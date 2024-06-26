@@ -1,16 +1,16 @@
-import { IncomingMessage, ServerResponse } from "http";
+import { IncomingMessage, ServerResponse } from 'http';
 
-import busboy from "busboy";
-import createError from "http-errors";
-import objectPath from "object-path";
+import busboy from 'busboy';
+import createError from 'http-errors';
+import objectPath from 'object-path';
 
-import Upload, { FileUpload } from "./upload";
-import ignoreStream from "./ignore-stream";
-import { ProcessRequestOptions } from "./graphql-upload-express";
-import { WriteStream } from "./fs-capacitor";
+import Upload, { FileUpload } from './upload';
+import ignoreStream from './ignore-stream';
+import { ProcessRequestOptions } from './graphql-upload-express';
+import { WriteStream } from './fs-capacitor';
 
 const GRAPHQL_MULTIPART_REQUEST_SPEC_URL =
-  "https://github.com/jaydenseric/graphql-multipart-request-spec";
+  'https://github.com/jaydenseric/graphql-multipart-request-spec';
 
 export default async function processRequest(
   request: IncomingMessage,
@@ -36,7 +36,7 @@ export default async function processRequest(
 
     const parser = busboy({
       headers: request.headers,
-      defParamCharset: "utf8",
+      defParamCharset: 'utf8',
       limits: {
         fieldSize: maxFieldSize,
         fields: 2, // Only operations and map.
@@ -74,7 +74,7 @@ export default async function processRequest(
       reject(exitError);
     }
 
-    parser.on("field", (fieldName, value, { valueTruncated }) => {
+    parser.on('field', (fieldName, value, { valueTruncated }) => {
       if (valueTruncated)
         return exit(
           createError(
@@ -84,7 +84,7 @@ export default async function processRequest(
         );
 
       switch (fieldName) {
-        case "operations":
+        case 'operations':
           try {
             operations = JSON.parse(value);
           } catch (error) {
@@ -98,7 +98,7 @@ export default async function processRequest(
 
           // `operations` should be an object or an array. Note that arrays
           // and `null` have an `object` type.
-          if (typeof operations !== "object" || !operations)
+          if (typeof operations !== 'object' || !operations)
             return exit(
               createError(
                 400,
@@ -109,7 +109,7 @@ export default async function processRequest(
           operationsPath = objectPath(operations);
 
           break;
-        case "map": {
+        case 'map': {
           if (!operations)
             return exit(
               createError(
@@ -132,7 +132,7 @@ export default async function processRequest(
 
           // `map` should be an object.
           if (
-            typeof parsedMap !== "object" ||
+            typeof parsedMap !== 'object' ||
             !parsedMap ||
             Array.isArray(parsedMap)
           )
@@ -165,7 +165,7 @@ export default async function processRequest(
             map.set(fieldName, new Upload());
 
             for (const [index, path] of paths.entries()) {
-              if (typeof path !== "string")
+              if (typeof path !== 'string')
                 return exit(
                   createError(
                     400,
@@ -192,7 +192,7 @@ export default async function processRequest(
     });
 
     parser.on(
-      "file",
+      'file',
       (fieldName, stream, { encoding, filename, mimeType: mimetype }) => {
         if (!map) {
           ignoreStream(stream);
@@ -219,12 +219,12 @@ export default async function processRequest(
 
         const capacitor = new WriteStream();
 
-        capacitor.on("error", () => {
+        capacitor.on('error', () => {
           stream.unpipe();
           stream.resume();
         });
 
-        stream.on("limit", () => {
+        stream.on('limit', () => {
           fileError = createError(
             413,
             `File truncated as it exceeds the ${maxFileSize} byte size limit.`,
@@ -233,7 +233,7 @@ export default async function processRequest(
           capacitor.destroy(fileError);
         });
 
-        stream.on("error", error => {
+        stream.on('error', error => {
           fileError = error;
           stream.unpipe();
           capacitor.destroy(fileError);
@@ -252,7 +252,7 @@ export default async function processRequest(
           capacitor,
         };
 
-        Object.defineProperty(file, "capacitor", {
+        Object.defineProperty(file, 'capacitor', {
           enumerable: false,
           configurable: false,
           writable: false,
@@ -263,11 +263,11 @@ export default async function processRequest(
       },
     );
 
-    parser.once("filesLimit", () =>
+    parser.once('filesLimit', () =>
       exit(createError(413, `${maxFiles} max file uploads exceeded.`)),
     );
 
-    parser.once("finish", () => {
+    parser.once('finish', () => {
       request.unpipe(parser);
       request.resume();
 
@@ -289,18 +289,18 @@ export default async function processRequest(
 
       for (const upload of map.values())
         if (!upload.file)
-          upload.reject(createError(400, "File missing in the request."));
+          upload.reject(createError(400, 'File missing in the request.'));
     });
 
     // Use the `on` method instead of `once` as in edge cases the same parser
     // could have multiple `error` events and all must be handled to prevent the
     // Node.js process exiting with an error. One edge case is if there is a
     // malformed part header as well as an unexpected end of the form.
-    parser.on("error", (error: Error) => {
+    parser.on('error', (error: Error) => {
       exit(error, true);
     });
 
-    response.once("close", () => {
+    response.once('close', () => {
       released = true;
 
       if (map)
@@ -310,12 +310,12 @@ export default async function processRequest(
             upload.file.capacitor.release();
     });
 
-    request.once("close", () => {
+    request.once('close', () => {
       if (!request.readableEnded)
         exit(
           createError(
             499,
-            "Request disconnected during file upload stream parsing.",
+            'Request disconnected during file upload stream parsing.',
           ),
         );
     });

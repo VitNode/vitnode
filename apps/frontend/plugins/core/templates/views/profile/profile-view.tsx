@@ -1,8 +1,8 @@
-import { Button } from "vitnode-frontend/components/ui/button";
+import { Button } from 'vitnode-frontend/components/ui/button';
 
-import { Core_Members__ProfilesQuery } from "@/graphql/hooks";
-import { AvatarUser } from "@/components/user/avatar/avatar-user";
-import { useTextLang } from "@/plugins/core/hooks/use-text-lang";
+import { Core_Members__ProfilesQuery } from '@/graphql/hooks';
+import { AvatarUser } from '@/components/user/avatar/avatar-user';
+import { useTextLang } from '@/plugins/core/hooks/use-text-lang';
 
 interface Props {
   data: Core_Members__ProfilesQuery;

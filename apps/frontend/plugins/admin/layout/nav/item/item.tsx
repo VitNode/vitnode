@@ -1,7 +1,7 @@
-import { useTranslations } from "next-intl";
+import { useTranslations } from 'next-intl';
 
-import { ItemItemNavAdminProps, LinkItemNavAdmin } from "./link";
-import { Icon } from "@/components/icon/icon";
+import { ItemItemNavAdminProps, LinkItemNavAdmin } from './link';
+import { Icon } from '@/components/icon/icon';
 
 interface Props {
   id: string;
@@ -16,9 +16,9 @@ export const ItemNavAdmin = ({ id, items }: Props) => {
 
   return (
     <div>
-      {id !== "core" && (
+      {id !== 'core' && (
         <div className="text-muted-foreground px-4 text-sm">
-          {t("nav.title")}
+          {t('nav.title')}
         </div>
       )}
 

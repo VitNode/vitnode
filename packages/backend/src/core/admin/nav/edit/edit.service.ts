@@ -1,17 +1,17 @@
-import { Injectable } from "@nestjs/common";
-import { eq } from "drizzle-orm";
+import { Injectable } from '@nestjs/common';
+import { eq } from 'drizzle-orm';
 
-import { EditAdminNavArgs } from "./dto/edit.args";
+import { EditAdminNavArgs } from './dto/edit.args';
 
-import { DatabaseService } from "../../../../database";
-import { ParserTextLanguageCoreHelpersService } from "../../../helpers/text_language/parser/parser.service";
-import { ShowCoreNav } from "../../../nav/show/dto/show.obj";
-import { NotFoundError } from "../../../../errors";
+import { DatabaseService } from '../../../../database';
+import { ParserTextLanguageCoreHelpersService } from '../../../helpers/text_language/parser/parser.service';
+import { ShowCoreNav } from '../../../nav/show/dto/show.obj';
+import { NotFoundError } from '../../../../errors';
 import {
   core_nav,
   core_nav_description,
   core_nav_name,
-} from "../../../../templates/core/admin/database/schema/nav";
+} from '../../../../templates/core/admin/database/schema/nav';
 
 @Injectable()
 export class EditAdminNavService {
@@ -33,7 +33,7 @@ export class EditAdminNavService {
     });
 
     if (!nav) {
-      throw new NotFoundError("Nav");
+      throw new NotFoundError('Nav');
     }
 
     const updatedNav = await this.databaseService.db

@@ -1,5 +1,5 @@
-import { useFormContext } from "react-hook-form";
-import { useTranslations } from "next-intl";
+import { useFormContext } from 'react-hook-form';
+import { useTranslations } from 'next-intl';
 import {
   FormControl,
   FormDescription,
@@ -7,13 +7,13 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "vitnode-frontend/components/ui/form";
-import { Input } from "vitnode-frontend/components/ui/input";
-import { Switch } from "vitnode-frontend/components/ui/switch";
-import { Label } from "vitnode-frontend/components/ui/label";
-import { Checkbox } from "vitnode-frontend/components/ui/checkbox";
+} from 'vitnode-frontend/components/ui/form';
+import { Input } from 'vitnode-frontend/components/ui/input';
+import { Switch } from 'vitnode-frontend/components/ui/switch';
+import { Label } from 'vitnode-frontend/components/ui/label';
+import { Checkbox } from 'vitnode-frontend/components/ui/checkbox';
 
-import { HeaderContent } from "@/components/header-content/header-content";
+import { HeaderContent } from '@/components/header-content/header-content';
 
 interface Props {
   isGuest?: boolean;
@@ -22,13 +22,13 @@ interface Props {
 export const ContentContentCreateEditFormGroupsMembersAdmin = ({
   isGuest,
 }: Props) => {
-  const t = useTranslations("admin.members.groups.create_edit");
-  const tCore = useTranslations("core");
+  const t = useTranslations('admin.members.groups.create_edit');
+  const tCore = useTranslations('core');
   const form = useFormContext();
 
   return (
     <>
-      <HeaderContent h2={t("files.title")} className="m-0" />
+      <HeaderContent h2={t('files.title')} className="m-0" />
 
       <FormField
         control={form.control}
@@ -37,7 +37,7 @@ export const ContentContentCreateEditFormGroupsMembersAdmin = ({
           <FormItem className="flex flex-row items-center justify-between gap-2 rounded-lg border p-4">
             <div className="space-y-0.5">
               <FormLabel className="text-base">
-                {t("files.allow_upload")}
+                {t('files.allow_upload')}
               </FormLabel>
             </div>
             <FormControl>
@@ -47,7 +47,7 @@ export const ContentContentCreateEditFormGroupsMembersAdmin = ({
         )}
       />
 
-      {form.watch("content.files_allow_upload") && (
+      {form.watch('content.files_allow_upload') && (
         <>
           {!isGuest && (
             <FormField
@@ -55,12 +55,12 @@ export const ContentContentCreateEditFormGroupsMembersAdmin = ({
               name="content.files_total_max_storage"
               render={({ field }) => {
                 const currentValue = +form.watch(
-                  "content.files_total_max_storage",
+                  'content.files_total_max_storage',
                 );
 
                 return (
                   <FormItem>
-                    <FormLabel>{t("files.total_max_storage")}</FormLabel>
+                    <FormLabel>{t('files.total_max_storage')}</FormLabel>
                     <div className="flex flex-wrap items-center gap-2">
                       <FormControl>
                         <Input
@@ -70,20 +70,20 @@ export const ContentContentCreateEditFormGroupsMembersAdmin = ({
                           onChange={e =>
                             form.setValue(field.name, +e.target.value)
                           }
-                          value={currentValue === -1 ? "" : currentValue}
+                          value={currentValue === -1 ? '' : currentValue}
                           disabled={currentValue === -1}
                           min={-1}
                         />
                       </FormControl>
-                      <span>{t("in_kb")}</span>
+                      <span>{t('in_kb')}</span>
                       <div className="flex shrink-0 items-center gap-2">
-                        <span>{tCore("or")}</span>
+                        <span>{tCore('or')}</span>
                         <Checkbox
                           id="content.files_total_max_storage.unlimited"
                           onClick={() => {
                             if (currentValue === -1) {
                               form.setValue(
-                                "content.files_total_max_storage",
+                                'content.files_total_max_storage',
                                 500000,
                               );
 
@@ -91,14 +91,14 @@ export const ContentContentCreateEditFormGroupsMembersAdmin = ({
                             }
 
                             form.setValue(
-                              "content.files_total_max_storage",
+                              'content.files_total_max_storage',
                               -1,
                             );
                           }}
                           checked={currentValue === -1}
                         />
                         <Label htmlFor="content.files_total_max_storage.unlimited">
-                          {tCore("unlimited")}
+                          {tCore('unlimited')}
                         </Label>
                       </div>
                     </div>
@@ -115,13 +115,13 @@ export const ContentContentCreateEditFormGroupsMembersAdmin = ({
             name="content.files_max_storage_for_submit"
             render={({ field }) => {
               const currentValue = +form.watch(
-                "content.files_max_storage_for_submit",
+                'content.files_max_storage_for_submit',
               );
 
               return (
                 <FormItem>
                   <FormLabel>
-                    {t("files.max_storage_for_submit.label")}
+                    {t('files.max_storage_for_submit.label')}
                   </FormLabel>
                   <div className="flex flex-wrap items-center gap-2">
                     <FormControl>
@@ -132,20 +132,20 @@ export const ContentContentCreateEditFormGroupsMembersAdmin = ({
                         onChange={e =>
                           form.setValue(field.name, +e.target.value)
                         }
-                        value={currentValue === -1 ? "" : currentValue}
+                        value={currentValue === -1 ? '' : currentValue}
                         disabled={currentValue === -1}
                         min={-1}
                       />
                     </FormControl>
-                    <span>{t("in_kb")}</span>
+                    <span>{t('in_kb')}</span>
                     <div className="flex shrink-0 items-center gap-2">
-                      <span>{tCore("or")}</span>
+                      <span>{tCore('or')}</span>
                       <Checkbox
                         id="content.files_max_storage_for_submit.unlimited"
                         onClick={() => {
                           if (currentValue === -1) {
                             form.setValue(
-                              "content.files_max_storage_for_submit",
+                              'content.files_max_storage_for_submit',
                               10000,
                             );
 
@@ -153,19 +153,19 @@ export const ContentContentCreateEditFormGroupsMembersAdmin = ({
                           }
 
                           form.setValue(
-                            "content.files_max_storage_for_submit",
+                            'content.files_max_storage_for_submit',
                             -1,
                           );
                         }}
                         checked={currentValue === -1}
                       />
                       <Label htmlFor="content.files_max_storage_for_submit.unlimited">
-                        {tCore("unlimited")}
+                        {tCore('unlimited')}
                       </Label>
                     </div>
                   </div>
                   <FormDescription>
-                    {t("files.max_storage_for_submit.desc")}
+                    {t('files.max_storage_for_submit.desc')}
                   </FormDescription>
                   <FormMessage />
                 </FormItem>

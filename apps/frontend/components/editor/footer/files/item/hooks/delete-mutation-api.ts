@@ -1,13 +1,13 @@
-"use server";
+'use server';
 
-import { revalidatePath } from "next/cache";
-import { fetcher } from "vitnode-frontend/graphql/fetcher";
+import { revalidatePath } from 'next/cache';
+import { fetcher } from 'vitnode-frontend/graphql/fetcher';
 
 import {
   Core_Editor_Files__Delete,
   Core_Editor_Files__DeleteMutation,
   Core_Editor_Files__DeleteMutationVariables,
-} from "@/graphql/hooks";
+} from '@/graphql/hooks';
 
 export const deleteMutationApi = async (
   variables: Core_Editor_Files__DeleteMutationVariables,
@@ -21,7 +21,7 @@ export const deleteMutationApi = async (
       variables,
     });
 
-    revalidatePath("/settings/files", "page");
+    revalidatePath('/settings/files', 'page');
 
     return { data };
   } catch (error) {

@@ -1,10 +1,10 @@
-import { useTranslations } from "next-intl";
-import { Card } from "vitnode-frontend/components/ui/card";
+import { useTranslations } from 'next-intl';
+import { Card } from 'vitnode-frontend/components/ui/card';
 
-import { HeaderContent } from "@/components/header-content/header-content";
-import { Admin__Core_Staff_Administrators__ShowQuery } from "@/graphql/hooks";
-import { TableAdministratorsStaffAdmin } from "./table/table";
-import { ActionsAdministratorsStaffAdmin } from "./actions/actions";
+import { HeaderContent } from '@/components/header-content/header-content';
+import { Admin__Core_Staff_Administrators__ShowQuery } from '@/graphql/hooks';
+import { TableAdministratorsStaffAdmin } from './table/table';
+import { ActionsAdministratorsStaffAdmin } from './actions/actions';
 
 export interface AdministratorsStaffAdminViewProps {
   data: Admin__Core_Staff_Administrators__ShowQuery;
@@ -13,11 +13,11 @@ export interface AdministratorsStaffAdminViewProps {
 export const AdministratorsStaffAdminView = (
   props: AdministratorsStaffAdminViewProps,
 ) => {
-  const t = useTranslations("admin.members.staff.administrators");
+  const t = useTranslations('admin.members.staff.administrators');
 
   return (
     <>
-      <HeaderContent h1={t("title")}>
+      <HeaderContent h1={t('title')}>
         <ActionsAdministratorsStaffAdmin />
       </HeaderContent>
 

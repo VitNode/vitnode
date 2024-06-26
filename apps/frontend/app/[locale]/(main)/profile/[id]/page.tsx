@@ -1,14 +1,14 @@
-import { Metadata } from "next";
-import { notFound } from "next/navigation";
-import * as React from "react";
-import { fetcher } from "vitnode-frontend/graphql/fetcher";
+import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+import * as React from 'react';
+import { fetcher } from 'vitnode-frontend/graphql/fetcher';
 
-import { ProfileView } from "@/plugins/core/templates/views/profile/profile-view";
+import { ProfileView } from '@/plugins/core/templates/views/profile/profile-view';
 import {
   Core_Members__Profiles,
   Core_Members__ProfilesQuery,
   Core_Members__ProfilesQueryVariables,
-} from "@/graphql/hooks";
+} from '@/graphql/hooks';
 
 const getData = async ({ id }: { id: string }) => {
   const { data } = await fetcher<
@@ -20,7 +20,7 @@ const getData = async ({ id }: { id: string }) => {
       first: 1,
       nameSeo: id,
     },
-    cache: "force-cache",
+    cache: 'force-cache',
   });
 
   return data;

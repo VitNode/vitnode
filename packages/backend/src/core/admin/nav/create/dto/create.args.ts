@@ -1,19 +1,19 @@
-import { ArgsType, Field } from "@nestjs/graphql";
+import { ArgsType, Field } from '@nestjs/graphql';
 import {
   ArrayMinSize,
   IsArray,
   IsNotEmpty,
   MaxLength,
   ValidateNested,
-} from "class-validator";
-import { Transform } from "class-transformer";
+} from 'class-validator';
+import { Transform } from 'class-transformer';
 
 import {
   IsTextLanguageInput,
   TextLanguageInput,
   TransformString,
   TransformTextLanguageInput,
-} from "../../../../../utils";
+} from '../../../../../utils';
 
 @ArgsType()
 export class CreateAdminNavArgs {

@@ -1,13 +1,13 @@
-import emojiMartData, { Emoji, EmojiMartData } from "@emoji-mart/data";
-import { init, SearchIndex } from "emoji-mart";
-import * as React from "react";
-import { useTranslations } from "next-intl";
-import { cn } from "vitnode-frontend/helpers/classnames";
-import { Button } from "vitnode-frontend/components/ui/button";
+import emojiMartData, { Emoji, EmojiMartData } from '@emoji-mart/data';
+import { init, SearchIndex } from 'emoji-mart';
+import * as React from 'react';
+import { useTranslations } from 'next-intl';
+import { cn } from 'vitnode-frontend/helpers/classnames';
+import { Button } from 'vitnode-frontend/components/ui/button';
 
-import { IconInputProps } from "../content";
+import { IconInputProps } from '../content';
 
-interface Props extends Omit<IconInputProps, "setOpen"> {
+interface Props extends Omit<IconInputProps, 'setOpen'> {
   search: string;
   skinToneIndex: number;
   classNameHeaders?: string;
@@ -26,7 +26,7 @@ export const EmojisContentIconInput = ({
   skinToneIndex,
   value,
 }: Props) => {
-  const t = useTranslations("core");
+  const t = useTranslations('core');
   const [searchResults, setSearchResults] = React.useState<string[] | null>(
     null,
   );
@@ -51,15 +51,15 @@ export const EmojisContentIconInput = ({
       <>
         <div
           className={cn(
-            "bg-popover/80 sticky top-[7.5rem] pb-2 text-sm backdrop-blur",
+            'bg-popover/80 sticky top-[7.5rem] pb-2 text-sm backdrop-blur',
             classNameHeaders,
           )}
         >
-          {t("editor.emoji.search_results")}
+          {t('editor.emoji.search_results')}
         </div>
         <div className="pb-3 pt-1">
           {searchResults?.length === 0 ? (
-            <div className="text-muted-foreground p-2">{t("no_results")}</div>
+            <div className="text-muted-foreground p-2">{t('no_results')}</div>
           ) : (
             searchResults?.map(id => {
               const emoji = emojiMart.emojis[id];
@@ -75,10 +75,10 @@ export const EmojisContentIconInput = ({
                   size="icon"
                   className="size-9 text-2xl"
                   ariaLabel={emoji.name}
-                  variant={value === icon ? "default" : "ghost"}
+                  variant={value === icon ? 'default' : 'ghost'}
                   onClick={() => {
                     if (value === icon) {
-                      onChange("");
+                      onChange('');
                       setOpen?.(false);
 
                       return;
@@ -104,7 +104,7 @@ export const EmojisContentIconInput = ({
         <div key={category.id}>
           <div
             className={cn(
-              "bg-popover/80 sticky top-[7.5rem] pb-2 text-sm backdrop-blur",
+              'bg-popover/80 sticky top-[7.5rem] pb-2 text-sm backdrop-blur',
               classNameHeaders,
             )}
           >
@@ -127,10 +127,10 @@ export const EmojisContentIconInput = ({
                   size="icon"
                   className="size-9 text-2xl"
                   ariaLabel={emoji.name}
-                  variant={value === icon ? "default" : "ghost"}
+                  variant={value === icon ? 'default' : 'ghost'}
                   onClick={() => {
                     if (value === icon) {
-                      onChange("");
+                      onChange('');
                       setOpen?.(false);
 
                       return;

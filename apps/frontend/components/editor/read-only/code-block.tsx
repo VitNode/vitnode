@@ -1,12 +1,12 @@
-import { Element } from "html-react-parser";
-import * as React from "react";
-import { generateRandomString } from "vitnode-shared";
-import { cn } from "vitnode-frontend/helpers/classnames";
+import { Element } from 'html-react-parser';
+import * as React from 'react';
+import { generateRandomString } from 'vitnode-shared';
+import { cn } from 'vitnode-frontend/helpers/classnames';
 
-import { classNameCodeBlock, lowlight } from "../extensions/code/code";
+import { classNameCodeBlock, lowlight } from '../extensions/code/code';
 
 interface Node {
-  type: "text";
+  type: 'text';
   value: string;
 }
 
@@ -34,7 +34,7 @@ const renderElement = (node: Node | WithTagName): JSX.Element => {
   return React.createElement(
     node.tagName,
     {
-      className: node.properties?.className?.join(" "),
+      className: node.properties?.className?.join(' '),
       key: `${node.tagName}-${new Date().getTime()}-${generateRandomString(10)}`,
     },
     ...children,
@@ -43,20 +43,20 @@ const renderElement = (node: Node | WithTagName): JSX.Element => {
 
 export const changeCodeBlock = ({ children }: Element) => {
   const element = children[0] as Element;
-  if (element.name !== "code") {
+  if (element.name !== 'code') {
     return;
   }
 
   const language =
-    (element?.attribs?.class ?? "")
-      .replace("language-", "")
-      .replace("react", "") || "plaintext";
+    (element?.attribs?.class ?? '')
+      .replace('language-', '')
+      .replace('react', '') || 'plaintext';
   const text =
     (
       element.children[0] as {
         data: string;
       }
-    )?.data ?? "";
+    )?.data ?? '';
 
   const highlighted = lowlight.highlight(language, text);
 
@@ -65,12 +65,12 @@ export const changeCodeBlock = ({ children }: Element) => {
   const content = highlighted.children.map(renderElement);
 
   return React.createElement(
-    "pre",
+    'pre',
     {
-      className: cn(classNameCodeBlock, "bg-muted rounded-md"),
+      className: cn(classNameCodeBlock, 'bg-muted rounded-md'),
     },
     React.createElement(
-      "code",
+      'code',
       {
         className: element?.attribs?.class,
       },

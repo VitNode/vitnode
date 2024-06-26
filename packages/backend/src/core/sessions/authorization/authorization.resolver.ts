@@ -1,9 +1,9 @@
-import { Context, Query, Resolver } from "@nestjs/graphql";
+import { Context, Query, Resolver } from '@nestjs/graphql';
 
-import { AuthorizationCoreSessionsService } from "./authorization.service";
-import { AuthorizationCoreSessionsObj } from "./dto/authorization.obj";
+import { AuthorizationCoreSessionsService } from './authorization.service';
+import { AuthorizationCoreSessionsObj } from './dto/authorization.obj';
 
-import { Ctx } from "../../../utils";
+import { Ctx } from '../../../utils';
 
 @Resolver()
 export class AuthorizationCoreSessionsResolver {

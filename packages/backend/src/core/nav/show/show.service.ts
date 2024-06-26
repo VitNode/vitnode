@@ -1,13 +1,13 @@
-import { Injectable } from "@nestjs/common";
-import { and, count, eq } from "drizzle-orm";
+import { Injectable } from '@nestjs/common';
+import { and, count, eq } from 'drizzle-orm';
 
-import { ShowCoreNavArgs } from "./dto/show.args";
-import { ShowCoreNavObj } from "./dto/show.obj";
+import { ShowCoreNavArgs } from './dto/show.args';
+import { ShowCoreNavObj } from './dto/show.obj';
 
-import { DatabaseService } from "../../../database";
-import { inputPaginationCursor, outputPagination } from "../../../functions";
-import { core_nav } from "../../../templates/core/admin/database/schema/nav";
-import { SortDirectionEnum } from "../../../utils";
+import { DatabaseService } from '../../../database';
+import { inputPaginationCursor, outputPagination } from '../../../functions';
+import { core_nav } from '../../../templates/core/admin/database/schema/nav';
+import { SortDirectionEnum } from '../../../utils';
 
 @Injectable()
 export class ShowCoreNavService {
@@ -25,12 +25,12 @@ export class ShowCoreNavService {
       first,
       last,
       primaryCursor: {
-        column: "id",
+        column: 'id',
         schema: core_nav.id,
       },
       defaultSortBy: {
         direction: SortDirectionEnum.asc,
-        column: "position",
+        column: 'position',
       },
     });
 

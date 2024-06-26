@@ -1,4 +1,4 @@
-import { SortDirectionEnum } from "../utils";
+import { SortDirectionEnum } from '../utils';
 
 interface Args<T> {
   sortBy:

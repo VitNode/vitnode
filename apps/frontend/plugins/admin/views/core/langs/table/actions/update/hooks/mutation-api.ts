@@ -1,28 +1,28 @@
-"use server";
+'use server';
 
-import { revalidatePath } from "next/cache";
-import { fetcher } from "vitnode-frontend/graphql/fetcher";
+import { revalidatePath } from 'next/cache';
+import { fetcher } from 'vitnode-frontend/graphql/fetcher';
 
 import {
   Admin__Core_Languages__UpdateMutation,
   Admin__Core_Languages__Update,
   Admin__Core_Languages__UpdateMutationVariables,
-} from "@/graphql/hooks";
+} from '@/graphql/hooks';
 
 export const mutationApi = async (formData: FormData) => {
   try {
-    const files = formData.get("file") as File;
-    const code = formData.get("code") as string;
+    const files = formData.get('file') as File;
+    const code = formData.get('code') as string;
 
     const { data } = await fetcher<
       Admin__Core_Languages__UpdateMutation,
-      Omit<Admin__Core_Languages__UpdateMutationVariables, "file">
+      Omit<Admin__Core_Languages__UpdateMutationVariables, 'file'>
     >({
       query: Admin__Core_Languages__Update,
       uploads: [
         {
           files,
-          variable: "file",
+          variable: 'file',
         },
       ],
       variables: {
@@ -30,7 +30,7 @@ export const mutationApi = async (formData: FormData) => {
       },
     });
 
-    revalidatePath("/", "layout");
+    revalidatePath('/', 'layout');
 
     return { data };
   } catch (error) {

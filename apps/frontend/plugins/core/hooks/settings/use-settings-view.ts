@@ -1,6 +1,6 @@
-import { Bell, Cog, Files, LucideIcon, MonitorSmartphone } from "lucide-react";
-import { useTranslations } from "next-intl";
-import * as React from "react";
+import { Bell, Cog, Files, LucideIcon, MonitorSmartphone } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import * as React from 'react';
 
 export interface ItemNavSettingsProps {
   href: string;
@@ -10,7 +10,7 @@ export interface ItemNavSettingsProps {
 }
 
 export interface LinkItemNavSettingsProps
-  extends Omit<ItemNavSettingsProps, "icon" | "text"> {
+  extends Omit<ItemNavSettingsProps, 'icon' | 'text'> {
   children: React.ReactNode;
 }
 
@@ -19,29 +19,29 @@ interface ReturnValues {
 }
 
 export const useSettingsView = (): ReturnValues => {
-  const t = useTranslations("core.settings");
+  const t = useTranslations('core.settings');
 
   return {
     navItems: [
       {
-        href: "/settings",
+        href: '/settings',
         icon: Cog,
-        text: t("overview.title"),
+        text: t('overview.title'),
       },
       {
-        href: "/settings/files",
+        href: '/settings/files',
         icon: Files,
-        text: t("files.title"),
+        text: t('files.title'),
       },
       {
-        href: "/settings/devices",
+        href: '/settings/devices',
         icon: MonitorSmartphone,
-        text: t("devices.title"),
+        text: t('devices.title'),
       },
       {
-        href: "/settings/notifications",
+        href: '/settings/notifications',
         icon: Bell,
-        text: t("notifications.title"),
+        text: t('notifications.title'),
       },
     ],
   };

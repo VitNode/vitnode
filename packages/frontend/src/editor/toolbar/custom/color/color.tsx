@@ -1,22 +1,22 @@
-import { Baseline, ChevronDownIcon } from "lucide-react";
-import * as React from "react";
-import { HslColor } from "react-colorful";
-import { getHSLFromString } from "vitnode-shared";
+import { Baseline, ChevronDownIcon } from 'lucide-react';
+import * as React from 'react';
+import { HslColor } from 'react-colorful';
+import { getHSLFromString } from 'vitnode-shared';
 
-import { ButtonToolbarEditor } from "../../button";
-import { useEditorState } from "../../../hooks/use-editor-state";
+import { ButtonToolbarEditor } from '../../button';
+import { useEditorState } from '../../../hooks/use-editor-state';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "../../../../components/ui/popover";
-import { PickerColor } from "../../../../components/ui/picker-color";
+} from '../../../../components/ui/popover';
+import { PickerColor } from '../../../../components/ui/picker-color';
 
 export const ColorToolbarEditor = () => {
   const [open, setOpen] = React.useState(false);
   const { editor } = useEditorState();
   const [color, setColor] = React.useState<HslColor | null>(
-    getHSLFromString(editor.getAttributes("textStyle").color),
+    getHSLFromString(editor.getAttributes('textStyle').color),
   );
 
   React.useEffect(() => {
@@ -30,7 +30,7 @@ export const ColorToolbarEditor = () => {
   }, [color]);
 
   const currentColor = getHSLFromString(
-    editor.getAttributes("textStyle").color,
+    editor.getAttributes('textStyle').color,
   );
 
   return (

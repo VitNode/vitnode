@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import { NodeViewWrapper, ReactNodeViewRenderer } from "@tiptap/react";
-import { File } from "lucide-react";
-import Image from "next/image";
-import { formatBytes } from "vitnode-shared";
+import { NodeViewWrapper, ReactNodeViewRenderer } from '@tiptap/react';
+import { File } from 'lucide-react';
+import Image from 'next/image';
+import { formatBytes } from 'vitnode-shared';
 
-import { acceptMimeTypeImage, FilesHandlerAttributes } from "./files";
+import { acceptMimeTypeImage, FilesHandlerAttributes } from './files';
 
-import { CONFIG } from "../../../helpers";
+import { CONFIG } from '../../../helpers';
 
 const FileFromNextWithNode = ({
   node: { attrs: data },

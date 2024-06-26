@@ -1,6 +1,6 @@
-import Image, { StaticImageData } from "next/image";
+import Image, { StaticImageData } from 'next/image';
 
-import { cn } from "../helpers/classnames";
+import { cn } from '../helpers/classnames';
 
 interface InitialProps {
   alt: string;
@@ -43,12 +43,12 @@ export const Img = ({
 }: ImgProps) => {
   return (
     <div
-      className={cn("relative w-fit overflow-hidden leading-[0]", className)}
+      className={cn('relative w-fit overflow-hidden leading-[0]', className)}
       style={{
         height: !height
           ? heightLoading
             ? `${heightLoading}px`
-            : "100%"
+            : '100%'
           : undefined,
       }}
     >

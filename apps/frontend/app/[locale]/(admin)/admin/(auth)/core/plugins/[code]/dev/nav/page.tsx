@@ -1,18 +1,18 @@
-import { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
-import { flattenTree } from "vitnode-frontend/helpers/flatten-tree";
-import { fetcher } from "vitnode-frontend/graphql/fetcher";
+import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
+import { flattenTree } from 'vitnode-frontend/helpers/flatten-tree';
+import { fetcher } from 'vitnode-frontend/graphql/fetcher';
 
-import { HeaderContent } from "@/components/header-content/header-content";
+import { HeaderContent } from '@/components/header-content/header-content';
 import {
   Admin__Core_Plugins__Nav__Show,
   Admin__Core_Plugins__Nav__ShowQuery,
   Admin__Core_Plugins__Nav__ShowQueryVariables,
   ShowAdminNavPluginsObj,
-} from "@/graphql/hooks";
-import { NavDevPluginAdminView } from "@/plugins/admin/views/core/plugins/views/dev/nav/nav";
-import { CreateNavDevPluginAdmin } from "@/plugins/admin/views/core/plugins/views/dev/nav/actions/create/create";
-import { Icon } from "@/components/icon/icon";
+} from '@/graphql/hooks';
+import { NavDevPluginAdminView } from '@/plugins/admin/views/core/plugins/views/dev/nav/nav';
+import { CreateNavDevPluginAdmin } from '@/plugins/admin/views/core/plugins/views/dev/nav/actions/create/create';
+import { Icon } from '@/components/icon/icon';
 
 interface Props {
   params: {
@@ -35,16 +35,16 @@ const getData = async (
 };
 
 export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations("admin.core.plugins.dev.nav");
+  const t = await getTranslations('admin.core.plugins.dev.nav');
 
   return {
-    title: t("title"),
+    title: t('title'),
   };
 }
 
 export default async function Page({ params: { code } }: Props) {
   const data = await getData({ pluginCode: code });
-  const t = await getTranslations("admin.core.plugins.dev.nav");
+  const t = await getTranslations('admin.core.plugins.dev.nav');
 
   const flattenData = flattenTree<ShowAdminNavPluginsObj>({
     tree: data.admin__core_plugins__nav__show.map(nav => ({
@@ -69,7 +69,7 @@ export default async function Page({ params: { code } }: Props) {
 
   return (
     <>
-      <HeaderContent h1={t("title")}>
+      <HeaderContent h1={t('title')}>
         <CreateNavDevPluginAdmin
           dataFromSSR={data.admin__core_plugins__nav__show}
           icons={icons}

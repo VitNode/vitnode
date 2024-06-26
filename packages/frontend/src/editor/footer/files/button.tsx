@@ -1,20 +1,20 @@
-import { Paperclip } from "lucide-react";
-import { useTranslations } from "next-intl";
-import * as React from "react";
+import { Paperclip } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import * as React from 'react';
 
-import { FileStateEditor } from "../../extensions/files/files";
-import { useEditorState } from "../../hooks/use-editor-state";
-import { Button } from "../../../components/ui/button";
+import { FileStateEditor } from '../../extensions/files/files';
+import { useEditorState } from '../../hooks/use-editor-state';
+import { Button } from '../../../components/ui/button';
 
 export const FilesButtonFooterEditor = () => {
-  const t = useTranslations("core.editor");
+  const t = useTranslations('core.editor');
   const ref = React.useRef<HTMLInputElement>(null);
   const { uploadFiles } = useEditorState();
 
   return (
     <>
       <Button variant="ghost" onClick={() => ref.current?.click()}>
-        <Paperclip /> {t("files.attach")}
+        <Paperclip /> {t('files.attach')}
       </Button>
       <input
         type="file"

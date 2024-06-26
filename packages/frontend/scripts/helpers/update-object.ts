@@ -10,7 +10,7 @@ export function updateObject<T extends Record<string, any>>(
         updatedConfig[key] = [] as any;
       }
     } else if (
-      typeof defaultData[key] === "object" &&
+      typeof defaultData[key] === 'object' &&
       defaultData[key] !== null
     ) {
       // Handle nested objects

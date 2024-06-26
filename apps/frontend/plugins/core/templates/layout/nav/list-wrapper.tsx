@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import * as NavigationMenu from "@radix-ui/react-navigation-menu";
+import * as React from 'react';
+import * as NavigationMenu from '@radix-ui/react-navigation-menu';
 
 interface Props {
   children: React.ReactNode;

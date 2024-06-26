@@ -1,26 +1,26 @@
-import { Trash2 } from "lucide-react";
-import { useTranslations } from "next-intl";
-import * as React from "react";
+import { Trash2 } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import * as React from 'react';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "vitnode-frontend/components/ui/tooltip";
+} from 'vitnode-frontend/components/ui/tooltip';
 import {
   AlertDialog,
   AlertDialogContent,
   AlertDialogTrigger,
-} from "vitnode-frontend/components/ui/alert-dialog";
-import { Button } from "vitnode-frontend/components/ui/button";
-import { Loader } from "vitnode-frontend/components/ui/loader";
+} from 'vitnode-frontend/components/ui/alert-dialog';
+import { Button } from 'vitnode-frontend/components/ui/button';
+import { Loader } from 'vitnode-frontend/components/ui/loader';
 
-import { ContentDeleteActionTableNavDevPluginAdminProps } from "./content";
+import { ContentDeleteActionTableNavDevPluginAdminProps } from './content';
 
-import { useItemNavDevPluginAdmin } from "../../hooks/use-item-nav-dev-plugin-admin";
+import { useItemNavDevPluginAdmin } from '../../hooks/use-item-nav-dev-plugin-admin';
 
 const Content = React.lazy(async () =>
-  import("./content").then(module => ({
+  import('./content').then(module => ({
     default: module.ContentDeleteActionTableNavDevPluginAdmin,
   })),
 );
@@ -28,7 +28,7 @@ const Content = React.lazy(async () =>
 export const DeleteActionTableNavDevPluginAdmin = (
   props: ContentDeleteActionTableNavDevPluginAdminProps,
 ) => {
-  const t = useTranslations("core");
+  const t = useTranslations('core');
   const { parentId } = useItemNavDevPluginAdmin();
 
   return (
@@ -40,14 +40,14 @@ export const DeleteActionTableNavDevPluginAdmin = (
               <Button
                 variant="destructiveGhost"
                 size="icon"
-                ariaLabel={t("delete")}
+                ariaLabel={t('delete')}
               >
                 <Trash2 />
               </Button>
             </AlertDialogTrigger>
           </TooltipTrigger>
 
-          <TooltipContent>{t("delete")}</TooltipContent>
+          <TooltipContent>{t('delete')}</TooltipContent>
         </Tooltip>
       </TooltipProvider>
 

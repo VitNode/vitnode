@@ -7,7 +7,7 @@
 //     variables
 //   });
 
-import { DashboardCoreAdminView } from "@/plugins/admin/views/core/dashboard/dashboard-core-admin-view";
+import { DashboardCoreAdminView } from '@/plugins/admin/views/core/dashboard/dashboard-core-admin-view';
 
 //   return data;
 // };

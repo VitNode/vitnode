@@ -1,16 +1,16 @@
-import { Injectable } from "@nestjs/common";
-import { count, eq } from "drizzle-orm";
+import { Injectable } from '@nestjs/common';
+import { count, eq } from 'drizzle-orm';
 
-import { DeleteCoreEditorArgs } from "./dto/delete.args";
+import { DeleteCoreEditorArgs } from './dto/delete.args';
 
-import { DeleteCoreFilesService } from "../../files/helpers/delete/delete.service";
-import { DatabaseService } from "../../../database";
-import { User } from "../../../decorators";
-import { AccessDeniedError } from "../../../errors";
+import { DeleteCoreFilesService } from '../../files/helpers/delete/delete.service';
+import { DatabaseService } from '../../../database';
+import { User } from '../../../decorators';
+import { AccessDeniedError } from '../../../errors';
 import {
   core_files,
   core_files_using,
-} from "../../../templates/core/admin/database/schema/files";
+} from '../../../templates/core/admin/database/schema/files';
 
 @Injectable()
 export class DeleteCoreEditorService {
@@ -43,7 +43,7 @@ export class DeleteCoreEditorService {
       .where(eq(core_files_using.file_id, id));
 
     if (uses[0].count > 0) {
-      return "Skipped! File is being used.";
+      return 'Skipped! File is being used.';
     }
 
     this.deleteFile.delete({
@@ -59,6 +59,6 @@ export class DeleteCoreEditorService {
       .delete(core_files)
       .where(eq(core_files.id, id));
 
-    return "Success!";
+    return 'Success!';
   }
 }

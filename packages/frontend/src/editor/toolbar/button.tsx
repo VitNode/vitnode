@@ -1,8 +1,8 @@
-import { useTranslations } from "next-intl";
-import * as React from "react";
+import { useTranslations } from 'next-intl';
+import * as React from 'react';
 
-import { Button } from "../../components/ui/button";
-import { cn } from "../../helpers/classnames";
+import { Button } from '../../components/ui/button';
+import { cn } from '../../helpers/classnames';
 
 interface Props {
   children: React.ReactNode;
@@ -23,13 +23,13 @@ export const ButtonToolbarEditor = ({
   className,
   ...rest
 }: Props) => {
-  const t = useTranslations("core.editor");
+  const t = useTranslations('core.editor');
 
   return (
     <Button
       variant="ghost"
-      className={cn("hover:bg-muted size-9 shadow-none", className, {
-        "bg-accent": active,
+      className={cn('hover:bg-muted size-9 shadow-none', className, {
+        'bg-accent': active,
       })}
       size="icon"
       onClick={onClick}

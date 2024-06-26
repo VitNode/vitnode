@@ -1,27 +1,27 @@
-"use client";
+'use client';
 
-import { useTranslations } from "next-intl";
+import { useTranslations } from 'next-intl';
 import {
   Form,
   FormField,
   FormFieldRender,
   FormWrapper,
-} from "vitnode-frontend/components/ui/form";
-import { Separator } from "vitnode-frontend/components/ui/separator";
-import { Button } from "vitnode-frontend/components/ui/button";
-import { ColorInput } from "vitnode-frontend/components/ui/color-input";
-import { Input } from "vitnode-frontend/components/ui/input";
-import { Switch } from "vitnode-frontend/components/ui/switch";
+} from 'vitnode-frontend/components/ui/form';
+import { Separator } from 'vitnode-frontend/components/ui/separator';
+import { Button } from 'vitnode-frontend/components/ui/button';
+import { ColorInput } from 'vitnode-frontend/components/ui/color-input';
+import { Input } from 'vitnode-frontend/components/ui/input';
+import { Switch } from 'vitnode-frontend/components/ui/switch';
 
-import { HeaderContent } from "@/components/header-content/header-content";
-import { useEmailSettingsFormAdmin } from "./hooks/use-email-settings-form-admin";
-import { Admin__Core_Email_Settings__ShowQuery } from "@/graphql/hooks";
+import { HeaderContent } from '@/components/header-content/header-content';
+import { useEmailSettingsFormAdmin } from './hooks/use-email-settings-form-admin';
+import { Admin__Core_Email_Settings__ShowQuery } from '@/graphql/hooks';
 
 export const EmailSettingsAdminView = (
   props: Admin__Core_Email_Settings__ShowQuery,
 ) => {
-  const t = useTranslations("admin.core.settings.email");
-  const tCore = useTranslations("core");
+  const t = useTranslations('admin.core.settings.email');
+  const tCore = useTranslations('core');
   const { form, onSubmit } = useEmailSettingsFormAdmin(props);
 
   return (
@@ -31,14 +31,14 @@ export const EmailSettingsAdminView = (
           control={form.control}
           name="color_primary"
           render={({ field }) => (
-            <FormFieldRender label={t("color_primary")}>
+            <FormFieldRender label={t('color_primary')}>
               <ColorInput {...field} disableRemoveColor />
             </FormFieldRender>
           )}
         />
 
         <div className="w-full space-y-2">
-          <HeaderContent h2={t("smtp")} className="m-0" />
+          <HeaderContent h2={t('smtp')} className="m-0" />
           <Separator />
         </div>
 
@@ -46,7 +46,7 @@ export const EmailSettingsAdminView = (
           control={form.control}
           name="smtp_host"
           render={({ field }) => (
-            <FormFieldRender label={t("smtp_host")}>
+            <FormFieldRender label={t('smtp_host')}>
               <Input {...field} placeholder="smtp.gmail.com" />
             </FormFieldRender>
           )}
@@ -56,7 +56,7 @@ export const EmailSettingsAdminView = (
           control={form.control}
           name="smtp_user"
           render={({ field }) => (
-            <FormFieldRender label={t("smtp_user")}>
+            <FormFieldRender label={t('smtp_user')}>
               <Input {...field} placeholder="user" />
             </FormFieldRender>
           )}
@@ -66,7 +66,7 @@ export const EmailSettingsAdminView = (
           control={form.control}
           name="smtp_password"
           render={({ field }) => (
-            <FormFieldRender label={t("smtp_password")}>
+            <FormFieldRender label={t('smtp_password')}>
               <Input {...field} type="password" placeholder="**********" />
             </FormFieldRender>
           )}
@@ -76,13 +76,13 @@ export const EmailSettingsAdminView = (
           control={form.control}
           name="smtp_secure"
           render={({ field }) => (
-            <FormFieldRender label={t("smtp_secure")}>
+            <FormFieldRender label={t('smtp_secure')}>
               <Switch
                 checked={field.value}
                 onCheckedChange={val => {
                   field.onChange(val);
                   if (val) {
-                    form.setValue("smtp_port", 465);
+                    form.setValue('smtp_port', 465);
                   }
                 }}
               />
@@ -94,7 +94,7 @@ export const EmailSettingsAdminView = (
           control={form.control}
           name="smtp_port"
           render={({ field }) => (
-            <FormFieldRender label={t("smtp_port")}>
+            <FormFieldRender label={t('smtp_port')}>
               <Input {...field} type="number" min={1} max={999} />
             </FormFieldRender>
           )}
@@ -105,7 +105,7 @@ export const EmailSettingsAdminView = (
           disabled={!form.formState.isValid}
           loading={form.formState.isSubmitting}
         >
-          {tCore("save")}
+          {tCore('save')}
         </Button>
       </FormWrapper>
     </Form>

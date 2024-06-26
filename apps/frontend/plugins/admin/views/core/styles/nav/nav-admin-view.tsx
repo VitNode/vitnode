@@ -1,16 +1,16 @@
-import { useTranslations } from "next-intl";
-import * as React from "react";
-import { flattenTree } from "vitnode-frontend/helpers/flatten-tree";
-import { Card } from "vitnode-frontend/components/ui/card";
+import { useTranslations } from 'next-intl';
+import * as React from 'react';
+import { flattenTree } from 'vitnode-frontend/helpers/flatten-tree';
+import { Card } from 'vitnode-frontend/components/ui/card';
 
-import { HeaderContent } from "@/components/header-content/header-content";
-import { TableNavAdmin } from "./table/table";
-import { Admin__Core_Nav__ShowQuery, ShowCoreNav } from "@/graphql/hooks";
-import { ActionsNavAdmin } from "./actions/actions";
-import { Icon } from "@/components/icon/icon";
+import { HeaderContent } from '@/components/header-content/header-content';
+import { TableNavAdmin } from './table/table';
+import { Admin__Core_Nav__ShowQuery, ShowCoreNav } from '@/graphql/hooks';
+import { ActionsNavAdmin } from './actions/actions';
+import { Icon } from '@/components/icon/icon';
 
 export const NavAdminView = (props: Admin__Core_Nav__ShowQuery) => {
-  const t = useTranslations("admin.core.styles.nav");
+  const t = useTranslations('admin.core.styles.nav');
 
   const flattenData = flattenTree<ShowCoreNav>({
     tree: props.core_nav__show.edges.map(nav => ({
@@ -32,7 +32,7 @@ export const NavAdminView = (props: Admin__Core_Nav__ShowQuery) => {
 
   return (
     <>
-      <HeaderContent h1={t("title")}>
+      <HeaderContent h1={t('title')}>
         <ActionsNavAdmin />
       </HeaderContent>
 

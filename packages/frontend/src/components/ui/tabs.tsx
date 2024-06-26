@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import { motion } from "framer-motion";
+import * as React from 'react';
+import { motion } from 'framer-motion';
 
-import { buttonVariants } from "./button";
+import { buttonVariants } from './button';
 
-import { Link, usePathname } from "../../navigation";
-import { cn } from "../../helpers/classnames";
+import { Link, usePathname } from '../../navigation';
+import { cn } from '../../helpers/classnames';
 
 interface Props {
   children: React.ReactNode;
@@ -17,7 +17,7 @@ export const Tabs = ({ children, className }: Props) => {
   return (
     <div
       className={cn(
-        "no-scrollbar shadow-border overflow-x-auto shadow-[inset_0_-2px_0]",
+        'no-scrollbar shadow-border overflow-x-auto shadow-[inset_0_-2px_0]',
         className,
       )}
     >
@@ -48,7 +48,7 @@ export const TabsTrigger = ({
 }: TabsTriggerProps) => {
   const pathname = usePathname();
   const active = activeFromProps || (href && pathname.includes(href));
-  const dataState = active ? "active" : "inactive";
+  const dataState = active ? 'active' : 'inactive';
 
   const activeBar = active ? (
     <motion.span
@@ -56,22 +56,22 @@ export const TabsTrigger = ({
       layoutId="tabs-trigger-active"
       transition={{
         duration: 0.18,
-        ease: "easeInOut",
+        ease: 'easeInOut',
       }}
-      style={{ originY: "0px" }}
+      style={{ originY: '0px' }}
     />
   ) : null;
 
   const className = buttonVariants({
-    variant: "ghost",
+    variant: 'ghost',
     className: cn(
       classNameFromProps,
-      "text-muted-foreground hover:text-foreground flex-shrink-0",
+      'text-muted-foreground hover:text-foreground flex-shrink-0',
       {
-        "text-foreground": active,
+        'text-foreground': active,
       },
     ),
-    size: "sm",
+    size: 'sm',
   });
 
   if (href) {

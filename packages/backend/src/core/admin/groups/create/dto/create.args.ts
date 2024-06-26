@@ -1,12 +1,12 @@
-import { ArgsType, Field, InputType, Int } from "@nestjs/graphql";
-import { ArrayMinSize, IsArray, Min, ValidateNested } from "class-validator";
-import { Transform } from "class-transformer";
+import { ArgsType, Field, InputType, Int } from '@nestjs/graphql';
+import { ArrayMinSize, IsArray, Min, ValidateNested } from 'class-validator';
+import { Transform } from 'class-transformer';
 
 import {
   IsTextLanguageInput,
   TextLanguageInput,
   TransformTextLanguageInput,
-} from "../../../../../utils";
+} from '../../../../../utils';
 
 @InputType()
 export class ContentCreateAdminGroups {

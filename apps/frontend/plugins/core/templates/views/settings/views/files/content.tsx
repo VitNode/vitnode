@@ -1,43 +1,43 @@
-"use client";
+'use client';
 
-import { ColumnDef } from "@tanstack/react-table";
-import * as React from "react";
-import { useTranslations } from "next-intl";
-import Image from "next/image";
-import { Clock, Download, File } from "lucide-react";
-import { formatBytes } from "vitnode-shared";
-import { Link } from "vitnode-frontend/navigation";
+import { ColumnDef } from '@tanstack/react-table';
+import * as React from 'react';
+import { useTranslations } from 'next-intl';
+import Image from 'next/image';
+import { Clock, Download, File } from 'lucide-react';
+import { formatBytes } from 'vitnode-shared';
+import { Link } from 'vitnode-frontend/navigation';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "vitnode-frontend/components/ui/tooltip";
-import { buttonVariants } from "vitnode-frontend/components/ui/button";
-import { CONFIG } from "vitnode-frontend/helpers/config-with-env";
+} from 'vitnode-frontend/components/ui/tooltip';
+import { buttonVariants } from 'vitnode-frontend/components/ui/button';
+import { CONFIG } from 'vitnode-frontend/helpers/config-with-env';
 
-import { DataTable } from "@/components/data-table/data-table";
-import { Core_Members__Files__ShowQuery, ShowCoreFiles } from "@/graphql/hooks";
-import { DateFormat } from "@/components/date-format/date-format";
-import { HeaderSortingDataTable } from "@/components/data-table/header";
+import { DataTable } from '@/components/data-table/data-table';
+import { Core_Members__Files__ShowQuery, ShowCoreFiles } from '@/graphql/hooks';
+import { DateFormat } from '@/components/date-format/date-format';
+import { HeaderSortingDataTable } from '@/components/data-table/header';
 
 export const ContentFilesSettings = ({
   core_files__show: { edges, pageInfo },
 }: Core_Members__Files__ShowQuery) => {
-  const t = useTranslations("core.settings.files");
-  const tCore = useTranslations("core");
+  const t = useTranslations('core.settings.files');
+  const tCore = useTranslations('core');
   const columns: ColumnDef<ShowCoreFiles>[] = React.useMemo(
     () => [
       {
-        header: "",
-        accessorKey: "id",
+        header: '',
+        accessorKey: 'id',
         cell: ({ row }) => {
           const data = row.original;
           const src =
             data?.width && data.height
               ? `${CONFIG.graphql_public_url}/${data.dir_folder}/${data.file_name}`
               : null;
-          const alt = data?.file_alt ?? data?.file_name ?? "";
+          const alt = data?.file_alt ?? data?.file_name ?? '';
 
           return (
             <div className="relative flex h-14 w-20 shrink-0 items-center justify-center overflow-hidden rounded-lg">
@@ -57,8 +57,8 @@ export const ContentFilesSettings = ({
         },
       },
       {
-        header: tCore("table.name"),
-        accessorKey: "file_name",
+        header: tCore('table.name'),
+        accessorKey: 'file_name',
         cell: ({ row }) => {
           const data = row.original;
 
@@ -86,11 +86,11 @@ export const ContentFilesSettings = ({
         header: val => {
           return (
             <HeaderSortingDataTable {...val}>
-              {tCore("table.created")}
+              {tCore('table.created')}
             </HeaderSortingDataTable>
           );
         },
-        accessorKey: "created",
+        accessorKey: 'created',
         cell: ({ row }) => {
           const data = row.original;
 
@@ -101,11 +101,11 @@ export const ContentFilesSettings = ({
         header: val => {
           return (
             <HeaderSortingDataTable {...val}>
-              {t("table.file_size")}
+              {t('table.file_size')}
             </HeaderSortingDataTable>
           );
         },
-        accessorKey: "file_size",
+        accessorKey: 'file_size',
         cell: ({ row }) => {
           const data = row.original;
 
@@ -113,8 +113,8 @@ export const ContentFilesSettings = ({
         },
       },
       {
-        header: t("table.count_uses"),
-        accessorKey: "count_uses",
+        header: t('table.count_uses'),
+        accessorKey: 'count_uses',
         cell: ({ row }) => {
           const data = row.original;
 
@@ -126,7 +126,7 @@ export const ContentFilesSettings = ({
                     <TooltipTrigger>
                       <Clock className="text-destructive size-4" />
                     </TooltipTrigger>
-                    <TooltipContent>{t("temp_file")}</TooltipContent>
+                    <TooltipContent>{t('temp_file')}</TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
                 {data.count_uses}
@@ -138,8 +138,8 @@ export const ContentFilesSettings = ({
         },
       },
       {
-        header: "",
-        accessorKey: "actions",
+        header: '',
+        accessorKey: 'actions',
         cell: ({ row }) => {
           const data = row.original;
 
@@ -149,8 +149,8 @@ export const ContentFilesSettings = ({
                 <TooltipTrigger asChild>
                   <Link
                     className={buttonVariants({
-                      size: "icon",
-                      variant: "ghost",
+                      size: 'icon',
+                      variant: 'ghost',
                     })}
                     href={
                       data.width && data.height
@@ -158,13 +158,13 @@ export const ContentFilesSettings = ({
                         : `${CONFIG.backend_url}/secure_files/${data.id}?security_key=${data.security_key}`
                     }
                     target="_blank"
-                    aria-label={tCore("download")}
+                    aria-label={tCore('download')}
                   >
                     <Download />
                   </Link>
                 </TooltipTrigger>
 
-                <TooltipContent>{tCore("download")}</TooltipContent>
+                <TooltipContent>{tCore('download')}</TooltipContent>
               </Tooltip>
             </TooltipProvider>
           );
@@ -180,10 +180,10 @@ export const ContentFilesSettings = ({
       pageInfo={pageInfo}
       defaultPageSize={10}
       defaultSorting={{
-        sortBy: "created",
-        sortDirection: "desc",
+        sortBy: 'created',
+        sortDirection: 'desc',
       }}
-      searchPlaceholder={t("search")}
+      searchPlaceholder={t('search')}
       columns={columns}
     />
   );

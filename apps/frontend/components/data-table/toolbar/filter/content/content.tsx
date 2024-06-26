@@ -1,10 +1,10 @@
-import { Search } from "lucide-react";
-import { useTranslations } from "next-intl";
-import { useSearchParams } from "next/navigation";
-import * as React from "react";
-import { useDebouncedCallback } from "use-debounce";
-import { usePathname, useRouter } from "vitnode-frontend/navigation";
-import { cn } from "vitnode-frontend/helpers/classnames";
+import { Search } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import { useSearchParams } from 'next/navigation';
+import * as React from 'react';
+import { useDebouncedCallback } from 'use-debounce';
+import { usePathname, useRouter } from 'vitnode-frontend/navigation';
+import { cn } from 'vitnode-frontend/helpers/classnames';
 import {
   Command,
   CommandEmpty,
@@ -14,11 +14,11 @@ import {
   CommandList,
   CommandSeparator,
   commandInputClassName,
-} from "vitnode-frontend/components/ui/command";
-import { Input } from "vitnode-frontend/components/ui/input";
+} from 'vitnode-frontend/components/ui/command';
+import { Input } from 'vitnode-frontend/components/ui/input';
 
-import { ListContentFilterToolbarDataTable } from "./list";
-import { useFilterToolbarDataTable } from "../hooks/use-filter-toolbar-data-table";
+import { ListContentFilterToolbarDataTable } from './list';
+import { useFilterToolbarDataTable } from '../hooks/use-filter-toolbar-data-table';
 
 export interface ContentFilterToolbarDataTableProps {
   options: {
@@ -34,7 +34,7 @@ export const ContentFilterToolbarDataTable = ({
   searchOnChange,
   ...props
 }: ContentFilterToolbarDataTableProps) => {
-  const t = useTranslations("core");
+  const t = useTranslations('core');
   const { id, title } = useFilterToolbarDataTable();
   const searchParams = useSearchParams();
   const selectedValues = searchParams.getAll(id);
@@ -56,7 +56,7 @@ export const ContentFilterToolbarDataTable = ({
             onChange={e => handleSearchInput(e.target.value)}
             className={cn(
               commandInputClassName,
-              "border-0 px-0 focus-visible:ring-0 focus-visible:ring-offset-0",
+              'border-0 px-0 focus-visible:ring-0 focus-visible:ring-offset-0',
             )}
             placeholder={title}
           />
@@ -66,7 +66,7 @@ export const ContentFilterToolbarDataTable = ({
       )}
 
       <CommandList>
-        {!searchOnChange && <CommandEmpty>{t("no_results")}</CommandEmpty>}
+        {!searchOnChange && <CommandEmpty>{t('no_results')}</CommandEmpty>}
 
         <CommandGroup>
           <ListContentFilterToolbarDataTable {...props} />
@@ -80,7 +80,7 @@ export const ContentFilterToolbarDataTable = ({
                 onSelect={() => push(pathname, { scroll: false })}
                 className="justify-center text-center"
               >
-                {t("clear")}
+                {t('clear')}
               </CommandItem>
             </CommandGroup>
           </>

@@ -1,6 +1,6 @@
-import { DrawerNavSettings } from "./drawer";
-import { ItemNavSettings } from "./item/item-nav-settings";
-import { useSettingsView } from "@/plugins/core/hooks/settings/use-settings-view";
+import { DrawerNavSettings } from './drawer';
+import { ItemNavSettings } from './item/item-nav-settings';
+import { useSettingsView } from '@/plugins/core/hooks/settings/use-settings-view';
 
 export const NavSettings = () => {
   const { navItems } = useSettingsView();

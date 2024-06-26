@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 
 interface Args {
   id: string;
@@ -6,8 +6,8 @@ interface Args {
 }
 
 export const FilterToolbarDataTableContext = React.createContext<Args>({
-  id: "",
-  title: "",
+  id: '',
+  title: '',
 });
 
 export const useFilterToolbarDataTable = () =>

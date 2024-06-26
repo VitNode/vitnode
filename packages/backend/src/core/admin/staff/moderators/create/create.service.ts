@@ -1,11 +1,11 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable } from '@nestjs/common';
 
-import { ShowAdminStaffModerators } from "../show/dto/show.obj";
-import { CreateAdminStaffModeratorsArgs } from "./dto/create.args";
+import { ShowAdminStaffModerators } from '../show/dto/show.obj';
+import { CreateAdminStaffModeratorsArgs } from './dto/create.args';
 
-import { DatabaseService } from "../../../../../database";
-import { CustomError } from "../../../../../errors";
-import { core_moderators_permissions } from "../../../../../templates/core/admin/database/schema/moderators";
+import { DatabaseService } from '../../../../../database';
+import { CustomError } from '../../../../../errors';
+import { core_moderators_permissions } from '../../../../../templates/core/admin/database/schema/moderators';
 
 @Injectable()
 export class CreateAdminStaffModeratorsService {
@@ -18,8 +18,8 @@ export class CreateAdminStaffModeratorsService {
   }: CreateAdminStaffModeratorsArgs): Promise<ShowAdminStaffModerators> {
     if (!group_id && !user_id) {
       throw new CustomError({
-        code: "BAD_REQUEST",
-        message: "You must provide either a group_id or a user_id.",
+        code: 'BAD_REQUEST',
+        message: 'You must provide either a group_id or a user_id.',
       });
     }
 
@@ -33,8 +33,8 @@ export class CreateAdminStaffModeratorsService {
 
     if (findPermission) {
       throw new CustomError({
-        code: "ALREADY_EXISTS",
-        message: "This user or group already has moderator permissions.",
+        code: 'ALREADY_EXISTS',
+        message: 'This user or group already has moderator permissions.',
       });
     }
 

@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { motion } from "framer-motion";
-import { Link, usePathname } from "vitnode-frontend/navigation";
-import { cn } from "vitnode-frontend/helpers/classnames";
-import { buttonVariants } from "vitnode-frontend/components/ui/button";
+import { motion } from 'framer-motion';
+import { Link, usePathname } from 'vitnode-frontend/navigation';
+import { cn } from 'vitnode-frontend/helpers/classnames';
+import { buttonVariants } from 'vitnode-frontend/components/ui/button';
 
-import { LinkItemNavSettingsProps } from "@/plugins/core/hooks/settings/use-settings-view";
+import { LinkItemNavSettingsProps } from '@/plugins/core/hooks/settings/use-settings-view';
 
 export const LinkItemNavSettings = ({
   children,
@@ -19,9 +19,9 @@ export const LinkItemNavSettings = ({
     <Link
       href={href}
       className={cn(
-        buttonVariants({ variant: "ghost", size: "sm" }),
-        "relative justify-start gap-2 pl-4",
-        { "bg-primary/10": active },
+        buttonVariants({ variant: 'ghost', size: 'sm' }),
+        'relative justify-start gap-2 pl-4',
+        { 'bg-primary/10': active },
       )}
       onClick={onClick}
     >

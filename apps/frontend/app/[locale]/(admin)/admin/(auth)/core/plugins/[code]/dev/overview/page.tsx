@@ -1,8 +1,8 @@
-import { notFound } from "next/navigation";
-import { CONFIG } from "vitnode-frontend/helpers/config-with-env";
+import { notFound } from 'next/navigation';
+import { CONFIG } from 'vitnode-frontend/helpers/config-with-env';
 
-import { getPluginDataAdmin } from "../query-api";
-import { OverviewDevPluginAdminView } from "@/plugins/admin/views/core/plugins/views/dev/overview";
+import { getPluginDataAdmin } from '../query-api';
+import { OverviewDevPluginAdminView } from '@/plugins/admin/views/core/plugins/views/dev/overview';
 
 interface Props {
   params: {

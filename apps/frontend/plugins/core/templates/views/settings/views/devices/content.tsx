@@ -1,17 +1,17 @@
-import { Monitor, Smartphone } from "lucide-react";
-import { useTranslations } from "next-intl";
-import { Badge } from "vitnode-frontend/components/ui/badge";
-import { Separator } from "vitnode-frontend/components/ui/separator";
+import { Monitor, Smartphone } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import { Badge } from 'vitnode-frontend/components/ui/badge';
+import { Separator } from 'vitnode-frontend/components/ui/separator';
 
-import { DateFormat } from "@/components/date-format/date-format";
-import { DevicesSettingsViewProps } from "./devices-settings-view";
+import { DateFormat } from '@/components/date-format/date-format';
+import { DevicesSettingsViewProps } from './devices-settings-view';
 
 const getDeviceIcon = (device: string) => {
   if (
-    device.includes("Android") ||
-    device.includes("Windows Phone") ||
-    device.includes("iPhone") ||
-    device.includes("iPad")
+    device.includes('Android') ||
+    device.includes('Windows Phone') ||
+    device.includes('iPhone') ||
+    device.includes('iPad')
   ) {
     return <Smartphone />;
   }
@@ -23,7 +23,7 @@ export const ContentDevicesSettings = ({
   core_sessions__devices__show: devices,
   loginToken,
 }: DevicesSettingsViewProps) => {
-  const t = useTranslations("core.settings.devices");
+  const t = useTranslations('core.settings.devices');
 
   return (
     <div className="space-y-6">
@@ -39,11 +39,11 @@ export const ContentDevicesSettings = ({
                   {device.uagent_os}
                 </h3>
                 {loginToken === device.login_token ? (
-                  <Badge>{t("current_device")}</Badge>
+                  <Badge>{t('current_device')}</Badge>
                 ) : null}
               </div>
               <p className="text-muted-foreground text-sm">
-                {t.rich("last_active", {
+                {t.rich('last_active', {
                   time: () => <DateFormat date={device.last_seen} />,
                 })}
               </p>
@@ -54,19 +54,19 @@ export const ContentDevicesSettings = ({
 
           <ul className="[&>li>div:first-child]:text-muted-foreground space-y-2 sm:[&>li>div:first-child]:w-52 sm:[&>li>div:first-child]:flex-shrink-0 [&>li>div]:truncate [&>li]:flex [&>li]:flex-col [&>li]:gap-1 sm:[&>li]:flex-row sm:[&>li]:gap-4">
             <li>
-              <div>{t("browser")}</div>
+              <div>{t('browser')}</div>
               <div>
                 {device.uagent_browser} {device.uagent_version}
               </div>
             </li>
 
             <li>
-              <div>{t("ip_address")}</div>
+              <div>{t('ip_address')}</div>
               <div>{device.ip_address}</div>
             </li>
 
             <li>
-              <div>{t("session_expires")}</div>
+              <div>{t('session_expires')}</div>
               <div>
                 <DateFormat date={device.expires} showFullDate />
               </div>

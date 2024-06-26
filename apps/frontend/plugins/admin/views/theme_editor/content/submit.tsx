@@ -1,5 +1,5 @@
-import { Check } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { Check } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -9,14 +9,14 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "vitnode-frontend/components/ui/alert-dialog";
+} from 'vitnode-frontend/components/ui/alert-dialog';
 import {
   Alert,
   AlertDescription,
   AlertTitle,
-} from "vitnode-frontend/components/ui/alert";
-import { Button } from "vitnode-frontend/components/ui/button";
-import { CONFIG } from "vitnode-frontend/helpers/config-with-env";
+} from 'vitnode-frontend/components/ui/alert';
+import { Button } from 'vitnode-frontend/components/ui/button';
+import { CONFIG } from 'vitnode-frontend/helpers/config-with-env';
 
 interface Props {
   isPending: boolean;
@@ -31,27 +31,27 @@ export const SubmitContentThemeEditor = ({
   openSubmitDialog,
   setOpenSubmitDialog,
 }: Props) => {
-  const t = useTranslations("core.theme_editor.submit");
-  const tCore = useTranslations("core");
+  const t = useTranslations('core.theme_editor.submit');
+  const tCore = useTranslations('core');
 
   return (
     <AlertDialog open={openSubmitDialog} onOpenChange={setOpenSubmitDialog}>
       <AlertDialogTrigger asChild>
         <Button className="w-full" size="sm">
-          {tCore("save")}
+          {tCore('save')}
         </Button>
       </AlertDialogTrigger>
 
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>{tCore("are_you_sure")}</AlertDialogTitle>
-          <AlertDialogDescription>{t("desc")}</AlertDialogDescription>
+          <AlertDialogTitle>{tCore('are_you_sure')}</AlertDialogTitle>
+          <AlertDialogDescription>{t('desc')}</AlertDialogDescription>
 
           {CONFIG.node_development && (
             <Alert>
               <Check />
-              <AlertTitle>{t("dev.title")}</AlertTitle>
-              <AlertDescription>{t("dev.desc")}</AlertDescription>
+              <AlertTitle>{t('dev.title')}</AlertTitle>
+              <AlertDescription>{t('dev.desc')}</AlertDescription>
             </Alert>
           )}
         </AlertDialogHeader>
@@ -59,12 +59,12 @@ export const SubmitContentThemeEditor = ({
         <AlertDialogFooter className="mt-6">
           <AlertDialogCancel asChild>
             <Button type="button" variant="outline">
-              {tCore("cancel")}
+              {tCore('cancel')}
             </Button>
           </AlertDialogCancel>
 
           <Button variant="destructive" onClick={onClick} loading={isPending}>
-            {t("submit")}
+            {t('submit')}
           </Button>
         </AlertDialogFooter>
       </AlertDialogContent>

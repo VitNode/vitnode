@@ -1,13 +1,13 @@
-import { INestApplication, ValidationPipe } from "@nestjs/common";
-import * as cookieParser from "cookie-parser";
-import { CorsOptions } from "@nestjs/common/interfaces/external/cors-options.interface";
+import { INestApplication, ValidationPipe } from '@nestjs/common';
+import * as cookieParser from 'cookie-parser';
+import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface';
 
 import {
   ProcessRequestOptions,
   graphqlUploadExpress,
-} from "./graphql-upload/graphql-upload-express";
+} from './graphql-upload/graphql-upload-express';
 
-interface CorsOptionsMain extends Omit<CorsOptions, "credentials"> {
+interface CorsOptionsMain extends Omit<CorsOptions, 'credentials'> {
   origin?: (RegExp | string)[];
 }
 
@@ -22,7 +22,7 @@ export const nestjsMainApp = async (app: INestApplication, options?: Args) => {
     ...options?.cors,
     credentials: true,
     origin: [
-      "https://sandbox.embed.apollographql.com",
+      'https://sandbox.embed.apollographql.com',
       ...(options?.cors?.origin ?? []),
     ],
   });

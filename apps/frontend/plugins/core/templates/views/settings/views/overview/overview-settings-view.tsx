@@ -1,4 +1,4 @@
-import { HeaderOverviewSettings } from "./header/header-overview-settings";
+import { HeaderOverviewSettings } from './header/header-overview-settings';
 
 export const OverviewSettingsView = () => {
   return <HeaderOverviewSettings />;

@@ -1,4 +1,4 @@
-import { removeSpecialCharacters } from "vitnode-shared";
+import { removeSpecialCharacters } from 'vitnode-shared';
 
 export const getIdFormString = (str: string[] | string) => {
   const value = Array.isArray(str) ? str[0] : str;
@@ -6,7 +6,7 @@ export const getIdFormString = (str: string[] | string) => {
     decodeURIComponent(value),
   ).toLowerCase();
 
-  const split = formatValue.split("-").at(-1);
+  const split = formatValue.split('-').at(-1);
 
   if (!split) return 0;
   const convertToNumber = Number(split);

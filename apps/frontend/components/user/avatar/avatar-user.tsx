@@ -1,8 +1,8 @@
-import { cn } from "vitnode-frontend/helpers/classnames";
-import { CONFIG } from "vitnode-frontend/helpers/config-with-env";
-import { Img } from "vitnode-frontend/components/img";
+import { cn } from 'vitnode-frontend/helpers/classnames';
+import { CONFIG } from 'vitnode-frontend/helpers/config-with-env';
+import { Img } from 'vitnode-frontend/components/img';
 
-import { Maybe, AvatarUser as AvatarUserType } from "@/graphql/hooks";
+import { Maybe, AvatarUser as AvatarUserType } from '@/graphql/hooks';
 
 const generateLetterPhoto = (letter: string, color: string) =>
   `data:image/svg+xml,${encodeURIComponent(
@@ -15,7 +15,7 @@ interface Props {
     avatar_color: string;
     name: string;
     name_seo: string;
-    avatar?: Maybe<Pick<AvatarUserType, "dir_folder" | "file_name">>;
+    avatar?: Maybe<Pick<AvatarUserType, 'dir_folder' | 'file_name'>>;
   };
   className?: string;
 }
@@ -27,7 +27,7 @@ export const AvatarUser = ({
 }: Props) => {
   return (
     <Img
-      className={cn("flex-shrink-0 rounded-full", className)}
+      className={cn('flex-shrink-0 rounded-full', className)}
       imageClassName="object-cover"
       src={
         avatar

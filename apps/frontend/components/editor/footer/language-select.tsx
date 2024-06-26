@@ -1,21 +1,21 @@
-import { useTranslations } from "next-intl";
-import { useGlobals } from "vitnode-frontend/hooks/use-globals";
+import { useTranslations } from 'next-intl';
+import { useGlobals } from 'vitnode-frontend/hooks/use-globals';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "vitnode-frontend/components/ui/select";
+} from 'vitnode-frontend/components/ui/select';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "vitnode-frontend/components/ui/tooltip";
-import { buttonVariants } from "vitnode-frontend/components/ui/button";
+} from 'vitnode-frontend/components/ui/tooltip';
+import { buttonVariants } from 'vitnode-frontend/components/ui/button';
 
-import { useEditorState } from "../hooks/use-editor-state";
+import { useEditorState } from '../hooks/use-editor-state';
 
 export interface LanguageSelectFooterEditorProps {
   selectedLanguage: string;
@@ -26,7 +26,7 @@ export const LanguageSelectFooterEditor = ({
   selectedLanguage,
   setSelectedLanguage,
 }: LanguageSelectFooterEditorProps) => {
-  const t = useTranslations("core.editor");
+  const t = useTranslations('core.editor');
   const { languages: languagesFromGlobal } = useGlobals();
   const { editor } = useEditorState();
   const languages = languagesFromGlobal.filter(item => item.allow_in_input);
@@ -40,17 +40,17 @@ export const LanguageSelectFooterEditor = ({
           <TooltipTrigger asChild>
             <SelectTrigger
               className={buttonVariants({
-                variant: "ghost",
-                size: "sm",
+                variant: 'ghost',
+                size: 'sm',
                 className:
-                  "w-auto border-0 shadow-none [&>svg]:h-5 [&>svg]:w-5",
+                  'w-auto border-0 shadow-none [&>svg]:h-5 [&>svg]:w-5',
               })}
             >
               <SelectValue />
             </SelectTrigger>
           </TooltipTrigger>
 
-          <TooltipContent side="top">{t("change_language")}</TooltipContent>
+          <TooltipContent side="top">{t('change_language')}</TooltipContent>
         </Tooltip>
       </TooltipProvider>
 

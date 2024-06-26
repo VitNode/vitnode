@@ -1,32 +1,32 @@
-"use client";
+'use client';
 
-import { Upload } from "lucide-react";
-import { useTranslations } from "next-intl";
-import * as React from "react";
+import { Upload } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import * as React from 'react';
 import {
   Dialog,
   DialogContent,
   DialogTrigger,
-} from "vitnode-frontend/components/ui/dialog";
-import { Button } from "vitnode-frontend/components/ui/button";
-import { Loader } from "vitnode-frontend/components/ui/loader";
-import { CONFIG } from "vitnode-frontend/helpers/config-with-env";
+} from 'vitnode-frontend/components/ui/dialog';
+import { Button } from 'vitnode-frontend/components/ui/button';
+import { Loader } from 'vitnode-frontend/components/ui/loader';
+import { CONFIG } from 'vitnode-frontend/helpers/config-with-env';
 
 const Content = React.lazy(async () =>
-  import("../upload/upload").then(module => ({
+  import('../upload/upload').then(module => ({
     default: module.UploadPluginAdmin,
   })),
 );
 
 export const UploadActionPluginAdmin = () => {
-  const t = useTranslations("core");
+  const t = useTranslations('core');
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant={CONFIG.node_development ? "ghost" : "default"}>
+        <Button variant={CONFIG.node_development ? 'ghost' : 'default'}>
           <Upload />
-          {t("upload")}
+          {t('upload')}
         </Button>
       </DialogTrigger>
 

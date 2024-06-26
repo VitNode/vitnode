@@ -1,18 +1,18 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable } from '@nestjs/common';
 import {
   DatabaseService,
   ParserTextLanguageCoreHelpersService,
-} from "vitnode-backend";
+} from 'vitnode-backend';
 
-import { CreatePluginCategoriesArgs } from "./dto/create.args";
+import { CreatePluginCategoriesArgs } from './dto/create.args';
 
-import { ShowBlogCategories } from "@/plugins/blog/categories/show/dto/show.obj";
+import { ShowBlogCategories } from '@/plugins/blog/categories/show/dto/show.obj';
 import {
   blog_categories,
   blog_categories_description,
   blog_categories_name,
   blog_categories_permissions,
-} from "../../database/schema/categories";
+} from '../../database/schema/categories';
 
 @Injectable()
 export class CreateBlogCategoriesService {

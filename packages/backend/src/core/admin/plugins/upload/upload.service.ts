@@ -1,30 +1,30 @@
-import { join } from "path";
-import * as fs from "fs";
+import { join } from 'path';
+import * as fs from 'fs';
 
-import { Injectable } from "@nestjs/common";
-import * as tar from "tar";
-import { eq } from "drizzle-orm";
-import { currentUnixDate, generateRandomString } from "vitnode-shared";
+import { Injectable } from '@nestjs/common';
+import * as tar from 'tar';
+import { eq } from 'drizzle-orm';
+import { currentUnixDate, generateRandomString } from 'vitnode-shared';
 
-import { ShowAdminPlugins } from "../show/dto/show.obj";
-import { UploadAdminPluginsArgs } from "./dto/upload.args";
-import { ChangeFilesAdminPluginsService } from "../helpers/files/change/change.service";
+import { ShowAdminPlugins } from '../show/dto/show.obj';
+import { UploadAdminPluginsArgs } from './dto/upload.args';
+import { ChangeFilesAdminPluginsService } from '../helpers/files/change/change.service';
 
-import { core_plugins } from "../../../../templates/core/admin/database/schema/plugins";
-import { DatabaseService } from "../../../../database";
+import { core_plugins } from '../../../../templates/core/admin/database/schema/plugins';
+import { DatabaseService } from '../../../../database';
 import {
   ABSOLUTE_PATHS_BACKEND,
   ConfigPlugin,
   CustomError,
   FileUpload,
-} from "../../../..";
+} from '../../../..';
 
 @Injectable()
 export class UploadAdminPluginsService {
   protected path: string = join(process.cwd());
   protected tempPath: string = join(
     ABSOLUTE_PATHS_BACKEND.uploads.temp,
-    "plugins",
+    'plugins',
     `upload-${generateRandomString(5)}${currentUnixDate()}`,
   );
 
@@ -57,30 +57,30 @@ export class UploadAdminPluginsService {
             strip: 1,
           }) as NodeJS.WritableStream & ReturnType<typeof tar.extract>,
         )
-        .on("error", err => {
+        .on('error', err => {
           throw new reject(err.message);
         })
-        .on("finish", () => {
-          resolve("success");
+        .on('finish', () => {
+          resolve('success');
         });
     });
 
-    const pathInfoJSON = join(this.tempPath, "backend", "config.json");
-    const pluginFile = await fs.promises.readFile(pathInfoJSON, "utf8");
-    const config: Omit<ConfigPlugin, "version_code" | "versions"> =
+    const pathInfoJSON = join(this.tempPath, 'backend', 'config.json');
+    const pluginFile = await fs.promises.readFile(pathInfoJSON, 'utf8');
+    const config: Omit<ConfigPlugin, 'version_code' | 'versions'> =
       JSON.parse(pluginFile);
 
     // Check if variables exists
     if (!config.name || !config.author || !config.code || !config.support_url) {
       await this.removeTempFolder();
       throw new CustomError({
-        code: "PLUGIN_CONFIG_VARIABLES_NOT_FOUND",
-        message: "Plugin config variables not found",
+        code: 'PLUGIN_CONFIG_VARIABLES_NOT_FOUND',
+        message: 'Plugin config variables not found',
       });
     }
 
-    const pathVersionsJSON = join(this.tempPath, "backend", "versions.json");
-    const versionsFile = await fs.promises.readFile(pathVersionsJSON, "utf8");
+    const pathVersionsJSON = join(this.tempPath, 'backend', 'versions.json');
+    const versionsFile = await fs.promises.readFile(pathVersionsJSON, 'utf8');
     const versions: Record<string, string> = JSON.parse(versionsFile);
 
     // Find the latest version
@@ -110,7 +110,7 @@ export class UploadAdminPluginsService {
     await fs.promises.mkdir(newPathBackend);
 
     // Copy temp folder to plugin folder
-    const backendSource = join(this.tempPath, "backend");
+    const backendSource = join(this.tempPath, 'backend');
     await fs.promises.cp(backendSource, newPathBackend, { recursive: true });
     if (!upload_new_version) {
       this.changeFilesService.changeFilesWhenCreate({ code: config.code });
@@ -132,7 +132,7 @@ export class UploadAdminPluginsService {
       });
     } catch (error) {
       throw new CustomError({
-        code: "COPY_FILES_TO_PLUGIN_FOLDER_ERROR",
+        code: 'COPY_FILES_TO_PLUGIN_FOLDER_ERROR',
         message: `Source: ${source}, Destination: ${destination}`,
       });
     }
@@ -151,7 +151,7 @@ export class UploadAdminPluginsService {
       await fs.promises.copyFile(source, destination);
     } catch (error) {
       throw new CustomError({
-        code: "COPY_FILE_TO_PLUGIN_FOLDER_ERROR",
+        code: 'COPY_FILE_TO_PLUGIN_FOLDER_ERROR',
         message: `Source: ${source}, Destination: ${destination}`,
       });
     }
@@ -162,10 +162,10 @@ export class UploadAdminPluginsService {
   }: {
     config: ConfigPlugin;
   }): Promise<void> {
-    const frontendPaths = ["admin_pages", "pages", "plugin", "pages_container"];
+    const frontendPaths = ['admin_pages', 'pages', 'plugin', 'pages_container'];
     await Promise.all(
       frontendPaths.map(async path => {
-        const source = join(this.tempPath, "frontend", path);
+        const source = join(this.tempPath, 'frontend', path);
         const destination: string = ABSOLUTE_PATHS_BACKEND.plugin({
           code: config.code,
         }).frontend[path];
@@ -226,24 +226,24 @@ export class UploadAdminPluginsService {
     if (checkPlugin && !code) {
       await this.removeTempFolder();
       throw new CustomError({
-        code: "PLUGIN_ALREADY_EXISTS",
-        message: "Plugin already exists",
+        code: 'PLUGIN_ALREADY_EXISTS',
+        message: 'Plugin already exists',
       });
     }
 
     if (code && code !== config.code) {
       await this.removeTempFolder();
       throw new CustomError({
-        code: "PLUGIN_CODE_NOT_MATCH",
-        message: "Plugin code not match",
+        code: 'PLUGIN_CODE_NOT_MATCH',
+        message: 'Plugin code not match',
       });
     }
 
     if (checkPlugin && code && config.version_code < checkPlugin.version_code) {
       await this.removeTempFolder();
       throw new CustomError({
-        code: "PLUGIN_VERSION_IS_LOWER",
-        message: "Plugin version is lower than the current version",
+        code: 'PLUGIN_VERSION_IS_LOWER',
+        message: 'Plugin version is lower than the current version',
       });
     }
 

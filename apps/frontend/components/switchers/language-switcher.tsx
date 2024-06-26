@@ -1,22 +1,22 @@
 /* eslint-disable no-console */
-"use client";
+'use client';
 
-import { Languages } from "lucide-react";
-import { useLocale, useTranslations } from "next-intl";
-import { usePathname, useRouter } from "vitnode-frontend/navigation";
+import { Languages } from 'lucide-react';
+import { useLocale, useTranslations } from 'next-intl';
+import { usePathname, useRouter } from 'vitnode-frontend/navigation';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
-} from "vitnode-frontend/components/ui/dropdown-menu";
-import { Button } from "vitnode-frontend/components/ui/button";
-import { useGlobals } from "vitnode-frontend/hooks/use-globals";
-import { CONFIG } from "vitnode-frontend/helpers/config-with-env";
+} from 'vitnode-frontend/components/ui/dropdown-menu';
+import { Button } from 'vitnode-frontend/components/ui/button';
+import { useGlobals } from 'vitnode-frontend/hooks/use-globals';
+import { CONFIG } from 'vitnode-frontend/helpers/config-with-env';
 
 export const LanguageSwitcher = () => {
-  const t = useTranslations("core");
+  const t = useTranslations('core');
   const {
     config: { rebuild_required },
     languages,
@@ -39,7 +39,7 @@ export const LanguageSwitcher = () => {
         <Button
           variant="ghost"
           size="icon"
-          ariaLabel={t("user-bar.language.change")}
+          ariaLabel={t('user-bar.language.change')}
         >
           <Languages className="size-[1.2rem]" />
         </Button>

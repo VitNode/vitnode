@@ -1,15 +1,15 @@
-import * as React from "react";
-import { ReactCropperElement } from "react-cropper";
-import { useTranslations } from "next-intl";
-import { toast } from "sonner";
-import { useDialog } from "vitnode-frontend/components/ui/dialog";
+import * as React from 'react';
+import { ReactCropperElement } from 'react-cropper';
+import { useTranslations } from 'next-intl';
+import { toast } from 'sonner';
+import { useDialog } from 'vitnode-frontend/components/ui/dialog';
 
-import { mutationUploadApi } from "./api/mutation-upload-api";
+import { mutationUploadApi } from './api/mutation-upload-api';
 
-import { useSession } from "../../use-session";
+import { useSession } from '../../use-session';
 
 export const useCopperModalChangeAvatar = () => {
-  const t = useTranslations("core");
+  const t = useTranslations('core');
   const cropperRef = React.useRef<ReactCropperElement>(null);
   const [isPending, setPending] = React.useState(false);
   const { session } = useSession();
@@ -30,17 +30,17 @@ export const useCopperModalChangeAvatar = () => {
     setPending(true);
 
     const formData = new FormData();
-    formData.append("file", file);
+    formData.append('file', file);
     const mutation = await mutationUploadApi(formData);
     if (mutation.error) {
-      toast.error(t("errors.title"), {
-        description: t("settings.change_avatar.options.upload.error"),
+      toast.error(t('errors.title'), {
+        description: t('settings.change_avatar.options.upload.error'),
       });
 
       return;
     } else {
-      toast.success(t("settings.change_avatar.options.upload.title"), {
-        description: t("settings.change_avatar.options.upload.success"),
+      toast.success(t('settings.change_avatar.options.upload.title'), {
+        description: t('settings.change_avatar.options.upload.success'),
       });
       setOpen?.(false);
     }

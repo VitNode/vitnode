@@ -1,22 +1,22 @@
-import * as z from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { toast } from "sonner";
-import { useTranslations } from "next-intl";
-import { zodInput } from "vitnode-frontend/helpers/zod";
-import { useDialog } from "vitnode-frontend/components/ui/dialog";
+import * as z from 'zod';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { toast } from 'sonner';
+import { useTranslations } from 'next-intl';
+import { zodInput } from 'vitnode-frontend/helpers/zod';
+import { useDialog } from 'vitnode-frontend/components/ui/dialog';
 
-import { mutationCreateApi } from "./create-mutation-api";
-import { ShowBlogCategories } from "@/graphql/hooks";
-import { useTextLang } from "@/plugins/core/hooks/use-text-lang";
+import { mutationCreateApi } from './create-mutation-api';
+import { ShowBlogCategories } from '@/graphql/hooks';
+import { useTextLang } from '@/plugins/core/hooks/use-text-lang';
 
 interface Args {
   data?: ShowBlogCategories;
 }
 
 export const useCreateEditCategoryBlogAdmin = ({ data }: Args) => {
-  const t = useTranslations("blog.admin.categories");
-  const tCore = useTranslations("core");
+  const t = useTranslations('blog.admin.categories');
+  const tCore = useTranslations('core');
   const { setOpen } = useDialog();
   const { convertText } = useTextLang();
 
@@ -46,7 +46,7 @@ export const useCreateEditCategoryBlogAdmin = ({ data }: Args) => {
     defaultValues: {
       name: data?.name ?? [],
       description: data?.description ?? [],
-      color: "",
+      color: '',
       permissions: {
         can_all_read: false,
         can_all_create: false,
@@ -74,14 +74,14 @@ export const useCreateEditCategoryBlogAdmin = ({ data }: Args) => {
     }
 
     if (error) {
-      toast.error(tCore("errors.title"), {
-        description: tCore("errors.internal_server_error"),
+      toast.error(tCore('errors.title'), {
+        description: tCore('errors.internal_server_error'),
       });
 
       return;
     }
 
-    toast.success(t(data ? "edit.success" : "create.success"), {
+    toast.success(t(data ? 'edit.success' : 'create.success'), {
       description: convertText(values.name),
     });
 

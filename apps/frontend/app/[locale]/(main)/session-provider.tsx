@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import { SessionContext } from "vitnode-frontend/hooks/use-session";
+import * as React from 'react';
+import { SessionContext } from 'vitnode-frontend/hooks/use-session';
 
-import { Core_Sessions__AuthorizationQuery } from "@/graphql/hooks";
+import { Core_Sessions__AuthorizationQuery } from '@/graphql/hooks';
 
 interface Props {
   children: React.ReactNode;

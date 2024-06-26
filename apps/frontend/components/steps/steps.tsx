@@ -1,6 +1,6 @@
-import { Check } from "lucide-react";
-import { Link } from "vitnode-frontend/navigation";
-import { cn } from "vitnode-frontend/helpers/classnames";
+import { Check } from 'lucide-react';
+import { Link } from 'vitnode-frontend/navigation';
+import { cn } from 'vitnode-frontend/helpers/classnames';
 
 export interface ItemStepProps {
   component: React.ReactNode;
@@ -21,14 +21,14 @@ export const Steps = ({ className, items }: Props) => {
 
   return (
     <div className={className}>
-      <ol className={cn("relative ml-4 flex flex-col gap-5 border-l-2")}>
+      <ol className={cn('relative ml-4 flex flex-col gap-5 border-l-2')}>
         {items.map((item, index) => (
           <li key={item.id}>
             <span
               className={cn(
-                "bg-background text-card-foreground absolute -left-4 flex h-8 w-8 items-center justify-center rounded-full border-2 font-bold",
+                'bg-background text-card-foreground absolute -left-4 flex h-8 w-8 items-center justify-center rounded-full border-2 font-bold',
                 {
-                  ["bg-primary border-primary text-white"]: item.checked,
+                  ['bg-primary border-primary text-white']: item.checked,
                 },
               )}
             >

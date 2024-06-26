@@ -1,11 +1,11 @@
-import { useTranslations } from "next-intl";
+import { useTranslations } from 'next-intl';
 import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "vitnode-frontend/components/ui/dialog";
-import { Button } from "vitnode-frontend/components/ui/button";
+} from 'vitnode-frontend/components/ui/dialog';
+import { Button } from 'vitnode-frontend/components/ui/button';
 import {
   Form,
   FormField,
@@ -14,27 +14,27 @@ import {
   FormMessage,
   FormControl,
   FormDescription,
-} from "vitnode-frontend/components/ui/form";
-import { Input } from "vitnode-frontend/components/ui/input";
-import { Switch } from "vitnode-frontend/components/ui/switch";
+} from 'vitnode-frontend/components/ui/form';
+import { Input } from 'vitnode-frontend/components/ui/input';
+import { Switch } from 'vitnode-frontend/components/ui/switch';
 
-import { TimezoneFieldCreateEditLangAdmin } from "./fields/timezone";
-import { LocaleFieldCreateEditLangAdmin } from "./fields/locale";
-import { ShowCoreLanguages } from "@/graphql/hooks";
-import { useCreateEditLangAdmin } from "./hooks/use-create-edit-lang-admin";
+import { TimezoneFieldCreateEditLangAdmin } from './fields/timezone';
+import { LocaleFieldCreateEditLangAdmin } from './fields/locale';
+import { ShowCoreLanguages } from '@/graphql/hooks';
+import { useCreateEditLangAdmin } from './hooks/use-create-edit-lang-admin';
 
 interface Props {
   data?: ShowCoreLanguages;
 }
 
 export const CreateEditLangAdmin = ({ data }: Props) => {
-  const t = useTranslations("admin.core.langs.actions");
+  const t = useTranslations('admin.core.langs.actions');
   const { form, onSubmit } = useCreateEditLangAdmin({ data });
 
   return (
     <>
       <DialogHeader>
-        <DialogTitle>{t(data ? "edit.title" : "create.title")}</DialogTitle>
+        <DialogTitle>{t(data ? 'edit.title' : 'create.title')}</DialogTitle>
         {data?.name && <DialogDescription>{data.name}</DialogDescription>}
       </DialogHeader>
 
@@ -48,10 +48,10 @@ export const CreateEditLangAdmin = ({ data }: Props) => {
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{t("create.name.label")}</FormLabel>
+                <FormLabel>{t('create.name.label')}</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder={t("create.name.placeholder")}
+                    placeholder={t('create.name.placeholder')}
                     {...field}
                   />
                 </FormControl>
@@ -81,14 +81,14 @@ export const CreateEditLangAdmin = ({ data }: Props) => {
               name="code"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{t("create.code.label")}</FormLabel>
+                  <FormLabel>{t('create.code.label')}</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder={t("create.code.placeholder")}
+                      placeholder={t('create.code.placeholder')}
                       {...field}
                     />
                   </FormControl>
-                  <FormDescription>{t("create.code.desc")}</FormDescription>
+                  <FormDescription>{t('create.code.desc')}</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -101,9 +101,9 @@ export const CreateEditLangAdmin = ({ data }: Props) => {
                 <FormItem className="flex flex-row items-center justify-between gap-2 rounded-lg border p-4">
                   <div className="space-y-0.5">
                     <FormLabel className="text-base">
-                      {t("edit.default.label")}
+                      {t('edit.default.label')}
                     </FormLabel>
-                    <FormDescription>{t("edit.default.desc")}</FormDescription>
+                    <FormDescription>{t('edit.default.desc')}</FormDescription>
                   </div>
                   <FormControl>
                     <Switch
@@ -124,9 +124,9 @@ export const CreateEditLangAdmin = ({ data }: Props) => {
               <FormItem className="flex flex-row items-center justify-between gap-2 rounded-lg border p-4">
                 <div className="space-y-0.5">
                   <FormLabel className="text-base">
-                    {t("create.time_24.label")}
+                    {t('create.time_24.label')}
                   </FormLabel>
-                  <FormDescription>{t("create.time_24.desc")}</FormDescription>
+                  <FormDescription>{t('create.time_24.desc')}</FormDescription>
                 </div>
                 <FormControl>
                   <Switch
@@ -145,10 +145,10 @@ export const CreateEditLangAdmin = ({ data }: Props) => {
               <FormItem className="flex flex-row items-center justify-between gap-2 rounded-lg border p-4">
                 <div className="space-y-0.5">
                   <FormLabel className="text-base">
-                    {t("create.allow_in_input.label")}
+                    {t('create.allow_in_input.label')}
                   </FormLabel>
                   <FormDescription>
-                    {t("create.allow_in_input.desc")}
+                    {t('create.allow_in_input.desc')}
                   </FormDescription>
                 </div>
                 <FormControl>
@@ -168,7 +168,7 @@ export const CreateEditLangAdmin = ({ data }: Props) => {
               loading={form.formState.isSubmitting}
               disabled={!form.formState.isValid}
             >
-              {t(data ? "edit.submit" : "create.submit")}
+              {t(data ? 'edit.submit' : 'create.submit')}
             </Button>
           </DialogFooter>
         </form>

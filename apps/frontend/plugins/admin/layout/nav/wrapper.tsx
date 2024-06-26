@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import * as Accordion from "@radix-ui/react-accordion";
-import { useSelectedLayoutSegments } from "next/navigation";
-import * as React from "react";
+import * as Accordion from '@radix-ui/react-accordion';
+import { useSelectedLayoutSegments } from 'next/navigation';
+import * as React from 'react';
 
 interface Props {
   children: React.ReactNode;

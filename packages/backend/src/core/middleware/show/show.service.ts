@@ -1,10 +1,10 @@
-import { readdir } from "fs/promises";
+import { readdir } from 'fs/promises';
 
-import { Injectable } from "@nestjs/common";
+import { Injectable } from '@nestjs/common';
 
-import { ShowCoreMiddlewareObj } from "./dto/languages.obj";
+import { ShowCoreMiddlewareObj } from './dto/languages.obj';
 
-import { ABSOLUTE_PATHS_BACKEND, getConfigFile } from "../../..";
+import { ABSOLUTE_PATHS_BACKEND, getConfigFile } from '../../..';
 
 @Injectable()
 export class ShowCoreMiddlewareService {
@@ -16,8 +16,8 @@ export class ShowCoreMiddlewareService {
     return {
       languages: config.langs,
       plugins: [
-        "admin",
-        ...plugins.filter(plugin => !["plugins.module.ts"].includes(plugin)),
+        'admin',
+        ...plugins.filter(plugin => !['plugins.module.ts'].includes(plugin)),
       ],
     };
   }

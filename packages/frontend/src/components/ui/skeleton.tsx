@@ -1,6 +1,6 @@
-import * as React from "react";
+import * as React from 'react';
 
-import { cn } from "../../helpers/classnames";
+import { cn } from '../../helpers/classnames';
 
 function Skeleton({
   className,
@@ -8,7 +8,7 @@ function Skeleton({
 }: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
-      className={cn("bg-muted animate-pulse rounded-md", className)}
+      className={cn('bg-muted animate-pulse rounded-md', className)}
       {...props}
     />
   );

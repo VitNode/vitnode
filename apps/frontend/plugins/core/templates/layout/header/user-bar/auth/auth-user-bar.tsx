@@ -5,9 +5,9 @@ import {
   Settings,
   Shield,
   User,
-} from "lucide-react";
-import { useTranslations } from "next-intl";
-import { Link } from "vitnode-frontend/navigation";
+} from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import { Link } from 'vitnode-frontend/navigation';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -16,15 +16,15 @@ import {
   DropdownMenuTrigger,
   DropdownMenuSeparator,
   DropdownMenuLabel,
-} from "vitnode-frontend/components/ui/dropdown-menu";
-import { Button } from "vitnode-frontend/components/ui/button";
-import { useSession } from "vitnode-frontend/hooks/use-session";
+} from 'vitnode-frontend/components/ui/dropdown-menu';
+import { Button } from 'vitnode-frontend/components/ui/button';
+import { useSession } from 'vitnode-frontend/hooks/use-session';
 
-import { useSignOutAPI } from "@/plugins/core/hooks/sign/out/use-sign-out-api";
-import { AvatarUser } from "@/components/user/avatar/avatar-user";
+import { useSignOutAPI } from '@/plugins/core/hooks/sign/out/use-sign-out-api';
+import { AvatarUser } from '@/components/user/avatar/avatar-user';
 
 export const AuthUserBar = () => {
-  const t = useTranslations("core");
+  const t = useTranslations('core');
   const { session } = useSession();
   const { onSubmit } = useSignOutAPI();
 
@@ -59,13 +59,13 @@ export const AuthUserBar = () => {
           <DropdownMenuItem asChild>
             <Link href={`/profile/${name_seo}`}>
               <User />
-              <span>{t("user-bar.my_profile")}</span>
+              <span>{t('user-bar.my_profile')}</span>
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
             <Link href="/settings">
               <Settings />
-              <span>{t("user-bar.settings")}</span>
+              <span>{t('user-bar.settings')}</span>
             </Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
@@ -79,7 +79,7 @@ export const AuthUserBar = () => {
                 <DropdownMenuItem asChild>
                   <Link href="/admin/theme-editor">
                     <PaintRoller />
-                    <span>{t("user-bar.theme_editor")}</span>
+                    <span>{t('user-bar.theme_editor')}</span>
                   </Link>
                 </DropdownMenuItem>
               )}
@@ -88,7 +88,7 @@ export const AuthUserBar = () => {
                 <DropdownMenuItem asChild>
                   <Link href="/mod">
                     <Shield />
-                    <span>{t("user-bar.mod_cp")}</span>
+                    <span>{t('user-bar.mod_cp')}</span>
                   </Link>
                 </DropdownMenuItem>
               )}
@@ -97,7 +97,7 @@ export const AuthUserBar = () => {
                 <DropdownMenuItem asChild>
                   <Link href="/admin" target="_blank">
                     <KeyRound />
-                    <span>{t("user-bar.admin_cp")}</span>
+                    <span>{t('user-bar.admin_cp')}</span>
                   </Link>
                 </DropdownMenuItem>
               )}
@@ -110,7 +110,7 @@ export const AuthUserBar = () => {
         <DropdownMenuGroup>
           <DropdownMenuItem onClick={async () => onSubmit()}>
             <LogOut />
-            <span>{t("user-bar.log_out")}</span>
+            <span>{t('user-bar.log_out')}</span>
           </DropdownMenuItem>
         </DropdownMenuGroup>
       </DropdownMenuContent>

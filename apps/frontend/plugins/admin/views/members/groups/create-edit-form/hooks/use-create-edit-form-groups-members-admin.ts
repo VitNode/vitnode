@@ -1,26 +1,26 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useTranslations } from "next-intl";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
-import { toast } from "sonner";
-import { usePathname, useRouter } from "vitnode-frontend/navigation";
-import { zodInput } from "vitnode-frontend/helpers/zod";
-import { useDialog } from "vitnode-frontend/components/ui/dialog";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useTranslations } from 'next-intl';
+import { useForm } from 'react-hook-form';
+import * as z from 'zod';
+import { toast } from 'sonner';
+import { usePathname, useRouter } from 'vitnode-frontend/navigation';
+import { zodInput } from 'vitnode-frontend/helpers/zod';
+import { useDialog } from 'vitnode-frontend/components/ui/dialog';
 
-import { ShowAdminGroups } from "@/graphql/hooks";
-import { mutationCreateApi } from "./mutation-create-api";
-import { mutationEditApi } from "./mutation-edit-api";
-import { useTextLang } from "@/plugins/core/hooks/use-text-lang";
+import { ShowAdminGroups } from '@/graphql/hooks';
+import { mutationCreateApi } from './mutation-create-api';
+import { mutationEditApi } from './mutation-edit-api';
+import { useTextLang } from '@/plugins/core/hooks/use-text-lang';
 
 export interface CreateEditFormGroupsMembersAdminArgs {
-  data?: Pick<ShowAdminGroups, "content" | "id" | "name">;
+  data?: Pick<ShowAdminGroups, 'content' | 'id' | 'name'>;
 }
 
 export const useCreateEditFormGroupsMembersAdmin = ({
   data,
 }: CreateEditFormGroupsMembersAdminArgs) => {
-  const t = useTranslations("admin.members.groups");
-  const tCore = useTranslations("core");
+  const t = useTranslations('admin.members.groups');
+  const tCore = useTranslations('core');
   const { setOpen } = useDialog();
   const { convertText } = useTextLang();
   const pathname = usePathname();
@@ -40,7 +40,7 @@ export const useCreateEditFormGroupsMembersAdmin = ({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: data?.name ?? [],
-      color: "",
+      color: '',
       content: data?.content ?? {
         files_allow_upload: true,
         files_total_max_storage: 500000,
@@ -69,8 +69,8 @@ export const useCreateEditFormGroupsMembersAdmin = ({
     }
 
     if (isError) {
-      toast.error(tCore("errors.title"), {
-        description: tCore("errors.internal_server_error"),
+      toast.error(tCore('errors.title'), {
+        description: tCore('errors.internal_server_error'),
       });
 
       return;
@@ -78,7 +78,7 @@ export const useCreateEditFormGroupsMembersAdmin = ({
 
     push(pathname);
 
-    toast.success(data ? t("edit.success") : t("create.success"), {
+    toast.success(data ? t('edit.success') : t('create.success'), {
       description: convertText(values.name),
     });
 

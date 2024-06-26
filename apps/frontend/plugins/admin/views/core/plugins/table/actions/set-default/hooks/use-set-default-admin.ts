@@ -1,12 +1,12 @@
-import { toast } from "sonner";
-import { useTranslations } from "next-intl";
+import { toast } from 'sonner';
+import { useTranslations } from 'next-intl';
 
-import { ShowAdminPlugins } from "@/graphql/hooks";
+import { ShowAdminPlugins } from '@/graphql/hooks';
 
-import { mutationEditApi } from "../../../../actions/create/hooks/mutation-edit-api";
+import { mutationEditApi } from '../../../../actions/create/hooks/mutation-edit-api';
 
 export const useSetDefaultPluginAdmin = (data: ShowAdminPlugins) => {
-  const tCore = useTranslations("core");
+  const tCore = useTranslations('core');
 
   const onSubmit = async () => {
     const mutation = await mutationEditApi({
@@ -21,8 +21,8 @@ export const useSetDefaultPluginAdmin = (data: ShowAdminPlugins) => {
     });
 
     if (mutation.error) {
-      toast.error(tCore("errors.title"), {
-        description: tCore("errors.internal_server_error"),
+      toast.error(tCore('errors.title'), {
+        description: tCore('errors.internal_server_error'),
       });
 
       return;

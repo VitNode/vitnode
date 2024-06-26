@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { useTranslations } from "next-intl";
-import { AlertCircle } from "lucide-react";
+import { useTranslations } from 'next-intl';
+import { AlertCircle } from 'lucide-react';
 import {
   Form,
   FormControl,
@@ -10,21 +10,21 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "vitnode-frontend/components/ui/form";
-import { Button } from "vitnode-frontend/components/ui/button";
-import { Input } from "vitnode-frontend/components/ui/input";
-import { CardContent, CardFooter } from "vitnode-frontend/components/ui/card";
+} from 'vitnode-frontend/components/ui/form';
+import { Button } from 'vitnode-frontend/components/ui/button';
+import { Input } from 'vitnode-frontend/components/ui/input';
+import { CardContent, CardFooter } from 'vitnode-frontend/components/ui/card';
 import {
   Alert,
   AlertDescription,
   AlertTitle,
-} from "vitnode-frontend/components/ui/alert";
-import { Checkbox } from "vitnode-frontend/components/ui/checkbox";
+} from 'vitnode-frontend/components/ui/alert';
+import { Checkbox } from 'vitnode-frontend/components/ui/checkbox';
 
-import { useSignInView } from "@/plugins/core/hooks/sign/in/use-sign-in-view";
+import { useSignInView } from '@/plugins/core/hooks/sign/in/use-sign-in-view';
 
 export const FormSignIn = () => {
-  const t = useTranslations("core");
+  const t = useTranslations('core');
   const { error, form, onSubmit } = useSignInView();
 
   return (
@@ -32,20 +32,20 @@ export const FormSignIn = () => {
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <CardContent>
           <div className="space-y-4">
-            {error?.extensions?.code === "ACCESS_DENIED" && (
+            {error?.extensions?.code === 'ACCESS_DENIED' && (
               <Alert variant="destructive">
                 <AlertCircle className="size-4" />
-                <AlertTitle>{t("sign_in.error.title")}</AlertTitle>
-                <AlertDescription>{t("sign_in.error.desc")}</AlertDescription>
+                <AlertTitle>{t('sign_in.error.title')}</AlertTitle>
+                <AlertDescription>{t('sign_in.error.desc')}</AlertDescription>
               </Alert>
             )}
 
-            {error && error.extensions?.code !== "ACCESS_DENIED" && (
+            {error && error.extensions?.code !== 'ACCESS_DENIED' && (
               <Alert variant="destructive">
                 <AlertCircle className="size-4" />
-                <AlertTitle>{t("errors.title")}</AlertTitle>
+                <AlertTitle>{t('errors.title')}</AlertTitle>
                 <AlertDescription>
-                  {t("errors.internal_server_error")}
+                  {t('errors.internal_server_error')}
                 </AlertDescription>
               </Alert>
             )}
@@ -55,7 +55,7 @@ export const FormSignIn = () => {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{t("sign_in.form.email.label")}</FormLabel>
+                  <FormLabel>{t('sign_in.form.email.label')}</FormLabel>
                   <FormControl>
                     <Input {...field} type="email" />
                   </FormControl>
@@ -68,7 +68,7 @@ export const FormSignIn = () => {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{t("sign_in.form.password.label")}</FormLabel>
+                  <FormLabel>{t('sign_in.form.password.label')}</FormLabel>
                   <FormControl>
                     <Input {...field} type="password" />
                   </FormControl>
@@ -88,9 +88,9 @@ export const FormSignIn = () => {
                     />
                   </FormControl>
                   <div className="space-y-1 leading-none">
-                    <FormLabel>{t("sign_in.form.remember.label")}</FormLabel>
+                    <FormLabel>{t('sign_in.form.remember.label')}</FormLabel>
                     <FormDescription>
-                      {t("sign_in.form.remember.desc")}
+                      {t('sign_in.form.remember.desc')}
                     </FormDescription>
                   </div>
                 </FormItem>
@@ -104,7 +104,7 @@ export const FormSignIn = () => {
             className="w-full"
             loading={form.formState.isSubmitting}
           >
-            {t("sign_in.form.submit")}
+            {t('sign_in.form.submit')}
           </Button>
         </CardFooter>
       </form>

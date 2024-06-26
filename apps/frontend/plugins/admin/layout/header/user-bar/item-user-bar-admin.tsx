@@ -1,8 +1,8 @@
-import * as React from "react";
-import { Link } from "vitnode-frontend/navigation";
-import { cn } from "vitnode-frontend/helpers/classnames";
-import { buttonVariants, Button } from "vitnode-frontend/components/ui/button";
-import { SheetClose } from "vitnode-frontend/components/ui/sheet";
+import * as React from 'react';
+import { Link } from 'vitnode-frontend/navigation';
+import { cn } from 'vitnode-frontend/helpers/classnames';
+import { buttonVariants, Button } from 'vitnode-frontend/components/ui/button';
+import { SheetClose } from 'vitnode-frontend/components/ui/sheet';
 
 interface Props {
   children: React.ReactNode;
@@ -19,7 +19,7 @@ export const ItemUserBarAdmin = ({
 }: Props) => {
   const content = () => {
     const className =
-      "w-full justify-start [&>svg]:text-muted-foreground font-normal";
+      'w-full justify-start [&>svg]:text-muted-foreground font-normal';
 
     if (href) {
       return (
@@ -27,8 +27,8 @@ export const ItemUserBarAdmin = ({
           href={href}
           className={cn(
             buttonVariants({
-              variant: "ghost",
-              size: "sm",
+              variant: 'ghost',
+              size: 'sm',
               className,
             }),
           )}

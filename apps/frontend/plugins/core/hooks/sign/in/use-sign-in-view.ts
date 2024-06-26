@@ -1,11 +1,11 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
-import * as React from "react";
-import { zodInput } from "vitnode-frontend/helpers/zod";
-import { ErrorType } from "vitnode-frontend/graphql/fetcher";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import * as z from 'zod';
+import * as React from 'react';
+import { zodInput } from 'vitnode-frontend/helpers/zod';
+import { ErrorType } from 'vitnode-frontend/graphql/fetcher';
 
-import { mutationApi } from "./mutation-api";
+import { mutationApi } from './mutation-api';
 
 export const useSignInView = () => {
   const [error, setError] = React.useState<ErrorType | null>(null);
@@ -19,11 +19,11 @@ export const useSignInView = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
       remember: false,
     },
-    mode: "onChange",
+    mode: 'onChange',
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {

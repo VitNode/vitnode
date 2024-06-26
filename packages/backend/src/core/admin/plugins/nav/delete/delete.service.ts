@@ -1,11 +1,11 @@
-import * as fs from "fs";
+import * as fs from 'fs';
 
-import { Injectable } from "@nestjs/common";
+import { Injectable } from '@nestjs/common';
 
-import { DeleteCreateAdminNavPluginsArgs } from "./dto/delete.args";
+import { DeleteCreateAdminNavPluginsArgs } from './dto/delete.args';
 
-import { NotFoundError } from "../../../../../errors";
-import { ABSOLUTE_PATHS_BACKEND, ConfigPlugin } from "../../../../..";
+import { NotFoundError } from '../../../../../errors';
+import { ABSOLUTE_PATHS_BACKEND, ConfigPlugin } from '../../../../..';
 
 @Injectable()
 export class DeleteAdminNavPluginsService {
@@ -18,10 +18,10 @@ export class DeleteAdminNavPluginsService {
       code: plugin_code,
     }).config;
     if (!fs.existsSync(pathConfig)) {
-      throw new NotFoundError("Plugin");
+      throw new NotFoundError('Plugin');
     }
     const config: ConfigPlugin = JSON.parse(
-      fs.readFileSync(pathConfig, "utf8"),
+      fs.readFileSync(pathConfig, 'utf8'),
     );
 
     // Update config
@@ -29,14 +29,14 @@ export class DeleteAdminNavPluginsService {
       const parent = config.nav.find(nav => nav.code === parent_code);
 
       if (!parent) {
-        throw new NotFoundError("Parent nav");
+        throw new NotFoundError('Parent nav');
       }
 
       parent.children = parent.children.filter(child => child.code !== code);
     } else {
       const codeExists = config.nav.find(nav => nav.code === code);
       if (!codeExists) {
-        throw new NotFoundError("Plugin nav");
+        throw new NotFoundError('Plugin nav');
       }
 
       config.nav = config.nav.filter(nav => nav.code !== code);
@@ -45,6 +45,6 @@ export class DeleteAdminNavPluginsService {
     // Save config
     fs.writeFileSync(pathConfig, JSON.stringify(config, null, 2));
 
-    return "Success!";
+    return 'Success!';
   }
 }

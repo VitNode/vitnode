@@ -1,7 +1,7 @@
-import { CircleX, File } from "lucide-react";
-import Image from "next/image";
+import { CircleX, File } from 'lucide-react';
+import Image from 'next/image';
 
-import { Loader } from "../../../../components/ui/loader";
+import { Loader } from '../../../../components/ui/loader';
 
 interface Props {
   alt: string;

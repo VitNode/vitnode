@@ -1,10 +1,10 @@
-import { Args, Mutation, Resolver } from "@nestjs/graphql";
-import { UseGuards } from "@nestjs/common";
+import { Args, Mutation, Resolver } from '@nestjs/graphql';
+import { UseGuards } from '@nestjs/common';
 
-import { UpdateAdminCoreLanguageService } from "./update.service";
-import { UpdateCoreAdminLanguagesArgs } from "./dto/update.args";
+import { UpdateAdminCoreLanguageService } from './update.service';
+import { UpdateCoreAdminLanguagesArgs } from './dto/update.args';
 
-import { AdminAuthGuards } from "../../../../utils";
+import { AdminAuthGuards } from '../../../../utils';
 
 @Resolver()
 export class UpdateAdminCoreLanguagesResolver {

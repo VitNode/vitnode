@@ -1,7 +1,7 @@
-import { Query, Resolver } from "@nestjs/graphql";
+import { Query, Resolver } from '@nestjs/graphql';
 
-import { ShowCorePluginsService } from "./show.service";
-import { ShowCorePluginsObj } from "./dto/show.obj";
+import { ShowCorePluginsService } from './show.service';
+import { ShowCorePluginsObj } from './dto/show.obj';
 
 @Resolver()
 export class ShowCorePluginsResolver {

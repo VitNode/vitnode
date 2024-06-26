@@ -1,20 +1,20 @@
-import { Plus, Trash2 } from "lucide-react";
-import { useTranslations } from "next-intl";
-import { toast } from "sonner";
-import { JSONContent } from "@tiptap/react";
-import { cn } from "vitnode-frontend/helpers/classnames";
-import { CONFIG } from "vitnode-frontend/helpers/config-with-env";
-import { Button } from "vitnode-frontend/components/ui/button";
+import { Plus, Trash2 } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import { toast } from 'sonner';
+import { JSONContent } from '@tiptap/react';
+import { cn } from 'vitnode-frontend/helpers/classnames';
+import { CONFIG } from 'vitnode-frontend/helpers/config-with-env';
+import { Button } from 'vitnode-frontend/components/ui/button';
 
-import { IconItemListFilesFooterEditor } from "./icon";
-import { ContentItemListFilesFooterEditor } from "./content";
-import { deleteMutationApi } from "./hooks/delete-mutation-api";
-import { FileStateEditor } from "@/components/editor/extensions/files/files";
-import { useEditorState } from "@/components/editor/hooks/use-editor-state";
-import { TextLanguage } from "@/graphql/hooks";
+import { IconItemListFilesFooterEditor } from './icon';
+import { ContentItemListFilesFooterEditor } from './content';
+import { deleteMutationApi } from './hooks/delete-mutation-api';
+import { FileStateEditor } from '@/components/editor/extensions/files/files';
+import { useEditorState } from '@/components/editor/hooks/use-editor-state';
+import { TextLanguage } from '@/graphql/hooks';
 
 export interface ItemListFilesFooterEditorProps
-  extends Omit<FileStateEditor, "file"> {
+  extends Omit<FileStateEditor, 'file'> {
   file?: File;
 }
 
@@ -25,8 +25,8 @@ export const ItemListFilesFooterEditor = ({
   id,
   isLoading,
 }: ItemListFilesFooterEditorProps) => {
-  const t = useTranslations("core.editor.files");
-  const tCore = useTranslations("core");
+  const t = useTranslations('core.editor.files');
+  const tCore = useTranslations('core');
   const { editor, onChange, selectedLanguage, setFiles, value } =
     useEditorState();
 
@@ -42,7 +42,7 @@ export const ItemListFilesFooterEditor = ({
 
     const mapContent = (values: JSONContent[]): JSONContent[] => {
       return values.filter(value => {
-        if (value.type === "files" && value.attrs?.id === file_id) {
+        if (value.type === 'files' && value.attrs?.id === file_id) {
           return false;
         }
         if (value.content) {
@@ -65,16 +65,16 @@ export const ItemListFilesFooterEditor = ({
     <>
       <div
         className={cn(
-          "relative flex size-10 flex-shrink-0 items-center justify-center overflow-hidden rounded-lg",
+          'relative flex size-10 flex-shrink-0 items-center justify-center overflow-hidden rounded-lg',
           {
-            "h-14 w-20": data?.width && data?.height && !isLoading && !error,
+            'h-14 w-20': data?.width && data?.height && !isLoading && !error,
           },
         )}
       >
         <IconItemListFilesFooterEditor
           isLoading={isLoading}
           isError={!!error}
-          alt={data?.file_alt ?? data?.file_name ?? file?.name ?? ""}
+          alt={data?.file_alt ?? data?.file_name ?? file?.name ?? ''}
           src={
             data?.width && data.height
               ? `${CONFIG.graphql_public_url}/${data.dir_folder}/${data.file_name}`
@@ -85,7 +85,7 @@ export const ItemListFilesFooterEditor = ({
 
       <div className="min-w-0 flex-1 break-words md:truncate">
         <span className="leading-tight">
-          {file?.name ?? data?.file_name ?? "Error!"}
+          {file?.name ?? data?.file_name ?? 'Error!'}
         </span>
 
         <div className="text-muted-foreground space-x-2 text-sm">
@@ -105,21 +105,21 @@ export const ItemListFilesFooterEditor = ({
             onClick={() => {
               editor.commands.insertFile({
                 ...data,
-                file_alt: data.file_alt ?? "",
+                file_alt: data.file_alt ?? '',
                 width: data.width ?? 0,
                 height: data.height ?? 0,
-                security_key: data.security_key ?? "",
+                security_key: data.security_key ?? '',
                 id,
               });
               editor.commands.focus();
             }}
           >
-            <Plus /> {t("insert")}
+            <Plus /> {t('insert')}
           </Button>
           <Button
             size="icon"
             variant="destructiveGhost"
-            ariaLabel={tCore("delete")}
+            ariaLabel={tCore('delete')}
             onClick={async () => {
               // Remove files from the editor
               if (Array.isArray(value)) {
@@ -135,7 +135,7 @@ export const ItemListFilesFooterEditor = ({
 
                 const parseContent = JSON.parse(
                   content.find(item => item.language_code === selectedLanguage)
-                    ?.value ?? "",
+                    ?.value ?? '',
                 );
 
                 editor.commands.clearContent();
@@ -155,8 +155,8 @@ export const ItemListFilesFooterEditor = ({
                 securityKey: data?.security_key,
               });
               if (mutation.error) {
-                toast.error(tCore("errors.title"), {
-                  description: tCore("errors.internal_server_error"),
+                toast.error(tCore('errors.title'), {
+                  description: tCore('errors.internal_server_error'),
                 });
               }
             }}

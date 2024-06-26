@@ -1,8 +1,8 @@
-import { useTranslations } from "next-intl";
-import { toast } from "sonner";
-import { useAlertDialog } from "vitnode-frontend/components/ui/alert-dialog";
+import { useTranslations } from 'next-intl';
+import { toast } from 'sonner';
+import { useAlertDialog } from 'vitnode-frontend/components/ui/alert-dialog';
 
-import { mutationApi } from "./mutation-api";
+import { mutationApi } from './mutation-api';
 
 interface Args {
   file_name_original: string;
@@ -13,8 +13,8 @@ export const useDeleteFileAdvancedAdmin = ({
   file_name_original,
   id,
 }: Args) => {
-  const t = useTranslations("admin.core.advanced.files.delete");
-  const tCore = useTranslations("core");
+  const t = useTranslations('admin.core.advanced.files.delete');
+  const tCore = useTranslations('core');
   const { setOpen } = useAlertDialog();
 
   const onSubmit = async () => {
@@ -22,14 +22,14 @@ export const useDeleteFileAdvancedAdmin = ({
       id,
     });
     if (mutation.error) {
-      toast.error(tCore("errors.title"), {
-        description: tCore("errors.internal_server_error"),
+      toast.error(tCore('errors.title'), {
+        description: tCore('errors.internal_server_error'),
       });
 
       return;
     }
 
-    toast.success(t("success"), {
+    toast.success(t('success'), {
       description: file_name_original,
     });
 

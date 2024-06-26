@@ -1,17 +1,17 @@
-import { Injectable } from "@nestjs/common";
-import { compare } from "bcrypt";
-import { JwtService } from "@nestjs/jwt";
-import { ConfigService } from "@nestjs/config";
-import { and, eq } from "drizzle-orm";
+import { Injectable } from '@nestjs/common';
+import { compare } from 'bcrypt';
+import { JwtService } from '@nestjs/jwt';
+import { ConfigService } from '@nestjs/config';
+import { and, eq } from 'drizzle-orm';
 
-import { SignInCoreSessionsArgs } from "./dto/sign_in.args";
-import { DeviceSignInCoreSessionsService } from "./device.service";
+import { SignInCoreSessionsArgs } from './dto/sign_in.args';
+import { DeviceSignInCoreSessionsService } from './device.service';
 
-import { Ctx } from "../../../utils";
-import { DatabaseService } from "../../../database";
-import { AccessDeniedError, CustomError } from "../../../errors";
-import { core_admin_sessions } from "../../../templates/core/admin/database/schema/admins";
-import { core_sessions } from "../../../templates/core/admin/database/schema/sessions";
+import { Ctx } from '../../../utils';
+import { DatabaseService } from '../../../database';
+import { AccessDeniedError, CustomError } from '../../../errors';
+import { core_admin_sessions } from '../../../templates/core/admin/database/schema/admins';
+import { core_sessions } from '../../../templates/core/admin/database/schema/sessions';
 
 interface CreateSessionArgs extends Ctx {
   email: string;
@@ -40,18 +40,18 @@ export class SignInCoreSessionsService {
     userId,
   }: CreateSessionArgs) {
     const loginTokenSecret =
-      this.configService.getOrThrow("login_token_secret");
+      this.configService.getOrThrow('login_token_secret');
 
     const device = await this.deviceService.getDevice({ req, res });
     if (!device) {
       throw new AccessDeniedError();
     }
 
-    if (device.uagent_os === "Uagent from tests") {
+    if (device.uagent_os === 'Uagent from tests') {
       throw new CustomError({
-        code: "INVALID_DEVICE",
+        code: 'INVALID_DEVICE',
         message:
-          "We have detected that you are using an invalid device. Please try again.",
+          'We have detected that you are using an invalid device. Please try again.',
       });
     }
 
@@ -66,12 +66,12 @@ export class SignInCoreSessionsService {
           60 *
           60 *
           24 *
-          this.configService.getOrThrow("cookies.login_token.expiresIn"),
+          this.configService.getOrThrow('cookies.login_token.expiresIn'),
       },
     );
 
     const expiresValue: number = this.configService.getOrThrow(
-      `cookies.login_token.${remember ? "expiresInRemember" : "expiresIn"}`,
+      `cookies.login_token.${remember ? 'expiresInRemember' : 'expiresIn'}`,
     );
 
     if (admin) {
@@ -108,15 +108,15 @@ export class SignInCoreSessionsService {
 
       // Set cookie for session
       res.cookie(
-        this.configService.getOrThrow("cookies.login_token.admin.name"),
+        this.configService.getOrThrow('cookies.login_token.admin.name'),
         login_token,
         {
           httpOnly: true,
           secure: true,
-          domain: this.configService.getOrThrow("cookies.domain"),
-          path: "/",
+          domain: this.configService.getOrThrow('cookies.domain'),
+          path: '/',
           expires,
-          sameSite: "none",
+          sameSite: 'none',
         },
       );
 
@@ -157,15 +157,15 @@ export class SignInCoreSessionsService {
 
     // Set cookie for session
     res.cookie(
-      this.configService.getOrThrow("cookies.login_token.name"),
+      this.configService.getOrThrow('cookies.login_token.name'),
       login_token,
       {
         httpOnly: true,
         secure: true,
-        domain: this.configService.getOrThrow("cookies.domain"),
-        path: "/",
+        domain: this.configService.getOrThrow('cookies.domain'),
+        path: '/',
         expires: remember ? expires : null,
-        sameSite: "none",
+        sameSite: 'none',
       },
     );
 

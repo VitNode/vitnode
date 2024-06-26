@@ -1,13 +1,13 @@
-import { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
-import { cn } from "vitnode-frontend/helpers/classnames";
-import { fetcher } from "vitnode-frontend/graphql/fetcher";
+import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
+import { cn } from 'vitnode-frontend/helpers/classnames';
+import { fetcher } from 'vitnode-frontend/graphql/fetcher';
 
 import {
   Admin__Core_Plugins__Files,
   Admin__Core_Plugins__FilesQuery,
   Admin__Core_Plugins__FilesQueryVariables,
-} from "@/graphql/hooks";
+} from '@/graphql/hooks';
 
 interface Props {
   params: {
@@ -28,17 +28,17 @@ const getData = async (variables: Admin__Core_Plugins__FilesQueryVariables) => {
 };
 
 export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations("admin.core.plugins.dev.files");
+  const t = await getTranslations('admin.core.plugins.dev.files');
 
   return {
-    title: t("title"),
+    title: t('title'),
   };
 }
 
 export default async function Page({ params: { code } }: Props) {
   const [data, t] = await Promise.all([
     getData({ code }),
-    getTranslations("admin.core.plugins.dev.files"),
+    getTranslations('admin.core.plugins.dev.files'),
   ]);
 
   return (
@@ -53,14 +53,14 @@ export default async function Page({ params: { code } }: Props) {
           {t(item[0])}
 
           <span
-            className={cn("text-right text-sm", {
-              "text-muted-foreground italic": !item[1],
-              "text-primary font-semibold": item[1],
-              "text-destructive font-semibold":
-                !item[1] && item[0] === "default_page",
+            className={cn('text-right text-sm', {
+              'text-muted-foreground italic': !item[1],
+              'text-primary font-semibold': item[1],
+              'text-destructive font-semibold':
+                !item[1] && item[0] === 'default_page',
             })}
           >
-            {t("file_detected", { count: +item[1] })}
+            {t('file_detected', { count: +item[1] })}
           </span>
         </li>
       ))}

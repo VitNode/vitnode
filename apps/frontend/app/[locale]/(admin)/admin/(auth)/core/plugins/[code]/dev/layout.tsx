@@ -1,11 +1,11 @@
-import * as React from "react";
-import { notFound } from "next/navigation";
-import { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
-import { getConfigFile } from "vitnode-frontend/helpers/config";
+import * as React from 'react';
+import { notFound } from 'next/navigation';
+import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
+import { getConfigFile } from 'vitnode-frontend/helpers/config';
 
-import { getPluginDataAdmin } from "./query-api";
-import { DevPluginAdminLayout } from "@/plugins/admin/views/core/plugins/views/dev/layout/layout";
+import { getPluginDataAdmin } from './query-api';
+import { DevPluginAdminLayout } from '@/plugins/admin/views/core/plugins/views/dev/layout/layout';
 
 interface Props {
   children: React.ReactNode;
@@ -18,15 +18,15 @@ export async function generateMetadata({
   params: { code },
 }: Props): Promise<Metadata> {
   const [t, tCore, config] = await Promise.all([
-    getTranslations("admin"),
-    getTranslations("core.admin"),
+    getTranslations('admin'),
+    getTranslations('core.admin'),
     getConfigFile(),
   ]);
 
   const { data } = await getPluginDataAdmin({ code });
   if (!data || data.admin__core_plugins__show.edges.length === 0) return {};
 
-  const defaultTitle = `${data.admin__core_plugins__show.edges[0].name} - ${tCore("nav.plugins")} - ${t("title_short")} - ${config.settings.general.site_name}`;
+  const defaultTitle = `${data.admin__core_plugins__show.edges[0].name} - ${tCore('nav.plugins')} - ${t('title_short')} - ${config.settings.general.site_name}`;
 
   return {
     title: {

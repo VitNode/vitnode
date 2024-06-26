@@ -1,12 +1,12 @@
-import * as fs from "fs";
+import * as fs from 'fs';
 
-import { ConfigType, configPath, getConfigFile } from "../providers/config";
-import { CustomError } from "../errors";
+import { ConfigType, configPath, getConfigFile } from '../providers/config';
+import { CustomError } from '../errors';
 
 export const setRebuildRequired = async ({
   set,
 }: {
-  set: "langs" | "plugins";
+  set: 'langs' | 'plugins';
 }) => {
   const config = getConfigFile();
 
@@ -18,11 +18,11 @@ export const setRebuildRequired = async ({
     },
   };
 
-  fs.writeFile(configPath, JSON.stringify(newData, null, 2), "utf8", err => {
+  fs.writeFile(configPath, JSON.stringify(newData, null, 2), 'utf8', err => {
     if (err)
       throw new CustomError({
-        code: "ERR_CONFIG_WRITE",
-        message: "Error writing to config file",
+        code: 'ERR_CONFIG_WRITE',
+        message: 'Error writing to config file',
       });
   });
 };

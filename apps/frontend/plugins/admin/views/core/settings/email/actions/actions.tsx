@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { TestingActionEmailSettingsAdmin } from "./testing/testing";
+import { TestingActionEmailSettingsAdmin } from './testing/testing';
 
 export const ActionsEmailSettingsAdmin = () => {
   return <TestingActionEmailSettingsAdmin />;

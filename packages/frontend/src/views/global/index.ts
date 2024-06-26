@@ -1,2 +1,2 @@
-export * from "./powered-by";
-export * from "./internal-error/internal-error-view";
+export * from './powered-by';
+export * from './internal-error/internal-error-view';

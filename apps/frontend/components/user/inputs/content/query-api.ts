@@ -1,12 +1,12 @@
-"use server";
+'use server';
 
-import { fetcher } from "vitnode-frontend/graphql/fetcher";
+import { fetcher } from 'vitnode-frontend/graphql/fetcher';
 
 import {
   Core_Members__Show__Search,
   Core_Members__Show__SearchQuery,
   Core_Members__Show__SearchQueryVariables,
-} from "@/graphql/hooks";
+} from '@/graphql/hooks';
 
 export const queryApi = async (
   variables: Core_Members__Show__SearchQueryVariables,

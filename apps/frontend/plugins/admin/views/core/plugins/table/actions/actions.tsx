@@ -1,24 +1,24 @@
-import { BadgeHelp, ChevronDown, CodeXml, Trash2 } from "lucide-react";
-import { useTranslations } from "next-intl";
-import * as React from "react";
-import { Link, usePathname, useRouter } from "vitnode-frontend/navigation";
+import { BadgeHelp, ChevronDown, CodeXml, Trash2 } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import * as React from 'react';
+import { Link, usePathname, useRouter } from 'vitnode-frontend/navigation';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "vitnode-frontend/components/ui/dropdown-menu";
-import { Button } from "vitnode-frontend/components/ui/button";
-import { CONFIG } from "vitnode-frontend/helpers/config-with-env";
+} from 'vitnode-frontend/components/ui/dropdown-menu';
+import { Button } from 'vitnode-frontend/components/ui/button';
+import { CONFIG } from 'vitnode-frontend/helpers/config-with-env';
 
-import { ShowAdminPlugins } from "@/graphql/hooks";
-import { DeletePluginActionsAdmin } from "./delete/delete";
-import { SetDefaultPluginActionsAdmin } from "./set-default/set-default";
-import { UploadPluginActionsAdmin } from "./upload";
+import { ShowAdminPlugins } from '@/graphql/hooks';
+import { DeletePluginActionsAdmin } from './delete/delete';
+import { SetDefaultPluginActionsAdmin } from './set-default/set-default';
+import { UploadPluginActionsAdmin } from './upload';
 
 export const ActionsItemPluginsAdmin = (props: ShowAdminPlugins) => {
-  const t = useTranslations("admin.core.plugins");
-  const tCore = useTranslations("core");
+  const t = useTranslations('admin.core.plugins');
+  const tCore = useTranslations('core');
   const pathname = usePathname();
   const { push } = useRouter();
 
@@ -35,7 +35,7 @@ export const ActionsItemPluginsAdmin = (props: ShowAdminPlugins) => {
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost" size="icon" ariaLabel={tCore("more_actions")}>
+          <Button variant="ghost" size="icon" ariaLabel={tCore('more_actions')}>
             <ChevronDown />
           </Button>
         </DropdownMenuTrigger>
@@ -46,7 +46,7 @@ export const ActionsItemPluginsAdmin = (props: ShowAdminPlugins) => {
               <DropdownMenuItem
                 onClick={() => push(`${pathname}/${props.code}/dev/overview`)}
               >
-                <CodeXml /> {t("dev_tools")}
+                <CodeXml /> {t('dev_tools')}
               </DropdownMenuItem>
             </>
           )}
@@ -57,7 +57,7 @@ export const ActionsItemPluginsAdmin = (props: ShowAdminPlugins) => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <BadgeHelp /> {t("get_help")}
+              <BadgeHelp /> {t('get_help')}
             </Link>
           </DropdownMenuItem>
 
@@ -66,7 +66,7 @@ export const ActionsItemPluginsAdmin = (props: ShowAdminPlugins) => {
               onClick={() => setIsOpenDeleteDialog(true)}
               destructive
             >
-              <Trash2 /> {tCore("delete")}
+              <Trash2 /> {tCore('delete')}
             </DropdownMenuItem>
           )}
         </DropdownMenuContent>

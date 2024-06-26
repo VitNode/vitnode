@@ -1,10 +1,10 @@
-import { ArgsType, Field, OmitType } from "@nestjs/graphql";
+import { ArgsType, Field, OmitType } from '@nestjs/graphql';
 
-import { CreateAdminPluginsArgs } from "../../create/dto/create.args";
+import { CreateAdminPluginsArgs } from '../../create/dto/create.args';
 
 @ArgsType()
 export class EditAdminPluginsArgs extends OmitType(CreateAdminPluginsArgs, [
-  "code",
+  'code',
 ] as const) {
   @Field(() => String)
   code: string;

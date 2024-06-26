@@ -1,15 +1,15 @@
-import { useTranslations } from "next-intl";
-import { Link } from "vitnode-frontend/navigation";
-import { buttonVariants } from "vitnode-frontend/components/ui/button";
-import { DrawerClose } from "vitnode-frontend/components/ui/drawer";
-import { useSession } from "vitnode-frontend/hooks/use-session";
+import { useTranslations } from 'next-intl';
+import { Link } from 'vitnode-frontend/navigation';
+import { buttonVariants } from 'vitnode-frontend/components/ui/button';
+import { DrawerClose } from 'vitnode-frontend/components/ui/drawer';
+import { useSession } from 'vitnode-frontend/hooks/use-session';
 
-import { AvatarUser } from "@/components/user/avatar/avatar-user";
-import { DarkLightModeSwitcher } from "@/components/switchers/dark-light-mode-switcher";
-import { LanguageSwitcher } from "@/components/switchers/language-switcher";
+import { AvatarUser } from '@/components/user/avatar/avatar-user';
+import { DarkLightModeSwitcher } from '@/components/switchers/dark-light-mode-switcher';
+import { LanguageSwitcher } from '@/components/switchers/language-switcher';
 
 export const HeaderDrawerQuickMenu = () => {
-  const t = useTranslations("core");
+  const t = useTranslations('core');
   const { session } = useSession();
 
   if (!session)
@@ -20,11 +20,11 @@ export const HeaderDrawerQuickMenu = () => {
             <Link
               href="/login"
               className={buttonVariants({
-                variant: "outline",
-                className: "flex-1",
+                variant: 'outline',
+                className: 'flex-1',
               })}
             >
-              {t("user-bar.sign_in")}
+              {t('user-bar.sign_in')}
             </Link>
           </DrawerClose>
 
@@ -32,10 +32,10 @@ export const HeaderDrawerQuickMenu = () => {
             <Link
               href="/register"
               className={buttonVariants({
-                className: "flex-1",
+                className: 'flex-1',
               })}
             >
-              {t("user-bar.sign_up")}
+              {t('user-bar.sign_up')}
             </Link>
           </DrawerClose>
         </div>

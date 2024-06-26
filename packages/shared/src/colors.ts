@@ -14,7 +14,7 @@ export const convertColor = {
 
       return Math.round(255 * color)
         .toString(16)
-        .padStart(2, "0");
+        .padStart(2, '0');
     };
 
     return `#${f(0)}${f(8)}${f(4)}`;
@@ -120,7 +120,7 @@ export const convertColor = {
   },
 };
 
-type CheckColorReturn = "hex" | "hsl" | "rgb";
+type CheckColorReturn = 'hex' | 'hsl' | 'rgb';
 
 export const hexRegex = /^#?([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
 export const hslRegex = /^hsl\(\s*\d{1,3}\s*,\s*\d{1,3}%\s*,\s*\d{1,3}%\s*\)$/;
@@ -131,15 +131,15 @@ export const rgbWithoutCommaRegex =
 
 export const checkColorType = (strColor: string): CheckColorReturn | null => {
   if (hexRegex.test(strColor)) {
-    return "hex";
+    return 'hex';
   }
 
   if (hslRegex.test(strColor)) {
-    return "hsl";
+    return 'hsl';
   }
 
   if (rgbWithoutCommaRegex.test(strColor) || rgbWithCommaRegex.test(strColor)) {
-    return "rgb";
+    return 'rgb';
   }
 
   return null;
@@ -149,10 +149,10 @@ export const getHSLFromString = (string: string): HslColor | null => {
   if (!hslRegex.test(string)) return null;
 
   const [h, s, l] = string
-    .replaceAll("hsl(", "")
-    .replaceAll(")", "")
-    .replaceAll("%", "")
-    .split(",")
+    .replaceAll('hsl(', '')
+    .replaceAll(')', '')
+    .replaceAll('%', '')
+    .split(',')
     .map(Number);
 
   return { h, s, l };

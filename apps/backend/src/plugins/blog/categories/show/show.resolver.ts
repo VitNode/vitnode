@@ -1,8 +1,8 @@
-import { Args, Query, Resolver } from "@nestjs/graphql";
+import { Args, Query, Resolver } from '@nestjs/graphql';
 
-import { ShowBlogCategoriesService } from "./show.service";
-import { ShowBlogCategoriesArgs } from "./dto/show.args";
-import { ShowBlogCategoriesObj } from "./dto/show.obj";
+import { ShowBlogCategoriesService } from './show.service';
+import { ShowBlogCategoriesArgs } from './dto/show.args';
+import { ShowBlogCategoriesObj } from './dto/show.obj';
 
 @Resolver()
 export class ShowBlogCategoriesResolver {

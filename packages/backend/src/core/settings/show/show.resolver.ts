@@ -1,7 +1,7 @@
-import { Query, Resolver } from "@nestjs/graphql";
+import { Query, Resolver } from '@nestjs/graphql';
 
-import { ShowSettingsService } from "./show.service";
-import { ShowSettingsObj } from "./dto/show.obj";
+import { ShowSettingsService } from './show.service';
+import { ShowSettingsObj } from './dto/show.obj';
 
 @Resolver()
 export class ShowCoreSettingsResolver {

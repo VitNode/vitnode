@@ -1,24 +1,24 @@
-"use client";
+'use client';
 
-import { useTranslations } from "next-intl";
+import { useTranslations } from 'next-intl';
 import {
   Form,
   FormField,
   FormFieldRender,
   FormWrapper,
-} from "vitnode-frontend/components/ui/form";
-import { Input } from "vitnode-frontend/components/ui/input";
-import { Button } from "vitnode-frontend/components/ui/button";
+} from 'vitnode-frontend/components/ui/form';
+import { Input } from 'vitnode-frontend/components/ui/input';
+import { Button } from 'vitnode-frontend/components/ui/button';
 
-import { useSettingsCoreAdmin } from "./hooks/use-settings-core-admin";
-import { Core_Main_Settings__ShowQuery } from "@/graphql/hooks";
-import { TextLanguageInput } from "@/components/text-language-input";
+import { useSettingsCoreAdmin } from './hooks/use-settings-core-admin';
+import { Core_Main_Settings__ShowQuery } from '@/graphql/hooks';
+import { TextLanguageInput } from '@/components/text-language-input';
 
 export const GeneralSettingsCoreAdmin = (
   props: Core_Main_Settings__ShowQuery,
 ) => {
-  const t = useTranslations("admin.core.settings.main");
-  const tCore = useTranslations("core");
+  const t = useTranslations('admin.core.settings.main');
+  const tCore = useTranslations('core');
   const { form, onSubmit } = useSettingsCoreAdmin(props);
 
   return (
@@ -28,7 +28,7 @@ export const GeneralSettingsCoreAdmin = (
           control={form.control}
           name="name"
           render={({ field }) => (
-            <FormFieldRender label={t("name.label")}>
+            <FormFieldRender label={t('name.label')}>
               <Input {...field} />
             </FormFieldRender>
           )}
@@ -38,7 +38,7 @@ export const GeneralSettingsCoreAdmin = (
           control={form.control}
           name="short_name"
           render={({ field }) => (
-            <FormFieldRender label={t("short_name.label")}>
+            <FormFieldRender label={t('short_name.label')}>
               <Input {...field} />
             </FormFieldRender>
           )}
@@ -48,7 +48,7 @@ export const GeneralSettingsCoreAdmin = (
           control={form.control}
           name="description"
           render={({ field }) => (
-            <FormFieldRender label={t("description.label")} optional>
+            <FormFieldRender label={t('description.label')} optional>
               <TextLanguageInput {...field} />
             </FormFieldRender>
           )}
@@ -58,7 +58,7 @@ export const GeneralSettingsCoreAdmin = (
           control={form.control}
           name="copyright"
           render={({ field }) => (
-            <FormFieldRender label={t("copyright.label")}>
+            <FormFieldRender label={t('copyright.label')}>
               <TextLanguageInput {...field} />
             </FormFieldRender>
           )}
@@ -69,7 +69,7 @@ export const GeneralSettingsCoreAdmin = (
           disabled={!form.formState.isValid}
           loading={form.formState.isSubmitting}
         >
-          {tCore("save")}
+          {tCore('save')}
         </Button>
       </FormWrapper>
     </Form>

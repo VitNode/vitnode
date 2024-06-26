@@ -1,24 +1,24 @@
-"use client";
+'use client';
 
-import { useEditor, EditorContent } from "@tiptap/react";
-import * as React from "react";
-import { useLocale } from "next-intl";
-import { cn } from "vitnode-frontend/helpers/classnames";
-import { Skeleton } from "vitnode-frontend/components/ui/skeleton";
-import { useGlobals } from "vitnode-frontend/hooks/use-globals";
+import { useEditor, EditorContent } from '@tiptap/react';
+import * as React from 'react';
+import { useLocale } from 'next-intl';
+import { cn } from 'vitnode-frontend/helpers/classnames';
+import { Skeleton } from 'vitnode-frontend/components/ui/skeleton';
+import { useGlobals } from 'vitnode-frontend/hooks/use-globals';
 
-import { TextLanguage } from "@/graphql/hooks";
-import { ToolBarEditor } from "./toolbar/toolbar";
-import { FooterEditor } from "./footer/footer";
-import { extensionsEditor } from "./extensions/extensions";
-import { EmojiExtensionEditor } from "./extensions/emoji/emoji";
+import { TextLanguage } from '@/graphql/hooks';
+import { ToolBarEditor } from './toolbar/toolbar';
+import { FooterEditor } from './footer/footer';
+import { extensionsEditor } from './extensions/extensions';
+import { EmojiExtensionEditor } from './extensions/emoji/emoji';
 import {
   useUploadFilesHandlerEditor,
   UploadFilesHandlerEditorArgs,
-} from "./extensions/files/hooks/use-upload-files-handler-editor.ts";
-import { EditorStateContext } from "./hooks/use-editor-state";
+} from './extensions/files/hooks/use-upload-files-handler-editor.ts';
+import { EditorStateContext } from './hooks/use-editor-state';
 
-interface Props extends Omit<UploadFilesHandlerEditorArgs, "value"> {
+interface Props extends Omit<UploadFilesHandlerEditorArgs, 'value'> {
   autoFocus?: boolean;
   className?: string;
 }
@@ -36,7 +36,7 @@ interface WithoutLanguage extends Props {
 }
 
 export const EditorSkeleton = ({ className }: { className?: string }) => {
-  return <Skeleton className={cn("h-32 w-full", className)} />;
+  return <Skeleton className={cn('h-32 w-full', className)} />;
 };
 
 export const Editor = ({
@@ -67,13 +67,13 @@ export const Editor = ({
     editorProps: {
       attributes: {
         class: cn(
-          "bg-card min-h-32 resize-y overflow-auto p-4 focus:outline-none [&>*:not(:last-child)]:mb-[0.5rem]",
+          'bg-card min-h-32 resize-y overflow-auto p-4 focus:outline-none [&>*:not(:last-child)]:mb-[0.5rem]',
         ),
       },
     },
     content: (() => {
       const current = Array.isArray(value)
-        ? value.find(v => v.language_code === selectedLanguage)?.value ?? ""
+        ? value.find(v => v.language_code === selectedLanguage)?.value ?? ''
         : value;
 
       try {
@@ -113,7 +113,7 @@ export const Editor = ({
     if (!editor || disableLanguage || !Array.isArray(value)) return;
 
     const findValue =
-      value.find(v => v.language_code === selectedLanguage)?.value ?? "";
+      value.find(v => v.language_code === selectedLanguage)?.value ?? '';
     if (!findValue) {
       editor.commands.clearContent();
 
@@ -139,7 +139,7 @@ export const Editor = ({
       }}
     >
       <div
-        className={cn("border-input rounded-md border shadow-sm", className)}
+        className={cn('border-input rounded-md border shadow-sm', className)}
       >
         <div className="relative">
           <ToolBarEditor />

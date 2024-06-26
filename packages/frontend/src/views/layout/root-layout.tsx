@@ -1,19 +1,19 @@
-import * as React from "react";
-import NextTopLoader from "nextjs-toploader";
-import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
+import * as React from 'react';
+import NextTopLoader from 'nextjs-toploader';
+import { NextIntlClientProvider } from 'next-intl';
+import { getMessages } from 'next-intl/server';
 
-import { InternalErrorView } from "../global/internal-error/internal-error-view";
-import { RootProviders } from "./providers";
+import { InternalErrorView } from '../global/internal-error/internal-error-view';
+import { RootProviders } from './providers';
 
-import { getConfigFile } from "../../helpers/config";
-import { fetcher } from "../../graphql/fetcher";
-import { Core_Middleware, Core_MiddlewareQuery } from "../../graphql/hooks";
+import { getConfigFile } from '../../helpers/config';
+import { fetcher } from '../../graphql/fetcher';
+import { Core_Middleware, Core_MiddlewareQuery } from '../../graphql/hooks';
 
 const getMiddlewareData = async () => {
   const { data } = await fetcher<Core_MiddlewareQuery>({
     query: Core_Middleware,
-    cache: "force-cache",
+    cache: 'force-cache',
   });
 
   return data;

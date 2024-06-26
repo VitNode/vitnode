@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import { File } from "lucide-react";
-import Image from "next/image";
-import { useTranslations } from "next-intl";
-import { formatBytes } from "vitnode-shared";
-import { Button } from "vitnode-frontend/components/ui/button";
-import { CONFIG } from "vitnode-frontend/helpers/config-with-env";
+import { File } from 'lucide-react';
+import Image from 'next/image';
+import { useTranslations } from 'next-intl';
+import { formatBytes } from 'vitnode-shared';
+import { Button } from 'vitnode-frontend/components/ui/button';
+import { CONFIG } from 'vitnode-frontend/helpers/config-with-env';
 
-import { acceptMimeTypeImage } from "../extensions/files/files";
+import { acceptMimeTypeImage } from '../extensions/files/files';
 
 interface Props {
   dir_folder: string;
@@ -36,7 +36,7 @@ export const FileDownloadButton = ({
   security_key,
   width,
 }: Props) => {
-  const t = useTranslations("core.editor.files");
+  const t = useTranslations('core.editor.files');
 
   if (acceptMimeTypeImage.includes(mimetype) && width && height) {
     return (
@@ -62,7 +62,7 @@ export const FileDownloadButton = ({
       >
         <File className="text-muted-foreground" />
         <div className="text-muted-foreground text-sm">
-          <span>{t("access_denied_download")}</span>
+          <span>{t('access_denied_download')}</span>
         </div>
       </Button>
     );
@@ -77,7 +77,7 @@ export const FileDownloadButton = ({
 
         window.open(
           `${CONFIG.backend_url}/secure_files/${id}?security_key=${security_key}`,
-          "_blank",
+          '_blank',
         );
       }}
     >

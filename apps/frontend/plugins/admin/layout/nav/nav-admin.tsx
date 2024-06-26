@@ -1,6 +1,6 @@
-import { getSessionAdminData } from "@/app/[locale]/(admin)/admin/(auth)/get-session-admin";
-import { ItemNavAdmin } from "./item/item";
-import { NavAdminWrapper } from "./wrapper";
+import { getSessionAdminData } from '@/app/[locale]/(admin)/admin/(auth)/get-session-admin';
+import { ItemNavAdmin } from './item/item';
+import { NavAdminWrapper } from './wrapper';
 
 export const NavAdmin = async () => {
   const data = await getSessionAdminData();
@@ -11,62 +11,62 @@ export const NavAdmin = async () => {
         id="core"
         items={[
           {
-            id: "dashboard",
-            href: "dashboard",
-            icon: "LayoutDashboard",
+            id: 'dashboard',
+            href: 'dashboard',
+            icon: 'LayoutDashboard',
           },
           {
-            id: "settings",
-            href: "general",
-            icon: "Settings",
+            id: 'settings',
+            href: 'general',
+            icon: 'Settings',
             children: [
               {
-                id: "general",
-                href: "general",
+                id: 'general',
+                href: 'general',
               },
               {
-                id: "metadata",
-                href: "metadata",
+                id: 'metadata',
+                href: 'metadata',
               },
               {
-                id: "email",
-                href: "email",
+                id: 'email',
+                href: 'email',
               },
             ],
           },
           {
-            id: "plugins",
-            href: "plugins",
-            icon: "PlugIcon",
+            id: 'plugins',
+            href: 'plugins',
+            icon: 'PlugIcon',
           },
           {
-            id: "styles",
-            href: "nav",
-            icon: "Paintbrush",
+            id: 'styles',
+            href: 'nav',
+            icon: 'Paintbrush',
             children: [
               {
-                id: "nav",
-                href: "nav",
+                id: 'nav',
+                href: 'nav',
               },
               {
-                id: "editor",
-                href: "editor",
+                id: 'editor',
+                href: 'editor',
               },
             ],
           },
           {
-            id: "langs",
-            href: "langs",
-            icon: "Languages",
+            id: 'langs',
+            href: 'langs',
+            icon: 'Languages',
           },
           {
-            id: "advanced",
-            href: "advanced/files",
-            icon: "Cog",
+            id: 'advanced',
+            href: 'advanced/files',
+            icon: 'Cog',
             children: [
               {
-                id: "files",
-                href: "files",
+                id: 'files',
+                href: 'files',
               },
             ],
           },
@@ -76,27 +76,27 @@ export const NavAdmin = async () => {
         id="members"
         items={[
           {
-            id: "users",
-            href: "users",
-            icon: "Users",
+            id: 'users',
+            href: 'users',
+            icon: 'Users',
           },
           {
-            id: "groups",
-            href: "groups",
-            icon: "Group",
+            id: 'groups',
+            href: 'groups',
+            icon: 'Group',
           },
           {
-            id: "staff",
-            href: "staff/moderators",
-            icon: "UserCog",
+            id: 'staff',
+            href: 'staff/moderators',
+            icon: 'UserCog',
             children: [
               {
-                id: "moderators",
-                href: "moderators",
+                id: 'moderators',
+                href: 'moderators',
               },
               {
-                id: "administrators",
-                href: "administrators",
+                id: 'administrators',
+                href: 'administrators',
               },
             ],
           },

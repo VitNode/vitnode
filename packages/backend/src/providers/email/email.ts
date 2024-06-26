@@ -1,25 +1,25 @@
-import * as fs from "fs";
-import { join } from "path";
+import * as fs from 'fs';
+import { join } from 'path';
 
 export const getTranslationForEmail = (namespaces: string) => {
-  const resolveNamespace = namespaces.split(".");
+  const resolveNamespace = namespaces.split('.');
   const path = join(
     process.cwd(),
-    "..",
-    "frontend",
-    "plugins",
+    '..',
+    'frontend',
+    'plugins',
     resolveNamespace[0],
-    "langs",
-    "en.json",
+    'langs',
+    'en.json',
   );
 
-  const read = fs.readFileSync(path, "utf-8");
+  const read = fs.readFileSync(path, 'utf-8');
   const messages = JSON.parse(read);
 
   return (key: string) => {
     let message = messages;
 
-    [...resolveNamespace, ...key.split(".")].forEach(part => {
+    [...resolveNamespace, ...key.split('.')].forEach(part => {
       try {
         const next = message[part as any];
 

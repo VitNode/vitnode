@@ -1,15 +1,15 @@
-import * as React from "react";
+import * as React from 'react';
 
 import {
   AuthorizationCurrentUserObj,
   Core_Sessions__AuthorizationQuery,
   ShowCoreNav,
-} from "../graphql/hooks";
+} from '../graphql/hooks';
 
 interface Args {
-  files: Core_Sessions__AuthorizationQuery["core_sessions__authorization"]["files"];
+  files: Core_Sessions__AuthorizationQuery['core_sessions__authorization']['files'];
   nav: ShowCoreNav[];
-  session: Omit<AuthorizationCurrentUserObj, "posts"> | null | undefined;
+  session: Omit<AuthorizationCurrentUserObj, 'posts'> | null | undefined;
 }
 
 export const SessionContext = React.createContext<Args>({

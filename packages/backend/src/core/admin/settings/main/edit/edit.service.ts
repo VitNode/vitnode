@@ -1,21 +1,21 @@
-import * as fs from "fs";
-import { join } from "path";
+import * as fs from 'fs';
+import { join } from 'path';
 
-import { Injectable } from "@nestjs/common";
-import { eq } from "drizzle-orm";
+import { Injectable } from '@nestjs/common';
+import { eq } from 'drizzle-orm';
 
-import { EditAdminMainSettingsArgs } from "./dto/edit.args";
-import { EditAdminSettingsObj } from "./dto/edit.obj";
+import { EditAdminMainSettingsArgs } from './dto/edit.args';
+import { EditAdminSettingsObj } from './dto/edit.obj';
 
-import { DatabaseService } from "../../../../../database";
+import { DatabaseService } from '../../../../../database';
 import {
   ABSOLUTE_PATHS_BACKEND,
   ConfigType,
   configPath,
   getConfigFile,
-} from "../../../../..";
-import { ManifestWithLang } from "../../../../settings/settings.module";
-import { core_languages } from "../../../../../templates/core/admin/database/schema/languages";
+} from '../../../../..';
+import { ManifestWithLang } from '../../../../settings/settings.module';
+import { core_languages } from '../../../../../templates/core/admin/database/schema/languages';
 
 @Injectable()
 export class EditAdminMainSettingsService {
@@ -26,23 +26,23 @@ export class EditAdminMainSettingsService {
     site_description,
   }: {
     languages: { code: string }[];
-    site_description: EditAdminMainSettingsArgs["site_description"];
+    site_description: EditAdminMainSettingsArgs['site_description'];
   }) {
     const update = site_description.map(el => {
       const item =
         el.value !== undefined
           ? el
-          : site_description.find(el => el.language_code === "en")?.value
-            ? site_description.find(el => el.language_code === "en")
+          : site_description.find(el => el.language_code === 'en')?.value
+            ? site_description.find(el => el.language_code === 'en')
             : site_description.find(el => el.value);
 
       const path = join(
         ABSOLUTE_PATHS_BACKEND.uploads.public,
-        "assets",
+        'assets',
         item.language_code,
-        "manifest.webmanifest",
+        'manifest.webmanifest',
       );
-      const data = fs.readFileSync(path, "utf8");
+      const data = fs.readFileSync(path, 'utf8');
       const manifest: ManifestWithLang = JSON.parse(data);
       const newData: ManifestWithLang = {
         ...manifest,
@@ -50,7 +50,7 @@ export class EditAdminMainSettingsService {
         description: item.value,
       };
 
-      fs.writeFileSync(path, JSON.stringify(newData, null, 2), "utf8");
+      fs.writeFileSync(path, JSON.stringify(newData, null, 2), 'utf8');
 
       return el.language_code;
     });
@@ -60,24 +60,24 @@ export class EditAdminMainSettingsService {
       .filter(item => !update.includes(item.code))
       .map(item => {
         const value =
-          site_description.find(el => el.language_code === "en")?.value ??
+          site_description.find(el => el.language_code === 'en')?.value ??
           site_description[0]?.value ??
-          "";
+          '';
 
         const path = join(
           ABSOLUTE_PATHS_BACKEND.uploads.public,
-          "assets",
+          'assets',
           item.code,
-          "manifest.webmanifest",
+          'manifest.webmanifest',
         );
-        const data = fs.readFileSync(path, "utf8");
+        const data = fs.readFileSync(path, 'utf8');
         const manifest: ManifestWithLang = JSON.parse(data);
         const newData: ManifestWithLang = {
           ...manifest,
           description: value,
         };
 
-        fs.writeFileSync(path, JSON.stringify(newData, null, 2), "utf8");
+        fs.writeFileSync(path, JSON.stringify(newData, null, 2), 'utf8');
       });
   }
 
@@ -86,7 +86,7 @@ export class EditAdminMainSettingsService {
     site_copyright,
   }: {
     languages: { code: string }[];
-    site_copyright: EditAdminMainSettingsArgs["site_copyright"];
+    site_copyright: EditAdminMainSettingsArgs['site_copyright'];
   }) {
     // Update site_description
     const update = await Promise.all(
@@ -119,7 +119,7 @@ export class EditAdminMainSettingsService {
         await this.databaseService.db
           .update(core_languages)
           .set({
-            site_copyright: "",
+            site_copyright: '',
           })
           .where(eq(core_languages.code, item.code));
       }),
@@ -144,7 +144,7 @@ export class EditAdminMainSettingsService {
         },
       },
     };
-    fs.writeFileSync(configPath, JSON.stringify(newData, null, 2), "utf8");
+    fs.writeFileSync(configPath, JSON.stringify(newData, null, 2), 'utf8');
     const languages = await this.databaseService.db
       .select()
       .from(core_languages);

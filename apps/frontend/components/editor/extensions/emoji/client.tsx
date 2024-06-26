@@ -1,20 +1,20 @@
-"use client";
+'use client';
 
-import { ReactRenderer } from "@tiptap/react";
-import * as React from "react";
-import tippy, { Instance, Props } from "tippy.js";
-import { useTranslations } from "next-intl";
-import { Emoji } from "@emoji-mart/data";
-import { Button } from "vitnode-frontend/components/ui/button";
-import { classPopover } from "vitnode-frontend/components/ui/popover";
-import { cn } from "vitnode-frontend/helpers/classnames";
-import { CONFIG } from "vitnode-frontend/helpers/config-with-env";
+import { ReactRenderer } from '@tiptap/react';
+import * as React from 'react';
+import tippy, { Instance, Props } from 'tippy.js';
+import { useTranslations } from 'next-intl';
+import { Emoji } from '@emoji-mart/data';
+import { Button } from 'vitnode-frontend/components/ui/button';
+import { classPopover } from 'vitnode-frontend/components/ui/popover';
+import { cn } from 'vitnode-frontend/helpers/classnames';
+import { CONFIG } from 'vitnode-frontend/helpers/config-with-env';
 
 import {
   ComponentListRef,
   SuggestionKeyDownProps,
   SuggestionProps,
-} from "../mentions/client";
+} from '../mentions/client';
 
 const ComponentList = ({
   command,
@@ -25,7 +25,7 @@ const ComponentList = ({
   items: Emoji[];
   ref: React.RefCallback<ComponentListRef>;
 }) => {
-  const t = useTranslations("core");
+  const t = useTranslations('core');
   const [selectedIndex, setSelectedIndex] = React.useState(0);
   const skinToneIndexLocalStorage = localStorage.getItem(
     CONFIG.local_storage.editor_skin_tone,
@@ -58,19 +58,19 @@ const ComponentList = ({
 
   React.useImperativeHandle(ref, () => ({
     onKeyDown: ({ event }) => {
-      if (event.key === "ArrowUp") {
+      if (event.key === 'ArrowUp') {
         upHandler();
 
         return true;
       }
 
-      if (event.key === "ArrowDown") {
+      if (event.key === 'ArrowDown') {
         downHandler();
 
         return true;
       }
 
-      if (event.key === "Enter") {
+      if (event.key === 'Enter') {
         enterHandler();
 
         return true;
@@ -92,8 +92,8 @@ const ComponentList = ({
           return (
             <Button
               variant="ghost"
-              className={cn("justify-start", {
-                "bg-accent": index === selectedIndex,
+              className={cn('justify-start', {
+                'bg-accent': index === selectedIndex,
               })}
               key={index}
               onClick={() => selectItem(index)}
@@ -104,7 +104,7 @@ const ComponentList = ({
           );
         })
       ) : (
-        <div className="text-muted-foreground italic">{t("no_results")}</div>
+        <div className="text-muted-foreground italic">{t('no_results')}</div>
       )}
     </>
   );
@@ -117,21 +117,21 @@ export function onStart<T>(props: SuggestionProps<T>) {
   component = new ReactRenderer(ComponentList, {
     props,
     editor: props.editor,
-    className: cn(classPopover, "flex flex-col p-2"),
+    className: cn(classPopover, 'flex flex-col p-2'),
   });
 
   if (!props.clientRect) {
     return;
   }
 
-  popup = tippy("body", {
+  popup = tippy('body', {
     getReferenceClientRect: props.clientRect,
     appendTo: () => document.body,
     content: component?.element,
     showOnCreate: true,
     interactive: true,
-    trigger: "manual",
-    placement: "bottom-start",
+    trigger: 'manual',
+    placement: 'bottom-start',
   });
 }
 
@@ -156,7 +156,7 @@ export function onKeyDown(props: SuggestionKeyDownProps) {
     return;
   }
 
-  if (props.event.key === "Escape") {
+  if (props.event.key === 'Escape') {
     popup[0].hide();
 
     return true;

@@ -1,11 +1,11 @@
-import { Query, Resolver } from "@nestjs/graphql";
-import { UseGuards } from "@nestjs/common";
+import { Query, Resolver } from '@nestjs/graphql';
+import { UseGuards } from '@nestjs/common';
 
-import { ShowCoreSessionDevicesService } from "./show.service";
-import { ShowCoreSessionDevicesObj } from "./dto/show.obj";
+import { ShowCoreSessionDevicesService } from './show.service';
+import { ShowCoreSessionDevicesObj } from './dto/show.obj';
 
-import { CurrentUser, User } from "../../../../decorators";
-import { AuthGuards } from "../../../../utils/guards/auth.guard";
+import { CurrentUser, User } from '../../../../decorators';
+import { AuthGuards } from '../../../../utils/guards/auth.guard';
 
 @Resolver()
 export class ShowCoreSessionDevicesResolver {

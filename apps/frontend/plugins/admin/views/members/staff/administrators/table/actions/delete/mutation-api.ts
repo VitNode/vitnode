@@ -1,13 +1,13 @@
-"use server";
+'use server';
 
-import { revalidatePath } from "next/cache";
-import { fetcher } from "vitnode-frontend/graphql/fetcher";
+import { revalidatePath } from 'next/cache';
+import { fetcher } from 'vitnode-frontend/graphql/fetcher';
 
 import {
   Admin__Core_Staff_Administrators__Delete,
   Admin__Core_Staff_Administrators__DeleteMutation,
   Admin__Core_Staff_Administrators__DeleteMutationVariables,
-} from "@/graphql/hooks";
+} from '@/graphql/hooks';
 
 export const mutationApi = async (
   variables: Admin__Core_Staff_Administrators__DeleteMutationVariables,
@@ -21,7 +21,7 @@ export const mutationApi = async (
       variables,
     });
 
-    revalidatePath("/admin", "layout");
+    revalidatePath('/admin', 'layout');
 
     return { data };
   } catch (error) {

@@ -1,24 +1,24 @@
-import { Cropper } from "react-cropper";
-import { useTranslations } from "next-intl";
-import { Button } from "vitnode-frontend/components/ui/button";
-import { DialogFooter } from "vitnode-frontend/components/ui/dialog";
+import { Cropper } from 'react-cropper';
+import { useTranslations } from 'next-intl';
+import { Button } from 'vitnode-frontend/components/ui/button';
+import { DialogFooter } from 'vitnode-frontend/components/ui/dialog';
 
-import { useCopperModalChangeAvatar } from "@/plugins/core/hooks/settings/avatar/use-copper-modal-change-avatar";
-import "cropperjs/dist/cropper.css";
+import { useCopperModalChangeAvatar } from '@/plugins/core/hooks/settings/avatar/use-copper-modal-change-avatar';
+import 'cropperjs/dist/cropper.css';
 
 interface Props {
   file: File;
 }
 
 export const CropperModalChangeAvatar = ({ file }: Props) => {
-  const t = useTranslations("core");
+  const t = useTranslations('core');
   const { cropperRef, isPending, onSubmit } = useCopperModalChangeAvatar();
 
   return (
     <>
       <Cropper
         ref={cropperRef}
-        style={{ height: 200, width: "100%" }}
+        style={{ height: 200, width: '100%' }}
         src={URL.createObjectURL(file)}
         aspectRatio={1}
         viewMode={1}
@@ -32,7 +32,7 @@ export const CropperModalChangeAvatar = ({ file }: Props) => {
 
       <DialogFooter>
         <Button onClick={onSubmit} loading={isPending}>
-          {t("settings.change_avatar.submit")}
+          {t('settings.change_avatar.submit')}
         </Button>
       </DialogFooter>
     </>

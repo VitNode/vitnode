@@ -1,9 +1,9 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable } from '@nestjs/common';
 
 import {
   ConfigPlugin,
   NavPluginInfoJSONTypeWithChildren,
-} from "../../../../providers/plugins.type";
+} from '../../../../providers/plugins.type';
 
 @Injectable()
 export class HelpersAdminNavPluginsService {
@@ -12,7 +12,7 @@ export class HelpersAdminNavPluginsService {
     code,
   }: {
     code: string;
-    items: ConfigPlugin["nav"];
+    items: ConfigPlugin['nav'];
   }): NavPluginInfoJSONTypeWithChildren | null {
     for (const item of items) {
       if (item.code === code) {

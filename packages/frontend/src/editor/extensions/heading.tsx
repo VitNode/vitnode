@@ -1,5 +1,5 @@
-import { Heading } from "@tiptap/extension-heading";
-import { mergeAttributes } from "@tiptap/react";
+import { Heading } from '@tiptap/extension-heading';
+import { mergeAttributes } from '@tiptap/react';
 
 export const HeadingExtensionEditor = () => {
   return Heading.extend({
@@ -9,12 +9,12 @@ export const HeadingExtensionEditor = () => {
         ? node.attrs.level
         : this.options.levels[0];
       const classes: Record<number, string> = {
-        1: "text-4xl font-extrabold",
-        2: "text-3xl font-bold",
-        3: "text-2xl font-bold",
-        4: "text-xl font-bold",
-        5: "text-lg font-bold",
-        6: "text-base font-bold",
+        1: 'text-4xl font-extrabold',
+        2: 'text-3xl font-bold',
+        3: 'text-2xl font-bold',
+        4: 'text-xl font-bold',
+        5: 'text-lg font-bold',
+        6: 'text-base font-bold',
       };
 
       return [

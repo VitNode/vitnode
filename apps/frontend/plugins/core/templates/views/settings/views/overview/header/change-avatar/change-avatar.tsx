@@ -1,31 +1,31 @@
-import { useTranslations } from "next-intl";
-import * as React from "react";
-import { ImageIcon } from "lucide-react";
+import { useTranslations } from 'next-intl';
+import * as React from 'react';
+import { ImageIcon } from 'lucide-react';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "vitnode-frontend/components/ui/tooltip";
+} from 'vitnode-frontend/components/ui/tooltip';
 import {
   Dialog,
   DialogContent,
   DialogTrigger,
-} from "vitnode-frontend/components/ui/dialog";
-import { Loader } from "vitnode-frontend/components/ui/loader";
-import { Button } from "vitnode-frontend/components/ui/button";
-import { useSession } from "vitnode-frontend/hooks/use-session";
+} from 'vitnode-frontend/components/ui/dialog';
+import { Loader } from 'vitnode-frontend/components/ui/loader';
+import { Button } from 'vitnode-frontend/components/ui/button';
+import { useSession } from 'vitnode-frontend/hooks/use-session';
 
-import { AvatarUser } from "@/components/user/avatar/avatar-user";
+import { AvatarUser } from '@/components/user/avatar/avatar-user';
 
 const ModalChangeAvatar = React.lazy(async () =>
-  import("./modal/modal-change-avatar").then(module => ({
+  import('./modal/modal-change-avatar').then(module => ({
     default: module.ModalChangeAvatar,
   })),
 );
 
 export const ChangeAvatar = () => {
-  const t = useTranslations("core");
+  const t = useTranslations('core');
   const { session } = useSession();
   if (!session) return null;
 
@@ -55,7 +55,7 @@ export const ChangeAvatar = () => {
             </DialogContent>
 
             <TooltipContent>
-              <p>{t("settings.change_avatar.title")}</p>
+              <p>{t('settings.change_avatar.title')}</p>
             </TooltipContent>
           </Tooltip>
         </Dialog>

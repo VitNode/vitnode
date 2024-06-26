@@ -1,6 +1,6 @@
-import { Global, Module } from "@nestjs/common";
+import { Global, Module } from '@nestjs/common';
 
-import { ParserTextLanguageCoreHelpersService } from "./text_language/parser/parser.service";
+import { ParserTextLanguageCoreHelpersService } from './text_language/parser/parser.service';
 
 @Global()
 @Module({

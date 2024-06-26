@@ -1,16 +1,16 @@
-import * as fs from "fs";
-import { join } from "path";
+import * as fs from 'fs';
+import { join } from 'path';
 
-import { Injectable } from "@nestjs/common";
-import { ConfigService } from "@nestjs/config";
+import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 
-import { EditAdminManifestMetadataObj } from "./dto/edit.args";
-import { ShowAdminManifestMetadataObj } from "../show/dto/show.obj";
-import { getManifest } from "../functions";
+import { EditAdminManifestMetadataObj } from './dto/edit.args';
+import { ShowAdminManifestMetadataObj } from '../show/dto/show.obj';
+import { getManifest } from '../functions';
 
-import { DatabaseService } from "../../../../../database";
-import { ABSOLUTE_PATHS_BACKEND } from "../../../../..";
-import { core_languages } from "../../../../../templates/core/admin/database/schema/languages";
+import { DatabaseService } from '../../../../../database';
+import { ABSOLUTE_PATHS_BACKEND } from '../../../../..';
+import { core_languages } from '../../../../../templates/core/admin/database/schema/languages';
 
 @Injectable()
 export class EditAdminManifestMetadataService {
@@ -26,7 +26,7 @@ export class EditAdminManifestMetadataService {
     data: EditAdminManifestMetadataObj;
     lang_code: string;
   }): ShowAdminManifestMetadataObj {
-    const frontendUrl: string = this.configService.getOrThrow("frontend_url");
+    const frontendUrl: string = this.configService.getOrThrow('frontend_url');
     const manifest = getManifest({ lang_code });
     const newManifest: ShowAdminManifestMetadataObj = {
       ...manifest,
@@ -38,9 +38,9 @@ export class EditAdminManifestMetadataService {
     fs.writeFileSync(
       join(
         ABSOLUTE_PATHS_BACKEND.uploads.public,
-        "assets",
+        'assets',
         lang_code,
-        "manifest.webmanifest",
+        'manifest.webmanifest',
       ),
       JSON.stringify(newManifest, null, 2),
     );
@@ -64,6 +64,6 @@ export class EditAdminManifestMetadataService {
       }),
     );
 
-    return manifests.find(manifest => manifest.lang === "en");
+    return manifests.find(manifest => manifest.lang === 'en');
   }
 }

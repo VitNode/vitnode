@@ -1,11 +1,11 @@
-import { Link } from "vitnode-frontend/navigation";
-import { LogoVitNode } from "vitnode-frontend/components/logo-vitnode";
-import { CONFIG } from "vitnode-frontend/helpers/config-with-env";
+import { Link } from 'vitnode-frontend/navigation';
+import { LogoVitNode } from 'vitnode-frontend/components/logo-vitnode';
+import { CONFIG } from 'vitnode-frontend/helpers/config-with-env';
 
-import { UserBarAdmin } from "./user-bar/user-bar-admin";
-import { DarkLightModeSwitcher } from "@/components/switchers/dark-light-mode-switcher";
-import { LanguageSwitcher } from "@/components/switchers/language-switcher";
-import { NavAdmin } from "../nav/nav-admin";
+import { UserBarAdmin } from './user-bar/user-bar-admin';
+import { DarkLightModeSwitcher } from '@/components/switchers/dark-light-mode-switcher';
+import { LanguageSwitcher } from '@/components/switchers/language-switcher';
+import { NavAdmin } from '../nav/nav-admin';
 
 export const HeaderAdmin = () => {
   return (
@@ -15,7 +15,7 @@ export const HeaderAdmin = () => {
           className="absolute left-0 top-0 z-50 h-1 w-full"
           style={{
             backgroundImage:
-              "repeating-linear-gradient(-55deg,#000, #000 20px, #ffb103 20px, #feb100 40px)",
+              'repeating-linear-gradient(-55deg,#000, #000 20px, #ffb103 20px, #feb100 40px)',
           }}
         />
       )}

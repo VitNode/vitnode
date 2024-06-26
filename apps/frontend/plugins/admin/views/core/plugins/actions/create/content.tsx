@@ -1,24 +1,24 @@
-import { useTranslations } from "next-intl";
+import { useTranslations } from 'next-intl';
 import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "vitnode-frontend/components/ui/dialog";
-import { Button } from "vitnode-frontend/components/ui/button";
-import { Form } from "vitnode-frontend/components/ui/form";
+} from 'vitnode-frontend/components/ui/dialog';
+import { Button } from 'vitnode-frontend/components/ui/button';
+import { Form } from 'vitnode-frontend/components/ui/form';
 
-import { useCreateEditPluginAdmin } from "./hooks/use-create-edit-plugin-admin";
-import { FormCreateEditPluginAdmin } from "./form";
+import { useCreateEditPluginAdmin } from './hooks/use-create-edit-plugin-admin';
+import { FormCreateEditPluginAdmin } from './form';
 
 export const CreatePluginAdmin = () => {
-  const t = useTranslations("admin.core.plugins");
-  const tCore = useTranslations("core");
+  const t = useTranslations('admin.core.plugins');
+  const tCore = useTranslations('core');
   const { form, onSubmit } = useCreateEditPluginAdmin({});
 
   return (
     <>
       <DialogHeader>
-        <DialogTitle>{t("create.title")}</DialogTitle>
+        <DialogTitle>{t('create.title')}</DialogTitle>
       </DialogHeader>
 
       <Form {...form}>
@@ -31,7 +31,7 @@ export const CreatePluginAdmin = () => {
               loading={form.formState.isSubmitting}
               type="submit"
             >
-              {tCore("create")}
+              {tCore('create')}
             </Button>
           </DialogFooter>
         </form>

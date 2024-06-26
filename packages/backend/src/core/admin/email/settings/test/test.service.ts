@@ -1,8 +1,8 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable } from '@nestjs/common';
 
-import { TestAdminEmailSettingsServiceArgs } from "./dto/test.args";
+import { TestAdminEmailSettingsServiceArgs } from './dto/test.args';
 
-import { SendAdminEmailService } from "../../send/send.service";
+import { SendAdminEmailService } from '../../send/send.service';
 
 @Injectable()
 export class TestAdminEmailSettingsService extends SendAdminEmailService {
@@ -19,6 +19,6 @@ export class TestAdminEmailSettingsService extends SendAdminEmailService {
       message,
     });
 
-    return "Email sent!";
+    return 'Email sent!';
   }
 }

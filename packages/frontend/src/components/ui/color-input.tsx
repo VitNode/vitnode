@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import { HslColor } from "react-colorful";
-import { useTranslations } from "next-intl";
-import { getHSLFromString, isColorBrightness } from "vitnode-shared";
+import * as React from 'react';
+import { HslColor } from 'react-colorful';
+import { useTranslations } from 'next-intl';
+import { getHSLFromString, isColorBrightness } from 'vitnode-shared';
 
-import { PickerColor } from "./picker-color";
-import { Button } from "./button";
-import { Popover, PopoverContent, PopoverTrigger } from "./popover";
+import { PickerColor } from './picker-color';
+import { Button } from './button';
+import { Popover, PopoverContent, PopoverTrigger } from './popover';
 
-import { cn } from "../../helpers/classnames";
+import { cn } from '../../helpers/classnames';
 
 interface Props {
   onChange: (value: string) => void;
@@ -26,7 +26,7 @@ export const ColorInput = ({
   value,
   ...rest
 }: Props) => {
-  const t = useTranslations("core.colors");
+  const t = useTranslations('core.colors');
   const [open, setOpen] = React.useState(false);
   const [color, setColor] = React.useState<HslColor | null>(
     getHSLFromString(value),
@@ -34,7 +34,7 @@ export const ColorInput = ({
 
   // Set color from value
   React.useEffect(() => {
-    onChange(color ? `hsl(${color.h}, ${color.s}%, ${color.l}%)` : "");
+    onChange(color ? `hsl(${color.h}, ${color.s}%, ${color.l}%)` : '');
   }, [color]);
 
   const colorBrightness = color ? isColorBrightness(color) : false;
@@ -45,24 +45,24 @@ export const ColorInput = ({
         <PopoverTrigger asChild>
           <Button
             variant="outline"
-            className={cn("max-w-52 flex-1 justify-start", {
-              "text-black": color && colorBrightness,
-              "text-white": color && !colorBrightness,
+            className={cn('max-w-52 flex-1 justify-start', {
+              'text-black': color && colorBrightness,
+              'text-white': color && !colorBrightness,
             })}
             style={{
               backgroundColor: color
                 ? `hsl(${color.h}, ${color.s}%, ${color.l}%)`
-                : "",
+                : '',
             }}
             disabled={disabled}
             {...rest}
           >
             <span
               className={cn({
-                "text-muted-foreground": !color,
+                'text-muted-foreground': !color,
               })}
             >
-              {color ? `hsl(${color.h}, ${color.s}%, ${color.l}%)` : t("none")}
+              {color ? `hsl(${color.h}, ${color.s}%, ${color.l}%)` : t('none')}
             </span>
           </Button>
         </PopoverTrigger>

@@ -1,23 +1,23 @@
-import * as React from "react";
-import { useTranslations } from "next-intl";
-import { Card } from "vitnode-frontend/components/ui/card";
+import * as React from 'react';
+import { useTranslations } from 'next-intl';
+import { Card } from 'vitnode-frontend/components/ui/card';
 
-import { NavSettings } from "./nav/nav-settings";
-import { HeaderContent } from "@/components/header-content/header-content";
+import { NavSettings } from './nav/nav-settings';
+import { HeaderContent } from '@/components/header-content/header-content';
 
 interface Props {
   children: React.ReactNode;
 }
 
 export const LayoutSettingsView = ({ children }: Props) => {
-  const t = useTranslations("core");
+  const t = useTranslations('core');
 
   return (
     <>
       <HeaderContent
         className="mb-5"
-        h2={t("settings.title")}
-        desc={t("settings.desc")}
+        h2={t('settings.title')}
+        desc={t('settings.desc')}
       />
 
       <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:gap-8">

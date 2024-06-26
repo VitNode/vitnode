@@ -1,11 +1,11 @@
-import * as Lucide from "lucide-react";
-import * as React from "react";
-import { useTranslations } from "next-intl";
-import { Button } from "vitnode-frontend/components/ui/button";
+import * as Lucide from 'lucide-react';
+import * as React from 'react';
+import { useTranslations } from 'next-intl';
+import { Button } from 'vitnode-frontend/components/ui/button';
 
-import { IconLucideNames } from "@/components/icon/icon";
-import { IconInputProps } from "../content";
-import { IconClient } from "@/components/icon/icon-client";
+import { IconLucideNames } from '@/components/icon/icon';
+import { IconInputProps } from '../content';
+import { IconClient } from '@/components/icon/icon-client';
 
 interface Props extends IconInputProps {
   search: string;
@@ -19,13 +19,13 @@ export const IconsContentIconInput = ({
   setOpen,
   value,
 }: Props) => {
-  const t = useTranslations("core.icon_picker.icons");
+  const t = useTranslations('core.icon_picker.icons');
   const data = iconNamesArray.filter(name =>
     name.toLowerCase().includes(search.toLowerCase()),
   );
 
   if (data.length === 0) {
-    return <span className="text-muted-foreground">{t("not_found")}</span>;
+    return <span className="text-muted-foreground">{t('not_found')}</span>;
   }
 
   return (
@@ -35,10 +35,10 @@ export const IconsContentIconInput = ({
           key={name}
           size="icon"
           ariaLabel={name}
-          variant={value === name ? "default" : "ghost"}
+          variant={value === name ? 'default' : 'ghost'}
           onClick={() => {
             if (value === name) {
-              onChange("");
+              onChange('');
               setOpen(false);
 
               return;

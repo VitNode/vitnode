@@ -1,12 +1,12 @@
-import { Injectable } from "@nestjs/common";
-import { eq } from "drizzle-orm";
+import { Injectable } from '@nestjs/common';
+import { eq } from 'drizzle-orm';
 
-import { DeleteAdminFilesArgs } from "./dto/delete.args";
+import { DeleteAdminFilesArgs } from './dto/delete.args';
 
-import { DatabaseService } from "../../../../database";
-import { DeleteCoreFilesService } from "../../../files/helpers/delete/delete.service";
-import { NotFoundError } from "../../../../errors";
-import { core_files } from "../../../../templates/core/admin/database/schema/files";
+import { DatabaseService } from '../../../../database';
+import { DeleteCoreFilesService } from '../../../files/helpers/delete/delete.service';
+import { NotFoundError } from '../../../../errors';
+import { core_files } from '../../../../templates/core/admin/database/schema/files';
 
 @Injectable()
 export class DeleteAdminFilesService {
@@ -21,7 +21,7 @@ export class DeleteAdminFilesService {
     });
 
     if (!findFile) {
-      throw new NotFoundError("File");
+      throw new NotFoundError('File');
     }
 
     this.deleteFile.delete({
@@ -33,6 +33,6 @@ export class DeleteAdminFilesService {
       .delete(core_files)
       .where(eq(core_files.id, id));
 
-    return "Success!";
+    return 'Success!';
   }
 }

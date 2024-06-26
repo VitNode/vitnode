@@ -4,20 +4,20 @@ import {
   mkdirSync,
   readFileSync,
   statSync,
-} from "fs";
-import { join } from "path";
+} from 'fs';
+import { join } from 'path';
 
-import sharp from "sharp";
-import { Injectable } from "@nestjs/common";
-import { generateRandomString, removeSpecialCharacters } from "vitnode-shared";
+import sharp from 'sharp';
+import { Injectable } from '@nestjs/common';
+import { generateRandomString, removeSpecialCharacters } from 'vitnode-shared';
 
-import { UploadCoreFilesArgs } from "./dto/upload.args";
-import { UploadCoreFilesObj } from "./dto/upload.obj";
-import { HelpersUploadCoreFilesService, acceptMimeTypeImage } from "./helpers";
+import { UploadCoreFilesArgs } from './dto/upload.args';
+import { UploadCoreFilesObj } from './dto/upload.obj';
+import { HelpersUploadCoreFilesService, acceptMimeTypeImage } from './helpers';
 
-import { DatabaseService } from "../../../../database";
-import { CustomError } from "../../../../errors";
-import { ABSOLUTE_PATHS_BACKEND } from "../../../..";
+import { DatabaseService } from '../../../../database';
+import { CustomError } from '../../../../errors';
+import { ABSOLUTE_PATHS_BACKEND } from '../../../..';
 
 @Injectable()
 export class UploadCoreFilesService extends HelpersUploadCoreFilesService {
@@ -42,9 +42,9 @@ export class UploadCoreFilesService extends HelpersUploadCoreFilesService {
         },
       });
 
-    if (!pluginExists && plugin !== "core") {
+    if (!pluginExists && plugin !== 'core') {
       throw new CustomError({
-        code: "PLUGIN_NOT_FOUND",
+        code: 'PLUGIN_NOT_FOUND',
         message: `Plugin "${plugin}" not found`,
       });
     }
@@ -60,7 +60,7 @@ export class UploadCoreFilesService extends HelpersUploadCoreFilesService {
     // Create folders
     const date = new Date();
     const dir = join(
-      "uploads",
+      'uploads',
       `monthly_${date.getMonth() + 1}_${date.getFullYear()}`,
       plugin,
       folder,
@@ -75,8 +75,8 @@ export class UploadCoreFilesService extends HelpersUploadCoreFilesService {
     return Promise.all(
       files.map(async file => {
         const { createReadStream, filename, mimetype } = await file;
-        const extension = filename.split(".").pop();
-        const name = filename.split(".").shift();
+        const extension = filename.split('.').pop();
+        const name = filename.split('.').shift();
         const stream = createReadStream();
 
         // Generate file name
@@ -89,8 +89,8 @@ export class UploadCoreFilesService extends HelpersUploadCoreFilesService {
         await new Promise((resolve, reject) =>
           stream
             .pipe(createWriteStream(url))
-            .on("finish", () => resolve(url))
-            .on("error", reject),
+            .on('finish', () => resolve(url))
+            .on('error', reject),
         );
 
         // Get file stats

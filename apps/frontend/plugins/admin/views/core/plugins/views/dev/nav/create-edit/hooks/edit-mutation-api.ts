@@ -1,13 +1,13 @@
-"use server";
+'use server';
 
-import { revalidatePath } from "next/cache";
-import { fetcher } from "vitnode-frontend/graphql/fetcher";
+import { revalidatePath } from 'next/cache';
+import { fetcher } from 'vitnode-frontend/graphql/fetcher';
 
 import {
   Admin__Core_Plugins__Nav__Edit,
   Admin__Core_Plugins__Nav__EditMutation,
   Admin__Core_Plugins__Nav__EditMutationVariables,
-} from "@/graphql/hooks";
+} from '@/graphql/hooks';
 
 interface Args extends Admin__Core_Plugins__Nav__EditMutationVariables {
   pluginCode: string;
@@ -25,7 +25,7 @@ export const editMutationApi = async (variables: Args) => {
 
     revalidatePath(
       `/admin/core/plugins/${variables.pluginCode}/dev/nav`,
-      "page",
+      'page',
     );
 
     return { data };

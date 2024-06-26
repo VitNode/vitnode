@@ -1,8 +1,8 @@
-import * as React from "react";
-import { UniqueIdentifier } from "@dnd-kit/core";
-import { arrayMove } from "@dnd-kit/sortable";
-import { Coordinates } from "@dnd-kit/utilities";
-import { FlatTree } from "vitnode-frontend/helpers/flatten-tree";
+import * as React from 'react';
+import { UniqueIdentifier } from '@dnd-kit/core';
+import { arrayMove } from '@dnd-kit/sortable';
+import { Coordinates } from '@dnd-kit/utilities';
+import { FlatTree } from 'vitnode-frontend/helpers/flatten-tree';
 
 const getDragDepth = ({
   indentationWidth,

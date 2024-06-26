@@ -1,13 +1,13 @@
-"use server";
+'use server';
 
-import { revalidatePath } from "next/cache";
-import { fetcher } from "vitnode-frontend/graphql/fetcher";
+import { revalidatePath } from 'next/cache';
+import { fetcher } from 'vitnode-frontend/graphql/fetcher';
 
 import {
   Admin__Core_Files__Delete,
   Admin__Core_Files__DeleteMutation,
   Admin__Core_Files__DeleteMutationVariables,
-} from "@/graphql/hooks";
+} from '@/graphql/hooks';
 
 export const mutationApi = async (
   variables: Admin__Core_Files__DeleteMutationVariables,
@@ -21,8 +21,8 @@ export const mutationApi = async (
       variables,
     });
 
-    revalidatePath("/admin/core/advanced/files", "page");
-    revalidatePath("/settings/files", "page");
+    revalidatePath('/admin/core/advanced/files', 'page');
+    revalidatePath('/settings/files', 'page');
 
     return { data };
   } catch (error) {

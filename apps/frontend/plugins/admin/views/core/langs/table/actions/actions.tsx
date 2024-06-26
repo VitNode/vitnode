@@ -1,22 +1,22 @@
-import { ChevronDown, Trash2, Upload } from "lucide-react";
-import { useLocale, useTranslations } from "next-intl";
-import * as React from "react";
-import { Button } from "vitnode-frontend/components/ui/button";
+import { ChevronDown, Trash2, Upload } from 'lucide-react';
+import { useLocale, useTranslations } from 'next-intl';
+import * as React from 'react';
+import { Button } from 'vitnode-frontend/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "vitnode-frontend/components/ui/dropdown-menu";
+} from 'vitnode-frontend/components/ui/dropdown-menu';
 
-import { ShowCoreLanguages } from "@/graphql/hooks";
-import { EditActionsTableLangsCoreAdmin } from "./edit";
-import { DeleteActionsTableLangsCoreAdmin } from "./delete/delete";
-import { DownloadActionsTableLangsCoreAdmin } from "./download/download";
-import { UpdateActionsTableLangsCoreAdmin } from "./update/update";
+import { ShowCoreLanguages } from '@/graphql/hooks';
+import { EditActionsTableLangsCoreAdmin } from './edit';
+import { DeleteActionsTableLangsCoreAdmin } from './delete/delete';
+import { DownloadActionsTableLangsCoreAdmin } from './download/download';
+import { UpdateActionsTableLangsCoreAdmin } from './update/update';
 
 export const ActionsTableLangsCoreAdmin = (data: ShowCoreLanguages) => {
-  const t = useTranslations("core");
+  const t = useTranslations('core');
   const locale = useLocale();
   const [isOpenDeleteDialog, setIsOpenDeleteDialog] = React.useState(false);
   const [isOpenUploadDialog, setIsOpenUploadDialog] = React.useState(false);
@@ -29,13 +29,13 @@ export const ActionsTableLangsCoreAdmin = (data: ShowCoreLanguages) => {
       {!data.protected && (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="icon" ariaLabel={t("more_actions")}>
+            <Button variant="ghost" size="icon" ariaLabel={t('more_actions')}>
               <ChevronDown />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
             <DropdownMenuItem onClick={() => setIsOpenUploadDialog(true)}>
-              <Upload /> {t("upload_new_version")}
+              <Upload /> {t('upload_new_version')}
             </DropdownMenuItem>
             {!data.default && (
               <DropdownMenuItem
@@ -43,7 +43,7 @@ export const ActionsTableLangsCoreAdmin = (data: ShowCoreLanguages) => {
                 disabled={locale === data.code}
                 destructive
               >
-                <Trash2 /> {t("delete")}
+                <Trash2 /> {t('delete')}
               </DropdownMenuItem>
             )}
           </DropdownMenuContent>

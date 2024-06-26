@@ -1,16 +1,16 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
-import { useParams } from "next/navigation";
-import { toast } from "sonner";
-import { useTranslations } from "next-intl";
-import { zodInput } from "vitnode-frontend/helpers/zod";
-import { useDialog } from "vitnode-frontend/components/ui/dialog";
-import { ErrorType } from "vitnode-frontend/graphql/fetcher";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import * as z from 'zod';
+import { useParams } from 'next/navigation';
+import { toast } from 'sonner';
+import { useTranslations } from 'next-intl';
+import { zodInput } from 'vitnode-frontend/helpers/zod';
+import { useDialog } from 'vitnode-frontend/components/ui/dialog';
+import { ErrorType } from 'vitnode-frontend/graphql/fetcher';
 
-import { createMutationApi } from "./create-mutation-api";
-import { editMutationApi } from "./edit-mutation-api";
-import { ShowAdminNavPluginsObj } from "@/graphql/hooks";
+import { createMutationApi } from './create-mutation-api';
+import { editMutationApi } from './edit-mutation-api';
+import { ShowAdminNavPluginsObj } from '@/graphql/hooks';
 
 interface Props {
   data?: ShowAdminNavPluginsObj;
@@ -18,8 +18,8 @@ interface Props {
 }
 
 export const useCreateNavPluginAdmin = ({ data, parentId }: Props) => {
-  const t = useTranslations("admin.core.plugins.dev.nav");
-  const tCore = useTranslations("core");
+  const t = useTranslations('admin.core.plugins.dev.nav');
+  const tCore = useTranslations('core');
   const { setOpen } = useDialog();
   const { code } = useParams();
   const formSchema = z.object({
@@ -32,10 +32,10 @@ export const useCreateNavPluginAdmin = ({ data, parentId }: Props) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      code: data?.code ?? "",
-      icon: data?.icon ?? "",
-      href: data?.href ?? "",
-      parent_code: parentId ?? "null",
+      code: data?.code ?? '',
+      icon: data?.icon ?? '',
+      href: data?.href ?? '',
+      parent_code: parentId ?? 'null',
     },
   });
 
@@ -46,7 +46,7 @@ export const useCreateNavPluginAdmin = ({ data, parentId }: Props) => {
         ...values,
         previousCode: data.code,
         pluginCode: Array.isArray(code) ? code[0] : code,
-        parentCode: values.parent_code === "null" ? null : values.parent_code,
+        parentCode: values.parent_code === 'null' ? null : values.parent_code,
       });
       if (mutation.error) {
         error = mutation.error as ErrorType | undefined;
@@ -55,30 +55,30 @@ export const useCreateNavPluginAdmin = ({ data, parentId }: Props) => {
       const mutation = await createMutationApi({
         ...values,
         pluginCode: Array.isArray(code) ? code[0] : code,
-        parentCode: values.parent_code === "null" ? null : values.parent_code,
+        parentCode: values.parent_code === 'null' ? null : values.parent_code,
       });
       if (mutation.error) {
         error = mutation.error as ErrorType | undefined;
       }
     }
 
-    if (error?.extensions?.code === "CODE_ALREADY_EXISTS") {
-      form.setError("code", {
-        message: t("create.code.exists"),
+    if (error?.extensions?.code === 'CODE_ALREADY_EXISTS') {
+      form.setError('code', {
+        message: t('create.code.exists'),
       });
 
       return;
     }
 
     if (error) {
-      toast.error(tCore("errors.title"), {
-        description: tCore("errors.internal_server_error"),
+      toast.error(tCore('errors.title'), {
+        description: tCore('errors.internal_server_error'),
       });
 
       return;
     }
 
-    toast.success(t(data ? "edit.success" : "create.success"));
+    toast.success(t(data ? 'edit.success' : 'create.success'));
 
     setOpen?.(false);
   };

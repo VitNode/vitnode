@@ -1,18 +1,18 @@
-import { useTranslations } from "next-intl";
-import { useForm } from "react-hook-form";
-import { toast } from "sonner";
-import * as z from "zod";
-import { useDialog } from "vitnode-frontend/components/ui/dialog";
+import { useTranslations } from 'next-intl';
+import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
+import * as z from 'zod';
+import { useDialog } from 'vitnode-frontend/components/ui/dialog';
 
-import { ShowCoreLanguages } from "@/graphql/hooks";
-import { mutationApi } from "./mutation-api";
+import { ShowCoreLanguages } from '@/graphql/hooks';
+import { mutationApi } from './mutation-api';
 
 export const useUpdateLangAdmin = ({
   code,
   name,
-}: Pick<ShowCoreLanguages, "code" | "name">) => {
-  const t = useTranslations("admin.core.langs.actions.update");
-  const tCore = useTranslations("core");
+}: Pick<ShowCoreLanguages, 'code' | 'name'>) => {
+  const t = useTranslations('admin.core.langs.actions.update');
+  const tCore = useTranslations('core');
   const { setOpen } = useDialog();
   const formSchema = z.object({
     file: z.array(z.instanceof(File)),
@@ -28,20 +28,20 @@ export const useUpdateLangAdmin = ({
     if (!values.file.length) return;
 
     const formData = new FormData();
-    formData.append("file", values.file[0]);
-    formData.append("code", code);
+    formData.append('file', values.file[0]);
+    formData.append('code', code);
     const mutation = await mutationApi(formData);
 
     if (mutation.error || !mutation.data) {
-      toast.error(tCore("errors.title"), {
-        description: tCore("errors.internal_server_error"),
+      toast.error(tCore('errors.title'), {
+        description: tCore('errors.internal_server_error'),
       });
 
       return;
     }
 
     setOpen?.(false);
-    toast.success(t("success"), {
+    toast.success(t('success'), {
       description: name,
     });
   };

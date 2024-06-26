@@ -1,14 +1,14 @@
-import { Injectable } from "@nestjs/common";
-import { Cron, CronExpression } from "@nestjs/schedule";
-import { desc, eq, lt, sql } from "drizzle-orm";
+import { Injectable } from '@nestjs/common';
+import { Cron, CronExpression } from '@nestjs/schedule';
+import { desc, eq, lt, sql } from 'drizzle-orm';
 
-import { DeleteCoreFilesService } from "./helpers/delete/delete.service";
+import { DeleteCoreFilesService } from './helpers/delete/delete.service';
 
-import { DatabaseService } from "../../database";
+import { DatabaseService } from '../../database';
 import {
   core_files,
   core_files_using,
-} from "../../templates/core/admin/database/schema/files";
+} from '../../templates/core/admin/database/schema/files';
 
 @Injectable()
 export class CoreFilesCron {

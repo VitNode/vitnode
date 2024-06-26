@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import { NodeViewContent, NodeViewWrapper } from "@tiptap/react";
-import * as React from "react";
-import { CheckIcon, SortAscIcon } from "lucide-react";
-import { useTranslations } from "next-intl";
-import { cn } from "vitnode-frontend/helpers/classnames";
+import { NodeViewContent, NodeViewWrapper } from '@tiptap/react';
+import * as React from 'react';
+import { CheckIcon, SortAscIcon } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import { cn } from 'vitnode-frontend/helpers/classnames';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "vitnode-frontend/components/ui/popover";
-import { Button } from "vitnode-frontend/components/ui/button";
+} from 'vitnode-frontend/components/ui/popover';
+import { Button } from 'vitnode-frontend/components/ui/button';
 import {
   Command,
   CommandEmpty,
@@ -18,9 +18,9 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "vitnode-frontend/components/ui/command";
+} from 'vitnode-frontend/components/ui/command';
 
-import { classNameCodeBlock } from "./code";
+import { classNameCodeBlock } from './code';
 
 export const CodeBlockComponent = ({
   extension,
@@ -41,8 +41,8 @@ export const CodeBlockComponent = ({
 }) => {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(defaultLanguage);
-  const t = useTranslations("core.editor.heading.code_block");
-  const tCore = useTranslations("core");
+  const t = useTranslations('core.editor.heading.code_block');
+  const tCore = useTranslations('core');
 
   return (
     <NodeViewWrapper className="bg-muted relative rounded-md">
@@ -50,7 +50,7 @@ export const CodeBlockComponent = ({
         <NodeViewContent
           as="code"
           className={classNameCodeBlock}
-          style={{ whiteSpace: "break-spaces" }}
+          style={{ whiteSpace: 'break-spaces' }}
         />
       </pre>
 
@@ -64,24 +64,24 @@ export const CodeBlockComponent = ({
               aria-expanded={open}
               className="w-40 justify-between"
             >
-              {value ?? t("auto")}
+              {value ?? t('auto')}
               <SortAscIcon className="ml-2 size-4 shrink-0 opacity-50" />
             </Button>
           </PopoverTrigger>
 
           <PopoverContent className="w-40 p-0">
             <Command>
-              <CommandInput placeholder={tCore("search")} className="h-9" />
+              <CommandInput placeholder={tCore('search')} className="h-9" />
 
               <CommandList>
-                <CommandEmpty>{tCore("no_results")}</CommandEmpty>
+                <CommandEmpty>{tCore('no_results')}</CommandEmpty>
                 <CommandGroup>
                   {extension.options.lowlight.listLanguages().map(lang => (
                     <CommandItem
                       key={lang}
                       value={lang}
                       onSelect={currentValue => {
-                        const val = currentValue === value ? "" : currentValue;
+                        const val = currentValue === value ? '' : currentValue;
                         updateAttributes({ language: val });
                         setValue(val);
                         setOpen(false);
@@ -90,8 +90,8 @@ export const CodeBlockComponent = ({
                       {lang}
                       <CheckIcon
                         className={cn(
-                          "ml-auto h-4 w-4",
-                          value === lang ? "opacity-100" : "opacity-0",
+                          'ml-auto h-4 w-4',
+                          value === lang ? 'opacity-100' : 'opacity-0',
                         )}
                       />
                     </CommandItem>

@@ -1,32 +1,32 @@
-import { Trash2 } from "lucide-react";
-import { useTranslations } from "next-intl";
-import * as React from "react";
+import { Trash2 } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import * as React from 'react';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "vitnode-frontend/components/ui/tooltip";
+} from 'vitnode-frontend/components/ui/tooltip';
 import {
   AlertDialog,
   AlertDialogContent,
   AlertDialogTrigger,
-} from "vitnode-frontend/components/ui/alert-dialog";
-import { Button } from "vitnode-frontend/components/ui/button";
-import { Loader } from "vitnode-frontend/components/ui/loader";
+} from 'vitnode-frontend/components/ui/alert-dialog';
+import { Button } from 'vitnode-frontend/components/ui/button';
+import { Loader } from 'vitnode-frontend/components/ui/loader';
 
-import { ShowCoreNav } from "@/graphql/hooks";
+import { ShowCoreNav } from '@/graphql/hooks';
 
 const Content = React.lazy(async () =>
-  import("./content").then(module => ({
+  import('./content').then(module => ({
     default: module.ContentDeleteActionTableNavAdmin,
   })),
 );
 
 export const DeleteActionTableNavAdmin = (
-  props: Pick<ShowCoreNav, "children" | "id" | "name">,
+  props: Pick<ShowCoreNav, 'children' | 'id' | 'name'>,
 ) => {
-  const t = useTranslations("core");
+  const t = useTranslations('core');
 
   return (
     <AlertDialog>
@@ -37,14 +37,14 @@ export const DeleteActionTableNavAdmin = (
               <Button
                 variant="destructiveGhost"
                 size="icon"
-                ariaLabel={t("delete")}
+                ariaLabel={t('delete')}
               >
                 <Trash2 />
               </Button>
             </AlertDialogTrigger>
           </TooltipTrigger>
 
-          <TooltipContent>{t("delete")}</TooltipContent>
+          <TooltipContent>{t('delete')}</TooltipContent>
         </Tooltip>
       </TooltipProvider>
 

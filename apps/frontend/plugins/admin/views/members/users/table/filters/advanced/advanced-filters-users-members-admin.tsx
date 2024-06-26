@@ -1,25 +1,25 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
-import { useTranslations } from "next-intl";
-import { useSearchParams } from "next/navigation";
-import { convertDateToUnixTime } from "vitnode-shared";
-import { usePathname, useRouter } from "vitnode-frontend/navigation";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import * as z from 'zod';
+import { useTranslations } from 'next-intl';
+import { useSearchParams } from 'next/navigation';
+import { convertDateToUnixTime } from 'vitnode-shared';
+import { usePathname, useRouter } from 'vitnode-frontend/navigation';
 import {
   Form,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from "vitnode-frontend/components/ui/form";
-import { Button } from "vitnode-frontend/components/ui/button";
-import { SheetClose, SheetFooter } from "vitnode-frontend/components/ui/sheet";
+} from 'vitnode-frontend/components/ui/form';
+import { Button } from 'vitnode-frontend/components/ui/button';
+import { SheetClose, SheetFooter } from 'vitnode-frontend/components/ui/sheet';
 
-import { CalendarPicker } from "@/components/calendar-picker";
+import { CalendarPicker } from '@/components/calendar-picker';
 
 export const AdvancedFiltersUsersMembersAdmin = () => {
-  const t = useTranslations("admin.members.users");
-  const tCore = useTranslations("core");
+  const t = useTranslations('admin.members.users');
+  const tCore = useTranslations('core');
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -43,14 +43,14 @@ export const AdvancedFiltersUsersMembersAdmin = () => {
 
     if (data.date?.from) {
       params.set(
-        "dateFrom",
+        'dateFrom',
         `${convertDateToUnixTime(data.date.from.toDateString())}`,
       );
     }
 
     if (data.date?.to) {
       params.set(
-        "dateTo",
+        'dateTo',
         `${convertDateToUnixTime(data.date.to.toDateString())}`,
       );
     }
@@ -66,7 +66,7 @@ export const AdvancedFiltersUsersMembersAdmin = () => {
           name="date"
           render={({ field }) => (
             <FormItem className="flex flex-col">
-              <FormLabel>{t("table.joined")}</FormLabel>
+              <FormLabel>{t('table.joined')}</FormLabel>
               <CalendarPicker
                 selected={field.value}
                 onSelect={field.onChange}
@@ -79,7 +79,7 @@ export const AdvancedFiltersUsersMembersAdmin = () => {
         <SheetFooter>
           <SheetClose asChild>
             <Button className="w-full" type="submit">
-              {tCore("search")}
+              {tCore('search')}
             </Button>
           </SheetClose>
         </SheetFooter>

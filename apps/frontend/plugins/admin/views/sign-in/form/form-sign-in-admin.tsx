@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { useTranslations } from "next-intl";
-import { AlertCircle } from "lucide-react";
+import { useTranslations } from 'next-intl';
+import { AlertCircle } from 'lucide-react';
 import {
   Form,
   FormControl,
@@ -9,20 +9,20 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "vitnode-frontend/components/ui/form";
-import { Button } from "vitnode-frontend/components/ui/button";
-import { Input } from "vitnode-frontend/components/ui/input";
-import { CardContent, CardFooter } from "vitnode-frontend/components/ui/card";
+} from 'vitnode-frontend/components/ui/form';
+import { Button } from 'vitnode-frontend/components/ui/button';
+import { Input } from 'vitnode-frontend/components/ui/input';
+import { CardContent, CardFooter } from 'vitnode-frontend/components/ui/card';
 import {
   Alert,
   AlertDescription,
   AlertTitle,
-} from "vitnode-frontend/components/ui/alert";
+} from 'vitnode-frontend/components/ui/alert';
 
-import { useSignInAdminView } from "../hooks/use-sign-in-admin-view";
+import { useSignInAdminView } from '../hooks/use-sign-in-admin-view';
 
 export const FormSignInAdmin = () => {
-  const t = useTranslations("core");
+  const t = useTranslations('core');
   const { error, form, onSubmit } = useSignInAdminView();
 
   return (
@@ -30,20 +30,20 @@ export const FormSignInAdmin = () => {
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <CardContent className="p-6">
           <div className="space-y-4">
-            {error?.extensions?.code === "ACCESS_DENIED" && (
+            {error?.extensions?.code === 'ACCESS_DENIED' && (
               <Alert variant="destructive">
                 <AlertCircle className="size-4" />
-                <AlertTitle>{t("sign_in.error.title")}</AlertTitle>
-                <AlertDescription>{t("sign_in.error.desc")}</AlertDescription>
+                <AlertTitle>{t('sign_in.error.title')}</AlertTitle>
+                <AlertDescription>{t('sign_in.error.desc')}</AlertDescription>
               </Alert>
             )}
 
-            {error && error.extensions?.code !== "ACCESS_DENIED" && (
+            {error && error.extensions?.code !== 'ACCESS_DENIED' && (
               <Alert variant="destructive">
                 <AlertCircle className="size-4" />
-                <AlertTitle>{t("errors.title")}</AlertTitle>
+                <AlertTitle>{t('errors.title')}</AlertTitle>
                 <AlertDescription>
-                  {t("errors.internal_server_error")}
+                  {t('errors.internal_server_error')}
                 </AlertDescription>
               </Alert>
             )}
@@ -53,7 +53,7 @@ export const FormSignInAdmin = () => {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{t("sign_in.form.email.label")}</FormLabel>
+                  <FormLabel>{t('sign_in.form.email.label')}</FormLabel>
                   <FormControl>
                     <Input {...field} type="email" />
                   </FormControl>
@@ -66,7 +66,7 @@ export const FormSignInAdmin = () => {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{t("sign_in.form.password.label")}</FormLabel>
+                  <FormLabel>{t('sign_in.form.password.label')}</FormLabel>
                   <FormControl>
                     <Input {...field} type="password" />
                   </FormControl>
@@ -82,7 +82,7 @@ export const FormSignInAdmin = () => {
             className="w-full"
             loading={form.formState.isSubmitting}
           >
-            {t("sign_in.form.submit")}
+            {t('sign_in.form.submit')}
           </Button>
         </CardFooter>
       </form>

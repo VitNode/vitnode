@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import { ChevronDown } from "lucide-react";
-import * as NavigationMenu from "@radix-ui/react-navigation-menu";
-import * as React from "react";
-import { Link, usePathname } from "vitnode-frontend/navigation";
-import { cn } from "vitnode-frontend/helpers/classnames";
-import { buttonVariants } from "vitnode-frontend/components/ui/button";
+import { ChevronDown } from 'lucide-react';
+import * as NavigationMenu from '@radix-ui/react-navigation-menu';
+import * as React from 'react';
+import { Link, usePathname } from 'vitnode-frontend/navigation';
+import { cn } from 'vitnode-frontend/helpers/classnames';
+import { buttonVariants } from 'vitnode-frontend/components/ui/button';
 
-import { ShowCoreNav } from "@/graphql/hooks";
-import { useTextLang } from "@/plugins/core/hooks/use-text-lang";
+import { ShowCoreNav } from '@/graphql/hooks';
+import { useTextLang } from '@/plugins/core/hooks/use-text-lang';
 
-interface Props extends Omit<ShowCoreNav, "icon"> {
+interface Props extends Omit<ShowCoreNav, 'icon'> {
   icons: { icon: React.ReactNode; id: number }[];
 }
 
@@ -25,7 +25,7 @@ export const ItemNav = ({
   const { convertText } = useTextLang();
   const pathname = usePathname();
   const active =
-    href === pathname || (pathname.startsWith(href) && href !== "/");
+    href === pathname || (pathname.startsWith(href) && href !== '/');
 
   return (
     <NavigationMenu.Item className="shrink-0">
@@ -34,14 +34,14 @@ export const ItemNav = ({
           href={href}
           className={cn(
             buttonVariants({
-              variant: active ? "outline" : "ghost",
-              className: cn("px-6", {
-                "bg-card dark:bg-accent": active,
+              variant: active ? 'outline' : 'ghost',
+              className: cn('px-6', {
+                'bg-card dark:bg-accent': active,
               }),
             }),
           )}
-          target={external ? "_blank" : undefined}
-          rel={external ? "noopener noreferrer" : undefined}
+          target={external ? '_blank' : undefined}
+          rel={external ? 'noopener noreferrer' : undefined}
         >
           {icons.find(icon => icon.id === id)?.icon}
           {convertText(name)} {children.length > 0 && <ChevronDown />}
@@ -51,10 +51,10 @@ export const ItemNav = ({
       {children.length > 0 && (
         <NavigationMenu.Content
           className={cn(
-            "data-[motion^=from-]:animate-in data-[motion^=to-]:animate-out data-[motion^=from-]:fade-in data-[motion^=to-]:fade-out data-[motion=from-end]:slide-in-from-right-52 data-[motion=from-start]:slide-in-from-left-52 data-[motion=to-end]:slide-out-to-right-52 data-[motion=to-start]:slide-out-to-left-52 left-0 top-0 w-56 duration-200 ease-in-out",
+            'data-[motion^=from-]:animate-in data-[motion^=to-]:animate-out data-[motion^=from-]:fade-in data-[motion^=to-]:fade-out data-[motion=from-end]:slide-in-from-right-52 data-[motion=from-start]:slide-in-from-left-52 data-[motion=to-end]:slide-out-to-right-52 data-[motion=to-start]:slide-out-to-left-52 left-0 top-0 w-56 duration-200 ease-in-out',
             {
-              "w-[30rem]": children.length >= 3,
-              "lg:w-[50rem]": children.length >= 5,
+              'w-[30rem]': children.length >= 3,
+              'lg:w-[50rem]': children.length >= 5,
             },
           )}
         >
@@ -62,7 +62,7 @@ export const ItemNav = ({
             {children.map(item => {
               const activeItem =
                 item.href === pathname ||
-                (pathname.startsWith(item.href) && item.href !== "/");
+                (pathname.startsWith(item.href) && item.href !== '/');
 
               const icon = icons.find(
                 childIcon => childIcon.id === item.id,
@@ -71,22 +71,22 @@ export const ItemNav = ({
               return (
                 <li
                   key={item.id}
-                  className={cn("flex-1 basis-full", {
-                    "basis-[calc(50%-0.5rem)]": children.length >= 3,
-                    "lg:basis-[calc(33%-0.5rem)]": children.length >= 5,
+                  className={cn('flex-1 basis-full', {
+                    'basis-[calc(50%-0.5rem)]': children.length >= 3,
+                    'lg:basis-[calc(33%-0.5rem)]': children.length >= 5,
                   })}
                 >
                   <NavigationMenu.Link asChild>
                     <Link
                       href={item.href}
                       className={cn(
-                        "hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground text-accent-foreground flex h-full select-none flex-col justify-center gap-1 rounded-md px-3 py-2 leading-none no-underline outline-none transition-colors",
+                        'hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground text-accent-foreground flex h-full select-none flex-col justify-center gap-1 rounded-md px-3 py-2 leading-none no-underline outline-none transition-colors',
                         {
-                          "bg-accent": activeItem,
+                          'bg-accent': activeItem,
                         },
                       )}
-                      target={item.external ? "_blank" : undefined}
-                      rel={item.external ? "noopener noreferrer" : undefined}
+                      target={item.external ? '_blank' : undefined}
+                      rel={item.external ? 'noopener noreferrer' : undefined}
                     >
                       <div className="flex gap-1 font-medium">
                         {icon}

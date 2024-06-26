@@ -1,13 +1,13 @@
-"use server";
+'use server';
 
-import { revalidatePath } from "next/cache";
-import { fetcher } from "vitnode-frontend/graphql/fetcher";
+import { revalidatePath } from 'next/cache';
+import { fetcher } from 'vitnode-frontend/graphql/fetcher';
 
 import {
   Admin__Core_Plugins__Edit,
   Admin__Core_Plugins__EditMutation,
   Admin__Core_Plugins__EditMutationVariables,
-} from "@/graphql/hooks";
+} from '@/graphql/hooks';
 
 export const mutationEditApi = async (
   variables: Admin__Core_Plugins__EditMutationVariables,
@@ -21,7 +21,7 @@ export const mutationEditApi = async (
       variables,
     });
 
-    revalidatePath("/admin/core/plugins/blog/dev/overview", "page");
+    revalidatePath('/admin/core/plugins/blog/dev/overview', 'page');
 
     return { data };
   } catch (error) {

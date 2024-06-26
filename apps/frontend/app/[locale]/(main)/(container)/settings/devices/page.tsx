@@ -1,13 +1,13 @@
-import * as React from "react";
-import { cookies } from "next/headers";
-import { fetcher } from "vitnode-frontend/graphql/fetcher";
+import * as React from 'react';
+import { cookies } from 'next/headers';
+import { fetcher } from 'vitnode-frontend/graphql/fetcher';
 
 import {
   Core_Sessions__Devices__Show,
   Core_Sessions__Devices__ShowQuery,
   Core_Sessions__Devices__ShowQueryVariables,
-} from "@/graphql/hooks";
-import { DevicesSettingsView } from "@/plugins/core/templates/views/settings/views/devices/devices-settings-view";
+} from '@/graphql/hooks';
+import { DevicesSettingsView } from '@/plugins/core/templates/views/settings/views/devices/devices-settings-view';
 
 const getData = async () => {
   const { data } = await fetcher<
@@ -23,7 +23,7 @@ const getData = async () => {
 export default async function Page() {
   const data = await getData();
   const cookieStore = cookies();
-  const loginToken = cookieStore.get("vitnode-login-token")?.value;
+  const loginToken = cookieStore.get('vitnode-login-token')?.value;
 
   if (!loginToken) {
     return null;

@@ -1,7 +1,7 @@
 export interface ConfigType {
   editor: {
     files: {
-      allow_type: "all" | "images_videos" | "images" | "none";
+      allow_type: 'all' | 'images_videos' | 'images' | 'none';
     };
     sticky: boolean;
   };

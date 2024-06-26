@@ -1,19 +1,19 @@
-import { Injectable } from "@nestjs/common";
-import { count } from "drizzle-orm";
+import { Injectable } from '@nestjs/common';
+import { count } from 'drizzle-orm';
 
-import { DatabaseService } from "../../../../database";
-import { CustomError } from "../../../../errors";
-import { core_languages } from "../../../../templates/core/admin/database/schema/languages";
+import { DatabaseService } from '../../../../database';
+import { CustomError } from '../../../../errors';
+import { core_languages } from '../../../../templates/core/admin/database/schema/languages';
 import {
   core_groups,
   core_groups_names,
-} from "../../../../templates/core/admin/database/schema/groups";
-import { core_admin_permissions } from "../../../../templates/core/admin/database/schema/admins";
+} from '../../../../templates/core/admin/database/schema/groups';
+import { core_admin_permissions } from '../../../../templates/core/admin/database/schema/admins';
 import {
   core_nav,
   core_nav_name,
-} from "../../../../templates/core/admin/database/schema/nav";
-import { core_moderators_permissions } from "../../../../templates/core/admin/database/schema/moderators";
+} from '../../../../templates/core/admin/database/schema/nav';
+import { core_moderators_permissions } from '../../../../templates/core/admin/database/schema/moderators';
 
 @Injectable()
 export class CreateDatabaseAdminInstallService {
@@ -21,8 +21,8 @@ export class CreateDatabaseAdminInstallService {
 
   protected throwError() {
     throw new CustomError({
-      code: "DATABASE_ALREADY_EXISTS",
-      message: "Database already exists.",
+      code: 'DATABASE_ALREADY_EXISTS',
+      message: 'Database already exists.',
     });
   }
 
@@ -39,20 +39,20 @@ export class CreateDatabaseAdminInstallService {
 
     await this.databaseService.db.insert(core_languages).values([
       {
-        code: "en",
-        name: "English (USA)",
+        code: 'en',
+        name: 'English (USA)',
         default: true,
         protected: true,
-        timezone: "America/New_York",
-        locale: "enUS",
+        timezone: 'America/New_York',
+        locale: 'enUS',
         site_copyright: `Copyright © VitNode ${new Date().getFullYear()}`,
       },
       {
-        code: "pl",
-        name: "Polski (Polish)",
-        timezone: "Europe/Warsaw",
+        code: 'pl',
+        name: 'Polski (Polish)',
+        timezone: 'Europe/Warsaw',
         time_24: true,
-        locale: "pl",
+        locale: 'pl',
         site_copyright: `Prawa autorskie © VitNode ${new Date().getFullYear()}`,
       },
     ]);
@@ -80,13 +80,13 @@ export class CreateDatabaseAdminInstallService {
     await this.databaseService.db.insert(core_groups_names).values([
       {
         item_id: guestGroup[0].id,
-        language_code: "en",
-        value: "Guest",
+        language_code: 'en',
+        value: 'Guest',
       },
       {
         item_id: guestGroup[0].id,
-        language_code: "pl",
-        value: "Gość",
+        language_code: 'pl',
+        value: 'Gość',
       },
     ]);
 
@@ -101,13 +101,13 @@ export class CreateDatabaseAdminInstallService {
     await this.databaseService.db.insert(core_groups_names).values([
       {
         item_id: memberGroup[0].id,
-        language_code: "en",
-        value: "Member",
+        language_code: 'en',
+        value: 'Member',
       },
       {
         item_id: memberGroup[0].id,
-        language_code: "pl",
-        value: "Użytkownik",
+        language_code: 'pl',
+        value: 'Użytkownik',
       },
     ]);
 
@@ -121,13 +121,13 @@ export class CreateDatabaseAdminInstallService {
     await this.databaseService.db.insert(core_groups_names).values([
       {
         item_id: moderatorGroup[0].id,
-        language_code: "en",
-        value: "Moderator",
+        language_code: 'en',
+        value: 'Moderator',
       },
       {
         item_id: moderatorGroup[0].id,
-        language_code: "pl",
-        value: "Moderator",
+        language_code: 'pl',
+        value: 'Moderator',
       },
     ]);
 
@@ -148,13 +148,13 @@ export class CreateDatabaseAdminInstallService {
     await this.databaseService.db.insert(core_groups_names).values([
       {
         item_id: adminGroup[0].id,
-        language_code: "en",
-        value: "Administrator",
+        language_code: 'en',
+        value: 'Administrator',
       },
       {
         item_id: adminGroup[0].id,
-        language_code: "pl",
-        value: "Administrator",
+        language_code: 'pl',
+        value: 'Administrator',
       },
     ]);
 
@@ -175,10 +175,10 @@ export class CreateDatabaseAdminInstallService {
       .insert(core_nav)
       .values([
         {
-          href: "/",
+          href: '/',
         },
         {
-          href: "https://vitnode.com/",
+          href: 'https://vitnode.com/',
           external: true,
         },
       ])
@@ -187,21 +187,21 @@ export class CreateDatabaseAdminInstallService {
     await this.databaseService.db.insert(core_nav_name).values([
       {
         item_id: nav[0].id,
-        language_code: "en",
-        value: "Home",
+        language_code: 'en',
+        value: 'Home',
       },
       {
         item_id: nav[0].id,
-        language_code: "pl",
-        value: "Strona główna",
+        language_code: 'pl',
+        value: 'Strona główna',
       },
       {
         item_id: nav[1].id,
-        language_code: "en",
-        value: "VitNode",
+        language_code: 'en',
+        value: 'VitNode',
       },
     ]);
 
-    return "Success!";
+    return 'Success!';
   }
 }

@@ -1,9 +1,9 @@
-import { useSortable } from "@dnd-kit/sortable";
-import { CSS } from "@dnd-kit/utilities";
-import { ChevronRight, Grip } from "lucide-react";
-import * as React from "react";
-import { cn } from "vitnode-frontend/helpers/classnames";
-import { Button } from "vitnode-frontend/components/ui/button";
+import { useSortable } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
+import { ChevronRight, Grip } from 'lucide-react';
+import * as React from 'react';
+import { cn } from 'vitnode-frontend/helpers/classnames';
+import { Button } from 'vitnode-frontend/components/ui/button';
 
 interface Props {
   active: boolean;
@@ -56,17 +56,17 @@ export const ItemDragAndDrop = ({
       className="border-t-0 pl-[var(--spacing)]"
       style={
         {
-          "--spacing": `${indentationWidth * depth}px`,
+          '--spacing': `${indentationWidth * depth}px`,
         } as React.CSSProperties
       }
     >
       <div
         className={cn(
-          "bg-card relative flex flex-wrap items-center gap-2 border p-4 transition-[background-color,opacity] sm:gap-4",
+          'bg-card relative flex flex-wrap items-center gap-2 border p-4 transition-[background-color,opacity] sm:gap-4',
           {
-            "bg-primary/20 animate-pulse": isDropHere,
-            "z-10": isDragging,
-            "opacity-50": active,
+            'bg-primary/20 animate-pulse': isDropHere,
+            'z-10': isDragging,
+            'opacity-50': active,
           },
         )}
         style={{
@@ -78,7 +78,7 @@ export const ItemDragAndDrop = ({
         <div className="flex shrink-0 gap-2">
           <Button
             className={cn(
-              "hover:text-foreground bg-primary/20 text-primary hidden flex-shrink-0 cursor-grab focus:outline-none sm:flex",
+              'hover:text-foreground bg-primary/20 text-primary hidden flex-shrink-0 cursor-grab focus:outline-none sm:flex',
               draggableButtonClassName,
             )}
             style={draggableStyle}
@@ -99,8 +99,8 @@ export const ItemDragAndDrop = ({
               ariaLabel=""
             >
               <ChevronRight
-                className={cn("text-muted-foreground transition-transform", {
-                  "rotate-90": isOpenChildren,
+                className={cn('text-muted-foreground transition-transform', {
+                  'rotate-90': isOpenChildren,
                 })}
               />
             </Button>

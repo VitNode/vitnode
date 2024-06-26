@@ -1,7 +1,7 @@
-import * as fs from "fs";
-import { join } from "path";
+import * as fs from 'fs';
+import { join } from 'path';
 
-import { Injectable } from "@nestjs/common";
+import { Injectable } from '@nestjs/common';
 
 import {
   createConfigForDrizzle,
@@ -9,13 +9,13 @@ import {
   createInfoJSON,
   createModuleAdminSchema,
   createModuleSchema,
-} from "./contents";
+} from './contents';
 
 import {
   ABSOLUTE_PATHS_BACKEND,
   CustomError,
   PluginInfoJSONType,
-} from "../../../../../..";
+} from '../../../../../..';
 
 @Injectable()
 export class CreateFilesAdminPluginsService {
@@ -32,12 +32,12 @@ export class CreateFilesAdminPluginsService {
             content: createModuleSchema({ code }),
           },
           {
-            name: "config.json",
+            name: 'config.json',
             content: createInfoJSON({ code, allow_default: true, ...rest }),
           },
           {
-            name: "versions.json",
-            content: "{}\n",
+            name: 'versions.json',
+            content: '{}\n',
           },
         ],
       },
@@ -45,7 +45,7 @@ export class CreateFilesAdminPluginsService {
         path: ABSOLUTE_PATHS_BACKEND.plugin({ code }).admin,
         files: [
           {
-            name: "admin.module.ts",
+            name: 'admin.module.ts',
             content: createModuleAdminSchema({ code }),
           },
         ],
@@ -54,15 +54,15 @@ export class CreateFilesAdminPluginsService {
         path: ABSOLUTE_PATHS_BACKEND.plugin({ code }).database.init,
         files: [
           {
-            name: "index.ts",
+            name: 'index.ts',
             content: `export default {};\n`,
           },
           {
-            name: "functions.ts",
+            name: 'functions.ts',
             content: createFunctionsDatabase(),
           },
           {
-            name: "drizzle.config.ts",
+            name: 'drizzle.config.ts',
             content: createConfigForDrizzle({ code }),
           },
         ],
@@ -73,7 +73,7 @@ export class CreateFilesAdminPluginsService {
     folders.forEach(folder => {
       if (fs.existsSync(folder.path)) {
         throw new CustomError({
-          code: "PLUGIN_ALREADY_EXISTS",
+          code: 'PLUGIN_ALREADY_EXISTS',
           message: `Plugin already exists in filesystem with "${code}" code!`,
         });
       }
@@ -88,7 +88,7 @@ export class CreateFilesAdminPluginsService {
         fs.writeFile(join(folder.path, file.name), file.content, err => {
           if (err) {
             throw new CustomError({
-              code: "ERROR_CREATING_FILE",
+              code: 'ERROR_CREATING_FILE',
               message: err.message,
             });
           }

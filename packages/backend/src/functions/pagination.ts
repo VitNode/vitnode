@@ -1,8 +1,8 @@
-import { AnyColumn, SQL, asc, desc, eq, gt, gte, lt, lte } from "drizzle-orm";
-import { PgTableWithColumns, TableConfig } from "drizzle-orm/pg-core";
-import { NodePgDatabase } from "drizzle-orm/node-postgres";
+import { AnyColumn, SQL, asc, desc, eq, gt, gte, lt, lte } from 'drizzle-orm';
+import { PgTableWithColumns, TableConfig } from 'drizzle-orm/pg-core';
+import { NodePgDatabase } from 'drizzle-orm/node-postgres';
 
-import { PageInfo, SortDirectionEnum } from "../utils";
+import { PageInfo, SortDirectionEnum } from '../utils';
 
 type DataInterface<T> = T & {
   id: number;

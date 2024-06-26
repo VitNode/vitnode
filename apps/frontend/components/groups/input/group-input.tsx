@@ -1,20 +1,20 @@
-import { useTranslations } from "next-intl";
-import * as React from "react";
-import { X } from "lucide-react";
-import { cn } from "vitnode-frontend/helpers/classnames";
+import { useTranslations } from 'next-intl';
+import * as React from 'react';
+import { X } from 'lucide-react';
+import { cn } from 'vitnode-frontend/helpers/classnames';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "vitnode-frontend/components/ui/popover";
-import { Button } from "vitnode-frontend/components/ui/button";
-import { Badge } from "vitnode-frontend/components/ui/badge";
-import { Loader } from "vitnode-frontend/components/ui/loader";
+} from 'vitnode-frontend/components/ui/popover';
+import { Button } from 'vitnode-frontend/components/ui/button';
+import { Badge } from 'vitnode-frontend/components/ui/badge';
+import { Loader } from 'vitnode-frontend/components/ui/loader';
 
-import { GroupInputContent } from "./content/content";
+import { GroupInputContent } from './content/content';
 
-import { TextLanguage } from "../../../graphql/hooks";
-import { useTextLang } from "../../../plugins/core/hooks/use-text-lang";
+import { TextLanguage } from '../../../graphql/hooks';
+import { useTextLang } from '../../../plugins/core/hooks/use-text-lang';
 
 export interface GroupInputItem {
   id: number;
@@ -47,7 +47,7 @@ export const GroupInput = ({
   value: currentValue,
   ...rest
 }: MultiProps | SingleProps) => {
-  const t = useTranslations("core.group_input");
+  const t = useTranslations('core.group_input');
   const values = Array.isArray(currentValue)
     ? currentValue
     : currentValue
@@ -61,13 +61,13 @@ export const GroupInput = ({
       <PopoverTrigger asChild>
         <Button
           variant="outline"
-          className={cn("w-full justify-start", className, {
-            "text-muted-foreground": values.length === 0,
+          className={cn('w-full justify-start', className, {
+            'text-muted-foreground': values.length === 0,
           })}
           {...rest}
         >
           {values.length === 0
-            ? t("placeholder")
+            ? t('placeholder')
             : values.map(item => {
                 const onRemove = () => {
                   if (multiple) {
@@ -90,7 +90,7 @@ export const GroupInput = ({
                       onRemove();
                     }}
                     onKeyDown={e => {
-                      if (e.key === "Enter") {
+                      if (e.key === 'Enter') {
                         e.stopPropagation();
                         e.preventDefault();
                         onRemove();

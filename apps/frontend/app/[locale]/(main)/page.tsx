@@ -1,6 +1,6 @@
-import * as React from "react";
-import { Metadata } from "next";
-import { getSessionData } from "vitnode-frontend/graphql/get-session-data";
+import * as React from 'react';
+import { Metadata } from 'next';
+import { getSessionData } from 'vitnode-frontend/graphql/get-session-data';
 
 interface Props {
   params: {
@@ -11,7 +11,7 @@ interface Props {
 const getDescription = async ({
   locale,
 }: {
-  locale: Props["params"]["locale"];
+  locale: Props['params']['locale'];
 }): Promise<string> => {
   const {
     data: {
@@ -25,7 +25,7 @@ const getDescription = async ({
     return textFromLang.value;
   }
 
-  return site_description[0]?.value ?? "";
+  return site_description[0]?.value ?? '';
 };
 
 export async function generateMetadata({

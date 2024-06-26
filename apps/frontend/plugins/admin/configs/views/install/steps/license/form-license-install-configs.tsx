@@ -1,26 +1,26 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useTranslations } from "next-intl";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
-import { Button } from "vitnode-frontend/components/ui/button";
-import { Checkbox } from "vitnode-frontend/components/ui/checkbox";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useTranslations } from 'next-intl';
+import { useForm } from 'react-hook-form';
+import * as z from 'zod';
+import { Button } from 'vitnode-frontend/components/ui/button';
+import { Checkbox } from 'vitnode-frontend/components/ui/checkbox';
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormLabel,
-} from "vitnode-frontend/components/ui/form";
+} from 'vitnode-frontend/components/ui/form';
 
-import { useInstallVitnode } from "../../hooks/use-install-vitnode";
+import { useInstallVitnode } from '../../hooks/use-install-vitnode';
 
 export const FormLicenseInstallConfigs = () => {
-  const tCore = useTranslations("core");
+  const tCore = useTranslations('core');
   const { setCurrentStep } = useInstallVitnode();
 
   const formSchema = z.object({
     agree: z.boolean({
-      required_error: tCore("forms.empty"),
+      required_error: tCore('forms.empty'),
     }),
   });
 
@@ -59,7 +59,7 @@ export const FormLicenseInstallConfigs = () => {
           )}
         />
 
-        <Button type="submit" disabled={!form.watch("agree")}>
+        <Button type="submit" disabled={!form.watch('agree')}>
           Next step
         </Button>
       </form>

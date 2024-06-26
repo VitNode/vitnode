@@ -4,16 +4,16 @@ import {
   DragOverEvent,
   DragStartEvent,
   UniqueIdentifier,
-} from "@dnd-kit/core";
-import * as React from "react";
-import { arrayMove } from "@dnd-kit/sortable";
+} from '@dnd-kit/core';
+import * as React from 'react';
+import { arrayMove } from '@dnd-kit/sortable';
 import {
   FlatTree,
   WithChildren,
   flattenTree,
-} from "vitnode-frontend/helpers/flatten-tree";
+} from 'vitnode-frontend/helpers/flatten-tree';
 
-import { useProjection } from "./use-projection";
+import { useProjection } from './use-projection';
 
 function removeChildrenOf<T extends object>({
   ids,
@@ -138,7 +138,7 @@ export function useDragAndDrop<T extends object>({ data }: Args<T>) {
     maxDepth,
   }: OnDragMoveArgs) => {
     if (maxDepth === undefined && !indentationWidth) {
-      throw new Error("You must provide either maxDepth abd indentationWidth");
+      throw new Error('You must provide either maxDepth abd indentationWidth');
     }
 
     if (!activeId || !overId) return;

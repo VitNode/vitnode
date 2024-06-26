@@ -1,12 +1,12 @@
-import { Injectable } from "@nestjs/common";
-import { eq } from "drizzle-orm";
+import { Injectable } from '@nestjs/common';
+import { eq } from 'drizzle-orm';
 
-import { DeleteAdminGroupsArgs } from "./dto/delete.args";
+import { DeleteAdminGroupsArgs } from './dto/delete.args';
 
-import { DatabaseService } from "../../../../database";
-import { NotFoundError } from "../../../../errors";
-import { core_users } from "../../../../templates/core/admin/database/schema/users";
-import { core_groups } from "../../../../templates/core/admin/database/schema/groups";
+import { DatabaseService } from '../../../../database';
+import { NotFoundError } from '../../../../errors';
+import { core_users } from '../../../../templates/core/admin/database/schema/users';
+import { core_groups } from '../../../../templates/core/admin/database/schema/groups';
 
 @Injectable()
 export class DeleteAdminGroupsService {
@@ -18,7 +18,7 @@ export class DeleteAdminGroupsService {
     });
 
     if (!group) {
-      throw new NotFoundError("Group");
+      throw new NotFoundError('Group');
     }
 
     // Find default group
@@ -28,7 +28,7 @@ export class DeleteAdminGroupsService {
       });
 
     if (!defaultGroup) {
-      throw new NotFoundError("Default group");
+      throw new NotFoundError('Default group');
     }
 
     // Move users to default group
@@ -44,6 +44,6 @@ export class DeleteAdminGroupsService {
       .delete(core_groups)
       .where(eq(core_groups.id, id));
 
-    return "Success!";
+    return 'Success!';
   }
 }

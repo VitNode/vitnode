@@ -1,9 +1,9 @@
-import { join } from "path";
-import * as fs from "fs";
+import { join } from 'path';
+import * as fs from 'fs';
 
-import { ShowAdminManifestMetadataObj } from "./show/dto/show.obj";
+import { ShowAdminManifestMetadataObj } from './show/dto/show.obj';
 
-import { ABSOLUTE_PATHS_BACKEND, NotFoundError } from "../../../..";
+import { ABSOLUTE_PATHS_BACKEND, NotFoundError } from '../../../..';
 
 export const getManifest = ({
   lang_code,
@@ -12,16 +12,16 @@ export const getManifest = ({
 }): ShowAdminManifestMetadataObj => {
   const path = join(
     ABSOLUTE_PATHS_BACKEND.uploads.public,
-    "assets",
+    'assets',
     lang_code,
-    "manifest.webmanifest",
+    'manifest.webmanifest',
   );
 
   if (!fs.existsSync(path)) {
     throw new NotFoundError(`Manifest for language code: ${lang_code}`);
   }
 
-  const file = fs.readFileSync(path, "utf8");
+  const file = fs.readFileSync(path, 'utf8');
   const data: ShowAdminManifestMetadataObj = JSON.parse(file);
 
   return data;

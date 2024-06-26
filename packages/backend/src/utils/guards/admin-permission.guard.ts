@@ -3,12 +3,12 @@ import {
   ExecutionContext,
   Inject,
   Injectable,
-} from "@nestjs/common";
-import { Reflector } from "@nestjs/core";
-import { GqlExecutionContext } from "@nestjs/graphql";
+} from '@nestjs/common';
+import { Reflector } from '@nestjs/core';
+import { GqlExecutionContext } from '@nestjs/graphql';
 
-import { Ctx } from "../context";
-import { IOAdminAuthGuards } from "./admin-auth.guard";
+import { Ctx } from '../context';
+import { IOAdminAuthGuards } from './admin-auth.guard';
 
 // TODO: Implement in DOCS
 // ? Example use
@@ -20,7 +20,7 @@ export class AdminPermissionGuards implements CanActivate {
   // TODO: Add inject for service // Basic service is not compatible with this package
   constructor(
     private readonly reflector: Reflector,
-    @Inject("IOAdminAuthGuards") private readonly service: IOAdminAuthGuards,
+    @Inject('IOAdminAuthGuards') private readonly service: IOAdminAuthGuards,
     // private readonly databaseService: DatabaseService
   ) {}
 

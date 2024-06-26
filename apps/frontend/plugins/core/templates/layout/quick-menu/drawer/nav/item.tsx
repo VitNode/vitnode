@@ -1,13 +1,13 @@
-import * as React from "react";
-import { Link, usePathname } from "vitnode-frontend/navigation";
-import { cn } from "vitnode-frontend/helpers/classnames";
-import { buttonVariants } from "vitnode-frontend/components/ui/button";
-import { DrawerClose } from "vitnode-frontend/components/ui/drawer";
+import * as React from 'react';
+import { Link, usePathname } from 'vitnode-frontend/navigation';
+import { cn } from 'vitnode-frontend/helpers/classnames';
+import { buttonVariants } from 'vitnode-frontend/components/ui/button';
+import { DrawerClose } from 'vitnode-frontend/components/ui/drawer';
 
-import { ShowCoreNav } from "@/graphql/hooks";
-import { classNameDrawerQuickMenu } from "../drawer";
+import { ShowCoreNav } from '@/graphql/hooks';
+import { classNameDrawerQuickMenu } from '../drawer';
 
-interface Props extends Omit<ShowCoreNav, "__typename" | "children"> {
+interface Props extends Omit<ShowCoreNav, '__typename' | 'children'> {
   children: React.ReactNode;
 }
 
@@ -20,7 +20,7 @@ export const ItemNavDrawerQuickMenu = ({
 }: Props) => {
   const pathname = usePathname();
   const active =
-    href === pathname || (pathname.startsWith(href) && href !== "/");
+    href === pathname || (pathname.startsWith(href) && href !== '/');
 
   return (
     <DrawerClose key={id} asChild>
@@ -28,18 +28,18 @@ export const ItemNavDrawerQuickMenu = ({
         href={href}
         className={cn(
           buttonVariants({
-            variant: "ghost",
+            variant: 'ghost',
             className: cn(
               classNameDrawerQuickMenu,
-              "h-auto flex-col items-start gap-1",
+              'h-auto flex-col items-start gap-1',
               {
-                "bg-accent": active,
+                'bg-accent': active,
               },
             ),
           }),
         )}
-        target={external ? "_blank" : undefined}
-        rel={external ? "noopener noreferrer" : undefined}
+        target={external ? '_blank' : undefined}
+        rel={external ? 'noopener noreferrer' : undefined}
       >
         {children}
       </Link>

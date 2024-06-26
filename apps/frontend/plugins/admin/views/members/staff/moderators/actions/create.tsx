@@ -1,22 +1,22 @@
-import { useTranslations } from "next-intl";
-import { Plus } from "lucide-react";
-import * as React from "react";
+import { useTranslations } from 'next-intl';
+import { Plus } from 'lucide-react';
+import * as React from 'react';
 import {
   Dialog,
   DialogContent,
   DialogTrigger,
-} from "vitnode-frontend/components/ui/dialog";
-import { Button } from "vitnode-frontend/components/ui/button";
-import { Loader } from "vitnode-frontend/components/ui/loader";
+} from 'vitnode-frontend/components/ui/dialog';
+import { Button } from 'vitnode-frontend/components/ui/button';
+import { Loader } from 'vitnode-frontend/components/ui/loader';
 
 const CreateEditFormModeratorsStaffAdmin = React.lazy(async () =>
-  import("../create-edit-form/create-edit-form").then(module => ({
+  import('../create-edit-form/create-edit-form').then(module => ({
     default: module.CreateEditFormModeratorsStaffAdmin,
   })),
 );
 
 export const CreateActionsModeratorsStaffAdmin = () => {
-  const t = useTranslations("core");
+  const t = useTranslations('core');
 
   return (
     <>
@@ -24,7 +24,7 @@ export const CreateActionsModeratorsStaffAdmin = () => {
         <DialogTrigger asChild>
           <Button>
             <Plus />
-            {t("create")}
+            {t('create')}
           </Button>
         </DialogTrigger>
 

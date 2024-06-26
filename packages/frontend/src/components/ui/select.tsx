@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import * as SelectPrimitive from "@radix-ui/react-select";
-import { ComponentPropsWithoutRef } from "react";
-import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from "lucide-react";
+import * as SelectPrimitive from '@radix-ui/react-select';
+import { ComponentPropsWithoutRef } from 'react';
+import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from 'lucide-react';
 
-import { cn } from "../../helpers/classnames";
+import { cn } from '../../helpers/classnames';
 
 const Select = SelectPrimitive.Root;
 
@@ -19,7 +19,7 @@ const SelectTrigger = ({
 }: ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger>) => (
   <SelectPrimitive.Trigger
     className={cn(
-      "border-input bg-background ring-offset-background placeholder:text-muted-foreground focus:ring-ring flex h-10 w-full items-center justify-between rounded-md border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1",
+      'border-input bg-background ring-offset-background placeholder:text-muted-foreground focus:ring-ring flex h-10 w-full items-center justify-between rounded-md border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1',
       className,
     )}
     {...props}
@@ -37,7 +37,7 @@ const SelectScrollUpButton = ({
 }: ComponentPropsWithoutRef<typeof SelectPrimitive.ScrollUpButton>) => (
   <SelectPrimitive.ScrollUpButton
     className={cn(
-      "flex cursor-default items-center justify-center py-1",
+      'flex cursor-default items-center justify-center py-1',
       className,
     )}
     {...props}
@@ -52,7 +52,7 @@ const SelectScrollDownButton = ({
 }: ComponentPropsWithoutRef<typeof SelectPrimitive.ScrollDownButton>) => (
   <SelectPrimitive.ScrollDownButton
     className={cn(
-      "flex cursor-default items-center justify-center py-1",
+      'flex cursor-default items-center justify-center py-1',
       className,
     )}
     {...props}
@@ -64,15 +64,15 @@ const SelectScrollDownButton = ({
 const SelectContent = ({
   children,
   className,
-  position = "popper",
+  position = 'popper',
   ...props
 }: ComponentPropsWithoutRef<typeof SelectPrimitive.Content>) => (
   <SelectPrimitive.Portal>
     <SelectPrimitive.Content
       className={cn(
-        "bg-popover text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 relative z-50 max-h-96 min-w-[8rem] overflow-hidden rounded-md border shadow-md",
-        position === "popper" &&
-          "data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1",
+        'bg-popover text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 relative z-50 max-h-96 min-w-[8rem] overflow-hidden rounded-md border shadow-md',
+        position === 'popper' &&
+          'data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1',
         className,
       )}
       position={position}
@@ -81,9 +81,9 @@ const SelectContent = ({
       <SelectScrollUpButton />
       <SelectPrimitive.Viewport
         className={cn(
-          "p-1",
-          position === "popper" &&
-            "h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)]",
+          'p-1',
+          position === 'popper' &&
+            'h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)]',
         )}
       >
         {children}
@@ -98,7 +98,7 @@ const SelectLabel = ({
   ...props
 }: ComponentPropsWithoutRef<typeof SelectPrimitive.Label>) => (
   <SelectPrimitive.Label
-    className={cn("px-2 py-1.5 text-sm font-semibold", className)}
+    className={cn('px-2 py-1.5 text-sm font-semibold', className)}
     {...props}
   />
 );
@@ -110,7 +110,7 @@ const SelectItem = ({
 }: ComponentPropsWithoutRef<typeof SelectPrimitive.Item>) => (
   <SelectPrimitive.Item
     className={cn(
-      "focus:bg-accent focus:text-accent-foreground relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+      'focus:bg-accent focus:text-accent-foreground relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
       className,
     )}
     {...props}
@@ -129,7 +129,7 @@ const SelectSeparator = ({
   ...props
 }: ComponentPropsWithoutRef<typeof SelectPrimitive.Separator>) => (
   <SelectPrimitive.Separator
-    className={cn("bg-muted -mx-1 my-1 h-px", className)}
+    className={cn('bg-muted -mx-1 my-1 h-px', className)}
     {...props}
   />
 );

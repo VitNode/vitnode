@@ -1,27 +1,27 @@
-import { useTranslations } from "next-intl";
-import { cn } from "vitnode-frontend/helpers/classnames";
+import { useTranslations } from 'next-intl';
+import { cn } from 'vitnode-frontend/helpers/classnames';
 import {
   Drawer,
   DrawerClose,
   DrawerContent,
   DrawerTrigger,
-} from "vitnode-frontend/components/ui/drawer";
-import { buttonVariants } from "vitnode-frontend/components/ui/button";
+} from 'vitnode-frontend/components/ui/drawer';
+import { buttonVariants } from 'vitnode-frontend/components/ui/button';
 
-import { useSettingsView } from "@/plugins/core/hooks/settings/use-settings-view";
-import { ItemNavSettings } from "./item/item-nav-settings";
+import { useSettingsView } from '@/plugins/core/hooks/settings/use-settings-view';
+import { ItemNavSettings } from './item/item-nav-settings';
 
 export const DrawerNavSettings = () => {
-  const t = useTranslations("core");
+  const t = useTranslations('core');
   const { navItems } = useSettingsView();
 
   return (
     <div className="block lg:hidden">
       <Drawer>
         <DrawerTrigger
-          className={cn(buttonVariants({ variant: "ghost" }), "w-full")}
+          className={cn(buttonVariants({ variant: 'ghost' }), 'w-full')}
         >
-          {t("settings.open_sheet")}
+          {t('settings.open_sheet')}
         </DrawerTrigger>
 
         <DrawerContent>
