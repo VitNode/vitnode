@@ -1,0 +1,30 @@
+{
+  "index": {
+    "title": "Home",
+    "type": "page",
+    "display": "hidden",
+    "theme": {
+      "layout": "raw"
+    }
+  },
+  "docs": {
+    "title": "Docs",
+    "type": "page"
+  },
+  "features": {
+    "title": "Features",
+    "type": "page"
+  },
+  "plugins": {
+    "title": "Plugins",
+    "type": "page"
+  },
+  "about": {
+    "title": "About",
+    "type": "page"
+  },
+  "contact": {
+    "title": "Contact",
+    "type": "page"
+  }
+}
