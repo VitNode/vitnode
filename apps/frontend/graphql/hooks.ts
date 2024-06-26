@@ -1600,23 +1600,6 @@ export type Admin_Blog_Categories__ShowQueryVariables = Exact<{ [key: string]: n
 
 export type Admin_Blog_Categories__ShowQuery = { __typename?: 'Query', blog_categories__show: { __typename?: 'ShowBlogCategoriesObj', edges: Array<{ __typename?: 'ShowBlogCategories', color: string, id: number, position: number, description?: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> | null, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }> } };
 
-export type Core_Editor_Files__DeleteMutationVariables = Exact<{
-  id: Scalars['Int']['input'];
-  securityKey?: InputMaybe<Scalars['String']['input']>;
-}>;
-
-
-export type Core_Editor_Files__DeleteMutation = { __typename?: 'Mutation', core_editor_files__delete: string };
-
-export type Core_Editor_Files__UploadMutationVariables = Exact<{
-  file: Scalars['Upload']['input'];
-  folder: Scalars['String']['input'];
-  plugin: Scalars['String']['input'];
-}>;
-
-
-export type Core_Editor_Files__UploadMutation = { __typename?: 'Mutation', core_editor_files__upload: { __typename?: 'ShowCoreFiles', extension: string, file_name: string, file_size: number, mimetype: string, id: number, height?: number | null, width?: number | null, dir_folder: string, security_key?: string | null, file_alt?: string | null, file_name_original: string } };
-
 export type Core_Members__Sign_UpMutationVariables = Exact<{
   email: Scalars['String']['input'];
   name: Scalars['String']['input'];
@@ -1654,11 +1637,6 @@ export type Core_Sessions__Sign_OutMutationVariables = Exact<{ [key: string]: ne
 
 export type Core_Sessions__Sign_OutMutation = { __typename?: 'Mutation', core_sessions__sign_out: string };
 
-export type Core_MetadataQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type Core_MetadataQuery = { __typename?: 'Query', core_settings__show: { __typename?: 'ShowSettingsObj', site_name: string, site_short_name: string, site_copyright: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, site_description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
-
 export type Core_MiddlewareQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -1668,11 +1646,6 @@ export type Core_Middleware__ShowQueryVariables = Exact<{ [key: string]: never; 
 
 
 export type Core_Middleware__ShowQuery = { __typename?: 'Query', core_middleware__show: { __typename?: 'ShowCoreMiddlewareObj', plugins: Array<string>, languages: Array<{ __typename?: 'LanguagesCoreMiddleware', code: string, default: boolean, enabled: boolean }> } };
-
-export type Core_Sessions__AuthorizationQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type Core_Sessions__AuthorizationQuery = { __typename?: 'Query', core_sessions__authorization: { __typename?: 'AuthorizationCoreSessionsObj', plugin_default: string, user?: { __typename?: 'AuthorizationCurrentUserObj', email: string, id: number, name_seo: string, is_admin: boolean, is_mod: boolean, name: string, newsletter: boolean, avatar_color: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, file_name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } | null, files: { __typename?: 'FilesAuthorizationCoreSessions', allow_upload: boolean, max_storage_for_submit: number, total_max_storage: number, space_used: number } }, core_languages__show: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', code: string }> }, core_nav__show: { __typename?: 'ShowCoreNavObj', edges: Array<{ __typename?: 'ShowCoreNav', id: number, href: string, external: boolean, position: number, icon?: string | null, children: Array<{ __typename?: 'ShowCoreNavItem', id: number, position: number, external: boolean, href: string, icon?: string | null, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }>, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }> }, core_plugins__show: Array<{ __typename?: 'ShowCorePluginsObj', code: string, allow_default: boolean }>, core_settings__show: { __typename?: 'ShowSettingsObj', site_copyright: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, site_description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
 
 export type Core_Languages__ShowQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -2724,28 +2697,6 @@ export const Admin_Blog_Categories__Show = gql`
   }
 }
     `;
-export const Core_Editor_Files__Delete = gql`
-    mutation Core_editor_files__delete($id: Int!, $securityKey: String) {
-  core_editor_files__delete(id: $id, security_key: $securityKey)
-}
-    `;
-export const Core_Editor_Files__Upload = gql`
-    mutation core_editor_files__upload($file: Upload!, $folder: String!, $plugin: String!) {
-  core_editor_files__upload(file: $file, folder: $folder, plugin: $plugin) {
-    extension
-    file_name
-    file_size
-    mimetype
-    id
-    height
-    width
-    dir_folder
-    security_key
-    file_alt
-    file_name_original
-  }
-}
-    `;
 export const Core_Members__Sign_Up = gql`
     mutation Core_members__sign_up($email: String!, $name: String!, $password: String!, $newsletter: Boolean) {
   core_members__sign_up(
@@ -2785,22 +2736,6 @@ export const Core_Sessions__Sign_In = gql`
 export const Core_Sessions__Sign_Out = gql`
     mutation Core_sessions__sign_out {
   core_sessions__sign_out
-}
-    `;
-export const Core_Metadata = gql`
-    query Core_metadata {
-  core_settings__show {
-    site_copyright {
-      language_code
-      value
-    }
-    site_description {
-      language_code
-      value
-    }
-    site_name
-    site_short_name
-  }
 }
     `;
 export const Core_Middleware = gql`
@@ -2843,92 +2778,6 @@ export const Core_Middleware__Show = gql`
       enabled
     }
     plugins
-  }
-}
-    `;
-export const Core_Sessions__Authorization = gql`
-    query Core_sessions__authorization {
-  core_sessions__authorization {
-    user {
-      email
-      id
-      name_seo
-      is_admin
-      is_mod
-      name
-      newsletter
-      avatar_color
-      avatar {
-        id
-        dir_folder
-        file_name
-      }
-      group {
-        name {
-          language_code
-          value
-        }
-        id
-      }
-    }
-    plugin_default
-    files {
-      allow_upload
-      max_storage_for_submit
-      total_max_storage
-      space_used
-    }
-  }
-  core_languages__show {
-    edges {
-      code
-    }
-  }
-  core_nav__show {
-    edges {
-      children {
-        description {
-          language_code
-          value
-        }
-        id
-        name {
-          language_code
-          value
-        }
-        position
-        external
-        href
-        icon
-      }
-      description {
-        language_code
-        value
-      }
-      id
-      name {
-        language_code
-        value
-      }
-      href
-      external
-      position
-      icon
-    }
-  }
-  core_plugins__show {
-    code
-    allow_default
-  }
-  core_settings__show {
-    site_copyright {
-      language_code
-      value
-    }
-    site_description {
-      language_code
-      value
-    }
   }
 }
     `;

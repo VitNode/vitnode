@@ -25,9 +25,9 @@ import {
   SelectValue,
 } from 'vitnode-frontend/components/ui/select';
 import { Button } from 'vitnode-frontend/components/ui/button';
+import { IconInput } from 'vitnode-frontend/components/icon/input/icon-input';
 
 import { ShowAdminNavPluginsObj } from '@/graphql/hooks';
-import { IconInput } from '@/components/icon/input/icon-input';
 import { useCreateNavPluginAdmin } from './hooks/use-create-nav-plugin-admin';
 
 export interface CreateEditNavDevPluginAdminProps {

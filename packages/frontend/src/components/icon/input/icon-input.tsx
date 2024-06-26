@@ -3,17 +3,14 @@
 import { Plus, X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import * as React from 'react';
-import { cn } from 'vitnode-frontend/helpers/classnames';
-import { Button } from 'vitnode-frontend/components/ui/button';
-import { Loader } from 'vitnode-frontend/components/ui/loader';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from 'vitnode-frontend/components/ui/popover';
 
 import { IconInputProps } from './content/content';
 import { IconLucideNames } from '../icon';
+
+import { Popover, PopoverContent, PopoverTrigger } from '../../ui/popover';
+import { cn } from '../../../helpers/classnames';
+import { Button } from '../../ui/button';
+import { Loader } from '../../ui/loader';
 
 const IconClient = React.lazy(async () =>
   import('../icon-client').then(module => ({

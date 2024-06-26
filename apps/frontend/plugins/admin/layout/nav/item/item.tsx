@@ -1,7 +1,7 @@
 import { useTranslations } from 'next-intl';
+import { Icon } from 'vitnode-frontend/components/icon/icon';
 
 import { ItemItemNavAdminProps, LinkItemNavAdmin } from './link';
-import { Icon } from '@/components/icon/icon';
 
 interface Props {
   id: string;

@@ -3,10 +3,9 @@ import { ReactCropperElement } from 'react-cropper';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 import { useDialog } from 'vitnode-frontend/components/ui/dialog';
+import { useSession } from 'vitnode-frontend/hooks/use-session';
 
 import { mutationUploadApi } from './api/mutation-upload-api';
-
-import { useSession } from '../../use-session';
 
 export const useCopperModalChangeAvatar = () => {
   const t = useTranslations('core');

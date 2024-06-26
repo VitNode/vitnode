@@ -1147,6 +1147,23 @@ export type User = {
 
 export type UserOrGroupCoreStaffUnion = StaffGroupUser | User;
 
+export type Core_Editor_Files__DeleteMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+  securityKey?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type Core_Editor_Files__DeleteMutation = { __typename?: 'Mutation', core_editor_files__delete: string };
+
+export type Core_Editor_Files__UploadMutationVariables = Exact<{
+  file: Scalars['Upload']['input'];
+  folder: Scalars['String']['input'];
+  plugin: Scalars['String']['input'];
+}>;
+
+
+export type Core_Editor_Files__UploadMutation = { __typename?: 'Mutation', core_editor_files__upload: { __typename?: 'ShowCoreFiles', extension: string, file_name: string, file_size: number, mimetype: string, id: number, height?: number | null, width?: number | null, dir_folder: string, security_key?: string | null, file_alt?: string | null, file_name_original: string } };
+
 export type Core_MiddlewareQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -1158,6 +1175,28 @@ export type Core_Sessions__AuthorizationQueryVariables = Exact<{ [key: string]: 
 export type Core_Sessions__AuthorizationQuery = { __typename?: 'Query', core_sessions__authorization: { __typename?: 'AuthorizationCoreSessionsObj', plugin_default: string, user?: { __typename?: 'AuthorizationCurrentUserObj', email: string, id: number, name_seo: string, is_admin: boolean, is_mod: boolean, name: string, newsletter: boolean, avatar_color: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, file_name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } | null, files: { __typename?: 'FilesAuthorizationCoreSessions', allow_upload: boolean, max_storage_for_submit: number, total_max_storage: number, space_used: number } }, core_languages__show: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', code: string }> }, core_nav__show: { __typename?: 'ShowCoreNavObj', edges: Array<{ __typename?: 'ShowCoreNav', id: number, href: string, external: boolean, position: number, icon?: string | null, children: Array<{ __typename?: 'ShowCoreNavItem', id: number, position: number, external: boolean, href: string, icon?: string | null, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }>, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }> }, core_plugins__show: Array<{ __typename?: 'ShowCorePluginsObj', code: string, allow_default: boolean }>, core_settings__show: { __typename?: 'ShowSettingsObj', site_copyright: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, site_description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
 
 
+export const Core_Editor_Files__Delete = gql`
+    mutation Core_editor_files__delete($id: Int!, $securityKey: String) {
+  core_editor_files__delete(id: $id, security_key: $securityKey)
+}
+    `;
+export const Core_Editor_Files__Upload = gql`
+    mutation core_editor_files__upload($file: Upload!, $folder: String!, $plugin: String!) {
+  core_editor_files__upload(file: $file, folder: $folder, plugin: $plugin) {
+    extension
+    file_name
+    file_size
+    mimetype
+    id
+    height
+    width
+    dir_folder
+    security_key
+    file_alt
+    file_name_original
+  }
+}
+    `;
 export const Core_Middleware = gql`
     query Core_middleware {
   core_languages__show {
