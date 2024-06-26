@@ -9,10 +9,10 @@ import {
 } from "vitnode-frontend/components/ui/drawer";
 import { Button, buttonVariants } from "vitnode-frontend/components/ui/button";
 import { Separator } from "vitnode-frontend/components/ui/separator";
+import { useSession } from "vitnode-frontend/hooks/use-session";
 
 import { HeaderDrawerQuickMenu } from "./header";
 import { useSignOutAPI } from "@/plugins/core/hooks/sign/out/use-sign-out-api";
-import { useSession } from "@/plugins/core/hooks/use-session";
 import { NavDrawerQuickMenu } from "./nav/nav";
 
 export const classNameDrawerQuickMenu =

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { cookies } from "next/headers";
-import { fetcher } from "vitnode-frontend/helpers/fetcher";
+import { fetcher } from "vitnode-frontend/graphql/fetcher";
 
 import {
   Core_Sessions__Devices__Show,

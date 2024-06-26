@@ -154,6 +154,7 @@ importers:
         specifier: ^10.9.2
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         version: 10.9.2(@swc/core@1.6.3(@swc/helpers@0.5.11))(@types/node@20.14.7)(typescript@5.5.2)
 =======
         version: 10.9.2(@swc/core@1.6.1(@swc/helpers@0.5.11))(@types/node@20.14.2)(typescript@5.4.5)
@@ -173,6 +174,9 @@ importers:
 =======
         version: 10.9.2(@swc/core@1.6.5)(@types/node@20.14.8)(typescript@5.5.2)
 >>>>>>> 2e0ec75a (fix(backend): Add dotenv to init script for database)
+=======
+        version: 10.9.2(@swc/core@1.6.5(@swc/helpers@0.5.11))(@types/node@20.14.8)(typescript@5.5.2)
+>>>>>>> 38444a5e (perf(frontend): Move auth layout to package)
       typescript:
         specifier: ^5.5.2
         version: 5.5.2
@@ -468,7 +472,7 @@ importers:
         version: 3.4.4(ts-node@10.9.2(@swc/core@1.6.5)(@types/node@20.14.8)(typescript@5.5.2))
       ts-node:
         specifier: ^10.9.2
-        version: 10.9.2(@swc/core@1.6.5)(@types/node@20.14.8)(typescript@5.5.2)
+        version: 10.9.2(@swc/core@1.6.5(@swc/helpers@0.5.11))(@types/node@20.14.8)(typescript@5.5.2)
       typescript:
         specifier: ^5.5.2
         version: 5.5.2
@@ -607,7 +611,7 @@ importers:
         version: 2.1.4(@swc/helpers@0.5.11)(eslint@8.57.0)(ts-node@10.9.2(@swc/core@1.6.5(@swc/helpers@0.5.11))(@types/node@20.14.8)(typescript@5.5.2))
       ts-node:
         specifier: ^10.9.2
-        version: 10.9.2(@swc/core@1.6.5)(@types/node@20.14.8)(typescript@5.5.2)
+        version: 10.9.2(@swc/core@1.6.5(@swc/helpers@0.5.11))(@types/node@20.14.8)(typescript@5.5.2)
       typescript:
         specifier: ^5.5.2
         version: 5.5.2
@@ -761,9 +765,6 @@ importers:
       framer-motion:
         specifier: ^11.2.12
         version: 11.2.12(@emotion/is-prop-valid@1.2.2)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
-      graphql:
-        specifier: ^16.9.0
-        version: 16.9.0
       html-react-parser:
         specifier: ^5.1.10
         version: 5.1.10(@types/react@18.3.3)(react@19.0.0-rc.0)
@@ -828,6 +829,18 @@ importers:
         specifier: ^3.23.8
         version: 3.23.8
     devDependencies:
+      '@graphql-codegen/cli':
+        specifier: ^5.0.2
+        version: 5.0.2(@types/node@20.14.8)(graphql@16.9.0)(typescript@5.5.2)
+      '@graphql-codegen/typescript':
+        specifier: ^4.0.7
+        version: 4.0.7(graphql@16.9.0)
+      '@graphql-codegen/typescript-document-nodes':
+        specifier: ^4.0.7
+        version: 4.0.7(graphql@16.9.0)
+      '@graphql-codegen/typescript-operations':
+        specifier: ^4.2.1
+        version: 4.2.1(graphql@16.9.0)
       '@types/node':
         specifier: ^20.14.8
         version: 20.14.8
@@ -843,15 +856,24 @@ importers:
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
+      dotenv:
+        specifier: ^16.4.5
+        version: 16.4.5
       eslint-config-vitnode:
         specifier: workspace:*
         version: link:../eslint-config-vitnode
+      graphql:
+        specifier: ^16.9.0
+        version: 16.9.0
+      graphql-tag:
+        specifier: ^2.12.6
+        version: 2.12.6(graphql@16.9.0)
       tailwind-merge:
         specifier: ^2.3.0
         version: 2.3.0
       ts-node:
         specifier: ^10.9.2
-        version: 10.9.2(@swc/core@1.6.5)(@types/node@20.14.8)(typescript@5.5.2)
+        version: 10.9.2(@swc/core@1.6.5(@swc/helpers@0.5.11))(@types/node@20.14.8)(typescript@5.5.2)
       typescript:
         specifier: ^5.5.2
         version: 5.5.2
@@ -16831,7 +16853,7 @@ snapshots:
       yaml: 2.4.5
     optionalDependencies:
       postcss: 8.4.38
-      ts-node: 10.9.2(@swc/core@1.6.5)(@types/node@20.14.8)(typescript@5.5.2)
+      ts-node: 10.9.2(@swc/core@1.6.5(@swc/helpers@0.5.11))(@types/node@20.14.8)(typescript@5.5.2)
 
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -18365,6 +18387,7 @@ snapshots:
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   ts-node@10.9.2(@swc/core@1.6.3(@swc/helpers@0.5.11))(@types/node@20.14.7)(typescript@5.5.2):
 =======
   ts-node@10.9.2(@swc/core@1.6.1(@swc/helpers@0.5.11))(@types/node@20.14.2)(typescript@5.4.5):
@@ -18420,6 +18443,9 @@ snapshots:
 =======
   ts-node@10.9.2(@swc/core@1.6.5)(@types/node@20.14.8)(typescript@5.5.2):
 >>>>>>> 2e0ec75a (fix(backend): Add dotenv to init script for database)
+=======
+  ts-node@10.9.2(@swc/core@1.6.5(@swc/helpers@0.5.11))(@types/node@20.14.8)(typescript@5.5.2):
+>>>>>>> 38444a5e (perf(frontend): Move auth layout to package)
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       '@tsconfig/node10': 1.0.11

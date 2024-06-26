@@ -3,9 +3,9 @@
 import { useTranslations } from "next-intl";
 import { Link } from "vitnode-frontend/navigation";
 import { buttonVariants } from "vitnode-frontend/components/ui/button";
+import { useSession } from "vitnode-frontend/hooks/use-session";
 
 import { AuthUserBar } from "./auth/auth-user-bar";
-import { useSession } from "@/plugins/core/hooks/use-session";
 
 export const UserBar = () => {
   const t = useTranslations("core");

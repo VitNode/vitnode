@@ -1,5 +1,5 @@
 import { getRequestConfig } from "next-intl/server";
-import { fetcher } from "vitnode-frontend/helpers/fetcher";
+import { fetcher } from "vitnode-frontend/graphql/fetcher";
 
 import {
   Core_Middleware__Show,

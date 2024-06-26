@@ -16,5 +16,5 @@
       "module": "commonjs"
     }
   },
-  "include": ["next-env.d.ts", "src/**/*", "scripts/**/*"]
+  "include": ["next-env.d.ts", "src/**/*", "scripts/**/*", "codegen.ts"]
 }

@@ -1,20 +1,18 @@
 import { join } from "path";
 
 import { CodegenConfig } from "@graphql-codegen/cli";
-// import * as dotenv from "dotenv";
+import * as dotenv from "dotenv";
 
-// dotenv.config({
-//   path: join(process.cwd(), "..", "..", ".env"),
-// });
+dotenv.config({
+  path: join(process.cwd(), "..", "..", ".env"),
+});
 
 const config: CodegenConfig = {
   overwrite: true,
   schema: `${process.env.NEXT_PUBLIC_GRAPHQL_URL ?? "http://localhost:8080"}/graphql`,
-  documents: [
-    join(process.cwd(), "..", "frontend", "plugins/**/graphql/**/*.gql"),
-  ],
+  documents: [join(process.cwd(), "..", "frontend", "src/graphql/**/*.gql")],
   generates: {
-    [`${join(process.cwd(), "..", "frontend", "graphql", "hooks.ts")}`]: {
+    ["./src/graphql/hooks.ts"]: {
       plugins: [
         "typescript",
         "typescript-operations",

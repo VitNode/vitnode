@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Metadata } from "next";
-
-import { getSessionData } from "@/graphql/get-session-data";
+import { getSessionData } from "vitnode-frontend/graphql/get-session-data";
 
 interface Props {
   params: {
