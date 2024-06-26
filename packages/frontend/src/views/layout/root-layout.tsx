@@ -9,6 +9,32 @@ import { RootProviders } from './providers';
 import { getConfigFile } from '../../helpers/config';
 import { fetcher } from '../../graphql/fetcher';
 import { Core_Middleware, Core_MiddlewareQuery } from '../../graphql/code';
+import { Metadata } from 'next';
+import { CONFIG } from '../../helpers/config-with-env';
+
+export interface RootLayoutProps {
+  children: React.ReactNode;
+  params: { locale: string };
+  className?: string;
+}
+
+export const generateMetadataForRootLayout = async ({
+  params: { locale },
+}: RootLayoutProps): Promise<Metadata> => {
+  const config = await getConfigFile();
+  const defaultTitle = config.settings.general.site_name;
+
+  return {
+    manifest: `${CONFIG.backend_public_url}/assets/${locale}/manifest.webmanifest`,
+    title: {
+      default: defaultTitle,
+      template: `%s - ${defaultTitle}`,
+    },
+    icons: {
+      icon: '/icons/favicon.ico',
+    },
+  };
+};
 
 const getMiddlewareData = async () => {
   const { data } = await fetcher<Core_MiddlewareQuery>({
@@ -19,17 +45,11 @@ const getMiddlewareData = async () => {
   return data;
 };
 
-interface Props {
-  children: React.ReactNode;
-  params: { locale: string };
-  className?: string;
-}
-
 export const RootLayout = async ({
   children,
   params: { locale },
   className,
-}: Props) => {
+}: RootLayoutProps) => {
   const [messages, config] = await Promise.all([
     getMessages(),
     getConfigFile(),

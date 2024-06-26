@@ -10,7 +10,6 @@ import {
 import { useTranslations } from 'next-intl';
 import { useSearchParams } from 'next/navigation';
 import * as React from 'react';
-import { usePathname, useRouter } from 'vitnode-frontend/navigation';
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
 
 import {
@@ -39,6 +38,7 @@ import { SkeletonDataTable } from './skeleton';
 import { ToolbarDataTable, ToolbarDataTableProps } from './toolbar/toolbar';
 
 import { PageInfo } from '../../graphql/code';
+import { usePathname, useRouter } from '../../navigation';
 
 interface TDataMin {
   id: number;

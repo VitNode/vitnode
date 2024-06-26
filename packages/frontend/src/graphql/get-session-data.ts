@@ -1,10 +1,9 @@
-import { fetcher } from 'vitnode-frontend/graphql/fetcher';
-
 import {
   Core_Sessions__Authorization,
   Core_Sessions__AuthorizationQuery,
   Core_Sessions__AuthorizationQueryVariables,
 } from './code';
+import { fetcher } from './fetcher';
 
 export const getSessionData = async () => {
   const { data } = await fetcher<
