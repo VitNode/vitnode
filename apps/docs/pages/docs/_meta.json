@@ -1,0 +1,21 @@
+{
+  "index": "👋 Introduction",
+  "contribution": "🥰 Contribution",
+  "---": {
+    "type": "separator"
+  },
+  "deployment": "🚀 Deployment",
+  "-- For Developers": {
+    "type": "separator",
+    "title": "For Developers"
+  },
+  "graphql": "GraphQL",
+  "cron": "Task Scheduling (CRON)",
+  "plugins": "🔌 Plugins",
+  "-- UI": {
+    "type": "separator",
+    "title": "UI"
+  },
+  "components": "Components",
+  "themes": "🖌️ Themes"
+}
