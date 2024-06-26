@@ -1,6 +1,6 @@
 import { AdminProviders } from './providers';
 
-import { getSessionAdminData } from '../../graphql/get-session-admin';
+import { getSessionAdminData } from '../../../graphql/get-session-admin';
 
 interface Props {
   children: React.ReactNode;
