@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useTranslations } from "next-intl";
-import { CONFIG } from "vitnode-frontend/helpers";
+import { CONFIG } from "vitnode-frontend/helpers/config-with-env";
 import { Input } from "vitnode-frontend/components/ui/input";
 import { Loader } from "vitnode-frontend/components/ui/loader";
 import { Tabs, TabsTrigger } from "vitnode-frontend/components/ui/tabs";

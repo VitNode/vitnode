@@ -2,7 +2,7 @@ import * as React from "react";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { getConfigFile } from "vitnode-frontend/config";
+import { getConfigFile } from "vitnode-frontend/helpers/config";
 
 import { getPluginDataAdmin } from "./query-api";
 import { DevPluginAdminLayout } from "@/plugins/admin/views/core/plugins/views/dev/layout/layout";

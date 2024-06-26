@@ -2,7 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import * as React from "react";
-import { zodInput } from "vitnode-frontend/helpers";
+import { zodInput } from "vitnode-frontend/helpers/zod";
 
 import { mutationApi } from "./mutation-api";
 import { ErrorType } from "@/graphql/fetcher";

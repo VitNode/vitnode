@@ -5,9 +5,7 @@ import * as React from "react";
 import { CaretSortIcon } from "@radix-ui/react-icons";
 import { CheckIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { cn } from "vitnode-frontend/helpers";
-
-import { classNameCodeBlock } from "./code";
+import { cn } from "vitnode-frontend/helpers/classnames";
 import {
   Popover,
   PopoverContent,
@@ -22,6 +20,8 @@ import {
   CommandItem,
   CommandList,
 } from "vitnode-frontend/components/ui/command";
+
+import { classNameCodeBlock } from "./code";
 
 export const CodeBlockComponent = ({
   extension,

@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { Metadata } from "next";
 import * as React from "react";
-import { getConfigFile } from "vitnode-frontend/config";
+import { getConfigFile } from "vitnode-frontend/helpers/config";
 
 export async function generateMetadata(): Promise<Metadata> {
   const config = await getConfigFile();

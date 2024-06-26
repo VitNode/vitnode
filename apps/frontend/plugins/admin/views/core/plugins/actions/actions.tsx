@@ -1,4 +1,4 @@
-import { CONFIG } from "vitnode-frontend/helpers";
+import { CONFIG } from "vitnode-frontend/helpers/config-with-env";
 
 import { CreateActionPluginAdmin } from "./create/create";
 import { UploadActionPluginAdmin } from "./upload";

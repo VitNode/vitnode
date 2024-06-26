@@ -8,8 +8,8 @@ import {
   AlertTitle,
 } from "vitnode-frontend/components/ui/alert";
 import { buttonVariants } from "vitnode-frontend/components/ui/button";
-import { useGlobals } from "vitnode-frontend/hooks";
-import { CONFIG } from "vitnode-frontend/helpers";
+import { useGlobals } from "vitnode-frontend/hooks/use-globals";
+import { CONFIG } from "vitnode-frontend/helpers/config-with-env";
 
 export const RebuildRequiredAdmin = () => {
   const t = useTranslations("admin.rebuild_required");

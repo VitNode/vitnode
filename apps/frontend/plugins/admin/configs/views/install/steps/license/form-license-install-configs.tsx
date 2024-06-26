@@ -11,6 +11,7 @@ import {
   FormItem,
   FormLabel,
 } from "vitnode-frontend/components/ui/form";
+
 import { useInstallVitnode } from "../../hooks/use-install-vitnode";
 
 export const FormLicenseInstallConfigs = () => {

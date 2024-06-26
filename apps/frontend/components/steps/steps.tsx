@@ -1,6 +1,6 @@
 import { Check } from "lucide-react";
 import { Link } from "vitnode-frontend/navigation";
-import { cn } from "vitnode-frontend/helpers";
+import { cn } from "vitnode-frontend/helpers/classnames";
 
 export interface ItemStepProps {
   component: React.ReactNode;

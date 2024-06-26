@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as Accordion from "@radix-ui/react-accordion";
 import { ChevronDown } from "lucide-react";
-import { cn } from "vitnode-frontend/helpers";
+import { cn } from "vitnode-frontend/helpers/classnames";
 import { buttonVariants } from "vitnode-frontend/components/ui/button";
 import { Separator } from "vitnode-frontend/components/ui/separator";
 

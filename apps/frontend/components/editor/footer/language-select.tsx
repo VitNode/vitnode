@@ -1,7 +1,5 @@
 import { useTranslations } from "next-intl";
-import { useGlobals } from "vitnode-frontend/hooks";
-
-import { useEditorState } from "../hooks/use-editor-state";
+import { useGlobals } from "vitnode-frontend/hooks/use-globals";
 import {
   Select,
   SelectContent,
@@ -16,6 +14,8 @@ import {
   TooltipTrigger,
 } from "vitnode-frontend/components/ui/tooltip";
 import { buttonVariants } from "vitnode-frontend/components/ui/button";
+
+import { useEditorState } from "../hooks/use-editor-state";
 
 export interface LanguageSelectFooterEditorProps {
   selectedLanguage: string;

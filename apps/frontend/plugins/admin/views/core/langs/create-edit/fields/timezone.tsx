@@ -2,9 +2,7 @@ import { useTranslations } from "next-intl";
 import * as React from "react";
 import { Check } from "lucide-react";
 import { ControllerRenderProps, FieldValues, Path } from "react-hook-form";
-import { cn } from "vitnode-frontend/helpers";
-
-import { timeZones } from "../timezones";
+import { cn } from "vitnode-frontend/helpers/classnames";
 import {
   FormControl,
   FormItem,
@@ -25,6 +23,8 @@ import {
   CommandItem,
   CommandList,
 } from "vitnode-frontend/components/ui/command";
+
+import { timeZones } from "../timezones";
 
 interface Props<T extends FieldValues, TName extends Path<T>> {
   field: ControllerRenderProps<T, TName>;

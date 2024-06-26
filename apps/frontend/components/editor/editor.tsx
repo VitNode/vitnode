@@ -3,9 +3,9 @@
 import { useEditor, EditorContent } from "@tiptap/react";
 import * as React from "react";
 import { useLocale } from "next-intl";
-import { cn } from "vitnode-frontend/helpers";
+import { cn } from "vitnode-frontend/helpers/classnames";
 import { Skeleton } from "vitnode-frontend/components/ui/skeleton";
-import { useGlobals } from "vitnode-frontend/hooks";
+import { useGlobals } from "vitnode-frontend/hooks/use-globals";
 
 import { TextLanguage } from "@/graphql/hooks";
 import { ToolBarEditor } from "./toolbar/toolbar";

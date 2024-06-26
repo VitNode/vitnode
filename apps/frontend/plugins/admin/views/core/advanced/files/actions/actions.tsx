@@ -8,7 +8,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "vitnode-frontend/components/ui/tooltip";
-import { CONFIG } from "vitnode-frontend/helpers";
+import { CONFIG } from "vitnode-frontend/helpers/config-with-env";
 
 import { Admin__Core_Files__ShowQuery } from "@/graphql/hooks";
 import { DeleteActionFilesAdvancedCoreAdmin } from "./delete/delete";

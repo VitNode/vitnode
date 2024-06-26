@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useTranslations } from "next-intl";
 import { X } from "lucide-react";
-import { cn } from "vitnode-frontend/helpers";
+import { cn } from "vitnode-frontend/helpers/classnames";
 import { Button } from "vitnode-frontend/components/ui/button";
 import { Loader } from "vitnode-frontend/components/ui/loader";
 import {

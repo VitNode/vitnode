@@ -1,4 +1,4 @@
-import { flattenTree } from "vitnode-frontend/helpers";
+import { flattenTree } from "vitnode-frontend/helpers/flatten-tree";
 
 import { NavWrapper } from "./wrapper";
 import { NavListWrapper } from "./list-wrapper";

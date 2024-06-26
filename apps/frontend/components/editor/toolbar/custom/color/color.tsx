@@ -2,16 +2,16 @@ import { Baseline, ChevronDownIcon } from "lucide-react";
 import * as React from "react";
 import { HslColor } from "react-colorful";
 import { getHSLFromString } from "@vitnode/shared";
-
-import { useEditorState } from "@/components/editor/hooks/use-editor-state";
-
-import { ButtonToolbarEditor } from "../../button";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "vitnode-frontend/components/ui/popover";
 import { PickerColor } from "vitnode-frontend/components/ui/picker-color";
+
+import { useEditorState } from "@/components/editor/hooks/use-editor-state";
+
+import { ButtonToolbarEditor } from "../../button";
 
 export const ColorToolbarEditor = () => {
   const [open, setOpen] = React.useState(false);

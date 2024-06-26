@@ -19,9 +19,9 @@ import {
   AlertDescription,
   AlertTitle,
 } from "vitnode-frontend/components/ui/alert";
+import { Checkbox } from "vitnode-frontend/components/ui/checkbox";
 
 import { useSignInView } from "@/plugins/core/hooks/sign/in/use-sign-in-view";
-import { Checkbox } from "vitnode-frontend/components/ui/checkbox";
 
 export const FormSignIn = () => {
   const t = useTranslations("core");

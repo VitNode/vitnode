@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Link, usePathname } from "vitnode-frontend/navigation";
-import { cn } from "vitnode-frontend/helpers";
+import { cn } from "vitnode-frontend/helpers/classnames";
 import { buttonVariants } from "vitnode-frontend/components/ui/button";
 import { DrawerClose } from "vitnode-frontend/components/ui/drawer";
 

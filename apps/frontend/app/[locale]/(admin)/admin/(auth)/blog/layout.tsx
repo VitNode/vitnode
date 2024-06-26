@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import * as React from "react";
-import { getConfigFile } from "vitnode-frontend/config";
+import { getConfigFile } from "vitnode-frontend/helpers/config";
 
 interface Props {
   children: React.ReactNode;

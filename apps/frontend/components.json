@@ -11,6 +11,6 @@
   },
   "aliases": {
     "components": "@/components",
-    "utils": "vitnode-frontend/helpers"
+    "utils": "vitnode-frontend/helpers/classnames"
   }
 }

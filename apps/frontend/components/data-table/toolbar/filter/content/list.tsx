@@ -2,15 +2,15 @@ import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { CheckIcon } from "@radix-ui/react-icons";
 import { usePathname, useRouter } from "vitnode-frontend/navigation";
-import { cn } from "vitnode-frontend/helpers";
-
-import { ContentFilterToolbarDataTableProps } from "./content";
-import { useFilterToolbarDataTable } from "../hooks/use-filter-toolbar-data-table";
+import { cn } from "vitnode-frontend/helpers/classnames";
 import { Loader } from "vitnode-frontend/components/ui/loader";
 import {
   CommandGroup,
   CommandItem,
 } from "vitnode-frontend/components/ui/command";
+
+import { ContentFilterToolbarDataTableProps } from "./content";
+import { useFilterToolbarDataTable } from "../hooks/use-filter-toolbar-data-table";
 
 export const ListContentFilterToolbarDataTable = ({
   isFetching,

@@ -14,10 +14,10 @@ import {
   FormItem,
   FormMessage,
 } from "vitnode-frontend/components/ui/form";
+import { Input } from "vitnode-frontend/components/ui/input";
 
 import { useDeleteLangAdmin } from "./hooks/use-delete-lang-admin";
 import { ShowCoreLanguages } from "@/graphql/hooks";
-import { Input } from "vitnode-frontend/components/ui/input";
 
 export const ContentDeleteActionsTableLangsCoreAdmin = ({
   code,

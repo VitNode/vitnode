@@ -5,15 +5,16 @@ import * as React from "react";
 import tippy, { Instance, Props } from "tippy.js";
 import { useTranslations } from "next-intl";
 import { Emoji } from "@emoji-mart/data";
-import { cn, CONFIG } from "vitnode-frontend/helpers";
+import { Button } from "vitnode-frontend/components/ui/button";
+import { classPopover } from "vitnode-frontend/components/ui/popover";
+import { cn } from "vitnode-frontend/helpers/classnames";
+import { CONFIG } from "vitnode-frontend/helpers/config-with-env";
 
 import {
   ComponentListRef,
   SuggestionKeyDownProps,
   SuggestionProps,
 } from "../mentions/client";
-import { Button } from "vitnode-frontend/components/ui/button";
-import { classPopover } from "vitnode-frontend/components/ui/popover";
 
 const ComponentList = ({
   command,

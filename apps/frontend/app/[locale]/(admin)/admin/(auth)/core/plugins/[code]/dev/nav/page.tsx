@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { flattenTree } from "vitnode-frontend/helpers";
+import { flattenTree } from "vitnode-frontend/helpers/flatten-tree";
 
 import { HeaderContent } from "@/components/header-content/header-content";
 import {

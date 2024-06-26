@@ -14,7 +14,7 @@ import {
   TooltipTrigger,
 } from "vitnode-frontend/components/ui/tooltip";
 import { buttonVariants } from "vitnode-frontend/components/ui/button";
-import { CONFIG } from "vitnode-frontend/helpers";
+import { CONFIG } from "vitnode-frontend/helpers/config-with-env";
 
 import { DataTable } from "@/components/data-table/data-table";
 import { Core_Members__Files__ShowQuery, ShowCoreFiles } from "@/graphql/hooks";

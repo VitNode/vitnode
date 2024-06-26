@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl";
 import * as React from "react";
-import { flattenTree } from "vitnode-frontend/helpers";
+import { flattenTree } from "vitnode-frontend/helpers/flatten-tree";
 import { Card } from "vitnode-frontend/components/ui/card";
 
 import { HeaderContent } from "@/components/header-content/header-content";

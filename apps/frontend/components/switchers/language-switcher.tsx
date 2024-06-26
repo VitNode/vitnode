@@ -12,8 +12,8 @@ import {
   DropdownMenuTrigger,
 } from "vitnode-frontend/components/ui/dropdown-menu";
 import { Button } from "vitnode-frontend/components/ui/button";
-import { useGlobals } from "vitnode-frontend/hooks";
-import { CONFIG } from "vitnode-frontend/helpers";
+import { useGlobals } from "vitnode-frontend/hooks/use-globals";
+import { CONFIG } from "vitnode-frontend/helpers/config-with-env";
 
 export const LanguageSwitcher = () => {
   const t = useTranslations("core");

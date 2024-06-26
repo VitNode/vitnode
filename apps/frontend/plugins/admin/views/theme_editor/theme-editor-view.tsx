@@ -1,7 +1,8 @@
 "use client";
 
 import * as React from "react";
-import { cn, CONFIG } from "vitnode-frontend/helpers";
+import { cn } from "vitnode-frontend/helpers/classnames";
+import { CONFIG } from "vitnode-frontend/helpers/config-with-env";
 import { Loader } from "vitnode-frontend/components/ui/loader";
 
 import { ThemeEditorViewEnum, ToolbarThemeEditor } from "./toolbar";

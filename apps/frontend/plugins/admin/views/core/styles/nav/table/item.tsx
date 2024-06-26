@@ -1,6 +1,6 @@
 import { ExternalLink } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { FlatTree } from "vitnode-frontend/helpers";
+import { FlatTree } from "vitnode-frontend/helpers/flatten-tree";
 
 import { ShowCoreNav } from "@/graphql/hooks";
 import { useTextLang } from "@/plugins/core/hooks/use-text-lang";

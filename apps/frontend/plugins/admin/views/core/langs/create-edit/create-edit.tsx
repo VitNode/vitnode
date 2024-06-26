@@ -1,9 +1,4 @@
 import { useTranslations } from "next-intl";
-
-import { useCreateEditLangAdmin } from "./hooks/use-create-edit-lang-admin";
-import { ShowCoreLanguages } from "@/graphql/hooks";
-import { LocaleFieldCreateEditLangAdmin } from "./fields/locale";
-import { TimezoneFieldCreateEditLangAdmin } from "./fields/timezone";
 import {
   DialogDescription,
   DialogFooter,
@@ -22,6 +17,11 @@ import {
 } from "vitnode-frontend/components/ui/form";
 import { Input } from "vitnode-frontend/components/ui/input";
 import { Switch } from "vitnode-frontend/components/ui/switch";
+
+import { TimezoneFieldCreateEditLangAdmin } from "./fields/timezone";
+import { LocaleFieldCreateEditLangAdmin } from "./fields/locale";
+import { ShowCoreLanguages } from "@/graphql/hooks";
+import { useCreateEditLangAdmin } from "./hooks/use-create-edit-lang-admin";
 
 interface Props {
   data?: ShowCoreLanguages;

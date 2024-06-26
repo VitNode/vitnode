@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
-import { zodInput } from "vitnode-frontend/helpers";
+import { zodInput } from "vitnode-frontend/helpers/zod";
 import { useDialog } from "vitnode-frontend/components/ui/dialog";
 
 import { mutationCreateApi } from "./create-mutation-api";

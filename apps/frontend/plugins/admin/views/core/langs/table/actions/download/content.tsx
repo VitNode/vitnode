@@ -1,10 +1,6 @@
 import { useTranslations } from "next-intl";
 import { Check } from "lucide-react";
-import { cn } from "vitnode-frontend/helpers";
-
-import { useDownloadLangAdmin } from "./hooks/use-download-lang-admin";
-import { ShowCoreLanguages } from "@/graphql/hooks";
-import { useSessionAdmin } from "@/plugins/admin/hooks/use-session-admin";
+import { cn } from "vitnode-frontend/helpers/classnames";
 import { Loader } from "vitnode-frontend/components/ui/loader";
 import {
   DialogDescription,
@@ -36,6 +32,10 @@ import {
   CommandItem,
   CommandList,
 } from "vitnode-frontend/components/ui/command";
+
+import { useSessionAdmin } from "@/plugins/admin/hooks/use-session-admin";
+import { ShowCoreLanguages } from "@/graphql/hooks";
+import { useDownloadLangAdmin } from "./hooks/use-download-lang-admin";
 
 export const ContentDownloadActionsTableLangsCoreAdmin = ({
   code,
