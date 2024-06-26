@@ -1,13 +1,13 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { fetcher } from "vitnode-frontend/helpers/fetcher";
 
 import {
   Admin__Core_Plugins__Edit,
   Admin__Core_Plugins__EditMutation,
   Admin__Core_Plugins__EditMutationVariables,
 } from "@/graphql/hooks";
-import { fetcher } from "@/graphql/fetcher";
 
 export const mutationEditApi = async (
   variables: Admin__Core_Plugins__EditMutationVariables,

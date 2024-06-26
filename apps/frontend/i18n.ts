@@ -1,11 +1,11 @@
 import { getRequestConfig } from "next-intl/server";
+import { fetcher } from "vitnode-frontend/helpers/fetcher";
 
 import {
   Core_Middleware__Show,
   Core_Middleware__ShowQuery,
   Core_Middleware__ShowQueryVariables,
 } from "./graphql/hooks";
-import { fetcher } from "./graphql/fetcher";
 
 export default getRequestConfig(async ({ locale }) => {
   let plugins: string[] = [];

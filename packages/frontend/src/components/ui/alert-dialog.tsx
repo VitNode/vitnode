@@ -5,7 +5,7 @@ import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog";
 
 import { buttonVariants } from "./button";
 
-import { cn } from "../../helpers";
+import { cn } from "../../helpers/classnames";
 
 interface AlertDialogContextArgs {
   open: boolean;

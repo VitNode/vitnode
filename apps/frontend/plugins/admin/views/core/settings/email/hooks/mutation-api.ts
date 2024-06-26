@@ -1,8 +1,8 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { fetcher } from "vitnode-frontend/helpers/fetcher";
 
-import { fetcher } from "@/graphql/fetcher";
 import {
   Admin__Core_Email_Settings__Edit,
   Admin__Core_Email_Settings__EditMutation,

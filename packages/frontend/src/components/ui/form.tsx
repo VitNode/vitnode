@@ -18,7 +18,7 @@ import { useBeforeUnload } from "react-use";
 import { Label } from "./label";
 import { useDialog } from "./dialog";
 
-import { cn } from "../../helpers";
+import { cn } from "../../helpers/classnames";
 
 interface FormProps<
   TFieldValues extends FieldValues,

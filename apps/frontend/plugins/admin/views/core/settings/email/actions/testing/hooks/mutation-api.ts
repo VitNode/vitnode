@@ -1,6 +1,7 @@
 "use server";
 
-import { fetcher } from "@/graphql/fetcher";
+import { fetcher } from "vitnode-frontend/helpers/fetcher";
+
 import {
   Admin__Core_Email_Settings__Test,
   Admin__Core_Email_Settings__TestMutation,

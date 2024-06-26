@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import * as React from "react";
+import { fetcher } from "vitnode-frontend/helpers/fetcher";
 
 import { ProfileView } from "@/plugins/core/templates/views/profile/profile-view";
 import {
@@ -8,7 +9,6 @@ import {
   Core_Members__ProfilesQuery,
   Core_Members__ProfilesQueryVariables,
 } from "@/graphql/hooks";
-import { fetcher } from "@/graphql/fetcher";
 
 const getData = async ({ id }: { id: string }) => {
   const { data } = await fetcher<

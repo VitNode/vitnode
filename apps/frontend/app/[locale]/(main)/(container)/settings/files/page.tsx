@@ -1,4 +1,5 @@
 import * as React from "react";
+import { fetcher } from "vitnode-frontend/helpers/fetcher";
 
 import {
   Core_Members__Files__Show,
@@ -10,7 +11,6 @@ import {
   usePaginationAPISsr,
   SearchParamsPagination,
 } from "@/plugins/core/hooks/utils/use-pagination-api-ssr";
-import { fetcher } from "@/graphql/fetcher";
 import { FilesSettingsView } from "@/plugins/core/templates/views/settings/views/files/files-settings-view";
 
 const getData = async (variables: Core_Members__Files__ShowQueryVariables) => {

@@ -1,13 +1,13 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { fetcher } from "vitnode-frontend/helpers/fetcher";
 
 import {
   Admin__Core_Files__Delete,
   Admin__Core_Files__DeleteMutation,
   Admin__Core_Files__DeleteMutationVariables,
 } from "@/graphql/hooks";
-import { fetcher } from "@/graphql/fetcher";
 
 export const mutationApi = async (
   variables: Admin__Core_Files__DeleteMutationVariables,

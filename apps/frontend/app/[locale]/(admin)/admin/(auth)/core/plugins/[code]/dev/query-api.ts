@@ -3,7 +3,7 @@ import {
   Admin__Core_Plugins__Show__ItemQuery,
   Admin__Core_Plugins__Show__ItemQueryVariables,
 } from "@/graphql/hooks";
-import { fetcher, ErrorType } from "@/graphql/fetcher";
+import { fetcher, ErrorType } from "vitnode-frontend/helpers/fetcher";
 
 export const getPluginDataAdmin = async (
   variables: Admin__Core_Plugins__Show__ItemQueryVariables,

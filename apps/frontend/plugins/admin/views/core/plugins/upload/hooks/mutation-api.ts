@@ -1,13 +1,13 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { fetcher } from "vitnode-frontend/helpers/fetcher";
 
 import {
   Admin__Core_Plugins__Upload,
   Admin__Core_Plugins__UploadMutation,
   Admin__Core_Plugins__UploadMutationVariables,
 } from "@/graphql/hooks";
-import { fetcher } from "@/graphql/fetcher";
 
 export const mutationApi = async (formData: FormData) => {
   try {

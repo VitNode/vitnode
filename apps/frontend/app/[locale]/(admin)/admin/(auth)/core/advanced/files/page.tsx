@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { Metadata } from "next";
 import { Card } from "vitnode-frontend/components/ui/card";
+import { fetcher } from "vitnode-frontend/helpers/fetcher";
 
 import { HeaderContent } from "@/components/header-content/header-content";
 import {
@@ -13,7 +14,6 @@ import {
   usePaginationAPISsr,
   SearchParamsPagination,
 } from "@/plugins/core/hooks/utils/use-pagination-api-ssr";
-import { fetcher } from "@/graphql/fetcher";
 import { FilesAdvancedCoreAdminView } from "@/plugins/admin/views/core/advanced/files/files-advanced-core-admin-view";
 
 const getData = async (variables: Admin__Core_Files__ShowQueryVariables) => {

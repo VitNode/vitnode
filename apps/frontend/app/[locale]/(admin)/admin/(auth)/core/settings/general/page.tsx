@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { Metadata } from "next";
 import { Card } from "vitnode-frontend/components/ui/card";
+import { fetcher } from "vitnode-frontend/helpers/fetcher";
 
 import { HeaderContent } from "@/components/header-content/header-content";
 import {
@@ -8,7 +9,6 @@ import {
   Core_Main_Settings__ShowQuery,
   Core_Main_Settings__ShowQueryVariables,
 } from "@/graphql/hooks";
-import { fetcher } from "@/graphql/fetcher";
 import { GeneralSettingsCoreAdmin } from "@/plugins/admin/views/core/settings/general/main-settings-core-admin";
 
 const getData = async () => {

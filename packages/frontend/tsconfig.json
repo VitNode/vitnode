@@ -16,5 +16,5 @@
       "module": "commonjs"
     }
   },
-  "include": ["src/**/*", "scripts/**/*"]
+  "include": ["next-env.d.ts", "src/**/*", "scripts/**/*"]
 }

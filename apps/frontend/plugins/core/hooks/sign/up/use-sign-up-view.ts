@@ -3,9 +3,9 @@ import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { toast } from "sonner";
+import { ErrorType } from "vitnode-frontend/helpers/fetcher";
 
 import { mutationApi } from "./mutation-api";
-import { ErrorType } from "@/graphql/fetcher";
 
 const nameRegex = /^(?!.* {2})[\p{L}\p{N}._@ -]*$/u;
 

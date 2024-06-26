@@ -5,9 +5,9 @@ import {
   CardContent,
   CardHeader,
 } from "vitnode-frontend/components/ui/card";
+import { fetcher } from "vitnode-frontend/helpers/fetcher";
 
 import { CategoriesBlogAdminView } from "@/plugins/blog/admin/views/categories/categories-view";
-import { fetcher } from "@/graphql/fetcher";
 import {
   Admin_Blog_Categories__Show,
   Admin_Blog_Categories__ShowQuery,

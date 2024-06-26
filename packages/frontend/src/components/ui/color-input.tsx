@@ -9,7 +9,7 @@ import { PickerColor } from "./picker-color";
 import { Button } from "./button";
 import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 
-import { cn } from "../../helpers";
+import { cn } from "../../helpers/classnames";
 
 interface Props {
   onChange: (value: string) => void;

@@ -1,6 +1,6 @@
 import Image, { StaticImageData } from "next/image";
 
-import { cn } from "../helpers";
+import { cn } from "../helpers/classnames";
 
 interface InitialProps {
   alt: string;

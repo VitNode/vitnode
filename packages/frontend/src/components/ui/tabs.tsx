@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { buttonVariants } from "./button";
 
 import { Link, usePathname } from "../../navigation";
-import { cn } from "../../helpers";
+import { cn } from "../../helpers/classnames";
 
 interface Props {
   children: React.ReactNode;

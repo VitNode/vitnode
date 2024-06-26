@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { flattenTree } from "vitnode-frontend/helpers/flatten-tree";
+import { fetcher } from "vitnode-frontend/helpers/fetcher";
 
 import { HeaderContent } from "@/components/header-content/header-content";
 import {
@@ -9,7 +10,6 @@ import {
   Admin__Core_Plugins__Nav__ShowQueryVariables,
   ShowAdminNavPluginsObj,
 } from "@/graphql/hooks";
-import { fetcher } from "@/graphql/fetcher";
 import { NavDevPluginAdminView } from "@/plugins/admin/views/core/plugins/views/dev/nav/nav";
 import { CreateNavDevPluginAdmin } from "@/plugins/admin/views/core/plugins/views/dev/nav/actions/create/create";
 import { Icon } from "@/components/icon/icon";

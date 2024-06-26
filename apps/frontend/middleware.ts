@@ -1,7 +1,7 @@
 import createIntlMiddleware from "next-intl/middleware";
 import { NextRequest } from "next/server";
+import { fetcher } from "vitnode-frontend/helpers/fetcher";
 
-import { fetcher } from "./graphql/fetcher";
 import {
   Core_Middleware__Show,
   Core_Middleware__ShowQuery,
