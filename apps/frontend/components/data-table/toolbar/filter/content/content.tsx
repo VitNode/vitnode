@@ -4,10 +4,7 @@ import { useSearchParams } from "next/navigation";
 import * as React from "react";
 import { useDebouncedCallback } from "use-debounce";
 import { usePathname, useRouter } from "vitnode-frontend/navigation";
-import { cn } from "vitnode-frontend/helpers";
-
-import { ListContentFilterToolbarDataTable } from "./list";
-import { useFilterToolbarDataTable } from "../hooks/use-filter-toolbar-data-table";
+import { cn } from "vitnode-frontend/helpers/classnames";
 import {
   Command,
   CommandEmpty,
@@ -19,6 +16,9 @@ import {
   commandInputClassName,
 } from "vitnode-frontend/components/ui/command";
 import { Input } from "vitnode-frontend/components/ui/input";
+
+import { ListContentFilterToolbarDataTable } from "./list";
+import { useFilterToolbarDataTable } from "../hooks/use-filter-toolbar-data-table";
 
 export interface ContentFilterToolbarDataTableProps {
   options: {

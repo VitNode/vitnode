@@ -18,8 +18,7 @@ import {
   RadioGroupItem,
 } from "vitnode-frontend/components/ui/radio-group";
 import { ColorInput } from "vitnode-frontend/components/ui/color-input";
-
-import { CONFIG } from "vitnode-frontend/helpers";
+import { CONFIG } from "vitnode-frontend/helpers/config-with-env";
 
 import { useManifestCoreAdminView } from "./hooks/use-manifest-core-admin-view";
 import { Admin__Core_Manifest_Metadata__ShowQuery } from "@/graphql/hooks";

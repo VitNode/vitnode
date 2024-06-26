@@ -1,8 +1,8 @@
 import * as React from "react";
 import { GeistSans } from "geist/font/sans";
 import { Metadata } from "next";
-import { RootLayout } from "vitnode-frontend/views/layout";
-import { CONFIG } from "vitnode-frontend/helpers";
+import { RootLayout } from "vitnode-frontend/views/root-layout";
+import { CONFIG } from "vitnode-frontend/helpers/config-with-env";
 
 import {
   Core_Middleware,

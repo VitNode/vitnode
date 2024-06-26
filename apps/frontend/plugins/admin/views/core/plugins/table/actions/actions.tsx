@@ -9,7 +9,7 @@ import {
   DropdownMenuTrigger,
 } from "vitnode-frontend/components/ui/dropdown-menu";
 import { Button } from "vitnode-frontend/components/ui/button";
-import { CONFIG } from "vitnode-frontend/helpers";
+import { CONFIG } from "vitnode-frontend/helpers/config-with-env";
 
 import { ShowAdminPlugins } from "@/graphql/hooks";
 import { DeletePluginActionsAdmin } from "./delete/delete";

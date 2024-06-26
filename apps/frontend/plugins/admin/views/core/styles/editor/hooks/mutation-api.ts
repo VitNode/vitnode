@@ -3,7 +3,7 @@
 import * as fs from "fs";
 
 import { ConfigType } from "@vitnode/shared";
-import { configPath, getConfigFile } from "vitnode-frontend/config";
+import { configPath, getConfigFile } from "vitnode-frontend/helpers/config";
 
 export const mutationApi = async (variables: ConfigType["editor"]) => {
   const config = await getConfigFile();

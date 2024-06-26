@@ -4,7 +4,7 @@ import { ChevronDown } from "lucide-react";
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import * as React from "react";
 import { Link, usePathname } from "vitnode-frontend/navigation";
-import { cn } from "vitnode-frontend/helpers";
+import { cn } from "vitnode-frontend/helpers/classnames";
 import { buttonVariants } from "vitnode-frontend/components/ui/button";
 
 import { ShowCoreNav } from "@/graphql/hooks";

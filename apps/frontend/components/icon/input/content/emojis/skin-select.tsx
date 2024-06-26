@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl";
 import { Check } from "lucide-react";
-import { CONFIG } from "vitnode-frontend/helpers";
+import { CONFIG } from "vitnode-frontend/helpers/config-with-env";
 import { Button } from "vitnode-frontend/components/ui/button";
 import {
   DropdownMenu,

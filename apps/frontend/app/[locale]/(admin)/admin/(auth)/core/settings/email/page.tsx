@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import { Card } from "vitnode-frontend/components/ui/card";
 
 import { HeaderContent } from "@/components/header-content/header-content";
 import { EmailSettingsAdminView } from "@/plugins/admin/views/core/settings/email/email-settings-admin-view";
@@ -10,7 +11,6 @@ import {
   Admin__Core_Email_Settings__ShowQueryVariables,
 } from "@/graphql/hooks";
 import { ActionsEmailSettingsAdmin } from "@/plugins/admin/views/core/settings/email/actions/actions";
-import { Card } from "vitnode-frontend/components/ui/card";
 
 const getData = async () => {
   const { data } = await fetcher<

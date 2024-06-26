@@ -12,10 +12,6 @@ import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import * as React from "react";
 import { usePathname, useRouter } from "vitnode-frontend/navigation";
-
-import { PageInfo } from "@/graphql/hooks";
-import { ToolbarDataTable, ToolbarDataTableProps } from "./toolbar/toolbar";
-import { SkeletonDataTable } from "./skeleton";
 import {
   Table,
   TableBody,
@@ -38,6 +34,10 @@ import {
   SelectValue,
 } from "vitnode-frontend/components/ui/select";
 import { Button } from "vitnode-frontend/components/ui/button";
+
+import { SkeletonDataTable } from "./skeleton";
+import { ToolbarDataTable, ToolbarDataTableProps } from "./toolbar/toolbar";
+import { PageInfo } from "@/graphql/hooks";
 
 interface TDataMin {
   id: number;

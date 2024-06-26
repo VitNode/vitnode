@@ -13,7 +13,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "vitnode-frontend/components/ui/tooltip";
-import { CONFIG } from "vitnode-frontend/helpers";
+import { CONFIG } from "vitnode-frontend/helpers/config-with-env";
 
 import { DataTable } from "@/components/data-table/data-table";
 import { HeaderSortingDataTable } from "@/components/data-table/header";

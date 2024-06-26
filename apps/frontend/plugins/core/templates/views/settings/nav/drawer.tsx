@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { cn } from "vitnode-frontend/helpers";
+import { cn } from "vitnode-frontend/helpers/classnames";
 import {
   Drawer,
   DrawerClose,

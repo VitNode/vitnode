@@ -7,7 +7,7 @@ import { HslColor } from "react-colorful";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
 import { useRouter } from "vitnode-frontend/navigation";
-import { CONFIG } from "vitnode-frontend/helpers";
+import { CONFIG } from "vitnode-frontend/helpers/config-with-env";
 
 import { Core_Theme_Editor__ShowQuery } from "@/graphql/hooks";
 import { mutationApi } from "./mutation-api";

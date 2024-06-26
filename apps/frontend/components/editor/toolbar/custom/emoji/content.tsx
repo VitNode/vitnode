@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 import * as React from "react";
 import { Input } from "vitnode-frontend/components/ui/input";
-import { CONFIG } from "vitnode-frontend/helpers";
+import { CONFIG } from "vitnode-frontend/helpers/config-with-env";
 
 import { EmojisContentIconInput } from "@/components/icon/input/content/emojis/emojis";
 import { SkinSelectEmojisContentIconInput } from "@/components/icon/input/content/emojis/skin-select";

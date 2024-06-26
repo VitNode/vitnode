@@ -7,7 +7,11 @@ import {
 } from "@dnd-kit/core";
 import * as React from "react";
 import { arrayMove } from "@dnd-kit/sortable";
-import { FlatTree, WithChildren, flattenTree } from "vitnode-frontend/helpers";
+import {
+  FlatTree,
+  WithChildren,
+  flattenTree,
+} from "vitnode-frontend/helpers/flatten-tree";
 
 import { useProjection } from "./use-projection";
 

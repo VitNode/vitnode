@@ -2,7 +2,8 @@ import { Plus, Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { JSONContent } from "@tiptap/react";
-import { cn, CONFIG } from "vitnode-frontend/helpers";
+import { cn } from "vitnode-frontend/helpers/classnames";
+import { CONFIG } from "vitnode-frontend/helpers/config-with-env";
 import { Button } from "vitnode-frontend/components/ui/button";
 
 import { IconItemListFilesFooterEditor } from "./icon";

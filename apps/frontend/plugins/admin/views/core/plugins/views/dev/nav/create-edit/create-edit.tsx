@@ -2,10 +2,6 @@ import { useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
 import { Ban } from "lucide-react";
 import { removeSpecialCharacters } from "@vitnode/shared";
-
-import { useCreateNavPluginAdmin } from "./hooks/use-create-nav-plugin-admin";
-import { IconInput } from "@/components/icon/input/icon-input";
-import { ShowAdminNavPluginsObj } from "@/graphql/hooks";
 import {
   DialogFooter,
   DialogHeader,
@@ -29,6 +25,10 @@ import {
   SelectValue,
 } from "vitnode-frontend/components/ui/select";
 import { Button } from "vitnode-frontend/components/ui/button";
+
+import { ShowAdminNavPluginsObj } from "@/graphql/hooks";
+import { IconInput } from "@/components/icon/input/icon-input";
+import { useCreateNavPluginAdmin } from "./hooks/use-create-nav-plugin-admin";
 
 export interface CreateEditNavDevPluginAdminProps {
   dataFromSSR: ShowAdminNavPluginsObj[];

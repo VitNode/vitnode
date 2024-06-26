@@ -2,7 +2,7 @@ import { useLocale } from "next-intl";
 import parse, { Element, HTMLReactParserOptions } from "html-react-parser";
 import { generateHTML } from "@tiptap/html";
 import Image from "next/image";
-import { cn } from "vitnode-frontend/helpers";
+import { cn } from "vitnode-frontend/helpers/classnames";
 
 import { TextLanguage } from "@/graphql/hooks";
 import { extensionsEditor } from "../extensions/extensions";

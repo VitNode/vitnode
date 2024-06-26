@@ -3,15 +3,13 @@ import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { toast } from "sonner";
-import {
-  zodInput,
-  increaseVersionString,
-  CONFIG,
-} from "vitnode-frontend/helpers";
 import { useDialog } from "vitnode-frontend/components/ui/dialog";
+import { CONFIG } from "vitnode-frontend/helpers/config-with-env";
+import { increaseVersionString } from "vitnode-frontend/helpers/increase-version-string";
+import { zodInput } from "vitnode-frontend/helpers/zod";
 
-import { ShowAdminPlugins } from "@/graphql/hooks";
 import { mutationApi } from "./mutation-api";
+import { ShowAdminPlugins } from "@/graphql/hooks";
 
 export const useDownloadPluginAdmin = ({
   code,

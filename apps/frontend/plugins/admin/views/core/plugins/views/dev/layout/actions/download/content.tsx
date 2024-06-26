@@ -1,7 +1,4 @@
 import { useTranslations } from "next-intl";
-
-import { useDownloadPluginAdmin } from "./hooks/use-download-plugin-admin";
-import { ShowAdminPlugins } from "@/graphql/hooks";
 import {
   DialogDescription,
   DialogFooter,
@@ -23,6 +20,9 @@ import {
   RadioGroup,
   RadioGroupItem,
 } from "vitnode-frontend/components/ui/radio-group";
+
+import { ShowAdminPlugins } from "@/graphql/hooks";
+import { useDownloadPluginAdmin } from "./hooks/use-download-plugin-admin";
 
 export const ContentDownloadActionDevPluginAdmin = ({
   code,

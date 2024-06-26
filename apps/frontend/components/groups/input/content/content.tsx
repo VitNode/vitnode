@@ -3,11 +3,7 @@ import { useTranslations } from "next-intl";
 import * as React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useDebouncedCallback } from "use-debounce";
-import { cn } from "vitnode-frontend/helpers";
-
-import { GroupInputItem } from "../group-input";
-import { GroupInputContentList } from "./list";
-import { queryApi } from "./query-api";
+import { cn } from "vitnode-frontend/helpers/classnames";
 import {
   Command,
   CommandList,
@@ -15,6 +11,10 @@ import {
 } from "vitnode-frontend/components/ui/command";
 import { Input } from "vitnode-frontend/components/ui/input";
 import { Loader } from "vitnode-frontend/components/ui/loader";
+
+import { GroupInputItem } from "../group-input";
+import { GroupInputContentList } from "./list";
+import { queryApi } from "./query-api";
 
 interface Props {
   onSelect: (value: GroupInputItem) => void;

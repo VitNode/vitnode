@@ -1,6 +1,6 @@
 import { Bold, Italic, Underline } from "lucide-react";
-import { cn } from "vitnode-frontend/helpers";
-import { useGlobals } from "vitnode-frontend/hooks";
+import { cn } from "vitnode-frontend/helpers/classnames";
+import { useGlobals } from "vitnode-frontend/hooks/use-globals";
 
 import { ToggleToolbarEditor } from "./toggle";
 import { LinkToolbarEditor } from "./custom/link/link";

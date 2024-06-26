@@ -3,7 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { Metadata } from "next";
 import { isRedirectError } from "next/dist/client/components/redirect";
 import { redirect } from "vitnode-frontend/navigation";
-import { getConfigFile } from "vitnode-frontend/config";
+import { getConfigFile } from "vitnode-frontend/helpers/config";
 
 import { Providers } from "./providers";
 import { AdminLayout } from "@/plugins/admin/layout/admin-layout";

@@ -1,4 +1,4 @@
-import { useGlobals } from "vitnode-frontend/hooks";
+import { useGlobals } from "vitnode-frontend/hooks/use-globals";
 
 import {
   LanguageSelectFooterEditor,

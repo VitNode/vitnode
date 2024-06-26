@@ -10,7 +10,7 @@ import {
 } from "vitnode-frontend/components/ui/dialog";
 import { Button } from "vitnode-frontend/components/ui/button";
 import { Loader } from "vitnode-frontend/components/ui/loader";
-import { CONFIG } from "vitnode-frontend/helpers";
+import { CONFIG } from "vitnode-frontend/helpers/config-with-env";
 
 const Content = React.lazy(async () =>
   import("../upload/upload").then(module => ({
