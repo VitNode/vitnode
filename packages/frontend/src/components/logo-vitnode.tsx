@@ -1,4 +1,4 @@
-import { cn } from '../helpers';
+import { cn } from '../helpers/classnames';
 
 interface Props {
   className?: string;

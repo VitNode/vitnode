@@ -12,9 +12,10 @@ import {
   SuggestionProps,
 } from '../mentions/client';
 
-import { CONFIG, cn } from '../../../helpers';
 import { Button } from '../../../components/ui/button';
 import { classPopover } from '../../../components/ui/popover';
+import { CONFIG } from '../../../helpers/config-with-env';
+import { cn } from '../../../helpers/classnames';
 
 const ComponentList = ({
   command,

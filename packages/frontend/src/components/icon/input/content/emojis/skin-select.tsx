@@ -1,13 +1,14 @@
 import { useTranslations } from 'next-intl';
 import { Check } from 'lucide-react';
-import { CONFIG } from 'vitnode-frontend/helpers/config-with-env';
-import { Button } from 'vitnode-frontend/components/ui/button';
+
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from 'vitnode-frontend/components/ui/dropdown-menu';
+} from '../../../../ui/dropdown-menu';
+import { Button } from '../../../../ui/button';
+import { CONFIG } from '../../../../../helpers/config-with-env';
 
 const skinToneEmoji = [
   '43.55deg 100% 61.37%',
@@ -63,8 +64,8 @@ export const SkinSelectEmojisContentIconInput = ({
               className="size-5 rounded-md"
               style={{ backgroundColor: `hsl(${skinToneEmoji[index]})` }}
             />
-            {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-            {/* @ts-expect-error */}
+            {/* eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error, @typescript-eslint/ban-ts-comment */}
+            {/* @ts-ignore */}
             <span>{t(`skin.skin_${index}`)}</span>
           </DropdownMenuItem>
         ))}

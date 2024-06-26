@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { useTranslations } from 'next-intl';
-import { CONFIG } from 'vitnode-frontend/helpers/config-with-env';
-import { Input } from 'vitnode-frontend/components/ui/input';
-import { Loader } from 'vitnode-frontend/components/ui/loader';
-import { Tabs, TabsTrigger } from 'vitnode-frontend/components/ui/tabs';
 
-import { IconLucideNames } from '@/components/icon/icon';
 import { SkinSelectEmojisContentIconInput } from './emojis/skin-select';
+
+import { IconLucideNames } from '../../icon-client';
+import { CONFIG } from '../../../../helpers/config-with-env';
+import { Tabs, TabsTrigger } from '../../../ui/tabs';
+import { Input } from '../../../ui/input';
+import { Loader } from '../../../ui/loader';
 
 // import { SkinSelectEmojiButtonEditor } from "@/components/editor/toolbar/buttons/emoji/skin-select";
 

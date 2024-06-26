@@ -14,10 +14,9 @@ import {
 } from './extensions/files/hooks/use-upload-files-handler-editor.ts';
 import { EditorStateContext } from './hooks/use-editor-state';
 import { useGlobals } from '../hooks/use-globals';
-import { cn } from '../helpers';
+import { cn } from '../helpers/classnames';
 import { Skeleton } from '../components/ui/skeleton';
-
-import { TextLanguage } from '@/graphql/hooks';
+import { TextLanguage } from '../graphql/hooks';
 
 interface Props extends Omit<UploadFilesHandlerEditorArgs, 'value'> {
   autoFocus?: boolean;

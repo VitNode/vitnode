@@ -1,10 +1,10 @@
 import { flattenTree } from 'vitnode-frontend/helpers/flatten-tree';
 import { getSessionData } from 'vitnode-frontend/graphql/get-session-data';
+import { Icon } from 'vitnode-frontend/components/icon/icon';
 
 import { NavWrapper } from './wrapper';
 import { NavListWrapper } from './list-wrapper';
 import { ItemNav } from './item';
-import { Icon } from '@/components/icon/icon';
 import { ShowCoreNav } from '@/graphql/hooks';
 
 export const Nav = async () => {

@@ -1,11 +1,11 @@
 import * as Lucide from 'lucide-react';
 import * as React from 'react';
 import { useTranslations } from 'next-intl';
-import { Button } from 'vitnode-frontend/components/ui/button';
 
-import { IconLucideNames } from '@/components/icon/icon';
 import { IconInputProps } from '../content';
-import { IconClient } from '@/components/icon/icon-client';
+
+import { IconClient, IconLucideNames } from '../../../icon-client';
+import { Button } from '../../../../ui/button';
 
 interface Props extends IconInputProps {
   search: string;

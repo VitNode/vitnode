@@ -4,7 +4,7 @@ import { Plugin } from '@tiptap/pm/state';
 import { renderReactNode } from './client';
 import { UploadFilesHandlerArgs } from './hooks/use-upload-files-handler-editor.ts';
 
-import { Core_Editor_Files__UploadMutation } from '@/graphql/hooks';
+import { Core_Editor_Files__UploadMutation } from '../../../graphql/hooks';
 
 export const acceptMimeTypeImage = [
   'image/jpeg',

@@ -7,7 +7,7 @@ import {
   Core_Editor_Files__Upload,
   Core_Editor_Files__UploadMutation,
   Core_Editor_Files__UploadMutationVariables,
-} from '@/graphql/hooks';
+} from '../../../../graphql/hooks';
 
 export const uploadMutationApi = async (formData: FormData) => {
   const file = formData.get('file') as File;
