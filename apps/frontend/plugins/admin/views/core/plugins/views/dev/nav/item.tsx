@@ -1,10 +1,10 @@
-import { useTranslations } from "next-intl";
-import { useParams } from "next/navigation";
-import { FlatTree } from "vitnode-frontend/helpers/flatten-tree";
+import { useTranslations } from 'next-intl';
+import { useParams } from 'next/navigation';
+import { FlatTree } from 'vitnode-frontend/helpers/flatten-tree';
 
-import { ShowAdminNavPluginsObj } from "@/graphql/hooks";
-import { ActionsTableNavDevPluginAdmin } from "./item/actions/actions";
-import { useItemNavDevPluginAdmin } from "./item/hooks/use-item-nav-dev-plugin-admin";
+import { ShowAdminNavPluginsObj } from '@/graphql/hooks';
+import { ActionsTableNavDevPluginAdmin } from './item/actions/actions';
+import { useItemNavDevPluginAdmin } from './item/hooks/use-item-nav-dev-plugin-admin';
 
 export const ItemContentNavDevPluginAdmin = (
   data: FlatTree<ShowAdminNavPluginsObj>,
@@ -13,8 +13,8 @@ export const ItemContentNavDevPluginAdmin = (
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-expect-error
   const t = useTranslations(`${pluginCode}.admin.nav`);
-  const tAdmin = useTranslations("admin.core.plugins.dev.nav");
-  const tCore = useTranslations("core");
+  const tAdmin = useTranslations('admin.core.plugins.dev.nav');
+  const tCore = useTranslations('core');
   const { parentId } = useItemNavDevPluginAdmin();
   const langKey = parentId ? `${parentId}_${data.code}` : data.code;
 
@@ -27,16 +27,16 @@ export const ItemContentNavDevPluginAdmin = (
           {t(langKey)}
         </span>
         <p className="text-muted-foreground text-sm">
-          {tAdmin.rich("lang_key", {
+          {tAdmin.rich('lang_key', {
             key: () => (
               <span className="text-foreground">{`${pluginCode}.admin.nav.${langKey}`}</span>
             ),
           })}
         </p>
         <p className="text-muted-foreground text-sm">
-          {tCore.rich("link_url_with_link", {
+          {tCore.rich('link_url_with_link', {
             link: () => (
-              <span className="text-foreground">{`/admin/${pluginCode}/${parentId ? `${parentId}/` : ""}${data.code}`}</span>
+              <span className="text-foreground">{`/admin/${pluginCode}/${parentId ? `${parentId}/` : ''}${data.code}`}</span>
             ),
           })}
         </p>

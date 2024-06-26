@@ -1,10 +1,10 @@
-import { useTranslations } from "next-intl";
+import { useTranslations } from 'next-intl';
 import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "vitnode-frontend/components/ui/dialog";
+} from 'vitnode-frontend/components/ui/dialog';
 import {
   Form,
   FormControl,
@@ -12,17 +12,17 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "vitnode-frontend/components/ui/form";
-import { Button } from "vitnode-frontend/components/ui/button";
-import { Label } from "vitnode-frontend/components/ui/label";
-import { Input } from "vitnode-frontend/components/ui/input";
+} from 'vitnode-frontend/components/ui/form';
+import { Button } from 'vitnode-frontend/components/ui/button';
+import { Label } from 'vitnode-frontend/components/ui/label';
+import { Input } from 'vitnode-frontend/components/ui/input';
 import {
   RadioGroup,
   RadioGroupItem,
-} from "vitnode-frontend/components/ui/radio-group";
+} from 'vitnode-frontend/components/ui/radio-group';
 
-import { ShowAdminPlugins } from "@/graphql/hooks";
-import { useDownloadPluginAdmin } from "./hooks/use-download-plugin-admin";
+import { ShowAdminPlugins } from '@/graphql/hooks';
+import { useDownloadPluginAdmin } from './hooks/use-download-plugin-admin';
 
 export const ContentDownloadActionDevPluginAdmin = ({
   code,
@@ -30,7 +30,7 @@ export const ContentDownloadActionDevPluginAdmin = ({
   version,
   version_code,
 }: ShowAdminPlugins) => {
-  const t = useTranslations("admin.core.plugins.download");
+  const t = useTranslations('admin.core.plugins.download');
   const { form, onSubmit } = useDownloadPluginAdmin({
     version_code,
     version,
@@ -40,7 +40,7 @@ export const ContentDownloadActionDevPluginAdmin = ({
   return (
     <>
       <DialogHeader>
-        <DialogTitle>{t("title")}</DialogTitle>
+        <DialogTitle>{t('title')}</DialogTitle>
         <DialogDescription className="text-muted-foreground text-sm">
           {name}
         </DialogDescription>
@@ -60,7 +60,7 @@ export const ContentDownloadActionDevPluginAdmin = ({
                   <div className="flex items-center space-x-2">
                     <RadioGroupItem value="rebuild" id="rebuild" />
                     <Label htmlFor="rebuild">
-                      {t("type.rebuild", {
+                      {t('type.rebuild', {
                         version: `${version} (${version_code})`,
                       })}
                     </Label>
@@ -68,21 +68,21 @@ export const ContentDownloadActionDevPluginAdmin = ({
 
                   <div className="flex items-center space-x-2">
                     <RadioGroupItem value="new_version" id="new_version" />
-                    <Label htmlFor="new_version">{t("type.new_version")}</Label>
+                    <Label htmlFor="new_version">{t('type.new_version')}</Label>
                   </div>
                 </RadioGroup>
               )}
             />
           )}
 
-          {form.watch("type") === "new_version" && (
+          {form.watch('type') === 'new_version' && (
             <>
               <FormField
                 control={form.control}
                 name="version"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{t("version.label")}</FormLabel>
+                    <FormLabel>{t('version.label')}</FormLabel>
                     <FormControl>
                       <Input {...field} />
                     </FormControl>
@@ -96,7 +96,7 @@ export const ContentDownloadActionDevPluginAdmin = ({
                 name="version_code"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{t("version_code.label")}</FormLabel>
+                    <FormLabel>{t('version_code.label')}</FormLabel>
                     <FormControl>
                       <Input
                         type="number"
@@ -117,7 +117,7 @@ export const ContentDownloadActionDevPluginAdmin = ({
               loading={form.formState.isSubmitting}
               type="submit"
             >
-              {t("submit")}
+              {t('submit')}
             </Button>
           </DialogFooter>
         </form>

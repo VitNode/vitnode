@@ -1,6 +1,6 @@
-import "server-only";
+import 'server-only';
 
-import { cookies } from "next/headers";
+import { cookies } from 'next/headers';
 
 const cookieFromStringToObject = (
   str: string[],
@@ -9,14 +9,14 @@ const cookieFromStringToObject = (
   Expires: string;
   HttpOnly: boolean;
   Path: string;
-  SameSite: boolean | "lax" | "none" | "strict" | undefined;
+  SameSite: boolean | 'lax' | 'none' | 'strict' | undefined;
   Secure: boolean;
   // eslint-disable-next-line typescript-sort-keys/interface
-  [key: string]: boolean | string | "lax" | "none" | "strict" | undefined;
+  [key: string]: boolean | string | 'lax' | 'none' | 'strict' | undefined;
 }[] => {
   return str.map(item =>
     Object.fromEntries(
-      item.split("; ").map(v => {
+      item.split('; ').map(v => {
         const current = v.split(/=(.*)/s).map(decodeURIComponent);
 
         if (current.length === 1) {
@@ -35,7 +35,7 @@ export const setCookieFromApi = ({ res }: { res: Response }) => {
       const key = Object.keys(cookie)[0];
       const value = Object.values(cookie)[0];
 
-      if (typeof value !== "string" || typeof key !== "string") return;
+      if (typeof value !== 'string' || typeof key !== 'string') return;
 
       cookies().set(key, value, {
         domain: cookie.Domain,

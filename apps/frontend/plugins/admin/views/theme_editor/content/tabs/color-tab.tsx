@@ -1,26 +1,26 @@
-import { ChevronLeft } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { ChevronLeft } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import {
   getHSLFromString,
   getStringFromHSL,
   isColorBrightness,
-} from "vitnode-shared";
+} from 'vitnode-shared';
 import {
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from "vitnode-frontend/components/ui/form";
-import { Button } from "vitnode-frontend/components/ui/button";
-import { ColorInput } from "vitnode-frontend/components/ui/color-input";
-import { Separator } from "vitnode-frontend/components/ui/separator";
+} from 'vitnode-frontend/components/ui/form';
+import { Button } from 'vitnode-frontend/components/ui/button';
+import { ColorInput } from 'vitnode-frontend/components/ui/color-input';
+import { Separator } from 'vitnode-frontend/components/ui/separator';
 
-import { ThemeEditorTab, useThemeEditor } from "../../hooks/use-theme-editor";
+import { ThemeEditorTab, useThemeEditor } from '../../hooks/use-theme-editor';
 
 export const ColorTabThemeEditor = () => {
-  const t = useTranslations("core.theme_editor.colors");
-  const tCore = useTranslations("core");
+  const t = useTranslations('core.theme_editor.colors');
+  const tCore = useTranslations('core');
   const { activeTheme, changeColor, form, setActiveTab } = useThemeEditor();
 
   return (
@@ -33,7 +33,7 @@ export const ColorTabThemeEditor = () => {
           onClick={() => setActiveTab(ThemeEditorTab.Main)}
         >
           <ChevronLeft />
-          <span>{tCore("go_back")}</span>
+          <span>{tCore('go_back')}</span>
         </Button>
       </div>
 
@@ -45,7 +45,7 @@ export const ColorTabThemeEditor = () => {
           name="colors.primary"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{t("primary")}</FormLabel>
+              <FormLabel>{t('primary')}</FormLabel>
               <FormControl>
                 <ColorInput
                   {...field}
@@ -55,12 +55,12 @@ export const ColorTabThemeEditor = () => {
                     if (!hslFromColor) return;
 
                     changeColor({
-                      name: "primary",
+                      name: 'primary',
                       hslColor: hslFromColor,
                     });
 
                     changeColor({
-                      name: "primary-foreground",
+                      name: 'primary-foreground',
                       hslColor: isColorBrightness(hslFromColor)
                         ? {
                             h: hslFromColor.h,
@@ -88,7 +88,7 @@ export const ColorTabThemeEditor = () => {
           name="colors.secondary"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{t("secondary")}</FormLabel>
+              <FormLabel>{t('secondary')}</FormLabel>
               <FormControl>
                 <ColorInput
                   {...field}
@@ -98,12 +98,12 @@ export const ColorTabThemeEditor = () => {
                     if (!hslFromColor) return;
 
                     changeColor({
-                      name: "secondary",
+                      name: 'secondary',
                       hslColor: hslFromColor,
                     });
 
                     changeColor({
-                      name: "secondary-foreground",
+                      name: 'secondary-foreground',
                       hslColor: isColorBrightness(hslFromColor)
                         ? {
                             h: 210,
@@ -131,7 +131,7 @@ export const ColorTabThemeEditor = () => {
           name="colors.cover"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{t("cover")}</FormLabel>
+              <FormLabel>{t('cover')}</FormLabel>
               <FormControl>
                 <ColorInput
                   {...field}
@@ -141,12 +141,12 @@ export const ColorTabThemeEditor = () => {
                     if (!hslFromColor) return;
 
                     changeColor({
-                      name: "cover",
+                      name: 'cover',
                       hslColor: hslFromColor,
                     });
 
                     changeColor({
-                      name: "cover-foreground",
+                      name: 'cover-foreground',
                       hslColor: isColorBrightness(hslFromColor)
                         ? {
                             h: 210,
@@ -161,10 +161,10 @@ export const ColorTabThemeEditor = () => {
                     });
 
                     const colorMuted =
-                      form.getValues("colors.muted")[activeTheme];
+                      form.getValues('colors.muted')[activeTheme];
 
                     changeColor({
-                      name: "muted",
+                      name: 'muted',
                       hslColor: {
                         h: hslFromColor.h,
                         s: Math.floor(hslFromColor.s / 2),
@@ -173,11 +173,11 @@ export const ColorTabThemeEditor = () => {
                     });
 
                     const colorMutedForeground = form.getValues(
-                      "colors.muted-foreground",
+                      'colors.muted-foreground',
                     )[activeTheme];
 
                     changeColor({
-                      name: "muted-foreground",
+                      name: 'muted-foreground',
                       hslColor: {
                         h: hslFromColor.h,
                         s: colorMutedForeground.s,
@@ -186,10 +186,10 @@ export const ColorTabThemeEditor = () => {
                     });
 
                     const colorAccent =
-                      form.getValues("colors.accent")[activeTheme];
+                      form.getValues('colors.accent')[activeTheme];
 
                     changeColor({
-                      name: "accent",
+                      name: 'accent',
                       hslColor: {
                         h: hslFromColor.h,
                         s: Math.floor(hslFromColor.s / 2),
@@ -198,10 +198,10 @@ export const ColorTabThemeEditor = () => {
                     });
 
                     const colorBackground =
-                      form.getValues("colors.background")[activeTheme];
+                      form.getValues('colors.background')[activeTheme];
 
                     changeColor({
-                      name: "background",
+                      name: 'background',
                       hslColor: {
                         h: hslFromColor.h,
                         s: Math.floor(hslFromColor.s / 2),
@@ -210,10 +210,10 @@ export const ColorTabThemeEditor = () => {
                     });
 
                     const colorCard =
-                      form.getValues("colors.card")[activeTheme];
+                      form.getValues('colors.card')[activeTheme];
 
                     changeColor({
-                      name: "card",
+                      name: 'card',
                       hslColor: {
                         h: hslFromColor.h,
                         s: Math.floor(hslFromColor.s / 2),
@@ -222,10 +222,10 @@ export const ColorTabThemeEditor = () => {
                     });
 
                     const colorBorder =
-                      form.getValues("colors.border")[activeTheme];
+                      form.getValues('colors.border')[activeTheme];
 
                     changeColor({
-                      name: "border",
+                      name: 'border',
                       hslColor: {
                         h: hslFromColor.h,
                         s: Math.floor(hslFromColor.s / 4),
@@ -247,7 +247,7 @@ export const ColorTabThemeEditor = () => {
           name="colors.destructive"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{t("destructive")}</FormLabel>
+              <FormLabel>{t('destructive')}</FormLabel>
               <FormControl>
                 <ColorInput
                   {...field}
@@ -257,12 +257,12 @@ export const ColorTabThemeEditor = () => {
                     if (!hslFromColor) return;
 
                     changeColor({
-                      name: "destructive",
+                      name: 'destructive',
                       hslColor: hslFromColor,
                     });
 
                     changeColor({
-                      name: "destructive-foreground",
+                      name: 'destructive-foreground',
                       hslColor: isColorBrightness(hslFromColor)
                         ? {
                             h: 210,

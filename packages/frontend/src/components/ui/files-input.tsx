@@ -1,17 +1,17 @@
-import * as React from "react";
-import { Upload } from "lucide-react";
-import { useTranslations } from "next-intl";
-import { toast } from "sonner";
+import * as React from 'react';
+import { Upload } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import { toast } from 'sonner';
 
-import { PreviewFilesInput } from "./files/preview/preview-files-input";
+import { PreviewFilesInput } from './files/preview/preview-files-input';
 
-import { useMergeRefs } from "../../helpers/use-merge-refs";
-import { cn } from "../../helpers/classnames";
+import { useMergeRefs } from '../../helpers/use-merge-refs';
+import { cn } from '../../helpers/classnames';
 
 export interface FilesInputInputProps
   extends Omit<
     React.InputHTMLAttributes<HTMLInputElement>,
-    "onChange" | "type" | "value"
+    'onChange' | 'type' | 'value'
   > {
   acceptExtensions: string[];
   maxFileSizeInMb: number;
@@ -31,7 +31,7 @@ export const FilesInput = ({
   ref,
   ...props
 }: FilesInputInputProps) => {
-  const t = useTranslations("core");
+  const t = useTranslations('core');
   const [isDrag, setDrag] = React.useState(false);
   const currentRef = React.useRef<HTMLInputElement>(null);
   const inputRef = useMergeRefs([ref, currentRef]);
@@ -41,17 +41,17 @@ export const FilesInput = ({
 
     // Validate files
     const currentFiles = Array.from(files).filter(file => {
-      const splitFileName = file.name.split(".");
+      const splitFileName = file.name.split('.');
       const extensionType = splitFileName.at(-1);
 
       if (extensionType && !acceptExtensions.includes(extensionType)) {
-        toast.error(t("forms.files.errors.extension", { file: file.name }));
+        toast.error(t('forms.files.errors.extension', { file: file.name }));
 
         return;
       }
 
       if (maxFileSizeInMb && file.size > maxFileSizeInMb * 1024 * 1024) {
-        toast.error(t("forms.files.errors.max_size", { file: file.name }));
+        toast.error(t('forms.files.errors.max_size', { file: file.name }));
 
         return;
       }
@@ -78,30 +78,30 @@ export const FilesInput = ({
       {((stateValue && stateValue.length === 0 && !multiple) || multiple) && (
         <div
           className={cn(
-            "m-h-32 border-input bg-background placeholder:text-muted-foreground focus-visible:ring-ring flex w-full flex-col items-center justify-center rounded-md border px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-1 disabled:cursor-not-allowed disabled:opacity-50",
+            'm-h-32 border-input bg-background placeholder:text-muted-foreground focus-visible:ring-ring flex w-full flex-col items-center justify-center rounded-md border px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-1 disabled:cursor-not-allowed disabled:opacity-50',
             className,
             {
-              "cursor-not-allowed opacity-50": disabled,
+              'cursor-not-allowed opacity-50': disabled,
             },
           )}
           role="button"
           tabIndex={disabled ? -1 : 0}
           onClick={() => currentRef.current?.click()}
           onKeyDown={e => {
-            if (e.key === "Enter" || e.key === " ") {
+            if (e.key === 'Enter' || e.key === ' ') {
               e.preventDefault();
               currentRef.current?.click();
             }
           }}
           onDragOver={e => {
-            if (!e.dataTransfer.types.includes("Files")) return;
+            if (!e.dataTransfer.types.includes('Files')) return;
             e.preventDefault();
             e.stopPropagation();
 
             setDrag(true);
           }}
           onDragLeave={e => {
-            if (!e.dataTransfer.types.includes("Files")) return;
+            if (!e.dataTransfer.types.includes('Files')) return;
             e.preventDefault();
             e.stopPropagation();
 
@@ -109,7 +109,7 @@ export const FilesInput = ({
             setDrag(false);
           }}
           onDrop={e => {
-            if (!e.dataTransfer.types.includes("Files")) return;
+            if (!e.dataTransfer.types.includes('Files')) return;
             e.preventDefault();
             e.stopPropagation();
             setDrag(false);
@@ -119,15 +119,15 @@ export const FilesInput = ({
           <div className="text-muted-foreground flex flex-col items-center justify-center pb-6 pt-5">
             <Upload />
             <p className="my-2 text-sm font-semibold">
-              {t(isDrag ? "forms.files.drop_here" : "forms.files.title")}
+              {t(isDrag ? 'forms.files.drop_here' : 'forms.files.title')}
             </p>
             <p className="text-xs">
-              {acceptExtensions.join(", ").toUpperCase()}{" "}
+              {acceptExtensions.join(', ').toUpperCase()}{' '}
               {maxFileSizeInMb
-                ? t("forms.files.allow_size_per_file", {
+                ? t('forms.files.allow_size_per_file', {
                     size: maxFileSizeInMb,
                   })
-                : ""}
+                : ''}
             </p>
           </div>
           <input

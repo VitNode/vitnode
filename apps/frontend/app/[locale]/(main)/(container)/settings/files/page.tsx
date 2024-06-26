@@ -1,17 +1,17 @@
-import * as React from "react";
-import { fetcher } from "vitnode-frontend/graphql/fetcher";
+import * as React from 'react';
+import { fetcher } from 'vitnode-frontend/graphql/fetcher';
 
 import {
   Core_Members__Files__Show,
   ShowCoreFilesSortingColumnEnum,
   Core_Members__Files__ShowQuery,
   Core_Members__Files__ShowQueryVariables,
-} from "@/graphql/hooks";
+} from '@/graphql/hooks';
 import {
   usePaginationAPISsr,
   SearchParamsPagination,
-} from "@/plugins/core/hooks/utils/use-pagination-api-ssr";
-import { FilesSettingsView } from "@/plugins/core/templates/views/settings/views/files/files-settings-view";
+} from '@/plugins/core/hooks/utils/use-pagination-api-ssr';
+import { FilesSettingsView } from '@/plugins/core/templates/views/settings/views/files/files-settings-view';
 
 const getData = async (variables: Core_Members__Files__ShowQueryVariables) => {
   const { data } = await fetcher<
@@ -20,7 +20,7 @@ const getData = async (variables: Core_Members__Files__ShowQueryVariables) => {
   >({
     query: Core_Members__Files__Show,
     variables,
-    cache: "force-cache",
+    cache: 'force-cache',
   });
 
   return data;

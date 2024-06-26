@@ -1,4 +1,4 @@
-import { cn } from "../helpers";
+import { cn } from '../helpers';
 
 interface Props {
   className?: string;
@@ -11,7 +11,7 @@ export const LogoVitNode = ({ className, shrink }: Props) => {
       <svg
         viewBox="0 0 129 129"
         fill="none"
-        className={cn("text-foreground", className)}
+        className={cn('text-foreground', className)}
         xmlns="http://www.w3.org/2000/svg"
         aria-label="Logo VitNode"
       >
@@ -36,7 +36,7 @@ export const LogoVitNode = ({ className, shrink }: Props) => {
     <svg
       viewBox="0 0 546 129"
       fill="none"
-      className={cn("text-foreground", className)}
+      className={cn('text-foreground', className)}
       xmlns="http://www.w3.org/2000/svg"
       aria-label="Logo VitNode"
     >

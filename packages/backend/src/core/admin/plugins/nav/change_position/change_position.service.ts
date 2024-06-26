@@ -1,12 +1,12 @@
-import * as fs from "fs";
+import * as fs from 'fs';
 
-import { Injectable } from "@nestjs/common";
+import { Injectable } from '@nestjs/common';
 
-import { ChangePositionAdminNavPluginsArgs } from "./dto/change_position.args";
-import { HelpersAdminNavPluginsService } from "../helpers.service";
+import { ChangePositionAdminNavPluginsArgs } from './dto/change_position.args';
+import { HelpersAdminNavPluginsService } from '../helpers.service';
 
-import { NotFoundError } from "../../../../../errors";
-import { ABSOLUTE_PATHS_BACKEND, ConfigPlugin } from "../../../../..";
+import { NotFoundError } from '../../../../../errors';
+import { ABSOLUTE_PATHS_BACKEND, ConfigPlugin } from '../../../../..';
 
 @Injectable()
 export class ChangePositionAdminNavPluginsService extends HelpersAdminNavPluginsService {
@@ -15,8 +15,8 @@ export class ChangePositionAdminNavPluginsService extends HelpersAdminNavPlugins
     code,
   }: {
     code: string;
-    items: ConfigPlugin["nav"];
-  }): ConfigPlugin["nav"] {
+    items: ConfigPlugin['nav'];
+  }): ConfigPlugin['nav'] {
     return items.filter(item => {
       if (item.code === code) {
         return false;
@@ -43,16 +43,16 @@ export class ChangePositionAdminNavPluginsService extends HelpersAdminNavPlugins
       code: plugin_code,
     }).config;
     if (!fs.existsSync(pathConfig)) {
-      throw new NotFoundError("Plugin");
+      throw new NotFoundError('Plugin');
     }
     const config: ConfigPlugin = JSON.parse(
-      fs.readFileSync(pathConfig, "utf8"),
+      fs.readFileSync(pathConfig, 'utf8'),
     );
 
     // Find the item to be moved
     const itemToMove = this.findItemByCode({ items: config.nav, code });
     if (!itemToMove) {
-      throw new NotFoundError("Item");
+      throw new NotFoundError('Item');
     }
 
     // Remove the item from its current position
@@ -68,7 +68,7 @@ export class ChangePositionAdminNavPluginsService extends HelpersAdminNavPlugins
         code: parent_code,
       });
       if (!parentItem) {
-        throw new NotFoundError("Parent");
+        throw new NotFoundError('Parent');
       }
 
       parentItem.children = parentItem.children || [];
@@ -81,6 +81,6 @@ export class ChangePositionAdminNavPluginsService extends HelpersAdminNavPlugins
     // Save config
     fs.writeFileSync(pathConfig, JSON.stringify(config, null, 2));
 
-    return "Success!";
+    return 'Success!';
   }
 }

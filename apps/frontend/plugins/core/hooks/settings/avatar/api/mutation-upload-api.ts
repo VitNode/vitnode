@@ -1,17 +1,17 @@
-"use server";
+'use server';
 
-import { revalidatePath } from "next/cache";
-import { fetcher } from "vitnode-frontend/graphql/fetcher";
+import { revalidatePath } from 'next/cache';
+import { fetcher } from 'vitnode-frontend/graphql/fetcher';
 
 import {
   Core_Members__Avatar__Upload,
   Core_Members__Avatar__UploadMutation,
   Core_Members__Avatar__UploadMutationVariables,
-} from "@/graphql/hooks";
+} from '@/graphql/hooks';
 
 export const mutationUploadApi = async (formData: FormData) => {
   try {
-    const files = formData.get("file") as File;
+    const files = formData.get('file') as File;
 
     const { data } = await fetcher<
       Core_Members__Avatar__UploadMutation,
@@ -21,12 +21,12 @@ export const mutationUploadApi = async (formData: FormData) => {
       uploads: [
         {
           files,
-          variable: "file",
+          variable: 'file',
         },
       ],
     });
 
-    revalidatePath("/", "layout");
+    revalidatePath('/', 'layout');
 
     return { data };
   } catch (error) {

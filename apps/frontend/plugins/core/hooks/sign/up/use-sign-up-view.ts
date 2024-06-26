@@ -1,62 +1,62 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useTranslations } from "next-intl";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
-import { toast } from "sonner";
-import { ErrorType } from "vitnode-frontend/graphql/fetcher";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useTranslations } from 'next-intl';
+import { useForm } from 'react-hook-form';
+import * as z from 'zod';
+import { toast } from 'sonner';
+import { ErrorType } from 'vitnode-frontend/graphql/fetcher';
 
-import { mutationApi } from "./mutation-api";
+import { mutationApi } from './mutation-api';
 
 const nameRegex = /^(?!.* {2})[\p{L}\p{N}._@ -]*$/u;
 
 export const useSignUpView = () => {
-  const t = useTranslations("core");
+  const t = useTranslations('core');
 
   const formSchema = z.object({
     name: z
       .string()
       .trim()
       .min(1, {
-        message: t("forms.empty"),
+        message: t('forms.empty'),
       })
       .max(32, {
-        message: t("forms.max_length", { length: 32 }),
+        message: t('forms.max_length', { length: 32 }),
       })
       .refine(value => nameRegex.test(value), {
-        message: t("sign_up.form.name.invalid"),
+        message: t('sign_up.form.name.invalid'),
       }),
     email: z
       .string()
       .trim()
       .min(1, {
-        message: t("forms.empty"),
+        message: t('forms.empty'),
       }),
     password: z
       .string()
       .min(1, {
-        message: t("forms.empty"),
+        message: t('forms.empty'),
       })
       .regex(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-_=+{};:,<.>]).{8,}$/,
         {
-          message: t("sign_up.form.password.invalid"),
+          message: t('sign_up.form.password.invalid'),
         },
       ),
     terms: z.boolean().refine(value => value, {
-      message: t("sign_up.form.terms.empty"),
+      message: t('sign_up.form.terms.empty'),
     }),
     newsletter: z.boolean(),
   });
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
-      email: "",
-      password: "",
+      name: '',
+      email: '',
+      password: '',
       terms: false,
       newsletter: false,
     },
-    mode: "onChange",
+    mode: 'onChange',
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -69,12 +69,12 @@ export const useSignUpView = () => {
 
       if (error?.extensions) {
         const { code } = error.extensions;
-        if (code === "EMAIL_ALREADY_EXISTS") {
+        if (code === 'EMAIL_ALREADY_EXISTS') {
           form.setError(
-            "email",
+            'email',
             {
-              type: "manual",
-              message: t("sign_up.form.email.already_exists"),
+              type: 'manual',
+              message: t('sign_up.form.email.already_exists'),
             },
             {
               shouldFocus: true,
@@ -84,12 +84,12 @@ export const useSignUpView = () => {
           return;
         }
 
-        if (code === "NAME_ALREADY_EXISTS") {
+        if (code === 'NAME_ALREADY_EXISTS') {
           form.setError(
-            "name",
+            'name',
             {
-              type: "manual",
-              message: t("sign_up.form.name.already_exists"),
+              type: 'manual',
+              message: t('sign_up.form.name.already_exists'),
             },
             {
               shouldFocus: true,
@@ -99,8 +99,8 @@ export const useSignUpView = () => {
           return;
         }
 
-        toast.error(t("errors.title"), {
-          description: t("errors.internal_server_error"),
+        toast.error(t('errors.title'), {
+          description: t('errors.internal_server_error'),
         });
       }
     }

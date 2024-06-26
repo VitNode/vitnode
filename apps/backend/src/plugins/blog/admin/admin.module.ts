@@ -1,7 +1,7 @@
-import { Module } from "@nestjs/common";
+import { Module } from '@nestjs/common';
 
-import { CreateBlogCategoriesService } from "./categories/create/create.service";
-import { CreateBlogCategoriesResolver } from "./categories/create/create.resolver";
+import { CreateBlogCategoriesService } from './categories/create/create.service';
+import { CreateBlogCategoriesResolver } from './categories/create/create.resolver';
 
 @Module({
   providers: [CreateBlogCategoriesService, CreateBlogCategoriesResolver],

@@ -1,29 +1,29 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import { HslColorPicker, HslColor } from "react-colorful";
-import { RemoveFormatting } from "lucide-react";
-import { useTranslations } from "next-intl";
+import * as React from 'react';
+import { HslColorPicker, HslColor } from 'react-colorful';
+import { RemoveFormatting } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import {
   checkColorType,
   convertColor,
   isColorBrightness,
-} from "vitnode-shared";
+} from 'vitnode-shared';
 
-import { Input } from "./input";
+import { Input } from './input';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "./tooltip";
-import { Button } from "./button";
+} from './tooltip';
+import { Button } from './button';
 
-import { cn } from "../../helpers/classnames";
+import { cn } from '../../helpers/classnames';
 
 const presetColors: { color: HslColor; name: string }[] = [
   {
-    name: "Red",
+    name: 'Red',
     color: {
       h: 0,
       s: 80,
@@ -31,7 +31,7 @@ const presetColors: { color: HslColor; name: string }[] = [
     },
   },
   {
-    name: "Orange",
+    name: 'Orange',
     color: {
       h: 30,
       s: 80,
@@ -39,7 +39,7 @@ const presetColors: { color: HslColor; name: string }[] = [
     },
   },
   {
-    name: "Yellow",
+    name: 'Yellow',
     color: {
       h: 60,
       s: 80,
@@ -47,7 +47,7 @@ const presetColors: { color: HslColor; name: string }[] = [
     },
   },
   {
-    name: "Lime",
+    name: 'Lime',
     color: {
       h: 150,
       s: 80,
@@ -55,7 +55,7 @@ const presetColors: { color: HslColor; name: string }[] = [
     },
   },
   {
-    name: "Green",
+    name: 'Green',
     color: {
       h: 150,
       s: 80,
@@ -63,7 +63,7 @@ const presetColors: { color: HslColor; name: string }[] = [
     },
   },
   {
-    name: "Teal",
+    name: 'Teal',
     color: {
       h: 180,
       s: 80,
@@ -71,7 +71,7 @@ const presetColors: { color: HslColor; name: string }[] = [
     },
   },
   {
-    name: "Cyan",
+    name: 'Cyan',
     color: {
       h: 210,
       s: 80,
@@ -79,7 +79,7 @@ const presetColors: { color: HslColor; name: string }[] = [
     },
   },
   {
-    name: "Blue",
+    name: 'Blue',
     color: {
       h: 240,
       s: 80,
@@ -87,7 +87,7 @@ const presetColors: { color: HslColor; name: string }[] = [
     },
   },
   {
-    name: "Indigo",
+    name: 'Indigo',
     color: {
       h: 270,
       s: 80,
@@ -95,7 +95,7 @@ const presetColors: { color: HslColor; name: string }[] = [
     },
   },
   {
-    name: "Purple",
+    name: 'Purple',
     color: {
       h: 300,
       s: 80,
@@ -103,7 +103,7 @@ const presetColors: { color: HslColor; name: string }[] = [
     },
   },
   {
-    name: "Magenta",
+    name: 'Magenta',
     color: {
       h: 330,
       s: 80,
@@ -111,7 +111,7 @@ const presetColors: { color: HslColor; name: string }[] = [
     },
   },
   {
-    name: "Primary",
+    name: 'Primary',
     color: {
       h: 221.2,
       s: 83.2,
@@ -127,7 +127,7 @@ interface Props {
 }
 
 export const PickerColor = ({ color, disableRemoveColor, setColor }: Props) => {
-  const t = useTranslations("core.colors");
+  const t = useTranslations('core.colors');
   const [internalColor, setInternalColor] = React.useState<HslColor | null>(
     color,
   );
@@ -140,33 +140,33 @@ export const PickerColor = ({ color, disableRemoveColor, setColor }: Props) => {
     const input = value.trim();
     const type = checkColorType(input);
 
-    if (type === "hex") {
+    if (type === 'hex') {
       const hsl = convertColor.hexToHSL(input);
       if (!hsl) return;
       setColor(hsl);
       setInternalColor(hsl);
-    } else if (type === "rgb") {
-      const [r, g, b] = input.includes(",")
+    } else if (type === 'rgb') {
+      const [r, g, b] = input.includes(',')
         ? input
-            .replaceAll("rgb(", "")
-            .replaceAll(")", "")
-            .split(",")
+            .replaceAll('rgb(', '')
+            .replaceAll(')', '')
+            .split(',')
             .map(Number)
         : input
-            .replaceAll("rgb(", "")
-            .replaceAll(")", "")
-            .split(" ")
+            .replaceAll('rgb(', '')
+            .replaceAll(')', '')
+            .split(' ')
             .map(Number);
 
       const { h, l, s } = convertColor.RGBToHSL(r, g, b);
       setColor({ h, s, l });
       setInternalColor({ h, s, l });
-    } else if (type === "hsl") {
+    } else if (type === 'hsl') {
       const [h, s, l] = input
-        .replaceAll("hsl(", "")
-        .replaceAll(")", "")
-        .replaceAll("%", "")
-        .split(",")
+        .replaceAll('hsl(', '')
+        .replaceAll(')', '')
+        .replaceAll('%', '')
+        .split(',')
         .map(Number);
 
       setColor({ h, s, l });
@@ -197,20 +197,20 @@ export const PickerColor = ({ color, disableRemoveColor, setColor }: Props) => {
         <div className="flex w-[200px] gap-2">
           <Input
             type="text"
-            className={cn("h-9", {
-              "text-black": internalColor && colorBrightness,
-              "text-white": internalColor && !colorBrightness,
+            className={cn('h-9', {
+              'text-black': internalColor && colorBrightness,
+              'text-white': internalColor && !colorBrightness,
             })}
             ref={inputRef}
             defaultValue={
               internalColor
                 ? `hsl(${internalColor.h}, ${internalColor.s}%, ${internalColor.l}%)`
-                : "hs(0, 0%, 0%)"
+                : 'hs(0, 0%, 0%)'
             }
             style={{
               backgroundColor: internalColor
                 ? `hsl(${internalColor.h}, ${internalColor.s}%, ${internalColor.l}%)`
-                : "",
+                : '',
             }}
             onChange={e => handleInput(e.target.value)}
           />
@@ -222,7 +222,7 @@ export const PickerColor = ({ color, disableRemoveColor, setColor }: Props) => {
                   <Button
                     size="icon"
                     className="shrink-0"
-                    ariaLabel={t("remove")}
+                    ariaLabel={t('remove')}
                     variant="ghost"
                     onClick={() => {
                       setColor(null);
@@ -230,14 +230,14 @@ export const PickerColor = ({ color, disableRemoveColor, setColor }: Props) => {
 
                       // Change value of input
                       if (!inputRef.current) return;
-                      inputRef.current.value = "hsl(0, 0%, 0%)";
+                      inputRef.current.value = 'hsl(0, 0%, 0%)';
                     }}
                   >
                     <RemoveFormatting />
                   </Button>
                 </TooltipTrigger>
 
-                <TooltipContent>{t("remove")}</TooltipContent>
+                <TooltipContent>{t('remove')}</TooltipContent>
               </Tooltip>
             </TooltipProvider>
           )}

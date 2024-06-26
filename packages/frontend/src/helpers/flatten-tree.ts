@@ -1,6 +1,6 @@
 export type WithChildren<T extends object> = Omit<
   T,
-  "__typename" | "children"
+  '__typename' | 'children'
 > & {
   children: WithChildren<T>[];
   id: number | string;

@@ -1,18 +1,18 @@
-import * as React from "react";
-import { useTranslations } from "next-intl";
-import { X } from "lucide-react";
-import { cn } from "vitnode-frontend/helpers/classnames";
-import { Button } from "vitnode-frontend/components/ui/button";
-import { Loader } from "vitnode-frontend/components/ui/loader";
+import * as React from 'react';
+import { useTranslations } from 'next-intl';
+import { X } from 'lucide-react';
+import { cn } from 'vitnode-frontend/helpers/classnames';
+import { Button } from 'vitnode-frontend/components/ui/button';
+import { Loader } from 'vitnode-frontend/components/ui/loader';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "vitnode-frontend/components/ui/popover";
-import { Badge } from "vitnode-frontend/components/ui/badge";
+} from 'vitnode-frontend/components/ui/popover';
+import { Badge } from 'vitnode-frontend/components/ui/badge';
 
 const UserInputContent = React.lazy(async () =>
-  import("./content/content").then(module => ({
+  import('./content/content').then(module => ({
     default: module.UserInputContent,
   })),
 );
@@ -46,7 +46,7 @@ export const UserInput = ({
   value: currentValue,
   ...rest
 }: MultiProps | SingleProps) => {
-  const t = useTranslations("core.user_input");
+  const t = useTranslations('core.user_input');
   const values = Array.isArray(currentValue)
     ? currentValue
     : currentValue
@@ -59,13 +59,13 @@ export const UserInput = ({
       <PopoverTrigger asChild>
         <Button
           variant="outline"
-          className={cn("w-full justify-start", className, {
-            "text-muted-foreground": values.length === 0,
+          className={cn('w-full justify-start', className, {
+            'text-muted-foreground': values.length === 0,
           })}
           {...rest}
         >
           {values.length === 0
-            ? t("placeholder")
+            ? t('placeholder')
             : values.map(item => {
                 const onRemove = () => {
                   if (multiple) {
@@ -88,7 +88,7 @@ export const UserInput = ({
                       onRemove();
                     }}
                     onKeyDown={e => {
-                      if (e.key === "Enter") {
+                      if (e.key === 'Enter') {
                         e.stopPropagation();
                         e.preventDefault();
                         onRemove();

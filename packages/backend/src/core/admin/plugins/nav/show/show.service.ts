@@ -1,12 +1,12 @@
-import * as fs from "fs";
+import * as fs from 'fs';
 
-import { Injectable } from "@nestjs/common";
+import { Injectable } from '@nestjs/common';
 
-import { ShowAdminNavPluginsArgs } from "./dto/show.args";
-import { ShowAdminNavPluginsObj } from "./dto/show.obj";
+import { ShowAdminNavPluginsArgs } from './dto/show.args';
+import { ShowAdminNavPluginsObj } from './dto/show.obj';
 
-import { NotFoundError } from "../../../../../errors";
-import { ABSOLUTE_PATHS_BACKEND, ConfigPlugin } from "../../../../..";
+import { NotFoundError } from '../../../../../errors';
+import { ABSOLUTE_PATHS_BACKEND, ConfigPlugin } from '../../../../..';
 
 @Injectable()
 export class ShowAdminNavPluginsService {
@@ -15,11 +15,11 @@ export class ShowAdminNavPluginsService {
       code: plugin_code,
     }).config;
     if (!fs.existsSync(pathConfig)) {
-      throw new NotFoundError("Plugin");
+      throw new NotFoundError('Plugin');
     }
 
     const config: ConfigPlugin = JSON.parse(
-      fs.readFileSync(pathConfig, "utf8"),
+      fs.readFileSync(pathConfig, 'utf8'),
     );
 
     return config.nav;

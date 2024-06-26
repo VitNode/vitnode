@@ -1,13 +1,13 @@
-import { useGlobals } from "vitnode-frontend/hooks/use-globals";
-import { useSession } from "vitnode-frontend/hooks/use-session";
+import { useGlobals } from 'vitnode-frontend/hooks/use-globals';
+import { useSession } from 'vitnode-frontend/hooks/use-session';
 
 import {
   LanguageSelectFooterEditor,
   LanguageSelectFooterEditorProps,
-} from "./language-select";
-import { FilesButtonFooterEditor } from "./files/button";
-import { ListFilesFooterEditor } from "./files/list";
-import { useEditorState } from "../hooks/use-editor-state";
+} from './language-select';
+import { FilesButtonFooterEditor } from './files/button';
+import { ListFilesFooterEditor } from './files/list';
+import { useEditorState } from '../hooks/use-editor-state';
 
 interface Props extends LanguageSelectFooterEditorProps {
   disableLanguage?: boolean;
@@ -33,7 +33,7 @@ export const FooterEditor = ({
         )}
 
         {allowUploadFiles &&
-          config.editor.files.allow_type !== "none" &&
+          config.editor.files.allow_type !== 'none' &&
           permissionFiles.allow_upload && <FilesButtonFooterEditor />}
       </div>
 

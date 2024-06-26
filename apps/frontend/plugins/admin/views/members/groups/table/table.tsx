@@ -1,46 +1,46 @@
-"use client";
+'use client';
 
-import { useTranslations } from "next-intl";
-import { ColumnDef } from "@tanstack/react-table";
-import * as React from "react";
-import { Link } from "vitnode-frontend/navigation";
-import { Badge } from "vitnode-frontend/components/ui/badge";
+import { useTranslations } from 'next-intl';
+import { ColumnDef } from '@tanstack/react-table';
+import * as React from 'react';
+import { Link } from 'vitnode-frontend/navigation';
+import { Badge } from 'vitnode-frontend/components/ui/badge';
 
-import { DataTable } from "@/components/data-table/data-table";
-import { ShowAdminGroups } from "@/graphql/hooks";
-import { useTextLang } from "@/plugins/core/hooks/use-text-lang";
-import { ActionsTableGroupsMembersAdmin } from "./actions/actions";
-import { DateFormat } from "@/components/date-format/date-format";
-import { HeaderSortingDataTable } from "@/components/data-table/header";
-import { GroupsMembersAdminViewProps } from "../groups-members-admin-view";
+import { DataTable } from '@/components/data-table/data-table';
+import { ShowAdminGroups } from '@/graphql/hooks';
+import { useTextLang } from '@/plugins/core/hooks/use-text-lang';
+import { ActionsTableGroupsMembersAdmin } from './actions/actions';
+import { DateFormat } from '@/components/date-format/date-format';
+import { HeaderSortingDataTable } from '@/components/data-table/header';
+import { GroupsMembersAdminViewProps } from '../groups-members-admin-view';
 
 export const TableGroupsMembersAdmin = ({
   data,
 }: GroupsMembersAdminViewProps) => {
-  const t = useTranslations("admin.members.groups");
-  const tCore = useTranslations("core");
+  const t = useTranslations('admin.members.groups');
+  const tCore = useTranslations('core');
   const { convertText } = useTextLang();
 
   const columns: ColumnDef<ShowAdminGroups>[] = React.useMemo(
     () => [
       {
-        header: tCore("table.name"),
-        accessorKey: "name",
+        header: tCore('table.name'),
+        accessorKey: 'name',
         cell: ({ row }) => {
           const data = row.original;
 
           return (
             <div className="flex items-center gap-4">
               <span>{convertText(data.name)}</span>
-              {data.default && <Badge>{t("default")}</Badge>}
-              {data.root && <Badge>{t("root")}</Badge>}
+              {data.default && <Badge>{t('default')}</Badge>}
+              {data.root && <Badge>{t('root')}</Badge>}
             </div>
           );
         },
       },
       {
-        header: t("table.users_count"),
-        accessorKey: "users_count",
+        header: t('table.users_count'),
+        accessorKey: 'users_count',
         cell: ({ row }) => {
           const data = row.original;
 
@@ -55,11 +55,11 @@ export const TableGroupsMembersAdmin = ({
         header: val => {
           return (
             <HeaderSortingDataTable {...val}>
-              {tCore("table.updated")}
+              {tCore('table.updated')}
             </HeaderSortingDataTable>
           );
         },
-        accessorKey: "updated",
+        accessorKey: 'updated',
         cell: ({ row }) => {
           const data = row.original;
 
@@ -67,7 +67,7 @@ export const TableGroupsMembersAdmin = ({
         },
       },
       {
-        id: "actions",
+        id: 'actions',
         cell: ({ row }) => {
           const data = row.original;
 
@@ -84,10 +84,10 @@ export const TableGroupsMembersAdmin = ({
       pageInfo={data?.admin__core_groups__show.pageInfo}
       defaultPageSize={10}
       columns={columns}
-      searchPlaceholder={t("search_placeholder")}
+      searchPlaceholder={t('search_placeholder')}
       defaultSorting={{
-        sortBy: "updated",
-        sortDirection: "desc",
+        sortBy: 'updated',
+        sortDirection: 'desc',
       }}
     />
   );

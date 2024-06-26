@@ -1,47 +1,47 @@
-"use client";
+'use client';
 
-import { Plus, X } from "lucide-react";
-import { useTranslations } from "next-intl";
-import * as React from "react";
-import { cn } from "vitnode-frontend/helpers/classnames";
-import { Button } from "vitnode-frontend/components/ui/button";
-import { Loader } from "vitnode-frontend/components/ui/loader";
+import { Plus, X } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import * as React from 'react';
+import { cn } from 'vitnode-frontend/helpers/classnames';
+import { Button } from 'vitnode-frontend/components/ui/button';
+import { Loader } from 'vitnode-frontend/components/ui/loader';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "vitnode-frontend/components/ui/popover";
+} from 'vitnode-frontend/components/ui/popover';
 
-import { IconInputProps } from "./content/content";
-import { IconLucideNames } from "../icon";
+import { IconInputProps } from './content/content';
+import { IconLucideNames } from '../icon';
 
 const IconClient = React.lazy(async () =>
-  import("../icon-client").then(module => ({
+  import('../icon-client').then(module => ({
     default: module.IconClient,
   })),
 );
 
 const Content = React.lazy(async () =>
-  import("./content/content").then(module => ({
+  import('./content/content').then(module => ({
     default: module.ContentIconInput,
   })),
 );
 
-interface Props extends Omit<IconInputProps, "setOpen"> {
+interface Props extends Omit<IconInputProps, 'setOpen'> {
   className?: string;
 }
 
 export const IconInput = ({ className, onChange, value }: Props) => {
-  const t = useTranslations("core");
+  const t = useTranslations('core');
   const [open, setOpen] = React.useState(false);
 
   return (
     <Popover open={open} onOpenChange={setOpen} modal>
-      <div className={cn("flex flex-col gap-2", className)}>
+      <div className={cn('flex flex-col gap-2', className)}>
         <div className="flex gap-2">
           <PopoverTrigger asChild>
             <Button variant="outline" className="w-full max-w-52 justify-start">
-              <Plus /> {t("icon_picker.title")}
+              <Plus /> {t('icon_picker.title')}
             </Button>
           </PopoverTrigger>
 
@@ -49,10 +49,10 @@ export const IconInput = ({ className, onChange, value }: Props) => {
             <Button
               variant="destructiveGhost"
               onClick={() => {
-                onChange("");
+                onChange('');
               }}
             >
-              <X /> {t("icon_picker.remove")}
+              <X /> {t('icon_picker.remove')}
             </Button>
           )}
         </div>

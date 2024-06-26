@@ -1,22 +1,22 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useTranslations } from "next-intl";
-import { useForm } from "react-hook-form";
-import { toast } from "sonner";
-import * as z from "zod";
-import { zodInput } from "vitnode-frontend/helpers/zod";
-import { useDialog } from "vitnode-frontend/components/ui/dialog";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useTranslations } from 'next-intl';
+import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
+import * as z from 'zod';
+import { zodInput } from 'vitnode-frontend/helpers/zod';
+import { useDialog } from 'vitnode-frontend/components/ui/dialog';
 
-import { ShowCoreLanguages } from "@/graphql/hooks";
-import { editMutationApi } from "./edit-mutation-api";
-import { createMutationApi } from "./create-mutation-api";
+import { ShowCoreLanguages } from '@/graphql/hooks';
+import { editMutationApi } from './edit-mutation-api';
+import { createMutationApi } from './create-mutation-api';
 
 interface Args {
   data?: ShowCoreLanguages;
 }
 
 export const useCreateEditLangAdmin = ({ data }: Args) => {
-  const t = useTranslations("admin.core.langs.actions");
-  const tCore = useTranslations("core");
+  const t = useTranslations('admin.core.langs.actions');
+  const tCore = useTranslations('core');
   const { setOpen } = useDialog();
 
   const formSchema = z.object({
@@ -32,12 +32,12 @@ export const useCreateEditLangAdmin = ({ data }: Args) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      code: data?.code ?? "",
-      name: data?.name ?? "",
-      timezone: data?.timezone ?? "America/New_York",
+      code: data?.code ?? '',
+      name: data?.name ?? '',
+      timezone: data?.timezone ?? 'America/New_York',
       default: data?.default ?? false,
       time_24: data?.time_24 ?? false,
-      locale: data?.locale ?? "enUS",
+      locale: data?.locale ?? 'enUS',
       allow_in_input: data?.allow_in_input ?? true,
     },
   });
@@ -68,14 +68,14 @@ export const useCreateEditLangAdmin = ({ data }: Args) => {
     }
 
     if (error) {
-      toast.error(tCore("errors.title"), {
-        description: tCore("errors.internal_server_error"),
+      toast.error(tCore('errors.title'), {
+        description: tCore('errors.internal_server_error'),
       });
 
       return;
     }
 
-    toast(t(data ? "edit.success" : "create.success"), {
+    toast(t(data ? 'edit.success' : 'create.success'), {
       description: values.name,
     });
     setOpen?.(false);

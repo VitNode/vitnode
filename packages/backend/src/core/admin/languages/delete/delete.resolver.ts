@@ -1,10 +1,10 @@
-import { Args, Mutation, Resolver } from "@nestjs/graphql";
-import { UseGuards } from "@nestjs/common";
+import { Args, Mutation, Resolver } from '@nestjs/graphql';
+import { UseGuards } from '@nestjs/common';
 
-import { DeleteAdminCoreLanguageService } from "./delete.service";
-import { DeleteCoreAdminLanguagesArgs } from "./dto/delete.args";
+import { DeleteAdminCoreLanguageService } from './delete.service';
+import { DeleteCoreAdminLanguagesArgs } from './dto/delete.args';
 
-import { AdminAuthGuards } from "../../../../utils";
+import { AdminAuthGuards } from '../../../../utils';
 
 @Resolver()
 export class DeleteAdminCoreLanguagesResolver {

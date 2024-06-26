@@ -1,4 +1,4 @@
-import { EmailTemplateProps } from "./template/email-template";
+import { EmailTemplateProps } from './template/email-template';
 
 export interface GetHelpersForEmailType {
   color: {
@@ -22,5 +22,5 @@ export interface GetHelpersForEmailType {
 
 export interface EmailHelpersServiceType {
   getHelpersForEmail: () => GetHelpersForEmailType;
-  template: (props: Omit<EmailTemplateProps, "helpers">) => JSX.Element;
+  template: (props: Omit<EmailTemplateProps, 'helpers'>) => JSX.Element;
 }

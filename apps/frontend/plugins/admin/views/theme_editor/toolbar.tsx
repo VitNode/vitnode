@@ -1,19 +1,19 @@
-import { Monitor, Moon, Smartphone, Sun, Tablet } from "lucide-react";
-import { useTranslations } from "next-intl";
-import * as React from "react";
-import { useTheme } from "next-themes";
+import { Monitor, Moon, Smartphone, Sun, Tablet } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import * as React from 'react';
+import { useTheme } from 'next-themes';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "vitnode-frontend/components/ui/tooltip";
-import { Button } from "vitnode-frontend/components/ui/button";
+} from 'vitnode-frontend/components/ui/tooltip';
+import { Button } from 'vitnode-frontend/components/ui/button';
 
 export enum ThemeEditorViewEnum {
-  Desktop = "desktop",
-  Tablet = "tablet",
-  Mobile = "mobile",
+  Desktop = 'desktop',
+  Tablet = 'tablet',
+  Mobile = 'mobile',
 }
 
 interface Props {
@@ -22,9 +22,9 @@ interface Props {
 }
 
 export const ToolbarThemeEditor = ({ activeMode, setActiveMode }: Props) => {
-  const t = useTranslations("core");
+  const t = useTranslations('core');
   const { resolvedTheme, setTheme, theme } = useTheme();
-  const activeTheme = resolvedTheme ?? theme ?? "light";
+  const activeTheme = resolvedTheme ?? theme ?? 'light';
 
   const ButtonWithTooltip = ({
     active,
@@ -44,7 +44,7 @@ export const ToolbarThemeEditor = ({ activeMode, setActiveMode }: Props) => {
             <Button
               size="icon"
               ariaLabel={ariaLabel}
-              variant={active ? "default" : "ghost"}
+              variant={active ? 'default' : 'ghost'}
               className="relative shrink-0"
               onClick={onClick}
             >
@@ -88,17 +88,17 @@ export const ToolbarThemeEditor = ({ activeMode, setActiveMode }: Props) => {
 
       <div className="flex flex-col gap-1 p-2">
         <ButtonWithTooltip
-          active={activeTheme === "light"}
-          onClick={() => setTheme("light")}
-          ariaLabel={t("user-bar.dark_light_switcher.light")}
+          active={activeTheme === 'light'}
+          onClick={() => setTheme('light')}
+          ariaLabel={t('user-bar.dark_light_switcher.light')}
         >
           <Sun />
         </ButtonWithTooltip>
 
         <ButtonWithTooltip
-          active={activeTheme === "dark"}
-          onClick={() => setTheme("dark")}
-          ariaLabel={t("user-bar.dark_light_switcher.dark")}
+          active={activeTheme === 'dark'}
+          onClick={() => setTheme('dark')}
+          ariaLabel={t('user-bar.dark_light_switcher.dark')}
         >
           <Moon />
         </ButtonWithTooltip>

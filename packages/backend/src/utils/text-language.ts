@@ -1,5 +1,5 @@
-import { Field, InputType, ObjectType } from "@nestjs/graphql";
-import { registerDecorator } from "class-validator";
+import { Field, InputType, ObjectType } from '@nestjs/graphql';
+import { registerDecorator } from 'class-validator';
 
 @ObjectType()
 export class TextLanguage {
@@ -26,7 +26,7 @@ export const IsTextLanguageInput = () => {
       target: object.constructor,
       propertyName,
       options: {
-        message: "Each language must have a value",
+        message: 'Each language must have a value',
       },
       validator: {
         validate(item: TextLanguageInput | TextLanguageInput[]) {
@@ -90,10 +90,10 @@ export const TransformTextLanguageInput = ({
     }));
 
     // If is only one item and isn't english then change to english
-    if (current.find(el => el.language_code !== "en" && current.length === 1)) {
+    if (current.find(el => el.language_code !== 'en' && current.length === 1)) {
       current = [
         {
-          language_code: "en",
+          language_code: 'en',
           value: current[0].value,
         },
       ];

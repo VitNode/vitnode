@@ -1,12 +1,12 @@
-import * as React from "react";
-import { HslColor } from "react-colorful";
-import { UseFormReturn } from "react-hook-form";
+import * as React from 'react';
+import { HslColor } from 'react-colorful';
+import { UseFormReturn } from 'react-hook-form';
 
-import { formSchemaColorsThemeEditor } from "./use-theme-editor-api";
+import { formSchemaColorsThemeEditor } from './use-theme-editor-api';
 
 export enum ThemeEditorTab {
-  Main = "main",
-  Colors = "colors",
+  Main = 'main',
+  Colors = 'colors',
 }
 
 interface ColorObj {
@@ -17,26 +17,26 @@ interface ColorObj {
 interface ThemeEditorFormObj {
   colors: {
     accent: ColorObj;
-    "accent-foreground": ColorObj;
+    'accent-foreground': ColorObj;
     background: ColorObj;
     border: ColorObj;
     card: ColorObj;
     cover: ColorObj;
-    "cover-foreground": ColorObj;
+    'cover-foreground': ColorObj;
     destructive: ColorObj;
-    "destructive-foreground": ColorObj;
+    'destructive-foreground': ColorObj;
     muted: ColorObj;
-    "muted-foreground": ColorObj;
+    'muted-foreground': ColorObj;
     primary: ColorObj;
-    "primary-foreground": ColorObj;
+    'primary-foreground': ColorObj;
     secondary: ColorObj;
-    "secondary-foreground": ColorObj;
+    'secondary-foreground': ColorObj;
   };
 }
 
 interface Args {
   activeTab: ThemeEditorTab;
-  activeTheme: "dark" | "light";
+  activeTheme: 'dark' | 'light';
   changeColor: ({
     hslColor,
     name,
@@ -59,7 +59,7 @@ export const ThemeEditorContext = React.createContext<Args>({
   form: {} as UseFormReturn<ThemeEditorFormObj>,
   onSubmit: () => {},
   changeColor: () => {},
-  activeTheme: "light",
+  activeTheme: 'light',
   openSubmitDialog: false,
   setOpenSubmitDialog: () => {},
 });

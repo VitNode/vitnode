@@ -1,4 +1,4 @@
-import { CreateActionLangAdmin } from "./create";
+import { CreateActionLangAdmin } from './create';
 
 export const ActionsLangsAdmin = () => {
   return (

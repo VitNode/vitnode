@@ -1,13 +1,13 @@
-import { ArgsType, Field, InputType, registerEnumType } from "@nestjs/graphql";
+import { ArgsType, Field, InputType, registerEnumType } from '@nestjs/graphql';
 
-import { PaginationArgs, SortDirectionEnum } from "../../../../../../utils";
+import { PaginationArgs, SortDirectionEnum } from '../../../../../../utils';
 
 enum ShowAdminStaffAdministratorsSortingColumnEnum {
-  updated = "updated",
+  updated = 'updated',
 }
 
 registerEnumType(ShowAdminStaffAdministratorsSortingColumnEnum, {
-  name: "ShowAdminStaffAdministratorsSortingColumnEnum",
+  name: 'ShowAdminStaffAdministratorsSortingColumnEnum',
 });
 
 @InputType()

@@ -5,13 +5,13 @@ const ENVS = {
 };
 
 export const CONFIG = {
-  graphql_url: ENVS.graphql_url ?? "http://localhost:8080",
-  backend_url: ENVS.backend_url ?? "http://localhost:8080",
-  frontend_url: ENVS.frontend_url ?? "http://localhost:3000",
-  graphql_public_url: `${ENVS.graphql_url ?? "http://localhost:8080"}/public`,
-  backend_public_url: `${ENVS.backend_url ?? "http://localhost:8080"}/public`,
+  graphql_url: ENVS.graphql_url ?? 'http://localhost:8080',
+  backend_url: ENVS.backend_url ?? 'http://localhost:8080',
+  frontend_url: ENVS.frontend_url ?? 'http://localhost:3000',
+  graphql_public_url: `${ENVS.graphql_url ?? 'http://localhost:8080'}/public`,
+  backend_public_url: `${ENVS.backend_url ?? 'http://localhost:8080'}/public`,
   local_storage: {
-    editor_skin_tone: "emoji:skin-tone",
+    editor_skin_tone: 'emoji:skin-tone',
   },
-  node_development: process.env.NODE_ENV === "development",
+  node_development: process.env.NODE_ENV === 'development',
 };

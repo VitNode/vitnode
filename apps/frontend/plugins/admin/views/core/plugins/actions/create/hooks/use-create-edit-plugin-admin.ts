@@ -1,17 +1,17 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
-import { toast } from "sonner";
-import { useTranslations } from "next-intl";
-import { usePathname, useRouter } from "vitnode-frontend/navigation";
-import { zodInput } from "vitnode-frontend/helpers/zod";
-import { useDialog } from "vitnode-frontend/components/ui/dialog";
-import { ErrorType } from "vitnode-frontend/graphql/fetcher";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import * as z from 'zod';
+import { toast } from 'sonner';
+import { useTranslations } from 'next-intl';
+import { usePathname, useRouter } from 'vitnode-frontend/navigation';
+import { zodInput } from 'vitnode-frontend/helpers/zod';
+import { useDialog } from 'vitnode-frontend/components/ui/dialog';
+import { ErrorType } from 'vitnode-frontend/graphql/fetcher';
 
-import { mutationCreateApi } from "./mutation-create-api";
-import { ShowAdminPlugins } from "@/graphql/hooks";
-import { mutationEditApi } from "./mutation-edit-api";
-import { useSessionAdmin } from "@/plugins/admin/hooks/use-session-admin";
+import { mutationCreateApi } from './mutation-create-api';
+import { ShowAdminPlugins } from '@/graphql/hooks';
+import { mutationEditApi } from './mutation-edit-api';
+import { useSessionAdmin } from '@/plugins/admin/hooks/use-session-admin';
 
 export const codePluginRegex = /^[a-z0-9-]*$/;
 
@@ -20,8 +20,8 @@ interface Args {
 }
 
 export const useCreateEditPluginAdmin = ({ data }: Args) => {
-  const t = useTranslations("admin.core.plugins");
-  const tCore = useTranslations("core");
+  const t = useTranslations('admin.core.plugins');
+  const tCore = useTranslations('core');
   const { setOpen } = useDialog();
   const pathname = usePathname();
   const { push } = useRouter();
@@ -32,23 +32,23 @@ export const useCreateEditPluginAdmin = ({ data }: Args) => {
       .min(3)
       .max(50)
       .refine(value => codePluginRegex.test(value), {
-        message: t("create.code.invalid"),
+        message: t('create.code.invalid'),
       }),
     description: zodInput.string,
     support_url: zodInput.string.url(),
     author: zodInput.string.min(3).max(100),
-    author_url: zodInput.string.url().or(z.literal("")),
+    author_url: zodInput.string.url().or(z.literal('')),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: data?.name ?? "",
-      code: data?.code ?? "",
-      description: data?.description ?? "",
-      support_url: data?.support_url ?? "",
-      author: data ? data.author : session?.name ?? "",
-      author_url: data?.author_url ?? "",
+      name: data?.name ?? '',
+      code: data?.code ?? '',
+      description: data?.description ?? '',
+      support_url: data?.support_url ?? '',
+      author: data ? data.author : session?.name ?? '',
+      author_url: data?.author_url ?? '',
     },
   });
 
@@ -84,23 +84,23 @@ export const useCreateEditPluginAdmin = ({ data }: Args) => {
       }
     }
 
-    if (error?.extensions?.code === "PLUGIN_ALREADY_EXISTS") {
-      form.setError("code", {
-        message: t("create.code.exists"),
+    if (error?.extensions?.code === 'PLUGIN_ALREADY_EXISTS') {
+      form.setError('code', {
+        message: t('create.code.exists'),
       });
 
       return;
     }
 
     if (error) {
-      toast.error(tCore("errors.title"), {
-        description: tCore("errors.internal_server_error"),
+      toast.error(tCore('errors.title'), {
+        description: tCore('errors.internal_server_error'),
       });
 
       return;
     }
 
-    toast.success(t(data ? "edit.success" : "create.success"), {
+    toast.success(t(data ? 'edit.success' : 'create.success'), {
       description: values.name,
     });
 

@@ -1,17 +1,17 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
-import { toast } from "sonner";
-import { useTranslations } from "next-intl";
-import { getHSLFromString, isColorBrightness } from "vitnode-shared";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import * as z from 'zod';
+import { toast } from 'sonner';
+import { useTranslations } from 'next-intl';
+import { getHSLFromString, isColorBrightness } from 'vitnode-shared';
 
-import { Admin__Core_Email_Settings__ShowQuery } from "@/graphql/hooks";
-import { mutationApi } from "./mutation-api";
+import { Admin__Core_Email_Settings__ShowQuery } from '@/graphql/hooks';
+import { mutationApi } from './mutation-api';
 
 export const useEmailSettingsFormAdmin = ({
   admin__core_email_settings__show: data,
 }: Admin__Core_Email_Settings__ShowQuery) => {
-  const t = useTranslations("core");
+  const t = useTranslations('core');
 
   const formSchema = z.object({
     smtp_host: z.string().min(1),
@@ -25,12 +25,12 @@ export const useEmailSettingsFormAdmin = ({
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      smtp_host: data.smtp_host || "",
-      smtp_user: data.smtp_user || "",
+      smtp_host: data.smtp_host || '',
+      smtp_user: data.smtp_user || '',
       smtp_port: data.smtp_port || 0,
       smtp_secure: data.smtp_secure || false,
-      smtp_password: "", // Password is not fetched from the server,
-      color_primary: data.color_primary || "hsl(0, 0, 0)",
+      smtp_password: '', // Password is not fetched from the server,
+      color_primary: data.color_primary || 'hsl(0, 0, 0)',
     },
   });
 
@@ -49,14 +49,14 @@ export const useEmailSettingsFormAdmin = ({
     });
 
     if (mutation.error) {
-      toast.error(t("errors.title"), {
-        description: t("errors.internal_server_error"),
+      toast.error(t('errors.title'), {
+        description: t('errors.internal_server_error'),
       });
 
       return;
     }
 
-    toast.success(t("saved_success"));
+    toast.success(t('saved_success'));
     form.reset(values);
   };
 

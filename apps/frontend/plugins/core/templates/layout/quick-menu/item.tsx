@@ -1,6 +1,6 @@
-import * as React from "react";
-import { Link } from "vitnode-frontend/navigation";
-import { cn } from "vitnode-frontend/helpers/classnames";
+import * as React from 'react';
+import { Link } from 'vitnode-frontend/navigation';
+import { cn } from 'vitnode-frontend/helpers/classnames';
 
 interface Props {
   children: React.ReactNode;
@@ -18,9 +18,9 @@ export const ItemQuickMenu = ({
   ref,
 }: Props) => {
   const className = cn(
-    "text-foreground [&>span]:text-muted-foreground flex flex-1 flex-col items-center justify-center gap-1.5 px-1 pb-2 pt-1.5 text-center text-xs leading-none no-underline [&>svg]:size-6",
+    'text-foreground [&>span]:text-muted-foreground flex flex-1 flex-col items-center justify-center gap-1.5 px-1 pb-2 pt-1.5 text-center text-xs leading-none no-underline [&>svg]:size-6',
     {
-      "text-primary": active,
+      'text-primary': active,
     },
   );
 

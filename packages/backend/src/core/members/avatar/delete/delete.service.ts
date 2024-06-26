@@ -1,10 +1,10 @@
-import { Injectable } from "@nestjs/common";
-import { eq } from "drizzle-orm";
+import { Injectable } from '@nestjs/common';
+import { eq } from 'drizzle-orm';
 
-import { DeleteCoreFilesService } from "../../../files/helpers/delete/delete.service";
-import { DatabaseService } from "../../../../database";
-import { User } from "../../../../decorators";
-import { core_files_avatars } from "../../../../templates/core/admin/database/schema/users";
+import { DeleteCoreFilesService } from '../../../files/helpers/delete/delete.service';
+import { DatabaseService } from '../../../../database';
+import { User } from '../../../../decorators';
+import { core_files_avatars } from '../../../../templates/core/admin/database/schema/users';
 
 @Injectable()
 export class DeleteAvatarCoreMembersService {
@@ -15,7 +15,7 @@ export class DeleteAvatarCoreMembersService {
 
   async deleteAvatar({ avatar }: User): Promise<string> {
     if (!avatar) {
-      return "Avatar not found";
+      return 'Avatar not found';
     }
 
     // Check if avatar exists
@@ -33,6 +33,6 @@ export class DeleteAvatarCoreMembersService {
     // Delete from server
     this.deleteFile.delete(avatar);
 
-    return "Success!";
+    return 'Success!';
   }
 }

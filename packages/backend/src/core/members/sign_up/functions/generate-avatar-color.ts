@@ -7,7 +7,7 @@ const hslToRgb = (h: number, s: number, l: number) => {
 
     return Math.round(255 * color)
       .toString(16)
-      .padStart(2, "0"); // convert to Hex and prefix "0" if needed
+      .padStart(2, '0'); // convert to Hex and prefix "0" if needed
   };
 
   return `${f(0)}${f(8)}${f(4)}`;

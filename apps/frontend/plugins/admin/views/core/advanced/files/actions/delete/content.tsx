@@ -1,21 +1,21 @@
-import { useTranslations } from "next-intl";
-import { Button } from "vitnode-frontend/components/ui/button";
+import { useTranslations } from 'next-intl';
+import { Button } from 'vitnode-frontend/components/ui/button';
 import {
   AlertDialogCancel,
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "vitnode-frontend/components/ui/alert-dialog";
+} from 'vitnode-frontend/components/ui/alert-dialog';
 
-import { SubmitDeleteActionFilesAdvancedCoreAdmin } from "./submit";
-import { useDeleteFileAdvancedAdmin } from "./hooks/use-delete-file-advanced-admin";
-import { Admin__Core_Files__ShowQuery } from "@/graphql/hooks";
+import { SubmitDeleteActionFilesAdvancedCoreAdmin } from './submit';
+import { useDeleteFileAdvancedAdmin } from './hooks/use-delete-file-advanced-admin';
+import { Admin__Core_Files__ShowQuery } from '@/graphql/hooks';
 
 export interface ContentDeleteActionFilesAdvancedCoreAdminProps
   extends Pick<
-    Admin__Core_Files__ShowQuery["admin__core_files__show"]["edges"][0],
-    "count_uses" | "file_name_original" | "id"
+    Admin__Core_Files__ShowQuery['admin__core_files__show']['edges'][0],
+    'count_uses' | 'file_name_original' | 'id'
   > {}
 
 export const ContentDeleteActionFilesAdvancedCoreAdmin = ({
@@ -23,8 +23,8 @@ export const ContentDeleteActionFilesAdvancedCoreAdmin = ({
   file_name_original,
   id,
 }: ContentDeleteActionFilesAdvancedCoreAdminProps) => {
-  const t = useTranslations("admin.core.advanced.files.delete");
-  const tCore = useTranslations("core");
+  const t = useTranslations('admin.core.advanced.files.delete');
+  const tCore = useTranslations('core');
   const { onSubmit } = useDeleteFileAdvancedAdmin({
     file_name_original,
     id,
@@ -34,10 +34,10 @@ export const ContentDeleteActionFilesAdvancedCoreAdmin = ({
     <form action={onSubmit}>
       <AlertDialogHeader>
         <AlertDialogTitle>
-          {tCore(count_uses > 0 ? "are_you_absolutely_sure" : "are_you_sure")}
+          {tCore(count_uses > 0 ? 'are_you_absolutely_sure' : 'are_you_sure')}
         </AlertDialogTitle>
         <AlertDialogDescription>
-          {t.rich("desc", {
+          {t.rich('desc', {
             name: () => (
               <span className="text-foreground font-bold">
                 {file_name_original}
@@ -47,7 +47,7 @@ export const ContentDeleteActionFilesAdvancedCoreAdmin = ({
         </AlertDialogDescription>
         {count_uses > 0 && (
           <AlertDialogDescription className="text-destructive">
-            {t("uses_warning")}
+            {t('uses_warning')}
           </AlertDialogDescription>
         )}
       </AlertDialogHeader>
@@ -55,7 +55,7 @@ export const ContentDeleteActionFilesAdvancedCoreAdmin = ({
       <AlertDialogFooter className="mt-6">
         <AlertDialogCancel asChild>
           <Button type="button" variant="outline">
-            {tCore("cancel")}
+            {tCore('cancel')}
           </Button>
         </AlertDialogCancel>
 

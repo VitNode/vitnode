@@ -1,18 +1,18 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import { cn } from "vitnode-frontend/helpers/classnames";
-import { CONFIG } from "vitnode-frontend/helpers/config-with-env";
-import { Loader } from "vitnode-frontend/components/ui/loader";
+import * as React from 'react';
+import { cn } from 'vitnode-frontend/helpers/classnames';
+import { CONFIG } from 'vitnode-frontend/helpers/config-with-env';
+import { Loader } from 'vitnode-frontend/components/ui/loader';
 
-import { ThemeEditorViewEnum, ToolbarThemeEditor } from "./toolbar";
-import { ThemeEditorContext, ThemeEditorTab } from "./hooks/use-theme-editor";
-import { ContentThemeEditor } from "./content/content";
+import { ThemeEditorViewEnum, ToolbarThemeEditor } from './toolbar';
+import { ThemeEditorContext, ThemeEditorTab } from './hooks/use-theme-editor';
+import { ContentThemeEditor } from './content/content';
 import {
   keysFromCSSThemeEditor,
   useThemeEditorApi,
-} from "./hooks/use-theme-editor-api";
-import { Core_Theme_Editor__ShowQuery } from "@/graphql/hooks";
+} from './hooks/use-theme-editor-api';
+import { Core_Theme_Editor__ShowQuery } from '@/graphql/hooks';
 
 export const ThemeEditorView = (props: Core_Theme_Editor__ShowQuery) => {
   const { activeTheme, iframeRef, ...rest } = useThemeEditorApi(props);
@@ -48,10 +48,10 @@ export const ThemeEditorView = (props: Core_Theme_Editor__ShowQuery) => {
           <iframe
             ref={iframeRef}
             title={CONFIG.frontend_url}
-            className={cn("bg-background transition-all", {
-              "h-full w-full": activeMode === "desktop",
-              "h-5/6 w-[768px] rounded-md border": activeMode === "tablet",
-              "h-5/6 w-[375px] rounded-md border": activeMode === "mobile",
+            className={cn('bg-background transition-all', {
+              'h-full w-full': activeMode === 'desktop',
+              'h-5/6 w-[768px] rounded-md border': activeMode === 'tablet',
+              'h-5/6 w-[375px] rounded-md border': activeMode === 'mobile',
             })}
             src={CONFIG.frontend_url}
             onLoad={() => {
@@ -59,7 +59,7 @@ export const ThemeEditorView = (props: Core_Theme_Editor__ShowQuery) => {
 
               const iframe =
                 iframeRef.current?.contentWindow?.document.querySelector(
-                  "html",
+                  'html',
                 );
               if (!iframe) return;
 

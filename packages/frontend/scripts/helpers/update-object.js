@@ -6,7 +6,7 @@ export function updateObject(config, defaultData) {
                 updatedConfig[key] = [];
             }
         }
-        else if (typeof defaultData[key] === "object" &&
+        else if (typeof defaultData[key] === 'object' &&
             defaultData[key] !== null) {
             if (!config[key]) {
                 updatedConfig[key] = {};

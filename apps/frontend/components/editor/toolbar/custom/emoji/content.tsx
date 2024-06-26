@@ -1,20 +1,20 @@
-import { useTranslations } from "next-intl";
-import * as React from "react";
-import { Input } from "vitnode-frontend/components/ui/input";
-import { CONFIG } from "vitnode-frontend/helpers/config-with-env";
+import { useTranslations } from 'next-intl';
+import * as React from 'react';
+import { Input } from 'vitnode-frontend/components/ui/input';
+import { CONFIG } from 'vitnode-frontend/helpers/config-with-env';
 
-import { EmojisContentIconInput } from "@/components/icon/input/content/emojis/emojis";
-import { SkinSelectEmojisContentIconInput } from "@/components/icon/input/content/emojis/skin-select";
-import { useEditorState } from "@/components/editor/hooks/use-editor-state";
+import { EmojisContentIconInput } from '@/components/icon/input/content/emojis/emojis';
+import { SkinSelectEmojisContentIconInput } from '@/components/icon/input/content/emojis/skin-select';
+import { useEditorState } from '@/components/editor/hooks/use-editor-state';
 
 interface Props {
   setIsOpen?: (open: boolean) => void;
 }
 
 export const ContentEmojiToolbarEditor = ({ setIsOpen }: Props) => {
-  const t = useTranslations("core.icon_picker");
+  const t = useTranslations('core.icon_picker');
   const { editor } = useEditorState();
-  const [search, setSearch] = React.useState("");
+  const [search, setSearch] = React.useState('');
   const localStorageSkinToneIndex = localStorage.getItem(
     CONFIG.local_storage.editor_skin_tone,
   );
@@ -27,7 +27,7 @@ export const ContentEmojiToolbarEditor = ({ setIsOpen }: Props) => {
       <div className="bg-popover sticky top-0 z-10 flex flex-col gap-3 p-4">
         <div className="flex gap-2">
           <Input
-            placeholder={t("emojis.placeholder")}
+            placeholder={t('emojis.placeholder')}
             onChange={e => setSearch(e.target.value)}
             value={search}
             className="h-9"

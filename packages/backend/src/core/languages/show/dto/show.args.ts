@@ -1,14 +1,14 @@
-import { ArgsType, Field, InputType, registerEnumType } from "@nestjs/graphql";
+import { ArgsType, Field, InputType, registerEnumType } from '@nestjs/graphql';
 
-import { PaginationArgs, SortDirectionEnum } from "../../../../utils";
+import { PaginationArgs, SortDirectionEnum } from '../../../../utils';
 
 enum ShowCoreLanguagesSortingColumnEnum {
-  created = "created",
-  updated = "updated",
+  created = 'created',
+  updated = 'updated',
 }
 
 registerEnumType(ShowCoreLanguagesSortingColumnEnum, {
-  name: "ShowCoreLanguagesSortingColumnEnum",
+  name: 'ShowCoreLanguagesSortingColumnEnum',
 });
 
 @InputType()

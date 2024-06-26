@@ -1,8 +1,8 @@
-import { JSONContent } from "@tiptap/react";
+import { JSONContent } from '@tiptap/react';
 
-import { FileStateEditor } from "../files";
+import { FileStateEditor } from '../files';
 
-import { TextLanguage } from "@/graphql/hooks";
+import { TextLanguage } from '@/graphql/hooks';
 
 export const getFilesFromContent = (
   content: TextLanguage[],
@@ -16,7 +16,7 @@ export const getFilesFromContent = (
       values.forEach(value => {
         // Get all file ids
         if (
-          value.type === "files" &&
+          value.type === 'files' &&
           value.attrs?.id &&
           !files.find(file => file.id === value.attrs?.id)
         ) {

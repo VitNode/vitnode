@@ -1,18 +1,18 @@
-import { LinkIcon } from "lucide-react";
-import * as React from "react";
+import { LinkIcon } from 'lucide-react';
+import * as React from 'react';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "vitnode-frontend/components/ui/popover";
-import { Loader } from "vitnode-frontend/components/ui/loader";
+} from 'vitnode-frontend/components/ui/popover';
+import { Loader } from 'vitnode-frontend/components/ui/loader';
 
-import { useEditorState } from "@/components/editor/hooks/use-editor-state";
+import { useEditorState } from '@/components/editor/hooks/use-editor-state';
 
-import { ButtonToolbarEditor } from "../../button";
+import { ButtonToolbarEditor } from '../../button';
 
 const Content = React.lazy(async () =>
-  import("./content").then(module => ({
+  import('./content').then(module => ({
     default: module.ContentLinkToolbarEditor,
   })),
 );
@@ -24,7 +24,7 @@ export const LinkToolbarEditor = () => {
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <ButtonToolbarEditor name="link.title" active={editor.isActive("link")}>
+        <ButtonToolbarEditor name="link.title" active={editor.isActive('link')}>
           <LinkIcon />
         </ButtonToolbarEditor>
       </PopoverTrigger>

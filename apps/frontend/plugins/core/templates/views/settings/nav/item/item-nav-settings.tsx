@@ -1,5 +1,5 @@
-import { LinkItemNavSettings } from "./link/link-item-nav-settings";
-import { ItemNavSettingsProps } from "@/plugins/core/hooks/settings/use-settings-view";
+import { LinkItemNavSettings } from './link/link-item-nav-settings';
+import { ItemNavSettingsProps } from '@/plugins/core/hooks/settings/use-settings-view';
 
 export const ItemNavSettings = ({
   icon,

@@ -1,15 +1,15 @@
-import * as fs from "fs";
+import * as fs from 'fs';
 
-import { Injectable } from "@nestjs/common";
-import { eq, ne } from "drizzle-orm";
+import { Injectable } from '@nestjs/common';
+import { eq, ne } from 'drizzle-orm';
 
-import { ShowAdminPlugins } from "../show/dto/show.obj";
-import { EditAdminPluginsArgs } from "./dto/edit.args";
+import { ShowAdminPlugins } from '../show/dto/show.obj';
+import { EditAdminPluginsArgs } from './dto/edit.args';
 
-import { DatabaseService } from "../../../../database";
-import { CustomError, NotFoundError } from "../../../../errors";
-import { core_plugins } from "../../../../templates/core/admin/database/schema/plugins";
-import { ABSOLUTE_PATHS_BACKEND, ConfigPlugin } from "../../../..";
+import { DatabaseService } from '../../../../database';
+import { CustomError, NotFoundError } from '../../../../errors';
+import { core_plugins } from '../../../../templates/core/admin/database/schema/plugins';
+import { ABSOLUTE_PATHS_BACKEND, ConfigPlugin } from '../../../..';
 
 @Injectable()
 export class EditAdminPluginsService {
@@ -25,21 +25,21 @@ export class EditAdminPluginsService {
     });
 
     if (!plugin) {
-      throw new NotFoundError("Plugin");
+      throw new NotFoundError('Plugin');
     }
 
     if (code !== plugin.code) {
       throw new CustomError({
-        code: "PLUGIN_CODE_MISMATCH",
-        message: "Plugin code mismatch!",
+        code: 'PLUGIN_CODE_MISMATCH',
+        message: 'Plugin code mismatch!',
       });
     }
 
     if (isDefault) {
       if (!plugin.enabled) {
         throw new CustomError({
-          code: "PLUGIN_NOT_ENABLED",
-          message: "Plugin is not enabled!",
+          code: 'PLUGIN_NOT_ENABLED',
+          message: 'Plugin is not enabled!',
         });
       }
 
@@ -63,8 +63,8 @@ export class EditAdminPluginsService {
 
     // Update config.json
     const path = ABSOLUTE_PATHS_BACKEND.plugin({ code }).config;
-    const pluginFile = fs.readFileSync(path, "utf8");
-    const config: Omit<ConfigPlugin, "version_code" | "versions"> =
+    const pluginFile = fs.readFileSync(path, 'utf8');
+    const config: Omit<ConfigPlugin, 'version_code' | 'versions'> =
       JSON.parse(pluginFile);
 
     config.name = rest.name;
@@ -76,7 +76,7 @@ export class EditAdminPluginsService {
     fs.writeFile(path, JSON.stringify(config, null, 2), err => {
       if (err) {
         throw new CustomError({
-          code: "CANNOT_WRITE_FILE",
+          code: 'CANNOT_WRITE_FILE',
           message: `Cannot write file with "${path}" path!`,
         });
       }

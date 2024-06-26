@@ -1,20 +1,20 @@
-"use client";
+'use client';
 
-import { useTranslations } from "next-intl";
-import { Button } from "vitnode-frontend/components/ui/button";
-import { Form } from "vitnode-frontend/components/ui/form";
+import { useTranslations } from 'next-intl';
+import { Button } from 'vitnode-frontend/components/ui/button';
+import { Form } from 'vitnode-frontend/components/ui/form';
 
-import { ShowAdminPlugins } from "@/graphql/hooks";
+import { ShowAdminPlugins } from '@/graphql/hooks';
 
-import { useCreateEditPluginAdmin } from "../../actions/create/hooks/use-create-edit-plugin-admin";
-import { FormCreateEditPluginAdmin } from "../../actions/create/form";
+import { useCreateEditPluginAdmin } from '../../actions/create/hooks/use-create-edit-plugin-admin';
+import { FormCreateEditPluginAdmin } from '../../actions/create/form';
 
 interface Props {
   data: ShowAdminPlugins;
 }
 
 export const OverviewDevPluginAdminView = ({ data }: Props) => {
-  const t = useTranslations("core");
+  const t = useTranslations('core');
   const { form, onSubmit } = useCreateEditPluginAdmin({ data });
 
   return (
@@ -31,7 +31,7 @@ export const OverviewDevPluginAdminView = ({ data }: Props) => {
             loading={form.formState.isSubmitting}
             type="submit"
           >
-            {t("edit")}
+            {t('edit')}
           </Button>
         </form>
       </Form>

@@ -1,23 +1,23 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useQuery } from "@tanstack/react-query";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
-import { toast } from "sonner";
-import { useTranslations } from "next-intl";
-import { useDialog } from "vitnode-frontend/components/ui/dialog";
-import { CONFIG } from "vitnode-frontend/helpers/config-with-env";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useQuery } from '@tanstack/react-query';
+import { useForm } from 'react-hook-form';
+import * as z from 'zod';
+import { toast } from 'sonner';
+import { useTranslations } from 'next-intl';
+import { useDialog } from 'vitnode-frontend/components/ui/dialog';
+import { CONFIG } from 'vitnode-frontend/helpers/config-with-env';
 
-import { queryApi } from "./query-api";
-import { mutationApi } from "./mutation-api";
-import { ShowCoreLanguages } from "@/graphql/hooks";
+import { queryApi } from './query-api';
+import { mutationApi } from './mutation-api';
+import { ShowCoreLanguages } from '@/graphql/hooks';
 
 export const useDownloadLangAdmin = ({
   code,
-}: Pick<ShowCoreLanguages, "code">) => {
-  const t = useTranslations("core");
+}: Pick<ShowCoreLanguages, 'code'>) => {
+  const t = useTranslations('core');
   const { setOpen } = useDialog();
   const query = useQuery({
-    queryKey: ["Admin__Core_Plugins__Show"],
+    queryKey: ['Admin__Core_Plugins__Show'],
     queryFn: async () => queryApi({}),
   });
 
@@ -41,8 +41,8 @@ export const useDownloadLangAdmin = ({
     });
 
     if (mutation.error || !mutation.data) {
-      toast.error(t("errors.title"), {
-        description: t("errors.internal_server_error"),
+      toast.error(t('errors.title'), {
+        description: t('errors.internal_server_error'),
       });
 
       return;
@@ -52,7 +52,7 @@ export const useDownloadLangAdmin = ({
 
     window.open(
       `${CONFIG.backend_url}/files/${mutation.data.admin__core_languages__download}`,
-      "_blank",
+      '_blank',
     );
   };
 

@@ -1,12 +1,12 @@
-import { join } from "path";
-import * as fs from "fs";
+import { join } from 'path';
+import * as fs from 'fs';
 
-import { Injectable } from "@nestjs/common";
+import { Injectable } from '@nestjs/common';
 
-import { EditAdminThemeEditorArgs, ThemeVariableInput } from "./dto/edit.args";
+import { EditAdminThemeEditorArgs, ThemeVariableInput } from './dto/edit.args';
 
-import { ABSOLUTE_PATHS_BACKEND, NotFoundError } from "../../../..";
-import { keysFromCSSThemeEditor } from "../../../theme_editor/theme_editor.module";
+import { ABSOLUTE_PATHS_BACKEND, NotFoundError } from '../../../..';
+import { keysFromCSSThemeEditor } from '../../../theme_editor/theme_editor.module';
 
 @Injectable()
 export class EditAdminThemeEditorService {
@@ -23,7 +23,7 @@ export class EditAdminThemeEditorService {
   }): string {
     const regex = new RegExp(
       `(:root\\s*{[^}]*)--${variable}:\\s*([^;]*)([^}]*)|(\\.dark\\s*{[^}]*)--${variable}:\\s*([^;]*)([^}]*)`,
-      "g",
+      'g',
     );
 
     return cssAsString.replace(regex, (match, p1, p2, p3, p4, p5, p6) => {
@@ -39,20 +39,20 @@ export class EditAdminThemeEditorService {
 
   async edit({ colors }: EditAdminThemeEditorArgs): Promise<string> {
     const pathToCss = join(
-      ABSOLUTE_PATHS_BACKEND.plugin({ code: "core" }).frontend.templates,
-      "layout",
-      "global.css",
+      ABSOLUTE_PATHS_BACKEND.plugin({ code: 'core' }).frontend.templates,
+      'layout',
+      'global.css',
     );
 
     if (!fs.existsSync(pathToCss)) {
-      throw new NotFoundError("CSS file in Theme not found!");
+      throw new NotFoundError('CSS file in Theme not found!');
     }
 
-    const cssAsString = fs.readFileSync(pathToCss, "utf8");
+    const cssAsString = fs.readFileSync(pathToCss, 'utf8');
     let colorsStringUpdate = cssAsString;
 
     keysFromCSSThemeEditor.forEach(key => {
-      const formatKey = key.replace("-", "_");
+      const formatKey = key.replace('-', '_');
 
       colorsStringUpdate = this.changeVariable({
         cssAsString: colorsStringUpdate,
@@ -63,6 +63,6 @@ export class EditAdminThemeEditorService {
 
     fs.writeFileSync(pathToCss, colorsStringUpdate);
 
-    return "Success!";
+    return 'Success!';
   }
 }

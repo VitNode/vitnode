@@ -1,6 +1,6 @@
-import { Field, Int, ObjectType } from "@nestjs/graphql";
+import { Field, Int, ObjectType } from '@nestjs/graphql';
 
-import { PageInfo, TextLanguage } from "../../../../utils";
+import { PageInfo, TextLanguage } from '../../../../utils';
 
 @ObjectType()
 class ShowCoreNavItem {

@@ -1,5 +1,5 @@
-import { Heading } from "@react-email/components";
-import * as React from "react";
+import { Heading } from '@react-email/components';
+import * as React from 'react';
 
 export const HeaderEmail = () => {
   return (

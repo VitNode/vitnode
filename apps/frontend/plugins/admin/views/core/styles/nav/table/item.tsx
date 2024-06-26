@@ -1,17 +1,17 @@
-import { ExternalLink } from "lucide-react";
-import { useTranslations } from "next-intl";
-import { FlatTree } from "vitnode-frontend/helpers/flatten-tree";
+import { ExternalLink } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import { FlatTree } from 'vitnode-frontend/helpers/flatten-tree';
 
-import { ShowCoreNav } from "@/graphql/hooks";
-import { useTextLang } from "@/plugins/core/hooks/use-text-lang";
-import { ActionsTableNavAdmin } from "./actions/actions";
+import { ShowCoreNav } from '@/graphql/hooks';
+import { useTextLang } from '@/plugins/core/hooks/use-text-lang';
+import { ActionsTableNavAdmin } from './actions/actions';
 
 interface Props {
-  data: FlatTree<Omit<ShowCoreNav, "__typename">>;
+  data: FlatTree<Omit<ShowCoreNav, '__typename'>>;
 }
 
 export const ItemContentTableContentNavAdmin = ({ data }: Props) => {
-  const t = useTranslations("admin.core.styles.nav");
+  const t = useTranslations('admin.core.styles.nav');
   const { convertText } = useTextLang();
 
   return (
@@ -22,7 +22,7 @@ export const ItemContentTableContentNavAdmin = ({ data }: Props) => {
         </div>
 
         <span className="text-muted-foreground line-clamp-2 flex items-center gap-2 text-sm">
-          {t("href", { href: data.href })}{" "}
+          {t('href', { href: data.href })}{' '}
           {data.external && <ExternalLink className="size-4" />}
         </span>
 

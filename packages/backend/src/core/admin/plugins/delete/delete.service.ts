@@ -1,17 +1,17 @@
-import * as fs from "fs";
+import * as fs from 'fs';
 
-import { Injectable } from "@nestjs/common";
-import { eq, sql } from "drizzle-orm";
+import { Injectable } from '@nestjs/common';
+import { eq, sql } from 'drizzle-orm';
 
-import { DeleteAdminPluginsArgs } from "./dto/delete.args";
-import { ChangeFilesAdminPluginsService } from "../helpers/files/change/change.service";
+import { DeleteAdminPluginsArgs } from './dto/delete.args';
+import { ChangeFilesAdminPluginsService } from '../helpers/files/change/change.service';
 
-import { DatabaseService } from "../../../../database";
-import { CustomError, NotFoundError } from "../../../../errors";
-import { core_migrations } from "../../../../templates/core/admin/database/schema/files";
-import { ABSOLUTE_PATHS_BACKEND } from "../../../..";
-import { core_plugins } from "../../../../templates/core/admin/database/schema/plugins";
-import { setRebuildRequired } from "../../../../functions/rebuild-required";
+import { DatabaseService } from '../../../../database';
+import { CustomError, NotFoundError } from '../../../../errors';
+import { core_migrations } from '../../../../templates/core/admin/database/schema/files';
+import { ABSOLUTE_PATHS_BACKEND } from '../../../..';
+import { core_plugins } from '../../../../templates/core/admin/database/schema/plugins';
+import { setRebuildRequired } from '../../../../functions/rebuild-required';
 
 @Injectable()
 export class DeleteAdminPluginsService {
@@ -32,13 +32,13 @@ export class DeleteAdminPluginsService {
     });
 
     if (!plugin) {
-      throw new NotFoundError("Plugin");
+      throw new NotFoundError('Plugin');
     }
 
     if (plugin.default) {
       throw new CustomError({
-        code: "DEFAULT_PLUGIN",
-        message: "This plugin is default and cannot be deleted",
+        code: 'DEFAULT_PLUGIN',
+        message: 'This plugin is default and cannot be deleted',
       });
     }
 
@@ -48,16 +48,16 @@ export class DeleteAdminPluginsService {
     );
     const deleteQueries = tables
       .getTables()
-      .filter(el => !el.endsWith("_relations"))
+      .filter(el => !el.endsWith('_relations'))
       .map(table => {
         return `DROP TABLE IF EXISTS ${table} CASCADE;`;
       });
 
     try {
-      await this.databaseService.db.execute(sql.raw(deleteQueries.join(" ")));
+      await this.databaseService.db.execute(sql.raw(deleteQueries.join(' ')));
     } catch (error) {
       throw new CustomError({
-        code: "DELETE_TABLE_ERROR",
+        code: 'DELETE_TABLE_ERROR',
         message: `Error deleting tables for plugin ${code}`,
       });
     }
@@ -69,7 +69,7 @@ export class DeleteAdminPluginsService {
     const modulePath = ABSOLUTE_PATHS_BACKEND.plugin({ code }).root;
     this.deleteFolderWhenExists(modulePath);
     // Frontend
-    const frontendPaths = ["admin_pages", "pages", "plugin", "pages_container"];
+    const frontendPaths = ['admin_pages', 'pages', 'plugin', 'pages_container'];
     frontendPaths.forEach(path => {
       this.deleteFolderWhenExists(
         ABSOLUTE_PATHS_BACKEND.plugin({ code }).frontend[path],
@@ -80,8 +80,8 @@ export class DeleteAdminPluginsService {
       .delete(core_plugins)
       .where(eq(core_plugins.code, code));
 
-    await setRebuildRequired({ set: "plugins" });
+    await setRebuildRequired({ set: 'plugins' });
 
-    return "Success!";
+    return 'Success!';
   }
 }

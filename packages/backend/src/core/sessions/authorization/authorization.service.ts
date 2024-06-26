@@ -1,12 +1,12 @@
-import { Injectable } from "@nestjs/common";
-import { eq, sum } from "drizzle-orm";
+import { Injectable } from '@nestjs/common';
+import { eq, sum } from 'drizzle-orm';
 
-import { InternalAuthorizationCoreSessionsService } from "./internal/internal_authorization.service";
-import { AuthorizationCoreSessionsObj } from "./dto/authorization.obj";
+import { InternalAuthorizationCoreSessionsService } from './internal/internal_authorization.service';
+import { AuthorizationCoreSessionsObj } from './dto/authorization.obj';
 
-import { DatabaseService } from "../../../database";
-import { core_files } from "../../../templates/core/admin/database/schema/files";
-import { Ctx } from "../../../utils";
+import { DatabaseService } from '../../../database';
+import { core_files } from '../../../templates/core/admin/database/schema/files';
+import { Ctx } from '../../../utils';
 
 @Injectable()
 export class AuthorizationCoreSessionsService {
@@ -89,7 +89,7 @@ export class AuthorizationCoreSessionsService {
           }),
           avatar_color: user.avatar_color,
         },
-        plugin_default: plugin?.code ?? "",
+        plugin_default: plugin?.code ?? '',
         files: {
           allow_upload: user.group.files_allow_upload,
           max_storage_for_submit: user.group.files_max_storage_for_submit
@@ -109,7 +109,7 @@ export class AuthorizationCoreSessionsService {
 
       return {
         user: null,
-        plugin_default: plugin?.code ?? "",
+        plugin_default: plugin?.code ?? '',
         files: {
           allow_upload: guestGroup?.files_allow_upload ?? false,
           max_storage_for_submit: guestGroup?.files_max_storage_for_submit ?? 0,

@@ -1,7 +1,7 @@
-import * as React from "react";
+import * as React from 'react';
 
-import { NavAdmin } from "./nav/nav-admin";
-import { HeaderAdmin } from "./header/header-admin";
+import { NavAdmin } from './nav/nav-admin';
+import { HeaderAdmin } from './header/header-admin';
 
 interface Props {
   children: React.ReactNode;

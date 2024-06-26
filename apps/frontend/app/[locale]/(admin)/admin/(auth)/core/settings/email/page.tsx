@@ -1,16 +1,16 @@
-import { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
-import { Card } from "vitnode-frontend/components/ui/card";
-import { fetcher } from "vitnode-frontend/graphql/fetcher";
+import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
+import { Card } from 'vitnode-frontend/components/ui/card';
+import { fetcher } from 'vitnode-frontend/graphql/fetcher';
 
-import { HeaderContent } from "@/components/header-content/header-content";
-import { EmailSettingsAdminView } from "@/plugins/admin/views/core/settings/email/email-settings-admin-view";
+import { HeaderContent } from '@/components/header-content/header-content';
+import { EmailSettingsAdminView } from '@/plugins/admin/views/core/settings/email/email-settings-admin-view';
 import {
   Admin__Core_Email_Settings__Show,
   Admin__Core_Email_Settings__ShowQuery,
   Admin__Core_Email_Settings__ShowQueryVariables,
-} from "@/graphql/hooks";
-import { ActionsEmailSettingsAdmin } from "@/plugins/admin/views/core/settings/email/actions/actions";
+} from '@/graphql/hooks';
+import { ActionsEmailSettingsAdmin } from '@/plugins/admin/views/core/settings/email/actions/actions';
 
 const getData = async () => {
   const { data } = await fetcher<
@@ -24,22 +24,22 @@ const getData = async () => {
 };
 
 export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations("core.admin.nav");
+  const t = await getTranslations('core.admin.nav');
 
   return {
-    title: t("settings_email"),
+    title: t('settings_email'),
   };
 }
 
 export default async function Page() {
   const [t, data] = await Promise.all([
-    getTranslations("core.admin.nav"),
+    getTranslations('core.admin.nav'),
     getData(),
   ]);
 
   return (
     <>
-      <HeaderContent h1={t("settings_email")}>
+      <HeaderContent h1={t('settings_email')}>
         <ActionsEmailSettingsAdmin />
       </HeaderContent>
 

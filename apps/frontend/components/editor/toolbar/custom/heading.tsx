@@ -1,5 +1,5 @@
-import * as React from "react";
-import { useTranslations } from "next-intl";
+import * as React from 'react';
+import { useTranslations } from 'next-intl';
 import {
   Code,
   Heading1,
@@ -9,15 +9,15 @@ import {
   Heading5,
   Heading6,
   Pilcrow,
-} from "lucide-react";
+} from 'lucide-react';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
-} from "vitnode-frontend/components/ui/select";
+} from 'vitnode-frontend/components/ui/select';
 
-import { useEditorState } from "../../hooks/use-editor-state";
+import { useEditorState } from '../../hooks/use-editor-state';
 
 const getHeadingIcon = (level: number) => {
   switch (level) {
@@ -41,32 +41,32 @@ const getHeadingIcon = (level: number) => {
 };
 
 export const HeadingToolbarEditor = () => {
-  const t = useTranslations("core.editor.heading");
+  const t = useTranslations('core.editor.heading');
   const { editor } = useEditorState();
 
   const value = React.useMemo(() => {
     const findActiveHeading = [...Array(6).keys()].find(i =>
-      editor.isActive("heading", { level: i + 1 }),
+      editor.isActive('heading', { level: i + 1 }),
     );
 
     if (findActiveHeading !== undefined) {
       return findActiveHeading + 2;
     }
 
-    if (editor.isActive("codeBlock")) {
+    if (editor.isActive('codeBlock')) {
       return 1;
     }
 
     return 0;
   }, [
-    editor.isActive("paragraph"),
-    editor.isActive("codeBlock"),
-    editor.isActive("heading", { level: 1 }),
-    editor.isActive("heading", { level: 2 }),
-    editor.isActive("heading", { level: 3 }),
-    editor.isActive("heading", { level: 4 }),
-    editor.isActive("heading", { level: 5 }),
-    editor.isActive("heading", { level: 6 }),
+    editor.isActive('paragraph'),
+    editor.isActive('codeBlock'),
+    editor.isActive('heading', { level: 1 }),
+    editor.isActive('heading', { level: 2 }),
+    editor.isActive('heading', { level: 3 }),
+    editor.isActive('heading', { level: 4 }),
+    editor.isActive('heading', { level: 5 }),
+    editor.isActive('heading', { level: 6 }),
   ]);
 
   return (
@@ -97,13 +97,13 @@ export const HeadingToolbarEditor = () => {
       <SelectContent onCloseAutoFocus={() => editor.commands.focus()}>
         <SelectItem value="0">
           <span className="flex flex-wrap items-center gap-2 [&>svg]:size-4">
-            <Pilcrow /> {t("paragraph")}
+            <Pilcrow /> {t('paragraph')}
           </span>
         </SelectItem>
 
         <SelectItem value="1">
           <span className="flex flex-wrap items-center gap-2 [&>svg]:size-4">
-            <Code /> {t("code_block.title")}
+            <Code /> {t('code_block.title')}
           </span>
         </SelectItem>
 

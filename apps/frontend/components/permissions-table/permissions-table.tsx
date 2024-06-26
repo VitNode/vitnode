@@ -1,22 +1,22 @@
-import * as React from "react";
-import { TableVirtuoso } from "react-virtuoso";
-import { ControllerRenderProps, FieldValues } from "react-hook-form";
-import { keyBy, mapValues } from "lodash";
-import { Input } from "vitnode-frontend/components/ui/input";
-import { Switch } from "vitnode-frontend/components/ui/switch";
-import { Loader } from "vitnode-frontend/components/ui/loader";
+import * as React from 'react';
+import { TableVirtuoso } from 'react-virtuoso';
+import { ControllerRenderProps, FieldValues } from 'react-hook-form';
+import { keyBy, mapValues } from 'lodash';
+import { Input } from 'vitnode-frontend/components/ui/input';
+import { Switch } from 'vitnode-frontend/components/ui/switch';
+import { Loader } from 'vitnode-frontend/components/ui/loader';
 
-import { useTextLang } from "@/plugins/core/hooks/use-text-lang";
-import { ShowAdminGroups } from "@/graphql/hooks";
-import { usePermissionsGroupsAdminAPI } from "./use-permissions-table-api";
+import { useTextLang } from '@/plugins/core/hooks/use-text-lang';
+import { ShowAdminGroups } from '@/graphql/hooks';
+import { usePermissionsGroupsAdminAPI } from './use-permissions-table-api';
 
 interface Props {
-  field: ControllerRenderProps<FieldValues, "permissions">;
+  field: ControllerRenderProps<FieldValues, 'permissions'>;
   permissions: { id: string; title: string; disableForGuest?: boolean }[];
 }
 
 export const PermissionsTable = ({ field, permissions }: Props) => {
-  const [searchValue, setSearchValue] = React.useState("");
+  const [searchValue, setSearchValue] = React.useState('');
   const { data, isError, isLoading } = usePermissionsGroupsAdminAPI({
     searchValue,
   });
@@ -64,7 +64,7 @@ export const PermissionsTable = ({ field, permissions }: Props) => {
       />
 
       <TableVirtuoso
-        style={{ height: "50vh" }}
+        style={{ height: '50vh' }}
         data={data}
         overscan={200}
         className="rounded-md border"
@@ -117,7 +117,7 @@ export const PermissionsTable = ({ field, permissions }: Props) => {
                               ...item,
                               id: `can_all_${item.id}`,
                             })),
-                            "id",
+                            'id',
                           ),
                           () => false,
                         );
@@ -127,7 +127,7 @@ export const PermissionsTable = ({ field, permissions }: Props) => {
                           .map(group => {
                             return {
                               id: group.id,
-                              ...mapValues(keyBy(permissions, "id"), el => {
+                              ...mapValues(keyBy(permissions, 'id'), el => {
                                 // Find if the permission is enabled for all groups
                                 if (field.value[`can_all_${el.id}`]) {
                                   return true;
@@ -156,7 +156,7 @@ export const PermissionsTable = ({ field, permissions }: Props) => {
                       }
 
                       const groupPermissions = mapValues(
-                        keyBy(permissions, "id"),
+                        keyBy(permissions, 'id'),
                         () => true,
                       );
 
@@ -198,13 +198,13 @@ export const PermissionsTable = ({ field, permissions }: Props) => {
                               permissions.map(item => ({
                                 id: item.id,
                               })),
-                              "id",
+                              'id',
                             ),
                             () => false,
                           );
 
                           const groups = data.map(
-                            (group: Pick<ShowAdminGroups, "id">) => {
+                            (group: Pick<ShowAdminGroups, 'id'>) => {
                               const findExistingGroup = field.value.groups.find(
                                 ({ id }: { id: number }) => id === group.id,
                               );
@@ -243,7 +243,7 @@ export const PermissionsTable = ({ field, permissions }: Props) => {
                               permissions.map(item => ({
                                 id: item.id,
                               })),
-                              "id",
+                              'id',
                             ),
                             item => {
                               if (item.id === permission.id) {

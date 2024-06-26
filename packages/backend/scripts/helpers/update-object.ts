@@ -10,7 +10,7 @@ export function updateObject<T extends Record<string, any>>(
         updatedConfig[key] = [] as any;
       }
     } else if (
-      typeof defaultData[key] === "object" &&
+      typeof defaultData[key] === 'object' &&
       defaultData[key] !== null
     ) {
       // Handle nested objects
@@ -36,7 +36,7 @@ export function updateObject<T extends Record<string, any>>(
 export function objectToArray<T extends Record<string, any>>(
   obj: T,
 ): Record<string, unknown> {
-  if (typeof obj !== "object" || obj === null) {
+  if (typeof obj !== 'object' || obj === null) {
     return obj;
   }
 
@@ -44,7 +44,7 @@ export function objectToArray<T extends Record<string, any>>(
     (acc: Record<string, unknown>, [key, value]) => {
       if (Array.isArray(value)) {
         acc[key] = value.map(objectToArray);
-      } else if (typeof value === "object" && value !== null) {
+      } else if (typeof value === 'object' && value !== null) {
         acc[key] = [objectToArray(value)];
       } else {
         acc[key] = value;

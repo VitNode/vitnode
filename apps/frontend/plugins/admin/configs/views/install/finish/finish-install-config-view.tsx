@@ -1,6 +1,6 @@
-import { Home, KeyRound } from "lucide-react";
-import { Link } from "vitnode-frontend/navigation";
-import { buttonVariants } from "vitnode-frontend/components/ui/button";
+import { Home, KeyRound } from 'lucide-react';
+import { Link } from 'vitnode-frontend/navigation';
+import { buttonVariants } from 'vitnode-frontend/components/ui/button';
 import {
   Card,
   CardContent,
@@ -8,7 +8,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "vitnode-frontend/components/ui/card";
+} from 'vitnode-frontend/components/ui/card';
 
 export const FinishInstallConfigsView = () => {
   return (
@@ -29,7 +29,7 @@ export const FinishInstallConfigsView = () => {
         <Link
           href="/admin"
           className={buttonVariants({
-            variant: "ghost",
+            variant: 'ghost',
           })}
         >
           <KeyRound /> Admin Control Panel

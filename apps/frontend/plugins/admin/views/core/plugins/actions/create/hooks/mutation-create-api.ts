@@ -1,13 +1,13 @@
-"use server";
+'use server';
 
-import { revalidatePath } from "next/cache";
-import { fetcher } from "vitnode-frontend/graphql/fetcher";
+import { revalidatePath } from 'next/cache';
+import { fetcher } from 'vitnode-frontend/graphql/fetcher';
 
 import {
   Admin__Core_Plugins__Create,
   Admin__Core_Plugins__CreateMutation,
   Admin__Core_Plugins__CreateMutationVariables,
-} from "@/graphql/hooks";
+} from '@/graphql/hooks';
 
 export const mutationCreateApi = async (
   variables: Admin__Core_Plugins__CreateMutationVariables,
@@ -21,7 +21,7 @@ export const mutationCreateApi = async (
       variables,
     });
 
-    revalidatePath("/", "layout");
+    revalidatePath('/', 'layout');
 
     return { data };
   } catch (error) {

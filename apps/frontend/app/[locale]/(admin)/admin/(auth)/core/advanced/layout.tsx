@@ -1,7 +1,7 @@
-import { getTranslations } from "next-intl/server";
-import * as React from "react";
-import { Metadata } from "next";
-import { getConfigFile } from "vitnode-frontend/helpers/config";
+import { getTranslations } from 'next-intl/server';
+import * as React from 'react';
+import { Metadata } from 'next';
+import { getConfigFile } from 'vitnode-frontend/helpers/config';
 
 interface Props {
   children: React.ReactNode;
@@ -9,12 +9,12 @@ interface Props {
 
 export async function generateMetadata(): Promise<Metadata> {
   const [t, tCore, config] = await Promise.all([
-    getTranslations("admin"),
-    getTranslations("core.admin"),
+    getTranslations('admin'),
+    getTranslations('core.admin'),
     getConfigFile(),
   ]);
 
-  const defaultTitle = `${tCore("nav.advanced")} - ${t("title_short")} - ${config.settings.general.site_name}`;
+  const defaultTitle = `${tCore('nav.advanced')} - ${t('title_short')} - ${config.settings.general.site_name}`;
 
   return {
     title: {

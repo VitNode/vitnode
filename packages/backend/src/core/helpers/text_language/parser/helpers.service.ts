@@ -1,8 +1,8 @@
-import { Injectable } from "@nestjs/common";
-import { eq } from "drizzle-orm";
+import { Injectable } from '@nestjs/common';
+import { eq } from 'drizzle-orm';
 
-import { DatabaseService } from "../../../../database";
-import { core_files_using } from "../../../../templates/core/admin/database/schema/files";
+import { DatabaseService } from '../../../../database';
+import { core_files_using } from '../../../../templates/core/admin/database/schema/files';
 interface TextLanguageJSONContentType {
   type: string;
   attrs?: { id: number };
@@ -25,8 +25,8 @@ export class HelpersParserTextLanguageCoreHelpersService {
     fileIds,
     oldFileIds,
   }: {
-    fileIds: InfoFromTextLanguageContentReturnValues["fileIds"];
-    oldFileIds: InfoFromTextLanguageContentReturnValues["fileIds"];
+    fileIds: InfoFromTextLanguageContentReturnValues['fileIds'];
+    oldFileIds: InfoFromTextLanguageContentReturnValues['fileIds'];
   }) {
     await Promise.all(
       fileIds.map(async id => {
@@ -38,8 +38,8 @@ export class HelpersParserTextLanguageCoreHelpersService {
 
         await this.databaseService.db.insert(core_files_using).values({
           file_id: id,
-          plugin: "core",
-          folder: "text-language",
+          plugin: 'core',
+          folder: 'text-language',
         });
       }),
     );
@@ -72,7 +72,7 @@ export class HelpersParserTextLanguageCoreHelpersService {
     const mapContent = (values: TextLanguageJSONContentType[]) => {
       values.forEach(value => {
         // Get all file ids
-        if (value.type === "files" && !fileIds.includes(value.attrs.id)) {
+        if (value.type === 'files' && !fileIds.includes(value.attrs.id)) {
           fileIds.push(value.attrs.id);
         }
 

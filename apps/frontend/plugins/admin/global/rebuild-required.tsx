@@ -1,18 +1,18 @@
-"use client";
+'use client';
 
-import { RefreshCcw } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { RefreshCcw } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import {
   Alert,
   AlertDescription,
   AlertTitle,
-} from "vitnode-frontend/components/ui/alert";
-import { buttonVariants } from "vitnode-frontend/components/ui/button";
-import { useGlobals } from "vitnode-frontend/hooks/use-globals";
-import { CONFIG } from "vitnode-frontend/helpers/config-with-env";
+} from 'vitnode-frontend/components/ui/alert';
+import { buttonVariants } from 'vitnode-frontend/components/ui/button';
+import { useGlobals } from 'vitnode-frontend/hooks/use-globals';
+import { CONFIG } from 'vitnode-frontend/helpers/config-with-env';
 
 export const RebuildRequiredAdmin = () => {
-  const t = useTranslations("admin.rebuild_required");
+  const t = useTranslations('admin.rebuild_required');
   const {
     config: { rebuild_required },
   } = useGlobals();
@@ -28,13 +28,13 @@ export const RebuildRequiredAdmin = () => {
     <Alert className="my-2" variant="destructive">
       <RefreshCcw />
 
-      <AlertTitle>{t("title")}</AlertTitle>
-      <AlertDescription>{t("desc")}</AlertDescription>
+      <AlertTitle>{t('title')}</AlertTitle>
+      <AlertDescription>{t('desc')}</AlertDescription>
       <AlertDescription className="my-4">
         <ul>
           {rebuild_required.langs && (
             <li>
-              {t.rich("langs", {
+              {t.rich('langs', {
                 bold: text => <span className="font-bold">{text}</span>,
               })}
             </li>
@@ -42,7 +42,7 @@ export const RebuildRequiredAdmin = () => {
 
           {rebuild_required.plugins && (
             <li>
-              {t.rich("plugins", {
+              {t.rich('plugins', {
                 bold: text => <span className="font-bold">{text}</span>,
               })}
             </li>
@@ -56,10 +56,10 @@ export const RebuildRequiredAdmin = () => {
           rel="noopener noreferrer"
           target="_blank"
           className={buttonVariants({
-            variant: "outline",
+            variant: 'outline',
           })}
         >
-          {t("submit")}
+          {t('submit')}
         </a>
       </div>
     </Alert>

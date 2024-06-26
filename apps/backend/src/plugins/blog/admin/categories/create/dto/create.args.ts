@@ -1,11 +1,11 @@
-import { ArgsType, Field, InputType, Int } from "@nestjs/graphql";
-import { Transform } from "class-transformer";
-import { ArrayMinSize, ValidateNested, IsArray } from "class-validator";
+import { ArgsType, Field, InputType, Int } from '@nestjs/graphql';
+import { Transform } from 'class-transformer';
+import { ArrayMinSize, ValidateNested, IsArray } from 'class-validator';
 import {
   IsTextLanguageInput,
   TextLanguageInput,
   TransformTextLanguageInput,
-} from "vitnode-backend";
+} from 'vitnode-backend';
 
 @InputType()
 class GroupsPermissionsCreatePluginCategories {

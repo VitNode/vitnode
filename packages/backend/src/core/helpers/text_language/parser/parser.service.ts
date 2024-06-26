@@ -1,15 +1,15 @@
-import { Injectable } from "@nestjs/common";
-import { Placeholder, SQL, eq } from "drizzle-orm";
-import { PgTableWithColumns, TableConfig } from "drizzle-orm/pg-core";
+import { Injectable } from '@nestjs/common';
+import { Placeholder, SQL, eq } from 'drizzle-orm';
+import { PgTableWithColumns, TableConfig } from 'drizzle-orm/pg-core';
 
 import {
   HelpersParserTextLanguageCoreHelpersService,
   InfoFromTextLanguageContentReturnValues,
-} from "./helpers.service";
+} from './helpers.service';
 
-import { TextLanguageInput } from "../../../../utils";
-import { DatabaseService } from "../../../../database";
-import { CustomError } from "../../../../errors";
+import { TextLanguageInput } from '../../../../utils';
+import { DatabaseService } from '../../../../database';
+import { CustomError } from '../../../../errors';
 
 interface Args<T extends TableConfig> {
   data: TextLanguageInput[];
@@ -61,10 +61,10 @@ export class ParserTextLanguageCoreHelpersService extends HelpersParserTextLangu
     database,
     item_id,
   }: Args<T>): Promise<ReturnValues[]> {
-    ["language_code", "value", "item_id"].forEach(key => {
+    ['language_code', 'value', 'item_id'].forEach(key => {
       if (!database[key]) {
         throw new CustomError({
-          code: "DATABASE_COLUMN_NOT_FOUND",
+          code: 'DATABASE_COLUMN_NOT_FOUND',
           message: `Column ${key} not found in database`,
         });
       }
@@ -107,8 +107,8 @@ export class ParserTextLanguageCoreHelpersService extends HelpersParserTextLangu
         const data = await this.databaseService.db
           .insert(database)
           .values({ ...item, item_id } as {
-            [Key in keyof PgTableWithColumns<T>["$inferInsert"]]:
-              | PgTableWithColumns<T>["$inferInsert"][Key]
+            [Key in keyof PgTableWithColumns<T>['$inferInsert']]:
+              | PgTableWithColumns<T>['$inferInsert'][Key]
               | Placeholder<string, unknown>
               | SQL<unknown>;
           })
@@ -127,7 +127,7 @@ export class ParserTextLanguageCoreHelpersService extends HelpersParserTextLangu
         if (exist) return;
 
         await this.contentParser({
-          content: "",
+          content: '',
           infoOldData,
         });
 
@@ -148,11 +148,11 @@ export class ParserTextLanguageCoreHelpersService extends HelpersParserTextLangu
   async delete<T extends TableConfig>({
     database,
     item_id,
-  }: Omit<Args<T>, "data">) {
-    ["language_code", "value", "item_id"].forEach(key => {
+  }: Omit<Args<T>, 'data'>) {
+    ['language_code', 'value', 'item_id'].forEach(key => {
       if (!database[key]) {
         throw new CustomError({
-          code: "DATABASE_COLUMN_NOT_FOUND",
+          code: 'DATABASE_COLUMN_NOT_FOUND',
           message: `Column ${key} not found in database`,
         });
       }
@@ -172,7 +172,7 @@ export class ParserTextLanguageCoreHelpersService extends HelpersParserTextLangu
     );
 
     await this.contentParser({
-      content: "",
+      content: '',
       infoOldData,
     });
   }

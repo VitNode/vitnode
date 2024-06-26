@@ -1,24 +1,24 @@
-"use client";
+'use client';
 
-import { DndContext, DragOverlay, closestCorners } from "@dnd-kit/core";
+import { DndContext, DragOverlay, closestCorners } from '@dnd-kit/core';
 import {
   SortableContext,
   verticalListSortingStrategy,
-} from "@dnd-kit/sortable";
-import { useTranslations } from "next-intl";
-import * as React from "react";
-import { useParams } from "next/navigation";
-import { WithChildren } from "vitnode-frontend/helpers/flatten-tree";
+} from '@dnd-kit/sortable';
+import { useTranslations } from 'next-intl';
+import * as React from 'react';
+import { useParams } from 'next/navigation';
+import { WithChildren } from 'vitnode-frontend/helpers/flatten-tree';
 
-import { useDragAndDrop } from "@/plugins/core/hooks/drag&drop/use-functions";
+import { useDragAndDrop } from '@/plugins/core/hooks/drag&drop/use-functions';
 import {
   Admin__Core_Plugins__Nav__ShowQuery,
   ShowAdminNavPluginsObj,
-} from "@/graphql/hooks";
-import { ItemContentNavDevPluginAdmin } from "./item";
-import { mutationChangePositionApi } from "./item/hooks/mutation-change-position-api";
-import { ItemDragAndDrop } from "@/plugins/core/hooks/drag&drop/item";
-import { ItemNavDevPluginAdminContext } from "./item/hooks/use-item-nav-dev-plugin-admin";
+} from '@/graphql/hooks';
+import { ItemContentNavDevPluginAdmin } from './item';
+import { mutationChangePositionApi } from './item/hooks/mutation-change-position-api';
+import { ItemDragAndDrop } from '@/plugins/core/hooks/drag&drop/item';
+import { ItemNavDevPluginAdminContext } from './item/hooks/use-item-nav-dev-plugin-admin';
 
 interface Props extends Admin__Core_Plugins__Nav__ShowQuery {
   icons: { icon: React.ReactNode; id: string }[];
@@ -28,7 +28,7 @@ export const NavDevPluginAdminView = ({
   admin__core_plugins__nav__show: edges,
   icons,
 }: Props) => {
-  const t = useTranslations("core");
+  const t = useTranslations('core');
   const { code } = useParams();
   const [initData, setData] = React.useState<ShowAdminNavPluginsObj[]>(edges);
   const data: WithChildren<ShowAdminNavPluginsObj>[] = initData.map(item => ({
@@ -64,7 +64,7 @@ export const NavDevPluginAdminView = ({
   }, [edges]);
 
   if (!data || data.length === 0) {
-    return <div className="text-center">{t("no_results")}</div>;
+    return <div className="text-center">{t('no_results')}</div>;
   }
 
   return (

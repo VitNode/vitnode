@@ -1,4 +1,4 @@
-import { useTranslations } from "next-intl";
+import { useTranslations } from 'next-intl';
 import {
   Form,
   FormControl,
@@ -7,33 +7,33 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "vitnode-frontend/components/ui/form";
-import { Button } from "vitnode-frontend/components/ui/button";
-import { Switch } from "vitnode-frontend/components/ui/switch";
+} from 'vitnode-frontend/components/ui/form';
+import { Button } from 'vitnode-frontend/components/ui/button';
+import { Switch } from 'vitnode-frontend/components/ui/switch';
 import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "vitnode-frontend/components/ui/dialog";
+} from 'vitnode-frontend/components/ui/dialog';
 import {
   RadioGroup,
   RadioGroupItem,
-} from "vitnode-frontend/components/ui/radio-group";
-import { Label } from "vitnode-frontend/components/ui/label";
+} from 'vitnode-frontend/components/ui/radio-group';
+import { Label } from 'vitnode-frontend/components/ui/label';
 
-import { useFormCreateEditFormGroupsMembersAdmin } from "./hooks/use-form";
-import { UserInput } from "@/components/user/inputs/user-input";
-import { GroupInput } from "@/components/groups/input/group-input";
+import { useFormCreateEditFormGroupsMembersAdmin } from './hooks/use-form';
+import { UserInput } from '@/components/user/inputs/user-input';
+import { GroupInput } from '@/components/groups/input/group-input';
 
 export const CreateEditFormAdministratorsStaffAdmin = () => {
-  const t = useTranslations("admin.members.staff");
-  const tCore = useTranslations("core");
+  const t = useTranslations('admin.members.staff');
+  const tCore = useTranslations('core');
   const { form, onSubmit } = useFormCreateEditFormGroupsMembersAdmin();
 
   return (
     <Form {...form}>
       <DialogHeader className="flex flex-col gap-4">
-        <DialogTitle>{t("administrators.add.title")}</DialogTitle>
+        <DialogTitle>{t('administrators.add.title')}</DialogTitle>
       </DialogHeader>
 
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -42,36 +42,36 @@ export const CreateEditFormAdministratorsStaffAdmin = () => {
           name="type"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{t("create_edit.type.title")}</FormLabel>
+              <FormLabel>{t('create_edit.type.title')}</FormLabel>
               <RadioGroup
                 onValueChange={el => {
-                  form.resetField("user");
-                  form.resetField("group");
+                  form.resetField('user');
+                  form.resetField('group');
                   field.onChange(el);
                 }}
                 defaultValue={field.value}
               >
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="group" id="r1" />
-                  <Label htmlFor="r1">{t("create_edit.type.group")}</Label>
+                  <Label htmlFor="r1">{t('create_edit.type.group')}</Label>
                 </div>
 
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="user" id="r2" />
-                  <Label htmlFor="r2">{t("create_edit.type.user")}</Label>
+                  <Label htmlFor="r2">{t('create_edit.type.user')}</Label>
                 </div>
               </RadioGroup>
             </FormItem>
           )}
         />
 
-        {form.watch("type") === "user" ? (
+        {form.watch('type') === 'user' ? (
           <FormField
             control={form.control}
             name="user"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{t("create_edit.type.user")}</FormLabel>
+                <FormLabel>{t('create_edit.type.user')}</FormLabel>
                 <UserInput {...field} />
                 <FormMessage />
               </FormItem>
@@ -83,7 +83,7 @@ export const CreateEditFormAdministratorsStaffAdmin = () => {
             name="group"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{t("create_edit.type.group")}</FormLabel>
+                <FormLabel>{t('create_edit.type.group')}</FormLabel>
                 <GroupInput {...field} />
                 <FormMessage />
               </FormItem>
@@ -98,10 +98,10 @@ export const CreateEditFormAdministratorsStaffAdmin = () => {
             <FormItem className="flex flex-row items-center justify-between gap-2 rounded-lg border p-4">
               <div className="space-y-0.5">
                 <FormLabel className="text-base">
-                  {t("create_edit.unrestricted.title")}
+                  {t('create_edit.unrestricted.title')}
                 </FormLabel>
                 <FormDescription>
-                  {t("create_edit.unrestricted.desc")}
+                  {t('create_edit.unrestricted.desc')}
                 </FormDescription>
               </div>
               <FormControl>
@@ -120,12 +120,12 @@ export const CreateEditFormAdministratorsStaffAdmin = () => {
           <Button
             disabled={
               !form.formState.isValid ||
-              (!form.watch("user") && !form.watch("group"))
+              (!form.watch('user') && !form.watch('group'))
             }
             loading={form.formState.isSubmitting}
             type="submit"
           >
-            {tCore("save")}
+            {tCore('save')}
           </Button>
         </DialogFooter>
       </form>

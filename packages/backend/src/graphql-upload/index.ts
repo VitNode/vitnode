@@ -1,2 +1,2 @@
-export * from "./upload";
-export * from "./graphql-upload";
+export * from './upload';
+export * from './graphql-upload';

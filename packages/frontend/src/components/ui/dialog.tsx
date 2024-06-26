@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import * as DialogPrimitive from "@radix-ui/react-dialog";
-import { X } from "lucide-react";
-import { useTranslations } from "next-intl";
+import * as React from 'react';
+import * as DialogPrimitive from '@radix-ui/react-dialog';
+import { X } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
-import { cn } from "../../helpers/classnames";
+import { cn } from '../../helpers/classnames';
 
 interface DialogContextArgs {
   isDirty?: boolean;
@@ -64,7 +64,7 @@ const DialogOverlay = ({
 }: React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>) => (
   <DialogPrimitive.Overlay
     className={cn(
-      "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/80",
+      'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/80',
       className,
     )}
     {...props}
@@ -76,7 +76,7 @@ const DialogContent = ({
   children,
   ...props
 }: React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>) => {
-  const t = useTranslations("core");
+  const t = useTranslations('core');
   const { isDirty, setOpen } = useDialog();
 
   const handleBeforeUnload = (
@@ -88,7 +88,7 @@ const DialogContent = ({
   ) => {
     if (!isDirty) return;
     e.preventDefault();
-    if (confirm(t("are_you_sure_want_to_leave_form"))) {
+    if (confirm(t('are_you_sure_want_to_leave_form'))) {
       setOpen?.(false);
     }
   };
@@ -99,7 +99,7 @@ const DialogContent = ({
       <DialogPrimitive.Content
         onPointerDownOutside={handleBeforeUnload}
         className={cn(
-          "bg-card data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] fixed left-[50%] top-[50%] z-50 grid max-h-screen w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 overflow-y-auto border p-6 shadow-lg duration-200 sm:rounded-lg md:w-full",
+          'bg-card data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] fixed left-[50%] top-[50%] z-50 grid max-h-screen w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 overflow-y-auto border p-6 shadow-lg duration-200 sm:rounded-lg md:w-full',
           className,
         )}
         {...props}
@@ -123,7 +123,7 @@ const DialogHeader = ({
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
     className={cn(
-      "flex flex-col space-y-1.5 text-center sm:text-left",
+      'flex flex-col space-y-1.5 text-center sm:text-left',
       className,
     )}
     {...props}
@@ -136,7 +136,7 @@ const DialogFooter = ({
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
     className={cn(
-      "flex w-full flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2 [&>a:last-child]:self-end [&>button:last-child]:self-end",
+      'flex w-full flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2 [&>a:last-child]:self-end [&>button:last-child]:self-end',
       className,
     )}
     {...props}
@@ -149,7 +149,7 @@ const DialogTitle = ({
 }: React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>) => (
   <DialogPrimitive.Title
     className={cn(
-      "text-lg font-semibold leading-none tracking-tight",
+      'text-lg font-semibold leading-none tracking-tight',
       className,
     )}
     {...props}
@@ -161,7 +161,7 @@ const DialogDescription = ({
   ...props
 }: React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description>) => (
   <DialogPrimitive.Description
-    className={cn("text-muted-foreground text-sm", className)}
+    className={cn('text-muted-foreground text-sm', className)}
     {...props}
   />
 );

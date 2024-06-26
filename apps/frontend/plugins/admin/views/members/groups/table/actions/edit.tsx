@@ -1,18 +1,18 @@
-import { Pencil } from "lucide-react";
-import * as React from "react";
-import { useTranslations } from "next-intl";
+import { Pencil } from 'lucide-react';
+import * as React from 'react';
+import { useTranslations } from 'next-intl';
 import {
   Dialog,
   DialogContent,
   DialogTrigger,
-} from "vitnode-frontend/components/ui/dialog";
-import { Button } from "vitnode-frontend/components/ui/button";
-import { Loader } from "vitnode-frontend/components/ui/loader";
+} from 'vitnode-frontend/components/ui/dialog';
+import { Button } from 'vitnode-frontend/components/ui/button';
+import { Loader } from 'vitnode-frontend/components/ui/loader';
 
-import { ShowAdminGroups } from "@/graphql/hooks";
+import { ShowAdminGroups } from '@/graphql/hooks';
 
 const CreateEditFormGroupsMembersAdmin = React.lazy(async () =>
-  import("../../create-edit-form/create-edit-form-groups-members-admin").then(
+  import('../../create-edit-form/create-edit-form-groups-members-admin').then(
     module => ({
       default: module.CreateEditFormGroupsMembersAdmin,
     }),
@@ -24,12 +24,12 @@ interface Props {
 }
 
 export const EditGroupsMembersDialogAdmin = ({ data }: Props) => {
-  const t = useTranslations("core");
+  const t = useTranslations('core');
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="ghost" size="icon" ariaLabel={t("edit")}>
+        <Button variant="ghost" size="icon" ariaLabel={t('edit')}>
           <Pencil />
         </Button>
       </DialogTrigger>

@@ -1,25 +1,25 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useTranslations } from "next-intl";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
-import { toast } from "sonner";
-import { useDialog } from "vitnode-frontend/components/ui/dialog";
-import { CONFIG } from "vitnode-frontend/helpers/config-with-env";
-import { increaseVersionString } from "vitnode-frontend/helpers/increase-version-string";
-import { zodInput } from "vitnode-frontend/helpers/zod";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useTranslations } from 'next-intl';
+import { useForm } from 'react-hook-form';
+import * as z from 'zod';
+import { toast } from 'sonner';
+import { useDialog } from 'vitnode-frontend/components/ui/dialog';
+import { CONFIG } from 'vitnode-frontend/helpers/config-with-env';
+import { increaseVersionString } from 'vitnode-frontend/helpers/increase-version-string';
+import { zodInput } from 'vitnode-frontend/helpers/zod';
 
-import { mutationApi } from "./mutation-api";
-import { ShowAdminPlugins } from "@/graphql/hooks";
+import { mutationApi } from './mutation-api';
+import { ShowAdminPlugins } from '@/graphql/hooks';
 
 export const useDownloadPluginAdmin = ({
   code,
   version,
   version_code,
-}: Pick<ShowAdminPlugins, "code" | "version_code" | "version">) => {
-  const t = useTranslations("core");
+}: Pick<ShowAdminPlugins, 'code' | 'version_code' | 'version'>) => {
+  const t = useTranslations('core');
   const { setOpen } = useDialog();
   const formSchema = z.object({
-    type: z.enum(["rebuild", "new_version"]),
+    type: z.enum(['rebuild', 'new_version']),
     version: zodInput.string,
     version_code: z.coerce
       .number()
@@ -29,8 +29,8 @@ export const useDownloadPluginAdmin = ({
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      type: version_code ? "rebuild" : "new_version",
-      version: version ? increaseVersionString(version) : "1.0.0",
+      type: version_code ? 'rebuild' : 'new_version',
+      version: version ? increaseVersionString(version) : '1.0.0',
       version_code: version_code ? version_code + 1 : 10000,
     },
   });
@@ -38,12 +38,12 @@ export const useDownloadPluginAdmin = ({
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const mutation = await mutationApi({
       code,
-      version: values.type === "new_version" ? values.version : null,
-      versionCode: values.type === "new_version" ? values.version_code : null,
+      version: values.type === 'new_version' ? values.version : null,
+      versionCode: values.type === 'new_version' ? values.version_code : null,
     });
     if (mutation.error || !mutation.data) {
-      toast.error(t("errors.title"), {
-        description: t("errors.internal_server_error"),
+      toast.error(t('errors.title'), {
+        description: t('errors.internal_server_error'),
       });
 
       return;
@@ -52,7 +52,7 @@ export const useDownloadPluginAdmin = ({
 
     window.open(
       `${CONFIG.backend_url}/files/${mutation.data.admin__core_plugins__download}`,
-      "_blank",
+      '_blank',
     );
   };
 

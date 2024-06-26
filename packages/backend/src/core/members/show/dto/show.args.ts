@@ -1,24 +1,24 @@
-import { ArgsType, Field, InputType, registerEnumType } from "@nestjs/graphql";
-import { Transform } from "class-transformer";
+import { ArgsType, Field, InputType, registerEnumType } from '@nestjs/graphql';
+import { Transform } from 'class-transformer';
 
 import {
   PaginationArgs,
   SortDirectionEnum,
   TransformString,
-} from "../../../../utils";
+} from '../../../../utils';
 
 enum ShowCoreMembersSortingColumnEnum {
-  name = "name",
-  joined = "joined",
-  first_name = "first_name",
-  last_name = "last_name",
-  posts = "posts",
-  followers = "followers",
-  reactions = "reactions",
+  name = 'name',
+  joined = 'joined',
+  first_name = 'first_name',
+  last_name = 'last_name',
+  posts = 'posts',
+  followers = 'followers',
+  reactions = 'reactions',
 }
 
 registerEnumType(ShowCoreMembersSortingColumnEnum, {
-  name: "ShowCoreMembersSortingColumnEnum",
+  name: 'ShowCoreMembersSortingColumnEnum',
 });
 
 @InputType()

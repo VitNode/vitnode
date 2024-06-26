@@ -1,34 +1,34 @@
-import { useTranslations } from "next-intl";
+import { useTranslations } from 'next-intl';
 import {
   Form,
   FormField,
   FormItem,
   FormMessage,
-} from "vitnode-frontend/components/ui/form";
-import { Button } from "vitnode-frontend/components/ui/button";
+} from 'vitnode-frontend/components/ui/form';
+import { Button } from 'vitnode-frontend/components/ui/button';
 import {
   DialogFooter,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from "vitnode-frontend/components/ui/dialog";
-import { FilesInput } from "vitnode-frontend/components/ui/files-input";
+} from 'vitnode-frontend/components/ui/dialog';
+import { FilesInput } from 'vitnode-frontend/components/ui/files-input';
 
-import { useUploadPluginAdmin } from "./hooks/use-upload-plugin-admin";
-import { ShowAdminPlugins } from "@/graphql/hooks";
+import { useUploadPluginAdmin } from './hooks/use-upload-plugin-admin';
+import { ShowAdminPlugins } from '@/graphql/hooks';
 
 export interface UploadPluginAdminProps {
-  data?: Pick<ShowAdminPlugins, "code" | "name">;
+  data?: Pick<ShowAdminPlugins, 'code' | 'name'>;
 }
 
 export const UploadPluginAdmin = ({ data }: UploadPluginAdminProps) => {
-  const t = useTranslations("admin.core.plugins.upload");
+  const t = useTranslations('admin.core.plugins.upload');
   const { form, onSubmit } = useUploadPluginAdmin({ data });
 
   return (
     <>
       <DialogHeader>
-        <DialogTitle>{t(data ? "title_new_version" : "title")}</DialogTitle>
+        <DialogTitle>{t(data ? 'title_new_version' : 'title')}</DialogTitle>
         {data?.name && <DialogDescription>{data.name}</DialogDescription>}
       </DialogHeader>
 
@@ -42,7 +42,7 @@ export const UploadPluginAdmin = ({ data }: UploadPluginAdminProps) => {
                 <FilesInput
                   id="plugin"
                   {...field}
-                  acceptExtensions={["tgz"]}
+                  acceptExtensions={['tgz']}
                   maxFileSizeInMb={0}
                 />
 
@@ -53,11 +53,11 @@ export const UploadPluginAdmin = ({ data }: UploadPluginAdminProps) => {
 
           <DialogFooter>
             <Button
-              disabled={!form.watch("file").length}
+              disabled={!form.watch('file').length}
               loading={form.formState.isSubmitting}
               type="submit"
             >
-              {t("submit")}
+              {t('submit')}
             </Button>
           </DialogFooter>
         </form>

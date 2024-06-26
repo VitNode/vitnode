@@ -1,6 +1,6 @@
-import { ContentFilterToolbarDataTable } from "@/components/data-table/toolbar/filter/content/content";
-import { useTextLang } from "@/plugins/core/hooks/use-text-lang";
-import { useShortShowGroupsAdminAPI } from "@/plugins/admin/hooks/api/use-short-show-groups-admin-api";
+import { ContentFilterToolbarDataTable } from '@/components/data-table/toolbar/filter/content/content';
+import { useTextLang } from '@/plugins/core/hooks/use-text-lang';
+import { useShortShowGroupsAdminAPI } from '@/plugins/admin/hooks/api/use-short-show-groups-admin-api';
 
 export const ContentGroupsFiltersUsersMembersAdmin = () => {
   const { data, isFetching, setTextSearch } = useShortShowGroupsAdminAPI();

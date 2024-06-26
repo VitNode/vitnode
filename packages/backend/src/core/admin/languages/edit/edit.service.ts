@@ -1,12 +1,12 @@
-import { Injectable } from "@nestjs/common";
-import { eq } from "drizzle-orm";
+import { Injectable } from '@nestjs/common';
+import { eq } from 'drizzle-orm';
 
-import { EditCoreAdminLanguagesArgs } from "./dto/edit.args";
+import { EditCoreAdminLanguagesArgs } from './dto/edit.args';
 
-import { DatabaseService } from "../../../../database";
-import { ShowCoreLanguages } from "../../../languages/show/dto/show.obj";
-import { NotFoundError } from "../../../../errors";
-import { core_languages } from "../../../../templates/core/admin/database/schema/languages";
+import { DatabaseService } from '../../../../database';
+import { ShowCoreLanguages } from '../../../languages/show/dto/show.obj';
+import { NotFoundError } from '../../../../errors';
+import { core_languages } from '../../../../templates/core/admin/database/schema/languages';
 
 @Injectable()
 export class EditAdminCoreLanguagesService {
@@ -22,7 +22,7 @@ export class EditAdminCoreLanguagesService {
       });
 
     if (!language) {
-      throw new NotFoundError("Language");
+      throw new NotFoundError('Language');
     }
 
     // Edit default language

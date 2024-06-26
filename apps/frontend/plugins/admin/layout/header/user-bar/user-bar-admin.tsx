@@ -1,30 +1,30 @@
-"use client";
+'use client';
 
-import { Home, LogOut } from "lucide-react";
-import { useTranslations } from "next-intl";
-import { toast } from "sonner";
-import * as React from "react";
-import { Button } from "vitnode-frontend/components/ui/button";
-import { Separator } from "vitnode-frontend/components/ui/separator";
+import { Home, LogOut } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import { toast } from 'sonner';
+import * as React from 'react';
+import { Button } from 'vitnode-frontend/components/ui/button';
+import { Separator } from 'vitnode-frontend/components/ui/separator';
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTrigger,
-} from "vitnode-frontend/components/ui/sheet";
+} from 'vitnode-frontend/components/ui/sheet';
 
-import { AvatarUser } from "@/components/user/avatar/avatar-user";
-import { ItemUserBarAdmin } from "./item-user-bar-admin";
-import { mutationApi } from "./mutation-api";
-import { useSessionAdmin } from "@/plugins/admin/hooks/use-session-admin";
+import { AvatarUser } from '@/components/user/avatar/avatar-user';
+import { ItemUserBarAdmin } from './item-user-bar-admin';
+import { mutationApi } from './mutation-api';
+import { useSessionAdmin } from '@/plugins/admin/hooks/use-session-admin';
 
 interface Props {
   navComponent: React.ReactNode;
 }
 
 export const UserBarAdmin = ({ navComponent }: Props) => {
-  const t = useTranslations("admin");
-  const tCore = useTranslations("core");
+  const t = useTranslations('admin');
+  const tCore = useTranslations('core');
   const { session } = useSessionAdmin();
   const [open, setOpen] = React.useState(false);
 
@@ -38,7 +38,7 @@ export const UserBarAdmin = ({ navComponent }: Props) => {
           variant="ghost"
           className="rounded-full"
           size="icon"
-          ariaLabel={tCore("open_menu")}
+          ariaLabel={tCore('open_menu')}
         >
           <AvatarUser user={{ name, ...rest }} sizeInRem={2} />
         </Button>
@@ -63,7 +63,7 @@ export const UserBarAdmin = ({ navComponent }: Props) => {
 
         <div className="px-2">
           <ItemUserBarAdmin href="/" target="_blank">
-            <Home /> <span>{t("home_page")}</span>
+            <Home /> <span>{t('home_page')}</span>
           </ItemUserBarAdmin>
 
           <Separator className="my-2" />
@@ -72,13 +72,13 @@ export const UserBarAdmin = ({ navComponent }: Props) => {
             onClick={async () => {
               const mutation = await mutationApi();
               if (mutation?.error) {
-                toast.error(tCore("errors.title"), {
-                  description: tCore("errors.internal_server_error"),
+                toast.error(tCore('errors.title'), {
+                  description: tCore('errors.internal_server_error'),
                 });
               }
             }}
           >
-            <LogOut /> <span>{tCore("user-bar.log_out")}</span>
+            <LogOut /> <span>{tCore('user-bar.log_out')}</span>
           </ItemUserBarAdmin>
         </div>
       </SheetContent>

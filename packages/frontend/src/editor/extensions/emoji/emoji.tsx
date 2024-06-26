@@ -1,21 +1,21 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { Mention } from "@tiptap/extension-mention";
-import { PluginKey } from "@tiptap/pm/state";
-import emojiMartData, { Emoji } from "@emoji-mart/data";
-import { SearchIndex, init } from "emoji-mart";
+import { Mention } from '@tiptap/extension-mention';
+import { PluginKey } from '@tiptap/pm/state';
+import emojiMartData, { Emoji } from '@emoji-mart/data';
+import { SearchIndex, init } from 'emoji-mart';
 
-import { onExit, onKeyDown, onStart, onUpdate } from "./client";
+import { onExit, onKeyDown, onStart, onUpdate } from './client';
 
 init({ data: emojiMartData });
 
-const EmojiPluginKey = new PluginKey("emoji-search");
+const EmojiPluginKey = new PluginKey('emoji-search');
 
 export const EmojiExtensionEditor = Mention.extend({
-  name: "emoji-search",
+  name: 'emoji-search',
 }).configure({
   HTMLAttributes: {},
   suggestion: {
-    char: ":",
+    char: ':',
     pluginKey: EmojiPluginKey,
     command: ({ editor, props, range }) => {
       editor
@@ -23,7 +23,7 @@ export const EmojiExtensionEditor = Mention.extend({
         .focus()
         .deleteRange(range)
         .insertContent({
-          type: "text",
+          type: 'text',
           text: `${props.id}`,
         })
         .run();

@@ -1,8 +1,8 @@
 // ! DO NOT REMOVE, MODIFY OR MOVE THIS FILE!!!
 
-import { Module } from "@nestjs/common";
+import { Module } from '@nestjs/common';
 
-import { BlogModule } from "./blog/blog.module";
+import { BlogModule } from './blog/blog.module';
 // ! === IMPORT ===
 
 @Module({

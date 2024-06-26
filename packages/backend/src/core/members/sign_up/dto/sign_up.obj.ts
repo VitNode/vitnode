@@ -1,7 +1,7 @@
-import { Field, Int, ObjectType } from "@nestjs/graphql";
-import { IsEmail, Matches, MaxLength, MinLength } from "class-validator";
+import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { IsEmail, Matches, MaxLength, MinLength } from 'class-validator';
 
-import { nameRegex } from "./sign_up.args";
+import { nameRegex } from './sign_up.args';
 
 @ObjectType()
 export class SignUpCoreMembersObj {

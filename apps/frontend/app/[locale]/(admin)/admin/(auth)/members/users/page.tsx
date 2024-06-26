@@ -1,18 +1,18 @@
-import { getTranslations } from "next-intl/server";
-import { Metadata } from "next";
-import { fetcher } from "vitnode-frontend/graphql/fetcher";
+import { getTranslations } from 'next-intl/server';
+import { Metadata } from 'next';
+import { fetcher } from 'vitnode-frontend/graphql/fetcher';
 
 import {
   Admin__Core_Members__Show,
   ShowAdminMembersSortingColumnEnum,
   Admin__Core_Members__ShowQuery,
   Admin__Core_Members__ShowQueryVariables,
-} from "@/graphql/hooks";
+} from '@/graphql/hooks';
 import {
   usePaginationAPISsr,
   SearchParamsPagination,
-} from "@/plugins/core/hooks/utils/use-pagination-api-ssr";
-import { UsersMembersAdminView } from "@/plugins/admin/views/members/users/users-members-admin-view";
+} from '@/plugins/core/hooks/utils/use-pagination-api-ssr';
+import { UsersMembersAdminView } from '@/plugins/admin/views/members/users/users-members-admin-view';
 
 interface SearchParams extends SearchParamsPagination {
   groups?: string[];
@@ -35,10 +35,10 @@ const getData = async (variables: Admin__Core_Members__ShowQueryVariables) => {
 };
 
 export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations("admin.members.users");
+  const t = await getTranslations('admin.members.users');
 
   return {
-    title: t("title"),
+    title: t('title'),
   };
 }
 

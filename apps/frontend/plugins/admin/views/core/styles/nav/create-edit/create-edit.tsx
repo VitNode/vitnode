@@ -1,4 +1,4 @@
-import { useTranslations } from "next-intl";
+import { useTranslations } from 'next-intl';
 import {
   Form,
   FormControl,
@@ -7,32 +7,32 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "vitnode-frontend/components/ui/form";
-import { Input } from "vitnode-frontend/components/ui/input";
-import { Button } from "vitnode-frontend/components/ui/button";
-import { Switch } from "vitnode-frontend/components/ui/switch";
+} from 'vitnode-frontend/components/ui/form';
+import { Input } from 'vitnode-frontend/components/ui/input';
+import { Button } from 'vitnode-frontend/components/ui/button';
+import { Switch } from 'vitnode-frontend/components/ui/switch';
 import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "vitnode-frontend/components/ui/dialog";
+} from 'vitnode-frontend/components/ui/dialog';
 
 import {
   useCreateEditNavAdmin,
   CreateEditNavAdminArgs,
-} from "./hooks/use-create-edit-nav-admin";
-import { TextLanguageInput } from "@/components/text-language-input";
-import { IconInput } from "@/components/icon/input/icon-input";
+} from './hooks/use-create-edit-nav-admin';
+import { TextLanguageInput } from '@/components/text-language-input';
+import { IconInput } from '@/components/icon/input/icon-input';
 
 export const ContentCreateEditNavAdmin = ({ data }: CreateEditNavAdminArgs) => {
-  const t = useTranslations("admin.core.styles.nav");
-  const tCore = useTranslations("core");
+  const t = useTranslations('admin.core.styles.nav');
+  const tCore = useTranslations('core');
   const { form, onSubmit } = useCreateEditNavAdmin({ data });
 
   return (
     <>
       <DialogHeader>
-        <DialogTitle>{data ? t("edit.title") : t("create.title")}</DialogTitle>
+        <DialogTitle>{data ? t('edit.title') : t('create.title')}</DialogTitle>
       </DialogHeader>
 
       <Form {...form}>
@@ -42,7 +42,7 @@ export const ContentCreateEditNavAdmin = ({ data }: CreateEditNavAdminArgs) => {
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{t("create.name.label")}</FormLabel>
+                <FormLabel>{t('create.name.label')}</FormLabel>
                 <FormControl>
                   <TextLanguageInput {...field} />
                 </FormControl>
@@ -56,7 +56,7 @@ export const ContentCreateEditNavAdmin = ({ data }: CreateEditNavAdminArgs) => {
             name="description"
             render={({ field }) => (
               <FormItem>
-                <FormLabel optional>{t("create.description.label")}</FormLabel>
+                <FormLabel optional>{t('create.description.label')}</FormLabel>
                 <FormControl>
                   <TextLanguageInput {...field} />
                 </FormControl>
@@ -70,11 +70,11 @@ export const ContentCreateEditNavAdmin = ({ data }: CreateEditNavAdminArgs) => {
             name="href"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{t("create.href.label")}</FormLabel>
+                <FormLabel>{t('create.href.label')}</FormLabel>
                 <FormControl>
                   <Input {...field} />
                 </FormControl>
-                <FormDescription>{t("create.href.desc")}</FormDescription>
+                <FormDescription>{t('create.href.desc')}</FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -85,7 +85,7 @@ export const ContentCreateEditNavAdmin = ({ data }: CreateEditNavAdminArgs) => {
             name="icon"
             render={({ field }) => (
               <FormItem>
-                <FormLabel optional>{t("create.icon.label")}</FormLabel>
+                <FormLabel optional>{t('create.icon.label')}</FormLabel>
                 <FormControl>
                   <IconInput {...field} />
                 </FormControl>
@@ -101,9 +101,9 @@ export const ContentCreateEditNavAdmin = ({ data }: CreateEditNavAdminArgs) => {
               <FormItem className="flex flex-row items-center justify-between gap-2 rounded-lg border p-4">
                 <div className="space-y-0.5">
                   <FormLabel className="text-base">
-                    {t("create.external.label")}
+                    {t('create.external.label')}
                   </FormLabel>
-                  <FormDescription>{t("create.external.desc")}</FormDescription>
+                  <FormDescription>{t('create.external.desc')}</FormDescription>
                 </div>
                 <FormControl>
                   <Switch
@@ -121,7 +121,7 @@ export const ContentCreateEditNavAdmin = ({ data }: CreateEditNavAdminArgs) => {
               loading={form.formState.isSubmitting}
               type="submit"
             >
-              {tCore(data ? "edit" : "create")}
+              {tCore(data ? 'edit' : 'create')}
             </Button>
           </DialogFooter>
         </form>

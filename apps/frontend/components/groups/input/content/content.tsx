@@ -1,20 +1,20 @@
-import { Search } from "lucide-react";
-import { useTranslations } from "next-intl";
-import * as React from "react";
-import { useQuery } from "@tanstack/react-query";
-import { useDebouncedCallback } from "use-debounce";
-import { cn } from "vitnode-frontend/helpers/classnames";
+import { Search } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import * as React from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { useDebouncedCallback } from 'use-debounce';
+import { cn } from 'vitnode-frontend/helpers/classnames';
 import {
   Command,
   CommandList,
   commandInputClassName,
-} from "vitnode-frontend/components/ui/command";
-import { Input } from "vitnode-frontend/components/ui/input";
-import { Loader } from "vitnode-frontend/components/ui/loader";
+} from 'vitnode-frontend/components/ui/command';
+import { Input } from 'vitnode-frontend/components/ui/input';
+import { Loader } from 'vitnode-frontend/components/ui/loader';
 
-import { GroupInputItem } from "../group-input";
-import { GroupInputContentList } from "./list";
-import { queryApi } from "./query-api";
+import { GroupInputItem } from '../group-input';
+import { GroupInputContentList } from './list';
+import { queryApi } from './query-api';
 
 interface Props {
   onSelect: (value: GroupInputItem) => void;
@@ -22,11 +22,11 @@ interface Props {
 }
 
 export const GroupInputContent = ({ onSelect, values }: Props) => {
-  const t = useTranslations("core");
-  const [search, setSearch] = React.useState("");
+  const t = useTranslations('core');
+  const [search, setSearch] = React.useState('');
 
   const { data, isLoading } = useQuery({
-    queryKey: ["Admin__Core_Groups__Show_Short", { search }],
+    queryKey: ['Admin__Core_Groups__Show_Short', { search }],
     queryFn: async () => queryApi({ first: 10, search }),
   });
 
@@ -40,11 +40,11 @@ export const GroupInputContent = ({ onSelect, values }: Props) => {
         <Search className="mr-2 size-4 shrink-0 opacity-50" />
         <Input
           className={cn(
-            "border-0 px-0 focus-visible:ring-0 focus-visible:ring-offset-0",
+            'border-0 px-0 focus-visible:ring-0 focus-visible:ring-offset-0',
             commandInputClassName,
           )}
           onChange={e => handleSearchInput(e.target.value)}
-          placeholder={t("group_input.search")}
+          placeholder={t('group_input.search')}
         />
       </div>
 

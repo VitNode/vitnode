@@ -1,31 +1,31 @@
-import { useTranslations } from "next-intl";
-import { CheckIcon } from "lucide-react";
-import { cn } from "vitnode-frontend/helpers/classnames";
+import { useTranslations } from 'next-intl';
+import { CheckIcon } from 'lucide-react';
+import { cn } from 'vitnode-frontend/helpers/classnames';
 import {
   CommandGroup,
   CommandItem,
-} from "vitnode-frontend/components/ui/command";
+} from 'vitnode-frontend/components/ui/command';
 
-import { ShowCoreMembers } from "@/graphql/hooks";
-import { UserInputItem } from "../user-input";
+import { ShowCoreMembers } from '@/graphql/hooks';
+import { UserInputItem } from '../user-input';
 
-import { AvatarUser } from "../../avatar/avatar-user";
-import { GroupFormat } from "../../../groups/group-format";
+import { AvatarUser } from '../../avatar/avatar-user';
+import { GroupFormat } from '../../../groups/group-format';
 
 interface Props {
   edges: Pick<
     ShowCoreMembers,
-    "avatar_color" | "avatar" | "group" | "id" | "name_seo" | "name"
+    'avatar_color' | 'avatar' | 'group' | 'id' | 'name_seo' | 'name'
   >[];
   onSelect: (value: UserInputItem) => void;
   values: UserInputItem[];
 }
 
 export const UserInputContentList = ({ edges, onSelect, values }: Props) => {
-  const t = useTranslations("core");
+  const t = useTranslations('core');
 
   if (edges.length === 0) {
-    return <div className="py-6 text-center text-sm">{t("no_results")}</div>;
+    return <div className="py-6 text-center text-sm">{t('no_results')}</div>;
   }
 
   return (
@@ -43,10 +43,10 @@ export const UserInputContentList = ({ edges, onSelect, values }: Props) => {
         >
           <div
             className={cn(
-              "border-primary mr-2 flex size-4 items-center justify-center rounded-sm border",
+              'border-primary mr-2 flex size-4 items-center justify-center rounded-sm border',
               values.find(value => item.id === value.id)
-                ? "bg-primary text-primary-foreground"
-                : "opacity-50 [&_svg]:invisible",
+                ? 'bg-primary text-primary-foreground'
+                : 'opacity-50 [&_svg]:invisible',
             )}
           >
             <CheckIcon />

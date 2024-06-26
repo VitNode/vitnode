@@ -1,13 +1,13 @@
-import { useTranslations } from "next-intl";
-import { Check } from "lucide-react";
-import { cn } from "vitnode-frontend/helpers/classnames";
-import { Loader } from "vitnode-frontend/components/ui/loader";
+import { useTranslations } from 'next-intl';
+import { Check } from 'lucide-react';
+import { cn } from 'vitnode-frontend/helpers/classnames';
+import { Loader } from 'vitnode-frontend/components/ui/loader';
 import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "vitnode-frontend/components/ui/dialog";
+} from 'vitnode-frontend/components/ui/dialog';
 import {
   Form,
   FormControl,
@@ -16,14 +16,14 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "vitnode-frontend/components/ui/form";
-import { Switch } from "vitnode-frontend/components/ui/switch";
+} from 'vitnode-frontend/components/ui/form';
+import { Switch } from 'vitnode-frontend/components/ui/switch';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "vitnode-frontend/components/ui/popover";
-import { Button } from "vitnode-frontend/components/ui/button";
+} from 'vitnode-frontend/components/ui/popover';
+import { Button } from 'vitnode-frontend/components/ui/button';
 import {
   Command,
   CommandEmpty,
@@ -31,16 +31,16 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "vitnode-frontend/components/ui/command";
+} from 'vitnode-frontend/components/ui/command';
 
-import { useSessionAdmin } from "@/plugins/admin/hooks/use-session-admin";
-import { ShowCoreLanguages } from "@/graphql/hooks";
-import { useDownloadLangAdmin } from "./hooks/use-download-lang-admin";
+import { useSessionAdmin } from '@/plugins/admin/hooks/use-session-admin';
+import { ShowCoreLanguages } from '@/graphql/hooks';
+import { useDownloadLangAdmin } from './hooks/use-download-lang-admin';
 
 export const ContentDownloadActionsTableLangsCoreAdmin = ({
   code,
-}: Pick<ShowCoreLanguages, "code">) => {
-  const t = useTranslations("admin.core.langs.actions.download");
+}: Pick<ShowCoreLanguages, 'code'>) => {
+  const t = useTranslations('admin.core.langs.actions.download');
   const { form, onSubmit, query } = useDownloadLangAdmin({ code });
   const { version } = useSessionAdmin();
   const { data } = query;
@@ -54,12 +54,12 @@ export const ContentDownloadActionsTableLangsCoreAdmin = ({
   } = data;
 
   const plugins = [
-    { id: "core", name: "Core", version, code: "core" },
+    { id: 'core', name: 'Core', version, code: 'core' },
     {
-      id: "admin",
-      name: "Admin",
+      id: 'admin',
+      name: 'Admin',
       version,
-      code: "admin",
+      code: 'admin',
     },
     ...edges,
   ];
@@ -67,8 +67,8 @@ export const ContentDownloadActionsTableLangsCoreAdmin = ({
   return (
     <>
       <DialogHeader>
-        <DialogTitle>{t("title", { code })}</DialogTitle>
-        <DialogDescription>{t("desc")}</DialogDescription>
+        <DialogTitle>{t('title', { code })}</DialogTitle>
+        <DialogDescription>{t('desc')}</DialogDescription>
       </DialogHeader>
 
       <Form {...form}>
@@ -82,8 +82,8 @@ export const ContentDownloadActionsTableLangsCoreAdmin = ({
             render={({ field }) => (
               <FormItem className="flex flex-row items-center justify-between gap-2 rounded-lg border p-4">
                 <div className="space-y-0.5">
-                  <FormLabel className="text-base">{t("all.label")}</FormLabel>
-                  <FormDescription>{t("all.desc")}</FormDescription>
+                  <FormLabel className="text-base">{t('all.label')}</FormLabel>
+                  <FormDescription>{t('all.desc')}</FormDescription>
                 </div>
                 <FormControl>
                   <Switch
@@ -95,13 +95,13 @@ export const ContentDownloadActionsTableLangsCoreAdmin = ({
             )}
           />
 
-          {!form.watch("all") && (
+          {!form.watch('all') && (
             <FormField
               control={form.control}
               name="plugins"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-base">{t("plugins")}</FormLabel>
+                  <FormLabel className="text-base">{t('plugins')}</FormLabel>
 
                   <Popover>
                     <PopoverTrigger asChild>
@@ -110,20 +110,20 @@ export const ContentDownloadActionsTableLangsCoreAdmin = ({
                           variant="outline"
                           role="combobox"
                           className={cn(
-                            "w-full justify-between",
-                            !field.value && "text-muted-foreground",
+                            'w-full justify-between',
+                            !field.value && 'text-muted-foreground',
                           )}
                         >
-                          {t("selected", { count: field.value.length })}
+                          {t('selected', { count: field.value.length })}
                         </Button>
                       </FormControl>
                     </PopoverTrigger>
                     <PopoverContent className="w-80 p-0">
                       <Command>
-                        <CommandInput placeholder={t("search")} />
+                        <CommandInput placeholder={t('search')} />
 
                         <CommandList>
-                          <CommandEmpty>{t("empty")}</CommandEmpty>
+                          <CommandEmpty>{t('empty')}</CommandEmpty>
                           <CommandGroup>
                             {plugins.map(item => (
                               <CommandItem
@@ -142,10 +142,10 @@ export const ContentDownloadActionsTableLangsCoreAdmin = ({
                               >
                                 <Check
                                   className={cn(
-                                    "size-4",
+                                    'size-4',
                                     field.value.includes(item.code)
-                                      ? "opacity-100"
-                                      : "opacity-0",
+                                      ? 'opacity-100'
+                                      : 'opacity-0',
                                   )}
                                 />
                                 <span className="font-semibold">
@@ -171,10 +171,10 @@ export const ContentDownloadActionsTableLangsCoreAdmin = ({
               onClick={form.handleSubmit(onSubmit)}
               loading={form.formState.isSubmitting}
               disabled={
-                !form.watch("all") && form.watch("plugins").length === 0
+                !form.watch('all') && form.watch('plugins').length === 0
               }
             >
-              {t("submit")}
+              {t('submit')}
             </Button>
           </DialogFooter>
         </form>

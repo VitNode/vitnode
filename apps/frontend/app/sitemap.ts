@@ -1,6 +1,6 @@
-import { MetadataRoute } from "next";
-import { CONFIG } from "vitnode-frontend/helpers/config-with-env";
-import { getSessionData } from "vitnode-frontend/graphql/get-session-data";
+import { MetadataRoute } from 'next';
+import { CONFIG } from 'vitnode-frontend/helpers/config-with-env';
+import { getSessionData } from 'vitnode-frontend/graphql/get-session-data';
 
 const generateAlternateLanguagesForSitemap = ({
   frontendUrl,
@@ -12,7 +12,7 @@ const generateAlternateLanguagesForSitemap = ({
   slug?: (locale: string) => string;
 }): Record<string, string> => {
   return languages.reduce((acc: Record<string, string>, { code }) => {
-    acc[code] = `${frontendUrl}/${code}${slug ? slug(code) : ""}`;
+    acc[code] = `${frontendUrl}/${code}${slug ? slug(code) : ''}`;
 
     return acc;
   }, {});

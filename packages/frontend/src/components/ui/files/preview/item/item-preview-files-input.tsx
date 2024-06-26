@@ -1,8 +1,8 @@
-import * as React from "react";
-import { X } from "lucide-react";
+import * as React from 'react';
+import { X } from 'lucide-react';
 
-import { Img } from "../../../../img";
-import { acceptMimeTypeImage } from "../../../../../helpers/files-support";
+import { Img } from '../../../../img';
+import { acceptMimeTypeImage } from '../../../../../helpers/files-support';
 
 interface Props {
   file: File;
@@ -34,7 +34,7 @@ export const ItemPreviewFilesInput = ({
       return `${sizeInGb.toFixed(2)} GB`;
     }
 
-    return "";
+    return '';
   }, [file]);
 
   const handleRemoveFile = () => {
@@ -50,7 +50,7 @@ export const ItemPreviewFilesInput = ({
           className="shrink-0 rounded-sm"
           imageClassName="object-cover"
           src={previewURL}
-          alt={file instanceof File ? file.name : ""}
+          alt={file instanceof File ? file.name : ''}
           width={64}
           height={64}
         />

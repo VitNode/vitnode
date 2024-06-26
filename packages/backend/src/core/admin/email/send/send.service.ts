@@ -1,8 +1,8 @@
-import { Inject, Injectable } from "@nestjs/common";
+import { Inject, Injectable } from '@nestjs/common';
 
-import { MailService } from "../mail.service";
+import { MailService } from '../mail.service';
 
-import { EmailHelpersServiceType } from "../../../../providers/email/email-helpers.type";
+import { EmailHelpersServiceType } from '../../../../providers/email/email-helpers.type';
 
 interface Args {
   message: string;
@@ -14,7 +14,7 @@ interface Args {
 export class SendAdminEmailService {
   constructor(
     private readonly mailService: MailService,
-    @Inject("EmailHelpersService")
+    @Inject('EmailHelpersService')
     private readonly emailHelpersService: EmailHelpersServiceType,
   ) {}
 
@@ -23,11 +23,11 @@ export class SendAdminEmailService {
       to,
       subject,
       template: this.emailHelpersService.template({
-        previewText: "test",
+        previewText: 'test',
         children: message,
       }),
     });
 
-    return "Email sent with Message!";
+    return 'Email sent with Message!';
   }
 }

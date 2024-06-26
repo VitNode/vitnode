@@ -1,12 +1,12 @@
 import {
   LanguageSelectFooterEditor,
   LanguageSelectFooterEditorProps,
-} from "./language-select";
-import { FilesButtonFooterEditor } from "./files/button";
-import { ListFilesFooterEditor } from "./files/list";
-import { useEditorState } from "../hooks/use-editor-state";
+} from './language-select';
+import { FilesButtonFooterEditor } from './files/button';
+import { ListFilesFooterEditor } from './files/list';
+import { useEditorState } from '../hooks/use-editor-state';
 
-import { useGlobals } from "../../hooks/use-globals";
+import { useGlobals } from '../../hooks/use-globals';
 
 interface Props extends LanguageSelectFooterEditorProps {
   disableLanguage?: boolean;
@@ -32,7 +32,7 @@ export const FooterEditor = ({
         )}
 
         {allowUploadFiles &&
-          config.editor.files.allow_type !== "none" &&
+          config.editor.files.allow_type !== 'none' &&
           permissionFiles.allow_upload && <FilesButtonFooterEditor />}
       </div>
 

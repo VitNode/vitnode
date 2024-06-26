@@ -1,30 +1,30 @@
-import * as z from "zod";
-import { useForm } from "react-hook-form";
-import { useTranslations } from "next-intl";
-import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from 'zod';
+import { useForm } from 'react-hook-form';
+import { useTranslations } from 'next-intl';
+import { zodResolver } from '@hookform/resolvers/zod';
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormMessage,
-} from "vitnode-frontend/components/ui/form";
-import { Input } from "vitnode-frontend/components/ui/input";
-import { Button } from "vitnode-frontend/components/ui/button";
+} from 'vitnode-frontend/components/ui/form';
+import { Input } from 'vitnode-frontend/components/ui/input';
+import { Button } from 'vitnode-frontend/components/ui/button';
 
-import { useEditorState } from "@/components/editor/hooks/use-editor-state";
+import { useEditorState } from '@/components/editor/hooks/use-editor-state';
 
 interface Props {
   setOpen: (open: boolean) => void;
 }
 
 export const ContentLinkToolbarEditor = ({ setOpen }: Props) => {
-  const t = useTranslations("core.editor.link");
+  const t = useTranslations('core.editor.link');
   const { editor } = useEditorState();
-  const tCore = useTranslations("core");
+  const tCore = useTranslations('core');
   const formSchema = z.object({
-    text: z.string().min(1, { message: tCore("errors.required") }),
-    href: z.string().min(1, { message: tCore("errors.required") }),
+    text: z.string().min(1, { message: tCore('errors.required') }),
+    href: z.string().min(1, { message: tCore('errors.required') }),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -34,9 +34,9 @@ export const ContentLinkToolbarEditor = ({ setOpen }: Props) => {
         editor.state.doc.textBetween(
           editor.view.state.selection.from,
           editor.view.state.selection.to,
-          "",
-        ) ?? "",
-      href: editor.getAttributes("link").href ?? "",
+          '',
+        ) ?? '',
+      href: editor.getAttributes('link').href ?? '',
     },
   });
 
@@ -44,12 +44,12 @@ export const ContentLinkToolbarEditor = ({ setOpen }: Props) => {
     editor
       .chain()
 
-      .extendMarkRange("link")
+      .extendMarkRange('link')
       .command(({ dispatch, tr }) => {
         if (!dispatch) return true;
 
         const { from, to } = tr.selection;
-        const displayText = values.text || values.href || "";
+        const displayText = values.text || values.href || '';
 
         tr.insertText(displayText, from, to);
         tr.addMark(
@@ -77,7 +77,7 @@ export const ContentLinkToolbarEditor = ({ setOpen }: Props) => {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Input placeholder={t("text")} {...field} />
+                <Input placeholder={t('text')} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -90,7 +90,7 @@ export const ContentLinkToolbarEditor = ({ setOpen }: Props) => {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Input type="url" placeholder={t("href")} {...field} />
+                <Input type="url" placeholder={t('href')} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -105,9 +105,9 @@ export const ContentLinkToolbarEditor = ({ setOpen }: Props) => {
             }}
             variant="destructiveGhost"
             size="sm"
-            disabled={!editor.isActive("link")}
+            disabled={!editor.isActive('link')}
           >
-            {t("delete")}
+            {t('delete')}
           </Button>
           <Button
             onClick={form.handleSubmit(onSubmit)}
@@ -115,7 +115,7 @@ export const ContentLinkToolbarEditor = ({ setOpen }: Props) => {
             disabled={!form.formState.isValid}
             size="sm"
           >
-            {t("insert")}
+            {t('insert')}
           </Button>
         </div>
       </form>

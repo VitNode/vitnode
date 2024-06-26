@@ -1,5 +1,5 @@
-import * as React from "react";
-import { cn } from "vitnode-frontend/helpers/classnames";
+import * as React from 'react';
+import { cn } from 'vitnode-frontend/helpers/classnames';
 
 interface HeaderContentProps {
   children?: React.ReactNode;
@@ -30,7 +30,7 @@ export const HeaderContent = ({
     <div
       ref={ref}
       className={cn(
-        "mb-4 flex min-h-9 flex-col items-start gap-2 sm:flex-row sm:gap-4",
+        'mb-4 flex min-h-9 flex-col items-start gap-2 sm:flex-row sm:gap-4',
         className,
       )}
     >

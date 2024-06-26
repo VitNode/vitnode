@@ -1,23 +1,23 @@
-import * as React from "react";
-import { useLocale } from "next-intl";
-import { cn } from "vitnode-frontend/helpers/classnames";
-import { useGlobals } from "vitnode-frontend/hooks/use-globals";
+import * as React from 'react';
+import { useLocale } from 'next-intl';
+import { cn } from 'vitnode-frontend/helpers/classnames';
+import { useGlobals } from 'vitnode-frontend/hooks/use-globals';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "vitnode-frontend/components/ui/select";
-import { FormControl } from "vitnode-frontend/components/ui/form";
-import { Input } from "vitnode-frontend/components/ui/input";
+} from 'vitnode-frontend/components/ui/select';
+import { FormControl } from 'vitnode-frontend/components/ui/form';
+import { Input } from 'vitnode-frontend/components/ui/input';
 
-import { TextLanguage } from "@/graphql/hooks";
+import { TextLanguage } from '@/graphql/hooks';
 
 interface Props
   extends Omit<
     React.InputHTMLAttributes<HTMLInputElement>,
-    "onChange" | "value"
+    'onChange' | 'value'
   > {
   onChange: (value: TextLanguage[]) => void;
   value: TextLanguage[];
@@ -39,10 +39,10 @@ export const TextLanguageInput = ({
   const valueAsArray = Array.isArray(value) ? value : [];
   const currentValue =
     valueAsArray.find(item => item.language_code === selectedLanguage)?.value ??
-    "";
+    '';
 
   return (
-    <div className={cn("flex w-full flex-col gap-2", className)}>
+    <div className={cn('flex w-full flex-col gap-2', className)}>
       <Input
         className="w-full"
         type="text"

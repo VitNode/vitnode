@@ -1,30 +1,30 @@
-import { useTranslations } from "next-intl";
+import { useTranslations } from 'next-intl';
 import {
   AlertDialogCancel,
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "vitnode-frontend/components/ui/alert-dialog";
-import { Button } from "vitnode-frontend/components/ui/button";
+} from 'vitnode-frontend/components/ui/alert-dialog';
+import { Button } from 'vitnode-frontend/components/ui/button';
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormMessage,
-} from "vitnode-frontend/components/ui/form";
-import { Input } from "vitnode-frontend/components/ui/input";
+} from 'vitnode-frontend/components/ui/form';
+import { Input } from 'vitnode-frontend/components/ui/input';
 
-import { useDeleteLangAdmin } from "./hooks/use-delete-lang-admin";
-import { ShowCoreLanguages } from "@/graphql/hooks";
+import { useDeleteLangAdmin } from './hooks/use-delete-lang-admin';
+import { ShowCoreLanguages } from '@/graphql/hooks';
 
 export const ContentDeleteActionsTableLangsCoreAdmin = ({
   code,
   name,
-}: Pick<ShowCoreLanguages, "code" | "name">) => {
-  const t = useTranslations("admin.core.langs.actions.delete");
-  const tCore = useTranslations("core");
+}: Pick<ShowCoreLanguages, 'code' | 'name'>) => {
+  const t = useTranslations('admin.core.langs.actions.delete');
+  const tCore = useTranslations('core');
   const { form, onSubmit } = useDeleteLangAdmin({ name, code });
 
   return (
@@ -32,12 +32,12 @@ export const ContentDeleteActionsTableLangsCoreAdmin = ({
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <AlertDialogHeader>
           <AlertDialogTitle>
-            {tCore("are_you_absolutely_sure")}
+            {tCore('are_you_absolutely_sure')}
           </AlertDialogTitle>
           <AlertDialogDescription className="flex flex-col gap-4">
-            <p>{t("text")}</p>
+            <p>{t('text')}</p>
             <p>
-              {t.rich("form_confirm_text", {
+              {t.rich('form_confirm_text', {
                 text: () => (
                   <span className="text-foreground font-semibold">{name}</span>
                 ),
@@ -62,7 +62,7 @@ export const ContentDeleteActionsTableLangsCoreAdmin = ({
         <AlertDialogFooter className="mt-6">
           <AlertDialogCancel asChild>
             <Button type="button" variant="outline">
-              {tCore("cancel")}
+              {tCore('cancel')}
             </Button>
           </AlertDialogCancel>
           <Button
@@ -71,7 +71,7 @@ export const ContentDeleteActionsTableLangsCoreAdmin = ({
             disabled={!form.formState.isValid}
             loading={form.formState.isSubmitting}
           >
-            {t("submit")}
+            {t('submit')}
           </Button>
         </AlertDialogFooter>
       </form>

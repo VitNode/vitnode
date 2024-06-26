@@ -1,14 +1,14 @@
-import * as React from "react";
-import { useTranslations } from "next-intl";
-import { ExternalLink } from "lucide-react";
-import { Badge } from "vitnode-frontend/components/ui/badge";
-import { Card } from "vitnode-frontend/components/ui/card";
-import { Tabs, TabsTrigger } from "vitnode-frontend/components/ui/tabs";
+import * as React from 'react';
+import { useTranslations } from 'next-intl';
+import { ExternalLink } from 'lucide-react';
+import { Badge } from 'vitnode-frontend/components/ui/badge';
+import { Card } from 'vitnode-frontend/components/ui/card';
+import { Tabs, TabsTrigger } from 'vitnode-frontend/components/ui/tabs';
 
-import { Admin__Core_Plugins__Show__ItemQuery } from "@/graphql/hooks";
-import { HeaderContent } from "@/components/header-content/header-content";
-import { DateFormat } from "@/components/date-format/date-format";
-import { ActionsDevPluginAdmin } from "./actions/actions";
+import { Admin__Core_Plugins__Show__ItemQuery } from '@/graphql/hooks';
+import { HeaderContent } from '@/components/header-content/header-content';
+import { DateFormat } from '@/components/date-format/date-format';
+import { ActionsDevPluginAdmin } from './actions/actions';
 
 interface Props extends Admin__Core_Plugins__Show__ItemQuery {
   children: React.ReactNode;
@@ -18,8 +18,8 @@ export const DevPluginAdminLayout = ({
   admin__core_plugins__show: { edges },
   children,
 }: Props) => {
-  const t = useTranslations("admin.core.plugins.dev");
-  const tCore = useTranslations("core");
+  const t = useTranslations('admin.core.plugins.dev');
+  const tCore = useTranslations('core');
 
   const plugin = edges.at(0);
   if (!plugin) return null;
@@ -41,7 +41,7 @@ export const DevPluginAdminLayout = ({
         h1={
           <div className="flex flex-wrap items-center gap-2">
             <span>{name}</span>
-            {isDefault && <Badge>{tCore("default")}</Badge>}
+            {isDefault && <Badge>{tCore('default')}</Badge>}
           </div>
         }
         desc={
@@ -80,13 +80,13 @@ export const DevPluginAdminLayout = ({
           id="overview"
           href={`/admin/core/plugins/${code}/dev/overview`}
         >
-          {t("overview.title")}
+          {t('overview.title')}
         </TabsTrigger>
         <TabsTrigger id="files" href={`/admin/core/plugins/${code}/dev/files`}>
-          {t("files.title")}
+          {t('files.title')}
         </TabsTrigger>
         <TabsTrigger id="nav" href={`/admin/core/plugins/${code}/dev/nav`}>
-          {t("nav.title")}
+          {t('nav.title')}
         </TabsTrigger>
       </Tabs>
 

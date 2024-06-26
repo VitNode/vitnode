@@ -1,22 +1,22 @@
-import { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
-import { Card } from "vitnode-frontend/components/ui/card";
-import { fetcher } from "vitnode-frontend/graphql/fetcher";
+import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
+import { Card } from 'vitnode-frontend/components/ui/card';
+import { fetcher } from 'vitnode-frontend/graphql/fetcher';
 
 import {
   Core_Languages__Show,
   ShowCoreLanguagesSortingColumnEnum,
   Core_Languages__ShowQuery,
   Core_Languages__ShowQueryVariables,
-} from "@/graphql/hooks";
+} from '@/graphql/hooks';
 import {
   usePaginationAPISsr,
   SearchParamsPagination,
-} from "@/plugins/core/hooks/utils/use-pagination-api-ssr";
-import { HeaderContent } from "@/components/header-content/header-content";
-import { ActionsLangsAdmin } from "@/plugins/admin/views/core/langs/actions/actions";
-import { RebuildRequiredAdmin } from "@/plugins/admin/global/rebuild-required";
-import { LangsCoreAdminView } from "@/plugins/admin/views/core/langs/langs-core-admin-view";
+} from '@/plugins/core/hooks/utils/use-pagination-api-ssr';
+import { HeaderContent } from '@/components/header-content/header-content';
+import { ActionsLangsAdmin } from '@/plugins/admin/views/core/langs/actions/actions';
+import { RebuildRequiredAdmin } from '@/plugins/admin/global/rebuild-required';
+import { LangsCoreAdminView } from '@/plugins/admin/views/core/langs/langs-core-admin-view';
 
 const getData = async (variables: Core_Languages__ShowQueryVariables) => {
   const { data } = await fetcher<
@@ -37,10 +37,10 @@ interface Props {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations("admin.core.langs");
+  const t = await getTranslations('admin.core.langs');
 
   return {
-    title: t("title"),
+    title: t('title'),
   };
 }
 
@@ -53,13 +53,13 @@ export default async function Page({ searchParams }: Props) {
   });
 
   const [t, data] = await Promise.all([
-    getTranslations("admin.core.langs"),
+    getTranslations('admin.core.langs'),
     getData(variables),
   ]);
 
   return (
     <>
-      <HeaderContent h1={t("title")}>
+      <HeaderContent h1={t('title')}>
         <ActionsLangsAdmin />
       </HeaderContent>
 

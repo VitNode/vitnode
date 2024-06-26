@@ -1,41 +1,41 @@
-import { useForm } from "react-hook-form";
-import { useTranslations } from "next-intl";
-import * as React from "react";
-import { toast } from "sonner";
-import { useDialog } from "vitnode-frontend/components/ui/dialog";
+import { useForm } from 'react-hook-form';
+import { useTranslations } from 'next-intl';
+import * as React from 'react';
+import { toast } from 'sonner';
+import { useDialog } from 'vitnode-frontend/components/ui/dialog';
 
-import { mutationDeleteApi } from "./api/mutation-delete-api";
+import { mutationDeleteApi } from './api/mutation-delete-api';
 
 interface FormType {
   file: File[];
-  type: "delete" | "upload";
+  type: 'delete' | 'upload';
 }
 
 export const useModalChangeAvatar = () => {
   const [isPending, setPending] = React.useState(false);
-  const t = useTranslations("core");
+  const t = useTranslations('core');
   const { setOpen } = useDialog();
 
   const form = useForm<FormType>({
     defaultValues: {
-      type: "upload",
+      type: 'upload',
       file: [],
     },
-    mode: "onChange",
+    mode: 'onChange',
   });
 
   const onSubmit = async ({ type }: FormType) => {
-    if (type === "delete") {
+    if (type === 'delete') {
       setPending(true);
 
       const mutation = await mutationDeleteApi();
       if (mutation.error) {
-        toast.error(t("errors.title"), {
-          description: t("settings.change_avatar.options.delete.error"),
+        toast.error(t('errors.title'), {
+          description: t('settings.change_avatar.options.delete.error'),
         });
       } else {
-        toast.success(t("settings.change_avatar.options.delete.title"), {
-          description: t("settings.change_avatar.options.delete.success"),
+        toast.success(t('settings.change_avatar.options.delete.title'), {
+          description: t('settings.change_avatar.options.delete.success'),
         });
         setOpen?.(false);
       }

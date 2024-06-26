@@ -1,18 +1,18 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import * as Accordion from "@radix-ui/react-accordion";
-import { motion } from "framer-motion";
-import { useTranslations } from "next-intl";
-import { ChevronDown, Menu } from "lucide-react";
-import { Link, usePathname } from "vitnode-frontend/navigation";
-import { cn } from "vitnode-frontend/helpers/classnames";
-import { Button, buttonVariants } from "vitnode-frontend/components/ui/button";
+import * as React from 'react';
+import * as Accordion from '@radix-ui/react-accordion';
+import { motion } from 'framer-motion';
+import { useTranslations } from 'next-intl';
+import { ChevronDown, Menu } from 'lucide-react';
+import { Link, usePathname } from 'vitnode-frontend/navigation';
+import { cn } from 'vitnode-frontend/helpers/classnames';
+import { Button, buttonVariants } from 'vitnode-frontend/components/ui/button';
 
 export interface ItemItemNavAdminProps {
   href: string;
   id: string;
-  children?: Omit<ItemItemNavAdminProps, "icon">[];
+  children?: Omit<ItemItemNavAdminProps, 'icon'>[];
   icon?: string;
 }
 
@@ -42,14 +42,14 @@ export const LinkItemNavAdmin = ({
 
   const buttonClass = (active: boolean) =>
     cn(
-      "hover:bg-primary/10 text-foreground [&>svg]:text-muted-foreground relative h-8 w-full justify-start font-normal [&>svg]:flex [&>svg]:size-4 [&>svg]:flex-shrink-0 [&>svg]:items-center [&>svg]:justify-center [&[data-state=open]>svg:not(:first-child)]:rotate-180",
+      'hover:bg-primary/10 text-foreground [&>svg]:text-muted-foreground relative h-8 w-full justify-start font-normal [&>svg]:flex [&>svg]:size-4 [&>svg]:flex-shrink-0 [&>svg]:items-center [&>svg]:justify-center [&[data-state=open]>svg:not(:first-child)]:rotate-180',
       {
-        "bg-primary/10 font-bold": active,
+        'bg-primary/10 font-bold': active,
       },
     );
 
   const primaryButtonClass = (active: boolean) =>
-    cn(buttonClass(active), "pl-4");
+    cn(buttonClass(active), 'pl-4');
 
   return (
     <Accordion.Item value={`${primaryId}_${id}`}>
@@ -77,7 +77,7 @@ export const LinkItemNavAdmin = ({
         <Link
           href={href}
           className={cn(
-            buttonVariants({ variant: "ghost", size: "sm" }),
+            buttonVariants({ variant: 'ghost', size: 'sm' }),
             primaryButtonClass(active),
           )}
         >
@@ -107,7 +107,7 @@ export const LinkItemNavAdmin = ({
                   key={`${primaryId}_${child.id}`}
                   href={href}
                   className={cn(
-                    buttonVariants({ variant: "ghost", size: "sm" }),
+                    buttonVariants({ variant: 'ghost', size: 'sm' }),
                     buttonClass(active),
                   )}
                 >

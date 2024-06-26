@@ -1,20 +1,20 @@
-import { useFormContext } from "react-hook-form";
-import { useTranslations } from "next-intl";
+import { useFormContext } from 'react-hook-form';
+import { useTranslations } from 'next-intl';
 import {
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from "vitnode-frontend/components/ui/form";
-import { ColorInput } from "vitnode-frontend/components/ui/color-input";
-import { Separator } from "vitnode-frontend/components/ui/separator";
+} from 'vitnode-frontend/components/ui/form';
+import { ColorInput } from 'vitnode-frontend/components/ui/color-input';
+import { Separator } from 'vitnode-frontend/components/ui/separator';
 
-import { TextLanguageInput } from "@/components/text-language-input";
-import { IconInput } from "@/components/icon/input/icon-input";
+import { TextLanguageInput } from '@/components/text-language-input';
+import { IconInput } from '@/components/icon/input/icon-input';
 
 export const MainContentCreateEditFormGroupsMembersAdmin = () => {
-  const t = useTranslations("admin.members.groups.create_edit");
+  const t = useTranslations('admin.members.groups.create_edit');
   const form = useFormContext();
 
   return (
@@ -24,7 +24,7 @@ export const MainContentCreateEditFormGroupsMembersAdmin = () => {
         name="name"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{t("name")}</FormLabel>
+            <FormLabel>{t('name')}</FormLabel>
             <FormControl>
               <TextLanguageInput {...field} />
             </FormControl>

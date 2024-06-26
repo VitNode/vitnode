@@ -1,6 +1,6 @@
-import { ArgsType, Field, Int } from "@nestjs/graphql";
+import { ArgsType, Field, Int } from '@nestjs/graphql';
 
-import { CreateAdminGroupsArgs } from "../../create/dto/create.args";
+import { CreateAdminGroupsArgs } from '../../create/dto/create.args';
 
 @ArgsType()
 export class EditAdminGroupsArgs extends CreateAdminGroupsArgs {

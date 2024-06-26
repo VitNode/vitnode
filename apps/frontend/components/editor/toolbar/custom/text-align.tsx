@@ -4,27 +4,27 @@ import {
   AlignLeft,
   AlignRight,
   ChevronDownIcon,
-} from "lucide-react";
+} from 'lucide-react';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "vitnode-frontend/components/ui/popover";
+} from 'vitnode-frontend/components/ui/popover';
 
-import { ButtonToolbarEditor } from "../button";
-import { ToggleToolbarEditor } from "../toggle";
+import { ButtonToolbarEditor } from '../button';
+import { ToggleToolbarEditor } from '../toggle';
 
-import { useEditorState } from "../../hooks/use-editor-state";
+import { useEditorState } from '../../hooks/use-editor-state';
 
 export const TextAlignToolbarEditor = () => {
   const { editor } = useEditorState();
 
   const getCurrentIcon = () => {
-    if (editor.isActive({ textAlign: "center" })) {
+    if (editor.isActive({ textAlign: 'center' })) {
       return <AlignCenter />;
-    } else if (editor.isActive({ textAlign: "right" })) {
+    } else if (editor.isActive({ textAlign: 'right' })) {
       return <AlignRight />;
-    } else if (editor.isActive({ textAlign: "justify" })) {
+    } else if (editor.isActive({ textAlign: 'justify' })) {
       return <AlignJustify />;
     }
 
@@ -45,9 +45,9 @@ export const TextAlignToolbarEditor = () => {
 
       <PopoverContent className="flex w-fit max-w-80 flex-wrap gap-1 p-2">
         <ToggleToolbarEditor
-          pressed={editor.isActive({ textAlign: "left" })}
+          pressed={editor.isActive({ textAlign: 'left' })}
           onPressedChange={() => {
-            editor.commands.setTextAlign("left");
+            editor.commands.setTextAlign('left');
             editor.commands.focus();
           }}
         >
@@ -55,9 +55,9 @@ export const TextAlignToolbarEditor = () => {
         </ToggleToolbarEditor>
 
         <ToggleToolbarEditor
-          pressed={editor.isActive({ textAlign: "center" })}
+          pressed={editor.isActive({ textAlign: 'center' })}
           onPressedChange={() => {
-            editor.commands.setTextAlign("center");
+            editor.commands.setTextAlign('center');
             editor.commands.focus();
           }}
         >
@@ -65,9 +65,9 @@ export const TextAlignToolbarEditor = () => {
         </ToggleToolbarEditor>
 
         <ToggleToolbarEditor
-          pressed={editor.isActive({ textAlign: "right" })}
+          pressed={editor.isActive({ textAlign: 'right' })}
           onPressedChange={() => {
-            editor.commands.setTextAlign("right");
+            editor.commands.setTextAlign('right');
             editor.commands.focus();
           }}
         >
@@ -75,9 +75,9 @@ export const TextAlignToolbarEditor = () => {
         </ToggleToolbarEditor>
 
         <ToggleToolbarEditor
-          pressed={editor.isActive({ textAlign: "justify" })}
+          pressed={editor.isActive({ textAlign: 'justify' })}
           onPressedChange={() => {
-            editor.commands.setTextAlign("justify");
+            editor.commands.setTextAlign('justify');
             editor.commands.focus();
           }}
         >

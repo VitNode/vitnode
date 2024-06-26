@@ -1,13 +1,13 @@
-import { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
-import { fetcher } from "vitnode-frontend/graphql/fetcher";
+import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
+import { fetcher } from 'vitnode-frontend/graphql/fetcher';
 
 import {
   Admin__Core_Nav__Show,
   Admin__Core_Nav__ShowQuery,
   Admin__Core_Nav__ShowQueryVariables,
-} from "@/graphql/hooks";
-import { NavAdminView } from "@/plugins/admin/views/core/styles/nav/nav-admin-view";
+} from '@/graphql/hooks';
+import { NavAdminView } from '@/plugins/admin/views/core/styles/nav/nav-admin-view';
 
 const getData = async () => {
   const { data } = await fetcher<
@@ -21,10 +21,10 @@ const getData = async () => {
 };
 
 export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations("admin.core.styles.nav");
+  const t = await getTranslations('admin.core.styles.nav');
 
   return {
-    title: t("title"),
+    title: t('title'),
   };
 }
 

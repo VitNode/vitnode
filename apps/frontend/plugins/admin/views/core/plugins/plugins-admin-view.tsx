@@ -1,31 +1,31 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import { useTranslations } from "next-intl";
-import { ColumnDef } from "@tanstack/react-table";
-import { ExternalLink } from "lucide-react";
-import { Badge } from "vitnode-frontend/components/ui/badge";
+import * as React from 'react';
+import { useTranslations } from 'next-intl';
+import { ColumnDef } from '@tanstack/react-table';
+import { ExternalLink } from 'lucide-react';
+import { Badge } from 'vitnode-frontend/components/ui/badge';
 
 import {
   Admin__Core_Plugins__ShowQuery,
   ShowAdminPlugins,
-} from "@/graphql/hooks";
-import { HeaderSortingDataTable } from "@/components/data-table/header";
-import { DateFormat } from "@/components/date-format/date-format";
-import { DataTable } from "@/components/data-table/data-table";
-import { ActionsItemPluginsAdmin } from "./table/actions/actions";
+} from '@/graphql/hooks';
+import { HeaderSortingDataTable } from '@/components/data-table/header';
+import { DateFormat } from '@/components/date-format/date-format';
+import { DataTable } from '@/components/data-table/data-table';
+import { ActionsItemPluginsAdmin } from './table/actions/actions';
 
 export const PluginsCoreAdminView = ({
   admin__core_plugins__show: { edges, pageInfo },
 }: Admin__Core_Plugins__ShowQuery) => {
-  const t = useTranslations("admin.core.plugins");
-  const tCore = useTranslations("core");
+  const t = useTranslations('admin.core.plugins');
+  const tCore = useTranslations('core');
 
   const columns: ColumnDef<ShowAdminPlugins>[] = React.useMemo(
     () => [
       {
-        header: tCore("table.name"),
-        accessorKey: "name",
+        header: tCore('table.name'),
+        accessorKey: 'name',
         cell: ({ row }) => {
           const data = row.original;
 
@@ -33,7 +33,7 @@ export const PluginsCoreAdminView = ({
             <div>
               <div className="flex items-center gap-2">
                 <span className="font-semibold">{data.name}</span>
-                {data.default && <Badge>{tCore("default")}</Badge>}
+                {data.default && <Badge>{tCore('default')}</Badge>}
               </div>
               {data.description && (
                 <p className="text-muted-foreground max-w-80 truncate text-sm">
@@ -45,8 +45,8 @@ export const PluginsCoreAdminView = ({
         },
       },
       {
-        header: tCore("table.version"),
-        accessorKey: "version",
+        header: tCore('table.version'),
+        accessorKey: 'version',
         cell: ({ row }) => {
           const data = row.original;
 
@@ -63,8 +63,8 @@ export const PluginsCoreAdminView = ({
         },
       },
       {
-        header: tCore("table.author"),
-        accessorKey: "author",
+        header: tCore('table.author'),
+        accessorKey: 'author',
         cell: ({ row }) => {
           const data = row.original;
 
@@ -88,11 +88,11 @@ export const PluginsCoreAdminView = ({
         header: val => {
           return (
             <HeaderSortingDataTable {...val}>
-              {tCore("table.updated")}
+              {tCore('table.updated')}
             </HeaderSortingDataTable>
           );
         },
-        accessorKey: "updated",
+        accessorKey: 'updated',
         cell: ({ row }) => {
           const data = row.original;
 
@@ -126,7 +126,7 @@ export const PluginsCoreAdminView = ({
       //   }
       // },
       {
-        id: "actions",
+        id: 'actions',
         cell: ({ row }) => {
           const data = row.original;
 
@@ -143,10 +143,10 @@ export const PluginsCoreAdminView = ({
       pageInfo={pageInfo}
       defaultPageSize={10}
       columns={columns}
-      searchPlaceholder={t("search_placeholder")}
+      searchPlaceholder={t('search_placeholder')}
       defaultSorting={{
-        sortBy: "updated",
-        sortDirection: "desc",
+        sortBy: 'updated',
+        sortDirection: 'desc',
       }}
     />
   );

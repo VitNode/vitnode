@@ -1,13 +1,13 @@
-import { AnimatePresence, motion } from "framer-motion";
-import { useTranslations } from "next-intl";
-import { Link } from "vitnode-frontend/navigation";
-import { buttonVariants } from "vitnode-frontend/components/ui/button";
-import { Form } from "vitnode-frontend/components/ui/form";
+import { AnimatePresence, motion } from 'framer-motion';
+import { useTranslations } from 'next-intl';
+import { Link } from 'vitnode-frontend/navigation';
+import { buttonVariants } from 'vitnode-frontend/components/ui/button';
+import { Form } from 'vitnode-frontend/components/ui/form';
 
-import { ThemeEditorTab, useThemeEditor } from "../hooks/use-theme-editor";
-import { ColorTabThemeEditor } from "./tabs/color-tab";
-import { MainTabThemeEditor } from "./tabs/main";
-import { SubmitContentThemeEditor } from "./submit";
+import { ThemeEditorTab, useThemeEditor } from '../hooks/use-theme-editor';
+import { ColorTabThemeEditor } from './tabs/color-tab';
+import { MainTabThemeEditor } from './tabs/main';
+import { SubmitContentThemeEditor } from './submit';
 
 export const ContentThemeEditor = () => {
   const {
@@ -18,7 +18,7 @@ export const ContentThemeEditor = () => {
     openSubmitDialog,
     setOpenSubmitDialog,
   } = useThemeEditor();
-  const t = useTranslations("core");
+  const t = useTranslations('core');
   const tabs = {
     [ThemeEditorTab.Main]: <MainTabThemeEditor />,
     [ThemeEditorTab.Colors]: <ColorTabThemeEditor />,
@@ -38,7 +38,7 @@ export const ContentThemeEditor = () => {
                 initial: direction => {
                   return { x: `${110 * direction}%`, opacity: 0 };
                 },
-                active: { x: "0%", opacity: 1 },
+                active: { x: '0%', opacity: 1 },
                 exit: direction => {
                   return { x: `${110 * direction}%`, opacity: 0 };
                 },
@@ -47,7 +47,7 @@ export const ContentThemeEditor = () => {
               animate="active"
               exit="exit"
               custom={direction}
-              transition={{ duration: 0.25, type: "spring", bounce: 0 }}
+              transition={{ duration: 0.25, type: 'spring', bounce: 0 }}
             >
               {tabs[activeTab]}
             </motion.div>
@@ -56,13 +56,13 @@ export const ContentThemeEditor = () => {
               <Link
                 href="/"
                 className={buttonVariants({
-                  variant: "ghost",
-                  size: "sm",
-                  className: "w-full",
+                  variant: 'ghost',
+                  size: 'sm',
+                  className: 'w-full',
                 })}
-                aria-label={t("close")}
+                aria-label={t('close')}
               >
-                {t("cancel")}
+                {t('cancel')}
               </Link>
 
               <SubmitContentThemeEditor

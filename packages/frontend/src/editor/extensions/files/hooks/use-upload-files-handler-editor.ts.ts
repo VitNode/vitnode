@@ -1,20 +1,20 @@
-import * as React from "react";
-import { useTranslations } from "next-intl";
-import { toast } from "sonner";
-import { formatBytes } from "vitnode-shared";
-import { useGlobals } from "vitnode-frontend/hooks/use-globals";
-import { ErrorType } from "vitnode-frontend/graphql/fetcher";
-import { useSession } from "vitnode-frontend/hooks/use-session";
+import * as React from 'react';
+import { useTranslations } from 'next-intl';
+import { toast } from 'sonner';
+import { formatBytes } from 'vitnode-shared';
+import { useGlobals } from 'vitnode-frontend/hooks/use-globals';
+import { ErrorType } from 'vitnode-frontend/graphql/fetcher';
+import { useSession } from 'vitnode-frontend/hooks/use-session';
 
 import {
   acceptMimeTypeImage,
   acceptMimeTypeVideo,
   FileStateEditor,
-} from "../files";
-import { uploadMutationApi } from "./upload-mutation-api";
-import { getFilesFromContent } from "./functions";
+} from '../files';
+import { uploadMutationApi } from './upload-mutation-api';
+import { getFilesFromContent } from './functions';
 
-import { TextLanguage } from "@/graphql/hooks";
+import { TextLanguage } from '@/graphql/hooks';
 
 export interface UploadFilesHandlerArgs {
   files: FileStateEditor[];
@@ -38,8 +38,8 @@ export const useUploadFilesHandlerEditor = ({
   const [files, setFiles] = React.useState<FileStateEditor[]>(
     Array.isArray(value) ? getFilesFromContent(value) : [],
   );
-  const t = useTranslations("core.editor.files");
-  const tCore = useTranslations("core");
+  const t = useTranslations('core.editor.files');
+  const tCore = useTranslations('core');
 
   const handleUpload = async ({
     data,
@@ -50,16 +50,16 @@ export const useUploadFilesHandlerEditor = ({
   }) => {
     const formData = new FormData();
     if (!data.file || !allowUploadFiles) return;
-    formData.append("file", data.file);
-    formData.append("plugin", allowUploadFiles.plugin);
-    formData.append("folder", allowUploadFiles.folder);
+    formData.append('file', data.file);
+    formData.append('plugin', allowUploadFiles.plugin);
+    formData.append('folder', allowUploadFiles.folder);
     const mutation = await uploadMutationApi(formData);
 
     const error = mutation.error as ErrorType | undefined;
 
     if (error || !mutation.data) {
-      toast.error(tCore("errors.title"), {
-        description: tCore("errors.internal_server_error"),
+      toast.error(tCore('errors.title'), {
+        description: tCore('errors.internal_server_error'),
       });
 
       return;
@@ -92,17 +92,17 @@ export const useUploadFilesHandlerEditor = ({
     files: FileStateEditor[],
   ): FileStateEditor[] => {
     // console.log(files);
-    if (config.editor.files.allow_type === "all") return files;
+    if (config.editor.files.allow_type === 'all') return files;
 
     return files.filter(file => {
-      if (config.editor.files.allow_type === "images_videos") {
+      if (config.editor.files.allow_type === 'images_videos') {
         return [...acceptMimeTypeImage, ...acceptMimeTypeVideo].includes(
-          file.file?.type || "",
+          file.file?.type || '',
         );
       }
 
-      if (config.editor.files.allow_type === "images") {
-        return acceptMimeTypeImage.includes(file.file?.type || "");
+      if (config.editor.files.allow_type === 'images') {
+        return acceptMimeTypeImage.includes(file.file?.type || '');
       }
     });
   };
@@ -122,8 +122,8 @@ export const useUploadFilesHandlerEditor = ({
     }, 0);
 
     if (totalSize > max) {
-      toast.error(t("errors.max_storage_for_submit.title"), {
-        description: t.rich("errors.max_storage_for_submit.desc", {
+      toast.error(t('errors.max_storage_for_submit.title'), {
+        description: t.rich('errors.max_storage_for_submit.desc', {
           size: formatBytes(max),
         }),
       });
@@ -141,7 +141,7 @@ export const useUploadFilesHandlerEditor = ({
     if (
       !files.length ||
       !allowUploadFiles ||
-      config.editor.files.allow_type === "none" ||
+      config.editor.files.allow_type === 'none' ||
       !permissionFiles.allow_upload
     ) {
       return;
@@ -150,8 +150,8 @@ export const useUploadFilesHandlerEditor = ({
     const validateMineType = validateMineTypeFiles(files);
 
     if (validateMineType.length !== files.length) {
-      toast.error(t("errors.invalid_file_type.title"), {
-        description: t("errors.invalid_file_type.desc", {
+      toast.error(t('errors.invalid_file_type.title'), {
+        description: t('errors.invalid_file_type.desc', {
           types: t(config.editor.files.allow_type),
         }),
       });

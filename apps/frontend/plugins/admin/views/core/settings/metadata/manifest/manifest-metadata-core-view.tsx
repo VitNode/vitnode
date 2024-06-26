@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { useTranslations } from "next-intl";
+import { useTranslations } from 'next-intl';
 import {
   Form,
   FormControl,
@@ -10,24 +10,24 @@ import {
   FormItem,
   FormLabel,
   FormWrapper,
-} from "vitnode-frontend/components/ui/form";
-import { Input } from "vitnode-frontend/components/ui/input";
-import { Button } from "vitnode-frontend/components/ui/button";
+} from 'vitnode-frontend/components/ui/form';
+import { Input } from 'vitnode-frontend/components/ui/input';
+import { Button } from 'vitnode-frontend/components/ui/button';
 import {
   RadioGroup,
   RadioGroupItem,
-} from "vitnode-frontend/components/ui/radio-group";
-import { ColorInput } from "vitnode-frontend/components/ui/color-input";
-import { CONFIG } from "vitnode-frontend/helpers/config-with-env";
+} from 'vitnode-frontend/components/ui/radio-group';
+import { ColorInput } from 'vitnode-frontend/components/ui/color-input';
+import { CONFIG } from 'vitnode-frontend/helpers/config-with-env';
 
-import { useManifestCoreAdminView } from "./hooks/use-manifest-core-admin-view";
-import { Admin__Core_Manifest_Metadata__ShowQuery } from "@/graphql/hooks";
+import { useManifestCoreAdminView } from './hooks/use-manifest-core-admin-view';
+import { Admin__Core_Manifest_Metadata__ShowQuery } from '@/graphql/hooks';
 
 export const ManifestMetadataCoreAdminView = (
   props: Admin__Core_Manifest_Metadata__ShowQuery,
 ) => {
-  const t = useTranslations("admin.core.metadata.manifest");
-  const tCore = useTranslations("core");
+  const t = useTranslations('admin.core.metadata.manifest');
+  const tCore = useTranslations('core');
   const { form, onSubmit } = useManifestCoreAdminView(props);
 
   return (
@@ -38,15 +38,15 @@ export const ManifestMetadataCoreAdminView = (
           name="display"
           render={({ field }) => (
             <FormFieldRender
-              label={t("display.label")}
-              description={t("display.desc")}
+              label={t('display.label')}
+              description={t('display.desc')}
             >
               <RadioGroup
                 onValueChange={field.onChange}
                 defaultValue={field.value}
                 className="flex flex-col space-y-1"
               >
-                {["fullscreen", "standalone", "minimal-ui", "browser"].map(
+                {['fullscreen', 'standalone', 'minimal-ui', 'browser'].map(
                   item => (
                     <FormItem
                       key={item}
@@ -80,8 +80,8 @@ export const ManifestMetadataCoreAdminView = (
           name="start_url"
           render={({ field }) => (
             <FormFieldRender
-              label={t("start_url.label")}
-              description={t("start_url.desc")}
+              label={t('start_url.label')}
+              description={t('start_url.desc')}
             >
               <div className="flex flex-wrap items-center gap-1">
                 <span>{CONFIG.frontend_url}</span>
@@ -97,7 +97,7 @@ export const ManifestMetadataCoreAdminView = (
           control={form.control}
           name="theme_color"
           render={({ field }) => (
-            <FormFieldRender label={t("theme_color.label")}>
+            <FormFieldRender label={t('theme_color.label')}>
               <ColorInput {...field} disableRemoveColor />
             </FormFieldRender>
           )}
@@ -107,7 +107,7 @@ export const ManifestMetadataCoreAdminView = (
           control={form.control}
           name="background_color"
           render={({ field }) => (
-            <FormFieldRender label={t("background_color.label")}>
+            <FormFieldRender label={t('background_color.label')}>
               <ColorInput {...field} disableRemoveColor />
             </FormFieldRender>
           )}
@@ -118,7 +118,7 @@ export const ManifestMetadataCoreAdminView = (
           disabled={!form.formState.isValid}
           loading={form.formState.isSubmitting}
         >
-          {tCore("save")}
+          {tCore('save')}
         </Button>
       </FormWrapper>
     </Form>

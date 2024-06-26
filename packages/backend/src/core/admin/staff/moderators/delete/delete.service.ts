@@ -1,11 +1,11 @@
-import { Injectable } from "@nestjs/common";
-import { eq } from "drizzle-orm";
+import { Injectable } from '@nestjs/common';
+import { eq } from 'drizzle-orm';
 
-import { DeleteAdminStaffModeratorsArgs } from "./dto/delete.args";
+import { DeleteAdminStaffModeratorsArgs } from './dto/delete.args';
 
-import { DatabaseService } from "../../../../../database";
-import { CustomError } from "../../../../../errors";
-import { core_moderators_permissions } from "../../../../../templates/core/admin/database/schema/moderators";
+import { DatabaseService } from '../../../../../database';
+import { CustomError } from '../../../../../errors';
+import { core_moderators_permissions } from '../../../../../templates/core/admin/database/schema/moderators';
 
 @Injectable()
 export class DeleteAdminStaffModeratorsService {
@@ -20,8 +20,8 @@ export class DeleteAdminStaffModeratorsService {
 
     if (permission.protected) {
       throw new CustomError({
-        code: "BAD_REQUEST",
-        message: "You cannot delete this permission with protected flag.",
+        code: 'BAD_REQUEST',
+        message: 'You cannot delete this permission with protected flag.',
       });
     }
 
@@ -29,6 +29,6 @@ export class DeleteAdminStaffModeratorsService {
       .delete(core_moderators_permissions)
       .where(eq(core_moderators_permissions.id, id));
 
-    return "Success!";
+    return 'Success!';
   }
 }

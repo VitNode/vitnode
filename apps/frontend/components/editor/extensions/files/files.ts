@@ -1,19 +1,19 @@
-import { Node, mergeAttributes } from "@tiptap/react";
-import { Plugin } from "@tiptap/pm/state";
+import { Node, mergeAttributes } from '@tiptap/react';
+import { Plugin } from '@tiptap/pm/state';
 
-import { renderReactNode } from "./client";
-import { Core_Editor_Files__UploadMutation } from "@/graphql/hooks";
-import { UploadFilesHandlerArgs } from "./hooks/use-upload-files-handler-editor.ts";
+import { renderReactNode } from './client';
+import { Core_Editor_Files__UploadMutation } from '@/graphql/hooks';
+import { UploadFilesHandlerArgs } from './hooks/use-upload-files-handler-editor.ts';
 
 export const acceptMimeTypeImage = [
-  "image/jpeg",
-  "image/png",
-  "image/webp",
-  "image/gif",
-  "image/avif",
+  'image/jpeg',
+  'image/png',
+  'image/webp',
+  'image/gif',
+  'image/avif',
 ];
 
-export const acceptMimeTypeVideo = ["video/mp4", "video/webm", "video/ogg"];
+export const acceptMimeTypeVideo = ['video/mp4', 'video/webm', 'video/ogg'];
 
 export interface FilesHandlerAttributes {
   dir_folder: string;
@@ -28,7 +28,7 @@ export interface FilesHandlerAttributes {
   width?: number;
 }
 
-declare module "@tiptap/react" {
+declare module '@tiptap/react' {
   interface Commands<ReturnType> {
     files: {
       insertFile: (options: FilesHandlerAttributes) => ReturnType;
@@ -39,7 +39,7 @@ declare module "@tiptap/react" {
 export interface FileStateEditor {
   id: number;
   isLoading: boolean;
-  data?: Core_Editor_Files__UploadMutation["core_editor_files__upload"];
+  data?: Core_Editor_Files__UploadMutation['core_editor_files__upload'];
   error?: string;
   file?: File;
 }
@@ -50,8 +50,8 @@ export interface FilesHandlerArgs {
 
 export const FilesHandler = ({ uploadFiles }: FilesHandlerArgs) =>
   Node.create({
-    name: "files",
-    group: "inline",
+    name: 'files',
+    group: 'inline',
     inline: true,
     atom: true,
     selectable: true,
@@ -62,22 +62,22 @@ export const FilesHandler = ({ uploadFiles }: FilesHandlerArgs) =>
     addAttributes() {
       return {
         file_name_original: {
-          default: "",
+          default: '',
         },
         file_name: {
-          default: "",
+          default: '',
         },
         dir_folder: {
-          default: "",
+          default: '',
         },
         file_alt: {
-          default: "",
+          default: '',
         },
         file_size: {
           default: 0,
         },
         mimetype: {
-          default: "",
+          default: '',
         },
         id: {
           default: 0,
@@ -89,7 +89,7 @@ export const FilesHandler = ({ uploadFiles }: FilesHandlerArgs) =>
           default: 0,
         },
         security_key: {
-          default: "",
+          default: '',
         },
       };
     },
@@ -100,10 +100,10 @@ export const FilesHandler = ({ uploadFiles }: FilesHandlerArgs) =>
 
     renderHTML({ HTMLAttributes }) {
       return [
-        "button",
+        'button',
         mergeAttributes(HTMLAttributes, {
-          ["data-type"]: "file",
-          type: "button",
+          ['data-type']: 'file',
+          type: 'button',
         }),
       ];
     },

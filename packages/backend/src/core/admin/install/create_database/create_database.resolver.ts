@@ -1,6 +1,6 @@
-import { Mutation, Resolver } from "@nestjs/graphql";
+import { Mutation, Resolver } from '@nestjs/graphql';
 
-import { CreateDatabaseAdminInstallService } from "./create_database.service";
+import { CreateDatabaseAdminInstallService } from './create_database.service';
 
 @Resolver()
 export class CreateDatabaseAdminInstallResolver {

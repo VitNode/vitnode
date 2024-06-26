@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
-import { Metadata } from "next";
-import * as React from "react";
-import { getConfigFile } from "vitnode-frontend/helpers/config";
+import { Metadata } from 'next';
+import * as React from 'react';
+import { getConfigFile } from 'vitnode-frontend/helpers/config';
 
 export async function generateMetadata(): Promise<Metadata> {
   const config = await getConfigFile();
@@ -13,7 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
       template: `%s - ${defaultTitle}`,
     },
     icons: {
-      icon: "/icons/favicon.ico",
+      icon: '/icons/favicon.ico',
     },
   };
 }

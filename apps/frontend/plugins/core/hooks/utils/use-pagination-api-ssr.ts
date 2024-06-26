@@ -1,4 +1,4 @@
-import { SortDirectionEnum } from "@/graphql/hooks";
+import { SortDirectionEnum } from '@/graphql/hooks';
 
 export interface SearchParamsPagination {
   cursor?: string;
@@ -36,7 +36,7 @@ export function usePaginationAPISsr<T extends Record<string, unknown>>({
       : Number(searchParams.first ?? 0),
     last: Number(searchParams.last ?? 0),
     cursor: Number(searchParams.cursor) ?? null,
-    search: search ? searchParams.search ?? "" : "",
+    search: search ? searchParams.search ?? '' : '',
     sortBy: useGetSortByParamsAPI({ constEnum: sortByEnum, searchParams }),
   };
 
@@ -50,7 +50,7 @@ function useGetSortByParamsAPI<T extends Record<string, unknown>>({
   constEnum,
   searchParams,
 }: {
-  searchParams: Pick<SearchParamsPagination, "sortBy" | "sortDirection">;
+  searchParams: Pick<SearchParamsPagination, 'sortBy' | 'sortDirection'>;
   constEnum?: T;
 }): {
   column: keyof T;
@@ -74,7 +74,7 @@ function useGetSortByParamsAPI<T extends Record<string, unknown>>({
   return {
     column: sort.by as keyof T,
     direction:
-      sort.direction === "asc" ? SortDirectionEnum.asc : SortDirectionEnum.desc,
+      sort.direction === 'asc' ? SortDirectionEnum.asc : SortDirectionEnum.desc,
   };
 }
 
@@ -87,7 +87,7 @@ export const emptyPagination = ({
     first,
     last: 0,
     cursor: null,
-    search: "",
+    search: '',
     sortBy: null,
   };
 };

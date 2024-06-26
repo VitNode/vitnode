@@ -1,13 +1,13 @@
-import { redirect } from "vitnode-frontend/navigation";
-import { InternalErrorView } from "vitnode-frontend/views/global";
-import { ErrorType, fetcher } from "vitnode-frontend/graphql/fetcher";
+import { redirect } from 'vitnode-frontend/navigation';
+import { InternalErrorView } from 'vitnode-frontend/views/global';
+import { ErrorType, fetcher } from 'vitnode-frontend/graphql/fetcher';
 
 import {
   Admin__Install__Layout,
   Admin__Install__LayoutQuery,
   Admin__Install__LayoutQueryVariables,
-} from "@/graphql/hooks";
-import { LayoutInstallConfigsView } from "@/plugins/admin/configs/views/install/layout-install-configs-view";
+} from '@/graphql/hooks';
+import { LayoutInstallConfigsView } from '@/plugins/admin/configs/views/install/layout-install-configs-view';
 
 const getData = async () => {
   const { data } = await fetcher<
@@ -15,7 +15,7 @@ const getData = async () => {
     Admin__Install__LayoutQueryVariables
   >({
     query: Admin__Install__Layout,
-    cache: "force-cache",
+    cache: 'force-cache',
   });
 
   return data;
@@ -31,8 +31,8 @@ export default async function Page() {
   } catch (error) {
     const code = error as ErrorType;
 
-    if (code.extensions?.code === "ACCESS_DENIED") {
-      redirect("/admin");
+    if (code.extensions?.code === 'ACCESS_DENIED') {
+      redirect('/admin');
     }
 
     return <InternalErrorView />;

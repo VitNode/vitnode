@@ -1,15 +1,15 @@
-import * as React from "react";
-import { Ellipsis, Minus, Quote } from "lucide-react";
+import * as React from 'react';
+import { Ellipsis, Minus, Quote } from 'lucide-react';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "vitnode-frontend/components/ui/popover";
+} from 'vitnode-frontend/components/ui/popover';
 
-import { ButtonToolbarEditor } from "../button";
-import { ToggleToolbarEditor } from "../toggle";
+import { ButtonToolbarEditor } from '../button';
+import { ToggleToolbarEditor } from '../toggle';
 
-import { useEditorState } from "../../hooks/use-editor-state";
+import { useEditorState } from '../../hooks/use-editor-state';
 
 export const MoreToolbarEditor = () => {
   const { editor } = useEditorState();
@@ -17,7 +17,7 @@ export const MoreToolbarEditor = () => {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <ButtonToolbarEditor name="more" active={editor.isActive("link")}>
+        <ButtonToolbarEditor name="more" active={editor.isActive('link')}>
           <Ellipsis />
         </ButtonToolbarEditor>
       </PopoverTrigger>
@@ -31,7 +31,7 @@ export const MoreToolbarEditor = () => {
         </ButtonToolbarEditor>
 
         <ToggleToolbarEditor
-          pressed={editor.isActive("blockquote")}
+          pressed={editor.isActive('blockquote')}
           onPressedChange={() =>
             editor.chain().focus().toggleBlockquote().run()
           }

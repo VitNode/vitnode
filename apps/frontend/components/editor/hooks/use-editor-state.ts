@@ -1,14 +1,14 @@
-import * as React from "react";
-import { Editor } from "@tiptap/react";
+import * as React from 'react';
+import { Editor } from '@tiptap/react';
 
-import { FileStateEditor } from "../extensions/files/files";
+import { FileStateEditor } from '../extensions/files/files';
 import {
   UploadFilesHandlerArgs,
   UploadFilesHandlerEditorArgs,
-} from "../extensions/files/hooks/use-upload-files-handler-editor.ts";
-import { TextLanguage } from "@/graphql/hooks";
+} from '../extensions/files/hooks/use-upload-files-handler-editor.ts';
+import { TextLanguage } from '@/graphql/hooks';
 
-interface Args extends Omit<UploadFilesHandlerEditorArgs, "value"> {
+interface Args extends Omit<UploadFilesHandlerEditorArgs, 'value'> {
   editor: Editor;
   files: FileStateEditor[];
   onChange: (value: TextLanguage[] | string) => void;
@@ -24,7 +24,7 @@ export const EditorStateContext = React.createContext<Args>({
   uploadFiles: async () => {},
   value: [],
   onChange: () => {},
-  selectedLanguage: "",
+  selectedLanguage: '',
   setFiles: () => {},
 });
 

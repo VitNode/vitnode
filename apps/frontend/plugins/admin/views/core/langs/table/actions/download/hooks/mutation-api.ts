@@ -1,13 +1,13 @@
-"use server";
+'use server';
 
-import { revalidatePath } from "next/cache";
-import { fetcher } from "vitnode-frontend/graphql/fetcher";
+import { revalidatePath } from 'next/cache';
+import { fetcher } from 'vitnode-frontend/graphql/fetcher';
 
 import {
   Admin__Core_Languages__Download,
   Admin__Core_Languages__DownloadMutation,
   Admin__Core_Languages__DownloadMutationVariables,
-} from "@/graphql/hooks";
+} from '@/graphql/hooks';
 
 export const mutationApi = async (
   variables: Admin__Core_Languages__DownloadMutationVariables,
@@ -21,7 +21,7 @@ export const mutationApi = async (
       variables,
     });
 
-    revalidatePath("/admin/core/langs", "page");
+    revalidatePath('/admin/core/langs', 'page');
 
     return { data };
   } catch (error) {

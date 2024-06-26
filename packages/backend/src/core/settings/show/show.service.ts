@@ -1,14 +1,14 @@
-import { join } from "path";
-import * as fs from "fs";
+import { join } from 'path';
+import * as fs from 'fs';
 
-import { Injectable } from "@nestjs/common";
+import { Injectable } from '@nestjs/common';
 
-import { ShowSettingsObj } from "./dto/show.obj";
-import { ManifestWithLang } from "../settings.module";
+import { ShowSettingsObj } from './dto/show.obj';
+import { ManifestWithLang } from '../settings.module';
 
-import { DatabaseService } from "../../../database";
-import { ABSOLUTE_PATHS_BACKEND, getConfigFile } from "../../..";
-import { core_languages } from "../../../templates/core/admin/database/schema/languages";
+import { DatabaseService } from '../../../database';
+import { ABSOLUTE_PATHS_BACKEND, getConfigFile } from '../../..';
+import { core_languages } from '../../../templates/core/admin/database/schema/languages';
 
 @Injectable()
 export class ShowSettingsService {
@@ -22,11 +22,11 @@ export class ShowSettingsService {
     return langCodes.map(lang => {
       const path = join(
         ABSOLUTE_PATHS_BACKEND.uploads.public,
-        "assets",
+        'assets',
         lang,
-        "manifest.webmanifest",
+        'manifest.webmanifest',
       );
-      const data = fs.readFileSync(path, "utf8");
+      const data = fs.readFileSync(path, 'utf8');
       const manifest: ManifestWithLang = JSON.parse(data);
 
       return manifest;

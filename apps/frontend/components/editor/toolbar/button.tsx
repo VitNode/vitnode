@@ -1,7 +1,7 @@
-import { useTranslations } from "next-intl";
-import * as React from "react";
-import { cn } from "vitnode-frontend/helpers/classnames";
-import { Button } from "vitnode-frontend/components/ui/button";
+import { useTranslations } from 'next-intl';
+import * as React from 'react';
+import { cn } from 'vitnode-frontend/helpers/classnames';
+import { Button } from 'vitnode-frontend/components/ui/button';
 
 interface Props {
   children: React.ReactNode;
@@ -22,13 +22,13 @@ export const ButtonToolbarEditor = ({
   className,
   ...rest
 }: Props) => {
-  const t = useTranslations("core.editor");
+  const t = useTranslations('core.editor');
 
   return (
     <Button
       variant="ghost"
-      className={cn("hover:bg-muted size-9 shadow-none", className, {
-        "bg-accent": active,
+      className={cn('hover:bg-muted size-9 shadow-none', className, {
+        'bg-accent': active,
       })}
       size="icon"
       onClick={onClick}

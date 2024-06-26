@@ -1,12 +1,12 @@
-import { useTranslations } from "next-intl";
+import { useTranslations } from 'next-intl';
 import {
   CardContent,
   CardDescription,
   CardHeader,
-} from "vitnode-frontend/components/ui/card";
+} from 'vitnode-frontend/components/ui/card';
 
-import { Core_Sessions__Devices__ShowQuery } from "@/graphql/hooks";
-import { ContentDevicesSettings } from "./content";
+import { Core_Sessions__Devices__ShowQuery } from '@/graphql/hooks';
+import { ContentDevicesSettings } from './content';
 
 export interface DevicesSettingsViewProps
   extends Core_Sessions__Devices__ShowQuery {
@@ -14,15 +14,15 @@ export interface DevicesSettingsViewProps
 }
 
 export const DevicesSettingsView = (props: DevicesSettingsViewProps) => {
-  const t = useTranslations("core.settings.devices");
+  const t = useTranslations('core.settings.devices');
 
   return (
     <>
       <CardHeader>
         <h1 className="text-2xl font-semibold leading-none tracking-tight">
-          {t("title")}
+          {t('title')}
         </h1>
-        <CardDescription>{t("desc")}</CardDescription>
+        <CardDescription>{t('desc')}</CardDescription>
       </CardHeader>
 
       <CardContent>

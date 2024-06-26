@@ -1,6 +1,6 @@
-import { createSharedPathnamesNavigation } from "next-intl/navigation";
+import { createSharedPathnamesNavigation } from 'next-intl/navigation';
 
-import { useRouter } from "./router";
+import { useRouter } from './router';
 
 const { redirect, usePathname, Link } = createSharedPathnamesNavigation();
 

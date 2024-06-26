@@ -1,16 +1,16 @@
-import { useTranslations } from "next-intl";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
-import { toast } from "sonner";
-import { useDialog } from "vitnode-frontend/components/ui/dialog";
-import { ErrorType } from "vitnode-frontend/graphql/fetcher";
+import { useTranslations } from 'next-intl';
+import { useForm } from 'react-hook-form';
+import * as z from 'zod';
+import { toast } from 'sonner';
+import { useDialog } from 'vitnode-frontend/components/ui/dialog';
+import { ErrorType } from 'vitnode-frontend/graphql/fetcher';
 
-import { mutationApi } from "./mutation-api";
-import { UploadPluginAdminProps } from "../upload";
+import { mutationApi } from './mutation-api';
+import { UploadPluginAdminProps } from '../upload';
 
 export const useUploadPluginAdmin = ({ data }: UploadPluginAdminProps) => {
-  const t = useTranslations("admin.core.plugins.upload");
-  const tCore = useTranslations("core");
+  const t = useTranslations('admin.core.plugins.upload');
+  const tCore = useTranslations('core');
   const { setOpen } = useDialog();
   const formSchema = z.object({
     file: z.array(z.instanceof(File)),
@@ -26,19 +26,19 @@ export const useUploadPluginAdmin = ({ data }: UploadPluginAdminProps) => {
     if (!values.file.length) return;
 
     const formData = new FormData();
-    formData.append("file", values.file[0]);
+    formData.append('file', values.file[0]);
     if (data) {
-      formData.append("code", data.code);
+      formData.append('code', data.code);
     }
     const mutation = await mutationApi(formData);
 
     const error = mutation.error as ErrorType | undefined;
 
     if (
-      error?.extensions?.code === "PLUGIN_ALREADY_EXISTS" ||
-      error?.extensions?.code === "PLUGIN_VERSION_IS_LOWER"
+      error?.extensions?.code === 'PLUGIN_ALREADY_EXISTS' ||
+      error?.extensions?.code === 'PLUGIN_VERSION_IS_LOWER'
     ) {
-      form.setError("file", {
+      form.setError('file', {
         message: t(`errors.${error?.extensions?.code}`),
       });
 
@@ -46,15 +46,15 @@ export const useUploadPluginAdmin = ({ data }: UploadPluginAdminProps) => {
     }
 
     if (error || !mutation.data) {
-      toast.error(tCore("errors.title"), {
-        description: tCore("errors.internal_server_error"),
+      toast.error(tCore('errors.title'), {
+        description: tCore('errors.internal_server_error'),
       });
 
       return;
     }
 
     setOpen?.(false);
-    toast.success(t(data ? "success_update" : "success"), {
+    toast.success(t(data ? 'success_update' : 'success'), {
       description: mutation.data.admin__core_plugins__upload.name,
     });
   };

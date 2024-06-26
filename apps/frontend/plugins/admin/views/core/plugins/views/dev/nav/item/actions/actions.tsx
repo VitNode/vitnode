@@ -1,8 +1,8 @@
-import { FlatTree } from "vitnode-frontend/helpers/flatten-tree";
+import { FlatTree } from 'vitnode-frontend/helpers/flatten-tree';
 
-import { EditActionTableNavDevPluginAdmin } from "./edit";
-import { DeleteActionTableNavDevPluginAdmin } from "./delete/delete";
-import { ShowAdminNavPluginsObj } from "@/graphql/hooks";
+import { EditActionTableNavDevPluginAdmin } from './edit';
+import { DeleteActionTableNavDevPluginAdmin } from './delete/delete';
+import { ShowAdminNavPluginsObj } from '@/graphql/hooks';
 
 export const ActionsTableNavDevPluginAdmin = (
   props: FlatTree<ShowAdminNavPluginsObj>,

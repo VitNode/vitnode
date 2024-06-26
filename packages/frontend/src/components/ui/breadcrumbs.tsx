@@ -1,11 +1,11 @@
-import { ChevronRight, Home } from "lucide-react";
-import * as React from "react";
-import { useTranslations } from "next-intl";
+import { ChevronRight, Home } from 'lucide-react';
+import * as React from 'react';
+import { useTranslations } from 'next-intl';
 
-import { buttonVariants } from "./button";
+import { buttonVariants } from './button';
 
-import { cn } from "../../helpers/classnames";
-import { Link } from "../../navigation";
+import { cn } from '../../helpers/classnames';
+import { Link } from '../../navigation';
 
 interface Props {
   items: { href: string; id: number | string; text: string }[];
@@ -14,12 +14,12 @@ interface Props {
 }
 
 export const Breadcrumbs = ({ children, items, ref }: Props) => {
-  const t = useTranslations("core");
+  const t = useTranslations('core');
   const classNameItem = cn(
     buttonVariants({
-      variant: "link",
-      size: "sm",
-      className: "text-muted-foreground h-5 px-0",
+      variant: 'link',
+      size: 'sm',
+      className: 'text-muted-foreground h-5 px-0',
     }),
   );
 
@@ -27,7 +27,7 @@ export const Breadcrumbs = ({ children, items, ref }: Props) => {
     <div className="mb-2 flex items-center justify-between gap-5" ref={ref}>
       <ul className="text-muted-foreground flex gap-2 overflow-auto py-3">
         <li className="leading-none">
-          <Link className={classNameItem} aria-label={t("home")} href="/">
+          <Link className={classNameItem} aria-label={t('home')} href="/">
             <Home />
           </Link>
         </li>

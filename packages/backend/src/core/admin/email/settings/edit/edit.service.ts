@@ -1,19 +1,19 @@
-import * as fs from "fs";
+import * as fs from 'fs';
 
-import { Injectable } from "@nestjs/common";
+import { Injectable } from '@nestjs/common';
 
-import { ShowAdminEmailSettingsServiceObj } from "../show/dto/show.obj";
-import { EditAdminEmailSettingsServiceArgs } from "./dto/edit.args";
+import { ShowAdminEmailSettingsServiceObj } from '../show/dto/show.obj';
+import { EditAdminEmailSettingsServiceArgs } from './dto/edit.args';
 
 import {
   HelpersAdminEmailSettingsService,
   ShowAdminEmailSettingsServiceObjWithPassword,
-} from "../../helpers.service";
+} from '../../helpers.service';
 import {
   ConfigType,
   configPath,
   getConfigFile,
-} from "../../../../../providers/config";
+} from '../../../../../providers/config';
 
 @Injectable()
 export class EditAdminEmailSettingsService extends HelpersAdminEmailSettingsService {
@@ -38,7 +38,7 @@ export class EditAdminEmailSettingsService extends HelpersAdminEmailSettingsServ
         },
       },
     };
-    fs.writeFileSync(configPath, JSON.stringify(newData, null, 2), "utf8");
+    fs.writeFileSync(configPath, JSON.stringify(newData, null, 2), 'utf8');
 
     const smtpData = {
       smtp_host,
@@ -57,7 +57,7 @@ export class EditAdminEmailSettingsService extends HelpersAdminEmailSettingsServ
       };
     }
 
-    const read = fs.readFileSync(this.path, "utf-8");
+    const read = fs.readFileSync(this.path, 'utf-8');
     const config: ShowAdminEmailSettingsServiceObjWithPassword =
       JSON.parse(read);
     // eslint-disable-next-line @typescript-eslint/no-unused-vars

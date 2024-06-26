@@ -1,22 +1,22 @@
-"use client";
+'use client';
 
-import { useTranslations } from "next-intl";
+import { useTranslations } from 'next-intl';
 import {
   Form,
   FormField,
   FormFieldRender,
   FormWrapper,
-} from "vitnode-frontend/components/ui/form";
-import { Button } from "vitnode-frontend/components/ui/button";
-import { Card } from "vitnode-frontend/components/ui/card";
-import { Switch } from "vitnode-frontend/components/ui/switch";
+} from 'vitnode-frontend/components/ui/form';
+import { Button } from 'vitnode-frontend/components/ui/button';
+import { Card } from 'vitnode-frontend/components/ui/card';
+import { Switch } from 'vitnode-frontend/components/ui/switch';
 
-import { useEditorAdmin, EditorAdminArgs } from "./hooks/use-editor-admin";
-import { FilesSectionContentEditorAdmin } from "./sections/files";
+import { useEditorAdmin, EditorAdminArgs } from './hooks/use-editor-admin';
+import { FilesSectionContentEditorAdmin } from './sections/files';
 
 export const EditorAdminView = ({ data }: EditorAdminArgs) => {
-  const t = useTranslations("admin.core.styles.editor");
-  const tCore = useTranslations("core");
+  const t = useTranslations('admin.core.styles.editor');
+  const tCore = useTranslations('core');
   const { form, onSubmit } = useEditorAdmin({ data });
 
   return (
@@ -28,8 +28,8 @@ export const EditorAdminView = ({ data }: EditorAdminArgs) => {
             name="sticky"
             render={({ field }) => (
               <FormFieldRender
-                label={t("sticky.label")}
-                description={t("sticky.desc")}
+                label={t('sticky.label')}
+                description={t('sticky.desc')}
               >
                 <Switch
                   checked={field.value}
@@ -42,7 +42,7 @@ export const EditorAdminView = ({ data }: EditorAdminArgs) => {
           <FilesSectionContentEditorAdmin />
 
           <Button type="submit" loading={form.formState.isSubmitting}>
-            {tCore("save")}
+            {tCore('save')}
           </Button>
         </FormWrapper>
       </Form>

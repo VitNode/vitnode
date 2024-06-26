@@ -1,14 +1,14 @@
-import * as fs from "fs";
+import * as fs from 'fs';
 
-import { Injectable } from "@nestjs/common";
-import { render } from "@react-email/render";
-import * as nodemailer from "nodemailer";
-import * as React from "react";
+import { Injectable } from '@nestjs/common';
+import { render } from '@react-email/render';
+import * as nodemailer from 'nodemailer';
+import * as React from 'react';
 
 import {
   HelpersAdminEmailSettingsService,
   ShowAdminEmailSettingsServiceObjWithPassword,
-} from "./helpers.service";
+} from './helpers.service';
 
 interface SendMailConfiguration {
   subject: string;
@@ -25,7 +25,7 @@ export class MailService extends HelpersAdminEmailSettingsService {
 
   async sendMail({ to, subject, template }: SendMailConfiguration) {
     const html = this.generateEmail(template);
-    const data = fs.readFileSync(this.path, "utf-8");
+    const data = fs.readFileSync(this.path, 'utf-8');
     const config: ShowAdminEmailSettingsServiceObjWithPassword =
       JSON.parse(data);
 
@@ -41,15 +41,15 @@ export class MailService extends HelpersAdminEmailSettingsService {
       },
       {
         from: {
-          name: "NestJs + React Emails Test App",
-          address: "Test App",
+          name: 'NestJs + React Emails Test App',
+          address: 'Test App',
         },
       },
     );
 
     await transporter.sendMail({
       to,
-      from: "test",
+      from: 'test',
       subject,
       html,
     });

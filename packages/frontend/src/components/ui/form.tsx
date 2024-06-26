@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import * as LabelPrimitive from "@radix-ui/react-label";
-import { Slot } from "@radix-ui/react-slot";
+import * as React from 'react';
+import * as LabelPrimitive from '@radix-ui/react-label';
+import { Slot } from '@radix-ui/react-slot';
 import {
   Controller,
   ControllerProps,
@@ -11,14 +11,14 @@ import {
   FormProvider,
   FormProviderProps,
   useFormContext,
-} from "react-hook-form";
-import { useTranslations } from "next-intl";
-import { useBeforeUnload } from "react-use";
+} from 'react-hook-form';
+import { useTranslations } from 'next-intl';
+import { useBeforeUnload } from 'react-use';
 
-import { Label } from "./label";
-import { useDialog } from "./dialog";
+import { Label } from './label';
+import { useDialog } from './dialog';
 
-import { cn } from "../../helpers/classnames";
+import { cn } from '../../helpers/classnames';
 
 interface FormProps<
   TFieldValues extends FieldValues,
@@ -33,11 +33,11 @@ function Form<
   TContext = unknown,
   TTransformedValues extends FieldValues = TFieldValues,
 >(props: FormProps<TFieldValues, TContext, TTransformedValues>) {
-  const t = useTranslations("core");
+  const t = useTranslations('core');
   const formIsDirty = props.formState.isDirty;
   useBeforeUnload(
     formIsDirty && !props.disableBeforeUnload,
-    t("are_you_sure_want_to_leave_form"),
+    t('are_you_sure_want_to_leave_form'),
   );
   const { setIsDirty } = useDialog();
 
@@ -82,7 +82,7 @@ const useFormField = () => {
   const fieldState = getFieldState(fieldContext.name, formState);
 
   if (!fieldContext) {
-    throw new Error("useFormField should be used within <FormField>");
+    throw new Error('useFormField should be used within <FormField>');
   }
 
   const { id } = itemContext;
@@ -113,7 +113,7 @@ const FormItem = ({
 
   return (
     <FormItemContext.Provider value={{ id }}>
-      <div className={cn("space-y-2", className)} {...props} />
+      <div className={cn('space-y-2', className)} {...props} />
     </FormItemContext.Provider>
   );
 };
@@ -130,17 +130,17 @@ const FormLabel = ({
   ...props
 }: FormLabelProps) => {
   const { error, formItemId } = useFormField();
-  const t = useTranslations("core");
+  const t = useTranslations('core');
 
   return (
     <Label
-      className={cn(error && "text-destructive", "space-x-2", className)}
+      className={cn(error && 'text-destructive', 'space-x-2', className)}
       htmlFor={formItemId}
       {...props}
     >
       <span>{children}</span>
       {optional && (
-        <span className="text-muted-foreground text-xs">{t("optional")}</span>
+        <span className="text-muted-foreground text-xs">{t('optional')}</span>
       )}
     </Label>
   );
@@ -175,7 +175,7 @@ const FormDescription = ({
   return (
     <p
       id={formDescriptionId}
-      className={cn("text-muted-foreground text-sm", className)}
+      className={cn('text-muted-foreground text-sm', className)}
       {...props}
     />
   );
@@ -196,7 +196,7 @@ const FormMessage = ({
   return (
     <p
       id={formMessageId}
-      className={cn("text-destructive text-sm font-medium", className)}
+      className={cn('text-destructive text-sm font-medium', className)}
       {...props}
     >
       {body}
@@ -211,7 +211,7 @@ const FormWrapper = ({
   return (
     <form
       className={cn(
-        "@container flex flex-col items-start space-y-6 [&>a:last-child]:self-end [&>button:last-child]:self-end",
+        '@container flex flex-col items-start space-y-6 [&>a:last-child]:self-end [&>button:last-child]:self-end',
         className,
       )}
       {...props}
@@ -230,14 +230,14 @@ const FormFieldRender = ({
   description?: string;
   optional?: boolean;
 }) => {
-  const t = useTranslations("core");
+  const t = useTranslations('core');
 
   return (
     <FormItem className="@xs:flex-row @xs:gap-6 flex w-full flex-col">
       <div className="@xs:mt-3 @xs:w-32 @xs:shrink-0 @xs:text-right @sm:w-40 @xl:w-72 @3xl:w-96 @4xl:w-[26rem] flex w-full flex-col gap-1">
         <FormLabel>{label}</FormLabel>
         {optional && (
-          <span className="text-muted-foreground text-xs">{t("optional")}</span>
+          <span className="text-muted-foreground text-xs">{t('optional')}</span>
         )}
         {description && <FormDescription>{description}</FormDescription>}
       </div>

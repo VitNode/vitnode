@@ -1,22 +1,22 @@
-import { useTranslations } from "next-intl";
-import { useSearchParams } from "next/navigation";
-import { CheckIcon } from "@radix-ui/react-icons";
-import { usePathname, useRouter } from "vitnode-frontend/navigation";
-import { cn } from "vitnode-frontend/helpers/classnames";
-import { Loader } from "vitnode-frontend/components/ui/loader";
+import { useTranslations } from 'next-intl';
+import { useSearchParams } from 'next/navigation';
+import { CheckIcon } from '@radix-ui/react-icons';
+import { usePathname, useRouter } from 'vitnode-frontend/navigation';
+import { cn } from 'vitnode-frontend/helpers/classnames';
+import { Loader } from 'vitnode-frontend/components/ui/loader';
 import {
   CommandGroup,
   CommandItem,
-} from "vitnode-frontend/components/ui/command";
+} from 'vitnode-frontend/components/ui/command';
 
-import { ContentFilterToolbarDataTableProps } from "./content";
-import { useFilterToolbarDataTable } from "../hooks/use-filter-toolbar-data-table";
+import { ContentFilterToolbarDataTableProps } from './content';
+import { useFilterToolbarDataTable } from '../hooks/use-filter-toolbar-data-table';
 
 export const ListContentFilterToolbarDataTable = ({
   isFetching,
   options,
-}: Pick<ContentFilterToolbarDataTableProps, "isFetching" | "options">) => {
-  const t = useTranslations("core");
+}: Pick<ContentFilterToolbarDataTableProps, 'isFetching' | 'options'>) => {
+  const t = useTranslations('core');
   const { id } = useFilterToolbarDataTable();
   const { push } = useRouter();
   const pathname = usePathname();
@@ -25,7 +25,7 @@ export const ListContentFilterToolbarDataTable = ({
 
   if (isFetching) return <Loader />;
   if (options.length === 0)
-    return <div className="py-6 text-center text-sm">{t("no_results")}</div>;
+    return <div className="py-6 text-center text-sm">{t('no_results')}</div>;
 
   return (
     <CommandGroup>
@@ -51,13 +51,13 @@ export const ListContentFilterToolbarDataTable = ({
           >
             <div
               className={cn(
-                "border-primary mr-2 flex h-4 w-4 items-center justify-center rounded-sm border",
+                'border-primary mr-2 flex h-4 w-4 items-center justify-center rounded-sm border',
                 isSelected
-                  ? "bg-primary text-primary-foreground"
-                  : "opacity-50 [&_svg]:invisible",
+                  ? 'bg-primary text-primary-foreground'
+                  : 'opacity-50 [&_svg]:invisible',
               )}
             >
-              <CheckIcon className={cn("h-4 w-4")} />
+              <CheckIcon className={cn('h-4 w-4')} />
             </div>
             {option.icon && (
               <option.icon className="text-muted-foreground mr-2 size-4" />

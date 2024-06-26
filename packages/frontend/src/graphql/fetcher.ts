@@ -1,13 +1,13 @@
-import "server-only";
+import 'server-only';
 
-import { DocumentNode } from "graphql";
-import { cookies, headers as nextHeaders } from "next/headers";
+import { DocumentNode } from 'graphql';
+import { cookies, headers as nextHeaders } from 'next/headers';
 
-import { setCookieFromApi } from "../helpers/cookie-from-string-to-object";
-import { CONFIG } from "../helpers/config-with-env";
+import { setCookieFromApi } from '../helpers/cookie-from-string-to-object';
+import { CONFIG } from '../helpers/config-with-env';
 
 const getGqlString = (doc: DocumentNode) => {
-  return doc.loc?.source.body ?? "";
+  return doc.loc?.source.body ?? '';
 };
 
 interface Args<TVariables> {
@@ -49,7 +49,7 @@ export async function fetcher<TData, TVariables = object>({
     });
 
     formData.append(
-      "operations",
+      'operations',
       JSON.stringify({
         query: getGqlString(query),
         variables: {
@@ -78,7 +78,7 @@ export async function fetcher<TData, TVariables = object>({
         }
       }
     });
-    formData.append("map", JSON.stringify(Object.fromEntries(preMap)));
+    formData.append('map', JSON.stringify(Object.fromEntries(preMap)));
 
     let currentIndex = 0;
     uploads.forEach(({ files }) => {
@@ -102,28 +102,28 @@ export async function fetcher<TData, TVariables = object>({
 
   const internalHeaders = {
     Cookie: cookies().toString(),
-    ["user-agent"]: nextInternalHeaders.get("user-agent") ?? "node",
-    ["x-forwarded-for"]:
-      nextInternalHeaders.get("x-forwarded-for") ?? "0.0.0.0",
-    ["x-real-ip"]: nextInternalHeaders.get("x-real-ip") ?? "0.0.0.0",
-    "x-vitnode-user-language": cookies().get("NEXT_LOCALE")?.value ?? "en",
+    ['user-agent']: nextInternalHeaders.get('user-agent') ?? 'node',
+    ['x-forwarded-for']:
+      nextInternalHeaders.get('x-forwarded-for') ?? '0.0.0.0',
+    ['x-real-ip']: nextInternalHeaders.get('x-real-ip') ?? '0.0.0.0',
+    'x-vitnode-user-language': cookies().get('NEXT_LOCALE')?.value ?? 'en',
     ...headers,
   };
 
   const internalQuery = getGqlString(query);
 
   const res = await fetch(`${CONFIG.graphql_url}/graphql`, {
-    method: "POST",
-    credentials: "include",
-    mode: "cors",
+    method: 'POST',
+    credentials: 'include',
+    mode: 'cors',
     signal,
     headers: uploads
       ? {
-          "x-apollo-operation-name": "*",
+          'x-apollo-operation-name': '*',
           ...internalHeaders,
         }
       : {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           ...internalHeaders,
         },
     body: uploads
@@ -133,7 +133,7 @@ export async function fetcher<TData, TVariables = object>({
     cache,
   });
 
-  if (internalQuery.trim().startsWith("mutation")) {
+  if (internalQuery.trim().startsWith('mutation')) {
     setCookieFromApi({ res });
   }
 

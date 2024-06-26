@@ -1,20 +1,20 @@
-"use client";
+'use client';
 
-import { Moon, Sun } from "lucide-react";
-import { useTranslations } from "next-intl";
-import { useTheme } from "next-themes";
-import * as React from "react";
+import { Moon, Sun } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import { useTheme } from 'next-themes';
+import * as React from 'react';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
-} from "vitnode-frontend/components/ui/dropdown-menu";
-import { Button } from "vitnode-frontend/components/ui/button";
+} from 'vitnode-frontend/components/ui/dropdown-menu';
+import { Button } from 'vitnode-frontend/components/ui/button';
 
 export const DarkLightModeSwitcher = () => {
-  const t = useTranslations("core.user-bar.dark_light_switcher");
+  const t = useTranslations('core.user-bar.dark_light_switcher');
   const { setTheme, theme } = useTheme();
 
   return (
@@ -24,7 +24,7 @@ export const DarkLightModeSwitcher = () => {
           variant="ghost"
           size="icon"
           className="relative"
-          ariaLabel={t("toggle")}
+          ariaLabel={t('toggle')}
         >
           <Sun className="size-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
           <Moon className="absolute size-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
@@ -39,18 +39,18 @@ export const DarkLightModeSwitcher = () => {
         >
           <DropdownMenuRadioItem
             value="light"
-            onClick={() => setTheme("light")}
+            onClick={() => setTheme('light')}
           >
-            <span>{t("light")}</span>
+            <span>{t('light')}</span>
           </DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="dark" onClick={() => setTheme("dark")}>
-            <span>{t("dark")}</span>
+          <DropdownMenuRadioItem value="dark" onClick={() => setTheme('dark')}>
+            <span>{t('dark')}</span>
           </DropdownMenuRadioItem>
           <DropdownMenuRadioItem
             value="system"
-            onClick={() => setTheme("system")}
+            onClick={() => setTheme('system')}
           >
-            <span>{t("system")}</span>
+            <span>{t('system')}</span>
           </DropdownMenuRadioItem>
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>

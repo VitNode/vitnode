@@ -1,45 +1,45 @@
-"use client";
+'use client';
 
-import { ColumnDef } from "@tanstack/react-table";
-import { Clock, File } from "lucide-react";
-import { useTranslations } from "next-intl";
-import Image from "next/image";
-import * as React from "react";
-import { formatBytes } from "vitnode-shared";
-import { Link } from "vitnode-frontend/navigation";
+import { ColumnDef } from '@tanstack/react-table';
+import { Clock, File } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import Image from 'next/image';
+import * as React from 'react';
+import { formatBytes } from 'vitnode-shared';
+import { Link } from 'vitnode-frontend/navigation';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "vitnode-frontend/components/ui/tooltip";
-import { CONFIG } from "vitnode-frontend/helpers/config-with-env";
+} from 'vitnode-frontend/components/ui/tooltip';
+import { CONFIG } from 'vitnode-frontend/helpers/config-with-env';
 
-import { DataTable } from "@/components/data-table/data-table";
-import { HeaderSortingDataTable } from "@/components/data-table/header";
-import { DateFormat } from "@/components/date-format/date-format";
-import { Admin__Core_Files__ShowQuery } from "@/graphql/hooks";
-import { ActionsFilesAdvancedCoreAdmin } from "./actions/actions";
+import { DataTable } from '@/components/data-table/data-table';
+import { HeaderSortingDataTable } from '@/components/data-table/header';
+import { DateFormat } from '@/components/date-format/date-format';
+import { Admin__Core_Files__ShowQuery } from '@/graphql/hooks';
+import { ActionsFilesAdvancedCoreAdmin } from './actions/actions';
 
 export const FilesAdvancedCoreAdminView = ({
   admin__core_files__show: { edges, pageInfo },
 }: Admin__Core_Files__ShowQuery) => {
-  const t = useTranslations("core.settings.files");
-  const tCore = useTranslations("core");
+  const t = useTranslations('core.settings.files');
+  const tCore = useTranslations('core');
   const columns: ColumnDef<
-    Admin__Core_Files__ShowQuery["admin__core_files__show"]["edges"][0]
+    Admin__Core_Files__ShowQuery['admin__core_files__show']['edges'][0]
   >[] = React.useMemo(
     () => [
       {
-        header: "",
-        accessorKey: "id",
+        header: '',
+        accessorKey: 'id',
         cell: ({ row }) => {
           const data = row.original;
           const src =
             data?.width && data.height
               ? `${CONFIG.graphql_public_url}/${data.dir_folder}/${data.file_name}`
               : null;
-          const alt = data?.file_alt ?? data?.file_name ?? "";
+          const alt = data?.file_alt ?? data?.file_name ?? '';
 
           return (
             <div className="relative flex h-14 w-20 shrink-0 items-center justify-center overflow-hidden rounded-lg">
@@ -59,8 +59,8 @@ export const FilesAdvancedCoreAdminView = ({
         },
       },
       {
-        header: tCore("table.name"),
-        accessorKey: "file_name",
+        header: tCore('table.name'),
+        accessorKey: 'file_name',
         cell: ({ row }) => {
           const data = row.original;
 
@@ -88,11 +88,11 @@ export const FilesAdvancedCoreAdminView = ({
         header: val => {
           return (
             <HeaderSortingDataTable {...val}>
-              {tCore("table.created")}
+              {tCore('table.created')}
             </HeaderSortingDataTable>
           );
         },
-        accessorKey: "created",
+        accessorKey: 'created',
         cell: ({ row }) => {
           const data = row.original;
 
@@ -103,11 +103,11 @@ export const FilesAdvancedCoreAdminView = ({
         header: val => {
           return (
             <HeaderSortingDataTable {...val}>
-              {t("table.file_size")}
+              {t('table.file_size')}
             </HeaderSortingDataTable>
           );
         },
-        accessorKey: "file_size",
+        accessorKey: 'file_size',
         cell: ({ row }) => {
           const data = row.original;
 
@@ -115,8 +115,8 @@ export const FilesAdvancedCoreAdminView = ({
         },
       },
       {
-        header: t("table.user"),
-        accessorKey: "user",
+        header: t('table.user'),
+        accessorKey: 'user',
         cell: ({ row }) => {
           const data = row.original;
 
@@ -128,8 +128,8 @@ export const FilesAdvancedCoreAdminView = ({
         },
       },
       {
-        header: t("table.count_uses"),
-        accessorKey: "count_uses",
+        header: t('table.count_uses'),
+        accessorKey: 'count_uses',
         cell: ({ row }) => {
           const data = row.original;
 
@@ -141,7 +141,7 @@ export const FilesAdvancedCoreAdminView = ({
                     <TooltipTrigger>
                       <Clock className="text-destructive size-4" />
                     </TooltipTrigger>
-                    <TooltipContent>{t("temp_file")}</TooltipContent>
+                    <TooltipContent>{t('temp_file')}</TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
                 {data.count_uses}
@@ -153,8 +153,8 @@ export const FilesAdvancedCoreAdminView = ({
         },
       },
       {
-        header: "",
-        accessorKey: "actions",
+        header: '',
+        accessorKey: 'actions',
         cell: ({ row }) => {
           const data = row.original;
 
@@ -171,10 +171,10 @@ export const FilesAdvancedCoreAdminView = ({
       pageInfo={pageInfo}
       defaultPageSize={10}
       defaultSorting={{
-        sortBy: "created",
-        sortDirection: "desc",
+        sortBy: 'created',
+        sortDirection: 'desc',
       }}
-      searchPlaceholder={t("search")}
+      searchPlaceholder={t('search')}
       columns={columns}
     />
   );

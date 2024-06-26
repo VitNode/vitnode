@@ -1,34 +1,34 @@
-"use client";
+'use client';
 
-import { Pencil } from "lucide-react";
-import { useTranslations } from "next-intl";
-import * as React from "react";
+import { Pencil } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import * as React from 'react';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "vitnode-frontend/components/ui/tooltip";
+} from 'vitnode-frontend/components/ui/tooltip';
 import {
   Dialog,
   DialogContent,
   DialogTrigger,
-} from "vitnode-frontend/components/ui/dialog";
-import { Button } from "vitnode-frontend/components/ui/button";
-import { Loader } from "vitnode-frontend/components/ui/loader";
+} from 'vitnode-frontend/components/ui/dialog';
+import { Button } from 'vitnode-frontend/components/ui/button';
+import { Loader } from 'vitnode-frontend/components/ui/loader';
 
-import { ShowCoreNav } from "@/graphql/hooks";
+import { ShowCoreNav } from '@/graphql/hooks';
 
 const Content = React.lazy(async () =>
-  import("../../create-edit/create-edit").then(module => ({
+  import('../../create-edit/create-edit').then(module => ({
     default: module.ContentCreateEditNavAdmin,
   })),
 );
 
 export const EditActionTableNavAdmin = (
-  props: Omit<ShowCoreNav, "children">,
+  props: Omit<ShowCoreNav, 'children'>,
 ) => {
-  const t = useTranslations("core");
+  const t = useTranslations('core');
 
   return (
     <Dialog>
@@ -36,13 +36,13 @@ export const EditActionTableNavAdmin = (
         <Tooltip>
           <TooltipTrigger asChild>
             <DialogTrigger asChild>
-              <Button variant="ghost" size="icon" ariaLabel={t("edit")}>
+              <Button variant="ghost" size="icon" ariaLabel={t('edit')}>
                 <Pencil />
               </Button>
             </DialogTrigger>
           </TooltipTrigger>
 
-          <TooltipContent>{t("edit")}</TooltipContent>
+          <TooltipContent>{t('edit')}</TooltipContent>
         </Tooltip>
       </TooltipProvider>
 

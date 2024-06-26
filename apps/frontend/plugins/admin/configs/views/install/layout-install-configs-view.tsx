@@ -1,21 +1,21 @@
-"use client";
+'use client';
 
-import * as React from "react";
+import * as React from 'react';
 import {
   Card,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "vitnode-frontend/components/ui/card";
+} from 'vitnode-frontend/components/ui/card';
 
-import { Steps, ItemStepProps } from "@/components/steps/steps";
-import { InstallConfigsView } from "./steps/install-configs-view";
-import { InstallVitNodeContext } from "./hooks/use-install-vitnode";
-import { LicenseInstallConfigsView } from "./steps/license/license-install-configs-view";
-import { DatabaseInstallConfigsView } from "./steps/database/database-install-configs-view";
-import { AccountInstallConfigsView } from "./steps/account/account-install-configs-view";
-import { LayoutAdminInstallEnum } from "@/graphql/hooks";
-import { FinishInstallConfigsView } from "./finish/finish-install-config-view";
+import { Steps, ItemStepProps } from '@/components/steps/steps';
+import { InstallConfigsView } from './steps/install-configs-view';
+import { InstallVitNodeContext } from './hooks/use-install-vitnode';
+import { LicenseInstallConfigsView } from './steps/license/license-install-configs-view';
+import { DatabaseInstallConfigsView } from './steps/database/database-install-configs-view';
+import { AccountInstallConfigsView } from './steps/account/account-install-configs-view';
+import { LayoutAdminInstallEnum } from '@/graphql/hooks';
+import { FinishInstallConfigsView } from './finish/finish-install-config-view';
 
 interface Props {
   data: LayoutAdminInstallEnum;
@@ -26,30 +26,30 @@ export const LayoutInstallConfigsView = ({ data }: Props) => {
 
   const items: ItemStepProps[] = [
     {
-      id: "welcome",
-      title: "Welcome",
-      description: "Before you begin...",
+      id: 'welcome',
+      title: 'Welcome',
+      description: 'Before you begin...',
       checked: currentStep >= 1,
       component: <InstallConfigsView />,
     },
     {
-      id: "license",
-      title: "License",
-      description: "Read carefully",
+      id: 'license',
+      title: 'License',
+      description: 'Read carefully',
       checked: currentStep >= 2,
       component: <LicenseInstallConfigsView />,
     },
     {
-      id: "database",
-      title: "Database",
-      description: "Create schema and first records",
+      id: 'database',
+      title: 'Database',
+      description: 'Create schema and first records',
       checked: currentStep >= 3,
       component: <DatabaseInstallConfigsView />,
     },
     {
-      id: "account",
-      title: "Admin Account",
-      description: "Create admin account",
+      id: 'account',
+      title: 'Admin Account',
+      description: 'Create admin account',
       checked: currentStep >= 4,
       component: <AccountInstallConfigsView />,
     },

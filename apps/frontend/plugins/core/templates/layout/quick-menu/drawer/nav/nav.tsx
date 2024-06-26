@@ -1,14 +1,14 @@
-import * as React from "react";
-import * as Accordion from "@radix-ui/react-accordion";
-import { ChevronDown } from "lucide-react";
-import { cn } from "vitnode-frontend/helpers/classnames";
-import { buttonVariants } from "vitnode-frontend/components/ui/button";
-import { Separator } from "vitnode-frontend/components/ui/separator";
-import { useSession } from "vitnode-frontend/hooks/use-session";
+import * as React from 'react';
+import * as Accordion from '@radix-ui/react-accordion';
+import { ChevronDown } from 'lucide-react';
+import { cn } from 'vitnode-frontend/helpers/classnames';
+import { buttonVariants } from 'vitnode-frontend/components/ui/button';
+import { Separator } from 'vitnode-frontend/components/ui/separator';
+import { useSession } from 'vitnode-frontend/hooks/use-session';
 
-import { ItemNavDrawerQuickMenu } from "./item";
-import { useTextLang } from "@/plugins/core/hooks/use-text-lang";
-import { classNameDrawerQuickMenu } from "../drawer";
+import { ItemNavDrawerQuickMenu } from './item';
+import { useTextLang } from '@/plugins/core/hooks/use-text-lang';
+import { classNameDrawerQuickMenu } from '../drawer';
 
 interface Props {
   navIcons: { icon: React.ReactNode; id: number }[];
@@ -25,8 +25,8 @@ export const NavDrawerQuickMenu = ({ navIcons }: Props) => {
     <Accordion.Root
       type="multiple"
       defaultValue={activeItems}
-      className={cn("flex flex-col px-2", {
-        "pb-5": !session,
+      className={cn('flex flex-col px-2', {
+        'pb-5': !session,
       })}
     >
       {nav.map(item => {
@@ -36,8 +36,8 @@ export const NavDrawerQuickMenu = ({ navIcons }: Props) => {
               <Accordion.Trigger
                 className={cn(
                   buttonVariants({
-                    variant: "ghost",
-                    className: cn(classNameDrawerQuickMenu, "focus:bg-inherit"),
+                    variant: 'ghost',
+                    className: cn(classNameDrawerQuickMenu, 'focus:bg-inherit'),
                   }),
                 )}
                 onClick={() =>
@@ -54,9 +54,9 @@ export const NavDrawerQuickMenu = ({ navIcons }: Props) => {
                 <span>{convertText(item.name)}</span>
                 <ChevronDown
                   className={cn(
-                    "ml-auto h-5 w-5 flex-shrink-0 transition-transform",
+                    'ml-auto h-5 w-5 flex-shrink-0 transition-transform',
                     {
-                      "rotate-180 transform": activeItems.includes(
+                      'rotate-180 transform': activeItems.includes(
                         item.id.toString(),
                       ),
                     },

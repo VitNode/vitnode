@@ -1,29 +1,29 @@
-import { useTranslations } from "next-intl";
-import { KeyRound, LogOut, Settings, Shield, User } from "lucide-react";
-import * as React from "react";
-import { Link } from "vitnode-frontend/navigation";
-import { cn } from "vitnode-frontend/helpers/classnames";
+import { useTranslations } from 'next-intl';
+import { KeyRound, LogOut, Settings, Shield, User } from 'lucide-react';
+import * as React from 'react';
+import { Link } from 'vitnode-frontend/navigation';
+import { cn } from 'vitnode-frontend/helpers/classnames';
 import {
   DrawerClose,
   DrawerContent,
-} from "vitnode-frontend/components/ui/drawer";
-import { Button, buttonVariants } from "vitnode-frontend/components/ui/button";
-import { Separator } from "vitnode-frontend/components/ui/separator";
-import { useSession } from "vitnode-frontend/hooks/use-session";
+} from 'vitnode-frontend/components/ui/drawer';
+import { Button, buttonVariants } from 'vitnode-frontend/components/ui/button';
+import { Separator } from 'vitnode-frontend/components/ui/separator';
+import { useSession } from 'vitnode-frontend/hooks/use-session';
 
-import { HeaderDrawerQuickMenu } from "./header";
-import { useSignOutAPI } from "@/plugins/core/hooks/sign/out/use-sign-out-api";
-import { NavDrawerQuickMenu } from "./nav/nav";
+import { HeaderDrawerQuickMenu } from './header';
+import { useSignOutAPI } from '@/plugins/core/hooks/sign/out/use-sign-out-api';
+import { NavDrawerQuickMenu } from './nav/nav';
 
 export const classNameDrawerQuickMenu =
-  "w-full justify-start [&>svg]:text-muted-foreground font-normal";
+  'w-full justify-start [&>svg]:text-muted-foreground font-normal';
 
 interface Props {
   navIcons: { icon: React.ReactNode; id: number }[];
 }
 
 export const DrawerQuickMenu = ({ navIcons }: Props) => {
-  const t = useTranslations("core");
+  const t = useTranslations('core');
   const { onSubmit } = useSignOutAPI();
   const { session } = useSession();
 
@@ -38,13 +38,13 @@ export const DrawerQuickMenu = ({ navIcons }: Props) => {
               href={`/profile/${session.name_seo}`}
               className={cn(
                 buttonVariants({
-                  variant: "ghost",
+                  variant: 'ghost',
                   className: classNameDrawerQuickMenu,
                 }),
               )}
             >
               <User />
-              <span>{t("user-bar.my_profile")}</span>
+              <span>{t('user-bar.my_profile')}</span>
             </Link>
           </DrawerClose>
 
@@ -53,13 +53,13 @@ export const DrawerQuickMenu = ({ navIcons }: Props) => {
               href="/settings"
               className={cn(
                 buttonVariants({
-                  variant: "ghost",
+                  variant: 'ghost',
                   className: classNameDrawerQuickMenu,
                 }),
               )}
             >
               <Settings />
-              <span>{t("user-bar.settings")}</span>
+              <span>{t('user-bar.settings')}</span>
             </Link>
           </DrawerClose>
 
@@ -77,13 +77,13 @@ export const DrawerQuickMenu = ({ navIcons }: Props) => {
                 href="/mod"
                 className={cn(
                   buttonVariants({
-                    variant: "ghost",
+                    variant: 'ghost',
                     className: classNameDrawerQuickMenu,
                   }),
                 )}
               >
                 <Shield />
-                <span>{t("user-bar.mod_cp")}</span>
+                <span>{t('user-bar.mod_cp')}</span>
               </Link>
             </DrawerClose>
           )}
@@ -92,11 +92,11 @@ export const DrawerQuickMenu = ({ navIcons }: Props) => {
             <DrawerClose asChild>
               <Button
                 variant="ghost"
-                onClick={() => window.open("/admin", "_blank")}
+                onClick={() => window.open('/admin', '_blank')}
                 className={classNameDrawerQuickMenu}
               >
                 <KeyRound />
-                <span>{t("user-bar.admin_cp")}</span>
+                <span>{t('user-bar.admin_cp')}</span>
               </Button>
             </DrawerClose>
           )}
@@ -111,7 +111,7 @@ export const DrawerQuickMenu = ({ navIcons }: Props) => {
               onClick={onSubmit}
               className={classNameDrawerQuickMenu}
             >
-              <LogOut /> <span>{t("user-bar.log_out")}</span>
+              <LogOut /> <span>{t('user-bar.log_out')}</span>
             </Button>
           </DrawerClose>
         </div>

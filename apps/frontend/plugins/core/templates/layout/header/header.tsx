@@ -1,9 +1,9 @@
-import { Link } from "vitnode-frontend/navigation";
+import { Link } from 'vitnode-frontend/navigation';
 
-import { UserBar } from "./user-bar/user-bar";
-import { DarkLightModeSwitcher } from "@/components/switchers/dark-light-mode-switcher";
-import { LanguageSwitcher } from "@/components/switchers/language-switcher";
-import { Nav } from "../nav/nav";
+import { UserBar } from './user-bar/user-bar';
+import { DarkLightModeSwitcher } from '@/components/switchers/dark-light-mode-switcher';
+import { LanguageSwitcher } from '@/components/switchers/language-switcher';
+import { Nav } from '../nav/nav';
 
 export const Header = () => {
   return (

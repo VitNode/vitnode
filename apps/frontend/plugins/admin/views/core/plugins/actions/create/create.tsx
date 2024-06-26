@@ -1,31 +1,31 @@
-"use client";
+'use client';
 
-import { Plus } from "lucide-react";
-import { useTranslations } from "next-intl";
-import * as React from "react";
+import { Plus } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import * as React from 'react';
 import {
   Dialog,
   DialogContent,
   DialogTrigger,
-} from "vitnode-frontend/components/ui/dialog";
-import { Button } from "vitnode-frontend/components/ui/button";
-import { Loader } from "vitnode-frontend/components/ui/loader";
+} from 'vitnode-frontend/components/ui/dialog';
+import { Button } from 'vitnode-frontend/components/ui/button';
+import { Loader } from 'vitnode-frontend/components/ui/loader';
 
 const Content = React.lazy(async () =>
-  import("./content").then(module => ({
+  import('./content').then(module => ({
     default: module.CreatePluginAdmin,
   })),
 );
 
 export const CreateActionPluginAdmin = () => {
-  const t = useTranslations("core");
+  const t = useTranslations('core');
 
   return (
     <Dialog>
       <DialogTrigger asChild>
         <Button>
           <Plus />
-          {t("create")}
+          {t('create')}
         </Button>
       </DialogTrigger>
 

@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import { ThemeProvider as NextThemesProvider } from "next-themes";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ConfigType } from "vitnode-shared";
+import * as React from 'react';
+import { ThemeProvider as NextThemesProvider } from 'next-themes';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ConfigType } from 'vitnode-shared';
 
-import { GlobalsContext } from "../../hooks/use-globals";
-import { Toaster } from "../../components/ui/sonner";
-import { Core_MiddlewareQuery } from "../../graphql/hooks";
+import { GlobalsContext } from '../../hooks/use-globals';
+import { Toaster } from '../../components/ui/sonner';
+import { Core_MiddlewareQuery } from '../../graphql/hooks';
 
 interface Props {
   children: React.ReactNode;
@@ -39,7 +39,7 @@ export const RootProviders = ({ children, middlewareData, config }: Props) => {
           defaultLanguage:
             middlewareData?.core_languages__show.edges.find(
               lang => lang.default,
-            )?.code ?? "en",
+            )?.code ?? 'en',
           config,
         }}
       >

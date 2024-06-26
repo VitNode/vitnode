@@ -1,5 +1,5 @@
-import { useTranslations } from "next-intl";
-import { UseFormReturn } from "react-hook-form";
+import { useTranslations } from 'next-intl';
+import { UseFormReturn } from 'react-hook-form';
 import {
   FormControl,
   FormDescription,
@@ -7,8 +7,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "vitnode-frontend/components/ui/form";
-import { Input } from "vitnode-frontend/components/ui/input";
+} from 'vitnode-frontend/components/ui/form';
+import { Input } from 'vitnode-frontend/components/ui/input';
 
 interface Props {
   form: UseFormReturn<{
@@ -23,7 +23,7 @@ interface Props {
 }
 
 export const FormCreateEditPluginAdmin = ({ form, isEdit }: Props) => {
-  const t = useTranslations("admin.core.plugins");
+  const t = useTranslations('admin.core.plugins');
 
   return (
     <>
@@ -32,11 +32,11 @@ export const FormCreateEditPluginAdmin = ({ form, isEdit }: Props) => {
         name="name"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{t("create.name.label")}</FormLabel>
+            <FormLabel>{t('create.name.label')}</FormLabel>
             <FormControl>
               <Input {...field} />
             </FormControl>
-            <FormDescription>{t("create.name.desc")}</FormDescription>
+            <FormDescription>{t('create.name.desc')}</FormDescription>
             <FormMessage />
           </FormItem>
         )}
@@ -47,7 +47,7 @@ export const FormCreateEditPluginAdmin = ({ form, isEdit }: Props) => {
         name="description"
         render={({ field }) => (
           <FormItem>
-            <FormLabel optional>{t("create.description.label")}</FormLabel>
+            <FormLabel optional>{t('create.description.label')}</FormLabel>
             <FormControl>
               <Input {...field} />
             </FormControl>
@@ -62,11 +62,11 @@ export const FormCreateEditPluginAdmin = ({ form, isEdit }: Props) => {
           name="code"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{t("create.code.label")}</FormLabel>
+              <FormLabel>{t('create.code.label')}</FormLabel>
               <FormControl>
                 <Input placeholder="vitnode-plugin-example" {...field} />
               </FormControl>
-              <FormDescription>{t("create.code.desc")}</FormDescription>
+              <FormDescription>{t('create.code.desc')}</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -78,11 +78,11 @@ export const FormCreateEditPluginAdmin = ({ form, isEdit }: Props) => {
         name="support_url"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{t("create.support_url.label")}</FormLabel>
+            <FormLabel>{t('create.support_url.label')}</FormLabel>
             <FormControl>
               <Input type="url" {...field} />
             </FormControl>
-            <FormDescription>{t("create.support_url.desc")}</FormDescription>
+            <FormDescription>{t('create.support_url.desc')}</FormDescription>
             <FormMessage />
           </FormItem>
         )}
@@ -93,7 +93,7 @@ export const FormCreateEditPluginAdmin = ({ form, isEdit }: Props) => {
         name="author"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{t("create.author.label")}</FormLabel>
+            <FormLabel>{t('create.author.label')}</FormLabel>
             <FormControl>
               <Input {...field} />
             </FormControl>
@@ -107,7 +107,7 @@ export const FormCreateEditPluginAdmin = ({ form, isEdit }: Props) => {
         name="author_url"
         render={({ field }) => (
           <FormItem>
-            <FormLabel optional>{t("create.author_url.label")}</FormLabel>
+            <FormLabel optional>{t('create.author_url.label')}</FormLabel>
             <FormControl>
               <Input type="url" {...field} />
             </FormControl>

@@ -1,20 +1,20 @@
-import { Search } from "lucide-react";
-import { useTranslations } from "next-intl";
-import * as React from "react";
-import { useQuery } from "@tanstack/react-query";
-import { useDebouncedCallback } from "use-debounce";
-import { cn } from "vitnode-frontend/helpers/classnames";
-import { Input } from "vitnode-frontend/components/ui/input";
-import { Loader } from "vitnode-frontend/components/ui/loader";
+import { Search } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import * as React from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { useDebouncedCallback } from 'use-debounce';
+import { cn } from 'vitnode-frontend/helpers/classnames';
+import { Input } from 'vitnode-frontend/components/ui/input';
+import { Loader } from 'vitnode-frontend/components/ui/loader';
 import {
   Command,
   CommandList,
   commandInputClassName,
-} from "vitnode-frontend/components/ui/command";
+} from 'vitnode-frontend/components/ui/command';
 
-import { UserInputContentList } from "./list";
-import { UserInputItem } from "../user-input";
-import { queryApi } from "./query-api";
+import { UserInputContentList } from './list';
+import { UserInputItem } from '../user-input';
+import { queryApi } from './query-api';
 
 interface Props {
   onSelect: (value: UserInputItem) => void;
@@ -22,11 +22,11 @@ interface Props {
 }
 
 export const UserInputContent = (props: Props) => {
-  const t = useTranslations("core");
-  const [search, setSearch] = React.useState("");
+  const t = useTranslations('core');
+  const [search, setSearch] = React.useState('');
 
   const { data, isLoading } = useQuery({
-    queryKey: ["Core_Members__Show__Search", { search }],
+    queryKey: ['Core_Members__Show__Search', { search }],
     queryFn: async () =>
       queryApi({
         first: 10,
@@ -44,11 +44,11 @@ export const UserInputContent = (props: Props) => {
         <Search className="mr-2 size-4 shrink-0 opacity-50" />
         <Input
           className={cn(
-            "border-0 px-0 focus-visible:ring-0 focus-visible:ring-offset-0",
+            'border-0 px-0 focus-visible:ring-0 focus-visible:ring-offset-0',
             commandInputClassName,
           )}
           onChange={e => handleSearchInput(e.target.value)}
-          placeholder={t("user_input.search")}
+          placeholder={t('user_input.search')}
         />
       </div>
 

@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
+import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
 import {
   flexRender,
   getCoreRowModel,
   useReactTable,
   ColumnDef,
   SortingState,
-} from "@tanstack/react-table";
-import { useTranslations } from "next-intl";
-import { useSearchParams } from "next/navigation";
-import * as React from "react";
-import { usePathname, useRouter } from "vitnode-frontend/navigation";
+} from '@tanstack/react-table';
+import { useTranslations } from 'next-intl';
+import { useSearchParams } from 'next/navigation';
+import * as React from 'react';
+import { usePathname, useRouter } from 'vitnode-frontend/navigation';
 import {
   Table,
   TableBody,
@@ -19,36 +19,36 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "vitnode-frontend/components/ui/table";
+} from 'vitnode-frontend/components/ui/table';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "vitnode-frontend/components/ui/tooltip";
+} from 'vitnode-frontend/components/ui/tooltip';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "vitnode-frontend/components/ui/select";
-import { Button } from "vitnode-frontend/components/ui/button";
+} from 'vitnode-frontend/components/ui/select';
+import { Button } from 'vitnode-frontend/components/ui/button';
 
-import { SkeletonDataTable } from "./skeleton";
-import { ToolbarDataTable, ToolbarDataTableProps } from "./toolbar/toolbar";
-import { PageInfo } from "@/graphql/hooks";
+import { SkeletonDataTable } from './skeleton';
+import { ToolbarDataTable, ToolbarDataTableProps } from './toolbar/toolbar';
+import { PageInfo } from '@/graphql/hooks';
 
 interface TDataMin {
   id: number;
 }
 
 interface DataTableProps<TData extends TDataMin>
-  extends Omit<ToolbarDataTableProps, "startTransition"> {
+  extends Omit<ToolbarDataTableProps, 'startTransition'> {
   columns: ColumnDef<TData>[];
   data: TData[];
   defaultPageSize: 10 | 20 | 30 | 40 | 50;
-  defaultSorting?: { sortBy: keyof TData; sortDirection: "asc" | "desc" };
+  defaultSorting?: { sortBy: keyof TData; sortDirection: 'asc' | 'desc' };
   filters?: React.ReactNode;
   pageInfo?: PageInfo;
   searchPlaceholder?: string;
@@ -66,11 +66,11 @@ export function DataTable<TData extends TDataMin>({
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { push } = useRouter();
-  const t = useTranslations("core");
+  const t = useTranslations('core');
   const pagination = {
-    first: searchParams.get("first"),
-    last: searchParams.get("last"),
-    cursor: searchParams.get("cursor"),
+    first: searchParams.get('first'),
+    last: searchParams.get('last'),
+    cursor: searchParams.get('cursor'),
   };
 
   const table = useReactTable({
@@ -84,8 +84,8 @@ export function DataTable<TData extends TDataMin>({
       const sorting = fnSorting();
 
       const params = new URLSearchParams(searchParams);
-      params.set("sortBy", sorting[0].id);
-      params.set("sortDirection", sorting[0].desc ? "desc" : "asc");
+      params.set('sortBy', sorting[0].id);
+      params.set('sortDirection', sorting[0].desc ? 'desc' : 'asc');
 
       push(`${pathname}?${params.toString()}`, { scroll: false });
     },
@@ -94,7 +94,7 @@ export function DataTable<TData extends TDataMin>({
         ? [
             {
               id: defaultSorting.sortBy.toString(),
-              desc: defaultSorting.sortDirection === "desc",
+              desc: defaultSorting.sortDirection === 'desc',
             },
           ]
         : [],
@@ -147,11 +147,11 @@ export function DataTable<TData extends TDataMin>({
                   table.getRowModel().rows.map(row => (
                     <TableRow
                       key={row.id}
-                      data-state={row.getIsSelected() && "selected"}
+                      data-state={row.getIsSelected() && 'selected'}
                     >
                       {row.getVisibleCells().map(cell => (
                         <TableCell key={cell.id}>
-                          {cell.column.id === "actions" ? (
+                          {cell.column.id === 'actions' ? (
                             <div className="flex items-center justify-end gap-1">
                               {flexRender(
                                 cell.column.columnDef.cell,
@@ -174,7 +174,7 @@ export function DataTable<TData extends TDataMin>({
                       colSpan={columns.length}
                       className="h-24 text-center"
                     >
-                      {t("no_results")}
+                      {t('no_results')}
                     </TableCell>
                   </TableRow>
                 )}
@@ -185,7 +185,7 @@ export function DataTable<TData extends TDataMin>({
           {pageInfo && (
             <div className="flex flex-wrap items-center justify-center gap-4 px-2 pt-4 sm:justify-end">
               <span className="text-muted-foreground text-sm">
-                {t("table.total_count", { count: pageInfo.totalCount })}
+                {t('table.total_count', { count: pageInfo.totalCount })}
               </span>
 
               <div className="flex flex-wrap items-center justify-center gap-4">
@@ -197,12 +197,12 @@ export function DataTable<TData extends TDataMin>({
                         const params = new URLSearchParams(
                           searchParams.toString(),
                         );
-                        if (params.has("last")) {
-                          params.set("last", value);
-                          params.delete("first");
+                        if (params.has('last')) {
+                          params.set('last', value);
+                          params.delete('first');
                         } else {
-                          params.set("first", value);
-                          params.delete("last");
+                          params.set('first', value);
+                          params.delete('last');
                         }
                         push(`${pathname}?${params.toString()}`, {
                           scroll: false,
@@ -223,7 +223,7 @@ export function DataTable<TData extends TDataMin>({
                       </SelectContent>
                     </Select>
 
-                    <TooltipContent>{t("table.rows_per_page")}</TooltipContent>
+                    <TooltipContent>{t('table.rows_per_page')}</TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
 
@@ -232,16 +232,16 @@ export function DataTable<TData extends TDataMin>({
                     variant="outline"
                     size="icon"
                     disabled={!pageInfo.hasPreviousPage}
-                    ariaLabel={t("pagination.previous")}
+                    ariaLabel={t('pagination.previous')}
                     onClick={() => {
                       if (!pageInfo.startCursor) return;
 
                       const params = new URLSearchParams(
                         searchParams.toString(),
                       );
-                      params.set("cursor", `${pageInfo.startCursor}`);
-                      params.set("last", `${pageSizeValue}`);
-                      params.delete("first");
+                      params.set('cursor', `${pageInfo.startCursor}`);
+                      params.set('last', `${pageSizeValue}`);
+                      params.delete('first');
                       push(`${pathname}?${params.toString()}`, {
                         scroll: false,
                       });
@@ -252,7 +252,7 @@ export function DataTable<TData extends TDataMin>({
                   <Button
                     variant="outline"
                     size="icon"
-                    ariaLabel={t("pagination.next")}
+                    ariaLabel={t('pagination.next')}
                     disabled={!pageInfo.hasNextPage}
                     onClick={() => {
                       if (!pageInfo.endCursor) return;
@@ -260,9 +260,9 @@ export function DataTable<TData extends TDataMin>({
                       const params = new URLSearchParams(
                         searchParams.toString(),
                       );
-                      params.set("cursor", `${pageInfo.endCursor}`);
-                      params.set("first", `${pageSizeValue}`);
-                      params.delete("last");
+                      params.set('cursor', `${pageInfo.endCursor}`);
+                      params.set('first', `${pageSizeValue}`);
+                      params.delete('last');
                       push(`${pathname}?${params.toString()}`, {
                         scroll: false,
                       });

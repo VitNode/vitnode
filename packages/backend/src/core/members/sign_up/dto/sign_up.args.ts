@@ -1,14 +1,14 @@
-import { ArgsType, Field } from "@nestjs/graphql";
+import { ArgsType, Field } from '@nestjs/graphql';
 import {
   IsEmail,
   IsStrongPassword,
   Matches,
   MaxLength,
   MinLength,
-} from "class-validator";
-import { Transform } from "class-transformer";
+} from 'class-validator';
+import { Transform } from 'class-transformer';
 
-import { TransformString } from "../../../../utils";
+import { TransformString } from '../../../../utils';
 
 export const nameRegex = /^(?!.* {2})[\p{L}\p{N}._@ -]*$/u;
 

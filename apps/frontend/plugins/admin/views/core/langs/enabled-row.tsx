@@ -1,10 +1,10 @@
-import { useLocale, useTranslations } from "next-intl";
-import { toast } from "sonner";
-import * as React from "react";
-import { Switch } from "vitnode-frontend/components/ui/switch";
+import { useLocale, useTranslations } from 'next-intl';
+import { toast } from 'sonner';
+import * as React from 'react';
+import { Switch } from 'vitnode-frontend/components/ui/switch';
 
-import { ShowCoreLanguages } from "@/graphql/hooks";
-import { editMutationApi } from "./create-edit/hooks/edit-mutation-api";
+import { ShowCoreLanguages } from '@/graphql/hooks';
+import { editMutationApi } from './create-edit/hooks/edit-mutation-api';
 
 interface Props {
   data: ShowCoreLanguages;
@@ -12,7 +12,7 @@ interface Props {
 
 export const EnabledRowTableLangsCoreAdmin = ({ data }: Props) => {
   const locale = useLocale();
-  const t = useTranslations("core");
+  const t = useTranslations('core');
   const [checked, changeChecked] = React.useOptimistic(data.enabled);
 
   return (
@@ -29,8 +29,8 @@ export const EnabledRowTableLangsCoreAdmin = ({ data }: Props) => {
         });
 
         if (mutation.error) {
-          toast.error(t("errors.title"), {
-            description: t("errors.internal_server_error"),
+          toast.error(t('errors.title'), {
+            description: t('errors.internal_server_error'),
           });
           changeChecked(!checked);
 

@@ -1,12 +1,12 @@
-import { useTranslations } from "next-intl";
-import { useParams } from "next/navigation";
-import { Ban } from "lucide-react";
-import { removeSpecialCharacters } from "vitnode-shared";
+import { useTranslations } from 'next-intl';
+import { useParams } from 'next/navigation';
+import { Ban } from 'lucide-react';
+import { removeSpecialCharacters } from 'vitnode-shared';
 import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "vitnode-frontend/components/ui/dialog";
+} from 'vitnode-frontend/components/ui/dialog';
 import {
   Form,
   FormControl,
@@ -15,20 +15,20 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "vitnode-frontend/components/ui/form";
-import { Input } from "vitnode-frontend/components/ui/input";
+} from 'vitnode-frontend/components/ui/form';
+import { Input } from 'vitnode-frontend/components/ui/input';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "vitnode-frontend/components/ui/select";
-import { Button } from "vitnode-frontend/components/ui/button";
+} from 'vitnode-frontend/components/ui/select';
+import { Button } from 'vitnode-frontend/components/ui/button';
 
-import { ShowAdminNavPluginsObj } from "@/graphql/hooks";
-import { IconInput } from "@/components/icon/input/icon-input";
-import { useCreateNavPluginAdmin } from "./hooks/use-create-nav-plugin-admin";
+import { ShowAdminNavPluginsObj } from '@/graphql/hooks';
+import { IconInput } from '@/components/icon/input/icon-input';
+import { useCreateNavPluginAdmin } from './hooks/use-create-nav-plugin-admin';
 
 export interface CreateEditNavDevPluginAdminProps {
   dataFromSSR: ShowAdminNavPluginsObj[];
@@ -43,8 +43,8 @@ export const CreateEditNavDevPluginAdmin = ({
   icons,
   parentId,
 }: CreateEditNavDevPluginAdminProps) => {
-  const t = useTranslations("admin.core.plugins.dev.nav");
-  const tCore = useTranslations("core");
+  const t = useTranslations('admin.core.plugins.dev.nav');
+  const tCore = useTranslations('core');
   const { form, onSubmit } = useCreateNavPluginAdmin({ data, parentId });
   const { code } = useParams();
   const tPlugin = useTranslations(
@@ -52,12 +52,12 @@ export const CreateEditNavDevPluginAdmin = ({
     // @ts-expect-error
     `${Array.isArray(code) ? code[0] : code}.admin.nav`,
   );
-  const parentCode = form.watch("parent_code");
+  const parentCode = form.watch('parent_code');
 
   return (
     <>
       <DialogHeader>
-        <DialogTitle>{data ? t("edit.title") : t("create.title")}</DialogTitle>
+        <DialogTitle>{data ? t('edit.title') : t('create.title')}</DialogTitle>
       </DialogHeader>
 
       <Form {...form}>
@@ -67,11 +67,11 @@ export const CreateEditNavDevPluginAdmin = ({
             name="code"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{t("create.code.label")}</FormLabel>
+                <FormLabel>{t('create.code.label')}</FormLabel>
                 <FormControl>
                   <Input {...field} />
                 </FormControl>
-                <FormDescription>{t("create.code.desc")}</FormDescription>
+                <FormDescription>{t('create.code.desc')}</FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -82,14 +82,14 @@ export const CreateEditNavDevPluginAdmin = ({
             name="href"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{t("create.href.label")}</FormLabel>
+                <FormLabel>{t('create.href.label')}</FormLabel>
                 <FormControl>
                   <Input {...field} />
                 </FormControl>
                 <FormDescription>
-                  {t.rich("create.href.desc", {
+                  {t.rich('create.href.desc', {
                     link: () => (
-                      <span className="text-foreground font-bold">{`${code}/${parentCode !== "null" ? `${parentCode}/` : ""}${removeSpecialCharacters(form.watch("href"))}`}</span>
+                      <span className="text-foreground font-bold">{`${code}/${parentCode !== 'null' ? `${parentCode}/` : ''}${removeSpecialCharacters(form.watch('href'))}`}</span>
                     ),
                   })}
                 </FormDescription>
@@ -103,7 +103,7 @@ export const CreateEditNavDevPluginAdmin = ({
             name="parent_code"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{t("create.parent.label")}</FormLabel>
+                <FormLabel>{t('create.parent.label')}</FormLabel>
                 <FormControl>
                   <Select
                     onValueChange={field.onChange}
@@ -118,7 +118,7 @@ export const CreateEditNavDevPluginAdmin = ({
                       <SelectItem value="null">
                         <div className="flex flex-wrap items-center gap-2">
                           <Ban className="text-muted-foreground size-4" />
-                          <span>{t("create.parent.null")}</span>
+                          <span>{t('create.parent.null')}</span>
                         </div>
                       </SelectItem>
                       {dataFromSSR.map(nav => (
@@ -147,7 +147,7 @@ export const CreateEditNavDevPluginAdmin = ({
             name="icon"
             render={({ field }) => (
               <FormItem>
-                <FormLabel optional>{t("create.icon.label")}</FormLabel>
+                <FormLabel optional>{t('create.icon.label')}</FormLabel>
                 <FormControl>
                   <IconInput {...field} />
                 </FormControl>
@@ -162,7 +162,7 @@ export const CreateEditNavDevPluginAdmin = ({
               loading={form.formState.isSubmitting}
               type="submit"
             >
-              {tCore(data ? "edit" : "create")}
+              {tCore(data ? 'edit' : 'create')}
             </Button>
           </DialogFooter>
         </form>

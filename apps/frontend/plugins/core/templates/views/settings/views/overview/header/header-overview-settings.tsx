@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { CardHeader } from "vitnode-frontend/components/ui/card";
-import { useSession } from "vitnode-frontend/hooks/use-session";
+import { CardHeader } from 'vitnode-frontend/components/ui/card';
+import { useSession } from 'vitnode-frontend/hooks/use-session';
 
-import { ChangeAvatar } from "./change-avatar/change-avatar";
+import { ChangeAvatar } from './change-avatar/change-avatar';
 
 export const HeaderOverviewSettings = () => {
   const { session } = useSession();
