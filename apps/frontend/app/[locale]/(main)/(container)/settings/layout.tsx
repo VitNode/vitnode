@@ -2,8 +2,7 @@ import * as React from 'react';
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { getConfigFile } from 'vitnode-frontend/helpers/config';
-
-import { LayoutSettingsView } from '@/plugins/core/templates/views/settings/layout-settings-view';
+import { LayoutSettingsView } from 'vitnode-frontend/theme-tsx/settings/layout-settings-view';
 
 interface Props {
   children: React.ReactNode;
@@ -22,6 +21,6 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function Layout({ children }: Props) {
+export default function Layout({ children }: Props) {
   return <LayoutSettingsView>{children}</LayoutSettingsView>;
 }

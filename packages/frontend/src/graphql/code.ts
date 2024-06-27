@@ -1194,6 +1194,18 @@ export type Core_Sessions__Sign_OutMutationVariables = Exact<{ [key: string]: ne
 
 export type Core_Sessions__Sign_OutMutation = { __typename?: 'Mutation', core_sessions__sign_out: string };
 
+export type Core_Members__Avatar__DeleteMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Core_Members__Avatar__DeleteMutation = { __typename?: 'Mutation', core_members__avatar__delete: string };
+
+export type Core_Members__Avatar__UploadMutationVariables = Exact<{
+  file: Scalars['Upload']['input'];
+}>;
+
+
+export type Core_Members__Avatar__UploadMutation = { __typename?: 'Mutation', core_members__avatar__upload: { __typename?: 'UploadAvatarCoreMembersObj', id: number } };
+
 export type Admin__Sessions__AuthorizationQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -1221,6 +1233,30 @@ export type Core_Sessions__AuthorizationQueryVariables = Exact<{ [key: string]: 
 
 
 export type Core_Sessions__AuthorizationQuery = { __typename?: 'Query', core_sessions__authorization: { __typename?: 'AuthorizationCoreSessionsObj', plugin_default: string, user?: { __typename?: 'AuthorizationCurrentUserObj', email: string, id: number, name_seo: string, is_admin: boolean, is_mod: boolean, name: string, newsletter: boolean, avatar_color: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, file_name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } | null, files: { __typename?: 'FilesAuthorizationCoreSessions', allow_upload: boolean, max_storage_for_submit: number, total_max_storage: number, space_used: number } }, core_languages__show: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', code: string }> }, core_nav__show: { __typename?: 'ShowCoreNavObj', edges: Array<{ __typename?: 'ShowCoreNav', id: number, href: string, external: boolean, position: number, icon?: string | null, children: Array<{ __typename?: 'ShowCoreNavItem', id: number, position: number, external: boolean, href: string, icon?: string | null, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }>, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }> }, core_plugins__show: Array<{ __typename?: 'ShowCorePluginsObj', code: string, allow_default: boolean }>, core_settings__show: { __typename?: 'ShowSettingsObj', site_copyright: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, site_description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
+
+export type Core_Members__ProfilesQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']['input']>;
+  nameSeo: Scalars['String']['input'];
+}>;
+
+
+export type Core_Members__ProfilesQuery = { __typename?: 'Query', core_members__show: { __typename?: 'ShowCoreMembersObj', edges: Array<{ __typename?: 'ShowCoreMembers', avatar_color: string, id: number, joined: Date, name: string, name_seo: string, posts: number, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, file_name: string } | null, group: { __typename?: 'GroupUser', name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } }> } };
+
+export type Core_Members__Files__ShowQueryVariables = Exact<{
+  cursor?: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  sortBy?: InputMaybe<ShowCoreFilesSortByArgs>;
+  search?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type Core_Members__Files__ShowQuery = { __typename?: 'Query', core_files__show: { __typename?: 'ShowCoreFilesObj', edges: Array<{ __typename?: 'ShowCoreFiles', created: Date, dir_folder: string, extension: string, file_name: string, file_size: number, file_name_original: string, height?: number | null, id: number, mimetype: string, width?: number | null, file_alt?: string | null, count_uses: number, security_key?: string | null }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
+
+export type Core_Sessions__Devices__ShowQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Core_Sessions__Devices__ShowQuery = { __typename?: 'Query', core_sessions__devices__show: Array<{ __typename?: 'ShowCoreSessionDevicesObj', expires: Date, id: number, last_seen: Date, uagent_browser: string, uagent_os: string, uagent_version: string, login_token: string, ip_address: string, created: Date }> };
 
 export type Core_Members__Show__SearchQueryVariables = Exact<{
   search?: InputMaybe<Scalars['String']['input']>;
@@ -1285,6 +1321,18 @@ export const Core_Sessions__Sign_In = gql`
 export const Core_Sessions__Sign_Out = gql`
     mutation Core_sessions__sign_out {
   core_sessions__sign_out
+}
+    `;
+export const Core_Members__Avatar__Delete = gql`
+    mutation Core_members__avatar__delete {
+  core_members__avatar__delete
+}
+    `;
+export const Core_Members__Avatar__Upload = gql`
+    mutation Core_members__avatar__upload($file: Upload!) {
+  core_members__avatar__upload(file: $file) {
+    id
+  }
 }
     `;
 export const Admin__Sessions__Authorization = gql`
@@ -1463,6 +1511,81 @@ export const Core_Sessions__Authorization = gql`
       language_code
       value
     }
+  }
+}
+    `;
+export const Core_Members__Profiles = gql`
+    query Core_members__profiles($first: Int, $nameSeo: String!) {
+  core_members__show(first: $first, name_seo: $nameSeo) {
+    edges {
+      avatar_color
+      avatar {
+        id
+        dir_folder
+        file_name
+      }
+      group {
+        name {
+          language_code
+          value
+        }
+      }
+      id
+      joined
+      name
+      name_seo
+      posts
+    }
+  }
+}
+    `;
+export const Core_Members__Files__Show = gql`
+    query Core_members__files__show($cursor: Int, $first: Int, $last: Int, $sortBy: ShowCoreFilesSortByArgs, $search: String) {
+  core_files__show(
+    cursor: $cursor
+    first: $first
+    last: $last
+    sortBy: $sortBy
+    search: $search
+  ) {
+    edges {
+      created
+      dir_folder
+      extension
+      file_name
+      file_size
+      file_name_original
+      height
+      id
+      mimetype
+      width
+      file_alt
+      count_uses
+      security_key
+    }
+    pageInfo {
+      count
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      totalCount
+    }
+  }
+}
+    `;
+export const Core_Sessions__Devices__Show = gql`
+    query Core_sessions__devices__show {
+  core_sessions__devices__show {
+    expires
+    id
+    last_seen
+    uagent_browser
+    uagent_os
+    uagent_version
+    login_token
+    ip_address
+    created
   }
 }
     `;
