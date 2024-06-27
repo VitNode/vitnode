@@ -1,6 +1,9 @@
-import { CardContent, CardFooter } from 'vitnode-frontend/components/ui/card';
-
 import { SubmitDatabaseInstallConfigs } from './submit-database-install-configs';
+
+import {
+  CardContent,
+  CardFooter,
+} from '../../../../../../../components/ui/card';
 
 export const DatabaseInstallConfigsView = () => {
   return (

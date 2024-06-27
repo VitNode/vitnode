@@ -1,0 +1,3 @@
+mutation Admin__install__create_database {
+  admin__install__create_database
+}

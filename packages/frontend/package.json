@@ -13,6 +13,7 @@
     "./views/admin/layout": "./src/views/admin/layout/admin-cp-layout.tsx",
     "./views/theme/layout": "./src/views/theme/layout/theme-layout.tsx",
     "./views/global": "./src/views/global/index.ts",
+    "./admin/*": "./src/views/admin/views/*.tsx",
     "./theme/*": "./src/views/theme/views/*.tsx",
     "./components/*": "./src/components/*.tsx",
     "./editor": "./src/editor/editor.tsx",

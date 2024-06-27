@@ -1,13 +1,13 @@
-import { redirect } from 'vitnode-frontend/navigation';
-import { InternalErrorView } from 'vitnode-frontend/views/global';
-import { ErrorType, fetcher } from 'vitnode-frontend/graphql/fetcher';
+import { ContentInstallConfigsView } from './content/content';
 
 import {
   Admin__Install__Layout,
   Admin__Install__LayoutQuery,
   Admin__Install__LayoutQueryVariables,
-} from '@/graphql/hooks';
-import { LayoutInstallConfigsView } from '@/plugins/admin/configs/views/install/layout-install-configs-view';
+} from '../../../../graphql/code';
+import { ErrorType, fetcher } from '../../../../graphql/fetcher';
+import { redirect } from '../../../../navigation';
+import { InternalErrorView } from '../../../global';
 
 const getData = async () => {
   const { data } = await fetcher<
@@ -21,12 +21,12 @@ const getData = async () => {
   return data;
 };
 
-export default async function Page() {
+export const InstallConfigsView = async () => {
   try {
     const data = await getData();
 
     return (
-      <LayoutInstallConfigsView data={data.admin__install__layout.status} />
+      <ContentInstallConfigsView data={data.admin__install__layout.status} />
     );
   } catch (error) {
     const code = error as ErrorType;
@@ -37,4 +37,4 @@ export default async function Page() {
 
     return <InternalErrorView />;
   }
-}
+};

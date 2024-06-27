@@ -1,15 +1,15 @@
-import * as React from 'react';
 import { useTranslations } from 'next-intl';
-import { Card } from 'vitnode-frontend/components/ui/card';
-import { LogoVitNode } from 'vitnode-frontend/components/logo-vitnode';
-import { PoweredByVitNode } from 'vitnode-frontend/views/global';
-import { ThemeSwitcher } from 'vitnode-frontend/components/switchers/theme-switcher';
+
+import { LogoVitNode } from '../../../../components/logo-vitnode';
+import { ThemeSwitcher } from '../../../../components/switchers/theme-switcher';
+import { Card } from '../../../../components/ui/card';
+import { PoweredByVitNode } from '../../../global';
 
 interface Props {
   children: React.ReactNode;
 }
 
-export const LayoutConfigs = ({ children }: Props) => {
+export const InstallConfigLayout = ({ children }: Props) => {
   const t = useTranslations('admin.configs');
 
   return (
@@ -17,7 +17,6 @@ export const LayoutConfigs = ({ children }: Props) => {
       <div className="mb-5 flex items-center justify-center">
         <LogoVitNode className="h-16" />
       </div>
-
       {children}
       <Card className="p-5 text-center sm:hidden">
         {t('mobile_not_supported')}
@@ -25,10 +24,7 @@ export const LayoutConfigs = ({ children }: Props) => {
 
       <div className="mt-5 flex flex-col items-center justify-center gap-4">
         <PoweredByVitNode />
-
-        <div>
-          <ThemeSwitcher />
-        </div>
+        <ThemeSwitcher />
       </div>
     </div>
   );

@@ -1,11 +1,11 @@
 import { useTranslations } from 'next-intl';
 import * as React from 'react';
 import { toast } from 'sonner';
-import { Button } from 'vitnode-frontend/components/ui/button';
 
 import { mutationApi } from './mutation-api';
 
 import { useInstallVitnode } from '../../hooks/use-install-vitnode';
+import { Button } from '../../../../../../../components/ui/button';
 
 export const SubmitDatabaseInstallConfigs = () => {
   const [isPending, setPending] = React.useState(false);
