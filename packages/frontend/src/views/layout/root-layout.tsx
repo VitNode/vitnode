@@ -2,6 +2,7 @@ import * as React from 'react';
 import NextTopLoader from 'nextjs-toploader';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
+import { Metadata } from 'next';
 
 import { InternalErrorView } from '../global/internal-error/internal-error-view';
 import { RootProviders } from './providers';
@@ -9,8 +10,8 @@ import { RootProviders } from './providers';
 import { getConfigFile } from '../../helpers/config';
 import { fetcher } from '../../graphql/fetcher';
 import { Core_Middleware, Core_MiddlewareQuery } from '../../graphql/code';
-import { Metadata } from 'next';
 import { CONFIG } from '../../helpers/config-with-env';
+import './global.css';
 
 export interface RootLayoutProps {
   children: React.ReactNode;

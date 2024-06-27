@@ -1164,6 +1164,21 @@ export type Core_Editor_Files__UploadMutationVariables = Exact<{
 
 export type Core_Editor_Files__UploadMutation = { __typename?: 'Mutation', core_editor_files__upload: { __typename?: 'ShowCoreFiles', extension: string, file_name: string, file_size: number, mimetype: string, id: number, height?: number | null, width?: number | null, dir_folder: string, security_key?: string | null, file_alt?: string | null, file_name_original: string } };
 
+export type Core_Sessions__Sign_InMutationVariables = Exact<{
+  email: Scalars['String']['input'];
+  password: Scalars['String']['input'];
+  remember?: InputMaybe<Scalars['Boolean']['input']>;
+  admin?: InputMaybe<Scalars['Boolean']['input']>;
+}>;
+
+
+export type Core_Sessions__Sign_InMutation = { __typename?: 'Mutation', core_sessions__sign_in: string };
+
+export type Core_Sessions__Sign_OutMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Core_Sessions__Sign_OutMutation = { __typename?: 'Mutation', core_sessions__sign_out: string };
+
 export type Admin__Sessions__AuthorizationQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -1216,6 +1231,21 @@ export const Core_Editor_Files__Upload = gql`
     file_alt
     file_name_original
   }
+}
+    `;
+export const Core_Sessions__Sign_In = gql`
+    mutation Core_sessions__sign_in($email: String!, $password: String!, $remember: Boolean, $admin: Boolean) {
+  core_sessions__sign_in(
+    email: $email
+    password: $password
+    remember: $remember
+    admin: $admin
+  )
+}
+    `;
+export const Core_Sessions__Sign_Out = gql`
+    mutation Core_sessions__sign_out {
+  core_sessions__sign_out
 }
     `;
 export const Admin__Sessions__Authorization = gql`

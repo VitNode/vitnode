@@ -1,17 +1,16 @@
 import * as React from 'react';
 import { AuthLayout } from 'vitnode-frontend/views/auth-layout';
-
-import { Layout as LayoutCore } from '@/plugins/core/templates/layout/layout';
+import { ThemeLayout } from 'vitnode-frontend/views/theme/layout';
 
 interface Props {
   children: React.ReactNode;
   params: { locale: string };
 }
 
-export default async function Layout({ children }: Props) {
+export default function Layout({ children }: Props) {
   return (
     <AuthLayout>
-      <LayoutCore>{children}</LayoutCore>
+      <ThemeLayout>{children}</ThemeLayout>
     </AuthLayout>
   );
 }

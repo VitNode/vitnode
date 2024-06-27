@@ -2,9 +2,9 @@ import * as React from 'react';
 import { getTranslations } from 'next-intl/server';
 import { Metadata } from 'next';
 import { getConfigFile } from 'vitnode-frontend/helpers/config';
-import { AdminLayout } from 'vitnode-frontend/views/admin/layout';
+import { AdminCPLayout } from 'vitnode-frontend/views/admin/layout';
 
-import { AdminLayout as AdminCPLayout } from '@/plugins/admin/layout/admin-layout';
+import { AdminLayout } from '@/plugins/admin/layout/admin-layout';
 
 interface Props {
   children: React.ReactNode;
@@ -28,8 +28,8 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function Layout({ children }: Props) {
   return (
-    <AdminLayout>
-      <AdminCPLayout>{children}</AdminCPLayout>
-    </AdminLayout>
+    <AdminCPLayout>
+      <AdminLayout>{children}</AdminLayout>
+    </AdminCPLayout>
   );
 }

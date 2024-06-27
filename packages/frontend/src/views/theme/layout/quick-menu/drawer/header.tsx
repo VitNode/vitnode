@@ -1,11 +1,12 @@
 import { useTranslations } from 'next-intl';
-import { Link } from 'vitnode-frontend/navigation';
-import { buttonVariants } from 'vitnode-frontend/components/ui/button';
-import { DrawerClose } from 'vitnode-frontend/components/ui/drawer';
-import { useSession } from 'vitnode-frontend/hooks/use-session';
-import { ThemeSwitcher } from 'vitnode-frontend/components/switchers/theme-switcher';
-import { LanguageSwitcher } from 'vitnode-frontend/components/switchers/language-switcher';
-import { AvatarUser } from 'vitnode-frontend/components/ui/user/avatar';
+
+import { useSession } from '../../../../../hooks/use-session';
+import { DrawerClose } from '../../../../../components/ui/drawer';
+import { Link } from '../../../../../navigation';
+import { buttonVariants } from '../../../../../components/ui/button';
+import { LanguageSwitcher } from '../../../../../components/switchers/language-switcher';
+import { ThemeSwitcher } from '../../../../../components/switchers/theme-switcher';
+import { AvatarUser } from '../../../../../components/ui/user/avatar';
 
 export const HeaderDrawerQuickMenu = () => {
   const t = useTranslations('core');

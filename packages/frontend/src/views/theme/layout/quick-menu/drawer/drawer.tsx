@@ -1,19 +1,20 @@
 import { useTranslations } from 'next-intl';
 import { KeyRound, LogOut, Settings, Shield, User } from 'lucide-react';
 import * as React from 'react';
-import { Link } from 'vitnode-frontend/navigation';
-import { cn } from 'vitnode-frontend/helpers/classnames';
+
+import { HeaderDrawerQuickMenu } from './header';
+import { NavDrawerQuickMenu } from './nav/nav';
+
+import { useSignOutApi } from '../../../../../hooks/core/sign/out/use-sign-out-api';
+import { useSession } from '../../../../../hooks/use-session';
 import {
   DrawerClose,
   DrawerContent,
-} from 'vitnode-frontend/components/ui/drawer';
-import { Button, buttonVariants } from 'vitnode-frontend/components/ui/button';
-import { Separator } from 'vitnode-frontend/components/ui/separator';
-import { useSession } from 'vitnode-frontend/hooks/use-session';
-
-import { HeaderDrawerQuickMenu } from './header';
-import { useSignOutAPI } from '@/plugins/core/hooks/sign/out/use-sign-out-api';
-import { NavDrawerQuickMenu } from './nav/nav';
+} from '../../../../../components/ui/drawer';
+import { Link } from '../../../../../navigation';
+import { cn } from '../../../../../helpers/classnames';
+import { Button, buttonVariants } from '../../../../../components/ui/button';
+import { Separator } from '../../../../../components/ui/separator';
 
 export const classNameDrawerQuickMenu =
   'w-full justify-start [&>svg]:text-muted-foreground font-normal';
@@ -24,7 +25,7 @@ interface Props {
 
 export const DrawerQuickMenu = ({ navIcons }: Props) => {
   const t = useTranslations('core');
-  const { onSubmit } = useSignOutAPI();
+  const { onSubmit } = useSignOutApi();
   const { session } = useSession();
 
   return (
