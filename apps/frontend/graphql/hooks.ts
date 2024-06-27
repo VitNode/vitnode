@@ -1587,16 +1587,6 @@ export type Admin_Blog_Categories__ShowQueryVariables = Exact<{ [key: string]: n
 
 export type Admin_Blog_Categories__ShowQuery = { __typename?: 'Query', blog_categories__show: { __typename?: 'ShowBlogCategoriesObj', edges: Array<{ __typename?: 'ShowBlogCategories', color: string, id: number, position: number, description?: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> | null, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }> } };
 
-export type Core_Members__Sign_UpMutationVariables = Exact<{
-  email: Scalars['String']['input'];
-  name: Scalars['String']['input'];
-  password: Scalars['String']['input'];
-  newsletter?: InputMaybe<Scalars['Boolean']['input']>;
-}>;
-
-
-export type Core_Members__Sign_UpMutation = { __typename?: 'Mutation', core_members__sign_up: { __typename?: 'SignUpCoreMembersObj', email: string, name: string, newsletter?: boolean | null } };
-
 export type Core_Members__Avatar__DeleteMutationVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -1608,21 +1598,6 @@ export type Core_Members__Avatar__UploadMutationVariables = Exact<{
 
 
 export type Core_Members__Avatar__UploadMutation = { __typename?: 'Mutation', core_members__avatar__upload: { __typename?: 'UploadAvatarCoreMembersObj', id: number } };
-
-export type Core_Sessions__Sign_InMutationVariables = Exact<{
-  email: Scalars['String']['input'];
-  password: Scalars['String']['input'];
-  remember?: InputMaybe<Scalars['Boolean']['input']>;
-  admin?: InputMaybe<Scalars['Boolean']['input']>;
-}>;
-
-
-export type Core_Sessions__Sign_InMutation = { __typename?: 'Mutation', core_sessions__sign_in: string };
-
-export type Core_Sessions__Sign_OutMutationVariables = Exact<{ [key: string]: never; }>;
-
-
-export type Core_Sessions__Sign_OutMutation = { __typename?: 'Mutation', core_sessions__sign_out: string };
 
 export type Core_MiddlewareQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2621,20 +2596,6 @@ export const Admin_Blog_Categories__Show = gql`
   }
 }
     `;
-export const Core_Members__Sign_Up = gql`
-    mutation Core_members__sign_up($email: String!, $name: String!, $password: String!, $newsletter: Boolean) {
-  core_members__sign_up(
-    email: $email
-    name: $name
-    password: $password
-    newsletter: $newsletter
-  ) {
-    email
-    name
-    newsletter
-  }
-}
-    `;
 export const Core_Members__Avatar__Delete = gql`
     mutation Core_members__avatar__delete {
   core_members__avatar__delete
@@ -2645,21 +2606,6 @@ export const Core_Members__Avatar__Upload = gql`
   core_members__avatar__upload(file: $file) {
     id
   }
-}
-    `;
-export const Core_Sessions__Sign_In = gql`
-    mutation Core_sessions__sign_in($email: String!, $password: String!, $remember: Boolean, $admin: Boolean) {
-  core_sessions__sign_in(
-    email: $email
-    password: $password
-    remember: $remember
-    admin: $admin
-  )
-}
-    `;
-export const Core_Sessions__Sign_Out = gql`
-    mutation Core_sessions__sign_out {
-  core_sessions__sign_out
 }
     `;
 export const Core_Middleware = gql`

@@ -1,13 +1,14 @@
 import { useTranslations } from 'next-intl';
-import { Link } from 'vitnode-frontend/navigation';
+
+import { FormSignIn } from './form/form-sign-in';
+
 import {
   Card,
   CardDescription,
   CardHeader,
   CardTitle,
-} from 'vitnode-frontend/components/ui/card';
-
-import { FormSignIn } from './form/form-sign-in';
+} from '../../../../../../components/ui/card';
+import { Link } from '../../../../../../navigation';
 
 export const SignInView = () => {
   const t = useTranslations('core.sign_in');

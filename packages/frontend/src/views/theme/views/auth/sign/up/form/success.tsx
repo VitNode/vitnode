@@ -1,7 +1,8 @@
 import { Mailbox } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import { Link } from 'vitnode-frontend/navigation';
-import { buttonVariants } from 'vitnode-frontend/components/ui/button';
+
+import { buttonVariants } from '../../../../../../../components/ui/button';
+import { Link } from '../../../../../../../navigation';
 
 interface Props {
   name: string;
