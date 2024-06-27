@@ -3,12 +3,12 @@
 import { ChevronDown } from 'lucide-react';
 import * as NavigationMenu from '@radix-ui/react-navigation-menu';
 import * as React from 'react';
-import { Link, usePathname } from 'vitnode-frontend/navigation';
-import { cn } from 'vitnode-frontend/helpers/classnames';
-import { buttonVariants } from 'vitnode-frontend/components/ui/button';
-import { useTextLang } from 'vitnode-frontend/hooks/use-text-lang';
 
-import { ShowCoreNav } from '@/graphql/hooks';
+import { ShowCoreNav } from '../../../../graphql/code';
+import { useTextLang } from '../../../../hooks/use-text-lang';
+import { Link, usePathname } from '../../../../navigation';
+import { cn } from '../../../../helpers/classnames';
+import { buttonVariants } from '../../../../components/ui/button';
 
 interface Props extends Omit<ShowCoreNav, 'icon'> {
   icons: { icon: React.ReactNode; id: number }[];
@@ -58,7 +58,7 @@ export const ItemNav = ({
             },
           )}
         >
-          <ul className="flex flex-wrap gap-1 p-2">
+          <div className="flex flex-wrap gap-1 p-2">
             {children.map(item => {
               const activeItem =
                 item.href === pathname ||
@@ -69,40 +69,39 @@ export const ItemNav = ({
               )?.icon;
 
               return (
-                <li
+                <NavigationMenu.Link
                   key={item.id}
                   className={cn('flex-1 basis-full', {
                     'basis-[calc(50%-0.5rem)]': children.length >= 3,
                     'lg:basis-[calc(33%-0.5rem)]': children.length >= 5,
                   })}
+                  asChild
                 >
-                  <NavigationMenu.Link asChild>
-                    <Link
-                      href={item.href}
-                      className={cn(
-                        'hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground text-accent-foreground flex h-full select-none flex-col justify-center gap-1 rounded-md px-3 py-2 leading-none no-underline outline-none transition-colors',
-                        {
-                          'bg-accent': activeItem,
-                        },
-                      )}
-                      target={item.external ? '_blank' : undefined}
-                      rel={item.external ? 'noopener noreferrer' : undefined}
-                    >
-                      <div className="flex gap-1 font-medium">
-                        {icon}
-                        {convertText(item.name)}
-                      </div>
-                      {item.description && (
-                        <p className="text-muted-foreground line-clamp-2 text-sm leading-snug">
-                          {convertText(item.description)}
-                        </p>
-                      )}
-                    </Link>
-                  </NavigationMenu.Link>
-                </li>
+                  <Link
+                    href={item.href}
+                    className={cn(
+                      'hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground text-accent-foreground flex h-full select-none flex-col justify-center gap-1 rounded-md px-3 py-2 leading-none no-underline outline-none transition-colors',
+                      {
+                        'bg-accent': activeItem,
+                      },
+                    )}
+                    target={item.external ? '_blank' : undefined}
+                    rel={item.external ? 'noopener noreferrer' : undefined}
+                  >
+                    <div className="flex gap-1 font-medium">
+                      {icon}
+                      {convertText(item.name)}
+                    </div>
+                    {item.description && (
+                      <p className="text-muted-foreground line-clamp-2 text-sm leading-snug">
+                        {convertText(item.description)}
+                      </p>
+                    )}
+                  </Link>
+                </NavigationMenu.Link>
               );
             })}
-          </ul>
+          </div>
         </NavigationMenu.Content>
       )}
     </NavigationMenu.Item>

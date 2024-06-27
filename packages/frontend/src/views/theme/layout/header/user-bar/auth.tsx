@@ -1,3 +1,5 @@
+'use client';
+
 import {
   KeyRound,
   LogOut,
@@ -7,26 +9,26 @@ import {
   User,
 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import { Link } from 'vitnode-frontend/navigation';
+
+import { useSession } from '../../../../../hooks/use-session';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
-  DropdownMenuTrigger,
-  DropdownMenuSeparator,
   DropdownMenuLabel,
-} from 'vitnode-frontend/components/ui/dropdown-menu';
-import { Button } from 'vitnode-frontend/components/ui/button';
-import { useSession } from 'vitnode-frontend/hooks/use-session';
-import { AvatarUser } from 'vitnode-frontend/components/ui/user/avatar';
-
-import { useSignOutAPI } from '@/plugins/core/hooks/sign/out/use-sign-out-api';
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '../../../../../components/ui/dropdown-menu';
+import { Button } from '../../../../../components/ui/button';
+import { AvatarUser } from '../../../../../components/ui/user/avatar';
+import { Link } from '../../../../../navigation';
+import { useSignOutApi } from '../../../../../hooks/core/sign/out/use-sign-out-api';
 
 export const AuthUserBar = () => {
   const t = useTranslations('core');
   const { session } = useSession();
-  const { onSubmit } = useSignOutAPI();
+  const { onSubmit } = useSignOutApi();
 
   if (!session) return null;
   const { email, is_admin, is_mod, name, name_seo } = session;

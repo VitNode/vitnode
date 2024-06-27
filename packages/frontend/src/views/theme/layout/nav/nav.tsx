@@ -1,11 +1,11 @@
-import { flattenTree } from 'vitnode-frontend/helpers/flatten-tree';
-import { getSessionData } from 'vitnode-frontend/graphql/get-session-data';
-import { Icon } from 'vitnode-frontend/components/icon/icon';
-
 import { NavWrapper } from './wrapper';
 import { NavListWrapper } from './list-wrapper';
 import { ItemNav } from './item';
-import { ShowCoreNav } from '@/graphql/hooks';
+
+import { getSessionData } from '../../../../graphql/get-session-data';
+import { flattenTree } from '../../../../helpers/flatten-tree';
+import { Icon } from '../../../../components/icon/icon';
+import { ShowCoreNav } from '../../../../graphql/code';
 
 export const Nav = async () => {
   const { data } = await getSessionData();

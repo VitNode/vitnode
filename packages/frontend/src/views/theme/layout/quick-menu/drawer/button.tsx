@@ -3,12 +3,13 @@
 import { Menu } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import * as React from 'react';
-import { Drawer, DrawerTrigger } from 'vitnode-frontend/components/ui/drawer';
-import { useSession } from 'vitnode-frontend/hooks/use-session';
-import { AvatarUser } from 'vitnode-frontend/components/ui/user/avatar';
 
 import { ItemQuickMenu } from '../item';
 import { DrawerQuickMenu } from './drawer';
+
+import { useSession } from '../../../../../hooks/use-session';
+import { Drawer, DrawerTrigger } from '../../../../../components/ui/drawer';
+import { AvatarUser } from '../../../../../components/ui/user/avatar';
 
 interface Props {
   navIcons: { icon: React.ReactNode; id: number }[];

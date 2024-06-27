@@ -375,11 +375,15 @@ importers:
         specifier: ^0.396.0
         version: 0.396.0(react@19.0.0-rc.0)
       next:
-        specifier: 15.0.0-canary.44
-        version: 15.0.0-canary.44(babel-plugin-react-compiler@0.0.0-experimental-938cd9a-20240601)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
+        specifier: 15.0.0-canary.46
+        version: 15.0.0-canary.46(babel-plugin-react-compiler@0.0.0-experimental-696af53-20240625)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
       next-intl:
         specifier: ^3.15.2
+<<<<<<< HEAD
         version: 3.15.2(next@15.0.0-canary.44(babel-plugin-react-compiler@0.0.0-experimental-938cd9a-20240601)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0)
+=======
+        version: 3.15.2(next@15.0.0-canary.46(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0)
+>>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
       next-themes:
         specifier: ^0.3.0
         version: 0.3.0(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
@@ -439,8 +443,8 @@ importers:
         specifier: ^3.6.0
         version: 3.6.0(react-hook-form@7.52.0(react@19.0.0-rc.0))
       '@next/bundle-analyzer':
-        specifier: 15.0.0-canary.44
-        version: 15.0.0-canary.44
+        specifier: 15.0.0-canary.46
+        version: 15.0.0-canary.46
       '@tailwindcss/container-queries':
         specifier: ^0.1.1
         version: 0.1.1(tailwindcss@3.4.4(ts-node@10.9.2(@swc/core@1.6.5)(@types/node@20.14.8)(typescript@5.5.2)))
@@ -466,8 +470,8 @@ importers:
         specifier: ^18.3.0
         version: 18.3.0
       babel-plugin-react-compiler:
-        specifier: 0.0.0-experimental-938cd9a-20240601
-        version: 0.0.0-experimental-938cd9a-20240601
+        specifier: 0.0.0-experimental-696af53-20240625
+        version: 0.0.0-experimental-696af53-20240625
       cross-env:
         specifier: ^7.0.3
         version: 7.0.3
@@ -475,14 +479,14 @@ importers:
         specifier: ^8.57.0
         version: 8.57.0
       eslint-config-next:
-        specifier: 15.0.0-canary.44
-        version: 15.0.0-canary.44(eslint@8.57.0)(typescript@5.5.2)
+        specifier: 15.0.0-canary.46
+        version: 15.0.0-canary.46(eslint@8.57.0)(typescript@5.5.2)
       eslint-config-vitnode:
         specifier: workspace:*
         version: link:../../packages/eslint-config-vitnode
       geist:
         specifier: ^1.3.0
-        version: 1.3.0(next@15.0.0-canary.44(babel-plugin-react-compiler@0.0.0-experimental-938cd9a-20240601)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))
+        version: 1.3.0(next@15.0.0-canary.46(babel-plugin-react-compiler@0.0.0-experimental-696af53-20240625)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))
       postcss:
         specifier: ^8.4.38
         version: 8.4.38
@@ -691,6 +695,9 @@ importers:
       '@radix-ui/react-label':
         specifier: ^2.1.0
         version: 2.1.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
+      '@radix-ui/react-navigation-menu':
+        specifier: ^1.2.0
+        version: 1.2.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
       '@radix-ui/react-popover':
         specifier: ^1.1.1
         version: 1.1.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
@@ -797,17 +804,29 @@ importers:
         specifier: ^0.396.0
         version: 0.396.0(react@19.0.0-rc.0)
       next:
+<<<<<<< HEAD
         specifier: 15.0.0-canary.44
         version: 15.0.0-canary.44(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
       next-intl:
         specifier: ^3.15.2
         version: 3.15.2(next@15.0.0-canary.44(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0)
+=======
+        specifier: 15.0.0-canary.46
+        version: 15.0.0-canary.46(babel-plugin-react-compiler@0.0.0-experimental-696af53-20240625)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
+      next-intl:
+        specifier: ^3.15.2
+        version: 3.15.2(next@15.0.0-canary.46(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0)
+>>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
       next-themes:
         specifier: ^0.3.0
         version: 0.3.0(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
       nextjs-toploader:
         specifier: ^1.6.12
+<<<<<<< HEAD
         version: 1.6.12(next@15.0.0-canary.44(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
+=======
+        version: 1.6.12(next@15.0.0-canary.46(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
+>>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
       nprogress:
         specifier: ^0.2.0
         version: 0.2.0
@@ -2536,8 +2555,8 @@ packages:
       fastify:
         optional: true
 
-  '@next/bundle-analyzer@15.0.0-canary.44':
-    resolution: {integrity: sha512-XYMOqhB1cy63tHEbucovmqleKiPA71EUEzBAZ5NLBr6036p82O9iA5zBmScMrnTMtYFCWj5rCLn6A3R/3bWj7Q==}
+  '@next/bundle-analyzer@15.0.0-canary.46':
+    resolution: {integrity: sha512-YYnRHIFiLww1kjxdQbHGr3Y0OuL36CochC8Tks6Ir35HIosnBXjieGRM2Yhivp3drzE1n0fKXOfGsZb/ryixuA==}
 
   '@next/env@14.1.4':
     resolution: {integrity: sha512-e7X7bbn3Z6DWnDi75UWn+REgAbLEqxI8Tq2pkFOFAMpWAWApz/YCUhtWMWn410h8Q2fYiYL7Yg5OlxMOCfFjJQ==}
@@ -2549,12 +2568,17 @@ packages:
   '@next/env@14.2.4':
     resolution: {integrity: sha512-3EtkY5VDkuV2+lNmKlbkibIJxcO4oIHEhBWne6PaAp+76J9KoSsGvNikp6ivzAT8dhhBMYrm6op2pS1ApG0Hzg==}
 
+<<<<<<< HEAD
   '@next/env@15.0.0-canary.28':
     resolution: {integrity: sha512-0ITy8GHxw1UnCe6qr65gnGyHraY3f9eifRjdKybFvAGXHhakkepwIVPuQDBYAOwa3bnP7dgzZpk2VGF9jxXzPA==}
 >>>>>>> 321538bf (docs: Add docs)
+=======
+  '@next/env@15.0.0-canary.46':
+    resolution: {integrity: sha512-ahFr4BNVF+ajZnZP9tesGWiMN8onxWyUMU4Fx+pHecp812TmUcRori8KgU6q5UEfGnB3GfLYExaRxN0oheQaLQ==}
+>>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
 
-  '@next/eslint-plugin-next@15.0.0-canary.44':
-    resolution: {integrity: sha512-3tlgtApUU9kUx+phZUfDEbdMIuogEIZD0RMVKVKYFTY5v9MOBpTHuUlQVFv/wiQmrJ2BxHfcmSWKDyRLwxhp4w==}
+  '@next/eslint-plugin-next@15.0.0-canary.46':
+    resolution: {integrity: sha512-NxkE2nUzFVadPZWhFHzqiUrVQEBhCe3YrkxNVmtu8jPyEa6uCi+kqr1sM4cKtRM7V/RY2jZp8QErz3XCezM+6g==}
 
   '@next/swc-darwin-arm64@14.1.4':
     resolution: {integrity: sha512-ubmUkbmW65nIAOmoxT1IROZdmmJMmdYvXIe8211send9ZYJu+SqxSnJM4TrPj9wmL6g9Atvj0S/2cFmMSS99jg==}
@@ -2572,6 +2596,7 @@ packages:
     cpu: [arm64]
     os: [darwin]
 
+<<<<<<< HEAD
   '@next/swc-darwin-arm64@15.0.0-canary.28':
     resolution: {integrity: sha512-wKocn87O5NzHsBQGiZGgvCkU5awfY35o5FIQZTZ2xXnERHJUbE4bAeYhEf/kg9tZtG2Mqw4CItUVtS0Q0L0XMg==}
     engines: {node: '>= 10'}
@@ -2581,6 +2606,10 @@ packages:
   '@next/swc-darwin-arm64@15.0.0-rc.0':
     resolution: {integrity: sha512-4OpTXvAWcSabXA5d688zdUwa3sfT9QrLnHMdpv4q2UDnnuqmOI0xLb6lrOxwpi+vHJNkneuNLqyc5HGBhkqL6A==}
 >>>>>>> 321538bf (docs: Add docs)
+=======
+  '@next/swc-darwin-arm64@15.0.0-canary.46':
+    resolution: {integrity: sha512-42fIDLl5Sm9klKZm5TH8H3CEms/bJ8xy1S5g5EW37l4xVbwfOV5q27NbXFIUAkAqHoXaMgzC/Yck/Vk1Z7b7eQ==}
+>>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [darwin]
@@ -2601,6 +2630,7 @@ packages:
     cpu: [x64]
     os: [darwin]
 
+<<<<<<< HEAD
   '@next/swc-darwin-x64@15.0.0-canary.28':
     resolution: {integrity: sha512-vuwicSLOtxXOj2OIyDjNxkJlzQTIOwmX+KmZZinMG22N1dpYWT2pxYK5ZJVQGa1SSKVsC/vxu1zG963aa2Oq8g==}
     engines: {node: '>= 10'}
@@ -2610,6 +2640,10 @@ packages:
   '@next/swc-darwin-x64@15.0.0-rc.0':
     resolution: {integrity: sha512-/TD8M9DT244uhtFA8P/0DUbM7ftg2zio6yOo6ajV16vNjkcug9Kt9//Wa4SrJjWcsGZpViLctOlwn3/6JFAuAA==}
 >>>>>>> 321538bf (docs: Add docs)
+=======
+  '@next/swc-darwin-x64@15.0.0-canary.46':
+    resolution: {integrity: sha512-9c3dArYniDMTfq2TM4dg8rbJp3hFWHq1KAYPsbmcm9b1n9twJEd/LnNLLrpN4ITk+f8XXGRSWZ5FerhQkDtDig==}
+>>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [darwin]
@@ -2630,6 +2664,7 @@ packages:
     cpu: [arm64]
     os: [linux]
 
+<<<<<<< HEAD
   '@next/swc-linux-arm64-gnu@15.0.0-canary.28':
     resolution: {integrity: sha512-Do3PxwAyuSyIEttDbUUsOqS9d/IZCwMKBNBrmc2dg6eqC/GQWnGSDKRfKGNfQnGVia2Z5EGITIrsBcEelc/g6Q==}
     engines: {node: '>= 10'}
@@ -2639,6 +2674,10 @@ packages:
   '@next/swc-linux-arm64-gnu@15.0.0-rc.0':
     resolution: {integrity: sha512-3VTO32938AcqOlOI/U61/MIpeYrblP22VU1GrgmMQJozsAXEJgLCgf3wxZtn61/FG4Yc0tp7rPZE2t1fIGe0+w==}
 >>>>>>> 321538bf (docs: Add docs)
+=======
+  '@next/swc-linux-arm64-gnu@15.0.0-canary.46':
+    resolution: {integrity: sha512-zTBQLNLv4DJfHZWLN4fC7IaSH3OV1QYNeqix4XjrVVXJ/G1A0F49SaVvpUMOM/APOsPBKTOzukaAJ39q7PkJmQ==}
+>>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
@@ -2659,6 +2698,7 @@ packages:
     cpu: [arm64]
     os: [linux]
 
+<<<<<<< HEAD
   '@next/swc-linux-arm64-musl@15.0.0-canary.28':
     resolution: {integrity: sha512-WAlgyaifh6wg4dZgv4CRyXdvVVqSwY/xfdA+qdbf+Z3Sbs6FMO+etXhXqkwnujlpi3uiOEY9IizrwFlikCXt1A==}
     engines: {node: '>= 10'}
@@ -2668,6 +2708,10 @@ packages:
   '@next/swc-linux-arm64-musl@15.0.0-rc.0':
     resolution: {integrity: sha512-0kDnxM3AfrrHFJ/wTkjkv7cVHIaGwv+CzDg9lL2BoLEM4kMQhH20DTsBOMqpTpo1K2KCg67LuTGd3QOITT5uFQ==}
 >>>>>>> 321538bf (docs: Add docs)
+=======
+  '@next/swc-linux-arm64-musl@15.0.0-canary.46':
+    resolution: {integrity: sha512-cPvHRaMDg3bt2uaPpGvc5xIUGsUg9NbS++ujMxwKVuo0VPBmMzyXjn+g/bro7yQR3YM8bYrQiPi0Cy2rPMXMmg==}
+>>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
@@ -2688,6 +2732,7 @@ packages:
     cpu: [x64]
     os: [linux]
 
+<<<<<<< HEAD
   '@next/swc-linux-x64-gnu@15.0.0-canary.28':
     resolution: {integrity: sha512-F7w21iUF0YQB9CNEbp06mqOl/XPGtQpR69Jcu4fpcWdd7iKe2IxGJbfyNfmTAUf+S186kYQuSNgsNBPPPuEqxw==}
     engines: {node: '>= 10'}
@@ -2697,6 +2742,10 @@ packages:
   '@next/swc-linux-x64-gnu@15.0.0-rc.0':
     resolution: {integrity: sha512-fPMNahzqYFjm5h0ncJ5+F3NrShmWhpusM+zrQl01MMU0Ed5xsL4pJJDSuXV4wPkNUSjCP3XstTjxR5kBdO4juQ==}
 >>>>>>> 321538bf (docs: Add docs)
+=======
+  '@next/swc-linux-x64-gnu@15.0.0-canary.46':
+    resolution: {integrity: sha512-Snt1dijo+6cmgVs/6TsvNJyw71fE4yLSURQ931TA2SMU1r6nAWqdyOWqPFxRKbOAXqAknP5hdoBR/hnEbFwH5g==}
+>>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
@@ -2717,6 +2766,7 @@ packages:
     cpu: [x64]
     os: [linux]
 
+<<<<<<< HEAD
   '@next/swc-linux-x64-musl@15.0.0-canary.28':
     resolution: {integrity: sha512-YkrgRQu+f4Jb0kz7oO09lQlR6TqOV573ELV//yCmjl+Hc89rSTp3PDVScNnf5UWJgscDC1vX7fcByp/lA8E57A==}
     engines: {node: '>= 10'}
@@ -2726,6 +2776,10 @@ packages:
   '@next/swc-linux-x64-musl@15.0.0-rc.0':
     resolution: {integrity: sha512-7/FLgOqrrQAxOVQrxfr3bGgZ83pSCmc2S3TXBILnHw0S8qLxmFjhSjH5ogaDmjrES/PSYMaX1FsP5Af88hp7Gw==}
 >>>>>>> 321538bf (docs: Add docs)
+=======
+  '@next/swc-linux-x64-musl@15.0.0-canary.46':
+    resolution: {integrity: sha512-QEQA+r37Qw1+XhxqLt1Pk7ZMcHRUNMp1lmMmmo18kM16GfxGPu7tPT2XtQcObcvMeH0u6hYwwzzuVrB5BQo2HA==}
+>>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
@@ -2746,6 +2800,7 @@ packages:
     cpu: [arm64]
     os: [win32]
 
+<<<<<<< HEAD
   '@next/swc-win32-arm64-msvc@15.0.0-canary.28':
     resolution: {integrity: sha512-W/zMWyjyQIqTH6VitQs3YhkM4md1dcZyIVLEVUGj5QhsOl+/UW1qe2Y4YUKvQPnCbMcGu0Vk/dhiyIkv/B6OXg==}
     engines: {node: '>= 10'}
@@ -2755,6 +2810,10 @@ packages:
   '@next/swc-win32-arm64-msvc@15.0.0-rc.0':
     resolution: {integrity: sha512-5wcqoYHh7hbdghjH6Xs3i5/f0ov+i1Xw2E3O+BzZNESYVLgCM1q7KJu5gdGFoXA2gz5XaKF/VBcYHikLzyjgmA==}
 >>>>>>> 321538bf (docs: Add docs)
+=======
+  '@next/swc-win32-arm64-msvc@15.0.0-canary.46':
+    resolution: {integrity: sha512-0BxRw87UV98DLrfv3+1r9KY29tvcRZ8iKKKubY/N/d82RFUx3J9/BiSCcacX1yckPvKSDFRUP3ukKzarIuDpXA==}
+>>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [win32]
@@ -2775,6 +2834,7 @@ packages:
     cpu: [ia32]
     os: [win32]
 
+<<<<<<< HEAD
   '@next/swc-win32-ia32-msvc@15.0.0-canary.28':
     resolution: {integrity: sha512-JbxGVmHN0rdVp7l7qX/HkXM/rgehRiHExFaJza+7iCJv/yYoB+rMvSPJnuSNq+lNMEJUc4y/iQ8r0Bja8t7BkQ==}
     engines: {node: '>= 10'}
@@ -2784,6 +2844,10 @@ packages:
   '@next/swc-win32-ia32-msvc@15.0.0-rc.0':
     resolution: {integrity: sha512-/hqOmYRTvtBPToE4Dbl9n+sLYU7DPd52R+TtjIrrEzTMgFo2/d7un3sD7GKmb2OwOj/ExyGv6Bd/JzytBVxXlw==}
 >>>>>>> 321538bf (docs: Add docs)
+=======
+  '@next/swc-win32-ia32-msvc@15.0.0-canary.46':
+    resolution: {integrity: sha512-CHjNDxkjHQhx0d3Rrlld+V7M5VsYnE0IMasuWF7LiA4AwkKIeuOxrgMKfwGWLYq5Y3fZ8JyqWx/28qc9GTydqA==}
+>>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
     engines: {node: '>= 10'}
     cpu: [ia32]
     os: [win32]
@@ -2804,6 +2868,7 @@ packages:
     cpu: [x64]
     os: [win32]
 
+<<<<<<< HEAD
   '@next/swc-win32-x64-msvc@15.0.0-canary.28':
     resolution: {integrity: sha512-+MEW2d87/hOU8gM4Uw+iwCuWK1yAk6SbcQWByB0o4geEVJEK7j8J3agdjFlHZWiabhljyf2VYbfPu4Xj3nRmtA==}
     engines: {node: '>= 10'}
@@ -2813,6 +2878,10 @@ packages:
   '@next/swc-win32-x64-msvc@15.0.0-rc.0':
     resolution: {integrity: sha512-2Jly5nShvCUzzngP3RzdQ3JcuEcHcnIEvkvZDCXqFAK+bWks4+qOkEUO1QIAERQ99J5J9/1AN/8zFBme3Mm57A==}
 >>>>>>> 321538bf (docs: Add docs)
+=======
+  '@next/swc-win32-x64-msvc@15.0.0-canary.46':
+    resolution: {integrity: sha512-2Z+X4fMKFI6NXgS+1Sqe/hp+XkU1cbU9rJ9lJkdj0pmY/Q2Ch0438Vm2hx0SGw0u8H8oBonmQEEJJZotXa9kIA==}
+>>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [win32]
@@ -5120,8 +5189,8 @@ packages:
   axobject-query@3.1.1:
     resolution: {integrity: sha512-goKlv8DZrK9hUh975fnHzhNIO4jUnFCfv/dszV5VwUGDFjI6vQ2VwoyjYjYNEbBE8AH87TduWP5uyDR1D+Iteg==}
 
-  babel-plugin-react-compiler@0.0.0-experimental-938cd9a-20240601:
-    resolution: {integrity: sha512-t+uBHxbfxq2z4j83ZYgOsV0dlSaRgPfhrYB5+CMv6ByXUAv5wm7m7YLFx67fWKrG3eDhq3+KH1OMeFypuDLkUA==}
+  babel-plugin-react-compiler@0.0.0-experimental-696af53-20240625:
+    resolution: {integrity: sha512-OUDKms8qmcm5bX0D+sJWC1YcKcd7AZ2aJ7eY6gkR+Xr7PDfkXLbqAld4Qs9B0ntjVbUMEtW/PjlQrxDtY4raHg==}
 
   babel-plugin-syntax-trailing-function-commas@7.0.0-beta.0:
     resolution: {integrity: sha512-Xj9XuRuz3nTSbaTXWv3itLOcxyF4oPD8douBBmj7U9BBC6nEBYfyOJYQMf/8PJAFotC62UY5dFfIGEPr7WswzQ==}
@@ -6166,8 +6235,8 @@ packages:
     resolution: {integrity: sha512-/veY75JbMK4j1yjvuUxuVsiS/hr/4iHs9FTT6cgTexxdE0Ly/glccBAkloH/DofkjRbZU3bnoj38mOmhkZ0lHw==}
     engines: {node: '>=12'}
 
-  eslint-config-next@15.0.0-canary.44:
-    resolution: {integrity: sha512-bj15lUknbHqqLqrx0kr0u/SMlZvwcGcNJsOka7Xth4ZhsZBgxjmJm7NZSOt1KS/EQsvAIYPrDVQ5njglZGaTVg==}
+  eslint-config-next@15.0.0-canary.46:
+    resolution: {integrity: sha512-wzl1gh1pnCi6w2OvGXipdOyCPzERKHD5Yb0MvtptlDYJrGNXARFJf0SxVsoWWeFO59JfIJi48lSFmZY0wdn89Q==}
     peerDependencies:
       eslint: ^7.23.0 || ^8.0.0
       typescript: '>=3.3.1'
@@ -8043,10 +8112,16 @@ packages:
       sass:
         optional: true
 
+<<<<<<< HEAD
   next@15.0.0-canary.28:
     resolution: {integrity: sha512-l50RlkXP6wdQHs6ssjxQOpT3fooWq4pGAY31HcShAmJk+mrrYLqJwU/AwkATngPL0snykurINAqBHeASAG8LEQ==}
     engines: {node: '>=18.17.0', pnpm: 8.15.7}
 >>>>>>> 321538bf (docs: Add docs)
+=======
+  next@15.0.0-canary.46:
+    resolution: {integrity: sha512-m8raV39xX5v1JN20mA2olFQaglgWIHFo4WVIknrs11hQnW2A9sfYD5ULfYIGJu48eyBSVEMI8pf7VqDRrRZQKQ==}
+    engines: {node: '>=18.17.0'}
+>>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
     hasBin: true
     peerDependencies:
       '@opentelemetry/api': ^1.1.0
@@ -12144,7 +12219,7 @@ snapshots:
     optionalDependencies:
       express: 4.19.2
 
-  '@next/bundle-analyzer@15.0.0-canary.44':
+  '@next/bundle-analyzer@15.0.0-canary.46':
     dependencies:
       webpack-bundle-analyzer: 4.10.1
     transitivePeerDependencies:
@@ -12158,10 +12233,14 @@ snapshots:
 =======
   '@next/env@14.2.4': {}
 
+<<<<<<< HEAD
   '@next/env@15.0.0-canary.28': {}
 >>>>>>> 321538bf (docs: Add docs)
+=======
+  '@next/env@15.0.0-canary.46': {}
+>>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
 
-  '@next/eslint-plugin-next@15.0.0-canary.44':
+  '@next/eslint-plugin-next@15.0.0-canary.46':
     dependencies:
       glob: 10.3.10
 
@@ -12174,11 +12253,15 @@ snapshots:
   '@next/swc-darwin-arm64@14.2.4':
     optional: true
 
+<<<<<<< HEAD
   '@next/swc-darwin-arm64@15.0.0-canary.28':
     optional: true
 
   '@next/swc-darwin-arm64@15.0.0-rc.0':
 >>>>>>> 321538bf (docs: Add docs)
+=======
+  '@next/swc-darwin-arm64@15.0.0-canary.46':
+>>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
     optional: true
 
   '@next/swc-darwin-x64@14.1.4':
@@ -12190,11 +12273,15 @@ snapshots:
   '@next/swc-darwin-x64@14.2.4':
     optional: true
 
+<<<<<<< HEAD
   '@next/swc-darwin-x64@15.0.0-canary.28':
     optional: true
 
   '@next/swc-darwin-x64@15.0.0-rc.0':
 >>>>>>> 321538bf (docs: Add docs)
+=======
+  '@next/swc-darwin-x64@15.0.0-canary.46':
+>>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
     optional: true
 
   '@next/swc-linux-arm64-gnu@14.1.4':
@@ -12206,11 +12293,15 @@ snapshots:
   '@next/swc-linux-arm64-gnu@14.2.4':
     optional: true
 
+<<<<<<< HEAD
   '@next/swc-linux-arm64-gnu@15.0.0-canary.28':
     optional: true
 
   '@next/swc-linux-arm64-gnu@15.0.0-rc.0':
 >>>>>>> 321538bf (docs: Add docs)
+=======
+  '@next/swc-linux-arm64-gnu@15.0.0-canary.46':
+>>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
     optional: true
 
   '@next/swc-linux-arm64-musl@14.1.4':
@@ -12222,11 +12313,15 @@ snapshots:
   '@next/swc-linux-arm64-musl@14.2.4':
     optional: true
 
+<<<<<<< HEAD
   '@next/swc-linux-arm64-musl@15.0.0-canary.28':
     optional: true
 
   '@next/swc-linux-arm64-musl@15.0.0-rc.0':
 >>>>>>> 321538bf (docs: Add docs)
+=======
+  '@next/swc-linux-arm64-musl@15.0.0-canary.46':
+>>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
     optional: true
 
   '@next/swc-linux-x64-gnu@14.1.4':
@@ -12238,11 +12333,15 @@ snapshots:
   '@next/swc-linux-x64-gnu@14.2.4':
     optional: true
 
+<<<<<<< HEAD
   '@next/swc-linux-x64-gnu@15.0.0-canary.28':
     optional: true
 
   '@next/swc-linux-x64-gnu@15.0.0-rc.0':
 >>>>>>> 321538bf (docs: Add docs)
+=======
+  '@next/swc-linux-x64-gnu@15.0.0-canary.46':
+>>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
     optional: true
 
   '@next/swc-linux-x64-musl@14.1.4':
@@ -12254,11 +12353,15 @@ snapshots:
   '@next/swc-linux-x64-musl@14.2.4':
     optional: true
 
+<<<<<<< HEAD
   '@next/swc-linux-x64-musl@15.0.0-canary.28':
     optional: true
 
   '@next/swc-linux-x64-musl@15.0.0-rc.0':
 >>>>>>> 321538bf (docs: Add docs)
+=======
+  '@next/swc-linux-x64-musl@15.0.0-canary.46':
+>>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
     optional: true
 
   '@next/swc-win32-arm64-msvc@14.1.4':
@@ -12270,11 +12373,15 @@ snapshots:
   '@next/swc-win32-arm64-msvc@14.2.4':
     optional: true
 
+<<<<<<< HEAD
   '@next/swc-win32-arm64-msvc@15.0.0-canary.28':
     optional: true
 
   '@next/swc-win32-arm64-msvc@15.0.0-rc.0':
 >>>>>>> 321538bf (docs: Add docs)
+=======
+  '@next/swc-win32-arm64-msvc@15.0.0-canary.46':
+>>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
     optional: true
 
   '@next/swc-win32-ia32-msvc@14.1.4':
@@ -12286,11 +12393,15 @@ snapshots:
   '@next/swc-win32-ia32-msvc@14.2.4':
     optional: true
 
+<<<<<<< HEAD
   '@next/swc-win32-ia32-msvc@15.0.0-canary.28':
     optional: true
 
   '@next/swc-win32-ia32-msvc@15.0.0-rc.0':
 >>>>>>> 321538bf (docs: Add docs)
+=======
+  '@next/swc-win32-ia32-msvc@15.0.0-canary.46':
+>>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
     optional: true
 
   '@next/swc-win32-x64-msvc@14.1.4':
@@ -12302,11 +12413,15 @@ snapshots:
   '@next/swc-win32-x64-msvc@14.2.4':
     optional: true
 
+<<<<<<< HEAD
   '@next/swc-win32-x64-msvc@15.0.0-canary.28':
     optional: true
 
   '@next/swc-win32-x64-msvc@15.0.0-rc.0':
 >>>>>>> 321538bf (docs: Add docs)
+=======
+  '@next/swc-win32-x64-msvc@15.0.0-canary.46':
+>>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
     optional: true
 
   '@nodelib/fs.scandir@2.1.5':
@@ -15352,7 +15467,7 @@ snapshots:
     dependencies:
       deep-equal: 2.2.3
 
-  babel-plugin-react-compiler@0.0.0-experimental-938cd9a-20240601:
+  babel-plugin-react-compiler@0.0.0-experimental-696af53-20240625:
     dependencies:
       '@babel/generator': 7.2.0
       '@babel/types': 7.24.7
@@ -16565,9 +16680,9 @@ snapshots:
 
   escape-string-regexp@5.0.0: {}
 
-  eslint-config-next@15.0.0-canary.44(eslint@8.57.0)(typescript@5.5.2):
+  eslint-config-next@15.0.0-canary.46(eslint@8.57.0)(typescript@5.5.2):
     dependencies:
-      '@next/eslint-plugin-next': 15.0.0-canary.44
+      '@next/eslint-plugin-next': 15.0.0-canary.46
       '@rushstack/eslint-patch': 1.10.3
       '@typescript-eslint/parser': 7.2.0(eslint@8.57.0)(typescript@5.5.2)
       eslint: 8.57.0
@@ -16575,11 +16690,15 @@ snapshots:
 <<<<<<< HEAD
 <<<<<<< HEAD
       eslint-import-resolver-typescript: 3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0)
+<<<<<<< HEAD
       eslint-plugin-import: 2.29.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0))(eslint@8.57.0)
 =======
       eslint-import-resolver-typescript: 3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1)(eslint@8.57.0)
       eslint-plugin-import: 2.29.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.0)
 >>>>>>> 321538bf (docs: Add docs)
+=======
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.0)
+>>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
       eslint-plugin-jsx-a11y: 6.9.0(eslint@8.57.0)
       eslint-plugin-react: 7.34.3(eslint@8.57.0)
 =======
@@ -16636,6 +16755,7 @@ snapshots:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       eslint-plugin-import: 2.29.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0))(eslint@8.57.0)
 =======
       eslint-module-utils: 2.8.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1)(eslint@8.57.0))(eslint@8.57.0)
@@ -16657,6 +16777,9 @@ snapshots:
       eslint-module-utils: 2.8.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1)(eslint@8.57.0))(eslint@8.57.0)
       eslint-plugin-import: 2.29.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.0)
 >>>>>>> 321538bf (docs: Add docs)
+=======
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.0)
+>>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
       fast-glob: 3.3.2
       get-tsconfig: 4.7.5
       is-core-module: 2.14.0
@@ -17373,9 +17496,9 @@ snapshots:
       strip-ansi: 6.0.1
       wide-align: 1.1.5
 
-  geist@1.3.0(next@15.0.0-canary.44(babel-plugin-react-compiler@0.0.0-experimental-938cd9a-20240601)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)):
+  geist@1.3.0(next@15.0.0-canary.46(babel-plugin-react-compiler@0.0.0-experimental-696af53-20240625)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)):
     dependencies:
-      next: 15.0.0-canary.44(babel-plugin-react-compiler@0.0.0-experimental-938cd9a-20240601)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
+      next: 15.0.0-canary.46(babel-plugin-react-compiler@0.0.0-experimental-696af53-20240625)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
 
   gensync@1.0.0-beta.2: {}
 
@@ -19050,6 +19173,7 @@ snapshots:
 
   neo-async@2.6.2: {}
 
+<<<<<<< HEAD
   next-intl@3.15.2(next@15.0.0-canary.44(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0):
     dependencies:
       '@formatjs/intl-localematcher': 0.2.32
@@ -19059,10 +19183,13 @@ snapshots:
       use-intl: 3.15.2(react@19.0.0-rc.0)
 
   next-intl@3.15.2(next@15.0.0-canary.44(babel-plugin-react-compiler@0.0.0-experimental-938cd9a-20240601)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0):
+=======
+  next-intl@3.15.2(next@15.0.0-canary.46(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0):
+>>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
     dependencies:
       '@formatjs/intl-localematcher': 0.2.32
       negotiator: 0.6.3
-      next: 15.0.0-canary.44(babel-plugin-react-compiler@0.0.0-experimental-938cd9a-20240601)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
+      next: 15.0.0-canary.46(babel-plugin-react-compiler@0.0.0-experimental-696af53-20240625)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
       react: 19.0.0-rc.0
       use-intl: 3.15.2(react@19.0.0-rc.0)
 
@@ -19147,6 +19274,7 @@ snapshots:
       - '@babel/core'
       - babel-plugin-macros
 
+<<<<<<< HEAD
   next@15.0.0-canary.28(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0):
 >>>>>>> 321538bf (docs: Add docs)
     dependencies:
@@ -19175,8 +19303,11 @@ snapshots:
       - babel-plugin-macros
 
   next@15.0.0-canary.44(babel-plugin-react-compiler@0.0.0-experimental-938cd9a-20240601)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0):
+=======
+  next@15.0.0-canary.46(babel-plugin-react-compiler@0.0.0-experimental-696af53-20240625)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0):
+>>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
     dependencies:
-      '@next/env': 15.0.0-canary.44
+      '@next/env': 15.0.0-canary.46
       '@swc/helpers': 0.5.11
       busboy: 1.6.0
       caniuse-lite: 1.0.30001636
@@ -19186,24 +19317,30 @@ snapshots:
       react-dom: 19.0.0-rc.0(react@19.0.0-rc.0)
       styled-jsx: 5.1.6(@babel/core@7.24.7)(react@19.0.0-rc.0)
     optionalDependencies:
-      '@next/swc-darwin-arm64': 15.0.0-canary.44
-      '@next/swc-darwin-x64': 15.0.0-canary.44
-      '@next/swc-linux-arm64-gnu': 15.0.0-canary.44
-      '@next/swc-linux-arm64-musl': 15.0.0-canary.44
-      '@next/swc-linux-x64-gnu': 15.0.0-canary.44
-      '@next/swc-linux-x64-musl': 15.0.0-canary.44
-      '@next/swc-win32-arm64-msvc': 15.0.0-canary.44
-      '@next/swc-win32-ia32-msvc': 15.0.0-canary.44
-      '@next/swc-win32-x64-msvc': 15.0.0-canary.44
-      babel-plugin-react-compiler: 0.0.0-experimental-938cd9a-20240601
+      '@next/swc-darwin-arm64': 15.0.0-canary.46
+      '@next/swc-darwin-x64': 15.0.0-canary.46
+      '@next/swc-linux-arm64-gnu': 15.0.0-canary.46
+      '@next/swc-linux-arm64-musl': 15.0.0-canary.46
+      '@next/swc-linux-x64-gnu': 15.0.0-canary.46
+      '@next/swc-linux-x64-musl': 15.0.0-canary.46
+      '@next/swc-win32-arm64-msvc': 15.0.0-canary.46
+      '@next/swc-win32-ia32-msvc': 15.0.0-canary.46
+      '@next/swc-win32-x64-msvc': 15.0.0-canary.46
+      babel-plugin-react-compiler: 0.0.0-experimental-696af53-20240625
       sharp: 0.33.4
     transitivePeerDependencies:
       - '@babel/core'
       - babel-plugin-macros
 
+<<<<<<< HEAD
   nextjs-toploader@1.6.12(next@15.0.0-canary.44(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0):
     dependencies:
       next: 15.0.0-canary.44(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
+=======
+  nextjs-toploader@1.6.12(next@15.0.0-canary.46(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0):
+    dependencies:
+      next: 15.0.0-canary.46(babel-plugin-react-compiler@0.0.0-experimental-696af53-20240625)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
+>>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
       nprogress: 0.2.0
       prop-types: 15.8.1
       react: 19.0.0-rc.0
