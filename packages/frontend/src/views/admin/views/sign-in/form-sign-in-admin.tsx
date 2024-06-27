@@ -2,6 +2,8 @@
 
 import { useTranslations } from 'next-intl';
 import { AlertCircle } from 'lucide-react';
+
+import { useSignInAdminView } from '../../../../hooks/core/sign/in/use-sign-in-admin-view';
 import {
   Form,
   FormControl,
@@ -9,16 +11,15 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from 'vitnode-frontend/components/ui/form';
-import { Button } from 'vitnode-frontend/components/ui/button';
-import { Input } from 'vitnode-frontend/components/ui/input';
-import { CardContent, CardFooter } from 'vitnode-frontend/components/ui/card';
+} from '../../../../components/ui/form';
+import { CardContent, CardFooter } from '../../../../components/ui/card';
 import {
   Alert,
   AlertDescription,
   AlertTitle,
-} from 'vitnode-frontend/components/ui/alert';
-import { useSignInAdminView } from 'vitnode-frontend/hooks/core/sign/in/use-sign-in-admin-view';
+} from '../../../../components/ui/alert';
+import { Input } from '../../../../components/ui/input';
+import { Button } from '../../../../components/ui/button';
 
 export const FormSignInAdmin = () => {
   const t = useTranslations('core');

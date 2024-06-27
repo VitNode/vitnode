@@ -1608,14 +1608,6 @@ export type Core_Languages__ShowQueryVariables = Exact<{
 
 export type Core_Languages__ShowQuery = { __typename?: 'Query', core_languages__show: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', code: string, default: boolean, allow_in_input: boolean, enabled: boolean, id: number, name: string, protected: boolean, timezone: string, locale: string, time_24: boolean, updated: Date, created: Date }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
 
-export type Core_Members__ProfilesQueryVariables = Exact<{
-  first?: InputMaybe<Scalars['Int']['input']>;
-  nameSeo: Scalars['String']['input'];
-}>;
-
-
-export type Core_Members__ProfilesQuery = { __typename?: 'Query', core_members__show: { __typename?: 'ShowCoreMembersObj', edges: Array<{ __typename?: 'ShowCoreMembers', avatar_color: string, id: number, joined: Date, name: string, name_seo: string, posts: number, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, file_name: string } | null, group: { __typename?: 'GroupUser', name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } }> } };
-
 
 export const Admin__Core_Files__Delete = gql`
     mutation Admin__core_files__delete($id: Int!) {
@@ -2641,31 +2633,6 @@ export const Core_Languages__Show = gql`
       hasPreviousPage
       startCursor
       totalCount
-    }
-  }
-}
-    `;
-export const Core_Members__Profiles = gql`
-    query Core_members__profiles($first: Int, $nameSeo: String!) {
-  core_members__show(first: $first, name_seo: $nameSeo) {
-    edges {
-      avatar_color
-      avatar {
-        id
-        dir_folder
-        file_name
-      }
-      group {
-        name {
-          language_code
-          value
-        }
-      }
-      id
-      joined
-      name
-      name_seo
-      posts
     }
   }
 }
