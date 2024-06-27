@@ -1164,6 +1164,16 @@ export type Core_Editor_Files__UploadMutationVariables = Exact<{
 
 export type Core_Editor_Files__UploadMutation = { __typename?: 'Mutation', core_editor_files__upload: { __typename?: 'ShowCoreFiles', extension: string, file_name: string, file_size: number, mimetype: string, id: number, height?: number | null, width?: number | null, dir_folder: string, security_key?: string | null, file_alt?: string | null, file_name_original: string } };
 
+export type Core_Members__Sign_UpMutationVariables = Exact<{
+  email: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  password: Scalars['String']['input'];
+  newsletter?: InputMaybe<Scalars['Boolean']['input']>;
+}>;
+
+
+export type Core_Members__Sign_UpMutation = { __typename?: 'Mutation', core_members__sign_up: { __typename?: 'SignUpCoreMembersObj', email: string, name: string, newsletter?: boolean | null } };
+
 export type Core_Sessions__Sign_InMutationVariables = Exact<{
   email: Scalars['String']['input'];
   password: Scalars['String']['input'];
@@ -1230,6 +1240,20 @@ export const Core_Editor_Files__Upload = gql`
     security_key
     file_alt
     file_name_original
+  }
+}
+    `;
+export const Core_Members__Sign_Up = gql`
+    mutation Core_members__sign_up($email: String!, $name: String!, $password: String!, $newsletter: Boolean) {
+  core_members__sign_up(
+    email: $email
+    name: $name
+    password: $password
+    newsletter: $newsletter
+  ) {
+    email
+    name
+    newsletter
   }
 }
     `;

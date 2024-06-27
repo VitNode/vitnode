@@ -16,8 +16,7 @@ import { Button } from 'vitnode-frontend/components/ui/button';
 import { Input } from 'vitnode-frontend/components/ui/input';
 import { Checkbox } from 'vitnode-frontend/components/ui/checkbox';
 import { Progress } from 'vitnode-frontend/components/ui/progress';
-
-import { useSignUpView } from '@/plugins/core/hooks/sign/up/use-sign-up-view';
+import { useSignUpView } from 'vitnode-frontend/hooks/core/sign/up/use-sign-up-view';
 
 import { useInstallVitnode } from '../../hooks/use-install-vitnode';
 

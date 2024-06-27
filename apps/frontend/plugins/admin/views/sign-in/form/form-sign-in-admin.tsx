@@ -18,8 +18,7 @@ import {
   AlertDescription,
   AlertTitle,
 } from 'vitnode-frontend/components/ui/alert';
-
-import { useSignInAdminView } from '../hooks/use-sign-in-admin-view';
+import { useSignInAdminView } from 'vitnode-frontend/hooks/core/sign/in/use-sign-in-admin-view';
 
 export const FormSignInAdmin = () => {
   const t = useTranslations('core');

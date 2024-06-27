@@ -1,13 +1,14 @@
 import { useTranslations } from 'next-intl';
-import { Link } from 'vitnode-frontend/navigation';
+
+import { FormSignUp } from './form/form-sign-up';
+
 import {
   Card,
   CardDescription,
   CardHeader,
   CardTitle,
-} from 'vitnode-frontend/components/ui/card';
-
-import { FormSignUp } from './form/form-sign-up';
+} from '../../../../../../components/ui/card';
+import { Link } from '../../../../../../navigation';
 
 export const SignUpView = () => {
   const t = useTranslations('core.sign_up');
