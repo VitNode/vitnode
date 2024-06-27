@@ -1,4 +1,4 @@
-import { ErrorView } from '@/plugins/core/templates/views/global/error/error-view';
+import { ErrorView } from 'vitnode-frontend/theme-tsx/error/error-view';
 
 export default function NotFoundPage() {
   return (

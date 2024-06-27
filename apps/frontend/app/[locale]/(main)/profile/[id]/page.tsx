@@ -1,9 +1,11 @@
 import { Metadata } from 'next';
-import { notFound } from 'next/navigation';
 import * as React from 'react';
 import { fetcher } from 'vitnode-frontend/graphql/fetcher';
+import {
+  ProfileView,
+  ProfileViewProps,
+} from 'vitnode-frontend/theme-tsx/profile/profile-view';
 
-import { ProfileView } from '@/plugins/core/templates/views/profile/profile-view';
 import {
   Core_Members__Profiles,
   Core_Members__ProfilesQuery,
@@ -42,12 +44,6 @@ export async function generateMetadata({
   };
 }
 
-export default async function Page({ params: { id } }: Props) {
-  const data = await getData({ id });
-
-  if (data.core_members__show.edges.length === 0) {
-    notFound();
-  }
-
-  return <ProfileView data={data} />;
+export default async function Page(params: ProfileViewProps) {
+  return <ProfileView {...params} />;
 }

@@ -1,7 +1,6 @@
 import * as React from 'react';
+import { NotificationsSettingsView } from 'vitnode-frontend/theme-tsx/settings/views/notifications/notifications-settings-view';
 
-import { NotificationsSettingsView } from '@/plugins/core/templates/views/settings/views/notifications/notifications-settings-view';
-
-export default async function Page() {
+export default function Page() {
   return <NotificationsSettingsView />;
 }
