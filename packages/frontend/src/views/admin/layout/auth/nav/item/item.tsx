@@ -1,7 +1,8 @@
 import { useTranslations } from 'next-intl';
-import { Icon } from 'vitnode-frontend/components/icon/icon';
 
 import { ItemItemNavAdminProps, LinkItemNavAdmin } from './link';
+
+import { Icon } from '../../../../../../components/icon/icon';
 
 interface Props {
   id: string;
@@ -10,8 +11,8 @@ interface Props {
 }
 
 export const ItemNavAdmin = ({ id, items }: Props) => {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-expect-error
+  // eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error, @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   const t = useTranslations(`${id}.admin`);
 
   return (

@@ -4,19 +4,20 @@ import { Home, LogOut } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 import * as React from 'react';
-import { Button } from 'vitnode-frontend/components/ui/button';
-import { Separator } from 'vitnode-frontend/components/ui/separator';
+
+import { ItemUserBarAdmin } from './item-user-bar-admin';
+import { mutationApi } from './hooks/mutation-api';
+
+import { useSessionAdmin } from '../../../../../../hooks/use-session-admin';
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTrigger,
-} from 'vitnode-frontend/components/ui/sheet';
-import { useSessionAdmin } from 'vitnode-frontend/hooks/use-session-admin';
-import { AvatarUser } from 'vitnode-frontend/components/ui/user/avatar';
-
-import { ItemUserBarAdmin } from './item-user-bar-admin';
-import { mutationApi } from './mutation-api';
+} from '../../../../../../components/ui/sheet';
+import { Button } from '../../../../../../components/ui/button';
+import { AvatarUser } from '../../../../../../components/ui/user/avatar';
+import { Separator } from '../../../../../../components/ui/separator';
 
 interface Props {
   navComponent: React.ReactNode;

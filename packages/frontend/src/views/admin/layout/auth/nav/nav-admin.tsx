@@ -1,7 +1,7 @@
-import { getSessionAdminData } from 'vitnode-frontend/graphql/get-session-admin';
-
 import { ItemNavAdmin } from './item/item';
 import { NavAdminWrapper } from './wrapper';
+
+import { getSessionAdminData } from '../../../../../graphql/get-session-admin';
 
 export const NavAdmin = async () => {
   const data = await getSessionAdminData();

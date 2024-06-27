@@ -1147,6 +1147,11 @@ export type User = {
 
 export type UserOrGroupCoreStaffUnion = StaffGroupUser | User;
 
+export type Admin_Sessions__Sign_OutMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Admin_Sessions__Sign_OutMutation = { __typename?: 'Mutation', admin_sessions__sign_out: string };
+
 export type Core_Editor_Files__DeleteMutationVariables = Exact<{
   id: Scalars['Int']['input'];
   securityKey?: InputMaybe<Scalars['String']['input']>;
@@ -1267,6 +1272,11 @@ export type Core_Members__Show__SearchQueryVariables = Exact<{
 export type Core_Members__Show__SearchQuery = { __typename?: 'Query', core_members__show: { __typename?: 'ShowCoreMembersObj', edges: Array<{ __typename?: 'ShowCoreMembers', avatar_color: string, id: number, name: string, name_seo: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, file_name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } }> } };
 
 
+export const Admin_Sessions__Sign_Out = gql`
+    mutation Admin_sessions__sign_out {
+  admin_sessions__sign_out
+}
+    `;
 export const Core_Editor_Files__Delete = gql`
     mutation Core_editor_files__delete($id: Int!, $securityKey: String) {
   core_editor_files__delete(id: $id, security_key: $securityKey)

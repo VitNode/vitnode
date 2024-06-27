@@ -1,11 +1,11 @@
-import { Link } from 'vitnode-frontend/navigation';
-import { LogoVitNode } from 'vitnode-frontend/components/logo-vitnode';
-import { CONFIG } from 'vitnode-frontend/helpers/config-with-env';
-import { ThemeSwitcher } from 'vitnode-frontend/components/switchers/theme-switcher';
-import { LanguageSwitcher } from 'vitnode-frontend/components/switchers/language-switcher';
-
 import { UserBarAdmin } from './user-bar/user-bar-admin';
 import { NavAdmin } from '../nav/nav-admin';
+
+import { CONFIG } from '../../../../../helpers/config-with-env';
+import { Link } from '../../../../../navigation';
+import { LogoVitNode } from '../../../../../components/logo-vitnode';
+import { LanguageSwitcher } from '../../../../../components/switchers/language-switcher';
+import { ThemeSwitcher } from '../../../../../components/switchers/theme-switcher';
 
 export const HeaderAdmin = () => {
   return (
