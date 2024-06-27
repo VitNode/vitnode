@@ -2,17 +2,17 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
-import { Button } from 'vitnode-frontend/components/ui/button';
-import { Checkbox } from 'vitnode-frontend/components/ui/checkbox';
+
+import { useInstallVitnode } from '../../hooks/use-install-vitnode';
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormLabel,
-} from 'vitnode-frontend/components/ui/form';
-
-import { useInstallVitnode } from '../../hooks/use-install-vitnode';
+} from '../../../../../../../components/ui/form';
+import { Checkbox } from '../../../../../../../components/ui/checkbox';
+import { Button } from '../../../../../../../components/ui/button';
 
 export const FormLicenseInstallConfigs = () => {
   const tCore = useTranslations('core');

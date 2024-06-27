@@ -1,27 +1,28 @@
 'use client';
 
 import * as React from 'react';
+
+import { WelcomeInstallConfigsView } from './steps/welcome';
+import { InstallVitNodeContext } from './hooks/use-install-vitnode';
+import { LicenseInstallConfigsView } from './steps/license/license-install-configs-view';
+import { DatabaseInstallConfigsView } from './steps/database/database-install-configs-view';
+import { AccountInstallConfigsView } from './steps/account/account-install-configs-view';
+import { FinishInstallConfigsView } from './finish/finish-install-config-view';
+
+import { LayoutAdminInstallEnum } from '../../../../../graphql/code';
+import { ItemStepProps, Steps } from '../../../../../components/ui/steps';
 import {
   Card,
   CardDescription,
   CardHeader,
   CardTitle,
-} from 'vitnode-frontend/components/ui/card';
-import { Steps, ItemStepProps } from 'vitnode-frontend/components/ui/steps';
-
-import { InstallConfigsView } from './steps/install-configs-view';
-import { InstallVitNodeContext } from './hooks/use-install-vitnode';
-import { LicenseInstallConfigsView } from './steps/license/license-install-configs-view';
-import { DatabaseInstallConfigsView } from './steps/database/database-install-configs-view';
-import { AccountInstallConfigsView } from './steps/account/account-install-configs-view';
-import { LayoutAdminInstallEnum } from '@/graphql/hooks';
-import { FinishInstallConfigsView } from './finish/finish-install-config-view';
+} from '../../../../../components/ui/card';
 
 interface Props {
   data: LayoutAdminInstallEnum;
 }
 
-export const LayoutInstallConfigsView = ({ data }: Props) => {
+export const ContentInstallConfigsView = ({ data }: Props) => {
   const [currentStep, setCurrentStep] = React.useState(0);
 
   const items: ItemStepProps[] = [
@@ -30,7 +31,7 @@ export const LayoutInstallConfigsView = ({ data }: Props) => {
       title: 'Welcome',
       description: 'Before you begin...',
       checked: currentStep >= 1,
-      component: <InstallConfigsView />,
+      component: <WelcomeInstallConfigsView />,
     },
     {
       id: 'license',

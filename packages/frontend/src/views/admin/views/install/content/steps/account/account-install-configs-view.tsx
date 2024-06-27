@@ -2,7 +2,9 @@
 
 import { useTranslations } from 'next-intl';
 import { removeSpecialCharacters } from 'vitnode-shared';
-import { CardContent, CardFooter } from 'vitnode-frontend/components/ui/card';
+
+import { useInstallVitnode } from '../../hooks/use-install-vitnode';
+import { useSignUpView } from '../../../../../../../hooks/core/sign/up/use-sign-up-view';
 import {
   Form,
   FormControl,
@@ -11,14 +13,15 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from 'vitnode-frontend/components/ui/form';
-import { Button } from 'vitnode-frontend/components/ui/button';
-import { Input } from 'vitnode-frontend/components/ui/input';
-import { Checkbox } from 'vitnode-frontend/components/ui/checkbox';
-import { Progress } from 'vitnode-frontend/components/ui/progress';
-import { useSignUpView } from 'vitnode-frontend/hooks/core/sign/up/use-sign-up-view';
-
-import { useInstallVitnode } from '../../hooks/use-install-vitnode';
+} from '../../../../../../../components/ui/form';
+import {
+  CardContent,
+  CardFooter,
+} from '../../../../../../../components/ui/card';
+import { Input } from '../../../../../../../components/ui/input';
+import { Progress } from '../../../../../../../components/ui/progress';
+import { Checkbox } from '../../../../../../../components/ui/checkbox';
+import { Button } from '../../../../../../../components/ui/button';
 
 export const AccountInstallConfigsView = () => {
   const t = useTranslations('core');

@@ -1164,6 +1164,11 @@ export type Core_Editor_Files__UploadMutationVariables = Exact<{
 
 export type Core_Editor_Files__UploadMutation = { __typename?: 'Mutation', core_editor_files__upload: { __typename?: 'ShowCoreFiles', extension: string, file_name: string, file_size: number, mimetype: string, id: number, height?: number | null, width?: number | null, dir_folder: string, security_key?: string | null, file_alt?: string | null, file_name_original: string } };
 
+export type Admin__Install__Create_DatabaseMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Admin__Install__Create_DatabaseMutation = { __typename?: 'Mutation', admin__install__create_database: string };
+
 export type Core_Members__Sign_UpMutationVariables = Exact<{
   email: Scalars['String']['input'];
   name: Scalars['String']['input'];
@@ -1201,6 +1206,11 @@ export type Admin__Core_Groups__Show_ShortQueryVariables = Exact<{
 
 
 export type Admin__Core_Groups__Show_ShortQuery = { __typename?: 'Query', admin__core_groups__show: { __typename?: 'ShowAdminGroupsObj', edges: Array<{ __typename?: 'ShowAdminGroups', id: number, guest: boolean, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }> } };
+
+export type Admin__Install__LayoutQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Admin__Install__LayoutQuery = { __typename?: 'Query', admin__install__layout: { __typename?: 'LayoutAdminInstallObj', status: LayoutAdminInstallEnum } };
 
 export type Core_MiddlewareQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1241,6 +1251,11 @@ export const Core_Editor_Files__Upload = gql`
     file_alt
     file_name_original
   }
+}
+    `;
+export const Admin__Install__Create_Database = gql`
+    mutation Admin__install__create_database {
+  admin__install__create_database
 }
     `;
 export const Core_Members__Sign_Up = gql`
@@ -1324,6 +1339,13 @@ export const Admin__Core_Groups__Show_Short = gql`
       }
       guest
     }
+  }
+}
+    `;
+export const Admin__Install__Layout = gql`
+    query Admin__install__layout {
+  admin__install__layout {
+    status
   }
 }
     `;

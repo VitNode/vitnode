@@ -15,6 +15,7 @@ import {
   CardHeader,
 } from '../../../components/ui/card';
 import { Button } from '../../../components/ui/button';
+import '../../admin/layout/global.css';
 
 interface Props {
   showPoweredBy?: boolean;

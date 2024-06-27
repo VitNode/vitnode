@@ -25,7 +25,7 @@ export const generateMetadataForRootLayout = async ({
   const config = await getConfigFile();
   const defaultTitle = config.settings.general.site_name;
 
-  return {
+  const metadata: Metadata = {
     manifest: `${CONFIG.backend_public_url}/assets/${locale}/manifest.webmanifest`,
     title: {
       default: defaultTitle,
@@ -35,6 +35,18 @@ export const generateMetadataForRootLayout = async ({
       icon: '/icons/favicon.ico',
     },
   };
+
+  try {
+    await getMiddlewareData();
+
+    return metadata;
+  } catch (e) {
+    return {
+      ...metadata,
+      title: `Error 500 - ${defaultTitle}`,
+      robots: 'noindex, nofollow',
+    };
+  }
 };
 
 const getMiddlewareData = async () => {
