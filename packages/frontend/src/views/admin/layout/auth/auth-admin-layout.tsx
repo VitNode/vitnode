@@ -3,11 +3,11 @@ import * as React from 'react';
 import { NavAdmin } from './nav/nav-admin';
 import { HeaderAdmin } from './header/header-admin';
 
-interface Props {
+export interface AuthAdminLayoutProps {
   children: React.ReactNode;
 }
 
-export const AdminLayout = ({ children }: Props) => {
+export const AuthAdminLayout = ({ children }: AuthAdminLayoutProps) => {
   return (
     <>
       <HeaderAdmin />

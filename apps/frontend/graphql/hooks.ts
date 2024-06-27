@@ -1395,11 +1395,6 @@ export type Admin__Core_Plugins__Nav__EditMutationVariables = Exact<{
 
 export type Admin__Core_Plugins__Nav__EditMutation = { __typename?: 'Mutation', admin__core_plugins__nav__edit: { __typename?: 'ShowAdminNavPluginsObj', code: string } };
 
-export type Admin_Sessions__Sign_OutMutationVariables = Exact<{ [key: string]: never; }>;
-
-
-export type Admin_Sessions__Sign_OutMutation = { __typename?: 'Mutation', admin_sessions__sign_out: string };
-
 export type Admin__Core_Main_Settings__EditMutationVariables = Exact<{
   siteName: Scalars['String']['input'];
   siteShortName: Scalars['String']['input'];
@@ -1879,11 +1874,6 @@ export const Admin__Core_Plugins__Nav__Edit = gql`
   ) {
     code
   }
-}
-    `;
-export const Admin_Sessions__Sign_Out = gql`
-    mutation Admin_sessions__sign_out {
-  admin_sessions__sign_out
 }
     `;
 export const Admin__Core_Main_Settings__Edit = gql`

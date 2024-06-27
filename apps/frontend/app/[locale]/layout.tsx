@@ -5,7 +5,7 @@ import {
   RootLayout,
   RootLayoutProps,
   generateMetadataForRootLayout,
-} from 'vitnode-frontend/views/root-layout';
+} from 'vitnode-frontend/views/layout/root-layout';
 
 export async function generateMetadata(
   props: RootLayoutProps,

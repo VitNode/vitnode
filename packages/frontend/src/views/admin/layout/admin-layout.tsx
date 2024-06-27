@@ -6,7 +6,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-export const AdminCPLayout = async ({ children }: Props) => {
+export const AdminLayout = async ({ children }: Props) => {
   try {
     const data = await getSessionAdminData();
 
