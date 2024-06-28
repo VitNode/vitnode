@@ -266,6 +266,7 @@ importers:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         version: 1.0.7(tailwindcss@3.4.4(ts-node@10.9.2(@types/node@20.14.2)(typescript@5.4.5)))
     devDependencies:
       '@types/mdx':
@@ -284,6 +285,9 @@ importers:
 =======
         version: 1.0.7(tailwindcss@3.4.4(ts-node@10.9.2(@swc/core@1.6.5)(@types/node@20.14.8)(typescript@5.5.2)))
 >>>>>>> 0ab072cd (refactor(backend): Restore paths)
+=======
+        version: 1.0.7(tailwindcss@3.4.4(ts-node@10.9.2(@types/node@20.14.8)(typescript@5.5.2)))
+>>>>>>> f973ba0f (perf(frontend): Move plugins pages admin to package)
     devDependencies:
       '@types/node':
         specifier: ^20.12.12
@@ -317,7 +321,7 @@ importers:
         version: 3.3.2
       tailwindcss:
         specifier: ^3.4.3
-        version: 3.4.4(ts-node@10.9.2(@swc/core@1.6.5)(@types/node@20.14.8)(typescript@5.5.2))
+        version: 3.4.4(ts-node@10.9.2(@types/node@20.14.8)(typescript@5.5.2))
       typescript:
         specifier: ^5.4.5
         version: 5.5.2
@@ -390,6 +394,7 @@ importers:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         version: 3.15.2(next@15.0.0-canary.44(babel-plugin-react-compiler@0.0.0-experimental-938cd9a-20240601)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0)
 =======
         version: 3.15.2(next@15.0.0-canary.46(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0)
@@ -400,6 +405,9 @@ importers:
 =======
         version: 3.15.2(next@15.0.0-canary.46(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0)
 >>>>>>> 0ab072cd (refactor(backend): Restore paths)
+=======
+        version: 3.15.2(next@15.0.0-canary.46(babel-plugin-react-compiler@0.0.0-experimental-696af53-20240625)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0)
+>>>>>>> f973ba0f (perf(frontend): Move plugins pages admin to package)
       next-themes:
         specifier: ^0.3.0
         version: 0.3.0(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
@@ -687,6 +695,15 @@ importers:
 
   packages/frontend:
     dependencies:
+      '@dnd-kit/core':
+        specifier: ^6.1.0
+        version: 6.1.0(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
+      '@dnd-kit/sortable':
+        specifier: ^8.0.0
+        version: 8.0.0(@dnd-kit/core@6.1.0(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0)
+      '@dnd-kit/utilities':
+        specifier: ^3.2.2
+        version: 3.2.2(react@19.0.0-rc.0)
       '@emoji-mart/data':
         specifier: ^1.2.1
         version: 1.2.1
@@ -834,9 +851,10 @@ importers:
         version: 3.15.2(next@15.0.0-canary.44(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0)
 =======
         specifier: 15.0.0-canary.46
-        version: 15.0.0-canary.46(babel-plugin-react-compiler@0.0.0-experimental-696af53-20240625)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
+        version: 15.0.0-canary.46(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
       next-intl:
         specifier: ^3.15.2
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         version: 3.15.2(next@15.0.0-canary.46(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0)
@@ -847,11 +865,15 @@ importers:
 =======
         version: 3.15.2(next@15.0.0-canary.46(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0)
 >>>>>>> 0ab072cd (refactor(backend): Restore paths)
+=======
+        version: 3.15.2(next@15.0.0-canary.46(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0)
+>>>>>>> f973ba0f (perf(frontend): Move plugins pages admin to package)
       next-themes:
         specifier: ^0.3.0
         version: 0.3.0(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
       nextjs-toploader:
         specifier: ^1.6.12
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -865,6 +887,9 @@ importers:
 =======
         version: 1.6.12(next@15.0.0-canary.46(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
 >>>>>>> 0ab072cd (refactor(backend): Restore paths)
+=======
+        version: 1.6.12(next@15.0.0-canary.46(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
+>>>>>>> f973ba0f (perf(frontend): Move plugins pages admin to package)
       nprogress:
         specifier: ^0.2.0
         version: 0.2.0
@@ -15310,7 +15335,7 @@ snapshots:
     dependencies:
       '@types/node': 20.14.8
       tapable: 2.2.1
-      webpack: 5.92.1(@swc/core@1.6.5(@swc/helpers@0.5.11))(esbuild@0.21.5)
+      webpack: 5.92.1(@swc/core@1.3.101(@swc/helpers@0.5.11))(esbuild@0.19.11)
     transitivePeerDependencies:
       - '@swc/core'
       - esbuild
@@ -19664,6 +19689,7 @@ snapshots:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   next-intl@3.15.2(next@15.0.0-canary.44(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0):
     dependencies:
       '@formatjs/intl-localematcher': 0.2.32
@@ -19677,6 +19703,8 @@ snapshots:
   next-intl@3.15.2(next@15.0.0-canary.46(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0):
 >>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
 =======
+=======
+>>>>>>> f973ba0f (perf(frontend): Move plugins pages admin to package)
   next-intl@3.15.2(next@15.0.0-canary.46(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0):
     dependencies:
       '@formatjs/intl-localematcher': 0.2.32
@@ -19686,10 +19714,13 @@ snapshots:
       use-intl: 3.15.2(react@19.0.0-rc.0)
 
   next-intl@3.15.2(next@15.0.0-canary.46(babel-plugin-react-compiler@0.0.0-experimental-696af53-20240625)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0):
+<<<<<<< HEAD
 >>>>>>> ca4a53fc (perf(frontend): Move user settings to package)
 =======
   next-intl@3.15.2(next@15.0.0-canary.46(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0):
 >>>>>>> 0ab072cd (refactor(backend): Restore paths)
+=======
+>>>>>>> f973ba0f (perf(frontend): Move plugins pages admin to package)
     dependencies:
       '@formatjs/intl-localematcher': 0.2.32
       negotiator: 0.6.3
@@ -19781,6 +19812,7 @@ snapshots:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   next@15.0.0-canary.28(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0):
 >>>>>>> 321538bf (docs: Add docs)
     dependencies:
@@ -19790,6 +19822,11 @@ snapshots:
     dependencies:
       '@next/env': 15.0.0-canary.46
 >>>>>>> ca4a53fc (perf(frontend): Move user settings to package)
+=======
+  next@15.0.0-canary.46(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0):
+    dependencies:
+      '@next/env': 15.0.0-canary.46
+>>>>>>> f973ba0f (perf(frontend): Move plugins pages admin to package)
       '@swc/helpers': 0.5.11
       busboy: 1.6.0
       caniuse-lite: 1.0.30001636
@@ -19799,6 +19836,7 @@ snapshots:
       react-dom: 19.0.0-rc.0(react@19.0.0-rc.0)
       styled-jsx: 5.1.6(@babel/core@7.24.7)(react@19.0.0-rc.0)
     optionalDependencies:
+<<<<<<< HEAD
 <<<<<<< HEAD
       '@next/swc-darwin-arm64': 15.0.0-canary.44
       '@next/swc-darwin-x64': 15.0.0-canary.44
@@ -19810,6 +19848,8 @@ snapshots:
       '@next/swc-win32-ia32-msvc': 15.0.0-canary.44
       '@next/swc-win32-x64-msvc': 15.0.0-canary.44
 =======
+=======
+>>>>>>> f973ba0f (perf(frontend): Move plugins pages admin to package)
       '@next/swc-darwin-arm64': 15.0.0-canary.46
       '@next/swc-darwin-x64': 15.0.0-canary.46
       '@next/swc-linux-arm64-gnu': 15.0.0-canary.46
@@ -19819,12 +19859,16 @@ snapshots:
       '@next/swc-win32-arm64-msvc': 15.0.0-canary.46
       '@next/swc-win32-ia32-msvc': 15.0.0-canary.46
       '@next/swc-win32-x64-msvc': 15.0.0-canary.46
+<<<<<<< HEAD
 >>>>>>> ca4a53fc (perf(frontend): Move user settings to package)
+=======
+>>>>>>> f973ba0f (perf(frontend): Move plugins pages admin to package)
       sharp: 0.33.4
     transitivePeerDependencies:
       - '@babel/core'
       - babel-plugin-macros
 
+<<<<<<< HEAD
 <<<<<<< HEAD
   next@15.0.0-canary.44(babel-plugin-react-compiler@0.0.0-experimental-938cd9a-20240601)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0):
 =======
@@ -19832,6 +19876,8 @@ snapshots:
 >>>>>>> ca4a53fc (perf(frontend): Move user settings to package)
 =======
 >>>>>>> 0ab072cd (refactor(backend): Restore paths)
+=======
+>>>>>>> f973ba0f (perf(frontend): Move plugins pages admin to package)
   next@15.0.0-canary.46(babel-plugin-react-compiler@0.0.0-experimental-696af53-20240625)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0):
 >>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
     dependencies:
@@ -19843,7 +19889,7 @@ snapshots:
       postcss: 8.4.31
       react: 19.0.0-rc.0
       react-dom: 19.0.0-rc.0(react@19.0.0-rc.0)
-      styled-jsx: 5.1.6(react@19.0.0-rc.0)
+      styled-jsx: 5.1.6(@babel/core@7.24.7)(react@19.0.0-rc.0)
     optionalDependencies:
       '@next/swc-darwin-arm64': 15.0.0-canary.46
       '@next/swc-darwin-x64': 15.0.0-canary.46
@@ -19860,6 +19906,7 @@ snapshots:
       - '@babel/core'
       - babel-plugin-macros
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -19881,6 +19928,11 @@ snapshots:
     dependencies:
       next: 15.0.0-canary.46(babel-plugin-react-compiler@0.0.0-experimental-696af53-20240625)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
 >>>>>>> 0ab072cd (refactor(backend): Restore paths)
+=======
+  nextjs-toploader@1.6.12(next@15.0.0-canary.46(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0):
+    dependencies:
+      next: 15.0.0-canary.46(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
+>>>>>>> f973ba0f (perf(frontend): Move plugins pages admin to package)
       nprogress: 0.2.0
       prop-types: 15.8.1
       react: 19.0.0-rc.0
@@ -20380,6 +20432,7 @@ snapshots:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   postcss-load-config@4.0.2(postcss@8.4.38)(ts-node@10.9.2(@types/node@20.14.7)(typescript@5.5.2)):
 =======
 =======
@@ -20439,6 +20492,9 @@ snapshots:
 =======
 >>>>>>> 0ab072cd (refactor(backend): Restore paths)
   postcss-load-config@4.0.2(postcss@8.4.38)(ts-node@10.9.2(@types/node@20.14.8)(typescript@5.5.2)):
+=======
+  postcss-load-config@4.0.2(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.6.5)(@types/node@20.14.8)(typescript@5.5.2)):
+>>>>>>> f973ba0f (perf(frontend): Move plugins pages admin to package)
     dependencies:
       lilconfig: 3.1.2
       yaml: 2.4.5
@@ -20446,7 +20502,18 @@ snapshots:
       postcss: 8.4.38
       ts-node: 10.9.2(@swc/core@1.6.5)(@types/node@20.14.8)(typescript@5.5.2)
 
+<<<<<<< HEAD
 >>>>>>> ca4a53fc (perf(frontend): Move user settings to package)
+=======
+  postcss-load-config@4.0.2(postcss@8.4.38)(ts-node@10.9.2(@types/node@20.14.8)(typescript@5.5.2)):
+    dependencies:
+      lilconfig: 3.1.2
+      yaml: 2.4.5
+    optionalDependencies:
+      postcss: 8.4.38
+      ts-node: 10.9.2(@swc/core@1.6.5(@swc/helpers@0.5.11))(@types/node@20.14.8)(typescript@5.5.2)
+
+>>>>>>> f973ba0f (perf(frontend): Move plugins pages admin to package)
   postcss-nested@6.0.1(postcss@8.4.38):
     dependencies:
       postcss: 8.4.38
@@ -21613,10 +21680,12 @@ snapshots:
     optionalDependencies:
       '@babel/core': 7.24.5
 
-  styled-jsx@5.1.6(react@19.0.0-rc.0):
+  styled-jsx@5.1.6(@babel/core@7.24.7)(react@19.0.0-rc.0):
     dependencies:
       client-only: 0.0.1
       react: 19.0.0-rc.0
+    optionalDependencies:
+      '@babel/core': 7.24.7
 
   stylis@4.3.2: {}
 
@@ -21689,12 +21758,16 @@ snapshots:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> ca4a53fc (perf(frontend): Move user settings to package)
+=======
+>>>>>>> f973ba0f (perf(frontend): Move plugins pages admin to package)
   tailwindcss-animate@1.0.7(tailwindcss@3.4.4(ts-node@10.9.2(@types/node@20.14.8)(typescript@5.5.2))):
     dependencies:
       tailwindcss: 3.4.4(ts-node@10.9.2(@types/node@20.14.8)(typescript@5.5.2))
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -21711,6 +21784,8 @@ snapshots:
 >>>>>>> ca4a53fc (perf(frontend): Move user settings to package)
 =======
 >>>>>>> 0ab072cd (refactor(backend): Restore paths)
+=======
+>>>>>>> f973ba0f (perf(frontend): Move plugins pages admin to package)
   tailwindcss@3.4.0(ts-node@10.9.2(@swc/core@1.6.5(@swc/helpers@0.5.11))(@types/node@20.14.8)(typescript@5.5.2)):
 >>>>>>> 4173750f (perf(frontend): Move generate config script to package)
     dependencies:
@@ -21872,9 +21947,40 @@ snapshots:
       postcss-import: 15.1.0(postcss@8.4.38)
       postcss-js: 4.0.1(postcss@8.4.38)
 <<<<<<< HEAD
+<<<<<<< HEAD
       postcss-load-config: 4.0.2(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.6.5)(@types/node@20.14.8)(typescript@5.5.2))
 <<<<<<< HEAD
 =======
+=======
+      postcss-load-config: 4.0.2(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.6.5)(@types/node@20.14.8)(typescript@5.5.2))
+      postcss-nested: 6.0.1(postcss@8.4.38)
+      postcss-selector-parser: 6.1.0
+      resolve: 1.22.8
+      sucrase: 3.35.0
+    transitivePeerDependencies:
+      - ts-node
+
+  tailwindcss@3.4.4(ts-node@10.9.2(@types/node@20.14.8)(typescript@5.5.2)):
+    dependencies:
+      '@alloc/quick-lru': 5.2.0
+      arg: 5.0.2
+      chokidar: 3.6.0
+      didyoumean: 1.2.2
+      dlv: 1.1.3
+      fast-glob: 3.3.2
+      glob-parent: 6.0.2
+      is-glob: 4.0.3
+      jiti: 1.21.6
+      lilconfig: 2.1.0
+      micromatch: 4.0.7
+      normalize-path: 3.0.0
+      object-hash: 3.0.0
+      picocolors: 1.0.1
+      postcss: 8.4.38
+      postcss-import: 15.1.0(postcss@8.4.38)
+      postcss-js: 4.0.1(postcss@8.4.38)
+      postcss-load-config: 4.0.2(postcss@8.4.38)(ts-node@10.9.2(@types/node@20.14.8)(typescript@5.5.2))
+>>>>>>> f973ba0f (perf(frontend): Move plugins pages admin to package)
       postcss-nested: 6.0.1(postcss@8.4.38)
       postcss-selector-parser: 6.1.0
       resolve: 1.22.8
@@ -21986,7 +22092,7 @@ snapshots:
       schema-utils: 3.3.0
       serialize-javascript: 6.0.2
       terser: 5.31.1
-      webpack: 5.92.1(@swc/core@1.6.5(@swc/helpers@0.5.11))(esbuild@0.21.5)
+      webpack: 5.92.1(@swc/core@1.3.101(@swc/helpers@0.5.11))(esbuild@0.19.11)
     optionalDependencies:
       '@swc/core': 1.3.101(@swc/helpers@0.5.11)
       esbuild: 0.19.11
@@ -22301,7 +22407,7 @@ snapshots:
       execa: 5.1.1
       globby: 11.1.0
       joycon: 3.1.1
-      postcss-load-config: 4.0.2(postcss@8.4.38)(ts-node@10.9.2(@types/node@20.14.8)(typescript@5.5.2))
+      postcss-load-config: 4.0.2(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.6.5)(@types/node@20.14.8)(typescript@5.5.2))
       resolve-from: 5.0.0
       rollup: 4.18.0
       source-map: 0.8.0-beta.0
@@ -22768,6 +22874,7 @@ snapshots:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   webpack@5.92.1(@swc/core@1.3.101(@swc/helpers@0.5.11))(esbuild@0.19.11):
 <<<<<<< HEAD
 =======
@@ -22820,6 +22927,9 @@ snapshots:
 =======
   webpack@5.92.1(@swc/core@1.6.5(@swc/helpers@0.5.11))(esbuild@0.21.5):
 >>>>>>> ef64f85b (feat: Add tsup for build scripts)
+=======
+  webpack@5.92.1(@swc/core@1.3.101(@swc/helpers@0.5.11))(esbuild@0.19.11):
+>>>>>>> f973ba0f (perf(frontend): Move plugins pages admin to package)
     dependencies:
       '@types/eslint-scope': 3.7.7
       '@types/estree': 1.0.5

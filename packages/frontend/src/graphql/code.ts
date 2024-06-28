@@ -1203,6 +1203,98 @@ export type Admin__Core_Languages__UpdateMutationVariables = Exact<{
 
 export type Admin__Core_Languages__UpdateMutation = { __typename?: 'Mutation', admin__core_languages__update: string };
 
+export type Admin__Core_Plugins__CreateMutationVariables = Exact<{
+  author: Scalars['String']['input'];
+  authorUrl?: InputMaybe<Scalars['String']['input']>;
+  code: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  supportUrl: Scalars['String']['input'];
+  description?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type Admin__Core_Plugins__CreateMutation = { __typename?: 'Mutation', admin__core_plugins__create: { __typename?: 'ShowAdminPlugins', code: string } };
+
+export type Admin__Core_Plugins__DeleteMutationVariables = Exact<{
+  code: Scalars['String']['input'];
+}>;
+
+
+export type Admin__Core_Plugins__DeleteMutation = { __typename?: 'Mutation', admin__core_plugins__delete: string };
+
+export type Admin__Core_Plugins__UploadMutationVariables = Exact<{
+  file: Scalars['Upload']['input'];
+  code?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type Admin__Core_Plugins__UploadMutation = { __typename?: 'Mutation', admin__core_plugins__upload: { __typename?: 'ShowAdminPlugins', id: number, name: string } };
+
+export type Admin__Core_Plugins__DownloadMutationVariables = Exact<{
+  code: Scalars['String']['input'];
+  version?: InputMaybe<Scalars['String']['input']>;
+  versionCode?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type Admin__Core_Plugins__DownloadMutation = { __typename?: 'Mutation', admin__core_plugins__download: string };
+
+export type Admin__Core_Plugins__EditMutationVariables = Exact<{
+  author: Scalars['String']['input'];
+  authorUrl?: InputMaybe<Scalars['String']['input']>;
+  code: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  supportUrl: Scalars['String']['input'];
+  description?: InputMaybe<Scalars['String']['input']>;
+  default?: InputMaybe<Scalars['Boolean']['input']>;
+  enabled?: InputMaybe<Scalars['Boolean']['input']>;
+}>;
+
+
+export type Admin__Core_Plugins__EditMutation = { __typename?: 'Mutation', admin__core_plugins__edit: { __typename?: 'ShowAdminPlugins', id: number, name: string } };
+
+export type Admin__Core_Plugins__Nav__Change_PositionMutationVariables = Exact<{
+  indexToMove: Scalars['Int']['input'];
+  pluginCode: Scalars['String']['input'];
+  code: Scalars['String']['input'];
+  parentCode?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type Admin__Core_Plugins__Nav__Change_PositionMutation = { __typename?: 'Mutation', admin__core_plugins__nav__change_position: string };
+
+export type Admin__Core_Plugins__Nav__CreateMutationVariables = Exact<{
+  code: Scalars['String']['input'];
+  pluginCode: Scalars['String']['input'];
+  icon?: InputMaybe<Scalars['String']['input']>;
+  href: Scalars['String']['input'];
+  parentCode?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type Admin__Core_Plugins__Nav__CreateMutation = { __typename?: 'Mutation', admin__core_plugins__nav__create: { __typename?: 'ShowAdminNavPluginsObj', code: string, icon?: string | null, href: string } };
+
+export type Admin__Core_Plugins__Nav__DeleteMutationVariables = Exact<{
+  code: Scalars['String']['input'];
+  pluginCode: Scalars['String']['input'];
+  parentCode?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type Admin__Core_Plugins__Nav__DeleteMutation = { __typename?: 'Mutation', admin__core_plugins__nav__delete: string };
+
+export type Admin__Core_Plugins__Nav__EditMutationVariables = Exact<{
+  code: Scalars['String']['input'];
+  href: Scalars['String']['input'];
+  icon?: InputMaybe<Scalars['String']['input']>;
+  pluginCode: Scalars['String']['input'];
+  previousCode: Scalars['String']['input'];
+  parentCode?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type Admin__Core_Plugins__Nav__EditMutation = { __typename?: 'Mutation', admin__core_plugins__nav__edit: { __typename?: 'ShowAdminNavPluginsObj', code: string } };
+
 export type Admin_Sessions__Sign_OutMutationVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -1318,6 +1410,39 @@ export type Admin__Core_Plugins__Show__QuickQueryVariables = Exact<{
 
 export type Admin__Core_Plugins__Show__QuickQuery = { __typename?: 'Query', admin__core_plugins__show: { __typename?: 'ShowAdminPluginsObj', edges: Array<{ __typename?: 'ShowAdminPlugins', code: string, name: string, version?: string | null, created: Date, version_code?: number | null }> } };
 
+export type Admin__Core_Plugins__ShowQueryVariables = Exact<{
+  cursor?: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  sortBy?: InputMaybe<ShowAdminPluginsSortByArgs>;
+  search?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type Admin__Core_Plugins__ShowQuery = { __typename?: 'Query', admin__core_plugins__show: { __typename?: 'ShowAdminPluginsObj', edges: Array<{ __typename?: 'ShowAdminPlugins', author: string, author_url?: string | null, code: string, default: boolean, description?: string | null, enabled: boolean, id: number, name: string, support_url: string, updated: Date, version?: string | null, created: Date, version_code?: number | null, allow_default: boolean }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
+
+export type Admin__Core_Plugins__FilesQueryVariables = Exact<{
+  code: Scalars['String']['input'];
+}>;
+
+
+export type Admin__Core_Plugins__FilesQuery = { __typename?: 'Query', admin__core_plugins__files: { __typename?: 'FilesAdminPluginsObj', admin_pages: number, admin_templates: number, databases: number, pages: number, pages_container: number, templates: number, default_page: boolean } };
+
+export type Admin__Core_Plugins__Show__ItemQueryVariables = Exact<{
+  code?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type Admin__Core_Plugins__Show__ItemQuery = { __typename?: 'Query', admin__core_plugins__show: { __typename?: 'ShowAdminPluginsObj', edges: Array<{ __typename?: 'ShowAdminPlugins', allow_default: boolean, author: string, author_url?: string | null, code: string, created: Date, default: boolean, description?: string | null, enabled: boolean, id: number, name: string, support_url: string, updated: Date, version?: string | null, version_code?: number | null }> } };
+
+export type Admin__Core_Plugins__Nav__ShowQueryVariables = Exact<{
+  pluginCode: Scalars['String']['input'];
+}>;
+
+
+export type Admin__Core_Plugins__Nav__ShowQuery = { __typename?: 'Query', admin__core_plugins__nav__show: Array<{ __typename?: 'ShowAdminNavPluginsObj', code: string, icon?: string | null, href: string, children?: Array<{ __typename?: 'ShowAdminNavPlugins', code: string, href: string, icon?: string | null }> | null }> };
+
 export type Core_MiddlewareQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -1417,6 +1542,107 @@ export const Admin__Core_Languages__Edit = gql`
 export const Admin__Core_Languages__Update = gql`
     mutation Admin__core_languages__update($code: String!, $file: Upload!) {
   admin__core_languages__update(code: $code, file: $file)
+}
+    `;
+export const Admin__Core_Plugins__Create = gql`
+    mutation Admin__core_plugins__create($author: String!, $authorUrl: String, $code: String!, $name: String!, $supportUrl: String!, $description: String) {
+  admin__core_plugins__create(
+    author: $author
+    author_url: $authorUrl
+    code: $code
+    name: $name
+    support_url: $supportUrl
+    description: $description
+  ) {
+    code
+  }
+}
+    `;
+export const Admin__Core_Plugins__Delete = gql`
+    mutation Admin__core_plugins__delete($code: String!) {
+  admin__core_plugins__delete(code: $code)
+}
+    `;
+export const Admin__Core_Plugins__Upload = gql`
+    mutation Admin__core_plugins__upload($file: Upload!, $code: String) {
+  admin__core_plugins__upload(file: $file, code: $code) {
+    id
+    name
+  }
+}
+    `;
+export const Admin__Core_Plugins__Download = gql`
+    mutation Admin__core_plugins__download($code: String!, $version: String, $versionCode: Int) {
+  admin__core_plugins__download(
+    code: $code
+    version: $version
+    version_code: $versionCode
+  )
+}
+    `;
+export const Admin__Core_Plugins__Edit = gql`
+    mutation Admin__core_plugins__edit($author: String!, $authorUrl: String, $code: String!, $name: String!, $supportUrl: String!, $description: String, $default: Boolean, $enabled: Boolean) {
+  admin__core_plugins__edit(
+    author: $author
+    author_url: $authorUrl
+    code: $code
+    name: $name
+    support_url: $supportUrl
+    description: $description
+    default: $default
+    enabled: $enabled
+  ) {
+    id
+    name
+  }
+}
+    `;
+export const Admin__Core_Plugins__Nav__Change_Position = gql`
+    mutation Admin__core_plugins__nav__change_position($indexToMove: Int!, $pluginCode: String!, $code: String!, $parentCode: String) {
+  admin__core_plugins__nav__change_position(
+    index_to_move: $indexToMove
+    plugin_code: $pluginCode
+    code: $code
+    parent_code: $parentCode
+  )
+}
+    `;
+export const Admin__Core_Plugins__Nav__Create = gql`
+    mutation Admin__core_plugins__nav__create($code: String!, $pluginCode: String!, $icon: String, $href: String!, $parentCode: String) {
+  admin__core_plugins__nav__create(
+    code: $code
+    plugin_code: $pluginCode
+    icon: $icon
+    href: $href
+    parent_code: $parentCode
+  ) {
+    code
+    icon
+    href
+  }
+}
+    `;
+export const Admin__Core_Plugins__Nav__Delete = gql`
+    mutation Admin__core_plugins__nav__delete($code: String!, $pluginCode: String!, $parentCode: String) {
+  admin__core_plugins__nav__delete(
+    code: $code
+    plugin_code: $pluginCode
+    parent_code: $parentCode
+  )
+}
+    `;
+export const Admin__Core_Plugins__Nav__Edit = gql`
+    mutation Admin__core_plugins__nav__edit($code: String!, $href: String!, $icon: String, $pluginCode: String!, $previousCode: String!, $parentCode: String) {
+  admin__core_plugins__nav__edit(
+    code: $code
+    href: $href
+    icon: $icon
+    plugin_code: $pluginCode
+    previous_code: $previousCode
+    parent_code: $parentCode
+  ) {
+    code
+  }
 }
     `;
 export const Admin_Sessions__Sign_Out = gql`
@@ -1643,6 +1869,91 @@ export const Admin__Core_Plugins__Show__Quick = gql`
       version
       created
       version_code
+    }
+  }
+}
+    `;
+export const Admin__Core_Plugins__Show = gql`
+    query Admin__core_plugins__show($cursor: Int, $first: Int, $last: Int, $sortBy: ShowAdminPluginsSortByArgs, $search: String) {
+  admin__core_plugins__show(
+    cursor: $cursor
+    first: $first
+    last: $last
+    sortBy: $sortBy
+    search: $search
+  ) {
+    edges {
+      author
+      author_url
+      code
+      default
+      description
+      enabled
+      id
+      name
+      support_url
+      updated
+      version
+      created
+      version_code
+      allow_default
+    }
+    pageInfo {
+      count
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      totalCount
+    }
+  }
+}
+    `;
+export const Admin__Core_Plugins__Files = gql`
+    query Admin__core_plugins__files($code: String!) {
+  admin__core_plugins__files(code: $code) {
+    admin_pages
+    admin_templates
+    databases
+    pages
+    pages_container
+    templates
+    default_page
+  }
+}
+    `;
+export const Admin__Core_Plugins__Show__Item = gql`
+    query Admin__core_plugins__show__item($code: String, $first: Int) {
+  admin__core_plugins__show(code: $code, first: $first) {
+    edges {
+      allow_default
+      author
+      author_url
+      code
+      created
+      default
+      description
+      enabled
+      id
+      name
+      support_url
+      updated
+      version
+      version_code
+    }
+  }
+}
+    `;
+export const Admin__Core_Plugins__Nav__Show = gql`
+    query Admin__core_plugins__nav__show($pluginCode: String!) {
+  admin__core_plugins__nav__show(plugin_code: $pluginCode) {
+    code
+    icon
+    href
+    children {
+      code
+      href
+      icon
     }
   }
 }
