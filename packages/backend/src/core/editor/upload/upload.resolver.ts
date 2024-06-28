@@ -5,8 +5,8 @@ import { UploadCoreEditorService } from './upload.service';
 import { UploadCoreEditorArgs } from './dto/upload.args';
 
 import { ShowCoreFiles } from '../../files/show/dto/show.obj';
-import { AuthGuards, OptionalAuth } from '@/utils';
-import { CurrentUser, User } from '@/decorators';
+import { AuthGuards, OptionalAuth } from '../../../utils';
+import { CurrentUser, User } from '../../../decorators';
 
 @Resolver()
 export class UploadCoreEditorResolver {

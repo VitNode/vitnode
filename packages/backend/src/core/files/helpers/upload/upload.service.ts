@@ -15,9 +15,9 @@ import { UploadCoreFilesArgs } from './dto/upload.args';
 import { UploadCoreFilesObj } from './dto/upload.obj';
 import { HelpersUploadCoreFilesService, acceptMimeTypeImage } from './helpers';
 
-import { DatabaseService } from '@/database';
-import { CustomError } from '@/errors';
-import { ABSOLUTE_PATHS_BACKEND } from '@/index';
+import { DatabaseService } from '../../../../database';
+import { CustomError } from '../../../../errors';
+import { ABSOLUTE_PATHS_BACKEND } from '../../../..';
 
 @Injectable()
 export class UploadCoreFilesService extends HelpersUploadCoreFilesService {

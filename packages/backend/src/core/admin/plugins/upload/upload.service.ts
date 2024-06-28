@@ -10,14 +10,14 @@ import { ShowAdminPlugins } from '../show/dto/show.obj';
 import { UploadAdminPluginsArgs } from './dto/upload.args';
 import { ChangeFilesAdminPluginsService } from '../helpers/files/change/change.service';
 
-import { core_plugins } from '@/templates/core/admin/database/schema/plugins';
-import { DatabaseService } from '@/database';
+import { core_plugins } from '../../../../templates/core/admin/database/schema/plugins';
+import { DatabaseService } from '../../../../database';
 import {
   ABSOLUTE_PATHS_BACKEND,
   ConfigPlugin,
   CustomError,
   FileUpload,
-} from '@/index';
+} from '../../../..';
 
 @Injectable()
 export class UploadAdminPluginsService {

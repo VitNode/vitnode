@@ -4,7 +4,7 @@ import { UseGuards } from '@nestjs/common';
 import { StatsAdminMembersService } from './stats.service';
 import { SignUpStatsAdminMembers } from './dto/stats.obj';
 
-import { AdminAuthGuards } from '@/utils';
+import { AdminAuthGuards } from '../../../../utils';
 
 @Resolver()
 export class StatsAdminMembersResolver {

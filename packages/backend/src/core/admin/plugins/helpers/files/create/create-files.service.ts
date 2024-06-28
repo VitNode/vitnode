@@ -15,7 +15,7 @@ import {
   ABSOLUTE_PATHS_BACKEND,
   CustomError,
   PluginInfoJSONType,
-} from '@/index';
+} from '../../../../../..';
 
 @Injectable()
 export class CreateFilesAdminPluginsService {

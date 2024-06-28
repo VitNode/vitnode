@@ -1,6 +1,6 @@
 import { Field, Float, Int, ObjectType } from '@nestjs/graphql';
 
-import { User } from '@/decorators';
+import { User } from '../../../../decorators';
 
 @ObjectType()
 export class AuthorizationCurrentUserObj extends User {

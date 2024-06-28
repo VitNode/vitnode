@@ -4,7 +4,7 @@ import { UseGuards } from '@nestjs/common';
 import { EditAdminThemeEditorService } from './edit.service';
 import { EditAdminThemeEditorArgs } from './dto/edit.args';
 
-import { AdminAuthGuards } from '@/utils';
+import { AdminAuthGuards } from '../../../../utils';
 
 @Resolver()
 export class EditAdminThemeEditorResolver {

@@ -265,6 +265,7 @@ importers:
         specifier: ^1.0.7
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         version: 1.0.7(tailwindcss@3.4.4(ts-node@10.9.2(@types/node@20.14.2)(typescript@5.4.5)))
     devDependencies:
       '@types/mdx':
@@ -280,6 +281,9 @@ importers:
 =======
         version: 1.0.7(tailwindcss@3.4.4(ts-node@10.9.2(@types/node@20.14.8)(typescript@5.5.2)))
 >>>>>>> ca4a53fc (perf(frontend): Move user settings to package)
+=======
+        version: 1.0.7(tailwindcss@3.4.4(ts-node@10.9.2(@swc/core@1.6.5)(@types/node@20.14.8)(typescript@5.5.2)))
+>>>>>>> 0ab072cd (refactor(backend): Restore paths)
     devDependencies:
       '@types/node':
         specifier: ^20.12.12
@@ -313,7 +317,7 @@ importers:
         version: 3.3.2
       tailwindcss:
         specifier: ^3.4.3
-        version: 3.4.4(ts-node@10.9.2(@types/node@20.14.8)(typescript@5.5.2))
+        version: 3.4.4(ts-node@10.9.2(@swc/core@1.6.5)(@types/node@20.14.8)(typescript@5.5.2))
       typescript:
         specifier: ^5.4.5
         version: 5.5.2
@@ -385,6 +389,7 @@ importers:
         specifier: ^3.15.2
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         version: 3.15.2(next@15.0.0-canary.44(babel-plugin-react-compiler@0.0.0-experimental-938cd9a-20240601)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0)
 =======
         version: 3.15.2(next@15.0.0-canary.46(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0)
@@ -392,6 +397,9 @@ importers:
 =======
         version: 3.15.2(next@15.0.0-canary.46(babel-plugin-react-compiler@0.0.0-experimental-696af53-20240625)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0)
 >>>>>>> ca4a53fc (perf(frontend): Move user settings to package)
+=======
+        version: 3.15.2(next@15.0.0-canary.46(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0)
+>>>>>>> 0ab072cd (refactor(backend): Restore paths)
       next-themes:
         specifier: ^0.3.0
         version: 0.3.0(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
@@ -826,20 +834,25 @@ importers:
         version: 3.15.2(next@15.0.0-canary.44(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0)
 =======
         specifier: 15.0.0-canary.46
-        version: 15.0.0-canary.46(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
+        version: 15.0.0-canary.46(babel-plugin-react-compiler@0.0.0-experimental-696af53-20240625)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
       next-intl:
         specifier: ^3.15.2
+<<<<<<< HEAD
 <<<<<<< HEAD
         version: 3.15.2(next@15.0.0-canary.46(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0)
 >>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
 =======
         version: 3.15.2(next@15.0.0-canary.46(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0)
 >>>>>>> ca4a53fc (perf(frontend): Move user settings to package)
+=======
+        version: 3.15.2(next@15.0.0-canary.46(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0)
+>>>>>>> 0ab072cd (refactor(backend): Restore paths)
       next-themes:
         specifier: ^0.3.0
         version: 0.3.0(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
       nextjs-toploader:
         specifier: ^1.6.12
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         version: 1.6.12(next@15.0.0-canary.44(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
@@ -849,6 +862,9 @@ importers:
 =======
         version: 1.6.12(next@15.0.0-canary.46(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
 >>>>>>> ca4a53fc (perf(frontend): Move user settings to package)
+=======
+        version: 1.6.12(next@15.0.0-canary.46(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
+>>>>>>> 0ab072cd (refactor(backend): Restore paths)
       nprogress:
         specifier: ^0.2.0
         version: 0.2.0
@@ -19647,6 +19663,7 @@ snapshots:
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   next-intl@3.15.2(next@15.0.0-canary.44(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0):
     dependencies:
       '@formatjs/intl-localematcher': 0.2.32
@@ -19670,6 +19687,9 @@ snapshots:
 
   next-intl@3.15.2(next@15.0.0-canary.46(babel-plugin-react-compiler@0.0.0-experimental-696af53-20240625)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0):
 >>>>>>> ca4a53fc (perf(frontend): Move user settings to package)
+=======
+  next-intl@3.15.2(next@15.0.0-canary.46(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0):
+>>>>>>> 0ab072cd (refactor(backend): Restore paths)
     dependencies:
       '@formatjs/intl-localematcher': 0.2.32
       negotiator: 0.6.3
@@ -19760,6 +19780,7 @@ snapshots:
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   next@15.0.0-canary.28(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0):
 >>>>>>> 321538bf (docs: Add docs)
     dependencies:
@@ -19809,6 +19830,8 @@ snapshots:
 =======
 =======
 >>>>>>> ca4a53fc (perf(frontend): Move user settings to package)
+=======
+>>>>>>> 0ab072cd (refactor(backend): Restore paths)
   next@15.0.0-canary.46(babel-plugin-react-compiler@0.0.0-experimental-696af53-20240625)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0):
 >>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
     dependencies:
@@ -19820,7 +19843,7 @@ snapshots:
       postcss: 8.4.31
       react: 19.0.0-rc.0
       react-dom: 19.0.0-rc.0(react@19.0.0-rc.0)
-      styled-jsx: 5.1.6(@babel/core@7.24.7)(react@19.0.0-rc.0)
+      styled-jsx: 5.1.6(react@19.0.0-rc.0)
     optionalDependencies:
       '@next/swc-darwin-arm64': 15.0.0-canary.46
       '@next/swc-darwin-x64': 15.0.0-canary.46
@@ -19839,6 +19862,7 @@ snapshots:
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   nextjs-toploader@1.6.12(next@15.0.0-canary.44(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0):
     dependencies:
       next: 15.0.0-canary.44(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
@@ -19852,6 +19876,11 @@ snapshots:
     dependencies:
       next: 15.0.0-canary.46(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
 >>>>>>> ca4a53fc (perf(frontend): Move user settings to package)
+=======
+  nextjs-toploader@1.6.12(next@15.0.0-canary.46(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0):
+    dependencies:
+      next: 15.0.0-canary.46(babel-plugin-react-compiler@0.0.0-experimental-696af53-20240625)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
+>>>>>>> 0ab072cd (refactor(backend): Restore paths)
       nprogress: 0.2.0
       prop-types: 15.8.1
       react: 19.0.0-rc.0
@@ -20350,6 +20379,7 @@ snapshots:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   postcss-load-config@4.0.2(postcss@8.4.38)(ts-node@10.9.2(@types/node@20.14.7)(typescript@5.5.2)):
 =======
 =======
@@ -20406,13 +20436,15 @@ snapshots:
 =======
 >>>>>>> ec012e8e (perf(frontend): Move rest of components to package)
 =======
+=======
+>>>>>>> 0ab072cd (refactor(backend): Restore paths)
   postcss-load-config@4.0.2(postcss@8.4.38)(ts-node@10.9.2(@types/node@20.14.8)(typescript@5.5.2)):
     dependencies:
       lilconfig: 3.1.2
       yaml: 2.4.5
     optionalDependencies:
       postcss: 8.4.38
-      ts-node: 10.9.2(@swc/core@1.6.5(@swc/helpers@0.5.11))(@types/node@20.14.8)(typescript@5.5.2)
+      ts-node: 10.9.2(@swc/core@1.6.5)(@types/node@20.14.8)(typescript@5.5.2)
 
 >>>>>>> ca4a53fc (perf(frontend): Move user settings to package)
   postcss-nested@6.0.1(postcss@8.4.38):
@@ -21581,12 +21613,10 @@ snapshots:
     optionalDependencies:
       '@babel/core': 7.24.5
 
-  styled-jsx@5.1.6(@babel/core@7.24.7)(react@19.0.0-rc.0):
+  styled-jsx@5.1.6(react@19.0.0-rc.0):
     dependencies:
       client-only: 0.0.1
       react: 19.0.0-rc.0
-    optionalDependencies:
-      '@babel/core': 7.24.7
 
   stylis@4.3.2: {}
 
@@ -21658,6 +21688,7 @@ snapshots:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> ca4a53fc (perf(frontend): Move user settings to package)
   tailwindcss-animate@1.0.7(tailwindcss@3.4.4(ts-node@10.9.2(@types/node@20.14.8)(typescript@5.5.2))):
@@ -21678,6 +21709,8 @@ snapshots:
 =======
 =======
 >>>>>>> ca4a53fc (perf(frontend): Move user settings to package)
+=======
+>>>>>>> 0ab072cd (refactor(backend): Restore paths)
   tailwindcss@3.4.0(ts-node@10.9.2(@swc/core@1.6.5(@swc/helpers@0.5.11))(@types/node@20.14.8)(typescript@5.5.2)):
 >>>>>>> 4173750f (perf(frontend): Move generate config script to package)
     dependencies:
@@ -21838,6 +21871,7 @@ snapshots:
       postcss: 8.4.38
       postcss-import: 15.1.0(postcss@8.4.38)
       postcss-js: 4.0.1(postcss@8.4.38)
+<<<<<<< HEAD
       postcss-load-config: 4.0.2(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.6.5)(@types/node@20.14.8)(typescript@5.5.2))
 <<<<<<< HEAD
 =======
@@ -21867,6 +21901,8 @@ snapshots:
       postcss: 8.4.38
       postcss-import: 15.1.0(postcss@8.4.38)
       postcss-js: 4.0.1(postcss@8.4.38)
+=======
+>>>>>>> 0ab072cd (refactor(backend): Restore paths)
       postcss-load-config: 4.0.2(postcss@8.4.38)(ts-node@10.9.2(@types/node@20.14.8)(typescript@5.5.2))
 >>>>>>> ca4a53fc (perf(frontend): Move user settings to package)
       postcss-nested: 6.0.1(postcss@8.4.38)
@@ -22265,7 +22301,7 @@ snapshots:
       execa: 5.1.1
       globby: 11.1.0
       joycon: 3.1.1
-      postcss-load-config: 4.0.2(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.6.5)(@types/node@20.14.8)(typescript@5.5.2))
+      postcss-load-config: 4.0.2(postcss@8.4.38)(ts-node@10.9.2(@types/node@20.14.8)(typescript@5.5.2))
       resolve-from: 5.0.0
       rollup: 4.18.0
       source-map: 0.8.0-beta.0

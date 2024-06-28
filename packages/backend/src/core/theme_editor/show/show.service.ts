@@ -10,7 +10,7 @@ import {
 } from './dto/show.obj';
 import { keysFromCSSThemeEditor } from '../theme_editor.module';
 
-import { ABSOLUTE_PATHS_BACKEND, NotFoundError } from '@/index';
+import { ABSOLUTE_PATHS_BACKEND, NotFoundError } from '../../..';
 
 @Injectable()
 export class ShowCoreThemeEditorService {

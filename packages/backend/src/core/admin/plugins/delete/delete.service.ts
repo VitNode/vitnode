@@ -6,12 +6,12 @@ import { eq, sql } from 'drizzle-orm';
 import { DeleteAdminPluginsArgs } from './dto/delete.args';
 import { ChangeFilesAdminPluginsService } from '../helpers/files/change/change.service';
 
-import { DatabaseService } from '@/database';
-import { CustomError, NotFoundError } from '@/errors';
-import { core_migrations } from '@/templates/core/admin/database/schema/files';
-import { ABSOLUTE_PATHS_BACKEND } from '@/index';
-import { core_plugins } from '@/templates/core/admin/database/schema/plugins';
-import { setRebuildRequired } from '@/functions/rebuild-required';
+import { DatabaseService } from '../../../../database';
+import { CustomError, NotFoundError } from '../../../../errors';
+import { core_migrations } from '../../../../templates/core/admin/database/schema/files';
+import { ABSOLUTE_PATHS_BACKEND } from '../../../..';
+import { core_plugins } from '../../../../templates/core/admin/database/schema/plugins';
+import { setRebuildRequired } from '../../../../functions/rebuild-required';
 
 @Injectable()
 export class DeleteAdminPluginsService {

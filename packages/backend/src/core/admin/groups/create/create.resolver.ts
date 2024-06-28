@@ -5,7 +5,7 @@ import { CreateAdminGroupsService } from './create.service';
 import { CreateAdminGroupsArgs } from './dto/create.args';
 import { ShowAdminGroups } from '../show/dto/show.obj';
 
-import { AdminPermissionGuards } from '@/utils';
+import { AdminPermissionGuards } from '../../../../utils';
 
 @Resolver()
 export class CreateAdminGroupsResolver {

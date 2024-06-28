@@ -2,7 +2,7 @@ import { Context, Mutation, Resolver } from '@nestjs/graphql';
 
 import { SignOutAdminSessionsService } from './sign_out.service';
 
-import { Ctx } from '@/utils';
+import { Ctx } from '../../../../utils';
 
 @Resolver()
 export class SignOutAdminSessionsResolver {

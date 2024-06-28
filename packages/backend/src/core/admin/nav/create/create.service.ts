@@ -2,14 +2,14 @@ import { Injectable } from '@nestjs/common';
 
 import { CreateAdminNavArgs } from './dto/create.args';
 
-import { DatabaseService } from '@/database';
+import { DatabaseService } from '../../../../database';
 import { ParserTextLanguageCoreHelpersService } from '../../../helpers/text_language/parser/parser.service';
 import { ShowCoreNav } from '../../../nav/show/dto/show.obj';
 import {
   core_nav,
   core_nav_description,
   core_nav_name,
-} from '@/templates/core/admin/database/schema/nav';
+} from '../../../../templates/core/admin/database/schema/nav';
 
 @Injectable()
 export class CreateAdminNavService {

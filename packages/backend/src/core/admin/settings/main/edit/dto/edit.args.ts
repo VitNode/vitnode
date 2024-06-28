@@ -1,6 +1,6 @@
 import { ArgsType, Field } from '@nestjs/graphql';
 
-import { TextLanguageInput } from '@/utils';
+import { TextLanguageInput } from '../../../../../../utils';
 
 @ArgsType()
 export class EditAdminMainSettingsArgs {

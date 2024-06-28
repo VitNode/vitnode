@@ -1,7 +1,11 @@
 import { ArgsType, Field, InputType, registerEnumType } from '@nestjs/graphql';
 import { Transform } from 'class-transformer';
 
-import { PaginationArgs, SortDirectionEnum, TransformString } from '@/utils';
+import {
+  PaginationArgs,
+  SortDirectionEnum,
+  TransformString,
+} from '../../../../../utils';
 
 enum ShowAdminGroupsSortingColumnEnum {
   created = 'created',

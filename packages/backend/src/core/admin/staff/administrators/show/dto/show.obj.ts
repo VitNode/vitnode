@@ -6,8 +6,8 @@ import {
   createUnionType,
 } from '@nestjs/graphql';
 
-import { GroupUser, User } from '@/decorators';
-import { PageInfo, TextLanguage } from '@/utils';
+import { GroupUser, User } from '../../../../../../decorators';
+import { PageInfo, TextLanguage } from '../../../../../../utils';
 
 @ObjectType()
 export class ShowAdminStaffAdministratorsObj {

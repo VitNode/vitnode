@@ -12,11 +12,11 @@ import {
 } from '../../files/helpers/upload/helpers';
 import { UploadCoreFilesArgs } from '../../files/helpers/upload/dto/upload.args';
 import { ShowCoreFiles } from '../../files/show/dto/show.obj';
-import { DatabaseService } from '@/database';
-import { User } from '@/decorators';
-import { AccessDeniedError } from '@/errors';
-import { core_files } from '@/templates/core/admin/database/schema/files';
-import { getConfigFile } from '@/providers/config';
+import { DatabaseService } from '../../../database';
+import { User } from '../../../decorators';
+import { AccessDeniedError } from '../../../errors';
+import { core_files } from '../../../templates/core/admin/database/schema/files';
+import { getConfigFile } from '../../../providers/config';
 
 interface GetFilesAfterUploadArgs extends UploadCoreEditorArgs {
   maxUploadSizeKb: number;

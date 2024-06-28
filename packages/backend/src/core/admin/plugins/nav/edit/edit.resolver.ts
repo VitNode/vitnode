@@ -5,7 +5,7 @@ import { EditAdminNavPluginsService } from './edit.service';
 import { ShowAdminNavPluginsObj } from '../show/dto/show.obj';
 import { EditCreateAdminNavPluginsArgs } from './dto/edit.args';
 
-import { AdminAuthGuards, OnlyForDevelopment } from '@/utils';
+import { AdminAuthGuards, OnlyForDevelopment } from '../../../../../utils';
 
 @Resolver()
 export class EditAdminNavPluginsResolver {

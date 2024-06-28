@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 
 import { MailService } from '../mail.service';
 
-import { EmailHelpersServiceType } from '@/providers/email/email-helpers.type';
+import { EmailHelpersServiceType } from '../../../../providers/email/email-helpers.type';
 
 interface Args {
   message: string;
