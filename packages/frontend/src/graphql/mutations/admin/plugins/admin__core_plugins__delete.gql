@@ -1,0 +1,3 @@
+mutation Admin__core_plugins__delete($code: String!) {
+  admin__core_plugins__delete(code: $code)
+}
