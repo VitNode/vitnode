@@ -7,11 +7,12 @@ import { IconItemListFilesFooterEditor } from './icon';
 import { ContentItemListFilesFooterEditor } from './content';
 import { deleteMutationApi } from './hooks/delete-mutation-api';
 
-import { TextLanguage } from '@/graphql/hooks';
 import { FileStateEditor } from '../../../extensions/files/files';
 import { useEditorState } from '../../../hooks/use-editor-state';
-import { CONFIG, cn } from '../../../../helpers';
 import { Button } from '../../../../components/ui/button';
+import { cn } from '../../../../helpers/classnames';
+import { CONFIG } from '../../../../helpers/config-with-env';
+import { TextLanguage } from '../../../../graphql/code';
 
 export interface ItemListFilesFooterEditorProps
   extends Omit<FileStateEditor, 'file'> {

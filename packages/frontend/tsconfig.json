@@ -7,6 +7,7 @@
     "moduleResolution": "bundler",
     "isolatedModules": true,
     "outDir": "./dist",
+    "rootDir": "./src",
     "jsx": "preserve"
   },
   "ts-node": {
@@ -16,5 +17,6 @@
       "module": "commonjs"
     }
   },
-  "include": ["next-env.d.ts", "src/**/*", "scripts/**/*", "codegen.ts"]
+  "include": ["next-env.d.ts", "src/**/*"],
+  "exclude": ["codegen.ts", "scripts/**/*"]
 }

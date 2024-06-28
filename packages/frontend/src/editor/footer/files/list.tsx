@@ -1,7 +1,7 @@
 import { ItemListFilesFooterEditor } from './item/item';
 
 import { useEditorState } from '../../hooks/use-editor-state';
-import { cn } from '../../../helpers';
+import { cn } from '../../../helpers/classnames';
 
 export const ListFilesFooterEditor = () => {
   const { files } = useEditorState();
