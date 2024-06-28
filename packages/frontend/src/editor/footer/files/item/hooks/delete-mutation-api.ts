@@ -2,12 +2,11 @@
 
 import { revalidatePath } from 'next/cache';
 import { fetcher } from 'vitnode-frontend/graphql/fetcher';
-
 import {
   Core_Editor_Files__Delete,
   Core_Editor_Files__DeleteMutation,
   Core_Editor_Files__DeleteMutationVariables,
-} from '@/graphql/hooks';
+} from '../../../../../graphql/code';
 
 export const deleteMutationApi = async (
   variables: Core_Editor_Files__DeleteMutationVariables,

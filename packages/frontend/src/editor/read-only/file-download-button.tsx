@@ -7,8 +7,8 @@ import { formatBytes } from 'vitnode-shared';
 
 import { acceptMimeTypeImage } from '../extensions/files/files';
 
-import { CONFIG } from '../../helpers';
 import { Button } from '../../components/ui/button';
+import { CONFIG } from '../../helpers/config-with-env';
 
 interface Props {
   dir_folder: string;

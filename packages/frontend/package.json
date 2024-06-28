@@ -5,19 +5,54 @@
     "vitnode-frontend": "./scripts/generate-config-file.ts"
   },
   "exports": {
-    "./navigation": "./src/navigation/index.ts",
-    "./helpers/*": "./src/helpers/*.ts",
-    "./hooks/*": "./src/hooks/*.ts",
-    "./views/*": "./src/views/*.tsx",
-    "./admin/*": "./src/views/admin/views/*.tsx",
-    "./theme-tsx/*": "./src/views/theme/views/*.tsx",
-    "./theme-ts/*": "./src/views/theme/views/*.ts",
-    "./components/*": "./src/components/*.tsx",
-    "./editor": "./src/editor/editor.tsx",
-    "./editor/read-only": "./src/editor/read-only/read-only.tsx",
-    "./graphql/*": "./src/graphql/*.ts"
+    "./navigation": {
+      "types": "./src/navigation/index.ts",
+      "default": "./dist/navigation/index.js"
+    },
+    "./helpers/*": {
+      "types": "./src/helpers/*.ts",
+      "default": "./dist/helpers/*.js"
+    },
+    "./hooks/*": {
+      "types": "./src/hooks/*.ts",
+      "default": "./dist/hooks/*.js"
+    },
+    "./views/*": {
+      "types": "./src/views/*.tsx",
+      "default": "./dist/views/*.jsx"
+    },
+    "./admin/*": {
+      "types": "./src/views/admin/views/*.tsx",
+      "default": "./dist/views/admin/views/*.jsx"
+    },
+    "./theme-tsx/*": {
+      "types": "./src/views/theme/views/*.tsx",
+      "default": "./dist/views/theme/views/*.jsx"
+    },
+    "./theme-ts/*": {
+      "types": "./src/views/theme/views/*.ts",
+      "default": "./dist/views/theme/views/*.js"
+    },
+    "./components/*": {
+      "types": "./src/components/*.tsx",
+      "default": "./dist/components/*.jsx"
+    },
+    "./editor": {
+      "types": "./src/editor/editor.tsx",
+      "default": "./dist/editor/editor.js"
+    },
+    "./editor/read-only": {
+      "types": "./src/editor/read-only/read-only.tsx",
+      "default": "./dist/editor/read-only/read-only.js"
+    },
+    "./graphql/*": {
+      "types": "./src/graphql/*.ts",
+      "default": "./dist/graphql/*.js"
+    }
   },
   "scripts": {
+    "build": "tsc",
+    "dev": "tsc -w",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "codegen": "graphql-codegen --config codegen.ts"

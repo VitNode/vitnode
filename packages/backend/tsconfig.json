@@ -5,11 +5,13 @@
     "jsx": "react",
     "target": "ESNext",
     "module": "CommonJS",
-    "outDir": "dist",
+    "outDir": "./dist",
     "declaration": true,
     "experimentalDecorators": true,
     "strictNullChecks": false,
-    "emitDecoratorMetadata": true
+    "emitDecoratorMetadata": true,
+    "rootDir": "./src"
   },
-  "include": ["src/**/*", "scripts/**/*"]
+  "include": ["src/**/*"],
+  "exclude": ["scripts/**/*"]
 }
