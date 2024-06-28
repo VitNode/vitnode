@@ -8,6 +8,7 @@
     "tailwind.config.ts",
     "src/graphql/code.ts",
     "codegen.ts",
-    "scripts/**/*"
+    "scripts/**/*",
+    "tsup.config.ts"
   ]
 }

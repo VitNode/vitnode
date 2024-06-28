@@ -3,5 +3,6 @@
   "extends": ["eslint-config-vitnode/.eslintrc.json"],
   "env": {
     "node": true
-  }
+  },
+  "ignorePatterns": ["scripts/**/*", "tsup.config.ts"]
 }
