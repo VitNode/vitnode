@@ -1,4 +1,4 @@
-#!/usr/bin/env ts-node --project tsconfig.json
+#!/usr/bin/env node
 import * as fs from 'fs';
 import { join } from 'path';
 

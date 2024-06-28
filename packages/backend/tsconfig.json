@@ -10,9 +10,11 @@
     "experimentalDecorators": true,
     "strictNullChecks": false,
     "emitDecoratorMetadata": true,
+    "rootDir": "./src",
     "paths": {
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src/**/*", "scripts/**/*"]
+  "include": ["src/**/*"],
+  "exclude": ["scripts/**/*"]
 }
