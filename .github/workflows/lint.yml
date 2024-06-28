@@ -2,7 +2,7 @@ name: Lint
 
 on:
   pull_request:
-    branches: "*"
+    branches: '*'
     types:
       - opened
       - edited
@@ -27,7 +27,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: "pnpm"
+          cache: 'pnpm'
 
       - name: Install dependencies
         run: pnpm install
