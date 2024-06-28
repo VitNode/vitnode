@@ -13,6 +13,7 @@
     "build:scripts": "turbo build:scripts && pnpm i",
     "build": "cross-env TURBO_TELEMETRY_DISABLED=1 turbo build",
     "dev": "pnpm build:scripts && turbo dev",
+    "dev:docs": "cd apps/docs && pnpm dev:docs",
     "email:dev": "cd apps/backend && pnpm email:dev",
     "lint": "turbo lint",
     "lint:fix": "turbo lint:fix",

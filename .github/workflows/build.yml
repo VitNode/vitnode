@@ -35,5 +35,8 @@ jobs:
       - name: Build Scripts
         run: pnpm build:scripts
 
+      - name: Build Docs
+        run: pnpm build:docs
+
       - name: Build
         run: pnpm build
