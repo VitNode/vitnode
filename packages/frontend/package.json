@@ -2,7 +2,7 @@
   "name": "vitnode-frontend",
   "version": "0.0.3",
   "bin": {
-    "vitnode-frontend": "./scripts/generate-config-file.ts"
+    "vitnode-frontend": "./dist/scripts/setup.js"
   },
   "exports": {
     "./navigation": {
@@ -52,6 +52,7 @@
   },
   "scripts": {
     "build": "tsc",
+    "build:scripts": "tsup",
     "dev": "tsc -w",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
@@ -73,6 +74,7 @@
     "graphql-tag": "^2.12.6",
     "tailwind-merge": "^2.3.0",
     "ts-node": "^10.9.2",
+    "tsup": "^8.1.0",
     "typescript": "^5.5.2"
   },
   "dependencies": {

@@ -16,6 +16,7 @@
     "tanstack",
     "testid",
     "tiptap",
+    "tsup",
     "uagent",
     "vitnode"
   ],
