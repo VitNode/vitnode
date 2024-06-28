@@ -4,7 +4,7 @@ import { UseGuards } from '@nestjs/common';
 import { ShowAdminEmailSettingsServiceObj } from './dto/show.obj';
 import { ShowAdminEmailSettingsService } from './show.service';
 
-import { AdminAuthGuards } from '../../../../../utils';
+import { AdminAuthGuards } from '@/utils';
 
 @Resolver()
 export class ShowAdminEmailSettingsResolver {

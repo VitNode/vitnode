@@ -8,11 +8,11 @@ import { SignUpCoreMembersArgs } from './dto/sign_up.args';
 import { SignUpCoreMembersObj } from './dto/sign_up.obj';
 import { generateAvatarColor } from './functions/generate-avatar-color';
 
-import { DatabaseService } from '../../../database';
-import { core_users } from '../../../templates/core/admin/database/schema/users';
-import { Ctx } from '../../../utils';
-import { CustomError } from '../../../errors';
-import { getUserIp } from '../../../functions';
+import { DatabaseService } from '@/database';
+import { core_users } from '@/templates/core/admin/database/schema/users';
+import { Ctx } from '@/utils';
+import { CustomError } from '@/errors';
+import { getUserIp } from '@/functions';
 
 @Injectable()
 export class SignUpCoreMembersService {

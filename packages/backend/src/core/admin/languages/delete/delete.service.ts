@@ -7,11 +7,11 @@ import { eq } from 'drizzle-orm';
 
 import { DeleteCoreAdminLanguagesArgs } from './dto/delete.args';
 
-import { DatabaseService } from '../../../../database';
-import { CustomError, NotFoundError } from '../../../../errors';
-import { ABSOLUTE_PATHS_BACKEND } from '../../../..';
-import { core_languages } from '../../../../templates/core/admin/database/schema/languages';
-import { setRebuildRequired } from '../../../../functions/rebuild-required';
+import { DatabaseService } from '@/database';
+import { CustomError, NotFoundError } from '@/errors';
+import { ABSOLUTE_PATHS_BACKEND } from '@/index';
+import { core_languages } from '@/templates/core/admin/database/schema/languages';
+import { setRebuildRequired } from '@/functions/rebuild-required';
 @Injectable()
 export class DeleteAdminCoreLanguageService {
   constructor(private readonly databaseService: DatabaseService) {}

@@ -5,8 +5,8 @@ import { ShowCoreFilesService } from './show.service';
 import { ShowCoreFilesObj } from './dto/show.obj';
 import { ShowCoreFilesArgs } from './dto/show.args';
 
-import { AuthGuards } from '../../../utils';
-import { CurrentUser, User } from '../../../decorators';
+import { AuthGuards } from '@/utils';
+import { CurrentUser, User } from '@/decorators';
 
 @Resolver()
 export class ShowCoreFilesResolver {

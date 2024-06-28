@@ -4,10 +4,10 @@ import { and, count, eq, ilike, or } from 'drizzle-orm';
 import { ShowCoreMembersObj } from './dto/show.obj';
 import { ShowCoreMembersArgs } from './dto/show.args';
 
-import { DatabaseService } from '../../../database';
-import { inputPaginationCursor, outputPagination } from '../../../functions';
-import { core_users } from '../../../templates/core/admin/database/schema/users';
-import { SortDirectionEnum } from '../../../utils';
+import { DatabaseService } from '@/database';
+import { inputPaginationCursor, outputPagination } from '@/functions';
+import { core_users } from '@/templates/core/admin/database/schema/users';
+import { SortDirectionEnum } from '@/utils';
 
 @Injectable()
 export class ShowCoreMembersService {

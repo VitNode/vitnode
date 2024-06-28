@@ -4,9 +4,9 @@ import { eq, sum } from 'drizzle-orm';
 import { InternalAuthorizationCoreSessionsService } from './internal/internal_authorization.service';
 import { AuthorizationCoreSessionsObj } from './dto/authorization.obj';
 
-import { DatabaseService } from '../../../database';
-import { core_files } from '../../../templates/core/admin/database/schema/files';
-import { Ctx } from '../../../utils';
+import { DatabaseService } from '@/database';
+import { core_files } from '@/templates/core/admin/database/schema/files';
+import { Ctx } from '@/utils';
 
 @Injectable()
 export class AuthorizationCoreSessionsService {

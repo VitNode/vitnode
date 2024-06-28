@@ -4,7 +4,7 @@ import { UseGuards } from '@nestjs/common';
 import { ChangePositionAdminNavService } from './change_position.service';
 import { ChangePositionAdminNavArgs } from './dto/change_position.args';
 
-import { AdminAuthGuards } from '../../../../utils';
+import { AdminAuthGuards } from '@/utils';
 
 @Resolver()
 export class ChangePositionAdminNavResolver {

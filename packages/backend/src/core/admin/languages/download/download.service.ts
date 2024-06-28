@@ -12,10 +12,10 @@ import {
 
 import { DownloadCoreAdminLanguagesArgs } from './dto/download.args';
 
-import { DatabaseService } from '../../../../database';
-import { User } from '../../../../decorators';
-import { CustomError, NotFoundError } from '../../../../errors';
-import { ABSOLUTE_PATHS_BACKEND } from '../../../..';
+import { DatabaseService } from '@/database';
+import { User } from '@/decorators';
+import { CustomError, NotFoundError } from '@/errors';
+import { ABSOLUTE_PATHS_BACKEND } from '@/index';
 
 @Injectable()
 export class DownloadAdminCoreLanguageService {

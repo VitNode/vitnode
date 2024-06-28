@@ -4,8 +4,8 @@ import { Injectable } from '@nestjs/common';
 
 import { DeleteCreateAdminNavPluginsArgs } from './dto/delete.args';
 
-import { NotFoundError } from '../../../../../errors';
-import { ABSOLUTE_PATHS_BACKEND, ConfigPlugin } from '../../../../..';
+import { NotFoundError } from '@/errors';
+import { ABSOLUTE_PATHS_BACKEND, ConfigPlugin } from '@/index';
 
 @Injectable()
 export class DeleteAdminNavPluginsService {

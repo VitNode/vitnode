@@ -4,8 +4,8 @@ import { UseGuards } from '@nestjs/common';
 import { DeleteCoreEditorService } from './delete.service';
 import { DeleteCoreEditorArgs } from './dto/delete.args';
 
-import { AuthGuards } from '../../../utils';
-import { CurrentUser, User } from '../../../decorators';
+import { AuthGuards } from '@/utils';
+import { CurrentUser, User } from '@/decorators';
 
 @Resolver()
 export class DeleteCoreEditorResolver {

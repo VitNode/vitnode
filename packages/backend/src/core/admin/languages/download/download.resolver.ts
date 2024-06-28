@@ -4,8 +4,8 @@ import { UseGuards } from '@nestjs/common';
 import { DownloadAdminCoreLanguageService } from './download.service';
 import { DownloadCoreAdminLanguagesArgs } from './dto/download.args';
 
-import { AdminAuthGuards } from '../../../../utils';
-import { CurrentUser, User } from '../../../../decorators';
+import { AdminAuthGuards } from '@/utils';
+import { CurrentUser, User } from '@/decorators';
 
 @Resolver()
 export class DownloadAdminCoreLanguagesResolver {
