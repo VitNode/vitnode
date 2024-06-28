@@ -1147,6 +1147,62 @@ export type User = {
 
 export type UserOrGroupCoreStaffUnion = StaffGroupUser | User;
 
+export type Admin__Core_Files__DeleteMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type Admin__Core_Files__DeleteMutation = { __typename?: 'Mutation', admin__core_files__delete: string };
+
+export type Admin__Core_Languages__CreateMutationVariables = Exact<{
+  code: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  timezone: Scalars['String']['input'];
+  locale: Scalars['String']['input'];
+  time24: Scalars['Boolean']['input'];
+  allowInInput: Scalars['Boolean']['input'];
+}>;
+
+
+export type Admin__Core_Languages__CreateMutation = { __typename?: 'Mutation', admin__core_languages__create: { __typename?: 'ShowCoreLanguages', code: string, id: number, name: string } };
+
+export type Admin__Core_Languages__DeleteMutationVariables = Exact<{
+  code: Scalars['String']['input'];
+}>;
+
+
+export type Admin__Core_Languages__DeleteMutation = { __typename?: 'Mutation', admin__core_languages__delete: string };
+
+export type Admin__Core_Languages__DownloadMutationVariables = Exact<{
+  code: Scalars['String']['input'];
+  plugins: Array<Scalars['String']['input']> | Scalars['String']['input'];
+}>;
+
+
+export type Admin__Core_Languages__DownloadMutation = { __typename?: 'Mutation', admin__core_languages__download: string };
+
+export type Admin__Core_Languages__EditMutationVariables = Exact<{
+  default: Scalars['Boolean']['input'];
+  enabled: Scalars['Boolean']['input'];
+  id: Scalars['Int']['input'];
+  name: Scalars['String']['input'];
+  timezone: Scalars['String']['input'];
+  locale: Scalars['String']['input'];
+  time24: Scalars['Boolean']['input'];
+  allowInInput: Scalars['Boolean']['input'];
+}>;
+
+
+export type Admin__Core_Languages__EditMutation = { __typename?: 'Mutation', admin__core_languages__edit: { __typename?: 'ShowCoreLanguages', code: string, default: boolean, enabled: boolean, id: number, name: string, protected: boolean, timezone: string } };
+
+export type Admin__Core_Languages__UpdateMutationVariables = Exact<{
+  code: Scalars['String']['input'];
+  file: Scalars['Upload']['input'];
+}>;
+
+
+export type Admin__Core_Languages__UpdateMutation = { __typename?: 'Mutation', admin__core_languages__update: string };
+
 export type Admin_Sessions__Sign_OutMutationVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -1216,6 +1272,17 @@ export type Admin__Sessions__AuthorizationQueryVariables = Exact<{ [key: string]
 
 export type Admin__Sessions__AuthorizationQuery = { __typename?: 'Query', admin__sessions__authorization: { __typename?: 'AuthorizationAdminSessionsObj', version: string, user?: { __typename?: 'AuthorizationCurrentUserObj', email: string, id: number, name_seo: string, is_admin: boolean, is_mod: boolean, name: string, newsletter: boolean, avatar_color: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, file_name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } | null, nav: Array<{ __typename?: 'NavAdminPluginsAuthorization', code: string, nav: Array<{ __typename?: 'ShowAdminNavPluginsObj', code: string, href: string, icon?: string | null, children?: Array<{ __typename?: 'ShowAdminNavPlugins', code: string, href: string }> | null }> }> } };
 
+export type Admin__Core_Files__ShowQueryVariables = Exact<{
+  cursor?: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  sortBy?: InputMaybe<ShowCoreFilesSortByArgs>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type Admin__Core_Files__ShowQuery = { __typename?: 'Query', admin__core_files__show: { __typename?: 'ShowAdminFilesObj', pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number }, edges: Array<{ __typename?: 'ShowAdminFiles', count_uses: number, created: Date, dir_folder: string, extension: string, file_alt?: string | null, file_name: string, file_name_original: string, file_size: number, height?: number | null, id: number, mimetype: string, security_key?: string | null, width?: number | null, user: { __typename?: 'User', id: number, name: string, name_seo: string } }> } };
+
 export type Admin__Core_Groups__Show_ShortQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
   search?: InputMaybe<Scalars['String']['input']>;
@@ -1228,6 +1295,28 @@ export type Admin__Install__LayoutQueryVariables = Exact<{ [key: string]: never;
 
 
 export type Admin__Install__LayoutQuery = { __typename?: 'Query', admin__install__layout: { __typename?: 'LayoutAdminInstallObj', status: LayoutAdminInstallEnum } };
+
+export type Admin__Core_Languages__ShowQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  cursor?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sortBy?: InputMaybe<ShowCoreLanguagesSortByArgs>;
+}>;
+
+
+export type Admin__Core_Languages__ShowQuery = { __typename?: 'Query', core_languages__show: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', code: string, default: boolean, allow_in_input: boolean, enabled: boolean, id: number, name: string, protected: boolean, timezone: string, locale: string, time_24: boolean, updated: Date, created: Date }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
+
+export type Admin__Core_Plugins__Show__QuickQueryVariables = Exact<{
+  cursor?: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  sortBy?: InputMaybe<ShowAdminPluginsSortByArgs>;
+  search?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type Admin__Core_Plugins__Show__QuickQuery = { __typename?: 'Query', admin__core_plugins__show: { __typename?: 'ShowAdminPluginsObj', edges: Array<{ __typename?: 'ShowAdminPlugins', code: string, name: string, version?: string | null, created: Date, version_code?: number | null }> } };
 
 export type Core_MiddlewareQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1272,6 +1361,64 @@ export type Core_Members__Show__SearchQueryVariables = Exact<{
 export type Core_Members__Show__SearchQuery = { __typename?: 'Query', core_members__show: { __typename?: 'ShowCoreMembersObj', edges: Array<{ __typename?: 'ShowCoreMembers', avatar_color: string, id: number, name: string, name_seo: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, file_name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } }> } };
 
 
+export const Admin__Core_Files__Delete = gql`
+    mutation Admin__core_files__delete($id: Int!) {
+  admin__core_files__delete(id: $id)
+}
+    `;
+export const Admin__Core_Languages__Create = gql`
+    mutation Admin__core_languages__create($code: String!, $name: String!, $timezone: String!, $locale: String!, $time24: Boolean!, $allowInInput: Boolean!) {
+  admin__core_languages__create(
+    code: $code
+    name: $name
+    timezone: $timezone
+    locale: $locale
+    time_24: $time24
+    allow_in_input: $allowInInput
+  ) {
+    code
+    id
+    name
+  }
+}
+    `;
+export const Admin__Core_Languages__Delete = gql`
+    mutation Admin__core_languages__delete($code: String!) {
+  admin__core_languages__delete(code: $code)
+}
+    `;
+export const Admin__Core_Languages__Download = gql`
+    mutation Admin__core_languages__download($code: String!, $plugins: [String!]!) {
+  admin__core_languages__download(code: $code, plugins: $plugins)
+}
+    `;
+export const Admin__Core_Languages__Edit = gql`
+    mutation Admin__core_languages__edit($default: Boolean!, $enabled: Boolean!, $id: Int!, $name: String!, $timezone: String!, $locale: String!, $time24: Boolean!, $allowInInput: Boolean!) {
+  admin__core_languages__edit(
+    default: $default
+    enabled: $enabled
+    id: $id
+    name: $name
+    timezone: $timezone
+    locale: $locale
+    time_24: $time24
+    allow_in_input: $allowInInput
+  ) {
+    code
+    default
+    enabled
+    id
+    name
+    protected
+    timezone
+  }
+}
+    `;
+export const Admin__Core_Languages__Update = gql`
+    mutation Admin__core_languages__update($code: String!, $file: Upload!) {
+  admin__core_languages__update(code: $code, file: $file)
+}
+    `;
 export const Admin_Sessions__Sign_Out = gql`
     mutation Admin_sessions__sign_out {
   admin_sessions__sign_out
@@ -1386,6 +1533,46 @@ export const Admin__Sessions__Authorization = gql`
   }
 }
     `;
+export const Admin__Core_Files__Show = gql`
+    query Admin__core_files__show($cursor: Int, $first: Int, $sortBy: ShowCoreFilesSortByArgs, $last: Int, $search: String) {
+  admin__core_files__show(
+    cursor: $cursor
+    first: $first
+    sortBy: $sortBy
+    last: $last
+    search: $search
+  ) {
+    pageInfo {
+      count
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      totalCount
+    }
+    edges {
+      count_uses
+      created
+      dir_folder
+      extension
+      file_alt
+      file_name
+      file_name_original
+      file_size
+      height
+      id
+      mimetype
+      security_key
+      user {
+        id
+        name
+        name_seo
+      }
+      width
+    }
+  }
+}
+    `;
 export const Admin__Core_Groups__Show_Short = gql`
     query Admin__Core_groups__show_short($first: Int, $search: String) {
   admin__core_groups__show(first: $first, search: $search) {
@@ -1404,6 +1591,59 @@ export const Admin__Install__Layout = gql`
     query Admin__install__layout {
   admin__install__layout {
     status
+  }
+}
+    `;
+export const Admin__Core_Languages__Show = gql`
+    query Admin__Core_languages__show($first: Int, $last: Int, $cursor: Int, $search: String, $sortBy: ShowCoreLanguagesSortByArgs) {
+  core_languages__show(
+    first: $first
+    last: $last
+    cursor: $cursor
+    search: $search
+    sortBy: $sortBy
+  ) {
+    edges {
+      code
+      default
+      allow_in_input
+      enabled
+      id
+      name
+      protected
+      timezone
+      locale
+      time_24
+      updated
+      created
+    }
+    pageInfo {
+      count
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      totalCount
+    }
+  }
+}
+    `;
+export const Admin__Core_Plugins__Show__Quick = gql`
+    query Admin__core_plugins__show__quick($cursor: Int, $first: Int, $last: Int, $sortBy: ShowAdminPluginsSortByArgs, $search: String) {
+  admin__core_plugins__show(
+    cursor: $cursor
+    first: $first
+    last: $last
+    sortBy: $sortBy
+    search: $search
+  ) {
+    edges {
+      code
+      name
+      version
+      created
+      version_code
+    }
   }
 }
     `;
