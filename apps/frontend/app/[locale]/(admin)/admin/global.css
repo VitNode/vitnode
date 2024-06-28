@@ -1,3 +1,5 @@
+@tailwind components;
+@tailwind utilities;
 @tailwind base;
 
 @layer base {
@@ -61,5 +63,20 @@
     /* --ring: var(--primary); */
     --cover: 220 64% 39%;
     --cover-foreground: 210 40% 98%;
+  }
+}
+
+@layer utilities {
+  .underline-strike-through {
+    text-decoration: underline line-through;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 }
