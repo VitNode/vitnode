@@ -5,7 +5,7 @@ import { ShowAdminFilesService } from './show.service';
 import { ShowAdminFilesObj } from './dto/show.obj';
 import { ShowAdminFilesArgs } from './dto/show.args';
 
-import { AdminAuthGuards } from '@/utils';
+import { AdminAuthGuards } from '../../../../utils';
 
 @Resolver()
 export class ShowAdminFilesResolver {

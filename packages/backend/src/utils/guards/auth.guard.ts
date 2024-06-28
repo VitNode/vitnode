@@ -9,7 +9,7 @@ import { Reflector } from '@nestjs/core';
 
 import { Ctx } from '../context';
 
-import { User } from '@/decorators';
+import { User } from '../../decorators';
 
 interface IOAuthGuards {
   authorization: (context: Ctx) => Promise<User>;

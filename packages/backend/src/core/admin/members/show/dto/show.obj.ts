@@ -1,6 +1,6 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 
-import { PageInfo } from '@/utils';
+import { PageInfo } from '../../../../../utils';
 import { ShowCoreMembers } from '../../../../members/show/dto/show.obj';
 
 @ObjectType()

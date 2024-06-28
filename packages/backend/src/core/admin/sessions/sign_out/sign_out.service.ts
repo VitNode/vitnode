@@ -2,9 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
 import { ConfigService } from '@nestjs/config';
 
-import { DatabaseService } from '@/database';
-import { Ctx } from '@/utils';
-import { core_admin_sessions } from '@/templates/core/admin/database/schema/admins';
+import { DatabaseService } from '../../../../database';
+import { Ctx } from '../../../../utils';
+import { core_admin_sessions } from '../../../../templates/core/admin/database/schema/admins';
 
 @Injectable()
 export class SignOutAdminSessionsService {

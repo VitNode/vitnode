@@ -5,8 +5,8 @@ import { Injectable } from '@nestjs/common';
 import { ShowAdminNavPluginsArgs } from './dto/show.args';
 import { ShowAdminNavPluginsObj } from './dto/show.obj';
 
-import { NotFoundError } from '@/errors';
-import { ABSOLUTE_PATHS_BACKEND, ConfigPlugin } from '@/index';
+import { NotFoundError } from '../../../../../errors';
+import { ABSOLUTE_PATHS_BACKEND, ConfigPlugin } from '../../../../..';
 
 @Injectable()
 export class ShowAdminNavPluginsService {

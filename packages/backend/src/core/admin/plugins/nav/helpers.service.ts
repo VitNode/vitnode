@@ -3,7 +3,7 @@ import { Injectable } from '@nestjs/common';
 import {
   ConfigPlugin,
   NavPluginInfoJSONTypeWithChildren,
-} from '@/providers/plugins.type';
+} from '../../../../providers/plugins.type';
 
 @Injectable()
 export class HelpersAdminNavPluginsService {

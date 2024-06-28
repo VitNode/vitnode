@@ -5,7 +5,7 @@ import { EditAdminNavService } from './edit.service';
 import { EditAdminNavArgs } from './dto/edit.args';
 
 import { ShowCoreNav } from '../../../nav/show/dto/show.obj';
-import { AdminAuthGuards } from '@/utils';
+import { AdminAuthGuards } from '../../../../utils';
 
 @Resolver()
 export class EditAdminNavResolver {

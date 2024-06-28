@@ -8,11 +8,11 @@ import { currentUnixDate, generateRandomString } from 'vitnode-shared';
 
 import { UpdateCoreAdminLanguagesArgs } from './dto/update.args';
 
-import { DatabaseService } from '@/database';
-import { NotFoundError } from '@/errors';
-import { ABSOLUTE_PATHS_BACKEND } from '@/index';
-import { core_languages } from '@/templates/core/admin/database/schema/languages';
-import { setRebuildRequired } from '@/functions/rebuild-required';
+import { DatabaseService } from '../../../../database';
+import { NotFoundError } from '../../../../errors';
+import { ABSOLUTE_PATHS_BACKEND } from '../../../..';
+import { core_languages } from '../../../../templates/core/admin/database/schema/languages';
+import { setRebuildRequired } from '../../../../functions/rebuild-required';
 
 @Injectable()
 export class UpdateAdminCoreLanguageService {

@@ -6,9 +6,9 @@ import { Injectable } from '@nestjs/common';
 import { ShowSettingsObj } from './dto/show.obj';
 import { ManifestWithLang } from '../settings.module';
 
-import { DatabaseService } from '@/database';
-import { ABSOLUTE_PATHS_BACKEND, getConfigFile } from '@/index';
-import { core_languages } from '@/templates/core/admin/database/schema/languages';
+import { DatabaseService } from '../../../database';
+import { ABSOLUTE_PATHS_BACKEND, getConfigFile } from '../../..';
+import { core_languages } from '../../../templates/core/admin/database/schema/languages';
 
 @Injectable()
 export class ShowSettingsService {

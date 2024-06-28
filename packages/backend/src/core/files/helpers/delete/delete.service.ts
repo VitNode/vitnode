@@ -5,7 +5,7 @@ import { Injectable } from '@nestjs/common';
 
 import { DeleteCoreFilesArgs } from './dto/delete.args';
 
-import { ABSOLUTE_PATHS_BACKEND, CustomError } from '@/index';
+import { ABSOLUTE_PATHS_BACKEND, CustomError } from '../../../..';
 
 @Injectable()
 export class DeleteCoreFilesService {

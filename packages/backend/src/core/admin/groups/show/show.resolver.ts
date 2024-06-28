@@ -5,7 +5,7 @@ import { ShowAdminGroupsService } from './show.service';
 import { ShowAdminGroupsObj } from './dto/show.obj';
 import { ShowAdminGroupsArgs } from './dto/show.args';
 
-import { AdminAuthGuards } from '@/utils';
+import { AdminAuthGuards } from '../../../../utils';
 
 @Resolver()
 export class ShowAdminGroupsResolver {

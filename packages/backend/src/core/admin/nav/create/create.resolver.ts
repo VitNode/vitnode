@@ -5,7 +5,7 @@ import { CreateAdminNavService } from './create.service';
 import { CreateAdminNavArgs } from './dto/create.args';
 
 import { ShowCoreNav } from '../../../nav/show/dto/show.obj';
-import { AdminAuthGuards } from '@/utils';
+import { AdminAuthGuards } from '../../../../utils';
 
 @Resolver()
 export class CreateAdminNavResolver {

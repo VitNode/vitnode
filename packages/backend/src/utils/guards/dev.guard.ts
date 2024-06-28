@@ -1,6 +1,6 @@
 import { CanActivate, Injectable } from '@nestjs/common';
 
-import { AccessDeniedError } from '@/errors';
+import { AccessDeniedError } from '../../errors';
 
 @Injectable()
 export class OnlyForDevelopment implements CanActivate {

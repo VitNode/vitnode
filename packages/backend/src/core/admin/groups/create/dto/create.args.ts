@@ -6,7 +6,7 @@ import {
   IsTextLanguageInput,
   TextLanguageInput,
   TransformTextLanguageInput,
-} from '@/utils';
+} from '../../../../../utils';
 
 @InputType()
 export class ContentCreateAdminGroups {

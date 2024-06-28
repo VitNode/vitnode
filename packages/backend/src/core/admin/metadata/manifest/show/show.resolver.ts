@@ -4,7 +4,7 @@ import { UseGuards } from '@nestjs/common';
 import { ShowAdminManifestMetadataService } from './show.service';
 import { ShowAdminManifestMetadataObj } from './dto/show.obj';
 
-import { AdminAuthGuards } from '@/utils';
+import { AdminAuthGuards } from '../../../../../utils';
 
 @Resolver()
 export class ShowAdminManifestMetadataResolver {

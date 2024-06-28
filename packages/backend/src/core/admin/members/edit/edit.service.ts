@@ -4,9 +4,9 @@ import { eq } from 'drizzle-orm';
 import { EditAdminMembersArgs } from './dto/edit.args';
 import { EditAdminMembersObj } from './dto/edit.obj';
 
-import { DatabaseService } from '@/database';
-import { core_users } from '@/templates/core/admin/database/schema/users';
-import { AccessDeniedError, NotFoundError } from '@/errors';
+import { DatabaseService } from '../../../../database';
+import { core_users } from '../../../../templates/core/admin/database/schema/users';
+import { AccessDeniedError, NotFoundError } from '../../../../errors';
 
 @Injectable()
 export class EditAdminMembersService {

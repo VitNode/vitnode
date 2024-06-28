@@ -4,7 +4,7 @@ import { SignUpCoreMembersObj } from './dto/sign_up.obj';
 import { SignUpCoreMembersService } from './sign_up.service';
 import { SignUpCoreMembersArgs } from './dto/sign_up.args';
 
-import { Ctx } from '@/utils';
+import { Ctx } from '../../../utils';
 
 @Resolver()
 export class SignUpCoreMembersResolver {

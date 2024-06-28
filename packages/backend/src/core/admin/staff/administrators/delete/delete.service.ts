@@ -3,9 +3,9 @@ import { eq } from 'drizzle-orm';
 
 import { DeleteAdminStaffAdministratorsArgs } from './dto/delete.args';
 
-import { DatabaseService } from '@/database';
-import { CustomError, NotFoundError } from '@/errors';
-import { core_admin_permissions } from '@/templates/core/admin/database/schema/admins';
+import { DatabaseService } from '../../../../../database';
+import { CustomError, NotFoundError } from '../../../../../errors';
+import { core_admin_permissions } from '../../../../../templates/core/admin/database/schema/admins';
 
 @Injectable()
 export class DeleteAdminStaffAdministratorsService {
