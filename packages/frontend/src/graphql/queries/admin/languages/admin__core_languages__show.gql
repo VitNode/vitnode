@@ -1,4 +1,4 @@
-query Admin_Core_languages__show(
+query Admin__Core_languages__show(
   $first: Int
   $last: Int
   $cursor: Int
