@@ -1,19 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { count } from 'drizzle-orm';
 
-import { DatabaseService } from '../../../../database';
-import { CustomError } from '../../../../errors';
-import { core_languages } from '../../../../templates/core/admin/database/schema/languages';
+import { DatabaseService } from '@/database';
+import { CustomError } from '@/errors';
+import { core_languages } from '@/templates/core/admin/database/schema/languages';
 import {
   core_groups,
   core_groups_names,
-} from '../../../../templates/core/admin/database/schema/groups';
-import { core_admin_permissions } from '../../../../templates/core/admin/database/schema/admins';
+} from '@/templates/core/admin/database/schema/groups';
+import { core_admin_permissions } from '@/templates/core/admin/database/schema/admins';
 import {
   core_nav,
   core_nav_name,
-} from '../../../../templates/core/admin/database/schema/nav';
-import { core_moderators_permissions } from '../../../../templates/core/admin/database/schema/moderators';
+} from '@/templates/core/admin/database/schema/nav';
+import { core_moderators_permissions } from '@/templates/core/admin/database/schema/moderators';
 
 @Injectable()
 export class CreateDatabaseAdminInstallService {

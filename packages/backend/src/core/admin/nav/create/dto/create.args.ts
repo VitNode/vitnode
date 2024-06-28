@@ -13,7 +13,7 @@ import {
   TextLanguageInput,
   TransformString,
   TransformTextLanguageInput,
-} from '../../../../../utils';
+} from '@/utils';
 
 @ArgsType()
 export class CreateAdminNavArgs {

@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
-import { DatabaseService } from '../../../database';
-import { core_sessions_known_devices } from '../../../templates/core/admin/database/schema/sessions';
-import { Ctx } from '../../../utils';
-import { getUserIp, getUserAgentData } from '../../../functions';
+import { DatabaseService } from '@/database';
+import { core_sessions_known_devices } from '@/templates/core/admin/database/schema/sessions';
+import { Ctx } from '@/utils';
+import { getUserIp, getUserAgentData } from '@/functions';
 
 interface DeviceType {
   id: number;

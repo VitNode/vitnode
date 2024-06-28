@@ -1,4 +1,4 @@
-import { CustomError } from '../../../../errors';
+import { CustomError } from '@/errors';
 import { FileUpload } from '../../../../graphql-upload';
 
 export const acceptMimeTypeImage = [

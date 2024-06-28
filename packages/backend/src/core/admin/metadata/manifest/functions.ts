@@ -3,7 +3,7 @@ import * as fs from 'fs';
 
 import { ShowAdminManifestMetadataObj } from './show/dto/show.obj';
 
-import { ABSOLUTE_PATHS_BACKEND, NotFoundError } from '../../../..';
+import { ABSOLUTE_PATHS_BACKEND, NotFoundError } from '@/index';
 
 export const getManifest = ({
   lang_code,

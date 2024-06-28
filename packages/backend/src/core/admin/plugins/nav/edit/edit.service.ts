@@ -6,8 +6,8 @@ import { removeSpecialCharacters } from 'vitnode-shared';
 import { ShowAdminNavPluginsObj } from '../show/dto/show.obj';
 import { EditCreateAdminNavPluginsArgs } from './dto/edit.args';
 
-import { CustomError, NotFoundError } from '../../../../../errors';
-import { ABSOLUTE_PATHS_BACKEND, ConfigPlugin } from '../../../../..';
+import { CustomError, NotFoundError } from '@/errors';
+import { ABSOLUTE_PATHS_BACKEND, ConfigPlugin } from '@/index';
 
 @Injectable()
 export class EditAdminNavPluginsService {

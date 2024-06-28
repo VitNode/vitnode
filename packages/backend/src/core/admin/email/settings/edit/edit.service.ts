@@ -9,11 +9,7 @@ import {
   HelpersAdminEmailSettingsService,
   ShowAdminEmailSettingsServiceObjWithPassword,
 } from '../../helpers.service';
-import {
-  ConfigType,
-  configPath,
-  getConfigFile,
-} from '../../../../../providers/config';
+import { ConfigType, configPath, getConfigFile } from '@/providers/config';
 
 @Injectable()
 export class EditAdminEmailSettingsService extends HelpersAdminEmailSettingsService {

@@ -7,11 +7,11 @@ import { and, eq } from 'drizzle-orm';
 import { SignInCoreSessionsArgs } from './dto/sign_in.args';
 import { DeviceSignInCoreSessionsService } from './device.service';
 
-import { Ctx } from '../../../utils';
-import { DatabaseService } from '../../../database';
-import { AccessDeniedError, CustomError } from '../../../errors';
-import { core_admin_sessions } from '../../../templates/core/admin/database/schema/admins';
-import { core_sessions } from '../../../templates/core/admin/database/schema/sessions';
+import { Ctx } from '@/utils';
+import { DatabaseService } from '@/database';
+import { AccessDeniedError, CustomError } from '@/errors';
+import { core_admin_sessions } from '@/templates/core/admin/database/schema/admins';
+import { core_sessions } from '@/templates/core/admin/database/schema/sessions';
 
 interface CreateSessionArgs extends Ctx {
   email: string;

@@ -4,7 +4,7 @@ import { Injectable } from '@nestjs/common';
 
 import { ShowCoreMiddlewareObj } from './dto/languages.obj';
 
-import { ABSOLUTE_PATHS_BACKEND, getConfigFile } from '../../..';
+import { ABSOLUTE_PATHS_BACKEND, getConfigFile } from '@/index';
 
 @Injectable()
 export class ShowCoreMiddlewareService {

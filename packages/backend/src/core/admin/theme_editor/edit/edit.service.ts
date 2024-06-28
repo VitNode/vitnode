@@ -5,7 +5,7 @@ import { Injectable } from '@nestjs/common';
 
 import { EditAdminThemeEditorArgs, ThemeVariableInput } from './dto/edit.args';
 
-import { ABSOLUTE_PATHS_BACKEND, NotFoundError } from '../../../..';
+import { ABSOLUTE_PATHS_BACKEND, NotFoundError } from '@/index';
 import { keysFromCSSThemeEditor } from '../../../theme_editor/theme_editor.module';
 
 @Injectable()

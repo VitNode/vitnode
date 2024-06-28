@@ -14,8 +14,8 @@ import {
   removeLangFromTypes,
   removeModuleFromRootSchema,
 } from '../../../delete/contents';
-import { CustomError } from '../../../../../../errors';
-import { ABSOLUTE_PATHS_BACKEND } from '../../../../../..';
+import { CustomError } from '@/errors';
+import { ABSOLUTE_PATHS_BACKEND } from '@/index';
 
 interface ChangeFilesContentType {
   condition: (content: string) => boolean;

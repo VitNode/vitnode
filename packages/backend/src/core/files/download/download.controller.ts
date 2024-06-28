@@ -11,8 +11,8 @@ import {
 } from '@nestjs/common';
 import { Response } from 'express';
 
-import { DatabaseService } from '../../../database';
-import { ABSOLUTE_PATHS_BACKEND } from '../../..';
+import { DatabaseService } from '@/database';
+import { ABSOLUTE_PATHS_BACKEND } from '@/index';
 
 @Controller('secure_files')
 export class DownloadSecureFilesController {

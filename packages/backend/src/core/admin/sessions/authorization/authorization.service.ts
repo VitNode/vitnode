@@ -11,12 +11,12 @@ import {
   NavAdminPluginsAuthorization,
 } from './dto/authorization.obj';
 
-import { DatabaseService } from '../../../../database';
+import { DatabaseService } from '@/database';
 import { DeviceSignInCoreSessionsService } from '../../../sessions/sign_in/device.service';
-import { ABSOLUTE_PATHS_BACKEND, AccessDeniedError, Ctx } from '../../../..';
+import { ABSOLUTE_PATHS_BACKEND, AccessDeniedError, Ctx } from '@/index';
 import { AuthorizationCurrentUserObj } from '../../../sessions/authorization/dto/authorization.obj';
-import { core_sessions_known_devices } from '../../../../templates/core/admin/database/schema/sessions';
-import { getUserAgentData, getUserIp } from '../../../../functions';
+import { core_sessions_known_devices } from '@/templates/core/admin/database/schema/sessions';
+import { getUserAgentData, getUserIp } from '@/functions';
 
 @Injectable()
 export class AuthorizationAdminSessionsService {
