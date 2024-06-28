@@ -1,6 +1,20 @@
+import { exec } from 'child_process';
 import * as fs from 'fs';
 
-import { execShellCommand } from '../src';
+const execShellCommand = async (cmd: string) => {
+  return new Promise((resolve, reject) => {
+    exec(cmd, (error, stdout, stderr) => {
+      if (error) {
+        reject(error);
+      }
+      const result = stdout ? stdout : stderr;
+      // eslint-disable-next-line no-console
+      console.log(result);
+
+      resolve(result);
+    });
+  });
+};
 
 export const generateDatabaseMigrations = async ({
   pluginsPath,
