@@ -11,7 +11,6 @@ import { getConfigFile } from '../../helpers/config';
 import { fetcher } from '../../graphql/fetcher';
 import { Core_Middleware, Core_MiddlewareQuery } from '../../graphql/code';
 import { CONFIG } from '../../helpers/config-with-env';
-import './global.css';
 
 export interface RootLayoutProps {
   children: React.ReactNode;
