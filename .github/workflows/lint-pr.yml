@@ -1,8 +1,8 @@
-name: "Lint PR title"
+name: 'Lint PR title'
 
 on:
   pull_request_target:
-    branches: "*"
+    branches: '*'
     types:
       - opened
       - edited

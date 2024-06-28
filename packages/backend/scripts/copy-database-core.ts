@@ -10,6 +10,7 @@ export const copyDatabaseSchema = ({
   const currentPathToSchema = path.join(
     __dirname,
     '..',
+    '..',
     'src',
     'templates',
     'core',

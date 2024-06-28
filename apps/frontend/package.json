@@ -7,7 +7,7 @@
     "config:init": "vitnode-frontend init",
     "dev": "pnpm config:init && next dev --turbo",
     "dev:turbo": "next dev --turbo",
-    "build": "pnpm config:init && next build",
+    "build": "next build",
     "analyze": "cross-env ANALYZE=true pnpm build",
     "start": "next start",
     "start:prod": "node server.js",

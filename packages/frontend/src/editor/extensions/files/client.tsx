@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { formatBytes } from 'vitnode-shared';
 
 import { acceptMimeTypeImage, FilesHandlerAttributes } from './files';
+
 import { CONFIG } from '../../../helpers/config-with-env';
 
 const FileFromNextWithNode = ({
