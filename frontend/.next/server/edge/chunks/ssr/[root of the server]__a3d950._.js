@@ -23,6 +23,10 @@ __turbopack_esm__({
 });
 const DEFAULT_CONFIG_DATA = {
     rebuild_required: {
+<<<<<<< HEAD
+=======
+        themes: false,
+>>>>>>> b8e7de99 (feat: core_keys table)
         langs: false,
         plugins: false
     },
@@ -238,6 +242,10 @@ async function fetcher({ cache, headers, next, query, signal, uploads, variables
 
 __turbopack_esm__({
     "Admin_Blog_Categories__Show": ()=>Admin_Blog_Categories__Show,
+<<<<<<< HEAD
+=======
+    "Admin_Core_Themes__Show": ()=>Admin_Core_Themes__Show,
+>>>>>>> b8e7de99 (feat: core_keys table)
     "Admin_Sessions__Sign_Out": ()=>Admin_Sessions__Sign_Out,
     "Admin__Blog_Categories__Create": ()=>Admin__Blog_Categories__Create,
     "Admin__Core_Email_Settings__Edit": ()=>Admin__Core_Email_Settings__Edit,
@@ -283,6 +291,14 @@ __turbopack_esm__({
     "Admin__Core_Staff_Moderators__Delete": ()=>Admin__Core_Staff_Moderators__Delete,
     "Admin__Core_Staff_Moderators__Show": ()=>Admin__Core_Staff_Moderators__Show,
     "Admin__Core_Theme_Editor__Edit": ()=>Admin__Core_Theme_Editor__Edit,
+<<<<<<< HEAD
+=======
+    "Admin__Core_Themes__Create": ()=>Admin__Core_Themes__Create,
+    "Admin__Core_Themes__Delete": ()=>Admin__Core_Themes__Delete,
+    "Admin__Core_Themes__Download": ()=>Admin__Core_Themes__Download,
+    "Admin__Core_Themes__Edit": ()=>Admin__Core_Themes__Edit,
+    "Admin__Core_Themes__Upload": ()=>Admin__Core_Themes__Upload,
+>>>>>>> b8e7de99 (feat: core_keys table)
     "Admin__Core__Dashboard": ()=>Admin__Core__Dashboard,
     "Admin__Install__Create_Database": ()=>Admin__Install__Create_Database,
     "Admin__Install__Layout": ()=>Admin__Install__Layout,
@@ -306,12 +322,20 @@ __turbopack_esm__({
     "Core_Sessions__Sign_In": ()=>Core_Sessions__Sign_In,
     "Core_Sessions__Sign_Out": ()=>Core_Sessions__Sign_Out,
     "Core_Theme_Editor__Show": ()=>Core_Theme_Editor__Show,
+<<<<<<< HEAD
+=======
+    "Core_Themes__Change": ()=>Core_Themes__Change,
+>>>>>>> b8e7de99 (feat: core_keys table)
     "LayoutAdminInstallEnum": ()=>LayoutAdminInstallEnum,
     "ShowAdminGroupsSortingColumnEnum": ()=>ShowAdminGroupsSortingColumnEnum,
     "ShowAdminMembersSortingColumnEnum": ()=>ShowAdminMembersSortingColumnEnum,
     "ShowAdminPluginsSortingColumnEnum": ()=>ShowAdminPluginsSortingColumnEnum,
     "ShowAdminStaffAdministratorsSortingColumnEnum": ()=>ShowAdminStaffAdministratorsSortingColumnEnum,
     "ShowAdminStaffModeratorsSortingColumnEnum": ()=>ShowAdminStaffModeratorsSortingColumnEnum,
+<<<<<<< HEAD
+=======
+    "ShowAdminThemesSortingColumnEnum": ()=>ShowAdminThemesSortingColumnEnum,
+>>>>>>> b8e7de99 (feat: core_keys table)
     "ShowCoreFilesSortingColumnEnum": ()=>ShowCoreFilesSortingColumnEnum,
     "ShowCoreLanguagesSortingColumnEnum": ()=>ShowCoreLanguagesSortingColumnEnum,
     "ShowCoreMembersSortingColumnEnum": ()=>ShowCoreMembersSortingColumnEnum,
@@ -348,6 +372,12 @@ const ShowAdminStaffAdministratorsSortingColumnEnum = {
 const ShowAdminStaffModeratorsSortingColumnEnum = {
     updated: 'updated'
 };
+<<<<<<< HEAD
+=======
+const ShowAdminThemesSortingColumnEnum = {
+    created: 'created'
+};
+>>>>>>> b8e7de99 (feat: core_keys table)
 const ShowCoreFilesSortingColumnEnum = {
     created: 'created',
     file_size: 'file_size'
@@ -700,6 +730,56 @@ const Admin__Core_Theme_Editor__Edit = __TURBOPACK__imported__module__$5b$projec
   admin__core_theme_editor__edit(colors: $colors)
 }
     `;
+<<<<<<< HEAD
+=======
+const Admin__Core_Themes__Create = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$graphql$2d$tag$40$2$2e$12$2e$6_graphql$40$16$2e$8$2e$1$2f$node_modules$2f$graphql$2d$tag$2f$lib$2f$index$2e$js__$5b$middleware$5d$__$28$ecmascript$29$__["default"]`
+    mutation Admin__core_themes__create($author: String!, $authorUrl: String, $name: String!, $supportUrl: String!) {
+  admin__core_themes__create(
+    author: $author
+    author_url: $authorUrl
+    name: $name
+    support_url: $supportUrl
+  ) {
+    id
+  }
+}
+    `;
+const Admin__Core_Themes__Delete = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$graphql$2d$tag$40$2$2e$12$2e$6_graphql$40$16$2e$8$2e$1$2f$node_modules$2f$graphql$2d$tag$2f$lib$2f$index$2e$js__$5b$middleware$5d$__$28$ecmascript$29$__["default"]`
+    mutation Admin__core_themes__delete($id: Int!) {
+  admin__core_themes__delete(id: $id)
+}
+    `;
+const Admin__Core_Themes__Download = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$graphql$2d$tag$40$2$2e$12$2e$6_graphql$40$16$2e$8$2e$1$2f$node_modules$2f$graphql$2d$tag$2f$lib$2f$index$2e$js__$5b$middleware$5d$__$28$ecmascript$29$__["default"]`
+    mutation Admin__core_themes__download($id: Int!, $version: String, $versionCode: Int) {
+  admin__core_themes__download(
+    id: $id
+    version: $version
+    version_code: $versionCode
+  )
+}
+    `;
+const Admin__Core_Themes__Edit = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$graphql$2d$tag$40$2$2e$12$2e$6_graphql$40$16$2e$8$2e$1$2f$node_modules$2f$graphql$2d$tag$2f$lib$2f$index$2e$js__$5b$middleware$5d$__$28$ecmascript$29$__["default"]`
+    mutation Admin__core_themes__edit($author: String!, $authorUrl: String, $id: Int!, $name: String!, $supportUrl: String!) {
+  admin__core_themes__edit(
+    author: $author
+    author_url: $authorUrl
+    id: $id
+    name: $name
+    support_url: $supportUrl
+  ) {
+    id
+  }
+}
+    `;
+const Admin__Core_Themes__Upload = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$graphql$2d$tag$40$2$2e$12$2e$6_graphql$40$16$2e$8$2e$1$2f$node_modules$2f$graphql$2d$tag$2f$lib$2f$index$2e$js__$5b$middleware$5d$__$28$ecmascript$29$__["default"]`
+    mutation Admin__core_themes__upload($file: Upload!, $id: Int) {
+  admin__core_themes__upload(file: $file, id: $id) {
+    id
+    name
+  }
+}
+    `;
+>>>>>>> b8e7de99 (feat: core_keys table)
 const Admin__Sessions__Authorization = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$graphql$2d$tag$40$2$2e$12$2e$6_graphql$40$16$2e$8$2e$1$2f$node_modules$2f$graphql$2d$tag$2f$lib$2f$index$2e$js__$5b$middleware$5d$__$28$ecmascript$29$__["default"]`
     query Admin__sessions__authorization {
   admin__sessions__authorization {
@@ -1344,6 +1424,40 @@ const Core_Theme_Editor__Show = __TURBOPACK__imported__module__$5b$project$5d2f$
   }
 }
     `;
+<<<<<<< HEAD
+=======
+const Admin_Core_Themes__Show = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$graphql$2d$tag$40$2$2e$12$2e$6_graphql$40$16$2e$8$2e$1$2f$node_modules$2f$graphql$2d$tag$2f$lib$2f$index$2e$js__$5b$middleware$5d$__$28$ecmascript$29$__["default"]`
+    query Admin_core_themes__show($cursor: Int, $first: Int, $last: Int, $sortBy: ShowAdminThemesSortByArgs) {
+  admin__core_themes__show(
+    cursor: $cursor
+    first: $first
+    last: $last
+    sortBy: $sortBy
+  ) {
+    edges {
+      author
+      author_url
+      created
+      default
+      id
+      name
+      protected
+      support_url
+      version
+      version_code
+    }
+    pageInfo {
+      count
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      totalCount
+    }
+  }
+}
+    `;
+>>>>>>> b8e7de99 (feat: core_keys table)
 const Admin__Blog_Categories__Create = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$graphql$2d$tag$40$2$2e$12$2e$6_graphql$40$16$2e$8$2e$1$2f$node_modules$2f$graphql$2d$tag$2f$lib$2f$index$2e$js__$5b$middleware$5d$__$28$ecmascript$29$__["default"]`
     mutation Admin__blog_categories__create($description: [TextLanguageInput!]!, $name: [TextLanguageInput!]!, $color: String!, $permissions: PermissionsCreatePluginCategories!) {
   admin__blog_categories__create(
@@ -1438,6 +1552,14 @@ const Core_Sessions__Sign_Out = __TURBOPACK__imported__module__$5b$project$5d2f$
   core_sessions__sign_out
 }
     `;
+<<<<<<< HEAD
+=======
+const Core_Themes__Change = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$graphql$2d$tag$40$2$2e$12$2e$6_graphql$40$16$2e$8$2e$1$2f$node_modules$2f$graphql$2d$tag$2f$lib$2f$index$2e$js__$5b$middleware$5d$__$28$ecmascript$29$__["default"]`
+    mutation Core_themes__change($id: Int!) {
+  core_themes__change(id: $id)
+}
+    `;
+>>>>>>> b8e7de99 (feat: core_keys table)
 const Core_Metadata = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$graphql$2d$tag$40$2$2e$12$2e$6_graphql$40$16$2e$8$2e$1$2f$node_modules$2f$graphql$2d$tag$2f$lib$2f$index$2e$js__$5b$middleware$5d$__$28$ecmascript$29$__["default"]`
     query Core_metadata {
   core_settings__show {
@@ -1469,6 +1591,15 @@ const Core_Middleware = __TURBOPACK__imported__module__$5b$project$5d2f$node_mod
       time_24
     }
   }
+<<<<<<< HEAD
+=======
+  core_themes__show {
+    edges {
+      id
+      name
+    }
+  }
+>>>>>>> b8e7de99 (feat: core_keys table)
   core_plugins__show {
     code
   }
@@ -1482,6 +1613,10 @@ const Core_Middleware = __TURBOPACK__imported__module__$5b$project$5d2f$node_mod
       value
     }
     site_name
+<<<<<<< HEAD
+=======
+    theme_id
+>>>>>>> b8e7de99 (feat: core_keys table)
   }
 }
     `;
@@ -1580,6 +1715,10 @@ const Core_Sessions__Authorization = __TURBOPACK__imported__module__$5b$project$
       language_code
       value
     }
+<<<<<<< HEAD
+=======
+    theme_id
+>>>>>>> b8e7de99 (feat: core_keys table)
   }
 }
     `;
