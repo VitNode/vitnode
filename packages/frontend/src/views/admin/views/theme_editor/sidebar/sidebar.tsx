@@ -1,15 +1,16 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
-import { Link } from 'vitnode-frontend/navigation';
-import { buttonVariants } from 'vitnode-frontend/components/ui/button';
-import { Form } from 'vitnode-frontend/components/ui/form';
 
 import { ThemeEditorTab, useThemeEditor } from '../hooks/use-theme-editor';
 import { ColorTabThemeEditor } from './tabs/color-tab';
 import { MainTabThemeEditor } from './tabs/main';
-import { SubmitContentThemeEditor } from './submit';
+import { SubmitSidebarThemeEditor } from './submit';
 
-export const ContentThemeEditor = () => {
+import { Form } from '../../../../../components/ui/form';
+import { buttonVariants } from '../../../../../components/ui/button';
+import { Link } from '../../../../../navigation';
+
+export const SidebarThemeEditor = () => {
   const {
     activeTab,
     direction,
@@ -65,7 +66,7 @@ export const ContentThemeEditor = () => {
                 {t('cancel')}
               </Link>
 
-              <SubmitContentThemeEditor
+              <SubmitSidebarThemeEditor
                 onClick={async () => form.handleSubmit(onSubmit)()}
                 isPending={form.formState.isSubmitting}
                 openSubmitDialog={openSubmitDialog}

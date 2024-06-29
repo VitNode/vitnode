@@ -1,20 +1,21 @@
 'use client';
 
 import * as React from 'react';
-import { cn } from 'vitnode-frontend/helpers/classnames';
-import { CONFIG } from 'vitnode-frontend/helpers/config-with-env';
-import { Loader } from 'vitnode-frontend/components/ui/loader';
 
 import { ThemeEditorViewEnum, ToolbarThemeEditor } from './toolbar';
 import { ThemeEditorContext, ThemeEditorTab } from './hooks/use-theme-editor';
-import { ContentThemeEditor } from './content/content';
+import { SidebarThemeEditor } from './sidebar/sidebar';
 import {
   keysFromCSSThemeEditor,
   useThemeEditorApi,
 } from './hooks/use-theme-editor-api';
-import { Core_Theme_Editor__ShowQuery } from '@/graphql/hooks';
 
-export const ThemeEditorView = (props: Core_Theme_Editor__ShowQuery) => {
+import { Core_Theme_Editor__ShowQuery } from '../../../../graphql/code';
+import { CONFIG } from '../../../../helpers/config-with-env';
+import { cn } from '../../../../helpers/classnames';
+import { Loader } from '../../../../components/ui/loader';
+
+export const ContentThemeEditor = (props: Core_Theme_Editor__ShowQuery) => {
   const { activeTheme, iframeRef, ...rest } = useThemeEditorApi(props);
   const [activeMode, setActiveMode] = React.useState<ThemeEditorViewEnum>(
     ThemeEditorViewEnum.Desktop,
@@ -79,7 +80,7 @@ export const ThemeEditorView = (props: Core_Theme_Editor__ShowQuery) => {
             setActiveMode={setActiveMode}
             activeMode={activeMode}
           />
-          <ContentThemeEditor />
+          <SidebarThemeEditor />
         </div>
       </div>
     </ThemeEditorContext.Provider>

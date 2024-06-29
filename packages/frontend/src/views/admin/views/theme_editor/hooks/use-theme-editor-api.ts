@@ -6,11 +6,12 @@ import { useTheme } from 'next-themes';
 import { HslColor } from 'react-colorful';
 import { toast } from 'sonner';
 import { useTranslations } from 'next-intl';
-import { useRouter } from 'vitnode-frontend/navigation';
-import { CONFIG } from 'vitnode-frontend/helpers/config-with-env';
 
-import { Core_Theme_Editor__ShowQuery } from '@/graphql/hooks';
 import { mutationApi } from './mutation-api';
+
+import { Core_Theme_Editor__ShowQuery } from '../../../../../graphql/code';
+import { useRouter } from '../../../../../navigation';
+import { CONFIG } from '../../../../../helpers/config-with-env';
 
 const zObjectHsl = z.object({
   h: z.number(),

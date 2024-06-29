@@ -5,18 +5,18 @@ import {
   getStringFromHSL,
   isColorBrightness,
 } from 'vitnode-shared';
+
+import { ThemeEditorTab, useThemeEditor } from '../../hooks/use-theme-editor';
+import { Button } from '../../../../../../components/ui/button';
+import { Separator } from '../../../../../../components/ui/separator';
 import {
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from 'vitnode-frontend/components/ui/form';
-import { Button } from 'vitnode-frontend/components/ui/button';
-import { ColorInput } from 'vitnode-frontend/components/ui/color-input';
-import { Separator } from 'vitnode-frontend/components/ui/separator';
-
-import { ThemeEditorTab, useThemeEditor } from '../../hooks/use-theme-editor';
+} from '../../../../../../components/ui/form';
+import { ColorInput } from '../../../../../../components/ui/color-input';
 
 export const ColorTabThemeEditor = () => {
   const t = useTranslations('core.theme_editor.colors');
