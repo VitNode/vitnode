@@ -1,0 +1,11 @@
+mutation Admin__core_nav__change_position(
+  $id: Int!
+  $indexToMove: Int!
+  $parentId: Int!
+) {
+  admin__core_nav__change_position(
+    id: $id
+    index_to_move: $indexToMove
+    parent_id: $parentId
+  )
+}

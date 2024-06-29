@@ -1343,6 +1343,45 @@ export type Admin__Core_Email_Settings__TestMutationVariables = Exact<{
 
 export type Admin__Core_Email_Settings__TestMutation = { __typename?: 'Mutation', admin__core_email_settings__test: string };
 
+export type Admin__Core_Nav__Change_PositionMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+  indexToMove: Scalars['Int']['input'];
+  parentId: Scalars['Int']['input'];
+}>;
+
+
+export type Admin__Core_Nav__Change_PositionMutation = { __typename?: 'Mutation', admin__core_nav__change_position: string };
+
+export type Admin__Core_Nav__CreateMutationVariables = Exact<{
+  description: Array<TextLanguageInput> | TextLanguageInput;
+  external: Scalars['Boolean']['input'];
+  href: Scalars['String']['input'];
+  name: Array<TextLanguageInput> | TextLanguageInput;
+  icon?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type Admin__Core_Nav__CreateMutation = { __typename?: 'Mutation', admin__core_nav__create: { __typename?: 'ShowCoreNav', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
+
+export type Admin__Core_Nav__DeleteMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type Admin__Core_Nav__DeleteMutation = { __typename?: 'Mutation', admin__core_nav__delete: string };
+
+export type Admin__Core_Nav__EditMutationVariables = Exact<{
+  description: Array<TextLanguageInput> | TextLanguageInput;
+  external: Scalars['Boolean']['input'];
+  href: Scalars['String']['input'];
+  id: Scalars['Int']['input'];
+  name: Array<TextLanguageInput> | TextLanguageInput;
+  icon?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type Admin__Core_Nav__EditMutation = { __typename?: 'Mutation', admin__core_nav__edit: { __typename?: 'ShowCoreNav', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
+
 export type Core_Editor_Files__DeleteMutationVariables = Exact<{
   id: Scalars['Int']['input'];
   securityKey?: InputMaybe<Scalars['String']['input']>;
@@ -1500,6 +1539,11 @@ export type Core_Main_Settings__ShowQueryVariables = Exact<{ [key: string]: neve
 
 
 export type Core_Main_Settings__ShowQuery = { __typename?: 'Query', core_settings__show: { __typename?: 'ShowSettingsObj', site_name: string, site_short_name: string, site_copyright: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, site_description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
+
+export type Admin__Core_Nav__ShowQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Admin__Core_Nav__ShowQuery = { __typename?: 'Query', core_nav__show: { __typename?: 'ShowCoreNavObj', edges: Array<{ __typename?: 'ShowCoreNav', id: number, href: string, external: boolean, position: number, icon?: string | null, children: Array<{ __typename?: 'ShowCoreNavItem', id: number, href: string, external: boolean, position: number, icon?: string | null, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }>, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }> } };
 
 export type Core_MiddlewareQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1755,6 +1799,55 @@ export const Admin__Core_Email_Settings__Test = gql`
     message: $message
     subject: $subject
   )
+}
+    `;
+export const Admin__Core_Nav__Change_Position = gql`
+    mutation Admin__core_nav__change_position($id: Int!, $indexToMove: Int!, $parentId: Int!) {
+  admin__core_nav__change_position(
+    id: $id
+    index_to_move: $indexToMove
+    parent_id: $parentId
+  )
+}
+    `;
+export const Admin__Core_Nav__Create = gql`
+    mutation Admin__core_nav__create($description: [TextLanguageInput!]!, $external: Boolean!, $href: String!, $name: [TextLanguageInput!]!, $icon: String) {
+  admin__core_nav__create(
+    description: $description
+    external: $external
+    href: $href
+    name: $name
+    icon: $icon
+  ) {
+    id
+    name {
+      language_code
+      value
+    }
+  }
+}
+    `;
+export const Admin__Core_Nav__Delete = gql`
+    mutation Admin__core_nav__delete($id: Int!) {
+  admin__core_nav__delete(id: $id)
+}
+    `;
+export const Admin__Core_Nav__Edit = gql`
+    mutation Admin__core_nav__edit($description: [TextLanguageInput!]!, $external: Boolean!, $href: String!, $id: Int!, $name: [TextLanguageInput!]!, $icon: String) {
+  admin__core_nav__edit(
+    description: $description
+    external: $external
+    href: $href
+    id: $id
+    name: $name
+    icon: $icon
+  ) {
+    id
+    name {
+      language_code
+      value
+    }
+  }
 }
     `;
 export const Core_Editor_Files__Delete = gql`
@@ -2098,6 +2191,42 @@ export const Core_Main_Settings__Show = gql`
     site_description {
       language_code
       value
+    }
+  }
+}
+    `;
+export const Admin__Core_Nav__Show = gql`
+    query Admin__Core_nav__show {
+  core_nav__show {
+    edges {
+      children {
+        description {
+          language_code
+          value
+        }
+        id
+        name {
+          language_code
+          value
+        }
+        href
+        external
+        position
+        icon
+      }
+      description {
+        language_code
+        value
+      }
+      id
+      name {
+        language_code
+        value
+      }
+      href
+      external
+      position
+      icon
     }
   }
 }
