@@ -7,7 +7,7 @@ RUN apk add --no-cache libc6-compat
 RUN apk update
 # Set working directory
 WORKDIR /app
-RUN npm i -g turbo@~2.0.5
+RUN npm i -g turbo@~2.0.6
 COPY . .
 RUN turbo telemetry disable
 RUN turbo prune frontend --docker
@@ -38,7 +38,7 @@ ENV NEXT_TELEMETRY_DISABLED 1
 
 RUN pnpm turbo build --filter=frontend...
 
-# COPY frontend/config/config.json ./frontend/config/config.json
+# COPY frontend/config/config.json ./frontend/utils/config.json
 
 FROM base AS runner
 WORKDIR /app
@@ -55,11 +55,11 @@ WORKDIR /app
 # # https://nextjs.org/docs/advanced-features/output-file-tracing
 # COPY --from=installer --chown=nextjs:nodejs /app/frontend/.next/standalone ./
 # COPY --from=installer --chown=nextjs:nodejs /app/frontend/.next/static ./frontend/.next/static
-# COPY --from=installer --chown=nextjs:nodejs /app/frontend/config/config.json ./frontend/config/config.json
+# COPY --from=installer --chown=nextjs:nodejs /app/frontend/utils/config.json ./frontend/utils/config.json
 
 COPY --from=installer /app/frontend/.next/standalone ./
 COPY --from=installer /app/frontend/.next/static ./frontend/.next/static
-COPY --from=installer /app/frontend/config/config.json ./frontend/config.json
+COPY --from=installer /app/frontend/utils/config.json ./frontend/config.json
 
 EXPOSE 3000
 ENV PORT 3000

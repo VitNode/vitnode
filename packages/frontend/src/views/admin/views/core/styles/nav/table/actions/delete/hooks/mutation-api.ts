@@ -7,7 +7,7 @@ import {
   Admin__Core_Nav__Delete,
   Admin__Core_Nav__DeleteMutation,
   Admin__Core_Nav__DeleteMutationVariables,
-} from '../../../../../../../../../../graphql/code';
+} from '../../../../../../../../../../graphql/graphql';
 
 export const mutationApi = async (
   variables: Admin__Core_Nav__DeleteMutationVariables,

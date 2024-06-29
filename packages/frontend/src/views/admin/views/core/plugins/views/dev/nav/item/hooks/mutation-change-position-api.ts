@@ -6,7 +6,7 @@ import {
   Admin__Core_Plugins__Nav__Change_Position,
   Admin__Core_Plugins__Nav__Change_PositionMutation,
   Admin__Core_Plugins__Nav__Change_PositionMutationVariables,
-} from '../../../../../../../../../../graphql/code';
+} from '../../../../../../../../../../graphql/graphql';
 import { fetcher } from '../../../../../../../../../../graphql/fetcher';
 
 export const mutationChangePositionApi = async (

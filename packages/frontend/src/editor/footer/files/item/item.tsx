@@ -12,7 +12,7 @@ import { useEditorState } from '../../../hooks/use-editor-state';
 import { Button } from '../../../../components/ui/button';
 import { cn } from '../../../../helpers/classnames';
 import { CONFIG } from '../../../../helpers/config-with-env';
-import { TextLanguage } from '../../../../graphql/code';
+import { TextLanguage } from '../../../../graphql/graphql';
 
 export interface ItemListFilesFooterEditorProps
   extends Omit<FileStateEditor, 'file'> {

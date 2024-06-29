@@ -9,7 +9,7 @@ import { RootProviders } from './providers';
 
 import { getConfigFile } from '../../helpers/config';
 import { fetcher } from '../../graphql/fetcher';
-import { Core_Middleware, Core_MiddlewareQuery } from '../../graphql/code';
+import { Core_Middleware, Core_MiddlewareQuery } from '../../graphql/graphql';
 import { CONFIG } from '../../helpers/config-with-env';
 
 export interface RootLayoutProps {

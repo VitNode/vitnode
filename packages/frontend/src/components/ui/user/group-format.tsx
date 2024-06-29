@@ -1,4 +1,4 @@
-import { TextLanguage } from '../../../graphql/code';
+import { TextLanguage } from '../../../graphql/graphql';
 import { useTextLang } from '../../../hooks/use-text-lang';
 
 interface Props {

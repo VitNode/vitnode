@@ -1,4 +1,3 @@
-import { useTranslations } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
 
 import { TableAdministratorsStaffAdmin } from './table/table';
@@ -9,7 +8,7 @@ import {
   Admin__Core_Staff_Administrators__ShowQuery,
   Admin__Core_Staff_Administrators__ShowQueryVariables,
   ShowAdminStaffAdministratorsSortingColumnEnum,
-} from '../../../../../../graphql/code';
+} from '../../../../../../graphql/graphql';
 import { HeaderContent } from '../../../../../../components/ui/header-content';
 import { Card } from '../../../../../../components/ui/card';
 import {

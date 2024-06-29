@@ -7,7 +7,7 @@ import {
   Core_Editor_Files__Delete,
   Core_Editor_Files__DeleteMutation,
   Core_Editor_Files__DeleteMutationVariables,
-} from '../../../../../graphql/code';
+} from '../../../../../graphql/graphql';
 
 export const deleteMutationApi = async (
   variables: Core_Editor_Files__DeleteMutationVariables,

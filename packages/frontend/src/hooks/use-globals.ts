@@ -1,7 +1,7 @@
 import { ConfigType } from 'vitnode-shared';
 import * as React from 'react';
 
-import { Core_MiddlewareQuery } from '../graphql/code';
+import { Core_MiddlewareQuery } from '../graphql/graphql';
 
 interface Args {
   config: ConfigType;

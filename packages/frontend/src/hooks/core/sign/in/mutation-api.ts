@@ -6,7 +6,7 @@ import {
   Core_Sessions__Sign_In,
   Core_Sessions__Sign_InMutation,
   Core_Sessions__Sign_InMutationVariables,
-} from '../../../../graphql/code';
+} from '../../../../graphql/graphql';
 import { fetcher } from '../../../../graphql/fetcher';
 import { redirect } from '../../../../navigation';
 

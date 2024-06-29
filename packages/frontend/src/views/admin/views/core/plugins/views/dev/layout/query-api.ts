@@ -2,7 +2,7 @@ import {
   Admin__Core_Plugins__Show__Item,
   Admin__Core_Plugins__Show__ItemQuery,
   Admin__Core_Plugins__Show__ItemQueryVariables,
-} from '../../../../../../../../graphql/code';
+} from '../../../../../../../../graphql/graphql';
 import { ErrorType, fetcher } from '../../../../../../../../graphql/fetcher';
 
 export const getPluginDataAdmin = async (

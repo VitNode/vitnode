@@ -1,5 +1,5 @@
-import { Steps } from "nextra/components";
-import { FileTree } from "nextra/components";
+import { Steps } from 'nextra/components';
+import { FileTree } from 'nextra/components';
 
 # GraphGL
 
@@ -7,7 +7,7 @@ Frontend communicates with the backend via GraphQL and use SSR to fetching data.
 
 ## Generate GraphQL Types
 
-VitNode use [GraphQL Codegen](https://the-guild.dev/graphql/codegen) to generate types for GraphQL queries. The types are generated in the `graphql/hooks.ts` file.
+VitNode use [GraphQL Codegen](https://the-guild.dev/graphql/codegen) to generate types for GraphQL queries. The types are generated in the `utils/graphql.ts` file.
 
 <Steps>
 ### Find Query or Mutation
@@ -41,6 +41,6 @@ After defining the query, you can generate the types by running the following co
 pnpm codegen
 ```
 
-The command will overwrite the `graphql/hooks.ts` file.
+The command will overwrite the `utils/graphql.ts` file.
 
 </Steps>

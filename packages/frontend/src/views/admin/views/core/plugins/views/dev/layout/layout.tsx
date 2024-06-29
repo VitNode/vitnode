@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useTranslations } from 'next-intl';
 import { ExternalLink } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
@@ -8,7 +7,6 @@ import { Metadata } from 'next';
 import { ActionsDevPluginAdmin } from './actions/actions';
 import { getPluginDataAdmin } from './query-api';
 
-import { Admin__Core_Plugins__Show__ItemQuery } from '../../../../../../../../graphql/code';
 import { HeaderContent } from '../../../../../../../../components/ui/header-content';
 import { Badge } from '../../../../../../../../components/ui/badge';
 import { DateFormat } from '../../../../../../../../components/date-format';

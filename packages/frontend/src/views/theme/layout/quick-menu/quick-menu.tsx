@@ -1,7 +1,7 @@
 import { QuickMenuWrapper } from './wrapper';
 import { ButtonDrawer } from './drawer/button';
 
-import { ShowCoreNav } from '../../../../graphql/code';
+import { ShowCoreNav } from '../../../../graphql/graphql';
 import { flattenTree } from '../../../../helpers/flatten-tree';
 import { getSessionData } from '../../../../graphql/get-session-data';
 import { Icon } from '../../../../components/icon/icon';

@@ -2,7 +2,7 @@ import { useTranslations } from 'next-intl';
 
 import { useDeleteLangAdmin } from './hooks/use-delete-lang-admin';
 
-import { ShowCoreLanguages } from '../../../../../../../../graphql/code';
+import { ShowCoreLanguages } from '../../../../../../../../graphql/graphql';
 import {
   Form,
   FormControl,

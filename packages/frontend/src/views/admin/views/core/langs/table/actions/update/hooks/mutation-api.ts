@@ -7,7 +7,7 @@ import {
   Admin__Core_Languages__Update,
   Admin__Core_Languages__UpdateMutation,
   Admin__Core_Languages__UpdateMutationVariables,
-} from '../../../../../../../../../graphql/code';
+} from '../../../../../../../../../graphql/graphql';
 
 export const mutationApi = async (formData: FormData) => {
   try {

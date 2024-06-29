@@ -7,7 +7,7 @@ import {
   Admin__Core_Plugins__Nav__Create,
   Admin__Core_Plugins__Nav__CreateMutation,
   Admin__Core_Plugins__Nav__CreateMutationVariables,
-} from '../../../../../../../../../../graphql/code';
+} from '../../../../../../../../../../graphql/graphql';
 
 export const createMutationApi = async (
   variables: Admin__Core_Plugins__Nav__CreateMutationVariables,

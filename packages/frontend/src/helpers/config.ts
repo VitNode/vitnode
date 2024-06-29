@@ -38,7 +38,7 @@ export const DEFAULT_CONFIG_DATA: ConfigType = {
   ],
 };
 
-export const configPath = join(process.cwd(), 'config', 'config.json');
+export const configPath = join(process.cwd(), 'utils', 'config.json');
 
 export const getConfigFile = async () => {
   const file = await fs.promises.readFile(configPath, 'utf8');

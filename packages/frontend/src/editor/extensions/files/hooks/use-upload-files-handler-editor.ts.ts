@@ -14,7 +14,7 @@ import {
 import { uploadMutationApi } from './upload-mutation-api';
 import { getFilesFromContent } from './functions';
 
-import { TextLanguage } from '../../../../graphql/code';
+import { TextLanguage } from '../../../../graphql/graphql';
 
 export interface UploadFilesHandlerArgs {
   files: FileStateEditor[];

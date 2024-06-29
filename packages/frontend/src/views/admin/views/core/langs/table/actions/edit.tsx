@@ -2,7 +2,7 @@ import { Pencil } from 'lucide-react';
 import * as React from 'react';
 import { useTranslations } from 'next-intl';
 
-import { ShowCoreLanguages } from '../../../../../../../graphql/code';
+import { ShowCoreLanguages } from '../../../../../../../graphql/graphql';
 import {
   Dialog,
   DialogContent,

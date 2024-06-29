@@ -2,7 +2,7 @@ import {
   Core_Sessions__Authorization,
   Core_Sessions__AuthorizationQuery,
   Core_Sessions__AuthorizationQueryVariables,
-} from './code';
+} from './graphql';
 import { fetcher } from './fetcher';
 
 export const getSessionData = async () => {

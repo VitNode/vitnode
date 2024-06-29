@@ -1,6 +1,6 @@
 import { useTextLang } from 'vitnode-frontend/hooks/use-text-lang';
 
-import { ShowBlogCategories } from '@/graphql/hooks';
+import { ShowBlogCategories } from '@/utils/hooks';
 
 interface Props {
   data: ShowBlogCategories;

@@ -9,7 +9,7 @@ import { formatBytes } from 'vitnode-shared';
 
 import { ActionsFilesAdvancedCoreAdmin } from './actions/actions';
 
-import { Admin__Core_Files__ShowQuery } from '../../../../../../graphql/code';
+import { Admin__Core_Files__ShowQuery } from '../../../../../../graphql/graphql';
 import { CONFIG } from '../../../../../../helpers/config-with-env';
 import { HeaderSortingDataTable } from '../../../../../../components/data-table/header';
 import { DateFormat } from '../../../../../../components/date-format';

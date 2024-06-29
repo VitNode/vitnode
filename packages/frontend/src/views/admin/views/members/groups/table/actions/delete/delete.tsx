@@ -2,7 +2,7 @@ import { useTranslations } from 'next-intl';
 import { Trash2 } from 'lucide-react';
 import * as React from 'react';
 
-import { ShowAdminGroups } from '../../../../../../../../graphql/code';
+import { ShowAdminGroups } from '../../../../../../../../graphql/graphql';
 import {
   AlertDialog,
   AlertDialogContent,

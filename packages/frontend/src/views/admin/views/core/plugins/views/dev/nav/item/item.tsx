@@ -5,7 +5,7 @@ import { ActionsTableNavDevPluginAdmin } from './actions/actions';
 import { useItemNavDevPluginAdmin } from './hooks/use-item-nav-dev-plugin-admin';
 
 import { FlatTree } from '../../../../../../../../../helpers/flatten-tree';
-import { ShowAdminNavPluginsObj } from '../../../../../../../../../graphql/code';
+import { ShowAdminNavPluginsObj } from '../../../../../../../../../graphql/graphql';
 
 export const ItemContentNavDevPluginAdmin = (
   data: FlatTree<ShowAdminNavPluginsObj>,

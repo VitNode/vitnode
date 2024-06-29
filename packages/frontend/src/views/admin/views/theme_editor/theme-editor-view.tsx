@@ -4,7 +4,7 @@ import {
   Core_Theme_Editor__Show,
   Core_Theme_Editor__ShowQuery,
   Core_Theme_Editor__ShowQueryVariables,
-} from '../../../../graphql/code';
+} from '../../../../graphql/graphql';
 import { fetcher } from '../../../../graphql/fetcher';
 import { getSessionData } from '../../../../graphql/get-session-data';
 import { ErrorView } from '../../../theme/views/error/error-view';

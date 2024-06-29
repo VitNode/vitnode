@@ -8,7 +8,7 @@ import {
   Admin_Sessions__Sign_Out,
   Admin_Sessions__Sign_OutMutation,
   Admin_Sessions__Sign_OutMutationVariables,
-} from '../../../../../../../graphql/code';
+} from '../../../../../../../graphql/graphql';
 
 export const mutationApi = async () => {
   try {

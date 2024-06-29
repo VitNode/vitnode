@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { ShowAdminPlugins } from '../../../../../../../../graphql/code';
+import { ShowAdminPlugins } from '../../../../../../../../graphql/graphql';
 import {
   AlertDialog,
   AlertDialogContent,

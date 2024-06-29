@@ -6,7 +6,7 @@ import {
   Admin__Core_Email_Settings__Edit,
   Admin__Core_Email_Settings__EditMutation,
   Admin__Core_Email_Settings__EditMutationVariables,
-} from '../../../../../../../graphql/code';
+} from '../../../../../../../graphql/graphql';
 import { fetcher } from '../../../../../../../graphql/fetcher';
 
 export const mutationApi = async (

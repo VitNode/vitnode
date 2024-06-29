@@ -10,7 +10,7 @@ import { EnabledRowTableLangsCoreAdmin } from './enabled-row';
 import {
   Admin__Core_Languages__ShowQuery,
   ShowCoreLanguages,
-} from '../../../../../graphql/code';
+} from '../../../../../graphql/graphql';
 import { Badge } from '../../../../../components/ui/badge';
 import { HeaderSortingDataTable } from '../../../../../components/data-table/header';
 import { DateFormat } from '../../../../../components/date-format';

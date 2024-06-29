@@ -3,7 +3,7 @@ import { useTranslations } from 'next-intl';
 import { SubmitDeleteActionFilesAdvancedCoreAdmin } from './submit';
 import { useDeleteFileAdvancedAdmin } from './hooks/use-delete-file-advanced-admin';
 
-import { Admin__Core_Files__ShowQuery } from '../../../../../../../../graphql/code';
+import { Admin__Core_Files__ShowQuery } from '../../../../../../../../graphql/graphql';
 import {
   AlertDialogCancel,
   AlertDialogDescription,

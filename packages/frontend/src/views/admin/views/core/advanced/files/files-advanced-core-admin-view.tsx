@@ -11,7 +11,7 @@ import {
   Admin__Core_Files__ShowQuery,
   Admin__Core_Files__ShowQueryVariables,
   ShowCoreFilesSortingColumnEnum,
-} from '../../../../../../graphql/code';
+} from '../../../../../../graphql/graphql';
 import { HeaderContent } from '../../../../../../components/ui/header-content';
 import { Card } from '../../../../../../components/ui/card';
 import { fetcher } from '../../../../../../graphql/fetcher';

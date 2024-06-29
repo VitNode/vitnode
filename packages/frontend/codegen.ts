@@ -12,7 +12,7 @@ const config: CodegenConfig = {
   schema: `${process.env.NEXT_PUBLIC_GRAPHQL_URL ?? 'http://localhost:8080'}/graphql`,
   documents: [join(process.cwd(), '..', 'frontend', 'src/graphql/**/*.gql')],
   generates: {
-    ['./src/graphql/code.ts']: {
+    ['./src/graphql/graphql.ts']: {
       plugins: [
         'typescript',
         'typescript-operations',

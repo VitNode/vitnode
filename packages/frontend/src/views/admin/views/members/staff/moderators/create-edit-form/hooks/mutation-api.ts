@@ -7,7 +7,7 @@ import {
   Admin__Core_Staff_Moderators__Create,
   Admin__Core_Staff_Moderators__CreateMutation,
   Admin__Core_Staff_Moderators__CreateMutationVariables,
-} from '../../../../../../../../graphql/code';
+} from '../../../../../../../../graphql/graphql';
 
 export const mutationApi = async (
   variables: Admin__Core_Staff_Moderators__CreateMutationVariables,

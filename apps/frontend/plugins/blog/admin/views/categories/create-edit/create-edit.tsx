@@ -12,9 +12,10 @@ import { Tabs, TabsTrigger } from 'vitnode-frontend/components/ui/tabs';
 import { useTextLang } from 'vitnode-frontend/hooks/use-text-lang';
 
 import { useCreateEditCategoryBlogAdmin } from './hooks/use-create-edit-category-blog-admin';
-import { ShowBlogCategories } from '@/graphql/hooks';
 import { MainTabCreateEditCategoryBlogAdmin } from './tabs/main';
 import { PermissionsTabCreateEditCategoryBlogAdmin } from './tabs/permissions';
+
+import { ShowBlogCategories } from '@/utils/hooks';
 
 interface Props {
   data?: ShowBlogCategories;

@@ -2,7 +2,7 @@ import { useTranslations } from 'next-intl';
 
 import { useDownloadPluginAdmin } from './hooks/use-download-plugin-admin';
 
-import { ShowAdminPlugins } from '../../../../../../../../../../graphql/code';
+import { ShowAdminPlugins } from '../../../../../../../../../../graphql/graphql';
 import {
   DialogDescription,
   DialogFooter,

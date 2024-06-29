@@ -8,7 +8,7 @@ import { useTranslations } from 'next-intl';
 import { createMutationApi } from './create-mutation-api';
 import { editMutationApi } from './edit-mutation-api';
 
-import { ShowAdminNavPluginsObj } from '../../../../../../../../../../graphql/code';
+import { ShowAdminNavPluginsObj } from '../../../../../../../../../../graphql/graphql';
 import { useDialog } from '../../../../../../../../../../components/ui/dialog';
 import { zodInput } from '../../../../../../../../../../helpers/zod';
 import { ErrorType } from '../../../../../../../../../../graphql/fetcher';

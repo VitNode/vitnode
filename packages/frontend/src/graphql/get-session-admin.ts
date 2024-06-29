@@ -2,7 +2,7 @@ import {
   Admin__Sessions__Authorization,
   Admin__Sessions__AuthorizationQuery,
   Admin__Sessions__AuthorizationQueryVariables,
-} from './code';
+} from './graphql';
 import { fetcher } from './fetcher';
 
 export const getSessionAdminData = async () => {

@@ -7,7 +7,7 @@ import { convertColor, getHSLFromString } from 'vitnode-shared';
 
 import { mutationApi } from './mutation-api';
 
-import { Admin__Core_Manifest_Metadata__ShowQuery } from '../../../../../../../../graphql/code';
+import { Admin__Core_Manifest_Metadata__ShowQuery } from '../../../../../../../../graphql/graphql';
 import { CONFIG } from '../../../../../../../../helpers/config-with-env';
 
 export const useManifestCoreAdminView = ({

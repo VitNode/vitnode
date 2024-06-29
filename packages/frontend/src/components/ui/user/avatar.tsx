@@ -1,4 +1,4 @@
-import { Maybe, AvatarUser as AvatarUserType } from '../../../graphql/code';
+import { Maybe, AvatarUser as AvatarUserType } from '../../../graphql/graphql';
 import { cn } from '../../../helpers/classnames';
 import { CONFIG } from '../../../helpers/config-with-env';
 import { Img } from '../../img';

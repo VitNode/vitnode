@@ -10,7 +10,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '../../../../../../../../components/ui/alert-dialog';
-import { ShowAdminPlugins } from '../../../../../../../../graphql/code';
+import { ShowAdminPlugins } from '../../../../../../../../graphql/graphql';
 import { Button } from '../../../../../../../../components/ui/button';
 
 export const ContentDeletePluginActionsAdmin = ({

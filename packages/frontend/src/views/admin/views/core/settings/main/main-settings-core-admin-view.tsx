@@ -9,7 +9,7 @@ import {
   Core_Main_Settings__Show,
   Core_Main_Settings__ShowQuery,
   Core_Main_Settings__ShowQueryVariables,
-} from '../../../../../../graphql/code';
+} from '../../../../../../graphql/graphql';
 
 const getData = async () => {
   const { data } = await fetcher<

@@ -6,7 +6,7 @@ import {
   Core_Members__Avatar__Upload,
   Core_Members__Avatar__UploadMutation,
   Core_Members__Avatar__UploadMutationVariables,
-} from '../../../../../../../../../../../graphql/code';
+} from '../../../../../../../../../../../graphql/graphql';
 import { fetcher } from '../../../../../../../../../../../graphql/fetcher';
 
 export const mutationApi = async (formData: FormData) => {

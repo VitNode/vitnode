@@ -2,7 +2,7 @@ import { useTranslations } from 'next-intl';
 
 import { useUpdateLangAdmin } from './hooks/use-update-lang-admin';
 
-import { ShowCoreLanguages } from '../../../../../../../../graphql/code';
+import { ShowCoreLanguages } from '../../../../../../../../graphql/graphql';
 import {
   DialogFooter,
   DialogHeader,

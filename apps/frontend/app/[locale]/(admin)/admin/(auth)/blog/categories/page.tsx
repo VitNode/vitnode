@@ -9,12 +9,13 @@ import { fetcher } from 'vitnode-frontend/graphql/fetcher';
 import { HeaderContent } from 'vitnode-frontend/components/ui/header-content';
 
 import { CategoriesBlogAdminView } from '@/plugins/blog/admin/views/categories/categories-view';
+import { CreateCategoryBlogAdmin } from '@/plugins/blog/admin/views/categories/actions/create';
+
 import {
   Admin_Blog_Categories__Show,
   Admin_Blog_Categories__ShowQuery,
   Admin_Blog_Categories__ShowQueryVariables,
-} from '@/graphql/hooks';
-import { CreateCategoryBlogAdmin } from '@/plugins/blog/admin/views/categories/actions/create';
+} from '@/utils/hooks';
 
 const getData = async () => {
   const { data } = await fetcher<

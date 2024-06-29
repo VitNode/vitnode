@@ -101,7 +101,7 @@ export const generateManifest = () => {
     process.cwd(),
     '..',
     'frontend',
-    'config',
+    'utils',
     'config.json',
   );
 

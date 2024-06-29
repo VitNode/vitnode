@@ -7,7 +7,7 @@ import {
   Admin__Core_Languages__Create,
   Admin__Core_Languages__CreateMutation,
   Admin__Core_Languages__CreateMutationVariables,
-} from '../../../../../../../graphql/code';
+} from '../../../../../../../graphql/graphql';
 
 export const createMutationApi = async (
   variables: Admin__Core_Languages__CreateMutationVariables,

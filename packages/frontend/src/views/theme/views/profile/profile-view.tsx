@@ -5,7 +5,7 @@ import {
   Core_Members__Profiles,
   Core_Members__ProfilesQuery,
   Core_Members__ProfilesQueryVariables,
-} from '../../../../graphql/code';
+} from '../../../../graphql/graphql';
 import { getTextLang } from '../../../../hooks/use-text-lang';
 import { AvatarUser } from '../../../../components/ui/user/avatar';
 import { Button } from '../../../../components/ui/button';

@@ -10,7 +10,7 @@ import { formatBytes } from 'vitnode-shared';
 import {
   Core_Members__Files__ShowQuery,
   ShowCoreFiles,
-} from '../../../../../../graphql/code';
+} from '../../../../../../graphql/graphql';
 import { CONFIG } from '../../../../../../helpers/config-with-env';
 import {
   Tooltip,

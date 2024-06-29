@@ -6,7 +6,7 @@ import {
   Admin__Core_Manifest_Metadata__Edit,
   Admin__Core_Manifest_Metadata__EditMutation,
   Admin__Core_Manifest_Metadata__EditMutationVariables,
-} from '../../../../../../../../graphql/code';
+} from '../../../../../../../../graphql/graphql';
 import { fetcher } from '../../../../../../../../graphql/fetcher';
 
 export const mutationApi = async (

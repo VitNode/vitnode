@@ -7,7 +7,7 @@ import { DeleteActionsTableLangsCoreAdmin } from './delete/delete';
 import { DownloadActionsTableLangsCoreAdmin } from './download/download';
 import { UpdateActionsTableLangsCoreAdmin } from './update/update';
 
-import { ShowCoreLanguages } from '../../../../../../../graphql/code';
+import { ShowCoreLanguages } from '../../../../../../../graphql/graphql';
 import {
   DropdownMenu,
   DropdownMenuContent,

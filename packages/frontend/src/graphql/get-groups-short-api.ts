@@ -5,7 +5,7 @@ import {
   Admin__Core_Groups__Show_Short,
   Admin__Core_Groups__Show_ShortQuery,
   Admin__Core_Groups__Show_ShortQueryVariables,
-} from './code';
+} from './graphql';
 
 export const getGroupsShortApi = async (
   variables: Admin__Core_Groups__Show_ShortQueryVariables,

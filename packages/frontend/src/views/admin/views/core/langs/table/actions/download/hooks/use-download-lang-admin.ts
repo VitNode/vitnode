@@ -8,7 +8,7 @@ import { useTranslations } from 'next-intl';
 import { queryApi } from './query-api';
 import { mutationApi } from './mutation-api';
 
-import { ShowCoreLanguages } from '../../../../../../../../../graphql/code';
+import { ShowCoreLanguages } from '../../../../../../../../../graphql/graphql';
 import { useDialog } from '../../../../../../../../../components/ui/dialog';
 import { CONFIG } from '../../../../../../../../../helpers/config-with-env';
 
