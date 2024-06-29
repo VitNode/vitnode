@@ -4,7 +4,7 @@ import {
   Admin__Core_Email_Settings__Test,
   Admin__Core_Email_Settings__TestMutation,
   Admin__Core_Email_Settings__TestMutationVariables,
-} from '../../../../../../../../../graphql/code';
+} from '../../../../../../../../../graphql/graphql';
 import { fetcher } from '../../../../../../../../../graphql/fetcher';
 
 export const mutationApi = async (

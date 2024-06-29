@@ -2,7 +2,7 @@ import { Upload } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import * as React from 'react';
 
-import { ShowAdminPlugins } from '../../../../../../../graphql/code';
+import { ShowAdminPlugins } from '../../../../../../../graphql/graphql';
 import {
   Dialog,
   DialogContent,

@@ -4,7 +4,7 @@ import { TimezoneFieldCreateEditLangAdmin } from './fields/timezone';
 import { LocaleFieldCreateEditLangAdmin } from './fields/locale';
 import { useCreateEditLangAdmin } from './hooks/use-create-edit-lang-admin';
 
-import { ShowCoreLanguages } from '../../../../../../graphql/code';
+import { ShowCoreLanguages } from '../../../../../../graphql/graphql';
 import {
   DialogDescription,
   DialogFooter,

@@ -6,7 +6,7 @@ import {
   Admin__Core_Groups__Delete,
   Admin__Core_Groups__DeleteMutation,
   Admin__Core_Groups__DeleteMutationVariables,
-} from '../../../../../../../../../graphql/code';
+} from '../../../../../../../../../graphql/graphql';
 import { fetcher } from '../../../../../../../../../graphql/fetcher';
 
 export const mutationApi = async (

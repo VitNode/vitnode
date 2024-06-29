@@ -10,7 +10,7 @@ import {
   useThemeEditorApi,
 } from './hooks/use-theme-editor-api';
 
-import { Core_Theme_Editor__ShowQuery } from '../../../../graphql/code';
+import { Core_Theme_Editor__ShowQuery } from '../../../../graphql/graphql';
 import { CONFIG } from '../../../../helpers/config-with-env';
 import { cn } from '../../../../helpers/classnames';
 import { Loader } from '../../../../components/ui/loader';

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { AuthorizationCurrentUserObj } from '../graphql/code';
+import { AuthorizationCurrentUserObj } from '../graphql/graphql';
 
 interface Args {
   session: AuthorizationCurrentUserObj | null | undefined;

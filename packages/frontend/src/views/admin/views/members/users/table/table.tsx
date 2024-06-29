@@ -11,7 +11,7 @@ import { AdvancedFiltersUsersMembersAdmin } from './filters/advanced/advanced-fi
 import {
   Admin__Core_Members__ShowQuery,
   ShowAdminMembers,
-} from '../../../../../../graphql/code';
+} from '../../../../../../graphql/graphql';
 import { useTextLang } from '../../../../../../hooks/use-text-lang';
 import { AvatarUser } from '../../../../../../components/ui/user/avatar';
 import { HeaderSortingDataTable } from '../../../../../../components/data-table/header';

@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl';
 
 import { useEmailSettingsFormAdmin } from './hooks/use-email-settings-form-admin';
 
-import { Admin__Core_Email_Settings__ShowQuery } from '../../../../../../graphql/code';
+import { Admin__Core_Email_Settings__ShowQuery } from '../../../../../../graphql/graphql';
 import {
   Form,
   FormField,

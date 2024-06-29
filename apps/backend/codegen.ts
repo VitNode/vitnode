@@ -14,7 +14,7 @@ const config: CodegenConfig = {
     join(process.cwd(), '..', 'frontend', 'plugins/**/graphql/**/*.gql'),
   ],
   generates: {
-    [`${join(process.cwd(), '..', 'frontend', 'graphql', 'hooks.ts')}`]: {
+    [`${join(process.cwd(), '..', 'frontend', 'utils', 'graphql.ts')}`]: {
       plugins: [
         'typescript',
         'typescript-operations',

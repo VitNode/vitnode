@@ -1,4 +1,3 @@
-import { useTranslations } from 'next-intl';
 import * as React from 'react';
 import { getTranslations } from 'next-intl/server';
 
@@ -10,7 +9,7 @@ import {
   Admin__Core_Nav__ShowQuery,
   Admin__Core_Nav__ShowQueryVariables,
   ShowCoreNav,
-} from '../../../../../../graphql/code';
+} from '../../../../../../graphql/graphql';
 import { flattenTree } from '../../../../../../helpers/flatten-tree';
 import { Icon } from '../../../../../../components/icon/icon';
 import { HeaderContent } from '../../../../../../components/ui/header-content';

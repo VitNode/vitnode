@@ -8,7 +8,7 @@ import {
   Admin__Core_Languages__ShowQuery,
   Admin__Core_Languages__ShowQueryVariables,
   ShowCoreLanguagesSortingColumnEnum,
-} from '../../../../../graphql/code';
+} from '../../../../../graphql/graphql';
 import {
   SearchParamsPagination,
   getPaginationTool,

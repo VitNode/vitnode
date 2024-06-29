@@ -9,7 +9,7 @@ import { ActionsTableGroupsMembersAdmin } from './actions/actions';
 import {
   Admin__Core_Groups__ShowQuery,
   ShowAdminGroups,
-} from '../../../../../../graphql/code';
+} from '../../../../../../graphql/graphql';
 import { useTextLang } from '../../../../../../hooks/use-text-lang';
 import { Badge } from '../../../../../../components/ui/badge';
 import { Link } from '../../../../../../navigation';

@@ -6,7 +6,7 @@ import {
   Core_Members__Sign_Up,
   Core_Members__Sign_UpMutation,
   Core_Members__Sign_UpMutationVariables,
-} from '../../../../graphql/code';
+} from '../../../../graphql/graphql';
 import { fetcher } from '../../../../graphql/fetcher';
 
 export const mutationApi = async (

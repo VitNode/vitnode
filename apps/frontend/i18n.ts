@@ -5,7 +5,7 @@ import {
   Core_Middleware__Show,
   Core_Middleware__ShowQuery,
   Core_Middleware__ShowQueryVariables,
-} from './graphql/hooks';
+} from './utils/graphql';
 
 export default getRequestConfig(async ({ locale }) => {
   let plugins: string[] = [];

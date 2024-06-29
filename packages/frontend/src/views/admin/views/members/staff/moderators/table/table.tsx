@@ -10,7 +10,7 @@ import { ActionsTableModeratorsStaffAdmin } from './actions/actions';
 import {
   Admin__Core_Staff_Moderators__ShowQuery,
   ShowAdminStaffModerators,
-} from '../../../../../../../graphql/code';
+} from '../../../../../../../graphql/graphql';
 import { UserLink } from '../../../../../../../components/ui/user/link';
 import { GroupFormat } from '../../../../../../../components/ui/user/group-format';
 import { Badge } from '../../../../../../../components/ui/badge';

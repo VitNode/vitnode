@@ -4,7 +4,7 @@ import {
   Core_Members__Show__Search,
   Core_Members__Show__SearchQuery,
   Core_Members__Show__SearchQueryVariables,
-} from '../graphql/code';
+} from './graphql';
 import { fetcher } from './fetcher';
 
 export const getUsersShortApi = async (

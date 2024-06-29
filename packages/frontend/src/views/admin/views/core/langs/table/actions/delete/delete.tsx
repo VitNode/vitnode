@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { ShowCoreLanguages } from '../../../../../../../../graphql/code';
+import { ShowCoreLanguages } from '../../../../../../../../graphql/graphql';
 import {
   AlertDialog,
   AlertDialogContent,

@@ -6,7 +6,7 @@
   },
   "ignorePatterns": [
     "tailwind.config.ts",
-    "src/graphql/code.ts",
+    "src/graphql/graphql.ts",
     "codegen.ts",
     "scripts/**/*",
     "tsup.config.ts"

@@ -39,8 +39,10 @@ export class EditAdminThemeEditorService {
 
   async edit({ colors }: EditAdminThemeEditorArgs): Promise<string> {
     const pathToCss = join(
-      ABSOLUTE_PATHS_BACKEND.plugin({ code: 'core' }).frontend.templates,
-      'layout',
+      ABSOLUTE_PATHS_BACKEND.frontend.init,
+      'app',
+      '[locale]',
+      '(main)',
       'global.css',
     );
 

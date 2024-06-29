@@ -1,7 +1,7 @@
 import { EditGroupsMembersDialogAdmin } from './edit';
 import { DeleteGroupsMembersDialogAdmin } from './delete/delete';
 
-import { ShowAdminGroups } from '../../../../../../../graphql/code';
+import { ShowAdminGroups } from '../../../../../../../graphql/graphql';
 
 export const ActionsTableGroupsMembersAdmin = (props: ShowAdminGroups) => {
   return (

@@ -1,7 +1,7 @@
 import { useTranslations } from 'next-intl';
 import { CheckIcon } from 'lucide-react';
 
-import { ShowCoreMembers } from '../../../../graphql/code';
+import { ShowCoreMembers } from '../../../../graphql/graphql';
 import { CommandGroup, CommandItem } from '../../../../components/ui/command';
 import { UserInputItem } from '../../../../components/ui/user/user-input';
 import { cn } from '../../../../helpers/classnames';

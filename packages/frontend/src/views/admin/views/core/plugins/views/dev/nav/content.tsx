@@ -16,7 +16,7 @@ import { ItemNavDevPluginAdminContext } from './item/hooks/use-item-nav-dev-plug
 import {
   Admin__Core_Plugins__Nav__ShowQuery,
   ShowAdminNavPluginsObj,
-} from '../../../../../../../../graphql/code';
+} from '../../../../../../../../graphql/graphql';
 import { WithChildren } from '../../../../../../../../helpers/flatten-tree';
 import { useDragAndDrop } from '../../../../../../../../hooks/drag&drop/use-functions';
 import { ItemDragAndDrop } from '../../../../../../../../components/drag&drop-item';

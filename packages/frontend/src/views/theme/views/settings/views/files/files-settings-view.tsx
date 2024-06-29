@@ -7,7 +7,7 @@ import {
   Core_Members__Files__ShowQuery,
   Core_Members__Files__ShowQueryVariables,
   ShowCoreFilesSortingColumnEnum,
-} from '../../../../../../graphql/code';
+} from '../../../../../../graphql/graphql';
 import {
   CardContent,
   CardDescription,

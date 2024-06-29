@@ -4,7 +4,7 @@ import * as React from 'react';
 
 import { useItemNavDevPluginAdmin } from '../hooks/use-item-nav-dev-plugin-admin';
 
-import { ShowAdminNavPluginsObj } from '../../../../../../../../../../graphql/code';
+import { ShowAdminNavPluginsObj } from '../../../../../../../../../../graphql/graphql';
 import { FlatTree } from '../../../../../../../../../../helpers/flatten-tree';
 import {
   Dialog,

@@ -8,7 +8,7 @@ import {
   Admin__Core_Members__ShowQuery,
   Admin__Core_Members__ShowQueryVariables,
   ShowAdminMembersSortingColumnEnum,
-} from '../../../../../graphql/code';
+} from '../../../../../graphql/graphql';
 import { HeaderContent } from '../../../../../components/ui/header-content';
 import { Card } from '../../../../../components/ui/card';
 import {

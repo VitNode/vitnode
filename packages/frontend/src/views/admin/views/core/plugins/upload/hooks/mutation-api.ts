@@ -7,7 +7,7 @@ import {
   Admin__Core_Plugins__Upload,
   Admin__Core_Plugins__UploadMutation,
   Admin__Core_Plugins__UploadMutationVariables,
-} from '../../../../../../../graphql/code';
+} from '../../../../../../../graphql/graphql';
 
 export const mutationApi = async (formData: FormData) => {
   try {

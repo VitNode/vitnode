@@ -2,7 +2,7 @@ import { JSONContent } from '@tiptap/react';
 
 import { FileStateEditor } from '../files';
 
-import { TextLanguage } from '../../../../graphql/code';
+import { TextLanguage } from '../../../../graphql/graphql';
 
 export const getFilesFromContent = (
   content: TextLanguage[],

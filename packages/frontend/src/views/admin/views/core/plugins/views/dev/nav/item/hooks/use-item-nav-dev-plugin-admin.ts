@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { ShowAdminNavPluginsObj } from '../../../../../../../../../../graphql/code';
+import { ShowAdminNavPluginsObj } from '../../../../../../../../../../graphql/graphql';
 
 interface Args {
   dataFromSSR: ShowAdminNavPluginsObj[];

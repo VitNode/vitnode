@@ -4,7 +4,7 @@ import { toast } from 'sonner';
 import { SubmitDeleteActionsTableModeratorsStaffAdmin } from './submit';
 import { mutationApi } from './mutation-api';
 
-import { ShowAdminStaffModerators } from '../../../../../../../../../graphql/code';
+import { ShowAdminStaffModerators } from '../../../../../../../../../graphql/graphql';
 import {
   AlertDialogCancel,
   AlertDialogDescription,

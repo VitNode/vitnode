@@ -5,7 +5,7 @@ import { removeSpecialCharacters } from 'vitnode-shared';
 
 import { useCreateNavPluginAdmin } from './hooks/use-create-nav-plugin-admin';
 
-import { ShowAdminNavPluginsObj } from '../../../../../../../../../graphql/code';
+import { ShowAdminNavPluginsObj } from '../../../../../../../../../graphql/graphql';
 import {
   DialogFooter,
   DialogHeader,

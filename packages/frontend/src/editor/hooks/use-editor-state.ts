@@ -7,7 +7,7 @@ import {
   UploadFilesHandlerEditorArgs,
 } from '../extensions/files/hooks/use-upload-files-handler-editor.ts';
 
-import { TextLanguage } from '../../graphql/code';
+import { TextLanguage } from '../../graphql/graphql';
 
 interface Args extends Omit<UploadFilesHandlerEditorArgs, 'value'> {
   editor: Editor;

@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { classNameDrawerQuickMenu } from '../drawer';
 
-import { ShowCoreNav } from '../../../../../../graphql/code';
+import { ShowCoreNav } from '../../../../../../graphql/graphql';
 import { Link, usePathname } from '../../../../../../navigation';
 import { DrawerClose } from '../../../../../../components/ui/drawer';
 import { cn } from '../../../../../../helpers/classnames';

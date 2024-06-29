@@ -10,7 +10,7 @@ import {
   Admin__Core_Plugins__Nav__ShowQuery,
   Admin__Core_Plugins__Nav__ShowQueryVariables,
   ShowAdminNavPluginsObj,
-} from '../../../../../../../../graphql/code';
+} from '../../../../../../../../graphql/graphql';
 import { flattenTree } from '../../../../../../../../helpers/flatten-tree';
 import { fetcher } from '../../../../../../../../graphql/fetcher';
 

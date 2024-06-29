@@ -9,7 +9,7 @@ import {
   Admin__Core_Groups__ShowQuery,
   Admin__Core_Groups__ShowQueryVariables,
   ShowAdminGroupsSortingColumnEnum,
-} from '../../../../../graphql/code';
+} from '../../../../../graphql/graphql';
 import {
   SearchParamsPagination,
   getPaginationTool,

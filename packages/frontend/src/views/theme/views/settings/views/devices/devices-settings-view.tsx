@@ -7,7 +7,7 @@ import {
   Core_Sessions__Devices__Show,
   Core_Sessions__Devices__ShowQuery,
   Core_Sessions__Devices__ShowQueryVariables,
-} from '../../../../../../graphql/code';
+} from '../../../../../../graphql/graphql';
 import {
   CardContent,
   CardDescription,

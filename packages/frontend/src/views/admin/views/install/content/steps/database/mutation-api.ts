@@ -6,7 +6,7 @@ import {
   Admin__Install__Create_Database,
   Admin__Install__Create_DatabaseMutation,
   Admin__Install__Create_DatabaseMutationVariables,
-} from '../../../../../../../graphql/code';
+} from '../../../../../../../graphql/graphql';
 import { fetcher } from '../../../../../../../graphql/fetcher';
 
 export const mutationApi = async () => {

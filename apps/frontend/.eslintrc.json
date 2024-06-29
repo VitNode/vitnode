@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/eslintrc",
-  "ignorePatterns": ["graphql/hooks.ts", ".next", "global.d.ts"],
+  "ignorePatterns": ["utils/graphql.ts", ".next", "global.d.ts"],
   "env": {
     "browser": true,
     "es2021": true

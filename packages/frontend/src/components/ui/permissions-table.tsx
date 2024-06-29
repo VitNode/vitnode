@@ -7,7 +7,7 @@ import { Loader } from './loader';
 import { Input } from './input';
 import { Switch } from './switch';
 
-import { ShowAdminGroups } from '../../graphql/code';
+import { ShowAdminGroups } from '../../graphql/graphql';
 import { usePermissionsGroupsAdminAPI } from '../../utils/components/permissions-table/use-permissions-table-api';
 import { useTextLang } from '../../hooks/use-text-lang';
 

@@ -7,7 +7,7 @@ import { SetDefaultPluginActionsAdmin } from './set-default/set-default';
 import { UploadPluginActionsAdmin } from './upload';
 
 import { Link, usePathname, useRouter } from '../../../../../../../navigation';
-import { ShowAdminPlugins } from '../../../../../../../graphql/code';
+import { ShowAdminPlugins } from '../../../../../../../graphql/graphql';
 import { CONFIG } from '../../../../../../../helpers/config-with-env';
 import {
   DropdownMenu,

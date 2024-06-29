@@ -6,7 +6,7 @@ import {
   Core_Sessions__Sign_Out,
   Core_Sessions__Sign_OutMutation,
   Core_Sessions__Sign_OutMutationVariables,
-} from '../../../../graphql/code';
+} from '../../../../graphql/graphql';
 import { fetcher } from '../../../../graphql/fetcher';
 import { redirect } from '../../../../navigation';
 

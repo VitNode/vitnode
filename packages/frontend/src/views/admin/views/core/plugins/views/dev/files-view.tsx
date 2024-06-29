@@ -5,7 +5,7 @@ import {
   Admin__Core_Plugins__Files,
   Admin__Core_Plugins__FilesQuery,
   Admin__Core_Plugins__FilesQueryVariables,
-} from '../../../../../../../graphql/code';
+} from '../../../../../../../graphql/graphql';
 import { fetcher } from '../../../../../../../graphql/fetcher';
 
 const getData = async (variables: Admin__Core_Plugins__FilesQueryVariables) => {

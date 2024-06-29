@@ -37,7 +37,7 @@ import { Button } from '../ui/button';
 import { SkeletonDataTable } from './skeleton';
 import { ToolbarDataTable, ToolbarDataTableProps } from './toolbar/toolbar';
 
-import { PageInfo } from '../../graphql/code';
+import { PageInfo } from '../../graphql/graphql';
 import { usePathname, useRouter } from '../../navigation';
 
 interface TDataMin {

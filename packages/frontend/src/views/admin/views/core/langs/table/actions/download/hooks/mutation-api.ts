@@ -7,7 +7,7 @@ import {
   Admin__Core_Languages__Download,
   Admin__Core_Languages__DownloadMutation,
   Admin__Core_Languages__DownloadMutationVariables,
-} from '../../../../../../../../../graphql/code';
+} from '../../../../../../../../../graphql/graphql';
 
 export const mutationApi = async (
   variables: Admin__Core_Languages__DownloadMutationVariables,

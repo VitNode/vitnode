@@ -33,7 +33,7 @@ export const configPath = join(
   process.cwd(),
   '..',
   'frontend',
-  'config',
+  'utils',
   'config.json',
 );
 

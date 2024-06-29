@@ -3,7 +3,7 @@ import { Check } from 'lucide-react';
 
 import { useDownloadLangAdmin } from './hooks/use-download-lang-admin';
 
-import { ShowCoreLanguages } from '../../../../../../../../graphql/code';
+import { ShowCoreLanguages } from '../../../../../../../../graphql/graphql';
 import { useSessionAdmin } from '../../../../../../../../hooks/use-session-admin';
 import { Loader } from '../../../../../../../../components/ui/loader';
 import {

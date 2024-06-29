@@ -3,7 +3,7 @@ import { useTranslations } from 'next-intl';
 import { SubmitDeleteActionTableNavDevPluginAdmin } from './submit';
 import { useDeleteNavPluginAdmin } from './hooks/use-delete-nav-plugin-admin';
 
-import { ShowAdminNavPluginsObj } from '../../../../../../../../../../../graphql/code';
+import { ShowAdminNavPluginsObj } from '../../../../../../../../../../../graphql/graphql';
 import {
   AlertDialogCancel,
   AlertDialogDescription,

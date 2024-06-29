@@ -1,4 +1,4 @@
-/graphql/hooks.ts
+/utils/graphql.ts
 
 next.config.mjs
 tailwind.config.js

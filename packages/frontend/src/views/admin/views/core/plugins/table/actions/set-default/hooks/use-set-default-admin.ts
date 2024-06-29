@@ -2,7 +2,7 @@ import { toast } from 'sonner';
 import { useTranslations } from 'next-intl';
 
 import { mutationEditApi } from '../../../../actions/create/hooks/mutation-edit-api';
-import { ShowAdminPlugins } from '../../../../../../../../../graphql/code';
+import { ShowAdminPlugins } from '../../../../../../../../../graphql/graphql';
 
 export const useSetDefaultPluginAdmin = (data: ShowAdminPlugins) => {
   const tCore = useTranslations('core');
