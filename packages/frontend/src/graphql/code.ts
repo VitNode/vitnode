@@ -1203,6 +1203,62 @@ export type Admin__Core_Languages__UpdateMutationVariables = Exact<{
 
 export type Admin__Core_Languages__UpdateMutation = { __typename?: 'Mutation', admin__core_languages__update: string };
 
+export type Admin__Core_Groups__DeleteMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type Admin__Core_Groups__DeleteMutation = { __typename?: 'Mutation', admin__core_groups__delete: string };
+
+export type Admin__Core_Groups__EditMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+  name: Array<TextLanguageInput> | TextLanguageInput;
+  content: ContentCreateAdminGroups;
+}>;
+
+
+export type Admin__Core_Groups__EditMutation = { __typename?: 'Mutation', admin__core_groups__edit: { __typename?: 'ShowAdminGroups', id: number } };
+
+export type Core_Groups__Admin_CreateMutationVariables = Exact<{
+  name: Array<TextLanguageInput> | TextLanguageInput;
+  content: ContentCreateAdminGroups;
+}>;
+
+
+export type Core_Groups__Admin_CreateMutation = { __typename?: 'Mutation', core_groups__admin_create: { __typename?: 'ShowAdminGroups', id: number } };
+
+export type Admin__Core_Staff_Administrators__CreateMutationVariables = Exact<{
+  groupId?: InputMaybe<Scalars['Int']['input']>;
+  userId?: InputMaybe<Scalars['Int']['input']>;
+  unrestricted: Scalars['Boolean']['input'];
+}>;
+
+
+export type Admin__Core_Staff_Administrators__CreateMutation = { __typename?: 'Mutation', admin__core_staff_administrators__create: { __typename?: 'ShowAdminStaffAdministrators', created: Date, id: number, protected: boolean, unrestricted: boolean, updated: Date } };
+
+export type Admin__Core_Staff_Administrators__DeleteMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type Admin__Core_Staff_Administrators__DeleteMutation = { __typename?: 'Mutation', admin__core_staff_administrators__delete: string };
+
+export type Admin__Core_Staff_Moderators__CreateMutationVariables = Exact<{
+  groupId?: InputMaybe<Scalars['Int']['input']>;
+  userId?: InputMaybe<Scalars['Int']['input']>;
+  unrestricted: Scalars['Boolean']['input'];
+}>;
+
+
+export type Admin__Core_Staff_Moderators__CreateMutation = { __typename?: 'Mutation', admin__core_staff_moderators__create: { __typename?: 'ShowAdminStaffModerators', created: Date, id: number, protected: boolean, unrestricted: boolean, updated: Date } };
+
+export type Admin__Core_Staff_Moderators__DeleteMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type Admin__Core_Staff_Moderators__DeleteMutation = { __typename?: 'Mutation', admin__core_staff_moderators__delete: string };
+
 export type Admin__Core_Plugins__CreateMutationVariables = Exact<{
   author: Scalars['String']['input'];
   authorUrl?: InputMaybe<Scalars['String']['input']>;
@@ -1492,6 +1548,49 @@ export type Admin__Core_Plugins__Show__QuickQueryVariables = Exact<{
 
 export type Admin__Core_Plugins__Show__QuickQuery = { __typename?: 'Query', admin__core_plugins__show: { __typename?: 'ShowAdminPluginsObj', edges: Array<{ __typename?: 'ShowAdminPlugins', code: string, name: string, version?: string | null, created: Date, version_code?: number | null }> } };
 
+export type Admin__Core_Groups__ShowQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']['input']>;
+  cursor?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sortBy?: InputMaybe<ShowAdminGroupsSortByArgs>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type Admin__Core_Groups__ShowQuery = { __typename?: 'Query', admin__core_groups__show: { __typename?: 'ShowAdminGroupsObj', pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, startCursor?: number | null, totalCount: number, hasPreviousPage: boolean }, edges: Array<{ __typename?: 'ShowAdminGroups', created: Date, updated: Date, id: number, users_count: number, protected: boolean, guest: boolean, root: boolean, default: boolean, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, content: { __typename?: 'ContentShowAdminGroups', files_allow_upload: boolean, files_max_storage_for_submit: number, files_total_max_storage: number } }> } };
+
+export type Admin__Core_Staff_Administrators__ShowQueryVariables = Exact<{
+  cursor?: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  sortBy?: InputMaybe<ShowAdminStaffAdministratorsSortByArgs>;
+}>;
+
+
+export type Admin__Core_Staff_Administrators__ShowQuery = { __typename?: 'Query', admin__core_staff_administrators__show: { __typename?: 'ShowAdminStaffAdministratorsObj', edges: Array<{ __typename?: 'ShowAdminStaffAdministrators', created: Date, id: number, unrestricted: boolean, updated: Date, protected: boolean, user_or_group: { __typename: 'StaffGroupUser', id: number, group_name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } | { __typename: 'User', avatar_color: string, name_seo: string, id: number, name: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, file_name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
+
+export type Admin__Core_Staff_Moderators__ShowQueryVariables = Exact<{
+  sortBy?: InputMaybe<ShowAdminStaffModeratorsSortByArgs>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  cursor?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type Admin__Core_Staff_Moderators__ShowQuery = { __typename?: 'Query', admin__core_staff_moderators__show: { __typename?: 'ShowAdminStaffModeratorsObj', edges: Array<{ __typename?: 'ShowAdminStaffModerators', created: Date, id: number, unrestricted: boolean, updated: Date, protected: boolean, user_or_group: { __typename: 'StaffGroupUser', id: number, group_name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } | { __typename: 'User', avatar_color: string, id: number, name_seo: string, name: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, file_name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
+
+export type Admin__Core_Members__ShowQueryVariables = Exact<{
+  cursor?: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sortBy?: InputMaybe<ShowAdminMembersSortByArgs>;
+  groups?: InputMaybe<Array<Scalars['Int']['input']> | Scalars['Int']['input']>;
+}>;
+
+
+export type Admin__Core_Members__ShowQuery = { __typename?: 'Query', admin__core_members__show: { __typename?: 'ShowAdminMembersObj', pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number }, edges: Array<{ __typename?: 'ShowAdminMembers', avatar_color: string, email: string, id: number, name_seo: string, joined: Date, name: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, file_name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } }> } };
+
 export type Admin__Core_Plugins__ShowQueryVariables = Exact<{
   cursor?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -1644,6 +1743,65 @@ export const Admin__Core_Languages__Edit = gql`
 export const Admin__Core_Languages__Update = gql`
     mutation Admin__core_languages__update($code: String!, $file: Upload!) {
   admin__core_languages__update(code: $code, file: $file)
+}
+    `;
+export const Admin__Core_Groups__Delete = gql`
+    mutation Admin__core_groups__delete($id: Int!) {
+  admin__core_groups__delete(id: $id)
+}
+    `;
+export const Admin__Core_Groups__Edit = gql`
+    mutation Admin__core_groups__edit($id: Int!, $name: [TextLanguageInput!]!, $content: ContentCreateAdminGroups!) {
+  admin__core_groups__edit(id: $id, name: $name, content: $content) {
+    id
+  }
+}
+    `;
+export const Core_Groups__Admin_Create = gql`
+    mutation core_groups__admin_create($name: [TextLanguageInput!]!, $content: ContentCreateAdminGroups!) {
+  core_groups__admin_create(name: $name, content: $content) {
+    id
+  }
+}
+    `;
+export const Admin__Core_Staff_Administrators__Create = gql`
+    mutation Admin__core_staff_administrators__create($groupId: Int, $userId: Int, $unrestricted: Boolean!) {
+  admin__core_staff_administrators__create(
+    group_id: $groupId
+    user_id: $userId
+    unrestricted: $unrestricted
+  ) {
+    created
+    id
+    protected
+    unrestricted
+    updated
+  }
+}
+    `;
+export const Admin__Core_Staff_Administrators__Delete = gql`
+    mutation Admin__core_staff_administrators__delete($id: Int!) {
+  admin__core_staff_administrators__delete(id: $id)
+}
+    `;
+export const Admin__Core_Staff_Moderators__Create = gql`
+    mutation Admin__core_staff_moderators__create($groupId: Int, $userId: Int, $unrestricted: Boolean!) {
+  admin__core_staff_moderators__create(
+    group_id: $groupId
+    user_id: $userId
+    unrestricted: $unrestricted
+  ) {
+    created
+    id
+    protected
+    unrestricted
+    updated
+  }
+}
+    `;
+export const Admin__Core_Staff_Moderators__Delete = gql`
+    mutation Admin__core_staff_moderators__delete($id: Int!) {
+  admin__core_staff_moderators__delete(id: $id)
 }
     `;
 export const Admin__Core_Plugins__Create = gql`
@@ -2069,6 +2227,194 @@ export const Admin__Core_Plugins__Show__Quick = gql`
       version
       created
       version_code
+    }
+  }
+}
+    `;
+export const Admin__Core_Groups__Show = gql`
+    query Admin__Core_groups__show($first: Int, $cursor: Int, $search: String, $sortBy: ShowAdminGroupsSortByArgs, $last: Int) {
+  admin__core_groups__show(
+    first: $first
+    cursor: $cursor
+    search: $search
+    sortBy: $sortBy
+    last: $last
+  ) {
+    pageInfo {
+      count
+      endCursor
+      hasNextPage
+      startCursor
+      totalCount
+      hasPreviousPage
+    }
+    edges {
+      created
+      updated
+      id
+      users_count
+      protected
+      guest
+      name {
+        language_code
+        value
+      }
+      root
+      default
+      content {
+        files_allow_upload
+        files_max_storage_for_submit
+        files_total_max_storage
+      }
+    }
+  }
+}
+    `;
+export const Admin__Core_Staff_Administrators__Show = gql`
+    query Admin__core_staff_administrators__show($cursor: Int, $first: Int, $last: Int, $sortBy: ShowAdminStaffAdministratorsSortByArgs) {
+  admin__core_staff_administrators__show(
+    cursor: $cursor
+    first: $first
+    last: $last
+    sortBy: $sortBy
+  ) {
+    edges {
+      created
+      id
+      unrestricted
+      user_or_group {
+        __typename
+        ... on User {
+          avatar_color
+          avatar {
+            id
+            dir_folder
+            file_name
+          }
+          group {
+            id
+            name {
+              language_code
+              value
+            }
+          }
+          name_seo
+          id
+          name
+        }
+        ... on StaffGroupUser {
+          group_name {
+            language_code
+            value
+          }
+          id
+        }
+      }
+      updated
+      protected
+    }
+    pageInfo {
+      count
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      totalCount
+    }
+  }
+}
+    `;
+export const Admin__Core_Staff_Moderators__Show = gql`
+    query Admin__core_staff_moderators__show($sortBy: ShowAdminStaffModeratorsSortByArgs, $last: Int, $first: Int, $cursor: Int) {
+  admin__core_staff_moderators__show(
+    sortBy: $sortBy
+    last: $last
+    first: $first
+    cursor: $cursor
+  ) {
+    edges {
+      created
+      id
+      unrestricted
+      user_or_group {
+        __typename
+        ... on User {
+          avatar_color
+          avatar {
+            id
+            dir_folder
+            file_name
+          }
+          group {
+            id
+            name {
+              language_code
+              value
+            }
+          }
+          id
+          name_seo
+          name
+        }
+        ... on StaffGroupUser {
+          group_name {
+            language_code
+            value
+          }
+          id
+        }
+      }
+      updated
+      protected
+    }
+    pageInfo {
+      count
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      totalCount
+    }
+  }
+}
+    `;
+export const Admin__Core_Members__Show = gql`
+    query Admin__core_members__show($cursor: Int, $first: Int, $last: Int, $search: String, $sortBy: ShowAdminMembersSortByArgs, $groups: [Int!]) {
+  admin__core_members__show(
+    cursor: $cursor
+    first: $first
+    last: $last
+    search: $search
+    sortBy: $sortBy
+    groups: $groups
+  ) {
+    pageInfo {
+      count
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      totalCount
+    }
+    edges {
+      avatar_color
+      avatar {
+        id
+        dir_folder
+        file_name
+      }
+      email
+      id
+      name_seo
+      joined
+      name
+      group {
+        id
+        name {
+          language_code
+          value
+        }
+      }
     }
   }
 }

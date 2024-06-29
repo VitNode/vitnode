@@ -91,7 +91,7 @@ export const ContentLangsCoreAdminView = ({
 
   return (
     <DataTable
-      data={edges ?? []}
+      data={edges}
       pageInfo={pageInfo}
       searchPlaceholder={t('search_placeholder')}
       defaultPageSize={10}
