@@ -2,13 +2,14 @@ import { Monitor, Moon, Smartphone, Sun, Tablet } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import * as React from 'react';
 import { useTheme } from 'next-themes';
+
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from 'vitnode-frontend/components/ui/tooltip';
-import { Button } from 'vitnode-frontend/components/ui/button';
+} from '../../../../components/ui/tooltip';
+import { Button } from '../../../../components/ui/button';
 
 export enum ThemeEditorViewEnum {
   Desktop = 'desktop',

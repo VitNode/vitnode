@@ -1438,6 +1438,13 @@ export type Admin__Core_Nav__EditMutationVariables = Exact<{
 
 export type Admin__Core_Nav__EditMutation = { __typename?: 'Mutation', admin__core_nav__edit: { __typename?: 'ShowCoreNav', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
 
+export type Admin__Core_Theme_Editor__EditMutationVariables = Exact<{
+  colors: ColorsEditAdminThemeEditor;
+}>;
+
+
+export type Admin__Core_Theme_Editor__EditMutation = { __typename?: 'Mutation', admin__core_theme_editor__edit: string };
+
 export type Core_Editor_Files__DeleteMutationVariables = Exact<{
   id: Scalars['Int']['input'];
   securityKey?: InputMaybe<Scalars['String']['input']>;
@@ -1643,6 +1650,11 @@ export type Admin__Core_Nav__ShowQueryVariables = Exact<{ [key: string]: never; 
 
 
 export type Admin__Core_Nav__ShowQuery = { __typename?: 'Query', core_nav__show: { __typename?: 'ShowCoreNavObj', edges: Array<{ __typename?: 'ShowCoreNav', id: number, href: string, external: boolean, position: number, icon?: string | null, children: Array<{ __typename?: 'ShowCoreNavItem', id: number, href: string, external: boolean, position: number, icon?: string | null, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }>, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }> } };
+
+export type Core_Theme_Editor__ShowQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Core_Theme_Editor__ShowQuery = { __typename?: 'Query', core_theme_editor__show: { __typename?: 'ShowCoreThemeEditorObj', colors: { __typename?: 'ColorsShowCoreThemeEditor', background: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, primary: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, secondary: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, primary_foreground: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, secondary_foreground: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, destructive: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, destructive_foreground: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, cover: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, cover_foreground: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, muted: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, muted_foreground: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, accent: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, accent_foreground: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, card: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, border: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } } } } };
 
 export type Core_MiddlewareQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2006,6 +2018,11 @@ export const Admin__Core_Nav__Edit = gql`
       value
     }
   }
+}
+    `;
+export const Admin__Core_Theme_Editor__Edit = gql`
+    mutation Admin__core_theme_editor__edit($colors: ColorsEditAdminThemeEditor!) {
+  admin__core_theme_editor__edit(colors: $colors)
 }
     `;
 export const Core_Editor_Files__Delete = gql`
@@ -2573,6 +2590,194 @@ export const Admin__Core_Nav__Show = gql`
       external
       position
       icon
+    }
+  }
+}
+    `;
+export const Core_Theme_Editor__Show = gql`
+    query Core_theme_editor__show {
+  core_theme_editor__show {
+    colors {
+      background {
+        dark {
+          h
+          l
+          s
+        }
+        light {
+          h
+          l
+          s
+        }
+      }
+      primary {
+        dark {
+          h
+          l
+          s
+        }
+        light {
+          h
+          l
+          s
+        }
+      }
+      secondary {
+        dark {
+          h
+          l
+          s
+        }
+        light {
+          h
+          l
+          s
+        }
+      }
+      primary_foreground {
+        dark {
+          h
+          l
+          s
+        }
+        light {
+          h
+          l
+          s
+        }
+      }
+      secondary_foreground {
+        dark {
+          h
+          l
+          s
+        }
+        light {
+          h
+          l
+          s
+        }
+      }
+      destructive {
+        dark {
+          h
+          l
+          s
+        }
+        light {
+          h
+          l
+          s
+        }
+      }
+      destructive_foreground {
+        dark {
+          h
+          l
+          s
+        }
+        light {
+          h
+          l
+          s
+        }
+      }
+      cover {
+        dark {
+          h
+          l
+          s
+        }
+        light {
+          h
+          l
+          s
+        }
+      }
+      cover_foreground {
+        dark {
+          h
+          l
+          s
+        }
+        light {
+          h
+          l
+          s
+        }
+      }
+      muted {
+        dark {
+          h
+          l
+          s
+        }
+        light {
+          h
+          l
+          s
+        }
+      }
+      muted_foreground {
+        dark {
+          h
+          l
+          s
+        }
+        light {
+          h
+          l
+          s
+        }
+      }
+      accent {
+        dark {
+          h
+          l
+          s
+        }
+        light {
+          h
+          l
+          s
+        }
+      }
+      accent_foreground {
+        dark {
+          h
+          l
+          s
+        }
+        light {
+          h
+          l
+          s
+        }
+      }
+      card {
+        dark {
+          h
+          l
+          s
+        }
+        light {
+          h
+          l
+          s
+        }
+      }
+      border {
+        dark {
+          h
+          l
+          s
+        }
+        light {
+          h
+          l
+          s
+        }
+      }
     }
   }
 }

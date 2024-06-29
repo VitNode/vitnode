@@ -1,5 +1,6 @@
 import { Check } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -9,14 +10,14 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from 'vitnode-frontend/components/ui/alert-dialog';
+} from '../../../../../components/ui/alert-dialog';
+import { Button } from '../../../../../components/ui/button';
+import { CONFIG } from '../../../../../helpers/config-with-env';
 import {
   Alert,
   AlertDescription,
   AlertTitle,
-} from 'vitnode-frontend/components/ui/alert';
-import { Button } from 'vitnode-frontend/components/ui/button';
-import { CONFIG } from 'vitnode-frontend/helpers/config-with-env';
+} from '../../../../../components/ui/alert';
 
 interface Props {
   isPending: boolean;
@@ -25,7 +26,7 @@ interface Props {
   setOpenSubmitDialog: (open: boolean) => void;
 }
 
-export const SubmitContentThemeEditor = ({
+export const SubmitSidebarThemeEditor = ({
   isPending,
   onClick,
   openSubmitDialog,
