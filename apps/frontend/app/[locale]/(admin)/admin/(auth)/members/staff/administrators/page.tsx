@@ -1,54 +1,8 @@
-import { Metadata } from 'next';
-import { getTranslations } from 'next-intl/server';
-import { fetcher } from 'vitnode-frontend/graphql/fetcher';
-
 import {
-  Admin__Core_Staff_Administrators__Show,
-  ShowAdminStaffAdministratorsSortingColumnEnum,
-  Admin__Core_Staff_Administrators__ShowQuery,
-  Admin__Core_Staff_Administrators__ShowQueryVariables,
-} from '@/graphql/hooks';
-import {
-  usePaginationAPISsr,
-  SearchParamsPagination,
-} from '@/plugins/core/hooks/utils/use-pagination-api-ssr';
-import { AdministratorsStaffAdminView } from '@/plugins/admin/views/members/staff/administrators/administrators-view';
+  AdministratorsStaffAdminView,
+  AdministratorsStaffAdminViewProps,
+} from 'vitnode-frontend/admin/members/staff/administrators/administrators-view';
 
-const getData = async (
-  variables: Admin__Core_Staff_Administrators__ShowQueryVariables,
-) => {
-  const { data } = await fetcher<
-    Admin__Core_Staff_Administrators__ShowQuery,
-    Admin__Core_Staff_Administrators__ShowQueryVariables
-  >({
-    query: Admin__Core_Staff_Administrators__Show,
-    variables,
-  });
-
-  return data;
-};
-
-interface Props {
-  searchParams: SearchParamsPagination;
-}
-
-export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations('admin.members.staff.administrators');
-
-  return {
-    title: t('title'),
-  };
-}
-
-export default async function Page({ searchParams }: Props) {
-  const variables = usePaginationAPISsr({
-    searchParams,
-    search: true,
-    sortByEnum: ShowAdminStaffAdministratorsSortingColumnEnum,
-    defaultPageSize: 10,
-  });
-
-  const data = await getData(variables);
-
-  return <AdministratorsStaffAdminView data={data} />;
+export default function Page(props: AdministratorsStaffAdminViewProps) {
+  return <AdministratorsStaffAdminView {...props} />;
 }
