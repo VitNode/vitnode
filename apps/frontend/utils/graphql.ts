@@ -1162,16 +1162,6 @@ export type Admin_Blog_Categories__ShowQueryVariables = Exact<{ [key: string]: n
 
 export type Admin_Blog_Categories__ShowQuery = { __typename?: 'Query', blog_categories__show: { __typename?: 'ShowBlogCategoriesObj', edges: Array<{ __typename?: 'ShowBlogCategories', color: string, id: number, position: number, description?: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> | null, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }> } };
 
-export type Core_MiddlewareQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type Core_MiddlewareQuery = { __typename?: 'Query', core_languages__show: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', default: boolean, code: string, id: number, name: string, timezone: string, enabled: boolean, locale: string, allow_in_input: boolean, time_24: boolean }> }, core_plugins__show: Array<{ __typename?: 'ShowCorePluginsObj', code: string }>, core_settings__show: { __typename?: 'ShowSettingsObj', site_name: string, site_copyright: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, site_description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
-
-export type Core_Middleware__ShowQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type Core_Middleware__ShowQuery = { __typename?: 'Query', core_middleware__show: { __typename?: 'ShowCoreMiddlewareObj', plugins: Array<string>, languages: Array<{ __typename?: 'LanguagesCoreMiddleware', code: string, default: boolean, enabled: boolean }> } };
-
 
 export const Admin__Blog_Categories__Create = gql`
     mutation Admin__blog_categories__create($description: [TextLanguageInput!]!, $name: [TextLanguageInput!]!, $color: String!, $permissions: PermissionsCreatePluginCategories!) {
@@ -1201,49 +1191,6 @@ export const Admin_Blog_Categories__Show = gql`
       }
       position
     }
-  }
-}
-    `;
-export const Core_Middleware = gql`
-    query Core_middleware {
-  core_languages__show {
-    edges {
-      default
-      code
-      id
-      name
-      timezone
-      enabled
-      locale
-      allow_in_input
-      time_24
-    }
-  }
-  core_plugins__show {
-    code
-  }
-  core_settings__show {
-    site_copyright {
-      language_code
-      value
-    }
-    site_description {
-      language_code
-      value
-    }
-    site_name
-  }
-}
-    `;
-export const Core_Middleware__Show = gql`
-    query Core_middleware__show {
-  core_middleware__show {
-    languages {
-      code
-      default
-      enabled
-    }
-    plugins
   }
 }
     `;

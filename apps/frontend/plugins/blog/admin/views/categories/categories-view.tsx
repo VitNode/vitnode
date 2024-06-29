@@ -7,15 +7,14 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 import { useTranslations } from 'next-intl';
+import { useDragAndDrop } from 'vitnode-frontend/hooks/drag&drop/use-functions';
+import { ItemDragAndDrop } from 'vitnode-frontend/components/drag&drop-item';
 
-import { useDragAndDrop } from '@/plugins/core/hooks/drag&drop/use-functions';
-import { ItemDragAndDrop } from '@/plugins/core/hooks/drag&drop/item';
 import { ItemCategoriesCategoryAdmin } from './item/item';
-
 import {
   Admin_Blog_Categories__ShowQuery,
   ShowBlogCategories,
-} from '@/utils/hooks';
+} from '@/utils/graphql';
 
 export const CategoriesBlogAdminView = ({
   blog_categories__show: { edges },

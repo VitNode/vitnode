@@ -5,6 +5,14 @@
     "vitnode-frontend": "./dist/scripts/setup.js"
   },
   "exports": {
+    "./middleware": {
+      "types": "./src/middleware.ts",
+      "default": "./dist/middleware.js"
+    },
+    "./i18n": {
+      "types": "./src/i18n.ts",
+      "default": "./dist/i18n.js"
+    },
     "./navigation": {
       "types": "./src/navigation/index.ts",
       "default": "./dist/navigation/index.js"

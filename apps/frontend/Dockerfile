@@ -38,7 +38,7 @@ ENV NEXT_TELEMETRY_DISABLED 1
 
 RUN pnpm turbo build --filter=frontend...
 
-# COPY frontend/config/config.json ./frontend/utils/config.json
+# COPY frontend/utils/config.json ./frontend/utils/config.json
 
 FROM base AS runner
 WORKDIR /app
