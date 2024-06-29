@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { useTranslations } from 'next-intl';
-import { FilterToolbarDataTable } from 'vitnode-frontend/components/data-table/toolbar/filter/filter';
+
+import { FilterToolbarDataTable } from '../../../../../../../components/data-table/toolbar/filter/filter';
 
 const ContentGroupsFiltersUsersMembersAdmin = React.lazy(async () =>
-  import('./content-groups-filters-users-members-admin').then(module => ({
+  import('./content').then(module => ({
     default: module.ContentGroupsFiltersUsersMembersAdmin,
   })),
 );
