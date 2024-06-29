@@ -5,8 +5,9 @@ import { toast } from 'sonner';
 import { useTranslations } from 'next-intl';
 import { getHSLFromString, isColorBrightness } from 'vitnode-shared';
 
-import { Admin__Core_Email_Settings__ShowQuery } from '@/graphql/hooks';
 import { mutationApi } from './mutation-api';
+
+import { Admin__Core_Email_Settings__ShowQuery } from '../../../../../../../graphql/code';
 
 export const useEmailSettingsFormAdmin = ({
   admin__core_email_settings__show: data,

@@ -1,13 +1,13 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
-import { fetcher } from 'vitnode-frontend/graphql/fetcher';
 
 import {
   Admin__Core_Manifest_Metadata__Edit,
   Admin__Core_Manifest_Metadata__EditMutation,
   Admin__Core_Manifest_Metadata__EditMutationVariables,
-} from '@/graphql/hooks';
+} from '../../../../../../../../graphql/code';
+import { fetcher } from '../../../../../../../../graphql/fetcher';
 
 export const mutationApi = async (
   variables: Admin__Core_Manifest_Metadata__EditMutationVariables,

@@ -1300,6 +1300,49 @@ export type Admin_Sessions__Sign_OutMutationVariables = Exact<{ [key: string]: n
 
 export type Admin_Sessions__Sign_OutMutation = { __typename?: 'Mutation', admin_sessions__sign_out: string };
 
+export type Admin__Core_Main_Settings__EditMutationVariables = Exact<{
+  siteName: Scalars['String']['input'];
+  siteShortName: Scalars['String']['input'];
+  siteDescription: Array<TextLanguageInput> | TextLanguageInput;
+  siteCopyright: Array<TextLanguageInput> | TextLanguageInput;
+}>;
+
+
+export type Admin__Core_Main_Settings__EditMutation = { __typename?: 'Mutation', admin__core_main_settings__edit: { __typename?: 'EditAdminSettingsObj', site_name: string } };
+
+export type Admin__Core_Manifest_Metadata__EditMutationVariables = Exact<{
+  display: Scalars['String']['input'];
+  startUrl: Scalars['String']['input'];
+  backgroundColor: Scalars['String']['input'];
+  themeColor: Scalars['String']['input'];
+}>;
+
+
+export type Admin__Core_Manifest_Metadata__EditMutation = { __typename?: 'Mutation', admin__core_manifest_metadata__edit: { __typename?: 'ShowAdminManifestMetadataObj', display: string } };
+
+export type Admin__Core_Email_Settings__EditMutationVariables = Exact<{
+  smtpHost: Scalars['String']['input'];
+  smtpPassword: Scalars['String']['input'];
+  smtpPort: Scalars['Int']['input'];
+  smtpSecure: Scalars['Boolean']['input'];
+  smtpUser: Scalars['String']['input'];
+  colorPrimaryForeground: Scalars['String']['input'];
+  colorPrimary: Scalars['String']['input'];
+}>;
+
+
+export type Admin__Core_Email_Settings__EditMutation = { __typename?: 'Mutation', admin__core_email_settings__edit: { __typename?: 'ShowAdminEmailSettingsServiceObj', smtp_host: string } };
+
+export type Admin__Core_Email_Settings__TestMutationVariables = Exact<{
+  to: Scalars['String']['input'];
+  from: Scalars['String']['input'];
+  message: Scalars['String']['input'];
+  subject: Scalars['String']['input'];
+}>;
+
+
+export type Admin__Core_Email_Settings__TestMutation = { __typename?: 'Mutation', admin__core_email_settings__test: string };
+
 export type Core_Editor_Files__DeleteMutationVariables = Exact<{
   id: Scalars['Int']['input'];
   securityKey?: InputMaybe<Scalars['String']['input']>;
@@ -1442,6 +1485,21 @@ export type Admin__Core_Plugins__Nav__ShowQueryVariables = Exact<{
 
 
 export type Admin__Core_Plugins__Nav__ShowQuery = { __typename?: 'Query', admin__core_plugins__nav__show: Array<{ __typename?: 'ShowAdminNavPluginsObj', code: string, icon?: string | null, href: string, children?: Array<{ __typename?: 'ShowAdminNavPlugins', code: string, href: string, icon?: string | null }> | null }> };
+
+export type Admin__Core_Email_Settings__ShowQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Admin__Core_Email_Settings__ShowQuery = { __typename?: 'Query', admin__core_email_settings__show: { __typename?: 'ShowAdminEmailSettingsServiceObj', smtp_host: string, smtp_port: number, smtp_secure: boolean, smtp_user: string, color_primary: string } };
+
+export type Admin__Core_Manifest_Metadata__ShowQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Admin__Core_Manifest_Metadata__ShowQuery = { __typename?: 'Query', admin__core_manifest_metadata__show: { __typename?: 'ShowAdminManifestMetadataObj', display: string, start_url: string, theme_color: string, background_color: string } };
+
+export type Core_Main_Settings__ShowQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Core_Main_Settings__ShowQuery = { __typename?: 'Query', core_settings__show: { __typename?: 'ShowSettingsObj', site_name: string, site_short_name: string, site_copyright: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, site_description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
 
 export type Core_MiddlewareQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1648,6 +1706,55 @@ export const Admin__Core_Plugins__Nav__Edit = gql`
 export const Admin_Sessions__Sign_Out = gql`
     mutation Admin_sessions__sign_out {
   admin_sessions__sign_out
+}
+    `;
+export const Admin__Core_Main_Settings__Edit = gql`
+    mutation Admin__core_main_settings__edit($siteName: String!, $siteShortName: String!, $siteDescription: [TextLanguageInput!]!, $siteCopyright: [TextLanguageInput!]!) {
+  admin__core_main_settings__edit(
+    site_name: $siteName
+    site_short_name: $siteShortName
+    site_description: $siteDescription
+    site_copyright: $siteCopyright
+  ) {
+    site_name
+  }
+}
+    `;
+export const Admin__Core_Manifest_Metadata__Edit = gql`
+    mutation Admin__core_manifest_metadata__edit($display: String!, $startUrl: String!, $backgroundColor: String!, $themeColor: String!) {
+  admin__core_manifest_metadata__edit(
+    display: $display
+    start_url: $startUrl
+    background_color: $backgroundColor
+    theme_color: $themeColor
+  ) {
+    display
+  }
+}
+    `;
+export const Admin__Core_Email_Settings__Edit = gql`
+    mutation Admin__core_email_settings__edit($smtpHost: String!, $smtpPassword: String!, $smtpPort: Int!, $smtpSecure: Boolean!, $smtpUser: String!, $colorPrimaryForeground: String!, $colorPrimary: String!) {
+  admin__core_email_settings__edit(
+    smtp_host: $smtpHost
+    smtp_password: $smtpPassword
+    smtp_port: $smtpPort
+    smtp_secure: $smtpSecure
+    smtp_user: $smtpUser
+    color_primary_foreground: $colorPrimaryForeground
+    color_primary: $colorPrimary
+  ) {
+    smtp_host
+  }
+}
+    `;
+export const Admin__Core_Email_Settings__Test = gql`
+    mutation Admin__core_email_settings__test($to: String!, $from: String!, $message: String!, $subject: String!) {
+  admin__core_email_settings__test(
+    to: $to
+    from: $from
+    message: $message
+    subject: $subject
+  )
 }
     `;
 export const Core_Editor_Files__Delete = gql`
@@ -1954,6 +2061,43 @@ export const Admin__Core_Plugins__Nav__Show = gql`
       code
       href
       icon
+    }
+  }
+}
+    `;
+export const Admin__Core_Email_Settings__Show = gql`
+    query Admin__core_email_settings__show {
+  admin__core_email_settings__show {
+    smtp_host
+    smtp_port
+    smtp_secure
+    smtp_user
+    color_primary
+  }
+}
+    `;
+export const Admin__Core_Manifest_Metadata__Show = gql`
+    query Admin__core_manifest_metadata__show {
+  admin__core_manifest_metadata__show {
+    display
+    start_url
+    theme_color
+    background_color
+  }
+}
+    `;
+export const Core_Main_Settings__Show = gql`
+    query Core_main_settings__show {
+  core_settings__show {
+    site_name
+    site_short_name
+    site_copyright {
+      language_code
+      value
+    }
+    site_description {
+      language_code
+      value
     }
   }
 }

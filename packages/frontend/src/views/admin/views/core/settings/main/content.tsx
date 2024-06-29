@@ -1,20 +1,21 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+
+import { useSettingsCoreAdmin } from './hooks/use-settings-core-admin';
+
+import { Core_Main_Settings__ShowQuery } from '../../../../../../graphql/code';
 import {
   Form,
   FormField,
   FormFieldRender,
   FormWrapper,
-} from 'vitnode-frontend/components/ui/form';
-import { Input } from 'vitnode-frontend/components/ui/input';
-import { Button } from 'vitnode-frontend/components/ui/button';
-import { TextLanguageInput } from 'vitnode-frontend/components/ui/text-language-input';
+} from '../../../../../../components/ui/form';
+import { Input } from '../../../../../../components/ui/input';
+import { TextLanguageInput } from '../../../../../../components/ui/text-language-input';
+import { Button } from '../../../../../../components/ui/button';
 
-import { useSettingsCoreAdmin } from './hooks/use-settings-core-admin';
-import { Core_Main_Settings__ShowQuery } from '@/graphql/hooks';
-
-export const GeneralSettingsCoreAdmin = (
+export const ContentMainSettingsCoreAdmin = (
   props: Core_Main_Settings__ShowQuery,
 ) => {
   const t = useTranslations('admin.core.settings.main');

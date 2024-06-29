@@ -1,23 +1,24 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+
+import { useEmailSettingsFormAdmin } from './hooks/use-email-settings-form-admin';
+
+import { Admin__Core_Email_Settings__ShowQuery } from '../../../../../../graphql/code';
 import {
   Form,
   FormField,
   FormFieldRender,
   FormWrapper,
-} from 'vitnode-frontend/components/ui/form';
-import { Separator } from 'vitnode-frontend/components/ui/separator';
-import { Button } from 'vitnode-frontend/components/ui/button';
-import { ColorInput } from 'vitnode-frontend/components/ui/color-input';
-import { Input } from 'vitnode-frontend/components/ui/input';
-import { Switch } from 'vitnode-frontend/components/ui/switch';
-import { HeaderContent } from 'vitnode-frontend/components/ui/header-content';
+} from '../../../../../../components/ui/form';
+import { ColorInput } from '../../../../../../components/ui/color-input';
+import { HeaderContent } from '../../../../../../components/ui/header-content';
+import { Separator } from '../../../../../../components/ui/separator';
+import { Input } from '../../../../../../components/ui/input';
+import { Switch } from '../../../../../../components/ui/switch';
+import { Button } from '../../../../../../components/ui/button';
 
-import { useEmailSettingsFormAdmin } from './hooks/use-email-settings-form-admin';
-import { Admin__Core_Email_Settings__ShowQuery } from '@/graphql/hooks';
-
-export const EmailSettingsAdminView = (
+export const ContentEmailSettingsAdmin = (
   props: Admin__Core_Email_Settings__ShowQuery,
 ) => {
   const t = useTranslations('admin.core.settings.email');
