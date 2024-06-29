@@ -1,13 +1,13 @@
 /* eslint-disable no-console */
-import { createHash } from "crypto";
-import * as fs from "fs";
-import { join } from "path";
+import { createHash } from 'crypto';
+import * as fs from 'fs';
+import { join } from 'path';
 
-import { sql } from "drizzle-orm";
-import { MigrationMeta } from "drizzle-orm/migrator";
-import { NodePgDatabase } from "drizzle-orm/node-postgres";
+import { sql } from 'drizzle-orm';
+import { MigrationMeta } from 'drizzle-orm/migrator';
+import { NodePgDatabase } from 'drizzle-orm/node-postgres';
 
-import coreSchemaDatabase from "../../src/templates/core/admin/database";
+import coreSchemaDatabase from '../../src/templates/core/admin/database';
 
 // Source: https://github.com/drizzle-team/drizzle-orm/blob/main/drizzle-orm/src/migrator.ts
 const readMigrationFiles = ({
@@ -17,12 +17,12 @@ const readMigrationFiles = ({
 }): MigrationMeta[] | null => {
   const migrationFolderTo = join(
     process.cwd(),
-    "src",
-    "plugins",
+    'src',
+    'plugins',
     pluginCode,
-    "admin",
-    "database",
-    "migrations",
+    'admin',
+    'database',
+    'migrations',
   );
   const journalPath = `${migrationFolderTo}/meta/_journal.json`;
   if (!fs.existsSync(journalPath)) {
@@ -45,7 +45,7 @@ const readMigrationFiles = ({
         .readFileSync(`${migrationFolderTo}/${journalEntry.tag}.sql`)
         .toString();
 
-      const result = query.split("--> statement-breakpoint").map(it => {
+      const result = query.split('--> statement-breakpoint').map(it => {
         return it;
       });
 
@@ -53,7 +53,7 @@ const readMigrationFiles = ({
         sql: result,
         bps: journalEntry.breakpoints,
         folderMillis: journalEntry.when,
-        hash: createHash("sha256").update(query).digest("hex"),
+        hash: createHash('sha256').update(query).digest('hex'),
       });
     } catch {
       throw new Error(
@@ -73,8 +73,8 @@ export const migrate = async ({
   db: NodePgDatabase<typeof coreSchemaDatabase>;
   pluginCode: string;
 }) => {
-  const migrationsTable = "core_migrations";
-  const migrationsSchema = "public";
+  const migrationsTable = 'core_migrations';
+  const migrationsSchema = 'public';
 
   // Create the migration table
   await db.execute(

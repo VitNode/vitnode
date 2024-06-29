@@ -1,14 +1,14 @@
-import * as fs from "fs";
+import * as fs from 'fs';
 
-import { Injectable } from "@nestjs/common";
-import { removeSpecialCharacters } from "@vitnode/shared";
+import { Injectable } from '@nestjs/common';
+import { removeSpecialCharacters } from 'vitnode-shared';
 
-import { ShowAdminNavPluginsObj } from "../show/dto/show.obj";
-import { CreateAdminNavPluginsArgs } from "./dto/create.args";
-import { HelpersAdminNavPluginsService } from "../helpers.service";
+import { ShowAdminNavPluginsObj } from '../show/dto/show.obj';
+import { CreateAdminNavPluginsArgs } from './dto/create.args';
+import { HelpersAdminNavPluginsService } from '../helpers.service';
 
-import { CustomError, NotFoundError } from "../../../../../errors";
-import { ABSOLUTE_PATHS_BACKEND, ConfigPlugin } from "../../../../..";
+import { CustomError, NotFoundError } from '../../../../../errors';
+import { ABSOLUTE_PATHS_BACKEND, ConfigPlugin } from '../../../../..';
 
 @Injectable()
 export class CreateAdminNavPluginsService extends HelpersAdminNavPluginsService {
@@ -23,10 +23,10 @@ export class CreateAdminNavPluginsService extends HelpersAdminNavPluginsService 
       code: plugin_code,
     }).config;
     if (!fs.existsSync(pathConfig)) {
-      throw new NotFoundError("Plugin");
+      throw new NotFoundError('Plugin');
     }
     const config: ConfigPlugin = JSON.parse(
-      fs.readFileSync(pathConfig, "utf8"),
+      fs.readFileSync(pathConfig, 'utf8'),
     );
 
     const currentCode = removeSpecialCharacters(code);
@@ -37,8 +37,8 @@ export class CreateAdminNavPluginsService extends HelpersAdminNavPluginsService 
 
     if (codeExists) {
       throw new CustomError({
-        message: "Code already exists",
-        code: "CODE_ALREADY_EXISTS",
+        message: 'Code already exists',
+        code: 'CODE_ALREADY_EXISTS',
       });
     }
 
@@ -47,7 +47,7 @@ export class CreateAdminNavPluginsService extends HelpersAdminNavPluginsService 
       const parent = config.nav.find(nav => nav.code === parent_code);
 
       if (!parent) {
-        throw new NotFoundError("Parent");
+        throw new NotFoundError('Parent');
       }
 
       parent.children = parent.children || [];

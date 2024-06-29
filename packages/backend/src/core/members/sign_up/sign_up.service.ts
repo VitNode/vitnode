@@ -1,18 +1,18 @@
-import { Injectable } from "@nestjs/common";
-import { genSalt, hash } from "bcrypt";
-import { count } from "drizzle-orm";
-import { ConfigService } from "@nestjs/config";
-import { removeSpecialCharacters } from "@vitnode/shared";
+import { Injectable } from '@nestjs/common';
+import { genSalt, hash } from 'bcrypt';
+import { count } from 'drizzle-orm';
+import { ConfigService } from '@nestjs/config';
+import { removeSpecialCharacters } from 'vitnode-shared';
 
-import { SignUpCoreMembersArgs } from "./dto/sign_up.args";
-import { SignUpCoreMembersObj } from "./dto/sign_up.obj";
-import { generateAvatarColor } from "./functions/generate-avatar-color";
+import { SignUpCoreMembersArgs } from './dto/sign_up.args';
+import { SignUpCoreMembersObj } from './dto/sign_up.obj';
+import { generateAvatarColor } from './functions/generate-avatar-color';
 
-import { DatabaseService } from "../../../database";
-import { core_users } from "../../../templates/core/admin/database/schema/users";
-import { Ctx } from "../../../utils";
-import { CustomError } from "../../../errors";
-import { getUserIp } from "../../../functions";
+import { DatabaseService } from '../../../database';
+import { core_users } from '../../../templates/core/admin/database/schema/users';
+import { Ctx } from '../../../utils';
+import { CustomError } from '../../../errors';
+import { getUserIp } from '../../../functions';
 
 @Injectable()
 export class SignUpCoreMembersService {
@@ -60,8 +60,8 @@ export class SignUpCoreMembersService {
 
     if (checkEmail) {
       throw new CustomError({
-        message: "Email already exists",
-        code: "EMAIL_ALREADY_EXISTS",
+        message: 'Email already exists',
+        code: 'EMAIL_ALREADY_EXISTS',
       });
     }
 
@@ -73,13 +73,13 @@ export class SignUpCoreMembersService {
 
     if (checkNameSEO) {
       throw new CustomError({
-        message: "Name already exists",
-        code: "NAME_ALREADY_EXISTS",
+        message: 'Name already exists',
+        code: 'NAME_ALREADY_EXISTS',
       });
     }
 
     const passwordSalt = await genSalt(
-      this.configService.getOrThrow("password_salt"),
+      this.configService.getOrThrow('password_salt'),
     );
     const hashPassword = await hash(password, passwordSalt);
 

@@ -1,25 +1,25 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import { DndContext, DragOverlay, closestCorners } from "@dnd-kit/core";
+import * as React from 'react';
+import { DndContext, DragOverlay, closestCorners } from '@dnd-kit/core';
 import {
   SortableContext,
   verticalListSortingStrategy,
-} from "@dnd-kit/sortable";
-import { useTranslations } from "next-intl";
+} from '@dnd-kit/sortable';
+import { useTranslations } from 'next-intl';
+import { useDragAndDrop } from 'vitnode-frontend/hooks/drag&drop/use-functions';
+import { ItemDragAndDrop } from 'vitnode-frontend/components/drag&drop-item';
 
+import { ItemCategoriesCategoryAdmin } from './item/item';
 import {
   Admin_Blog_Categories__ShowQuery,
   ShowBlogCategories,
-} from "@/graphql/hooks";
-import { useDragAndDrop } from "@/plugins/core/hooks/drag&drop/use-functions";
-import { ItemDragAndDrop } from "@/plugins/core/hooks/drag&drop/item";
-import { ItemCategoriesCategoryAdmin } from "./item/item";
+} from '@/utils/graphql';
 
 export const CategoriesBlogAdminView = ({
   blog_categories__show: { edges },
 }: Admin_Blog_Categories__ShowQuery) => {
-  const t = useTranslations("core");
+  const t = useTranslations('core');
   const [initData, setData] = React.useState<ShowBlogCategories[]>(edges);
   const data = initData.map(item => ({
     ...item,
@@ -46,7 +46,7 @@ export const CategoriesBlogAdminView = ({
   });
 
   if (!data.length) {
-    return <div className="text-center">{t("no_results")}</div>;
+    return <div className="text-center">{t('no_results')}</div>;
   }
 
   return (
@@ -74,7 +74,7 @@ export const CategoriesBlogAdminView = ({
             key={item.id}
             {...actionsItem({ data: item })}
             draggableStyle={{
-              background: item.color.replace(")", ", 0.2 )"),
+              background: item.color.replace(')', ', 0.2 )'),
               color: item.color,
             }}
           >
@@ -89,7 +89,7 @@ export const CategoriesBlogAdminView = ({
                 data: activeItemOverlay,
               })}
               draggableStyle={{
-                background: activeItemOverlay.color.replace(")", ", 0.2 )"),
+                background: activeItemOverlay.color.replace(')', ', 0.2 )'),
                 color: activeItemOverlay.color,
               }}
             >

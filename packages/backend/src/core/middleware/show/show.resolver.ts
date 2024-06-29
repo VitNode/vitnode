@@ -1,7 +1,7 @@
-import { Query, Resolver } from "@nestjs/graphql";
+import { Query, Resolver } from '@nestjs/graphql';
 
-import { ShowCoreMiddlewareService } from "./show.service";
-import { ShowCoreMiddlewareObj } from "./dto/languages.obj";
+import { ShowCoreMiddlewareService } from './show.service';
+import { ShowCoreMiddlewareObj } from './dto/languages.obj';
 
 @Resolver()
 export class ShowCoreMiddlewareResolver {

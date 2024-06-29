@@ -1,13 +1,13 @@
-import { Injectable } from "@nestjs/common";
-import { and, count, eq, ilike, inArray, or } from "drizzle-orm";
+import { Injectable } from '@nestjs/common';
+import { and, count, eq, ilike, inArray, or } from 'drizzle-orm';
 
-import { ShowAdminMembersObj } from "./dto/show.obj";
-import { ShowAdminMembersArgs } from "./dto/show.args";
+import { ShowAdminMembersObj } from './dto/show.obj';
+import { ShowAdminMembersArgs } from './dto/show.args';
 
-import { inputPaginationCursor, outputPagination } from "../../../../functions";
-import { DatabaseService } from "../../../../database";
-import { core_users } from "../../../../templates/core/admin/database/schema/users";
-import { SortDirectionEnum } from "../../../../utils";
+import { inputPaginationCursor, outputPagination } from '../../../../functions';
+import { DatabaseService } from '../../../../database';
+import { core_users } from '../../../../templates/core/admin/database/schema/users';
+import { SortDirectionEnum } from '../../../../utils';
 
 @Injectable()
 export class ShowAdminMembersService {
@@ -28,12 +28,12 @@ export class ShowAdminMembersService {
       first,
       last,
       primaryCursor: {
-        column: "id",
+        column: 'id',
         schema: core_users.id,
       },
       defaultSortBy: {
         direction: SortDirectionEnum.desc,
-        column: "joined",
+        column: 'joined',
       },
       sortBy,
     });

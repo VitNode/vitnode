@@ -1,14 +1,14 @@
-import { ArgsType, Field } from "@nestjs/graphql";
-import { Transform } from "class-transformer";
+import { ArgsType, Field } from '@nestjs/graphql';
+import { Transform } from 'class-transformer';
 import {
   IsNotEmpty,
   IsOptional,
   Matches,
   MaxLength,
   MinLength,
-} from "class-validator";
+} from 'class-validator';
 
-import { TransformString } from "../../../../../utils";
+import { TransformString } from '../../../../../utils';
 
 @ArgsType()
 export class CreateAdminPluginsArgs {

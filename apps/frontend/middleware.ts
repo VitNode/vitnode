@@ -1,45 +1,14 @@
-import createIntlMiddleware from "next-intl/middleware";
-import { NextRequest } from "next/server";
-
-import { fetcher } from "./graphql/fetcher";
-import {
-  Core_Middleware__Show,
-  Core_Middleware__ShowQuery,
-  Core_Middleware__ShowQueryVariables,
-} from "./graphql/hooks";
+import { NextRequest } from 'next/server';
+import createIntlMiddleware from 'next-intl/middleware';
+import { createMiddleware } from 'vitnode-frontend/middleware';
 
 export default async function middleware(request: NextRequest) {
-  try {
-    const {
-      data: {
-        core_middleware__show: { languages: langs },
-      },
-    } = await fetcher<
-      Core_Middleware__ShowQuery,
-      Core_Middleware__ShowQueryVariables
-    >({
-      query: Core_Middleware__Show,
-    });
-    const languages = langs.filter(lang => lang.enabled);
-    const defaultLanguage = langs.find(lang => lang.default)?.code ?? "en";
-    const handleI18nRouting = createIntlMiddleware({
-      locales: languages.length > 0 ? languages.map(edge => edge.code) : ["en"],
-      defaultLocale: defaultLanguage,
-    });
-    const response = handleI18nRouting(request);
+  const handleI18nRouting = createIntlMiddleware(await createMiddleware());
+  const response = handleI18nRouting(request);
 
-    return response;
-  } catch (error) {
-    const handleI18nRouting = createIntlMiddleware({
-      locales: ["en"],
-      defaultLocale: "en",
-    });
-    const response = handleI18nRouting(request);
-
-    return response;
-  }
+  return response;
 }
 
 export const config = {
-  matcher: ["/((?!api|_next|icons|robots.txt|sitemap.xml|sitemap).*)"],
+  matcher: '/((?!_next/static|_next/image|robots.txt|sitemap.xml|sitemap).*)',
 };

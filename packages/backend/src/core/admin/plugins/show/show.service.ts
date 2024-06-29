@@ -1,13 +1,13 @@
-import { Injectable } from "@nestjs/common";
-import { and, count, eq, ilike } from "drizzle-orm";
+import { Injectable } from '@nestjs/common';
+import { and, count, eq, ilike } from 'drizzle-orm';
 
-import { ShowAdminPluginsArgs } from "./dto/show.args";
-import { ShowAdminPluginsObj } from "./dto/show.obj";
+import { ShowAdminPluginsArgs } from './dto/show.args';
+import { ShowAdminPluginsObj } from './dto/show.obj';
 
-import { inputPaginationCursor, outputPagination } from "../../../../functions";
-import { core_plugins } from "../../../../templates/core/admin/database/schema/plugins";
-import { SortDirectionEnum } from "../../../../utils";
-import { DatabaseService } from "../../../../database";
+import { inputPaginationCursor, outputPagination } from '../../../../functions';
+import { core_plugins } from '../../../../templates/core/admin/database/schema/plugins';
+import { SortDirectionEnum } from '../../../../utils';
+import { DatabaseService } from '../../../../database';
 
 @Injectable()
 export class ShowAdminPluginsService {
@@ -18,7 +18,7 @@ export class ShowAdminPluginsService {
     cursor,
     first,
     last,
-    search = "",
+    search = '',
     sortBy,
   }: ShowAdminPluginsArgs): Promise<ShowAdminPluginsObj> {
     const pagination = await inputPaginationCursor({
@@ -28,12 +28,12 @@ export class ShowAdminPluginsService {
       first,
       last,
       primaryCursor: {
-        column: "id",
+        column: 'id',
         schema: core_plugins.id,
       },
       defaultSortBy: {
         direction: SortDirectionEnum.desc,
-        column: "updated",
+        column: 'updated',
       },
       sortBy,
     });

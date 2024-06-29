@@ -1,9 +1,9 @@
-import { Injectable } from "@nestjs/common";
-import { sql } from "drizzle-orm";
+import { Injectable } from '@nestjs/common';
+import { sql } from 'drizzle-orm';
 
-import { SignUpStatsAdminMembers } from "./dto/stats.obj";
+import { SignUpStatsAdminMembers } from './dto/stats.obj';
 
-import { DatabaseService } from "../../../../database";
+import { DatabaseService } from '../../../../database';
 
 @Injectable()
 export class StatsAdminMembersService {

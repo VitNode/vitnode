@@ -1,5 +1,5 @@
-import { createReadStream } from "fs";
-import { join } from "path";
+import { createReadStream } from 'fs';
+import { join } from 'path';
 
 import {
   Controller,
@@ -8,17 +8,17 @@ import {
   Res,
   StreamableFile,
   Query,
-} from "@nestjs/common";
-import { Response } from "express";
+} from '@nestjs/common';
+import { Response } from 'express';
 
-import { DatabaseService } from "../../../database";
-import { ABSOLUTE_PATHS_BACKEND } from "../../..";
+import { DatabaseService } from '../../../database';
+import { ABSOLUTE_PATHS_BACKEND } from '../../..';
 
-@Controller("secure_files")
+@Controller('secure_files')
 export class DownloadSecureFilesController {
   constructor(private readonly databaseService: DatabaseService) {}
 
-  @Get(":id")
+  @Get(':id')
   async getFile(
     @Res({ passthrough: true }) res: Response,
     @Param() { id }: { id: string },
@@ -40,12 +40,12 @@ export class DownloadSecureFilesController {
       file.file_name,
     );
 
-    const mediaType = file.mimetype.split("/")[0];
+    const mediaType = file.mimetype.split('/')[0];
 
     const streamFile = createReadStream(path);
     res.set({
-      "Content-Type": `application/${mediaType}`,
-      "Content-Disposition": `attachment; filename="${file.file_name}"`,
+      'Content-Type': `application/${mediaType}`,
+      'Content-Disposition': `attachment; filename="${file.file_name}"`,
     });
 
     return new StreamableFile(streamFile);

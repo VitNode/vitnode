@@ -1,7 +1,7 @@
-import { Field, Int, ObjectType } from "@nestjs/graphql";
+import { Field, Int, ObjectType } from '@nestjs/graphql';
 
-import { UploadCoreFilesObj } from "../../helpers/upload/dto/upload.obj";
-import { PageInfo } from "../../../../utils";
+import { UploadCoreFilesObj } from '../../helpers/upload/dto/upload.obj';
+import { PageInfo } from '../../../../utils';
 
 @ObjectType()
 export class ShowCoreFiles extends UploadCoreFilesObj {

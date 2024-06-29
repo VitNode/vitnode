@@ -1,17 +1,17 @@
-import { Injectable } from "@nestjs/common";
-import { and, count, eq, ilike, or } from "drizzle-orm";
+import { Injectable } from '@nestjs/common';
+import { and, count, eq, ilike, or } from 'drizzle-orm';
 
-import { ShowCoreFilesArgs } from "./dto/show.args";
-import { ShowCoreFilesObj } from "./dto/show.obj";
+import { ShowCoreFilesArgs } from './dto/show.args';
+import { ShowCoreFilesObj } from './dto/show.obj';
 
-import { DatabaseService } from "../../../database";
-import { inputPaginationCursor, outputPagination } from "../../../functions";
+import { DatabaseService } from '../../../database';
+import { inputPaginationCursor, outputPagination } from '../../../functions';
 import {
   core_files,
   core_files_using,
-} from "../../../templates/core/admin/database/schema/files";
-import { User } from "../../../decorators";
-import { SortDirectionEnum } from "../../../utils";
+} from '../../../templates/core/admin/database/schema/files';
+import { User } from '../../../decorators';
+import { SortDirectionEnum } from '../../../utils';
 
 @Injectable()
 export class ShowCoreFilesService {
@@ -19,7 +19,7 @@ export class ShowCoreFilesService {
 
   async show(
     { id: user_id }: User,
-    { cursor, first, last, search = "", sortBy }: ShowCoreFilesArgs,
+    { cursor, first, last, search = '', sortBy }: ShowCoreFilesArgs,
   ): Promise<ShowCoreFilesObj> {
     const pagination = await inputPaginationCursor({
       cursor,
@@ -28,12 +28,12 @@ export class ShowCoreFilesService {
       first,
       last,
       primaryCursor: {
-        column: "id",
+        column: 'id',
         schema: core_files.id,
       },
       defaultSortBy: {
         direction: SortDirectionEnum.desc,
-        column: "created",
+        column: 'created',
       },
       sortBy,
     });

@@ -1,7 +1,6 @@
-import * as React from "react";
+import * as React from 'react';
+import { OverviewSettingsView } from 'vitnode-frontend/theme-tsx/settings/views/overview/overview-settings-view';
 
-import { OverviewSettingsView } from "@/plugins/core/templates/views/settings/views/overview/overview-settings-view";
-
-export default async function Page() {
+export default function Page() {
   return <OverviewSettingsView />;
 }

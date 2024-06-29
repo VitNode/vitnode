@@ -3,5 +3,12 @@
   "extends": ["eslint-config-vitnode/.eslintrc.json"],
   "env": {
     "node": true
-  }
+  },
+  "ignorePatterns": [
+    "tailwind.config.ts",
+    "src/graphql/graphql.ts",
+    "codegen.ts",
+    "scripts/**/*",
+    "tsup.config.ts"
+  ]
 }

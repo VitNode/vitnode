@@ -1,17 +1,17 @@
-import { Injectable } from "@nestjs/common";
-import { and, count, eq, ilike, inArray } from "drizzle-orm";
+import { Injectable } from '@nestjs/common';
+import { and, count, eq, ilike, inArray } from 'drizzle-orm';
 
-import { ShowAdminGroupsArgs } from "./dto/show.args";
-import { ShowAdminGroupsObj } from "./dto/show.obj";
+import { ShowAdminGroupsArgs } from './dto/show.args';
+import { ShowAdminGroupsObj } from './dto/show.obj';
 
 import {
   core_groups,
   core_groups_names,
-} from "../../../../templates/core/admin/database/schema/groups";
-import { inputPaginationCursor, outputPagination } from "../../../../functions";
-import { core_users } from "../../../../templates/core/admin/database/schema/users";
-import { SortDirectionEnum } from "../../../../utils";
-import { DatabaseService } from "../../../../database";
+} from '../../../../templates/core/admin/database/schema/groups';
+import { inputPaginationCursor, outputPagination } from '../../../../functions';
+import { core_users } from '../../../../templates/core/admin/database/schema/users';
+import { SortDirectionEnum } from '../../../../utils';
+import { DatabaseService } from '../../../../database';
 
 @Injectable()
 export class ShowAdminGroupsService {
@@ -41,12 +41,12 @@ export class ShowAdminGroupsService {
       first,
       last,
       primaryCursor: {
-        column: "id",
+        column: 'id',
         schema: core_groups.id,
       },
       defaultSortBy: {
         direction: SortDirectionEnum.desc,
-        column: "updated",
+        column: 'updated',
       },
       sortBy,
     });

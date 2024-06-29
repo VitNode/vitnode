@@ -1,12 +1,12 @@
-import { defineConfig } from "drizzle-kit";
+import { defineConfig } from 'drizzle-kit';
 
-import { DATABASE_ENVS } from "@/database/client";
+import { DATABASE_ENVS } from '@/database/client';
 
 export default defineConfig({
-  dialect: "postgresql",
+  dialect: 'postgresql',
   dbCredentials: {
     ...DATABASE_ENVS,
     ssl: false,
   },
-  schema: "./src/plugins/**/admin/database/schema/*.ts",
+  schema: './src/plugins/**/admin/database/schema/*.ts',
 });

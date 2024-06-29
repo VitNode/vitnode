@@ -1,17 +1,17 @@
-import { Injectable } from "@nestjs/common";
-import { JwtService } from "@nestjs/jwt";
-import { ConfigService } from "@nestjs/config";
-import { eq } from "drizzle-orm";
-import { currentUnixDate } from "@vitnode/shared";
+import { Injectable } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
+import { ConfigService } from '@nestjs/config';
+import { eq } from 'drizzle-orm';
+import { currentUnixDate } from 'vitnode-shared';
 
-import { DeviceSignInCoreSessionsService } from "../../sign_in/device.service";
-import { DatabaseService } from "../../../../database";
-import { User } from "../../../../decorators";
-import { Ctx } from "../../../../utils";
-import { AccessDeniedError } from "../../../../errors";
-import { core_users } from "../../../../templates/core/admin/database/schema/users";
-import { core_sessions_known_devices } from "../../../../templates/core/admin/database/schema/sessions";
-import { getUserAgentData, getUserIp } from "../../../../functions";
+import { DeviceSignInCoreSessionsService } from '../../sign_in/device.service';
+import { DatabaseService } from '../../../../database';
+import { User } from '../../../../decorators';
+import { Ctx } from '../../../../utils';
+import { AccessDeniedError } from '../../../../errors';
+import { core_users } from '../../../../templates/core/admin/database/schema/users';
+import { core_sessions_known_devices } from '../../../../templates/core/admin/database/schema/sessions';
+import { getUserAgentData, getUserIp } from '../../../../functions';
 
 @Injectable()
 export class InternalAuthorizationCoreSessionsService {
@@ -24,9 +24,9 @@ export class InternalAuthorizationCoreSessionsService {
 
   async authorization({ req, res }: Ctx): Promise<User> {
     const login_token =
-      req.cookies[this.configService.getOrThrow("cookies.login_token.name")];
+      req.cookies[this.configService.getOrThrow('cookies.login_token.name')];
     const know_device_id: number | undefined =
-      +req.cookies[this.configService.getOrThrow("cookies.known_device.name")];
+      +req.cookies[this.configService.getOrThrow('cookies.known_device.name')];
 
     if (!login_token || !know_device_id) {
       throw new AccessDeniedError();
@@ -66,17 +66,17 @@ export class InternalAuthorizationCoreSessionsService {
     }
 
     const decodeAccessToken = this.jwtService.decode(login_token);
-    if (!decodeAccessToken || decodeAccessToken["exp"] < currentUnixDate()) {
+    if (!decodeAccessToken || decodeAccessToken['exp'] < currentUnixDate()) {
       throw new AccessDeniedError();
     }
 
-    if (session.user.language !== req.headers["x-vitnode-user-language"]) {
+    if (session.user.language !== req.headers['x-vitnode-user-language']) {
       await this.databaseService.db
         .update(core_users)
         .set({
-          language: Array.isArray(req.headers["x-vitnode-user-language"])
-            ? req.headers["x-vitnode-user-language"][0]
-            : req.headers["x-vitnode-user-language"],
+          language: Array.isArray(req.headers['x-vitnode-user-language'])
+            ? req.headers['x-vitnode-user-language'][0]
+            : req.headers['x-vitnode-user-language'],
         })
         .where(eq(core_users.id, session.user.id));
     }
@@ -86,7 +86,7 @@ export class InternalAuthorizationCoreSessionsService {
       .update(core_sessions_known_devices)
       .set({
         last_seen: new Date(),
-        ...getUserAgentData(req.headers["user-agent"]),
+        ...getUserAgentData(req.headers['user-agent']),
         ip_address: getUserIp(req),
       })
       .where(eq(core_sessions_known_devices.id, device.id));
@@ -94,19 +94,19 @@ export class InternalAuthorizationCoreSessionsService {
     // Update known device cookie
     const expires = new Date();
     const expiresInDeviceCookie: number = this.configService.getOrThrow(
-      "cookies.known_device.expiresIn",
+      'cookies.known_device.expiresIn',
     );
     expires.setDate(expires.getDate() + expiresInDeviceCookie);
     res.cookie(
-      this.configService.getOrThrow("cookies.known_device.name"),
+      this.configService.getOrThrow('cookies.known_device.name'),
       know_device_id,
       {
         httpOnly: true,
         secure: true,
-        domain: this.configService.getOrThrow("cookies.domain"),
-        path: "/",
+        domain: this.configService.getOrThrow('cookies.domain'),
+        path: '/',
         expires,
-        sameSite: "none",
+        sameSite: 'none',
       },
     );
 

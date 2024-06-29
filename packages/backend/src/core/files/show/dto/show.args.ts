@@ -1,14 +1,14 @@
-import { ArgsType, Field, InputType, registerEnumType } from "@nestjs/graphql";
+import { ArgsType, Field, InputType, registerEnumType } from '@nestjs/graphql';
 
-import { PaginationArgs, SortDirectionEnum } from "../../../../utils";
+import { PaginationArgs, SortDirectionEnum } from '../../../../utils';
 
 enum ShowCoreFilesSortingColumnEnum {
-  created = "created",
-  file_size = "file_size",
+  created = 'created',
+  file_size = 'file_size',
 }
 
 registerEnumType(ShowCoreFilesSortingColumnEnum, {
-  name: "ShowCoreFilesSortingColumnEnum",
+  name: 'ShowCoreFilesSortingColumnEnum',
 });
 
 @InputType()

@@ -7,34 +7,34 @@ import {
   serial,
   timestamp,
   varchar,
-} from "drizzle-orm/pg-core";
-import { relations } from "drizzle-orm";
+} from 'drizzle-orm/pg-core';
+import { relations } from 'drizzle-orm';
 
-import { core_groups } from "./groups";
-import { core_users } from "./users";
-import { core_sessions_known_devices } from "./sessions";
+import { core_groups } from './groups';
+import { core_users } from './users';
+import { core_sessions_known_devices } from './sessions';
 
 export const core_admin_permissions = pgTable(
-  "core_admin_permissions",
+  'core_admin_permissions',
   {
-    id: serial("id").primaryKey(),
-    group_id: integer("group_id").references(() => core_groups.id, {
-      onDelete: "cascade",
+    id: serial('id').primaryKey(),
+    group_id: integer('group_id').references(() => core_groups.id, {
+      onDelete: 'cascade',
     }),
-    user_id: integer("user_id").references(() => core_users.id, {
-      onDelete: "cascade",
+    user_id: integer('user_id').references(() => core_users.id, {
+      onDelete: 'cascade',
     }),
-    unrestricted: boolean("unrestricted").notNull().default(false),
-    created: timestamp("created").notNull().defaultNow(),
-    updated: timestamp("updated").notNull().defaultNow(),
-    protected: boolean("protected").notNull().default(false),
-    permissions: jsonb("permissions").default("{}"),
+    unrestricted: boolean('unrestricted').notNull().default(false),
+    created: timestamp('created').notNull().defaultNow(),
+    updated: timestamp('updated').notNull().defaultNow(),
+    protected: boolean('protected').notNull().default(false),
+    permissions: jsonb('permissions').default('{}'),
   },
   table => ({
-    group_id_idx: index("core_admin_permissions_group_id_idx").on(
+    group_id_idx: index('core_admin_permissions_group_id_idx').on(
       table.group_id,
     ),
-    user_id_idx: index("core_admin_permissions_user_id_idx").on(table.user_id),
+    user_id_idx: index('core_admin_permissions_user_id_idx').on(table.user_id),
   }),
 );
 
@@ -53,28 +53,28 @@ export const core_admin_permissions_relations = relations(
 );
 
 export const core_admin_sessions = pgTable(
-  "core_admin_sessions",
+  'core_admin_sessions',
   {
-    login_token: varchar("login_token", { length: 255 }).primaryKey(),
-    user_id: integer("user_id")
+    login_token: varchar('login_token', { length: 255 }).primaryKey(),
+    user_id: integer('user_id')
       .notNull()
       .references(() => core_users.id, {
-        onDelete: "cascade",
+        onDelete: 'cascade',
       }),
-    created: timestamp("created").notNull().defaultNow(),
-    last_seen: timestamp("last_seen").notNull().defaultNow(),
-    expires: timestamp("expires").notNull(),
-    device_id: integer("device_id")
+    created: timestamp('created').notNull().defaultNow(),
+    last_seen: timestamp('last_seen').notNull().defaultNow(),
+    expires: timestamp('expires').notNull(),
+    device_id: integer('device_id')
       .references(() => core_sessions_known_devices.id, {
-        onDelete: "cascade",
+        onDelete: 'cascade',
       })
       .notNull(),
   },
   table => ({
-    login_token_idx: index("core_admin_sessions_login_token_idx").on(
+    login_token_idx: index('core_admin_sessions_login_token_idx').on(
       table.login_token,
     ),
-    user_id_idx: index("core_admin_sessions_user_id_idx").on(table.user_id),
+    user_id_idx: index('core_admin_sessions_user_id_idx').on(table.user_id),
   }),
 );
 

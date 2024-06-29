@@ -1,18 +1,17 @@
-import { useTranslations } from "next-intl";
-import { useFormContext } from "react-hook-form";
-
-import { ColorInput } from "@/components/color/color-input";
-import { TextLanguageInput } from "@/components/text-language-input";
+import { useTranslations } from 'next-intl';
+import { useFormContext } from 'react-hook-form';
 import {
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from 'vitnode-frontend/components/ui/form';
+import { ColorInput } from 'vitnode-frontend/components/ui/color-input';
+import { TextLanguageInput } from 'vitnode-frontend/components/ui/text-language-input';
 
 export const MainTabCreateEditCategoryBlogAdmin = () => {
-  const t = useTranslations("blog.admin.categories");
+  const t = useTranslations('blog.admin.categories');
   const form = useFormContext();
 
   return (
@@ -22,7 +21,7 @@ export const MainTabCreateEditCategoryBlogAdmin = () => {
         name="name"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{t("create.name.label")}</FormLabel>
+            <FormLabel>{t('create.name.label')}</FormLabel>
             <FormControl>
               <TextLanguageInput {...field} />
             </FormControl>
@@ -36,7 +35,7 @@ export const MainTabCreateEditCategoryBlogAdmin = () => {
         name="description"
         render={({ field }) => (
           <FormItem>
-            <FormLabel optional>{t("create.description.label")}</FormLabel>
+            <FormLabel optional>{t('create.description.label')}</FormLabel>
             <FormControl>
               <TextLanguageInput {...field} />
             </FormControl>
@@ -50,7 +49,7 @@ export const MainTabCreateEditCategoryBlogAdmin = () => {
         name="color"
         render={({ field }) => (
           <FormItem>
-            <FormLabel optional>{t("create.color.label")}</FormLabel>
+            <FormLabel optional>{t('create.color.label')}</FormLabel>
             <FormControl>
               <ColorInput {...field} />
             </FormControl>

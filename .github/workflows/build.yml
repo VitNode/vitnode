@@ -2,7 +2,7 @@ name: Build
 
 on:
   pull_request:
-    branches: "*"
+    branches: '*'
     types:
       - opened
       - edited
@@ -27,16 +27,16 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: "pnpm"
+          cache: 'pnpm'
 
       - name: Install dependencies
         run: pnpm install
 
-      - name: Run config init
-        run: pnpm config:init
+      - name: Build Scripts
+        run: pnpm build:scripts
 
-      - name: Check formatting
-        run: pnpm lint
+      - name: Build Docs
+        run: pnpm build:docs
 
       - name: Build
         run: pnpm build

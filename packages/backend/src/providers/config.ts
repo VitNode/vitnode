@@ -1,10 +1,10 @@
-import * as fs from "fs";
-import { join } from "path";
+import * as fs from 'fs';
+import { join } from 'path';
 
 export interface ConfigType {
   editor: {
     files: {
-      allow_type: "all" | "images_videos" | "images" | "none";
+      allow_type: 'all' | 'images_videos' | 'images' | 'none';
     };
     sticky: boolean;
   };
@@ -31,14 +31,14 @@ export interface ConfigType {
 
 export const configPath = join(
   process.cwd(),
-  "..",
-  "frontend",
-  "config",
-  "config.json",
+  '..',
+  'frontend',
+  'utils',
+  'config.json',
 );
 
 export const getConfigFile = () => {
-  const file = fs.readFileSync(configPath, "utf-8");
+  const file = fs.readFileSync(configPath, 'utf-8');
 
   return JSON.parse(file) as ConfigType;
 };

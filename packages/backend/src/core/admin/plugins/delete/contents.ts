@@ -1,4 +1,4 @@
-import { changeCodePluginToCapitalLetters } from "../helpers/change-code-plugin-to-capital-letters";
+import { changeCodePluginToCapitalLetters } from '../helpers/change-code-plugin-to-capital-letters';
 
 export const removeModuleFromRootSchema = ({
   code,
@@ -10,8 +10,8 @@ export const removeModuleFromRootSchema = ({
   const name = changeCodePluginToCapitalLetters(code);
 
   return content
-    .replace(`\n    ${name}Module,`, "")
-    .replace(`\nimport { ${name}Module } from "./${code}/${code}.module";`, "");
+    .replace(`\n    ${name}Module,`, '')
+    .replace(`\nimport { ${name}Module } from "./${code}/${code}.module";`, '');
 };
 
 export const removeDatabaseFromService = ({
@@ -24,10 +24,10 @@ export const removeDatabaseFromService = ({
   const name = changeCodePluginToCapitalLetters(code);
 
   return content
-    .replace(`\n  ...table${name},`, "")
+    .replace(`\n  ...table${name},`, '')
     .replace(
       `\nimport table${name} from "../plugins/${code}/admin/database/index";`,
-      "",
+      '',
     );
 };
 
@@ -40,6 +40,6 @@ export const removeLangFromTypes = ({
 }) => {
   return content.replace(
     `\n  typeof import("@/plugins/${code}/langs/en.json") &`,
-    "",
+    '',
   );
 };

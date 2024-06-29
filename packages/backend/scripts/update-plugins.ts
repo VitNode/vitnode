@@ -1,13 +1,13 @@
 /* eslint-disable no-console */
-import * as fs from "fs";
-import { join } from "path";
+import * as fs from 'fs';
+import { join } from 'path';
 
-import { NodePgDatabase } from "drizzle-orm/node-postgres";
-import { eq } from "drizzle-orm";
+import { NodePgDatabase } from 'drizzle-orm/node-postgres';
+import { eq } from 'drizzle-orm';
 
-import { ConfigPlugin } from "../src";
-import coreSchemaDatabase from "../src/templates/core/admin/database";
-import { core_plugins } from "../src/templates/core/admin/database/schema/plugins";
+import { ConfigPlugin } from '../src';
+import coreSchemaDatabase from '../src/templates/core/admin/database';
+import { core_plugins } from '../src/templates/core/admin/database/schema/plugins';
 
 export const updatePlugins = async ({
   pluginsPath,
@@ -22,21 +22,21 @@ export const updatePlugins = async ({
   });
   const plugins = fs
     .readdirSync(pluginsPath)
-    .filter(plugin => !["core", "plugins.module.ts"].includes(plugin));
+    .filter(plugin => !['core', 'plugins.module.ts'].includes(plugin));
 
   await db.transaction(async tx => {
     await Promise.all(
       plugins.map(async (code, index) => {
         const pluginPath = join(pluginsPath, code);
         const config: ConfigPlugin = JSON.parse(
-          fs.readFileSync(join(pluginPath, "config.json"), "utf8"),
+          fs.readFileSync(join(pluginPath, 'config.json'), 'utf8'),
         );
 
         if (config.allow_default) {
           isDefaultIndex = index;
         }
         const versions: Record<string, string> = JSON.parse(
-          fs.readFileSync(join(pluginPath, "versions.json"), "utf8"),
+          fs.readFileSync(join(pluginPath, 'versions.json'), 'utf8'),
         );
         const latestVersion = Object.keys(versions).sort().reverse()[0];
         const version = versions[latestVersion];

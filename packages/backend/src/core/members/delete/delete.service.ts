@@ -1,11 +1,11 @@
-import { Injectable } from "@nestjs/common";
-import { eq } from "drizzle-orm";
+import { Injectable } from '@nestjs/common';
+import { eq } from 'drizzle-orm';
 
-import { DeleteCoreMembersArgs } from "./dto/delete.args";
+import { DeleteCoreMembersArgs } from './dto/delete.args';
 
-import { core_users } from "../../../templates/core/admin/database/schema/users";
-import { DatabaseService } from "../../../database";
-import { AccessDeniedError, NotFoundError } from "../../../errors";
+import { core_users } from '../../../templates/core/admin/database/schema/users';
+import { DatabaseService } from '../../../database';
+import { AccessDeniedError, NotFoundError } from '../../../errors';
 
 @Injectable()
 export class DeleteCoreMembersService {
@@ -16,7 +16,7 @@ export class DeleteCoreMembersService {
       where: eq(core_users.id, id),
     });
 
-    if (!user) throw new NotFoundError("User");
+    if (!user) throw new NotFoundError('User');
 
     const admin =
       await this.databaseService.db.query.core_admin_permissions.findFirst({
@@ -30,6 +30,6 @@ export class DeleteCoreMembersService {
       .delete(core_users)
       .where(eq(core_users.id, id));
 
-    return "Success!";
+    return 'Success!';
   }
 }

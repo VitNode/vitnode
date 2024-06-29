@@ -6,6 +6,10 @@
       "outputs": [".next/**", "!.next/cache/**", "dist/**"],
       "dependsOn": ["^build"]
     },
+    "build:scripts": {
+      "outputs": ["dist/**"],
+      "dependsOn": ["^build:scripts"]
+    },
     "start": {
       "outputs": [".next/**", "!.next/cache/**", "dist/**"],
       "dependsOn": ["^start"],

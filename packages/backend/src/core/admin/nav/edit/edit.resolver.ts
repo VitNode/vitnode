@@ -1,11 +1,11 @@
-import { Args, Mutation, Resolver } from "@nestjs/graphql";
-import { UseGuards } from "@nestjs/common";
+import { Args, Mutation, Resolver } from '@nestjs/graphql';
+import { UseGuards } from '@nestjs/common';
 
-import { EditAdminNavService } from "./edit.service";
-import { EditAdminNavArgs } from "./dto/edit.args";
+import { EditAdminNavService } from './edit.service';
+import { EditAdminNavArgs } from './dto/edit.args';
 
-import { ShowCoreNav } from "../../../nav/show/dto/show.obj";
-import { AdminAuthGuards } from "../../../../utils";
+import { ShowCoreNav } from '../../../nav/show/dto/show.obj';
+import { AdminAuthGuards } from '../../../../utils';
 
 @Resolver()
 export class EditAdminNavResolver {

@@ -1,17 +1,17 @@
-import { rm } from "fs/promises";
-import { join } from "path";
-import { unlinkSync } from "fs";
+import { rm } from 'fs/promises';
+import { join } from 'path';
+import { unlinkSync } from 'fs';
 
-import { Injectable } from "@nestjs/common";
-import { eq } from "drizzle-orm";
+import { Injectable } from '@nestjs/common';
+import { eq } from 'drizzle-orm';
 
-import { DeleteCoreAdminLanguagesArgs } from "./dto/delete.args";
+import { DeleteCoreAdminLanguagesArgs } from './dto/delete.args';
 
-import { DatabaseService } from "../../../../database";
-import { CustomError, NotFoundError } from "../../../../errors";
-import { ABSOLUTE_PATHS_BACKEND } from "../../../..";
-import { core_languages } from "../../../../templates/core/admin/database/schema/languages";
-import { setRebuildRequired } from "../../../../functions/rebuild-required";
+import { DatabaseService } from '../../../../database';
+import { CustomError, NotFoundError } from '../../../../errors';
+import { ABSOLUTE_PATHS_BACKEND } from '../../../..';
+import { core_languages } from '../../../../templates/core/admin/database/schema/languages';
+import { setRebuildRequired } from '../../../../functions/rebuild-required';
 @Injectable()
 export class DeleteAdminCoreLanguageService {
   constructor(private readonly databaseService: DatabaseService) {}
@@ -23,20 +23,20 @@ export class DeleteAdminCoreLanguageService {
       });
 
     if (!language) {
-      throw new NotFoundError("Language");
+      throw new NotFoundError('Language');
     }
 
     if (language.protected) {
       throw new CustomError({
-        code: "PROTECTED_LANGUAGE",
-        message: "This language is protected and cannot be deleted",
+        code: 'PROTECTED_LANGUAGE',
+        message: 'This language is protected and cannot be deleted',
       });
     }
 
     if (language.default) {
       throw new CustomError({
-        code: "DEFAULT_LANGUAGE",
-        message: "This language is default and cannot be deleted",
+        code: 'DEFAULT_LANGUAGE',
+        message: 'This language is default and cannot be deleted',
       });
     }
 
@@ -47,7 +47,7 @@ export class DeleteAdminCoreLanguageService {
       },
     });
 
-    [...plugins, { code: "core" }, { code: "admin" }].forEach(async plugin => {
+    [...plugins, { code: 'core' }, { code: 'admin' }].forEach(async plugin => {
       unlinkSync(
         join(
           ABSOLUTE_PATHS_BACKEND.plugin({ code: plugin.code }).frontend
@@ -60,7 +60,7 @@ export class DeleteAdminCoreLanguageService {
     // Remove assets
     const assetsPath = join(
       ABSOLUTE_PATHS_BACKEND.uploads.public,
-      "assets",
+      'assets',
       code,
     );
     rm(assetsPath, { recursive: true });
@@ -69,8 +69,8 @@ export class DeleteAdminCoreLanguageService {
       .delete(core_languages)
       .where(eq(core_languages.code, code));
 
-    await setRebuildRequired({ set: "langs" });
+    await setRebuildRequired({ set: 'langs' });
 
-    return "Success!";
+    return 'Success!';
   }
 }

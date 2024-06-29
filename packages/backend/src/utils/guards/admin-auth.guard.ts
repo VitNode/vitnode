@@ -3,12 +3,12 @@ import {
   ExecutionContext,
   Inject,
   Injectable,
-} from "@nestjs/common";
-import { GqlExecutionContext } from "@nestjs/graphql";
+} from '@nestjs/common';
+import { GqlExecutionContext } from '@nestjs/graphql';
 
-import { Ctx } from "../context";
+import { Ctx } from '../context';
 
-import { AuthorizationAdminSessionsObj } from "../../core/admin/sessions/authorization/dto/authorization.obj";
+import { AuthorizationAdminSessionsObj } from '../../core/admin/sessions/authorization/dto/authorization.obj';
 
 export interface IOAdminAuthGuards {
   authorization: (context: Ctx) => Promise<AuthorizationAdminSessionsObj>;
@@ -17,7 +17,7 @@ export interface IOAdminAuthGuards {
 @Injectable()
 export class AdminAuthGuards implements CanActivate {
   constructor(
-    @Inject("IOAdminAuthGuards") private readonly service: IOAdminAuthGuards,
+    @Inject('IOAdminAuthGuards') private readonly service: IOAdminAuthGuards,
   ) {}
 
   protected async getAuth({ req, res }: Ctx) {

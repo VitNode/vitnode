@@ -1,11 +1,11 @@
-import { Args, Mutation, Resolver } from "@nestjs/graphql";
-import { SetMetadata, UseGuards } from "@nestjs/common";
+import { Args, Mutation, Resolver } from '@nestjs/graphql';
+import { SetMetadata, UseGuards } from '@nestjs/common';
 
-import { CreateAdminGroupsService } from "./create.service";
-import { CreateAdminGroupsArgs } from "./dto/create.args";
-import { ShowAdminGroups } from "../show/dto/show.obj";
+import { CreateAdminGroupsService } from './create.service';
+import { CreateAdminGroupsArgs } from './dto/create.args';
+import { ShowAdminGroups } from '../show/dto/show.obj';
 
-import { AdminPermissionGuards } from "../../../../utils";
+import { AdminPermissionGuards } from '../../../../utils';
 
 @Resolver()
 export class CreateAdminGroupsResolver {
@@ -13,7 +13,7 @@ export class CreateAdminGroupsResolver {
 
   @Mutation(() => ShowAdminGroups)
   @UseGuards(AdminPermissionGuards)
-  @SetMetadata("permission", "create_group")
+  @SetMetadata('permission', 'create_group')
   async core_groups__admin_create(
     @Args() args: CreateAdminGroupsArgs,
   ): Promise<ShowAdminGroups> {

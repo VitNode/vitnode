@@ -1,96 +1,20 @@
-import * as React from "react";
-import { NextIntlClientProvider, AbstractIntlMessages } from "next-intl";
-import { GeistSans } from "geist/font/sans";
-import NextTopLoader from "nextjs-toploader";
-import { Metadata } from "next";
-import { cn } from "@vitnode/frontend/helpers";
-
-import { CONFIG } from "@/config";
-import { Providers } from "./providers";
+import * as React from 'react';
+import { GeistSans } from 'geist/font/sans';
+import { Metadata } from 'next';
 import {
-  Core_Middleware,
-  Core_MiddlewareQuery,
-  Core_MiddlewareQueryVariables,
-} from "@/graphql/hooks";
-import { CatchLayout } from "./catch";
-import { getConfigFile } from "@/config/helpers";
-import { fetcher } from "@/graphql/fetcher";
-import "@/app/[locale]/(admin)/admin/global.css";
-import "./global.css";
+  RootLayout,
+  RootLayoutProps,
+  generateMetadataForRootLayout,
+} from 'vitnode-frontend/views/layout/root-layout';
 
-const getData = async () => {
-  const { data } = await fetcher<
-    Core_MiddlewareQuery,
-    Core_MiddlewareQueryVariables
-  >({
-    query: Core_Middleware,
-    cache: "force-cache",
-  });
+export async function generateMetadata(
+  props: RootLayoutProps,
+): Promise<Metadata> {
+  const metadata = await generateMetadataForRootLayout(props);
 
-  return data;
-};
-
-interface Props {
-  children: React.ReactNode;
-  params: { locale: string };
+  return metadata;
 }
 
-export function generateMetadata({ params: { locale } }: Props): Metadata {
-  return {
-    manifest: `${CONFIG.backend_public_url}/assets/${locale}/manifest.webmanifest`,
-  };
-}
-
-export default async function LocaleLayout({
-  children,
-  params: { locale },
-}: Props) {
-  const defaultPlugins = [{ code: "core" }, { code: "admin" }];
-
-  try {
-    const [data, config] = await Promise.all([getData(), getConfigFile()]);
-
-    const messagesFormApps = await Promise.all(
-      (data
-        ? [...data.core_plugins__show, ...defaultPlugins]
-        : defaultPlugins
-      ).map(async plugin => {
-        try {
-          return {
-            ...(
-              await import(`../../plugins/${plugin.code}/langs/${locale}.json`)
-            ).default,
-          };
-        } catch (e) {
-          return {};
-        }
-      }),
-    );
-
-    const messages: AbstractIntlMessages = {
-      ...messagesFormApps.reduce(
-        (acc, messages) => ({ ...acc, ...messages }),
-        {},
-      ),
-    };
-
-    return (
-      <html lang={locale} className={cn(GeistSans.className, "vitnode")}>
-        <body>
-          <NextTopLoader
-            color="hsl(var(--primary))"
-            showSpinner={false}
-            height={4}
-          />
-          <Providers data={data} config={config}>
-            <NextIntlClientProvider messages={messages}>
-              {children}
-            </NextIntlClientProvider>
-          </Providers>
-        </body>
-      </html>
-    );
-  } catch (error) {
-    return <CatchLayout defaultPlugins={defaultPlugins} locale={locale} />;
-  }
+export default function LocaleLayout(props: RootLayoutProps) {
+  return <RootLayout className={GeistSans.className} {...props} />;
 }

@@ -1,21 +1,21 @@
-import { join } from "path";
-import * as fs from "fs";
+import { join } from 'path';
+import * as fs from 'fs';
 
-import { Injectable } from "@nestjs/common";
+import { Injectable } from '@nestjs/common';
 
 import {
   changeDatabaseService,
   changeLangTypes,
   changeModuleRootSchema,
-} from "./contents";
+} from './contents';
 
 import {
   removeDatabaseFromService,
   removeLangFromTypes,
   removeModuleFromRootSchema,
-} from "../../../delete/contents";
-import { CustomError } from "../../../../../../errors";
-import { ABSOLUTE_PATHS_BACKEND } from "../../../../../..";
+} from '../../../delete/contents';
+import { CustomError } from '../../../../../../errors';
+import { ABSOLUTE_PATHS_BACKEND } from '../../../../../..';
 
 interface ChangeFilesContentType {
   condition: (content: string) => boolean;
@@ -33,19 +33,19 @@ export class ChangeFilesAdminPluginsService {
     files.forEach(file => {
       if (!fs.existsSync(file.path)) {
         throw new CustomError({
-          code: "CANNOT_FIND_PLUGIN_PATH",
+          code: 'CANNOT_FIND_PLUGIN_PATH',
           message: `Cannot find plugin path with "${file.path}"!`,
         });
       }
 
-      const content = fs.readFileSync(file.path, "utf8");
+      const content = fs.readFileSync(file.path, 'utf8');
 
       // Write files
       if (file.condition(content)) {
         fs.writeFile(file.path, file.content(content), err => {
           if (err) {
             throw new CustomError({
-              code: "CANNOT_WRITE_FILE",
+              code: 'CANNOT_WRITE_FILE',
               message: `Cannot write file with "${file.path}" path!`,
             });
           }
@@ -57,7 +57,7 @@ export class ChangeFilesAdminPluginsService {
   changeFilesWhenCreate({ code }: { code: string }): void {
     const files: ChangeFilesContentType[] = [
       {
-        path: join(ABSOLUTE_PATHS_BACKEND.plugins, "plugins.module.ts"),
+        path: join(ABSOLUTE_PATHS_BACKEND.plugins, 'plugins.module.ts'),
         content: content =>
           changeModuleRootSchema({
             content,
@@ -66,7 +66,7 @@ export class ChangeFilesAdminPluginsService {
         condition: content => !content.includes(`./${code}/${code}.module`),
       },
       {
-        path: join(ABSOLUTE_PATHS_BACKEND.backend, "database", "schema.ts"),
+        path: join(ABSOLUTE_PATHS_BACKEND.backend, 'database', 'schema.ts'),
         content: content =>
           changeDatabaseService({
             content,
@@ -75,7 +75,7 @@ export class ChangeFilesAdminPluginsService {
         condition: () => true,
       },
       {
-        path: join(ABSOLUTE_PATHS_BACKEND.frontend.init, "global.d.ts"),
+        path: join(ABSOLUTE_PATHS_BACKEND.frontend.init, 'global.d.ts'),
         content: content =>
           changeLangTypes({
             content,
@@ -91,7 +91,7 @@ export class ChangeFilesAdminPluginsService {
   changeFilesWhenDelete({ code }: { code: string }): void {
     const files: ChangeFilesContentType[] = [
       {
-        path: join(ABSOLUTE_PATHS_BACKEND.plugins, "plugins.module.ts"),
+        path: join(ABSOLUTE_PATHS_BACKEND.plugins, 'plugins.module.ts'),
         content: content =>
           removeModuleFromRootSchema({
             content,
@@ -100,7 +100,7 @@ export class ChangeFilesAdminPluginsService {
         condition: () => true,
       },
       {
-        path: join(ABSOLUTE_PATHS_BACKEND.backend, "database", "schema.ts"),
+        path: join(ABSOLUTE_PATHS_BACKEND.backend, 'database', 'schema.ts'),
         content: content =>
           removeDatabaseFromService({
             content,
@@ -109,7 +109,7 @@ export class ChangeFilesAdminPluginsService {
         condition: () => true,
       },
       {
-        path: join(ABSOLUTE_PATHS_BACKEND.frontend.init, "global.d.ts"),
+        path: join(ABSOLUTE_PATHS_BACKEND.frontend.init, 'global.d.ts'),
         content: content =>
           removeLangFromTypes({
             content,

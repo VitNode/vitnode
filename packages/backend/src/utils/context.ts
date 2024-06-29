@@ -1,10 +1,10 @@
-import { Request, Response } from "express";
+import { Request, Response } from 'express';
 
-import { User } from "../decorators";
+import { User } from '../decorators';
 
 export interface AuthRequest extends Request {
   user?: {
-    id: User["id"];
+    id: User['id'];
   };
 }
 

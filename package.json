@@ -10,8 +10,11 @@
     "packages/*"
   ],
   "scripts": {
+    "build:scripts": "turbo build:scripts && pnpm i",
     "build": "cross-env TURBO_TELEMETRY_DISABLED=1 turbo build",
-    "dev": "turbo dev",
+    "dev": "pnpm build:scripts && turbo dev",
+    "dev:docs": "cd apps/docs && pnpm dev:docs",
+    "build:docs": "cd apps/docs && pnpm build:docs",
     "email:dev": "cd apps/backend && pnpm email:dev",
     "lint": "turbo lint",
     "lint:fix": "turbo lint:fix",
@@ -31,7 +34,7 @@
     "cross-env": "^7.0.3",
     "prettier": "^3.3.2",
     "prettier-plugin-tailwindcss": "^0.6.5",
-    "turbo": "~2.0.4"
+    "turbo": "^2.0.6"
   },
   "packageManager": "pnpm@9.4.0"
 }

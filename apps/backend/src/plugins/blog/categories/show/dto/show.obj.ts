@@ -1,5 +1,5 @@
-import { Field, Int, ObjectType } from "@nestjs/graphql";
-import { PageInfo, TextLanguage } from "vitnode-backend";
+import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { PageInfo, TextLanguage } from 'vitnode-backend';
 
 @ObjectType()
 export class ShowBlogCategories {

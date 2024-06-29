@@ -1,16 +1,16 @@
-import { Injectable } from "@nestjs/common";
-import { count } from "drizzle-orm";
+import { Injectable } from '@nestjs/common';
+import { count } from 'drizzle-orm';
 
-import { ShowAdminStaffModeratorsArgs } from "./dto/show.args";
-import { ShowAdminStaffModeratorsObj } from "./dto/show.obj";
+import { ShowAdminStaffModeratorsArgs } from './dto/show.args';
+import { ShowAdminStaffModeratorsObj } from './dto/show.obj';
 
-import { DatabaseService } from "../../../../../database";
+import { DatabaseService } from '../../../../../database';
 import {
   inputPaginationCursor,
   outputPagination,
-} from "../../../../../functions";
-import { core_moderators_permissions } from "../../../../../templates/core/admin/database/schema/moderators";
-import { SortDirectionEnum } from "../../../../../utils";
+} from '../../../../../functions';
+import { core_moderators_permissions } from '../../../../../templates/core/admin/database/schema/moderators';
+import { SortDirectionEnum } from '../../../../../utils';
 
 @Injectable()
 export class ShowAdminStaffModeratorsService {
@@ -29,12 +29,12 @@ export class ShowAdminStaffModeratorsService {
       first,
       last,
       primaryCursor: {
-        column: "id",
+        column: 'id',
         schema: core_moderators_permissions.id,
       },
       defaultSortBy: {
         direction: SortDirectionEnum.desc,
-        column: "updated",
+        column: 'updated',
       },
       sortBy,
     });

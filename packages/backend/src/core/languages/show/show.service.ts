@@ -1,13 +1,13 @@
-import { Injectable } from "@nestjs/common";
-import { and, count, ilike } from "drizzle-orm";
+import { Injectable } from '@nestjs/common';
+import { and, count, ilike } from 'drizzle-orm';
 
-import { ShowCoreLanguagesArgs } from "./dto/show.args";
-import { ShowCoreLanguagesObj } from "./dto/show.obj";
+import { ShowCoreLanguagesArgs } from './dto/show.args';
+import { ShowCoreLanguagesObj } from './dto/show.obj';
 
-import { DatabaseService } from "../../../database";
-import { inputPaginationCursor, outputPagination } from "../../../functions";
-import { core_languages } from "../../../templates/core/admin/database/schema/languages";
-import { SortDirectionEnum } from "../../../utils";
+import { DatabaseService } from '../../../database';
+import { inputPaginationCursor, outputPagination } from '../../../functions';
+import { core_languages } from '../../../templates/core/admin/database/schema/languages';
+import { SortDirectionEnum } from '../../../utils';
 
 @Injectable()
 export class ShowCoreLanguageService {
@@ -17,7 +17,7 @@ export class ShowCoreLanguageService {
     cursor,
     first,
     last,
-    search = "",
+    search = '',
     sortBy,
   }: ShowCoreLanguagesArgs): Promise<ShowCoreLanguagesObj> {
     const pagination = await inputPaginationCursor({
@@ -27,12 +27,12 @@ export class ShowCoreLanguageService {
       first,
       last,
       primaryCursor: {
-        column: "id",
+        column: 'id',
         schema: core_languages.id,
       },
       defaultSortBy: {
         direction: SortDirectionEnum.desc,
-        column: "created",
+        column: 'created',
       },
       sortBy,
     });

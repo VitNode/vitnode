@@ -1,13 +1,13 @@
-import * as fs from "fs";
+import * as fs from 'fs';
 
-import { Injectable } from "@nestjs/common";
+import { Injectable } from '@nestjs/common';
 
-import { FilesAdminPluginsArgs } from "./dto/files.args";
-import { FilesAdminPluginsObj } from "./dto/files.obj";
+import { FilesAdminPluginsArgs } from './dto/files.args';
+import { FilesAdminPluginsObj } from './dto/files.obj';
 
-import { DatabaseService } from "../../../../database";
-import { NotFoundError } from "../../../../errors";
-import { ABSOLUTE_PATHS_BACKEND } from "../../../..";
+import { DatabaseService } from '../../../../database';
+import { NotFoundError } from '../../../../errors';
+import { ABSOLUTE_PATHS_BACKEND } from '../../../..';
 
 @Injectable()
 export class FilesAdminPluginsService {
@@ -20,7 +20,7 @@ export class FilesAdminPluginsService {
   }): Promise<number> {
     return fs.existsSync(paths)
       ? (await fs.promises.readdir(paths, { recursive: true })).filter(
-          fileName => fileName.includes("."),
+          fileName => fileName.includes('.'),
         ).length
       : 0;
   }
@@ -31,7 +31,7 @@ export class FilesAdminPluginsService {
     });
 
     if (!plugin) {
-      throw new NotFoundError("Plugin");
+      throw new NotFoundError('Plugin');
     }
 
     const pluginPaths = ABSOLUTE_PATHS_BACKEND.plugin({ code });

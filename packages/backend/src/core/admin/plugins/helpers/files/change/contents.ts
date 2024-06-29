@@ -1,4 +1,4 @@
-import { changeCodePluginToCapitalLetters } from "../../change-code-plugin-to-capital-letters";
+import { changeCodePluginToCapitalLetters } from '../../change-code-plugin-to-capital-letters';
 
 export const changeModuleRootSchema = ({
   admin,
@@ -9,15 +9,15 @@ export const changeModuleRootSchema = ({
   content: string;
   admin?: boolean;
 }) => {
-  const name = `${admin ? "Admin" : ""}${changeCodePluginToCapitalLetters(code)}`;
+  const name = `${admin ? 'Admin' : ''}${changeCodePluginToCapitalLetters(code)}`;
 
   return content
     .replace(
-      "// ! === IMPORT ===",
+      '// ! === IMPORT ===',
       `import { ${name}Module } from "./${code}/${code}.module";\n// ! === IMPORT ===`,
     )
     .replace(
-      "\n    // ! === MODULE ===",
+      '\n    // ! === MODULE ===',
       `\n    ${name}Module,\n    // ! === MODULE ===`,
     );
 };
@@ -31,15 +31,15 @@ export const changeDatabaseService = ({
   content: string;
   admin?: boolean;
 }) => {
-  const name = `${admin ? "Admin" : ""}${changeCodePluginToCapitalLetters(code)}`;
+  const name = `${admin ? 'Admin' : ''}${changeCodePluginToCapitalLetters(code)}`;
 
   return content
     .replace(
-      "// ! === IMPORT ===",
+      '// ! === IMPORT ===',
       `import table${name} from "../plugins/${code}/admin/database/index";\n// ! === IMPORT ===`,
     )
     .replace(
-      "\n  // ! === MODULE ===",
+      '\n  // ! === MODULE ===',
       `\n  ...table${name},\n  // ! === MODULE ===`,
     );
 };
@@ -52,7 +52,7 @@ export const changeLangTypes = ({
   content: string;
 }) => {
   return content.replace(
-    "// ! === IMPORT ===",
+    '// ! === IMPORT ===',
     `typeof import("@/plugins/${code}/langs/en.json") &\n  // ! === IMPORT ===`,
   );
 };

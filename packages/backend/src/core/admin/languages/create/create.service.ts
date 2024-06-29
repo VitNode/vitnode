@@ -1,15 +1,15 @@
-import * as fs from "fs";
-import { join } from "path";
+import * as fs from 'fs';
+import { join } from 'path';
 
-import { Injectable } from "@nestjs/common";
+import { Injectable } from '@nestjs/common';
 
-import { CreateCoreAdminLanguagesArgs } from "./dto/create.args";
+import { CreateCoreAdminLanguagesArgs } from './dto/create.args';
 
-import { DatabaseService } from "../../../../database";
-import { ABSOLUTE_PATHS_BACKEND, CustomError } from "../../../..";
-import { core_languages } from "../../../../templates/core/admin/database/schema/languages";
-import { ShowCoreLanguages } from "../../../languages/show/dto/show.obj";
-import { setRebuildRequired } from "../../../../functions/rebuild-required";
+import { DatabaseService } from '../../../../database';
+import { ABSOLUTE_PATHS_BACKEND, CustomError } from '../../../..';
+import { core_languages } from '../../../../templates/core/admin/database/schema/languages';
+import { ShowCoreLanguages } from '../../../languages/show/dto/show.obj';
+import { setRebuildRequired } from '../../../../functions/rebuild-required';
 
 @Injectable()
 export class CreateAdminCoreLanguageService {
@@ -23,7 +23,7 @@ export class CreateAdminCoreLanguageService {
       },
     });
 
-    [...plugins, { code: "core" }, { code: "admin" }].forEach(async plugin => {
+    [...plugins, { code: 'core' }, { code: 'admin' }].forEach(async plugin => {
       const path = join(
         ABSOLUTE_PATHS_BACKEND.plugin({ code: plugin.code }).frontend.language,
         `${pluginCode}.json`,
@@ -34,7 +34,7 @@ export class CreateAdminCoreLanguageService {
         join(
           ABSOLUTE_PATHS_BACKEND.plugin({ code: plugin.code }).frontend
             .language,
-          "en.json",
+          'en.json',
         ),
         path,
         { recursive: true },
@@ -56,8 +56,8 @@ export class CreateAdminCoreLanguageService {
 
     if (language) {
       throw new CustomError({
-        code: "LANGUAGE_ALREADY_EXISTS",
-        message: "Language already exists",
+        code: 'LANGUAGE_ALREADY_EXISTS',
+        message: 'Language already exists',
       });
     }
 
@@ -67,21 +67,21 @@ export class CreateAdminCoreLanguageService {
     fs.cpSync(
       join(
         ABSOLUTE_PATHS_BACKEND.uploads.public,
-        "assets",
-        "en",
-        "manifest.webmanifest",
+        'assets',
+        'en',
+        'manifest.webmanifest',
       ),
       join(
         ABSOLUTE_PATHS_BACKEND.uploads.public,
-        "assets",
+        'assets',
         code,
-        "manifest.webmanifest",
+        'manifest.webmanifest',
       ),
     );
 
     const defaultLanguage =
       await this.databaseService.db.query.core_languages.findFirst({
-        where: (table, { eq }) => eq(table.code, "en"),
+        where: (table, { eq }) => eq(table.code, 'en'),
       });
 
     const newLanguage = await this.databaseService.db
@@ -99,7 +99,7 @@ export class CreateAdminCoreLanguageService {
       })
       .returning();
 
-    await setRebuildRequired({ set: "langs" });
+    await setRebuildRequired({ set: 'langs' });
 
     return newLanguage[0];
   }

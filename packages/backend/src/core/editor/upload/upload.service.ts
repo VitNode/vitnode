@@ -1,22 +1,22 @@
-import { Injectable } from "@nestjs/common";
-import { eq, sum } from "drizzle-orm";
-import { generateRandomString } from "@vitnode/shared";
+import { Injectable } from '@nestjs/common';
+import { eq, sum } from 'drizzle-orm';
+import { generateRandomString } from 'vitnode-shared';
 
-import { UploadCoreEditorArgs } from "./dto/upload.args";
+import { UploadCoreEditorArgs } from './dto/upload.args';
 
-import { UploadCoreFilesService } from "../../files/helpers/upload/upload.service";
+import { UploadCoreFilesService } from '../../files/helpers/upload/upload.service';
 import {
   HelpersUploadCoreFilesService,
   acceptMimeTypeImage,
   acceptMimeTypeVideo,
-} from "../../files/helpers/upload/helpers";
-import { UploadCoreFilesArgs } from "../../files/helpers/upload/dto/upload.args";
-import { ShowCoreFiles } from "../../files/show/dto/show.obj";
-import { DatabaseService } from "../../../database";
-import { User } from "../../../decorators";
-import { AccessDeniedError } from "../../../errors";
-import { core_files } from "../../../templates/core/admin/database/schema/files";
-import { getConfigFile } from "../../../providers/config";
+} from '../../files/helpers/upload/helpers';
+import { UploadCoreFilesArgs } from '../../files/helpers/upload/dto/upload.args';
+import { ShowCoreFiles } from '../../files/show/dto/show.obj';
+import { DatabaseService } from '../../../database';
+import { User } from '../../../decorators';
+import { AccessDeniedError } from '../../../errors';
+import { core_files } from '../../../templates/core/admin/database/schema/files';
+import { getConfigFile } from '../../../providers/config';
 
 interface GetFilesAfterUploadArgs extends UploadCoreEditorArgs {
   maxUploadSizeKb: number;
@@ -43,11 +43,11 @@ export class UploadCoreEditorService extends HelpersUploadCoreFilesService {
       },
     } = getConfigFile();
 
-    if (allow_type === "images_videos") {
+    if (allow_type === 'images_videos') {
       return [...acceptMimeTypeImage, ...acceptMimeTypeVideo];
     }
 
-    if (allow_type === "images") {
+    if (allow_type === 'images') {
       return acceptMimeTypeImage;
     }
 
@@ -66,7 +66,7 @@ export class UploadCoreEditorService extends HelpersUploadCoreFilesService {
       acceptMimeType: this.acceptMimeTypeToFrontend,
       disableThrowError: true,
     });
-    const args: Omit<UploadCoreFilesArgs, "acceptMimeType" | "secure"> = {
+    const args: Omit<UploadCoreFilesArgs, 'acceptMimeType' | 'secure'> = {
       files: [file],
       maxUploadSizeBytes: maxUploadSizeKb * 1024,
       plugin,

@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
-import * as path from "path";
-import * as fs from "fs";
+import * as path from 'path';
+import * as fs from 'fs';
 
 export const copyDatabaseSchema = ({
   corePluginPath,
@@ -9,12 +9,13 @@ export const copyDatabaseSchema = ({
 }) => {
   const currentPathToSchema = path.join(
     __dirname,
-    "..",
-    "src",
-    "templates",
-    "core",
-    "admin",
-    "database",
+    '..',
+    '..',
+    'src',
+    'templates',
+    'core',
+    'admin',
+    'database',
   );
   if (!fs.existsSync(currentPathToSchema)) {
     console.log(
@@ -23,6 +24,6 @@ export const copyDatabaseSchema = ({
     process.exit(1);
   }
 
-  const userPathToSchema = path.join(corePluginPath, "admin", "database");
+  const userPathToSchema = path.join(corePluginPath, 'admin', 'database');
   fs.cpSync(currentPathToSchema, userPathToSchema, { recursive: true });
 };

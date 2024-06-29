@@ -1,15 +1,15 @@
-import { CustomError } from "../../../../errors";
-import { FileUpload } from "../../../../graphql-upload";
+import { CustomError } from '../../../../errors';
+import { FileUpload } from '../../../../graphql-upload';
 
 export const acceptMimeTypeImage = [
-  "image/jpeg",
-  "image/png",
-  "image/webp",
-  "image/gif",
-  "image/avif",
+  'image/jpeg',
+  'image/png',
+  'image/webp',
+  'image/gif',
+  'image/avif',
 ];
 
-export const acceptMimeTypeVideo = ["video/mp4", "video/webm", "video/ogg"];
+export const acceptMimeTypeVideo = ['video/mp4', 'video/webm', 'video/ogg'];
 
 export class HelpersUploadCoreFilesService {
   protected async checkSizeFile({
@@ -32,7 +32,7 @@ export class HelpersUploadCoreFilesService {
 
     if (fileSizeInBytes > maxUploadSizeBytes) {
       throw new CustomError({
-        code: "FILE_TOO_LARGE",
+        code: 'FILE_TOO_LARGE',
         message: `${filename} file is too large! We only accept files up to ${maxUploadSizeBytes} bytes.`,
       });
     }
@@ -58,9 +58,9 @@ export class HelpersUploadCoreFilesService {
 
     if (!acceptMimeType.includes(mimetype) && !disableThrowError) {
       throw new CustomError({
-        code: "INVALID_TYPE_FILE",
+        code: 'INVALID_TYPE_FILE',
         message: `${filename} file has invalid type! We only accept the following types: ${acceptMimeType.join(
-          ", ",
+          ', ',
         )}.`,
       });
     }

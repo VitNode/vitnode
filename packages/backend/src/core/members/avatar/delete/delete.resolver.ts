@@ -1,10 +1,10 @@
-import { Mutation, Resolver } from "@nestjs/graphql";
-import { UseGuards } from "@nestjs/common";
+import { Mutation, Resolver } from '@nestjs/graphql';
+import { UseGuards } from '@nestjs/common';
 
-import { DeleteAvatarCoreMembersService } from "./delete.service";
+import { DeleteAvatarCoreMembersService } from './delete.service';
 
-import { AuthGuards } from "../../../../utils";
-import { CurrentUser, User } from "../../../../decorators";
+import { AuthGuards } from '../../../../utils';
+import { CurrentUser, User } from '../../../../decorators';
 
 @Resolver()
 export class DeleteAvatarCoreMembersResolver {

@@ -1,23 +1,23 @@
 /* eslint-disable no-console */
-import * as fs from "fs";
-import { join } from "path";
+import * as fs from 'fs';
+import { join } from 'path';
 
-import { objectToArray, updateObject } from "./helpers/update-object";
+import { objectToArray, updateObject } from './helpers/update-object';
 
 interface ManifestType {
   background_color?: string;
   description?: string;
-  display?: "browser" | "fullscreen" | "minimal-ui" | "standalone";
+  display?: 'browser' | 'fullscreen' | 'minimal-ui' | 'standalone';
   display_override?: (
-    | "browser"
-    | "fullscreen"
-    | "minimal-ui"
-    | "standalone"
-    | "window-controls-overlay"
+    | 'browser'
+    | 'fullscreen'
+    | 'minimal-ui'
+    | 'standalone'
+    | 'window-controls-overlay'
   )[];
   icons?: {
     src: string;
-    purpose?: "any" | "badge" | "maskable" | "monochrome";
+    purpose?: 'any' | 'badge' | 'maskable' | 'monochrome';
     sizes?: string;
     type?: string;
   }[];
@@ -25,14 +25,14 @@ interface ManifestType {
   lang?: string;
   name?: string;
   orientation?:
-    | "any"
-    | "landscape-primary"
-    | "landscape-secondary"
-    | "landscape"
-    | "natural"
-    | "portrait-primary"
-    | "portrait-secondary"
-    | "portrait";
+    | 'any'
+    | 'landscape-primary'
+    | 'landscape-secondary'
+    | 'landscape'
+    | 'natural'
+    | 'portrait-primary'
+    | 'portrait-secondary'
+    | 'portrait';
   screenshots?: {
     src: string;
     sizes?: string;
@@ -45,7 +45,7 @@ interface ManifestType {
     description?: string;
     icons?: {
       src: string;
-      purpose?: "any" | "badge" | "maskable" | "monochrome";
+      purpose?: 'any' | 'badge' | 'maskable' | 'monochrome';
       sizes?: string;
       type?: string;
     }[];
@@ -65,17 +65,17 @@ const generateDefaultManifest = ({
   name: siteName,
   short_name: siteShortName,
   lang: langCode,
-  description: "",
-  display: "standalone",
-  theme_color: "#2463eb",
-  background_color: "#09090b",
+  description: '',
+  display: 'standalone',
+  theme_color: '#2463eb',
+  background_color: '#09090b',
   start_url: `${frontendUrl}/${langCode}/`,
-  orientation: "any",
+  orientation: 'any',
   icons: [
     {
-      src: "/icons/favicon.ico",
-      sizes: "any",
-      type: "image/x-icon",
+      src: '/icons/favicon.ico',
+      sizes: 'any',
+      type: 'image/x-icon',
     },
   ],
 });
@@ -83,11 +83,11 @@ const generateDefaultManifest = ({
 export const generateManifest = () => {
   const langsPath = join(
     process.cwd(),
-    "..",
-    "frontend",
-    "plugins",
-    "core",
-    "langs",
+    '..',
+    'frontend',
+    'plugins',
+    'core',
+    'langs',
   );
 
   if (!fs.existsSync(langsPath)) {
@@ -99,10 +99,10 @@ export const generateManifest = () => {
 
   const configPath = join(
     process.cwd(),
-    "..",
-    "frontend",
-    "config",
-    "config.json",
+    '..',
+    'frontend',
+    'utils',
+    'config.json',
   );
 
   if (!fs.existsSync(configPath)) {
@@ -112,13 +112,13 @@ export const generateManifest = () => {
     process.exit(1);
   }
 
-  const config = JSON.parse(fs.readFileSync(configPath, "utf8"));
+  const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
   const languages = fs
     .readdirSync(langsPath)
-    .map(fileName => fileName.replace(".json", ""));
+    .map(fileName => fileName.replace('.json', ''));
 
   const envUrl = process.env.NEXT_PUBLIC_FRONTEND_URL;
-  const frontendUrl = envUrl ? envUrl : "http://localhost:3000";
+  const frontendUrl = envUrl ? envUrl : 'http://localhost:3000';
 
   languages.forEach(langCode => {
     const defaultManifest = generateDefaultManifest({
@@ -130,12 +130,12 @@ export const generateManifest = () => {
 
     const pathToUpload = join(
       process.cwd(),
-      "uploads",
-      "public",
-      "assets",
+      'uploads',
+      'public',
+      'assets',
       langCode,
     );
-    const pathToUploadFile = join(pathToUpload, "manifest.webmanifest");
+    const pathToUploadFile = join(pathToUpload, 'manifest.webmanifest');
 
     if (!fs.existsSync(pathToUpload)) {
       fs.mkdirSync(pathToUpload, { recursive: true });
@@ -150,7 +150,7 @@ export const generateManifest = () => {
 
     // Update manifest
     const manifest: ManifestType = JSON.parse(
-      fs.readFileSync(pathToUploadFile, "utf8"),
+      fs.readFileSync(pathToUploadFile, 'utf8'),
     );
     if (!manifest.start_url) return;
     const startUrl = `${frontendUrl}/${langCode}`;
@@ -158,8 +158,8 @@ export const generateManifest = () => {
       updateObject(
         {
           ...manifest,
-          start_url: `${startUrl}${manifest.start_url.replace(startUrl, "")}`,
-          id: `${startUrl}${manifest.start_url.replace(startUrl, "")}`,
+          start_url: `${startUrl}${manifest.start_url.replace(startUrl, '')}`,
+          id: `${startUrl}${manifest.start_url.replace(startUrl, '')}`,
         },
         defaultManifest,
       ),

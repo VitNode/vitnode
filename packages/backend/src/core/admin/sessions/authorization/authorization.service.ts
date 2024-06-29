@@ -1,22 +1,22 @@
-import * as fs from "fs";
+import * as fs from 'fs';
 
-import { Injectable } from "@nestjs/common";
-import { JwtService } from "@nestjs/jwt";
-import { ConfigService } from "@nestjs/config";
-import { eq } from "drizzle-orm";
-import { currentUnixDate } from "@vitnode/shared";
+import { Injectable } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
+import { ConfigService } from '@nestjs/config';
+import { eq } from 'drizzle-orm';
+import { currentUnixDate } from 'vitnode-shared';
 
 import {
   AuthorizationAdminSessionsObj,
   NavAdminPluginsAuthorization,
-} from "./dto/authorization.obj";
+} from './dto/authorization.obj';
 
-import { DatabaseService } from "../../../../database";
-import { DeviceSignInCoreSessionsService } from "../../../sessions/sign_in/device.service";
-import { ABSOLUTE_PATHS_BACKEND, AccessDeniedError, Ctx } from "../../../..";
-import { AuthorizationCurrentUserObj } from "../../../sessions/authorization/dto/authorization.obj";
-import { core_sessions_known_devices } from "../../../../templates/core/admin/database/schema/sessions";
-import { getUserAgentData, getUserIp } from "../../../../functions";
+import { DatabaseService } from '../../../../database';
+import { DeviceSignInCoreSessionsService } from '../../../sessions/sign_in/device.service';
+import { ABSOLUTE_PATHS_BACKEND, AccessDeniedError, Ctx } from '../../../..';
+import { AuthorizationCurrentUserObj } from '../../../sessions/authorization/dto/authorization.obj';
+import { core_sessions_known_devices } from '../../../../templates/core/admin/database/schema/sessions';
+import { getUserAgentData, getUserIp } from '../../../../functions';
 
 @Injectable()
 export class AuthorizationAdminSessionsService {
@@ -49,7 +49,7 @@ export class AuthorizationAdminSessionsService {
         // const config: ConfigPlugin = JSON.parse(
         //   fs.readFileSync(pathConfig, "utf8")
         // );
-        const config = JSON.parse(fs.readFileSync(pathConfig, "utf8"));
+        const config = JSON.parse(fs.readFileSync(pathConfig, 'utf8'));
 
         return {
           code,
@@ -65,7 +65,7 @@ export class AuthorizationAdminSessionsService {
   }: Ctx): Promise<AuthorizationCurrentUserObj> {
     const login_token =
       req.cookies[
-        this.configService.getOrThrow("cookies.login_token.admin.name")
+        this.configService.getOrThrow('cookies.login_token.admin.name')
       ];
 
     if (!login_token) {
@@ -105,7 +105,7 @@ export class AuthorizationAdminSessionsService {
     }
 
     const decodeAccessToken = this.jwtService.decode(login_token);
-    if (!decodeAccessToken || decodeAccessToken["exp"] < currentUnixDate()) {
+    if (!decodeAccessToken || decodeAccessToken['exp'] < currentUnixDate()) {
       throw new AccessDeniedError();
     }
 
@@ -114,7 +114,7 @@ export class AuthorizationAdminSessionsService {
       .update(core_sessions_known_devices)
       .set({
         last_seen: new Date(),
-        ...getUserAgentData(req.headers["user-agent"]),
+        ...getUserAgentData(req.headers['user-agent']),
         ip_address: getUserIp(req),
       })
       .where(eq(core_sessions_known_devices.id, device.id));
@@ -131,7 +131,7 @@ export class AuthorizationAdminSessionsService {
 
     return {
       user,
-      version: "0.0.3", // TODO: Get version from package.json
+      version: '0.0.3', // TODO: Get version from package.json
       nav: await this.getAdminNav(),
     };
   }

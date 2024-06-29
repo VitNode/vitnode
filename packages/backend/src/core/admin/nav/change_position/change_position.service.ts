@@ -1,11 +1,11 @@
-import { Injectable } from "@nestjs/common";
-import { eq } from "drizzle-orm";
+import { Injectable } from '@nestjs/common';
+import { eq } from 'drizzle-orm';
 
-import { ChangePositionAdminNavArgs } from "./dto/change_position.args";
+import { ChangePositionAdminNavArgs } from './dto/change_position.args';
 
-import { DatabaseService } from "../../../../database";
-import { NotFoundError } from "../../../../errors";
-import { core_nav } from "../../../../templates/core/admin/database/schema/nav";
+import { DatabaseService } from '../../../../database';
+import { NotFoundError } from '../../../../errors';
+import { core_nav } from '../../../../templates/core/admin/database/schema/nav';
 
 @Injectable()
 export class ChangePositionAdminNavService {
@@ -21,7 +21,7 @@ export class ChangePositionAdminNavService {
     });
 
     if (!nav) {
-      throw new NotFoundError("Nav");
+      throw new NotFoundError('Nav');
     }
 
     const allChildrenParent =
@@ -65,6 +65,6 @@ export class ChangePositionAdminNavService {
       }),
     );
 
-    return "Success!";
+    return 'Success!';
   }
 }

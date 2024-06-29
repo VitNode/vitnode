@@ -7,9 +7,9 @@
     "moduleResolution": "bundler",
     "isolatedModules": true,
     "outDir": "./dist",
-    "jsx": "preserve",
-    "paths": {
-      "@/*": ["./*"]
-    }
-  }
+    "rootDir": "./src",
+    "jsx": "preserve"
+  },
+  "include": ["next-env.d.ts", "src/**/*"],
+  "exclude": ["codegen.ts", "scripts/**/*"]
 }

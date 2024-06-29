@@ -48,3 +48,4 @@ lerna-debug.log*
 
 # Migrations
 /src/plugins/*/admin/database/migrations
+/src/plugins/core/email.config.json

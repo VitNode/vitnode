@@ -1,11 +1,11 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable } from '@nestjs/common';
 
-import { ShowAdminStaffAdministrators } from "../show/dto/show.obj";
-import { CreateAdminStaffAdministratorsArgs } from "./dto/create.args";
+import { ShowAdminStaffAdministrators } from '../show/dto/show.obj';
+import { CreateAdminStaffAdministratorsArgs } from './dto/create.args';
 
-import { CustomError } from "../../../../../errors";
-import { DatabaseService } from "../../../../../database";
-import { core_admin_permissions } from "../../../../../templates/core/admin/database/schema/admins";
+import { CustomError } from '../../../../../errors';
+import { DatabaseService } from '../../../../../database';
+import { core_admin_permissions } from '../../../../../templates/core/admin/database/schema/admins';
 
 @Injectable()
 export class CreateAdminStaffAdministratorsService {
@@ -18,8 +18,8 @@ export class CreateAdminStaffAdministratorsService {
   }: CreateAdminStaffAdministratorsArgs): Promise<ShowAdminStaffAdministrators> {
     if (!group_id && !user_id) {
       throw new CustomError({
-        code: "BAD_REQUEST",
-        message: "You must provide either a group_id or a user_id.",
+        code: 'BAD_REQUEST',
+        message: 'You must provide either a group_id or a user_id.',
       });
     }
 
@@ -31,8 +31,8 @@ export class CreateAdminStaffAdministratorsService {
 
     if (findPermission) {
       throw new CustomError({
-        code: "ALREADY_EXISTS",
-        message: "This user or group already has moderator permissions.",
+        code: 'ALREADY_EXISTS',
+        message: 'This user or group already has moderator permissions.',
       });
     }
 

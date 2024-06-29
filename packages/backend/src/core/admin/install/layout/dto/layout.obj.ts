@@ -1,13 +1,13 @@
-import { Field, ObjectType, registerEnumType } from "@nestjs/graphql";
+import { Field, ObjectType, registerEnumType } from '@nestjs/graphql';
 
 export enum LayoutAdminInstallEnum {
-  DATABASE = "DATABASE",
-  ACCOUNT = "ACCOUNT",
-  FINISH = "FINISH",
+  DATABASE = 'DATABASE',
+  ACCOUNT = 'ACCOUNT',
+  FINISH = 'FINISH',
 }
 
 registerEnumType(LayoutAdminInstallEnum, {
-  name: "LayoutAdminInstallEnum",
+  name: 'LayoutAdminInstallEnum',
 });
 
 @ObjectType()

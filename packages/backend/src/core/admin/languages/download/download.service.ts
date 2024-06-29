@@ -1,21 +1,21 @@
-import { join } from "path";
-import * as fs from "fs";
-import { copyFile } from "fs/promises";
+import { join } from 'path';
+import * as fs from 'fs';
+import { copyFile } from 'fs/promises';
 
-import { Injectable } from "@nestjs/common";
-import * as tar from "tar";
+import { Injectable } from '@nestjs/common';
+import * as tar from 'tar';
 import {
   currentUnixDate,
   generateRandomString,
   removeSpecialCharacters,
-} from "@vitnode/shared";
+} from 'vitnode-shared';
 
-import { DownloadCoreAdminLanguagesArgs } from "./dto/download.args";
+import { DownloadCoreAdminLanguagesArgs } from './dto/download.args';
 
-import { DatabaseService } from "../../../../database";
-import { User } from "../../../../decorators";
-import { CustomError, NotFoundError } from "../../../../errors";
-import { ABSOLUTE_PATHS_BACKEND } from "../../../..";
+import { DatabaseService } from '../../../../database';
+import { User } from '../../../../decorators';
+import { CustomError, NotFoundError } from '../../../../errors';
+import { ABSOLUTE_PATHS_BACKEND } from '../../../..';
 
 @Injectable()
 export class DownloadAdminCoreLanguageService {
@@ -31,14 +31,14 @@ export class DownloadAdminCoreLanguageService {
       });
 
     if (!language) {
-      throw new NotFoundError("Language");
+      throw new NotFoundError('Language');
     }
 
     // Create temp folder
     const tempNameFolder = `${code}-download--${generateRandomString(5)}-${currentUnixDate()}`;
     const pathTemp = join(
       ABSOLUTE_PATHS_BACKEND.uploads.temp,
-      "langs",
+      'langs',
       tempNameFolder,
     );
     if (!fs.existsSync(pathTemp)) {
@@ -52,7 +52,7 @@ export class DownloadAdminCoreLanguageService {
       },
     });
 
-    [...plugins, { code: "admin" }, { code: "core" }].forEach(plugin => {
+    [...plugins, { code: 'admin' }, { code: 'core' }].forEach(plugin => {
       const path = join(
         ABSOLUTE_PATHS_BACKEND.plugin({ code: plugin.code }).frontend.language,
         `${code}.json`,
@@ -79,15 +79,15 @@ export class DownloadAdminCoreLanguageService {
           file: join(ABSOLUTE_PATHS_BACKEND.uploads.temp, `${name}.tgz`),
           cwd: pathTemp,
         },
-        ["."],
+        ['.'],
       );
 
       // Remove temp folder
       fs.rmSync(pathTemp, { recursive: true });
     } catch (error) {
       throw new CustomError({
-        code: "LANGUAGE_DOWNLOAD_ERROR",
-        message: "Error creating tgz",
+        code: 'LANGUAGE_DOWNLOAD_ERROR',
+        message: 'Error creating tgz',
       });
     }
 

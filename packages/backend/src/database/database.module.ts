@@ -1,13 +1,13 @@
-import { DynamicModule, Global, Module } from "@nestjs/common";
-import { registerEnumType } from "@nestjs/graphql";
-import { PoolConfig } from "pg";
+import { DynamicModule, Global, Module } from '@nestjs/common';
+import { registerEnumType } from '@nestjs/graphql';
+import { PoolConfig } from 'pg';
 
-import { DatabaseService } from "./database.service";
+import { DatabaseService } from './database.service';
 
-import { SortDirectionEnum } from "..";
+import { SortDirectionEnum } from '..';
 
 registerEnumType(SortDirectionEnum, {
-  name: "SortDirectionEnum",
+  name: 'SortDirectionEnum',
 });
 
 export interface DatabaseModuleArgs {
@@ -23,7 +23,7 @@ export class DatabaseModule {
       module: DatabaseModule,
       providers: [
         {
-          provide: "DATABASE_MODULE_OPTIONS",
+          provide: 'DATABASE_MODULE_OPTIONS',
           useValue: options,
         },
         DatabaseService,

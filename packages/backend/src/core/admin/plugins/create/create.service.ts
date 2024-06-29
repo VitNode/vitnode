@@ -1,17 +1,17 @@
-import { join } from "path";
-import * as fs from "fs";
+import { join } from 'path';
+import * as fs from 'fs';
 
-import { Injectable } from "@nestjs/common";
+import { Injectable } from '@nestjs/common';
 
-import { CreateAdminPluginsArgs } from "./dto/create.args";
-import { ShowAdminPlugins } from "../show/dto/show.obj";
-import { CreateFilesAdminPluginsService } from "../helpers/files/create/create-files.service";
-import { ChangeFilesAdminPluginsService } from "../helpers/files/change/change.service";
+import { CreateAdminPluginsArgs } from './dto/create.args';
+import { ShowAdminPlugins } from '../show/dto/show.obj';
+import { CreateFilesAdminPluginsService } from '../helpers/files/create/create-files.service';
+import { ChangeFilesAdminPluginsService } from '../helpers/files/change/change.service';
 
-import { DatabaseService } from "../../../../database";
-import { CustomError } from "../../../../errors";
-import { ABSOLUTE_PATHS_BACKEND } from "../../../..";
-import { core_plugins } from "../../../../templates/core/admin/database/schema/plugins";
+import { DatabaseService } from '../../../../database';
+import { CustomError } from '../../../../errors';
+import { ABSOLUTE_PATHS_BACKEND } from '../../../..';
+import { core_plugins } from '../../../../templates/core/admin/database/schema/plugins';
 
 @Injectable()
 export class CreateAdminPluginsService {
@@ -33,9 +33,9 @@ export class CreateAdminPluginsService {
       where: (table, { eq }) => eq(table.code, code),
     });
 
-    if (plugin || code === "admin" || code === "core" || code === "members") {
+    if (plugin || code === 'admin' || code === 'core' || code === 'members') {
       throw new CustomError({
-        code: "PLUGIN_ALREADY_EXISTS",
+        code: 'PLUGIN_ALREADY_EXISTS',
         message: `Plugin already exists with "${code}" code!`,
       });
     }
@@ -79,7 +79,7 @@ export class CreateAdminPluginsService {
           null,
           2,
         ),
-        "utf-8",
+        'utf-8',
       );
     });
 

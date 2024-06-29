@@ -1,9 +1,8 @@
-import * as React from "react";
-import { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
-
-import { getConfigFile } from "@/config/helpers";
-import { LayoutSettingsView } from "@/plugins/core/templates/views/settings/layout-settings-view";
+import * as React from 'react';
+import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
+import { getConfigFile } from 'vitnode-frontend/helpers/config';
+import { LayoutSettingsView } from 'vitnode-frontend/theme-tsx/settings/layout-settings-view';
 
 interface Props {
   children: React.ReactNode;
@@ -11,17 +10,17 @@ interface Props {
 
 export async function generateMetadata(): Promise<Metadata> {
   const config = await getConfigFile();
-  const t = await getTranslations("core.settings");
+  const t = await getTranslations('core.settings');
 
   return {
     title: {
-      default: t("title"),
-      template: `%s - ${t("title")} - ${config.settings.general.site_name}`,
+      default: t('title'),
+      template: `%s - ${t('title')} - ${config.settings.general.site_name}`,
     },
-    robots: "noindex, nofollow",
+    robots: 'noindex, nofollow',
   };
 }
 
-export default async function Layout({ children }: Props) {
+export default function Layout({ children }: Props) {
   return <LayoutSettingsView>{children}</LayoutSettingsView>;
 }

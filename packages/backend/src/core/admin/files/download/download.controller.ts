@@ -1,5 +1,5 @@
-import { createReadStream, existsSync, unlinkSync } from "fs";
-import { join } from "path";
+import { createReadStream, existsSync, unlinkSync } from 'fs';
+import { join } from 'path';
 
 import {
   Controller,
@@ -8,15 +8,15 @@ import {
   Req,
   Res,
   StreamableFile,
-} from "@nestjs/common";
-import { Request, Response } from "express";
+} from '@nestjs/common';
+import { Request, Response } from 'express';
 
-import { InternalAuthorizationCoreSessionsService } from "../../../sessions/authorization/internal/internal_authorization.service";
-import { AuthorizationAdminSessionsService } from "../../sessions/authorization/authorization.service";
-import { DatabaseService } from "../../../../database";
-import { ABSOLUTE_PATHS_BACKEND } from "../../../..";
+import { InternalAuthorizationCoreSessionsService } from '../../../sessions/authorization/internal/internal_authorization.service';
+import { AuthorizationAdminSessionsService } from '../../sessions/authorization/authorization.service';
+import { DatabaseService } from '../../../../database';
+import { ABSOLUTE_PATHS_BACKEND } from '../../../..';
 
-@Controller("files")
+@Controller('files')
 export class DownloadFilesAdminController {
   constructor(
     private readonly service: InternalAuthorizationCoreSessionsService,
@@ -24,7 +24,7 @@ export class DownloadFilesAdminController {
     private readonly databaseService: DatabaseService,
   ) {}
 
-  @Get(":file")
+  @Get(':file')
   async getFile(
     @Res({ passthrough: true }) res: Response,
     @Req() req: Request,
@@ -36,10 +36,10 @@ export class DownloadFilesAdminController {
 
       return;
     }
-    const userId = file.split(".")[0].split("--")[1].split("-")[0];
+    const userId = file.split('.')[0].split('--')[1].split('-')[0];
     const currentFile = {
-      name: file.split("--")[0],
-      type: file.split(".")[1],
+      name: file.split('--')[0],
+      type: file.split('.')[1],
     };
 
     const user = await this.databaseService.db.query.core_users.findFirst({
@@ -96,11 +96,11 @@ export class DownloadFilesAdminController {
 
     const streamFile = createReadStream(path);
     res.set({
-      "Content-Type": `application/${currentFile.type}`,
-      "Content-Disposition": `attachment; filename="${currentFile.name}.${currentFile.type}"`,
+      'Content-Type': `application/${currentFile.type}`,
+      'Content-Disposition': `attachment; filename="${currentFile.name}.${currentFile.type}"`,
     });
 
-    streamFile.on("close", () => {
+    streamFile.on('close', () => {
       unlinkSync(path);
     });
 

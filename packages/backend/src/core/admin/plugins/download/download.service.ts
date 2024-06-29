@@ -1,27 +1,27 @@
-import { join } from "path";
-import * as fs from "fs";
+import { join } from 'path';
+import * as fs from 'fs';
 
-import { Injectable } from "@nestjs/common";
-import * as tar from "tar";
-import { eq } from "drizzle-orm";
+import { Injectable } from '@nestjs/common';
+import * as tar from 'tar';
+import { eq } from 'drizzle-orm';
 import {
   currentUnixDate,
   generateRandomString,
   removeSpecialCharacters,
-} from "@vitnode/shared";
+} from 'vitnode-shared';
 
-import { DownloadAdminPluginsArgs } from "./dto/download.args";
+import { DownloadAdminPluginsArgs } from './dto/download.args';
 
-import { DatabaseService } from "../../../../database";
-import { CustomError, NotFoundError } from "../../../../errors";
-import { execShellCommand } from "../../../../functions";
-import { User } from "../../../../decorators";
-import { ABSOLUTE_PATHS_BACKEND, PluginInfoJSONType } from "../../../..";
-import { core_plugins } from "../../../../templates/core/admin/database/schema/plugins";
+import { DatabaseService } from '../../../../database';
+import { CustomError, NotFoundError } from '../../../../errors';
+import { execShellCommand } from '../../../../functions';
+import { User } from '../../../../decorators';
+import { ABSOLUTE_PATHS_BACKEND, PluginInfoJSONType } from '../../../..';
+import { core_plugins } from '../../../../templates/core/admin/database/schema/plugins';
 
 @Injectable()
 export class DownloadAdminPluginsService {
-  protected tempPath = join(ABSOLUTE_PATHS_BACKEND.uploads.temp, "plugins");
+  protected tempPath = join(ABSOLUTE_PATHS_BACKEND.uploads.temp, 'plugins');
 
   constructor(private readonly databaseService: DatabaseService) {}
 
@@ -54,17 +54,17 @@ export class DownloadAdminPluginsService {
     this.createFolders(tempPath);
 
     // Create folders for backend and frontend
-    const backendPath = join(tempPath, "backend");
+    const backendPath = join(tempPath, 'backend');
     this.createFolders(backendPath);
-    const frontendPath = join(tempPath, "frontend");
+    const frontendPath = join(tempPath, 'frontend');
     this.createFolders(frontendPath);
 
     // Copy backend files
-    const backendSource = join(process.cwd(), "src", "plugins", code);
+    const backendSource = join(process.cwd(), 'src', 'plugins', code);
     fs.cpSync(backendSource, backendPath, { recursive: true });
 
     // Copy frontend files
-    const frontendPaths = ["admin_pages", "pages", "plugin", "pages_container"];
+    const frontendPaths = ['admin_pages', 'pages', 'plugin', 'pages_container'];
     frontendPaths.forEach(path => {
       this.copyFiles({
         destination: join(frontendPath, path),
@@ -83,7 +83,7 @@ export class DownloadAdminPluginsService {
     // Update allow_default in config.json
     const pathInfoJSON = ABSOLUTE_PATHS_BACKEND.plugin({ code }).config;
     const infoJSON: PluginInfoJSONType = JSON.parse(
-      fs.readFileSync(pathInfoJSON, "utf-8"),
+      fs.readFileSync(pathInfoJSON, 'utf-8'),
     );
     const allow_default = fs.existsSync(
       ABSOLUTE_PATHS_BACKEND.plugin({ code }).frontend.default_page,
@@ -93,11 +93,11 @@ export class DownloadAdminPluginsService {
     fs.writeFile(
       pathInfoJSON,
       JSON.stringify(infoJSON, null, 2),
-      "utf8",
+      'utf8',
       err => {
         if (err) {
           throw new CustomError({
-            code: "ERROR_UPDATING_INFO_JSON",
+            code: 'ERROR_UPDATING_INFO_JSON',
             message: err.message,
           });
         }
@@ -131,13 +131,13 @@ export class DownloadAdminPluginsService {
     const pathToVersions = ABSOLUTE_PATHS_BACKEND.plugin({ code }).versions;
     if (!fs.existsSync(pathToVersions)) {
       throw new CustomError({
-        code: "VERSIONS_FILE_NOT_FOUND",
-        message: "Versions file not found",
+        code: 'VERSIONS_FILE_NOT_FOUND',
+        message: 'Versions file not found',
       });
     }
 
     const versions: Record<number, string> = JSON.parse(
-      fs.readFileSync(pathToVersions, "utf-8"),
+      fs.readFileSync(pathToVersions, 'utf-8'),
     );
     versions[version_code] = version;
     fs.writeFileSync(pathToVersions, JSON.stringify(versions, null, 2));
@@ -159,8 +159,8 @@ export class DownloadAdminPluginsService {
       );
     } catch (err) {
       throw new CustomError({
-        code: "GENERATE_MIGRATION_ERROR",
-        message: "Error generating migration",
+        code: 'GENERATE_MIGRATION_ERROR',
+        message: 'Error generating migration',
       });
     }
   }
@@ -174,7 +174,7 @@ export class DownloadAdminPluginsService {
     });
 
     if (!plugin) {
-      throw new NotFoundError("Plugin");
+      throw new NotFoundError('Plugin');
     }
 
     await this.generateMigration({ code });
@@ -196,7 +196,7 @@ export class DownloadAdminPluginsService {
             file: join(ABSOLUTE_PATHS_BACKEND.uploads.temp, `${name}.tgz`),
             cwd: tempPath,
           },
-          ["."],
+          ['.'],
         )
         .then(() => {
           // Remove temp folder
@@ -204,8 +204,8 @@ export class DownloadAdminPluginsService {
         });
     } catch (error) {
       throw new CustomError({
-        code: "CREATE_TGZ_ERROR",
-        message: "Error creating tgz file",
+        code: 'CREATE_TGZ_ERROR',
+        message: 'Error creating tgz file',
       });
     }
 

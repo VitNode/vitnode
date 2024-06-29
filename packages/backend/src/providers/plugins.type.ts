@@ -1,4 +1,4 @@
-import { CreateAdminPluginsArgs } from "../core/admin/plugins/create/dto/create.args";
+import { CreateAdminPluginsArgs } from '../core/admin/plugins/create/dto/create.args';
 
 interface NavPluginInfoJSONType {
   code: string;

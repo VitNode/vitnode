@@ -1,25 +1,25 @@
-import { join } from "path";
-import * as fs from "fs";
+import { join } from 'path';
+import * as fs from 'fs';
 
-import { Injectable } from "@nestjs/common";
+import { Injectable } from '@nestjs/common';
 
 import {
   ColorsShowCoreThemeEditor,
   HslColor,
   ShowCoreThemeEditorObj,
-} from "./dto/show.obj";
-import { keysFromCSSThemeEditor } from "../theme_editor.module";
+} from './dto/show.obj';
+import { keysFromCSSThemeEditor } from '../theme_editor.module';
 
-import { ABSOLUTE_PATHS_BACKEND, NotFoundError } from "../../..";
+import { ABSOLUTE_PATHS_BACKEND, NotFoundError } from '../../..';
 
 @Injectable()
 export class ShowCoreThemeEditorService {
   private parseStringToHsl(string: string): HslColor {
     const values = string
       .trim()
-      .replaceAll("%", "")
-      .replaceAll("deg", "")
-      .split(" ")
+      .replaceAll('%', '')
+      .replaceAll('deg', '')
+      .split(' ')
       .map(v => parseInt(v));
 
     return {
@@ -39,11 +39,11 @@ export class ShowCoreThemeEditorService {
     dark: HslColor;
     light: HslColor;
   } {
-    const regex = new RegExp(`:root\\s*{([^}]*)}|\\.dark\\s*{([^}]*)}`, "g");
+    const regex = new RegExp(`:root\\s*{([^}]*)}|\\.dark\\s*{([^}]*)}`, 'g');
     let match: RegExpExecArray | null;
     const values = {
-      light: "",
-      dark: "",
+      light: '',
+      dark: '',
     };
 
     while ((match = regex.exec(cssAsString)) !== null) {
@@ -68,19 +68,19 @@ export class ShowCoreThemeEditorService {
 
   show(): ShowCoreThemeEditorObj {
     const pathToCss = join(
-      ABSOLUTE_PATHS_BACKEND.plugin({ code: "core" }).frontend.templates,
-      "layout",
-      "global.css",
+      ABSOLUTE_PATHS_BACKEND.frontend.init,
+      'app',
+      'global.css',
     );
 
     if (!fs.existsSync(pathToCss)) {
-      throw new NotFoundError("CSS file in Theme not found!");
+      throw new NotFoundError('CSS file in Theme not found!');
     }
 
-    const cssAsString = fs.readFileSync(pathToCss, "utf8");
+    const cssAsString = fs.readFileSync(pathToCss, 'utf8');
     const colors: ColorsShowCoreThemeEditor = keysFromCSSThemeEditor.reduce(
       (acc, variable) => {
-        acc[variable.replace("-", "_")] = this.getVariable({
+        acc[variable.replace('-', '_')] = this.getVariable({
           cssAsString,
           variable,
         });

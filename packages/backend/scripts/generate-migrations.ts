@@ -1,10 +1,10 @@
 /* eslint-disable no-console */
-import * as fs from "fs";
+import * as fs from 'fs';
 
-import { NodePgDatabase } from "drizzle-orm/node-postgres";
+import { NodePgDatabase } from 'drizzle-orm/node-postgres';
 
-import coreSchemaDatabase from "../src/templates/core/admin/database";
-import { migrate } from "./helpers/migrate";
+import coreSchemaDatabase from '../src/templates/core/admin/database';
+import { migrate } from './helpers/migrate';
 
 export const generateMigrations = async ({
   pluginsPath,
@@ -13,12 +13,12 @@ export const generateMigrations = async ({
   db: NodePgDatabase<typeof coreSchemaDatabase>;
   pluginsPath: string;
 }) => {
-  await migrate({ pluginCode: "core", db });
+  await migrate({ pluginCode: 'core', db });
 
   await Promise.all(
     fs
       .readdirSync(pluginsPath)
-      .filter(plugin => !["core", "plugins.module.ts"].includes(plugin))
+      .filter(plugin => !['core', 'plugins.module.ts'].includes(plugin))
       .map(async plugin => {
         try {
           await migrate({ pluginCode: plugin, db });

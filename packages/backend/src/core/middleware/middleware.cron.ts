@@ -1,10 +1,10 @@
-import { Injectable } from "@nestjs/common";
-import { Cron, CronExpression } from "@nestjs/schedule";
-import { lte } from "drizzle-orm";
-import { ConfigService } from "@nestjs/config";
+import { Injectable } from '@nestjs/common';
+import { Cron, CronExpression } from '@nestjs/schedule';
+import { lte } from 'drizzle-orm';
+import { ConfigService } from '@nestjs/config';
 
-import { DatabaseService } from "../../database";
-import { core_sessions_known_devices } from "../../templates/core/admin/database/schema/sessions";
+import { DatabaseService } from '../../database';
+import { core_sessions_known_devices } from '../../templates/core/admin/database/schema/sessions';
 
 @Injectable()
 export class CoreMiddlewareCron {
@@ -18,7 +18,7 @@ export class CoreMiddlewareCron {
   async clearKnowDevices() {
     const lastSeen = new Date();
     const lastSeenInDeviceCookie: number = this.configService.getOrThrow(
-      "cookies.known_device.expiresIn",
+      'cookies.known_device.expiresIn',
     );
     lastSeen.setDate(lastSeen.getDate() - lastSeenInDeviceCookie);
 
