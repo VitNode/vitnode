@@ -1,6 +1,6 @@
 /graphql/hooks.ts
 
-next.config.js
+next.config.mjs
 tailwind.config.js
 postcss.config.js
 vitest.config.mts

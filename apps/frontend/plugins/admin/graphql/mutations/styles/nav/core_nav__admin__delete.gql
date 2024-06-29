@@ -1,3 +1,0 @@
-mutation Admin__core_nav__delete($id: Int!) {
-  admin__core_nav__delete(id: $id)
-}

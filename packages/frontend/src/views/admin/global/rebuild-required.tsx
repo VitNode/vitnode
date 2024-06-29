@@ -6,10 +6,10 @@ import {
   Alert,
   AlertDescription,
   AlertTitle,
-} from 'vitnode-frontend/components/ui/alert';
-import { buttonVariants } from 'vitnode-frontend/components/ui/button';
-import { useGlobals } from 'vitnode-frontend/hooks/use-globals';
-import { CONFIG } from 'vitnode-frontend/helpers/config-with-env';
+} from '../../../components/ui/alert';
+import { CONFIG } from '../../../helpers/config-with-env';
+import { useGlobals } from '../../../hooks/use-globals';
+import { buttonVariants } from '../../../components/ui/button';
 
 export const RebuildRequiredAdmin = () => {
   const t = useTranslations('admin.rebuild_required');

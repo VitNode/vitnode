@@ -1,6 +1,0 @@
-query Admin__core__dashboard {
-  admin__core_members__stats_sign_up {
-    joined_date
-    users_joined
-  }
-}

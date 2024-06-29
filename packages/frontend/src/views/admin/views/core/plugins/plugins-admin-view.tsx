@@ -16,6 +16,7 @@ import {
 import { HeaderContent } from '../../../../../components/ui/header-content';
 import { Card } from '../../../../../components/ui/card';
 import { fetcher } from '../../../../../graphql/fetcher';
+import { RebuildRequiredAdmin } from '../../../global/rebuild-required';
 
 export interface PluginsAdminViewProps {
   searchParams: SearchParamsPagination;
@@ -54,9 +55,7 @@ export const PluginsAdminView = async ({
       </HeaderContent>
 
       <Card className="p-6">
-        {/* // TODO: Add this */}
-        {/* <RebuildRequiredAdmin /> */}
-
+        <RebuildRequiredAdmin />
         <ContentPluginsCoreAdminView {...data} />
       </Card>
     </>
