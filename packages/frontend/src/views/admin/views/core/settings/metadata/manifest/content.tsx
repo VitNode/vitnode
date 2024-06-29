@@ -1,6 +1,10 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+
+import { useManifestCoreAdminView } from './hooks/use-manifest-core-admin-view';
+
+import { Admin__Core_Manifest_Metadata__ShowQuery } from '../../../../../../../graphql/code';
 import {
   Form,
   FormControl,
@@ -10,20 +14,17 @@ import {
   FormItem,
   FormLabel,
   FormWrapper,
-} from 'vitnode-frontend/components/ui/form';
-import { Input } from 'vitnode-frontend/components/ui/input';
-import { Button } from 'vitnode-frontend/components/ui/button';
+} from '../../../../../../../components/ui/form';
 import {
   RadioGroup,
   RadioGroupItem,
-} from 'vitnode-frontend/components/ui/radio-group';
-import { ColorInput } from 'vitnode-frontend/components/ui/color-input';
-import { CONFIG } from 'vitnode-frontend/helpers/config-with-env';
+} from '../../../../../../../components/ui/radio-group';
+import { CONFIG } from '../../../../../../../helpers/config-with-env';
+import { Input } from '../../../../../../../components/ui/input';
+import { ColorInput } from '../../../../../../../components/ui/color-input';
+import { Button } from '../../../../../../../components/ui/button';
 
-import { useManifestCoreAdminView } from './hooks/use-manifest-core-admin-view';
-import { Admin__Core_Manifest_Metadata__ShowQuery } from '@/graphql/hooks';
-
-export const ManifestMetadataCoreAdminView = (
+export const ContentManifestMetadataCoreAdmin = (
   props: Admin__Core_Manifest_Metadata__ShowQuery,
 ) => {
   const t = useTranslations('admin.core.metadata.manifest');
@@ -57,13 +58,13 @@ export const ManifestMetadataCoreAdminView = (
                       </FormControl>
                       <div>
                         <FormLabel className="font-normal">
-                          {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-                          {/* @ts-expect-error */}
+                          {/* eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error, @typescript-eslint/ban-ts-comment */}
+                          {/* @ts-ignore */}
                           {t(`display.${item}.title`)}
                         </FormLabel>
                         <FormDescription>
-                          {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-                          {/* @ts-expect-error */}
+                          {/* eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error, @typescript-eslint/ban-ts-comment */}
+                          {/* @ts-ignore */}
                           {t(`display.${item}.desc`)}
                         </FormDescription>
                       </div>

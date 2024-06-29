@@ -1592,7 +1592,7 @@ export type Core_Middleware__ShowQueryVariables = Exact<{ [key: string]: never; 
 
 export type Core_Middleware__ShowQuery = { __typename?: 'Query', core_middleware__show: { __typename?: 'ShowCoreMiddlewareObj', plugins: Array<string>, languages: Array<{ __typename?: 'LanguagesCoreMiddleware', code: string, default: boolean, enabled: boolean }> } };
 
-export type Core_Languages__ShowQueryVariables = Exact<{
+export type Admin_Core_Languages__ShowQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
   cursor?: InputMaybe<Scalars['Int']['input']>;
@@ -1601,7 +1601,7 @@ export type Core_Languages__ShowQueryVariables = Exact<{
 }>;
 
 
-export type Core_Languages__ShowQuery = { __typename?: 'Query', core_languages__show: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', code: string, default: boolean, allow_in_input: boolean, enabled: boolean, id: number, name: string, protected: boolean, timezone: string, locale: string, time_24: boolean, updated: Date, created: Date }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
+export type Admin_Core_Languages__ShowQuery = { __typename?: 'Query', core_languages__show: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', code: string, default: boolean, allow_in_input: boolean, enabled: boolean, id: number, name: string, protected: boolean, timezone: string, locale: string, time_24: boolean, updated: Date, created: Date }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number | null, totalCount: number } } };
 
 
 export const Admin__Core_Files__Delete = gql`
@@ -2593,8 +2593,8 @@ export const Core_Middleware__Show = gql`
   }
 }
     `;
-export const Core_Languages__Show = gql`
-    query Core_languages__show($first: Int, $last: Int, $cursor: Int, $search: String, $sortBy: ShowCoreLanguagesSortByArgs) {
+export const Admin_Core_Languages__Show = gql`
+    query Admin_Core_languages__show($first: Int, $last: Int, $cursor: Int, $search: String, $sortBy: ShowCoreLanguagesSortByArgs) {
   core_languages__show(
     first: $first
     last: $last

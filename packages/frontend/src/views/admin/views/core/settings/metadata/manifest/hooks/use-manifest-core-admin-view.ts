@@ -4,10 +4,11 @@ import * as z from 'zod';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 import { convertColor, getHSLFromString } from 'vitnode-shared';
-import { CONFIG } from 'vitnode-frontend/helpers/config-with-env';
 
-import { Admin__Core_Manifest_Metadata__ShowQuery } from '@/graphql/hooks';
 import { mutationApi } from './mutation-api';
+
+import { Admin__Core_Manifest_Metadata__ShowQuery } from '../../../../../../../../graphql/code';
+import { CONFIG } from '../../../../../../../../helpers/config-with-env';
 
 export const useManifestCoreAdminView = ({
   admin__core_manifest_metadata__show: data,

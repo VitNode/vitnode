@@ -3,10 +3,11 @@ import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import * as z from 'zod';
-import { useDialog } from 'vitnode-frontend/components/ui/dialog';
-import { useSessionAdmin } from 'vitnode-frontend/hooks/use-session-admin';
 
 import { mutationApi } from './mutation-api';
+
+import { useDialog } from '../../../../../../../../../components/ui/dialog';
+import { useSessionAdmin } from '../../../../../../../../../hooks/use-session-admin';
 
 export const useTestingEmailAdmin = () => {
   const t = useTranslations('admin.core.settings.email.test');
