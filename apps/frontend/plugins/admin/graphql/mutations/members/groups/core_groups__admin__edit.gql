@@ -1,9 +1,0 @@
-mutation Admin__core_groups__edit(
-  $id: Int!
-  $name: [TextLanguageInput!]!
-  $content: ContentCreateAdminGroups!
-) {
-  admin__core_groups__edit(id: $id, name: $name, content: $content) {
-    id
-  }
-}

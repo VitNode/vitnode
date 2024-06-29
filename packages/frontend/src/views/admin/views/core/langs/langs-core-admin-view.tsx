@@ -16,6 +16,7 @@ import {
 import { HeaderContent } from '../../../../../components/ui/header-content';
 import { Card } from '../../../../../components/ui/card';
 import { fetcher } from '../../../../../graphql/fetcher';
+import { RebuildRequiredAdmin } from '../../../global/rebuild-required';
 
 const getData = async (
   variables: Admin__Core_Languages__ShowQueryVariables,
@@ -60,8 +61,7 @@ export const LangsCoreAdminView = async ({
       </HeaderContent>
 
       <Card className="p-6">
-        {/* // TODO: Add this */}
-        {/* <RebuildRequiredAdmin /> */}
+        <RebuildRequiredAdmin />
         <ContentLangsCoreAdminView {...data} />
       </Card>
     </>
