@@ -1,0 +1,57 @@
+query Admin__core_staff_moderators__show(
+  $sortBy: ShowAdminStaffModeratorsSortByArgs
+  $last: Int
+  $first: Int
+  $cursor: Int
+) {
+  admin__core_staff_moderators__show(
+    sortBy: $sortBy
+    last: $last
+    first: $first
+    cursor: $cursor
+  ) {
+    edges {
+      created
+      id
+      unrestricted
+      user_or_group {
+        __typename
+        ... on User {
+          avatar_color
+          avatar {
+            id
+            dir_folder
+            file_name
+          }
+          group {
+            id
+            name {
+              language_code
+              value
+            }
+          }
+          id
+          name_seo
+          name
+        }
+        ... on StaffGroupUser {
+          group_name {
+            language_code
+            value
+          }
+          id
+        }
+      }
+      updated
+      protected
+    }
+    pageInfo {
+      count
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      totalCount
+    }
+  }
+}

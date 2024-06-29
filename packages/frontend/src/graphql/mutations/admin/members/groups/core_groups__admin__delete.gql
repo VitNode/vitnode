@@ -1,0 +1,3 @@
+mutation Admin__core_groups__delete($id: Int!) {
+  admin__core_groups__delete(id: $id)
+}
