@@ -4,24 +4,27 @@ import { useTranslations } from 'next-intl';
 import * as React from 'react';
 import { ColumnDef } from '@tanstack/react-table';
 import { Pencil } from 'lucide-react';
-import { Link } from 'vitnode-frontend/navigation';
+
+import { GroupsFiltersUsersMembersAdmin } from './filters/groups-filters-users-members-admin';
+import { AdvancedFiltersUsersMembersAdmin } from './filters/advanced/advanced-filters-users-members-admin';
+
+import {
+  Admin__Core_Members__ShowQuery,
+  ShowAdminMembers,
+} from '../../../../../../graphql/code';
+import { useTextLang } from '../../../../../../hooks/use-text-lang';
+import { AvatarUser } from '../../../../../../components/ui/user/avatar';
+import { HeaderSortingDataTable } from '../../../../../../components/data-table/header';
+import { DateFormat } from '../../../../../../components/date-format';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from 'vitnode-frontend/components/ui/tooltip';
-import { buttonVariants } from 'vitnode-frontend/components/ui/button';
-import { DateFormat } from 'vitnode-frontend/components/date-format';
-import { DataTable } from 'vitnode-frontend/components/data-table/data-table';
-import { HeaderSortingDataTable } from 'vitnode-frontend/components/data-table/header';
-import { useTextLang } from 'vitnode-frontend/hooks/use-text-lang';
-import { AvatarUser } from 'vitnode-frontend/components/ui/user/avatar';
-
-import { GroupsFiltersUsersMembersAdmin } from './filters/groups-filters-users-members-admin';
-import { AdvancedFiltersUsersMembersAdmin } from './filters/advanced/advanced-filters-users-members-admin';
-import { UsersMembersAdminViewProps } from '../users-members-admin-view';
-import { ShowAdminMembers } from '@/graphql/hooks';
+} from '../../../../../../components/ui/tooltip';
+import { Link } from '../../../../../../navigation';
+import { buttonVariants } from '../../../../../../components/ui/button';
+import { DataTable } from '../../../../../../components/data-table/data-table';
 
 interface UsersMembersAdminAPIDataType
   extends Pick<
@@ -37,8 +40,8 @@ interface UsersMembersAdminAPIDataType
   > {}
 
 export const TableUsersMembersAdmin = ({
-  data,
-}: UsersMembersAdminViewProps) => {
+  admin__core_members__show: { edges, pageInfo },
+}: Admin__Core_Members__ShowQuery) => {
   const t = useTranslations('admin.members.users');
   const tCore = useTranslations('core');
   const { convertText } = useTextLang();
@@ -122,8 +125,8 @@ export const TableUsersMembersAdmin = ({
 
   return (
     <DataTable
-      data={data?.admin__core_members__show.edges ?? []}
-      pageInfo={data?.admin__core_members__show.pageInfo}
+      data={edges}
+      pageInfo={pageInfo}
       defaultPageSize={10}
       columns={columns}
       searchPlaceholder={t('search_placeholder')}

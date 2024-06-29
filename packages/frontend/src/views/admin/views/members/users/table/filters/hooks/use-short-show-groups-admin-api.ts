@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import * as React from 'react';
-import { getGroupsShortApi } from 'vitnode-frontend/graphql/get-groups-short-api';
+
+import { getGroupsShortApi } from '../../../../../../../../graphql/get-groups-short-api';
 
 export const useShortShowGroupsAdminAPI = () => {
   const [textSearch, setTextSearch] = React.useState('');

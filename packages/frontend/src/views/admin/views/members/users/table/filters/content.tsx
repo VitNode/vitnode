@@ -1,7 +1,7 @@
-import { useTextLang } from 'vitnode-frontend/hooks/use-text-lang';
-import { ContentFilterToolbarDataTable } from 'vitnode-frontend/components/data-table/toolbar/filter/content/content';
-
 import { useShortShowGroupsAdminAPI } from './hooks/use-short-show-groups-admin-api';
+
+import { ContentFilterToolbarDataTable } from '../../../../../../../components/data-table/toolbar/filter/content/content';
+import { useTextLang } from '../../../../../../../hooks/use-text-lang';
 
 export const ContentGroupsFiltersUsersMembersAdmin = () => {
   const { data, isFetching, setTextSearch } = useShortShowGroupsAdminAPI();
