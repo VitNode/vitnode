@@ -41,8 +41,6 @@ export class EditAdminThemeEditorService {
     const pathToCss = join(
       ABSOLUTE_PATHS_BACKEND.frontend.init,
       'app',
-      '[locale]',
-      '(main)',
       'global.css',
     );
 

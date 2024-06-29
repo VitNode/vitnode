@@ -10,12 +10,11 @@ import { HeaderContent } from 'vitnode-frontend/components/ui/header-content';
 
 import { CategoriesBlogAdminView } from '@/plugins/blog/admin/views/categories/categories-view';
 import { CreateCategoryBlogAdmin } from '@/plugins/blog/admin/views/categories/actions/create';
-
 import {
   Admin_Blog_Categories__Show,
   Admin_Blog_Categories__ShowQuery,
   Admin_Blog_Categories__ShowQueryVariables,
-} from '@/utils/hooks';
+} from '@/utils/graphql';
 
 const getData = async () => {
   const { data } = await fetcher<

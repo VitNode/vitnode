@@ -8,8 +8,7 @@ import { useDialog } from 'vitnode-frontend/components/ui/dialog';
 import { useTextLang } from 'vitnode-frontend/hooks/use-text-lang';
 
 import { mutationCreateApi } from './create-mutation-api';
-
-import { ShowBlogCategories } from '@/utils/hooks';
+import { ShowBlogCategories } from '@/utils/graphql';
 
 interface Args {
   data?: ShowBlogCategories;

@@ -14,8 +14,7 @@ import { useTextLang } from 'vitnode-frontend/hooks/use-text-lang';
 import { useCreateEditCategoryBlogAdmin } from './hooks/use-create-edit-category-blog-admin';
 import { MainTabCreateEditCategoryBlogAdmin } from './tabs/main';
 import { PermissionsTabCreateEditCategoryBlogAdmin } from './tabs/permissions';
-
-import { ShowBlogCategories } from '@/utils/hooks';
+import { ShowBlogCategories } from '@/utils/graphql';
 
 interface Props {
   data?: ShowBlogCategories;
