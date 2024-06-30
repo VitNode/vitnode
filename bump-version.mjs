@@ -227,7 +227,7 @@ function logError(error) {
     // Download the new version
     let newVersion = parseNpmVersionOutput(
       execSync(
-        `npm version --git-tag-version=false --git-tag-version=false --commit-hooks=false --workspaces --workspaces-update=false ${version}`,
+        `npm version --git-tag-version=false --commit-hooks=false --workspaces --workspaces-update=false ${version}`,
       ).toString(),
     );
     newVersion = `${tagPrefix}${newVersion}${tagSuffix}`;
@@ -237,7 +237,13 @@ function logError(error) {
       packages.map(async pkg => {
         await runInWorkspace(
           'npm',
-          ['version', '--git-tag-version=false', newVersion],
+          [
+            'version',
+            '--git-tag-version=false',
+            '--commit-hooks=false',
+            '--workspaces-update=false',
+            newVersion,
+          ],
           pkg,
         );
       }),
