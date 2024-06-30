@@ -233,14 +233,14 @@ function logError(error) {
     newVersion = `${tagPrefix}${newVersion}${tagSuffix}`;
 
     // Bump the version
-    // await runInWorkspace('npm', [
-    //   'version',
-    //   '--git-tag-version=false',
-    //   '--commit-hooks=false',
-    //   '--workspaces',
-    //   '--workspaces-update=false',
-    //   newVersion,
-    // ]);
+    await runInWorkspace('npm', [
+      'version',
+      '--git-tag-version=false',
+      '--commit-hooks=false',
+      '--workspaces',
+      '--workspaces-update=false',
+      newVersion,
+    ]);
 
     // Expose the new version
     await runInWorkspace('sh', [
@@ -257,15 +257,15 @@ function logError(error) {
     await runInWorkspace('git', ['checkout', currentBranch]);
 
     // Create a commit
-    // await runInWorkspace('git', [
-    //   'commit',
-    //   '-a',
-    //   '-m',
-    //   commitMessage.replace(/{{version}}/g, newVersion),
-    // ]);
+    await runInWorkspace('git', [
+      'commit',
+      '-a',
+      '-m',
+      commitMessage.replace(/{{version}}/g, newVersion),
+    ]);
 
-    // const remoteRepo = `https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git`;
-    // await runInWorkspace('git', ['push', remoteRepo]);
+    const remoteRepo = `https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git`;
+    await runInWorkspace('git', ['push', remoteRepo]);
     exitSuccess('Version bumped!');
   } catch (e) {
     logError(e);
