@@ -214,24 +214,21 @@ function logError(error) {
 
     // Do it in the currentVersion checked out github branch (DETACHED HEAD)
     // important for further usage of the package.json version
-    await Promise.all(
-      packages.map(async pkg => {
-        await runInWorkspace(
-          'npm',
-          [
-            'version',
-            '--allow-same-version=true',
-            '--git-tag-version=false',
-            currentVersion,
-          ],
-          pkg,
-        );
-      }),
-    );
+    await runInWorkspace('npm', [
+      'version',
+      '--allow-same-version=true',
+      '--git-tag-version=false',
+      '--commit-hooks=false',
+      '--workspaces',
+      '--workspaces-update=false',
+      currentVersion,
+    ]);
 
     // Download the new version
     let newVersion = parseNpmVersionOutput(
-      execSync(`npm version --git-tag-version=false ${version}`).toString(),
+      execSync(
+        `npm version --git-tag-version=false --git-tag-version=false --commit-hooks=false --workspaces --workspaces-update=false ${version}`,
+      ).toString(),
     );
     newVersion = `${tagPrefix}${newVersion}${tagSuffix}`;
 

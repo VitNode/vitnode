@@ -161,6 +161,7 @@ importers:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         version: 10.9.2(@swc/core@1.6.3(@swc/helpers@0.5.11))(@types/node@20.14.7)(typescript@5.5.2)
 =======
         version: 10.9.2(@swc/core@1.6.1(@swc/helpers@0.5.11))(@types/node@20.14.2)(typescript@5.4.5)
@@ -189,6 +190,9 @@ importers:
 =======
         version: 10.9.2(@swc/core@1.6.5(@swc/helpers@0.5.11))(@types/node@20.14.9)(typescript@5.5.2)
 >>>>>>> 6dcd1de7 (feat: Add create-vitnode-app)
+=======
+        version: 10.9.2(@swc/core@1.6.5)(@types/node@20.14.9)(typescript@5.5.2)
+>>>>>>> bafd0554 (chore: Change npm version when bump version)
       typescript:
         specifier: ^5.5.2
         version: 5.5.2
@@ -423,8 +427,12 @@ importers:
 >>>>>>> f973ba0f (perf(frontend): Move plugins pages admin to package)
 =======
         specifier: ^3.15.3
+<<<<<<< HEAD
         version: 3.15.3(next@15.0.0-canary.46(babel-plugin-react-compiler@0.0.0-experimental-696af53-20240625)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0)
 >>>>>>> ea73e4fc (perf(frontend): Improve graphql paths)
+=======
+        version: 3.15.3(next@15.0.0-canary.46(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0)
+>>>>>>> bafd0554 (chore: Change npm version when bump version)
       next-themes:
         specifier: ^0.3.0
         version: 0.3.0(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
@@ -541,6 +549,7 @@ importers:
         specifier: ^10.9.2
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         version: 10.9.2(@swc/core@1.6.5(@swc/helpers@0.5.11))(@types/node@20.14.8)(typescript@5.5.2)
 =======
         version: 10.9.2(@swc/core@1.6.5)(@types/node@20.14.9)(typescript@5.5.2)
@@ -548,6 +557,9 @@ importers:
 =======
         version: 10.9.2(@swc/core@1.6.5(@swc/helpers@0.5.11))(@types/node@20.14.9)(typescript@5.5.2)
 >>>>>>> 6dcd1de7 (feat: Add create-vitnode-app)
+=======
+        version: 10.9.2(@swc/core@1.6.5)(@types/node@20.14.9)(typescript@5.5.2)
+>>>>>>> bafd0554 (chore: Change npm version when bump version)
       typescript:
         specifier: ^5.5.2
         version: 5.5.2
@@ -680,7 +692,7 @@ importers:
         version: 2.1.4(@swc/helpers@0.5.11)(eslint@8.57.0)(ts-node@10.9.2(@swc/core@1.6.5(@swc/helpers@0.5.11))(@types/node@20.14.9)(typescript@5.5.2))
       ts-node:
         specifier: ^10.9.2
-        version: 10.9.2(@swc/core@1.6.5(@swc/helpers@0.5.11))(@types/node@20.14.9)(typescript@5.5.2)
+        version: 10.9.2(@swc/core@1.6.5)(@types/node@20.14.9)(typescript@5.5.2)
       tsup:
         specifier: ^8.1.0
         version: 8.1.0(@swc/core@1.6.5(@swc/helpers@0.5.11))(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.6.5(@swc/helpers@0.5.11))(@types/node@20.14.9)(typescript@5.5.2))(typescript@5.5.2)
@@ -913,7 +925,7 @@ importers:
         version: 3.15.2(next@15.0.0-canary.44(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0)
 =======
         specifier: 15.0.0-canary.46
-        version: 15.0.0-canary.46(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
+        version: 15.0.0-canary.46(babel-plugin-react-compiler@0.0.0-experimental-696af53-20240625)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
       next-intl:
 <<<<<<< HEAD
         specifier: ^3.15.2
@@ -933,13 +945,18 @@ importers:
 >>>>>>> f973ba0f (perf(frontend): Move plugins pages admin to package)
 =======
         specifier: ^3.15.3
+<<<<<<< HEAD
         version: 3.15.3(next@15.0.0-canary.46(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0)
 >>>>>>> ea73e4fc (perf(frontend): Improve graphql paths)
+=======
+        version: 3.15.3(next@15.0.0-canary.46(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0)
+>>>>>>> bafd0554 (chore: Change npm version when bump version)
       next-themes:
         specifier: ^0.3.0
         version: 0.3.0(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
       nextjs-toploader:
         specifier: ^1.6.12
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -957,6 +974,9 @@ importers:
 =======
         version: 1.6.12(next@15.0.0-canary.46(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
 >>>>>>> f973ba0f (perf(frontend): Move plugins pages admin to package)
+=======
+        version: 1.6.12(next@15.0.0-canary.46(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
+>>>>>>> bafd0554 (chore: Change npm version when bump version)
       nprogress:
         specifier: ^0.2.0
         version: 0.2.0
@@ -1059,6 +1079,7 @@ importers:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         version: 10.9.2(@swc/core@1.6.5(@swc/helpers@0.5.11))(@types/node@20.14.8)(typescript@5.5.2)
 =======
         version: 10.9.2(@swc/core@1.6.5)(@types/node@20.14.8)(typescript@5.5.2)
@@ -1071,6 +1092,9 @@ importers:
 =======
         version: 10.9.2(@swc/core@1.6.5(@swc/helpers@0.5.11))(@types/node@20.14.9)(typescript@5.5.2)
 >>>>>>> 6dcd1de7 (feat: Add create-vitnode-app)
+=======
+        version: 10.9.2(@swc/core@1.6.5)(@types/node@20.14.9)(typescript@5.5.2)
+>>>>>>> bafd0554 (chore: Change npm version when bump version)
       tsup:
         specifier: ^8.1.0
         version: 8.1.0(@swc/core@1.6.5)(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.6.5)(@types/node@20.14.9)(typescript@5.5.2))(typescript@5.5.2)
@@ -19876,6 +19900,7 @@ snapshots:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   next-intl@3.15.2(next@15.0.0-canary.44(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0):
     dependencies:
       '@formatjs/intl-localematcher': 0.2.32
@@ -19914,6 +19939,9 @@ snapshots:
 =======
   next-intl@3.15.3(next@15.0.0-canary.46(babel-plugin-react-compiler@0.0.0-experimental-696af53-20240625)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0):
 >>>>>>> ea73e4fc (perf(frontend): Improve graphql paths)
+=======
+  next-intl@3.15.3(next@15.0.0-canary.46(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0):
+>>>>>>> bafd0554 (chore: Change npm version when bump version)
     dependencies:
       '@formatjs/intl-localematcher': 0.2.32
       negotiator: 0.6.3
@@ -20006,6 +20034,7 @@ snapshots:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   next@15.0.0-canary.28(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0):
 >>>>>>> 321538bf (docs: Add docs)
     dependencies:
@@ -20071,6 +20100,8 @@ snapshots:
 >>>>>>> 0ab072cd (refactor(backend): Restore paths)
 =======
 >>>>>>> f973ba0f (perf(frontend): Move plugins pages admin to package)
+=======
+>>>>>>> bafd0554 (chore: Change npm version when bump version)
   next@15.0.0-canary.46(babel-plugin-react-compiler@0.0.0-experimental-696af53-20240625)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0):
 >>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
     dependencies:
@@ -20082,7 +20113,7 @@ snapshots:
       postcss: 8.4.31
       react: 19.0.0-rc.0
       react-dom: 19.0.0-rc.0(react@19.0.0-rc.0)
-      styled-jsx: 5.1.6(@babel/core@7.24.7)(react@19.0.0-rc.0)
+      styled-jsx: 5.1.6(react@19.0.0-rc.0)
     optionalDependencies:
       '@next/swc-darwin-arm64': 15.0.0-canary.46
       '@next/swc-darwin-x64': 15.0.0-canary.46
@@ -20099,6 +20130,7 @@ snapshots:
       - '@babel/core'
       - babel-plugin-macros
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -20126,6 +20158,11 @@ snapshots:
     dependencies:
       next: 15.0.0-canary.46(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
 >>>>>>> f973ba0f (perf(frontend): Move plugins pages admin to package)
+=======
+  nextjs-toploader@1.6.12(next@15.0.0-canary.46(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0):
+    dependencies:
+      next: 15.0.0-canary.46(babel-plugin-react-compiler@0.0.0-experimental-696af53-20240625)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
+>>>>>>> bafd0554 (chore: Change npm version when bump version)
       nprogress: 0.2.0
       prop-types: 15.8.1
       react: 19.0.0-rc.0
@@ -20619,7 +20656,7 @@ snapshots:
       yaml: 2.4.5
     optionalDependencies:
       postcss: 8.4.38
-      ts-node: 10.9.2(@swc/core@1.6.5(@swc/helpers@0.5.11))(@types/node@20.14.9)(typescript@5.5.2)
+      ts-node: 10.9.2(@swc/core@1.6.5)(@types/node@20.14.9)(typescript@5.5.2)
 
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -21888,12 +21925,10 @@ snapshots:
     optionalDependencies:
       '@babel/core': 7.24.5
 
-  styled-jsx@5.1.6(@babel/core@7.24.7)(react@19.0.0-rc.0):
+  styled-jsx@5.1.6(react@19.0.0-rc.0):
     dependencies:
       client-only: 0.0.1
       react: 19.0.0-rc.0
-    optionalDependencies:
-      '@babel/core': 7.24.7
 
   stylis@4.3.2: {}
 
@@ -22496,6 +22531,7 @@ snapshots:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   ts-node@10.9.2(@swc/core@1.6.3(@swc/helpers@0.5.11))(@types/node@20.14.7)(typescript@5.5.2):
 =======
   ts-node@10.9.2(@swc/core@1.6.1(@swc/helpers@0.5.11))(@types/node@20.14.2)(typescript@5.4.5):
@@ -22535,6 +22571,8 @@ snapshots:
     optionalDependencies:
       '@swc/core': 1.6.5(@swc/helpers@0.5.11)
 
+=======
+>>>>>>> bafd0554 (chore: Change npm version when bump version)
   ts-node@10.9.2(@swc/core@1.6.5)(@types/node@20.14.9)(typescript@5.5.2):
 >>>>>>> ea73e4fc (perf(frontend): Improve graphql paths)
     dependencies:
@@ -22562,8 +22600,11 @@ snapshots:
       '@swc/core': 1.6.3(@swc/helpers@0.5.11)
 =======
       '@swc/core': 1.6.5(@swc/helpers@0.5.11)
+<<<<<<< HEAD
     optional: true
 >>>>>>> 6dcd1de7 (feat: Add create-vitnode-app)
+=======
+>>>>>>> bafd0554 (chore: Change npm version when bump version)
 
 <<<<<<< HEAD
 =======
