@@ -46,6 +46,12 @@ jobs:
           RELEASE_TYPE: ${{ github.event.inputs.release }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Build CLI
+        run: npm run build:scripts
+
+      - name: Build Projects
+        run: npm run build
+
       - name: Create Pre-release
         if: github.event.inputs.release == 'canary' || github.event.inputs.release == 'release-candidate'
         run: gh release create ${{ steps.version-bump.outputs.newTag }} --generate-notes --prerelease
