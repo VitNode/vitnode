@@ -50,7 +50,7 @@ jobs:
         run: pnpm run build:scripts
 
       - name: Build Projects
-        run: pnpm run build
+        run: pnpm run build --filter=vitnode-backend --filter=vitnode-shared --filter=vitnode-frontend  
 
       - name: Run script to bump version
         run: pnpm run release
@@ -86,6 +86,6 @@ jobs:
 
       - name: Publish stable
         if: github.event.inputs.release == 'stable'
-        run: pnpm publish --provenance --access public --workspace vitnode-backend --workspace vitnode-frontend --workspace vitnode-shared --workspace create-vitnode-app --workspace eslint-config-vitnode
+        run: npm publish --provenance --access public --workspace vitnode-backend --workspace vitnode-frontend --workspace vitnode-shared --workspace create-vitnode-app --workspace eslint-config-vitnode
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

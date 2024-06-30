@@ -11,7 +11,7 @@
     "directory": "packages/backend"
   },
   "bin": {
-    "vitnode-backend": "./dist/scripts/setup.js"
+    "vitnode-backend": "dist/scripts/setup.js"
   },
   "scripts": {
     "build": "tsc",
