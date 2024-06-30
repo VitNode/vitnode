@@ -1,7 +1,15 @@
 {
   "name": "eslint-config-vitnode",
-  "version": "0.0.3",
+  "version": "0.0.4-canary.0",
   "description": "ESLint, TSConfig & Prettier config for VitNode",
+  "author": "VitNode Team",
+  "license": "MIT",
+  "homepage": "https://vitnode.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aXenDeveloper/vitnode.git",
+    "directory": "packages/eslint-config-vitnode"
+  },
   "type": "module",
   "keywords": [
     "eslint",
@@ -13,9 +21,6 @@
     "tsconfig.base.json",
     ".eslintrc.json"
   ],
-  "author": "VitNode",
-  "license": "MIT",
-  "homepage": "https://vitnode.com/",
   "peerDependencies": {
     "eslint": "8"
   },

@@ -1,6 +1,15 @@
 {
   "name": "vitnode-shared",
-  "version": "0.0.3",
+  "description": "Shared code for VitNode projects",
+  "version": "0.0.4-canary.0",
+  "author": "VitNode Team",
+  "license": "MIT",
+  "homepage": "https://vitnode.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aXenDeveloper/vitnode.git",
+    "directory": "packages/shared"
+  },
   "main": "./dist/index.js",
   "types": "./src/index.ts",
   "scripts": {
