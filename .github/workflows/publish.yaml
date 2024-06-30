@@ -39,7 +39,7 @@ jobs:
           node-version: 20
 
       - name: Run script
-        run: npm run start
+        run: npm run release
         id: version-bump
         env:
           VERSION_TYPE: ${{ github.event.inputs.type }}
