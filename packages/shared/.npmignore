@@ -1,5 +1,5 @@
 /src
 /.turbo
 /node_modules
-tsconfig.json
-.eslintrc.json
+/tsconfig.json
+/.eslintrc.json
