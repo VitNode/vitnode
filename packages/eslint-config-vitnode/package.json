@@ -1,6 +1,6 @@
 {
   "name": "eslint-config-vitnode",
-  "version": "0.0.4-canary.1",
+  "version": "0.0.4-canary.2",
   "description": "ESLint, TSConfig config for VitNode",
   "author": "VitNode Team",
   "license": "MIT",
