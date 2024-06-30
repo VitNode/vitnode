@@ -60,32 +60,32 @@ jobs:
       - name: Build Projects
         run: pnpm run build
 
-      # - name: Create Pre-release
-      #   if: github.event.inputs.release == 'canary' || github.event.inputs.release == 'release-candidate'
-      #   run: gh release create ${{ steps.version-bump.outputs.newTag }} --generate-notes --prerelease
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create Pre-release
+        if: github.event.inputs.release == 'canary' || github.event.inputs.release == 'release-candidate'
+        run: gh release create ${{ steps.version-bump.outputs.newTag }} --generate-notes --prerelease
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # - name: Create Release
-      #   if: github.event.inputs.release == 'stable'
-      #   run: gh release create ${{ steps.version-bump.outputs.newTag }} --generate-notes
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create Release
+        if: github.event.inputs.release == 'stable'
+        run: gh release create ${{ steps.version-bump.outputs.newTag }} --generate-notes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # - name: Publish canary
-      #   if: github.event.inputs.release == 'canary'
-      #   run: npm publish --provenance --access public --workspace vitnode-backend --workspace vitnode-frontend --workspace vitnode-shared --workspace create-vitnode-app --workspace eslint-config-vitnode --tag canary
-      #   env:
-      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Publish canary
+        if: github.event.inputs.release == 'canary'
+        run: npm publish --provenance --access public --workspace vitnode-backend --workspace vitnode-frontend --workspace vitnode-shared --workspace create-vitnode-app --workspace eslint-config-vitnode --tag canary
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      # - name: Publish release candidate
-      #   if: github.event.inputs.release == 'release-candidate'
-      #   run: npm publish --provenance --access public --workspace vitnode-backend --workspace vitnode-frontend --workspace vitnode-shared --workspace create-vitnode-app --workspace eslint-config-vitnode --tag rc
-      #   env:
-      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Publish release candidate
+        if: github.event.inputs.release == 'release-candidate'
+        run: npm publish --provenance --access public --workspace vitnode-backend --workspace vitnode-frontend --workspace vitnode-shared --workspace create-vitnode-app --workspace eslint-config-vitnode --tag rc
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      # - name: Publish stable
-      #   if: github.event.inputs.release == 'stable'
-      #   run: pnpm publish --provenance --access public --workspace vitnode-backend --workspace vitnode-frontend --workspace vitnode-shared --workspace create-vitnode-app --workspace eslint-config-vitnode
-      #   env:
-      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Publish stable
+        if: github.event.inputs.release == 'stable'
+        run: pnpm publish --provenance --access public --workspace vitnode-backend --workspace vitnode-frontend --workspace vitnode-shared --workspace create-vitnode-app --workspace eslint-config-vitnode
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
