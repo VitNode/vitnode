@@ -32,6 +32,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          version: 9.4.0
+
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
@@ -39,18 +44,21 @@ jobs:
           node-version: 20
 
       - name: Run script
-        run: npm run release
+        run: pnpm run release
         id: version-bump
         env:
           VERSION_TYPE: ${{ github.event.inputs.type }}
           RELEASE_TYPE: ${{ github.event.inputs.release }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Install dependencies
+        run: pnpm install
+
       - name: Build CLI
-        run: npm run build:scripts
+        run: pnpm run build:scripts
 
       - name: Build Projects
-        run: npm run build
+        run: pnpm run build
 
       - name: Create Pre-release
         if: github.event.inputs.release == 'canary' || github.event.inputs.release == 'release-candidate'
@@ -66,18 +74,18 @@ jobs:
 
       - name: Publish canary
         if: github.event.inputs.release == 'canary'
-        run: npm publish --provenance --access public --workspace axendev-test1 --workspace axendev-test2 --tag canary
+        run: npm publish --provenance --access public --workspace vitnode-backend --workspace vitnode-frontend --workspace vitnode-shared --workspace create-vitnode-app --workspace eslint-config-vitnode --tag canary
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish release candidate
         if: github.event.inputs.release == 'release-candidate'
-        run: npm publish --provenance --access public --workspace axendev-test1 --workspace axendev-test2 --tag rc
+        run: npm publish --provenance --access public --workspace vitnode-backend --workspace vitnode-frontend --workspace vitnode-shared --workspace create-vitnode-app --workspace eslint-config-vitnode --tag rc
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish stable
         if: github.event.inputs.release == 'stable'
-        run: npm publish --provenance --access public --workspace axendev-test1 --workspace axendev-test2
+        run: pnpm publish --provenance --access public --workspace vitnode-backend --workspace vitnode-frontend --workspace vitnode-shared --workspace create-vitnode-app --workspace eslint-config-vitnode
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
