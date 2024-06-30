@@ -10,7 +10,6 @@
     "experimentalDecorators": true,
     "strictNullChecks": false,
     "emitDecoratorMetadata": true,
-    "rootDir": "./src",
     "paths": {
       "@/*": ["./src/*"]
     }

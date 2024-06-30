@@ -1,4 +1,4 @@
-# (Vitnode) Shared
+# (VitNode) Shared
 
 This package contains shared code between the different packages of the Vitnode project.
 

@@ -1,4 +1,4 @@
-# (VitNode) Create VitNode App
+# (VitNode) Create App
 
 This package is a CLI tool to create a new VitNode app quickly.
 
