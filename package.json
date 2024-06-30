@@ -3,8 +3,13 @@
   "version": "0.0.4-canary.0",
   "version_code": "10000",
   "description": "VitNode app",
-  "author": "Maciej Piotr (aXenDev) Balcerzak",
-  "license": "GPL-3.0 license",
+  "author": "VitNode Team",
+  "license": "MIT",
+  "homepage": "https://VitNode.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aXenDeveloper/VitNode.git"
+  },
   "workspaces": [
     "apps/*",
     "packages/*"
