@@ -11,7 +11,7 @@
     "directory": "packages/frontend"
   },
   "bin": {
-    "vitnode-frontend": "./dist/scripts/setup.js"
+    "vitnode-frontend": "dist/scripts/setup.js"
   },
   "exports": {
     "./middleware": {
