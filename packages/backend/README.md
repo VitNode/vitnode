@@ -1,6 +1,6 @@
-# Vitnode - Backend Package
+# (Vitnode) Backend Package
 
-This package is used to create wrapper for a backend server in NestJS for the VitNode framework.
+This package is used to create wrapper for a backend server in NestJS for the VitNode app.
 
 ## Installation
 
