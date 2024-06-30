@@ -1,6 +1,13 @@
-# Vitnode - Backend Package
+# (Vitnode) Backend Package
 
-This package is used to create wrapper for a backend server in NestJS for the VitNode framework.
+This package is used to create wrapper for a backend server in NestJS for the VitNode app.
 
-> [!WARNING]
-> 🛠️ VitNode is still in development! You can try it out, but it is not recommended to use it now in production.
+## Installation
+
+```bash
+npm install vitnode-backend
+# or
+yarn add vitnode-backend
+# or
+pnpm add vitnode-backend
+```

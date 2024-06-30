@@ -1,6 +1,13 @@
-# (ESLint) Config for VitNode
+# (VitNode) ESLint Config
 
-This repository contains the ESLint configuration for VitNode projects.
+Package providing ESLint & TSConfig configuration for VitNode projects.
 
-> [!WARNING]
-> 🛠️ Not ready to use for ESLint 9! Work in progress...
+## Installation
+
+```bash
+npm install --save-dev eslint-config-vitnode
+# or
+yarn add --dev eslint-config-vitnode
+# or
+pnpm add --save-dev eslint-config-vitnode
+```
