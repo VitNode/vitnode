@@ -1,0 +1,39 @@
+name: Publish npm packages
+
+on:
+  workflow_dispatch:
+    inputs:
+      release:
+        description: stable, canary, or release candidate?
+        required: true
+        type: choice
+        options:
+          - canary
+          - stable
+          - release-candidate
+      type:
+        description: 'Type of package to publish'
+        required: true
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+
+jobs:
+  bump-version:
+    name: 'Bump Version'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          registry-url: 'https://registry.npmjs.org/'
+          node-version: 20
