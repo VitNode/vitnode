@@ -1,6 +1,17 @@
 {
   "name": "create-vitnode-app",
   "version": "0.0.3",
+  "author": "VitNode Team",
+  "license": "MIT",
+  "homepage": "https://vitnode.com/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aXenDeveloper/vitnode.git",
+    "directory": "packages/create-vitnode-app"
+  },
+  "files": [
+    "dist"
+  ],
   "type": "module",
   "bin": {
     "create-next-app": "./dist/index.cjs"
