@@ -46,6 +46,12 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Build CLI
+        run: pnpm run build:scripts
+
+      - name: Build Projects
+        run: pnpm run build
+
       - name: Run script to bump version
         run: pnpm run release
         id: version-bump
@@ -53,12 +59,6 @@ jobs:
           VERSION_TYPE: ${{ github.event.inputs.type }}
           RELEASE_TYPE: ${{ github.event.inputs.release }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Build CLI
-        run: pnpm run build:scripts
-
-      - name: Build Projects
-        run: pnpm run build
 
       - name: Create Pre-release
         if: github.event.inputs.release == 'canary' || github.event.inputs.release == 'release-candidate'
