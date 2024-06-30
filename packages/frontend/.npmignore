@@ -1,4 +1,5 @@
 /.turbo
+/scripts
 /node_modules
 /.eslintrc.json
 /codegen.ts
