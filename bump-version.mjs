@@ -5,9 +5,9 @@ import { EOL } from 'os';
 import path from 'path';
 
 const ALLOWED_VERSION_TYPES = ['major', 'minor', 'patch'];
-const GIT_USER_NAME = process.env.GITHUB_USER || 'Github Action';
+const GIT_USER_NAME = process.env.GITHUB_USER || 'Automated Version Bump';
 const GIT_USER_EMAIL =
-  process.env.GITHUB_EMAIL || 'gh-action@users.noreply.github.com';
+  process.env.GITHUB_EMAIL || 'gh-action-bump-version@users.noreply.github.com';
 const WORKSPACE = process.env.GITHUB_WORKSPACE;
 const EVENT_PATH = process.env.GITHUB_EVENT_PATH;
 const VERSION_TYPE = process.env.VERSION_TYPE;
@@ -233,21 +233,14 @@ function logError(error) {
     newVersion = `${tagPrefix}${newVersion}${tagSuffix}`;
 
     // Bump the version
-    await Promise.all(
-      packages.map(async pkg => {
-        await runInWorkspace(
-          'npm',
-          [
-            'version',
-            '--git-tag-version=false',
-            '--commit-hooks=false',
-            '--workspaces-update=false',
-            newVersion,
-          ],
-          pkg,
-        );
-      }),
-    );
+    await runInWorkspace('npm', [
+      'version',
+      '--git-tag-version=false',
+      '--commit-hooks=false',
+      '--workspaces',
+      '--workspaces-update=false',
+      newVersion,
+    ]);
 
     // Expose the new version
     await runInWorkspace('sh', [
