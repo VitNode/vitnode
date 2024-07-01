@@ -4,11 +4,20 @@
   "compilerOptions": {
     "target": "ES2022",
     "module": "esnext",
+    "baseUrl": "./",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "noEmit": true,
+    "esModuleInterop": true,
     "moduleResolution": "bundler",
     "isolatedModules": true,
+    "jsx": "preserve",
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
     "outDir": "./dist",
-    "rootDir": "./src",
-    "jsx": "preserve"
+    "rootDir": "./src"
   },
   "include": ["next-env.d.ts", "src/**/*"],
   "exclude": ["codegen.ts", "scripts/**/*"]

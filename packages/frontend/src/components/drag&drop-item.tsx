@@ -1,6 +1,6 @@
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { ChevronRight, Grip } from 'lucide-react';
+import { ChevronRight, GripVertical } from 'lucide-react';
 import * as React from 'react';
 
 import { cn } from '../helpers/classnames';
@@ -13,10 +13,8 @@ interface Props {
   isDropHere: boolean;
   onCollapse: () => void;
   childrenLength?: number;
+  className?: string;
   depth?: number;
-  draggableButtonClassName?: string;
-  draggableChildren?: React.ReactNode;
-  draggableStyle?: React.CSSProperties;
   indentationWidth?: number;
   isOpenChildren?: boolean;
 }
@@ -26,14 +24,12 @@ export const ItemDragAndDrop = ({
   children,
   childrenLength,
   depth = 0,
-  draggableButtonClassName,
-  draggableChildren,
-  draggableStyle,
   id,
   indentationWidth = 0,
   isDropHere,
   isOpenChildren,
   onCollapse,
+  className,
 }: Props) => {
   const {
     attributes,
@@ -54,7 +50,10 @@ export const ItemDragAndDrop = ({
   return (
     <div
       ref={setDroppableNodeRef}
-      className="border-t-0 pl-[var(--spacing)]"
+      className={cn(
+        'rounded-lg pl-[var(--spacing)] transition-all [&:not(:first-child)]:mt-4',
+        className,
+      )}
       style={
         {
           '--spacing': `${indentationWidth * depth}px`,
@@ -63,11 +62,11 @@ export const ItemDragAndDrop = ({
     >
       <div
         className={cn(
-          'bg-card relative flex flex-wrap items-center gap-2 border p-4 transition-[background-color,opacity] sm:gap-4',
+          'bg-card border-input relative flex flex-wrap items-center gap-2 rounded-lg border p-4 transition-shadow sm:gap-4',
           {
             'bg-primary/20 animate-pulse': isDropHere,
-            'z-10': isDragging,
-            'opacity-50': active,
+            'z-10 opacity-50': isDragging,
+            'shadow-lg': active,
           },
         )}
         style={{
@@ -78,18 +77,14 @@ export const ItemDragAndDrop = ({
       >
         <div className="flex shrink-0 gap-2">
           <Button
-            className={cn(
-              'hover:text-foreground bg-primary/20 text-primary hidden flex-shrink-0 cursor-grab focus:outline-none sm:flex',
-              draggableButtonClassName,
-            )}
-            style={draggableStyle}
+            className={cn('w-8')}
             variant="ghost"
             size="icon"
             ariaLabel=""
             {...attributes}
             {...listeners}
           >
-            {draggableChildren ? draggableChildren : <Grip />}
+            <GripVertical />
           </Button>
 
           {allowOpenChildren && (

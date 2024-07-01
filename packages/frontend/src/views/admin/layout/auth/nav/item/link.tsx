@@ -43,9 +43,9 @@ export const LinkItemNavAdmin = ({
 
   const buttonClass = (active: boolean) =>
     cn(
-      'hover:bg-primary/10 text-foreground [&>svg]:text-muted-foreground relative h-8 w-full justify-start font-normal [&>svg]:flex [&>svg]:size-4 [&>svg]:flex-shrink-0 [&>svg]:items-center [&>svg]:justify-center [&[data-state=open]>svg:not(:first-child)]:rotate-180',
+      'hover:bg-primary/10 text-foreground/70 hover:text-foreground [&>svg]:text-muted-foreground relative h-8 w-full justify-start font-normal [&>svg]:flex [&>svg]:size-4 [&>svg]:flex-shrink-0 [&>svg]:items-center [&>svg]:justify-center [&[data-state=open]>svg:not(:first-child)]:rotate-180',
       {
-        'bg-primary/10 font-bold': active,
+        'bg-primary/10 text-foreground font-semibold': active,
       },
     );
 

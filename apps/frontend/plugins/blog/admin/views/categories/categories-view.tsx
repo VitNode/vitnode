@@ -73,10 +73,10 @@ export const CategoriesBlogAdminView = ({
           <ItemDragAndDrop
             key={item.id}
             {...actionsItem({ data: item })}
-            draggableStyle={{
-              background: item.color.replace(')', ', 0.2 )'),
-              color: item.color,
-            }}
+            // draggableStyle={{
+            //   background: item.color.replace(')', ', 0.2 )'),
+            //   color: item.color,
+            // }}
           >
             <ItemCategoriesCategoryAdmin data={item} />
           </ItemDragAndDrop>
@@ -88,10 +88,10 @@ export const CategoriesBlogAdminView = ({
               {...actionsItem({
                 data: activeItemOverlay,
               })}
-              draggableStyle={{
-                background: activeItemOverlay.color.replace(')', ', 0.2 )'),
-                color: activeItemOverlay.color,
-              }}
+              // draggableStyle={{
+              //   background: activeItemOverlay.color.replace(')', ', 0.2 )'),
+              //   color: activeItemOverlay.color,
+              // }}
             >
               <ItemCategoriesCategoryAdmin data={activeItemOverlay} />
             </ItemDragAndDrop>

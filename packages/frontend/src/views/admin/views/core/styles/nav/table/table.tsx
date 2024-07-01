@@ -91,11 +91,13 @@ export const TableNavAdmin = ({ core_nav__show: { edges }, icons }: Props) => {
               data: item,
               indentationWidth,
             })}
-            draggableChildren={
-              item.icon ? icons.find(el => el.id === item.id)?.icon : null
-            }
           >
-            <ItemContentTableContentNavAdmin data={item} />
+            <ItemContentTableContentNavAdmin
+              data={item}
+              icon={
+                item.icon ? icons.find(el => el.id === item.id)?.icon : null
+              }
+            />
           </ItemDragAndDrop>
         ))}
 
@@ -105,13 +107,15 @@ export const TableNavAdmin = ({ core_nav__show: { edges }, icons }: Props) => {
               {...actionsItem({
                 data: activeItemOverlay,
               })}
-              draggableChildren={
-                activeItemOverlay.icon
-                  ? icons.find(el => el.id === activeItemOverlay.id)?.icon
-                  : null
-              }
             >
-              <ItemContentTableContentNavAdmin data={activeItemOverlay} />
+              <ItemContentTableContentNavAdmin
+                data={activeItemOverlay}
+                icon={
+                  activeItemOverlay.icon
+                    ? icons.find(el => el.id === activeItemOverlay.id)?.icon
+                    : null
+                }
+              />
             </ItemDragAndDrop>
           )}
         </DragOverlay>
