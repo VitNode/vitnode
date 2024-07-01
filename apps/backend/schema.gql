@@ -201,9 +201,9 @@ type Mutation {
   core_members__avatar__delete: String!
   core_members__avatar__upload(file: Upload!): UploadAvatarCoreMembersObj!
   core_members__delete(id: Int!): String!
-  core_members__sign_up(email: String!, name: String!, newsletter: Boolean, password: String!): SignUpCoreMembersObj!
   core_sessions__sign_in(admin: Boolean, email: String!, password: String!, remember: Boolean): String!
   core_sessions__sign_out: String!
+  core_sessions__sign_up(email: String!, name: String!, newsletter: Boolean, password: String!): SignUpCoreSessionsObj!
 }
 
 type NavAdminPluginsAuthorization {
@@ -610,7 +610,7 @@ type ShowSettingsObj {
   site_short_name: String!
 }
 
-type SignUpCoreMembersObj {
+type SignUpCoreSessionsObj {
   email: String!
   group_id: Int!
   name: String!

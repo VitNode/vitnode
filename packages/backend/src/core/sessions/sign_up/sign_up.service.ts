@@ -4,9 +4,9 @@ import { count } from 'drizzle-orm';
 import { ConfigService } from '@nestjs/config';
 import { removeSpecialCharacters } from 'vitnode-shared';
 
-import { SignUpCoreMembersArgs } from './dto/sign_up.args';
-import { SignUpCoreMembersObj } from './dto/sign_up.obj';
 import { generateAvatarColor } from './functions/generate-avatar-color';
+import { SignUpCoreSessionsArgs } from './dto/sign_up.args';
+import { SignUpCoreSessionsObj } from './dto/sign_up.obj';
 
 import { DatabaseService } from '../../../database';
 import { core_users } from '../../../templates/core/admin/database/schema/users';
@@ -15,7 +15,7 @@ import { CustomError } from '../../../errors';
 import { getUserIp } from '../../../functions';
 
 @Injectable()
-export class SignUpCoreMembersService {
+export class SignUpCoreSessionsService {
   constructor(
     private readonly databaseService: DatabaseService,
     private readonly configService: ConfigService,
@@ -47,9 +47,9 @@ export class SignUpCoreMembersService {
   };
 
   async signUp(
-    { email: emailRaw, name, newsletter, password }: SignUpCoreMembersArgs,
+    { email: emailRaw, name, newsletter, password }: SignUpCoreSessionsArgs,
     { req }: Ctx,
-  ): Promise<SignUpCoreMembersObj> {
+  ): Promise<SignUpCoreSessionsObj> {
     const email = emailRaw.toLowerCase();
 
     const checkEmail = await this.databaseService.db.query.core_users.findFirst(
