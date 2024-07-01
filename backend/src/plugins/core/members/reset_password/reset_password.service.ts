@@ -21,8 +21,11 @@ export class ResetPasswordCoreMembersService {
       where: eq(core_users.email, email)
     });
 
+<<<<<<< HEAD
     if (user == undefined) return "No such email found!";
 
+=======
+>>>>>>> a55175d5 (feat: Sending URL for resetting password)
     const characters =
       "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     let key;
@@ -40,24 +43,35 @@ export class ResetPasswordCoreMembersService {
       )
     );
 
+<<<<<<< HEAD
     await this.databaseService.db.insert(core_keys).values({
       user_id: user.id,
       key: key
     });
 
+=======
+>>>>>>> a55175d5 (feat: Sending URL for resetting password)
     const message = `Hello ${user.first_name} ${user.last_name},\n\n
     To confirm your password reset, go to https://vitnode.com/?key=${key}.\n\n
     In most email programs, the address sent should work as an active link that can be clicked. If the link does not work, copy and paste it into the address bar of your browser (preferably Chrome or Opera).\n\n
     Best regards!\n
     VitNode Team`;
 
+<<<<<<< HEAD
     const emailData = {
+=======
+    const emailArgs = {
+>>>>>>> a55175d5 (feat: Sending URL for resetting password)
       to: user.email,
       subject: "VitNode.com - password reset request",
       message: message
     };
 
+<<<<<<< HEAD
     await this.mailService.send(emailData);
+=======
+    await this.mailService.send(emailArgs);
+>>>>>>> a55175d5 (feat: Sending URL for resetting password)
 
     return "Success!";
   }
