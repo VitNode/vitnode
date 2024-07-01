@@ -38,6 +38,11 @@ export class ResetPasswordCoreMembersService {
       )
     );
 
+    await this.databaseService.db.insert(core_keys).values({
+      user_id: user.id,
+      key: key
+    });
+
     const message = `Hello ${user.first_name} ${user.last_name},\n\n
     To confirm your password reset, go to https://vitnode.com/?key=${key}.\n\n
     In most email programs, the address sent should work as an active link that can be clicked. If the link does not work, copy and paste it into the address bar of your browser (preferably Chrome or Opera).\n\n
