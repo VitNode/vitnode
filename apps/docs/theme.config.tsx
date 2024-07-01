@@ -1,5 +1,5 @@
-import { useRouter } from "next/router";
-import { type DocsThemeConfig } from "nextra-theme-docs";
+import { useRouter } from 'next/router';
+import { type DocsThemeConfig } from 'nextra-theme-docs';
 
 const config: DocsThemeConfig = {
   gitTimestamp: null,
@@ -7,7 +7,7 @@ const config: DocsThemeConfig = {
     <svg
       viewBox="0 0 546 129"
       fill="none"
-      style={{ height: "2.5rem" }}
+      style={{ height: '2.5rem' }}
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
@@ -55,9 +55,10 @@ const config: DocsThemeConfig = {
     </svg>
   ),
   project: {
-    link: "https://github.com/aXenDeveloper/vitnode/"
+    link: 'https://github.com/aXenDeveloper/vitnode/',
   },
-  docsRepositoryBase: "https://github.com/VitNode/vitnode_page",
+  docsRepositoryBase:
+    'https://github.com/aXenDeveloper/vitnode/tree/canary/apps/docs',
   head: (
     <>
       <link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="48x48" />
@@ -72,33 +73,33 @@ const config: DocsThemeConfig = {
           <span>VitNode © {new Date().getFullYear()}</span>
         </div>
       );
-    }
+    },
   },
   useNextSeoProps() {
     const { asPath } = useRouter();
-    if (asPath !== "/") {
+    if (asPath !== '/') {
       return {
-        titleTemplate: "%s – VitNode"
+        titleTemplate: '%s – VitNode',
       };
     }
 
     return {
-      titleTemplate: "VitNode - CMS built with NodeJS and React"
+      titleTemplate: 'VitNode - CMS built with NodeJS and React',
     };
   },
   sidebar: {
     titleComponent({ title, type }) {
-      if (type === "separator") {
+      if (type === 'separator') {
         return <span className="cursor-default">{title}</span>;
       }
       return <>{title}</>;
     },
-    toggleButton: true
+    toggleButton: true,
   },
   banner: {
-    key: "0.0.1-alpha",
-    text: "🛠️ VitNode is still in development! You can try it out, but it is not recommended to use it now in production."
-  }
+    key: '0.0.1-alpha',
+    text: '🛠️ VitNode is still in development! You can try it out, but it is not recommended to use it now in production.',
+  },
 };
 
 export default config;

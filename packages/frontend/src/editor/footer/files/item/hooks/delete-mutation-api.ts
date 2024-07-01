@@ -1,13 +1,13 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
-import { fetcher } from 'vitnode-frontend/graphql/fetcher';
 
 import {
   Core_Editor_Files__Delete,
   Core_Editor_Files__DeleteMutation,
   Core_Editor_Files__DeleteMutationVariables,
 } from '../../../../../graphql/graphql';
+import { fetcher } from '../../../../../graphql/fetcher';
 
 export const deleteMutationApi = async (
   variables: Core_Editor_Files__DeleteMutationVariables,

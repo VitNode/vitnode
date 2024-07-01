@@ -37,7 +37,11 @@ export class UploadAvatarCoreMembersService {
         .where(eq(core_files_avatars.id, avatar.id));
 
       // Delete from server
-      this.deleteFile.delete(avatar);
+      this.deleteFile.delete({
+        dir_folder: avatar.dir_folder,
+        file_name: avatar.file_name,
+        file_secure: false,
+      });
     }
 
     const uploadFiles = await this.uploadFile.upload({

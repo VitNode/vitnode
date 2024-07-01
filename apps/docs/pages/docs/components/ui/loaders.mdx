@@ -1,4 +1,4 @@
-import { Callout } from "nextra/components";
+import { Callout } from 'nextra/components';
 
 # Loaders
 
@@ -9,7 +9,7 @@ VitNode provides a few loaders to help you load any data to the frontend.
 This loader looks like a spinner and it's used to show that something is loading.
 
 ```tsx
-import { Loader } from "@/components/loader";
+import { Loader } from 'vitnode-frontend/components/ui/loader';
 
 export const TestComponent = () => {
   if (isLoading) return <Loader />;
@@ -32,25 +32,13 @@ We're modifying few components to help you load data to the frontend. You can us
 ### Button
 
 ```tsx
-import { Button } from "@/components/ui/button";
+import { Button } from 'vitnode-frontend/components/ui/button';
 
 export const TestComponent = () => {
   return (
     <Button type="submit" loading={isPending}>
-      {t("save")}
+      {t('save')}
     </Button>
-  );
-};
-```
-
-### DropdownMenuItem
-
-```tsx
-import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
-
-export const TestComponent = () => {
-  return (
-    <DropdownMenuItem loading={isPending}>{t("testing")}</DropdownMenuItem>
   );
 };
 ```

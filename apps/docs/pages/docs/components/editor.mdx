@@ -1,35 +1,30 @@
-import { Callout } from "nextra/components";
+import { Callout } from 'nextra/components';
 
 # Editor
 
 WYSIWYG Editor is a rich text editor that uses [TipTap](https://tiptap.dev/) library.
 
-<Callout type="info" emoji="ℹ️">
-  Editor has uncontroller state. All source-code for Editor is based on change
-  state and passing it to external state.
-</Callout>
-
 ## Using in Form
 
-Editor is working only in `Form` component. If you don't know how to use `Form` please read [Forms documentation](/frontend/forms).
+Editor is working only in `Form` component. If you don't know how to use `Form` please read [Forms documentation](/forms).
 
-```tsx
+```tsx {9, 18}
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormLabel,
-  FormMessage
-} from "@/components/ui/form";
-import { Editor } from "@/components/editor/editor";
+  FormMessage,
+} from 'vitnode-frontend/components/ui/form';
+import { Editor } from 'vitnode-frontend/editor';
 
 <FormField
   control={form.control}
   name="content"
   render={({ field }) => (
     <FormItem>
-      <FormLabel>{t("form.content")}</FormLabel>
+      <FormLabel>{t('form.content')}</FormLabel>
       <FormControl>
         <Editor onChange={field.onChange} value={field.value} />
       </FormControl>
@@ -39,13 +34,25 @@ import { Editor } from "@/components/editor/editor";
 />;
 ```
 
+### Props
+
+| Name               | Type                                                        | Default | Description                      |
+| ------------------ | ----------------------------------------------------------- | ------- | -------------------------------- |
+| `onChange`         | `(value: TextLanguage[]) => void / (value: string) => void` | -       | Callback when the value changes. |
+| `value`            | `TextLanguage[] / string`                                   | -       | Value of the editor.             |
+| `disableLanguages` | `boolean`                                                   | `false` | Disable languages in editor.     |
+| `autoFocus`        | `boolean`                                                   | `false` | Focus editor on mount.           |
+| `allowUploadFiles` | `{ plugin: string, folder: string }`                        | -       | Allow upload files.              |
+
+It's important to set `plugin` and `folder` props for `allowUploadFiles`. Without it, when admin wants to remove plugin, then all files from this plugin will be remove.
+
 ### Form Schema
 
-```ts
-import { zodInput } from "@/functions/zod";
+```ts {1, 4}
+import { zodInput } from 'vitnode-frontend/helpers/zod';
 
 const formSchema = z.object({
-  content: zodInput.languageInput
+  content: zodInput.languageInput,
 });
 ```
 
@@ -53,7 +60,7 @@ You can set this field as **required**:
 
 ```ts
 const formSchema = z.object({
-  content: zodInput.languageInput.min(1)
+  content: zodInput.languageInput.min(1),
 });
 ```
 
@@ -69,7 +76,7 @@ If you don't want to use i18n in Editor you need to pass `disableLanguage` props
 
 ```ts
 const formSchema = z.object({
-  content: z.string().trim()
+  content: z.string().trim(),
 });
 ```
 
@@ -107,46 +114,22 @@ const formSchema = z.object({
 
 ## Good to know
 
-- Convert `http` URLs to links is not working for users safety. Users need to use `https` instead,
 - `HTML` tags are not allowed. Users can use `Markdown` instead,
-- `Font Family` is not implemented. Users don't like to change it when they are writing,
-- `Code Block` has prettier support. Users can format code by pressing a button in the toolbar
-
-### Allow Upload Files
-
-To allow upload files you have to pass `allowUploadFiles` props with `plugin` and `folder`. By default users don't have permission to upload files.
-
-```tsx {6-9}
-import { Editor } from "@/components/editor/editor";
-
-<Editor
-  onChange={field.onChange}
-  value={field.value}
-  allowUploadFiles={{
-    plugin: "forums",
-    folder: "posts"
-  }}
-/>;
-```
-
-It's important to set `plugin` and `folder` props. Without it, when admin wants to remove plugin, then all files from this plugin will be removed.
+- `Font Family` is not implemented. Users don't like to change it when they are writing
 
 ## Read only mode
 
 To display content form editor you have to use `ReadOnlyEditor` component with unique `id: string` and `value: TextLanguage[]` props.
 
 ```tsx
-import { ReadOnlyEditor } from "@/components/editor/read-only/read-only";
+import { ReadOnlyEditor } from 'vitnode-frontend/editor/read-only';
 
 <ReadOnlyEditor value={value} />;
 ```
 
-### Allow Download Attachments
+### Props
 
-To allow download attachments you have to pass `allowDownloadAttachments` props. By default users don't have permission to download attachments.
-
-```tsx {3}
-import { ReadOnlyEditor } from "@/components/editor/read-only/read-only";
-
-<ReadOnlyEditor value={value} allowDownloadAttachments />;
-```
+| Name                       | Type             | Default | Description                 |
+| -------------------------- | ---------------- | ------- | --------------------------- |
+| `value`                    | `TextLanguage[]` | -       | Value of the editor.        |
+| `allowDownloadAttachments` | `boolean`        | `false` | Allow download attachments. |

@@ -10,11 +10,11 @@ import { useGlobals } from '../../hooks/use-globals';
 import { useSession } from '../../hooks/use-session';
 
 interface Props extends LanguageSelectFooterEditorProps {
-  disableLanguage?: boolean;
+  disableLanguages?: boolean;
 }
 
 export const FooterEditor = ({
-  disableLanguage,
+  disableLanguages,
   selectedLanguage,
   setSelectedLanguage,
 }: Props) => {
@@ -25,7 +25,7 @@ export const FooterEditor = ({
   return (
     <div className="bg-background rounded-b-md p-2">
       <div className="flex w-full flex-wrap items-center justify-between gap-2 [&>*]:w-full [&>*]:sm:w-auto">
-        {!disableLanguage && (
+        {!disableLanguages && (
           <LanguageSelectFooterEditor
             selectedLanguage={selectedLanguage}
             setSelectedLanguage={setSelectedLanguage}
