@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { SignUpCoreMembersResolver } from "./sign_up/sign_up.resolver";
 import { SignUpCoreMembersService } from "./sign_up/sign_up.service";
 import { ShowCoreMembersService } from "./show/show.service";
@@ -17,6 +18,8 @@ import { MailService } from "../admin/email/mail.service";
 =======
 import { SignUpCoreMembersResolver } from './sign_up/sign_up.resolver';
 import { SignUpCoreMembersService } from './sign_up/sign_up.service';
+=======
+>>>>>>> 2a2f3d22 (refactor(backend): Move sign up from members to sessions module)
 import { ShowCoreMembersService } from './show/show.service';
 import { ShowCoreMembersResolver } from './show/show.resolver';
 import { AvatarCoreMembers } from './avatar/avatar-core_members.module';
@@ -27,9 +30,12 @@ import { DeleteCoreMembersService } from './delete/delete.service';
 @Module({
   providers: [
     ShowCoreMembersResolver,
+<<<<<<< HEAD
     ShowCoreMembersService,
     SignUpCoreMembersResolver,
     SignUpCoreMembersService,
+=======
+>>>>>>> 2a2f3d22 (refactor(backend): Move sign up from members to sessions module)
     DeleteCoreMembersResolver,
     DeleteCoreMembersService,
 <<<<<<< HEAD

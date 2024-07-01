@@ -10,6 +10,8 @@ import { InternalAuthorizationCoreSessionsService } from './authorization/intern
 import { CoreSessionsCron } from './sessions.cron';
 import { DeviceSignInCoreSessionsService } from './sign_in/device.service';
 import { DevicesCoreSessionsModule } from './devices/devices.module';
+import { SignUpCoreSessionsResolver } from './sign_up/sign_up.resolver';
+import { SignUpCoreSessionsService } from './sign_up/sign_up.service';
 
 @Module({
   providers: [
@@ -20,6 +22,8 @@ import { DevicesCoreSessionsModule } from './devices/devices.module';
     SignOutCoreSessionsService,
     SignOutCoreSessionsResolver,
     CoreSessionsCron,
+    SignUpCoreSessionsResolver,
+    SignUpCoreSessionsService,
   ],
   imports: [DevicesCoreSessionsModule],
 })
