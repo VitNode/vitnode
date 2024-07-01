@@ -13,7 +13,7 @@ import { TransformString } from '../../../../utils';
 export const nameRegex = /^(?!.* {2})[\p{L}\p{N}._@ -]*$/u;
 
 @ArgsType()
-export class SignUpCoreMembersArgs {
+export class SignUpCoreSessionsArgs {
   @Transform(TransformString)
   @Field(() => String)
   @IsEmail()

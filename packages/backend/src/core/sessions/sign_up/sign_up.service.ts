@@ -4,9 +4,9 @@ import { count } from 'drizzle-orm';
 import { ConfigService } from '@nestjs/config';
 import { removeSpecialCharacters } from 'vitnode-shared';
 
-import { SignUpCoreMembersArgs } from './dto/sign_up.args';
-import { SignUpCoreMembersObj } from './dto/sign_up.obj';
-import { generateAvatarColor } from './functions/generate-avatar-color';
+import { SignUpCoreSessionsArgs } from './dto/sign_up.args';
+import { SignUpCoreSessionsObj } from './dto/sign_up.obj';
+import { AvatarColorService } from './helpers/avatar-color.service';
 
 import { DatabaseService } from '../../../database';
 import { core_users } from '../../../templates/core/admin/database/schema/users';
@@ -15,13 +15,15 @@ import { CustomError } from '../../../errors';
 import { getUserIp } from '../../../functions';
 
 @Injectable()
-export class SignUpCoreMembersService {
+export class SignUpCoreSessionsService extends AvatarColorService {
   constructor(
     private readonly databaseService: DatabaseService,
     private readonly configService: ConfigService,
-  ) {}
+  ) {
+    super();
+  }
 
-  protected getGroupId = async (): Promise<number> => {
+  private readonly getGroupId = async (): Promise<number> => {
     const countUsers = await this.databaseService.db
       .select({ count: count() })
       .from(core_users);
@@ -47,11 +49,10 @@ export class SignUpCoreMembersService {
   };
 
   async signUp(
-    { email: emailRaw, name, newsletter, password }: SignUpCoreMembersArgs,
+    { email: emailRaw, name, newsletter, password }: SignUpCoreSessionsArgs,
     { req }: Ctx,
-  ): Promise<SignUpCoreMembersObj> {
+  ): Promise<SignUpCoreSessionsObj> {
     const email = emailRaw.toLowerCase();
-
     const checkEmail = await this.databaseService.db.query.core_users.findFirst(
       {
         where: (table, { eq }) => eq(table.email, email),
@@ -91,7 +92,7 @@ export class SignUpCoreMembersService {
         name_seo: convertToNameSEO,
         newsletter,
         password: hashPassword,
-        avatar_color: generateAvatarColor(name),
+        avatar_color: this.generateAvatarColor(name),
         group_id: await this.getGroupId(),
         ip_address: getUserIp(req),
       })

@@ -227,9 +227,9 @@ export type Mutation = {
   core_members__avatar__delete: Scalars['String']['output'];
   core_members__avatar__upload: UploadAvatarCoreMembersObj;
   core_members__delete: Scalars['String']['output'];
-  core_members__sign_up: SignUpCoreMembersObj;
   core_sessions__sign_in: Scalars['String']['output'];
   core_sessions__sign_out: Scalars['String']['output'];
+  core_sessions__sign_up: SignUpCoreSessionsObj;
 };
 
 
@@ -506,19 +506,19 @@ export type MutationCore_Members__DeleteArgs = {
 };
 
 
-export type MutationCore_Members__Sign_UpArgs = {
-  email: Scalars['String']['input'];
-  name: Scalars['String']['input'];
-  newsletter?: InputMaybe<Scalars['Boolean']['input']>;
-  password: Scalars['String']['input'];
-};
-
-
 export type MutationCore_Sessions__Sign_InArgs = {
   admin?: InputMaybe<Scalars['Boolean']['input']>;
   email: Scalars['String']['input'];
   password: Scalars['String']['input'];
   remember?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+export type MutationCore_Sessions__Sign_UpArgs = {
+  email: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  newsletter?: InputMaybe<Scalars['Boolean']['input']>;
+  password: Scalars['String']['input'];
 };
 
 export type NavAdminPluginsAuthorization = {
@@ -1074,8 +1074,8 @@ export type ShowSettingsObj = {
   site_short_name: Scalars['String']['output'];
 };
 
-export type SignUpCoreMembersObj = {
-  __typename?: 'SignUpCoreMembersObj';
+export type SignUpCoreSessionsObj = {
+  __typename?: 'SignUpCoreSessionsObj';
   email: Scalars['String']['output'];
   group_id: Scalars['Int']['output'];
   name: Scalars['String']['output'];
@@ -1467,7 +1467,7 @@ export type Admin__Install__Create_DatabaseMutationVariables = Exact<{ [key: str
 
 export type Admin__Install__Create_DatabaseMutation = { __typename?: 'Mutation', admin__install__create_database: string };
 
-export type Core_Members__Sign_UpMutationVariables = Exact<{
+export type Core_Sessions__Sign_UpMutationVariables = Exact<{
   email: Scalars['String']['input'];
   name: Scalars['String']['input'];
   password: Scalars['String']['input'];
@@ -1475,7 +1475,7 @@ export type Core_Members__Sign_UpMutationVariables = Exact<{
 }>;
 
 
-export type Core_Members__Sign_UpMutation = { __typename?: 'Mutation', core_members__sign_up: { __typename?: 'SignUpCoreMembersObj', email: string, name: string, newsletter?: boolean | null } };
+export type Core_Sessions__Sign_UpMutation = { __typename?: 'Mutation', core_sessions__sign_up: { __typename?: 'SignUpCoreSessionsObj', email: string, name: string, newsletter?: boolean | null } };
 
 export type Core_Sessions__Sign_InMutationVariables = Exact<{
   email: Scalars['String']['input'];
@@ -2057,9 +2057,9 @@ export const Admin__Install__Create_Database = gql`
   admin__install__create_database
 }
     `;
-export const Core_Members__Sign_Up = gql`
-    mutation Core_members__sign_up($email: String!, $name: String!, $password: String!, $newsletter: Boolean) {
-  core_members__sign_up(
+export const Core_Sessions__Sign_Up = gql`
+    mutation Core_sessions__sign_up($email: String!, $name: String!, $password: String!, $newsletter: Boolean) {
+  core_sessions__sign_up(
     email: $email
     name: $name
     password: $password

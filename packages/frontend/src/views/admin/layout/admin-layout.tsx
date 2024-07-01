@@ -7,11 +7,7 @@ interface Props {
 }
 
 export const AdminLayout = async ({ children }: Props) => {
-  try {
-    const data = await getSessionAdminData();
+  const data = await getSessionAdminData();
 
-    return <AdminProviders data={data}>{children}</AdminProviders>;
-  } catch (error) {
-    return <div>Access Denied!</div>;
-  }
+  return <AdminProviders data={data}>{children}</AdminProviders>;
 };
