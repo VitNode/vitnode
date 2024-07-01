@@ -1,14 +1,16 @@
-import { Mutation, Resolver } from "@nestjs/graphql";
+import { Args, Mutation, Resolver } from "@nestjs/graphql";
+
+import { ResetPasswordCoreMembersArgs } from "./dto/reset_password.args";
 import { ResetPasswordCoreMembersService } from "./reset_password.service";
 
-@Resolver
+@Resolver()
 export class ResetPasswordCoreMembersResolver {
   constructor(private readonly service: ResetPasswordCoreMembersService) {}
 
-  @Mutation(() => ResetPasswordCoreMembersObj)
+  @Mutation(() => String)
   async core_members__reset_password(
     @Args() args: ResetPasswordCoreMembersArgs
-  ): Promise<ResetPasswordCoreMembersObj> {
+  ): Promise<string> {
     return this.service.reset_password(args);
   }
 }

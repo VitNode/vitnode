@@ -4,7 +4,6 @@ import { MailService } from "../mail.service";
 import { EmailTemplate } from "../emails/email-template";
 
 interface Args {
-  from: string;
   message: string;
   subject: string;
   to: string;
@@ -14,7 +13,7 @@ interface Args {
 export class SendAdminEmailService {
   constructor(private readonly mailService: MailService) {}
 
-  async send({ to, from, subject, message }: Args): Promise<string> {
+  async send({ to, subject, message }: Args): Promise<string> {
     await this.mailService.sendMail({
       to,
       subject,
