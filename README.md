@@ -33,18 +33,16 @@ pnpm create vitnode-app@latest
 |         | Minimum        | Recommended    |
 | :------ | :------------- | :------------- |
 | CPU     | 1GHz (2+ core) | 1GHz (4+ core) |
-| RAM     | 2GB            | 8GB            |
+| RAM     | 2GB            | 4GB            |
 | Storage | 10GB           | 20GB           |
 | Network | 100Mbps        | 300Mbps        |
-| Https   | Yes            | Yes            |
 
 ## 🧑‍💻 Browser
 
-|            | Minimum | Recommended |
-| :--------- | :------ | :---------- |
-| Chrome     | >= 91   | >= 115      |
-| Firefox    | >= 103  | >= 121      |
-| Edge       | >= 91   | >= 120      |
-| Safari     | >= 16   | >= 17.2     |
-| iOS Safari | >= 15   | >= 17.2     |
-| Opera      | >= 77   | >= 101      |
+|         | Minimum | Recommended |
+| :------ | :------ | :---------- |
+| Chrome  | >= 106  | >= 115      |
+| Firefox | >= 110  | >= 121      |
+| Edge    | >= 106  | >= 120      |
+| Safari  | >= 16   | >= 17.2     |
+| Opera   | >= 94   | >= 101      |

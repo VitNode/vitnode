@@ -1,4 +1,5 @@
 import * as fs from 'fs';
+import { join } from 'path';
 
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
@@ -13,7 +14,12 @@ import {
 
 import { DatabaseService } from '../../../../database';
 import { DeviceSignInCoreSessionsService } from '../../../sessions/sign_in/device.service';
-import { ABSOLUTE_PATHS_BACKEND, AccessDeniedError, Ctx } from '../../../..';
+import {
+  ABSOLUTE_PATHS_BACKEND,
+  AccessDeniedError,
+  ConfigPlugin,
+  Ctx,
+} from '../../../..';
 import { AuthorizationCurrentUserObj } from '../../../sessions/authorization/dto/authorization.obj';
 import { core_sessions_known_devices } from '../../../../templates/core/admin/database/schema/sessions';
 import { getUserAgentData, getUserIp } from '../../../../functions';
@@ -45,11 +51,9 @@ export class AuthorizationAdminSessionsService {
           };
         }
 
-        // TODO: Fix this
-        // const config: ConfigPlugin = JSON.parse(
-        //   fs.readFileSync(pathConfig, "utf8")
-        // );
-        const config = JSON.parse(fs.readFileSync(pathConfig, 'utf8'));
+        const config: ConfigPlugin = JSON.parse(
+          fs.readFileSync(pathConfig, 'utf8'),
+        );
 
         return {
           code,
@@ -129,9 +133,20 @@ export class AuthorizationAdminSessionsService {
   async authorization(ctx: Ctx): Promise<AuthorizationAdminSessionsObj> {
     const user = await this.initialAuthorization(ctx);
 
+    const packageJSONPath = join(
+      __dirname,
+      '../../../../../../../package.json',
+    );
+    if (!fs.existsSync(packageJSONPath)) {
+      throw new Error('package.json not found');
+    }
+    const packageJSON: { version: string } = JSON.parse(
+      fs.readFileSync(packageJSONPath, 'utf8'),
+    );
+
     return {
       user,
-      version: '0.0.3', // TODO: Get version from package.json
+      version: packageJSON.version,
       nav: await this.getAdminNav(),
     };
   }
