@@ -1,11 +1,11 @@
-import { Steps } from "nextra/components";
-import { Callout } from "nextra/components";
+import { Steps } from 'nextra/components';
+import { Callout } from 'nextra/components';
 
 # GraphQL
 
 VitNode use [GraphQL](https://graphql.org/) to query and mutate data with [Codegen](https://the-guild.dev/graphql/codegen) to generate typescript types. It's a powerful tool that allows you to query only the data you need and get the data in the shape you want.
 
-Before we start, we're recomending you to read the [GraphQL documentation](https://graphql.org/learn/) to understand the basics of the language.
+Before we start, we're recomend you to read the [GraphQL documentation](https://graphql.org/learn/) to understand the basics of the language.
 
 In this tutorial we're create a simple query and mutation with the categories data and [Internationalization (i18n)](/plugins/i18n) from the blog plugin.
 
@@ -20,7 +20,7 @@ For example if you have `blogs_categories` and `blogs_articles` in the database,
 Let's create a new file in the `backend/plugins/blog/categories/categories.module.ts` file and add the following code:
 
 ```ts
-import { Module } from "@nestjs/common";
+import { Module } from '@nestjs/common';
 
 @Module({})
 export class BlogCategoriesModule {}
@@ -33,13 +33,13 @@ Name class whatever you want, but it's a good practice to name it after the feat
 Now we need to import the module we just created to the main module of the blog plugin. Open the `backend/plugins/blog/blog.module.ts` file and add the following code:
 
 ```ts {4, 7}
-import { Module } from "@nestjs/common";
+import { Module } from '@nestjs/common';
 
-import { AdminBlogModule } from "./admin/admin.module";
-import { BlogCategoriesModule } from "./categories/categories.module";
+import { AdminBlogModule } from './admin/admin.module';
+import { BlogCategoriesModule } from './categories/categories.module';
 
 @Module({
-  imports: [AdminBlogModule, BlogCategoriesModule]
+  imports: [AdminBlogModule, BlogCategoriesModule],
 })
 export class BlogModule {}
 ```
@@ -59,7 +59,7 @@ Now, create a folder called `show` inside the `backend/plugins/blog/categories` 
 Create a file called `show.service.ts` inside the `backend/plugins/blog/categories/show` folder and add the following code:
 
 ```ts
-import { Injectable } from "@nestjs/common";
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class ShowBlogCategoriesService {}
@@ -72,9 +72,9 @@ Class name should be whatever you want, but it's a good practice to name `{Actio
 If you want to get access to database, you should inject the `DatabaseService` in the constructor of the service.
 
 ```ts {3, 7}
-import { Injectable } from "@nestjs/common";
+import { Injectable } from '@nestjs/common';
 
-import { DatabaseService } from "@/plugins/database/database.service";
+import { DatabaseService } from '@/plugins/database/database.service';
 
 @Injectable()
 export class ShowBlogCategoriesService {
@@ -92,12 +92,12 @@ export class ShowBlogCategoriesService {
 Now we need to inject the service to the module. Open the `backend/plugins/blog/categories/categories.module.ts` file and add the following code:
 
 ```ts {3, 6}
-import { Module } from "@nestjs/common";
+import { Module } from '@nestjs/common';
 
-import { ShowBlogCategoriesService } from "./show/show.service";
+import { ShowBlogCategoriesService } from './show/show.service';
 
 @Module({
-  providers: [ShowBlogCategoriesService]
+  providers: [ShowBlogCategoriesService],
 })
 export class BlogCategoriesModule {}
 ```
@@ -124,9 +124,9 @@ Create the `backend/plugins/blog/categories/show/dto` folder.
 Create a file called `show.args.ts` inside the `backend/plugins/blog/categories/show/dto` folder and add the following code:
 
 ```ts
-import { ArgsType } from "@nestjs/graphql";
+import { ArgsType } from '@nestjs/graphql';
 
-import { PaginationArgs } from "@/types/database/pagination.type";
+import { PaginationArgs } from '@/types/database/pagination.type';
 
 @ArgsType()
 export class ShowBlogCategoriesArgs extends PaginationArgs {}
@@ -139,10 +139,10 @@ Class name should be unique. For example `{Action}{Plugin}{Module}Args`.
 Create a file called `show.obj.ts` inside the `backend/plugins/blog/categories/show/dto` folder and add the following code:
 
 ```ts
-import { Field, Int, ObjectType } from "@nestjs/graphql";
+import { Field, Int, ObjectType } from '@nestjs/graphql';
 
-import { PageInfo } from "@/types/database/pagination.type";
-import { TextLanguage } from "@/types/database/text-language.type";
+import { PageInfo } from '@/types/database/pagination.type';
+import { TextLanguage } from '@/types/database/text-language.type';
 
 @ObjectType()
 export class ShowBlogCategories {
@@ -209,11 +209,11 @@ If you want to know how to implement `show` method, see [Pagination with Databas
 Create a file called `show.resolver.ts` inside the `backend/plugins/blog/categories/show` folder and add the following code:
 
 ```ts
-import { Args, Query, Resolver } from "@nestjs/graphql";
+import { Args, Query, Resolver } from '@nestjs/graphql';
 
-import { ShowBlogCategoriesService } from "./show.service";
-import { ShowBlogCategoriesArgs } from "./dto/show.args";
-import { ShowBlogCategoriesObj } from "./dto/show.obj";
+import { ShowBlogCategoriesService } from './show.service';
+import { ShowBlogCategoriesArgs } from './dto/show.args';
+import { ShowBlogCategoriesObj } from './dto/show.obj';
 
 @Resolver()
 export class ShowBlogCategoriesResolver {
@@ -221,7 +221,7 @@ export class ShowBlogCategoriesResolver {
 
   @Query(() => ShowBlogCategoriesObj)
   async blog_categories__show(
-    @Args() args: ShowBlogCategoriesArgs
+    @Args() args: ShowBlogCategoriesArgs,
   ): Promise<ShowBlogCategoriesObj> {
     return await this.service.show(args);
   }
@@ -233,9 +233,9 @@ You can name the resolver whatever you want, but it's a good practice to name `{
 ### Inject Service
 
 ```ts {3, 7}
-import { Resolver } from "@nestjs/graphql";
+import { Resolver } from '@nestjs/graphql';
 
-import { ShowBlogCategoriesService } from "./show.service";
+import { ShowBlogCategoriesService } from './show.service';
 
 @Resolver()
 export class ShowBlogCategoriesResolver {
@@ -246,11 +246,11 @@ export class ShowBlogCategoriesResolver {
 ### Create method
 
 ```ts {1, 4-5, 11-16}
-import { Args, Query, Resolver } from "@nestjs/graphql";
+import { Args, Query, Resolver } from '@nestjs/graphql';
 
-import { ShowBlogCategoriesService } from "./show.service";
-import { ShowBlogCategoriesArgs } from "./dto/show.args";
-import { ShowBlogCategoriesObj } from "./dto/show.obj";
+import { ShowBlogCategoriesService } from './show.service';
+import { ShowBlogCategoriesArgs } from './dto/show.args';
+import { ShowBlogCategoriesObj } from './dto/show.obj';
 
 @Resolver()
 export class ShowBlogCategoriesResolver {
@@ -258,7 +258,7 @@ export class ShowBlogCategoriesResolver {
 
   @Query(() => ShowBlogCategoriesObj)
   async blog_categories__show(
-    @Args() args: ShowBlogCategoriesArgs
+    @Args() args: ShowBlogCategoriesArgs,
   ): Promise<ShowBlogCategoriesObj> {
     return await this.service.show(args);
   }
@@ -277,11 +277,11 @@ If query or mutation is in the admin folder, you should name it `admin__{plugin}
 If you want to create a mutation, you should create a method in the resolver with the `@Mutation` decorator.
 
 ```ts {1, 4-5, 11-16}
-import { Args, Mutation, Resolver } from "@nestjs/graphql";
+import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
-import { CreateBlogCategoriesService } from "./create.service";
-import { CreateBlogCategoriesArgs } from "./dto/create.args";
-import { CreateBlogCategoriesObj } from "./dto/create.obj";
+import { CreateBlogCategoriesService } from './create.service';
+import { CreateBlogCategoriesArgs } from './dto/create.args';
+import { CreateBlogCategoriesObj } from './dto/create.obj';
 
 @Resolver()
 export class CreateBlogCategoriesResolver {
@@ -289,7 +289,7 @@ export class CreateBlogCategoriesResolver {
 
   @Mutation(() => CreateBlogCategoriesObj)
   async blog_categories__create(
-    @Args() args: CreateBlogCategoriesArgs
+    @Args() args: CreateBlogCategoriesArgs,
   ): Promise<CreateBlogCategoriesObj> {
     return await this.service.create(args);
   }
@@ -303,13 +303,13 @@ If you want to add authorization to query, please follow [Authorization](/plugin
 Now we need to inject the resolver to the module. Open the `backend/plugins/blog/categories/categories.module.ts` file and add the following code:
 
 ```ts {4, 7}
-import { Module } from "@nestjs/common";
+import { Module } from '@nestjs/common';
 
-import { ShowBlogCategoriesService } from "./show/show.service";
-import { ShowBlogCategoriesResolver } from "./show/show.resolver";
+import { ShowBlogCategoriesService } from './show/show.service';
+import { ShowBlogCategoriesResolver } from './show/show.resolver';
 
 @Module({
-  providers: [ShowBlogCategoriesService, ShowBlogCategoriesResolver]
+  providers: [ShowBlogCategoriesService, ShowBlogCategoriesResolver],
 })
 export class BlogCategoriesModule {}
 ```

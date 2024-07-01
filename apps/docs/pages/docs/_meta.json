@@ -5,17 +5,25 @@
     "type": "separator"
   },
   "deployment": "🚀 Deployment",
-  "-- For Developers": {
+  "-- For Backend": {
     "type": "separator",
-    "title": "For Developers"
+    "title": "For Backend"
+  },
+  "cron": "Task Scheduling (CRON)",
+  "emails": "Emails",
+  "files": "Files",
+  "-- For Frontend": {
+    "type": "separator",
+    "title": "For Frontend"
   },
   "graphql": "GraphQL",
-  "cron": "Task Scheduling (CRON)",
-  "plugins": "🔌 Plugins",
-  "-- UI": {
-    "type": "separator",
-    "title": "UI"
-  },
+  "fetch": "Fetch & Revalidate Data",
+  "forms": "Forms",
   "components": "Components",
+  "plugins": "🔌 Plugins",
+  "-- Deprecation": {
+    "type": "separator",
+    "title": "Deprecation"
+  },
   "themes": "🖌️ Themes"
 }

@@ -1,0 +1,454 @@
+import { Steps } from 'nextra/components';
+import { Callout } from 'nextra/components';
+import { FileTree } from 'nextra/components';
+
+# Fetch & Revalidate Data
+
+You can fetching data for many ways. Befere you start you should read [GraphGL](/themes/graphql) section and learn how to generate types form GraphQL.
+
+## React Server Components (RSC)
+
+The best way to fetch data is using [React Server Components (RSC)](https://react.dev/reference/rsc/server-components).
+
+<Steps>
+
+### Create async component
+
+```tsx
+export default async function Page() {}
+```
+
+### Function with fetcher
+
+```tsx {1-6, 9-16}
+import { fetcher } from 'vitnode-frontend/graphql/fetcher';
+
+import {
+  Forum_Forums__Show,
+  type Forum_Forums__ShowQuery,
+  type Forum_Forums__ShowQueryVariables,
+} from '@/graphql/hooks';
+
+const getData = async (variables: Forum_Forums__ShowQueryVariables) => {
+  const { data } = await fetcher<
+    Forum_Forums__ShowQuery,
+    Forum_Forums__ShowQueryVariables
+  >({
+    query: Forum_Forums__Show,
+    variables,
+    cache: 'force-cache', // this option is used for caching data
+  });
+
+  return data;
+};
+
+export default async function Page() {}
+```
+
+You can avoid using `cache` option if you don't want to cache data.
+
+### Run query
+
+```tsx {2-4}
+export default async function Page() {
+  const data = await getData();
+
+  return <ForumsForumView data={data} />;
+}
+```
+
+</Steps>
+
+## React Query
+
+Using [TanStack Query (React Query)](https://tanstack.com/query/latest/docs/react/overview). You can use it for fetching data in client components.
+
+<Steps>
+
+### Create hook
+
+Inside `hooks/{plugin_name}` create new files with:
+
+- suffix `api`, for example `query-api.ts` _(For Server Action)_,
+- prefix `use`, for example `use-use-short-show-groups.ts`
+
+Your schema should be similar like this:
+
+<FileTree>
+  <FileTree.Folder name="hooks" defaultOpen>
+    <FileTree.Folder name="{plugin_name}" defaultOpen>
+      <FileTree.Folder name="groups" defaultOpen>
+        <FileTree.File name="query-api.ts" />
+        <FileTree.File name="use-use-short-show-groups.ts" />
+      </FileTree.Folder>
+    </FileTree.Folder>
+  </FileTree.Folder>
+</FileTree>
+
+### Server Action
+
+Inside `query-api.ts` you should create function for fetching data from server using `fetcher` function.
+
+```ts
+'use server';
+
+import { fetcher } from 'vitnode-frontend/graphql/fetcher';
+
+import {
+  Admin__Core_Groups__Show_Short,
+  type Admin__Core_Groups__Show_ShortQuery,
+  type Admin__Core_Groups__Show_ShortQueryVariables,
+} from '@/graphql/hooks';
+
+export const queryApi = async (
+  variables: Admin__Core_Groups__Show_ShortQueryVariables,
+) => {
+  const { data } = await fetcher<
+    Admin__Core_Groups__Show_ShortQuery,
+    Admin__Core_Groups__Show_ShortQueryVariables
+  >({
+    query: Admin__Core_Groups__Show_Short,
+    variables,
+  });
+
+  return data;
+};
+```
+
+### useQuery
+
+```ts
+import { useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
+
+import { queryApi } from './query-api';
+
+export const useShortShowGroupsAdminAPI = () => {
+  const api = useQuery({
+    queryKey: ['forum.SHORT_GROUPS_MEMBERS', { textSearch }],
+    queryFn: async () => {
+      const data = await queryApi({
+        first: 25,
+      });
+
+      return DataTransfer;
+    },
+    refetchOnMount: true, // is used for refetching data when component is mounted
+  });
+
+  return api;
+};
+```
+
+<Callout type="info" emoji="ℹ️">
+  `queryKey` have to be unique in your app. The best practise to name it is `
+  {plugin_name}.method_name`.
+</Callout>
+
+### Example use
+
+```tsx {2}
+'use client';
+
+export const ContentGroupsFiltersUsersMembersAdmin = () => {
+  const { data, isFetching } = useShortShowGroupsAdmin();
+
+  if (isFetching) {
+    return <div>Loading...</div>;
+  }
+
+  return (
+    <div>
+      {data.map(item => (
+        <div key={item.id}>{item.name}</div>
+      ))}
+    </div>
+  );
+};
+```
+
+</Steps>
+
+## Debounced fetching
+
+To avoid fetching data on every key press you can use `useDebouncedCallback` from `use-debounce` package.
+
+Here is an example how to use it for `search` input.
+
+```tsx
+import { useDebouncedCallback } from 'use-debounce';
+
+const handleSearchInput = useDebouncedCallback((value: string) => {
+  setSearch(value);
+}, 500);
+
+return <Input onChange={e => handleSearchInput(e.target.value)} />;
+```
+
+## Infinite Query
+
+Using [TanStack Infinite Queries (React Query)](https://tanstack.com/query/latest/docs/react/guides/infinite-queries). You can using Infinite Query for fetching data for infinite scroll.
+
+<Steps>
+
+### Create hook
+
+Create new file with prefix `use`, for example `use-use-topics-list.ts`.
+
+<FileTree>
+  <FileTree.Folder name="hooks" defaultOpen>
+    <FileTree.File name="query-api.ts" />
+    <FileTree.File name="use-use-topics-list.ts" />
+  </FileTree.Folder>
+</FileTree>
+
+### Server Action
+
+Inside `query-api.ts` you should create function for fetching data from server using `fetcher` function.
+
+```ts
+'use server';
+
+import { fetcher } from 'vitnode-frontend/graphql/fetcher';
+
+import {
+  Forum_Forums__Show_Item_More,
+  type Forum_Forums__Show_Item_MoreQuery,
+  type Forum_Forums__Show_Item_MoreQueryVariables,
+} from '@/graphql/hooks';
+
+export const queryApi = async (
+  variables: Forum_Forums__Show_Item_MoreQueryVariables,
+) => {
+  const { data } = (await fetcher) <Steps Steps;
+  Forum_Forums__Show_Item_MoreQuery,
+    Forum_Forums__Show_Item_MoreQueryVariables >
+      {
+        query: Forum_Forums__Show_Item_More,
+        variables,
+      };
+
+  return data;
+};
+```
+
+### useInfiniteQuery
+
+```ts
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { useParams } from 'next/navigation';
+
+import {
+  Forum_Forums__Show_Item_More,
+  type Forum_Forums__Show_Item_MoreQuery,
+  type Forum_Forums__Show_Item_MoreQueryVariables,
+  type ShowTopicsForumsObj,
+} from '@/graphql/hooks';
+
+export const useTopicsList = () => {
+  const { id } = useParams();
+
+  const query = useInfiniteQuery({
+    queryKey: ['fourm.TOPICS_IN_FORUM' { id }],
+    queryFn: async ({ pageParam }) =>
+      {
+        const data = await queryApi({
+          ...pageParam,
+          forumId: getIdFormString(id),
+        });
+
+        return data;
+      },
+    initialPageParam: {
+      first: 10,
+    },
+    getNextPageParam: ({ forum_topics__show: { pageInfo } }) => {
+      if (pageInfo.hasNextPage) {
+        return {
+          first: 10,
+          cursor: pageInfo.endCursor,
+        };
+      }
+    },
+  });
+
+  return query;
+};
+```
+
+- `pageParam` - is used for passing variables to query
+- `initialPageParam` - is used for passing initial variables to query
+- `getNextPageParam` - is used for passing variables to query when infinite scroll is triggered
+
+### Parse map data
+
+```ts
+export const useTopicsList = () => {
+  const data = React.useMemo(
+    () => query.data.pages.flatMap(page => page.forum_topics__show.edges) ?? [],
+    [query.data.pages],
+  );
+
+  return {
+    ...query,
+    data,
+  };
+};
+```
+
+### Example use
+
+```tsx
+'use client';
+
+export const TopicsList = () => {
+  const { data, isFetching, fetchNextPage, hasNextPage } = useTopicsList();
+
+  return (
+    <div>
+      {data.map(item => (
+        <div key={item.node.id}>{item.node.title}</div>
+      ))}
+
+      {isFetching && <div>Loading...</div>}
+
+      {hasNextPage && (
+        <button onClick={() => fetchNextPage()} disabled={isFetching}>
+          Load more
+        </button>
+      )}
+    </div>
+  );
+};
+```
+
+</Steps>
+
+## Mutation
+
+NextJS allows you to use [Server Actions](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations).
+
+<Steps>
+
+### Create action
+
+Mutations should be placed in `hooks` folder next to client hook with `onSubmit`.
+
+```ts
+'use server';
+
+export const mutationApi = async () => {};
+```
+
+### Use fetcher
+
+Our `fetcher` should be wrapper with `try/catch` block to handle errors using client side.
+
+```ts
+'use server';
+
+import { fetcher } from 'vitnode-frontend/graphql/fetcher';
+
+import {
+  Forum_Topics__Actions__Lock_Toggle,
+  type Forum_Topics__Actions__Lock_ToggleMutation,
+  type Forum_Topics__Actions__Lock_ToggleMutationVariables,
+} from '@/graphql/hooks';
+
+export const mutationApi = async (
+  variables: Forum_Topics__Actions__Lock_ToggleMutationVariables,
+) => {
+  try {
+    const { data } = await fetcher<
+      Forum_Topics__Actions__Lock_ToggleMutation,
+      Forum_Topics__Actions__Lock_ToggleMutationVariables
+    >({
+      query: Forum_Topics__Actions__Lock_Toggle,
+      variables,
+    });
+
+    return { data };
+  } catch (error) {
+    return { error };
+  }
+};
+```
+
+### Example use
+
+```tsx {4,9-17,19}
+import { useTranslations } from 'next-intl';
+import { toast } from 'sonner';
+
+import { mutationApi } from './mutation-api';
+
+export const useLockToggleActionsTopic = ({ id }: { id: number }) => {
+  const t = useTranslations('core');
+
+  const onClick = async () => {
+    const mutation = await mutationApi({ id });
+
+    if (mutation.error) {
+      toast.error(t('errors.title'), {
+        description: t('errors.internal_server_error'),
+      });
+    }
+  };
+
+  return { onClick };
+};
+```
+
+- `toast` - is used for displaying toast messages. You can read more here in [Notifications Toast](/frontend/notifications/toast)
+
+### Revalidate data
+
+NextJS allows you to use [Revalidating data](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations#revalidating-data) in Server Actions.
+
+This function only works when you're using `fetcher()` in Server Server Component (RSC) for fetching data.
+
+### Revalidate data (Client)
+
+Take a look at your mutation in Server Action. You have `data` variable from `fetcher` function and you return it. You can using this data to change data in cache using [queryClient.setQueryData](https://tanstack.com/query/latest/docs/react/reference/QueryClient#queryclientsetquerydata).
+
+```ts
+import {
+  useQuery,
+  useQueryClient,
+  type InfiniteData,
+} from '@tanstack/react-query';
+import { type Forum_Topics__ShowQuery } from '@/graphql/hooks';
+
+const queryClient = useQueryClient();
+
+const onClick = async () => {
+  const mutation = await mutationApi({ id });
+  if (mutation.data) {
+    queryClient.setQueryData<InfiniteData<Forum_Topics__ShowQuery>>(
+      ['forum.TOPICS'],
+      old => {
+        if (!old) return old;
+
+        return {
+          ...old,
+          pages: old.pages.map(page => ({
+            ...page,
+            forum_topics__show: {
+              ...page.forum_topics__show,
+              edges: mutation.data,
+            },
+          })),
+        };
+      },
+    );
+
+    return;
+  }
+
+  toast.error(t('errors.title'), {
+    description: t('errors.internal_server_error'),
+  });
+};
+```
+
+</Steps>

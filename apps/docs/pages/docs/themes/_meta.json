@@ -1,9 +1,6 @@
 {
-  "overview": "Overview",
   "graphql": "GraphQL",
-  "fetch": "Fetch & Revalidate Data",
   "routing": "Routing",
-  "forms": "Forms",
   "i18n": "Internationalization (i18n)",
   "virtualization": "Virtualization",
   "drag&drop": "Drag & Drop"
