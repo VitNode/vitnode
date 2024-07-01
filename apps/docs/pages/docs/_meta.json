@@ -9,6 +9,7 @@
     "type": "separator",
     "title": "For Backend"
   },
+  "authorization": "Authorization",
   "cron": "Task Scheduling (CRON)",
   "emails": "Emails",
   "files": "Files",

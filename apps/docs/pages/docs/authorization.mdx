@@ -9,7 +9,7 @@ To protect a route, you need to add the `@UseGuards(AuthGuards)` decorator to th
 Here is an example for resolver:
 
 ```ts {1, 4}
-import { AuthGuards } from "@/utils/guards/auth.guard";
+import { AuthGuards } from 'vitnode-backend';
 
 @Query(() => ShowCoreMembersObj)
 @UseGuards(AuthGuards)
@@ -23,7 +23,7 @@ async core_members__show(@Args() args: ShowCoreMembersArgs): Promise<ShowCoreMem
 If you need to protect a route with `admin` permissions you need to use the `@UseGuards(AdminAuthGuards)` decorator.
 
 ```ts {1, 4}
-import { AdminAuthGuards } from "@/utils/guards/admin-auth.guard";
+import { AdminAuthGuards } from 'vitnode-backend';
 
 @Query(() => ShowCoreMembersObj)
 @UseGuards(AdminAuthGuards)
@@ -37,7 +37,7 @@ async core_members__show(@Args() args: ShowCoreMembersArgs): Promise<ShowCoreMem
 Whan you are using `AuthGuards` you can access to the current user in the resolver by using the `@CurrentUser()` decorator as param route.
 
 ```ts {1, 7}
-import { CurrentUser, User } from '@/utils/decorators/user.decorator';
+import { CurrentUser, User } from 'vitnode-backend';
 
 @Query(() => ShowCoreMembersObj)
 @UseGuards(AuthGuards)
@@ -53,9 +53,8 @@ async core_members__show(
 
 If you need to access to the current user in a route you need use the `@OptionalAuth()` decorator in route. You need change `@CurrentUser()` decorator to optional param route.
 
-```ts {1-2, 5-6, 9}
-import { AuthGuards, OptionalAuth } from "@/utils/guards/auth.guard";
-import { CurrentUser, User } from '@/utils/decorators/user.decorator';
+```ts {1, 4-5, 8}
+import { AuthGuards, OptionalAuth, CurrentUser, User } from 'vitnode-backend';
 
 @Query(() => ShowCoreMembersObj)
 @OptionalAuth()
