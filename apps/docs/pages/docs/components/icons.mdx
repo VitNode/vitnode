@@ -1,4 +1,4 @@
-import { Callout } from "nextra/components";
+import { Callout } from 'nextra/components';
 
 # Icons
 
@@ -11,7 +11,7 @@ But, before we start...
 To use Lucide Icons, we're really recommend you to use JSX _(Insted of using `Dynamic Icon`)_. It's the best way to use them.
 
 ```tsx
-import { Home, KeyRound } from "lucide-react";
+import { Home, KeyRound } from 'lucide-react';
 
 return (
   <div>
@@ -26,7 +26,7 @@ return (
 You can use dynamic icons with JSX too. Use this component if you want to download the icons as "text" from database or something like that.
 
 ```tsx
-import { Icon, type IconLucideNames } from "@/components/icon/icon";
+import { Icon } from 'vitnode-frontend/components/icon/icon';
 
 return <Icon name="Home" />;
 ```
@@ -40,7 +40,7 @@ return <Icon name="Home" />;
 We also allow to using dynamic icon on client side. You can use this component.
 
 ```tsx
-import { IconClient } from "@/components/icon/icon-client";
+import { IconClient } from 'vitnode-frontend/components/icon/icon-client';
 
 return <IconClient name="Home" />;
 ```
@@ -63,9 +63,9 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage
-} from "@/components/ui/form";
-import { IconInput } from "@/components/icon/input/icon-input";
+  FormMessage,
+} from 'vitnode-frontend/components/ui/form';
+import { IconInput } from 'vitnode-frontend/components/icon/icon-input';
 
 return (
   <FormField

@@ -26,11 +26,11 @@ interface Props extends Omit<UploadFilesHandlerEditorArgs, 'value'> {
 interface WithLanguage extends Props {
   onChange: (value: TextLanguage[]) => void;
   value: TextLanguage[];
-  disableLanguage?: never;
+  disableLanguages?: never;
 }
 
 interface WithoutLanguage extends Props {
-  disableLanguage: true;
+  disableLanguages: true;
   onChange: (value: string) => void;
   value: string;
 }
@@ -43,7 +43,7 @@ export const Editor = ({
   allowUploadFiles,
   autoFocus,
   className,
-  disableLanguage,
+  disableLanguages,
   onChange,
   value,
 }: WithLanguage | WithoutLanguage) => {
@@ -86,7 +86,7 @@ export const Editor = ({
       const content = JSON.stringify(editor.getJSON());
       const currentValue = Array.isArray(value) ? value : [];
 
-      if (disableLanguage) {
+      if (disableLanguages) {
         onChange(content);
 
         return;
@@ -110,7 +110,7 @@ export const Editor = ({
 
   // Toggle the editor content when the selected language changes
   React.useEffect(() => {
-    if (!editor || disableLanguage || !Array.isArray(value)) return;
+    if (!editor || disableLanguages || !Array.isArray(value)) return;
 
     const findValue =
       value.find(v => v.language_code === selectedLanguage)?.value ?? '';
@@ -149,7 +149,7 @@ export const Editor = ({
           />
         </div>
         <FooterEditor
-          disableLanguage={disableLanguage}
+          disableLanguages={disableLanguages}
           selectedLanguage={selectedLanguage}
           setSelectedLanguage={setSelectedLanguage}
         />

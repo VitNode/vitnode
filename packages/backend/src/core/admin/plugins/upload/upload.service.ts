@@ -51,11 +51,10 @@ export class UploadAdminPluginsService {
       tgz
         .createReadStream()
         .pipe(
-          // TODO: Fix this type
           tar.extract({
             C: this.tempPath,
             strip: 1,
-          }) as NodeJS.WritableStream & ReturnType<typeof tar.extract>,
+          }),
         )
         .on('error', err => {
           throw new reject(err.message);

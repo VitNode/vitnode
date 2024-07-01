@@ -1,13 +1,15 @@
 {
+  "ui": "UI",
+  "icons": "Icons",
+  "date": "Date Format",
+  "editor": "Editor WYSIWYG",
+  "-- Deprecation": {
+    "type": "separator",
+    "title": "Deprecation"
+  },
   "user": "User",
   "group": "Group",
   "data-table": "Data Table",
-  "dialog": "Dialog",
   "tabs": "Tabs",
-  "loaders": "Loaders",
-  "date": "Date Format",
-  "editor": "Editor",
-  "icons": "Icons",
-  "colors": "Colors",
   "breadcrumbs": "Breadcrumbs"
 }

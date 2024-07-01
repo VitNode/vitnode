@@ -42,11 +42,7 @@ export class UpdateAdminCoreLanguageService {
     await new Promise((resolve, reject) => {
       tgz
         .createReadStream()
-        .pipe(
-          // TODO: Fix this type
-          tar.extract({ C: pathTemp, strip: 1 }) as NodeJS.WritableStream &
-            ReturnType<typeof tar.extract>,
-        )
+        .pipe(tar.extract({ C: pathTemp, strip: 1 }))
         .on('error', function (err) {
           throw new reject(err.message);
         })
