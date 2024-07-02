@@ -51,7 +51,7 @@ export class CreateKeyResetPasswordCoreMembersService {
       subject: 'VitNode.com - password reset request',
       message: message,
       previewText: 'VitNode.com - password reset request 123',
-      username: user.name,
+      user,
     };
 
     await this.mailService.send(emailData);

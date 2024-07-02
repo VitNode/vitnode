@@ -11,6 +11,7 @@ import {
 } from 'drizzle-orm/pg-core';
 
 import { core_groups } from './groups';
+import { core_languages } from './languages';
 
 export const core_users = pgTable(
   'core_users',
@@ -29,7 +30,12 @@ export const core_users = pgTable(
     last_name: varchar('last_name', { length: 255 }),
     birthday: timestamp('birthday'),
     ip_address: varchar('ip_address', { length: 255 }).notNull(),
-    language: varchar('language', { length: 5 }).notNull().default('en'),
+    language: varchar('language', { length: 5 })
+      .notNull()
+      .default('en')
+      .references(() => core_languages.code, {
+        onDelete: 'set default',
+      }),
   },
   table => ({
     name_seo_idx: index('core_users_name_seo_idx').on(table.name_seo),
@@ -46,6 +52,10 @@ export const core_users_relations = relations(core_users, ({ one }) => ({
   avatar: one(core_files_avatars, {
     fields: [core_users.id],
     references: [core_files_avatars.user_id],
+  }),
+  language: one(core_languages, {
+    fields: [core_users.language],
+    references: [core_languages.code],
   }),
 }));
 

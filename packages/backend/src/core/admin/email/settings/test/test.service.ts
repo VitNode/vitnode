@@ -23,7 +23,7 @@ export class TestAdminEmailSettingsService extends SendAdminEmailService {
       subject,
       message,
       previewText,
-      username: user.name,
+      user,
     });
 
     return 'Email sent!';

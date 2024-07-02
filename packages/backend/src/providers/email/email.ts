@@ -1,17 +1,32 @@
 import * as fs from 'fs';
 import { join } from 'path';
 
-export const getTranslationForEmail = (namespaces: string) => {
+export const getTranslationForEmail = (
+  namespaces: string,
+  language: string,
+) => {
   const resolveNamespace = namespaces.split('.');
-  const path = join(
+  let path = join(
     process.cwd(),
     '..',
     'frontend',
     'plugins',
     resolveNamespace[0],
     'langs',
-    'en.json',
+    `${language}.json`,
   );
+
+  if (!fs.existsSync(path)) {
+    path = join(
+      process.cwd(),
+      '..',
+      'frontend',
+      'plugins',
+      resolveNamespace[0],
+      'langs',
+      'en.json',
+    );
+  }
 
   const read = fs.readFileSync(path, 'utf-8');
   const messages = JSON.parse(read);
