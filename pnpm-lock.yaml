@@ -71,35 +71,11 @@ importers:
         version: 4.2.2(graphql@16.9.0)
       '@nestjs/cli':
         specifier: ^10.3.2
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        version: 10.3.2(@swc/cli@0.3.12(@swc/core@1.6.3(@swc/helpers@0.5.11))(chokidar@3.6.0))(@swc/core@1.6.3(@swc/helpers@0.5.11))
-=======
-        version: 10.3.2(@swc/cli@0.3.14(@swc/core@1.6.5(@swc/helpers@0.5.11))(chokidar@3.6.0))(@swc/core@1.6.5(@swc/helpers@0.5.11))(esbuild@0.19.12)
-=======
-        version: 10.3.2(@swc/cli@0.3.14(@swc/core@1.6.5(@swc/helpers@0.5.11))(chokidar@3.6.0))(@swc/core@1.6.5(@swc/helpers@0.5.11))
->>>>>>> 2e0ec75a (fix(backend): Add dotenv to init script for database)
-=======
-        version: 10.3.2(@swc/cli@0.3.14(@swc/core@1.6.5(@swc/helpers@0.5.11))(chokidar@3.6.0))(@swc/core@1.6.5(@swc/helpers@0.5.11))(esbuild@0.19.12)
->>>>>>> b991c2f3 (perf: Change @vitnode/shared to vitnode-shared name package)
-=======
         version: 10.3.2(@swc/cli@0.4.0(@swc/core@1.6.5(@swc/helpers@0.5.11))(chokidar@3.6.0))(@swc/core@1.6.5(@swc/helpers@0.5.11))(esbuild@0.19.12)
->>>>>>> ea73e4fc (perf(frontend): Improve graphql paths)
       '@nestjs/platform-express':
         specifier: ^10.3.9
         version: 10.3.9(@nestjs/common@10.3.9(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/core@10.3.9)
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 0aa27abf (chore: Update packages)
       '@nestjs/schematics':
-=======
-      "@nestjs/schematics":
->>>>>>> 3ba70325 (refactor(frontend): Change package name form @vitnode/frontend to vitnode-frontend)
-=======
-      '@nestjs/schematics':
->>>>>>> a9a3e1df (perf(frontend): Move accordion, alert-dialog, loader & button to package)
         specifier: ^10.1.1
         version: 10.1.1(chokidar@3.6.0)(typescript@5.5.2)
       '@swc/cli':
@@ -147,52 +123,9 @@ importers:
       pg:
         specifier: ^8.12.0
         version: 8.12.0
-<<<<<<< HEAD
-      react-email:
-        specifier: ^2.1.4
-        version: 2.1.4(@swc/helpers@0.5.11)(eslint@8.57.0)(ts-node@10.9.2(@swc/core@1.6.3(@swc/helpers@0.5.11))(@types/node@20.14.7)(typescript@5.5.2))
-      ts-loader:
-        specifier: ^9.5.1
-        version: 9.5.1(typescript@5.5.2)(webpack@5.90.1(@swc/core@1.6.3(@swc/helpers@0.5.11)))
       ts-node:
         specifier: ^10.9.2
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        version: 10.9.2(@swc/core@1.6.3(@swc/helpers@0.5.11))(@types/node@20.14.7)(typescript@5.5.2)
-=======
-        version: 10.9.2(@swc/core@1.6.1(@swc/helpers@0.5.11))(@types/node@20.14.2)(typescript@5.4.5)
->>>>>>> a24fce42 (docs: Add docs by fumadocs)
-=======
-        version: 10.9.2(@swc/core@1.6.3)(@types/node@20.14.7)(typescript@5.5.2)
->>>>>>> 9e049073 (perf(docs): Remove docs)
-      tsconfig-paths:
-        specifier: ^4.2.0
-        version: 4.2.0
-=======
-      ts-node:
-        specifier: ^10.9.2
-<<<<<<< HEAD
-        version: 10.9.2(@swc/core@1.6.5(@swc/helpers@0.5.11))(@types/node@20.14.8)(typescript@5.5.2)
->>>>>>> 0aa27abf (chore: Update packages)
-=======
-        version: 10.9.2(@swc/core@1.6.5)(@types/node@20.14.8)(typescript@5.5.2)
->>>>>>> 2e0ec75a (fix(backend): Add dotenv to init script for database)
-=======
-        version: 10.9.2(@swc/core@1.6.5(@swc/helpers@0.5.11))(@types/node@20.14.8)(typescript@5.5.2)
->>>>>>> 38444a5e (perf(frontend): Move auth layout to package)
-=======
         version: 10.9.2(@swc/core@1.6.5)(@types/node@20.14.9)(typescript@5.5.2)
->>>>>>> ea73e4fc (perf(frontend): Improve graphql paths)
-=======
-        version: 10.9.2(@swc/core@1.6.5(@swc/helpers@0.5.11))(@types/node@20.14.9)(typescript@5.5.2)
->>>>>>> 6dcd1de7 (feat: Add create-vitnode-app)
-=======
-        version: 10.9.2(@swc/core@1.6.5)(@types/node@20.14.9)(typescript@5.5.2)
->>>>>>> bafd0554 (chore: Change npm version when bump version)
       typescript:
         specifier: ^5.5.2
         version: 5.5.2
@@ -203,11 +136,6 @@ importers:
         specifier: workspace:*
         version: link:../../packages/shared
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-  apps/docs:
-    dependencies:
-=======
   apps/docs:
     dependencies:
       '@radix-ui/react-dropdown-menu':
@@ -219,36 +147,18 @@ importers:
       '@radix-ui/react-slot':
         specifier: ^1.0.2
         version: 1.1.0(@types/react@18.3.3)(react@18.3.1)
->>>>>>> 321538bf (docs: Add docs)
       class-variance-authority:
         specifier: ^0.7.0
         version: 0.7.0
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
-<<<<<<< HEAD
-      fumadocs-core:
-        specifier: 12.1.3
-        version: 12.1.3(@types/react@18.3.3)(next@14.2.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      fumadocs-mdx:
-        specifier: 8.2.32
-        version: 8.2.32(fumadocs-core@12.1.3(@types/react@18.3.3)(next@14.2.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(next@14.2.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
-      fumadocs-ui:
-        specifier: 12.1.3
-        version: 12.1.3(@types/react-dom@18.3.0)(@types/react@18.3.3)(next@14.2.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.4(ts-node@10.9.2(@types/node@20.14.2)(typescript@5.4.5)))
-      lucide-react:
-        specifier: ^0.395.0
-        version: 0.395.0(react@18.3.1)
-      next:
-        specifier: ^14.2.4
-        version: 14.2.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-=======
       embla-carousel-react:
         specifier: ^8.1.5
         version: 8.1.5(react@18.3.1)
       framer-motion:
         specifier: ^11.2.4
-        version: 11.2.11(@emotion/is-prop-valid@1.2.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 11.2.12(@emotion/is-prop-valid@1.2.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       lucide-react:
         specifier: ^0.378.0
         version: 0.378.0(react@18.3.1)
@@ -261,56 +171,27 @@ importers:
       nextra-theme-docs:
         specifier: ^2.13.4
         version: 2.13.4(next@14.2.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(nextra@2.13.4(next@14.2.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
->>>>>>> 321538bf (docs: Add docs)
       react:
         specifier: ^18.3.1
         version: 18.3.1
       react-dom:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
-<<<<<<< HEAD
-=======
       sharp:
         specifier: ^0.33.4
         version: 0.33.4
->>>>>>> 321538bf (docs: Add docs)
       tailwind-merge:
         specifier: ^2.3.0
         version: 2.3.0
       tailwindcss-animate:
         specifier: ^1.0.7
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        version: 1.0.7(tailwindcss@3.4.4(ts-node@10.9.2(@types/node@20.14.2)(typescript@5.4.5)))
-    devDependencies:
-      '@types/mdx':
-        specifier: ^2.0.13
-        version: 2.0.13
-      '@types/node':
-        specifier: ^20.14.2
-        version: 20.14.2
-      '@types/react':
-        specifier: ^18.3.3
-=======
-        version: 1.0.7(tailwindcss@3.4.4(ts-node@10.9.2(@swc/core@1.6.5)(@types/node@20.14.8)(typescript@5.5.2)))
-=======
         version: 1.0.7(tailwindcss@3.4.4(ts-node@10.9.2(@types/node@20.14.8)(typescript@5.5.2)))
->>>>>>> ca4a53fc (perf(frontend): Move user settings to package)
-=======
-        version: 1.0.7(tailwindcss@3.4.4(ts-node@10.9.2(@swc/core@1.6.5)(@types/node@20.14.8)(typescript@5.5.2)))
->>>>>>> 0ab072cd (refactor(backend): Restore paths)
-=======
-        version: 1.0.7(tailwindcss@3.4.4(ts-node@10.9.2(@types/node@20.14.8)(typescript@5.5.2)))
->>>>>>> f973ba0f (perf(frontend): Move plugins pages admin to package)
     devDependencies:
       '@types/node':
         specifier: ^20.12.12
         version: 20.14.8
       '@types/react':
         specifier: ^18.3.2
->>>>>>> 321538bf (docs: Add docs)
         version: 18.3.3
       '@types/react-dom':
         specifier: ^18.3.0
@@ -321,17 +202,6 @@ importers:
       postcss:
         specifier: ^8.4.38
         version: 8.4.38
-<<<<<<< HEAD
-      tailwindcss:
-        specifier: ^3.4.4
-        version: 3.4.4(ts-node@10.9.2(@types/node@20.14.2)(typescript@5.4.5))
-      typescript:
-        specifier: ^5.4.5
-        version: 5.4.5
-
-=======
->>>>>>> 9e049073 (perf(docs): Remove docs)
-=======
       prettier:
         specifier: ^3.2.5
         version: 3.3.2
@@ -342,7 +212,6 @@ importers:
         specifier: ^5.4.5
         version: 5.5.2
 
->>>>>>> 321538bf (docs: Add docs)
   apps/frontend:
     dependencies:
       '@dnd-kit/core':
@@ -406,33 +275,8 @@ importers:
         specifier: 15.0.0-canary.46
         version: 15.0.0-canary.46(babel-plugin-react-compiler@0.0.0-experimental-696af53-20240625)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
       next-intl:
-<<<<<<< HEAD
-        specifier: ^3.15.2
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        version: 3.15.2(next@15.0.0-canary.44(babel-plugin-react-compiler@0.0.0-experimental-938cd9a-20240601)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0)
-=======
-        version: 3.15.2(next@15.0.0-canary.46(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0)
->>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
-=======
-        version: 3.15.2(next@15.0.0-canary.46(babel-plugin-react-compiler@0.0.0-experimental-696af53-20240625)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0)
->>>>>>> ca4a53fc (perf(frontend): Move user settings to package)
-=======
-        version: 3.15.2(next@15.0.0-canary.46(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0)
->>>>>>> 0ab072cd (refactor(backend): Restore paths)
-=======
-        version: 3.15.2(next@15.0.0-canary.46(babel-plugin-react-compiler@0.0.0-experimental-696af53-20240625)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0)
->>>>>>> f973ba0f (perf(frontend): Move plugins pages admin to package)
-=======
         specifier: ^3.15.3
-<<<<<<< HEAD
-        version: 3.15.3(next@15.0.0-canary.46(babel-plugin-react-compiler@0.0.0-experimental-696af53-20240625)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0)
->>>>>>> ea73e4fc (perf(frontend): Improve graphql paths)
-=======
         version: 3.15.3(next@15.0.0-canary.46(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0)
->>>>>>> bafd0554 (chore: Change npm version when bump version)
       next-themes:
         specifier: ^0.3.0
         version: 0.3.0(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
@@ -547,19 +391,7 @@ importers:
         version: 3.4.4(ts-node@10.9.2(@swc/core@1.6.5)(@types/node@20.14.9)(typescript@5.5.2))
       ts-node:
         specifier: ^10.9.2
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        version: 10.9.2(@swc/core@1.6.5(@swc/helpers@0.5.11))(@types/node@20.14.8)(typescript@5.5.2)
-=======
         version: 10.9.2(@swc/core@1.6.5)(@types/node@20.14.9)(typescript@5.5.2)
->>>>>>> ea73e4fc (perf(frontend): Improve graphql paths)
-=======
-        version: 10.9.2(@swc/core@1.6.5(@swc/helpers@0.5.11))(@types/node@20.14.9)(typescript@5.5.2)
->>>>>>> 6dcd1de7 (feat: Add create-vitnode-app)
-=======
-        version: 10.9.2(@swc/core@1.6.5)(@types/node@20.14.9)(typescript@5.5.2)
->>>>>>> bafd0554 (chore: Change npm version when bump version)
       typescript:
         specifier: ^5.5.2
         version: 5.5.2
@@ -917,66 +749,17 @@ importers:
         specifier: ^0.399.0
         version: 0.399.0(react@19.0.0-rc.0)
       next:
-<<<<<<< HEAD
-        specifier: 15.0.0-canary.44
-        version: 15.0.0-canary.44(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
-      next-intl:
-        specifier: ^3.15.2
-        version: 3.15.2(next@15.0.0-canary.44(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0)
-=======
         specifier: 15.0.0-canary.46
         version: 15.0.0-canary.46(babel-plugin-react-compiler@0.0.0-experimental-696af53-20240625)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
       next-intl:
-<<<<<<< HEAD
-        specifier: ^3.15.2
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        version: 3.15.2(next@15.0.0-canary.46(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0)
->>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
-=======
-        version: 3.15.2(next@15.0.0-canary.46(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0)
->>>>>>> ca4a53fc (perf(frontend): Move user settings to package)
-=======
-        version: 3.15.2(next@15.0.0-canary.46(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0)
->>>>>>> 0ab072cd (refactor(backend): Restore paths)
-=======
-        version: 3.15.2(next@15.0.0-canary.46(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0)
->>>>>>> f973ba0f (perf(frontend): Move plugins pages admin to package)
-=======
         specifier: ^3.15.3
-<<<<<<< HEAD
-        version: 3.15.3(next@15.0.0-canary.46(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0)
->>>>>>> ea73e4fc (perf(frontend): Improve graphql paths)
-=======
         version: 3.15.3(next@15.0.0-canary.46(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0)
->>>>>>> bafd0554 (chore: Change npm version when bump version)
       next-themes:
         specifier: ^0.3.0
         version: 0.3.0(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
       nextjs-toploader:
         specifier: ^1.6.12
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        version: 1.6.12(next@15.0.0-canary.44(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
-=======
         version: 1.6.12(next@15.0.0-canary.46(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
->>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
-=======
-        version: 1.6.12(next@15.0.0-canary.46(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
->>>>>>> ca4a53fc (perf(frontend): Move user settings to package)
-=======
-        version: 1.6.12(next@15.0.0-canary.46(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
->>>>>>> 0ab072cd (refactor(backend): Restore paths)
-=======
-        version: 1.6.12(next@15.0.0-canary.46(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
->>>>>>> f973ba0f (perf(frontend): Move plugins pages admin to package)
-=======
-        version: 1.6.12(next@15.0.0-canary.46(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
->>>>>>> bafd0554 (chore: Change npm version when bump version)
       nprogress:
         specifier: ^0.2.0
         version: 0.2.0
@@ -1076,29 +859,10 @@ importers:
         version: 2.3.0
       ts-node:
         specifier: ^10.9.2
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        version: 10.9.2(@swc/core@1.6.5(@swc/helpers@0.5.11))(@types/node@20.14.8)(typescript@5.5.2)
-=======
-        version: 10.9.2(@swc/core@1.6.5)(@types/node@20.14.8)(typescript@5.5.2)
-      tsup:
-        specifier: ^8.1.0
-        version: 8.1.0(@swc/core@1.6.5)(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.6.5)(@types/node@20.14.8)(typescript@5.5.2))(typescript@5.5.2)
->>>>>>> ef64f85b (feat: Add tsup for build scripts)
-=======
         version: 10.9.2(@swc/core@1.6.5)(@types/node@20.14.9)(typescript@5.5.2)
-=======
-        version: 10.9.2(@swc/core@1.6.5(@swc/helpers@0.5.11))(@types/node@20.14.9)(typescript@5.5.2)
->>>>>>> 6dcd1de7 (feat: Add create-vitnode-app)
-=======
-        version: 10.9.2(@swc/core@1.6.5)(@types/node@20.14.9)(typescript@5.5.2)
->>>>>>> bafd0554 (chore: Change npm version when bump version)
       tsup:
         specifier: ^8.1.0
         version: 8.1.0(@swc/core@1.6.5)(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.6.5)(@types/node@20.14.9)(typescript@5.5.2))(typescript@5.5.2)
->>>>>>> ea73e4fc (perf(frontend): Improve graphql paths)
       typescript:
         specifier: ^5.5.2
         version: 5.5.2
@@ -2450,8 +2214,6 @@ packages:
     peerDependencies:
       graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
 
-<<<<<<< HEAD
-=======
   '@headlessui/react@1.7.19':
     resolution: {integrity: sha512-Ll+8q3OlMJfJbAKM/+/Y2q6PPYbryqNTXDbryx7SXLIDamkF6iQFbriYHga0dY44PvDhvvBWCx1Xj4U5+G4hOw==}
     engines: {node: '>=10'}
@@ -2459,13 +2221,6 @@ packages:
       react: ^16 || ^17 || ^18
       react-dom: ^16 || ^17 || ^18
 
-  '@hookform/devtools@4.3.1':
-    resolution: {integrity: sha512-CrWxEoHQZaOXJZVQ8KBgOuAa8p2LI8M0DAN5GTRTmdCieRwFVjVDEmuTAVazWVRRkpEQSgSt3KYp7VmmqXdEnw==}
-    peerDependencies:
-      react: ^16.8.0 || ^17 || ^18
-      react-dom: ^16.8.0 || ^17 || ^18
-
->>>>>>> 321538bf (docs: Add docs)
   '@hookform/resolvers@3.6.0':
     resolution: {integrity: sha512-UBcpyOX3+RR+dNnqBd0lchXpoL8p4xC21XP8H6Meb8uve5Br1GCnmg0PcBoKKqPKgGu9GHQ/oygcmPrQhetwqw==}
     peerDependencies:
@@ -2879,21 +2634,11 @@ packages:
   '@next/env@14.1.4':
     resolution: {integrity: sha512-e7X7bbn3Z6DWnDi75UWn+REgAbLEqxI8Tq2pkFOFAMpWAWApz/YCUhtWMWn410h8Q2fYiYL7Yg5OlxMOCfFjJQ==}
 
-<<<<<<< HEAD
-  '@next/env@15.0.0-canary.44':
-    resolution: {integrity: sha512-JN2qBCiZKTSVf8jI6x/6vBaFiqVL5v8XZnzOPzXP4BvcmtdWtaPKmmoQ4uIDZa3EribY+E0awZF8m+jVh9FDKw==}
-=======
   '@next/env@14.2.4':
     resolution: {integrity: sha512-3EtkY5VDkuV2+lNmKlbkibIJxcO4oIHEhBWne6PaAp+76J9KoSsGvNikp6ivzAT8dhhBMYrm6op2pS1ApG0Hzg==}
 
-<<<<<<< HEAD
-  '@next/env@15.0.0-canary.28':
-    resolution: {integrity: sha512-0ITy8GHxw1UnCe6qr65gnGyHraY3f9eifRjdKybFvAGXHhakkepwIVPuQDBYAOwa3bnP7dgzZpk2VGF9jxXzPA==}
->>>>>>> 321538bf (docs: Add docs)
-=======
   '@next/env@15.0.0-canary.46':
     resolution: {integrity: sha512-ahFr4BNVF+ajZnZP9tesGWiMN8onxWyUMU4Fx+pHecp812TmUcRori8KgU6q5UEfGnB3GfLYExaRxN0oheQaLQ==}
->>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
 
   '@next/eslint-plugin-next@15.0.0-canary.46':
     resolution: {integrity: sha512-NxkE2nUzFVadPZWhFHzqiUrVQEBhCe3YrkxNVmtu8jPyEa6uCi+kqr1sM4cKtRM7V/RY2jZp8QErz3XCezM+6g==}
@@ -2904,30 +2649,14 @@ packages:
     cpu: [arm64]
     os: [darwin]
 
-<<<<<<< HEAD
-  '@next/swc-darwin-arm64@15.0.0-canary.44':
-    resolution: {integrity: sha512-ZreNs+jJxC/aI3M7YXdZU3WSXIlWciE/hLezW0tiFhsX6OEBOeUUAwrG8s22tM1Winzisc+MYgABjbqHZ+l4zw==}
-=======
   '@next/swc-darwin-arm64@14.2.4':
     resolution: {integrity: sha512-AH3mO4JlFUqsYcwFUHb1wAKlebHU/Hv2u2kb1pAuRanDZ7pD/A/KPD98RHZmwsJpdHQwfEc/06mgpSzwrJYnNg==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [darwin]
 
-<<<<<<< HEAD
-  '@next/swc-darwin-arm64@15.0.0-canary.28':
-    resolution: {integrity: sha512-wKocn87O5NzHsBQGiZGgvCkU5awfY35o5FIQZTZ2xXnERHJUbE4bAeYhEf/kg9tZtG2Mqw4CItUVtS0Q0L0XMg==}
-    engines: {node: '>= 10'}
-    cpu: [arm64]
-    os: [darwin]
-
-  '@next/swc-darwin-arm64@15.0.0-rc.0':
-    resolution: {integrity: sha512-4OpTXvAWcSabXA5d688zdUwa3sfT9QrLnHMdpv4q2UDnnuqmOI0xLb6lrOxwpi+vHJNkneuNLqyc5HGBhkqL6A==}
->>>>>>> 321538bf (docs: Add docs)
-=======
   '@next/swc-darwin-arm64@15.0.0-canary.46':
     resolution: {integrity: sha512-42fIDLl5Sm9klKZm5TH8H3CEms/bJ8xy1S5g5EW37l4xVbwfOV5q27NbXFIUAkAqHoXaMgzC/Yck/Vk1Z7b7eQ==}
->>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [darwin]
@@ -2938,30 +2667,14 @@ packages:
     cpu: [x64]
     os: [darwin]
 
-<<<<<<< HEAD
-  '@next/swc-darwin-x64@15.0.0-canary.44':
-    resolution: {integrity: sha512-lKWD4tGDxWnskIww4mfLyBw9rHNRAxhavSbi1Yfx0XhKSC6FJcpM5KKTQgu4vXhWZGlSFDVosVv0i+khXMJ8VQ==}
-=======
   '@next/swc-darwin-x64@14.2.4':
     resolution: {integrity: sha512-QVadW73sWIO6E2VroyUjuAxhWLZWEpiFqHdZdoQ/AMpN9YWGuHV8t2rChr0ahy+irKX5mlDU7OY68k3n4tAZTg==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [darwin]
 
-<<<<<<< HEAD
-  '@next/swc-darwin-x64@15.0.0-canary.28':
-    resolution: {integrity: sha512-vuwicSLOtxXOj2OIyDjNxkJlzQTIOwmX+KmZZinMG22N1dpYWT2pxYK5ZJVQGa1SSKVsC/vxu1zG963aa2Oq8g==}
-    engines: {node: '>= 10'}
-    cpu: [x64]
-    os: [darwin]
-
-  '@next/swc-darwin-x64@15.0.0-rc.0':
-    resolution: {integrity: sha512-/TD8M9DT244uhtFA8P/0DUbM7ftg2zio6yOo6ajV16vNjkcug9Kt9//Wa4SrJjWcsGZpViLctOlwn3/6JFAuAA==}
->>>>>>> 321538bf (docs: Add docs)
-=======
   '@next/swc-darwin-x64@15.0.0-canary.46':
     resolution: {integrity: sha512-9c3dArYniDMTfq2TM4dg8rbJp3hFWHq1KAYPsbmcm9b1n9twJEd/LnNLLrpN4ITk+f8XXGRSWZ5FerhQkDtDig==}
->>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [darwin]
@@ -2972,30 +2685,14 @@ packages:
     cpu: [arm64]
     os: [linux]
 
-<<<<<<< HEAD
-  '@next/swc-linux-arm64-gnu@15.0.0-canary.44':
-    resolution: {integrity: sha512-LtZ30nLi3heZb4nEje2OBu+WfrXTzvo0YIoqATEe0lE4CLtMGNRg9pt9/i5+AhWL6G3LbnkshT3Fp17HdbPdew==}
-=======
   '@next/swc-linux-arm64-gnu@14.2.4':
     resolution: {integrity: sha512-KT6GUrb3oyCfcfJ+WliXuJnD6pCpZiosx2X3k66HLR+DMoilRb76LpWPGb4tZprawTtcnyrv75ElD6VncVamUQ==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
 
-<<<<<<< HEAD
-  '@next/swc-linux-arm64-gnu@15.0.0-canary.28':
-    resolution: {integrity: sha512-Do3PxwAyuSyIEttDbUUsOqS9d/IZCwMKBNBrmc2dg6eqC/GQWnGSDKRfKGNfQnGVia2Z5EGITIrsBcEelc/g6Q==}
-    engines: {node: '>= 10'}
-    cpu: [arm64]
-    os: [linux]
-
-  '@next/swc-linux-arm64-gnu@15.0.0-rc.0':
-    resolution: {integrity: sha512-3VTO32938AcqOlOI/U61/MIpeYrblP22VU1GrgmMQJozsAXEJgLCgf3wxZtn61/FG4Yc0tp7rPZE2t1fIGe0+w==}
->>>>>>> 321538bf (docs: Add docs)
-=======
   '@next/swc-linux-arm64-gnu@15.0.0-canary.46':
     resolution: {integrity: sha512-zTBQLNLv4DJfHZWLN4fC7IaSH3OV1QYNeqix4XjrVVXJ/G1A0F49SaVvpUMOM/APOsPBKTOzukaAJ39q7PkJmQ==}
->>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
@@ -3006,30 +2703,14 @@ packages:
     cpu: [arm64]
     os: [linux]
 
-<<<<<<< HEAD
-  '@next/swc-linux-arm64-musl@15.0.0-canary.44':
-    resolution: {integrity: sha512-v40WASdcOmka94qhxsz8t+iGkwrkiWVUnxJuTiAH2QaeGrqRxEBqj7QpacdrV1H9SNLNE2j4LX8yh8cMNR7smg==}
-=======
   '@next/swc-linux-arm64-musl@14.2.4':
     resolution: {integrity: sha512-Alv8/XGSs/ytwQcbCHwze1HmiIkIVhDHYLjczSVrf0Wi2MvKn/blt7+S6FJitj3yTlMwMxII1gIJ9WepI4aZ/A==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
 
-<<<<<<< HEAD
-  '@next/swc-linux-arm64-musl@15.0.0-canary.28':
-    resolution: {integrity: sha512-WAlgyaifh6wg4dZgv4CRyXdvVVqSwY/xfdA+qdbf+Z3Sbs6FMO+etXhXqkwnujlpi3uiOEY9IizrwFlikCXt1A==}
-    engines: {node: '>= 10'}
-    cpu: [arm64]
-    os: [linux]
-
-  '@next/swc-linux-arm64-musl@15.0.0-rc.0':
-    resolution: {integrity: sha512-0kDnxM3AfrrHFJ/wTkjkv7cVHIaGwv+CzDg9lL2BoLEM4kMQhH20DTsBOMqpTpo1K2KCg67LuTGd3QOITT5uFQ==}
->>>>>>> 321538bf (docs: Add docs)
-=======
   '@next/swc-linux-arm64-musl@15.0.0-canary.46':
     resolution: {integrity: sha512-cPvHRaMDg3bt2uaPpGvc5xIUGsUg9NbS++ujMxwKVuo0VPBmMzyXjn+g/bro7yQR3YM8bYrQiPi0Cy2rPMXMmg==}
->>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
@@ -3040,30 +2721,14 @@ packages:
     cpu: [x64]
     os: [linux]
 
-<<<<<<< HEAD
-  '@next/swc-linux-x64-gnu@15.0.0-canary.44':
-    resolution: {integrity: sha512-+ZLMpkG8I1NzsWBmd6+lkHp2hEYld7wLRm8JUU6aRZFUfOoVNpovnGZDOAl4bvc6gz6BeL6Z9DZooHsqpJjeow==}
-=======
   '@next/swc-linux-x64-gnu@14.2.4':
     resolution: {integrity: sha512-ze0ShQDBPCqxLImzw4sCdfnB3lRmN3qGMB2GWDRlq5Wqy4G36pxtNOo2usu/Nm9+V2Rh/QQnrRc2l94kYFXO6Q==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
 
-<<<<<<< HEAD
-  '@next/swc-linux-x64-gnu@15.0.0-canary.28':
-    resolution: {integrity: sha512-F7w21iUF0YQB9CNEbp06mqOl/XPGtQpR69Jcu4fpcWdd7iKe2IxGJbfyNfmTAUf+S186kYQuSNgsNBPPPuEqxw==}
-    engines: {node: '>= 10'}
-    cpu: [x64]
-    os: [linux]
-
-  '@next/swc-linux-x64-gnu@15.0.0-rc.0':
-    resolution: {integrity: sha512-fPMNahzqYFjm5h0ncJ5+F3NrShmWhpusM+zrQl01MMU0Ed5xsL4pJJDSuXV4wPkNUSjCP3XstTjxR5kBdO4juQ==}
->>>>>>> 321538bf (docs: Add docs)
-=======
   '@next/swc-linux-x64-gnu@15.0.0-canary.46':
     resolution: {integrity: sha512-Snt1dijo+6cmgVs/6TsvNJyw71fE4yLSURQ931TA2SMU1r6nAWqdyOWqPFxRKbOAXqAknP5hdoBR/hnEbFwH5g==}
->>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
@@ -3074,30 +2739,14 @@ packages:
     cpu: [x64]
     os: [linux]
 
-<<<<<<< HEAD
-  '@next/swc-linux-x64-musl@15.0.0-canary.44':
-    resolution: {integrity: sha512-Szn3f/5xRidiBlOtu4+IIAQjgqqe36+2XXVRskfedCzIgWRo+2TacRLd4lzW4aeUS5ahyApyKH9ha8UQbXxDaw==}
-=======
   '@next/swc-linux-x64-musl@14.2.4':
     resolution: {integrity: sha512-8dwC0UJoc6fC7PX70csdaznVMNr16hQrTDAMPvLPloazlcaWfdPogq+UpZX6Drqb1OBlwowz8iG7WR0Tzk/diQ==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
 
-<<<<<<< HEAD
-  '@next/swc-linux-x64-musl@15.0.0-canary.28':
-    resolution: {integrity: sha512-YkrgRQu+f4Jb0kz7oO09lQlR6TqOV573ELV//yCmjl+Hc89rSTp3PDVScNnf5UWJgscDC1vX7fcByp/lA8E57A==}
-    engines: {node: '>= 10'}
-    cpu: [x64]
-    os: [linux]
-
-  '@next/swc-linux-x64-musl@15.0.0-rc.0':
-    resolution: {integrity: sha512-7/FLgOqrrQAxOVQrxfr3bGgZ83pSCmc2S3TXBILnHw0S8qLxmFjhSjH5ogaDmjrES/PSYMaX1FsP5Af88hp7Gw==}
->>>>>>> 321538bf (docs: Add docs)
-=======
   '@next/swc-linux-x64-musl@15.0.0-canary.46':
     resolution: {integrity: sha512-QEQA+r37Qw1+XhxqLt1Pk7ZMcHRUNMp1lmMmmo18kM16GfxGPu7tPT2XtQcObcvMeH0u6hYwwzzuVrB5BQo2HA==}
->>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
@@ -3108,30 +2757,14 @@ packages:
     cpu: [arm64]
     os: [win32]
 
-<<<<<<< HEAD
-  '@next/swc-win32-arm64-msvc@15.0.0-canary.44':
-    resolution: {integrity: sha512-swu4ZbelQ9uMh+HTlBgH2r1fkNDbHS1uiEpDI7wL1UcrwKEoovNvZMZqHWk9YeMTXC9cyJDHu5akaQn7PdQNQQ==}
-=======
   '@next/swc-win32-arm64-msvc@14.2.4':
     resolution: {integrity: sha512-jxyg67NbEWkDyvM+O8UDbPAyYRZqGLQDTPwvrBBeOSyVWW/jFQkQKQ70JDqDSYg1ZDdl+E3nkbFbq8xM8E9x8A==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [win32]
 
-<<<<<<< HEAD
-  '@next/swc-win32-arm64-msvc@15.0.0-canary.28':
-    resolution: {integrity: sha512-W/zMWyjyQIqTH6VitQs3YhkM4md1dcZyIVLEVUGj5QhsOl+/UW1qe2Y4YUKvQPnCbMcGu0Vk/dhiyIkv/B6OXg==}
-    engines: {node: '>= 10'}
-    cpu: [arm64]
-    os: [win32]
-
-  '@next/swc-win32-arm64-msvc@15.0.0-rc.0':
-    resolution: {integrity: sha512-5wcqoYHh7hbdghjH6Xs3i5/f0ov+i1Xw2E3O+BzZNESYVLgCM1q7KJu5gdGFoXA2gz5XaKF/VBcYHikLzyjgmA==}
->>>>>>> 321538bf (docs: Add docs)
-=======
   '@next/swc-win32-arm64-msvc@15.0.0-canary.46':
     resolution: {integrity: sha512-0BxRw87UV98DLrfv3+1r9KY29tvcRZ8iKKKubY/N/d82RFUx3J9/BiSCcacX1yckPvKSDFRUP3ukKzarIuDpXA==}
->>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [win32]
@@ -3142,30 +2775,14 @@ packages:
     cpu: [ia32]
     os: [win32]
 
-<<<<<<< HEAD
-  '@next/swc-win32-ia32-msvc@15.0.0-canary.44':
-    resolution: {integrity: sha512-J0V0zTKxzjLQIPtwgUoVwCb/6mn7w/aNQNDAk9yxax6a8ff4kL6fg/72lqkTT/GgSOOYhI1FZraD0k1S99fJjg==}
-=======
   '@next/swc-win32-ia32-msvc@14.2.4':
     resolution: {integrity: sha512-twrmN753hjXRdcrZmZttb/m5xaCBFa48Dt3FbeEItpJArxriYDunWxJn+QFXdJ3hPkm4u7CKxncVvnmgQMY1ag==}
     engines: {node: '>= 10'}
     cpu: [ia32]
     os: [win32]
 
-<<<<<<< HEAD
-  '@next/swc-win32-ia32-msvc@15.0.0-canary.28':
-    resolution: {integrity: sha512-JbxGVmHN0rdVp7l7qX/HkXM/rgehRiHExFaJza+7iCJv/yYoB+rMvSPJnuSNq+lNMEJUc4y/iQ8r0Bja8t7BkQ==}
-    engines: {node: '>= 10'}
-    cpu: [ia32]
-    os: [win32]
-
-  '@next/swc-win32-ia32-msvc@15.0.0-rc.0':
-    resolution: {integrity: sha512-/hqOmYRTvtBPToE4Dbl9n+sLYU7DPd52R+TtjIrrEzTMgFo2/d7un3sD7GKmb2OwOj/ExyGv6Bd/JzytBVxXlw==}
->>>>>>> 321538bf (docs: Add docs)
-=======
   '@next/swc-win32-ia32-msvc@15.0.0-canary.46':
     resolution: {integrity: sha512-CHjNDxkjHQhx0d3Rrlld+V7M5VsYnE0IMasuWF7LiA4AwkKIeuOxrgMKfwGWLYq5Y3fZ8JyqWx/28qc9GTydqA==}
->>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
     engines: {node: '>= 10'}
     cpu: [ia32]
     os: [win32]
@@ -3176,30 +2793,14 @@ packages:
     cpu: [x64]
     os: [win32]
 
-<<<<<<< HEAD
-  '@next/swc-win32-x64-msvc@15.0.0-canary.44':
-    resolution: {integrity: sha512-/L9F8uf2Dy2ot1GFxlvMVyXsoSj8O2ZIry0OpHz4jA+6AI7DBbHD915pGXE5TUsuE9PIzNtw3vikgcLEDXIyzA==}
-=======
   '@next/swc-win32-x64-msvc@14.2.4':
     resolution: {integrity: sha512-tkLrjBzqFTP8DVrAAQmZelEahfR9OxWpFR++vAI9FBhCiIxtwHwBHC23SBHCTURBtwB4kc/x44imVOnkKGNVGg==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [win32]
 
-<<<<<<< HEAD
-  '@next/swc-win32-x64-msvc@15.0.0-canary.28':
-    resolution: {integrity: sha512-+MEW2d87/hOU8gM4Uw+iwCuWK1yAk6SbcQWByB0o4geEVJEK7j8J3agdjFlHZWiabhljyf2VYbfPu4Xj3nRmtA==}
-    engines: {node: '>= 10'}
-    cpu: [x64]
-    os: [win32]
-
-  '@next/swc-win32-x64-msvc@15.0.0-rc.0':
-    resolution: {integrity: sha512-2Jly5nShvCUzzngP3RzdQ3JcuEcHcnIEvkvZDCXqFAK+bWks4+qOkEUO1QIAERQ99J5J9/1AN/8zFBme3Mm57A==}
->>>>>>> 321538bf (docs: Add docs)
-=======
   '@next/swc-win32-x64-msvc@15.0.0-canary.46':
     resolution: {integrity: sha512-2Z+X4fMKFI6NXgS+1Sqe/hp+XkU1cbU9rJ9lJkdj0pmY/Q2Ch0438Vm2hx0SGw0u8H8oBonmQEEJJZotXa9kIA==}
->>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [win32]
@@ -3285,48 +2886,14 @@ packages:
   '@radix-ui/number@1.1.0':
     resolution: {integrity: sha512-V3gRzhVNU1ldS5XhAPTom1fOIo4ccrjjJgmE+LI2h/WaFpHmx0MQApT+KZHnx8abG6Avtfcz4WoEciMnpFT3HQ==}
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-  '@radix-ui/number@1.1.0':
-    resolution: {integrity: sha512-V3gRzhVNU1ldS5XhAPTom1fOIo4ccrjjJgmE+LI2h/WaFpHmx0MQApT+KZHnx8abG6Avtfcz4WoEciMnpFT3HQ==}
-
   '@radix-ui/primitive@1.0.1':
     resolution: {integrity: sha512-yQ8oGX2GVsEYMWGxcovu1uGWPCxV5BFfeeYxqPmuAzUyLT9qmaMXSAhXpb0WrspIeqYzdJpkh2vHModJPgRIaw==}
-=======
-  "@radix-ui/primitive@1.0.1":
-    resolution:
-      {
-        integrity: sha512-yQ8oGX2GVsEYMWGxcovu1uGWPCxV5BFfeeYxqPmuAzUyLT9qmaMXSAhXpb0WrspIeqYzdJpkh2vHModJPgRIaw==,
-      }
->>>>>>> 3ba70325 (refactor(frontend): Change package name form @vitnode/frontend to vitnode-frontend)
-=======
-  '@radix-ui/primitive@1.0.1':
-    resolution: {integrity: sha512-yQ8oGX2GVsEYMWGxcovu1uGWPCxV5BFfeeYxqPmuAzUyLT9qmaMXSAhXpb0WrspIeqYzdJpkh2vHModJPgRIaw==}
->>>>>>> a9a3e1df (perf(frontend): Move accordion, alert-dialog, loader & button to package)
 
   '@radix-ui/primitive@1.1.0':
     resolution: {integrity: sha512-4Z8dn6Upk0qk4P74xBhZ6Hd/w0mPEzOOLxy4xiPXOXqjF7jZS0VAKk7/x/H6FyY2zCkYJqePf1G5KmkmNJ4RBA==}
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
   '@radix-ui/react-accordion@1.2.0':
     resolution: {integrity: sha512-HJOzSX8dQqtsp/3jVxCU3CXEONF7/2jlGAB28oX8TTw1Dz8JYbEI1UcL8355PuLBE41/IRRMvCw7VkiK/jcUOQ==}
-=======
-  '@radix-ui/react-accordion@1.1.2':
-    resolution: {integrity: sha512-fDG7jcoNKVjSK6yfmuAs0EnPDro0WMXIhMtXdTBWqEioVW206ku+4Lw07e+13lUkFkpoEQ2PdeMIAGpdqEAmDg==}
->>>>>>> a24fce42 (docs: Add docs by fumadocs)
-=======
-  "@radix-ui/react-accordion@1.2.0":
-    resolution:
-      {
-        integrity: sha512-HJOzSX8dQqtsp/3jVxCU3CXEONF7/2jlGAB28oX8TTw1Dz8JYbEI1UcL8355PuLBE41/IRRMvCw7VkiK/jcUOQ==,
-      }
->>>>>>> 3ba70325 (refactor(frontend): Change package name form @vitnode/frontend to vitnode-frontend)
-=======
-  '@radix-ui/react-accordion@1.2.0':
-    resolution: {integrity: sha512-HJOzSX8dQqtsp/3jVxCU3CXEONF7/2jlGAB28oX8TTw1Dz8JYbEI1UcL8355PuLBE41/IRRMvCw7VkiK/jcUOQ==}
->>>>>>> a9a3e1df (perf(frontend): Move accordion, alert-dialog, loader & button to package)
     peerDependencies:
       '@types/react': '*'
       '@types/react-dom': '*'
@@ -3797,37 +3364,8 @@ packages:
       '@types/react-dom':
         optional: true
 
-<<<<<<< HEAD
-<<<<<<< HEAD
   '@radix-ui/react-primitive@2.0.0':
     resolution: {integrity: sha512-ZSpFm0/uHa8zTvKBDjLFWLo8dkr4MBsiDLz0g3gMUwqgLHz9rTaRRGYDgvZPtBJgYCBKXkS9fzmoySgr8CO6Cw==}
-<<<<<<< HEAD
-=======
-    peerDependencies:
-      '@types/react': '*'
-      '@types/react-dom': '*'
-      react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
-      react-dom: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
-    peerDependenciesMeta:
-      '@types/react':
-        optional: true
-      '@types/react-dom':
-        optional: true
-
-  '@radix-ui/react-progress@1.0.3':
-    resolution: {integrity: sha512-5G6Om/tYSxjSeEdrb1VfKkfZfn/1IlPWd731h2RfPuSbIfNUgfqAwbKfJCg/PP6nuUCTrYzalwHSpSinoWoCag==}
->>>>>>> a24fce42 (docs: Add docs by fumadocs)
-=======
-  "@radix-ui/react-primitive@2.0.0":
-    resolution:
-      {
-        integrity: sha512-ZSpFm0/uHa8zTvKBDjLFWLo8dkr4MBsiDLz0g3gMUwqgLHz9rTaRRGYDgvZPtBJgYCBKXkS9fzmoySgr8CO6Cw==,
-      }
->>>>>>> 3ba70325 (refactor(frontend): Change package name form @vitnode/frontend to vitnode-frontend)
-=======
-  '@radix-ui/react-primitive@2.0.0':
-    resolution: {integrity: sha512-ZSpFm0/uHa8zTvKBDjLFWLo8dkr4MBsiDLz0g3gMUwqgLHz9rTaRRGYDgvZPtBJgYCBKXkS9fzmoySgr8CO6Cw==}
->>>>>>> a9a3e1df (perf(frontend): Move accordion, alert-dialog, loader & button to package)
     peerDependencies:
       '@types/react': '*'
       '@types/react-dom': '*'
@@ -3878,25 +3416,8 @@ packages:
       '@types/react-dom':
         optional: true
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
   '@radix-ui/react-roving-focus@1.1.0':
     resolution: {integrity: sha512-EA6AMGeq9AEeQDeSH0aZgG198qkfHSbvWTf1HvoDmOB5bBG/qTxjYMWUKMnYiV6J/iP/J8MEFSuB2zRU2n7ODA==}
-=======
-  '@radix-ui/react-scroll-area@1.1.0':
-    resolution: {integrity: sha512-9ArIZ9HWhsrfqS765h+GZuLoxaRHD/j0ZWOWilsCvYTpYJp8XwCqNG7Dt9Nu/TItKOdgLGkOPCodQvDc+UMwYg==}
-=======
-  "@radix-ui/react-roving-focus@1.1.0":
-    resolution:
-      {
-        integrity: sha512-EA6AMGeq9AEeQDeSH0aZgG198qkfHSbvWTf1HvoDmOB5bBG/qTxjYMWUKMnYiV6J/iP/J8MEFSuB2zRU2n7ODA==,
-      }
->>>>>>> 3ba70325 (refactor(frontend): Change package name form @vitnode/frontend to vitnode-frontend)
-=======
-  '@radix-ui/react-roving-focus@1.1.0':
-    resolution: {integrity: sha512-EA6AMGeq9AEeQDeSH0aZgG198qkfHSbvWTf1HvoDmOB5bBG/qTxjYMWUKMnYiV6J/iP/J8MEFSuB2zRU2n7ODA==}
->>>>>>> a9a3e1df (perf(frontend): Move accordion, alert-dialog, loader & button to package)
     peerDependencies:
       '@types/react': '*'
       '@types/react-dom': '*'
@@ -3908,43 +3429,8 @@ packages:
       '@types/react-dom':
         optional: true
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-  '@radix-ui/react-select@2.0.0':
-    resolution: {integrity: sha512-RH5b7af4oHtkcHS7pG6Sgv5rk5Wxa7XI8W5gvB1N/yiuDGZxko1ynvOiVhFM7Cis2A8zxF9bTOUVbRDzPepe6w==}
->>>>>>> a24fce42 (docs: Add docs by fumadocs)
-    peerDependencies:
-      '@types/react': '*'
-      '@types/react-dom': '*'
-      react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
-      react-dom: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
-    peerDependenciesMeta:
-      '@types/react':
-        optional: true
-      '@types/react-dom':
-        optional: true
-
-=======
->>>>>>> 9e049073 (perf(docs): Remove docs)
-  '@radix-ui/react-select@2.1.0':
-    resolution: {integrity: sha512-g6uR+e9o4EB3laMekSDEEKpwRmoZdfiZmZSfc1fO4A1EAVCukZplyNB2TIrNao5cw9HQOyhhy2W1ZQo72RXrJg==}
-=======
   '@radix-ui/react-select@2.1.1':
     resolution: {integrity: sha512-8iRDfyLtzxlprOo9IicnzvpsO1wNCkuwzzCM+Z5Rb5tNOpCdMvcc2AkzX0Fz+Tz9v6NJ5B/7EEgyZveo4FBRfQ==}
->>>>>>> 0aa27abf (chore: Update packages)
-=======
-  "@radix-ui/react-select@2.1.1":
-    resolution:
-      {
-        integrity: sha512-8iRDfyLtzxlprOo9IicnzvpsO1wNCkuwzzCM+Z5Rb5tNOpCdMvcc2AkzX0Fz+Tz9v6NJ5B/7EEgyZveo4FBRfQ==,
-      }
->>>>>>> 3ba70325 (refactor(frontend): Change package name form @vitnode/frontend to vitnode-frontend)
-=======
-  '@radix-ui/react-select@2.1.1':
-    resolution: {integrity: sha512-8iRDfyLtzxlprOo9IicnzvpsO1wNCkuwzzCM+Z5Rb5tNOpCdMvcc2AkzX0Fz+Tz9v6NJ5B/7EEgyZveo4FBRfQ==}
->>>>>>> a9a3e1df (perf(frontend): Move accordion, alert-dialog, loader & button to package)
     peerDependencies:
       '@types/react': '*'
       '@types/react-dom': '*'
@@ -3987,26 +3473,8 @@ packages:
       '@types/react':
         optional: true
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
   '@radix-ui/react-switch@1.1.0':
     resolution: {integrity: sha512-OBzy5WAj641k0AOSpKQtreDMe+isX0MQJ1IVyF03ucdF3DunOnROVrjWs8zsXUxC3zfZ6JL9HFVCUlMghz9dJw==}
-=======
-  '@radix-ui/react-switch@1.0.3':
-    resolution: {integrity: sha512-mxm87F88HyHztsI7N+ZUmEoARGkC22YVW5CaC+Byc+HRpuvCrOBPTAnXgf+tZ/7i0Sg/eOePGdMhUKhPaQEqow==}
->>>>>>> a24fce42 (docs: Add docs by fumadocs)
-=======
-  "@radix-ui/react-switch@1.1.0":
-    resolution:
-      {
-        integrity: sha512-OBzy5WAj641k0AOSpKQtreDMe+isX0MQJ1IVyF03ucdF3DunOnROVrjWs8zsXUxC3zfZ6JL9HFVCUlMghz9dJw==,
-      }
->>>>>>> 3ba70325 (refactor(frontend): Change package name form @vitnode/frontend to vitnode-frontend)
-=======
-  '@radix-ui/react-switch@1.1.0':
-    resolution: {integrity: sha512-OBzy5WAj641k0AOSpKQtreDMe+isX0MQJ1IVyF03ucdF3DunOnROVrjWs8zsXUxC3zfZ6JL9HFVCUlMghz9dJw==}
->>>>>>> a9a3e1df (perf(frontend): Move accordion, alert-dialog, loader & button to package)
     peerDependencies:
       '@types/react': '*'
       '@types/react-dom': '*'
@@ -4159,33 +3627,8 @@ packages:
       '@types/react':
         optional: true
 
-<<<<<<< HEAD
-<<<<<<< HEAD
   '@radix-ui/react-use-layout-effect@1.1.0':
     resolution: {integrity: sha512-+FPE0rOdziWSrH9athwI1R0HDVbWlEhd+FR+aSDk4uWGmSJ9Z54sdZVDQPZAinJhJXwfT+qnj969mCsT2gfm5w==}
-<<<<<<< HEAD
-=======
-    peerDependencies:
-      '@types/react': '*'
-      react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
-    peerDependenciesMeta:
-      '@types/react':
-        optional: true
-
-  '@radix-ui/react-use-previous@1.0.1':
-    resolution: {integrity: sha512-cV5La9DPwiQ7S0gf/0qiD6YgNqM5Fk97Kdrlc5yBcrF3jyEZQwm7vYFqMo4IfeHgJXsRaMvLABFtd0OVEmZhDw==}
->>>>>>> a24fce42 (docs: Add docs by fumadocs)
-=======
-  "@radix-ui/react-use-layout-effect@1.1.0":
-    resolution:
-      {
-        integrity: sha512-+FPE0rOdziWSrH9athwI1R0HDVbWlEhd+FR+aSDk4uWGmSJ9Z54sdZVDQPZAinJhJXwfT+qnj969mCsT2gfm5w==,
-      }
->>>>>>> 3ba70325 (refactor(frontend): Change package name form @vitnode/frontend to vitnode-frontend)
-=======
-  '@radix-ui/react-use-layout-effect@1.1.0':
-    resolution: {integrity: sha512-+FPE0rOdziWSrH9athwI1R0HDVbWlEhd+FR+aSDk4uWGmSJ9Z54sdZVDQPZAinJhJXwfT+qnj969mCsT2gfm5w==}
->>>>>>> a9a3e1df (perf(frontend): Move accordion, alert-dialog, loader & button to package)
     peerDependencies:
       '@types/react': '*'
       react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
@@ -4484,36 +3927,9 @@ packages:
   '@selderee/plugin-htmlparser2@0.11.0':
     resolution: {integrity: sha512-P33hHGdldxGabLFjPPpaTxVolMrzrcegejx+0GxjrIb9Zv48D8yAIA/QTDR2dFl7Uz7urX8aX6+5bCZslr+gWQ==}
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-  '@shikijs/core@1.7.0':
-    resolution: {integrity: sha512-O6j27b7dGmJbR3mjwh/aHH8Ld+GQvA0OQsNO43wKWnqbAae3AYXrhFyScHGX8hXZD6vX2ngjzDFkZY5srtIJbQ==}
-
-  '@shikijs/rehype@1.7.0':
-    resolution: {integrity: sha512-PmjhKdud2FzdexQiU79XJqH3jp4X7vQkgjeMtJIhKNuO4Q1WnOL4ah6wJjmvr0ayOSrcAHaM3bYXGUqq9NKjsQ==}
-
-  '@shikijs/transformers@1.7.0':
-    resolution: {integrity: sha512-QX3TP+CS4yYLt4X4Dk7wT0MsC7yweTYHMAAKY+ay+uuR9yRdFae/h+hivny2O+YixJHfZl57xtiZfWSrHdyVhQ==}
-
-=======
->>>>>>> 9e049073 (perf(docs): Remove docs)
   '@sindresorhus/is@4.6.0':
     resolution: {integrity: sha512-t09vSN3MdfsyCHoFcTRCH/iUtG7OJ0CsjzB8cjAmKc/va/kIgeDI/TxsigdncE/4be734m0cvIYwNaV4i2XqAw==}
     engines: {node: '>=10'}
-=======
-  "@sindresorhus/is@4.6.0":
-    resolution:
-      {
-        integrity: sha512-t09vSN3MdfsyCHoFcTRCH/iUtG7OJ0CsjzB8cjAmKc/va/kIgeDI/TxsigdncE/4be734m0cvIYwNaV4i2XqAw==,
-      }
-    engines: { node: ">=10" }
->>>>>>> 3ba70325 (refactor(frontend): Change package name form @vitnode/frontend to vitnode-frontend)
-=======
-  '@sindresorhus/is@4.6.0':
-    resolution: {integrity: sha512-t09vSN3MdfsyCHoFcTRCH/iUtG7OJ0CsjzB8cjAmKc/va/kIgeDI/TxsigdncE/4be734m0cvIYwNaV4i2XqAw==}
-    engines: {node: '>=10'}
->>>>>>> a9a3e1df (perf(frontend): Move accordion, alert-dialog, loader & button to package)
 
   '@socket.io/component-emitter@3.1.2':
     resolution: {integrity: sha512-9BCxFwvbGg/RsZK9tjXd8s4UcwR0MWeFQ1XEKIQVVvAGJyINdrqKMcTRyLoK8Rse1GjzLV9cwjWV1olXRWEXVA==}
@@ -6005,16 +5421,9 @@ packages:
     resolution: {integrity: sha512-KIHbLJqu73RGr/hnbrO9uBeixNGuvSQjul/jdFvS/KFSIH1hWVd1ng7zOHx+YrEfInLG7q4n6GHQ9cDtxv/P6g==}
     engines: {node: '>= 0.10'}
 
-<<<<<<< HEAD
-=======
   cose-base@1.0.3:
     resolution: {integrity: sha512-s9whTXInMSgAp/NVXVNuVxVKzGH2qck3aQlVHxDCdAEPgtMKwc4Wq6/QKhgdEdgbLSi9rBTAcPoRa6JpiG4ksg==}
 
-  cosmiconfig@7.1.0:
-    resolution: {integrity: sha512-AdmX6xUzdNASswsFtmwSt7Vj8po9IuqXm0UXz7QKPuEUmPB4XyjGfaAr2PSuELMwkRMVH1EpIkX5bTZGRB3eCA==}
-    engines: {node: '>=10'}
-
->>>>>>> 321538bf (docs: Add docs)
   cosmiconfig@8.3.6:
     resolution: {integrity: sha512-kcZ6+W5QzcJ3P1Mt+83OUv/oHFqZHIx8DuxG6eZ5RGMERoLqp4BuGjhHLYGK+Kf5XVkQvqBSmAy/nGWN3qDgEA==}
     engines: {node: '>=14'}
@@ -6827,26 +6236,6 @@ packages:
     resolution: {integrity: sha512-MMdARuVEQziNTeJD8DgMqmhwR11BRQ/cBP+pLtYdSTnf3MIO8fFeiINEbX36ZdNlfU/7A9f3gUw49B3oQsvwBA==}
     engines: {node: '>=4.0'}
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-  estree-util-attach-comments@3.0.0:
-    resolution: {integrity: sha512-cKUwm/HUcTDsYh/9FgnuFqpfquUbwIqwKM26BVCGDPVgvaCl/nDCCjUfiLlx6lsEZ3Z4RFxNbOQ60pkaEwFxGw==}
-
-  estree-util-build-jsx@3.0.1:
-    resolution: {integrity: sha512-8U5eiL6BTrPxp/CHbs2yMgP8ftMhR5ww1eIKoWRMlqvltHF8fZn5LRDvTKuxD3DUn+shRbLGqXemcP51oFCsGQ==}
-
-  estree-util-is-identifier-name@3.0.0:
-    resolution: {integrity: sha512-hFtqIDZTIUZ9BXLb8y4pYGyk6+wekIivNVTcmvk8NoOh+VeRn5y6cEHzbURrWbfp1fIqdVipilzj+lfaadNZmg==}
-
-  estree-util-to-js@2.0.0:
-    resolution: {integrity: sha512-WDF+xj5rRWmD5tj6bIqRi6CkLIXbbNQUcxQHzGysQzvHmdYG2G7p/Tf0J0gpxGgkeMZNTIjT/AoSvC9Xehcgdg==}
-
-  estree-util-value-to-estree@3.1.1:
-    resolution: {integrity: sha512-5mvUrF2suuv5f5cGDnDphIy4/gW86z82kl5qG6mM9z04SEQI4FB5Apmaw/TGEf3l55nLtMs5s51dmhUzvAHQCA==}
-
-  estree-util-visit@2.0.0:
-    resolution: {integrity: sha512-m5KgiH85xAhhW8Wta0vShLcUvOsh3LLPI2YVwcbio1l7E09NTLL1EyMZFM1OyWowoH0skScNbhOPl4kcBgzTww==}
-=======
   estree-util-attach-comments@2.1.1:
     resolution: {integrity: sha512-+5Ba/xGGS6mnwFbXIuQiDPTbuTxuMCooq3arVv7gPZtYpjp+VXH/NkHAP35OOefPhNG/UGqU3vt/LTABwcHX0w==}
 
@@ -6865,16 +6254,10 @@ packages:
 
   estree-util-visit@1.2.1:
     resolution: {integrity: sha512-xbgqcrkIVbIG+lI/gzbvd9SGTJL4zqJKBFttUl5pP27KhAjtMKbX/mQXJ7qgyXpMgVy/zvpm0xoQQaGL8OloOw==}
->>>>>>> 321538bf (docs: Add docs)
 
   estree-walker@3.0.3:
     resolution: {integrity: sha512-7RUKfXgSMMkzt6ZuXmqapOurLGPPfgj6l9uRZ7lRGolvk0y2yocc35LdcxKC5PQZdn2DMqioAQ2NoWcrTKmm6g==}
 
-<<<<<<< HEAD
-=======
->>>>>>> 9e049073 (perf(docs): Remove docs)
-=======
->>>>>>> 321538bf (docs: Add docs)
   esutils@2.0.3:
     resolution: {integrity: sha512-kVscqXk4OCp68SZ0dkgEKVi6/8ij300KBWTJq32P/dYeWTSwK41WyTxalN1eRmA5Z9UU/LX9D7FWSmV9SAYx6g==}
     engines: {node: '>=0.10.0'}
@@ -7532,43 +6915,15 @@ packages:
     resolution: {integrity: sha512-dOWoqflvcydARa360Gvv18DZ/gRuHKi2NU/wU5X1ZFzdYfH29nkiNZsF3mp4OJ3H4yo9Mx8A/uAGNzpzPN3yBA==}
     engines: {node: '>=0.10.0'}
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-  is-arguments@1.1.1:
-<<<<<<< HEAD
-<<<<<<< HEAD
-    resolution: {integrity: sha512-8Q7EARjzEnKpt/PCD7e1cgUS0a6X8u5tdSiMqXhojOdoV9TsMsiO+9VLC5vAmO8N7/GmXn7yjR8qnA6bVAEzfA==}
-    engines: {node: '>= 0.4'}
-=======
-=======
->>>>>>> 321538bf (docs: Add docs)
   is-alphabetical@2.0.1:
     resolution: {integrity: sha512-FWyyY60MeTNyeSRpkM2Iry0G9hpr7/9kD40mD/cGQEuilcZYS4okz8SN2Q6rLCJ8gbCt6fN+rC+6tMGS99LaxQ==}
 
   is-alphanumerical@2.0.1:
     resolution: {integrity: sha512-hmbYhX/9MUMF5uh7tOXyK/n0ZvWpad5caBA17GsC6vyuCqaWliRG5K1qS9inmUhEMaOBIW7/whAnSwveW/LtZw==}
-<<<<<<< HEAD
->>>>>>> a24fce42 (docs: Add docs by fumadocs)
-=======
-=======
 
->>>>>>> 321538bf (docs: Add docs)
   is-arguments@1.1.1:
     resolution: {integrity: sha512-8Q7EARjzEnKpt/PCD7e1cgUS0a6X8u5tdSiMqXhojOdoV9TsMsiO+9VLC5vAmO8N7/GmXn7yjR8qnA6bVAEzfA==}
     engines: {node: '>= 0.4'}
->>>>>>> 9e049073 (perf(docs): Remove docs)
-=======
-    resolution:
-      {
-        integrity: sha512-8Q7EARjzEnKpt/PCD7e1cgUS0a6X8u5tdSiMqXhojOdoV9TsMsiO+9VLC5vAmO8N7/GmXn7yjR8qnA6bVAEzfA==,
-      }
-    engines: { node: ">= 0.4" }
->>>>>>> 3ba70325 (refactor(frontend): Change package name form @vitnode/frontend to vitnode-frontend)
-=======
-    resolution: {integrity: sha512-8Q7EARjzEnKpt/PCD7e1cgUS0a6X8u5tdSiMqXhojOdoV9TsMsiO+9VLC5vAmO8N7/GmXn7yjR8qnA6bVAEzfA==}
-    engines: {node: '>= 0.4'}
->>>>>>> a9a3e1df (perf(frontend): Move accordion, alert-dialog, loader & button to package)
 
   is-array-buffer@3.0.4:
     resolution: {integrity: sha512-wcjaerHw0ydZwfhiKbXJWLDY8A7yV7KhjQOpb83hGgGfId/aQa4TOvwyzn2PuswW2gPCYEL/nEAiSVpdOj1lXw==}
@@ -8064,23 +7419,13 @@ packages:
     resolution: {integrity: sha512-jumlc0BIUrS3qJGgIkWZsyfAM7NCWiBcCDhnd+3NNM5KbBmLTgHVfWBcg6W+rLUsIpzpERPsvwUP7CckAQSOoA==}
     engines: {node: '>=12'}
 
-<<<<<<< HEAD
-  lucide-react@0.396.0:
-    resolution: {integrity: sha512-N/zP+9vEfEYHiMWMpjwH/M5diaV0e4UFe07BpgdzaRYce5QvXi87hixf7F0Xqdr3zuX/9u7H/2D4MVXIK22O0A==}
-=======
   lucide-react@0.378.0:
     resolution: {integrity: sha512-u6EPU8juLUk9ytRcyapkWI18epAv3RU+6+TC23ivjR0e+glWKBobFeSgRwOIJihzktILQuy6E0E80P2jVTDR5g==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0
 
-<<<<<<< HEAD
-  lucide-react@0.395.0:
-    resolution: {integrity: sha512-6hzdNH5723A4FLaYZWpK50iyZH8iS2Jq5zuPRRotOFkhu6kxxJiebVdJ72tCR5XkiIeYFOU5NUawFZOac+VeYw==}
->>>>>>> 321538bf (docs: Add docs)
-=======
   lucide-react@0.399.0:
     resolution: {integrity: sha512-UyTNa3djBISdzL2UktgCrESXexQXaDQWi/WsDkbw6fBFfHlapajR58WoR+gxQ4laxfEyiHmoFrEIM3V+5XOVQg==}
->>>>>>> ea73e4fc (perf(frontend): Improve graphql paths)
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
@@ -8547,11 +7892,6 @@ packages:
       sass:
         optional: true
 
-<<<<<<< HEAD
-  next@15.0.0-canary.44:
-    resolution: {integrity: sha512-W83yZN0RzqIr+yaW7JUZ012RzURpP5LwlSO5Mt+Q5+JzCB14AZpOiDiunHtNRkeqebPyoR6a3flTVswFrG2HPg==}
-    engines: {node: '>=18.17.0'}
-=======
   next@14.2.4:
     resolution: {integrity: sha512-R8/V7vugY+822rsQGQCjoLhMuC9oFj9SOi4Cl4b2wjDrseD0LRZ10W7R6Czo4w9ZznVSshKjuIomsRjvm9EKJQ==}
     engines: {node: '>=18.17.0'}
@@ -8570,16 +7910,9 @@ packages:
       sass:
         optional: true
 
-<<<<<<< HEAD
-  next@15.0.0-canary.28:
-    resolution: {integrity: sha512-l50RlkXP6wdQHs6ssjxQOpT3fooWq4pGAY31HcShAmJk+mrrYLqJwU/AwkATngPL0snykurINAqBHeASAG8LEQ==}
-    engines: {node: '>=18.17.0', pnpm: 8.15.7}
->>>>>>> 321538bf (docs: Add docs)
-=======
   next@15.0.0-canary.46:
     resolution: {integrity: sha512-m8raV39xX5v1JN20mA2olFQaglgWIHFo4WVIknrs11hQnW2A9sfYD5ULfYIGJu48eyBSVEMI8pf7VqDRrRZQKQ==}
     engines: {node: '>=18.17.0'}
->>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
     hasBin: true
     peerDependencies:
       '@opentelemetry/api': ^1.1.0
@@ -9332,15 +8665,6 @@ packages:
   react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
 
-<<<<<<< HEAD
-  react-medium-image-zoom@5.2.4:
-    resolution: {integrity: sha512-XLu/fLqpbmhiDAGA6yie78tDv4kh8GxvS7kKQArSOvCvm5zvgItoh4h01NAAvnezQ60ovsTeedHiHG3eG9CcGg==}
-    peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
-      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-
-=======
->>>>>>> 9e049073 (perf(docs): Remove docs)
   react-promise-suspense@0.3.4:
     resolution: {integrity: sha512-I42jl7L3Ze6kZaq+7zXWSunBa3b1on5yfvUW6Eo/3fFOj6dZ5Bqmcd264nJbTK/gn1HjjILAjSwnZbV4RpSaNQ==}
 
@@ -9743,18 +9067,9 @@ packages:
     engines: {node: '>=4'}
     hasBin: true
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-  shiki@1.7.0:
-    resolution: {integrity: sha512-H5pMn4JA7ayx8H0qOz1k2qANq6mZVCMl1gKLK6kWIrv1s2Ial4EmD4s4jE8QB5Dw03d/oCQUxc24sotuyR5byA==}
-
-=======
->>>>>>> 9e049073 (perf(docs): Remove docs)
-=======
   shiki@0.14.7:
     resolution: {integrity: sha512-dNPAPrxSc87ua2sKJ3H5dQ/6ZaY8RNnaAqK+t0eG7p0Soi2ydiqbGOTaZCqaYvA/uZYfS1LJnemt3Q+mSfcPCg==}
 
->>>>>>> 321538bf (docs: Add docs)
   side-channel@1.0.6:
     resolution: {integrity: sha512-fDW/EZ6Q9RiO8eFG8Hj+7u/oW+XrPTIChwCOM2+th2A6OblDtYYIpve9m+KvI9Z4C9qSEXlaGR6bTEYHReuglA==}
     engines: {node: '>= 0.4'}
@@ -12323,8 +11638,6 @@ snapshots:
     dependencies:
       graphql: 16.9.0
 
-<<<<<<< HEAD
-=======
   '@headlessui/react@1.7.19(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@tanstack/react-virtual': 3.7.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -12332,23 +11645,6 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  '@hookform/devtools@4.3.1(@types/react@18.3.3)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)':
-    dependencies:
-      '@emotion/react': 11.11.4(@types/react@18.3.3)(react@19.0.0-rc.0)
-      '@emotion/styled': 11.11.5(@emotion/react@11.11.4(@types/react@18.3.3)(react@19.0.0-rc.0))(@types/react@18.3.3)(react@19.0.0-rc.0)
-      '@types/lodash': 4.17.5
-      little-state-machine: 4.8.0(react@19.0.0-rc.0)
-      lodash: 4.17.21
-      react: 19.0.0-rc.0
-      react-dom: 19.0.0-rc.0(react@19.0.0-rc.0)
-      react-simple-animate: 3.5.2(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))
-      use-deep-compare-effect: 1.8.1(react@19.0.0-rc.0)
-      uuid: 8.3.2
-    transitivePeerDependencies:
-      - '@types/react'
-      - supports-color
-
->>>>>>> 321538bf (docs: Add docs)
   '@hookform/resolvers@3.6.0(react-hook-form@7.52.0(react@19.0.0-rc.0))':
     dependencies:
       react-hook-form: 7.52.0(react@19.0.0-rc.0)
@@ -12609,31 +11905,7 @@ snapshots:
       lodash.omit: 4.5.0
       tslib: 2.6.2
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-  '@nestjs/cli@10.3.2(@swc/cli@0.3.12(@swc/core@1.6.3(@swc/helpers@0.5.11))(chokidar@3.6.0))(@swc/core@1.6.3(@swc/helpers@0.5.11))':
-=======
-  '@nestjs/cli@10.3.2(@swc/cli@0.3.14(@swc/core@1.6.5(@swc/helpers@0.5.11))(chokidar@3.6.0))(@swc/core@1.6.5(@swc/helpers@0.5.11))(esbuild@0.19.12)':
->>>>>>> 0aa27abf (chore: Update packages)
-=======
-  "@nestjs/cli@10.3.2(@swc/cli@0.3.14(@swc/core@1.6.5(@swc/helpers@0.5.11))(chokidar@3.6.0))(@swc/core@1.6.5(@swc/helpers@0.5.11))(esbuild@0.19.12)":
->>>>>>> 3ba70325 (refactor(frontend): Change package name form @vitnode/frontend to vitnode-frontend)
-=======
-  '@nestjs/cli@10.3.2(@swc/cli@0.3.14(@swc/core@1.6.5(@swc/helpers@0.5.11))(chokidar@3.6.0))(@swc/core@1.6.5(@swc/helpers@0.5.11))(esbuild@0.19.12)':
->>>>>>> a9a3e1df (perf(frontend): Move accordion, alert-dialog, loader & button to package)
-=======
-  '@nestjs/cli@10.3.2(@swc/cli@0.3.14(@swc/core@1.6.5(@swc/helpers@0.5.11))(chokidar@3.6.0))(@swc/core@1.6.5(@swc/helpers@0.5.11))':
->>>>>>> 2e0ec75a (fix(backend): Add dotenv to init script for database)
-=======
-  '@nestjs/cli@10.3.2(@swc/cli@0.3.14(@swc/core@1.6.5(@swc/helpers@0.5.11))(chokidar@3.6.0))(@swc/core@1.6.5(@swc/helpers@0.5.11))(esbuild@0.19.12)':
->>>>>>> b991c2f3 (perf: Change @vitnode/shared to vitnode-shared name package)
-=======
   '@nestjs/cli@10.3.2(@swc/cli@0.4.0(@swc/core@1.6.5(@swc/helpers@0.5.11))(chokidar@3.6.0))(@swc/core@1.6.5(@swc/helpers@0.5.11))(esbuild@0.19.12)':
->>>>>>> ea73e4fc (perf(frontend): Improve graphql paths)
     dependencies:
       '@angular-devkit/core': 17.1.2(chokidar@3.6.0)
       '@angular-devkit/schematics': 17.1.2(chokidar@3.6.0)
@@ -12643,19 +11915,7 @@ snapshots:
       chokidar: 3.6.0
       cli-table3: 0.6.3
       commander: 4.1.1
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-      fork-ts-checker-webpack-plugin: 9.0.2(typescript@5.3.3)(webpack@5.90.1(@swc/core@1.6.3(@swc/helpers@0.5.11)))
-=======
       fork-ts-checker-webpack-plugin: 9.0.2(typescript@5.3.3)(webpack@5.90.1(@swc/core@1.6.5(@swc/helpers@0.5.11))(esbuild@0.19.12))
->>>>>>> 0aa27abf (chore: Update packages)
-=======
-      fork-ts-checker-webpack-plugin: 9.0.2(typescript@5.3.3)(webpack@5.90.1(@swc/core@1.6.5(@swc/helpers@0.5.11)))
->>>>>>> 2e0ec75a (fix(backend): Add dotenv to init script for database)
-=======
-      fork-ts-checker-webpack-plugin: 9.0.2(typescript@5.3.3)(webpack@5.90.1(@swc/core@1.6.5(@swc/helpers@0.5.11))(esbuild@0.19.12))
->>>>>>> b991c2f3 (perf: Change @vitnode/shared to vitnode-shared name package)
       glob: 10.3.10
       inquirer: 8.2.6
       node-emoji: 1.11.0
@@ -12667,19 +11927,7 @@ snapshots:
       tsconfig-paths: 4.2.0
       tsconfig-paths-webpack-plugin: 4.1.0
       typescript: 5.3.3
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-      webpack: 5.90.1(@swc/core@1.6.3(@swc/helpers@0.5.11))
-=======
       webpack: 5.90.1(@swc/core@1.6.5(@swc/helpers@0.5.11))(esbuild@0.19.12)
->>>>>>> 0aa27abf (chore: Update packages)
-=======
-      webpack: 5.90.1(@swc/core@1.6.5(@swc/helpers@0.5.11))
->>>>>>> 2e0ec75a (fix(backend): Add dotenv to init script for database)
-=======
-      webpack: 5.90.1(@swc/core@1.6.5(@swc/helpers@0.5.11))(esbuild@0.19.12)
->>>>>>> b991c2f3 (perf: Change @vitnode/shared to vitnode-shared name package)
       webpack-node-externals: 3.0.0
     optionalDependencies:
       '@swc/cli': 0.4.0(@swc/core@1.6.5(@swc/helpers@0.5.11))(chokidar@3.6.0)
@@ -12824,17 +12072,9 @@ snapshots:
 
   '@next/env@14.1.4': {}
 
-<<<<<<< HEAD
-  '@next/env@15.0.0-canary.44': {}
-=======
   '@next/env@14.2.4': {}
 
-<<<<<<< HEAD
-  '@next/env@15.0.0-canary.28': {}
->>>>>>> 321538bf (docs: Add docs)
-=======
   '@next/env@15.0.0-canary.46': {}
->>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
 
   '@next/eslint-plugin-next@15.0.0-canary.46':
     dependencies:
@@ -12843,181 +12083,82 @@ snapshots:
   '@next/swc-darwin-arm64@14.1.4':
     optional: true
 
-<<<<<<< HEAD
-  '@next/swc-darwin-arm64@15.0.0-canary.44':
-=======
   '@next/swc-darwin-arm64@14.2.4':
     optional: true
 
-<<<<<<< HEAD
-  '@next/swc-darwin-arm64@15.0.0-canary.28':
-    optional: true
-
-  '@next/swc-darwin-arm64@15.0.0-rc.0':
->>>>>>> 321538bf (docs: Add docs)
-=======
   '@next/swc-darwin-arm64@15.0.0-canary.46':
->>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
     optional: true
 
   '@next/swc-darwin-x64@14.1.4':
     optional: true
 
-<<<<<<< HEAD
-  '@next/swc-darwin-x64@15.0.0-canary.44':
-=======
   '@next/swc-darwin-x64@14.2.4':
     optional: true
 
-<<<<<<< HEAD
-  '@next/swc-darwin-x64@15.0.0-canary.28':
-    optional: true
-
-  '@next/swc-darwin-x64@15.0.0-rc.0':
->>>>>>> 321538bf (docs: Add docs)
-=======
   '@next/swc-darwin-x64@15.0.0-canary.46':
->>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
     optional: true
 
   '@next/swc-linux-arm64-gnu@14.1.4':
     optional: true
 
-<<<<<<< HEAD
-  '@next/swc-linux-arm64-gnu@15.0.0-canary.44':
-=======
   '@next/swc-linux-arm64-gnu@14.2.4':
     optional: true
 
-<<<<<<< HEAD
-  '@next/swc-linux-arm64-gnu@15.0.0-canary.28':
-    optional: true
-
-  '@next/swc-linux-arm64-gnu@15.0.0-rc.0':
->>>>>>> 321538bf (docs: Add docs)
-=======
   '@next/swc-linux-arm64-gnu@15.0.0-canary.46':
->>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
     optional: true
 
   '@next/swc-linux-arm64-musl@14.1.4':
     optional: true
 
-<<<<<<< HEAD
-  '@next/swc-linux-arm64-musl@15.0.0-canary.44':
-=======
   '@next/swc-linux-arm64-musl@14.2.4':
     optional: true
 
-<<<<<<< HEAD
-  '@next/swc-linux-arm64-musl@15.0.0-canary.28':
-    optional: true
-
-  '@next/swc-linux-arm64-musl@15.0.0-rc.0':
->>>>>>> 321538bf (docs: Add docs)
-=======
   '@next/swc-linux-arm64-musl@15.0.0-canary.46':
->>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
     optional: true
 
   '@next/swc-linux-x64-gnu@14.1.4':
     optional: true
 
-<<<<<<< HEAD
-  '@next/swc-linux-x64-gnu@15.0.0-canary.44':
-=======
   '@next/swc-linux-x64-gnu@14.2.4':
     optional: true
 
-<<<<<<< HEAD
-  '@next/swc-linux-x64-gnu@15.0.0-canary.28':
-    optional: true
-
-  '@next/swc-linux-x64-gnu@15.0.0-rc.0':
->>>>>>> 321538bf (docs: Add docs)
-=======
   '@next/swc-linux-x64-gnu@15.0.0-canary.46':
->>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
     optional: true
 
   '@next/swc-linux-x64-musl@14.1.4':
     optional: true
 
-<<<<<<< HEAD
-  '@next/swc-linux-x64-musl@15.0.0-canary.44':
-=======
   '@next/swc-linux-x64-musl@14.2.4':
     optional: true
 
-<<<<<<< HEAD
-  '@next/swc-linux-x64-musl@15.0.0-canary.28':
-    optional: true
-
-  '@next/swc-linux-x64-musl@15.0.0-rc.0':
->>>>>>> 321538bf (docs: Add docs)
-=======
   '@next/swc-linux-x64-musl@15.0.0-canary.46':
->>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
     optional: true
 
   '@next/swc-win32-arm64-msvc@14.1.4':
     optional: true
 
-<<<<<<< HEAD
-  '@next/swc-win32-arm64-msvc@15.0.0-canary.44':
-=======
   '@next/swc-win32-arm64-msvc@14.2.4':
     optional: true
 
-<<<<<<< HEAD
-  '@next/swc-win32-arm64-msvc@15.0.0-canary.28':
-    optional: true
-
-  '@next/swc-win32-arm64-msvc@15.0.0-rc.0':
->>>>>>> 321538bf (docs: Add docs)
-=======
   '@next/swc-win32-arm64-msvc@15.0.0-canary.46':
->>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
     optional: true
 
   '@next/swc-win32-ia32-msvc@14.1.4':
     optional: true
 
-<<<<<<< HEAD
-  '@next/swc-win32-ia32-msvc@15.0.0-canary.44':
-=======
   '@next/swc-win32-ia32-msvc@14.2.4':
     optional: true
 
-<<<<<<< HEAD
-  '@next/swc-win32-ia32-msvc@15.0.0-canary.28':
-    optional: true
-
-  '@next/swc-win32-ia32-msvc@15.0.0-rc.0':
->>>>>>> 321538bf (docs: Add docs)
-=======
   '@next/swc-win32-ia32-msvc@15.0.0-canary.46':
->>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
     optional: true
 
   '@next/swc-win32-x64-msvc@14.1.4':
     optional: true
 
-<<<<<<< HEAD
-  '@next/swc-win32-x64-msvc@15.0.0-canary.44':
-=======
   '@next/swc-win32-x64-msvc@14.2.4':
     optional: true
 
-<<<<<<< HEAD
-  '@next/swc-win32-x64-msvc@15.0.0-canary.28':
-    optional: true
-
-  '@next/swc-win32-x64-msvc@15.0.0-rc.0':
->>>>>>> 321538bf (docs: Add docs)
-=======
   '@next/swc-win32-x64-msvc@15.0.0-canary.46':
->>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
     optional: true
 
   '@nodelib/fs.scandir@2.1.5':
@@ -13096,57 +12237,13 @@ snapshots:
 
   '@radix-ui/number@1.1.0': {}
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-  '@radix-ui/number@1.1.0': {}
-
   '@radix-ui/primitive@1.0.1':
-=======
-  "@radix-ui/primitive@1.0.1":
->>>>>>> 3ba70325 (refactor(frontend): Change package name form @vitnode/frontend to vitnode-frontend)
-=======
-  '@radix-ui/primitive@1.0.1':
->>>>>>> a9a3e1df (perf(frontend): Move accordion, alert-dialog, loader & button to package)
     dependencies:
       '@babel/runtime': 7.24.7
 
   '@radix-ui/primitive@1.1.0': {}
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
   '@radix-ui/react-accordion@1.2.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)':
-=======
-  '@radix-ui/react-accordion@1.1.2(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
-    dependencies:
-      '@babel/runtime': 7.24.7
-      '@radix-ui/primitive': 1.0.1
-      '@radix-ui/react-collapsible': 1.0.3(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@radix-ui/react-collection': 1.0.3(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@radix-ui/react-compose-refs': 1.0.1(@types/react@18.3.3)(react@18.3.1)
-      '@radix-ui/react-context': 1.0.1(@types/react@18.3.3)(react@18.3.1)
-      '@radix-ui/react-direction': 1.0.1(@types/react@18.3.3)(react@18.3.1)
-      '@radix-ui/react-id': 1.0.1(@types/react@18.3.3)(react@18.3.1)
-      '@radix-ui/react-primitive': 1.0.3(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@radix-ui/react-use-controllable-state': 1.0.1(@types/react@18.3.3)(react@18.3.1)
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
-    optionalDependencies:
-      '@types/react': 18.3.3
-      '@types/react-dom': 18.3.0
-
-  '@radix-ui/react-accordion@1.1.2(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)':
->>>>>>> a24fce42 (docs: Add docs by fumadocs)
-=======
-  '@radix-ui/react-accordion@1.2.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)':
->>>>>>> 9e049073 (perf(docs): Remove docs)
-=======
-  "@radix-ui/react-accordion@1.2.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)":
->>>>>>> 3ba70325 (refactor(frontend): Change package name form @vitnode/frontend to vitnode-frontend)
-=======
-  '@radix-ui/react-accordion@1.2.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)':
->>>>>>> a9a3e1df (perf(frontend): Move accordion, alert-dialog, loader & button to package)
     dependencies:
       '@radix-ui/primitive': 1.1.0
       '@radix-ui/react-collapsible': 1.1.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
@@ -13305,35 +12402,15 @@ snapshots:
     optionalDependencies:
       '@types/react': 18.3.3
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 9e049073 (perf(docs): Remove docs)
-=======
   '@radix-ui/react-compose-refs@1.1.0(@types/react@18.3.3)(react@18.3.1)':
     dependencies:
       react: 18.3.1
     optionalDependencies:
       '@types/react': 18.3.3
 
->>>>>>> 321538bf (docs: Add docs)
   '@radix-ui/react-compose-refs@1.1.0(@types/react@18.3.3)(react@19.0.0-rc.0)':
-=======
-  "@radix-ui/react-compose-refs@1.1.0(@types/react@18.3.3)(react@19.0.0-rc.0)":
->>>>>>> 3ba70325 (refactor(frontend): Change package name form @vitnode/frontend to vitnode-frontend)
-=======
-  '@radix-ui/react-compose-refs@1.1.0(@types/react@18.3.3)(react@19.0.0-rc.0)':
->>>>>>> a9a3e1df (perf(frontend): Move accordion, alert-dialog, loader & button to package)
     dependencies:
       react: 19.0.0-rc.0
-=======
-  '@radix-ui/react-compose-refs@1.1.0(@types/react@18.3.3)(react@18.3.1)':
-    dependencies:
-      react: 18.3.1
->>>>>>> a24fce42 (docs: Add docs by fumadocs)
     optionalDependencies:
       '@types/react': 18.3.3
 
@@ -13351,76 +12428,19 @@ snapshots:
     optionalDependencies:
       '@types/react': 18.3.3
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 9e049073 (perf(docs): Remove docs)
-=======
   '@radix-ui/react-context@1.1.0(@types/react@18.3.3)(react@18.3.1)':
     dependencies:
       react: 18.3.1
     optionalDependencies:
       '@types/react': 18.3.3
 
->>>>>>> 321538bf (docs: Add docs)
   '@radix-ui/react-context@1.1.0(@types/react@18.3.3)(react@19.0.0-rc.0)':
-=======
-  "@radix-ui/react-context@1.1.0(@types/react@18.3.3)(react@19.0.0-rc.0)":
->>>>>>> 3ba70325 (refactor(frontend): Change package name form @vitnode/frontend to vitnode-frontend)
-=======
-  '@radix-ui/react-context@1.1.0(@types/react@18.3.3)(react@19.0.0-rc.0)':
->>>>>>> a9a3e1df (perf(frontend): Move accordion, alert-dialog, loader & button to package)
     dependencies:
       react: 19.0.0-rc.0
     optionalDependencies:
       '@types/react': 18.3.3
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-  '@radix-ui/react-context@1.1.0(@types/react@18.3.3)(react@18.3.1)':
-    dependencies:
-      react: 18.3.1
-    optionalDependencies:
-      '@types/react': 18.3.3
-
-  '@radix-ui/react-dialog@1.0.5(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
-    dependencies:
-      '@babel/runtime': 7.24.7
-      '@radix-ui/primitive': 1.0.1
-      '@radix-ui/react-compose-refs': 1.0.1(@types/react@18.3.3)(react@18.3.1)
-      '@radix-ui/react-context': 1.0.1(@types/react@18.3.3)(react@18.3.1)
-      '@radix-ui/react-dismissable-layer': 1.0.5(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@radix-ui/react-focus-guards': 1.0.1(@types/react@18.3.3)(react@18.3.1)
-      '@radix-ui/react-focus-scope': 1.0.4(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@radix-ui/react-id': 1.0.1(@types/react@18.3.3)(react@18.3.1)
-      '@radix-ui/react-portal': 1.0.4(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@radix-ui/react-presence': 1.0.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@radix-ui/react-primitive': 1.0.3(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@radix-ui/react-slot': 1.0.2(@types/react@18.3.3)(react@18.3.1)
-      '@radix-ui/react-use-controllable-state': 1.0.1(@types/react@18.3.3)(react@18.3.1)
-      aria-hidden: 1.2.4
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
-      react-remove-scroll: 2.5.5(@types/react@18.3.3)(react@18.3.1)
-    optionalDependencies:
-      '@types/react': 18.3.3
-      '@types/react-dom': 18.3.0
-
->>>>>>> a24fce42 (docs: Add docs by fumadocs)
-=======
->>>>>>> 9e049073 (perf(docs): Remove docs)
   '@radix-ui/react-dialog@1.0.5(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)':
-=======
-  "@radix-ui/react-dialog@1.0.5(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)":
->>>>>>> 3ba70325 (refactor(frontend): Change package name form @vitnode/frontend to vitnode-frontend)
-=======
-  '@radix-ui/react-dialog@1.0.5(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)':
->>>>>>> a9a3e1df (perf(frontend): Move accordion, alert-dialog, loader & button to package)
     dependencies:
       '@babel/runtime': 7.24.7
       '@radix-ui/primitive': 1.0.1
@@ -13484,21 +12504,7 @@ snapshots:
     optionalDependencies:
       '@types/react': 18.3.3
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-  '@radix-ui/react-direction@1.1.0(@types/react@18.3.3)(react@18.3.1)':
-    dependencies:
-      react: 18.3.1
-    optionalDependencies:
-      '@types/react': 18.3.3
-
   '@radix-ui/react-dismissable-layer@1.0.5(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
-=======
-  "@radix-ui/react-dismissable-layer@1.0.5(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)":
->>>>>>> 3ba70325 (refactor(frontend): Change package name form @vitnode/frontend to vitnode-frontend)
-=======
-  '@radix-ui/react-dismissable-layer@1.0.5(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
->>>>>>> a9a3e1df (perf(frontend): Move accordion, alert-dialog, loader & button to package)
     dependencies:
       '@babel/runtime': 7.24.7
       '@radix-ui/primitive': 1.0.1
@@ -13956,14 +12962,6 @@ snapshots:
       '@types/react': 18.3.3
       '@types/react-dom': 18.3.0
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 9e049073 (perf(docs): Remove docs)
-=======
   '@radix-ui/react-presence@1.1.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@radix-ui/react-compose-refs': 1.1.0(@types/react@18.3.3)(react@18.3.1)
@@ -13974,27 +12972,12 @@ snapshots:
       '@types/react': 18.3.3
       '@types/react-dom': 18.3.0
 
->>>>>>> 321538bf (docs: Add docs)
   '@radix-ui/react-presence@1.1.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)':
-=======
-  "@radix-ui/react-presence@1.1.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)":
->>>>>>> 3ba70325 (refactor(frontend): Change package name form @vitnode/frontend to vitnode-frontend)
-=======
-  '@radix-ui/react-presence@1.1.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)':
->>>>>>> a9a3e1df (perf(frontend): Move accordion, alert-dialog, loader & button to package)
     dependencies:
       '@radix-ui/react-compose-refs': 1.1.0(@types/react@18.3.3)(react@19.0.0-rc.0)
       '@radix-ui/react-use-layout-effect': 1.1.0(@types/react@18.3.3)(react@19.0.0-rc.0)
       react: 19.0.0-rc.0
       react-dom: 19.0.0-rc.0(react@19.0.0-rc.0)
-=======
-  '@radix-ui/react-presence@1.1.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
-    dependencies:
-      '@radix-ui/react-compose-refs': 1.1.0(@types/react@18.3.3)(react@18.3.1)
-      '@radix-ui/react-use-layout-effect': 1.1.0(@types/react@18.3.3)(react@18.3.1)
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
->>>>>>> a24fce42 (docs: Add docs by fumadocs)
     optionalDependencies:
       '@types/react': 18.3.3
       '@types/react-dom': 18.3.0
@@ -14019,12 +13002,6 @@ snapshots:
       '@types/react': 18.3.3
       '@types/react-dom': 18.3.0
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
   '@radix-ui/react-primitive@2.0.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@radix-ui/react-slot': 1.1.0(@types/react@18.3.3)(react@18.3.1)
@@ -14034,29 +13011,7 @@ snapshots:
       '@types/react': 18.3.3
       '@types/react-dom': 18.3.0
 
->>>>>>> 321538bf (docs: Add docs)
   '@radix-ui/react-primitive@2.0.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)':
-=======
-  '@radix-ui/react-primitive@2.0.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
-    dependencies:
-      '@radix-ui/react-slot': 1.1.0(@types/react@18.3.3)(react@18.3.1)
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
-    optionalDependencies:
-      '@types/react': 18.3.3
-      '@types/react-dom': 18.3.0
-
-  '@radix-ui/react-progress@1.0.3(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)':
->>>>>>> a24fce42 (docs: Add docs by fumadocs)
-=======
-  '@radix-ui/react-primitive@2.0.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)':
->>>>>>> 9e049073 (perf(docs): Remove docs)
-=======
-  "@radix-ui/react-primitive@2.0.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)":
->>>>>>> 3ba70325 (refactor(frontend): Change package name form @vitnode/frontend to vitnode-frontend)
-=======
-  '@radix-ui/react-primitive@2.0.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)':
->>>>>>> a9a3e1df (perf(frontend): Move accordion, alert-dialog, loader & button to package)
     dependencies:
       '@radix-ui/react-slot': 1.1.0(@types/react@18.3.3)(react@19.0.0-rc.0)
       react: 19.0.0-rc.0
@@ -14145,44 +13100,7 @@ snapshots:
       '@types/react': 18.3.3
       '@types/react-dom': 18.3.0
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-  '@radix-ui/react-select@2.1.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)':
-=======
-  '@radix-ui/react-scroll-area@1.1.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
-    dependencies:
-      '@radix-ui/number': 1.1.0
-      '@radix-ui/primitive': 1.1.0
-      '@radix-ui/react-compose-refs': 1.1.0(@types/react@18.3.3)(react@18.3.1)
-      '@radix-ui/react-context': 1.1.0(@types/react@18.3.3)(react@18.3.1)
-      '@radix-ui/react-direction': 1.1.0(@types/react@18.3.3)(react@18.3.1)
-      '@radix-ui/react-presence': 1.1.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@radix-ui/react-primitive': 2.0.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@radix-ui/react-use-callback-ref': 1.1.0(@types/react@18.3.3)(react@18.3.1)
-      '@radix-ui/react-use-layout-effect': 1.1.0(@types/react@18.3.3)(react@18.3.1)
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
-    optionalDependencies:
-      '@types/react': 18.3.3
-      '@types/react-dom': 18.3.0
-
-  '@radix-ui/react-select@2.0.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)':
->>>>>>> a24fce42 (docs: Add docs by fumadocs)
-=======
-  '@radix-ui/react-select@2.1.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)':
->>>>>>> 9e049073 (perf(docs): Remove docs)
-=======
   '@radix-ui/react-select@2.1.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)':
->>>>>>> 0aa27abf (chore: Update packages)
-=======
-  "@radix-ui/react-select@2.1.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)":
->>>>>>> 3ba70325 (refactor(frontend): Change package name form @vitnode/frontend to vitnode-frontend)
-=======
-  '@radix-ui/react-select@2.1.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)':
->>>>>>> a9a3e1df (perf(frontend): Move accordion, alert-dialog, loader & button to package)
     dependencies:
       '@radix-ui/number': 1.1.0
       '@radix-ui/primitive': 1.1.0
@@ -14236,12 +13154,6 @@ snapshots:
     optionalDependencies:
       '@types/react': 18.3.3
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
   '@radix-ui/react-slot@1.1.0(@types/react@18.3.3)(react@18.3.1)':
     dependencies:
       '@radix-ui/react-compose-refs': 1.1.0(@types/react@18.3.3)(react@18.3.1)
@@ -14249,27 +13161,7 @@ snapshots:
     optionalDependencies:
       '@types/react': 18.3.3
 
->>>>>>> 321538bf (docs: Add docs)
   '@radix-ui/react-slot@1.1.0(@types/react@18.3.3)(react@19.0.0-rc.0)':
-=======
-  '@radix-ui/react-slot@1.1.0(@types/react@18.3.3)(react@18.3.1)':
-    dependencies:
-      '@radix-ui/react-compose-refs': 1.1.0(@types/react@18.3.3)(react@18.3.1)
-      react: 18.3.1
-    optionalDependencies:
-      '@types/react': 18.3.3
-
-  '@radix-ui/react-switch@1.0.3(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)':
->>>>>>> a24fce42 (docs: Add docs by fumadocs)
-=======
-  '@radix-ui/react-slot@1.1.0(@types/react@18.3.3)(react@19.0.0-rc.0)':
->>>>>>> 9e049073 (perf(docs): Remove docs)
-=======
-  "@radix-ui/react-slot@1.1.0(@types/react@18.3.3)(react@19.0.0-rc.0)":
->>>>>>> 3ba70325 (refactor(frontend): Change package name form @vitnode/frontend to vitnode-frontend)
-=======
-  '@radix-ui/react-slot@1.1.0(@types/react@18.3.3)(react@19.0.0-rc.0)':
->>>>>>> a9a3e1df (perf(frontend): Move accordion, alert-dialog, loader & button to package)
     dependencies:
       '@radix-ui/react-compose-refs': 1.1.0(@types/react@18.3.3)(react@19.0.0-rc.0)
       react: 19.0.0-rc.0
@@ -14291,58 +13183,6 @@ snapshots:
       '@types/react': 18.3.3
       '@types/react-dom': 18.3.0
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-  '@radix-ui/react-tabs@1.1.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)':
-=======
-  '@radix-ui/react-tabs@1.0.4(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
-    dependencies:
-      '@babel/runtime': 7.24.7
-      '@radix-ui/primitive': 1.0.1
-      '@radix-ui/react-context': 1.0.1(@types/react@18.3.3)(react@18.3.1)
-      '@radix-ui/react-direction': 1.0.1(@types/react@18.3.3)(react@18.3.1)
-      '@radix-ui/react-id': 1.0.1(@types/react@18.3.3)(react@18.3.1)
-      '@radix-ui/react-presence': 1.0.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@radix-ui/react-primitive': 1.0.3(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@radix-ui/react-roving-focus': 1.0.4(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@radix-ui/react-use-controllable-state': 1.0.1(@types/react@18.3.3)(react@18.3.1)
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
-    optionalDependencies:
-      '@types/react': 18.3.3
-      '@types/react-dom': 18.3.0
-
-  '@radix-ui/react-tabs@1.0.4(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)':
->>>>>>> a24fce42 (docs: Add docs by fumadocs)
-=======
-  '@radix-ui/react-tabs@1.1.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)':
->>>>>>> 9e049073 (perf(docs): Remove docs)
-=======
-  "@radix-ui/react-tabs@1.1.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)":
->>>>>>> 3ba70325 (refactor(frontend): Change package name form @vitnode/frontend to vitnode-frontend)
-=======
-  '@radix-ui/react-tabs@1.1.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)':
->>>>>>> a9a3e1df (perf(frontend): Move accordion, alert-dialog, loader & button to package)
-    dependencies:
-      '@radix-ui/primitive': 1.1.0
-      '@radix-ui/react-context': 1.1.0(@types/react@18.3.3)(react@19.0.0-rc.0)
-      '@radix-ui/react-direction': 1.1.0(@types/react@18.3.3)(react@19.0.0-rc.0)
-      '@radix-ui/react-id': 1.1.0(@types/react@18.3.3)(react@19.0.0-rc.0)
-      '@radix-ui/react-presence': 1.1.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
-      '@radix-ui/react-primitive': 2.0.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
-      '@radix-ui/react-roving-focus': 1.1.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
-      '@radix-ui/react-use-controllable-state': 1.1.0(@types/react@18.3.3)(react@19.0.0-rc.0)
-      react: 19.0.0-rc.0
-      react-dom: 19.0.0-rc.0(react@19.0.0-rc.0)
-    optionalDependencies:
-      '@types/react': 18.3.3
-      '@types/react-dom': 18.3.0
-
-=======
->>>>>>> b991c2f3 (perf: Change @vitnode/shared to vitnode-shared name package)
   '@radix-ui/react-toggle-group@1.0.4(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@babel/runtime': 7.24.7
@@ -14452,35 +13292,15 @@ snapshots:
     optionalDependencies:
       '@types/react': 18.3.3
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 9e049073 (perf(docs): Remove docs)
-=======
   '@radix-ui/react-use-callback-ref@1.1.0(@types/react@18.3.3)(react@18.3.1)':
     dependencies:
       react: 18.3.1
     optionalDependencies:
       '@types/react': 18.3.3
 
->>>>>>> 321538bf (docs: Add docs)
   '@radix-ui/react-use-callback-ref@1.1.0(@types/react@18.3.3)(react@19.0.0-rc.0)':
-=======
-  "@radix-ui/react-use-callback-ref@1.1.0(@types/react@18.3.3)(react@19.0.0-rc.0)":
->>>>>>> 3ba70325 (refactor(frontend): Change package name form @vitnode/frontend to vitnode-frontend)
-=======
-  '@radix-ui/react-use-callback-ref@1.1.0(@types/react@18.3.3)(react@19.0.0-rc.0)':
->>>>>>> a9a3e1df (perf(frontend): Move accordion, alert-dialog, loader & button to package)
     dependencies:
       react: 19.0.0-rc.0
-=======
-  '@radix-ui/react-use-callback-ref@1.1.0(@types/react@18.3.3)(react@18.3.1)':
-    dependencies:
-      react: 18.3.1
->>>>>>> a24fce42 (docs: Add docs by fumadocs)
     optionalDependencies:
       '@types/react': 18.3.3
 
@@ -14558,51 +13378,19 @@ snapshots:
     optionalDependencies:
       '@types/react': 18.3.3
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 9e049073 (perf(docs): Remove docs)
-=======
   '@radix-ui/react-use-layout-effect@1.1.0(@types/react@18.3.3)(react@18.3.1)':
     dependencies:
       react: 18.3.1
     optionalDependencies:
       '@types/react': 18.3.3
 
->>>>>>> 321538bf (docs: Add docs)
   '@radix-ui/react-use-layout-effect@1.1.0(@types/react@18.3.3)(react@19.0.0-rc.0)':
-=======
-  "@radix-ui/react-use-layout-effect@1.1.0(@types/react@18.3.3)(react@19.0.0-rc.0)":
->>>>>>> 3ba70325 (refactor(frontend): Change package name form @vitnode/frontend to vitnode-frontend)
-=======
-  '@radix-ui/react-use-layout-effect@1.1.0(@types/react@18.3.3)(react@19.0.0-rc.0)':
->>>>>>> a9a3e1df (perf(frontend): Move accordion, alert-dialog, loader & button to package)
     dependencies:
       react: 19.0.0-rc.0
     optionalDependencies:
       '@types/react': 18.3.3
 
-<<<<<<< HEAD
-<<<<<<< HEAD
   '@radix-ui/react-use-previous@1.1.0(@types/react@18.3.3)(react@19.0.0-rc.0)':
-=======
-  '@radix-ui/react-use-layout-effect@1.1.0(@types/react@18.3.3)(react@18.3.1)':
-    dependencies:
-      react: 18.3.1
-    optionalDependencies:
-      '@types/react': 18.3.3
-
-  '@radix-ui/react-use-previous@1.0.1(@types/react@18.3.3)(react@19.0.0-rc.0)':
->>>>>>> a24fce42 (docs: Add docs by fumadocs)
-=======
-  "@radix-ui/react-use-previous@1.1.0(@types/react@18.3.3)(react@19.0.0-rc.0)":
->>>>>>> 3ba70325 (refactor(frontend): Change package name form @vitnode/frontend to vitnode-frontend)
-=======
-  '@radix-ui/react-use-previous@1.1.0(@types/react@18.3.3)(react@19.0.0-rc.0)':
->>>>>>> a9a3e1df (perf(frontend): Move accordion, alert-dialog, loader & button to package)
     dependencies:
       react: 19.0.0-rc.0
     optionalDependencies:
@@ -14851,33 +13639,7 @@ snapshots:
       domhandler: 5.0.3
       selderee: 0.11.0
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-  '@shikijs/core@1.7.0': {}
-
-  '@shikijs/rehype@1.7.0':
-    dependencies:
-      '@shikijs/transformers': 1.7.0
-      '@types/hast': 3.0.4
-      hast-util-to-string: 3.0.0
-      shiki: 1.7.0
-      unified: 11.0.5
-      unist-util-visit: 5.0.0
-
-  '@shikijs/transformers@1.7.0':
-    dependencies:
-      shiki: 1.7.0
-
-=======
->>>>>>> 9e049073 (perf(docs): Remove docs)
   '@sindresorhus/is@4.6.0': {}
-=======
-  "@sindresorhus/is@4.6.0": {}
->>>>>>> 3ba70325 (refactor(frontend): Change package name form @vitnode/frontend to vitnode-frontend)
-=======
-  '@sindresorhus/is@4.6.0': {}
->>>>>>> a9a3e1df (perf(frontend): Move accordion, alert-dialog, loader & button to package)
 
   '@socket.io/component-emitter@3.1.2': {}
 
@@ -15017,50 +13779,7 @@ snapshots:
     dependencies:
       tailwindcss: 3.4.4(ts-node@10.9.2(@swc/core@1.6.5)(@types/node@20.14.9)(typescript@5.5.2))
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-  '@tailwindcss/container-queries@0.1.1(tailwindcss@3.4.4(ts-node@10.9.2(@types/node@20.14.8)(typescript@5.5.2)))':
-    dependencies:
-      tailwindcss: 3.4.4(ts-node@10.9.2(@types/node@20.14.8)(typescript@5.5.2))
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 8e139d6b (perf(frontend): Move root layout to package)
-  '@tanstack/eslint-plugin-query@5.43.1(eslint@8.57.0)(typescript@5.5.2)':
-=======
-  '@tailwindcss/typography@0.5.13(tailwindcss@3.4.4(ts-node@10.9.2(typescript@5.4.5)))':
-=======
-  '@tailwindcss/typography@0.5.13(tailwindcss@3.4.4(ts-node@10.9.2(@types/node@20.14.2)(typescript@5.4.5)))':
->>>>>>> 3d5764be (feat(docs): Add tailwind)
-    dependencies:
-      lodash.castarray: 4.4.0
-      lodash.isplainobject: 4.0.6
-      lodash.merge: 4.6.2
-      postcss-selector-parser: 6.0.10
-      tailwindcss: 3.4.4(ts-node@10.9.2(@types/node@20.14.2)(typescript@5.4.5))
-
-  '@tanstack/eslint-plugin-query@5.43.1(eslint@8.57.0)(typescript@5.4.5)':
->>>>>>> a24fce42 (docs: Add docs by fumadocs)
-=======
-  '@tanstack/eslint-plugin-query@5.43.1(eslint@8.57.0)(typescript@5.5.2)':
->>>>>>> 9e049073 (perf(docs): Remove docs)
-=======
-  "@tanstack/eslint-plugin-query@5.43.1(eslint@8.57.0)(typescript@5.5.2)":
->>>>>>> 3ba70325 (refactor(frontend): Change package name form @vitnode/frontend to vitnode-frontend)
-=======
-  '@tanstack/eslint-plugin-query@5.43.1(eslint@8.57.0)(typescript@5.5.2)':
->>>>>>> a9a3e1df (perf(frontend): Move accordion, alert-dialog, loader & button to package)
-=======
-  '@tanstack/eslint-plugin-query@5.47.0(eslint@8.57.0)(typescript@5.5.2)':
->>>>>>> 4173750f (perf(frontend): Move generate config script to package)
-=======
   '@tanstack/eslint-plugin-query@5.49.0(eslint@8.57.0)(typescript@5.5.2)':
->>>>>>> ea73e4fc (perf(frontend): Improve graphql paths)
     dependencies:
       '@typescript-eslint/utils': 8.0.0-alpha.30(eslint@8.57.0)(typescript@5.5.2)
       eslint: 8.57.0
@@ -16600,21 +15319,10 @@ snapshots:
       object-assign: 4.1.1
       vary: 1.1.2
 
-<<<<<<< HEAD
-=======
   cose-base@1.0.3:
     dependencies:
       layout-base: 1.0.2
 
-  cosmiconfig@7.1.0:
-    dependencies:
-      '@types/parse-json': 4.0.2
-      import-fresh: 3.3.0
-      parse-json: 5.2.0
-      path-type: 4.0.0
-      yaml: 1.10.2
-
->>>>>>> 321538bf (docs: Add docs)
   cosmiconfig@8.3.6(typescript@5.3.3):
     dependencies:
       import-fresh: 3.3.0
@@ -17385,30 +16093,10 @@ snapshots:
       '@typescript-eslint/parser': 7.2.0(eslint@8.57.0)(typescript@5.5.2)
       eslint: 8.57.0
       eslint-import-resolver-node: 0.3.9
-<<<<<<< HEAD
-<<<<<<< HEAD
       eslint-import-resolver-typescript: 3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0)
-<<<<<<< HEAD
-<<<<<<< HEAD
       eslint-plugin-import: 2.29.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0))(eslint@8.57.0)
-=======
-      eslint-import-resolver-typescript: 3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1)(eslint@8.57.0)
-      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.0)
->>>>>>> 321538bf (docs: Add docs)
-=======
-      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.0)
->>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
-=======
-      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0))(eslint@8.57.0)
->>>>>>> ca4a53fc (perf(frontend): Move user settings to package)
       eslint-plugin-jsx-a11y: 6.9.0(eslint@8.57.0)
       eslint-plugin-react: 7.34.3(eslint@8.57.0)
-=======
-      eslint-import-resolver-typescript: 3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1)(eslint@8.57.0)
-      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.0)
-      eslint-plugin-jsx-a11y: 6.8.0(eslint@8.57.0)
-      eslint-plugin-react: 7.34.2(eslint@8.57.0)
->>>>>>> a24fce42 (docs: Add docs by fumadocs)
       eslint-plugin-react-hooks: 4.6.2(eslint@8.57.0)
     optionalDependencies:
       typescript: 5.5.2
@@ -17437,55 +16125,13 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-<<<<<<< HEAD
-<<<<<<< HEAD
   eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0):
-=======
-  eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1)(eslint@8.57.0):
->>>>>>> a24fce42 (docs: Add docs by fumadocs)
-=======
-  eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1)(eslint@8.57.0):
->>>>>>> 321538bf (docs: Add docs)
     dependencies:
       debug: 4.3.5
       enhanced-resolve: 5.17.0
       eslint: 8.57.0
-<<<<<<< HEAD
-<<<<<<< HEAD
       eslint-module-utils: 2.8.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0))(eslint@8.57.0)
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
       eslint-plugin-import: 2.29.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0))(eslint@8.57.0)
-=======
-      eslint-module-utils: 2.8.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1)(eslint@8.57.0))(eslint@8.57.0)
-      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.0)
->>>>>>> a24fce42 (docs: Add docs by fumadocs)
-=======
-      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.0)
->>>>>>> 5fb59dd0 (perf(frontend): Move ui components to package)
-=======
-      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0))(eslint@8.57.0)
->>>>>>> 5f53f831 (perf(frontend): Move few files form components folder to package)
-=======
-      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.0)
->>>>>>> 4173750f (perf(frontend): Move generate config script to package)
-=======
-      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0))(eslint@8.57.0)
->>>>>>> 2e0ec75a (fix(backend): Add dotenv to init script for database)
-=======
-      eslint-module-utils: 2.8.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1)(eslint@8.57.0))(eslint@8.57.0)
-      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.0)
->>>>>>> 321538bf (docs: Add docs)
-=======
-      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.0)
->>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
-=======
-      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0))(eslint@8.57.0)
->>>>>>> ca4a53fc (perf(frontend): Move user settings to package)
       fast-glob: 3.3.2
       get-tsconfig: 4.7.5
       is-core-module: 2.14.0
@@ -17496,30 +16142,14 @@ snapshots:
       - eslint-import-resolver-webpack
       - supports-color
 
-<<<<<<< HEAD
-<<<<<<< HEAD
   eslint-module-utils@2.8.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0))(eslint@8.57.0):
-=======
-  eslint-module-utils@2.8.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1)(eslint@8.57.0))(eslint@8.57.0):
->>>>>>> a24fce42 (docs: Add docs by fumadocs)
-=======
-  eslint-module-utils@2.8.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1)(eslint@8.57.0))(eslint@8.57.0):
->>>>>>> 321538bf (docs: Add docs)
     dependencies:
       debug: 3.2.7
     optionalDependencies:
       '@typescript-eslint/parser': 7.2.0(eslint@8.57.0)(typescript@5.5.2)
       eslint: 8.57.0
       eslint-import-resolver-node: 0.3.9
-<<<<<<< HEAD
-<<<<<<< HEAD
       eslint-import-resolver-typescript: 3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0)
-=======
-      eslint-import-resolver-typescript: 3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1)(eslint@8.57.0)
->>>>>>> a24fce42 (docs: Add docs by fumadocs)
-=======
-      eslint-import-resolver-typescript: 3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1)(eslint@8.57.0)
->>>>>>> 321538bf (docs: Add docs)
     transitivePeerDependencies:
       - supports-color
 
@@ -17533,15 +16163,7 @@ snapshots:
       doctrine: 2.1.0
       eslint: 8.57.0
       eslint-import-resolver-node: 0.3.9
-<<<<<<< HEAD
-<<<<<<< HEAD
       eslint-module-utils: 2.8.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0))(eslint@8.57.0)
-=======
-      eslint-module-utils: 2.8.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1)(eslint@8.57.0))(eslint@8.57.0)
->>>>>>> a24fce42 (docs: Add docs by fumadocs)
-=======
-      eslint-module-utils: 2.8.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1)(eslint@8.57.0))(eslint@8.57.0)
->>>>>>> 321538bf (docs: Add docs)
       hasown: 2.0.2
       is-core-module: 2.14.0
       is-glob: 4.0.3
@@ -17710,23 +16332,6 @@ snapshots:
 
   estraverse@5.3.0: {}
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-  estree-util-attach-comments@3.0.0:
-    dependencies:
-      '@types/estree': 1.0.5
-
-  estree-util-build-jsx@3.0.1:
-    dependencies:
-      '@types/estree-jsx': 1.0.5
-      devlop: 1.1.0
-      estree-util-is-identifier-name: 3.0.0
-      estree-walker: 3.0.3
-
-  estree-util-is-identifier-name@3.0.0: {}
-
-  estree-util-to-js@2.0.0:
-=======
   estree-util-attach-comments@2.1.1:
     dependencies:
       '@types/estree': 1.0.5
@@ -17740,23 +16345,11 @@ snapshots:
   estree-util-is-identifier-name@2.1.0: {}
 
   estree-util-to-js@1.2.0:
->>>>>>> 321538bf (docs: Add docs)
     dependencies:
       '@types/estree-jsx': 1.0.5
       astring: 1.8.6
       source-map: 0.7.4
 
-<<<<<<< HEAD
-  estree-util-value-to-estree@3.1.1:
-    dependencies:
-      '@types/estree': 1.0.5
-      is-plain-obj: 4.1.0
-
-  estree-util-visit@2.0.0:
-    dependencies:
-      '@types/estree-jsx': 1.0.5
-      '@types/unist': 3.0.2
-=======
   estree-util-value-to-estree@1.3.0:
     dependencies:
       is-plain-obj: 3.0.0
@@ -17765,17 +16358,11 @@ snapshots:
     dependencies:
       '@types/estree-jsx': 1.0.5
       '@types/unist': 2.0.10
->>>>>>> 321538bf (docs: Add docs)
 
   estree-walker@3.0.3:
     dependencies:
       '@types/estree': 1.0.5
 
-<<<<<<< HEAD
-=======
->>>>>>> 9e049073 (perf(docs): Remove docs)
-=======
->>>>>>> 321538bf (docs: Add docs)
   esutils@2.0.3: {}
 
   etag@1.8.1: {}
@@ -18017,19 +16604,7 @@ snapshots:
       cross-spawn: 7.0.3
       signal-exit: 4.1.0
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-  fork-ts-checker-webpack-plugin@9.0.2(typescript@5.3.3)(webpack@5.90.1(@swc/core@1.6.3(@swc/helpers@0.5.11))):
-=======
   fork-ts-checker-webpack-plugin@9.0.2(typescript@5.3.3)(webpack@5.90.1(@swc/core@1.6.5(@swc/helpers@0.5.11))(esbuild@0.19.12)):
->>>>>>> 0aa27abf (chore: Update packages)
-=======
-  fork-ts-checker-webpack-plugin@9.0.2(typescript@5.3.3)(webpack@5.90.1(@swc/core@1.6.5(@swc/helpers@0.5.11))):
->>>>>>> 2e0ec75a (fix(backend): Add dotenv to init script for database)
-=======
-  fork-ts-checker-webpack-plugin@9.0.2(typescript@5.3.3)(webpack@5.90.1(@swc/core@1.6.5(@swc/helpers@0.5.11))(esbuild@0.19.12)):
->>>>>>> b991c2f3 (perf: Change @vitnode/shared to vitnode-shared name package)
     dependencies:
       '@babel/code-frame': 7.24.7
       chalk: 4.1.2
@@ -18044,19 +16619,7 @@ snapshots:
       semver: 7.6.2
       tapable: 2.2.1
       typescript: 5.3.3
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-      webpack: 5.90.1(@swc/core@1.6.3(@swc/helpers@0.5.11))
-=======
       webpack: 5.90.1(@swc/core@1.6.5(@swc/helpers@0.5.11))(esbuild@0.19.12)
->>>>>>> 0aa27abf (chore: Update packages)
-=======
-      webpack: 5.90.1(@swc/core@1.6.5(@swc/helpers@0.5.11))
->>>>>>> 2e0ec75a (fix(backend): Add dotenv to init script for database)
-=======
-      webpack: 5.90.1(@swc/core@1.6.5(@swc/helpers@0.5.11))(esbuild@0.19.12)
->>>>>>> b991c2f3 (perf: Change @vitnode/shared to vitnode-shared name package)
 
   form-data@4.0.0:
     dependencies:
@@ -18076,10 +16639,7 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-<<<<<<< HEAD
-  framer-motion@11.2.12(@emotion/is-prop-valid@1.2.2)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0):
-=======
-  framer-motion@11.2.11(@emotion/is-prop-valid@1.2.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  framer-motion@11.2.12(@emotion/is-prop-valid@1.2.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       tslib: 2.6.3
     optionalDependencies:
@@ -18087,8 +16647,7 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  framer-motion@11.2.11(@emotion/is-prop-valid@1.2.2)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0):
->>>>>>> 321538bf (docs: Add docs)
+  framer-motion@11.2.12(@emotion/is-prop-valid@1.2.2)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0):
     dependencies:
       tslib: 2.6.3
     optionalDependencies:
@@ -18115,72 +16674,6 @@ snapshots:
   fsevents@2.3.3:
     optional: true
 
-<<<<<<< HEAD
-  fumadocs-core@12.1.3(@types/react@18.3.3)(next@14.2.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
-    dependencies:
-      '@formatjs/intl-localematcher': 0.5.4
-      '@shikijs/rehype': 1.7.0
-      '@shikijs/transformers': 1.7.0
-      flexsearch: 0.7.21
-      github-slugger: 2.0.0
-      negotiator: 0.6.3
-      next: 14.2.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      npm-to-yarn: 2.2.1
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
-      react-remove-scroll: 2.5.10(@types/react@18.3.3)(react@18.3.1)
-      remark: 15.0.1
-      remark-gfm: 4.0.0
-      remark-mdx: 3.0.1
-      scroll-into-view-if-needed: 3.1.0
-      shiki: 1.7.0
-      swr: 2.2.5(react@18.3.1)
-      unist-util-visit: 5.0.0
-    transitivePeerDependencies:
-      - '@types/react'
-      - supports-color
-
-  fumadocs-mdx@8.2.32(fumadocs-core@12.1.3(@types/react@18.3.3)(next@14.2.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(next@14.2.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)):
-    dependencies:
-      '@mdx-js/mdx': 3.0.1
-      cross-spawn: 7.0.3
-      estree-util-value-to-estree: 3.1.1
-      fast-glob: 3.3.2
-      fumadocs-core: 12.1.3(@types/react@18.3.3)(next@14.2.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      gray-matter: 4.0.3
-      next: 14.2.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      zod: 3.23.8
-    transitivePeerDependencies:
-      - supports-color
-
-  fumadocs-ui@12.1.3(@types/react-dom@18.3.0)(@types/react@18.3.3)(next@14.2.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.4(ts-node@10.9.2(@types/node@20.14.2)(typescript@5.4.5))):
-    dependencies:
-      '@radix-ui/react-accordion': 1.1.2(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@radix-ui/react-collapsible': 1.0.3(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@radix-ui/react-dialog': 1.0.5(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@radix-ui/react-direction': 1.0.1(@types/react@18.3.3)(react@18.3.1)
-      '@radix-ui/react-popover': 1.0.7(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@radix-ui/react-scroll-area': 1.1.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@radix-ui/react-tabs': 1.0.4(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@tailwindcss/typography': 0.5.13(tailwindcss@3.4.4(ts-node@10.9.2(@types/node@20.14.2)(typescript@5.4.5)))
-      class-variance-authority: 0.7.0
-      cmdk: 1.0.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      fumadocs-core: 12.1.3(@types/react@18.3.3)(next@14.2.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      lucide-react: 0.395.0(react@18.3.1)
-      next: 14.2.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      next-themes: 0.3.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
-      react-medium-image-zoom: 5.2.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      tailwind-merge: 2.3.0
-    transitivePeerDependencies:
-      - '@types/react'
-      - '@types/react-dom'
-      - supports-color
-      - tailwindcss
-
-=======
->>>>>>> 9e049073 (perf(docs): Remove docs)
   function-bind@1.1.2: {}
 
   function.prototype.name@1.1.6:
@@ -18736,12 +17229,6 @@ snapshots:
       is-relative: 1.0.0
       is-windows: 1.0.2
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 9e049073 (perf(docs): Remove docs)
-=======
   is-alphabetical@2.0.1: {}
 
   is-alphanumerical@2.0.1:
@@ -18749,22 +17236,10 @@ snapshots:
       is-alphabetical: 2.0.1
       is-decimal: 2.0.1
 
->>>>>>> 321538bf (docs: Add docs)
   is-arguments@1.1.1:
     dependencies:
       call-bind: 1.0.7
       has-tostringtag: 1.0.2
-<<<<<<< HEAD
-=======
-  is-alphabetical@2.0.1: {}
-
-  is-alphanumerical@2.0.1:
-    dependencies:
-      is-alphabetical: 2.0.1
-      is-decimal: 2.0.1
->>>>>>> a24fce42 (docs: Add docs by fumadocs)
-=======
->>>>>>> 9e049073 (perf(docs): Remove docs)
 
   is-array-buffer@3.0.4:
     dependencies:
@@ -19202,19 +17677,11 @@ snapshots:
 
   lru-cache@7.18.3: {}
 
-<<<<<<< HEAD
-  lucide-react@0.396.0(react@19.0.0-rc.0):
-=======
   lucide-react@0.378.0(react@18.3.1):
     dependencies:
       react: 18.3.1
 
-<<<<<<< HEAD
-  lucide-react@0.395.0(react@19.0.0-rc.0):
->>>>>>> 321538bf (docs: Add docs)
-=======
   lucide-react@0.399.0(react@19.0.0-rc.0):
->>>>>>> ea73e4fc (perf(frontend): Improve graphql paths)
     dependencies:
       react: 19.0.0-rc.0
 
@@ -19895,53 +18362,7 @@ snapshots:
 
   neo-async@2.6.2: {}
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-  next-intl@3.15.2(next@15.0.0-canary.44(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0):
-    dependencies:
-      '@formatjs/intl-localematcher': 0.2.32
-      negotiator: 0.6.3
-      next: 15.0.0-canary.44(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
-      react: 19.0.0-rc.0
-      use-intl: 3.15.2(react@19.0.0-rc.0)
-
-  next-intl@3.15.2(next@15.0.0-canary.44(babel-plugin-react-compiler@0.0.0-experimental-938cd9a-20240601)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0):
-=======
-  next-intl@3.15.2(next@15.0.0-canary.46(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0):
->>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
-=======
-=======
->>>>>>> f973ba0f (perf(frontend): Move plugins pages admin to package)
-  next-intl@3.15.2(next@15.0.0-canary.46(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0):
-=======
-  next-intl@3.15.3(next@15.0.0-canary.46(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0):
->>>>>>> ea73e4fc (perf(frontend): Improve graphql paths)
-    dependencies:
-      '@formatjs/intl-localematcher': 0.2.32
-      negotiator: 0.6.3
-      next: 15.0.0-canary.46(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
-      react: 19.0.0-rc.0
-      use-intl: 3.15.3(react@19.0.0-rc.0)
-
-<<<<<<< HEAD
-  next-intl@3.15.2(next@15.0.0-canary.46(babel-plugin-react-compiler@0.0.0-experimental-696af53-20240625)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0):
-<<<<<<< HEAD
->>>>>>> ca4a53fc (perf(frontend): Move user settings to package)
-=======
-  next-intl@3.15.2(next@15.0.0-canary.46(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0):
->>>>>>> 0ab072cd (refactor(backend): Restore paths)
-=======
->>>>>>> f973ba0f (perf(frontend): Move plugins pages admin to package)
-=======
-  next-intl@3.15.3(next@15.0.0-canary.46(babel-plugin-react-compiler@0.0.0-experimental-696af53-20240625)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0):
->>>>>>> ea73e4fc (perf(frontend): Improve graphql paths)
-=======
   next-intl@3.15.3(next@15.0.0-canary.46(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0):
->>>>>>> bafd0554 (chore: Change npm version when bump version)
     dependencies:
       '@formatjs/intl-localematcher': 0.2.32
       negotiator: 0.6.3
@@ -20002,9 +18423,6 @@ snapshots:
       - '@babel/core'
       - babel-plugin-macros
 
-<<<<<<< HEAD
-  next@15.0.0-canary.44(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0):
-=======
   next@14.2.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       '@next/env': 14.2.4
@@ -20030,80 +18448,7 @@ snapshots:
       - '@babel/core'
       - babel-plugin-macros
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-  next@15.0.0-canary.28(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0):
->>>>>>> 321538bf (docs: Add docs)
-    dependencies:
-      '@next/env': 15.0.0-canary.44
-=======
-  next@15.0.0-canary.46(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0):
-    dependencies:
-      '@next/env': 15.0.0-canary.46
->>>>>>> ca4a53fc (perf(frontend): Move user settings to package)
-=======
-  next@15.0.0-canary.46(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0):
-    dependencies:
-      '@next/env': 15.0.0-canary.46
->>>>>>> f973ba0f (perf(frontend): Move plugins pages admin to package)
-      '@swc/helpers': 0.5.11
-      busboy: 1.6.0
-      caniuse-lite: 1.0.30001636
-      graceful-fs: 4.2.11
-      postcss: 8.4.31
-      react: 19.0.0-rc.0
-      react-dom: 19.0.0-rc.0(react@19.0.0-rc.0)
-      styled-jsx: 5.1.6(@babel/core@7.24.7)(react@19.0.0-rc.0)
-    optionalDependencies:
-<<<<<<< HEAD
-<<<<<<< HEAD
-      '@next/swc-darwin-arm64': 15.0.0-canary.44
-      '@next/swc-darwin-x64': 15.0.0-canary.44
-      '@next/swc-linux-arm64-gnu': 15.0.0-canary.44
-      '@next/swc-linux-arm64-musl': 15.0.0-canary.44
-      '@next/swc-linux-x64-gnu': 15.0.0-canary.44
-      '@next/swc-linux-x64-musl': 15.0.0-canary.44
-      '@next/swc-win32-arm64-msvc': 15.0.0-canary.44
-      '@next/swc-win32-ia32-msvc': 15.0.0-canary.44
-      '@next/swc-win32-x64-msvc': 15.0.0-canary.44
-=======
-=======
->>>>>>> f973ba0f (perf(frontend): Move plugins pages admin to package)
-      '@next/swc-darwin-arm64': 15.0.0-canary.46
-      '@next/swc-darwin-x64': 15.0.0-canary.46
-      '@next/swc-linux-arm64-gnu': 15.0.0-canary.46
-      '@next/swc-linux-arm64-musl': 15.0.0-canary.46
-      '@next/swc-linux-x64-gnu': 15.0.0-canary.46
-      '@next/swc-linux-x64-musl': 15.0.0-canary.46
-      '@next/swc-win32-arm64-msvc': 15.0.0-canary.46
-      '@next/swc-win32-ia32-msvc': 15.0.0-canary.46
-      '@next/swc-win32-x64-msvc': 15.0.0-canary.46
-<<<<<<< HEAD
->>>>>>> ca4a53fc (perf(frontend): Move user settings to package)
-=======
->>>>>>> f973ba0f (perf(frontend): Move plugins pages admin to package)
-      sharp: 0.33.4
-    transitivePeerDependencies:
-      - '@babel/core'
-      - babel-plugin-macros
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-  next@15.0.0-canary.44(babel-plugin-react-compiler@0.0.0-experimental-938cd9a-20240601)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0):
-=======
-=======
->>>>>>> ca4a53fc (perf(frontend): Move user settings to package)
-=======
->>>>>>> 0ab072cd (refactor(backend): Restore paths)
-=======
->>>>>>> f973ba0f (perf(frontend): Move plugins pages admin to package)
-=======
->>>>>>> bafd0554 (chore: Change npm version when bump version)
   next@15.0.0-canary.46(babel-plugin-react-compiler@0.0.0-experimental-696af53-20240625)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0):
->>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
     dependencies:
       '@next/env': 15.0.0-canary.46
       '@swc/helpers': 0.5.11
@@ -20130,39 +18475,9 @@ snapshots:
       - '@babel/core'
       - babel-plugin-macros
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-  nextjs-toploader@1.6.12(next@15.0.0-canary.44(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0):
-    dependencies:
-      next: 15.0.0-canary.44(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
-=======
   nextjs-toploader@1.6.12(next@15.0.0-canary.46(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0):
     dependencies:
       next: 15.0.0-canary.46(babel-plugin-react-compiler@0.0.0-experimental-696af53-20240625)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
->>>>>>> dc6e0d10 (perf(frontend): Move theme layout to package)
-=======
-  nextjs-toploader@1.6.12(next@15.0.0-canary.46(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0):
-    dependencies:
-      next: 15.0.0-canary.46(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
->>>>>>> ca4a53fc (perf(frontend): Move user settings to package)
-=======
-  nextjs-toploader@1.6.12(next@15.0.0-canary.46(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0):
-    dependencies:
-      next: 15.0.0-canary.46(babel-plugin-react-compiler@0.0.0-experimental-696af53-20240625)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
->>>>>>> 0ab072cd (refactor(backend): Restore paths)
-=======
-  nextjs-toploader@1.6.12(next@15.0.0-canary.46(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0):
-    dependencies:
-      next: 15.0.0-canary.46(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
->>>>>>> f973ba0f (perf(frontend): Move plugins pages admin to package)
-=======
-  nextjs-toploader@1.6.12(next@15.0.0-canary.46(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0):
-    dependencies:
-      next: 15.0.0-canary.46(babel-plugin-react-compiler@0.0.0-experimental-696af53-20240625)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
->>>>>>> bafd0554 (chore: Change npm version when bump version)
       nprogress: 0.2.0
       prop-types: 15.8.1
       react: 19.0.0-rc.0
@@ -20604,53 +18919,7 @@ snapshots:
       camelcase-css: 2.0.1
       postcss: 8.4.38
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-  postcss-load-config@4.0.2(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.6.3(@swc/helpers@0.5.11))(@types/node@20.14.7)(typescript@5.5.2)):
-=======
-  postcss-load-config@4.0.2(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.6.1(@swc/helpers@0.5.11))(@types/node@20.14.2)(typescript@5.4.5)):
-=======
-  postcss-load-config@4.0.2(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.6.5(@swc/helpers@0.5.11))(@types/node@20.14.8)(typescript@5.5.2)):
->>>>>>> b991c2f3 (perf: Change @vitnode/shared to vitnode-shared name package)
-=======
-  postcss-load-config@4.0.2(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.6.5)(@types/node@20.14.8)(typescript@5.5.2)):
->>>>>>> 321538bf (docs: Add docs)
-    dependencies:
-      lilconfig: 3.1.2
-      yaml: 2.4.5
-    optionalDependencies:
-      postcss: 8.4.38
-<<<<<<< HEAD
-      ts-node: 10.9.2(@swc/core@1.6.1(@swc/helpers@0.5.11))(@types/node@20.14.2)(typescript@5.4.5)
-
-  postcss-load-config@4.0.2(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.6.1)(@types/node@20.14.2)(typescript@5.4.5)):
->>>>>>> a24fce42 (docs: Add docs by fumadocs)
-=======
-  postcss-load-config@4.0.2(postcss@8.4.38)(ts-node@10.9.2(@types/node@20.14.8)(typescript@5.5.2)):
->>>>>>> 0aa27abf (chore: Update packages)
-=======
-=======
-      ts-node: 10.9.2(@swc/core@1.6.5)(@types/node@20.14.8)(typescript@5.5.2)
-
-<<<<<<< HEAD
->>>>>>> b991c2f3 (perf: Change @vitnode/shared to vitnode-shared name package)
-  postcss-load-config@4.0.2(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.6.5)(@types/node@20.14.8)(typescript@5.5.2)):
->>>>>>> 5f53f831 (perf(frontend): Move few files form components folder to package)
-=======
-  postcss-load-config@4.0.2(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.6.5(@swc/helpers@0.5.11))(@types/node@20.14.8)(typescript@5.5.2)):
->>>>>>> 4173750f (perf(frontend): Move generate config script to package)
-=======
-  postcss-load-config@4.0.2(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.6.5)(@types/node@20.14.8)(typescript@5.5.2)):
->>>>>>> 2e0ec75a (fix(backend): Add dotenv to init script for database)
-=======
   postcss-load-config@4.0.2(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.6.5(@swc/helpers@0.5.11))(@types/node@20.14.9)(typescript@5.5.2)):
->>>>>>> ea73e4fc (perf(frontend): Improve graphql paths)
     dependencies:
       lilconfig: 3.1.2
       yaml: 2.4.5
@@ -20658,81 +18927,7 @@ snapshots:
       postcss: 8.4.38
       ts-node: 10.9.2(@swc/core@1.6.5)(@types/node@20.14.9)(typescript@5.5.2)
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-  postcss-load-config@4.0.2(postcss@8.4.38)(ts-node@10.9.2(@types/node@20.14.7)(typescript@5.5.2)):
-=======
-=======
-  postcss-load-config@4.0.2(postcss@8.4.38)(ts-node@10.9.2(@types/node@20.14.8)(typescript@5.5.2)):
-=======
-  postcss-load-config@4.0.2(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.6.5)(@types/node@20.14.8)(typescript@5.5.2)):
->>>>>>> e528822e (perf(frontend): Move admin layout to package)
-=======
-  postcss-load-config@4.0.2(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.6.5)(@types/node@20.14.8)(typescript@5.5.2)):
->>>>>>> ca4a53fc (perf(frontend): Move user settings to package)
-    dependencies:
-      lilconfig: 3.1.2
-      yaml: 2.4.5
-    optionalDependencies:
-      postcss: 8.4.38
-<<<<<<< HEAD
-      ts-node: 10.9.2(@swc/core@1.6.5(@swc/helpers@0.5.11))(@types/node@20.14.8)(typescript@5.5.2)
-
->>>>>>> 5f53f831 (perf(frontend): Move few files form components folder to package)
-  postcss-load-config@5.1.0(jiti@1.21.6)(postcss@8.4.38):
->>>>>>> 84699d96 (perf(frontend): Move color input to package)
-    dependencies:
-      lilconfig: 3.1.2
-      yaml: 2.4.5
-    optionalDependencies:
-<<<<<<< HEAD
-      postcss: 8.4.38
-      ts-node: 10.9.2(@types/node@20.14.7)(typescript@5.5.2)
-
-  postcss-load-config@4.0.2(postcss@8.4.38)(ts-node@10.9.2(@types/node@20.14.2)(typescript@5.4.5)):
-    dependencies:
-      lilconfig: 3.1.2
-      yaml: 2.4.5
-    optionalDependencies:
-      postcss: 8.4.38
-      ts-node: 10.9.2(@swc/core@1.6.1)(@types/node@20.14.2)(typescript@5.4.5)
-
-=======
->>>>>>> 9e049073 (perf(docs): Remove docs)
-=======
-      jiti: 1.21.6
-      postcss: 8.4.38
-
->>>>>>> 84699d96 (perf(frontend): Move color input to package)
-=======
->>>>>>> 8e139d6b (perf(frontend): Move root layout to package)
-=======
->>>>>>> 8880a1e1 (perf(frontend): Move fetcher to package)
-=======
-      ts-node: 10.9.2(@swc/core@1.6.5)(@types/node@20.14.8)(typescript@5.5.2)
-
-<<<<<<< HEAD
->>>>>>> e528822e (perf(frontend): Move admin layout to package)
-=======
->>>>>>> ec012e8e (perf(frontend): Move rest of components to package)
-=======
-=======
->>>>>>> 0ab072cd (refactor(backend): Restore paths)
-  postcss-load-config@4.0.2(postcss@8.4.38)(ts-node@10.9.2(@types/node@20.14.8)(typescript@5.5.2)):
-=======
-  postcss-load-config@4.0.2(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.6.5)(@types/node@20.14.8)(typescript@5.5.2)):
->>>>>>> f973ba0f (perf(frontend): Move plugins pages admin to package)
-=======
   postcss-load-config@4.0.2(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.6.5)(@types/node@20.14.9)(typescript@5.5.2)):
->>>>>>> ea73e4fc (perf(frontend): Improve graphql paths)
     dependencies:
       lilconfig: 3.1.2
       yaml: 2.4.5
@@ -20740,9 +18935,6 @@ snapshots:
       postcss: 8.4.38
       ts-node: 10.9.2(@swc/core@1.6.5)(@types/node@20.14.9)(typescript@5.5.2)
 
-<<<<<<< HEAD
->>>>>>> ca4a53fc (perf(frontend): Move user settings to package)
-=======
   postcss-load-config@4.0.2(postcss@8.4.38)(ts-node@10.9.2(@types/node@20.14.8)(typescript@5.5.2)):
     dependencies:
       lilconfig: 3.1.2
@@ -20751,7 +18943,6 @@ snapshots:
       postcss: 8.4.38
       ts-node: 10.9.2(@types/node@20.14.8)(typescript@5.5.2)
 
->>>>>>> f973ba0f (perf(frontend): Move plugins pages admin to package)
   postcss-nested@6.0.1(postcss@8.4.38):
     dependencies:
       postcss: 8.4.38
@@ -21083,14 +19274,6 @@ snapshots:
 
   react-is@16.13.1: {}
 
-<<<<<<< HEAD
-  react-medium-image-zoom@5.2.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
-    dependencies:
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
-
-=======
->>>>>>> 9e049073 (perf(docs): Remove docs)
   react-promise-suspense@0.3.4:
     dependencies:
       fast-deep-equal: 2.0.1
@@ -21631,15 +19814,6 @@ snapshots:
       interpret: 1.4.0
       rechoir: 0.6.2
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-  shiki@1.7.0:
-    dependencies:
-      '@shikijs/core': 1.7.0
-
-=======
->>>>>>> 9e049073 (perf(docs): Remove docs)
-=======
   shiki@0.14.7:
     dependencies:
       ansi-sequence-parser: 1.1.1
@@ -21647,7 +19821,6 @@ snapshots:
       vscode-oniguruma: 1.7.0
       vscode-textmate: 8.0.0
 
->>>>>>> 321538bf (docs: Add docs)
   side-channel@1.0.6:
     dependencies:
       call-bind: 1.0.7
@@ -21997,87 +20170,11 @@ snapshots:
     dependencies:
       tailwindcss: 3.4.4(ts-node@10.9.2(@swc/core@1.6.5)(@types/node@20.14.9)(typescript@5.5.2))
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> ca4a53fc (perf(frontend): Move user settings to package)
-=======
->>>>>>> f973ba0f (perf(frontend): Move plugins pages admin to package)
   tailwindcss-animate@1.0.7(tailwindcss@3.4.4(ts-node@10.9.2(@types/node@20.14.8)(typescript@5.5.2))):
     dependencies:
       tailwindcss: 3.4.4(ts-node@10.9.2(@types/node@20.14.8)(typescript@5.5.2))
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-  tailwindcss@3.4.0:
-=======
-=======
->>>>>>> 8e139d6b (perf(frontend): Move root layout to package)
-  tailwindcss@3.4.0(ts-node@10.9.2(@types/node@20.14.8)(typescript@5.5.2)):
->>>>>>> 0aa27abf (chore: Update packages)
-=======
-=======
->>>>>>> ca4a53fc (perf(frontend): Move user settings to package)
-=======
->>>>>>> 0ab072cd (refactor(backend): Restore paths)
-=======
->>>>>>> f973ba0f (perf(frontend): Move plugins pages admin to package)
-  tailwindcss@3.4.0(ts-node@10.9.2(@swc/core@1.6.5(@swc/helpers@0.5.11))(@types/node@20.14.8)(typescript@5.5.2)):
->>>>>>> 4173750f (perf(frontend): Move generate config script to package)
-    dependencies:
-      '@alloc/quick-lru': 5.2.0
-      arg: 5.0.2
-      chokidar: 3.6.0
-      didyoumean: 1.2.2
-      dlv: 1.1.3
-      fast-glob: 3.3.2
-      glob-parent: 6.0.2
-      is-glob: 4.0.3
-      jiti: 1.21.6
-      lilconfig: 2.1.0
-      micromatch: 4.0.7
-      normalize-path: 3.0.0
-      object-hash: 3.0.0
-      picocolors: 1.0.1
-      postcss: 8.4.38
-      postcss-import: 15.1.0(postcss@8.4.38)
-      postcss-js: 4.0.1(postcss@8.4.38)
-<<<<<<< HEAD
-      postcss-load-config: 4.0.2(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.6.5(@swc/helpers@0.5.11))(@types/node@20.14.8)(typescript@5.5.2))
-=======
-      postcss-load-config: 4.0.2(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.6.5)(@types/node@20.14.8)(typescript@5.5.2))
->>>>>>> 321538bf (docs: Add docs)
-      postcss-nested: 6.0.1(postcss@8.4.38)
-      postcss-selector-parser: 6.1.0
-      resolve: 1.22.8
-      sucrase: 3.35.0
-    transitivePeerDependencies:
-      - ts-node
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 9e049073 (perf(docs): Remove docs)
-  tailwindcss@3.4.0(ts-node@10.9.2(@swc/core@1.6.3(@swc/helpers@0.5.11))(@types/node@20.14.7)(typescript@5.5.2)):
-=======
-  tailwindcss-animate@1.0.7(tailwindcss@3.4.4(ts-node@10.9.2(@types/node@20.14.2)(typescript@5.4.5))):
-    dependencies:
-      tailwindcss: 3.4.4(ts-node@10.9.2(@types/node@20.14.2)(typescript@5.4.5))
-
-<<<<<<< HEAD
-  tailwindcss@3.4.0(ts-node@10.9.2(@swc/core@1.6.1(@swc/helpers@0.5.11))(@types/node@20.14.2)(typescript@5.4.5)):
->>>>>>> 3d5764be (feat(docs): Add tailwind)
-=======
   tailwindcss@3.4.0(ts-node@10.9.2(@swc/core@1.6.5(@swc/helpers@0.5.11))(@types/node@20.14.9)(typescript@5.5.2)):
->>>>>>> ea73e4fc (perf(frontend): Improve graphql paths)
     dependencies:
       '@alloc/quick-lru': 5.2.0
       arg: 5.0.2
@@ -22096,78 +20193,7 @@ snapshots:
       postcss: 8.4.38
       postcss-import: 15.1.0(postcss@8.4.38)
       postcss-js: 4.0.1(postcss@8.4.38)
-<<<<<<< HEAD
-<<<<<<< HEAD
-      postcss-load-config: 4.0.2(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.6.3(@swc/helpers@0.5.11))(@types/node@20.14.7)(typescript@5.5.2))
-=======
-      postcss-load-config: 4.0.2(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.6.1(@swc/helpers@0.5.11))(@types/node@20.14.2)(typescript@5.4.5))
->>>>>>> a24fce42 (docs: Add docs by fumadocs)
-      postcss-nested: 6.0.1(postcss@8.4.38)
-      postcss-selector-parser: 6.1.0
-      resolve: 1.22.8
-      sucrase: 3.35.0
-    transitivePeerDependencies:
-      - ts-node
-
-  tailwindcss@3.4.0(ts-node@10.9.2(@types/node@20.14.7)(typescript@5.5.2)):
-=======
-  tailwindcss@3.4.0(ts-node@10.9.2(@swc/core@1.6.3(@swc/helpers@0.5.11))(@types/node@20.14.7)(typescript@5.5.2)):
->>>>>>> d08ed456 (perf(backend): Move init scripts to package)
-    dependencies:
-      '@alloc/quick-lru': 5.2.0
-      arg: 5.0.2
-      chokidar: 3.5.3
-      didyoumean: 1.2.2
-      dlv: 1.1.3
-      fast-glob: 3.3.2
-      glob-parent: 6.0.2
-      is-glob: 4.0.3
-      jiti: 1.21.6
-      lilconfig: 2.1.0
-      micromatch: 4.0.7
-      normalize-path: 3.0.0
-      object-hash: 3.0.0
-      picocolors: 1.0.1
-      postcss: 8.4.38
-      postcss-import: 15.1.0(postcss@8.4.38)
-      postcss-js: 4.0.1(postcss@8.4.38)
-      postcss-load-config: 4.0.2(postcss@8.4.38)(ts-node@10.9.2(@types/node@20.14.7)(typescript@5.5.2))
-      postcss-nested: 6.0.1(postcss@8.4.38)
-      postcss-selector-parser: 6.1.0
-      resolve: 1.22.8
-      sucrase: 3.35.0
-    transitivePeerDependencies:
-      - ts-node
-
-  tailwindcss@3.4.4(ts-node@10.9.2(@swc/core@1.6.3)(@types/node@20.14.7)(typescript@5.5.2)):
-=======
-  tailwindcss@3.4.4(ts-node@10.9.2(@swc/core@1.6.5)(@types/node@20.14.8)(typescript@5.5.2)):
->>>>>>> 0aa27abf (chore: Update packages)
-=======
-=======
-  tailwindcss@3.4.4(ts-node@10.9.2(@swc/core@1.6.5)(@types/node@20.14.8)(typescript@5.5.2)):
-    dependencies:
-      '@alloc/quick-lru': 5.2.0
-      arg: 5.0.2
-      chokidar: 3.6.0
-      didyoumean: 1.2.2
-      dlv: 1.1.3
-      fast-glob: 3.3.2
-      glob-parent: 6.0.2
-      is-glob: 4.0.3
-      jiti: 1.21.6
-      lilconfig: 2.1.0
-      micromatch: 4.0.7
-      normalize-path: 3.0.0
-      object-hash: 3.0.0
-      picocolors: 1.0.1
-      postcss: 8.4.38
-      postcss-import: 15.1.0(postcss@8.4.38)
-      postcss-js: 4.0.1(postcss@8.4.38)
-      postcss-load-config: 4.0.2(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.6.5(@swc/helpers@0.5.11))(@types/node@20.14.8)(typescript@5.5.2))
-=======
       postcss-load-config: 4.0.2(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.6.5(@swc/helpers@0.5.11))(@types/node@20.14.9)(typescript@5.5.2))
->>>>>>> ea73e4fc (perf(frontend): Improve graphql paths)
       postcss-nested: 6.0.1(postcss@8.4.38)
       postcss-selector-parser: 6.1.0
       resolve: 1.22.8
@@ -22175,14 +20201,7 @@ snapshots:
     transitivePeerDependencies:
       - ts-node
 
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 5f53f831 (perf(frontend): Move few files form components folder to package)
-  tailwindcss@3.4.4(ts-node@10.9.2(@types/node@20.14.8)(typescript@5.5.2)):
->>>>>>> 84699d96 (perf(frontend): Move color input to package)
-=======
   tailwindcss@3.4.4(ts-node@10.9.2(@swc/core@1.6.5)(@types/node@20.14.9)(typescript@5.5.2)):
->>>>>>> ea73e4fc (perf(frontend): Improve graphql paths)
     dependencies:
       '@alloc/quick-lru': 5.2.0
       arg: 5.0.2
@@ -22201,17 +20220,7 @@ snapshots:
       postcss: 8.4.38
       postcss-import: 15.1.0(postcss@8.4.38)
       postcss-js: 4.0.1(postcss@8.4.38)
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-      postcss-load-config: 4.0.2(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.6.5)(@types/node@20.14.8)(typescript@5.5.2))
-<<<<<<< HEAD
-=======
-=======
-      postcss-load-config: 4.0.2(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.6.5)(@types/node@20.14.8)(typescript@5.5.2))
-=======
       postcss-load-config: 4.0.2(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.6.5)(@types/node@20.14.9)(typescript@5.5.2))
->>>>>>> ea73e4fc (perf(frontend): Improve graphql paths)
       postcss-nested: 6.0.1(postcss@8.4.38)
       postcss-selector-parser: 6.1.0
       resolve: 1.22.8
@@ -22239,7 +20248,6 @@ snapshots:
       postcss-import: 15.1.0(postcss@8.4.38)
       postcss-js: 4.0.1(postcss@8.4.38)
       postcss-load-config: 4.0.2(postcss@8.4.38)(ts-node@10.9.2(@types/node@20.14.8)(typescript@5.5.2))
->>>>>>> f973ba0f (perf(frontend): Move plugins pages admin to package)
       postcss-nested: 6.0.1(postcss@8.4.38)
       postcss-selector-parser: 6.1.0
       resolve: 1.22.8
@@ -22247,68 +20255,6 @@ snapshots:
     transitivePeerDependencies:
       - ts-node
 
-  tailwindcss@3.4.4(ts-node@10.9.2(@types/node@20.14.8)(typescript@5.5.2)):
-    dependencies:
-      '@alloc/quick-lru': 5.2.0
-      arg: 5.0.2
-      chokidar: 3.6.0
-      didyoumean: 1.2.2
-      dlv: 1.1.3
-      fast-glob: 3.3.2
-      glob-parent: 6.0.2
-      is-glob: 4.0.3
-      jiti: 1.21.6
-      lilconfig: 2.1.0
-      micromatch: 4.0.7
-      normalize-path: 3.0.0
-      object-hash: 3.0.0
-      picocolors: 1.0.1
-      postcss: 8.4.38
-      postcss-import: 15.1.0(postcss@8.4.38)
-      postcss-js: 4.0.1(postcss@8.4.38)
-=======
->>>>>>> 0ab072cd (refactor(backend): Restore paths)
-      postcss-load-config: 4.0.2(postcss@8.4.38)(ts-node@10.9.2(@types/node@20.14.8)(typescript@5.5.2))
->>>>>>> ca4a53fc (perf(frontend): Move user settings to package)
-      postcss-nested: 6.0.1(postcss@8.4.38)
-      postcss-selector-parser: 6.1.0
-      resolve: 1.22.8
-      sucrase: 3.35.0
-    transitivePeerDependencies:
-      - ts-node
-
-<<<<<<< HEAD
-  tailwindcss@3.4.4(ts-node@10.9.2(@types/node@20.14.2)(typescript@5.4.5)):
-    dependencies:
-      '@alloc/quick-lru': 5.2.0
-      arg: 5.0.2
-      chokidar: 3.6.0
-      didyoumean: 1.2.2
-      dlv: 1.1.3
-      fast-glob: 3.3.2
-      glob-parent: 6.0.2
-      is-glob: 4.0.3
-      jiti: 1.21.6
-      lilconfig: 2.1.0
-      micromatch: 4.0.7
-      normalize-path: 3.0.0
-      object-hash: 3.0.0
-      picocolors: 1.0.1
-      postcss: 8.4.38
-      postcss-import: 15.1.0(postcss@8.4.38)
-      postcss-js: 4.0.1(postcss@8.4.38)
-      postcss-load-config: 4.0.2(postcss@8.4.38)(ts-node@10.9.2(@types/node@20.14.2)(typescript@5.4.5))
-      postcss-nested: 6.0.1(postcss@8.4.38)
-      postcss-selector-parser: 6.1.0
-      resolve: 1.22.8
-      sucrase: 3.35.0
-    transitivePeerDependencies:
-      - ts-node
-
-=======
->>>>>>> 9e049073 (perf(docs): Remove docs)
-=======
->>>>>>> 8e139d6b (perf(frontend): Move root layout to package)
   tapable@2.2.1: {}
 
   tar@6.2.1:
@@ -22329,22 +20275,7 @@ snapshots:
       mkdirp: 3.0.1
       yallist: 5.0.0
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
   terser-webpack-plugin@5.3.10(@swc/core@1.3.101(@swc/helpers@0.5.11))(esbuild@0.19.11)(webpack@5.92.1(@swc/core@1.3.101(@swc/helpers@0.5.11))(esbuild@0.19.11)):
-<<<<<<< HEAD
-=======
-=======
-  terser-webpack-plugin@5.3.10(@swc/core@1.3.101(@swc/helpers@0.5.11))(esbuild@0.19.11)(webpack@5.92.1):
->>>>>>> 0aa27abf (chore: Update packages)
-=======
-  terser-webpack-plugin@5.3.10(@swc/core@1.3.101(@swc/helpers@0.5.11))(esbuild@0.19.11)(webpack@5.92.1(@swc/core@1.3.101(@swc/helpers@0.5.11))(esbuild@0.19.11)):
->>>>>>> 4173750f (perf(frontend): Move generate config script to package)
-=======
-  terser-webpack-plugin@5.3.10(@swc/core@1.3.101(@swc/helpers@0.5.11))(esbuild@0.19.11)(webpack@5.92.1(esbuild@0.19.12)):
->>>>>>> 321538bf (docs: Add docs)
     dependencies:
       '@jridgewell/trace-mapping': 0.3.25
       jest-worker: 27.5.1
@@ -22356,63 +20287,17 @@ snapshots:
       '@swc/core': 1.3.101(@swc/helpers@0.5.11)
       esbuild: 0.19.11
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 9e049073 (perf(docs): Remove docs)
-  terser-webpack-plugin@5.3.10(@swc/core@1.6.3(@swc/helpers@0.5.11))(esbuild@0.19.12)(webpack@5.90.1(@swc/core@1.6.3(@swc/helpers@0.5.11))(esbuild@0.19.12)):
->>>>>>> d08ed456 (perf(backend): Move init scripts to package)
-=======
   terser-webpack-plugin@5.3.10(@swc/core@1.6.5(@swc/helpers@0.5.11))(esbuild@0.19.12)(webpack@5.90.1(@swc/core@1.6.5(@swc/helpers@0.5.11))(esbuild@0.19.12)):
->>>>>>> 0aa27abf (chore: Update packages)
-=======
-  terser-webpack-plugin@5.3.10(@swc/core@1.6.5(@swc/helpers@0.5.11))(webpack@5.90.1(@swc/core@1.6.5(@swc/helpers@0.5.11))):
->>>>>>> 2e0ec75a (fix(backend): Add dotenv to init script for database)
-=======
-  terser-webpack-plugin@5.3.10(@swc/core@1.6.5(@swc/helpers@0.5.11))(esbuild@0.19.12)(webpack@5.90.1(@swc/core@1.6.5(@swc/helpers@0.5.11))(esbuild@0.19.12)):
->>>>>>> b991c2f3 (perf: Change @vitnode/shared to vitnode-shared name package)
     dependencies:
       '@jridgewell/trace-mapping': 0.3.25
       jest-worker: 27.5.1
       schema-utils: 3.3.0
       serialize-javascript: 6.0.2
       terser: 5.31.1
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-      webpack: 5.92.1(@swc/core@1.3.101(@swc/helpers@0.5.11))(esbuild@0.19.11)
-    optionalDependencies:
-      '@swc/core': 1.3.101(@swc/helpers@0.5.11)
-      esbuild: 0.19.11
-
-  terser-webpack-plugin@5.3.10(@swc/core@1.6.3(@swc/helpers@0.5.11))(webpack@5.90.1(@swc/core@1.6.3(@swc/helpers@0.5.11))):
-    dependencies:
-      '@jridgewell/trace-mapping': 0.3.25
-      jest-worker: 27.5.1
-      schema-utils: 3.3.0
-      serialize-javascript: 6.0.2
-      terser: 5.31.1
-      webpack: 5.90.1(@swc/core@1.6.3(@swc/helpers@0.5.11))
-    optionalDependencies:
-      '@swc/core': 1.6.3(@swc/helpers@0.5.11)
-=======
       webpack: 5.90.1(@swc/core@1.6.5(@swc/helpers@0.5.11))(esbuild@0.19.12)
     optionalDependencies:
       '@swc/core': 1.6.5(@swc/helpers@0.5.11)
       esbuild: 0.19.12
->>>>>>> 0aa27abf (chore: Update packages)
-=======
-      webpack: 5.90.1(@swc/core@1.6.5(@swc/helpers@0.5.11))
-    optionalDependencies:
-      '@swc/core': 1.6.5(@swc/helpers@0.5.11)
->>>>>>> 2e0ec75a (fix(backend): Add dotenv to init script for database)
-=======
-      webpack: 5.90.1(@swc/core@1.6.5(@swc/helpers@0.5.11))(esbuild@0.19.12)
-    optionalDependencies:
-      '@swc/core': 1.6.5(@swc/helpers@0.5.11)
-      esbuild: 0.19.12
->>>>>>> b991c2f3 (perf: Change @vitnode/shared to vitnode-shared name package)
 
   terser@5.31.1:
     dependencies:
@@ -22489,22 +20374,9 @@ snapshots:
 
   trim-right@1.0.1: {}
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
   trough@2.2.0: {}
 
->>>>>>> 321538bf (docs: Add docs)
   ts-api-utils@1.3.0(typescript@5.5.2):
-=======
-  trough@2.2.0: {}
-
-  ts-api-utils@1.3.0(typescript@5.4.5):
->>>>>>> a24fce42 (docs: Add docs by fumadocs)
-=======
-  ts-api-utils@1.3.0(typescript@5.5.2):
->>>>>>> 9e049073 (perf(docs): Remove docs)
     dependencies:
       typescript: 5.5.2
 
@@ -22514,78 +20386,16 @@ snapshots:
 
   ts-interface-checker@0.1.13: {}
 
-<<<<<<< HEAD
-  ts-loader@9.5.1(typescript@5.5.2)(webpack@5.90.1(@swc/core@1.6.3(@swc/helpers@0.5.11))):
-    dependencies:
-      chalk: 4.1.2
-      enhanced-resolve: 5.17.0
-      micromatch: 4.0.7
-      semver: 7.6.2
-      source-map: 0.7.4
-      typescript: 5.5.2
-      webpack: 5.90.1(@swc/core@1.6.3(@swc/helpers@0.5.11))
-
   ts-log@2.2.5: {}
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-  ts-node@10.9.2(@swc/core@1.6.3(@swc/helpers@0.5.11))(@types/node@20.14.7)(typescript@5.5.2):
-=======
-  ts-node@10.9.2(@swc/core@1.6.1(@swc/helpers@0.5.11))(@types/node@20.14.2)(typescript@5.4.5):
-=======
-  ts-node@10.9.2(@swc/core@1.6.5(@swc/helpers@0.5.11))(@types/node@20.14.9)(typescript@5.5.2):
->>>>>>> ea73e4fc (perf(frontend): Improve graphql paths)
-    dependencies:
-      '@cspotcode/source-map-support': 0.8.1
-      '@tsconfig/node10': 1.0.11
-      '@tsconfig/node12': 1.0.11
-      '@tsconfig/node14': 1.0.3
-      '@tsconfig/node16': 1.0.4
-<<<<<<< HEAD
-      '@types/node': 20.14.2
-=======
-      '@types/node': 20.14.9
->>>>>>> ea73e4fc (perf(frontend): Improve graphql paths)
-      acorn: 8.12.0
-      acorn-walk: 8.3.3
-      arg: 4.1.3
-      create-require: 1.1.1
-      diff: 4.0.2
-      make-error: 1.3.6
-<<<<<<< HEAD
-      typescript: 5.4.5
-      v8-compile-cache-lib: 3.0.1
-      yn: 3.1.1
-    optionalDependencies:
-      '@swc/core': 1.6.1(@swc/helpers@0.5.11)
-
-  ts-node@10.9.2(@swc/core@1.6.1)(@types/node@20.14.2)(typescript@5.4.5):
->>>>>>> a24fce42 (docs: Add docs by fumadocs)
-=======
-      typescript: 5.5.2
-      v8-compile-cache-lib: 3.0.1
-      yn: 3.1.1
-    optionalDependencies:
-      '@swc/core': 1.6.5(@swc/helpers@0.5.11)
-
-=======
->>>>>>> bafd0554 (chore: Change npm version when bump version)
   ts-node@10.9.2(@swc/core@1.6.5)(@types/node@20.14.9)(typescript@5.5.2):
->>>>>>> ea73e4fc (perf(frontend): Improve graphql paths)
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       '@tsconfig/node10': 1.0.11
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
-<<<<<<< HEAD
-      '@types/node': 20.14.7
-=======
       '@types/node': 20.14.9
->>>>>>> ea73e4fc (perf(frontend): Improve graphql paths)
       acorn: 8.12.0
       acorn-walk: 8.3.3
       arg: 4.1.3
@@ -22596,35 +20406,9 @@ snapshots:
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
     optionalDependencies:
-<<<<<<< HEAD
-      '@swc/core': 1.6.3(@swc/helpers@0.5.11)
-=======
       '@swc/core': 1.6.5(@swc/helpers@0.5.11)
-<<<<<<< HEAD
-    optional: true
->>>>>>> 6dcd1de7 (feat: Add create-vitnode-app)
-=======
->>>>>>> bafd0554 (chore: Change npm version when bump version)
 
-<<<<<<< HEAD
-=======
->>>>>>> 9e049073 (perf(docs): Remove docs)
-  ts-node@10.9.2(@swc/core@1.6.3)(@types/node@20.14.7)(typescript@5.5.2):
-=======
-  ts-log@2.2.5: {}
-
-<<<<<<< HEAD
-  ts-node@10.9.2(@swc/core@1.6.5(@swc/helpers@0.5.11))(@types/node@20.14.8)(typescript@5.5.2):
->>>>>>> 0aa27abf (chore: Update packages)
-=======
-  ts-node@10.9.2(@swc/core@1.6.5)(@types/node@20.14.8)(typescript@5.5.2):
->>>>>>> 2e0ec75a (fix(backend): Add dotenv to init script for database)
-=======
-  ts-node@10.9.2(@swc/core@1.6.5(@swc/helpers@0.5.11))(@types/node@20.14.8)(typescript@5.5.2):
->>>>>>> 38444a5e (perf(frontend): Move auth layout to package)
-=======
   ts-node@10.9.2(@types/node@20.14.8)(typescript@5.5.2):
->>>>>>> ea73e4fc (perf(frontend): Improve graphql paths)
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       '@tsconfig/node10': 1.0.11
@@ -23111,19 +20895,7 @@ snapshots:
 
   webpack-sources@3.2.3: {}
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-  webpack@5.90.1(@swc/core@1.6.3(@swc/helpers@0.5.11)):
-=======
   webpack@5.90.1(@swc/core@1.6.5(@swc/helpers@0.5.11))(esbuild@0.19.12):
->>>>>>> 0aa27abf (chore: Update packages)
-=======
-  webpack@5.90.1(@swc/core@1.6.5(@swc/helpers@0.5.11)):
->>>>>>> 2e0ec75a (fix(backend): Add dotenv to init script for database)
-=======
-  webpack@5.90.1(@swc/core@1.6.5(@swc/helpers@0.5.11))(esbuild@0.19.12):
->>>>>>> b991c2f3 (perf: Change @vitnode/shared to vitnode-shared name package)
     dependencies:
       '@types/eslint-scope': 3.7.7
       '@types/estree': 1.0.5
@@ -23146,19 +20918,7 @@ snapshots:
       neo-async: 2.6.2
       schema-utils: 3.3.0
       tapable: 2.2.1
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-      terser-webpack-plugin: 5.3.10(@swc/core@1.6.3(@swc/helpers@0.5.11))(webpack@5.90.1(@swc/core@1.6.3(@swc/helpers@0.5.11)))
-=======
       terser-webpack-plugin: 5.3.10(@swc/core@1.6.5(@swc/helpers@0.5.11))(esbuild@0.19.12)(webpack@5.90.1(@swc/core@1.6.5(@swc/helpers@0.5.11))(esbuild@0.19.12))
->>>>>>> 0aa27abf (chore: Update packages)
-=======
-      terser-webpack-plugin: 5.3.10(@swc/core@1.6.5(@swc/helpers@0.5.11))(webpack@5.90.1(@swc/core@1.6.5(@swc/helpers@0.5.11)))
->>>>>>> 2e0ec75a (fix(backend): Add dotenv to init script for database)
-=======
-      terser-webpack-plugin: 5.3.10(@swc/core@1.6.5(@swc/helpers@0.5.11))(esbuild@0.19.12)(webpack@5.90.1(@swc/core@1.6.5(@swc/helpers@0.5.11))(esbuild@0.19.12))
->>>>>>> b991c2f3 (perf: Change @vitnode/shared to vitnode-shared name package)
       watchpack: 2.4.1
       webpack-sources: 3.2.3
     transitivePeerDependencies:
@@ -23166,71 +20926,7 @@ snapshots:
       - esbuild
       - uglify-js
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-  webpack@5.92.1(@swc/core@1.3.101(@swc/helpers@0.5.11))(esbuild@0.19.11):
-<<<<<<< HEAD
-=======
-=======
-  webpack@5.92.1(@swc/core@1.3.101(@swc/helpers@0.5.11))(esbuild@0.19.11):
->>>>>>> 0aa27abf (chore: Update packages)
-    dependencies:
-      '@types/eslint-scope': 3.7.7
-      '@types/estree': 1.0.5
-      '@webassemblyjs/ast': 1.12.1
-      '@webassemblyjs/wasm-edit': 1.12.1
-      '@webassemblyjs/wasm-parser': 1.12.1
-      acorn: 8.12.0
-      acorn-import-attributes: 1.9.5(acorn@8.12.0)
-      browserslist: 4.23.1
-      chrome-trace-event: 1.0.4
-      enhanced-resolve: 5.17.0
-      es-module-lexer: 1.5.3
-      eslint-scope: 5.1.1
-      events: 3.3.0
-      glob-to-regexp: 0.4.1
-      graceful-fs: 4.2.11
-      json-parse-even-better-errors: 2.3.1
-      loader-runner: 4.3.0
-      mime-types: 2.1.35
-      neo-async: 2.6.2
-      schema-utils: 3.3.0
-      tapable: 2.2.1
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-      terser-webpack-plugin: 5.3.10(@swc/core@1.3.101(@swc/helpers@0.5.11))(esbuild@0.19.11)(webpack@5.92.1(@swc/core@1.3.101(@swc/helpers@0.5.11))(esbuild@0.19.11))
-      watchpack: 2.4.1
-      webpack-sources: 3.2.3
-    transitivePeerDependencies:
-      - '@swc/core'
-      - esbuild
-      - uglify-js
-
-=======
->>>>>>> 9e049073 (perf(docs): Remove docs)
-  webpack@5.92.1(@swc/core@1.6.3(@swc/helpers@0.5.11))(esbuild@0.19.12):
->>>>>>> d08ed456 (perf(backend): Move init scripts to package)
-=======
-  webpack@5.92.1(@swc/core@1.6.5(@swc/helpers@0.5.11))(esbuild@0.19.12):
->>>>>>> 2e0ec75a (fix(backend): Add dotenv to init script for database)
-=======
-  webpack@5.92.1(@swc/core@1.3.101(@swc/helpers@0.5.11))(esbuild@0.19.11):
->>>>>>> b991c2f3 (perf: Change @vitnode/shared to vitnode-shared name package)
-=======
   webpack@5.92.1(@swc/core@1.6.5(@swc/helpers@0.5.11))(esbuild@0.21.5):
->>>>>>> ef64f85b (feat: Add tsup for build scripts)
-=======
-  webpack@5.92.1(@swc/core@1.3.101(@swc/helpers@0.5.11))(esbuild@0.19.11):
->>>>>>> f973ba0f (perf(frontend): Move plugins pages admin to package)
-=======
-  webpack@5.92.1(@swc/core@1.6.5(@swc/helpers@0.5.11))(esbuild@0.21.5):
->>>>>>> ea73e4fc (perf(frontend): Improve graphql paths)
     dependencies:
       '@types/eslint-scope': 3.7.7
       '@types/estree': 1.0.5
@@ -23254,15 +20950,6 @@ snapshots:
       schema-utils: 3.3.0
       tapable: 2.2.1
       terser-webpack-plugin: 5.3.10(@swc/core@1.3.101(@swc/helpers@0.5.11))(esbuild@0.19.11)(webpack@5.92.1(@swc/core@1.3.101(@swc/helpers@0.5.11))(esbuild@0.19.11))
-=======
-      terser-webpack-plugin: 5.3.10(@swc/core@1.3.101(@swc/helpers@0.5.11))(esbuild@0.19.11)(webpack@5.92.1)
->>>>>>> 0aa27abf (chore: Update packages)
-=======
-      terser-webpack-plugin: 5.3.10(@swc/core@1.3.101(@swc/helpers@0.5.11))(esbuild@0.19.11)(webpack@5.92.1(@swc/core@1.3.101(@swc/helpers@0.5.11))(esbuild@0.19.11))
->>>>>>> 4173750f (perf(frontend): Move generate config script to package)
-=======
-      terser-webpack-plugin: 5.3.10(@swc/core@1.3.101(@swc/helpers@0.5.11))(esbuild@0.19.11)(webpack@5.92.1(esbuild@0.19.12))
->>>>>>> 321538bf (docs: Add docs)
       watchpack: 2.4.1
       webpack-sources: 3.2.3
     transitivePeerDependencies:
