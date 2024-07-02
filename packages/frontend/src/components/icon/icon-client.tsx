@@ -2,11 +2,10 @@
 
 import { Loader2 } from 'lucide-react';
 import * as React from 'react';
-
 import dynamicIconImports from 'lucide-react/dynamicIconImports';
+import dynamic from 'next/dynamic';
 
 import { cn } from '../../helpers/classnames';
-import dynamic from 'next/dynamic';
 
 export type IconLucideNames = keyof typeof dynamicIconImports;
 

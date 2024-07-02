@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import createIntlMiddleware from 'next-intl/middleware';
 
 import { fetcher } from './graphql/fetcher';
 import {
@@ -8,7 +9,7 @@ import {
 } from './graphql/graphql';
 import { getSessionAdminData } from './graphql/get-session-admin';
 
-const handleI18nRouting = async () => {
+const getI18n = async () => {
   try {
     const {
       data: {
@@ -29,18 +30,14 @@ const handleI18nRouting = async () => {
       defaultLocale: defaultLanguage,
     };
 
-    return {
-      i18n,
-    };
+    return i18n;
   } catch (err) {
     const i18n = {
       locales: ['en'],
       defaultLocale: 'en',
     };
 
-    return {
-      i18n,
-    };
+    return i18n;
   }
 };
 
@@ -58,24 +55,36 @@ const removeLocaleFromUrl = (urlPath: string, locales: string[]): string => {
   return `/${parts.join('/')}`;
 };
 
-export const createMiddleware = async () => {
-  const { i18n } = await handleI18nRouting();
-  // const response = createIntlMiddleware(request);
-  // const pathname = removeLocaleFromUrl(request.nextUrl.pathname, i18n.locales);
+export const createMiddleware = () => {
+  return async function middleware(request: NextRequest) {
+    const i18n = await getI18n();
+    const handleI18nRouting = createIntlMiddleware(i18n);
+    const response = handleI18nRouting(request);
+    const pathname = removeLocaleFromUrl(
+      request.nextUrl.pathname,
+      i18n.locales,
+    );
 
-  // // Redirect to /admin if the user is not logged in to AdminCP
-  // if (
-  //   pathname.startsWith('/admin') &&
-  //   pathname !== '/admin' &&
-  //   pathname !== '/admin/theme-editor' &&
-  //   pathname !== '/admin/install'
-  // ) {
-  //   try {
-  //     await getSessionAdminData();
-  //   } catch (error) {
-  //     return NextResponse.redirect(new URL('/admin', request.url));
-  //   }
-  // }
+    const cookieAdmin = request.cookies.get('vitnode-login-token')?.value;
 
-  return i18n;
+    // Redirect to /admin if the user is not logged in to AdminCP
+    if (
+      pathname.startsWith('/admin') &&
+      pathname !== '/admin' &&
+      pathname !== '/admin/theme-editor' &&
+      pathname !== '/admin/install'
+    ) {
+      if (!cookieAdmin) {
+        return NextResponse.redirect(new URL('/admin', request.url));
+      }
+
+      try {
+        await getSessionAdminData();
+      } catch (error) {
+        return NextResponse.redirect(new URL('/admin', request.url));
+      }
+    }
+
+    return response;
+  };
 };

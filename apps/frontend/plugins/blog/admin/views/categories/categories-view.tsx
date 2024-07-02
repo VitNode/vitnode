@@ -70,14 +70,7 @@ export const CategoriesBlogAdminView = ({
     >
       <SortableContext items={sortedIds} strategy={verticalListSortingStrategy}>
         {flattenedItems.map(item => (
-          <ItemDragAndDrop
-            key={item.id}
-            {...actionsItem({ data: item })}
-            // draggableStyle={{
-            //   background: item.color.replace(')', ', 0.2 )'),
-            //   color: item.color,
-            // }}
-          >
+          <ItemDragAndDrop key={item.id} {...actionsItem({ data: item })}>
             <ItemCategoriesCategoryAdmin data={item} />
           </ItemDragAndDrop>
         ))}
@@ -88,10 +81,6 @@ export const CategoriesBlogAdminView = ({
               {...actionsItem({
                 data: activeItemOverlay,
               })}
-              // draggableStyle={{
-              //   background: activeItemOverlay.color.replace(')', ', 0.2 )'),
-              //   color: activeItemOverlay.color,
-              // }}
             >
               <ItemCategoriesCategoryAdmin data={activeItemOverlay} />
             </ItemDragAndDrop>
