@@ -12,7 +12,6 @@ import { buttonVariants } from '../../../../components/ui/button';
 
 interface Props extends Omit<ShowCoreNav, 'icon'> {
   icons: { icon: React.ReactNode; id: number }[];
-  icon: React.ReactNode;
 }
 
 export const ItemNav = ({
@@ -22,7 +21,6 @@ export const ItemNav = ({
   name,
   icons,
   id,
-  icon,
 }: Props) => {
   const { convertText } = useTextLang();
   const pathname = usePathname();
@@ -45,8 +43,7 @@ export const ItemNav = ({
           target={external ? '_blank' : undefined}
           rel={external ? 'noopener noreferrer' : undefined}
         >
-          {icon}
-          {/* {icons.find(icon => icon.id === id)?.icon} */}
+          {icons.find(icon => icon.id === id)?.icon}
           {convertText(name)} {children.length > 0 && <ChevronDown />}
         </Link>
       </NavigationMenu.Trigger>

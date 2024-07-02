@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Metadata } from 'next';
 import { getSessionData } from 'vitnode-frontend/graphql/get-session-data';
+import { Icon } from 'vitnode-frontend/components/icon/icon';
 
 interface Props {
   params: {

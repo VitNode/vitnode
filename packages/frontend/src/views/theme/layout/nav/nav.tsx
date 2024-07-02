@@ -33,14 +33,7 @@ export const Nav = async () => {
       <div className="flex h-full flex-1 overflow-x-auto p-1">
         <NavListWrapper>
           {data.core_nav__show.edges.map(nav => {
-            return (
-              <ItemNav
-                key={nav.id}
-                {...nav}
-                icons={icons}
-                icon={<Icon className="size-4" name="House" />}
-              />
-            );
+            return <ItemNav key={nav.id} {...nav} icons={icons} />;
           })}
         </NavListWrapper>
       </div>
