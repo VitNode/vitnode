@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import createIntlMiddleware from 'next-intl/middleware';
 
 import { fetcher } from './graphql/fetcher';
 import {
@@ -32,7 +31,6 @@ const handleI18nRouting = async () => {
 
     return {
       i18n,
-      createIntlMiddleware: createIntlMiddleware(i18n),
     };
   } catch (err) {
     const i18n = {
@@ -42,7 +40,6 @@ const handleI18nRouting = async () => {
 
     return {
       i18n,
-      createIntlMiddleware: createIntlMiddleware(i18n),
     };
   }
 };
@@ -61,24 +58,24 @@ const removeLocaleFromUrl = (urlPath: string, locales: string[]): string => {
   return `/${parts.join('/')}`;
 };
 
-export const createMiddleware = async (request: NextRequest) => {
-  const { createIntlMiddleware, i18n } = await handleI18nRouting();
-  const response = createIntlMiddleware(request);
-  const pathname = removeLocaleFromUrl(request.nextUrl.pathname, i18n.locales);
+export const createMiddleware = async () => {
+  const { i18n } = await handleI18nRouting();
+  // const response = createIntlMiddleware(request);
+  // const pathname = removeLocaleFromUrl(request.nextUrl.pathname, i18n.locales);
 
-  // Redirect to /admin if the user is not logged in to AdminCP
-  if (
-    pathname.startsWith('/admin') &&
-    pathname !== '/admin' &&
-    pathname !== '/admin/theme-editor' &&
-    pathname !== '/admin/install'
-  ) {
-    try {
-      await getSessionAdminData();
-    } catch (error) {
-      return NextResponse.redirect(new URL('/admin', request.url));
-    }
-  }
+  // // Redirect to /admin if the user is not logged in to AdminCP
+  // if (
+  //   pathname.startsWith('/admin') &&
+  //   pathname !== '/admin' &&
+  //   pathname !== '/admin/theme-editor' &&
+  //   pathname !== '/admin/install'
+  // ) {
+  //   try {
+  //     await getSessionAdminData();
+  //   } catch (error) {
+  //     return NextResponse.redirect(new URL('/admin', request.url));
+  //   }
+  // }
 
-  return response;
+  return i18n;
 };
