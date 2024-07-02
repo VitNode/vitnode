@@ -3,11 +3,12 @@ import { ConfigService } from '@nestjs/config';
 import { eq } from 'drizzle-orm';
 import { genSalt, hash } from 'bcrypt';
 
-import { core_users_password_keys } from '@/templates/core/admin/database/schema/keys';
-import { core_users } from '@/templates/core/admin/database/schema/users';
-import { DatabaseService } from '../../../../../../packages/backend/dist';
 import { ChangePasswordCoreMembersArgs } from './dto/change_password.args';
 import { ChangePasswordCoreMembersObj } from './dto/change_password.obj';
+
+import { core_users_password_keys } from '@/templates/core/admin/database/schema/keys';
+import { core_users } from '@/templates/core/admin/database/schema/users';
+import { DatabaseService } from '@/database';
 
 @Injectable()
 export class ChangePasswordCoreMembersService {

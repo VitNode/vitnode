@@ -7,7 +7,6 @@ import { SendAdminEmailService } from '../../send/send.service';
 @Injectable()
 export class TestAdminEmailSettingsService extends SendAdminEmailService {
   async test({
-    from,
     to,
     subject,
     message,
