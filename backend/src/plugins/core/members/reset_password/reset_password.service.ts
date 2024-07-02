@@ -58,20 +58,28 @@ export class ResetPasswordCoreMembersService {
     VitNode Team`;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     const emailData = {
 =======
     const emailArgs = {
 >>>>>>> a55175d5 (feat: Sending URL for resetting password)
+=======
+    const emailData = {
+>>>>>>> cb04e9d3 (fix: Correct returning type in ChangePasswordCoreMembersResolver)
       to: user.email,
       subject: "VitNode.com - password reset request",
       message: message
     };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     await this.mailService.send(emailData);
 =======
     await this.mailService.send(emailArgs);
 >>>>>>> a55175d5 (feat: Sending URL for resetting password)
+=======
+    await this.mailService.send(emailData);
+>>>>>>> cb04e9d3 (fix: Correct returning type in ChangePasswordCoreMembersResolver)
 
     return "Success!";
   }

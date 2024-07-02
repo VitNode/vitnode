@@ -6,6 +6,7 @@ import { core_users } from "../../admin/database/schema/users";
 import { core_keys } from "../../admin/database/schema/keys";
 import { ChangePasswordCoreMembersArgs } from "./dto/change_password.args";
 import { ChangePasswordCoreMembersObj } from "./dto/change_password.obj";
+<<<<<<< HEAD
 import { genSalt, hash } from "bcrypt";
 import { ConfigService } from "@nestjs/config";
 
@@ -15,6 +16,12 @@ export class ChangePasswordCoreMembersService {
     private readonly databaseService: DatabaseService,
     private readonly configService: ConfigService
   ) {}
+=======
+
+@Injectable()
+export class ChangePasswordCoreMembersService {
+  constructor(private readonly databaseService: DatabaseService) {}
+>>>>>>> cb04e9d3 (fix: Correct returning type in ChangePasswordCoreMembersResolver)
 
   async change_password({
     key,
@@ -25,15 +32,22 @@ export class ChangePasswordCoreMembersService {
     });
 
     const id = keyData.user_id;
+<<<<<<< HEAD
     const passwordSalt = await genSalt(
       this.configService.getOrThrow("password_salt")
     );
     const hashPassword = await hash(password, passwordSalt);
+=======
+>>>>>>> cb04e9d3 (fix: Correct returning type in ChangePasswordCoreMembersResolver)
 
     const update = await this.databaseService.db
       .update(core_users)
       .set({
+<<<<<<< HEAD
         password: hashPassword
+=======
+        password: password
+>>>>>>> cb04e9d3 (fix: Correct returning type in ChangePasswordCoreMembersResolver)
       })
       .where(eq(core_users.id, id))
       .returning();
