@@ -24,7 +24,7 @@ export class TestAdminEmailSettingsServiceArgs {
   @Transform(TransformString)
   subject: string;
 
-  @Field(() => String)
+  @Field(() => String, { nullable: true })
   @Transform(TransformString)
-  previewText: string;
+  previewText: string | null;
 }

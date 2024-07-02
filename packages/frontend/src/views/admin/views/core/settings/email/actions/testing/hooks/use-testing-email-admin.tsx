@@ -19,6 +19,7 @@ export const useTestingEmailAdmin = () => {
     to: z.string().min(1).email(),
     subject: z.string().min(1),
     message: z.string().min(1),
+    preview_text: z.string(),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -26,14 +27,17 @@ export const useTestingEmailAdmin = () => {
     defaultValues: {
       from: '',
       to: session?.email || '',
-      subject: 'Test Email from Admin Panel',
-      message:
-        'This email confirms that your email settings in your website by VitNode are working correctly.',
+      subject: t('test.subject'),
+      message: t('test.message'),
+      preview_text: t('test.preview_text'),
     },
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const mutation = await mutationApi(values);
+    const mutation = await mutationApi({
+      ...values,
+      previewText: values.preview_text,
+    });
 
     if (mutation.error) {
       toast.error(tCore('errors.title'), {

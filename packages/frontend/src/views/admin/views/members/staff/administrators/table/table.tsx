@@ -1,16 +1,12 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { ColumnDef } from '@tanstack/react-table';
 import * as React from 'react';
 import { InfinityIcon, ShieldAlert } from 'lucide-react';
 
 import { ActionsTableAdministratorsStaffAdmin } from './actions/actions';
 
-import {
-  Admin__Core_Staff_Administrators__ShowQuery,
-  ShowAdminStaffAdministrators,
-} from '../../../../../../../graphql/graphql';
+import { Admin__Core_Staff_Administrators__ShowQuery } from '../../../../../../../graphql/graphql';
 import { UserLink } from '../../../../../../../components/ui/user/link';
 import { GroupFormat } from '../../../../../../../components/ui/user/group-format';
 import { Badge } from '../../../../../../../components/ui/badge';
@@ -23,7 +19,8 @@ export const TableAdministratorsStaffAdmin = ({
 }: Admin__Core_Staff_Administrators__ShowQuery) => {
   const t = useTranslations('admin.members.staff');
 
-  const columns: ColumnDef<ShowAdminStaffAdministrators>[] = React.useMemo(
+  // TODO: Add ColumnDef<ShowAdminStaffAdministrators>[] type
+  const columns = React.useMemo(
     () => [
       {
         header: t('table.administrator'),

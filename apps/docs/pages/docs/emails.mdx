@@ -43,6 +43,32 @@ Create `.tsx` file inside `backend/src/plugins/{plugin_code}/admin/{module_name}
 
 Go to [react-email docs](https://react.email/docs/introduction) to see how to create email templates.
 
+## Internationalization (i18n)
+
+We're created a helper function to translate the email templates. You can use it like this:
+
+```tsx {3, 6, 10, 14}
+import * as React from 'react';
+import { Container, Text } from '@react-email/components';
+import { getTranslationForEmail, User } from 'vitnode-backend';
+
+interface Props {
+  user: User;
+}
+
+export const ExampleEmail = ({ user }: EmailTemplateProps) => {
+  const t = getTranslationForEmail('admin.core.email', user.language);
+
+  return (
+    <Container>
+      <Text>{t('footer')}</Text>
+    </Container>
+  );
+};
+
+export default ExampleEmail;
+```
+
 ## Dev Server
 
 To start the dev server run:

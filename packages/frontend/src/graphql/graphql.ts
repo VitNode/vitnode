@@ -40,6 +40,7 @@ export type AuthorizationCurrentUserObj = {
   id: Scalars['Int']['output'];
   is_admin: Scalars['Boolean']['output'];
   is_mod: Scalars['Boolean']['output'];
+  language: Scalars['String']['output'];
   name: Scalars['String']['output'];
   name_seo: Scalars['String']['output'];
   newsletter: Scalars['Boolean']['output'];
@@ -227,6 +228,7 @@ export type Mutation = {
   core_members__avatar__delete: Scalars['String']['output'];
   core_members__avatar__upload: UploadAvatarCoreMembersObj;
   core_members__delete: Scalars['String']['output'];
+  core_members__reset_password__create_key: Scalars['String']['output'];
   core_sessions__sign_in: Scalars['String']['output'];
   core_sessions__sign_out: Scalars['String']['output'];
   core_sessions__sign_up: SignUpCoreSessionsObj;
@@ -255,6 +257,7 @@ export type MutationAdmin__Core_Email_Settings__EditArgs = {
 export type MutationAdmin__Core_Email_Settings__TestArgs = {
   from: Scalars['String']['input'];
   message: Scalars['String']['input'];
+  previewText?: InputMaybe<Scalars['String']['input']>;
   subject: Scalars['String']['input'];
   to: Scalars['String']['input'];
 };
@@ -503,6 +506,11 @@ export type MutationCore_Members__Avatar__UploadArgs = {
 
 export type MutationCore_Members__DeleteArgs = {
   id: Scalars['Int']['input'];
+};
+
+
+export type MutationCore_Members__Reset_Password__Create_KeyArgs = {
+  email: Scalars['String']['input'];
 };
 
 
@@ -761,6 +769,7 @@ export type ShowAdminMembers = {
   group: GroupUser;
   id: Scalars['Int']['output'];
   joined: Scalars['DateTime']['output'];
+  language: Scalars['String']['output'];
   name: Scalars['String']['output'];
   name_seo: Scalars['String']['output'];
   newsletter: Scalars['Boolean']['output'];
@@ -980,6 +989,7 @@ export type ShowCoreMembers = {
   group: GroupUser;
   id: Scalars['Int']['output'];
   joined: Scalars['DateTime']['output'];
+  language: Scalars['String']['output'];
   name: Scalars['String']['output'];
   name_seo: Scalars['String']['output'];
   posts: Scalars['Int']['output'];
@@ -1141,6 +1151,7 @@ export type User = {
   avatar_color: Scalars['String']['output'];
   group: GroupUser;
   id: Scalars['Int']['output'];
+  language: Scalars['String']['output'];
   name: Scalars['String']['output'];
   name_seo: Scalars['String']['output'];
 };
@@ -1394,6 +1405,7 @@ export type Admin__Core_Email_Settings__TestMutationVariables = Exact<{
   from: Scalars['String']['input'];
   message: Scalars['String']['input'];
   subject: Scalars['String']['input'];
+  previewText?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
@@ -1967,12 +1979,13 @@ export const Admin__Core_Email_Settings__Edit = gql`
 }
     `;
 export const Admin__Core_Email_Settings__Test = gql`
-    mutation Admin__core_email_settings__test($to: String!, $from: String!, $message: String!, $subject: String!) {
+    mutation Admin__core_email_settings__test($to: String!, $from: String!, $message: String!, $subject: String!, $previewText: String) {
   admin__core_email_settings__test(
     to: $to
     from: $from
     message: $message
     subject: $subject
+    previewText: $previewText
   )
 }
     `;

@@ -44,10 +44,16 @@
             "from": "Od",
             "to": "Do",
             "subject": "Temat",
+            "preview_text": "Podgląd wiadomości",
             "message": "Wiadomość",
             "success": {
               "title": "Email został wysłany",
               "desc": "Sprawdź swoją skrzynkę odbiorczą, aby zobaczyć czy email został dostarczony."
+            },
+            "test": {
+              "subject": "Testowy email z AdminCP VitNode",
+              "message": "Ten email potwierdza, że ustawienia email w Twojej witrynie przez VitNode działają poprawnie.",
+              "preview_text": "Podgląd wiadomości testowego emaila z AdminCP VitNode"
             },
             "send_testing_email": "Wyślij testowy email"
           }
