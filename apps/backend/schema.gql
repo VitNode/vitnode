@@ -221,10 +221,18 @@ type Mutation {
   core_members__change_password(key: String!, password: String!): ChangePasswordCoreMembersObj!
   core_members__delete(id: Int!): String!
 <<<<<<< HEAD
+<<<<<<< HEAD
   core_members__reset_password(email: String!): String!
   core_members__sign_up(email: String!, name: String!, newsletter: Boolean, password: String!): SignUpCoreMembersObj!
 =======
 >>>>>>> 2a2f3d22 (refactor(backend): Move sign up from members to sessions module)
+=======
+<<<<<<< HEAD:apps/backend/schema.gql
+=======
+  core_members__reset_password(email: String!): String!
+  core_members__sign_up(email: String!, name: String!, newsletter: Boolean, password: String!): SignUpCoreMembersObj!
+>>>>>>> 94163b06 (feat: Hashing new password):backend/schema.gql
+>>>>>>> 6a5b8f35 (feat: Hashing new password)
   core_sessions__sign_in(admin: Boolean, email: String!, password: String!, remember: Boolean): String!
   core_sessions__sign_out: String!
   core_sessions__sign_up(email: String!, name: String!, newsletter: Boolean, password: String!): SignUpCoreSessionsObj!

@@ -11,6 +11,8 @@ import { ResetPasswordCoreMembersResolver } from "./reset_password/reset_passwor
 import { ChangePasswordCoreMembersResolver } from "./change_password/change_password.resolver";
 import { ChangePasswordCoreMembersService } from "./change_password/change_password.service";
 import { ResetPasswordCoreMembersService } from "./reset_password/reset_password.service";
+import { SendAdminEmailService } from "../admin/email/send/send.service";
+import { MailService } from "../admin/email/mail.service";
 
 @Module({
   providers: [
@@ -23,7 +25,9 @@ import { ResetPasswordCoreMembersService } from "./reset_password/reset_password
     ResetPasswordCoreMembersResolver,
     ResetPasswordCoreMembersService,
     ChangePasswordCoreMembersResolver,
-    ChangePasswordCoreMembersService
+    ChangePasswordCoreMembersService,
+    MailService,
+    SendAdminEmailService
   ],
   imports: [AvatarCoreMembers]
 })

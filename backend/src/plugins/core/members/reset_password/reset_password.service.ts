@@ -22,10 +22,15 @@ export class ResetPasswordCoreMembersService {
     });
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     if (user == undefined) return "No such email found!";
 
 =======
 >>>>>>> a55175d5 (feat: Sending URL for resetting password)
+=======
+    if (user == undefined) return "No such email found!";
+
+>>>>>>> 6a5b8f35 (feat: Hashing new password)
     const characters =
       "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     let key;
