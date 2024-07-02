@@ -9,6 +9,7 @@ import {
   HelpersAdminEmailSettingsService,
   ShowAdminEmailSettingsServiceObjWithPassword,
 } from './helpers.service';
+import { CustomError } from '../../../errors';
 
 interface SendMailConfiguration {
   subject: string;
@@ -24,6 +25,14 @@ export class MailService extends HelpersAdminEmailSettingsService {
   };
 
   async sendMail({ to, subject, template }: SendMailConfiguration) {
+    if (!fs.existsSync(this.path)) {
+      throw new CustomError({
+        code: 'EMAIL_NOT_CONFIGURED',
+        message:
+          'Email settings are not configured. Please configure them in the AdminCP.',
+      });
+    }
+
     const html = this.generateEmail(template);
     const data = fs.readFileSync(this.path, 'utf-8');
     const config: ShowAdminEmailSettingsServiceObjWithPassword =

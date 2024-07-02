@@ -71,3 +71,23 @@ export const core_files_avatars_relations = relations(
     }),
   }),
 );
+
+export const core_users_pass_reset = pgTable('core_users_pass_reset', {
+  id: serial('id').primaryKey(),
+  user_id: integer('user_id').references(() => core_users.id, {
+    onDelete: 'cascade',
+  }),
+  key: varchar('key', { length: 100 }).notNull().unique(),
+  created: timestamp('created').notNull().defaultNow(),
+  expires: timestamp('expires').notNull(),
+});
+
+export const core_users_pass_reset_relations = relations(
+  core_users_pass_reset,
+  ({ one }) => ({
+    user: one(core_users, {
+      fields: [core_users_pass_reset.user_id],
+      references: [core_users.id],
+    }),
+  }),
+);

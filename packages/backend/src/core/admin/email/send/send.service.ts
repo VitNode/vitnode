@@ -5,10 +5,10 @@ import { MailService } from '../mail.service';
 import { EmailHelpersServiceType } from '../../../../providers/email/email-helpers.type';
 
 interface Args {
-  from: string;
   message: string;
   subject: string;
   to: string;
+  from?: string;
 }
 
 @Injectable()
