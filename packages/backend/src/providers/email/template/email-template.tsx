@@ -12,7 +12,6 @@ import {
 } from '@react-email/components';
 import * as React from 'react';
 
-import { HeaderEmail } from './_components/header';
 import { getTranslationForEmail } from '../email';
 import { GetHelpersForEmailType } from '../email-helpers.type';
 
@@ -20,14 +19,15 @@ export interface EmailTemplateProps {
   children: React.ReactNode;
   helpers: GetHelpersForEmailType;
   previewText: string;
+  username: string;
   header?: React.ReactNode;
 }
 
 export const EmailTemplate = ({
-  previewText = 'previewText',
-  header = <HeaderEmail />,
+  previewText,
   children = 'This is the email template.',
   helpers: { color, frontend_url, site_name, site_short_name },
+  username,
 }: EmailTemplateProps) => {
   const t = getTranslationForEmail('admin.core.email');
 
@@ -102,11 +102,10 @@ export const EmailTemplate = ({
             <Section
               className={`rounded border border-solid border-${color.border} p-5 bg-${color.card}`}
             >
-              {header}
               <Text className="mt-0">
                 {t('hello')}{' '}
                 <span className={`font-bold text-${color.primary.DEFAULT}`}>
-                  aXen
+                  {username}
                 </span>
                 ,
               </Text>

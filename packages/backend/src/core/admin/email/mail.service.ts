@@ -9,9 +9,11 @@ import {
   HelpersAdminEmailSettingsService,
   ShowAdminEmailSettingsServiceObjWithPassword,
 } from './helpers.service';
-import { CustomError } from '../../../errors';
 
-interface SendMailConfiguration {
+import { CustomError } from '../../../errors';
+import { getConfigFile } from '../../../providers/config';
+
+export interface SendMailServiceArgs {
   subject: string;
   template: React.ReactElement;
   to: string;
@@ -24,7 +26,7 @@ export class MailService extends HelpersAdminEmailSettingsService {
     return render(template);
   };
 
-  async sendMail({ to, subject, template }: SendMailConfiguration) {
+  async sendMail({ to, subject, template }: SendMailServiceArgs) {
     if (!fs.existsSync(this.path)) {
       throw new CustomError({
         code: 'EMAIL_NOT_CONFIGURED',
@@ -37,6 +39,7 @@ export class MailService extends HelpersAdminEmailSettingsService {
     const data = fs.readFileSync(this.path, 'utf-8');
     const config: ShowAdminEmailSettingsServiceObjWithPassword =
       JSON.parse(data);
+    const configSettings = getConfigFile();
 
     const transporter = nodemailer.createTransport(
       {
@@ -50,15 +53,14 @@ export class MailService extends HelpersAdminEmailSettingsService {
       },
       {
         from: {
-          name: 'NestJs + React Emails Test App',
-          address: 'Test App',
+          name: configSettings.settings.general.site_name,
+          address: 'aXenDeveloper@gmail.com',
         },
       },
     );
 
     await transporter.sendMail({
       to,
-      from: 'test',
       subject,
       html,
     });

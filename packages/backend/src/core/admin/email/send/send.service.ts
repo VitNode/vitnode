@@ -6,8 +6,10 @@ import { EmailHelpersServiceType } from '../../../../providers/email/email-helpe
 
 interface Args {
   message: string;
+  previewText: string;
   subject: string;
   to: string;
+  username: string;
   from?: string;
 }
 
@@ -19,13 +21,21 @@ export class SendAdminEmailService {
     private readonly emailHelpersService: EmailHelpersServiceType,
   ) {}
 
-  async send({ to, from, subject, message }: Args): Promise<string> {
+  async send({
+    to,
+    from,
+    subject,
+    message,
+    previewText,
+    username,
+  }: Args): Promise<string> {
     await this.mailService.sendMail({
       to,
       subject,
       template: this.emailHelpersService.template({
-        previewText: 'test',
+        previewText,
         children: message,
+        username,
       }),
     });
 

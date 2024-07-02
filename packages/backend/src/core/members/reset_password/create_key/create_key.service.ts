@@ -26,7 +26,7 @@ export class CreateKeyResetPasswordCoreMembersService {
     });
 
     if (!user) {
-      throw new NotFoundError('User not found');
+      throw new NotFoundError('User');
     }
 
     const key = generateRandomString(32);
@@ -50,6 +50,8 @@ export class CreateKeyResetPasswordCoreMembersService {
       to: user.email,
       subject: 'VitNode.com - password reset request',
       message: message,
+      previewText: 'VitNode.com - password reset request 123',
+      username: user.name,
     };
 
     await this.mailService.send(emailData);

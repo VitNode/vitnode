@@ -2,6 +2,41 @@
 
 In VitNode we're implementing [NodeMailer SMTP](https://nodemailer.com/) to send emails with [react-email](https://react.email/) which allows you to create beautiful responsive emails using React.
 
+## Example usage
+
+```ts {2, 8, 20-26}
+import { Injectable } from '@nestjs/common';
+import { SendAdminEmailService, DatabaseService } from 'vitnode-backend';
+
+@Injectable()
+export class ExampleService {
+  constructor(
+    private readonly databaseService: DatabaseService,
+    private readonly mailService: SendAdminEmailService,
+  ) {}
+
+  async send_email({ email }: Args): Promise<string> {
+    const user = await this.databaseService.db.query.core_users.findFirst({
+      where: (table, { eq }) => eq(table.email, email),
+    });
+
+    if (!user) {
+      throw new NotFoundError('User');
+    }
+
+    await this.mailService.send({
+      to: user.email,
+      subject: 'Test email subject',
+      message: 'Test email message',
+      previewText: 'Test email preview text',
+      username: user.name,
+    });
+
+    return 'Success!';
+  }
+}
+```
+
 ## Templates
 
 Create `.tsx` file inside `backend/src/plugins/{plugin_code}/admin/{module_name}/emails` folder.

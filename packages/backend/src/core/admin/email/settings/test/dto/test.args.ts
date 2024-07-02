@@ -23,4 +23,8 @@ export class TestAdminEmailSettingsServiceArgs {
   @Field(() => String)
   @Transform(TransformString)
   subject: string;
+
+  @Field(() => String)
+  @Transform(TransformString)
+  previewText: string;
 }

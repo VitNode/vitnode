@@ -5,6 +5,7 @@ import { TestAdminEmailSettingsService } from './test.service';
 import { TestAdminEmailSettingsServiceArgs } from './dto/test.args';
 
 import { AdminAuthGuards } from '../../../../../utils';
+import { CurrentUser, User } from '../../../../../decorators';
 
 @Resolver()
 export class TestAdminEmailSettingsResolver {
@@ -14,7 +15,8 @@ export class TestAdminEmailSettingsResolver {
   @UseGuards(AdminAuthGuards)
   async admin__core_email_settings__test(
     @Args() args: TestAdminEmailSettingsServiceArgs,
+    @CurrentUser() user: User,
   ): Promise<string> {
-    return this.service.test(args);
+    return this.service.test(args, user);
   }
 }
