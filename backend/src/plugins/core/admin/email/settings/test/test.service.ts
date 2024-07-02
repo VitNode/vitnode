@@ -13,7 +13,6 @@ export class TestAdminEmailSettingsService extends SendAdminEmailService {
     message
   }: TestAdminEmailSettingsServiceArgs): Promise<string> {
     await this.send({
-      from,
       to,
       subject,
       message

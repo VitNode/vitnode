@@ -7,15 +7,23 @@ import { ShowCoreMembersResolver } from "./show/show.resolver";
 import { AvatarCoreMembers } from "./avatar/avatar-core_members.module";
 import { DeleteCoreMembersResolver } from "./delete/delete.resolver";
 import { DeleteCoreMembersService } from "./delete/delete.service";
+import { ResetPasswordCoreMembersResolver } from "./reset_password/reset_password.resolver";
+import { ChangePasswordCoreMembersResolver } from "./change_password/change_password.resolver";
+import { ChangePasswordCoreMembersService } from "./change_password/change_password.service";
+import { ResetPasswordCoreMembersService } from "./reset_password/reset_password.service";
 
 @Module({
   providers: [
-    ShowCoreMembersService,
     ShowCoreMembersResolver,
+    ShowCoreMembersService,
     SignUpCoreMembersResolver,
     SignUpCoreMembersService,
     DeleteCoreMembersResolver,
-    DeleteCoreMembersService
+    DeleteCoreMembersService,
+    ResetPasswordCoreMembersResolver,
+    ResetPasswordCoreMembersService,
+    ChangePasswordCoreMembersResolver,
+    ChangePasswordCoreMembersService
   ],
   imports: [AvatarCoreMembers]
 })

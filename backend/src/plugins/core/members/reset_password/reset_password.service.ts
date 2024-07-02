@@ -49,13 +49,13 @@ export class ResetPasswordCoreMembersService {
     Best regards!\n
     VitNode Team`;
 
-    const emailArgs = {
+    const emailData = {
       to: user.email,
       subject: "VitNode.com - password reset request",
       message: message
     };
 
-    await this.mailService.send(emailArgs);
+    await this.mailService.send(emailData);
 
     return "Success!";
   }
