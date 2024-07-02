@@ -1,4 +1,4 @@
-import { createMiddleware } from 'vitnode-frontend/middleware';
+import createMiddleware from 'vitnode-frontend/middleware';
 
 export default createMiddleware();
 
