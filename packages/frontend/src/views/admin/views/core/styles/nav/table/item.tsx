@@ -9,9 +9,10 @@ import { useTextLang } from '../../../../../../../hooks/use-text-lang';
 
 interface Props {
   data: FlatTree<Omit<ShowCoreNav, '__typename'>>;
+  icon: React.ReactNode | null;
 }
 
-export const ItemContentTableContentNavAdmin = ({ data }: Props) => {
+export const ItemContentTableContentNavAdmin = ({ data, icon }: Props) => {
   const t = useTranslations('admin.core.styles.nav');
   const { convertText } = useTextLang();
 
@@ -19,7 +20,9 @@ export const ItemContentTableContentNavAdmin = ({ data }: Props) => {
     <>
       <div className="flex flex-1 flex-col">
         <div className="flex items-center gap-2">
-          <span className="font-semibold">{convertText(data.name)}</span>
+          <span className="flex items-center gap-1 font-semibold">
+            {icon} {convertText(data.name)}
+          </span>
         </div>
 
         <span className="text-muted-foreground line-clamp-2 flex items-center gap-2 text-sm">

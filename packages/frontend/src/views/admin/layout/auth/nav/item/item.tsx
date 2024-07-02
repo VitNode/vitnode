@@ -17,11 +17,7 @@ export const ItemNavAdmin = ({ id, items }: Props) => {
 
   return (
     <div>
-      {id !== 'core' && (
-        <div className="text-muted-foreground px-4 text-sm">
-          {t('nav.title')}
-        </div>
-      )}
+      {id !== 'core' && <div className="px-4 text-sm">{t('nav.title')}</div>}
 
       <div className="data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down overflow-hidden transition-all">
         <ul className="space-y-1 py-2">
