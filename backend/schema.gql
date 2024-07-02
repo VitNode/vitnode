@@ -33,6 +33,24 @@ type AvatarUser {
   id: Int!
 }
 
+type ChangePasswordCoreMembersObj {
+  avatar_color: String!
+  birthday: DateTime!
+  email: String!
+  first_name: String!
+  group_id: Int!
+  id: Int!
+  ip_address: String!
+  joined: DateTime!
+  language: String!
+  last_name: String!
+  name: String!
+  name_seo: String!
+  newsletter: Boolean!
+  password: String!
+  posts: Int!
+}
+
 input ColorsEditAdminThemeEditor {
   accent: ThemeVariableInput!
   accent_foreground: ThemeVariableInput!
@@ -205,7 +223,9 @@ type Mutation {
   core_groups__admin_create(content: ContentCreateAdminGroups!, name: [TextLanguageInput!]!): ShowAdminGroups!
   core_members__avatar__delete: String!
   core_members__avatar__upload(file: Upload!): UploadAvatarCoreMembersObj!
+  core_members__change_password(key: String!, password: String!): ChangePasswordCoreMembersObj!
   core_members__delete(id: Int!): String!
+  core_members__reset_password(email: String!): String!
   core_members__sign_up(email: String!, name: String!, newsletter: Boolean, password: String!): SignUpCoreMembersObj!
   core_sessions__sign_in(admin: Boolean, email: String!, password: String!, remember: Boolean): String!
   core_sessions__sign_out: String!

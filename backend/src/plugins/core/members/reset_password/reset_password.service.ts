@@ -21,6 +21,8 @@ export class ResetPasswordCoreMembersService {
       where: eq(core_users.email, email)
     });
 
+    if (user == undefined) return "No such email found!";
+
     const characters =
       "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     let key;
