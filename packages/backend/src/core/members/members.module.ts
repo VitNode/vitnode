@@ -1,52 +1,29 @@
 import { Module } from '@nestjs/common';
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-import { SignUpCoreMembersResolver } from "./sign_up/sign_up.resolver";
-import { SignUpCoreMembersService } from "./sign_up/sign_up.service";
-import { ShowCoreMembersService } from "./show/show.service";
-import { ShowCoreMembersResolver } from "./show/show.resolver";
-import { AvatarCoreMembers } from "./avatar/avatar-core_members.module";
-import { DeleteCoreMembersResolver } from "./delete/delete.resolver";
-import { DeleteCoreMembersService } from "./delete/delete.service";
-import { ResetPasswordCoreMembersResolver } from "./reset_password/reset_password.resolver";
-import { ChangePasswordCoreMembersResolver } from "./change_password/change_password.resolver";
-import { ChangePasswordCoreMembersService } from "./change_password/change_password.service";
-import { ResetPasswordCoreMembersService } from "./reset_password/reset_password.service";
-import { SendAdminEmailService } from "../admin/email/send/send.service";
-import { MailService } from "../admin/email/mail.service";
-=======
-import { SignUpCoreMembersResolver } from './sign_up/sign_up.resolver';
-import { SignUpCoreMembersService } from './sign_up/sign_up.service';
-=======
->>>>>>> 2a2f3d22 (refactor(backend): Move sign up from members to sessions module)
 import { ShowCoreMembersService } from './show/show.service';
 import { ShowCoreMembersResolver } from './show/show.resolver';
 import { AvatarCoreMembers } from './avatar/avatar-core_members.module';
 import { DeleteCoreMembersResolver } from './delete/delete.resolver';
 import { DeleteCoreMembersService } from './delete/delete.service';
->>>>>>> 1b3c841d (chore: Change prettier singleQuote to true)
+import { MailService } from '../admin/email/mail.service';
+import { SendAdminEmailService } from '../admin/email/send/send.service';
+import { ChangePasswordCoreMembersResolver } from './change_password/change_password.resolver';
+import { ChangePasswordCoreMembersService } from './change_password/change_password.service';
+import { ResetPasswordCoreMembersResolver } from './reset_password/reset_password.resolver';
+import { ResetPasswordCoreMembersService } from './reset_password/reset_password.service';
 
 @Module({
   providers: [
-    ShowCoreMembersResolver,
-<<<<<<< HEAD
     ShowCoreMembersService,
-    SignUpCoreMembersResolver,
-    SignUpCoreMembersService,
-=======
->>>>>>> 2a2f3d22 (refactor(backend): Move sign up from members to sessions module)
+    ShowCoreMembersResolver,
     DeleteCoreMembersResolver,
     DeleteCoreMembersService,
-<<<<<<< HEAD
     ResetPasswordCoreMembersResolver,
     ResetPasswordCoreMembersService,
     ChangePasswordCoreMembersResolver,
     ChangePasswordCoreMembersService,
     MailService,
-    SendAdminEmailService
-=======
->>>>>>> 95500191 (chore: Change prettier config)
+    SendAdminEmailService,
   ],
   imports: [AvatarCoreMembers],
 })
