@@ -7,7 +7,6 @@ import {
   Core_Middleware__ShowQuery,
   Core_Middleware__ShowQueryVariables,
 } from './graphql/graphql';
-import { getSessionAdminData } from './graphql/get-session-admin';
 
 const getI18n = async () => {
   try {
@@ -64,25 +63,17 @@ export const createMiddleware = () => {
       request.nextUrl.pathname,
       i18n.locales,
     );
-
-    const cookieAdmin = request.cookies.get('vitnode-login-token')?.value;
+    const cookieAdmin = request.cookies.get('vitnode-login-token-admin');
 
     // Redirect to /admin if the user is not logged in to AdminCP
     if (
       pathname.startsWith('/admin') &&
       pathname !== '/admin' &&
       pathname !== '/admin/theme-editor' &&
-      pathname !== '/admin/install'
+      pathname !== '/admin/install' &&
+      !cookieAdmin
     ) {
-      if (!cookieAdmin) {
-        return NextResponse.redirect(new URL('/admin', request.url));
-      }
-
-      try {
-        await getSessionAdminData();
-      } catch (error) {
-        return NextResponse.redirect(new URL('/admin', request.url));
-      }
+      return NextResponse.redirect(new URL('/admin', request.url));
     }
 
     return response;

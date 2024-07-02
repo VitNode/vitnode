@@ -89,7 +89,7 @@ export const ItemNav = ({
                     rel={item.external ? 'noopener noreferrer' : undefined}
                   >
                     <div className="flex gap-1 font-medium">
-                      {/* {icon} */}
+                      {icon}
                       {convertText(item.name)}
                     </div>
                     {item.description && (
