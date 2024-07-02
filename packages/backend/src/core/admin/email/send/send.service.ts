@@ -5,8 +5,8 @@ import { MailService } from '../mail.service';
 import { EmailHelpersServiceType } from '../../../../providers/email/email-helpers.type';
 import { EmailTemplateProps } from '../../../../providers/email/template/email-template';
 
-interface Args extends Pick<EmailTemplateProps, 'previewText' | 'user'> {
-  message: string;
+interface Args extends Pick<EmailTemplateProps, 'preview_text' | 'user'> {
+  message: JSX.Element | string;
   subject: string;
   to: string;
   from?: string;
@@ -25,14 +25,14 @@ export class SendAdminEmailService {
     from,
     subject,
     message,
-    previewText,
+    preview_text,
     user,
   }: Args): Promise<string> {
     await this.mailService.sendMail({
       to,
       subject,
       template: this.emailHelpersService.template({
-        previewText,
+        preview_text,
         children: message,
         user,
       }),

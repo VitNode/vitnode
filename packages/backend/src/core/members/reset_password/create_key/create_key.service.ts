@@ -1,14 +1,19 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { genSalt, hash } from 'bcrypt';
 import { generateRandomString } from 'vitnode-shared';
 import { ConfigService } from '@nestjs/config';
 
 import { CreateKeyResetPasswordCoreMembersArgs } from './dto/create_key.args';
+import { ContentCreateKeyEmail } from './_email/content';
 
 import { DatabaseService } from '../../../../database/database.service';
 import { NotFoundError } from '../../../../errors';
 import { core_users_pass_reset } from '../../../../templates/core/admin/database/schema/users';
 import { SendAdminEmailService } from '../../../admin/email/send/send.service';
+import {
+  EmailHelpersServiceType,
+  getTranslationForEmail,
+} from '../../../../providers';
 
 @Injectable()
 export class CreateKeyResetPasswordCoreMembersService {
@@ -16,6 +21,8 @@ export class CreateKeyResetPasswordCoreMembersService {
     private readonly databaseService: DatabaseService,
     private readonly configService: ConfigService,
     private readonly mailService: SendAdminEmailService,
+    @Inject('EmailHelpersService')
+    private readonly emailHelpersService: EmailHelpersServiceType,
   ) {}
 
   async create_key({
@@ -33,28 +40,26 @@ export class CreateKeyResetPasswordCoreMembersService {
     const keySalt = await genSalt(
       this.configService.getOrThrow('password_reset_salt'),
     );
-    const hashPassword = await hash(key, keySalt);
+    const hashKey = await hash(key, keySalt);
     await this.databaseService.db.insert(core_users_pass_reset).values({
       user_id: user.id,
-      key: hashPassword,
+      key: hashKey,
       expires: new Date(Date.now() + 1000 * 60 * 60), // 1 hour
     });
 
-    const message = `Hello ${user.first_name} ${user.last_name},\n\n
-    To confirm your password reset, go to https://vitnode.com/?key=${key}.\n\n
-    In most email programs, the address sent should work as an active link that can be clicked. If the link does not work, copy and paste it into the address bar of your browser (preferably Chrome or Opera).\n\n
-    Best regards!\n
-    VitNode Team`;
+    const t = getTranslationForEmail('core.reset_password', user.language);
 
-    const emailData = {
+    await this.mailService.send({
       to: user.email,
-      subject: 'VitNode.com - password reset request',
-      message: message,
-      previewText: 'VitNode.com - password reset request 123',
+      subject: t('title'),
+      message: ContentCreateKeyEmail({
+        language: user.language,
+        helpers: this.emailHelpersService.getHelpersForEmail(),
+        key: hashKey,
+      }),
+      preview_text: t('preview_text'),
       user,
-    };
-
-    await this.mailService.send(emailData);
+    });
 
     return 'Success!';
   }

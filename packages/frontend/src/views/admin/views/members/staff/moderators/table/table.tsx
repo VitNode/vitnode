@@ -7,7 +7,10 @@ import { InfinityIcon, ShieldAlert } from 'lucide-react';
 
 import { ActionsTableModeratorsStaffAdmin } from './actions/actions';
 
-import { Admin__Core_Staff_Moderators__ShowQuery } from '../../../../../../../graphql/graphql';
+import {
+  Admin__Core_Staff_Moderators__ShowQuery,
+  ShowAdminStaffModerators,
+} from '../../../../../../../graphql/graphql';
 import { UserLink } from '../../../../../../../components/ui/user/link';
 import { GroupFormat } from '../../../../../../../components/ui/user/group-format';
 import { Badge } from '../../../../../../../components/ui/badge';
@@ -20,8 +23,7 @@ export const TableModeratorsStaffAdmin = ({
 }: Admin__Core_Staff_Moderators__ShowQuery) => {
   const t = useTranslations('admin.members.staff');
 
-  // TODO: Add ColumnDef<ShowAdminStaffModerators>[] type
-  const columns = React.useMemo(
+  const columns: ColumnDef<ShowAdminStaffModerators>[] = React.useMemo(
     () => [
       {
         header: t('table.moderator'),

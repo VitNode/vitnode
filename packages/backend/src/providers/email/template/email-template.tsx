@@ -23,11 +23,11 @@ export interface EmailTemplateProps {
     name: string;
   };
   header?: React.ReactNode;
-  previewText?: string;
+  preview_text?: string;
 }
 
 export const EmailTemplate = ({
-  previewText,
+  preview_text,
   children = 'This is the email template.',
   helpers: { color, frontend_url, site_name, site_short_name },
   user,
@@ -37,7 +37,7 @@ export const EmailTemplate = ({
   return (
     <Html>
       <Head />
-      {previewText && <Preview>{previewText}</Preview>}
+      {preview_text && <Preview>{preview_text}</Preview>}
       <Tailwind
         config={{
           theme: {

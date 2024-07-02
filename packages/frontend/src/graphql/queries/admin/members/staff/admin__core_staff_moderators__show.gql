@@ -23,6 +23,7 @@ query Admin__core_staff_moderators__show(
             dir_folder
             file_name
           }
+          language
           group {
             id
             name {

@@ -13,7 +13,7 @@ export class TestAdminEmailSettingsService extends SendAdminEmailService {
       to,
       subject,
       message,
-      previewText,
+      preview_text,
     }: TestAdminEmailSettingsServiceArgs,
     user: User,
   ): Promise<string> {
@@ -22,7 +22,7 @@ export class TestAdminEmailSettingsService extends SendAdminEmailService {
       to,
       subject,
       message,
-      previewText,
+      preview_text,
       user,
     });
 

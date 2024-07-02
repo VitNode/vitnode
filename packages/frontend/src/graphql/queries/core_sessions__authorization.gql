@@ -9,6 +9,7 @@ query Core_sessions__authorization {
       name
       newsletter
       avatar_color
+      language
       avatar {
         id
         dir_folder

@@ -46,7 +46,7 @@ export const useEmailSettingsFormAdmin = ({
       smtpSecure: values.smtp_secure,
       smtpPassword: values.smtp_password,
       colorPrimary: values.color_primary,
-      colorPrimaryForeground: `hsl(${isColorBrightness(primaryHSL) ? `${primaryHSL.h}, 40, 2` : `${primaryHSL.h}, 40, 98`})`,
+      colorPrimaryForeground: `hsl(${isColorBrightness(primaryHSL) ? `${primaryHSL.h}, 40%, 2%` : `${primaryHSL.h}, 40%, 98%`})`,
     });
 
     if (mutation.error) {

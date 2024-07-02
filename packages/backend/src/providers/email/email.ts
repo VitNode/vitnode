@@ -38,7 +38,7 @@ export const getTranslationForEmail = (
       try {
         const next = message[part as any];
 
-        if (part == null || next == null) {
+        if (part === null || next === null) {
           return key;
         }
 
