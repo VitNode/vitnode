@@ -14,12 +14,12 @@ export const NavAdmin = async () => {
           {
             id: 'dashboard',
             href: 'dashboard',
-            icon: 'LayoutDashboard',
+            icon: 'layout-dashboard',
           },
           {
             id: 'settings',
             href: 'general',
-            icon: 'Settings',
+            icon: 'settings',
             children: [
               {
                 id: 'general',
@@ -38,12 +38,12 @@ export const NavAdmin = async () => {
           {
             id: 'plugins',
             href: 'plugins',
-            icon: 'PlugIcon',
+            icon: 'plug',
           },
           {
             id: 'styles',
             href: 'nav',
-            icon: 'Paintbrush',
+            icon: 'paintbrush',
             children: [
               {
                 id: 'nav',
@@ -58,12 +58,12 @@ export const NavAdmin = async () => {
           {
             id: 'langs',
             href: 'langs',
-            icon: 'Languages',
+            icon: 'languages',
           },
           {
             id: 'advanced',
             href: 'advanced/files',
-            icon: 'Cog',
+            icon: 'cog',
             children: [
               {
                 id: 'files',
@@ -79,17 +79,17 @@ export const NavAdmin = async () => {
           {
             id: 'users',
             href: 'users',
-            icon: 'Users',
+            icon: 'users',
           },
           {
             id: 'groups',
             href: 'groups',
-            icon: 'Group',
+            icon: 'group',
           },
           {
             id: 'staff',
             href: 'staff/moderators',
-            icon: 'UserCog',
+            icon: 'user-cog',
             children: [
               {
                 id: 'moderators',

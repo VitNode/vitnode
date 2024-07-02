@@ -1,4 +1,4 @@
-import * as Lucide from 'lucide-react';
+import dynamicIconImports from 'lucide-react/dynamicIconImports';
 import * as React from 'react';
 import { useTranslations } from 'next-intl';
 
@@ -11,7 +11,7 @@ interface Props extends IconInputProps {
   search: string;
 }
 
-const iconNamesArray = Object.keys(Lucide.icons) as IconLucideNames[];
+const iconNamesArray = Object.keys(dynamicIconImports) as IconLucideNames[];
 
 export const IconsContentIconInput = ({
   onChange,
