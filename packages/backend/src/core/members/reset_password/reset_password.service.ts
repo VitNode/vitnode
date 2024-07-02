@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
 
 import { DatabaseService } from '@/database/database.service';
-import { core_keys } from '@/templates/core/admin/database/schema/keys';
+import { core_users_password_keys } from '@/templates/core/admin/database/schema/keys';
 import { core_users } from '@/templates/core/admin/database/schema/users';
 
 import { SendAdminEmailService } from '../../admin/email/send/send.service';
@@ -35,13 +35,13 @@ export class ResetPasswordCoreMembersService {
       }
     } while (
       Boolean(
-        await this.databaseService.db.query.core_keys.findFirst({
-          where: eq(core_keys.key, key),
+        await this.databaseService.db.query.core_users_password_keys.findFirst({
+          where: eq(core_users_password_keys.key, key),
         }),
       )
     );
 
-    await this.databaseService.db.insert(core_keys).values({
+    await this.databaseService.db.insert(core_users_password_keys).values({
       user_id: user.id,
       key: key,
     });
