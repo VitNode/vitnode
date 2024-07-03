@@ -26,9 +26,9 @@ import { Button } from '../../../../../../../components/ui/button';
 
 export const FormSignUp = () => {
   const t = useTranslations('core');
-  const { form, onSubmit } = useSignUpView();
+  const { form, onSubmit, isReady, isSuccess } = useSignUpView();
 
-  if (form.formState.isSubmitSuccessful) {
+  if (isSuccess) {
     return <SuccessFormSignUp name={form.watch('name')} />;
   }
 
@@ -167,7 +167,7 @@ export const FormSignUp = () => {
           <Button
             type="submit"
             className="w-full"
-            disabled={!form.formState.isValid}
+            disabled={!form.formState.isValid || !isReady}
             loading={form.formState.isSubmitting}
           >
             {t('sign_up.form.submit')}
