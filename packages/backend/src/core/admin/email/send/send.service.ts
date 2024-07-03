@@ -3,12 +3,13 @@ import { Inject, Injectable } from '@nestjs/common';
 import { MailService } from '../mail.service';
 
 import { EmailHelpersServiceType } from '../../../../providers/email/email-helpers.type';
+import { EmailTemplateProps } from '../../../../providers/email/template/email-template';
 
-interface Args {
-  from: string;
-  message: string;
+interface Args extends Pick<EmailTemplateProps, 'preview_text' | 'user'> {
+  message: JSX.Element | string;
   subject: string;
   to: string;
+  from?: string;
 }
 
 @Injectable()
@@ -19,13 +20,21 @@ export class SendAdminEmailService {
     private readonly emailHelpersService: EmailHelpersServiceType,
   ) {}
 
-  async send({ to, from, subject, message }: Args): Promise<string> {
+  async send({
+    to,
+    from,
+    subject,
+    message,
+    preview_text,
+    user,
+  }: Args): Promise<string> {
     await this.mailService.sendMail({
       to,
       subject,
       template: this.emailHelpersService.template({
-        previewText: 'test',
+        preview_text,
         children: message,
+        user,
       }),
     });
 

@@ -336,6 +336,15 @@
         "ip_address": "IP Address"
       }
     },
+    "reset_password": {
+      "title": "Reset Password",
+      "preview_text": "You're receiving this email because you requested a password reset for your account.",
+      "email": {
+        "title": "Someone recently requested a password change for your account. If this was you, you can set a new password here:",
+        "button": "Reset Password",
+        "desc": "If you don't want to change your password or didn't request this, just ignore and delete this message."
+      }
+    },
     "errors": {
       "title": "Oops! Something went wrong",
       "code": "Error code: <code></code>",

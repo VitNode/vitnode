@@ -15,11 +15,12 @@ import { AdminMetadataModule } from './metadata/metadata.module';
 import { AdminSettingsModule } from './settings/settings.module';
 import { AdminThemeEditorModule } from './theme_editor/theme_editor.module';
 import { AdminInstallModule } from './install/install.module';
-import { AdminEmailModule } from './email/email.module';
+import { AdminEmailModule, GlobalAdminEmailModule } from './email/email.module';
 
 @Module({
   imports: [
     GlobalAdminSessionsModule,
+    GlobalAdminEmailModule,
     AdminSessionsModule,
     AdminPluginsModule,
     AdminNavModule,

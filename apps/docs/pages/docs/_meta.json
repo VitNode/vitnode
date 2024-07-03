@@ -11,7 +11,7 @@
   },
   "authorization": "Authorization",
   "cron": "Task Scheduling (CRON)",
-  "emails": "Emails",
+  "email": "Email",
   "files": "Files",
   "-- For Frontend": {
     "type": "separator",

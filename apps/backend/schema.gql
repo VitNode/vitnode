@@ -22,6 +22,7 @@ type AuthorizationCurrentUserObj {
   id: Int!
   is_admin: Boolean!
   is_mod: Boolean!
+  language: String!
   name: String!
   name_seo: String!
   newsletter: Boolean!
@@ -163,7 +164,7 @@ type LayoutAdminInstallObj {
 type Mutation {
   admin__blog_categories__create(color: String!, description: [TextLanguageInput!]!, name: [TextLanguageInput!]!, permissions: PermissionsCreatePluginCategories!): ShowBlogCategories!
   admin__core_email_settings__edit(color_primary: String!, color_primary_foreground: String!, smtp_host: String!, smtp_password: String!, smtp_port: Int!, smtp_secure: Boolean!, smtp_user: String!): ShowAdminEmailSettingsServiceObj!
-  admin__core_email_settings__test(from: String!, message: String!, subject: String!, to: String!): String!
+  admin__core_email_settings__test(from: String!, message: String!, preview_text: String, subject: String!, to: String!): String!
   admin__core_files__delete(id: Int!): String!
   admin__core_groups__delete(id: Int!): String!
   admin__core_groups__edit(content: ContentCreateAdminGroups!, id: Int!, name: [TextLanguageInput!]!): ShowAdminGroups!
@@ -201,6 +202,7 @@ type Mutation {
   core_members__avatar__delete: String!
   core_members__avatar__upload(file: Upload!): UploadAvatarCoreMembersObj!
   core_members__delete(id: Int!): String!
+  core_members__reset_password__create_key(email: String!): String!
   core_sessions__sign_in(admin: Boolean, email: String!, password: String!, remember: Boolean): String!
   core_sessions__sign_out: String!
   core_sessions__sign_up(email: String!, name: String!, newsletter: Boolean, password: String!): SignUpCoreSessionsObj!
@@ -329,6 +331,7 @@ type ShowAdminMembers {
   group: GroupUser!
   id: Int!
   joined: DateTime!
+  language: String!
   name: String!
   name_seo: String!
   newsletter: Boolean!
@@ -526,6 +529,7 @@ type ShowCoreMembers {
   group: GroupUser!
   id: Int!
   joined: DateTime!
+  language: String!
   name: String!
   name_seo: String!
   posts: Int!
@@ -672,6 +676,7 @@ type User {
   avatar_color: String!
   group: GroupUser!
   id: Int!
+  language: String!
   name: String!
   name_seo: String!
 }

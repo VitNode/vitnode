@@ -44,10 +44,16 @@
             "from": "From",
             "to": "To",
             "subject": "Subject",
+            "preview_text": "Preview Message",
             "message": "Message",
             "success": {
               "title": "Email has been sent",
               "desc": "Check your email inbox to see if you received the email."
+            },
+            "test": {
+              "subject": "Test Email from AdminCP VitNode",
+              "message": "This email confirms that your email settings in your website by VitNode are working correctly.",
+              "preview_text": "Preview text test email from AdminCP VitNode"
             },
             "send_testing_email": "Send Testing Email"
           }

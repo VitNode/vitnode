@@ -32,7 +32,9 @@ export const EmailSettingsAdminView = async () => {
   return (
     <>
       <HeaderContent h1={t('settings_email')}>
-        <ActionsEmailSettingsAdmin />
+        {data.admin__core_email_settings__show.smtp_host && (
+          <ActionsEmailSettingsAdmin />
+        )}
       </HeaderContent>
 
       <Card className="p-6">

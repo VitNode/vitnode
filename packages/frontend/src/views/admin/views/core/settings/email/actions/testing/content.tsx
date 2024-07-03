@@ -61,6 +61,16 @@ export const ContentTestingActionEmailSettingsAdmin = () => {
 
           <FormField
             control={form.control}
+            name="preview_text"
+            render={({ field }) => (
+              <FormFieldRender optional label={t('preview_text')}>
+                <Input {...field} />
+              </FormFieldRender>
+            )}
+          />
+
+          <FormField
+            control={form.control}
             name="message"
             render={({ field }) => (
               <FormFieldRender label={t('message')}>

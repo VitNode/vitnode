@@ -1,0 +1,244 @@
+import { Steps } from 'nextra/components';
+import { Callout } from 'nextra/components';
+
+# Email
+
+In VitNode we're implementing [NodeMailer SMTP](https://nodemailer.com/) to send emails with [react-email](https://react.email/) which allows you to create beautiful responsive emails using React.
+
+## Example usage
+
+```ts {2, 8, 20-26}
+import { Injectable } from '@nestjs/common';
+import { SendAdminEmailService, DatabaseService } from 'vitnode-backend';
+
+@Injectable()
+export class ExampleService {
+  constructor(
+    private readonly databaseService: DatabaseService,
+    private readonly mailService: SendAdminEmailService,
+  ) {}
+
+  async send_email({ email }: Args): Promise<string> {
+    const user = await this.databaseService.db.query.core_users.findFirst({
+      where: (table, { eq }) => eq(table.email, email),
+    });
+
+    if (!user) {
+      throw new NotFoundError('User');
+    }
+
+    await this.mailService.send({
+      to: user.email,
+      subject: 'Test email subject',
+      message: 'Test email message',
+      previewText: 'Test email preview text',
+      user,
+    });
+
+    return 'Success!';
+  }
+}
+```
+
+<Callout type="warning" emoji="⚠️">
+  VitNode throws an error if the email config is empty.
+</Callout>
+
+## Templates
+
+VitNode provides a template for emails. You can customize it by `AdminCP` => `Settings` => `Email`.
+
+<Steps>
+### TSX file
+
+Create `.tsx` file, for example: `/emails/example_template.tsx`.
+
+```tsx
+import * as React from 'react';
+import { Text } from '@react-email/components';
+
+interface Props {
+  username: string;
+}
+
+export const ExampleTemplateEmail = ({ username }: Props) => {
+  return <Text>Hi! This is a test for {username}</Text>;
+};
+```
+
+### Import into service
+
+Import the template into your service and use it.
+
+```ts {4, 25}
+import { Injectable } from '@nestjs/common';
+import { SendAdminEmailService, DatabaseService } from 'vitnode-backend';
+
+import { ExampleTemplateEmail } from './_emails/example_template';
+
+@Injectable()
+export class ExampleService {
+  constructor(
+    private readonly databaseService: DatabaseService,
+    private readonly mailService: SendAdminEmailService,
+  ) {}
+
+  async send_email({ email }: Args): Promise<string> {
+    const user = await this.databaseService.db.query.core_users.findFirst({
+      where: (table, { eq }) => eq(table.email, email),
+    });
+
+    if (!user) {
+      throw new NotFoundError('User');
+    }
+
+    await this.mailService.send({
+      to: user.email,
+      subject: 'Test email subject',
+      message: SendAdminEmailService({ username: user.name }),
+      previewText: 'Test email preview text',
+      user,
+    });
+
+    return 'Success!';
+  }
+}
+```
+
+</Steps>
+
+## Internationalization (i18n)
+
+We're created a helper function `getTranslationForEmail(namespace, language)` to translate the email templates. You can use it like this:
+
+```tsx {3, 7, 11, 15}
+import * as React from 'react';
+import { Text } from '@react-email/components';
+import { getTranslationForEmail, User } from 'vitnode-backend';
+
+interface Props {
+  username: string;
+  user: User;
+}
+
+export const ExampleTemplateEmail = ({ username, user }: Props) => {
+  const t = getTranslationForEmail('admin.core.email', user.language);
+
+  return (
+    <Text>
+      Hi! This is a test for {username} - {t('surfix_user')}
+    </Text>
+  );
+};
+```
+
+...or in your service.
+
+<Callout type="info" emoji="ℹ️">
+  `namespaces` are working the same as in the frontend.
+</Callout>
+
+## Template Helpers
+
+We're providing some helper functions to make your life easier. Using `this.emailHelpersService.getHelpersForEmail()` you can get the following values like:
+
+- colors,
+- frontend_url,
+- site_name,
+- site_short_name
+
+<Steps>
+
+### Modify the template
+
+```tsx {4-5, 10, 18, 25-30}
+import * as React from 'react';
+import { Text, Link } from '@react-email/components';
+import {
+  getTranslationForEmail,
+  GetHelpersForEmailType,
+  User,
+} from 'vitnode-backend';
+
+interface Props {
+  helpers: GetHelpersForEmailType;
+  username: string;
+  user: User;
+}
+
+export const ExampleTemplateEmail = ({
+  username,
+  user,
+  helpers: { frontend_url, color },
+}: Props) => {
+  const t = getTranslationForEmail('admin.core.email', user.language);
+
+  return (
+    <Text>
+      Hi! This is a test for {username} - {t('surfix_user')}
+      <Button
+        className={`bg-${color.primary.DEFAULT} rounded-md text-sm font-medium text-${color.primary.foreground} px-4 py-2.5`}
+        href={`${frontend_url}/test`}
+      >
+        {t('button')}
+      </Button>
+    </Text>
+  );
+};
+```
+
+<Callout type="warning" emoji="⚠️">
+  Custom colors like for example`bg-primary` not working in emails.  
+
+
+Use `bg-${color.primary.DEFAULT}` instead.
+
+</Callout>
+
+### Import into service
+
+```ts {1, 5, 15-16, 33}
+import { Injectable, Inject } from '@nestjs/common';
+import {
+  SendAdminEmailService,
+  DatabaseService,
+  EmailHelpersServiceType,
+} from 'vitnode-backend';
+
+import { ExampleTemplateEmail } from './_emails/example_template';
+
+@Injectable()
+export class ExampleService {
+  constructor(
+    private readonly databaseService: DatabaseService,
+    private readonly mailService: SendAdminEmailService,
+    @Inject('EmailHelpersService')
+    private readonly emailHelpersService: EmailHelpersServiceType,
+  ) {}
+
+  async send_email({ email }: Args): Promise<string> {
+    const user = await this.databaseService.db.query.core_users.findFirst({
+      where: (table, { eq }) => eq(table.email, email),
+    });
+
+    if (!user) {
+      throw new NotFoundError('User');
+    }
+
+    await this.mailService.send({
+      to: user.email,
+      subject: 'Test email subject',
+      message: SendAdminEmailService({
+        username: user.name,
+        helpers: this.emailHelpersService.getHelpersForEmail(),
+      }),
+      previewText: 'Test email preview text',
+      user,
+    });
+
+    return 'Success!';
+  }
+}
+```
+
+</Steps>
