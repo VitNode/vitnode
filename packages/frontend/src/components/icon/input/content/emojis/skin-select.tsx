@@ -64,8 +64,8 @@ export const SkinSelectEmojisContentIconInput = ({
               className="size-5 rounded-md"
               style={{ backgroundColor: `hsl(${skinToneEmoji[index]})` }}
             />
-            {/* eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error, @typescript-eslint/ban-ts-comment */}
-            {/* @ts-ignore */}
+            {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+            {/* @ts-expect-error */}
             <span>{t(`skin.skin_${index}`)}</span>
           </DropdownMenuItem>
         ))}

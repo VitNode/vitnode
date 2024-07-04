@@ -11,8 +11,8 @@ interface Props {
 }
 
 export const ItemNavAdmin = ({ id, items }: Props) => {
-  // eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error, @typescript-eslint/ban-ts-comment
-  // @ts-ignore
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
   const t = useTranslations(`${id}.admin`);
 
   return (

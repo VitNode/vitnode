@@ -369,6 +369,7 @@
         "dashboard": "Dashboard",
         "settings": "Settings",
         "settings_general": "General",
+        "settings_security": "Security",
         "settings_metadata": "Metadata",
         "settings_email": "Email",
         "plugins": "Plugins",

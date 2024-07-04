@@ -30,8 +30,8 @@ export const ErrorView = ({ className, code }: ErrorViewProps) => {
         <CardContent className="flex flex-col items-center pb-4 text-center">
           <span className="text-muted-foreground">{t('errors.title')}</span>
           <p className="mt-1 text-xl font-semibold tracking-tight">
-            {/* eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error, @typescript-eslint/ban-ts-comment */}
-            {/* @ts-ignore */}
+            {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+            {/* @ts-expect-error */}
             {t(`errors.${code}`)}
           </p>
         </CardContent>

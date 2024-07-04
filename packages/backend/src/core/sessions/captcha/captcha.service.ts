@@ -10,7 +10,7 @@ export class CaptchaCoreSessionsService {
     captchaKey,
     userIp,
   }: {
-    captchaKey: string | string[];
+    captchaKey: string[] | string;
     userIp: string;
   }) {
     const captchaSecret = '';
@@ -41,7 +41,5 @@ export class CaptchaCoreSessionsService {
       captchaKey,
       userIp,
     });
-
-    console.log(test);
   }
 }

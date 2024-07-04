@@ -7,13 +7,13 @@ import { removeSpecialCharacters } from 'vitnode-shared';
 import { SignUpCoreSessionsArgs } from './dto/sign_up.args';
 import { SignUpCoreSessionsObj } from './dto/sign_up.obj';
 import { AvatarColorService } from './helpers/avatar-color.service';
+import { CaptchaCoreSessionsService } from '../captcha/captcha.service';
 
 import { DatabaseService } from '../../../database';
 import { core_users } from '../../../templates/core/admin/database/schema/users';
 import { Ctx } from '../../../utils';
 import { CustomError } from '../../../errors';
 import { getUserIp } from '../../../functions';
-import { CaptchaCoreSessionsService } from '../captcha/captcha.service';
 
 @Injectable()
 export class SignUpCoreSessionsService extends AvatarColorService {

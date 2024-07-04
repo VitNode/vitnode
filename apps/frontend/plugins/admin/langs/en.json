@@ -57,6 +57,30 @@
             },
             "send_testing_email": "Send Testing Email"
           }
+        },
+        "security": {
+          "captcha": {
+            "title": "Captcha",
+            "desc": "Captcha is a security feature that requires users to complete a challenge to prove they are human. This helps prevent spam and abuse.",
+            "type": {
+              "title": "Type",
+              "none": {
+                "title": "None"
+              },
+              "recaptcha_v2": {
+                "title": "reCAPTCHA v2"
+              },
+              "recaptcha_v3": {
+                "title": "reCAPTCHA v3"
+              },
+              "hcaptcha": {
+                "title": "hCaptcha"
+              },
+              "cloudflare_turnstile": {
+                "title": "Cloudflare Turnstile"
+              }
+            }
+          }
         }
       },
       "metadata": {

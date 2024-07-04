@@ -49,8 +49,8 @@ export const CreateEditNavDevPluginAdmin = ({
   const { form, onSubmit } = useCreateNavPluginAdmin({ data, parentId });
   const { code } = useParams();
   const tPlugin = useTranslations(
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment, @typescript-eslint/prefer-ts-expect-error
-    // @ts-ignore
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     `${Array.isArray(code) ? code[0] : code}.admin.nav`,
   );
   const parentCode = form.watch('parent_code');
@@ -128,8 +128,8 @@ export const CreateEditNavDevPluginAdmin = ({
                             {nav.icon
                               ? icons.find(icon => icon.id === nav.code)?.icon
                               : null}
-                            {/* eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error, @typescript-eslint/ban-ts-comment */}
-                            {/* @ts-ignore */}
+                            {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+                            {/* @ts-expect-error */}
                             <span>{tPlugin(nav.code)}</span>
                           </div>
                         </SelectItem>

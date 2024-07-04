@@ -30,8 +30,8 @@ export const LinkItemNavAdmin = ({
   icon,
   children,
 }: Props) => {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment, @typescript-eslint/prefer-ts-expect-error
-  // @ts-ignore
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
   const t = useTranslations(`${primaryId}.admin.nav`);
   const pathname = usePathname();
   const href = `/admin/${primaryId}/${hrefFromProps}`;
@@ -62,8 +62,8 @@ export const LinkItemNavAdmin = ({
             className={primaryButtonClass(active && !isChildActive)}
           >
             {icon ? icons.find(i => i.id === id)?.icon : <Menu />}
-            {/* eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error, @typescript-eslint/ban-ts-comment */}
-            {/* @ts-ignore */}
+            {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+            {/* @ts-expect-error */}
             <span>{t(id)}</span>
             <ChevronDown className="ml-auto transition-transform" />
             {active && (
@@ -83,8 +83,8 @@ export const LinkItemNavAdmin = ({
           )}
         >
           {icon ? icons.find(i => i.id === id)?.icon : <Menu />}
-          {/* eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error, @typescript-eslint/ban-ts-comment */}
-          {/* @ts-ignore */}
+          {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+          {/* @ts-expect-error */}
           <span>{t(id)}</span>
 
           {active && (
@@ -112,8 +112,8 @@ export const LinkItemNavAdmin = ({
                     buttonClass(active),
                   )}
                 >
-                  {/* eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error, @typescript-eslint/ban-ts-comment */}
-                  {/* @ts-ignore */}
+                  {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+                  {/* @ts-expect-error */}
                   <span>{t(`${id}_${child.id}`)}</span>
                 </Link>
               );

@@ -152,6 +152,8 @@ export const useUploadFilesHandlerEditor = ({
     if (validateMineType.length !== files.length) {
       toast.error(t('errors.invalid_file_type.title'), {
         description: t('errors.invalid_file_type.desc', {
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-expect-error
           types: t(config.editor.files.allow_type),
         }),
       });

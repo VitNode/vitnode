@@ -369,6 +369,7 @@
         "dashboard": "Pulpit",
         "settings": "Ustawienia",
         "settings_general": "Ogólne",
+        "settings_security": "Bezpieczeństwo",
         "settings_metadata": "Metadane",
         "settings_email": "Email",
         "plugins": "Wtyczki",

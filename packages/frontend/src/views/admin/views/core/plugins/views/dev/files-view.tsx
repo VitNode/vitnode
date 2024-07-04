@@ -39,8 +39,8 @@ export const FilesDevPluginAdminView = async ({
           className="flex items-center justify-between gap-2 p-4"
           key={item[0]}
         >
-          {/* eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error, @typescript-eslint/ban-ts-comment */}
-          {/* @ts-ignore */}
+          {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+          {/* @ts-expect-error */}
           {t(item[0])}
 
           <span

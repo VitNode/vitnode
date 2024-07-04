@@ -57,6 +57,30 @@
             },
             "send_testing_email": "Wyślij testowy email"
           }
+        },
+        "security": {
+          "captcha": {
+            "title": "Captcha",
+            "desc": "Captcha to funkcja zabezpieczająca, która wymaga od użytkowników ukończenia wyzwania, aby udowodnić, że są ludźmi. Pomaga to zapobiegać spamowi i nadużyciom.",
+            "type": {
+              "title": "Typ",
+              "none": {
+                "title": "Brak"
+              },
+              "recaptcha_v2": {
+                "title": "reCAPTCHA v2"
+              },
+              "recaptcha_v3": {
+                "title": "reCAPTCHA v3"
+              },
+              "hcaptcha": {
+                "title": "hCaptcha"
+              },
+              "cloudflare_turnstile": {
+                "title": "Cloudflare Turnstile"
+              }
+            }
+          }
         }
       },
       "metadata": {
