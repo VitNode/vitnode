@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import { toast } from 'sonner';
 import { useTranslations } from 'next-intl';
-import { ConfigType } from 'vitnode-shared';
 
 import { mutationApi } from './mutation-api';
 

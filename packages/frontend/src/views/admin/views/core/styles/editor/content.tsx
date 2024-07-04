@@ -1,7 +1,6 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { ConfigType } from 'vitnode-shared';
 
 import { useEditorAdmin } from './hooks/use-editor-admin';
 import { FilesSectionContentEditorAdmin } from './sections/files';

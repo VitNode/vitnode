@@ -103,6 +103,11 @@ type EditAdminSettingsObj {
   site_name: String!
 }
 
+type EditorShowCoreMiddleware {
+  files: FilesEditorShowCoreMiddleware!
+  sticky: String!
+}
+
 type FilesAdminPluginsObj {
   admin_pages: Int!
   admin_templates: Int!
@@ -118,6 +123,10 @@ type FilesAuthorizationCoreSessions {
   max_storage_for_submit: Int!
   space_used: Float!
   total_max_storage: Int!
+}
+
+type FilesEditorShowCoreMiddleware {
+  allow_type: String!
 }
 
 type GroupUser {
@@ -255,6 +264,11 @@ type Query {
   core_sessions__devices__show: [ShowCoreSessionDevicesObj!]!
   core_settings__show: ShowSettingsObj!
   core_theme_editor__show: ShowCoreThemeEditorObj!
+}
+
+type RebuildRequiredEditorShowCoreMiddleware {
+  langs: Boolean!
+  plugins: Boolean!
 }
 
 type ShowAdminEmailSettingsServiceObj {
@@ -556,8 +570,10 @@ enum ShowCoreMembersSortingColumnEnum {
 }
 
 type ShowCoreMiddlewareObj {
+  editor: EditorShowCoreMiddleware!
   languages: [LanguagesCoreMiddleware!]!
   plugins: [String!]!
+  rebuild_required: RebuildRequiredEditorShowCoreMiddleware!
 }
 
 type ShowCoreNav {

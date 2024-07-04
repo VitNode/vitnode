@@ -5,7 +5,7 @@ import { join } from 'path';
 import { NodePgDatabase } from 'drizzle-orm/node-postgres';
 import { eq } from 'drizzle-orm';
 
-import { ConfigPlugin } from '../src';
+import { ConfigPlugin } from '../src/providers/plugins.type';
 import coreSchemaDatabase from '../src/templates/core/admin/database';
 import { core_plugins } from '../src/templates/core/admin/database/schema/plugins';
 

@@ -99,15 +99,16 @@ export const generateManifest = () => {
 
   const configPath = join(
     process.cwd(),
-    '..',
-    'frontend',
+    'src',
+    'plugins',
+    'core',
     'utils',
     'config.json',
   );
 
   if (!fs.existsSync(configPath)) {
     console.log(
-      `⛔️ Config file not found in 'frontend/config' directory. "${configPath}"`,
+      `⛔️ Config file not found in 'backend/utils/config.json' directory. "${configPath}"`,
     );
     process.exit(1);
   }

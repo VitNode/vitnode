@@ -1,4 +1,4 @@
-query Core_middleware {
+query Core_global {
   core_languages__show {
     edges {
       default
@@ -25,5 +25,18 @@ query Core_middleware {
       value
     }
     site_name
+    site_short_name
+  }
+  core_middleware__show {
+    editor {
+      files {
+        allow_type
+      }
+      sticky
+    }
+    rebuild_required {
+      langs
+      plugins
+    }
   }
 }

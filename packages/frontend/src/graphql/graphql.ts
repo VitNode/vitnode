@@ -121,6 +121,12 @@ export type EditAdminSettingsObj = {
   site_name: Scalars['String']['output'];
 };
 
+export type EditorShowCoreMiddleware = {
+  __typename?: 'EditorShowCoreMiddleware';
+  files: FilesEditorShowCoreMiddleware;
+  sticky: Scalars['String']['output'];
+};
+
 export type FilesAdminPluginsObj = {
   __typename?: 'FilesAdminPluginsObj';
   admin_pages: Scalars['Int']['output'];
@@ -138,6 +144,11 @@ export type FilesAuthorizationCoreSessions = {
   max_storage_for_submit: Scalars['Int']['output'];
   space_used: Scalars['Float']['output'];
   total_max_storage: Scalars['Int']['output'];
+};
+
+export type FilesEditorShowCoreMiddleware = {
+  __typename?: 'FilesEditorShowCoreMiddleware';
+  allow_type: Scalars['String']['output'];
 };
 
 export type GroupUser = {
@@ -257,7 +268,7 @@ export type MutationAdmin__Core_Email_Settings__EditArgs = {
 export type MutationAdmin__Core_Email_Settings__TestArgs = {
   from: Scalars['String']['input'];
   message: Scalars['String']['input'];
-  previewText?: InputMaybe<Scalars['String']['input']>;
+  preview_text?: InputMaybe<Scalars['String']['input']>;
   subject: Scalars['String']['input'];
   to: Scalars['String']['input'];
 };
@@ -687,6 +698,12 @@ export type QueryCore_Nav__ShowArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
 };
 
+export type RebuildRequiredEditorShowCoreMiddleware = {
+  __typename?: 'RebuildRequiredEditorShowCoreMiddleware';
+  langs: Scalars['Boolean']['output'];
+  plugins: Scalars['Boolean']['output'];
+};
+
 export type ShowAdminEmailSettingsServiceObj = {
   __typename?: 'ShowAdminEmailSettingsServiceObj';
   color_primary: Scalars['String']['output'];
@@ -1019,8 +1036,10 @@ export const ShowCoreMembersSortingColumnEnum = {
 export type ShowCoreMembersSortingColumnEnum = typeof ShowCoreMembersSortingColumnEnum[keyof typeof ShowCoreMembersSortingColumnEnum];
 export type ShowCoreMiddlewareObj = {
   __typename?: 'ShowCoreMiddlewareObj';
+  editor: EditorShowCoreMiddleware;
   languages: Array<LanguagesCoreMiddleware>;
   plugins: Array<Scalars['String']['output']>;
+  rebuild_required: RebuildRequiredEditorShowCoreMiddleware;
 };
 
 export type ShowCoreNav = {
@@ -1668,10 +1687,10 @@ export type Core_Theme_Editor__ShowQueryVariables = Exact<{ [key: string]: never
 
 export type Core_Theme_Editor__ShowQuery = { __typename?: 'Query', core_theme_editor__show: { __typename?: 'ShowCoreThemeEditorObj', colors: { __typename?: 'ColorsShowCoreThemeEditor', background: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, primary: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, secondary: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, primary_foreground: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, secondary_foreground: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, destructive: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, destructive_foreground: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, cover: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, cover_foreground: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, muted: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, muted_foreground: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, accent: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, accent_foreground: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, card: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, border: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } } } } };
 
-export type Core_MiddlewareQueryVariables = Exact<{ [key: string]: never; }>;
+export type Core_GlobalQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Core_MiddlewareQuery = { __typename?: 'Query', core_languages__show: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', default: boolean, code: string, id: number, name: string, timezone: string, enabled: boolean, locale: string, allow_in_input: boolean, time_24: boolean }> }, core_plugins__show: Array<{ __typename?: 'ShowCorePluginsObj', code: string }>, core_settings__show: { __typename?: 'ShowSettingsObj', site_name: string, site_copyright: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, site_description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
+export type Core_GlobalQuery = { __typename?: 'Query', core_languages__show: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', default: boolean, code: string, id: number, name: string, timezone: string, enabled: boolean, locale: string, allow_in_input: boolean, time_24: boolean }> }, core_plugins__show: Array<{ __typename?: 'ShowCorePluginsObj', code: string }>, core_settings__show: { __typename?: 'ShowSettingsObj', site_name: string, site_short_name: string, site_copyright: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, site_description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }, core_middleware__show: { __typename?: 'ShowCoreMiddlewareObj', editor: { __typename?: 'EditorShowCoreMiddleware', sticky: string, files: { __typename?: 'FilesEditorShowCoreMiddleware', allow_type: string } }, rebuild_required: { __typename?: 'RebuildRequiredEditorShowCoreMiddleware', langs: boolean, plugins: boolean } } };
 
 export type Core_Middleware__ShowQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1985,7 +2004,7 @@ export const Admin__Core_Email_Settings__Test = gql`
     from: $from
     message: $message
     subject: $subject
-    previewText: $previewText
+    preview_text: $previewText
   )
 }
     `;
@@ -2803,8 +2822,8 @@ export const Core_Theme_Editor__Show = gql`
   }
 }
     `;
-export const Core_Middleware = gql`
-    query Core_middleware {
+export const Core_Global = gql`
+    query Core_global {
   core_languages__show {
     edges {
       default
@@ -2831,6 +2850,19 @@ export const Core_Middleware = gql`
       value
     }
     site_name
+    site_short_name
+  }
+  core_middleware__show {
+    editor {
+      files {
+        allow_type
+      }
+      sticky
+    }
+    rebuild_required {
+      langs
+      plugins
+    }
   }
 }
     `;

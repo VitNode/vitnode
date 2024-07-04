@@ -11,6 +11,7 @@ import { updatePlugins } from './update-plugins';
 import { DATABASE_ENVS, createClientDatabase } from '../src/database/client';
 import coreSchemaDatabase from '../src/templates/core/admin/database';
 import { generateDatabaseMigrations } from './generate-database-migrations';
+import { generateConfig } from './generate-config';
 
 const init = async () => {
   const pluginsPath = join(process.cwd(), 'src', 'plugins');
@@ -30,32 +31,39 @@ const init = async () => {
   console.log(
     '\x1b[34m%s\x1b[0m',
     '[VitNode]',
-    '[1/5] Setup the project. Copying the database core schema...',
+    '[1/6] Setup the project. Generating the config file...',
+  );
+  generateConfig({ pluginsPath });
+
+  console.log(
+    '\x1b[34m%s\x1b[0m',
+    '[VitNode]',
+    '[2/6] Copying the database core schema...',
   );
   copyDatabaseSchema({ corePluginPath });
 
   console.log(
     '\x1b[34m%s\x1b[0m',
     '[VitNode]',
-    '[2/5] Generating database migrations...',
+    '[3/6] Generating database migrations...',
   );
   await generateDatabaseMigrations({ pluginsPath });
 
   console.log(
     '\x1b[34m%s\x1b[0m',
     '[VitNode]',
-    '[3/5] Generating the manifest files...',
+    '[4/6] Generating the manifest files...',
   );
   generateManifest();
 
   console.log(
     '\x1b[34m%s\x1b[0m',
     '[VitNode]',
-    '[4/5] Generating migrations...',
+    '[5/6] Generating migrations...',
   );
   await generateMigrations({ pluginsPath, db: database.db });
 
-  console.log('\x1b[34m%s\x1b[0m', '[VitNode]', '[5/5] Updating plugins...');
+  console.log('\x1b[34m%s\x1b[0m', '[VitNode]', '[6/6] Updating plugins...');
   await updatePlugins({ pluginsPath, db: database.db });
 
   await database.poolDB.end();

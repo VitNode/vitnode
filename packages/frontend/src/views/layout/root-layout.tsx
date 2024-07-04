@@ -7,10 +7,8 @@ import { Metadata } from 'next';
 import { InternalErrorView } from '../global/internal-error/internal-error-view';
 import { RootProviders } from './providers';
 
-import { getConfigFile } from '../../helpers/config';
-import { fetcher } from '../../graphql/fetcher';
-import { Core_Middleware, Core_MiddlewareQuery } from '../../graphql/graphql';
 import { CONFIG } from '../../helpers/config-with-env';
+import { getGlobalData } from 'src/graphql/get-global-data';
 
 export interface RootLayoutProps {
   children: React.ReactNode;
@@ -21,40 +19,32 @@ export interface RootLayoutProps {
 export const generateMetadataForRootLayout = async ({
   params: { locale },
 }: RootLayoutProps): Promise<Metadata> => {
-  const config = await getConfigFile();
-  const defaultTitle = config.settings.general.site_name;
-
   const metadata: Metadata = {
     manifest: `${CONFIG.backend_public_url}/assets/${locale}/manifest.webmanifest`,
-    title: {
-      default: defaultTitle,
-      template: `%s - ${defaultTitle}`,
-    },
     icons: {
       icon: '/icons/favicon.ico',
     },
   };
 
   try {
-    await getMiddlewareData();
+    const {
+      core_settings__show: { site_name },
+    } = await getGlobalData();
 
-    return metadata;
+    return {
+      ...metadata,
+      title: {
+        default: site_name,
+        template: `%s - ${site_name}`,
+      },
+    };
   } catch (e) {
     return {
       ...metadata,
-      title: `Error 500 - ${defaultTitle}`,
+      title: 'Error 500!',
       robots: 'noindex, nofollow',
     };
   }
-};
-
-const getMiddlewareData = async () => {
-  const { data } = await fetcher<Core_MiddlewareQuery>({
-    query: Core_Middleware,
-    cache: 'force-cache',
-  });
-
-  return data;
 };
 
 export const RootLayout = async ({
@@ -64,11 +54,11 @@ export const RootLayout = async ({
 }: RootLayoutProps) => {
   const [messages, config] = await Promise.all([
     getMessages(),
-    getConfigFile(),
+    getGlobalData(),
   ]);
 
   try {
-    const middlewareData = await getMiddlewareData();
+    const middlewareData = await getGlobalData();
 
     return (
       <html lang={locale} className={className}>
@@ -78,7 +68,7 @@ export const RootLayout = async ({
             showSpinner={false}
             height={4}
           />
-          <RootProviders middlewareData={middlewareData} config={config}>
+          <RootProviders middlewareData={middlewareData}>
             <NextIntlClientProvider messages={messages}>
               {children}
             </NextIntlClientProvider>
@@ -90,7 +80,7 @@ export const RootLayout = async ({
     return (
       <html lang={locale} className={className}>
         <body>
-          <RootProviders config={config}>
+          <RootProviders>
             <NextIntlClientProvider messages={messages}>
               <InternalErrorView />
             </NextIntlClientProvider>
