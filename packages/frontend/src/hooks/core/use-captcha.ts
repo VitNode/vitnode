@@ -11,14 +11,17 @@ export const useCaptcha = () => {
 
   const config: {
     site_key: string;
-    type: 'recaptcha_v2_checkbox' | 'recaptcha_v3';
+    type: 'recaptcha_v2_checkbox' | 'recaptcha_v2_invisible' | 'recaptcha_v3';
   } = {
-    site_key: '',
-    type: 'recaptcha_v3',
+    site_key: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI',
+    type: 'recaptcha_v2_invisible',
   };
 
   const handleLoaded = () => {
-    if (config.type === 'recaptcha_v2_checkbox') {
+    if (
+      config.type === 'recaptcha_v2_checkbox' ||
+      config.type === 'recaptcha_v2_invisible'
+    ) {
       // @ts-expect-error
       window.grecaptcha.ready(() => {
         // @ts-expect-error
@@ -26,6 +29,7 @@ export const useCaptcha = () => {
           sitekey: config.site_key,
           theme: resolvedTheme,
           locale,
+          size: config.type === 'recaptcha_v2_invisible' ? 'invisible' : null,
           callback: (token: string) => {
             setToken(token);
           },
@@ -43,7 +47,10 @@ export const useCaptcha = () => {
     const script = document.createElement('script');
     const googleCaptchaDomain =
       'https://www.google.com/recaptcha/api.js?hl=${locale}';
-    if (config.type === 'recaptcha_v2_checkbox') {
+    if (
+      config.type === 'recaptcha_v2_checkbox' ||
+      config.type === 'recaptcha_v2_invisible'
+    ) {
       script.src = `${googleCaptchaDomain}&render=explicit`;
     } else if (config.type === 'recaptcha_v3') {
       script.src = `${googleCaptchaDomain}&render=${config.site_key}`;
@@ -80,7 +87,10 @@ export const useCaptcha = () => {
           resolve('');
         });
       });
-    } else if (config.type === 'recaptcha_v2_checkbox') {
+    } else if (
+      config.type === 'recaptcha_v2_checkbox' ||
+      config.type === 'recaptcha_v2_invisible'
+    ) {
       return token;
     }
 

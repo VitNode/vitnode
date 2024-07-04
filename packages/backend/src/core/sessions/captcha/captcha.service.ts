@@ -13,7 +13,7 @@ export class CaptchaCoreSessionsService {
     captchaKey: string[] | string;
     userIp: string;
   }) {
-    const captchaSecret = '';
+    const captchaSecret = '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe';
 
     const res = await fetch(
       `https://www.google.com/recaptcha/api/siteverify?secret=${captchaSecret}&response=${captchaKey}&remoteip=${userIp}`,
