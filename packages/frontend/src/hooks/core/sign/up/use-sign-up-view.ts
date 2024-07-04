@@ -68,7 +68,7 @@ export const useSignUpView = () => {
     const token = await getTokenFromCaptcha();
     if (!token) {
       toast.error(t('errors.title'), {
-        description: t('errors.internal_server_error'),
+        description: t('errors.captcha_empty'),
       });
 
       return;
@@ -83,6 +83,14 @@ export const useSignUpView = () => {
 
       if (error?.extensions) {
         const { code } = error.extensions;
+
+        if (code === 'CAPTCHA_INVALID') {
+          toast.error(t('errors.title'), {
+            description: t('errors.captcha_invalid'),
+          });
+
+          return;
+        }
 
         if (code === 'EMAIL_ALREADY_EXISTS') {
           form.setError(

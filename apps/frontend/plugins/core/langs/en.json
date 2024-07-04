@@ -352,6 +352,8 @@
       "no_connection_api_dev": "This happens when the API makes some changes in your code or when the API is down.",
       "access_denied": "Access denied",
       "internal_server_error": "Internal server error.",
+      "captcha_empty": "Captcha is empty.",
+      "captcha_invalid": "Captcha is invalid. Please try again. If you can't see the captcha, please refresh the page.",
       "required": "This field is required.",
       "min_length": "This field must be at least {length} characters.",
       "max_length": "This field must be less than {length} characters.",

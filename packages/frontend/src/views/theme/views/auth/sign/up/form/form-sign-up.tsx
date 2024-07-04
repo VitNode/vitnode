@@ -161,6 +161,8 @@ export const FormSignUp = () => {
               </FormItem>
             )}
           />
+
+          <div id="vitnode_recaptcha" />
         </CardContent>
 
         <CardFooter>

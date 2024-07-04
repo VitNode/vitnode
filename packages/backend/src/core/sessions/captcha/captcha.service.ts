@@ -37,9 +37,17 @@ export class CaptchaCoreSessionsService {
     }
 
     const userIp = getUserIp(req);
-    const test = await this.getResFromReCaptcha({
-      captchaKey,
-      userIp,
-    });
+    const res: { success: boolean; 'error-codes'?: string[]; score?: number } =
+      await this.getResFromReCaptcha({
+        captchaKey,
+        userIp,
+      });
+
+    if (!res.success || res.score < 0.5) {
+      throw new CustomError({
+        code: 'CAPTCHA_INVALID',
+        message: 'Captcha is invalid',
+      });
+    }
   }
 }
