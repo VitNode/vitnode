@@ -15,7 +15,7 @@ const nameRegex = /^(?!.* {2})[\p{L}\p{N}._@ -]*$/u;
 export const useSignUpView = () => {
   const t = useTranslations('core');
   const [isSuccess, setSuccess] = React.useState(false);
-  const { handleSubmitWithCaptcha, isReady } = useCaptcha();
+  const { getTokenFromCaptcha, isReady } = useCaptcha();
 
   const formSchema = z.object({
     name: z
@@ -65,65 +65,62 @@ export const useSignUpView = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    if (!isReady) {
-      return;
-    }
-
-    try {
-      await handleSubmitWithCaptcha(token => {
-        // console.log('token', token);
-      });
-    } catch (error) {
+    const token = await getTokenFromCaptcha();
+    if (!token) {
       toast.error(t('errors.title'), {
         description: t('errors.internal_server_error'),
       });
 
       return;
     }
-    // // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    // const { terms, ...rest } = values;
-    // const mutation = await mutationApi(rest);
 
-    // if (mutation.error) {
-    //   const error = mutation.error as ErrorType | undefined;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { terms, ...rest } = values;
+    const mutation = await mutationApi({ ...rest, token });
 
-    //   if (error?.extensions) {
-    //     const { code } = error.extensions;
-    //     if (code === 'EMAIL_ALREADY_EXISTS') {
-    //       form.setError(
-    //         'email',
-    //         {
-    //           type: 'manual',
-    //           message: t('sign_up.form.email.already_exists'),
-    //         },
-    //         {
-    //           shouldFocus: true,
-    //         },
-    //       );
+    if (mutation.error) {
+      const error = mutation.error as ErrorType | undefined;
 
-    //       return;
-    //     }
+      if (error?.extensions) {
+        const { code } = error.extensions;
 
-    //     if (code === 'NAME_ALREADY_EXISTS') {
-    //       form.setError(
-    //         'name',
-    //         {
-    //           type: 'manual',
-    //           message: t('sign_up.form.name.already_exists'),
-    //         },
-    //         {
-    //           shouldFocus: true,
-    //         },
-    //       );
+        if (code === 'EMAIL_ALREADY_EXISTS') {
+          form.setError(
+            'email',
+            {
+              type: 'manual',
+              message: t('sign_up.form.email.already_exists'),
+            },
+            {
+              shouldFocus: true,
+            },
+          );
 
-    //       return;
-    //     }
+          return;
+        }
 
-    //     toast.error(t('errors.title'), {
-    //       description: t('errors.internal_server_error'),
-    //     });
-    //   }
-    // }
+        if (code === 'NAME_ALREADY_EXISTS') {
+          form.setError(
+            'name',
+            {
+              type: 'manual',
+              message: t('sign_up.form.name.already_exists'),
+            },
+            {
+              shouldFocus: true,
+            },
+          );
+
+          return;
+        }
+
+        toast.error(t('errors.title'), {
+          description: t('errors.internal_server_error'),
+        });
+      }
+
+      return;
+    }
 
     setSuccess(true);
   };

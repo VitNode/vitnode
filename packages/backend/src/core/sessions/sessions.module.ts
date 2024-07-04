@@ -12,6 +12,7 @@ import { DeviceSignInCoreSessionsService } from './sign_in/device.service';
 import { DevicesCoreSessionsModule } from './devices/devices.module';
 import { SignUpCoreSessionsResolver } from './sign_up/sign_up.resolver';
 import { SignUpCoreSessionsService } from './sign_up/sign_up.service';
+import { CaptchaCoreSessionsService } from './captcha/captcha.service';
 
 @Module({
   providers: [
@@ -36,12 +37,14 @@ export class CoreSessionsModule {}
     AuthorizationCoreSessionsResolver,
     InternalAuthorizationCoreSessionsService,
     DeviceSignInCoreSessionsService,
+    CaptchaCoreSessionsService,
   ],
   exports: [
     AuthorizationCoreSessionsService,
     AuthorizationCoreSessionsResolver,
     InternalAuthorizationCoreSessionsService,
     DeviceSignInCoreSessionsService,
+    CaptchaCoreSessionsService,
   ],
 })
 export class GlobalCoreSessionsModule {}

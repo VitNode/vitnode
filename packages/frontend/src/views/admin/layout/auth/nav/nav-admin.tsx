@@ -26,6 +26,10 @@ export const NavAdmin = async () => {
                 href: 'general',
               },
               {
+                id: 'security',
+                href: 'security',
+              },
+              {
                 id: 'metadata',
                 href: 'metadata',
               },

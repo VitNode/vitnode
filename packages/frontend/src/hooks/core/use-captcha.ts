@@ -33,29 +33,35 @@ export const useCaptcha = () => {
     };
   }, []);
 
-  const handleSubmitWithCaptcha = async (callback: (token: string) => void) => {
-    if (!config.site_key) return callback('');
+  const getTokenFromCaptcha = async (): Promise<string> => {
+    if (!config.site_key) {
+      return '';
+    }
 
     // Captcha
-    await new Promise<void>((resolve, reject) => {
+    return new Promise<string>(resolve => {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-expect-error
-      window.grecaptcha
-        .ready(() => {
+      window.grecaptcha.ready(async () => {
+        try {
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-expect-error
-          window.grecaptcha
-            .execute(config.site_key, { action: 'submit' })
-            .then((token: string) => {
-              callback(token);
-              resolve();
-            });
-        })
-        .catch(() => {
-          throw new reject('Captcha error');
-        });
+          const token = await window.grecaptcha.execute(config.site_key, {
+            action: 'submit',
+          });
+
+          resolve(token);
+        } catch (error) {
+          // eslint-disable-next-line no-console
+          console.error('Captcha error', error);
+        }
+
+        resolve('');
+
+        // throw new reject('Captcha error');
+      });
     });
   };
 
-  return { handleSubmitWithCaptcha, isReady };
+  return { getTokenFromCaptcha, isReady };
 };

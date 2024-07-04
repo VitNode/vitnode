@@ -13,12 +13,14 @@ import { core_users } from '../../../templates/core/admin/database/schema/users'
 import { Ctx } from '../../../utils';
 import { CustomError } from '../../../errors';
 import { getUserIp } from '../../../functions';
+import { CaptchaCoreSessionsService } from '../captcha/captcha.service';
 
 @Injectable()
 export class SignUpCoreSessionsService extends AvatarColorService {
   constructor(
     private readonly databaseService: DatabaseService,
     private readonly configService: ConfigService,
+    private readonly captchaService: CaptchaCoreSessionsService,
   ) {
     super();
   }
@@ -52,6 +54,13 @@ export class SignUpCoreSessionsService extends AvatarColorService {
     { email: emailRaw, name, newsletter, password }: SignUpCoreSessionsArgs,
     { req }: Ctx,
   ): Promise<SignUpCoreSessionsObj> {
+    await this.captchaService.validateCaptcha({ req });
+
+    throw new CustomError({
+      code: 'NOT_IMPLEMENTED',
+      message: 'Not implemented',
+    });
+
     const email = emailRaw.toLowerCase();
     const checkEmail = await this.databaseService.db.query.core_users.findFirst(
       {
