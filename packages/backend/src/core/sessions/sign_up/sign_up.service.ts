@@ -13,6 +13,7 @@ import { core_users } from '../../../templates/core/admin/database/schema/users'
 import { Ctx } from '../../../utils';
 import { CustomError } from '../../../errors';
 import { getUserIp } from '../../../functions';
+import { setPassword } from '../set_password';
 
 @Injectable()
 export class SignUpCoreSessionsService extends AvatarColorService {
@@ -77,12 +78,7 @@ export class SignUpCoreSessionsService extends AvatarColorService {
         message: 'Name already exists',
         code: 'NAME_ALREADY_EXISTS',
       });
-    }
-
-    const passwordSalt = await genSalt(
-      this.configService.getOrThrow('password_salt'),
-    );
-    const hashPassword = await hash(password, passwordSalt);
+    }   
 
     const user = await this.databaseService.db
       .insert(core_users)
@@ -91,12 +87,13 @@ export class SignUpCoreSessionsService extends AvatarColorService {
         name,
         name_seo: convertToNameSEO,
         newsletter,
-        password: hashPassword,
         avatar_color: this.generateAvatarColor(name),
         group_id: await this.getGroupId(),
         ip_address: getUserIp(req),
       })
       .returning();
+
+      setPassword(this.databaseService, this.configService, user.id, password);
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { password: _, ...rest } = user[0];

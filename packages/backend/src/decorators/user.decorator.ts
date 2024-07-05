@@ -47,6 +47,9 @@ export class User {
   @Field(() => String)
   avatar_color: string;
 
+  @Field(() => String)
+  language: string;
+
   @Field(() => AvatarUser, { nullable: true })
   avatar: AvatarUser | null;
 

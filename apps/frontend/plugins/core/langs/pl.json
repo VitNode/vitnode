@@ -336,6 +336,15 @@
         "ip_address": "Adres IP"
       }
     },
+    "reset_password": {
+      "title": "Zresetuj hasło",
+      "preview_text": "Otrzymujesz tę wiadomość e-mail, ponieważ poproszono o zresetowanie hasła do Twojego konta.",
+      "email": {
+        "title": "Ktoś niedawno poprosił o zmianę hasła do Twojego konta. Jeśli to byłeś Ty, możesz ustawić nowe hasło tutaj:",
+        "button": "Zresetuj hasło",
+        "desc": "Jeśli nie chcesz zmieniać hasła lub nie poprosiłeś o to, po prostu zignoruj i usuń tę wiadomość."
+      }
+    },
     "errors": {
       "title": "Ups! Coś poszło nie tak",
       "code": "Kod błędu: <code></code>",

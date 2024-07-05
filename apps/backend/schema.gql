@@ -22,6 +22,7 @@ type AuthorizationCurrentUserObj {
   id: Int!
   is_admin: Boolean!
   is_mod: Boolean!
+  language: String!
   name: String!
   name_seo: String!
   newsletter: Boolean!
@@ -161,189 +162,50 @@ type LayoutAdminInstallObj {
 }
 
 type Mutation {
-  admin__blog_categories__create(
-    color: String!
-    description: [TextLanguageInput!]!
-    name: [TextLanguageInput!]!
-    permissions: PermissionsCreatePluginCategories!
-  ): ShowBlogCategories!
-  admin__core_email_settings__edit(
-    color_primary: String!
-    color_primary_foreground: String!
-    smtp_host: String!
-    smtp_password: String!
-    smtp_port: Int!
-    smtp_secure: Boolean!
-    smtp_user: String!
-  ): ShowAdminEmailSettingsServiceObj!
-  admin__core_email_settings__test(
-    from: String!
-    message: String!
-    subject: String!
-    to: String!
-  ): String!
+  admin__blog_categories__create(color: String!, description: [TextLanguageInput!]!, name: [TextLanguageInput!]!, permissions: PermissionsCreatePluginCategories!): ShowBlogCategories!
+  admin__core_email_settings__edit(color_primary: String!, color_primary_foreground: String!, smtp_host: String!, smtp_password: String!, smtp_port: Int!, smtp_secure: Boolean!, smtp_user: String!): ShowAdminEmailSettingsServiceObj!
+  admin__core_email_settings__test(from: String!, message: String!, preview_text: String, subject: String!, to: String!): String!
   admin__core_files__delete(id: Int!): String!
   admin__core_groups__delete(id: Int!): String!
-  admin__core_groups__edit(
-    content: ContentCreateAdminGroups!
-    id: Int!
-    name: [TextLanguageInput!]!
-  ): ShowAdminGroups!
-  admin__core_languages__create(
-    allow_in_input: Boolean!
-    code: String!
-    locale: String!
-    name: String!
-    time_24: Boolean!
-    timezone: String!
-  ): ShowCoreLanguages!
+  admin__core_groups__edit(content: ContentCreateAdminGroups!, id: Int!, name: [TextLanguageInput!]!): ShowAdminGroups!
+  admin__core_languages__create(allow_in_input: Boolean!, code: String!, locale: String!, name: String!, time_24: Boolean!, timezone: String!): ShowCoreLanguages!
   admin__core_languages__delete(code: String!): String!
   admin__core_languages__download(code: String!, plugins: [String!]!): String!
-  admin__core_languages__edit(
-    allow_in_input: Boolean!
-    default: Boolean!
-    enabled: Boolean!
-    id: Int!
-    locale: String!
-    name: String!
-    time_24: Boolean!
-    timezone: String!
-  ): ShowCoreLanguages!
+  admin__core_languages__edit(allow_in_input: Boolean!, default: Boolean!, enabled: Boolean!, id: Int!, locale: String!, name: String!, time_24: Boolean!, timezone: String!): ShowCoreLanguages!
   admin__core_languages__update(code: String!, file: Upload!): String!
-  admin__core_main_settings__edit(
-    site_copyright: [TextLanguageInput!]!
-    site_description: [TextLanguageInput!]!
-    site_name: String!
-    site_short_name: String!
-  ): EditAdminSettingsObj!
-  admin__core_manifest_metadata__edit(
-    background_color: String!
-    display: String!
-    start_url: String!
-    theme_color: String!
-  ): ShowAdminManifestMetadataObj!
-  admin__core_members__edit(
-    birthday: DateTime!
-    email: String!
-    first_name: String!
-    id: Int!
-    last_name: String!
-    name: String!
-    newsletter: Boolean!
-  ): EditAdminMembersObj!
-  admin__core_nav__change_position(
-    id: Int!
-    index_to_move: Int!
-    parent_id: Int!
-  ): String!
-  admin__core_nav__create(
-    description: [TextLanguageInput!]!
-    external: Boolean!
-    href: String!
-    icon: String
-    name: [TextLanguageInput!]!
-  ): ShowCoreNav!
+  admin__core_main_settings__edit(site_copyright: [TextLanguageInput!]!, site_description: [TextLanguageInput!]!, site_name: String!, site_short_name: String!): EditAdminSettingsObj!
+  admin__core_manifest_metadata__edit(background_color: String!, display: String!, start_url: String!, theme_color: String!): ShowAdminManifestMetadataObj!
+  admin__core_members__edit(birthday: DateTime!, email: String!, first_name: String!, id: Int!, last_name: String!, name: String!, newsletter: Boolean!): EditAdminMembersObj!
+  admin__core_nav__change_position(id: Int!, index_to_move: Int!, parent_id: Int!): String!
+  admin__core_nav__create(description: [TextLanguageInput!]!, external: Boolean!, href: String!, icon: String, name: [TextLanguageInput!]!): ShowCoreNav!
   admin__core_nav__delete(id: Int!): String!
-  admin__core_nav__edit(
-    description: [TextLanguageInput!]!
-    external: Boolean!
-    href: String!
-    icon: String
-    id: Int!
-    name: [TextLanguageInput!]!
-  ): ShowCoreNav!
-  admin__core_plugins__create(
-    author: String!
-    author_url: String
-    code: String!
-    description: String
-    name: String!
-    support_url: String!
-  ): ShowAdminPlugins!
+  admin__core_nav__edit(description: [TextLanguageInput!]!, external: Boolean!, href: String!, icon: String, id: Int!, name: [TextLanguageInput!]!): ShowCoreNav!
+  admin__core_plugins__create(author: String!, author_url: String, code: String!, description: String, name: String!, support_url: String!): ShowAdminPlugins!
   admin__core_plugins__delete(code: String!): String!
-  admin__core_plugins__download(
-    code: String!
-    version: String
-    version_code: Int
-  ): String!
-  admin__core_plugins__edit(
-    author: String!
-    author_url: String
-    code: String!
-    default: Boolean
-    description: String
-    enabled: Boolean
-    name: String!
-    support_url: String!
-  ): ShowAdminPlugins!
-  admin__core_plugins__nav__change_position(
-    code: String!
-    index_to_move: Int!
-    parent_code: String
-    plugin_code: String!
-  ): String!
-  admin__core_plugins__nav__create(
-    code: String!
-    href: String!
-    icon: String
-    parent_code: String
-    plugin_code: String!
-  ): ShowAdminNavPluginsObj!
-  admin__core_plugins__nav__delete(
-    code: String!
-    parent_code: String
-    plugin_code: String!
-  ): String!
-  admin__core_plugins__nav__edit(
-    code: String!
-    href: String!
-    icon: String
-    parent_code: String
-    plugin_code: String!
-    previous_code: String!
-  ): ShowAdminNavPluginsObj!
+  admin__core_plugins__download(code: String!, version: String, version_code: Int): String!
+  admin__core_plugins__edit(author: String!, author_url: String, code: String!, default: Boolean, description: String, enabled: Boolean, name: String!, support_url: String!): ShowAdminPlugins!
+  admin__core_plugins__nav__change_position(code: String!, index_to_move: Int!, parent_code: String, plugin_code: String!): String!
+  admin__core_plugins__nav__create(code: String!, href: String!, icon: String, parent_code: String, plugin_code: String!): ShowAdminNavPluginsObj!
+  admin__core_plugins__nav__delete(code: String!, parent_code: String, plugin_code: String!): String!
+  admin__core_plugins__nav__edit(code: String!, href: String!, icon: String, parent_code: String, plugin_code: String!, previous_code: String!): ShowAdminNavPluginsObj!
   admin__core_plugins__upload(code: String, file: Upload!): ShowAdminPlugins!
-  admin__core_staff_administrators__create(
-    group_id: Int
-    unrestricted: Boolean!
-    user_id: Int
-  ): ShowAdminStaffAdministrators!
+  admin__core_staff_administrators__create(group_id: Int, unrestricted: Boolean!, user_id: Int): ShowAdminStaffAdministrators!
   admin__core_staff_administrators__delete(id: Int!): String!
-  admin__core_staff_moderators__create(
-    group_id: Int
-    unrestricted: Boolean!
-    user_id: Int
-  ): ShowAdminStaffModerators!
+  admin__core_staff_moderators__create(group_id: Int, unrestricted: Boolean!, user_id: Int): ShowAdminStaffModerators!
   admin__core_staff_moderators__delete(id: Int!): String!
   admin__core_theme_editor__edit(colors: ColorsEditAdminThemeEditor!): String!
   admin__install__create_database: String!
   admin_sessions__sign_out: String!
   core_editor_files__delete(id: Int!, security_key: String): String!
-  core_editor_files__upload(
-    file: Upload!
-    folder: String!
-    plugin: String!
-  ): ShowCoreFiles!
-  core_groups__admin_create(
-    content: ContentCreateAdminGroups!
-    name: [TextLanguageInput!]!
-  ): ShowAdminGroups!
+  core_editor_files__upload(file: Upload!, folder: String!, plugin: String!): ShowCoreFiles!
+  core_groups__admin_create(content: ContentCreateAdminGroups!, name: [TextLanguageInput!]!): ShowAdminGroups!
   core_members__avatar__delete: String!
   core_members__avatar__upload(file: Upload!): UploadAvatarCoreMembersObj!
   core_members__delete(id: Int!): String!
-  core_sessions__sign_in(
-    admin: Boolean
-    email: String!
-    password: String!
-    remember: Boolean
-  ): String!
+  core_members__reset_password__create_key(email: String!): String!
+  core_sessions__sign_in(admin: Boolean, email: String!, password: String!, remember: Boolean): String!
   core_sessions__sign_out: String!
-  core_sessions__sign_up(
-    email: String!
-    name: String!
-    newsletter: Boolean
-    password: String!
-  ): SignUpCoreSessionsObj!
+  core_sessions__sign_up(email: String!, name: String!, newsletter: Boolean, password: String!): SignUpCoreSessionsObj!
 }
 
 type NavAdminPluginsAuthorization {
@@ -370,83 +232,22 @@ input PermissionsCreatePluginCategories {
 
 type Query {
   admin__core_email_settings__show: ShowAdminEmailSettingsServiceObj!
-  admin__core_files__show(
-    cursor: Int
-    first: Int
-    last: Int
-    search: String
-    sortBy: ShowCoreFilesSortByArgs
-  ): ShowAdminFilesObj!
-  admin__core_groups__show(
-    cursor: Int
-    first: Int
-    last: Int
-    search: String
-    sortBy: ShowAdminGroupsSortByArgs
-  ): ShowAdminGroupsObj!
+  admin__core_files__show(cursor: Int, first: Int, last: Int, search: String, sortBy: ShowCoreFilesSortByArgs): ShowAdminFilesObj!
+  admin__core_groups__show(cursor: Int, first: Int, last: Int, search: String, sortBy: ShowAdminGroupsSortByArgs): ShowAdminGroupsObj!
   admin__core_manifest_metadata__show: ShowAdminManifestMetadataObj!
-  admin__core_members__show(
-    cursor: Int
-    first: Int
-    groups: [Int!]
-    last: Int
-    search: String
-    sortBy: ShowAdminMembersSortByArgs
-  ): ShowAdminMembersObj!
+  admin__core_members__show(cursor: Int, first: Int, groups: [Int!], last: Int, search: String, sortBy: ShowAdminMembersSortByArgs): ShowAdminMembersObj!
   admin__core_members__stats_sign_up: [SignUpStatsAdminMembers!]!
   admin__core_plugins__files(code: String!): FilesAdminPluginsObj!
-  admin__core_plugins__nav__show(
-    plugin_code: String!
-  ): [ShowAdminNavPluginsObj!]!
-  admin__core_plugins__show(
-    code: String
-    cursor: Int
-    first: Int
-    last: Int
-    search: String
-    sortBy: ShowAdminPluginsSortByArgs
-  ): ShowAdminPluginsObj!
-  admin__core_staff_administrators__show(
-    cursor: Int
-    first: Int
-    last: Int
-    sortBy: ShowAdminStaffAdministratorsSortByArgs
-  ): ShowAdminStaffAdministratorsObj!
-  admin__core_staff_moderators__show(
-    cursor: Int
-    first: Int
-    last: Int
-    sortBy: ShowAdminStaffModeratorsSortByArgs
-  ): ShowAdminStaffModeratorsObj!
+  admin__core_plugins__nav__show(plugin_code: String!): [ShowAdminNavPluginsObj!]!
+  admin__core_plugins__show(code: String, cursor: Int, first: Int, last: Int, search: String, sortBy: ShowAdminPluginsSortByArgs): ShowAdminPluginsObj!
+  admin__core_staff_administrators__show(cursor: Int, first: Int, last: Int, sortBy: ShowAdminStaffAdministratorsSortByArgs): ShowAdminStaffAdministratorsObj!
+  admin__core_staff_moderators__show(cursor: Int, first: Int, last: Int, sortBy: ShowAdminStaffModeratorsSortByArgs): ShowAdminStaffModeratorsObj!
   admin__install__layout: LayoutAdminInstallObj!
   admin__sessions__authorization: AuthorizationAdminSessionsObj!
-  blog_categories__show(
-    cursor: Int
-    first: Int
-    last: Int
-  ): ShowBlogCategoriesObj!
-  core_files__show(
-    cursor: Int
-    first: Int
-    last: Int
-    search: String
-    sortBy: ShowCoreFilesSortByArgs
-  ): ShowCoreFilesObj!
-  core_languages__show(
-    cursor: Int
-    first: Int
-    last: Int
-    search: String
-    sortBy: ShowCoreLanguagesSortByArgs
-  ): ShowCoreLanguagesObj!
-  core_members__show(
-    cursor: Int
-    first: Int
-    last: Int
-    name_seo: String
-    search: String
-    sortBy: ShowCoreMembersSortByArgs
-  ): ShowCoreMembersObj!
+  blog_categories__show(cursor: Int, first: Int, last: Int): ShowBlogCategoriesObj!
+  core_files__show(cursor: Int, first: Int, last: Int, search: String, sortBy: ShowCoreFilesSortByArgs): ShowCoreFilesObj!
+  core_languages__show(cursor: Int, first: Int, last: Int, search: String, sortBy: ShowCoreLanguagesSortByArgs): ShowCoreLanguagesObj!
+  core_members__show(cursor: Int, first: Int, last: Int, name_seo: String, search: String, sortBy: ShowCoreMembersSortByArgs): ShowCoreMembersObj!
   core_middleware__show: ShowCoreMiddlewareObj!
   core_nav__show(cursor: Int, first: Int, last: Int): ShowCoreNavObj!
   core_plugins__show: [ShowCorePluginsObj!]!
@@ -530,6 +331,7 @@ type ShowAdminMembers {
   group: GroupUser!
   id: Int!
   joined: DateTime!
+  language: String!
   name: String!
   name_seo: String!
   newsletter: Boolean!
@@ -727,6 +529,7 @@ type ShowCoreMembers {
   group: GroupUser!
   id: Int!
   joined: DateTime!
+  language: String!
   name: String!
   name_seo: String!
   posts: Int!
@@ -853,9 +656,7 @@ input ThemeVariableInput {
   light: HslColorInput!
 }
 
-"""
-The `Upload` scalar type represents a file upload.
-"""
+"""The `Upload` scalar type represents a file upload."""
 scalar Upload
 
 type UploadAvatarCoreMembersObj {
@@ -875,6 +676,7 @@ type User {
   avatar_color: String!
   group: GroupUser!
   id: Int!
+  language: String!
   name: String!
   name_seo: String!
 }

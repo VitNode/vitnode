@@ -5,12 +5,10 @@ import { ShowCoreMembersResolver } from './show/show.resolver';
 import { AvatarCoreMembers } from './avatar/avatar-core_members.module';
 import { DeleteCoreMembersResolver } from './delete/delete.resolver';
 import { DeleteCoreMembersService } from './delete/delete.service';
-import { MailService } from '../admin/email/mail.service';
-import { SendAdminEmailService } from '../admin/email/send/send.service';
-import { ChangePasswordCoreMembersResolver } from './change_password/change_password.resolver';
-import { ChangePasswordCoreMembersService } from './change_password/change_password.service';
-import { ResetPasswordCoreMembersResolver } from './reset_password/reset_password.resolver';
-import { ResetPasswordCoreMembersService } from './reset_password/reset_password.service';
+import { CreateKeyResetPasswordCoreMembersService } from './reset_password/create_key/create_key.service';
+import { CreateKeyResetPasswordCoreMembersResolver } from './reset_password/create_key/create_key.resolver';
+import { SetPasswordCoreMembersResolver } from './set_password/set_password.resolver';
+import { SetPasswordCoreMembersService } from '../sessions/set_password.service';
 
 @Module({
   providers: [
@@ -18,12 +16,10 @@ import { ResetPasswordCoreMembersService } from './reset_password/reset_password
     ShowCoreMembersResolver,
     DeleteCoreMembersResolver,
     DeleteCoreMembersService,
-    ResetPasswordCoreMembersResolver,
-    ResetPasswordCoreMembersService,
-    ChangePasswordCoreMembersResolver,
-    ChangePasswordCoreMembersService,
-    MailService,
-    SendAdminEmailService,
+    CreateKeyResetPasswordCoreMembersService,
+    CreateKeyResetPasswordCoreMembersResolver,
+    SetPasswordCoreMembersResolver,
+    SetPasswordCoreMembersService
   ],
   imports: [AvatarCoreMembers],
 })

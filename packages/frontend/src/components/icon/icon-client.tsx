@@ -1,11 +1,13 @@
 'use client';
 
-import * as Lucide from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 import * as React from 'react';
+import dynamicIconImports from 'lucide-react/dynamicIconImports';
+import dynamic from 'next/dynamic';
 
 import { cn } from '../../helpers/classnames';
 
-export type IconLucideNames = keyof typeof Lucide.icons;
+export type IconLucideNames = keyof typeof dynamicIconImports;
 
 export const IconClient = React.memo(
   ({
@@ -19,18 +21,15 @@ export const IconClient = React.memo(
       return <span className={className}>{name}</span>;
     }
 
-    const LucideIcon = React.lazy<React.ComponentType<Lucide.LucideProps>>(
-      async () =>
-        import('lucide-react')
-          .then(mod => mod[name as IconLucideNames])
-          .then(mod => ({ default: mod })),
-    );
+    const LucideIcon = dynamic(dynamicIconImports[name]);
 
     return (
       <React.Suspense
-        fallback={<Lucide.Loader2 className={cn('animate-spin', className)} />}
+        fallback={<Loader2 className={cn('animate-spin', className)} />}
         key={name}
       >
+        {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+        {/* @ts-expect-error */}
         <LucideIcon className={className} />
       </React.Suspense>
     );

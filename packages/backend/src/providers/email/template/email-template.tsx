@@ -12,29 +12,32 @@ import {
 } from '@react-email/components';
 import * as React from 'react';
 
-import { HeaderEmail } from './_components/header';
 import { getTranslationForEmail } from '../email';
 import { GetHelpersForEmailType } from '../email-helpers.type';
 
 export interface EmailTemplateProps {
   children: React.ReactNode;
   helpers: GetHelpersForEmailType;
-  previewText: string;
+  user: {
+    language: string;
+    name: string;
+  };
   header?: React.ReactNode;
+  preview_text?: string;
 }
 
 export const EmailTemplate = ({
-  previewText = 'previewText',
-  header = <HeaderEmail />,
+  preview_text,
   children = 'This is the email template.',
   helpers: { color, frontend_url, site_name, site_short_name },
+  user,
 }: EmailTemplateProps) => {
-  const t = getTranslationForEmail('admin.core.email');
+  const t = getTranslationForEmail('admin.core.email', user.language);
 
   return (
     <Html>
       <Head />
-      <Preview>{previewText}</Preview>
+      {preview_text && <Preview>{preview_text}</Preview>}
       <Tailwind
         config={{
           theme: {
@@ -102,11 +105,10 @@ export const EmailTemplate = ({
             <Section
               className={`rounded border border-solid border-${color.border} p-5 bg-${color.card}`}
             >
-              {header}
               <Text className="mt-0">
                 {t('hello')}{' '}
                 <span className={`font-bold text-${color.primary.DEFAULT}`}>
-                  aXen
+                  {user.name}
                 </span>
                 ,
               </Text>

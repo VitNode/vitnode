@@ -11,15 +11,13 @@ import { getConfigFile } from '../../../../../providers/config';
 export class ShowAdminEmailSettingsService extends HelpersAdminEmailSettingsService {
   show(): ShowAdminEmailSettingsServiceObj {
     if (!fs.existsSync(this.path)) {
-      const smtpData = {
+      return {
         smtp_host: '',
-        smtp_password: '',
         smtp_port: 0,
         smtp_secure: false,
         smtp_user: '',
+        color_primary: 'hsl(220, 74%, 50%)',
       };
-
-      fs.writeFileSync(this.path, JSON.stringify(smtpData, null, 2));
     }
 
     const {

@@ -7,7 +7,6 @@ import * as admins from './schema/admins';
 import * as moderators from './schema/moderators';
 import * as plugins from './schema/plugins';
 import * as nav from './schema/nav';
-import * as keys from './schema/keys';
 
 export default {
   ...groups,
@@ -18,7 +17,5 @@ export default {
   ...admins,
   ...moderators,
   ...plugins,
-  ...themes,
   ...nav,
-  ...keys,
 };
