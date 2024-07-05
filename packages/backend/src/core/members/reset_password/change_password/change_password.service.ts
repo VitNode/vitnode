@@ -3,9 +3,11 @@ import { ConfigService } from '@nestjs/config';
 import { eq } from 'drizzle-orm';
 
 import { ChangePasswordCoreMembersArgs } from './dto/change_password.args';
-import { core_users_pass_reset } from '@/templates/core/admin/database/schema/users';
+import { ChangePasswordCoreMembersObj } from './dto/change_password.obj';
+
+import { core_users, core_users_pass_reset } from '@/templates/core/admin/database/schema/users';
 import { DatabaseService } from '@/database';
-import { setPassword } from '@/core/sessions/set_password';
+import { encryptPassword } from '@/core/sessions/encrypt_password';
 
 @Injectable()
 export class ChangePasswordCoreMembersService {
@@ -15,16 +17,25 @@ export class ChangePasswordCoreMembersService {
   ) {}
 
   async change_password({
-    key,
+    hashKey,
     password,
-  }: ChangePasswordCoreMembersArgs): Promise<string> {
+  }: ChangePasswordCoreMembersArgs): Promise<ChangePasswordCoreMembersObj> {
     const keyData =
       await this.databaseService.db.query.core_users_pass_reset.findFirst({
-        where: eq(core_users_pass_reset.key, key),
+        where: eq(core_users_pass_reset.key, hashKey),
       });
 
     const id = keyData.user_id;
-    setPassword(this.databaseService, this.configService, id, password);
-    return "Success!";
+    const hashPassword = await encryptPassword(this.configService, password);
+
+    const update = await this.databaseService.db
+      .update(core_users)
+      .set({
+        password: hashPassword,
+      })
+      .where(eq(core_users.id, id))
+      .returning();
+
+    return update[0];
   }
 }

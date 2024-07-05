@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { genSalt, hash } from 'bcrypt';
 import { count } from 'drizzle-orm';
 import { ConfigService } from '@nestjs/config';
 import { removeSpecialCharacters } from 'vitnode-shared';
@@ -13,7 +12,7 @@ import { core_users } from '../../../templates/core/admin/database/schema/users'
 import { Ctx } from '../../../utils';
 import { CustomError } from '../../../errors';
 import { getUserIp } from '../../../functions';
-import { setPassword } from '../set_password';
+import { encryptPassword } from '../encrypt_password';
 
 @Injectable()
 export class SignUpCoreSessionsService extends AvatarColorService {
@@ -78,7 +77,9 @@ export class SignUpCoreSessionsService extends AvatarColorService {
         message: 'Name already exists',
         code: 'NAME_ALREADY_EXISTS',
       });
-    }   
+    }
+
+    const hashPassword = await encryptPassword(this.configService, password);
 
     const user = await this.databaseService.db
       .insert(core_users)
@@ -87,13 +88,12 @@ export class SignUpCoreSessionsService extends AvatarColorService {
         name,
         name_seo: convertToNameSEO,
         newsletter,
+        password: hashPassword,
         avatar_color: this.generateAvatarColor(name),
         group_id: await this.getGroupId(),
         ip_address: getUserIp(req),
       })
       .returning();
-
-      setPassword(this.databaseService, this.configService, user.id, password);
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { password: _, ...rest } = user[0];

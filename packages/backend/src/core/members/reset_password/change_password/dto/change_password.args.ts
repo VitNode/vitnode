@@ -4,7 +4,7 @@ import { ArgsType, Field } from '@nestjs/graphql';
 @ArgsType()
 export class ChangePasswordCoreMembersArgs {
   @Field(() => String)
-  key: string;
+  hashKey: string;
 
   @IsStrongPassword({
     minLength: 8,
