@@ -6,20 +6,27 @@ import { useTranslations } from 'next-intl';
 
 import { mutationApi } from './mutation-api';
 
-export const useEditorAdmin = (data: ConfigType) => {
+import {
+  AllowTypeFilesEnum,
+  Core_GlobalQuery,
+} from '../../../../../../../graphql/graphql';
+
+export const useEditorAdmin = (
+  data: Core_GlobalQuery['core_middleware__show']['editor'],
+) => {
   const t = useTranslations('core');
   const formSchema = z.object({
     sticky: z.boolean(),
     files: z.object({
-      allow_type: z.enum(['all', 'images_videos', 'images', 'none']),
+      allow_type: z.nativeEnum(AllowTypeFilesEnum),
     }),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      sticky: data.editor.sticky,
-      files: data.editor.files,
+      sticky: data.sticky,
+      files: data.files,
     },
   });
 

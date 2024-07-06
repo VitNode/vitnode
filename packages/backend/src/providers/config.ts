@@ -1,10 +1,17 @@
 import * as fs from 'fs';
 import { join } from 'path';
 
+export enum AllowTypeFilesEnum {
+  all = 'all',
+  images_videos = 'images_videos',
+  images = 'images',
+  none = 'none',
+}
+
 export interface ConfigType {
   editor: {
     files: {
-      allow_type: 'all' | 'images_videos' | 'images' | 'none';
+      allow_type: AllowTypeFilesEnum;
     };
     sticky: boolean;
   };
@@ -37,7 +44,7 @@ export const DEFAULT_CONFIG_DATA: ConfigType = {
   editor: {
     sticky: true,
     files: {
-      allow_type: 'all',
+      allow_type: AllowTypeFilesEnum.all,
     },
   },
   settings: {

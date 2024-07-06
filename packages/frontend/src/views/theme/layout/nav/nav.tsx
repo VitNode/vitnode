@@ -8,7 +8,7 @@ import { Icon } from '../../../../components/icon/icon';
 import { ShowCoreNav } from '../../../../graphql/graphql';
 
 export const Nav = async () => {
-  const { data } = await getSessionData();
+  const data = await getSessionData();
 
   const flattenData = flattenTree<ShowCoreNav>({
     tree: data.core_nav__show.edges.map(nav => ({

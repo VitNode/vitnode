@@ -1,4 +1,10 @@
-import { Field, ObjectType } from '@nestjs/graphql';
+import { Field, ObjectType, registerEnumType } from '@nestjs/graphql';
+
+import { AllowTypeFilesEnum } from '../../../../providers/config';
+
+registerEnumType(AllowTypeFilesEnum, {
+  name: 'AllowTypeFilesEnum',
+});
 
 @ObjectType()
 export class RebuildRequiredEditorShowCoreMiddleware {
@@ -11,13 +17,13 @@ export class RebuildRequiredEditorShowCoreMiddleware {
 
 @ObjectType()
 export class FilesEditorShowCoreMiddleware {
-  @Field(() => String)
-  allow_type: string;
+  @Field(() => AllowTypeFilesEnum)
+  allow_type: AllowTypeFilesEnum;
 }
 
 @ObjectType()
 export class EditorShowCoreMiddleware {
-  @Field(() => String)
+  @Field(() => Boolean)
   sticky: boolean;
 
   @Field(() => FilesEditorShowCoreMiddleware)

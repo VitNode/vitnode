@@ -2,6 +2,13 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+enum AllowTypeFilesEnum {
+  all
+  images
+  images_videos
+  none
+}
+
 type AuthorizationAdminSessionsObj {
   nav: [NavAdminPluginsAuthorization!]!
   user: AuthorizationCurrentUserObj
@@ -105,7 +112,7 @@ type EditAdminSettingsObj {
 
 type EditorShowCoreMiddleware {
   files: FilesEditorShowCoreMiddleware!
-  sticky: String!
+  sticky: Boolean!
 }
 
 type FilesAdminPluginsObj {
@@ -126,7 +133,7 @@ type FilesAuthorizationCoreSessions {
 }
 
 type FilesEditorShowCoreMiddleware {
-  allow_type: String!
+  allow_type: AllowTypeFilesEnum!
 }
 
 type GroupUser {

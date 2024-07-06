@@ -7,7 +7,7 @@ import { getSessionData } from '../../../../graphql/get-session-data';
 import { Icon } from '../../../../components/icon/icon';
 
 export const QuickMenu = async () => {
-  const { data } = await getSessionData();
+  const data = await getSessionData();
 
   const flattenData = flattenTree<ShowCoreNav>({
     tree: data.core_nav__show.edges.map(nav => ({

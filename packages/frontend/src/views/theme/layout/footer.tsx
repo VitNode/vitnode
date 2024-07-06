@@ -9,9 +9,7 @@ interface Props {
 export const Footer = async ({ locale }: Props) => {
   const { convertText } = getTextLang({ locale });
   const {
-    data: {
-      core_settings__show: { site_copyright },
-    },
+    core_settings__show: { site_copyright },
   } = await getSessionData();
 
   return (

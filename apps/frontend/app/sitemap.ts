@@ -20,10 +20,8 @@ const generateAlternateLanguagesForSitemap = ({
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const {
-    data: {
-      core_languages__show: { edges: languages },
-      core_plugins__show,
-    },
+    core_languages__show: { edges: languages },
+    core_plugins__show,
   } = await getSessionData();
   const plugins = core_plugins__show.filter(item => item.allow_default);
 

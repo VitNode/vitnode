@@ -11,9 +11,7 @@ import { getSessionData } from '../../../../graphql/get-session-data';
 
 export const Header = async () => {
   const {
-    data: {
-      core_sessions__authorization: { user },
-    },
+    core_sessions__authorization: { user },
   } = await getSessionData();
 
   return (

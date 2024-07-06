@@ -21,12 +21,9 @@ const getData = async () => {
 };
 
 export const ThemeEditorView = async () => {
-  const [data, session] = await Promise.all([
-    getData(),
-    await getSessionData(),
-  ]);
+  const [data, session] = await Promise.all([getData(), getSessionData()]);
 
-  if (!session.data.core_sessions__authorization.user?.is_admin) {
+  if (!session.core_sessions__authorization.user?.is_admin) {
     return <ErrorView code="403" />;
   }
 

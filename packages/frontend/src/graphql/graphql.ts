@@ -17,6 +17,14 @@ export type Scalars = {
   Upload: { input: any; output: any; }
 };
 
+export const AllowTypeFilesEnum = {
+  all: 'all',
+  images: 'images',
+  images_videos: 'images_videos',
+  none: 'none'
+} as const;
+
+export type AllowTypeFilesEnum = typeof AllowTypeFilesEnum[keyof typeof AllowTypeFilesEnum];
 export type AuthorizationAdminSessionsObj = {
   __typename?: 'AuthorizationAdminSessionsObj';
   nav: Array<NavAdminPluginsAuthorization>;
@@ -124,7 +132,7 @@ export type EditAdminSettingsObj = {
 export type EditorShowCoreMiddleware = {
   __typename?: 'EditorShowCoreMiddleware';
   files: FilesEditorShowCoreMiddleware;
-  sticky: Scalars['String']['output'];
+  sticky: Scalars['Boolean']['output'];
 };
 
 export type FilesAdminPluginsObj = {
@@ -148,7 +156,7 @@ export type FilesAuthorizationCoreSessions = {
 
 export type FilesEditorShowCoreMiddleware = {
   __typename?: 'FilesEditorShowCoreMiddleware';
-  allow_type: Scalars['String']['output'];
+  allow_type: AllowTypeFilesEnum | `${AllowTypeFilesEnum}`;
 };
 
 export type GroupUser = {
@@ -1690,7 +1698,7 @@ export type Core_Theme_Editor__ShowQuery = { __typename?: 'Query', core_theme_ed
 export type Core_GlobalQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Core_GlobalQuery = { __typename?: 'Query', core_languages__show: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', default: boolean, code: string, id: number, name: string, timezone: string, enabled: boolean, locale: string, allow_in_input: boolean, time_24: boolean }> }, core_plugins__show: Array<{ __typename?: 'ShowCorePluginsObj', code: string }>, core_settings__show: { __typename?: 'ShowSettingsObj', site_name: string, site_short_name: string, site_copyright: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, site_description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }, core_middleware__show: { __typename?: 'ShowCoreMiddlewareObj', editor: { __typename?: 'EditorShowCoreMiddleware', sticky: string, files: { __typename?: 'FilesEditorShowCoreMiddleware', allow_type: string } }, rebuild_required: { __typename?: 'RebuildRequiredEditorShowCoreMiddleware', langs: boolean, plugins: boolean } } };
+export type Core_GlobalQuery = { __typename?: 'Query', core_languages__show: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', default: boolean, code: string, id: number, name: string, timezone: string, enabled: boolean, locale: string, allow_in_input: boolean, time_24: boolean }> }, core_plugins__show: Array<{ __typename?: 'ShowCorePluginsObj', code: string }>, core_settings__show: { __typename?: 'ShowSettingsObj', site_name: string, site_short_name: string, site_copyright: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, site_description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }, core_middleware__show: { __typename?: 'ShowCoreMiddlewareObj', editor: { __typename?: 'EditorShowCoreMiddleware', sticky: boolean, files: { __typename?: 'FilesEditorShowCoreMiddleware', allow_type: AllowTypeFilesEnum } }, rebuild_required: { __typename?: 'RebuildRequiredEditorShowCoreMiddleware', langs: boolean, plugins: boolean } } };
 
 export type Core_Middleware__ShowQueryVariables = Exact<{ [key: string]: never; }>;
 
