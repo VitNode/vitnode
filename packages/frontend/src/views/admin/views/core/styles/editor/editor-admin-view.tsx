@@ -2,8 +2,8 @@ import { getTranslations } from 'next-intl/server';
 
 import { ContentEditorAdmin } from './content';
 
-import { HeaderContent } from '../../../../../../components/ui/header-content';
-import { getGlobalData } from '../../../../../../graphql/get-global-data';
+import { HeaderContent } from '@/components/ui/header-content';
+import { getGlobalData } from '@/graphql/get-global-data';
 
 export const EditorAdminView = async () => {
   const [t, data] = await Promise.all([

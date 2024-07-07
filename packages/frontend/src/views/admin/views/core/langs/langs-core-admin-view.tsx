@@ -8,14 +8,14 @@ import {
   Admin__Core_Languages__ShowQuery,
   Admin__Core_Languages__ShowQueryVariables,
   ShowCoreLanguagesSortingColumnEnum,
-} from '../../../../../graphql/graphql';
+} from '@/graphql/graphql';
 import {
   SearchParamsPagination,
   getPaginationTool,
-} from '../../../../../graphql/get-pagination-tool';
-import { HeaderContent } from '../../../../../components/ui/header-content';
-import { Card } from '../../../../../components/ui/card';
-import { fetcher } from '../../../../../graphql/fetcher';
+} from '@/graphql/get-pagination-tool';
+import { HeaderContent } from '@/components/ui/header-content';
+import { Card } from '@/components/ui/card';
+import { fetcher } from '@/graphql/fetcher';
 import { RebuildRequiredAdmin } from '../../../global/rebuild-required';
 
 const getData = async (

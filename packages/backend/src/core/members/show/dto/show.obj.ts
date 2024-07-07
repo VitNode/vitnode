@@ -1,7 +1,7 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 
-import { PageInfo, TextLanguage } from '../../../../utils';
-import { User } from '../../../../decorators';
+import { PageInfo, TextLanguage } from '@/utils';
+import { User } from '@/decorators';
 
 @ObjectType()
 export class ShowCoreMembersObj {

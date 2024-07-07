@@ -4,13 +4,13 @@ import { and, count, eq, ilike, or } from 'drizzle-orm';
 import { ShowAdminFilesArgs } from './dto/show.args';
 import { ShowAdminFilesObj } from './dto/show.obj';
 
-import { DatabaseService } from '../../../../database';
-import { inputPaginationCursor, outputPagination } from '../../../../functions';
+import { DatabaseService } from '@/database';
+import { inputPaginationCursor, outputPagination } from '@/functions';
 import {
   core_files,
   core_files_using,
-} from '../../../../templates/core/admin/database/schema/files';
-import { SortDirectionEnum } from '../../../../utils';
+} from '@/templates/core/admin/database/schema/files';
+import { SortDirectionEnum } from '@/utils';
 
 @Injectable()
 export class ShowAdminFilesService {

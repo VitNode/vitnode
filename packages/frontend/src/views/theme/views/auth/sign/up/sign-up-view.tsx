@@ -7,8 +7,8 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from '../../../../../../components/ui/card';
-import { Link } from '../../../../../../navigation';
+} from '@/components/ui/card';
+import { Link } from '@/navigation';
 
 export const SignUpView = () => {
   const t = useTranslations('core.sign_up');

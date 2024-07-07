@@ -4,14 +4,10 @@ import { Upload } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import * as React from 'react';
 
-import {
-  Dialog,
-  DialogContent,
-  DialogTrigger,
-} from '../../../../../../components/ui/dialog';
-import { Button } from '../../../../../../components/ui/button';
-import { CONFIG } from '../../../../../../helpers/config-with-env';
-import { Loader } from '../../../../../../components/ui/loader';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
+import { CONFIG } from '@/helpers/config-with-env';
+import { Loader } from '@/components/ui/loader';
 
 const Content = React.lazy(async () =>
   import('../upload/upload').then(module => ({

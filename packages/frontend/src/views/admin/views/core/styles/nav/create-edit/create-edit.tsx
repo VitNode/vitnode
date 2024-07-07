@@ -9,7 +9,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '../../../../../../../components/ui/dialog';
+} from '@/components/ui/dialog';
 import {
   Form,
   FormControl,
@@ -18,12 +18,12 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '../../../../../../../components/ui/form';
-import { TextLanguageInput } from '../../../../../../../components/ui/text-language-input';
-import { Input } from '../../../../../../../components/ui/input';
-import { IconInput } from '../../../../../../../components/icon/input/icon-input';
-import { Switch } from '../../../../../../../components/ui/switch';
-import { Button } from '../../../../../../../components/ui/button';
+} from '@/components/ui/form';
+import { TextLanguageInput } from '@/components/ui/text-language-input';
+import { Input } from '@/components/ui/input';
+import { IconInput } from '@/components/icon/input/icon-input';
+import { Switch } from '@/components/ui/switch';
+import { Button } from '@/components/ui/button';
 
 export const ContentCreateEditNavAdmin = ({ data }: CreateEditNavAdminArgs) => {
   const t = useTranslations('admin.core.styles.nav');

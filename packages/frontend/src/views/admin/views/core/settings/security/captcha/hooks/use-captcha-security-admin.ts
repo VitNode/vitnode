@@ -5,7 +5,7 @@ import * as z from 'zod';
 import {
   Admin__Core_Security__Captcha__ShowQuery,
   CaptchaTypeEnum,
-} from '../../../../../../../../graphql/graphql';
+} from '@/graphql/graphql';
 
 export const useCaptchaSecurityAdmin = ({
   admin__core_security__captcha__show: data,

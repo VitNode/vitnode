@@ -7,11 +7,11 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '../../../../../../../components/ui/form';
-import { TextLanguageInput } from '../../../../../../../components/ui/text-language-input';
-import { Separator } from '../../../../../../../components/ui/separator';
-import { IconInput } from '../../../../../../../components/icon/input/icon-input';
-import { ColorInput } from '../../../../../../../components/ui/color-input';
+} from '@/components/ui/form';
+import { TextLanguageInput } from '@/components/ui/text-language-input';
+import { Separator } from '@/components/ui/separator';
+import { IconInput } from '@/components/icon/input/icon-input';
+import { ColorInput } from '@/components/ui/color-input';
 
 export const MainContentCreateEditFormGroupsMembersAdmin = () => {
   const t = useTranslations('admin.members.groups.create_edit');

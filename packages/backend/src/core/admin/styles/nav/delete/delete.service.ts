@@ -3,14 +3,14 @@ import { eq } from 'drizzle-orm';
 
 import { DeleteAdminNavStylesArgs } from './dto/delete.args';
 
-import { DatabaseService } from '../../../../../database';
-import { ParserTextLanguageCoreHelpersService } from '../../../../helpers/text_language/parser/parser.service';
-import { NotFoundError } from '../../../../../errors';
+import { DatabaseService } from '@/database';
+import { NotFoundError } from '@/errors';
 import {
   core_nav,
   core_nav_description,
   core_nav_name,
-} from '../../../../../templates/core/admin/database/schema/nav';
+} from '@/templates/core/admin/database/schema/nav';
+import { ParserTextLanguageCoreHelpersService } from '@/core/helpers/text_language/parser/parser.service';
 
 @Injectable()
 export class DeleteAdminNavStylesService {

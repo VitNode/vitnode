@@ -2,7 +2,7 @@ import { useTranslations } from 'next-intl';
 
 import { ItemItemNavAdminProps, LinkItemNavAdmin } from './link';
 
-import { Icon } from '../../../../../../components/icon/icon';
+import { Icon } from '@/components/icon/icon';
 
 interface Props {
   id: string;

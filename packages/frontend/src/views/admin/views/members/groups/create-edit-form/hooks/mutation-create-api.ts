@@ -6,8 +6,8 @@ import {
   Core_Groups__Admin_Create,
   Core_Groups__Admin_CreateMutation,
   Core_Groups__Admin_CreateMutationVariables,
-} from '../../../../../../../graphql/graphql';
-import { fetcher } from '../../../../../../../graphql/fetcher';
+} from '@/graphql/graphql';
+import { fetcher } from '@/graphql/fetcher';
 
 export const mutationCreateApi = async (
   variables: Core_Groups__Admin_CreateMutationVariables,

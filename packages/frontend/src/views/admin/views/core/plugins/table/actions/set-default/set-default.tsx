@@ -3,12 +3,12 @@ import { useTranslations } from 'next-intl';
 import { ButtonSetDefaultPluginActionsAdmin } from './button';
 import { useSetDefaultPluginAdmin } from './hooks/use-set-default-admin';
 
-import { ShowAdminPlugins } from '../../../../../../../../graphql/graphql';
+import { ShowAdminPlugins } from '@/graphql/graphql';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
-} from '../../../../../../../../components/ui/tooltip';
+} from '@/components/ui/tooltip';
 
 export const SetDefaultPluginActionsAdmin = (props: ShowAdminPlugins) => {
   const t = useTranslations('admin.core.plugins');

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useTranslations } from 'next-intl';
 
-import { FilterToolbarDataTable } from '../../../../../../../components/data-table/toolbar/filter/filter';
+import { FilterToolbarDataTable } from '@/components/data-table/toolbar/filter/filter';
 
 const ContentGroupsFiltersUsersMembersAdmin = React.lazy(async () =>
   import('./content').then(module => ({

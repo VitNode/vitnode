@@ -5,8 +5,8 @@ import * as React from 'react';
 
 import { mutationApi } from './mutation-api';
 
-import { ErrorType } from '../../../../graphql/fetcher';
-import { zodInput } from '../../../../helpers/zod';
+import { ErrorType } from '@/graphql/fetcher';
+import { zodInput } from '@/helpers/zod';
 
 export const useSignInView = () => {
   const [error, setError] = React.useState<ErrorType | null>(null);

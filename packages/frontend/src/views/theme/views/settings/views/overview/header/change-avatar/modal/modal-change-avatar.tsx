@@ -3,22 +3,19 @@ import * as React from 'react';
 
 import { useModalChangeAvatar } from './hooks/use-modal-change-avatar';
 
-import { useSession } from '../../../../../../../../../hooks/use-session';
+import { useSession } from '@/hooks/use-session';
 import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '../../../../../../../../../components/ui/dialog';
-import { Loader } from '../../../../../../../../../components/ui/loader';
-import { Form, FormField } from '../../../../../../../../../components/ui/form';
-import {
-  RadioGroup,
-  RadioGroupItem,
-} from '../../../../../../../../../components/ui/radio-group';
-import { Label } from '../../../../../../../../../components/ui/label';
-import { FilesInput } from '../../../../../../../../../components/ui/files-input';
-import { Button } from '../../../../../../../../../components/ui/button';
+} from '@/components/ui/dialog';
+import { Loader } from '@/components/ui/loader';
+import { Form, FormField } from '@/components/ui/form';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Label } from '@/components/ui/label';
+import { FilesInput } from '@/components/ui/files-input';
+import { Button } from '@/components/ui/button';
 
 const CropperModalChangeAvatar = React.lazy(async () =>
   import('./cropper/cropper-modal-change-avatar').then(module => ({

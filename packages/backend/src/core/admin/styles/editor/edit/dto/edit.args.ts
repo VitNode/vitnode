@@ -1,6 +1,6 @@
 import { ArgsType, Field, InputType } from '@nestjs/graphql';
 
-import { AllowTypeFilesEnum } from '../../../../../../providers/config';
+import { AllowTypeFilesEnum } from '@/providers/config';
 
 @InputType()
 class FilesEditAdminEditorStyles {

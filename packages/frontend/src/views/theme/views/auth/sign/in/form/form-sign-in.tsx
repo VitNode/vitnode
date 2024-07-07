@@ -11,20 +11,13 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '../../../../../../../components/ui/form';
-import {
-  CardContent,
-  CardFooter,
-} from '../../../../../../../components/ui/card';
-import {
-  Alert,
-  AlertDescription,
-  AlertTitle,
-} from '../../../../../../../components/ui/alert';
-import { Input } from '../../../../../../../components/ui/input';
-import { Button } from '../../../../../../../components/ui/button';
-import { Checkbox } from '../../../../../../../components/ui/checkbox';
-import { useSignInView } from '../../../../../../../hooks/core/sign/in/use-sign-in-view';
+} from '@/components/ui/form';
+import { CardContent, CardFooter } from '@/components/ui/card';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
+import { useSignInView } from '@/hooks/core/sign/in/use-sign-in-view';
 
 export const FormSignIn = () => {
   const t = useTranslations('core');

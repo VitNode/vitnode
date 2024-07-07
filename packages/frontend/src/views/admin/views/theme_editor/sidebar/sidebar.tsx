@@ -6,9 +6,9 @@ import { ColorTabThemeEditor } from './tabs/color-tab';
 import { MainTabThemeEditor } from './tabs/main';
 import { SubmitSidebarThemeEditor } from './submit';
 
-import { Form } from '../../../../../components/ui/form';
-import { buttonVariants } from '../../../../../components/ui/button';
-import { Link } from '../../../../../navigation';
+import { Form } from '@/components/ui/form';
+import { buttonVariants } from '@/components/ui/button';
+import { Link } from '@/navigation';
 
 export const SidebarThemeEditor = () => {
   const {

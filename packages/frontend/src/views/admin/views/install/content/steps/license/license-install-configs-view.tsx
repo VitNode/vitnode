@@ -1,10 +1,7 @@
 import { FormLicenseInstallConfigs } from './form-license-install-configs';
 
-import {
-  CardContent,
-  CardFooter,
-} from '../../../../../../../components/ui/card';
-import { Link } from '../../../../../../../navigation';
+import { CardContent, CardFooter } from '@/components/ui/card';
+import { Link } from '@/navigation';
 
 export const LicenseInstallConfigsView = () => {
   return (

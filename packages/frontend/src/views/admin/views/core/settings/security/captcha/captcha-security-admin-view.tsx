@@ -2,13 +2,13 @@ import { getTranslations } from 'next-intl/server';
 
 import { ContentCaptchaSecurityAdmin } from './content';
 
-import { HeaderContent } from '../../../../../../../components/ui/header-content';
-import { Card, CardContent } from '../../../../../../../components/ui/card';
-import { fetcher } from '../../../../../../../graphql/fetcher';
+import { HeaderContent } from '@/components/ui/header-content';
+import { Card, CardContent } from '@/components/ui/card';
+import { fetcher } from '@/graphql/fetcher';
 import {
   Admin__Core_Security__Captcha__Show,
   Admin__Core_Security__Captcha__ShowQuery,
-} from '../../../../../../../graphql/graphql';
+} from '@/graphql/graphql';
 
 const getData = async () => {
   const { data } = await fetcher<Admin__Core_Security__Captcha__ShowQuery>({

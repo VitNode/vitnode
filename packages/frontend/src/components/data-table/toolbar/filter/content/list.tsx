@@ -5,10 +5,10 @@ import { CheckIcon } from 'lucide-react';
 import { ContentFilterToolbarDataTableProps } from './content';
 import { useFilterToolbarDataTable } from '../hooks/use-filter-toolbar-data-table';
 
-import { Loader } from '../../../../ui/loader';
-import { usePathname, useRouter } from '../../../../../navigation';
-import { CommandGroup, CommandItem } from '../../../../ui/command';
-import { cn } from '../../../../../helpers/classnames';
+import { Loader } from '@/components/ui/loader';
+import { usePathname, useRouter } from '@/navigation';
+import { CommandGroup, CommandItem } from '@/components/ui/command';
+import { cn } from '@/helpers/classnames';
 
 export const ListContentFilterToolbarDataTable = ({
   isFetching,

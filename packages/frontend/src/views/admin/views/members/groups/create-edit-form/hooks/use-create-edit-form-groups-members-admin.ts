@@ -7,11 +7,11 @@ import { toast } from 'sonner';
 import { mutationCreateApi } from './mutation-create-api';
 import { mutationEditApi } from './mutation-edit-api';
 
-import { useDialog } from '../../../../../../../components/ui/dialog';
-import { ShowAdminGroups } from '../../../../../../../graphql/graphql';
-import { useTextLang } from '../../../../../../../hooks/use-text-lang';
-import { usePathname, useRouter } from '../../../../../../../navigation';
-import { zodInput } from '../../../../../../../helpers/zod';
+import { useDialog } from '@/components/ui/dialog';
+import { ShowAdminGroups } from '@/graphql/graphql';
+import { useTextLang } from '@/hooks/use-text-lang';
+import { usePathname, useRouter } from '@/navigation';
+import { zodInput } from '@/helpers/zod';
 
 export interface CreateEditFormGroupsMembersAdminArgs {
   data?: Pick<ShowAdminGroups, 'content' | 'id' | 'name'>;

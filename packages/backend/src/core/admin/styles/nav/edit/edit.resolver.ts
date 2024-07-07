@@ -4,8 +4,8 @@ import { UseGuards } from '@nestjs/common';
 import { EditAdminNavStylesService } from './edit.service';
 import { EditAdminNavStylesArgs } from './dto/edit.args';
 
-import { ShowCoreNav } from '../../../../nav/show/dto/show.obj';
-import { AdminAuthGuards } from '../../../../../utils';
+import { AdminAuthGuards } from '@/utils';
+import { ShowCoreNav } from '@/core/nav/show/dto/show.obj';
 
 @Resolver()
 export class EditAdminNavStylesResolver {

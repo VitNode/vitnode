@@ -7,9 +7,9 @@ import * as z from 'zod';
 import { editMutationApi } from './edit-mutation-api';
 import { createMutationApi } from './create-mutation-api';
 
-import { ShowCoreLanguages } from '../../../../../../../graphql/graphql';
-import { useDialog } from '../../../../../../../components/ui/dialog';
-import { zodInput } from '../../../../../../../helpers/zod';
+import { ShowCoreLanguages } from '@/graphql/graphql';
+import { useDialog } from '@/components/ui/dialog';
+import { zodInput } from '@/helpers/zod';
 
 interface Args {
   data?: ShowCoreLanguages;

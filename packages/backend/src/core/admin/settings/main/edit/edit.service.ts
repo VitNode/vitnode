@@ -7,15 +7,15 @@ import { eq } from 'drizzle-orm';
 import { EditAdminMainSettingsArgs } from './dto/edit.args';
 import { EditAdminSettingsObj } from './dto/edit.obj';
 
-import { DatabaseService } from '../../../../../database';
+import { DatabaseService } from '@/database';
 import {
   ABSOLUTE_PATHS_BACKEND,
   ConfigType,
   configPath,
   getConfigFile,
-} from '../../../../..';
-import { ManifestWithLang } from '../../../../settings/settings.module';
-import { core_languages } from '../../../../../templates/core/admin/database/schema/languages';
+} from '@/index';
+import { core_languages } from '@/templates/core/admin/database/schema/languages';
+import { ManifestWithLang } from '@/core/settings/settings.module';
 
 @Injectable()
 export class EditAdminMainSettingsService {

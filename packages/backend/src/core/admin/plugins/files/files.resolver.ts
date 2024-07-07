@@ -5,7 +5,7 @@ import { FilesAdminPluginsService } from './files.service';
 import { FilesAdminPluginsArgs } from './dto/files.args';
 import { FilesAdminPluginsObj } from './dto/files.obj';
 
-import { AdminAuthGuards, OnlyForDevelopment } from '../../../../utils';
+import { AdminAuthGuards, OnlyForDevelopment } from '@/utils';
 
 @Resolver()
 export class FilesAdminPluginsResolver {

@@ -4,8 +4,8 @@ import {
   Admin__Core_Plugins__Show__Quick,
   Admin__Core_Plugins__Show__QuickQuery,
   Admin__Core_Plugins__Show__QuickQueryVariables,
-} from '../../../../../../../../../graphql/graphql';
-import { fetcher } from '../../../../../../../../../graphql/fetcher';
+} from '@/graphql/graphql';
+import { fetcher } from '@/graphql/fetcher';
 
 export const queryApi = async (
   variables: Admin__Core_Plugins__Show__QuickQueryVariables,

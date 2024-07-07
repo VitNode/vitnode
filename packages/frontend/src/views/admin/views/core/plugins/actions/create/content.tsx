@@ -7,9 +7,9 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '../../../../../../../components/ui/dialog';
-import { Form } from '../../../../../../../components/ui/form';
-import { Button } from '../../../../../../../components/ui/button';
+} from '@/components/ui/dialog';
+import { Form } from '@/components/ui/form';
+import { Button } from '@/components/ui/button';
 
 export const CreatePluginAdmin = () => {
   const t = useTranslations('admin.core.plugins');

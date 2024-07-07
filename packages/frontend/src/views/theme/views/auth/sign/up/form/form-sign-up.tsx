@@ -5,7 +5,7 @@ import { removeSpecialCharacters } from 'vitnode-shared';
 
 import { SuccessFormSignUp } from './success';
 
-import { useSignUpView } from '../../../../../../../hooks/core/sign/up/use-sign-up-view';
+import { useSignUpView } from '@/hooks/core/sign/up/use-sign-up-view';
 import {
   Form,
   FormControl,
@@ -14,15 +14,12 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '../../../../../../../components/ui/form';
-import {
-  CardContent,
-  CardFooter,
-} from '../../../../../../../components/ui/card';
-import { Input } from '../../../../../../../components/ui/input';
-import { Progress } from '../../../../../../../components/ui/progress';
-import { Checkbox } from '../../../../../../../components/ui/checkbox';
-import { Button } from '../../../../../../../components/ui/button';
+} from '@/components/ui/form';
+import { CardContent, CardFooter } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Progress } from '@/components/ui/progress';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Button } from '@/components/ui/button';
 
 export const FormSignUp = () => {
   const t = useTranslations('core');

@@ -3,12 +3,12 @@ import { Injectable } from '@nestjs/common';
 import { ShowAdminGroups } from '../show/dto/show.obj';
 import { CreateAdminGroupsArgs } from './dto/create.args';
 
-import { DatabaseService } from '../../../../database';
+import { DatabaseService } from '@/database';
 import { ParserTextLanguageCoreHelpersService } from '../../../helpers/text_language/parser/parser.service';
 import {
   core_groups,
   core_groups_names,
-} from '../../../../templates/core/admin/database/schema/groups';
+} from '@/templates/core/admin/database/schema/groups';
 
 @Injectable()
 export class CreateAdminGroupsService {

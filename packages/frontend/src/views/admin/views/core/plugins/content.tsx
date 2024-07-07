@@ -10,11 +10,11 @@ import { ActionsItemPluginsAdmin } from './table/actions/actions';
 import {
   Admin__Core_Plugins__ShowQuery,
   ShowAdminPlugins,
-} from '../../../../../graphql/graphql';
-import { HeaderSortingDataTable } from '../../../../../components/data-table/header';
-import { DateFormat } from '../../../../../components/date-format';
-import { DataTable } from '../../../../../components/data-table/data-table';
-import { Badge } from '../../../../../components/ui/badge';
+} from '@/graphql/graphql';
+import { HeaderSortingDataTable } from '@/components/data-table/header';
+import { DateFormat } from '@/components/date-format';
+import { DataTable } from '@/components/data-table/data-table';
+import { Badge } from '@/components/ui/badge';
 
 export const ContentPluginsCoreAdminView = ({
   admin__core_plugins__show: { edges, pageInfo },

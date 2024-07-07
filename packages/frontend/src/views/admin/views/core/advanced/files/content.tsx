@@ -9,18 +9,18 @@ import { formatBytes } from 'vitnode-shared';
 
 import { ActionsFilesAdvancedCoreAdmin } from './actions/actions';
 
-import { Admin__Core_Files__ShowQuery } from '../../../../../../graphql/graphql';
-import { CONFIG } from '../../../../../../helpers/config-with-env';
-import { HeaderSortingDataTable } from '../../../../../../components/data-table/header';
-import { DateFormat } from '../../../../../../components/date-format';
-import { Link } from '../../../../../../navigation';
+import { Admin__Core_Files__ShowQuery } from '@/graphql/graphql';
+import { CONFIG } from '@/helpers/config-with-env';
+import { HeaderSortingDataTable } from '@/components/data-table/header';
+import { DateFormat } from '@/components/date-format';
+import { Link } from '@/navigation';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '../../../../../../components/ui/tooltip';
-import { DataTable } from '../../../../../../components/data-table/data-table';
+} from '@/components/ui/tooltip';
+import { DataTable } from '@/components/data-table/data-table';
 
 export const ContentFilesAdvancedCoreAdminView = ({
   admin__core_files__show: { edges, pageInfo },

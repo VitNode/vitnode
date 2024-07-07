@@ -1,6 +1,6 @@
 import { DeleteActionsTableModeratorsStaffAdmin } from './delete/delete';
 
-import { ShowAdminStaffModerators } from '../../../../../../../../graphql/graphql';
+import { ShowAdminStaffModerators } from '@/graphql/graphql';
 
 interface Props {
   data: ShowAdminStaffModerators;

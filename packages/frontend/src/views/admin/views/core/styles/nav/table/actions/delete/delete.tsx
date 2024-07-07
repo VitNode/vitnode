@@ -2,20 +2,20 @@ import { Trash2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import * as React from 'react';
 
-import { ShowCoreNav } from '../../../../../../../../../graphql/graphql';
+import { ShowCoreNav } from '@/graphql/graphql';
 import {
   AlertDialog,
   AlertDialogContent,
   AlertDialogTrigger,
-} from '../../../../../../../../../components/ui/alert-dialog';
+} from '@/components/ui/alert-dialog';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '../../../../../../../../../components/ui/tooltip';
-import { Button } from '../../../../../../../../../components/ui/button';
-import { Loader } from '../../../../../../../../../components/ui/loader';
+} from '@/components/ui/tooltip';
+import { Button } from '@/components/ui/button';
+import { Loader } from '@/components/ui/loader';
 
 const Content = React.lazy(async () =>
   import('./content').then(module => ({

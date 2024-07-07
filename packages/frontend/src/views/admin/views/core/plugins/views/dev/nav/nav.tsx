@@ -3,16 +3,16 @@ import { getTranslations } from 'next-intl/server';
 import { CreateNavDevPluginAdmin } from './actions/create/create';
 import { ContentNavDevPluginAdmin } from './content';
 
-import { Icon } from '../../../../../../../../components/icon/icon';
-import { HeaderContent } from '../../../../../../../../components/ui/header-content';
+import { Icon } from '@/components/icon/icon';
+import { HeaderContent } from '@/components/ui/header-content';
 import {
   Admin__Core_Plugins__Nav__Show,
   Admin__Core_Plugins__Nav__ShowQuery,
   Admin__Core_Plugins__Nav__ShowQueryVariables,
   ShowAdminNavPluginsObj,
-} from '../../../../../../../../graphql/graphql';
-import { flattenTree } from '../../../../../../../../helpers/flatten-tree';
-import { fetcher } from '../../../../../../../../graphql/fetcher';
+} from '@/graphql/graphql';
+import { flattenTree } from '@/helpers/flatten-tree';
+import { fetcher } from '@/graphql/fetcher';
 
 const getData = async (
   variables: Admin__Core_Plugins__Nav__ShowQueryVariables,

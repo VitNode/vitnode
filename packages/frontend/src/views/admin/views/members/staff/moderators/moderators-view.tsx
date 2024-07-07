@@ -8,14 +8,14 @@ import {
   Admin__Core_Staff_Moderators__ShowQuery,
   Admin__Core_Staff_Moderators__ShowQueryVariables,
   ShowAdminStaffModeratorsSortingColumnEnum,
-} from '../../../../../../graphql/graphql';
-import { HeaderContent } from '../../../../../../components/ui/header-content';
-import { Card } from '../../../../../../components/ui/card';
-import { fetcher } from '../../../../../../graphql/fetcher';
+} from '@/graphql/graphql';
+import { HeaderContent } from '@/components/ui/header-content';
+import { Card } from '@/components/ui/card';
+import { fetcher } from '@/graphql/fetcher';
 import {
   SearchParamsPagination,
   getPaginationTool,
-} from '../../../../../../graphql/get-pagination-tool';
+} from '@/graphql/get-pagination-tool';
 
 const getData = async (
   variables: Admin__Core_Staff_Moderators__ShowQueryVariables,

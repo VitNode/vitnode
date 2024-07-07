@@ -7,10 +7,10 @@ import { toast } from 'sonner';
 import { createMutationApi } from './create-mutation-api';
 import { editMutationApi } from './edit-mutation-api';
 
-import { ShowCoreNav } from '../../../../../../../../graphql/graphql';
-import { useDialog } from '../../../../../../../../components/ui/dialog';
-import { useTextLang } from '../../../../../../../../hooks/use-text-lang';
-import { zodInput } from '../../../../../../../../helpers/zod';
+import { ShowCoreNav } from '@/graphql/graphql';
+import { useDialog } from '@/components/ui/dialog';
+import { useTextLang } from '@/hooks/use-text-lang';
+import { zodInput } from '@/helpers/zod';
 
 export interface CreateEditNavAdminArgs {
   data?: Omit<ShowCoreNav, 'children'>;

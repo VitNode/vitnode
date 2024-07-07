@@ -4,8 +4,8 @@ import { Injectable } from '@nestjs/common';
 
 import { EditAdminEditorStylesArgs } from './dto/edit.args';
 
-import { configPath, getConfigFile } from '../../../../../providers/config';
-import { EditorShowCoreMiddleware } from '../../../../middleware/show/dto/show.obj';
+import { configPath, getConfigFile } from '@/providers/config';
+import { EditorShowCoreMiddleware } from '@/core/middleware/show/dto/show.obj';
 
 @Injectable()
 export class EditAdminEditorStylesService {

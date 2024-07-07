@@ -8,16 +8,16 @@ import {
 import { MainContentCreateEditFormGroupsMembersAdmin } from './content/main';
 import { ContentContentCreateEditFormGroupsMembersAdmin } from './content/content';
 
-import { useTextLang } from '../../../../../../hooks/use-text-lang';
+import { useTextLang } from '@/hooks/use-text-lang';
 import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '../../../../../../components/ui/dialog';
-import { Tabs, TabsTrigger } from '../../../../../../components/ui/tabs';
-import { Form } from '../../../../../../components/ui/form';
-import { Button } from '../../../../../../components/ui/button';
+} from '@/components/ui/dialog';
+import { Tabs, TabsTrigger } from '@/components/ui/tabs';
+import { Form } from '@/components/ui/form';
+import { Button } from '@/components/ui/button';
 
 enum TabsEnum {
   MAIN = 'main',

@@ -7,13 +7,13 @@ import { Metadata } from 'next';
 import { ActionsDevPluginAdmin } from './actions/actions';
 import { getPluginDataAdmin } from './query-api';
 
-import { HeaderContent } from '../../../../../../../../components/ui/header-content';
-import { Badge } from '../../../../../../../../components/ui/badge';
-import { DateFormat } from '../../../../../../../../components/date-format';
-import { Tabs, TabsTrigger } from '../../../../../../../../components/ui/tabs';
-import { Card } from '../../../../../../../../components/ui/card';
-import { CONFIG } from '../../../../../../../../helpers/config-with-env';
-import { getGlobalData } from '../../../../../../../../graphql/get-global-data';
+import { HeaderContent } from '@/components/ui/header-content';
+import { Badge } from '@/components/ui/badge';
+import { DateFormat } from '@/components/date-format';
+import { Tabs, TabsTrigger } from '@/components/ui/tabs';
+import { Card } from '@/components/ui/card';
+import { CONFIG } from '@/helpers/config-with-env';
+import { getGlobalData } from '@/graphql/get-global-data';
 
 export interface DevPluginAdminLayoutProps {
   children: React.ReactNode;

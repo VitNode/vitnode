@@ -6,10 +6,10 @@ import * as z from 'zod';
 
 import { mutationApi } from './mutation-api';
 
-import { ShowAdminGroups } from '../../../../../../../../../graphql/graphql';
-import { useTextLang } from '../../../../../../../../../hooks/use-text-lang';
-import { useAlertDialog } from '../../../../../../../../../components/ui/alert-dialog';
-import { usePathname, useRouter } from '../../../../../../../../../navigation';
+import { ShowAdminGroups } from '@/graphql/graphql';
+import { useTextLang } from '@/hooks/use-text-lang';
+import { useAlertDialog } from '@/components/ui/alert-dialog';
+import { usePathname, useRouter } from '@/navigation';
 
 export const useDeleteGroupAdmin = ({
   id,

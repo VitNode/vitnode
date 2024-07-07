@@ -9,12 +9,12 @@ import {
   Admin__Core_Nav__ShowQuery,
   Admin__Core_Nav__ShowQueryVariables,
   ShowCoreNav,
-} from '../../../../../../graphql/graphql';
-import { flattenTree } from '../../../../../../helpers/flatten-tree';
-import { Icon } from '../../../../../../components/icon/icon';
-import { HeaderContent } from '../../../../../../components/ui/header-content';
-import { Card } from '../../../../../../components/ui/card';
-import { fetcher } from '../../../../../../graphql/fetcher';
+} from '@/graphql/graphql';
+import { flattenTree } from '@/helpers/flatten-tree';
+import { Icon } from '@/components/icon/icon';
+import { HeaderContent } from '@/components/ui/header-content';
+import { Card } from '@/components/ui/card';
+import { fetcher } from '@/graphql/fetcher';
 
 const getData = async () => {
   const { data } = await fetcher<

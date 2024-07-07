@@ -3,7 +3,7 @@
 import { useTranslations } from 'next-intl';
 import { AlertCircle } from 'lucide-react';
 
-import { useSignInAdminView } from '../../../../hooks/core/sign/in/use-sign-in-admin-view';
+import { useSignInAdminView } from '@/hooks/core/sign/in/use-sign-in-admin-view';
 import {
   Form,
   FormControl,
@@ -11,15 +11,11 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '../../../../components/ui/form';
-import { CardContent, CardFooter } from '../../../../components/ui/card';
-import {
-  Alert,
-  AlertDescription,
-  AlertTitle,
-} from '../../../../components/ui/alert';
-import { Input } from '../../../../components/ui/input';
-import { Button } from '../../../../components/ui/button';
+} from '@/components/ui/form';
+import { CardContent, CardFooter } from '@/components/ui/card';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 
 export const FormSignInAdmin = () => {
   const t = useTranslations('core');

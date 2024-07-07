@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 
 import { ShowAdminCaptchaSecurityObj } from './dto/show.obj';
 
-import { getConfigFile } from '../../../../../providers/config';
+import { getConfigFile } from '@/providers/config';
 
 @Injectable()
 export class ShowAdminCaptchaSecurityService {

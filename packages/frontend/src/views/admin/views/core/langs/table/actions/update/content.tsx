@@ -2,15 +2,15 @@ import { useTranslations } from 'next-intl';
 
 import { useUpdateLangAdmin } from './hooks/use-update-lang-admin';
 
-import { ShowCoreLanguages } from '../../../../../../../../graphql/graphql';
+import { ShowCoreLanguages } from '@/graphql/graphql';
 import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '../../../../../../../../components/ui/dialog';
-import { Form, FormField } from '../../../../../../../../components/ui/form';
-import { FilesInput } from '../../../../../../../../components/ui/files-input';
-import { Button } from '../../../../../../../../components/ui/button';
+} from '@/components/ui/dialog';
+import { Form, FormField } from '@/components/ui/form';
+import { FilesInput } from '@/components/ui/files-input';
+import { Button } from '@/components/ui/button';
 
 export const ContentUpdateActionsTableLangsCoreAdmin = ({
   code,

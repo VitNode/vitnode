@@ -10,21 +10,18 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '../../../../../../../components/ui/form';
+} from '@/components/ui/form';
 import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '../../../../../../../components/ui/dialog';
-import {
-  RadioGroup,
-  RadioGroupItem,
-} from '../../../../../../../components/ui/radio-group';
-import { Label } from '../../../../../../../components/ui/label';
-import { UserInput } from '../../../../../../../components/ui/user/user-input';
-import { GroupInput } from '../../../../../../../components/ui/user/group-input';
-import { Switch } from '../../../../../../../components/ui/switch';
-import { Button } from '../../../../../../../components/ui/button';
+} from '@/components/ui/dialog';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Label } from '@/components/ui/label';
+import { UserInput } from '@/components/ui/user/user-input';
+import { GroupInput } from '@/components/ui/user/group-input';
+import { Switch } from '@/components/ui/switch';
+import { Button } from '@/components/ui/button';
 
 export const CreateEditFormModeratorsStaffAdmin = () => {
   const t = useTranslations('admin.members.staff');

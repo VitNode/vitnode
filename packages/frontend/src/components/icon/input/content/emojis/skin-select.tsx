@@ -6,9 +6,9 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '../../../../ui/dropdown-menu';
-import { Button } from '../../../../ui/button';
-import { CONFIG } from '../../../../../helpers/config-with-env';
+} from '@/components/ui/dropdown-menu';
+import { Button } from '@/components/ui/button';
+import { CONFIG } from '@/helpers/config-with-env';
 
 const skinToneEmoji = [
   '43.55deg 100% 61.37%',

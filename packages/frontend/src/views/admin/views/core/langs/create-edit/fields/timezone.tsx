@@ -10,14 +10,14 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '../../../../../../../components/ui/form';
+} from '@/components/ui/form';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '../../../../../../../components/ui/popover';
-import { Button } from '../../../../../../../components/ui/button';
-import { cn } from '../../../../../../../helpers/classnames';
+} from '@/components/ui/popover';
+import { Button } from '@/components/ui/button';
+import { cn } from '@/helpers/classnames';
 import {
   Command,
   CommandEmpty,
@@ -25,7 +25,7 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from '../../../../../../../components/ui/command';
+} from '@/components/ui/command';
 
 interface Props<T extends FieldValues, TName extends Path<T>> {
   field: ControllerRenderProps<T, TName>;

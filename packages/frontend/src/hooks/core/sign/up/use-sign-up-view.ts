@@ -7,7 +7,7 @@ import { toast } from 'sonner';
 
 import { mutationApi } from './mutation-api';
 
-import { ErrorType } from '../../../../graphql/fetcher';
+import { ErrorType } from '@/graphql/fetcher';
 import { useCaptcha } from '../../use-captcha';
 
 const nameRegex = /^(?!.* {2})[\p{L}\p{N}._@ -]*$/u;
