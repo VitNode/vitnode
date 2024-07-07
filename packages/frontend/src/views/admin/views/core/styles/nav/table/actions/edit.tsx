@@ -4,20 +4,16 @@ import { Pencil } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import * as React from 'react';
 
-import { ShowCoreNav } from '../../../../../../../../graphql/graphql';
-import {
-  Dialog,
-  DialogContent,
-  DialogTrigger,
-} from '../../../../../../../../components/ui/dialog';
+import { ShowCoreNav } from '@/graphql/graphql';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '../../../../../../../../components/ui/tooltip';
-import { Loader } from '../../../../../../../../components/ui/loader';
-import { Button } from '../../../../../../../../components/ui/button';
+} from '@/components/ui/tooltip';
+import { Loader } from '@/components/ui/loader';
+import { Button } from '@/components/ui/button';
 
 const Content = React.lazy(async () =>
   import('../../create-edit/create-edit').then(module => ({

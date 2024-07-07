@@ -5,7 +5,7 @@ import { UploadAdminPluginsService } from './upload.service';
 import { UploadAdminPluginsArgs } from './dto/upload.args';
 import { ShowAdminPlugins } from '../show/dto/show.obj';
 
-import { AdminAuthGuards } from '../../../../utils';
+import { AdminAuthGuards } from '@/utils';
 
 @Resolver()
 export class UploadAdminPluginsResolver {

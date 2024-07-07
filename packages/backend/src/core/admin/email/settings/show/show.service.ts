@@ -5,7 +5,7 @@ import { Injectable } from '@nestjs/common';
 import { ShowAdminEmailSettingsServiceObj } from './dto/show.obj';
 
 import { HelpersAdminEmailSettingsService } from '../../helpers.service';
-import { getConfigFile } from '../../../../../providers/config';
+import { getConfigFile } from '@/providers/config';
 
 @Injectable()
 export class ShowAdminEmailSettingsService extends HelpersAdminEmailSettingsService {

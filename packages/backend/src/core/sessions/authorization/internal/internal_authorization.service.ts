@@ -5,13 +5,13 @@ import { eq } from 'drizzle-orm';
 import { currentUnixDate } from 'vitnode-shared';
 
 import { DeviceSignInCoreSessionsService } from '../../sign_in/device.service';
-import { DatabaseService } from '../../../../database';
-import { User } from '../../../../decorators';
-import { Ctx } from '../../../../utils';
-import { AccessDeniedError } from '../../../../errors';
-import { core_users } from '../../../../templates/core/admin/database/schema/users';
-import { core_sessions_known_devices } from '../../../../templates/core/admin/database/schema/sessions';
-import { getUserAgentData, getUserIp } from '../../../../functions';
+import { DatabaseService } from '@/database';
+import { User } from '@/decorators';
+import { Ctx } from '@/utils';
+import { AccessDeniedError } from '@/errors';
+import { core_users } from '@/templates/core/admin/database/schema/users';
+import { core_sessions_known_devices } from '@/templates/core/admin/database/schema/sessions';
+import { getUserAgentData, getUserIp } from '@/functions';
 
 @Injectable()
 export class InternalAuthorizationCoreSessionsService {

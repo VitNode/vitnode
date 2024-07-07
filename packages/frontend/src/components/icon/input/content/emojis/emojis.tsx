@@ -5,8 +5,8 @@ import { useTranslations } from 'next-intl';
 
 import { IconInputProps } from '../content';
 
-import { Button } from '../../../../ui/button';
-import { cn } from '../../../../../helpers/classnames';
+import { Button } from '@/components/ui/button';
+import { cn } from '@/helpers/classnames';
 
 interface Props extends Omit<IconInputProps, 'setOpen'> {
   search: string;

@@ -2,12 +2,12 @@
 
 import { revalidatePath } from 'next/cache';
 
-import { fetcher } from '../../../../../../../../../graphql/fetcher';
+import { fetcher } from '@/graphql/fetcher';
 import {
   Admin__Core_Languages__Update,
   Admin__Core_Languages__UpdateMutation,
   Admin__Core_Languages__UpdateMutationVariables,
-} from '../../../../../../../../../graphql/graphql';
+} from '@/graphql/graphql';
 
 export const mutationApi = async (formData: FormData) => {
   try {

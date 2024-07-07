@@ -7,9 +7,9 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '../../../../../../components/ui/card';
-import { Link } from '../../../../../../navigation';
-import { buttonVariants } from '../../../../../../components/ui/button';
+} from '@/components/ui/card';
+import { Link } from '@/navigation';
+import { buttonVariants } from '@/components/ui/button';
 
 export const FinishInstallConfigsView = () => {
   return (

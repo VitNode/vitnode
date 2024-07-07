@@ -5,16 +5,16 @@ import { useTranslations } from 'next-intl';
 import { useEditorAdmin } from './hooks/use-editor-admin';
 import { FilesSectionContentEditorAdmin } from './sections/files';
 
-import { Card } from '../../../../../../components/ui/card';
+import { Card } from '@/components/ui/card';
 import {
   Form,
   FormField,
   FormFieldRender,
   FormWrapper,
-} from '../../../../../../components/ui/form';
-import { Switch } from '../../../../../../components/ui/switch';
-import { Button } from '../../../../../../components/ui/button';
-import { Core_GlobalQuery } from '../../../../../../graphql/graphql';
+} from '@/components/ui/form';
+import { Switch } from '@/components/ui/switch';
+import { Button } from '@/components/ui/button';
+import { Core_GlobalQuery } from '@/graphql/graphql';
 
 export const ContentEditorAdmin = (
   data: Core_GlobalQuery['core_middleware__show']['editor'],

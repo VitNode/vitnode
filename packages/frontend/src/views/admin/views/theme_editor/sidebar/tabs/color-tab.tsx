@@ -7,16 +7,16 @@ import {
 } from 'vitnode-shared';
 
 import { ThemeEditorTab, useThemeEditor } from '../../hooks/use-theme-editor';
-import { Button } from '../../../../../../components/ui/button';
-import { Separator } from '../../../../../../components/ui/separator';
+import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
 import {
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from '../../../../../../components/ui/form';
-import { ColorInput } from '../../../../../../components/ui/color-input';
+} from '@/components/ui/form';
+import { ColorInput } from '@/components/ui/color-input';
 
 export const ColorTabThemeEditor = () => {
   const t = useTranslations('core.theme_editor.colors');

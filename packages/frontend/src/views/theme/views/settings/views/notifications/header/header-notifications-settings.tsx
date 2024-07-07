@@ -1,9 +1,6 @@
 import { useTranslations } from 'next-intl';
 
-import {
-  CardDescription,
-  CardHeader,
-} from '../../../../../../../components/ui/card';
+import { CardDescription, CardHeader } from '@/components/ui/card';
 
 export const HeaderNotificationsSettings = () => {
   const t = useTranslations('core');

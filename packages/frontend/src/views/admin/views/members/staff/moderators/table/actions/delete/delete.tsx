@@ -2,14 +2,14 @@ import { Trash2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import * as React from 'react';
 
-import { ShowAdminStaffModerators } from '../../../../../../../../../graphql/graphql';
+import { ShowAdminStaffModerators } from '@/graphql/graphql';
 import {
   AlertDialog,
   AlertDialogContent,
   AlertDialogTrigger,
-} from '../../../../../../../../../components/ui/alert-dialog';
-import { Button } from '../../../../../../../../../components/ui/button';
-import { Loader } from '../../../../../../../../../components/ui/loader';
+} from '@/components/ui/alert-dialog';
+import { Button } from '@/components/ui/button';
+import { Loader } from '@/components/ui/loader';
 
 const ContentDeleteActionsTableModeratorsStaffAdmin = React.lazy(async () =>
   import('./content').then(module => ({

@@ -9,8 +9,8 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '../../../../components/ui/popover';
-import { PickerColor } from '../../../../components/ui/picker-color';
+} from '@/components/ui/popover';
+import { PickerColor } from '@/components/ui/picker-color';
 
 export const ColorToolbarEditor = () => {
   const [open, setOpen] = React.useState(false);

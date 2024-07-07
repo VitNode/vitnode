@@ -1,11 +1,8 @@
 import * as React from 'react';
 
-import { ShowCoreLanguages } from '../../../../../../../../graphql/graphql';
-import {
-  AlertDialog,
-  AlertDialogContent,
-} from '../../../../../../../../components/ui/alert-dialog';
-import { Loader } from '../../../../../../../../components/ui/loader';
+import { ShowCoreLanguages } from '@/graphql/graphql';
+import { AlertDialog, AlertDialogContent } from '@/components/ui/alert-dialog';
+import { Loader } from '@/components/ui/loader';
 
 const Content = React.lazy(async () =>
   import('./content').then(module => ({

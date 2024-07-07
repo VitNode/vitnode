@@ -4,8 +4,8 @@ import * as React from 'react';
 
 import { editMutationApi } from './create-edit/hooks/edit-mutation-api';
 
-import { ShowCoreLanguages } from '../../../../../graphql/graphql';
-import { Switch } from '../../../../../components/ui/switch';
+import { ShowCoreLanguages } from '@/graphql/graphql';
+import { Switch } from '@/components/ui/switch';
 
 interface Props {
   data: ShowCoreLanguages;

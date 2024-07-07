@@ -5,16 +5,13 @@ import * as React from 'react';
 import { HeaderDrawerQuickMenu } from './header';
 import { NavDrawerQuickMenu } from './nav/nav';
 
-import { useSignOutApi } from '../../../../../hooks/core/sign/out/use-sign-out-api';
-import { useSession } from '../../../../../hooks/use-session';
-import {
-  DrawerClose,
-  DrawerContent,
-} from '../../../../../components/ui/drawer';
-import { Link } from '../../../../../navigation';
-import { cn } from '../../../../../helpers/classnames';
-import { Button, buttonVariants } from '../../../../../components/ui/button';
-import { Separator } from '../../../../../components/ui/separator';
+import { useSignOutApi } from '@/hooks/core/sign/out/use-sign-out-api';
+import { useSession } from '@/hooks/use-session';
+import { DrawerClose, DrawerContent } from '@/components/ui/drawer';
+import { Link } from '@/navigation';
+import { cn } from '@/helpers/classnames';
+import { Button, buttonVariants } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
 
 export const classNameDrawerQuickMenu =
   'w-full justify-start [&>svg]:text-muted-foreground font-normal';

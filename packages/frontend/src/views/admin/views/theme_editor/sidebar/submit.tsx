@@ -10,14 +10,10 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from '../../../../../components/ui/alert-dialog';
-import { Button } from '../../../../../components/ui/button';
-import { CONFIG } from '../../../../../helpers/config-with-env';
-import {
-  Alert,
-  AlertDescription,
-  AlertTitle,
-} from '../../../../../components/ui/alert';
+} from '@/components/ui/alert-dialog';
+import { Button } from '@/components/ui/button';
+import { CONFIG } from '@/helpers/config-with-env';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
 interface Props {
   isPending: boolean;

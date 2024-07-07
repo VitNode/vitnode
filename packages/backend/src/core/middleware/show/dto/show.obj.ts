@@ -1,9 +1,6 @@
 import { Field, ObjectType, registerEnumType } from '@nestjs/graphql';
 
-import {
-  AllowTypeFilesEnum,
-  CaptchaTypeEnum,
-} from '../../../../providers/config';
+import { AllowTypeFilesEnum, CaptchaTypeEnum } from '@/providers/config';
 
 registerEnumType(AllowTypeFilesEnum, {
   name: 'AllowTypeFilesEnum',

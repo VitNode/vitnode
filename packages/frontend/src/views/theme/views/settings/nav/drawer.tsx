@@ -8,8 +8,8 @@ import {
   DrawerClose,
   DrawerContent,
   DrawerTrigger,
-} from '../../../../../components/ui/drawer';
-import { buttonVariants } from '../../../../../components/ui/button';
+} from '@/components/ui/drawer';
+import { buttonVariants } from '@/components/ui/button';
 
 export const DrawerNavSettings = () => {
   const t = useTranslations('core');

@@ -2,10 +2,10 @@ import { NavWrapper } from './wrapper';
 import { NavListWrapper } from './list-wrapper';
 import { ItemNav } from './item';
 
-import { getSessionData } from '../../../../graphql/get-session-data';
-import { flattenTree } from '../../../../helpers/flatten-tree';
-import { Icon } from '../../../../components/icon/icon';
-import { ShowCoreNav } from '../../../../graphql/graphql';
+import { getSessionData } from '@/graphql/get-session-data';
+import { flattenTree } from '@/helpers/flatten-tree';
+import { Icon } from '@/components/icon/icon';
+import { ShowCoreNav } from '@/graphql/graphql';
 
 export const Nav = async () => {
   const data = await getSessionData();

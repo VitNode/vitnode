@@ -1,6 +1,6 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 
-import { TextLanguage } from '../../../../utils';
+import { TextLanguage } from '@/utils';
 
 @ObjectType()
 export class ShowSettingsObj {

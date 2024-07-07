@@ -2,23 +2,23 @@ import { useTranslations } from 'next-intl';
 
 import { useDeleteLangAdmin } from './hooks/use-delete-lang-admin';
 
-import { ShowCoreLanguages } from '../../../../../../../../graphql/graphql';
+import { ShowCoreLanguages } from '@/graphql/graphql';
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormMessage,
-} from '../../../../../../../../components/ui/form';
+} from '@/components/ui/form';
 import {
   AlertDialogCancel,
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from '../../../../../../../../components/ui/alert-dialog';
-import { Input } from '../../../../../../../../components/ui/input';
-import { Button } from '../../../../../../../../components/ui/button';
+} from '@/components/ui/alert-dialog';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 
 export const ContentDeleteActionsTableLangsCoreAdmin = ({
   code,

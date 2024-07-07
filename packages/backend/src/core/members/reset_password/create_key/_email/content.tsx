@@ -1,10 +1,7 @@
 import * as React from 'react';
 import { Text, Section, Button } from '@react-email/components';
 
-import {
-  GetHelpersForEmailType,
-  getTranslationForEmail,
-} from '../../../../../providers';
+import { GetHelpersForEmailType, getTranslationForEmail } from '@/providers';
 
 interface Props {
   helpers: GetHelpersForEmailType;

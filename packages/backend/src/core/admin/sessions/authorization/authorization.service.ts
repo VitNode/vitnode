@@ -12,7 +12,7 @@ import {
   NavAdminPluginsAuthorization,
 } from './dto/authorization.obj';
 
-import { DatabaseService } from '../../../../database';
+import { DatabaseService } from '@/database';
 import { DeviceSignInCoreSessionsService } from '../../../sessions/sign_in/device.service';
 import {
   ABSOLUTE_PATHS_BACKEND,
@@ -21,8 +21,8 @@ import {
   Ctx,
 } from '../../../..';
 import { AuthorizationCurrentUserObj } from '../../../sessions/authorization/dto/authorization.obj';
-import { core_sessions_known_devices } from '../../../../templates/core/admin/database/schema/sessions';
-import { getUserAgentData, getUserIp } from '../../../../functions';
+import { core_sessions_known_devices } from '@/templates/core/admin/database/schema/sessions';
+import { getUserAgentData, getUserIp } from '@/functions';
 
 @Injectable()
 export class AuthorizationAdminSessionsService {
@@ -133,10 +133,7 @@ export class AuthorizationAdminSessionsService {
   async authorization(ctx: Ctx): Promise<AuthorizationAdminSessionsObj> {
     const user = await this.initialAuthorization(ctx);
 
-    const packageJSONPath = join(
-      __dirname,
-      '../../../../../../../package.json',
-    );
+    const packageJSONPath = join(__dirname, '@/package.json');
     if (!fs.existsSync(packageJSONPath)) {
       throw new Error('package.json not found');
     }

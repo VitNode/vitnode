@@ -8,14 +8,14 @@ import {
   Admin__Core_Plugins__ShowQuery,
   Admin__Core_Plugins__ShowQueryVariables,
   ShowAdminPluginsSortingColumnEnum,
-} from '../../../../../graphql/graphql';
+} from '@/graphql/graphql';
 import {
   SearchParamsPagination,
   getPaginationTool,
-} from '../../../../../graphql/get-pagination-tool';
-import { HeaderContent } from '../../../../../components/ui/header-content';
-import { Card } from '../../../../../components/ui/card';
-import { fetcher } from '../../../../../graphql/fetcher';
+} from '@/graphql/get-pagination-tool';
+import { HeaderContent } from '@/components/ui/header-content';
+import { Card } from '@/components/ui/card';
+import { fetcher } from '@/graphql/fetcher';
 import { RebuildRequiredAdmin } from '../../../global/rebuild-required';
 
 export interface PluginsAdminViewProps {

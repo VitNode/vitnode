@@ -8,10 +8,10 @@ import { ShowAdminPlugins } from '../show/dto/show.obj';
 import { CreateFilesAdminPluginsService } from '../helpers/files/create/create-files.service';
 import { ChangeFilesAdminPluginsService } from '../helpers/files/change/change.service';
 
-import { DatabaseService } from '../../../../database';
-import { CustomError } from '../../../../errors';
+import { DatabaseService } from '@/database';
+import { CustomError } from '@/errors';
 import { ABSOLUTE_PATHS_BACKEND } from '../../../..';
-import { core_plugins } from '../../../../templates/core/admin/database/schema/plugins';
+import { core_plugins } from '@/templates/core/admin/database/schema/plugins';
 
 @Injectable()
 export class CreateAdminPluginsService {

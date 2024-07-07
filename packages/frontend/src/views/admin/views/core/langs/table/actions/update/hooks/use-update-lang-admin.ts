@@ -5,8 +5,8 @@ import * as z from 'zod';
 
 import { mutationApi } from './mutation-api';
 
-import { ShowCoreLanguages } from '../../../../../../../../../graphql/graphql';
-import { useDialog } from '../../../../../../../../../components/ui/dialog';
+import { ShowCoreLanguages } from '@/graphql/graphql';
+import { useDialog } from '@/components/ui/dialog';
 
 export const useUpdateLangAdmin = ({
   code,

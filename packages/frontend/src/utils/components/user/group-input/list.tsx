@@ -1,11 +1,11 @@
 import { useTranslations } from 'next-intl';
 import { CheckIcon } from 'lucide-react';
 
-import { CommandGroup, CommandItem } from '../../../../components/ui/command';
-import { cn } from '../../../../helpers/classnames';
-import { GroupFormat } from '../../../../components/ui/user/group-format';
-import { GroupInputItem } from '../../../../components/ui/user/group-input';
-import { ShowAdminGroups } from '../../../../graphql/graphql';
+import { CommandGroup, CommandItem } from '@/components/ui/command';
+import { cn } from '@/helpers/classnames';
+import { GroupFormat } from '@/components/ui/user/group-format';
+import { GroupInputItem } from '@/components/ui/user/group-input';
+import { ShowAdminGroups } from '@/graphql/graphql';
 
 interface Props {
   edges: Pick<ShowAdminGroups, 'guest' | 'id' | 'name'>[];

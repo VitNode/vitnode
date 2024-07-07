@@ -4,7 +4,7 @@ import { UseGuards } from '@nestjs/common';
 import { DeleteAdminNavStylesService } from './delete.service';
 import { DeleteAdminNavStylesArgs } from './dto/delete.args';
 
-import { AdminAuthGuards } from '../../../../../utils';
+import { AdminAuthGuards } from '@/utils';
 
 @Resolver()
 export class DeleteAdminNavStylesResolver {

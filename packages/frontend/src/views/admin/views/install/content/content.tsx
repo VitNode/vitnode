@@ -9,14 +9,14 @@ import { DatabaseInstallConfigsView } from './steps/database/database-install-co
 import { AccountInstallConfigsView } from './steps/account/account-install-configs-view';
 import { FinishInstallConfigsView } from './finish/finish-install-config-view';
 
-import { LayoutAdminInstallEnum } from '../../../../../graphql/graphql';
-import { ItemStepProps, Steps } from '../../../../../components/ui/steps';
+import { LayoutAdminInstallEnum } from '@/graphql/graphql';
+import { ItemStepProps, Steps } from '@/components/ui/steps';
 import {
   Card,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '../../../../../components/ui/card';
+} from '@/components/ui/card';
 
 interface Props {
   data: LayoutAdminInstallEnum;

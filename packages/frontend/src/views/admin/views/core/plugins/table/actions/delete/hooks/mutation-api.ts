@@ -6,8 +6,8 @@ import {
   Admin__Core_Plugins__Delete,
   Admin__Core_Plugins__DeleteMutation,
   Admin__Core_Plugins__DeleteMutationVariables,
-} from '../../../../../../../../../graphql/graphql';
-import { fetcher } from '../../../../../../../../../graphql/fetcher';
+} from '@/graphql/graphql';
+import { fetcher } from '@/graphql/fetcher';
 
 export const mutationApi = async (
   variables: Admin__Core_Plugins__DeleteMutationVariables,

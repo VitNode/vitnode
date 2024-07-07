@@ -6,9 +6,9 @@ import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { ChevronDown, Menu } from 'lucide-react';
 
-import { Link, usePathname } from '../../../../../../navigation';
-import { cn } from '../../../../../../helpers/classnames';
-import { Button, buttonVariants } from '../../../../../../components/ui/button';
+import { Link, usePathname } from '@/navigation';
+import { cn } from '@/helpers/classnames';
+import { Button, buttonVariants } from '@/components/ui/button';
 
 export interface ItemItemNavAdminProps {
   href: string;

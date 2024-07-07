@@ -6,14 +6,11 @@ import { ConfigService } from '@nestjs/config';
 import { CreateKeyResetPasswordCoreMembersArgs } from './dto/create_key.args';
 import { ContentCreateKeyEmail } from './_email/content';
 
-import { DatabaseService } from '../../../../database/database.service';
-import { NotFoundError } from '../../../../errors';
-import { core_users_pass_reset } from '../../../../templates/core/admin/database/schema/users';
+import { DatabaseService } from '@/database/database.service';
+import { NotFoundError } from '@/errors';
+import { core_users_pass_reset } from '@/templates/core/admin/database/schema/users';
 import { SendAdminEmailService } from '../../../admin/email/send/send.service';
-import {
-  EmailHelpersServiceType,
-  getTranslationForEmail,
-} from '../../../../providers';
+import { EmailHelpersServiceType, getTranslationForEmail } from '@/providers';
 
 @Injectable()
 export class CreateKeyResetPasswordCoreMembersService {

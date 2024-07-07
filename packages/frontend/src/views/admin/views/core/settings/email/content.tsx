@@ -4,19 +4,19 @@ import { useTranslations } from 'next-intl';
 
 import { useEmailSettingsFormAdmin } from './hooks/use-email-settings-form-admin';
 
-import { Admin__Core_Email_Settings__ShowQuery } from '../../../../../../graphql/graphql';
+import { Admin__Core_Email_Settings__ShowQuery } from '@/graphql/graphql';
 import {
   Form,
   FormField,
   FormFieldRender,
   FormWrapper,
-} from '../../../../../../components/ui/form';
-import { ColorInput } from '../../../../../../components/ui/color-input';
-import { HeaderContent } from '../../../../../../components/ui/header-content';
-import { Separator } from '../../../../../../components/ui/separator';
-import { Input } from '../../../../../../components/ui/input';
-import { Switch } from '../../../../../../components/ui/switch';
-import { Button } from '../../../../../../components/ui/button';
+} from '@/components/ui/form';
+import { ColorInput } from '@/components/ui/color-input';
+import { HeaderContent } from '@/components/ui/header-content';
+import { Separator } from '@/components/ui/separator';
+import { Input } from '@/components/ui/input';
+import { Switch } from '@/components/ui/switch';
+import { Button } from '@/components/ui/button';
 
 export const ContentEmailSettingsAdmin = (
   props: Admin__Core_Email_Settings__ShowQuery,

@@ -2,19 +2,19 @@ import { getTranslations } from 'next-intl/server';
 
 import { TableUsersMembersAdmin } from './table/table';
 
-import { fetcher } from '../../../../../graphql/fetcher';
+import { fetcher } from '@/graphql/fetcher';
 import {
   Admin__Core_Members__Show,
   Admin__Core_Members__ShowQuery,
   Admin__Core_Members__ShowQueryVariables,
   ShowAdminMembersSortingColumnEnum,
-} from '../../../../../graphql/graphql';
-import { HeaderContent } from '../../../../../components/ui/header-content';
-import { Card } from '../../../../../components/ui/card';
+} from '@/graphql/graphql';
+import { HeaderContent } from '@/components/ui/header-content';
+import { Card } from '@/components/ui/card';
 import {
   SearchParamsPagination,
   getPaginationTool,
-} from '../../../../../graphql/get-pagination-tool';
+} from '@/graphql/get-pagination-tool';
 
 const getData = async (variables: Admin__Core_Members__ShowQueryVariables) => {
   const { data } = await fetcher<

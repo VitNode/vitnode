@@ -3,9 +3,9 @@ import { useTranslations } from 'next-intl';
 
 import { ActionsTableNavAdmin } from './actions/actions';
 
-import { ShowCoreNav } from '../../../../../../../graphql/graphql';
-import { FlatTree } from '../../../../../../../helpers/flatten-tree';
-import { useTextLang } from '../../../../../../../hooks/use-text-lang';
+import { ShowCoreNav } from '@/graphql/graphql';
+import { FlatTree } from '@/helpers/flatten-tree';
+import { useTextLang } from '@/hooks/use-text-lang';
 
 interface Props {
   data: FlatTree<Omit<ShowCoreNav, '__typename'>>;

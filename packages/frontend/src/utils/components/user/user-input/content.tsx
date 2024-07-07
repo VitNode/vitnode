@@ -6,16 +6,16 @@ import { useDebouncedCallback } from 'use-debounce';
 
 import { UserInputContentList } from './list';
 
-import { UserInputItem } from '../../../../components/ui/user/user-input';
-import { getUsersShortApi } from '../../../../graphql/get-users-short-api';
+import { UserInputItem } from '@/components/ui/user/user-input';
+import { getUsersShortApi } from '@/graphql/get-users-short-api';
 import {
   Command,
   CommandList,
   commandInputClassName,
-} from '../../../../components/ui/command';
-import { Input } from '../../../../components/ui/input';
-import { cn } from '../../../../helpers/classnames';
-import { Loader } from '../../../../components/ui/loader';
+} from '@/components/ui/command';
+import { Input } from '@/components/ui/input';
+import { cn } from '@/helpers/classnames';
+import { Loader } from '@/components/ui/loader';
 
 interface Props {
   onSelect: (value: UserInputItem) => void;

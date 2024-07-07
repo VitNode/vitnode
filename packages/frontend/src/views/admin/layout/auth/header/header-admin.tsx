@@ -1,11 +1,11 @@
 import { UserBarAdmin } from './user-bar/user-bar-admin';
 import { NavAdmin } from '../nav/nav-admin';
 
-import { CONFIG } from '../../../../../helpers/config-with-env';
-import { Link } from '../../../../../navigation';
-import { LogoVitNode } from '../../../../../components/logo-vitnode';
-import { LanguageSwitcher } from '../../../../../components/switchers/language-switcher';
-import { ThemeSwitcher } from '../../../../../components/switchers/theme-switcher';
+import { CONFIG } from '@/helpers/config-with-env';
+import { Link } from '@/navigation';
+import { LogoVitNode } from '@/components/logo-vitnode';
+import { LanguageSwitcher } from '@/components/switchers/language-switcher';
+import { ThemeSwitcher } from '@/components/switchers/theme-switcher';
 
 export const HeaderAdmin = () => {
   return (

@@ -4,8 +4,8 @@ import { UseGuards } from '@nestjs/common';
 import { EditAdminEditorStylesService } from './edit.service';
 import { EditAdminEditorStylesArgs } from './dto/edit.args';
 
-import { AdminAuthGuards } from '../../../../../utils/guards/admin-auth.guard';
-import { EditorShowCoreMiddleware } from '../../../../middleware/show/dto/show.obj';
+import { AdminAuthGuards } from '@/utils/guards/admin-auth.guard';
+import { EditorShowCoreMiddleware } from '@/core/middleware/show/dto/show.obj';
 
 @Resolver()
 export class EditAdminEditorStylesResolver {

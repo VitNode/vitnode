@@ -10,7 +10,7 @@ import {
 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
-import { useSession } from '../../../../../hooks/use-session';
+import { useSession } from '@/hooks/use-session';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -19,11 +19,11 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '../../../../../components/ui/dropdown-menu';
-import { Button } from '../../../../../components/ui/button';
-import { AvatarUser } from '../../../../../components/ui/user/avatar';
-import { Link } from '../../../../../navigation';
-import { useSignOutApi } from '../../../../../hooks/core/sign/out/use-sign-out-api';
+} from '@/components/ui/dropdown-menu';
+import { Button } from '@/components/ui/button';
+import { AvatarUser } from '@/components/ui/user/avatar';
+import { Link } from '@/navigation';
+import { useSignOutApi } from '@/hooks/core/sign/out/use-sign-out-api';
 
 export const AuthUserBar = () => {
   const t = useTranslations('core');

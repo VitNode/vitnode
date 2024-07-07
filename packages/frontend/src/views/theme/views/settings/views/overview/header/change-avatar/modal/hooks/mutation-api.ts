@@ -2,12 +2,12 @@
 
 import { revalidatePath } from 'next/cache';
 
-import { fetcher } from '../../../../../../../../../../graphql/fetcher';
+import { fetcher } from '@/graphql/fetcher';
 import {
   Core_Members__Avatar__Delete,
   Core_Members__Avatar__DeleteMutation,
   Core_Members__Avatar__DeleteMutationVariables,
-} from '../../../../../../../../../../graphql/graphql';
+} from '@/graphql/graphql';
 
 export const mutationApi = async () => {
   try {

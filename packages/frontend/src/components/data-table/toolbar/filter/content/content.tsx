@@ -7,7 +7,7 @@ import { useDebouncedCallback } from 'use-debounce';
 import { ListContentFilterToolbarDataTable } from './list';
 import { useFilterToolbarDataTable } from '../hooks/use-filter-toolbar-data-table';
 
-import { usePathname, useRouter } from '../../../../../navigation';
+import { usePathname, useRouter } from '@/navigation';
 import {
   Command,
   CommandEmpty,
@@ -17,9 +17,9 @@ import {
   CommandList,
   CommandSeparator,
   commandInputClassName,
-} from '../../../../ui/command';
-import { Input } from '../../../../ui/input';
-import { cn } from '../../../../../helpers/classnames';
+} from '@/components/ui/command';
+import { Input } from '@/components/ui/input';
+import { cn } from '@/helpers/classnames';
 
 export interface ContentFilterToolbarDataTableProps {
   options: {

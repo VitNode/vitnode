@@ -6,17 +6,20 @@
     "module": "esnext",
     "baseUrl": "./",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "esModuleInterop": true,
     "moduleResolution": "bundler",
-    "isolatedModules": true,
     "jsx": "preserve",
+    "declaration": true,
+    "emitDeclarationOnly": true,
     "plugins": [
       {
         "name": "next"
       }
     ],
     "outDir": "./dist",
-    "rootDir": "./src"
+    "rootDir": "./",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
   "include": ["next-env.d.ts", "src/**/*", "global.d.ts"],
   "exclude": ["codegen.ts", "scripts/**/*"]

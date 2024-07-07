@@ -8,7 +8,7 @@ import {
   MinLength,
 } from 'class-validator';
 
-import { TransformString } from '../../../../../utils';
+import { TransformString } from '@/utils';
 
 @ArgsType()
 export class CreateAdminPluginsArgs {

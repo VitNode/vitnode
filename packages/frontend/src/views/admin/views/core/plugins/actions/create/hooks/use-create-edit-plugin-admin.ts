@@ -7,12 +7,12 @@ import { useTranslations } from 'next-intl';
 import { mutationCreateApi } from './mutation-create-api';
 import { mutationEditApi } from './mutation-edit-api';
 
-import { ShowAdminPlugins } from '../../../../../../../../graphql/graphql';
-import { useDialog } from '../../../../../../../../components/ui/dialog';
-import { usePathname, useRouter } from '../../../../../../../../navigation';
-import { useSessionAdmin } from '../../../../../../../../hooks/use-session-admin';
-import { zodInput } from '../../../../../../../../helpers/zod';
-import { ErrorType } from '../../../../../../../../graphql/fetcher';
+import { ShowAdminPlugins } from '@/graphql/graphql';
+import { useDialog } from '@/components/ui/dialog';
+import { usePathname, useRouter } from '@/navigation';
+import { useSessionAdmin } from '@/hooks/use-session-admin';
+import { zodInput } from '@/helpers/zod';
+import { ErrorType } from '@/graphql/fetcher';
 
 export const codePluginRegex = /^[a-z0-9-]*$/;
 

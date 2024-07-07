@@ -7,19 +7,16 @@ import { useCaptchaSecurityAdmin } from './hooks/use-captcha-security-admin';
 import {
   Admin__Core_Security__Captcha__ShowQuery,
   CaptchaTypeEnum,
-} from '../../../../../../../graphql/graphql';
-import {
-  RadioGroup,
-  RadioGroupItem,
-} from '../../../../../../../components/ui/radio-group';
+} from '@/graphql/graphql';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import {
   Form,
   FormField,
   FormFieldRender,
   FormWrapper,
-} from '../../../../../../../components/ui/form';
-import { Label } from '../../../../../../../components/ui/label';
-import { Button } from '../../../../../../../components/ui/button';
+} from '@/components/ui/form';
+import { Label } from '@/components/ui/label';
+import { Button } from '@/components/ui/button';
 
 export const ContentCaptchaSecurityAdmin = (
   data: Admin__Core_Security__Captcha__ShowQuery,

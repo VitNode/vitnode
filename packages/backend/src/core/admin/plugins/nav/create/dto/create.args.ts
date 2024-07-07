@@ -2,7 +2,7 @@ import { ArgsType, Field } from '@nestjs/graphql';
 import { Transform } from 'class-transformer';
 import { IsNotEmpty, MaxLength, MinLength } from 'class-validator';
 
-import { TransformString } from '../../../../../../utils';
+import { TransformString } from '@/utils';
 
 @ArgsType()
 export class CreateAdminNavPluginsArgs {

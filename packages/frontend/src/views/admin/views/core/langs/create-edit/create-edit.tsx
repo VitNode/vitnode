@@ -4,13 +4,13 @@ import { TimezoneFieldCreateEditLangAdmin } from './fields/timezone';
 import { LocaleFieldCreateEditLangAdmin } from './fields/locale';
 import { useCreateEditLangAdmin } from './hooks/use-create-edit-lang-admin';
 
-import { ShowCoreLanguages } from '../../../../../../graphql/graphql';
+import { ShowCoreLanguages } from '@/graphql/graphql';
 import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '../../../../../../components/ui/dialog';
+} from '@/components/ui/dialog';
 import {
   Form,
   FormControl,
@@ -19,10 +19,10 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '../../../../../../components/ui/form';
-import { Input } from '../../../../../../components/ui/input';
-import { Switch } from '../../../../../../components/ui/switch';
-import { Button } from '../../../../../../components/ui/button';
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Switch } from '@/components/ui/switch';
+import { Button } from '@/components/ui/button';
 
 interface Props {
   data?: ShowCoreLanguages;

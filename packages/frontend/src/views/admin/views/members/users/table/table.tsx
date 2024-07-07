@@ -11,20 +11,20 @@ import { AdvancedFiltersUsersMembersAdmin } from './filters/advanced/advanced-fi
 import {
   Admin__Core_Members__ShowQuery,
   ShowAdminMembers,
-} from '../../../../../../graphql/graphql';
-import { useTextLang } from '../../../../../../hooks/use-text-lang';
-import { AvatarUser } from '../../../../../../components/ui/user/avatar';
-import { HeaderSortingDataTable } from '../../../../../../components/data-table/header';
-import { DateFormat } from '../../../../../../components/date-format';
+} from '@/graphql/graphql';
+import { useTextLang } from '@/hooks/use-text-lang';
+import { AvatarUser } from '@/components/ui/user/avatar';
+import { HeaderSortingDataTable } from '@/components/data-table/header';
+import { DateFormat } from '@/components/date-format';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '../../../../../../components/ui/tooltip';
-import { Link } from '../../../../../../navigation';
-import { buttonVariants } from '../../../../../../components/ui/button';
-import { DataTable } from '../../../../../../components/data-table/data-table';
+} from '@/components/ui/tooltip';
+import { Link } from '@/navigation';
+import { buttonVariants } from '@/components/ui/button';
+import { DataTable } from '@/components/data-table/data-table';
 
 interface UsersMembersAdminAPIDataType
   extends Pick<

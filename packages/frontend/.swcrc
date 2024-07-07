@@ -1,0 +1,22 @@
+{
+  "$schema": "https://swc.rs/schema.json",
+  "jsc": {
+    "baseUrl": "./",
+    "target": "es2022",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "parser": {
+      "syntax": "typescript",
+      "jsx": true
+    },
+    "transform": {
+      "react": {
+        "runtime": "automatic"
+      }
+    }
+  },
+  "module": {
+    "type": "nodenext"
+  }
+}

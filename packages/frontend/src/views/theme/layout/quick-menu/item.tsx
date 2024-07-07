@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import { cn } from '../../../../helpers/classnames';
-import { Link } from '../../../../navigation';
+import { cn } from '@/helpers/classnames';
+import { Link } from '@/navigation';
 
 interface Props {
   children: React.ReactNode;

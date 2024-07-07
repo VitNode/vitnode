@@ -7,8 +7,8 @@ import { ShowAdminNavPluginsObj } from '../show/dto/show.obj';
 import { CreateAdminNavPluginsArgs } from './dto/create.args';
 import { HelpersAdminNavPluginsService } from '../helpers.service';
 
-import { CustomError, NotFoundError } from '../../../../../errors';
-import { ABSOLUTE_PATHS_BACKEND, ConfigPlugin } from '../../../../..';
+import { CustomError, NotFoundError } from '@/errors';
+import { ABSOLUTE_PATHS_BACKEND, ConfigPlugin } from '@/index';
 
 @Injectable()
 export class CreateAdminNavPluginsService extends HelpersAdminNavPluginsService {
