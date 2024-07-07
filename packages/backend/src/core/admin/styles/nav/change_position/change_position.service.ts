@@ -1,21 +1,21 @@
 import { Injectable } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
 
-import { ChangePositionAdminNavArgs } from './dto/change_position.args';
+import { ChangePositionAdminNavStylesArgs } from './dto/change_position.args';
 
-import { DatabaseService } from '../../../../database';
-import { NotFoundError } from '../../../../errors';
-import { core_nav } from '../../../../templates/core/admin/database/schema/nav';
+import { DatabaseService } from '../../../../../database';
+import { NotFoundError } from '../../../../../errors';
+import { core_nav } from '../../../../../templates/core/admin/database/schema/nav';
 
 @Injectable()
-export class ChangePositionAdminNavService {
+export class ChangePositionAdminNavStylesService {
   constructor(private readonly databaseService: DatabaseService) {}
 
   async changePosition({
     id,
     index_to_move,
     parent_id,
-  }: ChangePositionAdminNavArgs): Promise<string> {
+  }: ChangePositionAdminNavStylesArgs): Promise<string> {
     const nav = await this.databaseService.db.query.core_nav.findFirst({
       where: (table, { eq }) => eq(table.id, id),
     });

@@ -1,25 +1,25 @@
 import { Injectable } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
 
-import { DeleteAdminNavArgs } from './dto/delete.args';
+import { DeleteAdminNavStylesArgs } from './dto/delete.args';
 
-import { DatabaseService } from '../../../../database';
-import { ParserTextLanguageCoreHelpersService } from '../../../helpers/text_language/parser/parser.service';
-import { NotFoundError } from '../../../../errors';
+import { DatabaseService } from '../../../../../database';
+import { ParserTextLanguageCoreHelpersService } from '../../../../helpers/text_language/parser/parser.service';
+import { NotFoundError } from '../../../../../errors';
 import {
   core_nav,
   core_nav_description,
   core_nav_name,
-} from '../../../../templates/core/admin/database/schema/nav';
+} from '../../../../../templates/core/admin/database/schema/nav';
 
 @Injectable()
-export class DeleteAdminNavService {
+export class DeleteAdminNavStylesService {
   constructor(
     private readonly databaseService: DatabaseService,
     private readonly parserTextLang: ParserTextLanguageCoreHelpersService,
   ) {}
 
-  async delete({ id }: DeleteAdminNavArgs): Promise<string> {
+  async delete({ id }: DeleteAdminNavStylesArgs): Promise<string> {
     const nav = await this.databaseService.db.query.core_nav.findFirst({
       where: (table, { eq }) => eq(table.id, id),
     });

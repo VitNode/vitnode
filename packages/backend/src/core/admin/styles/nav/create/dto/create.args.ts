@@ -13,10 +13,10 @@ import {
   TextLanguageInput,
   TransformString,
   TransformTextLanguageInput,
-} from '../../../../../utils';
+} from '../../../../../../utils';
 
 @ArgsType()
-export class CreateAdminNavArgs {
+export class CreateAdminNavStylesArgs {
   @IsArray()
   @ValidateNested({ each: true })
   @ArrayMinSize(1)

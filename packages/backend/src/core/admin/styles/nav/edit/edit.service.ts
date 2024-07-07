@@ -1,20 +1,20 @@
 import { Injectable } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
 
-import { EditAdminNavArgs } from './dto/edit.args';
+import { EditAdminNavStylesArgs } from './dto/edit.args';
 
-import { DatabaseService } from '../../../../database';
-import { ParserTextLanguageCoreHelpersService } from '../../../helpers/text_language/parser/parser.service';
-import { ShowCoreNav } from '../../../nav/show/dto/show.obj';
-import { NotFoundError } from '../../../../errors';
+import { DatabaseService } from '../../../../../database';
+import { ParserTextLanguageCoreHelpersService } from '../../../../helpers/text_language/parser/parser.service';
+import { ShowCoreNav } from '../../../../nav/show/dto/show.obj';
+import { NotFoundError } from '../../../../../errors';
 import {
   core_nav,
   core_nav_description,
   core_nav_name,
-} from '../../../../templates/core/admin/database/schema/nav';
+} from '../../../../../templates/core/admin/database/schema/nav';
 
 @Injectable()
-export class EditAdminNavService {
+export class EditAdminNavStylesService {
   constructor(
     private readonly databaseService: DatabaseService,
     private readonly parserTextLang: ParserTextLanguageCoreHelpersService,
@@ -27,7 +27,7 @@ export class EditAdminNavService {
     icon,
     id,
     name,
-  }: EditAdminNavArgs): Promise<ShowCoreNav> {
+  }: EditAdminNavStylesArgs): Promise<ShowCoreNav> {
     const nav = await this.databaseService.db.query.core_nav.findFirst({
       where: (table, { eq }) => eq(table.id, id),
     });

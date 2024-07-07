@@ -221,10 +221,7 @@ export type Mutation = {
   admin__core_main_settings__edit: EditAdminSettingsObj;
   admin__core_manifest_metadata__edit: ShowAdminManifestMetadataObj;
   admin__core_members__edit: EditAdminMembersObj;
-  admin__core_nav__change_position: Scalars['String']['output'];
-  admin__core_nav__create: ShowCoreNav;
-  admin__core_nav__delete: Scalars['String']['output'];
-  admin__core_nav__edit: ShowCoreNav;
+  admin__core_nav_styles__change_position: Scalars['String']['output'];
   admin__core_plugins__create: ShowAdminPlugins;
   admin__core_plugins__delete: Scalars['String']['output'];
   admin__core_plugins__download: Scalars['String']['output'];
@@ -238,6 +235,9 @@ export type Mutation = {
   admin__core_staff_administrators__delete: Scalars['String']['output'];
   admin__core_staff_moderators__create: ShowAdminStaffModerators;
   admin__core_staff_moderators__delete: Scalars['String']['output'];
+  admin__core_styles__nav__create: ShowCoreNav;
+  admin__core_styles__nav__delete: Scalars['String']['output'];
+  admin__core_styles__nav__edit: ShowCoreNav;
   admin__core_theme_editor__edit: Scalars['String']['output'];
   admin__install__create_database: Scalars['String']['output'];
   admin_sessions__sign_out: Scalars['String']['output'];
@@ -365,34 +365,10 @@ export type MutationAdmin__Core_Members__EditArgs = {
 };
 
 
-export type MutationAdmin__Core_Nav__Change_PositionArgs = {
+export type MutationAdmin__Core_Nav_Styles__Change_PositionArgs = {
   id: Scalars['Int']['input'];
   index_to_move: Scalars['Int']['input'];
   parent_id: Scalars['Int']['input'];
-};
-
-
-export type MutationAdmin__Core_Nav__CreateArgs = {
-  description: Array<TextLanguageInput>;
-  external: Scalars['Boolean']['input'];
-  href: Scalars['String']['input'];
-  icon?: InputMaybe<Scalars['String']['input']>;
-  name: Array<TextLanguageInput>;
-};
-
-
-export type MutationAdmin__Core_Nav__DeleteArgs = {
-  id: Scalars['Int']['input'];
-};
-
-
-export type MutationAdmin__Core_Nav__EditArgs = {
-  description: Array<TextLanguageInput>;
-  external: Scalars['Boolean']['input'];
-  href: Scalars['String']['input'];
-  icon?: InputMaybe<Scalars['String']['input']>;
-  id: Scalars['Int']['input'];
-  name: Array<TextLanguageInput>;
 };
 
 
@@ -491,6 +467,30 @@ export type MutationAdmin__Core_Staff_Moderators__CreateArgs = {
 
 export type MutationAdmin__Core_Staff_Moderators__DeleteArgs = {
   id: Scalars['Int']['input'];
+};
+
+
+export type MutationAdmin__Core_Styles__Nav__CreateArgs = {
+  description: Array<TextLanguageInput>;
+  external: Scalars['Boolean']['input'];
+  href: Scalars['String']['input'];
+  icon?: InputMaybe<Scalars['String']['input']>;
+  name: Array<TextLanguageInput>;
+};
+
+
+export type MutationAdmin__Core_Styles__Nav__DeleteArgs = {
+  id: Scalars['Int']['input'];
+};
+
+
+export type MutationAdmin__Core_Styles__Nav__EditArgs = {
+  description: Array<TextLanguageInput>;
+  external: Scalars['Boolean']['input'];
+  href: Scalars['String']['input'];
+  icon?: InputMaybe<Scalars['String']['input']>;
+  id: Scalars['Int']['input'];
+  name: Array<TextLanguageInput>;
 };
 
 
@@ -1438,16 +1438,16 @@ export type Admin__Core_Email_Settings__TestMutationVariables = Exact<{
 
 export type Admin__Core_Email_Settings__TestMutation = { __typename?: 'Mutation', admin__core_email_settings__test: string };
 
-export type Admin__Core_Nav__Change_PositionMutationVariables = Exact<{
+export type Admin__Core_Nav_Styles__Change_PositionMutationVariables = Exact<{
   id: Scalars['Int']['input'];
   indexToMove: Scalars['Int']['input'];
   parentId: Scalars['Int']['input'];
 }>;
 
 
-export type Admin__Core_Nav__Change_PositionMutation = { __typename?: 'Mutation', admin__core_nav__change_position: string };
+export type Admin__Core_Nav_Styles__Change_PositionMutation = { __typename?: 'Mutation', admin__core_nav_styles__change_position: string };
 
-export type Admin__Core_Nav__CreateMutationVariables = Exact<{
+export type Admin__Core_Styles__Nav__CreateMutationVariables = Exact<{
   description: Array<TextLanguageInput> | TextLanguageInput;
   external: Scalars['Boolean']['input'];
   href: Scalars['String']['input'];
@@ -1456,16 +1456,16 @@ export type Admin__Core_Nav__CreateMutationVariables = Exact<{
 }>;
 
 
-export type Admin__Core_Nav__CreateMutation = { __typename?: 'Mutation', admin__core_nav__create: { __typename?: 'ShowCoreNav', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
+export type Admin__Core_Styles__Nav__CreateMutation = { __typename?: 'Mutation', admin__core_styles__nav__create: { __typename?: 'ShowCoreNav', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
 
-export type Admin__Core_Nav__DeleteMutationVariables = Exact<{
+export type Admin__Core_Styles__Nav__DeleteMutationVariables = Exact<{
   id: Scalars['Int']['input'];
 }>;
 
 
-export type Admin__Core_Nav__DeleteMutation = { __typename?: 'Mutation', admin__core_nav__delete: string };
+export type Admin__Core_Styles__Nav__DeleteMutation = { __typename?: 'Mutation', admin__core_styles__nav__delete: string };
 
-export type Admin__Core_Nav__EditMutationVariables = Exact<{
+export type Admin__Core_Styles__Nav__EditMutationVariables = Exact<{
   description: Array<TextLanguageInput> | TextLanguageInput;
   external: Scalars['Boolean']['input'];
   href: Scalars['String']['input'];
@@ -1475,7 +1475,7 @@ export type Admin__Core_Nav__EditMutationVariables = Exact<{
 }>;
 
 
-export type Admin__Core_Nav__EditMutation = { __typename?: 'Mutation', admin__core_nav__edit: { __typename?: 'ShowCoreNav', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
+export type Admin__Core_Styles__Nav__EditMutation = { __typename?: 'Mutation', admin__core_styles__nav__edit: { __typename?: 'ShowCoreNav', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
 
 export type Admin__Core_Theme_Editor__EditMutationVariables = Exact<{
   colors: ColorsEditAdminThemeEditor;
@@ -2016,18 +2016,18 @@ export const Admin__Core_Email_Settings__Test = gql`
   )
 }
     `;
-export const Admin__Core_Nav__Change_Position = gql`
-    mutation Admin__core_nav__change_position($id: Int!, $indexToMove: Int!, $parentId: Int!) {
-  admin__core_nav__change_position(
+export const Admin__Core_Nav_Styles__Change_Position = gql`
+    mutation Admin__core_nav_styles__change_position($id: Int!, $indexToMove: Int!, $parentId: Int!) {
+  admin__core_nav_styles__change_position(
     id: $id
     index_to_move: $indexToMove
     parent_id: $parentId
   )
 }
     `;
-export const Admin__Core_Nav__Create = gql`
-    mutation Admin__core_nav__create($description: [TextLanguageInput!]!, $external: Boolean!, $href: String!, $name: [TextLanguageInput!]!, $icon: String) {
-  admin__core_nav__create(
+export const Admin__Core_Styles__Nav__Create = gql`
+    mutation Admin__core_styles__nav__create($description: [TextLanguageInput!]!, $external: Boolean!, $href: String!, $name: [TextLanguageInput!]!, $icon: String) {
+  admin__core_styles__nav__create(
     description: $description
     external: $external
     href: $href
@@ -2042,14 +2042,14 @@ export const Admin__Core_Nav__Create = gql`
   }
 }
     `;
-export const Admin__Core_Nav__Delete = gql`
-    mutation Admin__core_nav__delete($id: Int!) {
-  admin__core_nav__delete(id: $id)
+export const Admin__Core_Styles__Nav__Delete = gql`
+    mutation Admin__core_styles__nav__delete($id: Int!) {
+  admin__core_styles__nav__delete(id: $id)
 }
     `;
-export const Admin__Core_Nav__Edit = gql`
-    mutation Admin__core_nav__edit($description: [TextLanguageInput!]!, $external: Boolean!, $href: String!, $id: Int!, $name: [TextLanguageInput!]!, $icon: String) {
-  admin__core_nav__edit(
+export const Admin__Core_Styles__Nav__Edit = gql`
+    mutation Admin__core_styles__nav__edit($description: [TextLanguageInput!]!, $external: Boolean!, $href: String!, $id: Int!, $name: [TextLanguageInput!]!, $icon: String) {
+  admin__core_styles__nav__edit(
     description: $description
     external: $external
     href: $href

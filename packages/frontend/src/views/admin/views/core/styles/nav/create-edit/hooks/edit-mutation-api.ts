@@ -4,20 +4,20 @@ import { revalidatePath } from 'next/cache';
 
 import { fetcher } from '../../../../../../../../graphql/fetcher';
 import {
-  Admin__Core_Nav__Edit,
-  Admin__Core_Nav__EditMutation,
-  Admin__Core_Nav__EditMutationVariables,
+  Admin__Core_Styles__Nav__Edit,
+  Admin__Core_Styles__Nav__EditMutation,
+  Admin__Core_Styles__Nav__EditMutationVariables,
 } from '../../../../../../../../graphql/graphql';
 
 export const editMutationApi = async (
-  variables: Admin__Core_Nav__EditMutationVariables,
+  variables: Admin__Core_Styles__Nav__EditMutationVariables,
 ) => {
   try {
     const { data } = await fetcher<
-      Admin__Core_Nav__EditMutation,
-      Admin__Core_Nav__EditMutationVariables
+      Admin__Core_Styles__Nav__EditMutation,
+      Admin__Core_Styles__Nav__EditMutationVariables
     >({
-      query: Admin__Core_Nav__Edit,
+      query: Admin__Core_Styles__Nav__Edit,
       variables,
     });
 

@@ -1,7 +1,7 @@
 import { ArgsType, Field, Int } from '@nestjs/graphql';
 
 @ArgsType()
-export class DeleteAdminNavArgs {
+export class DeleteAdminNavStylesArgs {
   @Field(() => Int)
   id: number;
 }
