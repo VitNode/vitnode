@@ -1,13 +1,13 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import {
-  Admin__Core_Security__Captcha__ShowQuery,
-  CaptchaTypeEnum,
-} from 'src/graphql/graphql';
 
 import { useCaptchaSecurityAdmin } from './hooks/use-captcha-security-admin';
 
+import {
+  Admin__Core_Security__Captcha__ShowQuery,
+  CaptchaTypeEnum,
+} from '../../../../../../../graphql/graphql';
 import {
   RadioGroup,
   RadioGroupItem,
@@ -43,17 +43,29 @@ export const ContentCaptchaSecurityAdmin = (
                   onValueChange={field.onChange}
                   defaultValue={field.value}
                 >
-                  {types.map(type => (
-                    <div key={type} className="flex items-center space-x-2">
-                      <RadioGroupItem value={type} id={type} />
-                      <Label className="flex flex-col gap-1" htmlFor={type}>
-                        <span>{t(`type.${type}.title`)}</span>
-                        <span className="text-muted-foreground text-sm font-normal">
-                          {t(`type.${type}.title`)}
-                        </span>
-                      </Label>
-                    </div>
-                  ))}
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="none" id="none" />
+                    <Label className="flex flex-col gap-1" htmlFor="none">
+                      <span>{t('type.none.title')}</span>
+                      <span className="text-muted-foreground text-sm font-normal">
+                        {t('type.none.title')}
+                      </span>
+                    </Label>
+                  </div>
+
+                  {types
+                    .filter(type => type !== 'none')
+                    .map(type => (
+                      <div key={type} className="flex items-center space-x-2">
+                        <RadioGroupItem value={type} id={type} />
+                        <Label className="flex flex-col gap-1" htmlFor={type}>
+                          <span>{t(`type.${type}.title`)}</span>
+                          <span className="text-muted-foreground text-sm font-normal">
+                            {t(`type.${type}.title`)}
+                          </span>
+                        </Label>
+                      </div>
+                    ))}
                 </RadioGroup>
               </FormFieldRender>
             );
