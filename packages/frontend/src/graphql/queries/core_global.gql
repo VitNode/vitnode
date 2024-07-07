@@ -38,5 +38,11 @@ query Core_global {
       langs
       plugins
     }
+    security {
+      captcha {
+        site_key
+        type
+      }
+    }
   }
 }

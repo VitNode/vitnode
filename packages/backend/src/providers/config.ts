@@ -8,6 +8,15 @@ export enum AllowTypeFilesEnum {
   none = 'none',
 }
 
+export enum CaptchaTypeEnum {
+  none = 'none',
+  recaptcha_v2_invisible = 'recaptcha_v2_invisible',
+  recaptcha_v2_checkbox = 'recaptcha_v2_checkbox',
+  recaptcha_v3 = 'recaptcha_v3',
+  hcaptcha = 'hcaptcha',
+  cloudflare_turnstile = 'cloudflare_turnstile',
+}
+
 export interface ConfigType {
   editor: {
     files: {
@@ -24,6 +33,12 @@ export interface ConfigType {
     langs: boolean;
     plugins: boolean;
   };
+  security: {
+    captcha: {
+      site_key: string;
+      type: CaptchaTypeEnum;
+    };
+  };
   settings: {
     email: {
       color_primary: string;
@@ -37,6 +52,12 @@ export interface ConfigType {
 }
 
 export const DEFAULT_CONFIG_DATA: ConfigType = {
+  security: {
+    captcha: {
+      type: CaptchaTypeEnum.none,
+      site_key: '',
+    },
+  },
   rebuild_required: {
     langs: false,
     plugins: false,

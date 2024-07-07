@@ -67,11 +67,11 @@
               "none": {
                 "title": "Brak"
               },
-              "recaptcha_v2": {
-                "title": "reCAPTCHA v2"
+              "recaptcha_v2_invisible": {
+                "title": "reCAPTCHA v2 Niewidoczna"
               },
-              "recaptcha_v3": {
-                "title": "reCAPTCHA v3"
+              "recaptcha_v2_checkbox": {
+                "title": "reCAPTCHA v2 Checkbox"
               },
               "hcaptcha": {
                 "title": "hCaptcha"

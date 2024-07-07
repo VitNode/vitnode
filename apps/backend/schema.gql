@@ -41,6 +41,20 @@ type AvatarUser {
   id: Int!
 }
 
+type CaptchaSecurityCoreMiddleware {
+  site_key: String!
+  type: CaptchaTypeEnum!
+}
+
+enum CaptchaTypeEnum {
+  cloudflare_turnstile
+  hcaptcha
+  none
+  recaptcha_v2_checkbox
+  recaptcha_v2_invisible
+  recaptcha_v3
+}
+
 input ColorsEditAdminThemeEditor {
   accent: ThemeVariableInput!
   accent_foreground: ThemeVariableInput!
@@ -261,6 +275,7 @@ type Query {
   admin__core_plugins__files(code: String!): FilesAdminPluginsObj!
   admin__core_plugins__nav__show(plugin_code: String!): [ShowAdminNavPluginsObj!]!
   admin__core_plugins__show(code: String, cursor: Int, first: Int, last: Int, search: String, sortBy: ShowAdminPluginsSortByArgs): ShowAdminPluginsObj!
+  admin__core_security__captcha__show: ShowAdminCaptchaSecurityObj!
   admin__core_staff_administrators__show(cursor: Int, first: Int, last: Int, sortBy: ShowAdminStaffAdministratorsSortByArgs): ShowAdminStaffAdministratorsObj!
   admin__core_staff_moderators__show(cursor: Int, first: Int, last: Int, sortBy: ShowAdminStaffModeratorsSortByArgs): ShowAdminStaffModeratorsObj!
   admin__install__layout: LayoutAdminInstallObj!
@@ -281,6 +296,16 @@ type Query {
 type RebuildRequiredEditorShowCoreMiddleware {
   langs: Boolean!
   plugins: Boolean!
+}
+
+type SecurityCoreMiddleware {
+  captcha: CaptchaSecurityCoreMiddleware!
+}
+
+type ShowAdminCaptchaSecurityObj {
+  secret_key: String!
+  site_key: String!
+  type: CaptchaTypeEnum!
 }
 
 type ShowAdminEmailSettingsServiceObj {
@@ -586,6 +611,7 @@ type ShowCoreMiddlewareObj {
   languages: [LanguagesCoreMiddleware!]!
   plugins: [String!]!
   rebuild_required: RebuildRequiredEditorShowCoreMiddleware!
+  security: SecurityCoreMiddleware!
 }
 
 type ShowCoreNav {

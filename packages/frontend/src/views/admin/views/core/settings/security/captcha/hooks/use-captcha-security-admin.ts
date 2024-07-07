@@ -2,21 +2,22 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
-export const useCaptchaSecurityAdmin = () => {
+import {
+  Admin__Core_Security__Captcha__ShowQuery,
+  CaptchaTypeEnum,
+} from '../../../../../../../../graphql/graphql';
+
+export const useCaptchaSecurityAdmin = ({
+  admin__core_security__captcha__show: data,
+}: Admin__Core_Security__Captcha__ShowQuery) => {
   const formSchema = z.object({
-    type: z.enum([
-      'none',
-      'recaptcha_v2',
-      'recaptcha_v3',
-      'hcaptcha',
-      'cloudflare_turnstile',
-    ]),
+    type: z.nativeEnum(CaptchaTypeEnum),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      type: 'none',
+      type: data.type,
     },
   });
 

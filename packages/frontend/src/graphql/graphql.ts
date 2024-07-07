@@ -61,6 +61,22 @@ export type AvatarUser = {
   id: Scalars['Int']['output'];
 };
 
+export type CaptchaSecurityCoreMiddleware = {
+  __typename?: 'CaptchaSecurityCoreMiddleware';
+  site_key: Scalars['String']['output'];
+  type: CaptchaTypeEnum | `${CaptchaTypeEnum}`;
+};
+
+export const CaptchaTypeEnum = {
+  cloudflare_turnstile: 'cloudflare_turnstile',
+  hcaptcha: 'hcaptcha',
+  none: 'none',
+  recaptcha_v2_checkbox: 'recaptcha_v2_checkbox',
+  recaptcha_v2_invisible: 'recaptcha_v2_invisible',
+  recaptcha_v3: 'recaptcha_v3'
+} as const;
+
+export type CaptchaTypeEnum = typeof CaptchaTypeEnum[keyof typeof CaptchaTypeEnum];
 export type ColorsEditAdminThemeEditor = {
   accent: ThemeVariableInput;
   accent_foreground: ThemeVariableInput;
@@ -594,6 +610,7 @@ export type Query = {
   admin__core_plugins__files: FilesAdminPluginsObj;
   admin__core_plugins__nav__show: Array<ShowAdminNavPluginsObj>;
   admin__core_plugins__show: ShowAdminPluginsObj;
+  admin__core_security__captcha__show: ShowAdminCaptchaSecurityObj;
   admin__core_staff_administrators__show: ShowAdminStaffAdministratorsObj;
   admin__core_staff_moderators__show: ShowAdminStaffModeratorsObj;
   admin__install__layout: LayoutAdminInstallObj;
@@ -721,6 +738,18 @@ export type RebuildRequiredEditorShowCoreMiddleware = {
   __typename?: 'RebuildRequiredEditorShowCoreMiddleware';
   langs: Scalars['Boolean']['output'];
   plugins: Scalars['Boolean']['output'];
+};
+
+export type SecurityCoreMiddleware = {
+  __typename?: 'SecurityCoreMiddleware';
+  captcha: CaptchaSecurityCoreMiddleware;
+};
+
+export type ShowAdminCaptchaSecurityObj = {
+  __typename?: 'ShowAdminCaptchaSecurityObj';
+  secret_key: Scalars['String']['output'];
+  site_key: Scalars['String']['output'];
+  type: CaptchaTypeEnum | `${CaptchaTypeEnum}`;
 };
 
 export type ShowAdminEmailSettingsServiceObj = {
@@ -1059,6 +1088,7 @@ export type ShowCoreMiddlewareObj = {
   languages: Array<LanguagesCoreMiddleware>;
   plugins: Array<Scalars['String']['output']>;
   rebuild_required: RebuildRequiredEditorShowCoreMiddleware;
+  security: SecurityCoreMiddleware;
 };
 
 export type ShowCoreNav = {
@@ -1689,6 +1719,11 @@ export type Admin__Core_Plugins__Nav__ShowQueryVariables = Exact<{
 
 export type Admin__Core_Plugins__Nav__ShowQuery = { __typename?: 'Query', admin__core_plugins__nav__show: Array<{ __typename?: 'ShowAdminNavPluginsObj', code: string, icon?: string | null, href: string, children?: Array<{ __typename?: 'ShowAdminNavPlugins', code: string, href: string, icon?: string | null }> | null }> };
 
+export type Admin__Core_Security__Captcha__ShowQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Admin__Core_Security__Captcha__ShowQuery = { __typename?: 'Query', admin__core_security__captcha__show: { __typename?: 'ShowAdminCaptchaSecurityObj', secret_key: string, site_key: string, type: CaptchaTypeEnum } };
+
 export type Admin__Core_Email_Settings__ShowQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -1717,7 +1752,7 @@ export type Core_Theme_Editor__ShowQuery = { __typename?: 'Query', core_theme_ed
 export type Core_GlobalQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Core_GlobalQuery = { __typename?: 'Query', core_languages__show: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', default: boolean, code: string, id: number, name: string, timezone: string, enabled: boolean, locale: string, allow_in_input: boolean, time_24: boolean }> }, core_plugins__show: Array<{ __typename?: 'ShowCorePluginsObj', code: string }>, core_settings__show: { __typename?: 'ShowSettingsObj', site_name: string, site_short_name: string, site_copyright: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, site_description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }, core_middleware__show: { __typename?: 'ShowCoreMiddlewareObj', editor: { __typename?: 'EditorShowCoreMiddleware', sticky: boolean, files: { __typename?: 'FilesEditorShowCoreMiddleware', allow_type: AllowTypeFilesEnum } }, rebuild_required: { __typename?: 'RebuildRequiredEditorShowCoreMiddleware', langs: boolean, plugins: boolean } } };
+export type Core_GlobalQuery = { __typename?: 'Query', core_languages__show: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', default: boolean, code: string, id: number, name: string, timezone: string, enabled: boolean, locale: string, allow_in_input: boolean, time_24: boolean }> }, core_plugins__show: Array<{ __typename?: 'ShowCorePluginsObj', code: string }>, core_settings__show: { __typename?: 'ShowSettingsObj', site_name: string, site_short_name: string, site_copyright: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, site_description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }, core_middleware__show: { __typename?: 'ShowCoreMiddlewareObj', editor: { __typename?: 'EditorShowCoreMiddleware', sticky: boolean, files: { __typename?: 'FilesEditorShowCoreMiddleware', allow_type: AllowTypeFilesEnum } }, rebuild_required: { __typename?: 'RebuildRequiredEditorShowCoreMiddleware', langs: boolean, plugins: boolean }, security: { __typename?: 'SecurityCoreMiddleware', captcha: { __typename?: 'CaptchaSecurityCoreMiddleware', site_key: string, type: CaptchaTypeEnum } } } };
 
 export type Core_Middleware__ShowQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2595,6 +2630,15 @@ export const Admin__Core_Plugins__Nav__Show = gql`
   }
 }
     `;
+export const Admin__Core_Security__Captcha__Show = gql`
+    query Admin__core_security__captcha__show {
+  admin__core_security__captcha__show {
+    secret_key
+    site_key
+    type
+  }
+}
+    `;
 export const Admin__Core_Email_Settings__Show = gql`
     query Admin__core_email_settings__show {
   admin__core_email_settings__show {
@@ -2896,6 +2940,12 @@ export const Core_Global = gql`
     rebuild_required {
       langs
       plugins
+    }
+    security {
+      captcha {
+        site_key
+        type
+      }
     }
   }
 }

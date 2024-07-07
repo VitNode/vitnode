@@ -1,9 +1,16 @@
 import { Field, ObjectType, registerEnumType } from '@nestjs/graphql';
 
-import { AllowTypeFilesEnum } from '../../../../providers/config';
+import {
+  AllowTypeFilesEnum,
+  CaptchaTypeEnum,
+} from '../../../../providers/config';
 
 registerEnumType(AllowTypeFilesEnum, {
   name: 'AllowTypeFilesEnum',
+});
+
+registerEnumType(CaptchaTypeEnum, {
+  name: 'CaptchaTypeEnum',
 });
 
 @ObjectType()
@@ -43,6 +50,21 @@ export class LanguagesCoreMiddleware {
 }
 
 @ObjectType()
+export class CaptchaSecurityCoreMiddleware {
+  @Field(() => CaptchaTypeEnum)
+  type: CaptchaTypeEnum;
+
+  @Field(() => String)
+  site_key: string;
+}
+
+@ObjectType()
+export class SecurityCoreMiddleware {
+  @Field(() => CaptchaSecurityCoreMiddleware)
+  captcha: CaptchaSecurityCoreMiddleware;
+}
+
+@ObjectType()
 export class ShowCoreMiddlewareObj {
   @Field(() => [LanguagesCoreMiddleware])
   languages: LanguagesCoreMiddleware[];
@@ -55,4 +77,7 @@ export class ShowCoreMiddlewareObj {
 
   @Field(() => RebuildRequiredEditorShowCoreMiddleware)
   rebuild_required: RebuildRequiredEditorShowCoreMiddleware;
+
+  @Field(() => SecurityCoreMiddleware)
+  security: SecurityCoreMiddleware;
 }

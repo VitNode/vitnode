@@ -1,6 +1,10 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+import {
+  Admin__Core_Security__Captcha__ShowQuery,
+  CaptchaTypeEnum,
+} from 'src/graphql/graphql';
 
 import { useCaptchaSecurityAdmin } from './hooks/use-captcha-security-admin';
 
@@ -17,10 +21,12 @@ import {
 import { Label } from '../../../../../../../components/ui/label';
 import { Button } from '../../../../../../../components/ui/button';
 
-export const ContentCaptchaSecurityAdmin = () => {
+export const ContentCaptchaSecurityAdmin = (
+  data: Admin__Core_Security__Captcha__ShowQuery,
+) => {
   const t = useTranslations('admin.core.settings.security.captcha');
   const tCore = useTranslations('core');
-  const { form, onSubmit } = useCaptchaSecurityAdmin();
+  const { form, onSubmit } = useCaptchaSecurityAdmin(data);
 
   return (
     <Form {...form}>
@@ -29,13 +35,7 @@ export const ContentCaptchaSecurityAdmin = () => {
           control={form.control}
           name="type"
           render={({ field }) => {
-            const types = [
-              'none',
-              'recaptcha_v2',
-              'recaptcha_v3',
-              'hcaptcha',
-              'cloudflare_turnstile',
-            ] as const;
+            const types = Object.keys(CaptchaTypeEnum) as CaptchaTypeEnum[];
 
             return (
               <FormFieldRender label={t('type.title')}>
