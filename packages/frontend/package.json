@@ -12,61 +12,61 @@
   },
   "exports": {
     "./middleware": {
-      "types": "./src/middleware.ts",
-      "default": "./dist/middleware.js"
+      "types": "./dist/src/middleware.ts",
+      "default": "./dist/src/middleware.js"
     },
     "./i18n": {
-      "types": "./src/i18n.ts",
-      "default": "./dist/i18n.js"
+      "types": "./dist/src/i18n.ts",
+      "default": "./dist/src/i18n.js"
     },
     "./navigation": {
-      "types": "./src/navigation/index.ts",
-      "default": "./dist/navigation/index.js"
+      "types": "./dist/src/navigation/index.ts",
+      "default": "./dist/src/navigation/index.js"
     },
     "./helpers/*": {
-      "types": "./src/helpers/*.ts",
-      "default": "./dist/helpers/*.js"
+      "types": "./dist/src/helpers/*.ts",
+      "default": "./dist/src/helpers/*.js"
     },
     "./hooks/*": {
-      "types": "./src/hooks/*.ts",
-      "default": "./dist/hooks/*.js"
+      "types": "./dist/src/hooks/*.ts",
+      "default": "./dist/src/hooks/*.js"
     },
     "./views/*": {
-      "types": "./src/views/*.tsx",
-      "default": "./dist/views/*.jsx"
+      "types": "./dist/src/views/*.tsx",
+      "default": "./dist/src/views/*.js"
     },
     "./admin/*": {
-      "types": "./src/views/admin/views/*.tsx",
-      "default": "./dist/views/admin/views/*.jsx"
+      "types": "./dist/src/views/admin/views/*.tsx",
+      "default": "./dist/src/views/admin/views/*.js"
     },
     "./theme-tsx/*": {
-      "types": "./src/views/theme/views/*.tsx",
-      "default": "./dist/views/theme/views/*.jsx"
+      "types": "./dist/src/views/theme/views/*.tsx",
+      "default": "./dist/src/views/theme/views/*.js"
     },
     "./theme-ts/*": {
-      "types": "./src/views/theme/views/*.ts",
-      "default": "./dist/views/theme/views/*.js"
+      "types": "./dist/src/views/theme/views/*.ts",
+      "default": "./dist/src/views/theme/views/*.js"
     },
     "./components/*": {
-      "types": "./src/components/*.tsx",
-      "default": "./dist/components/*.jsx"
+      "types": "./dist/src/components/*.tsx",
+      "default": "./dist/src/components/*.js"
     },
     "./editor": {
-      "types": "./src/editor/editor.tsx",
-      "default": "./dist/editor/editor.js"
+      "types": "./dist/src/editor/editor.tsx",
+      "default": "./dist/src/editor/editor.js"
     },
     "./editor/read-only": {
-      "types": "./src/editor/read-only/read-only.tsx",
-      "default": "./dist/editor/read-only/read-only.js"
+      "types": "./dist/src/editor/read-only/read-only.tsx",
+      "default": "./dist/src/editor/read-only/read-only.js"
     },
     "./graphql/*": {
-      "types": "./src/graphql/*.ts",
-      "default": "./dist/graphql/*.js"
+      "types": "./dist/src/graphql/*.ts",
+      "default": "./dist/src/graphql/*.js"
     }
   },
   "scripts": {
-    "build": "tsc",
-    "dev": "tsc -w",
+    "build": "tsc && swc src -d ./dist --config-file .swcrc",
+    "dev": "pnpm build -w",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "codegen": "graphql-codegen --config codegen.ts"
@@ -76,6 +76,8 @@
     "@graphql-codegen/typescript": "^4.0.9",
     "@graphql-codegen/typescript-document-nodes": "^4.0.9",
     "@graphql-codegen/typescript-operations": "^4.2.3",
+    "@swc/cli": "^0.4.0",
+    "@swc/core": "^1.6.13",
     "@types/node": "^20.14.10",
     "@types/nprogress": "^0.2.3",
     "@types/react": "^18.3.3",

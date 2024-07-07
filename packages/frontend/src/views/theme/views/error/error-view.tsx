@@ -3,15 +3,15 @@
 import { AlertTriangle, Home } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
-import { cn } from '../../../../helpers/classnames';
+import { cn } from '@/helpers/classnames';
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
-} from '../../../../components/ui/card';
-import { Link } from '../../../../navigation';
-import { buttonVariants } from '../../../../components/ui/button';
+} from '@/components/ui/card';
+import { Link } from '@/navigation';
+import { buttonVariants } from '@/components/ui/button';
 
 export interface ErrorViewProps {
   code: string | '403' | '404' | '500';

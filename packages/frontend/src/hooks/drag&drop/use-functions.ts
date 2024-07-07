@@ -72,6 +72,17 @@ export function buildTree<T extends object>({
   return tree.filter(item => !item.parentId);
 }
 
+interface OnDragMoveArgs extends DragMoveEvent {
+  flattenedItems: FlatTree<object>[];
+  indentationWidth?: number;
+  maxDepth?: number;
+}
+
+interface DragEndArgs<T extends object> extends DragEndEvent {
+  data: WithChildren<T>[];
+  setData: (data: WithChildren<FlatTree<T>>[]) => void;
+}
+
 interface Args<T extends object> {
   data: WithChildren<T>[];
 }
@@ -88,7 +99,6 @@ export function useDragAndDrop<T extends object>({ data }: Args<T>) {
     setActiveId,
     setOverId,
     setProjected,
-    ...rest
   } = useProjection();
   const flattenedItems = flattItems({ data });
   const activeItem = flattenedItems.find(i => i.id === activeId);
@@ -126,12 +136,6 @@ export function useDragAndDrop<T extends object>({ data }: Args<T>) {
     setOverId(active.id);
   };
 
-  interface OnDragMoveArgs extends DragMoveEvent {
-    flattenedItems: FlatTree<object>[];
-    indentationWidth?: number;
-    maxDepth?: number;
-  }
-
   const onDragMove = ({
     delta,
     flattenedItems,
@@ -157,11 +161,6 @@ export function useDragAndDrop<T extends object>({ data }: Args<T>) {
 
     setProjected(currentProjection);
   };
-
-  interface DragEndArgs<T extends object> extends DragEndEvent {
-    data: WithChildren<T>[];
-    setData: (data: WithChildren<FlatTree<T>>[]) => void;
-  }
 
   function onDragEnd<T extends object>({
     active,
@@ -267,6 +266,5 @@ export function useDragAndDrop<T extends object>({ data }: Args<T>) {
     flattenedItems,
     activeItemOverlay: activeId !== null && activeItem,
     sortedIds,
-    ...rest,
   };
 }
