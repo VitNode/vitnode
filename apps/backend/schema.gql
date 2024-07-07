@@ -132,6 +132,10 @@ type FilesAuthorizationCoreSessions {
   total_max_storage: Int!
 }
 
+input FilesEditAdminEditorStyles {
+  allow_type: AllowTypeFilesEnum!
+}
+
 type FilesEditorShowCoreMiddleware {
   allow_type: AllowTypeFilesEnum!
 }
@@ -206,6 +210,7 @@ type Mutation {
   admin__core_staff_administrators__delete(id: Int!): String!
   admin__core_staff_moderators__create(group_id: Int, unrestricted: Boolean!, user_id: Int): ShowAdminStaffModerators!
   admin__core_staff_moderators__delete(id: Int!): String!
+  admin__core_styles__editor__edit(files: FilesEditAdminEditorStyles!, sticky: Boolean!): EditorShowCoreMiddleware!
   admin__core_styles__nav__create(description: [TextLanguageInput!]!, external: Boolean!, href: String!, icon: String, name: [TextLanguageInput!]!): ShowCoreNav!
   admin__core_styles__nav__delete(id: Int!): String!
   admin__core_styles__nav__edit(description: [TextLanguageInput!]!, external: Boolean!, href: String!, icon: String, id: Int!, name: [TextLanguageInput!]!): ShowCoreNav!

@@ -1,10 +1,29 @@
 'use server';
 
-export const mutationApi = async () => {
-  // const config = await getConfigFile();
-  // const newData: ConfigType = {
-  //   ...config,
-  //   editor: variables,
-  // };
-  // fs.writeFileSync(configPath, JSON.stringify(newData, null, 2), 'utf8');
+import { revalidatePath } from 'next/cache';
+import { fetcher } from 'src/graphql/fetcher';
+import {
+  Admin__Core_Styles__Editor__Edit,
+  Admin__Core_Styles__Editor__EditMutation,
+  Admin__Core_Styles__Editor__EditMutationVariables,
+} from 'src/graphql/graphql';
+
+export const mutationApi = async (
+  variables: Admin__Core_Styles__Editor__EditMutationVariables,
+) => {
+  try {
+    const { data } = await fetcher<
+      Admin__Core_Styles__Editor__EditMutation,
+      Admin__Core_Styles__Editor__EditMutationVariables
+    >({
+      query: Admin__Core_Styles__Editor__Edit,
+      variables,
+    });
+
+    revalidatePath('/', 'layout');
+
+    return { data };
+  } catch (error) {
+    return { error };
+  }
 };

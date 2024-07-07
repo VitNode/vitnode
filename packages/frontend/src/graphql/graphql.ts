@@ -154,6 +154,10 @@ export type FilesAuthorizationCoreSessions = {
   total_max_storage: Scalars['Int']['output'];
 };
 
+export type FilesEditAdminEditorStyles = {
+  allow_type: AllowTypeFilesEnum | `${AllowTypeFilesEnum}`;
+};
+
 export type FilesEditorShowCoreMiddleware = {
   __typename?: 'FilesEditorShowCoreMiddleware';
   allow_type: AllowTypeFilesEnum | `${AllowTypeFilesEnum}`;
@@ -235,6 +239,7 @@ export type Mutation = {
   admin__core_staff_administrators__delete: Scalars['String']['output'];
   admin__core_staff_moderators__create: ShowAdminStaffModerators;
   admin__core_staff_moderators__delete: Scalars['String']['output'];
+  admin__core_styles__editor__edit: EditorShowCoreMiddleware;
   admin__core_styles__nav__create: ShowCoreNav;
   admin__core_styles__nav__delete: Scalars['String']['output'];
   admin__core_styles__nav__edit: ShowCoreNav;
@@ -467,6 +472,12 @@ export type MutationAdmin__Core_Staff_Moderators__CreateArgs = {
 
 export type MutationAdmin__Core_Staff_Moderators__DeleteArgs = {
   id: Scalars['Int']['input'];
+};
+
+
+export type MutationAdmin__Core_Styles__Editor__EditArgs = {
+  files: FilesEditAdminEditorStyles;
+  sticky: Scalars['Boolean']['input'];
 };
 
 
@@ -1438,6 +1449,14 @@ export type Admin__Core_Email_Settings__TestMutationVariables = Exact<{
 
 export type Admin__Core_Email_Settings__TestMutation = { __typename?: 'Mutation', admin__core_email_settings__test: string };
 
+export type Admin__Core_Styles__Editor__EditMutationVariables = Exact<{
+  files: FilesEditAdminEditorStyles;
+  sticky: Scalars['Boolean']['input'];
+}>;
+
+
+export type Admin__Core_Styles__Editor__EditMutation = { __typename?: 'Mutation', admin__core_styles__editor__edit: { __typename?: 'EditorShowCoreMiddleware', sticky: boolean } };
+
 export type Admin__Core_Nav_Styles__Change_PositionMutationVariables = Exact<{
   id: Scalars['Int']['input'];
   indexToMove: Scalars['Int']['input'];
@@ -2014,6 +2033,13 @@ export const Admin__Core_Email_Settings__Test = gql`
     subject: $subject
     preview_text: $previewText
   )
+}
+    `;
+export const Admin__Core_Styles__Editor__Edit = gql`
+    mutation Admin__core_styles__editor__edit($files: FilesEditAdminEditorStyles!, $sticky: Boolean!) {
+  admin__core_styles__editor__edit(files: $files, sticky: $sticky) {
+    sticky
+  }
 }
     `;
 export const Admin__Core_Nav_Styles__Change_Position = gql`

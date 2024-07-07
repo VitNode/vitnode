@@ -154,6 +154,10 @@ export type FilesAuthorizationCoreSessions = {
   total_max_storage: Scalars['Int']['output'];
 };
 
+export type FilesEditAdminEditorStyles = {
+  allow_type: AllowTypeFilesEnum | `${AllowTypeFilesEnum}`;
+};
+
 export type FilesEditorShowCoreMiddleware = {
   __typename?: 'FilesEditorShowCoreMiddleware';
   allow_type: AllowTypeFilesEnum | `${AllowTypeFilesEnum}`;
@@ -235,6 +239,7 @@ export type Mutation = {
   admin__core_staff_administrators__delete: Scalars['String']['output'];
   admin__core_staff_moderators__create: ShowAdminStaffModerators;
   admin__core_staff_moderators__delete: Scalars['String']['output'];
+  admin__core_styles__editor__edit: EditorShowCoreMiddleware;
   admin__core_styles__nav__create: ShowCoreNav;
   admin__core_styles__nav__delete: Scalars['String']['output'];
   admin__core_styles__nav__edit: ShowCoreNav;
@@ -467,6 +472,12 @@ export type MutationAdmin__Core_Staff_Moderators__CreateArgs = {
 
 export type MutationAdmin__Core_Staff_Moderators__DeleteArgs = {
   id: Scalars['Int']['input'];
+};
+
+
+export type MutationAdmin__Core_Styles__Editor__EditArgs = {
+  files: FilesEditAdminEditorStyles;
+  sticky: Scalars['Boolean']['input'];
 };
 
 

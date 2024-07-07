@@ -3,10 +3,10 @@ import * as React from 'react';
 import { Core_GlobalQuery } from '../graphql/graphql';
 
 interface Args {
+  config: Core_GlobalQuery['core_middleware__show'];
   defaultLanguage: string;
   languages: Core_GlobalQuery['core_languages__show']['edges'];
   settings: Core_GlobalQuery['core_settings__show'];
-  config: Core_GlobalQuery['core_middleware__show'];
 }
 
 export const GlobalsContext = React.createContext<Args>({
