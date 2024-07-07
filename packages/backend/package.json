@@ -16,7 +16,7 @@
   "scripts": {
     "build": "tsc && swc src -d dist --config-file .swcrc",
     "build:scripts": "tsup",
-    "dev": "pnpm build -w",
+    "dev": "concurrently \"tsc -w\" \"pnpm build -w\"",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
@@ -46,6 +46,7 @@
     "@types/react": "^18.3.3",
     "busboy": "^1.6.0",
     "class-transformer": "^0.5.1",
+    "concurrently": "^8.2.2",
     "dotenv": "^16.4.5",
     "eslint-config-vitnode": "workspace:*",
     "http-errors": "^2.0.0",

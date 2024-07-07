@@ -66,7 +66,7 @@
   },
   "scripts": {
     "build": "tsc && swc src -d ./dist --config-file .swcrc",
-    "dev": "pnpm build -w",
+    "dev": "concurrently \"tsc -w\" \"pnpm build -w\"",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "codegen": "graphql-codegen --config codegen.ts"
@@ -83,6 +83,7 @@
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "clsx": "^2.1.1",
+    "concurrently": "^8.2.2",
     "dotenv": "^16.4.5",
     "eslint-config-vitnode": "workspace:*",
     "graphql": "^16.9.0",
