@@ -3,11 +3,11 @@ import NextTopLoader from 'nextjs-toploader';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { Metadata } from 'next';
-import { getGlobalData } from 'src/graphql/get-global-data';
 
 import { InternalErrorView } from '../global/internal-error/internal-error-view';
 import { RootProviders } from './providers';
 
+import { getGlobalData } from '../../graphql/get-global-data';
 import { CONFIG } from '../../helpers/config-with-env';
 
 export interface RootLayoutProps {
