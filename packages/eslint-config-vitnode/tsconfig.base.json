@@ -12,7 +12,9 @@
     "incremental": true,
     "strictNullChecks": true,
     "strictBindCallApply": false,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
   },
   "exclude": ["node_modules", ".turbo", "dist"]
 }

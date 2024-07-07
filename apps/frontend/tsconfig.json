@@ -7,9 +7,7 @@
     "baseUrl": "./",
     "lib": ["dom", "dom.iterable", "esnext"],
     "noEmit": true,
-    "esModuleInterop": true,
     "moduleResolution": "bundler",
-    "isolatedModules": true,
     "jsx": "preserve",
     "plugins": [
       {

@@ -4,7 +4,7 @@ import { Injectable } from '@nestjs/common';
 
 import { ShowAdminEmailSettingsServiceObj } from './settings/show/dto/show.obj';
 
-import { ABSOLUTE_PATHS_BACKEND } from '../../..';
+import { ABSOLUTE_PATHS_BACKEND } from '@/index';
 
 export interface ShowAdminEmailSettingsServiceObjWithPassword
   extends ShowAdminEmailSettingsServiceObj {
