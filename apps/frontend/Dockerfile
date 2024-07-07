@@ -38,8 +38,6 @@ ENV NEXT_TELEMETRY_DISABLED 1
 
 RUN pnpm turbo build --filter=frontend...
 
-# COPY frontend/utils/config.json ./frontend/utils/config.json
-
 FROM base AS runner
 WORKDIR /app
 
@@ -55,11 +53,9 @@ WORKDIR /app
 # # https://nextjs.org/docs/advanced-features/output-file-tracing
 # COPY --from=installer --chown=nextjs:nodejs /app/frontend/.next/standalone ./
 # COPY --from=installer --chown=nextjs:nodejs /app/frontend/.next/static ./frontend/.next/static
-# COPY --from=installer --chown=nextjs:nodejs /app/frontend/utils/config.json ./frontend/utils/config.json
 
 COPY --from=installer /app/frontend/.next/standalone ./
 COPY --from=installer /app/frontend/.next/static ./frontend/.next/static
-COPY --from=installer /app/frontend/utils/config.json ./frontend/config.json
 
 EXPOSE 3000
 ENV PORT 3000

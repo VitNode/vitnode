@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { getTranslations } from 'next-intl/server';
 import { Metadata } from 'next';
-import { getConfigFile } from 'vitnode-frontend/helpers/config';
+import { getGlobalData } from 'vitnode-frontend/graphql/get-global-data';
 import { AdminLayout } from 'vitnode-frontend/views/admin/layout/admin-layout';
 import { AuthAdminLayout } from 'vitnode-frontend/views/admin/layout/auth/auth-admin-layout';
 
@@ -10,12 +10,12 @@ interface Props {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-  const [config, t] = await Promise.all([
-    getConfigFile(),
+  const [data, t] = await Promise.all([
+    getGlobalData(),
     getTranslations('admin'),
   ]);
 
-  const defaultTitle = `${t('title_short')} - ${config.settings.general.site_name}`;
+  const defaultTitle = `${t('title_short')} - ${data.core_settings__show.site_name}`;
 
   return {
     title: {

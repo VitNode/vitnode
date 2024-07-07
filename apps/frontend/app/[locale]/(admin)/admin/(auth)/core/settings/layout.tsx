@@ -1,20 +1,20 @@
 import { getTranslations } from 'next-intl/server';
 import * as React from 'react';
 import { Metadata } from 'next';
-import { getConfigFile } from 'vitnode-frontend/helpers/config';
+import { getGlobalData } from 'vitnode-frontend/graphql/get-global-data';
 
 interface Props {
   children: React.ReactNode;
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-  const [t, tCore, config] = await Promise.all([
+  const [t, tCore, data] = await Promise.all([
     getTranslations('admin'),
     getTranslations('core.admin'),
-    getConfigFile(),
+    getGlobalData(),
   ]);
 
-  const defaultTitle = `${tCore('nav.settings')} - ${t('title_short')} - ${config.settings.general.site_name}`;
+  const defaultTitle = `${tCore('nav.settings')} - ${t('title_short')} - ${data.core_settings__show.site_name}`;
 
   return {
     title: {

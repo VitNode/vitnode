@@ -10,6 +10,6 @@ mutation Admin__core_email_settings__test(
     from: $from
     message: $message
     subject: $subject
-    previewText: $previewText
+    preview_text: $previewText
   )
 }

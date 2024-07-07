@@ -2,6 +2,13 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+enum AllowTypeFilesEnum {
+  all
+  images
+  images_videos
+  none
+}
+
 type AuthorizationAdminSessionsObj {
   nav: [NavAdminPluginsAuthorization!]!
   user: AuthorizationCurrentUserObj
@@ -103,6 +110,11 @@ type EditAdminSettingsObj {
   site_name: String!
 }
 
+type EditorShowCoreMiddleware {
+  files: FilesEditorShowCoreMiddleware!
+  sticky: Boolean!
+}
+
 type FilesAdminPluginsObj {
   admin_pages: Int!
   admin_templates: Int!
@@ -118,6 +130,14 @@ type FilesAuthorizationCoreSessions {
   max_storage_for_submit: Int!
   space_used: Float!
   total_max_storage: Int!
+}
+
+input FilesEditAdminEditorStyles {
+  allow_type: AllowTypeFilesEnum!
+}
+
+type FilesEditorShowCoreMiddleware {
+  allow_type: AllowTypeFilesEnum!
 }
 
 type GroupUser {
@@ -176,10 +196,7 @@ type Mutation {
   admin__core_main_settings__edit(site_copyright: [TextLanguageInput!]!, site_description: [TextLanguageInput!]!, site_name: String!, site_short_name: String!): EditAdminSettingsObj!
   admin__core_manifest_metadata__edit(background_color: String!, display: String!, start_url: String!, theme_color: String!): ShowAdminManifestMetadataObj!
   admin__core_members__edit(birthday: DateTime!, email: String!, first_name: String!, id: Int!, last_name: String!, name: String!, newsletter: Boolean!): EditAdminMembersObj!
-  admin__core_nav__change_position(id: Int!, index_to_move: Int!, parent_id: Int!): String!
-  admin__core_nav__create(description: [TextLanguageInput!]!, external: Boolean!, href: String!, icon: String, name: [TextLanguageInput!]!): ShowCoreNav!
-  admin__core_nav__delete(id: Int!): String!
-  admin__core_nav__edit(description: [TextLanguageInput!]!, external: Boolean!, href: String!, icon: String, id: Int!, name: [TextLanguageInput!]!): ShowCoreNav!
+  admin__core_nav_styles__change_position(id: Int!, index_to_move: Int!, parent_id: Int!): String!
   admin__core_plugins__create(author: String!, author_url: String, code: String!, description: String, name: String!, support_url: String!): ShowAdminPlugins!
   admin__core_plugins__delete(code: String!): String!
   admin__core_plugins__download(code: String!, version: String, version_code: Int): String!
@@ -193,6 +210,10 @@ type Mutation {
   admin__core_staff_administrators__delete(id: Int!): String!
   admin__core_staff_moderators__create(group_id: Int, unrestricted: Boolean!, user_id: Int): ShowAdminStaffModerators!
   admin__core_staff_moderators__delete(id: Int!): String!
+  admin__core_styles__editor__edit(files: FilesEditAdminEditorStyles!, sticky: Boolean!): EditorShowCoreMiddleware!
+  admin__core_styles__nav__create(description: [TextLanguageInput!]!, external: Boolean!, href: String!, icon: String, name: [TextLanguageInput!]!): ShowCoreNav!
+  admin__core_styles__nav__delete(id: Int!): String!
+  admin__core_styles__nav__edit(description: [TextLanguageInput!]!, external: Boolean!, href: String!, icon: String, id: Int!, name: [TextLanguageInput!]!): ShowCoreNav!
   admin__core_theme_editor__edit(colors: ColorsEditAdminThemeEditor!): String!
   admin__install__create_database: String!
   admin_sessions__sign_out: String!
@@ -255,6 +276,11 @@ type Query {
   core_sessions__devices__show: [ShowCoreSessionDevicesObj!]!
   core_settings__show: ShowSettingsObj!
   core_theme_editor__show: ShowCoreThemeEditorObj!
+}
+
+type RebuildRequiredEditorShowCoreMiddleware {
+  langs: Boolean!
+  plugins: Boolean!
 }
 
 type ShowAdminEmailSettingsServiceObj {
@@ -556,8 +582,10 @@ enum ShowCoreMembersSortingColumnEnum {
 }
 
 type ShowCoreMiddlewareObj {
+  editor: EditorShowCoreMiddleware!
   languages: [LanguagesCoreMiddleware!]!
   plugins: [String!]!
+  rebuild_required: RebuildRequiredEditorShowCoreMiddleware!
 }
 
 type ShowCoreNav {

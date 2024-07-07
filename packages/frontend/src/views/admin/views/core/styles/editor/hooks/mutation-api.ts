@@ -1,17 +1,30 @@
 'use server';
 
-import * as fs from 'fs';
+import { revalidatePath } from 'next/cache';
 
-import { ConfigType } from 'vitnode-shared';
+import { fetcher } from '../../../../../../../graphql/fetcher';
+import {
+  Admin__Core_Styles__Editor__Edit,
+  Admin__Core_Styles__Editor__EditMutation,
+  Admin__Core_Styles__Editor__EditMutationVariables,
+} from '../../../../../../../graphql/graphql';
 
-import { configPath, getConfigFile } from '../../../../../../../helpers/config';
+export const mutationApi = async (
+  variables: Admin__Core_Styles__Editor__EditMutationVariables,
+) => {
+  try {
+    const { data } = await fetcher<
+      Admin__Core_Styles__Editor__EditMutation,
+      Admin__Core_Styles__Editor__EditMutationVariables
+    >({
+      query: Admin__Core_Styles__Editor__Edit,
+      variables,
+    });
 
-export const mutationApi = async (variables: ConfigType['editor']) => {
-  const config = await getConfigFile();
-  const newData: ConfigType = {
-    ...config,
-    editor: variables,
-  };
+    revalidatePath('/', 'layout');
 
-  fs.writeFileSync(configPath, JSON.stringify(newData, null, 2), 'utf8');
+    return { data };
+  } catch (error) {
+    return { error };
+  }
 };

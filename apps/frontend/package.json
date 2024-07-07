@@ -4,8 +4,7 @@
   "author": "Maciej Piotr (aXenDev) Balcerzak",
   "license": "GPL-3.0 license",
   "scripts": {
-    "config:init": "vitnode-frontend init",
-    "dev": "pnpm config:init && next dev --turbo",
+    "dev": "next dev --turbo",
     "dev:turbo": "next dev --turbo",
     "build": "next build",
     "analyze": "cross-env ANALYZE=true pnpm build",

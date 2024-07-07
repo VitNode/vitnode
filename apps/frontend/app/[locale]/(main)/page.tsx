@@ -14,9 +14,7 @@ const getDescription = async ({
   locale: Props['params']['locale'];
 }): Promise<string> => {
   const {
-    data: {
-      core_settings__show: { site_description },
-    },
+    core_settings__show: { site_description },
   } = await getSessionData();
 
   const textFromLang = site_description.find(t => t.language_code === locale);
@@ -37,11 +35,13 @@ export async function generateMetadata({
 }
 
 export default async function Page() {
-  const { default_plugin } = await getSessionData();
+  const {
+    core_sessions__authorization: { plugin_default },
+  } = await getSessionData();
   const PageFromTheme: React.LazyExoticComponent<() => JSX.Element> =
     React.lazy(
       async () =>
-        import(`../../../plugins/${default_plugin}/templates/default-page`),
+        import(`../../../plugins/${plugin_default}/templates/default-page`),
     );
 
   return <PageFromTheme />;
