@@ -16,7 +16,7 @@
   "scripts": {
     "build": "tsc && swc src -d dist --config-file .swcrc",
     "build:scripts": "tsup",
-    "dev": "concurrently \"tsc -w\" \"pnpm build -w\"",
+    "dev": "concurrently \"tsc -w\" \"swc src -d dist --config-file .swcrc -w\"",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
