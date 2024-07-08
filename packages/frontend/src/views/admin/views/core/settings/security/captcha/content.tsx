@@ -47,9 +47,6 @@ export const ContentCaptchaSecurityAdmin = (
                     <RadioGroupItem value="none" id="none" />
                     <Label className="flex flex-col gap-1" htmlFor="none">
                       <span>{t('type.none.title')}</span>
-                      <span className="text-muted-foreground text-sm font-normal">
-                        {t('type.none.title')}
-                      </span>
                     </Label>
                   </div>
 
