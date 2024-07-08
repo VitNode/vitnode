@@ -26,7 +26,6 @@ const config = () => {
     },
     experimental: {
       ppr: true,
-      reactCompiler: true,
     },
     output: 'standalone',
     transpilePackages: ['lucide-react', 'vitnode-shared', 'vitnode-frontend'],

@@ -26,8 +26,6 @@ export const ContentCaptchaSecurityAdmin = (
   const tCore = useTranslations('core');
   const { form, onSubmit } = useCaptchaSecurityAdmin(data);
 
-  console.log(form.formState.isValid);
-
   return (
     <Form {...form}>
       <FormWrapper onSubmit={form.handleSubmit(onSubmit)}>

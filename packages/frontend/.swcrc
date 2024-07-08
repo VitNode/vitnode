@@ -8,15 +8,20 @@
     },
     "parser": {
       "syntax": "typescript",
-      "jsx": true
+      "tsx": true,
+      "decorators": true,
+      "dynamicImport": true
     },
     "transform": {
+      "decoratorMetadata": true,
       "react": {
-        "runtime": "automatic"
+        "runtime": "automatic",
+        "refresh": true
       }
     }
   },
   "module": {
-    "type": "nodenext"
+    "type": "nodenext",
+    "strict": true
   }
 }
