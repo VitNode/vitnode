@@ -2,13 +2,13 @@ import { useTranslations } from 'next-intl';
 
 import { useDownloadPluginAdmin } from './hooks/use-download-plugin-admin';
 
-import { ShowAdminPlugins } from '../../../../../../../../../../graphql/graphql';
+import { ShowAdminPlugins } from '@/graphql/graphql';
 import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '../../../../../../../../../../components/ui/dialog';
+} from '@/components/ui/dialog';
 import {
   Form,
   FormControl,
@@ -16,14 +16,11 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '../../../../../../../../../../components/ui/form';
-import {
-  RadioGroup,
-  RadioGroupItem,
-} from '../../../../../../../../../../components/ui/radio-group';
-import { Label } from '../../../../../../../../../../components/ui/label';
-import { Input } from '../../../../../../../../../../components/ui/input';
-import { Button } from '../../../../../../../../../../components/ui/button';
+} from '@/components/ui/form';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 
 export const ContentDownloadActionDevPluginAdmin = ({
   code,

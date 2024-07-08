@@ -6,16 +6,16 @@ import { useDebouncedCallback } from 'use-debounce';
 
 import { GroupInputContentList } from './list';
 
-import { getGroupsShortApi } from '../../../../graphql/get-groups-short-api';
-import { GroupInputItem } from '../../../../components/ui/user/group-input';
+import { getGroupsShortApi } from '@/graphql/get-groups-short-api';
+import { GroupInputItem } from '@/components/ui/user/group-input';
 import {
   Command,
   CommandList,
   commandInputClassName,
-} from '../../../../components/ui/command';
-import { Input } from '../../../../components/ui/input';
-import { cn } from '../../../../helpers/classnames';
-import { Loader } from '../../../../components/ui/loader';
+} from '@/components/ui/command';
+import { Input } from '@/components/ui/input';
+import { cn } from '@/helpers/classnames';
+import { Loader } from '@/components/ui/loader';
 
 interface Props {
   onSelect: (value: GroupInputItem) => void;

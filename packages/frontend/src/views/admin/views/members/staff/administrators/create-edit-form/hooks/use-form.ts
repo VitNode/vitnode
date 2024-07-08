@@ -6,10 +6,10 @@ import { toast } from 'sonner';
 
 import { mutationApi } from './mutation-api';
 
-import { useTextLang } from '../../../../../../../../hooks/use-text-lang';
-import { useDialog } from '../../../../../../../../components/ui/dialog';
-import { zodInput } from '../../../../../../../../helpers/zod';
-import { ErrorType } from '../../../../../../../../graphql/fetcher';
+import { useTextLang } from '@/hooks/use-text-lang';
+import { useDialog } from '@/components/ui/dialog';
+import { zodInput } from '@/helpers/zod';
+import { ErrorType } from '@/graphql/fetcher';
 
 export const useFormCreateEditFormGroupsMembersAdmin = () => {
   const t = useTranslations('admin.members.staff');

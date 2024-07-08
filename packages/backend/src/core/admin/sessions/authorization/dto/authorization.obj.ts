@@ -1,7 +1,7 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 
-import { AuthorizationCurrentUserObj } from '../../../../sessions/authorization/dto/authorization.obj';
-import { ShowAdminNavPluginsObj } from '../../../plugins/nav/show/dto/show.obj';
+import { ShowAdminNavPluginsObj } from '@/core/admin/plugins/nav/show/dto/show.obj';
+import { AuthorizationCurrentUserObj } from '@/core/sessions/authorization/dto/authorization.obj';
 
 @ObjectType()
 export class NavAdminPluginsAuthorization {

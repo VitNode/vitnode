@@ -5,7 +5,7 @@ import { removeSpecialCharacters } from 'vitnode-shared';
 
 import { SuccessFormSignUp } from './success';
 
-import { useSignUpView } from '../../../../../../../hooks/core/sign/up/use-sign-up-view';
+import { useSignUpView } from '@/hooks/core/sign/up/use-sign-up-view';
 import {
   Form,
   FormControl,
@@ -14,21 +14,18 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '../../../../../../../components/ui/form';
-import {
-  CardContent,
-  CardFooter,
-} from '../../../../../../../components/ui/card';
-import { Input } from '../../../../../../../components/ui/input';
-import { Progress } from '../../../../../../../components/ui/progress';
-import { Checkbox } from '../../../../../../../components/ui/checkbox';
-import { Button } from '../../../../../../../components/ui/button';
+} from '@/components/ui/form';
+import { CardContent, CardFooter } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Progress } from '@/components/ui/progress';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Button } from '@/components/ui/button';
 
 export const FormSignUp = () => {
   const t = useTranslations('core');
-  const { form, onSubmit } = useSignUpView();
+  const { form, onSubmit, isReady, isSuccess } = useSignUpView();
 
-  if (form.formState.isSubmitSuccessful) {
+  if (isSuccess) {
     return <SuccessFormSignUp name={form.watch('name')} />;
   }
 
@@ -161,13 +158,15 @@ export const FormSignUp = () => {
               </FormItem>
             )}
           />
+
+          <div id="vitnode_recaptcha" />
         </CardContent>
 
         <CardFooter>
           <Button
             type="submit"
             className="w-full"
-            disabled={!form.formState.isValid}
+            disabled={!form.formState.isValid || !isReady}
             loading={form.formState.isSubmitting}
           >
             {t('sign_up.form.submit')}

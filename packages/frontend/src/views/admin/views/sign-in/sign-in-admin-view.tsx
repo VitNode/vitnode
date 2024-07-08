@@ -1,7 +1,7 @@
 import { FormSignInAdmin } from './form-sign-in-admin';
 
-import { LogoVitNode } from '../../../../components/logo-vitnode';
-import { Card } from '../../../../components/ui/card';
+import { LogoVitNode } from '@/components/logo-vitnode';
+import { Card } from '@/components/ui/card';
 import { PoweredByVitNode } from '../../../global';
 
 export const SignInAdminView = () => {

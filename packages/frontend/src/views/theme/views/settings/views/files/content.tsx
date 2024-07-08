@@ -10,19 +10,19 @@ import { formatBytes } from 'vitnode-shared';
 import {
   Core_Members__Files__ShowQuery,
   ShowCoreFiles,
-} from '../../../../../../graphql/graphql';
-import { CONFIG } from '../../../../../../helpers/config-with-env';
+} from '@/graphql/graphql';
+import { CONFIG } from '@/helpers/config-with-env';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '../../../../../../components/ui/tooltip';
-import { Link } from '../../../../../../navigation';
-import { buttonVariants } from '../../../../../../components/ui/button';
-import { DataTable } from '../../../../../../components/data-table/data-table';
-import { HeaderSortingDataTable } from '../../../../../../components/data-table/header';
-import { DateFormat } from '../../../../../../components/date-format';
+} from '@/components/ui/tooltip';
+import { Link } from '@/navigation';
+import { buttonVariants } from '@/components/ui/button';
+import { DataTable } from '@/components/data-table/data-table';
+import { HeaderSortingDataTable } from '@/components/data-table/header';
+import { DateFormat } from '@/components/date-format';
 
 export const ContentFilesSettings = ({
   core_files__show: { edges, pageInfo },

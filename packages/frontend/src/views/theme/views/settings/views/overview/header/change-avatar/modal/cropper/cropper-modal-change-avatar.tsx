@@ -3,8 +3,8 @@ import { useTranslations } from 'next-intl';
 
 import { useCopperModalChangeAvatar } from './hooks/use-copper-modal-change-avatar';
 
-import { DialogFooter } from '../../../../../../../../../../components/ui/dialog';
-import { Button } from '../../../../../../../../../../components/ui/button';
+import { DialogFooter } from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
 import 'cropperjs/dist/cropper.css';
 
 interface Props {

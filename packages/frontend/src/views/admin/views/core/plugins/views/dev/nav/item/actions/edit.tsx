@@ -4,21 +4,17 @@ import * as React from 'react';
 
 import { useItemNavDevPluginAdmin } from '../hooks/use-item-nav-dev-plugin-admin';
 
-import { ShowAdminNavPluginsObj } from '../../../../../../../../../../graphql/graphql';
-import { FlatTree } from '../../../../../../../../../../helpers/flatten-tree';
-import {
-  Dialog,
-  DialogContent,
-  DialogTrigger,
-} from '../../../../../../../../../../components/ui/dialog';
+import { ShowAdminNavPluginsObj } from '@/graphql/graphql';
+import { FlatTree } from '@/helpers/flatten-tree';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '../../../../../../../../../../components/ui/tooltip';
-import { Button } from '../../../../../../../../../../components/ui/button';
-import { Loader } from '../../../../../../../../../../components/ui/loader';
+} from '@/components/ui/tooltip';
+import { Button } from '@/components/ui/button';
+import { Loader } from '@/components/ui/loader';
 
 const Content = React.lazy(async () =>
   import('../../create-edit/create-edit').then(module => ({

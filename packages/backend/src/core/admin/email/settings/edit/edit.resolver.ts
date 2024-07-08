@@ -5,7 +5,7 @@ import { EditAdminEmailSettingsService } from './edit.service';
 import { EditAdminEmailSettingsServiceArgs } from './dto/edit.args';
 import { ShowAdminEmailSettingsServiceObj } from '../show/dto/show.obj';
 
-import { AdminAuthGuards } from '../../../../../utils';
+import { AdminAuthGuards } from '@/utils';
 
 @Resolver()
 export class EditAdminEmailSettingsResolver {

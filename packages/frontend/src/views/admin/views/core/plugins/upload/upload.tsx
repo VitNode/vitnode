@@ -2,21 +2,16 @@ import { useTranslations } from 'next-intl';
 
 import { useUploadPluginAdmin } from './hooks/use-upload-plugin-admin';
 
-import { ShowAdminPlugins } from '../../../../../../graphql/graphql';
+import { ShowAdminPlugins } from '@/graphql/graphql';
 import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '../../../../../../components/ui/dialog';
-import {
-  Form,
-  FormField,
-  FormItem,
-  FormMessage,
-} from '../../../../../../components/ui/form';
-import { FilesInput } from '../../../../../../components/ui/files-input';
-import { Button } from '../../../../../../components/ui/button';
+} from '@/components/ui/dialog';
+import { Form, FormField, FormItem, FormMessage } from '@/components/ui/form';
+import { FilesInput } from '@/components/ui/files-input';
+import { Button } from '@/components/ui/button';
 
 export interface UploadPluginAdminProps {
   data?: Pick<ShowAdminPlugins, 'code' | 'name'>;

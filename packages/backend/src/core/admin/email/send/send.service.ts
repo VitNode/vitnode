@@ -2,8 +2,8 @@ import { Inject, Injectable } from '@nestjs/common';
 
 import { MailService } from '../mail.service';
 
-import { EmailHelpersServiceType } from '../../../../providers/email/email-helpers.type';
-import { EmailTemplateProps } from '../../../../providers/email/template/email-template';
+import { EmailHelpersServiceType } from '@/providers/email/email-helpers.type';
+import { EmailTemplateProps } from '@/providers/email/template/email-template';
 
 interface Args extends Pick<EmailTemplateProps, 'preview_text' | 'user'> {
   message: JSX.Element | string;

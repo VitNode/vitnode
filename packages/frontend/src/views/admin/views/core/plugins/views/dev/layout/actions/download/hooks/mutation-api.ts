@@ -2,12 +2,12 @@
 
 import { revalidatePath } from 'next/cache';
 
-import { fetcher } from '../../../../../../../../../../../graphql/fetcher';
+import { fetcher } from '@/graphql/fetcher';
 import {
   Admin__Core_Plugins__Download,
   Admin__Core_Plugins__DownloadMutation,
   Admin__Core_Plugins__DownloadMutationVariables,
-} from '../../../../../../../../../../../graphql/graphql';
+} from '@/graphql/graphql';
 
 export const mutationApi = async (
   variables: Admin__Core_Plugins__DownloadMutationVariables,

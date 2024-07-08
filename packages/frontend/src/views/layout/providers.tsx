@@ -3,19 +3,17 @@
 import * as React from 'react';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ConfigType } from 'vitnode-shared';
 
 import { GlobalsContext } from '../../hooks/use-globals';
 import { Toaster } from '../../components/ui/sonner';
-import { Core_MiddlewareQuery } from '../../graphql/graphql';
+import { Core_GlobalQuery } from '../../graphql/graphql';
 
 interface Props {
   children: React.ReactNode;
-  config: ConfigType;
-  middlewareData?: Core_MiddlewareQuery;
+  middlewareData?: Core_GlobalQuery;
 }
 
-export const RootProviders = ({ children, middlewareData, config }: Props) => {
+export const RootProviders = ({ children, middlewareData }: Props) => {
   const [queryClient] = React.useState(
     () =>
       new QueryClient({
@@ -40,7 +38,15 @@ export const RootProviders = ({ children, middlewareData, config }: Props) => {
             middlewareData?.core_languages__show.edges.find(
               lang => lang.default,
             )?.code ?? 'en',
-          config,
+          settings: middlewareData?.core_settings__show ?? {
+            site_copyright: [],
+            site_description: [],
+            site_name: '',
+            site_short_name: '',
+          },
+          config:
+            middlewareData?.core_middleware__show ??
+            ({} as Core_GlobalQuery['core_middleware__show']),
         }}
       >
         <NextThemesProvider

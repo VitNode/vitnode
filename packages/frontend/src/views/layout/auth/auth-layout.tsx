@@ -13,7 +13,7 @@ interface Props {
 
 export const AuthLayout = async ({ children }: Props) => {
   try {
-    const { data } = await getSessionData();
+    const data = await getSessionData();
     // TODO: Improve this check, make this based on the users count
     if (data.core_languages__show.edges.length === 0) {
       redirect('/admin/install');

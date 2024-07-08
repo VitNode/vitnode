@@ -1,22 +1,24 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { ConfigType } from 'vitnode-shared';
 
 import { useEditorAdmin } from './hooks/use-editor-admin';
 import { FilesSectionContentEditorAdmin } from './sections/files';
 
-import { Card } from '../../../../../../components/ui/card';
+import { Card } from '@/components/ui/card';
 import {
   Form,
   FormField,
   FormFieldRender,
   FormWrapper,
-} from '../../../../../../components/ui/form';
-import { Switch } from '../../../../../../components/ui/switch';
-import { Button } from '../../../../../../components/ui/button';
+} from '@/components/ui/form';
+import { Switch } from '@/components/ui/switch';
+import { Button } from '@/components/ui/button';
+import { Core_GlobalQuery } from '@/graphql/graphql';
 
-export const ContentEditorAdmin = (data: ConfigType) => {
+export const ContentEditorAdmin = (
+  data: Core_GlobalQuery['core_middleware__show']['editor'],
+) => {
   const t = useTranslations('admin.core.styles.editor');
   const tCore = useTranslations('core');
   const { form, onSubmit } = useEditorAdmin(data);

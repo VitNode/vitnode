@@ -1,7 +1,7 @@
 import { useTranslations } from 'next-intl';
 
-import { buttonVariants } from '../../../../../components/ui/button';
-import { Link } from '../../../../../navigation';
+import { buttonVariants } from '@/components/ui/button';
+import { Link } from '@/navigation';
 
 export const UserBar = () => {
   const t = useTranslations('core');

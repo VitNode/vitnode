@@ -8,7 +8,7 @@ import {
 } from 'class-validator';
 import { Transform } from 'class-transformer';
 
-import { TransformString } from '../../../../utils';
+import { TransformString } from '@/utils';
 
 export const nameRegex = /^(?!.* {2})[\p{L}\p{N}._@ -]*$/u;
 

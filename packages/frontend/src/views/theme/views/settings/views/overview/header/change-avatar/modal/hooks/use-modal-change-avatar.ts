@@ -5,7 +5,7 @@ import { toast } from 'sonner';
 
 import { mutationApi } from './mutation-api';
 
-import { useDialog } from '../../../../../../../../../../components/ui/dialog';
+import { useDialog } from '@/components/ui/dialog';
 
 interface FormType {
   file: File[];

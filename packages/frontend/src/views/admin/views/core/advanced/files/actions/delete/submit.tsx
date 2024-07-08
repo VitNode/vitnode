@@ -1,7 +1,7 @@
 import { useTranslations } from 'next-intl';
 import { useFormStatus } from 'react-dom';
 
-import { Button } from '../../../../../../../../components/ui/button';
+import { Button } from '@/components/ui/button';
 
 export const SubmitDeleteActionFilesAdvancedCoreAdmin = () => {
   const t = useTranslations('admin.core.advanced.files.delete');

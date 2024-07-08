@@ -7,8 +7,7 @@
     "moduleResolution": "bundler",
     "strict": true,
     "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "skipLibCheck": false
+    "esModuleInterop": true
   },
   "exclude": ["dist"]
 }

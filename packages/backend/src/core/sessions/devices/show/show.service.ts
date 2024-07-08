@@ -3,12 +3,12 @@ import { desc, eq } from 'drizzle-orm';
 
 import { ShowCoreSessionDevicesObj } from './dto/show.obj';
 
-import { DatabaseService } from '../../../../database';
-import { User } from '../../../../decorators';
+import { DatabaseService } from '@/database';
+import { User } from '@/decorators';
 import {
   core_sessions,
   core_sessions_known_devices,
-} from '../../../../templates/core/admin/database/schema/sessions';
+} from '@/templates/core/admin/database/schema/sessions';
 
 @Injectable()
 export class ShowCoreSessionDevicesService {

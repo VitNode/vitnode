@@ -5,7 +5,7 @@ import { EditAdminManifestMetadataService } from './edit.service';
 import { EditAdminManifestMetadataObj } from './dto/edit.args';
 import { ShowAdminManifestMetadataObj } from '../show/dto/show.obj';
 
-import { AdminAuthGuards } from '../../../../../utils';
+import { AdminAuthGuards } from '@/utils';
 
 @Resolver()
 export class EditAdminManifestMetadataResolver {

@@ -7,9 +7,9 @@ import {
   InfoFromTextLanguageContentReturnValues,
 } from './helpers.service';
 
-import { TextLanguageInput } from '../../../../utils';
-import { DatabaseService } from '../../../../database';
-import { CustomError } from '../../../../errors';
+import { TextLanguageInput } from '@/utils';
+import { DatabaseService } from '@/database';
+import { CustomError } from '@/errors';
 
 interface Args<T extends TableConfig> {
   data: TextLanguageInput[];

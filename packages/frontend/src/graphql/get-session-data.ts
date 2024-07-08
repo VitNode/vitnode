@@ -14,8 +14,5 @@ export const getSessionData = async () => {
     cache: 'force-cache',
   });
 
-  return {
-    data,
-    default_plugin: data.core_sessions__authorization.plugin_default,
-  };
+  return data;
 };

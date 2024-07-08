@@ -2,14 +2,10 @@ import { Pencil } from 'lucide-react';
 import * as React from 'react';
 import { useTranslations } from 'next-intl';
 
-import { ShowAdminGroups } from '../../../../../../../graphql/graphql';
-import {
-  Dialog,
-  DialogContent,
-  DialogTrigger,
-} from '../../../../../../../components/ui/dialog';
-import { Button } from '../../../../../../../components/ui/button';
-import { Loader } from '../../../../../../../components/ui/loader';
+import { ShowAdminGroups } from '@/graphql/graphql';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
+import { Loader } from '@/components/ui/loader';
 
 const CreateEditFormGroupsMembersAdmin = React.lazy(async () =>
   import('../../create-edit-form/create-edit-form-groups-members-admin').then(

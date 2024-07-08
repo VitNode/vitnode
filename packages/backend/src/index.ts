@@ -11,6 +11,7 @@ export * from './database';
 export * from './core/admin/sessions/authorization/authorization.service';
 export * from './core/sessions/authorization/internal/internal_authorization.service';
 export * from './core/helpers/text_language/parser/parser.service';
+export * from './core/admin/security/captcha/captcha.service';
 
 // Providers / Helpers
 export * from './providers';

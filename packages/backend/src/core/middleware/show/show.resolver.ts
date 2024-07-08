@@ -1,7 +1,7 @@
 import { Query, Resolver } from '@nestjs/graphql';
 
 import { ShowCoreMiddlewareService } from './show.service';
-import { ShowCoreMiddlewareObj } from './dto/languages.obj';
+import { ShowCoreMiddlewareObj } from './dto/show.obj';
 
 @Resolver()
 export class ShowCoreMiddlewareResolver {
@@ -9,6 +9,6 @@ export class ShowCoreMiddlewareResolver {
 
   @Query(() => ShowCoreMiddlewareObj)
   async core_middleware__show(): Promise<ShowCoreMiddlewareObj> {
-    return this.service.languages();
+    return this.service.show();
   }
 }

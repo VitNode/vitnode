@@ -3,15 +3,15 @@
 import { AlertTriangle, Home } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
-import { cn } from '../../../../helpers/classnames';
+import { cn } from '@/helpers/classnames';
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
-} from '../../../../components/ui/card';
-import { Link } from '../../../../navigation';
-import { buttonVariants } from '../../../../components/ui/button';
+} from '@/components/ui/card';
+import { Link } from '@/navigation';
+import { buttonVariants } from '@/components/ui/button';
 
 export interface ErrorViewProps {
   code: string | '403' | '404' | '500';
@@ -30,8 +30,8 @@ export const ErrorView = ({ className, code }: ErrorViewProps) => {
         <CardContent className="flex flex-col items-center pb-4 text-center">
           <span className="text-muted-foreground">{t('errors.title')}</span>
           <p className="mt-1 text-xl font-semibold tracking-tight">
-            {/* eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error, @typescript-eslint/ban-ts-comment */}
-            {/* @ts-ignore */}
+            {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+            {/* @ts-expect-error */}
             {t(`errors.${code}`)}
           </p>
         </CardContent>

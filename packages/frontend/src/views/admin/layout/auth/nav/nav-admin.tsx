@@ -1,7 +1,7 @@
 import { ItemNavAdmin } from './item/item';
 import { NavAdminWrapper } from './wrapper';
 
-import { getSessionAdminData } from '../../../../../graphql/get-session-admin';
+import { getSessionAdminData } from '@/graphql/get-session-admin';
 
 export const NavAdmin = async () => {
   const data = await getSessionAdminData();
@@ -24,6 +24,10 @@ export const NavAdmin = async () => {
               {
                 id: 'general',
                 href: 'general',
+              },
+              {
+                id: 'security',
+                href: 'security',
               },
               {
                 id: 'metadata',

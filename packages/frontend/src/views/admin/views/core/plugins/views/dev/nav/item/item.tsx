@@ -4,15 +4,15 @@ import { useParams } from 'next/navigation';
 import { ActionsTableNavDevPluginAdmin } from './actions/actions';
 import { useItemNavDevPluginAdmin } from './hooks/use-item-nav-dev-plugin-admin';
 
-import { FlatTree } from '../../../../../../../../../helpers/flatten-tree';
-import { ShowAdminNavPluginsObj } from '../../../../../../../../../graphql/graphql';
+import { FlatTree } from '@/helpers/flatten-tree';
+import { ShowAdminNavPluginsObj } from '@/graphql/graphql';
 
 export const ItemContentNavDevPluginAdmin = (
   data: FlatTree<ShowAdminNavPluginsObj>,
 ) => {
   const { code: pluginCode } = useParams();
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment, @typescript-eslint/prefer-ts-expect-error
-  // @ts-ignore
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
   const t = useTranslations(`${pluginCode}.admin.nav`);
   const tAdmin = useTranslations('admin.core.plugins.dev.nav');
   const tCore = useTranslations('core');
@@ -23,8 +23,8 @@ export const ItemContentNavDevPluginAdmin = (
     <>
       <div className="flex flex-1 flex-col">
         <span className="font-semibold">
-          {/* eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error, @typescript-eslint/ban-ts-comment */}
-          {/* @ts-ignore */}
+          {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+          {/* @ts-expect-error */}
           {t(langKey)}
         </span>
         <p className="text-muted-foreground text-sm">

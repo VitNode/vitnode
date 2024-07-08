@@ -57,6 +57,36 @@
             },
             "send_testing_email": "Send Testing Email"
           }
+        },
+        "security": {
+          "captcha": {
+            "title": "Captcha",
+            "desc": "Captcha is a security feature that requires users to complete a challenge to prove they are human. This helps prevent spam and abuse.",
+            "type": {
+              "title": "Type",
+              "none": {
+                "title": "None"
+              },
+              "recaptcha_v2_invisible": {
+                "title": "reCAPTCHA v2 Invisible",
+                "desc": "Read more on <link>Google reCAPTCHA</link>."
+              },
+              "recaptcha_v2_checkbox": {
+                "title": "reCAPTCHA v2 Checkbox",
+                "desc": "Read more on <link>Google reCAPTCHA</link>."
+              },
+              "recaptcha_v3": {
+                "title": "reCAPTCHA v3",
+                "desc": "Read more on <link>Google reCAPTCHA</link>."
+              },
+              "cloudflare_turnstile": {
+                "title": "Cloudflare Turnstile",
+                "desc": "Read more on <link>Cloudflare Turnstile</link>."
+              }
+            },
+            "site_key": "Site Key",
+            "secret_key": "Secret Key"
+          }
         }
       },
       "metadata": {

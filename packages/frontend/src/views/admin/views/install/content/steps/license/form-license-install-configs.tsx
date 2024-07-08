@@ -10,9 +10,9 @@ import {
   FormField,
   FormItem,
   FormLabel,
-} from '../../../../../../../components/ui/form';
-import { Checkbox } from '../../../../../../../components/ui/checkbox';
-import { Button } from '../../../../../../../components/ui/button';
+} from '@/components/ui/form';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Button } from '@/components/ui/button';
 
 export const FormLicenseInstallConfigs = () => {
   const tCore = useTranslations('core');

@@ -13,6 +13,7 @@
   "cron": "Task Scheduling (CRON)",
   "email": "Email",
   "files": "Files",
+  "captcha": "Captcha",
   "-- For Frontend": {
     "type": "separator",
     "title": "For Frontend"

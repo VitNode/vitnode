@@ -114,6 +114,8 @@ export const HeadingToolbarEditor = () => {
             <SelectItem key={i} value={(i + 2).toString()}>
               <span className="flex flex-wrap items-center gap-2 [&>svg]:size-4">
                 {getHeadingIcon(i + 2)}
+                {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+                {/* @ts-expect-error */}
                 {t(`h${current}`)}
               </span>
             </SelectItem>

@@ -1,7 +1,7 @@
 import { useFormContext } from 'react-hook-form';
 import { useTranslations } from 'next-intl';
 
-import { HeaderContent } from '../../../../../../../components/ui/header-content';
+import { HeaderContent } from '@/components/ui/header-content';
 import {
   FormControl,
   FormDescription,
@@ -9,11 +9,11 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '../../../../../../../components/ui/form';
-import { Switch } from '../../../../../../../components/ui/switch';
-import { Input } from '../../../../../../../components/ui/input';
-import { Checkbox } from '../../../../../../../components/ui/checkbox';
-import { Label } from '../../../../../../../components/ui/label';
+} from '@/components/ui/form';
+import { Switch } from '@/components/ui/switch';
+import { Input } from '@/components/ui/input';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Label } from '@/components/ui/label';
 
 interface Props {
   isGuest?: boolean;

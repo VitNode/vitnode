@@ -7,11 +7,7 @@ import {
 } from '@nestjs/graphql';
 import { Transform } from 'class-transformer';
 
-import {
-  PaginationArgs,
-  SortDirectionEnum,
-  TransformString,
-} from '../../../../../utils';
+import { PaginationArgs, SortDirectionEnum, TransformString } from '@/utils';
 
 export enum ShowAdminMembersSortingColumnEnum {
   name = 'name',

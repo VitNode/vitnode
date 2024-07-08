@@ -5,20 +5,17 @@ import { useTranslations } from 'next-intl';
 import { useSearchParams } from 'next/navigation';
 import { convertDateToUnixTime } from 'vitnode-shared';
 
-import { usePathname, useRouter } from '../../../../../../../../navigation';
+import { usePathname, useRouter } from '@/navigation';
 import {
   Form,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from '../../../../../../../../components/ui/form';
-import { CalendarPicker } from '../../../../../../../../components/ui/calendar-picker';
-import {
-  SheetClose,
-  SheetFooter,
-} from '../../../../../../../../components/ui/sheet';
-import { Button } from '../../../../../../../../components/ui/button';
+} from '@/components/ui/form';
+import { CalendarPicker } from '@/components/ui/calendar-picker';
+import { SheetClose, SheetFooter } from '@/components/ui/sheet';
+import { Button } from '@/components/ui/button';
 
 export const AdvancedFiltersUsersMembersAdmin = () => {
   const t = useTranslations('admin.members.users');

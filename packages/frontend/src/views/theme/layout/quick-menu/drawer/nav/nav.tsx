@@ -5,11 +5,11 @@ import { ChevronDown } from 'lucide-react';
 import { ItemNavDrawerQuickMenu } from './item';
 import { classNameDrawerQuickMenu } from '../drawer';
 
-import { useSession } from '../../../../../../hooks/use-session';
-import { useTextLang } from '../../../../../../hooks/use-text-lang';
-import { cn } from '../../../../../../helpers/classnames';
-import { buttonVariants } from '../../../../../../components/ui/button';
-import { Separator } from '../../../../../../components/ui/separator';
+import { useSession } from '@/hooks/use-session';
+import { useTextLang } from '@/hooks/use-text-lang';
+import { cn } from '@/helpers/classnames';
+import { buttonVariants } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
 
 interface Props {
   navIcons: { icon: React.ReactNode; id: number }[];

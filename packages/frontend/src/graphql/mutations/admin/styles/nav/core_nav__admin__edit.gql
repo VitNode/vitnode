@@ -1,4 +1,4 @@
-mutation Admin__core_nav__edit(
+mutation Admin__core_styles__nav__edit(
   $description: [TextLanguageInput!]!
   $external: Boolean!
   $href: String!
@@ -6,7 +6,7 @@ mutation Admin__core_nav__edit(
   $name: [TextLanguageInput!]!
   $icon: String
 ) {
-  admin__core_nav__edit(
+  admin__core_styles__nav__edit(
     description: $description
     external: $external
     href: $href

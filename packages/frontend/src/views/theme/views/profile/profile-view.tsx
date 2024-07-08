@@ -1,14 +1,14 @@
 import { notFound } from 'next/navigation';
 
-import { fetcher } from '../../../../graphql/fetcher';
+import { fetcher } from '@/graphql/fetcher';
 import {
   Core_Members__Profiles,
   Core_Members__ProfilesQuery,
   Core_Members__ProfilesQueryVariables,
-} from '../../../../graphql/graphql';
-import { getTextLang } from '../../../../hooks/use-text-lang';
-import { AvatarUser } from '../../../../components/ui/user/avatar';
-import { Button } from '../../../../components/ui/button';
+} from '@/graphql/graphql';
+import { getTextLang } from '@/hooks/use-text-lang';
+import { AvatarUser } from '@/components/ui/user/avatar';
+import { Button } from '@/components/ui/button';
 
 const getData = async ({ id }: { id: string }) => {
   const { data } = await fetcher<

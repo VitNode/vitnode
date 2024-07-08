@@ -3,15 +3,15 @@ import { Check } from 'lucide-react';
 
 import { useDownloadLangAdmin } from './hooks/use-download-lang-admin';
 
-import { ShowCoreLanguages } from '../../../../../../../../graphql/graphql';
-import { useSessionAdmin } from '../../../../../../../../hooks/use-session-admin';
-import { Loader } from '../../../../../../../../components/ui/loader';
+import { ShowCoreLanguages } from '@/graphql/graphql';
+import { useSessionAdmin } from '@/hooks/use-session-admin';
+import { Loader } from '@/components/ui/loader';
 import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '../../../../../../../../components/ui/dialog';
+} from '@/components/ui/dialog';
 import {
   Form,
   FormControl,
@@ -20,15 +20,15 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '../../../../../../../../components/ui/form';
-import { Switch } from '../../../../../../../../components/ui/switch';
+} from '@/components/ui/form';
+import { Switch } from '@/components/ui/switch';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '../../../../../../../../components/ui/popover';
-import { Button } from '../../../../../../../../components/ui/button';
-import { cn } from '../../../../../../../../helpers/classnames';
+} from '@/components/ui/popover';
+import { Button } from '@/components/ui/button';
+import { cn } from '@/helpers/classnames';
 import {
   Command,
   CommandEmpty,
@@ -36,7 +36,7 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from '../../../../../../../../components/ui/command';
+} from '@/components/ui/command';
 
 export const ContentDownloadActionsTableLangsCoreAdmin = ({
   code,

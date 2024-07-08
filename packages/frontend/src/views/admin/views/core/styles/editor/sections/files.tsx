@@ -1,17 +1,11 @@
 import { useTranslations } from 'next-intl';
 import { useFormContext } from 'react-hook-form';
 
-import { HeaderContent } from '../../../../../../../components/ui/header-content';
-import { Separator } from '../../../../../../../components/ui/separator';
-import {
-  FormField,
-  FormFieldRender,
-} from '../../../../../../../components/ui/form';
-import {
-  RadioGroup,
-  RadioGroupItem,
-} from '../../../../../../../components/ui/radio-group';
-import { Label } from '../../../../../../../components/ui/label';
+import { HeaderContent } from '@/components/ui/header-content';
+import { Separator } from '@/components/ui/separator';
+import { FormField, FormFieldRender } from '@/components/ui/form';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Label } from '@/components/ui/label';
 
 export const FilesSectionContentEditorAdmin = () => {
   const t = useTranslations('admin.core.styles.editor');

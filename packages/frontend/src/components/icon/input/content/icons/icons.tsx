@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 import { IconInputProps } from '../content';
 
 import { IconClient, IconLucideNames } from '../../../icon-client';
-import { Button } from '../../../../ui/button';
+import { Button } from '@/components/ui/button';
 
 interface Props extends IconInputProps {
   search: string;

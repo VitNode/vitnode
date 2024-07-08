@@ -2,20 +2,16 @@ import { Upload } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import * as React from 'react';
 
-import { ShowAdminPlugins } from '../../../../../../../graphql/graphql';
-import {
-  Dialog,
-  DialogContent,
-  DialogTrigger,
-} from '../../../../../../../components/ui/dialog';
+import { ShowAdminPlugins } from '@/graphql/graphql';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '../../../../../../../components/ui/tooltip';
-import { Button } from '../../../../../../../components/ui/button';
-import { Loader } from '../../../../../../../components/ui/loader';
+} from '@/components/ui/tooltip';
+import { Button } from '@/components/ui/button';
+import { Loader } from '@/components/ui/loader';
 
 export const UploadPluginActionsAdmin = (
   props: Pick<ShowAdminPlugins, 'code' | 'name'>,

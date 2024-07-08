@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl';
 
 import { useManifestCoreAdminView } from './hooks/use-manifest-core-admin-view';
 
-import { Admin__Core_Manifest_Metadata__ShowQuery } from '../../../../../../../graphql/graphql';
+import { Admin__Core_Manifest_Metadata__ShowQuery } from '@/graphql/graphql';
 import {
   Form,
   FormControl,
@@ -14,15 +14,12 @@ import {
   FormItem,
   FormLabel,
   FormWrapper,
-} from '../../../../../../../components/ui/form';
-import {
-  RadioGroup,
-  RadioGroupItem,
-} from '../../../../../../../components/ui/radio-group';
-import { CONFIG } from '../../../../../../../helpers/config-with-env';
-import { Input } from '../../../../../../../components/ui/input';
-import { ColorInput } from '../../../../../../../components/ui/color-input';
-import { Button } from '../../../../../../../components/ui/button';
+} from '@/components/ui/form';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { CONFIG } from '@/helpers/config-with-env';
+import { Input } from '@/components/ui/input';
+import { ColorInput } from '@/components/ui/color-input';
+import { Button } from '@/components/ui/button';
 
 export const ContentManifestMetadataCoreAdmin = (
   props: Admin__Core_Manifest_Metadata__ShowQuery,
@@ -58,13 +55,13 @@ export const ContentManifestMetadataCoreAdmin = (
                       </FormControl>
                       <div>
                         <FormLabel className="font-normal">
-                          {/* eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error, @typescript-eslint/ban-ts-comment */}
-                          {/* @ts-ignore */}
+                          {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+                          {/* @ts-expect-error */}
                           {t(`display.${item}.title`)}
                         </FormLabel>
                         <FormDescription>
-                          {/* eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error, @typescript-eslint/ban-ts-comment */}
-                          {/* @ts-ignore */}
+                          {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+                          {/* @ts-expect-error */}
                           {t(`display.${item}.desc`)}
                         </FormDescription>
                       </div>

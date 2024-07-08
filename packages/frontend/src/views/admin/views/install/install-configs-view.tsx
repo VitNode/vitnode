@@ -4,9 +4,9 @@ import {
   Admin__Install__Layout,
   Admin__Install__LayoutQuery,
   Admin__Install__LayoutQueryVariables,
-} from '../../../../graphql/graphql';
-import { ErrorType, fetcher } from '../../../../graphql/fetcher';
-import { redirect } from '../../../../navigation';
+} from '@/graphql/graphql';
+import { ErrorType, fetcher } from '@/graphql/fetcher';
+import { redirect } from '@/navigation';
 import { InternalErrorView } from '../../../global';
 
 const getData = async () => {

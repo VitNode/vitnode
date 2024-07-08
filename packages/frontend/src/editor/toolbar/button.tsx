@@ -33,6 +33,8 @@ export const ButtonToolbarEditor = ({
       })}
       size="icon"
       onClick={onClick}
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
       ariaLabel={t(name)}
       disabled={disabled}
       {...rest}

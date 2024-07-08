@@ -5,7 +5,7 @@ import { EditAdminPluginsService } from './edit.service';
 import { ShowAdminPlugins } from '../show/dto/show.obj';
 import { EditAdminPluginsArgs } from './dto/edit.args';
 
-import { AdminAuthGuards, OnlyForDevelopment } from '../../../../utils';
+import { AdminAuthGuards, OnlyForDevelopment } from '@/utils';
 
 @Resolver()
 export class EditAdminPluginsResolver {

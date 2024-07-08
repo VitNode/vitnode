@@ -1,12 +1,12 @@
 import { useTranslations } from 'next-intl';
 
-import { useSession } from '../../../../../hooks/use-session';
-import { DrawerClose } from '../../../../../components/ui/drawer';
-import { Link } from '../../../../../navigation';
-import { buttonVariants } from '../../../../../components/ui/button';
-import { LanguageSwitcher } from '../../../../../components/switchers/language-switcher';
-import { ThemeSwitcher } from '../../../../../components/switchers/theme-switcher';
-import { AvatarUser } from '../../../../../components/ui/user/avatar';
+import { useSession } from '@/hooks/use-session';
+import { DrawerClose } from '@/components/ui/drawer';
+import { Link } from '@/navigation';
+import { buttonVariants } from '@/components/ui/button';
+import { LanguageSwitcher } from '@/components/switchers/language-switcher';
+import { ThemeSwitcher } from '@/components/switchers/theme-switcher';
+import { AvatarUser } from '@/components/ui/user/avatar';
 
 export const HeaderDrawerQuickMenu = () => {
   const t = useTranslations('core');

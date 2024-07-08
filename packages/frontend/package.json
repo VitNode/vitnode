@@ -10,96 +10,94 @@
     "url": "git+https://github.com/aXenDeveloper/VitNode.git",
     "directory": "packages/frontend"
   },
-  "bin": {
-    "vitnode-frontend": "dist/scripts/setup.js"
-  },
   "exports": {
     "./middleware": {
-      "types": "./src/middleware.ts",
-      "default": "./dist/middleware.js"
+      "types": "./dist/src/middleware.ts",
+      "default": "./dist/src/middleware.js"
     },
     "./i18n": {
-      "types": "./src/i18n.ts",
-      "default": "./dist/i18n.js"
+      "types": "./dist/src/i18n.ts",
+      "default": "./dist/src/i18n.js"
     },
     "./navigation": {
-      "types": "./src/navigation/index.ts",
-      "default": "./dist/navigation/index.js"
+      "types": "./dist/src/navigation/index.ts",
+      "default": "./dist/src/navigation/index.js"
     },
     "./helpers/*": {
-      "types": "./src/helpers/*.ts",
-      "default": "./dist/helpers/*.js"
+      "types": "./dist/src/helpers/*.ts",
+      "default": "./dist/src/helpers/*.js"
     },
     "./hooks/*": {
-      "types": "./src/hooks/*.ts",
-      "default": "./dist/hooks/*.js"
+      "types": "./dist/src/hooks/*.ts",
+      "default": "./dist/src/hooks/*.js"
     },
     "./views/*": {
-      "types": "./src/views/*.tsx",
-      "default": "./dist/views/*.jsx"
+      "types": "./dist/src/views/*.tsx",
+      "default": "./dist/src/views/*.js"
     },
     "./admin/*": {
-      "types": "./src/views/admin/views/*.tsx",
-      "default": "./dist/views/admin/views/*.jsx"
+      "types": "./dist/src/views/admin/views/*.tsx",
+      "default": "./dist/src/views/admin/views/*.js"
     },
     "./theme-tsx/*": {
-      "types": "./src/views/theme/views/*.tsx",
-      "default": "./dist/views/theme/views/*.jsx"
+      "types": "./dist/src/views/theme/views/*.tsx",
+      "default": "./dist/src/views/theme/views/*.js"
     },
     "./theme-ts/*": {
-      "types": "./src/views/theme/views/*.ts",
-      "default": "./dist/views/theme/views/*.js"
+      "types": "./dist/src/views/theme/views/*.ts",
+      "default": "./dist/src/views/theme/views/*.js"
     },
     "./components/*": {
-      "types": "./src/components/*.tsx",
-      "default": "./dist/components/*.jsx"
+      "types": "./dist/src/components/*.tsx",
+      "default": "./dist/src/components/*.js"
     },
     "./editor": {
-      "types": "./src/editor/editor.tsx",
-      "default": "./dist/editor/editor.js"
+      "types": "./dist/src/editor/editor.tsx",
+      "default": "./dist/src/editor/editor.js"
     },
     "./editor/read-only": {
-      "types": "./src/editor/read-only/read-only.tsx",
-      "default": "./dist/editor/read-only/read-only.js"
+      "types": "./dist/src/editor/read-only/read-only.tsx",
+      "default": "./dist/src/editor/read-only/read-only.js"
     },
     "./graphql/*": {
-      "types": "./src/graphql/*.ts",
-      "default": "./dist/graphql/*.js"
+      "types": "./dist/src/graphql/*.ts",
+      "default": "./dist/src/graphql/*.js"
     }
   },
   "scripts": {
-    "build": "tsc",
-    "build:scripts": "tsup",
-    "dev": "tsc -w",
+    "build": "tsc && swc src -d ./dist --config-file .swcrc",
+    "dev": "concurrently \"tsc -w\" \"swc src -d dist --config-file .swcrc -w\"",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "codegen": "graphql-codegen --config codegen.ts"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^5.0.2",
-    "@graphql-codegen/typescript": "^4.0.8",
-    "@graphql-codegen/typescript-document-nodes": "^4.0.8",
-    "@graphql-codegen/typescript-operations": "^4.2.2",
-    "@types/node": "^20.14.9",
+    "@graphql-codegen/typescript": "^4.0.9",
+    "@graphql-codegen/typescript-document-nodes": "^4.0.9",
+    "@graphql-codegen/typescript-operations": "^4.2.3",
+    "@swc/cli": "^0.4.0",
+    "@swc/core": "^1.6.13",
+    "@types/node": "^20.14.10",
     "@types/nprogress": "^0.2.3",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "clsx": "^2.1.1",
+    "concurrently": "^8.2.2",
     "dotenv": "^16.4.5",
     "eslint-config-vitnode": "workspace:*",
     "graphql": "^16.9.0",
     "graphql-tag": "^2.12.6",
     "tailwind-merge": "^2.3.0",
     "ts-node": "^10.9.2",
-    "tsup": "^8.1.0",
-    "typescript": "^5.5.2"
+    "typescript": "^5.5.3"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.1.0",
     "@dnd-kit/sortable": "^8.0.0",
     "@dnd-kit/utilities": "^3.2.2",
     "@emoji-mart/data": "^1.2.1",
-    "@hookform/resolvers": "^3.6.0",
+    "@hookform/resolvers": "^3.9.0",
     "@radix-ui/react-accordion": "^1.2.0",
     "@radix-ui/react-alert-dialog": "^1.1.1",
     "@radix-ui/react-checkbox": "^1.1.1",
@@ -119,8 +117,8 @@
     "@radix-ui/react-toggle-group": "^1.1.0",
     "@radix-ui/react-tooltip": "^1.1.2",
     "@tailwindcss/container-queries": "^0.1.1",
-    "@tanstack/react-query": "^5.49.0",
-    "@tanstack/react-table": "^8.17.3",
+    "@tanstack/react-query": "^5.50.1",
+    "@tanstack/react-table": "^8.19.2",
     "@tiptap/extension-code-block-lowlight": "^2.4.0",
     "@tiptap/extension-color": "^2.4.0",
     "@tiptap/extension-heading": "^2.4.0",
@@ -137,14 +135,14 @@
     "cmdk": "^1.0.0",
     "cropperjs": "^1.6.2",
     "date-fns": "^3.6.0",
-    "embla-carousel-react": "^8.1.5",
+    "embla-carousel-react": "^8.1.6",
     "emoji-mart": "^5.6.0",
-    "framer-motion": "^11.2.12",
+    "framer-motion": "^11.2.13",
     "html-react-parser": "^5.1.10",
     "lodash": "^4.17.21",
     "lowlight": "^3.1.0",
-    "lucide-react": "^0.399.0",
-    "next": "15.0.0-canary.46",
+    "lucide-react": "^0.400.0",
+    "next": "15.0.0-canary.58",
     "next-intl": "^3.15.3",
     "next-themes": "^0.3.0",
     "nextjs-toploader": "^1.6.12",
@@ -154,8 +152,8 @@
     "react-cropper": "^2.3.3",
     "react-day-picker": "^8.10.1",
     "react-dom": "19.0.0-rc.0",
-    "react-hook-form": "^7.52.0",
-    "react-resizable-panels": "^2.0.19",
+    "react-hook-form": "^7.52.1",
+    "react-resizable-panels": "^2.0.20",
     "react-use": "^17.5.0",
     "react-virtuoso": "^4.7.11",
     "sonner": "^1.5.0",

@@ -5,12 +5,12 @@ import { removeSpecialCharacters } from 'vitnode-shared';
 
 import { useCreateNavPluginAdmin } from './hooks/use-create-nav-plugin-admin';
 
-import { ShowAdminNavPluginsObj } from '../../../../../../../../../graphql/graphql';
+import { ShowAdminNavPluginsObj } from '@/graphql/graphql';
 import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '../../../../../../../../../components/ui/dialog';
+} from '@/components/ui/dialog';
 import {
   Form,
   FormControl,
@@ -19,17 +19,17 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '../../../../../../../../../components/ui/form';
-import { Input } from '../../../../../../../../../components/ui/input';
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '../../../../../../../../../components/ui/select';
-import { IconInput } from '../../../../../../../../../components/icon/input/icon-input';
-import { Button } from '../../../../../../../../../components/ui/button';
+} from '@/components/ui/select';
+import { IconInput } from '@/components/icon/input/icon-input';
+import { Button } from '@/components/ui/button';
 
 export interface CreateEditNavDevPluginAdminProps {
   dataFromSSR: ShowAdminNavPluginsObj[];
@@ -49,8 +49,8 @@ export const CreateEditNavDevPluginAdmin = ({
   const { form, onSubmit } = useCreateNavPluginAdmin({ data, parentId });
   const { code } = useParams();
   const tPlugin = useTranslations(
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment, @typescript-eslint/prefer-ts-expect-error
-    // @ts-ignore
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     `${Array.isArray(code) ? code[0] : code}.admin.nav`,
   );
   const parentCode = form.watch('parent_code');
@@ -128,8 +128,8 @@ export const CreateEditNavDevPluginAdmin = ({
                             {nav.icon
                               ? icons.find(icon => icon.id === nav.code)?.icon
                               : null}
-                            {/* eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error, @typescript-eslint/ban-ts-comment */}
-                            {/* @ts-ignore */}
+                            {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+                            {/* @ts-expect-error */}
                             <span>{tPlugin(nav.code)}</span>
                           </div>
                         </SelectItem>

@@ -8,16 +8,16 @@ import * as React from 'react';
 import { ItemUserBarAdmin } from './item-user-bar-admin';
 import { mutationApi } from './hooks/mutation-api';
 
-import { useSessionAdmin } from '../../../../../../hooks/use-session-admin';
+import { useSessionAdmin } from '@/hooks/use-session-admin';
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTrigger,
-} from '../../../../../../components/ui/sheet';
-import { Button } from '../../../../../../components/ui/button';
-import { AvatarUser } from '../../../../../../components/ui/user/avatar';
-import { Separator } from '../../../../../../components/ui/separator';
+} from '@/components/ui/sheet';
+import { Button } from '@/components/ui/button';
+import { AvatarUser } from '@/components/ui/user/avatar';
+import { Separator } from '@/components/ui/separator';
 
 interface Props {
   navComponent: React.ReactNode;

@@ -5,8 +5,8 @@ import { UploadAvatarCoreMembersService } from './upload.service';
 import { UploadAvatarCoreMembersArgs } from './dto/upload.args';
 import { UploadAvatarCoreMembersObj } from './dto/upload.obj';
 
-import { AuthGuards } from '../../../../utils';
-import { CurrentUser, User } from '../../../../decorators';
+import { AuthGuards } from '@/utils';
+import { CurrentUser, User } from '@/decorators';
 
 @Resolver()
 export class UploadAvatarCoreMembersResolver {

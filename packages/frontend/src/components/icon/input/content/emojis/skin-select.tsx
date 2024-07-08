@@ -6,9 +6,9 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '../../../../ui/dropdown-menu';
-import { Button } from '../../../../ui/button';
-import { CONFIG } from '../../../../../helpers/config-with-env';
+} from '@/components/ui/dropdown-menu';
+import { Button } from '@/components/ui/button';
+import { CONFIG } from '@/helpers/config-with-env';
 
 const skinToneEmoji = [
   '43.55deg 100% 61.37%',
@@ -64,8 +64,8 @@ export const SkinSelectEmojisContentIconInput = ({
               className="size-5 rounded-md"
               style={{ backgroundColor: `hsl(${skinToneEmoji[index]})` }}
             />
-            {/* eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error, @typescript-eslint/ban-ts-comment */}
-            {/* @ts-ignore */}
+            {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+            {/* @ts-expect-error */}
             <span>{t(`skin.skin_${index}`)}</span>
           </DropdownMenuItem>
         ))}

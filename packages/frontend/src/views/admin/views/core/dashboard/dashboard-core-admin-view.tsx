@@ -1,10 +1,10 @@
 import { AlertTriangle } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 
-import { getSessionAdminData } from '../../../../../graphql/get-session-admin';
-import { HeaderContent } from '../../../../../components/ui/header-content';
-import { CONFIG } from '../../../../../helpers/config-with-env';
-import { Badge } from '../../../../../components/ui/badge';
+import { getSessionAdminData } from '@/graphql/get-session-admin';
+import { HeaderContent } from '@/components/ui/header-content';
+import { CONFIG } from '@/helpers/config-with-env';
+import { Badge } from '@/components/ui/badge';
 import { RebuildRequiredAdmin } from '../../../global/rebuild-required';
 
 export const DashboardCoreAdminView = async () => {

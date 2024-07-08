@@ -6,16 +6,16 @@ import { DeletePluginActionsAdmin } from './delete/delete';
 import { SetDefaultPluginActionsAdmin } from './set-default/set-default';
 import { UploadPluginActionsAdmin } from './upload';
 
-import { Link, usePathname, useRouter } from '../../../../../../../navigation';
-import { ShowAdminPlugins } from '../../../../../../../graphql/graphql';
-import { CONFIG } from '../../../../../../../helpers/config-with-env';
+import { Link, usePathname, useRouter } from '@/navigation';
+import { ShowAdminPlugins } from '@/graphql/graphql';
+import { CONFIG } from '@/helpers/config-with-env';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '../../../../../../../components/ui/dropdown-menu';
-import { Button } from '../../../../../../../components/ui/button';
+} from '@/components/ui/dropdown-menu';
+import { Button } from '@/components/ui/button';
 
 export const ActionsItemPluginsAdmin = (props: ShowAdminPlugins) => {
   const t = useTranslations('admin.core.plugins');

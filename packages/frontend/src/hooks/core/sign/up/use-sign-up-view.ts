@@ -2,16 +2,20 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
+import * as React from 'react';
 import { toast } from 'sonner';
 
 import { mutationApi } from './mutation-api';
 
-import { ErrorType } from '../../../../graphql/fetcher';
+import { ErrorType } from '@/graphql/fetcher';
+import { useCaptcha } from '../../../use-captcha';
 
 const nameRegex = /^(?!.* {2})[\p{L}\p{N}._@ -]*$/u;
 
 export const useSignUpView = () => {
   const t = useTranslations('core');
+  const [isSuccess, setSuccess] = React.useState(false);
+  const { getTokenFromCaptcha, isReady } = useCaptcha();
 
   const formSchema = z.object({
     name: z
@@ -61,15 +65,33 @@ export const useSignUpView = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    const token = await getTokenFromCaptcha();
+    if (!token) {
+      toast.error(t('errors.title'), {
+        description: t('errors.captcha_empty'),
+      });
+
+      return;
+    }
+
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { terms, ...rest } = values;
-    const mutation = await mutationApi(rest);
+    const mutation = await mutationApi({ ...rest, token });
 
     if (mutation.error) {
       const error = mutation.error as ErrorType | undefined;
 
       if (error?.extensions) {
         const { code } = error.extensions;
+
+        if (code === 'CAPTCHA_FAILED') {
+          toast.error(t('errors.title'), {
+            description: t('errors.captcha_failed'),
+          });
+
+          return;
+        }
+
         if (code === 'EMAIL_ALREADY_EXISTS') {
           form.setError(
             'email',
@@ -104,11 +126,17 @@ export const useSignUpView = () => {
           description: t('errors.internal_server_error'),
         });
       }
+
+      return;
     }
+
+    setSuccess(true);
   };
 
   return {
     form,
     onSubmit,
+    isReady,
+    isSuccess,
   };
 };

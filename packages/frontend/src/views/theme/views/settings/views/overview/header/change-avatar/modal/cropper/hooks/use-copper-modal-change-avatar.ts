@@ -5,8 +5,8 @@ import { toast } from 'sonner';
 
 import { mutationApi } from './mutation-api';
 
-import { useSession } from '../../../../../../../../../../../hooks/use-session';
-import { useDialog } from '../../../../../../../../../../../components/ui/dialog';
+import { useSession } from '@/hooks/use-session';
+import { useDialog } from '@/components/ui/dialog';
 
 export const useCopperModalChangeAvatar = () => {
   const t = useTranslations('core');

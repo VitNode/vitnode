@@ -7,8 +7,8 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '../../../../components/ui/popover';
-import { Loader } from '../../../../components/ui/loader';
+} from '@/components/ui/popover';
+import { Loader } from '@/components/ui/loader';
 
 const Content = React.lazy(async () =>
   import('./content').then(module => ({

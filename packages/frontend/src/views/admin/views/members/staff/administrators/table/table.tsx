@@ -10,13 +10,13 @@ import { ActionsTableAdministratorsStaffAdmin } from './actions/actions';
 import {
   Admin__Core_Staff_Administrators__ShowQuery,
   ShowAdminStaffAdministrators,
-} from '../../../../../../../graphql/graphql';
-import { UserLink } from '../../../../../../../components/ui/user/link';
-import { GroupFormat } from '../../../../../../../components/ui/user/group-format';
-import { Badge } from '../../../../../../../components/ui/badge';
-import { HeaderSortingDataTable } from '../../../../../../../components/data-table/header';
-import { DateFormat } from '../../../../../../../components/date-format';
-import { DataTable } from '../../../../../../../components/data-table/data-table';
+} from '@/graphql/graphql';
+import { UserLink } from '@/components/ui/user/link';
+import { GroupFormat } from '@/components/ui/user/group-format';
+import { Badge } from '@/components/ui/badge';
+import { HeaderSortingDataTable } from '@/components/data-table/header';
+import { DateFormat } from '@/components/date-format';
+import { DataTable } from '@/components/data-table/data-table';
 
 export const TableAdministratorsStaffAdmin = ({
   admin__core_staff_administrators__show: { edges, pageInfo },

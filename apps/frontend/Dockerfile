@@ -1,5 +1,5 @@
 FROM node:20-alpine AS base
-RUN npm i -g pnpm@9.4.0
+RUN npm i -g pnpm@9.5.0
 
 FROM base AS builder
 # Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
@@ -38,8 +38,6 @@ ENV NEXT_TELEMETRY_DISABLED 1
 
 RUN pnpm turbo build --filter=frontend...
 
-# COPY frontend/utils/config.json ./frontend/utils/config.json
-
 FROM base AS runner
 WORKDIR /app
 
@@ -55,11 +53,9 @@ WORKDIR /app
 # # https://nextjs.org/docs/advanced-features/output-file-tracing
 # COPY --from=installer --chown=nextjs:nodejs /app/frontend/.next/standalone ./
 # COPY --from=installer --chown=nextjs:nodejs /app/frontend/.next/static ./frontend/.next/static
-# COPY --from=installer --chown=nextjs:nodejs /app/frontend/utils/config.json ./frontend/utils/config.json
 
 COPY --from=installer /app/frontend/.next/standalone ./
 COPY --from=installer /app/frontend/.next/static ./frontend/.next/static
-COPY --from=installer /app/frontend/utils/config.json ./frontend/config.json
 
 EXPOSE 3000
 ENV PORT 3000

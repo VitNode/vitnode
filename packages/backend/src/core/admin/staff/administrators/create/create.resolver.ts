@@ -5,7 +5,7 @@ import { CreateAdminStaffAdministratorsService } from './create.service';
 import { CreateAdminStaffAdministratorsArgs } from './dto/create.args';
 import { ShowAdminStaffAdministrators } from '../show/dto/show.obj';
 
-import { AdminAuthGuards } from '../../../../../utils';
+import { AdminAuthGuards } from '@/utils';
 
 @Resolver()
 export class CreateAdminStaffAdministratorResolver {

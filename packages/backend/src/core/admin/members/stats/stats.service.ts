@@ -3,7 +3,7 @@ import { sql } from 'drizzle-orm';
 
 import { SignUpStatsAdminMembers } from './dto/stats.obj';
 
-import { DatabaseService } from '../../../../database';
+import { DatabaseService } from '@/database';
 
 @Injectable()
 export class StatsAdminMembersService {

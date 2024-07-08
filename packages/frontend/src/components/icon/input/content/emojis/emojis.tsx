@@ -5,8 +5,8 @@ import { useTranslations } from 'next-intl';
 
 import { IconInputProps } from '../content';
 
-import { Button } from '../../../../ui/button';
-import { cn } from '../../../../../helpers/classnames';
+import { Button } from '@/components/ui/button';
+import { cn } from '@/helpers/classnames';
 
 interface Props extends Omit<IconInputProps, 'setOpen'> {
   search: string;
@@ -109,8 +109,8 @@ export const EmojisContentIconInput = ({
               classNameHeaders,
             )}
           >
-            {/* eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error, @typescript-eslint/ban-ts-comment */}
-            {/* @ts-ignore */}
+            {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+            {/* @ts-expect-error */}
             {t(`editor.emoji.categories.${category.id}`)}
           </div>
           <div className="pb-3 pt-1">

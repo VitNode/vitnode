@@ -4,7 +4,7 @@ import { toast } from 'sonner';
 import { SubmitDeleteActionsTableModeratorsStaffAdmin } from './submit';
 import { mutationApi } from './mutation-api';
 
-import { ShowAdminStaffModerators } from '../../../../../../../../../graphql/graphql';
+import { ShowAdminStaffModerators } from '@/graphql/graphql';
 import {
   AlertDialogCancel,
   AlertDialogDescription,
@@ -12,8 +12,8 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   useAlertDialog,
-} from '../../../../../../../../../components/ui/alert-dialog';
-import { Button } from '../../../../../../../../../components/ui/button';
+} from '@/components/ui/alert-dialog';
+import { Button } from '@/components/ui/button';
 
 interface Props {
   data: Pick<ShowAdminStaffModerators, 'id'>;

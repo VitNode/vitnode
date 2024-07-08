@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-import { cn } from '../../../../../../helpers/classnames';
-import { Button, buttonVariants } from '../../../../../../components/ui/button';
-import { Link } from '../../../../../../navigation';
-import { SheetClose } from '../../../../../../components/ui/sheet';
+import { cn } from '@/helpers/classnames';
+import { Button, buttonVariants } from '@/components/ui/button';
+import { Link } from '@/navigation';
+import { SheetClose } from '@/components/ui/sheet';
 
 interface Props {
   children: React.ReactNode;

@@ -1,12 +1,12 @@
 import { getTranslations } from 'next-intl/server';
 
-import { cn } from '../../../../../../../helpers/classnames';
+import { cn } from '@/helpers/classnames';
 import {
   Admin__Core_Plugins__Files,
   Admin__Core_Plugins__FilesQuery,
   Admin__Core_Plugins__FilesQueryVariables,
-} from '../../../../../../../graphql/graphql';
-import { fetcher } from '../../../../../../../graphql/fetcher';
+} from '@/graphql/graphql';
+import { fetcher } from '@/graphql/fetcher';
 
 const getData = async (variables: Admin__Core_Plugins__FilesQueryVariables) => {
   const { data } = await fetcher<
@@ -39,8 +39,8 @@ export const FilesDevPluginAdminView = async ({
           className="flex items-center justify-between gap-2 p-4"
           key={item[0]}
         >
-          {/* eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error, @typescript-eslint/ban-ts-comment */}
-          {/* @ts-ignore */}
+          {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+          {/* @ts-expect-error */}
           {t(item[0])}
 
           <span

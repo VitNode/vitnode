@@ -8,15 +8,15 @@ import {
   AlertDialog,
   AlertDialogContent,
   AlertDialogTrigger,
-} from '../../../../../../../../components/ui/alert-dialog';
+} from '@/components/ui/alert-dialog';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '../../../../../../../../components/ui/tooltip';
-import { Button } from '../../../../../../../../components/ui/button';
-import { Loader } from '../../../../../../../../components/ui/loader';
+} from '@/components/ui/tooltip';
+import { Button } from '@/components/ui/button';
+import { Loader } from '@/components/ui/loader';
 
 const Content = React.lazy(async () =>
   import('./content').then(module => ({

@@ -17,6 +17,14 @@ export type Scalars = {
   Upload: { input: any; output: any; }
 };
 
+export const AllowTypeFilesEnum = {
+  all: 'all',
+  images: 'images',
+  images_videos: 'images_videos',
+  none: 'none'
+} as const;
+
+export type AllowTypeFilesEnum = typeof AllowTypeFilesEnum[keyof typeof AllowTypeFilesEnum];
 export type AuthorizationAdminSessionsObj = {
   __typename?: 'AuthorizationAdminSessionsObj';
   nav: Array<NavAdminPluginsAuthorization>;
@@ -53,6 +61,21 @@ export type AvatarUser = {
   id: Scalars['Int']['output'];
 };
 
+export type CaptchaSecurityCoreMiddleware = {
+  __typename?: 'CaptchaSecurityCoreMiddleware';
+  site_key: Scalars['String']['output'];
+  type: CaptchaTypeEnum | `${CaptchaTypeEnum}`;
+};
+
+export const CaptchaTypeEnum = {
+  cloudflare_turnstile: 'cloudflare_turnstile',
+  none: 'none',
+  recaptcha_v2_checkbox: 'recaptcha_v2_checkbox',
+  recaptcha_v2_invisible: 'recaptcha_v2_invisible',
+  recaptcha_v3: 'recaptcha_v3'
+} as const;
+
+export type CaptchaTypeEnum = typeof CaptchaTypeEnum[keyof typeof CaptchaTypeEnum];
 export type ColorsEditAdminThemeEditor = {
   accent: ThemeVariableInput;
   accent_foreground: ThemeVariableInput;
@@ -121,6 +144,12 @@ export type EditAdminSettingsObj = {
   site_name: Scalars['String']['output'];
 };
 
+export type EditorShowCoreMiddleware = {
+  __typename?: 'EditorShowCoreMiddleware';
+  files: FilesEditorShowCoreMiddleware;
+  sticky: Scalars['Boolean']['output'];
+};
+
 export type FilesAdminPluginsObj = {
   __typename?: 'FilesAdminPluginsObj';
   admin_pages: Scalars['Int']['output'];
@@ -138,6 +167,15 @@ export type FilesAuthorizationCoreSessions = {
   max_storage_for_submit: Scalars['Int']['output'];
   space_used: Scalars['Float']['output'];
   total_max_storage: Scalars['Int']['output'];
+};
+
+export type FilesEditAdminEditorStyles = {
+  allow_type: AllowTypeFilesEnum | `${AllowTypeFilesEnum}`;
+};
+
+export type FilesEditorShowCoreMiddleware = {
+  __typename?: 'FilesEditorShowCoreMiddleware';
+  allow_type: AllowTypeFilesEnum | `${AllowTypeFilesEnum}`;
 };
 
 export type GroupUser = {
@@ -202,10 +240,7 @@ export type Mutation = {
   admin__core_main_settings__edit: EditAdminSettingsObj;
   admin__core_manifest_metadata__edit: ShowAdminManifestMetadataObj;
   admin__core_members__edit: EditAdminMembersObj;
-  admin__core_nav__change_position: Scalars['String']['output'];
-  admin__core_nav__create: ShowCoreNav;
-  admin__core_nav__delete: Scalars['String']['output'];
-  admin__core_nav__edit: ShowCoreNav;
+  admin__core_nav_styles__change_position: Scalars['String']['output'];
   admin__core_plugins__create: ShowAdminPlugins;
   admin__core_plugins__delete: Scalars['String']['output'];
   admin__core_plugins__download: Scalars['String']['output'];
@@ -215,10 +250,15 @@ export type Mutation = {
   admin__core_plugins__nav__delete: Scalars['String']['output'];
   admin__core_plugins__nav__edit: ShowAdminNavPluginsObj;
   admin__core_plugins__upload: ShowAdminPlugins;
+  admin__core_security__captcha__edit: ShowAdminCaptchaSecurityObj;
   admin__core_staff_administrators__create: ShowAdminStaffAdministrators;
   admin__core_staff_administrators__delete: Scalars['String']['output'];
   admin__core_staff_moderators__create: ShowAdminStaffModerators;
   admin__core_staff_moderators__delete: Scalars['String']['output'];
+  admin__core_styles__editor__edit: EditorShowCoreMiddleware;
+  admin__core_styles__nav__create: ShowCoreNav;
+  admin__core_styles__nav__delete: Scalars['String']['output'];
+  admin__core_styles__nav__edit: ShowCoreNav;
   admin__core_theme_editor__edit: Scalars['String']['output'];
   admin__install__create_database: Scalars['String']['output'];
   admin_sessions__sign_out: Scalars['String']['output'];
@@ -257,7 +297,7 @@ export type MutationAdmin__Core_Email_Settings__EditArgs = {
 export type MutationAdmin__Core_Email_Settings__TestArgs = {
   from: Scalars['String']['input'];
   message: Scalars['String']['input'];
-  previewText?: InputMaybe<Scalars['String']['input']>;
+  preview_text?: InputMaybe<Scalars['String']['input']>;
   subject: Scalars['String']['input'];
   to: Scalars['String']['input'];
 };
@@ -346,34 +386,10 @@ export type MutationAdmin__Core_Members__EditArgs = {
 };
 
 
-export type MutationAdmin__Core_Nav__Change_PositionArgs = {
+export type MutationAdmin__Core_Nav_Styles__Change_PositionArgs = {
   id: Scalars['Int']['input'];
   index_to_move: Scalars['Int']['input'];
   parent_id: Scalars['Int']['input'];
-};
-
-
-export type MutationAdmin__Core_Nav__CreateArgs = {
-  description: Array<TextLanguageInput>;
-  external: Scalars['Boolean']['input'];
-  href: Scalars['String']['input'];
-  icon?: InputMaybe<Scalars['String']['input']>;
-  name: Array<TextLanguageInput>;
-};
-
-
-export type MutationAdmin__Core_Nav__DeleteArgs = {
-  id: Scalars['Int']['input'];
-};
-
-
-export type MutationAdmin__Core_Nav__EditArgs = {
-  description: Array<TextLanguageInput>;
-  external: Scalars['Boolean']['input'];
-  href: Scalars['String']['input'];
-  icon?: InputMaybe<Scalars['String']['input']>;
-  id: Scalars['Int']['input'];
-  name: Array<TextLanguageInput>;
 };
 
 
@@ -451,6 +467,13 @@ export type MutationAdmin__Core_Plugins__UploadArgs = {
 };
 
 
+export type MutationAdmin__Core_Security__Captcha__EditArgs = {
+  secret_key: Scalars['String']['input'];
+  site_key: Scalars['String']['input'];
+  type: CaptchaTypeEnum;
+};
+
+
 export type MutationAdmin__Core_Staff_Administrators__CreateArgs = {
   group_id?: InputMaybe<Scalars['Int']['input']>;
   unrestricted: Scalars['Boolean']['input'];
@@ -472,6 +495,36 @@ export type MutationAdmin__Core_Staff_Moderators__CreateArgs = {
 
 export type MutationAdmin__Core_Staff_Moderators__DeleteArgs = {
   id: Scalars['Int']['input'];
+};
+
+
+export type MutationAdmin__Core_Styles__Editor__EditArgs = {
+  files: FilesEditAdminEditorStyles;
+  sticky: Scalars['Boolean']['input'];
+};
+
+
+export type MutationAdmin__Core_Styles__Nav__CreateArgs = {
+  description: Array<TextLanguageInput>;
+  external: Scalars['Boolean']['input'];
+  href: Scalars['String']['input'];
+  icon?: InputMaybe<Scalars['String']['input']>;
+  name: Array<TextLanguageInput>;
+};
+
+
+export type MutationAdmin__Core_Styles__Nav__DeleteArgs = {
+  id: Scalars['Int']['input'];
+};
+
+
+export type MutationAdmin__Core_Styles__Nav__EditArgs = {
+  description: Array<TextLanguageInput>;
+  external: Scalars['Boolean']['input'];
+  href: Scalars['String']['input'];
+  icon?: InputMaybe<Scalars['String']['input']>;
+  id: Scalars['Int']['input'];
+  name: Array<TextLanguageInput>;
 };
 
 
@@ -564,6 +617,7 @@ export type Query = {
   admin__core_plugins__files: FilesAdminPluginsObj;
   admin__core_plugins__nav__show: Array<ShowAdminNavPluginsObj>;
   admin__core_plugins__show: ShowAdminPluginsObj;
+  admin__core_security__captcha__show: ShowAdminCaptchaSecurityObj;
   admin__core_staff_administrators__show: ShowAdminStaffAdministratorsObj;
   admin__core_staff_moderators__show: ShowAdminStaffModeratorsObj;
   admin__install__layout: LayoutAdminInstallObj;
@@ -685,6 +739,24 @@ export type QueryCore_Nav__ShowArgs = {
   cursor?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type RebuildRequiredEditorShowCoreMiddleware = {
+  __typename?: 'RebuildRequiredEditorShowCoreMiddleware';
+  langs: Scalars['Boolean']['output'];
+  plugins: Scalars['Boolean']['output'];
+};
+
+export type SecurityCoreMiddleware = {
+  __typename?: 'SecurityCoreMiddleware';
+  captcha: CaptchaSecurityCoreMiddleware;
+};
+
+export type ShowAdminCaptchaSecurityObj = {
+  __typename?: 'ShowAdminCaptchaSecurityObj';
+  secret_key: Scalars['String']['output'];
+  site_key: Scalars['String']['output'];
+  type: CaptchaTypeEnum | `${CaptchaTypeEnum}`;
 };
 
 export type ShowAdminEmailSettingsServiceObj = {
@@ -1019,8 +1091,11 @@ export const ShowCoreMembersSortingColumnEnum = {
 export type ShowCoreMembersSortingColumnEnum = typeof ShowCoreMembersSortingColumnEnum[keyof typeof ShowCoreMembersSortingColumnEnum];
 export type ShowCoreMiddlewareObj = {
   __typename?: 'ShowCoreMiddlewareObj';
+  editor: EditorShowCoreMiddleware;
   languages: Array<LanguagesCoreMiddleware>;
   plugins: Array<Scalars['String']['output']>;
+  rebuild_required: RebuildRequiredEditorShowCoreMiddleware;
+  security: SecurityCoreMiddleware;
 };
 
 export type ShowCoreNav = {
@@ -1362,6 +1437,15 @@ export type Admin__Core_Plugins__Nav__EditMutationVariables = Exact<{
 
 export type Admin__Core_Plugins__Nav__EditMutation = { __typename?: 'Mutation', admin__core_plugins__nav__edit: { __typename?: 'ShowAdminNavPluginsObj', code: string } };
 
+export type Admin__Core_Security__Captcha__EditMutationVariables = Exact<{
+  secretKey: Scalars['String']['input'];
+  siteKey: Scalars['String']['input'];
+  type: CaptchaTypeEnum;
+}>;
+
+
+export type Admin__Core_Security__Captcha__EditMutation = { __typename?: 'Mutation', admin__core_security__captcha__edit: { __typename?: 'ShowAdminCaptchaSecurityObj', type: CaptchaTypeEnum } };
+
 export type Admin_Sessions__Sign_OutMutationVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -1411,16 +1495,24 @@ export type Admin__Core_Email_Settings__TestMutationVariables = Exact<{
 
 export type Admin__Core_Email_Settings__TestMutation = { __typename?: 'Mutation', admin__core_email_settings__test: string };
 
-export type Admin__Core_Nav__Change_PositionMutationVariables = Exact<{
+export type Admin__Core_Styles__Editor__EditMutationVariables = Exact<{
+  files: FilesEditAdminEditorStyles;
+  sticky: Scalars['Boolean']['input'];
+}>;
+
+
+export type Admin__Core_Styles__Editor__EditMutation = { __typename?: 'Mutation', admin__core_styles__editor__edit: { __typename?: 'EditorShowCoreMiddleware', sticky: boolean } };
+
+export type Admin__Core_Nav_Styles__Change_PositionMutationVariables = Exact<{
   id: Scalars['Int']['input'];
   indexToMove: Scalars['Int']['input'];
   parentId: Scalars['Int']['input'];
 }>;
 
 
-export type Admin__Core_Nav__Change_PositionMutation = { __typename?: 'Mutation', admin__core_nav__change_position: string };
+export type Admin__Core_Nav_Styles__Change_PositionMutation = { __typename?: 'Mutation', admin__core_nav_styles__change_position: string };
 
-export type Admin__Core_Nav__CreateMutationVariables = Exact<{
+export type Admin__Core_Styles__Nav__CreateMutationVariables = Exact<{
   description: Array<TextLanguageInput> | TextLanguageInput;
   external: Scalars['Boolean']['input'];
   href: Scalars['String']['input'];
@@ -1429,16 +1521,16 @@ export type Admin__Core_Nav__CreateMutationVariables = Exact<{
 }>;
 
 
-export type Admin__Core_Nav__CreateMutation = { __typename?: 'Mutation', admin__core_nav__create: { __typename?: 'ShowCoreNav', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
+export type Admin__Core_Styles__Nav__CreateMutation = { __typename?: 'Mutation', admin__core_styles__nav__create: { __typename?: 'ShowCoreNav', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
 
-export type Admin__Core_Nav__DeleteMutationVariables = Exact<{
+export type Admin__Core_Styles__Nav__DeleteMutationVariables = Exact<{
   id: Scalars['Int']['input'];
 }>;
 
 
-export type Admin__Core_Nav__DeleteMutation = { __typename?: 'Mutation', admin__core_nav__delete: string };
+export type Admin__Core_Styles__Nav__DeleteMutation = { __typename?: 'Mutation', admin__core_styles__nav__delete: string };
 
-export type Admin__Core_Nav__EditMutationVariables = Exact<{
+export type Admin__Core_Styles__Nav__EditMutationVariables = Exact<{
   description: Array<TextLanguageInput> | TextLanguageInput;
   external: Scalars['Boolean']['input'];
   href: Scalars['String']['input'];
@@ -1448,7 +1540,7 @@ export type Admin__Core_Nav__EditMutationVariables = Exact<{
 }>;
 
 
-export type Admin__Core_Nav__EditMutation = { __typename?: 'Mutation', admin__core_nav__edit: { __typename?: 'ShowCoreNav', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
+export type Admin__Core_Styles__Nav__EditMutation = { __typename?: 'Mutation', admin__core_styles__nav__edit: { __typename?: 'ShowCoreNav', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
 
 export type Admin__Core_Theme_Editor__EditMutationVariables = Exact<{
   colors: ColorsEditAdminThemeEditor;
@@ -1643,6 +1735,11 @@ export type Admin__Core_Plugins__Nav__ShowQueryVariables = Exact<{
 
 export type Admin__Core_Plugins__Nav__ShowQuery = { __typename?: 'Query', admin__core_plugins__nav__show: Array<{ __typename?: 'ShowAdminNavPluginsObj', code: string, icon?: string | null, href: string, children?: Array<{ __typename?: 'ShowAdminNavPlugins', code: string, href: string, icon?: string | null }> | null }> };
 
+export type Admin__Core_Security__Captcha__ShowQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Admin__Core_Security__Captcha__ShowQuery = { __typename?: 'Query', admin__core_security__captcha__show: { __typename?: 'ShowAdminCaptchaSecurityObj', secret_key: string, site_key: string, type: CaptchaTypeEnum } };
+
 export type Admin__Core_Email_Settings__ShowQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -1668,10 +1765,10 @@ export type Core_Theme_Editor__ShowQueryVariables = Exact<{ [key: string]: never
 
 export type Core_Theme_Editor__ShowQuery = { __typename?: 'Query', core_theme_editor__show: { __typename?: 'ShowCoreThemeEditorObj', colors: { __typename?: 'ColorsShowCoreThemeEditor', background: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, primary: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, secondary: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, primary_foreground: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, secondary_foreground: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, destructive: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, destructive_foreground: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, cover: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, cover_foreground: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, muted: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, muted_foreground: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, accent: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, accent_foreground: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, card: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, border: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } } } } };
 
-export type Core_MiddlewareQueryVariables = Exact<{ [key: string]: never; }>;
+export type Core_GlobalQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Core_MiddlewareQuery = { __typename?: 'Query', core_languages__show: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', default: boolean, code: string, id: number, name: string, timezone: string, enabled: boolean, locale: string, allow_in_input: boolean, time_24: boolean }> }, core_plugins__show: Array<{ __typename?: 'ShowCorePluginsObj', code: string }>, core_settings__show: { __typename?: 'ShowSettingsObj', site_name: string, site_copyright: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, site_description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
+export type Core_GlobalQuery = { __typename?: 'Query', core_languages__show: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', default: boolean, code: string, id: number, name: string, timezone: string, enabled: boolean, locale: string, allow_in_input: boolean, time_24: boolean }> }, core_plugins__show: Array<{ __typename?: 'ShowCorePluginsObj', code: string }>, core_settings__show: { __typename?: 'ShowSettingsObj', site_name: string, site_short_name: string, site_copyright: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, site_description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }, core_middleware__show: { __typename?: 'ShowCoreMiddlewareObj', editor: { __typename?: 'EditorShowCoreMiddleware', sticky: boolean, files: { __typename?: 'FilesEditorShowCoreMiddleware', allow_type: AllowTypeFilesEnum } }, rebuild_required: { __typename?: 'RebuildRequiredEditorShowCoreMiddleware', langs: boolean, plugins: boolean }, security: { __typename?: 'SecurityCoreMiddleware', captcha: { __typename?: 'CaptchaSecurityCoreMiddleware', site_key: string, type: CaptchaTypeEnum } } } };
 
 export type Core_Middleware__ShowQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1934,6 +2031,17 @@ export const Admin__Core_Plugins__Nav__Edit = gql`
   }
 }
     `;
+export const Admin__Core_Security__Captcha__Edit = gql`
+    mutation Admin__core_security__captcha__edit($secretKey: String!, $siteKey: String!, $type: CaptchaTypeEnum!) {
+  admin__core_security__captcha__edit(
+    secret_key: $secretKey
+    site_key: $siteKey
+    type: $type
+  ) {
+    type
+  }
+}
+    `;
 export const Admin_Sessions__Sign_Out = gql`
     mutation Admin_sessions__sign_out {
   admin_sessions__sign_out
@@ -1985,22 +2093,29 @@ export const Admin__Core_Email_Settings__Test = gql`
     from: $from
     message: $message
     subject: $subject
-    previewText: $previewText
+    preview_text: $previewText
   )
 }
     `;
-export const Admin__Core_Nav__Change_Position = gql`
-    mutation Admin__core_nav__change_position($id: Int!, $indexToMove: Int!, $parentId: Int!) {
-  admin__core_nav__change_position(
+export const Admin__Core_Styles__Editor__Edit = gql`
+    mutation Admin__core_styles__editor__edit($files: FilesEditAdminEditorStyles!, $sticky: Boolean!) {
+  admin__core_styles__editor__edit(files: $files, sticky: $sticky) {
+    sticky
+  }
+}
+    `;
+export const Admin__Core_Nav_Styles__Change_Position = gql`
+    mutation Admin__core_nav_styles__change_position($id: Int!, $indexToMove: Int!, $parentId: Int!) {
+  admin__core_nav_styles__change_position(
     id: $id
     index_to_move: $indexToMove
     parent_id: $parentId
   )
 }
     `;
-export const Admin__Core_Nav__Create = gql`
-    mutation Admin__core_nav__create($description: [TextLanguageInput!]!, $external: Boolean!, $href: String!, $name: [TextLanguageInput!]!, $icon: String) {
-  admin__core_nav__create(
+export const Admin__Core_Styles__Nav__Create = gql`
+    mutation Admin__core_styles__nav__create($description: [TextLanguageInput!]!, $external: Boolean!, $href: String!, $name: [TextLanguageInput!]!, $icon: String) {
+  admin__core_styles__nav__create(
     description: $description
     external: $external
     href: $href
@@ -2015,14 +2130,14 @@ export const Admin__Core_Nav__Create = gql`
   }
 }
     `;
-export const Admin__Core_Nav__Delete = gql`
-    mutation Admin__core_nav__delete($id: Int!) {
-  admin__core_nav__delete(id: $id)
+export const Admin__Core_Styles__Nav__Delete = gql`
+    mutation Admin__core_styles__nav__delete($id: Int!) {
+  admin__core_styles__nav__delete(id: $id)
 }
     `;
-export const Admin__Core_Nav__Edit = gql`
-    mutation Admin__core_nav__edit($description: [TextLanguageInput!]!, $external: Boolean!, $href: String!, $id: Int!, $name: [TextLanguageInput!]!, $icon: String) {
-  admin__core_nav__edit(
+export const Admin__Core_Styles__Nav__Edit = gql`
+    mutation Admin__core_styles__nav__edit($description: [TextLanguageInput!]!, $external: Boolean!, $href: String!, $id: Int!, $name: [TextLanguageInput!]!, $icon: String) {
+  admin__core_styles__nav__edit(
     description: $description
     external: $external
     href: $href
@@ -2542,6 +2657,15 @@ export const Admin__Core_Plugins__Nav__Show = gql`
   }
 }
     `;
+export const Admin__Core_Security__Captcha__Show = gql`
+    query Admin__core_security__captcha__show {
+  admin__core_security__captcha__show {
+    secret_key
+    site_key
+    type
+  }
+}
+    `;
 export const Admin__Core_Email_Settings__Show = gql`
     query Admin__core_email_settings__show {
   admin__core_email_settings__show {
@@ -2803,8 +2927,8 @@ export const Core_Theme_Editor__Show = gql`
   }
 }
     `;
-export const Core_Middleware = gql`
-    query Core_middleware {
+export const Core_Global = gql`
+    query Core_global {
   core_languages__show {
     edges {
       default
@@ -2831,6 +2955,25 @@ export const Core_Middleware = gql`
       value
     }
     site_name
+    site_short_name
+  }
+  core_middleware__show {
+    editor {
+      files {
+        allow_type
+      }
+      sticky
+    }
+    rebuild_required {
+      langs
+      plugins
+    }
+    security {
+      captcha {
+        site_key
+        type
+      }
+    }
   }
 }
     `;

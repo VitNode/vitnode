@@ -5,16 +5,16 @@ import { ContentFilesAdvancedCoreAdminView } from './content';
 import {
   SearchParamsPagination,
   getPaginationTool,
-} from '../../../../../../graphql/get-pagination-tool';
+} from '@/graphql/get-pagination-tool';
 import {
   Admin__Core_Files__Show,
   Admin__Core_Files__ShowQuery,
   Admin__Core_Files__ShowQueryVariables,
   ShowCoreFilesSortingColumnEnum,
-} from '../../../../../../graphql/graphql';
-import { HeaderContent } from '../../../../../../components/ui/header-content';
-import { Card } from '../../../../../../components/ui/card';
-import { fetcher } from '../../../../../../graphql/fetcher';
+} from '@/graphql/graphql';
+import { HeaderContent } from '@/components/ui/header-content';
+import { Card } from '@/components/ui/card';
+import { fetcher } from '@/graphql/fetcher';
 
 const getData = async (variables: Admin__Core_Files__ShowQueryVariables) => {
   const { data } = await fetcher<

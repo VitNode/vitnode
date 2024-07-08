@@ -1,23 +1,19 @@
 import * as React from 'react';
 import { getTranslations } from 'next-intl/server';
 
-import { fetcher } from '../../../../../../graphql/fetcher';
+import { fetcher } from '@/graphql/fetcher';
 import {
   Core_Members__Files__Show,
   Core_Members__Files__ShowQuery,
   Core_Members__Files__ShowQueryVariables,
   ShowCoreFilesSortingColumnEnum,
-} from '../../../../../../graphql/graphql';
-import {
-  CardContent,
-  CardDescription,
-  CardHeader,
-} from '../../../../../../components/ui/card';
-import { Loader } from '../../../../../../components/ui/loader';
+} from '@/graphql/graphql';
+import { CardContent, CardDescription, CardHeader } from '@/components/ui/card';
+import { Loader } from '@/components/ui/loader';
 import {
   SearchParamsPagination,
   getPaginationTool,
-} from '../../../../../../graphql/get-pagination-tool';
+} from '@/graphql/get-pagination-tool';
 
 const getData = async (variables: Core_Members__Files__ShowQueryVariables) => {
   const { data } = await fetcher<

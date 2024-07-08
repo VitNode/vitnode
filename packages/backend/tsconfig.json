@@ -10,10 +10,10 @@
     "experimentalDecorators": true,
     "strictNullChecks": false,
     "emitDecoratorMetadata": true,
+    "emitDeclarationOnly": true,
     "paths": {
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src/**/*"],
-  "exclude": ["scripts/**/*"]
+  "include": ["src/**/*", "scripts/**/*"]
 }

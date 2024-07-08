@@ -6,12 +6,14 @@ import {
   Core_Sessions__Sign_Up,
   Core_Sessions__Sign_UpMutation,
   Core_Sessions__Sign_UpMutationVariables,
-} from '../../../../graphql/graphql';
-import { fetcher } from '../../../../graphql/fetcher';
+} from '@/graphql/graphql';
+import { fetcher } from '@/graphql/fetcher';
 
-export const mutationApi = async (
-  variables: Core_Sessions__Sign_UpMutationVariables,
-) => {
+interface Args extends Core_Sessions__Sign_UpMutationVariables {
+  token: string;
+}
+
+export const mutationApi = async (variables: Args) => {
   try {
     const { data } = await fetcher<
       Core_Sessions__Sign_UpMutation,
@@ -19,6 +21,9 @@ export const mutationApi = async (
     >({
       query: Core_Sessions__Sign_Up,
       variables,
+      headers: {
+        'x-vitnode-captcha-token': variables.token,
+      },
     });
 
     revalidatePath('/', 'layout');
