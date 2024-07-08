@@ -17,6 +17,7 @@ import {
 } from '@/components/ui/form';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 
 export const ContentCaptchaSecurityAdmin = (
   data: Admin__Core_Security__Captcha__ShowQuery,
@@ -24,6 +25,8 @@ export const ContentCaptchaSecurityAdmin = (
   const t = useTranslations('admin.core.settings.security.captcha');
   const tCore = useTranslations('core');
   const { form, onSubmit } = useCaptchaSecurityAdmin(data);
+
+  console.log(form.formState.isValid);
 
   return (
     <Form {...form}>
@@ -67,6 +70,26 @@ export const ContentCaptchaSecurityAdmin = (
               </FormFieldRender>
             );
           }}
+        />
+
+        <FormField
+          control={form.control}
+          name="site_key"
+          render={({ field }) => (
+            <FormFieldRender label={t('site_key')}>
+              <Input {...field} />
+            </FormFieldRender>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="secret_key"
+          render={({ field }) => (
+            <FormFieldRender label={t('secret_key')}>
+              <Input {...field} />
+            </FormFieldRender>
+          )}
         />
 
         <Button

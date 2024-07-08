@@ -82,7 +82,9 @@
               "cloudflare_turnstile": {
                 "title": "Cloudflare Turnstile"
               }
-            }
+            },
+            "site_key": "Site Key",
+            "secret_key": "Secret Key"
           }
         }
       },

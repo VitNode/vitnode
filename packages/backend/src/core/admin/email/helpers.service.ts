@@ -1,7 +1,5 @@
 import { join } from 'path';
 
-import { Injectable } from '@nestjs/common';
-
 import { ShowAdminEmailSettingsServiceObj } from './settings/show/dto/show.obj';
 
 import { ABSOLUTE_PATHS_BACKEND } from '@/index';
@@ -11,7 +9,6 @@ export interface ShowAdminEmailSettingsServiceObjWithPassword
   smtp_password: string;
 }
 
-@Injectable()
 export class HelpersAdminEmailSettingsService {
   protected readonly path: string = join(
     ABSOLUTE_PATHS_BACKEND.plugin({ code: 'core' }).root,

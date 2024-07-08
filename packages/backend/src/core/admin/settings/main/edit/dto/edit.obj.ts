@@ -1,5 +1,6 @@
-import { ShowSettingsObj } from '@/core/settings/show/dto/show.obj';
 import { ObjectType, PickType } from '@nestjs/graphql';
+
+import { ShowSettingsObj } from '@/core/settings/show/dto/show.obj';
 
 @ObjectType()
 export class EditAdminSettingsObj extends PickType(ShowSettingsObj, [

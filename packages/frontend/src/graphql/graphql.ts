@@ -251,6 +251,7 @@ export type Mutation = {
   admin__core_plugins__nav__delete: Scalars['String']['output'];
   admin__core_plugins__nav__edit: ShowAdminNavPluginsObj;
   admin__core_plugins__upload: ShowAdminPlugins;
+  admin__core_security__captcha__edit: ShowAdminCaptchaSecurityObj;
   admin__core_staff_administrators__create: ShowAdminStaffAdministrators;
   admin__core_staff_administrators__delete: Scalars['String']['output'];
   admin__core_staff_moderators__create: ShowAdminStaffModerators;
@@ -464,6 +465,13 @@ export type MutationAdmin__Core_Plugins__Nav__EditArgs = {
 export type MutationAdmin__Core_Plugins__UploadArgs = {
   code?: InputMaybe<Scalars['String']['input']>;
   file: Scalars['Upload']['input'];
+};
+
+
+export type MutationAdmin__Core_Security__Captcha__EditArgs = {
+  secret_key: Scalars['String']['input'];
+  site_key: Scalars['String']['input'];
+  type: CaptchaTypeEnum;
 };
 
 
@@ -1430,6 +1438,15 @@ export type Admin__Core_Plugins__Nav__EditMutationVariables = Exact<{
 
 export type Admin__Core_Plugins__Nav__EditMutation = { __typename?: 'Mutation', admin__core_plugins__nav__edit: { __typename?: 'ShowAdminNavPluginsObj', code: string } };
 
+export type Admin__Core_Security__Captcha__EditMutationVariables = Exact<{
+  secretKey: Scalars['String']['input'];
+  siteKey: Scalars['String']['input'];
+  type: CaptchaTypeEnum;
+}>;
+
+
+export type Admin__Core_Security__Captcha__EditMutation = { __typename?: 'Mutation', admin__core_security__captcha__edit: { __typename?: 'ShowAdminCaptchaSecurityObj', type: CaptchaTypeEnum } };
+
 export type Admin_Sessions__Sign_OutMutationVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -2012,6 +2029,17 @@ export const Admin__Core_Plugins__Nav__Edit = gql`
     parent_code: $parentCode
   ) {
     code
+  }
+}
+    `;
+export const Admin__Core_Security__Captcha__Edit = gql`
+    mutation Admin__core_security__captcha__edit($secretKey: String!, $siteKey: String!, $type: CaptchaTypeEnum!) {
+  admin__core_security__captcha__edit(
+    secret_key: $secretKey
+    site_key: $siteKey
+    type: $type
+  ) {
+    type
   }
 }
     `;

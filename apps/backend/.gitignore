@@ -50,3 +50,4 @@ lerna-debug.log*
 /src/plugins/*/admin/database/migrations
 /src/plugins/core/utils/config.json
 /src/plugins/core/utils/email.config.json
+/src/plugins/core/utils/captcha.config.json
