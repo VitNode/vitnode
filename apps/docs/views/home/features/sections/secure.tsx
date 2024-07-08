@@ -19,6 +19,10 @@ export const SecureSectionFeatures = () => {
           id: 2,
           text: 'Protected by Helmet and CORS',
         },
+        {
+          id: 3,
+          text: 'Throttling by NestJS Throttler',
+        },
       ]}
       reverse
     >
