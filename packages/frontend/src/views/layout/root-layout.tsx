@@ -58,7 +58,7 @@ export const RootLayout = async ({
     const middlewareData = await getGlobalData();
 
     return (
-      <html lang={locale} className={className}>
+      <html lang={locale} className={className} suppressHydrationWarning>
         <body>
           <NextTopLoader
             color="hsl(var(--primary))"
@@ -75,7 +75,7 @@ export const RootLayout = async ({
     );
   } catch (e) {
     return (
-      <html lang={locale} className={className}>
+      <html lang={locale} className={className} suppressHydrationWarning>
         <body>
           <RootProviders>
             <NextIntlClientProvider messages={messages}>
