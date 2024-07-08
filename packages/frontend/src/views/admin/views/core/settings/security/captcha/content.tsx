@@ -70,25 +70,29 @@ export const ContentCaptchaSecurityAdmin = (
           }}
         />
 
-        <FormField
-          control={form.control}
-          name="site_key"
-          render={({ field }) => (
-            <FormFieldRender label={t('site_key')}>
-              <Input {...field} />
-            </FormFieldRender>
-          )}
-        />
+        {form.watch('type') !== 'none' && (
+          <>
+            <FormField
+              control={form.control}
+              name="site_key"
+              render={({ field }) => (
+                <FormFieldRender label={t('site_key')}>
+                  <Input {...field} />
+                </FormFieldRender>
+              )}
+            />
 
-        <FormField
-          control={form.control}
-          name="secret_key"
-          render={({ field }) => (
-            <FormFieldRender label={t('secret_key')}>
-              <Input {...field} />
-            </FormFieldRender>
-          )}
-        />
+            <FormField
+              control={form.control}
+              name="secret_key"
+              render={({ field }) => (
+                <FormFieldRender label={t('secret_key')}>
+                  <Input {...field} />
+                </FormFieldRender>
+              )}
+            />
+          </>
+        )}
 
         <Button
           type="submit"

@@ -84,9 +84,9 @@ export const useSignUpView = () => {
       if (error?.extensions) {
         const { code } = error.extensions;
 
-        if (code === 'CAPTCHA_INVALID') {
+        if (code === 'CAPTCHA_FAILED') {
           toast.error(t('errors.title'), {
-            description: t('errors.captcha_invalid'),
+            description: t('errors.captcha_failed'),
           });
 
           return;

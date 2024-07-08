@@ -3,37 +3,52 @@ import * as React from 'react';
 import { useLocale } from 'next-intl';
 import { useTheme } from 'next-themes';
 
+import { useGlobals } from '../use-globals';
+
+import { CaptchaTypeEnum } from '@/graphql/graphql';
+
 export const useCaptcha = () => {
   const locale = useLocale();
   const { resolvedTheme } = useTheme();
   const [isReady, setIsReady] = React.useState(false);
   const [token, setToken] = React.useState<string>('');
-
-  const config: {
-    site_key: string;
-    type: 'recaptcha_v2_checkbox' | 'recaptcha_v2_invisible' | 'recaptcha_v3';
-  } = {
-    site_key: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI',
-    type: 'recaptcha_v2_invisible',
-  };
+  const {
+    config: {
+      security: { captcha: config },
+    },
+  } = useGlobals();
 
   const handleLoaded = () => {
+    const elementId = 'vitnode_recaptcha';
     if (
-      config.type === 'recaptcha_v2_checkbox' ||
-      config.type === 'recaptcha_v2_invisible'
+      config.type === CaptchaTypeEnum.recaptcha_v2_checkbox ||
+      config.type === CaptchaTypeEnum.recaptcha_v2_invisible
     ) {
       // @ts-expect-error
       window.grecaptcha.ready(() => {
         // @ts-expect-error
-        window.grecaptcha.render('vitnode_recaptcha', {
+        window.grecaptcha.render(elementId, {
           sitekey: config.site_key,
           theme: resolvedTheme,
           locale,
-          size: config.type === 'recaptcha_v2_invisible' ? 'invisible' : null,
+          size:
+            config.type === CaptchaTypeEnum.recaptcha_v2_invisible
+              ? 'invisible'
+              : null,
           callback: (token: string) => {
             setToken(token);
           },
         });
+      });
+    } else if (config.type === CaptchaTypeEnum.cloudflare_turnstile) {
+      // @ts-expect-error
+      window.turnstile.render(`#${elementId}`, {
+        sitekey: config.site_key,
+        theme: resolvedTheme,
+        language: locale,
+        callback: (token: string) => {
+          setToken(token);
+        },
       });
     }
 
@@ -43,17 +58,24 @@ export const useCaptcha = () => {
   React.useEffect(() => {
     if (!config.type) return;
 
-    // Load script
-    const script = document.createElement('script');
+    const functionCF = 'cf_handleLoaded';
     const googleCaptchaDomain =
       'https://www.google.com/recaptcha/api.js?hl=${locale}';
+
+    // Load script
+    const script = document.createElement('script');
+
     if (
-      config.type === 'recaptcha_v2_checkbox' ||
-      config.type === 'recaptcha_v2_invisible'
+      config.type === CaptchaTypeEnum.recaptcha_v2_checkbox ||
+      config.type === CaptchaTypeEnum.recaptcha_v2_invisible
     ) {
       script.src = `${googleCaptchaDomain}&render=explicit`;
-    } else if (config.type === 'recaptcha_v3') {
+    } else if (config.type === CaptchaTypeEnum.recaptcha_v3) {
       script.src = `${googleCaptchaDomain}&render=${config.site_key}`;
+    } else if (config.type === CaptchaTypeEnum.cloudflare_turnstile) {
+      window[functionCF] = handleLoaded;
+
+      script.src = `https://challenges.cloudflare.com/turnstile/v0/api.js?onload=${functionCF}`;
     }
     if (!script.src) return;
 
@@ -62,12 +84,13 @@ export const useCaptcha = () => {
 
     return () => {
       script.removeEventListener('load', handleLoaded);
+      window[functionCF] = null;
       document.body.removeChild(script);
     };
   }, []);
 
   const getTokenFromCaptcha = async (): Promise<string> => {
-    if (config.type === 'recaptcha_v3') {
+    if (config.type === CaptchaTypeEnum.recaptcha_v3) {
       // Captcha
       return new Promise<string>(resolve => {
         // @ts-expect-error
@@ -87,14 +110,9 @@ export const useCaptcha = () => {
           resolve('');
         });
       });
-    } else if (
-      config.type === 'recaptcha_v2_checkbox' ||
-      config.type === 'recaptcha_v2_invisible'
-    ) {
-      return token;
     }
 
-    return '';
+    return token;
   };
 
   return { getTokenFromCaptcha, isReady };

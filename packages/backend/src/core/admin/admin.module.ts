@@ -16,10 +16,14 @@ import { AdminThemeEditorModule } from './theme_editor/theme_editor.module';
 import { AdminInstallModule } from './install/install.module';
 import { AdminEmailModule, GlobalAdminEmailModule } from './email/email.module';
 import { AdminStylesModule } from './styles/styles.module';
-import { AdminSecurityModule } from './security/security.module';
+import {
+  AdminSecurityModule,
+  GlobalAdminSecurityModule,
+} from './security/security.module';
 
 @Module({
   imports: [
+    GlobalAdminSecurityModule,
     GlobalAdminSessionsModule,
     GlobalAdminEmailModule,
     AdminSessionsModule,

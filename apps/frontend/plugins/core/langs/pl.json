@@ -353,7 +353,7 @@
       "access_denied": "Brak dostępu",
       "internal_server_error": "Wewnętrzny błąd serwera.",
       "captcha_empty": "To pole jest wymagane.",
-      "captcha_invalid": "Captcha jest nieprawidłowa. Spróbuj ponownie. Jeśli nie widzisz captchy, odśwież stronę.",
+      "captcha_failed": "Captcha jest nieprawidłowa. Spróbuj ponownie. Jeśli nie widzisz captchy, odśwież stronę.",
       "required": "To pole jest wymagane.",
       "min_length": "Minimalna długość to {length} znaków.",
       "max_length": "Maksymalna długość to {length} znaków.",

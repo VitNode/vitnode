@@ -32,7 +32,7 @@ export const useCaptchaSecurityAdmin = ({
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const mutation = await mutationApi({
-      type: 'none',
+      type: values.type,
       secretKey: values.secret_key,
       siteKey: values.site_key,
     });
