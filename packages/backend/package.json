@@ -67,6 +67,7 @@
     "drizzle-orm": "^0.31.2",
     "express": "^4.19.2",
     "graphql": "^16.9.0",
+    "helmet": "^7.1.0",
     "nodemailer": "^6.9.14",
     "pg": "^8.12.0",
     "react": "^18.3.1",

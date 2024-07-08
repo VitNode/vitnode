@@ -84,7 +84,7 @@ const config: DocsThemeConfig = {
     }
 
     return {
-      titleTemplate: 'VitNode - CMS built with NodeJS and React',
+      titleTemplate: 'VitNode',
     };
   },
   sidebar: {

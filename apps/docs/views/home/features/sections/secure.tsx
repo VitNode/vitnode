@@ -15,6 +15,10 @@ export const SecureSectionFeatures = () => {
           id: 1,
           text: 'Captcha protection by Google reCAPTCHA or Cloudflare Turnstile',
         },
+        {
+          id: 2,
+          text: 'Protected by Helmet and CORS',
+        },
       ]}
       reverse
     >

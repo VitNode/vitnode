@@ -1,5 +1,6 @@
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import cookieParser from 'cookie-parser';
+import helmet from 'helmet';
 import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface';
 
 import {
@@ -18,6 +19,7 @@ interface Args {
 
 export const nestjsMainApp = async (app: INestApplication, options?: Args) => {
   app.use(cookieParser());
+  app.use(helmet());
   app.enableCors({
     ...options?.cors,
     credentials: true,
