@@ -31,11 +31,6 @@ query Core_sessions__authorization {
       space_used
     }
   }
-  core_languages__show {
-    edges {
-      code
-    }
-  }
   core_nav__show {
     edges {
       children {

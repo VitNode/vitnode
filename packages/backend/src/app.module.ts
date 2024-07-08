@@ -8,11 +8,14 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ConfigModule } from '@nestjs/config';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
+import { ThrottlerModule } from '@nestjs/throttler';
+import { APP_GUARD } from '@nestjs/core';
 
 import { Ctx } from './utils';
 import { CoreModule } from './core/core.module';
 import { DatabaseModule, DatabaseModuleArgs } from './database/database.module';
 import { GlobalProvidersModule } from './providers/providers.module';
+import { GqlThrottlerGuard } from './utils/guards/gql-throttler.guard';
 
 export interface VitNodePaths {
   envFile: string;
@@ -166,6 +169,12 @@ export class VitNodeCoreModule {
           load: [config],
           envFilePath: paths.envFile,
         }),
+        ThrottlerModule.forRoot([
+          {
+            ttl: 1000,
+            limit: 20,
+          },
+        ]),
         GraphQLModule.forRoot<ApolloDriverConfig>({
           driver: ApolloDriver,
           autoSchemaFile: ABSOLUTE_PATHS_BACKEND.schema,
@@ -173,6 +182,7 @@ export class VitNodeCoreModule {
           playground: false,
           plugins: [ApolloServerPluginLandingPageLocalDefault()],
           context: ({ req, res }): Ctx => ({ req, res }),
+          debug: process.env.NODE_ENV === 'production' ? false : true,
         }),
         ScheduleModule.forRoot(),
         JwtModule.register({ global: true }),
@@ -183,6 +193,12 @@ export class VitNodeCoreModule {
         DatabaseModule.register(database),
         GlobalProvidersModule,
         CoreModule,
+      ],
+      providers: [
+        {
+          provide: APP_GUARD,
+          useClass: GqlThrottlerGuard,
+        },
       ],
     };
   }

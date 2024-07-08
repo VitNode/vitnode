@@ -58,6 +58,7 @@
     "vitnode-shared": "workspace:*"
   },
   "dependencies": {
+    "@nestjs/throttler": "^5.2.0",
     "@react-email/components": "^0.0.21",
     "@react-email/render": "^0.0.16",
     "bcrypt": "^5.1.1",

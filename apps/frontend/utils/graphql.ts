@@ -61,6 +61,21 @@ export type AvatarUser = {
   id: Scalars['Int']['output'];
 };
 
+export type CaptchaSecurityCoreMiddleware = {
+  __typename?: 'CaptchaSecurityCoreMiddleware';
+  site_key: Scalars['String']['output'];
+  type: CaptchaTypeEnum | `${CaptchaTypeEnum}`;
+};
+
+export const CaptchaTypeEnum = {
+  cloudflare_turnstile: 'cloudflare_turnstile',
+  none: 'none',
+  recaptcha_v2_checkbox: 'recaptcha_v2_checkbox',
+  recaptcha_v2_invisible: 'recaptcha_v2_invisible',
+  recaptcha_v3: 'recaptcha_v3'
+} as const;
+
+export type CaptchaTypeEnum = typeof CaptchaTypeEnum[keyof typeof CaptchaTypeEnum];
 export type ColorsEditAdminThemeEditor = {
   accent: ThemeVariableInput;
   accent_foreground: ThemeVariableInput;
@@ -235,6 +250,7 @@ export type Mutation = {
   admin__core_plugins__nav__delete: Scalars['String']['output'];
   admin__core_plugins__nav__edit: ShowAdminNavPluginsObj;
   admin__core_plugins__upload: ShowAdminPlugins;
+  admin__core_security__captcha__edit: ShowAdminCaptchaSecurityObj;
   admin__core_staff_administrators__create: ShowAdminStaffAdministrators;
   admin__core_staff_administrators__delete: Scalars['String']['output'];
   admin__core_staff_moderators__create: ShowAdminStaffModerators;
@@ -451,6 +467,13 @@ export type MutationAdmin__Core_Plugins__UploadArgs = {
 };
 
 
+export type MutationAdmin__Core_Security__Captcha__EditArgs = {
+  secret_key: Scalars['String']['input'];
+  site_key: Scalars['String']['input'];
+  type: CaptchaTypeEnum;
+};
+
+
 export type MutationAdmin__Core_Staff_Administrators__CreateArgs = {
   group_id?: InputMaybe<Scalars['Int']['input']>;
   unrestricted: Scalars['Boolean']['input'];
@@ -594,6 +617,7 @@ export type Query = {
   admin__core_plugins__files: FilesAdminPluginsObj;
   admin__core_plugins__nav__show: Array<ShowAdminNavPluginsObj>;
   admin__core_plugins__show: ShowAdminPluginsObj;
+  admin__core_security__captcha__show: ShowAdminCaptchaSecurityObj;
   admin__core_staff_administrators__show: ShowAdminStaffAdministratorsObj;
   admin__core_staff_moderators__show: ShowAdminStaffModeratorsObj;
   admin__install__layout: LayoutAdminInstallObj;
@@ -721,6 +745,18 @@ export type RebuildRequiredEditorShowCoreMiddleware = {
   __typename?: 'RebuildRequiredEditorShowCoreMiddleware';
   langs: Scalars['Boolean']['output'];
   plugins: Scalars['Boolean']['output'];
+};
+
+export type SecurityCoreMiddleware = {
+  __typename?: 'SecurityCoreMiddleware';
+  captcha: CaptchaSecurityCoreMiddleware;
+};
+
+export type ShowAdminCaptchaSecurityObj = {
+  __typename?: 'ShowAdminCaptchaSecurityObj';
+  secret_key: Scalars['String']['output'];
+  site_key: Scalars['String']['output'];
+  type: CaptchaTypeEnum | `${CaptchaTypeEnum}`;
 };
 
 export type ShowAdminEmailSettingsServiceObj = {
@@ -1059,6 +1095,7 @@ export type ShowCoreMiddlewareObj = {
   languages: Array<LanguagesCoreMiddleware>;
   plugins: Array<Scalars['String']['output']>;
   rebuild_required: RebuildRequiredEditorShowCoreMiddleware;
+  security: SecurityCoreMiddleware;
 };
 
 export type ShowCoreNav = {
