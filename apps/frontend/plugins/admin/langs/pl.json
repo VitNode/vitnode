@@ -68,16 +68,16 @@
                 "title": "Brak"
               },
               "recaptcha_v2_invisible": {
-                "title": "reCAPTCHA v2 Niewidoczna"
+                "title": "reCAPTCHA v2 Niewidoczna",
+                "desc": "Czytaj więcej na <link>Google reCAPTCHA</link>"
               },
               "recaptcha_v2_checkbox": {
-                "title": "reCAPTCHA v2 Checkbox"
-              },
-              "hcaptcha": {
-                "title": "hCaptcha"
+                "title": "reCAPTCHA v2 Checkbox",
+                "desc": "Czytaj więcej na <link>Google reCAPTCHA</link>"
               },
               "cloudflare_turnstile": {
-                "title": "Cloudflare Turnstile"
+                "title": "Cloudflare Turnstile",
+                "desc": "Czytaj więcej na <link>Cloudflare Turnstile</link>"
               }
             },
             "site_key": "Klucz witryny",

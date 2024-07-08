@@ -8,10 +8,10 @@ import { SignUpCoreSessionsArgs } from './dto/sign_up.args';
 import { SignUpCoreSessionsObj } from './dto/sign_up.obj';
 import { AvatarColorService } from './helpers/avatar-color.service';
 
-import { CaptchaCoreCaptchaSecurityService } from '../../admin/security/captcha/captcha.service';
+import { CaptchaCoreCaptchaSecurityService } from '@/core/admin/security/captcha/captcha.service';
 import { DatabaseService } from '../../../database';
 import { core_users } from '../../../templates/core/admin/database/schema/users';
-import { Ctx } from '../../../utils';
+import { Ctx } from '@/utils';
 import { CustomError } from '../../../errors';
 import { getUserIp } from '../../../functions';
 
@@ -55,11 +55,6 @@ export class SignUpCoreSessionsService extends AvatarColorService {
     { req }: Ctx,
   ): Promise<SignUpCoreSessionsObj> {
     await this.captchaService.validateCaptcha({ req });
-
-    throw new CustomError({
-      code: 'NOT_IMPLEMENTED',
-      message: 'Not implemented',
-    });
 
     const email = emailRaw.toLowerCase();
     const checkEmail = await this.databaseService.db.query.core_users.findFirst(

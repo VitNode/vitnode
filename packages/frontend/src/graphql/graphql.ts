@@ -69,7 +69,6 @@ export type CaptchaSecurityCoreMiddleware = {
 
 export const CaptchaTypeEnum = {
   cloudflare_turnstile: 'cloudflare_turnstile',
-  hcaptcha: 'hcaptcha',
   none: 'none',
   recaptcha_v2_checkbox: 'recaptcha_v2_checkbox',
   recaptcha_v2_invisible: 'recaptcha_v2_invisible',

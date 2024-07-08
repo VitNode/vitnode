@@ -1,6 +1,7 @@
-import { EmailsSectionFeatures } from "./sections/emails";
-import { I18nSectionFeatures } from "./sections/i18n";
-import { PluginsSectionFeatures } from "./sections/plugins";
+import { EmailsSectionFeatures } from './sections/emails';
+import { I18nSectionFeatures } from './sections/i18n';
+import { PluginsSectionFeatures } from './sections/plugins';
+import { SecureSectionFeatures } from './sections/secure';
 
 export const FeaturesHome = () => {
   return (
@@ -8,6 +9,7 @@ export const FeaturesHome = () => {
       <PluginsSectionFeatures />
       <EmailsSectionFeatures />
       <I18nSectionFeatures />
+      <SecureSectionFeatures />
     </div>
   );
 };

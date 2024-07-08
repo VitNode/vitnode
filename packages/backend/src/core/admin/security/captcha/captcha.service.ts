@@ -84,7 +84,10 @@ export class CaptchaCoreCaptchaSecurityService extends HelpersAdminCaptchaSecuri
 
   async validateCaptcha({ req }: { req: Ctx['req'] }) {
     const captchaKey = req.headers['x-vitnode-captcha-token'];
-    if (!captchaKey) {
+    const {
+      security: { captcha: config },
+    } = getConfigFile();
+    if (!captchaKey && config.type !== CaptchaTypeEnum.none) {
       throw new CustomError({
         code: 'CAPTCHA_NOT_PROVIDED',
         message: 'Captcha token not provided',

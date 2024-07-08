@@ -1,6 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+import { SquareArrowOutUpRight } from 'lucide-react';
 
 import { useCaptchaSecurityAdmin } from './hooks/use-captcha-security-admin';
 
@@ -18,6 +19,7 @@ import {
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Link } from '@/navigation';
 
 export const ContentCaptchaSecurityAdmin = (
   data: Admin__Core_Security__Captcha__ShowQuery,
@@ -53,17 +55,39 @@ export const ContentCaptchaSecurityAdmin = (
 
                   {types
                     .filter(type => type !== 'none')
-                    .map(type => (
-                      <div key={type} className="flex items-center space-x-2">
-                        <RadioGroupItem value={type} id={type} />
-                        <Label className="flex flex-col gap-1" htmlFor={type}>
-                          <span>{t(`type.${type}.title`)}</span>
-                          <span className="text-muted-foreground text-sm font-normal">
-                            {t(`type.${type}.title`)}
-                          </span>
-                        </Label>
-                      </div>
-                    ))}
+                    .map(type => {
+                      const href = () => {
+                        if (type === CaptchaTypeEnum.cloudflare_turnstile) {
+                          return 'https://www.cloudflare.com/products/turnstile/';
+                        }
+
+                        return 'https://www.google.com/recaptcha/about/';
+                      };
+
+                      return (
+                        <div key={type} className="flex items-center space-x-2">
+                          <RadioGroupItem value={type} id={type} />
+                          <Label className="flex flex-col gap-1" htmlFor={type}>
+                            <span>{t(`type.${type}.title`)}</span>
+                            <span className="text-muted-foreground flex flex-wrap items-center gap-1 text-sm font-normal">
+                              {t.rich(`type.${type}.desc`, {
+                                link: text => (
+                                  <Link
+                                    href={href()}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center gap-1"
+                                  >
+                                    {text}
+                                    <SquareArrowOutUpRight className="size-3" />
+                                  </Link>
+                                ),
+                              })}
+                            </span>
+                          </Label>
+                        </div>
+                      );
+                    })}
                 </RadioGroup>
               </FormFieldRender>
             );

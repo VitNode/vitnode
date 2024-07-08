@@ -48,7 +48,6 @@ type CaptchaSecurityCoreMiddleware {
 
 enum CaptchaTypeEnum {
   cloudflare_turnstile
-  hcaptcha
   none
   recaptcha_v2_checkbox
   recaptcha_v2_invisible

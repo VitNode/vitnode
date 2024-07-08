@@ -13,7 +13,6 @@ export enum CaptchaTypeEnum {
   recaptcha_v2_invisible = 'recaptcha_v2_invisible',
   recaptcha_v2_checkbox = 'recaptcha_v2_checkbox',
   recaptcha_v3 = 'recaptcha_v3',
-  hcaptcha = 'hcaptcha',
   cloudflare_turnstile = 'cloudflare_turnstile',
 }
 

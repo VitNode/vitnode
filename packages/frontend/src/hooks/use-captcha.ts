@@ -3,7 +3,7 @@ import * as React from 'react';
 import { useLocale } from 'next-intl';
 import { useTheme } from 'next-themes';
 
-import { useGlobals } from '../use-globals';
+import { useGlobals } from './use-globals';
 
 import { CaptchaTypeEnum } from '@/graphql/graphql';
 
@@ -11,12 +11,14 @@ export const useCaptcha = () => {
   const locale = useLocale();
   const { resolvedTheme } = useTheme();
   const [isReady, setIsReady] = React.useState(false);
-  const [token, setToken] = React.useState<string>('');
   const {
     config: {
       security: { captcha: config },
     },
   } = useGlobals();
+  const [token, setToken] = React.useState<string>(
+    config.type === CaptchaTypeEnum.none ? 'none' : '',
+  );
 
   const handleLoaded = () => {
     const elementId = 'vitnode_recaptcha';
@@ -56,7 +58,11 @@ export const useCaptcha = () => {
   };
 
   React.useEffect(() => {
-    if (!config.type) return;
+    if (!config.type || config.type === CaptchaTypeEnum.none) {
+      setIsReady(true);
+
+      return;
+    }
 
     const functionCF = 'cf_handleLoaded';
     const googleCaptchaDomain =
