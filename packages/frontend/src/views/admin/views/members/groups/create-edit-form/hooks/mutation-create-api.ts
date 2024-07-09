@@ -3,20 +3,20 @@
 import { revalidatePath } from 'next/cache';
 
 import {
-  Core_Groups__Admin_Create,
-  Core_Groups__Admin_CreateMutation,
-  Core_Groups__Admin_CreateMutationVariables,
+  Admin__Core_Groups__Create,
+  Admin__Core_Groups__CreateMutation,
+  Admin__Core_Groups__CreateMutationVariables,
 } from '@/graphql/graphql';
 import { fetcher } from '@/graphql/fetcher';
 
 export const mutationCreateApi = async (
-  variables: Core_Groups__Admin_CreateMutationVariables,
+  variables: Admin__Core_Groups__CreateMutationVariables,
 ) => {
   await fetcher<
-    Core_Groups__Admin_CreateMutation,
-    Core_Groups__Admin_CreateMutationVariables
+    Admin__Core_Groups__CreateMutation,
+    Admin__Core_Groups__CreateMutationVariables
   >({
-    query: Core_Groups__Admin_Create,
+    query: Admin__Core_Groups__Create,
     variables,
   });
 
