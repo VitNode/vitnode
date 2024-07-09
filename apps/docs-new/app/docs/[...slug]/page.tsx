@@ -2,13 +2,16 @@ import { getPage, getPages } from '@/app/source';
 import type { Metadata } from 'next';
 import { DocsPage, DocsBody } from 'fumadocs-ui/page';
 import { notFound } from 'next/navigation';
+import { utils } from '@/utils/source';
 
 export default async function Page({
   params,
 }: {
   params: { slug?: string[] };
 }) {
-  const page = getPage(params.slug);
+  const page = utils.getPage(params.slug);
+
+  if (!page) notFound();
 
   if (page == null) {
     notFound();

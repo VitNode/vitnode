@@ -1,7 +1,7 @@
 import { type BaseLayoutProps, type DocsLayoutProps } from 'fumadocs-ui/layout';
 import { RootToggle } from 'fumadocs-ui/components/layout/root-toggle';
 import { pageTree } from '@/app/source';
-import { modes } from './utils/modes';
+import { modes } from '../utils/modes';
 
 // shared configuration
 export const baseOptions: BaseLayoutProps = {

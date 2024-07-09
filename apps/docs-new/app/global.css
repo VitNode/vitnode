@@ -11,11 +11,6 @@
     @apply bg-background text-foreground;
   }
 
-  a {
-    @apply text-primary;
-    @apply cursor-pointer;
-  }
-
   :root {
     --background: 220 40% 98%;
     --foreground: 213deg 5% 8%;
@@ -39,30 +34,38 @@
     --radius: 0.5rem;
     --cover: 220 80% 67%;
     --cover-foreground: 210 40% 98%;
+
+    --dev-color: 220 74% 50%;
+    --ui-color: 141 74% 31%;
+    --guides-color: 20 74% 50%;
   }
 
   .dark {
-    --background: 216 32% 7%;
+    --background: 210 32% 7%;
     --foreground: 0 0% 98%;
-    --card: 216 32% 10%;
+    --card: 210 32% 10%;
     --card-foreground: 0 0% 98%;
     /* --popover: var(--card); */
     /* --popover-foreground: var(--card-foreground); */
-    --primary: 216 84% 59%;
-    --primary-foreground: 216 40% 98%;
+    --primary: 210 84% 59%;
+    --primary-foreground: 210 40% 98%;
     --secondary: 222 25% 18%;
     --secondary-foreground: 0 0% 98%;
-    --muted: 216 32% 11%;
-    --muted-foreground: 216 18% 64%;
-    --accent: 216 32% 14%;
+    --muted: 210 32% 11%;
+    --muted-foreground: 210 18% 64%;
+    --accent: 210 32% 14%;
     --accent-foreground: 0 0% 98%;
     --destructive: 359 78% 55%;
     --destructive-foreground: 210 40% 98%;
-    --border: 216 25% 16%;
+    --border: 210 25% 16%;
     /* --input: var(--border); */
     /* --ring: var(--primary); */
-    --cover: 216 64% 39%;
+    --cover: 210 64% 39%;
     --cover-foreground: 210 40% 98%;
+
+    --dev-color: 210 74% 50%;
+    --ui-color: 141 74% 38%;
+    --guides-color: 20 74% 50%;
   }
 }
 
@@ -79,4 +82,16 @@
       display: none;
     }
   }
+}
+
+.dev {
+  --primary: var(--dev-color);
+}
+
+.ui {
+  --primary: var(--ui-color);
+}
+
+.guides {
+  --primary: var(--guides-color);
 }

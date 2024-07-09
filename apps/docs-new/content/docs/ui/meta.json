@@ -1,5 +1,5 @@
 {
-  "title": "default",
+  "title": "ui",
   "root": true,
   "pages": ["---Guide---", "index", "..."]
 }

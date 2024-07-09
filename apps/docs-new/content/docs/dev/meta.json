@@ -1,0 +1,14 @@
+{
+  "title": "dev",
+  "root": true,
+  "pages": [
+    "---Introduction ---",
+    "index",
+    "contribution",
+    "--- API References ---",
+    "plugins",
+    "graphql",
+    "authorization",
+    "..."
+  ]
+}

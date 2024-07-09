@@ -1,0 +1,61 @@
+---
+title: Quick Start
+description: Welcome to the VitNode documentation!
+---
+
+VitNode is a modern, open-source, and self-hosted content management system (CMS) that allows you to create and manage your website with ease using [NextJS](https://nextjs.org/) & [NestJS](https://nestjs.com/).
+
+import { Callout } from 'fumadocs-ui/components/callout';
+
+<Callout title="🛠️ VitNode is still in development!" type="warn">
+  You can try it out, but it is not recommended to use it now in production.
+</Callout>
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+
+## Get Started
+
+Create a new app with `create-vitnode-app`, it requires NodeJS 20+.
+
+<Tabs id='package-manager' persist items={['pnpm', 'npm', 'yarn']}>
+
+```bash tab="pnpm"
+pnpm create vitnode-app@latest
+```
+
+```bash tab="npm"
+npx create-vitnode-app@latest
+```
+
+```bash tab="yarn"
+yarn create vitnode-app@latest
+```
+
+</Tabs>
+
+## FAQ
+
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
+
+<Accordions>
+  <Accordion title="Why VitNode?">My Content</Accordion>
+</Accordions>
+
+### 🖥️ Hardware
+
+|         | Minimum        | Recommended    |
+| :------ | :------------- | :------------- |
+| CPU     | 1GHz (2+ core) | 1GHz (4+ core) |
+| RAM     | 2GB            | 4GB            |
+| Storage | 10GB           | 20GB           |
+| Network | 100Mbps        | 300Mbps        |
+
+### 🧑‍💻 Browser
+
+|         | Minimum | Recommended |
+| :------ | :------ | :---------- |
+| Chrome  | >= 106  | >= 115      |
+| Firefox | >= 110  | >= 121      |
+| Edge    | >= 106  | >= 120      |
+| Safari  | >= 16   | >= 17.2     |
+| Opera   | >= 94   | >= 101      |

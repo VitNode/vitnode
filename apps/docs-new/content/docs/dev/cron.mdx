@@ -1,0 +1,37 @@
+---
+title: CRON
+description: Task Scheduling (CRON) in VitNode.
+---
+
+We're using [@nestjs/schedule](https://docs.nestjs.com/techniques/task-scheduling) to schedule tasks.
+
+### Usage
+
+Create a service for cron jobs.
+
+```ts title="clear.cron.ts"
+import { Injectable } from "@nestjs/common";
+import { Cron } from "@nestjs/schedule";
+
+@Injectable()
+export class ClearCoreMembersCron {
+
+  @Cron('45 * * * * *')
+  async exampleCron() {
+    ...
+  }
+}
+```
+
+Register the service in your module `providers` array.
+
+```ts title="members.module.ts"
+import { Module } from '@nestjs/common';
+
+import { ClearCoreMembersCron } from './clear.cron'; // [!code highlight]
+
+@Module({
+  providers: [ClearCoreMembersCron], // [!code highlight]
+})
+export class CoreMembersModule {}
+```

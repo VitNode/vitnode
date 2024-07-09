@@ -1,4 +1,4 @@
-import { LayoutIcon, LibraryIcon, LucideIcon } from 'lucide-react';
+import { BookOpenIcon, BracesIcon, LayoutIcon, LucideIcon } from 'lucide-react';
 
 export interface Mode {
   param: string;
@@ -12,12 +12,18 @@ export const modes: Mode[] = [
     param: 'dev',
     name: 'Development',
     description: 'The dev environment',
-    icon: LibraryIcon,
+    icon: BracesIcon,
   },
   {
     param: 'ui',
     name: 'UI',
-    description: 'The user interface',
+    description: 'Make it pretty',
     icon: LayoutIcon,
+  },
+  {
+    param: 'guides',
+    name: 'Guides',
+    description: 'Learn how to use',
+    icon: BookOpenIcon,
   },
 ];

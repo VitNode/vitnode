@@ -1,0 +1,113 @@
+---
+title: Authorization
+description: How to protect routes with authorization.
+---
+
+## Backend
+
+We're implementing a custom authorization system, which gives us more flexibility and control over the authorization process. Our system use [Guards](https://docs.nestjs.com/guards) from NestJS to protect routes.
+
+### Portected route
+
+To protect a route _(required sign in user)_, you need to add the `@UseGuards(AuthGuards)` decorator to the route.
+
+```ts title="show.resolver.ts"
+import { Args, Query, Resolver } from '@nestjs/graphql';
+import { UseGuards } from '@nestjs/common';
+import { AuthGuards } from 'vitnode-backend'; // [!code highlight]
+
+import { ShowCoreMembersService } from './show.service';
+import { ShowCoreMembersObj } from './dto/show.obj';
+
+@Resolver()
+export class ShowCoreMembersResolver {
+  constructor(private readonly service: ShowCoreMembersService) {}
+
+  @UseGuards(AuthGuards) // [!code highlight]
+  @Query(() => ShowCoreMembersObj)
+  async core_members__show(): Promise<ShowCoreMembersObj> {
+    return this.service.show();
+  }
+}
+```
+
+#### Admin protected route
+
+To protect a route with `admin` permissions, you need to use the `@UseGuards(AdminAuthGuards)` decorator.
+
+```ts title="show.resolver.ts"
+import { Args, Query, Resolver } from '@nestjs/graphql';
+import { UseGuards } from '@nestjs/common';
+import { AdminAuthGuards } from 'vitnode-backend'; // [!code highlight]
+
+import { ShowCoreMembersService } from './show.service';
+import { ShowCoreMembersObj } from './dto/show.obj';
+
+@Resolver()
+export class ShowCoreMembersResolver {
+  constructor(private readonly service: ShowCoreMembersService) {}
+
+  @UseGuards(AdminAuthGuards) // [!code highlight]
+  @Query(() => ShowCoreMembersObj)
+  async core_members__show(): Promise<ShowCoreMembersObj> {
+    return this.service.show();
+  }
+}
+```
+
+### Current user data
+
+Whan you are using `@UseGuards(AuthGuards)` or `@UseGuards(AdminAuthGuards)` you can access to the current user in the resolver by using the `@CurrentUser()` decorator as param route.
+
+```ts title="show.resolver.ts"
+import { Args, Query, Resolver } from '@nestjs/graphql';
+import { UseGuards } from '@nestjs/common';
+import { AuthGuards, CurrentUser, User } from 'vitnode-backend'; // [!code highlight]
+
+import { ShowCoreMembersService } from './show.service';
+import { ShowCoreMembersObj } from './dto/show.obj';
+
+@Resolver()
+export class ShowCoreMembersResolver {
+  constructor(private readonly service: ShowCoreMembersService) {}
+
+  @UseGuards(AuthGuards)
+  @Query(() => ShowCoreMembersObj)
+  async core_members__show(
+    @CurrentUser() user: User, // [!code highlight]
+  ): Promise<ShowCoreMembersObj> {
+    return this.service.show(user);
+  }
+}
+```
+
+### Current user data without protected route
+
+If you need to access to the current user in a route you need use the `@OptionalAuth()` decorator in route. You need change `@CurrentUser()` decorator to optional param route.
+
+```ts title="show.resolver.ts"
+import { Args, Query, Resolver } from '@nestjs/graphql';
+import { UseGuards } from '@nestjs/common';
+import { AuthGuards, CurrentUser, User, OptionalAuth } from 'vitnode-backend'; // [!code highlight]
+
+import { ShowCoreMembersService } from './show.service';
+import { ShowCoreMembersObj } from './dto/show.obj';
+
+@Resolver()
+export class ShowCoreMembersResolver {
+  constructor(private readonly service: ShowCoreMembersService) {}
+
+  @OptionalAuth() // [!code highlight]
+  @UseGuards(AuthGuards)
+  @Query(() => ShowCoreMembersObj)
+  async core_members__show(
+    @CurrentUser() user: User,
+  ): Promise<ShowCoreMembersObj> {
+    return this.service.show(user);
+  }
+}
+```
+
+## Frontend
+
+TODO: Add frontend authorization docs

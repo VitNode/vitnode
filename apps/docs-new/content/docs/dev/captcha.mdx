@@ -1,8 +1,9 @@
-import { Steps } from 'nextra/components';
+---
+title: Captcha
+description: How to enable and configure Captcha to protect your community from spam.
+---
 
-# Captcha
-
-VitNode provides a simple way to integrate captcha in your application to prevent bots from submitting forms. It supports multiple captcha providers and can be easily integrated into your plugin.
+We're provide a simple way to integrate captcha into your application to prevent bots from submitting forms. It supports multiple captcha providers and can be easily integrated into your plugin.
 
 VitNode has support for:
 
@@ -11,37 +12,43 @@ VitNode has support for:
 - [Google reCAPTCHA v3](https://www.google.com/recaptcha/about/)
 - [Cloudflare Turnstile](https://www.cloudflare.com/products/turnstile/)
 
+## Configuration
+
+To enable captacha go to our guide [Captcha in AdminCP](/docs/guides/captcha).
+
 ## Usage
 
-<Steps>
-### Backend - Service
+Inside VitNode we're already implemented a captcha into core modules, but you can use it in your plugin.
+
+## Backend
 
 Inside your service file, import the `CaptchaCoreCaptchaSecurityService` and inject it into your service.
 
-```ts {5, 10, 14}
+```ts title="sign-up.service.ts"
 import { Injectable } from '@nestjs/common';
+import { Ctx, CaptchaCoreCaptchaSecurityService } from 'vitnode-backend'; // [!code highlight]
 
 import { SignUpCoreSessionsObj } from './dto/sign_up.obj';
-
-import { Ctx, CaptchaCoreCaptchaSecurityService } from 'vitnode-backend';
 
 @Injectable()
 export class SignUpCoreSessionsService {
   constructor(
-    private readonly captchaService: CaptchaCoreCaptchaSecurityService,
+    private readonly captchaService: CaptchaCoreCaptchaSecurityService, // [!code highlight]
   ) {}
 
   async signUp({ req }: Ctx): Promise<SignUpCoreSessionsObj> {
-    await this.captchaService.validateCaptcha({ req });
+    await this.captchaService.validateCaptcha({ req }); // [!code highlight]
   }
 }
 ```
 
-### Frontend - Component
+## Frontend
+
+### Component
 
 Inside your form component, create a div with an id of `vitnode_recaptcha` to render the captcha.
 
-```tsx {14}
+```tsx title="content.tsx"
 'use client';
 
 import { useSignUpView } from 'vitnode-frontend/hooks/core/sign/up/use-sign-up-view';
@@ -55,7 +62,7 @@ export const FormSignUp = () => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <CardContent className="space-y-4">
-          <div id="vitnode_recaptcha" />
+          <div id="vitnode_recaptcha" /> // [!code highlight]
         </CardContent>
       </form>
     </Form>
@@ -63,21 +70,21 @@ export const FormSignUp = () => {
 };
 ```
 
-### Frontend - Hook
+### Hook
 
-Inside your hook, import the `useCaptcha` hook and call the `getTokenFromCaptcha` function to get the captcha token.
+Inside your hook, import the `useCaptcha` hook and call the `getTokenFromCaptcha` function to get the captcha token and use it in your mutation.
 
-```ts
-import { useCaptcha } from 'vitnode-frontend/hooks/use-captcha';
+```ts title="use-sign-up-view.ts"
+import { useCaptcha } from 'vitnode-frontend/hooks/use-captcha'; // [!code highlight]
 
 export const useSignUpView = () => {
-  const { getTokenFromCaptcha, isReady } = useCaptcha();
+  const { getTokenFromCaptcha, isReady } = useCaptcha(); // [!code highlight]
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const token = await getTokenFromCaptcha();
-    if (!token) return;
+    const token = await getTokenFromCaptcha(); // [!code highlight]
+    if (!token) return; // [!code highlight]
 
-    const mutation = await mutationApi({ ...values, token });
+    const mutation = await mutationApi({ ...values, token }); // [!code highlight]
   };
 
   return { isReady, onSubmit };
@@ -86,11 +93,11 @@ export const useSignUpView = () => {
 
 `isReady` is a boolean that indicates if the captcha is ready to be used.
 
-### Frontend - Fetcher
+### Fetcher
 
 Inside your fetcher, add `x-vitnode-captcha-token` to the headers.
 
-```ts {12-14, 25}
+```ts title="mutation-api.ts"
 'use server';
 
 import { revalidatePath } from 'next/cache';
@@ -103,7 +110,7 @@ import {
 import { fetcher } from '@/graphql/fetcher';
 
 interface Args extends Core_Sessions__Sign_UpMutationVariables {
-  token: string;
+  token: string; // [!code highlight]
 }
 
 export const mutationApi = async (variables: Args) => {
@@ -115,7 +122,7 @@ export const mutationApi = async (variables: Args) => {
       query: Core_Sessions__Sign_Up,
       variables,
       headers: {
-        'x-vitnode-captcha-token': variables.token,
+        'x-vitnode-captcha-token': variables.token, // [!code highlight]
       },
     });
 
@@ -127,5 +134,3 @@ export const mutationApi = async (variables: Args) => {
   }
 };
 ```
-
-</Steps>
