@@ -3,7 +3,7 @@ import { Context, Query, Resolver } from '@nestjs/graphql';
 import { AuthorizationCoreSessionsService } from './authorization.service';
 import { AuthorizationCoreSessionsObj } from './dto/authorization.obj';
 
-import { Ctx } from '../../../utils';
+import { GqlContext } from '../../../utils';
 
 @Resolver()
 export class AuthorizationCoreSessionsResolver {
@@ -11,7 +11,7 @@ export class AuthorizationCoreSessionsResolver {
 
   @Query(() => AuthorizationCoreSessionsObj)
   async core_sessions__authorization(
-    @Context() context: Ctx,
+    @Context() context: GqlContext,
   ): Promise<AuthorizationCoreSessionsObj> {
     return this.service.authorization(context);
   }

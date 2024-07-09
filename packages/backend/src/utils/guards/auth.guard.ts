@@ -7,12 +7,12 @@ import {
 import { GqlExecutionContext } from '@nestjs/graphql';
 import { Reflector } from '@nestjs/core';
 
-import { Ctx } from '../context';
+import { GqlContext } from '../context';
 
 import { User } from '../../decorators';
 
 interface IOAuthGuards {
-  authorization: (context: Ctx) => Promise<User>;
+  authorization: (context: GqlContext) => Promise<User>;
 }
 
 @Injectable()
@@ -22,7 +22,7 @@ export class AuthGuards implements CanActivate {
     @Inject('IOAuthGuards') private readonly service: IOAuthGuards,
   ) {}
 
-  protected async getAuth({ req, res }: Ctx) {
+  protected async getAuth({ req, res }: GqlContext) {
     const data = await this.service.authorization({
       req,
       res,

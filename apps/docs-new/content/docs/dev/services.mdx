@@ -64,3 +64,39 @@ export class ShowBlogCategoriesService {
   }
 }
 ```
+
+## Return Object
+
+You can return an object from the service method by creating a DTO (Data Transfer Object) file.
+
+```ts title="backend/plugins/blog/categories/show/dto/show.obj.ts"
+import { Field, Int, ObjectType } from '@nestjs/graphql';
+
+@ObjectType()
+export class ShowBlogCategoriesObj {
+  @Field(() => Int)
+  id: number;
+
+  @Field(() => String)
+  name: string;
+}
+```
+
+### Use Object in Service
+
+```ts title="backend/plugins/blog/categories/show/show.service.ts"
+import { Injectable } from '@nestjs/common';
+
+import { ShowBlogCategories } from './dto/show.obj'; // [!code highlight]
+
+@Injectable()
+export class ShowBlogCategoriesService {
+  // [!code word:ShowBlogCategoriesObj]
+  show(): ShowBlogCategoriesObj {
+    return {
+      id: 1,
+      name: 'Hello World!',
+    };
+  }
+}
+```

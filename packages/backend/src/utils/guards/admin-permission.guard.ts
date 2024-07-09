@@ -7,7 +7,7 @@ import {
 import { Reflector } from '@nestjs/core';
 import { GqlExecutionContext } from '@nestjs/graphql';
 
-import { Ctx } from '../context';
+import { GqlContext } from '../context';
 import { IOAdminAuthGuards } from './admin-auth.guard';
 
 // TODO: Implement in DOCS
@@ -24,7 +24,7 @@ export class AdminPermissionGuards implements CanActivate {
     // private readonly databaseService: DatabaseService
   ) {}
 
-  protected async getAuth({ req, res }: Ctx) {
+  protected async getAuth({ req, res }: GqlContext) {
     const data = await this.service.authorization({
       req,
       res,

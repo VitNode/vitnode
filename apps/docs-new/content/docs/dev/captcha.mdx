@@ -26,7 +26,7 @@ Inside your service file, import the `CaptchaCoreCaptchaSecurityService` and inj
 
 ```ts title="sign-up.service.ts"
 import { Injectable } from '@nestjs/common';
-import { Ctx, CaptchaCoreCaptchaSecurityService } from 'vitnode-backend'; // [!code highlight]
+import { GqlContext, CaptchaCoreCaptchaSecurityService } from 'vitnode-backend'; // [!code highlight]
 
 import { SignUpCoreSessionsObj } from './dto/sign_up.obj';
 
@@ -36,7 +36,7 @@ export class SignUpCoreSessionsService {
     private readonly captchaService: CaptchaCoreCaptchaSecurityService, // [!code highlight]
   ) {}
 
-  async signUp({ req }: Ctx): Promise<SignUpCoreSessionsObj> {
+  async signUp({ req }: GqlContext): Promise<SignUpCoreSessionsObj> {
     await this.captchaService.validateCaptcha({ req }); // [!code highlight]
   }
 }

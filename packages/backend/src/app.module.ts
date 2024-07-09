@@ -11,7 +11,7 @@ import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin
 import { ThrottlerModule } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
 
-import { Ctx } from './utils';
+import { GqlContext } from './utils';
 import { CoreModule } from './core/core.module';
 import { DatabaseModule, DatabaseModuleArgs } from './database/database.module';
 import { GlobalProvidersModule } from './providers/providers.module';
@@ -181,7 +181,7 @@ export class VitNodeCoreModule {
           sortSchema: true,
           playground: false,
           plugins: [ApolloServerPluginLandingPageLocalDefault()],
-          context: ({ req, res }): Ctx => ({ req, res }),
+          context: ({ req, res }): GqlContext => ({ req, res }),
           debug: process.env.NODE_ENV === 'production' ? false : true,
         }),
         ScheduleModule.forRoot(),

@@ -7,7 +7,7 @@ import { currentUnixDate } from 'vitnode-shared';
 import { DeviceSignInCoreSessionsService } from '../../sign_in/device.service';
 import { DatabaseService } from '@/database';
 import { User } from '@/decorators';
-import { Ctx } from '@/utils';
+import { GqlContext } from '@/utils';
 import { AccessDeniedError } from '@/errors';
 import { core_users } from '@/templates/core/admin/database/schema/users';
 import { core_sessions_known_devices } from '@/templates/core/admin/database/schema/sessions';
@@ -22,7 +22,7 @@ export class InternalAuthorizationCoreSessionsService {
     private readonly deviceService: DeviceSignInCoreSessionsService,
   ) {}
 
-  async authorization({ req, res }: Ctx): Promise<User> {
+  async authorization({ req, res }: GqlContext): Promise<User> {
     const login_token =
       req.cookies[this.configService.getOrThrow('cookies.login_token.name')];
     const know_device_id: number | undefined =

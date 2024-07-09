@@ -11,7 +11,7 @@ import { AvatarColorService } from './helpers/avatar-color.service';
 import { CaptchaCoreCaptchaSecurityService } from '@/core/admin/security/captcha/captcha.service';
 import { DatabaseService } from '../../../database';
 import { core_users } from '../../../templates/core/admin/database/schema/users';
-import { Ctx } from '@/utils';
+import { GqlContext } from '@/utils';
 import { CustomError } from '../../../errors';
 import { getUserIp } from '../../../functions';
 
@@ -52,7 +52,7 @@ export class SignUpCoreSessionsService extends AvatarColorService {
 
   async signUp(
     { email: emailRaw, name, newsletter, password }: SignUpCoreSessionsArgs,
-    { req }: Ctx,
+    { req }: GqlContext,
   ): Promise<SignUpCoreSessionsObj> {
     await this.captchaService.validateCaptcha({ req });
 

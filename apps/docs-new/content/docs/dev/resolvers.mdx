@@ -2,3 +2,88 @@
 title: Resolvers
 description: Expose your data to the world for GraphQL.
 ---
+
+Resolvers are the functions that are responsible for populating the data for a single field in your schema. They are the bridge between the GraphQL server and your data.
+
+## Create a Resolver
+
+In regard to the [previews](/docs/dev/services) section, let's create a simple logic where we're using the service.
+
+```ts title="backend/plugins/blog/categories/show/show.resolver.ts"
+// [!code word:Query]
+import { Resolver, Query } from '@nestjs/graphql';
+
+import { ShowBlogCategoriesService } from './show.service';
+import { ShowBlogCategories } from './dto/show.obj';
+
+@Resolver()
+export class ShowBlogCategoriesResolver {
+  constructor(private readonly service: ShowBlogCategoriesService) {}
+
+  @Query(() => ShowBlogCategoriesObj)
+  async blog_categories__show(): Promise<ShowBlogCategoriesObj> {
+    return this.service.show();
+  }
+}
+```
+
+You can also create `Mutation`
+
+```ts title="backend/plugins/blog/categories/show/show.resolver.ts"
+// [!code word:Mutation]
+import { Resolver, Mutation } from '@nestjs/graphql';
+
+import { ShowBlogCategoriesService } from './show.service';
+import { ShowBlogCategories } from './dto/show.obj';
+
+@Resolver()
+export class ShowBlogCategoriesResolver {
+  constructor(private readonly service: ShowBlogCategoriesService) {}
+
+  @Mutation(() => ShowBlogCategoriesObj)
+  async blog_categories__show(): Promise<ShowBlogCategoriesObj> {
+    return this.service.show();
+  }
+}
+```
+
+Read more about [Return Object](/docs/dev/services#return-object).
+
+## Provide into the Module
+
+```ts title="backend/plugins/blog/categories/categories.module.ts"
+import { Module } from '@nestjs/common';
+
+import { ShowBlogCategoriesService } from './show/show.service';
+import { ShowBlogCategoriesResolver } from './show/show.resolver'; // [!code highlight]
+
+@Module({
+  providers: [ShowBlogCategoriesService, ShowBlogCategoriesResolver], // [!code highlight]
+})
+export class BlogCategoriesModule {}
+```
+
+## Arguments
+
+```ts title="backend/plugins/blog/categories/show/show.resolver.ts"
+import { Resolver, Query } from '@nestjs/graphql';
+
+import { ShowBlogCategoriesService } from './show.service';
+import { ShowBlogCategories } from './dto/show.obj';
+import { ShowBlogCategoriesArgs } from './dto/show.args'; // [!code highlight]
+
+@Resolver()
+export class ShowBlogCategoriesResolver {
+  constructor(private readonly service: ShowBlogCategoriesService) {}
+
+  @Query(() => ShowBlogCategoriesObj)
+  async blog_categories__show(
+    @Args() args: ShowBlogCategoriesArgs, // [!code highlight]
+  ): Promise<ShowBlogCategoriesObj> {
+    // [!code word:args]
+    return this.service.show(args);
+  }
+}
+```
+
+Read more about [Arguments](/docs/dev/services#arguments).
