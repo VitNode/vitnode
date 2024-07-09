@@ -8,6 +8,7 @@ import {
 import { useTranslations } from 'next-intl';
 import * as React from 'react';
 import { useParams } from 'next/navigation';
+import { toast } from 'sonner';
 
 import { ItemContentNavDevPluginAdmin } from './item/item';
 import { mutationChangePositionApi } from './item/hooks/mutation-change-position-api';
@@ -20,7 +21,6 @@ import {
 import { WithChildren } from '@/helpers/flatten-tree';
 import { useDragAndDrop } from '@/hooks/drag&drop/use-functions';
 import { ItemDragAndDrop } from '@/components/drag&drop-item';
-import { toast } from 'sonner';
 
 interface Props extends Admin__Core_Plugins__Nav__ShowQuery {
   icons: { icon: React.ReactNode; id: string }[];

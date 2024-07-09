@@ -9,6 +9,12 @@ export interface Mode {
 
 export const modes: Mode[] = [
   {
+    param: 'guides',
+    name: 'Guides',
+    description: 'Learn how to use',
+    icon: BookOpenIcon,
+  },
+  {
     param: 'dev',
     name: 'Development',
     description: 'The dev environment',
@@ -19,11 +25,5 @@ export const modes: Mode[] = [
     name: 'UI',
     description: 'Make it pretty',
     icon: LayoutIcon,
-  },
-  {
-    param: 'guides',
-    name: 'Guides',
-    description: 'Learn how to use',
-    icon: BookOpenIcon,
   },
 ];

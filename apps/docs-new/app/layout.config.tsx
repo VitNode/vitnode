@@ -2,11 +2,18 @@ import { type BaseLayoutProps, type DocsLayoutProps } from 'fumadocs-ui/layout';
 import { RootToggle } from 'fumadocs-ui/components/layout/root-toggle';
 import { pageTree } from '@/app/source';
 import { modes } from '../utils/modes';
+import Image from 'next/image';
+import logo from '@/public/logo.svg';
 
 // shared configuration
 export const baseOptions: BaseLayoutProps = {
   nav: {
-    title: 'VitNode',
+    title: (
+      <>
+        <Image alt="VitNode" src={logo} className="w-8" aria-label="VitNode" />
+        <span className="text-lg">VitNode</span>
+      </>
+    ),
   },
   links: [
     {

@@ -5,9 +5,14 @@
     "---Introduction ---",
     "index",
     "contribution",
+    "--- GraphQL ---",
+    "graphql",
+    "modules",
+    "services",
+    "resolvers",
+    "rest",
     "--- API References ---",
     "plugins",
-    "graphql",
     "authorization",
     "..."
   ]

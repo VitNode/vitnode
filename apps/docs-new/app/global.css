@@ -35,9 +35,9 @@
     --cover: 220 80% 67%;
     --cover-foreground: 210 40% 98%;
 
-    --dev-color: 220 74% 50%;
+    --guides-color: 220 74% 50%;
+    --dev-color: 20 74% 50%;
     --ui-color: 141 74% 31%;
-    --guides-color: 20 74% 50%;
   }
 
   .dark {
@@ -63,9 +63,9 @@
     --cover: 210 64% 39%;
     --cover-foreground: 210 40% 98%;
 
-    --dev-color: 210 74% 50%;
+    --guides-color: 210 74% 50%;
+    --dev-color: 20 74% 50%;
     --ui-color: 141 74% 38%;
-    --guides-color: 20 74% 50%;
   }
 }
 

@@ -1,0 +1,66 @@
+---
+title: Services
+description: Your code logic for GraphQL.
+---
+
+Services helps to separate the business logic from the GraphQL resolvers. It's a good practice to keep the resolvers as thin as possible.
+
+## Create a Service
+
+Let's create a simple logic for the GraphQL query or mutation.
+
+```ts title="backend/plugins/blog/categories/show/show.service.ts"
+import { Injectable } from '@nestjs/common';
+
+@Injectable()
+export class ShowBlogCategoriesService {
+  show(): string {
+    return 'Hello World!';
+  }
+}
+```
+
+## Provide into the Module
+
+```ts title="backend/plugins/blog/categories/categories.module.ts"
+import { Module } from '@nestjs/common';
+
+import { ShowBlogCategoriesService } from './show/show.service';
+
+@Module({
+  providers: [ShowBlogCategoriesService], // [!code highlight]
+})
+export class BlogCategoriesModule {}
+```
+
+## Arguments
+
+You can pass arguments to the service method by creating a DTO (Data Transfer Object) file.
+
+```ts title="backend/plugins/blog/categories/show/dto/show.args.ts"
+import { ArgsType, Field } from '@nestjs/graphql';
+
+@ArgsType()
+export class ShowBlogCategoriesArgs {
+  @Field(() => String)
+  id: string;
+}
+```
+
+You can read more about [NestJS GraphQL Class Inheritance](https://docs.nestjs.com/graphql/resolvers#class-inheritance) in the official documentation.
+
+### Use Arguments in Service
+
+```ts title="backend/plugins/blog/categories/show/show.service.ts"
+import { Injectable } from '@nestjs/common';
+
+import { ShowBlogCategoriesArgs } from './dto/show.args'; // [!code highlight]
+
+@Injectable()
+export class ShowBlogCategoriesService {
+  // [!code word:ShowBlogCategoriesArgs]
+  show({ id }: ShowBlogCategoriesArgs): string {
+    return `Hello World! Your ID is ${id}`;
+  }
+}
+```

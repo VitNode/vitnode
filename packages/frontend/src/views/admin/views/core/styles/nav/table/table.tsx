@@ -7,6 +7,7 @@ import {
 } from '@dnd-kit/sortable';
 import * as React from 'react';
 import { useTranslations } from 'next-intl';
+import { toast } from 'sonner';
 
 import { ItemContentTableContentNavAdmin } from './item';
 import { mutationChangePositionApi } from './hooks/mutation-change-position-api';
@@ -14,7 +15,6 @@ import { mutationChangePositionApi } from './hooks/mutation-change-position-api'
 import { Admin__Core_Nav__ShowQuery, ShowCoreNav } from '@/graphql/graphql';
 import { useDragAndDrop } from '@/hooks/drag&drop/use-functions';
 import { ItemDragAndDrop } from '@/components/drag&drop-item';
-import { toast } from 'sonner';
 
 const indentationWidth = 20;
 
