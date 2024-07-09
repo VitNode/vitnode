@@ -6,13 +6,13 @@ import { removeSpecialCharacters } from 'vitnode-shared';
 import { SignUpCoreSessionsArgs } from './dto/sign_up.args';
 import { SignUpCoreSessionsObj } from './dto/sign_up.obj';
 import { AvatarColorService } from './helpers/avatar-color.service';
+import { encryptPassword } from '../encrypt_password';
 
 import { DatabaseService } from '../../../database';
 import { core_users } from '../../../templates/core/admin/database/schema/users';
 import { Ctx } from '../../../utils';
 import { CustomError } from '../../../errors';
 import { getUserIp } from '../../../functions';
-import { encryptPassword } from '../encrypt_password';
 
 @Injectable()
 export class SignUpCoreSessionsService extends AvatarColorService {

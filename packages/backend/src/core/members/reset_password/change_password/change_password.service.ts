@@ -3,11 +3,14 @@ import { ConfigService } from '@nestjs/config';
 import { eq } from 'drizzle-orm';
 
 import { ChangePasswordCoreMembersArgs } from './dto/change_password.args';
-import { ChangePasswordCoreMembersObj } from './dto/change_password.obj';
 
-import { core_users, core_users_pass_reset } from '@/templates/core/admin/database/schema/users';
 import { DatabaseService } from '@/database';
+import { User } from '@/decorators';
 import { encryptPassword } from '@/core/sessions/encrypt_password';
+import {
+  core_users,
+  core_users_pass_reset,
+} from '@/templates/core/admin/database/schema/users';
 
 @Injectable()
 export class ChangePasswordCoreMembersService {
@@ -19,7 +22,7 @@ export class ChangePasswordCoreMembersService {
   async change_password({
     hashKey,
     password,
-  }: ChangePasswordCoreMembersArgs): Promise<ChangePasswordCoreMembersObj> {
+  }: ChangePasswordCoreMembersArgs): Promise<User> {
     const keyData =
       await this.databaseService.db.query.core_users_pass_reset.findFirst({
         where: eq(core_users_pass_reset.key, hashKey),

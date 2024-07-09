@@ -7,8 +7,8 @@ import { DeleteCoreMembersResolver } from './delete/delete.resolver';
 import { DeleteCoreMembersService } from './delete/delete.service';
 import { CreateKeyResetPasswordCoreMembersService } from './reset_password/create_key/create_key.service';
 import { CreateKeyResetPasswordCoreMembersResolver } from './reset_password/create_key/create_key.resolver';
-import { SetPasswordCoreMembersResolver } from './set_password/set_password.resolver';
-import { SetPasswordCoreMembersService } from '../sessions/encrypt_password';
+import { ChangePasswordCoreMembersResolver } from './reset_password/change_password/change_password.resolver';
+import { ChangePasswordCoreMembersService } from './reset_password/change_password/change_password.service';
 
 @Module({
   providers: [
@@ -18,8 +18,8 @@ import { SetPasswordCoreMembersService } from '../sessions/encrypt_password';
     DeleteCoreMembersService,
     CreateKeyResetPasswordCoreMembersService,
     CreateKeyResetPasswordCoreMembersResolver,
-    SetPasswordCoreMembersResolver,
-    SetPasswordCoreMembersService
+    ChangePasswordCoreMembersResolver,
+    ChangePasswordCoreMembersService,
   ],
   imports: [AvatarCoreMembers],
 })
