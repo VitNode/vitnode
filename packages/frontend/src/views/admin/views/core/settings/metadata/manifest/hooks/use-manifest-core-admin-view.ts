@@ -40,16 +40,17 @@ export const useManifestCoreAdminView = ({
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const themeColor = getHSLFromString(values.theme_color);
     const backgroundColor = getHSLFromString(values.background_color);
-    const mutation = await mutationApi({
-      ...values,
-      startUrl: values.start_url,
-      themeColor: themeColor ? convertColor.hslToHex(themeColor) : '',
-      backgroundColor: backgroundColor
-        ? convertColor.hslToHex(backgroundColor)
-        : '',
-    });
 
-    if (mutation.error) {
+    try {
+      await mutationApi({
+        ...values,
+        startUrl: values.start_url,
+        themeColor: themeColor ? convertColor.hslToHex(themeColor) : '',
+        backgroundColor: backgroundColor
+          ? convertColor.hslToHex(backgroundColor)
+          : '',
+      });
+    } catch (error) {
       toast.error(t('errors.title'), {
         description: t('errors.internal_server_error'),
       });

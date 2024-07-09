@@ -14,6 +14,7 @@ import { mutationChangePositionApi } from './hooks/mutation-change-position-api'
 import { Admin__Core_Nav__ShowQuery, ShowCoreNav } from '@/graphql/graphql';
 import { useDragAndDrop } from '@/hooks/drag&drop/use-functions';
 import { ItemDragAndDrop } from '@/components/drag&drop-item';
+import { toast } from 'sonner';
 
 const indentationWidth = 20;
 
@@ -73,11 +74,17 @@ export const TableNavAdmin = ({ core_nav__show: { edges }, icons }: Props) => {
 
         if (!moveTo) return;
 
-        await mutationChangePositionApi({
-          id: Number(moveTo.id),
-          indexToMove: moveTo.indexToMove,
-          parentId: Number(moveTo.parentId),
-        });
+        try {
+          await mutationChangePositionApi({
+            id: Number(moveTo.id),
+            indexToMove: moveTo.indexToMove,
+            parentId: Number(moveTo.parentId),
+          });
+        } catch (error) {
+          toast.error(t('errors.title'), {
+            description: t('errors.internal_server_error'),
+          });
+        }
       }}
     >
       <SortableContext items={sortedIds} strategy={verticalListSortingStrategy}>

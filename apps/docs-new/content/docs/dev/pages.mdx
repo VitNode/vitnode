@@ -1,0 +1,20 @@
+---
+title: Pages
+---
+
+## Default Page
+
+VitNode handle automaticly default page for you. You need to create a file `themes/1/{your_plugin}/default-page.tsx` in your plugin template.
+
+Use `export default` for your template.
+
+```tsx
+export default async function DefaultPage() {
+  const data = await getData();
+  const t = await getTranslations('core');
+
+  return <div>{t('info', { data })}</div>;
+}
+```
+
+Test it by set your plugin as default in `AdminCP` and go to your website.

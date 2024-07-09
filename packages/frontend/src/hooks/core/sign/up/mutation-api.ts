@@ -14,22 +14,16 @@ interface Args extends Core_Sessions__Sign_UpMutationVariables {
 }
 
 export const mutationApi = async (variables: Args) => {
-  try {
-    const { data } = await fetcher<
-      Core_Sessions__Sign_UpMutation,
-      Core_Sessions__Sign_UpMutationVariables
-    >({
-      query: Core_Sessions__Sign_Up,
-      variables,
-      headers: {
-        'x-vitnode-captcha-token': variables.token,
-      },
-    });
+  await fetcher<
+    Core_Sessions__Sign_UpMutation,
+    Core_Sessions__Sign_UpMutationVariables
+  >({
+    query: Core_Sessions__Sign_Up,
+    variables,
+    headers: {
+      'x-vitnode-captcha-token': variables.token,
+    },
+  });
 
-    revalidatePath('/', 'layout');
-
-    return { data };
-  } catch (error) {
-    return { error };
-  }
+  revalidatePath('/', 'layout');
 };

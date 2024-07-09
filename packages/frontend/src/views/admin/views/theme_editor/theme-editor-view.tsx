@@ -10,7 +10,7 @@ import { getSessionData } from '@/graphql/get-session-data';
 import { ErrorView } from '../../../theme/views/error/error-view';
 
 const getData = async () => {
-  const { data } = await fetcher<
+  const data = await fetcher<
     Core_Theme_Editor__ShowQuery,
     Core_Theme_Editor__ShowQueryVariables
   >({

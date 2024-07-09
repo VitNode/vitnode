@@ -18,7 +18,7 @@ import { HeaderContent } from '@/components/ui/header-content';
 import { Card } from '@/components/ui/card';
 
 const getData = async (variables: Admin__Core_Groups__ShowQueryVariables) => {
-  const { data } = await fetcher<
+  const data = await fetcher<
     Admin__Core_Groups__ShowQuery,
     Admin__Core_Groups__ShowQueryVariables
   >({

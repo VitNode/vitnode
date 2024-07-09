@@ -44,31 +44,22 @@ export const useCreateEditLangAdmin = ({ data }: Args) => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    let error = false;
-    if (data) {
-      const mutation = await editMutationApi({
-        ...data,
-        ...values,
-        time24: values.time_24,
-        allowInInput: values.allow_in_input,
-      });
-
-      if (mutation.error) {
-        error = true;
+    try {
+      if (data) {
+        await editMutationApi({
+          ...data,
+          ...values,
+          time24: values.time_24,
+          allowInInput: values.allow_in_input,
+        });
+      } else {
+        await createMutationApi({
+          ...values,
+          time24: values.time_24,
+          allowInInput: values.allow_in_input,
+        });
       }
-    } else {
-      const mutation = await createMutationApi({
-        ...values,
-        time24: values.time_24,
-        allowInInput: values.allow_in_input,
-      });
-
-      if (mutation.error) {
-        error = true;
-      }
-    }
-
-    if (error) {
+    } catch (error) {
       toast.error(tCore('errors.title'), {
         description: tCore('errors.internal_server_error'),
       });

@@ -31,21 +31,27 @@ export const useUploadPluginAdmin = ({ data }: UploadPluginAdminProps) => {
     if (data) {
       formData.append('code', data.code);
     }
-    const mutation = await mutationApi(formData);
-    const error = mutation.error as ErrorType | undefined;
 
-    if (
-      error?.extensions?.code === 'PLUGIN_ALREADY_EXISTS' ||
-      error?.extensions?.code === 'PLUGIN_VERSION_IS_LOWER'
-    ) {
-      form.setError('file', {
-        message: t(`errors.${error?.extensions?.code}`),
+    try {
+      const mutation = await mutationApi(formData);
+
+      toast.success(t(data ? 'success_update' : 'success'), {
+        description: mutation.admin__core_plugins__upload.name,
       });
+    } catch (err) {
+      const error = err as ErrorType;
 
-      return;
-    }
+      if (
+        error.extensions?.code === 'PLUGIN_ALREADY_EXISTS' ||
+        error.extensions?.code === 'PLUGIN_VERSION_IS_LOWER'
+      ) {
+        form.setError('file', {
+          message: t(`errors.${error?.extensions?.code}`),
+        });
 
-    if (error || !mutation.data) {
+        return;
+      }
+
       toast.error(tCore('errors.title'), {
         description: tCore('errors.internal_server_error'),
       });
@@ -54,9 +60,6 @@ export const useUploadPluginAdmin = ({ data }: UploadPluginAdminProps) => {
     }
 
     setOpen?.(false);
-    toast.success(t(data ? 'success_update' : 'success'), {
-      description: mutation.data.admin__core_plugins__upload.name,
-    });
   };
 
   return { form, onSubmit };

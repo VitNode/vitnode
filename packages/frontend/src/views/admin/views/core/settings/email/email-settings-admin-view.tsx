@@ -13,7 +13,7 @@ import {
 } from '@/graphql/graphql';
 
 const getData = async () => {
-  const { data } = await fetcher<
+  const data = await fetcher<
     Admin__Core_Email_Settings__ShowQuery,
     Admin__Core_Email_Settings__ShowQueryVariables
   >({

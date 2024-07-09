@@ -10,7 +10,7 @@ import { fetcher } from '@/graphql/fetcher';
 export const queryApi = async (
   variables: Admin__Core_Plugins__Show__QuickQueryVariables,
 ) => {
-  const { data } = await fetcher<
+  const data = await fetcher<
     Admin__Core_Plugins__Show__QuickQuery,
     Admin__Core_Plugins__Show__QuickQueryVariables
   >({

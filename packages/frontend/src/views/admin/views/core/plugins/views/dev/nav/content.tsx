@@ -20,6 +20,7 @@ import {
 import { WithChildren } from '@/helpers/flatten-tree';
 import { useDragAndDrop } from '@/hooks/drag&drop/use-functions';
 import { ItemDragAndDrop } from '@/components/drag&drop-item';
+import { toast } from 'sonner';
 
 interface Props extends Admin__Core_Plugins__Nav__ShowQuery {
   icons: { icon: React.ReactNode; id: string }[];
@@ -84,12 +85,18 @@ export const ContentNavDevPluginAdmin = ({
 
         if (!moveTo) return;
 
-        await mutationChangePositionApi({
-          code: moveTo.id.toString(),
-          pluginCode: Array.isArray(code) ? code[0] : code,
-          indexToMove: moveTo.indexToMove,
-          parentCode: moveTo.parentId?.toString(),
-        });
+        try {
+          await mutationChangePositionApi({
+            code: moveTo.id.toString(),
+            pluginCode: Array.isArray(code) ? code[0] : code,
+            indexToMove: moveTo.indexToMove,
+            parentCode: moveTo.parentId?.toString(),
+          });
+        } catch (error) {
+          toast.error(t('errors.title'), {
+            description: t('errors.internal_server_error'),
+          });
+        }
       }}
     >
       <SortableContext items={sortedIds} strategy={verticalListSortingStrategy}>

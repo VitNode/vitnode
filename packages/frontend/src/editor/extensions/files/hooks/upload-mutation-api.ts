@@ -14,28 +14,24 @@ export const uploadMutationApi = async (formData: FormData) => {
   const plugin = formData.get('plugin') as string;
   const folder = formData.get('folder') as string;
 
-  try {
-    const { data } = await fetcher<
-      Core_Editor_Files__UploadMutation,
-      Omit<Core_Editor_Files__UploadMutationVariables, 'file'>
-    >({
-      query: Core_Editor_Files__Upload,
-      variables: {
-        plugin,
-        folder,
+  const data = await fetcher<
+    Core_Editor_Files__UploadMutation,
+    Omit<Core_Editor_Files__UploadMutationVariables, 'file'>
+  >({
+    query: Core_Editor_Files__Upload,
+    variables: {
+      plugin,
+      folder,
+    },
+    uploads: [
+      {
+        files: file,
+        variable: 'file',
       },
-      uploads: [
-        {
-          files: file,
-          variable: 'file',
-        },
-      ],
-    });
+    ],
+  });
 
-    revalidatePath('/settings/files', 'page');
+  revalidatePath('/settings/files', 'page');
 
-    return { data };
-  } catch (error) {
-    return { error };
-  }
+  return data;
 };
