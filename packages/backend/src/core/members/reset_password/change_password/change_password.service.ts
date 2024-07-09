@@ -39,6 +39,10 @@ export class ChangePasswordCoreMembersService {
       .where(eq(core_users.id, id))
       .returning();
 
-    return update[0];
+    return {
+      ...update[0],
+      avatar: null,
+      group: null,
+    };
   }
 }
