@@ -32,14 +32,14 @@ export const useSettingsCoreAdmin = ({
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const mutation = await mutationApi({
-      siteName: values.name,
-      siteShortName: values.short_name,
-      siteDescription: values.description,
-      siteCopyright: values.copyright,
-    });
-
-    if (mutation.error) {
+    try {
+      await mutationApi({
+        siteName: values.name,
+        siteShortName: values.short_name,
+        siteDescription: values.description,
+        siteCopyright: values.copyright,
+      });
+    } catch (error) {
       toast.error(t('errors.title'), {
         description: t('errors.internal_server_error'),
       });

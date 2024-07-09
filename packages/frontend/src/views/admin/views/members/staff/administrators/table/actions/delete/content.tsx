@@ -27,8 +27,9 @@ export const ContentDeleteActionsAdministratorsStaffAdmin = ({
   const { setOpen } = useAlertDialog();
 
   const onSubmit = async () => {
-    const mutation = await mutationApi({ id });
-    if (mutation.error) {
+    try {
+      await mutationApi({ id });
+    } catch (error) {
       toast.error(tCore('errors.title'), {
         description: tCore('errors.internal_server_error'),
       });
@@ -37,7 +38,6 @@ export const ContentDeleteActionsAdministratorsStaffAdmin = ({
     }
 
     toast.success(t('success'));
-
     setOpen(false);
   };
 

@@ -5,9 +5,9 @@
   "author": "Maciej Piotr (aXenDev) Balcerzak",
   "license": "GPL-3.0 license",
   "scripts": {
-    "dev:docs": "next dev --port 3030",
+    "dev:docs": "next dev --port 3031",
     "build:docs": "next build",
-    "start:docs": "next start --port 3030"
+    "start:docs": "next start --port 3031"
   },
   "dependencies": {
     "@radix-ui/react-dropdown-menu": "^2.0.6",

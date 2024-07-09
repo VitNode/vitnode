@@ -1,21 +1,19 @@
-mutation Admin__core_styles__nav__create(
+mutation Admin__core_styles__nav__edit(
   $description: [TextLanguageInput!]!
   $external: Boolean!
   $href: String!
+  $id: Int!
   $name: [TextLanguageInput!]!
   $icon: String
 ) {
-  admin__core_styles__nav__create(
+  admin__core_styles__nav__edit(
     description: $description
     external: $external
     href: $href
+    id: $id
     name: $name
     icon: $icon
   ) {
     id
-    name {
-      language_code
-      value
-    }
   }
 }

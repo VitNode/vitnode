@@ -112,27 +112,27 @@ export const useThemeEditorApi = ({
   }, [activeTheme]);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const mutation = await mutationApi({
-      colors: {
-        primary: values.colors.primary,
-        secondary: values.colors.secondary,
-        background: values.colors.background,
-        destructive: values.colors.destructive,
-        cover: values.colors.cover,
-        accent: values.colors.accent,
-        muted: values.colors.muted,
-        card: values.colors.card,
-        border: values.colors.border,
-        primary_foreground: values.colors['primary-foreground'],
-        secondary_foreground: values.colors['secondary-foreground'],
-        destructive_foreground: values.colors['destructive-foreground'],
-        cover_foreground: values.colors['cover-foreground'],
-        accent_foreground: values.colors['accent-foreground'],
-        muted_foreground: values.colors['muted-foreground'],
-      },
-    });
-
-    if (mutation.error) {
+    try {
+      await mutationApi({
+        colors: {
+          primary: values.colors.primary,
+          secondary: values.colors.secondary,
+          background: values.colors.background,
+          destructive: values.colors.destructive,
+          cover: values.colors.cover,
+          accent: values.colors.accent,
+          muted: values.colors.muted,
+          card: values.colors.card,
+          border: values.colors.border,
+          primary_foreground: values.colors['primary-foreground'],
+          secondary_foreground: values.colors['secondary-foreground'],
+          destructive_foreground: values.colors['destructive-foreground'],
+          cover_foreground: values.colors['cover-foreground'],
+          accent_foreground: values.colors['accent-foreground'],
+          muted_foreground: values.colors['muted-foreground'],
+        },
+      });
+    } catch (error) {
       toast.error(tCore('errors.title'), {
         description: tCore('errors.internal_server_error'),
       });
@@ -140,12 +140,11 @@ export const useThemeEditorApi = ({
       return;
     }
 
-    setOpenSubmitDialog(false);
-    push('/');
-
     toast.success(t('success.title'), {
       description: !CONFIG.node_development && t('success.desc'),
     });
+    setOpenSubmitDialog(false);
+    push('/');
   };
 
   const changeColor = ({

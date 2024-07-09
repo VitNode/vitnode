@@ -10,7 +10,7 @@ import { redirect } from '@/navigation';
 import { InternalErrorView } from '../../../global';
 
 const getData = async () => {
-  const { data } = await fetcher<
+  const data = await fetcher<
     Admin__Install__LayoutQuery,
     Admin__Install__LayoutQueryVariables
   >({

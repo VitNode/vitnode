@@ -17,7 +17,7 @@ import {
 } from '@/utils/graphql';
 
 const getData = async () => {
-  const { data } = await fetcher<
+  const data = await fetcher<
     Admin_Blog_Categories__ShowQuery,
     Admin_Blog_Categories__ShowQueryVariables
   >({

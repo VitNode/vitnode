@@ -6,7 +6,7 @@ import {
 import { fetcher } from './fetcher';
 
 export const getSessionAdminData = async () => {
-  const { data } = await fetcher<
+  const data = await fetcher<
     Admin__Sessions__AuthorizationQuery,
     Admin__Sessions__AuthorizationQueryVariables
   >({

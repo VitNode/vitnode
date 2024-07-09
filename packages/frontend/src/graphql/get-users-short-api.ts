@@ -10,7 +10,7 @@ import { fetcher } from './fetcher';
 export const getUsersShortApi = async (
   variables: Core_Members__Show__SearchQueryVariables,
 ) => {
-  const { data } = await fetcher<
+  const data = await fetcher<
     Core_Members__Show__SearchQuery,
     Core_Members__Show__SearchQueryVariables
   >({

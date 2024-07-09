@@ -41,37 +41,32 @@ export const useCreateNavPluginAdmin = ({ data, parentId }: Props) => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    let error: ErrorType | undefined;
-    if (data) {
-      const mutation = await editMutationApi({
-        ...values,
-        previousCode: data.code,
-        pluginCode: Array.isArray(code) ? code[0] : code,
-        parentCode: values.parent_code === 'null' ? null : values.parent_code,
-      });
-      if (mutation.error) {
-        error = mutation.error as ErrorType | undefined;
+    try {
+      if (data) {
+        await editMutationApi({
+          ...values,
+          previousCode: data.code,
+          pluginCode: Array.isArray(code) ? code[0] : code,
+          parentCode: values.parent_code === 'null' ? null : values.parent_code,
+        });
+      } else {
+        await createMutationApi({
+          ...values,
+          pluginCode: Array.isArray(code) ? code[0] : code,
+          parentCode: values.parent_code === 'null' ? null : values.parent_code,
+        });
       }
-    } else {
-      const mutation = await createMutationApi({
-        ...values,
-        pluginCode: Array.isArray(code) ? code[0] : code,
-        parentCode: values.parent_code === 'null' ? null : values.parent_code,
-      });
-      if (mutation.error) {
-        error = mutation.error as ErrorType | undefined;
+    } catch (err) {
+      const error = err as ErrorType;
+
+      if (error.extensions?.code === 'CODE_ALREADY_EXISTS') {
+        form.setError('code', {
+          message: t('create.code.exists'),
+        });
+
+        return;
       }
-    }
 
-    if (error?.extensions?.code === 'CODE_ALREADY_EXISTS') {
-      form.setError('code', {
-        message: t('create.code.exists'),
-      });
-
-      return;
-    }
-
-    if (error) {
       toast.error(tCore('errors.title'), {
         description: tCore('errors.internal_server_error'),
       });

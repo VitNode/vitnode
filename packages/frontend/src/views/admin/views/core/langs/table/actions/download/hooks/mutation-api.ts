@@ -12,19 +12,15 @@ import {
 export const mutationApi = async (
   variables: Admin__Core_Languages__DownloadMutationVariables,
 ) => {
-  try {
-    const { data } = await fetcher<
-      Admin__Core_Languages__DownloadMutation,
-      Admin__Core_Languages__DownloadMutationVariables
-    >({
-      query: Admin__Core_Languages__Download,
-      variables,
-    });
+  const data = await fetcher<
+    Admin__Core_Languages__DownloadMutation,
+    Admin__Core_Languages__DownloadMutationVariables
+  >({
+    query: Admin__Core_Languages__Download,
+    variables,
+  });
 
-    revalidatePath('/admin/core/langs', 'page');
+  revalidatePath('/admin/core/langs', 'page');
 
-    return { data };
-  } catch (error) {
-    return { error };
-  }
+  return data;
 };

@@ -11,7 +11,5 @@ mutation Core_sessions__sign_up(
     newsletter: $newsletter
   ) {
     email
-    name
-    newsletter
   }
 }

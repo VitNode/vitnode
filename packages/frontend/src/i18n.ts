@@ -23,9 +23,7 @@ export const i18nConfig = async ({
   let plugins: string[] = [];
   try {
     const {
-      data: {
-        core_middleware__show: { plugins: pluginsFromServer },
-      },
+      core_middleware__show: { plugins: pluginsFromServer },
     } = await fetcher<
       Core_Middleware__ShowQuery,
       Core_Middleware__ShowQueryVariables

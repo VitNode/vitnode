@@ -31,7 +31,7 @@ export async function generateMetadataDevPluginAdminLayout({
     getGlobalData(),
   ]);
 
-  const { data } = await getPluginDataAdmin({ code });
+  const data = await getPluginDataAdmin({ code });
   if (!data || data.admin__core_plugins__show.edges.length === 0) return {};
 
   const defaultTitle = `${data.admin__core_plugins__show.edges[0].name} - ${tCore('nav.plugins')} - ${t('title_short')} - ${config.core_settings__show.site_name}`;
@@ -49,7 +49,7 @@ export const DevPluginAdminLayout = async ({
   children,
 }: DevPluginAdminLayoutProps) => {
   if (!CONFIG.node_development) notFound();
-  const { data } = await getPluginDataAdmin({ code });
+  const data = await getPluginDataAdmin({ code });
 
   if (!data || data.admin__core_plugins__show.edges.length === 0) notFound();
 

@@ -12,19 +12,13 @@ import {
 export const editMutationApi = async (
   variables: Admin__Core_Styles__Nav__EditMutationVariables,
 ) => {
-  try {
-    const { data } = await fetcher<
-      Admin__Core_Styles__Nav__EditMutation,
-      Admin__Core_Styles__Nav__EditMutationVariables
-    >({
-      query: Admin__Core_Styles__Nav__Edit,
-      variables,
-    });
+  await fetcher<
+    Admin__Core_Styles__Nav__EditMutation,
+    Admin__Core_Styles__Nav__EditMutationVariables
+  >({
+    query: Admin__Core_Styles__Nav__Edit,
+    variables,
+  });
 
-    revalidatePath('/', 'layout');
-
-    return { data };
-  } catch (error) {
-    return { error };
-  }
+  revalidatePath('/', 'layout');
 };

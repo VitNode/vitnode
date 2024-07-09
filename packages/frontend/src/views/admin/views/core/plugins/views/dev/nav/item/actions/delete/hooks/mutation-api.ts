@@ -14,22 +14,13 @@ interface Args extends Admin__Core_Plugins__Nav__DeleteMutationVariables {
 }
 
 export const mutationApi = async (variables: Args) => {
-  try {
-    const { data } = await fetcher<
-      Admin__Core_Plugins__Nav__DeleteMutation,
-      Admin__Core_Plugins__Nav__DeleteMutationVariables
-    >({
-      query: Admin__Core_Plugins__Nav__Delete,
-      variables,
-    });
+  await fetcher<
+    Admin__Core_Plugins__Nav__DeleteMutation,
+    Admin__Core_Plugins__Nav__DeleteMutationVariables
+  >({
+    query: Admin__Core_Plugins__Nav__Delete,
+    variables,
+  });
 
-    revalidatePath(
-      `/admin/core/plugins/${variables.pluginCode}/dev/nav`,
-      'page',
-    );
-
-    return { data };
-  } catch (error) {
-    return { error };
-  }
+  revalidatePath(`/admin/core/plugins/${variables.pluginCode}/dev/nav`, 'page');
 };

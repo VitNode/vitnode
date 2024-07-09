@@ -10,18 +10,12 @@ import {
 import { fetcher } from '@/graphql/fetcher';
 
 export const mutationApi = async () => {
-  try {
-    const { data } = await fetcher<
-      Admin__Install__Create_DatabaseMutation,
-      Admin__Install__Create_DatabaseMutationVariables
-    >({
-      query: Admin__Install__Create_Database,
-    });
+  await fetcher<
+    Admin__Install__Create_DatabaseMutation,
+    Admin__Install__Create_DatabaseMutationVariables
+  >({
+    query: Admin__Install__Create_Database,
+  });
 
-    revalidatePath('/admin/install', 'page');
-
-    return { data };
-  } catch (error) {
-    return { error };
-  }
+  revalidatePath('/admin/install', 'page');
 };

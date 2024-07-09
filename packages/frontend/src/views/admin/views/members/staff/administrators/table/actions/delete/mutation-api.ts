@@ -12,19 +12,13 @@ import {
 export const mutationApi = async (
   variables: Admin__Core_Staff_Administrators__DeleteMutationVariables,
 ) => {
-  try {
-    const { data } = await fetcher<
-      Admin__Core_Staff_Administrators__DeleteMutation,
-      Admin__Core_Staff_Administrators__DeleteMutationVariables
-    >({
-      query: Admin__Core_Staff_Administrators__Delete,
-      variables,
-    });
+  await fetcher<
+    Admin__Core_Staff_Administrators__DeleteMutation,
+    Admin__Core_Staff_Administrators__DeleteMutationVariables
+  >({
+    query: Admin__Core_Staff_Administrators__Delete,
+    variables,
+  });
 
-    revalidatePath('/admin', 'layout');
-
-    return { data };
-  } catch (error) {
-    return { error };
-  }
+  revalidatePath('/admin', 'layout');
 };
