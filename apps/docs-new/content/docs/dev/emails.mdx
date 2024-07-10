@@ -45,6 +45,13 @@ export class ShowBlogCategoriesService {
 
 ## Templates using React
 
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+<Steps>
+<Step>
+
+Create a new file for your email template.
+
 ```tsx title="backend/plugins/blog/categories/show/example.email.tsx"
 import * as React from 'react';
 import { Text } from '@react-email/components';
@@ -59,6 +66,9 @@ export const ExampleTemplateEmail = ({ username }: Props) => {
 ```
 
 You can read more about [React Email here](https://react.email/docs/introduction).
+
+</Step>
+<Step>
 
 Import into your service and use it like this:
 
@@ -100,6 +110,9 @@ export class ShowBlogCategoriesService {
   }
 }
 ```
+
+</Step>
+</Steps>
 
 ### Internationalization (i18n)
 
@@ -143,6 +156,9 @@ We're providing some helper functions to make your life easier. Using `this.emai
 - site_name,
 - site_short_name
 
+<Steps>
+<Step>
+
 ```tsx title="backend/plugins/blog/categories/show/example.email.tsx"
 import * as React from 'react';
 import { Text, Link } from '@react-email/components';
@@ -179,6 +195,9 @@ export const ExampleTemplateEmail = ({
 Use `bg-${color.primary.DEFAULT}` instead.
 
 </Callout>
+
+</Step>
+<Step>
 
 Modify the service to inject `EmailHelpersService`.
 
@@ -226,3 +245,6 @@ export class ShowBlogCategoriesService {
   }
 }
 ```
+
+</Step>
+</Steps>

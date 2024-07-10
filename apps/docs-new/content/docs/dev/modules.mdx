@@ -24,6 +24,12 @@ export class BlogModule {}
 
 You can extend the module by adding a new module.
 
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+<Steps>
+
+<Step>
+
 For example, you want to create a new module for `categories`:
 
 ```ts title="backend/src/plugins/blog/categories/categories.module.ts"
@@ -32,6 +38,8 @@ import { Module } from '@nestjs/common';
 @Module({})
 export class BlogCategoriesModule {}
 ```
+
+</Step><Step>
 
 And then you can import the module to the `BlogModule`:
 
@@ -45,6 +53,9 @@ import { BlogCategoriesModule } from './categories/categories.module'; // [!code
 })
 export class BlogModule {}
 ```
+
+</Step>
+</Steps>
 
 ## Global Module
 

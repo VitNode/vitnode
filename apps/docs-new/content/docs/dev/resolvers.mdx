@@ -5,6 +5,10 @@ description: Expose your data to the world for GraphQL.
 
 Resolvers are the functions that are responsible for populating the data for a single field in your schema. They are the bridge between the GraphQL server and your data.
 
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+<Steps>
+<Step>
 ## Create a Resolver
 
 In regard to the [previews](/docs/dev/services) section, let's create a simple logic where we're using the service.
@@ -58,6 +62,9 @@ export class ShowBlogCategoriesResolver {
 
 Read more about [Return Object](/docs/dev/services#return-object).
 
+</Step>
+<Step>
+
 ## Provide into the Module
 
 ```ts title="backend/plugins/blog/categories/categories.module.ts"
@@ -71,6 +78,9 @@ import { ShowBlogCategoriesResolver } from './show/show.resolver'; // [!code hig
 })
 export class BlogCategoriesModule {}
 ```
+
+</Step>
+</Steps>
 
 ## Arguments
 

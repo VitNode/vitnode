@@ -33,35 +33,50 @@ yarn create vitnode-app@latest
 
 </Tabs>
 
+### Requirements
+
+| 🛠️ Software | Minimum | Recommended |
+| :---------- | :------ | :---------- |
+| Node.js     | 18      | 20          |
+| PostgreSQL  | 14      | 16          |
+
+| 🖥️ Hardware | Minimum        | Recommended    | Development    |
+| :---------- | :------------- | :------------- | :------------- |
+| CPU         | 1GHz (2+ core) | 1GHz (4+ core) | 1GHz (4+ core) |
+| RAM         | 2GB            | 4GB            | 8GB            |
+| Storage     | 10GB           | 20GB           | 20GB           |
+| Network     | 100Mbps        | 300Mbps        | 100Mbps        |
+
+| 🧑‍💻 Browser | Minimum | Recommended |
+| :--------- | :------ | :---------- |
+| Chrome     | >= 106  | >= 115      |
+| Firefox    | >= 110  | >= 121      |
+| Edge       | >= 106  | >= 120      |
+| Safari     | >= 16   | >= 17.2     |
+| Opera      | >= 94   | >= 101      |
+
 ## FAQ
 
 import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
 
 <Accordions>
-  <Accordion title="Why VitNode?">My Content</Accordion>
-  <Accordion title="For who is VitNode?">My Content</Accordion>
+  <Accordion title="Why VitNode?">
+  `VitNode` is for developers who want to create websites with ease without worrying about the basic staff like authentication, authorization, database, emails etc.
+  </Accordion>
+  <Accordion title="Why not VitNode?">
+    If you want to create simple static page with no backend, `VitNode` is not for
+    you. You can use only [NextJS](https://nextjs.org/) or [Astro](https://astro.build/) for that.
+  </Accordion>
+  <Accordion title="Why NestJS insted of NextJS api?">
+    The goal of `VitNode` is to provide a full-stack solution for developers to
+    create websites with ease.
+
+    `NextJS API` don't have a lot of features that `NestJS` have, like guards, interceptors, pipes, dependency injection, decorators, WebSockets, dynamic saving files etc.
+
+    `NestJS` is a great framework for building APIs and `NextJS` is a great framework for building websites. Combining these two frameworks allows developers to create websites with ease.
+
+  </Accordion>
+    <Accordion title="When VitNode will be stable?">
+    Not earlier then `NestJS 15` and `React 19` will be stable.
+    </Accordion>
 </Accordions>
-
-### Requirements
-
-- [Node.js 18+](https://nodejs.org/)
-- [PostgreSQL 15+](https://www.postgresql.org/)
-
-#### 🖥️ Hardware
-
-|         | Minimum        | Recommended    |
-| :------ | :------------- | :------------- |
-| CPU     | 1GHz (2+ core) | 1GHz (4+ core) |
-| RAM     | 2GB            | 4GB            |
-| Storage | 10GB           | 20GB           |
-| Network | 100Mbps        | 300Mbps        |
-
-#### 🧑‍💻 Browser
-
-|         | Minimum | Recommended |
-| :------ | :------ | :---------- |
-| Chrome  | >= 106  | >= 115      |
-| Firefox | >= 110  | >= 121      |
-| Edge    | >= 106  | >= 120      |
-| Safari  | >= 16   | >= 17.2     |
-| Opera   | >= 94   | >= 101      |

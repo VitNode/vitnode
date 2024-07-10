@@ -11,9 +11,14 @@
     "services",
     "resolvers",
     "rest",
-    "--- API References ---",
+    "--- Plugins ---",
     "plugins",
+    "plugins-nav-admin",
+    "plugins-permissions-admin",
+    "--- API References ---",
     "authorization",
+    "fetch",
+    "i18n",
     "..."
   ]
 }

@@ -44,6 +44,11 @@ export class SignUpCoreSessionsService {
 
 ## Frontend
 
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+<Steps>
+
+<Step>
 ### Component
 
 Inside your form component, create a div with an id of `vitnode_recaptcha` to render the captcha.
@@ -70,6 +75,8 @@ export const FormSignUp = () => {
 };
 ```
 
+</Step>
+<Step>
 ### Hook
 
 Inside your hook, import the `useCaptcha` hook and call the `getTokenFromCaptcha` function to get the captcha token and use it in your mutation.
@@ -93,6 +100,8 @@ export const useSignUpView = () => {
 
 `isReady` is a boolean that indicates if the captcha is ready to be used.
 
+</Step>
+<Step>
 ### Fetcher
 
 Inside your fetcher, add `x-vitnode-captcha-token` to the headers.
@@ -130,3 +139,6 @@ export const mutationApi = async (variables: Args) => {
   return data;
 };
 ```
+
+</Step>
+</Steps>

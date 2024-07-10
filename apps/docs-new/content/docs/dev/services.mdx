@@ -5,6 +5,10 @@ description: Your code logic for GraphQL.
 
 Services helps to separate the business logic from the GraphQL resolvers. It's a good practice to keep the resolvers as thin as possible.
 
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+<Steps>
+<Step>
 ## Create a Service
 
 Let's create a simple logic for the GraphQL query or mutation.
@@ -20,6 +24,8 @@ export class ShowBlogCategoriesService {
 }
 ```
 
+</Step>
+<Step>
 ## Provide into the Module
 
 ```ts title="backend/plugins/blog/categories/categories.module.ts"
@@ -33,7 +39,13 @@ import { ShowBlogCategoriesService } from './show/show.service';
 export class BlogCategoriesModule {}
 ```
 
+</Step>
+</Steps>
+
 ## Arguments
+
+<Steps>
+<Step>
 
 You can pass arguments to the service method by creating a DTO (Data Transfer Object) file.
 
@@ -59,6 +71,9 @@ For example `{Action}{Plugin}{Module}Args`.
 
 You can read more about [NestJS GraphQL Class Inheritance](https://docs.nestjs.com/graphql/resolvers#class-inheritance) in the official documentation.
 
+</Step>
+<Step>
+
 ### Use Arguments in Service
 
 ```ts title="backend/plugins/blog/categories/show/show.service.ts"
@@ -75,7 +90,13 @@ export class ShowBlogCategoriesService {
 }
 ```
 
+</Step>
+</Steps>
+
 ## Return Object
+
+<Steps>
+<Step>
 
 You can return an object from the service method by creating a DTO (Data Transfer Object) file.
 
@@ -100,6 +121,9 @@ For example `{Action}{Plugin}{Module}Obj`.
 
 </Callout>
 
+</Step>
+<Step>
+
 ### Use Object in Service
 
 ```ts title="backend/plugins/blog/categories/show/show.service.ts"
@@ -118,3 +142,6 @@ export class ShowBlogCategoriesService {
   }
 }
 ```
+
+</Step>
+</Steps>

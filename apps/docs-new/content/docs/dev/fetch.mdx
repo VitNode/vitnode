@@ -1,0 +1,87 @@
+---
+title: Fetch & Revalidate Data
+description: How to get data from backend and revalidate it.
+---
+
+## Queries
+
+The best way to fetch data is using [React Server Components (RSC)](https://react.dev/reference/rsc/server-components) with our `fetcher` function which support GraphQL queries and mutations.
+
+```tsx title="example-component.tss"
+import { fetcher } from 'vitnode-frontend/graphql/fetcher';
+
+import {
+  Forum_Forums__Show,
+  type Forum_Forums__ShowQuery,
+  type Forum_Forums__ShowQueryVariables,
+} from '@/graphql/graphql';
+
+const getData = async (variables: Forum_Forums__ShowQueryVariables) => {
+  const data = await fetcher<
+    Forum_Forums__ShowQuery, // Query type
+    Forum_Forums__ShowQueryVariables // Variables type
+  >({
+    query: Forum_Forums__Show, // Schema GraphQL query
+    variables,
+    cache: 'force-cache', // this option is used for caching data, recommended to use 'force-cache'
+  });
+
+  return data;
+};
+
+export const ExampleComponent = async () => {
+  const data = await getData({ id: '1' });
+
+  return <div>{data.forum.name}</div>;
+};
+```
+
+## Mutations
+
+To mutate data, you can use [Server Action from NextJS](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations) with the `fetcher` function.
+
+```ts title="hooks/mutation-api.ts"
+'use server';
+
+import {
+  Core_Sessions__Sign_Out,
+  Core_Sessions__Sign_OutMutation,
+  Core_Sessions__Sign_OutMutationVariables,
+} from '@/graphql/graphql';
+import { fetcher } from 'vitnode-frontend/graphql/fetcher';
+
+export const mutationApi = async () => {
+  await fetcher<
+    Core_Sessions__Sign_OutMutation, // Mutation type
+    Core_Sessions__Sign_OutMutationVariables // Variables type
+  >({
+    query: Core_Sessions__Sign_Out, // Schema GraphQL mutation
+  });
+};
+```
+
+import { Callout } from 'fumadocs-ui/components/callout';
+
+<Callout title="Cache Mutation" type="warn">
+  Don't cache mutation data, because it will cause a problem with the mutation.
+</Callout>
+
+## Debounced fetching
+
+To avoid fetching data on every key press you can use `useDebouncedCallback` from `use-debounce` package.
+
+Here is an example how to use it for `search` input.
+
+```tsx
+import { useDebouncedCallback } from 'use-debounce';
+
+const handleSearchInput = useDebouncedCallback((value: string) => {
+  setSearch(value);
+}, 500);
+
+return <Input onChange={e => handleSearchInput(e.target.value)} />;
+```
+
+### Revalidate data
+
+NextJS allows you to use [Revalidating data](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations#revalidating-data) in Server Actions.

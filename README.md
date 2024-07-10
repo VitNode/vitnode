@@ -28,21 +28,24 @@ yarn create vitnode-app@latest
 pnpm create vitnode-app@latest
 ```
 
-## 🖥️ Hardware
+## Requirements
 
-|         | Minimum        | Recommended    |
-| :------ | :------------- | :------------- |
-| CPU     | 1GHz (2+ core) | 1GHz (4+ core) |
-| RAM     | 2GB            | 4GB            |
-| Storage | 10GB           | 20GB           |
-| Network | 100Mbps        | 300Mbps        |
+| 🛠️ Software | Minimum | Recommended |
+| :---------- | :------ | :---------- |
+| Node.js     | 18      | 20          |
+| PostgreSQL  | 14      | 16          |
 
-## 🧑‍💻 Browser
+| 🖥️ Hardware | Minimum        | Recommended    | Development    |
+| :---------- | :------------- | :------------- | :------------- |
+| CPU         | 1GHz (2+ core) | 1GHz (4+ core) | 1GHz (4+ core) |
+| RAM         | 2GB            | 4GB            | 8GB            |
+| Storage     | 10GB           | 20GB           | 20GB           |
+| Network     | 100Mbps        | 300Mbps        | 100Mbps        |
 
-|         | Minimum | Recommended |
-| :------ | :------ | :---------- |
-| Chrome  | >= 106  | >= 115      |
-| Firefox | >= 110  | >= 121      |
-| Edge    | >= 106  | >= 120      |
-| Safari  | >= 16   | >= 17.2     |
-| Opera   | >= 94   | >= 101      |
+| 🧑‍💻 Browser | Minimum | Recommended |
+| :--------- | :------ | :---------- |
+| Chrome     | >= 106  | >= 115      |
+| Firefox    | >= 110  | >= 121      |
+| Edge       | >= 106  | >= 120      |
+| Safari     | >= 16   | >= 17.2     |
+| Opera      | >= 94   | >= 101      |
