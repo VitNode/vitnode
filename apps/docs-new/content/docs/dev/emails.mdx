@@ -1,24 +1,26 @@
-import { Steps } from 'nextra/components';
-import { Callout } from 'nextra/components';
+---
+title: Emails
+description: Sending emails in VitNode.
+---
 
-# Email
+In VitNode we're implementing [NodeMailer SMTP](https://nodemailer.com/) to send emails with [React Email](https://react.email/) which allows you to create beautiful responsive emails using React.
 
-In VitNode we're implementing [NodeMailer SMTP](https://nodemailer.com/) to send emails with [react-email](https://react.email/) which allows you to create beautiful responsive emails using React.
+## Usage
 
-## Example usage
-
-```ts {2, 8, 20-26}
+```ts title="backend/plugins/blog/categories/show/show.service.ts"
 import { Injectable } from '@nestjs/common';
-import { SendAdminEmailService, DatabaseService } from 'vitnode-backend';
+import { SendAdminEmailService } from 'vitnode-backend';
+
+import { ShowBlogCategoriesArgs } from './dto/show.args';
 
 @Injectable()
-export class ExampleService {
+export class ShowBlogCategoriesService {
   constructor(
     private readonly databaseService: DatabaseService,
-    private readonly mailService: SendAdminEmailService,
+    private readonly mailService: SendAdminEmailService, // [!code highlight]
   ) {}
 
-  async send_email({ email }: Args): Promise<string> {
+  show({ email }: ShowBlogCategoriesArgs): string {
     const user = await this.databaseService.db.query.core_users.findFirst({
       where: (table, { eq }) => eq(table.email, email),
     });
@@ -27,6 +29,7 @@ export class ExampleService {
       throw new NotFoundError('User');
     }
 
+    // [!code word:mailService]
     await this.mailService.send({
       to: user.email,
       subject: 'Test email subject',
@@ -40,20 +43,9 @@ export class ExampleService {
 }
 ```
 
-<Callout type="warning" emoji="⚠️">
-  VitNode throws an error if the email config is empty.
-</Callout>
+## Templates using React
 
-## Templates
-
-VitNode provides a template for emails. You can customize it by `AdminCP` => `Settings` => `Email`.
-
-<Steps>
-### TSX file
-
-Create `.tsx` file, for example: `/emails/example_template.tsx`.
-
-```tsx
+```tsx title="backend/plugins/blog/categories/show/example.email.tsx"
 import * as React from 'react';
 import { Text } from '@react-email/components';
 
@@ -66,24 +58,25 @@ export const ExampleTemplateEmail = ({ username }: Props) => {
 };
 ```
 
-### Import into service
+You can read more about [React Email here](https://react.email/docs/introduction).
 
-Import the template into your service and use it.
+Import into your service and use it like this:
 
-```ts {4, 25}
+```ts title="backend/plugins/blog/categories/show/show.service.ts"
 import { Injectable } from '@nestjs/common';
-import { SendAdminEmailService, DatabaseService } from 'vitnode-backend';
+import { SendAdminEmailService } from 'vitnode-backend';
 
-import { ExampleTemplateEmail } from './_emails/example_template';
+import { ShowBlogCategoriesArgs } from './dto/show.args';
+import { ExampleTemplateEmail } from './example.email'; // [!code highlight]
 
 @Injectable()
-export class ExampleService {
+export class ShowBlogCategoriesService {
   constructor(
     private readonly databaseService: DatabaseService,
     private readonly mailService: SendAdminEmailService,
   ) {}
 
-  async send_email({ email }: Args): Promise<string> {
+  show({ email }: ShowBlogCategoriesArgs): string {
     const user = await this.databaseService.db.query.core_users.findFirst({
       where: (table, { eq }) => eq(table.email, email),
     });
@@ -95,7 +88,10 @@ export class ExampleService {
     await this.mailService.send({
       to: user.email,
       subject: 'Test email subject',
-      message: SendAdminEmailService({ username: user.name }),
+      // [!code word:SendAdminEmailService]
+      message: SendAdminEmailService({
+        username: user.name,
+      }),
       previewText: 'Test email preview text',
       user,
     });
@@ -105,16 +101,14 @@ export class ExampleService {
 }
 ```
 
-</Steps>
-
-## Internationalization (i18n)
+### Internationalization (i18n)
 
 We're created a helper function `getTranslationForEmail(namespace, language)` to translate the email templates. You can use it like this:
 
-```tsx {3, 7, 11, 15}
+```tsx
 import * as React from 'react';
 import { Text } from '@react-email/components';
-import { getTranslationForEmail, User } from 'vitnode-backend';
+import { getTranslationForEmail, User } from 'vitnode-backend'; // [!code highlight]
 
 interface Props {
   username: string;
@@ -122,7 +116,7 @@ interface Props {
 }
 
 export const ExampleTemplateEmail = ({ username, user }: Props) => {
-  const t = getTranslationForEmail('admin.core.email', user.language);
+  const t = getTranslationForEmail('admin.core.email', user.language); // [!code highlight]
 
   return (
     <Text>
@@ -134,11 +128,13 @@ export const ExampleTemplateEmail = ({ username, user }: Props) => {
 
 ...or in your service.
 
-<Callout type="info" emoji="ℹ️">
+import { Callout } from 'fumadocs-ui/components/callout';
+
+<Callout title="Schema GraphQL">
   `namespaces` are working the same as in the frontend.
 </Callout>
 
-## Template Helpers
+### Template Helpers
 
 We're providing some helper functions to make your life easier. Using `this.emailHelpersService.getHelpersForEmail()` you can get the following values like:
 
@@ -147,32 +143,22 @@ We're providing some helper functions to make your life easier. Using `this.emai
 - site_name,
 - site_short_name
 
-<Steps>
-
-### Modify the template
-
-```tsx {4-5, 10, 18, 25-30}
+```tsx title="backend/plugins/blog/categories/show/example.email.tsx"
 import * as React from 'react';
 import { Text, Link } from '@react-email/components';
-import {
-  getTranslationForEmail,
-  GetHelpersForEmailType,
-  User,
-} from 'vitnode-backend';
+import { GetHelpersForEmailType } from 'vitnode-backend'; // [!code highlight]
 
 interface Props {
-  helpers: GetHelpersForEmailType;
+  helpers: GetHelpersForEmailType; // [!code highlight]
   username: string;
-  user: User;
 }
 
 export const ExampleTemplateEmail = ({
   username,
-  user,
-  helpers: { frontend_url, color },
+  helpers: { frontend_url, color }, // [!code highlight]
 }: Props) => {
-  const t = getTranslationForEmail('admin.core.email', user.language);
-
+  // [!code word:frontend_url]
+  // [!code word:color]
   return (
     <Text>
       Hi! This is a test for {username} - {t('surfix_user')}
@@ -187,36 +173,35 @@ export const ExampleTemplateEmail = ({
 };
 ```
 
-<Callout type="warning" emoji="⚠️">
-  Custom colors like for example`bg-primary` not working in emails.  
-
+<Callout title="Custom Colors" type="warn">
+  Custom colors like `bg-primary` not working in emails.
 
 Use `bg-${color.primary.DEFAULT}` instead.
 
 </Callout>
 
-### Import into service
+Modify the service to inject `EmailHelpersService`.
 
-```ts {1, 5, 15-16, 33}
-import { Injectable, Inject } from '@nestjs/common';
+```ts title="backend/plugins/blog/categories/show/show.service.ts"
+import { Injectable, Inject } from '@nestjs/common'; // [!code highlight]
 import {
   SendAdminEmailService,
-  DatabaseService,
-  EmailHelpersServiceType,
+  EmailHelpersServiceType, // [!code highlight]
 } from 'vitnode-backend';
 
-import { ExampleTemplateEmail } from './_emails/example_template';
+import { ShowBlogCategoriesArgs } from './dto/show.args';
+import { ExampleTemplateEmail } from './example.email';
 
 @Injectable()
-export class ExampleService {
+export class ShowBlogCategoriesService {
   constructor(
     private readonly databaseService: DatabaseService,
     private readonly mailService: SendAdminEmailService,
-    @Inject('EmailHelpersService')
-    private readonly emailHelpersService: EmailHelpersServiceType,
+    @Inject('EmailHelpersService') // [!code highlight]
+    private readonly emailHelpersService: EmailHelpersServiceType, // [!code highlight]
   ) {}
 
-  async send_email({ email }: Args): Promise<string> {
+  show({ email }: ShowBlogCategoriesArgs): string {
     const user = await this.databaseService.db.query.core_users.findFirst({
       where: (table, { eq }) => eq(table.email, email),
     });
@@ -228,9 +213,10 @@ export class ExampleService {
     await this.mailService.send({
       to: user.email,
       subject: 'Test email subject',
+
       message: SendAdminEmailService({
         username: user.name,
-        helpers: this.emailHelpersService.getHelpersForEmail(),
+        helpers: this.emailHelpersService.getHelpersForEmail(), // [!code highlight]
       }),
       previewText: 'Test email preview text',
       user,
@@ -240,5 +226,3 @@ export class ExampleService {
   }
 }
 ```
-
-</Steps>

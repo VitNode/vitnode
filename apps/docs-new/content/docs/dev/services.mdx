@@ -47,6 +47,16 @@ export class ShowBlogCategoriesArgs {
 }
 ```
 
+import { Callout } from 'fumadocs-ui/components/callout';
+
+<Callout title="Schema GraphQL">
+  NestJS GraphQL Automaticly generates schema from the DTO classes. Make sure to
+  each class has a unique name.
+
+For example `{Action}{Plugin}{Module}Args`.
+
+</Callout>
+
 You can read more about [NestJS GraphQL Class Inheritance](https://docs.nestjs.com/graphql/resolvers#class-inheritance) in the official documentation.
 
 ### Use Arguments in Service
@@ -81,6 +91,14 @@ export class ShowBlogCategoriesObj {
   name: string;
 }
 ```
+
+<Callout title="Schema GraphQL">
+  NestJS GraphQL Automaticly generates schema from the DTO classes. Make sure to
+  each class has a unique name.
+
+For example `{Action}{Plugin}{Module}Obj`.
+
+</Callout>
 
 ### Use Object in Service
 

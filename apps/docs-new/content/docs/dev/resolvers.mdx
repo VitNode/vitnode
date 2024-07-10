@@ -27,7 +27,16 @@ export class ShowBlogCategoriesResolver {
 }
 ```
 
-You can also create `Mutation`
+import { Callout } from 'fumadocs-ui/components/callout';
+ 
+<Callout title="Unique Name">
+ The name of the query should be unique. Good practice is to name `{plugin}_{module}__{action}`.
+
+If query or mutation is in the admin folder, you should name it `admin__{plugin}_{module}__{action}`.
+
+</Callout>
+
+You can also create `Mutation`:
 
 ```ts title="backend/plugins/blog/categories/show/show.resolver.ts"
 // [!code word:Mutation]
