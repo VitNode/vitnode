@@ -172,7 +172,7 @@ export class VitNodeCoreModule {
         ThrottlerModule.forRoot([
           {
             ttl: 1000,
-            limit: 20,
+            limit: 30,
           },
         ]),
         GraphQLModule.forRoot<ApolloDriverConfig>({

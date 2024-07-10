@@ -9,7 +9,7 @@ import { ThemeSwitcher } from '@/components/switchers/theme-switcher';
 
 export const HeaderAdmin = () => {
   return (
-    <header className="bg-card/75 fixed left-0 right-0 top-0 z-20 flex h-16 border-b backdrop-blur">
+    <header className="bg-card/75 fixed left-80 right-0 top-0 z-20 flex h-16 border-b backdrop-blur">
       {CONFIG.node_development && (
         <div
           className="absolute left-0 top-0 z-50 h-1 w-full"

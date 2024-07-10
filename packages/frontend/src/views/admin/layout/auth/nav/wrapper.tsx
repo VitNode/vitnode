@@ -15,7 +15,6 @@ export const NavAdminWrapper = ({ children }: Props) => {
     <Accordion.Root
       type="multiple"
       defaultValue={[`${layoutSegments[0]}_${layoutSegments[1]}`]}
-      className="space-y-4"
     >
       {children}
     </Accordion.Root>

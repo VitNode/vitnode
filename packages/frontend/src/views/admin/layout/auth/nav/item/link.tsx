@@ -2,7 +2,6 @@
 
 import * as React from 'react';
 import * as Accordion from '@radix-ui/react-accordion';
-import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { ChevronDown, Menu } from 'lucide-react';
 
@@ -43,14 +42,12 @@ export const LinkItemNavAdmin = ({
 
   const buttonClass = (active: boolean) =>
     cn(
-      'hover:bg-primary/10 text-foreground/70 hover:text-foreground [&>svg]:text-muted-foreground relative h-8 w-full justify-start font-normal [&>svg]:flex [&>svg]:size-4 [&>svg]:flex-shrink-0 [&>svg]:items-center [&>svg]:justify-center [&[data-state=open]>svg:not(:first-child)]:rotate-180',
+      'hover:text-foreground/90 text-muted-foreground relative h-9 w-full justify-start font-normal [&>svg]:flex [&>svg]:size-4 [&>svg]:flex-shrink-0 [&>svg]:items-center [&>svg]:justify-center [&[data-state=open]>svg:not(:first-child)]:rotate-180',
       {
-        'bg-primary/10 text-foreground font-semibold': active,
+        'bg-primary/10 text-primary [&>svg]:text-primary hover:text-primary font-semibold':
+          active,
       },
     );
-
-  const primaryButtonClass = (active: boolean) =>
-    cn(buttonClass(active), 'pl-4');
 
   return (
     <Accordion.Item value={`${primaryId}_${id}`}>
@@ -59,19 +56,13 @@ export const LinkItemNavAdmin = ({
           <Button
             variant="ghost"
             size="sm"
-            className={primaryButtonClass(active && !isChildActive)}
+            className={buttonClass(active && !isChildActive)}
           >
             {icon ? icons.find(i => i.id === id)?.icon : <Menu />}
             {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
             {/* @ts-expect-error */}
             <span>{t(id)}</span>
             <ChevronDown className="ml-auto transition-transform" />
-            {active && (
-              <motion.div
-                className="bg-primary absolute left-1 h-[calc(100%_-_1rem)] w-1 rounded-md"
-                layoutId="admin_nav_underline"
-              />
-            )}
           </Button>
         </Accordion.Trigger>
       ) : (
@@ -79,20 +70,13 @@ export const LinkItemNavAdmin = ({
           href={href}
           className={cn(
             buttonVariants({ variant: 'ghost', size: 'sm' }),
-            primaryButtonClass(active),
+            buttonClass(active),
           )}
         >
           {icon ? icons.find(i => i.id === id)?.icon : <Menu />}
           {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
           {/* @ts-expect-error */}
           <span>{t(id)}</span>
-
-          {active && (
-            <motion.div
-              className="bg-primary absolute left-1 h-[calc(100%_-_1rem)] w-1 rounded-md"
-              layoutId="admin_nav_underline"
-            />
-          )}
         </Link>
       )}
 

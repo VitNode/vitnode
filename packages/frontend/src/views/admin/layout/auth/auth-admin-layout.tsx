@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import { NavAdmin } from './nav/nav-admin';
 import { HeaderAdmin } from './header/header-admin';
+import { AsideAuthAdmin } from './aside/aside';
 
 export interface AuthAdminLayoutProps {
   children: React.ReactNode;
@@ -10,11 +10,10 @@ export interface AuthAdminLayoutProps {
 export const AuthAdminLayout = ({ children }: AuthAdminLayoutProps) => {
   return (
     <>
-      <HeaderAdmin />
-      <nav className="fixed left-0 top-16 z-10 hidden h-[calc(100vh_-_4rem)] w-64 space-y-5 overflow-auto p-2 md:block">
-        <NavAdmin />
-      </nav>
-      <main className="text-card-foreground mt-16 p-5 sm:pl-2 md:ml-64">
+      <AsideAuthAdmin />
+      {/* <HeaderAdmin /> */}
+
+      <main className="text-card-foreground p-5 sm:pl-2 md:ml-[240px] xl:ml-[260px]">
         <div className="container">{children}</div>
       </main>
     </>
