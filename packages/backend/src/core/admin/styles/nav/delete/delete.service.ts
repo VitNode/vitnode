@@ -39,6 +39,7 @@ export class DeleteAdminNavStylesService {
       item_id: id,
     });
 
+    // TODO: Check if it's necessary to delete
     await this.parserTextLang.delete({
       database: core_nav_description,
       item_id: id,

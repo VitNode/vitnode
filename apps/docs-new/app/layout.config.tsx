@@ -4,6 +4,7 @@ import { pageTree } from '@/app/source';
 import { modes } from '../utils/modes';
 import Image from 'next/image';
 import logo from '@/public/logo.svg';
+import { utils } from '@/utils/source';
 
 // shared configuration
 export const baseOptions: BaseLayoutProps = {
@@ -27,7 +28,7 @@ export const baseOptions: BaseLayoutProps = {
 // docs layout configuration
 export const docsOptions: DocsLayoutProps = {
   ...baseOptions,
-  tree: pageTree,
+  tree: utils.pageTree,
   sidebar: {
     defaultOpenLevel: 0,
     banner: (
