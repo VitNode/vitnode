@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { genSalt, hash } from 'bcrypt';
 import { count } from 'drizzle-orm';
 import { ConfigService } from '@nestjs/config';
 import { removeSpecialCharacters } from 'vitnode-shared';
@@ -7,6 +6,7 @@ import { removeSpecialCharacters } from 'vitnode-shared';
 import { SignUpCoreSessionsArgs } from './dto/sign_up.args';
 import { SignUpCoreSessionsObj } from './dto/sign_up.obj';
 import { AvatarColorService } from './helpers/avatar-color.service';
+import { encryptPassword } from '../encrypt_password';
 
 import { CaptchaCoreCaptchaSecurityService } from '@/core/admin/security/captcha/captcha.service';
 import { DatabaseService } from '../../../database';
@@ -83,10 +83,7 @@ export class SignUpCoreSessionsService extends AvatarColorService {
       });
     }
 
-    const passwordSalt = await genSalt(
-      this.configService.getOrThrow('password_salt'),
-    );
-    const hashPassword = await hash(password, passwordSalt);
+    const hashPassword = await encryptPassword(this.configService, password);
 
     const user = await this.databaseService.db
       .insert(core_users)
