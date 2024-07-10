@@ -248,6 +248,9 @@
       "error": {
         "title": "Invalid credentials",
         "desc": "The email address or password was incorrect. Please try again (make sure your caps lock is off)."
+      },
+      "forgot_password": {
+        "title": "Forgot Password?"
       }
     },
     "sign_up": {

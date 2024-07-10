@@ -21,7 +21,7 @@ export const ContentCreateKeyEmail = ({
       <Text>{t('title')}</Text>
       <Button
         className={`bg-${color.primary.DEFAULT} rounded-md text-sm font-medium text-${color.primary.foreground} px-4 py-2.5`}
-        href={`${frontend_url}/reset_password?key=${key}`}
+        href={`${frontend_url}/reset-password?key=${key}`}
       >
         {t('button')}
       </Button>

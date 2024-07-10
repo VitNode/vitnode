@@ -18,6 +18,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { useSignInView } from '@/hooks/core/sign/in/use-sign-in-view';
+import { Link } from '@/navigation';
 
 export const FormSignIn = () => {
   const t = useTranslations('core');
@@ -94,7 +95,7 @@ export const FormSignIn = () => {
             />
           </div>
         </CardContent>
-        <CardFooter>
+        <CardFooter className="flex flex-col items-center gap-2">
           <Button
             type="submit"
             className="w-full"
@@ -102,6 +103,13 @@ export const FormSignIn = () => {
           >
             {t('sign_in.form.submit')}
           </Button>
+
+          <Link
+            href="/forgot-password"
+            className="text-primary self-end text-sm"
+          >
+            {t('sign_in.forgot_password.title')}
+          </Link>
         </CardFooter>
       </form>
     </Form>

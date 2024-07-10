@@ -248,6 +248,9 @@
       "error": {
         "title": "Nieprawidłowe dane logowania",
         "desc": "Email lub hasło jest nieprawidłowe. Proszę spróbuj ponownie (upewnij się że caps lock jest wyłączony)."
+      },
+      "forgot_password": {
+        "title": "Zapomniałeś hasła?"
       }
     },
     "sign_up": {

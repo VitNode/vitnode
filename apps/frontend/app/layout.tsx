@@ -1,4 +1,5 @@
 import './global.css';
+
 interface Props {
   children: React.ReactNode;
 }
