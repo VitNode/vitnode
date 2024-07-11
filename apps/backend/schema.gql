@@ -158,14 +158,6 @@ type GroupUser {
   name: [TextLanguage!]!
 }
 
-input GroupsPermissionsCreatePluginCategories {
-  can_create: Boolean!
-  can_download_files: Boolean!
-  can_read: Boolean!
-  can_reply: Boolean!
-  group_id: Int!
-}
-
 type HslColor {
   h: Int!
   l: Int!
@@ -195,7 +187,6 @@ type LayoutAdminInstallObj {
 }
 
 type Mutation {
-  admin__blog_categories__create(color: String!, description: [TextLanguageInput!]!, name: [TextLanguageInput!]!, permissions: PermissionsCreatePluginCategories!): ShowBlogCategories!
   admin__core_email_settings__edit(color_primary: String!, color_primary_foreground: String!, smtp_host: String!, smtp_password: String!, smtp_port: Int!, smtp_secure: Boolean!, smtp_user: String!): ShowAdminEmailSettingsServiceObj!
   admin__core_email_settings__test(from: String!, message: String!, preview_text: String, subject: String!, to: String!): String!
   admin__core_files__delete(id: Int!): String!
@@ -258,14 +249,6 @@ type PageInfo {
   totalCount: Float!
 }
 
-input PermissionsCreatePluginCategories {
-  can_all_create: Boolean!
-  can_all_download_files: Boolean!
-  can_all_read: Boolean!
-  can_all_reply: Boolean!
-  groups: [GroupsPermissionsCreatePluginCategories!]!
-}
-
 type Query {
   admin__core_email_settings__show: ShowAdminEmailSettingsServiceObj!
   admin__core_files__show(cursor: Int, first: Int, last: Int, search: String, sortBy: ShowCoreFilesSortByArgs): ShowAdminFilesObj!
@@ -281,7 +264,6 @@ type Query {
   admin__core_staff_moderators__show(cursor: Int, first: Int, last: Int, sortBy: ShowAdminStaffModeratorsSortByArgs): ShowAdminStaffModeratorsObj!
   admin__install__layout: LayoutAdminInstallObj!
   admin__sessions__authorization: AuthorizationAdminSessionsObj!
-  blog_categories__show(cursor: Int, first: Int, last: Int): ShowBlogCategoriesObj!
   core_files__show(cursor: Int, first: Int, last: Int, search: String, sortBy: ShowCoreFilesSortByArgs): ShowCoreFilesObj!
   core_languages__show(cursor: Int, first: Int, last: Int, search: String, sortBy: ShowCoreLanguagesSortByArgs): ShowCoreLanguagesObj!
   core_members__show(cursor: Int, first: Int, last: Int, name_seo: String, search: String, sortBy: ShowCoreMembersSortByArgs): ShowCoreMembersObj!
@@ -499,19 +481,6 @@ input ShowAdminStaffModeratorsSortByArgs {
 
 enum ShowAdminStaffModeratorsSortingColumnEnum {
   updated
-}
-
-type ShowBlogCategories {
-  color: String!
-  description: [TextLanguage!]
-  id: Int!
-  name: [TextLanguage!]!
-  position: Int!
-}
-
-type ShowBlogCategoriesObj {
-  edges: [ShowBlogCategories!]!
-  pageInfo: PageInfo!
 }
 
 type ShowCoreFiles {
