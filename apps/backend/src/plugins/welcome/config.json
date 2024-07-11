@@ -1,0 +1,10 @@
+{
+  "name": "Welcome",
+  "description": "",
+  "code": "welcome",
+  "author": "aXen",
+  "author_url": "",
+  "support_url": "https://axendev.net/",
+  "allow_default": true,
+  "nav": []
+}
