@@ -7,7 +7,7 @@ import { DeleteCoreFilesService } from './helpers/delete/delete.service';
 import {
   core_files,
   core_files_using,
-} from '../../templates/core/admin/database/schema/files';
+} from '../../plugins/core/admin/database/schema/files';
 import { DatabaseService } from '@/utils';
 
 @Injectable()

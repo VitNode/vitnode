@@ -21,7 +21,7 @@ import {
   Ctx,
 } from '@/index';
 import { AuthorizationCurrentUserObj } from '../../../sessions/authorization/dto/authorization.obj';
-import { core_sessions_known_devices } from '@/templates/core/admin/database/schema/sessions';
+import { core_sessions_known_devices } from '@/plugins/core/admin/database/schema/sessions';
 import { getUserAgentData, getUserIp } from '@/functions';
 
 @Injectable()

@@ -5,7 +5,7 @@ import { ChangePositionAdminNavStylesArgs } from './dto/change_position.args';
 
 import { DatabaseService } from '@/utils/database/database.service';
 import { NotFoundError } from '@/errors';
-import { core_nav } from '@/templates/core/admin/database/schema/nav';
+import { core_nav } from '@/plugins/core/admin/database/schema/nav';
 
 @Injectable()
 export class ChangePositionAdminNavStylesService {

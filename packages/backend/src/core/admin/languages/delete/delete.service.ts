@@ -10,7 +10,7 @@ import { DeleteCoreAdminLanguagesArgs } from './dto/delete.args';
 import { DatabaseService } from '@/utils/database/database.service';
 import { CustomError, NotFoundError } from '@/errors';
 import { ABSOLUTE_PATHS_BACKEND } from '../../../..';
-import { core_languages } from '@/templates/core/admin/database/schema/languages';
+import { core_languages } from '@/plugins/core/admin/database/schema/languages';
 import { setRebuildRequired } from '@/functions/rebuild-required';
 @Injectable()
 export class DeleteAdminCoreLanguageService {

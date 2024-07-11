@@ -7,7 +7,7 @@ import { sql } from 'drizzle-orm';
 import { MigrationMeta } from 'drizzle-orm/migrator';
 import { NodePgDatabase } from 'drizzle-orm/node-postgres';
 
-import coreSchemaDatabase from '../../src/templates/core/admin/database';
+import coreSchemaDatabase from '../../src/plugins/core/admin/database';
 
 // Source: https://github.com/drizzle-team/drizzle-orm/blob/main/drizzle-orm/src/migrator.ts
 const readMigrationFiles = ({

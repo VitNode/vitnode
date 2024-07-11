@@ -8,7 +8,7 @@ import { ManifestWithLang } from '../settings.module';
 
 import { DatabaseService } from '@/utils/database/database.service';
 import { ABSOLUTE_PATHS_BACKEND, getConfigFile } from '../../..';
-import { core_languages } from '../../../templates/core/admin/database/schema/languages';
+import { core_languages } from '../../../plugins/core/admin/database/schema/languages';
 
 @Injectable()
 export class ShowSettingsService {

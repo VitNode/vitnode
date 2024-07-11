@@ -8,7 +8,7 @@ import { User } from '@/decorators';
 import {
   core_sessions,
   core_sessions_known_devices,
-} from '@/templates/core/admin/database/schema/sessions';
+} from '@/plugins/core/admin/database/schema/sessions';
 
 @Injectable()
 export class ShowCoreSessionDevicesService {

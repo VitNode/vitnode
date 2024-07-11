@@ -8,7 +8,7 @@ import { copyFiles } from './copy-files';
 import { generateManifest } from './generate-manifest';
 import { generateMigrations } from './generate-migrations';
 import { updatePlugins } from './update-plugins';
-import coreSchemaDatabase from '../src/templates/core/admin/database';
+import coreSchemaDatabase from '../src/plugins/core/admin/database';
 import { generateDatabaseMigrations } from './generate-database-migrations';
 import { generateConfig } from './generate-config';
 import { createClientDatabase, DATABASE_ENVS } from '@/utils/database/client';

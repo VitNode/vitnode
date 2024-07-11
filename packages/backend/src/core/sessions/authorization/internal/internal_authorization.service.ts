@@ -9,8 +9,8 @@ import { DatabaseService } from '@/utils/database/database.service';
 import { User } from '@/decorators';
 import { Ctx } from '@/utils';
 import { AccessDeniedError } from '@/errors';
-import { core_users } from '@/templates/core/admin/database/schema/users';
-import { core_sessions_known_devices } from '@/templates/core/admin/database/schema/sessions';
+import { core_users } from '@/plugins/core/admin/database/schema/users';
+import { core_sessions_known_devices } from '@/plugins/core/admin/database/schema/sessions';
 import { getUserAgentData, getUserIp } from '@/functions';
 
 @Injectable()

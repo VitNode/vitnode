@@ -10,7 +10,7 @@ import { encryptPassword } from '@/core/sessions/encrypt_password';
 import {
   core_users,
   core_users_pass_reset,
-} from '@/templates/core/admin/database/schema/users';
+} from '@/plugins/core/admin/database/schema/users';
 
 @Injectable()
 export class ChangePasswordCoreMembersService {

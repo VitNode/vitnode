@@ -5,7 +5,7 @@ import { InternalAuthorizationCoreSessionsService } from './internal/internal_au
 import { AuthorizationCoreSessionsObj } from './dto/authorization.obj';
 
 import { DatabaseService } from '@/utils/database/database.service';
-import { core_files } from '../../../templates/core/admin/database/schema/files';
+import { core_files } from '../../../plugins/core/admin/database/schema/files';
 import { Ctx } from '../../../utils';
 
 @Injectable()

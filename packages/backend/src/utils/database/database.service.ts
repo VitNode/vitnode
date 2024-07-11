@@ -3,7 +3,7 @@ import { NodePgDatabase } from 'drizzle-orm/node-postgres';
 
 import { createClientDatabase } from './client';
 
-import coreSchemaDatabase from '../../templates/core/admin/database';
+import coreSchemaDatabase from '../../plugins/core/admin/database';
 import { DatabaseModuleArgs } from '@/utils/database/database.module';
 
 @Injectable()

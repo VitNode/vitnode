@@ -10,8 +10,8 @@ import { NotFoundError } from '@/errors';
 import {
   core_groups,
   core_groups_names,
-} from '@/templates/core/admin/database/schema/groups';
-import { core_users } from '@/templates/core/admin/database/schema/users';
+} from '@/plugins/core/admin/database/schema/groups';
+import { core_users } from '@/plugins/core/admin/database/schema/users';
 
 @Injectable()
 export class EditAdminGroupsService {

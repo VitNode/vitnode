@@ -9,9 +9,9 @@ import { ChangeFilesAdminPluginsService } from '../helpers/files/change/change.s
 
 import { DatabaseService } from '@/utils/database/database.service';
 import { CustomError, NotFoundError } from '@/errors';
-import { core_migrations } from '@/templates/core/admin/database/schema/files';
+import { core_migrations } from '@/plugins/core/admin/database/schema/files';
 import { ABSOLUTE_PATHS_BACKEND } from '../../../..';
-import { core_plugins } from '@/templates/core/admin/database/schema/plugins';
+import { core_plugins } from '@/plugins/core/admin/database/schema/plugins';
 import { setRebuildRequired } from '@/functions/rebuild-required';
 
 @Injectable()

@@ -6,7 +6,7 @@ import { ShowAdminStaffModeratorsObj } from './dto/show.obj';
 
 import { DatabaseService } from '@/utils/database/database.service';
 import { inputPaginationCursor, outputPagination } from '@/functions';
-import { core_moderators_permissions } from '@/templates/core/admin/database/schema/moderators';
+import { core_moderators_permissions } from '@/plugins/core/admin/database/schema/moderators';
 import { SortDirectionEnum } from '@/utils';
 
 @Injectable()

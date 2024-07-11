@@ -9,7 +9,7 @@ import { inputPaginationCursor, outputPagination } from '../../../functions';
 import {
   core_files,
   core_files_using,
-} from '../../../templates/core/admin/database/schema/files';
+} from '../../../plugins/core/admin/database/schema/files';
 import { User } from '../../../decorators';
 import { SortDirectionEnum } from '../../../utils';
 

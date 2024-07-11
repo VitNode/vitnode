@@ -3,12 +3,13 @@ import * as path from 'path';
 import * as fs from 'fs';
 
 export const copyFiles = ({ corePluginPath }: { corePluginPath: string }) => {
+  // Copy core plugin
   const currentPathToSchema = path.join(
     __dirname,
     '..',
     '..',
     'src',
-    'templates',
+    'plugins',
     'core',
     'admin',
     'database',
