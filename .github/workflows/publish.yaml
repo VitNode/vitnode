@@ -74,18 +74,18 @@ jobs:
 
       - name: Publish canary
         if: github.event.inputs.release == 'canary'
-        run: pnpm publish --provenance --access public --filter vitnode-backend --filter vitnode-frontend --filter vitnode-shared --filter create-vitnode-app --filter eslint-config-vitnode --tag canary
+        run: pnpm publish --provenance --access public --filter vitnode-backend --filter vitnode-frontend --filter vitnode-shared --filter create-vitnode-app --filter eslint-config-vitnode --tag canary --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish release candidate
         if: github.event.inputs.release == 'release-candidate'
-        run: pnpm publish --provenance --access public --filter vitnode-backend --filter vitnode-frontend --filter vitnode-shared --filter create-vitnode-app --filter eslint-config-vitnode --tag rc
+        run: pnpm publish --provenance --access public --filter vitnode-backend --filter vitnode-frontend --filter vitnode-shared --filter create-vitnode-app --filter eslint-config-vitnode --tag rc --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish stable
         if: github.event.inputs.release == 'stable'
-        run: pnpm publish --provenance --access public --filter vitnode-backend --filter vitnode-frontend --filter vitnode-shared --filter create-vitnode-app --filter eslint-config-vitnode
+        run: pnpm publish --provenance --access public --filter vitnode-backend --filter vitnode-frontend --filter vitnode-shared --filter create-vitnode-app --filter eslint-config-vitnode --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
