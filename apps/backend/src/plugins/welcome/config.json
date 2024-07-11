@@ -1,10 +1,10 @@
 {
   "name": "Welcome",
-  "description": "",
+  "description": "Basic plugin with default page.",
   "code": "welcome",
-  "author": "aXen",
-  "author_url": "",
-  "support_url": "https://axendev.net/",
+  "author": "VitNode",
+  "author_url": "https://vitnode.com/",
+  "support_url": "https://github.com/aXenDeveloper/vitnode/issues",
   "allow_default": true,
   "nav": []
 }

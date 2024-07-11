@@ -21,7 +21,7 @@ export const mutationEditApi = async (
       variables,
     });
 
-    revalidatePath('/admin/core/plugins/blog/dev/overview', 'page');
+    revalidatePath('/', 'layout');
 
     return { data };
   } catch (error) {
