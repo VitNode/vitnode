@@ -47,7 +47,6 @@ export default defineConfig({
   schema: './plugins/${code}/admin/database/schema/*.ts',
   out: './plugins/${code}/admin/database/migrations/',
 });
-
 `;
 };
 

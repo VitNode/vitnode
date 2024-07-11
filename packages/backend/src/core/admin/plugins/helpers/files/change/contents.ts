@@ -36,7 +36,7 @@ export const changeDatabaseService = ({
   return content
     .replace(
       '// ! === IMPORT ===',
-      `import table${name} from '../plugins/${code}/admin/database/index';\n// ! === IMPORT ===`,
+      `import table${name} from '@/plugins/${code}/admin/database/index';\n// ! === IMPORT ===`,
     )
     .replace(
       '\n  // ! === MODULE ===',

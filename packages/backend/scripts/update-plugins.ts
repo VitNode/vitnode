@@ -46,6 +46,8 @@ export const updatePlugins = async ({
         });
 
         if (plugin) {
+          if (!latestVersion) return;
+
           await tx
             .update(core_plugins)
             .set({

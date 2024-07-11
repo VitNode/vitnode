@@ -2,7 +2,7 @@
 import { DatabaseService } from 'vitnode-backend';
 import { NodePgDatabase } from 'drizzle-orm/node-postgres';
 
-import { schemaDatabase } from '@/database/schema';
+import { schemaDatabase } from '@/database';
 
 // Overwrite the DatabaseService class to include the db property
 declare module 'vitnode-backend' {
