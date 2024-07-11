@@ -14,6 +14,16 @@ import { generateDatabaseMigrations } from './generate-database-migrations';
 import { generateConfig } from './generate-config';
 
 const init = async () => {
+  let skipDatabase = false;
+  if (process.argv[3] === '--skip-database') {
+    console.log(
+      '\x1b[34m%s\x1b[0m',
+      '[VitNode]',
+      '`--skip-database` flag detected. Skipping database setup...',
+    );
+    skipDatabase = true;
+  }
+
   const pluginsPath = join(process.cwd(), 'src', 'plugins');
   const corePluginPath = join(pluginsPath, 'core');
   if (!fs.existsSync(pluginsPath)) {
@@ -23,24 +33,24 @@ const init = async () => {
     process.exit(1);
   }
 
-  const database = createClientDatabase({
-    config: DATABASE_ENVS,
-    schemaDatabase: coreSchemaDatabase,
-  });
-
   console.log(
     '\x1b[34m%s\x1b[0m',
     '[VitNode]',
-    '[1/6] Setup the project. Generating the config file...',
+    `[1/${skipDatabase ? 2 : 6}] Setup the project. Generating the config file...`,
   );
   generateConfig({ pluginsPath });
 
   console.log(
     '\x1b[34m%s\x1b[0m',
     '[VitNode]',
-    '[2/6] Copying the database core schema...',
+    `[2/${skipDatabase ? 2 : 6}] Copying the database core schema...`,
   );
   copyDatabaseSchema({ corePluginPath });
+
+  if (skipDatabase) {
+    console.log('\x1b[34m%s\x1b[0m', '[VitNode]', '✅ Project setup complete.');
+    process.exit(0);
+  }
 
   console.log(
     '\x1b[34m%s\x1b[0m',
@@ -55,6 +65,11 @@ const init = async () => {
     '[4/6] Generating the manifest files...',
   );
   generateManifest();
+
+  const database = createClientDatabase({
+    config: DATABASE_ENVS,
+    schemaDatabase: coreSchemaDatabase,
+  });
 
   console.log(
     '\x1b[34m%s\x1b[0m',
