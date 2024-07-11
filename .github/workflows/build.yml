@@ -42,7 +42,7 @@ jobs:
         run: pnpm install
 
       - name: Run config init
-        run: pnpm config:init --skip-database
+        run: pnpm config:init:skip-database
 
       - name: Build
         run: pnpm build
