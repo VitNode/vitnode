@@ -6,30 +6,41 @@ import figlet from 'figlet';
 import packageJson from './package.json' assert { type: 'json' };
 import prompts from 'prompts';
 import { validateNpmName } from './helpers/validate-pkg';
-import { basename, resolve } from 'path';
+import { basename, dirname, resolve } from 'path';
 import { existsSync } from 'fs';
 import { isFolderEmpty } from './helpers/is-folder-empty';
+import { getPkgManager } from './helpers/get-pkg-manager';
+import { isWriteable } from './helpers/is-writeable';
 
 let projectPath: string = '';
 
-const program = new Command()
+const program = new Command(packageJson.name)
   .version(packageJson.version)
   .argument('[project-directory]')
   .usage(`${colors.green('[project-directory]')} [options]`)
   .action(name => {
     projectPath = name;
-  });
+  })
+  .option('--turbo', 'Enable Turbopack by default for development.')
+  .option('--use-npm', 'Use NPM as the package manager.')
+  .option('--use-yarn', 'Use Yarn as the package manager.')
+  .option('--use-pnpm', 'Use PNPM as the package manager.')
+  .option(
+    '--skip-install',
+    'Skip installing packages after initializing the project.',
+  )
+  .parse(process.argv)
+  .opts();
 
-program.option('--turbo', 'Enable Turbopack by default for development.');
-program.option('--use-npm', 'Use NPM as the package manager.');
-// program.option('--use-yarn', 'Use Yarn as the package manager.');
-program.option('--use-pnpm', 'Use PNPM as the package manager.');
-program.option(
-  '--skip-install',
-  'Skip installing packages after initializing the project.',
-);
-
-program.parse(process.argv);
+const packageManager = !!program.useNpm
+  ? 'npm'
+  : !!program.usePnpm
+    ? 'pnpm'
+    : !!program.useYarn
+      ? 'yarn'
+      : !!program.useBun
+        ? 'bun'
+        : getPkgManager();
 
 (async () => {
   console.log(
@@ -47,7 +58,9 @@ program.parse(process.argv);
       message: 'What is your project named?',
       initial: 'my-app',
       validate: name => {
-        const validation = validateNpmName({ name: basename(resolve(name)) });
+        const validation = validateNpmName({
+          name: basename(resolve(name)),
+        });
         if (validation.valid) return true;
 
         return `Invalid project name: ${validation.problems[0]}`;
@@ -97,6 +110,19 @@ program.parse(process.argv);
   const folderExists = existsSync(root);
 
   if (folderExists && !isFolderEmpty(root, appName)) {
+    process.exit(1);
+  }
+
+  /**
+   * Verify the project dir is writeable
+   */
+  if (!(await isWriteable(dirname(root)))) {
+    console.error(
+      'The application path is not writable, please check folder permissions and try again.',
+    );
+    console.error(
+      'It is likely you do not have write permissions for this folder.',
+    );
     process.exit(1);
   }
 

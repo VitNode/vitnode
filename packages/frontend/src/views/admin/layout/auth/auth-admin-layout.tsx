@@ -13,7 +13,7 @@ export const AuthAdminLayout = ({ children }: AuthAdminLayoutProps) => {
       <AsideAuthAdmin />
       {/* <HeaderAdmin /> */}
 
-      <main className="text-card-foreground p-5 sm:pl-2 md:ml-[240px] xl:ml-[260px]">
+      <main className="text-card-foreground px-10 py-5 md:ml-[240px] xl:ml-[260px]">
         <div className="container">{children}</div>
       </main>
     </>
