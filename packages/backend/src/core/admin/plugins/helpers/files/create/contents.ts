@@ -39,7 +39,7 @@ export const createConfigForDrizzle = ({ code }: { code: string }) => {
   return `// ! DO NOT REMOVE, MODIFY OR MOVE THIS FILE!!!
 import { defineConfig } from 'drizzle-kit';
 
-import { DATABASE_ENVS } from '@/database/client';
+import { DATABASE_ENVS } from '@/database';
 
 export default defineConfig({
   dialect: 'postgresql',

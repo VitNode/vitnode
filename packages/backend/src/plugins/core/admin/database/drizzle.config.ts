@@ -2,9 +2,7 @@
 
 import { defineConfig } from 'drizzle-kit';
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment, @typescript-eslint/prefer-ts-expect-error
-// @ts-ignore
-import { DATABASE_ENVS } from '@/database/client';
+import { DATABASE_ENVS } from '@/database';
 
 export default defineConfig({
   dialect: 'postgresql',

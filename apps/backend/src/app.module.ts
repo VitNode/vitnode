@@ -4,8 +4,7 @@ import { Module } from '@nestjs/common';
 import { VitNodeCoreModule } from 'vitnode-backend';
 
 import { PluginsModule } from './plugins/plugins.module';
-import { DATABASE_ENVS } from './database/client';
-import { schemaDatabase } from './database/schema';
+import { DATABASE_ENVS, schemaDatabase } from './database';
 
 @Module({
   imports: [

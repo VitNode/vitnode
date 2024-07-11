@@ -2,7 +2,7 @@
 import * as path from 'path';
 import * as fs from 'fs';
 
-export const copyFiles = ({ corePluginPath }: { corePluginPath: string }) => {
+export const copyFiles = ({ pluginsPath }: { pluginsPath: string }) => {
   // Copy core plugin
   const currentPathToSchema = path.join(
     __dirname,
@@ -10,17 +10,13 @@ export const copyFiles = ({ corePluginPath }: { corePluginPath: string }) => {
     '..',
     'src',
     'plugins',
-    'core',
-    'admin',
-    'database',
   );
   if (!fs.existsSync(currentPathToSchema)) {
     console.log(
-      `⛔️ Database schema not found in 'templates/core/admin/database' directory. "${currentPathToSchema}"`,
+      `⛔️ Plugins not found in 'src/plugins' directory. "${currentPathToSchema}"`,
     );
     process.exit(1);
   }
 
-  const userPathToSchema = path.join(corePluginPath, 'admin', 'database');
-  fs.cpSync(currentPathToSchema, userPathToSchema, { recursive: true });
+  fs.cpSync(currentPathToSchema, pluginsPath, { recursive: true });
 };

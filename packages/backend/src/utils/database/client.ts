@@ -5,7 +5,7 @@ import { Pool, PoolConfig } from 'pg';
 import * as dotenv from 'dotenv';
 
 dotenv.config({
-  path: join(process.cwd(), '..', '..', '..', '.env'),
+  path: join(process.cwd(), '..', '..', '.env'),
 });
 
 interface Args<T> {

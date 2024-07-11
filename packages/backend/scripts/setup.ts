@@ -25,7 +25,6 @@ const init = async () => {
   }
 
   const pluginsPath = join(process.cwd(), 'src', 'plugins');
-  const corePluginPath = join(pluginsPath, 'core');
   if (!fs.existsSync(pluginsPath)) {
     console.log(
       `⛔️ Plugins not found in 'src/plugins' directory. "${pluginsPath}"`,
@@ -45,7 +44,7 @@ const init = async () => {
     '[VitNode]',
     `[2/${skipDatabase ? 2 : 6}] Copying files into backend...`,
   );
-  copyFiles({ corePluginPath });
+  copyFiles({ pluginsPath });
 
   if (skipDatabase) {
     console.log('\x1b[34m%s\x1b[0m', '[VitNode]', '✅ Project setup complete.');
