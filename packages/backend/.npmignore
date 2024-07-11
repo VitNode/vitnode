@@ -1,4 +1,5 @@
-/src
+/src/*
+!/src/plugins
 /.turbo
 /node_modules
 /.eslintrc.json

@@ -5,6 +5,7 @@ import { Injectable } from '@nestjs/common';
 
 import {
   createConfigForDrizzle,
+  createDefaultPage,
   createFunctionsDatabase,
   createInfoJSON,
   createModuleAdminSchema,
@@ -38,6 +39,15 @@ export class CreateFilesAdminPluginsService {
           {
             name: 'versions.json',
             content: '{}\n',
+          },
+        ],
+      },
+      {
+        path: ABSOLUTE_PATHS_BACKEND.plugin({ code }).frontend.templates,
+        files: [
+          {
+            name: 'default-page.tsx',
+            content: createDefaultPage({ code }),
           },
         ],
       },

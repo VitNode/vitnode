@@ -13,9 +13,12 @@ import { APP_GUARD } from '@nestjs/core';
 
 import { Ctx } from './utils';
 import { CoreModule } from './core/core.module';
-import { DatabaseModule, DatabaseModuleArgs } from './database/database.module';
 import { GlobalProvidersModule } from './providers/providers.module';
 import { GqlThrottlerGuard } from './utils/guards/gql-throttler.guard';
+import {
+  DatabaseModule,
+  DatabaseModuleArgs,
+} from './utils/database/database.module';
 
 export interface VitNodePaths {
   envFile: string;

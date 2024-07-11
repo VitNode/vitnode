@@ -8,10 +8,10 @@ import { SignInCoreSessionsArgs } from './dto/sign_in.args';
 import { DeviceSignInCoreSessionsService } from './device.service';
 
 import { Ctx } from '../../../utils';
-import { DatabaseService } from '../../../database';
+import { DatabaseService } from '@/utils/database/database.service';
 import { AccessDeniedError, CustomError } from '../../../errors';
-import { core_admin_sessions } from '../../../templates/core/admin/database/schema/admins';
-import { core_sessions } from '../../../templates/core/admin/database/schema/sessions';
+import { core_admin_sessions } from '../../../plugins/core/admin/database/schema/admins';
+import { core_sessions } from '../../../plugins/core/admin/database/schema/sessions';
 
 interface CreateSessionArgs extends Ctx {
   email: string;

@@ -4,13 +4,13 @@ import { eq } from 'drizzle-orm';
 
 import { ChangePasswordCoreMembersArgs } from './dto/change_password.args';
 
-import { DatabaseService } from '@/database';
+import { DatabaseService } from '@/utils/database/database.service';
 import { User } from '@/decorators';
 import { encryptPassword } from '@/core/sessions/encrypt_password';
 import {
   core_users,
   core_users_pass_reset,
-} from '@/templates/core/admin/database/schema/users';
+} from '@/plugins/core/admin/database/schema/users';
 
 @Injectable()
 export class ChangePasswordCoreMembersService {

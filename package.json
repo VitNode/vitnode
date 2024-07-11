@@ -15,6 +15,8 @@
     "packages/*"
   ],
   "scripts": {
+    "config:init": "cd apps/backend && pnpm config:init && cd ../..",
+    "config:init:skip-database": "cd apps/backend && pnpm config:init --skip-database && cd ../..",
     "build:scripts": "turbo build:scripts && pnpm i",
     "build": "cross-env TURBO_TELEMETRY_DISABLED=1 turbo build",
     "dev": "pnpm build:scripts && turbo dev",
@@ -25,7 +27,6 @@
     "lint:fix": "turbo lint:fix",
     "start": "turbo start",
     "preinstall": "npx only-allow pnpm",
-    "config:init": "cd apps/frontend && pnpm config:init && cd ../..",
     "codegen": "cd apps/backend && pnpm codegen && cd ../..",
     "docker:dev": "docker-compose -f ./docker-compose-dev.yml -p vitnode-dev up -d",
     "docker:prod": "sh docker-prod.sh",

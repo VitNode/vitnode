@@ -14,7 +14,7 @@ export const changeModuleRootSchema = ({
   return content
     .replace(
       '// ! === IMPORT ===',
-      `import { ${name}Module } from "./${code}/${code}.module";\n// ! === IMPORT ===`,
+      `import { ${name}Module } from './${code}/${code}.module';\n// ! === IMPORT ===`,
     )
     .replace(
       '\n    // ! === MODULE ===',
@@ -36,7 +36,7 @@ export const changeDatabaseService = ({
   return content
     .replace(
       '// ! === IMPORT ===',
-      `import table${name} from "../plugins/${code}/admin/database/index";\n// ! === IMPORT ===`,
+      `import table${name} from '@/plugins/${code}/admin/database/index';\n// ! === IMPORT ===`,
     )
     .replace(
       '\n  // ! === MODULE ===',
@@ -53,6 +53,6 @@ export const changeLangTypes = ({
 }) => {
   return content.replace(
     '// ! === IMPORT ===',
-    `typeof import("@/plugins/${code}/langs/en.json") &\n  // ! === IMPORT ===`,
+    `typeof import('@/plugins/${code}/langs/en.json') &\n  // ! === IMPORT ===`,
   );
 };

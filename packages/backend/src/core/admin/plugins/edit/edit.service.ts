@@ -6,9 +6,9 @@ import { eq, ne } from 'drizzle-orm';
 import { ShowAdminPlugins } from '../show/dto/show.obj';
 import { EditAdminPluginsArgs } from './dto/edit.args';
 
-import { DatabaseService } from '@/database';
+import { DatabaseService } from '@/utils/database/database.service';
 import { CustomError, NotFoundError } from '@/errors';
-import { core_plugins } from '@/templates/core/admin/database/schema/plugins';
+import { core_plugins } from '@/plugins/core/admin/database/schema/plugins';
 import { ABSOLUTE_PATHS_BACKEND, ConfigPlugin } from '../../../..';
 
 @Injectable()

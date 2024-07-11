@@ -12,10 +12,10 @@ import {
 } from '../../files/helpers/upload/helpers';
 import { UploadCoreFilesArgs } from '../../files/helpers/upload/dto/upload.args';
 import { ShowCoreFiles } from '../../files/show/dto/show.obj';
-import { DatabaseService } from '../../../database';
+import { DatabaseService } from '@/utils/database/database.service';
 import { User } from '../../../decorators';
 import { AccessDeniedError } from '../../../errors';
-import { core_files } from '../../../templates/core/admin/database/schema/files';
+import { core_files } from '../../../plugins/core/admin/database/schema/files';
 import { getConfigFile } from '../../../providers/config';
 
 interface GetFilesAfterUploadArgs extends UploadCoreEditorArgs {

@@ -9,8 +9,8 @@ import { AvatarColorService } from './helpers/avatar-color.service';
 import { encryptPassword } from '../encrypt_password';
 
 import { CaptchaCoreCaptchaSecurityService } from '@/core/admin/security/captcha/captcha.service';
-import { DatabaseService } from '../../../database';
-import { core_users } from '../../../templates/core/admin/database/schema/users';
+import { DatabaseService } from '@/utils/database/database.service';
+import { core_users } from '../../../plugins/core/admin/database/schema/users';
 import { Ctx } from '@/utils';
 import { CustomError } from '../../../errors';
 import { getUserIp } from '../../../functions';

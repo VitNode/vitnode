@@ -1,4 +1,5 @@
 import * as fs from 'fs';
+import { join } from 'path';
 
 import { Injectable } from '@nestjs/common';
 import { eq, sql } from 'drizzle-orm';
@@ -6,11 +7,11 @@ import { eq, sql } from 'drizzle-orm';
 import { DeleteAdminPluginsArgs } from './dto/delete.args';
 import { ChangeFilesAdminPluginsService } from '../helpers/files/change/change.service';
 
-import { DatabaseService } from '@/database';
+import { DatabaseService } from '@/utils/database/database.service';
 import { CustomError, NotFoundError } from '@/errors';
-import { core_migrations } from '@/templates/core/admin/database/schema/files';
-import { ABSOLUTE_PATHS_BACKEND } from '../../../..';
-import { core_plugins } from '@/templates/core/admin/database/schema/plugins';
+import { core_migrations } from '@/plugins/core/admin/database/schema/files';
+import { ABSOLUTE_PATHS_BACKEND } from '@/index';
+import { core_plugins } from '@/plugins/core/admin/database/schema/plugins';
 import { setRebuildRequired } from '@/functions/rebuild-required';
 
 @Injectable()
@@ -44,14 +45,19 @@ export class DeleteAdminPluginsService {
 
     // Drop tables
     const tables: { getTables: () => string[] } = await import(
-      `../../../../${code}/admin/database/functions`
+      join(
+        process.cwd(),
+        'dist',
+        'plugins',
+        code,
+        'admin',
+        'database',
+        'functions.js',
+      )
     );
-    const deleteQueries = tables
-      .getTables()
-      .filter(el => !el.endsWith('_relations'))
-      .map(table => {
-        return `DROP TABLE IF EXISTS ${table} CASCADE;`;
-      });
+    const deleteQueries = tables.getTables().map(table => {
+      return `DROP TABLE IF EXISTS ${table} CASCADE;`;
+    });
 
     try {
       await this.databaseService.db.execute(sql.raw(deleteQueries.join(' ')));
@@ -61,9 +67,12 @@ export class DeleteAdminPluginsService {
         message: `Error deleting tables for plugin ${code}`,
       });
     }
+    // Delete migrations
     await this.databaseService.db
       .delete(core_migrations)
       .where(eq(core_migrations.plugin, code));
+
+    // Change files when delete
     this.changeFilesService.changeFilesWhenDelete({ code });
 
     const modulePath = ABSOLUTE_PATHS_BACKEND.plugin({ code }).root;
