@@ -4,12 +4,12 @@ import { changeCodePluginToCapitalLetters } from '../../change-code-plugin-to-ca
 export const createModuleSchema = ({ code }: { code: string }) => {
   const name = changeCodePluginToCapitalLetters(code);
 
-  return `import { Module } from "@nestjs/common";
+  return `import { Module } from '@nestjs/common';
 
-import { Admin${name}Module } from "./admin/admin.module";
+import { Admin${name}Module } from './admin/admin.module';
 
 @Module({
-  imports: [Admin${name}Module]
+  imports: [Admin${name}Module],
 })
 export class ${name}Module {}
 `;
@@ -18,7 +18,7 @@ export class ${name}Module {}
 export const createModuleAdminSchema = ({ code }: { code: string }) => {
   const name = changeCodePluginToCapitalLetters(code);
 
-  return `import { Module } from "@nestjs/common";
+  return `import { Module } from '@nestjs/common';
 
 @Module({})
 export class Admin${name}Module {}
@@ -27,7 +27,7 @@ export class Admin${name}Module {}
 
 export const createFunctionsDatabase = () => {
   return `// ! DO NOT REMOVE, MODIFY OR MOVE THIS FILE!!!
-import { default as tables } from "./index";
+import { default as tables } from './index';
 
 export const getTables = () => {
   return Object.keys(tables);
@@ -37,16 +37,17 @@ export const getTables = () => {
 
 export const createConfigForDrizzle = ({ code }: { code: string }) => {
   return `// ! DO NOT REMOVE, MODIFY OR MOVE THIS FILE!!!
-import { defineConfig } from "drizzle-kit";
+import { defineConfig } from 'drizzle-kit';
 
-import { DATABASE_ENVS } from "@/database/client";
+import { DATABASE_ENVS } from '@/database/client';
 
 export default defineConfig({
-  dialect: "postgresql",
+  dialect: 'postgresql',
   dbCredentials: DATABASE_ENVS,
-  schema: "./plugins/${code}/admin/database/schema/*.ts",
-  out: "./plugins/${code}/admin/database/migrations/"
+  schema: './plugins/${code}/admin/database/schema/*.ts',
+  out: './plugins/${code}/admin/database/migrations/',
 });
+
 `;
 };
 

@@ -1,7 +1,7 @@
 // ! DO NOT REMOVE, MODIFY OR MOVE THIS FILE!!!
 
-import tableCore from '../plugins/core/admin/database/index';
-import tableBlog from '../plugins/blog/admin/database/index';
+import tableCore from '@/plugins/core/admin/database/index';
+import tableBlog from '@/plugins/blog/admin/database/index';
 // ! === IMPORT ===
 
 export const schemaDatabase = {

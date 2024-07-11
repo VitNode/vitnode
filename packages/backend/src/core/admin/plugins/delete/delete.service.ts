@@ -1,4 +1,5 @@
 import * as fs from 'fs';
+import { join } from 'path';
 
 import { Injectable } from '@nestjs/common';
 import { eq, sql } from 'drizzle-orm';
@@ -44,14 +45,19 @@ export class DeleteAdminPluginsService {
 
     // Drop tables
     const tables: { getTables: () => string[] } = await import(
-      `../../../../${code}/admin/database/functions`
+      join(
+        process.cwd(),
+        'dist',
+        'plugins',
+        code,
+        'admin',
+        'database',
+        'functions.js',
+      )
     );
-    const deleteQueries = tables
-      .getTables()
-      .filter(el => !el.endsWith('_relations'))
-      .map(table => {
-        return `DROP TABLE IF EXISTS ${table} CASCADE;`;
-      });
+    const deleteQueries = tables.getTables().map(table => {
+      return `DROP TABLE IF EXISTS ${table} CASCADE;`;
+    });
 
     try {
       await this.databaseService.db.execute(sql.raw(deleteQueries.join(' ')));
@@ -61,9 +67,12 @@ export class DeleteAdminPluginsService {
         message: `Error deleting tables for plugin ${code}`,
       });
     }
+    // Delete migrations
     await this.databaseService.db
       .delete(core_migrations)
       .where(eq(core_migrations.plugin, code));
+
+    // Change files when delete
     this.changeFilesService.changeFilesWhenDelete({ code });
 
     const modulePath = ABSOLUTE_PATHS_BACKEND.plugin({ code }).root;
