@@ -4,7 +4,7 @@
 import * as fs from 'fs';
 import { join } from 'path';
 
-import { copyDatabaseSchema } from './copy-database-core';
+import { copyFiles } from './copy-files';
 import { generateManifest } from './generate-manifest';
 import { generateMigrations } from './generate-migrations';
 import { updatePlugins } from './update-plugins';
@@ -43,9 +43,9 @@ const init = async () => {
   console.log(
     '\x1b[34m%s\x1b[0m',
     '[VitNode]',
-    `[2/${skipDatabase ? 2 : 6}] Copying the database core schema...`,
+    `[2/${skipDatabase ? 2 : 6}] Copying files into backend...`,
   );
-  copyDatabaseSchema({ corePluginPath });
+  copyFiles({ corePluginPath });
 
   if (skipDatabase) {
     console.log('\x1b[34m%s\x1b[0m', '[VitNode]', '✅ Project setup complete.');

@@ -2,11 +2,7 @@
 import * as path from 'path';
 import * as fs from 'fs';
 
-export const copyDatabaseSchema = ({
-  corePluginPath,
-}: {
-  corePluginPath: string;
-}) => {
+export const copyFiles = ({ corePluginPath }: { corePluginPath: string }) => {
   const currentPathToSchema = path.join(
     __dirname,
     '..',

@@ -1,9 +1,9 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { NodePgDatabase } from 'drizzle-orm/node-postgres';
 
-import { DatabaseModuleArgs } from './database.module';
 import { createClientDatabase } from './client';
 import coreSchemaDatabase from '../templates/core/admin/database';
+import { DatabaseModuleArgs } from '@/utils/database/database.module';
 
 @Injectable()
 export class DatabaseService {
