@@ -6,7 +6,7 @@ import {
   LayoutAdminInstallObj,
 } from './dto/layout.obj';
 
-import { DatabaseService } from '@/database';
+import { DatabaseService } from '@/utils/database/database.service';
 import { core_users } from '@/templates/core/admin/database/schema/users';
 import { core_sessions } from '@/templates/core/admin/database/schema/sessions';
 import { core_admin_sessions } from '@/templates/core/admin/database/schema/admins';

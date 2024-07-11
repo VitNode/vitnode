@@ -2,8 +2,7 @@ import { DynamicModule, Global, Module } from '@nestjs/common';
 import { registerEnumType } from '@nestjs/graphql';
 import { PoolConfig } from 'pg';
 
-import { SortDirectionEnum } from '..';
-import { DatabaseService } from '@/database';
+import { DatabaseService, SortDirectionEnum } from '..';
 
 registerEnumType(SortDirectionEnum, {
   name: 'SortDirectionEnum',

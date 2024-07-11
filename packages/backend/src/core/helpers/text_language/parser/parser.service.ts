@@ -8,7 +8,7 @@ import {
 } from './helpers.service';
 
 import { TextLanguageInput } from '@/utils';
-import { DatabaseService } from '@/database';
+import { DatabaseService } from '@/utils/database/database.service';
 import { CustomError } from '@/errors';
 
 interface Args<T extends TableConfig> {

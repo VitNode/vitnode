@@ -3,7 +3,7 @@ import { desc, eq } from 'drizzle-orm';
 
 import { ShowCoreSessionDevicesObj } from './dto/show.obj';
 
-import { DatabaseService } from '@/database';
+import { DatabaseService } from '@/utils/database/database.service';
 import { User } from '@/decorators';
 import {
   core_sessions,

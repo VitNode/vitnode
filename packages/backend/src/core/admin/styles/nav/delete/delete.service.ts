@@ -3,7 +3,7 @@ import { eq } from 'drizzle-orm';
 
 import { DeleteAdminNavStylesArgs } from './dto/delete.args';
 
-import { DatabaseService } from '@/database';
+import { DatabaseService } from '@/utils/database/database.service';
 import { NotFoundError } from '@/errors';
 import {
   core_nav,

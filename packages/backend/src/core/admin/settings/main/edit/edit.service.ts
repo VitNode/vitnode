@@ -7,7 +7,7 @@ import { eq } from 'drizzle-orm';
 import { EditAdminMainSettingsArgs } from './dto/edit.args';
 import { EditAdminSettingsObj } from './dto/edit.obj';
 
-import { DatabaseService } from '@/database';
+import { DatabaseService } from '@/utils/database/database.service';
 import {
   ABSOLUTE_PATHS_BACKEND,
   ConfigType,

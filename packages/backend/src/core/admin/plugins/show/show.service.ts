@@ -7,7 +7,7 @@ import { ShowAdminPluginsObj } from './dto/show.obj';
 import { inputPaginationCursor, outputPagination } from '@/functions';
 import { core_plugins } from '@/templates/core/admin/database/schema/plugins';
 import { SortDirectionEnum } from '@/utils';
-import { DatabaseService } from '@/database';
+import { DatabaseService } from '@/utils/database/database.service';
 
 @Injectable()
 export class ShowAdminPluginsService {

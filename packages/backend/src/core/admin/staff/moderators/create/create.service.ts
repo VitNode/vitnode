@@ -3,7 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { ShowAdminStaffModerators } from '../show/dto/show.obj';
 import { CreateAdminStaffModeratorsArgs } from './dto/create.args';
 
-import { DatabaseService } from '@/database';
+import { DatabaseService } from '@/utils/database/database.service';
 import { CustomError } from '@/errors';
 import { core_moderators_permissions } from '@/templates/core/admin/database/schema/moderators';
 

@@ -3,7 +3,7 @@ import { eq } from 'drizzle-orm';
 
 import { DeleteAdminFilesArgs } from './dto/delete.args';
 
-import { DatabaseService } from '@/database';
+import { DatabaseService } from '@/utils/database/database.service';
 import { DeleteCoreFilesService } from '../../../files/helpers/delete/delete.service';
 import { NotFoundError } from '@/errors';
 import { core_files } from '@/templates/core/admin/database/schema/files';

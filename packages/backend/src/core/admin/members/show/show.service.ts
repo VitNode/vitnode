@@ -5,7 +5,7 @@ import { ShowAdminMembersObj } from './dto/show.obj';
 import { ShowAdminMembersArgs } from './dto/show.args';
 
 import { inputPaginationCursor, outputPagination } from '@/functions';
-import { DatabaseService } from '@/database';
+import { DatabaseService } from '@/utils/database/database.service';
 import { core_users } from '@/templates/core/admin/database/schema/users';
 import { SortDirectionEnum } from '@/utils';
 

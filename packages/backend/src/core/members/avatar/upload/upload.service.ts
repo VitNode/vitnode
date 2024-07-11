@@ -6,7 +6,7 @@ import { UploadAvatarCoreMembersObj } from './dto/upload.obj';
 
 import { UploadCoreFilesService } from '../../../files/helpers/upload/upload.service';
 import { DeleteCoreFilesService } from '../../../files/helpers/delete/delete.service';
-import { DatabaseService } from '@/database';
+import { DatabaseService } from '@/utils/database/database.service';
 import { User } from '@/decorators';
 import { core_files_avatars } from '@/templates/core/admin/database/schema/users';
 import { CustomError } from '@/errors';

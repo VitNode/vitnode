@@ -3,7 +3,7 @@ import { eq } from 'drizzle-orm';
 
 import { DeleteAdminStaffAdministratorsArgs } from './dto/delete.args';
 
-import { DatabaseService } from '@/database';
+import { DatabaseService } from '@/utils/database/database.service';
 import { CustomError, NotFoundError } from '@/errors';
 import { core_admin_permissions } from '@/templates/core/admin/database/schema/admins';
 

@@ -8,10 +8,10 @@ import { copyFiles } from './copy-files';
 import { generateManifest } from './generate-manifest';
 import { generateMigrations } from './generate-migrations';
 import { updatePlugins } from './update-plugins';
-import { DATABASE_ENVS, createClientDatabase } from '../src/database/client';
 import coreSchemaDatabase from '../src/templates/core/admin/database';
 import { generateDatabaseMigrations } from './generate-database-migrations';
 import { generateConfig } from './generate-config';
+import { createClientDatabase, DATABASE_ENVS } from '@/utils/database/client';
 
 const init = async () => {
   let skipDatabase = false;

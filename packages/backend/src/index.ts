@@ -5,7 +5,6 @@ export * from './utils';
 export * from './decorators';
 export * from './main';
 export * from './app.module';
-export * from './database';
 
 // Services
 export * from './core/admin/sessions/authorization/authorization.service';

@@ -12,7 +12,7 @@ import {
 
 import { DownloadCoreAdminLanguagesArgs } from './dto/download.args';
 
-import { DatabaseService } from '@/database';
+import { DatabaseService } from '@/utils/database/database.service';
 import { User } from '@/decorators';
 import { CustomError, NotFoundError } from '@/errors';
 import { ABSOLUTE_PATHS_BACKEND } from '../../../..';

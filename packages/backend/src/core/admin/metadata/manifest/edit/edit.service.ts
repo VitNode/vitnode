@@ -8,7 +8,7 @@ import { EditAdminManifestMetadataObj } from './dto/edit.args';
 import { ShowAdminManifestMetadataObj } from '../show/dto/show.obj';
 import { getManifest } from '../functions';
 
-import { DatabaseService } from '@/database';
+import { DatabaseService } from '@/utils/database/database.service';
 import { ABSOLUTE_PATHS_BACKEND } from '@/index';
 import { core_languages } from '@/templates/core/admin/database/schema/languages';
 

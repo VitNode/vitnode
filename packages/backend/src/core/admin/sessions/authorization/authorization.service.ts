@@ -12,7 +12,7 @@ import {
   NavAdminPluginsAuthorization,
 } from './dto/authorization.obj';
 
-import { DatabaseService } from '@/database';
+import { DatabaseService } from '@/utils/database/database.service';
 import { DeviceSignInCoreSessionsService } from '../../../sessions/sign_in/device.service';
 import {
   ABSOLUTE_PATHS_BACKEND,

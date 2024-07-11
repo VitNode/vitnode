@@ -4,11 +4,11 @@ import { desc, eq, lt, sql } from 'drizzle-orm';
 
 import { DeleteCoreFilesService } from './helpers/delete/delete.service';
 
-import { DatabaseService } from '../../database';
 import {
   core_files,
   core_files_using,
 } from '../../templates/core/admin/database/schema/files';
+import { DatabaseService } from '@/utils';
 
 @Injectable()
 export class CoreFilesCron {

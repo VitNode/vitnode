@@ -5,7 +5,7 @@ import { eq } from 'drizzle-orm';
 import { currentUnixDate } from 'vitnode-shared';
 
 import { DeviceSignInCoreSessionsService } from '../../sign_in/device.service';
-import { DatabaseService } from '@/database';
+import { DatabaseService } from '@/utils/database/database.service';
 import { User } from '@/decorators';
 import { Ctx } from '@/utils';
 import { AccessDeniedError } from '@/errors';

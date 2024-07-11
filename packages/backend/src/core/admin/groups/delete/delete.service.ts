@@ -3,7 +3,7 @@ import { eq } from 'drizzle-orm';
 
 import { DeleteAdminGroupsArgs } from './dto/delete.args';
 
-import { DatabaseService } from '@/database';
+import { DatabaseService } from '@/utils/database/database.service';
 import { NotFoundError } from '@/errors';
 import { core_users } from '@/templates/core/admin/database/schema/users';
 import { core_groups } from '@/templates/core/admin/database/schema/groups';

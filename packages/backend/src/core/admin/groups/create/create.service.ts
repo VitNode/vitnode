@@ -3,7 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { ShowAdminGroups } from '../show/dto/show.obj';
 import { CreateAdminGroupsArgs } from './dto/create.args';
 
-import { DatabaseService } from '@/database';
+import { DatabaseService } from '@/utils/database/database.service';
 import { ParserTextLanguageCoreHelpersService } from '../../../helpers/text_language/parser/parser.service';
 import {
   core_groups,

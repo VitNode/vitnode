@@ -11,7 +11,7 @@ import { UploadAdminPluginsArgs } from './dto/upload.args';
 import { ChangeFilesAdminPluginsService } from '../helpers/files/change/change.service';
 
 import { core_plugins } from '@/templates/core/admin/database/schema/plugins';
-import { DatabaseService } from '@/database';
+import { DatabaseService } from '@/utils/database/database.service';
 import {
   ABSOLUTE_PATHS_BACKEND,
   ConfigPlugin,

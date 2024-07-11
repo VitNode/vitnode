@@ -11,7 +11,7 @@ import {
 import { inputPaginationCursor, outputPagination } from '@/functions';
 import { core_users } from '@/templates/core/admin/database/schema/users';
 import { SortDirectionEnum } from '@/utils';
-import { DatabaseService } from '@/database';
+import { DatabaseService } from '@/utils/database/database.service';
 
 @Injectable()
 export class ShowAdminGroupsService {

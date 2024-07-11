@@ -4,7 +4,7 @@ import { count } from 'drizzle-orm';
 import { ShowAdminStaffModeratorsArgs } from './dto/show.args';
 import { ShowAdminStaffModeratorsObj } from './dto/show.obj';
 
-import { DatabaseService } from '@/database';
+import { DatabaseService } from '@/utils/database/database.service';
 import { inputPaginationCursor, outputPagination } from '@/functions';
 import { core_moderators_permissions } from '@/templates/core/admin/database/schema/moderators';
 import { SortDirectionEnum } from '@/utils';

@@ -4,7 +4,7 @@ import { count, eq } from 'drizzle-orm';
 import { EditAdminGroupsArgs } from './dto/edit.args';
 import { ShowAdminGroups } from '../show/dto/show.obj';
 
-import { DatabaseService } from '@/database';
+import { DatabaseService } from '@/utils/database/database.service';
 import { ParserTextLanguageCoreHelpersService } from '../../../helpers/text_language/parser/parser.service';
 import { NotFoundError } from '@/errors';
 import {

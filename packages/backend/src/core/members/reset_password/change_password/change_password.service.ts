@@ -4,7 +4,7 @@ import { eq } from 'drizzle-orm';
 
 import { ChangePasswordCoreMembersArgs } from './dto/change_password.args';
 
-import { DatabaseService } from '@/database';
+import { DatabaseService } from '@/utils/database/database.service';
 import { User } from '@/decorators';
 import { encryptPassword } from '@/core/sessions/encrypt_password';
 import {

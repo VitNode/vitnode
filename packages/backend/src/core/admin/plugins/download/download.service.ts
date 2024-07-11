@@ -12,7 +12,7 @@ import {
 
 import { DownloadAdminPluginsArgs } from './dto/download.args';
 
-import { DatabaseService } from '@/database';
+import { DatabaseService } from '@/utils/database/database.service';
 import { CustomError, NotFoundError } from '@/errors';
 import { execShellCommand } from '@/functions';
 import { User } from '@/decorators';
