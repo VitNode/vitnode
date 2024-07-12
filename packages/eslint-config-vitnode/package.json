@@ -16,7 +16,8 @@
     "tsconfig.nest.json",
     "tsconfig.next.json",
     ".eslintrc.shared.json",
-    ".eslintrc.react.json"
+    ".eslintrc.react.json",
+    ".prettierrc.json"
   ],
   "keywords": [
     "eslint",
@@ -25,7 +26,8 @@
     "eslintplugin",
     "eslint-plugin",
     "typescript",
-    "prettier"
+    "prettier",
+    "prettierrc"
   ],
   "peerDependencies": {
     "eslint": "^8.57.0",

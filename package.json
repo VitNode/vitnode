@@ -26,7 +26,9 @@
     "cross-env": "^7.0.3",
     "prettier": "^3.3.2",
     "prettier-plugin-tailwindcss": "^0.6.5",
-    "turbo": "^2.0.6"
+    "turbo": "^2.0.6",
+    "eslint-config-vitnode": "workspace:*"
   },
-  "packageManager": "pnpm@9.5.0"
+  "packageManager": "pnpm@9.5.0",
+  "prettier": "eslint-config-vitnode/.prettierrc.json"
 }

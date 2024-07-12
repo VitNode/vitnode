@@ -39,11 +39,9 @@ or
 yarn add --dev eslint-config-vitnode
 ```
 
-## Usage
+## ESLint
 
-### ESLint
-
-#### Shared
+### Shared
 
 `.eslint.shared.json` can be used for any TypeScript project.
 
@@ -55,7 +53,7 @@ File: `.eslintrc.json`
 }
 ```
 
-#### React / NextJS
+### React / NextJS
 
 `.eslint.react.json` can be used for any React / NextJS project.
 
@@ -67,9 +65,9 @@ File: `.eslintrc.json`
 }
 ```
 
-### TSConfig
+## TSConfig
 
-#### Shared
+### Shared
 
 `tsconfig.shared.json` can be used for any TypeScript project.
 
@@ -81,7 +79,7 @@ File: `tsconfig.json`
 }
 ```
 
-#### NestJS
+### NestJS
 
 `tsconfig.nest.json` can be used for any NestJS project.
 
@@ -93,7 +91,7 @@ File: `tsconfig.json`
 }
 ```
 
-#### NextJS
+### NextJS
 
 `tsconfig.next.json` can be used for any NextJS project.
 
@@ -102,5 +100,17 @@ File: `tsconfig.json`
 ```json
 {
   "extends": "eslint-config-vitnode/tsconfig.next.json"
+}
+```
+
+## Prettier
+
+`.prettierrc.json` can be used for any project.
+
+File: `package.json`
+
+```json
+{
+  "prettier": "eslint-config-vitnode/.prettierrc.json"
 }
 ```
