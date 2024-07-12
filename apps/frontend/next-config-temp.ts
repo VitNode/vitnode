@@ -53,4 +53,5 @@ const config = () => {
   };
 };
 
+// @ts-ignore
 export default withBundleAnalyzer(withNextIntl(config()));
