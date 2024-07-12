@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { Editor } from '@tiptap/react';
 
 import { FileStateEditor } from '../extensions/files/files';

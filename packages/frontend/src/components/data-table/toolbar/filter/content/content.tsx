@@ -1,12 +1,11 @@
 import { Search } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useSearchParams } from 'next/navigation';
-import * as React from 'react';
+import React from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 
 import { ListContentFilterToolbarDataTable } from './list';
 import { useFilterToolbarDataTable } from '../hooks/use-filter-toolbar-data-table';
-
 import { usePathname, useRouter } from '@/navigation';
 import {
   Command,

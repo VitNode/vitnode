@@ -1,14 +1,13 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
-import * as React from 'react';
+import React from 'react';
 import { useTheme } from 'next-themes';
 import { HslColor } from 'react-colorful';
 import { toast } from 'sonner';
 import { useTranslations } from 'next-intl';
 
 import { mutationApi } from './mutation-api';
-
 import { Core_Theme_Editor__ShowQuery } from '@/graphql/graphql';
 import { useRouter } from '@/navigation';
 import { CONFIG } from '@/helpers/config-with-env';

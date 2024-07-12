@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { cn } from '@/helpers/classnames';
 import { Button, buttonVariants } from '@/components/ui/button';

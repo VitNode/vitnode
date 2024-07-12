@@ -3,7 +3,6 @@ import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
-import { useInstallVitnode } from '../../hooks/use-install-vitnode';
 import {
   Form,
   FormControl,
@@ -13,6 +12,8 @@ import {
 } from '@/components/ui/form';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Button } from '@/components/ui/button';
+
+import { useInstallVitnode } from '../../hooks/use-install-vitnode';
 
 export const FormLicenseInstallConfigs = () => {
   const tCore = useTranslations('core');

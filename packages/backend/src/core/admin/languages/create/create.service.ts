@@ -5,9 +5,9 @@ import { Injectable } from '@nestjs/common';
 
 import { CreateCoreAdminLanguagesArgs } from './dto/create.args';
 
-import { DatabaseService } from '@/database';
+import { DatabaseService } from '@/utils/database/database.service';
 import { ABSOLUTE_PATHS_BACKEND, CustomError } from '../../../..';
-import { core_languages } from '@/templates/core/admin/database/schema/languages';
+import { core_languages } from '@/plugins/core/admin/database/schema/languages';
 import { ShowCoreLanguages } from '../../../languages/show/dto/show.obj';
 import { setRebuildRequired } from '@/functions/rebuild-required';
 

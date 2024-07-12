@@ -2,11 +2,10 @@
 
 import { Menu } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import * as React from 'react';
+import React from 'react';
 
 import { ItemQuickMenu } from '../item';
 import { DrawerQuickMenu } from './drawer';
-
 import { useSession } from '@/hooks/use-session';
 import { Drawer, DrawerTrigger } from '@/components/ui/drawer';
 import { AvatarUser } from '@/components/ui/user/avatar';

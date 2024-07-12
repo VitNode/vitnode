@@ -1,11 +1,10 @@
 import { Search } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import * as React from 'react';
+import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useDebouncedCallback } from 'use-debounce';
 
 import { UserInputContentList } from './list';
-
 import { UserInputItem } from '@/components/ui/user/user-input';
 import { getUsersShortApi } from '@/graphql/get-users-short-api';
 import {

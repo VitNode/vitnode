@@ -1,11 +1,10 @@
 import { BadgeHelp, ChevronDown, CodeXml, Trash2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import * as React from 'react';
+import React from 'react';
 
 import { DeletePluginActionsAdmin } from './delete/delete';
 import { SetDefaultPluginActionsAdmin } from './set-default/set-default';
 import { UploadPluginActionsAdmin } from './upload';
-
 import { Link, usePathname, useRouter } from '@/navigation';
 import { ShowAdminPlugins } from '@/graphql/graphql';
 import { CONFIG } from '@/helpers/config-with-env';

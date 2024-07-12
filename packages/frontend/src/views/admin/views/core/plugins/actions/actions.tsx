@@ -1,6 +1,5 @@
 import { CreateActionPluginAdmin } from './create/create';
 import { UploadActionPluginAdmin } from './upload';
-
 import { CONFIG } from '@/helpers/config-with-env';
 
 export const ActionsPluginsAdmin = () => {

@@ -1,9 +1,8 @@
 import { Trash2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import * as React from 'react';
+import React from 'react';
 
 import { ContentDeleteActionFilesAdvancedCoreAdminProps } from './content';
-
 import {
   AlertDialog,
   AlertDialogContent,

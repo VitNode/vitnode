@@ -2,7 +2,6 @@ import { useTranslations } from 'next-intl';
 
 import { ButtonSetDefaultPluginActionsAdmin } from './button';
 import { useSetDefaultPluginAdmin } from './hooks/use-set-default-admin';
-
 import { ShowAdminPlugins } from '@/graphql/graphql';
 import {
   Tooltip,

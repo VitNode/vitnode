@@ -1,5 +1,4 @@
 import { ContentThemeEditor } from './content';
-
 import {
   Core_Theme_Editor__Show,
   Core_Theme_Editor__ShowQuery,
@@ -7,6 +6,7 @@ import {
 } from '@/graphql/graphql';
 import { fetcher } from '@/graphql/fetcher';
 import { getSessionData } from '@/graphql/get-session-data';
+
 import { ErrorView } from '../../../theme/views/error/error-view';
 
 const getData = async () => {

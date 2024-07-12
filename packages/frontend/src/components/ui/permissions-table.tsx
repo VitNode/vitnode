@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { TableVirtuoso } from 'react-virtuoso';
 import { ControllerRenderProps, FieldValues } from 'react-hook-form';
 import { keyBy, mapValues } from 'lodash';

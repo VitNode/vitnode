@@ -1,9 +1,4 @@
 {
-  "compilerOptions": {
-    "strict": true,
-    "allowJs": false,
-    "skipLibCheck": true,
-    "incremental": true,
-    "forceConsistentCasingInFileNames": true
-  }
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "eslint-config-typescript-vitnode/tsconfig.shared.json"
 }

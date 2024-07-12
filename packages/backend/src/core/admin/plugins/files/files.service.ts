@@ -5,7 +5,7 @@ import { Injectable } from '@nestjs/common';
 import { FilesAdminPluginsArgs } from './dto/files.args';
 import { FilesAdminPluginsObj } from './dto/files.obj';
 
-import { DatabaseService } from '@/database';
+import { DatabaseService } from '@/utils/database/database.service';
 import { NotFoundError } from '@/errors';
 import { ABSOLUTE_PATHS_BACKEND } from '../../../..';
 

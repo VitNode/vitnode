@@ -6,7 +6,6 @@ import { useTranslations } from 'next-intl';
 
 import { mutationCreateApi } from './mutation-create-api';
 import { mutationEditApi } from './mutation-edit-api';
-
 import { ShowAdminPlugins } from '@/graphql/graphql';
 import { useDialog } from '@/components/ui/dialog';
 import { usePathname, useRouter } from '@/navigation';

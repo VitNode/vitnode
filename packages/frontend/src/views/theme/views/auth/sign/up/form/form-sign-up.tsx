@@ -4,7 +4,6 @@ import { useTranslations } from 'next-intl';
 import { removeSpecialCharacters } from 'vitnode-shared';
 
 import { SuccessFormSignUp } from './success';
-
 import { useSignUpView } from '@/hooks/core/sign/up/use-sign-up-view';
 import {
   Form,

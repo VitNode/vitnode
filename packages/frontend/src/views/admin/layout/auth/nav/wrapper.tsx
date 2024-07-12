@@ -2,7 +2,7 @@
 
 import * as Accordion from '@radix-ui/react-accordion';
 import { useSelectedLayoutSegments } from 'next/navigation';
-import * as React from 'react';
+import React from 'react';
 
 interface Props {
   children: React.ReactNode;

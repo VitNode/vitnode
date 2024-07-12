@@ -2,7 +2,6 @@ import { ExternalLink } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 import { ActionsTableNavAdmin } from './actions/actions';
-
 import { ShowCoreNav } from '@/graphql/graphql';
 import { FlatTree } from '@/helpers/flatten-tree';
 import { useTextLang } from '@/hooks/use-text-lang';

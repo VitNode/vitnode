@@ -3,7 +3,6 @@ import { Trash } from 'lucide-react';
 
 import { useDeleteNavAdmin } from './hooks/use-delete-nav-admin';
 import { SubmitDeleteActionTableNavAdmin } from './submit';
-
 import { ShowCoreNav } from '@/graphql/graphql';
 import { useTextLang } from '@/hooks/use-text-lang';
 import {

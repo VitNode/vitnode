@@ -21,8 +21,16 @@ Script based on [Create Next App](https://nextjs.org/).
 
 ```bash
 npx create-vitnode-app@latest
-# or
-yarn create vitnode-app
-# or
+```
+
+or
+
+```bash
+pnpm create vitnode-app
+```
+
+or
+
+```bash
 pnpm create vitnode-app
 ```

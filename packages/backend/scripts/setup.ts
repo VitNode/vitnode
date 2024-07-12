@@ -4,18 +4,28 @@
 import * as fs from 'fs';
 import { join } from 'path';
 
-import { copyDatabaseSchema } from './copy-database-core';
+import { copyFiles } from './copy-files';
 import { generateManifest } from './generate-manifest';
 import { generateMigrations } from './generate-migrations';
 import { updatePlugins } from './update-plugins';
-import { DATABASE_ENVS, createClientDatabase } from '../src/database/client';
-import coreSchemaDatabase from '../src/templates/core/admin/database';
+import coreSchemaDatabase from '../src/plugins/core/admin/database';
 import { generateDatabaseMigrations } from './generate-database-migrations';
 import { generateConfig } from './generate-config';
 
+import { createClientDatabase, DATABASE_ENVS } from '@/utils/database/client';
+
 const init = async () => {
+  let skipDatabase = false;
+  if (process.argv[3] === '--skip-database') {
+    console.log(
+      '\x1b[34m%s\x1b[0m',
+      '[VitNode]',
+      '`--skip-database` flag detected. Skipping database setup...',
+    );
+    skipDatabase = true;
+  }
+
   const pluginsPath = join(process.cwd(), 'src', 'plugins');
-  const corePluginPath = join(pluginsPath, 'core');
   if (!fs.existsSync(pluginsPath)) {
     console.log(
       `⛔️ Plugins not found in 'src/plugins' directory. "${pluginsPath}"`,
@@ -23,24 +33,24 @@ const init = async () => {
     process.exit(1);
   }
 
-  const database = createClientDatabase({
-    config: DATABASE_ENVS,
-    schemaDatabase: coreSchemaDatabase,
-  });
-
   console.log(
     '\x1b[34m%s\x1b[0m',
     '[VitNode]',
-    '[1/6] Setup the project. Generating the config file...',
+    `[1/${skipDatabase ? 2 : 6}] Setup the project. Generating the config file...`,
   );
   generateConfig({ pluginsPath });
 
   console.log(
     '\x1b[34m%s\x1b[0m',
     '[VitNode]',
-    '[2/6] Copying the database core schema...',
+    `[2/${skipDatabase ? 2 : 6}] Copying files into backend...`,
   );
-  copyDatabaseSchema({ corePluginPath });
+  copyFiles({ pluginsPath });
+
+  if (skipDatabase) {
+    console.log('\x1b[34m%s\x1b[0m', '[VitNode]', '✅ Project setup complete.');
+    process.exit(0);
+  }
 
   console.log(
     '\x1b[34m%s\x1b[0m',
@@ -55,6 +65,11 @@ const init = async () => {
     '[4/6] Generating the manifest files...',
   );
   generateManifest();
+
+  const database = createClientDatabase({
+    config: DATABASE_ENVS,
+    schemaDatabase: coreSchemaDatabase,
+  });
 
   console.log(
     '\x1b[34m%s\x1b[0m',

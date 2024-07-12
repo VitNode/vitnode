@@ -2,7 +2,6 @@ import { getTranslations } from 'next-intl/server';
 
 import { CreateNavDevPluginAdmin } from './actions/create/create';
 import { ContentNavDevPluginAdmin } from './content';
-
 import { Icon } from '@/components/icon/icon';
 import { HeaderContent } from '@/components/ui/header-content';
 import {

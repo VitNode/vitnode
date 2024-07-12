@@ -1,8 +1,7 @@
 import { useTranslations } from 'next-intl';
-import * as React from 'react';
+import React from 'react';
 
 import { useModalChangeAvatar } from './hooks/use-modal-change-avatar';
-
 import { useSession } from '@/hooks/use-session';
 import {
   DialogDescription,

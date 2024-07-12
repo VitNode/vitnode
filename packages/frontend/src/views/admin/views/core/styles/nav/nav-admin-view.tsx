@@ -1,9 +1,8 @@
-import * as React from 'react';
+import React from 'react';
 import { getTranslations } from 'next-intl/server';
 
 import { TableNavAdmin } from './table/table';
 import { ActionsNavAdmin } from './actions/actions';
-
 import {
   Admin__Core_Nav__Show,
   Admin__Core_Nav__ShowQuery,

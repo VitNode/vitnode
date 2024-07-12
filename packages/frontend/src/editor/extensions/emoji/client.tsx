@@ -1,7 +1,7 @@
 'use client';
 
 import { ReactRenderer } from '@tiptap/react';
-import * as React from 'react';
+import React from 'react';
 import tippy, { Instance, Props } from 'tippy.js';
 import { useTranslations } from 'next-intl';
 import { Emoji } from '@emoji-mart/data';

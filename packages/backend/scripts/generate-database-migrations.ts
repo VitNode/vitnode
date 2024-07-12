@@ -1,5 +1,6 @@
 import { exec } from 'child_process';
 import * as fs from 'fs';
+import { join } from 'path';
 
 const execShellCommand = async (cmd: string) => {
   return new Promise((resolve, reject) => {
@@ -26,6 +27,16 @@ export const generateDatabaseMigrations = async ({
       .readdirSync(pluginsPath)
       .filter(plugin => plugin !== 'plugins.module.ts')
       .map(async plugin => {
+        // Check if schema exists
+        const schemaPath = join(
+          pluginsPath,
+          plugin,
+          'admin',
+          'database',
+          'schema',
+        );
+        if (!fs.existsSync(schemaPath)) return;
+
         await execShellCommand(
           `npx drizzle-kit up --config src/plugins/${plugin}/admin/database/drizzle.config.ts && npx drizzle-kit generate --config src/plugins/${plugin}/admin/database/drizzle.config.ts`,
         );

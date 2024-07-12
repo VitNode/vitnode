@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 import { formatBytes } from 'vitnode-shared';
@@ -12,7 +12,6 @@ import {
 } from '../files';
 import { uploadMutationApi } from './upload-mutation-api';
 import { getFilesFromContent } from './functions';
-
 import { TextLanguage } from '@/graphql/graphql';
 
 export interface UploadFilesHandlerArgs {

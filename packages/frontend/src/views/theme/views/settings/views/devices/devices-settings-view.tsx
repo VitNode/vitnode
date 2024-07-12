@@ -2,7 +2,6 @@ import { getTranslations } from 'next-intl/server';
 import { cookies } from 'next/headers';
 
 import { ContentDevicesSettings } from './content';
-
 import {
   Core_Sessions__Devices__Show,
   Core_Sessions__Devices__ShowQuery,

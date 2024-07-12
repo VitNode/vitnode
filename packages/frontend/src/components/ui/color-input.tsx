@@ -1,6 +1,6 @@
 'use client';
 
-import * as React from 'react';
+import React from 'react';
 import { HslColor } from 'react-colorful';
 import { useTranslations } from 'next-intl';
 import { getHSLFromString, isColorBrightness } from 'vitnode-shared';

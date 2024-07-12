@@ -2,7 +2,7 @@
 
 import { EditorView } from '@tiptap/pm/view';
 import { Editor, ReactRenderer } from '@tiptap/react';
-import * as React from 'react';
+import React from 'react';
 import tippy, { GetReferenceClientRect, Instance, Props } from 'tippy.js';
 import { useTranslations } from 'next-intl';
 

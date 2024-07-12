@@ -2,7 +2,6 @@ import { getTranslations } from 'next-intl/server';
 
 import { TableAdministratorsStaffAdmin } from './table/table';
 import { ActionsAdministratorsStaffAdmin } from './actions/actions';
-
 import {
   Admin__Core_Staff_Administrators__Show,
   Admin__Core_Staff_Administrators__ShowQuery,

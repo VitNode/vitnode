@@ -3,8 +3,8 @@ import { eq } from 'drizzle-orm';
 
 import { DeleteCoreMembersArgs } from './dto/delete.args';
 
-import { core_users } from '../../../templates/core/admin/database/schema/users';
-import { DatabaseService } from '../../../database';
+import { core_users } from '../../../plugins/core/admin/database/schema/users';
+import { DatabaseService } from '@/utils/database/database.service';
 import { AccessDeniedError, NotFoundError } from '../../../errors';
 
 @Injectable()

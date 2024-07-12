@@ -2,12 +2,12 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
-import * as React from 'react';
+import React from 'react';
 import { toast } from 'sonner';
 
 import { mutationApi } from './mutation-api';
-
 import { ErrorType } from '@/graphql/fetcher';
+
 import { useCaptcha } from '../../../use-captcha';
 
 const nameRegex = /^(?!.* {2})[\p{L}\p{N}._@ -]*$/u;

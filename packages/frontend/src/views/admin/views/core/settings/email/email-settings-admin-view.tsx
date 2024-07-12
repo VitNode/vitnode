@@ -2,7 +2,6 @@ import { getTranslations } from 'next-intl/server';
 
 import { ActionsEmailSettingsAdmin } from './actions/actions';
 import { ContentEmailSettingsAdmin } from './content';
-
 import { HeaderContent } from '@/components/ui/header-content';
 import { Card } from '@/components/ui/card';
 import { fetcher } from '@/graphql/fetcher';

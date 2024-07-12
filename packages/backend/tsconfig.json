@@ -1,15 +1,10 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "extends": "eslint-config-vitnode/tsconfig.base.json",
+  "extends": "eslint-config-typescript-vitnode/tsconfig.nest.json",
   "compilerOptions": {
-    "jsx": "react",
     "target": "ESNext",
-    "module": "CommonJS",
+    "module": "commonjs",
     "outDir": "./dist",
-    "declaration": true,
-    "experimentalDecorators": true,
-    "strictNullChecks": false,
-    "emitDecoratorMetadata": true,
     "emitDeclarationOnly": true,
     "paths": {
       "@/*": ["./src/*"]

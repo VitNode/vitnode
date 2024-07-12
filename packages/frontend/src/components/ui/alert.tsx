@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { VariantProps, cva } from 'class-variance-authority';
 
 import { cn } from '../../helpers/classnames';
@@ -36,6 +36,7 @@ const AlertTitle = ({
   className,
   ...props
 }: React.HTMLAttributes<HTMLHeadingElement>) => (
+  // eslint-disable-next-line jsx-a11y/heading-has-content
   <h5
     className={cn('mb-1 font-medium leading-none tracking-tight', className)}
     {...props}

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import NextTopLoader from 'nextjs-toploader';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';

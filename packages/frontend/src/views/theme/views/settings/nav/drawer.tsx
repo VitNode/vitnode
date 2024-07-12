@@ -2,7 +2,6 @@ import { useTranslations } from 'next-intl';
 
 import { ItemNavSettings } from './item/item-nav-settings';
 import { useSettingsView } from './hooks/use-settings-view';
-
 import {
   Drawer,
   DrawerClose,

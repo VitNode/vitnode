@@ -1,9 +1,8 @@
 import { useLocale, useTranslations } from 'next-intl';
 import { toast } from 'sonner';
-import * as React from 'react';
+import React from 'react';
 
 import { editMutationApi } from './create-edit/hooks/edit-mutation-api';
-
 import { ShowCoreLanguages } from '@/graphql/graphql';
 import { Switch } from '@/components/ui/switch';
 

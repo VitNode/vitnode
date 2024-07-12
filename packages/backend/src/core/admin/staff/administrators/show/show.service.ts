@@ -4,9 +4,9 @@ import { count } from 'drizzle-orm';
 import { ShowAdminStaffAdministratorsArgs } from './dto/show.args';
 import { ShowAdminStaffAdministratorsObj } from './dto/show.obj';
 
-import { DatabaseService } from '@/database';
+import { DatabaseService } from '@/utils/database/database.service';
 import { inputPaginationCursor, outputPagination } from '@/functions';
-import { core_admin_permissions } from '@/templates/core/admin/database/schema/admins';
+import { core_admin_permissions } from '@/plugins/core/admin/database/schema/admins';
 import { SortDirectionEnum } from '@/utils';
 
 @Injectable()

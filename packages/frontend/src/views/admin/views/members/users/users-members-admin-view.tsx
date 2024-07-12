@@ -1,7 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 
 import { TableUsersMembersAdmin } from './table/table';
-
 import { fetcher } from '@/graphql/fetcher';
 import {
   Admin__Core_Members__Show,

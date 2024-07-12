@@ -1,10 +1,10 @@
-import * as React from 'react';
+import React from 'react';
 import { useTranslations } from 'next-intl';
 
 import { SkinSelectEmojisContentIconInput } from './emojis/skin-select';
+import { CONFIG } from '@/helpers/config-with-env';
 
 import { IconLucideNames } from '../../icon-client';
-import { CONFIG } from '@/helpers/config-with-env';
 import { Tabs, TabsTrigger } from '../../../ui/tabs';
 import { Input } from '../../../ui/input';
 import { Loader } from '../../../ui/loader';

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { isRedirectError } from 'next/dist/client/components/redirect';
 
 import { AuthProviders } from './providers';

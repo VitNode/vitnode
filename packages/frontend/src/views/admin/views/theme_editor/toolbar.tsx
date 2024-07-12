@@ -1,6 +1,6 @@
 import { Monitor, Moon, Smartphone, Sun, Tablet } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import * as React from 'react';
+import React from 'react';
 import { useTheme } from 'next-themes';
 
 import {
