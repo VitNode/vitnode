@@ -18,6 +18,10 @@
     "docker:clear": "sudo docker system prune -a",
     "release": "node ./bump-version.mjs"
   },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "engines": {
     "node": ">=18.0.0",
     "pnpm": ">=8.0.0"
