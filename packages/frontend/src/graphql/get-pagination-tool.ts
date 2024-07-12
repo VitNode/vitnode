@@ -37,7 +37,7 @@ export function getPaginationTool<T extends Record<string, unknown>>({
     last: Number(searchParams.last ?? 0),
     cursor: Number(searchParams.cursor) ?? null,
     search: search ? searchParams.search ?? '' : '',
-    sortBy: useGetSortByParamsAPI({ constEnum: sortByEnum, searchParams }),
+    sortBy: getGetSortByParamsAPI({ constEnum: sortByEnum, searchParams }),
   };
 
   return {
@@ -46,7 +46,7 @@ export function getPaginationTool<T extends Record<string, unknown>>({
   };
 }
 
-function useGetSortByParamsAPI<T extends Record<string, unknown>>({
+function getGetSortByParamsAPI<T extends Record<string, unknown>>({
   constEnum,
   searchParams,
 }: {

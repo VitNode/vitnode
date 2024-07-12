@@ -4,7 +4,6 @@ import { Check } from 'lucide-react';
 import { ControllerRenderProps, FieldValues, Path } from 'react-hook-form';
 
 import { timeZones } from '../timezones';
-
 import {
   FormControl,
   FormItem,

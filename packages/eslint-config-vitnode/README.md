@@ -54,3 +54,13 @@ File: `.eslintrc.json`
   "extends": "eslint-config-vitnode/.eslintrc.shared.json"
 }
 ```
+
+#### React / NextJS
+
+File: `.eslintrc.json`
+
+```json
+{
+  "extends": "eslint-config-vitnode/.eslintrc.react.json"
+}
+```

@@ -1,7 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 
 import { ContentMainSettingsCoreAdmin } from './content';
-
 import { HeaderContent } from '@/components/ui/header-content';
 import { Card } from '@/components/ui/card';
 import { fetcher } from '@/graphql/fetcher';

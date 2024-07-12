@@ -6,7 +6,6 @@ import * as React from 'react';
 
 import { ActionsTableLangsCoreAdmin } from './table/actions/actions';
 import { EnabledRowTableLangsCoreAdmin } from './enabled-row';
-
 import {
   Admin__Core_Languages__ShowQuery,
   ShowCoreLanguages,

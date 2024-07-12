@@ -3,9 +3,10 @@ import * as React from 'react';
 import { Input } from 'vitnode-frontend/components/ui/input';
 import { CONFIG } from 'vitnode-frontend/helpers/config-with-env';
 
-import { useEditorState } from '../../../hooks/use-editor-state';
 import { SkinSelectEmojisContentIconInput } from '@/components/icon/input/content/emojis/skin-select';
 import { EmojisContentIconInput } from '@/components/icon/input/content/emojis/emojis';
+
+import { useEditorState } from '../../../hooks/use-editor-state';
 
 interface Props {
   setIsOpen?: (open: boolean) => void;

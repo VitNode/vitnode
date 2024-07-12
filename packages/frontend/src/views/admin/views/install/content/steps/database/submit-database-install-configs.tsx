@@ -3,9 +3,9 @@ import * as React from 'react';
 import { toast } from 'sonner';
 
 import { mutationApi } from './mutation-api';
+import { Button } from '@/components/ui/button';
 
 import { useInstallVitnode } from '../../hooks/use-install-vitnode';
-import { Button } from '@/components/ui/button';
 
 export const SubmitDatabaseInstallConfigs = () => {
   const [isPending, setPending] = React.useState(false);

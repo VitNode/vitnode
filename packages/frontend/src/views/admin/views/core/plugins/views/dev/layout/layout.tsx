@@ -6,7 +6,6 @@ import { Metadata } from 'next';
 
 import { ActionsDevPluginAdmin } from './actions/actions';
 import { getPluginDataAdmin } from './query-api';
-
 import { HeaderContent } from '@/components/ui/header-content';
 import { Badge } from '@/components/ui/badge';
 import { DateFormat } from '@/components/date-format';

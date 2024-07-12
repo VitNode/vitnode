@@ -8,7 +8,6 @@ import { LicenseInstallConfigsView } from './steps/license/license-install-confi
 import { DatabaseInstallConfigsView } from './steps/database/database-install-configs-view';
 import { AccountInstallConfigsView } from './steps/account/account-install-configs-view';
 import { FinishInstallConfigsView } from './finish/finish-install-config-view';
-
 import { LayoutAdminInstallEnum } from '@/graphql/graphql';
 import { ItemStepProps, Steps } from '@/components/ui/steps';
 import {

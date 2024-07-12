@@ -6,7 +6,6 @@ import { ColumnDef } from '@tanstack/react-table';
 import { ExternalLink } from 'lucide-react';
 
 import { ActionsItemPluginsAdmin } from './table/actions/actions';
-
 import {
   Admin__Core_Plugins__ShowQuery,
   ShowAdminPlugins,

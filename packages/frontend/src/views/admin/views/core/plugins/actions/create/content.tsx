@@ -2,7 +2,6 @@ import { useTranslations } from 'next-intl';
 
 import { useCreateEditPluginAdmin } from './hooks/use-create-edit-plugin-admin';
 import { FormCreateEditPluginAdmin } from './form';
-
 import {
   DialogFooter,
   DialogHeader,

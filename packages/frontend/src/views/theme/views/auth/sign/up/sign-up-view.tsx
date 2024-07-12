@@ -1,7 +1,6 @@
 import { useTranslations } from 'next-intl';
 
 import { FormSignUp } from './form/form-sign-up';
-
 import {
   Card,
   CardDescription,

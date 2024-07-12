@@ -3,7 +3,6 @@ import * as React from 'react';
 import { Nav } from '../nav/nav';
 import { UserBar } from './user-bar/user-bar';
 import { AuthUserBar } from './user-bar/auth';
-
 import { LanguageSwitcher } from '@/components/switchers/language-switcher';
 import { ThemeSwitcher } from '@/components/switchers/theme-switcher';
 import { Link } from '@/navigation';

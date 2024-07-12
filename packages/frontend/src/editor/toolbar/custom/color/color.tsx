@@ -3,14 +3,15 @@ import * as React from 'react';
 import { HslColor } from 'react-colorful';
 import { getHSLFromString } from 'vitnode-shared';
 
-import { ButtonToolbarEditor } from '../../button';
-import { useEditorState } from '../../../hooks/use-editor-state';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
 import { PickerColor } from '@/components/ui/picker-color';
+
+import { ButtonToolbarEditor } from '../../button';
+import { useEditorState } from '../../../hooks/use-editor-state';
 
 export const ColorToolbarEditor = () => {
   const [open, setOpen] = React.useState(false);

@@ -1,32 +1,5 @@
 {
   "$schema": "https://json.schemastore.org/eslintrc",
-  "ignorePatterns": [
-    "utils/graphql.ts",
-    ".next",
-    "global.d.ts",
-    "next-config-temp.js"
-  ],
-  "env": {
-    "browser": true,
-    "es2021": true
-  },
-  "extends": [
-    "eslint-config-vitnode/.eslintrc.shared.json",
-    "next/core-web-vitals",
-    "plugin:react/recommended",
-    "plugin:@tanstack/eslint-plugin-query/recommended",
-    "plugin:jsx-a11y/recommended"
-  ],
-  "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
-    },
-    "ecmaVersion": "latest"
-  },
-  "plugins": ["react", "@tanstack/query"],
-  "rules": {
-    "react/react-in-jsx-scope": "off",
-    "react-hooks/exhaustive-deps": "off",
-    "react/prop-types": "off"
-  }
+  "ignorePatterns": ["next-config-temp.js"],
+  "extends": ["eslint-config-vitnode/.eslintrc.react.json"]
 }

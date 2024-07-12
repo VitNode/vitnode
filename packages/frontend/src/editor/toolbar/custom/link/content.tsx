@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form';
 import { useTranslations } from 'next-intl';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { useEditorState } from '../../../hooks/use-editor-state';
 import {
   Form,
   FormControl,
@@ -13,6 +12,8 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+
+import { useEditorState } from '../../../hooks/use-editor-state';
 
 interface Props {
   setOpen: (open: boolean) => void;

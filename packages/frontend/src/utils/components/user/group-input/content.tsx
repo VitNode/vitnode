@@ -5,7 +5,6 @@ import { useQuery } from '@tanstack/react-query';
 import { useDebouncedCallback } from 'use-debounce';
 
 import { GroupInputContentList } from './list';
-
 import { getGroupsShortApi } from '@/graphql/get-groups-short-api';
 import { GroupInputItem } from '@/components/ui/user/group-input';
 import {

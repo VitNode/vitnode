@@ -3,8 +3,6 @@ import { useTranslations } from 'next-intl';
 import * as React from 'react';
 
 import { ContentDeleteActionTableNavDevPluginAdminProps } from './content';
-
-import { useItemNavDevPluginAdmin } from '../../hooks/use-item-nav-dev-plugin-admin';
 import {
   AlertDialog,
   AlertDialogContent,
@@ -18,6 +16,8 @@ import {
 } from '@/components/ui/tooltip';
 import { Button } from '@/components/ui/button';
 import { Loader } from '@/components/ui/loader';
+
+import { useItemNavDevPluginAdmin } from '../../hooks/use-item-nav-dev-plugin-admin';
 
 const Content = React.lazy(async () =>
   import('./content').then(module => ({

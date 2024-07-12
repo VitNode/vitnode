@@ -1,7 +1,6 @@
 'use client';
 
 import { ChangeAvatar } from './change-avatar/change-avatar';
-
 import { CardHeader } from '@/components/ui/card';
 import { useSession } from '@/hooks/use-session';
 

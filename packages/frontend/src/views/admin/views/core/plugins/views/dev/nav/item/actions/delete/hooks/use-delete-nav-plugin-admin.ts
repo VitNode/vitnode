@@ -4,7 +4,6 @@ import { useParams } from 'next/navigation';
 
 import { ContentDeleteActionTableNavDevPluginAdminProps } from '../content';
 import { mutationApi } from './mutation-api';
-
 import { useAlertDialog } from '@/components/ui/alert-dialog';
 
 export const useDeleteNavPluginAdmin = ({

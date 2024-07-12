@@ -1,14 +1,15 @@
 import * as React from 'react';
 import { ChevronDownIcon, SmileIcon } from 'lucide-react';
 
-import { ButtonToolbarEditor } from '../../button';
-import { useEditorState } from '../../../hooks/use-editor-state';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
 import { Loader } from '@/components/ui/loader';
+
+import { ButtonToolbarEditor } from '../../button';
+import { useEditorState } from '../../../hooks/use-editor-state';
 
 const Content = React.lazy(async () =>
   import('./content').then(module => ({

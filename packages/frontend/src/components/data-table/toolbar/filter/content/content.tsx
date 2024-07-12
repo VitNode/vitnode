@@ -6,7 +6,6 @@ import { useDebouncedCallback } from 'use-debounce';
 
 import { ListContentFilterToolbarDataTable } from './list';
 import { useFilterToolbarDataTable } from '../hooks/use-filter-toolbar-data-table';
-
 import { usePathname, useRouter } from '@/navigation';
 import {
   Command,

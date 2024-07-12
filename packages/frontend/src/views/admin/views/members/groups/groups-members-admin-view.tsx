@@ -2,7 +2,6 @@ import { getTranslations } from 'next-intl/server';
 
 import { ActionsGroupsMembersAdmin } from './actions/actions-groups-members-admin';
 import { TableGroupsMembersAdmin } from './table/table';
-
 import { fetcher } from '@/graphql/fetcher';
 import {
   Admin__Core_Groups__Show,
