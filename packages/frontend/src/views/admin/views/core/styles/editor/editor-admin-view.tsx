@@ -1,7 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 
 import { ContentEditorAdmin } from './content';
-
 import { HeaderContent } from '@/components/ui/header-content';
 import { getGlobalData } from '@/graphql/get-global-data';
 

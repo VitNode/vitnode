@@ -1,6 +1,6 @@
 'use client';
 
-import * as React from 'react';
+import React from 'react';
 
 import { SessionContext } from '../../../hooks/use-session';
 import { Core_Sessions__AuthorizationQuery } from '../../../graphql/graphql';

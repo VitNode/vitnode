@@ -1,7 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 
 import { ContentFilesAdvancedCoreAdminView } from './content';
-
 import {
   SearchParamsPagination,
   getPaginationTool,

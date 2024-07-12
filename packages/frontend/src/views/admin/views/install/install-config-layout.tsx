@@ -3,6 +3,7 @@ import { useTranslations } from 'next-intl';
 import { LogoVitNode } from '@/components/logo-vitnode';
 import { ThemeSwitcher } from '@/components/switchers/theme-switcher';
 import { Card } from '@/components/ui/card';
+
 import { PoweredByVitNode } from '../../../global';
 
 interface Props {

@@ -1,10 +1,9 @@
-import * as React from 'react';
+import React from 'react';
 import { ReactCropperElement } from 'react-cropper';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 
 import { mutationApi } from './mutation-api';
-
 import { useSession } from '@/hooks/use-session';
 import { useDialog } from '@/components/ui/dialog';
 

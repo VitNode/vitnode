@@ -17,7 +17,7 @@ interface Props {
   };
 }
 
-export const CalendarPicker = ({ onSelect, selected }: Props) => {
+export const CalendarPicker = ({ selected }: Props) => {
   return (
     <Popover>
       <PopoverTrigger asChild>

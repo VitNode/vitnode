@@ -2,11 +2,11 @@ import validateProjectName from 'validate-npm-package-name';
 
 type ValidateNpmNameResult =
   | {
-      valid: true;
+      problems: string[];
+      valid: false;
     }
   | {
-      valid: false;
-      problems: string[];
+      valid: true;
     };
 
 export const validateNpmName = ({

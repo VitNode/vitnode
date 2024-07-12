@@ -18,9 +18,17 @@
     "create-vitnode-app": "dist/index.cjs"
   },
   "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "build:scripts": "tsup index.ts",
     "dev:script": "tsup index.ts --watch",
     "start:script": "node dist/index.cjs"
+  },
+  "dependencies": {
+    "figlet": "^1.7.0",
+    "picocolors": "^1.0.1",
+    "prompts": "^2.4.2",
+    "validate-npm-package-name": "^5.0.1"
   },
   "devDependencies": {
     "@types/figlet": "^1.5.8",
@@ -29,12 +37,7 @@
     "@types/validate-npm-package-name": "^4.0.2",
     "commander": "^12.1.0",
     "tsup": "^8.1.0",
-    "typescript": "^5.5.3"
-  },
-  "dependencies": {
-    "figlet": "^1.7.0",
-    "picocolors": "^1.0.1",
-    "prompts": "^2.4.2",
-    "validate-npm-package-name": "^5.0.1"
+    "typescript": "^5.5.3",
+    "eslint-config-typescript-vitnode": "workspace:*"
   }
 }

@@ -9,7 +9,7 @@ import {
 } from '@tanstack/react-table';
 import { useTranslations } from 'next-intl';
 import { useSearchParams } from 'next/navigation';
-import * as React from 'react';
+import React from 'react';
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
 
 import {

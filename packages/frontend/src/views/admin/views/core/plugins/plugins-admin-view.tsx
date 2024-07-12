@@ -2,7 +2,6 @@ import { getTranslations } from 'next-intl/server';
 
 import { ActionsPluginsAdmin } from './actions/actions';
 import { ContentPluginsCoreAdminView } from './content';
-
 import {
   Admin__Core_Plugins__Show,
   Admin__Core_Plugins__ShowQuery,
@@ -16,6 +15,7 @@ import {
 import { HeaderContent } from '@/components/ui/header-content';
 import { Card } from '@/components/ui/card';
 import { fetcher } from '@/graphql/fetcher';
+
 import { RebuildRequiredAdmin } from '../../../global/rebuild-required';
 
 export interface PluginsAdminViewProps {

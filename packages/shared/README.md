@@ -24,3 +24,15 @@ yarn add vitnode-shared
 # or
 pnpm add vitnode-shared
 ```
+
+or
+
+```bash
+pnpm add vitnode-shared
+```
+
+or
+
+```bash
+yarn add vitnode-shared
+```

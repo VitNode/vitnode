@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { useTranslations } from 'next-intl';
 
 import {
@@ -7,7 +7,6 @@ import {
 } from './hooks/use-create-edit-form-groups-members-admin';
 import { MainContentCreateEditFormGroupsMembersAdmin } from './content/main';
 import { ContentContentCreateEditFormGroupsMembersAdmin } from './content/content';
-
 import { useTextLang } from '@/hooks/use-text-lang';
 import {
   DialogDescription,

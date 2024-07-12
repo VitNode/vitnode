@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { LayoutSettingsView } from 'vitnode-frontend/theme-tsx/settings/layout-settings-view';

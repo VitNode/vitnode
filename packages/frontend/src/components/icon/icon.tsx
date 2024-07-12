@@ -3,7 +3,7 @@ import 'server-only';
 import { LucideIcon } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import dynamicIconImports from 'lucide-react/dynamicIconImports';
-import * as React from 'react';
+import React from 'react';
 
 export type IconLucideNames = keyof typeof dynamicIconImports;
 

@@ -1,13 +1,15 @@
 #!/usr/bin/env node
 // Ref: https://github.com/vercel/next.js/blob/canary/packages/create-next-app/index.ts
+import { basename, resolve } from 'path';
+import { existsSync } from 'fs';
+
 import { Command } from 'commander';
 import colors from 'picocolors';
 import figlet from 'figlet';
-import packageJson from './package.json' assert { type: 'json' };
 import prompts from 'prompts';
+
+import packageJson from './package.json' assert { type: 'json' };
 import { validateNpmName } from './helpers/validate-pkg';
-import { basename, resolve } from 'path';
-import { existsSync } from 'fs';
 import { isFolderEmpty } from './helpers/is-folder-empty';
 
 let projectPath: string = '';

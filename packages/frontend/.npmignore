@@ -4,6 +4,5 @@
 /.eslintrc.json
 /codegen.ts
 /next-env.d.ts
-/tailwind.config.ts
 /tsconfig.json
 /tsup.config.ts

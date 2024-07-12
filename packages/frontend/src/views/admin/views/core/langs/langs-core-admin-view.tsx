@@ -2,7 +2,6 @@ import { getTranslations } from 'next-intl/server';
 
 import { ActionsLangsAdmin } from './actions/actions';
 import { ContentLangsCoreAdminView } from './content';
-
 import {
   Admin__Core_Languages__Show,
   Admin__Core_Languages__ShowQuery,
@@ -16,6 +15,7 @@ import {
 import { HeaderContent } from '@/components/ui/header-content';
 import { Card } from '@/components/ui/card';
 import { fetcher } from '@/graphql/fetcher';
+
 import { RebuildRequiredAdmin } from '../../../global/rebuild-required';
 
 const getData = async (

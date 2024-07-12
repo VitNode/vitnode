@@ -17,9 +17,11 @@
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended",
-    "plugin:import/warnings"
+    "plugin:import/warnings",
+    "plugin:eslint-comments/recommended"
   ],
   "rules": {
+    "eslint-comments/disable-enable-pair": "off",
     "no-restricted-imports": [
       "error",
       {
@@ -86,7 +88,7 @@
     "@typescript-eslint/return-await": "error",
     "@typescript-eslint/sort-type-constituents": "warn",
     "@typescript-eslint/unified-signatures": "error",
-    // "@typescript-eslint/use-unknown-in-catch-callback-variable": "error",
+    "@typescript-eslint/use-unknown-in-catch-callback-variable": "error",
     "@typescript-eslint/no-unused-vars": [
       "warn",
       {

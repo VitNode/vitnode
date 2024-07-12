@@ -1,9 +1,0 @@
-{
-  "compilerOptions": {
-    "strict": true,
-    "allowJs": false,
-    "skipLibCheck": true,
-    "incremental": true,
-    "forceConsistentCasingInFileNames": true
-  }
-}

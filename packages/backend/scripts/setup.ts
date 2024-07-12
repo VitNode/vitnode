@@ -11,6 +11,7 @@ import { updatePlugins } from './update-plugins';
 import coreSchemaDatabase from '../src/plugins/core/admin/database';
 import { generateDatabaseMigrations } from './generate-database-migrations';
 import { generateConfig } from './generate-config';
+
 import { createClientDatabase, DATABASE_ENVS } from '@/utils/database/client';
 
 const init = async () => {

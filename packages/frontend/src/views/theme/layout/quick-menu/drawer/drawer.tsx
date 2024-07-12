@@ -1,10 +1,9 @@
 import { useTranslations } from 'next-intl';
 import { KeyRound, LogOut, Settings, Shield, User } from 'lucide-react';
-import * as React from 'react';
+import React from 'react';
 
 import { HeaderDrawerQuickMenu } from './header';
 import { NavDrawerQuickMenu } from './nav/nav';
-
 import { useSignOutApi } from '@/hooks/core/sign/out/use-sign-out-api';
 import { useSession } from '@/hooks/use-session';
 import { DrawerClose, DrawerContent } from '@/components/ui/drawer';

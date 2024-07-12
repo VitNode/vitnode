@@ -1,5 +1,5 @@
 import { useTranslations } from 'next-intl';
-import * as React from 'react';
+import React from 'react';
 import { X } from 'lucide-react';
 
 import { Popover, PopoverContent, PopoverTrigger } from '../popover';

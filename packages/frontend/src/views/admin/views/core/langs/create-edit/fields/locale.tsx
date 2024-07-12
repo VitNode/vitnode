@@ -1,5 +1,5 @@
 import { useTranslations } from 'next-intl';
-import * as React from 'react';
+import React from 'react';
 import * as localeDate from 'date-fns/locale';
 import { Check } from 'lucide-react';
 import { ControllerRenderProps, FieldValues, Path } from 'react-hook-form';

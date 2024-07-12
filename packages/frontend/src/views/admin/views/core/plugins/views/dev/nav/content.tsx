@@ -6,13 +6,12 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 import { useTranslations } from 'next-intl';
-import * as React from 'react';
+import React from 'react';
 import { useParams } from 'next/navigation';
 
 import { ItemContentNavDevPluginAdmin } from './item/item';
 import { mutationChangePositionApi } from './item/hooks/mutation-change-position-api';
 import { ItemNavDevPluginAdminContext } from './item/hooks/use-item-nav-dev-plugin-admin';
-
 import {
   Admin__Core_Plugins__Nav__ShowQuery,
   ShowAdminNavPluginsObj,

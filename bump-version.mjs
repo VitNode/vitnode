@@ -22,7 +22,7 @@ const packages = [
   'create-vitnode-app',
   'frontend',
   'shared',
-  'eslint-config-vitnode',
+  'config',
 ];
 
 const getPackageJson = () => {
@@ -233,7 +233,10 @@ function logError(error) {
     newVersion = `${tagPrefix}${newVersion}${tagSuffix}`;
 
     // Bump the version
-    console.log(`Bumping version from ${currentVersion} to ${newVersion}`, version);
+    console.log(
+      `Bumping version from ${currentVersion} to ${newVersion}`,
+      version,
+    );
     await runInWorkspace('npm', [
       'version',
       '--allow-same-version=true',

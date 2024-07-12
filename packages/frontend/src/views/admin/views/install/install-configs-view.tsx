@@ -1,5 +1,4 @@
 import { ContentInstallConfigsView } from './content/content';
-
 import {
   Admin__Install__Layout,
   Admin__Install__LayoutQuery,
@@ -7,6 +6,7 @@ import {
 } from '@/graphql/graphql';
 import { ErrorType, fetcher } from '@/graphql/fetcher';
 import { redirect } from '@/navigation';
+
 import { InternalErrorView } from '../../../global';
 
 const getData = async () => {

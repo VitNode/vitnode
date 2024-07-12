@@ -1,7 +1,7 @@
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { ChevronRight, GripVertical } from 'lucide-react';
-import * as React from 'react';
+import React from 'react';
 
 import { cn } from '../helpers/classnames';
 import { Button } from './ui/button';

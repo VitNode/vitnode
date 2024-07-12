@@ -1,5 +1,5 @@
 import { useTranslations } from 'next-intl';
-import * as React from 'react';
+import React from 'react';
 import { ImageIcon } from 'lucide-react';
 
 import { useSession } from '@/hooks/use-session';

@@ -5,7 +5,6 @@ import { toast } from 'sonner';
 
 import { mutationApi } from './mutation-api';
 import { UploadPluginAdminProps } from '../upload';
-
 import { useDialog } from '@/components/ui/dialog';
 import { ErrorType } from '@/graphql/fetcher';
 

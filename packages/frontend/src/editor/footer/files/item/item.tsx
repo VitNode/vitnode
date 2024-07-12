@@ -6,13 +6,13 @@ import { JSONContent } from '@tiptap/react';
 import { IconItemListFilesFooterEditor } from './icon';
 import { ContentItemListFilesFooterEditor } from './content';
 import { deleteMutationApi } from './hooks/delete-mutation-api';
-
-import { FileStateEditor } from '../../../extensions/files/files';
-import { useEditorState } from '../../../hooks/use-editor-state';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/helpers/classnames';
 import { CONFIG } from '@/helpers/config-with-env';
 import { TextLanguage } from '@/graphql/graphql';
+
+import { useEditorState } from '../../../hooks/use-editor-state';
+import { FileStateEditor } from '../../../extensions/files/files';
 
 export interface ItemListFilesFooterEditorProps
   extends Omit<FileStateEditor, 'file'> {

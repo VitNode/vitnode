@@ -1,6 +1,6 @@
 'use client';
 
-import * as React from 'react';
+import React from 'react';
 import * as Accordion from '@radix-ui/react-accordion';
 import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
