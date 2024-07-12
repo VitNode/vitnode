@@ -1,28 +1,12 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "extends": "eslint-config-vitnode/tsconfig.base.json",
+  "extends": "eslint-config-vitnode/tsconfig.nest.json",
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "commonjs",
-    "jsx": "react",
     "baseUrl": "./",
-    "outDir": "./dist",
-    "declaration": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "sourceMap": true,
-    "noImplicitAny": false,
-    "strictNullChecks": false,
     "forceConsistentCasingInFileNames": false, // TODO: Improve this value
-    "noFallthroughCasesInSwitch": false,
-    "strictPropertyInitialization": false,
     "paths": {
       "@/*": ["./src/*"]
     }
   },
-  "exclude": ["uploads"],
-  "ts-node": {
-    // `pnpm add -D tsconfig-paths` / Paths for ts-node
-    "require": ["tsconfig-paths/register"]
-  }
+  "exclude": ["uploads"]
 }

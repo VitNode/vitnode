@@ -12,7 +12,8 @@
   },
   "type": "module",
   "files": [
-    "tsconfig.base.json",
+    "tsconfig.shared.json",
+    "tsconfig.nest.json",
     ".eslintrc.shared.json",
     ".eslintrc.react.json"
   ],
@@ -35,6 +36,7 @@
     "eslint": "8.57.0",
     "eslint-config-next": "15.0.0-canary.64",
     "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-eslint-comments": "^3.2.0",
     "eslint-plugin-jsx-a11y": "^6.9.0",
     "eslint-plugin-prettier": "^5.1.3",
     "eslint-plugin-sort-destructure-keys": "^2.0.0",

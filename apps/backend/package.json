@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "config:init": "vitnode-backend init",
-    "build": "vitnode-backend init && nest build",
+    "build": "nest build",
     "dev": "pnpm config:init && cross-env NODE_ENV=development nest start -w",
     "start": "node dist/main",
     "lint": "eslint .",
