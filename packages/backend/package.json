@@ -68,7 +68,7 @@
     "nodemailer": "^6.9.14",
     "concurrently": "^8.2.2",
     "dotenv": "^16.4.5",
-    "eslint-config-vitnode": "workspace:*",
+    "vitnode-config": "workspace:*",
     "http-errors": "^2.0.0",
     "object-path": "^0.11.8",
     "ts-node": "^10.9.2",

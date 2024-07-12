@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "extends": "eslint-config-vitnode/tsconfig.next.json",
+  "extends": "vitnode-config/tsconfig.next.json",
   "compilerOptions": {
     "target": "ES2022",
     "module": "ESNext",

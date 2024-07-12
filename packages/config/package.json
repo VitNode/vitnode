@@ -1,14 +1,14 @@
 {
-  "name": "eslint-config-vitnode",
+  "name": "vitnode-config",
   "version": "0.0.7-canary.0",
-  "description": "ESLint, TSConfig config for VitNode",
+  "description": "ESLint, TSConfig, Prettier config for VitNode",
   "author": "VitNode Team",
   "license": "MIT",
   "homepage": "https://VitNode.com",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/aXenDeveloper/VitNode.git",
-    "directory": "packages/eslint-config-vitnode"
+    "directory": "packages/config"
   },
   "type": "module",
   "files": [

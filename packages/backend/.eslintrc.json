@@ -1,5 +1,5 @@
 {
   "$schema": "https://json.schemastore.org/eslintrc",
-  "extends": ["eslint-config-vitnode/.eslintrc.shared.json"],
+  "extends": ["vitnode-config/.eslintrc.shared.json"],
   "ignorePatterns": ["tsup.config.ts"]
 }

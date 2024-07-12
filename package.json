@@ -27,8 +27,8 @@
     "prettier": "^3.3.2",
     "prettier-plugin-tailwindcss": "^0.6.5",
     "turbo": "^2.0.6",
-    "eslint-config-vitnode": "workspace:*"
+    "vitnode-config": "workspace:*"
   },
   "packageManager": "pnpm@9.5.0",
-  "prettier": "eslint-config-vitnode/.prettierrc.json"
+  "prettier": "vitnode-config/.prettierrc.json"
 }

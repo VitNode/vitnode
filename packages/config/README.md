@@ -24,19 +24,19 @@ Package providing ESLint & TSConfig configuration from [VitNode](https://vitnode
 ## Installation
 
 ```bash
-npm install --save-dev eslint-config-vitnode
+npm install --save-dev vitnode-config
 ```
 
 or
 
 ```bash
-pnpm add --save-dev eslint-config-vitnode
+pnpm add --save-dev vitnode-config
 ```
 
 or
 
 ```bash
-yarn add --dev eslint-config-vitnode
+yarn add --dev vitnode-config
 ```
 
 ## ESLint
@@ -49,7 +49,7 @@ File: `.eslintrc.json`
 
 ```json
 {
-  "extends": "eslint-config-vitnode/.eslintrc.shared.json"
+  "extends": "vitnode-config/.eslintrc.shared.json"
 }
 ```
 
@@ -61,7 +61,7 @@ File: `.eslintrc.json`
 
 ```json
 {
-  "extends": "eslint-config-vitnode/.eslintrc.react.json"
+  "extends": "vitnode-config/.eslintrc.react.json"
 }
 ```
 
@@ -75,7 +75,7 @@ File: `tsconfig.json`
 
 ```json
 {
-  "extends": "eslint-config-vitnode/tsconfig.shared.json"
+  "extends": "vitnode-config/tsconfig.shared.json"
 }
 ```
 
@@ -87,7 +87,7 @@ File: `tsconfig.json`
 
 ```json
 {
-  "extends": "eslint-config-vitnode/tsconfig.nest.json"
+  "extends": "vitnode-config/tsconfig.nest.json"
 }
 ```
 
@@ -99,7 +99,7 @@ File: `tsconfig.json`
 
 ```json
 {
-  "extends": "eslint-config-vitnode/tsconfig.next.json"
+  "extends": "vitnode-config/tsconfig.next.json"
 }
 ```
 
@@ -111,6 +111,6 @@ File: `package.json`
 
 ```json
 {
-  "prettier": "eslint-config-vitnode/.prettierrc.json"
+  "prettier": "vitnode-config/.prettierrc.json"
 }
 ```
