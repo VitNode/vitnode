@@ -1,6 +1,6 @@
 import { ChevronDown, Trash2, Upload } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
-import * as React from 'react';
+import React from 'react';
 
 import { EditActionsTableLangsCoreAdmin } from './edit';
 import { DeleteActionsTableLangsCoreAdmin } from './delete/delete';

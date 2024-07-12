@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { VariantProps, cva } from 'class-variance-authority';
 
 import { cn } from '../../helpers/classnames';

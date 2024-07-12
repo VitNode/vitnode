@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { Metadata } from 'next';
 import { getSessionData } from 'vitnode-frontend/graphql/get-session-data';
 

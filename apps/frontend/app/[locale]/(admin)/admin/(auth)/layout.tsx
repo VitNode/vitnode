@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { getTranslations } from 'next-intl/server';
 import { Metadata } from 'next';
 import { getGlobalData } from 'vitnode-frontend/graphql/get-global-data';

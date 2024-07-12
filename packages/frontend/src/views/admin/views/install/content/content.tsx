@@ -1,6 +1,6 @@
 'use client';
 
-import * as React from 'react';
+import React from 'react';
 
 import { WelcomeInstallConfigsView } from './steps/welcome';
 import { InstallVitNodeContext } from './hooks/use-install-vitnode';

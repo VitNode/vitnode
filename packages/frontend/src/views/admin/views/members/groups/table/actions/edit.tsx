@@ -1,5 +1,5 @@
 import { Pencil } from 'lucide-react';
-import * as React from 'react';
+import React from 'react';
 import { useTranslations } from 'next-intl';
 
 import { ShowAdminGroups } from '@/graphql/graphql';

@@ -1,5 +1,5 @@
 import { useTranslations } from 'next-intl';
-import * as React from 'react';
+import React from 'react';
 import { Input } from 'vitnode-frontend/components/ui/input';
 import { CONFIG } from 'vitnode-frontend/helpers/config-with-env';
 

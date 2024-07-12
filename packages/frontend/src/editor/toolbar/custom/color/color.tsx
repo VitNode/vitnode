@@ -1,5 +1,5 @@
 import { Baseline, ChevronDownIcon } from 'lucide-react';
-import * as React from 'react';
+import React from 'react';
 import { HslColor } from 'react-colorful';
 import { getHSLFromString } from 'vitnode-shared';
 

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { ReactCropperElement } from 'react-cropper';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';

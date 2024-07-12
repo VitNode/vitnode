@@ -1,5 +1,5 @@
 import dynamicIconImports from 'lucide-react/dynamicIconImports';
-import * as React from 'react';
+import React from 'react';
 import { useTranslations } from 'next-intl';
 
 import { IconInputProps } from '../content';

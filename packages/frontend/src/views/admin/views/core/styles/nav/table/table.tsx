@@ -5,7 +5,7 @@ import {
   SortableContext,
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
-import * as React from 'react';
+import React from 'react';
 import { useTranslations } from 'next-intl';
 
 import { ItemContentTableContentNavAdmin } from './item';

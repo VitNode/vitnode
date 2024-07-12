@@ -1,6 +1,6 @@
 import { Trash2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import * as React from 'react';
+import React from 'react';
 
 import { ShowAdminStaffModerators } from '@/graphql/graphql';
 import {

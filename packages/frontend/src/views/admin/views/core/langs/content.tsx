@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import { ColumnDef } from '@tanstack/react-table';
-import * as React from 'react';
+import React from 'react';
 
 import { ActionsTableLangsCoreAdmin } from './table/actions/actions';
 import { EnabledRowTableLangsCoreAdmin } from './enabled-row';

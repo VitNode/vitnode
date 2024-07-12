@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import * as React from 'react';
+import React from 'react';
 import { InfinityIcon, ShieldAlert } from 'lucide-react';
 import { ColumnDef } from '@tanstack/react-table';
 

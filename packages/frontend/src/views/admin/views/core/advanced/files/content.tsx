@@ -4,7 +4,7 @@ import { ColumnDef } from '@tanstack/react-table';
 import { Clock, File } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
-import * as React from 'react';
+import React from 'react';
 import { formatBytes } from 'vitnode-shared';
 
 import { ActionsFilesAdvancedCoreAdmin } from './actions/actions';

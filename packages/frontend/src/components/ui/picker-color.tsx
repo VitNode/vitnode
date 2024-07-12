@@ -1,6 +1,6 @@
 'use client';
 
-import * as React from 'react';
+import React from 'react';
 import { HslColorPicker, HslColor } from 'react-colorful';
 import { RemoveFormatting } from 'lucide-react';
 import { useTranslations } from 'next-intl';

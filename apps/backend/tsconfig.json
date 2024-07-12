@@ -6,7 +6,6 @@
     "module": "commonjs",
     "baseUrl": "./",
     "outDir": "./dist",
-    "forceConsistentCasingInFileNames": false, // TODO: Improve this value
     "paths": {
       "@/*": ["./src/*", "./node_modules/vitnode-backend/dist/*"]
     }

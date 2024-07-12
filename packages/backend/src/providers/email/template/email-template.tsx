@@ -10,7 +10,7 @@ import {
   Text,
   Tailwind,
 } from '@react-email/components';
-import * as React from 'react';
+import React from 'react';
 
 import { getTranslationForEmail } from '../email';
 import { GetHelpersForEmailType } from '../email-helpers.type';

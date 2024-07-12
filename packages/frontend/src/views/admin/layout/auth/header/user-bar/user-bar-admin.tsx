@@ -3,7 +3,7 @@
 import { Home, LogOut } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
-import * as React from 'react';
+import React from 'react';
 
 import { ItemUserBarAdmin } from './item-user-bar-admin';
 import { mutationApi } from './hooks/mutation-api';

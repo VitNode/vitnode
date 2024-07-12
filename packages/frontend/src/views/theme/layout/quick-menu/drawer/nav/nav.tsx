@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import * as Accordion from '@radix-ui/react-accordion';
 import { ChevronDown } from 'lucide-react';
 

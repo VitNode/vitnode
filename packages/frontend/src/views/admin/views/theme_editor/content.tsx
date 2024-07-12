@@ -1,6 +1,6 @@
 'use client';
 
-import * as React from 'react';
+import React from 'react';
 
 import { ThemeEditorViewEnum, ToolbarThemeEditor } from './toolbar';
 import { ThemeEditorContext, ThemeEditorTab } from './hooks/use-theme-editor';

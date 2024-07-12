@@ -1,6 +1,6 @@
 import { Bell, Cog, Files, LucideIcon, MonitorSmartphone } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import * as React from 'react';
+import React from 'react';
 
 export interface ItemNavSettingsProps {
   href: string;

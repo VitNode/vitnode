@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { useTranslations } from 'next-intl';
-import * as React from 'react';
+import React from 'react';
 import { toast } from 'sonner';
 
 import { mutationApi } from './mutation-api';

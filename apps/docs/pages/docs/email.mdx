@@ -54,7 +54,7 @@ VitNode provides a template for emails. You can customize it by `AdminCP` => `Se
 Create `.tsx` file, for example: `/emails/example_template.tsx`.
 
 ```tsx
-import * as React from 'react';
+import React from 'react';
 import { Text } from '@react-email/components';
 
 interface Props {
@@ -112,7 +112,7 @@ export class ExampleService {
 We're created a helper function `getTranslationForEmail(namespace, language)` to translate the email templates. You can use it like this:
 
 ```tsx {3, 7, 11, 15}
-import * as React from 'react';
+import React from 'react';
 import { Text } from '@react-email/components';
 import { getTranslationForEmail, User } from 'vitnode-backend';
 
@@ -152,7 +152,7 @@ We're providing some helper functions to make your life easier. Using `this.emai
 ### Modify the template
 
 ```tsx {4-5, 10, 18, 25-30}
-import * as React from 'react';
+import React from 'react';
 import { Text, Link } from '@react-email/components';
 import {
   getTranslationForEmail,
@@ -188,8 +188,7 @@ export const ExampleTemplateEmail = ({
 ```
 
 <Callout type="warning" emoji="⚠️">
-  Custom colors like for example`bg-primary` not working in emails.  
-
+  Custom colors like for example`bg-primary` not working in emails.
 
 Use `bg-${color.primary.DEFAULT}` instead.
 
