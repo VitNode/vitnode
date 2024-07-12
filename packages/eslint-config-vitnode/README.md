@@ -57,10 +57,50 @@ File: `.eslintrc.json`
 
 #### React / NextJS
 
+`.eslint.react.json` can be used for any React / NextJS project.
+
 File: `.eslintrc.json`
 
 ```json
 {
   "extends": "eslint-config-vitnode/.eslintrc.react.json"
+}
+```
+
+### TSConfig
+
+#### Shared
+
+`tsconfig.shared.json` can be used for any TypeScript project.
+
+File: `tsconfig.json`
+
+```json
+{
+  "extends": "eslint-config-vitnode/tsconfig.shared.json"
+}
+```
+
+#### NestJS
+
+`tsconfig.nest.json` can be used for any NestJS project.
+
+File: `tsconfig.json`
+
+```json
+{
+  "extends": "eslint-config-vitnode/tsconfig.nest.json"
+}
+```
+
+#### NextJS
+
+`tsconfig.next.json` can be used for any NextJS project.
+
+File: `tsconfig.json`
+
+```json
+{
+  "extends": "eslint-config-vitnode/tsconfig.next.json"
 }
 ```

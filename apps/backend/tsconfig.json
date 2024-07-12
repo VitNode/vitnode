@@ -2,10 +2,13 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "eslint-config-vitnode/tsconfig.nest.json",
   "compilerOptions": {
+    "target": "ESNext",
+    "module": "commonjs",
     "baseUrl": "./",
+    "outDir": "./dist",
     "forceConsistentCasingInFileNames": false, // TODO: Improve this value
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*", "./node_modules/vitnode-backend/dist/*"]
     }
   },
   "exclude": ["uploads"]
