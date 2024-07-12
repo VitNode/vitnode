@@ -13,14 +13,44 @@
 
 # (VitNode) ESLint Config
 
-Package providing ESLint & TSConfig configuration for VitNode projects.
+Package providing ESLint & TSConfig configuration from [VitNode](https://vitnode.com/).
+
+> [!TIP]
+> This package is not for only VitNode, you can use it in any project.
+
+> [!CAUTION]
+> Only ESLint 8 is supported. ESLint 9 is not supported yet.
 
 ## Installation
 
 ```bash
 npm install --save-dev eslint-config-vitnode
-# or
-yarn add --dev eslint-config-vitnode
-# or
+```
+
+or
+
+```bash
 pnpm add --save-dev eslint-config-vitnode
+```
+
+or
+
+```bash
+yarn add --dev eslint-config-vitnode
+```
+
+## Usage
+
+### ESLint
+
+#### Shared
+
+`.eslint.shared.json` can be used for any TypeScript project.
+
+File: `.eslintrc.json`
+
+```json
+{
+  "extends": "eslint-config-vitnode/.eslintrc.shared.json"
+}
 ```

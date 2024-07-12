@@ -1,5 +1,6 @@
 import { lstatSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
+
 import colors from 'picocolors';
 
 export function isFolderEmpty(root: string, name: string): boolean {
@@ -30,7 +31,7 @@ export function isFolderEmpty(root: string, name: string): boolean {
     file =>
       !validFiles.includes(file) &&
       // Support IntelliJ IDEA-based editors
-      !/\.iml$/.test(file),
+      !file.endsWith('.iml'),
   );
 
   if (conflicts.length > 0) {

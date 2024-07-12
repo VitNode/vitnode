@@ -1,5 +1,8 @@
 {
   "$schema": "https://json.schemastore.org/eslintrc",
   "extends": ["eslint-config-vitnode/.eslintrc.shared.json"],
-  "ignorePatterns": ["uploads"]
+  "ignorePatterns": ["tsup.config.ts"],
+  "rules": {
+    "no-console": "off"
+  }
 }

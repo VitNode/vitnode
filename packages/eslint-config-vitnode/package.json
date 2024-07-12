@@ -11,18 +11,22 @@
     "directory": "packages/eslint-config-vitnode"
   },
   "type": "module",
-  "keywords": [
-    "eslint",
-    "eslintconfig",
-    "prettier",
-    "vitnode"
-  ],
   "files": [
     "tsconfig.base.json",
-    ".eslintrc.json"
+    ".eslintrc.shared.json"
+  ],
+  "keywords": [
+    "eslint",
+    "tsconfig",
+    "vitnode",
+    "eslintplugin",
+    "eslint-plugin",
+    "typescript",
+    "prettier"
   ],
   "peerDependencies": {
-    "eslint": "8"
+    "eslint": "^8.57.0",
+    "typescript": "^5.5.3"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^7.15.0",

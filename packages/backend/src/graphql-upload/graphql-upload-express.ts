@@ -56,7 +56,9 @@ export function graphqlUploadExpress({
         request.body = body;
         next();
       })
-      .catch(error => {
+      .catch((err: unknown) => {
+        const error = err as { expose?: boolean; status?: number };
+
         if (error.status && error.expose) response.status(error.status);
         next(error);
       });

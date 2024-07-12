@@ -1,12 +1,17 @@
 {
   "$schema": "https://json.schemastore.org/eslintrc",
-  "ignorePatterns": ["utils/graphql.ts", ".next", "global.d.ts"],
+  "ignorePatterns": [
+    "utils/graphql.ts",
+    ".next",
+    "global.d.ts",
+    "next-config-temp.js"
+  ],
   "env": {
     "browser": true,
     "es2021": true
   },
   "extends": [
-    "eslint-config-vitnode/.eslintrc.json",
+    "eslint-config-vitnode/.eslintrc.shared.json",
     "next/core-web-vitals",
     "plugin:react/recommended",
     "plugin:@tanstack/eslint-plugin-query/recommended",
