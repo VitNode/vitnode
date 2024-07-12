@@ -2,11 +2,11 @@ import React from 'react';
 import { isRedirectError } from 'next/dist/client/components/redirect';
 
 import { AuthProviders } from './providers';
+import { getGlobalData } from '@/graphql/get-global-data';
+import { getSessionData } from '@/graphql/get-session-data';
 
 import { redirect } from '../../../navigation';
 import { InternalErrorView } from '../../global';
-import { getGlobalData } from '@/graphql/get-global-data';
-import { getSessionData } from '@/graphql/get-session-data';
 
 interface Props {
   children: React.ReactNode;

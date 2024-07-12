@@ -22,10 +22,18 @@ VitNode is a modern, open-source, and self-hosted content management system (CMS
 
 ```bash
 npx create-vitnode-app@latest
-# or
-yarn create vitnode-app@latest
-# or
+```
+
+or
+
+```bash
 pnpm create vitnode-app@latest
+```
+
+or
+
+```bash
+yarn create vitnode-app@latest
 ```
 
 ## Requirements
