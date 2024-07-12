@@ -11,6 +11,8 @@
     "directory": "packages/frontend"
   },
   "exports": {
+    "./next.config": "./next.config.ts",
+    "./tailwind.config": "./tailwind.config.ts",
     "./middleware": {
       "types": "./dist/src/middleware.ts",
       "default": "./dist/src/middleware.js"
