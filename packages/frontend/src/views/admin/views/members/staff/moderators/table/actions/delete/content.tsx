@@ -26,8 +26,9 @@ export const ContentDeleteActionsTableModeratorsStaffAdmin = ({
   const { setOpen } = useAlertDialog();
 
   const onSubmit = async () => {
-    const mutation = await mutationApi({ id });
-    if (mutation.error) {
+    try {
+      await mutationApi({ id });
+    } catch (error) {
       toast.error(tCore('errors.title'), {
         description: tCore('errors.internal_server_error'),
       });

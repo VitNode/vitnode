@@ -1,0 +1,25 @@
+{
+  "title": "dev",
+  "root": true,
+  "pages": [
+    "---Introduction ---",
+    "index",
+    "contribution",
+    "--- GraphQL ---",
+    "graphql",
+    "modules",
+    "services",
+    "resolvers",
+    "codegen",
+    "rest",
+    "--- Plugins ---",
+    "plugins",
+    "plugins-nav-admin",
+    "plugins-permissions-admin",
+    "--- API References ---",
+    "authorization",
+    "fetch",
+    "i18n",
+    "..."
+  ]
+}

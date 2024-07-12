@@ -15,8 +15,9 @@ export const useDeletePluginAdmin = ({ code, name }: Args) => {
   const { setOpen } = useAlertDialog();
 
   const onSubmit = async () => {
-    const mutation = await mutationApi({ code });
-    if (mutation.error) {
+    try {
+      await mutationApi({ code });
+    } catch (error) {
       toast.error(tCore('errors.title'), {
         description: tCore('errors.internal_server_error'),
       });

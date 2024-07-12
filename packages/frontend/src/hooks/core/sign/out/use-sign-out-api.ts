@@ -7,8 +7,9 @@ export const useSignOutApi = () => {
   const t = useTranslations('core');
 
   const onSubmit = async () => {
-    const mutation = await mutationApi();
-    if (mutation?.error) {
+    try {
+      await mutationApi();
+    } catch (error) {
       toast.error(t('errors.title'), {
         description: t('errors.internal_server_error'),
       });

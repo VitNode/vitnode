@@ -11,7 +11,7 @@ import {
 } from '@/graphql/graphql';
 
 const getData = async () => {
-  const { data } = await fetcher<
+  const data = await fetcher<
     Core_Main_Settings__ShowQuery,
     Core_Main_Settings__ShowQueryVariables
   >({

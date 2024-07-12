@@ -21,7 +21,7 @@ import { RebuildRequiredAdmin } from '../../../global/rebuild-required';
 const getData = async (
   variables: Admin__Core_Languages__ShowQueryVariables,
 ) => {
-  const { data } = await fetcher<
+  const data = await fetcher<
     Admin__Core_Languages__ShowQuery,
     Admin__Core_Languages__ShowQueryVariables
   >({

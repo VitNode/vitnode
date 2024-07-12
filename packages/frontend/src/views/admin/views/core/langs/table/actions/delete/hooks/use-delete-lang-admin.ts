@@ -32,8 +32,9 @@ export const useDeleteLangAdmin = ({
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     if (values.name !== name) return;
 
-    const mutation = await mutationApi({ code });
-    if (mutation.error) {
+    try {
+      await mutationApi({ code });
+    } catch (error) {
       toast.error(tCore('errors.title'), {
         description: tCore('errors.internal_server_error'),
       });

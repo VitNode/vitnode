@@ -17,8 +17,9 @@ export const SubmitDatabaseInstallConfigs = () => {
       onClick={async () => {
         setPending(true);
 
-        const mutation = await mutationApi();
-        if (mutation?.error) {
+        try {
+          await mutationApi();
+        } catch (error) {
           toast.error(tCore('errors.title'), {
             description: tCore('errors.internal_server_error'),
           });

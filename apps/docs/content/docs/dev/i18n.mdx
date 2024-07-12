@@ -1,0 +1,468 @@
+---
+title: Internationalization (i18n)
+description: Translate your plugin to multiple languages.
+---
+
+VitNode supports multiple languages out of the box. You can easily translate your content inside plugin. Input and WYSIWYG fields are supported also with i18n.
+
+Each translations are stored in database as `array`.
+
+```ts
+[
+  {
+    language_code: 'en',
+    value: 'Hello world',
+  },
+  {
+    language_code: 'pl',
+    value: 'Witaj świecie',
+  },
+];
+```
+
+## Content
+
+Thanks to [next-intl](https://next-intl-docs.vercel.app/) you can easily translate your content. Read more in the [official documentation](https://next-intl-docs.vercel.app/docs/usage).
+
+To translate your content select the plugin in `frontend`, go to `langs` folder and pick the language you want to translate. You can also add a new language by creating a new one in AdminCP.
+
+```json title="frontend/plugins/{your_plugin}/langs/en.json"
+{
+  "{your_plugin}": {
+    "hello": "Hello World",
+    "world": "World"
+  }
+}
+```
+
+import { Callout } from 'fumadocs-ui/components/callout';
+
+<Callout title="Primary key" type="warn">
+  Name your plugin should be a primary key in the JSON file.
+
+You cannnot do this:
+
+```json title="frontend/plugins/{your_plugin}/langs/en.json"
+{
+  "{your_plugin}": {
+    "hello": "Hello World"
+  },
+  "world": "World"
+}
+```
+
+</Callout>
+
+## Translation Fields
+
+VitNode has a built-in translation fields for input and WYSIWYG fields. You can easily translate your content in the AdminCP.
+
+As an example, we will create a translation field for the `title` field in the `blog_categories` table.
+
+### Database
+
+For the translation fields, you need to create a new table in the database where you will store the translations.
+
+```ts title="backend/plugins/blog/admin/database/schema/categories.ts"
+import {
+  boolean,
+  index,
+  integer,
+  pgTable,
+  serial,
+  timestamp,
+  varchar,
+} from 'drizzle-orm/pg-core';
+import { relations } from 'drizzle-orm';
+
+import { core_languages } from '@/plugins/core/admin/database/schema/languages';
+
+export const blog_categories = pgTable('blog_categories', {
+  id: serial('id').primaryKey(),
+  created: timestamp('created').notNull().defaultNow(),
+  position: integer('position').notNull().default(0),
+});
+
+export const blog_categories_relations = relations(
+  blog_categories,
+  ({ many }) => ({
+    name: many(blog_categories_name),
+  }),
+);
+
+export const blog_categories_name = pgTable(
+  'blog_categories_name',
+  {
+    id: serial('id').primaryKey(),
+    item_id: integer('item_id').references(() => blog_categories.id, {
+      onDelete: 'cascade',
+    }),
+    language_code: varchar('language_code')
+      .notNull()
+      .references(() => core_languages.code, {
+        onDelete: 'cascade',
+      }),
+    value: varchar('value', { length: 100 }).notNull(),
+  },
+  table => ({
+    item_id_idx: index('blog_categories_name_item_id_idx').on(table.item_id),
+    language_code_idx: index('blog_categories_name_language_code_idx').on(
+      table.language_code,
+    ),
+  }),
+);
+```
+
+<Callout title="References">
+  Remember to set `onDelete: 'cascade'` action into references and set `indexes`
+  for best performerce. We want to delete translation when we delete main table.
+</Callout>
+
+### Data Transfer Objects (DTO)
+
+#### Input
+
+Inside input DTO you can use `TextLanguageInput[]` for translation fields.
+
+```ts title="backend/plugins/blog/categories/show/dto/show.args.ts"
+import { ArgsType, Field } from '@nestjs/graphql';
+import { IsArray } from 'class-validator';
+import { Transform } from 'class-transformer';
+import {
+  IsTextLanguageInput,
+  TextLanguageInput,
+  TransformTextLanguageInput,
+} from 'vitnode-backend';
+
+@ArgsType()
+export class ShowBlogCategoriesArgs {
+  @IsArray()
+  @IsTextLanguageInput()
+  @Transform(TransformTextLanguageInput)
+  @Field(() => [TextLanguageInput])
+  title: TextLanguageInput[];
+}
+```
+
+#### Object
+
+Inside object DTO you can use `TextLanguage` for translation fields.
+
+```ts
+import { Field, ObjectType } from '@nestjs/graphql';
+import { TextLanguage } from 'vitnode-backend';
+
+@ObjectType()
+export class ShowBlogCategoriesObj {
+  @Field(() => [TextLanguage])
+  title: TextLanguage[];
+}
+```
+
+### Service
+
+Here is an example of how to use translation fields in the service.
+
+#### Show
+
+Using object DTO you can easily return translation fields by query to the database.
+
+```ts title="backend/plugins/blog/categories/show/show.service.ts"
+import { Injectable } from '@nestjs/common';
+import { NotFoundError } from 'vitnode-backend';
+
+import { ShowBlogCategories } from './dto/show.obj';
+import { ShowBlogCategoriesArgs } from './dto/show.args';
+
+@Injectable()
+export class ShowBlogCategoriesService {
+  constructor(private databaseService: DatabaseService) {}
+
+  async show({ id }: ShowBlogCategoriesArgs): Promise<ShowBlogCategoriesObj> {
+    const category =
+      await this.databaseService.db.query.blog_categories.findFirst({
+        where: (table, { eq }) => eq(table.id, id),
+        with: {
+          title: true,
+        },
+      });
+
+    if (!category) {
+      throw new NotFoundError('Category');
+    }
+
+    return {
+      title: category.title,
+    };
+  }
+}
+```
+
+### Create / Edit
+
+To create or edit translation fields you need to use `ParserTextLanguageCoreHelpersService` service. This service will help you to parse the translation fields.
+
+```ts title="backend/plugins/blog/categories/edit/edit.service.ts"
+import { Injectable } from '@nestjs/common';
+import {
+  NotFoundError,
+  ParserTextLanguageCoreHelpersService,
+} from 'vitnode-backend';
+
+import { EditBlogCategories } from './dto/show.obj';
+import { EditBlogCategoriesArgs } from './dto/show.args';
+
+import { blog_categories_name } from '@/plugins/blog/admin/database/schema/categories';
+
+@Injectable()
+export class EditBlogCategoriesService {
+  constructor(
+    private databaseService: DatabaseService,
+    private parserTextLang: ParserTextLanguageCoreHelpersService,
+  ) {}
+
+  async edit({
+    id,
+    title,
+  }: EditBlogCategoriesArgs): Promise<ShowBlogCategoriesObj> {
+    const category =
+      await this.databaseService.db.query.blog_categories.findFirst({
+        where: (table, { eq }) => eq(table.id, id),
+      });
+
+    if (!category) {
+      throw new NotFoundError('Category');
+    }
+
+    const titleCategory = await this.parserTextLang.parse({
+      item_id: id,
+      database: blog_categories_name,
+      data: title,
+    });
+
+    return {
+      title: titleCategory,
+    };
+  }
+}
+```
+
+### Delete
+
+To delete translation fields you need to use `ParserTextLanguageCoreHelpersService` service. This service will help you to delete the translation fields and remove sub-features like mentions, attachments, etc.
+
+```ts title="backend/plugins/blog/categories/delete/delete.service.ts"
+import { Injectable } from '@nestjs/common';
+import {
+  NotFoundError,
+  ParserTextLanguageCoreHelpersService,
+} from 'vitnode-backend';
+
+import { EditBlogCategories } from './dto/show.obj';
+import { EditBlogCategoriesArgs } from './dto/show.args';
+
+import {
+  blog_categories,
+  blog_categories_name,
+} from '@/plugins/blog/admin/database/schema/categories';
+
+@Injectable()
+export class EditBlogCategoriesService {
+  constructor(
+    private databaseService: DatabaseService,
+    private parserTextLang: ParserTextLanguageCoreHelpersService,
+  ) {}
+
+  async delete({ id }: DeleteBlogCategoriesArgs): Promise<string> {
+    const category =
+      await this.databaseService.db.query.blog_categories.findFirst({
+        where: (table, { eq }) => eq(table.id, id),
+      });
+
+    if (!category) {
+      throw new NotFoundError('Category');
+    }
+
+    // Delete translations
+    await this.parserTextLang.delete({
+      database: blog_categories_name,
+      item_id: id,
+    });
+
+    // Delete main record
+    await this.databaseService.db
+      .delete(blog_categories)
+      .where(eq(blog_categories.id, id));
+
+    return 'Category deleted!';
+  }
+}
+```
+
+---
+
+### Display text
+
+On the frontend you can display text depends on display language.
+
+#### Using hook
+
+```tsx title="example.tsx"
+import { useTextLang } from 'vitnode-frontend/hooks/use-text-lang';
+
+import { TextLanguage } from '@/utils/graphql/graphql';
+
+interface Props {
+  value: TextLanguage[];
+}
+
+export const ExampleComponent = ({ value }: Props) => {
+  const { convertText } = useTextLang();
+
+  return <div>{convertText(value)}</div>;
+};
+```
+
+#### Using function (async component)
+
+```tsx title="example.tsx"
+import { useTextLang } from 'vitnode-frontend/hooks/use-text-lang';
+
+import { TextLanguage } from '@/utils/graphql/graphql';
+
+interface Props {
+  value: TextLanguage[];
+  locale: string;
+}
+
+export const ExampleComponent = async ({ locale, value }: Props) => {
+  const { convertText } = getTextLang({ locale });
+
+  return <div>{convertText(value)}</div>;
+};
+```
+
+### Form
+
+Create form with translations is very similar to normal [Forms](/docs/ui/forms).
+
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+<Steps>
+
+<Step>
+#### Define schema
+
+```ts title="use-example.ts"
+import * as z from 'zod';
+import { zodInput } from 'vitnode-frontend/helpers/zod';
+
+export const useExample = () => {
+  const formSchema = z.object({
+    title: zodInput.languageInput,
+  });
+};
+```
+
+You can set `maxLength`:
+
+```ts title="use-example.ts"
+const formSchema = z.object({
+  content: zodInput.languageInput
+    .min(1, {
+      message: t('errors.required'),
+    })
+    .refine(value => value.every(item => item.value.length <= 100), {
+      message: t('errors.max_length', { length: 100 }),
+    }),
+});
+```
+
+</Step>
+
+<Step>
+#### Set initial values
+
+```ts title="example.ts"
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
+import { zodInput } from 'vitnode-frontend/helpers/zod';
+
+export const useExample = () => {
+  const formSchema = z.object({
+    title: zodInput.languageInput,
+  });
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      title: [], // [!code highlight]
+    },
+  });
+
+  const onSubmit = (values: z.infer<typeof formSchema>) => {
+    // Do something
+  };
+
+  return { form, onSubmit };
+};
+```
+
+</Step>
+
+<Step>
+
+#### Form Field
+
+```tsx
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from 'vitnode-frontend/components/ui/form';
+import { TextLanguageInput } from 'vitnode-frontend/components/ui/text-language-input'; // [!code highlight]
+
+import { useExample } from './use-example';
+
+export const ExampleForm = () => {
+  const { form, onSubmit } = useExample();
+
+  return (
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        <FormField
+          control={form.control}
+          name="title"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Title</FormLabel>
+              <FormControl>
+                <TextLanguageInput {...field} /> // [!code highlight]
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <Button
+          disabled={!form.formState.isValid}
+          loading={form.formState.isSubmitting}
+          type="submit"
+        >
+          Create
+        </Button>
+      </form>
+    </Form>
+  );
+};
+```
+
+Instead of `TextLanguageInput` you can use `Editor` component. [Read more](/docs/ui/editor#form).
+
+</Step>
+
+</Steps>

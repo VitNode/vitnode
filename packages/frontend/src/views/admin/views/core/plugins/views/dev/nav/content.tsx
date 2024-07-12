@@ -8,6 +8,7 @@ import {
 import { useTranslations } from 'next-intl';
 import React from 'react';
 import { useParams } from 'next/navigation';
+import { toast } from 'sonner';
 
 import { ItemContentNavDevPluginAdmin } from './item/item';
 import { mutationChangePositionApi } from './item/hooks/mutation-change-position-api';
@@ -83,12 +84,18 @@ export const ContentNavDevPluginAdmin = ({
 
         if (!moveTo) return;
 
-        await mutationChangePositionApi({
-          code: moveTo.id.toString(),
-          pluginCode: Array.isArray(code) ? code[0] : code,
-          indexToMove: moveTo.indexToMove,
-          parentCode: moveTo.parentId?.toString(),
-        });
+        try {
+          await mutationChangePositionApi({
+            code: moveTo.id.toString(),
+            pluginCode: Array.isArray(code) ? code[0] : code,
+            indexToMove: moveTo.indexToMove,
+            parentCode: moveTo.parentId?.toString(),
+          });
+        } catch (error) {
+          toast.error(t('errors.title'), {
+            description: t('errors.internal_server_error'),
+          });
+        }
       }}
     >
       <SortableContext items={sortedIds} strategy={verticalListSortingStrategy}>

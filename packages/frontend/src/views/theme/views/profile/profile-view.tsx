@@ -11,7 +11,7 @@ import { AvatarUser } from '@/components/ui/user/avatar';
 import { Button } from '@/components/ui/button';
 
 const getData = async ({ id }: { id: string }) => {
-  const { data } = await fetcher<
+  const data = await fetcher<
     Core_Members__ProfilesQuery,
     Core_Members__ProfilesQueryVariables
   >({

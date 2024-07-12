@@ -53,46 +53,38 @@ export const useCreateEditPluginAdmin = ({ data }: Args) => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    let error: ErrorType | undefined;
-
-    if (data) {
-      const mutation = await mutationEditApi({
-        name: values.name,
-        code: values.code,
-        description: values.description,
-        supportUrl: values.support_url,
-        author: values.author,
-        authorUrl: values.author_url,
-        default: data.default,
-      });
-
-      if (mutation.error) {
-        error = mutation.error as ErrorType | undefined;
+    try {
+      if (data) {
+        await mutationEditApi({
+          name: values.name,
+          code: values.code,
+          description: values.description,
+          supportUrl: values.support_url,
+          author: values.author,
+          authorUrl: values.author_url,
+          default: data.default,
+        });
+      } else {
+        await mutationCreateApi({
+          name: values.name,
+          code: values.code,
+          description: values.description,
+          supportUrl: values.support_url,
+          author: values.author,
+          authorUrl: values.author_url,
+        });
       }
-    } else {
-      const mutation = await mutationCreateApi({
-        name: values.name,
-        code: values.code,
-        description: values.description,
-        supportUrl: values.support_url,
-        author: values.author,
-        authorUrl: values.author_url,
-      });
+    } catch (err) {
+      const error = err as ErrorType;
 
-      if (mutation.error) {
-        error = mutation.error as ErrorType | undefined;
+      if (error?.extensions?.code === 'PLUGIN_ALREADY_EXISTS') {
+        form.setError('code', {
+          message: t('create.code.exists'),
+        });
+
+        return;
       }
-    }
 
-    if (error?.extensions?.code === 'PLUGIN_ALREADY_EXISTS') {
-      form.setError('code', {
-        message: t('create.code.exists'),
-      });
-
-      return;
-    }
-
-    if (error) {
       toast.error(tCore('errors.title'), {
         description: tCore('errors.internal_server_error'),
       });

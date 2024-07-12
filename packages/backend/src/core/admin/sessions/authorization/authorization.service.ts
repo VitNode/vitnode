@@ -18,7 +18,7 @@ import {
   ABSOLUTE_PATHS_BACKEND,
   AccessDeniedError,
   ConfigPlugin,
-  Ctx,
+  GqlContext,
 } from '@/index';
 import { AuthorizationCurrentUserObj } from '../../../sessions/authorization/dto/authorization.obj';
 import { core_sessions_known_devices } from '@/plugins/core/admin/database/schema/sessions';
@@ -66,7 +66,7 @@ export class AuthorizationAdminSessionsService {
   async initialAuthorization({
     req,
     res,
-  }: Ctx): Promise<AuthorizationCurrentUserObj> {
+  }: GqlContext): Promise<AuthorizationCurrentUserObj> {
     const login_token =
       req.cookies[
         this.configService.getOrThrow('cookies.login_token.admin.name')
@@ -130,8 +130,10 @@ export class AuthorizationAdminSessionsService {
     };
   }
 
-  async authorization(ctx: Ctx): Promise<AuthorizationAdminSessionsObj> {
-    const user = await this.initialAuthorization(ctx);
+  async authorization(
+    context: GqlContext,
+  ): Promise<AuthorizationAdminSessionsObj> {
+    const user = await this.initialAuthorization(context);
 
     const packageJSONPath = join(__dirname, '../../../../../../package.json');
     if (!fs.existsSync(packageJSONPath)) {

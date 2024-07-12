@@ -16,33 +16,44 @@
 > [!WARNING]
 > 🛠️ VitNode is still in development! You can try it out, but it is not recommended to use it now in production.
 
-VitNode is a CMS _(Content Management System)_ built with [NextJS](https://nextjs.org/) and [NestJS](https://nestjs.com/). It is designed to be a scalable and flexible platform for creating community-driven websites and applications. VitNode uses [Tailwind CSS](https://tailwindcss.com/) and [Shadcn UI](https://ui.shadcn.com/) for its frontend styling, which makes it easy to customize the look and feel of the website.
+VitNode is a modern, open-source, and self-hosted content management system (CMS) that allows you to create and manage your website with ease using [NextJS](https://nextjs.org/) & [NestJS](https://nestjs.com/).
 
 ## 🚀 Installation
 
 ```bash
 npx create-vitnode-app@latest
-# or
-yarn create vitnode-app@latest
-# or
+```
+
+or
+
+```bash
 pnpm create vitnode-app@latest
 ```
 
-## 🖥️ Hardware
+or
 
-|         | Minimum        | Recommended    |
-| :------ | :------------- | :------------- |
-| CPU     | 1GHz (2+ core) | 1GHz (4+ core) |
-| RAM     | 2GB            | 4GB            |
-| Storage | 10GB           | 20GB           |
-| Network | 100Mbps        | 300Mbps        |
+```bash
+yarn create vitnode-app@latest
+```
 
-## 🧑‍💻 Browser
+## Requirements
 
-|         | Minimum | Recommended |
-| :------ | :------ | :---------- |
-| Chrome  | >= 106  | >= 115      |
-| Firefox | >= 110  | >= 121      |
-| Edge    | >= 106  | >= 120      |
-| Safari  | >= 16   | >= 17.2     |
-| Opera   | >= 94   | >= 101      |
+| 🛠️ Software | Minimum | Recommended |
+| :---------- | :------ | :---------- |
+| Node.js     | 18      | 20          |
+| PostgreSQL  | 14      | 16          |
+
+| 🖥️ Hardware | Minimum        | Recommended    | Development    |
+| :---------- | :------------- | :------------- | :------------- |
+| CPU         | 1GHz (2+ core) | 1GHz (4+ core) | 1GHz (4+ core) |
+| RAM         | 2GB            | 4GB            | 8GB            |
+| Storage     | 10GB           | 20GB           | 20GB           |
+| Network     | 100Mbps        | 300Mbps        | 100Mbps        |
+
+| 🧑‍💻 Browser | Minimum | Recommended |
+| :--------- | :------ | :---------- |
+| Chrome     | >= 106  | >= 115      |
+| Firefox    | >= 110  | >= 121      |
+| Edge       | >= 106  | >= 120      |
+| Safari     | >= 16   | >= 17.2     |
+| Opera      | >= 94   | >= 101      |

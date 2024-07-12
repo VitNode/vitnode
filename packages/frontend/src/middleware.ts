@@ -11,9 +11,7 @@ import {
 const getI18n = async () => {
   try {
     const {
-      data: {
-        core_middleware__show: { languages: langs },
-      },
+      core_middleware__show: { languages: langs },
     } = await fetcher<
       Core_Middleware__ShowQuery,
       Core_Middleware__ShowQueryVariables

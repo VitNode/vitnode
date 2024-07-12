@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next';
 import { CONFIG } from 'vitnode-frontend/helpers/config-with-env';
 import { getSessionData } from 'vitnode-frontend/graphql/get-session-data';
+import { getGlobalData } from 'vitnode-frontend/graphql/get-global-data';
 
 const generateAlternateLanguagesForSitemap = ({
   frontendUrl,
@@ -19,10 +20,10 @@ const generateAlternateLanguagesForSitemap = ({
 };
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const { core_plugins__show } = await getSessionData();
   const {
     core_languages__show: { edges: languages },
-    core_plugins__show,
-  } = await getSessionData();
+  } = await getGlobalData();
   const plugins = core_plugins__show.filter(item => item.allow_default);
 
   const data = plugins.map(plugin => {

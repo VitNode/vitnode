@@ -14,8 +14,6 @@ mutation Admin__core_languages__create(
     time_24: $time24
     allow_in_input: $allowInInput
   ) {
-    code
     id
-    name
   }
 }

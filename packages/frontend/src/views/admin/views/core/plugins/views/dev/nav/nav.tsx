@@ -16,7 +16,7 @@ import { fetcher } from '@/graphql/fetcher';
 const getData = async (
   variables: Admin__Core_Plugins__Nav__ShowQueryVariables,
 ) => {
-  const { data } = await fetcher<
+  const data = await fetcher<
     Admin__Core_Plugins__Nav__ShowQuery,
     Admin__Core_Plugins__Nav__ShowQueryVariables
   >({

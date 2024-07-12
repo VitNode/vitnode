@@ -9,7 +9,7 @@ import {
 import { fetcher } from '@/graphql/fetcher';
 
 const getData = async (variables: Admin__Core_Plugins__FilesQueryVariables) => {
-  const { data } = await fetcher<
+  const data = await fetcher<
     Admin__Core_Plugins__FilesQuery,
     Admin__Core_Plugins__FilesQueryVariables
   >({

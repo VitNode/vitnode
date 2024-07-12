@@ -7,6 +7,7 @@ import {
 } from '@dnd-kit/sortable';
 import React from 'react';
 import { useTranslations } from 'next-intl';
+import { toast } from 'sonner';
 
 import { ItemContentTableContentNavAdmin } from './item';
 import { mutationChangePositionApi } from './hooks/mutation-change-position-api';
@@ -72,11 +73,17 @@ export const TableNavAdmin = ({ core_nav__show: { edges }, icons }: Props) => {
 
         if (!moveTo) return;
 
-        await mutationChangePositionApi({
-          id: Number(moveTo.id),
-          indexToMove: moveTo.indexToMove,
-          parentId: Number(moveTo.parentId),
-        });
+        try {
+          await mutationChangePositionApi({
+            id: Number(moveTo.id),
+            indexToMove: moveTo.indexToMove,
+            parentId: Number(moveTo.parentId),
+          });
+        } catch (error) {
+          toast.error(t('errors.title'), {
+            description: t('errors.internal_server_error'),
+          });
+        }
       }}
     >
       <SortableContext items={sortedIds} strategy={verticalListSortingStrategy}>

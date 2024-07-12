@@ -8,7 +8,7 @@ export interface AuthRequest extends Request {
   };
 }
 
-export interface Ctx {
+export interface GqlContext {
   req: AuthRequest;
   res: Response;
 }

@@ -70,8 +70,9 @@ export const UserBarAdmin = ({ navComponent }: Props) => {
 
           <ItemUserBarAdmin
             onClick={async () => {
-              const mutation = await mutationApi();
-              if (mutation?.error) {
+              try {
+                await mutationApi();
+              } catch (error) {
                 toast.error(tCore('errors.title'), {
                   description: tCore('errors.internal_server_error'),
                 });

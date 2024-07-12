@@ -230,6 +230,7 @@ export type Mutation = {
   admin__core_email_settings__edit: ShowAdminEmailSettingsServiceObj;
   admin__core_email_settings__test: Scalars['String']['output'];
   admin__core_files__delete: Scalars['String']['output'];
+  admin__core_groups__create: ShowAdminGroups;
   admin__core_groups__delete: Scalars['String']['output'];
   admin__core_groups__edit: ShowAdminGroups;
   admin__core_languages__create: ShowCoreLanguages;
@@ -264,7 +265,6 @@ export type Mutation = {
   admin_sessions__sign_out: Scalars['String']['output'];
   core_editor_files__delete: Scalars['String']['output'];
   core_editor_files__upload: ShowCoreFiles;
-  core_groups__admin_create: ShowAdminGroups;
   core_members__avatar__delete: Scalars['String']['output'];
   core_members__avatar__upload: UploadAvatarCoreMembersObj;
   core_members__delete: Scalars['String']['output'];
@@ -305,6 +305,12 @@ export type MutationAdmin__Core_Email_Settings__TestArgs = {
 
 export type MutationAdmin__Core_Files__DeleteArgs = {
   id: Scalars['Int']['input'];
+};
+
+
+export type MutationAdmin__Core_Groups__CreateArgs = {
+  content: ContentCreateAdminGroups;
+  name: Array<TextLanguageInput>;
 };
 
 
@@ -543,12 +549,6 @@ export type MutationCore_Editor_Files__UploadArgs = {
   file: Scalars['Upload']['input'];
   folder: Scalars['String']['input'];
   plugin: Scalars['String']['input'];
-};
-
-
-export type MutationCore_Groups__Admin_CreateArgs = {
-  content: ContentCreateAdminGroups;
-  name: Array<TextLanguageInput>;
 };
 
 
@@ -1250,7 +1250,7 @@ export type Admin__Core_Languages__CreateMutationVariables = Exact<{
 }>;
 
 
-export type Admin__Core_Languages__CreateMutation = { __typename?: 'Mutation', admin__core_languages__create: { __typename?: 'ShowCoreLanguages', code: string, id: number, name: string } };
+export type Admin__Core_Languages__CreateMutation = { __typename?: 'Mutation', admin__core_languages__create: { __typename?: 'ShowCoreLanguages', id: number } };
 
 export type Admin__Core_Languages__DeleteMutationVariables = Exact<{
   code: Scalars['String']['input'];
@@ -1279,7 +1279,7 @@ export type Admin__Core_Languages__EditMutationVariables = Exact<{
 }>;
 
 
-export type Admin__Core_Languages__EditMutation = { __typename?: 'Mutation', admin__core_languages__edit: { __typename?: 'ShowCoreLanguages', code: string, default: boolean, enabled: boolean, id: number, name: string, protected: boolean, timezone: string } };
+export type Admin__Core_Languages__EditMutation = { __typename?: 'Mutation', admin__core_languages__edit: { __typename?: 'ShowCoreLanguages', id: number } };
 
 export type Admin__Core_Languages__UpdateMutationVariables = Exact<{
   code: Scalars['String']['input'];
@@ -1288,6 +1288,14 @@ export type Admin__Core_Languages__UpdateMutationVariables = Exact<{
 
 
 export type Admin__Core_Languages__UpdateMutation = { __typename?: 'Mutation', admin__core_languages__update: string };
+
+export type Admin__Core_Groups__CreateMutationVariables = Exact<{
+  name: Array<TextLanguageInput> | TextLanguageInput;
+  content: ContentCreateAdminGroups;
+}>;
+
+
+export type Admin__Core_Groups__CreateMutation = { __typename?: 'Mutation', admin__core_groups__create: { __typename?: 'ShowAdminGroups', id: number } };
 
 export type Admin__Core_Groups__DeleteMutationVariables = Exact<{
   id: Scalars['Int']['input'];
@@ -1305,14 +1313,6 @@ export type Admin__Core_Groups__EditMutationVariables = Exact<{
 
 export type Admin__Core_Groups__EditMutation = { __typename?: 'Mutation', admin__core_groups__edit: { __typename?: 'ShowAdminGroups', id: number } };
 
-export type Core_Groups__Admin_CreateMutationVariables = Exact<{
-  name: Array<TextLanguageInput> | TextLanguageInput;
-  content: ContentCreateAdminGroups;
-}>;
-
-
-export type Core_Groups__Admin_CreateMutation = { __typename?: 'Mutation', core_groups__admin_create: { __typename?: 'ShowAdminGroups', id: number } };
-
 export type Admin__Core_Staff_Administrators__CreateMutationVariables = Exact<{
   groupId?: InputMaybe<Scalars['Int']['input']>;
   userId?: InputMaybe<Scalars['Int']['input']>;
@@ -1320,7 +1320,7 @@ export type Admin__Core_Staff_Administrators__CreateMutationVariables = Exact<{
 }>;
 
 
-export type Admin__Core_Staff_Administrators__CreateMutation = { __typename?: 'Mutation', admin__core_staff_administrators__create: { __typename?: 'ShowAdminStaffAdministrators', created: Date, id: number, protected: boolean, unrestricted: boolean, updated: Date } };
+export type Admin__Core_Staff_Administrators__CreateMutation = { __typename?: 'Mutation', admin__core_staff_administrators__create: { __typename?: 'ShowAdminStaffAdministrators', id: number } };
 
 export type Admin__Core_Staff_Administrators__DeleteMutationVariables = Exact<{
   id: Scalars['Int']['input'];
@@ -1336,7 +1336,7 @@ export type Admin__Core_Staff_Moderators__CreateMutationVariables = Exact<{
 }>;
 
 
-export type Admin__Core_Staff_Moderators__CreateMutation = { __typename?: 'Mutation', admin__core_staff_moderators__create: { __typename?: 'ShowAdminStaffModerators', created: Date, id: number, protected: boolean, unrestricted: boolean, updated: Date } };
+export type Admin__Core_Staff_Moderators__CreateMutation = { __typename?: 'Mutation', admin__core_staff_moderators__create: { __typename?: 'ShowAdminStaffModerators', id: number } };
 
 export type Admin__Core_Staff_Moderators__DeleteMutationVariables = Exact<{
   id: Scalars['Int']['input'];
@@ -1414,7 +1414,7 @@ export type Admin__Core_Plugins__Nav__CreateMutationVariables = Exact<{
 }>;
 
 
-export type Admin__Core_Plugins__Nav__CreateMutation = { __typename?: 'Mutation', admin__core_plugins__nav__create: { __typename?: 'ShowAdminNavPluginsObj', code: string, icon?: string | null, href: string } };
+export type Admin__Core_Plugins__Nav__CreateMutation = { __typename?: 'Mutation', admin__core_plugins__nav__create: { __typename?: 'ShowAdminNavPluginsObj', code: string } };
 
 export type Admin__Core_Plugins__Nav__DeleteMutationVariables = Exact<{
   code: Scalars['String']['input'];
@@ -1521,7 +1521,7 @@ export type Admin__Core_Styles__Nav__CreateMutationVariables = Exact<{
 }>;
 
 
-export type Admin__Core_Styles__Nav__CreateMutation = { __typename?: 'Mutation', admin__core_styles__nav__create: { __typename?: 'ShowCoreNav', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
+export type Admin__Core_Styles__Nav__CreateMutation = { __typename?: 'Mutation', admin__core_styles__nav__create: { __typename?: 'ShowCoreNav', id: number } };
 
 export type Admin__Core_Styles__Nav__DeleteMutationVariables = Exact<{
   id: Scalars['Int']['input'];
@@ -1540,7 +1540,7 @@ export type Admin__Core_Styles__Nav__EditMutationVariables = Exact<{
 }>;
 
 
-export type Admin__Core_Styles__Nav__EditMutation = { __typename?: 'Mutation', admin__core_styles__nav__edit: { __typename?: 'ShowCoreNav', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
+export type Admin__Core_Styles__Nav__EditMutation = { __typename?: 'Mutation', admin__core_styles__nav__edit: { __typename?: 'ShowCoreNav', id: number } };
 
 export type Admin__Core_Theme_Editor__EditMutationVariables = Exact<{
   colors: ColorsEditAdminThemeEditor;
@@ -1579,7 +1579,7 @@ export type Core_Sessions__Sign_UpMutationVariables = Exact<{
 }>;
 
 
-export type Core_Sessions__Sign_UpMutation = { __typename?: 'Mutation', core_sessions__sign_up: { __typename?: 'SignUpCoreSessionsObj', email: string, name: string, newsletter?: boolean | null } };
+export type Core_Sessions__Sign_UpMutation = { __typename?: 'Mutation', core_sessions__sign_up: { __typename?: 'SignUpCoreSessionsObj', email: string } };
 
 export type Core_Sessions__Sign_InMutationVariables = Exact<{
   email: Scalars['String']['input'];
@@ -1778,7 +1778,7 @@ export type Core_Middleware__ShowQuery = { __typename?: 'Query', core_middleware
 export type Core_Sessions__AuthorizationQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Core_Sessions__AuthorizationQuery = { __typename?: 'Query', core_sessions__authorization: { __typename?: 'AuthorizationCoreSessionsObj', plugin_default: string, user?: { __typename?: 'AuthorizationCurrentUserObj', email: string, id: number, name_seo: string, is_admin: boolean, is_mod: boolean, name: string, newsletter: boolean, avatar_color: string, language: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, file_name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } | null, files: { __typename?: 'FilesAuthorizationCoreSessions', allow_upload: boolean, max_storage_for_submit: number, total_max_storage: number, space_used: number } }, core_languages__show: { __typename?: 'ShowCoreLanguagesObj', edges: Array<{ __typename?: 'ShowCoreLanguages', code: string }> }, core_nav__show: { __typename?: 'ShowCoreNavObj', edges: Array<{ __typename?: 'ShowCoreNav', id: number, href: string, external: boolean, position: number, icon?: string | null, children: Array<{ __typename?: 'ShowCoreNavItem', id: number, position: number, external: boolean, href: string, icon?: string | null, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }>, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }> }, core_plugins__show: Array<{ __typename?: 'ShowCorePluginsObj', code: string, allow_default: boolean }>, core_settings__show: { __typename?: 'ShowSettingsObj', site_copyright: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, site_description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
+export type Core_Sessions__AuthorizationQuery = { __typename?: 'Query', core_sessions__authorization: { __typename?: 'AuthorizationCoreSessionsObj', plugin_default: string, user?: { __typename?: 'AuthorizationCurrentUserObj', email: string, id: number, name_seo: string, is_admin: boolean, is_mod: boolean, name: string, newsletter: boolean, avatar_color: string, language: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, file_name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } | null, files: { __typename?: 'FilesAuthorizationCoreSessions', allow_upload: boolean, max_storage_for_submit: number, total_max_storage: number, space_used: number } }, core_nav__show: { __typename?: 'ShowCoreNavObj', edges: Array<{ __typename?: 'ShowCoreNav', id: number, href: string, external: boolean, position: number, icon?: string | null, children: Array<{ __typename?: 'ShowCoreNavItem', id: number, position: number, external: boolean, href: string, icon?: string | null, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }>, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }> }, core_plugins__show: Array<{ __typename?: 'ShowCorePluginsObj', code: string, allow_default: boolean }>, core_settings__show: { __typename?: 'ShowSettingsObj', site_copyright: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, site_description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
 
 export type Core_Members__ProfilesQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -1828,9 +1828,7 @@ export const Admin__Core_Languages__Create = gql`
     time_24: $time24
     allow_in_input: $allowInInput
   ) {
-    code
     id
-    name
   }
 }
     `;
@@ -1856,19 +1854,20 @@ export const Admin__Core_Languages__Edit = gql`
     time_24: $time24
     allow_in_input: $allowInInput
   ) {
-    code
-    default
-    enabled
     id
-    name
-    protected
-    timezone
   }
 }
     `;
 export const Admin__Core_Languages__Update = gql`
     mutation Admin__core_languages__update($code: String!, $file: Upload!) {
   admin__core_languages__update(code: $code, file: $file)
+}
+    `;
+export const Admin__Core_Groups__Create = gql`
+    mutation Admin__core_groups__create($name: [TextLanguageInput!]!, $content: ContentCreateAdminGroups!) {
+  admin__core_groups__create(name: $name, content: $content) {
+    id
+  }
 }
     `;
 export const Admin__Core_Groups__Delete = gql`
@@ -1883,13 +1882,6 @@ export const Admin__Core_Groups__Edit = gql`
   }
 }
     `;
-export const Core_Groups__Admin_Create = gql`
-    mutation core_groups__admin_create($name: [TextLanguageInput!]!, $content: ContentCreateAdminGroups!) {
-  core_groups__admin_create(name: $name, content: $content) {
-    id
-  }
-}
-    `;
 export const Admin__Core_Staff_Administrators__Create = gql`
     mutation Admin__core_staff_administrators__create($groupId: Int, $userId: Int, $unrestricted: Boolean!) {
   admin__core_staff_administrators__create(
@@ -1897,11 +1889,7 @@ export const Admin__Core_Staff_Administrators__Create = gql`
     user_id: $userId
     unrestricted: $unrestricted
   ) {
-    created
     id
-    protected
-    unrestricted
-    updated
   }
 }
     `;
@@ -1917,11 +1905,7 @@ export const Admin__Core_Staff_Moderators__Create = gql`
     user_id: $userId
     unrestricted: $unrestricted
   ) {
-    created
     id
-    protected
-    unrestricted
-    updated
   }
 }
     `;
@@ -2003,8 +1987,6 @@ export const Admin__Core_Plugins__Nav__Create = gql`
     parent_code: $parentCode
   ) {
     code
-    icon
-    href
   }
 }
     `;
@@ -2123,10 +2105,6 @@ export const Admin__Core_Styles__Nav__Create = gql`
     icon: $icon
   ) {
     id
-    name {
-      language_code
-      value
-    }
   }
 }
     `;
@@ -2146,10 +2124,6 @@ export const Admin__Core_Styles__Nav__Edit = gql`
     icon: $icon
   ) {
     id
-    name {
-      language_code
-      value
-    }
   }
 }
     `;
@@ -2194,8 +2168,6 @@ export const Core_Sessions__Sign_Up = gql`
     newsletter: $newsletter
   ) {
     email
-    name
-    newsletter
   }
 }
     `;
@@ -3021,11 +2993,6 @@ export const Core_Sessions__Authorization = gql`
       max_storage_for_submit
       total_max_storage
       space_used
-    }
-  }
-  core_languages__show {
-    edges {
-      code
     }
   }
   core_nav__show {

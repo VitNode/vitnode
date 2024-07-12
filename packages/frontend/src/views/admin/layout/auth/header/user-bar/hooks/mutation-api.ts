@@ -11,18 +11,13 @@ import {
 } from '@/graphql/graphql';
 
 export const mutationApi = async () => {
-  try {
-    await fetcher<
-      Admin_Sessions__Sign_OutMutation,
-      Admin_Sessions__Sign_OutMutationVariables
-    >({
-      query: Admin_Sessions__Sign_Out,
-    });
+  await fetcher<
+    Admin_Sessions__Sign_OutMutation,
+    Admin_Sessions__Sign_OutMutationVariables
+  >({
+    query: Admin_Sessions__Sign_Out,
+  });
 
-    revalidatePath('/admin', 'layout');
-  } catch (error) {
-    return { error };
-  }
-
+  revalidatePath('/admin', 'layout');
   redirect('/admin');
 };

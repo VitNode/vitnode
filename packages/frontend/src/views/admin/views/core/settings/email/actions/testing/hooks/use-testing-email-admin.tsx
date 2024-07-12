@@ -33,12 +33,12 @@ export const useTestingEmailAdmin = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const mutation = await mutationApi({
-      ...values,
-      previewText: values.preview_text,
-    });
-
-    if (mutation.error) {
+    try {
+      await mutationApi({
+        ...values,
+        previewText: values.preview_text,
+      });
+    } catch (error) {
       toast.error(tCore('errors.title'), {
         description: tCore('errors.internal_server_error'),
       });

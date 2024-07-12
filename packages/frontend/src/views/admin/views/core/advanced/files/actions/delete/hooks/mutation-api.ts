@@ -12,20 +12,16 @@ import {
 export const mutationApi = async (
   variables: Admin__Core_Files__DeleteMutationVariables,
 ) => {
-  try {
-    const { data } = await fetcher<
-      Admin__Core_Files__DeleteMutation,
-      Admin__Core_Files__DeleteMutationVariables
-    >({
-      query: Admin__Core_Files__Delete,
-      variables,
-    });
+  const data = await fetcher<
+    Admin__Core_Files__DeleteMutation,
+    Admin__Core_Files__DeleteMutationVariables
+  >({
+    query: Admin__Core_Files__Delete,
+    variables,
+  });
 
-    revalidatePath('/admin/core/advanced/files', 'page');
-    revalidatePath('/settings/files', 'page');
+  revalidatePath('/admin/core/advanced/files', 'page');
+  revalidatePath('/settings/files', 'page');
 
-    return { data };
-  } catch (error) {
-    return { error };
-  }
+  return data;
 };

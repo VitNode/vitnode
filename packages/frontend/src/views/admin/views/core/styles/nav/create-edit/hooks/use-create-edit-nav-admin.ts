@@ -52,16 +52,13 @@ export const useCreateEditNavAdmin = ({ data }: CreateEditNavAdminArgs) => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    let isError = false;
-    if (data) {
-      const mutation = await editMutationApi({ ...values, id: data.id });
-      if (mutation.error) isError = true;
-    } else {
-      const mutation = await createMutationApi(values);
-      if (mutation.error) isError = true;
-    }
-
-    if (isError) {
+    try {
+      if (data) {
+        await editMutationApi({ ...values, id: data.id });
+      } else {
+        await createMutationApi(values);
+      }
+    } catch (error) {
       toast.error(tCore('errors.title'), {
         description: tCore('errors.internal_server_error'),
       });

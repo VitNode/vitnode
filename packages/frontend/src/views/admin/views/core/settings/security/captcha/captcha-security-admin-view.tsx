@@ -10,7 +10,7 @@ import {
 } from '@/graphql/graphql';
 
 const getData = async () => {
-  const { data } = await fetcher<Admin__Core_Security__Captcha__ShowQuery>({
+  const data = await fetcher<Admin__Core_Security__Captcha__ShowQuery>({
     query: Admin__Core_Security__Captcha__Show,
     cache: 'force-cache',
   });

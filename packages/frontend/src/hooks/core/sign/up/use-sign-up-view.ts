@@ -74,12 +74,12 @@ export const useSignUpView = () => {
       return;
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { terms, ...rest } = values;
-    const mutation = await mutationApi({ ...rest, token });
-
-    if (mutation.error) {
-      const error = mutation.error as ErrorType | undefined;
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { terms, ...rest } = values;
+      await mutationApi({ ...rest, token });
+    } catch (err) {
+      const error = err as ErrorType | undefined;
 
       if (error?.extensions) {
         const { code } = error.extensions;

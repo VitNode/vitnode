@@ -12,19 +12,13 @@ import {
 export const createMutationApi = async (
   variables: Admin__Core_Languages__CreateMutationVariables,
 ) => {
-  try {
-    const { data } = await fetcher<
-      Admin__Core_Languages__CreateMutation,
-      Admin__Core_Languages__CreateMutationVariables
-    >({
-      query: Admin__Core_Languages__Create,
-      variables,
-    });
+  await fetcher<
+    Admin__Core_Languages__CreateMutation,
+    Admin__Core_Languages__CreateMutationVariables
+  >({
+    query: Admin__Core_Languages__Create,
+    variables,
+  });
 
-    revalidatePath('/', 'layout');
-
-    return { data };
-  } catch (error) {
-    return { error };
-  }
+  revalidatePath('/', 'layout');
 };

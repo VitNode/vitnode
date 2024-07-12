@@ -19,7 +19,7 @@ import {
 const getData = async (
   variables: Admin__Core_Staff_Moderators__ShowQueryVariables,
 ) => {
-  const { data } = await fetcher<
+  const data = await fetcher<
     Admin__Core_Staff_Moderators__ShowQuery,
     Admin__Core_Staff_Moderators__ShowQueryVariables
   >({

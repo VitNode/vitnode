@@ -12,19 +12,15 @@ import { fetcher } from '@/graphql/fetcher';
 export const mutationApi = async (
   variables: Admin__Core_Manifest_Metadata__EditMutationVariables,
 ) => {
-  try {
-    const { data } = await fetcher<
-      Admin__Core_Manifest_Metadata__EditMutation,
-      Admin__Core_Manifest_Metadata__EditMutationVariables
-    >({
-      query: Admin__Core_Manifest_Metadata__Edit,
-      variables,
-    });
+  const data = await fetcher<
+    Admin__Core_Manifest_Metadata__EditMutation,
+    Admin__Core_Manifest_Metadata__EditMutationVariables
+  >({
+    query: Admin__Core_Manifest_Metadata__Edit,
+    variables,
+  });
 
-    revalidatePath('/', 'layout');
+  revalidatePath('/', 'layout');
 
-    return { data };
-  } catch (error) {
-    return { error };
-  }
+  return data;
 };

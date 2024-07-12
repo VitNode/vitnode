@@ -1,0 +1,83 @@
+---
+title: Quick Start
+description: Welcome to the VitNode documentation!
+icon: Power
+---
+
+VitNode is a modern, open-source, and self-hosted content management system (CMS) that allows you to create and manage your website with ease using [NextJS](https://nextjs.org/) & [NestJS](https://nestjs.com/).
+
+import { Callout } from 'fumadocs-ui/components/callout';
+
+<Callout title="🛠️ VitNode is still in development!" type="warn">
+  You can try it out, but it is not recommended to use it now in production.
+</Callout>
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+
+## Get Started
+
+Create a new app with `create-vitnode-app`, it requires NodeJS 20+.
+
+<Tabs id='package-manager' persist items={['pnpm', 'npm', 'yarn']}>
+
+```bash tab="pnpm"
+pnpm create vitnode-app@latest
+```
+
+```bash tab="npm"
+npx create-vitnode-app@latest
+```
+
+```bash tab="yarn"
+yarn create vitnode-app@latest
+```
+
+</Tabs>
+
+### Requirements
+
+| 🛠️ Software | Minimum | Recommended |
+| :---------- | :------ | :---------- |
+| Node.js     | 18      | 20          |
+| PostgreSQL  | 14      | 16          |
+
+| 🖥️ Hardware | Minimum        | Recommended    | Development    |
+| :---------- | :------------- | :------------- | :------------- |
+| CPU         | 1GHz (2+ core) | 1GHz (4+ core) | 1GHz (4+ core) |
+| RAM         | 2GB            | 4GB            | 8GB            |
+| Storage     | 10GB           | 20GB           | 20GB           |
+| Network     | 100Mbps        | 300Mbps        | 100Mbps        |
+
+| 🧑‍💻 Browser | Minimum | Recommended |
+| :--------- | :------ | :---------- |
+| Chrome     | >= 106  | >= 115      |
+| Firefox    | >= 110  | >= 121      |
+| Edge       | >= 106  | >= 120      |
+| Safari     | >= 16   | >= 17.2     |
+| Opera      | >= 94   | >= 101      |
+
+## FAQ
+
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
+
+<Accordions>
+  <Accordion title="Why VitNode?">
+  `VitNode` is for developers who want to create websites with ease without worrying about the basic staff like authentication, authorization, database, emails etc.
+  </Accordion>
+  <Accordion title="Why not VitNode?">
+    If you want to create simple static page with no backend, `VitNode` is not for
+    you. You can use only [NextJS](https://nextjs.org/) or [Astro](https://astro.build/) for that.
+  </Accordion>
+  <Accordion title="Why NestJS insted of NextJS api?">
+    The goal of `VitNode` is to provide a full-stack solution for developers to
+    create websites with ease.
+
+    `NextJS API` don't have a lot of features that `NestJS` have, like guards, interceptors, pipes, dependency injection, decorators, WebSockets, dynamic saving files etc.
+
+    `NestJS` is a great framework for building APIs and `NextJS` is a great framework for building websites. Combining these two frameworks allows developers to create websites with ease.
+
+  </Accordion>
+    <Accordion title="When VitNode will be stable?">
+    Not earlier then `NestJS 15` and `React 19` will be stable.
+    </Accordion>
+</Accordions>

@@ -12,19 +12,13 @@ import {
 export const mutationApi = async (
   variables: Admin__Core_Styles__Nav__DeleteMutationVariables,
 ) => {
-  try {
-    const { data } = await fetcher<
-      Admin__Core_Styles__Nav__DeleteMutation,
-      Admin__Core_Styles__Nav__DeleteMutationVariables
-    >({
-      query: Admin__Core_Styles__Nav__Delete,
-      variables,
-    });
+  await fetcher<
+    Admin__Core_Styles__Nav__DeleteMutation,
+    Admin__Core_Styles__Nav__DeleteMutationVariables
+  >({
+    query: Admin__Core_Styles__Nav__Delete,
+    variables,
+  });
 
-    revalidatePath('/', 'layout');
-
-    return { data };
-  } catch (error) {
-    return { error };
-  }
+  revalidatePath('/', 'layout');
 };

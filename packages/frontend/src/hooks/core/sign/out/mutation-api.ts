@@ -11,16 +11,12 @@ import { fetcher } from '@/graphql/fetcher';
 import { redirect } from '@/navigation';
 
 export const mutationApi = async () => {
-  try {
-    await fetcher<
-      Core_Sessions__Sign_OutMutation,
-      Core_Sessions__Sign_OutMutationVariables
-    >({
-      query: Core_Sessions__Sign_Out,
-    });
-  } catch (error) {
-    return { error };
-  }
+  await fetcher<
+    Core_Sessions__Sign_OutMutation,
+    Core_Sessions__Sign_OutMutationVariables
+  >({
+    query: Core_Sessions__Sign_Out,
+  });
 
   revalidatePath('/', 'layout');
   redirect('/');

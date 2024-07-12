@@ -12,19 +12,13 @@ import {
 export const mutationEditApi = async (
   variables: Admin__Core_Plugins__EditMutationVariables,
 ) => {
-  try {
-    const { data } = await fetcher<
-      Admin__Core_Plugins__EditMutation,
-      Admin__Core_Plugins__EditMutationVariables
-    >({
-      query: Admin__Core_Plugins__Edit,
-      variables,
-    });
+  await fetcher<
+    Admin__Core_Plugins__EditMutation,
+    Admin__Core_Plugins__EditMutationVariables
+  >({
+    query: Admin__Core_Plugins__Edit,
+    variables,
+  });
 
-    revalidatePath('/', 'layout');
-
-    return { data };
-  } catch (error) {
-    return { error };
-  }
+  revalidatePath('/', 'layout');
 };

@@ -28,19 +28,22 @@ export const useModalChangeAvatar = () => {
     if (type === 'delete') {
       setPending(true);
 
-      const mutation = await mutationApi();
-      if (mutation.error) {
+      try {
+        await mutationApi();
+      } catch (error) {
         toast.error(t('errors.title'), {
           description: t('settings.change_avatar.options.delete.error'),
         });
-      } else {
-        toast.success(t('settings.change_avatar.options.delete.title'), {
-          description: t('settings.change_avatar.options.delete.success'),
-        });
-        setOpen?.(false);
+        setPending(false);
+
+        return;
       }
 
       setPending(false);
+      setOpen?.(false);
+      toast.success(t('settings.change_avatar.options.delete.title'), {
+        description: t('settings.change_avatar.options.delete.success'),
+      });
     }
   };
 

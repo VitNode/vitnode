@@ -151,11 +151,12 @@ export const ItemListFilesFooterEditor = ({
               }
 
               setFiles(prev => prev.filter(item => item.id !== id));
-              const mutation = await deleteMutationApi({
-                id,
-                securityKey: data?.security_key,
-              });
-              if (mutation.error) {
+              try {
+                await deleteMutationApi({
+                  id,
+                  securityKey: data?.security_key,
+                });
+              } catch (error) {
                 toast.error(tCore('errors.title'), {
                   description: tCore('errors.internal_server_error'),
                 });

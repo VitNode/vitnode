@@ -1,0 +1,102 @@
+---
+title: Quick Start with GraphQL
+description: Learn how to use GraphQL in VitNode.
+---
+
+VitNode uses [GraphQL](https://graphql.org/) to query and mutate data with [Codegen](https://the-guild.dev/graphql/codegen) to generate TypeScript types. It's a powerful tool that allows you to query only the data you need and get the data in the shape you want.
+
+## GraphQL Playground
+
+VitNode comes with a built-in GraphQL Playground powered by [Apollo Sandbox](https://www.apollographql.com/docs/graphos/explorer/sandbox/). You can access it by going to [localhost:8080/graphql](http://localhost:8080/graphql) on your website.
+
+import { Callout } from 'fumadocs-ui/components/callout';
+
+<Callout title="Production" type="warn">
+  Playground is disabled in production mode.
+</Callout>
+
+## Folder for Feature
+
+To save consistency and make it easier to maintain, we're going to create a module to store all the queries and mutations. Each sub-module should have its own module.
+
+For example if you have `blogs_categories` and `blogs_articles` in the database, you should have two modules, one for each feature, like `BlogCategoriesModule` and `BlogArticlesModule`.
+
+import { File, Folder, Files } from 'fumadocs-ui/components/files';
+import { PackageIcon, HandPlatterIcon, SendIcon } from 'lucide-react';
+
+<Files>
+  <Folder name="backend" defaultOpen>
+    <Folder name="src" defaultOpen>
+      <Folder name="plugins" defaultOpen>
+        <Folder name="blog" defaultOpen>
+          <Folder name="categories" defaultOpen>
+            <Folder name="show" defaultOpen>
+              <File
+                name="show.resolver.ts"
+                icon={<SendIcon className="text-primary" />}
+              />
+              <File
+                name="show.service.ts"
+                icon={<HandPlatterIcon className="text-primary" />}
+              />
+              <File
+                name="show.module.ts"
+                icon={<PackageIcon className="text-primary" />}
+              />
+            </Folder>
+            <Folder name="edit" defaultOpen>
+              <File
+                name="edit.resolver.ts"
+                icon={<SendIcon className="text-primary" />}
+              />
+              <File
+                name="edit.service.ts"
+                icon={<HandPlatterIcon className="text-primary" />}
+              />
+              <File
+                name="edit.module.ts"
+                icon={<PackageIcon className="text-primary" />}
+              />
+            </Folder>
+            <File
+              name="categories.module.ts"
+              icon={<PackageIcon className="text-primary" />}
+            />
+          </Folder>
+          <Folder name="articles" defaultOpen>
+            <Folder name="show" defaultOpen>
+              <File
+                name="show.resolver.ts"
+                icon={<SendIcon className="text-primary" />}
+              />
+              <File
+                name="show.service.ts"
+                icon={<HandPlatterIcon className="text-primary" />}
+              />
+              <File
+                name="show.module.ts"
+                icon={<PackageIcon className="text-primary" />}
+              />
+            </Folder>
+            <File
+              name="articles.module.ts"
+              icon={<PackageIcon className="text-primary" />}
+            />
+          </Folder>
+          <File
+            name="blog.module.ts"
+            icon={<PackageIcon className="text-primary" />}
+          />
+        </Folder>
+      </Folder>
+    </Folder>
+  </Folder>
+</Files>
+
+## Links
+
+Here are some links to help you write GraphQL queries and mutations:
+
+- [Unions and Enums](https://docs.nestjs.com/graphql/unions-and-enums)
+- [Mapped types](https://docs.nestjs.com/graphql/mapped-types)
+- [Other features](https://docs.nestjs.com/graphql/other-features)

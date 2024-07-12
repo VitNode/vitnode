@@ -16,7 +16,7 @@ import {
 } from '@/graphql/get-pagination-tool';
 
 const getData = async (variables: Admin__Core_Members__ShowQueryVariables) => {
-  const { data } = await fetcher<
+  const data = await fetcher<
     Admin__Core_Members__ShowQuery,
     Admin__Core_Members__ShowQueryVariables
   >({

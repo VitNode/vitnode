@@ -16,7 +16,7 @@ import { Card } from '@/components/ui/card';
 import { fetcher } from '@/graphql/fetcher';
 
 const getData = async () => {
-  const { data } = await fetcher<
+  const data = await fetcher<
     Admin__Core_Nav__ShowQuery,
     Admin__Core_Nav__ShowQueryVariables
   >({
