@@ -1,5 +1,5 @@
 {
   "$schema": "https://json.schemastore.org/eslintrc",
   "ignorePatterns": ["next-config-temp.js"],
-  "extends": ["vitnode-config/.eslintrc.react.json"]
+  "extends": ["eslint-config-typescript-vitnode/.eslintrc.react.json"]
 }

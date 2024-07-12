@@ -1,4 +1,4 @@
 {
   "$schema": "https://json.schemastore.org/eslintrc",
-  "extends": ["vitnode-config/.eslintrc.shared.json"]
+  "extends": ["eslint-config-typescript-vitnode/.eslintrc.shared.json"]
 }

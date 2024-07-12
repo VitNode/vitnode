@@ -71,7 +71,7 @@
     "cross-env": "^7.0.3",
     "eslint": "^8.57.0",
     "eslint-config-next": "15.0.0-canary.64",
-    "vitnode-config": "workspace:*",
+    "eslint-config-typescript-vitnode": "workspace:*",
     "geist": "^1.3.0",
     "postcss": "^8.4.39",
     "tailwind-merge": "^2.3.0",

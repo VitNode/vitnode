@@ -50,7 +50,7 @@
     "drizzle-kit": "^0.23.0",
     "drizzle-orm": "^0.32.0",
     "eslint": "^8.57.0",
-    "vitnode-config": "workspace:*",
+    "eslint-config-typescript-vitnode": "workspace:*",
     "object-path": "^0.11.8",
     "source-map-support": "^0.5.21",
     "ts-jest": "^29.2.2",

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/eslintrc",
-  "extends": ["vitnode-config/.eslintrc.react.json"],
+  "extends": ["eslint-config-typescript-vitnode/.eslintrc.react.json"],
   "ignorePatterns": [
     "tailwind.config.ts",
     "src/graphql/graphql.ts",

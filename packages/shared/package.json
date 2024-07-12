@@ -19,7 +19,7 @@
     "lint:fix": "eslint . --fix"
   },
   "devDependencies": {
-    "vitnode-config": "workspace:*",
+    "eslint-config-typescript-vitnode": "workspace:*",
     "typescript": "^5.5.3"
   }
 }

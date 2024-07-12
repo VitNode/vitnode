@@ -13,10 +13,10 @@
 
 # (VitNode) ESLint Config
 
-Package providing ESLint & TSConfig configuration from [VitNode](https://vitnode.com/).
+Package providing ESLint & TypeScript _(TSConfig)_ configuration from [VitNode](https://vitnode.com/).
 
 > [!TIP]
-> This package is not for only VitNode, you can use it in any project.
+> This package is not for only VitNode, you can use it in any project where is TypeScript.
 
 > [!CAUTION]
 > Only ESLint 8 is supported. ESLint 9 is not supported yet.
@@ -24,19 +24,19 @@ Package providing ESLint & TSConfig configuration from [VitNode](https://vitnode
 ## Installation
 
 ```bash
-npm install --save-dev vitnode-config
+npm install --save-dev eslint-config-typescript-vitnode
 ```
 
 or
 
 ```bash
-pnpm add --save-dev vitnode-config
+pnpm add --save-dev eslint-config-typescript-vitnode
 ```
 
 or
 
 ```bash
-yarn add --dev vitnode-config
+yarn add --dev eslint-config-typescript-vitnode
 ```
 
 ## ESLint
@@ -49,7 +49,7 @@ File: `.eslintrc.json`
 
 ```json
 {
-  "extends": "vitnode-config/.eslintrc.shared.json"
+  "extends": "eslint-config-typescript-vitnode/.eslintrc.shared.json"
 }
 ```
 
@@ -61,7 +61,7 @@ File: `.eslintrc.json`
 
 ```json
 {
-  "extends": "vitnode-config/.eslintrc.react.json"
+  "extends": "eslint-config-typescript-vitnode/.eslintrc.react.json"
 }
 ```
 
@@ -75,7 +75,7 @@ File: `tsconfig.json`
 
 ```json
 {
-  "extends": "vitnode-config/tsconfig.shared.json"
+  "extends": "eslint-config-typescript-vitnode/tsconfig.shared.json"
 }
 ```
 
@@ -87,7 +87,7 @@ File: `tsconfig.json`
 
 ```json
 {
-  "extends": "vitnode-config/tsconfig.nest.json"
+  "extends": "eslint-config-typescript-vitnode/tsconfig.nest.json"
 }
 ```
 
@@ -99,7 +99,7 @@ File: `tsconfig.json`
 
 ```json
 {
-  "extends": "vitnode-config/tsconfig.next.json"
+  "extends": "eslint-config-typescript-vitnode/tsconfig.next.json"
 }
 ```
 
@@ -111,6 +111,6 @@ File: `package.json`
 
 ```json
 {
-  "prettier": "vitnode-config/.prettierrc.json"
+  "prettier": "eslint-config-typescript-vitnode/.prettierrc.json"
 }
 ```

@@ -38,6 +38,6 @@
     "commander": "^12.1.0",
     "tsup": "^8.1.0",
     "typescript": "^5.5.3",
-    "vitnode-config": "workspace:*"
+    "eslint-config-typescript-vitnode": "workspace:*"
   }
 }

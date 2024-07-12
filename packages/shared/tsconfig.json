@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "extends": "vitnode-config/tsconfig.shared.json",
+  "extends": "eslint-config-typescript-vitnode/tsconfig.shared.json",
   "compilerOptions": {
     "target": "ESNext",
     "module": "CommonJS",
