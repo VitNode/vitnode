@@ -22,7 +22,7 @@ const packages = [
   'create-vitnode-app',
   'frontend',
   'shared',
-  'config',
+  'eslint-config-typescript-vitnode',
 ];
 
 const getPackageJson = () => {
