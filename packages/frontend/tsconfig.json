@@ -3,10 +3,14 @@
   "extends": "eslint-config-typescript-vitnode/tsconfig.next.json",
   "compilerOptions": {
     "target": "ES2022",
-    "module": "ESNext",
-    "rootDir": "./",
+    "module": "esnext",
+    "baseUrl": "./",
     "outDir": "./dist",
+    "rootDir": "./",
     "lib": ["dom", "dom.iterable", "esnext"],
+    "noEmit": false,
+    "declaration": true,
+    "emitDeclarationOnly": true,
     "plugins": [
       {
         "name": "next"

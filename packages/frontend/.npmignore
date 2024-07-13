@@ -1,4 +1,6 @@
 /.turbo
+/src
+!/src/global.css
 /scripts
 /node_modules
 /.eslintrc.json
