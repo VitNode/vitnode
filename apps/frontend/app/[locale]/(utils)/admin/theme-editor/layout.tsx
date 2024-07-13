@@ -1,4 +1,4 @@
-import '../../../(admin)/admin/global.css';
+import 'vitnode-frontend/admin/css';
 
 interface Props {
   children: React.ReactNode;
