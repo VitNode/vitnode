@@ -161,7 +161,7 @@ export class UploadAdminPluginsService {
   }: {
     config: ConfigPlugin;
   }): Promise<void> {
-    const frontendPaths = ['admin_pages', 'pages', 'plugin', 'pages_container'];
+    const frontendPaths = ['admin_pages', 'pages', 'plugin'];
     await Promise.all(
       frontendPaths.map(async path => {
         const source = join(this.tempPath, 'frontend', path);

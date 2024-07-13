@@ -3,6 +3,10 @@ import * as path from 'path';
 import * as fs from 'fs';
 
 export const copyFiles = ({ pluginsPath }: { pluginsPath: string }) => {
+  const currentPathToCoreAdmin = path.join(pluginsPath, 'core', 'admin');
+  fs.rmSync(currentPathToCoreAdmin, { recursive: true });
+  fs.mkdirSync(currentPathToCoreAdmin, { recursive: true });
+
   // Copy core plugin
   const currentPathToSchema = path.join(
     __dirname,

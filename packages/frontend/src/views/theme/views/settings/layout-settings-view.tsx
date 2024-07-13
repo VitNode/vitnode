@@ -13,7 +13,7 @@ export const LayoutSettingsView = ({ children }: Props) => {
   const t = useTranslations('core');
 
   return (
-    <>
+    <div className="container">
       <HeaderContent
         className="mb-5"
         h2={t('settings.title')}
@@ -24,6 +24,6 @@ export const LayoutSettingsView = ({ children }: Props) => {
         <NavSettings />
         <Card className="grow">{children}</Card>
       </div>
-    </>
+    </div>
   );
 };

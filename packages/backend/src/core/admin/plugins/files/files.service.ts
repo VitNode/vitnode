@@ -49,9 +49,6 @@ export class FilesAdminPluginsService {
       pages: await this.checkNumberOfFiles({
         paths: pluginPaths.frontend.pages,
       }),
-      pages_container: await this.checkNumberOfFiles({
-        paths: pluginPaths.frontend.pages_container,
-      }),
       default_page: fs.existsSync(pluginPaths.frontend.default_page),
       templates: await this.checkNumberOfFiles({
         paths: pluginPaths.frontend.templates,

@@ -263,6 +263,9 @@ importers:
       eslint-config-typescript-vitnode:
         specifier: workspace:*
         version: link:../../packages/eslint-config-typescript-vitnode
+      graphql-tag:
+        specifier: ^2.12.6
+        version: 2.12.6(graphql@16.9.0)
       postcss:
         specifier: ^8
         version: 8.4.39

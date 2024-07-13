@@ -14,7 +14,7 @@ export const ThemeLayout = ({ children }: Props) => {
   return (
     <>
       <Header />
-      {children}
+      <main className="my-4">{children}</main>
       <Footer locale={locale} />
       <QuickMenu />
     </>
