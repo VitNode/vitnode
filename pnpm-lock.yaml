@@ -266,6 +266,9 @@ importers:
       postcss:
         specifier: ^8
         version: 8.4.39
+      tailwindcss:
+        specifier: ^3.4.4
+        version: 3.4.4(ts-node@10.9.2(@swc/core@1.6.13(@swc/helpers@0.5.11))(@types/node@20.14.10)(typescript@5.5.3))
       typescript:
         specifier: ^5
         version: 5.5.3

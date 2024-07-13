@@ -1,10 +1,10 @@
 import React from 'react';
 import 'vitnode-frontend/admin/css';
 
-interface Props {
+export default async function Layout({
+  children,
+}: {
   children: React.ReactNode;
-}
-
-export default async function Layout({ children }: Props) {
+}) {
   return children;
 }
