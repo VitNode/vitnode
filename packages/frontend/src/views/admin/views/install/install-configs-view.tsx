@@ -6,6 +6,7 @@ import {
 } from '@/graphql/graphql';
 import { ErrorType, fetcher } from '@/graphql/fetcher';
 import { redirect } from '@/navigation';
+import { InstallConfigLayout } from './layout';
 
 import { InternalErrorView } from '../../../global';
 
@@ -26,7 +27,9 @@ export const InstallConfigsView = async () => {
     const data = await getData();
 
     return (
-      <ContentInstallConfigsView data={data.admin__install__layout.status} />
+      <InstallConfigLayout>
+        <ContentInstallConfigsView data={data.admin__install__layout.status} />
+      </InstallConfigLayout>
     );
   } catch (error) {
     const code = error as ErrorType;

@@ -1,5 +1,5 @@
 import React from 'react';
-import './global.css';
+import 'vitnode-frontend/admin/css';
 
 interface Props {
   children: React.ReactNode;

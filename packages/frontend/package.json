@@ -41,6 +41,7 @@
       "types": "./dist/src/views/admin/views/*.tsx",
       "default": "./dist/src/views/admin/views/*.js"
     },
+    "./admin/css": "./src/global.css",
     "./theme-tsx/*": {
       "types": "./dist/src/views/theme/views/*.tsx",
       "default": "./dist/src/views/theme/views/*.js"
@@ -67,6 +68,7 @@
     }
   },
   "scripts": {
+    "test": "tsc -w",
     "build": "tsc && swc src -d ./dist --config-file .swcrc",
     "dev": "concurrently \"tsc -w\" \"swc src -d dist --config-file .swcrc -w\"",
     "lint": "eslint .",
