@@ -20,6 +20,6 @@
   },
   "devDependencies": {
     "eslint-config-typescript-vitnode": "workspace:*",
-    "typescript": "^5.5.3"
+    "typescript": "^5"
   }
 }

@@ -100,7 +100,7 @@ importers:
         specifier: ^4.17.21
         version: 4.17.21
       '@types/node':
-        specifier: ^20.14.10
+        specifier: ^20
         version: 20.14.10
       '@types/pg':
         specifier: ^8.11.6
@@ -154,7 +154,7 @@ importers:
         specifier: ^4.2.0
         version: 4.2.0
       typescript:
-        specifier: ^5.5.3
+        specifier: ^5
         version: 5.5.3
       vitnode-backend:
         specifier: workspace:*
@@ -203,10 +203,10 @@ importers:
         specifier: ^2.0.13
         version: 2.0.13
       '@types/react':
-        specifier: ^18.3.3
+        specifier: ^18
         version: 18.3.3
       '@types/react-dom':
-        specifier: ^18.3.0
+        specifier: ^18
         version: 18.3.0
       autoprefixer:
         specifier: ^10.4.19
@@ -218,7 +218,7 @@ importers:
         specifier: ^3.4.4
         version: 3.4.4(ts-node@10.9.2(typescript@5.5.3))
       typescript:
-        specifier: ^5.5.3
+        specifier: ^5
         version: 5.5.3
 
   apps/frontend:
@@ -323,6 +323,18 @@ importers:
       '@react-email/render':
         specifier: ^0.0.16
         version: 0.0.16(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@swc/cli':
+        specifier: ^0.4.0
+        version: 0.4.0(@swc/core@1.6.13(@swc/helpers@0.5.11))(chokidar@3.6.0)
+      '@swc/core':
+        specifier: ^1.6.13
+        version: 1.6.13(@swc/helpers@0.5.11)
+      bcrypt:
+        specifier: ^5.1.1
+        version: 5.1.1
+      busboy:
+        specifier: ^1.6.0
+        version: 1.6.0
       class-transformer:
         specifier: ^0.5.1
         version: 0.5.1
@@ -341,14 +353,20 @@ importers:
       helmet:
         specifier: ^7.1.0
         version: 7.1.0
+      http-errors:
+        specifier: ^2.0.0
+        version: 2.0.0
+      object-path:
+        specifier: ^0.11.8
+        version: 0.11.8
       pg:
         specifier: ^8.12.0
         version: 8.12.0
       react:
-        specifier: ^18.3.1
+        specifier: ^18
         version: 18.3.1
       react-dom:
-        specifier: ^18.3.1
+        specifier: ^18
         version: 18.3.1(react@18.3.1)
       reflect-metadata:
         specifier: ^0.2.2
@@ -362,16 +380,13 @@ importers:
       ua-parser-js:
         specifier: 2.0.0-beta.3
         version: 2.0.0-beta.3
+      vitnode-backend:
+        specifier: ^0.0.7-canary.3
+        version: 0.0.7-canary.3(@nestjs/platform-express@10.3.10(@nestjs/common@10.3.10(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/core@10.3.10))(@types/pg@8.11.6)(@types/react@18.3.3)(express@4.19.2)(graphql@16.9.0)(rxjs@7.8.1)
       vitnode-shared:
         specifier: workspace:*
         version: link:../shared
     devDependencies:
-      '@swc/cli':
-        specifier: ^0.4.0
-        version: 0.4.0(@swc/core@1.6.13(@swc/helpers@0.5.11))(chokidar@3.6.0)
-      '@swc/core':
-        specifier: ^1.6.13
-        version: 1.6.13(@swc/helpers@0.5.11)
       '@types/bcrypt':
         specifier: ^5.0.2
         version: 5.0.2
@@ -388,7 +403,7 @@ importers:
         specifier: ^2.0.4
         version: 2.0.4
       '@types/node':
-        specifier: ^20.14.10
+        specifier: ^20
         version: 20.14.10
       '@types/nodemailer':
         specifier: ^6.4.15
@@ -400,14 +415,8 @@ importers:
         specifier: ^8.11.6
         version: 8.11.6
       '@types/react':
-        specifier: ^18.3.3
+        specifier: ^18
         version: 18.3.3
-      bcrypt:
-        specifier: ^5.1.1
-        version: 5.1.1
-      busboy:
-        specifier: ^1.6.0
-        version: 1.6.0
       concurrently:
         specifier: ^8.2.2
         version: 8.2.2
@@ -423,15 +432,9 @@ importers:
       graphql:
         specifier: ^16.9.0
         version: 16.9.0
-      http-errors:
-        specifier: ^2.0.0
-        version: 2.0.0
       nodemailer:
         specifier: ^6.9.14
         version: 6.9.14
-      object-path:
-        specifier: ^0.11.8
-        version: 0.11.8
       ts-node:
         specifier: ^10.9.2
         version: 10.9.2(@swc/core@1.6.13(@swc/helpers@0.5.11))(@types/node@20.14.10)(typescript@5.5.3)
@@ -439,7 +442,7 @@ importers:
         specifier: ^8.1.0
         version: 8.1.0(@swc/core@1.6.13(@swc/helpers@0.5.11))(postcss@8.4.39)(ts-node@10.9.2(@swc/core@1.6.13(@swc/helpers@0.5.11))(@types/node@20.14.10)(typescript@5.5.3))(typescript@5.5.3)
       typescript:
-        specifier: ^5.5.3
+        specifier: ^5
         version: 5.5.3
 
   packages/create-vitnode-app:
@@ -461,7 +464,7 @@ importers:
         specifier: ^1.5.8
         version: 1.5.8
       '@types/node':
-        specifier: ^20.14.10
+        specifier: ^20
         version: 20.14.10
       '@types/prompts':
         specifier: ^2.4.9
@@ -479,7 +482,7 @@ importers:
         specifier: ^8.1.0
         version: 8.1.0(@swc/core@1.6.13)(postcss@8.4.39)(ts-node@10.9.2(@swc/core@1.6.13)(@types/node@20.14.10)(typescript@5.5.3))(typescript@5.5.3)
       typescript:
-        specifier: ^5.5.3
+        specifier: ^5
         version: 5.5.3
 
   packages/eslint-config-typescript-vitnode:
@@ -515,7 +518,7 @@ importers:
         specifier: ^3.2.0
         version: 3.2.0(@typescript-eslint/parser@7.16.0(eslint@8.57.0)(typescript@5.5.3))(eslint@8.57.0)(typescript@5.5.3)
       typescript:
-        specifier: ^5.5.3
+        specifier: ^5
         version: 5.5.3
 
   packages/frontend:
@@ -637,6 +640,9 @@ importers:
       class-variance-authority:
         specifier: ^0.7.0
         version: 0.7.0
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
       cmdk:
         specifier: ^1.0.0
         version: 1.0.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
@@ -655,6 +661,12 @@ importers:
       framer-motion:
         specifier: ^11.2.13
         version: 11.3.2(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
+      graphql:
+        specifier: ^16.9.0
+        version: 16.9.0
+      graphql-tag:
+        specifier: ^2.12.6
+        version: 2.12.6(graphql@16.9.0)
       html-react-parser:
         specifier: ^5.1.10
         version: 5.1.10(@types/react@18.3.3)(react@19.0.0-rc.0)
@@ -712,6 +724,9 @@ importers:
       sonner:
         specifier: ^1.5.0
         version: 1.5.0(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
+      tailwind-merge:
+        specifier: ^2.4.0
+        version: 2.4.0
       tailwindcss:
         specifier: ^3.4.4
         version: 3.4.4(ts-node@10.9.2(@swc/core@1.6.13(@swc/helpers@0.5.11))(@types/node@20.14.10)(typescript@5.5.3))
@@ -753,20 +768,17 @@ importers:
         specifier: ^1.6.13
         version: 1.6.13(@swc/helpers@0.5.11)
       '@types/node':
-        specifier: ^20.14.10
+        specifier: ^20
         version: 20.14.10
       '@types/nprogress':
         specifier: ^0.2.3
         version: 0.2.3
       '@types/react':
-        specifier: ^18.3.3
+        specifier: ^18
         version: 18.3.3
       '@types/react-dom':
-        specifier: ^18.3.0
+        specifier: ^18
         version: 18.3.0
-      clsx:
-        specifier: ^2.1.1
-        version: 2.1.1
       concurrently:
         specifier: ^8.2.2
         version: 8.2.2
@@ -776,20 +788,8 @@ importers:
       eslint-config-typescript-vitnode:
         specifier: workspace:*
         version: link:../eslint-config-typescript-vitnode
-      graphql:
-        specifier: ^16.9.0
-        version: 16.9.0
-      graphql-tag:
-        specifier: ^2.12.6
-        version: 2.12.6(graphql@16.9.0)
-      tailwind-merge:
-        specifier: ^2.3.0
-        version: 2.4.0
-      ts-node:
-        specifier: ^10.9.2
-        version: 10.9.2(@swc/core@1.6.13(@swc/helpers@0.5.11))(@types/node@20.14.10)(typescript@5.5.3)
       typescript:
-        specifier: ^5.5.3
+        specifier: ^5
         version: 5.5.3
 
   packages/shared:
@@ -798,7 +798,7 @@ importers:
         specifier: workspace:*
         version: link:../eslint-config-typescript-vitnode
       typescript:
-        specifier: ^5.5.3
+        specifier: ^5
         version: 5.5.3
 
 packages:
@@ -9212,6 +9212,13 @@ packages:
 
   vfile@6.0.1:
     resolution: {integrity: sha512-1bYqc7pt6NIADBJ98UiG0Bn/CHIVOoZ/IyEkqIruLg0mE1BKzkOXY2D6CSqQIcKqgadppE5lrxgWXJmXd7zZJw==}
+
+  vitnode-backend@0.0.7-canary.3:
+    resolution: {integrity: sha512-SEAAfonx3x3ED7VXbnolQQd67X8V2J52W5hLKHwHZsJULAX3XS2jgt83RKhiYH1sxYgkwQ78sLSoqSB5vLspgQ==}
+    hasBin: true
+
+  vitnode-shared@0.0.7-canary.3:
+    resolution: {integrity: sha512-H/AsZk8dLRSsvxiZ0rR4Erz7xFTzkXMNv7TFlpNuL0Zh/jD8kCZUajZbiV9W7a59+3aE6Y1AVD5aSIx1yW3FFA==}
 
   w3c-keyname@2.2.8:
     resolution: {integrity: sha512-dpojBhNsCNN7T82Tm7k26A6G9ML3NkhDsnw9n/eoxSRlVBB4CEtIQ/KTCLI2Fwf3ataSXRhYFkQi3SlnFwPvPQ==}
@@ -19652,6 +19659,81 @@ snapshots:
       '@types/unist': 3.0.2
       unist-util-stringify-position: 4.0.0
       vfile-message: 4.0.2
+
+  vitnode-backend@0.0.7-canary.3(@nestjs/platform-express@10.3.10(@nestjs/common@10.3.10(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/core@10.3.10))(@types/pg@8.11.6)(@types/react@18.3.3)(express@4.19.2)(graphql@16.9.0)(rxjs@7.8.1):
+    dependencies:
+      '@apollo/server': 4.10.4(graphql@16.9.0)
+      '@nestjs/apollo': 12.2.0(@apollo/server@4.10.4(graphql@16.9.0))(@nestjs/common@10.3.10(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/core@10.3.10(@nestjs/common@10.3.10(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/platform-express@10.3.10)(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/graphql@12.2.0(@nestjs/common@10.3.10(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/core@10.3.10(@nestjs/common@10.3.10(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/platform-express@10.3.10)(reflect-metadata@0.2.2)(rxjs@7.8.1))(class-transformer@0.5.1)(class-validator@0.14.1)(graphql@16.9.0)(reflect-metadata@0.2.2))(graphql@16.9.0)
+      '@nestjs/common': 10.3.10(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1)
+      '@nestjs/config': 3.2.3(@nestjs/common@10.3.10(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))(rxjs@7.8.1)
+      '@nestjs/core': 10.3.10(@nestjs/common@10.3.10(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/platform-express@10.3.10)(reflect-metadata@0.2.2)(rxjs@7.8.1)
+      '@nestjs/graphql': 12.2.0(@nestjs/common@10.3.10(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/core@10.3.10(@nestjs/common@10.3.10(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/platform-express@10.3.10)(reflect-metadata@0.2.2)(rxjs@7.8.1))(class-transformer@0.5.1)(class-validator@0.14.1)(graphql@16.9.0)(reflect-metadata@0.2.2)
+      '@nestjs/jwt': 10.2.0(@nestjs/common@10.3.10(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))
+      '@nestjs/schedule': 4.1.0(@nestjs/common@10.3.10(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/core@10.3.10(@nestjs/common@10.3.10(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/platform-express@10.3.10)(reflect-metadata@0.2.2)(rxjs@7.8.1))
+      '@nestjs/serve-static': 4.0.2(@nestjs/common@10.3.10(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/core@10.3.10(@nestjs/common@10.3.10(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/platform-express@10.3.10)(reflect-metadata@0.2.2)(rxjs@7.8.1))(express@4.19.2)
+      '@nestjs/throttler': 5.2.0(@nestjs/common@10.3.10(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/core@10.3.10(@nestjs/common@10.3.10(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/platform-express@10.3.10)(reflect-metadata@0.2.2)(rxjs@7.8.1))(reflect-metadata@0.2.2)
+      '@react-email/components': 0.0.21(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@react-email/render': 0.0.16(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      class-transformer: 0.5.1
+      class-validator: 0.14.1
+      cookie-parser: 1.4.6
+      drizzle-kit: 0.22.8
+      drizzle-orm: 0.31.4(@types/pg@8.11.6)(@types/react@18.3.3)(pg@8.12.0)(react@18.3.1)
+      helmet: 7.1.0
+      pg: 8.12.0
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      reflect-metadata: 0.2.2
+      sharp: 0.33.4
+      tar: 7.4.0
+      ua-parser-js: 2.0.0-beta.3
+      vitnode-shared: 0.0.7-canary.3
+    transitivePeerDependencies:
+      - '@apollo/gateway'
+      - '@apollo/subgraph'
+      - '@as-integrations/fastify'
+      - '@aws-sdk/client-rds-data'
+      - '@cloudflare/workers-types'
+      - '@electric-sql/pglite'
+      - '@fastify/static'
+      - '@libsql/client'
+      - '@neondatabase/serverless'
+      - '@nestjs/microservices'
+      - '@nestjs/platform-express'
+      - '@nestjs/websockets'
+      - '@op-engineering/op-sqlite'
+      - '@opentelemetry/api'
+      - '@planetscale/database'
+      - '@prisma/client'
+      - '@tidbcloud/serverless'
+      - '@types/better-sqlite3'
+      - '@types/pg'
+      - '@types/react'
+      - '@types/sql.js'
+      - '@vercel/postgres'
+      - '@xata.io/client'
+      - better-sqlite3
+      - bufferutil
+      - bun-types
+      - encoding
+      - expo-sqlite
+      - express
+      - fastify
+      - graphql
+      - knex
+      - kysely
+      - mysql2
+      - pg-native
+      - postgres
+      - prisma
+      - rxjs
+      - sql.js
+      - sqlite3
+      - supports-color
+      - ts-morph
+      - utf-8-validate
+
+  vitnode-shared@0.0.7-canary.3: {}
 
   w3c-keyname@2.2.8: {}
 
