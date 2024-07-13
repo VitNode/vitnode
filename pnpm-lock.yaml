@@ -57,10 +57,10 @@ importers:
         specifier: ^8.12.0
         version: 8.12.0
       react:
-        specifier: ^18.3.1
+        specifier: ^18
         version: 18.3.1
       react-dom:
-        specifier: ^18.3.1
+        specifier: ^18
         version: 18.3.1(react@18.3.1)
       reflect-metadata:
         specifier: ^0.2.2
@@ -338,9 +338,6 @@ importers:
       class-transformer:
         specifier: ^0.5.1
         version: 0.5.1
-      class-validator:
-        specifier: ^0.14.1
-        version: 0.14.1
       cookie-parser:
         specifier: ^1.4.6
         version: 1.4.6
@@ -356,18 +353,15 @@ importers:
       http-errors:
         specifier: ^2.0.0
         version: 2.0.0
+      nodemailer:
+        specifier: ^6.9.14
+        version: 6.9.14
       object-path:
         specifier: ^0.11.8
         version: 0.11.8
       pg:
         specifier: ^8.12.0
         version: 8.12.0
-      react:
-        specifier: ^18
-        version: 18.3.1
-      react-dom:
-        specifier: ^18
-        version: 18.3.1(react@18.3.1)
       reflect-metadata:
         specifier: ^0.2.2
         version: 0.2.2
@@ -417,6 +411,9 @@ importers:
       '@types/react':
         specifier: ^18
         version: 18.3.3
+      class-validator:
+        specifier: ^0.14.1
+        version: 0.14.1
       concurrently:
         specifier: ^8.2.2
         version: 8.2.2
@@ -432,9 +429,12 @@ importers:
       graphql:
         specifier: ^16.9.0
         version: 16.9.0
-      nodemailer:
-        specifier: ^6.9.14
-        version: 6.9.14
+      react:
+        specifier: ^18
+        version: 18.3.1
+      react-dom:
+        specifier: ^18
+        version: 18.3.1(react@18.3.1)
       ts-node:
         specifier: ^10.9.2
         version: 10.9.2(@swc/core@1.6.13(@swc/helpers@0.5.11))(@types/node@20.14.10)(typescript@5.5.3)

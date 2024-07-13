@@ -19,10 +19,6 @@ This package contains shared code between the different packages of the Vitnode 
 
 ```bash
 npm install vitnode-shared
-# or
-yarn add vitnode-shared
-# or
-pnpm add vitnode-shared
 ```
 
 or

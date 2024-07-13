@@ -18,6 +18,9 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
   "devDependencies": {
     "eslint-config-typescript-vitnode": "workspace:*",
     "typescript": "^5"

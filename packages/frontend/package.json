@@ -76,7 +76,10 @@
     "codegen": "graphql-codegen --config codegen.ts"
   },
   "peerDependencies": {
-    "next": "^15"
+    "next": "^15",
+    "react": "^19",
+    "react-dom": "^19",
+    "typescript": "^5"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^5.0.2",
