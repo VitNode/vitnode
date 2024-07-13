@@ -57,10 +57,10 @@ importers:
         specifier: ^8.12.0
         version: 8.12.0
       react:
-        specifier: ^18.3.1
+        specifier: ^18
         version: 18.3.1
       react-dom:
-        specifier: ^18.3.1
+        specifier: ^18
         version: 18.3.1(react@18.3.1)
       reflect-metadata:
         specifier: ^0.2.2
@@ -83,7 +83,7 @@ importers:
         version: 4.2.3(graphql@16.9.0)
       '@nestjs/cli':
         specifier: ^10.4.2
-        version: 10.4.2(@swc/cli@0.4.0(@swc/core@1.6.13(@swc/helpers@0.5.11))(chokidar@3.6.0))(@swc/core@1.6.13(@swc/helpers@0.5.11))(esbuild@0.19.12)
+        version: 10.4.2(@swc/cli@0.4.0(@swc/core@1.6.13(@swc/helpers@0.5.11))(chokidar@3.6.0))(@swc/core@1.6.13(@swc/helpers@0.5.11))
       '@nestjs/schematics':
         specifier: ^10.1.2
         version: 10.1.2(chokidar@3.6.0)(typescript@5.5.3)
@@ -100,7 +100,7 @@ importers:
         specifier: ^4.17.21
         version: 4.17.21
       '@types/node':
-        specifier: ^20.14.10
+        specifier: ^20
         version: 20.14.10
       '@types/pg':
         specifier: ^8.11.6
@@ -127,8 +127,8 @@ importers:
         specifier: ^0.23.0
         version: 0.23.0
       drizzle-orm:
-        specifier: ^0.32.0
-        version: 0.32.0(@types/pg@8.11.6)(@types/react@18.3.3)(pg@8.12.0)(react@18.3.1)
+        specifier: ^0.31.4
+        version: 0.31.4(@types/pg@8.11.6)(@types/react@18.3.3)(pg@8.12.0)(react@18.3.1)
       eslint:
         specifier: ^8.57.0
         version: 8.57.0
@@ -143,10 +143,10 @@ importers:
         version: 0.5.21
       ts-jest:
         specifier: ^29.2.2
-        version: 29.2.2(@babel/core@7.24.8)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.24.8))(esbuild@0.19.12)(jest@29.7.0(@types/node@20.14.10)(ts-node@10.9.2(@swc/core@1.6.13(@swc/helpers@0.5.11))(@types/node@20.14.10)(typescript@5.5.3)))(typescript@5.5.3)
+        version: 29.2.2(@babel/core@7.24.8)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.24.8))(jest@29.7.0(@types/node@20.14.10)(ts-node@10.9.2(@swc/core@1.6.13(@swc/helpers@0.5.11))(@types/node@20.14.10)(typescript@5.5.3)))(typescript@5.5.3)
       ts-loader:
         specifier: ^9.5.1
-        version: 9.5.1(typescript@5.5.3)(webpack@5.92.1(@swc/core@1.6.13(@swc/helpers@0.5.11))(esbuild@0.19.12))
+        version: 9.5.1(typescript@5.5.3)(webpack@5.92.1(@swc/core@1.6.13(@swc/helpers@0.5.11)))
       ts-node:
         specifier: ^10.9.2
         version: 10.9.2(@swc/core@1.6.13(@swc/helpers@0.5.11))(@types/node@20.14.10)(typescript@5.5.3)
@@ -154,7 +154,7 @@ importers:
         specifier: ^4.2.0
         version: 4.2.0
       typescript:
-        specifier: ^5.5.3
+        specifier: ^5
         version: 5.5.3
       vitnode-backend:
         specifier: workspace:*
@@ -203,10 +203,10 @@ importers:
         specifier: ^2.0.13
         version: 2.0.13
       '@types/react':
-        specifier: ^18.3.3
+        specifier: ^18
         version: 18.3.3
       '@types/react-dom':
-        specifier: ^18.3.0
+        specifier: ^18
         version: 18.3.0
       autoprefixer:
         specifier: ^10.4.19
@@ -218,7 +218,7 @@ importers:
         specifier: ^3.4.4
         version: 3.4.4(ts-node@10.9.2(typescript@5.5.3))
       typescript:
-        specifier: ^5.5.3
+        specifier: ^5
         version: 5.5.3
 
   apps/frontend:
@@ -323,33 +323,45 @@ importers:
       '@react-email/render':
         specifier: ^0.0.16
         version: 0.0.16(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@swc/cli':
+        specifier: ^0.4.0
+        version: 0.4.0(@swc/core@1.6.13(@swc/helpers@0.5.11))(chokidar@3.6.0)
+      '@swc/core':
+        specifier: ^1.6.13
+        version: 1.6.13(@swc/helpers@0.5.11)
+      bcrypt:
+        specifier: ^5.1.1
+        version: 5.1.1
+      busboy:
+        specifier: ^1.6.0
+        version: 1.6.0
       class-transformer:
         specifier: ^0.5.1
         version: 0.5.1
-      class-validator:
-        specifier: ^0.14.1
-        version: 0.14.1
       cookie-parser:
         specifier: ^1.4.6
         version: 1.4.6
       drizzle-kit:
-        specifier: ^0.22.8
-        version: 0.22.8
+        specifier: ^0.23.0
+        version: 0.23.0
       drizzle-orm:
         specifier: ^0.31.4
         version: 0.31.4(@types/pg@8.11.6)(@types/react@18.3.3)(pg@8.12.0)(react@18.3.1)
       helmet:
         specifier: ^7.1.0
         version: 7.1.0
+      http-errors:
+        specifier: ^2.0.0
+        version: 2.0.0
+      nodemailer:
+        specifier: ^6.9.14
+        version: 6.9.14
+      object-path:
+        specifier: ^0.11.8
+        version: 0.11.8
       pg:
         specifier: ^8.12.0
         version: 8.12.0
-      react:
-        specifier: ^18.3.1
-        version: 18.3.1
-      react-dom:
-        specifier: ^18.3.1
-        version: 18.3.1(react@18.3.1)
       reflect-metadata:
         specifier: ^0.2.2
         version: 0.2.2
@@ -362,16 +374,13 @@ importers:
       ua-parser-js:
         specifier: 2.0.0-beta.3
         version: 2.0.0-beta.3
+      vitnode-backend:
+        specifier: ^0.0.7-canary.3
+        version: 0.0.7-canary.5(ln43w5syblduyg5ua6yo3l2c4a)
       vitnode-shared:
         specifier: workspace:*
         version: link:../shared
     devDependencies:
-      '@swc/cli':
-        specifier: ^0.4.0
-        version: 0.4.0(@swc/core@1.6.13(@swc/helpers@0.5.11))(chokidar@3.6.0)
-      '@swc/core':
-        specifier: ^1.6.13
-        version: 1.6.13(@swc/helpers@0.5.11)
       '@types/bcrypt':
         specifier: ^5.0.2
         version: 5.0.2
@@ -388,7 +397,7 @@ importers:
         specifier: ^2.0.4
         version: 2.0.4
       '@types/node':
-        specifier: ^20.14.10
+        specifier: ^20
         version: 20.14.10
       '@types/nodemailer':
         specifier: ^6.4.15
@@ -400,14 +409,11 @@ importers:
         specifier: ^8.11.6
         version: 8.11.6
       '@types/react':
-        specifier: ^18.3.3
+        specifier: ^18
         version: 18.3.3
-      bcrypt:
-        specifier: ^5.1.1
-        version: 5.1.1
-      busboy:
-        specifier: ^1.6.0
-        version: 1.6.0
+      class-validator:
+        specifier: ^0.14.1
+        version: 0.14.1
       concurrently:
         specifier: ^8.2.2
         version: 8.2.2
@@ -423,15 +429,12 @@ importers:
       graphql:
         specifier: ^16.9.0
         version: 16.9.0
-      http-errors:
-        specifier: ^2.0.0
-        version: 2.0.0
-      nodemailer:
-        specifier: ^6.9.14
-        version: 6.9.14
-      object-path:
-        specifier: ^0.11.8
-        version: 0.11.8
+      react:
+        specifier: ^18
+        version: 18.3.1
+      react-dom:
+        specifier: ^18
+        version: 18.3.1(react@18.3.1)
       ts-node:
         specifier: ^10.9.2
         version: 10.9.2(@swc/core@1.6.13(@swc/helpers@0.5.11))(@types/node@20.14.10)(typescript@5.5.3)
@@ -439,7 +442,7 @@ importers:
         specifier: ^8.1.0
         version: 8.1.0(@swc/core@1.6.13(@swc/helpers@0.5.11))(postcss@8.4.39)(ts-node@10.9.2(@swc/core@1.6.13(@swc/helpers@0.5.11))(@types/node@20.14.10)(typescript@5.5.3))(typescript@5.5.3)
       typescript:
-        specifier: ^5.5.3
+        specifier: ^5
         version: 5.5.3
 
   packages/create-vitnode-app:
@@ -461,7 +464,7 @@ importers:
         specifier: ^1.5.8
         version: 1.5.8
       '@types/node':
-        specifier: ^20.14.10
+        specifier: ^20
         version: 20.14.10
       '@types/prompts':
         specifier: ^2.4.9
@@ -479,20 +482,17 @@ importers:
         specifier: ^8.1.0
         version: 8.1.0(@swc/core@1.6.13)(postcss@8.4.39)(ts-node@10.9.2(@swc/core@1.6.13)(@types/node@20.14.10)(typescript@5.5.3))(typescript@5.5.3)
       typescript:
-        specifier: ^5.5.3
+        specifier: ^5
         version: 5.5.3
 
   packages/eslint-config-typescript-vitnode:
-    devDependencies:
+    dependencies:
       '@typescript-eslint/eslint-plugin':
-        specifier: ^7.15.0
+        specifier: ^7.0.0
         version: 7.16.0(@typescript-eslint/parser@7.16.0(eslint@8.57.0)(typescript@5.5.3))(eslint@8.57.0)(typescript@5.5.3)
       '@typescript-eslint/parser':
-        specifier: ^7.15.0
+        specifier: ^7.0.0
         version: 7.16.0(eslint@8.57.0)(typescript@5.5.3)
-      eslint:
-        specifier: 8.57.0
-        version: 8.57.0
       eslint-config-next:
         specifier: 15.0.0-canary.64
         version: 15.0.0-canary.64(eslint@8.57.0)(typescript@5.5.3)
@@ -514,8 +514,15 @@ importers:
       eslint-plugin-typescript-sort-keys:
         specifier: ^3.2.0
         version: 3.2.0(@typescript-eslint/parser@7.16.0(eslint@8.57.0)(typescript@5.5.3))(eslint@8.57.0)(typescript@5.5.3)
+      prettier-plugin-tailwindcss:
+        specifier: ^0.6.5
+        version: 0.6.5(prettier@3.3.2)
+    devDependencies:
+      eslint:
+        specifier: 8.57.0
+        version: 8.57.0
       typescript:
-        specifier: ^5.5.3
+        specifier: ^5
         version: 5.5.3
 
   packages/frontend:
@@ -637,6 +644,9 @@ importers:
       class-variance-authority:
         specifier: ^0.7.0
         version: 0.7.0
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
       cmdk:
         specifier: ^1.0.0
         version: 1.0.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
@@ -655,6 +665,12 @@ importers:
       framer-motion:
         specifier: ^11.2.13
         version: 11.3.2(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
+      graphql:
+        specifier: ^16.9.0
+        version: 16.9.0
+      graphql-tag:
+        specifier: ^2.12.6
+        version: 2.12.6(graphql@16.9.0)
       html-react-parser:
         specifier: ^5.1.10
         version: 5.1.10(@types/react@18.3.3)(react@19.0.0-rc.0)
@@ -712,6 +728,9 @@ importers:
       sonner:
         specifier: ^1.5.0
         version: 1.5.0(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
+      tailwind-merge:
+        specifier: ^2.4.0
+        version: 2.4.0
       tailwindcss:
         specifier: ^3.4.4
         version: 3.4.4(ts-node@10.9.2(@swc/core@1.6.13(@swc/helpers@0.5.11))(@types/node@20.14.10)(typescript@5.5.3))
@@ -753,20 +772,17 @@ importers:
         specifier: ^1.6.13
         version: 1.6.13(@swc/helpers@0.5.11)
       '@types/node':
-        specifier: ^20.14.10
+        specifier: ^20
         version: 20.14.10
       '@types/nprogress':
         specifier: ^0.2.3
         version: 0.2.3
       '@types/react':
-        specifier: ^18.3.3
+        specifier: ^18
         version: 18.3.3
       '@types/react-dom':
-        specifier: ^18.3.0
+        specifier: ^18
         version: 18.3.0
-      clsx:
-        specifier: ^2.1.1
-        version: 2.1.1
       concurrently:
         specifier: ^8.2.2
         version: 8.2.2
@@ -776,20 +792,8 @@ importers:
       eslint-config-typescript-vitnode:
         specifier: workspace:*
         version: link:../eslint-config-typescript-vitnode
-      graphql:
-        specifier: ^16.9.0
-        version: 16.9.0
-      graphql-tag:
-        specifier: ^2.12.6
-        version: 2.12.6(graphql@16.9.0)
-      tailwind-merge:
-        specifier: ^2.3.0
-        version: 2.4.0
-      ts-node:
-        specifier: ^10.9.2
-        version: 10.9.2(@swc/core@1.6.13(@swc/helpers@0.5.11))(@types/node@20.14.10)(typescript@5.5.3)
       typescript:
-        specifier: ^5.5.3
+        specifier: ^5
         version: 5.5.3
 
   packages/shared:
@@ -798,7 +802,7 @@ importers:
         specifier: workspace:*
         version: link:../eslint-config-typescript-vitnode
       typescript:
-        specifier: ^5.5.3
+        specifier: ^5
         version: 5.5.3
 
 packages:
@@ -4094,8 +4098,8 @@ packages:
   '@types/validator@13.12.0':
     resolution: {integrity: sha512-nH45Lk7oPIJ1RVOF6JgFI6Dy0QpHEzq4QecZhvguxYPDwT8c93prCMqAtiIttm39voZ+DDR+qkNnMpJmMBRqag==}
 
-  '@types/ws@8.5.10':
-    resolution: {integrity: sha512-vmQSUcfalpIq0R9q7uTo2lXs6eGIpt9wtnLdMv9LVpIjCA/+ufZRozlVoVelIYixx1ugCBKDhn89vnsEGOCx9A==}
+  '@types/ws@8.5.11':
+    resolution: {integrity: sha512-4+q7P5h3SpJxaBft0Dzpbr6lmMaqh0Jr2tbhJZ/luAwvD7ohSCniYkwz/pLxuT2h0EOa6QADgJj1Ko+TzRfZ+w==}
 
   '@types/yargs-parser@21.0.3':
     resolution: {integrity: sha512-I4q9QU9MQv4oEOz4tAHJtNz1cwuLxn2F3xcc2iV5WdqLPpUnj30aUuxt1mAxYTG+oe8CZMV/+6rU4S4gRDzqtQ==}
@@ -5178,105 +5182,12 @@ packages:
     resolution: {integrity: sha512-ZmdL2rui+eB2YwhsWzjInR8LldtZHGDoQ1ugH85ppHKwpUHL7j7rN0Ti9NCnGiQbhaZ11FpR+7ao1dNsmduNUg==}
     engines: {node: '>=12'}
 
-  drizzle-kit@0.22.8:
-    resolution: {integrity: sha512-VjI4wsJjk3hSqHSa3TwBf+uvH6M6pRHyxyoVbt935GUzP9tUR/BRZ+MhEJNgryqbzN2Za1KP0eJMTgKEPsalYQ==}
-    hasBin: true
-
   drizzle-kit@0.23.0:
     resolution: {integrity: sha512-w9jE97z193dd4jzAyj4Uv2SOh8Ydue70Ki6W0awy4bGM1aPXan6zD6Yv+nNTA6oGgNTDl2MJFxutjHG4fden5g==}
     hasBin: true
 
   drizzle-orm@0.31.4:
     resolution: {integrity: sha512-VGD9SH9aStF2z4QOTnVlVX/WghV/EnuEzTmsH3fSVp2E4fFgc8jl3viQrS/XUJx1ekW4rVVLJMH42SfGQdjX3Q==}
-    peerDependencies:
-      '@aws-sdk/client-rds-data': '>=3'
-      '@cloudflare/workers-types': '>=3'
-      '@electric-sql/pglite': '>=0.1.1'
-      '@libsql/client': '*'
-      '@neondatabase/serverless': '>=0.1'
-      '@op-engineering/op-sqlite': '>=2'
-      '@opentelemetry/api': ^1.4.1
-      '@planetscale/database': '>=1'
-      '@prisma/client': '*'
-      '@tidbcloud/serverless': '*'
-      '@types/better-sqlite3': '*'
-      '@types/pg': '*'
-      '@types/react': '>=18'
-      '@types/sql.js': '*'
-      '@vercel/postgres': '>=0.8.0'
-      '@xata.io/client': '*'
-      better-sqlite3: '>=7'
-      bun-types: '*'
-      expo-sqlite: '>=13.2.0'
-      knex: '*'
-      kysely: '*'
-      mysql2: '>=2'
-      pg: '>=8'
-      postgres: '>=3'
-      prisma: '*'
-      react: '>=18'
-      sql.js: '>=1'
-      sqlite3: '>=5'
-    peerDependenciesMeta:
-      '@aws-sdk/client-rds-data':
-        optional: true
-      '@cloudflare/workers-types':
-        optional: true
-      '@electric-sql/pglite':
-        optional: true
-      '@libsql/client':
-        optional: true
-      '@neondatabase/serverless':
-        optional: true
-      '@op-engineering/op-sqlite':
-        optional: true
-      '@opentelemetry/api':
-        optional: true
-      '@planetscale/database':
-        optional: true
-      '@prisma/client':
-        optional: true
-      '@tidbcloud/serverless':
-        optional: true
-      '@types/better-sqlite3':
-        optional: true
-      '@types/pg':
-        optional: true
-      '@types/react':
-        optional: true
-      '@types/sql.js':
-        optional: true
-      '@vercel/postgres':
-        optional: true
-      '@xata.io/client':
-        optional: true
-      better-sqlite3:
-        optional: true
-      bun-types:
-        optional: true
-      expo-sqlite:
-        optional: true
-      knex:
-        optional: true
-      kysely:
-        optional: true
-      mysql2:
-        optional: true
-      pg:
-        optional: true
-      postgres:
-        optional: true
-      prisma:
-        optional: true
-      react:
-        optional: true
-      sql.js:
-        optional: true
-      sqlite3:
-        optional: true
-
-  drizzle-orm@0.32.0:
-    resolution: {integrity: sha512-99IlfVGPNHzOFEXo9Phyu5At5TALLsY2t6WxFFy68rYd9Ej4cHX/7WjdPOn7JNRW69MNeNtP8XrDQg43SppuAA==}
     peerDependencies:
       '@aws-sdk/client-rds-data': '>=3'
       '@cloudflare/workers-types': '>=3'
@@ -7174,6 +7085,10 @@ packages:
 
   mime-db@1.52.0:
     resolution: {integrity: sha512-sPU4uV7dYlvtWJxwwxHD0PuihVNiE7TyAbQ5SWxDCB9mUYvOgroQOwYQQOKPJ8CIbE+1ETVlOoK1UC2nU3gYvg==}
+    engines: {node: '>= 0.6'}
+
+  mime-db@1.53.0:
+    resolution: {integrity: sha512-oHlN/w+3MQ3rba9rqFr6V/ypF10LSkdwUysQL7GkXoTgIWeV+tcXGA852TBxH+gsh8UWoyhR1hKcoMJTuWflpg==}
     engines: {node: '>= 0.6'}
 
   mime-types@2.1.35:
@@ -9213,6 +9128,26 @@ packages:
   vfile@6.0.1:
     resolution: {integrity: sha512-1bYqc7pt6NIADBJ98UiG0Bn/CHIVOoZ/IyEkqIruLg0mE1BKzkOXY2D6CSqQIcKqgadppE5lrxgWXJmXd7zZJw==}
 
+  vitnode-backend@0.0.7-canary.5:
+    resolution: {integrity: sha512-EQHKk6Hu6nM7qN2WbEchLBoS2wKov8/LhG3iVQAb+0FDI3vADtbcw8q+vX3Gx4BUscw+DG2AMQvMWievk7hoIg==}
+    hasBin: true
+    peerDependencies:
+      '@nestjs/apollo': ^12
+      '@nestjs/graphql': ^12
+      '@react-email/components': ^0.0.21
+      '@types/react': ^18
+      class-validator: ^0.14.1
+      drizzle-kit: ^0.23.0
+      drizzle-orm: ^0.31.4
+      pg: ^8.12.0
+      react: ^18
+      typescript: ^5
+
+  vitnode-shared@0.0.7-canary.5:
+    resolution: {integrity: sha512-HR+pFu4mKx0N5DTY1OBSB4DzW8Do1p0t/PqCWuRGYDwUfjzpUyjgKbcDbVmeFBkpAYMxIEgV00xPNCgCTSqkgw==}
+    peerDependencies:
+      typescript: ^5
+
   w3c-keyname@2.2.8:
     resolution: {integrity: sha512-dpojBhNsCNN7T82Tm7k26A6G9ML3NkhDsnw9n/eoxSRlVBB4CEtIQ/KTCLI2Fwf3ataSXRhYFkQi3SlnFwPvPQ==}
 
@@ -10585,7 +10520,7 @@ snapshots:
   '@graphql-tools/executor-graphql-ws@1.2.0(graphql@16.9.0)':
     dependencies:
       '@graphql-tools/utils': 10.3.1(graphql@16.9.0)
-      '@types/ws': 8.5.10
+      '@types/ws': 8.5.11
       graphql: 16.9.0
       graphql-ws: 5.16.0(graphql@16.9.0)
       isomorphic-ws: 5.0.0(ws@8.18.0)
@@ -10611,7 +10546,7 @@ snapshots:
   '@graphql-tools/executor-legacy-ws@1.1.0(graphql@16.9.0)':
     dependencies:
       '@graphql-tools/utils': 10.3.1(graphql@16.9.0)
-      '@types/ws': 8.5.10
+      '@types/ws': 8.5.11
       graphql: 16.9.0
       isomorphic-ws: 5.0.0(ws@8.18.0)
       tslib: 2.6.3
@@ -10779,7 +10714,7 @@ snapshots:
       '@graphql-tools/executor-legacy-ws': 1.1.0(graphql@16.9.0)
       '@graphql-tools/utils': 10.3.1(graphql@16.9.0)
       '@graphql-tools/wrap': 10.0.5(graphql@16.9.0)
-      '@types/ws': 8.5.10
+      '@types/ws': 8.5.11
       '@whatwg-node/fetch': 0.9.18
       graphql: 16.9.0
       isomorphic-ws: 5.0.0(ws@8.18.0)
@@ -11206,7 +11141,7 @@ snapshots:
       lodash.omit: 4.5.0
       tslib: 2.6.3
 
-  '@nestjs/cli@10.4.2(@swc/cli@0.4.0(@swc/core@1.6.13(@swc/helpers@0.5.11))(chokidar@3.6.0))(@swc/core@1.6.13(@swc/helpers@0.5.11))(esbuild@0.19.12)':
+  '@nestjs/cli@10.4.2(@swc/cli@0.4.0(@swc/core@1.6.13(@swc/helpers@0.5.11))(chokidar@3.6.0))(@swc/core@1.6.13(@swc/helpers@0.5.11))':
     dependencies:
       '@angular-devkit/core': 17.3.8(chokidar@3.6.0)
       '@angular-devkit/schematics': 17.3.8(chokidar@3.6.0)
@@ -11216,7 +11151,7 @@ snapshots:
       chokidar: 3.6.0
       cli-table3: 0.6.5
       commander: 4.1.1
-      fork-ts-checker-webpack-plugin: 9.0.2(typescript@5.3.3)(webpack@5.92.1(@swc/core@1.6.13(@swc/helpers@0.5.11))(esbuild@0.19.12))
+      fork-ts-checker-webpack-plugin: 9.0.2(typescript@5.3.3)(webpack@5.92.1(@swc/core@1.6.13(@swc/helpers@0.5.11)))
       glob: 10.4.2
       inquirer: 8.2.6
       node-emoji: 1.11.0
@@ -11225,7 +11160,7 @@ snapshots:
       tsconfig-paths: 4.2.0
       tsconfig-paths-webpack-plugin: 4.1.0
       typescript: 5.3.3
-      webpack: 5.92.1(@swc/core@1.6.13(@swc/helpers@0.5.11))(esbuild@0.19.12)
+      webpack: 5.92.1(@swc/core@1.6.13(@swc/helpers@0.5.11))
       webpack-node-externals: 3.0.0
     optionalDependencies:
       '@swc/cli': 0.4.0(@swc/core@1.6.13(@swc/helpers@0.5.11))(chokidar@3.6.0)
@@ -13385,7 +13320,7 @@ snapshots:
 
   '@types/validator@13.12.0': {}
 
-  '@types/ws@8.5.10':
+  '@types/ws@8.5.11':
     dependencies:
       '@types/node': 20.14.10
 
@@ -14656,14 +14591,6 @@ snapshots:
 
   dotenv@16.4.5: {}
 
-  drizzle-kit@0.22.8:
-    dependencies:
-      '@esbuild-kit/esm-loader': 2.6.5
-      esbuild: 0.19.12
-      esbuild-register: 3.5.0(esbuild@0.19.12)
-    transitivePeerDependencies:
-      - supports-color
-
   drizzle-kit@0.23.0:
     dependencies:
       '@esbuild-kit/esm-loader': 2.6.5
@@ -14673,13 +14600,6 @@ snapshots:
       - supports-color
 
   drizzle-orm@0.31.4(@types/pg@8.11.6)(@types/react@18.3.3)(pg@8.12.0)(react@18.3.1):
-    optionalDependencies:
-      '@types/pg': 8.11.6
-      '@types/react': 18.3.3
-      pg: 8.12.0
-      react: 18.3.1
-
-  drizzle-orm@0.32.0(@types/pg@8.11.6)(@types/react@18.3.3)(pg@8.12.0)(react@18.3.1):
     optionalDependencies:
       '@types/pg': 8.11.6
       '@types/react': 18.3.3
@@ -15305,7 +15225,7 @@ snapshots:
 
   ext-list@2.2.2:
     dependencies:
-      mime-db: 1.52.0
+      mime-db: 1.53.0
 
   ext-name@5.0.0:
     dependencies:
@@ -15467,7 +15387,7 @@ snapshots:
       cross-spawn: 7.0.3
       signal-exit: 4.1.0
 
-  fork-ts-checker-webpack-plugin@9.0.2(typescript@5.3.3)(webpack@5.92.1(@swc/core@1.6.13(@swc/helpers@0.5.11))(esbuild@0.19.12)):
+  fork-ts-checker-webpack-plugin@9.0.2(typescript@5.3.3)(webpack@5.92.1(@swc/core@1.6.13(@swc/helpers@0.5.11))):
     dependencies:
       '@babel/code-frame': 7.24.7
       chalk: 4.1.2
@@ -15482,7 +15402,7 @@ snapshots:
       semver: 7.6.2
       tapable: 2.2.1
       typescript: 5.3.3
-      webpack: 5.92.1(@swc/core@1.6.13(@swc/helpers@0.5.11))(esbuild@0.19.12)
+      webpack: 5.92.1(@swc/core@1.6.13(@swc/helpers@0.5.11))
 
   form-data@4.0.0:
     dependencies:
@@ -17331,6 +17251,8 @@ snapshots:
 
   mime-db@1.52.0: {}
 
+  mime-db@1.53.0: {}
+
   mime-types@2.1.35:
     dependencies:
       mime-db: 1.52.0
@@ -17941,7 +17863,7 @@ snapshots:
       yaml: 2.4.5
     optionalDependencies:
       postcss: 8.4.39
-      ts-node: 10.9.2(@swc/core@1.6.13)(@types/node@20.14.10)(typescript@5.5.3)
+      ts-node: 10.9.2(@swc/core@1.6.13(@swc/helpers@0.5.11))(@types/node@20.14.10)(typescript@5.5.3)
 
   postcss-load-config@4.0.2(postcss@8.4.39)(ts-node@10.9.2(typescript@5.5.3)):
     dependencies:
@@ -17949,7 +17871,7 @@ snapshots:
       yaml: 2.4.5
     optionalDependencies:
       postcss: 8.4.39
-      ts-node: 10.9.2(@swc/core@1.6.13)(@types/node@20.14.10)(typescript@5.5.3)
+      ts-node: 10.9.2(@swc/core@1.6.13(@swc/helpers@0.5.11))(@types/node@20.14.10)(typescript@5.5.3)
 
   postcss-nested@6.0.1(postcss@8.4.39):
     dependencies:
@@ -19151,17 +19073,16 @@ snapshots:
       mkdirp: 3.0.1
       yallist: 5.0.0
 
-  terser-webpack-plugin@5.3.10(@swc/core@1.6.13(@swc/helpers@0.5.11))(esbuild@0.19.12)(webpack@5.92.1(@swc/core@1.6.13(@swc/helpers@0.5.11))(esbuild@0.19.12)):
+  terser-webpack-plugin@5.3.10(@swc/core@1.6.13(@swc/helpers@0.5.11))(webpack@5.92.1(@swc/core@1.6.13(@swc/helpers@0.5.11))):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.25
       jest-worker: 27.5.1
       schema-utils: 3.3.0
       serialize-javascript: 6.0.2
       terser: 5.31.2
-      webpack: 5.92.1(@swc/core@1.6.13(@swc/helpers@0.5.11))(esbuild@0.19.12)
+      webpack: 5.92.1(@swc/core@1.6.13(@swc/helpers@0.5.11))
     optionalDependencies:
       '@swc/core': 1.6.13(@swc/helpers@0.5.11)
-      esbuild: 0.19.12
 
   terser@5.31.2:
     dependencies:
@@ -19243,7 +19164,7 @@ snapshots:
 
   ts-interface-checker@0.1.13: {}
 
-  ts-jest@29.2.2(@babel/core@7.24.8)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.24.8))(esbuild@0.19.12)(jest@29.7.0(@types/node@20.14.10)(ts-node@10.9.2(@swc/core@1.6.13(@swc/helpers@0.5.11))(@types/node@20.14.10)(typescript@5.5.3)))(typescript@5.5.3):
+  ts-jest@29.2.2(@babel/core@7.24.8)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.24.8))(jest@29.7.0(@types/node@20.14.10)(ts-node@10.9.2(@swc/core@1.6.13(@swc/helpers@0.5.11))(@types/node@20.14.10)(typescript@5.5.3)))(typescript@5.5.3):
     dependencies:
       bs-logger: 0.2.6
       ejs: 3.1.10
@@ -19261,9 +19182,8 @@ snapshots:
       '@jest/transform': 29.7.0
       '@jest/types': 29.6.3
       babel-jest: 29.7.0(@babel/core@7.24.8)
-      esbuild: 0.19.12
 
-  ts-loader@9.5.1(typescript@5.5.3)(webpack@5.92.1(@swc/core@1.6.13(@swc/helpers@0.5.11))(esbuild@0.19.12)):
+  ts-loader@9.5.1(typescript@5.5.3)(webpack@5.92.1(@swc/core@1.6.13(@swc/helpers@0.5.11))):
     dependencies:
       chalk: 4.1.2
       enhanced-resolve: 5.17.0
@@ -19271,7 +19191,7 @@ snapshots:
       semver: 7.6.2
       source-map: 0.7.4
       typescript: 5.5.3
-      webpack: 5.92.1(@swc/core@1.6.13(@swc/helpers@0.5.11))(esbuild@0.19.12)
+      webpack: 5.92.1(@swc/core@1.6.13(@swc/helpers@0.5.11))
 
   ts-log@2.2.5: {}
 
@@ -19653,6 +19573,61 @@ snapshots:
       unist-util-stringify-position: 4.0.0
       vfile-message: 4.0.2
 
+  vitnode-backend@0.0.7-canary.5(ln43w5syblduyg5ua6yo3l2c4a):
+    dependencies:
+      '@apollo/server': 4.10.4(graphql@16.9.0)
+      '@nestjs/apollo': 12.2.0(@apollo/server@4.10.4(graphql@16.9.0))(@nestjs/common@10.3.10(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/core@10.3.10(@nestjs/common@10.3.10(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/platform-express@10.3.10)(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/graphql@12.2.0(@nestjs/common@10.3.10(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/core@10.3.10(@nestjs/common@10.3.10(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/platform-express@10.3.10)(reflect-metadata@0.2.2)(rxjs@7.8.1))(class-transformer@0.5.1)(class-validator@0.14.1)(graphql@16.9.0)(reflect-metadata@0.2.2))(graphql@16.9.0)
+      '@nestjs/common': 10.3.10(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1)
+      '@nestjs/config': 3.2.3(@nestjs/common@10.3.10(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))(rxjs@7.8.1)
+      '@nestjs/core': 10.3.10(@nestjs/common@10.3.10(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/platform-express@10.3.10)(reflect-metadata@0.2.2)(rxjs@7.8.1)
+      '@nestjs/graphql': 12.2.0(@nestjs/common@10.3.10(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/core@10.3.10(@nestjs/common@10.3.10(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/platform-express@10.3.10)(reflect-metadata@0.2.2)(rxjs@7.8.1))(class-transformer@0.5.1)(class-validator@0.14.1)(graphql@16.9.0)(reflect-metadata@0.2.2)
+      '@nestjs/jwt': 10.2.0(@nestjs/common@10.3.10(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))
+      '@nestjs/schedule': 4.1.0(@nestjs/common@10.3.10(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/core@10.3.10(@nestjs/common@10.3.10(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/platform-express@10.3.10)(reflect-metadata@0.2.2)(rxjs@7.8.1))
+      '@nestjs/serve-static': 4.0.2(@nestjs/common@10.3.10(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/core@10.3.10(@nestjs/common@10.3.10(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/platform-express@10.3.10)(reflect-metadata@0.2.2)(rxjs@7.8.1))(express@4.19.2)
+      '@nestjs/throttler': 5.2.0(@nestjs/common@10.3.10(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/core@10.3.10(@nestjs/common@10.3.10(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/platform-express@10.3.10)(reflect-metadata@0.2.2)(rxjs@7.8.1))(reflect-metadata@0.2.2)
+      '@react-email/components': 0.0.21(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@react-email/render': 0.0.16(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@swc/cli': 0.4.0(@swc/core@1.6.13(@swc/helpers@0.5.11))(chokidar@3.6.0)
+      '@swc/core': 1.6.13(@swc/helpers@0.5.11)
+      '@types/react': 18.3.3
+      bcrypt: 5.1.1
+      busboy: 1.6.0
+      class-transformer: 0.5.1
+      class-validator: 0.14.1
+      cookie-parser: 1.4.6
+      drizzle-kit: 0.23.0
+      drizzle-orm: 0.31.4(@types/pg@8.11.6)(@types/react@18.3.3)(pg@8.12.0)(react@18.3.1)
+      helmet: 7.1.0
+      http-errors: 2.0.0
+      nodemailer: 6.9.14
+      object-path: 0.11.8
+      pg: 8.12.0
+      react: 18.3.1
+      reflect-metadata: 0.2.2
+      sharp: 0.33.4
+      tar: 7.4.0
+      typescript: 5.5.3
+      ua-parser-js: 2.0.0-beta.3
+      vitnode-shared: 0.0.7-canary.5(typescript@5.5.3)
+    transitivePeerDependencies:
+      - '@fastify/static'
+      - '@nestjs/microservices'
+      - '@nestjs/platform-express'
+      - '@nestjs/websockets'
+      - '@swc/helpers'
+      - chokidar
+      - encoding
+      - express
+      - fastify
+      - graphql
+      - react-dom
+      - rxjs
+      - supports-color
+
+  vitnode-shared@0.0.7-canary.5(typescript@5.5.3):
+    dependencies:
+      typescript: 5.5.3
+
   w3c-keyname@2.2.8: {}
 
   walker@1.0.8:
@@ -19686,7 +19661,7 @@ snapshots:
 
   webpack-sources@3.2.3: {}
 
-  webpack@5.92.1(@swc/core@1.6.13(@swc/helpers@0.5.11))(esbuild@0.19.12):
+  webpack@5.92.1(@swc/core@1.6.13(@swc/helpers@0.5.11)):
     dependencies:
       '@types/eslint-scope': 3.7.7
       '@types/estree': 1.0.5
@@ -19709,7 +19684,7 @@ snapshots:
       neo-async: 2.6.2
       schema-utils: 3.3.0
       tapable: 2.2.1
-      terser-webpack-plugin: 5.3.10(@swc/core@1.6.13(@swc/helpers@0.5.11))(esbuild@0.19.12)(webpack@5.92.1(@swc/core@1.6.13(@swc/helpers@0.5.11))(esbuild@0.19.12))
+      terser-webpack-plugin: 5.3.10(@swc/core@1.6.13(@swc/helpers@0.5.11))(webpack@5.92.1(@swc/core@1.6.13(@swc/helpers@0.5.11)))
       watchpack: 2.4.1
       webpack-sources: 3.2.3
     transitivePeerDependencies:

@@ -11,7 +11,8 @@ export const removeModuleFromRootSchema = ({
 
   return content
     .replace(`\n    ${name}Module,`, '')
-    .replace(`\nimport { ${name}Module } from './${code}/${code}.module';`, '');
+    .replace(`\nimport { ${name}Module } from './${code}/${code}.module';`, '')
+    .replace(`\nimport { ${name}Module } from "./${code}/${code}.module";`, '');
 };
 
 export const removeDatabaseFromService = ({
@@ -28,6 +29,10 @@ export const removeDatabaseFromService = ({
     .replace(
       `\nimport table${name} from '@/plugins/${code}/admin/database/index';`,
       '',
+    )
+    .replace(
+      `\nimport table${name} from "@/plugins/${code}/admin/database/index";`,
+      '',
     );
 };
 
@@ -38,8 +43,7 @@ export const removeLangFromTypes = ({
   code: string;
   content: string;
 }) => {
-  return content.replace(
-    `\n  typeof import('@/plugins/${code}/langs/en.json') &`,
-    '',
-  );
+  return content
+    .replace(`\n  typeof import('@/plugins/${code}/langs/en.json') &`, '')
+    .replace(`\n  typeof import("@/plugins/${code}/langs/en.json") &`, '');
 };

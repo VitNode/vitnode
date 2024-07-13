@@ -1,6 +1,6 @@
 {
   "name": "create-vitnode-app",
-  "version": "0.0.7-canary.3",
+  "version": "0.0.7-canary.7",
   "description": "Create a new VitNode app in seconds.",
   "author": "VitNode Team",
   "license": "MIT",
@@ -32,12 +32,12 @@
   },
   "devDependencies": {
     "@types/figlet": "^1.5.8",
-    "@types/node": "^20.14.10",
+    "@types/node": "^20",
     "@types/prompts": "^2.4.9",
     "@types/validate-npm-package-name": "^4.0.2",
     "commander": "^12.1.0",
     "tsup": "^8.1.0",
-    "typescript": "^5.5.3",
+    "typescript": "^5",
     "eslint-config-typescript-vitnode": "workspace:*"
   }
 }
