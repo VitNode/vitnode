@@ -6,7 +6,7 @@ import { NodePgDatabase } from 'drizzle-orm/node-postgres';
 import coreSchemaDatabase from '../src/plugins/core/admin/database';
 import { migrate } from './helpers/migrate';
 
-export const generateMigrations = async ({
+export const createTablesDatabaseUsingMigrations = async ({
   pluginsPath,
   db,
 }: {

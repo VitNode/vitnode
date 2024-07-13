@@ -6,7 +6,7 @@ import { join } from 'path';
 
 import { copyFiles } from './copy-files';
 import { generateManifest } from './generate-manifest';
-import { generateMigrations } from './generate-migrations';
+import { createTablesDatabaseUsingMigrations } from './create-tables-database-using-migrations';
 import { updatePlugins } from './update-plugins';
 import coreSchemaDatabase from '../src/plugins/core/admin/database';
 import { generateDatabaseMigrations } from './generate-database-migrations';
@@ -74,9 +74,9 @@ const init = async () => {
   console.log(
     '\x1b[34m%s\x1b[0m',
     '[VitNode]',
-    '[5/6] Generating migrations...',
+    '[5/6] Create tables in database using migrations...',
   );
-  await generateMigrations({ pluginsPath, db: database.db });
+  await createTablesDatabaseUsingMigrations({ pluginsPath, db: database.db });
 
   console.log('\x1b[34m%s\x1b[0m', '[VitNode]', '[6/6] Updating plugins...');
   await updatePlugins({ pluginsPath, db: database.db });
