@@ -10,7 +10,8 @@
   "plugins": [
     "@typescript-eslint",
     "typescript-sort-keys",
-    "sort-destructure-keys"
+    "sort-destructure-keys",
+    "import"
   ],
   "extends": [
     "eslint:recommended",
