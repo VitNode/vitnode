@@ -278,7 +278,7 @@ function logError(error) {
       WORKSPACE,
       'packages',
       'frontend',
-      'apps',
+      'app',
     );
     const frontendAppPath = path.join(
       WORKSPACE,
@@ -287,17 +287,25 @@ function logError(error) {
       'app',
       `[locale]`,
     );
-    const pathsToFolders = [join('admin', '(vitnode)')];
+    const pathsToFolders = [
+      join('admin', '(vitnode)'),
+      join('admin', '(auth)', '(vitnode)'),
+      join('(main)', '(vitnode)'),
+    ];
     const pathsToFiles = [
       {
         folder: 'admin',
         file: 'layout.tsx',
       },
+      {
+        folder: '(main)',
+        file: 'page.tsx',
+      },
     ];
 
-    // Create folder for frontendPath
+    // Create folder for apps in frontend package
     if (!fs.existsSync(frontendPackagePath)) {
-      fs.mkdirSync(frontendPackagePath);
+      fs.mkdirSync(frontendPackagePath, { recursive: true });
     }
 
     // Copy folders
