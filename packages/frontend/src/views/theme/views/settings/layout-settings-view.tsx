@@ -1,12 +1,12 @@
 import React from 'react';
 import { useTranslations } from 'next-intl';
+import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 
 import { NavSettings } from './nav/nav-settings';
 import { HeaderContent } from '@/components/ui/header-content';
 import { Card } from '@/components/ui/card';
-import { Metadata } from 'next';
 import { getGlobalData } from '@/graphql/get-global-data';
-import { getTranslations } from 'next-intl/server';
 
 export const generateMetadataLayoutSettings = async (): Promise<Metadata> => {
   const [data, t] = await Promise.all([
