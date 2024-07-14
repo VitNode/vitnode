@@ -10,16 +10,24 @@ const init = () => {
   const frontendPackagePath = join(__dirname, '..', '..', 'folders_to_copy');
   const frontendAppPath = process.cwd();
   const pathsToFolders = [
-    join('app', `[locale]`, 'admin', '(vitnode)'),
-    join('app', `[locale]`, 'admin', '(auth)', '(vitnode)'),
+    join('app', '[locale]', 'admin', '(vitnode)'),
+    join('app', '[locale]', 'admin', '(auth)', '(vitnode)'),
   ];
   const pathsToFoldersOptional = [
-    join('app', `[locale]`, '(main)', '(vitnode)'),
+    join('app', '[locale]', '(main)', '(vitnode)'),
   ];
   const pathsToFiles = [
     {
       folder: join('app', '[locale]', '(main)', '(vitnode)', '[...rest]'),
       file: 'page.tsx',
+    },
+    {
+      folder: 'app',
+      file: 'not-found.tsx',
+    },
+    {
+      folder: join('app', `[locale]`),
+      file: 'layout.tsx',
     },
     {
       folder: join('app', `[locale]`, 'admin'),
@@ -56,6 +64,10 @@ const init = () => {
   // Copy folders if don't exist
   pathsToFoldersOptional.forEach(folder => {
     const appPath = join(frontendAppPath, folder);
+
+    if (!fs.existsSync(appPath)) {
+      fs.mkdirSync(appPath, { recursive: true });
+    }
 
     const files = fs.readdirSync(appPath, { recursive: true });
 
