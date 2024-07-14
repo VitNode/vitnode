@@ -1,4 +1,6 @@
 import { useTranslations } from 'next-intl';
+import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 
 import { FormSignIn } from './form/form-sign-in';
 import {
@@ -8,6 +10,14 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Link } from '@/navigation';
+
+export const generateMetadataSignIn = async (): Promise<Metadata> => {
+  const t = await getTranslations('core.sign_in');
+
+  return {
+    title: t('title'),
+  };
+};
 
 export const SignInView = () => {
   const t = useTranslations('core.sign_in');

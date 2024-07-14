@@ -1,5 +1,6 @@
 import React from 'react';
 import { getTranslations } from 'next-intl/server';
+import { Metadata } from 'next';
 
 import { TableNavAdmin } from './table/table';
 import { ActionsNavAdmin } from './actions/actions';
@@ -24,6 +25,14 @@ const getData = async () => {
   });
 
   return data;
+};
+
+export const generateMetadataNavAdmin = async (): Promise<Metadata> => {
+  const t = await getTranslations('admin.core.styles.nav');
+
+  return {
+    title: t('title'),
+  };
 };
 
 export const NavAdminView = async () => {

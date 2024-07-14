@@ -1,3 +1,5 @@
+import { Metadata } from 'next';
+
 import { ContentInstallConfigsView } from './content/content';
 import {
   Admin__Install__Layout,
@@ -20,6 +22,12 @@ const getData = async () => {
   });
 
   return data;
+};
+
+export const generateMetadataInstallConfigs = (): Metadata => {
+  return {
+    title: 'Install',
+  };
 };
 
 export const InstallConfigsView = async () => {
