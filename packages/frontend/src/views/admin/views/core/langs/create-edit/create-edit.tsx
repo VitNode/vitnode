@@ -23,11 +23,7 @@ import { Input } from '@/components/ui/input';
 import { Switch } from '@/components/ui/switch';
 import { Button } from '@/components/ui/button';
 
-interface Props {
-  data?: ShowCoreLanguages;
-}
-
-export const CreateEditLangAdmin = ({ data }: Props) => {
+export const CreateEditLangAdmin = ({ data }: { data?: ShowCoreLanguages }) => {
   const t = useTranslations('admin.core.langs.actions');
   const { form, onSubmit } = useCreateEditLangAdmin({ data });
 

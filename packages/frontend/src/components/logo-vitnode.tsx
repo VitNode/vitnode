@@ -1,11 +1,12 @@
 import { cn } from '../helpers/classnames';
 
-interface Props {
+export const LogoVitNode = ({
+  className,
+  shrink,
+}: {
   className?: string;
   shrink?: boolean;
-}
-
-export const LogoVitNode = ({ className, shrink }: Props) => {
+}) => {
   if (shrink)
     return (
       <svg

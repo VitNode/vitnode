@@ -11,12 +11,13 @@ import { ShowAdminGroups } from '../../graphql/graphql';
 import { usePermissionsGroupsAdminAPI } from '../../utils/components/permissions-table/use-permissions-table-api';
 import { useTextLang } from '../../hooks/use-text-lang';
 
-interface Props {
+export const PermissionsTable = ({
+  field,
+  permissions,
+}: {
   field: ControllerRenderProps<FieldValues, 'permissions'>;
   permissions: { id: string; title: string; disableForGuest?: boolean }[];
-}
-
-export const PermissionsTable = ({ field, permissions }: Props) => {
+}) => {
   const [searchValue, setSearchValue] = React.useState('');
   const { convertText } = useTextLang();
   const { data, isError, isLoading } = usePermissionsGroupsAdminAPI({

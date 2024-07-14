@@ -16,12 +16,13 @@ import { Input } from '@/components/ui/input';
 import { cn } from '@/helpers/classnames';
 import { Loader } from '@/components/ui/loader';
 
-interface Props {
+export const GroupInputContent = ({
+  onSelect,
+  values,
+}: {
   onSelect: (value: GroupInputItem) => void;
   values: GroupInputItem[];
-}
-
-export const GroupInputContent = ({ onSelect, values }: Props) => {
+}) => {
   const t = useTranslations('core');
   const [search, setSearch] = React.useState('');
 

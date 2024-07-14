@@ -7,11 +7,11 @@ import { useTranslations } from 'next-intl';
 import { ItemQuickMenu } from './item';
 import { usePathname, useRouter } from '@/navigation';
 
-interface Props {
+export const QuickMenuWrapper = ({
+  children,
+}: {
   children: React.ReactNode;
-}
-
-export const QuickMenuWrapper = ({ children }: Props) => {
+}) => {
   const t = useTranslations('core.mobile_nav');
   const pathname = usePathname();
   const { back } = useRouter();

@@ -1,13 +1,7 @@
 'use client';
 
-import Error from 'next/error';
+import { NotFoundView } from 'vitnode-frontend/views/theme/views/not-found';
 
 export default function NotFound() {
-  return (
-    <html lang="en" suppressHydrationWarning>
-      <body>
-        <Error statusCode={404} />
-      </body>
-    </html>
-  );
+  return <NotFoundView />;
 }

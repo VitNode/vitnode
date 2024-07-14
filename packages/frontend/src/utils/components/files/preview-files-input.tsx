@@ -1,11 +1,12 @@
 import { ItemPreviewFilesInput } from './item-preview-files-input';
 
-interface Props {
+export const PreviewFilesInput = ({
+  onChange,
+  value,
+}: {
   onChange: (e: File[]) => void;
   value: File[] | undefined;
-}
-
-export const PreviewFilesInput = ({ onChange, value }: Props) => {
+}) => {
   if (!value || value.length === 0) return null;
 
   return (

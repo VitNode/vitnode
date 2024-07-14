@@ -3,12 +3,13 @@
 import { Admin__Sessions__AuthorizationQuery } from '../../../graphql/graphql';
 import { SessionAdminContext } from '../../../hooks/use-session-admin';
 
-interface Props {
+export const AdminProviders = ({
+  children,
+  data,
+}: {
   children: React.ReactNode;
   data: Admin__Sessions__AuthorizationQuery;
-}
-
-export const AdminProviders = ({ children, data }: Props) => {
+}) => {
   return (
     <SessionAdminContext.Provider
       value={{

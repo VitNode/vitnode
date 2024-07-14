@@ -1,4 +1,5 @@
 import { getTranslations } from 'next-intl/server';
+import { Metadata } from 'next';
 
 import { ContentCaptchaSecurityAdmin } from './content';
 import { HeaderContent } from '@/components/ui/header-content';
@@ -17,6 +18,15 @@ const getData = async () => {
 
   return data;
 };
+
+export const generateMetadataCaptchaSecurityAdmin =
+  async (): Promise<Metadata> => {
+    const t = await getTranslations('admin.core.settings.security.captcha');
+
+    return {
+      title: t('title'),
+    };
+  };
 
 export const CaptchaSecurityAdminView = async () => {
   const [t, data] = await Promise.all([

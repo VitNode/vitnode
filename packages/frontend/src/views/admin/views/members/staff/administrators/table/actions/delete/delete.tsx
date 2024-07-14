@@ -17,11 +17,9 @@ const ContentDeleteActionsTableAdministratorsStaffAdmin = React.lazy(async () =>
   })),
 );
 
-interface Props {
+export const DeleteActionsTableAdministratorsStaffAdmin = (props: {
   data: Pick<ShowAdminStaffAdministrators, 'id'>;
-}
-
-export const DeleteActionsTableAdministratorsStaffAdmin = (props: Props) => {
+}) => {
   const t = useTranslations('core');
 
   return (

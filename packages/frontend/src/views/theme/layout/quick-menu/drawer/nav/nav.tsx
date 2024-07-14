@@ -10,11 +10,11 @@ import { cn } from '@/helpers/classnames';
 import { buttonVariants } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 
-interface Props {
+export const NavDrawerQuickMenu = ({
+  navIcons,
+}: {
   navIcons: { icon: React.ReactNode; id: number }[];
-}
-
-export const NavDrawerQuickMenu = ({ navIcons }: Props) => {
+}) => {
   const { nav, session } = useSession();
   const [activeItems, setActiveItems] = React.useState<string[]>([]);
   const { convertText } = useTextLang();

@@ -4,16 +4,6 @@ import React from 'react';
 import { Button } from '../../components/ui/button';
 import { cn } from '../../helpers/classnames';
 
-interface Props {
-  children: React.ReactNode;
-  name: string;
-  active?: boolean;
-  className?: string;
-  disabled?: boolean;
-  onClick?: () => void;
-  style?: React.CSSProperties;
-}
-
 export const ButtonToolbarEditor = ({
   active,
   children,
@@ -22,7 +12,15 @@ export const ButtonToolbarEditor = ({
   onClick,
   className,
   ...rest
-}: Props) => {
+}: {
+  children: React.ReactNode;
+  name: string;
+  active?: boolean;
+  className?: string;
+  disabled?: boolean;
+  onClick?: () => void;
+  style?: React.CSSProperties;
+}) => {
   const t = useTranslations('core.editor');
 
   return (

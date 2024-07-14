@@ -16,12 +16,10 @@ import { Input } from '@/components/ui/input';
 import { cn } from '@/helpers/classnames';
 import { Loader } from '@/components/ui/loader';
 
-interface Props {
+export const UserInputContent = (props: {
   onSelect: (value: UserInputItem) => void;
   values: UserInputItem[];
-}
-
-export const UserInputContent = (props: Props) => {
+}) => {
   const t = useTranslations('core');
   const [search, setSearch] = React.useState('');
 

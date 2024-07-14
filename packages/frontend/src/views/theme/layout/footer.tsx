@@ -2,11 +2,7 @@ import { getSessionData } from '../../../graphql/get-session-data';
 import { getTextLang } from '../../../hooks/use-text-lang';
 import { PoweredByVitNode } from '../../global';
 
-interface Props {
-  locale: string;
-}
-
-export const Footer = async ({ locale }: Props) => {
+export const Footer = async ({ locale }: { locale: string }) => {
   const { convertText } = getTextLang({ locale });
   const {
     core_settings__show: { site_copyright },

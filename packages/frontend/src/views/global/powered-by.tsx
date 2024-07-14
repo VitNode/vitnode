@@ -7,11 +7,7 @@
  * ! Thank you for your support!
  */
 
-interface Props {
-  className?: string;
-}
-
-export const PoweredByVitNode = ({ className }: Props) => {
+export const PoweredByVitNode = ({ className }: { className?: string }) => {
   return (
     <a
       className={className}

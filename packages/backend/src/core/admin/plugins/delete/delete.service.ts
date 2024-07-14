@@ -78,7 +78,7 @@ export class DeleteAdminPluginsService {
     const modulePath = ABSOLUTE_PATHS_BACKEND.plugin({ code }).root;
     this.deleteFolderWhenExists(modulePath);
     // Frontend
-    const frontendPaths = ['admin_pages', 'pages', 'plugin', 'pages_container'];
+    const frontendPaths = ['admin_pages', 'pages', 'plugin'];
     frontendPaths.forEach(path => {
       this.deleteFolderWhenExists(
         ABSOLUTE_PATHS_BACKEND.plugin({ code }).frontend[path],

@@ -1,4 +1,5 @@
 import { getTranslations } from 'next-intl/server';
+import { Metadata } from 'next';
 
 import { ActionsPluginsAdmin } from './actions/actions';
 import { ContentPluginsCoreAdminView } from './content';
@@ -33,6 +34,14 @@ const getData = async (variables: Admin__Core_Plugins__ShowQueryVariables) => {
   });
 
   return data;
+};
+
+export const generateMetadataPluginsAdmin = async (): Promise<Metadata> => {
+  const t = await getTranslations('admin.core.plugins');
+
+  return {
+    title: t('title'),
+  };
 };
 
 export const PluginsAdminView = async ({

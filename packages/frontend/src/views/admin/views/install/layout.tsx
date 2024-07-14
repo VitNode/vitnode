@@ -6,11 +6,11 @@ import { Card } from '@/components/ui/card';
 
 import { PoweredByVitNode } from '../../../global';
 
-interface Props {
+export const InstallConfigLayout = ({
+  children,
+}: {
   children: React.ReactNode;
-}
-
-export const InstallConfigLayout = ({ children }: Props) => {
+}) => {
   const t = useTranslations('admin.configs');
 
   return (

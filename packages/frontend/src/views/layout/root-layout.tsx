@@ -16,7 +16,7 @@ export interface RootLayoutProps {
   className?: string;
 }
 
-export const generateMetadataForRootLayout = async ({
+export const generateMetadataRootLayout = async ({
   params: { locale },
 }: RootLayoutProps): Promise<Metadata> => {
   const metadata: Metadata = {
@@ -28,14 +28,14 @@ export const generateMetadataForRootLayout = async ({
 
   try {
     const {
-      core_settings__show: { site_name },
+      core_settings__show: { site_name, site_short_name },
     } = await getGlobalData();
 
     return {
       ...metadata,
       title: {
         default: site_name,
-        template: `%s - ${site_name}`,
+        template: `%s - ${site_short_name}`,
       },
     };
   } catch (e) {

@@ -1,4 +1,5 @@
 import { getTranslations } from 'next-intl/server';
+import { Metadata } from 'next';
 
 import { ActionsEmailSettingsAdmin } from './actions/actions';
 import { ContentEmailSettingsAdmin } from './content';
@@ -21,6 +22,15 @@ const getData = async () => {
 
   return data;
 };
+
+export const generateMetadataEmailSettingsAdmin =
+  async (): Promise<Metadata> => {
+    const t = await getTranslations('core.admin.nav');
+
+    return {
+      title: t('settings_email'),
+    };
+  };
 
 export const EmailSettingsAdminView = async () => {
   const [t, data] = await Promise.all([

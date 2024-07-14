@@ -1,5 +1,5 @@
 {
   "title": "ui",
   "root": true,
-  "pages": ["---Guide---", "index", "..."]
+  "pages": ["---Introduction ---", "index", "theme", "---Components---", "..."]
 }

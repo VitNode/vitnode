@@ -52,7 +52,7 @@ export default defineConfig({
 
 export const createDefaultPage = ({ code }: { code: string }) => {
   return `export default function DefaultPage() {
-  return <div className="container">Default Page for ${code}</div>;
+  return <div className="container my-4">Default Page for ${code}</div>;
 }
 `;
 };

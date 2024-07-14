@@ -19,15 +19,13 @@ const skinToneEmoji = [
   '20.53deg 25.68% 29.02%',
 ];
 
-interface Props {
-  setSkinToneIndex: (value: number) => void;
-  skinToneIndex: number;
-}
-
 export const SkinSelectEmojisContentIconInput = ({
   setSkinToneIndex,
   skinToneIndex,
-}: Props) => {
+}: {
+  setSkinToneIndex: (value: number) => void;
+  skinToneIndex: number;
+}) => {
   const t = useTranslations('core.editor.emoji');
 
   return (

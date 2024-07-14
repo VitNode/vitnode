@@ -9,15 +9,15 @@ import { cn } from '../../helpers/classnames';
 
 // import { Calendar } from "./ui/calendar";
 
-interface Props {
+export const CalendarPicker = ({
+  selected,
+}: {
   onSelect?: SelectRangeEventHandler;
   selected?: {
     from: Date;
     to: Date;
   };
-}
-
-export const CalendarPicker = ({ selected }: Props) => {
+}) => {
   return (
     <Popover>
       <PopoverTrigger asChild>

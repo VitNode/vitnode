@@ -20,6 +20,7 @@ const getData = async () => {
   return data;
 };
 
+// TODO: Add this into the theme editor view
 export const ThemeEditorView = async () => {
   const [data, session] = await Promise.all([getData(), getSessionData()]);
 

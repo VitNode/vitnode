@@ -6,12 +6,13 @@ import { ShowCoreNav } from '@/graphql/graphql';
 import { FlatTree } from '@/helpers/flatten-tree';
 import { useTextLang } from '@/hooks/use-text-lang';
 
-interface Props {
+export const ItemContentTableContentNavAdmin = ({
+  data,
+  icon,
+}: {
   data: FlatTree<Omit<ShowCoreNav, '__typename'>>;
   icon: React.ReactNode | null;
-}
-
-export const ItemContentTableContentNavAdmin = ({ data, icon }: Props) => {
+}) => {
   const t = useTranslations('admin.core.styles.nav');
   const { convertText } = useTextLang();
 

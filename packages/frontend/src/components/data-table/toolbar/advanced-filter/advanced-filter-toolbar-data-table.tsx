@@ -12,11 +12,11 @@ import {
 import { Button } from '../../../ui/button';
 import { Loader } from '../../../ui/loader';
 
-interface Props {
+export const AdvancedFilterToolbarDataTable = ({
+  children,
+}: {
   children: React.ReactNode;
-}
-
-export const AdvancedFilterToolbarDataTable = ({ children }: Props) => {
+}) => {
   const t = useTranslations('core');
 
   return (

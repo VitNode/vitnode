@@ -17,12 +17,13 @@ export enum ThemeEditorViewEnum {
   Mobile = 'mobile',
 }
 
-interface Props {
+export const ToolbarThemeEditor = ({
+  activeMode,
+  setActiveMode,
+}: {
   activeMode: ThemeEditorViewEnum;
   setActiveMode: (mode: ThemeEditorViewEnum) => void;
-}
-
-export const ToolbarThemeEditor = ({ activeMode, setActiveMode }: Props) => {
+}) => {
   const t = useTranslations('core');
   const { resolvedTheme, setTheme, theme } = useTheme();
   const activeTheme = resolvedTheme ?? theme ?? 'light';

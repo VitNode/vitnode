@@ -17,11 +17,11 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 
-interface Props {
+export const ContentInstallConfigsView = ({
+  data,
+}: {
   data: LayoutAdminInstallEnum;
-}
-
-export const ContentInstallConfigsView = ({ data }: Props) => {
+}) => {
   const [currentStep, setCurrentStep] = React.useState(0);
 
   const items: ItemStepProps[] = [

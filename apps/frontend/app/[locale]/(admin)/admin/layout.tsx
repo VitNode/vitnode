@@ -1,0 +1,10 @@
+import React from 'react';
+import 'vitnode-frontend/admin/css';
+
+export default async function Layout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return children;
+}

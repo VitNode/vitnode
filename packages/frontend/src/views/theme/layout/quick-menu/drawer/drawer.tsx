@@ -1,5 +1,5 @@
 import { useTranslations } from 'next-intl';
-import { KeyRound, LogOut, Settings, Shield, User } from 'lucide-react';
+import { KeyRound, LogOut, Settings, User } from 'lucide-react';
 import React from 'react';
 
 import { HeaderDrawerQuickMenu } from './header';
@@ -15,11 +15,11 @@ import { Separator } from '@/components/ui/separator';
 export const classNameDrawerQuickMenu =
   'w-full justify-start [&>svg]:text-muted-foreground font-normal';
 
-interface Props {
+export const DrawerQuickMenu = ({
+  navIcons,
+}: {
   navIcons: { icon: React.ReactNode; id: number }[];
-}
-
-export const DrawerQuickMenu = ({ navIcons }: Props) => {
+}) => {
   const t = useTranslations('core');
   const { onSubmit } = useSignOutApi();
   const { session } = useSession();
@@ -68,23 +68,6 @@ export const DrawerQuickMenu = ({ navIcons }: Props) => {
 
       {session && (
         <div className="flex flex-col px-2 pb-5">
-          {session.is_mod && (
-            <DrawerClose asChild>
-              <Link
-                href="/mod"
-                className={cn(
-                  buttonVariants({
-                    variant: 'ghost',
-                    className: classNameDrawerQuickMenu,
-                  }),
-                )}
-              >
-                <Shield />
-                <span>{t('user-bar.mod_cp')}</span>
-              </Link>
-            </DrawerClose>
-          )}
-
           {session.is_admin && (
             <DrawerClose asChild>
               <Button

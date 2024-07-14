@@ -81,14 +81,6 @@ export const ABSOLUTE_PATHS_BACKEND = {
         code,
       ),
       admin_templates: join(internalPaths.frontend, 'plugins', code, 'admin'),
-      pages_container: join(
-        internalPaths.frontend,
-        'app',
-        '[locale]',
-        '(main)',
-        '(container)',
-        code,
-      ),
       default_page: join(
         internalPaths.frontend,
         'plugins',
@@ -175,7 +167,7 @@ export class VitNodeCoreModule {
         ThrottlerModule.forRoot([
           {
             ttl: 1000,
-            limit: 20,
+            limit: 30,
           },
         ]),
         GraphQLModule.forRoot<ApolloDriverConfig>({

@@ -42,14 +42,6 @@
       "default": "./dist/src/views/admin/views/*.js"
     },
     "./admin/css": "./src/global.css",
-    "./theme-tsx/*": {
-      "types": "./dist/src/views/theme/views/*.tsx",
-      "default": "./dist/src/views/theme/views/*.js"
-    },
-    "./theme-ts/*": {
-      "types": "./dist/src/views/theme/views/*.ts",
-      "default": "./dist/src/views/theme/views/*.js"
-    },
     "./components/*": {
       "types": "./dist/src/components/*.tsx",
       "default": "./dist/src/components/*.js"

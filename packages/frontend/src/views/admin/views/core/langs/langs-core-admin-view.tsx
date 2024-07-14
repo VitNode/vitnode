@@ -1,4 +1,5 @@
 import { getTranslations } from 'next-intl/server';
+import { Metadata } from 'next';
 
 import { ActionsLangsAdmin } from './actions/actions';
 import { ContentLangsCoreAdminView } from './content';
@@ -38,6 +39,14 @@ export interface LangsCoreAdminViewProps {
   };
   searchParams: SearchParamsPagination;
 }
+
+export const generateMetadataLangsCoreAdmin = async (): Promise<Metadata> => {
+  const t = await getTranslations('admin.core.langs');
+
+  return {
+    title: t('title'),
+  };
+};
 
 export const LangsCoreAdminView = async ({
   searchParams,

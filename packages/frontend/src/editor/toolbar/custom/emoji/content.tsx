@@ -8,11 +8,11 @@ import { EmojisContentIconInput } from '@/components/icon/input/content/emojis/e
 
 import { useEditorState } from '../../../hooks/use-editor-state';
 
-interface Props {
+export const ContentEmojiToolbarEditor = ({
+  setIsOpen,
+}: {
   setIsOpen?: (open: boolean) => void;
-}
-
-export const ContentEmojiToolbarEditor = ({ setIsOpen }: Props) => {
+}) => {
   const t = useTranslations('core.icon_picker');
   const { editor } = useEditorState();
   const [search, setSearch] = React.useState('');

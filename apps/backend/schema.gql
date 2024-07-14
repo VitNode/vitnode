@@ -134,7 +134,6 @@ type FilesAdminPluginsObj {
   databases: Int!
   default_page: Boolean!
   pages: Int!
-  pages_container: Int!
   templates: Int!
 }
 
