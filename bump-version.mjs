@@ -274,29 +274,49 @@ function logError(error) {
     await runInWorkspace('git', ['push', remoteRepo]);
 
     // Copy frontend files from app dir
-    const frontendPath = path.join(WORKSPACE, 'packages', 'frontend', 'apps');
-    const appPath = path.join(WORKSPACE, 'apps', 'frontend', 'app', `[locale]`);
-    const pathsToFolders = [join(appPath, 'admin', '(vitnode)')];
+    const frontendPackagePath = path.join(
+      WORKSPACE,
+      'packages',
+      'frontend',
+      'apps',
+    );
+    const frontendAppPath = path.join(
+      WORKSPACE,
+      'apps',
+      'frontend',
+      'app',
+      `[locale]`,
+    );
+    const pathsToFolders = [join('admin', '(vitnode)')];
     const pathsToFiles = [
       {
-        folder: join(appPath, 'admin'),
+        folder: 'admin',
         file: 'layout.tsx',
       },
     ];
 
     // Create folder for frontendPath
-    if (!fs.existsSync(frontendPath)) {
-      fs.mkdirSync(frontendPath);
+    if (!fs.existsSync(frontendPackagePath)) {
+      fs.mkdirSync(frontendPackagePath);
     }
 
     // Copy folders
     pathsToFolders.forEach(folder => {
-      fs.cpSync(folder, frontendPath, { recursive: true });
+      const appPath = join(frontendAppPath, folder);
+      const packagePath = join(frontendPackagePath, folder);
+      if (!fs.existsSync(packagePath)) {
+        fs.mkdirSync(packagePath, { recursive: true });
+      }
+
+      fs.cpSync(appPath, packagePath, { recursive: true });
     });
 
     // Copy files
     pathsToFiles.forEach(file => {
-      fs.cpSync(join(file.folder, file.file), join(frontendPath, file.file), {
+      const appPath = join(frontendAppPath, file.folder, file.file);
+      const packagePath = join(frontendPackagePath, file.folder, file.file);
+
+      fs.cpSync(appPath, packagePath, {
         recursive: true,
       });
     });
