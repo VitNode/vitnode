@@ -280,17 +280,14 @@ function logError(error) {
       'frontend',
       'app',
     );
-    const frontendAppPath = path.join(
-      WORKSPACE,
-      'apps',
-      'frontend',
-      'app',
-      `[locale]`,
-    );
+    const frontendAppPath = path.join(WORKSPACE, 'apps', 'frontend');
+    const pathsToFoldersForce = [
+      join('app', `[locale]`, 'admin', '(vitnode)'),
+      join('app', `[locale]`, 'admin', '(auth)', '(vitnode)'),
+    ];
     const pathsToFolders = [
-      join('admin', '(vitnode)'),
-      join('admin', '(auth)', '(vitnode)'),
-      join('(main)', '(vitnode)'),
+      join('app', `[locale]`, '(main)', '(vitnode)'),
+      'plugins',
     ];
     const pathsToFiles = [
       {
@@ -301,6 +298,10 @@ function logError(error) {
         folder: '(main)',
         file: 'page.tsx',
       },
+      {
+        folder: join('plugins', 'core', 'langs'),
+        file: 'en.json',
+      },
     ];
 
     // Create folder for apps in frontend package
@@ -308,8 +309,8 @@ function logError(error) {
       fs.mkdirSync(frontendPackagePath, { recursive: true });
     }
 
-    // Copy folders
-    pathsToFolders.forEach(folder => {
+    // Copy folders with force
+    pathsToFoldersForce.forEach(folder => {
       const appPath = join(frontendAppPath, folder);
       const packagePath = join(frontendPackagePath, folder);
       if (!fs.existsSync(packagePath)) {
@@ -317,6 +318,21 @@ function logError(error) {
       }
 
       fs.cpSync(appPath, packagePath, { recursive: true });
+    });
+
+    // Copy files without overwriting
+    // Check every file if it exists in the frontend package
+    pathsToFolders.forEach(folder => {
+      const appPath = join(frontendAppPath, folder);
+      const packagePath = join(frontendPackagePath, folder);
+
+      fs.readdirSync(appPath).forEach(file => {
+        if (!fs.existsSync(join(packagePath, file))) {
+          fs.cpSync(join(appPath, file), join(packagePath, file), {
+            recursive: true,
+          });
+        }
+      });
     });
 
     // Copy files
