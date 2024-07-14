@@ -11,7 +11,7 @@ export async function generateMetadata(): Promise<Metadata> {
     getTranslations('admin'),
   ]);
 
-  const defaultTitle = `${t('title_short')} - ${data.core_settings__show.site_name}`;
+  const defaultTitle = `${t('title_short')} - ${data.core_settings__show.site_short_name}`;
 
   return {
     title: {

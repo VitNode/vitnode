@@ -1,5 +1,5 @@
 import React from 'react';
-import { OverviewSettingsView } from 'vitnode-frontend/theme-tsx/settings/views/overview/overview-settings-view';
+import { OverviewSettingsView } from 'vitnode-frontend/views/theme/views/settings/views/overview/overview-settings-view';
 
 export default function Page() {
   return <OverviewSettingsView />;

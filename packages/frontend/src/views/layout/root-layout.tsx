@@ -28,14 +28,14 @@ export const generateMetadataRootLayout = async ({
 
   try {
     const {
-      core_settings__show: { site_name },
+      core_settings__show: { site_name, site_short_name },
     } = await getGlobalData();
 
     return {
       ...metadata,
       title: {
         default: site_name,
-        template: `%s - ${site_name}`,
+        template: `%s - ${site_short_name}`,
       },
     };
   } catch (e) {

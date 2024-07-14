@@ -1,5 +1,6 @@
 import React from 'react';
 import { getTranslations } from 'next-intl/server';
+import { Metadata } from 'next';
 
 import { fetcher } from '@/graphql/fetcher';
 import {
@@ -37,6 +38,15 @@ const ContentFilesSettings = React.lazy(async () =>
 export interface FilesSettingsViewProps {
   searchParams: SearchParamsPagination;
 }
+
+export const generateMetadataFilesSettings = async (): Promise<Metadata> => {
+  const t = await getTranslations('core.settings.files');
+
+  return {
+    title: t('title'),
+    description: t('desc'),
+  };
+};
 
 export const FilesSettingsView = async ({
   searchParams,

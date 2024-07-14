@@ -1,5 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 import { cookies } from 'next/headers';
+import { Metadata } from 'next';
 
 import { ContentDevicesSettings } from './content';
 import {
@@ -19,6 +20,15 @@ const getData = async () => {
   });
 
   return data;
+};
+
+export const generateMetadataDevicesSettings = async (): Promise<Metadata> => {
+  const t = await getTranslations('core.settings.devices');
+
+  return {
+    title: t('title'),
+    description: t('desc'),
+  };
 };
 
 export const DevicesSettingsView = async () => {

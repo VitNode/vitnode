@@ -1,8 +1,8 @@
 import React from 'react';
 import {
-  LayoutSettingsView,
   generateMetadataLayoutSettings,
-} from 'vitnode-frontend/theme-tsx/settings/layout-settings-view';
+  LayoutSettingsView,
+} from 'vitnode-frontend/views/theme/views/settings/layout-settings-view';
 
 export const generateMetadata = generateMetadataLayoutSettings;
 
