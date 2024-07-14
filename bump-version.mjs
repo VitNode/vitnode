@@ -278,24 +278,29 @@ function logError(error) {
       WORKSPACE,
       'packages',
       'frontend',
-      'app',
+      'folders_to_copy',
     );
     const frontendAppPath = path.join(WORKSPACE, 'apps', 'frontend');
     const pathsToFoldersForce = [
-      join('app', `[locale]`, 'admin', '(vitnode)'),
-      join('app', `[locale]`, 'admin', '(auth)', '(vitnode)'),
-    ];
-    const pathsToFolders = [
-      join('app', `[locale]`, '(main)', '(vitnode)'),
-      'plugins',
+      join('app', '[locale]', 'admin', '(vitnode)'),
+      join('app', '[locale]', 'admin', '(auth)', '(vitnode)'),
+      join('app', '[locale]', '(main)', '(vitnode)'),
     ];
     const pathsToFiles = [
       {
-        folder: 'admin',
+        folder: 'app',
+        file: 'not-found.tsx',
+      },
+      {
+        folder: join('app', `[locale]`),
         file: 'layout.tsx',
       },
       {
-        folder: '(main)',
+        folder: join('app', `[locale]`, 'admin'),
+        file: 'layout.tsx',
+      },
+      {
+        folder: join('app', `[locale]`, '(main)'),
         file: 'page.tsx',
       },
       {
@@ -309,7 +314,7 @@ function logError(error) {
       fs.mkdirSync(frontendPackagePath, { recursive: true });
     }
 
-    // Copy folders with force
+    // Copy folders
     pathsToFoldersForce.forEach(folder => {
       const appPath = join(frontendAppPath, folder);
       const packagePath = join(frontendPackagePath, folder);
@@ -318,21 +323,6 @@ function logError(error) {
       }
 
       fs.cpSync(appPath, packagePath, { recursive: true });
-    });
-
-    // Copy files without overwriting
-    // Check every file if it exists in the frontend package
-    pathsToFolders.forEach(folder => {
-      const appPath = join(frontendAppPath, folder);
-      const packagePath = join(frontendPackagePath, folder);
-
-      fs.readdirSync(appPath).forEach(file => {
-        if (!fs.existsSync(join(packagePath, file))) {
-          fs.cpSync(join(appPath, file), join(packagePath, file), {
-            recursive: true,
-          });
-        }
-      });
     });
 
     // Copy files

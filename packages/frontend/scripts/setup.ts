@@ -4,24 +4,34 @@
 import { join } from 'path';
 import * as fs from 'fs';
 
-const init = async () => {
+const init = () => {
   const initConsole = '\x1b[34m[VitNode]\x1b[0m \x1b[33m[Frontend]\x1b[0m';
   // Copy frontend files from app dir
-  const frontendPackagePath = join(__dirname, '..', '..', 'app');
-  const frontendAppPath = join(process.cwd(), 'app', `[locale]`);
+  const frontendPackagePath = join(__dirname, '..', '..', 'folders_to_copy');
+  const frontendAppPath = process.cwd();
   const pathsToFolders = [
-    join('admin', '(vitnode)'),
-    join('admin', '(auth)', '(vitnode)'),
-    join('(main)', '(vitnode)'),
+    join('app', `[locale]`, 'admin', '(vitnode)'),
+    join('app', `[locale]`, 'admin', '(auth)', '(vitnode)'),
+  ];
+  const pathsToFoldersOptional = [
+    join('app', `[locale]`, '(main)', '(vitnode)'),
   ];
   const pathsToFiles = [
     {
-      folder: 'admin',
+      folder: join('app', '[locale]', '(main)', '(vitnode)', '[...rest]'),
+      file: 'page.tsx',
+    },
+    {
+      folder: join('app', `[locale]`, 'admin'),
       file: 'layout.tsx',
     },
     {
-      folder: '(main)',
+      folder: join('app', `[locale]`, '(main)'),
       file: 'page.tsx',
+    },
+    {
+      folder: join('plugins', 'core', 'langs'),
+      file: 'en.json',
     },
   ];
 
@@ -41,6 +51,27 @@ const init = async () => {
     }
 
     fs.cpSync(packagePath, appPath, { recursive: true });
+  });
+
+  // Copy folders if don't exist
+  pathsToFoldersOptional.forEach(folder => {
+    const appPath = join(frontendAppPath, folder);
+
+    const files = fs.readdirSync(appPath, { recursive: true });
+
+    // Check every file if it exists in the frontend package
+    files
+      .filter(el => typeof el === 'string')
+      .forEach(file => {
+        const appFilePath = join(appPath, file);
+        const packageFilePath = join(frontendPackagePath, folder, file);
+
+        if (!fs.existsSync(packageFilePath)) {
+          fs.cpSync(appFilePath, packageFilePath, {
+            recursive: true,
+          });
+        }
+      });
   });
 
   pathsToFiles.forEach(file => {
