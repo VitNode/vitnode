@@ -277,7 +277,12 @@ function logError(error) {
     const frontendPath = path.join(WORKSPACE, 'packages', 'frontend', 'apps');
     const appPath = path.join(WORKSPACE, 'apps', 'frontend', 'app', `[locale]`);
     const pathsToFolders = [join(appPath, 'admin', '(vitnode)')];
-    const pathsToFiles = [join(appPath, 'admin', 'layout.tsx')];
+    const pathsToFiles = [
+      {
+        folder: join(appPath, 'admin'),
+        file: 'layout.tsx',
+      },
+    ];
 
     // Create folder for frontendPath
     if (!fs.existsSync(frontendPath)) {
@@ -291,7 +296,9 @@ function logError(error) {
 
     // Copy files
     pathsToFiles.forEach(file => {
-      fs.copyFileSync(file, join(frontendPath, 'admin', 'layout.tsx'));
+      fs.cpSync(join(file.folder, file.file), join(frontendPath, file.file), {
+        recursive: true,
+      });
     });
 
     exitSuccess('Version bumped!');
