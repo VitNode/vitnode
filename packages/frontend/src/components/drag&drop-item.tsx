@@ -6,19 +6,6 @@ import React from 'react';
 import { cn } from '../helpers/classnames';
 import { Button } from './ui/button';
 
-interface Props {
-  active: boolean;
-  children: React.ReactNode;
-  id: number | string;
-  isDropHere: boolean;
-  onCollapse: () => void;
-  childrenLength?: number;
-  className?: string;
-  depth?: number;
-  indentationWidth?: number;
-  isOpenChildren?: boolean;
-}
-
 export const ItemDragAndDrop = ({
   active,
   children,
@@ -30,7 +17,18 @@ export const ItemDragAndDrop = ({
   isOpenChildren,
   onCollapse,
   className,
-}: Props) => {
+}: {
+  active: boolean;
+  children: React.ReactNode;
+  id: number | string;
+  isDropHere: boolean;
+  onCollapse: () => void;
+  childrenLength?: number;
+  className?: string;
+  depth?: number;
+  indentationWidth?: number;
+  isOpenChildren?: boolean;
+}) => {
   const {
     attributes,
     isDragging,

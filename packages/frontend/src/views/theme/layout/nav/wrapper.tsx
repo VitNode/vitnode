@@ -3,11 +3,7 @@
 import React from 'react';
 import * as NavigationMenu from '@radix-ui/react-navigation-menu';
 
-interface Props {
-  children: React.ReactNode;
-}
-
-export const NavWrapper = ({ children }: Props) => {
+export const NavWrapper = ({ children }: { children: React.ReactNode }) => {
   return (
     <NavigationMenu.Root className="relative z-10 hidden flex-1 sm:block">
       {children}

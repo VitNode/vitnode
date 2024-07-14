@@ -3,13 +3,14 @@ import { useTranslations } from 'next-intl';
 import { ItemItemNavAdminProps, LinkItemNavAdmin } from './link';
 import { Icon } from '@/components/icon/icon';
 
-interface Props {
+export const ItemNavAdmin = ({
+  id,
+  items,
+}: {
   id: string;
   items: ItemItemNavAdminProps[];
   onClickItem?: () => void;
-}
-
-export const ItemNavAdmin = ({ id, items }: Props) => {
+}) => {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-expect-error
   const t = useTranslations(`${id}.admin`);

@@ -10,14 +10,17 @@ import {
 } from './ui/tooltip';
 import { useDateFormat } from './date-format-hooks/use-date-format';
 
-interface Props {
+export const DateFormat = ({
+  className,
+  date,
+  ref,
+  showFullDate,
+}: {
   date: Date;
   className?: string;
   ref?: React.RefCallback<HTMLTimeElement>;
   showFullDate?: boolean;
-}
-
-export const DateFormat = ({ className, date, ref, showFullDate }: Props) => {
+}) => {
   const { currentTime, fullDate, getDateWithFormatDistance } = useDateFormat({
     date,
   });

@@ -5,10 +5,6 @@ import { getGlobalData } from 'vitnode-frontend/graphql/get-global-data';
 import { AdminLayout } from 'vitnode-frontend/views/admin/layout/admin-layout';
 import { AuthAdminLayout } from 'vitnode-frontend/views/admin/layout/auth/auth-admin-layout';
 
-interface Props {
-  children: React.ReactNode;
-}
-
 export async function generateMetadata(): Promise<Metadata> {
   const [data, t] = await Promise.all([
     getGlobalData(),
@@ -25,7 +21,7 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default function Layout({ children }: Props) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <AdminLayout>
       <AuthAdminLayout>{children}</AuthAdminLayout>

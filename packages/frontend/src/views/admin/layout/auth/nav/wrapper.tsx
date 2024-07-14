@@ -4,11 +4,11 @@ import * as Accordion from '@radix-ui/react-accordion';
 import { useSelectedLayoutSegments } from 'next/navigation';
 import React from 'react';
 
-interface Props {
+export const NavAdminWrapper = ({
+  children,
+}: {
   children: React.ReactNode;
-}
-
-export const NavAdminWrapper = ({ children }: Props) => {
+}) => {
   const layoutSegments = useSelectedLayoutSegments();
 
   return (

@@ -16,7 +16,7 @@ export interface RootLayoutProps {
   className?: string;
 }
 
-export const generateMetadataForRootLayout = async ({
+export const generateMetadataRootLayout = async ({
   params: { locale },
 }: RootLayoutProps): Promise<Metadata> => {
   const metadata: Metadata = {

@@ -10,20 +10,6 @@ import { acceptMimeTypeImage } from '../extensions/files/files';
 import { Button } from '../../components/ui/button';
 import { CONFIG } from '../../helpers/config-with-env';
 
-interface Props {
-  dir_folder: string;
-  file_name: string;
-  file_name_original: string;
-  file_size: number;
-  id: number;
-  mimetype: string;
-  allowDownloadAttachments?: boolean;
-  file_alt?: string;
-  height?: number;
-  security_key?: string;
-  width?: number;
-}
-
 export const FileDownloadButton = ({
   allowDownloadAttachments,
   dir_folder,
@@ -36,7 +22,19 @@ export const FileDownloadButton = ({
   mimetype,
   security_key,
   width,
-}: Props) => {
+}: {
+  dir_folder: string;
+  file_name: string;
+  file_name_original: string;
+  file_size: number;
+  id: number;
+  mimetype: string;
+  allowDownloadAttachments?: boolean;
+  file_alt?: string;
+  height?: number;
+  security_key?: string;
+  width?: number;
+}) => {
   const t = useTranslations('core.editor.files');
 
   if (acceptMimeTypeImage.includes(mimetype) && width && height) {

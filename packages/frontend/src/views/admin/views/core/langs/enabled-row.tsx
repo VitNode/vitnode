@@ -6,11 +6,11 @@ import { editMutationApi } from './create-edit/hooks/edit-mutation-api';
 import { ShowCoreLanguages } from '@/graphql/graphql';
 import { Switch } from '@/components/ui/switch';
 
-interface Props {
+export const EnabledRowTableLangsCoreAdmin = ({
+  data,
+}: {
   data: ShowCoreLanguages;
-}
-
-export const EnabledRowTableLangsCoreAdmin = ({ data }: Props) => {
+}) => {
   const locale = useLocale();
   const t = useTranslations('core');
   const [checked, changeChecked] = React.useOptimistic(data.enabled);

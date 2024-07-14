@@ -72,7 +72,6 @@
     },
     "mobile_nav": {
       "back": "Wróć",
-      "notifications": "Powiadomienia",
       "messages": "Wiadomości",
       "search": "Szukaj",
       "menu": "Menu"
@@ -199,9 +198,7 @@
       "log_out": "Wyloguj się",
       "my_profile": "Mój profil",
       "settings": "Ustawienia",
-      "mod_cp": "Moderator Panel",
       "admin_cp": "Admin Panel",
-      "theme_editor": "Edytor motywu",
       "dark_light_switcher": {
         "light": "Jasny",
         "dark": "Ciemny",
@@ -310,10 +307,6 @@
       },
       "overview": {
         "title": "Przegląd"
-      },
-      "notifications": {
-        "title": "Powiadomienia",
-        "desc": "Konfiguruj jak otrzymujesz powiadomienia."
       },
       "files": {
         "title": "Moje pliki",

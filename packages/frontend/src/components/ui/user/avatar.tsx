@@ -8,7 +8,11 @@ const generateLetterPhoto = (letter: string, color: string) =>
     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" style="background:#${color}"><g><text text-anchor="middle" dy=".35em" x="512" y="512" fill="#ffffff" font-size="700" font-family="-apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif">${letter.toLocaleUpperCase()}</text></g></svg>`,
   )}`;
 
-interface Props {
+export const AvatarUser = ({
+  className,
+  sizeInRem,
+  user: { avatar, avatar_color, name },
+}: {
   sizeInRem: number;
   user: {
     avatar_color: string;
@@ -17,13 +21,7 @@ interface Props {
     avatar?: Maybe<Pick<AvatarUserType, 'dir_folder' | 'file_name'>>;
   };
   className?: string;
-}
-
-export const AvatarUser = ({
-  className,
-  sizeInRem,
-  user: { avatar, avatar_color, name },
-}: Props) => {
+}) => {
   return (
     <Img
       className={cn('flex-shrink-0 rounded-full', className)}

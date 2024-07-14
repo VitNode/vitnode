@@ -3,17 +3,15 @@ import { Text, Section, Button } from '@react-email/components';
 
 import { GetHelpersForEmailType, getTranslationForEmail } from '@/providers';
 
-interface Props {
-  helpers: GetHelpersForEmailType;
-  key: string;
-  language: string;
-}
-
 export const ContentCreateKeyEmail = ({
   language,
   helpers: { frontend_url, color },
   key,
-}: Props) => {
+}: {
+  helpers: GetHelpersForEmailType;
+  key: string;
+  language: string;
+}) => {
   const t = getTranslationForEmail('core.reset_password.email', language);
 
   return (

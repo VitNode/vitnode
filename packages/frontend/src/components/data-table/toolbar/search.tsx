@@ -5,15 +5,13 @@ import { useDebouncedCallback } from 'use-debounce';
 import { usePathname, useRouter } from '../../../navigation';
 import { Input } from '../../ui/input';
 
-interface Props {
-  startTransition: React.TransitionStartFunction;
-  searchPlaceholder?: string;
-}
-
 export const SearchToolbarDataTable = ({
   searchPlaceholder,
   startTransition,
-}: Props) => {
+}: {
+  startTransition: React.TransitionStartFunction;
+  searchPlaceholder?: string;
+}) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { push } = useRouter();

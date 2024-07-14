@@ -18,11 +18,11 @@ import { Button } from '@/components/ui/button';
 import { AvatarUser } from '@/components/ui/user/avatar';
 import { Separator } from '@/components/ui/separator';
 
-interface Props {
+export const UserBarAdmin = ({
+  navComponent,
+}: {
   navComponent: React.ReactNode;
-}
-
-export const UserBarAdmin = ({ navComponent }: Props) => {
+}) => {
   const t = useTranslations('admin');
   const tCore = useTranslations('core');
   const { session } = useSessionAdmin();

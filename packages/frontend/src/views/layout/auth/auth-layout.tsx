@@ -8,11 +8,11 @@ import { getSessionData } from '@/graphql/get-session-data';
 import { redirect } from '../../../navigation';
 import { InternalErrorView } from '../../global';
 
-interface Props {
+export const AuthLayout = async ({
+  children,
+}: {
   children: React.ReactNode;
-}
-
-export const AuthLayout = async ({ children }: Props) => {
+}) => {
   try {
     const data = await getSessionData();
     const { core_languages__show } = await getGlobalData();

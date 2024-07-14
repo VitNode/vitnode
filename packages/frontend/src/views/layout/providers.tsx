@@ -8,12 +8,13 @@ import { GlobalsContext } from '../../hooks/use-globals';
 import { Toaster } from '../../components/ui/sonner';
 import { Core_GlobalQuery } from '../../graphql/graphql';
 
-interface Props {
+export const RootProviders = ({
+  children,
+  middlewareData,
+}: {
   children: React.ReactNode;
   middlewareData?: Core_GlobalQuery;
-}
-
-export const RootProviders = ({ children, middlewareData }: Props) => {
+}) => {
   const [queryClient] = React.useState(
     () =>
       new QueryClient({

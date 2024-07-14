@@ -10,11 +10,11 @@ import { useSession } from '@/hooks/use-session';
 import { Drawer, DrawerTrigger } from '@/components/ui/drawer';
 import { AvatarUser } from '@/components/ui/user/avatar';
 
-interface Props {
+export const ButtonDrawer = ({
+  navIcons,
+}: {
   navIcons: { icon: React.ReactNode; id: number }[];
-}
-
-export const ButtonDrawer = ({ navIcons }: Props) => {
+}) => {
   const t = useTranslations('core.mobile_nav');
   const { session } = useSession();
 

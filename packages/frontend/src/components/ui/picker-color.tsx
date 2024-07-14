@@ -120,13 +120,15 @@ const presetColors: { color: HslColor; name: string }[] = [
   },
 ];
 
-interface Props {
+export const PickerColor = ({
+  color,
+  disableRemoveColor,
+  setColor,
+}: {
   color: HslColor | null;
   setColor: (color: HslColor | null) => void;
   disableRemoveColor?: boolean;
-}
-
-export const PickerColor = ({ color, disableRemoveColor, setColor }: Props) => {
+}) => {
   const t = useTranslations('core.colors');
   const [internalColor, setInternalColor] = React.useState<HslColor | null>(
     color,

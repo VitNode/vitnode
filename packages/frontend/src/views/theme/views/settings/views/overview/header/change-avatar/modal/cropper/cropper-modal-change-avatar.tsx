@@ -6,11 +6,7 @@ import { DialogFooter } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import 'cropperjs/dist/cropper.css';
 
-interface Props {
-  file: File;
-}
-
-export const CropperModalChangeAvatar = ({ file }: Props) => {
+export const CropperModalChangeAvatar = ({ file }: { file: File }) => {
   const t = useTranslations('core');
   const { cropperRef, isPending, onSubmit } = useCopperModalChangeAvatar();
 

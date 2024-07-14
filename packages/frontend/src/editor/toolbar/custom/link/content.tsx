@@ -15,11 +15,11 @@ import { Button } from '@/components/ui/button';
 
 import { useEditorState } from '../../../hooks/use-editor-state';
 
-interface Props {
+export const ContentLinkToolbarEditor = ({
+  setOpen,
+}: {
   setOpen: (open: boolean) => void;
-}
-
-export const ContentLinkToolbarEditor = ({ setOpen }: Props) => {
+}) => {
   const t = useTranslations('core.editor.link');
   const { editor } = useEditorState();
   const tCore = useTranslations('core');

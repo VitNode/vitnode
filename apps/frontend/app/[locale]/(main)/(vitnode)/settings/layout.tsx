@@ -1,28 +1,11 @@
 import React from 'react';
-import { Metadata } from 'next';
-import { getTranslations } from 'next-intl/server';
-import { LayoutSettingsView } from 'vitnode-frontend/theme-tsx/settings/layout-settings-view';
-import { getGlobalData } from 'vitnode-frontend/graphql/get-global-data';
+import {
+  LayoutSettingsView,
+  generateMetadataLayoutSettings,
+} from 'vitnode-frontend/theme-tsx/settings/layout-settings-view';
 
-interface Props {
-  children: React.ReactNode;
-}
+export const generateMetadata = generateMetadataLayoutSettings;
 
-export async function generateMetadata(): Promise<Metadata> {
-  const [data, t] = await Promise.all([
-    getGlobalData(),
-    getTranslations('core.settings'),
-  ]);
-
-  return {
-    title: {
-      default: t('title'),
-      template: `%s - ${t('title')} - ${data.core_settings__show.site_name}`,
-    },
-    robots: 'noindex, nofollow',
-  };
-}
-
-export default function Layout({ children }: Props) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   return <LayoutSettingsView>{children}</LayoutSettingsView>;
 }

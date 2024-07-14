@@ -11,21 +11,19 @@ import { Popover, PopoverContent, PopoverTrigger } from './popover';
 
 import { cn } from '../../helpers/classnames';
 
-interface Props {
-  onChange: (value: string) => void;
-  value: string;
-  disableRemoveColor?: boolean;
-  disabled?: boolean;
-  ref?: React.RefCallback<HTMLButtonElement>;
-}
-
 export const ColorInput = ({
   disableRemoveColor,
   disabled,
   onChange,
   value,
   ...rest
-}: Props) => {
+}: {
+  onChange: (value: string) => void;
+  value: string;
+  disableRemoveColor?: boolean;
+  disabled?: boolean;
+  ref?: React.RefCallback<HTMLButtonElement>;
+}) => {
   const t = useTranslations('core.colors');
   const [open, setOpen] = React.useState(false);
   const [color, setColor] = React.useState<HslColor | null>(

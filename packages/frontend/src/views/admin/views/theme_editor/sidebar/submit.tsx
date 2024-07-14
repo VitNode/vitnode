@@ -15,19 +15,17 @@ import { Button } from '@/components/ui/button';
 import { CONFIG } from '@/helpers/config-with-env';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
-interface Props {
-  isPending: boolean;
-  onClick: () => void;
-  openSubmitDialog: boolean;
-  setOpenSubmitDialog: (open: boolean) => void;
-}
-
 export const SubmitSidebarThemeEditor = ({
   isPending,
   onClick,
   openSubmitDialog,
   setOpenSubmitDialog,
-}: Props) => {
+}: {
+  isPending: boolean;
+  onClick: () => void;
+  openSubmitDialog: boolean;
+  setOpenSubmitDialog: (open: boolean) => void;
+}) => {
   const t = useTranslations('core.theme_editor.submit');
   const tCore = useTranslations('core');
 
