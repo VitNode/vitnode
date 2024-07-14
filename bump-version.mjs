@@ -304,6 +304,10 @@ function logError(error) {
         file: 'page.tsx',
       },
       {
+        folder: join('app', `[locale]`, 'admin', '(auth)'),
+        file: 'layout.tsx',
+      },
+      {
         folder: join('plugins', 'core', 'langs'),
         file: 'en.json',
       },
