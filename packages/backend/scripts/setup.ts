@@ -14,14 +14,13 @@ import { generateConfig } from './generate-config';
 
 import { createClientDatabase, DATABASE_ENVS } from '@/utils/database/client';
 
+const initConsole = '\x1b[34m[VitNode]\x1b[0m \x1b[33m[Backend]\x1b[0m';
+
 const init = async () => {
   let skipDatabase = false;
   if (process.argv[3] === '--skip-database') {
-    console.log(
-      '\x1b[34m%s\x1b[0m',
-      '[VitNode]',
-      '`--skip-database` flag detected. Skipping database setup...',
-    );
+    const skipDatabaseMessage = `${initConsole} '--skip-database' flag detected. Skipping database setup...`;
+    console.log(skipDatabaseMessage);
     skipDatabase = true;
   }
 
@@ -34,36 +33,24 @@ const init = async () => {
   }
 
   console.log(
-    '\x1b[34m%s\x1b[0m',
-    '[VitNode]',
-    `[1/${skipDatabase ? 2 : 6}] Setup the project. Generating the config file...`,
+    `${initConsole} [1/${skipDatabase ? 2 : 6}] Setup the project. Generating the config file...`,
   );
   generateConfig({ pluginsPath });
 
   console.log(
-    '\x1b[34m%s\x1b[0m',
-    '[VitNode]',
-    `[2/${skipDatabase ? 2 : 6}] Copying files into backend...`,
+    `${initConsole} [2/${skipDatabase ? 2 : 6}] Copying files into backend...`,
   );
   copyFiles({ pluginsPath });
 
   if (skipDatabase) {
-    console.log('\x1b[34m%s\x1b[0m', '[VitNode]', '✅ Project setup complete.');
+    console.log(`${initConsole} ✅ Project setup complete.`);
     process.exit(0);
   }
 
-  console.log(
-    '\x1b[34m%s\x1b[0m',
-    '[VitNode]',
-    '[3/6] Generating database migrations...',
-  );
+  console.log(`${initConsole} [3/6] Generating database migrations...`);
   await generateDatabaseMigrations({ pluginsPath });
 
-  console.log(
-    '\x1b[34m%s\x1b[0m',
-    '[VitNode]',
-    '[4/6] Generating the manifest files...',
-  );
+  console.log(`${initConsole} [4/6] Generating the manifest files...`);
   generateManifest();
 
   const database = createClientDatabase({
@@ -72,17 +59,15 @@ const init = async () => {
   });
 
   console.log(
-    '\x1b[34m%s\x1b[0m',
-    '[VitNode]',
-    '[5/6] Create tables in database using migrations...',
+    `${initConsole} [5/6] Create tables in database using migrations...`,
   );
   await createTablesDatabaseUsingMigrations({ pluginsPath, db: database.db });
 
-  console.log('\x1b[34m%s\x1b[0m', '[VitNode]', '[6/6] Updating plugins...');
+  console.log(`${initConsole} [6/6] Updating plugins...`);
   await updatePlugins({ pluginsPath, db: database.db });
 
   await database.poolDB.end();
-  console.log('\x1b[34m%s\x1b[0m', '[VitNode]', '✅ Project setup complete.');
+  console.log(`${initConsole} ✅ Project setup complete.`);
   process.exit(0);
 };
 

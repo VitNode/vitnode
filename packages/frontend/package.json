@@ -10,6 +10,9 @@
     "url": "git+https://github.com/aXenDeveloper/VitNode.git",
     "directory": "packages/frontend"
   },
+  "bin": {
+    "vitnode-frontend": "dist/scripts/setup.js"
+  },
   "exports": {
     "./next.config": "./next.config.ts",
     "./tailwind.config": "./tailwind.config.ts",
@@ -61,6 +64,7 @@
   },
   "scripts": {
     "test": "tsc -w",
+    "build:scripts": "tsup",
     "build": "tsc && swc src -d ./dist --config-file .swcrc",
     "dev": "concurrently \"tsc -w\" \"swc src -d dist --config-file .swcrc -w\"",
     "lint": "eslint .",
@@ -87,6 +91,7 @@
     "concurrently": "^8.2.2",
     "dotenv": "^16.4.5",
     "eslint-config-typescript-vitnode": "workspace:*",
+    "tsup": "^8.1.0",
     "typescript": "^5"
   },
   "dependencies": {

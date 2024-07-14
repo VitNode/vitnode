@@ -2,7 +2,8 @@
 import { execSync, spawn } from 'child_process';
 import { existsSync, readFileSync } from 'fs';
 import { EOL } from 'os';
-import path from 'path';
+import path, { join } from 'path';
+import * as fs from 'fs';
 
 const ALLOWED_VERSION_TYPES = ['major', 'minor', 'patch'];
 const GIT_USER_NAME = process.env.GITHUB_USER || 'Automated Version Bump';
@@ -271,6 +272,28 @@ function logError(error) {
 
     const remoteRepo = `https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git`;
     await runInWorkspace('git', ['push', remoteRepo]);
+
+    // Copy frontend files from app dir
+    const frontendPath = path.join(WORKSPACE, 'packages', 'frontend', 'apps');
+    const appPath = path.join(WORKSPACE, 'apps', 'frontend', 'app', `[locale]`);
+    const pathsToFolders = [join(appPath, 'admin', '(vitnode)')];
+    const pathsToFiles = [join(appPath, 'admin', 'layout.tsx')];
+
+    // Create folder for frontendPath
+    if (!fs.existsSync(frontendPath)) {
+      fs.mkdirSync(frontendPath);
+    }
+
+    // Copy folders
+    pathsToFolders.forEach(folder => {
+      fs.cpSync(folder, frontendPath, { recursive: true });
+    });
+
+    // Copy files
+    pathsToFiles.forEach(file => {
+      fs.copyFileSync(file, join(frontendPath, 'admin', 'layout.tsx'));
+    });
+
     exitSuccess('Version bumped!');
   } catch (e) {
     logError(e);
