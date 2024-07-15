@@ -1,6 +1,6 @@
-import { NextConfig } from 'next';
 import VitNodeConfig from 'vitnode-frontend/next.config';
 
-const nextConfig: NextConfig = {};
+/** @type {import('next').NextConfig} */
+const nextConfig = {};
 
 export default VitNodeConfig(nextConfig);
