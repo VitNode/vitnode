@@ -54,16 +54,16 @@ const init = () => {
     process.exit(1);
   }
 
-  // // Copy folders
-  // pathsToFolders.forEach(folder => {
-  //   const appPath = join(frontendAppPath, folder);
-  //   const packagePath = join(frontendPackagePath, folder);
-  //   if (!fs.existsSync(packagePath)) {
-  //     fs.mkdirSync(packagePath, { recursive: true });
-  //   }
+  // Copy folders
+  pathsToFolders.forEach(folder => {
+    const appPath = join(frontendAppPath, folder);
+    const packagePath = join(frontendPackagePath, folder);
+    if (!fs.existsSync(packagePath)) {
+      fs.mkdirSync(packagePath, { recursive: true });
+    }
 
-  //   fs.cpSync(packagePath, appPath, { recursive: true });
-  // });
+    fs.cpSync(packagePath, appPath, { recursive: true });
+  });
 
   // Copy folders if don't exist
   pathsToFoldersOptional.forEach(folder => {
@@ -98,14 +98,14 @@ const init = () => {
       });
   });
 
-  // pathsToFiles.forEach(file => {
-  //   const appPath = join(frontendAppPath, file.folder, file.file);
-  //   const packagePath = join(frontendPackagePath, file.folder, file.file);
+  pathsToFiles.forEach(file => {
+    const appPath = join(frontendAppPath, file.folder, file.file);
+    const packagePath = join(frontendPackagePath, file.folder, file.file);
 
-  //   fs.cpSync(packagePath, appPath, {
-  //     recursive: true,
-  //   });
-  // });
+    fs.cpSync(packagePath, appPath, {
+      recursive: true,
+    });
+  });
 
   console.log(`${initConsole} ✅ Frontend files copied successfully.`);
   process.exit(0);
