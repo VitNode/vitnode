@@ -38,7 +38,7 @@ export const generateDatabaseMigrations = async ({
         if (!fs.existsSync(schemaPath)) return;
 
         await execShellCommand(
-          `npx drizzle-kit@0.22.8 up --config src/plugins/${plugin}/admin/database/drizzle.config.ts && npx drizzle-kit@0.22.8 generate --config src/plugins/${plugin}/admin/database/drizzle.config.ts`,
+          `npx drizzle-kit up --config src/plugins/${plugin}/admin/database/drizzle.config.ts && npx drizzle-kit generate --config src/plugins/${plugin}/admin/database/drizzle.config.ts`,
         );
       }),
   );

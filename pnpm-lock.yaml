@@ -7,6 +7,13 @@ settings:
 importers:
 
   .:
+    dependencies:
+      drizzle-kit:
+        specifier: 0.22.8
+        version: 0.22.8
+      drizzle-orm:
+        specifier: 0.31.4
+        version: 0.31.4(@types/pg@8.11.6)(@types/react@18.3.3)(pg@8.12.0)(react@18.3.1)
     devDependencies:
       cross-env:
         specifier: ^7.0.3
@@ -123,12 +130,6 @@ importers:
       cross-env:
         specifier: ^7.0.3
         version: 7.0.3
-      drizzle-kit:
-        specifier: 0.22.8
-        version: 0.22.8
-      drizzle-orm:
-        specifier: 0.31.4
-        version: 0.31.4(@types/pg@8.11.6)(@types/react@18.3.3)(pg@8.12.0)(react@18.3.1)
       eslint:
         specifier: ^8.57.0
         version: 8.57.0
