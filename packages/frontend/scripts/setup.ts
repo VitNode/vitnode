@@ -54,50 +54,58 @@ const init = () => {
     process.exit(1);
   }
 
-  // Copy folders
-  pathsToFolders.forEach(folder => {
-    const appPath = join(frontendAppPath, folder);
-    const packagePath = join(frontendPackagePath, folder);
-    if (!fs.existsSync(packagePath)) {
-      fs.mkdirSync(packagePath, { recursive: true });
-    }
+  // // Copy folders
+  // pathsToFolders.forEach(folder => {
+  //   const appPath = join(frontendAppPath, folder);
+  //   const packagePath = join(frontendPackagePath, folder);
+  //   if (!fs.existsSync(packagePath)) {
+  //     fs.mkdirSync(packagePath, { recursive: true });
+  //   }
 
-    fs.cpSync(packagePath, appPath, { recursive: true });
-  });
+  //   fs.cpSync(packagePath, appPath, { recursive: true });
+  // });
 
   // Copy folders if don't exist
   pathsToFoldersOptional.forEach(folder => {
     const appPath = join(frontendAppPath, folder);
+    const packagePath = join(frontendPackagePath, folder);
 
-    if (!fs.existsSync(appPath)) {
-      fs.mkdirSync(appPath, { recursive: true });
+    if (!fs.existsSync(packagePath)) {
+      fs.mkdirSync(packagePath, { recursive: true });
     }
 
-    const files = fs.readdirSync(appPath, { recursive: true });
+    const files = fs.readdirSync(packagePath, { recursive: true });
+    console.log(
+      'Files',
+      files
+        .filter(el => typeof el === 'string')
+        .filter(file => file.includes('.tsx')),
+    );
 
     // Check every file if it exists in the frontend package
     files
       .filter(el => typeof el === 'string')
+      .filter(file => file.includes('.tsx'))
       .forEach(file => {
         const appFilePath = join(appPath, file);
         const packageFilePath = join(frontendPackagePath, folder, file);
 
-        if (!fs.existsSync(packageFilePath)) {
-          fs.cpSync(appFilePath, packageFilePath, {
+        if (!fs.existsSync(appFilePath)) {
+          fs.cpSync(packageFilePath, appFilePath, {
             recursive: true,
           });
         }
       });
   });
 
-  pathsToFiles.forEach(file => {
-    const appPath = join(frontendAppPath, file.folder, file.file);
-    const packagePath = join(frontendPackagePath, file.folder, file.file);
+  // pathsToFiles.forEach(file => {
+  //   const appPath = join(frontendAppPath, file.folder, file.file);
+  //   const packagePath = join(frontendPackagePath, file.folder, file.file);
 
-    fs.cpSync(packagePath, appPath, {
-      recursive: true,
-    });
-  });
+  //   fs.cpSync(packagePath, appPath, {
+  //     recursive: true,
+  //   });
+  // });
 
   console.log(`${initConsole} ✅ Frontend files copied successfully.`);
   process.exit(0);
