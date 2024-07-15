@@ -75,11 +75,18 @@ const init = () => {
     }
 
     const files = fs.readdirSync(packagePath, { recursive: true });
+    console.log('Files', files, packagePath);
     console.log(
-      'Files',
+      'Files with typeof',
+      files.filter(el => typeof el === 'string'),
+      packagePath,
+    );
+    console.log(
+      'Files with tsx',
       files
         .filter(el => typeof el === 'string')
         .filter(file => file.includes('.tsx')),
+      packagePath,
     );
 
     // Check every file if it exists in the frontend package
