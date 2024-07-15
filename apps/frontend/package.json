@@ -1,9 +1,10 @@
 {
   "name": "frontend",
-  "version": "0.0.7-canary.8",
+  "version": "0.0.7-canary.21",
   "author": "Maciej Piotr (aXenDev) Balcerzak",
   "license": "GPL-3.0 license",
   "scripts": {
+    "config:init": "vitnode-frontend init",
     "dev": "next dev --turbo",
     "dev:turbo": "next dev --turbo",
     "build": "next build",

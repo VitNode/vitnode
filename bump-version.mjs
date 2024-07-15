@@ -2,7 +2,8 @@
 import { execSync, spawn } from 'child_process';
 import { existsSync, readFileSync } from 'fs';
 import { EOL } from 'os';
-import path from 'path';
+import path, { join } from 'path';
+import * as fs from 'fs';
 
 const ALLOWED_VERSION_TYPES = ['major', 'minor', 'patch'];
 const GIT_USER_NAME = process.env.GITHUB_USER || 'Automated Version Bump';
@@ -271,6 +272,73 @@ function logError(error) {
 
     const remoteRepo = `https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git`;
     await runInWorkspace('git', ['push', remoteRepo]);
+
+    // Copy frontend files from app dir
+    const frontendPackagePath = path.join(
+      WORKSPACE,
+      'packages',
+      'frontend',
+      'folders_to_copy',
+    );
+    const frontendAppPath = path.join(WORKSPACE, 'apps', 'frontend');
+    const pathsToFoldersForce = [
+      join('app', '[locale]', 'admin', '(vitnode)'),
+      join('app', '[locale]', 'admin', '(auth)', '(vitnode)'),
+      join('app', '[locale]', '(main)', '(vitnode)'),
+    ];
+    const pathsToFiles = [
+      {
+        folder: 'app',
+        file: 'not-found.tsx',
+      },
+      {
+        folder: join('app', `[locale]`),
+        file: 'layout.tsx',
+      },
+      {
+        folder: join('app', `[locale]`, 'admin'),
+        file: 'layout.tsx',
+      },
+      {
+        folder: join('app', `[locale]`, '(main)'),
+        file: 'page.tsx',
+      },
+      {
+        folder: join('app', `[locale]`, 'admin', '(auth)'),
+        file: 'layout.tsx',
+      },
+      {
+        folder: join('plugins', 'core', 'langs'),
+        file: 'en.json',
+      },
+    ];
+
+    // Create folder for apps in frontend package
+    if (!fs.existsSync(frontendPackagePath)) {
+      fs.mkdirSync(frontendPackagePath, { recursive: true });
+    }
+
+    // Copy folders
+    pathsToFoldersForce.forEach(folder => {
+      const appPath = join(frontendAppPath, folder);
+      const packagePath = join(frontendPackagePath, folder);
+      if (!fs.existsSync(packagePath)) {
+        fs.mkdirSync(packagePath, { recursive: true });
+      }
+
+      fs.cpSync(appPath, packagePath, { recursive: true });
+    });
+
+    // Copy files
+    pathsToFiles.forEach(file => {
+      const appPath = join(frontendAppPath, file.folder, file.file);
+      const packagePath = join(frontendPackagePath, file.folder, file.file);
+
+      fs.cpSync(appPath, packagePath, {
+        recursive: true,
+      });
+    });
+
     exitSuccess('Version bumped!');
   } catch (e) {
     logError(e);
