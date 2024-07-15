@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Ref: https://github.com/vercel/next.js/blob/canary/packages/create-next-app/index.ts
-import { basename, resolve } from 'path';
-import { existsSync } from 'fs';
+import { basename, dirname, join, resolve } from 'path';
+import { existsSync, mkdirSync } from 'fs';
 
 import { Command } from 'commander';
 import colors from 'picocolors';
@@ -11,6 +11,7 @@ import prompts from 'prompts';
 import packageJson from './package.json' assert { type: 'json' };
 import { validateNpmName } from './helpers/validate-pkg';
 import { isFolderEmpty } from './helpers/is-folder-empty';
+import { isWriteable } from './helpers/is-writeable';
 
 let projectPath: string = '';
 
@@ -99,8 +100,33 @@ program.parse(process.argv);
   const folderExists = existsSync(root);
 
   if (folderExists && !isFolderEmpty(root, appName)) {
+    console.error('The specified directory is not empty.');
     process.exit(1);
   }
 
-  console.log(`Creating a new VitNode app in ${resolvedProjectPath}.\n`);
+  /**
+   * Verify the project dir is writeable
+   */
+  if (!(await isWriteable(dirname(root)))) {
+    console.error(
+      'The application path is not writable, please check folder permissions and try again.',
+    );
+    console.error(
+      'It is likely you do not have write permissions for this folder.',
+    );
+    process.exit(1);
+  }
+
+  /**
+   * Create the project
+   */
+  mkdirSync(root, { recursive: true });
+  if (!isFolderEmpty(root, appName)) {
+    process.exit(1);
+  }
+
+  console.log(`Creating a new VitNode app in ${colors.green(root)}.\n`);
+  process.chdir(root);
+
+  const packageJsonPath = join(root, 'package.json');
 })();
