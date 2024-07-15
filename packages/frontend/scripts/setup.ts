@@ -74,35 +74,28 @@ const init = () => {
       fs.mkdirSync(packagePath, { recursive: true });
     }
 
-    const files = fs.readdirSync(packagePath, { recursive: true });
+    const files = fs.readdirSync(packagePath, {
+      recursive: true,
+      withFileTypes: true,
+    });
+
     console.log('Files', files, packagePath);
-    console.log(
-      'Files with typeof',
-      files.filter(el => typeof el === 'string'),
-      packagePath,
-    );
-    console.log(
-      'Files with tsx',
-      files
-        .filter(el => typeof el === 'string')
-        .filter(file => file.includes('.tsx')),
-      packagePath,
-    );
+    console.log('Files only type', files, packagePath);
 
-    // Check every file if it exists in the frontend package
-    files
-      .filter(el => typeof el === 'string')
-      .filter(file => file.includes('.tsx'))
-      .forEach(file => {
-        const appFilePath = join(appPath, file);
-        const packageFilePath = join(frontendPackagePath, folder, file);
+    // // Check every file if it exists in the frontend package
+    // files
+    //   .filter(el => typeof el === 'string')
+    //   .filter(file => file.includes('.tsx'))
+    //   .forEach(file => {
+    //     const appFilePath = join(appPath, file);
+    //     const packageFilePath = join(frontendPackagePath, folder, file);
 
-        if (!fs.existsSync(appFilePath)) {
-          fs.cpSync(packageFilePath, appFilePath, {
-            recursive: true,
-          });
-        }
-      });
+    //     if (!fs.existsSync(appFilePath)) {
+    //       fs.cpSync(packageFilePath, appFilePath, {
+    //         recursive: true,
+    //       });
+    //     }
+    //   });
   });
 
   pathsToFiles.forEach(file => {
