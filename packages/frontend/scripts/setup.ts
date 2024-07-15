@@ -3,6 +3,7 @@
 
 import { join } from 'path';
 import * as fs from 'fs';
+import { getAllFiles } from './helpers/get-all-files';
 
 const init = () => {
   const initConsole = '\x1b[34m[VitNode]\x1b[0m \x1b[33m[Frontend]\x1b[0m';
@@ -74,28 +75,20 @@ const init = () => {
       fs.mkdirSync(packagePath, { recursive: true });
     }
 
-    const files = fs.readdirSync(packagePath, {
-      recursive: true,
-      withFileTypes: true,
+    const files = getAllFiles(packagePath);
+
+    files.forEach(file => {
+      const dir = file.dir.replace(packagePath, '');
+      const appFilePath = dir ? join(appPath, dir) : join(appPath);
+      const packageFilePath = dir
+        ? join(frontendPackagePath, folder, dir, file.name)
+        : join(frontendPackagePath, folder, file.name);
+
+      if (!fs.existsSync(join(appFilePath, file.name))) {
+        fs.mkdirSync(appFilePath, { recursive: true });
+        fs.copyFileSync(packageFilePath, join(appFilePath, file.name));
+      }
     });
-
-    console.log('Files', files, packagePath);
-    console.log('Files only type', files, packagePath);
-
-    // // Check every file if it exists in the frontend package
-    // files
-    //   .filter(el => typeof el === 'string')
-    //   .filter(file => file.includes('.tsx'))
-    //   .forEach(file => {
-    //     const appFilePath = join(appPath, file);
-    //     const packageFilePath = join(frontendPackagePath, folder, file);
-
-    //     if (!fs.existsSync(appFilePath)) {
-    //       fs.cpSync(packageFilePath, appFilePath, {
-    //         recursive: true,
-    //       });
-    //     }
-    //   });
   });
 
   pathsToFiles.forEach(file => {
