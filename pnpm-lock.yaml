@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      create-vitnode-app:
-        specifier: 0.0.7-canary.26
-        version: 0.0.7-canary.26
       drizzle-kit:
         specifier: 0.22.8
         version: 0.22.8
@@ -4959,10 +4956,6 @@ packages:
 
   create-require@1.1.1:
     resolution: {integrity: sha512-dcKFX3jn0MpIaXjisoRvexIJVEKzaq7z2rZKxf+MSr9TkdmHmsU4m2lcLojrj/FHl8mk5VxMmYA+ftRkP/3oKQ==}
-
-  create-vitnode-app@0.0.7-canary.26:
-    resolution: {integrity: sha512-ExfVXDz/7SJZWSPGA3wOLJ2iBLUM2l62BE7jL5BSq/igTVcVbgFHpyUdD7WV38dwwFN6gm8sqOhjI1khxoAmqQ==}
-    hasBin: true
 
   crelt@1.0.6:
     resolution: {integrity: sha512-VQ2MBenTq1fWZUH9DJNGti7kKv6EeAuYr3cLwxUWhIu1baTaXh4Ib5W2CqHVqib4/MqbYGJqiL3Zb8GJZr3l4g==}
@@ -14435,13 +14428,6 @@ snapshots:
       - ts-node
 
   create-require@1.1.1: {}
-
-  create-vitnode-app@0.0.7-canary.26:
-    dependencies:
-      figlet: 1.7.0
-      picocolors: 1.0.1
-      prompts: 2.4.2
-      validate-npm-package-name: 5.0.1
 
   crelt@1.0.6: {}
 
