@@ -56,7 +56,7 @@ program.parse(process.argv);
       type: 'text',
       name: 'path',
       message: 'What is your project named?',
-      initial: 'my-app',
+      initial: 'my-vitnode',
       validate: name => {
         const validation = validateNpmName({ name: basename(resolve(name)) });
         if (validation.valid) return true;

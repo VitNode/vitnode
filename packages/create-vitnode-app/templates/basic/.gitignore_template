@@ -41,15 +41,15 @@ yarn-error.log*
 /docker
 
 # Others
-/backend/uploads/public/*
-/backend/uploads/private/*
-/backend/uploads/temp/*
-!/backend/uploads/index.html
-!/backend/uploads/public/index.html
-!/backend/uploads/private/index.html
-!/backend/uploads/temp/index.html
-/backend/schema.gql
+/apps/backend/uploads/public/*
+/apps/backend/uploads/private/*
+/apps/backend/uploads/temp/*
+!/apps/backend/uploads/index.html
+!/apps/backend/uploads/public/index.html
+!/apps/backend/uploads/private/index.html
+!/apps/backend/uploads/temp/index.html
+/apps/backend/schema.gql
 
 # Configuration
-/backend/src/plugins/*/admin/database/migrations
-/backend/src/plugins/core/
+/apps/backend/src/plugins/*/admin/database/migrations
+/apps/backend/src/plugins/core/

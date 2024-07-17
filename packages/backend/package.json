@@ -30,6 +30,8 @@
     "class-validator": "^0.14.1",
     "drizzle-kit": "0.22.8",
     "drizzle-orm": "0.31.4",
+    "react": "^19.0.0-rc.0",
+    "react-dom": "^19.0.0-rc.0",
     "typescript": "^5.5.3"
   },
   "dependencies": {
@@ -82,8 +84,8 @@
     "express": "^4.19.2",
     "graphql": "^16.9.0",
     "pg": "^8.12.0",
-    "react": "19.0.0-rc.0",
-    "react-dom": "19.0.0-rc.0",
+    "react": "^19.0.0-rc.0",
+    "react-dom": "^19.0.0-rc.0",
     "ts-node": "^10.9.2",
     "tsup": "^8.1.0",
     "typescript": "^5.5.3"

@@ -7,6 +7,7 @@ interface PackageJSON {
   version: string;
   dependencies?: Record<string, string>;
   devDependencies?: Record<string, string>;
+  overrides?: Record<string, string>;
   packageManager?: string;
   scripts?: Record<string, string>;
   workspaces?: string[];
@@ -35,6 +36,10 @@ export const createPackagesJSON = ({
       build: 'turbo build',
       lint: 'turbo lint',
       'lint:fix': 'turbo lint:fix',
+    },
+    overrides: {
+      react: '^19.0.0-rc.0',
+      'react-dom': '^19.0.0-rc.0',
     },
     dependencies: {
       'drizzle-kit': '^0.22.8',
@@ -111,8 +116,8 @@ export const createPackagesJSON = ({
       '@nestjs/core': '^10.3.10',
       '@nestjs/graphql': '^12.2.0',
       '@react-email/components': '^0.0.21',
-      react: '19.0.0-rc.0',
-      'react-dom': '19.0.0-rc.0',
+      react: '^19.0.0-rc.0',
+      'react-dom': '^19.0.0-rc.0',
       'reflect-metadata': '^0.2.2',
       'vitnode-backend': `^${pkg.version}`,
     },
