@@ -61,7 +61,8 @@ export const createPackagesJSON = ({
     version: '1.0.0',
     private: true,
     scripts: {
-      dev: 'next dev --turbo',
+      'config:init': 'vitnode-frontend init',
+      dev: 'vitnode-frontend init && next dev --turbo',
       build: 'next build',
       start: 'next start',
       lint: 'eslint .',
@@ -95,8 +96,8 @@ export const createPackagesJSON = ({
     private: true,
     scripts: {
       'config:init': 'vitnode-backend init',
-      build: 'nest build',
       dev: 'vitnode-backend init && cross-env NODE_ENV=development nest start -w',
+      build: 'nest build',
       start: 'node dist/main',
       lint: 'eslint .',
       'lint:fix': 'eslint . --fix',

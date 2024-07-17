@@ -47,14 +47,6 @@ export class CreateDatabaseAdminInstallService {
         locale: 'enUS',
         site_copyright: `Copyright © VitNode ${new Date().getFullYear()}`,
       },
-      {
-        code: 'pl',
-        name: 'Polski (Polish)',
-        timezone: 'Europe/Warsaw',
-        time_24: true,
-        locale: 'pl',
-        site_copyright: `Prawa autorskie © VitNode ${new Date().getFullYear()}`,
-      },
     ]);
 
     // Create default groups

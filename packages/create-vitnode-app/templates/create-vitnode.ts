@@ -48,7 +48,7 @@ export const createVitNode = async ({
   renameSync(join(root, '.npmrc_template'), join(root, '.npmrc'));
 
   // Change tailwind.config.ts based on package manager
-  if (packageManager === 'pnpm') {
+  if (packageManager.startsWith('pnpm')) {
     const tailwindConfigPath = join(root, 'frontend', 'tailwind.config.ts');
     const tailwindConfig = readFileSync(tailwindConfigPath, 'utf-8');
     const newTailwindConfig = tailwindConfig
@@ -65,7 +65,7 @@ export const createVitNode = async ({
   }
 
   // Copy pnpm template
-  if (packageManager === 'pnpm') {
+  if (packageManager.startsWith('pnpm')) {
     cpSync(join(templatePath, 'pnpm'), root, { recursive: true });
   }
 

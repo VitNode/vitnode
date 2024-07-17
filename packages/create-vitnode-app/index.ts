@@ -33,6 +33,7 @@ program.addOption(
 );
 program.option('--eslint', 'Initialize with eslint config.');
 program.option('--no-eslint', 'Initialize without eslint config.');
+program.option('--i18n-routing', 'Initialize with i18n routing.');
 program.option(
   '--skip-install',
   'Skip installing packages after initializing the project.',

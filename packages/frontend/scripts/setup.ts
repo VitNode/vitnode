@@ -10,16 +10,18 @@ const init = () => {
   // Copy frontend files from app dir
   const frontendPackagePath = join(__dirname, '..', '..', 'folders_to_copy');
   const frontendAppPath = process.cwd();
+  const isLocaleFolder = fs.existsSync(
+    join(frontendAppPath, 'app', '[locale]'),
+  );
+  const localePath = isLocaleFolder ? join('app', '[locale]') : 'app';
   const pathsToFolders = [
-    join('app', '[locale]', 'admin', '(vitnode)'),
-    join('app', '[locale]', 'admin', '(auth)', '(vitnode)'),
+    join(localePath, 'admin', '(vitnode)'),
+    join(localePath, 'admin', '(auth)', '(vitnode)'),
   ];
-  const pathsToFoldersOptional = [
-    join('app', '[locale]', '(main)', '(vitnode)'),
-  ];
+  const pathsToFoldersOptional = [join(localePath, '(main)', '(vitnode)')];
   const pathsToFiles = [
     {
-      folder: join('app', '[locale]', '(main)', '(vitnode)', '[...rest]'),
+      folder: join(localePath, '(main)', '(vitnode)', '[...rest]'),
       file: 'page.tsx',
     },
     {
@@ -27,19 +29,19 @@ const init = () => {
       file: 'not-found.tsx',
     },
     {
-      folder: join('app', `[locale]`),
+      folder: localePath,
       file: 'layout.tsx',
     },
     {
-      folder: join('app', `[locale]`, 'admin'),
+      folder: join(localePath, 'admin'),
       file: 'layout.tsx',
     },
     {
-      folder: join('app', `[locale]`, 'admin', '(auth)'),
+      folder: join(localePath, 'admin', '(auth)'),
       file: 'layout.tsx',
     },
     {
-      folder: join('app', `[locale]`, '(main)'),
+      folder: join(localePath, '(main)'),
       file: 'page.tsx',
     },
     {
