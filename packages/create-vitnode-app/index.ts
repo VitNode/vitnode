@@ -29,7 +29,7 @@ program.addOption(
   new Option(
     '-pm, --package-manager <package-manager>',
     'Specify the package manager to use',
-  ).choices(['npm', 'pnpm']), // TODO: Add 'yarn'
+  ).choices(['npm', 'pnpm', 'yarn']),
 );
 program.option('--eslint', 'Initialize with eslint config.');
 program.option('--no-eslint', 'Initialize without eslint config.');
@@ -135,7 +135,7 @@ program.parse(process.argv);
   /**
    * Create the project
    */
-  createVitNode({
+  await createVitNode({
     root,
     appName,
     ...choses,

@@ -3,10 +3,10 @@ import { join } from 'path';
 
 interface PackageJSON {
   name: string;
-  version: string;
   private: boolean;
-  devDependencies?: Record<string, string>;
+  version: string;
   dependencies?: Record<string, string>;
+  devDependencies?: Record<string, string>;
   scripts?: Record<string, string>;
   workspaces?: string[];
 }

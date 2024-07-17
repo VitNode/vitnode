@@ -2,6 +2,8 @@ import { Command } from 'commander';
 import color from 'picocolors';
 import prompts, { InitialReturnValue } from 'prompts';
 
+import { getAvailablePackageManagers } from './helpers/get-available-package-anagers';
+
 export const onPromptState = (state: {
   aborted: boolean;
   exited: boolean;
@@ -31,6 +33,7 @@ export const createCli = async (program: Command): Promise<CreateCliReturn> => {
   };
 
   if (!optionsFromProgram.packageManager) {
+    const availablePackageManagers = await getAvailablePackageManagers();
     const text = color.blue('package manager');
     const { packageManager } = await prompts<string>({
       onState: onPromptState,
@@ -39,9 +42,21 @@ export const createCli = async (program: Command): Promise<CreateCliReturn> => {
       message: `Which ${text} do you want to use?`,
       initial: optionsFromProgram.packageManager,
       choices: [
-        { title: 'npm', value: 'npm' },
-        { title: 'pnpm', value: 'pnpm' },
-        { title: 'yarn', value: 'yarn', disabled: true },
+        {
+          title: `npm${availablePackageManagers.npm ? `@${availablePackageManagers.npm}` : ''}`,
+          value: 'npm',
+          disabled: !availablePackageManagers.npm,
+        },
+        {
+          title: `pnpm${availablePackageManagers.pnpm ? `@${availablePackageManagers.pnpm}` : ''}`,
+          value: 'pnpm',
+          disabled: !availablePackageManagers.pnpm,
+        },
+        {
+          title: `yarn${availablePackageManagers.yarn ? `@${availablePackageManagers.yarn}` : ''}`,
+          value: 'yarn',
+          disabled: !availablePackageManagers.yarn,
+        },
       ],
     });
 

@@ -6,13 +6,14 @@ import color from 'picocolors';
 import { isFolderEmpty } from '../helpers/is-folder-empty';
 import { CreateCliReturn } from '../cli';
 import { createPackagesJSON } from './create-packages-json';
+import { getAvailablePackageManagers } from '../helpers/get-available-package-anagers';
 
 interface Args extends CreateCliReturn {
   appName: string;
   root: string;
 }
 
-export const createVitNode = ({
+export const createVitNode = async ({
   root,
   appName,
   packageManager,
@@ -73,4 +74,6 @@ export const createVitNode = ({
   if (eslint) {
     cpSync(join(templatePath, 'eslint'), root, { recursive: true });
   }
+
+  console.log(await getAvailablePackageManagers());
 };
