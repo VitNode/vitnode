@@ -12,7 +12,7 @@ export const execShellCommand = async (
       }
       const result = stdout ? stdout : stderr;
 
-      resolve(result);
+      resolve(result.replace(/\s+/g, ''));
     });
   });
 };

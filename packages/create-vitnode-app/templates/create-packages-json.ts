@@ -7,6 +7,7 @@ interface PackageJSON {
   version: string;
   dependencies?: Record<string, string>;
   devDependencies?: Record<string, string>;
+  packageManager?: string;
   scripts?: Record<string, string>;
   workspaces?: string[];
 }
@@ -14,8 +15,10 @@ interface PackageJSON {
 export const createPackagesJSON = ({
   appName,
   root,
+  packageManager,
 }: {
   appName: string;
+  packageManager: string;
   root: string;
 }) => {
   const pkg: PackageJSON = JSON.parse(
@@ -44,6 +47,7 @@ export const createPackagesJSON = ({
       turbo: '^2.0.7',
       typescript: '^5.4.5',
     },
+    packageManager,
     workspaces: ['apps/*'],
   };
 

@@ -2,7 +2,10 @@ import { Command } from 'commander';
 import color from 'picocolors';
 import prompts, { InitialReturnValue } from 'prompts';
 
-import { getAvailablePackageManagers } from './helpers/get-available-package-anagers';
+import {
+  getAvailablePackageManagers,
+  PackageManager,
+} from './helpers/get-available-package-managers';
 
 export const onPromptState = (state: {
   aborted: boolean;
@@ -62,7 +65,7 @@ export const createCli = async (program: Command): Promise<CreateCliReturn> => {
 
     options = {
       ...options,
-      packageManager,
+      packageManager: `${packageManager}@${availablePackageManagers[packageManager as PackageManager]}`,
     };
   }
 

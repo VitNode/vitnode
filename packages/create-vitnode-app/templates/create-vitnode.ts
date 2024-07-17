@@ -6,7 +6,6 @@ import color from 'picocolors';
 import { isFolderEmpty } from '../helpers/is-folder-empty';
 import { CreateCliReturn } from '../cli';
 import { createPackagesJSON } from './create-packages-json';
-import { getAvailablePackageManagers } from '../helpers/get-available-package-anagers';
 
 interface Args extends CreateCliReturn {
   appName: string;
@@ -20,7 +19,6 @@ export const createVitNode = async ({
   eslint,
 }: Args) => {
   const templatePath = join(__dirname, '..', 'templates');
-  console.log(templatePath);
   console.log(
     `Creating a new VitNode app in ${color.green(root)}. Using ${color.green(packageManager)}... \n`,
   );
@@ -42,6 +40,7 @@ export const createVitNode = async ({
   createPackagesJSON({
     appName,
     root,
+    packageManager,
   });
 
   // Rename files
@@ -74,6 +73,4 @@ export const createVitNode = async ({
   if (eslint) {
     cpSync(join(templatePath, 'eslint'), root, { recursive: true });
   }
-
-  console.log(await getAvailablePackageManagers());
 };
