@@ -26,13 +26,13 @@ npx create-vitnode-app@latest
 or
 
 ```bash
-pnpm create vitnode-app
+pnpm create vitnode-app@latest
 ```
 
 or
 
 ```bash
-pnpm create vitnode-app
+yarn create vitnode-app@latest
 ```
 
 ## Options
