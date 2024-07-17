@@ -307,6 +307,10 @@ function logError(error) {
         folder: join('plugins', 'core', 'langs'),
         file: 'en.json',
       },
+      {
+        folder: join('plugins', 'admin', 'langs'),
+        file: 'en.json',
+      },
     ];
 
     // Create folder for apps in frontend package

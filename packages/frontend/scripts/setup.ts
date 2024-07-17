@@ -44,6 +44,10 @@ const init = () => {
       folder: join('plugins', 'core', 'langs'),
       file: 'en.json',
     },
+    {
+      folder: join('plugins', 'admin', 'langs'),
+      file: 'en.json',
+    },
   ];
 
   if (!fs.existsSync(frontendPackagePath)) {

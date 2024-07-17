@@ -70,7 +70,7 @@ export const createPackagesJSON = ({
     },
     dependencies: {
       geist: '^1.3.1',
-      next: '^15.0.0-canary.70',
+      next: '15.0.0-canary.70',
       react: '^19.0.0-rc.0',
       'react-dom': '^19.0.0-rc.0',
       'next-intl': '^3.17.1',
@@ -83,6 +83,7 @@ export const createPackagesJSON = ({
       autoprefixer: '^10.4.19',
       eslint: '^8.57.0',
       'eslint-config-typescript-vitnode': `^${pkg.version}`,
+      postcss: '^8.4.39',
       tailwindcss: '^3.4.4',
       typescript: '^5.5.3',
     },

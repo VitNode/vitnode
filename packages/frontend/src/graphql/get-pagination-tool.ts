@@ -36,7 +36,7 @@ export function getPaginationTool<T extends Record<string, unknown>>({
       : Number(searchParams.first ?? 0),
     last: Number(searchParams.last ?? 0),
     cursor: Number(searchParams.cursor) ?? null,
-    search: search ? (searchParams.search ?? '') : '',
+    search: search ? searchParams.search ?? '' : '',
     sortBy: getGetSortByParamsAPI({ constEnum: sortByEnum, searchParams }),
   };
 

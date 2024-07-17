@@ -47,7 +47,7 @@ export const useCreateEditPluginAdmin = ({ data }: Args) => {
       code: data?.code ?? '',
       description: data?.description ?? '',
       support_url: data?.support_url ?? '',
-      author: data ? data.author : (session?.name ?? ''),
+      author: data ? data.author : session?.name ?? '',
       author_url: data?.author_url ?? '',
     },
   });
