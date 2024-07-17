@@ -292,10 +292,6 @@ function logError(error) {
         file: 'not-found.tsx',
       },
       {
-        folder: join('app', `[locale]`),
-        file: 'layout.tsx',
-      },
-      {
         folder: join('app', `[locale]`, 'admin'),
         file: 'layout.tsx',
       },

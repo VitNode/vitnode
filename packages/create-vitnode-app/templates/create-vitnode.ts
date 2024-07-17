@@ -17,6 +17,7 @@ export const createVitNode = async ({
   appName,
   packageManager,
   eslint,
+  i18nRouting,
 }: Args) => {
   const templatePath = join(__dirname, '..', 'templates');
   console.log(
@@ -49,7 +50,12 @@ export const createVitNode = async ({
 
   // Change tailwind.config.ts based on package manager
   if (packageManager.startsWith('pnpm')) {
-    const tailwindConfigPath = join(root, 'frontend', 'tailwind.config.ts');
+    const tailwindConfigPath = join(
+      root,
+      'apps',
+      'frontend',
+      'tailwind.config.ts',
+    );
     const tailwindConfig = readFileSync(tailwindConfigPath, 'utf-8');
     const newTailwindConfig = tailwindConfig
       .replace(
@@ -73,4 +79,13 @@ export const createVitNode = async ({
   if (eslint) {
     cpSync(join(templatePath, 'eslint'), root, { recursive: true });
   }
+
+  // Copy i18n template
+  cpSync(
+    i18nRouting
+      ? join(templatePath, 'i18n', 'with')
+      : join(templatePath, 'i18n', 'without'),
+    root,
+    { recursive: true },
+  );
 };

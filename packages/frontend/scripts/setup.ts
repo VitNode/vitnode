@@ -29,10 +29,6 @@ const init = () => {
       file: 'not-found.tsx',
     },
     {
-      folder: localePath,
-      file: 'layout.tsx',
-    },
-    {
       folder: join(localePath, 'admin'),
       file: 'layout.tsx',
     },
