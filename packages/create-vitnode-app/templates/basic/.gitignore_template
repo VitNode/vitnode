@@ -39,3 +39,17 @@ yarn-error.log*
 
 # Docker
 /docker
+
+# Others
+/backend/uploads/public/*
+/backend/uploads/private/*
+/backend/uploads/temp/*
+!/backend/uploads/index.html
+!/backend/uploads/public/index.html
+!/backend/uploads/private/index.html
+!/backend/uploads/temp/index.html
+/backend/schema.gql
+
+# Configuration
+/backend/src/plugins/*/admin/database/migrations
+/backend/src/plugins/core/

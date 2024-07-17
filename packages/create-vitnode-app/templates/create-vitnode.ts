@@ -1,10 +1,11 @@
-import { cpSync, mkdirSync, readFileSync, writeFileSync } from 'fs';
+import { cpSync, mkdirSync, readFileSync, renameSync, writeFileSync } from 'fs';
 import { join } from 'path';
 
 import color from 'picocolors';
 
 import { isFolderEmpty } from '../helpers/is-folder-empty';
 import { CreateCliReturn } from '../cli';
+import { createPackagesJSON } from './create-packages-json';
 
 interface Args extends CreateCliReturn {
   appName: string;
@@ -32,10 +33,19 @@ export const createVitNode = ({
   }
 
   process.chdir(root);
-  const packageJsonPath = join(root, 'package.json');
 
   // Copy the basic template
   cpSync(join(templatePath, 'basic'), root, { recursive: true });
+
+  // Create package.json
+  createPackagesJSON({
+    appName,
+    root,
+  });
+
+  // Rename files
+  renameSync(join(root, '.gitignore_template'), join(root, '.gitignore'));
+  renameSync(join(root, '.npmrc_template'), join(root, '.npmrc'));
 
   // Change tailwind.config.ts based on package manager
   if (packageManager === 'pnpm') {
@@ -54,6 +64,12 @@ export const createVitNode = ({
     writeFileSync(tailwindConfigPath, newTailwindConfig);
   }
 
+  // Copy pnpm template
+  if (packageManager === 'pnpm') {
+    cpSync(join(templatePath, 'pnpm'), root, { recursive: true });
+  }
+
+  // Copy eslint template
   if (eslint) {
     cpSync(join(templatePath, 'eslint'), root, { recursive: true });
   }
