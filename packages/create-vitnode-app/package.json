@@ -10,9 +10,6 @@
     "url": "git+https://github.com/aXenDeveloper/VitNode.git",
     "directory": "packages/create-vitnode-app"
   },
-  "files": [
-    "dist"
-  ],
   "type": "module",
   "bin": {
     "create-vitnode-app": "dist/index.cjs"

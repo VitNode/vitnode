@@ -2,6 +2,8 @@
 /.turbo
 /node_modules
 /cli.ts
+/templates/create-vitnode.ts
 /index.ts
 /tsconfig.json
 /tsup.config.ts
+/.eslintrc.json

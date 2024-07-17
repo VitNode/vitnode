@@ -36,6 +36,7 @@
   },
   "packageManager": "pnpm@9.5.0",
   "dependencies": {
+    "create-vitnode-app": "0.0.7-canary.26",
     "drizzle-kit": "0.22.8",
     "drizzle-orm": "0.31.4"
   }
