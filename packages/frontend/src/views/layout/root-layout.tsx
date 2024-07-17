@@ -21,7 +21,7 @@ interface Props extends RootLayoutProps {
 
 export const generateMetadataRootLayout = async ({
   params: { locale },
-}: Props): Promise<Metadata> => {
+}: RootLayoutProps): Promise<Metadata> => {
   const metadata: Metadata = {
     manifest: `${CONFIG.backend_public_url}/assets/${locale}/manifest.webmanifest`,
     icons: {
