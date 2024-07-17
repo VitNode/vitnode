@@ -72,10 +72,10 @@
     "codegen": "graphql-codegen --config codegen.ts"
   },
   "peerDependencies": {
-    "next": "^15",
-    "react": "^19",
-    "react-dom": "^19",
-    "typescript": "^5"
+    "next": "^15.0.0-rc.0",
+    "react": "^19.0.0-rc-01172397-20240716",
+    "react-dom": "^19.0.0-rc-01172397-20240716",
+    "typescript": "^5.5.3"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^5.0.2",
@@ -84,15 +84,15 @@
     "@graphql-codegen/typescript-operations": "^4.2.3",
     "@swc/cli": "^0.4.0",
     "@swc/core": "^1.6.13",
-    "@types/node": "^20",
+    "@types/node": "^20.14.11",
     "@types/nprogress": "^0.2.3",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
     "concurrently": "^8.2.2",
     "dotenv": "^16.4.5",
     "eslint-config-typescript-vitnode": "workspace:*",
     "tsup": "^8.1.0",
-    "typescript": "^5"
+    "typescript": "^5.5.3"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.1.0",
@@ -152,7 +152,7 @@
     "next-themes": "^0.3.0",
     "nextjs-toploader": "^1.6.12",
     "nprogress": "^0.2.0",
-    "react": "19.0.0-rc.0",
+    "react": "^19.0.0-rc-01172397-20240716",
     "react-colorful": "^5.6.1",
     "react-cropper": "^2.3.3",
     "react-day-picker": "^8.10.1",
