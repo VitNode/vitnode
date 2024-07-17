@@ -3,6 +3,7 @@
   "extends": [
     "./.eslintrc.shared.json",
     "next/core-web-vitals",
+    "next/typescript",
     "plugin:jsx-a11y/recommended"
   ],
   "ignorePatterns": [
