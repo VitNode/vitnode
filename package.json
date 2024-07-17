@@ -34,7 +34,6 @@
     "turbo": "^2.0.6"
   },
   "packageManager": "pnpm@9.5.0",
-  "prettier": "eslint-config-typescript-vitnode/.prettierrc.json",
   "dependencies": {
     "drizzle-kit": "0.22.8",
     "drizzle-orm": "0.31.4"

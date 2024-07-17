@@ -12,7 +12,7 @@ import packageJson from './package.json' assert { type: 'json' };
 import { validateNpmName } from './helpers/validate-pkg';
 import { isFolderEmpty } from './helpers/is-folder-empty';
 import { isWriteable } from './helpers/is-writeable';
-import { createVitNode } from './create-vitnode';
+import { createVitNode } from './templates/create-vitnode';
 import { createCli, onPromptState } from './cli';
 
 let projectPath: string = '';

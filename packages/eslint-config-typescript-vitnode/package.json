@@ -17,7 +17,7 @@
     "tsconfig.next.json",
     ".eslintrc.shared.json",
     ".eslintrc.react.json",
-    ".prettierrc.json"
+    "prettierrc.mjs"
   ],
   "keywords": [
     "eslint",

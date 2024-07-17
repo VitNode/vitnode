@@ -1,6 +1,7 @@
 /helpers
 /.turbo
 /node_modules
+/cli.ts
 /index.ts
 /tsconfig.json
 /tsup.config.ts
