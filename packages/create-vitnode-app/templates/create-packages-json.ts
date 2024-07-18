@@ -37,10 +37,12 @@ export const createPackagesJSON = ({
       lint: 'turbo lint',
       'lint:fix': 'turbo lint:fix',
     },
-    overrides: {
-      react: '^19.0.0-rc.0',
-      'react-dom': '^19.0.0-rc.0',
-    },
+    overrides: packageManager.startsWith('npm')
+      ? {
+          react: '^19.0.0-rc.0',
+          'react-dom': '^19.0.0-rc.0',
+        }
+      : {},
     dependencies: {
       'drizzle-kit': '^0.22.8',
       'drizzle-orm': '^0.31.4',
