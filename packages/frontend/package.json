@@ -71,6 +71,18 @@
     "lint:fix": "eslint . --fix",
     "codegen": "graphql-codegen --config codegen.ts"
   },
+  "keywords": [
+    "vitnode",
+    "react",
+    "next",
+    "next.js",
+    "nextjs",
+    "typescript",
+    "tailwind",
+    "swc",
+    "tiptap",
+    "shadcnui"
+  ],
   "peerDependencies": {
     "next": "15.0.0-canary.72",
     "postcss": "^8.4.39",

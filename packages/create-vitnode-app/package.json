@@ -21,6 +21,17 @@
     "dev:script": "tsup index.ts --watch",
     "start:script": "node dist/index.cjs"
   },
+  "keywords": [
+    "vitnode",
+    "react",
+    "next",
+    "nest",
+    "nextjs",
+    "nestjs",
+    "typescript",
+    "next.js",
+    "nest.js"
+  ],
   "dependencies": {
     "figlet": "^1.7.0",
     "picocolors": "^1.0.1",

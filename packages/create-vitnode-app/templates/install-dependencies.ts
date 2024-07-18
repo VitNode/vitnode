@@ -5,11 +5,11 @@ import { CreateCliReturn } from '../cli';
 import { getOnline } from '../helpers/is-online';
 
 export const installDependencies = async ({
-  packageManager,
+  packageManager: pm,
 }: Pick<CreateCliReturn, 'packageManager'>) => {
+  const packageManager = pm.split('@')[0];
   const isOnline = await getOnline();
   const args: string[] = ['install'];
-  console.log('Installing packages...', packageManager);
 
   if (!isOnline) {
     console.log(
