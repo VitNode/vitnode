@@ -1,8 +1,8 @@
 import { getTranslations } from 'next-intl/server';
+import { Metadata } from 'next';
 
 import { ActionsPluginsAdmin } from './actions/actions';
 import { ContentPluginsCoreAdminView } from './content';
-
 import {
   Admin__Core_Plugins__Show,
   Admin__Core_Plugins__ShowQuery,
@@ -16,6 +16,7 @@ import {
 import { HeaderContent } from '@/components/ui/header-content';
 import { Card } from '@/components/ui/card';
 import { fetcher } from '@/graphql/fetcher';
+
 import { RebuildRequiredAdmin } from '../../../global/rebuild-required';
 
 export interface PluginsAdminViewProps {
@@ -29,9 +30,18 @@ const getData = async (variables: Admin__Core_Plugins__ShowQueryVariables) => {
   >({
     query: Admin__Core_Plugins__Show,
     variables,
+    cache: 'force-cache',
   });
 
   return data;
+};
+
+export const generateMetadataPluginsAdmin = async (): Promise<Metadata> => {
+  const t = await getTranslations('admin.core.plugins');
+
+  return {
+    title: t('title'),
+  };
 };
 
 export const PluginsAdminView = async ({

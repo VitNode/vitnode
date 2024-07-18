@@ -18,7 +18,7 @@ export const i18nConfig = async ({
   }: {
     locale: string;
     plugin: string;
-  }) => Promise<{ default: any }>;
+  }) => Promise<{ default: unknown }>;
 }): Promise<Omit<IntlConfig, 'locale'>> => {
   let plugins: string[] = [];
   try {
@@ -36,6 +36,7 @@ export const i18nConfig = async ({
     plugins = ['core', 'admin'];
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const messagesFormApps: any[] = await Promise.all(
     plugins.map(async plugin => {
       try {

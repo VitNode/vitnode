@@ -3,7 +3,7 @@ import * as fs from 'fs';
 import { Injectable } from '@nestjs/common';
 import { render } from '@react-email/render';
 import * as nodemailer from 'nodemailer';
-import * as React from 'react';
+import React from 'react';
 
 import {
   HelpersAdminEmailSettingsService,

@@ -6,7 +6,6 @@ import { useTranslations } from 'next-intl';
 
 import { mutationCreateApi } from './mutation-create-api';
 import { mutationEditApi } from './mutation-edit-api';
-
 import { ShowAdminPlugins } from '@/graphql/graphql';
 import { useDialog } from '@/components/ui/dialog';
 import { usePathname, useRouter } from '@/navigation';
@@ -48,7 +47,7 @@ export const useCreateEditPluginAdmin = ({ data }: Args) => {
       code: data?.code ?? '',
       description: data?.description ?? '',
       support_url: data?.support_url ?? '',
-      author: data ? data.author : session?.name ?? '',
+      author: data ? data.author : (session?.name ?? ''),
       author_url: data?.author_url ?? '',
     },
   });

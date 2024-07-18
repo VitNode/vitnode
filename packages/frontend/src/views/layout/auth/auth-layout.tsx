@@ -1,18 +1,18 @@
-import * as React from 'react';
+import React from 'react';
 import { isRedirectError } from 'next/dist/client/components/redirect';
 
 import { AuthProviders } from './providers';
-
-import { redirect } from '../../../navigation';
-import { InternalErrorView } from '../../global';
 import { getGlobalData } from '@/graphql/get-global-data';
 import { getSessionData } from '@/graphql/get-session-data';
 
-interface Props {
-  children: React.ReactNode;
-}
+import { redirect } from '../../../navigation';
+import { InternalErrorView } from '../../global';
 
-export const AuthLayout = async ({ children }: Props) => {
+export const AuthLayout = async ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   try {
     const data = await getSessionData();
     const { core_languages__show } = await getGlobalData();

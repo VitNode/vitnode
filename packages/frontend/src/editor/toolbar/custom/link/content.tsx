@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form';
 import { useTranslations } from 'next-intl';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { useEditorState } from '../../../hooks/use-editor-state';
 import {
   Form,
   FormControl,
@@ -14,11 +13,13 @@ import {
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 
-interface Props {
-  setOpen: (open: boolean) => void;
-}
+import { useEditorState } from '../../../hooks/use-editor-state';
 
-export const ContentLinkToolbarEditor = ({ setOpen }: Props) => {
+export const ContentLinkToolbarEditor = ({
+  setOpen,
+}: {
+  setOpen: (open: boolean) => void;
+}) => {
   const t = useTranslations('core.editor.link');
   const { editor } = useEditorState();
   const tCore = useTranslations('core');

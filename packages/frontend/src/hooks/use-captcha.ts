@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import * as React from 'react';
+import React from 'react';
 import { useLocale } from 'next-intl';
 import { useTheme } from 'next-themes';
 
 import { useGlobals } from './use-globals';
-
 import { CaptchaTypeEnum } from '@/graphql/graphql';
 
 export const useCaptcha = () => {

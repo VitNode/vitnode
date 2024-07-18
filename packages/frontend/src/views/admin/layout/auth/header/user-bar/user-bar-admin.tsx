@@ -3,11 +3,10 @@
 import { Home, LogOut } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
-import * as React from 'react';
+import React from 'react';
 
 import { ItemUserBarAdmin } from './item-user-bar-admin';
 import { mutationApi } from './hooks/mutation-api';
-
 import { useSessionAdmin } from '@/hooks/use-session-admin';
 import {
   Sheet,
@@ -19,11 +18,11 @@ import { Button } from '@/components/ui/button';
 import { AvatarUser } from '@/components/ui/user/avatar';
 import { Separator } from '@/components/ui/separator';
 
-interface Props {
+export const UserBarAdmin = ({
+  navComponent,
+}: {
   navComponent: React.ReactNode;
-}
-
-export const UserBarAdmin = ({ navComponent }: Props) => {
+}) => {
   const t = useTranslations('admin');
   const tCore = useTranslations('core');
   const { session } = useSessionAdmin();

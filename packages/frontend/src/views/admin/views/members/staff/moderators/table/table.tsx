@@ -2,11 +2,10 @@
 
 import { useTranslations } from 'next-intl';
 import { ColumnDef } from '@tanstack/react-table';
-import * as React from 'react';
+import React from 'react';
 import { InfinityIcon, ShieldAlert } from 'lucide-react';
 
 import { ActionsTableModeratorsStaffAdmin } from './actions/actions';
-
 import {
   Admin__Core_Staff_Moderators__ShowQuery,
   ShowAdminStaffModerators,

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { HeaderAdmin } from './header/header-admin';
 import { AsideAuthAdmin } from './aside/aside';

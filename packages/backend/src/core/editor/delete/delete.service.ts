@@ -4,13 +4,13 @@ import { count, eq } from 'drizzle-orm';
 import { DeleteCoreEditorArgs } from './dto/delete.args';
 
 import { DeleteCoreFilesService } from '../../files/helpers/delete/delete.service';
-import { DatabaseService } from '../../../database';
+import { DatabaseService } from '@/utils/database/database.service';
 import { User } from '../../../decorators';
 import { AccessDeniedError } from '../../../errors';
 import {
   core_files,
   core_files_using,
-} from '../../../templates/core/admin/database/schema/files';
+} from '../../../plugins/core/admin/database/schema/files';
 
 @Injectable()
 export class DeleteCoreEditorService {

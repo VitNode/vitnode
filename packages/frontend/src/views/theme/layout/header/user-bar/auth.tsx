@@ -1,13 +1,6 @@
 'use client';
 
-import {
-  KeyRound,
-  LogOut,
-  PaintRoller,
-  Settings,
-  Shield,
-  User,
-} from 'lucide-react';
+import { KeyRound, LogOut, Settings, User } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 import { useSession } from '@/hooks/use-session';
@@ -77,24 +70,6 @@ export const AuthUserBar = () => {
             <DropdownMenuSeparator />
 
             <DropdownMenuGroup>
-              {is_admin && (
-                <DropdownMenuItem asChild>
-                  <Link href="/admin/theme-editor">
-                    <PaintRoller />
-                    <span>{t('user-bar.theme_editor')}</span>
-                  </Link>
-                </DropdownMenuItem>
-              )}
-
-              {is_mod && (
-                <DropdownMenuItem asChild>
-                  <Link href="/mod">
-                    <Shield />
-                    <span>{t('user-bar.mod_cp')}</span>
-                  </Link>
-                </DropdownMenuItem>
-              )}
-
               {is_admin && (
                 <DropdownMenuItem asChild>
                   <Link href="/admin" target="_blank">

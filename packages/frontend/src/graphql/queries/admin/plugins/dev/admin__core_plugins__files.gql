@@ -4,7 +4,6 @@ query Admin__core_plugins__files($code: String!) {
     admin_templates
     databases
     pages
-    pages_container
     templates
     default_page
   }

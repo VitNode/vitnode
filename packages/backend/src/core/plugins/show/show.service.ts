@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 
 import { ShowCorePluginsObj } from './dto/show.obj';
 
-import { DatabaseService } from '../../../database';
+import { DatabaseService } from '@/utils/database/database.service';
 
 @Injectable()
 export class ShowCorePluginsService {

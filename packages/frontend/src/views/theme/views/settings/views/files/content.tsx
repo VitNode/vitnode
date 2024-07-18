@@ -1,7 +1,7 @@
 'use client';
 
 import { ColumnDef } from '@tanstack/react-table';
-import * as React from 'react';
+import React from 'react';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { Clock, Download, File } from 'lucide-react';

@@ -157,7 +157,6 @@ export type FilesAdminPluginsObj = {
   databases: Scalars['Int']['output'];
   default_page: Scalars['Boolean']['output'];
   pages: Scalars['Int']['output'];
-  pages_container: Scalars['Int']['output'];
   templates: Scalars['Int']['output'];
 };
 
@@ -182,14 +181,6 @@ export type GroupUser = {
   __typename?: 'GroupUser';
   id: Scalars['Int']['output'];
   name: Array<TextLanguage>;
-};
-
-export type GroupsPermissionsCreatePluginCategories = {
-  can_create: Scalars['Boolean']['input'];
-  can_download_files: Scalars['Boolean']['input'];
-  can_read: Scalars['Boolean']['input'];
-  can_reply: Scalars['Boolean']['input'];
-  group_id: Scalars['Int']['input'];
 };
 
 export type HslColor = {
@@ -226,7 +217,6 @@ export type LayoutAdminInstallObj = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  admin__blog_categories__create: ShowBlogCategories;
   admin__core_email_settings__edit: ShowAdminEmailSettingsServiceObj;
   admin__core_email_settings__test: Scalars['String']['output'];
   admin__core_files__delete: Scalars['String']['output'];
@@ -267,19 +257,12 @@ export type Mutation = {
   core_editor_files__upload: ShowCoreFiles;
   core_members__avatar__delete: Scalars['String']['output'];
   core_members__avatar__upload: UploadAvatarCoreMembersObj;
+  core_members__change_password: User;
   core_members__delete: Scalars['String']['output'];
   core_members__reset_password__create_key: Scalars['String']['output'];
   core_sessions__sign_in: Scalars['String']['output'];
   core_sessions__sign_out: Scalars['String']['output'];
   core_sessions__sign_up: SignUpCoreSessionsObj;
-};
-
-
-export type MutationAdmin__Blog_Categories__CreateArgs = {
-  color: Scalars['String']['input'];
-  description: Array<TextLanguageInput>;
-  name: Array<TextLanguageInput>;
-  permissions: PermissionsCreatePluginCategories;
 };
 
 
@@ -557,6 +540,12 @@ export type MutationCore_Members__Avatar__UploadArgs = {
 };
 
 
+export type MutationCore_Members__Change_PasswordArgs = {
+  hashKey: Scalars['String']['input'];
+  password: Scalars['String']['input'];
+};
+
+
 export type MutationCore_Members__DeleteArgs = {
   id: Scalars['Int']['input'];
 };
@@ -598,14 +587,6 @@ export type PageInfo = {
   totalCount: Scalars['Float']['output'];
 };
 
-export type PermissionsCreatePluginCategories = {
-  can_all_create: Scalars['Boolean']['input'];
-  can_all_download_files: Scalars['Boolean']['input'];
-  can_all_read: Scalars['Boolean']['input'];
-  can_all_reply: Scalars['Boolean']['input'];
-  groups: Array<GroupsPermissionsCreatePluginCategories>;
-};
-
 export type Query = {
   __typename?: 'Query';
   admin__core_email_settings__show: ShowAdminEmailSettingsServiceObj;
@@ -622,7 +603,6 @@ export type Query = {
   admin__core_staff_moderators__show: ShowAdminStaffModeratorsObj;
   admin__install__layout: LayoutAdminInstallObj;
   admin__sessions__authorization: AuthorizationAdminSessionsObj;
-  blog_categories__show: ShowBlogCategoriesObj;
   core_files__show: ShowCoreFilesObj;
   core_languages__show: ShowCoreLanguagesObj;
   core_members__show: ShowCoreMembersObj;
@@ -697,13 +677,6 @@ export type QueryAdmin__Core_Staff_Moderators__ShowArgs = {
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
   sortBy?: InputMaybe<ShowAdminStaffModeratorsSortByArgs>;
-};
-
-
-export type QueryBlog_Categories__ShowArgs = {
-  cursor?: InputMaybe<Scalars['Int']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
@@ -972,21 +945,6 @@ export const ShowAdminStaffModeratorsSortingColumnEnum = {
 } as const;
 
 export type ShowAdminStaffModeratorsSortingColumnEnum = typeof ShowAdminStaffModeratorsSortingColumnEnum[keyof typeof ShowAdminStaffModeratorsSortingColumnEnum];
-export type ShowBlogCategories = {
-  __typename?: 'ShowBlogCategories';
-  color: Scalars['String']['output'];
-  description?: Maybe<Array<TextLanguage>>;
-  id: Scalars['Int']['output'];
-  name: Array<TextLanguage>;
-  position: Scalars['Int']['output'];
-};
-
-export type ShowBlogCategoriesObj = {
-  __typename?: 'ShowBlogCategoriesObj';
-  edges: Array<ShowBlogCategories>;
-  pageInfo: PageInfo;
-};
-
 export type ShowCoreFiles = {
   __typename?: 'ShowCoreFiles';
   count_uses: Scalars['Int']['output'];
@@ -1718,7 +1676,7 @@ export type Admin__Core_Plugins__FilesQueryVariables = Exact<{
 }>;
 
 
-export type Admin__Core_Plugins__FilesQuery = { __typename?: 'Query', admin__core_plugins__files: { __typename?: 'FilesAdminPluginsObj', admin_pages: number, admin_templates: number, databases: number, pages: number, pages_container: number, templates: number, default_page: boolean } };
+export type Admin__Core_Plugins__FilesQuery = { __typename?: 'Query', admin__core_plugins__files: { __typename?: 'FilesAdminPluginsObj', admin_pages: number, admin_templates: number, databases: number, pages: number, templates: number, default_page: boolean } };
 
 export type Admin__Core_Plugins__Show__ItemQueryVariables = Exact<{
   code?: InputMaybe<Scalars['String']['input']>;
@@ -2587,7 +2545,6 @@ export const Admin__Core_Plugins__Files = gql`
     admin_templates
     databases
     pages
-    pages_container
     templates
     default_page
   }

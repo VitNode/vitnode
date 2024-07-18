@@ -1,8 +1,8 @@
 import { getTranslations } from 'next-intl/server';
+import { Metadata } from 'next';
 
 import { ActionsGroupsMembersAdmin } from './actions/actions-groups-members-admin';
 import { TableGroupsMembersAdmin } from './table/table';
-
 import { fetcher } from '@/graphql/fetcher';
 import {
   Admin__Core_Groups__Show,
@@ -32,6 +32,15 @@ const getData = async (variables: Admin__Core_Groups__ShowQueryVariables) => {
 export interface GroupsMembersAdminViewProps {
   searchParams: SearchParamsPagination;
 }
+
+export const generateMetadataGroupsMembersAdminView =
+  async (): Promise<Metadata> => {
+    const t = await getTranslations('admin.members.groups');
+
+    return {
+      title: t('title'),
+    };
+  };
 
 export const GroupsMembersAdminView = async ({
   searchParams,

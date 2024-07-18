@@ -14,17 +14,7 @@ export const generateConfig = ({ pluginsPath }: { pluginsPath: string }) => {
   if (!fs.existsSync(configPath)) {
     fs.writeFileSync(
       configPath,
-      JSON.stringify(
-        {
-          ...DEFAULT_CONFIG_DATA,
-          lang: [
-            { code: 'en', enabled: true },
-            { code: 'pl', enabled: true },
-          ],
-        },
-        null,
-        2,
-      ),
+      JSON.stringify(DEFAULT_CONFIG_DATA, null, 2),
       'utf8',
     );
 

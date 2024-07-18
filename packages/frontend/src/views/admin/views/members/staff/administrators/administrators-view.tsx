@@ -1,8 +1,8 @@
 import { getTranslations } from 'next-intl/server';
+import { Metadata } from 'next';
 
 import { TableAdministratorsStaffAdmin } from './table/table';
 import { ActionsAdministratorsStaffAdmin } from './actions/actions';
-
 import {
   Admin__Core_Staff_Administrators__Show,
   Admin__Core_Staff_Administrators__ShowQuery,
@@ -34,6 +34,15 @@ const getData = async (
 export interface AdministratorsStaffAdminViewProps {
   searchParams: SearchParamsPagination;
 }
+
+export const generateMetadataAdministratorsStaffAdminView =
+  async (): Promise<Metadata> => {
+    const t = await getTranslations('admin.members.staff.administrators');
+
+    return {
+      title: t('title'),
+    };
+  };
 
 export const AdministratorsStaffAdminView = async ({
   searchParams,

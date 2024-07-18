@@ -12,12 +12,12 @@ import {
 
 import { DownloadAdminPluginsArgs } from './dto/download.args';
 
-import { DatabaseService } from '@/database';
+import { DatabaseService } from '@/utils/database/database.service';
 import { CustomError, NotFoundError } from '@/errors';
 import { execShellCommand } from '@/functions';
 import { User } from '@/decorators';
 import { ABSOLUTE_PATHS_BACKEND, PluginInfoJSONType } from '../../../..';
-import { core_plugins } from '@/templates/core/admin/database/schema/plugins';
+import { core_plugins } from '@/plugins/core/admin/database/schema/plugins';
 
 @Injectable()
 export class DownloadAdminPluginsService {
@@ -64,7 +64,7 @@ export class DownloadAdminPluginsService {
     fs.cpSync(backendSource, backendPath, { recursive: true });
 
     // Copy frontend files
-    const frontendPaths = ['admin_pages', 'pages', 'plugin', 'pages_container'];
+    const frontendPaths = ['admin_pages', 'pages', 'plugin'];
     frontendPaths.forEach(path => {
       this.copyFiles({
         destination: join(frontendPath, path),

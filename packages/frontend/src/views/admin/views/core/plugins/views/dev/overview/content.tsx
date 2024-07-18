@@ -2,11 +2,12 @@
 
 import { useTranslations } from 'next-intl';
 
-import { useCreateEditPluginAdmin } from '../../../actions/create/hooks/use-create-edit-plugin-admin';
-import { FormCreateEditPluginAdmin } from '../../../actions/create/form';
 import { ShowAdminPlugins } from '@/graphql/graphql';
 import { Form } from '@/components/ui/form';
 import { Button } from '@/components/ui/button';
+
+import { FormCreateEditPluginAdmin } from '../../../actions/create/form';
+import { useCreateEditPluginAdmin } from '../../../actions/create/hooks/use-create-edit-plugin-admin';
 
 export const ContentOverviewDevPluginAdmin = (data: ShowAdminPlugins) => {
   const t = useTranslations('core');

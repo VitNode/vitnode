@@ -1,6 +1,6 @@
 'use client';
 
-import * as React from 'react';
+import React from 'react';
 
 import { WelcomeInstallConfigsView } from './steps/welcome';
 import { InstallVitNodeContext } from './hooks/use-install-vitnode';
@@ -8,7 +8,6 @@ import { LicenseInstallConfigsView } from './steps/license/license-install-confi
 import { DatabaseInstallConfigsView } from './steps/database/database-install-configs-view';
 import { AccountInstallConfigsView } from './steps/account/account-install-configs-view';
 import { FinishInstallConfigsView } from './finish/finish-install-config-view';
-
 import { LayoutAdminInstallEnum } from '@/graphql/graphql';
 import { ItemStepProps, Steps } from '@/components/ui/steps';
 import {
@@ -18,11 +17,11 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 
-interface Props {
+export const ContentInstallConfigsView = ({
+  data,
+}: {
   data: LayoutAdminInstallEnum;
-}
-
-export const ContentInstallConfigsView = ({ data }: Props) => {
+}) => {
   const [currentStep, setCurrentStep] = React.useState(0);
 
   const items: ItemStepProps[] = [

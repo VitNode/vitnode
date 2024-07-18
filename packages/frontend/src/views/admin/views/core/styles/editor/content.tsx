@@ -4,7 +4,6 @@ import { useTranslations } from 'next-intl';
 
 import { useEditorAdmin } from './hooks/use-editor-admin';
 import { FilesSectionContentEditorAdmin } from './sections/files';
-
 import { Card } from '@/components/ui/card';
 import {
   Form,

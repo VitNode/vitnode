@@ -13,9 +13,12 @@ import { APP_GUARD } from '@nestjs/core';
 
 import { GqlContext } from './utils';
 import { CoreModule } from './core/core.module';
-import { DatabaseModule, DatabaseModuleArgs } from './database/database.module';
 import { GlobalProvidersModule } from './providers/providers.module';
 import { GqlThrottlerGuard } from './utils/guards/gql-throttler.guard';
+import {
+  DatabaseModule,
+  DatabaseModuleArgs,
+} from './utils/database/database.module';
 
 export interface VitNodePaths {
   envFile: string;
@@ -78,14 +81,6 @@ export const ABSOLUTE_PATHS_BACKEND = {
         code,
       ),
       admin_templates: join(internalPaths.frontend, 'plugins', code, 'admin'),
-      pages_container: join(
-        internalPaths.frontend,
-        'app',
-        '[locale]',
-        '(main)',
-        '(container)',
-        code,
-      ),
       default_page: join(
         internalPaths.frontend,
         'plugins',

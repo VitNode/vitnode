@@ -5,7 +5,7 @@ import { Injectable } from '@nestjs/common';
 import { FilesAdminPluginsArgs } from './dto/files.args';
 import { FilesAdminPluginsObj } from './dto/files.obj';
 
-import { DatabaseService } from '@/database';
+import { DatabaseService } from '@/utils/database/database.service';
 import { NotFoundError } from '@/errors';
 import { ABSOLUTE_PATHS_BACKEND } from '../../../..';
 
@@ -48,9 +48,6 @@ export class FilesAdminPluginsService {
       }),
       pages: await this.checkNumberOfFiles({
         paths: pluginPaths.frontend.pages,
-      }),
-      pages_container: await this.checkNumberOfFiles({
-        paths: pluginPaths.frontend.pages_container,
       }),
       default_page: fs.existsSync(pluginPaths.frontend.default_page),
       templates: await this.checkNumberOfFiles({

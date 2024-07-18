@@ -1,13 +1,14 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "extends": "eslint-config-vitnode/tsconfig.base.json",
+  "extends": "eslint-config-typescript-vitnode/tsconfig.next.json",
   "compilerOptions": {
     "target": "ES2022",
     "module": "esnext",
     "baseUrl": "./",
+    "outDir": "./dist",
+    "rootDir": "./",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "moduleResolution": "bundler",
-    "jsx": "preserve",
+    "noEmit": false,
     "declaration": true,
     "emitDeclarationOnly": true,
     "plugins": [
@@ -15,12 +16,10 @@
         "name": "next"
       }
     ],
-    "outDir": "./dist",
-    "rootDir": "./",
     "paths": {
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "src/**/*", "global.d.ts"],
-  "exclude": ["codegen.ts", "scripts/**/*"]
+  "include": ["next-env.d.ts", "src/**/*", "global.d.ts", "scripts/**/*"],
+  "exclude": ["codegen.ts"]
 }

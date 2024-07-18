@@ -1,15 +1,7 @@
-import * as React from 'react';
+import React from 'react';
 
 import { cn } from '@/helpers/classnames';
 import { Link } from '@/navigation';
-
-interface Props {
-  children: React.ReactNode;
-  active?: boolean;
-  href?: string;
-  onClick?: () => void;
-  ref?: React.Ref<HTMLAnchorElement> | React.RefObject<HTMLButtonElement>;
-}
 
 export const ItemQuickMenu = ({
   active,
@@ -17,7 +9,13 @@ export const ItemQuickMenu = ({
   href,
   onClick,
   ref,
-}: Props) => {
+}: {
+  children: React.ReactNode;
+  active?: boolean;
+  href?: string;
+  onClick?: () => void;
+  ref?: React.Ref<HTMLAnchorElement> | React.RefObject<HTMLButtonElement>;
+}) => {
   const className = cn(
     'text-foreground [&>span]:text-muted-foreground flex flex-1 flex-col items-center justify-center gap-1.5 px-1 pb-2 pt-1.5 text-center text-xs leading-none no-underline [&>svg]:size-6',
     {

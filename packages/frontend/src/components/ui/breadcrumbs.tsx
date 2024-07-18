@@ -1,5 +1,5 @@
 import { ChevronRight, Home } from 'lucide-react';
-import * as React from 'react';
+import React from 'react';
 import { useTranslations } from 'next-intl';
 
 import { buttonVariants } from './button';
@@ -7,13 +7,15 @@ import { buttonVariants } from './button';
 import { cn } from '../../helpers/classnames';
 import { Link } from '../../navigation';
 
-interface Props {
+export const Breadcrumbs = ({
+  children,
+  items,
+  ref,
+}: {
   items: { href: string; id: number | string; text: string }[];
   children?: React.ReactNode;
   ref?: React.Ref<HTMLDivElement>;
-}
-
-export const Breadcrumbs = ({ children, items, ref }: Props) => {
+}) => {
   const t = useTranslations('core');
   const classNameItem = cn(
     buttonVariants({

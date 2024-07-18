@@ -1,5 +1,6 @@
-import { ContentInstallConfigsView } from './content/content';
+import { Metadata } from 'next';
 
+import { ContentInstallConfigsView } from './content/content';
 import {
   Admin__Install__Layout,
   Admin__Install__LayoutQuery,
@@ -7,6 +8,8 @@ import {
 } from '@/graphql/graphql';
 import { ErrorType, fetcher } from '@/graphql/fetcher';
 import { redirect } from '@/navigation';
+import { InstallConfigLayout } from './layout';
+
 import { InternalErrorView } from '../../../global';
 
 const getData = async () => {
@@ -21,12 +24,20 @@ const getData = async () => {
   return data;
 };
 
+export const generateMetadataInstallConfigs = (): Metadata => {
+  return {
+    title: 'Install',
+  };
+};
+
 export const InstallConfigsView = async () => {
   try {
     const data = await getData();
 
     return (
-      <ContentInstallConfigsView data={data.admin__install__layout.status} />
+      <InstallConfigLayout>
+        <ContentInstallConfigsView data={data.admin__install__layout.status} />
+      </InstallConfigLayout>
     );
   } catch (error) {
     const code = error as ErrorType;

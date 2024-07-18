@@ -4,7 +4,6 @@ import { useTranslations } from 'next-intl';
 import { SquareArrowOutUpRight } from 'lucide-react';
 
 import { useCaptchaSecurityAdmin } from './hooks/use-captcha-security-admin';
-
 import {
   Admin__Core_Security__Captcha__ShowQuery,
   CaptchaTypeEnum,

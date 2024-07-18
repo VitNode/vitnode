@@ -2,10 +2,11 @@
 
 import { motion } from 'framer-motion';
 
-import { LinkItemNavSettingsProps } from '../../hooks/use-settings-view';
 import { Link, usePathname } from '@/navigation';
 import { cn } from '@/helpers/classnames';
 import { buttonVariants } from '@/components/ui/button';
+
+import { LinkItemNavSettingsProps } from '../../hooks/use-settings-view';
 
 export const LinkItemNavSettings = ({
   children,

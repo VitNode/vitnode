@@ -2,12 +2,13 @@
 
 import { useTranslations } from 'next-intl';
 import { Plus } from 'lucide-react';
-import * as React from 'react';
+import React from 'react';
 
-import { CreateEditNavDevPluginAdminProps } from '../../create-edit/create-edit';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Loader } from '@/components/ui/loader';
+
+import { CreateEditNavDevPluginAdminProps } from '../../create-edit/create-edit';
 
 const Content = React.lazy(async () =>
   import('../../create-edit/create-edit').then(module => ({

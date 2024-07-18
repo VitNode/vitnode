@@ -1,9 +1,11 @@
 /.turbo
+/src
+!/src/global.css
 /scripts
 /node_modules
 /.eslintrc.json
 /codegen.ts
 /next-env.d.ts
-/tailwind.config.ts
 /tsconfig.json
 /tsup.config.ts
+/.swcrc

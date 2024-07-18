@@ -3,7 +3,6 @@ import { toast } from 'sonner';
 
 import { mutationApi } from './mutation-api';
 import { SubmitDeleteActionsTableAdministratorsStaffAdmin } from './submit';
-
 import { ShowAdminStaffAdministrators } from '@/graphql/graphql';
 import {
   AlertDialogCancel,
@@ -15,13 +14,11 @@ import {
 } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
 
-interface Props {
-  data: Pick<ShowAdminStaffAdministrators, 'id'>;
-}
-
 export const ContentDeleteActionsAdministratorsStaffAdmin = ({
   data: { id },
-}: Props) => {
+}: {
+  data: Pick<ShowAdminStaffAdministrators, 'id'>;
+}) => {
   const t = useTranslations('admin.members.staff.administrators.delete');
   const tCore = useTranslations('core');
   const { setOpen } = useAlertDialog();

@@ -12,9 +12,6 @@ export class FilesAdminPluginsObj {
   admin_templates: number;
 
   @Field(() => Int)
-  pages_container: number;
-
-  @Field(() => Int)
   pages: number;
 
   @Field(() => Boolean)

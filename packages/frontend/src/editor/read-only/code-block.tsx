@@ -1,5 +1,5 @@
 import { Element } from 'html-react-parser';
-import * as React from 'react';
+import React from 'react';
 import { generateRandomString } from 'vitnode-shared';
 
 import { classNameCodeBlock, lowlight } from '../extensions/code/code';

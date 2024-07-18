@@ -1,6 +1,6 @@
 'use client';
 
-import * as React from 'react';
+import React from 'react';
 
 import { ThemeEditorViewEnum, ToolbarThemeEditor } from './toolbar';
 import { ThemeEditorContext, ThemeEditorTab } from './hooks/use-theme-editor';
@@ -9,7 +9,6 @@ import {
   keysFromCSSThemeEditor,
   useThemeEditorApi,
 } from './hooks/use-theme-editor-api';
-
 import { Core_Theme_Editor__ShowQuery } from '@/graphql/graphql';
 import { CONFIG } from '@/helpers/config-with-env';
 import { cn } from '@/helpers/classnames';

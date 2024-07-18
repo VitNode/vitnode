@@ -15,13 +15,11 @@ import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 
-interface Props {
-  isGuest?: boolean;
-}
-
 export const ContentContentCreateEditFormGroupsMembersAdmin = ({
   isGuest,
-}: Props) => {
+}: {
+  isGuest?: boolean;
+}) => {
   const t = useTranslations('admin.members.groups.create_edit');
   const tCore = useTranslations('core');
   const form = useFormContext();

@@ -3,19 +3,17 @@ import Image from 'next/image';
 
 import { Loader } from '@/components/ui/loader';
 
-interface Props {
-  alt: string;
-  isError: boolean | undefined;
-  isLoading: boolean;
-  src: string | null;
-}
-
 export const IconItemListFilesFooterEditor = ({
   alt,
   isError,
   isLoading,
   src,
-}: Props) => {
+}: {
+  alt: string;
+  isError: boolean | undefined;
+  isLoading: boolean;
+  src: string | null;
+}) => {
   if (isLoading) {
     return <Loader />;
   }

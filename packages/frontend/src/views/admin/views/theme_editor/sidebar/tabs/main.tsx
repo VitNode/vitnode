@@ -1,8 +1,9 @@
 import { ChevronRight } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
-import { ThemeEditorTab, useThemeEditor } from '../../hooks/use-theme-editor';
 import { Button } from '@/components/ui/button';
+
+import { ThemeEditorTab, useThemeEditor } from '../../hooks/use-theme-editor';
 
 export const MainTabThemeEditor = () => {
   const t = useTranslations('core.theme_editor');

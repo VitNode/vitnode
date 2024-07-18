@@ -15,7 +15,7 @@ import { UploadCoreFilesArgs } from './dto/upload.args';
 import { UploadCoreFilesObj } from './dto/upload.obj';
 import { HelpersUploadCoreFilesService, acceptMimeTypeImage } from './helpers';
 
-import { DatabaseService } from '@/database';
+import { DatabaseService } from '@/utils/database/database.service';
 import { CustomError } from '@/errors';
 import { ABSOLUTE_PATHS_BACKEND } from '../../../..';
 

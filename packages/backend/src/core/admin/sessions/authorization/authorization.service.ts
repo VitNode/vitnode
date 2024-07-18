@@ -12,7 +12,7 @@ import {
   NavAdminPluginsAuthorization,
 } from './dto/authorization.obj';
 
-import { DatabaseService } from '@/database';
+import { DatabaseService } from '@/utils/database/database.service';
 import { DeviceSignInCoreSessionsService } from '../../../sessions/sign_in/device.service';
 import {
   ABSOLUTE_PATHS_BACKEND,
@@ -21,7 +21,7 @@ import {
   GqlContext,
 } from '@/index';
 import { AuthorizationCurrentUserObj } from '../../../sessions/authorization/dto/authorization.obj';
-import { core_sessions_known_devices } from '@/templates/core/admin/database/schema/sessions';
+import { core_sessions_known_devices } from '@/plugins/core/admin/database/schema/sessions';
 import { getUserAgentData, getUserIp } from '@/functions';
 
 @Injectable()

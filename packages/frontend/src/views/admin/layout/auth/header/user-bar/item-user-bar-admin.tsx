@@ -1,23 +1,21 @@
-import * as React from 'react';
+import React from 'react';
 
 import { cn } from '@/helpers/classnames';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { Link } from '@/navigation';
 import { SheetClose } from '@/components/ui/sheet';
 
-interface Props {
-  children: React.ReactNode;
-  href?: string;
-  onClick?: () => void;
-  target?: string;
-}
-
 export const ItemUserBarAdmin = ({
   children,
   href,
   onClick,
   target,
-}: Props) => {
+}: {
+  children: React.ReactNode;
+  href?: string;
+  onClick?: () => void;
+  target?: string;
+}) => {
   const content = () => {
     const className =
       'w-full justify-start [&>svg]:text-muted-foreground font-normal';

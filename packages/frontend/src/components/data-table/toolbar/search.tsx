@@ -1,19 +1,17 @@
 import { useSearchParams } from 'next/navigation';
-import * as React from 'react';
+import React from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 
 import { usePathname, useRouter } from '../../../navigation';
 import { Input } from '../../ui/input';
 
-interface Props {
-  startTransition: React.TransitionStartFunction;
-  searchPlaceholder?: string;
-}
-
 export const SearchToolbarDataTable = ({
   searchPlaceholder,
   startTransition,
-}: Props) => {
+}: {
+  startTransition: React.TransitionStartFunction;
+  searchPlaceholder?: string;
+}) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { push } = useRouter();

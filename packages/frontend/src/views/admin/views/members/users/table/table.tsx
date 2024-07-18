@@ -1,13 +1,12 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import * as React from 'react';
+import React from 'react';
 import { ColumnDef } from '@tanstack/react-table';
 import { Pencil } from 'lucide-react';
 
 import { GroupsFiltersUsersMembersAdmin } from './filters/groups-filters-users-members-admin';
 import { AdvancedFiltersUsersMembersAdmin } from './filters/advanced/advanced-filters-users-members-admin';
-
 import {
   Admin__Core_Members__ShowQuery,
   ShowAdminMembers,

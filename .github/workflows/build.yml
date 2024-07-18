@@ -32,11 +32,17 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Build Docs
+        run: pnpm build:docs
+
       - name: Build Scripts
         run: pnpm build:scripts
 
-      - name: Build Docs
-        run: pnpm build:docs
+      - name: Install scripts
+        run: pnpm install
+
+      - name: Run config init
+        run: pnpm config:init:skip-database
 
       - name: Build
         run: pnpm build

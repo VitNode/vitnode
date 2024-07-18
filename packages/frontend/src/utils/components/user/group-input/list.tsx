@@ -7,14 +7,16 @@ import { GroupFormat } from '@/components/ui/user/group-format';
 import { GroupInputItem } from '@/components/ui/user/group-input';
 import { ShowAdminGroups } from '@/graphql/graphql';
 
-interface Props {
+export const GroupInputContentList = ({
+  edges,
+  onSelect,
+  values,
+}: {
   edges: Pick<ShowAdminGroups, 'guest' | 'id' | 'name'>[];
   onSelect: (value: GroupInputItem) => void;
   values: GroupInputItem[];
   multiple?: boolean;
-}
-
-export const GroupInputContentList = ({ edges, onSelect, values }: Props) => {
+}) => {
   const t = useTranslations('core');
 
   if (edges.length === 0) {

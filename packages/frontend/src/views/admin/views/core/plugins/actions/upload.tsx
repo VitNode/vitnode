@@ -2,7 +2,7 @@
 
 import { Upload } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import * as React from 'react';
+import React from 'react';
 
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';

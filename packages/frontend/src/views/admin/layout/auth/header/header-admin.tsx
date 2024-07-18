@@ -1,6 +1,5 @@
 import { UserBarAdmin } from './user-bar/user-bar-admin';
 import { NavAdmin } from '../nav/nav-admin';
-
 import { CONFIG } from '@/helpers/config-with-env';
 import { Link } from '@/navigation';
 import { LogoVitNode } from '@/components/logo-vitnode';

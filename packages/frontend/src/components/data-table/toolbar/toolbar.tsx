@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { SearchToolbarDataTable } from './search';
 import { AdvancedFilterToolbarDataTable } from './advanced-filter/advanced-filter-toolbar-data-table';

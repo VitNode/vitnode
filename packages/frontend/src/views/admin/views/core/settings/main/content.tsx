@@ -3,7 +3,6 @@
 import { useTranslations } from 'next-intl';
 
 import { useSettingsCoreAdmin } from './hooks/use-settings-core-admin';
-
 import { Core_Main_Settings__ShowQuery } from '@/graphql/graphql';
 import {
   Form,

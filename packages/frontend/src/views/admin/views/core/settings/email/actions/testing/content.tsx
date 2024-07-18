@@ -1,7 +1,6 @@
 import { useTranslations } from 'next-intl';
 
 import { useTestingEmailAdmin } from './hooks/use-testing-email-admin';
-
 import {
   DialogFooter,
   DialogHeader,

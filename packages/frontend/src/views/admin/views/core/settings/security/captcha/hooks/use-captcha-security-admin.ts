@@ -5,7 +5,6 @@ import { toast } from 'sonner';
 import { useTranslations } from 'next-intl';
 
 import { mutationApi } from './mutation-api';
-
 import {
   Admin__Core_Security__Captcha__ShowQuery,
   CaptchaTypeEnum,

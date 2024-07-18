@@ -11,7 +11,10 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 
-interface Props {
+export const FormCreateEditPluginAdmin = ({
+  form,
+  isEdit,
+}: {
   form: UseFormReturn<{
     author: string;
     author_url: string;
@@ -21,9 +24,7 @@ interface Props {
     support_url: string;
   }>;
   isEdit?: boolean;
-}
-
-export const FormCreateEditPluginAdmin = ({ form, isEdit }: Props) => {
+}) => {
   const t = useTranslations('admin.core.plugins');
 
   return (

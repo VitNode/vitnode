@@ -1,7 +1,7 @@
 'use client';
 
 import { useEditor, EditorContent } from '@tiptap/react';
-import * as React from 'react';
+import React from 'react';
 import { useLocale } from 'next-intl';
 
 import { ToolBarEditor } from './toolbar/toolbar';
@@ -73,7 +73,7 @@ export const Editor = ({
     },
     content: (() => {
       const current = Array.isArray(value)
-        ? value.find(v => v.language_code === selectedLanguage)?.value ?? ''
+        ? (value.find(v => v.language_code === selectedLanguage)?.value ?? '')
         : value;
 
       try {
