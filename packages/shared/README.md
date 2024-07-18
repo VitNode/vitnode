@@ -26,9 +26,3 @@ or
 ```bash
 pnpm add vitnode-shared
 ```
-
-or
-
-```bash
-yarn add vitnode-shared
-```

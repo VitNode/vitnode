@@ -292,10 +292,6 @@ function logError(error) {
         file: 'not-found.tsx',
       },
       {
-        folder: join('app', `[locale]`),
-        file: 'layout.tsx',
-      },
-      {
         folder: join('app', `[locale]`, 'admin'),
         file: 'layout.tsx',
       },
@@ -304,12 +300,24 @@ function logError(error) {
         file: 'page.tsx',
       },
       {
+        folder: join('app', `[locale]`, '(main)'),
+        file: 'layout.tsx',
+      },
+      {
         folder: join('app', `[locale]`, 'admin', '(auth)'),
         file: 'layout.tsx',
       },
       {
         folder: join('plugins', 'core', 'langs'),
         file: 'en.json',
+      },
+      {
+        folder: join('plugins', 'admin', 'langs'),
+        file: 'en.json',
+      },
+      {
+        folder: '',
+        file: 'global.d.ts',
       },
     ];
 

@@ -1,6 +1,6 @@
 {
   "name": "create-vitnode-app",
-  "version": "0.0.7-canary.21",
+  "version": "0.0.7-canary.46",
   "description": "Create a new VitNode app in seconds.",
   "author": "VitNode Team",
   "license": "MIT",
@@ -10,9 +10,6 @@
     "url": "git+https://github.com/aXenDeveloper/VitNode.git",
     "directory": "packages/create-vitnode-app"
   },
-  "files": [
-    "dist"
-  ],
   "type": "module",
   "bin": {
     "create-vitnode-app": "dist/index.cjs"
@@ -24,6 +21,17 @@
     "dev:script": "tsup index.ts --watch",
     "start:script": "node dist/index.cjs"
   },
+  "keywords": [
+    "vitnode",
+    "react",
+    "next",
+    "nest",
+    "nextjs",
+    "nestjs",
+    "typescript",
+    "next.js",
+    "nest.js"
+  ],
   "dependencies": {
     "figlet": "^1.7.0",
     "picocolors": "^1.0.1",
@@ -31,13 +39,16 @@
     "validate-npm-package-name": "^5.0.1"
   },
   "devDependencies": {
+    "@types/cross-spawn": "^6.0.6",
     "@types/figlet": "^1.5.8",
-    "@types/node": "^20",
+    "@types/node": "^20.14.11",
     "@types/prompts": "^2.4.9",
     "@types/validate-npm-package-name": "^4.0.2",
     "commander": "^12.1.0",
+    "cross-spawn": "^7.0.3",
+    "eslint-config-typescript-vitnode": "workspace:*",
+    "ora": "^8.0.1",
     "tsup": "^8.1.0",
-    "typescript": "^5",
-    "eslint-config-typescript-vitnode": "workspace:*"
+    "typescript": "^5.5.3"
   }
 }

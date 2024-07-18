@@ -1,6 +1,6 @@
 {
   "name": "vitnode-shared",
-  "version": "0.0.7-canary.21",
+  "version": "0.0.7-canary.46",
   "description": "Shared code for VitNode projects",
   "author": "VitNode Team",
   "license": "MIT",
@@ -19,10 +19,10 @@
     "lint:fix": "eslint . --fix"
   },
   "peerDependencies": {
-    "typescript": "^5"
+    "typescript": "^5.5.3"
   },
   "devDependencies": {
     "eslint-config-typescript-vitnode": "workspace:*",
-    "typescript": "^5"
+    "typescript": "^5.5.3"
   }
 }

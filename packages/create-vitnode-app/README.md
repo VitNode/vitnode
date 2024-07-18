@@ -26,11 +26,15 @@ npx create-vitnode-app@latest
 or
 
 ```bash
-pnpm create vitnode-app
+pnpm create vitnode-app@latest
 ```
 
-or
+## Options
 
-```bash
-pnpm create vitnode-app
-```
+| Option                     | Description                                                |
+| -------------------------- | ---------------------------------------------------------- |
+| `--package-manager`, `-pm` | Specify the package manager to use. Support `npm`, `pnpm`. |
+| `--eslint`                 | Initialize with eslint config.                             |
+| `--docker`                 | Initialize with Dockerfile & Docker Compose.               |
+| `--no-eslint`              | Skip initializing with eslint config.                      |
+| `--skip-install`           | Skip installing packages after initializing the project.   |

@@ -1,6 +1,6 @@
 {
   "name": "eslint-config-typescript-vitnode",
-  "version": "0.0.7-canary.21",
+  "version": "0.0.7-canary.46",
   "description": "ESLint, TypeScript (TSConfig), Prettier config for VitNode",
   "author": "VitNode Team",
   "license": "MIT",
@@ -17,7 +17,7 @@
     "tsconfig.next.json",
     ".eslintrc.shared.json",
     ".eslintrc.react.json",
-    ".prettierrc.json"
+    "prettierrc.mjs"
   ],
   "keywords": [
     "eslint",
@@ -30,20 +30,19 @@
     "prettierrc"
   ],
   "peerDependencies": {
-    "eslint": "^8",
-    "typescript": "^5"
+    "eslint": "^8.57.0",
+    "typescript": "^5.5.3"
   },
   "devDependencies": {
-    "eslint": "8.57.0",
-    "typescript": "^5"
+    "eslint": "^8.57.0",
+    "typescript": "^5.5.3"
   },
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^7.0.0",
     "@typescript-eslint/parser": "^7.0.0",
-    "eslint-config-next": "15.0.0-canary.64",
+    "eslint-config-next": "15.0.0-canary.72",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-eslint-comments": "^3.2.0",
-    "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-jsx-a11y": "^6.9.0",
     "eslint-plugin-prettier": "^5.1.3",
     "eslint-plugin-sort-destructure-keys": "^2.0.0",

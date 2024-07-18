@@ -13,6 +13,9 @@ import { CONFIG } from '../../helpers/config-with-env';
 export interface RootLayoutProps {
   children: React.ReactNode;
   params: { locale: string };
+}
+
+interface Props extends RootLayoutProps {
   className?: string;
 }
 
@@ -51,7 +54,7 @@ export const RootLayout = async ({
   children,
   params: { locale },
   className,
-}: RootLayoutProps) => {
+}: Props) => {
   const messages = await getMessages();
 
   try {
