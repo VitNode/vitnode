@@ -33,12 +33,6 @@ or
 pnpm add --save-dev eslint-config-typescript-vitnode
 ```
 
-or
-
-```bash
-yarn add --dev eslint-config-typescript-vitnode
-```
-
 ## ESLint
 
 ### Shared
@@ -110,7 +104,7 @@ File: `tsconfig.json`
 File: `.prettierrc.mjs`
 
 ```js
-import vitnodePrettier from "eslint-config-typescript-vitnode/prettierrc.mjs";
+import vitnodePrettier from 'eslint-config-typescript-vitnode/prettierrc.mjs';
 
 /**
  * @see https://prettier.io/docs/en/configuration.html

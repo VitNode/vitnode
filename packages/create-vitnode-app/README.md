@@ -29,18 +29,12 @@ or
 pnpm create vitnode-app@latest
 ```
 
-or
-
-```bash
-yarn create vitnode-app@latest
-```
-
 ## Options
 
-| Option                     | Description                                                        |
-| -------------------------- | ------------------------------------------------------------------ |
-| `--package-manager`, `-pm` | Specify the package manager to use. Support `npm`, `pnpm`, `yarn`. |
-| `--eslint`                 | Initialize with eslint config.                                     |
-| `--docker`                 | Initialize with Dockerfile & Docker Compose.                       |
-| `--no-eslint`              | Skip initializing with eslint config.                              |
-| `--skip-install`           | Skip installing packages after initializing the project.           |
+| Option                     | Description                                                |
+| -------------------------- | ---------------------------------------------------------- |
+| `--package-manager`, `-pm` | Specify the package manager to use. Support `npm`, `pnpm`. |
+| `--eslint`                 | Initialize with eslint config.                             |
+| `--docker`                 | Initialize with Dockerfile & Docker Compose.               |
+| `--no-eslint`              | Skip initializing with eslint config.                      |
+| `--skip-install`           | Skip installing packages after initializing the project.   |

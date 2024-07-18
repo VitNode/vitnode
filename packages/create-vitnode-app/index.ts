@@ -29,7 +29,7 @@ program.addOption(
   new Option(
     '-pm, --package-manager <package-manager>',
     'Specify the package manager to use',
-  ).choices(['npm', 'pnpm', 'yarn']),
+  ).choices(['npm', 'pnpm']),
 );
 program.option('--eslint', 'Initialize with eslint config.');
 program.option('--docker', 'Initialize with Dockerfile & Docker Compose.');

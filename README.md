@@ -30,13 +30,12 @@ or
 pnpm create vitnode-app@latest
 ```
 
-or
-
-```bash
-yarn create vitnode-app@latest
-```
-
 ## Requirements
+
+| 📦 Package Manager | Minimum | Recommended |
+| :----------------- | :------ | :---------- |
+| npm                | 7       | 9           |
+| pnpm               | 8       | 9           |
 
 | 🛠️ Software | Minimum | Recommended |
 | :---------- | :------ | :---------- |

@@ -123,10 +123,10 @@ export const createVitNode = async ({
   console.log('Inside that directory, you can run several commands:\n');
   console.log(color.cyan(`  ${pm} ${useNpm ? 'run ' : ''}dev`));
   console.log('    Starts the development servers.\n');
-  console.log(color.cyan(`  ${pm} ${useNpm ? 'run ' : ''}build`));
-  console.log('    Builds the apps for production.\n');
   console.log(color.cyan(`  ${pm} ${useNpm ? 'run ' : ''}config:init`));
   console.log('    Initializes the VitNode config & files to build project.\n');
+  console.log(color.cyan(`  ${pm} ${useNpm ? 'run ' : ''}build`));
+  console.log('    Builds the apps for production.\n');
   console.log(color.cyan(`  ${pm} start`));
   console.log('    Runs the built app in production mode.\n');
   console.log('We suggest that you begin by typing:\n');

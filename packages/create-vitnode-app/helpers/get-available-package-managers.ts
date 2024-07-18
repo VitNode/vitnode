@@ -1,6 +1,6 @@
 import { exec } from 'child_process';
 
-export type PackageManager = 'npm' | 'pnpm' | 'yarn';
+export type PackageManager = 'npm' | 'pnpm';
 
 export const execShellCommand = async (
   cmd: string,
@@ -20,14 +20,12 @@ export const execShellCommand = async (
 export const getAvailablePackageManagers = async (): Promise<
   Record<PackageManager, string | undefined>
 > => {
-  const [yarn, npm, pnpm] = await Promise.all([
-    execShellCommand('yarnpkg --version'),
+  const [npm, pnpm] = await Promise.all([
     execShellCommand('npm --version'),
     execShellCommand('pnpm --version'),
   ]);
 
   return {
-    yarn,
     pnpm,
     npm,
   };

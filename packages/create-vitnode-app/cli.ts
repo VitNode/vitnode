@@ -57,11 +57,6 @@ export const createCli = async (program: Command): Promise<CreateCliReturn> => {
           value: 'pnpm',
           disabled: !availablePackageManagers.pnpm,
         },
-        {
-          title: `yarn${availablePackageManagers.yarn ? `@${availablePackageManagers.yarn}` : ''}`,
-          value: 'yarn',
-          disabled: !availablePackageManagers.yarn,
-        },
       ],
     });
 

@@ -26,9 +26,3 @@ or
 ```bash
 pnpm add vitnode-backend
 ```
-
-or
-
-```bash
-yarn add vitnode-backend
-```
