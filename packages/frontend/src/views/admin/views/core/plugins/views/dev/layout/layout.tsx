@@ -1,7 +1,6 @@
 import React from 'react';
 import { ExternalLink } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
-import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 
 import { ActionsDevPluginAdmin } from './actions/actions';
@@ -13,6 +12,7 @@ import { Tabs, TabsTrigger } from '@/components/ui/tabs';
 import { Card } from '@/components/ui/card';
 import { CONFIG } from '@/helpers/config-with-env';
 import { getGlobalData } from '@/graphql/get-global-data';
+import { redirect } from '@/navigation';
 
 export interface DevPluginAdminLayoutProps {
   children: React.ReactNode;
@@ -47,10 +47,12 @@ export const DevPluginAdminLayout = async ({
   params: { code },
   children,
 }: DevPluginAdminLayoutProps) => {
-  if (!CONFIG.node_development) notFound();
+  if (!CONFIG.node_development) redirect('/admin');
   const data = await getPluginDataAdmin({ code });
 
-  if (!data || data.admin__core_plugins__show.edges.length === 0) notFound();
+  if (!data || data.admin__core_plugins__show.edges.length === 0) {
+    redirect('/admin');
+  }
 
   const [t, tCore] = await Promise.all([
     getTranslations('admin.core.plugins.dev'),

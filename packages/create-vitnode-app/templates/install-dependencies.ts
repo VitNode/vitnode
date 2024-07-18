@@ -28,7 +28,7 @@ export const installDependencies = async ({
      * Spawn the installation process.
      */
     const child = spawn(packageManager, args, {
-      stdio: 'inherit',
+      stdio: 'ignore', // Change 'inherit' to 'ignore'
       env: {
         ...process.env,
         ADBLOCK: '1',

@@ -20,11 +20,11 @@ export const createVitNode = async ({
   appName,
   packageManager,
   eslint,
-  i18nRouting,
   docker,
   install,
 }: Args) => {
-  const useYarn = packageManager.startsWith('yarn');
+  const useNpm = packageManager.startsWith('npm');
+  const pm = packageManager.split('@')[0];
   const templatePath = join(__dirname, '..', 'templates');
   const spinner = ora(
     `Creating a new VitNode app in ${color.green(root)}. Using ${color.green(packageManager)}...`,
@@ -100,16 +100,6 @@ export const createVitNode = async ({
     cpSync(join(templatePath, 'docker'), root, { recursive: true });
   }
 
-  // Copy i18n template
-  spinner.text = 'Copying i18n template...';
-  cpSync(
-    i18nRouting
-      ? join(templatePath, 'i18n', 'with')
-      : join(templatePath, 'i18n', 'without'),
-    root,
-    { recursive: true },
-  );
-
   // Install dependencies
   if (install) {
     spinner.text = 'Installing dependencies...';
@@ -117,25 +107,30 @@ export const createVitNode = async ({
   }
 
   console.log(
-    color.blue(
-      figlet.textSync('VitNode', {
-        horizontalLayout: 'full',
-      }),
-    ),
+    '\n' +
+      color.blue(
+        figlet.textSync('VitNode', {
+          horizontalLayout: 'full',
+        }),
+      ),
+    +'\n',
   );
 
-  spinner.succeed(`${color.green('Success!')} Created ${appName} at ${root}`);
+  spinner.succeed(
+    ` ${color.green('Success!')} Created ${color.cyan(appName)} at ${color.cyan(root)}`,
+  );
 
   console.log('Inside that directory, you can run several commands:\n');
-  console.log(color.cyan(`  ${packageManager} ${useYarn ? '' : 'run '}dev`));
+  console.log(color.cyan(`  ${pm} ${useNpm ? 'run ' : ''}dev`));
   console.log('    Starts the development servers.\n');
-  console.log(color.cyan(`  ${packageManager} ${useYarn ? '' : 'run '}build`));
+  console.log(color.cyan(`  ${pm} ${useNpm ? 'run ' : ''}build`));
   console.log('    Builds the apps for production.\n');
-  console.log(color.cyan(`  ${packageManager} start`));
+  console.log(color.cyan(`  ${pm} ${useNpm ? 'run ' : ''}config:init`));
+  console.log('    Initializes the VitNode config & files to build project.\n');
+  console.log(color.cyan(`  ${pm} start`));
   console.log('    Runs the built app in production mode.\n');
   console.log('We suggest that you begin by typing:\n');
   console.log(color.cyan('  cd'), appName);
-  console.log(
-    `  ${color.cyan(`${packageManager} ${useYarn ? '' : 'run '}dev`)}`,
-  );
+  console.log(`  ${color.cyan(`${pm} ${useNpm ? 'run ' : ''}dev`)}\n`);
+  console.log(color.magenta('Happy hacking!'));
 };

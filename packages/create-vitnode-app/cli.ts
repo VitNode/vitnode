@@ -24,7 +24,6 @@ export const onPromptState = (state: {
 export interface CreateCliReturn {
   docker: boolean;
   eslint: boolean;
-  i18nRouting: boolean;
   install: boolean;
   packageManager: string;
 }
@@ -34,7 +33,6 @@ export const createCli = async (program: Command): Promise<CreateCliReturn> => {
   let options: CreateCliReturn = {
     packageManager: optionsFromProgram.packageManager,
     eslint: optionsFromProgram.eslint,
-    i18nRouting: optionsFromProgram.i18nRouting,
     install: !optionsFromProgram.skipInstall,
     docker: optionsFromProgram.docker,
   };
@@ -88,24 +86,6 @@ export const createCli = async (program: Command): Promise<CreateCliReturn> => {
     options = {
       ...options,
       eslint: Boolean(eslint),
-    };
-  }
-
-  if (optionsFromProgram.i18nRouting === undefined) {
-    const text = color.blue('i18n routing');
-    const { i18nRouting } = await prompts({
-      onState: onPromptState,
-      type: 'toggle',
-      name: 'i18nRouting',
-      message: `Would you like to use ${text}?`,
-      initial: optionsFromProgram.i18nRouting ? 'Yes' : 'No',
-      active: 'Yes',
-      inactive: 'No',
-    });
-
-    options = {
-      ...options,
-      i18nRouting: Boolean(i18nRouting),
     };
   }
 
