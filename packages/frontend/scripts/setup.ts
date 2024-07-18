@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /* eslint-disable no-console */
 
-import { join } from 'path';
+import path, { join } from 'path';
 import * as fs from 'fs';
 import { getAllFiles } from './helpers/get-all-files';
 
@@ -40,6 +40,7 @@ const init = () => {
     path: string;
     file: string;
     isInsideAppDir?: boolean;
+    optional?: boolean;
   }[] = [
     {
       path: join('(main)', '(vitnode)', '[...rest]'),
@@ -72,6 +73,12 @@ const init = () => {
     {
       path: join('plugins', 'admin', 'langs'),
       file: 'en.json',
+    },
+    {
+      path: '(main)',
+      isInsideAppDir: true,
+      file: 'layout.tsx',
+      optional: true,
     },
   ];
 
@@ -173,6 +180,10 @@ const init = () => {
 
     if (!fs.existsSync(appPath)) {
       fs.mkdirSync(appPath, { recursive: true });
+    }
+
+    if (file.optional && fs.existsSync(join(appPath, file.file))) {
+      return;
     }
 
     fs.copyFileSync(join(packagePath, file.file), join(appPath, file.file));
