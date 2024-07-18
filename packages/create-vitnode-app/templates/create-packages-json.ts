@@ -17,8 +17,10 @@ export const createPackagesJSON = ({
   appName,
   root,
   packageManager,
+  docker,
 }: {
   appName: string;
+  docker: boolean;
   packageManager: string;
   root: string;
 }) => {
@@ -36,6 +38,12 @@ export const createPackagesJSON = ({
       build: 'turbo build',
       lint: 'turbo lint',
       'lint:fix': 'turbo lint:fix',
+      ...(docker
+        ? {
+            'docker:dev':
+              'docker compose -f ./docker-compose-dev.yml -p vitnode-development up -d',
+          }
+        : {}),
     },
     overrides: packageManager.startsWith('npm')
       ? {
@@ -77,7 +85,7 @@ export const createPackagesJSON = ({
     },
     dependencies: {
       geist: '^1.3.1',
-      next: '15.0.0-canary.70',
+      next: '15.0.0-canary.72',
       react: '^19.0.0-rc.0',
       'react-dom': '^19.0.0-rc.0',
       'next-intl': '^3.17.1',

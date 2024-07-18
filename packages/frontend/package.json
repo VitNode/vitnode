@@ -72,7 +72,7 @@
     "codegen": "graphql-codegen --config codegen.ts"
   },
   "peerDependencies": {
-    "next": "15.0.0-canary.70",
+    "next": "15.0.0-canary.72",
     "postcss": "^8.4.39",
     "react": "^19.0.0-rc.0",
     "react-dom": "^19.0.0-rc.0",
@@ -151,7 +151,7 @@
     "lodash": "^4.17.21",
     "lowlight": "^3.1.0",
     "lucide-react": "^0.408.0",
-    "next": "15.0.0-canary.70",
+    "next": "15.0.0-canary.72",
     "next-intl": "^3.17.1",
     "next-themes": "^0.3.0",
     "nextjs-toploader": "^1.6.12",

@@ -18,6 +18,7 @@ export const createVitNode = async ({
   packageManager,
   eslint,
   i18nRouting,
+  docker,
 }: Args) => {
   const templatePath = join(__dirname, '..', 'templates');
   console.log(
@@ -42,6 +43,7 @@ export const createVitNode = async ({
     appName,
     root,
     packageManager,
+    docker,
   });
 
   // Rename files

@@ -32,6 +32,7 @@ program.addOption(
   ).choices(['npm', 'pnpm', 'yarn']),
 );
 program.option('--eslint', 'Initialize with eslint config.');
+program.option('--docker', 'Initialize with Dockerfile & Docker Compose.');
 program.option('--no-eslint', 'Initialize without eslint config.');
 program.option('--i18n-routing', 'Initialize with i18n routing.');
 program.option(

@@ -22,6 +22,7 @@ export const onPromptState = (state: {
 };
 
 export interface CreateCliReturn {
+  docker: boolean;
   eslint: boolean;
   i18nRouting: boolean;
   install: boolean;
@@ -35,6 +36,7 @@ export const createCli = async (program: Command): Promise<CreateCliReturn> => {
     eslint: optionsFromProgram.eslint,
     i18nRouting: optionsFromProgram.i18nRouting,
     install: !optionsFromProgram.skipInstall,
+    docker: optionsFromProgram.docker,
   };
 
   if (!optionsFromProgram.packageManager) {
@@ -104,6 +106,24 @@ export const createCli = async (program: Command): Promise<CreateCliReturn> => {
     options = {
       ...options,
       i18nRouting: Boolean(i18nRouting),
+    };
+  }
+
+  if (optionsFromProgram.docker === undefined) {
+    const text = color.blue('Dockerfile & Docker Compose');
+    const { docker } = await prompts({
+      onState: onPromptState,
+      type: 'toggle',
+      name: 'docker',
+      message: `Would you like to create ${text}?`,
+      initial: optionsFromProgram.i18nRouting ? 'Yes' : 'No',
+      active: 'Yes',
+      inactive: 'No',
+    });
+
+    options = {
+      ...options,
+      docker: Boolean(docker),
     };
   }
 

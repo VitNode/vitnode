@@ -41,6 +41,7 @@ yarn create vitnode-app@latest
 | -------------------------- | ------------------------------------------------------------------ |
 | `--package-manager`, `-pm` | Specify the package manager to use. Support `npm`, `pnpm`, `yarn`. |
 | `--eslint`                 | Initialize with eslint config.                                     |
+| `--docker`                 | Initialize with Dockerfile & Docker Compose.                       |
 | `--no-eslint`              | Skip initializing with eslint config.                              |
 | `--i18n-routing`           | Initialize with i18n routing.                                      |
 | `--skip-install`           | Skip installing packages after initializing the project.           |
