@@ -9,9 +9,8 @@ export const installDependencies = async ({
 }: Pick<CreateCliReturn, 'packageManager'>) => {
   const packageManager = pm.split('@')[0];
   const isOnline = await getOnline();
-  const args: string[] = [
-    packageManager === 'npm' ? 'install --force' : 'install',
-  ];
+  const args: string[] =
+    packageManager === 'npm' ? ['install', '--force'] : ['install'];
 
   if (!isOnline) {
     console.log(
