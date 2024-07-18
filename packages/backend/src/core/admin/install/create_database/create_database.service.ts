@@ -75,11 +75,6 @@ export class CreateDatabaseAdminInstallService {
         language_code: 'en',
         value: 'Guest',
       },
-      {
-        item_id: guestGroup[0].id,
-        language_code: 'pl',
-        value: 'Gość',
-      },
     ]);
 
     const memberGroup = await this.databaseService.db
@@ -96,11 +91,6 @@ export class CreateDatabaseAdminInstallService {
         language_code: 'en',
         value: 'Member',
       },
-      {
-        item_id: memberGroup[0].id,
-        language_code: 'pl',
-        value: 'Użytkownik',
-      },
     ]);
 
     const moderatorGroup = await this.databaseService.db
@@ -114,11 +104,6 @@ export class CreateDatabaseAdminInstallService {
       {
         item_id: moderatorGroup[0].id,
         language_code: 'en',
-        value: 'Moderator',
-      },
-      {
-        item_id: moderatorGroup[0].id,
-        language_code: 'pl',
         value: 'Moderator',
       },
     ]);
@@ -141,11 +126,6 @@ export class CreateDatabaseAdminInstallService {
       {
         item_id: adminGroup[0].id,
         language_code: 'en',
-        value: 'Administrator',
-      },
-      {
-        item_id: adminGroup[0].id,
-        language_code: 'pl',
         value: 'Administrator',
       },
     ]);
@@ -181,11 +161,6 @@ export class CreateDatabaseAdminInstallService {
         item_id: nav[0].id,
         language_code: 'en',
         value: 'Home',
-      },
-      {
-        item_id: nav[0].id,
-        language_code: 'pl',
-        value: 'Strona główna',
       },
       {
         item_id: nav[1].id,
