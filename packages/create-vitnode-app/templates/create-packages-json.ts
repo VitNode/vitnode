@@ -18,9 +18,11 @@ export const createPackagesJSON = ({
   root,
   packageManager,
   docker,
+  eslint,
 }: {
   appName: string;
   docker: boolean;
+  eslint: boolean;
   packageManager: string;
   root: string;
 }) => {
@@ -36,12 +38,10 @@ export const createPackagesJSON = ({
       'config:init': 'turbo config:init',
       dev: 'turbo dev',
       build: 'turbo build',
-      lint: 'turbo lint',
-      'lint:fix': 'turbo lint:fix',
+      ...(eslint ? { lint: 'turbo lint', 'lint:fix': 'turbo lint:fix' } : {}),
       ...(docker
         ? {
-            'docker:dev':
-              'docker compose -f ./docker-compose-dev.yml -p vitnode-development up -d',
+            'docker:dev': `docker compose -f ./docker-compose-dev.yml -p vitnode-dev-${appName} up -d`,
           }
         : {}),
     },
@@ -56,9 +56,10 @@ export const createPackagesJSON = ({
       'drizzle-orm': '^0.31.4',
     },
     devDependencies: {
+      ...(eslint
+        ? { prettier: '^3.3.3', 'prettier-plugin-tailwindcss': '^0.6.5' }
+        : {}),
       'eslint-config-typescript-vitnode': `^${pkg.version}`,
-      prettier: '^3.3.3',
-      'prettier-plugin-tailwindcss': '^0.6.5',
       turbo: '^2.0.7',
       typescript: '^5.4.5',
     },
@@ -96,7 +97,7 @@ export const createPackagesJSON = ({
       '@types/react': '^18.3.3',
       '@types/react-dom': '^18.3.0',
       autoprefixer: '^10.4.19',
-      eslint: '^8.57.0',
+      ...(eslint ? { eslint: '^8.57.0' } : {}),
       'eslint-config-typescript-vitnode': `^${pkg.version}`,
       postcss: '^8.4.39',
       tailwindcss: '^3.4.4',
@@ -142,7 +143,7 @@ export const createPackagesJSON = ({
       'cross-env': '^7.0.3',
       'drizzle-kit': '^0.22.8',
       'drizzle-orm': '^0.31.4',
-      eslint: '^8.57.0',
+      ...(eslint ? { eslint: '^8.57.0' } : {}),
       'eslint-config-typescript-vitnode': `^${pkg.version}`,
       pg: '^8.12.0',
       'source-map-support': '^0.5.21',

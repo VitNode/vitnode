@@ -145,7 +145,5 @@ export const createCli = async (program: Command): Promise<CreateCliReturn> => {
     };
   }
 
-  console.log('program', options);
-
   return options;
 };
