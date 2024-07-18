@@ -1,6 +1,7 @@
 import { cpSync, mkdirSync, readFileSync, renameSync, writeFileSync } from 'fs';
 import { join } from 'path';
 
+import figlet from 'figlet';
 import ora from 'ora';
 import color from 'picocolors';
 
@@ -23,6 +24,7 @@ export const createVitNode = async ({
   docker,
   install,
 }: Args) => {
+  const useYarn = packageManager.startsWith('yarn');
   const templatePath = join(__dirname, '..', 'templates');
   const spinner = ora(
     `Creating a new VitNode app in ${color.green(root)}. Using ${color.green(packageManager)}...`,
@@ -114,5 +116,26 @@ export const createVitNode = async ({
     await installDependencies({ packageManager });
   }
 
-  spinner.succeed(color.green('Done!'));
+  console.log(
+    color.blue(
+      figlet.textSync('VitNode', {
+        horizontalLayout: 'full',
+      }),
+    ),
+  );
+
+  spinner.succeed(`${color.green('Success!')} Created ${appName} at ${root}`);
+
+  console.log('Inside that directory, you can run several commands:\n');
+  console.log(color.cyan(`  ${packageManager} ${useYarn ? '' : 'run '}dev`));
+  console.log('    Starts the development servers.\n');
+  console.log(color.cyan(`  ${packageManager} ${useYarn ? '' : 'run '}build`));
+  console.log('    Builds the apps for production.\n');
+  console.log(color.cyan(`  ${packageManager} start`));
+  console.log('    Runs the built app in production mode.\n');
+  console.log('We suggest that you begin by typing:\n');
+  console.log(color.cyan('  cd'), appName);
+  console.log(
+    `  ${color.cyan(`${packageManager} ${useYarn ? '' : 'run '}dev`)}`,
+  );
 };

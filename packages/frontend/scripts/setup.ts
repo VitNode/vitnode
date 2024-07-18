@@ -75,6 +75,10 @@ const init = () => {
       file: 'en.json',
     },
     {
+      path: '',
+      file: 'global.d.ts',
+    },
+    {
       path: '(main)',
       isInsideAppDir: true,
       file: 'layout.tsx',

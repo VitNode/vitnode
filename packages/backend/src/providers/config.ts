@@ -83,11 +83,6 @@ export const DEFAULT_CONFIG_DATA: ConfigType = {
       enabled: true,
       default: true,
     },
-    {
-      code: 'pl',
-      enabled: true,
-      default: false,
-    },
   ],
 };
 

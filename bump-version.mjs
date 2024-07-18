@@ -315,6 +315,10 @@ function logError(error) {
         folder: join('plugins', 'admin', 'langs'),
         file: 'en.json',
       },
+      {
+        folder: '',
+        file: 'global.d.ts',
+      },
     ];
 
     // Create folder for apps in frontend package
