@@ -119,8 +119,6 @@ const config = () => {
     login_token_secret: process.env.LOGIN_TOKEN_SECRET ?? '',
     frontend_url: frontend_url.url,
     port: parseInt(process.env.PORT, 10) || 8080,
-    password_salt: 10,
-    password_reset_salt: 9,
     cookies: {
       domain:
         frontend_url.hostname === 'localhost'

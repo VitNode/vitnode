@@ -81,6 +81,8 @@ export const useSignUpView = () => {
     } catch (err) {
       const error = err as ErrorType | undefined;
 
+      console.log('error', error);
+
       if (error?.extensions) {
         const { code } = error.extensions;
 
