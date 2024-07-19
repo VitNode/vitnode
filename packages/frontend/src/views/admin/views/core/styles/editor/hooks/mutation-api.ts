@@ -2,7 +2,7 @@
 
 import { revalidatePath } from 'next/cache';
 
-import { fetcher } from '@/graphql/fetcher';
+import { fetcher, FetcherErrorType } from '@/graphql/fetcher';
 import {
   Admin__Core_Styles__Editor__Edit,
   Admin__Core_Styles__Editor__EditMutation,
@@ -12,13 +12,17 @@ import {
 export const mutationApi = async (
   variables: Admin__Core_Styles__Editor__EditMutationVariables,
 ) => {
-  await fetcher<
-    Admin__Core_Styles__Editor__EditMutation,
-    Admin__Core_Styles__Editor__EditMutationVariables
-  >({
-    query: Admin__Core_Styles__Editor__Edit,
-    variables,
-  });
+  try {
+    await fetcher<
+      Admin__Core_Styles__Editor__EditMutation,
+      Admin__Core_Styles__Editor__EditMutationVariables
+    >({
+      query: Admin__Core_Styles__Editor__Edit,
+      variables,
+    });
+  } catch (e) {
+    return { error: e as FetcherErrorType };
+  }
 
   revalidatePath('/', 'layout');
 };

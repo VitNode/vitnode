@@ -2,7 +2,7 @@
 
 import { revalidatePath } from 'next/cache';
 
-import { fetcher } from '@/graphql/fetcher';
+import { fetcher, FetcherErrorType } from '@/graphql/fetcher';
 import {
   Admin__Core_Nav_Styles__Change_Position,
   Admin__Core_Nav_Styles__Change_PositionMutation,
@@ -12,15 +12,19 @@ import {
 export const mutationChangePositionApi = async (
   variables: Admin__Core_Nav_Styles__Change_PositionMutationVariables,
 ) => {
-  const data = await fetcher<
-    Admin__Core_Nav_Styles__Change_PositionMutation,
-    Admin__Core_Nav_Styles__Change_PositionMutationVariables
-  >({
-    query: Admin__Core_Nav_Styles__Change_Position,
-    variables,
-  });
+  try {
+    const data = await fetcher<
+      Admin__Core_Nav_Styles__Change_PositionMutation,
+      Admin__Core_Nav_Styles__Change_PositionMutationVariables
+    >({
+      query: Admin__Core_Nav_Styles__Change_Position,
+      variables,
+    });
 
-  revalidatePath('/', 'layout');
+    revalidatePath('/', 'layout');
 
-  return data;
+    return data;
+  } catch (e) {
+    return { error: e as FetcherErrorType };
+  }
 };

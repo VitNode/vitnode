@@ -4,11 +4,11 @@ import * as z from 'zod';
 import React from 'react';
 
 import { mutationApi } from './mutation-api';
-import { ErrorType } from '@/graphql/fetcher';
+import { FetcherErrorType } from '@/graphql/fetcher';
 import { zodInput } from '@/helpers/zod';
 
 export const useSignInView = () => {
-  const [error, setError] = React.useState<ErrorType | null>(null);
+  const [error, setError] = React.useState<FetcherErrorType | null>(null);
 
   const formSchema = z.object({
     email: zodInput.string.min(1),
@@ -28,14 +28,9 @@ export const useSignInView = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setError(null);
-    try {
-      await mutationApi(values);
-    } catch (err) {
-      const error = err as ErrorType;
-
-      if (error?.extensions) {
-        setError(error);
-      }
+    const mutation = await mutationApi(values);
+    if (mutation?.error) {
+      setError(mutation?.error);
     }
   };
 

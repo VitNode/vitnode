@@ -2,7 +2,7 @@
 
 import { revalidatePath } from 'next/cache';
 
-import { fetcher } from '@/graphql/fetcher';
+import { fetcher, FetcherErrorType } from '@/graphql/fetcher';
 import {
   Admin__Core_Staff_Moderators__Delete,
   Admin__Core_Staff_Moderators__DeleteMutation,
@@ -12,13 +12,17 @@ import {
 export const mutationApi = async (
   variables: Admin__Core_Staff_Moderators__DeleteMutationVariables,
 ) => {
-  await fetcher<
-    Admin__Core_Staff_Moderators__DeleteMutation,
-    Admin__Core_Staff_Moderators__DeleteMutationVariables
-  >({
-    query: Admin__Core_Staff_Moderators__Delete,
-    variables,
-  });
+  try {
+    await fetcher<
+      Admin__Core_Staff_Moderators__DeleteMutation,
+      Admin__Core_Staff_Moderators__DeleteMutationVariables
+    >({
+      query: Admin__Core_Staff_Moderators__Delete,
+      variables,
+    });
+  } catch (e) {
+    return { error: e as FetcherErrorType };
+  }
 
   revalidatePath('/', 'layout');
 };

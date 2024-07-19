@@ -64,9 +64,8 @@ export const AvatarAsideAuthAdmin = () => {
         <DropdownMenuGroup>
           <DropdownMenuItem
             onClick={async () => {
-              try {
-                await mutationApi();
-              } catch (error) {
+              const mutation = await mutationApi();
+              if (mutation?.error) {
                 toast.error(tCore('errors.title'), {
                   description: tCore('errors.internal_server_error'),
                 });

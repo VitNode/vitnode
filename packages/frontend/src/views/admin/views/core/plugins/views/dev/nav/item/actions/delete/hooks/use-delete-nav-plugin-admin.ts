@@ -16,13 +16,13 @@ export const useDeleteNavPluginAdmin = ({
   const { code: pluginCode } = useParams();
 
   const onSubmit = async () => {
-    try {
-      await mutationApi({
-        code,
-        pluginCode: Array.isArray(pluginCode) ? pluginCode[0] : pluginCode,
-        parentCode,
-      });
-    } catch (error) {
+    const mutation = await mutationApi({
+      code,
+      pluginCode: Array.isArray(pluginCode) ? pluginCode[0] : pluginCode,
+      parentCode,
+    });
+
+    if (mutation?.error) {
       toast.error(tCore('errors.title'), {
         description: tCore('errors.internal_server_error'),
       });

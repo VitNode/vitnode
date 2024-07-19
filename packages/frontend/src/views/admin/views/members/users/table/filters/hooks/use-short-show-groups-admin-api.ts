@@ -8,11 +8,15 @@ export const useShortShowGroupsAdminAPI = () => {
 
   const api = useQuery({
     queryKey: ['SHORT_GROUPS_MEMBERS', { textSearch }],
-    queryFn: async () =>
-      getGroupsShortApi({
-        first: 25,
-        search: textSearch,
-      }),
+    queryFn: async () => {
+      const mutation = await getGroupsShortApi({ search: textSearch });
+
+      if (!mutation.data) {
+        throw mutation.error;
+      }
+
+      return mutation.data;
+    },
     refetchOnMount: true,
   });
 

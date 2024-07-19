@@ -46,42 +46,42 @@ export const useUploadFilesHandlerEditor = ({
     data: FileStateEditor;
     finishUpload?: (file: FileStateEditor) => void;
   }) => {
-    try {
-      const formData = new FormData();
-      if (!data.file || !allowUploadFiles) return;
-      formData.append('file', data.file);
-      formData.append('plugin', allowUploadFiles.plugin);
-      formData.append('folder', allowUploadFiles.folder);
-      const mutation = await uploadMutationApi(formData);
+    const formData = new FormData();
+    if (!data.file || !allowUploadFiles) return;
+    formData.append('file', data.file);
+    formData.append('plugin', allowUploadFiles.plugin);
+    formData.append('folder', allowUploadFiles.folder);
+    const mutation = await uploadMutationApi(formData);
 
-      setFiles(prev =>
-        prev.map(item => {
-          if (item.id === data.id) {
-            return {
-              ...item,
-              data: mutation.core_editor_files__upload,
-              isLoading: false,
-              id: mutation.core_editor_files__upload.id,
-            };
-          }
-
-          return item;
-        }),
-      );
-
-      finishUpload?.({
-        ...data,
-        data: mutation.core_editor_files__upload,
-        id: mutation.core_editor_files__upload.id,
-        isLoading: false,
-      });
-    } catch (error) {
+    if (!mutation.data || mutation.error) {
       toast.error(tCore('errors.title'), {
         description: tCore('errors.internal_server_error'),
       });
 
       return;
     }
+
+    setFiles(prev =>
+      prev.map(item => {
+        if (item.id === data.id) {
+          return {
+            ...item,
+            data: mutation.data.core_editor_files__upload,
+            isLoading: false,
+            id: mutation.data.core_editor_files__upload.id,
+          };
+        }
+
+        return item;
+      }),
+    );
+
+    finishUpload?.({
+      ...data,
+      data: mutation.data.core_editor_files__upload,
+      id: mutation.data.core_editor_files__upload.id,
+      isLoading: false,
+    });
   };
 
   const validateMineTypeFiles = (

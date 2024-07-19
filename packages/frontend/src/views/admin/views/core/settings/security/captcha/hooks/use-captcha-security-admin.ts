@@ -30,13 +30,13 @@ export const useCaptchaSecurityAdmin = ({
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    try {
-      await mutationApi({
-        type: values.type,
-        secretKey: values.secret_key,
-        siteKey: values.site_key,
-      });
-    } catch (error) {
+    const mutation = await mutationApi({
+      type: values.type,
+      secretKey: values.secret_key,
+      siteKey: values.site_key,
+    });
+
+    if (mutation?.error) {
       toast.error(t('errors.title'), {
         description: t('errors.internal_server_error'),
       });

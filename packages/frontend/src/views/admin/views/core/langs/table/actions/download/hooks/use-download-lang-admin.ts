@@ -18,7 +18,15 @@ export const useDownloadLangAdmin = ({
   const { setOpen } = useDialog();
   const queryPlugins = useQuery({
     queryKey: ['Admin__Core_Plugins__Show__Quick'],
-    queryFn: async () => queryApi({}),
+    queryFn: async () => {
+      const query = await queryApi({});
+
+      if (!query.data) {
+        throw query.error;
+      }
+
+      return query.data;
+    },
   });
 
   const formSchema = z.object({
@@ -35,23 +43,23 @@ export const useDownloadLangAdmin = ({
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    try {
-      const mutation = await mutationApi({
-        code,
-        plugins: values.all ? [] : values.plugins,
-      });
+    const mutation = await mutationApi({
+      code,
+      plugins: values.all ? [] : values.plugins,
+    });
 
-      window.open(
-        `${CONFIG.backend_url}/files/${mutation.admin__core_languages__download}`,
-        '_blank',
-      );
-    } catch (error) {
+    if (mutation?.error || !mutation.data) {
       toast.error(t('errors.title'), {
         description: t('errors.internal_server_error'),
       });
 
       return;
     }
+
+    window.open(
+      `${CONFIG.backend_url}/files/${mutation.data.admin__core_languages__download}`,
+      '_blank',
+    );
 
     setOpen?.(false);
   };

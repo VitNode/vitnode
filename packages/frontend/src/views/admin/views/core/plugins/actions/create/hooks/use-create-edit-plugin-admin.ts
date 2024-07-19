@@ -11,7 +11,7 @@ import { useDialog } from '@/components/ui/dialog';
 import { usePathname, useRouter } from '@/navigation';
 import { useSessionAdmin } from '@/hooks/use-session-admin';
 import { zodInput } from '@/helpers/zod';
-import { ErrorType } from '@/graphql/fetcher';
+import { FetcherErrorType } from '@/graphql/fetcher';
 
 export const codePluginRegex = /^[a-z0-9-]*$/;
 
@@ -53,30 +53,38 @@ export const useCreateEditPluginAdmin = ({ data }: Args) => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    try {
-      if (data) {
-        await mutationEditApi({
-          name: values.name,
-          code: values.code,
-          description: values.description,
-          supportUrl: values.support_url,
-          author: values.author,
-          authorUrl: values.author_url,
-          default: data.default,
-        });
-      } else {
-        await mutationCreateApi({
-          name: values.name,
-          code: values.code,
-          description: values.description,
-          supportUrl: values.support_url,
-          author: values.author,
-          authorUrl: values.author_url,
-        });
-      }
-    } catch (err) {
-      const error = err as ErrorType;
+    let error: FetcherErrorType | null = null;
 
+    if (data) {
+      const mutation = await mutationEditApi({
+        name: values.name,
+        code: values.code,
+        description: values.description,
+        supportUrl: values.support_url,
+        author: values.author,
+        authorUrl: values.author_url,
+        default: data.default,
+      });
+
+      if (mutation?.error) {
+        error = mutation.error;
+      }
+    } else {
+      const mutation = await mutationCreateApi({
+        name: values.name,
+        code: values.code,
+        description: values.description,
+        supportUrl: values.support_url,
+        author: values.author,
+        authorUrl: values.author_url,
+      });
+
+      if (mutation?.error) {
+        error = mutation.error;
+      }
+    }
+
+    if (error) {
       if (error?.extensions?.code === 'PLUGIN_ALREADY_EXISTS') {
         form.setError('code', {
           message: t('create.code.exists'),

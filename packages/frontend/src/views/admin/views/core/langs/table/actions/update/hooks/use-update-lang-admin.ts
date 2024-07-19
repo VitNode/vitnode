@@ -30,9 +30,8 @@ export const useUpdateLangAdmin = ({
     const formData = new FormData();
     formData.append('file', values.file[0]);
     formData.append('code', code);
-    try {
-      await mutationApi(formData);
-    } catch (error) {
+    const mutation = await mutationApi(formData);
+    if (mutation?.error) {
       toast.error(tCore('errors.title'), {
         description: tCore('errors.internal_server_error'),
       });

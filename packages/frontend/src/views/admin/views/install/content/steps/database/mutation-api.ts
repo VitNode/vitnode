@@ -7,15 +7,19 @@ import {
   Admin__Install__Create_DatabaseMutation,
   Admin__Install__Create_DatabaseMutationVariables,
 } from '@/graphql/graphql';
-import { fetcher } from '@/graphql/fetcher';
+import { fetcher, FetcherErrorType } from '@/graphql/fetcher';
 
 export const mutationApi = async () => {
-  await fetcher<
-    Admin__Install__Create_DatabaseMutation,
-    Admin__Install__Create_DatabaseMutationVariables
-  >({
-    query: Admin__Install__Create_Database,
-  });
+  try {
+    await fetcher<
+      Admin__Install__Create_DatabaseMutation,
+      Admin__Install__Create_DatabaseMutationVariables
+    >({
+      query: Admin__Install__Create_Database,
+    });
+  } catch (e) {
+    return { error: e as FetcherErrorType };
+  }
 
   revalidatePath('/admin/install', 'page');
 };

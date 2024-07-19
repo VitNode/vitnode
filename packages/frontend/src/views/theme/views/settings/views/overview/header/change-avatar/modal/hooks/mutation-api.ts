@@ -2,7 +2,7 @@
 
 import { revalidatePath } from 'next/cache';
 
-import { fetcher } from '@/graphql/fetcher';
+import { fetcher, FetcherErrorType } from '@/graphql/fetcher';
 import {
   Core_Members__Avatar__Delete,
   Core_Members__Avatar__DeleteMutation,
@@ -10,14 +10,16 @@ import {
 } from '@/graphql/graphql';
 
 export const mutationApi = async () => {
-  const data = await fetcher<
-    Core_Members__Avatar__DeleteMutation,
-    Core_Members__Avatar__DeleteMutationVariables
-  >({
-    query: Core_Members__Avatar__Delete,
-  });
+  try {
+    await fetcher<
+      Core_Members__Avatar__DeleteMutation,
+      Core_Members__Avatar__DeleteMutationVariables
+    >({
+      query: Core_Members__Avatar__Delete,
+    });
 
-  revalidatePath('/', 'layout');
-
-  return data;
+    revalidatePath('/', 'layout');
+  } catch (e) {
+    return { error: e as FetcherErrorType };
+  }
 };

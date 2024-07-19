@@ -7,19 +7,23 @@ import {
   Admin__Core_Plugins__DeleteMutation,
   Admin__Core_Plugins__DeleteMutationVariables,
 } from '@/graphql/graphql';
-import { fetcher } from '@/graphql/fetcher';
+import { fetcher, FetcherErrorType } from '@/graphql/fetcher';
 import { CONFIG } from '@/helpers/config-with-env';
 
 export const mutationApi = async (
   variables: Admin__Core_Plugins__DeleteMutationVariables,
 ) => {
-  await fetcher<
-    Admin__Core_Plugins__DeleteMutation,
-    Admin__Core_Plugins__DeleteMutationVariables
-  >({
-    query: Admin__Core_Plugins__Delete,
-    variables,
-  });
+  try {
+    await fetcher<
+      Admin__Core_Plugins__DeleteMutation,
+      Admin__Core_Plugins__DeleteMutationVariables
+    >({
+      query: Admin__Core_Plugins__Delete,
+      variables,
+    });
+  } catch (e) {
+    return { error: e as FetcherErrorType };
+  }
 
   if (CONFIG.node_development) {
     // Revalidate after 3 seconds in promise. Wait for fast refresh to compilation files.

@@ -35,10 +35,9 @@ export const useDeleteGroupAdmin = ({
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     if (values.name !== formatName) return;
+    const mutation = await mutationApi({ id });
 
-    try {
-      await mutationApi({ id });
-    } catch (error) {
+    if (mutation?.error) {
       toast.error(tCore('errors.title'), {
         description: tCore('errors.internal_server_error'),
       });

@@ -16,9 +16,8 @@ export const useDeleteNavAdmin = ({
   const { convertText } = useTextLang();
 
   const onSubmit = async () => {
-    try {
-      await mutationApi({ id });
-    } catch (error) {
+    const mutation = await mutationApi({ id });
+    if (mutation?.error) {
       toast.error(tCore('errors.title'), {
         description: tCore('errors.internal_server_error'),
       });

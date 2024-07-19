@@ -25,11 +25,18 @@ export const UserInputContent = (props: {
 
   const { data, isLoading } = useQuery({
     queryKey: ['Core_Members__Show__Search', { search }],
-    queryFn: async () =>
-      getUsersShortApi({
+    queryFn: async () => {
+      const mutation = await getUsersShortApi({
         first: 10,
         search,
-      }),
+      });
+
+      if (!mutation.data) {
+        throw mutation.error;
+      }
+
+      return mutation.data;
+    },
   });
 
   const handleSearchInput = useDebouncedCallback((value: string) => {
