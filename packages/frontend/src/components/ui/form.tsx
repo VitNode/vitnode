@@ -13,7 +13,7 @@ import {
   useFormContext,
 } from 'react-hook-form';
 import { useTranslations } from 'next-intl';
-import { useBeforeUnload } from 'react-use';
+import { useBeforeUnload } from '@/helpers/use-before-unload';
 
 import { Label } from './label';
 import { useDialog } from './dialog';
