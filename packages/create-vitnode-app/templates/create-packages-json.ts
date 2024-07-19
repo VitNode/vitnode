@@ -86,6 +86,7 @@ export const createPackagesJSON = ({
     },
     dependencies: {
       geist: '^1.3.1',
+      'lucide-react': '^0.408.0',
       next: '15.0.0-canary.72',
       react: '^19.0.0-rc.0',
       'react-dom': '^19.0.0-rc.0',
@@ -97,6 +98,7 @@ export const createPackagesJSON = ({
       '@types/react': '^18.3.3',
       '@types/react-dom': '^18.3.0',
       autoprefixer: '^10.4.19',
+      'graphql-tag': '^2.12.6',
       ...(eslint ? { eslint: '^8.57.0' } : {}),
       'eslint-config-typescript-vitnode': `^${pkg.version}`,
       postcss: '^8.4.39',
