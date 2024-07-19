@@ -8,6 +8,7 @@ import { ChevronDown, Menu } from 'lucide-react';
 import { Link, usePathname } from '@/navigation';
 import { cn } from '@/helpers/classnames';
 import { Button, buttonVariants } from '@/components/ui/button';
+import { useSheet } from '@/components/ui/sheet';
 
 export interface ItemItemNavAdminProps {
   href: string;
@@ -39,6 +40,7 @@ export const LinkItemNavAdmin = ({
     children?.some(child =>
       pathname.startsWith(`/admin/${primaryId}/${id}/${child.href}`),
     ) ?? false;
+  const { setOpen } = useSheet();
 
   const buttonClass = (active: boolean) =>
     cn(
@@ -72,6 +74,7 @@ export const LinkItemNavAdmin = ({
             buttonVariants({ variant: 'ghost', size: 'sm' }),
             buttonClass(active),
           )}
+          onClick={() => setOpen?.(false)}
         >
           {icon ? icons.find(i => i.id === id)?.icon : <Menu />}
           {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
@@ -95,6 +98,7 @@ export const LinkItemNavAdmin = ({
                     buttonVariants({ variant: 'ghost', size: 'sm' }),
                     buttonClass(active),
                   )}
+                  onClick={() => setOpen?.(false)}
                 >
                   {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
                   {/* @ts-expect-error */}

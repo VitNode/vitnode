@@ -6,7 +6,7 @@
     "project": "./tsconfig.json",
     "sourceType": "module"
   },
-  "ignorePatterns": ["node_modules", "dist", ".turbo", ".next"],
+  "ignorePatterns": ["node_modules", "dist", ".turbo", ".next", "global.d.ts"],
   "plugins": [
     "@typescript-eslint",
     "typescript-sort-keys",

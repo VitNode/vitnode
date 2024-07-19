@@ -5,7 +5,7 @@ import { Button, buttonVariants } from '@/components/ui/button';
 import { Link } from '@/navigation';
 import { SheetClose } from '@/components/ui/sheet';
 
-export const ItemUserBarAdmin = ({
+export const ItemDrawerHeaderAdmin = ({
   children,
   href,
   onClick,
@@ -18,7 +18,7 @@ export const ItemUserBarAdmin = ({
 }) => {
   const content = () => {
     const className =
-      'w-full justify-start [&>svg]:text-muted-foreground font-normal';
+      'hover:text-foreground/90 text-muted-foreground relative h-8 w-full justify-start font-normal [&>svg]:flex [&>svg]:size-4 [&>svg]:flex-shrink-0 [&>svg]:items-center [&>svg]:justify-center [&[data-state=open]>svg:not(:first-child)]:rotate-180';
 
     if (href) {
       return (
