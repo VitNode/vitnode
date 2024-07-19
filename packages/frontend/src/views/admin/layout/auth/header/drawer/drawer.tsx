@@ -1,74 +1,67 @@
 'use client';
 
-import { Home, LogOut } from 'lucide-react';
-import { useTranslations } from 'next-intl';
-import { toast } from 'sonner';
 import React from 'react';
+import { Home, LogOut } from 'lucide-react';
+import { toast } from 'sonner';
+import { useTranslations } from 'next-intl';
 
-import { ItemUserBarAdmin } from './item-user-bar-admin';
-import { mutationApi } from './hooks/mutation-api';
-import { useSessionAdmin } from '@/hooks/use-session-admin';
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTrigger,
 } from '@/components/ui/sheet';
-import { Button } from '@/components/ui/button';
 import { AvatarUser } from '@/components/ui/user/avatar';
+import { useSessionAdmin } from '@/hooks/use-session-admin';
+import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
+import { ItemDrawerHeaderAdmin } from './item';
 
-export const UserBarAdmin = ({
+import { mutationApi } from '../../aside/hooks/mutation-api';
+
+export const DrawerHeaderAdmin = ({
   navComponent,
 }: {
   navComponent: React.ReactNode;
 }) => {
   const t = useTranslations('admin');
   const tCore = useTranslations('core');
-  const { session } = useSessionAdmin();
   const [open, setOpen] = React.useState(false);
-
+  const { session } = useSessionAdmin();
   if (!session) return null;
-  const { email, name, ...rest } = session;
+  const { email, name } = session;
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
         <Button
           variant="ghost"
-          className="rounded-full"
+          className="flex shrink-0 rounded-full"
           size="icon"
-          ariaLabel={tCore('open_menu')}
+          ariaLabel=""
         >
-          <AvatarUser user={{ name, ...rest }} sizeInRem={2} />
+          <AvatarUser user={session} sizeInRem={1.75} />
         </Button>
       </SheetTrigger>
 
       <SheetContent className="p-0">
-        <SheetHeader className="flex-row items-center gap-2 space-y-0 p-4 text-left">
-          <AvatarUser user={{ name, ...rest }} sizeInRem={1.75} />
-          <div className="flex flex-col gap-1">
-            <p className="text-base font-medium leading-none">{name}</p>
-            <p className="text-muted-foreground text-sm leading-none">
-              {email}
-            </p>
-          </div>
+        <SheetHeader className="space-y-1 p-4 text-left">
+          <p className="text-base font-medium leading-none">{name}</p>
+          <p className="text-muted-foreground text-sm leading-none">{email}</p>
         </SheetHeader>
 
-        <div className="block md:hidden">
-          <div className="space-y-2 p-2">{navComponent}</div>
+        <div className="space-y-2 p-2">
+          {navComponent}
 
           <Separator className="my-2" />
-        </div>
 
-        <div className="px-2">
-          <ItemUserBarAdmin href="/" target="_blank">
+          <ItemDrawerHeaderAdmin href="/" target="_blank">
             <Home /> <span>{t('home_page')}</span>
-          </ItemUserBarAdmin>
+          </ItemDrawerHeaderAdmin>
 
           <Separator className="my-2" />
 
-          <ItemUserBarAdmin
+          <ItemDrawerHeaderAdmin
             onClick={async () => {
               try {
                 await mutationApi();
@@ -80,7 +73,7 @@ export const UserBarAdmin = ({
             }}
           >
             <LogOut /> <span>{tCore('user-bar.log_out')}</span>
-          </ItemUserBarAdmin>
+          </ItemDrawerHeaderAdmin>
         </div>
       </SheetContent>
     </Sheet>

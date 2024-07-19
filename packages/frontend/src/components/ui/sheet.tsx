@@ -7,7 +7,43 @@ import { X } from 'lucide-react';
 
 import { cn } from '../../helpers/classnames';
 
-const Sheet = SheetPrimitive.Root;
+interface SheetContextArgs {
+  open?: boolean;
+  setOpen?: (value: boolean) => void;
+}
+
+export const SheetContext = React.createContext<SheetContextArgs>({
+  open: false,
+  setOpen: () => {},
+});
+
+export const useSheet = () => React.useContext(SheetContext);
+
+const Sheet = ({
+  children,
+  onOpenChange,
+  open: openProp,
+  ...props
+}: SheetPrimitive.DialogProps) => {
+  const [open, setOpen] = React.useState(false);
+
+  return (
+    <SheetContext.Provider
+      value={{
+        open: openProp ?? open,
+        setOpen: onOpenChange ?? setOpen,
+      }}
+    >
+      <SheetPrimitive.Root
+        open={openProp ?? open}
+        onOpenChange={onOpenChange ?? setOpen}
+        {...props}
+      >
+        {children}
+      </SheetPrimitive.Root>
+    </SheetContext.Provider>
+  );
+};
 
 const SheetTrigger = SheetPrimitive.Trigger;
 

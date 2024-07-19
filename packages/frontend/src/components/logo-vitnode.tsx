@@ -2,12 +2,12 @@ import { cn } from '../helpers/classnames';
 
 export const LogoVitNode = ({
   className,
-  shrink,
+  small,
 }: {
   className?: string;
-  shrink?: boolean;
+  small?: boolean;
 }) => {
-  if (shrink)
+  if (small)
     return (
       <svg
         viewBox="0 0 129 129"
