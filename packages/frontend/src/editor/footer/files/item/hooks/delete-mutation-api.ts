@@ -7,18 +7,22 @@ import {
   Core_Editor_Files__DeleteMutation,
   Core_Editor_Files__DeleteMutationVariables,
 } from '@/graphql/graphql';
-import { fetcher } from '@/graphql/fetcher';
+import { fetcher, FetcherErrorType } from '@/graphql/fetcher';
 
 export const deleteMutationApi = async (
   variables: Core_Editor_Files__DeleteMutationVariables,
 ) => {
-  await fetcher<
-    Core_Editor_Files__DeleteMutation,
-    Core_Editor_Files__DeleteMutationVariables
-  >({
-    query: Core_Editor_Files__Delete,
-    variables,
-  });
+  try {
+    await fetcher<
+      Core_Editor_Files__DeleteMutation,
+      Core_Editor_Files__DeleteMutationVariables
+    >({
+      query: Core_Editor_Files__Delete,
+      variables,
+    });
+  } catch (e) {
+    return { error: e as FetcherErrorType };
+  }
 
   revalidatePath('/settings/files', 'page');
 };

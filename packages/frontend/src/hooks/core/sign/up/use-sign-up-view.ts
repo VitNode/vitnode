@@ -6,7 +6,6 @@ import React from 'react';
 import { toast } from 'sonner';
 
 import { mutationApi } from './mutation-api';
-import { ErrorType } from '@/graphql/fetcher';
 
 import { useCaptcha } from '../../../use-captcha';
 
@@ -74,60 +73,54 @@ export const useSignUpView = () => {
       return;
     }
 
-    try {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { terms, ...rest } = values;
-      await mutationApi({ ...rest, token });
-    } catch (err) {
-      const error = err as ErrorType | undefined;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { terms, ...rest } = values;
+    const mutation = await mutationApi({ ...rest, token });
 
-      if (error?.extensions) {
-        const { code } = error.extensions;
+    if (mutation?.error.extensions) {
+      const { code } = mutation.error.extensions;
 
-        if (code === 'CAPTCHA_FAILED') {
-          toast.error(t('errors.title'), {
-            description: t('errors.captcha_failed'),
-          });
-
-          return;
-        }
-
-        if (code === 'EMAIL_ALREADY_EXISTS') {
-          form.setError(
-            'email',
-            {
-              type: 'manual',
-              message: t('sign_up.form.email.already_exists'),
-            },
-            {
-              shouldFocus: true,
-            },
-          );
-
-          return;
-        }
-
-        if (code === 'NAME_ALREADY_EXISTS') {
-          form.setError(
-            'name',
-            {
-              type: 'manual',
-              message: t('sign_up.form.name.already_exists'),
-            },
-            {
-              shouldFocus: true,
-            },
-          );
-
-          return;
-        }
-
+      if (code === 'CAPTCHA_FAILED') {
         toast.error(t('errors.title'), {
-          description: t('errors.internal_server_error'),
+          description: t('errors.captcha_failed'),
         });
+
+        return;
       }
 
-      return;
+      if (code === 'EMAIL_ALREADY_EXISTS') {
+        form.setError(
+          'email',
+          {
+            type: 'manual',
+            message: t('sign_up.form.email.already_exists'),
+          },
+          {
+            shouldFocus: true,
+          },
+        );
+
+        return;
+      }
+
+      if (code === 'NAME_ALREADY_EXISTS') {
+        form.setError(
+          'name',
+          {
+            type: 'manual',
+            message: t('sign_up.form.name.already_exists'),
+          },
+          {
+            shouldFocus: true,
+          },
+        );
+
+        return;
+      }
+
+      toast.error(t('errors.title'), {
+        description: t('errors.internal_server_error'),
+      });
     }
 
     setSuccess(true);

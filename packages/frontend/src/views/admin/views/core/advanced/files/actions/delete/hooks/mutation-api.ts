@@ -2,7 +2,7 @@
 
 import { revalidatePath } from 'next/cache';
 
-import { fetcher } from '@/graphql/fetcher';
+import { fetcher, FetcherErrorType } from '@/graphql/fetcher';
 import {
   Admin__Core_Files__Delete,
   Admin__Core_Files__DeleteMutation,
@@ -12,16 +12,20 @@ import {
 export const mutationApi = async (
   variables: Admin__Core_Files__DeleteMutationVariables,
 ) => {
-  const data = await fetcher<
-    Admin__Core_Files__DeleteMutation,
-    Admin__Core_Files__DeleteMutationVariables
-  >({
-    query: Admin__Core_Files__Delete,
-    variables,
-  });
+  try {
+    const data = await fetcher<
+      Admin__Core_Files__DeleteMutation,
+      Admin__Core_Files__DeleteMutationVariables
+    >({
+      query: Admin__Core_Files__Delete,
+      variables,
+    });
 
-  revalidatePath('/admin/core/advanced/files', 'page');
-  revalidatePath('/settings/files', 'page');
+    revalidatePath('/admin/core/advanced/files', 'page');
+    revalidatePath('/settings/files', 'page');
 
-  return data;
+    return { data };
+  } catch (e) {
+    return { error: e as FetcherErrorType };
+  }
 };

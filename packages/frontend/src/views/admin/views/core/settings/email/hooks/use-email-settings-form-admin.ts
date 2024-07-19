@@ -38,17 +38,17 @@ export const useEmailSettingsFormAdmin = ({
     const primaryHSL = getHSLFromString(values.color_primary);
     if (!primaryHSL) return;
 
-    try {
-      await mutationApi({
-        smtpHost: values.smtp_host,
-        smtpUser: values.smtp_user,
-        smtpPort: values.smtp_port,
-        smtpSecure: values.smtp_secure,
-        smtpPassword: values.smtp_password,
-        colorPrimary: values.color_primary,
-        colorPrimaryForeground: `hsl(${isColorBrightness(primaryHSL) ? `${primaryHSL.h}, 40%, 2%` : `${primaryHSL.h}, 40%, 98%`})`,
-      });
-    } catch (error) {
+    const mutation = await mutationApi({
+      smtpHost: values.smtp_host,
+      smtpUser: values.smtp_user,
+      smtpPort: values.smtp_port,
+      smtpSecure: values.smtp_secure,
+      smtpPassword: values.smtp_password,
+      colorPrimary: values.color_primary,
+      colorPrimaryForeground: `hsl(${isColorBrightness(primaryHSL) ? `${primaryHSL.h}, 40%, 2%` : `${primaryHSL.h}, 40%, 98%`})`,
+    });
+
+    if (mutation?.error) {
       toast.error(t('errors.title'), {
         description: t('errors.internal_server_error'),
       });

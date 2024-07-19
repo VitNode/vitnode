@@ -9,7 +9,15 @@ interface Args {
 export const usePermissionsGroupsAdminAPI = ({ searchValue }: Args) => {
   const query = useQuery({
     queryKey: ['Admin__Core_Groups__Show_Short', { search: searchValue }],
-    queryFn: async () => getGroupsShortApi({ search: searchValue }),
+    queryFn: async () => {
+      const mutation = await getGroupsShortApi({ search: searchValue });
+
+      if (!mutation.data) {
+        throw mutation.error;
+      }
+
+      return mutation.data;
+    },
     placeholderData: previousData => previousData,
     refetchOnMount: true,
   });

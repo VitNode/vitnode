@@ -6,7 +6,7 @@ import { removeSpecialCharacters } from 'vitnode-shared';
 import { SignUpCoreSessionsArgs } from './dto/sign_up.args';
 import { SignUpCoreSessionsObj } from './dto/sign_up.obj';
 import { AvatarColorService } from './helpers/avatar-color.service';
-import { encryptPassword } from '../encrypt_password';
+import { encryptPassword } from '../password';
 
 import { CaptchaCoreCaptchaSecurityService } from '@/core/admin/security/captcha/captcha.service';
 import { DatabaseService } from '@/utils/database/database.service';
@@ -83,7 +83,7 @@ export class SignUpCoreSessionsService extends AvatarColorService {
       });
     }
 
-    const hashPassword = await encryptPassword(this.configService, password);
+    const hashPassword = await encryptPassword(password);
 
     const user = await this.databaseService.db
       .insert(core_users)

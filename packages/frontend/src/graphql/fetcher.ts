@@ -190,7 +190,7 @@ export async function fetcher<TData, TVariables = object>({
   return json.data;
 }
 
-export interface ErrorType {
+export interface FetcherErrorType {
   message: string;
   extensions?: {
     code: string;

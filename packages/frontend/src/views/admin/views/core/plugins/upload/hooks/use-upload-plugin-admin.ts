@@ -6,7 +6,7 @@ import { toast } from 'sonner';
 import { mutationApi } from './mutation-api';
 import { UploadPluginAdminProps } from '../upload';
 import { useDialog } from '@/components/ui/dialog';
-import { ErrorType } from '@/graphql/fetcher';
+import { FetcherErrorType } from '@/graphql/fetcher';
 
 export const useUploadPluginAdmin = ({ data }: UploadPluginAdminProps) => {
   const t = useTranslations('admin.core.plugins.upload');
@@ -31,14 +31,10 @@ export const useUploadPluginAdmin = ({ data }: UploadPluginAdminProps) => {
       formData.append('code', data.code);
     }
 
-    try {
-      const mutation = await mutationApi(formData);
+    const mutation = await mutationApi(formData);
 
-      toast.success(t(data ? 'success_update' : 'success'), {
-        description: mutation.admin__core_plugins__upload.name,
-      });
-    } catch (err) {
-      const error = err as ErrorType;
+    if (!mutation.data || mutation.error) {
+      const error = mutation.error as FetcherErrorType;
 
       if (
         error.extensions?.code === 'PLUGIN_ALREADY_EXISTS' ||
@@ -57,6 +53,10 @@ export const useUploadPluginAdmin = ({ data }: UploadPluginAdminProps) => {
 
       return;
     }
+
+    toast.success(t(data ? 'success_update' : 'success'), {
+      description: mutation.data.admin__core_plugins__upload.name,
+    });
 
     setOpen?.(false);
   };

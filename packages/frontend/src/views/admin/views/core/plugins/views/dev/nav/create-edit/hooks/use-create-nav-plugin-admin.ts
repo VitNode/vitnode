@@ -10,7 +10,7 @@ import { editMutationApi } from './edit-mutation-api';
 import { ShowAdminNavPluginsObj } from '@/graphql/graphql';
 import { useDialog } from '@/components/ui/dialog';
 import { zodInput } from '@/helpers/zod';
-import { ErrorType } from '@/graphql/fetcher';
+import { FetcherErrorType } from '@/graphql/fetcher';
 
 export const useCreateNavPluginAdmin = ({
   data,
@@ -41,24 +41,31 @@ export const useCreateNavPluginAdmin = ({
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    try {
-      if (data) {
-        await editMutationApi({
-          ...values,
-          previousCode: data.code,
-          pluginCode: Array.isArray(code) ? code[0] : code,
-          parentCode: values.parent_code === 'null' ? null : values.parent_code,
-        });
-      } else {
-        await createMutationApi({
-          ...values,
-          pluginCode: Array.isArray(code) ? code[0] : code,
-          parentCode: values.parent_code === 'null' ? null : values.parent_code,
-        });
-      }
-    } catch (err) {
-      const error = err as ErrorType;
+    let error: FetcherErrorType | null = null;
 
+    if (data) {
+      const mutation = await editMutationApi({
+        ...values,
+        previousCode: data.code,
+        pluginCode: Array.isArray(code) ? code[0] : code,
+        parentCode: values.parent_code === 'null' ? null : values.parent_code,
+      });
+
+      if (mutation?.error) {
+        error = mutation.error;
+      }
+    } else {
+      const mutation = await createMutationApi({
+        ...values,
+        pluginCode: Array.isArray(code) ? code[0] : code,
+        parentCode: values.parent_code === 'null' ? null : values.parent_code,
+      });
+      if (mutation?.error) {
+        error = mutation.error;
+      }
+    }
+
+    if (error) {
       if (error.extensions?.code === 'CODE_ALREADY_EXISTS') {
         form.setError('code', {
           message: t('create.code.exists'),

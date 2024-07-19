@@ -1,7 +1,7 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
-import { fetcher } from 'vitnode-frontend/graphql/fetcher';
+import { fetcher, FetcherErrorType } from 'vitnode-frontend/graphql/fetcher';
 
 import {
   Core_Editor_Files__Upload,
@@ -14,24 +14,28 @@ export const uploadMutationApi = async (formData: FormData) => {
   const plugin = formData.get('plugin') as string;
   const folder = formData.get('folder') as string;
 
-  const data = await fetcher<
-    Core_Editor_Files__UploadMutation,
-    Omit<Core_Editor_Files__UploadMutationVariables, 'file'>
-  >({
-    query: Core_Editor_Files__Upload,
-    variables: {
-      plugin,
-      folder,
-    },
-    uploads: [
-      {
-        files: file,
-        variable: 'file',
+  try {
+    const data = await fetcher<
+      Core_Editor_Files__UploadMutation,
+      Omit<Core_Editor_Files__UploadMutationVariables, 'file'>
+    >({
+      query: Core_Editor_Files__Upload,
+      variables: {
+        plugin,
+        folder,
       },
-    ],
-  });
+      uploads: [
+        {
+          files: file,
+          variable: 'file',
+        },
+      ],
+    });
 
-  revalidatePath('/settings/files', 'page');
+    revalidatePath('/settings/files', 'page');
 
-  return data;
+    return { data };
+  } catch (e) {
+    return { error: e as FetcherErrorType };
+  }
 };

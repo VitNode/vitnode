@@ -50,16 +50,24 @@ export const useCreateEditFormGroupsMembersAdmin = ({
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    try {
-      if (data) {
-        await mutationEditApi({
-          id: data.id,
-          ...values,
-        });
-      } else {
-        await mutationCreateApi(values);
+    let isError = false;
+
+    if (data) {
+      const mutation = await mutationEditApi({
+        id: data.id,
+        ...values,
+      });
+      if (mutation?.error) {
+        isError = true;
       }
-    } catch (error) {
+    } else {
+      const mutation = await mutationCreateApi(values);
+      if (mutation?.error) {
+        isError = true;
+      }
+    }
+
+    if (isError) {
       toast.error(tCore('errors.title'), {
         description: tCore('errors.internal_server_error'),
       });

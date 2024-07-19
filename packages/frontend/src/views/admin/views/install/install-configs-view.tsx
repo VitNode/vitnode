@@ -6,7 +6,7 @@ import {
   Admin__Install__LayoutQuery,
   Admin__Install__LayoutQueryVariables,
 } from '@/graphql/graphql';
-import { ErrorType, fetcher } from '@/graphql/fetcher';
+import { FetcherErrorType, fetcher } from '@/graphql/fetcher';
 import { redirect } from '@/navigation';
 import { InstallConfigLayout } from './layout';
 
@@ -40,7 +40,7 @@ export const InstallConfigsView = async () => {
       </InstallConfigLayout>
     );
   } catch (error) {
-    const code = error as ErrorType;
+    const code = error as FetcherErrorType;
 
     if (code.extensions?.code === 'ACCESS_DENIED') {
       redirect('/admin');

@@ -27,16 +27,18 @@ export const useEditorAdmin = (
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    try {
-      await mutationApi(values);
+    const mutation = await mutationApi(values);
 
-      toast.success(t('saved_success'));
-      form.reset(values);
-    } catch (error) {
+    if (mutation?.error) {
       toast.error(t('errors.title'), {
         description: t('errors.internal_server_error'),
       });
+
+      return;
     }
+
+    toast.success(t('saved_success'));
+    form.reset(values);
   };
 
   return {

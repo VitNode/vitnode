@@ -27,10 +27,8 @@ export const useModalChangeAvatar = () => {
   const onSubmit = async ({ type }: FormType) => {
     if (type === 'delete') {
       setPending(true);
-
-      try {
-        await mutationApi();
-      } catch (error) {
+      const mutation = await mutationApi();
+      if (mutation?.error) {
         toast.error(t('errors.title'), {
           description: t('settings.change_avatar.options.delete.error'),
         });

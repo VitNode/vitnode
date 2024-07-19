@@ -36,24 +36,24 @@ export const useDownloadPluginAdmin = ({
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    try {
-      const { admin__core_plugins__download } = await mutationApi({
-        code,
-        version: values.type === 'new_version' ? values.version : null,
-        versionCode: values.type === 'new_version' ? values.version_code : null,
-      });
+    const mutation = await mutationApi({
+      code,
+      version: values.type === 'new_version' ? values.version : null,
+      versionCode: values.type === 'new_version' ? values.version_code : null,
+    });
 
-      window.open(
-        `${CONFIG.backend_url}/files/${admin__core_plugins__download}`,
-        '_blank',
-      );
-    } catch (error) {
+    if (mutation.error || !mutation.data) {
       toast.error(t('errors.title'), {
         description: t('errors.internal_server_error'),
       });
 
       return;
     }
+
+    window.open(
+      `${CONFIG.backend_url}/files/${mutation.data.admin__core_plugins__download}`,
+      '_blank',
+    );
 
     setOpen?.(false);
   };

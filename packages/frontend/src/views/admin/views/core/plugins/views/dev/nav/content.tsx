@@ -84,14 +84,14 @@ export const ContentNavDevPluginAdmin = ({
 
         if (!moveTo) return;
 
-        try {
-          await mutationChangePositionApi({
-            code: moveTo.id.toString(),
-            pluginCode: Array.isArray(code) ? code[0] : code,
-            indexToMove: moveTo.indexToMove,
-            parentCode: moveTo.parentId?.toString(),
-          });
-        } catch (error) {
+        const mutation = await mutationChangePositionApi({
+          code: moveTo.id.toString(),
+          pluginCode: Array.isArray(code) ? code[0] : code,
+          indexToMove: moveTo.indexToMove,
+          parentCode: moveTo.parentId?.toString(),
+        });
+
+        if (mutation.error) {
           toast.error(t('errors.title'), {
             description: t('errors.internal_server_error'),
           });

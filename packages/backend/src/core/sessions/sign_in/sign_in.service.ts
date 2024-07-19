@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { compare } from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { and, eq } from 'drizzle-orm';
 
 import { SignInCoreSessionsArgs } from './dto/sign_in.args';
 import { DeviceSignInCoreSessionsService } from './device.service';
+import { verifyPassword } from '../password';
 
 import { GqlContext } from '../../../utils';
 import { DatabaseService } from '@/utils/database/database.service';
@@ -182,7 +182,7 @@ export class SignInCoreSessionsService {
     });
     if (!user) throw new AccessDeniedError();
 
-    const validPassword = await compare(password, user.password);
+    const validPassword = await verifyPassword(password, user.password);
     if (!validPassword) throw new AccessDeniedError();
 
     // If admin mode is enabled, check if user has access to admin cp

@@ -28,7 +28,15 @@ export const GroupInputContent = ({
 
   const { data, isLoading } = useQuery({
     queryKey: ['Admin__Core_Groups__Show_Short', { search }],
-    queryFn: async () => getGroupsShortApi({ first: 10, search }),
+    queryFn: async () => {
+      const mutation = await getGroupsShortApi({ search });
+
+      if (!mutation.data) {
+        throw mutation.error;
+      }
+
+      return mutation.data;
+    },
   });
 
   const handleSearchInput = useDebouncedCallback((value: string) => {

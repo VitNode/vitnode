@@ -31,16 +31,16 @@ export const useCopperModalChangeAvatar = () => {
     const formData = new FormData();
     formData.append('file', file);
 
-    try {
-      await mutationApi(formData);
-    } catch (error) {
+    const mutation = await mutationApi(formData);
+    if (mutation?.error) {
       toast.error(t('errors.title'), {
-        description: t('settings.change_avatar.options.upload.error'),
+        description: t('errors.internal_server_error'),
       });
       setPending(false);
 
       return;
     }
+
     toast.success(t('settings.change_avatar.options.upload.title'), {
       description: t('settings.change_avatar.options.upload.success'),
     });

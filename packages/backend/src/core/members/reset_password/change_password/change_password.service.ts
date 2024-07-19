@@ -1,12 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 import { eq } from 'drizzle-orm';
 
 import { ChangePasswordCoreMembersArgs } from './dto/change_password.args';
 
 import { DatabaseService } from '@/utils/database/database.service';
 import { User } from '@/decorators';
-import { encryptPassword } from '@/core/sessions/encrypt_password';
+import { encryptPassword } from '@/core/sessions/password';
 import {
   core_users,
   core_users_pass_reset,
@@ -14,10 +13,7 @@ import {
 
 @Injectable()
 export class ChangePasswordCoreMembersService {
-  constructor(
-    private readonly databaseService: DatabaseService,
-    private readonly configService: ConfigService,
-  ) {}
+  constructor(private readonly databaseService: DatabaseService) {}
 
   async change_password({
     hashKey,
@@ -29,7 +25,7 @@ export class ChangePasswordCoreMembersService {
       });
 
     const id = keyData.user_id;
-    const hashPassword = await encryptPassword(this.configService, password);
+    const hashPassword = await encryptPassword(password);
 
     const update = await this.databaseService.db
       .update(core_users)
