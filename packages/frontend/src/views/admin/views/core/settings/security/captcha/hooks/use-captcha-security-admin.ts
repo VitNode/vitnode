@@ -5,7 +5,6 @@ import { toast } from 'sonner';
 import { useTranslations } from 'next-intl';
 
 import { mutationApi } from './mutation-api';
-
 import {
   Admin__Core_Security__Captcha__ShowQuery,
   CaptchaTypeEnum,
@@ -31,13 +30,13 @@ export const useCaptchaSecurityAdmin = ({
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const mutation = await mutationApi({
-      type: values.type,
-      secretKey: values.secret_key,
-      siteKey: values.site_key,
-    });
-
-    if (mutation.error) {
+    try {
+      await mutationApi({
+        type: values.type,
+        secretKey: values.secret_key,
+        siteKey: values.site_key,
+      });
+    } catch (error) {
       toast.error(t('errors.title'), {
         description: t('errors.internal_server_error'),
       });

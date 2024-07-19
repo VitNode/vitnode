@@ -7,13 +7,13 @@ import { and, eq } from 'drizzle-orm';
 import { SignInCoreSessionsArgs } from './dto/sign_in.args';
 import { DeviceSignInCoreSessionsService } from './device.service';
 
-import { Ctx } from '../../../utils';
-import { DatabaseService } from '../../../database';
+import { GqlContext } from '../../../utils';
+import { DatabaseService } from '@/utils/database/database.service';
 import { AccessDeniedError, CustomError } from '../../../errors';
-import { core_admin_sessions } from '../../../templates/core/admin/database/schema/admins';
-import { core_sessions } from '../../../templates/core/admin/database/schema/sessions';
+import { core_admin_sessions } from '../../../plugins/core/admin/database/schema/admins';
+import { core_sessions } from '../../../plugins/core/admin/database/schema/sessions';
 
-interface CreateSessionArgs extends Ctx {
+interface CreateSessionArgs extends GqlContext {
   email: string;
   name: string;
   userId: number;
@@ -174,7 +174,7 @@ export class SignInCoreSessionsService {
 
   async signIn(
     { admin, email: emailRaw, password, remember }: SignInCoreSessionsArgs,
-    ctx: Ctx,
+    context: GqlContext,
   ) {
     const email = emailRaw.toLowerCase();
     const user = await this.databaseService.db.query.core_users.findFirst({
@@ -200,7 +200,7 @@ export class SignInCoreSessionsService {
       email: user.email,
       userId: user.id,
       admin,
-      ...ctx,
+      ...context,
       remember,
     });
   }

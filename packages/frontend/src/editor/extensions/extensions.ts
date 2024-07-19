@@ -56,7 +56,7 @@ export const extensionsEditor = ({ uploadFiles }: Args): Extensions => [
   }),
   CodeBlockLowlightExtensionEditor,
   Link.extend({ inclusive: false }).configure({
-    openOnClick: 'whenNotEditable',
+    openOnClick: true,
   }),
   Color,
   TextStyle,

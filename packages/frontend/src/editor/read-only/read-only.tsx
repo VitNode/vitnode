@@ -10,17 +10,15 @@ import { FileDownloadButton } from './file-download-button';
 import { cn } from '../../helpers/classnames';
 import { TextLanguage } from '../../graphql/graphql';
 
-interface Props {
-  value: TextLanguage[];
-  allowDownloadAttachments?: boolean;
-  className?: string;
-}
-
 export const ReadOnlyEditor = async ({
   allowDownloadAttachments,
   className,
   value,
-}: Props) => {
+}: {
+  value: TextLanguage[];
+  allowDownloadAttachments?: boolean;
+  className?: string;
+}) => {
   const locale = useLocale();
 
   const currentValue = (): string => {

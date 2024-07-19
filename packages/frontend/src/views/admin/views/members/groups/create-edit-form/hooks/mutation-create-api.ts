@@ -3,28 +3,22 @@
 import { revalidatePath } from 'next/cache';
 
 import {
-  Core_Groups__Admin_Create,
-  Core_Groups__Admin_CreateMutation,
-  Core_Groups__Admin_CreateMutationVariables,
+  Admin__Core_Groups__Create,
+  Admin__Core_Groups__CreateMutation,
+  Admin__Core_Groups__CreateMutationVariables,
 } from '@/graphql/graphql';
 import { fetcher } from '@/graphql/fetcher';
 
 export const mutationCreateApi = async (
-  variables: Core_Groups__Admin_CreateMutationVariables,
+  variables: Admin__Core_Groups__CreateMutationVariables,
 ) => {
-  try {
-    const { data } = await fetcher<
-      Core_Groups__Admin_CreateMutation,
-      Core_Groups__Admin_CreateMutationVariables
-    >({
-      query: Core_Groups__Admin_Create,
-      variables,
-    });
+  await fetcher<
+    Admin__Core_Groups__CreateMutation,
+    Admin__Core_Groups__CreateMutationVariables
+  >({
+    query: Admin__Core_Groups__Create,
+    variables,
+  });
 
-    revalidatePath('/admin/members/groups', 'page');
-
-    return { data };
-  } catch (error) {
-    return { error };
-  }
+  revalidatePath('/admin/members/groups', 'page');
 };

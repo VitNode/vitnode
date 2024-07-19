@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { HslColor } from 'react-colorful';
 import { UseFormReturn } from 'react-hook-form';
 

@@ -4,7 +4,6 @@ import { useParams } from 'next/navigation';
 
 import { ContentDeleteActionTableNavDevPluginAdminProps } from '../content';
 import { mutationApi } from './mutation-api';
-
 import { useAlertDialog } from '@/components/ui/alert-dialog';
 
 export const useDeleteNavPluginAdmin = ({
@@ -17,12 +16,13 @@ export const useDeleteNavPluginAdmin = ({
   const { code: pluginCode } = useParams();
 
   const onSubmit = async () => {
-    const mutation = await mutationApi({
-      code,
-      pluginCode: Array.isArray(pluginCode) ? pluginCode[0] : pluginCode,
-      parentCode,
-    });
-    if (mutation.error) {
+    try {
+      await mutationApi({
+        code,
+        pluginCode: Array.isArray(pluginCode) ? pluginCode[0] : pluginCode,
+        parentCode,
+      });
+    } catch (error) {
       toast.error(tCore('errors.title'), {
         description: tCore('errors.internal_server_error'),
       });

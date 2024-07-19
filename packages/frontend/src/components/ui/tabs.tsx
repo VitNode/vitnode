@@ -1,6 +1,6 @@
 'use client';
 
-import * as React from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 
 import { buttonVariants } from './button';
@@ -8,12 +8,13 @@ import { buttonVariants } from './button';
 import { Link, usePathname } from '../../navigation';
 import { cn } from '../../helpers/classnames';
 
-interface Props {
+export const Tabs = ({
+  children,
+  className,
+}: {
   children: React.ReactNode;
   className?: string;
-}
-
-export const Tabs = ({ children, className }: Props) => {
+}) => {
   return (
     <div
       className={cn(

@@ -1,6 +1,6 @@
 import { Trash2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import * as React from 'react';
+import React from 'react';
 
 import { ShowAdminStaffAdministrators } from '@/graphql/graphql';
 import {
@@ -17,11 +17,9 @@ const ContentDeleteActionsTableAdministratorsStaffAdmin = React.lazy(async () =>
   })),
 );
 
-interface Props {
+export const DeleteActionsTableAdministratorsStaffAdmin = (props: {
   data: Pick<ShowAdminStaffAdministrators, 'id'>;
-}
-
-export const DeleteActionsTableAdministratorsStaffAdmin = (props: Props) => {
+}) => {
   const t = useTranslations('core');
 
   return (

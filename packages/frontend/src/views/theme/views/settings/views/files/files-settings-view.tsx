@@ -1,5 +1,6 @@
-import * as React from 'react';
+import React from 'react';
 import { getTranslations } from 'next-intl/server';
+import { Metadata } from 'next';
 
 import { fetcher } from '@/graphql/fetcher';
 import {
@@ -16,7 +17,7 @@ import {
 } from '@/graphql/get-pagination-tool';
 
 const getData = async (variables: Core_Members__Files__ShowQueryVariables) => {
-  const { data } = await fetcher<
+  const data = await fetcher<
     Core_Members__Files__ShowQuery,
     Core_Members__Files__ShowQueryVariables
   >({
@@ -37,6 +38,15 @@ const ContentFilesSettings = React.lazy(async () =>
 export interface FilesSettingsViewProps {
   searchParams: SearchParamsPagination;
 }
+
+export const generateMetadataFilesSettings = async (): Promise<Metadata> => {
+  const t = await getTranslations('core.settings.files');
+
+  return {
+    title: t('title'),
+    description: t('desc'),
+  };
+};
 
 export const FilesSettingsView = async ({
   searchParams,

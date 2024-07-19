@@ -7,11 +7,11 @@ import { ShowAdminGroupsObj } from './dto/show.obj';
 import {
   core_groups,
   core_groups_names,
-} from '@/templates/core/admin/database/schema/groups';
+} from '@/plugins/core/admin/database/schema/groups';
 import { inputPaginationCursor, outputPagination } from '@/functions';
-import { core_users } from '@/templates/core/admin/database/schema/users';
+import { core_users } from '@/plugins/core/admin/database/schema/users';
 import { SortDirectionEnum } from '@/utils';
-import { DatabaseService } from '@/database';
+import { DatabaseService } from '@/utils/database/database.service';
 
 @Injectable()
 export class ShowAdminGroupsService {

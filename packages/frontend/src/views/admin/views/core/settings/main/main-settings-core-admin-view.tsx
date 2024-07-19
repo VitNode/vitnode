@@ -1,7 +1,7 @@
 import { getTranslations } from 'next-intl/server';
+import { Metadata } from 'next';
 
 import { ContentMainSettingsCoreAdmin } from './content';
-
 import { HeaderContent } from '@/components/ui/header-content';
 import { Card } from '@/components/ui/card';
 import { fetcher } from '@/graphql/fetcher';
@@ -12,7 +12,7 @@ import {
 } from '@/graphql/graphql';
 
 const getData = async () => {
-  const { data } = await fetcher<
+  const data = await fetcher<
     Core_Main_Settings__ShowQuery,
     Core_Main_Settings__ShowQueryVariables
   >({
@@ -21,6 +21,15 @@ const getData = async () => {
 
   return data;
 };
+
+export const generateMetadataMainSettingsCoreAdmin =
+  async (): Promise<Metadata> => {
+    const t = await getTranslations('core.admin.nav');
+
+    return {
+      title: t('settings_general'),
+    };
+  };
 
 export const MainSettingsCoreAdminView = async () => {
   const [t, data] = await Promise.all([

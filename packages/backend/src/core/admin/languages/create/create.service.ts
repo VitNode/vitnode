@@ -5,9 +5,15 @@ import { Injectable } from '@nestjs/common';
 
 import { CreateCoreAdminLanguagesArgs } from './dto/create.args';
 
-import { DatabaseService } from '@/database';
-import { ABSOLUTE_PATHS_BACKEND, CustomError } from '../../../..';
-import { core_languages } from '@/templates/core/admin/database/schema/languages';
+import { DatabaseService } from '@/utils/database/database.service';
+import {
+  ABSOLUTE_PATHS_BACKEND,
+  configPath,
+  ConfigType,
+  CustomError,
+  getConfigFile,
+} from '../../../..';
+import { core_languages } from '@/plugins/core/admin/database/schema/languages';
 import { ShowCoreLanguages } from '../../../languages/show/dto/show.obj';
 import { setRebuildRequired } from '@/functions/rebuild-required';
 
@@ -78,6 +84,15 @@ export class CreateAdminCoreLanguageService {
         'manifest.webmanifest',
       ),
     );
+
+    // Update config file
+    const config: ConfigType = getConfigFile();
+    config.langs.push({
+      code,
+      enabled: true,
+      default: false,
+    });
+    fs.writeFileSync(configPath, JSON.stringify(config, null, 2), 'utf-8');
 
     const defaultLanguage =
       await this.databaseService.db.query.core_languages.findFirst({

@@ -13,17 +13,13 @@ import { redirect } from '@/navigation';
 export const mutationApi = async (
   variables: Core_Sessions__Sign_InMutationVariables,
 ) => {
-  try {
-    await fetcher<
-      Core_Sessions__Sign_InMutation,
-      Core_Sessions__Sign_InMutationVariables
-    >({
-      query: Core_Sessions__Sign_In,
-      variables,
-    });
-  } catch (error) {
-    return { error };
-  }
+  await fetcher<
+    Core_Sessions__Sign_InMutation,
+    Core_Sessions__Sign_InMutationVariables
+  >({
+    query: Core_Sessions__Sign_In,
+    variables,
+  });
 
   revalidatePath(variables.admin ? '/admin' : '/', 'layout');
   redirect(variables.admin ? '/admin/core/dashboard' : '/');

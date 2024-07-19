@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { Ellipsis, Minus, Quote } from 'lucide-react';
 
 import { ButtonToolbarEditor } from '../button';

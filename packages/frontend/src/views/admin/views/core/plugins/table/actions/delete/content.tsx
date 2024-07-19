@@ -2,7 +2,6 @@ import { useTranslations } from 'next-intl';
 
 import { SubmitContentDeletePluginActionsAdmin } from './submit';
 import { useDeletePluginAdmin } from './hooks/use-delete-plugin-admin';
-
 import {
   AlertDialogCancel,
   AlertDialogDescription,

@@ -1,8 +1,0 @@
-/utils/graphql.ts
-
-next.config.mjs
-tailwind.config.js
-postcss.config.js
-vitest.config.mts
-.next
-.turbo

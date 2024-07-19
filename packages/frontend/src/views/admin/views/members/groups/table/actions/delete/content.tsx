@@ -1,7 +1,6 @@
 import { useTranslations } from 'next-intl';
 
 import { useDeleteGroupAdmin } from './hooks/use-delete-group-admin';
-
 import { ShowAdminGroups } from '@/graphql/graphql';
 import { useTextLang } from '@/hooks/use-text-lang';
 import {

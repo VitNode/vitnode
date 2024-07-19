@@ -1,11 +1,10 @@
 import { DeleteActionsTableAdministratorsStaffAdmin } from './delete/delete';
-
 import { ShowAdminStaffAdministrators } from '@/graphql/graphql';
 
-interface Props {
+export const ActionsTableAdministratorsStaffAdmin = ({
+  data,
+}: {
   data: ShowAdminStaffAdministrators;
-}
-
-export const ActionsTableAdministratorsStaffAdmin = ({ data }: Props) => {
+}) => {
   return <DeleteActionsTableAdministratorsStaffAdmin data={data} />;
 };

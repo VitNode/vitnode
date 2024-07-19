@@ -1,7 +1,7 @@
 import { getTranslations } from 'next-intl/server';
+import { Metadata } from 'next';
 
 import { ContentCaptchaSecurityAdmin } from './content';
-
 import { HeaderContent } from '@/components/ui/header-content';
 import { Card, CardContent } from '@/components/ui/card';
 import { fetcher } from '@/graphql/fetcher';
@@ -11,13 +11,22 @@ import {
 } from '@/graphql/graphql';
 
 const getData = async () => {
-  const { data } = await fetcher<Admin__Core_Security__Captcha__ShowQuery>({
+  const data = await fetcher<Admin__Core_Security__Captcha__ShowQuery>({
     query: Admin__Core_Security__Captcha__Show,
     cache: 'force-cache',
   });
 
   return data;
 };
+
+export const generateMetadataCaptchaSecurityAdmin =
+  async (): Promise<Metadata> => {
+    const t = await getTranslations('admin.core.settings.security.captcha');
+
+    return {
+      title: t('title'),
+    };
+  };
 
 export const CaptchaSecurityAdminView = async () => {
   const [t, data] = await Promise.all([

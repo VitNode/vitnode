@@ -1,6 +1,6 @@
 {
   "name": "vitnode-frontend",
-  "version": "0.0.6-canary.1",
+  "version": "0.0.8-canary.0",
   "description": "Frontend wrapper for VitNode projects",
   "author": "VitNode Team",
   "license": "MIT",
@@ -10,7 +10,12 @@
     "url": "git+https://github.com/aXenDeveloper/VitNode.git",
     "directory": "packages/frontend"
   },
+  "bin": {
+    "vitnode-frontend": "dist/scripts/setup.js"
+  },
   "exports": {
+    "./next.config": "./next.config.mjs",
+    "./tailwind.config": "./tailwind.config.ts",
     "./middleware": {
       "types": "./dist/src/middleware.ts",
       "default": "./dist/src/middleware.js"
@@ -39,14 +44,7 @@
       "types": "./dist/src/views/admin/views/*.tsx",
       "default": "./dist/src/views/admin/views/*.js"
     },
-    "./theme-tsx/*": {
-      "types": "./dist/src/views/theme/views/*.tsx",
-      "default": "./dist/src/views/theme/views/*.js"
-    },
-    "./theme-ts/*": {
-      "types": "./dist/src/views/theme/views/*.ts",
-      "default": "./dist/src/views/theme/views/*.js"
-    },
+    "./admin/css": "./src/global.css",
     "./components/*": {
       "types": "./dist/src/components/*.tsx",
       "default": "./dist/src/components/*.js"
@@ -65,11 +63,32 @@
     }
   },
   "scripts": {
+    "test": "tsc -w",
+    "build:scripts": "tsup",
     "build": "tsc && swc src -d ./dist --config-file .swcrc",
     "dev": "concurrently \"tsc -w\" \"swc src -d dist --config-file .swcrc -w\"",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "codegen": "graphql-codegen --config codegen.ts"
+  },
+  "keywords": [
+    "vitnode",
+    "react",
+    "next",
+    "next.js",
+    "nextjs",
+    "typescript",
+    "tailwind",
+    "swc",
+    "tiptap",
+    "shadcnui"
+  ],
+  "peerDependencies": {
+    "next": "15.0.0-canary.72",
+    "postcss": "^8.4.39",
+    "react": "^19.0.0-rc.0",
+    "react-dom": "^19.0.0-rc.0",
+    "typescript": "^5.5.3"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^5.0.2",
@@ -78,18 +97,17 @@
     "@graphql-codegen/typescript-operations": "^4.2.3",
     "@swc/cli": "^0.4.0",
     "@swc/core": "^1.6.13",
-    "@types/node": "^20.14.10",
+    "@types/node": "^20.14.11",
     "@types/nprogress": "^0.2.3",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
-    "clsx": "^2.1.1",
     "concurrently": "^8.2.2",
     "dotenv": "^16.4.5",
-    "eslint-config-vitnode": "workspace:*",
-    "graphql": "^16.9.0",
-    "graphql-tag": "^2.12.6",
-    "tailwind-merge": "^2.3.0",
-    "ts-node": "^10.9.2",
+    "eslint-config-typescript-vitnode": "workspace:*",
+    "react": "^19.0.0-rc.0",
+    "react-dom": "^19.0.0-rc.0",
+    "tailwindcss": "^3.4.4",
+    "tsup": "^8.1.0",
     "typescript": "^5.5.3"
   },
   "dependencies": {
@@ -109,6 +127,7 @@
     "@radix-ui/react-popover": "^1.1.1",
     "@radix-ui/react-progress": "^1.1.0",
     "@radix-ui/react-radio-group": "^1.2.0",
+    "@radix-ui/react-scroll-area": "^1.1.0",
     "@radix-ui/react-select": "^2.1.1",
     "@radix-ui/react-separator": "^1.1.0",
     "@radix-ui/react-slot": "^1.1.0",
@@ -132,32 +151,33 @@
     "@tiptap/react": "^2.4.0",
     "@tiptap/starter-kit": "^2.4.0",
     "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
     "cmdk": "^1.0.0",
     "cropperjs": "^1.6.2",
     "date-fns": "^3.6.0",
     "embla-carousel-react": "^8.1.6",
     "emoji-mart": "^5.6.0",
     "framer-motion": "^11.2.13",
+    "graphql": "^16.9.0",
+    "graphql-tag": "^2.12.6",
     "html-react-parser": "^5.1.10",
     "lodash": "^4.17.21",
     "lowlight": "^3.1.0",
-    "lucide-react": "^0.400.0",
-    "next": "15.0.0-canary.58",
-    "next-intl": "^3.15.3",
+    "lucide-react": "^0.408.0",
+    "next": "15.0.0-canary.72",
+    "next-intl": "^3.17.1",
     "next-themes": "^0.3.0",
     "nextjs-toploader": "^1.6.12",
     "nprogress": "^0.2.0",
-    "react": "19.0.0-rc.0",
     "react-colorful": "^5.6.1",
     "react-cropper": "^2.3.3",
     "react-day-picker": "^8.10.1",
-    "react-dom": "19.0.0-rc.0",
     "react-hook-form": "^7.52.1",
     "react-resizable-panels": "^2.0.20",
     "react-use": "^17.5.0",
     "react-virtuoso": "^4.7.11",
     "sonner": "^1.5.0",
-    "tailwindcss": "^3.4.4",
+    "tailwind-merge": "^2.4.0",
     "tailwindcss-animate": "^1.0.7",
     "tippy.js": "^6.3.7",
     "use-debounce": "^10.0.1",

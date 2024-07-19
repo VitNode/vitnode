@@ -4,8 +4,8 @@ import { ShowAdminStaffAdministrators } from '../show/dto/show.obj';
 import { CreateAdminStaffAdministratorsArgs } from './dto/create.args';
 
 import { CustomError } from '@/errors';
-import { DatabaseService } from '@/database';
-import { core_admin_permissions } from '@/templates/core/admin/database/schema/admins';
+import { DatabaseService } from '@/utils/database/database.service';
+import { core_admin_permissions } from '@/plugins/core/admin/database/schema/admins';
 
 @Injectable()
 export class CreateAdminStaffAdministratorsService {

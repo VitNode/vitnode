@@ -1,8 +1,8 @@
 import { getTranslations } from 'next-intl/server';
 import { cookies } from 'next/headers';
+import { Metadata } from 'next';
 
 import { ContentDevicesSettings } from './content';
-
 import {
   Core_Sessions__Devices__Show,
   Core_Sessions__Devices__ShowQuery,
@@ -12,7 +12,7 @@ import { CardContent, CardDescription, CardHeader } from '@/components/ui/card';
 import { fetcher } from '@/graphql/fetcher';
 
 const getData = async () => {
-  const { data } = await fetcher<
+  const data = await fetcher<
     Core_Sessions__Devices__ShowQuery,
     Core_Sessions__Devices__ShowQueryVariables
   >({
@@ -20,6 +20,15 @@ const getData = async () => {
   });
 
   return data;
+};
+
+export const generateMetadataDevicesSettings = async (): Promise<Metadata> => {
+  const t = await getTranslations('core.settings.devices');
+
+  return {
+    title: t('title'),
+    description: t('desc'),
+  };
 };
 
 export const DevicesSettingsView = async () => {

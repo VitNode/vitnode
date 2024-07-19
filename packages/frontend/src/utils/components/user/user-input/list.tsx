@@ -8,16 +8,18 @@ import { cn } from '@/helpers/classnames';
 import { AvatarUser } from '@/components/ui/user/avatar';
 import { GroupFormat } from '@/components/ui/user/group-format';
 
-interface Props {
+export const UserInputContentList = ({
+  edges,
+  onSelect,
+  values,
+}: {
   edges: Pick<
     ShowCoreMembers,
     'avatar_color' | 'avatar' | 'group' | 'id' | 'name_seo' | 'name'
   >[];
   onSelect: (value: UserInputItem) => void;
   values: UserInputItem[];
-}
-
-export const UserInputContentList = ({ edges, onSelect, values }: Props) => {
+}) => {
   const t = useTranslations('core');
 
   if (edges.length === 0) {

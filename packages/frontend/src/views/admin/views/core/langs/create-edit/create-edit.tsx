@@ -3,7 +3,6 @@ import { useTranslations } from 'next-intl';
 import { TimezoneFieldCreateEditLangAdmin } from './fields/timezone';
 import { LocaleFieldCreateEditLangAdmin } from './fields/locale';
 import { useCreateEditLangAdmin } from './hooks/use-create-edit-lang-admin';
-
 import { ShowCoreLanguages } from '@/graphql/graphql';
 import {
   DialogDescription,
@@ -24,11 +23,7 @@ import { Input } from '@/components/ui/input';
 import { Switch } from '@/components/ui/switch';
 import { Button } from '@/components/ui/button';
 
-interface Props {
-  data?: ShowCoreLanguages;
-}
-
-export const CreateEditLangAdmin = ({ data }: Props) => {
+export const CreateEditLangAdmin = ({ data }: { data?: ShowCoreLanguages }) => {
   const t = useTranslations('admin.core.langs.actions');
   const { form, onSubmit } = useCreateEditLangAdmin({ data });
 

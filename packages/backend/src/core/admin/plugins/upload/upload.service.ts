@@ -10,8 +10,8 @@ import { ShowAdminPlugins } from '../show/dto/show.obj';
 import { UploadAdminPluginsArgs } from './dto/upload.args';
 import { ChangeFilesAdminPluginsService } from '../helpers/files/change/change.service';
 
-import { core_plugins } from '@/templates/core/admin/database/schema/plugins';
-import { DatabaseService } from '@/database';
+import { core_plugins } from '@/plugins/core/admin/database/schema/plugins';
+import { DatabaseService } from '@/utils/database/database.service';
 import {
   ABSOLUTE_PATHS_BACKEND,
   ConfigPlugin,
@@ -161,7 +161,7 @@ export class UploadAdminPluginsService {
   }: {
     config: ConfigPlugin;
   }): Promise<void> {
-    const frontendPaths = ['admin_pages', 'pages', 'plugin', 'pages_container'];
+    const frontendPaths = ['admin_pages', 'pages', 'plugin'];
     await Promise.all(
       frontendPaths.map(async path => {
         const source = join(this.tempPath, 'frontend', path);

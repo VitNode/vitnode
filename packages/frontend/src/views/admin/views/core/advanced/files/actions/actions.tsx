@@ -2,7 +2,6 @@ import { Download } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 import { DeleteActionFilesAdvancedCoreAdmin } from './delete/delete';
-
 import { Admin__Core_Files__ShowQuery } from '@/graphql/graphql';
 import {
   Tooltip,

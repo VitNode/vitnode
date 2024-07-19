@@ -141,7 +141,6 @@
             "admin_pages": "Admin Pages",
             "admin_templates": "Admin Templates",
             "pages": "Pages",
-            "pages_container": "Pages (container)",
             "templates": "Templates",
             "default_page": "Default Page",
             "file_detected": "{count, plural, =0 {No files} =1 {1 file} other {# files}} detected"

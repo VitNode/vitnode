@@ -4,7 +4,6 @@ import { toast } from 'sonner';
 import * as z from 'zod';
 
 import { mutationApi } from './mutation-api';
-
 import { ShowCoreLanguages } from '@/graphql/graphql';
 import { useDialog } from '@/components/ui/dialog';
 
@@ -31,9 +30,9 @@ export const useUpdateLangAdmin = ({
     const formData = new FormData();
     formData.append('file', values.file[0]);
     formData.append('code', code);
-    const mutation = await mutationApi(formData);
-
-    if (mutation.error || !mutation.data) {
+    try {
+      await mutationApi(formData);
+    } catch (error) {
       toast.error(tCore('errors.title'), {
         description: tCore('errors.internal_server_error'),
       });

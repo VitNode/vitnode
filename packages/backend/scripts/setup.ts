@@ -4,18 +4,27 @@
 import * as fs from 'fs';
 import { join } from 'path';
 
-import { copyDatabaseSchema } from './copy-database-core';
+import { copyFiles } from './copy-files';
 import { generateManifest } from './generate-manifest';
-import { generateMigrations } from './generate-migrations';
+import { createTablesDatabaseUsingMigrations } from './create-tables-database-using-migrations';
 import { updatePlugins } from './update-plugins';
-import { DATABASE_ENVS, createClientDatabase } from '../src/database/client';
-import coreSchemaDatabase from '../src/templates/core/admin/database';
+import coreSchemaDatabase from '../src/plugins/core/admin/database';
 import { generateDatabaseMigrations } from './generate-database-migrations';
 import { generateConfig } from './generate-config';
 
+import { createClientDatabase, DATABASE_ENVS } from '@/utils/database/client';
+
+const initConsole = '\x1b[34m[VitNode]\x1b[0m \x1b[33m[Backend]\x1b[0m';
+
 const init = async () => {
+  let skipDatabase = false;
+  if (process.argv[3] === '--skip-database') {
+    const skipDatabaseMessage = `${initConsole} '--skip-database' flag detected. Skipping database setup...`;
+    console.log(skipDatabaseMessage);
+    skipDatabase = true;
+  }
+
   const pluginsPath = join(process.cwd(), 'src', 'plugins');
-  const corePluginPath = join(pluginsPath, 'core');
   if (!fs.existsSync(pluginsPath)) {
     console.log(
       `⛔️ Plugins not found in 'src/plugins' directory. "${pluginsPath}"`,
@@ -23,51 +32,42 @@ const init = async () => {
     process.exit(1);
   }
 
+  console.log(
+    `${initConsole} [1/${skipDatabase ? 2 : 6}] Setup the project. Generating the config file...`,
+  );
+  generateConfig({ pluginsPath });
+
+  console.log(
+    `${initConsole} [2/${skipDatabase ? 2 : 6}] Copying files into backend...`,
+  );
+  copyFiles({ pluginsPath });
+
+  if (skipDatabase) {
+    console.log(`${initConsole} ✅ Project setup complete.`);
+    process.exit(0);
+  }
+
+  console.log(`${initConsole} [3/6] Generating database migrations...`);
+  await generateDatabaseMigrations({ pluginsPath });
+
+  console.log(`${initConsole} [4/6] Generating the manifest files...`);
+  generateManifest();
+
   const database = createClientDatabase({
     config: DATABASE_ENVS,
     schemaDatabase: coreSchemaDatabase,
   });
 
   console.log(
-    '\x1b[34m%s\x1b[0m',
-    '[VitNode]',
-    '[1/6] Setup the project. Generating the config file...',
+    `${initConsole} [5/6] Create tables in database using migrations...`,
   );
-  generateConfig({ pluginsPath });
+  await createTablesDatabaseUsingMigrations({ pluginsPath, db: database.db });
 
-  console.log(
-    '\x1b[34m%s\x1b[0m',
-    '[VitNode]',
-    '[2/6] Copying the database core schema...',
-  );
-  copyDatabaseSchema({ corePluginPath });
-
-  console.log(
-    '\x1b[34m%s\x1b[0m',
-    '[VitNode]',
-    '[3/6] Generating database migrations...',
-  );
-  await generateDatabaseMigrations({ pluginsPath });
-
-  console.log(
-    '\x1b[34m%s\x1b[0m',
-    '[VitNode]',
-    '[4/6] Generating the manifest files...',
-  );
-  generateManifest();
-
-  console.log(
-    '\x1b[34m%s\x1b[0m',
-    '[VitNode]',
-    '[5/6] Generating migrations...',
-  );
-  await generateMigrations({ pluginsPath, db: database.db });
-
-  console.log('\x1b[34m%s\x1b[0m', '[VitNode]', '[6/6] Updating plugins...');
+  console.log(`${initConsole} [6/6] Updating plugins...`);
   await updatePlugins({ pluginsPath, db: database.db });
 
   await database.poolDB.end();
-  console.log('\x1b[34m%s\x1b[0m', '[VitNode]', '✅ Project setup complete.');
+  console.log(`${initConsole} ✅ Project setup complete.`);
   process.exit(0);
 };
 

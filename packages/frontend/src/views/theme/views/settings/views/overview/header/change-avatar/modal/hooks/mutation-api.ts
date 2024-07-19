@@ -10,18 +10,14 @@ import {
 } from '@/graphql/graphql';
 
 export const mutationApi = async () => {
-  try {
-    const { data } = await fetcher<
-      Core_Members__Avatar__DeleteMutation,
-      Core_Members__Avatar__DeleteMutationVariables
-    >({
-      query: Core_Members__Avatar__Delete,
-    });
+  const data = await fetcher<
+    Core_Members__Avatar__DeleteMutation,
+    Core_Members__Avatar__DeleteMutationVariables
+  >({
+    query: Core_Members__Avatar__Delete,
+  });
 
-    revalidatePath('/', 'layout');
+  revalidatePath('/', 'layout');
 
-    return { data };
-  } catch (error) {
-    return { error };
-  }
+  return data;
 };

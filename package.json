@@ -1,46 +1,42 @@
 {
   "name": "vitnode",
-  "version": "0.0.4-canary.0",
-  "version_code": "10000",
-  "description": "VitNode app",
-  "author": "VitNode Team",
   "license": "MIT",
-  "homepage": "https://VitNode.com",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/aXenDeveloper/VitNode.git"
-  },
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
   "scripts": {
+    "config:init": "cd apps/backend && pnpm config:init && cd ../..",
+    "config:init:skip-database": "cd apps/backend && pnpm config:init --skip-database && cd ../..",
     "build:scripts": "turbo build:scripts && pnpm i",
     "build": "cross-env TURBO_TELEMETRY_DISABLED=1 turbo build",
     "dev": "pnpm build:scripts && turbo dev",
     "dev:docs": "cd apps/docs && pnpm dev:docs",
     "build:docs": "cd apps/docs && pnpm build:docs",
-    "email:dev": "cd apps/backend && pnpm email:dev",
     "lint": "turbo lint",
     "lint:fix": "turbo lint:fix",
     "start": "turbo start",
-    "preinstall": "npx only-allow pnpm",
-    "config:init": "cd apps/frontend && pnpm config:init && cd ../..",
     "codegen": "cd apps/backend && pnpm codegen && cd ../..",
-    "docker:dev": "docker-compose -f ./docker-compose-dev.yml -p vitnode-dev up -d",
+    "docker:dev": "docker compose -f ./docker-compose-dev.yml -p vitnode-dev up -d",
     "docker:prod": "sh docker-prod.sh",
     "docker:clear": "sudo docker system prune -a",
     "release": "node ./bump-version.mjs"
   },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "engines": {
-    "node": ">=20.0.0",
-    "pnpm": ">=9.0.0"
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
   },
   "devDependencies": {
     "cross-env": "^7.0.3",
-    "prettier": "^3.3.2",
+    "eslint-config-typescript-vitnode": "workspace:*",
+    "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.5",
-    "turbo": "^2.0.6"
+    "turbo": "^2.0.7",
+    "typescript": "^5.5.3"
   },
-  "packageManager": "pnpm@9.5.0"
+  "packageManager": "pnpm@9.5.0",
+  "dependencies": {
+    "drizzle-kit": "0.22.8",
+    "drizzle-orm": "0.31.4"
+  }
 }

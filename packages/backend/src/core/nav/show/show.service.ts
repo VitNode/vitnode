@@ -4,9 +4,9 @@ import { and, count, eq } from 'drizzle-orm';
 import { ShowCoreNavArgs } from './dto/show.args';
 import { ShowCoreNavObj } from './dto/show.obj';
 
-import { DatabaseService } from '../../../database';
+import { DatabaseService } from '@/utils/database/database.service';
 import { inputPaginationCursor, outputPagination } from '../../../functions';
-import { core_nav } from '../../../templates/core/admin/database/schema/nav';
+import { core_nav } from '../../../plugins/core/admin/database/schema/nav';
 import { SortDirectionEnum } from '../../../utils';
 
 @Injectable()

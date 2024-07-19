@@ -1,10 +1,9 @@
 import { useForm } from 'react-hook-form';
 import { useTranslations } from 'next-intl';
-import * as React from 'react';
+import React from 'react';
 import { toast } from 'sonner';
 
 import { mutationApi } from './mutation-api';
-
 import { useDialog } from '@/components/ui/dialog';
 
 interface FormType {
@@ -29,19 +28,22 @@ export const useModalChangeAvatar = () => {
     if (type === 'delete') {
       setPending(true);
 
-      const mutation = await mutationApi();
-      if (mutation.error) {
+      try {
+        await mutationApi();
+      } catch (error) {
         toast.error(t('errors.title'), {
           description: t('settings.change_avatar.options.delete.error'),
         });
-      } else {
-        toast.success(t('settings.change_avatar.options.delete.title'), {
-          description: t('settings.change_avatar.options.delete.success'),
-        });
-        setOpen?.(false);
+        setPending(false);
+
+        return;
       }
 
       setPending(false);
+      setOpen?.(false);
+      toast.success(t('settings.change_avatar.options.delete.title'), {
+        description: t('settings.change_avatar.options.delete.success'),
+      });
     }
   };
 

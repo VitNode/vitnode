@@ -3,7 +3,6 @@
 import { useTranslations } from 'next-intl';
 
 import { useManifestCoreAdminView } from './hooks/use-manifest-core-admin-view';
-
 import { Admin__Core_Manifest_Metadata__ShowQuery } from '@/graphql/graphql';
 import {
   Form,

@@ -1,22 +1,20 @@
-import * as React from 'react';
+import React from 'react';
 import { X } from 'lucide-react';
 
 import { acceptMimeTypeImage } from '../../../helpers/files-support';
 import { Img } from '../../../components/img';
-
-interface Props {
-  file: File;
-  index: number;
-  onChange: (e: File[]) => void;
-  value: File[] | undefined;
-}
 
 export const ItemPreviewFilesInput = ({
   file,
   index,
   onChange,
   value,
-}: Props) => {
+}: {
+  file: File;
+  index: number;
+  onChange: (e: File[]) => void;
+  value: File[] | undefined;
+}) => {
   const previewURL = React.useMemo(
     () => (file instanceof File ? URL.createObjectURL(file) : ``),
     [file],

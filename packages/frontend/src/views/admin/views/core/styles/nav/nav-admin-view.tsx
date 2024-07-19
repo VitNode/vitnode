@@ -1,9 +1,9 @@
-import * as React from 'react';
+import React from 'react';
 import { getTranslations } from 'next-intl/server';
+import { Metadata } from 'next';
 
 import { TableNavAdmin } from './table/table';
 import { ActionsNavAdmin } from './actions/actions';
-
 import {
   Admin__Core_Nav__Show,
   Admin__Core_Nav__ShowQuery,
@@ -17,7 +17,7 @@ import { Card } from '@/components/ui/card';
 import { fetcher } from '@/graphql/fetcher';
 
 const getData = async () => {
-  const { data } = await fetcher<
+  const data = await fetcher<
     Admin__Core_Nav__ShowQuery,
     Admin__Core_Nav__ShowQueryVariables
   >({
@@ -25,6 +25,14 @@ const getData = async () => {
   });
 
   return data;
+};
+
+export const generateMetadataNavAdmin = async (): Promise<Metadata> => {
+  const t = await getTranslations('admin.core.styles.nav');
+
+  return {
+    title: t('title'),
+  };
 };
 
 export const NavAdminView = async () => {

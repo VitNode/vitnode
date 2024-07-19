@@ -13,7 +13,7 @@ import { Request, Response } from 'express';
 
 import { InternalAuthorizationCoreSessionsService } from '../../../sessions/authorization/internal/internal_authorization.service';
 import { AuthorizationAdminSessionsService } from '../../sessions/authorization/authorization.service';
-import { DatabaseService } from '@/database';
+import { DatabaseService } from '@/utils/database/database.service';
 import { ABSOLUTE_PATHS_BACKEND } from '../../../..';
 
 @Controller('files')

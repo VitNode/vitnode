@@ -1,8 +1,8 @@
 import { getTranslations } from 'next-intl/server';
+import { Metadata } from 'next';
 
 import { ActionsEmailSettingsAdmin } from './actions/actions';
 import { ContentEmailSettingsAdmin } from './content';
-
 import { HeaderContent } from '@/components/ui/header-content';
 import { Card } from '@/components/ui/card';
 import { fetcher } from '@/graphql/fetcher';
@@ -13,7 +13,7 @@ import {
 } from '@/graphql/graphql';
 
 const getData = async () => {
-  const { data } = await fetcher<
+  const data = await fetcher<
     Admin__Core_Email_Settings__ShowQuery,
     Admin__Core_Email_Settings__ShowQueryVariables
   >({
@@ -22,6 +22,15 @@ const getData = async () => {
 
   return data;
 };
+
+export const generateMetadataEmailSettingsAdmin =
+  async (): Promise<Metadata> => {
+    const t = await getTranslations('core.admin.nav');
+
+    return {
+      title: t('settings_email'),
+    };
+  };
 
 export const EmailSettingsAdminView = async () => {
   const [t, data] = await Promise.all([

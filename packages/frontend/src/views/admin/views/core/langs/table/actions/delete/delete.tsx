@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { ShowCoreLanguages } from '@/graphql/graphql';
 import { AlertDialog, AlertDialogContent } from '@/components/ui/alert-dialog';

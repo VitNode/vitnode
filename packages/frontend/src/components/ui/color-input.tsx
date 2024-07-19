@@ -1,6 +1,6 @@
 'use client';
 
-import * as React from 'react';
+import React from 'react';
 import { HslColor } from 'react-colorful';
 import { useTranslations } from 'next-intl';
 import { getHSLFromString, isColorBrightness } from 'vitnode-shared';
@@ -11,21 +11,19 @@ import { Popover, PopoverContent, PopoverTrigger } from './popover';
 
 import { cn } from '../../helpers/classnames';
 
-interface Props {
-  onChange: (value: string) => void;
-  value: string;
-  disableRemoveColor?: boolean;
-  disabled?: boolean;
-  ref?: React.RefCallback<HTMLButtonElement>;
-}
-
 export const ColorInput = ({
   disableRemoveColor,
   disabled,
   onChange,
   value,
   ...rest
-}: Props) => {
+}: {
+  onChange: (value: string) => void;
+  value: string;
+  disableRemoveColor?: boolean;
+  disabled?: boolean;
+  ref?: React.RefCallback<HTMLButtonElement>;
+}) => {
   const t = useTranslations('core.colors');
   const [open, setOpen] = React.useState(false);
   const [color, setColor] = React.useState<HslColor | null>(

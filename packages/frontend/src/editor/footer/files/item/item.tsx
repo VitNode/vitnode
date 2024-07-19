@@ -6,13 +6,13 @@ import { JSONContent } from '@tiptap/react';
 import { IconItemListFilesFooterEditor } from './icon';
 import { ContentItemListFilesFooterEditor } from './content';
 import { deleteMutationApi } from './hooks/delete-mutation-api';
-
-import { FileStateEditor } from '../../../extensions/files/files';
-import { useEditorState } from '../../../hooks/use-editor-state';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/helpers/classnames';
 import { CONFIG } from '@/helpers/config-with-env';
 import { TextLanguage } from '@/graphql/graphql';
+
+import { useEditorState } from '../../../hooks/use-editor-state';
+import { FileStateEditor } from '../../../extensions/files/files';
 
 export interface ItemListFilesFooterEditorProps
   extends Omit<FileStateEditor, 'file'> {
@@ -151,11 +151,12 @@ export const ItemListFilesFooterEditor = ({
               }
 
               setFiles(prev => prev.filter(item => item.id !== id));
-              const mutation = await deleteMutationApi({
-                id,
-                securityKey: data?.security_key,
-              });
-              if (mutation.error) {
+              try {
+                await deleteMutationApi({
+                  id,
+                  securityKey: data?.security_key,
+                });
+              } catch (error) {
                 toast.error(tCore('errors.title'), {
                   description: tCore('errors.internal_server_error'),
                 });

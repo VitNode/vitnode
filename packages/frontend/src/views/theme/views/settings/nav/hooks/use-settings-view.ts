@@ -1,6 +1,6 @@
-import { Bell, Cog, Files, LucideIcon, MonitorSmartphone } from 'lucide-react';
+import { Cog, Files, LucideIcon, MonitorSmartphone } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import * as React from 'react';
+import React from 'react';
 
 export interface ItemNavSettingsProps {
   href: string;
@@ -37,11 +37,6 @@ export const useSettingsView = (): ReturnValues => {
         href: '/settings/devices',
         icon: MonitorSmartphone,
         text: t('devices.title'),
-      },
-      {
-        href: '/settings/notifications',
-        icon: Bell,
-        text: t('notifications.title'),
       },
     ],
   };

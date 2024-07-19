@@ -1,12 +1,15 @@
+import * as fs from 'fs';
+
 import { Injectable } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
 
 import { EditCoreAdminLanguagesArgs } from './dto/edit.args';
 
-import { DatabaseService } from '@/database';
+import { DatabaseService } from '@/utils/database/database.service';
 import { ShowCoreLanguages } from '../../../languages/show/dto/show.obj';
 import { NotFoundError } from '@/errors';
-import { core_languages } from '@/templates/core/admin/database/schema/languages';
+import { core_languages } from '@/plugins/core/admin/database/schema/languages';
+import { configPath, ConfigType, getConfigFile } from '@/providers';
 
 @Injectable()
 export class EditAdminCoreLanguagesService {
@@ -24,6 +27,23 @@ export class EditAdminCoreLanguagesService {
     if (!language) {
       throw new NotFoundError('Language');
     }
+
+    // Update config file
+    const config: ConfigType = getConfigFile();
+    if (rest.default) {
+      config.langs.forEach(lang => {
+        lang.default = false;
+      });
+    }
+
+    config.langs = config.langs.map(lang => {
+      if (lang.code === language.code) {
+        return { ...lang, ...rest };
+      }
+
+      return lang;
+    });
+    fs.writeFileSync(configPath, JSON.stringify(config, null, 2), 'utf-8');
 
     // Edit default language
     if (rest.default) {

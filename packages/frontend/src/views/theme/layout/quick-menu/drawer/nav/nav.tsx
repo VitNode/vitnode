@@ -1,21 +1,20 @@
-import * as React from 'react';
+import React from 'react';
 import * as Accordion from '@radix-ui/react-accordion';
 import { ChevronDown } from 'lucide-react';
 
 import { ItemNavDrawerQuickMenu } from './item';
 import { classNameDrawerQuickMenu } from '../drawer';
-
 import { useSession } from '@/hooks/use-session';
 import { useTextLang } from '@/hooks/use-text-lang';
 import { cn } from '@/helpers/classnames';
 import { buttonVariants } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 
-interface Props {
+export const NavDrawerQuickMenu = ({
+  navIcons,
+}: {
   navIcons: { icon: React.ReactNode; id: number }[];
-}
-
-export const NavDrawerQuickMenu = ({ navIcons }: Props) => {
+}) => {
   const { nav, session } = useSession();
   const [activeItems, setActiveItems] = React.useState<string[]>([]);
   const { convertText } = useTextLang();

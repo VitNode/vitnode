@@ -1,7 +1,7 @@
 import { getTranslations } from 'next-intl/server';
+import { Metadata } from 'next';
 
 import { TableUsersMembersAdmin } from './table/table';
-
 import { fetcher } from '@/graphql/fetcher';
 import {
   Admin__Core_Members__Show,
@@ -17,7 +17,7 @@ import {
 } from '@/graphql/get-pagination-tool';
 
 const getData = async (variables: Admin__Core_Members__ShowQueryVariables) => {
-  const { data } = await fetcher<
+  const data = await fetcher<
     Admin__Core_Members__ShowQuery,
     Admin__Core_Members__ShowQueryVariables
   >({
@@ -35,6 +35,15 @@ interface SearchParams extends SearchParamsPagination {
 export interface UsersMembersAdminViewProps {
   searchParams: SearchParams;
 }
+
+export const generateMetadataUsersMembersAdminView =
+  async (): Promise<Metadata> => {
+    const t = await getTranslations('admin.members.users');
+
+    return {
+      title: t('title'),
+    };
+  };
 
 export const UsersMembersAdminView = async ({
   searchParams,

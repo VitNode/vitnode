@@ -18,12 +18,6 @@ mutation Admin__core_languages__edit(
     time_24: $time24
     allow_in_input: $allowInInput
   ) {
-    code
-    default
-    enabled
     id
-    name
-    protected
-    timezone
   }
 }

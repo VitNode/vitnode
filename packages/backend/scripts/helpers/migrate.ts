@@ -7,7 +7,7 @@ import { sql } from 'drizzle-orm';
 import { MigrationMeta } from 'drizzle-orm/migrator';
 import { NodePgDatabase } from 'drizzle-orm/node-postgres';
 
-import coreSchemaDatabase from '../../src/templates/core/admin/database';
+import coreSchemaDatabase from '../../src/plugins/core/admin/database';
 
 // Source: https://github.com/drizzle-team/drizzle-orm/blob/main/drizzle-orm/src/migrator.ts
 const readMigrationFiles = ({
@@ -99,7 +99,21 @@ export const migrate = async ({
   const lastDbMigration = dbMigrations.rows[0];
 
   const migrations = readMigrationFiles({ pluginCode });
-  if (!migrations) return;
+  if (!migrations) {
+    console.log(
+      '\x1b[34m%s\x1b[0m',
+      '[VitNode]',
+      `No migrations found for plugin ${pluginCode}.`,
+    );
+
+    return;
+  }
+
+  console.log(
+    '\x1b[34m%s\x1b[0m',
+    '[VitNode]',
+    `Migrating plugin ${pluginCode}...`,
+  );
 
   await db.transaction(async tx => {
     for await (const migration of migrations) {

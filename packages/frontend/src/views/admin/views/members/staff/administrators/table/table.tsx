@@ -1,12 +1,11 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import * as React from 'react';
+import React from 'react';
 import { InfinityIcon, ShieldAlert } from 'lucide-react';
 import { ColumnDef } from '@tanstack/react-table';
 
 import { ActionsTableAdministratorsStaffAdmin } from './actions/actions';
-
 import {
   Admin__Core_Staff_Administrators__ShowQuery,
   ShowAdminStaffAdministrators,

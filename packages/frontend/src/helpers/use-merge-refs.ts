@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 /**
  * Merges an array of refs into a single memoized callback ref or `null`.

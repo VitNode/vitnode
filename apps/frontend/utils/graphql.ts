@@ -230,6 +230,7 @@ export type Mutation = {
   admin__core_email_settings__edit: ShowAdminEmailSettingsServiceObj;
   admin__core_email_settings__test: Scalars['String']['output'];
   admin__core_files__delete: Scalars['String']['output'];
+  admin__core_groups__create: ShowAdminGroups;
   admin__core_groups__delete: Scalars['String']['output'];
   admin__core_groups__edit: ShowAdminGroups;
   admin__core_languages__create: ShowCoreLanguages;
@@ -264,7 +265,6 @@ export type Mutation = {
   admin_sessions__sign_out: Scalars['String']['output'];
   core_editor_files__delete: Scalars['String']['output'];
   core_editor_files__upload: ShowCoreFiles;
-  core_groups__admin_create: ShowAdminGroups;
   core_members__avatar__delete: Scalars['String']['output'];
   core_members__avatar__upload: UploadAvatarCoreMembersObj;
   core_members__delete: Scalars['String']['output'];
@@ -305,6 +305,12 @@ export type MutationAdmin__Core_Email_Settings__TestArgs = {
 
 export type MutationAdmin__Core_Files__DeleteArgs = {
   id: Scalars['Int']['input'];
+};
+
+
+export type MutationAdmin__Core_Groups__CreateArgs = {
+  content: ContentCreateAdminGroups;
+  name: Array<TextLanguageInput>;
 };
 
 
@@ -543,12 +549,6 @@ export type MutationCore_Editor_Files__UploadArgs = {
   file: Scalars['Upload']['input'];
   folder: Scalars['String']['input'];
   plugin: Scalars['String']['input'];
-};
-
-
-export type MutationCore_Groups__Admin_CreateArgs = {
-  content: ContentCreateAdminGroups;
-  name: Array<TextLanguageInput>;
 };
 
 

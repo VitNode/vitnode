@@ -1,0 +1,160 @@
+import { Steps } from 'nextra/components';
+import { Callout } from 'nextra/components';
+
+# Dialog
+
+Ref: [Shadcn UI - Dialog](https://ui.shadcn.com/docs/components/dialog)
+
+## Example use
+
+<Steps>
+
+### Define trigger
+
+```tsx
+import { Dialog, DialogTrigger } from 'vitnode-frontend/components/ui/dialog';
+import { Button } from 'vitnode-frontend/components/ui/button';
+
+export const Test = () => {
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button variant="ghost" size="icon" ariaLabel="Edit">
+          <Pencil />
+        </Button>
+      </DialogTrigger>
+    </Dialog>
+  );
+};
+```
+
+### Define content
+
+```tsx {3, 17-19}
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+} from 'vitnode-frontend/components/ui/dialog';
+import { Button } from 'vitnode-frontend/components/ui/button';
+
+export const Test = () => {
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button variant="ghost" size="icon" ariaLabel="Edit">
+          <Pencil />
+        </Button>
+      </DialogTrigger>
+
+      <DialogContent>
+        <div>Content</div>
+      </DialogContent>
+    </Dialog>
+  );
+};
+```
+
+### Lazy load content
+
+To improve performance and reduce the size of the initial bundle use [React Lazy](https://react.dev/reference/react/lazy) to lazy load the dialog content.
+
+Your dialog content should be in a separate file, for example `modal-test.tsx`.
+
+```tsx
+import { DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogClose } from 'vitnode-frontend/components/ui/dialog';
+import { Button } from 'vitnode-frontend/components/ui/button';
+
+export const ModalTest = () => {
+  return (
+    <>
+     <DialogHeader>
+        <DialogTitle>This is title</DialogTitle>
+        <DialogDescription>This is description</DialogDescription>
+      </DialogHeader>
+
+      <div>Content</div>
+
+      <DialogFooter>
+        <DialogClose asChild>
+          <Button variant="ghost">
+            Close
+          </Button>
+        </DialogClose>
+      </DialogFooter>
+    <>
+  );
+};
+```
+
+And then, import it in `test.tsx` file with `Suspance` and `Loader` component.
+
+```tsx {1,10-14, 22-24 }
+import React from 'react';
+
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+} from 'vitnode-frontend/components/ui/dialog';
+import { Loader } from 'vitnode-frontend/components/loader/loader';
+
+const ModalTest = React.lazy(() =>
+  import('./modal-test').then(module => ({
+    default: module.ModalTest,
+  })),
+);
+
+export const Test = () => {
+  return (
+    <Dialog>
+      <DialogTrigger asChild>...</DialogTrigger>
+
+      <DialogContent>
+        <React.Suspense fallback={<Loader />}>
+          <ModalTest />
+        </React.Suspense>
+      </DialogContent>
+    </Dialog>
+  );
+};
+```
+
+</Steps>
+
+<Callout type="info" emoji="ℹ️">
+  We're recomended to create each dialog in separate file. It's will help you to
+  manage your code. One for trigger dialog and one for content dialog.
+</Callout>
+
+## Alert Dialog
+
+In this component rules are the same.
+
+## Hook State
+
+We're created context to control dialog state `open` and `setOpen`. You can use it as hook inside dialog component.
+
+import { Tabs } from 'nextra/components';
+ 
+<Tabs items={['Dialog', 'AlertDialog']}>
+  <Tabs.Tab>
+  
+  ```tsx
+  import { useDialog } from 'vitnode-frontend/components/ui/dialog';
+  
+  const { open, setOpen } = useDialog();
+  ```
+  
+  </Tabs.Tab>
+  <Tabs.Tab>
+  
+  ```tsx
+  import { useAlertDialog } from 'vitnode-frontend/components/ui/alert-dialog';
+  
+  const { open, setOpen } = useAlertDialog();
+  ```
+  
+  </Tabs.Tab>
+
+</Tabs>

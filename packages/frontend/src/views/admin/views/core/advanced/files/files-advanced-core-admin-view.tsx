@@ -1,7 +1,7 @@
 import { getTranslations } from 'next-intl/server';
+import { Metadata } from 'next';
 
 import { ContentFilesAdvancedCoreAdminView } from './content';
-
 import {
   SearchParamsPagination,
   getPaginationTool,
@@ -17,7 +17,7 @@ import { Card } from '@/components/ui/card';
 import { fetcher } from '@/graphql/fetcher';
 
 const getData = async (variables: Admin__Core_Files__ShowQueryVariables) => {
-  const { data } = await fetcher<
+  const data = await fetcher<
     Admin__Core_Files__ShowQuery,
     Admin__Core_Files__ShowQueryVariables
   >({
@@ -31,6 +31,15 @@ const getData = async (variables: Admin__Core_Files__ShowQueryVariables) => {
 export interface FilesAdvancedCoreAdminViewProps {
   searchParams: SearchParamsPagination;
 }
+
+export const generateMetadataFilesAdvancedCoreAdminView =
+  async (): Promise<Metadata> => {
+    const t = await getTranslations('admin.core.advanced.files');
+
+    return {
+      title: t('title'),
+    };
+  };
 
 export const FilesAdvancedCoreAdminView = async ({
   searchParams,

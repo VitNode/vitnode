@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
-import { DatabaseService } from '../../../database';
-import { core_sessions_known_devices } from '../../../templates/core/admin/database/schema/sessions';
-import { Ctx } from '../../../utils';
+import { DatabaseService } from '@/utils/database/database.service';
+import { core_sessions_known_devices } from '../../../plugins/core/admin/database/schema/sessions';
+import { GqlContext } from '../../../utils';
 import { getUserIp, getUserAgentData } from '../../../functions';
 
 interface DeviceType {
@@ -23,7 +23,7 @@ export class DeviceSignInCoreSessionsService {
     private readonly configService: ConfigService,
   ) {}
 
-  protected async createDevice({ req, res }: Ctx): Promise<DeviceType> {
+  protected async createDevice({ req, res }: GqlContext): Promise<DeviceType> {
     const dataDevice = await this.databaseService.db
       .insert(core_sessions_known_devices)
       .values({
@@ -56,7 +56,7 @@ export class DeviceSignInCoreSessionsService {
     return device;
   }
 
-  async getDevice({ req, res }: Ctx): Promise<DeviceType> {
+  async getDevice({ req, res }: GqlContext): Promise<DeviceType> {
     const know_device_id: number | undefined =
       +req.cookies[this.configService.getOrThrow('cookies.known_device.name')];
 

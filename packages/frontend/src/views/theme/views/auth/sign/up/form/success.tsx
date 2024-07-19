@@ -4,11 +4,7 @@ import { useTranslations } from 'next-intl';
 import { buttonVariants } from '@/components/ui/button';
 import { Link } from '@/navigation';
 
-interface Props {
-  name: string;
-}
-
-export const SuccessFormSignUp = ({ name }: Props) => {
+export const SuccessFormSignUp = ({ name }: { name: string }) => {
   const t = useTranslations('core.sign_up.form.success');
 
   return (

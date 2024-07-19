@@ -6,7 +6,6 @@ import { useTranslations } from 'next-intl';
 import { getHSLFromString, isColorBrightness } from 'vitnode-shared';
 
 import { mutationApi } from './mutation-api';
-
 import { Admin__Core_Email_Settings__ShowQuery } from '@/graphql/graphql';
 
 export const useEmailSettingsFormAdmin = ({
@@ -39,17 +38,17 @@ export const useEmailSettingsFormAdmin = ({
     const primaryHSL = getHSLFromString(values.color_primary);
     if (!primaryHSL) return;
 
-    const mutation = await mutationApi({
-      smtpHost: values.smtp_host,
-      smtpUser: values.smtp_user,
-      smtpPort: values.smtp_port,
-      smtpSecure: values.smtp_secure,
-      smtpPassword: values.smtp_password,
-      colorPrimary: values.color_primary,
-      colorPrimaryForeground: `hsl(${isColorBrightness(primaryHSL) ? `${primaryHSL.h}, 40%, 2%` : `${primaryHSL.h}, 40%, 98%`})`,
-    });
-
-    if (mutation.error) {
+    try {
+      await mutationApi({
+        smtpHost: values.smtp_host,
+        smtpUser: values.smtp_user,
+        smtpPort: values.smtp_port,
+        smtpSecure: values.smtp_secure,
+        smtpPassword: values.smtp_password,
+        colorPrimary: values.color_primary,
+        colorPrimaryForeground: `hsl(${isColorBrightness(primaryHSL) ? `${primaryHSL.h}, 40%, 2%` : `${primaryHSL.h}, 40%, 98%`})`,
+      });
+    } catch (error) {
       toast.error(t('errors.title'), {
         description: t('errors.internal_server_error'),
       });

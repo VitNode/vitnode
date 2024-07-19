@@ -5,7 +5,6 @@ import { useTranslations } from 'next-intl';
 import * as z from 'zod';
 
 import { mutationApi } from './mutation-api';
-
 import { ShowAdminGroups } from '@/graphql/graphql';
 import { useTextLang } from '@/hooks/use-text-lang';
 import { useAlertDialog } from '@/components/ui/alert-dialog';
@@ -37,8 +36,9 @@ export const useDeleteGroupAdmin = ({
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     if (values.name !== formatName) return;
 
-    const mutation = await mutationApi({ id });
-    if (mutation.error) {
+    try {
+      await mutationApi({ id });
+    } catch (error) {
       toast.error(tCore('errors.title'), {
         description: tCore('errors.internal_server_error'),
       });
@@ -47,9 +47,7 @@ export const useDeleteGroupAdmin = ({
     }
 
     push(pathname);
-
     toast.success(t('success'));
-
     setOpen(false);
   };
 

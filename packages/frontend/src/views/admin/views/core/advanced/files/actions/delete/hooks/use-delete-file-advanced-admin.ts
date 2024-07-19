@@ -2,7 +2,6 @@ import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 
 import { mutationApi } from './mutation-api';
-
 import { useAlertDialog } from '@/components/ui/alert-dialog';
 
 interface Args {
@@ -19,10 +18,11 @@ export const useDeleteFileAdvancedAdmin = ({
   const { setOpen } = useAlertDialog();
 
   const onSubmit = async () => {
-    const mutation = await mutationApi({
-      id,
-    });
-    if (mutation.error) {
+    try {
+      await mutationApi({
+        id,
+      });
+    } catch (error) {
       toast.error(tCore('errors.title'), {
         description: tCore('errors.internal_server_error'),
       });

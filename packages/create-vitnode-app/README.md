@@ -21,8 +21,20 @@ Script based on [Create Next App](https://nextjs.org/).
 
 ```bash
 npx create-vitnode-app@latest
-# or
-yarn create vitnode-app
-# or
-pnpm create vitnode-app
 ```
+
+or
+
+```bash
+pnpm create vitnode-app@latest
+```
+
+## Options
+
+| Option                     | Description                                                |
+| -------------------------- | ---------------------------------------------------------- |
+| `--package-manager`, `-pm` | Specify the package manager to use. Support `npm`, `pnpm`. |
+| `--eslint`                 | Initialize with eslint config.                             |
+| `--docker`                 | Initialize with Dockerfile & Docker Compose.               |
+| `--no-eslint`              | Skip initializing with eslint config.                      |
+| `--skip-install`           | Skip installing packages after initializing the project.   |

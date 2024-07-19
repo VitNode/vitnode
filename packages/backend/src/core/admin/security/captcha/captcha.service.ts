@@ -7,7 +7,7 @@ import {
   HelpersAdminCaptchaSecurityService,
 } from './helpers.service';
 
-import { Ctx } from '../../../../utils';
+import { GqlContext } from '../../../../utils';
 import { CustomError } from '../../../../errors';
 import { getUserIp } from '../../../../functions';
 import { CaptchaTypeEnum, getConfigFile } from '@/providers';
@@ -82,7 +82,7 @@ export class CaptchaCoreCaptchaSecurityService extends HelpersAdminCaptchaSecuri
     };
   }
 
-  async validateCaptcha({ req }: { req: Ctx['req'] }) {
+  async validateCaptcha({ req }: { req: GqlContext['req'] }) {
     const captchaKey = req.headers['x-vitnode-captcha-token'];
     const {
       security: { captcha: config },

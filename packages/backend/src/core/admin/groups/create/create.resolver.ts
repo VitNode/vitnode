@@ -14,7 +14,7 @@ export class CreateAdminGroupsResolver {
   @Mutation(() => ShowAdminGroups)
   @UseGuards(AdminPermissionGuards)
   @SetMetadata('permission', 'create_group')
-  async core_groups__admin_create(
+  async admin__core_groups__create(
     @Args() args: CreateAdminGroupsArgs,
   ): Promise<ShowAdminGroups> {
     return this.service.create(args);

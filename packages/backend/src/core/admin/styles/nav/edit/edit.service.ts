@@ -3,13 +3,13 @@ import { eq } from 'drizzle-orm';
 
 import { EditAdminNavStylesArgs } from './dto/edit.args';
 
-import { DatabaseService } from '@/database';
+import { DatabaseService } from '@/utils/database/database.service';
 import { NotFoundError } from '@/errors';
 import {
   core_nav,
   core_nav_description,
   core_nav_name,
-} from '@/templates/core/admin/database/schema/nav';
+} from '@/plugins/core/admin/database/schema/nav';
 import { ParserTextLanguageCoreHelpersService } from '@/core/helpers/text_language/parser/parser.service';
 import { ShowCoreNav } from '@/core/nav/show/dto/show.obj';
 

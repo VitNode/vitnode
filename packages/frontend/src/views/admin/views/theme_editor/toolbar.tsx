@@ -1,6 +1,6 @@
 import { Monitor, Moon, Smartphone, Sun, Tablet } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import * as React from 'react';
+import React from 'react';
 import { useTheme } from 'next-themes';
 
 import {
@@ -17,12 +17,13 @@ export enum ThemeEditorViewEnum {
   Mobile = 'mobile',
 }
 
-interface Props {
+export const ToolbarThemeEditor = ({
+  activeMode,
+  setActiveMode,
+}: {
   activeMode: ThemeEditorViewEnum;
   setActiveMode: (mode: ThemeEditorViewEnum) => void;
-}
-
-export const ToolbarThemeEditor = ({ activeMode, setActiveMode }: Props) => {
+}) => {
   const t = useTranslations('core');
   const { resolvedTheme, setTheme, theme } = useTheme();
   const activeTheme = resolvedTheme ?? theme ?? 'light';

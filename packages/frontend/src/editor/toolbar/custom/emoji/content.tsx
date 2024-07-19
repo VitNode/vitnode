@@ -1,17 +1,18 @@
 import { useTranslations } from 'next-intl';
-import * as React from 'react';
+import React from 'react';
 import { Input } from 'vitnode-frontend/components/ui/input';
 import { CONFIG } from 'vitnode-frontend/helpers/config-with-env';
 
-import { useEditorState } from '../../../hooks/use-editor-state';
 import { SkinSelectEmojisContentIconInput } from '@/components/icon/input/content/emojis/skin-select';
 import { EmojisContentIconInput } from '@/components/icon/input/content/emojis/emojis';
 
-interface Props {
-  setIsOpen?: (open: boolean) => void;
-}
+import { useEditorState } from '../../../hooks/use-editor-state';
 
-export const ContentEmojiToolbarEditor = ({ setIsOpen }: Props) => {
+export const ContentEmojiToolbarEditor = ({
+  setIsOpen,
+}: {
+  setIsOpen?: (open: boolean) => void;
+}) => {
   const t = useTranslations('core.icon_picker');
   const { editor } = useEditorState();
   const [search, setSearch] = React.useState('');

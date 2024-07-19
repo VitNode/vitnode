@@ -5,7 +5,6 @@ import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 
 import { mutationApi } from './mutation-api';
-
 import { ShowCoreLanguages } from '@/graphql/graphql';
 import { useAlertDialog } from '@/components/ui/alert-dialog';
 import { usePathname, useRouter } from '@/navigation';
@@ -33,8 +32,9 @@ export const useDeleteLangAdmin = ({
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     if (values.name !== name) return;
 
-    const mutation = await mutationApi({ code });
-    if (mutation.error) {
+    try {
+      await mutationApi({ code });
+    } catch (error) {
       toast.error(tCore('errors.title'), {
         description: tCore('errors.internal_server_error'),
       });

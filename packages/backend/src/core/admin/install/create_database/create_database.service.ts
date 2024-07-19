@@ -1,19 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { count } from 'drizzle-orm';
 
-import { DatabaseService } from '@/database';
+import { DatabaseService } from '@/utils/database/database.service';
 import { CustomError } from '@/errors';
-import { core_languages } from '@/templates/core/admin/database/schema/languages';
+import { core_languages } from '@/plugins/core/admin/database/schema/languages';
 import {
   core_groups,
   core_groups_names,
-} from '@/templates/core/admin/database/schema/groups';
-import { core_admin_permissions } from '@/templates/core/admin/database/schema/admins';
+} from '@/plugins/core/admin/database/schema/groups';
+import { core_admin_permissions } from '@/plugins/core/admin/database/schema/admins';
 import {
   core_nav,
   core_nav_name,
-} from '@/templates/core/admin/database/schema/nav';
-import { core_moderators_permissions } from '@/templates/core/admin/database/schema/moderators';
+} from '@/plugins/core/admin/database/schema/nav';
+import { core_moderators_permissions } from '@/plugins/core/admin/database/schema/moderators';
 
 @Injectable()
 export class CreateDatabaseAdminInstallService {
@@ -47,14 +47,6 @@ export class CreateDatabaseAdminInstallService {
         locale: 'enUS',
         site_copyright: `Copyright © VitNode ${new Date().getFullYear()}`,
       },
-      {
-        code: 'pl',
-        name: 'Polski (Polish)',
-        timezone: 'Europe/Warsaw',
-        time_24: true,
-        locale: 'pl',
-        site_copyright: `Prawa autorskie © VitNode ${new Date().getFullYear()}`,
-      },
     ]);
 
     // Create default groups
@@ -83,11 +75,6 @@ export class CreateDatabaseAdminInstallService {
         language_code: 'en',
         value: 'Guest',
       },
-      {
-        item_id: guestGroup[0].id,
-        language_code: 'pl',
-        value: 'Gość',
-      },
     ]);
 
     const memberGroup = await this.databaseService.db
@@ -104,11 +91,6 @@ export class CreateDatabaseAdminInstallService {
         language_code: 'en',
         value: 'Member',
       },
-      {
-        item_id: memberGroup[0].id,
-        language_code: 'pl',
-        value: 'Użytkownik',
-      },
     ]);
 
     const moderatorGroup = await this.databaseService.db
@@ -122,11 +104,6 @@ export class CreateDatabaseAdminInstallService {
       {
         item_id: moderatorGroup[0].id,
         language_code: 'en',
-        value: 'Moderator',
-      },
-      {
-        item_id: moderatorGroup[0].id,
-        language_code: 'pl',
         value: 'Moderator',
       },
     ]);
@@ -149,11 +126,6 @@ export class CreateDatabaseAdminInstallService {
       {
         item_id: adminGroup[0].id,
         language_code: 'en',
-        value: 'Administrator',
-      },
-      {
-        item_id: adminGroup[0].id,
-        language_code: 'pl',
         value: 'Administrator',
       },
     ]);
@@ -189,11 +161,6 @@ export class CreateDatabaseAdminInstallService {
         item_id: nav[0].id,
         language_code: 'en',
         value: 'Home',
-      },
-      {
-        item_id: nav[0].id,
-        language_code: 'pl',
-        value: 'Strona główna',
       },
       {
         item_id: nav[1].id,

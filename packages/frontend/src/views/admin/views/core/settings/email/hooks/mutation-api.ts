@@ -12,19 +12,13 @@ import { fetcher } from '@/graphql/fetcher';
 export const mutationApi = async (
   variables: Admin__Core_Email_Settings__EditMutationVariables,
 ) => {
-  try {
-    const { data } = await fetcher<
-      Admin__Core_Email_Settings__EditMutation,
-      Admin__Core_Email_Settings__EditMutationVariables
-    >({
-      query: Admin__Core_Email_Settings__Edit,
-      variables,
-    });
+  await fetcher<
+    Admin__Core_Email_Settings__EditMutation,
+    Admin__Core_Email_Settings__EditMutationVariables
+  >({
+    query: Admin__Core_Email_Settings__Edit,
+    variables,
+  });
 
-    revalidatePath('/admin/core/settings/email', 'page');
-
-    return { data };
-  } catch (error) {
-    return { error };
-  }
+  revalidatePath('/admin/core/settings/email', 'page');
 };

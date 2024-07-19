@@ -2,7 +2,6 @@ import { getTranslations } from 'next-intl/server';
 
 import { CreateNavDevPluginAdmin } from './actions/create/create';
 import { ContentNavDevPluginAdmin } from './content';
-
 import { Icon } from '@/components/icon/icon';
 import { HeaderContent } from '@/components/ui/header-content';
 import {
@@ -17,7 +16,7 @@ import { fetcher } from '@/graphql/fetcher';
 const getData = async (
   variables: Admin__Core_Plugins__Nav__ShowQueryVariables,
 ) => {
-  const { data } = await fetcher<
+  const data = await fetcher<
     Admin__Core_Plugins__Nav__ShowQuery,
     Admin__Core_Plugins__Nav__ShowQueryVariables
   >({

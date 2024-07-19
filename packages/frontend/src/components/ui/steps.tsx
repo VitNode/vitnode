@@ -12,12 +12,13 @@ export interface ItemStepProps {
   href?: string;
 }
 
-interface Props {
+export const Steps = ({
+  className,
+  items,
+}: {
   items: ItemStepProps[];
   className?: string;
-}
-
-export const Steps = ({ className, items }: Props) => {
+}) => {
   if (items.length === 0) return null;
 
   return (

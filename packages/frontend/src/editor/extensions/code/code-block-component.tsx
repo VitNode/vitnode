@@ -1,7 +1,7 @@
 'use client';
 
 import { NodeViewContent, NodeViewWrapper } from '@tiptap/react';
-import * as React from 'react';
+import React from 'react';
 import { CheckIcon, SortAscIcon } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { cn } from 'vitnode-frontend/helpers/classnames';

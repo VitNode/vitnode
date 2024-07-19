@@ -1,12 +1,10 @@
-import * as React from 'react';
+import React from 'react';
 import { ExternalLink } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
-import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 
 import { ActionsDevPluginAdmin } from './actions/actions';
 import { getPluginDataAdmin } from './query-api';
-
 import { HeaderContent } from '@/components/ui/header-content';
 import { Badge } from '@/components/ui/badge';
 import { DateFormat } from '@/components/date-format';
@@ -14,6 +12,7 @@ import { Tabs, TabsTrigger } from '@/components/ui/tabs';
 import { Card } from '@/components/ui/card';
 import { CONFIG } from '@/helpers/config-with-env';
 import { getGlobalData } from '@/graphql/get-global-data';
+import { redirect } from '@/navigation';
 
 export interface DevPluginAdminLayoutProps {
   children: React.ReactNode;
@@ -31,10 +30,10 @@ export async function generateMetadataDevPluginAdminLayout({
     getGlobalData(),
   ]);
 
-  const { data } = await getPluginDataAdmin({ code });
+  const data = await getPluginDataAdmin({ code });
   if (!data || data.admin__core_plugins__show.edges.length === 0) return {};
 
-  const defaultTitle = `${data.admin__core_plugins__show.edges[0].name} - ${tCore('nav.plugins')} - ${t('title_short')} - ${config.core_settings__show.site_name}`;
+  const defaultTitle = `${data.admin__core_plugins__show.edges[0].name} - ${tCore('nav.plugins')} - ${t('title_short')} - ${config.core_settings__show.site_short_name}`;
 
   return {
     title: {
@@ -48,10 +47,12 @@ export const DevPluginAdminLayout = async ({
   params: { code },
   children,
 }: DevPluginAdminLayoutProps) => {
-  if (!CONFIG.node_development) notFound();
-  const { data } = await getPluginDataAdmin({ code });
+  if (!CONFIG.node_development) redirect('/admin');
+  const data = await getPluginDataAdmin({ code });
 
-  if (!data || data.admin__core_plugins__show.edges.length === 0) notFound();
+  if (!data || data.admin__core_plugins__show.edges.length === 0) {
+    redirect('/admin');
+  }
 
   const [t, tCore] = await Promise.all([
     getTranslations('admin.core.plugins.dev'),

@@ -10,7 +10,7 @@ import {
 export const getGroupsShortApi = async (
   variables: Admin__Core_Groups__Show_ShortQueryVariables,
 ) => {
-  const { data } = await fetcher<
+  const data = await fetcher<
     Admin__Core_Groups__Show_ShortQuery,
     Admin__Core_Groups__Show_ShortQueryVariables
   >({

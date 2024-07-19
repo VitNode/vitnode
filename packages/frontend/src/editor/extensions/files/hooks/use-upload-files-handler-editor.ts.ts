@@ -1,9 +1,8 @@
-import * as React from 'react';
+import React from 'react';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 import { formatBytes } from 'vitnode-shared';
 import { useGlobals } from 'vitnode-frontend/hooks/use-globals';
-import { ErrorType } from 'vitnode-frontend/graphql/fetcher';
 import { useSession } from 'vitnode-frontend/hooks/use-session';
 
 import {
@@ -13,7 +12,6 @@ import {
 } from '../files';
 import { uploadMutationApi } from './upload-mutation-api';
 import { getFilesFromContent } from './functions';
-
 import { TextLanguage } from '@/graphql/graphql';
 
 export interface UploadFilesHandlerArgs {
@@ -48,44 +46,42 @@ export const useUploadFilesHandlerEditor = ({
     data: FileStateEditor;
     finishUpload?: (file: FileStateEditor) => void;
   }) => {
-    const formData = new FormData();
-    if (!data.file || !allowUploadFiles) return;
-    formData.append('file', data.file);
-    formData.append('plugin', allowUploadFiles.plugin);
-    formData.append('folder', allowUploadFiles.folder);
-    const mutation = await uploadMutationApi(formData);
+    try {
+      const formData = new FormData();
+      if (!data.file || !allowUploadFiles) return;
+      formData.append('file', data.file);
+      formData.append('plugin', allowUploadFiles.plugin);
+      formData.append('folder', allowUploadFiles.folder);
+      const mutation = await uploadMutationApi(formData);
 
-    const error = mutation.error as ErrorType | undefined;
+      setFiles(prev =>
+        prev.map(item => {
+          if (item.id === data.id) {
+            return {
+              ...item,
+              data: mutation.core_editor_files__upload,
+              isLoading: false,
+              id: mutation.core_editor_files__upload.id,
+            };
+          }
 
-    if (error || !mutation.data) {
+          return item;
+        }),
+      );
+
+      finishUpload?.({
+        ...data,
+        data: mutation.core_editor_files__upload,
+        id: mutation.core_editor_files__upload.id,
+        isLoading: false,
+      });
+    } catch (error) {
       toast.error(tCore('errors.title'), {
         description: tCore('errors.internal_server_error'),
       });
 
       return;
     }
-
-    setFiles(prev =>
-      prev.map(item => {
-        if (item.id === data.id) {
-          return {
-            ...item,
-            data: mutation.data.core_editor_files__upload,
-            isLoading: false,
-            id: mutation.data.core_editor_files__upload.id,
-          };
-        }
-
-        return item;
-      }),
-    );
-
-    finishUpload?.({
-      ...data,
-      data: mutation.data.core_editor_files__upload,
-      id: mutation.data.core_editor_files__upload.id,
-      isLoading: false,
-    });
   };
 
   const validateMineTypeFiles = (

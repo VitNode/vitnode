@@ -1,10 +1,9 @@
-import * as React from 'react';
+import React from 'react';
 import { ReactCropperElement } from 'react-cropper';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 
 import { mutationApi } from './mutation-api';
-
 import { useSession } from '@/hooks/use-session';
 import { useDialog } from '@/components/ui/dialog';
 
@@ -31,19 +30,21 @@ export const useCopperModalChangeAvatar = () => {
 
     const formData = new FormData();
     formData.append('file', file);
-    const mutation = await mutationApi(formData);
-    if (mutation.error) {
+
+    try {
+      await mutationApi(formData);
+    } catch (error) {
       toast.error(t('errors.title'), {
         description: t('settings.change_avatar.options.upload.error'),
       });
+      setPending(false);
 
       return;
-    } else {
-      toast.success(t('settings.change_avatar.options.upload.title'), {
-        description: t('settings.change_avatar.options.upload.success'),
-      });
-      setOpen?.(false);
     }
+    toast.success(t('settings.change_avatar.options.upload.title'), {
+      description: t('settings.change_avatar.options.upload.success'),
+    });
+    setOpen?.(false);
 
     setPending(false);
   };

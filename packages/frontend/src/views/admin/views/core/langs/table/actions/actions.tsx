@@ -1,12 +1,11 @@
 import { ChevronDown, Trash2, Upload } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
-import * as React from 'react';
+import React from 'react';
 
 import { EditActionsTableLangsCoreAdmin } from './edit';
 import { DeleteActionsTableLangsCoreAdmin } from './delete/delete';
 import { DownloadActionsTableLangsCoreAdmin } from './download/download';
 import { UpdateActionsTableLangsCoreAdmin } from './update/update';
-
 import { ShowCoreLanguages } from '@/graphql/graphql';
 import {
   DropdownMenu,

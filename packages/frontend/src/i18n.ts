@@ -18,14 +18,12 @@ export const i18nConfig = async ({
   }: {
     locale: string;
     plugin: string;
-  }) => Promise<{ default: any }>;
+  }) => Promise<{ default: unknown }>;
 }): Promise<Omit<IntlConfig, 'locale'>> => {
   let plugins: string[] = [];
   try {
     const {
-      data: {
-        core_middleware__show: { plugins: pluginsFromServer },
-      },
+      core_middleware__show: { plugins: pluginsFromServer },
     } = await fetcher<
       Core_Middleware__ShowQuery,
       Core_Middleware__ShowQueryVariables
@@ -38,6 +36,7 @@ export const i18nConfig = async ({
     plugins = ['core', 'admin'];
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const messagesFormApps: any[] = await Promise.all(
     plugins.map(async plugin => {
       try {

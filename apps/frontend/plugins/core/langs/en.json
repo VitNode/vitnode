@@ -72,7 +72,6 @@
     },
     "mobile_nav": {
       "back": "Back",
-      "notifications": "Notifications",
       "messages": "Messages",
       "search": "Search",
       "menu": "Menu"
@@ -199,9 +198,7 @@
       "log_out": "Log out",
       "my_profile": "My Profile",
       "settings": "Settings",
-      "mod_cp": "Moderator Panel",
       "admin_cp": "Admin Panel",
-      "theme_editor": "Theme Editor",
       "dark_light_switcher": {
         "light": "Light",
         "dark": "Dark",
@@ -313,10 +310,6 @@
       },
       "overview": {
         "title": "Overview"
-      },
-      "notifications": {
-        "title": "Notifications",
-        "desc": "Configure how you receive notifications."
       },
       "files": {
         "title": "My Files",

@@ -4,9 +4,9 @@ import { eq, sum } from 'drizzle-orm';
 import { InternalAuthorizationCoreSessionsService } from './internal/internal_authorization.service';
 import { AuthorizationCoreSessionsObj } from './dto/authorization.obj';
 
-import { DatabaseService } from '../../../database';
-import { core_files } from '../../../templates/core/admin/database/schema/files';
-import { Ctx } from '../../../utils';
+import { DatabaseService } from '@/utils/database/database.service';
+import { core_files } from '../../../plugins/core/admin/database/schema/files';
+import { GqlContext } from '../../../utils';
 
 @Injectable()
 export class AuthorizationCoreSessionsService {
@@ -48,7 +48,7 @@ export class AuthorizationCoreSessionsService {
   async authorization({
     req,
     res,
-  }: Ctx): Promise<AuthorizationCoreSessionsObj> {
+  }: GqlContext): Promise<AuthorizationCoreSessionsObj> {
     const plugin = await this.databaseService.db.query.core_plugins.findFirst({
       where: (table, { eq }) => eq(table.default, true),
     });

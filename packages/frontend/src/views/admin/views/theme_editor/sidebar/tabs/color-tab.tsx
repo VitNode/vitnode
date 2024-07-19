@@ -6,7 +6,6 @@ import {
   isColorBrightness,
 } from 'vitnode-shared';
 
-import { ThemeEditorTab, useThemeEditor } from '../../hooks/use-theme-editor';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import {
@@ -17,6 +16,8 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { ColorInput } from '@/components/ui/color-input';
+
+import { ThemeEditorTab, useThemeEditor } from '../../hooks/use-theme-editor';
 
 export const ColorTabThemeEditor = () => {
   const t = useTranslations('core.theme_editor.colors');

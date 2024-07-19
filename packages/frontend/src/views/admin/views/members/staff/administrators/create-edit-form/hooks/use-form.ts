@@ -5,7 +5,6 @@ import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 
 import { mutationApi } from './mutation-api';
-
 import { useTextLang } from '@/hooks/use-text-lang';
 import { useDialog } from '@/components/ui/dialog';
 import { zodInput } from '@/helpers/zod';
@@ -43,18 +42,16 @@ export const useFormCreateEditFormGroupsMembersAdmin = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    // eslint-disable-next-line no-console
-    console.log(values);
+    try {
+      await mutationApi({
+        groupId: values.type === 'group' ? values.group?.id : undefined,
+        userId: values.type === 'user' ? values.user?.id : undefined,
+        unrestricted: values.unrestricted,
+      });
+    } catch (err) {
+      const error = err as ErrorType;
 
-    const mutation = await mutationApi({
-      groupId: values.type === 'group' ? values.group?.id : undefined,
-      userId: values.type === 'user' ? values.user?.id : undefined,
-      unrestricted: values.unrestricted,
-    });
-
-    if (mutation.error) {
-      const error = mutation.error as ErrorType | undefined;
-      if (error?.extensions && error.extensions?.code === 'ALREADY_EXISTS') {
+      if (error.extensions && error.extensions?.code === 'ALREADY_EXISTS') {
         form.setError(values.type === 'user' ? 'user' : 'group', {
           type: 'manual',
           message: t('already_exists'),

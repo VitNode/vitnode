@@ -16,11 +16,11 @@ import {
 } from '../../../components/ui/card';
 import { Button } from '../../../components/ui/button';
 
-interface Props {
+export const InternalErrorView = ({
+  showPoweredBy,
+}: {
   showPoweredBy?: boolean;
-}
-
-export const InternalErrorView = ({ showPoweredBy }: Props) => {
+}) => {
   const t = useTranslations('core');
   const { back } = useRouter();
 
