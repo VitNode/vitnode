@@ -2,99 +2,118 @@
 
 import React from 'react';
 import { X } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
 
-import { Popover, PopoverContent, PopoverTrigger } from './popover';
-import { Button } from './button';
-import { cn } from '@/helpers/classnames';
-import { Badge } from './badge';
+import { badgeVariants } from './badge';
+import { Input } from './input';
 
 interface TagInputItemProps {
-  id: number;
+  id: number | string;
   value: string;
 }
 
-interface Props {
+interface Props
+  extends Omit<React.HTMLAttributes<HTMLInputElement>, 'onChange'> {
   onChange: (value?: TagInputItemProps | TagInputItemProps[]) => void;
   className?: string;
-  placeholder?: string;
+  disabled?: boolean;
 }
 
 interface MultiProps extends Props {
-  className?: string;
   multiple?: true;
   value?: TagInputItemProps[];
 }
 
 interface SingleProps extends Props {
-  className?: string;
   multiple?: never;
   value?: TagInputItemProps;
 }
 
 export const TagInput = ({
-  className,
-  placeholder,
   multiple,
   onChange,
   value: valueFromProps,
+  disabled,
+  ...rest
 }: MultiProps | SingleProps) => {
   const values: TagInputItemProps[] = Array.isArray(valueFromProps)
     ? valueFromProps
     : valueFromProps
       ? [valueFromProps]
       : [];
-  const [open, setOpen] = React.useState(false);
+  const [textInput, setTextInput] = React.useState('');
 
   return (
-    <Popover open={open} onOpenChange={setOpen} modal>
-      <PopoverTrigger asChild>
-        <Button
-          variant="outline"
-          className={cn('w-full justify-start', className, {
-            'text-muted-foreground': values.length === 0,
-          })}
-        >
-          {values.length === 0
-            ? placeholder
-            : values.map(item => {
-                const onRemove = () => {
-                  if (multiple) {
-                    onChange(values.filter(value => value.id !== item.id));
+    <div className="space-y-3">
+      {values.length > 0 && (
+        <div className="flex flex-wrap items-center gap-2">
+          <AnimatePresence>
+            {values.map(item => {
+              const onRemove = () => {
+                if (multiple) {
+                  onChange(values.filter(value => value.id !== item.id));
 
-                    return;
-                  }
+                  return;
+                }
 
-                  onChange();
-                };
+                onChange();
+              };
 
-                return (
-                  <Badge
-                    className="shrink-0 [&>svg]:size-4"
-                    key={item.id}
-                    tabIndex={0}
-                    onClick={e => {
+              return (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.5 }}
+                  layout
+                  className={badgeVariants({
+                    variant: 'outline',
+                    className: 'shrink-0 cursor-pointer [&>svg]:size-4',
+                  })}
+                  key={item.id}
+                  tabIndex={0}
+                  onClick={e => {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    onRemove();
+                  }}
+                  onKeyDown={e => {
+                    if (e.key === 'Enter') {
                       e.stopPropagation();
                       e.preventDefault();
                       onRemove();
-                    }}
-                    onKeyDown={e => {
-                      if (e.key === 'Enter') {
-                        e.stopPropagation();
-                        e.preventDefault();
-                        onRemove();
-                      }
-                    }}
-                  >
-                    {item.value} <X />
-                  </Badge>
-                );
-              })}
-        </Button>
-      </PopoverTrigger>
+                    }
+                  }}
+                >
+                  {item.value} <X />
+                </motion.div>
+              );
+            })}
+          </AnimatePresence>
+        </div>
+      )}
 
-      <PopoverContent className="w-64 p-0" align="start">
-        content
-      </PopoverContent>
-    </Popover>
+      <Input
+        onChange={e => setTextInput(e.target.value)}
+        value={textInput}
+        disabled={(!multiple && values.length > 0) || disabled}
+        onKeyDown={e => {
+          if ((e.key === 'Enter' || e.key === ',') && textInput) {
+            e.preventDefault();
+            const items = textInput.split(',').map(value => value.trim());
+
+            onChange([
+              ...values,
+              ...items.map(value => ({
+                id: Math.random(),
+                value,
+              })),
+            ]);
+            setTextInput('');
+          }
+        }}
+        {...rest}
+        type="text"
+      />
+    </div>
   );
 };
