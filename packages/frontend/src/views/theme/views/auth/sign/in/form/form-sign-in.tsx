@@ -2,6 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import { AlertCircle } from 'lucide-react';
+import React from 'react';
 
 import {
   Form,

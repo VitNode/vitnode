@@ -1,0 +1,74 @@
+---
+title: Tag Input
+description: Tag Input is a component that allows users to input tags.
+---
+
+## Preview
+
+Image
+
+## Props
+
+| Name        | Type      | Default | Description          |
+| ----------- | --------- | ------- | -------------------- |
+| placeholder | `string`  |         | Placeholder text.    |
+| multiple    | `boolean` | false   | Allow multiple tags. |
+| disabled    | `boolean` | false   | Disable input.       |
+
+## Usage
+
+```tsx
+const formSchema = z.object({
+  tag_input_test: z.object({ id: z.number(), value: z.string() }),
+});
+```
+
+```tsx
+import { TagInput } from 'vitnode-frontend/components/ui/tag-input';
+```
+
+```tsx
+<FormField
+  control={form.control}
+  name="tag_input_test"
+  render={({ field }) => (
+    <FormItem>
+      <FormLabel>Tag Input Test</FormLabel>
+      <FormControl>
+        <TagInput {...field} /> // [!code highlight]
+      </FormControl>
+      <FormMessage />
+    </FormItem>
+  )}
+/>
+```
+
+### Multiple
+
+```tsx
+const formSchema = z.object({
+  tag_input_test: z.array(z.object({ id: z.number(), value: z.string() })),
+});
+```
+
+```tsx
+import { TagInput } from 'vitnode-frontend/components/ui/tag-input';
+```
+
+```tsx
+<FormField
+  control={form.control}
+  name="tag_input_test"
+  render={({ field }) => (
+    <FormItem>
+      <FormLabel>Tag Input Test</FormLabel>
+      <FormControl>
+        <TagInput {...field} multiple /> // [!code highlight]
+      </FormControl>
+      <FormMessage />
+    </FormItem>
+  )}
+/>
+```
+
+import { placeholder } from 'drizzle-orm';
