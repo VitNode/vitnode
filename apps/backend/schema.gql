@@ -10,7 +10,6 @@ enum AllowTypeFilesEnum {
 }
 
 type AuthorizationAdminSessionsObj {
-  nav: [NavAdminPluginsAuthorization!]!
   user: AuthorizationCurrentUserObj
   version: String!
 }
@@ -234,11 +233,6 @@ type Mutation {
   core_sessions__sign_up(email: String!, name: String!, newsletter: Boolean, password: String!): SignUpCoreSessionsObj!
 }
 
-type NavAdminPluginsAuthorization {
-  code: String!
-  nav: [ShowAdminNavPluginsObj!]!
-}
-
 type PageInfo {
   count: Float!
   endCursor: Int
@@ -262,6 +256,7 @@ type Query {
   admin__core_staff_administrators__show(cursor: Int, first: Int, last: Int, sortBy: ShowAdminStaffAdministratorsSortByArgs): ShowAdminStaffAdministratorsObj!
   admin__core_staff_moderators__show(cursor: Int, first: Int, last: Int, sortBy: ShowAdminStaffModeratorsSortByArgs): ShowAdminStaffModeratorsObj!
   admin__install__layout: LayoutAdminInstallObj!
+  admin__nav__show: [ShowAdminNavObj!]!
   admin__sessions__authorization: AuthorizationAdminSessionsObj!
   core_files__show(cursor: Int, first: Int, last: Int, search: String, sortBy: ShowCoreFilesSortByArgs): ShowCoreFilesObj!
   core_languages__show(cursor: Int, first: Int, last: Int, search: String, sortBy: ShowCoreLanguagesSortByArgs): ShowCoreLanguagesObj!
@@ -389,6 +384,11 @@ enum ShowAdminMembersSortingColumnEnum {
   name
   posts
   reactions
+}
+
+type ShowAdminNavObj {
+  code: String!
+  nav: [ShowAdminNavPluginsObj!]!
 }
 
 type ShowAdminNavPlugins {

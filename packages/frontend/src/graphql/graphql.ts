@@ -27,7 +27,6 @@ export const AllowTypeFilesEnum = {
 export type AllowTypeFilesEnum = typeof AllowTypeFilesEnum[keyof typeof AllowTypeFilesEnum];
 export type AuthorizationAdminSessionsObj = {
   __typename?: 'AuthorizationAdminSessionsObj';
-  nav: Array<NavAdminPluginsAuthorization>;
   user?: Maybe<AuthorizationCurrentUserObj>;
   version: Scalars['String']['output'];
 };
@@ -571,12 +570,6 @@ export type MutationCore_Sessions__Sign_UpArgs = {
   password: Scalars['String']['input'];
 };
 
-export type NavAdminPluginsAuthorization = {
-  __typename?: 'NavAdminPluginsAuthorization';
-  code: Scalars['String']['output'];
-  nav: Array<ShowAdminNavPluginsObj>;
-};
-
 export type PageInfo = {
   __typename?: 'PageInfo';
   count: Scalars['Float']['output'];
@@ -602,6 +595,7 @@ export type Query = {
   admin__core_staff_administrators__show: ShowAdminStaffAdministratorsObj;
   admin__core_staff_moderators__show: ShowAdminStaffModeratorsObj;
   admin__install__layout: LayoutAdminInstallObj;
+  admin__nav__show: Array<ShowAdminNavObj>;
   admin__sessions__authorization: AuthorizationAdminSessionsObj;
   core_files__show: ShowCoreFilesObj;
   core_languages__show: ShowCoreLanguagesObj;
@@ -843,6 +837,12 @@ export const ShowAdminMembersSortingColumnEnum = {
 } as const;
 
 export type ShowAdminMembersSortingColumnEnum = typeof ShowAdminMembersSortingColumnEnum[keyof typeof ShowAdminMembersSortingColumnEnum];
+export type ShowAdminNavObj = {
+  __typename?: 'ShowAdminNavObj';
+  code: Scalars['String']['output'];
+  nav: Array<ShowAdminNavPluginsObj>;
+};
+
 export type ShowAdminNavPlugins = {
   __typename?: 'ShowAdminNavPlugins';
   code: Scalars['String']['output'];
@@ -1569,7 +1569,7 @@ export type Core_Members__Avatar__UploadMutation = { __typename?: 'Mutation', co
 export type Admin__Sessions__AuthorizationQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Admin__Sessions__AuthorizationQuery = { __typename?: 'Query', admin__sessions__authorization: { __typename?: 'AuthorizationAdminSessionsObj', version: string, user?: { __typename?: 'AuthorizationCurrentUserObj', email: string, id: number, name_seo: string, is_admin: boolean, is_mod: boolean, name: string, newsletter: boolean, avatar_color: string, language: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, file_name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } | null, nav: Array<{ __typename?: 'NavAdminPluginsAuthorization', code: string, nav: Array<{ __typename?: 'ShowAdminNavPluginsObj', code: string, href: string, icon?: string | null, children?: Array<{ __typename?: 'ShowAdminNavPlugins', code: string, href: string }> | null }> }> } };
+export type Admin__Sessions__AuthorizationQuery = { __typename?: 'Query', admin__sessions__authorization: { __typename?: 'AuthorizationAdminSessionsObj', version: string, user?: { __typename?: 'AuthorizationCurrentUserObj', email: string, id: number, name_seo: string, is_admin: boolean, is_mod: boolean, name: string, newsletter: boolean, avatar_color: string, language: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, file_name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } | null }, admin__nav__show: Array<{ __typename?: 'ShowAdminNavObj', code: string, nav: Array<{ __typename?: 'ShowAdminNavPluginsObj', href: string, code: string, icon?: string | null, children?: Array<{ __typename?: 'ShowAdminNavPlugins', icon?: string | null, href: string, code: string }> | null }> }> };
 
 export type Admin__Core_Files__ShowQueryVariables = Exact<{
   cursor?: InputMaybe<Scalars['Int']['input']>;
@@ -2183,17 +2183,18 @@ export const Admin__Sessions__Authorization = gql`
       }
     }
     version
+  }
+  admin__nav__show {
+    code
     nav {
+      href
       code
-      nav {
-        code
-        href
+      children {
         icon
-        children {
-          code
-          href
-        }
+        href
+        code
       }
+      icon
     }
   }
 }

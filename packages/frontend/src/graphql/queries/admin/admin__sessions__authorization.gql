@@ -24,17 +24,18 @@ query Admin__sessions__authorization {
       }
     }
     version
+  }
+  admin__nav__show {
+    code
     nav {
+      href
       code
-      nav {
-        code
-        href
+      children {
         icon
-        children {
-          code
-          href
-        }
+        href
+        code
       }
+      icon
     }
   }
 }
