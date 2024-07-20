@@ -427,6 +427,7 @@ export type MutationAdmin__Core_Plugins__Nav__CreateArgs = {
   code: Scalars['String']['input'];
   href: Scalars['String']['input'];
   icon?: InputMaybe<Scalars['String']['input']>;
+  keywords: Array<Scalars['String']['input']>;
   parent_code?: InputMaybe<Scalars['String']['input']>;
   plugin_code: Scalars['String']['input'];
 };
@@ -443,6 +444,7 @@ export type MutationAdmin__Core_Plugins__Nav__EditArgs = {
   code: Scalars['String']['input'];
   href: Scalars['String']['input'];
   icon?: InputMaybe<Scalars['String']['input']>;
+  keywords: Array<Scalars['String']['input']>;
   parent_code?: InputMaybe<Scalars['String']['input']>;
   plugin_code: Scalars['String']['input'];
   previous_code: Scalars['String']['input'];
@@ -848,6 +850,7 @@ export type ShowAdminNavPlugins = {
   code: Scalars['String']['output'];
   href: Scalars['String']['output'];
   icon?: Maybe<Scalars['String']['output']>;
+  keywords: Array<Scalars['String']['output']>;
 };
 
 export type ShowAdminNavPluginsObj = {
@@ -856,6 +859,7 @@ export type ShowAdminNavPluginsObj = {
   code: Scalars['String']['output'];
   href: Scalars['String']['output'];
   icon?: Maybe<Scalars['String']['output']>;
+  keywords: Array<Scalars['String']['output']>;
 };
 
 export type ShowAdminPlugins = {
@@ -1369,6 +1373,7 @@ export type Admin__Core_Plugins__Nav__CreateMutationVariables = Exact<{
   icon?: InputMaybe<Scalars['String']['input']>;
   href: Scalars['String']['input'];
   parentCode?: InputMaybe<Scalars['String']['input']>;
+  keywords: Array<Scalars['String']['input']> | Scalars['String']['input'];
 }>;
 
 
@@ -1390,6 +1395,7 @@ export type Admin__Core_Plugins__Nav__EditMutationVariables = Exact<{
   pluginCode: Scalars['String']['input'];
   previousCode: Scalars['String']['input'];
   parentCode?: InputMaybe<Scalars['String']['input']>;
+  keywords: Array<Scalars['String']['input']> | Scalars['String']['input'];
 }>;
 
 
@@ -1691,7 +1697,7 @@ export type Admin__Core_Plugins__Nav__ShowQueryVariables = Exact<{
 }>;
 
 
-export type Admin__Core_Plugins__Nav__ShowQuery = { __typename?: 'Query', admin__core_plugins__nav__show: Array<{ __typename?: 'ShowAdminNavPluginsObj', code: string, icon?: string | null, href: string, children?: Array<{ __typename?: 'ShowAdminNavPlugins', code: string, href: string, icon?: string | null }> | null }> };
+export type Admin__Core_Plugins__Nav__ShowQuery = { __typename?: 'Query', admin__core_plugins__nav__show: Array<{ __typename?: 'ShowAdminNavPluginsObj', code: string, icon?: string | null, href: string, keywords: Array<string>, children?: Array<{ __typename?: 'ShowAdminNavPlugins', code: string, href: string, icon?: string | null }> | null }> };
 
 export type Admin__Core_Security__Captcha__ShowQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1936,13 +1942,14 @@ export const Admin__Core_Plugins__Nav__Change_Position = gql`
 }
     `;
 export const Admin__Core_Plugins__Nav__Create = gql`
-    mutation Admin__core_plugins__nav__create($code: String!, $pluginCode: String!, $icon: String, $href: String!, $parentCode: String) {
+    mutation Admin__core_plugins__nav__create($code: String!, $pluginCode: String!, $icon: String, $href: String!, $parentCode: String, $keywords: [String!]!) {
   admin__core_plugins__nav__create(
     code: $code
     plugin_code: $pluginCode
     icon: $icon
     href: $href
     parent_code: $parentCode
+    keywords: $keywords
   ) {
     code
   }
@@ -1958,7 +1965,7 @@ export const Admin__Core_Plugins__Nav__Delete = gql`
 }
     `;
 export const Admin__Core_Plugins__Nav__Edit = gql`
-    mutation Admin__core_plugins__nav__edit($code: String!, $href: String!, $icon: String, $pluginCode: String!, $previousCode: String!, $parentCode: String) {
+    mutation Admin__core_plugins__nav__edit($code: String!, $href: String!, $icon: String, $pluginCode: String!, $previousCode: String!, $parentCode: String, $keywords: [String!]!) {
   admin__core_plugins__nav__edit(
     code: $code
     href: $href
@@ -1966,6 +1973,7 @@ export const Admin__Core_Plugins__Nav__Edit = gql`
     plugin_code: $pluginCode
     previous_code: $previousCode
     parent_code: $parentCode
+    keywords: $keywords
   ) {
     code
   }
@@ -2584,6 +2592,7 @@ export const Admin__Core_Plugins__Nav__Show = gql`
       href
       icon
     }
+    keywords
   }
 }
     `;

@@ -148,6 +148,7 @@
           "nav": {
             "title": "Navigation in AdminCP",
             "lang_key": "Lang Key: <key></key>",
+            "keywords": "Keywords: <keywords></keywords>",
             "create": {
               "title": "Create Navigation",
               "code": {
@@ -165,6 +166,10 @@
               "parent": {
                 "label": "Parent Navigation",
                 "null": "No parent"
+              },
+              "keywords": {
+                "label": "Keywords",
+                "desc": "Keywords are used to search for this navigation. Separate by comma."
               },
               "success": "Navigation has been created."
             },

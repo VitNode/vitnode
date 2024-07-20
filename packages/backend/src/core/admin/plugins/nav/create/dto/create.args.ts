@@ -26,4 +26,7 @@ export class CreateAdminNavPluginsArgs {
 
   @Field(() => String, { nullable: true })
   parent_code: string | null;
+
+  @Field(() => [String])
+  keywords: string[];
 }

@@ -18,6 +18,7 @@ export class EditAdminNavPluginsService {
     previous_code,
     plugin_code,
     parent_code,
+    keywords,
   }: EditCreateAdminNavPluginsArgs): ShowAdminNavPluginsObj {
     const pathConfig = ABSOLUTE_PATHS_BACKEND.plugin({
       code: plugin_code,
@@ -31,7 +32,7 @@ export class EditAdminNavPluginsService {
 
     const currentCode = removeSpecialCharacters(code);
     const existsNavCode = config.nav.find(nav => nav.code === currentCode);
-    if (existsNavCode) {
+    if (existsNavCode && code !== existsNavCode.code) {
       throw new CustomError({
         message: 'Code already exists',
         code: 'CODE_ALREADY_EXISTS',
@@ -53,6 +54,7 @@ export class EditAdminNavPluginsService {
         code: currentCode,
         href,
         icon,
+        keywords,
       };
     } else {
       const navIndex = config.nav.findIndex(nav => nav.code === previous_code);
@@ -60,6 +62,7 @@ export class EditAdminNavPluginsService {
         code: currentCode,
         href,
         icon,
+        keywords,
       };
     }
 
@@ -70,6 +73,7 @@ export class EditAdminNavPluginsService {
       code: currentCode,
       href,
       icon,
+      keywords,
     };
   }
 }

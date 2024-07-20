@@ -29,6 +29,7 @@ import {
 } from '@/components/ui/select';
 import { IconInput } from '@/components/icon/input/icon-input';
 import { Button } from '@/components/ui/button';
+import { TagInput } from '@/components/ui/tag-input';
 
 export interface CreateEditNavDevPluginAdminProps {
   dataFromSSR: ShowAdminNavPluginsObj[];
@@ -151,6 +152,21 @@ export const CreateEditNavDevPluginAdmin = ({
                 <FormControl>
                   <IconInput {...field} />
                 </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="keywords"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel optional>{t('create.keywords.label')}</FormLabel>
+                <FormControl>
+                  <TagInput {...field} multiple />
+                </FormControl>
+                <FormDescription>{t('create.keywords.desc')}</FormDescription>
                 <FormMessage />
               </FormItem>
             )}

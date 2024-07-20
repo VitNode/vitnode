@@ -65,7 +65,11 @@ export const IconInput = ({ className, onChange, value }: Props) => {
       </div>
 
       <PopoverContent align="start" className="w-72 p-0">
-        <React.Suspense fallback={<Loader className="p-4" />}>
+        <React.Suspense
+          fallback={
+            <Loader className="h-64 max-h-[var(--radix-popover-content-available-height)] p-4" />
+          }
+        >
           <Content onChange={onChange} value={value} setOpen={setOpen} />
         </React.Suspense>
       </PopoverContent>

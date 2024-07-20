@@ -10,6 +10,9 @@ export class ShowAdminNavPlugins {
 
   @Field(() => String)
   href: string;
+
+  @Field(() => [String])
+  keywords: string[];
 }
 
 @ObjectType()

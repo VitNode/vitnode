@@ -4,6 +4,7 @@ interface NavPluginInfoJSONType {
   code: string;
   href: string;
   icon: string | null;
+  keywords: string[];
 }
 
 export interface NavPluginInfoJSONTypeWithChildren

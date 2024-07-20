@@ -6,5 +6,15 @@
   "author_url": "https://vitnode.com/",
   "support_url": "https://github.com/aXenDeveloper/vitnode/issues",
   "allow_default": true,
-  "nav": []
+  "nav": [
+    {
+      "code": "test",
+      "href": "test",
+      "icon": "alarm-clock-plus",
+      "keywords": [
+        "dupa",
+        "elo"
+      ]
+    }
+  ]
 }

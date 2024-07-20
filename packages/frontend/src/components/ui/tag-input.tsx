@@ -104,7 +104,7 @@ export const TagInput = ({
             onChange([
               ...values,
               ...items.map(value => ({
-                id: Math.random(),
+                id: Math.random() * 1000,
                 value,
               })),
             ]);

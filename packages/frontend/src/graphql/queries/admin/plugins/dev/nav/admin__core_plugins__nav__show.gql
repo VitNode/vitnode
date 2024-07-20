@@ -8,5 +8,6 @@ query Admin__core_plugins__nav__show($pluginCode: String!) {
       href
       icon
     }
+    keywords
   }
 }

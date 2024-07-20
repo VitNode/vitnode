@@ -18,6 +18,7 @@ export class CreateAdminNavPluginsService extends HelpersAdminNavPluginsService 
     icon,
     plugin_code,
     parent_code,
+    keywords,
   }: CreateAdminNavPluginsArgs): ShowAdminNavPluginsObj {
     const pathConfig = ABSOLUTE_PATHS_BACKEND.plugin({
       code: plugin_code,
@@ -55,12 +56,14 @@ export class CreateAdminNavPluginsService extends HelpersAdminNavPluginsService 
         code: currentCode,
         href,
         icon,
+        keywords,
       });
     } else {
       config.nav.push({
         code: currentCode,
         href,
         icon,
+        keywords,
       });
     }
 
@@ -71,6 +74,7 @@ export class CreateAdminNavPluginsService extends HelpersAdminNavPluginsService 
       code: currentCode,
       href,
       icon,
+      keywords,
     };
   }
 }
