@@ -1,7 +1,7 @@
-import { Languages } from "lucide-react";
-import img from "@/assets/image.png";
-import { SectionFeatures } from "../section";
-import { Button } from "@/components/ui/button";
+import { Languages } from 'lucide-react';
+import img from '@/assets/image.png';
+import { Button } from '@/components/ui/button';
+import { SectionFeatures } from '@/components/features/section';
 
 export const I18nSectionFeatures = () => {
   return (
@@ -13,23 +13,23 @@ export const I18nSectionFeatures = () => {
       checklist={[
         {
           id: 1,
-          text: "Multi-language content management"
+          text: 'Multi-language content management',
         },
         {
           id: 2,
-          text: "Manifest with i18n for SEO optimization"
+          text: 'Manifest with i18n for SEO optimization',
         },
         {
           id: 3,
-          text: "Internationalized routing"
+          text: 'Internationalized routing',
         },
         {
           id: 5,
-          text: "Inputs & WYSIWYG editor with i18n support"
-        }
+          text: 'Inputs & WYSIWYG editor with i18n support',
+        },
       ]}
     >
-      <Button variant="ghost" className="border !bg-card">
+      <Button variant="ghost" className="!bg-card border">
         Test 123
       </Button>
     </SectionFeatures>

@@ -1,7 +1,7 @@
-import { AtSign } from "lucide-react";
-import img from "@/assets/image.png";
-import { SectionFeatures } from "../section";
-import { Button } from "@/components/ui/button";
+import { AtSign } from 'lucide-react';
+import img from '@/assets/image.png';
+import { SectionFeatures } from '@/components/features/section';
+import { Button } from '@/components/ui/button';
 
 export const EmailsSectionFeatures = () => {
   return (
@@ -13,12 +13,12 @@ export const EmailsSectionFeatures = () => {
       checklist={[
         {
           id: 1,
-          text: "Customizable email templates using React"
-        }
+          text: 'Customizable email templates using React',
+        },
       ]}
       reverse
     >
-      <Button variant="ghost" className="border !bg-card">
+      <Button variant="ghost" className="!bg-card border">
         Test 123
       </Button>
     </SectionFeatures>

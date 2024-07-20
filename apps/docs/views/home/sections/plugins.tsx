@@ -1,7 +1,7 @@
-import { Plug } from "lucide-react";
-import img from "@/assets/image.png";
-import { SectionFeatures } from "../section";
-import { Button } from "@/components/ui/button";
+import { Plug } from 'lucide-react';
+import img from '@/assets/image.png';
+import { SectionFeatures } from '@/components/features/section';
+import { Button } from '@/components/ui/button';
 
 export const PluginsSectionFeatures = () => {
   return (
@@ -14,19 +14,19 @@ export const PluginsSectionFeatures = () => {
       checklist={[
         {
           id: 1,
-          text: "Easy import & export tgz file from AdminCP"
+          text: 'Easy import & export tgz file from AdminCP',
         },
         {
           id: 2,
-          text: "Own settings, permissions, databases, etc."
+          text: 'Own settings, permissions, databases, etc.',
         },
         {
           id: 3,
-          text: "Version control"
-        }
+          text: 'Version control',
+        },
       ]}
     >
-      <Button variant="ghost" className="border !bg-card">
+      <Button variant="ghost" className="!bg-card border">
         Test 123
       </Button>
     </SectionFeatures>

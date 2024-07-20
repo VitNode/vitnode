@@ -1,8 +1,4 @@
-interface Props {
-  className?: string;
-}
-
-export const BackgroundHome = ({ className }: Props) => {
+export const BackgroundNet = ({ className }: { className?: string }) => {
   return (
     <svg
       width="1216"
@@ -15,7 +11,7 @@ export const BackgroundHome = ({ className }: Props) => {
       <g clipPath="url(#clip0_884_148)">
         <mask
           id="mask0_884_148"
-          style={{ maskType: "alpha" }}
+          style={{ maskType: 'alpha' }}
           maskUnits="userSpaceOnUse"
           x="0"
           y="0"

@@ -1,6 +1,6 @@
 import { ShieldCheck } from 'lucide-react';
 import img from '@/assets/image.png';
-import { SectionFeatures } from '../section';
+import { SectionFeatures } from '@/components/features/section';
 import { Button } from '@/components/ui/button';
 
 export const SecureSectionFeatures = () => {
