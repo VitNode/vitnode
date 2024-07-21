@@ -54,7 +54,7 @@ const SheetPortal = SheetPrimitive.Portal;
 const SheetOverlay = ({
   className,
   ...props
-}: React.ComponentPropsWithoutRef<typeof SheetPrimitive.Overlay>) => (
+}: React.ComponentProps<typeof SheetPrimitive.Overlay>) => (
   <SheetPrimitive.Overlay
     className={cn(
       'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/80',
@@ -84,7 +84,7 @@ const sheetVariants = cva(
 );
 
 interface SheetContentProps
-  extends React.ComponentPropsWithoutRef<typeof SheetPrimitive.Content>,
+  extends React.ComponentProps<typeof SheetPrimitive.Content>,
     VariantProps<typeof sheetVariants> {}
 
 const SheetContent = ({
@@ -137,7 +137,7 @@ const SheetFooter = ({
 const SheetTitle = ({
   className,
   ...props
-}: React.ComponentPropsWithoutRef<typeof SheetPrimitive.Title>) => (
+}: React.ComponentProps<typeof SheetPrimitive.Title>) => (
   <SheetPrimitive.Title
     className={cn('text-foreground text-lg font-semibold', className)}
     {...props}
@@ -147,7 +147,7 @@ const SheetTitle = ({
 const SheetDescription = ({
   className,
   ...props
-}: React.ComponentPropsWithoutRef<typeof SheetPrimitive.Description>) => (
+}: React.ComponentProps<typeof SheetPrimitive.Description>) => (
   <SheetPrimitive.Description
     className={cn('text-muted-foreground text-sm', className)}
     {...props}

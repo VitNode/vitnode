@@ -1,0 +1,45 @@
+---
+title: Badge
+description: Showcases a badge or an element designed to resemble a badge.
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+
+<Callout title="Shadcn UI">
+  This component is part of [Shadcn
+  UI](https://ui.shadcn.com/docs/components/badge).
+</Callout>
+
+## Usage
+
+```tsx
+import { Badge } from 'vitnode-frontend/components/ui/badge';
+```
+
+```tsx
+<Badge variant="outline">Badge</Badge>
+```
+
+### Link
+
+```tsx
+import { Link } from 'vitnode-frontend/navigation';
+import { badgeVariants } from 'vitnode-frontend/components/ui/badge';
+```
+
+```tsx
+<Link className={badgeVariants({ variant: 'outline' })}>Badge</Link>
+```
+
+## API Reference
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+<TypeTable
+  type={{
+    variant: {
+      type: 'default | secondary | destructive | outline',
+      default: 'default',
+    },
+  }}
+/>

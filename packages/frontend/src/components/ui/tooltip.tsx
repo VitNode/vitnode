@@ -15,7 +15,7 @@ const TooltipContent = ({
   className,
   sideOffset = 4,
   ...props
-}: React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content>) => (
+}: React.ComponentProps<typeof TooltipPrimitive.Content>) => (
   <TooltipPrimitive.Content
     sideOffset={sideOffset}
     className={cn(

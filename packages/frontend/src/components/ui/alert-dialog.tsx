@@ -49,7 +49,7 @@ const AlertDialogPortal = AlertDialogPrimitive.Portal;
 const AlertDialogOverlay = ({
   className,
   ...props
-}: React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Overlay>) => (
+}: React.ComponentProps<typeof AlertDialogPrimitive.Overlay>) => (
   <AlertDialogPrimitive.Overlay
     className={cn(
       'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/80',
@@ -62,7 +62,7 @@ const AlertDialogOverlay = ({
 const AlertDialogContent = ({
   className,
   ...props
-}: React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Content>) => (
+}: React.ComponentProps<typeof AlertDialogPrimitive.Content>) => (
   <AlertDialogPortal>
     <AlertDialogOverlay />
     <AlertDialogPrimitive.Content
@@ -104,7 +104,7 @@ const AlertDialogFooter = ({
 const AlertDialogTitle = ({
   className,
   ...props
-}: React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Title>) => (
+}: React.ComponentProps<typeof AlertDialogPrimitive.Title>) => (
   <AlertDialogPrimitive.Title
     className={cn('text-lg font-semibold', className)}
     {...props}
@@ -114,7 +114,7 @@ const AlertDialogTitle = ({
 const AlertDialogDescription = ({
   className,
   ...props
-}: React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Description>) => (
+}: React.ComponentProps<typeof AlertDialogPrimitive.Description>) => (
   <AlertDialogPrimitive.Description
     className={cn('text-muted-foreground text-sm', className)}
     {...props}
@@ -124,7 +124,7 @@ const AlertDialogDescription = ({
 const AlertDialogAction = ({
   className,
   ...props
-}: React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Action>) => (
+}: React.ComponentProps<typeof AlertDialogPrimitive.Action>) => (
   <AlertDialogPrimitive.Action
     className={cn(buttonVariants(), className)}
     {...props}
@@ -134,7 +134,7 @@ const AlertDialogAction = ({
 const AlertDialogCancel = ({
   className,
   ...props
-}: React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Cancel>) => (
+}: React.ComponentProps<typeof AlertDialogPrimitive.Cancel>) => (
   <AlertDialogPrimitive.Cancel
     className={cn(
       buttonVariants({ variant: 'outline' }),

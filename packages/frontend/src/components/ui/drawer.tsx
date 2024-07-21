@@ -24,7 +24,7 @@ const DrawerClose = DrawerPrimitive.Close;
 const DrawerOverlay = ({
   className,
   ...props
-}: React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Overlay>) => (
+}: React.ComponentProps<typeof DrawerPrimitive.Overlay>) => (
   <DrawerPrimitive.Overlay
     className={cn('fixed inset-0 z-50 bg-black/80', className)}
     {...props}
@@ -35,7 +35,7 @@ const DrawerContent = ({
   className,
   children,
   ...props
-}: React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Content>) => (
+}: React.ComponentProps<typeof DrawerPrimitive.Content>) => (
   <DrawerPortal>
     <DrawerOverlay />
     <DrawerPrimitive.Content
@@ -74,7 +74,7 @@ const DrawerFooter = ({
 const DrawerTitle = ({
   className,
   ...props
-}: React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Title>) => (
+}: React.ComponentProps<typeof DrawerPrimitive.Title>) => (
   <DrawerPrimitive.Title
     className={cn(
       'text-lg font-semibold leading-none tracking-tight',
@@ -87,7 +87,7 @@ const DrawerTitle = ({
 const DrawerDescription = ({
   className,
   ...props
-}: React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Description>) => (
+}: React.ComponentProps<typeof DrawerPrimitive.Description>) => (
   <DrawerPrimitive.Description
     className={cn('text-muted-foreground text-sm', className)}
     {...props}

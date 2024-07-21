@@ -1,7 +1,7 @@
 'use client';
 
 import * as ProgressPrimitive from '@radix-ui/react-progress';
-import { ComponentPropsWithoutRef } from 'react';
+import { ComponentProps } from 'react';
 
 import { cn } from '../../helpers/classnames';
 
@@ -9,7 +9,7 @@ const Progress = ({
   className,
   value,
   ...props
-}: ComponentPropsWithoutRef<typeof ProgressPrimitive.Root>) => (
+}: ComponentProps<typeof ProgressPrimitive.Root>) => (
   <ProgressPrimitive.Root
     className={cn(
       'bg-primary/20 relative h-2 w-full overflow-hidden rounded-full',

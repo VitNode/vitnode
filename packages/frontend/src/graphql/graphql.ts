@@ -1697,7 +1697,7 @@ export type Admin__Core_Plugins__Nav__ShowQueryVariables = Exact<{
 }>;
 
 
-export type Admin__Core_Plugins__Nav__ShowQuery = { __typename?: 'Query', admin__core_plugins__nav__show: Array<{ __typename?: 'ShowAdminNavPluginsObj', code: string, icon?: string | null, href: string, keywords: Array<string>, children?: Array<{ __typename?: 'ShowAdminNavPlugins', code: string, href: string, icon?: string | null }> | null }> };
+export type Admin__Core_Plugins__Nav__ShowQuery = { __typename?: 'Query', admin__core_plugins__nav__show: Array<{ __typename?: 'ShowAdminNavPluginsObj', code: string, icon?: string | null, href: string, keywords: Array<string>, children?: Array<{ __typename?: 'ShowAdminNavPlugins', code: string, href: string, keywords: Array<string>, icon?: string | null }> | null }> };
 
 export type Admin__Core_Security__Captcha__ShowQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2590,6 +2590,7 @@ export const Admin__Core_Plugins__Nav__Show = gql`
     children {
       code
       href
+      keywords
       icon
     }
     keywords

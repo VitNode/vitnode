@@ -7,36 +7,36 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { badgeVariants } from './badge';
 import { Input } from './input';
 
-interface TagInputItemProps {
+interface TagsInputItemProps {
   id: number | string;
   value: string;
 }
 
 interface Props
   extends Omit<React.HTMLAttributes<HTMLInputElement>, 'onChange'> {
-  onChange: (value?: TagInputItemProps | TagInputItemProps[]) => void;
+  onChange: (value?: TagsInputItemProps | TagsInputItemProps[]) => void;
   className?: string;
   disabled?: boolean;
 }
 
 interface MultiProps extends Props {
   multiple?: true;
-  value?: TagInputItemProps[];
+  value?: TagsInputItemProps[];
 }
 
 interface SingleProps extends Props {
   multiple?: never;
-  value?: TagInputItemProps;
+  value?: TagsInputItemProps;
 }
 
-export const TagInput = ({
+export const TagsInput = ({
   multiple,
   onChange,
   value: valueFromProps,
   disabled,
   ...rest
 }: MultiProps | SingleProps) => {
-  const values: TagInputItemProps[] = Array.isArray(valueFromProps)
+  const values: TagsInputItemProps[] = Array.isArray(valueFromProps)
     ? valueFromProps
     : valueFromProps
       ? [valueFromProps]
