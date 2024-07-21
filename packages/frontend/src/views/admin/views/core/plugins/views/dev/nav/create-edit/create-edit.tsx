@@ -32,8 +32,7 @@ import {
 } from '@/components/ui/select';
 import { IconInput } from '@/components/icon/input/icon-input';
 import { Button } from '@/components/ui/button';
-
-import { TagsInput } from '@/components/ui/tag-input';
+import { TagsInput } from '@/components/ui/tags-input';
 
 export interface CreateEditNavDevPluginAdminProps {
   dataFromSSR: Admin__Core_Plugins__Nav__ShowQuery['admin__core_plugins__nav__show'];

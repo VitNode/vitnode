@@ -9,7 +9,7 @@ import { DatabaseService } from '@/utils';
 
 @Injectable()
 export class ShowAdminNavService {
-  private readonly coreNav: ShowAdminNavObj[] = [
+  readonly coreNav: ShowAdminNavObj[] = [
     {
       code: 'core',
       nav: [
@@ -38,7 +38,7 @@ export class ShowAdminNavService {
             {
               code: 'metadata',
               href: 'metadata',
-              keywords: ['manifest', 'pwa'],
+              keywords: ['manifest', 'pwa', 'seo'],
             },
             {
               code: 'email',

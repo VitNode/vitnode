@@ -233,6 +233,14 @@ type Mutation {
   core_sessions__sign_up(email: String!, name: String!, newsletter: Boolean, password: String!): SignUpCoreSessionsObj!
 }
 
+type NavSearchAdminSessions {
+  code: String!
+  code_plugin: String!
+  href: String!
+  icon: String
+  keywords: [String!]!
+}
+
 type PageInfo {
   count: Float!
   endCursor: Int
@@ -258,6 +266,7 @@ type Query {
   admin__install__layout: LayoutAdminInstallObj!
   admin__nav__show: [ShowAdminNavObj!]!
   admin__sessions__authorization: AuthorizationAdminSessionsObj!
+  admin__sessions__search(search: String!): SearchAdminSessionsObj!
   core_files__show(cursor: Int, first: Int, last: Int, search: String, sortBy: ShowCoreFilesSortByArgs): ShowCoreFilesObj!
   core_languages__show(cursor: Int, first: Int, last: Int, search: String, sortBy: ShowCoreLanguagesSortByArgs): ShowCoreLanguagesObj!
   core_members__show(cursor: Int, first: Int, last: Int, name_seo: String, search: String, sortBy: ShowCoreMembersSortByArgs): ShowCoreMembersObj!
@@ -273,6 +282,10 @@ type Query {
 type RebuildRequiredEditorShowCoreMiddleware {
   langs: Boolean!
   plugins: Boolean!
+}
+
+type SearchAdminSessionsObj {
+  nav: [NavSearchAdminSessions!]!
 }
 
 type SecurityCoreMiddleware {

@@ -5,5 +5,6 @@ import { ShowAdminNavResolver } from './show/show.resolver';
 
 @Module({
   providers: [ShowAdminNavService, ShowAdminNavResolver],
+  exports: [ShowAdminNavService],
 })
 export class AdminNavModule {}
