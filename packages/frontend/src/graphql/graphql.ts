@@ -572,6 +572,16 @@ export type MutationCore_Sessions__Sign_UpArgs = {
   password: Scalars['String']['input'];
 };
 
+export type NavSearchAdminSessions = {
+  __typename?: 'NavSearchAdminSessions';
+  code: Scalars['String']['output'];
+  code_plugin: Scalars['String']['output'];
+  href: Scalars['String']['output'];
+  icon?: Maybe<Scalars['String']['output']>;
+  keywords: Array<Scalars['String']['output']>;
+  parent_nav_code?: Maybe<Scalars['String']['output']>;
+};
+
 export type PageInfo = {
   __typename?: 'PageInfo';
   count: Scalars['Float']['output'];
@@ -599,6 +609,7 @@ export type Query = {
   admin__install__layout: LayoutAdminInstallObj;
   admin__nav__show: Array<ShowAdminNavObj>;
   admin__sessions__authorization: AuthorizationAdminSessionsObj;
+  admin__sessions__search: SearchAdminSessionsObj;
   core_files__show: ShowCoreFilesObj;
   core_languages__show: ShowCoreLanguagesObj;
   core_members__show: ShowCoreMembersObj;
@@ -676,6 +687,11 @@ export type QueryAdmin__Core_Staff_Moderators__ShowArgs = {
 };
 
 
+export type QueryAdmin__Sessions__SearchArgs = {
+  search: Scalars['String']['input'];
+};
+
+
 export type QueryCore_Files__ShowArgs = {
   cursor?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -714,6 +730,11 @@ export type RebuildRequiredEditorShowCoreMiddleware = {
   __typename?: 'RebuildRequiredEditorShowCoreMiddleware';
   langs: Scalars['Boolean']['output'];
   plugins: Scalars['Boolean']['output'];
+};
+
+export type SearchAdminSessionsObj = {
+  __typename?: 'SearchAdminSessionsObj';
+  nav: Array<NavSearchAdminSessions>;
 };
 
 export type SecurityCoreMiddleware = {
@@ -1577,6 +1598,13 @@ export type Admin__Sessions__AuthorizationQueryVariables = Exact<{ [key: string]
 
 export type Admin__Sessions__AuthorizationQuery = { __typename?: 'Query', admin__sessions__authorization: { __typename?: 'AuthorizationAdminSessionsObj', version: string, user?: { __typename?: 'AuthorizationCurrentUserObj', email: string, id: number, name_seo: string, is_admin: boolean, is_mod: boolean, name: string, newsletter: boolean, avatar_color: string, language: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, file_name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } | null }, admin__nav__show: Array<{ __typename?: 'ShowAdminNavObj', code: string, nav: Array<{ __typename?: 'ShowAdminNavPluginsObj', href: string, code: string, icon?: string | null, children?: Array<{ __typename?: 'ShowAdminNavPlugins', icon?: string | null, href: string, code: string }> | null }> }> };
 
+export type Admin__Sessions__SearchQueryVariables = Exact<{
+  search: Scalars['String']['input'];
+}>;
+
+
+export type Admin__Sessions__SearchQuery = { __typename?: 'Query', admin__sessions__search: { __typename?: 'SearchAdminSessionsObj', nav: Array<{ __typename?: 'NavSearchAdminSessions', code: string, code_plugin: string, href: string, keywords: Array<string>, icon?: string | null, parent_nav_code?: string | null }> } };
+
 export type Admin__Core_Files__ShowQueryVariables = Exact<{
   cursor?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -2203,6 +2231,20 @@ export const Admin__Sessions__Authorization = gql`
         code
       }
       icon
+    }
+  }
+}
+    `;
+export const Admin__Sessions__Search = gql`
+    query Admin__sessions__search($search: String!) {
+  admin__sessions__search(search: $search) {
+    nav {
+      code
+      code_plugin
+      href
+      keywords
+      icon
+      parent_nav_code
     }
   }
 }

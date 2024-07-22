@@ -6,7 +6,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Link } from '@/navigation';
 import { AvatarAsideAuthAdmin } from './avatar';
 import { CONFIG } from '@/helpers/config-with-env';
-import { SearchAsideAuthAdmin } from './search';
+import { SearchAsideAuthAdmin } from './search/search';
 
 export const AsideAuthAdmin = () => {
   return (

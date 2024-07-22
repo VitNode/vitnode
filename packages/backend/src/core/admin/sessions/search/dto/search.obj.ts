@@ -6,6 +6,9 @@ import { ShowAdminNavPlugins } from '@/core/admin/plugins/nav/show/dto/show.obj'
 export class NavSearchAdminSessions extends ShowAdminNavPlugins {
   @Field(() => String)
   code_plugin: string;
+
+  @Field(() => String, { nullable: true })
+  parent_nav_code?: string;
 }
 
 @ObjectType()

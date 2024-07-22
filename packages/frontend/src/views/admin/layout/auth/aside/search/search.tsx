@@ -2,20 +2,22 @@
 
 import { SearchIcon } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import React from 'react';
+import React, { Suspense } from 'react';
+import { useDebouncedCallback } from 'use-debounce';
 
-import {
-  CommandDialog,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from '@/components/ui/command';
+import { CommandDialog, CommandInput } from '@/components/ui/command';
+import { Loader } from '@/components/ui/loader';
+
+const Content = React.lazy(async () =>
+  import('./content').then(module => ({
+    default: module.ContentSearchAsideAuthAdmin,
+  })),
+);
 
 export const SearchAsideAuthAdmin = () => {
-  const t = useTranslations('core');
+  const t = useTranslations('admin.search');
   const [open, setOpen] = React.useState(false);
+  const [search, setSearch] = React.useState('');
 
   React.useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -29,6 +31,10 @@ export const SearchAsideAuthAdmin = () => {
     return () => document.removeEventListener('keydown', down);
   }, []);
 
+  const handleSearchInput = useDebouncedCallback((value: string) => {
+    setSearch(value);
+  }, 500);
+
   return (
     <>
       <button
@@ -38,19 +44,17 @@ export const SearchAsideAuthAdmin = () => {
         onClick={() => setOpen(true)}
       >
         <SearchIcon className="ms-1 size-4" />
-        {t('search_placeholder')}
+        {t('placeholder')}
       </button>
 
-      <CommandDialog open={open} onOpenChange={setOpen}>
-        <CommandInput placeholder="Type a command or search..." />
-        <CommandList>
-          <CommandEmpty>No results found.</CommandEmpty>
-          <CommandGroup heading="Suggestions">
-            <CommandItem>Calendar</CommandItem>
-            <CommandItem>Search Emoji</CommandItem>
-            <CommandItem>Calculator</CommandItem>
-          </CommandGroup>
-        </CommandList>
+      <CommandDialog open={open} onOpenChange={setOpen} shouldFilter={false}>
+        <CommandInput
+          onValueChange={handleSearchInput}
+          placeholder={t('placeholder')}
+        />
+        <Suspense fallback={<Loader className="p-4" />}>
+          <Content search={search} setOpen={setOpen} />
+        </Suspense>
       </CommandDialog>
     </>
   );

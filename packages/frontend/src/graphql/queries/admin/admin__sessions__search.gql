@@ -1,0 +1,12 @@
+query Admin__sessions__search($search: String!) {
+  admin__sessions__search(search: $search) {
+    nav {
+      code
+      code_plugin
+      href
+      keywords
+      icon
+      parent_nav_code
+    }
+  }
+}

@@ -239,6 +239,7 @@ type NavSearchAdminSessions {
   href: String!
   icon: String
   keywords: [String!]!
+  parent_nav_code: String
 }
 
 type PageInfo {
