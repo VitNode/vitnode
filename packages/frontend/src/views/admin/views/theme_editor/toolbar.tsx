@@ -24,7 +24,8 @@ export const ToolbarThemeEditor = ({
   activeMode: ThemeEditorViewEnum;
   setActiveMode: (mode: ThemeEditorViewEnum) => void;
 }) => {
-  const t = useTranslations('core');
+  const t = useTranslations('admin');
+  const tCore = useTranslations('core');
   const { resolvedTheme, setTheme, theme } = useTheme();
   const activeTheme = resolvedTheme ?? theme ?? 'light';
 
@@ -92,7 +93,7 @@ export const ToolbarThemeEditor = ({
         <ButtonWithTooltip
           active={activeTheme === 'light'}
           onClick={() => setTheme('light')}
-          ariaLabel={t('user-bar.dark_light_switcher.light')}
+          ariaLabel={tCore('user-bar.dark_light_switcher.light')}
         >
           <Sun />
         </ButtonWithTooltip>
@@ -100,7 +101,7 @@ export const ToolbarThemeEditor = ({
         <ButtonWithTooltip
           active={activeTheme === 'dark'}
           onClick={() => setTheme('dark')}
-          ariaLabel={t('user-bar.dark_light_switcher.dark')}
+          ariaLabel={tCore('user-bar.dark_light_switcher.dark')}
         >
           <Moon />
         </ButtonWithTooltip>

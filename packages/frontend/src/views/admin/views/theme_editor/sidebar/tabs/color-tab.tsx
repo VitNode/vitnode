@@ -20,7 +20,7 @@ import { ColorInput } from '@/components/ui/color-input';
 import { ThemeEditorTab, useThemeEditor } from '../../hooks/use-theme-editor';
 
 export const ColorTabThemeEditor = () => {
-  const t = useTranslations('core.theme_editor.colors');
+  const t = useTranslations('admin.theme_editor.colors');
   const tCore = useTranslations('core');
   const { activeTheme, changeColor, form, setActiveTab } = useThemeEditor();
 

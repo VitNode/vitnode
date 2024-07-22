@@ -1,3 +1,6 @@
+import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
+
 import { ContentThemeEditor } from './content';
 import {
   Core_Theme_Editor__Show,
@@ -5,9 +8,8 @@ import {
   Core_Theme_Editor__ShowQueryVariables,
 } from '@/graphql/graphql';
 import { fetcher } from '@/graphql/fetcher';
-import { getSessionData } from '@/graphql/get-session-data';
-
-import { ErrorView } from '../../../theme/views/error/error-view';
+import { getSessionAdminData } from '@/graphql/get-session-admin';
+import { redirect } from '@/navigation';
 
 const getData = async () => {
   const data = await fetcher<
@@ -20,12 +22,19 @@ const getData = async () => {
   return data;
 };
 
-// TODO: Add this into the theme editor view
-export const ThemeEditorView = async () => {
-  const [data, session] = await Promise.all([getData(), getSessionData()]);
+export const generateMetadataThemeEditor = async (): Promise<Metadata> => {
+  const t = await getTranslations('core.admin.nav');
 
-  if (!session.core_sessions__authorization.user?.is_admin) {
-    return <ErrorView code="403" />;
+  return {
+    title: t('styles_theme-editor'),
+  };
+};
+
+export const ThemeEditorView = async () => {
+  const [data, session] = await Promise.all([getData(), getSessionAdminData()]);
+
+  if (!session) {
+    redirect('/admin');
   }
 
   return <ContentThemeEditor {...data} />;

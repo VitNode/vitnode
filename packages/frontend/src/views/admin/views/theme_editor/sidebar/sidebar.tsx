@@ -54,7 +54,7 @@ export const SidebarThemeEditor = () => {
 
             <div className="bg-card/75 sticky bottom-0 left-0 mt-auto flex w-full items-center gap-1 border-t p-3 backdrop-blur">
               <Link
-                href="/"
+                href="/admin/core/dashboard"
                 className={buttonVariants({
                   variant: 'ghost',
                   size: 'sm',

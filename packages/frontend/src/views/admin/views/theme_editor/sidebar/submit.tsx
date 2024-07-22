@@ -26,7 +26,7 @@ export const SubmitSidebarThemeEditor = ({
   openSubmitDialog: boolean;
   setOpenSubmitDialog: (open: boolean) => void;
 }) => {
-  const t = useTranslations('core.theme_editor.submit');
+  const t = useTranslations('admin.theme_editor.submit');
   const tCore = useTranslations('core');
 
   return (

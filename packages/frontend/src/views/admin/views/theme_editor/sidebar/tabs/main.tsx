@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { ThemeEditorTab, useThemeEditor } from '../../hooks/use-theme-editor';
 
 export const MainTabThemeEditor = () => {
-  const t = useTranslations('core.theme_editor');
+  const t = useTranslations('admin.theme_editor');
   const { setActiveTab } = useThemeEditor();
 
   return (
