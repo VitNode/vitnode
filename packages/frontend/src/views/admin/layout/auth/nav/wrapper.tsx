@@ -1,20 +1,22 @@
 'use client';
 
 import * as Accordion from '@radix-ui/react-accordion';
-import { useSelectedLayoutSegments } from 'next/navigation';
 import React from 'react';
+
+import { usePathname } from '@/navigation';
 
 export const NavAdminWrapper = ({
   children,
 }: {
   children: React.ReactNode;
 }) => {
-  const layoutSegments = useSelectedLayoutSegments();
+  const params = usePathname();
+  const segments = params.split('/').filter(item => item);
 
   return (
     <Accordion.Root
       type="multiple"
-      defaultValue={[`${layoutSegments[0]}_${layoutSegments[1]}`]}
+      defaultValue={[`${segments[1]}_${segments[2]}`]}
     >
       {children}
     </Accordion.Root>

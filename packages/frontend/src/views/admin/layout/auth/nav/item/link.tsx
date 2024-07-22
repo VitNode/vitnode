@@ -19,26 +19,26 @@ export interface ItemItemNavAdminProps {
 
 interface Props extends ItemItemNavAdminProps {
   icons: { icon: React.ReactNode; id: string }[];
-  primaryId: string;
+  plugin_code: string;
 }
 
 export const LinkItemNavAdmin = ({
   icons,
   href: hrefFromProps,
-  primaryId,
+  plugin_code,
   id,
   icon,
   children,
 }: Props) => {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-expect-error
-  const t = useTranslations(`${primaryId}.admin.nav`);
+  const t = useTranslations(`${plugin_code}.admin.nav`);
   const pathname = usePathname();
-  const href = `/admin/${primaryId}/${hrefFromProps}`;
-  const active = pathname.startsWith(`/admin/${primaryId}/${id}`);
+  const href = `/admin/${plugin_code}/${hrefFromProps}`;
+  const active = pathname.startsWith(`/admin/${plugin_code}/${id}`);
   const isChildActive =
     children?.some(child =>
-      pathname.startsWith(`/admin/${primaryId}/${id}/${child.href}`),
+      pathname.startsWith(`/admin/${plugin_code}/${id}/${child.href}`),
     ) ?? false;
   const { setOpen } = useSheet();
 
@@ -52,7 +52,7 @@ export const LinkItemNavAdmin = ({
     );
 
   return (
-    <Accordion.Item value={`${primaryId}_${id}`}>
+    <Accordion.Item value={`${plugin_code}_${id}`}>
       {children && children.length > 0 ? (
         <Accordion.Trigger asChild>
           <Button
@@ -87,12 +87,12 @@ export const LinkItemNavAdmin = ({
         <Accordion.Content className="data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down my-1 overflow-hidden transition-all">
           <div className="ml-7 space-y-1">
             {children.map(child => {
-              const href = `/admin/${primaryId}/${id}/${child.href}`;
+              const href = `/admin/${plugin_code}/${id}/${child.href}`;
               const active = pathname.startsWith(href);
 
               return (
                 <Link
-                  key={`${primaryId}_${child.id}`}
+                  key={`${plugin_code}_${child.id}`}
                   href={href}
                   className={cn(
                     buttonVariants({ variant: 'ghost', size: 'sm' }),

@@ -21,7 +21,7 @@ export class ShowAdminNavService {
         },
         {
           code: 'settings',
-          href: 'general',
+          href: 'settings/general',
           icon: 'settings',
           keywords: [],
           children: [
@@ -55,7 +55,7 @@ export class ShowAdminNavService {
         },
         {
           code: 'styles',
-          href: 'nav',
+          href: 'styles/nav',
           icon: 'paintbrush',
           keywords: [],
           children: [

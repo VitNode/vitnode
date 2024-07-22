@@ -28,7 +28,7 @@ export const ItemNavAdmin = ({
             <li key={item.id}>
               <LinkItemNavAdmin
                 key={item.id}
-                primaryId={id}
+                plugin_code={id}
                 {...item}
                 icons={[
                   {
