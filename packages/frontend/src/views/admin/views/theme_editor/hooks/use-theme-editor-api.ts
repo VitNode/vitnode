@@ -67,6 +67,11 @@ export const useThemeEditorApi = ({
   const iframeRef = React.useRef<HTMLIFrameElement>(null);
   const formSchema = z.object({
     colors: formSchemaColorsThemeEditor,
+    logos: z.object({
+      light: z.array(z.instanceof(File)),
+      dark: z.array(z.instanceof(File)),
+      text: z.string().min(1).max(100),
+    }),
   });
   const { resolvedTheme, theme } = useTheme();
   const activeTheme: 'dark' | 'light' =
@@ -86,6 +91,11 @@ export const useThemeEditorApi = ({
         ['cover-foreground']: core_theme_editor__show.colors.cover_foreground,
         ['accent-foreground']: core_theme_editor__show.colors.accent_foreground,
         ['muted-foreground']: core_theme_editor__show.colors.muted_foreground,
+      },
+      logos: {
+        light: [],
+        dark: [],
+        text: '',
       },
     },
   });

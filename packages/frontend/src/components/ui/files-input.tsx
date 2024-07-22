@@ -73,14 +73,15 @@ export const FilesInput = ({
   };
 
   return (
-    <>
+    <div className="@container">
       {((stateValue && stateValue.length === 0 && !multiple) || multiple) && (
         <div
           className={cn(
-            'm-h-32 border-input bg-background placeholder:text-muted-foreground focus-visible:ring-ring flex w-full flex-col items-center justify-center rounded-md border px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-1 disabled:cursor-not-allowed disabled:opacity-50',
+            'm-h-32 border-input bg-background placeholder:text-muted-foreground focus-visible:ring-ring flex w-full flex-col rounded-md border px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-1 disabled:cursor-not-allowed disabled:opacity-50',
             className,
             {
               'cursor-not-allowed opacity-50': disabled,
+              'ring-ring outline-none ring-2 ring-offset-2': isDrag,
             },
           )}
           role="button"
@@ -115,19 +116,23 @@ export const FilesInput = ({
             handleUploadFile(e.dataTransfer.files);
           }}
         >
-          <div className="text-muted-foreground flex flex-col items-center justify-center pb-6 pt-5">
-            <Upload />
-            <p className="my-2 text-sm font-semibold">
-              {t(isDrag ? 'forms.files.drop_here' : 'forms.files.title')}
-            </p>
-            <p className="text-xs">
-              {acceptExtensions.join(', ').toUpperCase()}{' '}
-              {maxFileSizeInMb
-                ? t('forms.files.allow_size_per_file', {
-                    size: maxFileSizeInMb,
-                  })
-                : ''}
-            </p>
+          <div className="text-muted-foreground @xs:p-4 flex items-center gap-4 p-1">
+            <Upload className="size-6 flex-shrink-0" />
+
+            <div>
+              <p className="text-foreground text-sm font-semibold">
+                {t(isDrag ? 'forms.files.drop_here' : 'forms.files.title')}
+              </p>
+
+              <p className="text-xs">
+                {acceptExtensions.join(', ').toUpperCase()}{' '}
+                {maxFileSizeInMb
+                  ? t('forms.files.allow_size_per_file', {
+                      size: maxFileSizeInMb,
+                    })
+                  : ''}
+              </p>
+            </div>
           </div>
           <input
             id="dropzone-file"
@@ -144,6 +149,6 @@ export const FilesInput = ({
       )}
 
       <PreviewFilesInput value={stateValue} onChange={onChange} />
-    </>
+    </div>
   );
 };

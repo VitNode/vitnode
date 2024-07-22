@@ -126,7 +126,7 @@ export const useExample = () => {
 };
 ```
 
-In `onSubmit` function you can call [Mutation with Server Action](/fetch#mutation).
+In `onSubmit` function you can call [Mutation with Server Action](/docs/dev/fetch#mutations).
 
 </Step>
 <Step>
@@ -212,4 +212,53 @@ Here are some tips and tricks to help you build forms in VitNode.
 
 ### Upload Files
 
-TODO: Add tutorial to upload files.
+<Steps>
+<Step>
+
+#### Form Schema
+
+```ts title="hooks/use-example.ts"
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+
+export const useExample = () => {
+  const formSchema = z.object({
+    files: z.array(z.instanceof(File)), // [!code highlight]
+  });
+};
+```
+
+</Step>
+
+<Step>
+#### Form Field
+
+```tsx
+import { FilesInput } from 'vitnode-frontend/components/ui/files-input';
+```
+
+```tsx title="example.tsx"
+<FormField
+  control={form.control}
+  name="logos.light"
+  render={({ field }) => (
+    <FormItem>
+      <FormLabel>{t('primary')}</FormLabel>
+      <FormControl>
+        <FilesInput
+          className="mt-5"
+          id="logos.light"
+          {...field}
+          acceptExtensions={['tgz']}
+          maxFileSizeInMb={0}
+        />
+      </FormControl>
+      <FormMessage />
+    </FormItem>
+  )}
+/>
+```
+
+</Step>
+
+</Steps>

@@ -191,7 +191,7 @@
       "empty": "This field is required.",
       "max_length": "This field must be less than {length} characters.",
       "files": {
-        "title": "Click to upload or drag and drop here",
+        "title": "Click to upload",
         "drop_here": "Drop here to upload",
         "allow_size_per_file": "(max {size} MB per file)",
         "errors": {

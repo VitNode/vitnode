@@ -33,6 +33,11 @@ interface ThemeEditorFormObj {
     secondary: ColorObj;
     'secondary-foreground': ColorObj;
   };
+  logos: {
+    dark: File[];
+    light: File[];
+    text: string;
+  };
 }
 
 interface Args {
