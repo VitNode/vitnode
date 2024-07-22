@@ -10,7 +10,6 @@ enum AllowTypeFilesEnum {
 }
 
 type AuthorizationAdminSessionsObj {
-  nav: [NavAdminPluginsAuthorization!]!
   user: AuthorizationCurrentUserObj
   version: String!
 }
@@ -206,9 +205,9 @@ type Mutation {
   admin__core_plugins__download(code: String!, version: String, version_code: Int): String!
   admin__core_plugins__edit(author: String!, author_url: String, code: String!, default: Boolean, description: String, enabled: Boolean, name: String!, support_url: String!): ShowAdminPlugins!
   admin__core_plugins__nav__change_position(code: String!, index_to_move: Int!, parent_code: String, plugin_code: String!): String!
-  admin__core_plugins__nav__create(code: String!, href: String!, icon: String, parent_code: String, plugin_code: String!): ShowAdminNavPluginsObj!
+  admin__core_plugins__nav__create(code: String!, href: String!, icon: String, keywords: [String!]!, parent_code: String, plugin_code: String!): ShowAdminNavPluginsObj!
   admin__core_plugins__nav__delete(code: String!, parent_code: String, plugin_code: String!): String!
-  admin__core_plugins__nav__edit(code: String!, href: String!, icon: String, parent_code: String, plugin_code: String!, previous_code: String!): ShowAdminNavPluginsObj!
+  admin__core_plugins__nav__edit(code: String!, href: String!, icon: String, keywords: [String!]!, parent_code: String, plugin_code: String!, previous_code: String!): ShowAdminNavPluginsObj!
   admin__core_plugins__upload(code: String, file: Upload!): ShowAdminPlugins!
   admin__core_security__captcha__edit(secret_key: String!, site_key: String!, type: CaptchaTypeEnum!): ShowAdminCaptchaSecurityObj!
   admin__core_staff_administrators__create(group_id: Int, unrestricted: Boolean!, user_id: Int): ShowAdminStaffAdministrators!
@@ -234,9 +233,13 @@ type Mutation {
   core_sessions__sign_up(email: String!, name: String!, newsletter: Boolean, password: String!): SignUpCoreSessionsObj!
 }
 
-type NavAdminPluginsAuthorization {
+type NavSearchAdminSessions {
   code: String!
-  nav: [ShowAdminNavPluginsObj!]!
+  code_plugin: String!
+  href: String!
+  icon: String
+  keywords: [String!]!
+  parent_nav_code: String
 }
 
 type PageInfo {
@@ -262,7 +265,9 @@ type Query {
   admin__core_staff_administrators__show(cursor: Int, first: Int, last: Int, sortBy: ShowAdminStaffAdministratorsSortByArgs): ShowAdminStaffAdministratorsObj!
   admin__core_staff_moderators__show(cursor: Int, first: Int, last: Int, sortBy: ShowAdminStaffModeratorsSortByArgs): ShowAdminStaffModeratorsObj!
   admin__install__layout: LayoutAdminInstallObj!
+  admin__nav__show: [ShowAdminNavObj!]!
   admin__sessions__authorization: AuthorizationAdminSessionsObj!
+  admin__sessions__search(search: String!): SearchAdminSessionsObj!
   core_files__show(cursor: Int, first: Int, last: Int, search: String, sortBy: ShowCoreFilesSortByArgs): ShowCoreFilesObj!
   core_languages__show(cursor: Int, first: Int, last: Int, search: String, sortBy: ShowCoreLanguagesSortByArgs): ShowCoreLanguagesObj!
   core_members__show(cursor: Int, first: Int, last: Int, name_seo: String, search: String, sortBy: ShowCoreMembersSortByArgs): ShowCoreMembersObj!
@@ -278,6 +283,10 @@ type Query {
 type RebuildRequiredEditorShowCoreMiddleware {
   langs: Boolean!
   plugins: Boolean!
+}
+
+type SearchAdminSessionsObj {
+  nav: [NavSearchAdminSessions!]!
 }
 
 type SecurityCoreMiddleware {
@@ -391,10 +400,16 @@ enum ShowAdminMembersSortingColumnEnum {
   reactions
 }
 
+type ShowAdminNavObj {
+  code: String!
+  nav: [ShowAdminNavPluginsObj!]!
+}
+
 type ShowAdminNavPlugins {
   code: String!
   href: String!
   icon: String
+  keywords: [String!]!
 }
 
 type ShowAdminNavPluginsObj {
@@ -402,6 +417,7 @@ type ShowAdminNavPluginsObj {
   code: String!
   href: String!
   icon: String
+  keywords: [String!]!
 }
 
 type ShowAdminPlugins {

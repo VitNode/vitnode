@@ -1,0 +1,52 @@
+---
+title: Command
+description: Fast, composable, unstyled command menu for React.
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+
+<Callout title="Shadcn UI">
+  This component is part of [Shadcn
+  UI](https://ui.shadcn.com/docs/components/command) &
+  [cmdk](https://cmdk.paco.me/) liblary.
+</Callout>
+
+## Usage
+
+```tsx
+import {
+  Command,
+  CommandDialog,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+  CommandSeparator,
+  CommandShortcut,
+} from '@/components/ui/command';
+```
+
+```tsx
+<Command>
+  <CommandInput placeholder="Type a command or search..." />
+  <CommandList>
+    <CommandEmpty>No results found.</CommandEmpty>
+    <CommandGroup heading="Suggestions">
+      <CommandItem>Calendar</CommandItem>
+      <CommandItem>Search Emoji</CommandItem>
+      <CommandItem>Calculator</CommandItem>
+    </CommandGroup>
+    <CommandSeparator />
+    <CommandGroup heading="Settings">
+      <CommandItem>Profile</CommandItem>
+      <CommandItem>Billing</CommandItem>
+      <CommandItem>Settings</CommandItem>
+    </CommandGroup>
+  </CommandList>
+</Command>
+```
+
+## API Reference
+
+[Cmdk GitHub](https://github.com/pacocoursey/cmdk).

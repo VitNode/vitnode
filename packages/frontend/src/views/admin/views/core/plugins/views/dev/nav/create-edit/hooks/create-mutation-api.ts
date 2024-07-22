@@ -24,5 +24,5 @@ export const createMutationApi = async (
     return { error: e as FetcherErrorType };
   }
 
-  revalidatePath(`/admin/core/plugins/${variables.pluginCode}/dev/nav`, 'page');
+  revalidatePath('/[locale]/admin/(auth)/(vitnode)', 'layout');
 };

@@ -1,0 +1,44 @@
+---
+title: Select
+description: Presents a dropdown list of options for the user to choose from, activated by clicking a button.
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+
+<Callout title="Shadcn UI">
+  This component is part of [Shadcn
+  UI](https://ui.shadcn.com/docs/components/select).
+</Callout>
+
+## Usage
+
+```tsx
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from 'vitnode-frontend/components/ui/select';
+```
+
+```tsx
+<Select>
+  <SelectTrigger className="w-[180px]">
+    <SelectValue placeholder="Theme" />
+  </SelectTrigger>
+  <SelectContent>
+    <SelectItem value="light">Light</SelectItem>
+    <SelectItem value="dark">Dark</SelectItem>
+    <SelectItem value="system">System</SelectItem>
+  </SelectContent>
+</Select>
+```
+
+## Examples
+
+[Shadcn UI Select - Examples](https://ui.shadcn.com/docs/components/select#examples)
+
+## API Reference
+
+[Radix UI Select](https://www.radix-ui.com/primitives/docs/components/select#api-reference)

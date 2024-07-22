@@ -6,7 +6,9 @@ query Admin__core_plugins__nav__show($pluginCode: String!) {
     children {
       code
       href
+      keywords
       icon
     }
+    keywords
   }
 }

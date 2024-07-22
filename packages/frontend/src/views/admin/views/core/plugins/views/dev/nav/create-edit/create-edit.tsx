@@ -4,7 +4,10 @@ import { Ban } from 'lucide-react';
 import { removeSpecialCharacters } from 'vitnode-shared';
 
 import { useCreateNavPluginAdmin } from './hooks/use-create-nav-plugin-admin';
-import { ShowAdminNavPluginsObj } from '@/graphql/graphql';
+import {
+  Admin__Core_Plugins__Nav__ShowQuery,
+  ShowAdminNavPluginsObj,
+} from '@/graphql/graphql';
 import {
   DialogFooter,
   DialogHeader,
@@ -29,9 +32,10 @@ import {
 } from '@/components/ui/select';
 import { IconInput } from '@/components/icon/input/icon-input';
 import { Button } from '@/components/ui/button';
+import { TagsInput } from '@/components/ui/tags-input';
 
 export interface CreateEditNavDevPluginAdminProps {
-  dataFromSSR: ShowAdminNavPluginsObj[];
+  dataFromSSR: Admin__Core_Plugins__Nav__ShowQuery['admin__core_plugins__nav__show'];
   icons: { icon: React.ReactNode; id: string }[];
   data?: ShowAdminNavPluginsObj;
   parentId?: string;
@@ -151,6 +155,21 @@ export const CreateEditNavDevPluginAdmin = ({
                 <FormControl>
                   <IconInput {...field} />
                 </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="keywords"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel optional>{t('create.keywords.label')}</FormLabel>
+                <FormControl>
+                  <TagsInput {...field} multiple />
+                </FormControl>
+                <FormDescription>{t('create.keywords.desc')}</FormDescription>
                 <FormMessage />
               </FormItem>
             )}

@@ -4,6 +4,9 @@ import { AuthorizationAdminSessionsResolver } from './authorization/authorizatio
 import { AuthorizationAdminSessionsService } from './authorization/authorization.service';
 import { SignOutAdminSessionsService } from './sign_out/sign_out.service';
 import { SignOutAdminSessionsResolver } from './sign_out/sign_out.resolver';
+import { AdminNavModule } from '../nav/nav.module';
+import { SearchAdminSessionsService } from './search/search.service';
+import { SearchAdminSessionsResolver } from './search/search.resolver';
 
 @Module({
   providers: [SignOutAdminSessionsService, SignOutAdminSessionsResolver],
@@ -15,6 +18,8 @@ export class AdminSessionsModule {}
   providers: [
     AuthorizationAdminSessionsResolver,
     AuthorizationAdminSessionsService,
+    SearchAdminSessionsResolver,
+    SearchAdminSessionsService,
     {
       provide: 'IOAdminAuthGuards',
       useClass: AuthorizationAdminSessionsService,
@@ -24,5 +29,6 @@ export class AdminSessionsModule {}
     AuthorizationAdminSessionsResolver,
     AuthorizationAdminSessionsService,
   ],
+  imports: [AdminNavModule],
 })
 export class GlobalAdminSessionsModule {}

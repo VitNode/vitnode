@@ -1,0 +1,38 @@
+---
+title: Radio Group
+description: A collection of radio buttons where only one option can be selected at a time, ensuring mutual exclusivity.
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+
+<Callout title="Shadcn UI">
+  This component is part of [Shadcn
+  UI](https://ui.shadcn.com/docs/components/radio-group).
+</Callout>
+
+## Usage
+
+```tsx
+import { Label } from 'vitnode-frontend/components/ui/label';
+import {
+  RadioGroup,
+  RadioGroupItem,
+} from 'vitnode-frontend/components/ui/radio-group';
+```
+
+```tsx
+<RadioGroup defaultValue="option-one">
+  <div className="flex items-center space-x-2">
+    <RadioGroupItem value="option-one" id="option-one" />
+    <Label htmlFor="option-one">Option One</Label>
+  </div>
+  <div className="flex items-center space-x-2">
+    <RadioGroupItem value="option-two" id="option-two" />
+    <Label htmlFor="option-two">Option Two</Label>
+  </div>
+</RadioGroup>
+```
+
+## API Reference
+
+[Radix UI Radio Group](https://www.radix-ui.com/primitives/docs/components/radio-group#api-reference).

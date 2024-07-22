@@ -28,6 +28,7 @@ export const useCreateNavPluginAdmin = ({
     icon: z.string(),
     href: zodInput.string.min(1).max(100),
     parent_code: z.string().optional(),
+    keywords: z.array(z.object({ id: z.number(), value: z.string() })),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -37,6 +38,11 @@ export const useCreateNavPluginAdmin = ({
       icon: data?.icon ?? '',
       href: data?.href ?? '',
       parent_code: parentId ?? 'null',
+      keywords:
+        data?.keywords.map(keyword => ({
+          id: Math.random() * 1000,
+          value: keyword,
+        })) ?? [],
     },
   });
 
@@ -49,6 +55,7 @@ export const useCreateNavPluginAdmin = ({
         previousCode: data.code,
         pluginCode: Array.isArray(code) ? code[0] : code,
         parentCode: values.parent_code === 'null' ? null : values.parent_code,
+        keywords: values.keywords.map(keyword => keyword.value),
       });
 
       if (mutation?.error) {
@@ -59,6 +66,7 @@ export const useCreateNavPluginAdmin = ({
         ...values,
         pluginCode: Array.isArray(code) ? code[0] : code,
         parentCode: values.parent_code === 'null' ? null : values.parent_code,
+        keywords: values.keywords.map(keyword => keyword.value),
       });
       if (mutation?.error) {
         error = mutation.error;

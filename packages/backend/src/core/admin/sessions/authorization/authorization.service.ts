@@ -7,19 +7,11 @@ import { ConfigService } from '@nestjs/config';
 import { eq } from 'drizzle-orm';
 import { currentUnixDate } from 'vitnode-shared';
 
-import {
-  AuthorizationAdminSessionsObj,
-  NavAdminPluginsAuthorization,
-} from './dto/authorization.obj';
+import { AuthorizationAdminSessionsObj } from './dto/authorization.obj';
 
 import { DatabaseService } from '@/utils/database/database.service';
 import { DeviceSignInCoreSessionsService } from '../../../sessions/sign_in/device.service';
-import {
-  ABSOLUTE_PATHS_BACKEND,
-  AccessDeniedError,
-  ConfigPlugin,
-  GqlContext,
-} from '@/index';
+import { AccessDeniedError, GqlContext } from '@/index';
 import { AuthorizationCurrentUserObj } from '../../../sessions/authorization/dto/authorization.obj';
 import { core_sessions_known_devices } from '@/plugins/core/admin/database/schema/sessions';
 import { getUserAgentData, getUserIp } from '@/functions';
@@ -32,36 +24,6 @@ export class AuthorizationAdminSessionsService {
     private readonly configService: ConfigService,
     private readonly deviceService: DeviceSignInCoreSessionsService,
   ) {}
-
-  protected async getAdminNav(): Promise<NavAdminPluginsAuthorization[]> {
-    const adminNav = await this.databaseService.db.query.core_plugins.findMany({
-      orderBy: (table, { asc }) => asc(table.created),
-      columns: {
-        code: true,
-      },
-    });
-
-    return adminNav
-      .map(({ code }) => {
-        const pathConfig = ABSOLUTE_PATHS_BACKEND.plugin({ code }).config;
-        if (!fs.existsSync(pathConfig)) {
-          return {
-            code,
-            nav: [],
-          };
-        }
-
-        const config: ConfigPlugin = JSON.parse(
-          fs.readFileSync(pathConfig, 'utf8'),
-        );
-
-        return {
-          code,
-          nav: config.nav,
-        };
-      })
-      .filter(plugin => plugin.nav.length > 0);
-  }
 
   async initialAuthorization({
     req,
@@ -146,7 +108,6 @@ export class AuthorizationAdminSessionsService {
     return {
       user,
       version: packageJSON.version,
-      nav: await this.getAdminNav(),
     };
   }
 }

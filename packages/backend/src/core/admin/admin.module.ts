@@ -20,6 +20,7 @@ import {
   AdminSecurityModule,
   GlobalAdminSecurityModule,
 } from './security/security.module';
+import { AdminNavModule } from './nav/nav.module';
 
 @Module({
   imports: [
@@ -40,6 +41,7 @@ import {
     AdminInstallModule,
     AdminEmailModule,
     AdminSecurityModule,
+    AdminNavModule,
   ],
 })
 export class AdminModule {}

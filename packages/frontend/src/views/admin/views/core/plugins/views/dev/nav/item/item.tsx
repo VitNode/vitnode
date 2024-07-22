@@ -40,6 +40,15 @@ export const ItemContentNavDevPluginAdmin = (
             ),
           })}
         </p>
+        <p className="text-muted-foreground mt-1 text-sm">
+          {tAdmin.rich('keywords', {
+            keywords: () => (
+              <span className="text-foreground">
+                {data.keywords.join(', ')}
+              </span>
+            ),
+          })}
+        </p>
       </div>
 
       <ActionsTableNavDevPluginAdmin {...data} />

@@ -7,7 +7,7 @@ import { Circle } from 'lucide-react';
 import { cn } from '../../helpers/classnames';
 
 const RadioGroup: React.FC<
-  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root>
+  React.ComponentProps<typeof RadioGroupPrimitive.Root>
 > = ({ className, ...props }) => {
   return (
     <RadioGroupPrimitive.Root
@@ -18,7 +18,7 @@ const RadioGroup: React.FC<
 };
 
 const RadioGroupItem: React.FC<
-  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item>
+  React.ComponentProps<typeof RadioGroupPrimitive.Item>
 > = ({ className, ...props }) => {
   return (
     <RadioGroupPrimitive.Item

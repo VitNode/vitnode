@@ -21,10 +21,7 @@ export const mutationChangePositionApi = async (
       variables,
     });
 
-    revalidatePath(
-      `/admin/core/plugins/${variables.pluginCode}/dev/nav`,
-      'page',
-    );
+    revalidatePath('/[locale]/admin/(auth)/(vitnode)', 'layout');
 
     return { data };
   } catch (e) {

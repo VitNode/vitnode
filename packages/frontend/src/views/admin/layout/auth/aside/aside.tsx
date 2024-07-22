@@ -6,6 +6,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Link } from '@/navigation';
 import { AvatarAsideAuthAdmin } from './avatar';
 import { CONFIG } from '@/helpers/config-with-env';
+import { SearchAsideAuthAdmin } from './search/search';
 
 export const AsideAuthAdmin = () => {
   return (
@@ -21,13 +22,15 @@ export const AsideAuthAdmin = () => {
       )}
 
       <div className="space-y-2 px-4 pt-2 md:px-3 md:pt-4">
-        <div className="flex flex-row items-center justify-between border-b pb-4">
+        <div className="flex flex-row items-center justify-between pb-2">
           <Link href="/admin/core/dashboard">
             <LogoVitNode className="h-8" />
           </Link>
 
           <AvatarAsideAuthAdmin />
         </div>
+
+        <SearchAsideAuthAdmin />
       </div>
 
       <ScrollArea className="flex-1">

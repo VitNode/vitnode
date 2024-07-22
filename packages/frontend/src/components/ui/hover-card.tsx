@@ -14,7 +14,7 @@ const HoverCardContent = ({
   align = 'center',
   sideOffset = 4,
   ...props
-}: React.ComponentPropsWithoutRef<typeof HoverCardPrimitive.Content>) => (
+}: React.ComponentProps<typeof HoverCardPrimitive.Content>) => (
   <HoverCardPrimitive.Content
     align={align}
     sideOffset={sideOffset}

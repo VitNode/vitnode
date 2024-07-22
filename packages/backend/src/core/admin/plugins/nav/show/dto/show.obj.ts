@@ -6,10 +6,13 @@ export class ShowAdminNavPlugins {
   code: string;
 
   @Field(() => String, { nullable: true })
-  icon: string | null;
+  icon?: string;
 
   @Field(() => String)
   href: string;
+
+  @Field(() => [String])
+  keywords: string[];
 }
 
 @ObjectType()

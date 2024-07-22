@@ -3,6 +3,11 @@
     "title": "Admin Control Panel",
     "title_short": "Admin",
     "home_page": "Home Page",
+    "search": {
+      "placeholder": "Search...",
+      "no_results": "No results found.",
+      "pages": "Pages"
+    },
     "rebuild_required": {
       "title": "Rebuild Required",
       "desc": "We're detecting that you need to rebuild your website, because you have made changes in:",
@@ -148,6 +153,7 @@
           "nav": {
             "title": "Navigation in AdminCP",
             "lang_key": "Lang Key: <key></key>",
+            "keywords": "Keywords: <keywords></keywords>",
             "create": {
               "title": "Create Navigation",
               "code": {
@@ -165,6 +171,10 @@
               "parent": {
                 "label": "Parent Navigation",
                 "null": "No parent"
+              },
+              "keywords": {
+                "label": "Keywords",
+                "desc": "Keywords are used to search for this navigation. Separate by comma."
               },
               "success": "Navigation has been created."
             },

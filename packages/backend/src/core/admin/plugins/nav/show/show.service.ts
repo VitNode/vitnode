@@ -22,6 +22,11 @@ export class ShowAdminNavPluginsService {
       fs.readFileSync(pathConfig, 'utf8'),
     );
 
-    return config.nav;
+    return config.nav.map(nav => {
+      return {
+        ...nav,
+        keywords: nav.keywords || [],
+      };
+    });
   }
 }

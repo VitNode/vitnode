@@ -119,7 +119,7 @@ const FormItem = ({
 };
 
 interface FormLabelProps
-  extends React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root> {
+  extends React.ComponentProps<typeof LabelPrimitive.Root> {
   optional?: boolean;
 }
 
@@ -146,9 +146,7 @@ const FormLabel = ({
   );
 };
 
-const FormControl = ({
-  ...props
-}: React.ComponentPropsWithoutRef<typeof Slot>) => {
+const FormControl = ({ ...props }: React.ComponentProps<typeof Slot>) => {
   const { error, formItemId, formDescriptionId, formMessageId } =
     useFormField();
 

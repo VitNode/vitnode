@@ -27,7 +27,6 @@ export const AllowTypeFilesEnum = {
 export type AllowTypeFilesEnum = typeof AllowTypeFilesEnum[keyof typeof AllowTypeFilesEnum];
 export type AuthorizationAdminSessionsObj = {
   __typename?: 'AuthorizationAdminSessionsObj';
-  nav: Array<NavAdminPluginsAuthorization>;
   user?: Maybe<AuthorizationCurrentUserObj>;
   version: Scalars['String']['output'];
 };
@@ -428,6 +427,7 @@ export type MutationAdmin__Core_Plugins__Nav__CreateArgs = {
   code: Scalars['String']['input'];
   href: Scalars['String']['input'];
   icon?: InputMaybe<Scalars['String']['input']>;
+  keywords: Array<Scalars['String']['input']>;
   parent_code?: InputMaybe<Scalars['String']['input']>;
   plugin_code: Scalars['String']['input'];
 };
@@ -444,6 +444,7 @@ export type MutationAdmin__Core_Plugins__Nav__EditArgs = {
   code: Scalars['String']['input'];
   href: Scalars['String']['input'];
   icon?: InputMaybe<Scalars['String']['input']>;
+  keywords: Array<Scalars['String']['input']>;
   parent_code?: InputMaybe<Scalars['String']['input']>;
   plugin_code: Scalars['String']['input'];
   previous_code: Scalars['String']['input'];
@@ -571,10 +572,14 @@ export type MutationCore_Sessions__Sign_UpArgs = {
   password: Scalars['String']['input'];
 };
 
-export type NavAdminPluginsAuthorization = {
-  __typename?: 'NavAdminPluginsAuthorization';
+export type NavSearchAdminSessions = {
+  __typename?: 'NavSearchAdminSessions';
   code: Scalars['String']['output'];
-  nav: Array<ShowAdminNavPluginsObj>;
+  code_plugin: Scalars['String']['output'];
+  href: Scalars['String']['output'];
+  icon?: Maybe<Scalars['String']['output']>;
+  keywords: Array<Scalars['String']['output']>;
+  parent_nav_code?: Maybe<Scalars['String']['output']>;
 };
 
 export type PageInfo = {
@@ -602,7 +607,9 @@ export type Query = {
   admin__core_staff_administrators__show: ShowAdminStaffAdministratorsObj;
   admin__core_staff_moderators__show: ShowAdminStaffModeratorsObj;
   admin__install__layout: LayoutAdminInstallObj;
+  admin__nav__show: Array<ShowAdminNavObj>;
   admin__sessions__authorization: AuthorizationAdminSessionsObj;
+  admin__sessions__search: SearchAdminSessionsObj;
   core_files__show: ShowCoreFilesObj;
   core_languages__show: ShowCoreLanguagesObj;
   core_members__show: ShowCoreMembersObj;
@@ -680,6 +687,11 @@ export type QueryAdmin__Core_Staff_Moderators__ShowArgs = {
 };
 
 
+export type QueryAdmin__Sessions__SearchArgs = {
+  search: Scalars['String']['input'];
+};
+
+
 export type QueryCore_Files__ShowArgs = {
   cursor?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -718,6 +730,11 @@ export type RebuildRequiredEditorShowCoreMiddleware = {
   __typename?: 'RebuildRequiredEditorShowCoreMiddleware';
   langs: Scalars['Boolean']['output'];
   plugins: Scalars['Boolean']['output'];
+};
+
+export type SearchAdminSessionsObj = {
+  __typename?: 'SearchAdminSessionsObj';
+  nav: Array<NavSearchAdminSessions>;
 };
 
 export type SecurityCoreMiddleware = {
@@ -843,11 +860,18 @@ export const ShowAdminMembersSortingColumnEnum = {
 } as const;
 
 export type ShowAdminMembersSortingColumnEnum = typeof ShowAdminMembersSortingColumnEnum[keyof typeof ShowAdminMembersSortingColumnEnum];
+export type ShowAdminNavObj = {
+  __typename?: 'ShowAdminNavObj';
+  code: Scalars['String']['output'];
+  nav: Array<ShowAdminNavPluginsObj>;
+};
+
 export type ShowAdminNavPlugins = {
   __typename?: 'ShowAdminNavPlugins';
   code: Scalars['String']['output'];
   href: Scalars['String']['output'];
   icon?: Maybe<Scalars['String']['output']>;
+  keywords: Array<Scalars['String']['output']>;
 };
 
 export type ShowAdminNavPluginsObj = {
@@ -856,6 +880,7 @@ export type ShowAdminNavPluginsObj = {
   code: Scalars['String']['output'];
   href: Scalars['String']['output'];
   icon?: Maybe<Scalars['String']['output']>;
+  keywords: Array<Scalars['String']['output']>;
 };
 
 export type ShowAdminPlugins = {
@@ -1369,6 +1394,7 @@ export type Admin__Core_Plugins__Nav__CreateMutationVariables = Exact<{
   icon?: InputMaybe<Scalars['String']['input']>;
   href: Scalars['String']['input'];
   parentCode?: InputMaybe<Scalars['String']['input']>;
+  keywords: Array<Scalars['String']['input']> | Scalars['String']['input'];
 }>;
 
 
@@ -1390,6 +1416,7 @@ export type Admin__Core_Plugins__Nav__EditMutationVariables = Exact<{
   pluginCode: Scalars['String']['input'];
   previousCode: Scalars['String']['input'];
   parentCode?: InputMaybe<Scalars['String']['input']>;
+  keywords: Array<Scalars['String']['input']> | Scalars['String']['input'];
 }>;
 
 
@@ -1569,7 +1596,14 @@ export type Core_Members__Avatar__UploadMutation = { __typename?: 'Mutation', co
 export type Admin__Sessions__AuthorizationQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Admin__Sessions__AuthorizationQuery = { __typename?: 'Query', admin__sessions__authorization: { __typename?: 'AuthorizationAdminSessionsObj', version: string, user?: { __typename?: 'AuthorizationCurrentUserObj', email: string, id: number, name_seo: string, is_admin: boolean, is_mod: boolean, name: string, newsletter: boolean, avatar_color: string, language: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, file_name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } | null, nav: Array<{ __typename?: 'NavAdminPluginsAuthorization', code: string, nav: Array<{ __typename?: 'ShowAdminNavPluginsObj', code: string, href: string, icon?: string | null, children?: Array<{ __typename?: 'ShowAdminNavPlugins', code: string, href: string }> | null }> }> } };
+export type Admin__Sessions__AuthorizationQuery = { __typename?: 'Query', admin__sessions__authorization: { __typename?: 'AuthorizationAdminSessionsObj', version: string, user?: { __typename?: 'AuthorizationCurrentUserObj', email: string, id: number, name_seo: string, is_admin: boolean, is_mod: boolean, name: string, newsletter: boolean, avatar_color: string, language: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, file_name: string } | null, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } } | null }, admin__nav__show: Array<{ __typename?: 'ShowAdminNavObj', code: string, nav: Array<{ __typename?: 'ShowAdminNavPluginsObj', href: string, code: string, icon?: string | null, children?: Array<{ __typename?: 'ShowAdminNavPlugins', icon?: string | null, href: string, code: string }> | null }> }> };
+
+export type Admin__Sessions__SearchQueryVariables = Exact<{
+  search: Scalars['String']['input'];
+}>;
+
+
+export type Admin__Sessions__SearchQuery = { __typename?: 'Query', admin__sessions__search: { __typename?: 'SearchAdminSessionsObj', nav: Array<{ __typename?: 'NavSearchAdminSessions', code: string, code_plugin: string, href: string, keywords: Array<string>, icon?: string | null, parent_nav_code?: string | null }> } };
 
 export type Admin__Core_Files__ShowQueryVariables = Exact<{
   cursor?: InputMaybe<Scalars['Int']['input']>;
@@ -1691,7 +1725,7 @@ export type Admin__Core_Plugins__Nav__ShowQueryVariables = Exact<{
 }>;
 
 
-export type Admin__Core_Plugins__Nav__ShowQuery = { __typename?: 'Query', admin__core_plugins__nav__show: Array<{ __typename?: 'ShowAdminNavPluginsObj', code: string, icon?: string | null, href: string, children?: Array<{ __typename?: 'ShowAdminNavPlugins', code: string, href: string, icon?: string | null }> | null }> };
+export type Admin__Core_Plugins__Nav__ShowQuery = { __typename?: 'Query', admin__core_plugins__nav__show: Array<{ __typename?: 'ShowAdminNavPluginsObj', code: string, icon?: string | null, href: string, keywords: Array<string>, children?: Array<{ __typename?: 'ShowAdminNavPlugins', code: string, href: string, keywords: Array<string>, icon?: string | null }> | null }> };
 
 export type Admin__Core_Security__Captcha__ShowQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1936,13 +1970,14 @@ export const Admin__Core_Plugins__Nav__Change_Position = gql`
 }
     `;
 export const Admin__Core_Plugins__Nav__Create = gql`
-    mutation Admin__core_plugins__nav__create($code: String!, $pluginCode: String!, $icon: String, $href: String!, $parentCode: String) {
+    mutation Admin__core_plugins__nav__create($code: String!, $pluginCode: String!, $icon: String, $href: String!, $parentCode: String, $keywords: [String!]!) {
   admin__core_plugins__nav__create(
     code: $code
     plugin_code: $pluginCode
     icon: $icon
     href: $href
     parent_code: $parentCode
+    keywords: $keywords
   ) {
     code
   }
@@ -1958,7 +1993,7 @@ export const Admin__Core_Plugins__Nav__Delete = gql`
 }
     `;
 export const Admin__Core_Plugins__Nav__Edit = gql`
-    mutation Admin__core_plugins__nav__edit($code: String!, $href: String!, $icon: String, $pluginCode: String!, $previousCode: String!, $parentCode: String) {
+    mutation Admin__core_plugins__nav__edit($code: String!, $href: String!, $icon: String, $pluginCode: String!, $previousCode: String!, $parentCode: String, $keywords: [String!]!) {
   admin__core_plugins__nav__edit(
     code: $code
     href: $href
@@ -1966,6 +2001,7 @@ export const Admin__Core_Plugins__Nav__Edit = gql`
     plugin_code: $pluginCode
     previous_code: $previousCode
     parent_code: $parentCode
+    keywords: $keywords
   ) {
     code
   }
@@ -2183,17 +2219,32 @@ export const Admin__Sessions__Authorization = gql`
       }
     }
     version
+  }
+  admin__nav__show {
+    code
+    nav {
+      href
+      code
+      children {
+        icon
+        href
+        code
+      }
+      icon
+    }
+  }
+}
+    `;
+export const Admin__Sessions__Search = gql`
+    query Admin__sessions__search($search: String!) {
+  admin__sessions__search(search: $search) {
     nav {
       code
-      nav {
-        code
-        href
-        icon
-        children {
-          code
-          href
-        }
-      }
+      code_plugin
+      href
+      keywords
+      icon
+      parent_nav_code
     }
   }
 }
@@ -2581,8 +2632,10 @@ export const Admin__Core_Plugins__Nav__Show = gql`
     children {
       code
       href
+      keywords
       icon
     }
+    keywords
   }
 }
     `;

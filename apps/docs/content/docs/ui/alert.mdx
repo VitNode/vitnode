@@ -1,0 +1,44 @@
+---
+title: Alert
+description: Provides a callout to capture user attention.
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+
+<Callout title="Shadcn UI">
+  This component is part of [Shadcn
+  UI](https://ui.shadcn.com/docs/components/alert).
+</Callout>
+
+## Usage
+
+```tsx
+import {
+  Alert,
+  AlertDescription,
+  AlertTitle,
+} from 'vitnode-frontend/components/ui/alert';
+```
+
+```tsx
+<Alert>
+  <TerminalIcon className="size-4" />
+  <AlertTitle>Heads up!</AlertTitle>
+  <AlertDescription>
+    You can add components and dependencies to your app using the cli.
+  </AlertDescription>
+</Alert>
+```
+
+## API Reference
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+<TypeTable
+  type={{
+    variant: {
+      type: 'default | destructive',
+      default: 'default',
+    },
+  }}
+/>

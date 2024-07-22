@@ -1,0 +1,61 @@
+---
+title: Button
+description: Renders a button or an element designed to resemble a button.
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+
+<Callout title="Shadcn UI">
+  This component is part of [Shadcn
+  UI](https://ui.shadcn.com/docs/components/button) with extra `modification`.
+</Callout>
+
+## Usage
+
+```tsx
+import { Button } from 'vitnode-frontend/components/ui/button';
+```
+
+```tsx
+<Button variant="outline">Button</Button>
+```
+
+### Link
+
+```tsx
+import { Link } from 'vitnode-frontend/navigation';
+import { buttonVariants } from 'vitnode-frontend/components/ui/button';
+```
+
+```tsx
+<Link className={buttonVariants({ variant: 'outline' })}>Click here</Link>
+```
+
+## API Reference
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+<TypeTable
+  type={{
+    variant: {
+      type: 'default | destructive | outline | secondary | ghost | destructiveGhost | link',
+      default: 'default',
+    },
+    size: {
+      type: 'default | sm | lg | icon',
+      default: 'default',
+    },
+    ariaLabel: {
+      type: 'string',
+      default: '',
+    },
+    loading: {
+      type: 'boolean',
+      default: 'false',
+    },
+    loadingText: {
+      type: 'string',
+      default: '(From i18n)',
+    },
+  }}
+/>
