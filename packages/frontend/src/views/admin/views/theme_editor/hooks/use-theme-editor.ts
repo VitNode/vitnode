@@ -7,6 +7,7 @@ import { formSchemaColorsThemeEditor } from './use-theme-editor-api';
 export enum ThemeEditorTab {
   Main = 'main',
   Colors = 'colors',
+  Logos = 'logos',
 }
 
 interface ColorObj {

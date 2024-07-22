@@ -2,12 +2,13 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 
 import { ThemeEditorTab, useThemeEditor } from '../hooks/use-theme-editor';
-import { ColorTabThemeEditor } from './tabs/color-tab';
+import { ColorsTabThemeEditor } from './tabs/color';
 import { MainTabThemeEditor } from './tabs/main';
 import { SubmitSidebarThemeEditor } from './submit';
 import { Form } from '@/components/ui/form';
 import { buttonVariants } from '@/components/ui/button';
 import { Link } from '@/navigation';
+import { LogosTabThemeEditor } from './tabs/logos';
 
 export const SidebarThemeEditor = () => {
   const {
@@ -21,7 +22,8 @@ export const SidebarThemeEditor = () => {
   const t = useTranslations('core');
   const tabs = {
     [ThemeEditorTab.Main]: <MainTabThemeEditor />,
-    [ThemeEditorTab.Colors]: <ColorTabThemeEditor />,
+    [ThemeEditorTab.Colors]: <ColorsTabThemeEditor />,
+    [ThemeEditorTab.Logos]: <LogosTabThemeEditor />,
   };
 
   return (

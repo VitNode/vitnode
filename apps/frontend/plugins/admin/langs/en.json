@@ -20,6 +20,9 @@
         "cover": "Cover",
         "destructive": "Destructive"
       },
+      "logos": {
+        "title": "Logos"
+      },
       "submit": {
         "desc": "This action requires rebuild the app. When you save the theme, not everything will be visible until the app is rebuilt.",
         "dev": {

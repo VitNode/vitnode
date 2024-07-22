@@ -62,7 +62,7 @@ export class ShowAdminNavService {
             {
               code: 'theme-editor',
               href: '/theme-editor',
-              keywords: ['theme', 'editor', 'color'],
+              keywords: ['theme', 'editor', 'color', 'logo'],
             },
             {
               code: 'nav',

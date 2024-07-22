@@ -1,31 +1,48 @@
-import { Callout } from 'nextra/components';
-import { Steps } from 'nextra/components';
+---
+title: Create Form
+description: How to create forms in VitNode.
+---
 
-# Forms
+VitNode uses [react-hook-form](https://react-hook-form.com/) to manage forms and [zod](https://zod.dev/) for form validation. This combination is lightweight and easy to use.
 
-Forms are a common part of web applications. They allow users to input data and submit it to the server. In VitNode, we use the [react-hook-form](https://react-hook-form.com/) library to handle forms. This library is lightweight and easy to use. It also integrates well with the `zod` library for form validation.
+## Installation
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+
+<Tabs id='package-manager' persist items={['pnpm', 'npm']}>
+
+```bash tab="pnpm"
+pnpm i react-hook-form zod
+```
+
+```bash tab="npm"
+npm i react-hook-form zod
+```
+
+</Tabs>
 
 ## Usage
 
-<Steps>
-
-### Create a Hook
-
 We're recomend to create a hook to handle the form state and submission. It will make your code cleaner and easier to maintain.
 
-```tsx
-export const useCreateEditCategoryBlogAdmin = () => {};
+```ts title="hooks/use-example.ts"
+export const useExample = () => {};
 ```
 
-### Create a form schema
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+<Steps>
+<Step>
+
+### Form Schema
 
 Define the shape of your form using a Zod schema. You can read more about using [Zod in the Zod documentation](https://zod.dev/).
 
-```tsx {2, 5-8}
+```ts title="hooks/use-example.ts"
 import * as z from 'zod';
 import { zodInput } from 'vitnode-frontend/helpers/zod';
 
-export const useCreateEditCategoryBlogAdmin = () => {
+export const useExample = () => {
   const formSchema = z.object({
     name: zodInput.languageInput.min(1),
     description: zodInput.languageInput,
@@ -33,24 +50,34 @@ export const useCreateEditCategoryBlogAdmin = () => {
 };
 ```
 
-We used the `zodInput` helper to create a custom validation function. You can read more about it in the [Custom validation zod section](#custom-validation-zod).
+#### zodInput
 
-### Define a form
+For VitNode we're created a `zodInput` helper to provide a custom validation function for the form fields.
+
+| Param                    | Description                          |
+| ------------------------ | ------------------------------------ |
+| `zodInput.languageInput` | Validate a language array input.     |
+| `zodInput.string`        | Validate a string with triming text. |
+
+</Step>
+<Step>
+
+### Form State
 
 Define the form state with default values with return the `form` object.
 
-```tsx {2-3, 12-18, 20}
-import * as z from 'zod';
+```ts title="hooks/use-example.ts"
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { zodInput } from 'vitnode-frontend/helpers/zod';
 
-export const useCreateEditCategoryBlogAdmin = () => {
+export const useExample = () => {
   const formSchema = z.object({
     name: zodInput.languageInput.min(1),
     description: zodInput.languageInput,
   });
 
+  // [!code word:form]
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -63,17 +90,20 @@ export const useCreateEditCategoryBlogAdmin = () => {
 };
 ```
 
-### Define a submit handler
+</Step>
+<Step>
 
-Define the submit handler that will be called when the form is submitted and return the `onSubmit` function.
+### Form Submission
 
-```tsx {20-22, 24}
+Define the `onSubmit` function that will be called when the form is submitted.
+
+```ts title="hooks/use-example.ts"
 import * as z from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { zodInput } from 'vitnode-frontend/helpers/zod';
 
-export const useCreateEditCategoryBlogAdmin = () => {
+export const useExample = () => {
   const formSchema = z.object({
     name: zodInput.languageInput.min(1),
     description: zodInput.languageInput,
@@ -87,6 +117,7 @@ export const useCreateEditCategoryBlogAdmin = () => {
     },
   });
 
+  // [!code word:onSubmit]
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     // Do something
   };
@@ -97,11 +128,14 @@ export const useCreateEditCategoryBlogAdmin = () => {
 
 In `onSubmit` function you can call [Mutation with Server Action](/fetch#mutation).
 
-### Build your form
+</Step>
+<Step>
 
-We can now use the `<Form />` components to build our form.
+### Form HTML
 
-```tsx {2-12, 14, 22, 24-68}
+Now you can use the `<Form />` components to build your form.
+
+```tsx title="example.tsx"
 import { useTranslations } from 'next-intl';
 import {
   Form,
@@ -115,15 +149,11 @@ import { TextLanguageInput } from '@/components/text-language-input';
 import { Button } from 'vitnode-frontend/components/ui/button';
 import { Editor } from 'vitnode-frontend/components/ui/editor';
 
-import { useCreateEditCategoryBlogAdmin } from './hooks/use-create-edit-category-blog-admin';
+import { useExample } from './hooks/use-example';
 
-interface Props {
-  data?: ShowCoreLanguages; // Add your data type
-}
-
-export const CreateEditCategoryBlogAdmin = ({ data }: Props) => {
-  const t = useTranslations('blog.admin.categories');
-  const { form, onSubmit } = useCreateEditCategoryBlogAdmin();
+export const Example = () => {
+  const t = useTranslations('example');
+  const { form, onSubmit } = useExample();
 
   return (
     <Form {...form}>
@@ -165,7 +195,7 @@ export const CreateEditCategoryBlogAdmin = ({ data }: Props) => {
           loading={form.formState.isSubmitting}
           disabled={!form.formState.isValid}
         >
-          {t(data ? 'edit.submit' : 'create.submit')}
+          {t('submit')}
         </Button>
       </form>
     </Form>
@@ -173,58 +203,13 @@ export const CreateEditCategoryBlogAdmin = ({ data }: Props) => {
 };
 ```
 
-#### Upload Files
-
-<Callout type="warning" emoji="⚠️">
-  This feature is currently planned but not yet implemented.
-</Callout>
-
+</Step>
 </Steps>
 
-## Custom validation zod
+## Tips & Tricks
 
-VitNode provides a custom validation function that allows you to use the `zod` schema to validate the form data.
+Here are some tips and tricks to help you build forms in VitNode.
 
-### Text Language Input
+### Upload Files
 
-This validation trims the input and create an array of objects with the language code and the value.
-
-```tsx {4}
-import { zodInput } from 'vitnode-frontend/helpers/zod';
-
-const formSchema = z.object({
-  name: zodInput.languageInput,
-});
-```
-
-You can make the input required by adding the `.min(1)` method.
-
-```tsx {4}
-import { zodInput } from 'vitnode-frontend/helpers/zod';
-
-const formSchema = z.object({
-  name: zodInput.languageInput.min(1),
-});
-```
-
-### String
-
-This validation trims the input. We're recomend to use this validation insted of `z.string()`.
-
-```tsx {4}
-import { zodInput } from 'vitnode-frontend/helpers/zod';
-
-const formSchema = z.object({
-  name: zodInput.string,
-});
-```
-
-You can make the input required by adding the `.min(1)` method.
-
-```tsx {4}
-import { zodInput } from 'vitnode-frontend/helpers/zod';
-
-const formSchema = z.object({
-  name: zodInput.string.min(1),
-});
-```
+TODO: Add tutorial to upload files.

@@ -7,7 +7,6 @@ import {
 } from 'vitnode-shared';
 
 import { Button } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
 import {
   FormControl,
   FormField,
@@ -19,28 +18,27 @@ import { ColorInput } from '@/components/ui/color-input';
 
 import { ThemeEditorTab, useThemeEditor } from '../../hooks/use-theme-editor';
 
-export const ColorTabThemeEditor = () => {
+export const ColorsTabThemeEditor = () => {
   const t = useTranslations('admin.theme_editor.colors');
   const tCore = useTranslations('core');
   const { activeTheme, changeColor, form, setActiveTab } = useThemeEditor();
 
   return (
     <div>
-      <div className="p-2">
+      <div className="flex items-center gap-2 p-2">
         <Button
-          className="w-full justify-start"
           variant="ghost"
-          size="sm"
+          size="icon"
+          ariaLabel={tCore('go_back')}
           onClick={() => setActiveTab(ThemeEditorTab.Main)}
         >
           <ChevronLeft />
-          <span>{tCore('go_back')}</span>
         </Button>
+
+        <h2 className="font-bold">{t('title')}</h2>
       </div>
 
-      <Separator />
-
-      <div className="space-y-2 p-5">
+      <div className="space-y-2 p-5 pt-0">
         <FormField
           control={form.control}
           name="colors.primary"

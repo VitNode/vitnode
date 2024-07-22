@@ -61,7 +61,7 @@ export const useThemeEditorApi = ({
   core_theme_editor__show,
 }: Core_Theme_Editor__ShowQuery) => {
   const [openSubmitDialog, setOpenSubmitDialog] = React.useState(false);
-  const t = useTranslations('core.theme_editor.submit');
+  const t = useTranslations('admin.theme_editor.submit');
   const tCore = useTranslations('core');
   const { push } = useRouter();
   const iframeRef = React.useRef<HTMLIFrameElement>(null);

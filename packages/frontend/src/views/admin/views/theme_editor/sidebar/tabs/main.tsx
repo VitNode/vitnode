@@ -22,6 +22,15 @@ export const MainTabThemeEditor = () => {
           <span>{t('colors.title')}</span>
           <ChevronRight className="text-muted-foreground ml-auto" />
         </Button>
+
+        <Button
+          className="w-full justify-start"
+          variant="ghost"
+          onClick={() => setActiveTab(ThemeEditorTab.Logos)}
+        >
+          <span>{t('logos.title')}</span>
+          <ChevronRight className="text-muted-foreground ml-auto" />
+        </Button>
       </div>
     </div>
   );
