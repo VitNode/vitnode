@@ -23,7 +23,11 @@
       "logos": {
         "title": "Logos",
         "light": "Light",
+        "width": "Width",
+        "mobile_width": "Mobile Width",
         "dark": "Dark",
+        "mobile_light": "Mobile Light",
+        "mobile_dark": "Mobile Dark",
         "text": "Logo Text"
       },
       "submit": {

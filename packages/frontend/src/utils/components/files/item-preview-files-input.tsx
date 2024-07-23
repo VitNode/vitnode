@@ -1,5 +1,5 @@
 import React from 'react';
-import { X } from 'lucide-react';
+import { Trash2 } from 'lucide-react';
 import Image from 'next/image';
 
 import { acceptMimeTypeImage } from '../../../helpers/files-support';
@@ -63,7 +63,7 @@ export const ItemPreviewFilesInput = ({
         className="ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute right-2 top-2 flex size-6 items-center justify-center rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none"
         onClick={handleRemoveFile}
       >
-        <X className="size-4" />
+        <Trash2 className="size-4" />
         <span className="sr-only">Close</span>
       </button>
     </li>

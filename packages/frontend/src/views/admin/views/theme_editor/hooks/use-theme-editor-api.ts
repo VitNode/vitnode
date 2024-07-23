@@ -70,6 +70,10 @@ export const useThemeEditorApi = ({
     logos: z.object({
       light: z.array(z.instanceof(File)),
       dark: z.array(z.instanceof(File)),
+      width: z.number(),
+      mobile_light: z.array(z.instanceof(File)),
+      mobile_dark: z.array(z.instanceof(File)),
+      mobile_width: z.number(),
       text: z.string().min(1).max(100),
     }),
   });
@@ -95,6 +99,10 @@ export const useThemeEditorApi = ({
       logos: {
         light: [],
         dark: [],
+        width: 100,
+        mobile_light: [],
+        mobile_dark: [],
+        mobile_width: 50,
         text: '',
       },
     },

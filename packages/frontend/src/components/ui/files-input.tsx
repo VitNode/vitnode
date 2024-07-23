@@ -17,6 +17,7 @@ export interface FilesInputInputProps
   onChange: (e: File[]) => void;
   value: File[] | undefined;
   ref?: React.RefCallback<HTMLInputElement>;
+  showInfo?: boolean;
 }
 
 export const FilesInput = ({
@@ -26,8 +27,9 @@ export const FilesInput = ({
   maxFileSizeInMb,
   multiple,
   onChange,
-  value: stateValue,
+  value: stateValue = [],
   ref,
+  showInfo,
   ...props
 }: FilesInputInputProps) => {
   const t = useTranslations('core');
@@ -117,21 +119,23 @@ export const FilesInput = ({
           }}
         >
           <div className="text-muted-foreground @xs:p-4 flex items-center gap-4 p-1">
-            <Upload className="size-6 flex-shrink-0" />
+            <Upload className="size-5 flex-shrink-0" />
 
-            <div>
-              <p className="text-foreground text-sm font-semibold">
+            <div className="space-y-1">
+              <p className="text-sm">
                 {t(isDrag ? 'forms.files.drop_here' : 'forms.files.title')}
               </p>
 
-              <p className="text-xs">
-                {acceptExtensions.join(', ').toUpperCase()}{' '}
-                {maxFileSizeInMb
-                  ? t('forms.files.allow_size_per_file', {
-                      size: maxFileSizeInMb,
-                    })
-                  : ''}
-              </p>
+              {showInfo && (
+                <p className="text-xs">
+                  {acceptExtensions.join(', ').toUpperCase()}{' '}
+                  {maxFileSizeInMb
+                    ? t('forms.files.allow_size_per_file', {
+                        size: maxFileSizeInMb,
+                      })
+                    : ''}
+                </p>
+              )}
             </div>
           </div>
           <input

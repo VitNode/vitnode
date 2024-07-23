@@ -36,7 +36,11 @@ interface ThemeEditorFormObj {
   logos: {
     dark: File[];
     light: File[];
+    mobile_dark: File[];
+    mobile_light: File[];
+    mobile_width: number;
     text: string;
+    width: number;
   };
 }
 
