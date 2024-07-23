@@ -70,7 +70,16 @@ export class ColorsShowCoreThemeEditor {
 }
 
 @ObjectType()
+export class LogoShowCoreThemeEditor {
+  @Field(() => String)
+  text: string;
+}
+
+@ObjectType()
 export class ShowCoreThemeEditorObj {
-  @Field(() => ColorsShowCoreThemeEditor)
-  colors: ColorsShowCoreThemeEditor;
+  @Field(() => ColorsShowCoreThemeEditor, { nullable: true })
+  colors?: ColorsShowCoreThemeEditor;
+
+  @Field(() => LogoShowCoreThemeEditor)
+  logos: LogoShowCoreThemeEditor;
 }

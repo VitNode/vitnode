@@ -66,7 +66,7 @@ export class ShowCoreThemeEditorService {
     };
   }
 
-  show(): ShowCoreThemeEditorObj {
+  protected getColors(): ShowCoreThemeEditorObj['colors'] {
     const pathToCss = join(
       ABSOLUTE_PATHS_BACKEND.frontend.init,
       'app',
@@ -74,7 +74,7 @@ export class ShowCoreThemeEditorService {
     );
 
     if (!fs.existsSync(pathToCss)) {
-      throw new NotFoundError('CSS file in Theme not found!');
+      return;
     }
 
     const cssAsString = fs.readFileSync(pathToCss, 'utf8');
@@ -90,8 +90,15 @@ export class ShowCoreThemeEditorService {
       {} as ColorsShowCoreThemeEditor,
     );
 
+    return colors;
+  }
+
+  show(): ShowCoreThemeEditorObj {
     return {
-      colors,
+      colors: this.getColors(),
+      logos: {
+        text: 'Logo',
+      },
     };
   }
 }

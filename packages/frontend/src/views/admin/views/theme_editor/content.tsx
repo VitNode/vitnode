@@ -43,8 +43,16 @@ export const ContentThemeEditor = (props: Core_Theme_Editor__ShowQuery) => {
         ...rest,
       }}
     >
-      <div className="bg-card flex h-screen w-full">
-        <div className="flex flex-1 items-center justify-center">
+      <div className="bg-card flex h-dvh w-full">
+        <div className="bg-card fixed left-0 top-0 z-30 flex h-dvh w-80 border-e">
+          <ToolbarThemeEditor
+            setActiveMode={setActiveMode}
+            activeMode={activeMode}
+          />
+          <SidebarThemeEditor />
+        </div>
+
+        <div className="ml-80 flex flex-1 items-center justify-center">
           <iframe
             ref={iframeRef}
             title={CONFIG.frontend_url}
@@ -72,14 +80,6 @@ export const ContentThemeEditor = (props: Core_Theme_Editor__ShowQuery) => {
               });
             }}
           />
-        </div>
-
-        <div className="flex w-80 shrink-0 overflow-auto border-l shadow-lg">
-          <ToolbarThemeEditor
-            setActiveMode={setActiveMode}
-            activeMode={activeMode}
-          />
-          <SidebarThemeEditor />
         </div>
       </div>
     </ThemeEditorContext.Provider>

@@ -23,11 +23,14 @@ export const ColorsTabThemeEditor = () => {
   const tCore = useTranslations('core');
   const { activeTheme, changeColor, form, setActiveTab } = useThemeEditor();
 
+  if (!form.watch('colors.primary')) return;
+
   return (
-    <div>
-      <div className="flex items-center gap-2 p-2">
+    <>
+      <div className="flex items-center gap-2">
         <Button
           variant="ghost"
+          className="size-8"
           size="icon"
           ariaLabel={tCore('go_back')}
           onClick={() => setActiveTab(ThemeEditorTab.Main)}
@@ -38,7 +41,7 @@ export const ColorsTabThemeEditor = () => {
         <h2 className="font-bold">{t('title')}</h2>
       </div>
 
-      <div className="space-y-2 p-5 pt-0">
+      <div className="space-y-4 py-4">
         <FormField
           control={form.control}
           name="colors.primary"
@@ -48,6 +51,7 @@ export const ColorsTabThemeEditor = () => {
               <FormControl>
                 <ColorInput
                   {...field}
+                  className="w-full max-w-none"
                   key={`color_primary__${activeTheme}`}
                   onChange={val => {
                     const hslFromColor = getHSLFromString(val);
@@ -91,6 +95,7 @@ export const ColorsTabThemeEditor = () => {
               <FormControl>
                 <ColorInput
                   {...field}
+                  className="w-full max-w-none"
                   key={`color_secondary__${activeTheme}`}
                   onChange={val => {
                     const hslFromColor = getHSLFromString(val);
@@ -134,6 +139,7 @@ export const ColorsTabThemeEditor = () => {
               <FormControl>
                 <ColorInput
                   {...field}
+                  className="w-full max-w-none"
                   key={`color_cover__${activeTheme}`}
                   onChange={val => {
                     const hslFromColor = getHSLFromString(val);
@@ -250,6 +256,7 @@ export const ColorsTabThemeEditor = () => {
               <FormControl>
                 <ColorInput
                   {...field}
+                  className="w-full max-w-none"
                   key={`color_destructive__${activeTheme}`}
                   onChange={val => {
                     const hslFromColor = getHSLFromString(val);
@@ -284,6 +291,6 @@ export const ColorsTabThemeEditor = () => {
           )}
         />
       </div>
-    </div>
+    </>
   );
 };

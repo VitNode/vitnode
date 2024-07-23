@@ -62,7 +62,7 @@ export const ToolbarThemeEditor = ({
   };
 
   return (
-    <div className="sticky top-0 border-r">
+    <div className="border-r">
       <div className="flex flex-col gap-1 p-2">
         <ButtonWithTooltip
           active={activeMode === ThemeEditorViewEnum.Desktop}

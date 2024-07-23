@@ -87,14 +87,15 @@ export const useThemeEditorApi = ({
       colors: {
         ...core_theme_editor__show.colors,
         ['primary-foreground']:
-          core_theme_editor__show.colors.primary_foreground,
+          core_theme_editor__show.colors?.primary_foreground,
         ['secondary-foreground']:
-          core_theme_editor__show.colors.secondary_foreground,
+          core_theme_editor__show.colors?.secondary_foreground,
         ['destructive-foreground']:
-          core_theme_editor__show.colors.destructive_foreground,
-        ['cover-foreground']: core_theme_editor__show.colors.cover_foreground,
-        ['accent-foreground']: core_theme_editor__show.colors.accent_foreground,
-        ['muted-foreground']: core_theme_editor__show.colors.muted_foreground,
+          core_theme_editor__show.colors?.destructive_foreground,
+        ['cover-foreground']: core_theme_editor__show.colors?.cover_foreground,
+        ['accent-foreground']:
+          core_theme_editor__show.colors?.accent_foreground,
+        ['muted-foreground']: core_theme_editor__show.colors?.muted_foreground,
       },
       logos: {
         light: [],
@@ -131,15 +132,15 @@ export const useThemeEditorApi = ({
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const mutation = await mutationApi({
       colors: {
-        primary: values.colors.primary,
-        secondary: values.colors.secondary,
-        background: values.colors.background,
-        destructive: values.colors.destructive,
-        cover: values.colors.cover,
-        accent: values.colors.accent,
-        muted: values.colors.muted,
-        card: values.colors.card,
-        border: values.colors.border,
+        primary: values.colors?.primary,
+        secondary: values.colors?.secondary,
+        background: values.colors?.background,
+        destructive: values.colors?.destructive,
+        cover: values.colors?.cover,
+        accent: values.colors?.accent,
+        muted: values.colors?.muted,
+        card: values.colors?.card,
+        border: values.colors?.border,
         primary_foreground: values.colors['primary-foreground'],
         secondary_foreground: values.colors['secondary-foreground'],
         destructive_foreground: values.colors['destructive-foreground'],
