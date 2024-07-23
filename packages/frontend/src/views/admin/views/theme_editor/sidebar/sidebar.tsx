@@ -30,7 +30,7 @@ export const SidebarThemeEditor = () => {
   return (
     <Form {...form}>
       <form
-        className="relative flex h-full flex-1 flex-col"
+        className="relative flex h-full w-64 flex-1 flex-col border-e"
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <AnimatePresence mode="popLayout" initial={false}>

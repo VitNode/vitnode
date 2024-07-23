@@ -1,6 +1,8 @@
 'use client';
 
 import React from 'react';
+import { useTranslations } from 'next-intl';
+import { Undo2 } from 'lucide-react';
 
 import { ThemeEditorViewEnum, ToolbarThemeEditor } from './toolbar';
 import { ThemeEditorContext, ThemeEditorTab } from './hooks/use-theme-editor';
@@ -13,8 +15,13 @@ import { Core_Theme_Editor__ShowQuery } from '@/graphql/graphql';
 import { CONFIG } from '@/helpers/config-with-env';
 import { cn } from '@/helpers/classnames';
 import { Loader } from '@/components/ui/loader';
+import { Card } from '@/components/ui/card';
+import { Link } from '@/navigation';
+import { buttonVariants } from '@/components/ui/button';
 
 export const ContentThemeEditor = (props: Core_Theme_Editor__ShowQuery) => {
+  const t = useTranslations('admin.configs');
+  const tCore = useTranslations('core');
   const { activeTheme, iframeRef, ...rest } = useThemeEditorApi(props);
   const [activeMode, setActiveMode] = React.useState<ThemeEditorViewEnum>(
     ThemeEditorViewEnum.Desktop,
@@ -43,8 +50,22 @@ export const ContentThemeEditor = (props: Core_Theme_Editor__ShowQuery) => {
         ...rest,
       }}
     >
+      <div className="bg-background fixed left-0 top-0 z-40 m-auto h-full w-full p-6 sm:hidden">
+        <Card className="space-y-4 p-5 text-center sm:hidden">
+          <div>{t('mobile_not_supported')}</div>
+          <Link
+            href="/admin/core/dashboard"
+            className={buttonVariants({})}
+            aria-label={tCore('go_back')}
+          >
+            <Undo2 />
+            {tCore('go_back')}
+          </Link>
+        </Card>
+      </div>
+
       <div className="bg-card flex h-dvh w-full">
-        <div className="bg-card fixed left-0 top-0 z-30 flex h-dvh w-80 border-e">
+        <div className="bg-card fixed left-0 top-0 z-30 flex h-dvh">
           <ToolbarThemeEditor
             setActiveMode={setActiveMode}
             activeMode={activeMode}
@@ -52,7 +73,7 @@ export const ContentThemeEditor = (props: Core_Theme_Editor__ShowQuery) => {
           <SidebarThemeEditor />
         </div>
 
-        <div className="ml-80 flex flex-1 items-center justify-center">
+        <div className="ml-[313] flex flex-1 items-center justify-center">
           <iframe
             ref={iframeRef}
             title={CONFIG.frontend_url}

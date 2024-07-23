@@ -62,8 +62,8 @@ export const ToolbarThemeEditor = ({
   };
 
   return (
-    <div className="border-r">
-      <div className="flex flex-col gap-1 p-2">
+    <div className="flex w-14 flex-col items-center gap-4 border-e">
+      <div className="flex flex-col gap-1 py-2">
         <ButtonWithTooltip
           active={activeMode === ThemeEditorViewEnum.Desktop}
           onClick={() => setActiveMode(ThemeEditorViewEnum.Desktop)}
@@ -89,7 +89,7 @@ export const ToolbarThemeEditor = ({
         </ButtonWithTooltip>
       </div>
 
-      <div className="flex flex-col gap-1 p-2">
+      <div className="flex flex-col gap-1 py-2">
         <ButtonWithTooltip
           active={activeTheme === 'light'}
           onClick={() => setTheme('light')}
