@@ -19,10 +19,10 @@
     "lint:fix": "eslint . --fix"
   },
   "peerDependencies": {
-    "typescript": "^5.5.3"
+    "typescript": "^5.5.4"
   },
   "devDependencies": {
     "eslint-config-typescript-vitnode": "workspace:*",
-    "typescript": "^5.5.3"
+    "typescript": "^5.5.4"
   }
 }
