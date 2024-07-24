@@ -14,7 +14,7 @@
     "vitnode-frontend": "dist/scripts/setup.js"
   },
   "exports": {
-    "./next.config": "./next.config.mjs",
+    "./next.config": "./next.config.ts",
     "./tailwind.config": "./tailwind.config.ts",
     "./middleware": {
       "types": "./dist/src/middleware.ts",

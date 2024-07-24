@@ -10,8 +10,7 @@
     ".next",
     "global.d.ts",
     "utils/graphql.ts",
-    "tailwind.config.ts",
-    "next.config.mjs"
+    "tailwind.config.ts"
   ],
   "plugins": ["jsx-a11y"],
   "rules": {
