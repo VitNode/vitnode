@@ -28,6 +28,15 @@ export interface ConfigType {
     default: boolean;
     enabled: boolean;
   }[];
+  logos: {
+    mobile_width: number;
+    text: string;
+    width: number;
+    dark?: string;
+    light?: string;
+    mobile_dark?: string;
+    mobile_light?: string;
+  };
   rebuild_required: {
     langs: boolean;
     plugins: boolean;
@@ -51,6 +60,11 @@ export interface ConfigType {
 }
 
 export const DEFAULT_CONFIG_DATA: ConfigType = {
+  logos: {
+    text: 'VitNode Website',
+    width: 120,
+    mobile_width: 60,
+  },
   security: {
     captcha: {
       type: CaptchaTypeEnum.none,

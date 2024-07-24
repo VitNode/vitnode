@@ -214,6 +214,17 @@ export type LayoutAdminInstallObj = {
   status: LayoutAdminInstallEnum | `${LayoutAdminInstallEnum}`;
 };
 
+export type LogoShowCoreThemeEditor = {
+  __typename?: 'LogoShowCoreThemeEditor';
+  text: Scalars['String']['output'];
+};
+
+export type LogosEditAdminThemeEditor = {
+  mobile_width: Scalars['Int']['input'];
+  text: Scalars['String']['input'];
+  width: Scalars['Int']['input'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   admin__core_email_settings__edit: ShowAdminEmailSettingsServiceObj;
@@ -519,7 +530,8 @@ export type MutationAdmin__Core_Styles__Nav__EditArgs = {
 
 
 export type MutationAdmin__Core_Theme_Editor__EditArgs = {
-  colors: ColorsEditAdminThemeEditor;
+  colors?: InputMaybe<ColorsEditAdminThemeEditor>;
+  logos: LogosEditAdminThemeEditor;
 };
 
 
@@ -1132,6 +1144,7 @@ export type ShowCoreSessionDevicesObj = {
 export type ShowCoreThemeEditorObj = {
   __typename?: 'ShowCoreThemeEditorObj';
   colors?: Maybe<ColorsShowCoreThemeEditor>;
+  logos: LogoShowCoreThemeEditor;
 };
 
 export type ShowSettingsObj = {
@@ -1528,7 +1541,8 @@ export type Admin__Core_Styles__Nav__EditMutationVariables = Exact<{
 export type Admin__Core_Styles__Nav__EditMutation = { __typename?: 'Mutation', admin__core_styles__nav__edit: { __typename?: 'ShowCoreNav', id: number } };
 
 export type Admin__Core_Theme_Editor__EditMutationVariables = Exact<{
-  colors: ColorsEditAdminThemeEditor;
+  colors?: InputMaybe<ColorsEditAdminThemeEditor>;
+  logos: LogosEditAdminThemeEditor;
 }>;
 
 
@@ -1755,7 +1769,7 @@ export type Admin__Core_Nav__ShowQuery = { __typename?: 'Query', core_nav__show:
 export type Core_Theme_Editor__ShowQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Core_Theme_Editor__ShowQuery = { __typename?: 'Query', core_theme_editor__show: { __typename?: 'ShowCoreThemeEditorObj', colors?: { __typename?: 'ColorsShowCoreThemeEditor', background: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, primary: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, secondary: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, primary_foreground: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, secondary_foreground: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, destructive: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, destructive_foreground: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, cover: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, cover_foreground: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, muted: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, muted_foreground: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, accent: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, accent_foreground: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, card: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, border: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } } } | null } };
+export type Core_Theme_Editor__ShowQuery = { __typename?: 'Query', core_theme_editor__show: { __typename?: 'ShowCoreThemeEditorObj', colors?: { __typename?: 'ColorsShowCoreThemeEditor', background: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, primary: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, secondary: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, primary_foreground: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, secondary_foreground: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, destructive: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, destructive_foreground: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, cover: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, cover_foreground: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, muted: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, muted_foreground: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, accent: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, accent_foreground: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, card: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, border: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } } } | null, logos: { __typename?: 'LogoShowCoreThemeEditor', text: string } } };
 
 export type Core_GlobalQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2122,8 +2136,8 @@ export const Admin__Core_Styles__Nav__Edit = gql`
 }
     `;
 export const Admin__Core_Theme_Editor__Edit = gql`
-    mutation Admin__core_theme_editor__edit($colors: ColorsEditAdminThemeEditor!) {
-  admin__core_theme_editor__edit(colors: $colors)
+    mutation Admin__core_theme_editor__edit($colors: ColorsEditAdminThemeEditor, $logos: LogosEditAdminThemeEditor!) {
+  admin__core_theme_editor__edit(colors: $colors, logos: $logos)
 }
     `;
 export const Core_Editor_Files__Delete = gql`
@@ -2905,6 +2919,9 @@ export const Core_Theme_Editor__Show = gql`
           s
         }
       }
+    }
+    logos {
+      text
     }
   }
 }

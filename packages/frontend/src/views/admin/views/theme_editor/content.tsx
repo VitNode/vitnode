@@ -84,7 +84,10 @@ export const ContentThemeEditor = (props: Core_Theme_Editor__ShowQuery) => {
             })}
             src={CONFIG.frontend_url}
             onLoad={() => {
-              if (CONFIG.node_development) return;
+              const colors = rest.form.getValues().colors;
+              if (CONFIG.node_development || !colors) {
+                return;
+              }
 
               const iframe =
                 iframeRef.current?.contentWindow?.document.querySelector(
@@ -93,7 +96,7 @@ export const ContentThemeEditor = (props: Core_Theme_Editor__ShowQuery) => {
               if (!iframe) return;
 
               keysFromCSSThemeEditor.forEach(key => {
-                const color = rest.form.getValues().colors[key][activeTheme];
+                const color = colors[key][activeTheme];
                 iframe.style.setProperty(
                   `--${key}`,
                   `${color.h} ${color.s}% ${color.l}%`,

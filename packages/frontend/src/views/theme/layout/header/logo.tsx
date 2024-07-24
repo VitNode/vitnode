@@ -41,7 +41,7 @@ export const LogoHeader = () => {
   });
 
   return (
-    <Link href="/">
+    <Link id="vitnode_logo" href="/">
       <picture className="hidden dark:block">
         <source srcSet={dark} media="(min-width: 640px)" />
         <source srcSet={mobileDark} />

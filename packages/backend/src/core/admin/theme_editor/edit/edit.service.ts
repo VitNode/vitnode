@@ -5,7 +5,11 @@ import { Injectable } from '@nestjs/common';
 
 import { EditAdminThemeEditorArgs, ThemeVariableInput } from './dto/edit.args';
 
-import { ABSOLUTE_PATHS_BACKEND, NotFoundError } from '../../../..';
+import {
+  ABSOLUTE_PATHS_BACKEND,
+  getConfigFile,
+  NotFoundError,
+} from '../../../..';
 import { keysFromCSSThemeEditor } from '../../../theme_editor/theme_editor.module';
 
 @Injectable()
@@ -37,7 +41,7 @@ export class EditAdminThemeEditorService {
     });
   }
 
-  async edit({ colors }: EditAdminThemeEditorArgs): Promise<string> {
+  protected updateColors(colors: EditAdminThemeEditorArgs['colors']) {
     const pathToCss = join(
       ABSOLUTE_PATHS_BACKEND.frontend.init,
       'app',
@@ -62,6 +66,15 @@ export class EditAdminThemeEditorService {
     });
 
     fs.writeFileSync(pathToCss, colorsStringUpdate);
+  }
+
+  async edit({ colors, logos }: EditAdminThemeEditorArgs): Promise<string> {
+    if (colors) {
+      this.updateColors(colors);
+    }
+
+    const config = getConfigFile();
+    config.logos = logos;
 
     return 'Success!';
   }

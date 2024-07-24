@@ -182,5 +182,8 @@ query Core_theme_editor__show {
         }
       }
     }
+    logos {
+      text
+    }
   }
 }

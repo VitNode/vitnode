@@ -10,7 +10,7 @@ import {
 } from './dto/show.obj';
 import { keysFromCSSThemeEditor } from '../theme_editor.module';
 
-import { ABSOLUTE_PATHS_BACKEND } from '@/index';
+import { ABSOLUTE_PATHS_BACKEND, getConfigFile } from '@/index';
 
 @Injectable()
 export class ShowCoreThemeEditorService {
@@ -94,11 +94,11 @@ export class ShowCoreThemeEditorService {
   }
 
   show(): ShowCoreThemeEditorObj {
+    const config = getConfigFile();
+
     return {
       colors: this.getColors(),
-      logos: {
-        text: 'Logo',
-      },
+      logos: config.logos,
     };
   }
 }

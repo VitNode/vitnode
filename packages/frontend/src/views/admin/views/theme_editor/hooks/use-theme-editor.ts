@@ -16,7 +16,16 @@ interface ColorObj {
 }
 
 interface ThemeEditorFormObj {
-  colors: {
+  logos: {
+    dark: File[];
+    light: File[];
+    mobile_dark: File[];
+    mobile_light: File[];
+    mobile_width: number;
+    text: string;
+    width: number;
+  };
+  colors?: {
     accent: ColorObj;
     'accent-foreground': ColorObj;
     background: ColorObj;
@@ -32,15 +41,6 @@ interface ThemeEditorFormObj {
     'primary-foreground': ColorObj;
     secondary: ColorObj;
     'secondary-foreground': ColorObj;
-  };
-  logos: {
-    dark: File[];
-    light: File[];
-    mobile_dark: File[];
-    mobile_light: File[];
-    mobile_width: number;
-    text: string;
-    width: number;
   };
 }
 

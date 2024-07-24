@@ -73,6 +73,7 @@ export const SidebarThemeEditor = () => {
             <SubmitSidebarThemeEditor
               onClick={async () => form.handleSubmit(onSubmit)()}
               isPending={form.formState.isSubmitting}
+              disable={!form.formState.isDirty}
               openSubmitDialog={openSubmitDialog}
               setOpenSubmitDialog={setOpenSubmitDialog}
             />

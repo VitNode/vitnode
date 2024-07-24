@@ -1,4 +1,4 @@
-import { Undo2 } from 'lucide-react';
+import { ChevronLeft } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 import { Button } from '@/components/ui/button';
@@ -31,7 +31,7 @@ export const LogosTabThemeEditor = () => {
           ariaLabel={tCore('go_back')}
           onClick={() => setActiveTab(ThemeEditorTab.Main)}
         >
-          <Undo2 />
+          <ChevronLeft />
         </Button>
 
         <h2 className="font-bold">{t('title')}</h2>

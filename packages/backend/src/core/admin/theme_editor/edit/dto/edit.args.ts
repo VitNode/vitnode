@@ -69,8 +69,23 @@ class ColorsEditAdminThemeEditor {
   border: ThemeVariableInput;
 }
 
+@InputType()
+class LogosEditAdminThemeEditor {
+  @Field(() => Int)
+  width: number;
+
+  @Field(() => Int)
+  mobile_width: number;
+
+  @Field()
+  text: string;
+}
+
 @ArgsType()
 export class EditAdminThemeEditorArgs {
-  @Field(() => ColorsEditAdminThemeEditor)
-  colors: ColorsEditAdminThemeEditor;
+  @Field(() => ColorsEditAdminThemeEditor, { nullable: true })
+  colors?: ColorsEditAdminThemeEditor;
+
+  @Field(() => LogosEditAdminThemeEditor)
+  logos: LogosEditAdminThemeEditor;
 }

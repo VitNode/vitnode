@@ -1,0 +1,26 @@
+---
+title: Files
+description: How to upload files to the system.
+---
+
+VitNode has a file system that allows you to upload files to the system dynamically. VitNode will save the files in the:
+
+- `public` folder - for public files _(accessible via URL)_.
+- `private` folder - for private files _(accessible only via the API)_.
+
+## Backend Usage
+
+### Arguments
+
+```ts title="example.args.ts"
+import { ArgsType, Field } from '@nestjs/graphql';
+import { FileUpload, GraphQLUpload } from 'vitnode-backend'; // [!code highlight]
+
+@ArgsType()
+export class ExampleArgs {
+  @Field(() => GraphQLUpload) // [!code highlight]
+  file: Promise<FileUpload>; // [!code highlight]
+}
+```
+
+Read more about [Arguments GraphQL](/docs/dev/services#arguments).

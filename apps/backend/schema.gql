@@ -184,6 +184,16 @@ type LayoutAdminInstallObj {
   status: LayoutAdminInstallEnum!
 }
 
+type LogoShowCoreThemeEditor {
+  text: String!
+}
+
+input LogosEditAdminThemeEditor {
+  mobile_width: Int!
+  text: String!
+  width: Int!
+}
+
 type Mutation {
   admin__core_email_settings__edit(color_primary: String!, color_primary_foreground: String!, smtp_host: String!, smtp_password: String!, smtp_port: Int!, smtp_secure: Boolean!, smtp_user: String!): ShowAdminEmailSettingsServiceObj!
   admin__core_email_settings__test(from: String!, message: String!, preview_text: String, subject: String!, to: String!): String!
@@ -218,7 +228,7 @@ type Mutation {
   admin__core_styles__nav__create(description: [TextLanguageInput!]!, external: Boolean!, href: String!, icon: String, name: [TextLanguageInput!]!): ShowCoreNav!
   admin__core_styles__nav__delete(id: Int!): String!
   admin__core_styles__nav__edit(description: [TextLanguageInput!]!, external: Boolean!, href: String!, icon: String, id: Int!, name: [TextLanguageInput!]!): ShowCoreNav!
-  admin__core_theme_editor__edit(colors: ColorsEditAdminThemeEditor!): String!
+  admin__core_theme_editor__edit(colors: ColorsEditAdminThemeEditor, logos: LogosEditAdminThemeEditor!): String!
   admin__install__create_database: String!
   admin_sessions__sign_out: String!
   core_editor_files__delete(id: Int!, security_key: String): String!
@@ -644,6 +654,7 @@ type ShowCoreSessionDevicesObj {
 
 type ShowCoreThemeEditorObj {
   colors: ColorsShowCoreThemeEditor
+  logos: LogoShowCoreThemeEditor!
 }
 
 type ShowSettingsObj {
