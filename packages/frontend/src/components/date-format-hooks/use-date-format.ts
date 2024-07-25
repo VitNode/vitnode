@@ -1,6 +1,4 @@
-import { useLocale } from 'next-intl';
-import * as localeDate from 'date-fns/locale';
-import { format, formatDistance } from 'date-fns';
+import { useFormatter, useLocale, useNow } from 'next-intl';
 
 import { useGlobals } from '../../hooks/use-globals';
 
@@ -11,55 +9,41 @@ interface Args {
 export const useDateFormat = ({ date }: Args) => {
   const currentLocale = useLocale();
   const { languages } = useGlobals();
+  const format = useFormatter();
   const currentLanguage = languages.find(
     language => language.code === currentLocale,
   );
+  const dateToFormat = new Date(date);
 
-  const currentTime = new Date(date);
+  const now = useNow({
+    // Update it every 30 seconds if it's less than a day
+    updateInterval:
+      new Date().getTime() - dateToFormat.getTime() < 86400000 ? 30000 : 0,
+  });
 
-  const relative = Math.floor(
-    (new Date().getTime() - currentTime.getTime()) / 1000,
-  );
+  const fullDate = format.dateTime(dateToFormat, {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    timeZone: currentLanguage?.timezone,
+    hour12: !currentLanguage?.time_24,
+  });
 
-  const getDateFormat = (dateFormat: string) => {
-    const locale = currentLanguage?.locale || 'enUS';
-
-    return format(currentTime, dateFormat, {
-      locale: localeDate[locale as keyof typeof localeDate],
-    });
-  };
-
-  const fullDate = getDateFormat('P p');
-
-  const getDateWithFormatDistance = () => {
-    // When date is < 1 day
-    if (relative < 86400) {
-      const locale = currentLanguage?.locale || 'enUS';
-
-      return formatDistance(currentTime, new Date(), {
-        addSuffix: true,
-        locale: localeDate[locale as keyof typeof localeDate],
-      });
-    }
-
+  const getDate = () => {
     // When date is < 7 days
-    if (relative < 604800) {
-      return getDateFormat(
-        currentLanguage?.time_24 ? 'EEEE, H:mm' : 'EEEE, H:mm a',
-      );
+    if (now.getTime() - dateToFormat.getTime() < 604800000) {
+      return format.relativeTime(dateToFormat, now);
     }
 
-    // When date is < 1 year
-    return getDateFormat(
-      currentLanguage?.time_24 ? 'd MMMM, H:mm' : 'MMMM d, H:mm a',
-    );
+    return fullDate;
   };
 
   return {
     fullDate,
-    getDateWithFormatDistance,
-    currentTime,
-    getDateFormat,
+    getDate,
     currentLanguage,
+    now,
   };
 };

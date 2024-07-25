@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'framer-motion';
 
 import { buttonVariants } from './button';
 
@@ -51,18 +50,6 @@ export const TabsTrigger = ({
   const active = activeFromProps || (href && pathname.includes(href));
   const dataState = active ? 'active' : 'inactive';
 
-  const activeBar = active ? (
-    <motion.span
-      className="bg-primary absolute bottom-0 left-0 h-[2px] w-full rounded-sm"
-      layoutId="tabs-trigger-active"
-      transition={{
-        duration: 0.18,
-        ease: 'easeInOut',
-      }}
-      style={{ originY: '0px' }}
-    />
-  ) : null;
-
   const className = buttonVariants({
     variant: 'ghost',
     className: cn(
@@ -84,7 +71,6 @@ export const TabsTrigger = ({
           className={className}
           onClick={onClick}
         >
-          {activeBar}
           {children}
         </Link>
       </Wrapper>
@@ -99,7 +85,6 @@ export const TabsTrigger = ({
         className={className}
         onClick={onClick}
       >
-        {activeBar}
         {children}
       </button>
     </Wrapper>

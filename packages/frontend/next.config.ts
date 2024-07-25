@@ -1,9 +1,9 @@
+import { NextConfig } from 'next';
 import createNextIntlPlugin from 'next-intl/plugin';
 
 const withNextIntl = createNextIntlPlugin();
 
-/** @type {import('next').NextConfig} */
-const nextConfig = config => {
+const nextConfig = (config: NextConfig): NextConfig => {
   return {
     ...config,
     // TODO: Remove this when the framer-motion issue is fixed for React 19
@@ -16,6 +16,6 @@ const nextConfig = config => {
   };
 };
 
-export default function (config) {
-  return withNextIntl(nextConfig(config));
+export default function NextConfigDefault(config?: NextConfig): NextConfig {
+  return withNextIntl(nextConfig(config || {}));
 }

@@ -10,6 +10,7 @@ import {
 } from '@/graphql/graphql';
 import { CardContent, CardDescription, CardHeader } from '@/components/ui/card';
 import { fetcher } from '@/graphql/fetcher';
+import { redirect } from '@/navigation';
 
 const getData = async () => {
   const data = await fetcher<
@@ -32,14 +33,13 @@ export const generateMetadataDevicesSettings = async (): Promise<Metadata> => {
 };
 
 export const DevicesSettingsView = async () => {
-  const t = await getTranslations('core.settings.devices');
-  const data = await getData();
+  const [t, data] = await Promise.all([
+    getTranslations('core.settings.devices'),
+    getData(),
+  ]);
   const cookieStore = cookies();
   const loginToken = cookieStore.get('vitnode-login-token')?.value;
-
-  if (!loginToken) {
-    return null;
-  }
+  if (!loginToken) return redirect('/login');
 
   return (
     <>
