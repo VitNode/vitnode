@@ -20,7 +20,7 @@ export const core_languages = pgTable(
     created: timestamp('created').notNull().defaultNow(),
     updated: timestamp('updated').notNull().defaultNow(),
     time_24: boolean('time_24').notNull().default(false),
-    locale: varchar('locale', { length: 50 }).notNull().default('enUS'),
+    locale: varchar('locale', { length: 50 }).notNull().default('en'),
     allow_in_input: boolean('allow_in_input').default(true),
     site_copyright: varchar('site_copyright', {
       length: 255,

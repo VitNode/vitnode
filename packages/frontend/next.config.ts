@@ -16,6 +16,6 @@ const nextConfig = (config: NextConfig): NextConfig => {
   };
 };
 
-export default function NextConfigDefault(config: NextConfig): NextConfig {
-  return withNextIntl(nextConfig(config));
+export default function NextConfigDefault(config?: NextConfig): NextConfig {
+  return withNextIntl(nextConfig(config || {}));
 }

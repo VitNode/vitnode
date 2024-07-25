@@ -1,4 +1,4 @@
-import { NextConfig } from 'next';
+import type { NextConfig } from 'next';
 import VitNodeConfig from 'vitnode-frontend/next.config';
 import bundleAnalyzer from '@next/bundle-analyzer';
 
@@ -6,6 +6,7 @@ const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
 });
 
-const nextConfig: NextConfig = {};
+// @ts-ignore
+const nextConfig: NextConfig = withBundleAnalyzer({});
 
-export default withBundleAnalyzer(VitNodeConfig(nextConfig));
+export default VitNodeConfig(nextConfig);

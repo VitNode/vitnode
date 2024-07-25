@@ -51,7 +51,7 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
 <Step>
 ### Component
 
-Inside your form component, create a div with an id of `vitnode_recaptcha` to render the captcha.
+Inside your form component, create a div with an id of `vitnode_captcha` to render the captcha.
 
 ```tsx title="content.tsx"
 'use client';
@@ -67,7 +67,7 @@ export const FormSignUp = () => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <CardContent className="space-y-4">
-          <div id="vitnode_recaptcha" /> // [!code highlight]
+          <div id="vitnode_captcha" /> // [!code highlight]
         </CardContent>
       </form>
     </Form>

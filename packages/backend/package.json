@@ -99,8 +99,8 @@
     "express": "^4.19.2",
     "graphql": "^16.9.0",
     "pg": "^8.12.0",
-    "react": "19.0.0-rc-fb9a90fa48-20240614",
-    "react-dom": "19.0.0-rc-fb9a90fa48-20240614",
+    "react": "^19.0.0-rc.0",
+    "react-dom": "^19.0.0-rc.0",
     "ts-node": "^10.9.2",
     "tsup": "^8.2.2",
     "typescript": "^5.5.4"

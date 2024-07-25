@@ -85,12 +85,12 @@
   ],
   "peerDependencies": {
     "graphql-tag": "^2.12.6",
+    "lucide-react": "^0.414.0",
     "next": "15.0.0-canary.79",
     "next-intl": "^3.17.1",
     "postcss": "^8.4.39",
     "react": "^19.0.0-rc.0",
     "react-dom": "^19.0.0-rc.0",
-    "lucide-react": "^0.414.0",
     "tailwindcss": "^3.4.6",
     "typescript": "^5.5.4"
   },
@@ -113,8 +113,8 @@
     "lucide-react": "^0.414.0",
     "next": "15.0.0-canary.79",
     "next-intl": "^3.17.2",
-    "react": "19.0.0-rc-fb9a90fa48-20240614",
-    "react-dom": "19.0.0-rc-fb9a90fa48-20240614",
+    "react": "^19.0.0-rc.0",
+    "react-dom": "^19.0.0-rc.0",
     "tailwindcss": "^3.4.6",
     "tsup": "^8.2.2",
     "typescript": "^5.5.4"
@@ -163,7 +163,6 @@
     "clsx": "^2.1.1",
     "cmdk": "^1.0.0",
     "cropperjs": "^1.6.2",
-    "date-fns": "^3.6.0",
     "embla-carousel-react": "^8.1.7",
     "emoji-mart": "^5.6.0",
     "framer-motion": "^11.3.12",

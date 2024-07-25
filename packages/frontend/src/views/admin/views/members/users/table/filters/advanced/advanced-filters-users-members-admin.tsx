@@ -6,19 +6,11 @@ import { useSearchParams } from 'next/navigation';
 import { convertDateToUnixTime } from 'vitnode-shared';
 
 import { usePathname, useRouter } from '@/navigation';
-import {
-  Form,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
-import { CalendarPicker } from '@/components/ui/calendar-picker';
+import { Form } from '@/components/ui/form';
 import { SheetClose, SheetFooter } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 
 export const AdvancedFiltersUsersMembersAdmin = () => {
-  const t = useTranslations('admin.members.users');
   const tCore = useTranslations('core');
   const router = useRouter();
   const pathname = usePathname();
@@ -61,7 +53,7 @@ export const AdvancedFiltersUsersMembersAdmin = () => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 py-6">
-        <FormField
+        {/* <FormField
           control={form.control}
           name="date"
           render={({ field }) => (
@@ -74,7 +66,7 @@ export const AdvancedFiltersUsersMembersAdmin = () => {
               <FormMessage />
             </FormItem>
           )}
-        />
+        /> */}
 
         <SheetFooter>
           <SheetClose asChild>

@@ -33,7 +33,6 @@ export const SignUpView = () => {
             })}
           </CardDescription>
         </CardHeader>
-
         <FormSignUp />
       </Card>
     </div>

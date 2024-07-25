@@ -85,7 +85,7 @@ export const AuthUserBar = () => {
         <DropdownMenuSeparator />
 
         <DropdownMenuGroup>
-          <DropdownMenuItem onClick={async () => onSubmit()}>
+          <DropdownMenuItem onClick={onSubmit}>
             <LogOut />
             <span>{t('user-bar.log_out')}</span>
           </DropdownMenuItem>
