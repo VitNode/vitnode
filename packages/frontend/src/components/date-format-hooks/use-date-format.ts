@@ -16,9 +16,9 @@ export const useDateFormat = ({ date }: Args) => {
   const dateToFormat = new Date(date);
 
   const now = useNow({
-    // Update it every 30 seconds if it's less than a day
+    // Update it every 1 minute if the date is from today, otherwise don't update
     updateInterval:
-      new Date().getTime() - dateToFormat.getTime() < 86400000 ? 30000 : 0,
+      new Date().getTime() - dateToFormat.getTime() < 86400000 ? 60000 : 0,
   });
 
   const fullDate = format.dateTime(dateToFormat, {

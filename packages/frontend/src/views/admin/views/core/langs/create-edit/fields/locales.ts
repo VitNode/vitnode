@@ -1,4 +1,4 @@
-export const locales: { name: string; locale: string }[] = [
+export const locales: { locale: string; name: string }[] = [
   {
     name: 'Afrikaans (Afrikaans)',
     locale: 'af',
