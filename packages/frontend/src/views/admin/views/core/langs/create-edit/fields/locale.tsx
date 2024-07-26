@@ -2,8 +2,8 @@ import { useTranslations } from 'next-intl';
 import React from 'react';
 import { Check } from 'lucide-react';
 import { ControllerRenderProps, FieldValues, Path } from 'react-hook-form';
-import { locales } from './locales';
 
+import { locales } from './locales';
 import {
   FormControl,
   FormItem,

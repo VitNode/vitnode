@@ -9,6 +9,18 @@ description: Powerful table and datagrids built using TanStack Table.
 
 ```
 
-## Documentation
+## API Reference
 
-[Tanstack Table Documentation](https://tanstack.com/table/v8/docs/introduction).
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+<TypeTable
+  type={{
+    data: {
+      description: 'Data source for the table.',
+      type: '[]',
+    },
+    columns: {
+      description: 'Columns configuration for the table.',
+    },
+  }}
+/>
