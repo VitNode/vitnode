@@ -16,8 +16,8 @@ import {
 } from '@/components/ui/tooltip';
 import { Link } from '@/navigation';
 import { buttonVariants } from '@/components/ui/button';
-import { DataTable } from '@/components/data-table/data-table';
 import { DateFormat } from '@/components/date-format';
+import { DataTable } from '@/components/ui/data-table';
 
 export const ContentFilesSettings = ({
   core_files__show: { edges, pageInfo },

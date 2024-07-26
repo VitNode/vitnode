@@ -2,7 +2,7 @@ import { getTranslations } from 'next-intl/server';
 import { Metadata } from 'next';
 
 import { ActionsPluginsAdmin } from './actions/actions';
-import { ContentPluginsCoreAdminView } from './content';
+import { ContentPluginsCoreAdmin } from './content';
 import {
   Admin__Core_Plugins__Show,
   Admin__Core_Plugins__ShowQuery,
@@ -66,7 +66,7 @@ export const PluginsAdminView = async ({
 
       <Card className="p-6">
         <RebuildRequiredAdmin />
-        <ContentPluginsCoreAdminView {...data} />
+        <ContentPluginsCoreAdmin {...data} />
       </Card>
     </>
   );

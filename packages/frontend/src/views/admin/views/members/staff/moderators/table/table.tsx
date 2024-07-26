@@ -10,7 +10,7 @@ import { UserLink } from '@/components/ui/user/link';
 import { GroupFormat } from '@/components/ui/user/group-format';
 import { Badge } from '@/components/ui/badge';
 import { DateFormat } from '@/components/date-format';
-import { DataTable } from '@/components/data-table/data-table';
+import { DataTable } from '@/components/ui/data-table';
 
 export const TableModeratorsStaffAdmin = ({
   admin__core_staff_moderators__show: { edges, pageInfo },

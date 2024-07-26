@@ -17,7 +17,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-import { DataTable } from '@/components/data-table/data-table';
+import { DataTable } from '@/components/ui/data-table';
 
 export const ContentFilesAdvancedCoreAdminView = ({
   admin__core_files__show: { edges, pageInfo },

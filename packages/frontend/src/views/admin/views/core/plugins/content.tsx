@@ -7,10 +7,10 @@ import { ExternalLink } from 'lucide-react';
 import { ActionsItemPluginsAdmin } from './table/actions/actions';
 import { Admin__Core_Plugins__ShowQuery } from '@/graphql/graphql';
 import { DateFormat } from '@/components/date-format';
-import { DataTable } from '@/components/data-table/data-table';
 import { Badge } from '@/components/ui/badge';
+import { DataTable } from '@/components/ui/data-table';
 
-export const ContentPluginsCoreAdminView = ({
+export const ContentPluginsCoreAdmin = ({
   admin__core_plugins__show: { edges, pageInfo },
 }: Admin__Core_Plugins__ShowQuery) => {
   const t = useTranslations('admin.core.plugins');

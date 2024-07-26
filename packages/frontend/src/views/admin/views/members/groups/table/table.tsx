@@ -9,7 +9,7 @@ import { useTextLang } from '@/hooks/use-text-lang';
 import { Badge } from '@/components/ui/badge';
 import { Link } from '@/navigation';
 import { DateFormat } from '@/components/date-format';
-import { DataTable } from '@/components/data-table/data-table';
+import { DataTable } from '@/components/ui/data-table';
 
 export const TableGroupsMembersAdmin = ({
   admin__core_groups__show: { edges, pageInfo },

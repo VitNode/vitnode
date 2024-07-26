@@ -8,7 +8,7 @@ import { EnabledRowTableLangsCoreAdmin } from './enabled-row';
 import { Admin__Core_Languages__ShowQuery } from '@/graphql/graphql';
 import { Badge } from '@/components/ui/badge';
 import { DateFormat } from '@/components/date-format';
-import { DataTable } from '@/components/data-table/data-table';
+import { DataTable } from '@/components/ui/data-table';
 
 export const ContentLangsCoreAdminView = ({
   core_languages__show: { edges, pageInfo },
