@@ -38,6 +38,22 @@ import {
   EditorAdminView,
   generateMetadataEditorAdmin,
 } from './core/styles/editor/editor-admin-view';
+import {
+  generateMetadataModeratorsStaffAdmin,
+  ModeratorsStaffAdminView,
+} from './members/staff/moderators/moderators-view';
+import {
+  AdministratorsStaffAdminView,
+  generateMetadataAdministratorsStaffAdmin,
+} from './members/staff/administrators/administrators-view';
+import {
+  generateMetadataGroupsMembersAdmin,
+  GroupsMembersAdminView,
+} from './members/groups/groups-members-admin-view';
+import {
+  generateMetadataPluginsAdmin,
+  PluginsAdminView,
+} from './core/plugins/plugins-admin-view';
 
 export interface SlugAdminViewProps {
   params: { locale: string; slug: string[] };
@@ -78,13 +94,28 @@ export const generateMetadataSlugAdmin = async ({
           break;
         case 'langs':
           return generateMetadataLangsCoreAdmin();
+        case 'plugins':
+          return generateMetadataPluginsAdmin();
         case 'dashboard':
           return {};
       }
       break;
     case 'members':
-      if (slug[1] === 'users') {
-        return generateMetadataUsersMembersAdmin();
+      switch (slug[1]) {
+        case 'users':
+          return generateMetadataUsersMembersAdmin();
+        case 'groups':
+          return generateMetadataGroupsMembersAdmin();
+      }
+      switch (slug[1]) {
+        case 'staff':
+          switch (slug[2]) {
+            case 'moderators':
+              return generateMetadataModeratorsStaffAdmin();
+            case 'administrators':
+              return generateMetadataAdministratorsStaffAdmin();
+          }
+          break;
       }
       break;
   }
@@ -128,13 +159,28 @@ export const SlugAdminView = (props: SlugAdminViewProps) => {
           break;
         case 'langs':
           return <LangsCoreAdminView {...props} />;
+        case 'plugins':
+          return <PluginsAdminView {...props} />;
         case 'dashboard':
           return <DashboardCoreAdminView />;
       }
       break;
     case 'members':
-      if (slug[1] === 'users') {
-        return <UsersMembersAdminView {...props} />;
+      switch (slug[1]) {
+        case 'users':
+          return <UsersMembersAdminView {...props} />;
+        case 'groups':
+          return <GroupsMembersAdminView {...props} />;
+      }
+      switch (slug[1]) {
+        case 'staff':
+          switch (slug[2]) {
+            case 'moderators':
+              return <ModeratorsStaffAdminView {...props} />;
+            case 'administrators':
+              return <AdministratorsStaffAdminView {...props} />;
+          }
+          break;
       }
       break;
   }

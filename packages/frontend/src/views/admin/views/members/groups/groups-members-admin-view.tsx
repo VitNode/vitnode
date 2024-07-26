@@ -33,7 +33,7 @@ export interface GroupsMembersAdminViewProps {
   searchParams: SearchParamsPagination;
 }
 
-export const generateMetadataGroupsMembersAdminView =
+export const generateMetadataGroupsMembersAdmin =
   async (): Promise<Metadata> => {
     const t = await getTranslations('admin.members.groups');
 

@@ -35,7 +35,7 @@ export interface AdministratorsStaffAdminViewProps {
   searchParams: SearchParamsPagination;
 }
 
-export const generateMetadataAdministratorsStaffAdminView =
+export const generateMetadataAdministratorsStaffAdmin =
   async (): Promise<Metadata> => {
     const t = await getTranslations('admin.members.staff.administrators');
 
