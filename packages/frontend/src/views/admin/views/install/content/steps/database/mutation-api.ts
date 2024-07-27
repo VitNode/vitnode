@@ -1,7 +1,5 @@
 'use server';
 
-import { revalidatePath } from 'next/cache';
-
 import {
   Admin__Install__Create_Database,
   Admin__Install__Create_DatabaseMutation,
@@ -20,6 +18,4 @@ export const mutationApi = async () => {
   } catch (e) {
     return { error: e as FetcherErrorType };
   }
-
-  revalidatePath('/admin/install', 'page');
 };

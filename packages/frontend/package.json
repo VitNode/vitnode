@@ -92,6 +92,8 @@
     "react": "^19.0.0-rc.0",
     "react-dom": "^19.0.0-rc.0",
     "tailwindcss": "^3.4.6",
+    "@hookform/resolvers": "^3.9.0",
+    "react-hook-form": "^7.52.1",
     "typescript": "^5.5.4"
   },
   "devDependencies": {
@@ -115,6 +117,7 @@
     "next-intl": "^3.17.2",
     "react": "^19.0.0-rc.0",
     "react-dom": "^19.0.0-rc.0",
+    "react-hook-form": "^7.52.1",
     "tailwindcss": "^3.4.6",
     "tsup": "^8.2.2",
     "typescript": "^5.5.4"
@@ -175,7 +178,6 @@
     "react-colorful": "^5.6.1",
     "react-cropper": "^2.3.3",
     "react-day-picker": "^8.10.1",
-    "react-hook-form": "^7.52.1",
     "react-virtuoso": "^4.7.13",
     "sonner": "^1.5.0",
     "tailwind-merge": "^2.4.0",

@@ -25,9 +25,9 @@ export const mutationApi = async (variables: Args) => {
         'x-vitnode-captcha-token': variables.token,
       },
     });
+
+    revalidatePath('/', 'layout');
   } catch (e) {
     return { error: e as FetcherErrorType };
   }
-
-  revalidatePath('/', 'layout');
 };
