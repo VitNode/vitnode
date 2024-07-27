@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { Injectable } from '@nestjs/common';
 import { and, count, ilike } from 'drizzle-orm';
 
@@ -44,26 +43,10 @@ export class ShowCoreLanguageService {
       where: and(pagination.where, where),
     });
 
-    console.log('params', { cursor, first, last, search, sortBy });
-    console.log('pagination', pagination);
-    console.log('edges', edges);
-
     const totalCount = await this.databaseService.db
       .select({ count: count() })
       .from(core_languages)
       .where(where);
-
-    console.log('totalCount', totalCount);
-    console.log(
-      'outputPagination',
-      outputPagination({
-        edges,
-        totalCount,
-        first,
-        cursor,
-        last,
-      }),
-    );
 
     return outputPagination({
       edges,

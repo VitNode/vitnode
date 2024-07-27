@@ -16,9 +16,6 @@ export const AuthLayout = async ({
     getGlobalData(),
   ]);
 
-  // eslint-disable-next-line no-console
-  console.log(core_languages__show, data);
-
   // TODO: Improve this check, make this based on the users count
   if (core_languages__show.edges.length === 0) {
     redirect('/admin/install');
