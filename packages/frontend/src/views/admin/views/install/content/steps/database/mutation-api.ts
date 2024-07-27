@@ -21,5 +21,5 @@ export const mutationApi = async () => {
     return { error: e as FetcherErrorType };
   }
 
-  revalidatePath('/admin/install', 'page');
+  revalidatePath('/[locale]/admin/(vitnode)/install', 'page');
 };

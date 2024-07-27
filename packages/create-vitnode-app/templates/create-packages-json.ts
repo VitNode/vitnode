@@ -38,6 +38,7 @@ export const createPackagesJSON = ({
       'config:init': 'turbo config:init',
       dev: 'turbo dev',
       build: 'turbo build',
+      start: 'turbo start',
       ...(eslint ? { lint: 'turbo lint', 'lint:fix': 'turbo lint:fix' } : {}),
       ...(docker
         ? {
@@ -87,10 +88,12 @@ export const createPackagesJSON = ({
     dependencies: {
       geist: '^1.3.1',
       'lucide-react': '^0.414.0',
-      next: '15.0.0-canary.79',
+      next: '15.0.0-canary.86',
       react: '^19.0.0-rc.0',
       'react-dom': '^19.0.0-rc.0',
       'next-intl': '^3.17.2',
+      'react-hook-form': '^7.52.1',
+      '@hookform/resolvers': '^3.9.0',
       'vitnode-frontend': `^${pkg.version}`,
     },
     devDependencies: {

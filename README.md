@@ -42,12 +42,12 @@ pnpm create vitnode-app@latest
 | Node.js     | 18      | 20          |
 | PostgreSQL  | 14      | 16          |
 
-| 🖥️ Hardware | Minimum        | Recommended    | Development    |
-| :---------- | :------------- | :------------- | :------------- |
-| CPU         | 1GHz (2+ core) | 1GHz (4+ core) | 1GHz (4+ core) |
-| RAM         | 2GB            | 4GB            | 8GB            |
-| Storage     | 10GB           | 20GB           | 20GB           |
-| Network     | 100Mbps        | 300Mbps        | 100Mbps        |
+| 🖥️ Hardware | Minimum        | Development    |
+| :---------- | :------------- | :------------- |
+| CPU         | 1GHz (2+ core) | 1GHz (4+ core) |
+| RAM         | 4GB            | 8GB            |
+| Storage     | 10GB           | 20GB           |
+| Network     | 100Mbps        | 100Mbps        |
 
 | 🧑‍💻 Browser | Minimum | Recommended |
 | :--------- | :------ | :---------- |

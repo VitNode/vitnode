@@ -38,7 +38,6 @@ export class ShowCoreLanguageService {
     });
 
     const where = ilike(core_languages.name, `%${search}%`);
-
     const edges = await this.databaseService.db.query.core_languages.findMany({
       ...pagination,
       where: and(pagination.where, where),

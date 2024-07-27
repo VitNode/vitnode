@@ -36,7 +36,7 @@ export interface UsersMembersAdminViewProps {
   searchParams: SearchParams;
 }
 
-export const generateMetadataUsersMembersAdminView =
+export const generateMetadataUsersMembersAdmin =
   async (): Promise<Metadata> => {
     const t = await getTranslations('admin.members.users');
 

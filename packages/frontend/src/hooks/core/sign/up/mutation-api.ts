@@ -29,5 +29,5 @@ export const mutationApi = async (variables: Args) => {
     return { error: e as FetcherErrorType };
   }
 
-  revalidatePath('/', 'layout');
+  revalidatePath('/[locale]/(main)', 'page');
 };
