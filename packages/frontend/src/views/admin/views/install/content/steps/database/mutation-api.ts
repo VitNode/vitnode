@@ -6,6 +6,7 @@ import {
   Admin__Install__Create_DatabaseMutationVariables,
 } from '@/graphql/graphql';
 import { fetcher, FetcherErrorType } from '@/graphql/fetcher';
+import { revalidatePath } from 'next/cache';
 
 export const mutationApi = async () => {
   try {
@@ -18,4 +19,6 @@ export const mutationApi = async () => {
   } catch (e) {
     return { error: e as FetcherErrorType };
   }
+
+  revalidatePath('/[locale]/admin/(vitnode)/install', 'page');
 };

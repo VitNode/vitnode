@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "geist": "^1.3.1",
-    "next": "15.0.0-canary.79",
+    "next": "15.0.0-canary.86",
     "next-intl": "^3.17.2",
     "react": "^19.0.0-rc.0",
     "react-dom": "^19.0.0-rc.0",
@@ -25,7 +25,7 @@
     "vitnode-shared": "workspace:*"
   },
   "devDependencies": {
-    "@next/bundle-analyzer": "15.0.0-canary.79",
+    "@next/bundle-analyzer": "15.0.0-canary.86",
     "@types/node": "^20.14.12",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",

@@ -88,7 +88,7 @@ export const createPackagesJSON = ({
     dependencies: {
       geist: '^1.3.1',
       'lucide-react': '^0.414.0',
-      next: '15.0.0-canary.79',
+      next: '15.0.0-canary.86',
       react: '^19.0.0-rc.0',
       'react-dom': '^19.0.0-rc.0',
       'next-intl': '^3.17.2',

@@ -1,13 +1,12 @@
 'use server';
 
-import { revalidatePath } from 'next/cache';
-
 import {
   Core_Sessions__Sign_Up,
   Core_Sessions__Sign_UpMutation,
   Core_Sessions__Sign_UpMutationVariables,
 } from '@/graphql/graphql';
 import { FetcherErrorType, fetcher } from '@/graphql/fetcher';
+import { revalidatePath } from 'next/cache';
 
 interface Args extends Core_Sessions__Sign_UpMutationVariables {
   token: string;
@@ -25,9 +24,9 @@ export const mutationApi = async (variables: Args) => {
         'x-vitnode-captcha-token': variables.token,
       },
     });
-
-    revalidatePath('/', 'layout');
   } catch (e) {
     return { error: e as FetcherErrorType };
   }
+
+  revalidatePath('/[locale]/(main)', 'page');
 };

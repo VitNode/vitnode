@@ -86,7 +86,7 @@
   "peerDependencies": {
     "graphql-tag": "^2.12.6",
     "lucide-react": "^0.414.0",
-    "next": "15.0.0-canary.79",
+    "next": "15.0.0-canary.86",
     "next-intl": "^3.17.1",
     "postcss": "^8.4.39",
     "react": "^19.0.0-rc.0",
@@ -113,7 +113,7 @@
     "eslint-config-typescript-vitnode": "workspace:*",
     "graphql-tag": "^2.12.6",
     "lucide-react": "^0.414.0",
-    "next": "15.0.0-canary.79",
+    "next": "15.0.0-canary.86",
     "next-intl": "^3.17.2",
     "react": "^19.0.0-rc.0",
     "react-dom": "^19.0.0-rc.0",
