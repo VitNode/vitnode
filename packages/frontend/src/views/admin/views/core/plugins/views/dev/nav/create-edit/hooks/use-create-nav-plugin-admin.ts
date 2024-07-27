@@ -47,6 +47,7 @@ export const useCreateNavPluginAdmin = ({
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    if (!code) return;
     let error: FetcherErrorType | null = null;
 
     if (data) {

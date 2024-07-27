@@ -21,21 +21,21 @@ export const DateFormat = ({
   ref?: React.RefCallback<HTMLTimeElement>;
   showFullDate?: boolean;
 }) => {
-  const { currentTime, fullDate, getDateWithFormatDistance } = useDateFormat({
+  const { now, fullDate, getDate } = useDateFormat({
     date,
   });
 
-  if (currentTime.getFullYear() == new Date().getFullYear() && !showFullDate) {
+  if (now.getFullYear() == new Date().getFullYear() && !showFullDate) {
     return (
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger asChild>
             <time
               ref={ref}
-              dateTime={currentTime.toString()}
+              dateTime={fullDate.toString()}
               className={className}
             >
-              {getDateWithFormatDistance()}
+              {getDate()}
             </time>
           </TooltipTrigger>
           <TooltipContent>
@@ -47,7 +47,7 @@ export const DateFormat = ({
   }
 
   return (
-    <time ref={ref} dateTime={currentTime.toString()} className={className}>
+    <time ref={ref} dateTime={fullDate.toString()} className={className}>
       {fullDate}
     </time>
   );

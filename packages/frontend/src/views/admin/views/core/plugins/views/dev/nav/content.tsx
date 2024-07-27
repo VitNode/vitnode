@@ -82,7 +82,7 @@ export const ContentNavDevPluginAdmin = ({
           ...event,
         });
 
-        if (!moveTo) return;
+        if (!moveTo || !code) return;
 
         const mutation = await mutationChangePositionApi({
           code: moveTo.id.toString(),

@@ -146,7 +146,7 @@ export async function inputPaginationCursor<T extends TableConfig>({
       return {
         where: eq(database.id, -1),
         orderBy,
-        limit: 0,
+        limit: undefined,
       };
     }
 
@@ -164,6 +164,6 @@ export async function inputPaginationCursor<T extends TableConfig>({
   return {
     where,
     orderBy,
-    limit: first || last ? (last ? last + 1 : first) + 1 : 0,
+    limit: first || last ? (last ? last + 1 : first) + 1 : undefined,
   };
 }

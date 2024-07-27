@@ -16,6 +16,8 @@ export const useDeleteNavPluginAdmin = ({
   const { code: pluginCode } = useParams();
 
   const onSubmit = async () => {
+    if (!pluginCode) return;
+
     const mutation = await mutationApi({
       code,
       pluginCode: Array.isArray(pluginCode) ? pluginCode[0] : pluginCode,

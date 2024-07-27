@@ -20,7 +20,7 @@ export const useCaptcha = () => {
   );
 
   const handleLoaded = () => {
-    const elementId = 'vitnode_recaptcha';
+    const elementId = 'vitnode_captcha';
     if (
       config.type === CaptchaTypeEnum.recaptcha_v2_checkbox ||
       config.type === CaptchaTypeEnum.recaptcha_v2_invisible

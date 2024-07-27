@@ -8,7 +8,6 @@ import {
 } from '@/graphql/graphql';
 import { getTextLang } from '@/hooks/use-text-lang';
 import { AvatarUser } from '@/components/ui/user/avatar';
-import { Button } from '@/components/ui/button';
 
 const getData = async ({ id }: { id: string }) => {
   const data = await fetcher<
@@ -57,9 +56,7 @@ export const ProfileView = async ({
                 <span>{convertText(data.group.name)}</span>
               </div>
               <div className="flex flex-wrap items-center justify-center gap-2 md:justify-end">
-                <Button>Test 123</Button>
-                <Button>Test 123</Button>
-                <Button>Test 123</Button>
+                Something
               </div>
             </div>
           </div>

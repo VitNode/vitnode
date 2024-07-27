@@ -1,9 +1,9 @@
 import { useTranslations } from 'next-intl';
 import React from 'react';
-import * as localeDate from 'date-fns/locale';
 import { Check } from 'lucide-react';
 import { ControllerRenderProps, FieldValues, Path } from 'react-hook-form';
 
+import { locales } from './locales';
 import {
   FormControl,
   FormItem,
@@ -64,10 +64,10 @@ export function LocaleFieldCreateEditLangAdmin<
             <CommandList>
               <CommandEmpty>{tCore('no_results')}</CommandEmpty>
               <CommandGroup>
-                {Object.keys(localeDate).map(item => (
+                {locales.map(item => (
                   <CommandItem
-                    value={item}
-                    key={item}
+                    value={item.locale}
+                    key={item.locale}
                     className="flex gap-2"
                     onSelect={value => {
                       field.onChange(value);
@@ -77,10 +77,14 @@ export function LocaleFieldCreateEditLangAdmin<
                     <Check
                       className={cn(
                         'size-4',
-                        field.value === item ? 'opacity-100' : 'opacity-0',
+                        field.value === item.locale
+                          ? 'opacity-100'
+                          : 'opacity-0',
                       )}
                     />
-                    <span>{item}</span>
+                    <span>
+                      {item.name} - {item.locale}
+                    </span>
                   </CommandItem>
                 ))}
               </CommandGroup>

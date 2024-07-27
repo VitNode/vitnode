@@ -37,7 +37,7 @@ export const useCreateEditLangAdmin = ({ data }: Args) => {
       timezone: data?.timezone ?? 'America/New_York',
       default: data?.default ?? false,
       time_24: data?.time_24 ?? false,
-      locale: data?.locale ?? 'enUS',
+      locale: data?.locale ?? 'en',
       allow_in_input: data?.allow_in_input ?? true,
     },
   });

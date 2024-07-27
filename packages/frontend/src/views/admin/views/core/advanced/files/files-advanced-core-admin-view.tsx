@@ -32,7 +32,7 @@ export interface FilesAdvancedCoreAdminViewProps {
   searchParams: SearchParamsPagination;
 }
 
-export const generateMetadataFilesAdvancedCoreAdminView =
+export const generateMetadataFilesAdvancedCoreAdmin =
   async (): Promise<Metadata> => {
     const t = await getTranslations('admin.core.advanced.files');
 
