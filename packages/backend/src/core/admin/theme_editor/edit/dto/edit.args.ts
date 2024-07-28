@@ -1,5 +1,7 @@
 import { ArgsType, Field, InputType, Int } from '@nestjs/graphql';
 
+import { FileUpload, GraphQLUpload } from '@/graphql-upload';
+
 @InputType()
 export class HslColorInput {
   @Field(() => Int)
@@ -79,6 +81,12 @@ class LogosEditAdminThemeEditor {
 
   @Field()
   text: string;
+
+  @Field(() => GraphQLUpload, { nullable: true })
+  dark?: Promise<FileUpload>;
+
+  @Field(() => GraphQLUpload, { nullable: true })
+  light?: Promise<FileUpload>;
 }
 
 @ArgsType()

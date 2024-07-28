@@ -220,6 +220,8 @@ export type LogoShowCoreThemeEditor = {
 };
 
 export type LogosEditAdminThemeEditor = {
+  dark?: InputMaybe<Scalars['Upload']['input']>;
+  light?: InputMaybe<Scalars['Upload']['input']>;
   mobile_width: Scalars['Int']['input'];
   text: Scalars['String']['input'];
   width: Scalars['Int']['input'];

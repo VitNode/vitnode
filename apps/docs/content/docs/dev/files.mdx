@@ -14,13 +14,158 @@ VitNode has a file system that allows you to upload files to the system dynamica
 
 ```ts title="example.args.ts"
 import { ArgsType, Field } from '@nestjs/graphql';
-import { FileUpload, GraphQLUpload } from 'vitnode-backend'; // [!code highlight]
+import { FileUpload, GraphQLUpload } from 'vitnode-backend';
 
 @ArgsType()
 export class ExampleArgs {
-  @Field(() => GraphQLUpload) // [!code highlight]
-  file: Promise<FileUpload>; // [!code highlight]
+  @Field(() => GraphQLUpload)
+  file: Promise<FileUpload>;
 }
 ```
 
 Read more about [Arguments GraphQL](/docs/dev/services#arguments).
+
+### Return Object
+
+```ts title="example.obj.ts"
+
+```
+
+Read more about [Return Objects GraphQL](/docs/dev/services#return-object).
+
+### Service
+
+```ts title="example.service.ts"
+
+```
+
+## Frontend Usage
+
+### Form Schema
+
+```ts title="use-example.ts"
+import * as z from 'zod';
+
+export const useExample = () => {
+  const formSchema = z.object({
+    file: z.array(z.instanceof(File)), // [!code highlight]
+  });
+};
+```
+
+### Submit FormData
+
+Files can only be sent to the server using the `FormData` function.
+
+```ts title="use-example.ts"
+import mutationApi from './mutation-api';
+
+export const useExample = () => {
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    const formData = new FormData();
+    formData.append('file', values.file[0]); // [!code highlight]
+    const mutation = await mutationApi(formData);
+  };
+};
+```
+
+#### Multiple Files
+
+```ts title="use-example.ts"
+import mutationApi from './mutation-api';
+
+export const useExample = () => {
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    const formData = new FormData();
+    values.file.forEach(file => {
+      formData.append('file', file); // [!code highlight]
+    });
+    const mutation = await mutationApi(formData);
+  };
+};
+```
+
+### Mutation
+
+To send files to the server, you need to use the `FormData` function as the argument and provider the file as the `files` array in the `fetcher` function.
+
+```ts title="mutation-api.ts"
+'use server';
+
+import { fetcher, FetcherErrorType } from 'vitnode-frontend/graphql/fetcher';
+
+import {
+  Core_Editor_Files__Upload,
+  Core_Editor_Files__UploadMutation,
+  Core_Editor_Files__UploadMutationVariables,
+} from '@/graphql/graphql';
+
+export const mutationApi = async (formData: FormData) => {
+  const file = formData.get('file') as File; // [!code highlight]
+  const plugin = formData.get('plugin') as string;
+  const folder = formData.get('folder') as string;
+
+  try {
+    const data = await fetcher<
+      Core_Editor_Files__UploadMutation,
+      Omit<Core_Editor_Files__UploadMutationVariables, 'file'> // [!code highlight]
+    >({
+      query: Core_Editor_Files__Upload,
+      variables: {
+        plugin,
+        folder,
+      },
+      files: [
+        {
+          files: file, // [!code highlight]
+          variable: 'file', // [!code highlight]
+        },
+      ],
+    });
+
+    return { data };
+  } catch (e) {
+    return { error: e as FetcherErrorType };
+  }
+};
+```
+
+`Files` arguments form the `fetcher` function:
+
+| Argument   | Type          | Description                            |
+| ---------- | ------------- | -------------------------------------- |
+| `files`    | `File File[]` | Array of files to upload.              |
+| `variable` | `string`      | Variable name in the GraphQL mutation. |
+
+#### Multiple Files
+
+```ts title="mutation-api.ts"
+export const mutationApi = async (formData: FormData) => {
+  const file = formData.getAll('file') as File[]; // [!code highlight]
+  const plugin = formData.get('plugin') as string;
+  const folder = formData.get('folder') as string;
+
+  try {
+    const data = await fetcher<
+      Core_Editor_Files__UploadMutation,
+      Omit<Core_Editor_Files__UploadMutationVariables, 'file'>
+    >({
+      query: Core_Editor_Files__Upload,
+      variables: {
+        plugin,
+        folder,
+      },
+      files: [
+        {
+          files: file,
+          variable: 'file',
+        },
+      ],
+    });
+
+    return { data };
+  } catch (e) {
+    return { error: e as FetcherErrorType };
+  }
+};
+```

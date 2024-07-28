@@ -1,26 +1,4 @@
-import { Callout } from 'nextra/components';
-import { Steps } from 'nextra/components';
-
-## Basic usage
-
-As an example, we will upload a file for a avatar user.
-
 <Steps>
-
-### Arguments (DTO)
-
-Create new file for arguments for example `/dto/upload-avatar-core_members.args.ts`.
-
-```ts
-import { ArgsType, Field } from '@nestjs/graphql';
-import { FileUpload, GraphQLUpload } from 'vitnode-backend';
-
-@ArgsType()
-export class UploadAvatarCoreMembersArgs {
-  @Field(() => GraphQLUpload)
-  file: Promise<FileUpload>;
-}
-```
 
 ### Upload service
 

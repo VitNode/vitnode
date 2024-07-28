@@ -19,7 +19,7 @@ export const mutationApi = async (formData: FormData) => {
       Omit<Admin__Core_Languages__UpdateMutationVariables, 'file'>
     >({
       query: Admin__Core_Languages__Update,
-      uploads: [
+      files: [
         {
           files,
           variable: 'file',

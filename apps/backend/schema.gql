@@ -189,6 +189,8 @@ type LogoShowCoreThemeEditor {
 }
 
 input LogosEditAdminThemeEditor {
+  dark: Upload
+  light: Upload
   mobile_width: Int!
   text: String!
   width: Int!

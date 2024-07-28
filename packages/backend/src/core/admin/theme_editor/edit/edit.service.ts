@@ -7,6 +7,7 @@ import { EditAdminThemeEditorArgs, ThemeVariableInput } from './dto/edit.args';
 
 import {
   ABSOLUTE_PATHS_BACKEND,
+  configPath,
   getConfigFile,
   NotFoundError,
 } from '../../../..';
@@ -74,7 +75,12 @@ export class EditAdminThemeEditorService {
     }
 
     const config = getConfigFile();
-    config.logos = logos;
+    config.logos = {
+      mobile_width: logos.mobile_width,
+      text: logos.text,
+      width: logos.width,
+    };
+    fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
 
     return 'Success!';
   }
