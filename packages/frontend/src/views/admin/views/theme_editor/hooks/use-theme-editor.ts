@@ -3,6 +3,7 @@ import { HslColor } from 'react-colorful';
 import { UseFormReturn } from 'react-hook-form';
 
 import { formSchemaColorsThemeEditor } from './use-theme-editor-api';
+import { FilesInputValue } from '@/components/ui/files-input';
 
 export enum ThemeEditorTab {
   Main = 'main',
@@ -17,10 +18,10 @@ interface ColorObj {
 
 interface ThemeEditorFormObj {
   logos: {
-    dark: File[];
-    light: File[];
-    mobile_dark: File[];
-    mobile_light: File[];
+    dark: FilesInputValue[];
+    light: FilesInputValue[];
+    mobile_dark: FilesInputValue[];
+    mobile_light: FilesInputValue[];
     mobile_width: number;
     text: string;
     width: number;

@@ -27,12 +27,13 @@ export class UploadCoreFilesService extends HelpersUploadCoreFilesService {
 
   async upload({
     acceptMimeType,
-    files,
+    files: filesFromProps,
     folder,
     maxUploadSizeBytes,
     plugin,
     secure = false,
   }: UploadCoreFilesArgs): Promise<UploadCoreFilesObj[]> {
+    const files = filesFromProps.filter(Boolean);
     // Check if plugin exists
     const pluginExists =
       await this.databaseService.db.query.core_plugins.findFirst({

@@ -28,12 +28,73 @@ Read more about [Arguments GraphQL](/docs/dev/services#arguments).
 ### Return Object
 
 ```ts title="example.obj.ts"
+import { Field, ObjectType } from '@nestjs/graphql';
+import { UploadCoreFilesObj } from 'vitnode-frontend';
 
+@ObjectType()
+export class ExampleObj {
+  @Field(UploadCoreFilesObj)
+  file: UploadCoreFilesObj;
+}
 ```
 
 Read more about [Return Objects GraphQL](/docs/dev/services#return-object).
 
-### Service
+### Upload Service
+
+```ts title="example.service.ts"
+import { UploadCoreFilesService } from 'vitnode-backend';
+
+export class ExampleService {
+  constructor(private readonly uploadFile: UploadCoreFilesService) {}
+
+  async uploadFile({ file }: ExampleArgs): Promise<string> {
+    await this.uploadFile.upload({
+      files: [file],
+      maxUploadSizeBytes: 1e6, // 1MB,
+      acceptMimeType: ['image/png', 'image/jpeg'],
+      plugin: 'welcome',
+      folder: 'test_files',
+    });
+
+    return 'Success!';
+  }
+}
+```
+
+#### API Reference
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+<TypeTable
+  type={{
+    files: {
+      description: 'Array of files to upload.',
+      type: 'Promise<FileUpload>[]',
+      default: '[]',
+    },
+    plugin: {
+      description: 'Plugin name.',
+      type: 'string',
+    },
+    folder: {
+      description: 'Folder name in file system.',
+      type: 'string',
+    },
+    maxUploadSizeBytes: {
+      description: 'Maximum file size in bytes.',
+      type: 'number',
+      default: 0,
+    },
+    acceptMimeType: {
+      description: 'Array of accepted mime types.',
+      type: 'string[]',
+      default: '[]',
+    },
+  }}
+/>
+
+### Delete Service
 
 ```ts title="example.service.ts"
 
@@ -45,10 +106,11 @@ Read more about [Return Objects GraphQL](/docs/dev/services#return-object).
 
 ```ts title="use-example.ts"
 import * as z from 'zod';
+import { zodFiles } from 'vitnode-frontend/helpers/zod';
 
 export const useExample = () => {
   const formSchema = z.object({
-    file: z.array(z.instanceof(File)), // [!code highlight]
+    file: zodFiles, // [!code highlight]
   });
 };
 ```

@@ -3,9 +3,13 @@ import { Upload } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 
+import { UploadCoreFilesObj } from '@/graphql/graphql';
+
 import { useMergeRefs } from '../../helpers/use-merge-refs';
 import { cn } from '../../helpers/classnames';
 import { PreviewFilesInput } from '../../utils/components/files/preview-files-input';
+
+export type FilesInputValue = File | UploadCoreFilesObj;
 
 export interface FilesInputInputProps
   extends Omit<
@@ -14,8 +18,8 @@ export interface FilesInputInputProps
   > {
   acceptExtensions: string[];
   maxFileSizeInMb: number;
-  onChange: (e: File[]) => void;
-  value: File[] | undefined;
+  onChange: (e: FilesInputValue[]) => void;
+  value: FilesInputValue[] | undefined;
   ref?: React.RefCallback<HTMLInputElement>;
   showInfo?: boolean;
 }

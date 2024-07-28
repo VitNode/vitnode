@@ -11,6 +11,7 @@ import { mutationApi } from './mutation-api';
 import { Core_Theme_Editor__ShowQuery } from '@/graphql/graphql';
 import { useRouter } from '@/navigation';
 import { CONFIG } from '@/helpers/config-with-env';
+import { zodFiles } from '@/helpers/zod';
 
 const zObjectHsl = z.object({
   h: z.number(),
@@ -68,11 +69,11 @@ export const useThemeEditorApi = ({
   const formSchema = z.object({
     colors: formSchemaColorsThemeEditor.optional(),
     logos: z.object({
-      light: z.array(z.instanceof(File)),
-      dark: z.array(z.instanceof(File)),
+      light: zodFiles,
+      dark: zodFiles,
       width: z.number(),
-      mobile_light: z.array(z.instanceof(File)),
-      mobile_dark: z.array(z.instanceof(File)),
+      mobile_light: zodFiles,
+      mobile_dark: zodFiles,
       mobile_width: z.number(),
       text: z.string().min(1).max(100),
     }),
@@ -98,12 +99,16 @@ export const useThemeEditorApi = ({
         ['muted-foreground']: core_theme_editor__show.colors?.muted_foreground,
       },
       logos: {
-        light: [],
-        dark: [],
-        width: 100,
+        light: core_theme_editor__show.logos.light
+          ? [core_theme_editor__show.logos.light]
+          : [],
+        dark: core_theme_editor__show.logos.dark
+          ? [core_theme_editor__show.logos.dark]
+          : [],
+        width: core_theme_editor__show.logos.width,
         mobile_light: [],
         mobile_dark: [],
-        mobile_width: 50,
+        mobile_width: core_theme_editor__show.logos.mobile_width,
         text: core_theme_editor__show.logos.text,
       },
     },

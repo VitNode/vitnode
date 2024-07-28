@@ -60,7 +60,7 @@ export class UploadCoreEditorService extends HelpersUploadCoreFilesService {
     maxUploadSizeKb,
     plugin,
   }: GetFilesAfterUploadArgs) {
-    const acceptMimeType = await this.getAcceptMineType();
+    const acceptMimeType = this.getAcceptMineType();
     const allowUploadToFrontend = await this.checkAcceptMimeType({
       file,
       acceptMimeType: this.acceptMimeTypeToFrontend,

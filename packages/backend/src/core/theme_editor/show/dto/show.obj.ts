@@ -1,5 +1,7 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 
+import { UploadCoreFilesObj } from '@/core/files/helpers/upload/dto/upload.obj';
+
 @ObjectType()
 export class HslColor {
   @Field(() => Int)
@@ -73,6 +75,18 @@ export class ColorsShowCoreThemeEditor {
 export class LogoShowCoreThemeEditor {
   @Field(() => String)
   text: string;
+
+  @Field(() => Int)
+  width: number;
+
+  @Field(() => Int)
+  mobile_width: number;
+
+  @Field(() => UploadCoreFilesObj, { nullable: true })
+  light?: UploadCoreFilesObj;
+
+  @Field(() => UploadCoreFilesObj, { nullable: true })
+  dark?: UploadCoreFilesObj;
 }
 
 @ObjectType()

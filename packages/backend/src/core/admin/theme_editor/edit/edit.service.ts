@@ -12,10 +12,11 @@ import {
   NotFoundError,
 } from '../../../..';
 import { keysFromCSSThemeEditor } from '../../../theme_editor/theme_editor.module';
+import { UploadCoreFilesService } from '@/core/files/helpers/upload/upload.service';
 
 @Injectable()
 export class EditAdminThemeEditorService {
-  constructor() {}
+  constructor(private readonly uploadFile: UploadCoreFilesService) {}
 
   protected changeVariable({
     cssAsString,
@@ -69,18 +70,32 @@ export class EditAdminThemeEditorService {
     fs.writeFileSync(pathToCss, colorsStringUpdate);
   }
 
-  async edit({ colors, logos }: EditAdminThemeEditorArgs): Promise<string> {
-    if (colors) {
-      this.updateColors(colors);
-    }
+  private async updateLogos(logos: EditAdminThemeEditorArgs['logos']) {
+    // Upload logos
+    const [dark, light] = await this.uploadFile.upload({
+      acceptMimeType: ['image/png', 'image/jpeg'],
+      files: [logos.dark, logos.light],
+      plugin: 'core',
+      folder: 'logos',
+      maxUploadSizeBytes: 1024 * 1024,
+    });
 
     const config = getConfigFile();
     config.logos = {
       mobile_width: logos.mobile_width,
       text: logos.text,
       width: logos.width,
+      dark,
+      light,
     };
     fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
+  }
+
+  async edit({ colors, logos }: EditAdminThemeEditorArgs): Promise<string> {
+    if (colors) {
+      this.updateColors(colors);
+    }
+    await this.updateLogos(logos);
 
     return 'Success!';
   }

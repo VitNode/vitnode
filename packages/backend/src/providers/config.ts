@@ -1,6 +1,8 @@
 import * as fs from 'fs';
 import { join } from 'path';
 
+import { UploadCoreFilesObj } from '@/core/files/helpers/upload/dto/upload.obj';
+
 export enum AllowTypeFilesEnum {
   all = 'all',
   images_videos = 'images_videos',
@@ -32,8 +34,8 @@ export interface ConfigType {
     mobile_width: number;
     text: string;
     width: number;
-    dark?: string;
-    light?: string;
+    dark?: UploadCoreFilesObj;
+    light?: UploadCoreFilesObj;
     mobile_dark?: string;
     mobile_light?: string;
   };

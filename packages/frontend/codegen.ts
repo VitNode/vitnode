@@ -19,8 +19,10 @@ const config: CodegenConfig = {
         'typescript-document-nodes',
       ],
       config: {
+        maybeValue: 'T',
         scalars: {
           DateTime: 'Date',
+          Upload: 'File',
         },
         enumsAsConst: true,
         allowEnumStringTypes: true,
