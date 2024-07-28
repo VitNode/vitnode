@@ -21,7 +21,6 @@ export const ContentLangsCoreAdminView = ({
       data={edges}
       pageInfo={pageInfo}
       searchPlaceholder={t('search_placeholder')}
-      defaultPageSize={10}
       defaultSorting={{
         sortBy: 'created',
         sortDirection: 'desc',
@@ -29,50 +28,50 @@ export const ContentLangsCoreAdminView = ({
       columns={[
         {
           id: 'name',
-          text: tCore('table.name'),
-          cell: ({ data }) => {
+          title: tCore('table.name'),
+          cell: ({ row }) => {
             return (
               <div className="flex items-center gap-4">
-                <span>{data.name}</span>
-                {data.default && <Badge>{tCore('default')}</Badge>}
+                <span>{row.name}</span>
+                {row.default && <Badge>{tCore('default')}</Badge>}
               </div>
             );
           },
         },
         {
           id: 'code',
-          text: t('table.key'),
+          title: t('table.key'),
         },
         {
           id: 'locale',
-          text: t('table.locale'),
+          title: t('table.locale'),
         },
         {
           id: 'time_24',
-          text: t('table.time_24'),
-          cell: ({ data }) => {
-            return data.time_24 ? tCore('yes') : tCore('no');
+          title: t('table.time_24'),
+          cell: ({ row }) => {
+            return row.time_24 ? tCore('yes') : tCore('no');
           },
         },
         {
           id: 'created',
-          text: tCore('table.created'),
+          title: tCore('table.created'),
           sortable: true,
-          cell: ({ data }) => {
-            return <DateFormat date={data.created} />;
+          cell: ({ row }) => {
+            return <DateFormat date={row.created} />;
           },
         },
         {
           id: 'enabled',
-          text: tCore('table.enabled'),
-          cell: ({ data }) => {
-            return <EnabledRowTableLangsCoreAdmin data={data} />;
+          title: tCore('table.enabled'),
+          cell: ({ row }) => {
+            return <EnabledRowTableLangsCoreAdmin data={row} />;
           },
         },
         {
           id: 'actions',
-          cell: ({ data }) => {
-            return <ActionsTableLangsCoreAdmin {...data} />;
+          cell: ({ row }) => {
+            return <ActionsTableLangsCoreAdmin {...row} />;
           },
         },
       ]}

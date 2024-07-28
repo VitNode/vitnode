@@ -29,50 +29,49 @@ export const TableUsersMembersAdmin = ({
     <DataTable
       data={edges}
       pageInfo={pageInfo}
-      defaultPageSize={10}
       columns={[
         {
           id: 'name',
-          text: tCore('table.name'),
-          cell: ({ data }) => {
+          title: tCore('table.name'),
+          cell: ({ row }) => {
             return (
               <div className="flex flex-wrap items-center gap-2">
-                <AvatarUser user={data} sizeInRem={2} />
+                <AvatarUser user={row} sizeInRem={2} />
 
-                <span>{data.name}</span>
+                <span>{row.name}</span>
               </div>
             );
           },
         },
         {
           id: 'email',
-          text: t('table.email'),
+          title: t('table.email'),
         },
         {
           id: 'group',
-          text: t('table.group'),
-          cell: ({ data }) => {
-            return convertText(data.group.name);
+          title: t('table.group'),
+          cell: ({ row }) => {
+            return convertText(row.group.name);
           },
         },
         {
           id: 'joined',
-          text: t('table.joined'),
+          title: t('table.joined'),
           sortable: true,
-          cell: ({ data }) => {
-            return <DateFormat date={data.joined} />;
+          cell: ({ row }) => {
+            return <DateFormat date={row.joined} />;
           },
         },
         {
           id: 'actions',
-          cell: ({ data }) => {
+          cell: ({ row }) => {
             return (
               <>
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger asChild>
                       <Link
-                        href={`/admin/members/users/${data.id}`}
+                        href={`/admin/members/users/${row.id}`}
                         className={buttonVariants({
                           variant: 'ghost',
                           size: 'icon',
