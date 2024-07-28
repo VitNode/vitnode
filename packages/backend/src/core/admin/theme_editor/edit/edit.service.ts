@@ -13,10 +13,14 @@ import {
 } from '../../../..';
 import { keysFromCSSThemeEditor } from '../../../theme_editor/theme_editor.module';
 import { UploadCoreFilesService } from '@/core/files/helpers/upload/upload.service';
+import { DeleteCoreFilesService } from '@/core/files/helpers/delete/delete.service';
 
 @Injectable()
 export class EditAdminThemeEditorService {
-  constructor(private readonly uploadFile: UploadCoreFilesService) {}
+  constructor(
+    private readonly uploadFile: UploadCoreFilesService,
+    private readonly deleteFile: DeleteCoreFilesService,
+  ) {}
 
   protected changeVariable({
     cssAsString,
@@ -71,22 +75,38 @@ export class EditAdminThemeEditorService {
   }
 
   private async updateLogos(logos: EditAdminThemeEditorArgs['logos']) {
-    // Upload logos
-    const [dark, light] = await this.uploadFile.upload({
-      acceptMimeType: ['image/png', 'image/jpeg'],
-      files: [logos.dark, logos.light],
-      plugin: 'core',
-      folder: 'logos',
-      maxUploadSizeBytes: 1024 * 1024,
-    });
-
     const config = getConfigFile();
+
+    await Promise.all(
+      ['dark', 'light'].map(async el => {
+        if (logos[el]?.keep && config.logos[el]) return;
+
+        if (config.logos[el]) {
+          this.deleteFile.delete({
+            dir_folder: config.logos[el].dir_folder,
+            file_name: config.logos[el].file_name,
+          });
+          delete config.logos[el];
+        }
+
+        if (logos[el]?.file) {
+          const upload = await this.uploadFile.upload({
+            acceptMimeType: ['image/png', 'image/jpeg'],
+            file: logos[el].file,
+            plugin: 'core',
+            folder: 'logos',
+            maxUploadSizeBytes: 1024 * 1024,
+          });
+          config.logos[el] = upload;
+        }
+      }),
+    );
+
     config.logos = {
+      ...config.logos,
       mobile_width: logos.mobile_width,
       text: logos.text,
       width: logos.width,
-      dark,
-      light,
     };
     fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
   }

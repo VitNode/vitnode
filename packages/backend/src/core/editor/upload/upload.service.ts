@@ -67,7 +67,7 @@ export class UploadCoreEditorService extends HelpersUploadCoreFilesService {
       disableThrowError: true,
     });
     const args: Omit<UploadCoreFilesArgs, 'acceptMimeType' | 'secure'> = {
-      files: [file],
+      file,
       maxUploadSizeBytes: maxUploadSizeKb * 1024,
       plugin,
       folder,

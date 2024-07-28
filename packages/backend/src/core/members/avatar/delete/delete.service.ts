@@ -22,7 +22,7 @@ export class DeleteAvatarCoreMembersService {
     this.deleteFile.checkIfFileExistsAndReturnPath({
       dir_folder: avatar.dir_folder,
       file_name: avatar.file_name,
-      file_secure: false,
+      secure: false,
     });
 
     // Delete from database

@@ -72,6 +72,15 @@ class ColorsEditAdminThemeEditor {
 }
 
 @InputType()
+class FileEditAdminThemeEditor {
+  @Field(() => GraphQLUpload, { nullable: true })
+  file?: Promise<FileUpload>;
+
+  @Field(() => Boolean, { nullable: true })
+  keep?: boolean;
+}
+
+@InputType()
 class LogosEditAdminThemeEditor {
   @Field(() => Int)
   width: number;
@@ -82,11 +91,11 @@ class LogosEditAdminThemeEditor {
   @Field()
   text: string;
 
-  @Field(() => GraphQLUpload, { nullable: true })
-  dark?: Promise<FileUpload>;
+  @Field(() => FileEditAdminThemeEditor, { nullable: true })
+  dark?: FileEditAdminThemeEditor;
 
-  @Field(() => GraphQLUpload, { nullable: true })
-  light?: Promise<FileUpload>;
+  @Field(() => FileEditAdminThemeEditor, { nullable: true })
+  light?: FileEditAdminThemeEditor;
 }
 
 @ArgsType()

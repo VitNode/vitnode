@@ -162,10 +162,18 @@ export const useThemeEditorApi = ({
     formData.append('logos.width', values.logos.width.toString());
     formData.append('logos.mobile_width', values.logos.mobile_width.toString());
     if (values.logos.light.length > 0) {
-      formData.append('logos.light', values.logos.light[0]);
+      if (values.logos.light[0] instanceof File) {
+        formData.append('logos.light.file', values.logos.light[0]);
+      } else {
+        formData.append('logos.light.keep', 'true');
+      }
     }
     if (values.logos.dark.length > 0) {
-      formData.append('logos.dark', values.logos.dark[0]);
+      if (values.logos.dark[0] instanceof File) {
+        formData.append('logos.dark.file', values.logos.dark[0]);
+      } else {
+        formData.append('logos.dark.keep', 'true');
+      }
     }
 
     const mutation = await mutationApi(formData);

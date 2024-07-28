@@ -14,8 +14,8 @@ export const mutationApi = async (formData: FormData) => {
   const formColors = formData.get('colors') as string | null;
   const colors = formColors
     ? (JSON.parse(formColors) as ColorsEditAdminThemeEditor)
-    : null;
-  const logos = {
+    : undefined;
+  const logos: Admin__Core_Theme_Editor__EditMutationVariables['logos'] = {
     width: Number(formData.get('logos.width')),
     mobile_width: Number(formData.get('logos.mobile_width')),
     text: formData.get('logos.text') as string,
@@ -23,17 +23,21 @@ export const mutationApi = async (formData: FormData) => {
 
   // Files
   const files: FetcherUploads[] = [];
-  if (formData.get('logos.light')) {
+  if (formData.get('logos.light.file')) {
     files.push({
-      files: formData.get('logos.light') as File,
-      variable: 'logos.light',
+      files: formData.get('logos.light.file') as File,
+      variable: 'logos.light.file',
     });
+  } else if (formData.get('logos.light.keep')) {
+    logos.light = { keep: true };
   }
-  if (formData.get('logos.dark')) {
+  if (formData.get('logos.dark.file')) {
     files.push({
-      files: formData.get('logos.dark') as File,
-      variable: 'logos.dark',
+      files: formData.get('logos.dark.file') as File,
+      variable: 'logos.dark.file',
     });
+  } else if (formData.get('logos.dark.keep')) {
+    logos.dark = { keep: true };
   }
 
   try {

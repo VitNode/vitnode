@@ -149,6 +149,11 @@ export type EditorShowCoreMiddleware = {
   sticky: Scalars['Boolean']['output'];
 };
 
+export type FileEditAdminThemeEditor = {
+  file?: InputMaybe<Scalars['Upload']['input']>;
+  keep?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
 export type FilesAdminPluginsObj = {
   __typename?: 'FilesAdminPluginsObj';
   admin_pages: Scalars['Int']['output'];
@@ -224,8 +229,8 @@ export type LogoShowCoreThemeEditor = {
 };
 
 export type LogosEditAdminThemeEditor = {
-  dark?: InputMaybe<Scalars['Upload']['input']>;
-  light?: InputMaybe<Scalars['Upload']['input']>;
+  dark?: InputMaybe<FileEditAdminThemeEditor>;
+  light?: InputMaybe<FileEditAdminThemeEditor>;
   mobile_width: Scalars['Int']['input'];
   text: Scalars['String']['input'];
   width: Scalars['Int']['input'];

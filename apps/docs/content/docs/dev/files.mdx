@@ -50,7 +50,7 @@ export class ExampleService {
 
   async uploadFile({ file }: ExampleArgs): Promise<string> {
     await this.uploadFile.upload({
-      files: [file],
+      file,
       maxUploadSizeBytes: 1e6, // 1MB,
       acceptMimeType: ['image/png', 'image/jpeg'],
       plugin: 'welcome',
@@ -68,10 +68,9 @@ import { TypeTable } from 'fumadocs-ui/components/type-table';
 
 <TypeTable
   type={{
-    files: {
-      description: 'Array of files to upload.',
-      type: 'Promise<FileUpload>[]',
-      default: '[]',
+    file: {
+      description: 'File to upload.',
+      type: 'Promise<FileUpload>',
     },
     plugin: {
       description: 'Plugin name.',
@@ -91,14 +90,56 @@ import { TypeTable } from 'fumadocs-ui/components/type-table';
       type: 'string[]',
       default: '[]',
     },
+    secure: {
+      description:
+        'Check `true` if file will be protected (not accessible via URL).',
+      type: 'boolean',
+      default: 'false',
+    },
   }}
 />
 
 ### Delete Service
 
 ```ts title="example.service.ts"
+import { DeleteCoreFilesService } from 'vitnode-backend';
 
+import { ExampleArgs } from './example.args';
+
+export class ExampleService {
+  constructor(private readonly deleteFile: DeleteCoreFilesService) {}
+
+  async deleteFile({ file }: ExampleArgs): Promise<string> {
+    this.deleteFile.delete({
+      dir_folder: file.dir_folder
+      file_name: file.file_name,
+    });
+
+    return 'Success!';
+  }
+}
 ```
+
+#### API Reference
+
+<TypeTable
+  type={{
+    dir_folder: {
+      description: 'Folder name in file system.',
+      type: 'string',
+    },
+    file_name: {
+      description: 'File name in file system.',
+      type: 'string',
+    },
+    secure: {
+      description:
+        'Check `true` if file is protected (inside `private` folder).',
+      type: 'boolean',
+      default: 'false',
+    },
+  }}
+/>
 
 ## Frontend Usage
 
@@ -196,38 +237,5 @@ export const mutationApi = async (formData: FormData) => {
 
 | Argument   | Type          | Description                            |
 | ---------- | ------------- | -------------------------------------- |
-| `files`    | `File File[]` | Array of files to upload.              |
+| `files`    | `File File[]` | Files / Array of files to upload.      |
 | `variable` | `string`      | Variable name in the GraphQL mutation. |
-
-#### Multiple Files
-
-```ts title="mutation-api.ts"
-export const mutationApi = async (formData: FormData) => {
-  const file = formData.getAll('file') as File[]; // [!code highlight]
-  const plugin = formData.get('plugin') as string;
-  const folder = formData.get('folder') as string;
-
-  try {
-    const data = await fetcher<
-      Core_Editor_Files__UploadMutation,
-      Omit<Core_Editor_Files__UploadMutationVariables, 'file'>
-    >({
-      query: Core_Editor_Files__Upload,
-      variables: {
-        plugin,
-        folder,
-      },
-      files: [
-        {
-          files: file,
-          variable: 'file',
-        },
-      ],
-    });
-
-    return { data };
-  } catch (e) {
-    return { error: e as FetcherErrorType };
-  }
-};
-```

@@ -12,9 +12,9 @@ export class DeleteCoreFilesService {
   checkIfFileExistsAndReturnPath({
     dir_folder,
     file_name,
-    file_secure,
+    secure,
   }: DeleteCoreFilesArgs) {
-    const path = file_secure
+    const path = secure
       ? ABSOLUTE_PATHS_BACKEND.uploads.private
       : ABSOLUTE_PATHS_BACKEND.uploads.public;
 
@@ -31,11 +31,11 @@ export class DeleteCoreFilesService {
     return filePath;
   }
 
-  delete({ dir_folder, file_name, file_secure }: DeleteCoreFilesArgs) {
+  delete({ dir_folder, file_name, secure }: DeleteCoreFilesArgs) {
     const path = this.checkIfFileExistsAndReturnPath({
       dir_folder,
       file_name,
-      file_secure,
+      secure,
     });
 
     // Remove file from server

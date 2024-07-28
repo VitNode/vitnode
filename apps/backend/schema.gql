@@ -127,6 +127,11 @@ type EditorShowCoreMiddleware {
   sticky: Boolean!
 }
 
+input FileEditAdminThemeEditor {
+  file: Upload
+  keep: Boolean
+}
+
 type FilesAdminPluginsObj {
   admin_pages: Int!
   admin_templates: Int!
@@ -193,8 +198,8 @@ type LogoShowCoreThemeEditor {
 }
 
 input LogosEditAdminThemeEditor {
-  dark: Upload
-  light: Upload
+  dark: FileEditAdminThemeEditor
+  light: FileEditAdminThemeEditor
   mobile_width: Int!
   text: String!
   width: Int!

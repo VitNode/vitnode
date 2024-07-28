@@ -55,7 +55,8 @@ export const useCreateNavPluginAdmin = ({
         ...values,
         previousCode: data.code,
         pluginCode: Array.isArray(code) ? code[0] : code,
-        parentCode: values.parent_code === 'null' ? null : values.parent_code,
+        parentCode:
+          values.parent_code === 'null' ? undefined : values.parent_code,
         keywords: values.keywords.map(keyword => keyword.value),
       });
 
@@ -66,7 +67,8 @@ export const useCreateNavPluginAdmin = ({
       const mutation = await createMutationApi({
         ...values,
         pluginCode: Array.isArray(code) ? code[0] : code,
-        parentCode: values.parent_code === 'null' ? null : values.parent_code,
+        parentCode:
+          values.parent_code === 'null' ? undefined : values.parent_code,
         keywords: values.keywords.map(keyword => keyword.value),
       });
       if (mutation?.error) {

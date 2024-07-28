@@ -17,11 +17,11 @@ interface Args<T> {
 }
 
 interface ReturnValues<T> {
-  cursor: number | null;
   first: number;
   last: number;
   search: string;
-  sortBy: { column: keyof T; direction: SortDirectionEnum } | null;
+  cursor?: number;
+  sortBy?: { column: keyof T; direction: SortDirectionEnum };
 }
 
 export function getPaginationTool<T extends Record<string, unknown>>({
@@ -35,7 +35,7 @@ export function getPaginationTool<T extends Record<string, unknown>>({
       ? null
       : Number(searchParams.first ?? 0),
     last: Number(searchParams.last ?? 0),
-    cursor: Number(searchParams.cursor) ?? null,
+    cursor: Number(searchParams.cursor) || undefined,
     search: search ? (searchParams.search ?? '') : '',
     sortBy: getGetSortByParamsAPI({ constEnum: sortByEnum, searchParams }),
   };
@@ -52,10 +52,12 @@ function getGetSortByParamsAPI<T extends Record<string, unknown>>({
 }: {
   searchParams: Pick<SearchParamsPagination, 'sortBy' | 'sortDirection'>;
   constEnum?: T;
-}): {
-  column: keyof T;
-  direction: SortDirectionEnum;
-} | null {
+}):
+  | {
+      column: keyof T;
+      direction: SortDirectionEnum;
+    }
+  | undefined {
   const sort = {
     by: searchParams.sortBy?.toLowerCase(),
     direction: searchParams.sortDirection?.toLowerCase(),
@@ -68,7 +70,7 @@ function getGetSortByParamsAPI<T extends Record<string, unknown>>({
     !(sort.by in constEnum) ||
     !(sort.direction in SortDirectionEnum)
   ) {
-    return null;
+    return;
   }
 
   return {
