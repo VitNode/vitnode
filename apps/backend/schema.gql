@@ -192,6 +192,8 @@ type LayoutAdminInstallObj {
 type LogoShowCoreThemeEditor {
   dark: UploadCoreFilesObj
   light: UploadCoreFilesObj
+  mobile_dark: UploadCoreFilesObj
+  mobile_light: UploadCoreFilesObj
   mobile_width: Int!
   text: String!
   width: Int!
@@ -200,6 +202,8 @@ type LogoShowCoreThemeEditor {
 input LogosEditAdminThemeEditor {
   dark: FileEditAdminThemeEditor
   light: FileEditAdminThemeEditor
+  mobile_dark: FileEditAdminThemeEditor
+  mobile_light: FileEditAdminThemeEditor
   mobile_width: Int!
   text: String!
   width: Int!

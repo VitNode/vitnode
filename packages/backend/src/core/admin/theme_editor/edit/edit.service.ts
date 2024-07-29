@@ -78,7 +78,7 @@ export class EditAdminThemeEditorService {
     const config = getConfigFile();
 
     await Promise.all(
-      ['dark', 'light'].map(async el => {
+      ['dark', 'light', 'mobile_dark', 'mobile_light'].map(async el => {
         if (logos[el]?.keep && config.logos[el]) return;
 
         if (config.logos[el]) {

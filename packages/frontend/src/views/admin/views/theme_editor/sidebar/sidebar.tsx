@@ -56,29 +56,29 @@ export const SidebarThemeEditor = () => {
               {tabs[activeTab]}
             </motion.div>
           </ScrollArea>
-
-          <div className="bg-card/75 flex items-center gap-2 border-t p-3 backdrop-blur">
-            <Link
-              href="/admin/core/dashboard"
-              className={buttonVariants({
-                variant: 'ghost',
-                size: 'sm',
-                className: 'w-full',
-              })}
-              aria-label={t('close')}
-            >
-              {t('cancel')}
-            </Link>
-
-            <SubmitSidebarThemeEditor
-              onClick={async () => form.handleSubmit(onSubmit)()}
-              isPending={form.formState.isSubmitting}
-              disable={!form.formState.isDirty}
-              openSubmitDialog={openSubmitDialog}
-              setOpenSubmitDialog={setOpenSubmitDialog}
-            />
-          </div>
         </AnimatePresence>
+
+        <div className="bg-card/75 flex items-center gap-2 border-t p-3 backdrop-blur">
+          <Link
+            href="/admin/core/dashboard"
+            className={buttonVariants({
+              variant: 'ghost',
+              size: 'sm',
+              className: 'w-full',
+            })}
+            aria-label={t('close')}
+          >
+            {t('cancel')}
+          </Link>
+
+          <SubmitSidebarThemeEditor
+            onClick={async () => form.handleSubmit(onSubmit)()}
+            isPending={form.formState.isSubmitting}
+            disable={!form.formState.isDirty}
+            openSubmitDialog={openSubmitDialog}
+            setOpenSubmitDialog={setOpenSubmitDialog}
+          />
+        </div>
       </form>
     </Form>
   );

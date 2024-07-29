@@ -23,22 +23,16 @@ export const mutationApi = async (formData: FormData) => {
 
   // Files
   const files: FetcherUploads[] = [];
-  if (formData.get('logos.light.file')) {
-    files.push({
-      files: formData.get('logos.light.file') as File,
-      variable: 'logos.light.file',
-    });
-  } else if (formData.get('logos.light.keep')) {
-    logos.light = { keep: true };
-  }
-  if (formData.get('logos.dark.file')) {
-    files.push({
-      files: formData.get('logos.dark.file') as File,
-      variable: 'logos.dark.file',
-    });
-  } else if (formData.get('logos.dark.keep')) {
-    logos.dark = { keep: true };
-  }
+  ['light', 'dark', 'mobile_light', 'mobile_dark'].forEach(el => {
+    if (formData.get(`logos.${el}.file`)) {
+      files.push({
+        files: formData.get(`logos.${el}.file`) as File,
+        variable: `logos.${el}.file`,
+      });
+    } else if (formData.get(`logos.${el}.keep`)) {
+      logos[el] = { keep: true };
+    }
+  });
 
   try {
     await fetcher<

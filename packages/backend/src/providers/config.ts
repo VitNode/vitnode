@@ -36,8 +36,8 @@ export interface ConfigType {
     width: number;
     dark?: UploadCoreFilesObj;
     light?: UploadCoreFilesObj;
-    mobile_dark?: string;
-    mobile_light?: string;
+    mobile_dark?: UploadCoreFilesObj;
+    mobile_light?: UploadCoreFilesObj;
   };
   rebuild_required: {
     langs: boolean;

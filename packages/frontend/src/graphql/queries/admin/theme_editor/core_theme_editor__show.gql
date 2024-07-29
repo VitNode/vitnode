@@ -206,6 +206,26 @@ query Core_theme_editor__show {
         mimetype
         width
       }
+      mobile_dark {
+        dir_folder
+        extension
+        file_name
+        file_name_original
+        file_size
+        height
+        mimetype
+        width
+      }
+      mobile_light {
+        dir_folder
+        extension
+        file_name
+        file_name_original
+        file_size
+        height
+        mimetype
+        width
+      }
     }
   }
 }

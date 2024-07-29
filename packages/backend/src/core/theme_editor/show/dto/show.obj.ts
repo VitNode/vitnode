@@ -87,6 +87,12 @@ export class LogoShowCoreThemeEditor {
 
   @Field(() => UploadCoreFilesObj, { nullable: true })
   dark?: UploadCoreFilesObj;
+
+  @Field(() => UploadCoreFilesObj, { nullable: true })
+  mobile_light?: UploadCoreFilesObj;
+
+  @Field(() => UploadCoreFilesObj, { nullable: true })
+  mobile_dark?: UploadCoreFilesObj;
 }
 
 @ObjectType()

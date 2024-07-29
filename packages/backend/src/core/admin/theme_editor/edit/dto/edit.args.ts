@@ -96,6 +96,12 @@ class LogosEditAdminThemeEditor {
 
   @Field(() => FileEditAdminThemeEditor, { nullable: true })
   light?: FileEditAdminThemeEditor;
+
+  @Field(() => FileEditAdminThemeEditor, { nullable: true })
+  mobile_dark?: FileEditAdminThemeEditor;
+
+  @Field(() => FileEditAdminThemeEditor, { nullable: true })
+  mobile_light?: FileEditAdminThemeEditor;
 }
 
 @ArgsType()

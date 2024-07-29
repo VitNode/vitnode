@@ -223,6 +223,8 @@ export type LogoShowCoreThemeEditor = {
   __typename?: 'LogoShowCoreThemeEditor';
   dark?: Maybe<UploadCoreFilesObj>;
   light?: Maybe<UploadCoreFilesObj>;
+  mobile_dark?: Maybe<UploadCoreFilesObj>;
+  mobile_light?: Maybe<UploadCoreFilesObj>;
   mobile_width: Scalars['Int']['output'];
   text: Scalars['String']['output'];
   width: Scalars['Int']['output'];
@@ -231,6 +233,8 @@ export type LogoShowCoreThemeEditor = {
 export type LogosEditAdminThemeEditor = {
   dark?: InputMaybe<FileEditAdminThemeEditor>;
   light?: InputMaybe<FileEditAdminThemeEditor>;
+  mobile_dark?: InputMaybe<FileEditAdminThemeEditor>;
+  mobile_light?: InputMaybe<FileEditAdminThemeEditor>;
   mobile_width: Scalars['Int']['input'];
   text: Scalars['String']['input'];
   width: Scalars['Int']['input'];
@@ -1792,7 +1796,7 @@ export type Admin__Core_Nav__ShowQuery = { __typename?: 'Query', core_nav__show:
 export type Core_Theme_Editor__ShowQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Core_Theme_Editor__ShowQuery = { __typename?: 'Query', core_theme_editor__show: { __typename?: 'ShowCoreThemeEditorObj', colors?: { __typename?: 'ColorsShowCoreThemeEditor', background: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, primary: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, secondary: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, primary_foreground: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, secondary_foreground: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, destructive: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, destructive_foreground: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, cover: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, cover_foreground: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, muted: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, muted_foreground: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, accent: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, accent_foreground: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, card: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, border: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } } }, logos: { __typename?: 'LogoShowCoreThemeEditor', text: string, width: number, mobile_width: number, light?: { __typename?: 'UploadCoreFilesObj', dir_folder: string, extension: string, file_name: string, file_name_original: string, file_size: number, height?: number, mimetype: string, width?: number }, dark?: { __typename?: 'UploadCoreFilesObj', dir_folder: string, extension: string, file_name: string, file_name_original: string, file_size: number, height?: number, mimetype: string, width?: number } } } };
+export type Core_Theme_Editor__ShowQuery = { __typename?: 'Query', core_theme_editor__show: { __typename?: 'ShowCoreThemeEditorObj', colors?: { __typename?: 'ColorsShowCoreThemeEditor', background: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, primary: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, secondary: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, primary_foreground: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, secondary_foreground: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, destructive: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, destructive_foreground: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, cover: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, cover_foreground: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, muted: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, muted_foreground: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, accent: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, accent_foreground: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, card: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } }, border: { __typename?: 'ThemeVariable', dark: { __typename?: 'HslColor', h: number, l: number, s: number }, light: { __typename?: 'HslColor', h: number, l: number, s: number } } }, logos: { __typename?: 'LogoShowCoreThemeEditor', text: string, width: number, mobile_width: number, light?: { __typename?: 'UploadCoreFilesObj', dir_folder: string, extension: string, file_name: string, file_name_original: string, file_size: number, height?: number, mimetype: string, width?: number }, dark?: { __typename?: 'UploadCoreFilesObj', dir_folder: string, extension: string, file_name: string, file_name_original: string, file_size: number, height?: number, mimetype: string, width?: number }, mobile_dark?: { __typename?: 'UploadCoreFilesObj', dir_folder: string, extension: string, file_name: string, file_name_original: string, file_size: number, height?: number, mimetype: string, width?: number }, mobile_light?: { __typename?: 'UploadCoreFilesObj', dir_folder: string, extension: string, file_name: string, file_name_original: string, file_size: number, height?: number, mimetype: string, width?: number } } } };
 
 export type Core_GlobalQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2958,6 +2962,26 @@ export const Core_Theme_Editor__Show = gql`
         width
       }
       dark {
+        dir_folder
+        extension
+        file_name
+        file_name_original
+        file_size
+        height
+        mimetype
+        width
+      }
+      mobile_dark {
+        dir_folder
+        extension
+        file_name
+        file_name_original
+        file_size
+        height
+        mimetype
+        width
+      }
+      mobile_light {
         dir_folder
         extension
         file_name
