@@ -25,11 +25,17 @@ export const LogoHeader = async () => {
       !logos.mobile_dark &&
       !logos.light &&
       !logos.mobile_light ? (
-        <span className="text-lg font-semibold sm:text-2xl">{logos.text}</span>
+        <span
+          id="vitnode_logo_text"
+          className="text-lg font-semibold sm:text-2xl"
+        >
+          {logos.text}
+        </span>
       ) : null}
 
       {logos.light && (
         <Image
+          id="vitnode_logo_light"
           src={`${CONFIG.backend_public_url}/${logos.light.dir_folder}/${logos.light.file_name}`}
           width={logos.light.width}
           height={logos.light.height}
@@ -43,6 +49,7 @@ export const LogoHeader = async () => {
       )}
       {logos.dark && (
         <Image
+          id="vitnode_logo_dark"
           src={`${CONFIG.backend_public_url}/${logos.dark.dir_folder}/${logos.dark.file_name}`}
           width={logos.dark.width}
           height={logos.dark.height}
@@ -59,6 +66,7 @@ export const LogoHeader = async () => {
 
       {logos.mobile_light && (
         <Image
+          id="vitnode_logo_mobile_light"
           src={`${CONFIG.backend_public_url}/${logos.mobile_light.dir_folder}/${logos.mobile_light.file_name}`}
           width={logos.mobile_light.width}
           height={logos.mobile_light.height}
@@ -72,6 +80,7 @@ export const LogoHeader = async () => {
       )}
       {logos.mobile_dark && (
         <Image
+          id="vitnode_logo_mobile_dark"
           src={`${CONFIG.backend_public_url}/${logos.mobile_dark.dir_folder}/${logos.mobile_dark.file_name}`}
           width={logos.mobile_dark.width}
           height={logos.mobile_dark.height}
