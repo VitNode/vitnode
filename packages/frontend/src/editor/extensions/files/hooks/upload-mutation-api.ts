@@ -24,7 +24,7 @@ export const uploadMutationApi = async (formData: FormData) => {
         plugin,
         folder,
       },
-      uploads: [
+      files: [
         {
           files: file,
           variable: 'file',

@@ -28,7 +28,7 @@ export class UploadAvatarCoreMembersService {
       this.deleteFile.checkIfFileExistsAndReturnPath({
         dir_folder: avatar.dir_folder,
         file_name: avatar.file_name,
-        file_secure: false,
+        secure: false,
       });
 
       // Delete from database
@@ -40,12 +40,12 @@ export class UploadAvatarCoreMembersService {
       this.deleteFile.delete({
         dir_folder: avatar.dir_folder,
         file_name: avatar.file_name,
-        file_secure: false,
+        secure: false,
       });
     }
 
     const uploadFiles = await this.uploadFile.upload({
-      files: [file],
+      file,
       maxUploadSizeBytes: 1e6, // 1MB,
       acceptMimeType: ['image/png', 'image/jpeg'],
       plugin: 'core',

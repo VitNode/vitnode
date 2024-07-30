@@ -18,7 +18,7 @@ export const mutationApi = async (formData: FormData) => {
       Core_Members__Avatar__UploadMutationVariables
     >({
       query: Core_Members__Avatar__Upload,
-      uploads: [
+      files: [
         {
           files,
           variable: 'file',

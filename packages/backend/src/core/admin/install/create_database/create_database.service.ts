@@ -45,7 +45,6 @@ export class CreateDatabaseAdminInstallService {
         protected: true,
         timezone: 'America/New_York',
         locale: 'enUS',
-        site_copyright: `Copyright © VitNode ${new Date().getFullYear()}`,
       },
     ]);
 

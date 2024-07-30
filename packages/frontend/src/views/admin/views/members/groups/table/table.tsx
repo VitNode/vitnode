@@ -22,46 +22,45 @@ export const TableGroupsMembersAdmin = ({
     <DataTable
       data={edges}
       pageInfo={pageInfo}
-      defaultPageSize={10}
       columns={[
         {
           id: 'name',
-          text: tCore('table.name'),
-          cell: ({ data }) => {
+          title: tCore('table.name'),
+          cell: ({ row }) => {
             return (
               <div className="flex items-center gap-4">
-                <span>{convertText(data.name)}</span>
-                {data.default && <Badge>{t('default')}</Badge>}
-                {data.root && <Badge>{t('root')}</Badge>}
+                <span>{convertText(row.name)}</span>
+                {row.default && <Badge>{t('default')}</Badge>}
+                {row.root && <Badge>{t('root')}</Badge>}
               </div>
             );
           },
         },
         {
           id: 'users_count',
-          text: t('table.users_count'),
-          cell: ({ data }) => {
-            if (data.guest) return null;
+          title: t('table.users_count'),
+          cell: ({ row }) => {
+            if (row.guest) return null;
 
             return (
-              <Link href={`/admin/members/users?groups=${data.id}`}>
-                {data.users_count}
+              <Link href={`/admin/members/users?groups=${row.id}`}>
+                {row.users_count}
               </Link>
             );
           },
         },
         {
           id: 'updated',
-          text: tCore('table.updated'),
+          title: tCore('table.updated'),
           sortable: true,
-          cell: ({ data }) => {
-            return <DateFormat date={data.updated} />;
+          cell: ({ row }) => {
+            return <DateFormat date={row.updated} />;
           },
         },
         {
           id: 'actions',
-          cell: ({ data }) => {
-            return <ActionsTableGroupsMembersAdmin {...data} />;
+          cell: ({ row }) => {
+            return <ActionsTableGroupsMembersAdmin {...row} />;
           },
         },
       ]}

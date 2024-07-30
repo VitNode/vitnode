@@ -77,4 +77,51 @@ query Core_sessions__authorization {
       value
     }
   }
+  core_theme_editor__show {
+    logos {
+      dark {
+        dir_folder
+        extension
+        file_name
+        file_name_original
+        file_size
+        height
+        mimetype
+        width
+      }
+      light {
+        dir_folder
+        extension
+        file_name
+        file_name_original
+        file_size
+        height
+        mimetype
+        width
+      }
+      mobile_dark {
+        dir_folder
+        extension
+        file_name
+        file_name_original
+        file_size
+        height
+        mimetype
+        width
+      }
+      mobile_light {
+        dir_folder
+        extension
+        file_name
+        file_name_original
+        file_size
+        height
+        mimetype
+        width
+      }
+      mobile_width
+      text
+      width
+    }
+  }
 }

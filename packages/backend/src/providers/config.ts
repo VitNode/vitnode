@@ -1,6 +1,8 @@
 import * as fs from 'fs';
 import { join } from 'path';
 
+import { UploadCoreFilesObj } from '@/core/files/helpers/upload/dto/upload.obj';
+
 export enum AllowTypeFilesEnum {
   all = 'all',
   images_videos = 'images_videos',
@@ -28,6 +30,15 @@ export interface ConfigType {
     default: boolean;
     enabled: boolean;
   }[];
+  logos: {
+    mobile_width: number;
+    text: string;
+    width: number;
+    dark?: UploadCoreFilesObj;
+    light?: UploadCoreFilesObj;
+    mobile_dark?: UploadCoreFilesObj;
+    mobile_light?: UploadCoreFilesObj;
+  };
   rebuild_required: {
     langs: boolean;
     plugins: boolean;
@@ -51,6 +62,11 @@ export interface ConfigType {
 }
 
 export const DEFAULT_CONFIG_DATA: ConfigType = {
+  logos: {
+    text: 'VitNode Website',
+    width: 10,
+    mobile_width: 3,
+  },
   security: {
     captcha: {
       type: CaptchaTypeEnum.none,

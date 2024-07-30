@@ -1,4 +1,6 @@
-import { ArgsType, Field, InputType, Int } from '@nestjs/graphql';
+import { ArgsType, Field, Float, InputType, Int } from '@nestjs/graphql';
+
+import { FileUpload, GraphQLUpload } from '@/graphql-upload';
 
 @InputType()
 export class HslColorInput {
@@ -69,8 +71,44 @@ class ColorsEditAdminThemeEditor {
   border: ThemeVariableInput;
 }
 
+@InputType()
+class FileEditAdminThemeEditor {
+  @Field(() => GraphQLUpload, { nullable: true })
+  file?: Promise<FileUpload>;
+
+  @Field(() => Boolean, { nullable: true })
+  keep?: boolean;
+}
+
+@InputType()
+class LogosEditAdminThemeEditor {
+  @Field(() => Float)
+  width: number;
+
+  @Field(() => Float)
+  mobile_width: number;
+
+  @Field()
+  text: string;
+
+  @Field(() => FileEditAdminThemeEditor, { nullable: true })
+  dark?: FileEditAdminThemeEditor;
+
+  @Field(() => FileEditAdminThemeEditor, { nullable: true })
+  light?: FileEditAdminThemeEditor;
+
+  @Field(() => FileEditAdminThemeEditor, { nullable: true })
+  mobile_dark?: FileEditAdminThemeEditor;
+
+  @Field(() => FileEditAdminThemeEditor, { nullable: true })
+  mobile_light?: FileEditAdminThemeEditor;
+}
+
 @ArgsType()
 export class EditAdminThemeEditorArgs {
-  @Field(() => ColorsEditAdminThemeEditor)
-  colors: ColorsEditAdminThemeEditor;
+  @Field(() => ColorsEditAdminThemeEditor, { nullable: true })
+  colors?: ColorsEditAdminThemeEditor;
+
+  @Field(() => LogosEditAdminThemeEditor)
+  logos: LogosEditAdminThemeEditor;
 }

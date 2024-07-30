@@ -60,6 +60,11 @@ export class ShowAdminNavService {
           keywords: [],
           children: [
             {
+              code: 'theme-editor',
+              href: '/theme-editor',
+              keywords: ['theme', 'editor', 'color', 'logo'],
+            },
+            {
               code: 'nav',
               href: 'nav',
               keywords: ['nav', 'navigation'],
@@ -67,7 +72,7 @@ export class ShowAdminNavService {
             {
               code: 'editor',
               href: 'editor',
-              keywords: ['editor'],
+              keywords: ['editor', 'tiptap'],
             },
           ],
         },

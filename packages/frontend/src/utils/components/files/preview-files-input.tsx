@@ -1,11 +1,12 @@
+import { FilesInputValue } from '@/components/ui/files-input';
 import { ItemPreviewFilesInput } from './item-preview-files-input';
 
 export const PreviewFilesInput = ({
   onChange,
   value,
 }: {
-  onChange: (e: File[]) => void;
-  value: File[] | undefined;
+  onChange: (e: FilesInputValue[]) => void;
+  value: FilesInputValue[] | undefined;
 }) => {
   if (!value || value.length === 0) return null;
 
@@ -13,7 +14,11 @@ export const PreviewFilesInput = ({
     <ul className="flex flex-col gap-4">
       {value.map((file, index) => (
         <ItemPreviewFilesInput
-          key={`${file.name}_${file.lastModified}_${file.size}`}
+          key={
+            file instanceof File
+              ? `${file.name}_${file.lastModified}_${file.size}`
+              : `${file.dir_folder}_${file.file_name}`
+          }
           onChange={onChange}
           file={file}
           value={value}

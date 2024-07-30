@@ -22,29 +22,31 @@ interface TMin {
   id: number;
 }
 
+export interface DataTableProps<T extends TMin> {
+  columns: {
+    id: string | keyof T;
+    cell?: (data: { allData: T[]; row: T }) => React.ReactNode;
+    sortable?: boolean;
+    title?: string;
+  }[];
+  data: T[];
+  defaultSorting: {
+    sortBy: keyof T;
+    sortDirection: 'asc' | 'desc';
+  };
+  pageInfo: PageInfo;
+  defaultPageSize?: 10 | 20 | 30 | 40 | 50;
+  searchPlaceholder?: string;
+}
+
 export function DataTable<T extends TMin>({
   data,
   columns,
   defaultSorting,
   searchPlaceholder,
   pageInfo,
-  defaultPageSize,
-}: {
-  columns: {
-    id: string | keyof T;
-    cell?: (data: { allData: T[]; data: T }) => React.ReactNode;
-    sortable?: boolean;
-    text?: string;
-  }[];
-  data: T[];
-  defaultPageSize: 10 | 20 | 30 | 40 | 50;
-  defaultSorting: {
-    sortBy: keyof T;
-    sortDirection: 'asc' | 'desc';
-  };
-  pageInfo: PageInfo;
-  searchPlaceholder?: string;
-}) {
+  defaultPageSize = 10,
+}: DataTableProps<T>) {
   const t = useTranslations('core');
   const [isPending, startTransition] = React.useTransition();
 
@@ -66,7 +68,7 @@ export function DataTable<T extends TMin>({
                   const text =
                     column.id.toString() === 'actions'
                       ? ''
-                      : column.text || column.id.toString();
+                      : column.title || column.id.toString();
 
                   return (
                     <TableHead key={column.id.toString()}>
@@ -99,7 +101,7 @@ export function DataTable<T extends TMin>({
                         column.id.toString() as keyof T
                       ] as React.ReactNode;
                       const content =
-                        column.cell?.({ data: row, allData: data }) || cell;
+                        column.cell?.({ row, allData: data }) || cell;
 
                       return (
                         <TableCell key={`${column.id.toString()}_${row.id}`}>

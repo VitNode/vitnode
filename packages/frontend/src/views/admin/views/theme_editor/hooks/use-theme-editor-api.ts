@@ -11,6 +11,7 @@ import { mutationApi } from './mutation-api';
 import { Core_Theme_Editor__ShowQuery } from '@/graphql/graphql';
 import { useRouter } from '@/navigation';
 import { CONFIG } from '@/helpers/config-with-env';
+import { zodFiles } from '@/helpers/zod';
 
 const zObjectHsl = z.object({
   h: z.number(),
@@ -61,12 +62,21 @@ export const useThemeEditorApi = ({
   core_theme_editor__show,
 }: Core_Theme_Editor__ShowQuery) => {
   const [openSubmitDialog, setOpenSubmitDialog] = React.useState(false);
-  const t = useTranslations('core.theme_editor.submit');
+  const t = useTranslations('admin.theme_editor.submit');
   const tCore = useTranslations('core');
   const { push } = useRouter();
   const iframeRef = React.useRef<HTMLIFrameElement>(null);
   const formSchema = z.object({
-    colors: formSchemaColorsThemeEditor,
+    colors: formSchemaColorsThemeEditor.optional(),
+    logos: z.object({
+      light: zodFiles,
+      dark: zodFiles,
+      width: z.number(),
+      mobile_light: zodFiles,
+      mobile_dark: zodFiles,
+      mobile_width: z.number(),
+      text: z.string().min(1).max(100),
+    }),
   });
   const { resolvedTheme, theme } = useTheme();
   const activeTheme: 'dark' | 'light' =
@@ -78,14 +88,32 @@ export const useThemeEditorApi = ({
       colors: {
         ...core_theme_editor__show.colors,
         ['primary-foreground']:
-          core_theme_editor__show.colors.primary_foreground,
+          core_theme_editor__show.colors?.primary_foreground,
         ['secondary-foreground']:
-          core_theme_editor__show.colors.secondary_foreground,
+          core_theme_editor__show.colors?.secondary_foreground,
         ['destructive-foreground']:
-          core_theme_editor__show.colors.destructive_foreground,
-        ['cover-foreground']: core_theme_editor__show.colors.cover_foreground,
-        ['accent-foreground']: core_theme_editor__show.colors.accent_foreground,
-        ['muted-foreground']: core_theme_editor__show.colors.muted_foreground,
+          core_theme_editor__show.colors?.destructive_foreground,
+        ['cover-foreground']: core_theme_editor__show.colors?.cover_foreground,
+        ['accent-foreground']:
+          core_theme_editor__show.colors?.accent_foreground,
+        ['muted-foreground']: core_theme_editor__show.colors?.muted_foreground,
+      },
+      logos: {
+        light: core_theme_editor__show.logos.light
+          ? [core_theme_editor__show.logos.light]
+          : [],
+        dark: core_theme_editor__show.logos.dark
+          ? [core_theme_editor__show.logos.dark]
+          : [],
+        width: core_theme_editor__show.logos.width,
+        mobile_light: core_theme_editor__show.logos.mobile_light
+          ? [core_theme_editor__show.logos.mobile_light]
+          : [],
+        mobile_dark: core_theme_editor__show.logos.mobile_dark
+          ? [core_theme_editor__show.logos.mobile_dark]
+          : [],
+        mobile_width: core_theme_editor__show.logos.mobile_width,
+        text: core_theme_editor__show.logos.text,
       },
     },
   });
@@ -111,25 +139,43 @@ export const useThemeEditorApi = ({
   }, [activeTheme]);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const mutation = await mutationApi({
-      colors: {
-        primary: values.colors.primary,
-        secondary: values.colors.secondary,
-        background: values.colors.background,
-        destructive: values.colors.destructive,
-        cover: values.colors.cover,
-        accent: values.colors.accent,
-        muted: values.colors.muted,
-        card: values.colors.card,
-        border: values.colors.border,
-        primary_foreground: values.colors['primary-foreground'],
-        secondary_foreground: values.colors['secondary-foreground'],
-        destructive_foreground: values.colors['destructive-foreground'],
-        cover_foreground: values.colors['cover-foreground'],
-        accent_foreground: values.colors['accent-foreground'],
-        muted_foreground: values.colors['muted-foreground'],
-      },
+    const formData = new FormData();
+    if (values.colors) {
+      formData.append(
+        'colors',
+        JSON.stringify({
+          primary: values.colors.primary,
+          secondary: values.colors.secondary,
+          background: values.colors.background,
+          destructive: values.colors.destructive,
+          cover: values.colors.cover,
+          accent: values.colors.accent,
+          muted: values.colors.muted,
+          card: values.colors.card,
+          border: values.colors.border,
+          primary_foreground: values.colors['primary-foreground'],
+          secondary_foreground: values.colors['secondary-foreground'],
+          destructive_foreground: values.colors['destructive-foreground'],
+          cover_foreground: values.colors['cover-foreground'],
+          accent_foreground: values.colors['accent-foreground'],
+          muted_foreground: values.colors['muted-foreground'],
+        }),
+      );
+    }
+    formData.append('logos.text', values.logos.text);
+    formData.append('logos.width', values.logos.width.toString());
+    formData.append('logos.mobile_width', values.logos.mobile_width.toString());
+    ['dark', 'light', 'mobile_dark', 'mobile_light'].forEach(el => {
+      if (values.logos[el].length > 0) {
+        if (values.logos[el][0] instanceof File) {
+          formData.append(`logos.${el}.file`, values.logos[el][0]);
+        } else {
+          formData.append(`logos.${el}.keep`, 'true');
+        }
+      }
     });
+
+    const mutation = await mutationApi(formData);
 
     if (mutation?.error) {
       toast.error(tCore('errors.title'), {
@@ -143,7 +189,7 @@ export const useThemeEditorApi = ({
       description: !CONFIG.node_development && t('success.desc'),
     });
     setOpenSubmitDialog(false);
-    push('/');
+    push('/admin/core/dashboard');
   };
 
   const changeColor = ({

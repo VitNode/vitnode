@@ -51,14 +51,14 @@
     --primary: 216 84% 59%;
     --primary-foreground: 216 40% 98%;
     --secondary: 222 25% 18%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary-foreground: 210 40% 98%;
     --muted: 216 32% 11%;
     --muted-foreground: 216 18% 64%;
     --accent: 216 32% 14%;
     --accent-foreground: 0 0% 98%;
     --destructive: 359 78% 55%;
     --destructive-foreground: 210 40% 98%;
-    --border: 216 25% 16%;
+    --border: 216 16% 16%;
     /* --input: var(--border); */
     /* --ring: var(--primary); */
     --cover: 216 64% 39%;

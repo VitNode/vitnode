@@ -56,16 +56,18 @@ export const setCookieFromApi = ({ res }: { res: Response }) => {
   );
 };
 
-interface Args<TVariables> {
+export interface FetcherUploads {
+  files: File | File[];
+  variable: string;
+}
+
+export interface FetcherArgs<TVariables> {
   query: DocumentNode;
   cache?: RequestCache;
+  files?: FetcherUploads[];
   headers?: HeadersInit;
   next?: NextFetchRequestConfig;
   signal?: AbortSignal;
-  uploads?: {
-    files: File | File[];
-    variable: string;
-  }[];
   variables?: TVariables;
 }
 
@@ -75,15 +77,15 @@ export async function fetcher<TData, TVariables = object>({
   next,
   query,
   signal,
-  uploads,
+  files,
   variables,
-}: Args<TVariables>): Promise<TData> {
+}: FetcherArgs<TVariables>): Promise<TData> {
   const formData = new FormData();
 
-  if (uploads) {
+  if (files) {
     const preVariables = {} as Record<string, unknown>;
 
-    uploads.forEach(({ files, variable }) => {
+    files.forEach(({ files, variable }) => {
       if (Array.isArray(files)) {
         preVariables[variable] = files.map(() => null);
       } else {
@@ -106,7 +108,7 @@ export async function fetcher<TData, TVariables = object>({
 
     // Map
     let mapIndex = 0;
-    uploads.forEach(({ files, variable }) => {
+    files.forEach(({ files, variable }) => {
       if (Array.isArray(files)) {
         files.forEach((_file, index) => {
           preMap.set(`${mapIndex}`, [`variables.${variable}.${index}`]);
@@ -124,7 +126,7 @@ export async function fetcher<TData, TVariables = object>({
     formData.append('map', JSON.stringify(Object.fromEntries(preMap)));
 
     let currentIndex = 0;
-    uploads.forEach(({ files }) => {
+    files.forEach(({ files }) => {
       if (Array.isArray(files)) {
         files.forEach(file => {
           formData.append(`${currentIndex}`, file);
@@ -160,7 +162,7 @@ export async function fetcher<TData, TVariables = object>({
     credentials: 'include',
     mode: 'cors',
     signal,
-    headers: uploads
+    headers: files
       ? {
           'x-apollo-operation-name': '*',
           ...internalHeaders,
@@ -169,7 +171,7 @@ export async function fetcher<TData, TVariables = object>({
           'Content-Type': 'application/json',
           ...internalHeaders,
         },
-    body: uploads
+    body: files
       ? formData
       : JSON.stringify({ query: internalQuery, variables }),
     next,

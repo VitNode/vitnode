@@ -22,7 +22,7 @@ export const mutationApi = async (formData: FormData) => {
       variables: {
         code: formData.get('code') as string,
       },
-      uploads: [
+      files: [
         {
           files,
           variable: 'file',

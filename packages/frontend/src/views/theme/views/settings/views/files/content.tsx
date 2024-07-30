@@ -29,7 +29,6 @@ export const ContentFilesSettings = ({
     <DataTable
       data={edges}
       pageInfo={pageInfo}
-      defaultPageSize={10}
       defaultSorting={{
         sortBy: 'created',
         sortDirection: 'desc',
@@ -38,16 +37,16 @@ export const ContentFilesSettings = ({
       columns={[
         {
           id: 'id',
-          cell: ({ data }) => {
+          cell: ({ row }) => {
             const src =
-              data?.width && data.height
-                ? `${CONFIG.graphql_public_url}/${data.dir_folder}/${data.file_name}`
+              row?.width && row.height
+                ? `${CONFIG.graphql_public_url}/${row.dir_folder}/${row.file_name}`
                 : null;
-            const alt = data?.file_alt ?? data?.file_name ?? '';
+            const alt = row?.file_alt ?? row?.file_name ?? '';
 
             return (
               <div className="relative flex h-14 w-20 shrink-0 items-center justify-center overflow-hidden rounded-lg">
-                {data.width && data.height && src ? (
+                {row.width && row.height && src ? (
                   <Image
                     src={src}
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -64,20 +63,20 @@ export const ContentFilesSettings = ({
         },
         {
           id: 'file_name',
-          text: tCore('table.name'),
-          cell: ({ data }) => {
+          title: tCore('table.name'),
+          cell: ({ row }) => {
             return (
               <div>
                 <span className="block max-w-80 truncate leading-tight">
-                  {data.file_name_original}
+                  {row.file_name_original}
                 </span>
                 <div className="text-muted-foreground flex flex-wrap items-center gap-2 text-sm">
-                  <span>{data.mimetype}</span>
-                  {data?.width && data?.height && (
+                  <span>{row.mimetype}</span>
+                  {row?.width && row?.height && (
                     <>
                       <span>&middot;</span>
                       <span>
-                        {data.width}x{data.height}
+                        {row.width}x{row.height}
                       </span>
                     </>
                   )}
@@ -88,25 +87,25 @@ export const ContentFilesSettings = ({
         },
         {
           id: 'created',
-          text: tCore('table.created'),
+          title: tCore('table.created'),
           sortable: true,
-          cell: ({ data }) => {
-            return <DateFormat date={data.created} />;
+          cell: ({ row }) => {
+            return <DateFormat date={row.created} />;
           },
         },
         {
           id: 'file_size',
-          text: t('table.file_size'),
+          title: t('table.file_size'),
           sortable: true,
-          cell: ({ data }) => {
-            return formatBytes(data.file_size);
+          cell: ({ row }) => {
+            return formatBytes(row.file_size);
           },
         },
         {
           id: 'count_uses',
-          text: t('table.count_uses'),
-          cell: ({ data }) => {
-            if (data.count_uses === 0) {
+          title: t('table.count_uses'),
+          cell: ({ row }) => {
+            if (row.count_uses === 0) {
               return (
                 <div className="flex items-center gap-2">
                   <TooltipProvider>
@@ -117,17 +116,17 @@ export const ContentFilesSettings = ({
                       <TooltipContent>{t('temp_file')}</TooltipContent>
                     </Tooltip>
                   </TooltipProvider>
-                  {data.count_uses}
+                  {row.count_uses}
                 </div>
               );
             }
 
-            return data.count_uses;
+            return row.count_uses;
           },
         },
         {
           id: 'actions',
-          cell: ({ data }) => {
+          cell: ({ row }) => {
             return (
               <TooltipProvider>
                 <Tooltip>
@@ -138,9 +137,9 @@ export const ContentFilesSettings = ({
                         variant: 'ghost',
                       })}
                       href={
-                        data.width && data.height
-                          ? `${CONFIG.backend_public_url}/${data.dir_folder}/${data.file_name}`
-                          : `${CONFIG.backend_url}/secure_files/${data.id}?security_key=${data.security_key}`
+                        row.width && row.height
+                          ? `${CONFIG.backend_public_url}/${row.dir_folder}/${row.file_name}`
+                          : `${CONFIG.backend_url}/secure_files/${row.id}?security_key=${row.security_key}`
                       }
                       target="_blank"
                       aria-label={tCore('download')}

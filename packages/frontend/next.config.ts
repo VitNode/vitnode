@@ -13,6 +13,16 @@ const nextConfig = (config: NextConfig): NextConfig => {
     },
     output: 'standalone',
     transpilePackages: ['lucide-react', 'vitnode-shared', 'vitnode-frontend'],
+    images: {
+      remotePatterns: [
+        {
+          protocol: 'http',
+          hostname: 'localhost',
+          port: '8080',
+          pathname: '/public/**',
+        },
+      ],
+    },
   };
 };
 

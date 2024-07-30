@@ -38,7 +38,7 @@ export const AuthUserBar = () => {
           <AvatarUser user={session} sizeInRem={1.75} />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-80 p-2" align="end">
+      <DropdownMenuContent className="w-64 p-2" align="end">
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
             <p className="text-base font-medium leading-none">{name}</p>

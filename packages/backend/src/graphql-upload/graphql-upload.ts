@@ -7,7 +7,9 @@ export const GraphQLUpload = new GraphQLScalarType({
   description: 'The `Upload` scalar type represents a file upload.',
   async parseValue(value) {
     if (value instanceof Upload) return value.promise;
-    throw new GraphQLError('Upload value invalid.');
+    throw new GraphQLError(
+      'Upload value invalid. Make sure it is "files" array object provided in "fetcher".',
+    );
   },
   parseLiteral(node) {
     throw new GraphQLError('Upload literal unsupported.', { nodes: node });

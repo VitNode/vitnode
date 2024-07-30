@@ -48,7 +48,7 @@ export class DeleteCoreEditorService {
 
     this.deleteFile.delete({
       ...findFile,
-      file_secure: !!findFile.security_key,
+      secure: !!findFile.security_key,
     });
 
     await this.databaseService.db

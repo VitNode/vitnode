@@ -3,9 +3,13 @@ import { Upload } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 
+import { UploadCoreFilesObj } from '@/graphql/graphql';
+
 import { useMergeRefs } from '../../helpers/use-merge-refs';
 import { cn } from '../../helpers/classnames';
 import { PreviewFilesInput } from '../../utils/components/files/preview-files-input';
+
+export type FilesInputValue = File | UploadCoreFilesObj;
 
 export interface FilesInputInputProps
   extends Omit<
@@ -14,9 +18,10 @@ export interface FilesInputInputProps
   > {
   acceptExtensions: string[];
   maxFileSizeInMb: number;
-  onChange: (e: File[]) => void;
-  value: File[] | undefined;
+  onChange: (e: FilesInputValue[]) => void;
+  value: FilesInputValue[] | undefined;
   ref?: React.RefCallback<HTMLInputElement>;
+  showInfo?: boolean;
 }
 
 export const FilesInput = ({
@@ -26,8 +31,9 @@ export const FilesInput = ({
   maxFileSizeInMb,
   multiple,
   onChange,
-  value: stateValue,
+  value: stateValue = [],
   ref,
+  showInfo,
   ...props
 }: FilesInputInputProps) => {
   const t = useTranslations('core');
@@ -73,14 +79,15 @@ export const FilesInput = ({
   };
 
   return (
-    <>
+    <div className="@container">
       {((stateValue && stateValue.length === 0 && !multiple) || multiple) && (
         <div
           className={cn(
-            'm-h-32 border-input bg-background placeholder:text-muted-foreground focus-visible:ring-ring flex w-full flex-col items-center justify-center rounded-md border px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-1 disabled:cursor-not-allowed disabled:opacity-50',
+            'm-h-32 border-input bg-background placeholder:text-muted-foreground focus-visible:ring-ring flex w-full flex-col rounded-md border px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-1 disabled:cursor-not-allowed disabled:opacity-50',
             className,
             {
               'cursor-not-allowed opacity-50': disabled,
+              'ring-ring outline-none ring-2 ring-offset-2': isDrag,
             },
           )}
           role="button"
@@ -115,19 +122,25 @@ export const FilesInput = ({
             handleUploadFile(e.dataTransfer.files);
           }}
         >
-          <div className="text-muted-foreground flex flex-col items-center justify-center pb-6 pt-5">
-            <Upload />
-            <p className="my-2 text-sm font-semibold">
-              {t(isDrag ? 'forms.files.drop_here' : 'forms.files.title')}
-            </p>
-            <p className="text-xs">
-              {acceptExtensions.join(', ').toUpperCase()}{' '}
-              {maxFileSizeInMb
-                ? t('forms.files.allow_size_per_file', {
-                    size: maxFileSizeInMb,
-                  })
-                : ''}
-            </p>
+          <div className="text-muted-foreground @xs:p-4 flex items-center gap-4 p-1">
+            <Upload className="size-5 flex-shrink-0" />
+
+            <div className="space-y-1">
+              <p className="text-sm">
+                {t(isDrag ? 'forms.files.drop_here' : 'forms.files.title')}
+              </p>
+
+              {showInfo && (
+                <p className="text-xs">
+                  {acceptExtensions.join(', ').toUpperCase()}{' '}
+                  {maxFileSizeInMb
+                    ? t('forms.files.allow_size_per_file', {
+                        size: maxFileSizeInMb,
+                      })
+                    : ''}
+                </p>
+              )}
+            </div>
           </div>
           <input
             id="dropzone-file"
@@ -144,6 +157,6 @@ export const FilesInput = ({
       )}
 
       <PreviewFilesInput value={stateValue} onChange={onChange} />
-    </>
+    </div>
   );
 };

@@ -3,10 +3,12 @@ import { HslColor } from 'react-colorful';
 import { UseFormReturn } from 'react-hook-form';
 
 import { formSchemaColorsThemeEditor } from './use-theme-editor-api';
+import { FilesInputValue } from '@/components/ui/files-input';
 
 export enum ThemeEditorTab {
   Main = 'main',
   Colors = 'colors',
+  Logos = 'logos',
 }
 
 interface ColorObj {
@@ -15,7 +17,16 @@ interface ColorObj {
 }
 
 interface ThemeEditorFormObj {
-  colors: {
+  logos: {
+    dark: FilesInputValue[];
+    light: FilesInputValue[];
+    mobile_dark: FilesInputValue[];
+    mobile_light: FilesInputValue[];
+    mobile_width: number;
+    text: string;
+    width: number;
+  };
+  colors?: {
     accent: ColorObj;
     'accent-foreground': ColorObj;
     background: ColorObj;
@@ -46,6 +57,7 @@ interface Args {
   }) => void;
   direction: number;
   form: UseFormReturn<ThemeEditorFormObj>;
+  iframeRef: React.RefObject<HTMLIFrameElement> | null;
   onSubmit: (values: ThemeEditorFormObj) => void;
   openSubmitDialog: boolean;
   setActiveTab: (tab: ThemeEditorTab) => void;
@@ -62,6 +74,7 @@ export const ThemeEditorContext = React.createContext<Args>({
   activeTheme: 'light',
   openSubmitDialog: false,
   setOpenSubmitDialog: () => {},
+  iframeRef: null,
 });
 
 export const useThemeEditor = () => React.useContext(ThemeEditorContext);

@@ -5,7 +5,6 @@ import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { eq } from 'drizzle-orm';
-import { currentUnixDate } from 'vitnode-shared';
 
 import { AuthorizationAdminSessionsObj } from './dto/authorization.obj';
 
@@ -14,7 +13,7 @@ import { DeviceSignInCoreSessionsService } from '../../../sessions/sign_in/devic
 import { AccessDeniedError, GqlContext } from '@/index';
 import { AuthorizationCurrentUserObj } from '../../../sessions/authorization/dto/authorization.obj';
 import { core_sessions_known_devices } from '@/plugins/core/admin/database/schema/sessions';
-import { getUserAgentData, getUserIp } from '@/functions';
+import { currentUnixDate, getUserAgentData, getUserIp } from '@/functions';
 
 @Injectable()
 export class AuthorizationAdminSessionsService {

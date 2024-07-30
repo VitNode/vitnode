@@ -16,10 +16,12 @@ export const ColorInput = ({
   disabled,
   onChange,
   value,
+  className,
   ...rest
 }: {
   onChange: (value: string) => void;
   value: string;
+  className?: string;
   disableRemoveColor?: boolean;
   disabled?: boolean;
   ref?: React.RefCallback<HTMLButtonElement>;
@@ -39,32 +41,30 @@ export const ColorInput = ({
 
   return (
     <Popover open={open} onOpenChange={setOpen} modal>
-      <div className="flex gap-2">
-        <PopoverTrigger asChild>
-          <Button
-            variant="outline"
-            className={cn('max-w-52 flex-1 justify-start', {
-              'text-black': color && colorBrightness,
-              'text-white': color && !colorBrightness,
+      <PopoverTrigger asChild>
+        <Button
+          variant="outline"
+          className={cn('flex min-w-40 max-w-52 justify-start', className, {
+            'text-black': color && colorBrightness,
+            'text-white': color && !colorBrightness,
+          })}
+          style={{
+            backgroundColor: color
+              ? `hsl(${color.h}, ${color.s}%, ${color.l}%)`
+              : '',
+          }}
+          disabled={disabled}
+          {...rest}
+        >
+          <span
+            className={cn({
+              'text-muted-foreground': !color,
             })}
-            style={{
-              backgroundColor: color
-                ? `hsl(${color.h}, ${color.s}%, ${color.l}%)`
-                : '',
-            }}
-            disabled={disabled}
-            {...rest}
           >
-            <span
-              className={cn({
-                'text-muted-foreground': !color,
-              })}
-            >
-              {color ? `hsl(${color.h}, ${color.s}%, ${color.l}%)` : t('none')}
-            </span>
-          </Button>
-        </PopoverTrigger>
-      </div>
+            {color ? `hsl(${color.h}, ${color.s}%, ${color.l}%)` : t('none')}
+          </span>
+        </Button>
+      </PopoverTrigger>
 
       {!disabled && (
         <PopoverContent align="start" className="w-auto">

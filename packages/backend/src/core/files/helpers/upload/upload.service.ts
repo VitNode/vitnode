@@ -27,12 +27,12 @@ export class UploadCoreFilesService extends HelpersUploadCoreFilesService {
 
   async upload({
     acceptMimeType,
-    files,
+    file,
     folder,
     maxUploadSizeBytes,
     plugin,
     secure = false,
-  }: UploadCoreFilesArgs): Promise<UploadCoreFilesObj[]> {
+  }: UploadCoreFilesArgs): Promise<UploadCoreFilesObj> {
     // Check if plugin exists
     const pluginExists =
       await this.databaseService.db.query.core_plugins.findFirst({
@@ -50,12 +50,10 @@ export class UploadCoreFilesService extends HelpersUploadCoreFilesService {
     }
 
     // Validate files
-    await Promise.all(
-      files.map(async file => {
-        await this.checkAcceptMimeType({ file, acceptMimeType });
-        await this.checkSizeFile({ file, maxUploadSizeBytes });
-      }),
-    );
+    await Promise.all([
+      this.checkAcceptMimeType({ file, acceptMimeType }),
+      this.checkSizeFile({ file, maxUploadSizeBytes }),
+    ]);
 
     // Create folders
     const date = new Date();
@@ -72,59 +70,53 @@ export class UploadCoreFilesService extends HelpersUploadCoreFilesService {
       mkdirSync(dirFolder, { recursive: true });
     }
 
-    return Promise.all(
-      files.map(async file => {
-        const { createReadStream, filename, mimetype } = await file;
-        const extension = filename.split('.').pop();
-        const name = filename.split('.').shift();
-        const stream = createReadStream();
+    const { createReadStream, filename, mimetype } = await file;
+    const extension = filename.split('.').pop();
+    const name = filename.split('.').shift();
+    const stream = createReadStream();
 
-        // Generate file name
-        const currentFileName = `${date.getTime()}_${generateRandomString(
-          10,
-        )}_${removeSpecialCharacters(name)}.${extension}`;
-        const url = join(dirFolder, currentFileName);
+    // Generate file name
+    const currentFileName = `${date.getTime()}_${generateRandomString(
+      10,
+    )}_${removeSpecialCharacters(name)}.${extension}`;
+    const url = join(dirFolder, currentFileName);
 
-        // Save file to file system
-        await new Promise((resolve, reject) =>
-          stream
-            .pipe(createWriteStream(url))
-            .on('finish', () => resolve(url))
-            .on('error', reject),
-        );
-
-        // Get file stats
-        const stat = statSync(url);
-
-        if (acceptMimeTypeImage.includes(mimetype)) {
-          const file = readFileSync(url);
-
-          const image = sharp(file);
-          const metadata = await image.metadata();
-
-          return {
-            plugin,
-            mimetype,
-            file_name: currentFileName,
-            file_name_original: filename,
-            dir_folder: dir,
-            extension,
-            file_size: stat.size,
-            width: metadata.width,
-            height: metadata.height,
-          };
-        }
-
-        return {
-          plugin,
-          mimetype,
-          file_name: currentFileName,
-          file_name_original: filename,
-          dir_folder: dir,
-          extension,
-          file_size: stat.size,
-        };
-      }),
+    // Save file to file system
+    await new Promise((resolve, reject) =>
+      stream
+        .pipe(createWriteStream(url))
+        .on('finish', () => resolve(url))
+        .on('error', reject),
     );
+
+    // Get file stats
+    const stat = statSync(url);
+
+    if (acceptMimeTypeImage.includes(mimetype)) {
+      const file = readFileSync(url);
+
+      const image = sharp(file);
+      const metadata = await image.metadata();
+
+      return {
+        mimetype,
+        file_name: currentFileName,
+        file_name_original: filename,
+        dir_folder: dir,
+        extension,
+        file_size: stat.size,
+        width: metadata.width,
+        height: metadata.height,
+      };
+    }
+
+    return {
+      mimetype,
+      file_name: currentFileName,
+      file_name_original: filename,
+      dir_folder: dir,
+      extension,
+      file_size: stat.size,
+    };
   }
 }

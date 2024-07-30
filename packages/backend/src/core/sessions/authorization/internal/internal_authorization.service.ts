@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { eq } from 'drizzle-orm';
-import { currentUnixDate } from 'vitnode-shared';
 
 import { DeviceSignInCoreSessionsService } from '../../sign_in/device.service';
 import { DatabaseService } from '@/utils/database/database.service';
@@ -11,7 +10,7 @@ import { GqlContext } from '@/utils';
 import { AccessDeniedError } from '@/errors';
 import { core_users } from '@/plugins/core/admin/database/schema/users';
 import { core_sessions_known_devices } from '@/plugins/core/admin/database/schema/sessions';
-import { getUserAgentData, getUserIp } from '@/functions';
+import { currentUnixDate, getUserAgentData, getUserIp } from '@/functions';
 
 @Injectable()
 export class InternalAuthorizationCoreSessionsService {

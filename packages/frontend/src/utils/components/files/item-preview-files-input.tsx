@@ -1,8 +1,12 @@
 import React from 'react';
-import { X } from 'lucide-react';
+import { Trash2 } from 'lucide-react';
+import Image from 'next/image';
+import { useTranslations } from 'next-intl';
+
+import { FilesInputValue } from '@/components/ui/files-input';
+import { CONFIG } from '@/helpers/config-with-env';
 
 import { acceptMimeTypeImage } from '../../../helpers/files-support';
-import { Img } from '../../../components/img';
 
 export const ItemPreviewFilesInput = ({
   file,
@@ -10,29 +14,23 @@ export const ItemPreviewFilesInput = ({
   onChange,
   value,
 }: {
-  file: File;
+  file: FilesInputValue;
   index: number;
-  onChange: (e: File[]) => void;
-  value: File[] | undefined;
+  onChange: (e: FilesInputValue[]) => void;
+  value: FilesInputValue[] | undefined;
 }) => {
-  const previewURL = React.useMemo(
-    () => (file instanceof File ? URL.createObjectURL(file) : ``),
-    [file],
-  );
+  const t = useTranslations('core');
+
   const size = React.useMemo(() => {
-    if (file instanceof File) {
-      const sizeInKb = file.size / 1024;
-      if (sizeInKb < 1024) return `${sizeInKb.toFixed(2)} KB`;
+    const sizeInKb = file instanceof File ? file.size : file.file_size / 1024;
+    if (sizeInKb < 1024) return `${sizeInKb.toFixed(2)} KB`;
 
-      const sizeInMb = sizeInKb / 1024;
-      if (sizeInMb < 1024) return `${sizeInMb.toFixed(2)} MB`;
+    const sizeInMb = sizeInKb / 1024;
+    if (sizeInMb < 1024) return `${sizeInMb.toFixed(2)} MB`;
 
-      const sizeInGb = sizeInMb / 1024;
+    const sizeInGb = sizeInMb / 1024;
 
-      return `${sizeInGb.toFixed(2)} GB`;
-    }
-
-    return '';
+    return `${sizeInGb.toFixed(2)} GB`;
   }, [file]);
 
   const handleRemoveFile = () => {
@@ -42,28 +40,37 @@ export const ItemPreviewFilesInput = ({
   };
 
   return (
-    <li className="border-input bg-background relative flex gap-4 overflow-hidden rounded-md border p-4">
-      {acceptMimeTypeImage.includes(file.type) && (
-        <Img
-          className="shrink-0 rounded-sm"
-          imageClassName="object-cover"
-          src={previewURL}
-          alt={file instanceof File ? file.name : ''}
-          width={64}
-          height={64}
-        />
+    <li className="border-input bg-background relative flex items-start gap-2 rounded-md border p-2">
+      {acceptMimeTypeImage.includes(
+        file instanceof File ? file.type : file.mimetype,
+      ) && (
+        <div className="relative size-10 shrink-0 rounded-sm">
+          <Image
+            src={
+              file instanceof File
+                ? URL.createObjectURL(file)
+                : `${CONFIG.backend_public_url}/${file.dir_folder}/${file.file_name}`
+            }
+            className="object-cover"
+            alt={file instanceof File ? file.name : file.file_name_original}
+            sizes="100px"
+            fill
+          />
+        </div>
       )}
-      <div className="mr-6 overflow-hidden">
-        <p className="truncate">{file.name}</p>
-        <p className="text-muted-foreground text-sm">{size}</p>
+      <div className="mr-6 truncate">
+        <p className="@xs:text-base truncate text-sm">
+          {file instanceof File ? file.name : file.file_name}
+        </p>
+        <p className="text-muted-foreground @xs:text-sm text-xs">{size}</p>
       </div>
       <button
         type="button"
-        className="ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute right-4 top-4 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none"
+        className="ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground ml-auto flex size-7 flex-shrink-0 items-center justify-center rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none"
         onClick={handleRemoveFile}
       >
-        <X className="size-6" />
-        <span className="sr-only">Close</span>
+        <Trash2 className="size-4" />
+        <span className="sr-only">{t('delete')}</span>
       </button>
     </li>
   );

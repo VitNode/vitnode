@@ -21,17 +21,17 @@ export const ContentPluginsCoreAdmin = ({
       columns={[
         {
           id: 'name',
-          text: tCore('table.name'),
-          cell: ({ data }) => {
+          title: tCore('table.name'),
+          cell: ({ row }) => {
             return (
               <>
                 <div className="flex items-center gap-2">
-                  <span className="font-semibold">{data.name}</span>
-                  {data.default && <Badge>{tCore('default')}</Badge>}
+                  <span className="font-semibold">{row.name}</span>
+                  {row.default && <Badge>{tCore('default')}</Badge>}
                 </div>
-                {data.description && (
+                {row.description && (
                   <p className="text-muted-foreground max-w-80 truncate text-sm">
-                    {data.description}
+                    {row.description}
                   </p>
                 )}
               </>
@@ -40,15 +40,15 @@ export const ContentPluginsCoreAdmin = ({
         },
         {
           id: 'version',
-          text: tCore('table.version'),
-          cell: ({ data }) => {
-            if (!data.version_code) return null;
+          title: tCore('table.version'),
+          cell: ({ row }) => {
+            if (!row.version_code) return null;
 
             return (
               <span className="flex gap-1">
-                <span>{data.version}</span>
+                <span>{row.version}</span>
                 <span className="text-muted-foreground">
-                  ({data.version_code})
+                  ({row.version_code})
                 </span>
               </span>
             );
@@ -56,36 +56,36 @@ export const ContentPluginsCoreAdmin = ({
         },
         {
           id: 'author',
-          text: tCore('table.author'),
-          cell: ({ data }) => {
-            if (data.author_url) {
+          title: tCore('table.author'),
+          cell: ({ row }) => {
+            if (row.author_url) {
               return (
                 <a
-                  href={data.author_url}
+                  href={row.author_url}
                   className="flex gap-1"
                   rel="noopener noreferrer"
                   target="_blank"
                 >
-                  {data.author} <ExternalLink className="size-4" />
+                  {row.author} <ExternalLink className="size-4" />
                 </a>
               );
             }
 
-            return <span className="flex gap-1">{data.author}</span>;
+            return <span className="flex gap-1">{row.author}</span>;
           },
         },
         {
           id: 'updated',
-          text: tCore('table.updated'),
+          title: tCore('table.updated'),
           sortable: true,
-          cell: ({ data }) => {
-            return <DateFormat date={data.updated} />;
+          cell: ({ row }) => {
+            return <DateFormat date={row.updated} />;
           },
         },
         {
           id: 'actions',
-          cell: ({ data }) => {
-            return <ActionsItemPluginsAdmin {...data} />;
+          cell: ({ row }) => {
+            return <ActionsItemPluginsAdmin {...row} />;
           },
         },
       ]}
@@ -96,7 +96,6 @@ export const ContentPluginsCoreAdmin = ({
       }}
       searchPlaceholder={t('search_placeholder')}
       pageInfo={pageInfo}
-      defaultPageSize={10}
     />
   );
 };

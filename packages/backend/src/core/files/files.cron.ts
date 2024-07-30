@@ -42,7 +42,7 @@ export class CoreFilesCron {
 
         this.deleteFile.delete({
           ...file.core_files,
-          file_secure: !!file.core_files.security_key,
+          secure: !!file.core_files.security_key,
         });
       }),
     );

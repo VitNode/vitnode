@@ -1,0 +1,49 @@
+---
+title: Files Input
+description: Input for uploading files.
+---
+
+## Usage
+
+```tsx
+import { FilesInput } from 'vitnode-frontend/components/ui/files-input';
+```
+
+```tsx
+
+```
+
+## API Reference
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+<TypeTable
+  type={{
+    acceptExtensions: {
+      description: 'Accepted file extensions.',
+      type: 'string[]',
+      default: '[]',
+    },
+    disabled: {
+      description: 'Disable input.',
+      type: 'boolean',
+      default: 'false',
+    },
+    maxFileSizeInMb: {
+      description: 'Maximum file size in MB.',
+      type: 'number',
+      default: '0',
+    },
+    multiple: {
+      description: 'Allow multiple files.',
+      type: 'boolean',
+      default: 'false',
+    },
+    showInfo: {
+      description:
+        'Show info about input (max file size, accepted extensions).',
+      type: 'boolean',
+      default: 'false',
+    },
+  }}
+/>

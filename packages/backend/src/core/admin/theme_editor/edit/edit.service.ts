@@ -5,12 +5,22 @@ import { Injectable } from '@nestjs/common';
 
 import { EditAdminThemeEditorArgs, ThemeVariableInput } from './dto/edit.args';
 
-import { ABSOLUTE_PATHS_BACKEND, NotFoundError } from '../../../..';
+import {
+  ABSOLUTE_PATHS_BACKEND,
+  configPath,
+  getConfigFile,
+  NotFoundError,
+} from '../../../..';
 import { keysFromCSSThemeEditor } from '../../../theme_editor/theme_editor.module';
+import { UploadCoreFilesService } from '@/core/files/helpers/upload/upload.service';
+import { DeleteCoreFilesService } from '@/core/files/helpers/delete/delete.service';
 
 @Injectable()
 export class EditAdminThemeEditorService {
-  constructor() {}
+  constructor(
+    private readonly uploadFile: UploadCoreFilesService,
+    private readonly deleteFile: DeleteCoreFilesService,
+  ) {}
 
   protected changeVariable({
     cssAsString,
@@ -37,7 +47,7 @@ export class EditAdminThemeEditorService {
     });
   }
 
-  async edit({ colors }: EditAdminThemeEditorArgs): Promise<string> {
+  protected updateColors(colors: EditAdminThemeEditorArgs['colors']) {
     const pathToCss = join(
       ABSOLUTE_PATHS_BACKEND.frontend.init,
       'app',
@@ -62,6 +72,50 @@ export class EditAdminThemeEditorService {
     });
 
     fs.writeFileSync(pathToCss, colorsStringUpdate);
+  }
+
+  private async updateLogos(logos: EditAdminThemeEditorArgs['logos']) {
+    const config = getConfigFile();
+
+    await Promise.all(
+      ['dark', 'light', 'mobile_dark', 'mobile_light'].map(async el => {
+        if (logos[el]?.keep && config.logos[el]) return;
+
+        if (config.logos[el]) {
+          this.deleteFile.delete({
+            dir_folder: config.logos[el].dir_folder,
+            file_name: config.logos[el].file_name,
+          });
+          delete config.logos[el];
+        }
+
+        if (logos[el]?.file) {
+          const upload = await this.uploadFile.upload({
+            acceptMimeType: ['image/png', 'image/jpeg'],
+            file: logos[el].file,
+            plugin: 'core',
+            folder: 'logos',
+            maxUploadSizeBytes: 1024 * 1024,
+          });
+          config.logos[el] = upload;
+        }
+      }),
+    );
+
+    config.logos = {
+      ...config.logos,
+      mobile_width: logos.mobile_width,
+      text: logos.text,
+      width: logos.width,
+    };
+    fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
+  }
+
+  async edit({ colors, logos }: EditAdminThemeEditorArgs): Promise<string> {
+    if (colors) {
+      this.updateColors(colors);
+    }
+    await this.updateLogos(logos);
 
     return 'Success!';
   }

@@ -38,8 +38,9 @@ export const useDownloadPluginAdmin = ({
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const mutation = await mutationApi({
       code,
-      version: values.type === 'new_version' ? values.version : null,
-      versionCode: values.type === 'new_version' ? values.version_code : null,
+      version: values.type === 'new_version' ? values.version : undefined,
+      versionCode:
+        values.type === 'new_version' ? values.version_code : undefined,
     });
 
     if (mutation.error || !mutation.data) {
