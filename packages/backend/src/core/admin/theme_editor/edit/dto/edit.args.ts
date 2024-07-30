@@ -1,4 +1,4 @@
-import { ArgsType, Field, InputType, Int } from '@nestjs/graphql';
+import { ArgsType, Field, Float, InputType, Int } from '@nestjs/graphql';
 
 import { FileUpload, GraphQLUpload } from '@/graphql-upload';
 
@@ -82,10 +82,10 @@ class FileEditAdminThemeEditor {
 
 @InputType()
 class LogosEditAdminThemeEditor {
-  @Field(() => Int)
+  @Field(() => Float)
   width: number;
 
-  @Field(() => Int)
+  @Field(() => Float)
   mobile_width: number;
 
   @Field()

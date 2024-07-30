@@ -17,7 +17,7 @@ export const EmailsSectionFeatures = () => {
         },
         {
           id: 2,
-          text: 'Send emails using SMTP"
+          text: 'Send emails using SMTP',
         },
       ]}
       reverse

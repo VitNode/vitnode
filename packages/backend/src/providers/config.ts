@@ -64,8 +64,8 @@ export interface ConfigType {
 export const DEFAULT_CONFIG_DATA: ConfigType = {
   logos: {
     text: 'VitNode Website',
-    width: 120,
-    mobile_width: 60,
+    width: 10,
+    mobile_width: 3,
   },
   security: {
     captcha: {

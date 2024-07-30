@@ -1,64 +1,89 @@
-import { getImageProps } from 'next/image';
+import Image from 'next/image';
 
-import { ImgProps } from '@/components/img';
-import { CONFIG } from '@/helpers/config-with-env';
 import { Link } from '@/navigation';
+import { getSessionData } from '@/graphql/get-session-data';
+import { CONFIG } from '@/helpers/config-with-env';
+import { cn } from '@/helpers/classnames';
 
-export const LogoHeader = () => {
-  const common: Omit<ImgProps, 'src'> = {
-    width: 500,
-    height: 500,
-    sizes: '100vw',
-    alt: 'Logo',
-  };
-
+export const LogoHeader = async () => {
   const {
-    props: { srcSet: light },
-  } = getImageProps({
-    src: `${CONFIG.backend_public_url}/light.png`,
-    ...common,
-  });
-
-  const {
-    props: { srcSet: dark, ...rest },
-  } = getImageProps({
-    src: `${CONFIG.backend_public_url}/dark.png`,
-    ...common,
-  });
-
-  const {
-    props: { srcSet: mobileDark },
-  } = getImageProps({
-    src: `${CONFIG.backend_public_url}/mobile.png`,
-    ...common,
-  });
-
-  const {
-    props: { srcSet: mobileLight },
-  } = getImageProps({
-    src: `${CONFIG.backend_public_url}/mobile.png`,
-    ...common,
-  });
+    core_theme_editor__show: { logos },
+  } = await getSessionData();
 
   return (
-    <Link id="vitnode_logo" href="/">
-      <picture className="hidden dark:block">
-        <source srcSet={dark} media="(min-width: 640px)" />
-        <source srcSet={mobileDark} />
-        {/* eslint-disable-next-line jsx-a11y/alt-text */}
-        <img className={`w-[50px] sm:w-[200px]`} {...rest} />
-      </picture>
+    <Link
+      id="vitnode_logo"
+      href="/"
+      style={
+        {
+          '--logo-width': `${logos.width}rem`,
+          '--logo-mobile-width': `${logos.mobile_width}rem`,
+        } as React.CSSProperties
+      }
+    >
+      {!logos.dark &&
+      !logos.mobile_dark &&
+      !logos.light &&
+      !logos.mobile_light ? (
+        <span className="text-lg font-semibold sm:text-2xl">{logos.text}</span>
+      ) : null}
 
-      <picture className="block dark:hidden">
-        <source
-          srcSet={light}
-          className="bg-black"
-          media="(min-width: 640px)"
+      {logos.light && (
+        <Image
+          src={`${CONFIG.backend_public_url}/${logos.light.dir_folder}/${logos.light.file_name}`}
+          width={logos.light.width}
+          height={logos.light.height}
+          sizes="100vw"
+          className={cn('w-[--logo-mobile-width] sm:w-[--logo-width]', {
+            'dark:hidden': logos.dark,
+            'hidden sm:block': logos.mobile_light || logos.mobile_dark,
+          })}
+          alt={logos.text}
         />
-        <source srcSet={mobileLight} />
-        {/* eslint-disable-next-line jsx-a11y/alt-text */}
-        <img className={`w-[50px] sm:w-[200px]`} {...rest} />
-      </picture>
+      )}
+      {logos.dark && (
+        <Image
+          src={`${CONFIG.backend_public_url}/${logos.dark.dir_folder}/${logos.dark.file_name}`}
+          width={logos.dark.width}
+          height={logos.dark.height}
+          sizes="100vw"
+          className={cn('w-[--logo-mobile-width] sm:w-[--logo-width]', {
+            'hidden dark:block': logos.light,
+            'hidden sm:block': !logos.light,
+            'dark:hidden dark:sm:block':
+              logos.mobile_dark || logos.mobile_light,
+          })}
+          alt={logos.text}
+        />
+      )}
+
+      {logos.mobile_light && (
+        <Image
+          src={`${CONFIG.backend_public_url}/${logos.mobile_light.dir_folder}/${logos.mobile_light.file_name}`}
+          width={logos.mobile_light.width}
+          height={logos.mobile_light.height}
+          sizes="100vw"
+          className={cn('w-[--logo-mobile-width] sm:w-[--logo-width]', {
+            'block sm:hidden': logos.light || logos.dark,
+            'dark:hidden': logos.mobile_dark,
+          })}
+          alt={logos.text}
+        />
+      )}
+      {logos.mobile_dark && (
+        <Image
+          src={`${CONFIG.backend_public_url}/${logos.mobile_dark.dir_folder}/${logos.mobile_dark.file_name}`}
+          width={logos.mobile_dark.width}
+          height={logos.mobile_dark.height}
+          sizes="100vw"
+          className={cn('w-[--logo-mobile-width] sm:w-[--logo-width]', {
+            'block sm:hidden dark:block dark:sm:hidden':
+              logos.dark || logos.light,
+            'hidden dark:block': logos.mobile_light,
+          })}
+          alt={logos.text}
+        />
+      )}
     </Link>
   );
 };

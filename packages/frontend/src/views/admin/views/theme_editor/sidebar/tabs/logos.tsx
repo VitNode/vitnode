@@ -17,7 +17,7 @@ import { Input } from '@/components/ui/input';
 import { ThemeEditorTab, useThemeEditor } from '../../hooks/use-theme-editor';
 
 export const LogosTabThemeEditor = () => {
-  const { form, setActiveTab } = useThemeEditor();
+  const { form, setActiveTab, iframeRef } = useThemeEditor();
   const t = useTranslations('admin.theme_editor.logos');
   const tCore = useTranslations('core');
 
@@ -62,6 +62,18 @@ export const LogosTabThemeEditor = () => {
                 <FilesInput
                   id="logos.light"
                   {...field}
+                  onChange={e => {
+                    field.onChange(e);
+                    const file = e[0] as File | undefined;
+                    // const logoElement =
+                    //   iframeRef?.current?.contentWindow?.document.querySelector<HTMLElement>(
+                    //     '#vitnode_logo',
+                    //   );
+
+                    if (!file) return;
+
+                    // console.log(file ? URL.createObjectURL(file) : 'no file');
+                  }}
                   acceptExtensions={['png', 'jpg', 'jpeg', 'svg', 'webp']}
                   maxFileSizeInMb={2}
                 />
@@ -98,15 +110,29 @@ export const LogosTabThemeEditor = () => {
               <FormLabel>{t('width')}</FormLabel>
               <FormControl>
                 <Slider
-                  onValueChange={e => field.onChange(e[0])}
+                  onValueChange={e => {
+                    const logoElement =
+                      iframeRef?.current?.contentWindow?.document.querySelector<HTMLElement>(
+                        '#vitnode_logo',
+                      );
+
+                    if (logoElement) {
+                      logoElement.style.setProperty(
+                        '--logo-width',
+                        `${e[0]}rem`,
+                      );
+                    }
+
+                    field.onChange(e[0]);
+                  }}
                   value={[field.value]}
-                  min={10}
-                  max={300}
-                  step={1}
+                  min={1}
+                  max={30}
+                  step={0.5}
                 />
               </FormControl>
               <p className="text-muted-foreground mt-2 text-sm">
-                {field.value}px
+                {field.value}rem
               </p>
               <FormMessage />
             </FormItem>
@@ -161,15 +187,29 @@ export const LogosTabThemeEditor = () => {
               <FormLabel>{t('mobile_width')}</FormLabel>
               <FormControl>
                 <Slider
-                  onValueChange={e => field.onChange(e[0])}
+                  onValueChange={e => {
+                    const logoElement =
+                      iframeRef?.current?.contentWindow?.document.querySelector<HTMLElement>(
+                        '#vitnode_logo',
+                      );
+
+                    if (logoElement) {
+                      logoElement.style.setProperty(
+                        '--logo-mobile-width',
+                        `${e[0]}rem`,
+                      );
+                    }
+
+                    field.onChange(e[0]);
+                  }}
                   value={[field.value]}
-                  min={10}
-                  max={300}
-                  step={1}
+                  min={1}
+                  max={20}
+                  step={0.5}
                 />
               </FormControl>
               <p className="text-muted-foreground mt-2 text-sm">
-                {field.value}px
+                {field.value}rem
               </p>
               <FormMessage />
             </FormItem>

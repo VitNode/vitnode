@@ -194,9 +194,9 @@ type LogoShowCoreThemeEditor {
   light: UploadCoreFilesObj
   mobile_dark: UploadCoreFilesObj
   mobile_light: UploadCoreFilesObj
-  mobile_width: Int!
+  mobile_width: Float!
   text: String!
-  width: Int!
+  width: Float!
 }
 
 input LogosEditAdminThemeEditor {
@@ -204,9 +204,9 @@ input LogosEditAdminThemeEditor {
   light: FileEditAdminThemeEditor
   mobile_dark: FileEditAdminThemeEditor
   mobile_light: FileEditAdminThemeEditor
-  mobile_width: Int!
+  mobile_width: Float!
   text: String!
-  width: Int!
+  width: Float!
 }
 
 type Mutation {

@@ -20,13 +20,6 @@ export const ItemPreviewFilesInput = ({
   value: FilesInputValue[] | undefined;
 }) => {
   const t = useTranslations('core');
-  const previewURL = React.useMemo(
-    () =>
-      file instanceof File
-        ? URL.createObjectURL(file)
-        : `${CONFIG.backend_public_url}/${file.dir_folder}/${file.file_name}`,
-    [file],
-  );
 
   const size = React.useMemo(() => {
     const sizeInKb = file instanceof File ? file.size : file.file_size / 1024;
@@ -53,7 +46,11 @@ export const ItemPreviewFilesInput = ({
       ) && (
         <div className="relative size-10 shrink-0 rounded-sm">
           <Image
-            src={previewURL}
+            src={
+              file instanceof File
+                ? URL.createObjectURL(file)
+                : `${CONFIG.backend_public_url}/${file.dir_folder}/${file.file_name}`
+            }
             className="object-cover"
             alt={file instanceof File ? file.name : file.file_name_original}
             sizes="100px"
@@ -69,7 +66,7 @@ export const ItemPreviewFilesInput = ({
       </div>
       <button
         type="button"
-        className="ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground flex size-7 flex-shrink-0 items-center justify-center rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none"
+        className="ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground ml-auto flex size-7 flex-shrink-0 items-center justify-center rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none"
         onClick={handleRemoveFile}
       >
         <Trash2 className="size-4" />

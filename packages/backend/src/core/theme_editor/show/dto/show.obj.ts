@@ -1,4 +1,4 @@
-import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { Field, Float, Int, ObjectType } from '@nestjs/graphql';
 
 import { UploadCoreFilesObj } from '@/core/files/helpers/upload/dto/upload.obj';
 
@@ -76,10 +76,10 @@ export class LogoShowCoreThemeEditor {
   @Field(() => String)
   text: string;
 
-  @Field(() => Int)
+  @Field(() => Float)
   width: number;
 
-  @Field(() => Int)
+  @Field(() => Float)
   mobile_width: number;
 
   @Field(() => UploadCoreFilesObj, { nullable: true })

@@ -225,9 +225,9 @@ export type LogoShowCoreThemeEditor = {
   light?: Maybe<UploadCoreFilesObj>;
   mobile_dark?: Maybe<UploadCoreFilesObj>;
   mobile_light?: Maybe<UploadCoreFilesObj>;
-  mobile_width: Scalars['Int']['output'];
+  mobile_width: Scalars['Float']['output'];
   text: Scalars['String']['output'];
-  width: Scalars['Int']['output'];
+  width: Scalars['Float']['output'];
 };
 
 export type LogosEditAdminThemeEditor = {
@@ -235,9 +235,9 @@ export type LogosEditAdminThemeEditor = {
   light?: InputMaybe<FileEditAdminThemeEditor>;
   mobile_dark?: InputMaybe<FileEditAdminThemeEditor>;
   mobile_light?: InputMaybe<FileEditAdminThemeEditor>;
-  mobile_width: Scalars['Int']['input'];
+  mobile_width: Scalars['Float']['input'];
   text: Scalars['String']['input'];
-  width: Scalars['Int']['input'];
+  width: Scalars['Float']['input'];
 };
 
 export type Mutation = {
@@ -1811,7 +1811,7 @@ export type Core_Middleware__ShowQuery = { __typename?: 'Query', core_middleware
 export type Core_Sessions__AuthorizationQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Core_Sessions__AuthorizationQuery = { __typename?: 'Query', core_sessions__authorization: { __typename?: 'AuthorizationCoreSessionsObj', plugin_default: string, user?: { __typename?: 'AuthorizationCurrentUserObj', email: string, id: number, name_seo: string, is_admin: boolean, is_mod: boolean, name: string, newsletter: boolean, avatar_color: string, language: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, file_name: string }, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } }, files: { __typename?: 'FilesAuthorizationCoreSessions', allow_upload: boolean, max_storage_for_submit: number, total_max_storage: number, space_used: number } }, core_nav__show: { __typename?: 'ShowCoreNavObj', edges: Array<{ __typename?: 'ShowCoreNav', id: number, href: string, external: boolean, position: number, icon?: string, children: Array<{ __typename?: 'ShowCoreNavItem', id: number, position: number, external: boolean, href: string, icon?: string, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }>, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }> }, core_plugins__show: Array<{ __typename?: 'ShowCorePluginsObj', code: string, allow_default: boolean }>, core_settings__show: { __typename?: 'ShowSettingsObj', site_copyright: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, site_description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
+export type Core_Sessions__AuthorizationQuery = { __typename?: 'Query', core_sessions__authorization: { __typename?: 'AuthorizationCoreSessionsObj', plugin_default: string, user?: { __typename?: 'AuthorizationCurrentUserObj', email: string, id: number, name_seo: string, is_admin: boolean, is_mod: boolean, name: string, newsletter: boolean, avatar_color: string, language: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, file_name: string }, group: { __typename?: 'GroupUser', id: number, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } }, files: { __typename?: 'FilesAuthorizationCoreSessions', allow_upload: boolean, max_storage_for_submit: number, total_max_storage: number, space_used: number } }, core_nav__show: { __typename?: 'ShowCoreNavObj', edges: Array<{ __typename?: 'ShowCoreNav', id: number, href: string, external: boolean, position: number, icon?: string, children: Array<{ __typename?: 'ShowCoreNavItem', id: number, position: number, external: boolean, href: string, icon?: string, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }>, description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }> }, core_plugins__show: Array<{ __typename?: 'ShowCorePluginsObj', code: string, allow_default: boolean }>, core_settings__show: { __typename?: 'ShowSettingsObj', site_copyright: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, site_description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }, core_theme_editor__show: { __typename?: 'ShowCoreThemeEditorObj', logos: { __typename?: 'LogoShowCoreThemeEditor', mobile_width: number, text: string, width: number, dark?: { __typename?: 'UploadCoreFilesObj', dir_folder: string, extension: string, file_name: string, file_name_original: string, file_size: number, height?: number, mimetype: string, width?: number }, light?: { __typename?: 'UploadCoreFilesObj', dir_folder: string, extension: string, file_name: string, file_name_original: string, file_size: number, height?: number, mimetype: string, width?: number }, mobile_dark?: { __typename?: 'UploadCoreFilesObj', dir_folder: string, extension: string, file_name: string, file_name_original: string, file_size: number, height?: number, mimetype: string, width?: number }, mobile_light?: { __typename?: 'UploadCoreFilesObj', dir_folder: string, extension: string, file_name: string, file_name_original: string, file_size: number, height?: number, mimetype: string, width?: number } } } };
 
 export type Core_Members__ProfilesQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -3135,6 +3135,53 @@ export const Core_Sessions__Authorization = gql`
     site_description {
       language_code
       value
+    }
+  }
+  core_theme_editor__show {
+    logos {
+      dark {
+        dir_folder
+        extension
+        file_name
+        file_name_original
+        file_size
+        height
+        mimetype
+        width
+      }
+      light {
+        dir_folder
+        extension
+        file_name
+        file_name_original
+        file_size
+        height
+        mimetype
+        width
+      }
+      mobile_dark {
+        dir_folder
+        extension
+        file_name
+        file_name_original
+        file_size
+        height
+        mimetype
+        width
+      }
+      mobile_light {
+        dir_folder
+        extension
+        file_name
+        file_name_original
+        file_size
+        height
+        mimetype
+        width
+      }
+      mobile_width
+      text
+      width
     }
   }
 }

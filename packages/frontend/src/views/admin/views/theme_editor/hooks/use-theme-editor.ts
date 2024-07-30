@@ -57,6 +57,7 @@ interface Args {
   }) => void;
   direction: number;
   form: UseFormReturn<ThemeEditorFormObj>;
+  iframeRef: React.RefObject<HTMLIFrameElement> | null;
   onSubmit: (values: ThemeEditorFormObj) => void;
   openSubmitDialog: boolean;
   setActiveTab: (tab: ThemeEditorTab) => void;
@@ -73,6 +74,7 @@ export const ThemeEditorContext = React.createContext<Args>({
   activeTheme: 'light',
   openSubmitDialog: false,
   setOpenSubmitDialog: () => {},
+  iframeRef: null,
 });
 
 export const useThemeEditor = () => React.useContext(ThemeEditorContext);

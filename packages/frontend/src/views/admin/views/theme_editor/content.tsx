@@ -47,6 +47,7 @@ export const ContentThemeEditor = (props: Core_Theme_Editor__ShowQuery) => {
         setActiveTab,
         direction,
         activeTheme,
+        iframeRef,
         ...rest,
       }}
     >
