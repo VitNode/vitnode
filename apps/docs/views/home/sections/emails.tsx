@@ -15,6 +15,10 @@ export const EmailsSectionFeatures = () => {
           id: 1,
           text: 'Customizable email templates using React',
         },
+        {
+          id: 2,
+          text: 'Send emails using SMTP"
+        },
       ]}
       reverse
     >

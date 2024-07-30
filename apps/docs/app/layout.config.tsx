@@ -1,13 +1,14 @@
-import { type BaseLayoutProps, type DocsLayoutProps } from 'fumadocs-ui/layout';
+import { type DocsLayoutProps } from 'fumadocs-ui/layout';
 import { RootToggle } from 'fumadocs-ui/components/layout/root-toggle';
-import { pageTree } from '@/app/source';
 import { modes } from '../utils/modes';
 import Image from 'next/image';
 import logo from '@/public/logo.svg';
 import { utils } from '@/utils/source';
+import { HomeLayoutProps } from 'fumadocs-ui/home-layout';
 
 // shared configuration
-export const baseOptions: BaseLayoutProps = {
+export const baseOptions: HomeLayoutProps = {
+  githubUrl: 'https://github.com/aXenDeveloper/vitnode',
   nav: {
     title: (
       <>
