@@ -8,7 +8,7 @@ export default function DefaultPage() {
     <main className="container my-10 flex max-w-lg flex-col items-center justify-center gap-8 text-center sm:my-20">
       <LogoVitNode className="w-48" />
 
-      <div>
+      <div className="space-y-1">
         <h1 className="text-3xl font-bold">Welcome! Ready to build?</h1>
 
         <p className="text-muted-foreground">

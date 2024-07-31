@@ -141,33 +141,6 @@ export class CreateDatabaseAdminInstallService {
       protected: true,
     });
 
-    // Create navigation
-    const nav = await this.databaseService.db
-      .insert(core_nav)
-      .values([
-        {
-          href: '/',
-        },
-        {
-          href: 'https://vitnode.com/',
-          external: true,
-        },
-      ])
-      .returning();
-
-    await this.databaseService.db.insert(core_nav_name).values([
-      {
-        item_id: nav[0].id,
-        language_code: 'en',
-        value: 'Home',
-      },
-      {
-        item_id: nav[1].id,
-        language_code: 'en',
-        value: 'VitNode',
-      },
-    ]);
-
     return 'Success!';
   }
 }
