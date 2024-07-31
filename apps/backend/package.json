@@ -10,7 +10,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "codegen": "graphql-codegen --config codegen.ts",
-    "db": "drizzle-kit push"
+    "db:push": "drizzle-kit push"
   },
   "dependencies": {
     "@nestjs/apollo": "^12.2.0",
