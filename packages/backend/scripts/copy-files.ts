@@ -3,9 +3,19 @@ import * as path from 'path';
 import * as fs from 'fs';
 
 export const copyFiles = ({ pluginsPath }: { pluginsPath: string }) => {
-  const currentPathToCoreAdmin = path.join(pluginsPath, 'core', 'admin');
+  const currentPathToCoreAdmin = path.join(
+    pluginsPath,
+    'core',
+    'admin',
+    'database',
+  );
   if (fs.existsSync(currentPathToCoreAdmin)) {
-    fs.rmSync(currentPathToCoreAdmin, { recursive: true });
+    fs.rmSync(path.join(currentPathToCoreAdmin, 'index.ts'), {
+      recursive: true,
+    });
+    fs.rmSync(path.join(currentPathToCoreAdmin, 'schema'), {
+      recursive: true,
+    });
   }
   fs.mkdirSync(currentPathToCoreAdmin, { recursive: true });
 
@@ -15,7 +25,7 @@ export const copyFiles = ({ pluginsPath }: { pluginsPath: string }) => {
     '..',
     '..',
     'src',
-    'plugins',
+    'database',
   );
   if (!fs.existsSync(currentPathToSchema)) {
     console.log(
@@ -24,5 +34,5 @@ export const copyFiles = ({ pluginsPath }: { pluginsPath: string }) => {
     process.exit(1);
   }
 
-  fs.cpSync(currentPathToSchema, pluginsPath, { recursive: true });
+  fs.cpSync(currentPathToSchema, currentPathToCoreAdmin, { recursive: true });
 };

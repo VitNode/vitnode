@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
 
 import { DatabaseService } from '@/utils/database/database.service';
-import { core_files_using } from '@/plugins/core/admin/database/schema/files';
+import { core_files_using } from '@/database/schema/files';
 interface TextLanguageJSONContentType {
   type: string;
   attrs?: { id: number };

@@ -12,7 +12,7 @@ import { DatabaseService } from '@/utils/database/database.service';
 import { DeviceSignInCoreSessionsService } from '../../../sessions/sign_in/device.service';
 import { AccessDeniedError, GqlContext } from '@/index';
 import { AuthorizationCurrentUserObj } from '../../../sessions/authorization/dto/authorization.obj';
-import { core_sessions_known_devices } from '@/plugins/core/admin/database/schema/sessions';
+import { core_sessions_known_devices } from '@/database/schema/sessions';
 import { currentUnixDate, getUserAgentData, getUserIp } from '@/functions';
 
 @Injectable()

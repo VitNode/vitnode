@@ -4,7 +4,7 @@ import { ConfigService } from '@nestjs/config';
 
 import { DatabaseService } from '@/utils/database/database.service';
 import { GqlContext } from '../../../utils';
-import { core_sessions } from '../../../plugins/core/admin/database/schema/sessions';
+import { core_sessions } from '../../../database/schema/sessions';
 
 @Injectable()
 export class SignOutCoreSessionsService {

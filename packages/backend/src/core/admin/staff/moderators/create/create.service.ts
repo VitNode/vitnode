@@ -5,7 +5,7 @@ import { CreateAdminStaffModeratorsArgs } from './dto/create.args';
 
 import { DatabaseService } from '@/utils/database/database.service';
 import { CustomError } from '@/errors';
-import { core_moderators_permissions } from '@/plugins/core/admin/database/schema/moderators';
+import { core_moderators_permissions } from '@/database/schema/moderators';
 
 @Injectable()
 export class CreateAdminStaffModeratorsService {

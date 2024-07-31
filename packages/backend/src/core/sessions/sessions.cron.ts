@@ -3,8 +3,8 @@ import { Cron, CronExpression } from '@nestjs/schedule';
 import { and, lte } from 'drizzle-orm';
 import { ConfigService } from '@nestjs/config';
 
-import { core_sessions } from '../../plugins/core/admin/database/schema/sessions';
-import { core_admin_sessions } from '../../plugins/core/admin/database/schema/admins';
+import { core_sessions } from '../../database/schema/sessions';
+import { core_admin_sessions } from '../../database/schema/admins';
 import { DatabaseService } from '@/utils';
 
 @Injectable()

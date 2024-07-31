@@ -15,7 +15,7 @@ import { ShowCoreFiles } from '../../files/show/dto/show.obj';
 import { DatabaseService } from '@/utils/database/database.service';
 import { User } from '../../../decorators';
 import { AccessDeniedError } from '../../../errors';
-import { core_files } from '../../../plugins/core/admin/database/schema/files';
+import { core_files } from '../../../database/schema/files';
 import { getConfigFile } from '../../../providers/config';
 
 interface GetFilesAfterUploadArgs extends UploadCoreEditorArgs {

@@ -7,10 +7,7 @@ import { DeleteCoreFilesService } from '../../files/helpers/delete/delete.servic
 import { DatabaseService } from '@/utils/database/database.service';
 import { User } from '../../../decorators';
 import { AccessDeniedError } from '../../../errors';
-import {
-  core_files,
-  core_files_using,
-} from '../../../plugins/core/admin/database/schema/files';
+import { core_files, core_files_using } from '../../../database/schema/files';
 
 @Injectable()
 export class DeleteCoreEditorService {

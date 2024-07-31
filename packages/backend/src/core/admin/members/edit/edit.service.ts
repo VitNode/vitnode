@@ -5,7 +5,7 @@ import { EditAdminMembersArgs } from './dto/edit.args';
 import { EditAdminMembersObj } from './dto/edit.obj';
 
 import { DatabaseService } from '@/utils/database/database.service';
-import { core_users } from '@/plugins/core/admin/database/schema/users';
+import { core_users } from '@/database/schema/users';
 import { AccessDeniedError, NotFoundError } from '@/errors';
 
 @Injectable()

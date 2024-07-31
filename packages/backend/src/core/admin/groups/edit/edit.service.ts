@@ -7,11 +7,8 @@ import { ShowAdminGroups } from '../show/dto/show.obj';
 import { DatabaseService } from '@/utils/database/database.service';
 import { ParserTextLanguageCoreHelpersService } from '../../../helpers/text_language/parser/parser.service';
 import { NotFoundError } from '@/errors';
-import {
-  core_groups,
-  core_groups_names,
-} from '@/plugins/core/admin/database/schema/groups';
-import { core_users } from '@/plugins/core/admin/database/schema/users';
+import { core_groups, core_groups_names } from '@/database/schema/groups';
+import { core_users } from '@/database/schema/users';
 
 @Injectable()
 export class EditAdminGroupsService {

@@ -15,7 +15,7 @@ import {
   ConfigType,
   getConfigFile,
 } from '../../../..';
-import { core_languages } from '@/plugins/core/admin/database/schema/languages';
+import { core_languages } from '@/database/schema/languages';
 import { setRebuildRequired } from '@/functions/rebuild-required';
 @Injectable()
 export class DeleteAdminCoreLanguageService {

@@ -6,7 +6,7 @@ import { ShowCoreLanguagesObj } from './dto/show.obj';
 
 import { DatabaseService } from '@/utils/database/database.service';
 import { inputPaginationCursor, outputPagination } from '../../../functions';
-import { core_languages } from '../../../plugins/core/admin/database/schema/languages';
+import { core_languages } from '../../../database/schema/languages';
 import { SortDirectionEnum } from '../../../utils';
 
 @Injectable()

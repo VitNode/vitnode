@@ -5,7 +5,7 @@ import { ShowAdminPluginsArgs } from './dto/show.args';
 import { ShowAdminPluginsObj } from './dto/show.obj';
 
 import { inputPaginationCursor, outputPagination } from '@/functions';
-import { core_plugins } from '@/plugins/core/admin/database/schema/plugins';
+import { core_plugins } from '@/database/schema/plugins';
 import { SortDirectionEnum } from '@/utils';
 import { DatabaseService } from '@/utils/database/database.service';
 
