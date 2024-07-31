@@ -109,8 +109,6 @@ Inside your fetcher, add `x-vitnode-captcha-token` to the headers.
 ```ts title="mutation-api.ts"
 'use server';
 
-import { revalidatePath } from 'next/cache';
-
 import {
   Core_Sessions__Sign_Up,
   Core_Sessions__Sign_UpMutation,
@@ -137,8 +135,6 @@ export const mutationApi = async (variables: Args) => {
   } catch (e) {
     return { error: e as FetcherErrorType };
   }
-
-  revalidatePath('/', 'layout');
 
   return data;
 };

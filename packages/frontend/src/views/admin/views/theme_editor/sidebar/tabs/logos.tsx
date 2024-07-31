@@ -126,7 +126,8 @@ export const LogosTabThemeEditor = () => {
     const span = document.createElement('span');
     span.id = 'vitnode_logo_text';
     span.textContent = form.watch('logos.text');
-    span.className = 'text-lg font-semibold sm:text-2xl';
+    span.className =
+      'text-foreground inline-block whitespace-nowrap text-xl font-bold';
     logoElement.appendChild(span);
   };
 

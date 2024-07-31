@@ -49,7 +49,7 @@ export const ItemDragAndDrop = ({
     <div
       ref={setDroppableNodeRef}
       className={cn(
-        'rounded-lg pl-[var(--spacing)] transition-all [&:not(:first-child)]:mt-4',
+        'rounded-lg pl-[var(--spacing)] transition-all [&:not(:first-child)]:mt-2',
         className,
       )}
       style={
