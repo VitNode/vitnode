@@ -6,7 +6,7 @@ import React from 'react';
 
 import { ShowCoreNav } from '@/graphql/graphql';
 import { useTextLang } from '@/hooks/use-text-lang';
-import { Link, usePathname } from '@/navigation';
+import { Link } from '@/navigation';
 import { cn } from '@/helpers/classnames';
 import { buttonVariants } from '@/components/ui/button';
 
@@ -23,9 +23,6 @@ export const ItemNav = ({
   id,
 }: Props) => {
   const { convertText } = useTextLang();
-  const pathname = usePathname();
-  const active =
-    href === pathname || (pathname.startsWith(href) && href !== '/');
 
   return (
     <NavigationMenu.Item className="shrink-0">
@@ -34,10 +31,7 @@ export const ItemNav = ({
           href={href}
           className={cn(
             buttonVariants({
-              variant: active ? 'outline' : 'ghost',
-              className: cn('px-6', {
-                'bg-card dark:bg-accent': active,
-              }),
+              variant: 'ghost',
             }),
           )}
           target={external ? '_blank' : undefined}
@@ -60,10 +54,6 @@ export const ItemNav = ({
         >
           <div className="flex flex-wrap gap-1 p-2">
             {children.map(item => {
-              const activeItem =
-                item.href === pathname ||
-                (pathname.startsWith(item.href) && item.href !== '/');
-
               const icon = icons.find(
                 childIcon => childIcon.id === item.id,
               )?.icon;
@@ -81,9 +71,6 @@ export const ItemNav = ({
                     href={item.href}
                     className={cn(
                       'hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground text-accent-foreground flex h-full select-none flex-col justify-center gap-1 rounded-md px-3 py-2 leading-none no-underline outline-none transition-colors',
-                      {
-                        'bg-accent': activeItem,
-                      },
                     )}
                     target={item.external ? '_blank' : undefined}
                     rel={item.external ? 'noopener noreferrer' : undefined}
