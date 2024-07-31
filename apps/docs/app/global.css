@@ -11,11 +11,6 @@
     @apply bg-background text-foreground;
   }
 
-  a {
-    @apply text-primary;
-    @apply cursor-pointer;
-  }
-
   :root {
     --background: 220 40% 98%;
     --foreground: 213deg 5% 8%;
@@ -25,7 +20,7 @@
     --popover-foreground: var(--card-foreground);
     --primary: 220 58% 47%;
     --primary-foreground: 220 40% 98%;
-    --secondary: 0 0% 100%;
+    --secondary: 220 42% 94%;
     --secondary-foreground: 210 40% 2%;
     --muted: 220 40% 96%;
     --muted-foreground: 220 8% 44%;
@@ -39,6 +34,10 @@
     --radius: 0.5rem;
     --cover: 220 80% 67%;
     --cover-foreground: 210 40% 98%;
+
+    --guides-color: 220 74% 50%;
+    --dev-color: 20 74% 50%;
+    --ui-color: 141 74% 31%;
   }
 
   .dark {
@@ -49,7 +48,7 @@
     /* --popover: var(--card); */
     /* --popover-foreground: var(--card-foreground); */
     --primary: 220 83% 60%;
-    --primary-foreground: 216 40% 98%;
+    --primary-foreground: 220 40% 98%;
     --secondary: 222 25% 18%;
     --secondary-foreground: 210 40% 98%;
     --muted: 216 32% 11%;
@@ -63,6 +62,10 @@
     /* --ring: var(--primary); */
     --cover: 216 64% 39%;
     --cover-foreground: 210 40% 98%;
+
+    --guides-color: 210 74% 50%;
+    --dev-color: 20 74% 50%;
+    --ui-color: 141 74% 38%;
   }
 }
 

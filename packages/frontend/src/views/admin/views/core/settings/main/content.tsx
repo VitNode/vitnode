@@ -58,7 +58,7 @@ export const ContentMainSettingsCoreAdmin = (
           control={form.control}
           name="copyright"
           render={({ field }) => (
-            <FormFieldRender label={t('copyright.label')}>
+            <FormFieldRender label={t('copyright.label')} optional>
               <TextLanguageInput {...field} />
             </FormFieldRender>
           )}

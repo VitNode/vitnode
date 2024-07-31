@@ -16,8 +16,8 @@ export const useSettingsCoreAdmin = ({
   const formSchema = z.object({
     name: zodInput.string.min(1),
     short_name: zodInput.string.min(1),
-    description: zodInput.languageInput.min(1),
-    copyright: zodInput.languageInput.min(1),
+    description: zodInput.languageInput,
+    copyright: zodInput.languageInput,
   });
 
   const form = useForm<z.infer<typeof formSchema>>({

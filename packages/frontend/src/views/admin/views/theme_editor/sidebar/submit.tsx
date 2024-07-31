@@ -20,13 +20,11 @@ export const SubmitSidebarThemeEditor = ({
   onClick,
   openSubmitDialog,
   setOpenSubmitDialog,
-  disable,
 }: {
   isPending: boolean;
   onClick: () => void;
   openSubmitDialog: boolean;
   setOpenSubmitDialog: (open: boolean) => void;
-  disable?: boolean;
 }) => {
   const t = useTranslations('admin.theme_editor.submit');
   const tCore = useTranslations('core');
@@ -34,7 +32,7 @@ export const SubmitSidebarThemeEditor = ({
   return (
     <AlertDialog open={openSubmitDialog} onOpenChange={setOpenSubmitDialog}>
       <AlertDialogTrigger asChild>
-        <Button className="w-full" size="sm" disabled={disable}>
+        <Button className="w-full" size="sm">
           {tCore('save')}
         </Button>
       </AlertDialogTrigger>
