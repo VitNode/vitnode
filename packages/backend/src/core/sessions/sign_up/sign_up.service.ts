@@ -10,7 +10,7 @@ import { encryptPassword } from '../password';
 
 import { CaptchaCoreCaptchaSecurityService } from '@/core/admin/security/captcha/captcha.service';
 import { DatabaseService } from '@/utils/database/database.service';
-import { core_users } from '../../../plugins/core/admin/database/schema/users';
+import { core_users } from '../../../database/schema/users';
 import { GqlContext } from '@/utils';
 import { CustomError } from '../../../errors';
 import { getUserIp } from '../../../functions';

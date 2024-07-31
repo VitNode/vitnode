@@ -3,7 +3,7 @@ import * as fs from 'fs';
 
 import { NodePgDatabase } from 'drizzle-orm/node-postgres';
 
-import coreSchemaDatabase from '../src/plugins/core/admin/database';
+import coreSchemaDatabase from '../src/database';
 import { migrate } from './helpers/migrate';
 
 export const createTablesDatabaseUsingMigrations = async ({

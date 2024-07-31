@@ -4,7 +4,6 @@ import { join } from 'path';
 import { Injectable } from '@nestjs/common';
 
 import {
-  createConfigForDrizzle,
   createDefaultPage,
   createFunctionsDatabase,
   createInfoJSON,
@@ -70,10 +69,6 @@ export class CreateFilesAdminPluginsService {
           {
             name: 'functions.ts',
             content: createFunctionsDatabase(),
-          },
-          {
-            name: 'drizzle.config.ts',
-            content: createConfigForDrizzle({ code }),
           },
         ],
       },

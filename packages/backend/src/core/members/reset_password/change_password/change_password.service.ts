@@ -6,10 +6,7 @@ import { ChangePasswordCoreMembersArgs } from './dto/change_password.args';
 import { DatabaseService } from '@/utils/database/database.service';
 import { User } from '@/decorators';
 import { encryptPassword } from '@/core/sessions/password';
-import {
-  core_users,
-  core_users_pass_reset,
-} from '@/plugins/core/admin/database/schema/users';
+import { core_users, core_users_pass_reset } from '@/database/schema/users';
 
 @Injectable()
 export class ChangePasswordCoreMembersService {

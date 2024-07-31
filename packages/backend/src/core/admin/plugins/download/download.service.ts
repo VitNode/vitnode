@@ -13,7 +13,7 @@ import { CustomError, NotFoundError } from '@/errors';
 import { currentUnixDate, execShellCommand } from '@/functions';
 import { User } from '@/decorators';
 import { ABSOLUTE_PATHS_BACKEND, PluginInfoJSONType } from '../../../..';
-import { core_plugins } from '@/plugins/core/admin/database/schema/plugins';
+import { core_plugins } from '@/database/schema/plugins';
 
 @Injectable()
 export class DownloadAdminPluginsService {
@@ -151,7 +151,7 @@ export class DownloadAdminPluginsService {
 
     try {
       await execShellCommand(
-        `npx drizzle-kit up --config src/plugins/${code}/admin/database/drizzle.config.ts && npx drizzle-kit generate --config src/plugins/${code}/admin/database/drizzle.config.ts`,
+        'pnpm drizzle-kit up && pnpm drizzle-kit generate',
       );
     } catch (err) {
       throw new CustomError({

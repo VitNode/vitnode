@@ -14,7 +14,7 @@ import {
   configPath,
   getConfigFile,
 } from '@/index';
-import { core_languages } from '@/plugins/core/admin/database/schema/languages';
+import { core_languages } from '@/database/schema/languages';
 import { ManifestWithLang } from '@/core/settings/settings.module';
 
 @Injectable()

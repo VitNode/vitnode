@@ -3,7 +3,7 @@ import { eq } from 'drizzle-orm';
 
 import { DeleteCoreMembersArgs } from './dto/delete.args';
 
-import { core_users } from '../../../plugins/core/admin/database/schema/users';
+import { core_users } from '../../../database/schema/users';
 import { DatabaseService } from '@/utils/database/database.service';
 import { AccessDeniedError, NotFoundError } from '../../../errors';
 

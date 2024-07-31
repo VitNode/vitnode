@@ -6,7 +6,7 @@ import { ShowCoreNavObj } from './dto/show.obj';
 
 import { DatabaseService } from '@/utils/database/database.service';
 import { inputPaginationCursor, outputPagination } from '../../../functions';
-import { core_nav } from '../../../plugins/core/admin/database/schema/nav';
+import { core_nav } from '../../../database/schema/nav';
 import { SortDirectionEnum } from '../../../utils';
 
 @Injectable()

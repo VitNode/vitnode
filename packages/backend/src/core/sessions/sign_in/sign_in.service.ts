@@ -10,8 +10,8 @@ import { verifyPassword } from '../password';
 import { GqlContext } from '../../../utils';
 import { DatabaseService } from '@/utils/database/database.service';
 import { AccessDeniedError, CustomError } from '../../../errors';
-import { core_admin_sessions } from '../../../plugins/core/admin/database/schema/admins';
-import { core_sessions } from '../../../plugins/core/admin/database/schema/sessions';
+import { core_admin_sessions } from '../../../database/schema/admins';
+import { core_sessions } from '../../../database/schema/sessions';
 
 interface CreateSessionArgs extends GqlContext {
   email: string;

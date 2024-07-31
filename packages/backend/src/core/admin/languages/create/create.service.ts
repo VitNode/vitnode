@@ -13,7 +13,7 @@ import {
   CustomError,
   getConfigFile,
 } from '../../../..';
-import { core_languages } from '@/plugins/core/admin/database/schema/languages';
+import { core_languages } from '@/database/schema/languages';
 import { ShowCoreLanguages } from '../../../languages/show/dto/show.obj';
 import { setRebuildRequired } from '@/functions/rebuild-required';
 
