@@ -21,8 +21,8 @@ export const LogoVitNode = ({
           fill="#FDFEFF"
         />
         <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
+          fillRule="evenodd"
+          clipRule="evenodd"
           d="M168.101 5.19482C180.105 -1.73161 194.895 -1.73161 206.899 5.19482L336.101 79.745C348.105 86.6714 355.5 99.472 355.5 113.325V262.425C355.5 276.278 348.105 289.079 336.101 296.005L206.899 370.555C194.895 377.482 180.105 377.482 168.101 370.555L38.899 296.005C26.8948 289.079 19.5 276.278 19.5 262.425V113.325C19.5 99.472 26.8948 86.6714 38.899 79.745L168.101 5.19482ZM109.649 106.082L187.5 61.1613L265.351 106.082L187.5 241.071L109.649 106.082ZM77.6969 148.394V251.232L166.585 302.521L77.6969 148.394ZM208.415 302.521L297.303 251.232V148.394L208.415 302.521Z"
           fill="url(#paint0_linear_123_23)"
         />
@@ -35,8 +35,8 @@ export const LogoVitNode = ({
             y2="375.75"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#3261BF" />
-            <stop offset="1" stop-color="#363795" />
+            <stop stopColor="#3261BF" />
+            <stop offset="1" stopColor="#363795" />
           </linearGradient>
         </defs>
       </svg>
@@ -63,8 +63,8 @@ export const LogoVitNode = ({
         fill="#FDFEFF"
       />
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M85.1219 2.63204C91.2005 -0.877348 98.6896 -0.877348 104.768 2.63204L170.193 40.4041C176.271 43.9135 180.016 50.3991 180.016 57.4179V132.962C180.016 139.981 176.271 146.466 170.193 149.976L104.768 187.748C98.6896 191.257 91.2005 191.257 85.1219 187.748L19.6974 149.976C13.6188 146.466 9.87427 139.981 9.87427 132.962V57.4179C9.87427 50.3991 13.6188 43.9135 19.6974 40.4041L85.1219 2.63204ZM55.5232 53.7481L94.945 30.9884L134.367 53.7481L94.945 122.143L55.5232 53.7481ZM39.3436 75.1861V127.291L84.3544 153.277L39.3436 75.1861ZM105.536 153.277L150.546 127.291V75.1861L105.536 153.277Z"
         fill="url(#paint1_linear_205_42)"
       />
@@ -77,8 +77,8 @@ export const LogoVitNode = ({
           y2="196"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#3261BF" />
-          <stop offset="1" stop-color="#363795" />
+          <stop stopColor="#3261BF" />
+          <stop offset="1" stopColor="#363795" />
         </linearGradient>
         <linearGradient
           id="paint1_linear_205_42"
@@ -88,8 +88,8 @@ export const LogoVitNode = ({
           y2="190.38"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#3261BF" />
-          <stop offset="1" stop-color="#363795" />
+          <stop stopColor="#3261BF" />
+          <stop offset="1" stopColor="#363795" />
         </linearGradient>
       </defs>
     </svg>

@@ -27,7 +27,7 @@ export const LogoHeader = async () => {
       !logos.mobile_light ? (
         <span
           id="vitnode_logo_text"
-          className="text-lg font-semibold sm:text-2xl"
+          className="text-foreground inline-block whitespace-nowrap text-xl font-bold"
         >
           {logos.text}
         </span>

@@ -80,3 +80,15 @@
     }
   }
 }
+
+.dev {
+  --primary: var(--dev-color);
+}
+
+.ui {
+  --primary: var(--ui-color);
+}
+
+.guides {
+  --primary: var(--guides-color);
+}
