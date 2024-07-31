@@ -11,6 +11,11 @@
     @apply bg-background text-foreground;
   }
 
+  a {
+    @apply text-primary;
+    @apply cursor-pointer;
+  }
+
   :root {
     --background: 220 40% 98%;
     --foreground: 213deg 5% 8%;
@@ -18,7 +23,7 @@
     --card-foreground: 213deg 26% 7%;
     --popover: var(--card);
     --popover-foreground: var(--card-foreground);
-    --primary: 220 74% 50%;
+    --primary: 220 58% 47%;
     --primary-foreground: 220 40% 98%;
     --secondary: 0 0% 100%;
     --secondary-foreground: 210 40% 2%;
@@ -34,38 +39,30 @@
     --radius: 0.5rem;
     --cover: 220 80% 67%;
     --cover-foreground: 210 40% 98%;
-
-    --guides-color: 220 74% 50%;
-    --dev-color: 20 74% 50%;
-    --ui-color: 141 74% 31%;
   }
 
   .dark {
-    --background: 210 32% 7%;
+    --background: 216 32% 7%;
     --foreground: 0 0% 98%;
-    --card: 210 32% 10%;
+    --card: 216 32% 10%;
     --card-foreground: 0 0% 98%;
     /* --popover: var(--card); */
     /* --popover-foreground: var(--card-foreground); */
-    --primary: 210 84% 59%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 220 83% 60%;
+    --primary-foreground: 216 40% 98%;
     --secondary: 222 25% 18%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 210 32% 11%;
-    --muted-foreground: 210 18% 64%;
-    --accent: 210 32% 14%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 216 32% 11%;
+    --muted-foreground: 216 18% 64%;
+    --accent: 216 32% 14%;
     --accent-foreground: 0 0% 98%;
     --destructive: 359 78% 55%;
     --destructive-foreground: 210 40% 98%;
-    --border: 210 25% 16%;
+    --border: 216 16% 16%;
     /* --input: var(--border); */
     /* --ring: var(--primary); */
-    --cover: 210 64% 39%;
+    --cover: 216 64% 39%;
     --cover-foreground: 210 40% 98%;
-
-    --guides-color: 210 74% 50%;
-    --dev-color: 20 74% 50%;
-    --ui-color: 141 74% 38%;
   }
 }
 
@@ -82,16 +79,4 @@
       display: none;
     }
   }
-}
-
-.dev {
-  --primary: var(--dev-color);
-}
-
-.ui {
-  --primary: var(--ui-color);
-}
-
-.guides {
-  --primary: var(--guides-color);
 }
