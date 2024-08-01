@@ -460,8 +460,8 @@ type ShowAdminPlugins {
   name: String!
   support_url: String!
   updated: DateTime!
-  version: String
-  version_code: Int
+  version: String!
+  version_code: Int!
 }
 
 type ShowAdminPluginsObj {

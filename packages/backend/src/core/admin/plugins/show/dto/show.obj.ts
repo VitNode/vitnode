@@ -16,11 +16,11 @@ export class ShowAdminPlugins {
   @Field(() => String, { nullable: true })
   description: string | null;
 
-  @Field(() => String, { nullable: true })
-  version: string | null;
+  @Field(() => String)
+  version: string;
 
-  @Field(() => Int, { nullable: true })
-  version_code: number | null;
+  @Field(() => Int)
+  version_code: number;
 
   @Field(() => Boolean)
   enabled: boolean;
