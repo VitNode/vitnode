@@ -19,6 +19,7 @@ export const core_groups = pgTable('core_groups', {
   default: boolean('default').notNull().default(false),
   root: boolean('root').notNull().default(false),
   guest: boolean('guest').notNull().default(false),
+  color: varchar('color', { length: 19 }),
   files_allow_upload: boolean('files_allow_upload').notNull().default(true),
   files_total_max_storage: integer('files_total_max_storage')
     .notNull()

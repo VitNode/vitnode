@@ -5,18 +5,17 @@ import React from 'react';
 
 import { ActionsTableGroupsMembersAdmin } from './actions/actions';
 import { Admin__Core_Groups__ShowQuery } from '@/graphql/graphql';
-import { useTextLang } from '@/hooks/use-text-lang';
 import { Badge } from '@/components/ui/badge';
 import { Link } from '@/navigation';
 import { DateFormat } from '@/components/date-format';
 import { DataTable } from '@/components/ui/data-table';
+import { GroupFormat } from '@/components/ui/user/group-format';
 
 export const TableGroupsMembersAdmin = ({
   admin__core_groups__show: { edges, pageInfo },
 }: Admin__Core_Groups__ShowQuery) => {
   const t = useTranslations('admin.members.groups');
   const tCore = useTranslations('core');
-  const { convertText } = useTextLang();
 
   return (
     <DataTable
@@ -29,7 +28,7 @@ export const TableGroupsMembersAdmin = ({
           cell: ({ row }) => {
             return (
               <div className="flex items-center gap-4">
-                <span>{convertText(row.name)}</span>
+                <GroupFormat group={row} />
                 {row.default && <Badge>{t('default')}</Badge>}
                 {row.root && <Badge>{t('root')}</Badge>}
               </div>

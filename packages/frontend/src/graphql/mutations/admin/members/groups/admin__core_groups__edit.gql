@@ -2,8 +2,14 @@ mutation Admin__core_groups__edit(
   $id: Int!
   $name: [TextLanguageInput!]!
   $content: ContentCreateAdminGroups!
+  $color: String
 ) {
-  admin__core_groups__edit(id: $id, name: $name, content: $content) {
+  admin__core_groups__edit(
+    id: $id
+    name: $name
+    content: $content
+    color: $color
+  ) {
     id
   }
 }

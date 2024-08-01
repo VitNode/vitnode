@@ -30,6 +30,7 @@ query Admin__core_staff_moderators__show(
               language_code
               value
             }
+            color
           }
           id
           name_seo
@@ -40,6 +41,7 @@ query Admin__core_staff_moderators__show(
             language_code
             value
           }
+          color
           id
         }
       }

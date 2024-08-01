@@ -6,7 +6,6 @@ import { CustomError } from '@/errors';
 import { core_languages } from '@/database/schema/languages';
 import { core_groups, core_groups_names } from '@/database/schema/groups';
 import { core_admin_permissions } from '@/database/schema/admins';
-import { core_nav, core_nav_name } from '@/database/schema/nav';
 import { core_moderators_permissions } from '@/database/schema/moderators';
 
 @Injectable()
@@ -90,6 +89,7 @@ export class CreateDatabaseAdminInstallService {
       .insert(core_groups)
       .values({
         protected: true,
+        color: 'hsl(122, 80%, 45%)',
       })
       .returning();
 
@@ -112,6 +112,7 @@ export class CreateDatabaseAdminInstallService {
       .values({
         protected: true,
         root: true,
+        color: 'hsl(0, 100%, 50%)',
       })
       .returning();
 

@@ -13,7 +13,7 @@ import { usePathname, useRouter } from '@/navigation';
 import { zodInput } from '@/helpers/zod';
 
 export interface CreateEditFormGroupsMembersAdminArgs {
-  data?: Pick<ShowAdminGroups, 'content' | 'id' | 'name'>;
+  data?: Pick<ShowAdminGroups, 'color' | 'content' | 'id' | 'name'>;
 }
 
 export const useCreateEditFormGroupsMembersAdmin = ({
@@ -40,7 +40,7 @@ export const useCreateEditFormGroupsMembersAdmin = ({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: data?.name ?? [],
-      color: '',
+      color: data?.color ?? '',
       content: data?.content ?? {
         files_allow_upload: true,
         files_total_max_storage: 500000,

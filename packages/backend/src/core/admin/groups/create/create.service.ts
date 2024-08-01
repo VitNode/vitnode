@@ -17,11 +17,13 @@ export class CreateAdminGroupsService {
   async create({
     content,
     name,
+    color,
   }: CreateAdminGroupsArgs): Promise<ShowAdminGroups> {
     const group = await this.databaseService.db
       .insert(core_groups)
       .values({
         ...content,
+        color: color ? color : null,
       })
       .returning();
 

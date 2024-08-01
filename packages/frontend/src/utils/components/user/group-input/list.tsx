@@ -5,14 +5,14 @@ import { CommandGroup, CommandItem } from '@/components/ui/command';
 import { cn } from '@/helpers/classnames';
 import { GroupFormat } from '@/components/ui/user/group-format';
 import { GroupInputItem } from '@/components/ui/user/group-input';
-import { ShowAdminGroups } from '@/graphql/graphql';
+import { Admin__Core_Groups__Show_ShortQuery } from '@/graphql/graphql';
 
 export const GroupInputContentList = ({
   edges,
   onSelect,
   values,
 }: {
-  edges: Pick<ShowAdminGroups, 'guest' | 'id' | 'name'>[];
+  edges: Admin__Core_Groups__Show_ShortQuery['admin__core_groups__show']['edges'];
   onSelect: (value: GroupInputItem) => void;
   values: GroupInputItem[];
   multiple?: boolean;

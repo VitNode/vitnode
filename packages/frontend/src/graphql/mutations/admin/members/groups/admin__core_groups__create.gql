@@ -1,8 +1,9 @@
 mutation Admin__core_groups__create(
   $name: [TextLanguageInput!]!
   $content: ContentCreateAdminGroups!
+  $color: String
 ) {
-  admin__core_groups__create(name: $name, content: $content) {
+  admin__core_groups__create(name: $name, content: $content, color: $color) {
     id
   }
 }

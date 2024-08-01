@@ -1,6 +1,13 @@
 'use client';
 
-import { Home, LogOut } from 'lucide-react';
+import {
+  GitBranch,
+  Globe,
+  Home,
+  LogOut,
+  SquareArrowOutUpRight,
+  User,
+} from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 
@@ -25,7 +32,7 @@ export const AvatarAsideAuthAdmin = () => {
   const { session } = useSessionAdmin();
 
   if (!session) return null;
-  const { email, name } = session;
+  const { email, name, name_seo } = session;
 
   return (
     <DropdownMenu>
@@ -54,7 +61,42 @@ export const AvatarAsideAuthAdmin = () => {
         <DropdownMenuGroup>
           <DropdownMenuItem asChild>
             <Link href="/" target="_blank">
-              <Home /> <span>{t('home_page')}</span>
+              <Home />
+              <span>{t('home_page')}</span>
+            </Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem asChild>
+            <Link href={`/profile/${name_seo}`} target="_blank">
+              <User />
+              <span>{tCore('user-bar.my_profile')}</span>
+            </Link>
+          </DropdownMenuItem>
+        </DropdownMenuGroup>
+
+        <DropdownMenuSeparator />
+
+        <DropdownMenuGroup>
+          <DropdownMenuItem asChild>
+            <Link
+              href="https://vitnode.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Globe />
+              <span>VitNode</span>
+              <SquareArrowOutUpRight />
+            </Link>
+          </DropdownMenuItem>
+
+          <DropdownMenuItem asChild>
+            <Link
+              href="https://github.com/aXenDeveloper/vitnode"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <GitBranch />
+              <span>VitNode GitHub</span>
+              <SquareArrowOutUpRight />
             </Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>

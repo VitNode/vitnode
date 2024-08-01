@@ -26,6 +26,7 @@ query Admin__core_staff_administrators__show(
           language
           group {
             id
+            color
             name {
               language_code
               value
@@ -40,6 +41,7 @@ query Admin__core_staff_administrators__show(
             language_code
             value
           }
+          color
           id
         }
       }

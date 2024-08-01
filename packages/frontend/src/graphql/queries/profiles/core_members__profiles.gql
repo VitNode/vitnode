@@ -8,10 +8,12 @@ query Core_members__profiles($first: Int, $nameSeo: String!) {
         file_name
       }
       group {
+        id
         name {
           language_code
           value
         }
+        color
       }
       id
       joined

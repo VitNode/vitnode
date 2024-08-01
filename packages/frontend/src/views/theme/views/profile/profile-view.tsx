@@ -6,8 +6,8 @@ import {
   Core_Members__ProfilesQuery,
   Core_Members__ProfilesQueryVariables,
 } from '@/graphql/graphql';
-import { getTextLang } from '@/hooks/use-text-lang';
 import { AvatarUser } from '@/components/ui/user/avatar';
+import { GroupFormat } from '@/components/ui/user/group-format';
 
 const getData = async ({ id }: { id: string }) => {
   const data = await fetcher<
@@ -26,14 +26,10 @@ const getData = async ({ id }: { id: string }) => {
 };
 
 export interface ProfileViewProps {
-  params: { id: string; locale: string };
+  params: { id: string };
 }
 
-export const ProfileView = async ({
-  params: { id, locale },
-}: ProfileViewProps) => {
-  const { convertText } = getTextLang({ locale });
-
+export const ProfileView = async ({ params: { id } }: ProfileViewProps) => {
   const {
     core_members__show: { edges },
   } = await getData({ id });
@@ -53,7 +49,7 @@ export const ProfileView = async ({
             <div className="flex w-full flex-col gap-4 text-center md:mt-20 md:flex-row md:text-left">
               <div className="flex flex-col items-center gap-1 md:mr-auto md:items-start">
                 <h1 className="text-2xl font-semibold">{data.name}</h1>
-                <span>{convertText(data.group.name)}</span>
+                <GroupFormat group={data.group} />
               </div>
               <div className="flex flex-wrap items-center justify-center gap-2 md:justify-end">
                 Something

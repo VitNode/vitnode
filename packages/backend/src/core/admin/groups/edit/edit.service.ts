@@ -21,6 +21,7 @@ export class EditAdminGroupsService {
     content,
     id,
     name,
+    color,
   }: EditAdminGroupsArgs): Promise<ShowAdminGroups> {
     const group = await this.databaseService.db.query.core_groups.findFirst({
       where: (table, { eq }) => eq(table.id, id),
@@ -45,6 +46,7 @@ export class EditAdminGroupsService {
       .update(core_groups)
       .set({
         updated: new Date(),
+        color: color ? color : null,
         ...content,
       })
       .where(eq(core_groups.id, id))

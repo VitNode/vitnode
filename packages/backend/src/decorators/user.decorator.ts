@@ -19,6 +19,9 @@ export class GroupUser {
 
   @Field(() => [TextLanguage])
   name: TextLanguage[];
+
+  @Field(() => String)
+  color: string;
 }
 
 @ObjectType()

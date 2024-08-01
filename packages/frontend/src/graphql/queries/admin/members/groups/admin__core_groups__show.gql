@@ -38,6 +38,7 @@ query Admin__Core_groups__show(
         files_max_storage_for_submit
         files_total_max_storage
       }
+      color
     }
   }
 }
