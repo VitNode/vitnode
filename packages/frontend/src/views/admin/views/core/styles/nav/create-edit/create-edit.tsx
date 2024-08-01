@@ -20,7 +20,7 @@ import {
 } from '@/components/ui/form';
 import { TextLanguageInput } from '@/components/ui/text-language-input';
 import { Input } from '@/components/ui/input';
-import { IconInput } from '@/components/icon/input/icon-input';
+import { IconPicker } from '@/components/icon/picker/icon-picker';
 import { Switch } from '@/components/ui/switch';
 import { Button } from '@/components/ui/button';
 
@@ -87,7 +87,7 @@ export const ContentCreateEditNavAdmin = ({ data }: CreateEditNavAdminArgs) => {
               <FormItem>
                 <FormLabel optional>{t('create.icon.label')}</FormLabel>
                 <FormControl>
-                  <IconInput {...field} />
+                  <IconPicker {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

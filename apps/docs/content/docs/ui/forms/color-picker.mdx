@@ -1,0 +1,39 @@
+---
+title: Color Picker
+description: Select a color from a color palette.
+---
+
+## Usage
+
+```tsx
+import { ColorPicker } from 'vitnode-frontend/components/ui/color-picker';
+```
+
+```tsx
+<ColorPicker onChange={onChange} value={value} />
+```
+
+## API Reference
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+<TypeTable
+  type={{
+    onChange: {
+      description: 'Callback when the value changes.',
+      type: '(value: string) => void;',
+    },
+    value: {
+      description: 'Value of the color picker.',
+      type: 'string',
+    },
+    disableRemoveColor: {
+      description: 'Disable the remove color button.',
+      type: 'boolean',
+    },
+    disabled: {
+      description: 'Disable the color picker.',
+      type: 'boolean',
+    },
+  }}
+/>

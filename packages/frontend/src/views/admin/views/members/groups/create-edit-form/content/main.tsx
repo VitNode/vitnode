@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/form';
 import { TextLanguageInput } from '@/components/ui/text-language-input';
 import { Separator } from '@/components/ui/separator';
-import { ColorInput } from '@/components/ui/color-input';
+import { ColorPicker } from '@/components/ui/color-picker';
 
 export const MainContentCreateEditFormGroupsMembersAdmin = () => {
   const t = useTranslations('admin.members.groups.create_edit');
@@ -40,7 +40,7 @@ export const MainContentCreateEditFormGroupsMembersAdmin = () => {
           <FormItem>
             <FormLabel>{t('color')}</FormLabel>
             <FormControl>
-              <ColorInput {...field} />
+              <ColorPicker {...field} />
             </FormControl>
             <FormMessage />
           </FormItem>

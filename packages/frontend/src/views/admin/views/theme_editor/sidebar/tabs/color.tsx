@@ -14,7 +14,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { ColorInput } from '@/components/ui/color-input';
+import { ColorPicker } from '@/components/ui/color-picker';
 
 import { ThemeEditorTab, useThemeEditor } from '../../hooks/use-theme-editor';
 
@@ -49,7 +49,7 @@ export const ColorsTabThemeEditor = () => {
             <FormItem>
               <FormLabel>{t('primary')}</FormLabel>
               <FormControl>
-                <ColorInput
+                <ColorPicker
                   {...field}
                   className="w-full max-w-none"
                   key={`color_primary__${activeTheme}`}
@@ -93,7 +93,7 @@ export const ColorsTabThemeEditor = () => {
             <FormItem>
               <FormLabel>{t('secondary')}</FormLabel>
               <FormControl>
-                <ColorInput
+                <ColorPicker
                   {...field}
                   className="w-full max-w-none"
                   key={`color_secondary__${activeTheme}`}
@@ -137,7 +137,7 @@ export const ColorsTabThemeEditor = () => {
             <FormItem>
               <FormLabel>{t('cover')}</FormLabel>
               <FormControl>
-                <ColorInput
+                <ColorPicker
                   {...field}
                   className="w-full max-w-none"
                   key={`color_cover__${activeTheme}`}
@@ -254,7 +254,7 @@ export const ColorsTabThemeEditor = () => {
             <FormItem>
               <FormLabel>{t('destructive')}</FormLabel>
               <FormControl>
-                <ColorInput
+                <ColorPicker
                   {...field}
                   className="w-full max-w-none"
                   key={`color_destructive__${activeTheme}`}

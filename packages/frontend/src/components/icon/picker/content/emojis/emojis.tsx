@@ -3,11 +3,11 @@ import { init, SearchIndex } from 'emoji-mart';
 import React from 'react';
 import { useTranslations } from 'next-intl';
 
-import { IconInputProps } from '../content';
+import { IconPickerProps } from '../content';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/helpers/classnames';
 
-interface Props extends Omit<IconInputProps, 'setOpen'> {
+interface Props extends Omit<IconPickerProps, 'setOpen'> {
   search: string;
   skinToneIndex: number;
   classNameHeaders?: string;

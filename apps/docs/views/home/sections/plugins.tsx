@@ -1,5 +1,5 @@
 import { Plug } from 'lucide-react';
-import img from '@/assets/image.png';
+import img from '@/assets/home/plugins.png';
 import { SectionFeatures } from '@/components/features/section';
 import { Button } from '@/components/ui/button';
 

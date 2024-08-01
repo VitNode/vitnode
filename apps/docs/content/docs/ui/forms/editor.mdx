@@ -1,8 +1,137 @@
 ---
 title: WYSIWYG Editor
-description: Rich text editor.
+description: Rich text editor that uses TipTap library.
 ---
 
-## Form
+## Usage
 
-TODO: Add description.
+```tsx
+import { Editor } from 'vitnode-frontend/editor';
+```
+
+```tsx
+<Editor onChange={onChange} value={value} />
+```
+
+### With Form
+
+```tsx
+
+```
+
+### With Upload Files
+
+```tsx
+
+```
+
+### Form Schema
+
+```ts {1, 4}
+import { zodInput } from 'vitnode-frontend/helpers/zod';
+
+const formSchema = z.object({
+  content: zodInput.languageInput,
+});
+```
+
+You can set this field as **required**:
+
+```ts
+const formSchema = z.object({
+  content: zodInput.languageInput.min(1),
+});
+```
+
+## API Reference
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+<TypeTable
+  type={{
+    onChange: {
+      description: 'Callback when the value changes.',
+      type: '(value: TextLanguage[]) => void | (value: string) => void',
+    },
+    value: {
+      description: 'Value of the editor.',
+      type: 'TextLanguage[] | string',
+    },
+    disableLanguages: {
+      description: 'Disable languages in editor.',
+      type: 'boolean',
+      default: 'false',
+    },
+    autoFocus: {
+      description: 'Focus editor on mount.',
+      type: 'boolean',
+      default: 'false',
+    },
+    allowUploadFiles: {
+      description: 'Allow upload files.',
+      type: '{ plugin: string, folder: string }',
+    },
+  }}
+/>
+
+## Extensions
+
+We have implemented the following extensions:
+
+- [Blockquote](https://tiptap.dev/docs/editor/api/nodes/blockquote),
+- [BulletList](https://tiptap.dev/docs/editor/api/nodes/bullet-list),
+- [CodeBlock](https://tiptap.dev/docs/editor/api/nodes/code-block),
+- [HardBreak](https://tiptap.dev/docs/editor/api/nodes/hard-break),
+- [Heading](https://tiptap.dev/docs/editor/api/nodes/heading),
+- [HorizontalRule](https://tiptap.dev/docs/editor/api/nodes/horizontal-rule),
+- [ListItem](https://tiptap.dev/docs/editor/api/nodes/list-item),
+- [OrderedList](https://tiptap.dev/docs/editor/api/nodes/ordered-list),
+- [Paragraph](https://tiptap.dev/docs/editor/api/nodes/paragraph),
+- [Bold](https://tiptap.dev/docs/editor/api/marks/bold),
+- [Code](https://tiptap.dev/docs/editor/api/marks/code),
+- [Italic](https://tiptap.dev/docs/editor/api/marks/italic),
+- [Strike](https://tiptap.dev/docs/editor/api/marks/strike),
+- [Dropcursor](https://tiptap.dev/docs/editor/api/extensions/dropcursor),
+- [Gapcursor](https://tiptap.dev/docs/editor/api/extensions/gapcursor),
+- [History](https://tiptap.dev/docs/editor/api/extensions/history),
+- [Underline](https://tiptap.dev/docs/editor/api/marks/underline),
+- [TextAlign](https://tiptap.dev/docs/editor/api/extensions/text-align),
+- [CodeBlockLowlight](https://tiptap.dev/docs/editor/api/nodes/code-block-lowlight),
+- [Link](https://tiptap.dev/docs/editor/api/marks/link),
+- [TextStyle](https://tiptap.dev/docs/editor/api/marks/text-style),
+- [Color](https://tiptap.dev/docs/editor/api/extensions/color)
+
+and extra extensions unique to our implementation:
+
+- Emoji,
+- Image,
+- Files
+
+## Read only mode
+
+To display content form editor you have to use `ReadOnlyEditor` component.
+
+```tsx
+import { ReadOnlyEditor } from 'vitnode-frontend/editor/read-only';
+```
+
+```tsx
+<ReadOnlyEditor value={value} />
+```
+
+### API Reference
+
+<TypeTable
+  type={{
+    value: {
+      description: 'Value of the editor.',
+      type: 'TextLanguage[]',
+      default: '[]',
+    },
+    allowDownloadAttachments: {
+      description: 'Allow download attachments.',
+      type: 'boolean',
+      default: 'false',
+    },
+  }}
+/>

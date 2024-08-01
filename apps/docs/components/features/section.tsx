@@ -26,7 +26,7 @@ export const SectionFeatures = ({
     <div className="grid grid-cols-1 gap-x-12 gap-y-8 md:grid-cols-2 lg:items-center xl:gap-x-20">
       <Image
         src={img}
-        className={cn('rounded-md', {
+        className={cn('rounded-md border shadow', {
           'order-1 lg:order-2': reverse,
         })}
         alt="test"

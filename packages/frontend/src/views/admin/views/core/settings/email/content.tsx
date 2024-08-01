@@ -10,7 +10,7 @@ import {
   FormFieldRender,
   FormWrapper,
 } from '@/components/ui/form';
-import { ColorInput } from '@/components/ui/color-input';
+import { ColorPicker } from '@/components/ui/color-picker';
 import { HeaderContent } from '@/components/ui/header-content';
 import { Separator } from '@/components/ui/separator';
 import { Input } from '@/components/ui/input';
@@ -32,7 +32,7 @@ export const ContentEmailSettingsAdmin = (
           name="color_primary"
           render={({ field }) => (
             <FormFieldRender label={t('color_primary')}>
-              <ColorInput {...field} disableRemoveColor />
+              <ColorPicker {...field} disableRemoveColor />
             </FormFieldRender>
           )}
         />

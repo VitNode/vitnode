@@ -11,7 +11,7 @@ import { Popover, PopoverContent, PopoverTrigger } from './popover';
 
 import { cn } from '../../helpers/classnames';
 
-export const ColorInput = ({
+export const ColorPicker = ({
   disableRemoveColor,
   disabled,
   onChange,
