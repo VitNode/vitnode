@@ -8,7 +8,7 @@ import { copyFiles } from './copy-files';
 import { generateManifest } from './generate-manifest';
 import { createTablesDatabaseUsingMigrations } from './create-tables-database-using-migrations';
 import { updatePlugins } from './update-plugins';
-import coreSchemaDatabase from '../src/plugins/core/admin/database';
+import coreSchemaDatabase from '../src/database';
 import { generateDatabaseMigrations } from './generate-database-migrations';
 import { generateConfig } from './generate-config';
 
@@ -48,7 +48,7 @@ const init = async () => {
   }
 
   console.log(`${initConsole} [3/6] Generating database migrations...`);
-  await generateDatabaseMigrations({ pluginsPath });
+  await generateDatabaseMigrations();
 
   console.log(`${initConsole} [4/6] Generating the manifest files...`);
   generateManifest();

@@ -20,6 +20,7 @@ query Admin__sessions__authorization {
           language_code
           value
         }
+        color
         id
       }
     }

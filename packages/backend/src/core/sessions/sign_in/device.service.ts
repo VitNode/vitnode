@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
 import { DatabaseService } from '@/utils/database/database.service';
-import { core_sessions_known_devices } from '../../../plugins/core/admin/database/schema/sessions';
+import { core_sessions_known_devices } from '../../../database/schema/sessions';
 import { GqlContext } from '../../../utils';
 import { getUserIp, getUserAgentData } from '../../../functions';
 

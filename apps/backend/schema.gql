@@ -157,6 +157,7 @@ type FilesEditorShowCoreMiddleware {
 }
 
 type GroupUser {
+  color: String!
   id: Int!
   name: [TextLanguage!]!
 }
@@ -213,9 +214,9 @@ type Mutation {
   admin__core_email_settings__edit(color_primary: String!, color_primary_foreground: String!, smtp_host: String!, smtp_password: String!, smtp_port: Int!, smtp_secure: Boolean!, smtp_user: String!): ShowAdminEmailSettingsServiceObj!
   admin__core_email_settings__test(from: String!, message: String!, preview_text: String, subject: String!, to: String!): String!
   admin__core_files__delete(id: Int!): String!
-  admin__core_groups__create(content: ContentCreateAdminGroups!, name: [TextLanguageInput!]!): ShowAdminGroups!
+  admin__core_groups__create(color: String, content: ContentCreateAdminGroups!, name: [TextLanguageInput!]!): ShowAdminGroups!
   admin__core_groups__delete(id: Int!): String!
-  admin__core_groups__edit(content: ContentCreateAdminGroups!, id: Int!, name: [TextLanguageInput!]!): ShowAdminGroups!
+  admin__core_groups__edit(color: String, content: ContentCreateAdminGroups!, id: Int!, name: [TextLanguageInput!]!): ShowAdminGroups!
   admin__core_languages__create(allow_in_input: Boolean!, code: String!, locale: String!, name: String!, time_24: Boolean!, timezone: String!): ShowCoreLanguages!
   admin__core_languages__delete(code: String!): String!
   admin__core_languages__download(code: String!, plugins: [String!]!): String!
@@ -355,6 +356,7 @@ type ShowAdminFilesObj {
 }
 
 type ShowAdminGroups {
+  color: String!
   content: ContentShowAdminGroups!
   created: DateTime!
   default: Boolean!
@@ -697,6 +699,7 @@ enum SortDirectionEnum {
 }
 
 type StaffGroupUser {
+  color: String!
   group_name: [TextLanguage!]!
   id: Int!
 }

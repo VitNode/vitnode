@@ -6,8 +6,8 @@ import { NodePgDatabase } from 'drizzle-orm/node-postgres';
 import { eq } from 'drizzle-orm';
 
 import { ConfigPlugin } from '../src/providers/plugins.type';
-import coreSchemaDatabase from '../src/plugins/core/admin/database';
-import { core_plugins } from '../src/plugins/core/admin/database/schema/plugins';
+import coreSchemaDatabase from '../src/database';
+import { core_plugins } from '../src/database/schema/plugins';
 
 export const updatePlugins = async ({
   pluginsPath,

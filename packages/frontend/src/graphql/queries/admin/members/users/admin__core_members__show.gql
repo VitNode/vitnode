@@ -40,6 +40,7 @@ query Admin__core_members__show(
           language_code
           value
         }
+        color
       }
     }
   }

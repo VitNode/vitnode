@@ -5,7 +5,7 @@ import { CreateAdminStaffAdministratorsArgs } from './dto/create.args';
 
 import { CustomError } from '@/errors';
 import { DatabaseService } from '@/utils/database/database.service';
-import { core_admin_permissions } from '@/plugins/core/admin/database/schema/admins';
+import { core_admin_permissions } from '@/database/schema/admins';
 
 @Injectable()
 export class CreateAdminStaffAdministratorsService {

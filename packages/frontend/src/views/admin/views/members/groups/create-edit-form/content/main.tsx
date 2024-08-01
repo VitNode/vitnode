@@ -10,7 +10,6 @@ import {
 } from '@/components/ui/form';
 import { TextLanguageInput } from '@/components/ui/text-language-input';
 import { Separator } from '@/components/ui/separator';
-import { IconInput } from '@/components/icon/input/icon-input';
 import { ColorInput } from '@/components/ui/color-input';
 
 export const MainContentCreateEditFormGroupsMembersAdmin = () => {
@@ -36,24 +35,10 @@ export const MainContentCreateEditFormGroupsMembersAdmin = () => {
 
       <FormField
         control={form.control}
-        name="icon"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>Icon</FormLabel>
-            <FormControl>
-              <IconInput {...field} />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-
-      <FormField
-        control={form.control}
         name="color"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Color</FormLabel>
+            <FormLabel>{t('color')}</FormLabel>
             <FormControl>
               <ColorInput {...field} />
             </FormControl>

@@ -5,10 +5,7 @@ import { CreateAdminGroupsArgs } from './dto/create.args';
 
 import { DatabaseService } from '@/utils/database/database.service';
 import { ParserTextLanguageCoreHelpersService } from '../../../helpers/text_language/parser/parser.service';
-import {
-  core_groups,
-  core_groups_names,
-} from '@/plugins/core/admin/database/schema/groups';
+import { core_groups, core_groups_names } from '@/database/schema/groups';
 
 @Injectable()
 export class CreateAdminGroupsService {
@@ -20,11 +17,13 @@ export class CreateAdminGroupsService {
   async create({
     content,
     name,
+    color,
   }: CreateAdminGroupsArgs): Promise<ShowAdminGroups> {
     const group = await this.databaseService.db
       .insert(core_groups)
       .values({
         ...content,
+        color: color ? color : null,
       })
       .returning();
 

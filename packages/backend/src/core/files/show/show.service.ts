@@ -6,10 +6,7 @@ import { ShowCoreFilesObj } from './dto/show.obj';
 
 import { DatabaseService } from '@/utils/database/database.service';
 import { inputPaginationCursor, outputPagination } from '../../../functions';
-import {
-  core_files,
-  core_files_using,
-} from '../../../plugins/core/admin/database/schema/files';
+import { core_files, core_files_using } from '../../../database/schema/files';
 import { User } from '../../../decorators';
 import { SortDirectionEnum } from '../../../utils';
 

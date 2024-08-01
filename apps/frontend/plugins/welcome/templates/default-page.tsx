@@ -5,11 +5,11 @@ import { BookIcon, KeyRoundIcon } from 'lucide-react';
 
 export default function DefaultPage() {
   return (
-    <main className="container my-10 flex max-w-lg flex-col items-center justify-center gap-8 text-center sm:my-20">
+    <main className="container my-10 flex max-w-lg flex-col items-center justify-center gap-8 text-center">
       <LogoVitNode className="w-48" />
 
       <div className="space-y-1">
-        <h1 className="text-3xl font-bold">Welcome! Ready to build?</h1>
+        <h1 className="text-3xl font-bold">Ready to build?</h1>
 
         <p className="text-muted-foreground">
           Dive in and install your first plugin! Or, if you&apos;re feeling
@@ -18,12 +18,7 @@ export default function DefaultPage() {
       </div>
 
       <div className="flex flex-wrap items-center justify-center gap-4">
-        <Link
-          href="/admin"
-          className={buttonVariants({
-            size: 'sm',
-          })}
-        >
+        <Link href="/admin" className={buttonVariants()}>
           <KeyRoundIcon /> Go to AdminCP
         </Link>
 
@@ -33,7 +28,6 @@ export default function DefaultPage() {
           rel="noopener noreferrer"
           className={buttonVariants({
             variant: 'ghost',
-            size: 'sm',
           })}
         >
           <BookIcon /> Read our Docs

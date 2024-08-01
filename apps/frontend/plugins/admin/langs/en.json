@@ -448,6 +448,7 @@
           "main": "Main",
           "content": "Content",
           "name": "Name",
+          "color": "Color",
           "in_kb": "in kB",
           "files": {
             "title": "Files",

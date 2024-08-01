@@ -11,7 +11,7 @@ import { ChangeFilesAdminPluginsService } from '../helpers/files/change/change.s
 import { DatabaseService } from '@/utils/database/database.service';
 import { CustomError } from '@/errors';
 import { ABSOLUTE_PATHS_BACKEND } from '../../../..';
-import { core_plugins } from '@/plugins/core/admin/database/schema/plugins';
+import { core_plugins } from '@/database/schema/plugins';
 
 @Injectable()
 export class CreateAdminPluginsService {

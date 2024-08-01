@@ -1,16 +1,23 @@
-import { TextLanguage } from '../../../graphql/graphql';
+import { GroupUser } from '@/graphql/graphql';
+import { cn } from '@/helpers/classnames';
+
 import { useTextLang } from '../../../hooks/use-text-lang';
 
 export const GroupFormat = ({
   className,
-  group: { name },
+  group: { name, color },
 }: {
-  group: {
-    name: TextLanguage[];
-  };
+  group: Omit<GroupUser, '__typename'>;
   className?: string;
 }) => {
   const { convertText } = useTextLang();
 
-  return <span className={className}>{convertText(name)}</span>;
+  return (
+    <span
+      className={cn('font-medium text-[--group-color]', className)}
+      style={{ '--group-color': color } as React.CSSProperties}
+    >
+      {convertText(name)}
+    </span>
+  );
 };

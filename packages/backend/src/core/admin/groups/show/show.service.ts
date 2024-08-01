@@ -4,12 +4,9 @@ import { and, count, eq, ilike, inArray } from 'drizzle-orm';
 import { ShowAdminGroupsArgs } from './dto/show.args';
 import { ShowAdminGroupsObj } from './dto/show.obj';
 
-import {
-  core_groups,
-  core_groups_names,
-} from '@/plugins/core/admin/database/schema/groups';
+import { core_groups, core_groups_names } from '@/database/schema/groups';
 import { inputPaginationCursor, outputPagination } from '@/functions';
-import { core_users } from '@/plugins/core/admin/database/schema/users';
+import { core_users } from '@/database/schema/users';
 import { SortDirectionEnum } from '@/utils';
 import { DatabaseService } from '@/utils/database/database.service';
 

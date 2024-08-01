@@ -7,11 +7,11 @@ import {
 } from './dto/layout.obj';
 
 import { DatabaseService } from '@/utils/database/database.service';
-import { core_users } from '@/plugins/core/admin/database/schema/users';
-import { core_sessions } from '@/plugins/core/admin/database/schema/sessions';
-import { core_admin_sessions } from '@/plugins/core/admin/database/schema/admins';
+import { core_users } from '@/database/schema/users';
+import { core_sessions } from '@/database/schema/sessions';
+import { core_admin_sessions } from '@/database/schema/admins';
 import { AccessDeniedError } from '@/errors';
-import { core_languages } from '@/plugins/core/admin/database/schema/languages';
+import { core_languages } from '@/database/schema/languages';
 
 @Injectable()
 export class LayoutAdminInstallService {

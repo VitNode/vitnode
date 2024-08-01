@@ -4,10 +4,7 @@ import { desc, eq, lt, sql } from 'drizzle-orm';
 
 import { DeleteCoreFilesService } from './helpers/delete/delete.service';
 
-import {
-  core_files,
-  core_files_using,
-} from '../../plugins/core/admin/database/schema/files';
+import { core_files, core_files_using } from '../../database/schema/files';
 import { DatabaseService } from '@/utils';
 
 @Injectable()

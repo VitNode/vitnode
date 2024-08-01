@@ -10,7 +10,7 @@ import { getManifest } from '../functions';
 
 import { DatabaseService } from '@/utils/database/database.service';
 import { ABSOLUTE_PATHS_BACKEND } from '@/index';
-import { core_languages } from '@/plugins/core/admin/database/schema/languages';
+import { core_languages } from '@/database/schema/languages';
 
 @Injectable()
 export class EditAdminManifestMetadataService {

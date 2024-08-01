@@ -1,6 +1,7 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 
-import { PageInfo, TextLanguage } from '@/utils';
+import { PageInfo } from '@/utils';
+import { GroupUser } from '@/decorators';
 
 @ObjectType()
 export class ContentShowAdminGroups {
@@ -15,13 +16,7 @@ export class ContentShowAdminGroups {
 }
 
 @ObjectType()
-export class ShowAdminGroups {
-  @Field(() => Int)
-  id: number;
-
-  @Field(() => [TextLanguage])
-  name: TextLanguage[];
-
+export class ShowAdminGroups extends GroupUser {
   @Field(() => Int)
   users_count: number;
 

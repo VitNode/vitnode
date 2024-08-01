@@ -34,4 +34,7 @@ export class CreateAdminGroupsArgs {
 
   @Field(() => ContentCreateAdminGroups)
   content: ContentCreateAdminGroups;
+
+  @Field(() => String, { nullable: true })
+  color?: string;
 }

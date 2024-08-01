@@ -13,6 +13,7 @@ query Core_members__show__search($search: String, $first: Int) {
           language_code
           value
         }
+        color
       }
       id
       name

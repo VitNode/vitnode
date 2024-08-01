@@ -7,11 +7,8 @@ import { ShowAdminGroups } from '../show/dto/show.obj';
 import { DatabaseService } from '@/utils/database/database.service';
 import { ParserTextLanguageCoreHelpersService } from '../../../helpers/text_language/parser/parser.service';
 import { NotFoundError } from '@/errors';
-import {
-  core_groups,
-  core_groups_names,
-} from '@/plugins/core/admin/database/schema/groups';
-import { core_users } from '@/plugins/core/admin/database/schema/users';
+import { core_groups, core_groups_names } from '@/database/schema/groups';
+import { core_users } from '@/database/schema/users';
 
 @Injectable()
 export class EditAdminGroupsService {
@@ -24,6 +21,7 @@ export class EditAdminGroupsService {
     content,
     id,
     name,
+    color,
   }: EditAdminGroupsArgs): Promise<ShowAdminGroups> {
     const group = await this.databaseService.db.query.core_groups.findFirst({
       where: (table, { eq }) => eq(table.id, id),
@@ -48,6 +46,7 @@ export class EditAdminGroupsService {
       .update(core_groups)
       .set({
         updated: new Date(),
+        color: color ? color : null,
         ...content,
       })
       .where(eq(core_groups.id, id))
