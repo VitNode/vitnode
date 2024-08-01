@@ -47,7 +47,6 @@ export const ABSOLUTE_PATHS_BACKEND = {
   plugins: internalPaths.plugins,
   plugin: ({ code }: { code: string }) => ({
     root: join(internalPaths.plugins, code),
-    versions: join(internalPaths.plugins, code, 'versions.json'),
     admin: join(internalPaths.plugins, code, 'admin'),
     config: join(internalPaths.plugins, code, 'config.json'),
     database: {

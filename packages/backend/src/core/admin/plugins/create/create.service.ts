@@ -50,6 +50,8 @@ export class CreateAdminPluginsService {
       support_url,
       allow_default: true,
       nav: [],
+      version: '0.0.1',
+      version_code: 1,
     });
     this.changeFilesService.changeFilesWhenCreate({ code });
 

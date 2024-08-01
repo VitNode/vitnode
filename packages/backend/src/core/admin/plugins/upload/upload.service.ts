@@ -67,11 +67,17 @@ export class UploadAdminPluginsService {
 
     const pathInfoJSON = join(this.tempPath, 'backend', 'config.json');
     const pluginFile = await fs.promises.readFile(pathInfoJSON, 'utf8');
-    const config: Omit<ConfigPlugin, 'version_code' | 'versions'> =
-      JSON.parse(pluginFile);
+    const config: ConfigPlugin = JSON.parse(pluginFile);
 
     // Check if variables exists
-    if (!config.name || !config.author || !config.code || !config.support_url) {
+    if (
+      !config.name ||
+      !config.author ||
+      !config.code ||
+      !config.support_url ||
+      !config.version ||
+      !config.version_code
+    ) {
       await this.removeTempFolder();
       throw new CustomError({
         code: 'PLUGIN_CONFIG_VARIABLES_NOT_FOUND',
@@ -79,19 +85,7 @@ export class UploadAdminPluginsService {
       });
     }
 
-    const pathVersionsJSON = join(this.tempPath, 'backend', 'versions.json');
-    const versionsFile = await fs.promises.readFile(pathVersionsJSON, 'utf8');
-    const versions: Record<string, string> = JSON.parse(versionsFile);
-
-    // Find the latest version
-    const latestVersion = Object.keys(versions).sort().reverse()[0];
-    const version = versions[latestVersion];
-
-    return {
-      ...config,
-      version,
-      version_code: +latestVersion,
-    };
+    return config;
   }
 
   protected async createPluginBackend({

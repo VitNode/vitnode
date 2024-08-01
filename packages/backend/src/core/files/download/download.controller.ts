@@ -10,10 +10,12 @@ import {
   Query,
 } from '@nestjs/common';
 import { Response } from 'express';
+import { SkipThrottle } from '@nestjs/throttler';
 
 import { DatabaseService } from '@/utils/database/database.service';
 import { ABSOLUTE_PATHS_BACKEND } from '../../..';
 
+@SkipThrottle()
 @Controller('secure_files')
 export class DownloadSecureFilesController {
   constructor(private readonly databaseService: DatabaseService) {}

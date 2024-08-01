@@ -10,12 +10,14 @@ import {
   StreamableFile,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
+import { SkipThrottle } from '@nestjs/throttler';
 
 import { InternalAuthorizationCoreSessionsService } from '../../../sessions/authorization/internal/internal_authorization.service';
 import { AuthorizationAdminSessionsService } from '../../sessions/authorization/authorization.service';
 import { DatabaseService } from '@/utils/database/database.service';
 import { ABSOLUTE_PATHS_BACKEND } from '../../../..';
 
+@SkipThrottle()
 @Controller('files')
 export class DownloadFilesAdminController {
   constructor(

@@ -35,19 +35,12 @@ export const updatePlugins = async ({
         if (config.allow_default) {
           isDefaultIndex = index;
         }
-        const versions: Record<string, string> = JSON.parse(
-          fs.readFileSync(join(pluginPath, 'versions.json'), 'utf8'),
-        );
-        const latestVersion = Object.keys(versions).sort().reverse()[0];
-        const version = versions[latestVersion];
 
         const plugin = await tx.query.core_plugins.findFirst({
           where: (table, { eq }) => eq(table.code, code),
         });
 
         if (plugin) {
-          if (!latestVersion) return;
-
           await tx
             .update(core_plugins)
             .set({
@@ -57,8 +50,8 @@ export const updatePlugins = async ({
               author: config.author,
               author_url: config.author_url,
               allow_default: config.allow_default,
-              version,
-              version_code: +latestVersion,
+              version: config.version,
+              version_code: config.version_code,
             })
             .where(eq(core_plugins.id, plugin.id));
 
@@ -73,8 +66,8 @@ export const updatePlugins = async ({
             author: config.author,
             author_url: config.author_url,
             allow_default: config.allow_default,
-            version: version ?? null,
-            version_code: latestVersion ? +latestVersion : null,
+            version: config.version,
+            version_code: config.version_code,
             default: isDefaultIndex === index && !defaultPlugin,
           },
         ]);
