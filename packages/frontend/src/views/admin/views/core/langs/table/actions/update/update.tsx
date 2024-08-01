@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { ShowCoreLanguages } from '@/graphql/graphql';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
 import { Loader } from '@/components/ui/loader';
+import { ShowCoreLanguages } from '@/graphql/types';
 
 const Content = React.lazy(async () =>
   import('./content').then(module => ({

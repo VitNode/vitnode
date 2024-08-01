@@ -2,7 +2,6 @@ import { Trash2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
-import { ShowCoreNav } from '@/graphql/graphql';
 import {
   AlertDialog,
   AlertDialogContent,
@@ -16,6 +15,7 @@ import {
 } from '@/components/ui/tooltip';
 import { Button } from '@/components/ui/button';
 import { Loader } from '@/components/ui/loader';
+import { ShowCoreNav } from '@/graphql/types';
 
 const Content = React.lazy(async () =>
   import('./content').then(module => ({

@@ -1,7 +1,6 @@
 import { useTranslations } from 'next-intl';
 
 import { useDeleteLangAdmin } from './hooks/use-delete-lang-admin';
-import { ShowCoreLanguages } from '@/graphql/graphql';
 import {
   Form,
   FormControl,
@@ -18,6 +17,7 @@ import {
 } from '@/components/ui/alert-dialog';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { ShowCoreLanguages } from '@/graphql/types';
 
 export const ContentDeleteActionsTableLangsCoreAdmin = ({
   code,

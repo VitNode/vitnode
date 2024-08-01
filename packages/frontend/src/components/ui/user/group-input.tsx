@@ -6,8 +6,8 @@ import { Popover, PopoverContent, PopoverTrigger } from '../popover';
 import { Button } from '../button';
 import { Badge } from '../badge';
 import { Loader } from '../loader';
+import { TextLanguage } from '@/graphql/types';
 
-import { TextLanguage } from '../../../graphql/graphql';
 import { GroupInputContent } from '../../../utils/components/user/group-input/content';
 import { useTextLang } from '../../../hooks/use-text-lang';
 import { cn } from '../../../helpers/classnames';

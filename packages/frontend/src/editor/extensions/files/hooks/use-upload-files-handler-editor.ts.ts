@@ -12,7 +12,7 @@ import {
 } from '../files';
 import { uploadMutationApi } from './upload-mutation-api';
 import { getFilesFromContent } from './functions';
-import { TextLanguage } from '@/graphql/graphql';
+import { TextLanguage } from '@/graphql/types';
 
 export interface UploadFilesHandlerArgs {
   files: FileStateEditor[];

@@ -8,7 +8,7 @@ import { fetcher } from '@/graphql/fetcher';
 import {
   Admin__Core_Security__Captcha__Show,
   Admin__Core_Security__Captcha__ShowQuery,
-} from '@/graphql/graphql';
+} from '@/graphql/queries/admin/security/admin__core_security__captcha__show.generated';
 
 const getData = async () => {
   const data = await fetcher<Admin__Core_Security__Captcha__ShowQuery>({

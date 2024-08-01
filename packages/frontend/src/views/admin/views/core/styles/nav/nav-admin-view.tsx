@@ -4,17 +4,17 @@ import { Metadata } from 'next';
 
 import { TableNavAdmin } from './table/table';
 import { ActionsNavAdmin } from './actions/actions';
-import {
-  Admin__Core_Nav__Show,
-  Admin__Core_Nav__ShowQuery,
-  Admin__Core_Nav__ShowQueryVariables,
-  ShowCoreNav,
-} from '@/graphql/graphql';
 import { flattenTree } from '@/helpers/flatten-tree';
 import { Icon } from '@/components/icon/icon';
 import { HeaderContent } from '@/components/ui/header-content';
 import { Card } from '@/components/ui/card';
 import { fetcher } from '@/graphql/fetcher';
+import {
+  Admin__Core_Nav__Show,
+  Admin__Core_Nav__ShowQuery,
+  Admin__Core_Nav__ShowQueryVariables,
+} from '@/graphql/queries/admin/styles/nav/admin__core_nav__show.generated';
+import { ShowCoreNav } from '@/graphql/types';
 
 const getData = async () => {
   const data = await fetcher<

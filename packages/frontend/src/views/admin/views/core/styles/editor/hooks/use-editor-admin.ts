@@ -5,7 +5,8 @@ import { toast } from 'sonner';
 import { useTranslations } from 'next-intl';
 
 import { mutationApi } from './mutation-api';
-import { AllowTypeFilesEnum, Core_GlobalQuery } from '@/graphql/graphql';
+import { Core_GlobalQuery } from '@/graphql/queries/core_global.generated';
+import { AllowTypeFilesEnum } from '@/graphql/types';
 
 export const useEditorAdmin = (
   data: Core_GlobalQuery['core_middleware__show']['editor'],

@@ -6,7 +6,6 @@ import { EditActionsTableLangsCoreAdmin } from './edit';
 import { DeleteActionsTableLangsCoreAdmin } from './delete/delete';
 import { DownloadActionsTableLangsCoreAdmin } from './download/download';
 import { UpdateActionsTableLangsCoreAdmin } from './update/update';
-import { ShowCoreLanguages } from '@/graphql/graphql';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,6 +13,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
+import { ShowCoreLanguages } from '@/graphql/types';
 
 export const ActionsTableLangsCoreAdmin = (data: ShowCoreLanguages) => {
   const t = useTranslations('core');

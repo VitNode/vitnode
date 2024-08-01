@@ -10,8 +10,8 @@ import {
   SelectValue,
 } from './select';
 import { FormControl } from './form';
+import { TextLanguage } from '@/graphql/types';
 
-import { TextLanguage } from '../../graphql/graphql';
 import { useGlobals } from '../../hooks/use-globals';
 import { cn } from '../../helpers/classnames';
 

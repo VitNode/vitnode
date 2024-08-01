@@ -1,10 +1,7 @@
 import React from 'react';
 
-import {
-  AuthorizationCurrentUserObj,
-  Core_Sessions__AuthorizationQuery,
-  ShowCoreNav,
-} from '../graphql/graphql';
+import { Core_Sessions__AuthorizationQuery } from '@/graphql/queries/core_sessions__authorization.generated';
+import { AuthorizationCurrentUserObj, ShowCoreNav } from '@/graphql/types';
 
 interface Args {
   files: Core_Sessions__AuthorizationQuery['core_sessions__authorization']['files'];

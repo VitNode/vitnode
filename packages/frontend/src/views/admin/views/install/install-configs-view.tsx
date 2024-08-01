@@ -1,14 +1,14 @@
 import { Metadata } from 'next';
 
 import { ContentInstallConfigsView } from './content/content';
+import { FetcherErrorType, fetcher } from '@/graphql/fetcher';
+import { redirect } from '@/navigation';
+import { InstallConfigLayout } from './layout';
 import {
   Admin__Install__Layout,
   Admin__Install__LayoutQuery,
   Admin__Install__LayoutQueryVariables,
-} from '@/graphql/graphql';
-import { FetcherErrorType, fetcher } from '@/graphql/fetcher';
-import { redirect } from '@/navigation';
-import { InstallConfigLayout } from './layout';
+} from '@/graphql/queries/admin/install/admin__install__layout.generated';
 
 import { InternalErrorView } from '../../../global';
 

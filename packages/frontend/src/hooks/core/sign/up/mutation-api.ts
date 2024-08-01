@@ -2,12 +2,12 @@
 
 import { revalidatePath } from 'next/cache';
 
+import { FetcherErrorType, fetcher } from '@/graphql/fetcher';
 import {
   Core_Sessions__Sign_Up,
   Core_Sessions__Sign_UpMutation,
   Core_Sessions__Sign_UpMutationVariables,
-} from '@/graphql/graphql';
-import { FetcherErrorType, fetcher } from '@/graphql/fetcher';
+} from '@/graphql/mutations/sessions/core_Sessions__sign_up.generated';
 
 interface Args extends Core_Sessions__Sign_UpMutationVariables {
   token: string;

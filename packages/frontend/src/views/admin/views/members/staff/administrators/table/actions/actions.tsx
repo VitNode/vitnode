@@ -1,5 +1,5 @@
+import { ShowAdminStaffAdministrators } from '@/graphql/types';
 import { DeleteActionsTableAdministratorsStaffAdmin } from './delete/delete';
-import { ShowAdminStaffAdministrators } from '@/graphql/graphql';
 
 export const ActionsTableAdministratorsStaffAdmin = ({
   data,

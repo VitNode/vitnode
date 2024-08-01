@@ -1,9 +1,9 @@
+import { fetcher } from './fetcher';
 import {
   Core_Sessions__Authorization,
   Core_Sessions__AuthorizationQuery,
   Core_Sessions__AuthorizationQueryVariables,
-} from './graphql';
-import { fetcher } from './fetcher';
+} from './queries/core_sessions__authorization.generated';
 
 export const getSessionData = async () => {
   const data = await fetcher<

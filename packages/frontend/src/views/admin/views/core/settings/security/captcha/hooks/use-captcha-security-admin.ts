@@ -5,10 +5,8 @@ import { toast } from 'sonner';
 import { useTranslations } from 'next-intl';
 
 import { mutationApi } from './mutation-api';
-import {
-  Admin__Core_Security__Captcha__ShowQuery,
-  CaptchaTypeEnum,
-} from '@/graphql/graphql';
+import { Admin__Core_Security__Captcha__ShowQuery } from '@/graphql/queries/admin/security/admin__core_security__captcha__show.generated';
+import { CaptchaTypeEnum } from '@/graphql/types';
 
 export const useCaptchaSecurityAdmin = ({
   admin__core_security__captcha__show: data,

@@ -9,7 +9,8 @@
   "ignorePatterns": [
     ".next",
     "global.d.ts",
-    "utils/graphql.ts",
+    "/graphql",
+    "/src/graphql",
     "tailwind.config.ts",
     "next.config.ts"
   ],

@@ -2,12 +2,12 @@
 
 import { revalidatePath } from 'next/cache';
 
+import { fetcher, FetcherErrorType } from '@/graphql/fetcher';
 import {
   Admin__Core_Main_Settings__Edit,
   Admin__Core_Main_Settings__EditMutation,
   Admin__Core_Main_Settings__EditMutationVariables,
-} from '@/graphql/graphql';
-import { fetcher, FetcherErrorType } from '@/graphql/fetcher';
+} from '@/graphql/mutations/admin/settings/admin__core_main_settings__edit.generated';
 
 export const mutationApi = async (
   variables: Admin__Core_Main_Settings__EditMutationVariables,

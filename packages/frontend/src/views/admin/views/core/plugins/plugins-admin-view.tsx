@@ -4,18 +4,18 @@ import { Metadata } from 'next';
 import { ActionsPluginsAdmin } from './actions/actions';
 import { ContentPluginsCoreAdmin } from './content';
 import {
-  Admin__Core_Plugins__Show,
-  Admin__Core_Plugins__ShowQuery,
-  Admin__Core_Plugins__ShowQueryVariables,
-  ShowAdminPluginsSortingColumnEnum,
-} from '@/graphql/graphql';
-import {
   SearchParamsPagination,
   getPaginationTool,
 } from '@/graphql/get-pagination-tool';
 import { HeaderContent } from '@/components/ui/header-content';
 import { Card } from '@/components/ui/card';
 import { fetcher } from '@/graphql/fetcher';
+import {
+  Admin__Core_Plugins__Show,
+  Admin__Core_Plugins__ShowQuery,
+  Admin__Core_Plugins__ShowQueryVariables,
+} from '@/graphql/queries/admin/plugins/admin__core_plugins__show.generated';
+import { ShowAdminPluginsSortingColumnEnum } from '@/graphql/types';
 
 import { RebuildRequiredAdmin } from '../../../global/rebuild-required';
 

@@ -5,10 +5,6 @@ import { removeSpecialCharacters } from 'vitnode-shared';
 
 import { useCreateNavPluginAdmin } from './hooks/use-create-nav-plugin-admin';
 import {
-  Admin__Core_Plugins__Nav__ShowQuery,
-  ShowAdminNavPluginsObj,
-} from '@/graphql/graphql';
-import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -33,6 +29,8 @@ import {
 import { IconPicker } from '@/components/icon/picker/icon-picker';
 import { Button } from '@/components/ui/button';
 import { TagsInput } from '@/components/ui/tags-input';
+import { Admin__Core_Plugins__Nav__ShowQuery } from '@/graphql/queries/admin/plugins/dev/nav/admin__core_plugins__nav__show.generated';
+import { ShowAdminNavPluginsObj } from '@/graphql/types';
 
 export interface CreateEditNavDevPluginAdminProps {
   dataFromSSR: Admin__Core_Plugins__Nav__ShowQuery['admin__core_plugins__nav__show'];

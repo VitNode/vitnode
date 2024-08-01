@@ -1,4 +1,5 @@
-import { Maybe, AvatarUser as AvatarUserType } from '../../../graphql/graphql';
+import { AvatarUser as AvatarUserType } from '@/graphql/types';
+
 import { cn } from '../../../helpers/classnames';
 import { CONFIG } from '../../../helpers/config-with-env';
 import { Img } from '../../img';
@@ -18,7 +19,7 @@ export const AvatarUser = ({
     avatar_color: string;
     name: string;
     name_seo: string;
-    avatar?: Maybe<Pick<AvatarUserType, 'dir_folder' | 'file_name'>>;
+    avatar?: Pick<AvatarUserType, 'dir_folder' | 'file_name'>;
   };
   className?: string;
 }) => {

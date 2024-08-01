@@ -2,7 +2,6 @@ import { Trash2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
-import { ShowAdminStaffModerators } from '@/graphql/graphql';
 import {
   AlertDialog,
   AlertDialogContent,
@@ -10,6 +9,7 @@ import {
 } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
 import { Loader } from '@/components/ui/loader';
+import { ShowAdminStaffModerators } from '@/graphql/types';
 
 const ContentDeleteActionsTableModeratorsStaffAdmin = React.lazy(async () =>
   import('./content').then(module => ({

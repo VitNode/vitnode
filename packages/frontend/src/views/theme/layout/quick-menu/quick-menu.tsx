@@ -1,9 +1,9 @@
 import { QuickMenuWrapper } from './wrapper';
 import { ButtonDrawer } from './drawer/button';
-import { ShowCoreNav } from '@/graphql/graphql';
 import { flattenTree } from '@/helpers/flatten-tree';
 import { getSessionData } from '@/graphql/get-session-data';
 import { Icon } from '@/components/icon/icon';
+import { ShowCoreNav } from '@/graphql/types';
 
 export const QuickMenu = async () => {
   const data = await getSessionData();

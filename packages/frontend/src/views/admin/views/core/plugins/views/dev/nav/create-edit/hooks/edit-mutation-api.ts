@@ -2,12 +2,12 @@
 
 import { revalidatePath } from 'next/cache';
 
+import { fetcher, FetcherErrorType } from '@/graphql/fetcher';
 import {
   Admin__Core_Plugins__Nav__Edit,
   Admin__Core_Plugins__Nav__EditMutation,
   Admin__Core_Plugins__Nav__EditMutationVariables,
-} from '@/graphql/graphql';
-import { fetcher, FetcherErrorType } from '@/graphql/fetcher';
+} from '@/graphql/mutations/admin/plugins/dev/nav/admin__core_plugins__nav__edit.generated';
 
 interface Args extends Admin__Core_Plugins__Nav__EditMutationVariables {
   pluginCode: string;

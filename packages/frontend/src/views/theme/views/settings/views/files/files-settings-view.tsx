@@ -3,18 +3,18 @@ import { getTranslations } from 'next-intl/server';
 import { Metadata } from 'next';
 
 import { fetcher } from '@/graphql/fetcher';
-import {
-  Core_Members__Files__Show,
-  Core_Members__Files__ShowQuery,
-  Core_Members__Files__ShowQueryVariables,
-  ShowCoreFilesSortingColumnEnum,
-} from '@/graphql/graphql';
 import { CardContent, CardDescription, CardHeader } from '@/components/ui/card';
 import { Loader } from '@/components/ui/loader';
 import {
   SearchParamsPagination,
   getPaginationTool,
 } from '@/graphql/get-pagination-tool';
+import {
+  Core_Members__Files__Show,
+  Core_Members__Files__ShowQuery,
+  Core_Members__Files__ShowQueryVariables,
+} from '@/graphql/queries/settings/core_members__files__show.generated';
+import { ShowCoreFilesSortingColumnEnum } from '@/graphql/types';
 
 const getData = async (variables: Core_Members__Files__ShowQueryVariables) => {
   const data = await fetcher<

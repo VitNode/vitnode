@@ -7,7 +7,7 @@ import {
   Admin__Core_Plugins__Download,
   Admin__Core_Plugins__DownloadMutation,
   Admin__Core_Plugins__DownloadMutationVariables,
-} from '@/graphql/graphql';
+} from '@/graphql/mutations/admin/plugins/dev/admin__core_plugins__download.generated';
 
 export const mutationApi = async (
   variables: Admin__Core_Plugins__DownloadMutationVariables,

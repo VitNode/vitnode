@@ -8,28 +8,28 @@ dotenv.config({
 });
 
 const config: CodegenConfig = {
-  overwrite: true,
   schema: `${process.env.NEXT_PUBLIC_GRAPHQL_URL ?? 'http://localhost:8080'}/graphql`,
-  documents: [join(process.cwd(), '..', 'frontend', 'src/graphql/**/*.gql')],
+  documents: [join(process.cwd(), 'src/graphql/**/*.gql')],
+  config: {
+    maybeValue: 'T',
+    scalars: {
+      DateTime: 'Date',
+      Upload: 'File',
+    },
+    enumsAsConst: true,
+    allowEnumStringTypes: true,
+    namingConvention: {
+      enumValues: 'change-case-all#lowerCase',
+    },
+  },
   generates: {
-    ['./src/graphql/graphql.ts']: {
-      plugins: [
-        'typescript',
-        'typescript-operations',
-        'typescript-document-nodes',
-      ],
-      config: {
-        maybeValue: 'T',
-        scalars: {
-          DateTime: 'Date',
-          Upload: 'File',
-        },
-        enumsAsConst: true,
-        allowEnumStringTypes: true,
-        namingConvention: {
-          enumValues: 'change-case-all#lowerCase',
-        },
-      },
+    './src/graphql/types.ts': {
+      plugins: ['typescript'],
+    },
+    ['./src/graphql/']: {
+      preset: 'near-operation-file',
+      presetConfig: { extension: '.generated.ts', baseTypesPath: 'types.ts' },
+      plugins: ['typescript-operations', 'typescript-document-nodes'],
     },
   },
 };

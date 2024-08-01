@@ -4,7 +4,7 @@ import { useLocale } from 'next-intl';
 import { useTheme } from 'next-themes';
 
 import { useGlobals } from './use-globals';
-import { CaptchaTypeEnum } from '@/graphql/graphql';
+import { CaptchaTypeEnum } from '@/graphql/types';
 
 export const useCaptcha = () => {
   const locale = useLocale();

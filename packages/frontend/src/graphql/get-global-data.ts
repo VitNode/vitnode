@@ -1,5 +1,5 @@
 import { fetcher } from './fetcher';
-import { Core_Global, Core_GlobalQuery } from './graphql';
+import { Core_Global, Core_GlobalQuery } from './queries/core_global.generated';
 
 export const getGlobalData = async () => {
   const data = await fetcher<Core_GlobalQuery>({

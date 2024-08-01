@@ -7,10 +7,10 @@ import { useTranslations } from 'next-intl';
 
 import { createMutationApi } from './create-mutation-api';
 import { editMutationApi } from './edit-mutation-api';
-import { ShowAdminNavPluginsObj } from '@/graphql/graphql';
 import { useDialog } from '@/components/ui/dialog';
 import { zodInput } from '@/helpers/zod';
 import { FetcherErrorType } from '@/graphql/fetcher';
+import { ShowAdminNavPluginsObj } from '@/graphql/types';
 
 export const useCreateNavPluginAdmin = ({
   data,

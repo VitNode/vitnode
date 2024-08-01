@@ -1,8 +1,8 @@
 import { useTranslations } from 'next-intl';
 
 import { CommandItem, CommandShortcut } from '@/components/ui/command';
-import { NavSearchAdminSessions } from '@/graphql/graphql';
 import { useRouter } from '@/navigation';
+import { NavSearchAdminSessions } from '@/graphql/types';
 
 interface Props
   extends Pick<

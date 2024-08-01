@@ -1,12 +1,12 @@
 import { useTranslations } from 'next-intl';
 import { CheckIcon } from 'lucide-react';
 
-import { ShowCoreMembers } from '@/graphql/graphql';
 import { CommandGroup, CommandItem } from '@/components/ui/command';
 import { UserInputItem } from '@/components/ui/user/user-input';
 import { cn } from '@/helpers/classnames';
 import { AvatarUser } from '@/components/ui/user/avatar';
 import { GroupFormat } from '@/components/ui/user/group-format';
+import { ShowCoreMembers } from '@/graphql/types';
 
 export const UserInputContentList = ({
   edges,

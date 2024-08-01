@@ -3,12 +3,12 @@
 import { revalidatePath } from 'next/cache';
 
 import { fetcher, FetcherErrorType, FetcherUploads } from '@/graphql/fetcher';
+import { ColorsEditAdminThemeEditor } from '@/graphql/types';
 import {
   Admin__Core_Theme_Editor__Edit,
   Admin__Core_Theme_Editor__EditMutation,
   Admin__Core_Theme_Editor__EditMutationVariables,
-  ColorsEditAdminThemeEditor,
-} from '@/graphql/graphql';
+} from '@/graphql/mutations/admin/theme_editor/admin__core_theme_editor__edit.generated';
 
 export const mutationApi = async (formData: FormData) => {
   const formColors = formData.get('colors') as string | null;

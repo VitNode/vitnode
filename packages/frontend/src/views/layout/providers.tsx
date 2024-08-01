@@ -4,9 +4,10 @@ import React from 'react';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
+import { Core_GlobalQuery } from '@/graphql/queries/core_global.generated';
+
 import { GlobalsContext } from '../../hooks/use-globals';
 import { Toaster } from '../../components/ui/sonner';
-import { Core_GlobalQuery } from '../../graphql/graphql';
 
 export const RootProviders = ({
   children,

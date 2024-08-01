@@ -7,7 +7,7 @@ import {
   Admin__Core_Languages__Edit,
   Admin__Core_Languages__EditMutation,
   Admin__Core_Languages__EditMutationVariables,
-} from '@/graphql/graphql';
+} from '@/graphql/mutations/admin/languages/admin__core_languages__edit.generated';
 
 export const editMutationApi = async (
   variables: Admin__Core_Languages__EditMutationVariables,

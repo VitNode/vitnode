@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/form';
 import { Switch } from '@/components/ui/switch';
 import { Button } from '@/components/ui/button';
-import { Core_GlobalQuery } from '@/graphql/graphql';
+import { Core_GlobalQuery } from '@/graphql/queries/core_global.generated';
 
 export const ContentEditorAdmin = (
   data: Core_GlobalQuery['core_middleware__show']['editor'],

@@ -2,13 +2,13 @@
 
 import { revalidatePath } from 'next/cache';
 
+import { fetcher, FetcherErrorType } from '@/graphql/fetcher';
+import { CONFIG } from '@/helpers/config-with-env';
 import {
   Admin__Core_Plugins__Delete,
   Admin__Core_Plugins__DeleteMutation,
   Admin__Core_Plugins__DeleteMutationVariables,
-} from '@/graphql/graphql';
-import { fetcher, FetcherErrorType } from '@/graphql/fetcher';
-import { CONFIG } from '@/helpers/config-with-env';
+} from '@/graphql/mutations/admin/plugins/admin__core_plugins__delete.generated';
 
 export const mutationApi = async (
   variables: Admin__Core_Plugins__DeleteMutationVariables,

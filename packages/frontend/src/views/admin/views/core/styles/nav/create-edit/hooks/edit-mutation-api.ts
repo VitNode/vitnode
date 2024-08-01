@@ -7,7 +7,7 @@ import {
   Admin__Core_Styles__Nav__Edit,
   Admin__Core_Styles__Nav__EditMutation,
   Admin__Core_Styles__Nav__EditMutationVariables,
-} from '@/graphql/graphql';
+} from '@/graphql/mutations/admin/styles/nav/core_styles__nav__edit.generated';
 
 export const editMutationApi = async (
   variables: Admin__Core_Styles__Nav__EditMutationVariables,

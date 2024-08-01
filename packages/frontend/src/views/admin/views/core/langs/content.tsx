@@ -5,10 +5,10 @@ import React from 'react';
 
 import { ActionsTableLangsCoreAdmin } from './table/actions/actions';
 import { EnabledRowTableLangsCoreAdmin } from './enabled-row';
-import { Admin__Core_Languages__ShowQuery } from '@/graphql/graphql';
 import { Badge } from '@/components/ui/badge';
 import { DateFormat } from '@/components/date-format';
 import { DataTable } from '@/components/ui/data-table';
+import { Admin__Core_Languages__ShowQuery } from '@/graphql/queries/admin/languages/admin__core_languages__show.generated';
 
 export const ContentLangsCoreAdminView = ({
   core_languages__show: { edges, pageInfo },

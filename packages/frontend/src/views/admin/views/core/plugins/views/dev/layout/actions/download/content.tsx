@@ -1,7 +1,6 @@
 import { useTranslations } from 'next-intl';
 
 import { useDownloadPluginAdmin } from './hooks/use-download-plugin-admin';
-import { ShowAdminPlugins } from '@/graphql/graphql';
 import {
   DialogDescription,
   DialogFooter,
@@ -20,6 +19,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { ShowAdminPlugins } from '@/graphql/types';
 
 export const ContentDownloadActionDevPluginAdmin = ({
   code,

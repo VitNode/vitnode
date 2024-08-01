@@ -11,13 +11,13 @@ import {
   keysFromCSSThemeEditor,
   useThemeEditorApi,
 } from './hooks/use-theme-editor-api';
-import { Core_Theme_Editor__ShowQuery } from '@/graphql/graphql';
 import { CONFIG } from '@/helpers/config-with-env';
 import { cn } from '@/helpers/classnames';
 import { Loader } from '@/components/ui/loader';
 import { Card } from '@/components/ui/card';
 import { Link } from '@/navigation';
 import { buttonVariants } from '@/components/ui/button';
+import { Core_Theme_Editor__ShowQuery } from '@/graphql/queries/admin/theme_editor/core_theme_editor__show.generated';
 
 export const ContentThemeEditor = (props: Core_Theme_Editor__ShowQuery) => {
   const t = useTranslations('admin.configs');

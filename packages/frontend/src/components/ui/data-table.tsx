@@ -15,8 +15,7 @@ import { SkeletonDataTable } from '../data-table/skeleton';
 import { ToolbarDataTable } from '../data-table/toolbar/toolbar';
 import { Pagination } from './pagination';
 import { HeaderDataTable } from '../data-table/header';
-
-import { PageInfo } from '../../graphql/graphql';
+import { PageInfo } from '@/graphql/types';
 
 interface TMin {
   id: number;

@@ -1,11 +1,11 @@
 'use server';
 
+import { fetcher, FetcherErrorType } from '@/graphql/fetcher';
 import {
   Admin__Sessions__Search,
   Admin__Sessions__SearchQuery,
   Admin__Sessions__SearchQueryVariables,
-} from '@/graphql/graphql';
-import { fetcher, FetcherErrorType } from '@/graphql/fetcher';
+} from '@/graphql/queries/admin/admin__sessions__search.generated';
 
 export const queryApi = async (
   variables: Admin__Sessions__SearchQueryVariables,

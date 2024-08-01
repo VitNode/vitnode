@@ -4,7 +4,6 @@ import { Pencil } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
-import { ShowCoreNav } from '@/graphql/graphql';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import {
   Tooltip,
@@ -14,6 +13,7 @@ import {
 } from '@/components/ui/tooltip';
 import { Loader } from '@/components/ui/loader';
 import { Button } from '@/components/ui/button';
+import { ShowCoreNav } from '@/graphql/types';
 
 const Content = React.lazy(async () =>
   import('../../create-edit/create-edit').then(module => ({

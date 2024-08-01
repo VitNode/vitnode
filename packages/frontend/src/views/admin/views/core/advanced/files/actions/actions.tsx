@@ -2,7 +2,6 @@ import { Download } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 import { DeleteActionFilesAdvancedCoreAdmin } from './delete/delete';
-import { Admin__Core_Files__ShowQuery } from '@/graphql/graphql';
 import {
   Tooltip,
   TooltipContent,
@@ -12,6 +11,7 @@ import {
 import { Link } from '@/navigation';
 import { buttonVariants } from '@/components/ui/button';
 import { CONFIG } from '@/helpers/config-with-env';
+import { Admin__Core_Files__ShowQuery } from '@/graphql/queries/admin/advanced/files/admin__core_files__show.generated';
 
 export const ActionsFilesAdvancedCoreAdmin = (
   data: Admin__Core_Files__ShowQuery['admin__core_files__show']['edges'][0],

@@ -3,12 +3,6 @@ import { Metadata } from 'next';
 
 import { TableAdministratorsStaffAdmin } from './table/table';
 import { ActionsAdministratorsStaffAdmin } from './actions/actions';
-import {
-  Admin__Core_Staff_Administrators__Show,
-  Admin__Core_Staff_Administrators__ShowQuery,
-  Admin__Core_Staff_Administrators__ShowQueryVariables,
-  ShowAdminStaffAdministratorsSortingColumnEnum,
-} from '@/graphql/graphql';
 import { HeaderContent } from '@/components/ui/header-content';
 import { Card } from '@/components/ui/card';
 import {
@@ -16,6 +10,12 @@ import {
   getPaginationTool,
 } from '@/graphql/get-pagination-tool';
 import { fetcher } from '@/graphql/fetcher';
+import {
+  Admin__Core_Staff_Administrators__Show,
+  Admin__Core_Staff_Administrators__ShowQuery,
+  Admin__Core_Staff_Administrators__ShowQueryVariables,
+} from '@/graphql/queries/admin/members/staff/admin__core_staff_administrators__show.generated';
+import { ShowAdminStaffAdministratorsSortingColumnEnum } from '@/graphql/types';
 
 const getData = async (
   variables: Admin__Core_Staff_Administrators__ShowQueryVariables,

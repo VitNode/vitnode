@@ -5,8 +5,8 @@ import * as z from 'zod';
 import { toast } from 'sonner';
 
 import { mutationApi } from './mutation-api';
-import { Core_Main_Settings__ShowQuery } from '@/graphql/graphql';
 import { zodInput } from '@/helpers/zod';
+import { Core_Main_Settings__ShowQuery } from '@/graphql/queries/admin/settings/core_main_settings__show.generated';
 
 export const useSettingsCoreAdmin = ({
   core_settings__show: data,

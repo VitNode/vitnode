@@ -7,7 +7,7 @@ import {
   Admin__Core_Languages__Delete,
   Admin__Core_Languages__DeleteMutation,
   Admin__Core_Languages__DeleteMutationVariables,
-} from '@/graphql/graphql';
+} from '@/graphql/mutations/admin/languages/admin__core_languages__delete.generated';
 
 export const mutationApi = async (
   variables: Admin__Core_Languages__DeleteMutationVariables,

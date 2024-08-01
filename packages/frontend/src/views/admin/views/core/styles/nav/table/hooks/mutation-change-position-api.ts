@@ -7,7 +7,7 @@ import {
   Admin__Core_Nav_Styles__Change_Position,
   Admin__Core_Nav_Styles__Change_PositionMutation,
   Admin__Core_Nav_Styles__Change_PositionMutationVariables,
-} from '@/graphql/graphql';
+} from '@/graphql/mutations/admin/styles/nav/core_nav_styles__change_position.generated';
 
 export const mutationChangePositionApi = async (
   variables: Admin__Core_Nav_Styles__Change_PositionMutationVariables,

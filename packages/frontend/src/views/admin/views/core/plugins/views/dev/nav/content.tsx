@@ -13,13 +13,11 @@ import { toast } from 'sonner';
 import { ItemContentNavDevPluginAdmin } from './item/item';
 import { mutationChangePositionApi } from './item/hooks/mutation-change-position-api';
 import { ItemNavDevPluginAdminContext } from './item/hooks/use-item-nav-dev-plugin-admin';
-import {
-  Admin__Core_Plugins__Nav__ShowQuery,
-  ShowAdminNavPluginsObj,
-} from '@/graphql/graphql';
 import { WithChildren } from '@/helpers/flatten-tree';
 import { useDragAndDrop } from '@/hooks/drag&drop/use-functions';
 import { ItemDragAndDrop } from '@/components/drag&drop-item';
+import { Admin__Core_Plugins__Nav__ShowQuery } from '@/graphql/queries/admin/plugins/dev/nav/admin__core_plugins__nav__show.generated';
+import { ShowAdminNavPluginsObj } from '@/graphql/types';
 
 interface Props extends Admin__Core_Plugins__Nav__ShowQuery {
   icons: { icon: React.ReactNode; id: string }[];
