@@ -16,16 +16,19 @@ See how to open [Developer Tools](/docs/dev/plugins#developer-tools).
 <Step>
 ## Create Navigation
 
-Inside the `Developer Tools` tab, you will see the `Navigation in AdminCP` tab. Click on it to see the navigation of the plugin and click on `Create` button to create a new navigation and fill the form.
+Inside the `Developer Tools` tab, go to the `Navigation in AdminCP` tab and next click on `Create` button to create a new navigation.
 
-TODO: Add image
+import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
+import formCreatePlugin from '@/assets/ui/plugins/form-create-plugin.png';
+
+<ImageZoom src={formCreatePlugin} className="max-w-xs" alt="test" />
 
 </Step>
 
 <Step>
 ## Internationalization (i18n)
 
-As you can see, the title of plugin and navigation item is a language key. You can add the language key inside the `langs` folder in `{your_plugin_code}.json` file in the frontend.
+As you can see, the title of plugin and navigation item is a language key. Add the language key inside the `langs` folder in `apps/frontend/plugins/{your_plugin_code}/langs/en.json` file in the frontend.
 
 import { File, Folder, Files } from 'fumadocs-ui/components/files';
 import { LanguagesIcon } from 'lucide-react';
@@ -45,12 +48,14 @@ import { LanguagesIcon } from 'lucide-react';
   </Folder>
 </Files>
 
-Default language is `en`. If you have more than one language, you have to create a new file for each language. For example, if you have `en` and `pl` languages, you have to create `en.json` and `pl.json` files.
+Default language is English `en`. If you have more then one language add keys to the other language files as well.
 
 ### Language Keys
 
-- Title - key is always `{your_plugin_code}.admin.nav.title`. For example: `blog.admin.nav.title`,
-- Navigation item - key is always `{your_plugin_code}.admin.nav.{navigation_item_name}`. For example: `blog.admin.nav.categories`.
+- **Title Plugin** - key is always `{your_plugin_code}.admin.nav.title`.  
+  For example: `blog.admin.nav.title`,
+- **Navigation item** - key is always `{your_plugin_code}.admin.nav.{navigation_item_name}`.  
+  For example: `blog.admin.nav.categories`.
 
 Here is an example of the language keys:
 
