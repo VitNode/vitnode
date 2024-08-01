@@ -24,8 +24,8 @@ export default function Page() {
           </h1>
 
           <p className="text-muted-foreground mt-6 text-lg font-normal leading-7 sm:text-xl lg:max-w-2xl xl:text-2xl xl:leading-9">
-            Deploy SEO-friendly sites effortlessly, customize with ease, and
-            enjoy security, speed, and efficiency.
+            SEO-friendly sites effortlessly, customize with ease, and enjoy
+            security, speed, and efficiency.
           </p>
 
           <div className="mt-10 flex flex-1 flex-wrap items-center justify-center gap-2 sm:gap-6">

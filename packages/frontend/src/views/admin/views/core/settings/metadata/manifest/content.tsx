@@ -17,7 +17,7 @@ import {
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { CONFIG } from '@/helpers/config-with-env';
 import { Input } from '@/components/ui/input';
-import { ColorInput } from '@/components/ui/color-input';
+import { ColorPicker } from '@/components/ui/color-picker';
 import { Button } from '@/components/ui/button';
 
 export const ContentManifestMetadataCoreAdmin = (
@@ -95,7 +95,7 @@ export const ContentManifestMetadataCoreAdmin = (
           name="theme_color"
           render={({ field }) => (
             <FormFieldRender label={t('theme_color.label')}>
-              <ColorInput {...field} disableRemoveColor />
+              <ColorPicker {...field} disableRemoveColor />
             </FormFieldRender>
           )}
         />
@@ -105,7 +105,7 @@ export const ContentManifestMetadataCoreAdmin = (
           name="background_color"
           render={({ field }) => (
             <FormFieldRender label={t('background_color.label')}>
-              <ColorInput {...field} disableRemoveColor />
+              <ColorPicker {...field} disableRemoveColor />
             </FormFieldRender>
           )}
         />

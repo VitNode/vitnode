@@ -30,7 +30,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { IconInput } from '@/components/icon/input/icon-input';
+import { IconPicker } from '@/components/icon/picker/icon-picker';
 import { Button } from '@/components/ui/button';
 import { TagsInput } from '@/components/ui/tags-input';
 
@@ -153,7 +153,7 @@ export const CreateEditNavDevPluginAdmin = ({
               <FormItem>
                 <FormLabel optional>{t('create.icon.label')}</FormLabel>
                 <FormControl>
-                  <IconInput {...field} />
+                  <IconPicker {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

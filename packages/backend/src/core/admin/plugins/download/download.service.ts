@@ -85,6 +85,8 @@ export class DownloadAdminPluginsService {
       ABSOLUTE_PATHS_BACKEND.plugin({ code }).frontend.default_page,
     );
     infoJSON.allow_default = allow_default;
+    infoJSON.version = version;
+    infoJSON.version_code = version_code;
 
     fs.writeFile(
       pathInfoJSON,
@@ -123,20 +125,6 @@ export class DownloadAdminPluginsService {
       })
       .where(eq(core_plugins.code, code))
       .returning();
-
-    const pathToVersions = ABSOLUTE_PATHS_BACKEND.plugin({ code }).versions;
-    if (!fs.existsSync(pathToVersions)) {
-      throw new CustomError({
-        code: 'VERSIONS_FILE_NOT_FOUND',
-        message: 'Versions file not found',
-      });
-    }
-
-    const versions: Record<number, string> = JSON.parse(
-      fs.readFileSync(pathToVersions, 'utf-8'),
-    );
-    versions[version_code] = version;
-    fs.writeFileSync(pathToVersions, JSON.stringify(versions, null, 2));
   }
 
   protected async generateMigration({ code }: { code: string }): Promise<void> {

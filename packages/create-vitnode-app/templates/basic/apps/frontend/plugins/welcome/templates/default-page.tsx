@@ -18,7 +18,7 @@ export default function DefaultPage() {
       </div>
 
       <div className="flex flex-wrap items-center justify-center gap-4">
-        <Link href="/admin" className={buttonVariants()}>
+        <Link href="/admin" target="_blank" className={buttonVariants()}>
           <KeyRoundIcon /> Go to AdminCP
         </Link>
 

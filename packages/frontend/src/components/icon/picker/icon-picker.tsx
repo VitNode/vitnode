@@ -4,7 +4,7 @@ import { Plus, X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
-import { IconInputProps } from './content/content';
+import { IconPickerProps } from './content/content';
 import { IconLucideNames } from '../icon';
 
 import { Popover, PopoverContent, PopoverTrigger } from '../../ui/popover';
@@ -24,11 +24,11 @@ const Content = React.lazy(async () =>
   })),
 );
 
-interface Props extends Omit<IconInputProps, 'setOpen'> {
+interface Props extends Omit<IconPickerProps, 'setOpen'> {
   className?: string;
 }
 
-export const IconInput = ({ className, onChange, value }: Props) => {
+export const IconPicker = ({ className, onChange, value }: Props) => {
   const t = useTranslations('core');
   const [open, setOpen] = React.useState(false);
 

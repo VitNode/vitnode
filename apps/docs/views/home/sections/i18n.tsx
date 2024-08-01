@@ -1,5 +1,5 @@
 import { Languages } from 'lucide-react';
-import img from '@/assets/image.png';
+import img from '@/assets/home/languages.png';
 import { Button } from '@/components/ui/button';
 import { SectionFeatures } from '@/components/features/section';
 

@@ -1,0 +1,174 @@
+---
+title: Alert Dialog
+description: Provides a dialog to capture user attention.
+---
+
+<Callout title="Shadcn UI">
+  This component is part of [Shadcn
+  UI](https://ui.shadcn.com/docs/components/alert-dialog) with some
+  modifications.
+</Callout>
+
+## Usage
+
+```tsx
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from 'vitnode-frontend/components/ui/alert-dialog';
+```
+
+```tsx
+<AlertDialog>
+  <AlertDialogTrigger>Open</AlertDialogTrigger>
+  <AlertDialogContent>
+    <AlertDialogHeader>
+      <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+      <AlertDialogDescription>
+        This action cannot be undone. This will permanently delete your account
+        and remove your data from our servers.
+      </AlertDialogDescription>
+    </AlertDialogHeader>
+    <AlertDialogFooter>
+      <AlertDialogCancel>Cancel</AlertDialogCancel>
+      <AlertDialogAction>Continue</AlertDialogAction>
+    </AlertDialogFooter>
+  </AlertDialogContent>
+</AlertDialog>
+```
+
+### Lazy Load Content
+
+To improve performance and reduce the size of the initial bundle use [React Lazy](https://react.dev/reference/react/lazy) to lazy load the dialog content.
+
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+ 
+<Steps>
+<Step>
+ 
+#### Trigger & Basic Content
+
+```tsx title="test.tsx"
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogTrigger,
+} from 'vitnode-frontend/components/ui/alert-dialog';
+import { Button } from 'vitnode-frontend/components/ui/button';
+
+export const Test = () => {
+  return (
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <Button variant="ghost" size="icon" ariaLabel="Edit">
+          <Pencil />
+        </Button>
+      </AlertDialogTrigger>
+
+      <AlertDialogContent>
+        <div>Content</div>
+      </AlertDialogContent>
+    </AlertDialog>
+  );
+};
+```
+
+</Step>
+
+<Step>
+
+#### Content
+
+Your dialog content should be in a separate file, for example `content.tsx`.
+
+```tsx title="content.tsx"
+import {
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from 'vitnode-frontend/components/ui/alert-dialog';
+
+export const ContentTest = () => {
+  return (
+    <>
+      <AlertDialogHeader>
+        <AlertDialogTitle>This is title</AlertDialogTitle>
+        <AlertDialogDescription>This is description</AlertDialogDescription>
+      </AlertDialogHeader>
+      <AlertDialogFooter>
+        <AlertDialogCancel>Cancel</AlertDialogCancel>
+        <AlertDialogAction>Continue</AlertDialogAction>
+      </AlertDialogFooter>
+    </>
+  );
+};
+```
+
+</Step>
+<Step>
+
+#### Lazy Load Content
+
+```tsx title="test.tsx"
+import React from 'react';
+
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogTrigger,
+} from 'vitnode-frontend/components/ui/alert-dialog';
+
+const Content = React.lazy(() =>
+  import('./content').then(module => ({
+    default: module.ContentTest,
+  })),
+);
+
+export const Test = () => {
+  return (
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <Button variant="ghost" size="icon" ariaLabel="Edit">
+          <Pencil />
+        </Button>
+      </AlertDialogTrigger>
+
+      <AlertDialogContent>
+        <React.Suspense fallback={<Loader />}>
+          <Content />
+        </React.Suspense>
+      </AlertDialogContent>
+    </AlertDialog>
+  );
+};
+```
+
+</Step>
+</Steps>
+
+## Hook State
+
+We're created context to control dialog state `open` and `setOpen`. You can use it as hook inside dialog component.
+
+```tsx
+import { useAlertDialog } from 'vitnode-frontend/components/ui/alert-dialog';
+```
+
+```tsx
+const { open, setOpen } = useAlertDialog();
+```
+
+## API Reference
+
+[Radix UI Alert Dialog](https://www.radix-ui.com/primitives/docs/components/alert-dialog#api-reference).

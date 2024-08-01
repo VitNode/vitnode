@@ -1,16 +1,67 @@
 ---
-title: Quick Start with Plugins
-description: Way to extend the functionality of your community like adding new features, integrations, or customizing the existing ones.
+title: Plugins
+description: How to extend the functionality of VitNode.
 ---
 
-## Create a plugin
+The most pawerful feature of VitNode is the ability to create plugins. Plugins are a way to extend the functionality of VitNode.
 
-TODO: Add content
+## Create a Plugin
+
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+ 
+<Steps>
+<Step>
+ 
+### AdminCP
+
+In VitNode we create plugins by going to `AdminCP > Plugins`. System will create all required files and folders for the plugin including the `default-page.tsx` file which is the main file of the plugin.
+
+Click on the `Create Plugin` button to create a new plugin.
+
+import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
+import formCreatePlugin from '@/assets/ui/plugins/form-create-plugin.png';
+
+<ImageZoom src={formCreatePlugin} className="max-w-xs" alt="test" />
+ 
+</Step>
+ 
+<Step>
+ 
+### Provide Information
+
+Fill the form with the required information:
+
+- **Name**: The name of the plugin,
+- **Description**: A short description of the plugin,
+- **Code**: Unique code for the plugin,
+- **Support URL**: The URL where users can get support for the plugin.
+- **Author**: The author of the plugin,
+- **Author URL**: The URL of the author.
+
+<ImageZoom src={formCreatePlugin} className="max-w-xs" alt="test" />
+
+<Callout title="Unique Code" type="warn">
+The code must be unique and can't be changed later. It's used to identify the plugin.
+
+Best practice is to use the author's name and the plugin name as the code. For example, `john-doe/my-plugin`.
+
+</Callout>
+ 
+</Step>
+<Step>
+
+### Test Plugin
+
+After creating the plugin, you can test it by making this plugin as the default plugin. Click on the `Set as Default` button.
+
+<ImageZoom src={formCreatePlugin} className="max-w-xs" alt="test" />
+
+</Step>
+
+</Steps>
 
 ## Developer Tools
 
-TODO: Add content
+VitNode provides a set of tools to help you develop plugins faster. Go to `AdminCP > Plugins` and click on the `Developer Tools` button inside the plugin.
 
-## Build new Version
-
-TODO: Add content
+<ImageZoom src={formCreatePlugin} className="max-w-xs" alt="test" />

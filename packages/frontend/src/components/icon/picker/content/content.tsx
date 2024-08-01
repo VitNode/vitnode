@@ -23,7 +23,7 @@ const IconsContentIconInput = React.lazy(async () =>
   })),
 );
 
-export interface IconInputProps {
+export interface IconPickerProps {
   onChange: (icon: IconLucideNames | string) => void;
   setOpen: (open: boolean) => void;
   value: string;
@@ -34,7 +34,7 @@ enum Tab {
   Emoji = 'emoji',
 }
 
-export const ContentIconInput = (props: IconInputProps) => {
+export const ContentIconInput = (props: IconPickerProps) => {
   const t = useTranslations('core.icon_picker');
   const [search, setSearch] = React.useState('');
   const [activeTab, setActiveTab] = React.useState<Tab>(Tab.Icon);
