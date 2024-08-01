@@ -2,12 +2,12 @@ import dynamicIconImports from 'lucide-react/dynamicIconImports';
 import React from 'react';
 import { useTranslations } from 'next-intl';
 
-import { IconInputProps } from '../content';
+import { IconPickerProps } from '../content';
 import { Button } from '@/components/ui/button';
 
 import { IconClient, IconLucideNames } from '../../../icon-client';
 
-interface Props extends IconInputProps {
+interface Props extends IconPickerProps {
   search: string;
 }
 
