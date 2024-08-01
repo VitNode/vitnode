@@ -20,6 +20,7 @@ query Core_sessions__authorization {
           language_code
           value
         }
+        color
         id
       }
     }
