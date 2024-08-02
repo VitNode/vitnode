@@ -94,7 +94,6 @@ export const createPackagesJSON = ({
       'vitnode-frontend': `^${pkg.version}`,
     },
     devDependencies: {
-      '@graphql-codegen/cli': '^5.0.2',
       '@types/node': '^22.0.2',
       '@types/react': '^18.3.3',
       '@types/react-dom': '^18.3.0',
@@ -139,6 +138,7 @@ export const createPackagesJSON = ({
       'vitnode-backend': `^${pkg.version}`,
     },
     devDependencies: {
+      '@graphql-codegen/cli': '^5.0.2',
       '@nestjs/cli': '^10.4.2',
       '@nestjs/platform-express': '^10.3.10',
       '@nestjs/schematics': '^10.1.3',

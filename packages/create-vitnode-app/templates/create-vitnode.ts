@@ -9,6 +9,7 @@ import { isFolderEmpty } from '../helpers/is-folder-empty';
 import { CreateCliReturn } from '../cli';
 import { createPackagesJSON } from './create-packages-json';
 import { installDependencies } from './install-dependencies';
+import { tryGitInit } from '../helpers/git';
 
 interface Args extends CreateCliReturn {
   appName: string;
@@ -105,6 +106,9 @@ export const createVitNode = async ({
     spinner.text = 'Installing dependencies...';
     await installDependencies({ packageManager });
   }
+
+  spinner.text = 'Initializing a git repository...';
+  tryGitInit(root);
 
   console.log(
     '\n' +
