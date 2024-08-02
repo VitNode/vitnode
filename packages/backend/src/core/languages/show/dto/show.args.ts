@@ -23,8 +23,8 @@ class ShowCoreLanguagesSortByArgs {
 @ArgsType()
 export class ShowCoreLanguagesArgs extends PaginationArgs {
   @Field(() => String, { nullable: true })
-  search: string | null;
+  search?: string;
 
   @Field(() => ShowCoreLanguagesSortByArgs, { nullable: true })
-  sortBy: ShowCoreLanguagesSortByArgs | null;
+  sortBy?: ShowCoreLanguagesSortByArgs;
 }

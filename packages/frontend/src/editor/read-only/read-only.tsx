@@ -6,9 +6,9 @@ import Image from 'next/image';
 import { extensionsEditor } from '../extensions/extensions';
 import { changeCodeBlock } from './code-block';
 import { FileDownloadButton } from './file-download-button';
+import { TextLanguage } from '@/graphql/types';
 
 import { cn } from '../../helpers/classnames';
-import { TextLanguage } from '../../graphql/graphql';
 
 export const ReadOnlyEditor = async ({
   allowDownloadAttachments,

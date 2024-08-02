@@ -4,7 +4,7 @@ import { eq } from 'drizzle-orm';
 import { DeleteAdminStaffModeratorsArgs } from './dto/delete.args';
 
 import { DatabaseService } from '@/utils/database/database.service';
-import { CustomError } from '@/errors';
+import { CustomError, NotFoundError } from '@/errors';
 import { core_moderators_permissions } from '@/database/schema/moderators';
 
 @Injectable()
@@ -17,6 +17,10 @@ export class DeleteAdminStaffModeratorsService {
           where: (table, { eq }) => eq(table.id, id),
         },
       );
+
+    if (!permission) {
+      throw new NotFoundError('Permission');
+    }
 
     if (permission.protected) {
       throw new CustomError({

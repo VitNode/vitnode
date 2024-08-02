@@ -12,7 +12,7 @@ import { CaptchaCoreCaptchaSecurityService } from '@/core/admin/security/captcha
 import { DatabaseService } from '@/utils/database/database.service';
 import { core_users } from '../../../database/schema/users';
 import { GqlContext } from '@/utils';
-import { CustomError } from '../../../errors';
+import { CustomError, NotFoundError } from '../../../errors';
 import { getUserIp } from '../../../functions';
 
 @Injectable()
@@ -38,6 +38,10 @@ export class SignUpCoreSessionsService extends AvatarColorService {
             and(eq(table.default, false), eq(table.root, true)),
         });
 
+      if (!rootGroup) {
+        throw new NotFoundError('Root Group');
+      }
+
       return rootGroup.id;
     }
 
@@ -46,6 +50,10 @@ export class SignUpCoreSessionsService extends AvatarColorService {
         where: (table, { and, eq }) =>
           and(eq(table.default, true), eq(table.root, false)),
       });
+
+    if (!defaultGroup) {
+      throw new NotFoundError('Default Group');
+    }
 
     return defaultGroup.id;
   };

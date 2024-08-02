@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl';
 import { Badge } from '@/components/ui/badge';
 import { DateFormat } from '@/components/date-format';
 import { Separator } from '@/components/ui/separator';
-import { Core_Sessions__Devices__ShowQuery } from '@/graphql/graphql';
+import { Core_Sessions__Devices__ShowQuery } from '@/graphql/queries/settings/core_sessions__devices__show.generated';
 
 const getDeviceIcon = (device: string) => {
   if (

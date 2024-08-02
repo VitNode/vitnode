@@ -16,7 +16,7 @@ import { EditorStateContext } from './hooks/use-editor-state';
 import { useGlobals } from '../hooks/use-globals';
 import { cn } from '../helpers/classnames';
 import { Skeleton } from '../components/ui/skeleton';
-import { TextLanguage } from '../graphql/graphql';
+import { TextLanguage } from '@/graphql/types';
 
 interface Props extends Omit<UploadFilesHandlerEditorArgs, 'value'> {
   autoFocus?: boolean;

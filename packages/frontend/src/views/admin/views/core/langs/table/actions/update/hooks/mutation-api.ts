@@ -7,7 +7,7 @@ import {
   Admin__Core_Languages__Update,
   Admin__Core_Languages__UpdateMutation,
   Admin__Core_Languages__UpdateMutationVariables,
-} from '@/graphql/graphql';
+} from '@/graphql/mutations/admin/languages/admin__core_languages__update.generated';
 
 export const mutationApi = async (formData: FormData) => {
   const files = formData.get('file') as File;

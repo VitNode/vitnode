@@ -10,7 +10,7 @@ import {
   Admin__Core_Email_Settings__Show,
   Admin__Core_Email_Settings__ShowQuery,
   Admin__Core_Email_Settings__ShowQueryVariables,
-} from '@/graphql/graphql';
+} from '@/graphql/queries/admin/settings/admin__core_email_settings__show.generated';
 
 const getData = async () => {
   const data = await fetcher<

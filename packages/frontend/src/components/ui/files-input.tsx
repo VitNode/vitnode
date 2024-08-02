@@ -3,7 +3,7 @@ import { Upload } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 
-import { UploadCoreFilesObj } from '@/graphql/graphql';
+import { UploadCoreFilesObj } from '@/graphql/types';
 
 import { useMergeRefs } from '../../helpers/use-merge-refs';
 import { cn } from '../../helpers/classnames';

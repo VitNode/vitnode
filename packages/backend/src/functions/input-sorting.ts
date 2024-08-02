@@ -25,7 +25,8 @@ export function inputSorting<T>({
   if (!sortBy || sortBy.length === 0) {
     return [
       {
-        [`${defaultSortBy?.column}`]: defaultSortBy?.direction,
+        [`${defaultSortBy?.column}`]:
+          defaultSortBy?.direction || SortDirectionEnum.asc,
       },
       sortById,
     ];

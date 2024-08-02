@@ -2,8 +2,9 @@
 
 import React from 'react';
 
+import { Core_Sessions__AuthorizationQuery } from '@/graphql/queries/core_sessions__authorization.generated';
+
 import { SessionContext } from '../../../hooks/use-session';
-import { Core_Sessions__AuthorizationQuery } from '../../../graphql/graphql';
 
 export const AuthProviders = ({
   children,

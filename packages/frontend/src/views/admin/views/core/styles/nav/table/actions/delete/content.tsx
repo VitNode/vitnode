@@ -3,7 +3,6 @@ import { Trash } from 'lucide-react';
 
 import { useDeleteNavAdmin } from './hooks/use-delete-nav-admin';
 import { SubmitDeleteActionTableNavAdmin } from './submit';
-import { ShowCoreNav } from '@/graphql/graphql';
 import { useTextLang } from '@/hooks/use-text-lang';
 import {
   AlertDialogCancel,
@@ -14,6 +13,7 @@ import {
 } from '@/components/ui/alert-dialog';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
+import { ShowCoreNav } from '@/graphql/types';
 
 export const ContentDeleteActionTableNavAdmin = ({
   children,

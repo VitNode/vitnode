@@ -5,9 +5,9 @@ import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 
 import { mutationApi } from './mutation-api';
-import { ShowCoreLanguages } from '@/graphql/graphql';
 import { useAlertDialog } from '@/components/ui/alert-dialog';
 import { usePathname, useRouter } from '@/navigation';
+import { ShowCoreLanguages } from '@/graphql/types';
 
 export const useDeleteLangAdmin = ({
   code,

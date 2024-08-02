@@ -2,12 +2,12 @@
 
 import { revalidatePath } from 'next/cache';
 
+import { fetcher, FetcherErrorType } from '@/graphql/fetcher';
 import {
   Core_Editor_Files__Delete,
   Core_Editor_Files__DeleteMutation,
   Core_Editor_Files__DeleteMutationVariables,
-} from '@/graphql/graphql';
-import { fetcher, FetcherErrorType } from '@/graphql/fetcher';
+} from '@/graphql/mutations/editor/core_editor_files__delete.generated';
 
 export const deleteMutationApi = async (
   variables: Core_Editor_Files__DeleteMutationVariables,

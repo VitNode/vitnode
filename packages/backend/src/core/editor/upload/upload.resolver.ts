@@ -19,6 +19,6 @@ export class UploadCoreEditorResolver {
     @Args() args: UploadCoreEditorArgs,
     @CurrentUser() currentUser?: User,
   ): Promise<ShowCoreFiles> {
-    return this.service.upload(currentUser, args);
+    return this.service.upload(args, currentUser);
   }
 }

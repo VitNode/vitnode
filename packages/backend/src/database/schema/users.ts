@@ -17,7 +17,7 @@ export const core_users = pgTable(
   'core_users',
   {
     id: serial('id').primaryKey(),
-    name_seo: varchar('name_seo', { length: 255 }).unique(),
+    name_seo: varchar('name_seo', { length: 255 }).notNull().unique(),
     name: varchar('name', { length: 255 }).notNull().unique(),
     email: varchar('email', { length: 255 }).notNull().unique(),
     password: text('password').notNull(),
@@ -25,7 +25,9 @@ export const core_users = pgTable(
     posts: integer('posts').notNull().default(0),
     newsletter: boolean('newsletter').notNull().default(false),
     avatar_color: varchar('avatar_color', { length: 6 }).notNull(),
-    group_id: integer('group_id').references(() => core_groups.id),
+    group_id: integer('group_id')
+      .references(() => core_groups.id)
+      .notNull(),
     first_name: varchar('first_name', { length: 255 }),
     last_name: varchar('last_name', { length: 255 }),
     birthday: timestamp('birthday'),
@@ -84,9 +86,11 @@ export const core_files_avatars_relations = relations(
 
 export const core_users_pass_reset = pgTable('core_users_pass_reset', {
   id: serial('id').primaryKey(),
-  user_id: integer('user_id').references(() => core_users.id, {
-    onDelete: 'cascade',
-  }),
+  user_id: integer('user_id')
+    .references(() => core_users.id, {
+      onDelete: 'cascade',
+    })
+    .notNull(),
   key: varchar('key', { length: 100 }).notNull().unique(),
   created: timestamp('created').notNull().defaultNow(),
   expires: timestamp('expires').notNull(),

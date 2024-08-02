@@ -60,6 +60,10 @@ export class EditAdminGroupsService {
         },
       });
 
+    if (!updateGroup) {
+      throw new NotFoundError('Group');
+    }
+
     return {
       users_count: usersCount[0].count,
       ...updateGroup,

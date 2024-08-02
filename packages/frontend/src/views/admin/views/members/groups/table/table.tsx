@@ -4,12 +4,12 @@ import { useTranslations } from 'next-intl';
 import React from 'react';
 
 import { ActionsTableGroupsMembersAdmin } from './actions/actions';
-import { Admin__Core_Groups__ShowQuery } from '@/graphql/graphql';
 import { Badge } from '@/components/ui/badge';
 import { Link } from '@/navigation';
 import { DateFormat } from '@/components/date-format';
 import { DataTable } from '@/components/ui/data-table';
 import { GroupFormat } from '@/components/ui/user/group-format';
+import { Admin__Core_Groups__ShowQuery } from '@/graphql/queries/admin/members/groups/admin__core_groups__show.generated';
 
 export const TableGroupsMembersAdmin = ({
   admin__core_groups__show: { edges, pageInfo },

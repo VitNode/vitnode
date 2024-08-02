@@ -73,6 +73,10 @@ export class ShowAdminStaffAdministratorsService {
           };
         }
 
+        if (!edge.group) {
+          throw new Error('Group');
+        }
+
         return {
           ...edge,
           user_or_group: {

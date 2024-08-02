@@ -3,7 +3,6 @@
 import { useTranslations } from 'next-intl';
 
 import { useManifestCoreAdminView } from './hooks/use-manifest-core-admin-view';
-import { Admin__Core_Manifest_Metadata__ShowQuery } from '@/graphql/graphql';
 import {
   Form,
   FormControl,
@@ -19,6 +18,7 @@ import { CONFIG } from '@/helpers/config-with-env';
 import { Input } from '@/components/ui/input';
 import { ColorPicker } from '@/components/ui/color-picker';
 import { Button } from '@/components/ui/button';
+import { Admin__Core_Manifest_Metadata__ShowQuery } from '@/graphql/queries/admin/settings/admin__core_manifest_metadata__show.generated';
 
 export const ContentManifestMetadataCoreAdmin = (
   props: Admin__Core_Manifest_Metadata__ShowQuery,

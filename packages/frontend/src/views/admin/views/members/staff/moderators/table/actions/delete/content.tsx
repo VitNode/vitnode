@@ -3,7 +3,6 @@ import { toast } from 'sonner';
 
 import { SubmitDeleteActionsTableModeratorsStaffAdmin } from './submit';
 import { mutationApi } from './mutation-api';
-import { ShowAdminStaffModerators } from '@/graphql/graphql';
 import {
   AlertDialogCancel,
   AlertDialogDescription,
@@ -13,6 +12,7 @@ import {
   useAlertDialog,
 } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
+import { ShowAdminStaffModerators } from '@/graphql/types';
 
 export const ContentDeleteActionsTableModeratorsStaffAdmin = ({
   data: { id },

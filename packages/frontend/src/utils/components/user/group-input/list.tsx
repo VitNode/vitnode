@@ -5,7 +5,7 @@ import { CommandGroup, CommandItem } from '@/components/ui/command';
 import { cn } from '@/helpers/classnames';
 import { GroupFormat } from '@/components/ui/user/group-format';
 import { GroupInputItem } from '@/components/ui/user/group-input';
-import { Admin__Core_Groups__Show_ShortQuery } from '@/graphql/graphql';
+import { Admin__Core_Groups__Show_ShortQuery } from '@/graphql/queries/admin/groups/admin__core_groups__show_short.generated';
 
 export const GroupInputContentList = ({
   edges,

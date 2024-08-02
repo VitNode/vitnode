@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { User } from '../../../graphql/graphql';
+import { User } from '@/graphql/types';
+
 import { Link } from '../../../navigation';
 
 interface Props

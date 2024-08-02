@@ -1,11 +1,11 @@
 'use server';
 
+import { fetcher, FetcherErrorType } from '@/graphql/fetcher';
 import {
   Admin__Core_Plugins__Show__Quick,
   Admin__Core_Plugins__Show__QuickQuery,
   Admin__Core_Plugins__Show__QuickQueryVariables,
-} from '@/graphql/graphql';
-import { fetcher, FetcherErrorType } from '@/graphql/fetcher';
+} from '@/graphql/queries/admin/languages/admin__core_plugins__show__quick.generated';
 
 export const queryApi = async (
   variables: Admin__Core_Plugins__Show__QuickQueryVariables,

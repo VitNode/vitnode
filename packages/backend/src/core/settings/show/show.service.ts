@@ -56,7 +56,7 @@ export class ShowSettingsService {
       })),
       site_copyright: enabledLanguages.map(item => ({
         language_code: item.code,
-        value: item.site_copyright,
+        value: item.site_copyright ?? '',
       })),
     };
   }

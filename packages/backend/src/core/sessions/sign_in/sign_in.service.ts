@@ -164,7 +164,7 @@ export class SignInCoreSessionsService {
         secure: true,
         domain: this.configService.getOrThrow('cookies.domain'),
         path: '/',
-        expires: remember ? expires : null,
+        expires: remember ? expires : undefined,
         sameSite: 'none',
       },
     );
@@ -190,7 +190,10 @@ export class SignInCoreSessionsService {
       const accessToAdminCP =
         await this.databaseService.db.query.core_admin_permissions.findFirst({
           where: (table, { eq, or }) =>
-            or(eq(table.group_id, user.group_id), eq(table.user_id, user.id)),
+            or(
+              user.group_id ? eq(table.group_id, user.group_id) : undefined,
+              eq(table.user_id, user.id),
+            ),
         });
       if (!accessToAdminCP) throw new AccessDeniedError();
     }

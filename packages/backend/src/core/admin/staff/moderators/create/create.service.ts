@@ -4,7 +4,7 @@ import { ShowAdminStaffModerators } from '../show/dto/show.obj';
 import { CreateAdminStaffModeratorsArgs } from './dto/create.args';
 
 import { DatabaseService } from '@/utils/database/database.service';
-import { CustomError } from '@/errors';
+import { CustomError, NotFoundError } from '@/errors';
 import { core_moderators_permissions } from '@/database/schema/moderators';
 
 @Injectable()
@@ -27,7 +27,10 @@ export class CreateAdminStaffModeratorsService {
       await this.databaseService.db.query.core_moderators_permissions.findFirst(
         {
           where: (table, { eq, or }) =>
-            or(eq(table.user_id, user_id), eq(table.group_id, group_id)),
+            or(
+              user_id ? eq(table.user_id, user_id) : undefined,
+              group_id ? eq(table.group_id, group_id) : undefined,
+            ),
         },
       );
 
@@ -71,6 +74,10 @@ export class CreateAdminStaffModeratorsService {
         },
       );
 
+    if (!data) {
+      throw new NotFoundError('Permission');
+    }
+
     if (data.user) {
       return {
         ...data,
@@ -78,6 +85,10 @@ export class CreateAdminStaffModeratorsService {
           ...data.user,
         },
       };
+    }
+
+    if (!data.group) {
+      throw new NotFoundError('Group');
     }
 
     return {

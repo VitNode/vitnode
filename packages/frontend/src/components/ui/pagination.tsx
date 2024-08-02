@@ -3,7 +3,6 @@ import React from 'react';
 import { useSearchParams } from 'next/navigation';
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
 
-import { PageInfo } from '@/graphql/graphql';
 import {
   Tooltip,
   TooltipContent,
@@ -19,6 +18,7 @@ import {
 } from './select';
 import { usePathname, useRouter } from '@/navigation';
 import { Button } from './button';
+import { PageInfo } from '@/graphql/types';
 
 const PAGE_SIZES = [10, 20, 30, 40, 50];
 

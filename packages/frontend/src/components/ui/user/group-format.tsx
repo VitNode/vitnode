@@ -1,5 +1,5 @@
-import { GroupUser } from '@/graphql/graphql';
 import { cn } from '@/helpers/classnames';
+import { GroupUser } from '@/graphql/types';
 
 import { useTextLang } from '../../../hooks/use-text-lang';
 

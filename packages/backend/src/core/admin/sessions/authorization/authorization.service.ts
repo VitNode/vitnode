@@ -10,7 +10,7 @@ import { AuthorizationAdminSessionsObj } from './dto/authorization.obj';
 
 import { DatabaseService } from '@/utils/database/database.service';
 import { DeviceSignInCoreSessionsService } from '../../../sessions/sign_in/device.service';
-import { AccessDeniedError, GqlContext } from '@/index';
+import { AccessDeniedError, GqlContext, NotFoundError } from '@/index';
 import { AuthorizationCurrentUserObj } from '../../../sessions/authorization/dto/authorization.obj';
 import { core_sessions_known_devices } from '@/database/schema/sessions';
 import { currentUnixDate, getUserAgentData, getUserIp } from '@/functions';
@@ -28,6 +28,10 @@ export class AuthorizationAdminSessionsService {
     req,
     res,
   }: GqlContext): Promise<AuthorizationCurrentUserObj> {
+    if (!req.headers['user-agent']) {
+      throw new NotFoundError('User-Agent');
+    }
+
     const login_token =
       req.cookies[
         this.configService.getOrThrow('cookies.login_token.admin.name')

@@ -8,6 +8,7 @@ import { DatabaseService } from '@/utils/database/database.service';
 import { inputPaginationCursor, outputPagination } from '@/functions';
 import { core_moderators_permissions } from '@/database/schema/moderators';
 import { SortDirectionEnum } from '@/utils';
+import { NotFoundError } from '@/errors';
 
 @Injectable()
 export class ShowAdminStaffModeratorsService {
@@ -71,6 +72,10 @@ export class ShowAdminStaffModeratorsService {
               ...edge.user,
             },
           };
+        }
+
+        if (!edge.group) {
+          throw new NotFoundError('Group');
         }
 
         return {

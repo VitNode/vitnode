@@ -11,9 +11,10 @@ import { toast } from 'sonner';
 
 import { ItemContentTableContentNavAdmin } from './item';
 import { mutationChangePositionApi } from './hooks/mutation-change-position-api';
-import { Admin__Core_Nav__ShowQuery, ShowCoreNav } from '@/graphql/graphql';
 import { useDragAndDrop } from '@/hooks/drag&drop/use-functions';
 import { ItemDragAndDrop } from '@/components/drag&drop-item';
+import { Admin__Core_Nav__ShowQuery } from '@/graphql/queries/admin/styles/nav/admin__core_nav__show.generated';
+import { ShowCoreNav } from '@/graphql/types';
 
 const indentationWidth = 20;
 

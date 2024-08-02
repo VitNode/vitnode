@@ -4,14 +4,14 @@ import { CreateNavDevPluginAdmin } from './actions/create/create';
 import { ContentNavDevPluginAdmin } from './content';
 import { Icon } from '@/components/icon/icon';
 import { HeaderContent } from '@/components/ui/header-content';
+import { flattenTree } from '@/helpers/flatten-tree';
+import { fetcher } from '@/graphql/fetcher';
 import {
   Admin__Core_Plugins__Nav__Show,
   Admin__Core_Plugins__Nav__ShowQuery,
   Admin__Core_Plugins__Nav__ShowQueryVariables,
-  ShowAdminNavPluginsObj,
-} from '@/graphql/graphql';
-import { flattenTree } from '@/helpers/flatten-tree';
-import { fetcher } from '@/graphql/fetcher';
+} from '@/graphql/queries/admin/plugins/dev/nav/admin__core_plugins__nav__show.generated';
+import { ShowAdminNavPluginsObj } from '@/graphql/types';
 
 const getData = async (
   variables: Admin__Core_Plugins__Nav__ShowQueryVariables,

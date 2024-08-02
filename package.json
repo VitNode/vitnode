@@ -5,7 +5,7 @@
     "config:init": "cd apps/backend && pnpm config:init && cd ../..",
     "config:init:skip-database": "cd apps/backend && pnpm config:init --skip-database && cd ../..",
     "build:scripts": "turbo build:scripts && pnpm i",
-    "build": "cross-env TURBO_TELEMETRY_DISABLED=1 turbo build",
+    "build": "turbo build",
     "dev": "pnpm build:scripts && turbo dev",
     "dev:docs": "cd apps/docs && pnpm dev:docs",
     "build:docs": "cd apps/docs && pnpm build:docs",
@@ -32,12 +32,8 @@
     "eslint-config-typescript-vitnode": "workspace:*",
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.5",
-    "turbo": "^2.0.10",
+    "turbo": "^2.0.11",
     "typescript": "^5.5.4"
   },
-  "packageManager": "pnpm@9.5.0",
-  "dependencies": {
-    "drizzle-kit": "0.22.8",
-    "drizzle-orm": "0.31.4"
-  }
+  "packageManager": "pnpm@9.5.0"
 }

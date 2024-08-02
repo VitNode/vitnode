@@ -63,7 +63,8 @@ export class EditAdminManifestMetadataService {
         lang_code: lang.code,
       }),
     );
+    const enManifest = manifests.find(manifest => manifest.lang === 'en');
 
-    return manifests.find(manifest => manifest.lang === 'en');
+    return enManifest ? enManifest : manifests[0];
   }
 }

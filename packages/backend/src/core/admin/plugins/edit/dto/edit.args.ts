@@ -10,8 +10,8 @@ export class EditAdminPluginsArgs extends OmitType(CreateAdminPluginsArgs, [
   code: string;
 
   @Field(() => Boolean, { nullable: true })
-  default: boolean | null;
+  default?: boolean;
 
   @Field(() => Boolean, { nullable: true })
-  enabled: boolean | null;
+  enabled?: boolean;
 }

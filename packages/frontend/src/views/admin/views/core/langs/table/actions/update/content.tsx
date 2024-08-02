@@ -1,7 +1,6 @@
 import { useTranslations } from 'next-intl';
 
 import { useUpdateLangAdmin } from './hooks/use-update-lang-admin';
-import { ShowCoreLanguages } from '@/graphql/graphql';
 import {
   DialogFooter,
   DialogHeader,
@@ -10,6 +9,7 @@ import {
 import { Form, FormField } from '@/components/ui/form';
 import { FilesInput } from '@/components/ui/files-input';
 import { Button } from '@/components/ui/button';
+import { ShowCoreLanguages } from '@/graphql/types';
 
 export const ContentUpdateActionsTableLangsCoreAdmin = ({
   code,

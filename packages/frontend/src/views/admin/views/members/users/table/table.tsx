@@ -4,7 +4,6 @@ import { useTranslations } from 'next-intl';
 import React from 'react';
 import { Pencil } from 'lucide-react';
 
-import { Admin__Core_Members__ShowQuery } from '@/graphql/graphql';
 import { AvatarUser } from '@/components/ui/user/avatar';
 import { DateFormat } from '@/components/date-format';
 import {
@@ -17,6 +16,7 @@ import { Link } from '@/navigation';
 import { buttonVariants } from '@/components/ui/button';
 import { DataTable } from '@/components/ui/data-table';
 import { GroupFormat } from '@/components/ui/user/group-format';
+import { Admin__Core_Members__ShowQuery } from '@/graphql/queries/admin/members/users/admin__core_members__show.generated';
 
 export const TableUsersMembersAdmin = ({
   admin__core_members__show: { edges, pageInfo },

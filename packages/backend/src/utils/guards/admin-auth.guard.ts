@@ -28,7 +28,7 @@ export class AdminAuthGuards implements CanActivate {
       res,
     });
 
-    req.user = data.user;
+    req.user = data.user ?? undefined;
 
     return data;
   }

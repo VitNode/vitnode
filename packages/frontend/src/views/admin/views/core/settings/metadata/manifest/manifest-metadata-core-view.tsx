@@ -9,7 +9,7 @@ import {
   Admin__Core_Manifest_Metadata__Show,
   Admin__Core_Manifest_Metadata__ShowQuery,
   Admin__Core_Manifest_Metadata__ShowQueryVariables,
-} from '@/graphql/graphql';
+} from '@/graphql/queries/admin/settings/admin__core_manifest_metadata__show.generated';
 
 const getData = async () => {
   const data = await fetcher<

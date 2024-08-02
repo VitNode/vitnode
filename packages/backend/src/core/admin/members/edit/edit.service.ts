@@ -38,12 +38,12 @@ export class EditAdminMembersService {
     const update = await this.databaseService.db
       .update(core_users)
       .set({
-        name: name,
-        email: email,
-        newsletter: newsletter,
-        first_name: first_name,
-        last_name: last_name,
-        birthday: birthday,
+        name,
+        email,
+        newsletter,
+        first_name,
+        last_name,
+        birthday,
       })
       .where(eq(core_users.id, id))
       .returning();

@@ -7,7 +7,7 @@ import {
   Admin__Core_Staff_Moderators__Delete,
   Admin__Core_Staff_Moderators__DeleteMutation,
   Admin__Core_Staff_Moderators__DeleteMutationVariables,
-} from '@/graphql/graphql';
+} from '@/graphql/mutations/admin/members/staff/moderators/admin__core_staff_moderators__delete.generated';
 
 export const mutationApi = async (
   variables: Admin__Core_Staff_Moderators__DeleteMutationVariables,

@@ -37,5 +37,5 @@ export class SignUpCoreSessionsArgs {
   password: string;
 
   @Field(() => Boolean, { nullable: true })
-  newsletter: boolean | null;
+  newsletter?: boolean;
 }

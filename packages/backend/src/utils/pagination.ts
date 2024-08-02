@@ -29,13 +29,13 @@ export class PageInfo {
 @ArgsType()
 export class PaginationArgs {
   @Field(() => Int, { nullable: true })
-  cursor: number | null;
+  cursor?: number;
 
   @Field(() => Int, { nullable: true })
-  first: number | null;
+  first?: number;
 
   @Field(() => Int, { nullable: true })
-  last: number | null;
+  last?: number;
 }
 
 @InputType()

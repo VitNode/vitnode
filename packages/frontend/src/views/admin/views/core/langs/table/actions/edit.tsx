@@ -2,10 +2,10 @@ import { Pencil } from 'lucide-react';
 import React from 'react';
 import { useTranslations } from 'next-intl';
 
-import { ShowCoreLanguages } from '@/graphql/graphql';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Loader } from '@/components/ui/loader';
+import { ShowCoreLanguages } from '@/graphql/types';
 
 const Content = React.lazy(async () =>
   import('../../create-edit/create-edit').then(module => ({

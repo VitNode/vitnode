@@ -5,11 +5,11 @@ import * as z from 'zod';
 import { toast } from 'sonner';
 
 import { mutationApi } from './mutation-api';
-import { ShowAdminPlugins } from '@/graphql/graphql';
 import { useDialog } from '@/components/ui/dialog';
 import { increaseVersionString } from '@/helpers/increase-version-string';
 import { zodInput } from '@/helpers/zod';
 import { CONFIG } from '@/helpers/config-with-env';
+import { ShowAdminPlugins } from '@/graphql/types';
 
 export const useDownloadPluginAdmin = ({
   code,

@@ -23,8 +23,8 @@ class ShowCoreFilesSortByArgs {
 @ArgsType()
 export class ShowCoreFilesArgs extends PaginationArgs {
   @Field(() => ShowCoreFilesSortByArgs, { nullable: true })
-  sortBy: ShowCoreFilesSortByArgs | null;
+  sortBy?: ShowCoreFilesSortByArgs;
 
   @Field(() => String, { nullable: true })
-  search: string | null;
+  search?: string;
 }

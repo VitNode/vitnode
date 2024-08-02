@@ -11,6 +11,7 @@
     "resolveJsonModule": true,
     "incremental": true,
     "strictNullChecks": true,
+    "strictPropertyInitialization": false,
     "strictBindCallApply": false,
     "allowSyntheticDefaultImports": true,
     "isolatedModules": true,

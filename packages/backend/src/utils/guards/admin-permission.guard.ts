@@ -29,7 +29,7 @@ export class AdminPermissionGuards implements CanActivate {
       req,
       res,
     });
-    req.user = data.user;
+    req.user = data.user ?? undefined;
 
     return data;
   }

@@ -27,7 +27,9 @@ export class ShowCoreSessionDevicesService {
 
     return edges.map(item => ({
       ...item.core_sessions_known_devices,
-      ...item.core_sessions,
+      // Force cast to object, as we know it exists. Typescript doesn't.
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      ...item.core_sessions!,
     }));
   }
 }

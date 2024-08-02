@@ -9,10 +9,10 @@ type DataInterface<T> = T & {
 };
 
 interface OutputPaginationArgs<T> {
-  cursor: number | null;
+  cursor: number | undefined;
   edges: DataInterface<T>[];
-  first: number | null;
-  last: number | null;
+  first: number | undefined;
+  last: number | undefined;
   totalCount: {
     count: number;
   }[];
@@ -53,8 +53,8 @@ export function outputPagination<T>({
         count: edges.length,
         hasNextPage: false,
         hasPreviousPage: false,
-        startCursor: edgesCursor.start,
-        endCursor: edgesCursor.end,
+        startCursor: edgesCursor.start || null,
+        endCursor: edgesCursor.end || null,
       },
     };
   }
@@ -62,11 +62,12 @@ export function outputPagination<T>({
   return {
     edges: currentEdges,
     pageInfo: {
-      hasNextPage: cursor
-        ? !!edges.at(first)
-        : edges.length > currentEdges.length,
-      startCursor: edgesCursor.start,
-      endCursor: edgesCursor.end,
+      hasNextPage:
+        cursor && first
+          ? !!edges.at(first)
+          : edges.length > currentEdges.length,
+      startCursor: edgesCursor.start || null,
+      endCursor: edgesCursor.end || null,
       totalCount: totalCount[0].count,
       count: currentEdges.length,
       hasPreviousPage:
@@ -84,7 +85,7 @@ export interface Cursor {
 }
 
 interface InputPaginationCursorArgs<T extends TableConfig> {
-  cursor: number | null;
+  cursor: number | undefined;
   database: PgTableWithColumns<T>;
   databaseService: {
     db: NodePgDatabase<NonNullable<unknown>>;
@@ -93,8 +94,8 @@ interface InputPaginationCursorArgs<T extends TableConfig> {
     column: string;
     direction: SortDirectionEnum;
   };
-  first: number | null;
-  last: number | null;
+  first: number | undefined;
+  last: number | undefined;
   primaryCursor: Cursor;
   sortBy?: {
     column: string;
@@ -103,9 +104,9 @@ interface InputPaginationCursorArgs<T extends TableConfig> {
 }
 
 interface Return {
-  limit: number;
   orderBy: SQL<unknown>;
-  where: SQL<unknown>;
+  limit?: number;
+  where?: SQL<unknown>;
 }
 
 export async function inputPaginationCursor<T extends TableConfig>({
@@ -164,6 +165,6 @@ export async function inputPaginationCursor<T extends TableConfig>({
   return {
     where,
     orderBy,
-    limit: first || last ? (last ? last + 1 : first) + 1 : undefined,
+    limit: first || last ? ((last ? last + 1 : first) ?? 0 + 1) : undefined,
   };
 }

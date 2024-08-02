@@ -9,7 +9,7 @@ import { deleteMutationApi } from './hooks/delete-mutation-api';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/helpers/classnames';
 import { CONFIG } from '@/helpers/config-with-env';
-import { TextLanguage } from '@/graphql/graphql';
+import { TextLanguage } from '@/graphql/types';
 
 import { useEditorState } from '../../../hooks/use-editor-state';
 import { FileStateEditor } from '../../../extensions/files/files';

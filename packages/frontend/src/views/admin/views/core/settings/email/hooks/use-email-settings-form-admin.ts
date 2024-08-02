@@ -6,7 +6,7 @@ import { useTranslations } from 'next-intl';
 import { getHSLFromString, isColorBrightness } from 'vitnode-shared';
 
 import { mutationApi } from './mutation-api';
-import { Admin__Core_Email_Settings__ShowQuery } from '@/graphql/graphql';
+import { Admin__Core_Email_Settings__ShowQuery } from '@/graphql/queries/admin/settings/admin__core_email_settings__show.generated';
 
 export const useEmailSettingsFormAdmin = ({
   admin__core_email_settings__show: data,

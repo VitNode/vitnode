@@ -3,7 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { ShowAdminStaffAdministrators } from '../show/dto/show.obj';
 import { CreateAdminStaffAdministratorsArgs } from './dto/create.args';
 
-import { CustomError } from '@/errors';
+import { CustomError, NotFoundError } from '@/errors';
 import { DatabaseService } from '@/utils/database/database.service';
 import { core_admin_permissions } from '@/database/schema/admins';
 
@@ -26,7 +26,10 @@ export class CreateAdminStaffAdministratorsService {
     const findPermission =
       await this.databaseService.db.query.core_admin_permissions.findFirst({
         where: (table, { eq, or }) =>
-          or(eq(table.user_id, user_id), eq(table.group_id, group_id)),
+          or(
+            user_id ? eq(table.user_id, user_id) : undefined,
+            group_id ? eq(table.group_id, group_id) : undefined,
+          ),
       });
 
     if (findPermission) {
@@ -67,6 +70,10 @@ export class CreateAdminStaffAdministratorsService {
         },
       });
 
+    if (!data) {
+      throw new NotFoundError('Permission');
+    }
+
     if (data.user) {
       return {
         ...data,
@@ -74,6 +81,10 @@ export class CreateAdminStaffAdministratorsService {
           ...data.user,
         },
       };
+    }
+
+    if (!data.group) {
+      throw new NotFoundError('Group');
     }
 
     return {

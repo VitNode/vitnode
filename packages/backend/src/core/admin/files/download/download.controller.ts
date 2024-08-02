@@ -31,7 +31,7 @@ export class DownloadFilesAdminController {
     @Res({ passthrough: true }) res: Response,
     @Req() req: Request,
     @Param() { file }: { file: string },
-  ): Promise<StreamableFile> {
+  ): Promise<StreamableFile | void> {
     const path = join(ABSOLUTE_PATHS_BACKEND.uploads.temp, file);
     if (!existsSync(path)) {
       res.status(404);

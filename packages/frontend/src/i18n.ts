@@ -5,7 +5,7 @@ import {
   Core_Middleware__Show,
   Core_Middleware__ShowQuery,
   Core_Middleware__ShowQueryVariables,
-} from './graphql/graphql';
+} from './graphql/queries/core_middleware__show.generated';
 
 export const i18nConfig = async ({
   pathsToMessagesFromPlugins,

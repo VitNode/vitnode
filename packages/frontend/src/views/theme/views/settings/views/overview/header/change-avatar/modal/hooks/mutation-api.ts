@@ -7,7 +7,7 @@ import {
   Core_Members__Avatar__Delete,
   Core_Members__Avatar__DeleteMutation,
   Core_Members__Avatar__DeleteMutationVariables,
-} from '@/graphql/graphql';
+} from '@/graphql/mutations/settings/avatar/core_members__avatar__delete.generated';
 
 export const mutationApi = async () => {
   try {

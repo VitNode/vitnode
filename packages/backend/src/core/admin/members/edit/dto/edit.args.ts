@@ -14,12 +14,12 @@ export class EditAdminMembersArgs {
   @Field(() => Boolean)
   newsletter: boolean;
 
-  @Field(() => String)
-  first_name: string;
+  @Field(() => String, { nullable: true })
+  first_name?: string;
 
-  @Field(() => String)
-  last_name: string;
+  @Field(() => String, { nullable: true })
+  last_name?: string;
 
-  @Field(() => Date)
-  birthday: Date;
+  @Field(() => Date, { nullable: true })
+  birthday?: Date;
 }

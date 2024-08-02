@@ -5,10 +5,10 @@ import { useTranslations } from 'next-intl';
 import { ExternalLink } from 'lucide-react';
 
 import { ActionsItemPluginsAdmin } from './table/actions/actions';
-import { Admin__Core_Plugins__ShowQuery } from '@/graphql/graphql';
 import { DateFormat } from '@/components/date-format';
 import { Badge } from '@/components/ui/badge';
 import { DataTable } from '@/components/ui/data-table';
+import { Admin__Core_Plugins__ShowQuery } from '@/graphql/queries/admin/plugins/admin__core_plugins__show.generated';
 
 export const ContentPluginsCoreAdmin = ({
   admin__core_plugins__show: { edges, pageInfo },

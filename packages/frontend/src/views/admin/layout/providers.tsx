@@ -1,6 +1,7 @@
 'use client';
 
-import { Admin__Sessions__AuthorizationQuery } from '../../../graphql/graphql';
+import { Admin__Sessions__AuthorizationQuery } from '@/graphql/queries/admin/admin__sessions__authorization.generated';
+
 import { SessionAdminContext } from '../../../hooks/use-session-admin';
 
 export const AdminProviders = ({

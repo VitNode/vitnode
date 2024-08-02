@@ -16,7 +16,7 @@ import { UploadCoreFilesObj } from './dto/upload.obj';
 import { HelpersUploadCoreFilesService, acceptMimeTypeImage } from './helpers';
 
 import { DatabaseService } from '@/utils/database/database.service';
-import { CustomError } from '@/errors';
+import { CustomError, InternalServerError } from '@/errors';
 import { ABSOLUTE_PATHS_BACKEND } from '../../../..';
 
 @Injectable()
@@ -75,6 +75,10 @@ export class UploadCoreFilesService extends HelpersUploadCoreFilesService {
     const name = filename.split('.').shift();
     const stream = createReadStream();
 
+    if (!extension || !name) {
+      throw new InternalServerError();
+    }
+
     // Generate file name
     const currentFileName = `${date.getTime()}_${generateRandomString(
       10,
@@ -105,8 +109,8 @@ export class UploadCoreFilesService extends HelpersUploadCoreFilesService {
         dir_folder: dir,
         extension,
         file_size: stat.size,
-        width: metadata.width,
-        height: metadata.height,
+        width: metadata.width ?? null,
+        height: metadata.height ?? null,
       };
     }
 
@@ -117,6 +121,8 @@ export class UploadCoreFilesService extends HelpersUploadCoreFilesService {
       dir_folder: dir,
       extension,
       file_size: stat.size,
+      width: null,
+      height: null,
     };
   }
 }

@@ -85,8 +85,8 @@ export class DownloadAdminPluginsService {
       ABSOLUTE_PATHS_BACKEND.plugin({ code }).frontend.default_page,
     );
     infoJSON.allow_default = allow_default;
-    infoJSON.version = version;
-    infoJSON.version_code = version_code;
+    infoJSON.version = version || infoJSON.version;
+    infoJSON.version_code = version_code || infoJSON.version_code;
 
     fs.writeFile(
       pathInfoJSON,

@@ -1,11 +1,11 @@
 import React from 'react';
 
 import { classNameDrawerQuickMenu } from '../drawer';
-import { ShowCoreNav } from '@/graphql/graphql';
 import { Link, usePathname } from '@/navigation';
 import { DrawerClose } from '@/components/ui/drawer';
 import { cn } from '@/helpers/classnames';
 import { buttonVariants } from '@/components/ui/button';
+import { ShowCoreNav } from '@/graphql/types';
 
 interface Props extends Omit<ShowCoreNav, '__typename' | 'children'> {
   children: React.ReactNode;

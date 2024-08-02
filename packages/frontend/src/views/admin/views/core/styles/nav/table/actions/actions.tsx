@@ -1,6 +1,6 @@
+import { ShowCoreNav } from '@/graphql/types';
 import { DeleteActionTableNavAdmin } from './delete/delete';
 import { EditActionTableNavAdmin } from './edit';
-import { ShowCoreNav } from '@/graphql/graphql';
 
 export const ActionsTableNavAdmin = (props: ShowCoreNav) => {
   return (

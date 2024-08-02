@@ -2,7 +2,6 @@ import { useTranslations } from 'next-intl';
 import { Check } from 'lucide-react';
 
 import { useDownloadLangAdmin } from './hooks/use-download-lang-admin';
-import { ShowCoreLanguages } from '@/graphql/graphql';
 import { useSessionAdmin } from '@/hooks/use-session-admin';
 import { Loader } from '@/components/ui/loader';
 import {
@@ -36,6 +35,7 @@ import {
   CommandItem,
   CommandList,
 } from '@/components/ui/command';
+import { ShowCoreLanguages } from '@/graphql/types';
 
 export const ContentDownloadActionsTableLangsCoreAdmin = ({
   code,

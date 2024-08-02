@@ -32,7 +32,9 @@ export class DeleteAdminNavPluginsService {
         throw new NotFoundError('Parent nav');
       }
 
-      parent.children = parent.children.filter(child => child.code !== code);
+      parent.children = (parent.children ?? []).filter(
+        child => child.code !== code,
+      );
     } else {
       const codeExists = config.nav.find(nav => nav.code === code);
       if (!codeExists) {

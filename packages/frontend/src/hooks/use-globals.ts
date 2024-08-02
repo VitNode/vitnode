@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Core_GlobalQuery } from '../graphql/graphql';
+import { Core_GlobalQuery } from '@/graphql/queries/core_global.generated';
 
 interface Args {
   config: Core_GlobalQuery['core_middleware__show'];

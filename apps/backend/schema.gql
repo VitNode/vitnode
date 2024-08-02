@@ -107,11 +107,11 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 scalar DateTime
 
 type EditAdminMembersObj {
-  birthday: DateTime!
+  birthday: DateTime
   email: String!
-  first_name: String!
+  first_name: String
   id: Int!
-  last_name: String!
+  last_name: String
   name: String!
   newsletter: Boolean!
 }
@@ -157,7 +157,7 @@ type FilesEditorShowCoreMiddleware {
 }
 
 type GroupUser {
-  color: String!
+  color: String
   id: Int!
   name: [TextLanguage!]!
 }
@@ -224,7 +224,7 @@ type Mutation {
   admin__core_languages__update(code: String!, file: Upload!): String!
   admin__core_main_settings__edit(site_copyright: [TextLanguageInput!]!, site_description: [TextLanguageInput!]!, site_name: String!, site_short_name: String!): EditAdminSettingsObj!
   admin__core_manifest_metadata__edit(background_color: String!, display: String!, start_url: String!, theme_color: String!): ShowAdminManifestMetadataObj!
-  admin__core_members__edit(birthday: DateTime!, email: String!, first_name: String!, id: Int!, last_name: String!, name: String!, newsletter: Boolean!): EditAdminMembersObj!
+  admin__core_members__edit(birthday: DateTime, email: String!, first_name: String, id: Int!, last_name: String, name: String!, newsletter: Boolean!): EditAdminMembersObj!
   admin__core_nav_styles__change_position(id: Int!, index_to_move: Int!, parent_id: Int!): String!
   admin__core_plugins__create(author: String!, author_url: String, code: String!, description: String, name: String!, support_url: String!): ShowAdminPlugins!
   admin__core_plugins__delete(code: String!): String!
@@ -251,7 +251,7 @@ type Mutation {
   core_editor_files__upload(file: Upload!, folder: String!, plugin: String!): ShowCoreFiles!
   core_members__avatar__delete: String!
   core_members__avatar__upload(file: Upload!): UploadAvatarCoreMembersObj!
-  core_members__change_password(hashKey: String!, password: String!): User!
+  core_members__change_password(hashKey: String!, password: String!): String!
   core_members__delete(id: Int!): String!
   core_members__reset_password__create_key(email: String!): String!
   core_sessions__sign_in(admin: Boolean, email: String!, password: String!, remember: Boolean): String!
@@ -356,7 +356,7 @@ type ShowAdminFilesObj {
 }
 
 type ShowAdminGroups {
-  color: String!
+  color: String
   content: ContentShowAdminGroups!
   created: DateTime!
   default: Boolean!
@@ -699,7 +699,7 @@ enum SortDirectionEnum {
 }
 
 type StaffGroupUser {
-  color: String!
+  color: String
   group_name: [TextLanguage!]!
   id: Int!
 }

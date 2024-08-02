@@ -5,12 +5,12 @@ import React from 'react';
 import { InfinityIcon, ShieldAlert } from 'lucide-react';
 
 import { ActionsTableModeratorsStaffAdmin } from './actions/actions';
-import { Admin__Core_Staff_Moderators__ShowQuery } from '@/graphql/graphql';
 import { UserLink } from '@/components/ui/user/link';
 import { GroupFormat } from '@/components/ui/user/group-format';
 import { Badge } from '@/components/ui/badge';
 import { DateFormat } from '@/components/date-format';
 import { DataTable } from '@/components/ui/data-table';
+import { Admin__Core_Staff_Moderators__ShowQuery } from '@/graphql/queries/admin/members/staff/admin__core_staff_moderators__show.generated';
 
 export const TableModeratorsStaffAdmin = ({
   admin__core_staff_moderators__show: { edges, pageInfo },

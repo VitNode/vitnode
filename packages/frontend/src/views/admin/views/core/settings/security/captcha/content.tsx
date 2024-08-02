@@ -4,10 +4,6 @@ import { useTranslations } from 'next-intl';
 import { SquareArrowOutUpRight } from 'lucide-react';
 
 import { useCaptchaSecurityAdmin } from './hooks/use-captcha-security-admin';
-import {
-  Admin__Core_Security__Captcha__ShowQuery,
-  CaptchaTypeEnum,
-} from '@/graphql/graphql';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import {
   Form,
@@ -19,6 +15,8 @@ import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Link } from '@/navigation';
+import { Admin__Core_Security__Captcha__ShowQuery } from '@/graphql/queries/admin/security/admin__core_security__captcha__show.generated';
+import { CaptchaTypeEnum } from '@/graphql/types';
 
 export const ContentCaptchaSecurityAdmin = (
   data: Admin__Core_Security__Captcha__ShowQuery,

@@ -2,7 +2,6 @@ import { useTranslations } from 'next-intl';
 
 import { SubmitDeleteActionTableNavDevPluginAdmin } from './submit';
 import { useDeleteNavPluginAdmin } from './hooks/use-delete-nav-plugin-admin';
-import { ShowAdminNavPluginsObj } from '@/graphql/graphql';
 import {
   AlertDialogCancel,
   AlertDialogDescription,
@@ -11,6 +10,7 @@ import {
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
+import { ShowAdminNavPluginsObj } from '@/graphql/types';
 
 export interface ContentDeleteActionTableNavDevPluginAdminProps
   extends Pick<ShowAdminNavPluginsObj, 'code'> {

@@ -3,7 +3,6 @@ import { useTranslations } from 'next-intl';
 import React from 'react';
 
 import { useItemNavDevPluginAdmin } from '../hooks/use-item-nav-dev-plugin-admin';
-import { ShowAdminNavPluginsObj } from '@/graphql/graphql';
 import { FlatTree } from '@/helpers/flatten-tree';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import {
@@ -14,6 +13,7 @@ import {
 } from '@/components/ui/tooltip';
 import { Button } from '@/components/ui/button';
 import { Loader } from '@/components/ui/loader';
+import { ShowAdminNavPluginsObj } from '@/graphql/types';
 
 const Content = React.lazy(async () =>
   import('../../create-edit/create-edit').then(module => ({

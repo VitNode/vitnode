@@ -3,14 +3,14 @@ import { cookies } from 'next/headers';
 import { Metadata } from 'next';
 
 import { ContentDevicesSettings } from './content';
+import { CardContent, CardDescription, CardHeader } from '@/components/ui/card';
+import { fetcher } from '@/graphql/fetcher';
+import { redirect } from '@/navigation';
 import {
   Core_Sessions__Devices__Show,
   Core_Sessions__Devices__ShowQuery,
   Core_Sessions__Devices__ShowQueryVariables,
-} from '@/graphql/graphql';
-import { CardContent, CardDescription, CardHeader } from '@/components/ui/card';
-import { fetcher } from '@/graphql/fetcher';
-import { redirect } from '@/navigation';
+} from '@/graphql/queries/settings/core_sessions__devices__show.generated';
 
 const getData = async () => {
   const data = await fetcher<

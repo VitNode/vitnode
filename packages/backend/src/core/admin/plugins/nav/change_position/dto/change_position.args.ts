@@ -12,5 +12,5 @@ export class ChangePositionAdminNavPluginsArgs {
   plugin_code: string;
 
   @Field(() => String, { nullable: true })
-  parent_code: string | null;
+  parent_code?: string;
 }

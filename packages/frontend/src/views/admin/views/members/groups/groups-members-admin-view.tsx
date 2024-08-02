@@ -5,17 +5,17 @@ import { ActionsGroupsMembersAdmin } from './actions/actions-groups-members-admi
 import { TableGroupsMembersAdmin } from './table/table';
 import { fetcher } from '@/graphql/fetcher';
 import {
-  Admin__Core_Groups__Show,
-  Admin__Core_Groups__ShowQuery,
-  Admin__Core_Groups__ShowQueryVariables,
-  ShowAdminGroupsSortingColumnEnum,
-} from '@/graphql/graphql';
-import {
   SearchParamsPagination,
   getPaginationTool,
 } from '@/graphql/get-pagination-tool';
 import { HeaderContent } from '@/components/ui/header-content';
 import { Card } from '@/components/ui/card';
+import {
+  Admin__Core_Groups__Show,
+  Admin__Core_Groups__ShowQuery,
+  Admin__Core_Groups__ShowQueryVariables,
+} from '@/graphql/queries/admin/members/groups/admin__core_groups__show.generated';
+import { ShowAdminGroupsSortingColumnEnum } from '@/graphql/types';
 
 const getData = async (variables: Admin__Core_Groups__ShowQueryVariables) => {
   const data = await fetcher<

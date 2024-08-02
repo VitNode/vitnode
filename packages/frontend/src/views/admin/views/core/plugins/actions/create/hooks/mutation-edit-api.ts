@@ -7,7 +7,7 @@ import {
   Admin__Core_Plugins__Edit,
   Admin__Core_Plugins__EditMutation,
   Admin__Core_Plugins__EditMutationVariables,
-} from '@/graphql/graphql';
+} from '@/graphql/mutations/admin/plugins/dev/admin__core_plugins__edit.generated';
 
 export const mutationEditApi = async (
   variables: Admin__Core_Plugins__EditMutationVariables,

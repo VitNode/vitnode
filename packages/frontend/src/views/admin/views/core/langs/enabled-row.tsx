@@ -3,8 +3,8 @@ import { toast } from 'sonner';
 import React from 'react';
 
 import { editMutationApi } from './create-edit/hooks/edit-mutation-api';
-import { ShowCoreLanguages } from '@/graphql/graphql';
 import { Switch } from '@/components/ui/switch';
+import { ShowCoreLanguages } from '@/graphql/types';
 
 export const EnabledRowTableLangsCoreAdmin = ({
   data,

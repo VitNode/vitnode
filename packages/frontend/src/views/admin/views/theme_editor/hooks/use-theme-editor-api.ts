@@ -8,10 +8,10 @@ import { toast } from 'sonner';
 import { useTranslations } from 'next-intl';
 
 import { mutationApi } from './mutation-api';
-import { Core_Theme_Editor__ShowQuery } from '@/graphql/graphql';
 import { useRouter } from '@/navigation';
 import { CONFIG } from '@/helpers/config-with-env';
 import { zodFiles } from '@/helpers/zod';
+import { Core_Theme_Editor__ShowQuery } from '@/graphql/queries/admin/theme_editor/core_theme_editor__show.generated';
 
 const zObjectHsl = z.object({
   h: z.number(),
