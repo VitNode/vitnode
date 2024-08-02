@@ -39,6 +39,7 @@ export const createPackagesJSON = ({
       dev: 'turbo dev',
       build: 'turbo build',
       start: 'turbo start',
+      codegen: 'turbo codegen',
       ...(eslint ? { lint: 'turbo lint', 'lint:fix': 'turbo lint:fix' } : {}),
       ...(docker
         ? {
@@ -87,8 +88,8 @@ export const createPackagesJSON = ({
     },
     dependencies: {
       geist: '^1.3.1',
-      'lucide-react': '^0.417.0',
-      next: '15.0.0-canary.94',
+      'lucide-react': '^0.420.0',
+      next: '15.0.0-canary.98',
       react: '^19.0.0-rc.0',
       'react-dom': '^19.0.0-rc.0',
       'next-intl': '^3.17.2',
@@ -97,7 +98,7 @@ export const createPackagesJSON = ({
       'vitnode-frontend': `^${pkg.version}`,
     },
     devDependencies: {
-      '@types/node': '^22.0.0',
+      '@types/node': '^22.0.2',
       '@types/react': '^18.3.3',
       '@types/react-dom': '^18.3.0',
       autoprefixer: '^10.4.19',
@@ -121,6 +122,7 @@ export const createPackagesJSON = ({
     private: true,
     scripts: {
       'config:init': 'vitnode-backend init',
+      codegen: 'graphql-codegen',
       dev: 'vitnode-backend init && cross-env NODE_ENV=development nest start -w',
       build: 'nest build',
       start: 'node dist/main',
@@ -144,7 +146,7 @@ export const createPackagesJSON = ({
       '@nestjs/platform-express': '^10.3.10',
       '@nestjs/schematics': '^10.1.3',
       '@types/express': '^4.17.21',
-      '@types/node': '^22.0.0',
+      '@types/node': '^22.0.2',
       '@types/pg': '^8.11.6',
       '@types/react': '^18.3.3',
       'cross-env': '^7.0.3',

@@ -10,6 +10,9 @@
       "dependsOn": ["^start"],
       "persistent": true
     },
+    "codegen": {
+      "dependsOn": ["^codegen"]
+    },
     "config:init": {
       "dependsOn": ["^config:init"]
     },
