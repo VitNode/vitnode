@@ -53,15 +53,11 @@ export const createPackagesJSON = ({
           'react-dom': '^19.0.0-rc.0',
         }
       : {},
-    dependencies: {
-      'drizzle-orm': '^0.32.1',
-    },
     devDependencies: {
       ...(eslint
         ? { prettier: '^3.3.3', 'prettier-plugin-tailwindcss': '^0.6.5' }
         : {}),
       'eslint-config-typescript-vitnode': `^${pkg.version}`,
-      'drizzle-kit': '^0.23.1',
       turbo: '^2.0.10',
       typescript: '^5.4.5',
     },
