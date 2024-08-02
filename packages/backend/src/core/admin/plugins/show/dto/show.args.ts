@@ -23,11 +23,11 @@ class ShowAdminPluginsSortByArgs {
 @ArgsType()
 export class ShowAdminPluginsArgs extends PaginationArgs {
   @Field(() => ShowAdminPluginsSortByArgs, { nullable: true })
-  sortBy: ShowAdminPluginsSortByArgs | null;
+  sortBy?: ShowAdminPluginsSortByArgs;
 
   @Field(() => String, { nullable: true })
-  search: string | null;
+  search?: string;
 
   @Field(() => String, { nullable: true })
-  code: string | null;
+  code?: string;
 }

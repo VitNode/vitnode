@@ -9,8 +9,8 @@ export class SignInCoreSessionsArgs {
   password: string;
 
   @Field(() => Boolean, { nullable: true })
-  remember: boolean | null;
+  remember?: boolean;
 
   @Field(() => Boolean, { nullable: true })
-  admin: boolean | null;
+  admin?: boolean;
 }

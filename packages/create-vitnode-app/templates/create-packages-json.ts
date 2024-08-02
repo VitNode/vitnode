@@ -54,14 +54,14 @@ export const createPackagesJSON = ({
         }
       : {},
     dependencies: {
-      'drizzle-kit': '^0.22.8',
-      'drizzle-orm': '^0.31.4',
+      'drizzle-orm': '^0.32.1',
     },
     devDependencies: {
       ...(eslint
         ? { prettier: '^3.3.3', 'prettier-plugin-tailwindcss': '^0.6.5' }
         : {}),
       'eslint-config-typescript-vitnode': `^${pkg.version}`,
+      'drizzle-kit': '^0.23.1',
       turbo: '^2.0.10',
       typescript: '^5.4.5',
     },
@@ -150,7 +150,7 @@ export const createPackagesJSON = ({
       '@types/pg': '^8.11.6',
       '@types/react': '^18.3.3',
       'cross-env': '^7.0.3',
-      'drizzle-kit': '^0.23.0',
+      'drizzle-kit': '^0.23.1',
       'drizzle-orm': '^0.32.1',
       ...(eslint ? { eslint: '^8.57.0' } : {}),
       'eslint-config-typescript-vitnode': `^${pkg.version}`,

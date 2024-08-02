@@ -53,7 +53,7 @@ export class EditAdminNavPluginsService {
       children[navIndex] = {
         code: currentCode,
         href,
-        icon,
+        icon: icon ?? null,
         keywords,
       };
     } else {
@@ -61,7 +61,7 @@ export class EditAdminNavPluginsService {
       config.nav[navIndex] = {
         code: currentCode,
         href,
-        icon,
+        icon: icon ?? null,
         keywords,
       };
     }

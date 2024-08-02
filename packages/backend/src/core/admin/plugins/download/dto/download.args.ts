@@ -6,8 +6,8 @@ export class DownloadAdminPluginsArgs {
   code: string;
 
   @Field(() => String, { nullable: true })
-  version: string | null;
+  version?: string;
 
   @Field(() => Int, { nullable: true })
-  version_code: number | null;
+  version_code?: number;
 }

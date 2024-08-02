@@ -25,7 +25,7 @@ export class DownloadSecureFilesController {
     @Res({ passthrough: true }) res: Response,
     @Param() { id }: { id: string },
     @Query() { security_key }: { security_key: string },
-  ): Promise<StreamableFile> {
+  ): Promise<StreamableFile | void> {
     const file = await this.databaseService.db.query.core_files.findFirst({
       where: (table, { eq }) => eq(table.id, +id),
     });

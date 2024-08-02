@@ -29,7 +29,7 @@ export class CreateAdminPluginsArgs {
   @MaxLength(255)
   @IsOptional()
   @Field(() => String, { nullable: true })
-  description: string | null;
+  description?: string;
 
   @Transform(TransformString)
   @IsNotEmpty()
@@ -45,5 +45,5 @@ export class CreateAdminPluginsArgs {
   @Transform(TransformString)
   @IsOptional()
   @Field(() => String, { nullable: true })
-  author_url: string | null;
+  author_url?: string;
 }

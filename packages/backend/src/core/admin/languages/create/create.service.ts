@@ -12,6 +12,7 @@ import {
   ConfigType,
   CustomError,
   getConfigFile,
+  NotFoundError,
 } from '../../../..';
 import { core_languages } from '@/database/schema/languages';
 import { ShowCoreLanguages } from '../../../languages/show/dto/show.obj';
@@ -98,6 +99,10 @@ export class CreateAdminCoreLanguageService {
       await this.databaseService.db.query.core_languages.findFirst({
         where: (table, { eq }) => eq(table.code, 'en'),
       });
+
+    if (!defaultLanguage) {
+      throw new NotFoundError('Default language');
+    }
 
     const newLanguage = await this.databaseService.db
       .insert(core_languages)

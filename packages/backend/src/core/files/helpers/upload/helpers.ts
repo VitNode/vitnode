@@ -25,6 +25,9 @@ export class HelpersUploadCoreFilesService {
 
     // Read the file data and calculate its size
     for await (const chunk of stream) {
+      // Typescript does not allow to push a Buffer into an array
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
       chunks.push(chunk);
     }
 

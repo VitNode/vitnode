@@ -20,7 +20,7 @@ export class CaptchaCoreCaptchaSecurityService extends HelpersAdminCaptchaSecuri
   }: {
     captchaKey: string[] | string;
     userIp: string;
-  }): Promise<{ success: boolean; 'error-codes'?: string[]; score?: number }> {
+  }): Promise<{ score: number; success: boolean; 'error-codes'?: string[] }> {
     const {
       security: { captcha: config },
     } = getConfigFile();
@@ -28,6 +28,7 @@ export class CaptchaCoreCaptchaSecurityService extends HelpersAdminCaptchaSecuri
     if (config.type === CaptchaTypeEnum.none || !config.type) {
       return {
         success: true,
+        score: 1,
       };
     }
 
@@ -35,6 +36,7 @@ export class CaptchaCoreCaptchaSecurityService extends HelpersAdminCaptchaSecuri
     if (!fs.existsSync(this.path)) {
       return {
         success: false,
+        score: 0,
       };
     }
     const captchaSecurityConfig: CaptchaSecurityConfig = JSON.parse(
@@ -79,11 +81,13 @@ export class CaptchaCoreCaptchaSecurityService extends HelpersAdminCaptchaSecuri
 
     return {
       success: false,
+      score: 0,
     };
   }
 
   async validateCaptcha({ req }: { req: GqlContext['req'] }) {
     const captchaKey = req.headers['x-vitnode-captcha-token'];
+
     const {
       security: { captcha: config },
     } = getConfigFile();
@@ -96,7 +100,9 @@ export class CaptchaCoreCaptchaSecurityService extends HelpersAdminCaptchaSecuri
 
     const userIp = getUserIp(req);
     const res = await this.getResFromReCaptcha({
-      captchaKey,
+      // Allow non-null assertion because we check if it's not provided. Specific to this case.
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      captchaKey: captchaKey!,
       userIp,
     });
 

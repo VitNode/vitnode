@@ -12,7 +12,7 @@ export class ShowCoreFiles extends UploadCoreFilesObj {
   created: Date;
 
   @Field(() => String, { nullable: true })
-  security_key?: string;
+  security_key: string | null;
 
   @Field(() => String, { nullable: true })
   file_alt: string | null;

@@ -7,7 +7,7 @@ import { DeviceSignInCoreSessionsService } from '../../sign_in/device.service';
 import { DatabaseService } from '@/utils/database/database.service';
 import { User } from '@/decorators';
 import { GqlContext } from '@/utils';
-import { AccessDeniedError } from '@/errors';
+import { AccessDeniedError, NotFoundError } from '@/errors';
 import { core_users } from '@/database/schema/users';
 import { core_sessions_known_devices } from '@/database/schema/sessions';
 import { currentUnixDate, getUserAgentData, getUserIp } from '@/functions';
@@ -26,6 +26,10 @@ export class InternalAuthorizationCoreSessionsService {
       req.cookies[this.configService.getOrThrow('cookies.login_token.name')];
     const know_device_id: number | undefined =
       +req.cookies[this.configService.getOrThrow('cookies.known_device.name')];
+
+    if (!req.headers['user-agent']) {
+      throw new NotFoundError('User-Agent');
+    }
 
     if (!login_token || !know_device_id) {
       throw new AccessDeniedError();

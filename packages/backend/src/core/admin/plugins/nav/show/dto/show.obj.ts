@@ -6,7 +6,7 @@ export class ShowAdminNavPlugins {
   code: string;
 
   @Field(() => String, { nullable: true })
-  icon?: string;
+  icon?: string | null;
 
   @Field(() => String)
   href: string;

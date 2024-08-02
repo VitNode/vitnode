@@ -29,6 +29,7 @@
   },
   "devDependencies": {
     "cross-env": "^7.0.3",
+    "drizzle-kit": "^0.23.1",
     "eslint-config-typescript-vitnode": "workspace:*",
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.5",
@@ -37,7 +38,6 @@
   },
   "packageManager": "pnpm@9.5.0",
   "dependencies": {
-    "drizzle-kit": "0.22.8",
-    "drizzle-orm": "0.31.4"
+    "drizzle-orm": "^0.32.1"
   }
 }

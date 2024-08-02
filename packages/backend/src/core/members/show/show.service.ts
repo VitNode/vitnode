@@ -52,7 +52,7 @@ export class ShowCoreMembersService {
     });
 
     const where = or(
-      eq(core_users.name_seo, name_seo),
+      name_seo ? eq(core_users.name_seo, name_seo) : undefined,
       or(
         ilike(core_users.name, `%${search}%`),
         ilike(core_users.email, `%${search}%`),

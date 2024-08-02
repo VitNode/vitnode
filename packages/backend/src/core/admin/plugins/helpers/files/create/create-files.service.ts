@@ -33,7 +33,7 @@ export class CreateFilesAdminPluginsService {
           },
           {
             name: 'config.json',
-            content: createInfoJSON({ code, allow_default: true, ...rest }),
+            content: createInfoJSON({ ...rest, code, allow_default: true }),
           },
         ],
       },

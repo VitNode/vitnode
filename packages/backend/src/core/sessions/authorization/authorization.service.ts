@@ -7,6 +7,7 @@ import { AuthorizationCoreSessionsObj } from './dto/authorization.obj';
 import { DatabaseService } from '@/utils/database/database.service';
 import { core_files } from '../../../database/schema/files';
 import { GqlContext } from '../../../utils';
+import { NotFoundError } from '@/errors';
 
 @Injectable()
 export class AuthorizationCoreSessionsService {
@@ -55,7 +56,6 @@ export class AuthorizationCoreSessionsService {
 
     try {
       const currentUser = await this.service.authorization({ req, res });
-
       const user = await this.databaseService.db.query.core_users.findFirst({
         where: (table, { eq }) => eq(table.id, currentUser.id),
         with: {
@@ -68,12 +68,17 @@ export class AuthorizationCoreSessionsService {
         },
       });
 
-      const countStorageUsed = await this.databaseService.db
+      if (!user) {
+        throw new NotFoundError('User');
+      }
+
+      const countStorageUsedDb = await this.databaseService.db
         .select({
           space_used: sum(core_files.file_size),
         })
         .from(core_files)
-        .where(eq(core_files.user_id, user.id));
+        .where(eq(core_files.user_id, currentUser.id));
+      const countStorageUsed = +(countStorageUsedDb[0].space_used ?? 0);
 
       return {
         user: {
@@ -98,7 +103,7 @@ export class AuthorizationCoreSessionsService {
           total_max_storage: user.group.files_total_max_storage
             ? user.group.files_total_max_storage * 1024
             : user.group.files_total_max_storage,
-          space_used: (+countStorageUsed[0].space_used ?? 0) * 1024,
+          space_used: countStorageUsed * 1024,
         },
       };
     } catch (error) {

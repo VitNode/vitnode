@@ -22,6 +22,8 @@
     "@nestjs/platform-express": "^10.3.10",
     "@nestjs/schedule": "^4.1.0",
     "@nestjs/serve-static": "^4.0.2",
+    "drizzle-kit": "^0.23.1",
+    "drizzle-orm": "^0.32.1",
     "pg": "^8.12.0",
     "react": "19.0.0-rc-fb9a90fa48-20240614",
     "react-dom": "19.0.0-rc-fb9a90fa48-20240614",

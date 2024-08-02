@@ -35,12 +35,12 @@ class ShowAdminMembersSortByArgs {
 @ArgsType()
 export class ShowAdminMembersArgs extends PaginationArgs {
   @Field(() => ShowAdminMembersSortByArgs, { nullable: true })
-  sortBy: ShowAdminMembersSortByArgs | null;
+  sortBy?: ShowAdminMembersSortByArgs;
 
   @Transform(TransformString)
   @Field(() => String, { nullable: true })
-  search: string | null;
+  search?: string;
 
   @Field(() => [Int], { nullable: true })
-  groups: number[] | null;
+  groups?: number[];
 }

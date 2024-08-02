@@ -7,7 +7,6 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "sourceMap": true,
-    "strictNullChecks": false,
     "noFallthroughCasesInSwitch": false
   }
 }

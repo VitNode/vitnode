@@ -14,7 +14,7 @@ export class ShowCoreSessionDevicesResolver {
   @Query(() => [ShowCoreSessionDevicesObj])
   @UseGuards(AuthGuards)
   async core_sessions__devices__show(
-    @CurrentUser() user: User | null,
+    @CurrentUser() user: User,
   ): Promise<ShowCoreSessionDevicesObj[]> {
     return this.service.show(user);
   }

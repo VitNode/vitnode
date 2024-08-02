@@ -11,6 +11,7 @@ import { DatabaseService } from '@/utils/database/database.service';
 import {
   ABSOLUTE_PATHS_BACKEND,
   ConfigType,
+  InternalServerError,
   configPath,
   getConfigFile,
 } from '@/index';
@@ -35,6 +36,11 @@ export class EditAdminMainSettingsService {
           : site_description.find(el => el.language_code === 'en')?.value
             ? site_description.find(el => el.language_code === 'en')
             : site_description.find(el => el.value);
+
+      // Still not found?
+      if (!item) {
+        throw new InternalServerError();
+      }
 
       const path = join(
         ABSOLUTE_PATHS_BACKEND.uploads.public,
@@ -113,7 +119,7 @@ export class EditAdminMainSettingsService {
       languages.map(async item => {
         const exist = update
           .filter(item => item)
-          .find(el => el.code === item.code);
+          .find(el => el?.code === item.code);
         if (exist) return;
 
         await this.databaseService.db

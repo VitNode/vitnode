@@ -29,13 +29,13 @@ class ShowCoreMembersSortByArgs {
 @ArgsType()
 export class ShowCoreMembersArgs extends PaginationArgs {
   @Field(() => ShowCoreMembersSortByArgs, { nullable: true })
-  sortBy: ShowCoreMembersSortByArgs | null;
+  sortBy?: ShowCoreMembersSortByArgs;
 
   @Transform(TransformString)
   @Field(() => String, { nullable: true })
-  search: string | null;
+  search?: string;
 
   @Transform(TransformString)
   @Field(() => String, { nullable: true })
-  name_seo: string | null;
+  name_seo?: string;
 }

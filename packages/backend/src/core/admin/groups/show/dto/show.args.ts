@@ -24,9 +24,9 @@ class ShowAdminGroupsSortByArgs {
 @ArgsType()
 export class ShowAdminGroupsArgs extends PaginationArgs {
   @Field(() => ShowAdminGroupsSortByArgs, { nullable: true })
-  sortBy: ShowAdminGroupsSortByArgs | null;
+  sortBy?: ShowAdminGroupsSortByArgs;
 
   @Transform(TransformString)
   @Field(() => String, { nullable: true })
-  search: string | null;
+  search?: string;
 }

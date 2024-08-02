@@ -97,7 +97,12 @@ export class ParserTextLanguageCoreHelpersService extends HelpersParserTextLangu
         if (itemExist) {
           const update = await this.databaseService.db
             .update(database)
-            .set({ ...item, item_id })
+            .set({ ...item, item_id } as {
+              [Key in keyof PgTableWithColumns<T>['$inferInsert']]:
+                | PgTableWithColumns<T>['$inferInsert'][Key]
+                | Placeholder<string, unknown>
+                | SQL<unknown>;
+            })
             .where(eq(database.id, itemExist.id))
             .returning();
 

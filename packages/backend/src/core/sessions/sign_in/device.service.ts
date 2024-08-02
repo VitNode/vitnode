@@ -5,6 +5,7 @@ import { DatabaseService } from '@/utils/database/database.service';
 import { core_sessions_known_devices } from '../../../database/schema/sessions';
 import { GqlContext } from '../../../utils';
 import { getUserIp, getUserAgentData } from '../../../functions';
+import { NotFoundError } from '@/errors';
 
 interface DeviceType {
   id: number;
@@ -24,6 +25,10 @@ export class DeviceSignInCoreSessionsService {
   ) {}
 
   protected async createDevice({ req, res }: GqlContext): Promise<DeviceType> {
+    if (!req.headers['user-agent']) {
+      throw new NotFoundError('User-Agent');
+    }
+
     const dataDevice = await this.databaseService.db
       .insert(core_sessions_known_devices)
       .values({

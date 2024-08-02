@@ -55,6 +55,8 @@ export class HelpersParserTextLanguageCoreHelpersService {
             where: (table, { eq }) => eq(table.file_id, id),
           });
 
+        if (!fileUsing) return;
+
         await this.databaseService.db
           .delete(core_files_using)
           .where(eq(core_files_using.id, fileUsing.id));
@@ -71,6 +73,8 @@ export class HelpersParserTextLanguageCoreHelpersService {
 
     const mapContent = (values: TextLanguageJSONContentType[]) => {
       values.forEach(value => {
+        if (!value.attrs) return;
+
         // Get all file ids
         if (value.type === 'files' && !fileIds.includes(value.attrs.id)) {
           fileIds.push(value.attrs.id);

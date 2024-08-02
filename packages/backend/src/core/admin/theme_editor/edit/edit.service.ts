@@ -48,6 +48,7 @@ export class EditAdminThemeEditorService {
   }
 
   protected updateColors(colors: EditAdminThemeEditorArgs['colors']) {
+    if (!colors) return;
     const pathToCss = join(
       ABSOLUTE_PATHS_BACKEND.frontend.init,
       'app',
@@ -112,9 +113,7 @@ export class EditAdminThemeEditorService {
   }
 
   async edit({ colors, logos }: EditAdminThemeEditorArgs): Promise<string> {
-    if (colors) {
-      this.updateColors(colors);
-    }
+    this.updateColors(colors);
     await this.updateLogos(logos);
 
     return 'Success!';

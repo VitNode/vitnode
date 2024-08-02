@@ -92,13 +92,13 @@ export class UploadCoreEditorService extends HelpersUploadCoreFilesService {
   }
 
   async upload(
-    { group, id: user_id }: User | null,
     { file, folder, plugin }: UploadCoreEditorArgs,
+    user: User | undefined,
   ): Promise<ShowCoreFiles> {
     // Check permission for upload files
     const findGroup = await this.databaseService.db.query.core_groups.findFirst(
       {
-        where: (table, { eq }) => eq(table.id, group?.id ?? 1), // 1 = guest
+        where: (table, { eq }) => eq(table.id, user?.group.id ?? 1), // 1 = guest
         columns: {
           files_allow_upload: true,
           files_max_storage_for_submit: true,
@@ -111,15 +111,17 @@ export class UploadCoreEditorService extends HelpersUploadCoreFilesService {
       throw new AccessDeniedError();
     }
 
-    const countStorageUsed: number = user_id
+    const countStorageUsed: number = user?.id
       ? +(
-          await this.databaseService.db
-            .select({
-              space_used: sum(core_files.file_size),
-            })
-            .from(core_files)
-            .where(eq(core_files.user_id, user_id))
-        )[0].space_used
+          (
+            await this.databaseService.db
+              .select({
+                space_used: sum(core_files.file_size),
+              })
+              .from(core_files)
+              .where(eq(core_files.user_id, user.id))
+          )[0].space_used ?? 0
+        )
       : 0;
 
     const remainingStorage =
@@ -142,7 +144,7 @@ export class UploadCoreEditorService extends HelpersUploadCoreFilesService {
     const data = await this.databaseService.db
       .insert(core_files)
       .values({
-        user_id,
+        user_id: user?.id,
         ...uploadFile,
         security_key: this.acceptMimeTypeToFrontend.includes(
           uploadFile.mimetype,
