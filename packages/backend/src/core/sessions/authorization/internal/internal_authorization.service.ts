@@ -22,7 +22,7 @@ export class InternalAuthorizationCoreSessionsService {
   ) {}
 
   async authorization({ req, res }: GqlContext): Promise<User> {
-    const login_token =
+    const login_token: string =
       req.cookies[this.configService.getOrThrow('cookies.login_token.name')];
     const know_device_id: number | undefined =
       +req.cookies[this.configService.getOrThrow('cookies.known_device.name')];
@@ -68,8 +68,15 @@ export class InternalAuthorizationCoreSessionsService {
       throw new AccessDeniedError();
     }
 
-    const decodeAccessToken = this.jwtService.decode(login_token);
-    if (!decodeAccessToken || decodeAccessToken['exp'] < currentUnixDate()) {
+    const decodeAccessToken: {
+      email: string;
+      exp: number;
+    } = this.jwtService.decode(login_token);
+    if (
+      !decodeAccessToken ||
+      decodeAccessToken['exp'] < currentUnixDate() ||
+      decodeAccessToken.email !== session.user.email
+    ) {
       throw new AccessDeniedError();
     }
 

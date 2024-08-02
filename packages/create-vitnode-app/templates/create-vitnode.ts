@@ -1,5 +1,6 @@
 import { cpSync, mkdirSync, readFileSync, renameSync, writeFileSync } from 'fs';
 import { join } from 'path';
+import { randomBytes } from 'crypto';
 
 import figlet from 'figlet';
 import ora from 'ora';
@@ -7,8 +8,8 @@ import color from 'picocolors';
 
 import { isFolderEmpty } from '../helpers/is-folder-empty';
 import { CreateCliReturn } from '../cli';
-import { createPackagesJSON } from './create-packages-json';
-import { installDependencies } from './install-dependencies';
+import { createPackagesJSON } from '../helpers/create-packages-json';
+import { installDependencies } from '../helpers/install-dependencies';
 import { tryGitInit } from '../helpers/git';
 
 interface Args extends CreateCliReturn {
@@ -100,6 +101,17 @@ export const createVitNode = async ({
     spinner.text = 'Copying docker template...';
     cpSync(join(templatePath, 'docker'), root, { recursive: true });
   }
+
+  // Change the .env file
+  spinner.text = 'Changing .env file...';
+  const envPath = join(root, '.env_template');
+  const env = readFileSync(envPath, 'utf-8');
+  const newEnv = env.replace(
+    'LOGIN_TOKEN_SECRET=vitnode_secret',
+    `LOGIN_TOKEN_SECRET=${randomBytes(32).toString('hex')}`,
+  );
+
+  writeFileSync(join(root, '.env'), newEnv);
 
   // Install dependencies
   if (install) {
