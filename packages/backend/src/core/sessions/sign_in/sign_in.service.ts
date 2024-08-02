@@ -39,7 +39,7 @@ export class SignInCoreSessionsService {
     res,
     userId,
   }: CreateSessionArgs) {
-    const loginTokenSecret =
+    const loginTokenSecret: string =
       this.configService.getOrThrow('login_token_secret');
 
     const device = await this.deviceService.getDevice({ req, res });

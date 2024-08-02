@@ -2,7 +2,7 @@ import color from 'picocolors';
 import spawn from 'cross-spawn';
 
 import { CreateCliReturn } from '../cli';
-import { getOnline } from '../helpers/is-online';
+import { getOnline } from './is-online';
 
 export const installDependencies = async ({
   packageManager: pm,
