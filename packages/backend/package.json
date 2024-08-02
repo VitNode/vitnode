@@ -56,7 +56,6 @@
   },
   "dependencies": {
     "@apollo/server": "^4.10.5",
-    "@graphql-codegen/cli": "^5.0.2",
     "@graphql-codegen/near-operation-file-preset": "^3.0.0",
     "@graphql-codegen/typescript": "^4.0.9",
     "@graphql-codegen/typescript-document-nodes": "^4.0.9",
@@ -82,6 +81,7 @@
     "vitnode-shared": "workspace:*"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^5.0.2",
     "@nestjs/common": "^10.3.10",
     "@nestjs/core": "^10.3.10",
     "@nestjs/graphql": "^12.2.0",
