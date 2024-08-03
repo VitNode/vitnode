@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import React from 'react';
 import { useTheme } from 'next-themes';
-import { HslColor } from 'react-colorful';
 import { toast } from 'sonner';
 import { useTranslations } from 'next-intl';
 
@@ -12,6 +11,7 @@ import { useRouter } from '@/navigation';
 import { CONFIG } from '@/helpers/config-with-env';
 import { zodFiles } from '@/helpers/zod';
 import { Core_Theme_Editor__ShowQuery } from '@/graphql/queries/admin/theme_editor/core_theme_editor__show.generated';
+import { HslColor } from '@/graphql/types';
 
 const zObjectHsl = z.object({
   h: z.number(),

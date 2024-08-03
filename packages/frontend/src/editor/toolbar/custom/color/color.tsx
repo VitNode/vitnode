@@ -1,14 +1,13 @@
 import { Baseline, ChevronDownIcon } from 'lucide-react';
 import React from 'react';
-import { HslColor } from 'react-colorful';
 
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
-import { PickerColor } from '@/components/ui/picker-color';
 import { getHSLFromString } from '@/helpers/colors';
+import { HslColor } from '@/graphql/types';
 
 import { ButtonToolbarEditor } from '../../button';
 import { useEditorState } from '../../../hooks/use-editor-state';
@@ -16,7 +15,7 @@ import { useEditorState } from '../../../hooks/use-editor-state';
 export const ColorToolbarEditor = () => {
   const [open, setOpen] = React.useState(false);
   const { editor } = useEditorState();
-  const [color, setColor] = React.useState<HslColor | null>(
+  const [color] = React.useState<HslColor | null>(
     getHSLFromString(editor.getAttributes('textStyle').color),
   );
 
@@ -55,7 +54,7 @@ export const ColorToolbarEditor = () => {
       </PopoverTrigger>
 
       <PopoverContent className="w-auto">
-        <PickerColor color={color} setColor={setColor} />
+        {/* <PickerColor color={color} setColor={setColor} /> */}
       </PopoverContent>
     </Popover>
   );

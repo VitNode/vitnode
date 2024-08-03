@@ -1,9 +1,9 @@
 import React from 'react';
-import { HslColor } from 'react-colorful';
 import { UseFormReturn } from 'react-hook-form';
 
 import { formSchemaColorsThemeEditor } from './use-theme-editor-api';
 import { FilesInputValue } from '@/components/ui/files-input';
+import { HslColor } from '@/graphql/types';
 
 export enum ThemeEditorTab {
   Main = 'main',
