@@ -1,13 +1,21 @@
 'use client';
 
 import React from 'react';
-import { HslColor } from 'react-colorful';
 import { useTranslations } from 'next-intl';
+import { RemoveFormatting } from 'lucide-react';
 
-import { PickerColor } from './picker-color';
 import { Button } from './button';
-import { Popover, PopoverContent, PopoverTrigger } from './popover';
-import { getHSLFromString, isColorBrightness } from '@/helpers/colors';
+import {
+  convertColor,
+  getHSLFromString,
+  isColorBrightness,
+} from '@/helpers/colors';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from './tooltip';
 
 import { cn } from '../../helpers/classnames';
 
@@ -15,7 +23,7 @@ export const ColorPicker = ({
   disableRemoveColor,
   disabled,
   onChange,
-  value,
+  value: valueProp,
   className,
   ...rest
 }: {
@@ -27,54 +35,76 @@ export const ColorPicker = ({
   ref?: React.RefCallback<HTMLButtonElement>;
 }) => {
   const t = useTranslations('core.colors');
-  const [open, setOpen] = React.useState(false);
-  const [color, setColor] = React.useState<HslColor | null>(
-    getHSLFromString(value),
-  );
-
-  // Set color from value
-  React.useEffect(() => {
-    onChange(color ? `hsl(${color.h}, ${color.s}%, ${color.l}%)` : '');
-  }, [color]);
-
-  const colorBrightness = color ? isColorBrightness(color) : false;
+  const ref = React.useRef<HTMLInputElement>(null);
+  const value = getHSLFromString(valueProp);
+  const colorBrightness = value ? isColorBrightness(value) : false;
 
   return (
-    <Popover open={open} onOpenChange={setOpen} modal>
-      <PopoverTrigger asChild>
-        <Button
-          variant="outline"
-          className={cn('flex min-w-40 max-w-52 justify-start', className, {
-            'text-black': color && colorBrightness,
-            'text-white': color && !colorBrightness,
-          })}
-          style={{
-            backgroundColor: color
-              ? `hsl(${color.h}, ${color.s}%, ${color.l}%)`
-              : '',
-          }}
-          disabled={disabled}
-          {...rest}
-        >
-          <span
-            className={cn({
-              'text-muted-foreground': !color,
-            })}
-          >
-            {color ? `hsl(${color.h}, ${color.s}%, ${color.l}%)` : t('none')}
-          </span>
-        </Button>
-      </PopoverTrigger>
+    <div className="flex items-center gap-2">
+      <Button
+        variant="outline"
+        className={cn(
+          'relative flex min-w-40 max-w-52 justify-start',
+          className,
+          {
+            'text-black': value && colorBrightness,
+            'text-white': value && !colorBrightness,
+          },
+        )}
+        style={{
+          backgroundColor: value
+            ? `hsl(${value.h}, ${value.s}%, ${value.l}%)`
+            : '',
+        }}
+        onClick={() => {
+          ref.current?.click();
+        }}
+        disabled={disabled}
+        {...rest}
+      >
+        <input
+          ref={ref}
+          className="invisible absolute bottom-0 left-0 h-0 w-0"
+          type="color"
+          onChange={e => {
+            const color = convertColor.hexToHSL(e.target.value);
+            if (!color) return;
 
-      {!disabled && (
-        <PopoverContent align="start" className="w-auto">
-          <PickerColor
-            color={color}
-            setColor={setColor}
-            disableRemoveColor={disableRemoveColor}
-          />
-        </PopoverContent>
+            onChange(color ? `hsl(${color.h}, ${color.s}%, ${color.l}%)` : '');
+          }}
+          value={value ? convertColor.hslToHex(value) : ''}
+          disabled={disabled}
+        />
+        <span
+          className={cn({
+            'text-muted-foreground': !value,
+          })}
+        >
+          {value ? `hsl(${value.h}, ${value.s}%, ${value.l}%)` : t('none')}
+        </span>
+      </Button>
+
+      {!disableRemoveColor && value && (
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                size="icon"
+                className="shrink-0"
+                ariaLabel={t('remove')}
+                variant="ghost"
+                onClick={() => {
+                  onChange('');
+                }}
+              >
+                <RemoveFormatting />
+              </Button>
+            </TooltipTrigger>
+
+            <TooltipContent>{t('remove')}</TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       )}
-    </Popover>
+    </div>
   );
 };
