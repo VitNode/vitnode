@@ -1,6 +1,6 @@
 {
   "name": "backend",
-  "version": "0.0.8-canary.14",
+  "version": "0.0.8-canary.15",
   "license": "MIT",
   "scripts": {
     "config:init": "vitnode-backend init",
