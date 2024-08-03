@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { count } from 'drizzle-orm';
-import { ConfigService } from '@nestjs/config';
 
 import { SignUpCoreSessionsArgs } from './dto/sign_up.args';
 import { SignUpCoreSessionsObj } from './dto/sign_up.obj';
@@ -18,7 +17,6 @@ import { getUserIp, removeSpecialCharacters } from '../../../functions';
 export class SignUpCoreSessionsService extends AvatarColorService {
   constructor(
     private readonly databaseService: DatabaseService,
-    private readonly configService: ConfigService,
     private readonly captchaService: CaptchaCoreCaptchaSecurityService,
   ) {
     super();

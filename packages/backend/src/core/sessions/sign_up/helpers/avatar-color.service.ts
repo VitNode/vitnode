@@ -33,8 +33,11 @@ export class AvatarColorService {
 
   generateAvatarColor = (name: string): string => {
     const hslName = this.generateHSLFromName(name);
-    const rgb = convertColor.hslToRgb(hslName[0], hslName[1], hslName[2]);
 
-    return `${rgb.r},${rgb.g},${rgb.b}`;
+    return convertColor.hslToHex({
+      h: hslName[0],
+      s: hslName[1],
+      l: hslName[2],
+    });
   };
 }

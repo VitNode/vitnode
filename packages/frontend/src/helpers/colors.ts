@@ -17,7 +17,7 @@ export const convertColor = {
         .padStart(2, '0');
     };
 
-    return `#${f(0)}${f(8)}${f(4)}`;
+    return `${f(0)}${f(8)}${f(4)}`;
   },
 
   hexToHSL: (hex: string): HslColor | undefined => {

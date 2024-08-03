@@ -121,6 +121,8 @@ export const useSignUpView = () => {
       toast.error(t('errors.title'), {
         description: t('errors.internal_server_error'),
       });
+
+      return;
     }
 
     setSuccess(true);
