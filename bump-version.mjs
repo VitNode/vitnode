@@ -22,7 +22,6 @@ const packages = [
   'backend',
   'create-vitnode-app',
   'frontend',
-  'shared',
   'eslint-config-typescript-vitnode',
 ];
 
