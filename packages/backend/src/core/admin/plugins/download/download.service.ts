@@ -4,16 +4,20 @@ import * as fs from 'fs';
 import { Injectable } from '@nestjs/common';
 import * as tar from 'tar';
 import { eq } from 'drizzle-orm';
-import { generateRandomString, removeSpecialCharacters } from 'vitnode-shared';
 
 import { DownloadAdminPluginsArgs } from './dto/download.args';
 
 import { DatabaseService } from '@/utils/database/database.service';
 import { CustomError, NotFoundError } from '@/errors';
-import { currentUnixDate, execShellCommand } from '@/functions';
+import {
+  currentUnixDate,
+  execShellCommand,
+  removeSpecialCharacters,
+} from '@/functions';
 import { User } from '@/decorators';
 import { ABSOLUTE_PATHS_BACKEND, PluginInfoJSONType } from '../../../..';
 import { core_plugins } from '@/database/schema/plugins';
+import { generateRandomString } from '@/functions/generate-random-string';
 
 @Injectable()
 export class DownloadAdminPluginsService {

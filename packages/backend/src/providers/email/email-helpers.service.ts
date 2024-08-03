@@ -1,10 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { convertColor, getHSLFromString } from 'vitnode-shared';
 import { ConfigService } from '@nestjs/config';
 
 import { getConfigFile } from '../config';
 import { EmailHelpersServiceType } from './email-helpers.type';
 import EmailTemplate from './template/email-template';
+
+import { convertColor, getHSLFromString } from '@/functions';
 
 @Injectable()
 export class EmailHelpersService {

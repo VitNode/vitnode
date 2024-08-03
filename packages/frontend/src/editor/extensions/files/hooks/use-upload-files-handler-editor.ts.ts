@@ -1,7 +1,6 @@
 import React from 'react';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
-import { formatBytes } from 'vitnode-shared';
 import { useGlobals } from 'vitnode-frontend/hooks/use-globals';
 import { useSession } from 'vitnode-frontend/hooks/use-session';
 
@@ -13,6 +12,7 @@ import {
 import { uploadMutationApi } from './upload-mutation-api';
 import { getFilesFromContent } from './functions';
 import { TextLanguage } from '@/graphql/types';
+import { formatBytes } from '@/helpers/format-bytes';
 
 export interface UploadFilesHandlerArgs {
   files: FileStateEditor[];

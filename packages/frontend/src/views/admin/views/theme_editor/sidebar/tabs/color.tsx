@@ -1,10 +1,5 @@
 import { ChevronLeft } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import {
-  getHSLFromString,
-  getStringFromHSL,
-  isColorBrightness,
-} from 'vitnode-shared';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -15,6 +10,11 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { ColorPicker } from '@/components/ui/color-picker';
+import {
+  getHSLFromString,
+  getStringFromHSL,
+  isColorBrightness,
+} from '@/helpers/colors';
 
 import { ThemeEditorTab, useThemeEditor } from '../../hooks/use-theme-editor';
 

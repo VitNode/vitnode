@@ -1,5 +1,4 @@
 import { Inject, Injectable } from '@nestjs/common';
-// import { generateRandomString } from 'vitnode-shared';
 
 import { CreateKeyResetPasswordCoreMembersArgs } from './dto/create_key.args';
 import { ContentCreateKeyEmail } from './_email/content';

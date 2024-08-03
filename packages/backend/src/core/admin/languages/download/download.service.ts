@@ -4,14 +4,18 @@ import { copyFile } from 'fs/promises';
 
 import { Injectable } from '@nestjs/common';
 import * as tar from 'tar';
-import { generateRandomString, removeSpecialCharacters } from 'vitnode-shared';
 
 import { DownloadCoreAdminLanguagesArgs } from './dto/download.args';
 
 import { DatabaseService } from '@/utils/database/database.service';
 import { User } from '@/decorators';
 import { CustomError, NotFoundError } from '@/errors';
-import { ABSOLUTE_PATHS_BACKEND, currentUnixDate } from '../../../..';
+import {
+  ABSOLUTE_PATHS_BACKEND,
+  currentUnixDate,
+  removeSpecialCharacters,
+} from '../../../..';
+import { generateRandomString } from '@/functions/generate-random-string';
 
 @Injectable()
 export class DownloadAdminCoreLanguageService {

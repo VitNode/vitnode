@@ -3,9 +3,9 @@
 import { File } from 'lucide-react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-import { formatBytes } from 'vitnode-shared';
 
 import { acceptMimeTypeImage } from '../extensions/files/files';
+import { formatBytes } from '@/helpers/format-bytes';
 
 import { Button } from '../../components/ui/button';
 import { CONFIG } from '../../helpers/config-with-env';

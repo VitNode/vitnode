@@ -1,7 +1,7 @@
 import { useTranslations } from 'next-intl';
-import { formatBytes } from 'vitnode-shared';
 
 import { ItemListFilesFooterEditorProps } from './item';
+import { formatBytes } from '@/helpers/format-bytes';
 
 export const ContentItemListFilesFooterEditor = ({
   data,

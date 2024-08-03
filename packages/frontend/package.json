@@ -187,7 +187,6 @@
     "tippy.js": "^6.3.7",
     "use-debounce": "^10.0.2",
     "vaul": "^0.9.1",
-    "vitnode-shared": "workspace:*",
     "zod": "^3.23.8"
   }
 }

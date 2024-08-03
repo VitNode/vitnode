@@ -4,7 +4,6 @@ import { Clock, File } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import React from 'react';
-import { formatBytes } from 'vitnode-shared';
 
 import { ActionsFilesAdvancedCoreAdmin } from './actions/actions';
 import { CONFIG } from '@/helpers/config-with-env';
@@ -18,6 +17,7 @@ import {
 } from '@/components/ui/tooltip';
 import { DataTable } from '@/components/ui/data-table';
 import { Admin__Core_Files__ShowQuery } from '@/graphql/queries/admin/advanced/files/admin__core_files__show.generated';
+import { formatBytes } from '@/helpers/format-bytes';
 
 export const ContentFilesAdvancedCoreAdminView = ({
   admin__core_files__show: { edges, pageInfo },

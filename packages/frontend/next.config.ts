@@ -12,7 +12,7 @@ const nextConfig = (config: NextConfig): NextConfig => {
       ppr: true,
     },
     output: 'standalone',
-    transpilePackages: ['lucide-react', 'vitnode-shared', 'vitnode-frontend'],
+    transpilePackages: ['lucide-react', 'vitnode-frontend'],
     images: {
       remotePatterns: [
         {

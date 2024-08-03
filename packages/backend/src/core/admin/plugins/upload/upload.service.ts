@@ -4,7 +4,6 @@ import * as fs from 'fs';
 import { Injectable } from '@nestjs/common';
 import * as tar from 'tar';
 import { eq } from 'drizzle-orm';
-import { generateRandomString } from 'vitnode-shared';
 
 import { ShowAdminPlugins } from '../show/dto/show.obj';
 import { UploadAdminPluginsArgs } from './dto/upload.args';
@@ -19,6 +18,7 @@ import {
   CustomError,
   FileUpload,
 } from '../../../..';
+import { generateRandomString } from '@/functions/generate-random-string';
 
 @Injectable()
 export class UploadAdminPluginsService {
