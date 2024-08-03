@@ -104,14 +104,15 @@ export const createVitNode = async ({
 
   // Change the .env file
   spinner.text = 'Changing .env file...';
-  const envPath = join(root, '.env_template');
+  renameSync(join(root, '.env_template'), join(root, '.env'));
+  const envPath = join(root, '.env');
   const env = readFileSync(envPath, 'utf-8');
   const newEnv = env.replace(
     'LOGIN_TOKEN_SECRET=vitnode_secret',
     `LOGIN_TOKEN_SECRET=${randomBytes(32).toString('hex')}`,
   );
 
-  writeFileSync(join(root, '.env'), newEnv);
+  writeFileSync(envPath, newEnv);
 
   // Install dependencies
   if (install) {

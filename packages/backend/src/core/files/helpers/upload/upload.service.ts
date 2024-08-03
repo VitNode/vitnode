@@ -9,7 +9,6 @@ import { join } from 'path';
 
 import sharp from 'sharp';
 import { Injectable } from '@nestjs/common';
-import { generateRandomString, removeSpecialCharacters } from 'vitnode-shared';
 
 import { UploadCoreFilesArgs } from './dto/upload.args';
 import { UploadCoreFilesObj } from './dto/upload.obj';
@@ -17,7 +16,8 @@ import { HelpersUploadCoreFilesService, acceptMimeTypeImage } from './helpers';
 
 import { DatabaseService } from '@/utils/database/database.service';
 import { CustomError, InternalServerError } from '@/errors';
-import { ABSOLUTE_PATHS_BACKEND } from '../../../..';
+import { ABSOLUTE_PATHS_BACKEND, removeSpecialCharacters } from '../../../..';
+import { generateRandomString } from '@/functions/generate-random-string';
 
 @Injectable()
 export class UploadCoreFilesService extends HelpersUploadCoreFilesService {

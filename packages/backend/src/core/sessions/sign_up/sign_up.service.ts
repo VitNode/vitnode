@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { count } from 'drizzle-orm';
 import { ConfigService } from '@nestjs/config';
-import { removeSpecialCharacters } from 'vitnode-shared';
 
 import { SignUpCoreSessionsArgs } from './dto/sign_up.args';
 import { SignUpCoreSessionsObj } from './dto/sign_up.obj';
@@ -13,7 +12,7 @@ import { DatabaseService } from '@/utils/database/database.service';
 import { core_users } from '../../../database/schema/users';
 import { GqlContext } from '@/utils';
 import { CustomError, NotFoundError } from '../../../errors';
-import { getUserIp } from '../../../functions';
+import { getUserIp, removeSpecialCharacters } from '../../../functions';
 
 @Injectable()
 export class SignUpCoreSessionsService extends AvatarColorService {

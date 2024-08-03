@@ -4,7 +4,6 @@ import React from 'react';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { Clock, Download, File } from 'lucide-react';
-import { formatBytes } from 'vitnode-shared';
 
 import { CONFIG } from '@/helpers/config-with-env';
 import {
@@ -18,6 +17,7 @@ import { buttonVariants } from '@/components/ui/button';
 import { DateFormat } from '@/components/date-format';
 import { DataTable } from '@/components/ui/data-table';
 import { Core_Members__Files__ShowQuery } from '@/graphql/queries/settings/core_members__files__show.generated';
+import { formatBytes } from '@/helpers/format-bytes';
 
 export const ContentFilesSettings = ({
   core_files__show: { edges, pageInfo },

@@ -3,11 +3,11 @@
 import React from 'react';
 import { HslColor } from 'react-colorful';
 import { useTranslations } from 'next-intl';
-import { getHSLFromString, isColorBrightness } from 'vitnode-shared';
 
 import { PickerColor } from './picker-color';
 import { Button } from './button';
 import { Popover, PopoverContent, PopoverTrigger } from './popover';
+import { getHSLFromString, isColorBrightness } from '@/helpers/colors';
 
 import { cn } from '../../helpers/classnames';
 

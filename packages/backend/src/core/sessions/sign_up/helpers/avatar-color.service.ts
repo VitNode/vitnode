@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { convertColor } from 'vitnode-shared';
+
+import { convertColor } from '@/functions';
 
 @Injectable()
 export class AvatarColorService {
@@ -30,9 +31,10 @@ export class AvatarColorService {
     return [h, s, l];
   };
 
-  generateAvatarColor = (name: string) => {
+  generateAvatarColor = (name: string): string => {
     const hslName = this.generateHSLFromName(name);
+    const rgb = convertColor.hslToRgb(hslName[0], hslName[1], hslName[2]);
 
-    return convertColor.hslToRgb(hslName[0], hslName[1], hslName[2]);
+    return `${rgb.r},${rgb.g},${rgb.b}`;
   };
 }

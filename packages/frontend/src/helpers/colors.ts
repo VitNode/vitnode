@@ -5,7 +5,7 @@ export interface HslColor {
 }
 
 export const convertColor = {
-  hslToHex: ({ h, l, s }: { h: number; l: number; s: number }): string => {
+  hslToHex: ({ h, l, s }: HslColor): string => {
     l /= 100;
     const a = (s * Math.min(l, 1 - l)) / 100;
     const f = (n: number) => {
@@ -20,7 +20,7 @@ export const convertColor = {
     return `#${f(0)}${f(8)}${f(4)}`;
   },
 
-  hexToHSL: (hex: string): { h: number; l: number; s: number } | undefined => {
+  hexToHSL: (hex: string): HslColor | undefined => {
     let r = 0,
       g = 0,
       b = 0;
@@ -76,7 +76,7 @@ export const convertColor = {
     };
   },
 
-  RGBToHSL(r: number, g: number, b: number) {
+  RGBToHSL(r: number, g: number, b: number): HslColor {
     // Make r, g, and b fractions of 1
     r /= 255;
     g /= 255;
@@ -131,11 +131,13 @@ export const convertColor = {
         .padStart(2, '0'); // convert to Hex and prefix "0" if needed
     };
 
-    return `${f(0)}${f(8)}${f(4)}`;
+    return {
+      r: f(0),
+      g: f(8),
+      b: f(4),
+    };
   },
 };
-
-type CheckColorReturn = 'hex' | 'hsl' | 'rgb';
 
 export const hexRegex = /^#?([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
 export const hslRegex = /^hsl\(\s*\d{1,3}\s*,\s*\d{1,3}%\s*,\s*\d{1,3}%\s*\)$/;
@@ -144,7 +146,9 @@ export const rgbWithCommaRegex =
 export const rgbWithoutCommaRegex =
   /^rgb\(\s*\d{1,3}\s+\d{1,3}\s+\d{1,3}\s*\)$/;
 
-export const checkColorType = (strColor: string): CheckColorReturn | null => {
+export const checkColorType = (
+  strColor: string,
+): 'hex' | 'hsl' | 'rgb' | null => {
   if (hexRegex.test(strColor)) {
     return 'hex';
   }

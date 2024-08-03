@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { eq, sum } from 'drizzle-orm';
-import { generateRandomString } from 'vitnode-shared';
 
 import { UploadCoreEditorArgs } from './dto/upload.args';
 
@@ -17,6 +16,7 @@ import { User } from '../../../decorators';
 import { AccessDeniedError } from '../../../errors';
 import { core_files } from '../../../database/schema/files';
 import { getConfigFile } from '../../../providers/config';
+import { generateRandomString } from '@/functions/generate-random-string';
 
 interface GetFilesAfterUploadArgs extends UploadCoreEditorArgs {
   maxUploadSizeKb: number;

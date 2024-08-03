@@ -4,7 +4,6 @@ import { join } from 'path';
 import { Injectable } from '@nestjs/common';
 import * as tar from 'tar';
 import { eq } from 'drizzle-orm';
-import { generateRandomString } from 'vitnode-shared';
 
 import { UpdateCoreAdminLanguagesArgs } from './dto/update.args';
 
@@ -13,6 +12,7 @@ import { NotFoundError } from '@/errors';
 import { ABSOLUTE_PATHS_BACKEND, currentUnixDate } from '../../../..';
 import { core_languages } from '@/database/schema/languages';
 import { setRebuildRequired } from '@/functions/rebuild-required';
+import { generateRandomString } from '@/functions/generate-random-string';
 
 @Injectable()
 export class UpdateAdminCoreLanguageService {

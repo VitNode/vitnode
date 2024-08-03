@@ -4,11 +4,6 @@ import React from 'react';
 import { HslColorPicker, HslColor } from 'react-colorful';
 import { RemoveFormatting } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import {
-  checkColorType,
-  convertColor,
-  isColorBrightness,
-} from 'vitnode-shared';
 
 import { Input } from './input';
 import {
@@ -18,6 +13,11 @@ import {
   TooltipTrigger,
 } from './tooltip';
 import { Button } from './button';
+import {
+  checkColorType,
+  convertColor,
+  isColorBrightness,
+} from '@/helpers/colors';
 
 import { cn } from '../../helpers/classnames';
 

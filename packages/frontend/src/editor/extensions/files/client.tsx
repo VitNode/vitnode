@@ -3,9 +3,9 @@
 import { NodeViewWrapper, ReactNodeViewRenderer } from '@tiptap/react';
 import { File } from 'lucide-react';
 import Image from 'next/image';
-import { formatBytes } from 'vitnode-shared';
 
 import { acceptMimeTypeImage, FilesHandlerAttributes } from './files';
+import { formatBytes } from '@/helpers/format-bytes';
 
 import { CONFIG } from '../../../helpers/config-with-env';
 

@@ -1,7 +1,6 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { removeSpecialCharacters } from 'vitnode-shared';
 
 import { useSignUpView } from '@/hooks/core/sign/up/use-sign-up-view';
 import {
@@ -18,6 +17,7 @@ import { Input } from '@/components/ui/input';
 import { Progress } from '@/components/ui/progress';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Button } from '@/components/ui/button';
+import { removeSpecialCharacters } from '@/helpers/special-characters';
 
 import { useInstallVitnode } from '../../hooks/use-install-vitnode';
 
