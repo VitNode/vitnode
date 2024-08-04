@@ -133,11 +133,6 @@ enum EmailProvider {
   smtp
 }
 
-input FileEditAdminThemeEditor {
-  file: Upload
-  keep: Boolean
-}
-
 type FilesAdminPluginsObj {
   admin_pages: Int!
   admin_templates: Int!
@@ -207,17 +202,17 @@ type LogoShowCoreThemeEditor {
 }
 
 input LogosEditAdminThemeEditor {
-  dark: FileEditAdminThemeEditor
-  light: FileEditAdminThemeEditor
-  mobile_dark: FileEditAdminThemeEditor
-  mobile_light: FileEditAdminThemeEditor
+  dark: UploadWithKeepCoreFilesArgs
+  light: UploadWithKeepCoreFilesArgs
+  mobile_dark: UploadWithKeepCoreFilesArgs
+  mobile_light: UploadWithKeepCoreFilesArgs
   mobile_width: Float!
   text: String!
   width: Float!
 }
 
 type Mutation {
-  admin__core_email_settings__edit(color_primary: String!, color_primary_foreground: String!, provider: EmailProvider!, resend_key: String, smtp: SMTPEditAdminEmailSettingsService): ShowAdminEmailSettingsServiceObj!
+  admin__core_email_settings__edit(color_primary: String!, color_primary_foreground: String!, logo: UploadWithKeepCoreFilesArgs, provider: EmailProvider!, resend_key: String, smtp: SMTPEditAdminEmailSettingsService): ShowAdminEmailSettingsServiceObj!
   admin__core_email_settings__test(from: String!, message: String!, preview_text: String, subject: String!, to: String!): String!
   admin__core_files__delete(id: Int!): String!
   admin__core_groups__create(color: String, content: ContentCreateAdminGroups!, name: [TextLanguageInput!]!): ShowAdminGroups!
@@ -341,8 +336,8 @@ type ShowAdminCaptchaSecurityObj {
 
 type ShowAdminEmailSettingsServiceObj {
   color_primary: String!
+  logo: UploadCoreFilesObj
   provider: EmailProvider!
-  resend_key: String
   smtp_host: String
   smtp_port: Int
   smtp_secure: Boolean
@@ -764,6 +759,11 @@ type UploadCoreFilesObj {
   height: Int
   mimetype: String!
   width: Int
+}
+
+input UploadWithKeepCoreFilesArgs {
+  file: Upload
+  keep: Boolean!
 }
 
 type User {

@@ -28,7 +28,7 @@ export const TestingActionEmailSettingsAdmin = ({
         </Button>
       </DialogTrigger>
 
-      <DialogContent>
+      <DialogContent className="max-w-xl">
         <React.Suspense fallback={<Loader />}>
           <Content />
         </React.Suspense>

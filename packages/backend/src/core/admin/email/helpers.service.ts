@@ -6,7 +6,10 @@ import { ShowAdminEmailSettingsServiceObj } from './settings/show/dto/show.obj';
 import { ABSOLUTE_PATHS_BACKEND, getConfigFile } from '@/index';
 
 export interface EmailCredentialsFile
-  extends Omit<ShowAdminEmailSettingsServiceObj, 'color_primary'> {
+  extends Pick<
+    ShowAdminEmailSettingsServiceObj,
+    'provider' | 'smtp_host' | 'smtp_port' | 'smtp_secure' | 'smtp_user'
+  > {
   resend_key: string;
   smtp_password: string;
 }

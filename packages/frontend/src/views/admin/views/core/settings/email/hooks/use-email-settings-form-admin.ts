@@ -40,6 +40,7 @@ export const useEmailSettingsFormAdmin = ({
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      logo: data.logo ? [data.logo] : [],
       provider: data.provider,
       smtp: {
         host: data.smtp_host || '',

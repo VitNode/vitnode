@@ -3,17 +3,17 @@ import { count, eq } from 'drizzle-orm';
 
 import { DeleteCoreEditorArgs } from './dto/delete.args';
 
-import { DeleteCoreFilesService } from '../../files/helpers/delete/delete.service';
 import { DatabaseService } from '@/utils/database/database.service';
 import { User } from '../../../decorators';
 import { AccessDeniedError } from '../../../errors';
 import { core_files, core_files_using } from '../../../database/schema/files';
+import { FilesService } from '@/core/files/helpers/upload/upload.service';
 
 @Injectable()
 export class DeleteCoreEditorService {
   constructor(
     private readonly databaseService: DatabaseService,
-    private readonly deleteFile: DeleteCoreFilesService,
+    private readonly files: FilesService,
   ) {}
 
   async delete(
@@ -43,7 +43,7 @@ export class DeleteCoreEditorService {
       return 'Skipped! File is being used.';
     }
 
-    this.deleteFile.delete({
+    this.files.delete({
       ...findFile,
       secure: !!findFile.security_key,
     });

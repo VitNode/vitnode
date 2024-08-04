@@ -1,6 +1,6 @@
 import { ArgsType, Field, Float, InputType, Int } from '@nestjs/graphql';
 
-import { FileUpload, GraphQLUpload } from '@/graphql-upload';
+import { UploadWithKeepCoreFilesArgs } from '@/core/files/helpers/upload/dto/upload.obj';
 
 @InputType()
 export class HslColorInput {
@@ -72,15 +72,6 @@ class ColorsEditAdminThemeEditor {
 }
 
 @InputType()
-class FileEditAdminThemeEditor {
-  @Field(() => GraphQLUpload, { nullable: true })
-  file?: Promise<FileUpload>;
-
-  @Field(() => Boolean, { nullable: true })
-  keep?: boolean;
-}
-
-@InputType()
 class LogosEditAdminThemeEditor {
   @Field(() => Float)
   width: number;
@@ -91,17 +82,17 @@ class LogosEditAdminThemeEditor {
   @Field()
   text: string;
 
-  @Field(() => FileEditAdminThemeEditor, { nullable: true })
-  dark?: FileEditAdminThemeEditor;
+  @Field(() => UploadWithKeepCoreFilesArgs, { nullable: true })
+  dark?: UploadWithKeepCoreFilesArgs;
 
-  @Field(() => FileEditAdminThemeEditor, { nullable: true })
-  light?: FileEditAdminThemeEditor;
+  @Field(() => UploadWithKeepCoreFilesArgs, { nullable: true })
+  light?: UploadWithKeepCoreFilesArgs;
 
-  @Field(() => FileEditAdminThemeEditor, { nullable: true })
-  mobile_dark?: FileEditAdminThemeEditor;
+  @Field(() => UploadWithKeepCoreFilesArgs, { nullable: true })
+  mobile_dark?: UploadWithKeepCoreFilesArgs;
 
-  @Field(() => FileEditAdminThemeEditor, { nullable: true })
-  mobile_light?: FileEditAdminThemeEditor;
+  @Field(() => UploadWithKeepCoreFilesArgs, { nullable: true })
+  mobile_light?: UploadWithKeepCoreFilesArgs;
 }
 
 @ArgsType()

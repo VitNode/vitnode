@@ -16,31 +16,59 @@ import {
   getConfigFile,
 } from '@/providers/config';
 import { InternalServerError, NotFoundError } from '@/errors';
+import { FilesService } from '@/core/files/helpers/upload/upload.service';
 
 @Injectable()
 export class EditAdminEmailSettingsService extends HelpersAdminEmailSettingsService {
-  edit({
+  constructor(private readonly files: FilesService) {
+    super();
+  }
+
+  async edit({
     smtp,
     color_primary,
     color_primary_foreground,
     provider,
     resend_key,
-  }: EditAdminEmailSettingsServiceArgs): ShowAdminEmailSettingsServiceObj {
+    logo,
+  }: EditAdminEmailSettingsServiceArgs): Promise<ShowAdminEmailSettingsServiceObj> {
     const emailCredentials = this.getEmailCredentials();
-
-    // Update settings
     const configSettings = getConfigFile();
+    // Update settings
     const newData: ConfigType = {
       ...configSettings,
       settings: {
         ...configSettings.settings,
         email: {
+          ...configSettings.settings.email,
           provider,
           color_primary,
           color_primary_foreground,
         },
       },
     };
+
+    // Update logo
+    if (logo?.file && !logo.keep) {
+      if (configSettings.settings.email.logo) {
+        this.files.delete(configSettings.settings.email.logo);
+      }
+
+      const newLogo = await this.files.upload({
+        file: logo.file,
+        maxUploadSizeBytes: 1024 * 1024 * 2, // 2MB
+        acceptMimeType: ['image/png', 'image/jpeg', 'image/gif'],
+        plugin: 'core',
+        folder: 'email',
+      });
+
+      newData.settings.email.logo = newLogo;
+    } else if (configSettings.settings.email.logo && !logo?.keep) {
+      this.files.delete(configSettings.settings.email.logo);
+
+      delete newData.settings.email.logo;
+    }
+
     fs.writeFileSync(configPath, JSON.stringify(newData, null, 2), 'utf8');
 
     // Remove email.config.json if provider is none

@@ -1,15 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
 
-import { DeleteCoreFilesService } from '../../../files/helpers/delete/delete.service';
 import { DatabaseService } from '@/utils/database/database.service';
 import { User } from '@/decorators';
 import { core_files_avatars } from '@/database/schema/users';
+import { FilesService } from '@/core/files/helpers/upload/upload.service';
 
 @Injectable()
 export class DeleteAvatarCoreMembersService {
   constructor(
-    private readonly deleteFile: DeleteCoreFilesService,
+    private readonly files: FilesService,
     private readonly databaseService: DatabaseService,
   ) {}
 
@@ -19,7 +19,7 @@ export class DeleteAvatarCoreMembersService {
     }
 
     // Check if avatar exists
-    this.deleteFile.checkIfFileExistsAndReturnPath({
+    this.files.checkIfFileExistsAndReturnPath({
       dir_folder: avatar.dir_folder,
       file_name: avatar.file_name,
       secure: false,
@@ -31,7 +31,7 @@ export class DeleteAvatarCoreMembersService {
       .where(eq(core_files_avatars.id, avatar.id));
 
     // Delete from server
-    this.deleteFile.delete(avatar);
+    this.files.delete(avatar);
 
     return 'Success!';
   }

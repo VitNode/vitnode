@@ -1,6 +1,7 @@
 import { ArgsType, Field, InputType, Int } from '@nestjs/graphql';
 
 import { EmailProvider } from '@/providers';
+import { UploadWithKeepCoreFilesArgs } from '@/core/files/helpers/upload/dto/upload.obj';
 
 @InputType()
 export class SMTPEditAdminEmailSettingsService {
@@ -30,6 +31,9 @@ export class EditAdminEmailSettingsServiceArgs {
 
   @Field(() => String, { nullable: true })
   resend_key?: string;
+
+  @Field(() => UploadWithKeepCoreFilesArgs, { nullable: true })
+  logo?: UploadWithKeepCoreFilesArgs;
 
   @Field(() => String)
   color_primary: string;

@@ -88,7 +88,7 @@
           "smtp_secure": "SMTP Secure (SSL/TLS)",
           "color_primary": "Primary Color",
           "test": {
-            "title": "Test Email Sending",
+            "title": "Test Email Send",
             "from": "From",
             "to": "To",
             "subject": "Subject",

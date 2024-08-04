@@ -7,26 +7,24 @@ export type Admin__Core_Email_Settings__EditMutationVariables = Types.Exact<{
   provider: Types.EmailProvider;
   resendKey?: Types.InputMaybe<Types.Scalars['String']['input']>;
   smtp?: Types.InputMaybe<Types.SmtpEditAdminEmailSettingsService>;
+  logo?: Types.InputMaybe<Types.UploadWithKeepCoreFilesArgs>;
 }>;
 
 
-export type Admin__Core_Email_Settings__EditMutation = { __typename?: 'Mutation', admin__core_email_settings__edit: { __typename?: 'ShowAdminEmailSettingsServiceObj', color_primary: string, smtp_host?: string, smtp_port?: number, smtp_secure?: boolean, smtp_user?: string } };
+export type Admin__Core_Email_Settings__EditMutation = { __typename?: 'Mutation', admin__core_email_settings__edit: { __typename?: 'ShowAdminEmailSettingsServiceObj', provider: Types.EmailProvider } };
 
 
 export const Admin__Core_Email_Settings__Edit = gql`
-    mutation Admin__core_email_settings__edit($colorPrimary: String!, $colorPrimaryForeground: String!, $provider: EmailProvider!, $resendKey: String, $smtp: SMTPEditAdminEmailSettingsService) {
+    mutation Admin__core_email_settings__edit($colorPrimary: String!, $colorPrimaryForeground: String!, $provider: EmailProvider!, $resendKey: String, $smtp: SMTPEditAdminEmailSettingsService, $logo: UploadWithKeepCoreFilesArgs) {
   admin__core_email_settings__edit(
     color_primary: $colorPrimary
     color_primary_foreground: $colorPrimaryForeground
     provider: $provider
     resend_key: $resendKey
     smtp: $smtp
+    logo: $logo
   ) {
-    color_primary
-    smtp_host
-    smtp_port
-    smtp_secure
-    smtp_user
+    provider
   }
 }
     `;

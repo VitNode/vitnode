@@ -60,6 +60,7 @@ export interface ConfigType {
       color_primary: string;
       color_primary_foreground: string;
       provider: EmailProvider;
+      logo?: UploadCoreFilesObj;
     };
     general: {
       site_name: string;
