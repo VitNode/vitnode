@@ -1,6 +1,6 @@
 import { ArgsType, Field, Float, InputType, Int } from '@nestjs/graphql';
 
-import { UploadWithKeepCoreFilesArgs } from '@/core/files/helpers/upload/dto/upload.obj';
+import { UploadWithKeepCoreFilesArgs } from '@/core/files/helpers/upload/dto/upload.args';
 
 @InputType()
 export class HslColorInput {

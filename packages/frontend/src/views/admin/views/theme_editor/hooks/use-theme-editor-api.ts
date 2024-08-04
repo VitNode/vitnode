@@ -158,7 +158,7 @@ export const useThemeEditorApi = ({
     formData.append('logos.width', values.logos.width.toString());
     formData.append('logos.mobile_width', values.logos.mobile_width.toString());
     ['dark', 'light', 'mobile_dark', 'mobile_light'].forEach(el => {
-      if (!values.logos) return;
+      if (!values.logos[el]) return;
 
       if (values.logos[el] instanceof File) {
         formData.append(`logos.${el}.file`, values.logos[el]);

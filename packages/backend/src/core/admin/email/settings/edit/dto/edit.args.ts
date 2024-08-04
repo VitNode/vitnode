@@ -1,7 +1,7 @@
 import { ArgsType, Field, InputType, Int } from '@nestjs/graphql';
 
 import { EmailProvider } from '@/providers';
-import { UploadWithKeepCoreFilesArgs } from '@/core/files/helpers/upload/dto/upload.obj';
+import { UploadWithKeepCoreFilesArgs } from '@/core/files/helpers/upload/dto/upload.args';
 
 @InputType()
 export class SMTPEditAdminEmailSettingsService {
