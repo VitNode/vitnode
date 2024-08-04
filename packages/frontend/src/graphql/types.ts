@@ -126,11 +126,11 @@ export type ContentShowAdminGroups = {
 
 export type EditAdminMembersObj = {
   __typename?: 'EditAdminMembersObj';
-  birthday: Scalars['DateTime']['output'];
+  birthday?: Maybe<Scalars['DateTime']['output']>;
   email: Scalars['String']['output'];
-  first_name: Scalars['String']['output'];
+  first_name?: Maybe<Scalars['String']['output']>;
   id: Scalars['Int']['output'];
-  last_name: Scalars['String']['output'];
+  last_name?: Maybe<Scalars['String']['output']>;
   name: Scalars['String']['output'];
   newsletter: Scalars['Boolean']['output'];
 };
@@ -148,6 +148,13 @@ export type EditorShowCoreMiddleware = {
   sticky: Scalars['Boolean']['output'];
 };
 
+export const EmailProvider = {
+  none: 'none',
+  resend: 'resend',
+  smtp: 'smtp'
+} as const;
+
+export type EmailProvider = typeof EmailProvider[keyof typeof EmailProvider];
 export type FileEditAdminThemeEditor = {
   file?: InputMaybe<Scalars['Upload']['input']>;
   keep?: InputMaybe<Scalars['Boolean']['input']>;
@@ -182,7 +189,7 @@ export type FilesEditorShowCoreMiddleware = {
 
 export type GroupUser = {
   __typename?: 'GroupUser';
-  color: Scalars['String']['output'];
+  color?: Maybe<Scalars['String']['output']>;
   id: Scalars['Int']['output'];
   name: Array<TextLanguage>;
 };
@@ -282,7 +289,7 @@ export type Mutation = {
   core_editor_files__upload: ShowCoreFiles;
   core_members__avatar__delete: Scalars['String']['output'];
   core_members__avatar__upload: UploadAvatarCoreMembersObj;
-  core_members__change_password: User;
+  core_members__change_password: Scalars['String']['output'];
   core_members__delete: Scalars['String']['output'];
   core_members__reset_password__create_key: Scalars['String']['output'];
   core_sessions__sign_in: Scalars['String']['output'];
@@ -294,11 +301,9 @@ export type Mutation = {
 export type MutationAdmin__Core_Email_Settings__EditArgs = {
   color_primary: Scalars['String']['input'];
   color_primary_foreground: Scalars['String']['input'];
-  smtp_host: Scalars['String']['input'];
-  smtp_password: Scalars['String']['input'];
-  smtp_port: Scalars['Int']['input'];
-  smtp_secure: Scalars['Boolean']['input'];
-  smtp_user: Scalars['String']['input'];
+  provider: EmailProvider;
+  resend_key?: InputMaybe<Scalars['String']['input']>;
+  smtp?: InputMaybe<SmtpEditAdminEmailSettingsService>;
 };
 
 
@@ -392,11 +397,11 @@ export type MutationAdmin__Core_Manifest_Metadata__EditArgs = {
 
 
 export type MutationAdmin__Core_Members__EditArgs = {
-  birthday: Scalars['DateTime']['input'];
+  birthday?: InputMaybe<Scalars['DateTime']['input']>;
   email: Scalars['String']['input'];
-  first_name: Scalars['String']['input'];
+  first_name?: InputMaybe<Scalars['String']['input']>;
   id: Scalars['Int']['input'];
-  last_name: Scalars['String']['input'];
+  last_name?: InputMaybe<Scalars['String']['input']>;
   name: Scalars['String']['input'];
   newsletter: Scalars['Boolean']['input'];
 };
@@ -761,6 +766,14 @@ export type RebuildRequiredEditorShowCoreMiddleware = {
   plugins: Scalars['Boolean']['output'];
 };
 
+export type SmtpEditAdminEmailSettingsService = {
+  host: Scalars['String']['input'];
+  password: Scalars['String']['input'];
+  port: Scalars['Int']['input'];
+  secure: Scalars['Boolean']['input'];
+  user: Scalars['String']['input'];
+};
+
 export type SearchAdminSessionsObj = {
   __typename?: 'SearchAdminSessionsObj';
   nav: Array<NavSearchAdminSessions>;
@@ -781,10 +794,12 @@ export type ShowAdminCaptchaSecurityObj = {
 export type ShowAdminEmailSettingsServiceObj = {
   __typename?: 'ShowAdminEmailSettingsServiceObj';
   color_primary: Scalars['String']['output'];
-  smtp_host: Scalars['String']['output'];
-  smtp_port: Scalars['Int']['output'];
-  smtp_secure: Scalars['Boolean']['output'];
-  smtp_user: Scalars['String']['output'];
+  provider: EmailProvider | `${EmailProvider}`;
+  resend_key?: Maybe<Scalars['String']['output']>;
+  smtp_host?: Maybe<Scalars['String']['output']>;
+  smtp_port?: Maybe<Scalars['Int']['output']>;
+  smtp_secure?: Maybe<Scalars['Boolean']['output']>;
+  smtp_user?: Maybe<Scalars['String']['output']>;
 };
 
 export type ShowAdminFiles = {
@@ -813,7 +828,7 @@ export type ShowAdminFilesObj = {
 
 export type ShowAdminGroups = {
   __typename?: 'ShowAdminGroups';
-  color: Scalars['String']['output'];
+  color?: Maybe<Scalars['String']['output']>;
   content: ContentShowAdminGroups;
   created: Scalars['DateTime']['output'];
   default: Scalars['Boolean']['output'];
@@ -1195,7 +1210,7 @@ export const SortDirectionEnum = {
 export type SortDirectionEnum = typeof SortDirectionEnum[keyof typeof SortDirectionEnum];
 export type StaffGroupUser = {
   __typename?: 'StaffGroupUser';
-  color: Scalars['String']['output'];
+  color?: Maybe<Scalars['String']['output']>;
   group_name: Array<TextLanguage>;
   id: Scalars['Int']['output'];
 };

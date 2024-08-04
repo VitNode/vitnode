@@ -1,21 +1,35 @@
-import { ArgsType, Field, Int } from '@nestjs/graphql';
+import { ArgsType, Field, InputType, Int } from '@nestjs/graphql';
+
+import { EmailProvider } from '@/providers';
+
+@InputType()
+export class SMTPEditAdminEmailSettingsService {
+  @Field(() => String)
+  host: string;
+
+  @Field(() => String)
+  user: string;
+
+  @Field(() => String)
+  password: string;
+
+  @Field(() => Int)
+  port: number;
+
+  @Field(() => Boolean)
+  secure: boolean;
+}
 
 @ArgsType()
 export class EditAdminEmailSettingsServiceArgs {
-  @Field(() => String)
-  smtp_host: string;
+  @Field(() => EmailProvider)
+  provider: EmailProvider;
 
-  @Field(() => String)
-  smtp_user: string;
+  @Field(() => SMTPEditAdminEmailSettingsService, { nullable: true })
+  smtp?: SMTPEditAdminEmailSettingsService;
 
-  @Field(() => String)
-  smtp_password: string;
-
-  @Field(() => Int)
-  smtp_port: number;
-
-  @Field(() => Boolean)
-  smtp_secure: boolean;
+  @Field(() => String, { nullable: true })
+  resend_key?: string;
 
   @Field(() => String)
   color_primary: string;

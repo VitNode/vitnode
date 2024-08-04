@@ -5,20 +5,29 @@ import { Injectable } from '@nestjs/common';
 import { ShowAdminEmailSettingsServiceObj } from '../show/dto/show.obj';
 import { EditAdminEmailSettingsServiceArgs } from './dto/edit.args';
 
-import { HelpersAdminEmailSettingsService } from '../../helpers.service';
-import { ConfigType, configPath, getConfigFile } from '@/providers/config';
+import {
+  EmailCredentialsFile,
+  HelpersAdminEmailSettingsService,
+} from '../../helpers.service';
+import {
+  ConfigType,
+  EmailProvider,
+  configPath,
+  getConfigFile,
+} from '@/providers/config';
+import { InternalServerError, NotFoundError } from '@/errors';
 
 @Injectable()
 export class EditAdminEmailSettingsService extends HelpersAdminEmailSettingsService {
   edit({
-    smtp_host,
-    smtp_password,
-    smtp_port,
-    smtp_secure,
-    smtp_user,
+    smtp,
     color_primary,
     color_primary_foreground,
+    provider,
+    resend_key,
   }: EditAdminEmailSettingsServiceArgs): ShowAdminEmailSettingsServiceObj {
+    const emailCredentials = this.getEmailCredentials();
+
     // Update settings
     const configSettings = getConfigFile();
     const newData: ConfigType = {
@@ -26,6 +35,7 @@ export class EditAdminEmailSettingsService extends HelpersAdminEmailSettingsServ
       settings: {
         ...configSettings.settings,
         email: {
+          provider,
           color_primary,
           color_primary_foreground,
         },
@@ -33,19 +43,53 @@ export class EditAdminEmailSettingsService extends HelpersAdminEmailSettingsServ
     };
     fs.writeFileSync(configPath, JSON.stringify(newData, null, 2), 'utf8');
 
-    const smtpData = {
-      smtp_host,
-      smtp_password,
-      smtp_port,
-      smtp_secure,
-      smtp_user,
-    };
+    // Remove email.config.json if provider is none
+    if (provider === EmailProvider.none && fs.existsSync(this.path)) {
+      fs.unlinkSync(this.path);
 
-    fs.writeFileSync(this.path, JSON.stringify(smtpData, null, 2));
+      return {
+        ...emailCredentials,
+        color_primary,
+      };
+    }
 
-    return {
-      ...smtpData,
-      color_primary,
-    };
+    if (provider === EmailProvider.smtp) {
+      if (!smtp?.host || !smtp.user || !smtp.port) {
+        throw new NotFoundError('SMTP data');
+      }
+
+      const updateData: Partial<EmailCredentialsFile> = {
+        smtp_host: smtp.host,
+        smtp_user: smtp.user,
+        smtp_password: smtp.password || emailCredentials.smtp_password,
+        smtp_port: smtp.port,
+        smtp_secure: smtp.secure,
+      };
+
+      fs.writeFileSync(this.path, JSON.stringify(updateData, null, 2));
+
+      return {
+        ...emailCredentials,
+        ...updateData,
+        color_primary,
+      };
+    }
+
+    if (provider === EmailProvider.resend) {
+      const updateData: Partial<EmailCredentialsFile> = {
+        resend_key: resend_key || emailCredentials.resend_key,
+      };
+
+      fs.writeFileSync(this.path, JSON.stringify(updateData, null, 2));
+
+      return {
+        ...emailCredentials,
+        ...updateData,
+        color_primary,
+      };
+    }
+
+    // Still here? Something went wrong
+    throw new InternalServerError();
   }
 }

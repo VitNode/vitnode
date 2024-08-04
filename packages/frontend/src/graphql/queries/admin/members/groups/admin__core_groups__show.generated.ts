@@ -10,7 +10,7 @@ export type Admin__Core_Groups__ShowQueryVariables = Types.Exact<{
 }>;
 
 
-export type Admin__Core_Groups__ShowQuery = { __typename?: 'Query', admin__core_groups__show: { __typename?: 'ShowAdminGroupsObj', pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number, hasNextPage: boolean, startCursor?: number, totalCount: number, hasPreviousPage: boolean }, edges: Array<{ __typename?: 'ShowAdminGroups', created: Date, updated: Date, id: number, users_count: number, protected: boolean, guest: boolean, root: boolean, default: boolean, color: string, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, content: { __typename?: 'ContentShowAdminGroups', files_allow_upload: boolean, files_max_storage_for_submit: number, files_total_max_storage: number } }> } };
+export type Admin__Core_Groups__ShowQuery = { __typename?: 'Query', admin__core_groups__show: { __typename?: 'ShowAdminGroupsObj', pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number, hasNextPage: boolean, startCursor?: number, totalCount: number, hasPreviousPage: boolean }, edges: Array<{ __typename?: 'ShowAdminGroups', created: Date, updated: Date, id: number, users_count: number, protected: boolean, guest: boolean, root: boolean, default: boolean, color?: string, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, content: { __typename?: 'ContentShowAdminGroups', files_allow_upload: boolean, files_max_storage_for_submit: number, files_total_max_storage: number } }> } };
 
 
 export const Admin__Core_Groups__Show = gql`

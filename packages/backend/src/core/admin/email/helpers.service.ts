@@ -1,11 +1,13 @@
 import { join } from 'path';
+import * as fs from 'fs';
 
 import { ShowAdminEmailSettingsServiceObj } from './settings/show/dto/show.obj';
 
-import { ABSOLUTE_PATHS_BACKEND } from '@/index';
+import { ABSOLUTE_PATHS_BACKEND, getConfigFile } from '@/index';
 
-export interface ShowAdminEmailSettingsServiceObjWithPassword
-  extends ShowAdminEmailSettingsServiceObj {
+export interface EmailCredentialsFile
+  extends Omit<ShowAdminEmailSettingsServiceObj, 'color_primary'> {
+  resend_key: string;
   smtp_password: string;
 }
 
@@ -15,4 +17,37 @@ export class HelpersAdminEmailSettingsService {
     'utils',
     'email.config.json',
   );
+
+  protected getEmailCredentials(): EmailCredentialsFile {
+    const config = getConfigFile();
+    const defaultEmailCredentials: EmailCredentialsFile = {
+      smtp_host: '',
+      smtp_port: 0,
+      smtp_secure: false,
+      smtp_user: '',
+      smtp_password: '',
+      resend_key: '',
+      provider: config.settings.email.provider,
+    };
+
+    const emailCredentials: EmailCredentialsFile = fs.existsSync(this.path)
+      ? JSON.parse(fs.readFileSync(this.path, 'utf-8'))
+      : defaultEmailCredentials;
+
+    return {
+      smtp_host:
+        emailCredentials.smtp_host || defaultEmailCredentials.smtp_host,
+      smtp_port:
+        emailCredentials.smtp_port || defaultEmailCredentials.smtp_port,
+      smtp_secure:
+        emailCredentials.smtp_secure || defaultEmailCredentials.smtp_secure,
+      smtp_user:
+        emailCredentials.smtp_user || defaultEmailCredentials.smtp_user,
+      smtp_password:
+        emailCredentials.smtp_password || defaultEmailCredentials.smtp_password,
+      resend_key:
+        emailCredentials.resend_key || defaultEmailCredentials.resend_key,
+      provider: defaultEmailCredentials.provider,
+    };
+  }
 }

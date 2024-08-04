@@ -7,11 +7,11 @@ import React from 'react';
 
 import {
   HelpersAdminEmailSettingsService,
-  ShowAdminEmailSettingsServiceObjWithPassword,
+  EmailCredentialsFile,
 } from './helpers.service';
 
 import { CustomError } from '../../../errors';
-import { getConfigFile } from '../../../providers/config';
+import { EmailProvider, getConfigFile } from '../../../providers/config';
 
 export interface SendMailServiceArgs {
   subject: string;
@@ -26,7 +26,11 @@ export class MailService extends HelpersAdminEmailSettingsService {
     return render(template);
   };
 
-  async sendMail({ to, subject, template }: SendMailServiceArgs) {
+  async sendMail({
+    to,
+    subject,
+    template,
+  }: SendMailServiceArgs): Promise<void> {
     if (!fs.existsSync(this.path)) {
       throw new CustomError({
         code: 'EMAIL_NOT_CONFIGURED',
@@ -37,32 +41,38 @@ export class MailService extends HelpersAdminEmailSettingsService {
 
     const html = this.generateEmail(template);
     const data = fs.readFileSync(this.path, 'utf-8');
-    const config: ShowAdminEmailSettingsServiceObjWithPassword =
-      JSON.parse(data);
+    const config: EmailCredentialsFile = JSON.parse(data);
     const configSettings = getConfigFile();
 
-    const transporter = nodemailer.createTransport(
-      {
-        host: config.smtp_host,
-        port: config.smtp_port,
-        secure: config.smtp_secure,
-        auth: {
-          user: config.smtp_user,
-          pass: config.smtp_password,
+    if (
+      configSettings.settings.email.provider === EmailProvider.smtp &&
+      config.smtp_host &&
+      config.smtp_user &&
+      config.smtp_port
+    ) {
+      const transporter = nodemailer.createTransport(
+        {
+          host: config.smtp_host,
+          port: config.smtp_port,
+          secure: config.smtp_secure || false,
+          auth: {
+            user: config.smtp_user,
+            pass: config.smtp_password,
+          },
         },
-      },
-      {
-        from: {
-          name: configSettings.settings.general.site_name,
-          address: 'aXenDeveloper@gmail.com',
+        {
+          from: {
+            name: configSettings.settings.general.site_name,
+            address: 'aXenDeveloper@gmail.com',
+          },
         },
-      },
-    );
+      );
 
-    await transporter.sendMail({
-      to,
-      subject,
-      html,
-    });
+      await transporter.sendMail({
+        to,
+        subject,
+        html,
+      });
+    }
   }
 }

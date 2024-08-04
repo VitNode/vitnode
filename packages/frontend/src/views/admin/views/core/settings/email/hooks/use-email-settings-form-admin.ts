@@ -37,7 +37,7 @@ export const useEmailSettingsFormAdmin = ({
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      provider: 'none',
+      provider: data.provider,
       smtp: {
         host: data.smtp_host || '',
         user: data.smtp_user || '',
@@ -45,7 +45,7 @@ export const useEmailSettingsFormAdmin = ({
         secure: data.smtp_secure || false,
         password: '', // Password is not fetched from the server,
       },
-      resend_key: '',
+      resend_key: '', // Resend key is not fetched from the server,
       color_primary: data.color_primary || 'hsl(0, 0, 0)',
     },
   });
@@ -55,11 +55,18 @@ export const useEmailSettingsFormAdmin = ({
     if (!primaryHSL) return;
 
     const mutation = await mutationApi({
-      smtpHost: values.smtp_host,
-      smtpUser: values.smtp_user,
-      smtpPort: values.smtp_port,
-      smtpSecure: values.smtp_secure,
-      smtpPassword: values.smtp_password,
+      provider: values.provider,
+      smtp:
+        values.provider === 'smtp'
+          ? {
+              host: values.smtp.host,
+              user: values.smtp.user,
+              port: values.smtp.port,
+              secure: values.smtp.secure,
+              password: values.smtp.password,
+            }
+          : undefined,
+      resendKey: values.provider === 'resend' ? values.resend_key : undefined,
       colorPrimary: values.color_primary,
       colorPrimaryForeground: `hsl(${isColorBrightness(primaryHSL) ? `${primaryHSL.h}, 40%, 2%` : `${primaryHSL.h}, 40%, 98%`})`,
     });

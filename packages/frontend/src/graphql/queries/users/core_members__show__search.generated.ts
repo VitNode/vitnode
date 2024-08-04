@@ -7,7 +7,7 @@ export type Core_Members__Show__SearchQueryVariables = Types.Exact<{
 }>;
 
 
-export type Core_Members__Show__SearchQuery = { __typename?: 'Query', core_members__show: { __typename?: 'ShowCoreMembersObj', edges: Array<{ __typename?: 'ShowCoreMembers', avatar_color: string, id: number, name: string, name_seo: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, file_name: string }, group: { __typename?: 'GroupUser', id: number, color: string, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } }> } };
+export type Core_Members__Show__SearchQuery = { __typename?: 'Query', core_members__show: { __typename?: 'ShowCoreMembersObj', edges: Array<{ __typename?: 'ShowCoreMembers', avatar_color: string, id: number, name: string, name_seo: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, file_name: string }, group: { __typename?: 'GroupUser', id: number, color?: string, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } }> } };
 
 
 export const Core_Members__Show__Search = gql`

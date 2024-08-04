@@ -2,6 +2,10 @@
 
 import { TestingActionEmailSettingsAdmin } from './testing/testing';
 
-export const ActionsEmailSettingsAdmin = () => {
-  return <TestingActionEmailSettingsAdmin />;
+export const ActionsEmailSettingsAdmin = ({
+  disabled,
+}: {
+  disabled: boolean;
+}) => {
+  return <TestingActionEmailSettingsAdmin disabled={disabled} />;
 };

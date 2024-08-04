@@ -12,13 +12,17 @@ const Content = React.lazy(async () =>
   })),
 );
 
-export const TestingActionEmailSettingsAdmin = () => {
+export const TestingActionEmailSettingsAdmin = ({
+  disabled,
+}: {
+  disabled: boolean;
+}) => {
   const t = useTranslations('admin.core.settings.email.test');
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">
+        <Button variant="outline" disabled={disabled}>
           <FlaskConical />
           {t('title')}
         </Button>
