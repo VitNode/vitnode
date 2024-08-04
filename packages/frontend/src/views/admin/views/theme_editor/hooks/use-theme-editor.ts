@@ -18,10 +18,10 @@ interface ColorObj {
 
 interface ThemeEditorFormObj {
   logos: {
-    dark: FilesInputValue[];
-    light: FilesInputValue[];
-    mobile_dark: FilesInputValue[];
-    mobile_light: FilesInputValue[];
+    dark: FilesInputValue | null;
+    light: FilesInputValue | null;
+    mobile_dark: FilesInputValue | null;
+    mobile_light: FilesInputValue | null;
     mobile_width: number;
     text: string;
     width: number;

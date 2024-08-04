@@ -48,7 +48,7 @@ export const UploadPluginAdmin = ({ data }: UploadPluginAdminProps) => {
 
           <DialogFooter>
             <Button
-              disabled={!form.watch('file').length}
+              disabled={!form.watch('file')}
               loading={form.formState.isSubmitting}
               type="submit"
             >

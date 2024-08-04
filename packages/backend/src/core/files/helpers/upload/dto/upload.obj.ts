@@ -1,6 +1,4 @@
-import { Field, InputType, Int, ObjectType } from '@nestjs/graphql';
-
-import { FileUpload, GraphQLUpload } from '@/graphql-upload';
+import { Field, Int, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
 export class UploadCoreFilesObj {
@@ -27,13 +25,4 @@ export class UploadCoreFilesObj {
 
   @Field(() => Int, { nullable: true })
   height: number | null;
-}
-
-@InputType()
-export class UploadWithKeepCoreFilesArgs {
-  @Field(() => GraphQLUpload, { nullable: true })
-  file?: Promise<FileUpload>;
-
-  @Field(() => Boolean)
-  keep: boolean;
 }

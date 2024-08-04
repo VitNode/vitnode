@@ -50,8 +50,8 @@ export class UploadWithKeepCoreFilesArgs {
   @Field(() => GraphQLUpload, { nullable: true })
   file?: Promise<FileUpload>;
 
-  @Field(() => Boolean)
-  keep: boolean;
+  @Field(() => Boolean, { nullable: true })
+  keep?: boolean;
 }
 ```
 
@@ -184,11 +184,24 @@ export class ExampleService {
 
 ```ts title="use-example.ts"
 import * as z from 'zod';
-import { zodFiles } from 'vitnode-frontend/helpers/zod';
+import { zodFile } from 'vitnode-frontend/helpers/zod';
 
 export const useExample = () => {
   const formSchema = z.object({
-    file: zodFiles, // [!code highlight]
+    file: zodFile, // [!code highlight]
+  });
+};
+```
+
+For array of files:
+
+```ts title="use-example.ts"
+import * as z from 'zod';
+import { zodFile } from 'vitnode-frontend/helpers/zod';
+
+export const useExample = () => {
+  const formSchema = z.object({
+    file: z.array(zodFile), // [!code highlight]
   });
 };
 ```
@@ -207,7 +220,29 @@ import mutationApi from './mutation-api';
 export const useExample = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const formData = new FormData();
-    formData.append('file', values.file[0]); // [!code highlight]
+    if (values.file instanceof File) {
+      formData.append('file', values.file); // [!code highlight]
+    }
+    const mutation = await mutationApi(formData);
+  };
+};
+```
+
+If you have [File Upload Optional Arguments](/docs/dev/files#file-upload-optional-arguments) then your formData should look like this:
+
+```ts title="use-example.ts"
+import mutationApi from './mutation-api';
+
+export const useExample = () => {
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    const formData = new FormData();
+    if (values.file) {
+      if (values.file instanceof File) {
+        formData.append('file.file', values.file); // [!code highlight]
+      } else {
+        formData.append('file.keep', 'true'); // [!code highlight]
+      }
+    }
     const mutation = await mutationApi(formData);
   };
 };

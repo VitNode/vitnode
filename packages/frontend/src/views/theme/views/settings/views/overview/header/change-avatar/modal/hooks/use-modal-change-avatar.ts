@@ -7,7 +7,7 @@ import { mutationApi } from './mutation-api';
 import { useDialog } from '@/components/ui/dialog';
 
 interface FormType {
-  file: File[];
+  file: File | null;
   type: 'delete' | 'upload';
 }
 
@@ -19,7 +19,7 @@ export const useModalChangeAvatar = () => {
   const form = useForm<FormType>({
     defaultValues: {
       type: 'upload',
-      file: [],
+      file: null,
     },
     mode: 'onChange',
   });
