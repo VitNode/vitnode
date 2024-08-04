@@ -34,6 +34,6 @@ export class UploadWithKeepCoreFilesArgs {
   @Field(() => GraphQLUpload, { nullable: true })
   file?: Promise<FileUpload>;
 
-  @Field(() => Boolean)
-  keep: boolean;
+  @Field(() => Boolean, { nullable: true })
+  keep?: boolean;
 }

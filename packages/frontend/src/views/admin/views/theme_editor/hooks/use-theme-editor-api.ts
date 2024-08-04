@@ -9,7 +9,7 @@ import { useTranslations } from 'next-intl';
 import { mutationApi } from './mutation-api';
 import { useRouter } from '@/navigation';
 import { CONFIG } from '@/helpers/config-with-env';
-import { zodFiles } from '@/helpers/zod';
+import { zodFile } from '@/helpers/zod';
 import { Core_Theme_Editor__ShowQuery } from '@/graphql/queries/admin/theme_editor/core_theme_editor__show.generated';
 import { HslColor } from '@/graphql/types';
 
@@ -69,11 +69,11 @@ export const useThemeEditorApi = ({
   const formSchema = z.object({
     colors: formSchemaColorsThemeEditor.optional(),
     logos: z.object({
-      light: zodFiles,
-      dark: zodFiles,
+      light: zodFile.nullable(),
+      dark: zodFile.nullable(),
       width: z.number(),
-      mobile_light: zodFiles,
-      mobile_dark: zodFiles,
+      mobile_light: zodFile.nullable(),
+      mobile_dark: zodFile.nullable(),
       mobile_width: z.number(),
       text: z.string().min(1).max(100),
     }),
@@ -99,19 +99,11 @@ export const useThemeEditorApi = ({
         ['muted-foreground']: core_theme_editor__show.colors?.muted_foreground,
       },
       logos: {
-        light: core_theme_editor__show.logos.light
-          ? [core_theme_editor__show.logos.light]
-          : [],
-        dark: core_theme_editor__show.logos.dark
-          ? [core_theme_editor__show.logos.dark]
-          : [],
+        light: core_theme_editor__show.logos.light,
+        dark: core_theme_editor__show.logos.dark,
         width: core_theme_editor__show.logos.width,
-        mobile_light: core_theme_editor__show.logos.mobile_light
-          ? [core_theme_editor__show.logos.mobile_light]
-          : [],
-        mobile_dark: core_theme_editor__show.logos.mobile_dark
-          ? [core_theme_editor__show.logos.mobile_dark]
-          : [],
+        mobile_light: core_theme_editor__show.logos.mobile_light,
+        mobile_dark: core_theme_editor__show.logos.mobile_dark,
         mobile_width: core_theme_editor__show.logos.mobile_width,
         text: core_theme_editor__show.logos.text,
       },
@@ -166,12 +158,12 @@ export const useThemeEditorApi = ({
     formData.append('logos.width', values.logos.width.toString());
     formData.append('logos.mobile_width', values.logos.mobile_width.toString());
     ['dark', 'light', 'mobile_dark', 'mobile_light'].forEach(el => {
-      if (values.logos[el].length > 0) {
-        if (values.logos[el][0] instanceof File) {
-          formData.append(`logos.${el}.file`, values.logos[el][0]);
-        } else {
-          formData.append(`logos.${el}.keep`, 'true');
-        }
+      if (!values.logos) return;
+
+      if (values.logos[el] instanceof File) {
+        formData.append(`logos.${el}.file`, values.logos[el]);
+      } else {
+        formData.append(`logos.${el}.keep`, 'true');
       }
     });
 

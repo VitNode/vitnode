@@ -42,7 +42,7 @@ export const ContentUpdateActionsTableLangsCoreAdmin = ({
 
           <DialogFooter>
             <Button
-              disabled={!form.watch('file').length}
+              disabled={!form.watch('file')}
               loading={form.formState.isSubmitting}
               type="submit"
             >

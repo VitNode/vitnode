@@ -9,19 +9,32 @@ import { cn } from '@/helpers/classnames';
 
 import { acceptMimeTypeImage } from '../../../helpers/files-support';
 
+interface Props {
+  file: FilesInputValue;
+  index: number;
+  showInfo?: boolean;
+}
+
+interface WithMultiple extends Props {
+  multiple: true;
+  onChange: (e: FilesInputValue[]) => void;
+  value: FilesInputValue[];
+}
+
+interface WithoutMultiple extends Props {
+  onChange: (e: FilesInputValue | null) => void;
+  value: FilesInputValue | null;
+  multiple?: false;
+}
+
 export const ItemPreviewFilesInput = ({
   file,
   index,
   onChange,
   value,
   showInfo,
-}: {
-  file: FilesInputValue;
-  index: number;
-  onChange: (e: FilesInputValue[]) => void;
-  value: FilesInputValue[] | undefined;
-  showInfo?: boolean;
-}) => {
+  multiple,
+}: WithMultiple | WithoutMultiple) => {
   const t = useTranslations('core');
 
   const size = React.useMemo(() => {
@@ -39,7 +52,13 @@ export const ItemPreviewFilesInput = ({
   const handleRemoveFile = () => {
     if (!value) return;
 
-    onChange(value.filter((_, i) => i !== index));
+    if (multiple) {
+      onChange(value.filter((_, i) => i !== index));
+
+      return;
+    }
+
+    onChange(null);
   };
 
   return (

@@ -8,7 +8,7 @@ import { mutationApi } from './mutation-api';
 import { Admin__Core_Email_Settings__ShowQuery } from '@/graphql/queries/admin/settings/admin__core_email_settings__show.generated';
 import { getHSLFromString, isColorBrightness } from '@/helpers/colors';
 import { EmailProvider } from '@/graphql/types';
-import { zodFiles } from '@/helpers/zod';
+import { zodFile } from '@/helpers/zod';
 
 export const useEmailSettingsFormAdmin = ({
   admin__core_email_settings__show: data,
@@ -17,7 +17,7 @@ export const useEmailSettingsFormAdmin = ({
 
   const formSchema = z
     .object({
-      logo: zodFiles,
+      logo: zodFile,
       provider: z.nativeEnum(EmailProvider),
       smtp: z.object({
         host: z.string(),
@@ -40,7 +40,7 @@ export const useEmailSettingsFormAdmin = ({
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      logo: data.logo ? [data.logo] : [],
+      logo: data.logo,
       provider: data.provider,
       smtp: {
         host: data.smtp_host || '',
