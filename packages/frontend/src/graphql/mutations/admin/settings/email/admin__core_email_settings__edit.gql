@@ -1,21 +1,21 @@
 mutation Admin__core_email_settings__edit(
-  $smtpHost: String!
-  $smtpPassword: String!
-  $smtpPort: Int!
-  $smtpSecure: Boolean!
-  $smtpUser: String!
-  $colorPrimaryForeground: String!
   $colorPrimary: String!
+  $colorPrimaryForeground: String!
+  $provider: EmailProvider!
+  $resendKey: String
+  $smtp: SMTPEditAdminEmailSettingsService
 ) {
   admin__core_email_settings__edit(
-    smtp_host: $smtpHost
-    smtp_password: $smtpPassword
-    smtp_port: $smtpPort
-    smtp_secure: $smtpSecure
-    smtp_user: $smtpUser
-    color_primary_foreground: $colorPrimaryForeground
     color_primary: $colorPrimary
+    color_primary_foreground: $colorPrimaryForeground
+    provider: $provider
+    resend_key: $resendKey
+    smtp: $smtp
   ) {
+    color_primary
     smtp_host
+    smtp_port
+    smtp_secure
+    smtp_user
   }
 }

@@ -18,6 +18,12 @@ export enum CaptchaTypeEnum {
   cloudflare_turnstile = 'cloudflare_turnstile',
 }
 
+export enum EmailProvider {
+  none = 'none',
+  smtp = 'smtp',
+  resend = 'resend',
+}
+
 export interface ConfigType {
   editor: {
     files: {
@@ -53,6 +59,7 @@ export interface ConfigType {
     email: {
       color_primary: string;
       color_primary_foreground: string;
+      provider: EmailProvider;
     };
     general: {
       site_name: string;
@@ -89,6 +96,7 @@ export const DEFAULT_CONFIG_DATA: ConfigType = {
       site_short_name: 'VitNode',
     },
     email: {
+      provider: EmailProvider.none,
       color_primary: 'hsl(220, 74%, 50%)',
       color_primary_foreground: 'hsl(210, 40%, 98%)',
     },

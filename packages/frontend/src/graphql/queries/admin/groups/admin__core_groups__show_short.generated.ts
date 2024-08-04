@@ -7,7 +7,7 @@ export type Admin__Core_Groups__Show_ShortQueryVariables = Types.Exact<{
 }>;
 
 
-export type Admin__Core_Groups__Show_ShortQuery = { __typename?: 'Query', admin__core_groups__show: { __typename?: 'ShowAdminGroupsObj', edges: Array<{ __typename?: 'ShowAdminGroups', id: number, guest: boolean, color: string, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }> } };
+export type Admin__Core_Groups__Show_ShortQuery = { __typename?: 'Query', admin__core_groups__show: { __typename?: 'ShowAdminGroupsObj', edges: Array<{ __typename?: 'ShowAdminGroups', id: number, guest: boolean, color?: string, name: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }> } };
 
 
 export const Admin__Core_Groups__Show_Short = gql`

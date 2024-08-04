@@ -4,7 +4,7 @@ import gql from 'graphql-tag';
 export type Admin__Core_Email_Settings__ShowQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
 
-export type Admin__Core_Email_Settings__ShowQuery = { __typename?: 'Query', admin__core_email_settings__show: { __typename?: 'ShowAdminEmailSettingsServiceObj', smtp_host: string, smtp_port: number, smtp_secure: boolean, smtp_user: string, color_primary: string } };
+export type Admin__Core_Email_Settings__ShowQuery = { __typename?: 'Query', admin__core_email_settings__show: { __typename?: 'ShowAdminEmailSettingsServiceObj', smtp_host?: string, smtp_port?: number, smtp_secure?: boolean, smtp_user?: string, color_primary: string, provider: Types.EmailProvider, resend_key?: string } };
 
 
 export const Admin__Core_Email_Settings__Show = gql`
@@ -15,6 +15,8 @@ export const Admin__Core_Email_Settings__Show = gql`
     smtp_secure
     smtp_user
     color_primary
+    provider
+    resend_key
   }
 }
     `;

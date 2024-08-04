@@ -72,7 +72,7 @@ export const ColorPicker = ({
 
             onChange(color ? `hsl(${color.h}, ${color.s}%, ${color.l}%)` : '');
           }}
-          value={value ? convertColor.hslToHex(value) : ''}
+          value={value ? `#${convertColor.hslToHex(value)}` : ''}
           disabled={disabled}
         />
         <span

@@ -11,6 +11,7 @@ import {
   Admin__Core_Email_Settings__ShowQuery,
   Admin__Core_Email_Settings__ShowQueryVariables,
 } from '@/graphql/queries/admin/settings/admin__core_email_settings__show.generated';
+import { EmailProvider } from '@/graphql/types';
 
 const getData = async () => {
   const data = await fetcher<
@@ -41,9 +42,12 @@ export const EmailSettingsAdminView = async () => {
   return (
     <>
       <HeaderContent h1={t('settings_email')}>
-        {data.admin__core_email_settings__show.smtp_host && (
-          <ActionsEmailSettingsAdmin />
-        )}
+        <ActionsEmailSettingsAdmin
+          disabled={
+            data.admin__core_email_settings__show.provider ===
+            EmailProvider.none
+          }
+        />
       </HeaderContent>
 
       <Card className="p-6">

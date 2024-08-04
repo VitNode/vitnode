@@ -11,7 +11,7 @@ const RadioGroup: React.FC<
 > = ({ className, ...props }) => {
   return (
     <RadioGroupPrimitive.Root
-      className={cn('grid gap-4', className)}
+      className={cn('grid gap-3', className)}
       {...props}
     />
   );

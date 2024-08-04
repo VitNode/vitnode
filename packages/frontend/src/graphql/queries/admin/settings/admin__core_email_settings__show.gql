@@ -5,5 +5,7 @@ query Admin__core_email_settings__show {
     smtp_secure
     smtp_user
     color_primary
+    provider
+    resend_key
   }
 }
