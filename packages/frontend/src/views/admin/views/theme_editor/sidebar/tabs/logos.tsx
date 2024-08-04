@@ -9,7 +9,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { FilesInput } from '@/components/ui/files-input';
+import { FileInput } from '@/components/ui/file-input';
 import { Separator } from '@/components/ui/separator';
 import { Slider } from '@/components/ui/slider';
 import { Input } from '@/components/ui/input';
@@ -180,7 +180,7 @@ export const LogosTabThemeEditor = () => {
             <FormItem>
               <FormLabel>{t('light')}</FormLabel>
               <FormControl>
-                <FilesInput
+                <FileInput
                   id="logos.light"
                   {...field}
                   onChange={e => {
@@ -204,7 +204,7 @@ export const LogosTabThemeEditor = () => {
             <FormItem>
               <FormLabel>{t('dark')}</FormLabel>
               <FormControl>
-                <FilesInput
+                <FileInput
                   id="logos.dark"
                   {...field}
                   onChange={e => {
@@ -264,7 +264,7 @@ export const LogosTabThemeEditor = () => {
             <FormItem>
               <FormLabel>{t('mobile_light')}</FormLabel>
               <FormControl>
-                <FilesInput
+                <FileInput
                   id="logos.mobile_light"
                   {...field}
                   onChange={e => {
@@ -288,7 +288,7 @@ export const LogosTabThemeEditor = () => {
             <FormItem>
               <FormLabel>{t('mobile_dark')}</FormLabel>
               <FormControl>
-                <FilesInput
+                <FileInput
                   id="logos.mobile_dark"
                   {...field}
                   onChange={e => {

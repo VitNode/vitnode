@@ -79,6 +79,7 @@
             "resend": "Resend Email",
             "resend_desc": "Read more on <link>Resend Email</link>."
           },
+          "logo": "Logo",
           "resend_key": "Resend Key",
           "smtp_host": "SMTP Host",
           "smtp_user": "SMTP User",

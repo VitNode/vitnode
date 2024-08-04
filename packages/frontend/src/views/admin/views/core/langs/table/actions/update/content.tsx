@@ -7,7 +7,7 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { Form, FormField } from '@/components/ui/form';
-import { FilesInput } from '@/components/ui/files-input';
+import { FileInput } from '@/components/ui/file-input';
 import { Button } from '@/components/ui/button';
 import { ShowCoreLanguages } from '@/graphql/types';
 
@@ -30,7 +30,7 @@ export const ContentUpdateActionsTableLangsCoreAdmin = ({
             control={form.control}
             name="file"
             render={({ field }) => (
-              <FilesInput
+              <FileInput
                 className="mt-5"
                 id="theme"
                 {...field}

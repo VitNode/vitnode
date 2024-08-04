@@ -13,7 +13,7 @@ import { Loader } from '@/components/ui/loader';
 import { Form, FormField } from '@/components/ui/form';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
-import { FilesInput } from '@/components/ui/files-input';
+import { FileInput } from '@/components/ui/file-input';
 import { Button } from '@/components/ui/button';
 
 const CropperModalChangeAvatar = React.lazy(async () =>
@@ -81,7 +81,7 @@ export const ModalChangeAvatar = () => {
                   control={form.control}
                   name="file"
                   render={({ field }) => (
-                    <FilesInput
+                    <FileInput
                       id="picture"
                       {...field}
                       acceptExtensions={['png', 'jpg', 'jpeg']}

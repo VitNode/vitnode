@@ -7,6 +7,8 @@ import { useTranslations } from 'next-intl';
 import { mutationApi } from './mutation-api';
 import { Admin__Core_Email_Settings__ShowQuery } from '@/graphql/queries/admin/settings/admin__core_email_settings__show.generated';
 import { getHSLFromString, isColorBrightness } from '@/helpers/colors';
+import { EmailProvider } from '@/graphql/types';
+import { zodFiles } from '@/helpers/zod';
 
 export const useEmailSettingsFormAdmin = ({
   admin__core_email_settings__show: data,
@@ -15,7 +17,8 @@ export const useEmailSettingsFormAdmin = ({
 
   const formSchema = z
     .object({
-      provider: z.enum(['none', 'smtp', 'resend']),
+      logo: zodFiles,
+      provider: z.nativeEnum(EmailProvider),
       smtp: z.object({
         host: z.string(),
         user: z.string(),

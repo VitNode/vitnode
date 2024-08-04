@@ -10,7 +10,7 @@ import { Badge } from '../badge';
 import { cn } from '../../../helpers/classnames';
 
 const UserInputContent = React.lazy(async () =>
-  import('../../../utils/components/user/user-input/content').then(module => ({
+  import('../../utils/user/user-input/content').then(module => ({
     default: module.UserInputContent,
   })),
 );

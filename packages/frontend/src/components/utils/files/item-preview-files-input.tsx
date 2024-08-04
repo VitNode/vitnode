@@ -3,8 +3,9 @@ import { Trash2 } from 'lucide-react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
-import { FilesInputValue } from '@/components/ui/files-input';
 import { CONFIG } from '@/helpers/config-with-env';
+import { FilesInputValue } from '@/components/ui/file-input';
+import { cn } from '@/helpers/classnames';
 
 import { acceptMimeTypeImage } from '../../../helpers/files-support';
 
@@ -13,11 +14,13 @@ export const ItemPreviewFilesInput = ({
   index,
   onChange,
   value,
+  showInfo,
 }: {
   file: FilesInputValue;
   index: number;
   onChange: (e: FilesInputValue[]) => void;
   value: FilesInputValue[] | undefined;
+  showInfo?: boolean;
 }) => {
   const t = useTranslations('core');
 
@@ -40,18 +43,30 @@ export const ItemPreviewFilesInput = ({
   };
 
   return (
-    <li className="border-input bg-background relative flex items-start gap-2 rounded-md border p-2">
+    <li
+      className={cn(
+        'border-input bg-background relative flex items-start gap-2 rounded-md border p-2',
+        {
+          'p-4': showInfo,
+        },
+      )}
+    >
       {acceptMimeTypeImage.includes(
         file instanceof File ? file.type : file.mimetype,
       ) && (
-        <div className="relative size-10 shrink-0 rounded-sm">
+        <div
+          className={cn('relative shrink-0 rounded-sm', {
+            'h-12 w-24': showInfo,
+            'size-10': !showInfo,
+          })}
+        >
           <Image
             src={
               file instanceof File
                 ? URL.createObjectURL(file)
                 : `${CONFIG.backend_public_url}/${file.dir_folder}/${file.file_name}`
             }
-            className="object-cover"
+            className="object-contain"
             alt={file instanceof File ? file.name : file.file_name_original}
             sizes="100px"
             fill
@@ -66,7 +81,12 @@ export const ItemPreviewFilesInput = ({
       </div>
       <button
         type="button"
-        className="ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground ml-auto flex size-7 flex-shrink-0 items-center justify-center rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none"
+        className={cn(
+          'ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground ml-auto flex size-7 flex-shrink-0 items-center justify-center rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none',
+          {
+            'size-8': showInfo,
+          },
+        )}
         onClick={handleRemoveFile}
       >
         <Trash2 className="size-4" />

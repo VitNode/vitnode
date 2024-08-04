@@ -4,10 +4,10 @@ import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 
 import { UploadCoreFilesObj } from '@/graphql/types';
+import { PreviewFilesInput } from '../utils/files/preview-files-input';
 
 import { useMergeRefs } from '../../helpers/use-merge-refs';
 import { cn } from '../../helpers/classnames';
-import { PreviewFilesInput } from '../../utils/components/files/preview-files-input';
 
 export type FilesInputValue = File | UploadCoreFilesObj;
 
@@ -24,7 +24,7 @@ export interface FilesInputInputProps
   showInfo?: boolean;
 }
 
-export const FilesInput = ({
+export const FileInput = ({
   acceptExtensions,
   className,
   disabled,
@@ -79,7 +79,7 @@ export const FilesInput = ({
   };
 
   return (
-    <div className="@container">
+    <div className="@container flex-1">
       {((stateValue && stateValue.length === 0 && !multiple) || multiple) && (
         <div
           className={cn(
@@ -156,7 +156,11 @@ export const FilesInput = ({
         </div>
       )}
 
-      <PreviewFilesInput value={stateValue} onChange={onChange} />
+      <PreviewFilesInput
+        value={stateValue}
+        onChange={onChange}
+        showInfo={showInfo}
+      />
     </div>
   );
 };

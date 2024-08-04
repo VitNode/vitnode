@@ -1,12 +1,14 @@
-import { FilesInputValue } from '@/components/ui/files-input';
 import { ItemPreviewFilesInput } from './item-preview-files-input';
+import { FilesInputValue } from '@/components/ui/file-input';
 
 export const PreviewFilesInput = ({
   onChange,
   value,
+  showInfo,
 }: {
   onChange: (e: FilesInputValue[]) => void;
   value: FilesInputValue[] | undefined;
+  showInfo?: boolean;
 }) => {
   if (!value || value.length === 0) return null;
 
@@ -23,6 +25,7 @@ export const PreviewFilesInput = ({
           file={file}
           value={value}
           index={index}
+          showInfo={showInfo}
         />
       ))}
     </ul>
