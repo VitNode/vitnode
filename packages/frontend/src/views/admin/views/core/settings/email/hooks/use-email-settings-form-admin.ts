@@ -13,23 +13,39 @@ export const useEmailSettingsFormAdmin = ({
 }: Admin__Core_Email_Settings__ShowQuery) => {
   const t = useTranslations('core');
 
-  const formSchema = z.object({
-    smtp_host: z.string().min(1),
-    smtp_user: z.string().min(1),
-    smtp_port: z.number().int().min(1).max(999),
-    smtp_secure: z.boolean(),
-    smtp_password: z.string(),
-    color_primary: z.string(),
-  });
+  const formSchema = z
+    .object({
+      provider: z.enum(['none', 'smtp', 'resend']),
+      smtp: z.object({
+        host: z.string(),
+        user: z.string(),
+        port: z.number().int().min(1).max(999),
+        secure: z.boolean(),
+        password: z.string(),
+      }),
+      resend_key: z.string(),
+      color_primary: z.string(),
+    })
+    .refine(input => {
+      if (input.provider === 'smtp') {
+        return input.smtp.host !== '' && input.smtp.user !== '';
+      }
+
+      return true;
+    });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      smtp_host: data.smtp_host || '',
-      smtp_user: data.smtp_user || '',
-      smtp_port: data.smtp_port || 0,
-      smtp_secure: data.smtp_secure || false,
-      smtp_password: '', // Password is not fetched from the server,
+      provider: 'none',
+      smtp: {
+        host: data.smtp_host || '',
+        user: data.smtp_user || '',
+        port: data.smtp_port || 1,
+        secure: data.smtp_secure || false,
+        password: '', // Password is not fetched from the server,
+      },
+      resend_key: '',
       color_primary: data.color_primary || 'hsl(0, 0, 0)',
     },
   });

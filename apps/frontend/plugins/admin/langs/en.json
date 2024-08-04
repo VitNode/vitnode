@@ -72,7 +72,14 @@
           }
         },
         "email": {
-          "smtp": "SMTP",
+          "provider": {
+            "title": "Email Provider",
+            "none": "None",
+            "smtp": "SMTP",
+            "resend": "Resend Email",
+            "resend_desc": "Read more on <link>Resend Email</link>."
+          },
+          "resend_key": "Resend Key",
           "smtp_host": "SMTP Host",
           "smtp_user": "SMTP User",
           "smtp_password": "SMTP Password",
