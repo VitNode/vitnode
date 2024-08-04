@@ -4,6 +4,7 @@ import { Injectable } from '@nestjs/common';
 import { render } from '@react-email/render';
 import * as nodemailer from 'nodemailer';
 import React from 'react';
+import { Resend } from 'resend';
 
 import {
   HelpersAdminEmailSettingsService,
@@ -68,7 +69,23 @@ export class MailService extends HelpersAdminEmailSettingsService {
         },
       );
 
+      // TODO: Handle errors
       await transporter.sendMail({
+        to,
+        subject,
+        html,
+      });
+    }
+
+    if (
+      configSettings.settings.email.provider === EmailProvider.resend &&
+      config.resend_key
+    ) {
+      const resend = new Resend(config.resend_key);
+
+      // TODO: Handle errors
+      await resend.emails.send({
+        from: `${configSettings.settings.general.site_name} <delivered@resend.dev>`,
         to,
         subject,
         html,
