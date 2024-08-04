@@ -228,6 +228,26 @@ export const useExample = () => {
 };
 ```
 
+If you have [File Upload Optional Arguments](/docs/dev/files#file-upload-optional-arguments) then your formData should look like this:
+
+```ts title="use-example.ts"
+import mutationApi from './mutation-api';
+
+export const useExample = () => {
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    const formData = new FormData();
+    if (values.file) {
+      if (values.file instanceof File) {
+        formData.append('file.file', values.file); // [!code highlight]
+      } else {
+        formData.append('file.keep', 'true'); // [!code highlight]
+      }
+    }
+    const mutation = await mutationApi(formData);
+  };
+};
+```
+
 #### Multiple Files
 
 ```ts title="use-example.ts"
