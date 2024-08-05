@@ -6,26 +6,21 @@ import { FormControl, FormItem, FormMessage } from '../../form';
 import { Input } from '../../input';
 
 export const AutoFormInput = ({
-  label,
   isRequired,
   fieldConfigItem,
   fieldProps,
 }: AutoFormInputComponentProps) => {
-  const { showLabel: _showLabel, ...fieldPropsWithoutShowLabel } = fieldProps;
-  const showLabel = _showLabel === undefined ? true : _showLabel;
-  const type = fieldProps.type || 'text';
-
   return (
     <div className="flex flex-row items-center space-x-2">
       <FormItem className="flex w-full flex-col justify-start">
-        {showLabel && (
+        {fieldConfigItem?.label && (
           <AutoFormLabel
-            label={fieldConfigItem?.label || label}
+            label={fieldConfigItem.label}
             isRequired={isRequired}
           />
         )}
         <FormControl>
-          <Input type={type} {...fieldPropsWithoutShowLabel} />
+          <Input type={fieldProps.type || 'text'} {...fieldProps} />
         </FormControl>
         <AutoFormTooltip description={fieldConfigItem.description} />
         <FormMessage />

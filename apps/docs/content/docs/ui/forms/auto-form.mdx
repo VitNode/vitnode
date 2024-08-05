@@ -7,13 +7,124 @@ Component created based on [auto-form from vantezzen](https://github.com/vantezz
 
 ## Support Fileds
 
-- text
+- [Color Picker](/docs/ui/forms/color-picker)
+- [Input](/docs/ui/forms/input)
+
+## Installation
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+
+<Tabs id='package-manager' persist items={['pnpm', 'npm']}>
+
+```bash tab="pnpm"
+pnpm i react-hook-form zod
+```
+
+```bash tab="npm"
+npm i react-hook-form zod
+```
+
+</Tabs>
 
 ## Usage
 
 ```tsx
+import * as z from 'zod';
 import { AutoForm } from 'vitnode-frontend/components/ui/auto-form';
 ```
+
+```ts
+const formSchema = z.object({
+  username: z.string(),
+});
+```
+
+```tsx
+<AutoForm formSchema={formSchema} />
+```
+
+## Zod Configuration
+
+### Validators
+
+Our component is smart and well integrated with Zod, so you can use all the validators that Zod provides. For exampele if you use `zod.string().min(8)`, the input will automatically have a minlength="8" attribute.
+
+Validation methods not supported by HTML will automatically be checked when the form is submitted.
+
+### Descriptions
+
+You can add a description to your schema fields by using the `description` method.
+
+```ts
+const formSchema = z.object({
+  username: z.string().describe('Your username'),
+});
+```
+
+or using the `description` method in the `fieldConfig` object.
+
+```tsx
+<AutoForm
+  formSchema={formSchema}
+  fieldConfig={{
+    name: {
+      description: 'Test description',
+    },
+  }}
+/>
+```
+
+### Optional Fields
+
+By default all fields are required. You can make a field optional by using the `optional` method.
+
+```ts
+const formSchema = z.object({
+  username: z.string().optional(),
+});
+```
+
+### Default Values
+
+You can set a default value for a field by using the `default` method.
+
+```ts
+const formSchema = z.object({
+  username: z.string().default('test'),
+});
+```
+
+## Field Configuration
+
+As `zod` does not support other configurations to the shema fields, we created a `fieldConfig` object that you can pass props to the fields.
+
+```tsx
+<AutoForm
+  fieldConfig={{
+    // Add config for each field here - don't add the field name to keep all defaults
+    username: {
+      // Configuration here
+    },
+  }}
+/>
+```
+
+### Label
+
+You can set a label for a field by using the `label` method.
+
+```tsx
+<AutoForm
+  formSchema={formSchema}
+  fieldConfig={{
+    username: {
+      label: 'Your username',
+    },
+  }}
+/>
+```
+
+###
 
 ## API Reference
 
@@ -21,9 +132,14 @@ import { TypeTable } from 'fumadocs-ui/components/type-table';
 
 <TypeTable
   type={{
-    onChange: {
-      description: 'Callback when the value changes.',
-      type: '(value: string) => void;',
+    formSchema: {
+      description: 'Zod schema for the form.',
+      type: 'z.ZodObject<any, any>',
+    },
+    fieldConfig: {
+      description:
+        'Configuration for the form fields. Depends on type of field.',
+      type: 'FieldConfig',
     },
   }}
 />

@@ -2,6 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import { SquareArrowOutUpRight } from 'lucide-react';
+import * as z from 'zod';
 
 import { useEmailSettingsFormAdmin } from './hooks/use-email-settings-form-admin';
 import {
@@ -29,24 +30,22 @@ export const ContentEmailSettingsAdmin = (
 ) => {
   const t = useTranslations('admin.core.settings.email');
   const tCore = useTranslations('core');
-  const { form, onSubmit, formSchema } = useEmailSettingsFormAdmin(props);
+  const { form, onSubmit } = useEmailSettingsFormAdmin(props);
+
+  const formSchema = z.object({
+    start_day: z.coerce.number(),
+  });
 
   return (
     <>
       <AutoForm
         formSchema={formSchema}
         fieldConfig={{
-          color_primary: {
-            label: t('color_primary'),
-            fieldType: 'color',
-            description: 'Test description',
+          start_day: {
+            label: 'Start Date',
             inputProps: {
-              disableRemoveColor: true,
+              type: 'date',
             },
-          },
-          logo: {
-            fieldType: 'file',
-            label: t('logo'),
           },
         }}
       />

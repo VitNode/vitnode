@@ -100,7 +100,6 @@ export interface AutoFormInputComponentProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   fieldProps: any;
   isRequired: boolean;
-  label: string;
   zodInputProps: React.InputHTMLAttributes<HTMLInputElement>;
   zodItem: z.ZodAny;
   className?: string;

@@ -5,32 +5,27 @@ import { AutoFormTooltip } from './common/tooltip';
 import { FormControl, FormItem, FormMessage } from '../../form';
 import { ColorPicker } from '../../color-picker';
 
-type ViewProps = React.ComponentProps<typeof ColorPicker> & {
-  showLabel?: boolean;
-};
-
 export const AutoFormColor = ({
-  label,
   isRequired,
   fieldConfigItem,
   fieldProps,
 }: AutoFormInputComponentProps & {
-  fieldProps: Omit<ViewProps, 'id' | 'ref'>;
+  fieldProps: Omit<
+    React.ComponentProps<typeof ColorPicker>,
+    'id' | 'ref' | 'disableRemoveColor'
+  >;
 }) => {
-  const { showLabel: _showLabel, ...fieldPropsWithoutShowLabel } = fieldProps;
-  const showLabel = _showLabel === undefined ? true : _showLabel;
-
   return (
     <div className="flex flex-row items-center space-x-2">
       <FormItem className="flex w-full flex-col justify-start">
-        {showLabel && (
+        {fieldConfigItem?.label && (
           <AutoFormLabel
-            label={fieldConfigItem?.label || label}
+            label={fieldConfigItem.label}
             isRequired={isRequired}
           />
         )}
         <FormControl>
-          <ColorPicker {...fieldPropsWithoutShowLabel} />
+          <ColorPicker disableRemoveColor={isRequired} {...fieldProps} />
         </FormControl>
         <AutoFormTooltip description={fieldConfigItem.description} />
         <FormMessage />

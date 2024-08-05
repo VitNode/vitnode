@@ -95,7 +95,6 @@ export function AutoFormObject<T extends z.ZodObject<any, any>>({
                     zodInputProps={zodInputProps}
                     field={field}
                     fieldConfigItem={fieldConfigItem}
-                    label={key}
                     isRequired={isRequired}
                     zodItem={item}
                     fieldProps={fieldProps}
