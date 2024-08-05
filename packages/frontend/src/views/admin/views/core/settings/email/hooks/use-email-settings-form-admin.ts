@@ -17,7 +17,7 @@ export const useEmailSettingsFormAdmin = ({
 
   const formSchema = z
     .object({
-      logo: zodFile,
+      logo: zodFile.nullable(),
       provider: z.nativeEnum(EmailProvider),
       smtp: z.object({
         host: z.string(),
@@ -58,22 +58,32 @@ export const useEmailSettingsFormAdmin = ({
     const primaryHSL = getHSLFromString(values.color_primary);
     if (!primaryHSL) return;
 
-    const mutation = await mutationApi({
-      provider: values.provider,
-      smtp:
-        values.provider === 'smtp'
-          ? {
-              host: values.smtp.host,
-              user: values.smtp.user,
-              port: values.smtp.port,
-              secure: values.smtp.secure,
-              password: values.smtp.password,
-            }
-          : undefined,
-      resendKey: values.provider === 'resend' ? values.resend_key : undefined,
-      colorPrimary: values.color_primary,
-      colorPrimaryForeground: `hsl(${isColorBrightness(primaryHSL) ? `${primaryHSL.h}, 40%, 2%` : `${primaryHSL.h}, 40%, 98%`})`,
-    });
+    const formData = new FormData();
+    formData.append('provider', values.provider);
+    formData.append('color_primary', values.color_primary);
+    formData.append(
+      'color_primary_foreground',
+      `hsl(${isColorBrightness(primaryHSL) ? `${primaryHSL.h}, 40%, 2%` : `${primaryHSL.h}, 40%, 98%`})`,
+    );
+    if (values.provider === 'smtp') {
+      formData.append('smtp_host', values.smtp.host);
+      formData.append('smtp_user', values.smtp.user);
+      formData.append('smtp_port', values.smtp.port.toString());
+      formData.append('smtp_password', values.smtp.password);
+      formData.append('smtp_secure', values.smtp.secure.toString());
+    } else if (values.provider === 'resend') {
+      formData.append('resend_key', values.resend_key);
+    }
+
+    if (values.logo) {
+      if (values.logo instanceof File) {
+        formData.append('logo.file', values.logo);
+      } else {
+        formData.append('logo.keep', 'true');
+      }
+    }
+
+    const mutation = await mutationApi(formData);
 
     if (mutation?.error) {
       toast.error(t('errors.title'), {

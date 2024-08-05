@@ -14,6 +14,7 @@ export class EmailHelpersService {
   getHelpersForEmail: EmailHelpersServiceType['getHelpersForEmail'] = () => {
     const config = getConfigFile();
     const frontend_url: string = this.configService.getOrThrow('frontend_url');
+    const backend_url: string = this.configService.getOrThrow('backend_url');
 
     const primaryHSL = getHSLFromString(config.settings.email.color_primary);
     const primaryForegroundHSL = getHSLFromString(
@@ -23,7 +24,9 @@ export class EmailHelpersService {
     return {
       site_name: config.settings.general.site_name,
       site_short_name: config.settings.general.site_short_name,
+      logo: config.settings.email.logo,
       frontend_url,
+      backend_url,
       color: {
         primary: {
           DEFAULT: `[${primaryHSL ? convertColor.hslToHex(primaryHSL) : '#215fdc'}]`,

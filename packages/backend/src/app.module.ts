@@ -111,12 +111,27 @@ const parseFrontendUrlFromEnv = () => {
   };
 };
 
+const parseBackendUrlFromEnv = () => {
+  const envUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+  const frontendUrl = envUrl ? envUrl : 'http://localhost:8080';
+  const urlObj = new URL(frontendUrl);
+
+  return {
+    url: frontendUrl,
+    protocol: urlObj.protocol,
+    hostname: urlObj.hostname,
+    port: urlObj.port,
+  };
+};
+
 const config = () => {
   const frontend_url = parseFrontendUrlFromEnv();
+  const backend_url = parseBackendUrlFromEnv();
 
   const data = {
     login_token_secret: process.env.LOGIN_TOKEN_SECRET ?? '',
     frontend_url: frontend_url.url,
+    backend_url: backend_url.url,
     port: process.env.PORT ? parseInt(process.env.PORT, 10) : 8080,
     cookies: {
       domain:

@@ -9,6 +9,7 @@ import {
   Section,
   Text,
   Tailwind,
+  Img,
 } from '@react-email/components';
 import React from 'react';
 
@@ -29,7 +30,14 @@ export interface EmailTemplateProps {
 export const EmailTemplate = ({
   preview_text,
   children = 'This is the email template.',
-  helpers: { color, frontend_url, site_name, site_short_name },
+  helpers: {
+    color,
+    frontend_url,
+    site_name,
+    site_short_name,
+    backend_url,
+    logo,
+  },
   user,
 }: EmailTemplateProps) => {
   const t = getTranslationForEmail('admin.core.email', user.language);
@@ -100,7 +108,17 @@ export const EmailTemplate = ({
           className={`bg-${color.background} mx-auto px-2 font-sans text-${color.foreground}`}
         >
           <Container className="max-w-[600px]">
-            <Section className="my-8 text-xl">{site_name}</Section>
+            <Section className="my-8 text-xl">
+              {logo ? (
+                <Img
+                  src={`${backend_url}/public/${logo.dir_folder}/${logo.file_name}`}
+                  className="max-w-xs"
+                  alt={site_name}
+                />
+              ) : (
+                site_name
+              )}
+            </Section>
 
             <Section
               className={`rounded border border-solid border-${color.border} p-5 bg-${color.card}`}

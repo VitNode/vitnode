@@ -1,6 +1,9 @@
 import { EmailTemplateProps } from './template/email-template';
 
+import { UploadCoreFilesObj } from '@/core/files/helpers/upload/dto/upload.obj';
+
 export interface GetHelpersForEmailType {
+  backend_url: string;
   color: {
     background: string;
     border: string;
@@ -18,6 +21,7 @@ export interface GetHelpersForEmailType {
   frontend_url: string;
   site_name: string;
   site_short_name: string;
+  logo?: UploadCoreFilesObj;
 }
 
 export interface EmailHelpersServiceType {
