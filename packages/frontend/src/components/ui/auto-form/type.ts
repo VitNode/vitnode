@@ -3,6 +3,7 @@ import * as z from 'zod';
 
 import { AutoFormColor } from './fields/color';
 import { INPUT_COMPONENTS } from './config';
+import { AutoFormFile } from './fields/file';
 
 export type ZodObjectOrWrapped =
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -29,15 +30,20 @@ export type FieldConfigItem = FieldConfigItemRoot &
         >;
       }
     | {
+        fieldType: 'file';
+        inputProps: Omit<
+          React.ComponentProps<typeof AutoFormFile>['fieldProps'],
+          'onChange' | 'value'
+        >;
+      }
+    | {
         fieldType?:
           | React.FC<AutoFormInputComponentProps>
           | keyof typeof INPUT_COMPONENTS;
         inputProps?: Omit<
           React.InputHTMLAttributes<HTMLInputElement>,
           'defaultValue' | 'onChange' | 'required' | 'value'
-        > & {
-          showLabel?: boolean;
-        };
+        >;
       }
   );
 

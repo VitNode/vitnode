@@ -3,17 +3,14 @@ import { AutoFormLabel } from './common/label';
 import { AutoFormTooltip } from './common/tooltip';
 
 import { FormControl, FormItem, FormMessage } from '../../form';
-import { ColorPicker } from '../../color-picker';
+import { FileInput } from '../../file-input';
 
-export const AutoFormColor = ({
+export const AutoFormFile = ({
   isRequired,
   fieldConfigItem,
   fieldProps,
 }: Omit<AutoFormInputComponentProps, 'fieldProps'> & {
-  fieldProps: Omit<
-    React.ComponentProps<typeof ColorPicker>,
-    'disableRemoveColor' | 'id' | 'ref'
-  >;
+  fieldProps: React.ComponentProps<typeof FileInput>;
 }) => {
   return (
     <div className="flex flex-row items-center space-x-2">
@@ -25,7 +22,7 @@ export const AutoFormColor = ({
           />
         )}
         <FormControl>
-          <ColorPicker disableRemoveColor={isRequired} {...fieldProps} />
+          <FileInput {...fieldProps} />
         </FormControl>
         <AutoFormTooltip description={fieldConfigItem.description} />
         <FormMessage />

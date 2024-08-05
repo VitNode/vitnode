@@ -24,6 +24,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Link } from '@/navigation';
 import { FileInput } from '@/components/ui/file-input';
 import { AutoForm } from '@/components/ui/auto-form';
+import { zodFile } from '@/helpers/zod';
 
 export const ContentEmailSettingsAdmin = (
   props: Admin__Core_Email_Settings__ShowQuery,
@@ -33,7 +34,7 @@ export const ContentEmailSettingsAdmin = (
   const { form, onSubmit } = useEmailSettingsFormAdmin(props);
 
   const formSchema = z.object({
-    start_day: z.coerce.number(),
+    logo: zodFile.optional(),
   });
 
   return (
@@ -41,10 +42,14 @@ export const ContentEmailSettingsAdmin = (
       <AutoForm
         formSchema={formSchema}
         fieldConfig={{
-          start_day: {
-            label: 'Start Date',
+          logo: {
+            label: 'Logo',
+            fieldType: 'file',
             inputProps: {
-              type: 'date',
+              acceptExtensions: ['png', 'jpg', 'gif'],
+              maxFileSizeInMb: 2,
+              accept: 'image/png, image/gif, image/jpeg',
+              showInfo: true,
             },
           },
         }}

@@ -1,4 +1,5 @@
 import { AutoFormColor } from './fields/color';
+import { AutoFormFile } from './fields/file';
 import { AutoFormInput } from './fields/input';
 
 export const INPUT_COMPONENTS = {
@@ -9,10 +10,9 @@ export const INPUT_COMPONENTS = {
   // switch: AutoFormSwitch,
   // textarea: AutoFormTextarea,
   // number: AutoFormNumber,
-  // file: AutoFormFile,
+  file: AutoFormFile,
   fallback: AutoFormInput,
   color: AutoFormColor,
-  file: AutoFormInput,
 };
 
 /**

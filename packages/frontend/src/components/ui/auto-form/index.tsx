@@ -3,11 +3,13 @@
 import { DefaultValues, useForm } from 'react-hook-form';
 import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useTranslations } from 'next-intl';
 
 import { Dependency, FieldConfig, ZodObjectOrWrapped } from './type';
 import { getDefaultValues, getObjectFormSchema } from './utils';
 import { Form } from '../form';
 import { AutoFormObject } from './object';
+import { Button } from '../button';
 
 export function AutoForm<T extends ZodObjectOrWrapped>({
   values: valuesProp,
@@ -20,6 +22,7 @@ export function AutoForm<T extends ZodObjectOrWrapped>({
   fieldConfig?: FieldConfig<z.infer<T>>;
   values?: Partial<z.infer<T>>;
 }) {
+  const t = useTranslations('core');
   const objectFormSchema = getObjectFormSchema(formSchema);
   const defaultValues: DefaultValues<z.infer<typeof objectFormSchema>> | null =
     getDefaultValues(objectFormSchema, fieldConfig);
@@ -39,13 +42,21 @@ export function AutoForm<T extends ZodObjectOrWrapped>({
 
   return (
     <Form {...form}>
-      <form className="space-y-6">
+      <form className="space-y-6" onSubmit={onSubmit}>
         <AutoFormObject
           schema={objectFormSchema}
           form={form}
           dependencies={dependencies}
           fieldConfig={fieldConfig}
         />
+
+        <Button
+          type="submit"
+          disabled={!form.formState.isValid}
+          loading={form.formState.isSubmitting}
+        >
+          {t('save')}
+        </Button>
       </form>
     </Form>
   );

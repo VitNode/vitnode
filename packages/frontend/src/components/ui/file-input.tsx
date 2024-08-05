@@ -16,8 +16,8 @@ interface FilesInputInputProps
     React.InputHTMLAttributes<HTMLInputElement>,
     'multiple' | 'onChange' | 'type' | 'value'
   > {
-  acceptExtensions: string[];
-  maxFileSizeInMb: number;
+  acceptExtensions?: string[];
+  maxFileSizeInMb?: number;
   ref?: React.RefCallback<HTMLInputElement>;
   showInfo?: boolean;
 }
@@ -38,7 +38,7 @@ export const FileInput = ({
   acceptExtensions,
   className,
   disabled,
-  maxFileSizeInMb,
+  maxFileSizeInMb = 0,
   multiple,
   onChange,
   value,
@@ -59,7 +59,11 @@ export const FileInput = ({
       const splitFileName = file.name.split('.');
       const extensionType = splitFileName.at(-1);
 
-      if (extensionType && !acceptExtensions.includes(extensionType)) {
+      if (
+        extensionType &&
+        acceptExtensions &&
+        !acceptExtensions.includes(extensionType)
+      ) {
         toast.error(t('forms.files.errors.extension', { file: file.name }));
 
         return;
@@ -142,7 +146,7 @@ export const FileInput = ({
 
               {showInfo && (
                 <p className="text-xs">
-                  {acceptExtensions.join(', ').toUpperCase()}{' '}
+                  {acceptExtensions?.join(', ').toUpperCase()}{' '}
                   {maxFileSizeInMb
                     ? t('forms.files.allow_size_per_file', {
                         size: maxFileSizeInMb,
