@@ -17,6 +17,7 @@ export const useEmailSettingsFormAdmin = ({
 
   const formSchema = z
     .object({
+      color_primary: z.string().default(data.color_primary),
       logo: zodFile.nullable(),
       provider: z.nativeEnum(EmailProvider),
       smtp: z.object({
@@ -27,7 +28,6 @@ export const useEmailSettingsFormAdmin = ({
         password: z.string(),
       }),
       resend_key: z.string(),
-      color_primary: z.string(),
     })
     .refine(input => {
       if (input.provider === 'smtp') {
@@ -97,5 +97,5 @@ export const useEmailSettingsFormAdmin = ({
     form.reset(values);
   };
 
-  return { form, onSubmit };
+  return { form, onSubmit, formSchema };
 };

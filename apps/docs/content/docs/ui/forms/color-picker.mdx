@@ -5,6 +5,39 @@ description: Select a color from a color palette.
 
 ## Usage
 
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+
+<Tabs items={['Auto Form', 'Manual']}>
+  <Tab value="Auto Form">
+```ts
+import * as z from 'zod';
+import { AutoForm } from 'vitnode-frontend/components/ui/auto-form';
+```
+
+```ts
+const formSchema = z.object({
+  color_primary: z.string(),
+});
+```
+
+```tsx
+<AutoForm
+  formSchema={formSchema}
+  fieldConfig={{
+    color_primary: {
+      label: 'Color picker',
+      fieldType: 'color',
+      inputProps: {
+        disableRemoveColor: true,
+      },
+    },
+  }}
+/>
+```
+
+  </Tab>
+
+  <Tab value="Manual">
 ```tsx
 import { ColorPicker } from 'vitnode-frontend/components/ui/color-picker';
 ```
@@ -13,7 +46,18 @@ import { ColorPicker } from 'vitnode-frontend/components/ui/color-picker';
 <ColorPicker onChange={onChange} value={value} />
 ```
 
+  </Tab>
+</Tabs>
+
 ## API Reference
+
+<Callout title="Auto Form Props">
+  If you are using the `AutoForm` component, you can pass the following props to
+  the `fieldConfig` object.
+
+Type not available in the API Reference: `onChange`, `value`.
+
+</Callout>
 
 import { TypeTable } from 'fumadocs-ui/components/type-table';
 
@@ -21,11 +65,11 @@ import { TypeTable } from 'fumadocs-ui/components/type-table';
   type={{
     onChange: {
       description: 'Callback when the value changes.',
-      type: '(value: string) => void;',
+      type: '(value: string | null) => void;',
     },
     value: {
       description: 'Value of the color picker.',
-      type: 'string',
+      type: 'string | null',
     },
     disableRemoveColor: {
       description: 'Disable the remove color button.',

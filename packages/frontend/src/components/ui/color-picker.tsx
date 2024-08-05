@@ -25,23 +25,26 @@ export const ColorPicker = ({
   onChange,
   value: valueProp,
   className,
-  ...rest
+  id,
+  ref: refFromProps,
 }: {
-  onChange: (value: string) => void;
-  value: string;
+  onChange: (value: string | null) => void;
+  value: string | null;
   className?: string;
   disableRemoveColor?: boolean;
   disabled?: boolean;
+  id?: string;
   ref?: React.RefCallback<HTMLButtonElement>;
 }) => {
   const t = useTranslations('core.colors');
   const ref = React.useRef<HTMLInputElement>(null);
-  const value = getHSLFromString(valueProp);
+  const value = getHSLFromString(valueProp ?? '');
   const colorBrightness = value ? isColorBrightness(value) : false;
 
   return (
     <div className="flex items-center gap-2">
       <Button
+        type="button"
         variant="outline"
         className={cn(
           'relative flex min-w-40 max-w-52 justify-start',
@@ -56,13 +59,14 @@ export const ColorPicker = ({
             ? `hsl(${value.h}, ${value.s}%, ${value.l}%)`
             : '',
         }}
+        ref={refFromProps}
         onClick={() => {
           ref.current?.click();
         }}
         disabled={disabled}
-        {...rest}
       >
         <input
+          id={id}
           ref={ref}
           className="invisible absolute bottom-0 left-0 h-0 w-0"
           type="color"
@@ -94,7 +98,7 @@ export const ColorPicker = ({
                 ariaLabel={t('remove')}
                 variant="ghost"
                 onClick={() => {
-                  onChange('');
+                  onChange(null);
                 }}
               >
                 <RemoveFormatting />
