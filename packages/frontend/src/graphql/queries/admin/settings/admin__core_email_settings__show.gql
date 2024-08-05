@@ -6,6 +6,15 @@ query Admin__core_email_settings__show {
     smtp_user
     color_primary
     provider
-    resend_key
+    logo {
+      dir_folder
+      extension
+      file_name
+      file_name_original
+      file_size
+      height
+      mimetype
+      width
+    }
   }
 }

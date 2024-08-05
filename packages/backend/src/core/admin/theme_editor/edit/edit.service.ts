@@ -12,15 +12,11 @@ import {
   NotFoundError,
 } from '../../../..';
 import { keysFromCSSThemeEditor } from '../../../theme_editor/theme_editor.module';
-import { UploadCoreFilesService } from '@/core/files/helpers/upload/upload.service';
-import { DeleteCoreFilesService } from '@/core/files/helpers/delete/delete.service';
+import { FilesService } from '@/core/files/helpers/upload/upload.service';
 
 @Injectable()
 export class EditAdminThemeEditorService {
-  constructor(
-    private readonly uploadFile: UploadCoreFilesService,
-    private readonly deleteFile: DeleteCoreFilesService,
-  ) {}
+  constructor(private readonly files: FilesService) {}
 
   protected changeVariable({
     cssAsString,
@@ -83,7 +79,7 @@ export class EditAdminThemeEditorService {
         if (logos[el]?.keep && config.logos[el]) return;
 
         if (config.logos[el]) {
-          this.deleteFile.delete({
+          this.files.delete({
             dir_folder: config.logos[el].dir_folder,
             file_name: config.logos[el].file_name,
           });
@@ -91,7 +87,7 @@ export class EditAdminThemeEditorService {
         }
 
         if (logos[el]?.file) {
-          const upload = await this.uploadFile.upload({
+          const upload = await this.files.upload({
             acceptMimeType: ['image/png', 'image/jpeg'],
             file: logos[el].file,
             plugin: 'core',

@@ -4,8 +4,7 @@ import { eq } from 'drizzle-orm';
 import { UploadAvatarCoreMembersArgs } from './dto/upload.args';
 import { UploadAvatarCoreMembersObj } from './dto/upload.obj';
 
-import { UploadCoreFilesService } from '../../../files/helpers/upload/upload.service';
-import { DeleteCoreFilesService } from '../../../files/helpers/delete/delete.service';
+import { FilesService } from '../../../files/helpers/upload/upload.service';
 import { DatabaseService } from '@/utils/database/database.service';
 import { User } from '@/decorators';
 import { core_files_avatars } from '@/database/schema/users';
@@ -14,8 +13,7 @@ import { CustomError } from '@/errors';
 @Injectable()
 export class UploadAvatarCoreMembersService {
   constructor(
-    private readonly uploadFile: UploadCoreFilesService,
-    private readonly deleteFile: DeleteCoreFilesService,
+    private readonly files: FilesService,
     private readonly databaseService: DatabaseService,
   ) {}
 
@@ -25,7 +23,7 @@ export class UploadAvatarCoreMembersService {
   ): Promise<UploadAvatarCoreMembersObj> {
     if (avatar) {
       // Check if avatar exists
-      this.deleteFile.checkIfFileExistsAndReturnPath({
+      this.files.checkIfFileExistsAndReturnPath({
         dir_folder: avatar.dir_folder,
         file_name: avatar.file_name,
         secure: false,
@@ -37,14 +35,14 @@ export class UploadAvatarCoreMembersService {
         .where(eq(core_files_avatars.id, avatar.id));
 
       // Delete from server
-      this.deleteFile.delete({
+      this.files.delete({
         dir_folder: avatar.dir_folder,
         file_name: avatar.file_name,
         secure: false,
       });
     }
 
-    const uploadFiles = await this.uploadFile.upload({
+    const uploadFiles = await this.files.upload({
       file,
       maxUploadSizeBytes: 1e6, // 1MB,
       acceptMimeType: ['image/png', 'image/jpeg'],

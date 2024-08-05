@@ -1,6 +1,7 @@
 import { Field, Int, ObjectType, registerEnumType } from '@nestjs/graphql';
 
 import { EmailProvider } from '@/providers';
+import { UploadCoreFilesObj } from '@/core/files/helpers/upload/dto/upload.obj';
 
 registerEnumType(EmailProvider, {
   name: 'EmailProvider',
@@ -20,11 +21,11 @@ export class ShowAdminEmailSettingsServiceObj {
   @Field(() => Boolean, { nullable: true })
   smtp_secure: boolean | null;
 
-  @Field(() => String, { nullable: true })
-  resend_key: string | null;
-
   @Field(() => EmailProvider)
   provider: EmailProvider;
+
+  @Field(() => UploadCoreFilesObj, { nullable: true })
+  logo?: UploadCoreFilesObj;
 
   @Field(() => String)
   color_primary: string;

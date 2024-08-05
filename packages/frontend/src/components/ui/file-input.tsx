@@ -4,38 +4,48 @@ import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 
 import { UploadCoreFilesObj } from '@/graphql/types';
+import { PreviewFilesInput } from '../utils/files/preview-files-input';
 
 import { useMergeRefs } from '../../helpers/use-merge-refs';
 import { cn } from '../../helpers/classnames';
-import { PreviewFilesInput } from '../../utils/components/files/preview-files-input';
 
 export type FilesInputValue = File | UploadCoreFilesObj;
 
-export interface FilesInputInputProps
+interface FilesInputInputProps
   extends Omit<
     React.InputHTMLAttributes<HTMLInputElement>,
-    'onChange' | 'type' | 'value'
+    'multiple' | 'onChange' | 'type' | 'value'
   > {
   acceptExtensions: string[];
   maxFileSizeInMb: number;
-  onChange: (e: FilesInputValue[]) => void;
-  value: FilesInputValue[] | undefined;
   ref?: React.RefCallback<HTMLInputElement>;
   showInfo?: boolean;
 }
 
-export const FilesInput = ({
+interface WithMultiple extends FilesInputInputProps {
+  multiple: true;
+  onChange: (e: FilesInputValue[]) => void;
+  value: FilesInputValue[];
+}
+
+interface WithoutMultiple extends FilesInputInputProps {
+  onChange: (e: FilesInputValue | null) => void;
+  value: FilesInputValue | null;
+  multiple?: false;
+}
+
+export const FileInput = ({
   acceptExtensions,
   className,
   disabled,
   maxFileSizeInMb,
   multiple,
   onChange,
-  value: stateValue = [],
+  value,
   ref,
   showInfo,
   ...props
-}: FilesInputInputProps) => {
+}: WithMultiple | WithoutMultiple) => {
   const t = useTranslations('core');
   const [isDrag, setDrag] = React.useState(false);
   const currentRef = React.useRef<HTMLInputElement>(null);
@@ -67,7 +77,7 @@ export const FilesInput = ({
     if (currentFiles.length === 0) return;
 
     if (multiple) {
-      onChange([...(stateValue || []), ...currentFiles]);
+      onChange([...(value || []), ...currentFiles]);
 
       return;
     }
@@ -75,12 +85,12 @@ export const FilesInput = ({
     const current = currentFiles.at(0);
     if (!current) return;
 
-    onChange([current]);
+    onChange(current);
   };
 
   return (
-    <div className="@container">
-      {((stateValue && stateValue.length === 0 && !multiple) || multiple) && (
+    <div className="@container flex-1">
+      {((!value && !multiple) || multiple) && (
         <div
           className={cn(
             'm-h-32 border-input bg-background placeholder:text-muted-foreground focus-visible:ring-ring flex w-full flex-col rounded-md border px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-1 disabled:cursor-not-allowed disabled:opacity-50',
@@ -156,7 +166,12 @@ export const FilesInput = ({
         </div>
       )}
 
-      <PreviewFilesInput value={stateValue} onChange={onChange} />
+      <PreviewFilesInput
+        value={value as FilesInputValue[]}
+        onChange={onChange as (e: FilesInputValue[]) => void}
+        showInfo={showInfo}
+        multiple={multiple as true}
+      />
     </div>
   );
 };

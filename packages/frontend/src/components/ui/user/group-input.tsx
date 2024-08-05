@@ -8,7 +8,7 @@ import { Badge } from '../badge';
 import { Loader } from '../loader';
 import { TextLanguage } from '@/graphql/types';
 
-import { GroupInputContent } from '../../../utils/components/user/group-input/content';
+import { GroupInputContent } from '../../utils/user/group-input/content';
 import { useTextLang } from '../../../hooks/use-text-lang';
 import { cn } from '../../../helpers/classnames';
 

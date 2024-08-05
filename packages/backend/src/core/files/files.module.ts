@@ -1,7 +1,6 @@
 import { Global, Module } from '@nestjs/common';
 
-import { UploadCoreFilesService } from './helpers/upload/upload.service';
-import { DeleteCoreFilesService } from './helpers/delete/delete.service';
+import { FilesService } from './helpers/upload/upload.service';
 import { ShowCoreFilesService } from './show/show.service';
 import { ShowCoreFilesResolver } from './show/show.resolver';
 import { CoreFilesCron } from './files.cron';
@@ -14,8 +13,8 @@ export class CoreFilesModule {}
 
 @Global()
 @Module({
-  providers: [UploadCoreFilesService, DeleteCoreFilesService],
-  exports: [UploadCoreFilesService, DeleteCoreFilesService],
+  providers: [FilesService],
+  exports: [FilesService],
   controllers: [DownloadSecureFilesController],
 })
 export class GlobalCoreFilesModule {}

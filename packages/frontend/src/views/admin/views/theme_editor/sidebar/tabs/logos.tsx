@@ -9,7 +9,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { FilesInput } from '@/components/ui/files-input';
+import { FileInput, FilesInputValue } from '@/components/ui/file-input';
 import { Separator } from '@/components/ui/separator';
 import { Slider } from '@/components/ui/slider';
 import { Input } from '@/components/ui/input';
@@ -29,7 +29,13 @@ export const LogosTabThemeEditor = () => {
     mobile_dark = 'vitnode_logo_mobile_dark',
   }
 
-  const updateLogo = ({ file, id }: { file: File | undefined; id: ids }) => {
+  const updateLogo = ({
+    file,
+    id,
+  }: {
+    file: FilesInputValue | null;
+    id: ids;
+  }) => {
     const iFrame = iframeRef?.current?.contentWindow?.document;
     const logoElement = iFrame?.querySelector<HTMLElement>('#vitnode_logo');
     if (!logoElement) return;
@@ -37,27 +43,25 @@ export const LogosTabThemeEditor = () => {
     const commonClassName = 'w-[--logo-mobile-width] sm:w-[--logo-width]';
     const classNames = {
       vitnode_logo_light: cn(commonClassName, {
-        'dark:hidden': form.watch('logos.dark').length,
+        'dark:hidden': form.watch('logos.dark'),
         'hidden sm:block':
-          form.watch('logos.mobile_light').length ||
-          form.watch('logos.mobile_dark').length,
+          form.watch('logos.mobile_light') || form.watch('logos.mobile_dark'),
       }),
       vitnode_logo_dark: cn(commonClassName, {
-        'hidden dark:block': form.watch('logos.light').length,
-        'hidden sm:block': !form.watch('logos.light').length,
+        'hidden dark:block': form.watch('logos.light'),
+        'hidden sm:block': !form.watch('logos.light'),
         'dark:hidden dark:sm:block':
-          form.watch('logos.mobile_dark').length ||
-          form.watch('logos.mobile_light').length,
+          form.watch('logos.mobile_dark') || form.watch('logos.mobile_light'),
       }),
       vitnode_logo_mobile_light: cn(commonClassName, {
         'block sm:hidden':
-          form.watch('logos.light').length || form.watch('logos.dark').length,
-        'dark:hidden': form.watch('logos.mobile_dark').length,
+          form.watch('logos.light') || form.watch('logos.dark'),
+        'dark:hidden': form.watch('logos.mobile_dark'),
       }),
       vitnode_logo_mobile_dark: cn(commonClassName, {
         'block sm:hidden dark:block dark:sm:hidden':
-          form.watch('logos.light').length || form.watch('logos.dark').length,
-        'hidden dark:block': form.watch('logos.mobile_light').length,
+          form.watch('logos.light') || form.watch('logos.dark'),
+        'hidden dark:block': form.watch('logos.mobile_light'),
       }),
     };
 
@@ -66,7 +70,7 @@ export const LogosTabThemeEditor = () => {
       const element = iFrame?.querySelector<HTMLImageElement>(`img#${key}`);
 
       if (key === id) {
-        if (!file) {
+        if (!file || !(file instanceof File)) {
           element?.remove();
         } else {
           if (element) {
@@ -180,12 +184,11 @@ export const LogosTabThemeEditor = () => {
             <FormItem>
               <FormLabel>{t('light')}</FormLabel>
               <FormControl>
-                <FilesInput
+                <FileInput
                   id="logos.light"
                   {...field}
-                  onChange={e => {
-                    field.onChange(e);
-                    const file = e[0] as File | undefined;
+                  onChange={file => {
+                    field.onChange(file);
                     updateLogo({ file, id: ids.light });
                   }}
                   acceptExtensions={['png', 'jpg', 'jpeg', 'svg', 'webp']}
@@ -204,12 +207,11 @@ export const LogosTabThemeEditor = () => {
             <FormItem>
               <FormLabel>{t('dark')}</FormLabel>
               <FormControl>
-                <FilesInput
+                <FileInput
                   id="logos.dark"
                   {...field}
-                  onChange={e => {
-                    field.onChange(e);
-                    const file = e[0] as File | undefined;
+                  onChange={file => {
+                    field.onChange(file);
                     updateLogo({ file, id: ids.dark });
                   }}
                   acceptExtensions={['png', 'jpg', 'jpeg', 'svg', 'webp']}
@@ -264,12 +266,11 @@ export const LogosTabThemeEditor = () => {
             <FormItem>
               <FormLabel>{t('mobile_light')}</FormLabel>
               <FormControl>
-                <FilesInput
+                <FileInput
                   id="logos.mobile_light"
                   {...field}
-                  onChange={e => {
-                    field.onChange(e);
-                    const file = e[0] as File | undefined;
+                  onChange={file => {
+                    field.onChange(file);
                     updateLogo({ file, id: ids.mobile_light });
                   }}
                   acceptExtensions={['png', 'jpg', 'jpeg', 'svg', 'webp']}
@@ -288,12 +289,11 @@ export const LogosTabThemeEditor = () => {
             <FormItem>
               <FormLabel>{t('mobile_dark')}</FormLabel>
               <FormControl>
-                <FilesInput
+                <FileInput
                   id="logos.mobile_dark"
                   {...field}
-                  onChange={e => {
-                    field.onChange(e);
-                    const file = e[0] as File | undefined;
+                  onChange={file => {
+                    field.onChange(file);
                     updateLogo({ file, id: ids.mobile_dark });
                   }}
                   acceptExtensions={['png', 'jpg', 'jpeg', 'svg', 'webp']}

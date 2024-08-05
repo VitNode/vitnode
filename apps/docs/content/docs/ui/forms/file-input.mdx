@@ -1,13 +1,19 @@
 ---
-title: Files Input
-description: Input for uploading files.
+title: File Input
+description: Input for uploading file.
 ---
 
 ## Usage
 
 ```tsx
-import { FilesInput } from 'vitnode-frontend/components/ui/files-input';
+import { FileInput } from 'vitnode-frontend/components/ui/file-input';
 ```
+
+```tsx
+
+```
+
+### Multiple Files
 
 ```tsx
 
@@ -23,6 +29,10 @@ import { TypeTable } from 'fumadocs-ui/components/type-table';
       description: 'Accepted file extensions.',
       type: 'string[]',
       default: '[]',
+    },
+    accept: {
+      description: 'Accepted file types.',
+      type: 'string',
     },
     disabled: {
       description: 'Disable input.',

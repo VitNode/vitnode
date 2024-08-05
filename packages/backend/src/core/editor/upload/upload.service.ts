@@ -3,7 +3,6 @@ import { eq, sum } from 'drizzle-orm';
 
 import { UploadCoreEditorArgs } from './dto/upload.args';
 
-import { UploadCoreFilesService } from '../../files/helpers/upload/upload.service';
 import {
   HelpersUploadCoreFilesService,
   acceptMimeTypeImage,
@@ -17,6 +16,7 @@ import { AccessDeniedError } from '../../../errors';
 import { core_files } from '../../../database/schema/files';
 import { getConfigFile } from '../../../providers/config';
 import { generateRandomString } from '@/functions/generate-random-string';
+import { FilesService } from '@/core/files/helpers/upload/upload.service';
 
 interface GetFilesAfterUploadArgs extends UploadCoreEditorArgs {
   maxUploadSizeKb: number;
@@ -31,7 +31,7 @@ export class UploadCoreEditorService extends HelpersUploadCoreFilesService {
 
   constructor(
     private readonly databaseService: DatabaseService,
-    private readonly uploadFile: UploadCoreFilesService,
+    private readonly files: FilesService,
   ) {
     super();
   }
@@ -74,7 +74,7 @@ export class UploadCoreEditorService extends HelpersUploadCoreFilesService {
     };
 
     if (allowUploadToFrontend) {
-      const current = await this.uploadFile.upload({
+      const current = await this.files.upload({
         ...args,
         acceptMimeType,
       });
@@ -82,7 +82,7 @@ export class UploadCoreEditorService extends HelpersUploadCoreFilesService {
       return current[0];
     }
 
-    const current = await this.uploadFile.upload({
+    const current = await this.files.upload({
       ...args,
       acceptMimeType,
       secure: true,

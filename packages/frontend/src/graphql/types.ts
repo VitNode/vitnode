@@ -155,11 +155,6 @@ export const EmailProvider = {
 } as const;
 
 export type EmailProvider = typeof EmailProvider[keyof typeof EmailProvider];
-export type FileEditAdminThemeEditor = {
-  file?: InputMaybe<Scalars['Upload']['input']>;
-  keep?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
 export type FilesAdminPluginsObj = {
   __typename?: 'FilesAdminPluginsObj';
   admin_pages: Scalars['Int']['output'];
@@ -238,10 +233,10 @@ export type LogoShowCoreThemeEditor = {
 };
 
 export type LogosEditAdminThemeEditor = {
-  dark?: InputMaybe<FileEditAdminThemeEditor>;
-  light?: InputMaybe<FileEditAdminThemeEditor>;
-  mobile_dark?: InputMaybe<FileEditAdminThemeEditor>;
-  mobile_light?: InputMaybe<FileEditAdminThemeEditor>;
+  dark?: InputMaybe<UploadWithKeepCoreFilesArgs>;
+  light?: InputMaybe<UploadWithKeepCoreFilesArgs>;
+  mobile_dark?: InputMaybe<UploadWithKeepCoreFilesArgs>;
+  mobile_light?: InputMaybe<UploadWithKeepCoreFilesArgs>;
   mobile_width: Scalars['Float']['input'];
   text: Scalars['String']['input'];
   width: Scalars['Float']['input'];
@@ -301,6 +296,7 @@ export type Mutation = {
 export type MutationAdmin__Core_Email_Settings__EditArgs = {
   color_primary: Scalars['String']['input'];
   color_primary_foreground: Scalars['String']['input'];
+  logo?: InputMaybe<UploadWithKeepCoreFilesArgs>;
   provider: EmailProvider;
   resend_key?: InputMaybe<Scalars['String']['input']>;
   smtp?: InputMaybe<SmtpEditAdminEmailSettingsService>;
@@ -794,8 +790,8 @@ export type ShowAdminCaptchaSecurityObj = {
 export type ShowAdminEmailSettingsServiceObj = {
   __typename?: 'ShowAdminEmailSettingsServiceObj';
   color_primary: Scalars['String']['output'];
+  logo?: Maybe<UploadCoreFilesObj>;
   provider: EmailProvider | `${EmailProvider}`;
-  resend_key?: Maybe<Scalars['String']['output']>;
   smtp_host?: Maybe<Scalars['String']['output']>;
   smtp_port?: Maybe<Scalars['Int']['output']>;
   smtp_secure?: Maybe<Scalars['Boolean']['output']>;
@@ -1260,6 +1256,11 @@ export type UploadCoreFilesObj = {
   height?: Maybe<Scalars['Int']['output']>;
   mimetype: Scalars['String']['output'];
   width?: Maybe<Scalars['Int']['output']>;
+};
+
+export type UploadWithKeepCoreFilesArgs = {
+  file?: InputMaybe<Scalars['Upload']['input']>;
+  keep: Scalars['Boolean']['input'];
 };
 
 export type User = {

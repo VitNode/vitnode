@@ -13,7 +13,7 @@ import { Loader } from '@/components/ui/loader';
 import { Form, FormField } from '@/components/ui/form';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
-import { FilesInput } from '@/components/ui/files-input';
+import { FileInput } from '@/components/ui/file-input';
 import { Button } from '@/components/ui/button';
 
 const CropperModalChangeAvatar = React.lazy(async () =>
@@ -28,6 +28,7 @@ export const ModalChangeAvatar = () => {
   const { form, onSubmit } = useModalChangeAvatar();
   if (!session) return null;
   const { avatar } = session;
+  const file = form.watch('file');
 
   return (
     <>
@@ -38,9 +39,9 @@ export const ModalChangeAvatar = () => {
         </DialogDescription>
       </DialogHeader>
 
-      {form.watch('type') === 'upload' && form.watch('file').length > 0 ? (
+      {form.watch('type') === 'upload' && file ? (
         <React.Suspense fallback={<Loader />}>
-          <CropperModalChangeAvatar file={form.watch('file')[0]} />
+          <CropperModalChangeAvatar file={file} />
         </React.Suspense>
       ) : (
         <>
@@ -81,7 +82,7 @@ export const ModalChangeAvatar = () => {
                   control={form.control}
                   name="file"
                   render={({ field }) => (
-                    <FilesInput
+                    <FileInput
                       id="picture"
                       {...field}
                       acceptExtensions={['png', 'jpg', 'jpeg']}
@@ -97,8 +98,7 @@ export const ModalChangeAvatar = () => {
                 type="submit"
                 onClick={form.handleSubmit(onSubmit)}
                 disabled={
-                  form.watch('type') === 'upload' &&
-                  form.watch('file').length === 0
+                  form.watch('type') === 'upload' && !!form.watch('file')
                 }
               >
                 {t('settings.change_avatar.submit')}

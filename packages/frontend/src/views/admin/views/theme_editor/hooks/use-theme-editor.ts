@@ -2,8 +2,8 @@ import React from 'react';
 import { UseFormReturn } from 'react-hook-form';
 
 import { formSchemaColorsThemeEditor } from './use-theme-editor-api';
-import { FilesInputValue } from '@/components/ui/files-input';
 import { HslColor } from '@/graphql/types';
+import { FilesInputValue } from '@/components/ui/file-input';
 
 export enum ThemeEditorTab {
   Main = 'main',
@@ -18,10 +18,10 @@ interface ColorObj {
 
 interface ThemeEditorFormObj {
   logos: {
-    dark: FilesInputValue[];
-    light: FilesInputValue[];
-    mobile_dark: FilesInputValue[];
-    mobile_light: FilesInputValue[];
+    dark: FilesInputValue | null;
+    light: FilesInputValue | null;
+    mobile_dark: FilesInputValue | null;
+    mobile_light: FilesInputValue | null;
     mobile_width: number;
     text: string;
     width: number;

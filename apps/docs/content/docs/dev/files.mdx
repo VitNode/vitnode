@@ -25,6 +25,43 @@ export class ExampleArgs {
 
 Read more about [Arguments GraphQL](/docs/dev/services#arguments).
 
+#### File Upload Optional Arguments
+
+In some cases, you may want to mutate data without replacing the file. Your code should know when to replace, add, or remove the file.
+
+For this case, we created the `UploadWithKeepCoreFilesArgs` object.
+
+```ts title="example.args.ts"
+import { ArgsType, Field } from '@nestjs/graphql';
+import { UploadWithKeepCoreFilesArgs } from 'vitnode-frontend';
+
+@ArgsType()
+export class ExampleArgs {
+  @Field(() => UploadWithKeepCoreFilesArgs, { nullable: true })
+  file?: UploadWithKeepCoreFilesArgs;
+}
+```
+
+Object looks like this:
+
+```ts title="upload.obj.ts"
+@InputType()
+export class UploadWithKeepCoreFilesArgs {
+  @Field(() => GraphQLUpload, { nullable: true })
+  file?: Promise<FileUpload>;
+
+  @Field(() => Boolean, { nullable: true })
+  keep?: boolean;
+}
+```
+
+Now you can check if keep the file, when replace it or when remove it.
+
+<Callout title="Only single File" type="warn">
+This object only accepts a single file. If you need to upload multiple files as optional, you need to create a custom object for that.
+
+</Callout>
+
 ### Return Object
 
 ```ts title="example.obj.ts"
@@ -43,13 +80,13 @@ Read more about [Return Objects GraphQL](/docs/dev/services#return-object).
 ### Upload Service
 
 ```ts title="example.service.ts"
-import { UploadCoreFilesService } from 'vitnode-backend';
+import { FilesService } from 'vitnode-backend';
 
 export class ExampleService {
-  constructor(private readonly uploadFile: UploadCoreFilesService) {}
+  constructor(private readonly files: FilesService) {}
 
   async uploadFile({ file }: ExampleArgs): Promise<string> {
-    await this.uploadFile.upload({
+    await this.files.upload({
       file,
       maxUploadSizeBytes: 1e6, // 1MB,
       acceptMimeType: ['image/png', 'image/jpeg'],
@@ -102,15 +139,15 @@ import { TypeTable } from 'fumadocs-ui/components/type-table';
 ### Delete Service
 
 ```ts title="example.service.ts"
-import { DeleteCoreFilesService } from 'vitnode-backend';
+import { FilesService } from 'vitnode-backend';
 
 import { ExampleArgs } from './example.args';
 
 export class ExampleService {
-  constructor(private readonly deleteFile: DeleteCoreFilesService) {}
+  constructor(private readonly files: FilesService) {}
 
   async deleteFile({ file }: ExampleArgs): Promise<string> {
-    this.deleteFile.delete({
+    this.files.delete({
       dir_folder: file.dir_folder
       file_name: file.file_name,
     });
@@ -147,14 +184,31 @@ export class ExampleService {
 
 ```ts title="use-example.ts"
 import * as z from 'zod';
-import { zodFiles } from 'vitnode-frontend/helpers/zod';
+import { zodFile } from 'vitnode-frontend/helpers/zod';
 
 export const useExample = () => {
   const formSchema = z.object({
-    file: zodFiles, // [!code highlight]
+    file: zodFile, // [!code highlight]
   });
 };
 ```
+
+For array of files:
+
+```ts title="use-example.ts"
+import * as z from 'zod';
+import { zodFile } from 'vitnode-frontend/helpers/zod';
+
+export const useExample = () => {
+  const formSchema = z.object({
+    file: z.array(zodFile), // [!code highlight]
+  });
+};
+```
+
+### File Input
+
+See more about the [File Input component](/docs/ui/forms/file-input).
 
 ### Submit FormData
 
@@ -166,7 +220,29 @@ import mutationApi from './mutation-api';
 export const useExample = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const formData = new FormData();
-    formData.append('file', values.file[0]); // [!code highlight]
+    if (values.file instanceof File) {
+      formData.append('file', values.file); // [!code highlight]
+    }
+    const mutation = await mutationApi(formData);
+  };
+};
+```
+
+If you have [File Upload Optional Arguments](/docs/dev/files#file-upload-optional-arguments) then your formData should look like this:
+
+```ts title="use-example.ts"
+import mutationApi from './mutation-api';
+
+export const useExample = () => {
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    const formData = new FormData();
+    if (values.file) {
+      if (values.file instanceof File) {
+        formData.append('file.file', values.file); // [!code highlight]
+      } else {
+        formData.append('file.keep', 'true'); // [!code highlight]
+      }
+    }
     const mutation = await mutationApi(formData);
   };
 };

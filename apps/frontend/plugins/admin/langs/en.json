@@ -79,6 +79,7 @@
             "resend": "Resend Email",
             "resend_desc": "Read more on <link>Resend Email</link>."
           },
+          "logo": "Logo",
           "resend_key": "Resend Key",
           "smtp_host": "SMTP Host",
           "smtp_user": "SMTP User",
@@ -87,7 +88,7 @@
           "smtp_secure": "SMTP Secure (SSL/TLS)",
           "color_primary": "Primary Color",
           "test": {
-            "title": "Test Email Sending",
+            "title": "Test Email Send",
             "from": "From",
             "to": "To",
             "subject": "Subject",

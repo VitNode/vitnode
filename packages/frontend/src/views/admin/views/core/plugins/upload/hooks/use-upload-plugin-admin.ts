@@ -7,26 +7,23 @@ import { mutationApi } from './mutation-api';
 import { UploadPluginAdminProps } from '../upload';
 import { useDialog } from '@/components/ui/dialog';
 import { FetcherErrorType } from '@/graphql/fetcher';
+import { zodFile } from '@/helpers/zod';
 
 export const useUploadPluginAdmin = ({ data }: UploadPluginAdminProps) => {
   const t = useTranslations('admin.core.plugins.upload');
   const tCore = useTranslations('core');
   const { setOpen } = useDialog();
   const formSchema = z.object({
-    file: z.array(z.instanceof(File)),
+    file: zodFile,
   });
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    defaultValues: {
-      file: [],
-    },
-  });
+  const form = useForm<z.infer<typeof formSchema>>();
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    if (!values.file.length) return;
+    if (!values.file || !(values.file instanceof File)) return;
 
     const formData = new FormData();
-    formData.append('file', values.file[0]);
+    formData.append('file', values.file);
     if (data) {
       formData.append('code', data.code);
     }

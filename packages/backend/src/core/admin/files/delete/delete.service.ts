@@ -4,15 +4,15 @@ import { eq } from 'drizzle-orm';
 import { DeleteAdminFilesArgs } from './dto/delete.args';
 
 import { DatabaseService } from '@/utils/database/database.service';
-import { DeleteCoreFilesService } from '../../../files/helpers/delete/delete.service';
 import { NotFoundError } from '@/errors';
 import { core_files } from '@/database/schema/files';
+import { FilesService } from '@/core/files/helpers/upload/upload.service';
 
 @Injectable()
 export class DeleteAdminFilesService {
   constructor(
     private readonly databaseService: DatabaseService,
-    private readonly deleteFile: DeleteCoreFilesService,
+    private readonly files: FilesService,
   ) {}
 
   async delete({ id }: DeleteAdminFilesArgs): Promise<string> {
@@ -24,7 +24,7 @@ export class DeleteAdminFilesService {
       throw new NotFoundError('File');
     }
 
-    this.deleteFile.delete({
+    this.files.delete({
       ...findFile,
       secure: !!findFile.security_key,
     });

@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
 import { desc, eq, lt, sql } from 'drizzle-orm';
 
-import { DeleteCoreFilesService } from './helpers/delete/delete.service';
+import { FilesService } from './helpers/upload/upload.service';
 
 import { core_files, core_files_using } from '../../database/schema/files';
 import { DatabaseService } from '@/utils';
@@ -11,7 +11,7 @@ import { DatabaseService } from '@/utils';
 export class CoreFilesCron {
   constructor(
     private readonly databaseService: DatabaseService,
-    private readonly deleteFile: DeleteCoreFilesService,
+    private readonly files: FilesService,
   ) {}
 
   @Cron(CronExpression.EVERY_HOUR)
@@ -37,7 +37,7 @@ export class CoreFilesCron {
           .delete(core_files)
           .where(eq(core_files.id, file.core_files.id));
 
-        this.deleteFile.delete({
+        this.files.delete({
           ...file.core_files,
           secure: !!file.core_files.security_key,
         });

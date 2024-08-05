@@ -21,6 +21,7 @@ import { Button } from '@/components/ui/button';
 import { Admin__Core_Email_Settings__ShowQuery } from '@/graphql/queries/admin/settings/admin__core_email_settings__show.generated';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Link } from '@/navigation';
+import { FileInput } from '@/components/ui/file-input';
 
 export const ContentEmailSettingsAdmin = (
   props: Admin__Core_Email_Settings__ShowQuery,
@@ -38,6 +39,22 @@ export const ContentEmailSettingsAdmin = (
           render={({ field }) => (
             <FormFieldRender label={t('color_primary')}>
               <ColorPicker {...field} disableRemoveColor />
+            </FormFieldRender>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="logo"
+          render={({ field }) => (
+            <FormFieldRender label={t('logo')} optional>
+              <FileInput
+                {...field}
+                acceptExtensions={['png', 'jpg', 'gif']}
+                maxFileSizeInMb={2}
+                accept="image/png, image/gif, image/jpeg"
+                showInfo
+              />
             </FormFieldRender>
           )}
         />

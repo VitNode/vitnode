@@ -4,6 +4,7 @@ import {
   mkdirSync,
   readFileSync,
   statSync,
+  unlink,
 } from 'fs';
 import { join } from 'path';
 
@@ -13,6 +14,7 @@ import { Injectable } from '@nestjs/common';
 import { UploadCoreFilesArgs } from './dto/upload.args';
 import { UploadCoreFilesObj } from './dto/upload.obj';
 import { HelpersUploadCoreFilesService, acceptMimeTypeImage } from './helpers';
+import { DeleteCoreFilesArgs } from './dto/delete.args';
 
 import { DatabaseService } from '@/utils/database/database.service';
 import { CustomError, InternalServerError } from '@/errors';
@@ -20,7 +22,7 @@ import { ABSOLUTE_PATHS_BACKEND, removeSpecialCharacters } from '../../../..';
 import { generateRandomString } from '@/functions/generate-random-string';
 
 @Injectable()
-export class UploadCoreFilesService extends HelpersUploadCoreFilesService {
+export class FilesService extends HelpersUploadCoreFilesService {
   constructor(private readonly databaseService: DatabaseService) {
     super();
   }
@@ -124,5 +126,43 @@ export class UploadCoreFilesService extends HelpersUploadCoreFilesService {
       width: null,
       height: null,
     };
+  }
+
+  checkIfFileExistsAndReturnPath({
+    dir_folder,
+    file_name,
+    secure,
+  }: DeleteCoreFilesArgs) {
+    const path = secure
+      ? ABSOLUTE_PATHS_BACKEND.uploads.private
+      : ABSOLUTE_PATHS_BACKEND.uploads.public;
+
+    const filePath = join(path, dir_folder, file_name);
+
+    // Check if file exists
+    if (!existsSync(filePath)) {
+      throw new CustomError({
+        code: 'FILE_NOT_FOUND',
+        message: `File "${filePath}" not found`,
+      });
+    }
+
+    return filePath;
+  }
+
+  delete({ dir_folder, file_name, secure }: DeleteCoreFilesArgs) {
+    const path = this.checkIfFileExistsAndReturnPath({
+      dir_folder,
+      file_name,
+      secure,
+    });
+
+    // Remove file from server
+    unlink(path, err => {
+      // eslint-disable-next-line no-console
+      if (err) console.error(err);
+    });
+
+    return 'Success!';
   }
 }
