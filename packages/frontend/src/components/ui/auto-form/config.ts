@@ -1,6 +1,7 @@
 import { AutoFormColor } from './fields/color';
 import { AutoFormFile } from './fields/file';
 import { AutoFormInput } from './fields/input';
+import { AutoFormTextArea } from './fields/textarea';
 
 export const INPUT_COMPONENTS = {
   // checkbox: AutoFormCheckbox,
@@ -8,8 +9,7 @@ export const INPUT_COMPONENTS = {
   // select: AutoFormEnum,
   // radio: AutoFormRadioGroup,
   // switch: AutoFormSwitch,
-  // textarea: AutoFormTextarea,
-  // number: AutoFormNumber,
+  textarea: AutoFormTextArea,
   file: AutoFormFile,
   fallback: AutoFormInput,
   color: AutoFormColor,

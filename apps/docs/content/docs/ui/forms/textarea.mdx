@@ -10,7 +10,38 @@ description: Renders a form textarea or a component designed to accept multi-lin
 
 ## Usage
 
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+
+<Tabs items={['Auto Form', 'Manual']}>
+  <Tab value="Auto Form">
+```ts
+import * as z from 'zod';
+import { AutoForm } from 'vitnode-frontend/components/ui/auto-form';
+```
+
+```ts
+const formSchema = z.object({
+  post: z.string(),
+});
+```
+
 ```tsx
+<AutoForm
+  formSchema={formSchema}
+  fieldConfig={{
+    post: {
+      label: 'Post',
+      fieldType: 'textarea', // [!code highlight]
+      inputProps: {},
+    },
+  }}
+/>
+```
+
+  </Tab>
+
+  <Tab value="Manual">
+```ts
 import { Textarea } from 'vitnode-frontend/components/ui/textarea';
 ```
 
@@ -18,6 +49,59 @@ import { Textarea } from 'vitnode-frontend/components/ui/textarea';
 <Textarea />
 ```
 
-## Examples
+  </Tab>
+</Tabs>
 
-[Shadcn UI Textarea - Examples](https://ui.shadcn.com/docs/components/textarea#examples).
+### With placeholder
+
+<Tabs items={['Auto Form', 'Manual']}>
+  <Tab value="Auto Form">
+```ts
+import * as z from 'zod';
+import { AutoForm } from 'vitnode-frontend/components/ui/auto-form';
+```
+
+```ts
+const formSchema = z.object({
+  post: z.string(),
+});
+```
+
+```tsx
+<AutoForm
+  formSchema={formSchema}
+  fieldConfig={{
+    post: {
+      label: 'Post',
+      fieldType: 'textarea',
+      inputProps: {
+        placeholder: 'Post Placeholder', // [!code highlight]
+      },
+    },
+  }}
+/>
+```
+
+  </Tab>
+
+  <Tab value="Manual">
+```ts
+import { Textarea } from 'vitnode-frontend/components/ui/textarea';
+```
+
+```tsx
+<Textarea placeholder="Post Placeholder" />
+```
+
+  </Tab>
+</Tabs>
+
+## API Reference
+
+<Callout title="Auto Form Props">
+  If you are using the `AutoForm` component, you can pass the following props to
+  the `fieldConfig` object.
+
+Type not available in the API Reference: `onChange`, `value`.
+
+</Callout>
