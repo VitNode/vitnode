@@ -1,9 +1,12 @@
+import { AutoFormSwitch } from './fields/switch';
 import { AutoFormColor } from './fields/color';
 import { AutoFormFile } from './fields/file';
 import { AutoFormInput } from './fields/input';
+import { AutoFormNumber } from './fields/number';
 import { AutoFormTextArea } from './fields/textarea';
 
 export const INPUT_COMPONENTS = {
+  switch: AutoFormSwitch,
   // checkbox: AutoFormCheckbox,
   // date: AutoFormDate,
   // select: AutoFormEnum,
@@ -13,6 +16,7 @@ export const INPUT_COMPONENTS = {
   file: AutoFormFile,
   fallback: AutoFormInput,
   color: AutoFormColor,
+  number: AutoFormNumber,
 };
 
 /**
@@ -23,9 +27,9 @@ export const DEFAULT_ZOD_HANDLERS: Record<
   string,
   keyof typeof INPUT_COMPONENTS
 > = {
-  // ZodBoolean: 'checkbox',
+  ZodBoolean: 'switch',
   // ZodDate: 'date',
   // ZodEnum: 'select',
   // ZodNativeEnum: 'select',
-  // ZodNumber: 'number',
+  ZodNumber: 'number',
 };

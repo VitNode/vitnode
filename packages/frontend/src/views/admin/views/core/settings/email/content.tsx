@@ -5,6 +5,7 @@ import { SquareArrowOutUpRight } from 'lucide-react';
 import * as z from 'zod';
 
 import { useEmailSettingsFormAdmin } from './hooks/use-email-settings-form-admin';
+
 import {
   Form,
   FormControl,
@@ -33,7 +34,7 @@ export const ContentEmailSettingsAdmin = (
   const { form, onSubmit } = useEmailSettingsFormAdmin(props);
 
   const formSchema = z.object({
-    post: z.string(),
+    allow_files: z.boolean(),
   });
 
   return (
@@ -41,9 +42,8 @@ export const ContentEmailSettingsAdmin = (
       <AutoForm
         formSchema={formSchema}
         fieldConfig={{
-          post: {
-            label: 'Post',
-            fieldType: 'textarea',
+          allow_files: {
+            label: 'Allow Files',
             inputProps: {},
           },
         }}

@@ -97,7 +97,9 @@ export function AutoFormObject<T extends z.ZodObject<any, any>>({
                     fieldConfigItem={fieldConfigItem}
                     isRequired={isRequired}
                     zodItem={item}
-                    fieldProps={fieldProps}
+                    // Override the fieldProps with the fieldProps from the fieldConfigItem
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    fieldProps={fieldProps as any}
                     className={fieldProps.className}
                   />
                 </div>

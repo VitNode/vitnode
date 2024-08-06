@@ -10,14 +10,55 @@ description: A control that enables the user to toggle between two states, such 
 
 ## Usage
 
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+
+<Tabs items={['Auto Form', 'Manual']}>
+  <Tab value="Auto Form">
+```ts
+import * as z from 'zod';
+import { AutoForm } from 'vitnode-frontend/components/ui/auto-form';
+```
+
+```ts
+const formSchema = z.object({
+  allow_files: z.boolean(),
+});
+```
+
 ```tsx
+<AutoForm
+  formSchema={formSchema}
+  fieldConfig={{
+    allow_files: {
+      label: 'Allow Files',
+      inputProps: {},
+    },
+  }}
+/>
+```
+
+  </Tab>
+
+  <Tab value="Manual">
+```ts
 import { Switch } from 'vitnode-frontend/components/ui/switch';
 ```
 
 ```tsx
-<Switch />
+<Switch checked={value} onCheckedChange={onChange} />
 ```
 
+  </Tab>
+</Tabs>
+
 ## API Reference
+
+<Callout title="Auto Form Props">
+  If you are using the `AutoForm` component, you can pass the following props to
+  the `fieldConfig` object.
+
+Type not available in the API Reference: `onCheckedChange`, `checked`.
+
+</Callout>
 
 [Radix UI Switch](https://www.radix-ui.com/primitives/docs/components/switch#api-reference).
