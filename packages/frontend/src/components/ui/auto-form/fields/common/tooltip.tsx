@@ -1,11 +1,7 @@
 export const AutoFormTooltip = ({
   description,
 }: {
-  description?: React.ReactNode;
+  description: React.ReactNode;
 }) => {
-  return (
-    description && (
-      <p className="text-muted-foreground text-sm">{description}</p>
-    )
-  );
+  return <p className="text-muted-foreground text-sm">{description}</p>;
 };

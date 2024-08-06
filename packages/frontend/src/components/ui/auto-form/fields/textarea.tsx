@@ -22,7 +22,9 @@ export const AutoFormTextArea = ({
         <FormControl>
           <Textarea {...fieldProps} />
         </FormControl>
-        <AutoFormTooltip description={fieldConfigItem.description} />
+        {fieldConfigItem.description && (
+          <AutoFormTooltip description={fieldConfigItem.description} />
+        )}
         <FormMessage />
       </FormItem>
     </div>

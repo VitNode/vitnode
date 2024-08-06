@@ -22,7 +22,9 @@ export const AutoFormInput = ({
         <FormControl>
           <Input type={fieldProps.type || 'text'} {...fieldProps} />
         </FormControl>
-        <AutoFormTooltip description={fieldConfigItem.description} />
+        {fieldConfigItem.description && (
+          <AutoFormTooltip description={fieldConfigItem.description} />
+        )}
         <FormMessage />
       </FormItem>
     </div>

@@ -5,7 +5,6 @@ import { SquareArrowOutUpRight } from 'lucide-react';
 import * as z from 'zod';
 
 import { useEmailSettingsFormAdmin } from './hooks/use-email-settings-form-admin';
-
 import {
   Form,
   FormControl,
@@ -44,6 +43,8 @@ export const ContentEmailSettingsAdmin = (
         fieldConfig={{
           allow_files: {
             label: 'Allow Files',
+            description: 'Test123',
+            fieldType: 'checkbox',
             inputProps: {},
           },
         }}

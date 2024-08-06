@@ -27,7 +27,9 @@ export const AutoFormColor = ({
         <FormControl>
           <ColorPicker disableRemoveColor={isRequired} {...fieldProps} />
         </FormControl>
-        <AutoFormTooltip description={fieldConfigItem.description} />
+        {fieldConfigItem.description && (
+          <AutoFormTooltip description={fieldConfigItem.description} />
+        )}
         <FormMessage />
       </FormItem>
     </div>

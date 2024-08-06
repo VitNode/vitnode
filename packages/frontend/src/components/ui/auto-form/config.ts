@@ -4,10 +4,11 @@ import { AutoFormFile } from './fields/file';
 import { AutoFormInput } from './fields/input';
 import { AutoFormNumber } from './fields/number';
 import { AutoFormTextArea } from './fields/textarea';
+import { AutoFormCheckbox } from './fields/checkbox';
 
 export const INPUT_COMPONENTS = {
   switch: AutoFormSwitch,
-  // checkbox: AutoFormCheckbox,
+  checkbox: AutoFormCheckbox,
   // date: AutoFormDate,
   // select: AutoFormEnum,
   // radio: AutoFormRadioGroup,

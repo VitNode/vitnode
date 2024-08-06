@@ -34,7 +34,9 @@ export const AutoFormSwitch = ({
             {...fieldProps}
           />
         </FormControl>
-        <AutoFormTooltip description={fieldConfigItem.description} />
+        {fieldConfigItem.description && (
+          <AutoFormTooltip description={fieldConfigItem.description} />
+        )}
         <FormMessage />
       </FormItem>
     </div>
