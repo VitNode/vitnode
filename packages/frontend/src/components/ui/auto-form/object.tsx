@@ -89,8 +89,6 @@ export function AutoFormObject<T extends z.ZodObject<any, any>>({
 
               return (
                 <div key={`${key}.parent`}>
-                  {inputType.toString()} <br />
-                  {zodBaseType}
                   <InputComponent
                     zodInputProps={zodInputProps}
                     field={field}

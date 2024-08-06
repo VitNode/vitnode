@@ -1,5 +1,6 @@
 {
   "core": {
+    "select_option": "Select an option",
     "week": "Week",
     "strong": "Strong",
     "reload_page": "Reload Page",

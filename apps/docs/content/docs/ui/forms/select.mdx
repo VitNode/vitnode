@@ -10,7 +10,39 @@ description: Presents a dropdown list of options for the user to choose from, ac
 
 ## Usage
 
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+
+<Tabs items={['Auto Form', 'Manual']}>
+  <Tab value="Auto Form">
+```ts
+import * as z from 'zod';
+import { AutoForm } from 'vitnode-frontend/components/ui/auto-form';
+```
+
+```ts
+const formSchema = z.object({
+  type: z.enum(['smtp', 'resend', 'none']),
+});
+```
+
 ```tsx
+<AutoForm
+  formSchema={formSchema}
+  fieldConfig={{
+    type: {
+      label: 'Type of Email',
+      inputProps: {
+        placeholder: 'Select type of email',
+      },
+    },
+  }}
+/>
+```
+
+  </Tab>
+
+  <Tab value="Manual">
+```ts
 import {
   Select,
   SelectContent,
@@ -22,21 +54,109 @@ import {
 
 ```tsx
 <Select>
-  <SelectTrigger className="w-[180px]">
-    <SelectValue placeholder="Theme" />
+  <SelectTrigger>
+    <SelectValue placeholder="Select type of email" />
   </SelectTrigger>
   <SelectContent>
-    <SelectItem value="light">Light</SelectItem>
-    <SelectItem value="dark">Dark</SelectItem>
-    <SelectItem value="system">System</SelectItem>
+    <SelectItem value="none">None</SelectItem>
+    <SelectItem value="smtp">SMTP</SelectItem>
+    <SelectItem value="resend">Resend</SelectItem>
   </SelectContent>
 </Select>
 ```
 
-## Examples
+  </Tab>
+</Tabs>
 
-[Shadcn UI Select - Examples](https://ui.shadcn.com/docs/components/select#examples)
+### With Native Enum
+
+```ts
+import * as z from 'zod';
+import { AutoForm } from 'vitnode-frontend/components/ui/auto-form';
+```
+
+```ts
+const EmailProvider = {
+  none: 'none',
+  resend: 'resend',
+  smtp: 'smtp',
+} as const;
+
+// or
+
+enum EmailProvider {
+  none = 'none',
+  resend = 'resend',
+  smtp = 'smtp',
+}
+```
+
+```ts
+const formSchema = z.object({
+  type: z.nativeEnum(EmailProvider), // [!code highlight]
+});
+```
+
+```tsx
+<AutoForm
+  formSchema={formSchema}
+  fieldConfig={{
+    type: {
+      label: 'Type of Email',
+      inputProps: {
+        placeholder: 'Select type of email',
+      },
+    },
+  }}
+/>
+```
+
+### With Translations
+
+```ts
+import * as z from 'zod';
+import { useTranslations } from 'next-intl'; // [!code highlight]
+import { AutoForm } from 'vitnode-frontend/components/ui/auto-form';
+```
+
+```ts
+const t = useTranslations('admin.core.settings.email'); // [!code highlight]
+
+const EmailProvider = {
+  none: t('provider.none'),
+  resend: t('provider.resend'),
+  smtp: t('provider.smtp'),
+} as const;
+```
+
+```ts
+const formSchema = z.object({
+  type: z.nativeEnum(EmailProvider), // [!code highlight]
+});
+```
+
+```tsx
+<AutoForm
+  formSchema={formSchema}
+  fieldConfig={{
+    type: {
+      label: 'Type of Email',
+      inputProps: {
+        placeholder: 'Select type of email',
+      },
+    },
+  }}
+/>
+```
 
 ## API Reference
+
+<Callout title="Auto Form Props">
+  If you are using the `AutoForm` component, you can pass the following props to
+  the `fieldConfig` object.
+
+Type not available in the API Reference: `onChange`, `value`.
+
+</Callout>
 
 [Radix UI Select](https://www.radix-ui.com/primitives/docs/components/select#api-reference)

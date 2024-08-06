@@ -9,12 +9,7 @@ export const AutoFormSwitch = ({
   isRequired,
   fieldConfigItem,
   fieldProps,
-}: Omit<AutoFormInputComponentProps, 'fieldProps'> & {
-  fieldProps: Omit<
-    React.ComponentProps<typeof Switch>,
-    'checked' | 'onCheckedChange'
-  >;
-}) => {
+}: AutoFormInputComponentProps) => {
   return (
     <div className="flex flex-row items-center space-x-2">
       <FormItem className="flex w-full flex-col justify-start">
@@ -26,11 +21,8 @@ export const AutoFormSwitch = ({
         )}
         <FormControl>
           <Switch
-            checked={!!fieldProps.value}
-            onCheckedChange={
-              // Override the `onCheckedChange` to accept a boolean value
-              fieldProps.onChange as unknown as (check: boolean) => void
-            }
+            checked={fieldProps.value}
+            onCheckedChange={fieldProps.onChange}
             {...fieldProps}
           />
         </FormControl>

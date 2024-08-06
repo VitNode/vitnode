@@ -5,14 +5,14 @@ import { AutoFormInput } from './fields/input';
 import { AutoFormNumber } from './fields/number';
 import { AutoFormTextArea } from './fields/textarea';
 import { AutoFormCheckbox } from './fields/checkbox';
+import { AutoFormEnum } from './fields/enum';
 
 export const INPUT_COMPONENTS = {
   switch: AutoFormSwitch,
   checkbox: AutoFormCheckbox,
   // date: AutoFormDate,
-  // select: AutoFormEnum,
+  select: AutoFormEnum,
   // radio: AutoFormRadioGroup,
-  // switch: AutoFormSwitch,
   textarea: AutoFormTextArea,
   file: AutoFormFile,
   fallback: AutoFormInput,
@@ -30,7 +30,7 @@ export const DEFAULT_ZOD_HANDLERS: Record<
 > = {
   ZodBoolean: 'switch',
   // ZodDate: 'date',
-  // ZodEnum: 'select',
-  // ZodNativeEnum: 'select',
+  ZodEnum: 'select',
+  ZodNativeEnum: 'select',
   ZodNumber: 'number',
 };

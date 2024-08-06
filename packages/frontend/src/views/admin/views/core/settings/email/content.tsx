@@ -32,8 +32,14 @@ export const ContentEmailSettingsAdmin = (
   const tCore = useTranslations('core');
   const { form, onSubmit } = useEmailSettingsFormAdmin(props);
 
+  const EmailProvider = {
+    none: t('provider.none'),
+    resend: t('provider.resend'),
+    smtp: t('provider.smtp'),
+  } as const;
+
   const formSchema = z.object({
-    allow_files: z.boolean(),
+    type: z.nativeEnum(EmailProvider),
   });
 
   return (
@@ -41,11 +47,12 @@ export const ContentEmailSettingsAdmin = (
       <AutoForm
         formSchema={formSchema}
         fieldConfig={{
-          allow_files: {
-            label: 'Allow Files',
-            description: 'Test123',
-            fieldType: 'checkbox',
-            inputProps: {},
+          type: {
+            label: 'Type of Email',
+            fieldType: 'select',
+            inputProps: {
+              placeholder: 'Select type of email',
+            },
           },
         }}
       />
