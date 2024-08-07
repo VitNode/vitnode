@@ -4,6 +4,8 @@ import * as z from 'zod';
 import { AutoFormColor } from './fields/color';
 import { AutoFormFile } from './fields/file';
 import { FieldPropsAutoFormEnum } from './fields/enum';
+import { INPUT_COMPONENTS } from './config';
+import { FieldPropsAutoFormRadioGroup } from './fields/radio-group';
 
 export type ZodObjectOrWrapped =
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -24,21 +26,23 @@ export type FieldConfigItem = FieldConfigItemRoot &
   (
     | {
         fieldType?: 'color';
-        inputProps?: Omit<
-          React.ComponentProps<typeof AutoFormColor>['fieldProps'],
-          'onChange' | 'value'
-        >;
+        inputProps?: React.ComponentProps<typeof AutoFormColor>['fieldProps'];
       }
     | {
         fieldType?: 'file';
-        inputProps?: Omit<
-          React.ComponentProps<typeof AutoFormFile>['fieldProps'],
-          'onChange' | 'value'
-        >;
+        inputProps?: React.ComponentProps<typeof AutoFormFile>['fieldProps'];
+      }
+    | {
+        fieldType?: 'radio';
+        inputProps?: FieldPropsAutoFormRadioGroup;
       }
     | {
         fieldType?: 'select';
         inputProps?: FieldPropsAutoFormEnum;
+      }
+    | {
+        fieldType?: keyof typeof INPUT_COMPONENTS;
+        inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
       }
   );
 

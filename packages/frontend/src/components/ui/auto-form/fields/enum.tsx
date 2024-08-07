@@ -79,7 +79,7 @@ export const AutoFormEnum = ({
                 const label = fieldProps.labels?.[value] ?? labelFromProps;
 
                 return (
-                  <SelectItem value={label} key={value}>
+                  <SelectItem value={labelFromProps} key={value}>
                     {label}
                   </SelectItem>
                 );

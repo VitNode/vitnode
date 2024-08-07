@@ -8,12 +8,26 @@ import { getBaseSchema } from '../utils';
 import { FormControl, FormItem, FormLabel, FormMessage } from '../../form';
 import { RadioGroup, RadioGroupItem } from '../../radio-group';
 
+type FieldPropsRoot = AutoFormInputComponentProps['fieldProps'];
+
+export interface FieldPropsAutoFormRadioGroup extends FieldPropsRoot {
+  labels?: Record<
+    string,
+    {
+      title: string;
+      description?: string;
+    }
+  >;
+}
+
 export const AutoFormRadioGroup = ({
   isRequired,
   fieldConfigItem,
   zodItem,
   fieldProps,
-}: AutoFormInputComponentProps) => {
+}: Omit<AutoFormInputComponentProps, 'fieldProps'> & {
+  fieldProps: FieldPropsAutoFormRadioGroup;
+}) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const baseValues = (getBaseSchema(zodItem) as unknown as z.ZodEnum<any>)._def
@@ -42,17 +56,30 @@ export const AutoFormRadioGroup = ({
             {...fieldProps}
           >
             {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-            {values?.map((value: any) => (
-              <FormItem
-                key={value}
-                className="mb-2 flex items-center gap-3 space-y-0"
-              >
-                <FormControl>
-                  <RadioGroupItem value={value[0]} />
-                </FormControl>
-                <FormLabel className="font-normal">{value[1]}</FormLabel>
-              </FormItem>
-            ))}
+            {values?.map((value: any) => {
+              const label = fieldProps.labels?.[value[0]].title || value[1];
+              const description = fieldProps.labels?.[value[0]].description;
+
+              return (
+                <FormItem
+                  key={value}
+                  className="flex items-center gap-3 space-y-0"
+                >
+                  <FormControl>
+                    <RadioGroupItem value={value[0]} />
+                  </FormControl>
+                  <FormLabel className="flex items-center space-y-0 font-normal">
+                    <span>{label}</span>
+
+                    {description && (
+                      <span className="text-muted-foreground flex flex-wrap items-center gap-1 text-sm font-normal">
+                        {description}
+                      </span>
+                    )}
+                  </FormLabel>
+                </FormItem>
+              );
+            })}
           </RadioGroup>
         </FormControl>
         {fieldConfigItem.description && (

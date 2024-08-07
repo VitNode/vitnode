@@ -23,6 +23,12 @@ import { AutoForm } from 'vitnode-frontend/components/ui/auto-form';
 const formSchema = z.object({
   type: z.enum(['smtp', 'resend', 'none']),
 });
+
+// or
+
+const formSchema = z.object({
+  type: z.nativeEnum(EmailProvider),
+});
 ```
 
 ```tsx
@@ -31,7 +37,13 @@ const formSchema = z.object({
   fieldConfig={{
     type: {
       label: 'Type of Email',
+      fieldType: 'select', // [!code highlight]
       inputProps: {
+        labels: {
+          [EmailProvider.none]: 'None',
+          [EmailProvider.smtp]: 'SMTP',
+          [EmailProvider.resend]: 'Resend',
+        },
         placeholder: 'Select type of email',
       },
     },
@@ -68,95 +80,6 @@ import {
   </Tab>
 </Tabs>
 
-### With Native Enum
-
-```ts
-import * as z from 'zod';
-import { AutoForm } from 'vitnode-frontend/components/ui/auto-form';
-```
-
-```ts
-enum EmailProvider {
-  none = 'none',
-  resend = 'resend',
-  smtp = 'smtp',
-}
-
-// or
-
-const EmailProvider = {
-  none: 'none',
-  resend: 'resend',
-  smtp: 'smtp',
-} as const;
-```
-
-```ts
-const formSchema = z.object({
-  type: z.nativeEnum(EmailProvider), // [!code highlight]
-});
-```
-
-```tsx
-<AutoForm
-  formSchema={formSchema}
-  fieldConfig={{
-    type: {
-      label: 'Type of Email',
-      inputProps: {
-        placeholder: 'Select type of email',
-      },
-    },
-  }}
-/>
-```
-
-### With Translations
-
-```ts
-import * as z from 'zod';
-import { useTranslations } from 'next-intl'; // [!code highlight]
-import { AutoForm } from 'vitnode-frontend/components/ui/auto-form';
-
-import { EmailProvider } from '@/graphql/types';
-```
-
-```ts
-const t = useTranslations('admin.core.settings.email'); // [!code highlight]
-
-const formSchema = z.object({
-  type: z.nativeEnum(EmailProvider),
-});
-```
-
-```tsx
-<AutoForm
-  formSchema={formSchema}
-  fieldConfig={{
-    type: {
-      label: 'Type of Email',
-      fieldType: 'select',
-      inputProps: {
-        labels: {
-          [EmailProvider.none]: t('provider.none'), // [!code highlight]
-          [EmailProvider.smtp]: t('provider.smtp'), // [!code highlight]
-          [EmailProvider.resend]: t('provider.resend'), // [!code highlight]
-        },
-        placeholder: 'Select type of email',
-      },
-    },
-  }}
-/>
-```
-
 ## API Reference
-
-<Callout title="Auto Form Props">
-  If you are using the `AutoForm` component, you can pass the following props to
-  the `fieldConfig` object.
-
-Type not available in the API Reference: `onChange`, `value`.
-
-</Callout>
 
 [Radix UI Select](https://www.radix-ui.com/primitives/docs/components/select#api-reference)

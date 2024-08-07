@@ -17,11 +17,19 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 ```ts
 import * as z from 'zod';
 import { AutoForm } from 'vitnode-frontend/components/ui/auto-form';
+
+import { EmailProvider } from '@/graphql/types';
 ```
 
 ```ts
 const formSchema = z.object({
-  username: z.string(),
+  type: z.enum(['option-one', 'option-two']),
+});
+
+// or
+
+const formSchema = z.object({
+  type: z.nativeEnum(RadioGroupExampleEnum),
 });
 ```
 
@@ -29,8 +37,22 @@ const formSchema = z.object({
 <AutoForm
   formSchema={formSchema}
   fieldConfig={{
-    username: {
-      label: 'Username',
+    type: {
+      label: 'Radio Group Example',
+      fieldType: 'radio',
+      inputProps: {
+        labels: {
+          ['option-one']: {
+            title: 'Option One',
+            description: 'Option One Description',
+          },
+          ['option-two']: {
+            title: 'Option Two',
+            description: 'Option Two Description',
+          },
+        },
+        placeholder: 'Select type of email',
+      },
     },
   }}
 />

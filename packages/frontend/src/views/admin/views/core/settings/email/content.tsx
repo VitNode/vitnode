@@ -24,7 +24,6 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Link } from '@/navigation';
 import { FileInput } from '@/components/ui/file-input';
 import { AutoForm } from '@/components/ui/auto-form';
-import { EmailProvider } from '@/graphql/types';
 
 export const ContentEmailSettingsAdmin = (
   props: Admin__Core_Email_Settings__ShowQuery,
@@ -34,7 +33,7 @@ export const ContentEmailSettingsAdmin = (
   const { form, onSubmit } = useEmailSettingsFormAdmin(props);
 
   const formSchema = z.object({
-    type: z.nativeEnum(EmailProvider),
+    type: z.enum(['option-one', 'option-two']),
   });
 
   return (
@@ -43,13 +42,18 @@ export const ContentEmailSettingsAdmin = (
         formSchema={formSchema}
         fieldConfig={{
           type: {
-            label: 'Type of Email',
-            fieldType: 'select',
+            label: 'Radio Group Example',
+            fieldType: 'radio',
             inputProps: {
               labels: {
-                [EmailProvider.none]: t('provider.none'),
-                [EmailProvider.smtp]: t('provider.smtp'),
-                [EmailProvider.resend]: t('provider.resend'),
+                ['option-one']: {
+                  title: 'Option One',
+                  description: 'Option One Description',
+                },
+                ['option-two']: {
+                  title: 'Option Two',
+                  description: 'Option Two Description',
+                },
               },
               placeholder: 'Select type of email',
             },
