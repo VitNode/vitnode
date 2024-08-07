@@ -1,5 +1,8 @@
-/* eslint-disable @typescript-eslint/consistent-type-imports */
+import type core from '../../apps/frontend/plugins/core/langs/en.json';
+import type admin from '../../apps/frontend/plugins/admin/langs/en.json';
 
-type IntlMessages =
-  typeof import('../../apps/frontend/plugins/admin/langs/en.json') &
-    typeof import('../../apps/frontend/plugins/core/langs/en.json');
+type Messages = typeof core & typeof admin;
+
+declare global {
+  interface IntlMessages extends Messages {}
+}

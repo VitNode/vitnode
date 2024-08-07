@@ -76,19 +76,19 @@ import { AutoForm } from 'vitnode-frontend/components/ui/auto-form';
 ```
 
 ```ts
-const EmailProvider = {
-  none: 'none',
-  resend: 'resend',
-  smtp: 'smtp',
-} as const;
-
-// or
-
 enum EmailProvider {
   none = 'none',
   resend = 'resend',
   smtp = 'smtp',
 }
+
+// or
+
+const EmailProvider = {
+  none: 'none',
+  resend: 'resend',
+  smtp: 'smtp',
+} as const;
 ```
 
 ```ts
@@ -117,21 +117,15 @@ const formSchema = z.object({
 import * as z from 'zod';
 import { useTranslations } from 'next-intl'; // [!code highlight]
 import { AutoForm } from 'vitnode-frontend/components/ui/auto-form';
+
+import { EmailProvider } from '@/graphql/types';
 ```
 
 ```ts
 const t = useTranslations('admin.core.settings.email'); // [!code highlight]
 
-const EmailProvider = {
-  none: t('provider.none'),
-  resend: t('provider.resend'),
-  smtp: t('provider.smtp'),
-} as const;
-```
-
-```ts
 const formSchema = z.object({
-  type: z.nativeEnum(EmailProvider), // [!code highlight]
+  type: z.nativeEnum(EmailProvider),
 });
 ```
 
@@ -141,7 +135,13 @@ const formSchema = z.object({
   fieldConfig={{
     type: {
       label: 'Type of Email',
+      fieldType: 'select',
       inputProps: {
+        labels: {
+          [EmailProvider.none]: t('provider.none'), // [!code highlight]
+          [EmailProvider.smtp]: t('provider.smtp'), // [!code highlight]
+          [EmailProvider.resend]: t('provider.resend'), // [!code highlight]
+        },
         placeholder: 'Select type of email',
       },
     },

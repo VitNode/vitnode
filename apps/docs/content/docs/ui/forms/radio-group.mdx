@@ -10,7 +10,36 @@ description: A collection of radio buttons where only one option can be selected
 
 ## Usage
 
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+
+<Tabs items={['Auto Form', 'Manual']}>
+  <Tab value="Auto Form">
+```ts
+import * as z from 'zod';
+import { AutoForm } from 'vitnode-frontend/components/ui/auto-form';
+```
+
+```ts
+const formSchema = z.object({
+  username: z.string(),
+});
+```
+
 ```tsx
+<AutoForm
+  formSchema={formSchema}
+  fieldConfig={{
+    username: {
+      label: 'Username',
+    },
+  }}
+/>
+```
+
+  </Tab>
+
+  <Tab value="Manual">
+```ts
 import { Label } from 'vitnode-frontend/components/ui/label';
 import {
   RadioGroup,
@@ -30,6 +59,9 @@ import {
   </div>
 </RadioGroup>
 ```
+
+  </Tab>
+</Tabs>
 
 ## API Reference
 

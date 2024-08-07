@@ -6,13 +6,14 @@ import { AutoFormNumber } from './fields/number';
 import { AutoFormTextArea } from './fields/textarea';
 import { AutoFormCheckbox } from './fields/checkbox';
 import { AutoFormEnum } from './fields/enum';
+import { AutoFormRadioGroup } from './fields/radio-group';
 
 export const INPUT_COMPONENTS = {
   switch: AutoFormSwitch,
   checkbox: AutoFormCheckbox,
   // date: AutoFormDate,
   select: AutoFormEnum,
-  // radio: AutoFormRadioGroup,
+  radio: AutoFormRadioGroup,
   textarea: AutoFormTextArea,
   file: AutoFormFile,
   fallback: AutoFormInput,

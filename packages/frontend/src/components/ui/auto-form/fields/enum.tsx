@@ -15,13 +15,21 @@ import {
   SelectValue,
 } from '../../select';
 
+type FieldPropsRoot = AutoFormInputComponentProps['fieldProps'];
+
+export interface FieldPropsAutoFormEnum extends FieldPropsRoot {
+  labels?: Record<string, string>;
+}
+
 export const AutoFormEnum = ({
   isRequired,
   fieldConfigItem,
   zodItem,
   fieldProps,
   field,
-}: AutoFormInputComponentProps) => {
+}: Omit<AutoFormInputComponentProps, 'fieldProps'> & {
+  fieldProps: FieldPropsAutoFormEnum;
+}) => {
   const t = useTranslations('core');
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const baseValues = (getBaseSchema(zodItem) as unknown as z.ZodEnum<any>)._def
@@ -67,11 +75,15 @@ export const AutoFormEnum = ({
               </SelectValue>
             </SelectTrigger>
             <SelectContent>
-              {values.map(([value, label]) => (
-                <SelectItem value={label} key={value}>
-                  {label}
-                </SelectItem>
-              ))}
+              {values.map(([value, labelFromProps]) => {
+                const label = fieldProps.labels?.[value] ?? labelFromProps;
+
+                return (
+                  <SelectItem value={label} key={value}>
+                    {label}
+                  </SelectItem>
+                );
+              })}
             </SelectContent>
           </Select>
         </FormControl>

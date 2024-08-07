@@ -2,8 +2,8 @@ import { ControllerRenderProps, FieldValues } from 'react-hook-form';
 import * as z from 'zod';
 
 import { AutoFormColor } from './fields/color';
-import { INPUT_COMPONENTS } from './config';
 import { AutoFormFile } from './fields/file';
+import { FieldPropsAutoFormEnum } from './fields/enum';
 
 export type ZodObjectOrWrapped =
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -23,36 +23,36 @@ interface FieldConfigItemRoot {
 export type FieldConfigItem = FieldConfigItemRoot &
   (
     | {
-        fieldType: 'color';
+        fieldType?: 'color';
         inputProps?: Omit<
           React.ComponentProps<typeof AutoFormColor>['fieldProps'],
           'onChange' | 'value'
         >;
       }
     | {
-        fieldType: 'file';
-        inputProps: Omit<
+        fieldType?: 'file';
+        inputProps?: Omit<
           React.ComponentProps<typeof AutoFormFile>['fieldProps'],
           'onChange' | 'value'
         >;
       }
     | {
-        fieldType?:
-          | React.FC<AutoFormInputComponentProps>
-          | keyof typeof INPUT_COMPONENTS;
-        inputProps?: Omit<
-          React.InputHTMLAttributes<HTMLInputElement>,
-          'defaultValue' | 'onChange' | 'required' | 'value'
-        >;
+        fieldType?: 'select';
+        inputProps?: FieldPropsAutoFormEnum;
       }
   );
 
+// | {
+//     fieldType?: (typeof INPUT_COMPONENTS)['file'];
+//     inputProps?: Omit<
+//       React.InputHTMLAttributes<HTMLInputElement>,
+//       'defaultValue' | 'onChange' | 'required' | 'value'
+//     >;
+//   }
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type FieldConfig<SchemaType extends z.infer<z.ZodObject<any, any>>> = {
-  // If SchemaType.key is an object, create a nested FieldConfig, otherwise FieldConfigItem
-  [Key in keyof SchemaType]?: SchemaType[Key] extends object
-    ? FieldConfig<z.infer<SchemaType[Key]>>
-    : FieldConfigItem;
+export type FieldConfig<T extends z.infer<z.ZodObject<any, any>>> = {
+  [Key in keyof T]?: FieldConfigItem;
 };
 
 export enum DependencyType {

@@ -106,6 +106,7 @@
     "@hookform/resolvers": "^3.9.0",
     "@swc/cli": "^0.4.0",
     "@swc/core": "^1.7.6",
+    "@types/lodash": "^4.17.7",
     "@types/node": "^22.1.0",
     "@types/nprogress": "^0.2.3",
     "@types/react": "^18.3.3",
