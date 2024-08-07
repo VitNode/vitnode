@@ -33,7 +33,7 @@ export const ContentEmailSettingsAdmin = (
   const { form, onSubmit } = useEmailSettingsFormAdmin(props);
 
   const formSchema = z.object({
-    type: z.enum(['option-one', 'option-two']),
+    type: z.enum(['option-one', 'option-two']).default('option-one'),
   });
 
   return (

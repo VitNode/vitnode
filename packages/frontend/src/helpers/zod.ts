@@ -7,7 +7,6 @@ export const zodInput = {
       value: z.string().trim(),
     }),
   ),
-  string: z.string().trim(),
 };
 
 export const zodFile = z.union([

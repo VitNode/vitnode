@@ -9,7 +9,6 @@ import { mutationEditApi } from './mutation-edit-api';
 import { useDialog } from '@/components/ui/dialog';
 import { usePathname, useRouter } from '@/navigation';
 import { useSessionAdmin } from '@/hooks/use-session-admin';
-import { zodInput } from '@/helpers/zod';
 import { FetcherErrorType } from '@/graphql/fetcher';
 import { ShowAdminPlugins } from '@/graphql/types';
 
@@ -27,17 +26,18 @@ export const useCreateEditPluginAdmin = ({ data }: Args) => {
   const { push } = useRouter();
   const { session } = useSessionAdmin();
   const formSchema = z.object({
-    name: zodInput.string.min(3).max(50),
-    code: zodInput.string
+    name: z.string().min(3).max(50),
+    code: z
+      .string()
       .min(3)
       .max(50)
       .refine(value => codePluginRegex.test(value), {
         message: t('create.code.invalid'),
       }),
-    description: zodInput.string,
-    support_url: zodInput.string.url(),
-    author: zodInput.string.min(3).max(100),
-    author_url: zodInput.string.url().or(z.literal('')),
+    description: z.string(),
+    support_url: z.string().url(),
+    author: z.string().min(3).max(100),
+    author_url: z.string().url().or(z.literal('')),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({

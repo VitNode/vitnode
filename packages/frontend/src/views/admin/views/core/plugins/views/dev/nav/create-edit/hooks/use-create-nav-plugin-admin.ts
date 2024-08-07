@@ -8,7 +8,6 @@ import { useTranslations } from 'next-intl';
 import { createMutationApi } from './create-mutation-api';
 import { editMutationApi } from './edit-mutation-api';
 import { useDialog } from '@/components/ui/dialog';
-import { zodInput } from '@/helpers/zod';
 import { FetcherErrorType } from '@/graphql/fetcher';
 import { ShowAdminNavPluginsObj } from '@/graphql/types';
 
@@ -24,9 +23,9 @@ export const useCreateNavPluginAdmin = ({
   const { setOpen } = useDialog();
   const { code } = useParams();
   const formSchema = z.object({
-    code: zodInput.string.min(3).max(50),
+    code: z.string().min(3).max(50),
     icon: z.string(),
-    href: zodInput.string.min(1).max(100),
+    href: z.string().min(1).max(100),
     parent_code: z.string().optional(),
     keywords: z.array(z.object({ id: z.number(), value: z.string() })),
   });

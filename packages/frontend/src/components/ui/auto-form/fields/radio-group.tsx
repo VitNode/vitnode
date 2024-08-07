@@ -41,52 +41,47 @@ export const AutoFormRadioGroup = ({
   }
 
   return (
-    <div className="flex flex-row items-center space-x-2">
-      <FormItem className="flex w-full flex-col justify-start">
-        {fieldConfigItem?.label && (
-          <AutoFormLabel
-            label={fieldConfigItem.label}
-            isRequired={isRequired}
-          />
-        )}
-        <FormControl>
-          <RadioGroup
-            onValueChange={fieldProps.onChange}
-            defaultValue={fieldProps.value}
-            {...fieldProps}
-          >
-            {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-            {values?.map((value: any) => {
-              const label = fieldProps.labels?.[value[0]].title || value[1];
-              const description = fieldProps.labels?.[value[0]].description;
+    <FormItem>
+      {fieldConfigItem?.label && (
+        <AutoFormLabel label={fieldConfigItem.label} isRequired={isRequired} />
+      )}
+      <FormControl>
+        <RadioGroup
+          onValueChange={fieldProps.onChange}
+          defaultValue={fieldProps.value}
+          {...fieldProps}
+        >
+          {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+          {values?.map((value: any) => {
+            const label = fieldProps.labels?.[value[0]].title || value[1];
+            const description = fieldProps.labels?.[value[0]].description;
 
-              return (
-                <FormItem
-                  key={value}
-                  className="flex items-center gap-3 space-y-0"
-                >
-                  <FormControl>
-                    <RadioGroupItem value={value[0]} />
-                  </FormControl>
-                  <FormLabel className="flex items-center space-y-0 font-normal">
-                    <span>{label}</span>
+            return (
+              <FormItem
+                key={value}
+                className="flex items-center gap-3 space-y-0"
+              >
+                <FormControl>
+                  <RadioGroupItem value={value[0]} />
+                </FormControl>
+                <FormLabel className="flex items-center space-y-0 font-normal">
+                  <span>{label}</span>
 
-                    {description && (
-                      <span className="text-muted-foreground flex flex-wrap items-center gap-1 text-sm font-normal">
-                        {description}
-                      </span>
-                    )}
-                  </FormLabel>
-                </FormItem>
-              );
-            })}
-          </RadioGroup>
-        </FormControl>
-        {fieldConfigItem.description && (
-          <AutoFormTooltip description={fieldConfigItem.description} />
-        )}
-        <FormMessage />
-      </FormItem>
-    </div>
+                  {description && (
+                    <span className="text-muted-foreground flex flex-wrap items-center gap-1 text-sm font-normal">
+                      {description}
+                    </span>
+                  )}
+                </FormLabel>
+              </FormItem>
+            );
+          })}
+        </RadioGroup>
+      </FormControl>
+      {fieldConfigItem.description && (
+        <AutoFormTooltip description={fieldConfigItem.description} />
+      )}
+      <FormMessage />
+    </FormItem>
   );
 };

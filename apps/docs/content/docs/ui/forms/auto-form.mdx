@@ -130,7 +130,35 @@ You can set a label for a field by using the `label` method.
 />
 ```
 
-###
+## Submit Form
+
+You can use the `onSubmit` prop to get the form data.
+
+```tsx
+<AutoForm
+  formSchema={formSchema}
+  onSubmit={data => {
+    console.log(data);
+  }}
+/>
+```
+
+### Submit Button
+
+Component has a submit button by default with the text `Save` include translation for this text. You can change the component by using the `submitButton` prop.
+
+```tsx
+<AutoForm
+  formSchema={formSchema}
+  submitButton={props => (
+    <Button {...props} className="w-full">
+      {t('sign_in.form.submit')}
+    </Button>
+  )}
+/>
+```
+
+Remember to pass the `props` to the button to keep the submit functionality.
 
 ## API Reference
 

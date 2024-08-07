@@ -13,22 +13,17 @@ export const AutoFormFile = ({
   fieldProps: React.ComponentProps<typeof FileInput>;
 }) => {
   return (
-    <div className="flex flex-row items-center space-x-2">
-      <FormItem className="flex w-full flex-col justify-start">
-        {fieldConfigItem?.label && (
-          <AutoFormLabel
-            label={fieldConfigItem.label}
-            isRequired={isRequired}
-          />
-        )}
-        <FormControl>
-          <FileInput {...fieldProps} />
-        </FormControl>
-        {fieldConfigItem.description && (
-          <AutoFormTooltip description={fieldConfigItem.description} />
-        )}
-        <FormMessage />
-      </FormItem>
-    </div>
+    <FormItem>
+      {fieldConfigItem?.label && (
+        <AutoFormLabel label={fieldConfigItem.label} isRequired={isRequired} />
+      )}
+      <FormControl>
+        <FileInput {...fieldProps} />
+      </FormControl>
+      {fieldConfigItem.description && (
+        <AutoFormTooltip description={fieldConfigItem.description} />
+      )}
+      <FormMessage />
+    </FormItem>
   );
 };

@@ -7,7 +7,6 @@ import { toast } from 'sonner';
 import { mutationApi } from './mutation-api';
 import { useDialog } from '@/components/ui/dialog';
 import { increaseVersionString } from '@/helpers/increase-version-string';
-import { zodInput } from '@/helpers/zod';
 import { CONFIG } from '@/helpers/config-with-env';
 import { ShowAdminPlugins } from '@/graphql/types';
 
@@ -20,7 +19,7 @@ export const useDownloadPluginAdmin = ({
   const { setOpen } = useDialog();
   const formSchema = z.object({
     type: z.enum(['rebuild', 'new_version']),
-    version: zodInput.string,
+    version: z.string(),
     version_code: z.coerce
       .number()
       .min(version_code ? version_code + 1 : 10000),

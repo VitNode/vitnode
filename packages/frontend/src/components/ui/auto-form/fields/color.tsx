@@ -16,22 +16,17 @@ export const AutoFormColor = ({
   >;
 }) => {
   return (
-    <div className="flex flex-row items-center space-x-2">
-      <FormItem className="flex w-full flex-col justify-start">
-        {fieldConfigItem?.label && (
-          <AutoFormLabel
-            label={fieldConfigItem.label}
-            isRequired={isRequired}
-          />
-        )}
-        <FormControl>
-          <ColorPicker disableRemoveColor={isRequired} {...fieldProps} />
-        </FormControl>
-        {fieldConfigItem.description && (
-          <AutoFormTooltip description={fieldConfigItem.description} />
-        )}
-        <FormMessage />
-      </FormItem>
-    </div>
+    <FormItem>
+      {fieldConfigItem?.label && (
+        <AutoFormLabel label={fieldConfigItem.label} isRequired={isRequired} />
+      )}
+      <FormControl>
+        <ColorPicker disableRemoveColor={isRequired} {...fieldProps} />
+      </FormControl>
+      {fieldConfigItem.description && (
+        <AutoFormTooltip description={fieldConfigItem.description} />
+      )}
+      <FormMessage />
+    </FormItem>
   );
 };

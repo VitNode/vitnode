@@ -20,7 +20,7 @@ export const useFormCreateEditFormGroupsMembersAdmin = () => {
     user: z
       .object({
         id: z.number(),
-        name: zodInput.string,
+        name: z.string(),
       })
       .optional(),
     group: z

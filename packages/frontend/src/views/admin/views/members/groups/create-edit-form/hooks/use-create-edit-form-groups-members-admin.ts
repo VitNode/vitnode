@@ -28,7 +28,7 @@ export const useCreateEditFormGroupsMembersAdmin = ({
 
   const formSchema = z.object({
     name: zodInput.languageInput.min(1),
-    color: zodInput.string,
+    color: z.string(),
     content: z.object({
       files_allow_upload: z.boolean(),
       files_total_max_storage: z.number(),

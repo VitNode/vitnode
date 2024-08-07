@@ -14,8 +14,8 @@ export const useSettingsCoreAdmin = ({
   const t = useTranslations('core');
 
   const formSchema = z.object({
-    name: zodInput.string.min(1),
-    short_name: zodInput.string.min(1),
+    name: z.string().min(1),
+    short_name: z.string().min(1),
     description: zodInput.languageInput,
     copyright: zodInput.languageInput,
   });

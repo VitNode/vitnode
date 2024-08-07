@@ -47,51 +47,46 @@ export const AutoFormEnum = ({
   };
 
   return (
-    <div className="flex flex-row items-center space-x-2">
-      <FormItem className="flex w-full flex-col justify-start">
-        {fieldConfigItem?.label && (
-          <AutoFormLabel
-            label={fieldConfigItem.label}
-            isRequired={isRequired}
-          />
-        )}
-        <FormControl>
-          <Select
-            onValueChange={fieldProps.onChange}
-            defaultValue={fieldProps.value}
-            {...fieldProps}
-          >
-            <SelectTrigger className={fieldProps.className}>
-              <SelectValue
-                placeholder={
-                  (
-                    fieldConfigItem.inputProps as {
-                      placeholder?: string;
-                    }
-                  )?.placeholder ?? t('select_option')
-                }
-              >
-                {field.value ? findItem(field.value)?.[1] : t('select_option')}
-              </SelectValue>
-            </SelectTrigger>
-            <SelectContent>
-              {values.map(([value, labelFromProps]) => {
-                const label = fieldProps.labels?.[value] ?? labelFromProps;
+    <FormItem>
+      {fieldConfigItem?.label && (
+        <AutoFormLabel label={fieldConfigItem.label} isRequired={isRequired} />
+      )}
+      <FormControl>
+        <Select
+          onValueChange={fieldProps.onChange}
+          defaultValue={fieldProps.value}
+          {...fieldProps}
+        >
+          <SelectTrigger className={fieldProps.className}>
+            <SelectValue
+              placeholder={
+                (
+                  fieldConfigItem.inputProps as {
+                    placeholder?: string;
+                  }
+                )?.placeholder ?? t('select_option')
+              }
+            >
+              {field.value ? findItem(field.value)?.[1] : t('select_option')}
+            </SelectValue>
+          </SelectTrigger>
+          <SelectContent>
+            {values.map(([value, labelFromProps]) => {
+              const label = fieldProps.labels?.[value] ?? labelFromProps;
 
-                return (
-                  <SelectItem value={labelFromProps} key={value}>
-                    {label}
-                  </SelectItem>
-                );
-              })}
-            </SelectContent>
-          </Select>
-        </FormControl>
-        {fieldConfigItem.description && (
-          <AutoFormTooltip description={fieldConfigItem.description} />
-        )}
-        <FormMessage />
-      </FormItem>
-    </div>
+              return (
+                <SelectItem value={labelFromProps} key={value}>
+                  {label}
+                </SelectItem>
+              );
+            })}
+          </SelectContent>
+        </Select>
+      </FormControl>
+      {fieldConfigItem.description && (
+        <AutoFormTooltip description={fieldConfigItem.description} />
+      )}
+      <FormMessage />
+    </FormItem>
   );
 };

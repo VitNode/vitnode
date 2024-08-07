@@ -8,7 +8,6 @@ import { createMutationApi } from './create-mutation-api';
 import { editMutationApi } from './edit-mutation-api';
 import { useDialog } from '@/components/ui/dialog';
 import { useTextLang } from '@/hooks/use-text-lang';
-import { zodInput } from '@/helpers/zod';
 import { ShowCoreNav } from '@/graphql/types';
 
 export interface CreateEditNavAdminArgs {
@@ -24,18 +23,18 @@ export const useCreateEditNavAdmin = ({ data }: CreateEditNavAdminArgs) => {
     name: z
       .array(
         z.object({
-          language_code: zodInput.string,
-          value: zodInput.string.min(3).max(100),
+          language_code: z.string(),
+          value: z.string().min(3).max(100),
         }),
       )
       .min(1),
     description: z.array(
       z.object({
-        language_code: zodInput.string,
-        value: zodInput.string.max(200),
+        language_code: z.string(),
+        value: z.string().max(200),
       }),
     ),
-    href: zodInput.string.min(1).max(255),
+    href: z.string().min(1).max(255),
     external: z.boolean(),
     icon: z.string(),
   });

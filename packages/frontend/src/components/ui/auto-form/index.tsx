@@ -16,10 +16,18 @@ export function AutoForm<T extends ZodObjectOrWrapped>({
   formSchema,
   fieldConfig,
   dependencies,
+  onSubmit: onSubmitProp,
+  submitButton,
 }: {
   formSchema: T;
   dependencies?: Dependency<z.infer<T>>[];
   fieldConfig?: FieldConfig<z.infer<T>>;
+  onSubmit?: (values: z.infer<T>) => Promise<void>;
+  submitButton?: (props: {
+    disabled: boolean;
+    loading: boolean;
+    type: 'submit';
+  }) => React.ReactNode;
   values?: Partial<z.infer<T>>;
 }) {
   const t = useTranslations('core');
@@ -33,16 +41,16 @@ export function AutoForm<T extends ZodObjectOrWrapped>({
     values: valuesProp,
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const parsedValues = formSchema.safeParse(values);
     if (parsedValues.success) {
-      // onSubmitProp?.(parsedValues.data);
+      await onSubmitProp?.(parsedValues.data);
     }
   };
 
   return (
     <Form {...form}>
-      <form className="space-y-6" onSubmit={onSubmit}>
+      <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
         <AutoFormObject
           schema={objectFormSchema}
           form={form}
@@ -50,13 +58,21 @@ export function AutoForm<T extends ZodObjectOrWrapped>({
           fieldConfig={fieldConfig}
         />
 
-        <Button
-          type="submit"
-          disabled={!form.formState.isValid}
-          loading={form.formState.isSubmitting}
-        >
-          {t('save')}
-        </Button>
+        {submitButton ? (
+          submitButton({
+            disabled: !form.formState.isValid,
+            loading: form.formState.isSubmitting,
+            type: 'submit',
+          })
+        ) : (
+          <Button
+            type="submit"
+            disabled={!form.formState.isValid}
+            loading={form.formState.isSubmitting}
+          >
+            {t('save')}
+          </Button>
+        )}
       </form>
     </Form>
   );

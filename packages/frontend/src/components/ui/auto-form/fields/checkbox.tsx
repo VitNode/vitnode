@@ -13,7 +13,7 @@ export const AutoFormCheckbox = ({
 }: AutoFormInputComponentProps) => {
   return (
     <FormItem
-      className={cn('flex flex-row items-start space-x-3 space-y-0', {
+      className={cn('flex items-start space-x-3 space-y-0', {
         'rounded-md border p-4':
           fieldConfigItem?.label || fieldConfigItem.description,
       })}

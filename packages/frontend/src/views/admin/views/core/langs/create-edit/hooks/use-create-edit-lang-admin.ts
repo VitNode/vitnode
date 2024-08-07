@@ -7,7 +7,6 @@ import * as z from 'zod';
 import { editMutationApi } from './edit-mutation-api';
 import { createMutationApi } from './create-mutation-api';
 import { useDialog } from '@/components/ui/dialog';
-import { zodInput } from '@/helpers/zod';
 import { ShowCoreLanguages } from '@/graphql/types';
 
 interface Args {
@@ -20,9 +19,9 @@ export const useCreateEditLangAdmin = ({ data }: Args) => {
   const { setOpen } = useDialog();
 
   const formSchema = z.object({
-    code: zodInput.string.min(1),
-    name: zodInput.string.min(1),
-    timezone: zodInput.string.min(1),
+    code: z.string().min(1),
+    name: z.string().min(1),
+    timezone: z.string().min(1),
     default: z.boolean(),
     time_24: z.boolean(),
     locale: z.string(),

@@ -88,19 +88,18 @@ export function AutoFormObject<T extends z.ZodObject<any, any>>({
               }
 
               return (
-                <div key={`${key}.parent`}>
-                  <InputComponent
-                    zodInputProps={zodInputProps}
-                    field={field}
-                    fieldConfigItem={fieldConfigItem}
-                    isRequired={isRequired}
-                    zodItem={item}
-                    // Override the fieldProps with the fieldProps from the fieldConfigItem
-                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                    fieldProps={fieldProps as any}
-                    className={fieldProps.className}
-                  />
-                </div>
+                <InputComponent
+                  key={key}
+                  zodInputProps={zodInputProps}
+                  field={field}
+                  fieldConfigItem={fieldConfigItem}
+                  isRequired={isRequired}
+                  zodItem={item}
+                  // Override the fieldProps with the fieldProps from the fieldConfigItem
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  fieldProps={fieldProps as any}
+                  className={fieldProps.className}
+                />
               );
             }}
           />
