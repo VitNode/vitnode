@@ -10,6 +10,7 @@ import { getDefaultValues, getObjectFormSchema } from './utils';
 import { Form } from '../form';
 import { AutoFormObject } from './object';
 import { Button } from '../button';
+import { cn } from '@/helpers/classnames';
 
 export function AutoForm<T extends ZodObjectOrWrapped>({
   values: valuesProp,
@@ -19,10 +20,12 @@ export function AutoForm<T extends ZodObjectOrWrapped>({
   onSubmit: onSubmitProp,
   submitButton,
   children,
+  className,
 }: {
   fieldConfig: FieldConfig<z.infer<T>>;
   formSchema: T;
   children?: React.ReactNode;
+  className?: string;
   dependencies?: Dependency<z.infer<T>>[];
   onSubmit?: (values: z.infer<T>) => Promise<void>;
   submitButton?: (props: {
@@ -52,7 +55,10 @@ export function AutoForm<T extends ZodObjectOrWrapped>({
 
   return (
     <Form {...form}>
-      <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
+      <form
+        className={cn('space-y-6', className)}
+        onSubmit={form.handleSubmit(onSubmit)}
+      >
         <AutoFormObject
           schema={objectFormSchema}
           form={form}

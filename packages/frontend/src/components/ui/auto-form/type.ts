@@ -20,7 +20,8 @@ export type ZodObjectOrWrapped =
   | z.ZodObject<any, any>;
 
 interface FieldConfigItemRoot {
-  description?: React.ReactNode;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  description?: React.ReactNode | ((value: any) => React.ReactNode);
   label?: string;
 
   renderParent?: (props: {

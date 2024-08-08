@@ -19,7 +19,10 @@ export const AutoFormNumber = ({
         <Input type="number" {...fieldProps} />
       </FormControl>
       {fieldConfigItem.description && (
-        <AutoFormTooltip description={fieldConfigItem.description} />
+        <AutoFormTooltip
+          value={fieldProps.value}
+          description={fieldConfigItem.description}
+        />
       )}
       <FormMessage />
     </FormItem>

@@ -80,6 +80,19 @@ or using the `description` method in the `fieldConfig` object.
 />
 ```
 
+You can also use the `description` as function to get the current value of the field.
+
+```tsx
+<AutoForm
+  formSchema={formSchema}
+  fieldConfig={{
+    name: {
+      description: value => `The current value is ${value}`,
+    },
+  }}
+/>
+```
+
 ### Optional Fields
 
 By default all fields are required. You can make a field optional by using the `optional` method.

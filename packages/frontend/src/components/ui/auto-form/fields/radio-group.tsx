@@ -79,7 +79,10 @@ export const AutoFormRadioGroup = ({
         </RadioGroup>
       </FormControl>
       {fieldConfigItem.description && (
-        <AutoFormTooltip description={fieldConfigItem.description} />
+        <AutoFormTooltip
+          value={fieldProps.value}
+          description={fieldConfigItem.description}
+        />
       )}
       <FormMessage />
     </FormItem>

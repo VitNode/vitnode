@@ -1,6 +1,5 @@
-import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
-import { useForm } from 'react-hook-form';
+// import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import React from 'react';
 import { toast } from 'sonner';
@@ -19,10 +18,7 @@ export const useSignUpView = () => {
   const formSchema = z.object({
     name: z
       .string()
-      .trim()
-      .min(1, {
-        message: t('forms.empty'),
-      })
+      .min(3)
       .max(32, {
         message: t('forms.max_length', { length: 32 }),
       })
@@ -30,18 +26,9 @@ export const useSignUpView = () => {
         message: t('sign_up.form.name.invalid'),
       })
       .default(''),
-    email: z
-      .string()
-      .trim()
-      .min(1, {
-        message: t('forms.empty'),
-      })
-      .default(''),
+    email: z.string().email().default(''),
     password: z
       .string()
-      .min(1, {
-        message: t('forms.empty'),
-      })
       .regex(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-_=+{};:,<.>]).{8,}$/,
         {
@@ -56,17 +43,6 @@ export const useSignUpView = () => {
       })
       .default(false),
     newsletter: z.boolean().default(false).optional(),
-  });
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: '',
-      email: '',
-      password: '',
-      terms: false,
-      newsletter: false,
-    },
-    mode: 'onChange',
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -95,31 +71,31 @@ export const useSignUpView = () => {
       }
 
       if (code === 'EMAIL_ALREADY_EXISTS') {
-        form.setError(
-          'email',
-          {
-            type: 'manual',
-            message: t('sign_up.form.email.already_exists'),
-          },
-          {
-            shouldFocus: true,
-          },
-        );
+        // form.setError(
+        //   'email',
+        //   {
+        //     type: 'manual',
+        //     message: t('sign_up.form.email.already_exists'),
+        //   },
+        //   {
+        //     shouldFocus: true,
+        //   },
+        // );
 
         return;
       }
 
       if (code === 'NAME_ALREADY_EXISTS') {
-        form.setError(
-          'name',
-          {
-            type: 'manual',
-            message: t('sign_up.form.name.already_exists'),
-          },
-          {
-            shouldFocus: true,
-          },
-        );
+        // form.setError(
+        //   'name',
+        //   {
+        //     type: 'manual',
+        //     message: t('sign_up.form.name.already_exists'),
+        //   },
+        //   {
+        //     shouldFocus: true,
+        //   },
+        // );
 
         return;
       }
@@ -136,7 +112,6 @@ export const useSignUpView = () => {
 
   return {
     formSchema,
-    form,
     onSubmit,
     isReady,
     isSuccess,

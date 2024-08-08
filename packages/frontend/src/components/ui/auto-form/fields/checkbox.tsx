@@ -35,7 +35,10 @@ export const AutoFormCheckbox = ({
             />
           )}
           {fieldConfigItem.description && (
-            <AutoFormTooltip description={fieldConfigItem.description} />
+            <AutoFormTooltip
+              value={fieldProps.value}
+              description={fieldConfigItem.description}
+            />
           )}
         </div>
       )}

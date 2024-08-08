@@ -8,7 +8,7 @@ export const useSignInView = () => {
   const [error, setError] = React.useState<FetcherErrorType | null>(null);
 
   const formSchema = z.object({
-    email: z.string().min(1).default(''),
+    email: z.string().email().default(''),
     password: z.string().min(1).default(''),
     remember: z.boolean().default(false).optional(),
   });
