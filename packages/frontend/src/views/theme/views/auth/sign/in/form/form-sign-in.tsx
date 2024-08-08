@@ -9,6 +9,8 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { useSignInView } from '@/hooks/core/sign/in/use-sign-in-view';
 import { AutoForm } from '@/components/ui/auto-form';
+import { AutoFormInput } from '@/components/ui/auto-form/fields/input';
+import { AutoFormCheckbox } from '@/components/ui/auto-form/fields/checkbox';
 
 export const FormSignIn = () => {
   const t = useTranslations('core');
@@ -42,21 +44,23 @@ export const FormSignIn = () => {
         formSchema={formSchema}
         fieldConfig={{
           email: {
+            fieldType: AutoFormInput,
             label: t('sign_in.form.email.label'),
             inputProps: {
               type: 'email',
             },
           },
           password: {
+            fieldType: AutoFormInput,
             label: t('sign_in.form.password.label'),
             inputProps: {
               type: 'password',
             },
           },
           remember: {
+            fieldType: AutoFormCheckbox,
             label: t('sign_in.form.remember.label'),
             description: t('sign_in.form.remember.desc'),
-            fieldType: 'checkbox',
           },
         }}
         onSubmit={onSubmit}

@@ -25,10 +25,7 @@ export const INPUT_COMPONENTS = {
  * Define handlers for specific Zod types.
  * You can expand this object to support more types.
  */
-export const DEFAULT_ZOD_HANDLERS: Record<
-  string,
-  keyof typeof INPUT_COMPONENTS
-> = {
+export const DEFAULT_ZOD_HANDLERS: Record<string, string> = {
   ZodBoolean: 'switch',
   // ZodDate: 'date',
   ZodEnum: 'select',

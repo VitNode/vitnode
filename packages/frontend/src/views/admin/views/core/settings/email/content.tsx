@@ -24,6 +24,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Link } from '@/navigation';
 import { FileInput } from '@/components/ui/file-input';
 import { AutoForm } from '@/components/ui/auto-form';
+import { AutoFormRadioGroup } from '@/components/ui/auto-form/fields/radio-group';
 
 export const ContentEmailSettingsAdmin = (
   props: Admin__Core_Email_Settings__ShowQuery,
@@ -43,7 +44,7 @@ export const ContentEmailSettingsAdmin = (
         fieldConfig={{
           type: {
             label: 'Radio Group Example',
-            fieldType: 'radio',
+            fieldType: AutoFormRadioGroup,
             inputProps: {
               labels: {
                 ['option-one']: {

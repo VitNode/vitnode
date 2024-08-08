@@ -28,13 +28,15 @@ export const useSignUpView = () => {
       })
       .refine(value => nameRegex.test(value), {
         message: t('sign_up.form.name.invalid'),
-      }),
+      })
+      .default(''),
     email: z
       .string()
       .trim()
       .min(1, {
         message: t('forms.empty'),
-      }),
+      })
+      .default(''),
     password: z
       .string()
       .min(1, {
@@ -45,11 +47,15 @@ export const useSignUpView = () => {
         {
           message: t('sign_up.form.password.invalid'),
         },
-      ),
-    terms: z.boolean().refine(value => value, {
-      message: t('sign_up.form.terms.empty'),
-    }),
-    newsletter: z.boolean(),
+      )
+      .default(''),
+    terms: z
+      .boolean()
+      .refine(value => value, {
+        message: t('sign_up.form.terms.empty'),
+      })
+      .default(false),
+    newsletter: z.boolean().default(false).optional(),
   });
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -129,6 +135,7 @@ export const useSignUpView = () => {
   };
 
   return {
+    formSchema,
     form,
     onSubmit,
     isReady,

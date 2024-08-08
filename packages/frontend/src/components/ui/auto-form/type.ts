@@ -3,9 +3,15 @@ import * as z from 'zod';
 
 import { AutoFormColor } from './fields/color';
 import { AutoFormFile } from './fields/file';
-import { FieldPropsAutoFormEnum } from './fields/enum';
-import { INPUT_COMPONENTS } from './config';
-import { FieldPropsAutoFormRadioGroup } from './fields/radio-group';
+import { AutoFormEnum, FieldPropsAutoFormEnum } from './fields/enum';
+import {
+  AutoFormRadioGroup,
+  FieldPropsAutoFormRadioGroup,
+} from './fields/radio-group';
+import { AutoFormInput } from './fields/input';
+import { AutoFormSwitch } from './fields/switch';
+import { AutoFormCheckbox } from './fields/checkbox';
+import { AutoFormTextArea } from './fields/textarea';
 
 export type ZodObjectOrWrapped =
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -25,34 +31,54 @@ interface FieldConfigItemRoot {
 export type FieldConfigItem = FieldConfigItemRoot &
   (
     | {
-        fieldType?: 'color';
+        fieldType: (
+          props: React.ComponentProps<typeof AutoFormCheckbox>,
+        ) => React.ReactNode;
+        inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
+      }
+    | {
+        fieldType: (
+          props: React.ComponentProps<typeof AutoFormColor>,
+        ) => React.ReactNode;
         inputProps?: React.ComponentProps<typeof AutoFormColor>['fieldProps'];
       }
     | {
-        fieldType?: 'file';
-        inputProps?: React.ComponentProps<typeof AutoFormFile>['fieldProps'];
-      }
-    | {
-        fieldType?: 'radio';
-        inputProps?: FieldPropsAutoFormRadioGroup;
-      }
-    | {
-        fieldType?: 'select';
+        fieldType: (
+          props: React.ComponentProps<typeof AutoFormEnum>,
+        ) => React.ReactNode;
         inputProps?: FieldPropsAutoFormEnum;
       }
     | {
-        fieldType?: keyof typeof INPUT_COMPONENTS;
+        fieldType: (
+          props: React.ComponentProps<typeof AutoFormFile>,
+        ) => React.ReactNode;
+        inputProps?: React.ComponentProps<typeof AutoFormFile>['fieldProps'];
+      }
+    | {
+        fieldType: (
+          props: React.ComponentProps<typeof AutoFormInput>,
+        ) => React.ReactNode;
+        inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
+      }
+    | {
+        fieldType: (
+          props: React.ComponentProps<typeof AutoFormRadioGroup>,
+        ) => React.ReactNode;
+        inputProps?: FieldPropsAutoFormRadioGroup;
+      }
+    | {
+        fieldType: (
+          props: React.ComponentProps<typeof AutoFormSwitch>,
+        ) => React.ReactNode;
+        inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
+      }
+    | {
+        fieldType: (
+          props: React.ComponentProps<typeof AutoFormTextArea>,
+        ) => React.ReactNode;
         inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
       }
   );
-
-// | {
-//     fieldType?: (typeof INPUT_COMPONENTS)['file'];
-//     inputProps?: Omit<
-//       React.InputHTMLAttributes<HTMLInputElement>,
-//       'defaultValue' | 'onChange' | 'required' | 'value'
-//     >;
-//   }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type FieldConfig<T extends z.infer<z.ZodObject<any, any>>> = {

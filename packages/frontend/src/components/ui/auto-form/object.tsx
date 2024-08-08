@@ -3,12 +3,10 @@ import { useForm, useFormContext } from 'react-hook-form';
 
 import resolveDependencies, {
   getBaseSchema,
-  getBaseType,
   zodToHtmlInputProps,
 } from './utils';
 import { FormField } from '../form';
-import { DEFAULT_ZOD_HANDLERS, INPUT_COMPONENTS } from './config';
-import { Dependency, FieldConfig, FieldConfigItem } from './type';
+import { Dependency, FieldConfig } from './type';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function AutoFormObject<T extends z.ZodObject<any, any>>({
@@ -18,10 +16,10 @@ export function AutoFormObject<T extends z.ZodObject<any, any>>({
   path = [],
   dependencies = [],
 }: {
+  fieldConfig: FieldConfig<z.infer<T>>;
   form: ReturnType<typeof useForm>;
   schema: T | z.ZodEffects<T>;
   dependencies?: Dependency<z.infer<T>>[];
-  fieldConfig?: FieldConfig<z.infer<T>>;
   path?: string[];
 }) {
   const { watch } = useFormContext();
@@ -33,7 +31,7 @@ export function AutoFormObject<T extends z.ZodObject<any, any>>({
     <>
       {Object.keys(shape).map(name => {
         let item = shape[name] as z.ZodAny;
-        const zodBaseType = getBaseType(item);
+        // const zodBaseType = getBaseType(item);
         const key = [...path, name].join('.');
 
         const {
@@ -47,7 +45,11 @@ export function AutoFormObject<T extends z.ZodObject<any, any>>({
 
         // Zod array or object
 
-        const fieldConfigItem: FieldConfigItem = fieldConfig?.[name] ?? {};
+        const fieldConfigItem = fieldConfig[name];
+        if (!fieldConfigItem) {
+          return;
+        }
+
         const zodInputProps = zodToHtmlInputProps(item);
         const isRequired =
           isRequiredByDependency || zodInputProps.required || false;
@@ -62,15 +64,7 @@ export function AutoFormObject<T extends z.ZodObject<any, any>>({
             control={form.control}
             name={key}
             render={({ field }) => {
-              const inputType =
-                fieldConfigItem.fieldType ??
-                DEFAULT_ZOD_HANDLERS[zodBaseType] ??
-                'fallback';
-
-              const InputComponent =
-                typeof inputType === 'function'
-                  ? inputType
-                  : INPUT_COMPONENTS[inputType];
+              const InputComponent = fieldConfigItem.fieldType;
 
               const value = field.value ?? '';
 

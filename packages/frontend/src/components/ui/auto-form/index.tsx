@@ -18,10 +18,12 @@ export function AutoForm<T extends ZodObjectOrWrapped>({
   dependencies,
   onSubmit: onSubmitProp,
   submitButton,
+  children,
 }: {
+  fieldConfig: FieldConfig<z.infer<T>>;
   formSchema: T;
+  children?: React.ReactNode;
   dependencies?: Dependency<z.infer<T>>[];
-  fieldConfig?: FieldConfig<z.infer<T>>;
   onSubmit?: (values: z.infer<T>) => Promise<void>;
   submitButton?: (props: {
     disabled: boolean;
@@ -57,7 +59,7 @@ export function AutoForm<T extends ZodObjectOrWrapped>({
           dependencies={dependencies}
           fieldConfig={fieldConfig}
         />
-
+        {children}
         {submitButton ? (
           submitButton({
             disabled: !form.formState.isValid,
