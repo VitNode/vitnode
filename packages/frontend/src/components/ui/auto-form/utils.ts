@@ -123,6 +123,7 @@ export default function resolveDependencies<
   const currentFieldDependencies = dependencies.filter(
     dependency => dependency.targetField === currentFieldName,
   );
+
   for (const dependency of currentFieldDependencies) {
     const watchedValue = watch(dependency.sourceField as string);
 
@@ -225,10 +226,10 @@ export function getDefaultValues<Schema extends z.ZodObject<any, any>>(
       let defaultValue = getDefaultValueInZodStack(item);
       if (
         (defaultValue === null || defaultValue === '') &&
-        fieldConfig?.[key]?.inputProps
+        fieldConfig?.[key]
       ) {
         defaultValue = (
-          fieldConfig?.[key]?.inputProps as unknown as { defaultValue: string }
+          fieldConfig?.[key] as unknown as { defaultValue: string }
         ).defaultValue;
       }
       if (defaultValue !== undefined) {

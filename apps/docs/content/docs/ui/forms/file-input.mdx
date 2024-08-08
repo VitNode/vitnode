@@ -12,6 +12,7 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 ```ts
 import * as z from 'zod';
 import { AutoForm } from 'vitnode-frontend/components/ui/auto-form';
+import { AutoFormFile } from 'vitnode-frontend/components/ui/auto-form/fields/file';
 import { zodFile } from 'vitnode-frontend/helpers/zod';
 ```
 
@@ -27,13 +28,15 @@ const formSchema = z.object({
   fieldConfig={{
     logo: {
       label: 'Logo',
-      fieldType: 'file', // [!code highlight]
-      inputProps: {
-        acceptExtensions: ['png', 'jpg', 'gif'],
-        maxFileSizeInMb: 2,
-        accept: 'image/png, image/gif, image/jpeg',
-        showInfo: true,
-      },
+      fieldType: props => (
+        <AutoFormFile
+          acceptExtensions={['png', 'jpg', 'gif']}
+          maxFileSizeInMb={2}
+          accept="image/png, image/gif, image/jpeg"
+          showInfo
+          {...props}
+        />
+      ),
     },
   }}
 />
@@ -75,14 +78,16 @@ const formSchema = z.object({
   fieldConfig={{
     logo: {
       label: 'Logo',
-      fieldType: 'file',
-      inputProps: {
-        acceptExtensions: ['png', 'jpg', 'gif'],
-        maxFileSizeInMb: 2,
-        accept: 'image/png, image/gif, image/jpeg',
-        showInfo: true,
-        multiple: true, // [!code highlight]
-      },
+      fieldType: props => (
+        <AutoFormFile
+          acceptExtensions={['png', 'jpg', 'gif']}
+          maxFileSizeInMb={2}
+          accept="image/png, image/gif, image/jpeg"
+          showInfo
+          multiple // [!code highlight]
+          {...props}
+        />
+      ),
     },
   }}
 />

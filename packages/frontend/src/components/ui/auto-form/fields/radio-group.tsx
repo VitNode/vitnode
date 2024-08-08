@@ -4,13 +4,15 @@ import { AutoFormInputComponentProps } from '../type';
 import { AutoFormLabel } from './common/label';
 import { AutoFormTooltip } from './common/tooltip';
 import { getBaseSchema } from '../utils';
+import { AutoFormWrapper } from './common/wrapper';
 
 import { FormControl, FormItem, FormLabel, FormMessage } from '../../form';
 import { RadioGroup, RadioGroupItem } from '../../radio-group';
 
-type FieldPropsRoot = AutoFormInputComponentProps['fieldProps'];
-
-export interface FieldPropsAutoFormRadioGroup extends FieldPropsRoot {
+export const AutoFormRadioGroup = ({
+  autoFormProps: { isRequired, fieldConfigItem, zodItem, field, theme },
+  labels,
+}: AutoFormInputComponentProps & {
   labels?: Record<
     string,
     {
@@ -18,15 +20,6 @@ export interface FieldPropsAutoFormRadioGroup extends FieldPropsRoot {
       description?: string;
     }
   >;
-}
-
-export const AutoFormRadioGroup = ({
-  isRequired,
-  fieldConfigItem,
-  zodItem,
-  fieldProps,
-}: Omit<AutoFormInputComponentProps, 'fieldProps'> & {
-  fieldProps: FieldPropsAutoFormRadioGroup;
 }) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -41,20 +34,20 @@ export const AutoFormRadioGroup = ({
   }
 
   return (
-    <FormItem>
+    <AutoFormWrapper theme={theme}>
       {fieldConfigItem?.label && (
-        <AutoFormLabel label={fieldConfigItem.label} isRequired={isRequired} />
+        <AutoFormLabel
+          label={fieldConfigItem.label}
+          isRequired={isRequired}
+          theme={theme}
+        />
       )}
       <FormControl>
-        <RadioGroup
-          onValueChange={fieldProps.onChange}
-          defaultValue={fieldProps.value}
-          {...fieldProps}
-        >
+        <RadioGroup onValueChange={field.onChange} defaultValue={field.value}>
           {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
           {values?.map((value: any) => {
-            const label = fieldProps.labels?.[value[0]].title || value[1];
-            const description = fieldProps.labels?.[value[0]].description;
+            const label = labels?.[value[0]].title || value[1];
+            const description = labels?.[value[0]].description;
 
             return (
               <FormItem
@@ -80,11 +73,11 @@ export const AutoFormRadioGroup = ({
       </FormControl>
       {fieldConfigItem.description && (
         <AutoFormTooltip
-          value={fieldProps.value}
+          value={field.value}
           description={fieldConfigItem.description}
         />
       )}
       <FormMessage />
-    </FormItem>
+    </AutoFormWrapper>
   );
 };

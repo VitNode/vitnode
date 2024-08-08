@@ -4,13 +4,15 @@ import { AutoFormTooltip } from './common/tooltip';
 import { AutoFormWrapper } from './common/wrapper';
 
 import { FormControl, FormMessage } from '../../form';
-import { Switch } from '../../switch';
+import { TextLanguageInput } from '../../text-language-input';
 
-export const AutoFormSwitch = ({
+export const AutoFormTextLanguageInput = ({
   autoFormProps: { isRequired, fieldConfigItem, field, theme },
-  ...props
 }: AutoFormInputComponentProps &
-  Omit<React.ComponentProps<typeof Switch>, 'onChange' | 'value'>) => {
+  Omit<
+    React.ComponentProps<typeof TextLanguageInput>,
+    'onChange' | 'value'
+  >) => {
   return (
     <AutoFormWrapper theme={theme}>
       {fieldConfigItem?.label && (
@@ -21,11 +23,7 @@ export const AutoFormSwitch = ({
         />
       )}
       <FormControl>
-        <Switch
-          checked={field.value}
-          onCheckedChange={field.onChange}
-          {...props}
-        />
+        <TextLanguageInput {...field} />
       </FormControl>
       {fieldConfigItem.description && (
         <AutoFormTooltip

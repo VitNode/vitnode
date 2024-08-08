@@ -3,8 +3,6 @@ title: Auto Form
 description: Automatically generate form fields based on a schema.
 ---
 
-Component created based on [auto-form from vantezzen](https://github.com/vantezzen/auto-form).
-
 ## Support Fileds
 
 - [Color Picker](/docs/ui/forms/color-picker)
@@ -37,6 +35,9 @@ npm i react-hook-form zod
 ```tsx
 import * as z from 'zod';
 import { AutoForm } from 'vitnode-frontend/components/ui/auto-form';
+
+// for input
+import { AutoFormInput } from 'vitnode-frontend/components/ui/auto-form/fields/input';
 ```
 
 ```ts
@@ -46,7 +47,14 @@ const formSchema = z.object({
 ```
 
 ```tsx
-<AutoForm formSchema={formSchema} />
+<AutoForm
+  formSchema={formSchema}
+  fieldConfig={{
+    name: {
+      fieldType: AutoFormInput,
+    },
+  }}
+/>
 ```
 
 ## Zod Configuration
@@ -74,6 +82,7 @@ or using the `description` method in the `fieldConfig` object.
   formSchema={formSchema}
   fieldConfig={{
     name: {
+      fieldType: AutoFormInput
       description: 'Test description',
     },
   }}
@@ -87,6 +96,7 @@ You can also use the `description` as function to get the current value of the f
   formSchema={formSchema}
   fieldConfig={{
     name: {
+      fieldType: AutoFormInput
       description: value => `The current value is ${value}`,
     },
   }}
@@ -113,21 +123,6 @@ const formSchema = z.object({
 });
 ```
 
-## Field Configuration
-
-As `zod` does not support other configurations to the shema fields, we created a `fieldConfig` object that you can pass props to the fields.
-
-```tsx
-<AutoForm
-  fieldConfig={{
-    // Add config for each field here - don't add the field name to keep all defaults
-    username: {
-      // Configuration here
-    },
-  }}
-/>
-```
-
 ### Label
 
 You can set a label for a field by using the `label` method.
@@ -138,6 +133,7 @@ You can set a label for a field by using the `label` method.
   fieldConfig={{
     username: {
       label: 'Your username',
+      fieldType: AutoFormInput,
     },
   }}
 />
@@ -150,6 +146,11 @@ You can use the `onSubmit` prop to get the form data.
 ```tsx
 <AutoForm
   formSchema={formSchema}
+  fieldConfig={{
+    username: {
+      fieldType: AutoFormInput,
+    },
+  }}
   onSubmit={data => {
     console.log(data);
   }}
@@ -161,6 +162,11 @@ You can get access to the `form` from `react-hook-form` by using the `form` prop
 ```tsx
 <AutoForm
   formSchema={formSchema}
+    fieldConfig={{
+    username: {
+      fieldType: AutoFormInput,
+    },
+  }}
   onSubmit={(data, form) => {
     console.log(data);
     form.setError("username", { type: "manual", message: "This is an error" });
@@ -174,6 +180,11 @@ Component has a submit button by default with the text `Save` include translatio
 ```tsx
 <AutoForm
   formSchema={formSchema}
+  fieldConfig={{
+    username: {
+      fieldType: AutoFormInput,
+    },
+  }}
   submitButton={props => (
     <Button {...props} className="w-full">
       {t('sign_in.form.submit')}
@@ -183,6 +194,22 @@ Component has a submit button by default with the text `Save` include translatio
 ```
 
 Remember to pass the `props` to the button to keep the submit functionality.
+
+## Theme
+
+You can change the theme of the form by using the `theme` prop and passing `horizontal` or `vertical`.
+
+```tsx
+<AutoForm
+  formSchema={formSchema}
+  fieldConfig={{
+    username: {
+      fieldType: AutoFormInput,
+    },
+  }}
+  theme="horizontal" // [!code highlight]
+/>
+```
 
 ## API Reference
 
@@ -198,6 +225,19 @@ import { TypeTable } from 'fumadocs-ui/components/type-table';
       description:
         'Configuration for the form fields. Depends on type of field.',
       type: 'FieldConfig',
+    },
+    onSubmit: {
+      description: 'Function to call when the form is submitted.',
+      type: '(data: zodObj, form: UseFormReturn<any>) => void',
+    },
+    submitButton: {
+      description: 'Custom submit button.',
+      type: 'ReactNode',
+    },
+    theme: {
+      description: 'Theme of the form.',
+      type: '"horizontal" | "vertical"',
+      default: '"vertical"',
     },
   }}
 />

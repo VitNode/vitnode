@@ -5,8 +5,9 @@ import { AutoFormInputComponentProps } from '../type';
 import { AutoFormLabel } from './common/label';
 import { AutoFormTooltip } from './common/tooltip';
 import { getBaseSchema } from '../utils';
+import { AutoFormWrapper } from './common/wrapper';
 
-import { FormControl, FormItem, FormMessage } from '../../form';
+import { FormControl, FormMessage } from '../../form';
 import {
   Select,
   SelectContent,
@@ -15,20 +16,14 @@ import {
   SelectValue,
 } from '../../select';
 
-type FieldPropsRoot = AutoFormInputComponentProps['fieldProps'];
-
-export interface FieldPropsAutoFormEnum extends FieldPropsRoot {
+export const AutoFormSelect = ({
+  autoFormProps: { isRequired, fieldConfigItem, zodItem, field, theme },
+  labels,
+  placeholder,
+  ...props
+}: AutoFormInputComponentProps & {
   labels?: Record<string, string>;
-}
-
-export const AutoFormEnum = ({
-  isRequired,
-  fieldConfigItem,
-  zodItem,
-  fieldProps,
-  field,
-}: Omit<AutoFormInputComponentProps, 'fieldProps'> & {
-  fieldProps: FieldPropsAutoFormEnum;
+  placeholder?: string;
 }) => {
   const t = useTranslations('core');
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -42,37 +37,36 @@ export const AutoFormEnum = ({
     values = baseValues.map(value => [value, value]);
   }
 
-  const findItem = (value: unknown) => {
-    return values.find(item => item[0] === value);
+  const buttonPlaceholder = () => {
+    const current = values.find(item => item[0] === field.value);
+    const item = current?.[1];
+
+    if (current) {
+      return labels?.[current[0]] || item;
+    }
+
+    return item || t('select_option');
   };
 
   return (
-    <FormItem>
+    <AutoFormWrapper theme={theme}>
       {fieldConfigItem?.label && (
-        <AutoFormLabel label={fieldConfigItem.label} isRequired={isRequired} />
+        <AutoFormLabel
+          label={fieldConfigItem.label}
+          isRequired={isRequired}
+          theme={theme}
+        />
       )}
       <FormControl>
-        <Select
-          onValueChange={fieldProps.onChange}
-          defaultValue={fieldProps.value}
-          {...fieldProps}
-        >
-          <SelectTrigger className={fieldProps.className}>
-            <SelectValue
-              placeholder={
-                (
-                  fieldConfigItem.inputProps as {
-                    placeholder?: string;
-                  }
-                )?.placeholder ?? t('select_option')
-              }
-            >
-              {field.value ? findItem(field.value)?.[1] : t('select_option')}
+        <Select onValueChange={field.onChange} defaultValue={field.value}>
+          <SelectTrigger {...props}>
+            <SelectValue placeholder={placeholder}>
+              {buttonPlaceholder()}
             </SelectValue>
           </SelectTrigger>
           <SelectContent>
             {values.map(([value, labelFromProps]) => {
-              const label = fieldProps.labels?.[value] ?? labelFromProps;
+              const label = labels?.[value] ?? labelFromProps;
 
               return (
                 <SelectItem value={labelFromProps} key={value}>
@@ -85,11 +79,11 @@ export const AutoFormEnum = ({
       </FormControl>
       {fieldConfigItem.description && (
         <AutoFormTooltip
-          value={fieldProps.value}
+          value={field.value}
           description={fieldConfigItem.description}
         />
       )}
       <FormMessage />
-    </FormItem>
+    </AutoFormWrapper>
   );
 };

@@ -1,11 +1,9 @@
-import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
-import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import { toast } from 'sonner';
 
 import { mutationApi } from './mutation-api';
-import { zodInput } from '@/helpers/zod';
+import { zodLanguageInput } from '@/helpers/zod';
 import { Core_Main_Settings__ShowQuery } from '@/graphql/queries/admin/settings/core_main_settings__show.generated';
 
 export const useSettingsCoreAdmin = ({
@@ -14,28 +12,24 @@ export const useSettingsCoreAdmin = ({
   const t = useTranslations('core');
 
   const formSchema = z.object({
-    name: z.string().min(1),
-    short_name: z.string().min(1),
-    description: zodInput.languageInput,
-    copyright: zodInput.languageInput,
-  });
-
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: data.site_name,
-      short_name: data.site_short_name,
-      description: data.site_description,
-      copyright: data.site_copyright,
-    },
+    name: z.string().min(1).default(data.site_name),
+    short_name: z.string().min(1).default(data.site_short_name),
+    description: z
+      .array(zodLanguageInput)
+      .default(data.site_description)
+      .optional(),
+    copyright: z
+      .array(zodLanguageInput)
+      .default(data.site_copyright)
+      .optional(),
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const mutation = await mutationApi({
       siteName: values.name,
       siteShortName: values.short_name,
-      siteDescription: values.description,
-      siteCopyright: values.copyright,
+      siteDescription: values.description ?? [],
+      siteCopyright: values.copyright ?? [],
     });
 
     if (mutation?.error) {
@@ -47,11 +41,10 @@ export const useSettingsCoreAdmin = ({
     }
 
     toast.success(t('saved_success'));
-    form.reset(values);
   };
 
   return {
-    form,
     onSubmit,
+    formSchema,
   };
 };

@@ -21,13 +21,13 @@ import { AutoForm } from 'vitnode-frontend/components/ui/auto-form';
 
 ```ts
 const formSchema = z.object({
-  type: z.enum(['smtp', 'resend', 'none']),
+  type: z.enum(['option-one', 'option-two']),
 });
 
 // or
 
 const formSchema = z.object({
-  type: z.nativeEnum(EmailProvider),
+  type: z.nativeEnum(TestEnumProvider),
 });
 ```
 
@@ -36,16 +36,17 @@ const formSchema = z.object({
   formSchema={formSchema}
   fieldConfig={{
     type: {
-      label: 'Type of Email',
-      fieldType: 'select', // [!code highlight]
-      inputProps: {
-        labels: {
-          [EmailProvider.none]: 'None',
-          [EmailProvider.smtp]: 'SMTP',
-          [EmailProvider.resend]: 'Resend',
-        },
-        placeholder: 'Select type of email',
-      },
+      label: 'Select Example',
+      fieldType: props => (
+        <AutoFormSelect
+          {...props}
+          placeholder="Select example"
+          labels={{
+            ['option-one']: 'Option One',
+            ['option-two']: 'Option Two',
+          }}
+        />
+      ),
     },
   }}
 />
@@ -67,12 +68,11 @@ import {
 ```tsx
 <Select>
   <SelectTrigger>
-    <SelectValue placeholder="Select type of email" />
+    <SelectValue placeholder="Select example" />
   </SelectTrigger>
   <SelectContent>
-    <SelectItem value="none">None</SelectItem>
-    <SelectItem value="smtp">SMTP</SelectItem>
-    <SelectItem value="resend">Resend</SelectItem>
+    <SelectItem value="option-one">Option One</SelectItem>
+    <SelectItem value="option-two">Option Two</SelectItem>
   </SelectContent>
 </Select>
 ```

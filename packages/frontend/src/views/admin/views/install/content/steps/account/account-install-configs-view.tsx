@@ -44,20 +44,14 @@ export const AccountInstallConfigsView = () => {
               </>
             );
           },
-          inputProps: {
-            type: 'text',
-          },
         },
         email: {
           label: t('sign_up.form.email.label'),
-          fieldType: AutoFormInput,
-          inputProps: {
-            type: 'email',
-          },
+          fieldType: props => <AutoFormInput type="email" {...props} />,
         },
         password: {
           label: t('sign_up.form.password.label'),
-          fieldType: AutoFormInput,
+          fieldType: props => <AutoFormInput type="password" {...props} />,
           description: value => {
             const regexArray = [
               /^.{8,}$/, // Min 8 characters
@@ -84,9 +78,6 @@ export const AccountInstallConfigsView = () => {
                 />
               </div>
             );
-          },
-          inputProps: {
-            type: 'password',
           },
         },
         terms: {

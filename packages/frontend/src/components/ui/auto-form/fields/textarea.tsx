@@ -1,30 +1,37 @@
 import { AutoFormInputComponentProps } from '../type';
 import { AutoFormLabel } from './common/label';
 import { AutoFormTooltip } from './common/tooltip';
+import { AutoFormWrapper } from './common/wrapper';
 
-import { FormControl, FormItem, FormMessage } from '../../form';
+import { FormControl, FormMessage } from '../../form';
 import { Textarea } from '../../textarea';
 
 export const AutoFormTextArea = ({
-  isRequired,
-  fieldConfigItem,
-  fieldProps,
-}: AutoFormInputComponentProps) => {
+  autoFormProps: { isRequired, fieldConfigItem, field, theme },
+  ...props
+}: AutoFormInputComponentProps &
+  Omit<React.InputHTMLAttributes<HTMLTextAreaElement>, 'value'>) => {
+  const value = field.value || '';
+
   return (
-    <FormItem>
+    <AutoFormWrapper theme={theme}>
       {fieldConfigItem?.label && (
-        <AutoFormLabel label={fieldConfigItem.label} isRequired={isRequired} />
+        <AutoFormLabel
+          label={fieldConfigItem.label}
+          isRequired={isRequired}
+          theme={theme}
+        />
       )}
       <FormControl>
-        <Textarea {...fieldProps} />
+        <Textarea {...field} value={value} {...props} />
       </FormControl>
       {fieldConfigItem.description && (
         <AutoFormTooltip
-          value={fieldProps.value}
+          value={value}
           description={fieldConfigItem.description}
         />
       )}
       <FormMessage />
-    </FormItem>
+    </AutoFormWrapper>
   );
 };

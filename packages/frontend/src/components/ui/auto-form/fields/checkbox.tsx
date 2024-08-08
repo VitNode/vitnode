@@ -2,28 +2,28 @@ import { AutoFormInputComponentProps } from '../type';
 import { AutoFormLabel } from './common/label';
 import { AutoFormTooltip } from './common/tooltip';
 import { cn } from '@/helpers/classnames';
+import { AutoFormWrapper } from './common/wrapper';
 
-import { FormControl, FormItem, FormMessage } from '../../form';
+import { FormControl, FormMessage } from '../../form';
 import { Checkbox } from '../../checkbox';
 
 export const AutoFormCheckbox = ({
-  isRequired,
-  fieldConfigItem,
-  fieldProps,
-}: AutoFormInputComponentProps) => {
+  autoFormProps: { isRequired, fieldConfigItem, field, theme },
+  ...props
+}: AutoFormInputComponentProps &
+  Omit<React.ComponentProps<typeof Checkbox>, 'onChange' | 'value'>) => {
+  const value: boolean = field.value || false;
+
   return (
-    <FormItem
+    <AutoFormWrapper
       className={cn('flex items-start space-x-3 space-y-0', {
         'rounded-md border p-4':
-          fieldConfigItem?.label || fieldConfigItem.description,
+          fieldConfigItem?.label && fieldConfigItem.description,
       })}
+      theme={theme}
     >
       <FormControl>
-        <Checkbox
-          checked={fieldProps.value}
-          onCheckedChange={fieldProps.onChange}
-          {...fieldProps}
-        />
+        <Checkbox checked={value} onCheckedChange={field.onChange} {...props} />
       </FormControl>
 
       {(fieldConfigItem?.label || fieldConfigItem.description) && (
@@ -32,17 +32,18 @@ export const AutoFormCheckbox = ({
             <AutoFormLabel
               label={fieldConfigItem.label}
               isRequired={isRequired}
+              theme={theme}
             />
           )}
           {fieldConfigItem.description && (
             <AutoFormTooltip
-              value={fieldProps.value}
+              value={value}
               description={fieldConfigItem.description}
             />
           )}
         </div>
       )}
       <FormMessage />
-    </FormItem>
+    </AutoFormWrapper>
   );
 };

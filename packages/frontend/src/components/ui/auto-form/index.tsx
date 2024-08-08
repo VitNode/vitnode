@@ -21,6 +21,7 @@ export function AutoForm<T extends ZodObjectOrWrapped>({
   submitButton,
   children,
   className,
+  theme = 'vertical',
 }: {
   fieldConfig: FieldConfig<z.infer<T>>;
   formSchema: T;
@@ -36,6 +37,7 @@ export function AutoForm<T extends ZodObjectOrWrapped>({
     loading: boolean;
     type: 'submit';
   }) => React.ReactNode;
+  theme?: 'horizontal' | 'vertical';
   values?: Partial<z.infer<T>>;
 }) {
   const t = useTranslations('core');
@@ -59,7 +61,10 @@ export function AutoForm<T extends ZodObjectOrWrapped>({
   return (
     <Form {...form}>
       <form
-        className={cn('space-y-6', className)}
+        className={cn('space-y-6', className, {
+          '@container flex flex-col items-start [&>a:last-child]:self-end [&>button:last-child]:self-end':
+            theme === 'horizontal',
+        })}
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <AutoFormObject
@@ -67,6 +72,7 @@ export function AutoForm<T extends ZodObjectOrWrapped>({
           form={form}
           dependencies={dependencies}
           fieldConfig={fieldConfig}
+          theme={theme}
         />
         {children}
         {submitButton ? (

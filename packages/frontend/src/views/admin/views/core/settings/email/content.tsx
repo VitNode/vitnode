@@ -44,20 +44,21 @@ export const ContentEmailSettingsAdmin = (
         fieldConfig={{
           type: {
             label: 'Radio Group Example',
-            fieldType: AutoFormRadioGroup,
-            inputProps: {
-              labels: {
-                ['option-one']: {
-                  title: 'Option One',
-                  description: 'Option One Description',
-                },
-                ['option-two']: {
-                  title: 'Option Two',
-                  description: 'Option Two Description',
-                },
-              },
-              placeholder: 'Select type of email',
-            },
+            fieldType: props => (
+              <AutoFormRadioGroup
+                {...props}
+                labels={{
+                  ['option-one']: {
+                    title: 'Option One',
+                    description: 'Option One Description',
+                  },
+                  ['option-two']: {
+                    title: 'Option Two',
+                    description: 'Option Two Description',
+                  },
+                }}
+              />
+            ),
           },
         }}
       />

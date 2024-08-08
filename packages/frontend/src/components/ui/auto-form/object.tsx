@@ -15,10 +15,12 @@ export function AutoFormObject<T extends z.ZodObject<any, any>>({
   fieldConfig,
   path = [],
   dependencies = [],
+  theme,
 }: {
   fieldConfig: FieldConfig<z.infer<T>>;
   form: ReturnType<typeof useForm>;
   schema: T | z.ZodEffects<T>;
+  theme: 'horizontal' | 'vertical';
   dependencies?: Dependency<z.infer<T>>[];
   path?: string[];
 }) {
@@ -34,14 +36,11 @@ export function AutoFormObject<T extends z.ZodObject<any, any>>({
         // const zodBaseType = getBaseType(item);
         const key = [...path, name].join('.');
 
-        const {
-          isHidden,
-          isDisabled,
-          isRequired: isRequiredByDependency,
-          overrideOptions,
-        } = resolveDependencies(dependencies, name, watch);
-
-        if (isHidden) return null;
+        const { overrideOptions } = resolveDependencies(
+          dependencies,
+          name,
+          watch,
+        );
 
         // Zod array or object
 
@@ -51,8 +50,6 @@ export function AutoFormObject<T extends z.ZodObject<any, any>>({
         }
 
         const zodInputProps = zodToHtmlInputProps(item);
-        const isRequired =
-          isRequiredByDependency || zodInputProps.required || false;
 
         if (overrideOptions) {
           item = z.enum(overrideOptions) as unknown as z.ZodAny;
@@ -66,33 +63,18 @@ export function AutoFormObject<T extends z.ZodObject<any, any>>({
             render={({ field }) => {
               const InputComponent = fieldConfigItem.fieldType;
 
-              const value = field.value ?? '';
-
-              const fieldProps = {
-                ...zodToHtmlInputProps(item),
-                ...field,
-                ...fieldConfigItem.inputProps,
-                disabled: fieldConfigItem.inputProps?.disabled || isDisabled,
-                ref: undefined,
-                value: value,
-              };
-
-              if (InputComponent === undefined) {
-                return <></>;
-              }
-
               return (
                 <InputComponent
                   key={key}
-                  zodInputProps={zodInputProps}
-                  field={field}
-                  fieldConfigItem={fieldConfigItem}
-                  isRequired={isRequired}
-                  zodItem={item}
-                  // Override the fieldProps with the fieldProps from the fieldConfigItem
-                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                  fieldProps={fieldProps as any}
-                  className={fieldProps.className}
+                  autoFormProps={{
+                    zodInputProps,
+                    field,
+                    fieldConfigItem,
+                    isRequired: zodInputProps.required || false,
+                    zodItem: item,
+                    theme,
+                  }}
+                  {...zodToHtmlInputProps(item)}
                 />
               );
             }}

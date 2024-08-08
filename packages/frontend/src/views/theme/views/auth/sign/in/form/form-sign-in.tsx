@@ -44,18 +44,12 @@ export const FormSignIn = () => {
         formSchema={formSchema}
         fieldConfig={{
           email: {
-            fieldType: AutoFormInput,
+            fieldType: props => <AutoFormInput type="email" {...props} />,
             label: t('sign_in.form.email.label'),
-            inputProps: {
-              type: 'email',
-            },
           },
           password: {
-            fieldType: AutoFormInput,
+            fieldType: props => <AutoFormInput type="password" {...props} />,
             label: t('sign_in.form.password.label'),
-            inputProps: {
-              type: 'password',
-            },
           },
           remember: {
             fieldType: AutoFormCheckbox,

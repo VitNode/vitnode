@@ -48,20 +48,14 @@ export const FormSignUp = () => {
                 </>
               );
             },
-            inputProps: {
-              type: 'text',
-            },
           },
           email: {
             label: t('sign_up.form.email.label'),
-            fieldType: AutoFormInput,
-            inputProps: {
-              type: 'email',
-            },
+            fieldType: props => <AutoFormInput type="email" {...props} />,
           },
           password: {
             label: t('sign_up.form.password.label'),
-            fieldType: AutoFormInput,
+            fieldType: props => <AutoFormInput type="password" {...props} />,
             description: value => {
               const regexArray = [
                 /^.{8,}$/, // Min 8 characters
@@ -78,19 +72,16 @@ export const FormSignUp = () => {
               if (value.length <= 0) return;
 
               return (
-                <div className="mt-1">
-                  <div className="mb-2 flex justify-between text-xs font-semibold">
+                <span className="mt-1 block">
+                  <span className="mb-2 flex justify-between text-xs font-semibold">
                     <span>{t('week')}</span>
                     <span>{t('strong')}</span>
-                  </div>
+                  </span>
                   <Progress
                     value={(100 / regexArray.length) * passRegexPassword}
                   />
-                </div>
+                </span>
               );
-            },
-            inputProps: {
-              type: 'password',
             },
           },
           terms: {

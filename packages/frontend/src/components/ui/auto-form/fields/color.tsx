@@ -1,35 +1,42 @@
 import { AutoFormInputComponentProps } from '../type';
 import { AutoFormLabel } from './common/label';
 import { AutoFormTooltip } from './common/tooltip';
+import { AutoFormWrapper } from './common/wrapper';
 
-import { FormControl, FormItem, FormMessage } from '../../form';
+import { FormControl, FormMessage } from '../../form';
 import { ColorPicker } from '../../color-picker';
 
 export const AutoFormColor = ({
-  isRequired,
-  fieldConfigItem,
-  fieldProps,
-}: Omit<AutoFormInputComponentProps, 'fieldProps'> & {
-  fieldProps: Omit<
-    React.ComponentProps<typeof ColorPicker>,
-    'disableRemoveColor' | 'id' | 'ref'
-  >;
-}) => {
+  autoFormProps: { isRequired, fieldConfigItem, field, theme },
+  ...props
+}: AutoFormInputComponentProps &
+  Omit<React.ComponentProps<typeof ColorPicker>, 'onChange' | 'value'>) => {
+  const value = field.value || '';
+
   return (
-    <FormItem>
+    <AutoFormWrapper theme={theme}>
       {fieldConfigItem?.label && (
-        <AutoFormLabel label={fieldConfigItem.label} isRequired={isRequired} />
+        <AutoFormLabel
+          label={fieldConfigItem.label}
+          isRequired={isRequired}
+          theme={theme}
+        />
       )}
       <FormControl>
-        <ColorPicker disableRemoveColor={isRequired} {...fieldProps} />
+        <ColorPicker
+          disableRemoveColor={isRequired}
+          {...field}
+          {...props}
+          value={value}
+        />
       </FormControl>
       {fieldConfigItem.description && (
         <AutoFormTooltip
-          value={fieldProps.value}
+          value={value}
           description={fieldConfigItem.description}
         />
       )}
       <FormMessage />
-    </FormItem>
+    </AutoFormWrapper>
   );
 };

@@ -5,7 +5,7 @@ import { BookIcon, KeyRoundIcon } from 'lucide-react';
 
 export default function DefaultPage() {
   return (
-    <main className="container my-10 flex max-w-lg flex-col items-center justify-center gap-8 text-center">
+    <main className="container mt-10 flex max-w-lg flex-col items-center justify-center gap-8 text-center">
       <LogoVitNode className="w-48" />
 
       <div className="space-y-1">

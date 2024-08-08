@@ -1,32 +1,35 @@
 import { AutoFormInputComponentProps } from '../type';
 import { AutoFormLabel } from './common/label';
 import { AutoFormTooltip } from './common/tooltip';
+import { AutoFormWrapper } from './common/wrapper';
 
-import { FormControl, FormItem, FormMessage } from '../../form';
+import { FormControl, FormMessage } from '../../form';
 import { FileInput } from '../../file-input';
 
 export const AutoFormFile = ({
-  isRequired,
-  fieldConfigItem,
-  fieldProps,
-}: Omit<AutoFormInputComponentProps, 'fieldProps'> & {
-  fieldProps: React.ComponentProps<typeof FileInput>;
-}) => {
+  autoFormProps: { isRequired, fieldConfigItem, field, theme },
+  ...props
+}: AutoFormInputComponentProps &
+  Omit<React.ComponentProps<typeof FileInput>, 'onChange' | 'value'>) => {
   return (
-    <FormItem>
+    <AutoFormWrapper theme={theme}>
       {fieldConfigItem?.label && (
-        <AutoFormLabel label={fieldConfigItem.label} isRequired={isRequired} />
+        <AutoFormLabel
+          label={fieldConfigItem.label}
+          isRequired={isRequired}
+          theme={theme}
+        />
       )}
       <FormControl>
-        <FileInput {...fieldProps} />
+        <FileInput {...field} {...props} />
       </FormControl>
       {fieldConfigItem.description && (
         <AutoFormTooltip
-          value={fieldProps.value}
+          value={field.value}
           description={fieldConfigItem.description}
         />
       )}
       <FormMessage />
-    </FormItem>
+    </AutoFormWrapper>
   );
 };

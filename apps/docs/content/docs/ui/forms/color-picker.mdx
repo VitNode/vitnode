@@ -12,6 +12,7 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 ```ts
 import * as z from 'zod';
 import { AutoForm } from 'vitnode-frontend/components/ui/auto-form';
+import { AutoFormColor } from 'vitnode-frontend/components/ui/auto-form/fields/color';
 ```
 
 ```ts
@@ -26,8 +27,7 @@ const formSchema = z.object({
   fieldConfig={{
     color_primary: {
       label: 'Color picker',
-      fieldType: 'color', // [!code highlight]
-      inputProps: {},
+      fieldType: AutoFormColor, // [!code highlight]
     },
   }}
 />
