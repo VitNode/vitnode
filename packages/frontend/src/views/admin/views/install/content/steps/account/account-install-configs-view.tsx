@@ -101,8 +101,8 @@ export const AccountInstallConfigsView = () => {
         },
       }}
       className="max-w-2xl"
-      onSubmit={async val => {
-        await onSubmit(val);
+      onSubmit={async (val, form) => {
+        await onSubmit(val, form);
         setCurrentStep(prev => prev + 1);
       }}
       submitButton={props => (

@@ -156,6 +156,17 @@ You can use the `onSubmit` prop to get the form data.
 />
 ```
 
+You can get access to the `form` from `react-hook-form` by using the `form` prop as second argument.
+
+```tsx
+<AutoForm
+  formSchema={formSchema}
+  onSubmit={(data, form) => {
+    console.log(data);
+    form.setError("username", { type: "manual", message: "This is an error" });
+  }}
+```
+
 ### Submit Button
 
 Component has a submit button by default with the text `Save` include translation for this text. You can change the component by using the `submitButton` prop.

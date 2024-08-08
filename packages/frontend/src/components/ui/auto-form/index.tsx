@@ -1,6 +1,6 @@
 'use client';
 
-import { DefaultValues, useForm } from 'react-hook-form';
+import { DefaultValues, useForm, UseFormReturn } from 'react-hook-form';
 import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
@@ -27,7 +27,10 @@ export function AutoForm<T extends ZodObjectOrWrapped>({
   children?: React.ReactNode;
   className?: string;
   dependencies?: Dependency<z.infer<T>>[];
-  onSubmit?: (values: z.infer<T>) => Promise<void>;
+  onSubmit?: (
+    values: z.infer<T>,
+    form: UseFormReturn<z.infer<T>>,
+  ) => Promise<void>;
   submitButton?: (props: {
     disabled: boolean;
     loading: boolean;
@@ -49,7 +52,7 @@ export function AutoForm<T extends ZodObjectOrWrapped>({
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const parsedValues = formSchema.safeParse(values);
     if (parsedValues.success) {
-      await onSubmitProp?.(parsedValues.data);
+      await onSubmitProp?.(parsedValues.data, form);
     }
   };
 

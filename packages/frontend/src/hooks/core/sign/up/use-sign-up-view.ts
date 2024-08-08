@@ -3,6 +3,7 @@ import { useTranslations } from 'next-intl';
 import * as z from 'zod';
 import React from 'react';
 import { toast } from 'sonner';
+import { UseFormReturn } from 'react-hook-form';
 
 import { mutationApi } from './mutation-api';
 
@@ -12,7 +13,7 @@ const nameRegex = /^(?!.* {2})[\p{L}\p{N}._@ -]*$/u;
 
 export const useSignUpView = () => {
   const t = useTranslations('core');
-  const [isSuccess, setSuccess] = React.useState(false);
+  const [successName, setSuccessName] = React.useState('');
   const { getTokenFromCaptcha, isReady } = useCaptcha();
 
   const formSchema = z.object({
@@ -45,7 +46,10 @@ export const useSignUpView = () => {
     newsletter: z.boolean().default(false).optional(),
   });
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  const onSubmit = async (
+    values: z.infer<typeof formSchema>,
+    form: UseFormReturn<z.infer<typeof formSchema>>,
+  ) => {
     const token = await getTokenFromCaptcha();
     if (!token) {
       toast.error(t('errors.title'), {
@@ -71,31 +75,31 @@ export const useSignUpView = () => {
       }
 
       if (code === 'EMAIL_ALREADY_EXISTS') {
-        // form.setError(
-        //   'email',
-        //   {
-        //     type: 'manual',
-        //     message: t('sign_up.form.email.already_exists'),
-        //   },
-        //   {
-        //     shouldFocus: true,
-        //   },
-        // );
+        form.setError(
+          'email',
+          {
+            type: 'manual',
+            message: t('sign_up.form.email.already_exists'),
+          },
+          {
+            shouldFocus: true,
+          },
+        );
 
         return;
       }
 
       if (code === 'NAME_ALREADY_EXISTS') {
-        // form.setError(
-        //   'name',
-        //   {
-        //     type: 'manual',
-        //     message: t('sign_up.form.name.already_exists'),
-        //   },
-        //   {
-        //     shouldFocus: true,
-        //   },
-        // );
+        form.setError(
+          'name',
+          {
+            type: 'manual',
+            message: t('sign_up.form.name.already_exists'),
+          },
+          {
+            shouldFocus: true,
+          },
+        );
 
         return;
       }
@@ -107,13 +111,13 @@ export const useSignUpView = () => {
       return;
     }
 
-    setSuccess(true);
+    setSuccessName(values.name);
   };
 
   return {
     formSchema,
     onSubmit,
     isReady,
-    isSuccess,
+    successName,
   };
 };

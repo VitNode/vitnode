@@ -2,7 +2,6 @@
 
 import { useTranslations } from 'next-intl';
 
-// import { SuccessFormSignUp } from './success';
 import { useSignUpView } from '@/hooks/core/sign/up/use-sign-up-view';
 import { CardContent } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
@@ -11,14 +10,15 @@ import { removeSpecialCharacters } from '@/helpers/special-characters';
 import { AutoForm } from '@/components/ui/auto-form';
 import { AutoFormInput } from '@/components/ui/auto-form/fields/input';
 import { AutoFormCheckbox } from '@/components/ui/auto-form/fields/checkbox';
+import { SuccessFormSignUp } from './success';
 
 export const FormSignUp = () => {
   const t = useTranslations('core');
-  const { formSchema, onSubmit } = useSignUpView();
+  const { formSchema, onSubmit, successName } = useSignUpView();
 
-  // if (isSuccess) {
-  //   return <SuccessFormSignUp name={form.watch('name')} />;
-  // }
+  if (successName) {
+    return <SuccessFormSignUp name={successName} />;
+  }
 
   return (
     <CardContent>
