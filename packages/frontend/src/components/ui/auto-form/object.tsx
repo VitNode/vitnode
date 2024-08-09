@@ -37,11 +37,16 @@ export function AutoFormObject<T extends z.ZodObject<any, any>>({
         const zodBaseType = getBaseType(item);
         const key = [...path, name].join('.');
 
-        const { overrideOptions } = resolveDependencies(
-          dependencies,
-          name,
-          watch,
-        );
+        const {
+          isHidden,
+          isDisabled,
+          isRequired: isRequiredByDependency,
+          overrideOptions,
+        } = resolveDependencies(dependencies, name, watch);
+
+        if (isHidden) {
+          return null;
+        }
 
         // Zod array or object
         if (zodBaseType === 'ZodObject') {
@@ -91,9 +96,11 @@ export function AutoFormObject<T extends z.ZodObject<any, any>>({
                     zodInputProps,
                     field,
                     fieldConfigItem,
-                    isRequired: zodInputProps.required || false,
+                    isRequired:
+                      isRequiredByDependency || zodInputProps.required || false,
                     zodItem: item,
                     theme,
+                    isDisabled,
                   }}
                   {...zodToHtmlInputProps(item)}
                 />

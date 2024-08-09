@@ -19,10 +19,10 @@ export interface FieldConfigItem {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type FieldConfig<T extends z.infer<z.ZodObject<any, any>>> = {
+export type FieldConfig<SchemaType extends z.infer<z.ZodObject<any, any>>> = {
   // If SchemaType.key is an object, create a nested FieldConfig, otherwise FieldConfigItem
-  [Key in keyof T]?: T[Key] extends object
-    ? FieldConfig<z.infer<T[Key]>>
+  [Key in keyof SchemaType]?: SchemaType[Key] extends object
+    ? FieldConfig<z.infer<SchemaType[Key]>>
     : FieldConfigItem;
 };
 
@@ -38,7 +38,8 @@ interface BaseDependency<SchemaType extends z.infer<z.ZodObject<any, any>>> {
   sourceField: keyof SchemaType;
   targetField: keyof SchemaType;
   type: DependencyType;
-  when: (sourceFieldValue: unknown, targetFieldValue: unknown) => boolean;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  when: (sourceFieldValue: any, targetFieldValue: unknown) => boolean;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -75,6 +76,7 @@ export interface AutoFormInputComponentProps {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     field: ControllerRenderProps<FieldValues, any>;
     fieldConfigItem: Omit<FieldConfigItem, 'fieldType'>;
+    isDisabled: boolean;
     isRequired: boolean;
     theme: 'horizontal' | 'vertical';
     zodInputProps: React.InputHTMLAttributes<HTMLInputElement>;

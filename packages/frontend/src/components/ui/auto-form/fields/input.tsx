@@ -7,7 +7,7 @@ import { FormControl, FormMessage } from '../../form';
 import { Input } from '../../input';
 
 export const AutoFormInput = ({
-  autoFormProps: { isRequired, fieldConfigItem, field, theme },
+  autoFormProps: { isRequired, fieldConfigItem, field, theme, isDisabled },
   ...props
 }: AutoFormInputComponentProps &
   Omit<React.InputHTMLAttributes<HTMLInputElement>, 'value'>) => {
@@ -23,7 +23,13 @@ export const AutoFormInput = ({
         />
       )}
       <FormControl>
-        <Input type={props.type} {...props} {...field} value={value} />
+        <Input
+          type={props.type}
+          {...props}
+          {...field}
+          value={value}
+          disabled={isDisabled || props.disabled}
+        />
       </FormControl>
       {fieldConfigItem.description && (
         <AutoFormTooltip

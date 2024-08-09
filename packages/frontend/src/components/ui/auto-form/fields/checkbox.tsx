@@ -8,7 +8,7 @@ import { FormControl, FormMessage } from '../../form';
 import { Checkbox } from '../../checkbox';
 
 export const AutoFormCheckbox = ({
-  autoFormProps: { isRequired, fieldConfigItem, field, theme },
+  autoFormProps: { isRequired, fieldConfigItem, field, theme, isDisabled },
   ...props
 }: AutoFormInputComponentProps &
   Omit<React.ComponentProps<typeof Checkbox>, 'onChange' | 'value'>) => {
@@ -23,7 +23,12 @@ export const AutoFormCheckbox = ({
       theme={theme}
     >
       <FormControl>
-        <Checkbox checked={value} onCheckedChange={field.onChange} {...props} />
+        <Checkbox
+          checked={value}
+          onCheckedChange={field.onChange}
+          disabled={isDisabled || props.disabled}
+          {...props}
+        />
       </FormControl>
 
       {(fieldConfigItem?.label || fieldConfigItem.description) && (

@@ -17,14 +17,22 @@ import {
 } from '../../select';
 
 export const AutoFormSelect = ({
-  autoFormProps: { isRequired, fieldConfigItem, zodItem, field, theme },
+  autoFormProps: {
+    isRequired,
+    fieldConfigItem,
+    zodItem,
+    field,
+    theme,
+    isDisabled,
+  },
   labels,
   placeholder,
   ...props
-}: AutoFormInputComponentProps & {
-  labels?: Record<string, string>;
-  placeholder?: string;
-}) => {
+}: AutoFormInputComponentProps &
+  React.ComponentProps<typeof Select> & {
+    labels?: Record<string, string>;
+    placeholder?: string;
+  }) => {
   const t = useTranslations('core');
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const baseValues = (getBaseSchema(zodItem) as unknown as z.ZodEnum<any>)._def
@@ -58,7 +66,12 @@ export const AutoFormSelect = ({
         />
       )}
       <FormControl>
-        <Select onValueChange={field.onChange} defaultValue={field.value}>
+        <Select
+          onValueChange={field.onChange}
+          defaultValue={field.value}
+          disabled={isDisabled || props.disabled}
+          {...props}
+        >
           <SelectTrigger {...props}>
             <SelectValue placeholder={placeholder}>
               {buttonPlaceholder()}

@@ -217,9 +217,13 @@ export function getDefaultValues<Schema extends z.ZodObject<any, any>>(
       );
 
       if (defaultItems !== null) {
+        const obj: Record<string, unknown> = {};
+
         for (const defaultItemKey of Object.keys(defaultItems)) {
-          const pathKey = `${key}.${defaultItemKey}` as keyof DefaultValuesType;
-          defaultValues[pathKey] = defaultItems[defaultItemKey];
+          obj[defaultItemKey] = defaultItems[defaultItemKey];
+          defaultValues[key as keyof DefaultValuesType] = obj as DefaultValues<
+            Partial<z.TypeOf<Schema>>
+          >[keyof DefaultValues<Partial<z.TypeOf<Schema>>>];
         }
       }
     } else {

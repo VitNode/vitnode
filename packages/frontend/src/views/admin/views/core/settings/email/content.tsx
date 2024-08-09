@@ -13,7 +13,10 @@ import { AutoFormColor } from '@/components/ui/auto-form/fields/color';
 import { AutoFormFile } from '@/components/ui/auto-form/fields/file';
 import { AutoFormInput } from '@/components/ui/auto-form/fields/input';
 import { AutoFormSwitch } from '@/components/ui/auto-form/fields/switch';
-import { AutoFormInputComponentProps } from '@/components/ui/auto-form/type';
+import {
+  AutoFormInputComponentProps,
+  DependencyType,
+} from '@/components/ui/auto-form/type';
 
 export const ContentEmailSettingsAdmin = (
   props: Admin__Core_Email_Settings__ShowQuery,
@@ -23,6 +26,20 @@ export const ContentEmailSettingsAdmin = (
 
   return (
     <AutoForm
+      dependencies={[
+        {
+          sourceField: 'provider',
+          type: DependencyType.HIDES,
+          targetField: 'smtp',
+          when: (provider: string) => provider !== 'smtp',
+        },
+        {
+          sourceField: 'provider',
+          type: DependencyType.HIDES,
+          targetField: 'resend_key',
+          when: (provider: string) => provider !== 'resend',
+        },
+      ]}
       theme="horizontal"
       formSchema={formSchema}
       onSubmit={onSubmit}

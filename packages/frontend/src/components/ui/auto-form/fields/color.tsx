@@ -7,7 +7,7 @@ import { FormControl, FormMessage } from '../../form';
 import { ColorPicker } from '../../color-picker';
 
 export const AutoFormColor = ({
-  autoFormProps: { isRequired, fieldConfigItem, field, theme },
+  autoFormProps: { isRequired, fieldConfigItem, field, theme, isDisabled },
   ...props
 }: AutoFormInputComponentProps &
   Omit<React.ComponentProps<typeof ColorPicker>, 'onChange' | 'value'>) => {
@@ -27,6 +27,7 @@ export const AutoFormColor = ({
           disableRemoveColor={isRequired}
           {...field}
           {...props}
+          disabled={isDisabled || props.disabled}
           value={value}
         />
       </FormControl>

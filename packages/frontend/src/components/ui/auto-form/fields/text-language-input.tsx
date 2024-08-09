@@ -7,7 +7,8 @@ import { FormControl, FormMessage } from '../../form';
 import { TextLanguageInput } from '../../text-language-input';
 
 export const AutoFormTextLanguageInput = ({
-  autoFormProps: { isRequired, fieldConfigItem, field, theme },
+  autoFormProps: { isRequired, fieldConfigItem, field, theme, isDisabled },
+  ...props
 }: AutoFormInputComponentProps &
   Omit<
     React.ComponentProps<typeof TextLanguageInput>,
@@ -23,7 +24,11 @@ export const AutoFormTextLanguageInput = ({
         />
       )}
       <FormControl>
-        <TextLanguageInput {...field} />
+        <TextLanguageInput
+          {...field}
+          {...props}
+          disabled={isDisabled || props.disabled}
+        />
       </FormControl>
       {fieldConfigItem.description && (
         <AutoFormTooltip

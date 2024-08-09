@@ -10,17 +10,26 @@ import { FormControl, FormItem, FormLabel, FormMessage } from '../../form';
 import { RadioGroup, RadioGroupItem } from '../../radio-group';
 
 export const AutoFormRadioGroup = ({
-  autoFormProps: { isRequired, fieldConfigItem, zodItem, field, theme },
+  autoFormProps: {
+    isRequired,
+    fieldConfigItem,
+    zodItem,
+    field,
+    theme,
+    isDisabled,
+  },
   labels,
-}: AutoFormInputComponentProps & {
-  labels?: Record<
-    string,
-    {
-      title: string;
-      description?: React.ReactNode;
-    }
-  >;
-}) => {
+  ...props
+}: AutoFormInputComponentProps &
+  Omit<React.ComponentProps<typeof RadioGroup>, 'value'> & {
+    labels?: Record<
+      string,
+      {
+        title: string;
+        description?: React.ReactNode;
+      }
+    >;
+  }) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const baseValues = (getBaseSchema(zodItem) as unknown as z.ZodEnum<any>)._def
@@ -43,7 +52,12 @@ export const AutoFormRadioGroup = ({
         />
       )}
       <FormControl>
-        <RadioGroup onValueChange={field.onChange} defaultValue={field.value}>
+        <RadioGroup
+          onValueChange={field.onChange}
+          defaultValue={field.value}
+          disabled={isDisabled || props.disabled}
+          {...props}
+        >
           {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
           {values?.map((value: any) => {
             const label = labels?.[value[0]].title || value[1];

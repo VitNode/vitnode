@@ -22,16 +22,16 @@ export const useEmailSettingsFormAdmin = ({
       smtp: z.object({
         host: z.string().default(data.smtp_host || ''),
         user: z.string().default(data.smtp_user || ''),
-        password: z.string().default(''),
+        password: z.string().default('').optional(),
         secure: z.boolean().default(data.smtp_secure || false),
         port: z
           .number()
           .int()
           .min(1)
           .max(999)
-          .default(data.smtp_port || 1),
+          .default(data.smtp_port || 587),
       }),
-      resend_key: z.string().default(''),
+      resend_key: z.string().default('').optional(),
     })
     .refine(input => {
       if (input.provider === 'smtp') {
@@ -55,13 +55,15 @@ export const useEmailSettingsFormAdmin = ({
       'color_primary_foreground',
       `hsl(${isColorBrightness(primaryHSL) ? `${primaryHSL.h}, 40%, 2%` : `${primaryHSL.h}, 40%, 98%`})`,
     );
-    if (values.provider === 'smtp') {
+    if (values.provider === 'smtp' && values.smtp) {
       formData.append('smtp_host', values.smtp.host);
       formData.append('smtp_user', values.smtp.user);
       formData.append('smtp_port', values.smtp.port.toString());
-      formData.append('smtp_password', values.smtp.password);
+      if (values.smtp.password) {
+        formData.append('smtp_password', values.smtp.password);
+      }
       formData.append('smtp_secure', values.smtp.secure.toString());
-    } else if (values.provider === 'resend') {
+    } else if (values.provider === 'resend' && values.resend_key) {
       formData.append('resend_key', values.resend_key);
     }
 

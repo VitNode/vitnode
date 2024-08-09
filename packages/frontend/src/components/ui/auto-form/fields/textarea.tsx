@@ -7,7 +7,7 @@ import { FormControl, FormMessage } from '../../form';
 import { Textarea } from '../../textarea';
 
 export const AutoFormTextArea = ({
-  autoFormProps: { isRequired, fieldConfigItem, field, theme },
+  autoFormProps: { isRequired, fieldConfigItem, field, theme, isDisabled },
   ...props
 }: AutoFormInputComponentProps &
   Omit<React.InputHTMLAttributes<HTMLTextAreaElement>, 'value'>) => {
@@ -23,7 +23,12 @@ export const AutoFormTextArea = ({
         />
       )}
       <FormControl>
-        <Textarea {...field} value={value} {...props} />
+        <Textarea
+          {...field}
+          value={value}
+          {...props}
+          disabled={isDisabled || props.disabled}
+        />
       </FormControl>
       {fieldConfigItem.description && (
         <AutoFormTooltip

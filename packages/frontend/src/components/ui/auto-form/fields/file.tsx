@@ -7,7 +7,7 @@ import { FormControl, FormMessage } from '../../form';
 import { FileInput } from '../../file-input';
 
 export const AutoFormFile = ({
-  autoFormProps: { isRequired, fieldConfigItem, field, theme },
+  autoFormProps: { isRequired, fieldConfigItem, field, theme, isDisabled },
   ...props
 }: AutoFormInputComponentProps &
   Omit<React.ComponentProps<typeof FileInput>, 'onChange' | 'value'>) => {
@@ -21,7 +21,11 @@ export const AutoFormFile = ({
         />
       )}
       <FormControl>
-        <FileInput {...field} {...props} />
+        <FileInput
+          {...field}
+          {...props}
+          disabled={isDisabled || props.disabled}
+        />
       </FormControl>
       {fieldConfigItem.description && (
         <AutoFormTooltip

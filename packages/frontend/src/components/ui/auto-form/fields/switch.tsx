@@ -7,7 +7,7 @@ import { FormControl, FormMessage } from '../../form';
 import { Switch } from '../../switch';
 
 export const AutoFormSwitch = ({
-  autoFormProps: { isRequired, fieldConfigItem, field, theme },
+  autoFormProps: { isRequired, fieldConfigItem, field, theme, isDisabled },
   ...props
 }: AutoFormInputComponentProps &
   Omit<React.ComponentProps<typeof Switch>, 'value'>) => {
@@ -28,6 +28,7 @@ export const AutoFormSwitch = ({
             props.onCheckedChange?.(e);
           }}
           {...props}
+          disabled={isDisabled || props.disabled}
         />
       </FormControl>
       {fieldConfigItem.description && (

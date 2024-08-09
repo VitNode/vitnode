@@ -278,33 +278,88 @@ You can change the theme of the form by using the `theme` prop and passing `hori
 />
 ```
 
-## API Reference
+## Dependencies
 
-import { TypeTable } from 'fumadocs-ui/components/type-table';
+AutoForm allow to create dependencies between fields. For example allowing one field's visibility or behavior to be controlled based on the value of another. Pass `dependencies` prop with an array of objects.
 
-<TypeTable
-  type={{
-    formSchema: {
-      description: 'Zod schema for the form.',
-      type: 'z.ZodObject<any, any>',
+```ts
+import { DependencyType } from 'vitnode-frontend/components/ui/auto-form/type';
+```
+
+### Hides
+
+For example if `provider` is not `smtp`, the field `smtp` will be hidden.
+
+```tsx
+<AutoForm
+  formSchema={formSchema}
+  fieldConfig={{}}
+  dependencies={[
+    {
+      sourceField: 'provider',
+      type: DependencyType.HIDES, // [!code highlight]
+      targetField: 'smtp',
+      when: (provider: string) => provider !== 'smtp',
     },
-    fieldConfig: {
-      description:
-        'Configuration for the form fields. Depends on type of field.',
-      type: 'FieldConfig',
-    },
-    onSubmit: {
-      description: 'Function to call when the form is submitted.',
-      type: '(data: zodObj, form: UseFormReturn<any>) => void',
-    },
-    submitButton: {
-      description: 'Custom submit button.',
-      type: 'ReactNode',
-    },
-    theme: {
-      description: 'Theme of the form.',
-      type: '"horizontal" | "vertical"',
-      default: '"vertical"',
-    },
-  }}
+  ]}
 />
+```
+
+### Requires
+
+For example if `provider` is `resend`, the field `resend_key` will be required.
+
+```tsx
+<AutoForm
+  formSchema={formSchema}
+  fieldConfig={{}}
+  dependencies={[
+    {
+      sourceField: 'provider',
+      type: DependencyType.REQUIRES, // [!code highlight]
+      targetField: 'resend_key',
+      when: (provider: string) => provider === 'resend',
+    },
+  ]}
+/>
+```
+
+### Disables
+
+For example if `provider` is not `smtp`, the field `smtp` will be disabled.
+
+```tsx
+<AutoForm
+  formSchema={formSchema}
+  fieldConfig={{}}
+  dependencies={[
+    {
+      sourceField: 'provider',
+      type: DependencyType.DISABLES, // [!code highlight]
+      targetField: 'smtp',
+      when: (provider: string) => provider !== 'smtp',
+    },
+  ]}
+/>
+```
+
+### Set options
+
+For example if `vegetarian` checkbox hides the `Beef Wellington` option from `mealOptions` if its not already selected.
+
+```tsx
+<AutoForm
+  formSchema={formSchema}
+  fieldConfig={{}}
+  dependencies={[
+    {
+      sourceField: 'vegetarian',
+      type: DependencyType.SETS_OPTIONS, // [!code highlight]
+      targetField: 'mealOptions',
+      when: (vegetarian, mealOption) =>
+        vegetarian && mealOption !== 'Beef Wellington',
+      options: ['Pasta', 'Salad'],
+    },
+  ]}
+/>
+```
