@@ -2,6 +2,7 @@ import { AutoFormInputComponentProps } from '../type';
 import { AutoFormLabel } from './common/label';
 import { AutoFormTooltip } from './common/tooltip';
 import { AutoFormWrapper } from './common/wrapper';
+import { DefaultParent } from './common/children';
 
 import { FormControl, FormMessage } from '../../form';
 import { Textarea } from '../../textarea';
@@ -12,6 +13,12 @@ export const AutoFormTextArea = ({
 }: AutoFormInputComponentProps &
   Omit<React.InputHTMLAttributes<HTMLTextAreaElement>, 'value'>) => {
   const value = field.value || '';
+  const desc =
+    typeof fieldConfigItem.description === 'function'
+      ? fieldConfigItem.description(field.value)
+      : fieldConfigItem.description;
+
+  const ParentWrapper = fieldConfigItem.renderParent ?? DefaultParent;
 
   return (
     <AutoFormWrapper theme={theme}>
@@ -20,21 +27,21 @@ export const AutoFormTextArea = ({
           label={fieldConfigItem.label}
           isRequired={isRequired}
           theme={theme}
+          description={desc}
         />
       )}
-      <FormControl>
-        <Textarea
-          {...field}
-          value={value}
-          {...props}
-          disabled={isDisabled || props.disabled}
-        />
-      </FormControl>
-      {fieldConfigItem.description && (
-        <AutoFormTooltip
-          value={value}
-          description={fieldConfigItem.description}
-        />
+      <ParentWrapper>
+        <FormControl>
+          <Textarea
+            {...field}
+            value={value}
+            {...props}
+            disabled={isDisabled || props.disabled}
+          />
+        </FormControl>
+      </ParentWrapper>
+      {fieldConfigItem.description && theme === 'vertical' && (
+        <AutoFormTooltip description={desc} />
       )}
       <FormMessage />
     </AutoFormWrapper>

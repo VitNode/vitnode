@@ -5,6 +5,7 @@ import { AutoFormLabel } from './common/label';
 import { AutoFormTooltip } from './common/tooltip';
 import { getBaseSchema } from '../utils';
 import { AutoFormWrapper } from './common/wrapper';
+import { DefaultParent } from './common/children';
 
 import { FormControl, FormItem, FormLabel, FormMessage } from '../../form';
 import { RadioGroup, RadioGroupItem } from '../../radio-group';
@@ -42,54 +43,60 @@ export const AutoFormRadioGroup = ({
     values = baseValues.map(value => [value, value]);
   }
 
+  const desc =
+    typeof fieldConfigItem.description === 'function'
+      ? fieldConfigItem.description(field.value)
+      : fieldConfigItem.description;
+  const ParentWrapper = fieldConfigItem.renderParent ?? DefaultParent;
+
   return (
     <AutoFormWrapper theme={theme}>
       {fieldConfigItem?.label && (
         <AutoFormLabel
+          description={desc}
           label={fieldConfigItem.label}
           isRequired={isRequired}
           theme={theme}
         />
       )}
-      <FormControl>
-        <RadioGroup
-          onValueChange={field.onChange}
-          defaultValue={field.value}
-          disabled={isDisabled || props.disabled}
-          {...props}
-        >
-          {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-          {values?.map((value: any) => {
-            const label = labels?.[value[0]].title || value[1];
-            const description = labels?.[value[0]].description;
+      <ParentWrapper>
+        <FormControl>
+          <RadioGroup
+            onValueChange={field.onChange}
+            defaultValue={field.value}
+            disabled={isDisabled || props.disabled}
+            {...props}
+          >
+            {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+            {values?.map((value: any) => {
+              const label = labels?.[value[0]].title || value[1];
+              const description = labels?.[value[0]].description;
 
-            return (
-              <FormItem
-                key={value}
-                className="flex items-center gap-3 space-y-0"
-              >
-                <FormControl>
-                  <RadioGroupItem value={value[0]} />
-                </FormControl>
-                <FormLabel className="flex items-center space-y-0 font-normal">
-                  <span>{label}</span>
+              return (
+                <FormItem
+                  key={value}
+                  className="flex items-center gap-3 space-y-0"
+                >
+                  <FormControl>
+                    <RadioGroupItem value={value[0]} />
+                  </FormControl>
+                  <FormLabel className="flex items-center space-y-0 font-normal">
+                    <span>{label}</span>
 
-                  {description && (
-                    <span className="text-muted-foreground flex flex-wrap items-center gap-1 text-sm font-normal">
-                      {description}
-                    </span>
-                  )}
-                </FormLabel>
-              </FormItem>
-            );
-          })}
-        </RadioGroup>
-      </FormControl>
-      {fieldConfigItem.description && (
-        <AutoFormTooltip
-          value={field.value}
-          description={fieldConfigItem.description}
-        />
+                    {description && (
+                      <span className="text-muted-foreground mt-1 flex flex-wrap items-center gap-1 text-sm font-normal">
+                        {description}
+                      </span>
+                    )}
+                  </FormLabel>
+                </FormItem>
+              );
+            })}
+          </RadioGroup>
+        </FormControl>
+      </ParentWrapper>
+      {fieldConfigItem.description && theme === 'vertical' && (
+        <AutoFormTooltip description={desc} />
       )}
       <FormMessage />
     </AutoFormWrapper>

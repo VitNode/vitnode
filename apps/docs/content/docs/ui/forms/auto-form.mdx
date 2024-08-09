@@ -206,6 +206,29 @@ const formSchema = z.object({
 />
 ```
 
+### Render Parent
+
+You can render the parent object by using the `renderParent` prop.
+
+```tsx
+<AutoForm
+  formSchema={formSchema}
+  fieldConfig={{
+    start_url: {
+      label: t('start_url.label'),
+      description: t('start_url.desc'),
+      fieldType: props => <AutoFormInput className="w-64" {...props} />,
+      renderParent: ({ children }) => (
+        <div className="flex flex-wrap items-center gap-1">
+          <span>Something</span>
+          {children} // Here is the input
+        </div>
+      ),
+    },
+  }}
+/>
+```
+
 ## Submit Form
 
 You can use the `onSubmit` prop to get the form data.
@@ -240,7 +263,7 @@ You can get access to the `form` from `react-hook-form` by using the `form` prop
   }}
 ```
 
-### Submit Button
+## Submit Button
 
 Component has a submit button by default with the text `Save` include translation for this text. You can change the component by using the `submitButton` prop.
 

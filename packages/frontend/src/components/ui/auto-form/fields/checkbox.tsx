@@ -3,6 +3,7 @@ import { AutoFormLabel } from './common/label';
 import { AutoFormTooltip } from './common/tooltip';
 import { cn } from '@/helpers/classnames';
 import { AutoFormWrapper } from './common/wrapper';
+import { DefaultParent } from './common/children';
 
 import { FormControl, FormMessage } from '../../form';
 import { Checkbox } from '../../checkbox';
@@ -13,6 +14,11 @@ export const AutoFormCheckbox = ({
 }: AutoFormInputComponentProps &
   Omit<React.ComponentProps<typeof Checkbox>, 'onChange' | 'value'>) => {
   const value: boolean = field.value || false;
+  const desc =
+    typeof fieldConfigItem.description === 'function'
+      ? fieldConfigItem.description(field.value)
+      : fieldConfigItem.description;
+  const ParentWrapper = fieldConfigItem.renderParent ?? DefaultParent;
 
   return (
     <AutoFormWrapper
@@ -22,29 +28,29 @@ export const AutoFormCheckbox = ({
       })}
       theme={theme}
     >
-      <FormControl>
-        <Checkbox
-          checked={value}
-          onCheckedChange={field.onChange}
-          disabled={isDisabled || props.disabled}
-          {...props}
-        />
-      </FormControl>
+      <ParentWrapper>
+        <FormControl>
+          <Checkbox
+            checked={value}
+            onCheckedChange={field.onChange}
+            disabled={isDisabled || props.disabled}
+            {...props}
+          />
+        </FormControl>
+      </ParentWrapper>
 
       {(fieldConfigItem?.label || fieldConfigItem.description) && (
         <div className="space-y-1 leading-none">
           {fieldConfigItem?.label && (
             <AutoFormLabel
+              description={desc}
               label={fieldConfigItem.label}
               isRequired={isRequired}
               theme={theme}
             />
           )}
-          {fieldConfigItem.description && (
-            <AutoFormTooltip
-              value={value}
-              description={fieldConfigItem.description}
-            />
+          {fieldConfigItem.description && theme === 'vertical' && (
+            <AutoFormTooltip description={desc} />
           )}
         </div>
       )}

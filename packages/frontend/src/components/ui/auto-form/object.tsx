@@ -43,10 +43,7 @@ export function AutoFormObject<T extends z.ZodObject<any, any>>({
           isRequired: isRequiredByDependency,
           overrideOptions,
         } = resolveDependencies(dependencies, name, watch);
-
-        if (isHidden) {
-          return null;
-        }
+        if (isHidden) return null;
 
         // Zod array or object
         if (zodBaseType === 'ZodObject') {

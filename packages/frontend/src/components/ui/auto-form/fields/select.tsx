@@ -6,6 +6,7 @@ import { AutoFormLabel } from './common/label';
 import { AutoFormTooltip } from './common/tooltip';
 import { getBaseSchema } from '../utils';
 import { AutoFormWrapper } from './common/wrapper';
+import { DefaultParent } from './common/children';
 
 import { FormControl, FormMessage } from '../../form';
 import {
@@ -34,6 +35,11 @@ export const AutoFormSelect = ({
     placeholder?: string;
   }) => {
   const t = useTranslations('core');
+  const desc =
+    typeof fieldConfigItem.description === 'function'
+      ? fieldConfigItem.description(field.value)
+      : fieldConfigItem.description;
+  const ParentWrapper = fieldConfigItem.renderParent ?? DefaultParent;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const baseValues = (getBaseSchema(zodItem) as unknown as z.ZodEnum<any>)._def
     .values;
@@ -63,38 +69,38 @@ export const AutoFormSelect = ({
           label={fieldConfigItem.label}
           isRequired={isRequired}
           theme={theme}
+          description={desc}
         />
       )}
-      <FormControl>
-        <Select
-          onValueChange={field.onChange}
-          defaultValue={field.value}
-          disabled={isDisabled || props.disabled}
-          {...props}
-        >
-          <SelectTrigger {...props}>
-            <SelectValue placeholder={placeholder}>
-              {buttonPlaceholder()}
-            </SelectValue>
-          </SelectTrigger>
-          <SelectContent>
-            {values.map(([value, labelFromProps]) => {
-              const label = labels?.[value] ?? labelFromProps;
+      <ParentWrapper>
+        <FormControl>
+          <Select
+            onValueChange={field.onChange}
+            defaultValue={field.value}
+            disabled={isDisabled || props.disabled}
+            {...props}
+          >
+            <SelectTrigger {...props}>
+              <SelectValue placeholder={placeholder}>
+                {buttonPlaceholder()}
+              </SelectValue>
+            </SelectTrigger>
+            <SelectContent>
+              {values.map(([value, labelFromProps]) => {
+                const label = labels?.[value] ?? labelFromProps;
 
-              return (
-                <SelectItem value={labelFromProps} key={value}>
-                  {label}
-                </SelectItem>
-              );
-            })}
-          </SelectContent>
-        </Select>
-      </FormControl>
-      {fieldConfigItem.description && (
-        <AutoFormTooltip
-          value={field.value}
-          description={fieldConfigItem.description}
-        />
+                return (
+                  <SelectItem value={labelFromProps} key={value}>
+                    {label}
+                  </SelectItem>
+                );
+              })}
+            </SelectContent>
+          </Select>
+        </FormControl>
+      </ParentWrapper>
+      {fieldConfigItem.description && theme === 'vertical' && (
+        <AutoFormTooltip description={desc} />
       )}
       <FormMessage />
     </AutoFormWrapper>

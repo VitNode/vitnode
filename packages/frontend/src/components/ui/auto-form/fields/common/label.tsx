@@ -8,7 +8,9 @@ export const AutoFormLabel = ({
   isRequired,
   className,
   theme,
+  description,
 }: {
+  description: React.ReactNode | undefined;
   isRequired: boolean;
   label: string;
   theme: AutoFormInputComponentProps['autoFormProps']['theme'];
@@ -22,7 +24,16 @@ export const AutoFormLabel = ({
       })}
       optional={!isRequired}
     >
-      {label}
+      {description ? (
+        <>
+          <span>{label}</span>
+          <span className="text-muted-foreground mt-1 block text-sm">
+            {description}
+          </span>
+        </>
+      ) : (
+        label
+      )}
     </FormLabel>
   );
 };
