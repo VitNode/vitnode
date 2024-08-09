@@ -3,6 +3,7 @@ import { useForm, useFormContext } from 'react-hook-form';
 
 import resolveDependencies, {
   getBaseSchema,
+  getBaseType,
   zodToHtmlInputProps,
 } from './utils';
 import { FormField } from '../form';
@@ -33,7 +34,7 @@ export function AutoFormObject<T extends z.ZodObject<any, any>>({
     <>
       {Object.keys(shape).map(name => {
         let item = shape[name] as z.ZodAny;
-        // const zodBaseType = getBaseType(item);
+        const zodBaseType = getBaseType(item);
         const key = [...path, name].join('.');
 
         const { overrideOptions } = resolveDependencies(
@@ -43,11 +44,24 @@ export function AutoFormObject<T extends z.ZodObject<any, any>>({
         );
 
         // Zod array or object
+        if (zodBaseType === 'ZodObject') {
+          return (
+            <AutoFormObject
+              key={name}
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              schema={item as unknown as z.ZodObject<any, any>}
+              form={form}
+              fieldConfig={
+                (fieldConfig?.[name] ?? {}) as FieldConfig<z.infer<typeof item>>
+              }
+              path={[...path, name]}
+              theme={theme}
+            />
+          );
+        }
 
         const fieldConfigItem = fieldConfig[name];
-        if (!fieldConfigItem) {
-          return;
-        }
+        if (!fieldConfigItem) return;
 
         const zodInputProps = zodToHtmlInputProps(item);
 
@@ -62,6 +76,13 @@ export function AutoFormObject<T extends z.ZodObject<any, any>>({
             name={key}
             render={({ field }) => {
               const InputComponent = fieldConfigItem.fieldType;
+
+              if (
+                InputComponent === undefined ||
+                typeof InputComponent !== 'function'
+              ) {
+                return <></>;
+              }
 
               return (
                 <InputComponent

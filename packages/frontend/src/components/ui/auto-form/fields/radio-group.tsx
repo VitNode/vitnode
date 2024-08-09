@@ -17,7 +17,7 @@ export const AutoFormRadioGroup = ({
     string,
     {
       title: string;
-      description?: string;
+      description?: React.ReactNode;
     }
   >;
 }) => {

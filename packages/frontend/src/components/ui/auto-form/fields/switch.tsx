@@ -10,7 +10,7 @@ export const AutoFormSwitch = ({
   autoFormProps: { isRequired, fieldConfigItem, field, theme },
   ...props
 }: AutoFormInputComponentProps &
-  Omit<React.ComponentProps<typeof Switch>, 'onChange' | 'value'>) => {
+  Omit<React.ComponentProps<typeof Switch>, 'value'>) => {
   return (
     <AutoFormWrapper theme={theme}>
       {fieldConfigItem?.label && (
@@ -23,7 +23,10 @@ export const AutoFormSwitch = ({
       <FormControl>
         <Switch
           checked={field.value}
-          onCheckedChange={field.onChange}
+          onCheckedChange={e => {
+            field.onChange(e);
+            props.onCheckedChange?.(e);
+          }}
           {...props}
         />
       </FormControl>

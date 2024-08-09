@@ -13,6 +13,7 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import * as z from 'zod';
 import { zodLanguageInput } from 'vitnode-frontend/helpers/zod';
 import { AutoForm } from 'vitnode-frontend/components/ui/auto-form';
+import { AutoFormTextLanguageInput } from 'vitnode-frontend/components/ui/auto-form/fields/text-language-input';
 ```
 
 ```ts
@@ -46,3 +47,20 @@ import { TextLanguageInput } from 'vitnode-frontend/components/ui/text-language-
 
   </Tab>
 </Tabs>
+
+## API Reference
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+<TypeTable
+  type={{
+    onChange: {
+      description: 'Function to be called when the value changes.',
+      type: '(value: value: TextLanguage[]]) => void',
+    },
+    value: {
+      description: 'Value of the input.',
+      type: 'TextLanguage[]',
+    },
+  }}
+/>

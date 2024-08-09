@@ -1,5 +1,4 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
+import { UseFormReturn } from 'react-hook-form';
 import * as z from 'zod';
 import { toast } from 'sonner';
 import { useTranslations } from 'next-intl';
@@ -18,16 +17,21 @@ export const useEmailSettingsFormAdmin = ({
   const formSchema = z
     .object({
       color_primary: z.string().default(data.color_primary),
-      logo: zodFile.nullable(),
-      provider: z.nativeEnum(EmailProvider),
+      logo: zodFile.optional(),
+      provider: z.nativeEnum(EmailProvider).default(data.provider),
       smtp: z.object({
-        host: z.string(),
-        user: z.string(),
-        port: z.number().int().min(1).max(999),
-        secure: z.boolean(),
-        password: z.string(),
+        host: z.string().default(data.smtp_host || ''),
+        user: z.string().default(data.smtp_user || ''),
+        password: z.string().default(''),
+        secure: z.boolean().default(data.smtp_secure || false),
+        port: z
+          .number()
+          .int()
+          .min(1)
+          .max(999)
+          .default(data.smtp_port || 1),
       }),
-      resend_key: z.string(),
+      resend_key: z.string().default(''),
     })
     .refine(input => {
       if (input.provider === 'smtp') {
@@ -37,24 +41,10 @@ export const useEmailSettingsFormAdmin = ({
       return true;
     });
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      logo: data.logo,
-      provider: data.provider,
-      smtp: {
-        host: data.smtp_host || '',
-        user: data.smtp_user || '',
-        port: data.smtp_port || 1,
-        secure: data.smtp_secure || false,
-        password: '', // Password is not fetched from the server,
-      },
-      resend_key: '', // Resend key is not fetched from the server,
-      color_primary: data.color_primary || 'hsl(0, 0, 0)',
-    },
-  });
-
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  const onSubmit = async (
+    values: z.infer<typeof formSchema>,
+    form: UseFormReturn<z.infer<typeof formSchema>>,
+  ) => {
     const primaryHSL = getHSLFromString(values.color_primary);
     if (!primaryHSL) return;
 
@@ -97,5 +87,5 @@ export const useEmailSettingsFormAdmin = ({
     form.reset(values);
   };
 
-  return { form, onSubmit, formSchema };
+  return { onSubmit, formSchema };
 };
