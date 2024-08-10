@@ -34,10 +34,12 @@ export const AutoFormCombobox = ({
   },
   labels,
   placeholderSearchInput,
+  multiple,
   ...props
 }: AutoFormInputComponentProps &
   Omit<React.ComponentProps<typeof Button>, 'role' | 'variant'> & {
     labels?: Record<string, JSX.Element | string>;
+    multiple?: boolean;
     placeholderSearchInput?: string;
   }) => {
   const t = useTranslations('core');
@@ -55,6 +57,10 @@ export const AutoFormCombobox = ({
   }
 
   const buttonPlaceholder = () => {
+    if (multiple && Array.isArray(field.value)) {
+      return t('selected', { count: field.value.length });
+    }
+
     const current = values.find(item => item[0] === field.value);
     const item = current?.[1];
 
@@ -106,12 +112,27 @@ export const AutoFormCombobox = ({
                 <CommandGroup>
                   {values.map(([value, labelFromProps]) => {
                     const label = labels?.[value] ?? labelFromProps;
+                    const currentArrayValues = Array.isArray(field.value)
+                      ? field.value
+                      : field.value
+                        ? [field.value]
+                        : [];
 
                     return (
                       <CommandItem
                         value={labelFromProps}
                         key={value}
                         onSelect={() => {
+                          if (multiple) {
+                            field.onChange(
+                              currentArrayValues.includes(value)
+                                ? currentArrayValues.filter(el => el !== value)
+                                : [...currentArrayValues, value],
+                            );
+
+                            return;
+                          }
+
                           field.onChange(value);
                           setOpen(false);
                         }}
@@ -119,7 +140,13 @@ export const AutoFormCombobox = ({
                         <Check
                           className={cn(
                             'mr-2 size-4',
-                            value === field.value ? 'opacity-100' : 'opacity-0',
+                            (
+                              multiple
+                                ? currentArrayValues.includes(value)
+                                : value === field.value
+                            )
+                              ? 'opacity-100'
+                              : 'opacity-0',
                           )}
                         />
                         {label}

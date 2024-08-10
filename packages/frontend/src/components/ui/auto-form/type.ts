@@ -19,10 +19,10 @@ export interface FieldConfigItem {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type FieldConfig<SchemaType extends z.infer<z.ZodObject<any, any>>> = {
-  // If SchemaType.key is an object, create a nested FieldConfig, otherwise FieldConfigItem
-  [Key in keyof SchemaType]?: SchemaType[Key] extends object
-    ? FieldConfig<z.infer<SchemaType[Key]>>
+export type FieldConfig<T extends z.infer<z.ZodObject<any, any>>> = {
+  // If SchemaType.key is an object or array, create a nested FieldConfig, otherwise
+  [Key in keyof T]?: T[Key] extends object
+    ? FieldConfig<z.infer<T[Key]>>
     : FieldConfigItem;
 };
 

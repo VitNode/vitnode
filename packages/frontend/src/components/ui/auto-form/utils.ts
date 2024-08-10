@@ -38,6 +38,9 @@ export function getBaseSchema<
   if ('schema' in schema._def) {
     return getBaseSchema(schema._def.schema as ChildType);
   }
+  if ('type' in schema._def) {
+    return getBaseSchema(schema._def.type as ChildType);
+  }
 
   return schema as ChildType;
 }

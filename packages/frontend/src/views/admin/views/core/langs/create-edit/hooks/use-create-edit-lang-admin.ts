@@ -19,10 +19,6 @@ export const useCreateEditLangAdmin = ({ data }: Args) => {
   const { setOpen } = useDialog();
 
   const formSchema = z.object({
-    code: z
-      .string()
-      .min(1)
-      .default(data?.code ?? ''),
     name: z
       .string()
       .min(1)
@@ -33,6 +29,10 @@ export const useCreateEditLangAdmin = ({ data }: Args) => {
     locale: z
       .enum(locales.map(item => item.locale) as [string, ...string[]])
       .default(data?.locale ?? 'en'),
+    code: z
+      .string()
+      .min(1)
+      .default(data?.code ?? ''),
     default: z.boolean().default(data?.default ?? false),
     time_24: z.boolean().default(data?.time_24 ?? false),
     allow_in_input: z.boolean().default(data?.allow_in_input ?? true),

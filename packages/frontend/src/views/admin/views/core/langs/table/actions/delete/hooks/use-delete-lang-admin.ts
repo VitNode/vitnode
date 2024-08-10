@@ -1,6 +1,4 @@
 import * as z from 'zod';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 
@@ -20,13 +18,6 @@ export const useDeleteLangAdmin = ({
   const { push } = useRouter();
   const formSchema = z.object({
     name: z.string().refine(value => value === name),
-  });
-
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: '',
-    },
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -49,5 +40,5 @@ export const useDeleteLangAdmin = ({
     setOpen(false);
   };
 
-  return { form, onSubmit };
+  return { onSubmit, formSchema };
 };

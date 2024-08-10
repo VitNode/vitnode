@@ -157,6 +157,38 @@ export function ComboboxDemo() {
   </Tab>
 </Tabs>
 
+### Multiple
+
+```ts
+const formSchema = z.object({
+  type: z.array(z.enum(['option-one', 'option-two'])), // [!code highlight]
+});
+```
+
+```tsx
+<AutoForm
+  formSchema={formSchema}
+  fieldConfig={{
+    type: {
+      label: 'Combobox Example',
+      fieldType: (
+        props: AutoFormInputComponentProps, // [!code highlight]
+      ) => (
+        <AutoFormCombobox
+          {...props}
+          placeholderSearchInput="Search options..."
+          labels={{
+            ['option-one']: 'Option One',
+            ['option-two']: 'Option Two',
+          }}
+          multiple // [!code highlight]
+        />
+      ),
+    },
+  }}
+/>
+```
+
 ## Examples
 
 [Shadcn UI Combobox - Examples](https://ui.shadcn.com/docs/components/combobox#examples).
