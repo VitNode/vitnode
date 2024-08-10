@@ -3,18 +3,15 @@ import { AutoFormLabel } from './common/label';
 import { AutoFormTooltip } from './common/tooltip';
 import { AutoFormWrapper } from './common/wrapper';
 import { DefaultParent } from './common/children';
+import { IconPicker } from '@/components/icon/picker/icon-picker';
 
 import { FormControl, FormMessage } from '../../form';
-import { ColorPicker } from '../../color-picker';
 
-export const AutoFormColor = ({
+export const AutoFormIcon = ({
   autoFormProps: { isRequired, fieldConfigItem, field, theme, isDisabled },
   ...props
 }: AutoFormInputComponentProps &
-  Omit<
-    React.ComponentProps<typeof ColorPicker>,
-    'onChange' | 'value' | 'required'
-  >) => {
+  Omit<React.ComponentProps<typeof IconPicker>, 'onChange' | 'value'>) => {
   const value = field.value || '';
   const desc =
     typeof fieldConfigItem.description === 'function'
@@ -34,12 +31,11 @@ export const AutoFormColor = ({
       )}
       <ParentWrapper>
         <FormControl>
-          <ColorPicker
-            required={isRequired}
-            {...field}
+          <IconPicker
             {...props}
-            disabled={isDisabled || props.disabled}
+            {...field}
             value={value}
+            disabled={isDisabled || props.disabled}
           />
         </FormControl>
       </ParentWrapper>

@@ -20,7 +20,7 @@ import {
 import { cn } from '../../helpers/classnames';
 
 export const ColorPicker = ({
-  disableRemoveColor,
+  required,
   disabled,
   onChange,
   value: valueProp,
@@ -31,7 +31,7 @@ export const ColorPicker = ({
   onChange: (value: string | null) => void;
   value: string | null;
   className?: string;
-  disableRemoveColor?: boolean;
+  required?: boolean;
   disabled?: boolean;
   id?: string;
   ref?: React.RefCallback<HTMLButtonElement>;
@@ -88,7 +88,7 @@ export const ColorPicker = ({
         </span>
       </Button>
 
-      {!disableRemoveColor && value && (
+      {!required && value && (
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>

@@ -45,6 +45,8 @@ export const ContentEmojiToolbarEditor = ({
         <EmojisContentIconInput
           search={search}
           onChange={emoji => {
+            if (!emoji) return;
+
             editor.commands.insertContent(emoji);
             setIsOpen?.(false);
           }}

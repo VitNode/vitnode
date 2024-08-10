@@ -78,7 +78,7 @@ export const ColorsTabThemeEditor = () => {
                     });
                   }}
                   value={getStringFromHSL(field.value[activeTheme])}
-                  disableRemoveColor
+                  required
                 />
               </FormControl>
               <FormMessage />
@@ -122,7 +122,7 @@ export const ColorsTabThemeEditor = () => {
                     });
                   }}
                   value={getStringFromHSL(field.value[activeTheme])}
-                  disableRemoveColor
+                  required
                 />
               </FormControl>
               <FormMessage />
@@ -239,7 +239,7 @@ export const ColorsTabThemeEditor = () => {
                     });
                   }}
                   value={getStringFromHSL(field.value[activeTheme])}
-                  disableRemoveColor
+                  required
                 />
               </FormControl>
               <FormMessage />
@@ -283,7 +283,7 @@ export const ColorsTabThemeEditor = () => {
                     });
                   }}
                   value={getStringFromHSL(field.value[activeTheme])}
-                  disableRemoveColor
+                  required
                 />
               </FormControl>
               <FormMessage />

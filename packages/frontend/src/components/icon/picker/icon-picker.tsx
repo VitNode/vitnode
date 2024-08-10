@@ -26,9 +26,17 @@ const Content = React.lazy(async () =>
 
 interface Props extends Omit<IconPickerProps, 'setOpen'> {
   className?: string;
+  disabled?: boolean;
+  required?: boolean;
 }
 
-export const IconPicker = ({ className, onChange, value }: Props) => {
+export const IconPicker = ({
+  className,
+  onChange,
+  value,
+  disabled,
+  required,
+}: Props) => {
   const t = useTranslations('core');
   const [open, setOpen] = React.useState(false);
 
@@ -37,16 +45,20 @@ export const IconPicker = ({ className, onChange, value }: Props) => {
       <div className={cn('flex flex-col gap-2', className)}>
         <div className="flex gap-2">
           <PopoverTrigger asChild>
-            <Button variant="outline" className="w-full max-w-52 justify-start">
+            <Button
+              variant="outline"
+              className="w-full max-w-52 justify-start"
+              disabled={disabled}
+            >
               <Plus /> {t('icon_picker.title')}
             </Button>
           </PopoverTrigger>
 
-          {value && (
+          {value && !required && (
             <Button
               variant="destructiveGhost"
               onClick={() => {
-                onChange('');
+                onChange(undefined);
               }}
             >
               <X /> {t('icon_picker.remove')}

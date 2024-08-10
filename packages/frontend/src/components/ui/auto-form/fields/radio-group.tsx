@@ -69,8 +69,8 @@ export const AutoFormRadioGroup = ({
           >
             {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
             {values?.map((value: any) => {
-              const label = labels?.[value[0]].title || value[1];
-              const description = labels?.[value[0]].description;
+              const label = labels?.[value[0]]?.title || value[1];
+              const description = labels?.[value[0]]?.description;
 
               return (
                 <FormItem

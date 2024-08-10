@@ -8,12 +8,12 @@ import { CONFIG } from '@/helpers/config-with-env';
 import { Admin__Core_Manifest_Metadata__ShowQuery } from '@/graphql/queries/admin/settings/admin__core_manifest_metadata__show.generated';
 import { convertColor, getHSLFromString } from '@/helpers/colors';
 
-enum DisplayManifest {
-  Fullscreen = 'fullscreen',
-  Standalone = 'standalone',
-  MinimalUi = 'minimal-ui',
-  Browser = 'browser',
-}
+const ManifestDisplay = {
+  fullscreen: 'fullscreen',
+  standalone: 'standalone',
+  ['minimal-ui']: 'minimal-ui',
+  browser: 'browser',
+} as const;
 
 export const useManifestCoreAdminView = ({
   admin__core_manifest_metadata__show: data,
@@ -24,8 +24,8 @@ export const useManifestCoreAdminView = ({
 
   const formSchema = z.object({
     display: z
-      .nativeEnum(DisplayManifest)
-      .default(data.display as DisplayManifest),
+      .nativeEnum(ManifestDisplay)
+      .default(data.display as z.infer<typeof formSchema>['display']),
     start_url: z
       .string()
       .default(data.start_url.replace(`${CONFIG.frontend_url}/en`, '')),

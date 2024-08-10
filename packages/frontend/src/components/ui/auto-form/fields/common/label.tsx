@@ -24,7 +24,7 @@ export const AutoFormLabel = ({
       })}
       optional={!isRequired}
     >
-      {description ? (
+      {description && theme === 'horizontal' ? (
         <>
           <span>{label}</span>
           <span className="text-muted-foreground mt-1 block text-sm">

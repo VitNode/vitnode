@@ -31,7 +31,7 @@ export const AutoFormSelect = ({
   ...props
 }: AutoFormInputComponentProps &
   React.ComponentProps<typeof Select> & {
-    labels?: Record<string, string>;
+    labels?: Record<string, JSX.Element | string>;
     placeholder?: string;
   }) => {
   const t = useTranslations('core');

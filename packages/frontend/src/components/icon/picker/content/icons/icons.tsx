@@ -5,13 +5,13 @@ import { useTranslations } from 'next-intl';
 import { IconPickerProps } from '../content';
 import { Button } from '@/components/ui/button';
 
-import { IconClient, IconLucideNames } from '../../../icon-client';
+import { IconClient } from '../../../icon-client';
 
 interface Props extends IconPickerProps {
   search: string;
 }
 
-const iconNamesArray = Object.keys(dynamicIconImports) as IconLucideNames[];
+const iconNamesArray = Object.keys(dynamicIconImports);
 
 export const IconsContentIconInput = ({
   onChange,

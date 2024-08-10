@@ -1,5 +1,3 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import React from 'react';
 
@@ -14,14 +12,6 @@ export const useSignInAdminView = () => {
     password: z.string().min(1),
   });
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      email: '',
-      password: '',
-    },
-  });
-
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setError(null);
     const mutation = await mutationApi({ ...values, admin: true });
@@ -31,7 +21,7 @@ export const useSignInAdminView = () => {
   };
 
   return {
-    form,
+    formSchema,
     onSubmit,
     error,
   };

@@ -10,11 +10,14 @@ import { editMutationApi } from './edit-mutation-api';
 import { useDialog } from '@/components/ui/dialog';
 import { FetcherErrorType } from '@/graphql/fetcher';
 import { ShowAdminNavPluginsObj } from '@/graphql/types';
+import { Admin__Core_Plugins__Nav__ShowQuery } from '@/graphql/queries/admin/plugins/dev/nav/admin__core_plugins__nav__show.generated';
 
 export const useCreateNavPluginAdmin = ({
   data,
   parentId,
+  dataFromSSR,
 }: {
+  dataFromSSR: Admin__Core_Plugins__Nav__ShowQuery['admin__core_plugins__nav__show'];
   data?: ShowAdminNavPluginsObj;
   parentId?: string;
 }) => {
@@ -22,11 +25,14 @@ export const useCreateNavPluginAdmin = ({
   const tCore = useTranslations('core');
   const { setOpen } = useDialog();
   const { code } = useParams();
+
   const formSchema = z.object({
     code: z.string().min(3).max(50),
-    icon: z.string(),
+    icon: z.string().optional(),
     href: z.string().min(1).max(100),
-    parent_code: z.string().optional(),
+    parent_code: z
+      .enum(['none', ...dataFromSSR.map(nav => nav.code)])
+      .default(parentId || 'none'),
     keywords: z.array(z.object({ id: z.number(), value: z.string() })),
   });
 
@@ -99,5 +105,6 @@ export const useCreateNavPluginAdmin = ({
   return {
     form,
     onSubmit,
+    formSchema,
   };
 };
