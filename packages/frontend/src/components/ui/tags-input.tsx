@@ -14,19 +14,21 @@ interface TagsInputItemProps {
 
 interface Props
   extends Omit<React.HTMLAttributes<HTMLInputElement>, 'onChange'> {
-  onChange: (value?: TagsInputItemProps | TagsInputItemProps[]) => void;
+  onChange: (
+    value?: TagsInputItemProps | TagsInputItemProps[] | undefined,
+  ) => void;
   className?: string;
   disabled?: boolean;
 }
 
 interface MultiProps extends Props {
   multiple?: true;
-  value?: TagsInputItemProps[];
+  value?: TagsInputItemProps[] | undefined;
 }
 
 interface SingleProps extends Props {
   multiple?: never;
-  value?: TagsInputItemProps;
+  value?: TagsInputItemProps | undefined;
 }
 
 export const TagsInput = ({
@@ -92,28 +94,30 @@ export const TagsInput = ({
         </div>
       )}
 
-      <Input
-        onChange={e => setTextInput(e.target.value)}
-        value={textInput}
-        disabled={(!multiple && values.length > 0) || disabled}
-        onKeyDown={e => {
-          if ((e.key === 'Enter' || e.key === ',') && textInput) {
-            e.preventDefault();
-            const items = textInput.split(',').map(value => value.trim());
+      {((!multiple && values.length <= 0) || multiple) && (
+        <Input
+          onChange={e => setTextInput(e.target.value)}
+          value={textInput}
+          disabled={(!multiple && values.length > 0) || disabled}
+          onKeyDown={e => {
+            if ((e.key === 'Enter' || e.key === ',') && textInput) {
+              e.preventDefault();
+              const items = textInput.split(',').map(value => value.trim());
 
-            onChange([
-              ...values,
-              ...items.map(value => ({
-                id: Math.random() * 1000,
-                value,
-              })),
-            ]);
-            setTextInput('');
-          }
-        }}
-        {...rest}
-        type="text"
-      />
+              onChange([
+                ...values,
+                ...items.map(value => ({
+                  id: Math.random() * 1000,
+                  value,
+                })),
+              ]);
+              setTextInput('');
+            }
+          }}
+          {...rest}
+          type="text"
+        />
+      )}
     </div>
   );
 };

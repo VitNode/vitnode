@@ -90,7 +90,6 @@ export function AutoFormObject<T extends z.ZodObject<any, any>>({
                 <InputComponent
                   key={key}
                   autoFormProps={{
-                    zodInputProps,
                     field,
                     fieldConfigItem,
                     isRequired:

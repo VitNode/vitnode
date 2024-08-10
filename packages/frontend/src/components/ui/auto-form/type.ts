@@ -79,7 +79,6 @@ export interface AutoFormInputComponentProps {
     isDisabled: boolean;
     isRequired: boolean;
     theme: 'horizontal' | 'vertical';
-    zodInputProps: React.InputHTMLAttributes<HTMLInputElement>;
     zodItem: z.ZodAny;
   };
 }

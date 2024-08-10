@@ -4,16 +4,6 @@ import { Ban } from 'lucide-react';
 
 import { useCreateNavPluginAdmin } from './hooks/use-create-nav-plugin-admin';
 import { DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
-import { TagsInput } from '@/components/ui/tags-input';
 import { Admin__Core_Plugins__Nav__ShowQuery } from '@/graphql/queries/admin/plugins/dev/nav/admin__core_plugins__nav__show.generated';
 import { ShowAdminNavPluginsObj } from '@/graphql/types';
 import { removeSpecialCharacters } from '@/helpers/special-characters';
@@ -21,6 +11,7 @@ import { AutoForm } from '@/components/ui/auto-form';
 import { AutoFormInput } from '@/components/ui/auto-form/fields/input';
 import { AutoFormSelect } from '@/components/ui/auto-form/fields/select';
 import { AutoFormIcon } from '@/components/ui/auto-form/fields/icon';
+import { AutoFormTags } from '@/components/ui/auto-form/fields/tags';
 
 export interface CreateEditNavDevPluginAdminProps {
   dataFromSSR: Admin__Core_Plugins__Nav__ShowQuery['admin__core_plugins__nav__show'];
@@ -37,7 +28,7 @@ export const CreateEditNavDevPluginAdmin = ({
 }: CreateEditNavDevPluginAdminProps) => {
   const t = useTranslations('admin.core.plugins.dev.nav');
   const tCore = useTranslations('core');
-  const { form, onSubmit, formSchema } = useCreateNavPluginAdmin({
+  const { onSubmit, formSchema } = useCreateNavPluginAdmin({
     data,
     parentId,
     dataFromSSR,
@@ -48,7 +39,8 @@ export const CreateEditNavDevPluginAdmin = ({
     // @ts-expect-error
     `${Array.isArray(code) ? code[0] : code}.admin.nav`,
   );
-  const parentCode = form.watch('parent_code');
+  // const parentCode = form.watch('parent_code');
+  const parentCode = 'none';
 
   const test = Object.fromEntries(dataFromSSR.map(nav => [nav.code, nav.code]));
   // <div className="flex flex-wrap items-center gap-2">
@@ -68,6 +60,7 @@ export const CreateEditNavDevPluginAdmin = ({
 
       <AutoForm
         formSchema={formSchema}
+        onSubmit={onSubmit}
         fieldConfig={{
           code: {
             label: t('create.code.label'),
@@ -106,29 +99,10 @@ export const CreateEditNavDevPluginAdmin = ({
           keywords: {
             label: t('create.keywords.label'),
             description: t('create.keywords.desc'),
-            fieldType: AutoFormInput,
+            fieldType: props => <AutoFormTags {...props} multiple />,
           },
         }}
       />
-
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-          <FormField
-            control={form.control}
-            name="keywords"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel optional>{t('create.keywords.label')}</FormLabel>
-                <FormControl>
-                  <TagsInput {...field} multiple />
-                </FormControl>
-                <FormDescription>{t('create.keywords.desc')}</FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </form>
-      </Form>
     </>
   );
 };

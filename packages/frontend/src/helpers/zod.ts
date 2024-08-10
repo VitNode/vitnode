@@ -27,3 +27,10 @@ export const zodFile = z.union([
     height: z.number().optional(),
   }),
 ]);
+
+export const zodTag = z.array(
+  z.object({
+    id: z.number(),
+    value: z.string(),
+  }),
+);

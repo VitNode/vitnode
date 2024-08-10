@@ -51,6 +51,8 @@ export function AutoForm<T extends ZodObjectOrWrapped>({
     values: valuesProp,
   });
 
+  console.log('form', form.watch());
+
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const parsedValues = formSchema.safeParse(values);
     if (parsedValues.success) {
