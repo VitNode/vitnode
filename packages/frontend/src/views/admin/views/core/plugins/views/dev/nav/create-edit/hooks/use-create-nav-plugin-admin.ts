@@ -39,8 +39,8 @@ export const useCreateNavPluginAdmin = ({
       .max(100)
       .default(data?.href || ''),
     parent_code: z
-      .enum(['none', ...dataFromSSR.map(nav => nav.code)])
-      .default(parentId || 'none'),
+      .enum(['null', ...dataFromSSR.map(nav => nav.code)])
+      .default(parentId || 'null'),
     icon: z
       .string()
       .default(data?.icon || '')

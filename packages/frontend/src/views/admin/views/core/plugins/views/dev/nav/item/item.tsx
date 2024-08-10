@@ -15,13 +15,14 @@ export const ItemContentNavDevPluginAdmin = (
   const t = useTranslations(`${pluginCode}.admin.nav`);
   const tAdmin = useTranslations('admin.core.plugins.dev.nav');
   const tCore = useTranslations('core');
-  const { parentId } = useItemNavDevPluginAdmin();
+  const { parentId, icons } = useItemNavDevPluginAdmin();
   const langKey = parentId ? `${parentId}_${data.code}` : data.code;
 
   return (
     <>
       <div className="flex flex-1 flex-col">
-        <span className="font-semibold">
+        <span className="flex flex-wrap items-center gap-2 font-semibold">
+          {icons.find(icon => icon.id === data.code)?.icon}
           {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
           {/* @ts-expect-error */}
           {t(langKey)}

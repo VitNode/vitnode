@@ -39,16 +39,6 @@ export const CreateEditNavDevPluginAdmin = ({
     `${Array.isArray(code) ? code[0] : code}.admin.nav`,
   );
 
-  const test = Object.fromEntries(dataFromSSR.map(nav => [nav.code, nav.code]));
-  // <div className="flex flex-wrap items-center gap-2">
-  //                           {nav.icon
-  //                             ? icons.find(icon => icon.id === nav.code)?.icon
-  //                             : null}
-  //                           {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-  //                           {/* @ts-expect-error */}
-  //                           <span>{tPlugin(nav.code)}</span>
-  //                         </div>
-
   return (
     <>
       <DialogHeader>
@@ -81,11 +71,27 @@ export const CreateEditNavDevPluginAdmin = ({
               <AutoFormSelect
                 {...props}
                 labels={{
-                  none: (
+                  null: (
                     <div className="flex flex-wrap items-center gap-2">
                       <Ban className="text-muted-foreground size-4" />
                       <span>{t('create.parent.null')}</span>
                     </div>
+                  ),
+                  ...Object.fromEntries(
+                    dataFromSSR.map(nav => [
+                      nav.code,
+                      <div
+                        key={nav.code}
+                        className="flex flex-wrap items-center gap-2"
+                      >
+                        {nav.icon
+                          ? icons.find(icon => icon.id === nav.code)?.icon
+                          : null}
+                        {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+                        {/* @ts-expect-error */}
+                        <span>{tPlugin(nav.code)}</span>
+                      </div>,
+                    ]),
                   ),
                 }}
               />
