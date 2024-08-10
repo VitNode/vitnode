@@ -10,7 +10,7 @@ export type ZodObjectOrWrapped =
 export interface FieldConfigItem {
   fieldType: (props: AutoFormInputComponentProps) => React.ReactNode;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  description?: React.ReactNode | ((value: any) => React.ReactNode);
+  description?: React.ReactNode;
   label?: string;
 
   renderParent?: (props: {

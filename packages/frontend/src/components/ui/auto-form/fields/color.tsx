@@ -13,20 +13,16 @@ export const AutoFormColor = ({
 }: AutoFormInputComponentProps &
   Omit<
     React.ComponentProps<typeof ColorPicker>,
-    'onChange' | 'value' | 'required'
+    'onChange' | 'required' | 'value'
   >) => {
   const value = field.value || '';
-  const desc =
-    typeof fieldConfigItem.description === 'function'
-      ? fieldConfigItem.description(field.value)
-      : fieldConfigItem.description;
   const ParentWrapper = fieldConfigItem.renderParent ?? DefaultParent;
 
   return (
     <AutoFormWrapper theme={theme}>
       {fieldConfigItem?.label && (
         <AutoFormLabel
-          description={desc}
+          description={fieldConfigItem.description}
           label={fieldConfigItem.label}
           isRequired={isRequired}
           theme={theme}
@@ -44,7 +40,7 @@ export const AutoFormColor = ({
         </FormControl>
       </ParentWrapper>
       {fieldConfigItem.description && theme === 'vertical' && (
-        <AutoFormTooltip description={desc} />
+        <AutoFormTooltip description={fieldConfigItem.description} />
       )}
       <FormMessage />
     </AutoFormWrapper>

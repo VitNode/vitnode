@@ -13,10 +13,6 @@ export const AutoFormTextArea = ({
 }: AutoFormInputComponentProps &
   Omit<React.InputHTMLAttributes<HTMLTextAreaElement>, 'value'>) => {
   const value = field.value || '';
-  const desc =
-    typeof fieldConfigItem.description === 'function'
-      ? fieldConfigItem.description(field.value)
-      : fieldConfigItem.description;
 
   const ParentWrapper = fieldConfigItem.renderParent ?? DefaultParent;
 
@@ -27,7 +23,7 @@ export const AutoFormTextArea = ({
           label={fieldConfigItem.label}
           isRequired={isRequired}
           theme={theme}
-          description={desc}
+          description={fieldConfigItem.description}
         />
       )}
       <ParentWrapper>
@@ -41,7 +37,7 @@ export const AutoFormTextArea = ({
         </FormControl>
       </ParentWrapper>
       {fieldConfigItem.description && theme === 'vertical' && (
-        <AutoFormTooltip description={desc} />
+        <AutoFormTooltip description={fieldConfigItem.description} />
       )}
       <FormMessage />
     </AutoFormWrapper>

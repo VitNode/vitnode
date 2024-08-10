@@ -27,8 +27,7 @@ export const CreateEditNavDevPluginAdmin = ({
   parentId,
 }: CreateEditNavDevPluginAdminProps) => {
   const t = useTranslations('admin.core.plugins.dev.nav');
-  const tCore = useTranslations('core');
-  const { onSubmit, formSchema } = useCreateNavPluginAdmin({
+  const { onSubmit, formSchema, values, setValues } = useCreateNavPluginAdmin({
     data,
     parentId,
     dataFromSSR,
@@ -39,8 +38,6 @@ export const CreateEditNavDevPluginAdmin = ({
     // @ts-expect-error
     `${Array.isArray(code) ? code[0] : code}.admin.nav`,
   );
-  // const parentCode = form.watch('parent_code');
-  const parentCode = 'none';
 
   const test = Object.fromEntries(dataFromSSR.map(nav => [nav.code, nav.code]));
   // <div className="flex flex-wrap items-center gap-2">
@@ -61,6 +58,8 @@ export const CreateEditNavDevPluginAdmin = ({
       <AutoForm
         formSchema={formSchema}
         onSubmit={onSubmit}
+        values={values}
+        onValuesChange={setValues}
         fieldConfig={{
           code: {
             label: t('create.code.label'),
@@ -71,7 +70,7 @@ export const CreateEditNavDevPluginAdmin = ({
             label: t('create.href.label'),
             description: t.rich('create.href.desc', {
               link: () => (
-                <span className="text-foreground font-bold">{`${code}/${parentCode !== 'null' ? `${parentCode}/` : ''}${removeSpecialCharacters(form.watch('href'))}`}</span>
+                <span className="text-foreground font-bold">{`${code}/${values.parent_code !== 'null' ? `${values.parent_code}/` : ''}${removeSpecialCharacters(values.href ?? '')}`}</span>
               ),
             }),
             fieldType: AutoFormInput,

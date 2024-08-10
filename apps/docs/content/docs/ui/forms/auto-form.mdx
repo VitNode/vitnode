@@ -303,6 +303,16 @@ You can change the theme of the form by using the `theme` prop and passing `hori
 />
 ```
 
+### Controlled Form
+
+You can control the form by using the `React.useState` prop.
+
+```tsx
+const [values, setValues] = useState<Partial<z.infer<typeof formSchema>>>({});
+
+<AutoForm values={values} onValuesChange={setValues} />;
+```
+
 ## Dependencies
 
 AutoForm allow to create dependencies between fields. For example allowing one field's visibility or behavior to be controlled based on the value of another. Pass `dependencies` prop with an array of objects.

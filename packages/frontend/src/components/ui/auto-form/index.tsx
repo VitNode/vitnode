@@ -2,6 +2,7 @@
 
 import { DefaultValues, useForm, UseFormReturn } from 'react-hook-form';
 import * as z from 'zod';
+import React from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 
@@ -22,6 +23,7 @@ export function AutoForm<T extends ZodObjectOrWrapped>({
   children,
   className,
   theme = 'vertical',
+  onValuesChange,
 }: {
   fieldConfig: FieldConfig<z.infer<T>>;
   formSchema: T;
@@ -32,6 +34,7 @@ export function AutoForm<T extends ZodObjectOrWrapped>({
     values: z.infer<T>,
     form: UseFormReturn<z.infer<T>>,
   ) => Promise<void>;
+  onValuesChange?: (values: Partial<z.infer<T>>) => void;
   submitButton?: (props: {
     disabled: boolean;
     loading: boolean;
@@ -50,8 +53,13 @@ export function AutoForm<T extends ZodObjectOrWrapped>({
     defaultValues: defaultValues ?? undefined,
     values: valuesProp,
   });
+  const values = form.watch();
+  // valuesString is needed because form.watch() returns a new object every time
+  const valuesString = JSON.stringify(values);
 
-  console.log('form', form.watch());
+  React.useEffect(() => {
+    onValuesChange?.(values);
+  }, [valuesString]);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const parsedValues = formSchema.safeParse(values);

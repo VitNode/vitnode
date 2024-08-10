@@ -13,17 +13,13 @@ export const AutoFormTags = ({
 }: AutoFormInputComponentProps &
   Omit<React.ComponentProps<typeof TagsInput>, 'onChange' | 'value'>) => {
   const value = field.value || '';
-  const desc =
-    typeof fieldConfigItem.description === 'function'
-      ? fieldConfigItem.description(field.value)
-      : fieldConfigItem.description;
   const ParentWrapper = fieldConfigItem.renderParent ?? DefaultParent;
 
   return (
     <AutoFormWrapper theme={theme}>
       {fieldConfigItem?.label && (
         <AutoFormLabel
-          description={desc}
+          description={fieldConfigItem.description}
           label={fieldConfigItem.label}
           isRequired={isRequired}
           theme={theme}
@@ -40,7 +36,7 @@ export const AutoFormTags = ({
         </FormControl>
       </ParentWrapper>
       {fieldConfigItem.description && theme === 'vertical' && (
-        <AutoFormTooltip description={desc} />
+        <AutoFormTooltip description={fieldConfigItem.description} />
       )}
       <FormMessage />
     </AutoFormWrapper>

@@ -43,17 +43,13 @@ export const AutoFormRadioGroup = ({
     values = baseValues.map(value => [value, value]);
   }
 
-  const desc =
-    typeof fieldConfigItem.description === 'function'
-      ? fieldConfigItem.description(field.value)
-      : fieldConfigItem.description;
   const ParentWrapper = fieldConfigItem.renderParent ?? DefaultParent;
 
   return (
     <AutoFormWrapper theme={theme}>
       {fieldConfigItem?.label && (
         <AutoFormLabel
-          description={desc}
+          description={fieldConfigItem.description}
           label={fieldConfigItem.label}
           isRequired={isRequired}
           theme={theme}
@@ -96,7 +92,7 @@ export const AutoFormRadioGroup = ({
         </FormControl>
       </ParentWrapper>
       {fieldConfigItem.description && theme === 'vertical' && (
-        <AutoFormTooltip description={desc} />
+        <AutoFormTooltip description={fieldConfigItem.description} />
       )}
       <FormMessage />
     </AutoFormWrapper>

@@ -1,5 +1,6 @@
 import { UseFormReturn } from 'react-hook-form';
 import * as z from 'zod';
+import React from 'react';
 import { useParams } from 'next/navigation';
 import { toast } from 'sonner';
 import { useTranslations } from 'next-intl';
@@ -53,6 +54,10 @@ export const useCreateNavPluginAdmin = ({
       )
       .optional(),
   });
+
+  const [values, setValues] = React.useState<
+    Partial<z.infer<typeof formSchema>>
+  >({});
 
   const onSubmit = async (
     values: z.infer<typeof formSchema>,
@@ -109,6 +114,8 @@ export const useCreateNavPluginAdmin = ({
   };
 
   return {
+    values,
+    setValues,
     onSubmit,
     formSchema,
   };

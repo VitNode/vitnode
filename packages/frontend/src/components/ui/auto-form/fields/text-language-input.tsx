@@ -15,10 +15,6 @@ export const AutoFormTextLanguageInput = ({
     React.ComponentProps<typeof TextLanguageInput>,
     'onChange' | 'value'
   >) => {
-  const desc =
-    typeof fieldConfigItem.description === 'function'
-      ? fieldConfigItem.description(field.value)
-      : fieldConfigItem.description;
   const ParentWrapper = fieldConfigItem.renderParent ?? DefaultParent;
 
   return (
@@ -28,7 +24,7 @@ export const AutoFormTextLanguageInput = ({
           label={fieldConfigItem.label}
           isRequired={isRequired}
           theme={theme}
-          description={desc}
+          description={fieldConfigItem.description}
         />
       )}
       <ParentWrapper>
@@ -41,7 +37,7 @@ export const AutoFormTextLanguageInput = ({
         </FormControl>
       </ParentWrapper>
       {fieldConfigItem.description && theme === 'vertical' && (
-        <AutoFormTooltip description={desc} />
+        <AutoFormTooltip description={fieldConfigItem.description} />
       )}
       <FormMessage />
     </AutoFormWrapper>

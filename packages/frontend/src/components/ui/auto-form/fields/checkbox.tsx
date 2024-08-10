@@ -14,10 +14,6 @@ export const AutoFormCheckbox = ({
 }: AutoFormInputComponentProps &
   Omit<React.ComponentProps<typeof Checkbox>, 'onChange' | 'value'>) => {
   const value: boolean = field.value || false;
-  const desc =
-    typeof fieldConfigItem.description === 'function'
-      ? fieldConfigItem.description(field.value)
-      : fieldConfigItem.description;
   const ParentWrapper = fieldConfigItem.renderParent ?? DefaultParent;
 
   return (
@@ -43,14 +39,14 @@ export const AutoFormCheckbox = ({
         <div className="space-y-1 leading-none">
           {fieldConfigItem?.label && (
             <AutoFormLabel
-              description={desc}
+              description={fieldConfigItem.description}
               label={fieldConfigItem.label}
               isRequired={isRequired}
               theme={theme}
             />
           )}
           {fieldConfigItem.description && theme === 'vertical' && (
-            <AutoFormTooltip description={desc} />
+            <AutoFormTooltip description={fieldConfigItem.description} />
           )}
         </div>
       )}

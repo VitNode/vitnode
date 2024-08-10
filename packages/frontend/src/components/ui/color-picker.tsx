@@ -31,10 +31,10 @@ export const ColorPicker = ({
   onChange: (value: string | null) => void;
   value: string | null;
   className?: string;
-  required?: boolean;
   disabled?: boolean;
   id?: string;
   ref?: React.RefCallback<HTMLButtonElement>;
+  required?: boolean;
 }) => {
   const t = useTranslations('core.colors');
   const ref = React.useRef<HTMLInputElement>(null);

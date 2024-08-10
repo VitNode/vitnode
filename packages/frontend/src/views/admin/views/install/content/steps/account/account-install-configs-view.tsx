@@ -14,18 +14,20 @@ import { useInstallVitnode } from '../../hooks/use-install-vitnode';
 
 export const AccountInstallConfigsView = () => {
   const t = useTranslations('core');
-  const { onSubmit, formSchema } = useSignUpView();
+  const { onSubmit, formSchema, values, setValues } = useSignUpView();
   const { setCurrentStep } = useInstallVitnode();
 
   return (
     <AutoForm
       formSchema={formSchema}
+      values={values}
+      onValuesChange={setValues}
       fieldConfig={{
         name: {
           label: t('sign_up.form.name.label'),
           fieldType: AutoFormInput,
-          description: val => {
-            const value = val.trimStart().trimEnd();
+          description: (() => {
+            const value = (values.name || '').trimStart().trimEnd();
 
             return (
               <>
@@ -43,7 +45,7 @@ export const AccountInstallConfigsView = () => {
                 )}
               </>
             );
-          },
+          })(),
         },
         email: {
           label: t('sign_up.form.email.label'),
@@ -52,7 +54,8 @@ export const AccountInstallConfigsView = () => {
         password: {
           label: t('sign_up.form.password.label'),
           fieldType: props => <AutoFormInput type="password" {...props} />,
-          description: value => {
+          description: (() => {
+            const value = values.password || '';
             const regexArray = [
               /^.{8,}$/, // Min 8 characters
               /[a-z]/, // Min 1 lowercase
@@ -78,7 +81,7 @@ export const AccountInstallConfigsView = () => {
                 />
               </div>
             );
-          },
+          })(),
         },
         terms: {
           label: t('sign_up.form.terms.label'),

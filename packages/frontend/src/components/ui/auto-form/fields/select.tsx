@@ -35,10 +35,6 @@ export const AutoFormSelect = ({
     placeholder?: string;
   }) => {
   const t = useTranslations('core');
-  const desc =
-    typeof fieldConfigItem.description === 'function'
-      ? fieldConfigItem.description(field.value)
-      : fieldConfigItem.description;
   const ParentWrapper = fieldConfigItem.renderParent ?? DefaultParent;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const baseValues = (getBaseSchema(zodItem) as unknown as z.ZodEnum<any>)._def
@@ -69,7 +65,7 @@ export const AutoFormSelect = ({
           label={fieldConfigItem.label}
           isRequired={isRequired}
           theme={theme}
-          description={desc}
+          description={fieldConfigItem.description}
         />
       )}
       <ParentWrapper>
@@ -100,7 +96,7 @@ export const AutoFormSelect = ({
         </FormControl>
       </ParentWrapper>
       {fieldConfigItem.description && theme === 'vertical' && (
-        <AutoFormTooltip description={desc} />
+        <AutoFormTooltip description={fieldConfigItem.description} />
       )}
       <FormMessage />
     </AutoFormWrapper>

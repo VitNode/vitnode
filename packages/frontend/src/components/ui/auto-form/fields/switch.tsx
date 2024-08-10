@@ -12,10 +12,6 @@ export const AutoFormSwitch = ({
   ...props
 }: AutoFormInputComponentProps &
   Omit<React.ComponentProps<typeof Switch>, 'value'>) => {
-  const desc =
-    typeof fieldConfigItem.description === 'function'
-      ? fieldConfigItem.description(field.value)
-      : fieldConfigItem.description;
   const ParentWrapper = fieldConfigItem.renderParent ?? DefaultParent;
 
   return (
@@ -25,7 +21,7 @@ export const AutoFormSwitch = ({
           label={fieldConfigItem.label}
           isRequired={isRequired}
           theme={theme}
-          description={desc}
+          description={fieldConfigItem.description}
         />
       )}
       <ParentWrapper>
@@ -42,7 +38,7 @@ export const AutoFormSwitch = ({
         </FormControl>
       </ParentWrapper>
       {fieldConfigItem.description && theme === 'vertical' && (
-        <AutoFormTooltip description={desc} />
+        <AutoFormTooltip description={fieldConfigItem.description} />
       )}
       <FormMessage />
     </AutoFormWrapper>

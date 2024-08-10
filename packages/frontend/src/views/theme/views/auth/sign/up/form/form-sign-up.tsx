@@ -14,7 +14,8 @@ import { SuccessFormSignUp } from './success';
 
 export const FormSignUp = () => {
   const t = useTranslations('core');
-  const { formSchema, onSubmit, successName } = useSignUpView();
+  const { formSchema, onSubmit, successName, values, setValues } =
+    useSignUpView();
 
   if (successName) {
     return <SuccessFormSignUp name={successName} />;
@@ -23,13 +24,15 @@ export const FormSignUp = () => {
   return (
     <CardContent>
       <AutoForm
+        values={values}
+        onValuesChange={setValues}
         formSchema={formSchema}
         fieldConfig={{
           name: {
             label: t('sign_up.form.name.label'),
             fieldType: AutoFormInput,
-            description: val => {
-              const value = val.trimStart().trimEnd();
+            description: (() => {
+              const value = (values.name || '').trimStart().trimEnd();
 
               return (
                 <>
@@ -47,7 +50,7 @@ export const FormSignUp = () => {
                   )}
                 </>
               );
-            },
+            })(),
           },
           email: {
             label: t('sign_up.form.email.label'),
@@ -56,7 +59,8 @@ export const FormSignUp = () => {
           password: {
             label: t('sign_up.form.password.label'),
             fieldType: props => <AutoFormInput type="password" {...props} />,
-            description: value => {
+            description: (() => {
+              const value = values.password || '';
               const regexArray = [
                 /^.{8,}$/, // Min 8 characters
                 /[a-z]/, // Min 1 lowercase
@@ -72,17 +76,17 @@ export const FormSignUp = () => {
               if (value.length <= 0) return;
 
               return (
-                <span className="mt-1 block">
-                  <span className="mb-2 flex justify-between text-xs font-semibold">
+                <div className="mt-1">
+                  <div className="mb-2 flex justify-between text-xs font-semibold">
                     <span>{t('week')}</span>
                     <span>{t('strong')}</span>
-                  </span>
+                  </div>
                   <Progress
                     value={(100 / regexArray.length) * passRegexPassword}
                   />
-                </span>
+                </div>
               );
-            },
+            })(),
           },
           terms: {
             label: t('sign_up.form.terms.label'),

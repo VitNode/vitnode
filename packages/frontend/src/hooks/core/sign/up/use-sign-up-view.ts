@@ -13,6 +13,9 @@ const nameRegex = /^(?!.* {2})[\p{L}\p{N}._@ -]*$/u;
 export const useSignUpView = () => {
   const t = useTranslations('core');
   const [successName, setSuccessName] = React.useState('');
+  const [values, setValues] = React.useState<
+    Partial<z.infer<typeof formSchema>>
+  >({});
   const { getTokenFromCaptcha, isReady } = useCaptcha();
 
   const formSchema = z.object({
@@ -114,6 +117,8 @@ export const useSignUpView = () => {
   };
 
   return {
+    values,
+    setValues,
     formSchema,
     onSubmit,
     isReady,
