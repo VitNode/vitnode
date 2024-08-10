@@ -1,6 +1,4 @@
-import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
-import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import * as z from 'zod';
 
@@ -8,6 +6,8 @@ import { editMutationApi } from './edit-mutation-api';
 import { createMutationApi } from './create-mutation-api';
 import { useDialog } from '@/components/ui/dialog';
 import { ShowCoreLanguages } from '@/graphql/types';
+import { timeZones } from '../timezones';
+import { locales } from '../locales';
 
 interface Args {
   data?: ShowCoreLanguages;
@@ -19,26 +19,23 @@ export const useCreateEditLangAdmin = ({ data }: Args) => {
   const { setOpen } = useDialog();
 
   const formSchema = z.object({
-    code: z.string().min(1),
-    name: z.string().min(1),
-    timezone: z.string().min(1),
-    default: z.boolean(),
-    time_24: z.boolean(),
-    locale: z.string(),
-    allow_in_input: z.boolean(),
-  });
-
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      code: data?.code ?? '',
-      name: data?.name ?? '',
-      timezone: data?.timezone ?? 'America/New_York',
-      default: data?.default ?? false,
-      time_24: data?.time_24 ?? false,
-      locale: data?.locale ?? 'en',
-      allow_in_input: data?.allow_in_input ?? true,
-    },
+    code: z
+      .string()
+      .min(1)
+      .default(data?.code ?? ''),
+    name: z
+      .string()
+      .min(1)
+      .default(data?.name ?? ''),
+    timezone: z
+      .enum(timeZones as [string, ...string[]])
+      .default(data?.timezone ?? 'America/New_York'),
+    locale: z
+      .enum(locales.map(item => item.locale) as [string, ...string[]])
+      .default(data?.locale ?? 'en'),
+    default: z.boolean().default(data?.default ?? false),
+    time_24: z.boolean().default(data?.time_24 ?? false),
+    allow_in_input: z.boolean().default(data?.allow_in_input ?? true),
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -82,7 +79,7 @@ export const useCreateEditLangAdmin = ({ data }: Args) => {
   };
 
   return {
-    form,
+    formSchema,
     onSubmit,
   };
 };

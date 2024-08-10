@@ -15,15 +15,24 @@ export const AutoFormSwitch = ({
   const ParentWrapper = fieldConfigItem.renderParent ?? DefaultParent;
 
   return (
-    <AutoFormWrapper theme={theme}>
-      {fieldConfigItem?.label && (
-        <AutoFormLabel
-          label={fieldConfigItem.label}
-          isRequired={isRequired}
-          theme={theme}
-          description={fieldConfigItem.description}
-        />
-      )}
+    <AutoFormWrapper
+      className="flex flex-row items-center justify-between gap-2 rounded-lg border p-4"
+      theme={theme}
+    >
+      <div>
+        {fieldConfigItem?.label && (
+          <AutoFormLabel
+            label={fieldConfigItem.label}
+            isRequired={isRequired}
+            theme={theme}
+            description={fieldConfigItem.description}
+          />
+        )}
+        {fieldConfigItem.description && theme === 'vertical' && (
+          <AutoFormTooltip description={fieldConfigItem.description} />
+        )}
+        <FormMessage />
+      </div>
       <ParentWrapper>
         <FormControl>
           <Switch
@@ -37,10 +46,6 @@ export const AutoFormSwitch = ({
           />
         </FormControl>
       </ParentWrapper>
-      {fieldConfigItem.description && theme === 'vertical' && (
-        <AutoFormTooltip description={fieldConfigItem.description} />
-      )}
-      <FormMessage />
     </AutoFormWrapper>
   );
 };
