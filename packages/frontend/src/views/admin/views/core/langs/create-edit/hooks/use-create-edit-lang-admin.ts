@@ -33,9 +33,18 @@ export const useCreateEditLangAdmin = ({ data }: Args) => {
       .string()
       .min(1)
       .default(data?.code ?? ''),
-    default: z.boolean().default(data?.default ?? false),
-    time_24: z.boolean().default(data?.time_24 ?? false),
-    allow_in_input: z.boolean().default(data?.allow_in_input ?? true),
+    default: z
+      .boolean()
+      .default(data?.default ?? false)
+      .optional(),
+    time_24: z
+      .boolean()
+      .default(data?.time_24 ?? false)
+      .optional(),
+    allow_in_input: z
+      .boolean()
+      .default(data?.allow_in_input ?? true)
+      .optional(),
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -45,8 +54,8 @@ export const useCreateEditLangAdmin = ({ data }: Args) => {
       const mutation = await editMutationApi({
         ...data,
         ...values,
-        time24: values.time_24,
-        allowInInput: values.allow_in_input,
+        time24: values.time_24 ?? false,
+        allowInInput: values.allow_in_input ?? true,
       });
 
       if (mutation?.error) {
@@ -55,8 +64,8 @@ export const useCreateEditLangAdmin = ({ data }: Args) => {
     } else {
       const mutation = await createMutationApi({
         ...values,
-        time24: values.time_24,
-        allowInInput: values.allow_in_input,
+        time24: values.time_24 ?? false,
+        allowInInput: values.allow_in_input ?? true,
       });
 
       if (mutation?.error) {

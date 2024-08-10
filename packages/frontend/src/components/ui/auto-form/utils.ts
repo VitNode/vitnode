@@ -30,7 +30,10 @@ export function getObjectFormSchema(
  */
 export function getBaseSchema<
   ChildType extends z.AnyZodObject | z.ZodAny = z.ZodAny,
->(schema: ChildType | z.ZodEffects<ChildType>): ChildType | null {
+>(
+  schema: ChildType | z.ZodEffects<ChildType>,
+  isArray?: boolean,
+): ChildType | null {
   if (!schema) return null;
   if ('innerType' in schema._def) {
     return getBaseSchema(schema._def.innerType as ChildType);
@@ -38,7 +41,8 @@ export function getBaseSchema<
   if ('schema' in schema._def) {
     return getBaseSchema(schema._def.schema as ChildType);
   }
-  if ('type' in schema._def) {
+
+  if ('type' in schema._def && isArray) {
     return getBaseSchema(schema._def.type as ChildType);
   }
 

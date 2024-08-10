@@ -7,19 +7,12 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { ShowAdminPlugins } from '@/graphql/types';
+import { AutoForm } from '@/components/ui/auto-form';
+import { AutoFormRadioGroup } from '@/components/ui/auto-form/fields/radio-group';
+import { AutoFormInput } from '@/components/ui/auto-form/fields/input';
+import { DependencyType } from '@/components/ui/auto-form/type';
 
 export const ContentDownloadActionDevPluginAdmin = ({
   code,
@@ -28,7 +21,7 @@ export const ContentDownloadActionDevPluginAdmin = ({
   version_code,
 }: ShowAdminPlugins) => {
   const t = useTranslations('admin.core.plugins.download');
-  const { form, onSubmit } = useDownloadPluginAdmin({
+  const { onSubmit, formSchema } = useDownloadPluginAdmin({
     version_code,
     version,
     code,
@@ -43,82 +36,63 @@ export const ContentDownloadActionDevPluginAdmin = ({
         </DialogDescription>
       </DialogHeader>
 
-      <Form {...form}>
-        <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
-          {version_code && (
-            <FormField
-              control={form.control}
-              name="type"
-              render={({ field }) => (
-                <RadioGroup
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="rebuild" id="rebuild" />
-                    <Label htmlFor="rebuild">
-                      {t('type.rebuild', {
-                        version: `${version} (${version_code})`,
-                      })}
-                    </Label>
-                  </div>
-
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="new_version" id="new_version" />
-                    <Label htmlFor="new_version">{t('type.new_version')}</Label>
-                  </div>
-                </RadioGroup>
-              )}
-            />
-          )}
-
-          {form.watch('type') === 'new_version' && (
-            <>
-              <FormField
-                control={form.control}
-                name="version"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t('version.label')}</FormLabel>
-                    <FormControl>
-                      <Input {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
+      <AutoForm
+        formSchema={formSchema}
+        onSubmit={onSubmit}
+        fieldConfig={{
+          type: {
+            fieldType: props => (
+              <AutoFormRadioGroup
+                {...props}
+                labels={{
+                  rebuild: {
+                    title: t('type.rebuild', {
+                      version: `${version} (${version_code})`,
+                    }),
+                  },
+                  new_version: {
+                    title: t('type.new_version'),
+                  },
+                }}
               />
-
-              <FormField
-                control={form.control}
-                name="version_code"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t('version_code.label')}</FormLabel>
-                    <FormControl>
-                      <Input
-                        type="number"
-                        min={version_code ? version_code + 1 : 1}
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </>
-          )}
-
+            ),
+          },
+          version: {
+            label: t('version.label'),
+            fieldType: AutoFormInput,
+          },
+          version_code: {
+            label: t('version_code.label'),
+            fieldType: props => <AutoFormInput type="number" {...props} />,
+          },
+        }}
+        dependencies={[
+          {
+            sourceField: 'type',
+            type: DependencyType.HIDES,
+            targetField: 'version',
+            when: (provider: string) => provider !== 'new_version',
+          },
+          {
+            sourceField: 'type',
+            type: DependencyType.HIDES,
+            targetField: 'version_code',
+            when: (provider: string) => provider !== 'new_version',
+          },
+          {
+            sourceField: 'type',
+            type: DependencyType.SETS_OPTIONS,
+            targetField: 'type',
+            when: () => !version_code,
+            options: ['new_version'],
+          },
+        ]}
+        submitButton={props => (
           <DialogFooter>
-            <Button
-              disabled={!form.formState.isValid}
-              loading={form.formState.isSubmitting}
-              type="submit"
-            >
-              {t('submit')}
-            </Button>
+            <Button {...props}>{t('submit')}</Button>
           </DialogFooter>
-        </form>
-      </Form>
+        )}
+      />
     </>
   );
 };

@@ -9,10 +9,12 @@ export const zodInput = {
   ),
 };
 
-export const zodLanguageInput = z.object({
-  language_code: z.string(),
-  value: z.string().trim(),
-});
+export const zodLanguageInput = z.array(
+  z.object({
+    language_code: z.string(),
+    value: z.string().trim(),
+  }),
+);
 
 export const zodFile = z.union([
   z.instanceof(File),

@@ -1,122 +1,61 @@
 import { useTranslations } from 'next-intl';
-import { UseFormReturn } from 'react-hook-form';
 
-import {
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
+import { AutoFormInput } from '@/components/ui/auto-form/fields/input';
+import { AutoForm } from '@/components/ui/auto-form';
+import { useCreateEditPluginAdmin } from './hooks/use-create-edit-plugin-admin';
+import { ShowAdminPlugins } from '@/graphql/types';
 
 export const FormCreateEditPluginAdmin = ({
-  form,
-  isEdit,
+  data,
+  submitButton,
+  className,
 }: {
-  form: UseFormReturn<{
-    author: string;
-    author_url: string;
-    code: string;
-    description: string;
-    name: string;
-    support_url: string;
-  }>;
-  isEdit?: boolean;
+  submitButton: React.ComponentProps<typeof AutoForm>['submitButton'];
+  className?: string;
+  data?: ShowAdminPlugins;
 }) => {
   const t = useTranslations('admin.core.plugins');
+  const { onSubmit, formSchema } = useCreateEditPluginAdmin({ data });
 
   return (
-    <>
-      <FormField
-        control={form.control}
-        name="name"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>{t('create.name.label')}</FormLabel>
-            <FormControl>
-              <Input {...field} />
-            </FormControl>
-            <FormDescription>{t('create.name.desc')}</FormDescription>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-
-      <FormField
-        control={form.control}
-        name="description"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel optional>{t('create.description.label')}</FormLabel>
-            <FormControl>
-              <Input {...field} />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-
-      {!isEdit && (
-        <FormField
-          control={form.control}
-          name="code"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{t('create.code.label')}</FormLabel>
-              <FormControl>
-                <Input placeholder="vitnode-plugin-example" {...field} />
-              </FormControl>
-              <FormDescription>{t('create.code.desc')}</FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-      )}
-
-      <FormField
-        control={form.control}
-        name="support_url"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>{t('create.support_url.label')}</FormLabel>
-            <FormControl>
-              <Input type="url" {...field} />
-            </FormControl>
-            <FormDescription>{t('create.support_url.desc')}</FormDescription>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-
-      <FormField
-        control={form.control}
-        name="author"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>{t('create.author.label')}</FormLabel>
-            <FormControl>
-              <Input {...field} />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-
-      <FormField
-        control={form.control}
-        name="author_url"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel optional>{t('create.author_url.label')}</FormLabel>
-            <FormControl>
-              <Input type="url" {...field} />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-    </>
+    <AutoForm
+      className={className}
+      formSchema={formSchema}
+      onSubmit={onSubmit}
+      submitButton={submitButton}
+      fieldConfig={{
+        name: {
+          label: t('create.name.label'),
+          description: t('create.name.desc'),
+          fieldType: AutoFormInput,
+        },
+        description: {
+          label: t('create.description.label'),
+          fieldType: AutoFormInput,
+        },
+        code: {
+          label: t('create.code.label'),
+          description: t('create.code.desc'),
+          fieldType: props => (
+            <AutoFormInput placeholder="vitnode-plugin-example" {...props} />
+          ),
+        },
+        support_url: {
+          label: t('create.support_url.label'),
+          description: t('create.support_url.desc'),
+          fieldType: props => <AutoFormInput type="email" {...props} />,
+        },
+        author: {
+          label: 'Author',
+          description: 'The author of the plugin',
+          fieldType: AutoFormInput,
+        },
+        author_url: {
+          label: 'Author URL',
+          description: 'The URL of the author',
+          fieldType: props => <AutoFormInput type="url" {...props} />,
+        },
+      }}
+    />
   );
 };

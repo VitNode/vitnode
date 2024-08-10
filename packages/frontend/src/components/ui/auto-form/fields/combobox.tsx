@@ -46,8 +46,8 @@ export const AutoFormCombobox = ({
   const [open, setOpen] = React.useState(false);
   const ParentWrapper = fieldConfigItem.renderParent ?? DefaultParent;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const baseValues = (getBaseSchema(zodItem) as unknown as z.ZodEnum<any>)._def
-    .values;
+  const baseValues = (getBaseSchema(zodItem, true) as unknown as z.ZodEnum<any>)
+    ._def.values;
 
   let values: [string, string][] = [];
   if (!Array.isArray(baseValues)) {

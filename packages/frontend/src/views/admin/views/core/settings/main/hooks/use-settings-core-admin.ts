@@ -14,14 +14,8 @@ export const useSettingsCoreAdmin = ({
   const formSchema = z.object({
     name: z.string().min(1).default(data.site_name),
     short_name: z.string().min(1).default(data.site_short_name),
-    description: z
-      .array(zodLanguageInput)
-      .default(data.site_description)
-      .optional(),
-    copyright: z
-      .array(zodLanguageInput)
-      .default(data.site_copyright)
-      .optional(),
+    description: zodLanguageInput.default(data.site_description).optional(),
+    copyright: zodLanguageInput.default(data.site_copyright).optional(),
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {

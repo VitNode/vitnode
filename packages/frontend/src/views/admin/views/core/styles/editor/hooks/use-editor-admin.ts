@@ -1,5 +1,4 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
+import { UseFormReturn } from 'react-hook-form';
 import * as z from 'zod';
 import { toast } from 'sonner';
 import { useTranslations } from 'next-intl';
@@ -13,21 +12,18 @@ export const useEditorAdmin = (
 ) => {
   const t = useTranslations('core');
   const formSchema = z.object({
-    sticky: z.boolean(),
+    sticky: z.boolean().default(data.sticky),
     files: z.object({
-      allow_type: z.nativeEnum(AllowTypeFilesEnum),
+      allow_type: z
+        .nativeEnum(AllowTypeFilesEnum)
+        .default(data.files.allow_type),
     }),
   });
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      sticky: data.sticky,
-      files: data.files,
-    },
-  });
-
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  const onSubmit = async (
+    values: z.infer<typeof formSchema>,
+    form: UseFormReturn<z.infer<typeof formSchema>>,
+  ) => {
     const mutation = await mutationApi(values);
 
     if (mutation?.error) {
@@ -43,7 +39,7 @@ export const useEditorAdmin = (
   };
 
   return {
-    form,
+    formSchema,
     onSubmit,
   };
 };

@@ -3,6 +3,7 @@ import { AutoFormLabel } from './common/label';
 import { AutoFormTooltip } from './common/tooltip';
 import { AutoFormWrapper } from './common/wrapper';
 import { DefaultParent } from './common/children';
+import { cn } from '@/helpers/classnames';
 
 import { FormControl, FormMessage } from '../../form';
 import { Switch } from '../../switch';
@@ -16,7 +17,10 @@ export const AutoFormSwitch = ({
 
   return (
     <AutoFormWrapper
-      className="flex flex-row items-center justify-between gap-2 rounded-lg border p-4"
+      className={cn({
+        'flex flex-row items-center justify-between gap-2 rounded-lg border p-4':
+          theme === 'vertical',
+      })}
       theme={theme}
     >
       <div>

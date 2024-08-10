@@ -115,18 +115,10 @@
               "none": {
                 "title": "None"
               },
-              "recaptcha_v2_invisible": {
-                "title": "reCAPTCHA v2 Invisible",
-                "desc": "Read more on <link>Google reCAPTCHA</link>."
-              },
-              "recaptcha_v2_checkbox": {
-                "title": "reCAPTCHA v2 Checkbox",
-                "desc": "Read more on <link>Google reCAPTCHA</link>."
-              },
-              "recaptcha_v3": {
-                "title": "reCAPTCHA v3",
-                "desc": "Read more on <link>Google reCAPTCHA</link>."
-              },
+              "recaptcha_desc": "Read more on <link>Google reCAPTCHA</link>.",
+              "recaptcha_v2_invisible": "reCAPTCHA v2 Invisible",
+              "recaptcha_v2_checkbox": "reCAPTCHA v2 Checkbox",
+              "recaptcha_v3": "reCAPTCHA v3",
               "cloudflare_turnstile": {
                 "title": "Cloudflare Turnstile",
                 "desc": "Read more on <link>Cloudflare Turnstile</link>."
