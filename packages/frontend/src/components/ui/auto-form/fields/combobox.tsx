@@ -81,7 +81,7 @@ export const AutoFormCombobox = ({
           description={fieldConfigItem.description}
         />
       )}
-      <ParentWrapper>
+      <ParentWrapper field={field}>
         <Popover open={open} onOpenChange={setOpen} modal>
           <PopoverTrigger asChild>
             <FormControl>

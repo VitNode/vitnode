@@ -27,7 +27,7 @@ export const AutoFormTextLanguageInput = ({
           description={fieldConfigItem.description}
         />
       )}
-      <ParentWrapper>
+      <ParentWrapper field={field}>
         <FormControl>
           <TextLanguageInput
             {...field}

@@ -1,4 +1,5 @@
 import { IntlConfig } from 'next-intl';
+import { notFound } from 'next/navigation';
 
 import { fetcher } from './graphql/fetcher';
 import {
@@ -23,13 +24,17 @@ export const i18nConfig = async ({
   let plugins: string[] = [];
   try {
     const {
-      core_middleware__show: { plugins: pluginsFromServer },
+      core_middleware__show: { plugins: pluginsFromServer, languages },
     } = await fetcher<
       Core_Middleware__ShowQuery,
       Core_Middleware__ShowQueryVariables
     >({
       query: Core_Middleware__Show,
     });
+
+    if (!languages.find(lang => lang.code === locale)) {
+      notFound();
+    }
 
     plugins = pluginsFromServer;
   } catch (e) {

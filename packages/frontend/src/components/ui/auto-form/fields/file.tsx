@@ -24,7 +24,7 @@ export const AutoFormFile = ({
           theme={theme}
         />
       )}
-      <ParentWrapper>
+      <ParentWrapper field={field}>
         <FormControl>
           <FileInput
             {...field}

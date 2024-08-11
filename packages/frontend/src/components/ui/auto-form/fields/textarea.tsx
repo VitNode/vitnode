@@ -11,7 +11,7 @@ export const AutoFormTextArea = ({
   autoFormProps: { isRequired, fieldConfigItem, field, theme, isDisabled },
   ...props
 }: AutoFormInputComponentProps &
-  Omit<React.InputHTMLAttributes<HTMLTextAreaElement>, 'value'>) => {
+  React.InputHTMLAttributes<HTMLTextAreaElement>) => {
   const value = field.value || '';
 
   const ParentWrapper = fieldConfigItem.renderParent ?? DefaultParent;
@@ -26,11 +26,11 @@ export const AutoFormTextArea = ({
           description={fieldConfigItem.description}
         />
       )}
-      <ParentWrapper>
+      <ParentWrapper field={field}>
         <FormControl>
           <Textarea
             {...field}
-            value={value}
+            value={props.value ?? value}
             {...props}
             disabled={isDisabled || props.disabled}
           />

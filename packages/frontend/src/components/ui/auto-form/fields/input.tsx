@@ -11,7 +11,7 @@ export const AutoFormInput = ({
   autoFormProps: { isRequired, fieldConfigItem, field, theme, isDisabled },
   ...props
 }: AutoFormInputComponentProps &
-  Omit<React.InputHTMLAttributes<HTMLInputElement>, 'value'>) => {
+  React.InputHTMLAttributes<HTMLInputElement>) => {
   const value = field.value || '';
   const ParentWrapper = fieldConfigItem.renderParent ?? DefaultParent;
 
@@ -25,13 +25,13 @@ export const AutoFormInput = ({
           theme={theme}
         />
       )}
-      <ParentWrapper>
+      <ParentWrapper field={field}>
         <FormControl>
           <Input
             type={props.type}
             {...props}
             {...field}
-            value={value}
+            value={props.value ?? value}
             disabled={isDisabled || props.disabled}
           />
         </FormControl>

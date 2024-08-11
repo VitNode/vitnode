@@ -30,7 +30,7 @@ export const AutoFormSelect = ({
   placeholder,
   ...props
 }: AutoFormInputComponentProps &
-  React.ComponentProps<typeof Select> & {
+  Omit<React.ComponentProps<typeof Select>, 'onValueChange'> & {
     labels?: Record<string, JSX.Element | string>;
     placeholder?: string;
   }) => {
@@ -68,11 +68,11 @@ export const AutoFormSelect = ({
           description={fieldConfigItem.description}
         />
       )}
-      <ParentWrapper>
+      <ParentWrapper field={field}>
         <FormControl>
           <Select
             onValueChange={field.onChange}
-            defaultValue={field.value}
+            defaultValue={props.value ?? field.value}
             disabled={isDisabled || props.disabled}
             {...props}
           >

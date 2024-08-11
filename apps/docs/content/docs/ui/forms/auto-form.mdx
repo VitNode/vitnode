@@ -213,6 +213,11 @@ const formSchema = z.object({
 
 You can render the parent object by using the `renderParent` prop.
 
+Avaliable props:
+
+- `children`: The children of the parent object.
+- `field`: The field object `ControllerRenderProps` from `react-hook-form`.
+
 ```tsx
 <AutoForm
   formSchema={formSchema}
@@ -221,7 +226,7 @@ You can render the parent object by using the `renderParent` prop.
       label: t('start_url.label'),
       description: t('start_url.desc'),
       fieldType: props => <AutoFormInput className="w-64" {...props} />,
-      renderParent: ({ children }) => (
+      renderParent: ({ children, field }) => (
         <div className="flex flex-wrap items-center gap-1">
           <span>Something</span>
           {children} // Here is the input
@@ -351,7 +356,7 @@ For example if `provider` is `resend`, the field `resend_key` will be required.
   fieldConfig={{}}
   dependencies={[
     {
-      sourceField: 'provider',
+      sourceField: 'email.provider',
       type: DependencyType.REQUIRES, // [!code highlight]
       targetField: 'resend_key',
       when: (provider: string) => provider === 'resend',
@@ -370,7 +375,7 @@ For example if `provider` is not `smtp`, the field `smtp` will be disabled.
   fieldConfig={{}}
   dependencies={[
     {
-      sourceField: 'provider',
+      sourceField: 'email.provider',
       type: DependencyType.DISABLES, // [!code highlight]
       targetField: 'smtp',
       when: (provider: string) => provider !== 'smtp',

@@ -11,8 +11,7 @@ import { Switch } from '../../switch';
 export const AutoFormSwitch = ({
   autoFormProps: { isRequired, fieldConfigItem, field, theme, isDisabled },
   ...props
-}: AutoFormInputComponentProps &
-  Omit<React.ComponentProps<typeof Switch>, 'value'>) => {
+}: AutoFormInputComponentProps & React.ComponentProps<typeof Switch>) => {
   const ParentWrapper = fieldConfigItem.renderParent ?? DefaultParent;
 
   return (
@@ -37,10 +36,10 @@ export const AutoFormSwitch = ({
         )}
         <FormMessage />
       </div>
-      <ParentWrapper>
+      <ParentWrapper field={field}>
         <FormControl>
           <Switch
-            checked={field.value}
+            checked={props.value || field.value}
             onCheckedChange={e => {
               field.onChange(e);
               props.onCheckedChange?.(e);

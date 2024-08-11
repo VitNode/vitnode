@@ -22,7 +22,7 @@ export const AutoFormRadioGroup = ({
   labels,
   ...props
 }: AutoFormInputComponentProps &
-  Omit<React.ComponentProps<typeof RadioGroup>, 'value'> & {
+  React.ComponentProps<typeof RadioGroup> & {
     labels?: Record<
       string,
       {
@@ -55,7 +55,7 @@ export const AutoFormRadioGroup = ({
           theme={theme}
         />
       )}
-      <ParentWrapper>
+      <ParentWrapper field={field}>
         <FormControl>
           <RadioGroup
             onValueChange={field.onChange}

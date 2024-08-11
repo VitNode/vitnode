@@ -27,7 +27,7 @@ export const AutoFormLabel = ({
       {description && theme === 'horizontal' ? (
         <>
           <span>{label}</span>
-          <span className="text-muted-foreground mt-1 block text-sm">
+          <span className="text-muted-foreground mt-1 block text-sm font-normal">
             {description}
           </span>
         </>

@@ -28,7 +28,7 @@ export const AutoFormColor = ({
           theme={theme}
         />
       )}
-      <ParentWrapper>
+      <ParentWrapper field={field}>
         <FormControl>
           <ColorPicker
             required={isRequired}

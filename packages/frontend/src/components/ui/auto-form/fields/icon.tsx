@@ -25,7 +25,7 @@ export const AutoFormIcon = ({
           theme={theme}
         />
       )}
-      <ParentWrapper>
+      <ParentWrapper field={field}>
         <FormControl>
           <IconPicker
             {...props}

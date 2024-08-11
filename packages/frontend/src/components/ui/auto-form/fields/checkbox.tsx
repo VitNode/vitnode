@@ -24,7 +24,7 @@ export const AutoFormCheckbox = ({
       })}
       theme={theme}
     >
-      <ParentWrapper>
+      <ParentWrapper field={field}>
         <FormControl>
           <Checkbox
             checked={value}

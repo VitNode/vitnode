@@ -42,7 +42,7 @@ export function AutoFormObject<T extends z.ZodObject<any, any>>({
           isDisabled,
           isRequired: isRequiredByDependency,
           overrideOptions,
-        } = resolveDependencies(dependencies, name, watch);
+        } = resolveDependencies(dependencies, key, watch);
         if (isHidden) return null;
 
         // Zod array or object
@@ -50,9 +50,9 @@ export function AutoFormObject<T extends z.ZodObject<any, any>>({
           return (
             <AutoFormObject
               key={name}
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              schema={item as unknown as z.ZodObject<any, any>}
+              schema={item as unknown as T}
               form={form}
+              dependencies={dependencies}
               fieldConfig={
                 (fieldConfig?.[name] ?? {}) as FieldConfig<z.infer<typeof item>>
               }
