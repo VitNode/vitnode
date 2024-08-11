@@ -76,6 +76,7 @@ export const useFormCreateEditFormGroupsMembersAdmin = () => {
   };
 
   return {
+    formSchema,
     form,
     onSubmit,
   };

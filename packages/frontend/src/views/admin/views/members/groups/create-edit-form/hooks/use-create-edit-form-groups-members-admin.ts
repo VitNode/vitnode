@@ -1,6 +1,4 @@
-import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
-import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import { toast } from 'sonner';
 
@@ -51,11 +49,6 @@ export const useCreateEditFormGroupsMembersAdmin = ({
     }),
   });
 
-  // TODO: Delete this line
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-  });
-
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     let isError = false;
 
@@ -102,5 +95,5 @@ export const useCreateEditFormGroupsMembersAdmin = ({
     setOpen?.(false);
   };
 
-  return { form, formSchema, onSubmit };
+  return { formSchema, onSubmit };
 };
