@@ -43,7 +43,7 @@ export const FormCreateEditPluginAdmin = ({
         support_url: {
           label: t('create.support_url.label'),
           description: t('create.support_url.desc'),
-          fieldType: props => <AutoFormInput type="email" {...props} />,
+          fieldType: props => <AutoFormInput type="url" {...props} />,
         },
         author: {
           label: 'Author',
