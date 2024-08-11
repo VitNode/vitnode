@@ -14,7 +14,6 @@ import { Button } from '../button';
 import { cn } from '@/helpers/classnames';
 
 export function AutoForm<T extends ZodObjectOrWrapped>({
-  values: valuesProp,
   formSchema,
   fieldConfig,
   dependencies,
@@ -41,7 +40,6 @@ export function AutoForm<T extends ZodObjectOrWrapped>({
     type: 'submit';
   }) => React.ReactNode;
   theme?: 'horizontal' | 'vertical';
-  values?: Partial<z.infer<T>>;
 }) {
   const t = useTranslations('core');
   const objectFormSchema = getObjectFormSchema(formSchema);
@@ -51,15 +49,10 @@ export function AutoForm<T extends ZodObjectOrWrapped>({
   const form = useForm<z.infer<typeof objectFormSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: defaultValues ?? undefined,
-    values: valuesProp,
   });
   const values = form.watch();
   // valuesString is needed because form.watch() returns a new object every time
   const valuesString = JSON.stringify(values);
-
-  React.useEffect(() => {
-    onValuesChange?.(values);
-  }, [valuesString]);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const parsedValues = formSchema.safeParse(values);
@@ -67,6 +60,13 @@ export function AutoForm<T extends ZodObjectOrWrapped>({
       await onSubmitProp?.(parsedValues.data, form);
     }
   };
+
+  React.useEffect(() => {
+    const parsedValues = formSchema.safeParse(values);
+    if (parsedValues.success) {
+      onValuesChange?.(parsedValues.data);
+    }
+  }, [valuesString]);
 
   return (
     <Form {...form}>

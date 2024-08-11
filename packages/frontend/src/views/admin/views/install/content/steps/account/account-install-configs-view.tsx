@@ -20,7 +20,6 @@ export const AccountInstallConfigsView = () => {
   return (
     <AutoForm
       formSchema={formSchema}
-      values={values}
       onValuesChange={setValues}
       fieldConfig={{
         name: {
@@ -71,15 +70,16 @@ export const AccountInstallConfigsView = () => {
             if (value.length <= 0) return;
 
             return (
-              <div className="mt-1">
-                <div className="mb-2 flex justify-between text-xs font-semibold">
+              <span className="mt-1">
+                <span className="mb-2 flex justify-between text-xs font-semibold">
                   <span>{t('week')}</span>
                   <span>{t('strong')}</span>
-                </div>
+                </span>
                 <Progress
                   value={(100 / regexArray.length) * passRegexPassword}
                 />
-              </div>
+                <span />
+              </span>
             );
           })(),
         },
@@ -94,7 +94,7 @@ export const AccountInstallConfigsView = () => {
           fieldType: AutoFormCheckbox,
         },
       }}
-      className="max-w-2xl"
+      className="max-w-2xl p-6 pt-0"
       onSubmit={async (val, form) => {
         await onSubmit(val, form);
         setCurrentStep(prev => prev + 1);

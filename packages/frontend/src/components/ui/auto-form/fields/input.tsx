@@ -28,7 +28,6 @@ export const AutoFormInput = ({
       <ParentWrapper field={field}>
         <FormControl>
           <Input
-            type={props.type}
             {...props}
             {...field}
             value={props.value ?? value}

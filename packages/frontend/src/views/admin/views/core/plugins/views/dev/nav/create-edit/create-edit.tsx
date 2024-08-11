@@ -48,7 +48,6 @@ export const CreateEditNavDevPluginAdmin = ({
       <AutoForm
         formSchema={formSchema}
         onSubmit={onSubmit}
-        values={values}
         onValuesChange={setValues}
         fieldConfig={{
           code: {

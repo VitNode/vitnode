@@ -24,7 +24,6 @@ export const FormSignUp = () => {
   return (
     <CardContent>
       <AutoForm
-        values={values}
         onValuesChange={setValues}
         formSchema={formSchema}
         fieldConfig={{

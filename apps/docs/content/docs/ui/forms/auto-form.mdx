@@ -309,14 +309,14 @@ You can change the theme of the form by using the `theme` prop and passing `hori
 />
 ```
 
-### Controlled Form
+### Get Values from Form
 
-You can control the form by using the `React.useState` prop.
+You can get the values from the form by using the `onValuesChange` prop.
 
 ```tsx
 const [values, setValues] = useState<Partial<z.infer<typeof formSchema>>>({});
 
-<AutoForm values={values} onValuesChange={setValues} />;
+<AutoForm onValuesChange={setValues} />;
 ```
 
 ## Dependencies
