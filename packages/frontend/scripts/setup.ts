@@ -40,7 +40,6 @@ const init = () => {
     path: string;
     file: string;
     isInsideAppDir?: boolean;
-    optional?: boolean;
   }[] = [
     {
       path: join('(main)', '(vitnode)', '[...rest]'),
@@ -73,16 +72,6 @@ const init = () => {
     {
       path: join('plugins', 'admin', 'langs'),
       file: 'en.json',
-    },
-    {
-      path: '',
-      file: 'global.d.ts',
-    },
-    {
-      path: '(main)',
-      isInsideAppDir: true,
-      file: 'layout.tsx',
-      optional: true,
     },
   ];
 
@@ -184,10 +173,6 @@ const init = () => {
 
     if (!fs.existsSync(appPath)) {
       fs.mkdirSync(appPath, { recursive: true });
-    }
-
-    if (file.optional && fs.existsSync(join(appPath, file.file))) {
-      return;
     }
 
     fs.copyFileSync(join(packagePath, file.file), join(appPath, file.file));

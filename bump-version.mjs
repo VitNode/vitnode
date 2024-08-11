@@ -299,10 +299,6 @@ function logError(error) {
         file: 'page.tsx',
       },
       {
-        folder: join('app', `[locale]`, '(main)'),
-        file: 'layout.tsx',
-      },
-      {
         folder: join('app', `[locale]`, 'admin', '(auth)'),
         file: 'layout.tsx',
       },
@@ -313,10 +309,6 @@ function logError(error) {
       {
         folder: join('plugins', 'admin', 'langs'),
         file: 'en.json',
-      },
-      {
-        folder: '',
-        file: 'global.d.ts',
       },
     ];
 
