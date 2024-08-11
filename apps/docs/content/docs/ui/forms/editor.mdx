@@ -28,10 +28,10 @@ import { Editor } from 'vitnode-frontend/editor';
 ### Form Schema
 
 ```ts {1, 4}
-import { zodInput } from 'vitnode-frontend/helpers/zod';
+import { zodLanguageInput } from 'vitnode-frontend/helpers/zod';
 
 const formSchema = z.object({
-  content: zodInput.languageInput,
+  content: zodLanguageInput,
 });
 ```
 
@@ -39,7 +39,7 @@ You can set this field as **required**:
 
 ```ts
 const formSchema = z.object({
-  content: zodInput.languageInput.min(1),
+  content: zodLanguageInput.min(1),
 });
 ```
 

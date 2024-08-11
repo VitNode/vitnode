@@ -1,6 +1,4 @@
-import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
-import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import { toast } from 'sonner';
 
@@ -8,8 +6,8 @@ import { createMutationApi } from './create-mutation-api';
 import { editMutationApi } from './edit-mutation-api';
 import { useDialog } from '@/components/ui/dialog';
 import { useTextLang } from '@/hooks/use-text-lang';
-import { zodInput } from '@/helpers/zod';
 import { ShowCoreNav } from '@/graphql/types';
+import { zodLanguageInput } from '@/helpers/zod';
 
 export interface CreateEditNavAdminArgs {
   data?: Omit<ShowCoreNav, 'children'>;
@@ -21,46 +19,42 @@ export const useCreateEditNavAdmin = ({ data }: CreateEditNavAdminArgs) => {
   const { setOpen } = useDialog();
   const { convertText } = useTextLang();
   const formSchema = z.object({
-    name: z
-      .array(
-        z.object({
-          language_code: zodInput.string,
-          value: zodInput.string.min(3).max(100),
-        }),
-      )
-      .min(1),
-    description: z.array(
-      z.object({
-        language_code: zodInput.string,
-        value: zodInput.string.max(200),
-      }),
-    ),
-    href: zodInput.string.min(1).max(255),
-    external: z.boolean(),
-    icon: z.string(),
-  });
-
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: data?.name ?? [],
-      description: data?.description ?? [],
-      href: data?.href ?? '',
-      external: data?.external ?? false,
-      icon: data?.icon ?? '',
-    },
+    name: zodLanguageInput.min(1).default(data?.name ?? []),
+    description: zodLanguageInput.default(data?.description ?? []).optional(),
+    href: z
+      .string()
+      .min(1)
+      .max(255)
+      .default(data?.href ?? ''),
+    icon: z
+      .string()
+      .default(data?.icon ?? '')
+      .optional(),
+    external: z
+      .boolean()
+      .default(data?.external ?? false)
+      .optional(),
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     let isError = false;
 
     if (data) {
-      const mutation = await editMutationApi({ ...values, id: data.id });
+      const mutation = await editMutationApi({
+        ...values,
+        id: data.id,
+        description: values.description || [],
+        external: values.external || false,
+      });
       if (mutation?.error) {
         isError = true;
       }
     } else {
-      const mutation = await createMutationApi(values);
+      const mutation = await createMutationApi({
+        ...values,
+        description: values.description || [],
+        external: values.external || false,
+      });
       if (mutation?.error) {
         isError = true;
       }
@@ -82,7 +76,7 @@ export const useCreateEditNavAdmin = ({ data }: CreateEditNavAdminArgs) => {
   };
 
   return {
-    form,
+    formSchema,
     onSubmit,
   };
 };

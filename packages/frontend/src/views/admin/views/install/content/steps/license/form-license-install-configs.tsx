@@ -1,17 +1,9 @@
-import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
-import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-} from '@/components/ui/form';
-import { Checkbox } from '@/components/ui/checkbox';
 import { Button } from '@/components/ui/button';
+import { AutoForm } from '@/components/ui/auto-form';
+import { AutoFormCheckbox } from '@/components/ui/auto-form/fields/checkbox';
 
 import { useInstallVitnode } from '../../hooks/use-install-vitnode';
 
@@ -25,45 +17,22 @@ export const FormLicenseInstallConfigs = () => {
     }),
   });
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      agree: false,
-    },
-  });
-
-  const onSubmit = () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const onSubmit = async (_: z.infer<typeof formSchema>) => {
     setCurrentStep(prev => prev + 1);
   };
 
   return (
-    <Form {...form}>
-      <form
-        className="flex flex-col items-start gap-4"
-        onSubmit={form.handleSubmit(onSubmit)}
-      >
-        <FormField
-          control={form.control}
-          name="agree"
-          render={({ field }) => (
-            <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
-              <FormControl>
-                <Checkbox
-                  checked={field.value}
-                  onCheckedChange={field.onChange}
-                />
-              </FormControl>
-              <FormLabel>
-                I agree to the terms of the license agreement.
-              </FormLabel>
-            </FormItem>
-          )}
-        />
-
-        <Button type="submit" disabled={!form.watch('agree')}>
-          Next step
-        </Button>
-      </form>
-    </Form>
+    <AutoForm
+      formSchema={formSchema}
+      onSubmit={onSubmit}
+      submitButton={props => <Button {...props}>Next step</Button>}
+      fieldConfig={{
+        agree: {
+          label: 'I agree to the terms of the license agreement.',
+          fieldType: AutoFormCheckbox,
+        },
+      }}
+    />
   );
 };

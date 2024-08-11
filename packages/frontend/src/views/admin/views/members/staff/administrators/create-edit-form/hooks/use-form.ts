@@ -7,7 +7,7 @@ import { toast } from 'sonner';
 import { mutationApi } from './mutation-api';
 import { useTextLang } from '@/hooks/use-text-lang';
 import { useDialog } from '@/components/ui/dialog';
-import { zodInput } from '@/helpers/zod';
+import { zodLanguageInput } from '@/helpers/zod';
 
 export const useFormCreateEditFormGroupsMembersAdmin = () => {
   const t = useTranslations('admin.members.staff');
@@ -20,13 +20,13 @@ export const useFormCreateEditFormGroupsMembersAdmin = () => {
     user: z
       .object({
         id: z.number(),
-        name: zodInput.string,
+        name: z.string(),
       })
       .optional(),
     group: z
       .object({
         id: z.number(),
-        name: zodInput.languageInput,
+        name: zodLanguageInput,
       })
       .optional(),
     unrestricted: z.boolean(),
@@ -76,6 +76,7 @@ export const useFormCreateEditFormGroupsMembersAdmin = () => {
   };
 
   return {
+    formSchema,
     form,
     onSubmit,
   };

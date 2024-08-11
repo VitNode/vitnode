@@ -1,5 +1,5 @@
 import { useTranslations } from 'next-intl';
-import { useForm } from 'react-hook-form';
+import { UseFormReturn } from 'react-hook-form';
 import * as z from 'zod';
 import { toast } from 'sonner';
 
@@ -17,9 +17,10 @@ export const useUploadPluginAdmin = ({ data }: UploadPluginAdminProps) => {
     file: zodFile,
   });
 
-  const form = useForm<z.infer<typeof formSchema>>();
-
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  const onSubmit = async (
+    values: z.infer<typeof formSchema>,
+    form: UseFormReturn<z.infer<typeof formSchema>>,
+  ) => {
     if (!values.file || !(values.file instanceof File)) return;
 
     const formData = new FormData();
@@ -58,5 +59,5 @@ export const useUploadPluginAdmin = ({ data }: UploadPluginAdminProps) => {
     setOpen?.(false);
   };
 
-  return { form, onSubmit };
+  return { onSubmit, formSchema };
 };

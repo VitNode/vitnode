@@ -3,52 +3,57 @@
 import { useTranslations } from 'next-intl';
 
 import { useEditorAdmin } from './hooks/use-editor-admin';
-import { FilesSectionContentEditorAdmin } from './sections/files';
 import { Card } from '@/components/ui/card';
-import {
-  Form,
-  FormField,
-  FormFieldRender,
-  FormWrapper,
-} from '@/components/ui/form';
-import { Switch } from '@/components/ui/switch';
-import { Button } from '@/components/ui/button';
 import { Core_GlobalQuery } from '@/graphql/queries/core_global.generated';
+import { AutoForm } from '@/components/ui/auto-form';
+import { AutoFormSwitch } from '@/components/ui/auto-form/fields/switch';
+import { AutoFormRadioGroup } from '@/components/ui/auto-form/fields/radio-group';
+import { AutoFormInputComponentProps } from '@/components/ui/auto-form/type';
 
 export const ContentEditorAdmin = (
   data: Core_GlobalQuery['core_middleware__show']['editor'],
 ) => {
   const t = useTranslations('admin.core.styles.editor');
-  const tCore = useTranslations('core');
-  const { form, onSubmit } = useEditorAdmin(data);
+  const { onSubmit, formSchema } = useEditorAdmin(data);
 
   return (
     <Card className="p-6">
-      <Form {...form}>
-        <FormWrapper onSubmit={form.handleSubmit(onSubmit)}>
-          <FormField
-            control={form.control}
-            name="sticky"
-            render={({ field }) => (
-              <FormFieldRender
-                label={t('sticky.label')}
-                description={t('sticky.desc')}
-              >
-                <Switch
-                  checked={field.value}
-                  onCheckedChange={field.onChange}
+      <AutoForm
+        theme="horizontal"
+        formSchema={formSchema}
+        onSubmit={onSubmit}
+        fieldConfig={{
+          sticky: {
+            label: t('sticky.label'),
+            description: t('sticky.desc'),
+            fieldType: AutoFormSwitch,
+          },
+          files: {
+            allow_type: {
+              label: t('files.allow_type.title'),
+              fieldType: (props: AutoFormInputComponentProps) => (
+                <AutoFormRadioGroup
+                  labels={{
+                    all: {
+                      title: t('files.allow_type.all'),
+                    },
+                    images_videos: {
+                      title: t('files.allow_type.images_videos'),
+                    },
+                    images: {
+                      title: t('files.allow_type.images'),
+                    },
+                    none: {
+                      title: t('files.allow_type.none'),
+                    },
+                  }}
+                  {...props}
                 />
-              </FormFieldRender>
-            )}
-          />
-
-          <FilesSectionContentEditorAdmin />
-
-          <Button type="submit" loading={form.formState.isSubmitting}>
-            {tCore('save')}
-          </Button>
-        </FormWrapper>
-      </Form>
+              ),
+            },
+          },
+        }}
+      />
     </Card>
   );
 };

@@ -56,7 +56,7 @@ export const NavDevPluginAdminView = async ({
     icon: React.ReactNode;
     id: string;
   }[] = flattenData.map(item => ({
-    icon: item.icon ? <Icon className="size-4" name={item.icon} /> : null,
+    icon: item.icon ? <Icon className="size-6" name={item.icon} /> : null,
     id: item.id.toString(),
   }));
 

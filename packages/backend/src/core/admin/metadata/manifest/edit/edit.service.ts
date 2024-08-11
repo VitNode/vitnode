@@ -31,6 +31,10 @@ export class EditAdminManifestMetadataService {
     const newManifest: ShowAdminManifestMetadataObj = {
       ...manifest,
       ...data,
+      theme_color: data.theme_color ? `#${data.theme_color}` : '',
+      background_color: data.background_color
+        ? `#${data.background_color}`
+        : '',
       start_url: `${frontendUrl}/${lang_code}${data.start_url}`,
       id: `${frontendUrl}/${lang_code}${data.start_url}`,
     };

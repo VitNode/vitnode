@@ -1,14 +1,11 @@
 import * as z from 'zod';
 
-export const zodInput = {
-  languageInput: z.array(
-    z.object({
-      language_code: z.string(),
-      value: z.string().trim(),
-    }),
-  ),
-  string: z.string().trim(),
-};
+export const zodLanguageInput = z.array(
+  z.object({
+    language_code: z.string(),
+    value: z.string().trim(),
+  }),
+);
 
 export const zodFile = z.union([
   z.instanceof(File),
@@ -23,3 +20,10 @@ export const zodFile = z.union([
     height: z.number().optional(),
   }),
 ]);
+
+export const zodTag = z.array(
+  z.object({
+    id: z.number(),
+    value: z.string(),
+  }),
+);

@@ -3,63 +3,62 @@ title: Tag Input
 description: Tag Input is a component that allows users to input tags.
 ---
 
-## Preview
-
-Image
-
 ## Usage
 
-```tsx
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+
+<Tabs items={['Auto Form', 'Manual']}>
+  <Tab value="Auto Form">
+```ts
+import * as z from 'zod';
+import { AutoForm } from 'vitnode-frontend/components/ui/auto-form';
+import { AutoFormTags } from 'vitnode-frontend/components/ui/auto-form/fields/tags';
+import { zodTag } from 'vitnode-frontend/helpers/zod';
+```
+
+```ts
 const formSchema = z.object({
-  tag_input_test: z.object({ id: z.number(), value: z.string() }),
+  keyworlds: zodTag,
 });
 ```
 
 ```tsx
+<AutoForm
+  formSchema={formSchema}
+  fieldConfig={{
+    keyworlds: {
+      label: 'Keyworlds',
+      fieldType: AutoFormTags, // [!code highlight]
+    },
+  }}
+/>
+```
+
+  </Tab>
+
+  <Tab value="Manual">
+```ts
 import { TagsInput } from 'vitnode-frontend/components/ui/tags-input';
 ```
 
 ```tsx
-<FormField
-  control={form.control}
-  name="tag_input_test"
-  render={({ field }) => (
-    <FormItem>
-      <FormLabel>Tag Input Test</FormLabel>
-      <FormControl>
-        <TagsInput {...field} /> // [!code highlight]
-      </FormControl>
-      <FormMessage />
-    </FormItem>
-  )}
-/>
+<TagsInput onChange={onChange} value={value} />
 ```
+
+  </Tab>
+</Tabs>
 
 ### Multiple
 
 ```tsx
-const formSchema = z.object({
-  tag_input_test: z.array(z.object({ id: z.number(), value: z.string() })),
-});
-```
-
-```tsx
-import { TagsInput } from 'vitnode-frontend/components/ui/tags-input';
-```
-
-```tsx
-<FormField
-  control={form.control}
-  name="tag_input_test"
-  render={({ field }) => (
-    <FormItem>
-      <FormLabel>Tag Input Test</FormLabel>
-      <FormControl>
-        <TagsInput {...field} multiple /> // [!code highlight]
-      </FormControl>
-      <FormMessage />
-    </FormItem>
-  )}
+<AutoForm
+  formSchema={formSchema}
+  fieldConfig={{
+    keyworlds: {
+      label: 'Keyworlds',
+      fieldType: props => <AutoFormTags {...props} multiple />, // [!code highlight]
+    },
+  }}
 />
 ```
 
@@ -69,6 +68,14 @@ import { TypeTable } from 'fumadocs-ui/components/type-table';
 
 <TypeTable
   type={{
+    onChange: {
+      description: 'Callback when the value changes.',
+      type: 'TagsInputItemProps | TagsInputItemProps[] | undefined',
+    },
+    value: {
+      description: 'Value of the input.',
+      type: 'TagsInputItemProps | TagsInputItemProps[]',
+    },
     placeholder: {
       description: 'Placeholder text.',
       type: 'string',

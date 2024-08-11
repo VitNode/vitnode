@@ -45,6 +45,7 @@ export interface ButtonProps
   asChild?: boolean;
   loading?: boolean;
   loadingText?: string;
+  ref?: React.RefCallback<HTMLButtonElement>;
   size?: 'default' | 'lg' | 'sm';
 }
 

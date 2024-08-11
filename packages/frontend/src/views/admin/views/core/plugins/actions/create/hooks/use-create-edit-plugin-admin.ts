@@ -1,5 +1,4 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
+import { UseFormReturn } from 'react-hook-form';
 import * as z from 'zod';
 import { toast } from 'sonner';
 import { useTranslations } from 'next-intl';
@@ -9,7 +8,6 @@ import { mutationEditApi } from './mutation-edit-api';
 import { useDialog } from '@/components/ui/dialog';
 import { usePathname, useRouter } from '@/navigation';
 import { useSessionAdmin } from '@/hooks/use-session-admin';
-import { zodInput } from '@/helpers/zod';
 import { FetcherErrorType } from '@/graphql/fetcher';
 import { ShowAdminPlugins } from '@/graphql/types';
 
@@ -26,33 +24,46 @@ export const useCreateEditPluginAdmin = ({ data }: Args) => {
   const pathname = usePathname();
   const { push } = useRouter();
   const { session } = useSessionAdmin();
+
   const formSchema = z.object({
-    name: zodInput.string.min(3).max(50),
-    code: zodInput.string
+    name: z
+      .string()
+      .min(3)
+      .max(50)
+      .default(data?.name ?? ''),
+    description: z
+      .string()
+      .default(data?.description ?? '')
+      .optional(),
+    code: z
+      .string()
       .min(3)
       .max(50)
       .refine(value => codePluginRegex.test(value), {
         message: t('create.code.invalid'),
-      }),
-    description: zodInput.string,
-    support_url: zodInput.string.url(),
-    author: zodInput.string.min(3).max(100),
-    author_url: zodInput.string.url().or(z.literal('')),
+      })
+      .default(data?.code ?? ''),
+    support_url: z
+      .string()
+      .url()
+      .default(data?.support_url ?? ''),
+    author: z
+      .string()
+      .min(3)
+      .max(100)
+      .default(data ? data.author : (session?.name ?? '')),
+    author_url: z
+      .string()
+      .url()
+      .or(z.literal(''))
+      .default(data?.author_url ?? '')
+      .optional(),
   });
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: data?.name ?? '',
-      code: data?.code ?? '',
-      description: data?.description ?? '',
-      support_url: data?.support_url ?? '',
-      author: data ? data.author : (session?.name ?? ''),
-      author_url: data?.author_url ?? '',
-    },
-  });
-
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  const onSubmit = async (
+    values: z.infer<typeof formSchema>,
+    form: UseFormReturn<z.infer<typeof formSchema>>,
+  ) => {
     let error: FetcherErrorType | null = null;
 
     if (data) {
@@ -111,7 +122,7 @@ export const useCreateEditPluginAdmin = ({ data }: Args) => {
   };
 
   return {
-    form,
+    formSchema,
     onSubmit,
   };
 };

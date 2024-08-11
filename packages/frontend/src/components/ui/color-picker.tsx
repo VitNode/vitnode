@@ -20,28 +20,31 @@ import {
 import { cn } from '../../helpers/classnames';
 
 export const ColorPicker = ({
-  disableRemoveColor,
+  required,
   disabled,
   onChange,
   value: valueProp,
   className,
-  ...rest
+  id,
+  ref: refFromProps,
 }: {
-  onChange: (value: string) => void;
-  value: string;
+  onChange: (value: string | null) => void;
+  value: string | null;
   className?: string;
-  disableRemoveColor?: boolean;
   disabled?: boolean;
+  id?: string;
   ref?: React.RefCallback<HTMLButtonElement>;
+  required?: boolean;
 }) => {
   const t = useTranslations('core.colors');
   const ref = React.useRef<HTMLInputElement>(null);
-  const value = getHSLFromString(valueProp);
+  const value = getHSLFromString(valueProp ?? '');
   const colorBrightness = value ? isColorBrightness(value) : false;
 
   return (
     <div className="flex items-center gap-2">
       <Button
+        type="button"
         variant="outline"
         className={cn(
           'relative flex min-w-40 max-w-52 justify-start',
@@ -56,13 +59,14 @@ export const ColorPicker = ({
             ? `hsl(${value.h}, ${value.s}%, ${value.l}%)`
             : '',
         }}
+        ref={refFromProps}
         onClick={() => {
           ref.current?.click();
         }}
         disabled={disabled}
-        {...rest}
       >
         <input
+          id={id}
           ref={ref}
           className="invisible absolute bottom-0 left-0 h-0 w-0"
           type="color"
@@ -72,7 +76,7 @@ export const ColorPicker = ({
 
             onChange(color ? `hsl(${color.h}, ${color.s}%, ${color.l}%)` : '');
           }}
-          value={value ? `#${convertColor.hslToHex(value)}` : ''}
+          value={value ? `#${convertColor.hslToHex(value)}` : '#000000'}
           disabled={disabled}
         />
         <span
@@ -84,7 +88,7 @@ export const ColorPicker = ({
         </span>
       </Button>
 
-      {!disableRemoveColor && value && (
+      {!required && value && (
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
@@ -94,7 +98,7 @@ export const ColorPicker = ({
                 ariaLabel={t('remove')}
                 variant="ghost"
                 onClick={() => {
-                  onChange('');
+                  onChange(null);
                 }}
               >
                 <RemoveFormatting />

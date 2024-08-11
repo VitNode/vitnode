@@ -9,25 +9,17 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
-import { TextLanguageInput } from '@/components/ui/text-language-input';
-import { Input } from '@/components/ui/input';
-import { IconPicker } from '@/components/icon/picker/icon-picker';
-import { Switch } from '@/components/ui/switch';
 import { Button } from '@/components/ui/button';
+import { AutoForm } from '@/components/ui/auto-form';
+import { AutoFormTextLanguageInput } from '@/components/ui/auto-form/fields/text-language-input';
+import { AutoFormInput } from '@/components/ui/auto-form/fields/input';
+import { AutoFormIcon } from '@/components/ui/auto-form/fields/icon';
+import { AutoFormSwitch } from '@/components/ui/auto-form/fields/switch';
 
 export const ContentCreateEditNavAdmin = ({ data }: CreateEditNavAdminArgs) => {
   const t = useTranslations('admin.core.styles.nav');
   const tCore = useTranslations('core');
-  const { form, onSubmit } = useCreateEditNavAdmin({ data });
+  const { onSubmit, formSchema } = useCreateEditNavAdmin({ data });
 
   return (
     <>
@@ -35,97 +27,39 @@ export const ContentCreateEditNavAdmin = ({ data }: CreateEditNavAdminArgs) => {
         <DialogTitle>{data ? t('edit.title') : t('create.title')}</DialogTitle>
       </DialogHeader>
 
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-          <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{t('create.name.label')}</FormLabel>
-                <FormControl>
-                  <TextLanguageInput {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="description"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel optional>{t('create.description.label')}</FormLabel>
-                <FormControl>
-                  <TextLanguageInput {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="href"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{t('create.href.label')}</FormLabel>
-                <FormControl>
-                  <Input {...field} />
-                </FormControl>
-                <FormDescription>{t('create.href.desc')}</FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="icon"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel optional>{t('create.icon.label')}</FormLabel>
-                <FormControl>
-                  <IconPicker {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="external"
-            render={({ field }) => (
-              <FormItem className="flex flex-row items-center justify-between gap-2 rounded-lg border p-4">
-                <div className="space-y-0.5">
-                  <FormLabel className="text-base">
-                    {t('create.external.label')}
-                  </FormLabel>
-                  <FormDescription>{t('create.external.desc')}</FormDescription>
-                </div>
-                <FormControl>
-                  <Switch
-                    checked={field.value}
-                    onCheckedChange={field.onChange}
-                  />
-                </FormControl>
-              </FormItem>
-            )}
-          />
-
+      <AutoForm
+        formSchema={formSchema}
+        onSubmit={onSubmit}
+        submitButton={props => (
           <DialogFooter>
-            <Button
-              disabled={!form.formState.isValid}
-              loading={form.formState.isSubmitting}
-              type="submit"
-            >
-              {tCore(data ? 'edit' : 'create')}
-            </Button>
+            <Button {...props}>{tCore(data ? 'edit' : 'create')}</Button>
           </DialogFooter>
-        </form>
-      </Form>
+        )}
+        fieldConfig={{
+          name: {
+            label: t('create.name.label'),
+            fieldType: AutoFormTextLanguageInput,
+          },
+          description: {
+            label: t('create.description.label'),
+            fieldType: AutoFormTextLanguageInput,
+          },
+          href: {
+            label: t('create.href.label'),
+            description: t('create.href.desc'),
+            fieldType: AutoFormInput,
+          },
+          icon: {
+            label: t('create.icon.label'),
+            fieldType: AutoFormIcon,
+          },
+          external: {
+            label: t('create.external.label'),
+            description: t('create.external.desc'),
+            fieldType: AutoFormSwitch,
+          },
+        }}
+      />
     </>
   );
 };

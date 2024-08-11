@@ -7,16 +7,8 @@ import dynamic from 'next/dynamic';
 
 import { cn } from '../../helpers/classnames';
 
-export type IconLucideNames = keyof typeof dynamicIconImports;
-
 export const IconClient = React.memo(
-  ({
-    name,
-    className,
-  }: {
-    name: IconLucideNames | string;
-    className?: string;
-  }) => {
+  ({ name, className }: { name: string; className?: string }) => {
     if (/\p{Extended_Pictographic}/gu.test(name)) {
       return <span className={className}>{name}</span>;
     }

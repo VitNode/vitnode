@@ -10,6 +10,53 @@ description: An autocomplete input and command palette featuring a list of sugge
 
 ## Usage
 
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+
+<Tabs items={['Auto Form', 'Manual']}>
+  <Tab value="Auto Form">
+```ts
+import * as z from 'zod';
+import { AutoForm } from 'vitnode-frontend/components/ui/auto-form';
+import { AutoFormCombobox } from 'vitnode-frontend/components/ui/auto-form/fields/combobox';
+```
+
+```ts
+const formSchema = z.object({
+  type: z.enum(['option-one', 'option-two']),
+});
+
+// or
+
+const formSchema = z.object({
+  type: z.nativeEnum(TestEnumProvider),
+});
+```
+
+```tsx
+<AutoForm
+  formSchema={formSchema}
+  fieldConfig={{
+    type: {
+      label: 'Combobox Example',
+      fieldType: props => (
+        <AutoFormCombobox
+          {...props}
+          placeholderSearchInput="Search options..."
+          labels={{
+            ['option-one']: 'Option One',
+            ['option-two']: 'Option Two',
+          }}
+        />
+      ),
+    },
+  }}
+/>
+```
+
+  </Tab>
+
+  <Tab value="Manual">
+
 ```tsx
 "use client"
 
@@ -105,6 +152,41 @@ export function ComboboxDemo() {
     </Popover>
   )
 }
+```
+
+  </Tab>
+</Tabs>
+
+### Multiple
+
+```ts
+const formSchema = z.object({
+  type: z.array(z.enum(['option-one', 'option-two'])), // [!code highlight]
+});
+```
+
+```tsx
+<AutoForm
+  formSchema={formSchema}
+  fieldConfig={{
+    type: {
+      label: 'Combobox Example',
+      fieldType: (
+        props: AutoFormInputComponentProps, // [!code highlight]
+      ) => (
+        <AutoFormCombobox
+          {...props}
+          placeholderSearchInput="Search options..."
+          labels={{
+            ['option-one']: 'Option One',
+            ['option-two']: 'Option Two',
+          }}
+          multiple // [!code highlight]
+        />
+      ),
+    },
+  }}
+/>
 ```
 
 ## Examples

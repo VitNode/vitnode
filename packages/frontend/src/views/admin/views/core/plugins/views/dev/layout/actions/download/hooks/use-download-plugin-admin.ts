@@ -1,13 +1,10 @@
-import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
-import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import { toast } from 'sonner';
 
 import { mutationApi } from './mutation-api';
 import { useDialog } from '@/components/ui/dialog';
 import { increaseVersionString } from '@/helpers/increase-version-string';
-import { zodInput } from '@/helpers/zod';
 import { CONFIG } from '@/helpers/config-with-env';
 import { ShowAdminPlugins } from '@/graphql/types';
 
@@ -19,20 +16,16 @@ export const useDownloadPluginAdmin = ({
   const t = useTranslations('core');
   const { setOpen } = useDialog();
   const formSchema = z.object({
-    type: z.enum(['rebuild', 'new_version']),
-    version: zodInput.string,
+    type: z
+      .enum(['rebuild', 'new_version'])
+      .default(version_code ? 'rebuild' : 'new_version'),
+    version: z
+      .string()
+      .default(version ? increaseVersionString(version) : '1.0.0'),
     version_code: z.coerce
       .number()
-      .min(version_code ? version_code + 1 : 10000),
-  });
-
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      type: version_code ? 'rebuild' : 'new_version',
-      version: version ? increaseVersionString(version) : '1.0.0',
-      version_code: version_code ? version_code + 1 : 10000,
-    },
+      .min(version_code ? version_code + 1 : 10000)
+      .default(version_code ? version_code + 1 : 10000),
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -59,5 +52,5 @@ export const useDownloadPluginAdmin = ({
     setOpen?.(false);
   };
 
-  return { form, onSubmit };
+  return { onSubmit, formSchema };
 };

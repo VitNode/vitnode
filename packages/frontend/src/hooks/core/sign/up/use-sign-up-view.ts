@@ -1,9 +1,8 @@
-import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
-import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import React from 'react';
 import { toast } from 'sonner';
+import { UseFormReturn } from 'react-hook-form';
 
 import { mutationApi } from './mutation-api';
 
@@ -13,57 +12,46 @@ const nameRegex = /^(?!.* {2})[\p{L}\p{N}._@ -]*$/u;
 
 export const useSignUpView = () => {
   const t = useTranslations('core');
-  const [isSuccess, setSuccess] = React.useState(false);
+  const [successName, setSuccessName] = React.useState('');
+  const [values, setValues] = React.useState<
+    Partial<z.infer<typeof formSchema>>
+  >({});
   const { getTokenFromCaptcha, isReady } = useCaptcha();
 
   const formSchema = z.object({
     name: z
       .string()
-      .trim()
-      .min(1, {
-        message: t('forms.empty'),
-      })
+      .min(3)
       .max(32, {
         message: t('forms.max_length', { length: 32 }),
       })
       .refine(value => nameRegex.test(value), {
         message: t('sign_up.form.name.invalid'),
-      }),
-    email: z
-      .string()
-      .trim()
-      .min(1, {
-        message: t('forms.empty'),
-      }),
+      })
+      .default(''),
+    email: z.string().email().default(''),
     password: z
       .string()
-      .min(1, {
-        message: t('forms.empty'),
-      })
       .regex(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-_=+{};:,<.>]).{8,}$/,
         {
           message: t('sign_up.form.password.invalid'),
         },
-      ),
-    terms: z.boolean().refine(value => value, {
-      message: t('sign_up.form.terms.empty'),
-    }),
-    newsletter: z.boolean(),
-  });
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: '',
-      email: '',
-      password: '',
-      terms: false,
-      newsletter: false,
-    },
-    mode: 'onChange',
+      )
+      .default(''),
+    terms: z
+      .boolean()
+      .refine(value => value, {
+        message: t('sign_up.form.terms.empty'),
+      })
+      .default(false),
+    newsletter: z.boolean().default(false).optional(),
   });
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  const onSubmit = async (
+    values: z.infer<typeof formSchema>,
+    form: UseFormReturn<z.infer<typeof formSchema>>,
+  ) => {
     const token = await getTokenFromCaptcha();
     if (!token) {
       toast.error(t('errors.title'), {
@@ -125,13 +113,15 @@ export const useSignUpView = () => {
       return;
     }
 
-    setSuccess(true);
+    setSuccessName(values.name);
   };
 
   return {
-    form,
+    values,
+    setValues,
+    formSchema,
     onSubmit,
     isReady,
-    isSuccess,
+    successName,
   };
 };

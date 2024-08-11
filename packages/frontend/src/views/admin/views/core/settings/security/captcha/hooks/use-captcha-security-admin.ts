@@ -1,33 +1,41 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
+import { UseFormReturn } from 'react-hook-form';
 import * as z from 'zod';
 import { toast } from 'sonner';
 import { useTranslations } from 'next-intl';
 
 import { mutationApi } from './mutation-api';
 import { Admin__Core_Security__Captcha__ShowQuery } from '@/graphql/queries/admin/security/admin__core_security__captcha__show.generated';
-import { CaptchaTypeEnum } from '@/graphql/types';
 
 export const useCaptchaSecurityAdmin = ({
   admin__core_security__captcha__show: data,
 }: Admin__Core_Security__Captcha__ShowQuery) => {
   const t = useTranslations('core');
-  const formSchema = z.object({
-    type: z.nativeEnum(CaptchaTypeEnum),
-    secret_key: z.string(),
-    site_key: z.string(),
-  });
+  const formSchema = z
+    .object({
+      type: z
+        .enum([
+          'none',
+          'cloudflare_turnstile',
+          'recaptcha_v3',
+          'recaptcha_v2_invisible',
+          'recaptcha_v2_checkbox',
+        ])
+        .default(data.type),
+      secret_key: z.string().default(data.secret_key),
+      site_key: z.string().default(data.site_key),
+    })
+    .refine(input => {
+      if (input.type === 'none') {
+        return true;
+      }
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      type: data.type,
-      secret_key: data.secret_key,
-      site_key: data.site_key,
-    },
-  });
+      return input.secret_key !== '' && input.site_key !== '';
+    });
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  const onSubmit = async (
+    values: z.infer<typeof formSchema>,
+    form: UseFormReturn<z.infer<typeof formSchema>>,
+  ) => {
     const mutation = await mutationApi({
       type: values.type,
       secretKey: values.secret_key,
@@ -46,5 +54,5 @@ export const useCaptchaSecurityAdmin = ({
     form.reset(values);
   };
 
-  return { form, onSubmit };
+  return { onSubmit, formSchema };
 };

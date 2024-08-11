@@ -4,7 +4,6 @@ import { useTranslations } from 'next-intl';
 import { SkinSelectEmojisContentIconInput } from './emojis/skin-select';
 import { CONFIG } from '@/helpers/config-with-env';
 
-import { IconLucideNames } from '../../icon-client';
 import { Tabs, TabsTrigger } from '../../../ui/tabs';
 import { Input } from '../../../ui/input';
 import { Loader } from '../../../ui/loader';
@@ -24,9 +23,9 @@ const IconsContentIconInput = React.lazy(async () =>
 );
 
 export interface IconPickerProps {
-  onChange: (icon: IconLucideNames | string) => void;
+  onChange: (icon: string | undefined) => void;
   setOpen: (open: boolean) => void;
-  value: string;
+  value: string | undefined;
 }
 
 enum Tab {

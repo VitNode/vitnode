@@ -3,22 +3,16 @@ import { useTranslations } from 'next-intl';
 import { useDeleteGroupAdmin } from './hooks/use-delete-group-admin';
 import { useTextLang } from '@/hooks/use-text-lang';
 import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from '@/components/ui/form';
-import {
   AlertDialogCancel,
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
-import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { ShowAdminGroups } from '@/graphql/types';
+import { AutoForm } from '@/components/ui/auto-form';
+import { AutoFormInput } from '@/components/ui/auto-form/fields/input';
 
 export const ContentDeleteGroupsMembersDialogAdmin = ({
   id,
@@ -28,58 +22,59 @@ export const ContentDeleteGroupsMembersDialogAdmin = ({
   const tCore = useTranslations('core');
   const { convertText } = useTextLang();
   const formatName = convertText(name);
-  const { form, onSubmit } = useDeleteGroupAdmin({ name, id });
+  const { onSubmit, formSchema } = useDeleteGroupAdmin({ name, id });
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
-        <AlertDialogHeader>
-          <AlertDialogTitle>
-            {tCore('are_you_absolutely_sure')}
-          </AlertDialogTitle>
-          <AlertDialogDescription className="flex flex-col gap-4">
-            <p>{t('text')}</p>
-            <p>
-              {t.rich('form_confirm_text', {
-                text: () => (
-                  <span className="text-foreground font-semibold">
-                    {formatName}
-                  </span>
-                ),
-              })}
-            </p>
+    <>
+      <AutoForm
+        formSchema={formSchema}
+        submitButton={props => (
+          <AlertDialogFooter className="mt-6">
+            <AlertDialogCancel asChild>
+              <Button type="button" variant="outline">
+                {tCore('cancel')}
+              </Button>
+            </AlertDialogCancel>
+            <Button {...props}>{t('submit')}</Button>
+          </AlertDialogFooter>
+        )}
+        fieldConfig={{
+          name: {
+            fieldType: AutoFormInput,
+          },
+        }}
+      />
 
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </AlertDialogDescription>
-        </AlertDialogHeader>
+      <AlertDialogHeader>
+        <AlertDialogTitle>{tCore('are_you_absolutely_sure')}</AlertDialogTitle>
+        <AlertDialogDescription className="flex flex-col gap-4">
+          <p>{t('text')}</p>
+          <p>
+            {t.rich('form_confirm_text', {
+              text: () => (
+                <span className="text-foreground font-semibold">
+                  {formatName}
+                </span>
+              ),
+            })}
+          </p>
+        </AlertDialogDescription>
+      </AlertDialogHeader>
 
-        <AlertDialogFooter className="mt-6">
-          <AlertDialogCancel asChild>
-            <Button type="button" variant="outline">
-              {tCore('cancel')}
-            </Button>
-          </AlertDialogCancel>
-          <Button
-            variant="destructive"
-            type="submit"
-            disabled={!form.formState.isValid}
-            loading={form.formState.isSubmitting}
-          >
+      <AutoForm
+        formSchema={formSchema}
+        onSubmit={onSubmit}
+        submitButton={props => (
+          <Button {...props} variant="destructive">
             {t('submit')}
           </Button>
-        </AlertDialogFooter>
-      </form>
-    </Form>
+        )}
+        fieldConfig={{
+          name: {
+            fieldType: AutoFormInput,
+          },
+        }}
+      />
+    </>
   );
 };

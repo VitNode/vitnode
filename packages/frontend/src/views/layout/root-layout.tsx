@@ -55,7 +55,7 @@ export const RootLayout = async ({
   params: { locale },
   className,
 }: Props) => {
-  const messages = await getMessages();
+  const messages = await getMessages({ locale });
 
   try {
     const middlewareData = await getGlobalData();

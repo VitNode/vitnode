@@ -1,6 +1,4 @@
 import { toast } from 'sonner';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 import * as z from 'zod';
 
@@ -26,13 +24,6 @@ export const useDeleteGroupAdmin = ({
     name: z.string().refine(value => value === formatName),
   });
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: '',
-    },
-  });
-
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     if (values.name !== formatName) return;
     const mutation = await mutationApi({ id });
@@ -50,5 +41,5 @@ export const useDeleteGroupAdmin = ({
     setOpen(false);
   };
 
-  return { form, onSubmit };
+  return { onSubmit, formSchema };
 };

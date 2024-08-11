@@ -54,7 +54,7 @@ export const ColorsTabThemeEditor = () => {
                   className="w-full max-w-none"
                   key={`color_primary__${activeTheme}`}
                   onChange={val => {
-                    const hslFromColor = getHSLFromString(val);
+                    const hslFromColor = getHSLFromString(val ?? '');
                     if (!hslFromColor) return;
 
                     changeColor({
@@ -78,7 +78,7 @@ export const ColorsTabThemeEditor = () => {
                     });
                   }}
                   value={getStringFromHSL(field.value[activeTheme])}
-                  disableRemoveColor
+                  required
                 />
               </FormControl>
               <FormMessage />
@@ -98,7 +98,7 @@ export const ColorsTabThemeEditor = () => {
                   className="w-full max-w-none"
                   key={`color_secondary__${activeTheme}`}
                   onChange={val => {
-                    const hslFromColor = getHSLFromString(val);
+                    const hslFromColor = getHSLFromString(val ?? '');
                     if (!hslFromColor) return;
 
                     changeColor({
@@ -122,7 +122,7 @@ export const ColorsTabThemeEditor = () => {
                     });
                   }}
                   value={getStringFromHSL(field.value[activeTheme])}
-                  disableRemoveColor
+                  required
                 />
               </FormControl>
               <FormMessage />
@@ -142,7 +142,7 @@ export const ColorsTabThemeEditor = () => {
                   className="w-full max-w-none"
                   key={`color_cover__${activeTheme}`}
                   onChange={val => {
-                    const hslFromColor = getHSLFromString(val);
+                    const hslFromColor = getHSLFromString(val ?? '');
                     if (!hslFromColor) return;
 
                     changeColor({
@@ -239,7 +239,7 @@ export const ColorsTabThemeEditor = () => {
                     });
                   }}
                   value={getStringFromHSL(field.value[activeTheme])}
-                  disableRemoveColor
+                  required
                 />
               </FormControl>
               <FormMessage />
@@ -259,7 +259,7 @@ export const ColorsTabThemeEditor = () => {
                   className="w-full max-w-none"
                   key={`color_destructive__${activeTheme}`}
                   onChange={val => {
-                    const hslFromColor = getHSLFromString(val);
+                    const hslFromColor = getHSLFromString(val ?? '');
                     if (!hslFromColor) return;
 
                     changeColor({
@@ -283,7 +283,7 @@ export const ColorsTabThemeEditor = () => {
                     });
                   }}
                   value={getStringFromHSL(field.value[activeTheme])}
-                  disableRemoveColor
+                  required
                 />
               </FormControl>
               <FormMessage />

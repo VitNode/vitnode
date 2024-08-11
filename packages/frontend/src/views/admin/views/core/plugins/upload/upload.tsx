@@ -3,14 +3,14 @@ import { useTranslations } from 'next-intl';
 import { useUploadPluginAdmin } from './hooks/use-upload-plugin-admin';
 import {
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { Form, FormField, FormItem, FormMessage } from '@/components/ui/form';
-import { FileInput } from '@/components/ui/file-input';
 import { Button } from '@/components/ui/button';
 import { ShowAdminPlugins } from '@/graphql/types';
+import { AutoForm } from '@/components/ui/auto-form';
+import { AutoFormFile } from '@/components/ui/auto-form/fields/file';
+import { AutoFormInputComponentProps } from '@/components/ui/auto-form/type';
 
 export interface UploadPluginAdminProps {
   data?: Pick<ShowAdminPlugins, 'code' | 'name'>;
@@ -18,7 +18,7 @@ export interface UploadPluginAdminProps {
 
 export const UploadPluginAdmin = ({ data }: UploadPluginAdminProps) => {
   const t = useTranslations('admin.core.plugins.upload');
-  const { form, onSubmit } = useUploadPluginAdmin({ data });
+  const { onSubmit, formSchema } = useUploadPluginAdmin({ data });
 
   return (
     <>
@@ -27,36 +27,24 @@ export const UploadPluginAdmin = ({ data }: UploadPluginAdminProps) => {
         {data?.name && <DialogDescription>{data.name}</DialogDescription>}
       </DialogHeader>
 
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-          <FormField
-            control={form.control}
-            name="file"
-            render={({ field }) => (
-              <FormItem>
-                <FileInput
-                  id="plugin"
-                  {...field}
-                  acceptExtensions={['tgz']}
-                  maxFileSizeInMb={0}
-                />
-
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <DialogFooter>
-            <Button
-              disabled={!form.watch('file')}
-              loading={form.formState.isSubmitting}
-              type="submit"
-            >
-              {t('submit')}
-            </Button>
-          </DialogFooter>
-        </form>
-      </Form>
+      <AutoForm
+        formSchema={formSchema}
+        onSubmit={onSubmit}
+        submitButton={props => <Button {...props}>{t('submit')}</Button>}
+        fieldConfig={{
+          file: {
+            fieldType: (props: AutoFormInputComponentProps) => (
+              <AutoFormFile
+                className="mt-5"
+                acceptExtensions={['tgz']}
+                maxFileSizeInMb={0}
+                showInfo
+                {...props}
+              />
+            ),
+          },
+        }}
+      />
     </>
   );
 };

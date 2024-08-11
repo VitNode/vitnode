@@ -6,6 +6,9 @@ const withNextIntl = createNextIntlPlugin();
 const nextConfig = (config: NextConfig): NextConfig => {
   return {
     ...config,
+    devIndicators: {
+      appIsrStatus: false,
+    },
     // TODO: Remove this when the framer-motion issue is fixed for React 19
     reactStrictMode: false,
     experimental: {

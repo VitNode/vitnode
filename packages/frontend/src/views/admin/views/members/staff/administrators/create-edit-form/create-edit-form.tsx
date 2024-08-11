@@ -33,6 +33,34 @@ export const CreateEditFormAdministratorsStaffAdmin = () => {
         <DialogTitle>{t('administrators.add.title')}</DialogTitle>
       </DialogHeader>
 
+      {/* <AutoForm
+        formSchema={formSchema}
+        onSubmit={onSubmit}
+        submitButton={props => (
+          <DialogFooter>
+            <Button {...props}>{tCore('save')}</Button>
+          </DialogFooter>
+        )}
+        fieldConfig={{
+          type: {
+            label: t('create_edit.type.title'),
+            fieldType: props => (
+              <AutoFormRadioGroup
+                {...props}
+                labels={{
+                  group: {
+                    title: t('create_edit.type.group'),
+                  },
+                  user: {
+                    title: t('create_edit.type.user'),
+                  },
+                }}
+              />
+            ),
+          },
+        }}
+      /> */}
+
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <FormField
           control={form.control}

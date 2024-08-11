@@ -5,8 +5,6 @@ import {
   useCreateEditFormGroupsMembersAdmin,
   CreateEditFormGroupsMembersAdminArgs,
 } from './hooks/use-create-edit-form-groups-members-admin';
-import { MainContentCreateEditFormGroupsMembersAdmin } from './content/main';
-import { ContentContentCreateEditFormGroupsMembersAdmin } from './content/content';
 import { useTextLang } from '@/hooks/use-text-lang';
 import {
   DialogDescription,
@@ -15,8 +13,18 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { Tabs, TabsTrigger } from '@/components/ui/tabs';
-import { Form } from '@/components/ui/form';
 import { Button } from '@/components/ui/button';
+import { AutoForm } from '@/components/ui/auto-form';
+import { AutoFormTextLanguageInput } from '@/components/ui/auto-form/fields/text-language-input';
+import { AutoFormColor } from '@/components/ui/auto-form/fields/color';
+import { AutoFormSwitch } from '@/components/ui/auto-form/fields/switch';
+import { AutoFormInput } from '@/components/ui/auto-form/fields/input';
+import {
+  AutoFormInputComponentProps,
+  DependencyType,
+} from '@/components/ui/auto-form/type';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Label } from '@/components/ui/label';
 
 enum TabsEnum {
   MAIN = 'main',
@@ -29,17 +37,10 @@ export const CreateEditFormGroupsMembersAdmin = ({
   const t = useTranslations('admin.members.groups');
   const tCore = useTranslations('core');
   const [activeTab, setActiveTab] = React.useState<TabsEnum>(TabsEnum.MAIN);
-  const { form, onSubmit } = useCreateEditFormGroupsMembersAdmin({ data });
+  const { onSubmit, formSchema } = useCreateEditFormGroupsMembersAdmin({
+    data,
+  });
   const { convertText } = useTextLang();
-
-  const tabsContent = {
-    [TabsEnum.MAIN]: <MainContentCreateEditFormGroupsMembersAdmin />,
-    [TabsEnum.CONTENT]: (
-      <ContentContentCreateEditFormGroupsMembersAdmin
-        isGuest={data?.id === 1}
-      />
-    ),
-  };
 
   return (
     <>
@@ -67,21 +68,129 @@ export const CreateEditFormGroupsMembersAdmin = ({
         </Tabs>
       </DialogHeader>
 
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-          {tabsContent[activeTab]}
-
+      <AutoForm
+        onSubmit={onSubmit}
+        formSchema={formSchema}
+        submitButton={props => (
           <DialogFooter>
-            <Button
-              disabled={!form.formState.isValid}
-              loading={form.formState.isSubmitting}
-              type="submit"
-            >
-              {tCore('save')}
-            </Button>
+            <Button {...props}>{tCore('save')}</Button>
           </DialogFooter>
-        </form>
-      </Form>
+        )}
+        fieldConfig={{
+          main: {
+            name: {
+              label: t('create_edit.name'),
+              fieldType: AutoFormTextLanguageInput,
+            },
+            color: {
+              label: t('create_edit.color'),
+              fieldType: AutoFormColor,
+            },
+          },
+          content: {
+            files_allow_upload: {
+              label: t('create_edit.files.allow_upload'),
+              fieldType: AutoFormSwitch,
+            },
+            files_total_max_storage: {
+              label: t('create_edit.files.total_max_storage'),
+              fieldType: (props: AutoFormInputComponentProps) => {
+                const value = props.autoFormProps.field.value;
+
+                return (
+                  <AutoFormInput
+                    className="max-w-32"
+                    type="number"
+                    disabled={value === -1}
+                    value={value === -1 ? '' : value}
+                    {...props}
+                  />
+                );
+              },
+              renderParent: ({ children, field }) => (
+                <div className="flex flex-wrap items-center gap-2">
+                  {children}
+                  <span>{t('create_edit.in_kb')}</span>
+                  <div className="flex shrink-0 items-center gap-2">
+                    <span>{tCore('or')}</span>
+                    <Checkbox
+                      id="content.files_total_max_storage.unlimited"
+                      onClick={() => {
+                        if (field.value === -1) {
+                          field.onChange(10000);
+
+                          return;
+                        }
+
+                        field.onChange(-1);
+                      }}
+                      checked={field.value === -1}
+                    />
+                    <Label htmlFor="content.files_total_max_storage.unlimited">
+                      {tCore('unlimited')}
+                    </Label>
+                  </div>
+                </div>
+              ),
+            },
+            files_max_storage_for_submit: {
+              label: t('create_edit.files.max_storage_for_submit.label'),
+              renderParent: ({ children, field }) => (
+                <div className="flex flex-wrap items-center gap-2">
+                  {children}
+                  <span>{t('create_edit.in_kb')}</span>
+                  <div className="flex shrink-0 items-center gap-2">
+                    <span>{tCore('or')}</span>
+                    <Checkbox
+                      id="content.files_max_storage_for_submit.unlimited"
+                      onClick={() => {
+                        if (field.value === -1) {
+                          field.onChange(10000);
+
+                          return;
+                        }
+
+                        field.onChange(-1);
+                      }}
+                      checked={field.value === -1}
+                    />
+                    <Label htmlFor="content.files_max_storage_for_submit.unlimited">
+                      {tCore('unlimited')}
+                    </Label>
+                  </div>
+                </div>
+              ),
+              fieldType: (props: AutoFormInputComponentProps) => {
+                const value = props.autoFormProps.field.value;
+
+                return (
+                  <AutoFormInput
+                    className="max-w-32"
+                    type="number"
+                    disabled={value === -1}
+                    value={value === -1 ? '' : value}
+                    {...props}
+                  />
+                );
+              },
+            },
+          },
+        }}
+        dependencies={[
+          {
+            sourceField: 'main',
+            type: DependencyType.HIDES,
+            targetField: 'main',
+            when: () => activeTab !== TabsEnum.MAIN,
+          },
+          {
+            sourceField: 'content',
+            type: DependencyType.HIDES,
+            targetField: 'content',
+            when: () => activeTab !== TabsEnum.CONTENT,
+          },
+        ]}
+      />
     </>
   );
 };

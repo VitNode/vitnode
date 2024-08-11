@@ -3,121 +3,72 @@
 import { useTranslations } from 'next-intl';
 
 import { useManifestCoreAdminView } from './hooks/use-manifest-core-admin-view';
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormFieldRender,
-  FormItem,
-  FormLabel,
-  FormWrapper,
-} from '@/components/ui/form';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { CONFIG } from '@/helpers/config-with-env';
-import { Input } from '@/components/ui/input';
-import { ColorPicker } from '@/components/ui/color-picker';
-import { Button } from '@/components/ui/button';
 import { Admin__Core_Manifest_Metadata__ShowQuery } from '@/graphql/queries/admin/settings/admin__core_manifest_metadata__show.generated';
+import { AutoForm } from '@/components/ui/auto-form';
+import { AutoFormRadioGroup } from '@/components/ui/auto-form/fields/radio-group';
+import { AutoFormInput } from '@/components/ui/auto-form/fields/input';
+import { AutoFormColor } from '@/components/ui/auto-form/fields/color';
 
 export const ContentManifestMetadataCoreAdmin = (
   props: Admin__Core_Manifest_Metadata__ShowQuery,
 ) => {
   const t = useTranslations('admin.core.metadata.manifest');
-  const tCore = useTranslations('core');
-  const { form, onSubmit } = useManifestCoreAdminView(props);
+  const { onSubmit, formSchema } = useManifestCoreAdminView(props);
 
   return (
-    <Form {...form}>
-      <FormWrapper onSubmit={form.handleSubmit(onSubmit)}>
-        <FormField
-          control={form.control}
-          name="display"
-          render={({ field }) => (
-            <FormFieldRender
-              label={t('display.label')}
-              description={t('display.desc')}
-            >
-              <RadioGroup
-                onValueChange={field.onChange}
-                defaultValue={field.value}
-                className="flex flex-col space-y-1"
-              >
-                {['fullscreen', 'standalone', 'minimal-ui', 'browser'].map(
-                  item => (
-                    <FormItem
-                      key={item}
-                      className="flex items-center space-x-3 space-y-0"
-                    >
-                      <FormControl>
-                        <RadioGroupItem value={item} />
-                      </FormControl>
-                      <div>
-                        <FormLabel className="font-normal">
-                          {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-                          {/* @ts-expect-error */}
-                          {t(`display.${item}.title`)}
-                        </FormLabel>
-                        <FormDescription>
-                          {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-                          {/* @ts-expect-error */}
-                          {t(`display.${item}.desc`)}
-                        </FormDescription>
-                      </div>
-                    </FormItem>
-                  ),
-                )}
-              </RadioGroup>
-            </FormFieldRender>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="start_url"
-          render={({ field }) => (
-            <FormFieldRender
-              label={t('start_url.label')}
-              description={t('start_url.desc')}
-            >
-              <div className="flex flex-wrap items-center gap-1">
-                <span>{CONFIG.frontend_url}</span>
-                <FormControl>
-                  <Input className="w-64" {...field} />
-                </FormControl>
-              </div>
-            </FormFieldRender>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="theme_color"
-          render={({ field }) => (
-            <FormFieldRender label={t('theme_color.label')}>
-              <ColorPicker {...field} disableRemoveColor />
-            </FormFieldRender>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="background_color"
-          render={({ field }) => (
-            <FormFieldRender label={t('background_color.label')}>
-              <ColorPicker {...field} disableRemoveColor />
-            </FormFieldRender>
-          )}
-        />
-
-        <Button
-          type="submit"
-          disabled={!form.formState.isValid}
-          loading={form.formState.isSubmitting}
-        >
-          {tCore('save')}
-        </Button>
-      </FormWrapper>
-    </Form>
+    <AutoForm
+      theme="horizontal"
+      formSchema={formSchema}
+      onSubmit={onSubmit}
+      fieldConfig={{
+        display: {
+          label: t('display.label'),
+          fieldType: props => (
+            <AutoFormRadioGroup
+              {...props}
+              labels={{
+                fullscreen: {
+                  title: t('display.fullscreen.title'),
+                  description: t('display.fullscreen.desc'),
+                },
+                standalone: {
+                  title: t('display.standalone.title'),
+                  description: t('display.standalone.desc'),
+                },
+                'minimal-ui': {
+                  title: t('display.minimal-ui.title'),
+                  description: t('display.minimal-ui.desc'),
+                },
+                browser: {
+                  title: t('display.browser.title'),
+                  description: t('display.browser.desc'),
+                },
+              }}
+            />
+          ),
+          description: t('display.desc'),
+        },
+        start_url: {
+          label: t('start_url.label'),
+          description: t('start_url.desc'),
+          fieldType: props => <AutoFormInput className="w-64" {...props} />,
+          renderParent: ({ children }) => (
+            <div className="flex flex-wrap items-center gap-1">
+              <span>{CONFIG.frontend_url}</span>
+              {children}
+            </div>
+          ),
+        },
+        theme_color: {
+          label: t('theme_color.label'),
+          fieldType: AutoFormColor,
+        },
+        background_color: {
+          label: t('background_color.label'),
+          fieldType: AutoFormColor,
+        },
+      }}
+    />
   );
 };
