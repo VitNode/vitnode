@@ -1,20 +1,18 @@
-import { AutoFormInputComponentProps } from '../type';
-import { AutoFormLabel } from './common/label';
-import { AutoFormTooltip } from './common/tooltip';
-import { AutoFormWrapper } from './common/wrapper';
 import { DefaultParent } from './common/children';
+import { AutoFormInputComponentProps } from '../type';
+import { AutoFormWrapper } from './common/wrapper';
+import { AutoFormLabel } from './common/label';
+import { FormControl, FormMessage } from '@/components/ui/form';
+import { Textarea } from '@/components/ui/textarea';
+import { AutoFormTooltip } from './common/tooltip';
 
-import { FormControl, FormMessage } from '../../form';
-import { TextLanguageInput } from '../../text-language-input';
-
-export const AutoFormTextLanguageInput = ({
+export const AutoFormTextArea = ({
   autoFormProps: { isRequired, fieldConfigItem, field, theme, isDisabled },
   ...props
 }: AutoFormInputComponentProps &
-  Omit<
-    React.ComponentProps<typeof TextLanguageInput>,
-    'onChange' | 'value'
-  >) => {
+  React.InputHTMLAttributes<HTMLTextAreaElement>) => {
+  const value = field.value || '';
+
   const ParentWrapper = fieldConfigItem.renderParent ?? DefaultParent;
 
   return (
@@ -29,8 +27,9 @@ export const AutoFormTextLanguageInput = ({
       )}
       <ParentWrapper field={field}>
         <FormControl>
-          <TextLanguageInput
+          <Textarea
             {...field}
+            value={props.value ?? value}
             {...props}
             disabled={isDisabled || props.disabled}
           />

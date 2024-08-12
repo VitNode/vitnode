@@ -7,11 +7,11 @@ import { DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Admin__Core_Plugins__Nav__ShowQuery } from '@/graphql/queries/admin/plugins/dev/nav/admin__core_plugins__nav__show.generated';
 import { ShowAdminNavPluginsObj } from '@/graphql/types';
 import { removeSpecialCharacters } from '@/helpers/special-characters';
-import { AutoForm } from '@/components/ui/auto-form';
-import { AutoFormInput } from '@/components/ui/auto-form/fields/input';
-import { AutoFormSelect } from '@/components/ui/auto-form/fields/select';
-import { AutoFormIcon } from '@/components/ui/auto-form/fields/icon';
-import { AutoFormTags } from '@/components/ui/auto-form/fields/tags';
+import { AutoForm } from '@/components/form/auto-form';
+import { AutoFormInput } from '@/components/form/fields/input';
+import { AutoFormIcon } from '@/components/form/fields/icon';
+import { AutoFormSelect } from '@/components/form/fields/select';
+import { AutoFormTags } from '@/components/form/fields/tags';
 
 export interface CreateEditNavDevPluginAdminProps {
   dataFromSSR: Admin__Core_Plugins__Nav__ShowQuery['admin__core_plugins__nav__show'];

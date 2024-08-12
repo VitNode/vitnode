@@ -1,12 +1,12 @@
 import { AutoFormInputComponentProps } from '../type';
-import { AutoFormLabel } from './common/label';
-import { AutoFormTooltip } from './common/tooltip';
 import { cn } from '@/helpers/classnames';
 import { AutoFormWrapper } from './common/wrapper';
 import { DefaultParent } from './common/children';
+import { AutoFormLabel } from './common/label';
+import { AutoFormTooltip } from './common/tooltip';
 
-import { FormControl, FormMessage } from '../../form';
-import { Checkbox } from '../../checkbox';
+import { Checkbox } from '../../ui/checkbox';
+import { FormControl, FormMessage } from '../../ui/form';
 
 export const AutoFormCheckbox = ({
   autoFormProps: { isRequired, fieldConfigItem, field, theme, isDisabled },

@@ -10,11 +10,11 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import { AutoForm } from '@/components/ui/auto-form';
-import { AutoFormTextLanguageInput } from '@/components/ui/auto-form/fields/text-language-input';
-import { AutoFormInput } from '@/components/ui/auto-form/fields/input';
-import { AutoFormIcon } from '@/components/ui/auto-form/fields/icon';
-import { AutoFormSwitch } from '@/components/ui/auto-form/fields/switch';
+import { AutoForm } from '@/components/form/auto-form';
+import { AutoFormInput } from '@/components/form/fields/input';
+import { AutoFormIcon } from '@/components/form/fields/icon';
+import { AutoFormSwitch } from '@/components/form/fields/switch';
+import { AutoFormTextLanguageInput } from '@/components/form/fields/text-language-input';
 
 export const ContentCreateEditNavAdmin = ({ data }: CreateEditNavAdminArgs) => {
   const t = useTranslations('admin.core.styles.nav');

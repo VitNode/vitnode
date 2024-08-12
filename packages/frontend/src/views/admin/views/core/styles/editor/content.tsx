@@ -5,10 +5,10 @@ import { useTranslations } from 'next-intl';
 import { useEditorAdmin } from './hooks/use-editor-admin';
 import { Card } from '@/components/ui/card';
 import { Core_GlobalQuery } from '@/graphql/queries/core_global.generated';
-import { AutoForm } from '@/components/ui/auto-form';
-import { AutoFormSwitch } from '@/components/ui/auto-form/fields/switch';
-import { AutoFormRadioGroup } from '@/components/ui/auto-form/fields/radio-group';
-import { AutoFormInputComponentProps } from '@/components/ui/auto-form/type';
+import { AutoForm } from '@/components/form/auto-form';
+import { AutoFormInputComponentProps } from '@/components/form/type';
+import { AutoFormRadioGroup } from '@/components/form/fields/radio-group';
+import { AutoFormSwitch } from '@/components/form/fields/switch';
 
 export const ContentEditorAdmin = (
   data: Core_GlobalQuery['core_middleware__show']['editor'],

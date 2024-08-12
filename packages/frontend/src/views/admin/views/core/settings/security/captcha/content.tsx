@@ -6,10 +6,10 @@ import { SquareArrowOutUpRight } from 'lucide-react';
 import { useCaptchaSecurityAdmin } from './hooks/use-captcha-security-admin';
 import { Link } from '@/navigation';
 import { Admin__Core_Security__Captcha__ShowQuery } from '@/graphql/queries/admin/security/admin__core_security__captcha__show.generated';
-import { AutoForm } from '@/components/ui/auto-form';
-import { AutoFormRadioGroup } from '@/components/ui/auto-form/fields/radio-group';
-import { AutoFormInput } from '@/components/ui/auto-form/fields/input';
-import { DependencyType } from '@/components/ui/auto-form/type';
+import { AutoFormInput } from '@/components/form/fields/input';
+import { DependencyType } from '@/components/form/type';
+import { AutoForm } from '@/components/form/auto-form';
+import { AutoFormRadioGroup } from '@/components/form/fields/radio-group';
 
 export const ContentCaptchaSecurityAdmin = (
   data: Admin__Core_Security__Captcha__ShowQuery,

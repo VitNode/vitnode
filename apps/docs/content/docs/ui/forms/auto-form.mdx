@@ -40,10 +40,10 @@ npm i react-hook-form zod
 
 ```tsx
 import * as z from 'zod';
-import { AutoForm } from 'vitnode-frontend/components/ui/auto-form';
+import { AutoForm } from 'vitnode-frontend/form/auto-form';
 
 // for input
-import { AutoFormInput } from 'vitnode-frontend/components/ui/auto-form/fields/input';
+import { AutoFormInput } from 'vitnode-frontend/form/fields/input';
 ```
 
 ```ts
@@ -150,7 +150,7 @@ You can set a label for a field by using the `label` method.
 You can nest objects to create accordion sections. Here is an example:
 
 ```ts
-import { AutoFormInputComponentProps } from 'vitnode-frontend/components/ui/auto-form/type';
+import { AutoFormInputComponentProps } from 'vitnode-frontend/form/type';
 ```
 
 ```ts
@@ -324,7 +324,7 @@ const [values, setValues] = useState<Partial<z.infer<typeof formSchema>>>({});
 AutoForm allow to create dependencies between fields. For example allowing one field's visibility or behavior to be controlled based on the value of another. Pass `dependencies` prop with an array of objects.
 
 ```ts
-import { DependencyType } from 'vitnode-frontend/components/ui/auto-form/type';
+import { DependencyType } from 'vitnode-frontend/form/type';
 ```
 
 ### Hides

@@ -11,14 +11,13 @@ import {
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { ShowCoreLanguages } from '@/graphql/types';
-import { AutoForm } from '@/components/ui/auto-form';
-import { AutoFormSwitch } from '@/components/ui/auto-form/fields/switch';
-import { AutoFormCombobox } from '@/components/ui/auto-form/fields/combobox';
+import { AutoForm } from '@/components/form/auto-form';
 import {
   AutoFormInputComponentProps,
   DependencyType,
-} from '@/components/ui/auto-form/type';
-
+} from '@/components/form/type';
+import { AutoFormCombobox } from '@/components/form/fields/combobox';
+import { AutoFormSwitch } from '@/components/form/fields/switch';
 export const ContentDownloadActionsTableLangsCoreAdmin = ({
   code,
 }: Pick<ShowCoreLanguages, 'code'>) => {

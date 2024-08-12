@@ -3,17 +3,17 @@ import React from 'react';
 import { useTranslations } from 'next-intl';
 import { Check, ChevronsUpDown } from 'lucide-react';
 
+import { cn } from '@/helpers/classnames';
+import { getBaseSchema } from '../utils';
 import { AutoFormInputComponentProps } from '../type';
+import { DefaultParent } from './common/children';
+import { AutoFormWrapper } from './common/wrapper';
 import { AutoFormLabel } from './common/label';
 import { AutoFormTooltip } from './common/tooltip';
-import { getBaseSchema } from '../utils';
-import { AutoFormWrapper } from './common/wrapper';
-import { DefaultParent } from './common/children';
-import { cn } from '@/helpers/classnames';
 
-import { FormControl, FormMessage } from '../../form';
-import { Popover, PopoverContent, PopoverTrigger } from '../../popover';
-import { Button } from '../../button';
+import { FormControl, FormMessage } from '../../ui/form';
+import { Popover, PopoverContent, PopoverTrigger } from '../../ui/popover';
+import { Button } from '../../ui/button';
 import {
   Command,
   CommandEmpty,
@@ -21,7 +21,7 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from '../../command';
+} from '../../ui/command';
 
 export const AutoFormCombobox = ({
   autoFormProps: {

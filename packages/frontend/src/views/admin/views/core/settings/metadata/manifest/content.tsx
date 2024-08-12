@@ -5,10 +5,10 @@ import { useTranslations } from 'next-intl';
 import { useManifestCoreAdminView } from './hooks/use-manifest-core-admin-view';
 import { CONFIG } from '@/helpers/config-with-env';
 import { Admin__Core_Manifest_Metadata__ShowQuery } from '@/graphql/queries/admin/settings/admin__core_manifest_metadata__show.generated';
-import { AutoForm } from '@/components/ui/auto-form';
-import { AutoFormRadioGroup } from '@/components/ui/auto-form/fields/radio-group';
-import { AutoFormInput } from '@/components/ui/auto-form/fields/input';
-import { AutoFormColor } from '@/components/ui/auto-form/fields/color';
+import { AutoForm } from '@/components/form/auto-form';
+import { AutoFormInput } from '@/components/form/fields/input';
+import { AutoFormColor } from '@/components/form/fields/color';
+import { AutoFormRadioGroup } from '@/components/form/fields/radio-group';
 
 export const ContentManifestMetadataCoreAdmin = (
   props: Admin__Core_Manifest_Metadata__ShowQuery,

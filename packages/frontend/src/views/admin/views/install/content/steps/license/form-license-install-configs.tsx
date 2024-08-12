@@ -2,8 +2,8 @@ import { useTranslations } from 'next-intl';
 import * as z from 'zod';
 
 import { Button } from '@/components/ui/button';
-import { AutoForm } from '@/components/ui/auto-form';
-import { AutoFormCheckbox } from '@/components/ui/auto-form/fields/checkbox';
+import { AutoFormCheckbox } from '@/components/form/fields/checkbox';
+import { AutoForm } from '@/components/form/auto-form';
 
 import { useInstallVitnode } from '../../hooks/use-install-vitnode';
 

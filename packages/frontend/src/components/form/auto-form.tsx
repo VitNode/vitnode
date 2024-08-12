@@ -6,12 +6,12 @@ import React from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 
-import { Dependency, FieldConfig, ZodObjectOrWrapped } from './type';
-import { getDefaultValues, getObjectFormSchema } from './utils';
-import { Form } from '../form';
-import { AutoFormObject } from './object';
-import { Button } from '../button';
+import { Form } from '../ui/form';
+import { Button } from '../ui/button';
 import { cn } from '@/helpers/classnames';
+import { AutoFormObject } from '@/components/form/object';
+import { getDefaultValues, getObjectFormSchema } from './utils';
+import { Dependency, FieldConfig, ZodObjectOrWrapped } from './type';
 
 export function AutoForm<T extends ZodObjectOrWrapped>({
   formSchema,

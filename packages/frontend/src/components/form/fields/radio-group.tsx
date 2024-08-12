@@ -1,14 +1,18 @@
 import * as z from 'zod';
 
 import { AutoFormInputComponentProps } from '../type';
-import { AutoFormLabel } from './common/label';
-import { AutoFormTooltip } from './common/tooltip';
 import { getBaseSchema } from '../utils';
-import { AutoFormWrapper } from './common/wrapper';
 import { DefaultParent } from './common/children';
-
-import { FormControl, FormItem, FormLabel, FormMessage } from '../../form';
-import { RadioGroup, RadioGroupItem } from '../../radio-group';
+import { AutoFormWrapper } from './common/wrapper';
+import { AutoFormLabel } from './common/label';
+import {
+  FormControl,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { AutoFormTooltip } from './common/tooltip';
 
 export const AutoFormRadioGroup = ({
   autoFormProps: {

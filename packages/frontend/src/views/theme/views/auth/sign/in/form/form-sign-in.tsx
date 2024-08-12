@@ -8,9 +8,9 @@ import { CardContent } from '@/components/ui/card';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { useSignInView } from '@/hooks/core/sign/in/use-sign-in-view';
-import { AutoForm } from '@/components/ui/auto-form';
-import { AutoFormInput } from '@/components/ui/auto-form/fields/input';
-import { AutoFormCheckbox } from '@/components/ui/auto-form/fields/checkbox';
+import { AutoForm } from '@/components/form/auto-form';
+import { AutoFormInput } from '@/components/form/fields/input';
+import { AutoFormCheckbox } from '@/components/form/fields/checkbox';
 
 export const FormSignIn = () => {
   const t = useTranslations('core');

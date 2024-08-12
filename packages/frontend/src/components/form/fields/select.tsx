@@ -2,20 +2,19 @@ import * as z from 'zod';
 import { useTranslations } from 'next-intl';
 
 import { AutoFormInputComponentProps } from '../type';
-import { AutoFormLabel } from './common/label';
-import { AutoFormTooltip } from './common/tooltip';
-import { getBaseSchema } from '../utils';
-import { AutoFormWrapper } from './common/wrapper';
-import { DefaultParent } from './common/children';
-
-import { FormControl, FormMessage } from '../../form';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '../../select';
+} from '@/components/ui/select';
+import { getBaseSchema } from '../utils';
+import { DefaultParent } from './common/children';
+import { AutoFormWrapper } from './common/wrapper';
+import { AutoFormLabel } from './common/label';
+import { FormControl, FormMessage } from '@/components/ui/form';
+import { AutoFormTooltip } from './common/tooltip';
 
 export const AutoFormSelect = ({
   autoFormProps: {

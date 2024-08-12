@@ -9,10 +9,10 @@ import {
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { ShowAdminPlugins } from '@/graphql/types';
-import { AutoForm } from '@/components/ui/auto-form';
-import { AutoFormRadioGroup } from '@/components/ui/auto-form/fields/radio-group';
-import { AutoFormInput } from '@/components/ui/auto-form/fields/input';
-import { DependencyType } from '@/components/ui/auto-form/type';
+import { AutoForm } from '@/components/form/auto-form';
+import { AutoFormInput } from '@/components/form/fields/input';
+import { DependencyType } from '@/components/form/type';
+import { AutoFormRadioGroup } from '@/components/form/fields/radio-group';
 
 export const ContentDownloadActionDevPluginAdmin = ({
   code,

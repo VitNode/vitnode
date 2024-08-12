@@ -7,16 +7,16 @@ import { useEmailSettingsFormAdmin } from './hooks/use-email-settings-form-admin
 import { Separator } from '@/components/ui/separator';
 import { Admin__Core_Email_Settings__ShowQuery } from '@/graphql/queries/admin/settings/admin__core_email_settings__show.generated';
 import { Link } from '@/navigation';
-import { AutoForm } from '@/components/ui/auto-form';
-import { AutoFormRadioGroup } from '@/components/ui/auto-form/fields/radio-group';
-import { AutoFormColor } from '@/components/ui/auto-form/fields/color';
-import { AutoFormFile } from '@/components/ui/auto-form/fields/file';
-import { AutoFormInput } from '@/components/ui/auto-form/fields/input';
-import { AutoFormSwitch } from '@/components/ui/auto-form/fields/switch';
+import { AutoForm } from '@/components/form/auto-form';
+import { AutoFormInput } from '@/components/form/fields/input';
 import {
   AutoFormInputComponentProps,
   DependencyType,
-} from '@/components/ui/auto-form/type';
+} from '@/components/form/type';
+import { AutoFormColor } from '@/components/form/fields/color';
+import { AutoFormFile } from '@/components/form/fields/file';
+import { AutoFormRadioGroup } from '@/components/form/fields/radio-group';
+import { AutoFormSwitch } from '@/components/form/fields/switch';
 
 export const ContentEmailSettingsAdmin = (
   props: Admin__Core_Email_Settings__ShowQuery,

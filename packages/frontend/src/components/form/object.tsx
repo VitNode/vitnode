@@ -1,13 +1,13 @@
 import * as z from 'zod';
 import { useForm, useFormContext } from 'react-hook-form';
 
+import { Dependency, FieldConfig } from './type';
 import resolveDependencies, {
   getBaseSchema,
   getBaseType,
   zodToHtmlInputProps,
 } from './utils';
-import { FormField } from '../form';
-import { Dependency, FieldConfig } from './type';
+import { FormField } from '../ui/form';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function AutoFormObject<T extends z.ZodObject<any, any>>({

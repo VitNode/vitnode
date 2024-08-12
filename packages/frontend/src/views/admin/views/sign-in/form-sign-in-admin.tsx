@@ -7,8 +7,8 @@ import { useSignInAdminView } from '@/hooks/core/sign/in/use-sign-in-admin-view'
 import { CardContent } from '@/components/ui/card';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
-import { AutoForm } from '@/components/ui/auto-form';
-import { AutoFormInput } from '@/components/ui/auto-form/fields/input';
+import { AutoFormInput } from '@/components/form/fields/input';
+import { AutoForm } from '@/components/form/auto-form';
 
 export const FormSignInAdmin = () => {
   const t = useTranslations('core');
