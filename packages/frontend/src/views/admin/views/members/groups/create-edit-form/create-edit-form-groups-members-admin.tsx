@@ -14,17 +14,17 @@ import {
 } from '@/components/ui/dialog';
 import { Tabs, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
-import { AutoForm } from '@/components/ui/auto-form';
-import { AutoFormTextLanguageInput } from '@/components/ui/auto-form/fields/text-language-input';
-import { AutoFormColor } from '@/components/ui/auto-form/fields/color';
-import { AutoFormSwitch } from '@/components/ui/auto-form/fields/switch';
-import { AutoFormInput } from '@/components/ui/auto-form/fields/input';
+import { AutoForm } from '@/components/form/auto-form';
+import { AutoFormInput } from '@/components/form/fields/input';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Label } from '@/components/ui/label';
 import {
   AutoFormInputComponentProps,
   DependencyType,
-} from '@/components/ui/auto-form/type';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Label } from '@/components/ui/label';
+} from '@/components/form/type';
+import { AutoFormColor } from '@/components/form/fields/color';
+import { AutoFormSwitch } from '@/components/form/fields/switch';
+import { AutoFormTextLanguageInput } from '@/components/form/fields/text-language-input';
 
 enum TabsEnum {
   MAIN = 'main',

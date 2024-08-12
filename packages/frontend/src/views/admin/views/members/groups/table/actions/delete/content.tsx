@@ -11,8 +11,8 @@ import {
 } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
 import { ShowAdminGroups } from '@/graphql/types';
-import { AutoForm } from '@/components/ui/auto-form';
-import { AutoFormInput } from '@/components/ui/auto-form/fields/input';
+import { AutoFormInput } from '@/components/form/fields/input';
+import { AutoForm } from '@/components/form/auto-form';
 
 export const ContentDeleteGroupsMembersDialogAdmin = ({
   id,

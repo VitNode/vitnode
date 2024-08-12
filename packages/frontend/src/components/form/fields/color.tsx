@@ -1,17 +1,19 @@
+import { ColorPicker } from '@/components/ui/color-picker';
 import { AutoFormInputComponentProps } from '../type';
-import { AutoFormLabel } from './common/label';
-import { AutoFormTooltip } from './common/tooltip';
-import { AutoFormWrapper } from './common/wrapper';
 import { DefaultParent } from './common/children';
-import { IconPicker } from '@/components/icon/picker/icon-picker';
+import { AutoFormWrapper } from './common/wrapper';
+import { AutoFormLabel } from './common/label';
+import { FormControl, FormMessage } from '@/components/ui/form';
+import { AutoFormTooltip } from './common/tooltip';
 
-import { FormControl, FormMessage } from '../../form';
-
-export const AutoFormIcon = ({
+export const AutoFormColor = ({
   autoFormProps: { isRequired, fieldConfigItem, field, theme, isDisabled },
   ...props
 }: AutoFormInputComponentProps &
-  Omit<React.ComponentProps<typeof IconPicker>, 'onChange' | 'value'>) => {
+  Omit<
+    React.ComponentProps<typeof ColorPicker>,
+    'onChange' | 'required' | 'value'
+  >) => {
   const value = field.value || '';
   const ParentWrapper = fieldConfigItem.renderParent ?? DefaultParent;
 
@@ -27,11 +29,12 @@ export const AutoFormIcon = ({
       )}
       <ParentWrapper field={field}>
         <FormControl>
-          <IconPicker
-            {...props}
+          <ColorPicker
+            required={isRequired}
             {...field}
-            value={value}
+            {...props}
             disabled={isDisabled || props.disabled}
+            value={value}
           />
         </FormControl>
       </ParentWrapper>

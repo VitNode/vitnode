@@ -8,9 +8,9 @@ import {
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { ShowAdminPlugins } from '@/graphql/types';
-import { AutoForm } from '@/components/ui/auto-form';
-import { AutoFormFile } from '@/components/ui/auto-form/fields/file';
-import { AutoFormInputComponentProps } from '@/components/ui/auto-form/type';
+import { AutoForm } from '@/components/form/auto-form';
+import { AutoFormInputComponentProps } from '@/components/form/type';
+import { AutoFormFile } from '@/components/form/fields/file';
 
 export interface UploadPluginAdminProps {
   data?: Pick<ShowAdminPlugins, 'code' | 'name'>;

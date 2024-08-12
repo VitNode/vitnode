@@ -1,6 +1,5 @@
 import { FormItem } from '@/components/ui/form';
 import { cn } from '@/helpers/classnames';
-
 import { AutoFormInputComponentProps } from '../../type';
 
 export const AutoFormWrapper = ({

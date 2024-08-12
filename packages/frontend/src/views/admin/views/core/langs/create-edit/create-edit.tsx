@@ -8,12 +8,12 @@ import {
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { ShowCoreLanguages } from '@/graphql/types';
-import { AutoForm } from '@/components/ui/auto-form';
-import { AutoFormInput } from '@/components/ui/auto-form/fields/input';
-import { AutoFormSwitch } from '@/components/ui/auto-form/fields/switch';
-import { DependencyType } from '@/components/ui/auto-form/type';
-import { AutoFormCombobox } from '@/components/ui/auto-form/fields/combobox';
+import { AutoForm } from '@/components/form/auto-form';
+import { AutoFormInput } from '@/components/form/fields/input';
 import { locales } from './locales';
+import { DependencyType } from '@/components/form/type';
+import { AutoFormCombobox } from '@/components/form/fields/combobox';
+import { AutoFormSwitch } from '@/components/form/fields/switch';
 
 export const CreateEditLangAdmin = ({ data }: { data?: ShowCoreLanguages }) => {
   const t = useTranslations('admin.core.langs.actions');

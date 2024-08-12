@@ -6,11 +6,11 @@ import { useSignUpView } from '@/hooks/core/sign/up/use-sign-up-view';
 import { Progress } from '@/components/ui/progress';
 import { Button } from '@/components/ui/button';
 import { removeSpecialCharacters } from '@/helpers/special-characters';
-import { AutoForm } from '@/components/ui/auto-form';
-import { AutoFormInput } from '@/components/ui/auto-form/fields/input';
-import { AutoFormCheckbox } from '@/components/ui/auto-form/fields/checkbox';
+import { AutoFormCheckbox } from '@/components/form/fields/checkbox';
 
 import { useInstallVitnode } from '../../hooks/use-install-vitnode';
+import { AutoForm } from '@/components/form/auto-form';
+import { AutoFormInput } from '@/components/form/fields/input';
 
 export const AccountInstallConfigsView = () => {
   const t = useTranslations('core');

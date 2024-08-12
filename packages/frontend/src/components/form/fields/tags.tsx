@@ -1,37 +1,35 @@
+import { TagsInput } from '@/components/ui/tags-input';
 import { AutoFormInputComponentProps } from '../type';
-import { AutoFormLabel } from './common/label';
+import { FormControl, FormMessage } from '@/components/ui/form';
 import { AutoFormTooltip } from './common/tooltip';
 import { AutoFormWrapper } from './common/wrapper';
+import { AutoFormLabel } from './common/label';
 import { DefaultParent } from './common/children';
 
-import { FormControl, FormMessage } from '../../form';
-import { Textarea } from '../../textarea';
-
-export const AutoFormTextArea = ({
+export const AutoFormTags = ({
   autoFormProps: { isRequired, fieldConfigItem, field, theme, isDisabled },
   ...props
 }: AutoFormInputComponentProps &
-  React.InputHTMLAttributes<HTMLTextAreaElement>) => {
+  Omit<React.ComponentProps<typeof TagsInput>, 'onChange'>) => {
   const value = field.value || '';
-
   const ParentWrapper = fieldConfigItem.renderParent ?? DefaultParent;
 
   return (
     <AutoFormWrapper theme={theme}>
       {fieldConfigItem?.label && (
         <AutoFormLabel
+          description={fieldConfigItem.description}
           label={fieldConfigItem.label}
           isRequired={isRequired}
           theme={theme}
-          description={fieldConfigItem.description}
         />
       )}
       <ParentWrapper field={field}>
         <FormControl>
-          <Textarea
+          <TagsInput
+            {...props}
             {...field}
             value={props.value ?? value}
-            {...props}
             disabled={isDisabled || props.disabled}
           />
         </FormControl>

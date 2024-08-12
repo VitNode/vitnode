@@ -2,10 +2,10 @@ import { useTranslations } from 'next-intl';
 import * as z from 'zod';
 
 import { Button } from '@/components/ui/button';
-import { AutoForm } from '@/components/ui/auto-form';
-import { AutoFormCheckbox } from '@/components/ui/auto-form/fields/checkbox';
+import { AutoFormCheckbox } from '@/components/form/fields/checkbox';
 
 import { useInstallVitnode } from '../../hooks/use-install-vitnode';
+import { AutoForm } from '@/components/form/auto-form';
 
 export const FormLicenseInstallConfigs = () => {
   const tCore = useTranslations('core');

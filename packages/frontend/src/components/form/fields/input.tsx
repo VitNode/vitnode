@@ -1,11 +1,10 @@
-import { AutoFormInputComponentProps } from '../type';
-import { AutoFormLabel } from './common/label';
-import { AutoFormTooltip } from './common/tooltip';
-import { AutoFormWrapper } from './common/wrapper';
 import { DefaultParent } from './common/children';
-
-import { FormControl, FormMessage } from '../../form';
-import { Input } from '../../input';
+import { AutoFormInputComponentProps } from '../type';
+import { AutoFormWrapper } from './common/wrapper';
+import { AutoFormLabel } from './common/label';
+import { FormControl, FormMessage } from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { AutoFormTooltip } from './common/tooltip';
 
 export const AutoFormInput = ({
   autoFormProps: { isRequired, fieldConfigItem, field, theme, isDisabled },

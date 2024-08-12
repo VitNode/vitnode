@@ -1,12 +1,11 @@
+import { Switch } from '@/components/ui/switch';
+import { cn } from '@/helpers/classnames';
 import { AutoFormInputComponentProps } from '../type';
-import { AutoFormLabel } from './common/label';
-import { AutoFormTooltip } from './common/tooltip';
+import { FormControl, FormMessage } from '@/components/ui/form';
 import { AutoFormWrapper } from './common/wrapper';
 import { DefaultParent } from './common/children';
-import { cn } from '@/helpers/classnames';
-
-import { FormControl, FormMessage } from '../../form';
-import { Switch } from '../../switch';
+import { AutoFormLabel } from './common/label';
+import { AutoFormTooltip } from './common/tooltip';
 
 export const AutoFormSwitch = ({
   autoFormProps: { isRequired, fieldConfigItem, field, theme, isDisabled },

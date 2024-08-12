@@ -7,9 +7,9 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import { AutoForm } from '@/components/ui/auto-form';
-import { AutoFormInput } from '@/components/ui/auto-form/fields/input';
-import { AutoFormTextArea } from '@/components/ui/auto-form/fields/textarea';
+import { AutoForm } from '@/components/form/auto-form';
+import { AutoFormInput } from '@/components/form/fields/input';
+import { AutoFormTextArea } from '@/components/form/fields/textarea';
 
 export const ContentTestingActionEmailSettingsAdmin = () => {
   const t = useTranslations('admin.core.settings.email.test');

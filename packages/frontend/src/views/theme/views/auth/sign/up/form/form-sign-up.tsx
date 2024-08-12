@@ -7,10 +7,10 @@ import { CardContent } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Button } from '@/components/ui/button';
 import { removeSpecialCharacters } from '@/helpers/special-characters';
-import { AutoForm } from '@/components/ui/auto-form';
-import { AutoFormInput } from '@/components/ui/auto-form/fields/input';
-import { AutoFormCheckbox } from '@/components/ui/auto-form/fields/checkbox';
+import { AutoForm } from '@/components/form/auto-form';
+import { AutoFormInput } from '@/components/form/fields/input';
 import { SuccessFormSignUp } from './success';
+import { AutoFormCheckbox } from '@/components/form/fields/checkbox';
 
 export const FormSignUp = () => {
   const t = useTranslations('core');
