@@ -29,7 +29,9 @@ export const IsTextLanguageInput = () => {
         message: 'Each language must have a value',
       },
       validator: {
-        validate(item: TextLanguageInput | TextLanguageInput[]) {
+        validate(item: TextLanguageInput | TextLanguageInput[] | null) {
+          if (!item) return false;
+
           return (Array.isArray(item) ? item : [item]).every(
             item => item.value?.trim().length > 0,
           );
@@ -49,7 +51,9 @@ export const MaxLengthLanguageInput = ({ length }: { length: number }) => {
         message: `Each language must have a value with a maximum length of ${length}`,
       },
       validator: {
-        validate(item: TextLanguageInput | TextLanguageInput[]) {
+        validate(item: TextLanguageInput | TextLanguageInput[] | null) {
+          if (!item) return true;
+
           return (Array.isArray(item) ? item : [item]).every(
             item => item.value?.trim().length <= length,
           );
@@ -68,7 +72,9 @@ export const MinLengthLanguageInput = ({ length }: { length: number }) => {
         message: `Each language must have a value with a minimum length of ${length}`,
       },
       validator: {
-        validate(item: TextLanguageInput | TextLanguageInput[]) {
+        validate(item: TextLanguageInput | TextLanguageInput[] | null) {
+          if (!item) return true;
+
           return (Array.isArray(item) ? item : [item]).every(
             item => item.value?.trim().length >= length,
           );
@@ -81,7 +87,7 @@ export const MinLengthLanguageInput = ({ length }: { length: number }) => {
 export const TransformTextLanguageInput = ({
   value,
 }: {
-  value: TextLanguageInput | TextLanguageInput[];
+  value: TextLanguageInput | TextLanguageInput[] | null;
 }) => {
   if (Array.isArray(value)) {
     let current = value.map(item => ({
@@ -102,13 +108,19 @@ export const TransformTextLanguageInput = ({
     return current;
   }
 
+  if (!value) return null;
+
   return {
     ...value,
     value: value.value?.trimStart().trimEnd(),
   };
 };
 
-export const TransformString = ({ value }: { value: string[] | string }) => {
+export const TransformString = ({
+  value,
+}: {
+  value: string[] | string | null;
+}) => {
   if (Array.isArray(value)) {
     return value.map(item => item?.trimStart().trimEnd());
   }
