@@ -3,9 +3,9 @@ import * as z from 'zod';
 
 import { Button } from '@/components/ui/button';
 import { AutoFormCheckbox } from '@/components/form/fields/checkbox';
+import { AutoForm } from '@/components/form/auto-form';
 
 import { useInstallVitnode } from '../../hooks/use-install-vitnode';
-import { AutoForm } from '@/components/form/auto-form';
 
 export const FormLicenseInstallConfigs = () => {
   const tCore = useTranslations('core');

@@ -4,9 +4,13 @@ import { useTranslations } from 'next-intl';
 import { Check, ChevronsUpDown } from 'lucide-react';
 
 import { cn } from '@/helpers/classnames';
-
 import { getBaseSchema } from '../utils';
 import { AutoFormInputComponentProps } from '../type';
+import { DefaultParent } from './common/children';
+import { AutoFormWrapper } from './common/wrapper';
+import { AutoFormLabel } from './common/label';
+import { AutoFormTooltip } from './common/tooltip';
+
 import { FormControl, FormMessage } from '../../ui/form';
 import { Popover, PopoverContent, PopoverTrigger } from '../../ui/popover';
 import { Button } from '../../ui/button';
@@ -18,10 +22,6 @@ import {
   CommandItem,
   CommandList,
 } from '../../ui/command';
-import { DefaultParent } from './common/children';
-import { AutoFormWrapper } from './common/wrapper';
-import { AutoFormLabel } from './common/label';
-import { AutoFormTooltip } from './common/tooltip';
 
 export const AutoFormCombobox = ({
   autoFormProps: {

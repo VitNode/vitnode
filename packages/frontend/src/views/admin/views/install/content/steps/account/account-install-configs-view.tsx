@@ -7,10 +7,10 @@ import { Progress } from '@/components/ui/progress';
 import { Button } from '@/components/ui/button';
 import { removeSpecialCharacters } from '@/helpers/special-characters';
 import { AutoFormCheckbox } from '@/components/form/fields/checkbox';
-
-import { useInstallVitnode } from '../../hooks/use-install-vitnode';
 import { AutoForm } from '@/components/form/auto-form';
 import { AutoFormInput } from '@/components/form/fields/input';
+
+import { useInstallVitnode } from '../../hooks/use-install-vitnode';
 
 export const AccountInstallConfigsView = () => {
   const t = useTranslations('core');

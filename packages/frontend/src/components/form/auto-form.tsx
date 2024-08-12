@@ -10,7 +10,6 @@ import { Form } from '../ui/form';
 import { Button } from '../ui/button';
 import { cn } from '@/helpers/classnames';
 import { AutoFormObject } from '@/components/form/object';
-
 import { getDefaultValues, getObjectFormSchema } from './utils';
 import { Dependency, FieldConfig, ZodObjectOrWrapped } from './type';
 
