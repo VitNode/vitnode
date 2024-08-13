@@ -6,10 +6,9 @@ import { join } from 'path';
 
 import { copyFiles } from './copy-files';
 import { generateManifest } from './generate-manifest';
-import { createTablesDatabaseUsingMigrations } from './create-tables-database-using-migrations';
 import { updatePlugins } from './update-plugins';
 import coreSchemaDatabase from '../src/database';
-import { generateDatabaseMigrations } from './generate-database-migrations';
+import { generateDatabaseMigrations, runMigrations } from './database';
 import { generateConfig } from './generate-config';
 
 import { createClientDatabase, DATABASE_ENVS } from '@/utils/database/client';
@@ -66,7 +65,7 @@ const init = async () => {
   console.log(
     `${initConsole} [5/6] Create tables in database using migrations...`,
   );
-  await createTablesDatabaseUsingMigrations({ pluginsPath, db: database.db });
+  await runMigrations();
 
   console.log(`${initConsole} [6/6] Updating plugins...`);
   await updatePlugins({ pluginsPath, db: database.db });
@@ -77,7 +76,6 @@ const init = async () => {
 };
 
 const db = async () => {
-  const pluginsPath = getPluginsPath();
   console.log(`${initConsole} [1/2] Generating database migrations...`);
   await generateDatabaseMigrations();
 
@@ -89,7 +87,7 @@ const db = async () => {
   console.log(
     `${initConsole} [2/2] Create tables in database using migrations...`,
   );
-  await createTablesDatabaseUsingMigrations({ pluginsPath, db: database.db });
+  await runMigrations();
 
   await database.poolDB.end();
   console.log(`${initConsole} ✅ Project setup complete.`);
