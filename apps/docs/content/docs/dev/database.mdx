@@ -1,0 +1,296 @@
+---
+title: Schema
+description: How to manage schema for database in VitNode
+---
+
+VitNode use [Drizzle ORM](https://orm.drizzle.team/) with [PostgreSQL](https://www.postgresql.org/) to manage database.
+
+## Create File
+
+After [created plugin](/docs/dev/plugins) create new file inside `database/schema` folder _(`posts.ts` is an example here)_. If is your first schema, create folder `schema` inside `database` folder.
+
+import { File, Folder, Files } from 'fumadocs-ui/components/files';
+
+<Files>
+  <Folder name="apps" defaultOpen>
+    <Folder name="backend" defaultOpen>
+      <Folder name="src" defaultOpen>
+        <Folder name="plugins" defaultOpen>
+          <Folder name="{your_plugin}" defaultOpen>
+            <Folder name="admin" defaultOpen>
+              <Folder name="database" defaultOpen>
+                <Folder name="schema" defaultOpen>
+                  <File name="posts.ts" />
+                </Folder>
+                <File name="index.ts" />
+              </Folder>
+            </Folder>
+          </Folder>
+        </Folder>
+      </Folder>
+    </Folder>
+  </Folder>
+</Files>
+
+## Create Schema
+
+Inside your new file `posts.ts` create schema for your tables. Follow [Drizzle ORM](https://orm.drizzle.team/docs/sql-schema-declaration) documentation for more information how create schema.
+
+### Schema
+
+```ts title="posts.ts"
+import {
+  integer,
+  pgTable,
+  serial,
+  timestamp,
+  varchar,
+} from 'drizzle-orm/pg-core';
+
+import { blog_categories } from './categories';
+
+import { core_languages } from '@/plugins/core/admin/database/schema/languages';
+import { core_users } from '@/plugins/core/admin/database/schema/users';
+
+export const blog_articles = pgTable('blog_articles', {
+  id: serial('id').primaryKey(),
+  author_id: integer('author_id').references(() => core_users.id, {
+    onDelete: 'cascade',
+  }),
+  category_id: integer('category_id').references(() => blog_categories.id, {
+    onDelete: 'cascade',
+  }),
+  created: timestamp('created').notNull().defaultNow(),
+  update: timestamp('update').notNull().defaultNow(),
+  ip_address: varchar('ip_address', { length: 45 }),
+});
+
+export const blog_articles_content = pgTable('blog_articles_content', {
+  id: serial('id').primaryKey(),
+  article_id: integer('article_id').references(() => blog_articles.id, {
+    onDelete: 'cascade',
+  }),
+  language_code: varchar('language_code')
+    .notNull()
+    .references(() => core_languages.code, {
+      onDelete: 'cascade',
+    }),
+  value: varchar('value').notNull(),
+});
+```
+
+#### Good to know
+
+- Inside `schema` folder you can create as many files as you want _(folders not supported)_,
+- You can create as many schemas as you want inside one file,
+- The best naming convention for tables is `snake_case` with `{your_plugin}_` prefix _(example: `blog_articles`)_,
+- You can import other schemas only from `core` plugin.
+
+### Indexes
+
+Indexes are important part of schema. Thanks to indexes your database will be faster.
+
+For example, if you have `blog_articles` table and you want to search by `author_id`, you can create index for this column.
+
+```ts title="posts.ts"
+import {
+  index,
+  integer,
+  pgTable,
+  serial,
+  timestamp,
+  varchar,
+} from 'drizzle-orm/pg-core';
+
+import { blog_categories } from './categories';
+
+import { core_languages } from '@/plugins/core/admin/database/schema/languages';
+import { core_users } from '@/plugins/core/admin/database/schema/users';
+
+export const blog_articles = pgTable(
+  'blog_articles',
+  {
+    id: serial('id').primaryKey(),
+    author_id: integer('author_id').references(() => core_users.id, {
+      onDelete: 'cascade',
+    }),
+    category_id: integer('category_id').references(() => blog_categories.id, {
+      onDelete: 'cascade',
+    }),
+    created: timestamp('created').notNull().defaultNow(),
+    update: timestamp('update').notNull().defaultNow(),
+    ip_address: varchar('ip_address', { length: 45 }),
+  },
+  table => ({
+    author_id_idx: index('blog_articles_author_id_idx').on(table.author_id),
+    category_id_idx: index('blog_articles_category_id_idx').on(
+      table.category_id,
+    ),
+  }),
+);
+
+export const blog_articles_content = pgTable(
+  'blog_articles_content',
+  {
+    id: serial('id').primaryKey(),
+    article_id: integer('article_id').references(() => blog_articles.id, {
+      onDelete: 'cascade',
+    }),
+    language_code: varchar('language_code')
+      .notNull()
+      .references(() => core_languages.code, {
+        onDelete: 'cascade',
+      }),
+    value: varchar('value').notNull(),
+  },
+  table => ({
+    article_id_idx: index('blog_articles_content_article_id_idx').on(
+      table.article_id,
+    ),
+    language_code_idx: index('blog_articles_content_language_code_idx').on(
+      table.language_code,
+    ),
+  }),
+);
+```
+
+### Relations
+
+Relations is importatnt part of schema. Thanks to relations your database will be more readable and easier to use by you.
+
+For example, if you have `blog_articles` table and `blog_articles_content` table, you can create relation between them. If some `blog_articles` will be removed, all `blog_articles_content` related to this `blog_articles` will be removed too.
+
+```ts title="posts.ts"
+import { relations } from 'drizzle-orm';
+import {
+  index,
+  integer,
+  pgTable,
+  serial,
+  timestamp,
+  varchar,
+} from 'drizzle-orm/pg-core';
+
+import { blog_categories } from './categories';
+
+import { core_languages } from '@/plugins/core/admin/database/schema/languages';
+import { core_users } from '@/plugins/core/admin/database/schema/users';
+
+export const blog_articles = pgTable(
+  'blog_articles',
+  {
+    id: serial('id').primaryKey(),
+    author_id: integer('author_id').references(() => core_users.id, {
+      onDelete: 'cascade',
+    }),
+    category_id: integer('category_id').references(() => blog_categories.id, {
+      onDelete: 'cascade',
+    }),
+    created: timestamp('created').notNull().defaultNow(),
+    update: timestamp('update').notNull().defaultNow(),
+    ip_address: varchar('ip_address', { length: 45 }),
+  },
+  table => ({
+    author_id_idx: index('blog_articles_author_id_idx').on(table.author_id),
+    category_id_idx: index('blog_articles_category_id_idx').on(
+      table.category_id,
+    ),
+  }),
+);
+
+export const blog_articles_relations = relations(
+  blog_articles,
+  ({ many, one }) => ({
+    author: one(core_users, {
+      fields: [blog_articles.author_id],
+      references: [core_users.id],
+    }),
+    content: many(blog_articles_content),
+    category: one(blog_categories, {
+      fields: [blog_articles.category_id],
+      references: [blog_categories.id],
+    }),
+  }),
+);
+
+export const blog_articles_content = pgTable(
+  'blog_articles_content',
+  {
+    id: serial('id').primaryKey(),
+    article_id: integer('article_id').references(() => blog_articles.id, {
+      onDelete: 'cascade',
+    }),
+    language_code: varchar('language_code')
+      .notNull()
+      .references(() => core_languages.code, {
+        onDelete: 'cascade',
+      }),
+    value: varchar('value').notNull(),
+  },
+  table => ({
+    article_id_idx: index('blog_articles_content_article_id_idx').on(
+      table.article_id,
+    ),
+    language_code_idx: index('blog_articles_content_language_code_idx').on(
+      table.language_code,
+    ),
+  }),
+);
+
+export const blog_articles_content_relations = relations(
+  blog_articles_content,
+  ({ one }) => ({
+    article: one(blog_articles, {
+      fields: [blog_articles_content.article_id],
+      references: [blog_articles.id],
+    }),
+  }),
+);
+```
+
+Your relations should be with `_relations` surfix.
+
+### Import schema to root file
+
+After created schema, you need to import it to `database/index.ts` file. Inside `index.ts` file you can import as many schemas as you want.
+
+Here is example `index.ts` file:
+
+```ts title="index.ts"
+import * as articles from './schema/articles';
+import * as categories from './schema/categories';
+
+export default {
+  ...articles,
+  ...categories,
+};
+```
+
+<Callout title="Remember" type="warn">
+  Export all schemas to `index.ts` file. If you forget to export some schema, it
+  will not be removed from database when you remove plugin.
+</Callout>
+
+### Generate tables
+
+To generate `migrations` and apply it to your database, you need to run `vitnode-backend db` command. We're created [CLI](/docs/dev/cli) for you.
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+
+<Tabs id='package-manager' persist items={['pnpm', 'npm']}>
+
+```bash tab="pnpm"
+pnpm db
+```
+
+```bash tab="npm"
+npm run db
+```
+
+</Tabs>
+
+## Migration
+
+You don't need to worry about migration. VitNode will handle it for you.
+
+When you change your schema, VitNode will automatically create schema for migration when create `new version` or `rebuild` existing version of your plugin.

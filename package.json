@@ -17,7 +17,7 @@
     "docker:prod": "sh docker-prod.sh",
     "docker:clear": "sudo docker system prune -a",
     "release": "node ./bump-version.mjs",
-    "db:push": "cd apps/backend && pnpm db:push && cd ../.."
+    "db": "turbo db"
   },
   "workspaces": [
     "apps/*",

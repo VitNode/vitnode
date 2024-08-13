@@ -40,6 +40,7 @@ export const createPackagesJSON = ({
       build: 'turbo build',
       start: 'turbo start',
       codegen: 'turbo codegen',
+      db: 'turbo db',
       ...(eslint ? { lint: 'turbo lint', 'lint:fix': 'turbo lint:fix' } : {}),
       ...(docker
         ? {
@@ -124,6 +125,7 @@ export const createPackagesJSON = ({
       start: 'node dist/main',
       lint: 'eslint .',
       'lint:fix': 'eslint . --fix',
+      db: 'vitnode-backend db',
     },
     dependencies: {
       '@nestjs/common': '^10.3.10',

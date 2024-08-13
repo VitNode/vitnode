@@ -19,6 +19,10 @@
       "cache": false,
       "persistent": true
     },
+    "db": {
+      "dependsOn": ["^db"],
+      "cache": false
+    },
     "lint": {
       "dependsOn": ["^lint"]
     },
