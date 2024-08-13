@@ -118,6 +118,7 @@ export const createPackagesJSON = ({
     version: '1.0.0',
     private: true,
     scripts: {
+      'drizzle-kit': 'drizzle-kit',
       'config:init': 'vitnode-backend init',
       codegen: 'graphql-codegen',
       dev: 'vitnode-backend init && cross-env NODE_ENV=development nest start -w',

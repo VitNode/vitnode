@@ -143,7 +143,7 @@ export class DownloadAdminPluginsService {
 
     try {
       await execShellCommand(
-        'npx drizzle-kit@0.23.1 up && npx drizzle-kit@0.23.1 generate',
+        'npm run drizzle-kit up && npm run drizzle-kit generate',
       );
     } catch (err) {
       throw new CustomError({

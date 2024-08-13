@@ -3,6 +3,7 @@
   "version": "0.0.9-canary.4",
   "license": "MIT",
   "scripts": {
+    "drizzle-kit": "drizzle-kit",
     "config:init": "vitnode-backend init",
     "build": "nest build",
     "dev": "pnpm config:init && cross-env NODE_ENV=development nest start -w",

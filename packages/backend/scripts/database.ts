@@ -17,10 +17,10 @@ const execShellCommand = async (cmd: string) => {
 
 export const generateDatabaseMigrations = async () => {
   await execShellCommand(
-    'npx drizzle-kit@0.23.1 up && npx drizzle-kit@0.23.1 generate',
+    'npm run drizzle-kit up && npm run drizzle-kit generate',
   );
 };
 
 export const runMigrations = async () => {
-  await execShellCommand('npx drizzle-kit@0.23.1 migrate');
+  await execShellCommand('npm run drizzle-kit migrate');
 };
