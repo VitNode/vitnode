@@ -9,9 +9,7 @@ import { DATABASE_ENVS, schemaDatabase } from './database';
 @Module({
   imports: [
     VitNodeCoreModule.register({
-      paths: {
-        envFile: join(process.cwd(), '..', '..', '.env'),
-      },
+      pathToEnvFile: join(process.cwd(), '..', '..', '.env'),
       database: {
         config: DATABASE_ENVS,
         schemaDatabase,

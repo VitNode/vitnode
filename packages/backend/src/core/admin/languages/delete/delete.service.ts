@@ -7,7 +7,7 @@ import { eq } from 'drizzle-orm';
 
 import { DeleteCoreAdminLanguagesArgs } from './dto/delete.args';
 
-import { DatabaseService } from '@/utils/database/database.service';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { CustomError, NotFoundError } from '@/errors';
 import {
   ABSOLUTE_PATHS_BACKEND,
@@ -19,7 +19,7 @@ import { core_languages } from '@/database/schema/languages';
 import { setRebuildRequired } from '@/functions/rebuild-required';
 @Injectable()
 export class DeleteAdminCoreLanguageService {
-  constructor(private readonly databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: InternalDatabaseService) {}
 
   async delete({ code }: DeleteCoreAdminLanguagesArgs): Promise<string> {
     const language =

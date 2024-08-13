@@ -14,7 +14,7 @@ import { SkipThrottle } from '@nestjs/throttler';
 
 import { InternalAuthorizationCoreSessionsService } from '../../../sessions/authorization/internal/internal_authorization.service';
 import { AuthorizationAdminSessionsService } from '../../sessions/authorization/authorization.service';
-import { DatabaseService } from '@/utils/database/database.service';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { ABSOLUTE_PATHS_BACKEND } from '../../../..';
 
 @SkipThrottle()
@@ -23,7 +23,7 @@ export class DownloadFilesAdminController {
   constructor(
     private readonly service: InternalAuthorizationCoreSessionsService,
     private readonly serviceAdmin: AuthorizationAdminSessionsService,
-    private readonly databaseService: DatabaseService,
+    private readonly databaseService: InternalDatabaseService,
   ) {}
 
   @Get(':file')

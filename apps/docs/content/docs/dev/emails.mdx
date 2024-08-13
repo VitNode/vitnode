@@ -16,7 +16,7 @@ import { ShowBlogCategoriesArgs } from './dto/show.args';
 @Injectable()
 export class ShowBlogCategoriesService {
   constructor(
-    private readonly databaseService: DatabaseService,
+    private readonly databaseServices: DatabaseService,
     private readonly mailService: SendAdminEmailService, // [!code highlight]
   ) {}
 
@@ -82,7 +82,7 @@ import { ExampleTemplateEmail } from './example.email'; // [!code highlight]
 @Injectable()
 export class ShowBlogCategoriesService {
   constructor(
-    private readonly databaseService: DatabaseService,
+    private readonly databaseServices: DatabaseService,
     private readonly mailService: SendAdminEmailService,
   ) {}
 
@@ -212,7 +212,7 @@ import { ExampleTemplateEmail } from './example.email';
 @Injectable()
 export class ShowBlogCategoriesService {
   constructor(
-    private readonly databaseService: DatabaseService,
+    private readonly databaseServices: DatabaseService,
     private readonly mailService: SendAdminEmailService,
     @Inject('EmailHelpersService') // [!code highlight]
     private readonly emailHelpersService: EmailHelpersServiceType, // [!code highlight]

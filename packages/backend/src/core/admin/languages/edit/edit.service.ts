@@ -5,7 +5,7 @@ import { eq } from 'drizzle-orm';
 
 import { EditCoreAdminLanguagesArgs } from './dto/edit.args';
 
-import { DatabaseService } from '@/utils/database/database.service';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { ShowCoreLanguages } from '../../../languages/show/dto/show.obj';
 import { NotFoundError } from '@/errors';
 import { core_languages } from '@/database/schema/languages';
@@ -13,7 +13,7 @@ import { configPath, ConfigType, getConfigFile } from '@/providers';
 
 @Injectable()
 export class EditAdminCoreLanguagesService {
-  constructor(private readonly databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: InternalDatabaseService) {}
 
   async edit({
     id,

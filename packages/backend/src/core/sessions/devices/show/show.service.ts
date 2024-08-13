@@ -3,7 +3,7 @@ import { desc, eq } from 'drizzle-orm';
 
 import { ShowCoreSessionDevicesObj } from './dto/show.obj';
 
-import { DatabaseService } from '@/utils/database/database.service';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { User } from '@/decorators';
 import {
   core_sessions,
@@ -12,7 +12,7 @@ import {
 
 @Injectable()
 export class ShowCoreSessionDevicesService {
-  constructor(private readonly databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: InternalDatabaseService) {}
 
   async show(user: User): Promise<ShowCoreSessionDevicesObj[]> {
     const edges = await this.databaseService.db

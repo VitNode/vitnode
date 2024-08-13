@@ -3,7 +3,7 @@ import { eq } from 'drizzle-orm';
 
 import { EditAdminNavStylesArgs } from './dto/edit.args';
 
-import { DatabaseService } from '@/utils/database/database.service';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { NotFoundError } from '@/errors';
 import {
   core_nav,
@@ -16,7 +16,7 @@ import { ShowCoreNav } from '@/core/nav/show/dto/show.obj';
 @Injectable()
 export class EditAdminNavStylesService {
   constructor(
-    private readonly databaseService: DatabaseService,
+    private readonly databaseService: InternalDatabaseService,
     private readonly parserTextLang: ParserTextLanguageCoreHelpersService,
   ) {}
 

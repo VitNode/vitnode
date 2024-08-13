@@ -4,7 +4,7 @@ import { eq, sum } from 'drizzle-orm';
 import { InternalAuthorizationCoreSessionsService } from './internal/internal_authorization.service';
 import { AuthorizationCoreSessionsObj } from './dto/authorization.obj';
 
-import { DatabaseService } from '@/utils/database/database.service';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { core_files } from '../../../database/schema/files';
 import { GqlContext } from '../../../utils';
 import { NotFoundError } from '@/errors';
@@ -12,7 +12,7 @@ import { NotFoundError } from '@/errors';
 @Injectable()
 export class AuthorizationCoreSessionsService {
   constructor(
-    private readonly databaseService: DatabaseService,
+    private readonly databaseService: InternalDatabaseService,
     private readonly service: InternalAuthorizationCoreSessionsService,
   ) {}
 

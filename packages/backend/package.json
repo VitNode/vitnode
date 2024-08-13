@@ -4,7 +4,7 @@
   "description": "Backend wrapper for VitNode projects",
   "author": "VitNode Team",
   "license": "MIT",
-  "homepage": "https://VitNode.com",
+  "homepage": "https://vitnode.com",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/aXenDeveloper/VitNode.git",

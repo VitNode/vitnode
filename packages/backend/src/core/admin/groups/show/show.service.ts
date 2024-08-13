@@ -8,11 +8,11 @@ import { core_groups, core_groups_names } from '@/database/schema/groups';
 import { inputPaginationCursor, outputPagination } from '@/functions';
 import { core_users } from '@/database/schema/users';
 import { SortDirectionEnum } from '@/utils';
-import { DatabaseService } from '@/utils/database/database.service';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 
 @Injectable()
 export class ShowAdminGroupsService {
-  constructor(private readonly databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: InternalDatabaseService) {}
 
   async show({
     cursor,

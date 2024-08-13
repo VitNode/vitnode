@@ -3,7 +3,7 @@ import { count, eq } from 'drizzle-orm';
 
 import { DeleteCoreEditorArgs } from './dto/delete.args';
 
-import { DatabaseService } from '@/utils/database/database.service';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { User } from '../../../decorators';
 import { AccessDeniedError } from '../../../errors';
 import { core_files, core_files_using } from '../../../database/schema/files';
@@ -12,7 +12,7 @@ import { FilesService } from '@/core/files/helpers/upload/upload.service';
 @Injectable()
 export class DeleteCoreEditorService {
   constructor(
-    private readonly databaseService: DatabaseService,
+    private readonly databaseService: InternalDatabaseService,
     private readonly files: FilesService,
   ) {}
 

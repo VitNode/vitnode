@@ -21,7 +21,7 @@ export class AdminPermissionGuards implements CanActivate {
   constructor(
     private readonly reflector: Reflector,
     @Inject('IOAdminAuthGuards') private readonly service: IOAdminAuthGuards,
-    // private readonly databaseService: DatabaseService
+    // private readonly databaseService: InternalDatabaseService
   ) {}
 
   protected async getAuth({ req, res }: GqlContext) {

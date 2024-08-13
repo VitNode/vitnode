@@ -10,7 +10,7 @@ import {
 } from '../../files/helpers/upload/helpers';
 import { UploadCoreFilesArgs } from '../../files/helpers/upload/dto/upload.args';
 import { ShowCoreFiles } from '../../files/show/dto/show.obj';
-import { DatabaseService } from '@/utils/database/database.service';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { User } from '../../../decorators';
 import { AccessDeniedError } from '../../../errors';
 import { core_files } from '../../../database/schema/files';
@@ -30,7 +30,7 @@ export class UploadCoreEditorService extends HelpersUploadCoreFilesService {
   ];
 
   constructor(
-    private readonly databaseService: DatabaseService,
+    private readonly databaseService: InternalDatabaseService,
     private readonly files: FilesService,
   ) {
     super();

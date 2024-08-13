@@ -4,13 +4,13 @@ import { eq } from 'drizzle-orm';
 import { EditAdminMembersArgs } from './dto/edit.args';
 import { EditAdminMembersObj } from './dto/edit.obj';
 
-import { DatabaseService } from '@/utils/database/database.service';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { core_users } from '@/database/schema/users';
 import { AccessDeniedError, NotFoundError } from '@/errors';
 
 @Injectable()
 export class EditAdminMembersService {
-  constructor(private readonly databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: InternalDatabaseService) {}
 
   async edit({
     id,

@@ -3,11 +3,11 @@ import { sql } from 'drizzle-orm';
 
 import { SignUpStatsAdminMembers } from './dto/stats.obj';
 
-import { DatabaseService } from '@/utils/database/database.service';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 
 @Injectable()
 export class StatsAdminMembersService {
-  constructor(private readonly databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: InternalDatabaseService) {}
 
   async signupStats(): Promise<SignUpStatsAdminMembers[]> {
     const data = await this.databaseService.db.execute(sql`

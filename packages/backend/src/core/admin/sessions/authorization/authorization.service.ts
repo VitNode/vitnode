@@ -8,7 +8,7 @@ import { eq } from 'drizzle-orm';
 
 import { AuthorizationAdminSessionsObj } from './dto/authorization.obj';
 
-import { DatabaseService } from '@/utils/database/database.service';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { DeviceSignInCoreSessionsService } from '../../../sessions/sign_in/device.service';
 import { AccessDeniedError, GqlContext, NotFoundError } from '@/index';
 import { AuthorizationCurrentUserObj } from '../../../sessions/authorization/dto/authorization.obj';
@@ -18,7 +18,7 @@ import { currentUnixDate, getUserAgentData, getUserIp } from '@/functions';
 @Injectable()
 export class AuthorizationAdminSessionsService {
   constructor(
-    private readonly databaseService: DatabaseService,
+    private readonly databaseService: InternalDatabaseService,
     private readonly jwtService: JwtService,
     private readonly configService: ConfigService,
     private readonly deviceService: DeviceSignInCoreSessionsService,

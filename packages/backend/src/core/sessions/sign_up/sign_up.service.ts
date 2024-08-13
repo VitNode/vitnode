@@ -7,8 +7,8 @@ import { AvatarColorService } from './helpers/avatar-color.service';
 import { encryptPassword } from '../password';
 
 import { CaptchaCoreCaptchaSecurityService } from '@/core/admin/security/captcha/captcha.service';
-import { DatabaseService } from '@/utils/database/database.service';
 import { core_users } from '../../../database/schema/users';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { GqlContext } from '@/utils';
 import { CustomError, NotFoundError } from '../../../errors';
 import { getUserIp, removeSpecialCharacters } from '../../../functions';
@@ -16,7 +16,7 @@ import { getUserIp, removeSpecialCharacters } from '../../../functions';
 @Injectable()
 export class SignUpCoreSessionsService extends AvatarColorService {
   constructor(
-    private readonly databaseService: DatabaseService,
+    private readonly databaseService: InternalDatabaseService,
     private readonly captchaService: CaptchaCoreCaptchaSecurityService,
   ) {
     super();

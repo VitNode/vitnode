@@ -3,7 +3,7 @@ import { eq } from 'drizzle-orm';
 
 import { DeleteAdminFilesArgs } from './dto/delete.args';
 
-import { DatabaseService } from '@/utils/database/database.service';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { NotFoundError } from '@/errors';
 import { core_files } from '@/database/schema/files';
 import { FilesService } from '@/core/files/helpers/upload/upload.service';
@@ -11,7 +11,7 @@ import { FilesService } from '@/core/files/helpers/upload/upload.service';
 @Injectable()
 export class DeleteAdminFilesService {
   constructor(
-    private readonly databaseService: DatabaseService,
+    private readonly databaseService: InternalDatabaseService,
     private readonly files: FilesService,
   ) {}
 

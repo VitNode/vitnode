@@ -7,11 +7,11 @@ import { ShowAdminPluginsObj } from './dto/show.obj';
 import { inputPaginationCursor, outputPagination } from '@/functions';
 import { core_plugins } from '@/database/schema/plugins';
 import { SortDirectionEnum } from '@/utils';
-import { DatabaseService } from '@/utils/database/database.service';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 
 @Injectable()
 export class ShowAdminPluginsService {
-  constructor(private readonly databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: InternalDatabaseService) {}
 
   async show({
     code,

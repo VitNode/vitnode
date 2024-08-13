@@ -4,14 +4,14 @@ import { and, count, eq, ilike, or } from 'drizzle-orm';
 import { ShowCoreMembersObj } from './dto/show.obj';
 import { ShowCoreMembersArgs } from './dto/show.args';
 
-import { DatabaseService } from '@/utils/database/database.service';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { inputPaginationCursor, outputPagination } from '../../../functions';
 import { core_users } from '../../../database/schema/users';
 import { SortDirectionEnum } from '../../../utils';
 
 @Injectable()
 export class ShowCoreMembersService {
-  constructor(private readonly databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: InternalDatabaseService) {}
 
   async show({
     cursor,

@@ -20,13 +20,9 @@ import {
   DatabaseModuleArgs,
 } from './utils/database/database.module';
 
-export interface VitNodePaths {
-  envFile: string;
-}
-
 interface Args {
   database: DatabaseModuleArgs;
-  paths: VitNodePaths;
+  pathToEnvFile: string;
 }
 
 const internalPaths = {
@@ -167,14 +163,14 @@ const config = () => {
 
 @Module({})
 export class VitNodeCoreModule {
-  static register({ paths, database }: Args): DynamicModule {
+  static register({ pathToEnvFile, database }: Args): DynamicModule {
     return {
       module: VitNodeCoreModule,
       imports: [
         ConfigModule.forRoot({
           isGlobal: true,
           load: [config],
-          envFilePath: paths.envFile,
+          envFilePath: pathToEnvFile,
         }),
         ThrottlerModule.forRoot([
           {

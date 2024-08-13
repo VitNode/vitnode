@@ -6,14 +6,14 @@ import { eq, ne } from 'drizzle-orm';
 import { ShowAdminPlugins } from '../show/dto/show.obj';
 import { EditAdminPluginsArgs } from './dto/edit.args';
 
-import { DatabaseService } from '@/utils/database/database.service';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { CustomError, NotFoundError } from '@/errors';
 import { core_plugins } from '@/database/schema/plugins';
 import { ABSOLUTE_PATHS_BACKEND, ConfigPlugin } from '../../../..';
 
 @Injectable()
 export class EditAdminPluginsService {
-  constructor(private readonly databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: InternalDatabaseService) {}
 
   async edit({
     code,

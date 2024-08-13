@@ -48,7 +48,7 @@ import { User } from '@/utils/decorators/user.decorator';
 
 @Injectable()
 export class ShowCoreFilesService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(private databaseServices: DatabaseService) {}
 
   async show(
     { id: user_id }: User,

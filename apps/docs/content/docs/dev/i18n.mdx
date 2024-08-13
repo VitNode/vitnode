@@ -174,7 +174,7 @@ import { ShowBlogCategoriesArgs } from './dto/show.args';
 
 @Injectable()
 export class ShowBlogCategoriesService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(private databaseServices: DatabaseService) {}
 
   async show({ id }: ShowBlogCategoriesArgs): Promise<ShowBlogCategoriesObj> {
     const category =
@@ -215,7 +215,7 @@ import { blog_categories_name } from '@/plugins/blog/admin/database/schema/categ
 @Injectable()
 export class EditBlogCategoriesService {
   constructor(
-    private databaseService: DatabaseService,
+    private databaseServices: DatabaseService,
     private parserTextLang: ParserTextLanguageCoreHelpersService,
   ) {}
 
@@ -267,7 +267,7 @@ import {
 @Injectable()
 export class EditBlogCategoriesService {
   constructor(
-    private databaseService: DatabaseService,
+    private databaseServices: DatabaseService,
     private parserTextLang: ParserTextLanguageCoreHelpersService,
   ) {}
 

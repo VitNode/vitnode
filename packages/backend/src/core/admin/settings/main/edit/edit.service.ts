@@ -7,7 +7,7 @@ import { eq } from 'drizzle-orm';
 import { EditAdminMainSettingsArgs } from './dto/edit.args';
 import { EditAdminSettingsObj } from './dto/edit.obj';
 
-import { DatabaseService } from '@/utils/database/database.service';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import {
   ABSOLUTE_PATHS_BACKEND,
   ConfigType,
@@ -20,7 +20,7 @@ import { ManifestWithLang } from '@/core/settings/settings.module';
 
 @Injectable()
 export class EditAdminMainSettingsService {
-  constructor(private readonly databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: InternalDatabaseService) {}
 
   protected async updateDescription({
     languages,

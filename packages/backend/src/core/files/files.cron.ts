@@ -5,12 +5,12 @@ import { desc, eq, lt, sql } from 'drizzle-orm';
 import { FilesService } from './helpers/upload/upload.service';
 
 import { core_files, core_files_using } from '../../database/schema/files';
-import { DatabaseService } from '@/utils';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 
 @Injectable()
 export class CoreFilesCron {
   constructor(
-    private readonly databaseService: DatabaseService,
+    private readonly databaseService: InternalDatabaseService,
     private readonly files: FilesService,
   ) {}
 

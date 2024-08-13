@@ -7,7 +7,7 @@ import { eq } from 'drizzle-orm';
 
 import { UpdateCoreAdminLanguagesArgs } from './dto/update.args';
 
-import { DatabaseService } from '@/utils/database/database.service';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { NotFoundError } from '@/errors';
 import { ABSOLUTE_PATHS_BACKEND, currentUnixDate } from '../../../..';
 import { core_languages } from '@/database/schema/languages';
@@ -16,7 +16,7 @@ import { generateRandomString } from '@/functions/generate-random-string';
 
 @Injectable()
 export class UpdateAdminCoreLanguageService {
-  constructor(private readonly databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: InternalDatabaseService) {}
 
   async update({ code, file }: UpdateCoreAdminLanguagesArgs): Promise<string> {
     const lang = await this.databaseService.db.query.core_languages.findFirst({

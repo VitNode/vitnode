@@ -2,14 +2,14 @@ import { Injectable } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
 import { ConfigService } from '@nestjs/config';
 
-import { DatabaseService } from '@/utils/database/database.service';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { GqlContext } from '@/utils';
 import { core_admin_sessions } from '@/database/schema/admins';
 
 @Injectable()
 export class SignOutAdminSessionsService {
   constructor(
-    private readonly databaseService: DatabaseService,
+    private readonly databaseService: InternalDatabaseService,
     private readonly configService: ConfigService,
   ) {}
 

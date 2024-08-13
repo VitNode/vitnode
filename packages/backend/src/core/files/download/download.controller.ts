@@ -12,13 +12,13 @@ import {
 import { Response } from 'express';
 import { SkipThrottle } from '@nestjs/throttler';
 
-import { DatabaseService } from '@/utils/database/database.service';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { ABSOLUTE_PATHS_BACKEND } from '../../..';
 
 @SkipThrottle()
 @Controller('secure_files')
 export class DownloadSecureFilesController {
-  constructor(private readonly databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: InternalDatabaseService) {}
 
   @Get(':id')
   async getFile(

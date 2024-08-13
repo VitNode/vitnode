@@ -5,13 +5,13 @@ import { Injectable } from '@nestjs/common';
 import { FilesAdminPluginsArgs } from './dto/files.args';
 import { FilesAdminPluginsObj } from './dto/files.obj';
 
-import { DatabaseService } from '@/utils/database/database.service';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { NotFoundError } from '@/errors';
 import { ABSOLUTE_PATHS_BACKEND } from '../../../..';
 
 @Injectable()
 export class FilesAdminPluginsService {
-  constructor(private readonly databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: InternalDatabaseService) {}
 
   protected async checkNumberOfFiles({
     paths,

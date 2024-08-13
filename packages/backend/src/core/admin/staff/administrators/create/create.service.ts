@@ -4,12 +4,12 @@ import { ShowAdminStaffAdministrators } from '../show/dto/show.obj';
 import { CreateAdminStaffAdministratorsArgs } from './dto/create.args';
 
 import { CustomError, NotFoundError } from '@/errors';
-import { DatabaseService } from '@/utils/database/database.service';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { core_admin_permissions } from '@/database/schema/admins';
 
 @Injectable()
 export class CreateAdminStaffAdministratorsService {
-  constructor(private readonly databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: InternalDatabaseService) {}
 
   async create({
     group_id,

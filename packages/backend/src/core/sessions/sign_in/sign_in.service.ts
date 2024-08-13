@@ -8,7 +8,7 @@ import { DeviceSignInCoreSessionsService } from './device.service';
 import { verifyPassword } from '../password';
 
 import { GqlContext } from '../../../utils';
-import { DatabaseService } from '@/utils/database/database.service';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { AccessDeniedError, CustomError } from '../../../errors';
 import { core_admin_sessions } from '../../../database/schema/admins';
 import { core_sessions } from '../../../database/schema/sessions';
@@ -24,7 +24,7 @@ interface CreateSessionArgs extends GqlContext {
 @Injectable()
 export class SignInCoreSessionsService {
   constructor(
-    private readonly databaseService: DatabaseService,
+    private readonly databaseService: InternalDatabaseService,
     private readonly jwtService: JwtService,
     private readonly configService: ConfigService,
     private readonly deviceService: DeviceSignInCoreSessionsService,

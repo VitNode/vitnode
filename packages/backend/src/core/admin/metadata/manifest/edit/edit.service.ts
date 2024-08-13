@@ -8,14 +8,14 @@ import { EditAdminManifestMetadataObj } from './dto/edit.args';
 import { ShowAdminManifestMetadataObj } from '../show/dto/show.obj';
 import { getManifest } from '../functions';
 
-import { DatabaseService } from '@/utils/database/database.service';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { ABSOLUTE_PATHS_BACKEND } from '@/index';
 import { core_languages } from '@/database/schema/languages';
 
 @Injectable()
 export class EditAdminManifestMetadataService {
   constructor(
-    private readonly databaseService: DatabaseService,
+    private readonly databaseService: InternalDatabaseService,
     private readonly configService: ConfigService,
   ) {}
 

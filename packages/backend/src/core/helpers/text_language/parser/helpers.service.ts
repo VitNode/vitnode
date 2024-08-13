@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
 
-import { DatabaseService } from '@/utils/database/database.service';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { core_files_using } from '@/database/schema/files';
 interface TextLanguageJSONContentType {
   type: string;
@@ -19,7 +19,7 @@ export class HelpersParserTextLanguageCoreHelpersService {
     fileIds: [],
   };
 
-  constructor(protected databaseService: DatabaseService) {}
+  constructor(protected databaseService: InternalDatabaseService) {}
 
   protected async parseFiles({
     fileIds,

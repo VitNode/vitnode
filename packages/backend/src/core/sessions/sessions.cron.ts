@@ -5,12 +5,12 @@ import { ConfigService } from '@nestjs/config';
 
 import { core_sessions } from '../../database/schema/sessions';
 import { core_admin_sessions } from '../../database/schema/admins';
-import { DatabaseService } from '@/utils';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 
 @Injectable()
 export class CoreSessionsCron {
   constructor(
-    private readonly databaseService: DatabaseService,
+    private readonly databaseService: InternalDatabaseService,
     private readonly configService: ConfigService,
   ) {}
 

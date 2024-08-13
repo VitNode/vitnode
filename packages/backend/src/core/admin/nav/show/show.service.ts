@@ -5,7 +5,7 @@ import { Injectable } from '@nestjs/common';
 import { ShowAdminNavObj } from './dto/show.obj';
 
 import { ABSOLUTE_PATHS_BACKEND, ConfigPlugin } from '@/index';
-import { DatabaseService } from '@/utils';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 
 @Injectable()
 export class ShowAdminNavService {
@@ -134,7 +134,7 @@ export class ShowAdminNavService {
     },
   ];
 
-  constructor(private readonly databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: InternalDatabaseService) {}
 
   async show(): Promise<ShowAdminNavObj[]> {
     const adminNav = await this.databaseService.db.query.core_plugins.findMany({

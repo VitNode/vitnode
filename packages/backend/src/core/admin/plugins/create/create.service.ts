@@ -8,7 +8,7 @@ import { ShowAdminPlugins } from '../show/dto/show.obj';
 import { CreateFilesAdminPluginsService } from '../helpers/files/create/create-files.service';
 import { ChangeFilesAdminPluginsService } from '../helpers/files/change/change.service';
 
-import { DatabaseService } from '@/utils/database/database.service';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { CustomError } from '@/errors';
 import { ABSOLUTE_PATHS_BACKEND } from '../../../..';
 import { core_plugins } from '@/database/schema/plugins';
@@ -16,7 +16,7 @@ import { core_plugins } from '@/database/schema/plugins';
 @Injectable()
 export class CreateAdminPluginsService {
   constructor(
-    private readonly databaseService: DatabaseService,
+    private readonly databaseService: InternalDatabaseService,
     private readonly createFilesService: CreateFilesAdminPluginsService,
     private readonly changeFilesService: ChangeFilesAdminPluginsService,
   ) {}

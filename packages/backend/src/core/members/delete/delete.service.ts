@@ -4,12 +4,12 @@ import { eq } from 'drizzle-orm';
 import { DeleteCoreMembersArgs } from './dto/delete.args';
 
 import { core_users } from '../../../database/schema/users';
-import { DatabaseService } from '@/utils/database/database.service';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { AccessDeniedError, NotFoundError } from '../../../errors';
 
 @Injectable()
 export class DeleteCoreMembersService {
-  constructor(private readonly databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: InternalDatabaseService) {}
 
   async delete({ id }: DeleteCoreMembersArgs): Promise<string> {
     const user = await this.databaseService.db.query.core_users.findFirst({

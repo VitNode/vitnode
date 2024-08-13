@@ -268,29 +268,6 @@ export default {
 
 <Callout title="Remember" type="warn">
   Export all schemas to `index.ts` file. If you forget to export some schema, it
-  will not be removed from database when you remove plugin.
+  will not be removed from database when you remove plugin or types will not be
+  work.
 </Callout>
-
-### Generate tables
-
-To generate `migrations` and apply it to your database, you need to run `vitnode-backend db` command. We're created [CLI](/docs/dev/cli) for you.
-
-import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
-
-<Tabs id='package-manager' persist items={['pnpm', 'npm']}>
-
-```bash tab="pnpm"
-pnpm db
-```
-
-```bash tab="npm"
-npm run db
-```
-
-</Tabs>
-
-## Migration
-
-You don't need to worry about migration. VitNode will handle it for you.
-
-When you change your schema, VitNode will automatically create schema for migration when create `new version` or `rebuild` existing version of your plugin.

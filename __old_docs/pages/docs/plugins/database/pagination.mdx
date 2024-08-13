@@ -1,4 +1,4 @@
-import { Callout } from "nextra/components";
+import { Callout } from 'nextra/components';
 
 # Pagination
 
@@ -14,7 +14,7 @@ Here is an example of how to use the pagination system based on `blog_categories
 
 We will create a `DTO` to create arguments and return values for the query.
 
-import { Steps } from "nextra/components";
+import { Steps } from 'nextra/components';
 
 <Steps>
 
@@ -25,9 +25,9 @@ File: `show/dto/show.args.ts`
 Arguments used as container for fields to create query in GraphQL schema.
 
 ```ts
-import { ArgsType } from "@nestjs/graphql";
+import { ArgsType } from '@nestjs/graphql';
 
-import { PaginationArgs } from "@/types/database/pagination.type";
+import { PaginationArgs } from '@/types/database/pagination.type';
 
 @ArgsType()
 export class ShowBlogCategoriesArgs extends PaginationArgs {}
@@ -38,9 +38,9 @@ export class ShowBlogCategoriesArgs extends PaginationArgs {}
 If you want to use `InputType` you can use `PaginationInput` from `pagination.type`.
 
 ```ts
-import { ArgsType } from "@nestjs/graphql";
+import { ArgsType } from '@nestjs/graphql';
 
-import { PaginationInput } from "@/types/database/pagination.type";
+import { PaginationInput } from '@/types/database/pagination.type';
 
 @InputType()
 export class ShowBlogCategoriesArgs extends PaginationInput {}
@@ -53,10 +53,10 @@ File: `show/dto/show.obj.ts`
 Object used as container for fields to create return values query in GraphQL schema.
 
 ```ts
-import { Field, Int, ObjectType } from "@nestjs/graphql";
+import { Field, Int, ObjectType } from '@nestjs/graphql';
 
-import { PageInfo } from "@/types/database/pagination.type";
-import { TextLanguage } from "@/types/database/text-language.type";
+import { PageInfo } from '@/types/database/pagination.type';
+import { TextLanguage } from '@/types/database/text-language.type';
 
 @ObjectType()
 export class ShowBlogCategories {
@@ -94,21 +94,21 @@ File: `show/show.service.ts`
 Inside service file we will create a `show` method that will return a `ShowBlogCategoriesObj` object.
 
 ```ts
-import { Injectable } from "@nestjs/common";
+import { Injectable } from '@nestjs/common';
 
-import { ShowBlogCategoriesArgs } from "./dto/show.args";
-import { ShowBlogCategoriesObj } from "./dto/show.obj";
+import { ShowBlogCategoriesArgs } from './dto/show.args';
+import { ShowBlogCategoriesObj } from './dto/show.obj';
 
-import { DatabaseService } from "@/plugins/database/database.service";
+import { DatabaseService } from '@/plugins/database/database.service';
 
 @Injectable()
 export class ShowBlogCategoriesService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(private databaseServices: DatabaseService) {}
 
   async show({
     cursor,
     first,
-    last
+    last,
   }: ShowBlogCategoriesArgs): Promise<ShowBlogCategoriesObj> {}
 }
 ```
@@ -118,24 +118,24 @@ export class ShowBlogCategoriesService {
 We will use `inputPaginationCursor()` to create initial values for pagination.
 
 ```ts {7-9, 20-35}
-import { Injectable } from "@nestjs/common";
+import { Injectable } from '@nestjs/common';
 
-import { ShowBlogCategoriesArgs } from "./dto/show.args";
-import { ShowBlogCategoriesObj } from "./dto/show.obj";
+import { ShowBlogCategoriesArgs } from './dto/show.args';
+import { ShowBlogCategoriesObj } from './dto/show.obj';
 
-import { DatabaseService } from "@/plugins/database/database.service";
-import { inputPaginationCursor } from "@/functions/database/pagination";
-import { blog_categories } from "../../admin/database/schema/categories";
-import { SortDirectionEnum } from "@/types/database/sortDirection.type";
+import { DatabaseService } from '@/plugins/database/database.service';
+import { inputPaginationCursor } from '@/functions/database/pagination';
+import { blog_categories } from '../../admin/database/schema/categories';
+import { SortDirectionEnum } from '@/types/database/sortDirection.type';
 
 @Injectable()
 export class ShowBlogCategoriesService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(private databaseServices: DatabaseService) {}
 
   async show({
     cursor,
     first,
-    last
+    last,
   }: ShowBlogCategoriesArgs): Promise<ShowBlogCategoriesObj> {
     const pagination = await inputPaginationCursor({
       cursor,
@@ -145,13 +145,13 @@ export class ShowBlogCategoriesService {
       last,
       primaryCursor: {
         direction: SortDirectionEnum.asc,
-        column: "id",
-        schema: blog_categories.id
+        column: 'id',
+        schema: blog_categories.id,
       },
       defaultSortBy: {
         direction: SortDirectionEnum.asc,
-        column: "position"
-      }
+        column: 'position',
+      },
     });
   }
 }
@@ -164,12 +164,12 @@ We will use `findMany()` method to get the data from the database with `with` ar
 ```ts {27-29}
 @Injectable()
 export class ShowBlogCategoriesService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(private databaseServices: DatabaseService) {}
 
   async show({
     cursor,
     first,
-    last
+    last,
   }: ShowBlogCategoriesArgs): Promise<ShowBlogCategoriesObj> {
     const pagination = await inputPaginationCursor({
       cursor,
@@ -179,17 +179,17 @@ export class ShowBlogCategoriesService {
       last,
       primaryCursor: {
         direction: SortDirectionEnum.asc,
-        column: "id",
-        schema: blog_categories.id
+        column: 'id',
+        schema: blog_categories.id,
       },
       defaultSortBy: {
         direction: SortDirectionEnum.asc,
-        column: "position"
-      }
+        column: 'position',
+      },
     });
 
     const edges = await this.databaseService.db.query.blog_categories.findMany({
-      ...pagination
+      ...pagination,
     });
   }
 }
@@ -200,25 +200,25 @@ export class ShowBlogCategoriesService {
 If you want to use `where` argument you can pass it to the `findMany()` method using `and()` method from `drizzle-orm`.
 
 ```ts {2, 38}
-import { Injectable } from "@nestjs/common";
-import { and, lte } from "drizzle-orm";
+import { Injectable } from '@nestjs/common';
+import { and, lte } from 'drizzle-orm';
 
-import { ShowBlogCategoriesArgs } from "./dto/show.args";
-import { ShowBlogCategoriesObj } from "./dto/show.obj";
+import { ShowBlogCategoriesArgs } from './dto/show.args';
+import { ShowBlogCategoriesObj } from './dto/show.obj';
 
-import { DatabaseService } from "@/plugins/database/database.service";
-import { inputPaginationCursor } from "@/functions/database/pagination";
-import { blog_categories } from "../../admin/database/schema/categories";
-import { SortDirectionEnum } from "@/types/database/sortDirection.type";
+import { DatabaseService } from '@/plugins/database/database.service';
+import { inputPaginationCursor } from '@/functions/database/pagination';
+import { blog_categories } from '../../admin/database/schema/categories';
+import { SortDirectionEnum } from '@/types/database/sortDirection.type';
 
 @Injectable()
 export class ShowBlogCategoriesService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(private databaseServices: DatabaseService) {}
 
   async show({
     cursor,
     first,
-    last
+    last,
   }: ShowBlogCategoriesArgs): Promise<ShowBlogCategoriesObj> {
     const pagination = await inputPaginationCursor({
       cursor,
@@ -228,20 +228,20 @@ export class ShowBlogCategoriesService {
       last,
       primaryCursor: {
         direction: SortDirectionEnum.asc,
-        column: "id",
-        schema: blog_categories.id
+        column: 'id',
+        schema: blog_categories.id,
       },
       defaultSortBy: {
         direction: SortDirectionEnum.asc,
-        column: "position"
-      }
+        column: 'position',
+      },
     });
 
     const where = lte(blog_categories.created, new Date());
 
     const edges = await this.databaseService.db.query.blog_categories.findMany({
       ...pagination,
-      where: and(pagination.where, where)
+      where: and(pagination.where, where),
     });
   }
 }
@@ -252,28 +252,28 @@ export class ShowBlogCategoriesService {
 We will use `outputPagination()` to create return values for the query. Remember to create a query `totalCount` to get the total count of the query.
 
 ```ts {2, 10, 45-47, 49}
-import { Injectable } from "@nestjs/common";
-import { count } from "drizzle-orm";
+import { Injectable } from '@nestjs/common';
+import { count } from 'drizzle-orm';
 
-import { ShowBlogCategoriesArgs } from "./dto/show.args";
-import { ShowBlogCategoriesObj } from "./dto/show.obj";
+import { ShowBlogCategoriesArgs } from './dto/show.args';
+import { ShowBlogCategoriesObj } from './dto/show.obj';
 
-import { DatabaseService } from "@/plugins/database/database.service";
+import { DatabaseService } from '@/plugins/database/database.service';
 import {
   inputPaginationCursor,
-  outputPagination
-} from "@/functions/database/pagination";
-import { blog_categories } from "../../admin/database/schema/categories";
-import { SortDirectionEnum } from "@/types/database/sortDirection.type";
+  outputPagination,
+} from '@/functions/database/pagination';
+import { blog_categories } from '../../admin/database/schema/categories';
+import { SortDirectionEnum } from '@/types/database/sortDirection.type';
 
 @Injectable()
 export class ShowBlogCategoriesService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(private databaseServices: DatabaseService) {}
 
   async show({
     cursor,
     first,
-    last
+    last,
   }: ShowBlogCategoriesArgs): Promise<ShowBlogCategoriesObj> {
     const pagination = await inputPaginationCursor({
       cursor,
@@ -283,17 +283,17 @@ export class ShowBlogCategoriesService {
       last,
       primaryCursor: {
         direction: SortDirectionEnum.asc,
-        column: "id",
-        schema: blog_categories.id
+        column: 'id',
+        schema: blog_categories.id,
       },
       defaultSortBy: {
         direction: SortDirectionEnum.asc,
-        column: "position"
-      }
+        column: 'position',
+      },
     });
 
     const edges = await this.databaseService.db.query.blog_categories.findMany({
-      ...pagination
+      ...pagination,
     });
 
     const totalCount = await this.databaseService.db
@@ -323,12 +323,12 @@ return outputPagination({
   edges: edges.map(edge => ({
     ...edge,
     name: edge.title,
-    description: edge.description
+    description: edge.description,
   })),
   totalCount,
   first,
   cursor,
-  last
+  last,
 });
 ```
 

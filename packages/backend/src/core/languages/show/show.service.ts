@@ -4,14 +4,14 @@ import { and, count, ilike } from 'drizzle-orm';
 import { ShowCoreLanguagesArgs } from './dto/show.args';
 import { ShowCoreLanguagesObj } from './dto/show.obj';
 
-import { DatabaseService } from '@/utils/database/database.service';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { inputPaginationCursor, outputPagination } from '../../../functions';
 import { core_languages } from '../../../database/schema/languages';
 import { SortDirectionEnum } from '../../../utils';
 
 @Injectable()
 export class ShowCoreLanguageService {
-  constructor(private readonly databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: InternalDatabaseService) {}
 
   async show({
     cursor,

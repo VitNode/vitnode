@@ -4,7 +4,7 @@ import { count } from 'drizzle-orm';
 import { ShowAdminStaffModeratorsArgs } from './dto/show.args';
 import { ShowAdminStaffModeratorsObj } from './dto/show.obj';
 
-import { DatabaseService } from '@/utils/database/database.service';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { inputPaginationCursor, outputPagination } from '@/functions';
 import { core_moderators_permissions } from '@/database/schema/moderators';
 import { SortDirectionEnum } from '@/utils';
@@ -12,7 +12,7 @@ import { NotFoundError } from '@/errors';
 
 @Injectable()
 export class ShowAdminStaffModeratorsService {
-  constructor(private readonly databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: InternalDatabaseService) {}
 
   async show({
     cursor,

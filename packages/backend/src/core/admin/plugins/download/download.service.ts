@@ -7,7 +7,7 @@ import { eq } from 'drizzle-orm';
 
 import { DownloadAdminPluginsArgs } from './dto/download.args';
 
-import { DatabaseService } from '@/utils/database/database.service';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { CustomError, NotFoundError } from '@/errors';
 import {
   currentUnixDate,
@@ -23,7 +23,7 @@ import { generateRandomString } from '@/functions/generate-random-string';
 export class DownloadAdminPluginsService {
   protected tempPath = join(ABSOLUTE_PATHS_BACKEND.uploads.temp, 'plugins');
 
-  constructor(private readonly databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: InternalDatabaseService) {}
 
   protected createFolders(path: string): void {
     if (!fs.existsSync(path)) {

@@ -6,7 +6,7 @@ import {
   LayoutAdminInstallObj,
 } from './dto/layout.obj';
 
-import { DatabaseService } from '@/utils/database/database.service';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { core_users } from '@/database/schema/users';
 import { core_sessions } from '@/database/schema/sessions';
 import { core_admin_sessions } from '@/database/schema/admins';
@@ -15,7 +15,7 @@ import { core_languages } from '@/database/schema/languages';
 
 @Injectable()
 export class LayoutAdminInstallService {
-  constructor(private readonly databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: InternalDatabaseService) {}
 
   async layout(): Promise<LayoutAdminInstallObj> {
     const users = await this.databaseService.db

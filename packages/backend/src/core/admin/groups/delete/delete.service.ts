@@ -3,14 +3,14 @@ import { eq } from 'drizzle-orm';
 
 import { DeleteAdminGroupsArgs } from './dto/delete.args';
 
-import { DatabaseService } from '@/utils/database/database.service';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { NotFoundError } from '@/errors';
 import { core_users } from '@/database/schema/users';
 import { core_groups } from '@/database/schema/groups';
 
 @Injectable()
 export class DeleteAdminGroupsService {
-  constructor(private readonly databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: InternalDatabaseService) {}
 
   async delete({ id }: DeleteAdminGroupsArgs): Promise<string> {
     const group = await this.databaseService.db.query.core_groups.findFirst({
