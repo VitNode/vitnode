@@ -10,6 +10,8 @@
     "lint",
     "plugins-nav-admin",
     "plugins-permissions-admin",
+    "--- Database ---",
+    "database",
     "--- GraphQL ---",
     "graphql",
     "modules",

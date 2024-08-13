@@ -16,14 +16,7 @@ import { createClientDatabase, DATABASE_ENVS } from '@/utils/database/client';
 
 const initConsole = '\x1b[34m[VitNode]\x1b[0m \x1b[33m[Backend]\x1b[0m';
 
-const init = async () => {
-  let skipDatabase = false;
-  if (process.argv[3] === '--skip-database') {
-    const skipDatabaseMessage = `${initConsole} '--skip-database' flag detected. Skipping database setup...`;
-    console.log(skipDatabaseMessage);
-    skipDatabase = true;
-  }
-
+const getPluginsPath = () => {
   const pluginsPath = join(process.cwd(), 'src', 'plugins');
   if (!fs.existsSync(pluginsPath)) {
     console.log(
@@ -32,6 +25,18 @@ const init = async () => {
     process.exit(1);
   }
 
+  return pluginsPath;
+};
+
+const init = async () => {
+  let skipDatabase = false;
+  if (process.argv[3] === '--skip-database') {
+    const skipDatabaseMessage = `${initConsole} '--skip-database' flag detected. Skipping database setup...`;
+    console.log(skipDatabaseMessage);
+    skipDatabase = true;
+  }
+
+  const pluginsPath = getPluginsPath();
   console.log(
     `${initConsole} [1/${skipDatabase ? 2 : 6}] Setup the project. Generating the config file...`,
   );
@@ -71,6 +76,30 @@ const init = async () => {
   process.exit(0);
 };
 
+const db = async () => {
+  const pluginsPath = getPluginsPath();
+  console.log(`${initConsole} [1/2] Generating database migrations...`);
+  await generateDatabaseMigrations();
+
+  const database = createClientDatabase({
+    config: DATABASE_ENVS,
+    schemaDatabase: coreSchemaDatabase,
+  });
+
+  console.log(
+    `${initConsole} [2/2] Create tables in database using migrations...`,
+  );
+  await createTablesDatabaseUsingMigrations({ pluginsPath, db: database.db });
+
+  await database.poolDB.end();
+  console.log(`${initConsole} ✅ Project setup complete.`);
+  process.exit(0);
+};
+
 if (process.argv[2] === 'init') {
   init();
+}
+
+if (process.argv[2] === 'db') {
+  db();
 }

@@ -2,3 +2,33 @@
 title: Lint
 description: Lint your code with ESLint and Prettier.
 ---
+
+## Checking Code
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+
+<Tabs id='package-manager' persist items={['pnpm', 'npm']}>
+
+```bash tab="pnpm"
+pnpm lint
+```
+
+```bash tab="npm"
+npm run lint
+```
+
+</Tabs>
+
+## Fixing Code
+
+<Tabs id='package-manager' persist items={['pnpm', 'npm']}>
+
+```bash tab="pnpm"
+pnpm lint:fix
+```
+
+```bash tab="npm"
+npm run lint:fix
+```
+
+</Tabs>
