@@ -16,7 +16,7 @@ import { CoreModule } from './core/core.module';
 import { GlobalProvidersModule } from './providers/providers.module';
 import { GqlThrottlerGuard } from './utils/guards/gql-throttler.guard';
 import {
-  DatabaseModule,
+  InternalDatabaseModule,
   DatabaseModuleArgs,
 } from './utils/database/database.module';
 
@@ -193,7 +193,7 @@ export class VitNodeCoreModule {
           rootPath: ABSOLUTE_PATHS_BACKEND.uploads.public,
           serveRoot: '/public/',
         }),
-        DatabaseModule.register(database),
+        InternalDatabaseModule.register(database),
         GlobalProvidersModule,
         CoreModule,
       ],

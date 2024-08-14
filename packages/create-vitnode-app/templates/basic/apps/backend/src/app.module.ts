@@ -5,6 +5,7 @@ import { VitNodeCoreModule } from 'vitnode-backend';
 
 import { PluginsModule } from './plugins/plugins.module';
 import { DATABASE_ENVS, schemaDatabase } from './database';
+import { DatabaseModule } from './database/database.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { DATABASE_ENVS, schemaDatabase } from './database';
         schemaDatabase,
       },
     }),
+    DatabaseModule,
     PluginsModule,
   ],
 })

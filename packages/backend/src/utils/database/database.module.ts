@@ -16,10 +16,10 @@ export interface DatabaseModuleArgs {
 
 @Global()
 @Module({})
-export class DatabaseModule {
+export class InternalDatabaseModule {
   static register(options: DatabaseModuleArgs): DynamicModule {
     return {
-      module: DatabaseModule,
+      module: InternalDatabaseModule,
       providers: [
         {
           provide: 'DATABASE_MODULE_OPTIONS',
