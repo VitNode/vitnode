@@ -61,13 +61,8 @@ export const updatePlugins = async ({
               version_code: config.version_code,
             })
             .where(eq(core_plugins.id, plugin.id));
-
-          return;
-        }
-
-        await tx
-          .insert(core_plugins)
-          .values([
+        } else {
+          await tx.insert(core_plugins).values([
             {
               name: config.name,
               description: config.description,
@@ -80,11 +75,23 @@ export const updatePlugins = async ({
               version_code: config.version_code,
               default: isDefaultIndex === index && !defaultPlugin,
             },
-          ])
-          .returning();
+          ]);
+        }
+
+        await tx.execute(sql`commit`);
       }),
     );
 
-    await tx.execute(sql`commit`);
+    // Remove plugins that are not in the plugins folder
+    const pluginsToDelete = pluginsFromDatabase.filter(
+      plugin => !plugins.includes(plugin.code),
+    );
+
+    await Promise.all(
+      pluginsToDelete.map(async plugin => {
+        await tx.delete(core_plugins).where(eq(core_plugins.id, plugin.id));
+        await tx.execute(sql`commit`);
+      }),
+    );
   });
 };
