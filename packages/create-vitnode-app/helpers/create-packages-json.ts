@@ -77,7 +77,7 @@ export const createPackagesJSON = ({
     private: true,
     scripts: {
       'config:init': 'vitnode-frontend init',
-      dev: 'rm -rf .next/cache && vitnode-frontend init && next dev --turbo',
+      dev: 'vitnode-frontend init && next dev --turbo',
       build: 'next build',
       start: 'next start',
       lint: 'eslint .',

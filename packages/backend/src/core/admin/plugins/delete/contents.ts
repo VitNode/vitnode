@@ -43,7 +43,21 @@ export const removeLangFromTypes = ({
   code: string;
   content: string;
 }) => {
-  return content
-    .replace(`\n  typeof import('@/plugins/${code}/langs/en.json') &`, '')
-    .replace(`\n  typeof import("@/plugins/${code}/langs/en.json") &`, '');
+  // Remove the import statement for the module
+  let updatedCode = content.replace(
+    `\nimport type ${code} from '@/plugins/${code}/langs/en.json';`,
+    '',
+  );
+
+  // Remove the module from the type definition
+  const typeRegex = new RegExp(`&\\s+typeof\\s+${code}`, 'g');
+  updatedCode = updatedCode.replace(typeRegex, '');
+
+  // Ensure there's no space before the comment after last module
+  updatedCode = updatedCode.replace(
+    /\s*;\s*\/\/\s*! === MODULE ===/g,
+    '; // ! === MODULE ===',
+  );
+
+  return updatedCode;
 };
