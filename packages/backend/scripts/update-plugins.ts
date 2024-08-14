@@ -3,7 +3,7 @@ import * as fs from 'fs';
 import { join } from 'path';
 
 import { NodePgDatabase } from 'drizzle-orm/node-postgres';
-import { eq } from 'drizzle-orm';
+import { eq, sql } from 'drizzle-orm';
 
 import { ConfigPlugin } from '../src/providers/plugins.type';
 import coreSchemaDatabase from '../src/database';
@@ -25,6 +25,13 @@ export const updatePlugins = async ({
     .filter(plugin => !['core', 'plugins.module.ts'].includes(plugin));
 
   await db.transaction(async tx => {
+    const pluginsFromDatabase = await tx.query.core_plugins.findMany({
+      columns: {
+        code: true,
+        id: true,
+      },
+    });
+
     await Promise.all(
       plugins.map(async (code, index) => {
         const pluginPath = join(pluginsPath, code);
@@ -36,11 +43,9 @@ export const updatePlugins = async ({
           isDefaultIndex = index;
         }
 
-        const plugin = await tx.query.core_plugins.findFirst({
-          where: (table, { eq }) => eq(table.code, code),
-        });
-
-        console.log(`Updating plugin ${config.name}`);
+        const plugin = pluginsFromDatabase.find(
+          plugin => plugin.code === config.code,
+        );
 
         if (plugin) {
           await tx
@@ -60,23 +65,26 @@ export const updatePlugins = async ({
           return;
         }
 
-        console.log(`Inserting plugin ${config.name}`);
-
-        await tx.insert(core_plugins).values([
-          {
-            name: config.name,
-            description: config.description,
-            code: config.code,
-            support_url: config.support_url,
-            author: config.author,
-            author_url: config.author_url,
-            allow_default: config.allow_default,
-            version: config.version,
-            version_code: config.version_code,
-            default: isDefaultIndex === index && !defaultPlugin,
-          },
-        ]);
+        await tx
+          .insert(core_plugins)
+          .values([
+            {
+              name: config.name,
+              description: config.description,
+              code: config.code,
+              support_url: config.support_url,
+              author: config.author,
+              author_url: config.author_url,
+              allow_default: config.allow_default,
+              version: config.version,
+              version_code: config.version_code,
+              default: isDefaultIndex === index && !defaultPlugin,
+            },
+          ])
+          .returning();
       }),
     );
+
+    await tx.execute(sql`commit`);
   });
 };
