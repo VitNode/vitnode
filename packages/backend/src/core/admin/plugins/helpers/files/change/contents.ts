@@ -51,8 +51,10 @@ export const changeLangTypes = ({
   code: string;
   content: string;
 }) => {
-  return content.replace(
-    '// ! === IMPORT ===',
-    `typeof import('@/plugins/${code}/langs/en.json') &\n  // ! === IMPORT ===`,
-  );
+  return content
+    .replace(
+      '// ! === IMPORT ===',
+      `import type ${code} from '@/plugins/${code}/langs/en.json';\n// ! === IMPORT ===`,
+    )
+    .replace('; // ! === MODULE ===', ` & typeof ${code}; // ! === MODULE ===`);
 };
