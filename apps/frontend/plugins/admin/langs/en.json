@@ -51,6 +51,16 @@
       "submit": "Read How To Rebuild"
     },
     "core": {
+      "diagnostic": {
+        "title": "Diagnostic Tools",
+        "desc": "Use these tools to diagnose and fix common issues with your website.",
+        "clear_cache": {
+          "title": "Clear Cache",
+          "desc": "This action clean up the cache of your website. This can help fix issues with your website but may slow down your website temporarily.",
+          "confirm": "Yes, clear cache",
+          "success": "Cache has been cleared."
+        }
+      },
       "email": {
         "hello": "Hello",
         "footer": "You're receiving this email because your account activity triggered this email. Please do not reply to this email. If you have any questions, please contact us at:"

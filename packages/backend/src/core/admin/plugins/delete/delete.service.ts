@@ -9,7 +9,6 @@ import { ChangeFilesAdminPluginsService } from '../helpers/files/change/change.s
 
 import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { CustomError, NotFoundError } from '@/errors';
-import { core_migrations } from '@/database/schema/files';
 import { ABSOLUTE_PATHS_BACKEND } from '@/index';
 import { core_plugins } from '@/database/schema/plugins';
 import { setRebuildRequired } from '@/functions/rebuild-required';
@@ -67,10 +66,8 @@ export class DeleteAdminPluginsService {
         message: `Error deleting tables for plugin ${code}`,
       });
     }
-    // Delete migrations
-    await this.databaseService.db
-      .delete(core_migrations)
-      .where(eq(core_migrations.plugin, code));
+    // Generate migrations
+    // TODO: Generate migrations
 
     // Change files when delete
     this.changeFilesService.changeFilesWhenDelete({ code });

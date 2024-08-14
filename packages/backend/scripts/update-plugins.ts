@@ -40,6 +40,8 @@ export const updatePlugins = async ({
           where: (table, { eq }) => eq(table.code, code),
         });
 
+        console.log(`Updating plugin ${config.name}`);
+
         if (plugin) {
           await tx
             .update(core_plugins)
@@ -57,6 +59,9 @@ export const updatePlugins = async ({
 
           return;
         }
+
+        console.log(`Inserting plugin ${config.name}`);
+
         await tx.insert(core_plugins).values([
           {
             name: config.name,

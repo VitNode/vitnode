@@ -119,7 +119,7 @@ import {
 } from 'vitnode-frontend/components/ui/dialog';
 import { Loader } from 'vitnode-frontend/components/ui/loader';
 
-const Content = React.lazy(() =>
+const Content = React.lazy(async () =>
   import('./content').then(module => ({
     default: module.ContentTest,
   })),
