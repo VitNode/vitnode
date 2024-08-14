@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
 
-import { DatabaseService } from '@/utils/database/database.service';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { User } from '@/decorators';
 import { core_files_avatars } from '@/database/schema/users';
 import { FilesService } from '@/core/files/helpers/upload/upload.service';
@@ -10,7 +10,7 @@ import { FilesService } from '@/core/files/helpers/upload/upload.service';
 export class DeleteAvatarCoreMembersService {
   constructor(
     private readonly files: FilesService,
-    private readonly databaseService: DatabaseService,
+    private readonly databaseService: InternalDatabaseService,
   ) {}
 
   async deleteAvatar({ avatar }: User): Promise<string> {

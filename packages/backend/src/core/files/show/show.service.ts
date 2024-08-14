@@ -4,7 +4,7 @@ import { and, count, eq, ilike, or } from 'drizzle-orm';
 import { ShowCoreFilesArgs } from './dto/show.args';
 import { ShowCoreFilesObj } from './dto/show.obj';
 
-import { DatabaseService } from '@/utils/database/database.service';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { inputPaginationCursor, outputPagination } from '../../../functions';
 import { core_files, core_files_using } from '../../../database/schema/files';
 import { User } from '../../../decorators';
@@ -12,7 +12,7 @@ import { SortDirectionEnum } from '../../../utils';
 
 @Injectable()
 export class ShowCoreFilesService {
-  constructor(private readonly databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: InternalDatabaseService) {}
 
   async show(
     { id: user_id }: User,

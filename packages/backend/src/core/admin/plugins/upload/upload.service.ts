@@ -10,7 +10,7 @@ import { UploadAdminPluginsArgs } from './dto/upload.args';
 import { ChangeFilesAdminPluginsService } from '../helpers/files/change/change.service';
 
 import { core_plugins } from '@/database/schema/plugins';
-import { DatabaseService } from '@/utils/database/database.service';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import {
   ABSOLUTE_PATHS_BACKEND,
   ConfigPlugin,
@@ -30,7 +30,7 @@ export class UploadAdminPluginsService {
   );
 
   constructor(
-    private readonly databaseService: DatabaseService,
+    private readonly databaseService: InternalDatabaseService,
     private readonly changeFilesService: ChangeFilesAdminPluginsService,
   ) {}
 

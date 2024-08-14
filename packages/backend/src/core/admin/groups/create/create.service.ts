@@ -3,14 +3,14 @@ import { Injectable } from '@nestjs/common';
 import { ShowAdminGroups } from '../show/dto/show.obj';
 import { CreateAdminGroupsArgs } from './dto/create.args';
 
-import { DatabaseService } from '@/utils/database/database.service';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { ParserTextLanguageCoreHelpersService } from '../../../helpers/text_language/parser/parser.service';
 import { core_groups, core_groups_names } from '@/database/schema/groups';
 
 @Injectable()
 export class CreateAdminGroupsService {
   constructor(
-    private readonly databaseService: DatabaseService,
+    private readonly databaseService: InternalDatabaseService,
     private readonly parserTextLang: ParserTextLanguageCoreHelpersService,
   ) {}
 

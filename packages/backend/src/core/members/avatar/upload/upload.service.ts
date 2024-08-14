@@ -5,7 +5,7 @@ import { UploadAvatarCoreMembersArgs } from './dto/upload.args';
 import { UploadAvatarCoreMembersObj } from './dto/upload.obj';
 
 import { FilesService } from '../../../files/helpers/upload/upload.service';
-import { DatabaseService } from '@/utils/database/database.service';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { User } from '@/decorators';
 import { core_files_avatars } from '@/database/schema/users';
 import { CustomError } from '@/errors';
@@ -14,7 +14,7 @@ import { CustomError } from '@/errors';
 export class UploadAvatarCoreMembersService {
   constructor(
     private readonly files: FilesService,
-    private readonly databaseService: DatabaseService,
+    private readonly databaseService: InternalDatabaseService,
   ) {}
 
   async uploadAvatar(

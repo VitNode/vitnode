@@ -79,28 +79,3 @@ export class BlogCategoriesModule {}
 
 </Step>
 </Steps>
-
-## Arguments
-
-```ts title="backend/plugins/blog/categories/show/show.resolver.ts"
-import { Resolver, Query } from '@nestjs/graphql';
-
-import { ShowBlogCategoriesService } from './show.service';
-import { ShowBlogCategories } from './dto/show.obj';
-import { ShowBlogCategoriesArgs } from './dto/show.args'; // [!code highlight]
-
-@Resolver()
-export class ShowBlogCategoriesResolver {
-  constructor(private readonly service: ShowBlogCategoriesService) {}
-
-  @Query(() => ShowBlogCategoriesObj)
-  async blog_categories__show(
-    @Args() args: ShowBlogCategoriesArgs, // [!code highlight]
-  ): Promise<ShowBlogCategoriesObj> {
-    // [!code word:args]
-    return this.service.show(args);
-  }
-}
-```
-
-Read more about [Arguments](/docs/dev/services#arguments).

@@ -16,14 +16,14 @@ import { UploadCoreFilesObj } from './dto/upload.obj';
 import { HelpersUploadCoreFilesService, acceptMimeTypeImage } from './helpers';
 import { DeleteCoreFilesArgs } from './dto/delete.args';
 
-import { DatabaseService } from '@/utils/database/database.service';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { CustomError, InternalServerError } from '@/errors';
 import { ABSOLUTE_PATHS_BACKEND, removeSpecialCharacters } from '../../../..';
 import { generateRandomString } from '@/functions/generate-random-string';
 
 @Injectable()
 export class FilesService extends HelpersUploadCoreFilesService {
-  constructor(private readonly databaseService: DatabaseService) {
+  constructor(private readonly databaseService: InternalDatabaseService) {
     super();
   }
 

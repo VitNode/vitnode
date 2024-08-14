@@ -4,14 +4,14 @@ import { and, count, eq, ilike, or } from 'drizzle-orm';
 import { ShowAdminFilesArgs } from './dto/show.args';
 import { ShowAdminFilesObj } from './dto/show.obj';
 
-import { DatabaseService } from '@/utils/database/database.service';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { inputPaginationCursor, outputPagination } from '@/functions';
 import { core_files, core_files_using } from '@/database/schema/files';
 import { SortDirectionEnum } from '@/utils';
 
 @Injectable()
 export class ShowAdminFilesService {
-  constructor(private readonly databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: InternalDatabaseService) {}
 
   async show({
     cursor,

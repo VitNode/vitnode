@@ -1,0 +1,136 @@
+---
+title: Data Transfer Object (DTO)
+description: How to create DTO in VitNode
+---
+
+Data Transfer Object is a simple object that carries data between processes. In VitNode, we use DTO to pass arguments and return objects from the service methods.
+
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+## Arguments
+
+<Steps>
+<Step>
+
+You can pass arguments to the service method by creating a DTO (Data Transfer Object) file.
+
+```ts title="backend/plugins/blog/categories/show/dto/show.args.ts"
+import { ArgsType, Field } from '@nestjs/graphql';
+
+@ArgsType()
+export class ShowBlogCategoriesArgs {
+  @Field(() => String)
+  id: string;
+}
+```
+
+<Callout title="Schema GraphQL">
+  NestJS GraphQL Automaticly generates schema from the DTO classes. Make sure to
+  each class has a unique name.
+
+For example `{Action}{Plugin}{Module}Args`.
+
+</Callout>
+
+You can read more about [NestJS GraphQL Class Inheritance](https://docs.nestjs.com/graphql/resolvers#class-inheritance) in the official documentation.
+
+</Step>
+<Step>
+
+### Use in Service
+
+```ts title="backend/plugins/blog/categories/show/show.service.ts"
+import { Injectable } from '@nestjs/common';
+
+import { ShowBlogCategoriesArgs } from './dto/show.args'; // [!code highlight]
+
+@Injectable()
+export class ShowBlogCategoriesService {
+  // [!code word:ShowBlogCategoriesArgs]
+  show({ id }: ShowBlogCategoriesArgs): string {
+    return `Hello World! Your ID is ${id}`;
+  }
+}
+```
+
+</Step>
+<Step>
+
+### Use in Resolver
+
+```ts title="backend/plugins/blog/categories/show/show.resolver.ts"
+import { Resolver, Query } from '@nestjs/graphql';
+
+import { ShowBlogCategoriesService } from './show.service';
+import { ShowBlogCategories } from './dto/show.obj';
+import { ShowBlogCategoriesArgs } from './dto/show.args'; // [!code highlight]
+
+@Resolver()
+export class ShowBlogCategoriesResolver {
+  constructor(private readonly service: ShowBlogCategoriesService) {}
+
+  @Query(() => ShowBlogCategoriesObj)
+  async blog_categories__show(
+    @Args() args: ShowBlogCategoriesArgs, // [!code highlight]
+  ): Promise<ShowBlogCategoriesObj> {
+    // [!code word:args]
+    return this.service.show(args);
+  }
+}
+```
+
+</Step>
+</Steps>
+
+## Return Object
+
+<Steps>
+<Step>
+
+You can return an object from the service method by creating a DTO (Data Transfer Object) file.
+
+```ts title="backend/plugins/blog/categories/show/dto/show.obj.ts"
+import { Field, Int, ObjectType } from '@nestjs/graphql';
+
+@ObjectType()
+export class ShowBlogCategoriesObj {
+  @Field(() => Int)
+  id: number;
+
+  @Field(() => String)
+  name: string;
+}
+```
+
+<Callout title="Schema GraphQL">
+  NestJS GraphQL Automaticly generates schema from the DTO classes. Make sure to
+  each class has a unique name.
+
+For example `{Action}{Plugin}{Module}Obj`.
+
+</Callout>
+
+</Step>
+<Step>
+
+### Use in Service
+
+```ts title="backend/plugins/blog/categories/show/show.service.ts"
+import { Injectable } from '@nestjs/common';
+
+import { ShowBlogCategories } from './dto/show.obj'; // [!code highlight]
+
+@Injectable()
+export class ShowBlogCategoriesService {
+  // [!code word:ShowBlogCategoriesObj]
+  show(): ShowBlogCategoriesObj {
+    return {
+      id: 1,
+      name: 'Hello World!',
+    };
+  }
+}
+```
+
+</Step>
+</Steps>

@@ -7,7 +7,7 @@ import * as tar from 'tar';
 
 import { DownloadCoreAdminLanguagesArgs } from './dto/download.args';
 
-import { DatabaseService } from '@/utils/database/database.service';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { User } from '@/decorators';
 import { CustomError, NotFoundError } from '@/errors';
 import {
@@ -19,7 +19,7 @@ import { generateRandomString } from '@/functions/generate-random-string';
 
 @Injectable()
 export class DownloadAdminCoreLanguageService {
-  constructor(private readonly databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: InternalDatabaseService) {}
 
   async download(
     { id: userId }: User,

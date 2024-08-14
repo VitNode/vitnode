@@ -16,17 +16,13 @@ import { CoreModule } from './core/core.module';
 import { GlobalProvidersModule } from './providers/providers.module';
 import { GqlThrottlerGuard } from './utils/guards/gql-throttler.guard';
 import {
-  DatabaseModule,
+  InternalDatabaseModule,
   DatabaseModuleArgs,
 } from './utils/database/database.module';
 
-export interface VitNodePaths {
-  envFile: string;
-}
-
 interface Args {
   database: DatabaseModuleArgs;
-  paths: VitNodePaths;
+  pathToEnvFile: string;
 }
 
 const internalPaths = {
@@ -167,14 +163,14 @@ const config = () => {
 
 @Module({})
 export class VitNodeCoreModule {
-  static register({ paths, database }: Args): DynamicModule {
+  static register({ pathToEnvFile, database }: Args): DynamicModule {
     return {
       module: VitNodeCoreModule,
       imports: [
         ConfigModule.forRoot({
           isGlobal: true,
           load: [config],
-          envFilePath: paths.envFile,
+          envFilePath: pathToEnvFile,
         }),
         ThrottlerModule.forRoot([
           {
@@ -197,7 +193,7 @@ export class VitNodeCoreModule {
           rootPath: ABSOLUTE_PATHS_BACKEND.uploads.public,
           serveRoot: '/public/',
         }),
-        DatabaseModule.register(database),
+        InternalDatabaseModule.register(database),
         GlobalProvidersModule,
         CoreModule,
       ],

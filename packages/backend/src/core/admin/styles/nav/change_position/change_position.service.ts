@@ -3,13 +3,13 @@ import { eq } from 'drizzle-orm';
 
 import { ChangePositionAdminNavStylesArgs } from './dto/change_position.args';
 
-import { DatabaseService } from '@/utils/database/database.service';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { NotFoundError } from '@/errors';
 import { core_nav } from '@/database/schema/nav';
 
 @Injectable()
 export class ChangePositionAdminNavStylesService {
-  constructor(private readonly databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: InternalDatabaseService) {}
 
   async changePosition({
     id,

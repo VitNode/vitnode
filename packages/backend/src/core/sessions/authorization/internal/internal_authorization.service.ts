@@ -4,7 +4,7 @@ import { ConfigService } from '@nestjs/config';
 import { eq } from 'drizzle-orm';
 
 import { DeviceSignInCoreSessionsService } from '../../sign_in/device.service';
-import { DatabaseService } from '@/utils/database/database.service';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { User } from '@/decorators';
 import { GqlContext } from '@/utils';
 import { AccessDeniedError, NotFoundError } from '@/errors';
@@ -15,7 +15,7 @@ import { currentUnixDate, getUserAgentData, getUserIp } from '@/functions';
 @Injectable()
 export class InternalAuthorizationCoreSessionsService {
   constructor(
-    private readonly databaseService: DatabaseService,
+    private readonly databaseService: InternalDatabaseService,
     private readonly jwtService: JwtService,
     private readonly configService: ConfigService,
     private readonly deviceService: DeviceSignInCoreSessionsService,

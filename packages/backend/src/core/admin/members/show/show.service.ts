@@ -5,13 +5,13 @@ import { ShowAdminMembersObj } from './dto/show.obj';
 import { ShowAdminMembersArgs } from './dto/show.args';
 
 import { inputPaginationCursor, outputPagination } from '@/functions';
-import { DatabaseService } from '@/utils/database/database.service';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { core_users } from '@/database/schema/users';
 import { SortDirectionEnum } from '@/utils';
 
 @Injectable()
 export class ShowAdminMembersService {
-  constructor(private readonly databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: InternalDatabaseService) {}
 
   async show({
     cursor,

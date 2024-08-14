@@ -4,7 +4,7 @@ import { count, eq } from 'drizzle-orm';
 import { EditAdminGroupsArgs } from './dto/edit.args';
 import { ShowAdminGroups } from '../show/dto/show.obj';
 
-import { DatabaseService } from '@/utils/database/database.service';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { ParserTextLanguageCoreHelpersService } from '../../../helpers/text_language/parser/parser.service';
 import { NotFoundError } from '@/errors';
 import { core_groups, core_groups_names } from '@/database/schema/groups';
@@ -13,7 +13,7 @@ import { core_users } from '@/database/schema/users';
 @Injectable()
 export class EditAdminGroupsService {
   constructor(
-    private readonly databaseService: DatabaseService,
+    private readonly databaseService: InternalDatabaseService,
     private readonly parserTextLang: ParserTextLanguageCoreHelpersService,
   ) {}
 

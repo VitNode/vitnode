@@ -4,12 +4,12 @@ import { lte } from 'drizzle-orm';
 import { ConfigService } from '@nestjs/config';
 
 import { core_sessions_known_devices } from '../../database/schema/sessions';
-import { DatabaseService } from '@/utils';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 
 @Injectable()
 export class CoreMiddlewareCron {
   constructor(
-    private readonly databaseService: DatabaseService,
+    private readonly databaseService: InternalDatabaseService,
     private readonly configService: ConfigService,
   ) {}
 

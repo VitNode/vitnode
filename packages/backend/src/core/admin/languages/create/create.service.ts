@@ -5,7 +5,7 @@ import { Injectable } from '@nestjs/common';
 
 import { CreateCoreAdminLanguagesArgs } from './dto/create.args';
 
-import { DatabaseService } from '@/utils/database/database.service';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import {
   ABSOLUTE_PATHS_BACKEND,
   configPath,
@@ -20,7 +20,7 @@ import { setRebuildRequired } from '@/functions/rebuild-required';
 
 @Injectable()
 export class CreateAdminCoreLanguageService {
-  constructor(private readonly databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: InternalDatabaseService) {}
 
   private async cloneLangInPlugins(pluginCode: string) {
     const plugins = await this.databaseService.db.query.core_plugins.findMany({

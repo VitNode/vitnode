@@ -66,7 +66,7 @@ export class ChangeFilesAdminPluginsService {
         condition: content => !content.includes(`./${code}/${code}.module`),
       },
       {
-        path: join(ABSOLUTE_PATHS_BACKEND.backend, 'database.ts'),
+        path: join(ABSOLUTE_PATHS_BACKEND.backend, 'database', 'config.ts'),
         content: content =>
           changeDatabaseService({
             content,
@@ -100,7 +100,7 @@ export class ChangeFilesAdminPluginsService {
         condition: () => true,
       },
       {
-        path: join(ABSOLUTE_PATHS_BACKEND.backend, 'database.ts'),
+        path: join(ABSOLUTE_PATHS_BACKEND.backend, 'database', 'config.ts'),
         content: content =>
           removeDatabaseFromService({
             content,

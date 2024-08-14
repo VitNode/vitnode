@@ -3,13 +3,13 @@ import { Injectable } from '@nestjs/common';
 import { ShowAdminStaffModerators } from '../show/dto/show.obj';
 import { CreateAdminStaffModeratorsArgs } from './dto/create.args';
 
-import { DatabaseService } from '@/utils/database/database.service';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { CustomError, NotFoundError } from '@/errors';
 import { core_moderators_permissions } from '@/database/schema/moderators';
 
 @Injectable()
 export class CreateAdminStaffModeratorsService {
-  constructor(private readonly databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: InternalDatabaseService) {}
 
   async create({
     group_id,

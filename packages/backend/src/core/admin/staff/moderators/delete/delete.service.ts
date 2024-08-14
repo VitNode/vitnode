@@ -3,13 +3,13 @@ import { eq } from 'drizzle-orm';
 
 import { DeleteAdminStaffModeratorsArgs } from './dto/delete.args';
 
-import { DatabaseService } from '@/utils/database/database.service';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { CustomError, NotFoundError } from '@/errors';
 import { core_moderators_permissions } from '@/database/schema/moderators';
 
 @Injectable()
 export class DeleteAdminStaffModeratorsService {
-  constructor(private readonly databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: InternalDatabaseService) {}
   async delete({ id }: DeleteAdminStaffModeratorsArgs): Promise<string> {
     const permission =
       await this.databaseService.db.query.core_moderators_permissions.findFirst(

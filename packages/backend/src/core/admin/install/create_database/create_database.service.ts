@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { count } from 'drizzle-orm';
 
-import { DatabaseService } from '@/utils/database/database.service';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { CustomError } from '@/errors';
 import { core_languages } from '@/database/schema/languages';
 import { core_groups, core_groups_names } from '@/database/schema/groups';
@@ -10,7 +10,7 @@ import { core_moderators_permissions } from '@/database/schema/moderators';
 
 @Injectable()
 export class CreateDatabaseAdminInstallService {
-  constructor(private readonly databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: InternalDatabaseService) {}
 
   protected throwError() {
     throw new CustomError({

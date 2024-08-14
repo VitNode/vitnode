@@ -6,13 +6,13 @@ import { Injectable } from '@nestjs/common';
 import { ShowSettingsObj } from './dto/show.obj';
 import { ManifestWithLang } from '../settings.module';
 
-import { DatabaseService } from '@/utils/database/database.service';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { ABSOLUTE_PATHS_BACKEND, getConfigFile } from '../../..';
 import { core_languages } from '../../../database/schema/languages';
 
 @Injectable()
 export class ShowSettingsService {
-  constructor(private readonly databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: InternalDatabaseService) {}
 
   protected getManifest({
     langCodes,

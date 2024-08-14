@@ -3,14 +3,14 @@ import { eq } from 'drizzle-orm';
 
 import { ChangePasswordCoreMembersArgs } from './dto/change_password.args';
 
-import { DatabaseService } from '@/utils/database/database.service';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { encryptPassword } from '@/core/sessions/password';
 import { core_users, core_users_pass_reset } from '@/database/schema/users';
 import { InternalServerError } from '@/errors';
 
 @Injectable()
 export class ChangePasswordCoreMembersService {
-  constructor(private readonly databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: InternalDatabaseService) {}
 
   async change_password({
     hashKey,

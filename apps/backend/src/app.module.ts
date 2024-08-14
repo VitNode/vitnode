@@ -4,19 +4,19 @@ import { Module } from '@nestjs/common';
 import { VitNodeCoreModule } from 'vitnode-backend';
 
 import { PluginsModule } from './plugins/plugins.module';
-import { DATABASE_ENVS, schemaDatabase } from './database';
+import { DATABASE_ENVS, schemaDatabase } from './database/config';
+import { DatabaseModule } from './database/database.module';
 
 @Module({
   imports: [
     VitNodeCoreModule.register({
-      paths: {
-        envFile: join(process.cwd(), '..', '..', '.env'),
-      },
+      pathToEnvFile: join(process.cwd(), '..', '..', '.env'),
       database: {
         config: DATABASE_ENVS,
         schemaDatabase,
       },
     }),
+    DatabaseModule,
     PluginsModule,
   ],
 })

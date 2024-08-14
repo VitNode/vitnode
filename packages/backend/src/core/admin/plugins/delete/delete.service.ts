@@ -7,7 +7,7 @@ import { eq, sql } from 'drizzle-orm';
 import { DeleteAdminPluginsArgs } from './dto/delete.args';
 import { ChangeFilesAdminPluginsService } from '../helpers/files/change/change.service';
 
-import { DatabaseService } from '@/utils/database/database.service';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { CustomError, NotFoundError } from '@/errors';
 import { core_migrations } from '@/database/schema/files';
 import { ABSOLUTE_PATHS_BACKEND } from '@/index';
@@ -17,7 +17,7 @@ import { setRebuildRequired } from '@/functions/rebuild-required';
 @Injectable()
 export class DeleteAdminPluginsService {
   constructor(
-    private readonly databaseService: DatabaseService,
+    private readonly databaseService: InternalDatabaseService,
     private readonly changeFilesService: ChangeFilesAdminPluginsService,
   ) {}
 

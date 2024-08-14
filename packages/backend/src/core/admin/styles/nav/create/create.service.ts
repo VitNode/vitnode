@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 
 import { CreateAdminNavStylesArgs } from './dto/create.args';
 
-import { DatabaseService } from '@/utils/database/database.service';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import {
   core_nav,
   core_nav_description,
@@ -14,7 +14,7 @@ import { ShowCoreNav } from '@/core/nav/show/dto/show.obj';
 @Injectable()
 export class CreateAdminNavStylesService {
   constructor(
-    private readonly databaseService: DatabaseService,
+    private readonly databaseService: InternalDatabaseService,
     private readonly parserTextLang: ParserTextLanguageCoreHelpersService,
   ) {}
 

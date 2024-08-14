@@ -1,5 +1,5 @@
-import { Steps } from "nextra/components";
-import { Callout } from "nextra/components";
+import { Steps } from 'nextra/components';
+import { Callout } from 'nextra/components';
 
 # Sorting
 
@@ -25,8 +25,8 @@ Inside `show/dto/show.args.ts` file create a enum to restrict the sorting column
 
 ```ts
 enum ShowBlogCategoriesSortingColumnEnum {
-  created = "created",
-  updated = "updated"
+  created = 'created',
+  updated = 'updated',
 }
 ```
 
@@ -42,10 +42,10 @@ Remember to export the enum. It will be used in the next steps.
 NestJS require to register the enum in the GraphQL schema. You can read more in [NestJS documentation](https://docs.nestjs.com/graphql/unions-and-enums).
 
 ```ts
-import { registerEnumType } from "@nestjs/graphql";
+import { registerEnumType } from '@nestjs/graphql';
 
 registerEnumType(ShowBlogCategoriesSortingColumnEnum, {
-  name: "ShowBlogCategoriesSortingColumnEnum"
+  name: 'ShowBlogCategoriesSortingColumnEnum',
 });
 ```
 
@@ -54,9 +54,9 @@ registerEnumType(ShowBlogCategoriesSortingColumnEnum, {
 Now you have to create a input type to use the enum in the args type.
 
 ```ts
-import { InputType } from "@nestjs/graphql";
+import { InputType } from '@nestjs/graphql';
 
-import { SortDirectionEnum } from "@/types/database/sortDirection.type";
+import { SortDirectionEnum } from '@/types/database/sortDirection.type';
 
 @InputType()
 class SortByArgs {
@@ -73,7 +73,7 @@ class SortByArgs {
 Now you have to add the input type to the args type as arry and make it optional _(If you want)_.
 
 ```ts
-import { ArgsType, Field } from "@nestjs/graphql";
+import { ArgsType, Field } from '@nestjs/graphql';
 
 @ArgsType()
 export class ShowCoreMembersArgs {
@@ -91,7 +91,7 @@ Inside service in `show/show.service.ts` file you have to add the `sortBy` argum
 ```ts {9, 22}
 @Injectable()
 export class ShowBlogCategoriesService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(private databaseServices: DatabaseService) {}
 
   async show({
     cursor,

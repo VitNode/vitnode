@@ -7,8 +7,10 @@ import coreSchemaDatabase from '../../database';
 import { DatabaseModuleArgs } from '@/utils/database/database.module';
 
 @Injectable()
-export class DatabaseService {
-  public db: NodePgDatabase<typeof coreSchemaDatabase>;
+export class InternalDatabaseService<
+  T extends Record<string, unknown> = typeof coreSchemaDatabase,
+> {
+  public db: NodePgDatabase<T>;
 
   constructor(
     @Inject('DATABASE_MODULE_OPTIONS')
@@ -19,6 +21,6 @@ export class DatabaseService {
       config: this.options.config,
     });
 
-    this.db = client.db as NodePgDatabase<typeof coreSchemaDatabase>;
+    this.db = client.db as NodePgDatabase<T>;
   }
 }

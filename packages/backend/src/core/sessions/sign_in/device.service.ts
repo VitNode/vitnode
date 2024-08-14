@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
-import { DatabaseService } from '@/utils/database/database.service';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { core_sessions_known_devices } from '../../../database/schema/sessions';
 import { GqlContext } from '../../../utils';
 import { getUserIp, getUserAgentData } from '../../../functions';
@@ -20,7 +20,7 @@ interface DeviceType {
 @Injectable()
 export class DeviceSignInCoreSessionsService {
   constructor(
-    private readonly databaseService: DatabaseService,
+    private readonly databaseService: InternalDatabaseService,
     private readonly configService: ConfigService,
   ) {}
 
