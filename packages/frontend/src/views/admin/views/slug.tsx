@@ -54,6 +54,10 @@ import {
   generateMetadataPluginsAdmin,
   PluginsAdminView,
 } from './core/plugins/plugins-admin-view';
+import {
+  DiagnosticToolsView,
+  generateMetadataDiagnosticAdmin,
+} from './core/diagnostic/diagnostic-tools-view';
 
 export interface SlugAdminViewProps {
   params: { locale: string; slug: string[] };
@@ -66,6 +70,8 @@ export const generateMetadataSlugAdmin = async ({
   switch (slug[0]) {
     case 'core':
       switch (slug[1]) {
+        case 'diagnostic':
+          return generateMetadataDiagnosticAdmin();
         case 'advanced':
           switch (slug[2]) {
             case 'files':
@@ -161,6 +167,8 @@ export const SlugAdminView = (props: SlugAdminViewProps) => {
           return <LangsCoreAdminView {...props} />;
         case 'plugins':
           return <PluginsAdminView {...props} />;
+        case 'diagnostic':
+          return <DiagnosticToolsView />;
         case 'dashboard':
           return <DashboardCoreAdminView />;
       }

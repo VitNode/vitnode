@@ -129,7 +129,7 @@ import {
   AlertDialogTrigger,
 } from 'vitnode-frontend/components/ui/alert-dialog';
 
-const Content = React.lazy(() =>
+const Content = React.lazy(async () =>
   import('./content').then(module => ({
     default: module.ContentTest,
   })),

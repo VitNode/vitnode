@@ -1,10 +1,8 @@
 import {
-  bigint,
   index,
   integer,
   pgTable,
   serial,
-  text,
   timestamp,
   varchar,
 } from 'drizzle-orm/pg-core';
@@ -72,11 +70,3 @@ export const core_files_using_relations = relations(
     }),
   }),
 );
-
-export const core_migrations = pgTable('core_migrations', {
-  id: serial('id').primaryKey(),
-  hash: text('hash').notNull(),
-  plugin: varchar('plugin', { length: 255 }).notNull(),
-  created_migration: bigint('created_migration', { mode: 'bigint' }),
-  created: timestamp('created').notNull().defaultNow(),
-});

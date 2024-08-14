@@ -3,6 +3,7 @@
 import {
   GitBranch,
   Globe,
+  HammerIcon,
   Home,
   LogOut,
   SquareArrowOutUpRight,
@@ -69,6 +70,12 @@ export const AvatarAsideAuthAdmin = () => {
             <Link href={`/profile/${name_seo}`} target="_blank">
               <User />
               <span>{tCore('user-bar.my_profile')}</span>
+            </Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem asChild>
+            <Link href="/admin/core/diagnostic">
+              <HammerIcon />
+              <span>{t('core.diagnostic.title')}</span>
             </Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
