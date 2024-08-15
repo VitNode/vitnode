@@ -165,6 +165,6 @@ export async function inputPaginationCursor<T extends TableConfig>({
   return {
     where,
     orderBy,
-    limit: first || last ? ((last ? last + 1 : first) ?? 0 + 1) : undefined,
+    limit: first || last ? ((last ? last + 1 : first) ?? 0) + 1 : undefined,
   };
 }

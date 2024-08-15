@@ -14,6 +14,7 @@
     "database",
     "database-migrations",
     "database-service",
+    "database-pagination",
     "--- GraphQL ---",
     "graphql",
     "modules",
