@@ -1,0 +1,156 @@
+---
+title: Pagination
+description: How to use cursor based pagination with database.
+---
+
+<Callout title="Offset pagination" type="warn">
+  VitNode doesn't support the `offset` pagination. You can create your own
+  offset pagination.
+</Callout>
+
+## Data Transfer Object (DTO)
+
+We will create a `DTO` to create arguments and return values for the query.
+
+### Object
+
+Object used as container for fields to create return values query in GraphQL schema.
+
+```ts title="show/dto/show.args.ts"
+import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { PageInfo } from 'vitnode-backend'; // [!code highlight]
+
+@ObjectType()
+export class ShowTest {
+  @Field(() => Int)
+  id: number;
+
+  @Field(() => String)
+  name: string;
+}
+
+@ObjectType()
+export class ShowTestObj {
+  @Field(() => [ShowTest])
+  edges: ShowTest[];
+
+  @Field(() => PageInfo) // [!code highlight]
+  pageInfo: PageInfo; // [!code highlight]
+}
+```
+
+### Arguments
+
+Arguments used as container for fields to create query in GraphQL schema.
+
+```ts title="show/dto/show.args.ts"
+import { ArgsType } from '@nestjs/graphql';
+import { PaginationArgs } from 'vitnode-backend'; // [!code highlight]
+
+@ArgsType()
+// [!code word:PaginationArgs]
+export class ShowTestArgs extends PaginationArgs {}
+```
+
+## Service
+
+Inside service file we will create a `show` method that will return a `ShowTestObj` object.
+
+```ts title="show/show.service.ts"
+import { Injectable } from '@nestjs/common';
+
+import { ShowTestArgs } from './dto/show.args';
+import { ShowTestObj } from './dto/show.obj';
+
+@Injectable()
+export class ShowTestService {
+  async show({ cursor, first, last }: ShowTestArgs): Promise<ShowTestObj> {}
+}
+```
+
+### Initial values for pagination
+
+Use `inputPaginationCursor()` to create initial values for pagination.
+
+```ts title="show/show.service.ts"
+import { Injectable } from '@nestjs/common';
+// [!code word:inputPaginationCursor]
+import { inputPaginationCursor, SortDirectionEnum } from 'vitnode-backend';
+
+import { ShowTestArgs } from './dto/show.args';
+import { ShowTestObj } from './dto/show.obj';
+
+import { test_table } from '../../admin/database/schema/test';
+import { DatabaseService } from '@/database/database.service';
+
+@Injectable()
+export class ShowTestService {
+  constructor(private readonly databaseService: DatabaseService) {}
+
+  async show({ cursor, first, last }: ShowTestObj): Promise<ShowTestObj> {
+    const pagination = await inputPaginationCursor({
+      cursor,
+      database: test_table,
+      databaseService: this.databaseService,
+      first,
+      last,
+      primaryCursor: {
+        column: 'id',
+        schema: test_table.id,
+      },
+      defaultSortBy: {
+        direction: SortDirectionEnum.asc,
+        column: 'created',
+      },
+    });
+  }
+}
+```
+
+### Query from database
+
+Use `findMany()` method to get the data from the database with `with` argument to get the related data.
+
+```ts title="show/show.service.ts"
+const edges = await this.databaseService.db.query.test_table.findMany({
+  ...pagination,
+});
+```
+
+#### Where argument
+
+If you want to use `where` argument you can pass it to the `findMany()` method using `and()` method from `drizzle-orm`.
+
+```ts title="show/show.service.ts"
+const where = lte(test_table.created, new Date()); // [!code highlight]
+
+const edges = await this.databaseService.db.query.test_table.findMany({
+  ...pagination,
+  where: and(pagination.where, where), // [!code highlight]
+});
+```
+
+### Return values
+
+We will use `outputPagination()` to create return values for the query.
+
+<Callout title="Total Count required" type="warn">
+  Remember to create a query `totalCount` to get the total count of the query.
+</Callout>
+
+```ts title="show/show.service.ts"
+const totalCount = await this.databaseService.db
+  .select({ count: count() })
+  .from(test_table);
+
+return outputPagination({ edges, totalCount, first, cursor, last });
+```
+
+If you have `where` argument you need to pass also to the `count()` query.
+
+```ts {4}
+const totalCount = await this.databaseService.db
+  .select({ count: count() })
+  .from(test_table)
+  .where(where); // [!code highlight]
+```
