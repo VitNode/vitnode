@@ -38,7 +38,9 @@ Inside your new file `posts.ts` create schema for your tables. Follow [Drizzle O
 
 ### Schema
 
-```ts title="posts.ts"
+Here is example schema for `posts` table:
+
+```ts title="apps/backend/src/plugins/{your_plugin}/admin/database/schema/posts.ts"
 import {
   integer,
   pgTable,
@@ -92,7 +94,7 @@ Indexes are important part of schema. Thanks to indexes your database will be fa
 
 For example, if you have `blog_articles` table and you want to search by `author_id`, you can create index for this column.
 
-```ts title="posts.ts"
+```ts title="apps/backend/src/plugins/{your_plugin}/admin/database/schema/posts.ts"
 import {
   index,
   integer,
@@ -160,7 +162,7 @@ Relations is importatnt part of schema. Thanks to relations your database will b
 
 For example, if you have `blog_articles` table and `blog_articles_content` table, you can create relation between them. If some `blog_articles` will be removed, all `blog_articles_content` related to this `blog_articles` will be removed too.
 
-```ts title="posts.ts"
+```ts title="apps/backend/src/plugins/{your_plugin}/admin/database/schema/posts.ts"
 import { relations } from 'drizzle-orm';
 import {
   index,
@@ -256,7 +258,7 @@ After created schema, you need to import it to `database/index.ts` file. Inside 
 
 Here is example `index.ts` file:
 
-```ts title="index.ts"
+```ts title="apps/backend/src/plugins/{your_plugin}/admin/database/index.ts"
 import * as articles from './schema/articles';
 import * as categories from './schema/categories';
 

@@ -157,6 +157,88 @@ We created special column for actions. You can add buttons, links or any other c
 />
 ```
 
+## Usage with Pagination API
+
+You can read how to implement [Pagination API here](/docs/dev/database-pagination).
+
+To help you with the implementation, we created a helper function `getPaginationTool()` that you can use to convert the data from the database to the format that the `DataTable` component expects.
+
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+ 
+<Steps>
+<Step>
+ 
+### Get Data
+
+Use the `fetcher` function to get data from the API. You can read more [here about fetch data](/docs/dev/fetch).
+
+```tsx title="example-page.tsx"
+import { fetcher } from 'vitnode-frontend/graphql/fetcher';
+
+const getData = async (variables: Test_Query__ShowQueryVariables) => {
+  const data = await fetcher<
+    Test_Query__ShowQuery,
+    Test_Query__ShowQueryVariables
+  >({
+    query: Test_Query__Show,
+    variables,
+  });
+
+  return data;
+};
+```
+
+</Step>
+<Step>
+ 
+### Get Search Params
+
+Create new interface for page props.
+
+```tsx title="example-page.tsx"
+import { SearchParamsPagination } from 'vitnode-frontend/graphql/get-pagination-tool';
+
+export interface ExamplePageProps {
+  searchParams: SearchParamsPagination;
+}
+```
+
+</Step>
+ 
+<Step>
+ 
+### Provide Interface to Component
+
+```tsx title="example-page.tsx"
+export default async function Page({ searchParams }: ExamplePageProps) {}
+```
+
+</Step>
+
+<Step>
+ 
+### Use getPaginationTool
+
+```tsx title="example-page.tsx"
+import {
+  getPaginationTool, // [!code highlight]
+  SearchParamsPagination,
+} from 'vitnode-frontend/graphql/get-pagination-tool';
+
+export default async function Page({ searchParams }: ExamplePageProps) {
+  // [!code word:getPaginationTool]
+  const variables = getPaginationTool({
+    searchParams,
+    defaultPageSize: 10,
+  });
+}
+```
+
+This function will automatically handle the pagination, search and sorting for you when you're using the `DataTable` component.
+
+</Step>
+</Steps>
+
 ## API Reference
 
 import { TypeTable } from 'fumadocs-ui/components/type-table';

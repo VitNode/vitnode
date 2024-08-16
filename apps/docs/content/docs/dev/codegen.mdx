@@ -4,3 +4,69 @@ description: Generate types for your GraphQL schema.
 ---
 
 VitNode provides a codegen tool that generates TypeScript types for your GraphQL schema using the [GraphQL Code Generator](https://the-guild.dev/graphql/codegen) library.
+
+## Create GraphQL File
+
+VitNode detected all the GraphQL files _(with `.gql` extension)_ in your plugin inside `graphql` folder.
+
+import { File, Folder, Files } from 'fumadocs-ui/components/files';
+
+<Files>
+  <Folder name="apps" defaultOpen>
+    <Folder name="frontend" defaultOpen>
+      <Folder name="plugins" defaultOpen>
+        <Folder name="{your_plugin}" defaultOpen>
+          <Folder name="graphql" defaultOpen>
+            <Folder name="queries" defaultOpen>
+              <File name="test_example_query.gql" />
+            </Folder>
+            <Folder name="mutations" defaultOpen>
+              <File name="test_example_mutation.gql" />
+            </Folder>
+            <File name="example.gql" />
+          </Folder>
+        </Folder>
+      </Folder>
+    </Folder>
+  </Folder>
+</Files>
+
+Example of a GraphQL file:
+
+```graphql title="graphql/queries/test_example_query.gql"
+query Test_example_query($cursor: Int, $first: Int) {
+  test_example_query(cursor: $cursor, first: $first) {
+    pageInfo {
+      count
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      totalCount
+    }
+    edges {
+      id
+      created
+      name
+    }
+  }
+}
+```
+
+## Generate Types
+
+To generate types for your GraphQL schema, run the following command:
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+
+<Tabs id='package-manager' persist items={['pnpm', 'npm']}>
+
+```bash tab="pnpm"
+pnpm codegen
+```
+
+```bash tab="npm"
+npm run codegen
+```
+
+</Tabs>

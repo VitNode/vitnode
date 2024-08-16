@@ -52,7 +52,6 @@ export const UsersMembersAdminView = async ({
     ...getPaginationTool({
       searchParams,
       sortByEnum: ShowAdminMembersSortingColumnEnum,
-      search: true,
       defaultPageSize: 10,
     }),
     groups: Array.isArray(searchParams.groups)

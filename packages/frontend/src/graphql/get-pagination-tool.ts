@@ -19,14 +19,12 @@ interface Args<T> {
 interface ReturnValues<T> {
   first: number;
   last: number;
-  search: string;
   cursor?: number;
   sortBy?: { column: keyof T; direction: SortDirectionEnum };
 }
 
 export function getPaginationTool<T extends Record<string, unknown>>({
   defaultPageSize,
-  search,
   searchParams,
   sortByEnum,
 }: Args<T>): ReturnValues<T> {
@@ -36,7 +34,7 @@ export function getPaginationTool<T extends Record<string, unknown>>({
       : Number(searchParams.first ?? 0),
     last: Number(searchParams.last ?? 0),
     cursor: Number(searchParams.cursor) || undefined,
-    search: search ? (searchParams.search ?? '') : '',
+    search: searchParams.search ?? '',
     sortBy: getGetSortByParamsAPI({ constEnum: sortByEnum, searchParams }),
   };
 

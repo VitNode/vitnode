@@ -55,7 +55,6 @@ export const LangsCoreAdminView = async ({
   const variables = getPaginationTool({
     searchParams,
     defaultPageSize: 10,
-    search: true,
     sortByEnum: ShowCoreLanguagesSortingColumnEnum,
   });
 

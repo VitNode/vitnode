@@ -47,7 +47,6 @@ export const FilesAdvancedCoreAdminView = async ({
   const variables = getPaginationTool({
     searchParams,
     defaultPageSize: 10,
-    search: true,
     sortByEnum: ShowCoreFilesSortingColumnEnum,
   });
 

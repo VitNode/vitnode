@@ -47,7 +47,6 @@ export const GroupsMembersAdminView = async ({
 }: GroupsMembersAdminViewProps) => {
   const variables = getPaginationTool({
     searchParams,
-    search: true,
     sortByEnum: ShowAdminGroupsSortingColumnEnum,
     defaultPageSize: 10,
   });
