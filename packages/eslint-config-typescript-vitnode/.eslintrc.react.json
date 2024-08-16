@@ -11,6 +11,7 @@
     "global.d.ts",
     "/graphql",
     "/src/graphql",
+    "/plugins/*/graphql",
     "tailwind.config.ts",
     "next.config.ts"
   ],

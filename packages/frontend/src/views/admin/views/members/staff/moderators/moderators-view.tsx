@@ -49,7 +49,6 @@ export const ModeratorsStaffAdminView = async ({
 }: ModeratorsStaffAdminViewProps) => {
   const variables = getPaginationTool({
     searchParams,
-    search: true,
     sortByEnum: ShowAdminStaffModeratorsSortingColumnEnum,
     defaultPageSize: 10,
   });

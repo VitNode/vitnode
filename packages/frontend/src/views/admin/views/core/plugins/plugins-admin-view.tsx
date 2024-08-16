@@ -49,7 +49,6 @@ export const PluginsAdminView = async ({
 }: PluginsAdminViewProps) => {
   const variables = getPaginationTool({
     searchParams,
-    search: true,
     sortByEnum: ShowAdminPluginsSortingColumnEnum,
     defaultPageSize: 10,
   });

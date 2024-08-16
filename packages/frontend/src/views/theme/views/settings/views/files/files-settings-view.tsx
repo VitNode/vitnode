@@ -55,7 +55,6 @@ export const FilesSettingsView = async ({
   const variables = getPaginationTool({
     searchParams,
     defaultPageSize: 10,
-    search: true,
     sortByEnum: ShowCoreFilesSortingColumnEnum,
   });
   const data = await getData(variables);

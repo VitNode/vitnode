@@ -1,0 +1,64 @@
+---
+title: Filters
+description: How to filter data in VitNode.
+---
+
+VitNode doesn't provide any functions for filters, but in this guide, you will learn how to create a filter function into your service.
+
+In this guide we'll create a new argument `search` to filter data.
+
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+ 
+<Steps>
+<Step>
+ 
+## Arguments (DTO)
+
+```ts title="show/dto/show.args.ts"
+@ArgsType()
+export class ShowExampleArgs extends PaginationArgs {
+  @Field(() => String, { nullable: true }) // [!code highlight]
+  search?: string; // [!code highlight]
+}
+```
+
+</Step>
+
+<Step>
+ 
+## Service
+
+Here is an example with `user_id` and `search` arguments. We want to show you how to use with more than one argument.
+
+```ts title="show/show.service.ts"
+const where = and(
+  eq(core_test.user_id, user_id),
+  ilike(core_test.file_name, `%${search ?? ''}%`), // [!code highlight]
+);
+
+const edges = await this.databaseService.db.query.core_test.findMany({
+  ...pagination,
+  where: and(pagination.where, where), // [!code highlight]
+});
+```
+
+Remember to change `where` variable to your table name.
+
+</Step>
+
+<Step>
+
+## Total count
+
+Provide `where` variable to the total count.
+
+```ts title="show/show.service.ts"
+const totalCount = await this.databaseService.db
+  .select({ count: count() })
+  .from(core_files)
+  .where(where); // [!code highlight]
+```
+
+</Step>
+
+</Steps>

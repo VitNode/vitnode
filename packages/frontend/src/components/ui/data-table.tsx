@@ -33,7 +33,7 @@ export interface DataTableProps<T extends TMin> {
     sortBy: keyof T;
     sortDirection: 'asc' | 'desc';
   };
-  pageInfo: PageInfo;
+  pageInfo?: PageInfo;
   defaultPageSize?: 10 | 20 | 30 | 40 | 50;
   searchPlaceholder?: string;
 }
