@@ -1,6 +1,6 @@
 {
   "name": "docs",
-  "version": "0.0.9-canary.8",
+  "version": "0.0.9-canary.9",
   "private": true,
   "scripts": {
     "dev:docs": "next dev --port 3030",
