@@ -16,6 +16,7 @@
     "database-service",
     "database-pagination",
     "database-filters",
+    "database-sorting",
     "--- GraphQL ---",
     "graphql",
     "modules",

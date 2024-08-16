@@ -1,0 +1,152 @@
+---
+title: Sorting
+description: How to sort data in VitNode.
+---
+
+In some cases, you may need to sort the data in the database. VitNode provides a sorting system to order the query result.
+
+<Callout title="Pagination Required">
+  Sorting system is based on [Pagination System](/docs/dev/database-pagination).
+  If you don't want to use the pagination system you can use the `orderBy`
+  argument directly in the `findMany()` method.
+</Callout>
+
+## Backend
+
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+ 
+<Steps>
+<Step>
+
+### Arguments (DTO)
+
+Create enum with columns to sort by.
+
+```ts title="dto/show.args.ts"
+enum ShowTestSortingColumnEnum {
+  created = 'created',
+  updated = 'updated',
+}
+```
+
+<Callout title="Cache Mutation" type="warn">
+  Enum name should be unique. If you have multiple enums in the same file, make
+  sure to give them unique names.
+</Callout>
+
+</Step>
+
+<Step>
+
+### Register Enum
+
+NestJS require to register the enum in the GraphQL schema. You can read more in [NestJS documentation](https://docs.nestjs.com/graphql/unions-and-enums).
+
+```ts title="dto/show.args.ts"
+import { registerEnumType } from '@nestjs/graphql';
+
+registerEnumType(ShowTestSortingColumnEnum, {
+  name: 'ShowTestSortingColumnEnum',
+});
+```
+
+### Create Input
+
+Create input type to use the enum in the args type. You need to create input type with `column` and `direction` fields.
+
+```ts title="dto/show.args.ts"
+import { InputType } from '@nestjs/graphql';
+import { SortDirectionEnum } from 'vitnode-backend';
+
+@InputType()
+class SortByArgs {
+  @Field(() => ShowTestSortingColumnEnum)
+  column: ShowTestSortingColumnEnum;
+
+  @Field(() => SortDirectionEnum)
+  direction: SortDirectionEnum;
+}
+
+@ArgsType()
+export class ShowTestArgs {
+  @Field(() => [ShowTestSortingColumnEnum], { nullable: true })
+  sortBy?: ShowTestSortingColumnEnum[];
+}
+```
+
+</Step>
+
+<Step>
+
+### Service
+
+Add the `sortBy` argument to the `inputPaginationCursor()` method.
+
+```ts title="show/show.service.ts"
+@Injectable()
+export class ShowTestService {
+  constructor(private databaseServices: DatabaseService) {}
+
+  async show({
+    cursor,
+    first,
+    last,
+    sortBy // [!code highlight]
+  }: ShowTestArgs): Promise<ShowBlogCategoriesObj> {
+    const pagination = await inputPaginationCursor({
+      cursor,
+      database: test_table,
+      databaseService: this.databaseService,
+      first,
+      last,
+      primaryCursor: { direction: SortDirectionEnum.asc, column: "id", schema: test_table.id },
+      defaultSortBy: {
+        direction: SortDirectionEnum.asc,
+        column: "created"
+      },
+      sortBy // [!code highlight]
+    });
+  }
+```
+
+</Step>
+</Steps>
+
+## Frontend
+
+Based on [Pagination Frontend Helper](/docs/dev/database-pagination#frontend) pass the `sortByEnum` to the `getPaginationTool()` function.
+
+```ts title="example-page.tsx"
+const variables = getPaginationTool({
+  searchParams,
+  defaultPageSize: 10,
+  sortByEnum: ShowTestSortingColumnEnum, // [!code highlight]
+});
+```
+
+### Data Table
+
+Enable sorting in the data table by setting the `sortable` property to `true`.
+
+```tsx title="example-page.tsx"
+<DataTable
+  data={data}
+  columns={[
+    { title: 'ID', id: 'id' },
+    {
+      title: 'Created',
+      id: 'created',
+      sortable: true, // [!code highlight]
+    },
+    {
+      title: 'Updated',
+      id: 'updated',
+      sortable: true, // [!code highlight]
+    },
+  ]}
+  defaultSorting={{
+    sortBy: 'created',
+    sortDirection: 'desc',
+  }}
+/>
+```

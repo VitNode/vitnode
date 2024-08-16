@@ -11,7 +11,8 @@
       "persistent": true
     },
     "codegen": {
-      "dependsOn": ["^codegen"]
+      "dependsOn": ["^codegen"],
+      "cache": false
     },
     "config:init": {
       "dependsOn": ["^config:init"]

@@ -8,13 +8,14 @@ description: How to use cursor based pagination with database.
   offset pagination.
 </Callout>
 
-## Data Transfer Object (DTO)
+## Backend
 
-We will create a `DTO` to create arguments and return values for the query.
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+ 
+<Steps>
+<Step>
 
-### Object
-
-Object used as container for fields to create return values query in GraphQL schema.
+### Object (DTO)
 
 ```ts title="show/dto/show.args.ts"
 import { Field, Int, ObjectType } from '@nestjs/graphql';
@@ -39,9 +40,9 @@ export class ShowTestObj {
 }
 ```
 
-### Arguments
-
-Arguments used as container for fields to create query in GraphQL schema.
+</Step>
+<Step>
+### Arguments (DTO)
 
 ```ts title="show/dto/show.args.ts"
 import { ArgsType } from '@nestjs/graphql';
@@ -52,7 +53,9 @@ import { PaginationArgs } from 'vitnode-backend'; // [!code highlight]
 export class ShowTestArgs extends PaginationArgs {}
 ```
 
-## Service
+</Step>
+<Step>
+### Service
 
 Inside service file we will create a `show` method that will return a `ShowTestObj` object.
 
@@ -68,6 +71,8 @@ export class ShowTestService {
 }
 ```
 
+</Step>
+<Step>
 ### Initial values for pagination
 
 Use `inputPaginationCursor()` to create initial values for pagination.
@@ -107,6 +112,8 @@ export class ShowTestService {
 }
 ```
 
+</Step>
+<Step>
 ### Query from database
 
 Use `findMany()` method to get the data from the database with `with` argument to get the related data.
@@ -130,6 +137,8 @@ const edges = await this.databaseService.db.query.test_table.findMany({
 });
 ```
 
+</Step>
+<Step>
 ### Return values
 
 We will use `outputPagination()` to create return values for the query.
@@ -154,3 +163,132 @@ const totalCount = await this.databaseService.db
   .from(test_table)
   .where(where); // [!code highlight]
 ```
+
+</Step>
+</Steps>
+
+## Frontend
+
+To help you with the implementation pagination into frontend, we created a helper function `getPaginationTool()` that you can use to convert the data from the database to the format that the `DataTable` component expects.
+
+This function will handle fields:
+
+- `first`,
+- `last`,
+- `cursor`,
+- `search` - [Read more about filters](/docs/dev/database-filters#frontend),
+- `sortBy` - [Read more about sorting](/docs/dev/database-sorting#frontend).
+
+<Steps>
+<Step>
+ 
+### Get Data
+
+Use the `fetcher` function to get data from the API. You can read more [here about fetch data](/docs/dev/fetch).
+
+```tsx title="example-page.tsx"
+import { fetcher } from 'vitnode-frontend/graphql/fetcher';
+
+const getData = async (variables: Test_Query__ShowQueryVariables) => {
+  const data = await fetcher<
+    Test_Query__ShowQuery,
+    Test_Query__ShowQueryVariables
+  >({
+    query: Test_Query__Show,
+    variables,
+  });
+
+  return data;
+};
+```
+
+</Step>
+<Step>
+ 
+### Get Search Params
+
+Create new interface for page props.
+
+```tsx title="example-page.tsx"
+import { SearchParamsPagination } from 'vitnode-frontend/graphql/get-pagination-tool';
+
+export interface ExamplePageProps {
+  searchParams: SearchParamsPagination;
+}
+```
+
+</Step>
+ 
+<Step>
+ 
+### Provide Interface to Component
+
+```tsx title="example-page.tsx"
+export default async function Page({ searchParams }: ExamplePageProps) {}
+```
+
+</Step>
+
+<Step>
+ 
+### Use getPaginationTool
+
+```tsx title="example-page.tsx"
+import {
+  getPaginationTool, // [!code highlight]
+  SearchParamsPagination,
+} from 'vitnode-frontend/graphql/get-pagination-tool';
+
+export default async function Page({ searchParams }: ExamplePageProps) {
+  // [!code word:getPaginationTool]
+  const variables = getPaginationTool({
+    searchParams,
+    defaultPageSize: 10,
+  });
+}
+```
+
+This function will automatically handle the pagination, search and sorting for you when you're using the `DataTable` component.
+
+</Step>
+
+<Step>
+
+### Data Table
+
+```tsx title="example-page.tsx"
+export default async function Page({ searchParams }: ExamplePageProps) {
+  const variables = getPaginationTool({
+    searchParams,
+    defaultPageSize: 10,
+  });
+
+  return <ClientExampleComponent {...variables} />; // [!code highlight]
+}
+```
+
+```tsx title="client-example.tsx"
+'use client';
+
+export const ClientExampleComponent = ({
+  test_query__show: { edges, pageInfo },
+}: Test_Query__ShowQueryVariables) => {
+  return (
+    <DataTable
+      data={edges} // [!code highlight]
+      columns={[
+        { title: 'ID', id: 'id' },
+        { title: 'Name', id: 'name' },
+      ]}
+      defaultSorting={{
+        sortBy: 'created',
+        sortDirection: 'asc',
+      }}
+      pageInfo={pageInfo} // [!code highlight]
+    />
+  );
+};
+```
+
+</Step>
+</Steps>
