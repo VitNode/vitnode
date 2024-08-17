@@ -97,7 +97,7 @@ export const AvatarAsideAuthAdmin = () => {
 
           <DropdownMenuItem asChild>
             <Link
-              href="https://github.com/aXenDeveloper/vitnode"
+              href="https://github.com/VitNode/vitnode"
               target="_blank"
               rel="noopener noreferrer"
             >

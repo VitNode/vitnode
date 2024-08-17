@@ -41,7 +41,7 @@ export default function Page() {
               Get Started
             </Link>
             <Link
-              href="https://github.com/aXenDeveloper/vitnode"
+              href="https://github.com/VitNode/vitnode"
               className={cn(
                 buttonVariants({
                   className:

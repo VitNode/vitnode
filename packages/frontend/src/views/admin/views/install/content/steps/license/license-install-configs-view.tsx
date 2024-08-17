@@ -7,7 +7,7 @@ export const LicenseInstallConfigsView = () => {
     <>
       <CardContent>
         <Link
-          href="https://github.com/aXenDeveloper/vitnode/blob/canary/LICENSE.md"
+          href="https://github.com/VitNode/vitnode/blob/canary/LICENSE.md"
           target="_blank"
           className="text-primary underline"
         >

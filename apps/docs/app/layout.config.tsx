@@ -8,7 +8,7 @@ import { HomeLayoutProps } from 'fumadocs-ui/home-layout';
 
 // shared configuration
 export const baseOptions: HomeLayoutProps = {
-  githubUrl: 'https://github.com/aXenDeveloper/vitnode',
+  githubUrl: 'https://github.com/VitNode/vitnode',
   nav: {
     title: (
       <>
