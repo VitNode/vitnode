@@ -52,25 +52,25 @@ jobs:
       - name: Build Projects
         run: pnpm run build --filter=vitnode-backend --filter=vitnode-frontend
 
-      # - name: Run script to bump version
-      #   run: pnpm run release
-      #   id: version-bump
-      #   env:
-      #     VERSION_TYPE: ${{ github.event.inputs.type }}
-      #     RELEASE_TYPE: ${{ github.event.inputs.release }}
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Run script to bump version
+        run: pnpm run release
+        id: version-bump
+        env:
+          VERSION_TYPE: ${{ github.event.inputs.type }}
+          RELEASE_TYPE: ${{ github.event.inputs.release }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # - name: Create Pre-release
-      #   if: github.event.inputs.release == 'canary' || github.event.inputs.release == 'release-candidate'
-      #   run: gh release create ${{ steps.version-bump.outputs.newTag }} --generate-notes --prerelease
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create Pre-release
+        if: github.event.inputs.release == 'canary' || github.event.inputs.release == 'release-candidate'
+        run: gh release create ${{ steps.version-bump.outputs.newTag }} --generate-notes --prerelease
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # - name: Create Release
-      #   if: github.event.inputs.release == 'stable'
-      #   run: gh release create ${{ steps.version-bump.outputs.newTag }} --generate-notes
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create Release
+        if: github.event.inputs.release == 'stable'
+        run: gh release create ${{ steps.version-bump.outputs.newTag }} --generate-notes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish canary
         if: github.event.inputs.release == 'canary'
