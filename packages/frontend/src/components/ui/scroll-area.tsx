@@ -8,18 +8,25 @@ import { cn } from '@/helpers/classnames';
 const ScrollArea = ({
   className,
   children,
+  disableShadow,
   ...props
-}: React.ComponentProps<typeof ScrollAreaPrimitive.Root>) => (
+}: React.ComponentProps<typeof ScrollAreaPrimitive.Root> & {
+  disableShadow?: boolean;
+}) => (
   <ScrollAreaPrimitive.Root
     className={cn('relative overflow-hidden', className)}
     {...props}
   >
     <ScrollAreaPrimitive.Viewport
       className="h-full w-full rounded-[inherit]"
-      style={{
-        maskImage:
-          'linear-gradient(to bottom, transparent 2px, white 24px, white calc(100% - 24px), transparent calc(100% - 2px))',
-      }}
+      style={
+        disableShadow
+          ? undefined
+          : {
+              maskImage:
+                'linear-gradient(to bottom, transparent 2px, white 24px, white calc(100% - 24px), transparent calc(100% - 2px))',
+            }
+      }
     >
       {children}
     </ScrollAreaPrimitive.Viewport>
