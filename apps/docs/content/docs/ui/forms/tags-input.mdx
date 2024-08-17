@@ -3,6 +3,11 @@ title: Tag Input
 description: Tag Input is a component that allows users to input tags.
 ---
 
+import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
+import img from '@/assets/ui/components/tags-input.png';
+
+<ImageZoom src={img} className="max-w-xs" alt="Tags Input" />
+
 ## Usage
 
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
@@ -18,7 +23,7 @@ import { zodTag } from 'vitnode-frontend/helpers/zod';
 
 ```ts
 const formSchema = z.object({
-  keyworlds: zodTag,
+  keywords: zodTag,
 });
 ```
 
@@ -26,9 +31,9 @@ const formSchema = z.object({
 <AutoForm
   formSchema={formSchema}
   fieldConfig={{
-    keyworlds: {
-      label: 'Keyworlds',
-      fieldType: AutoFormTags, // [!code highlight]
+    keywords: {
+      label: 'Keywords',
+      fieldType: AutoFormTags,
     },
   }}
 />
@@ -55,7 +60,7 @@ import { TagsInput } from 'vitnode-frontend/components/ui/tags-input';
   formSchema={formSchema}
   fieldConfig={{
     keyworlds: {
-      label: 'Keyworlds',
+      label: 'Keywords',
       fieldType: props => <AutoFormTags {...props} multiple />, // [!code highlight]
     },
   }}

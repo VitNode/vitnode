@@ -1,0 +1,32 @@
+---
+title: Calendar
+description: Renders a calendar or an element designed to resemble a calendar.
+---
+
+<Callout title="Shadcn UI">
+  This component is part of [Shadcn
+  UI](https://ui.shadcn.com/docs/components/calendar).
+</Callout>
+
+## Usage
+
+```tsx
+import { Calendar } from '@/components/ui/calendar';
+```
+
+```tsx
+const [date, setDate] = React.useState<Date | undefined>(new Date());
+
+return (
+  <Calendar
+    mode="single"
+    selected={date}
+    onSelect={setDate}
+    className="rounded-md border"
+  />
+);
+```
+
+## API Reference
+
+[React DayPicker](https://daypicker.dev/).

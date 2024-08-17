@@ -1,5 +1,6 @@
 {
   "core": {
+    "pick_date": "Pick a date",
     "select_option": "Select an option",
     "selected": "{count, plural, =0 {No items} =1 {1 item} other {# items}} selected",
     "week": "Week",

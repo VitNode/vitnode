@@ -16,7 +16,7 @@ export const AutoFormSwitch = ({
   return (
     <AutoFormWrapper
       className={cn({
-        'flex flex-row items-center justify-between gap-2 rounded-lg border p-4':
+        'flex flex-row items-center justify-between gap-4 rounded-lg border p-4':
           theme === 'vertical',
       })}
       theme={theme}

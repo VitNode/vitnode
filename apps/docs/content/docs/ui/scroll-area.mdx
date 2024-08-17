@@ -5,7 +5,8 @@ description: Enhances native scrolling with custom styling for a consistent appe
 
 <Callout title="Shadcn UI">
   This component is part of [Shadcn
-  UI](https://ui.shadcn.com/docs/components/scroll-area).
+  UI](https://ui.shadcn.com/docs/components/scroll-area) with some
+  modifications.
 </Callout>
 
 ## Usage
@@ -32,3 +33,17 @@ import { ScrollArea } from 'vitnode-frontend/components/ui/scroll-area';
 ## API Reference
 
 [Radix UI Scroll Area](https://www.radix-ui.com/primitives/docs/components/scroll-area#api-reference).
+
+and
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+<TypeTable
+  type={{
+    disableShadow: {
+      description: 'Remove the shadow from the scroll area.',
+      type: 'boolean',
+      default: 'false',
+    },
+  }}
+/>

@@ -3,6 +3,11 @@ title: Switch
 description: A control that enables the user to toggle between two states, such as on and off.
 ---
 
+import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
+import img from '@/assets/ui/components/switch.png';
+
+<ImageZoom src={img} className="max-w-xs" alt="Switch" />
+
 <Callout title="Shadcn UI">
   This component is part of [Shadcn
   UI](https://ui.shadcn.com/docs/components/switch).
@@ -17,6 +22,7 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 ```ts
 import * as z from 'zod';
 import { AutoForm } from 'vitnode-frontend/form/auto-form';
+import { AutoFormSwitch } from 'vitnode-frontend/form/fields/switch';
 ```
 
 ```ts
@@ -31,7 +37,7 @@ const formSchema = z.object({
   fieldConfig={{
     allow_files: {
       label: 'Allow Files',
-      inputProps: {},
+      fieldType: AutoFormSwitch,
     },
   }}
 />

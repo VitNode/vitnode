@@ -3,6 +3,11 @@ title: Text Language Input
 description: Text Language Input is a component that allows users to input text in different languages.
 ---
 
+import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
+import img from '@/assets/ui/components/text-language-input.png';
+
+<ImageZoom src={img} className="max-w-xs" alt="Text Language Input" />
+
 ## Usage
 
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
@@ -18,7 +23,7 @@ import { AutoFormTextLanguageInput } from 'vitnode-frontend/form/fields/text-lan
 
 ```ts
 const formSchema = z.object({
-  description: z.array(zodLanguageInput),
+  description: zodLanguageInput,
 });
 ```
 
