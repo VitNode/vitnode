@@ -5,6 +5,7 @@ import {
   RootLayoutProps,
   generateMetadataRootLayout,
 } from 'vitnode-frontend/views/layout/root-layout';
+import './global.css';
 
 export const generateMetadata = generateMetadataRootLayout;
 

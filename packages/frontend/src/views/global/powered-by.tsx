@@ -7,10 +7,10 @@
  * ! Thank you for your support!
  */
 
-export const PoweredByVitNode = ({ className }: { className?: string }) => {
+export const PoweredByVitNode = () => {
   return (
     <a
-      className={className}
+      className="text-muted-foreground no-underline"
       href="https://vitnode.com/"
       rel="noopener noreferrer"
       target="_blank"

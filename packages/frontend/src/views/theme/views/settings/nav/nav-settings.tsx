@@ -7,7 +7,7 @@ export const NavSettings = () => {
 
   return (
     <aside className="bg-card h-fit rounded-md border lg:w-64 lg:border-none lg:bg-transparent">
-      <div className="hidden flex-col gap-1 lg:flex">
+      <div className="hidden flex-col gap-2 lg:flex">
         {navItems.map(item => (
           <ItemNavSettings key={item.href} {...item} />
         ))}

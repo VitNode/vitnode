@@ -1,10 +1,9 @@
-import { NavWrapper } from './wrapper';
-import { NavListWrapper } from './list-wrapper';
 import { ItemNav } from './item';
 import { getSessionData } from '@/graphql/get-session-data';
 import { flattenTree } from '@/helpers/flatten-tree';
 import { Icon } from '@/components/icon/icon';
 import { ShowCoreNav } from '@/graphql/types';
+import { NavWrapper } from './wrapper';
 
 export const Nav = async () => {
   const data = await getSessionData();
@@ -23,19 +22,17 @@ export const Nav = async () => {
     icon: React.ReactNode;
     id: number;
   }[] = flattenData.map(item => ({
-    icon: item.icon ? <Icon className="size-4" name={item.icon} /> : null,
+    icon: item.icon ? <Icon name={item.icon} /> : null,
     id: item.id,
   }));
 
   return (
     <NavWrapper>
-      <div className="flex h-full flex-1 overflow-x-auto p-1">
-        <NavListWrapper>
-          {data.core_nav__show.edges.map(nav => {
-            return <ItemNav key={nav.id} {...nav} icons={icons} />;
-          })}
-        </NavListWrapper>
-      </div>
+      <nav className="hidden gap-2 sm:flex">
+        {data.core_nav__show.edges.map(nav => {
+          return <ItemNav key={nav.id} {...nav} icons={icons} />;
+        })}
+      </nav>
     </NavWrapper>
   );
 };
