@@ -19,7 +19,7 @@ export const Footer = async ({ locale }: { locale: string }) => {
        * ! You can remove this component if you want, but we will be very grateful if you leave it.
        * ! Thank you for your support!
        */}
-      <PoweredByVitNode className="text-muted-foreground no-underline" />
+      <PoweredByVitNode />
     </footer>
   );
 };

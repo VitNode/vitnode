@@ -4,8 +4,9 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { Metadata } from 'next';
 
-import { InternalErrorView } from '../global/internal-error/internal-error-view';
 import { RootProviders } from './providers';
+import { WrapperRootLayout } from './wrapper';
+import { InternalErrorView } from '../global';
 
 import { getGlobalData } from '../../graphql/get-global-data';
 import { CONFIG } from '../../helpers/config-with-env';
@@ -61,32 +62,28 @@ export const RootLayout = async ({
     const middlewareData = await getGlobalData();
 
     return (
-      <html lang={locale} className={className} suppressHydrationWarning>
-        <body>
-          <NextTopLoader
-            color="hsl(var(--primary))"
-            showSpinner={false}
-            height={4}
-          />
-          <RootProviders middlewareData={middlewareData}>
-            <NextIntlClientProvider messages={messages}>
-              {children}
-            </NextIntlClientProvider>
-          </RootProviders>
-        </body>
-      </html>
+      <WrapperRootLayout locale={locale} className={className}>
+        <NextTopLoader
+          color="hsl(var(--primary))"
+          showSpinner={false}
+          height={4}
+        />
+        <RootProviders middlewareData={middlewareData}>
+          <NextIntlClientProvider messages={messages}>
+            {children}
+          </NextIntlClientProvider>
+        </RootProviders>
+      </WrapperRootLayout>
     );
   } catch (e) {
     return (
-      <html lang={locale} className={className} suppressHydrationWarning>
-        <body>
-          <RootProviders>
-            <NextIntlClientProvider messages={messages}>
-              <InternalErrorView />
-            </NextIntlClientProvider>
-          </RootProviders>
-        </body>
-      </html>
+      <WrapperRootLayout locale={locale}>
+        <RootProviders>
+          <NextIntlClientProvider messages={messages}>
+            <InternalErrorView />
+          </NextIntlClientProvider>
+        </RootProviders>
+      </WrapperRootLayout>
     );
   }
 };

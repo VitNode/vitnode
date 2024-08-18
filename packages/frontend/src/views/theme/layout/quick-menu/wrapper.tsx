@@ -28,35 +28,6 @@ export const QuickMenuWrapper = ({
         <Search />
         <span>{t('search')}</span>
       </ItemQuickMenu>
-      {/* {session && (
-        <>
-          <Drawer>
-            <DrawerTrigger asChild>
-              <ItemQuickMenu>
-                <Bell />
-                <span>{t("notifications")}</span>
-              </ItemQuickMenu>
-            </DrawerTrigger>
-
-            <DrawerContent>
-              <div className="p-5">Notifications - Not implemented!</div>
-            </DrawerContent>
-          </Drawer>
-
-          <Drawer>
-            <DrawerTrigger asChild>
-              <ItemQuickMenu>
-                <Mail />
-                <span>{t("messages")}</span>
-              </ItemQuickMenu>
-            </DrawerTrigger>
-
-            <DrawerContent>
-              <div className="p-5">Messages - Not implemented!</div>
-            </DrawerContent>
-          </Drawer>
-        </>
-      )} */}
       {children}
     </>
   );

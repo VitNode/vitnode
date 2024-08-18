@@ -93,7 +93,7 @@ export const ItemNav = ({
                 rel={item.external ? 'noopener noreferrer' : undefined}
               >
                 {icon && (
-                  <div className="group-hover:bg-primary group-hover:text-primary-foreground flex size-10 shrink-0 items-center justify-center rounded-sm border text-xl transition-colors [&>svg]:size-5">
+                  <div className="group-hover:bg-primary-foreground group-hover:text-primary flex size-10 shrink-0 items-center justify-center rounded-sm border text-xl transition-colors [&>svg]:size-5">
                     {icon}
                   </div>
                 )}

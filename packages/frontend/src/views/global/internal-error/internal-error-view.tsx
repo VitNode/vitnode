@@ -74,7 +74,7 @@ export const InternalErrorView = ({
 
       {showPoweredBy && (
         <footer className="p-5 text-center text-sm">
-          <PoweredByVitNode className="text-muted-foreground no-underline" />
+          <PoweredByVitNode />
         </footer>
       )}
     </div>

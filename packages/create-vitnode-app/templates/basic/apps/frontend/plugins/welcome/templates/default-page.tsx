@@ -1,38 +1,39 @@
 import { LogoVitNode } from 'vitnode-frontend/components/logo-vitnode';
-import { buttonVariants } from 'vitnode-frontend/components/ui/button';
+import { Button } from 'vitnode-frontend/components/ui/button';
 import { Link } from 'vitnode-frontend/navigation';
-import { BookIcon, KeyRoundIcon } from 'lucide-react';
 
 export default function DefaultPage() {
   return (
-    <main className="container mt-10 flex max-w-lg flex-col items-center justify-center gap-8 text-center">
-      <LogoVitNode className="w-48" />
+    <main className="container my-10 flex max-w-5xl flex-wrap items-center justify-between gap-8 px-8 sm:px-16">
+      <div className="max-w-md space-y-4">
+        <h1 className="text-balance text-3xl font-bold tracking-tight md:text-4xl">
+          Ready to build?
+        </h1>
 
-      <div className="space-y-1">
-        <h1 className="text-3xl font-bold">Ready to build?</h1>
-
-        <p className="text-muted-foreground">
-          Dive in and install your first plugin! Or, if you&apos;re feeling
-          adventurous, create your own masterpiece.
+        <p className="text-muted-foreground text-pretty">
+          Dive in and install or create your first plugin!
         </p>
+
+        <div className="flex flex-wrap items-center gap-2 md:gap-4">
+          <Button className="rounded-full px-6" asChild>
+            <Link href="/admin" target="_blank">
+              Go to AdminCP
+            </Link>
+          </Button>
+
+          <Button className="rounded-full px-6" variant="ghost" asChild>
+            <Link
+              href="https://vitnode.com/docs"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Read our Docs
+            </Link>
+          </Button>
+        </div>
       </div>
 
-      <div className="flex flex-wrap items-center justify-center gap-4">
-        <Link href="/admin" target="_blank" className={buttonVariants()}>
-          <KeyRoundIcon /> Go to AdminCP
-        </Link>
-
-        <Link
-          href="https://vitnode.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={buttonVariants({
-            variant: 'ghost',
-          })}
-        >
-          <BookIcon /> Read our Docs
-        </Link>
-      </div>
+      <LogoVitNode className="w-60" />
     </main>
   );
 }

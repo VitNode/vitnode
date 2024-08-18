@@ -16,7 +16,7 @@ export const SignInAdminView = () => {
       </Card>
 
       <footer className="text-center text-sm">
-        <PoweredByVitNode className="text-muted-foreground no-underline" />
+        <PoweredByVitNode />
       </footer>
     </div>
   );

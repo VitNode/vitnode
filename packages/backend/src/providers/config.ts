@@ -71,7 +71,7 @@ export interface ConfigType {
 
 export const DEFAULT_CONFIG_DATA: ConfigType = {
   logos: {
-    text: 'VitNode Website',
+    text: 'VitNode',
     width: 10,
     mobile_width: 3,
   },
@@ -93,7 +93,7 @@ export const DEFAULT_CONFIG_DATA: ConfigType = {
   },
   settings: {
     general: {
-      site_name: 'VitNode Community',
+      site_name: 'VitNode',
       site_short_name: 'VitNode',
     },
     email: {
