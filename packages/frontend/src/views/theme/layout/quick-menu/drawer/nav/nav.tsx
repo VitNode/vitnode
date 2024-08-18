@@ -37,7 +37,10 @@ export const NavDrawerQuickMenu = ({
                 className={cn(
                   buttonVariants({
                     variant: 'ghost',
-                    className: cn(classNameDrawerQuickMenu, 'focus:bg-inherit'),
+                    className: cn(
+                      classNameDrawerQuickMenu,
+                      'h-auto flex-col items-start focus:bg-inherit',
+                    ),
                   }),
                 )}
                 onClick={() =>
@@ -48,20 +51,29 @@ export const NavDrawerQuickMenu = ({
                   )
                 }
               >
-                {item.icon
-                  ? navIcons.find(el => el.id === item.id)?.icon
-                  : null}
-                <span>{convertText(item.name)}</span>
-                <ChevronDown
-                  className={cn(
-                    'ml-auto h-5 w-5 flex-shrink-0 transition-transform',
-                    {
-                      'rotate-180 transform': activeItems.includes(
-                        item.id.toString(),
-                      ),
-                    },
-                  )}
-                />
+                <div className="[&>svg]:text-muted-foreground flex w-full flex-wrap items-center gap-2">
+                  {item.icon
+                    ? navIcons.find(el => el.id === item.id)?.icon
+                    : null}
+                  <span>{convertText(item.name)}</span>
+
+                  <ChevronDown
+                    className={cn(
+                      'ml-auto size-5 flex-shrink-0 transition-transform',
+                      {
+                        'rotate-180 transform': activeItems.includes(
+                          item.id.toString(),
+                        ),
+                      },
+                    )}
+                  />
+                </div>
+
+                {item.description.length > 0 && (
+                  <span className="text-muted-foreground max-w-full text-sm leading-none">
+                    {convertText(item.description)}
+                  </span>
+                )}
               </Accordion.Trigger>
 
               <Accordion.Content className="data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down overflow-hidden transition-all">
@@ -74,6 +86,7 @@ export const NavDrawerQuickMenu = ({
                           : null}
                         <span>{convertText(child.name)}</span>
                       </div>
+
                       {child.description.length > 0 && (
                         <span className="text-muted-foreground text-sm leading-none">
                           {convertText(child.description)}
@@ -89,10 +102,13 @@ export const NavDrawerQuickMenu = ({
 
         return (
           <ItemNavDrawerQuickMenu key={item.id} {...item}>
-            {item.icon ? navIcons.find(el => el.id === item.id)?.icon : null}
-            <span>{convertText(item.name)}</span>
+            <span className="[&>svg]:text-muted-foreground flex flex-wrap items-center gap-2">
+              {item.icon ? navIcons.find(el => el.id === item.id)?.icon : null}
+              <span>{convertText(item.name)}</span>
+            </span>
+
             {item.description.length > 0 && (
-              <span className="text-muted-foreground text-sm leading-none">
+              <span className="text-muted-foreground max-w-full text-sm leading-none">
                 {convertText(item.description)}
               </span>
             )}

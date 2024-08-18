@@ -16,7 +16,9 @@ interface Props extends Omit<LucideIcon, '$$typeof'> {
 
 export const Icon = ({ className, name, ...props }: Props) => {
   if (/\p{Extended_Pictographic}/gu.test(name)) {
-    return <span className={cn('text-center', className)}>{name}</span>;
+    return (
+      <span className={cn('text-center leading-none', className)}>{name}</span>
+    );
   }
 
   const LucideIcon = dynamic(dynamicIconImports[name]);
