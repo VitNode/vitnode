@@ -85,8 +85,8 @@ export class CaptchaCoreCaptchaSecurityService extends HelpersAdminCaptchaSecuri
     };
   }
 
-  async validateCaptcha({ req }: { req: GqlContext['req'] }) {
-    const captchaKey = req.headers['x-vitnode-captcha-token'];
+  async validateCaptcha({ request }: { request: GqlContext['request'] }) {
+    const captchaKey = request.headers['x-vitnode-captcha-token'];
 
     const {
       security: { captcha: config },
@@ -98,7 +98,7 @@ export class CaptchaCoreCaptchaSecurityService extends HelpersAdminCaptchaSecuri
       });
     }
 
-    const userIp = getUserIp(req);
+    const userIp = getUserIp(request);
     const res = await this.getResFromReCaptcha({
       // Allow non-null assertion because we check if it's not provided. Specific to this case.
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion

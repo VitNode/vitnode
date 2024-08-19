@@ -1,12 +1,13 @@
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
 import { Field, GqlExecutionContext, Int, ObjectType } from '@nestjs/graphql';
 
-import { TextLanguage } from '../utils';
+import { GqlContext, TextLanguage } from '../utils';
 
 export const CurrentUser = createParamDecorator(
   (_data: unknown, context: ExecutionContext) => {
-    const ctx = GqlExecutionContext.create(context);
-    const dataFromContext = ctx.getContext().req.user;
+    const gqlCtx = GqlExecutionContext.create(context);
+    const ctx: GqlContext = gqlCtx.getContext();
+    const dataFromContext = ctx.request.user;
 
     return dataFromContext;
   },

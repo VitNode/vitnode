@@ -143,7 +143,7 @@ export const createPackagesJSON = ({
     devDependencies: {
       '@graphql-codegen/cli': '^5.0.2',
       '@nestjs/cli': '^10.4.2',
-      '@nestjs/platform-express': '^10.3.10',
+      '@nestjs/platform-fastify': '^10.4.1',
       '@nestjs/schematics': '^10.1.3',
       '@types/express': '^4.17.21',
       '@types/node': '^22.1.0',

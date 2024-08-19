@@ -9,7 +9,7 @@ import { ShowCoreLanguagesObj } from './dto/show.obj';
 export class ShowCoreLanguagesResolver {
   constructor(private readonly service: ShowCoreLanguageService) {}
 
-  @SkipThrottle()
+  // @SkipThrottle()
   @Query(() => ShowCoreLanguagesObj)
   async core_languages__show(
     @Args() args: ShowCoreLanguagesArgs,

@@ -1,6 +1,6 @@
-import { Request } from 'express';
+import { FastifyRequest } from 'fastify';
 
-export const getUserIp = (req: Request): string => {
+export const getUserIp = (req: FastifyRequest): string => {
   return (
     (req.headers['x-forwarded-for']
       ? req.headers['x-forwarded-for'].toString()

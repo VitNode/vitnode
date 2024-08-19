@@ -57,9 +57,9 @@ export class SignUpCoreSessionsService extends AvatarColorService {
 
   async signUp(
     { email: emailRaw, name, newsletter, password }: SignUpCoreSessionsArgs,
-    { req }: GqlContext,
+    { request }: GqlContext,
   ): Promise<SignUpCoreSessionsObj> {
-    await this.captchaService.validateCaptcha({ req });
+    await this.captchaService.validateCaptcha({ request });
 
     const email = emailRaw.toLowerCase();
     const checkEmail = await this.databaseService.db.query.core_users.findFirst(
@@ -100,7 +100,7 @@ export class SignUpCoreSessionsService extends AvatarColorService {
         password: hashPassword,
         avatar_color: this.generateAvatarColor(name),
         group_id: await this.getGroupId(),
-        ip_address: getUserIp(req),
+        ip_address: getUserIp(request),
       })
       .returning();
 

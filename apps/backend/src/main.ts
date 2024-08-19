@@ -1,12 +1,18 @@
 /* eslint-disable no-console */
 import { NestFactory } from '@nestjs/core';
-import { INestApplication } from '@nestjs/common';
 import { nestjsMainApp } from 'vitnode-backend';
+import {
+  FastifyAdapter,
+  NestFastifyApplication,
+} from '@nestjs/platform-fastify';
 
 import { AppModule } from './app.module';
 
 async function bootstrap() {
-  const app: INestApplication = await NestFactory.create(AppModule);
+  const app = await NestFactory.create<NestFastifyApplication>(
+    AppModule,
+    new FastifyAdapter(),
+  );
 
   nestjsMainApp(app, {
     cors: {

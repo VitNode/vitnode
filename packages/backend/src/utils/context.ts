@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { FastifyRequest, FastifyReply } from 'fastify';
 
 import { User } from '../decorators';
 
@@ -9,6 +9,7 @@ export interface AuthRequest extends Request {
 }
 
 export interface GqlContext {
-  req: AuthRequest;
-  res: Response;
+  // req
+  reply: FastifyReply;
+  request: FastifyRequest; // res
 }

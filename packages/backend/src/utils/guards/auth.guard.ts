@@ -22,20 +22,20 @@ export class AuthGuards implements CanActivate {
     @Inject('IOAuthGuards') private readonly service: IOAuthGuards,
   ) {}
 
-  protected async getAuth({ req, res }: GqlContext) {
+  protected async getAuth({ request, reply }: GqlContext) {
     const data = await this.service.authorization({
-      req,
-      res,
+      request,
+      reply,
     });
-    req.user = data;
+    request.user = data;
 
     return data;
   }
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const optionalAuth = this.reflector.get(OptionalAuth, context.getHandler());
-
-    const ctx = GqlExecutionContext.create(context).getContext();
+    const gqlCtx = GqlExecutionContext.create(context);
+    const ctx: GqlContext = gqlCtx.getContext();
 
     // If optional auth decorator is not set, check auth
     if (optionalAuth === undefined) {

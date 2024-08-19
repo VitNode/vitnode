@@ -8,7 +8,7 @@ import { ShowCorePluginsObj } from './dto/show.obj';
 export class ShowCorePluginsResolver {
   constructor(private readonly service: ShowCorePluginsService) {}
 
-  @SkipThrottle()
+  // @SkipThrottle()
   @Query(() => [ShowCorePluginsObj])
   async core_plugins__show(): Promise<ShowCorePluginsObj[]> {
     return this.service.show();

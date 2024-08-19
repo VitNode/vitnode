@@ -22,19 +22,20 @@ export class AdminAuthGuards implements CanActivate {
     @Inject('IOAdminAuthGuards') private readonly service: IOAdminAuthGuards,
   ) {}
 
-  protected async getAuth({ req, res }: GqlContext) {
+  protected async getAuth({ reply, request }: GqlContext) {
     const data = await this.service.authorization({
-      req,
-      res,
+      reply,
+      request,
     });
 
-    req.user = data.user ?? undefined;
+    request.user = data.user ?? undefined;
 
     return data;
   }
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
-    const ctx = GqlExecutionContext.create(context).getContext();
+    const gqlCtx = GqlExecutionContext.create(context);
+    const ctx: GqlContext = gqlCtx.getContext();
 
     try {
       return !!(await this.getAuth(ctx));

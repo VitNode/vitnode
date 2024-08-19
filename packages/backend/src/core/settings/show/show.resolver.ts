@@ -8,7 +8,7 @@ import { ShowSettingsObj } from './dto/show.obj';
 export class ShowCoreSettingsResolver {
   constructor(private readonly service: ShowSettingsService) {}
 
-  @SkipThrottle()
+  // @SkipThrottle()
   @Query(() => ShowSettingsObj)
   async core_settings__show(): Promise<ShowSettingsObj> {
     return this.service.show();

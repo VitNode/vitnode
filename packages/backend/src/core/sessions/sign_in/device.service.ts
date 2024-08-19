@@ -24,16 +24,19 @@ export class DeviceSignInCoreSessionsService {
     private readonly configService: ConfigService,
   ) {}
 
-  protected async createDevice({ req, res }: GqlContext): Promise<DeviceType> {
-    if (!req.headers['user-agent']) {
+  protected async createDevice({
+    request,
+    reply,
+  }: GqlContext): Promise<DeviceType> {
+    if (!request.headers['user-agent']) {
       throw new NotFoundError('User-Agent');
     }
 
     const dataDevice = await this.databaseService.db
       .insert(core_sessions_known_devices)
       .values({
-        ...getUserAgentData(req.headers['user-agent']),
-        ip_address: getUserIp(req),
+        ...getUserAgentData(request.headers['user-agent']),
+        ip_address: getUserIp(request),
       })
       .returning();
 
@@ -45,9 +48,9 @@ export class DeviceSignInCoreSessionsService {
       'cookies.known_device.expiresIn',
     );
     expires.setDate(expires.getDate() + expiresIn);
-    res.cookie(
+    reply.cookie(
       this.configService.getOrThrow('cookies.known_device.name'),
-      device.id,
+      device.id.toString(),
       {
         httpOnly: true,
         secure: true,
@@ -61,23 +64,25 @@ export class DeviceSignInCoreSessionsService {
     return device;
   }
 
-  async getDevice({ req, res }: GqlContext): Promise<DeviceType> {
-    const know_device_id: number | undefined =
-      +req.cookies[this.configService.getOrThrow('cookies.known_device.name')];
+  async getDevice({ request, reply }: GqlContext): Promise<DeviceType> {
+    const know_device_id =
+      request.cookies[
+        this.configService.getOrThrow('cookies.known_device.name')
+      ];
 
     if (!know_device_id) {
-      return this.createDevice({ req, res });
+      return this.createDevice({ request, reply });
     }
 
     const device =
       await this.databaseService.db.query.core_sessions_known_devices.findFirst(
         {
-          where: (table, { eq }) => eq(table.id, know_device_id),
+          where: (table, { eq }) => eq(table.id, +know_device_id),
         },
       );
 
     if (!device) {
-      return this.createDevice({ req, res });
+      return this.createDevice({ request, reply });
     }
 
     return device;

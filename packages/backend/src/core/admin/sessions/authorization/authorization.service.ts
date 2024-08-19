@@ -25,15 +25,15 @@ export class AuthorizationAdminSessionsService {
   ) {}
 
   async initialAuthorization({
-    req,
-    res,
+    request,
+    reply,
   }: GqlContext): Promise<AuthorizationCurrentUserObj> {
-    if (!req.headers['user-agent']) {
+    if (!request.headers['user-agent']) {
       throw new NotFoundError('User-Agent');
     }
 
     const login_token =
-      req.cookies[
+      request.cookies[
         this.configService.getOrThrow('cookies.login_token.admin.name')
       ];
 
@@ -42,8 +42,8 @@ export class AuthorizationAdminSessionsService {
     }
 
     const device = await this.deviceService.getDevice({
-      req,
-      res,
+      request,
+      reply,
     });
 
     // If access token exists, check it
@@ -83,8 +83,8 @@ export class AuthorizationAdminSessionsService {
       .update(core_sessions_known_devices)
       .set({
         last_seen: new Date(),
-        ...getUserAgentData(req.headers['user-agent']),
-        ip_address: getUserIp(req),
+        ...getUserAgentData(request.headers['user-agent']),
+        ip_address: getUserIp(request),
       })
       .where(eq(core_sessions_known_devices.id, device.id));
 

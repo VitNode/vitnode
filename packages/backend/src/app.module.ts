@@ -8,7 +8,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ConfigModule } from '@nestjs/config';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
-import { ThrottlerModule } from '@nestjs/throttler';
+// import { ThrottlerModule } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
 
 import { GqlContext } from './utils';
@@ -172,19 +172,19 @@ export class VitNodeCoreModule {
           load: [config],
           envFilePath: pathToEnvFile,
         }),
-        ThrottlerModule.forRoot([
-          {
-            ttl: 1000,
-            limit: 30,
-          },
-        ]),
+        // ThrottlerModule.forRoot([
+        //   {
+        //     ttl: 1000,
+        //     limit: 30,
+        //   },
+        // ]),
         GraphQLModule.forRoot<ApolloDriverConfig>({
           driver: ApolloDriver,
           autoSchemaFile: ABSOLUTE_PATHS_BACKEND.schema,
           sortSchema: true,
           playground: false,
           plugins: [ApolloServerPluginLandingPageLocalDefault()],
-          context: ({ req, res }): GqlContext => ({ req, res }),
+          context: (request, reply): GqlContext => ({ request, reply }),
           debug: process.env.NODE_ENV === 'production' ? false : true,
         }),
         ScheduleModule.forRoot(),
@@ -197,12 +197,12 @@ export class VitNodeCoreModule {
         GlobalProvidersModule,
         CoreModule,
       ],
-      providers: [
-        {
-          provide: APP_GUARD,
-          useClass: GqlThrottlerGuard,
-        },
-      ],
+      // providers: [
+      //   {
+      //     provide: APP_GUARD,
+      //     useClass: GqlThrottlerGuard,
+      //   },
+      // ],
     };
   }
 }

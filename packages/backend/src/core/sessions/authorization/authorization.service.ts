@@ -47,15 +47,15 @@ export class AuthorizationCoreSessionsService {
   }
 
   async authorization({
-    req,
-    res,
+    request,
+    reply,
   }: GqlContext): Promise<AuthorizationCoreSessionsObj> {
     const plugin = await this.databaseService.db.query.core_plugins.findFirst({
       where: (table, { eq }) => eq(table.default, true),
     });
 
     try {
-      const currentUser = await this.service.authorization({ req, res });
+      const currentUser = await this.service.authorization({ request, reply });
       const user = await this.databaseService.db.query.core_users.findFirst({
         where: (table, { eq }) => eq(table.id, currentUser.id),
         with: {

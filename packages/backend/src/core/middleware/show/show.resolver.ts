@@ -8,7 +8,7 @@ import { ShowCoreMiddlewareObj } from './dto/show.obj';
 export class ShowCoreMiddlewareResolver {
   constructor(private readonly service: ShowCoreMiddlewareService) {}
 
-  @SkipThrottle()
+  // @SkipThrottle()
   @Query(() => ShowCoreMiddlewareObj)
   async core_middleware__show(): Promise<ShowCoreMiddlewareObj> {
     return this.service.show();

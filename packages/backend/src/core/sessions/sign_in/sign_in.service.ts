@@ -35,14 +35,14 @@ export class SignInCoreSessionsService {
     email,
     name,
     remember,
-    req,
-    res,
+    request,
+    reply,
     userId,
   }: CreateSessionArgs) {
     const loginTokenSecret: string =
       this.configService.getOrThrow('login_token_secret');
 
-    const device = await this.deviceService.getDevice({ req, res });
+    const device = await this.deviceService.getDevice({ request, reply });
     if (!device) {
       throw new AccessDeniedError();
     }
@@ -107,7 +107,7 @@ export class SignInCoreSessionsService {
       }
 
       // Set cookie for session
-      res.cookie(
+      reply.cookie(
         this.configService.getOrThrow('cookies.login_token.admin.name'),
         login_token,
         {
@@ -156,7 +156,7 @@ export class SignInCoreSessionsService {
     }
 
     // Set cookie for session
-    res.cookie(
+    reply.cookie(
       this.configService.getOrThrow('cookies.login_token.name'),
       login_token,
       {

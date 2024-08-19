@@ -9,15 +9,15 @@ import {
   Res,
   StreamableFile,
 } from '@nestjs/common';
-import { Request, Response } from 'express';
 import { SkipThrottle } from '@nestjs/throttler';
+import { FastifyReply, FastifyRequest } from 'fastify';
 
 import { InternalAuthorizationCoreSessionsService } from '../../../sessions/authorization/internal/internal_authorization.service';
 import { AuthorizationAdminSessionsService } from '../../sessions/authorization/authorization.service';
 import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { ABSOLUTE_PATHS_BACKEND } from '../../../..';
 
-@SkipThrottle()
+// @SkipThrottle()
 @Controller('files')
 export class DownloadFilesAdminController {
   constructor(
@@ -28,13 +28,13 @@ export class DownloadFilesAdminController {
 
   @Get(':file')
   async getFile(
-    @Res({ passthrough: true }) res: Response,
-    @Req() req: Request,
+    @Res({ passthrough: true }) reply: FastifyReply,
+    @Req() request: FastifyRequest,
     @Param() { file }: { file: string },
   ): Promise<StreamableFile | void> {
     const path = join(ABSOLUTE_PATHS_BACKEND.uploads.temp, file);
     if (!existsSync(path)) {
-      res.status(404);
+      reply.status(404);
 
       return;
     }
@@ -49,7 +49,7 @@ export class DownloadFilesAdminController {
     });
 
     if (!user) {
-      res.status(404);
+      reply.status(404);
 
       return;
     }
@@ -63,44 +63,45 @@ export class DownloadFilesAdminController {
     if (isAdmin) {
       try {
         const data = await this.serviceAdmin.initialAuthorization({
-          req,
-          res,
+          reply,
+          request,
         });
 
         if (+userId !== data.id) {
-          res.status(404);
+          reply.status(404);
 
           return;
         }
       } catch (e) {
-        res.status(404);
+        reply.status(404);
 
         return;
       }
     } else {
       try {
         const data = await this.service.authorization({
-          req,
-          res,
+          reply,
+          request,
         });
 
         if (+userId !== data.id) {
-          res.status(404);
+          reply.status(404);
 
           return;
         }
       } catch (e) {
-        res.status(404);
+        reply.status(404);
 
         return;
       }
     }
 
     const streamFile = createReadStream(path);
-    res.set({
-      'Content-Type': `application/${currentFile.type}`,
-      'Content-Disposition': `attachment; filename="${currentFile.name}.${currentFile.type}"`,
-    });
+    reply.header('Content-Type', `application/${currentFile.type}`);
+    reply.header(
+      'Content-Disposition',
+      `attachment; filename="${currentFile.name}.${currentFile.type}"`,
+    );
 
     streamFile.on('close', () => {
       unlinkSync(path);

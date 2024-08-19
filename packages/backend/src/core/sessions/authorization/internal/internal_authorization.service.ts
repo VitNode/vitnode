@@ -21,13 +21,17 @@ export class InternalAuthorizationCoreSessionsService {
     private readonly deviceService: DeviceSignInCoreSessionsService,
   ) {}
 
-  async authorization({ req, res }: GqlContext): Promise<User> {
-    const login_token: string =
-      req.cookies[this.configService.getOrThrow('cookies.login_token.name')];
-    const know_device_id: number | undefined =
-      +req.cookies[this.configService.getOrThrow('cookies.known_device.name')];
+  async authorization({ request, reply }: GqlContext): Promise<User> {
+    const login_token =
+      request.cookies[
+        this.configService.getOrThrow('cookies.login_token.name')
+      ];
+    const know_device_id =
+      request.cookies[
+        this.configService.getOrThrow('cookies.known_device.name')
+      ];
 
-    if (!req.headers['user-agent']) {
+    if (!request.headers['user-agent']) {
       throw new NotFoundError('User-Agent');
     }
 
@@ -36,8 +40,8 @@ export class InternalAuthorizationCoreSessionsService {
     }
 
     const device = await this.deviceService.getDevice({
-      req,
-      res,
+      request,
+      reply,
     });
 
     const session = await this.databaseService.db.query.core_sessions.findFirst(
@@ -80,13 +84,13 @@ export class InternalAuthorizationCoreSessionsService {
       throw new AccessDeniedError();
     }
 
-    if (session.user.language !== req.headers['x-vitnode-user-language']) {
+    if (session.user.language !== request.headers['x-vitnode-user-language']) {
       await this.databaseService.db
         .update(core_users)
         .set({
-          language: Array.isArray(req.headers['x-vitnode-user-language'])
-            ? req.headers['x-vitnode-user-language'][0]
-            : req.headers['x-vitnode-user-language'],
+          language: Array.isArray(request.headers['x-vitnode-user-language'])
+            ? request.headers['x-vitnode-user-language'][0]
+            : request.headers['x-vitnode-user-language'],
         })
         .where(eq(core_users.id, session.user.id));
     }
@@ -96,8 +100,8 @@ export class InternalAuthorizationCoreSessionsService {
       .update(core_sessions_known_devices)
       .set({
         last_seen: new Date(),
-        ...getUserAgentData(req.headers['user-agent']),
-        ip_address: getUserIp(req),
+        ...getUserAgentData(request.headers['user-agent']),
+        ip_address: getUserIp(request),
       })
       .where(eq(core_sessions_known_devices.id, device.id));
 
@@ -107,7 +111,7 @@ export class InternalAuthorizationCoreSessionsService {
       'cookies.known_device.expiresIn',
     );
     expires.setDate(expires.getDate() + expiresInDeviceCookie);
-    res.cookie(
+    reply.cookie(
       this.configService.getOrThrow('cookies.known_device.name'),
       know_device_id,
       {

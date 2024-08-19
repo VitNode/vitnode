@@ -1,7 +1,9 @@
-import { INestApplication, ValidationPipe } from '@nestjs/common';
-import cookieParser from 'cookie-parser';
-import helmet from 'helmet';
+import { ValidationPipe } from '@nestjs/common';
+import fastifyCookie from '@fastify/cookie';
+import helmet from '@fastify/helmet';
 import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface';
+import { RawServerDefault } from 'fastify';
+import { NestFastifyApplication } from '@nestjs/platform-fastify';
 
 import {
   ProcessRequestOptions,
@@ -17,14 +19,19 @@ interface Args {
   graphqlUpload?: ProcessRequestOptions;
 }
 
-export const nestjsMainApp = async (app: INestApplication, options?: Args) => {
-  app.use(cookieParser());
-  app.use(
-    helmet({
-      contentSecurityPolicy:
-        process.env.NODE_ENV === 'production' ? undefined : false,
-    }),
-  );
+export const nestjsMainApp = async (
+  app: NestFastifyApplication<RawServerDefault>,
+  options?: Args,
+) => {
+  await app.register(fastifyCookie, {
+    secret: 'my-secret', // for cookies signature
+  });
+
+  await app.register(helmet, {
+    contentSecurityPolicy:
+      process.env.NODE_ENV === 'production' ? undefined : false,
+  });
+
   app.enableCors({
     ...options?.cors,
     credentials: true,
@@ -41,10 +48,10 @@ export const nestjsMainApp = async (app: INestApplication, options?: Args) => {
     }),
   );
 
-  app.use(
-    graphqlUploadExpress({
-      maxFiles: options?.graphqlUpload ? options.graphqlUpload.maxFiles : 100,
-      ...options?.graphqlUpload,
-    }),
-  );
+  // app.use(
+  //   graphqlUploadExpress({
+  //     maxFiles: options?.graphqlUpload ? options.graphqlUpload.maxFiles : 100,
+  //     ...options?.graphqlUpload,
+  //   }),
+  // );
 };
