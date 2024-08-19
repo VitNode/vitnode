@@ -13,7 +13,9 @@ export const NavSettings = () => {
         ))}
       </div>
 
-      <DrawerNavSettings />
+      <div className="block lg:hidden">
+        <DrawerNavSettings />
+      </div>
     </aside>
   );
 };
