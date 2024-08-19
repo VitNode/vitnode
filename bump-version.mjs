@@ -284,6 +284,7 @@ function logError(error) {
       join('app', '[locale]', 'admin', '(vitnode)'),
       join('app', '[locale]', 'admin', '(auth)', '(vitnode)'),
       join('app', '[locale]', '(main)', '(vitnode)'),
+      join('app', '[locale]', '(main)', '[...rest]'),
     ];
     const pathsToFiles = [
       {
