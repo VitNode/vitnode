@@ -47,16 +47,6 @@ const init = () => {
       file: 'page.tsx',
     },
     {
-      path: '(main)',
-      isInsideAppDir: true,
-      file: 'not-found.tsx',
-    },
-    {
-      path: '(main)',
-      isInsideAppDir: true,
-      file: 'error.tsx',
-    },
-    {
       path: 'app',
       file: 'not-found.tsx',
     },
