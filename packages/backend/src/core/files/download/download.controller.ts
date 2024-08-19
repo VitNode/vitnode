@@ -9,7 +9,6 @@ import {
   StreamableFile,
   Query,
 } from '@nestjs/common';
-import { SkipThrottle } from '@nestjs/throttler';
 import { FastifyReply } from 'fastify';
 
 import { InternalDatabaseService } from '@/utils/database/internal_database.service';

@@ -8,13 +8,10 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ConfigModule } from '@nestjs/config';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
-// import { ThrottlerModule } from '@nestjs/throttler';
-import { APP_GUARD } from '@nestjs/core';
 
 import { GqlContext } from './utils';
 import { CoreModule } from './core/core.module';
 import { GlobalProvidersModule } from './providers/providers.module';
-import { GqlThrottlerGuard } from './utils/guards/gql-throttler.guard';
 import {
   InternalDatabaseModule,
   DatabaseModuleArgs,
@@ -172,12 +169,6 @@ export class VitNodeCoreModule {
           load: [config],
           envFilePath: pathToEnvFile,
         }),
-        // ThrottlerModule.forRoot([
-        //   {
-        //     ttl: 1000,
-        //     limit: 30,
-        //   },
-        // ]),
         GraphQLModule.forRoot<ApolloDriverConfig>({
           driver: ApolloDriver,
           autoSchemaFile: ABSOLUTE_PATHS_BACKEND.schema,
@@ -197,12 +188,6 @@ export class VitNodeCoreModule {
         GlobalProvidersModule,
         CoreModule,
       ],
-      // providers: [
-      //   {
-      //     provide: APP_GUARD,
-      //     useClass: GqlThrottlerGuard,
-      //   },
-      // ],
     };
   }
 }

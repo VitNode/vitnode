@@ -9,7 +9,6 @@ import {
   Res,
   StreamableFile,
 } from '@nestjs/common';
-import { SkipThrottle } from '@nestjs/throttler';
 import { FastifyReply, FastifyRequest } from 'fastify';
 
 import { InternalAuthorizationCoreSessionsService } from '../../../sessions/authorization/internal/internal_authorization.service';
