@@ -42,9 +42,19 @@ const init = () => {
     isInsideAppDir?: boolean;
   }[] = [
     {
-      path: join('(main)', '(vitnode)', '[...rest]'),
+      path: join('(main)', '[...rest]'),
       isInsideAppDir: true,
       file: 'page.tsx',
+    },
+    {
+      path: '(main)',
+      isInsideAppDir: true,
+      file: 'not-found.tsx',
+    },
+    {
+      path: '(main)',
+      isInsideAppDir: true,
+      file: 'error.tsx',
     },
     {
       path: 'app',

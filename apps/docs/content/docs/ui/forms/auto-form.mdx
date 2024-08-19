@@ -272,6 +272,42 @@ You can get access to the `form` from `react-hook-form` by using the `form` prop
   }}
 ```
 
+You can also move `onSubmit` to a separate function.
+
+```tsx
+const onSubmit = async (
+  values: z.infer<typeof formSchema>,
+  form: UseFormReturn<z.infer<typeof formSchema>>,
+) => {};
+```
+
+### Handle Errors
+
+You can handle errors by using the [Sonner](/docs/ui/sonner) component.
+
+```ts
+import { toast } from 'sonner';
+
+const onSubmit = async (
+  values: z.infer<typeof formSchema>,
+  form: UseFormReturn<z.infer<typeof formSchema>>,
+) => {
+  const mutation = await mutationApi(values);
+
+  if (mutation.error) {
+    toast.error(t('errors.title'), {
+      description: t('errors.internal_server_error'),
+    });
+
+    return;
+  }
+
+  toast.success(t('success.title'), {
+    description: t('success.description'),
+  });
+};
+```
+
 ## Submit Button
 
 Component has a submit button by default with the text `Save` include translation for this text. You can change the component by using the `submitButton` prop.

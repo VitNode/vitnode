@@ -50,13 +50,16 @@ import {
 } from '@/graphql/graphql';
 import { fetcher, FetcherErrorType } from 'vitnode-frontend/graphql/fetcher';
 
-export const mutationApi = async () => {
+export const mutationApi = async (
+  variables: Core_Sessions__Sign_OutMutationVariables,
+) => {
   try {
     const data = await fetcher<
-      Core_Sessions__Sign_OutMutation, // Mutation type
-      Core_Sessions__Sign_OutMutationVariables // Variables type
+      Core_Sessions__Sign_OutMutation,
+      Core_Sessions__Sign_OutMutationVariables
     >({
-      query: Core_Sessions__Sign_Out, // Schema GraphQL mutation
+      query: Core_Sessions__Sign_Out,
+      variables,
     });
 
     return { data };
