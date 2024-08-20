@@ -80,13 +80,20 @@ export class InternalAuthorizationCoreSessionsService {
       throw new AccessDeniedError();
     }
 
-    if (session.user.language !== req.headers['x-vitnode-user-language']) {
+    const languageToSet: string =
+      (Array.isArray(req.headers['x-vitnode-user-language'])
+        ? req.headers['x-vitnode-user-language'][0]
+        : req.headers['x-vitnode-user-language']) ?? 'en';
+
+    if (
+      req.headers['x-vitnode-user-language'] &&
+      session.user.language !== req.headers['x-vitnode-user-language'] &&
+      languageToSet !== session.user.language
+    ) {
       await this.databaseService.db
         .update(core_users)
         .set({
-          language: Array.isArray(req.headers['x-vitnode-user-language'])
-            ? req.headers['x-vitnode-user-language'][0]
-            : req.headers['x-vitnode-user-language'],
+          language: languageToSet,
         })
         .where(eq(core_users.id, session.user.id));
     }
