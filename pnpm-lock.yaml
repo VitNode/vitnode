@@ -57,11 +57,11 @@ importers:
         specifier: ^4.0.2
         version: 4.0.2(@fastify/static@7.0.4)(@nestjs/common@10.3.10(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/core@10.3.10(@nestjs/common@10.3.10(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/platform-express@10.3.10)(reflect-metadata@0.2.2)(rxjs@7.8.1))(express@4.19.2)(fastify@4.28.1)
       drizzle-kit:
-        specifier: ^0.23.1
-        version: 0.23.1
+        specifier: ^0.24.0
+        version: 0.24.0
       drizzle-orm:
-        specifier: ^0.32.1
-        version: 0.32.1(@types/pg@8.11.6)(@types/react@18.3.3)(pg@8.12.0)(react@19.0.0-rc-fb9a90fa48-20240614)
+        specifier: ^0.33.0
+        version: 0.33.0(@types/pg@8.11.6)(@types/react@18.3.3)(pg@8.12.0)(react@19.0.0-rc-fb9a90fa48-20240614)
       pg:
         specifier: ^8.12.0
         version: 8.12.0
@@ -409,11 +409,11 @@ importers:
         specifier: ^16.4.5
         version: 16.4.5
       drizzle-kit:
-        specifier: ^0.23.1
-        version: 0.23.1
+        specifier: ^0.24.0
+        version: 0.24.0
       drizzle-orm:
-        specifier: ^0.32.1
-        version: 0.32.1(@types/pg@8.11.6)(@types/react@18.3.3)(pg@8.12.0)(react@19.0.0-rc-fb9a90fa48-20240614)
+        specifier: ^0.33.0
+        version: 0.33.0(@types/pg@8.11.6)(@types/react@18.3.3)(pg@8.12.0)(react@19.0.0-rc-fb9a90fa48-20240614)
       eslint-config-typescript-vitnode:
         specifier: workspace:*
         version: link:../eslint-config-typescript-vitnode
@@ -434,7 +434,7 @@ importers:
         version: 10.9.2(@swc/core@1.7.6(@swc/helpers@0.5.12))(@types/node@22.1.0)(typescript@5.5.4)
       tsup:
         specifier: ^8.2.4
-        version: 8.2.4(@swc/core@1.7.6(@swc/helpers@0.5.12))(jiti@1.21.6)(postcss@8.4.40)(typescript@5.5.4)(yaml@2.5.0)
+        version: 8.2.4(@swc/core@1.7.6)(jiti@1.21.6)(postcss@8.4.40)(typescript@5.5.4)(yaml@2.5.0)
       typescript:
         specifier: ^5.5.4
         version: 5.5.4
@@ -5260,12 +5260,12 @@ packages:
     resolution: {integrity: sha512-ZmdL2rui+eB2YwhsWzjInR8LldtZHGDoQ1ugH85ppHKwpUHL7j7rN0Ti9NCnGiQbhaZ11FpR+7ao1dNsmduNUg==}
     engines: {node: '>=12'}
 
-  drizzle-kit@0.23.1:
-    resolution: {integrity: sha512-posGQhj8/K4S4CPhk7BO9+IcpNdIh96t0DvcAr/NvMKhPhe5D0MELzmpq9R2MpmSP3fd+Z3upwidtetrw7xnjg==}
+  drizzle-kit@0.24.0:
+    resolution: {integrity: sha512-rUl5Rf5HLOVkAwHEVEi8xgulIRWzoys0q77RHGCxv5e9v8AI3JGFg7Ug5K1kn513RwNZbuNJMUKOXo0j8kPRgg==}
     hasBin: true
 
-  drizzle-orm@0.32.1:
-    resolution: {integrity: sha512-Wq1J+lL8PzwR5K3a1FfoWsbs8powjr3pGA4+5+2ueN1VTLDNFYEolUyUWFtqy8DVRvYbL2n7sXZkgVmK9dQkng==}
+  drizzle-orm@0.33.0:
+    resolution: {integrity: sha512-SHy72R2Rdkz0LEq0PSG/IdvnT3nGiWuRk+2tXZQ90GVq/XQhpCzu/EFT3V2rox+w8MlkBQxifF8pCStNYnERfA==}
     peerDependencies:
       '@aws-sdk/client-rds-data': '>=3'
       '@cloudflare/workers-types': '>=3'
@@ -14469,7 +14469,7 @@ snapshots:
 
   dotenv@16.4.5: {}
 
-  drizzle-kit@0.23.1:
+  drizzle-kit@0.24.0:
     dependencies:
       '@drizzle-team/brocli': 0.8.2
       '@esbuild-kit/esm-loader': 2.6.5
@@ -14478,7 +14478,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  drizzle-orm@0.32.1(@types/pg@8.11.6)(@types/react@18.3.3)(pg@8.12.0)(react@19.0.0-rc-fb9a90fa48-20240614):
+  drizzle-orm@0.33.0(@types/pg@8.11.6)(@types/react@18.3.3)(pg@8.12.0)(react@19.0.0-rc-fb9a90fa48-20240614):
     optionalDependencies:
       '@types/pg': 8.11.6
       '@types/react': 18.3.3
@@ -19003,34 +19003,6 @@ snapshots:
   tslib@2.4.1: {}
 
   tslib@2.6.3: {}
-
-  tsup@8.2.4(@swc/core@1.7.6(@swc/helpers@0.5.12))(jiti@1.21.6)(postcss@8.4.40)(typescript@5.5.4)(yaml@2.5.0):
-    dependencies:
-      bundle-require: 5.0.0(esbuild@0.23.0)
-      cac: 6.7.14
-      chokidar: 3.6.0
-      consola: 3.2.3
-      debug: 4.3.6
-      esbuild: 0.23.0
-      execa: 5.1.1
-      globby: 11.1.0
-      joycon: 3.1.1
-      picocolors: 1.0.1
-      postcss-load-config: 6.0.1(jiti@1.21.6)(postcss@8.4.40)(yaml@2.5.0)
-      resolve-from: 5.0.0
-      rollup: 4.20.0
-      source-map: 0.8.0-beta.0
-      sucrase: 3.35.0
-      tree-kill: 1.2.2
-    optionalDependencies:
-      '@swc/core': 1.7.6(@swc/helpers@0.5.12)
-      postcss: 8.4.40
-      typescript: 5.5.4
-    transitivePeerDependencies:
-      - jiti
-      - supports-color
-      - tsx
-      - yaml
 
   tsup@8.2.4(@swc/core@1.7.6)(jiti@1.21.6)(postcss@8.4.40)(typescript@5.5.4)(yaml@2.5.0):
     dependencies:
