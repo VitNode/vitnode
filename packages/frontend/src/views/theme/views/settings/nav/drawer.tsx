@@ -15,24 +15,22 @@ export const DrawerNavSettings = () => {
   const { navItems } = useSettingsView();
 
   return (
-    <div className="block lg:hidden">
-      <Drawer>
-        <DrawerTrigger
-          className={buttonVariants({ variant: 'ghost', className: 'w-full' })}
-        >
-          {t('settings.open_sheet')}
-        </DrawerTrigger>
+    <Drawer>
+      <DrawerTrigger
+        className={buttonVariants({ variant: 'ghost', className: 'w-full' })}
+      >
+        {t('settings.open_sheet')}
+      </DrawerTrigger>
 
-        <DrawerContent>
-          <div className="flex flex-col p-5">
-            {navItems.map(item => (
-              <DrawerClose asChild key={item.href}>
-                <ItemNavSettings {...item} />
-              </DrawerClose>
-            ))}
-          </div>
-        </DrawerContent>
-      </Drawer>
-    </div>
+      <DrawerContent>
+        <div className="flex flex-col p-5">
+          {navItems.map(item => (
+            <DrawerClose asChild key={item.href}>
+              <ItemNavSettings {...item} />
+            </DrawerClose>
+          ))}
+        </div>
+      </DrawerContent>
+    </Drawer>
   );
 };
