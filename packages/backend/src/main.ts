@@ -1,7 +1,11 @@
+import { readFileSync } from 'fs';
+import { join } from 'path';
+
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 import {
   ProcessRequestOptions,
@@ -47,4 +51,15 @@ export const nestjsMainApp = async (app: INestApplication, options?: Args) => {
       ...options?.graphqlUpload,
     }),
   );
+
+  const pkg: {
+    version: string;
+  } = JSON.parse(readFileSync(join(process.cwd(), 'package.json'), 'utf-8'));
+
+  const config = new DocumentBuilder()
+    .setTitle('VitNode App')
+    .setVersion(pkg.version)
+    .build();
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api', app, document);
 };

@@ -104,26 +104,6 @@ const parseFrontendUrlFromEnv = () => {
   };
 };
 
-const replaceUrlToDomain = (url: string) => {
-  const urlObj = new URL(url);
-  let hostname = urlObj.hostname;
-
-  if (/^\d{1,3}(\.\d{1,3}){3}$/.test(hostname)) {
-    return hostname;
-  }
-
-  if (hostname.split('.').length > 2) {
-    hostname = hostname.split('.').slice(1).join('.');
-  }
-
-  const domainParts = hostname.split('.');
-  if (domainParts.length > 1) {
-    domainParts.pop();
-  }
-
-  return domainParts.join('.');
-};
-
 const parseBackendUrlFromEnv = () => {
   const envUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
   const frontendUrl = envUrl ? envUrl : 'http://localhost:8080';
