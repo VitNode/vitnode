@@ -1,0 +1,39 @@
+---
+title: Validation
+description: Validate incoming data for REST API.
+---
+
+<Callout title="Part of NestJS">
+  This guide is part of the [NestJS pipes - class validator
+  docs](https://docs.nestjs.com/pipes#class-validator).
+</Callout>
+
+Below you can find an example of how to validate incoming data.
+
+## Body
+
+```ts title="show/show.args.ts"
+import { IsString, IsOptional, IsInt } from 'class-validator';
+
+export class ShowNavExampleBody {
+  @IsString()
+  @IsOptional()
+  name?: string;
+
+  @IsInt()
+  id: number;
+}
+```
+
+```ts title="example.controller.ts"
+@Controller('example/nav')
+export class NavExampleController {
+  constructor(private readonly showService: ShowCoreNavService) {}
+
+  @Get()
+  // [!code word:ShowNavExampleBody]
+  async findAll(@Body() args: ShowNavExampleBody): Promise<ShowCoreNavObj> {
+    return this.showService.show(args);
+  }
+}
+```

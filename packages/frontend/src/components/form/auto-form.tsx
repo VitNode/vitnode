@@ -32,7 +32,7 @@ export function AutoForm<T extends ZodObjectOrWrapped>({
   onSubmit?: (
     values: z.infer<T>,
     form: UseFormReturn<z.infer<T>>,
-  ) => Promise<void>;
+  ) => Promise<void> | void;
   onValuesChange?: (values: Partial<z.infer<T>>) => void;
   submitButton?: (props: {
     disabled: boolean;

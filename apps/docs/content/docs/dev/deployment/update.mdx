@@ -38,8 +38,20 @@ npm i -D eslint-config-typescript-vitnode@latest --workspace=frontend && npm i -
 
 Packages has a script that will update the database, update the files, create a migration etc.
 
-<Callout title="Canary">
-  If you want to use the canary version, you can use `@canary` tag.
-</Callout>
-
 Sometimes in our [patch notes](https://github.com/VitNode/vitnode/releases) we will mention that you need to update a specific package for example `next` or `react` to a specific version.
+
+### Canary
+
+If you want to use the canary version, you can use `@canary` tag.
+
+  <Tabs id='package-manager' persist items={['pnpm', 'npm']}>
+
+```bash tab="pnpm"
+pnpm add -D eslint-config-typescript-vitnode@canary --filter frontend && pnpm add -D eslint-config-typescript-vitnode@canary --filter backend &&  pnpm i vitnode-frontend@canary --filter frontend && pnpm i vitnode-backend@canary --filter backend
+```
+
+```bash tab="npm"
+npm i -D eslint-config-typescript-vitnode@canary --workspace=frontend && npm i -D eslint-config-typescript-vitnode@canary --workspace=backend &&  npm i vitnode-frontend@canary --workspace=frontend && npm i vitnode-backend@canary --workspace=backend
+```
+
+</Tabs>
