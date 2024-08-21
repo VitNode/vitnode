@@ -34,10 +34,12 @@ export class SignOutAdminSessionsService {
       this.configService.getOrThrow('cookies.login_token.admin.name'),
       {
         httpOnly: true,
-        secure: true,
+        secure: !!this.configService.getOrThrow('cookies.secure'),
         domain: this.configService.getOrThrow('cookies.domain'),
         path: '/',
-        sameSite: 'none',
+        sameSite: this.configService.getOrThrow('cookies.secure')
+          ? 'none'
+          : 'lax',
       },
     );
 

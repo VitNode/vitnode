@@ -137,6 +137,21 @@ const parseBackendUrlFromEnv = () => {
   };
 };
 
+const replaceUrlToDomain = (url: string) => {
+  const urlObj = new URL(url);
+  let hostname = urlObj.hostname;
+
+  if (/^\d{1,3}(\.\d{1,3}){3}$/.test(hostname)) {
+    return hostname;
+  }
+
+  if (hostname.split('.').length > 2) {
+    hostname = hostname.split('.').slice(1).join('.');
+  }
+
+  return hostname;
+};
+
 const config = () => {
   const frontend_url = parseFrontendUrlFromEnv();
   const backend_url = parseBackendUrlFromEnv();
@@ -148,6 +163,7 @@ const config = () => {
     port: process.env.PORT ? parseInt(process.env.PORT, 10) : 8080,
     cookies: {
       domain: replaceUrlToDomain(frontend_url.url),
+      secure: frontend_url.protocol === 'https:',
       login_token: {
         expiresIn: 3, // 3 days
         expiresInRemember: 90, // 90 days
