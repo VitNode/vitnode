@@ -1,22 +1,22 @@
 import { Injectable } from '@nestjs/common';
 import { and, count, eq } from 'drizzle-orm';
 
-import { ShowCoreNavBody } from './dto/show.args';
-import { ShowCoreNavObj } from './dto/show.obj';
+import { ShowNavCoreBody } from './dto/show.args';
+import { ShowNavCoreObj } from './dto/show.obj';
 
 import { InternalDatabaseService, SortDirectionEnum } from '@/utils';
 import { inputPaginationCursor, outputPagination } from '@/functions';
 import { core_nav } from '@/database/schema/nav';
 
 @Injectable()
-export class ShowCoreNavService {
+export class ShowNavCoreService {
   constructor(private readonly databaseService: InternalDatabaseService) {}
 
   async show({
     cursor,
     first,
     last,
-  }: ShowCoreNavBody): Promise<ShowCoreNavObj> {
+  }: ShowNavCoreBody): Promise<ShowNavCoreObj> {
     const pagination = await inputPaginationCursor({
       cursor,
       database: core_nav,

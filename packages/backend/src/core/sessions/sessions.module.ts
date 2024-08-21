@@ -7,7 +7,6 @@ import { AuthorizationCoreSessionsResolver } from './authorization/authorization
 import { SignOutCoreSessionsService } from './sign_out/sign_out.service';
 import { SignOutCoreSessionsResolver } from './sign_out/sign_out.resolver';
 import { InternalAuthorizationCoreSessionsService } from './authorization/internal/internal_authorization.service';
-import { CoreSessionsCron } from './sessions.cron';
 import { DeviceSignInCoreSessionsService } from './sign_in/device.service';
 import { DevicesCoreSessionsModule } from './devices/devices.module';
 import { SignUpCoreSessionsResolver } from './sign_up/sign_up.resolver';
@@ -21,7 +20,6 @@ import { SignUpCoreSessionsService } from './sign_up/sign_up.service';
     AuthorizationCoreSessionsResolver,
     SignOutCoreSessionsService,
     SignOutCoreSessionsResolver,
-    CoreSessionsCron,
     SignUpCoreSessionsResolver,
     SignUpCoreSessionsService,
   ],

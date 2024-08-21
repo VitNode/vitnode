@@ -12,7 +12,6 @@ import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin
 import { GqlContext } from './utils';
 import { CoreModule } from './core/core.module';
 import { GlobalProvidersModule } from './providers/providers.module';
-
 import {
   InternalDatabaseModule,
   DatabaseModuleArgs,
@@ -105,6 +104,26 @@ const parseFrontendUrlFromEnv = () => {
   };
 };
 
+const replaceUrlToDomain = (url: string) => {
+  const urlObj = new URL(url);
+  let hostname = urlObj.hostname;
+
+  if (/^\d{1,3}(\.\d{1,3}){3}$/.test(hostname)) {
+    return hostname;
+  }
+
+  if (hostname.split('.').length > 2) {
+    hostname = hostname.split('.').slice(1).join('.');
+  }
+
+  const domainParts = hostname.split('.');
+  if (domainParts.length > 1) {
+    domainParts.pop();
+  }
+
+  return domainParts.join('.');
+};
+
 const parseBackendUrlFromEnv = () => {
   const envUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
   const frontendUrl = envUrl ? envUrl : 'http://localhost:8080';
@@ -128,14 +147,7 @@ const config = () => {
     backend_url: backend_url.url,
     port: process.env.PORT ? parseInt(process.env.PORT, 10) : 8080,
     cookies: {
-      domain:
-        frontend_url.hostname === 'localhost'
-          ? 'localhost'
-          : frontend_url.hostname
-              .replace(/:\d+$/, '')
-              .split('.')
-              .slice(-2)
-              .join('.'),
+      domain: replaceUrlToDomain(frontend_url.url),
       login_token: {
         expiresIn: 3, // 3 days
         expiresInRemember: 90, // 90 days

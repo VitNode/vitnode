@@ -1,15 +1,15 @@
 import { Body, Controller, Get } from '@nestjs/common';
 
-import { ShowCoreNavService } from './show/show.service';
-import { ShowCoreNavObj } from './show/dto/show.obj';
-import { ShowCoreNavBody } from './show/dto/show.args';
+import { ShowNavCoreService } from './show/show.service';
+import { ShowNavCoreObj } from './show/dto/show.obj';
+import { ShowNavCoreBody } from './show/dto/show.args';
 
 @Controller('core/nav')
-export class NavController {
-  constructor(private readonly showService: ShowCoreNavService) {}
+export class NavCoreController {
+  constructor(private readonly showService: ShowNavCoreService) {}
 
   @Get()
-  async findAll(@Body() args: ShowCoreNavBody): Promise<ShowCoreNavObj> {
+  async findAll(@Body() args: ShowNavCoreBody): Promise<ShowNavCoreObj> {
     return this.showService.show(args);
   }
 }

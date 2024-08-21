@@ -1,6 +1,6 @@
 import { TextLanguage } from '@/utils';
 
-class ShowCoreNavItem {
+class ItemShowNavCore {
   id: number;
   name: TextLanguage[];
   description: TextLanguage[];
@@ -10,8 +10,8 @@ class ShowCoreNavItem {
   icon: string | null;
 }
 
-export class ShowCoreNav extends ShowCoreNavItem {
-  children: ShowCoreNavItem[];
+export class ShowNavCore extends ItemShowNavCore {
+  children: ItemShowNavCore[];
 }
 
 class PageInfo {
@@ -23,7 +23,7 @@ class PageInfo {
   count: number;
 }
 
-export class ShowCoreNavObj {
-  edges: ShowCoreNav[];
+export class ShowNavCoreObj {
+  edges: ShowNavCore[];
   pageInfo: PageInfo;
 }

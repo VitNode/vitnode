@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 
-import { NavController } from './nav.controller';
-import { ShowCoreNavService } from './show/show.service';
+import { NavCoreController } from './nav.controller';
+import { ShowNavCoreService } from './show/show.service';
 
 @Module({
-  controllers: [NavController],
-  providers: [ShowCoreNavService],
+  controllers: [NavCoreController],
+  providers: [ShowNavCoreService],
 })
 export class NavCoreModule {}

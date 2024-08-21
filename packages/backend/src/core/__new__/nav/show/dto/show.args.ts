@@ -1,6 +1,6 @@
 import { IsInt, IsOptional } from 'class-validator';
 
-export class ShowCoreNavBody {
+export class ShowNavCoreBody {
   @IsInt()
   @IsOptional()
   cursor?: number;
