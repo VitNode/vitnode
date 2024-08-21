@@ -132,12 +132,7 @@ const replaceUrlToDomain = (url: string) => {
     hostname = hostname.split('.').slice(1).join('.');
   }
 
-  const domainParts = hostname.split('.');
-  if (domainParts.length > 1) {
-    domainParts.pop();
-  }
-
-  return domainParts.join('.');
+  return hostname;
 };
 
 const config = () => {
@@ -151,6 +146,7 @@ const config = () => {
     port: process.env.PORT ? parseInt(process.env.PORT, 10) : 8080,
     cookies: {
       domain: replaceUrlToDomain(frontend_url.url),
+      secure: frontend_url.protocol === 'https:',
       login_token: {
         expiresIn: 3, // 3 days
         expiresInRemember: 90, // 90 days

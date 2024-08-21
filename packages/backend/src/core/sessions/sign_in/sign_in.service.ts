@@ -112,11 +112,13 @@ export class SignInCoreSessionsService {
         login_token,
         {
           httpOnly: true,
-          secure: true,
+          secure: !!this.configService.getOrThrow('cookies.secure'),
           domain: this.configService.getOrThrow('cookies.domain'),
           path: '/',
           expires,
-          sameSite: 'none',
+          sameSite: this.configService.getOrThrow('cookies.secure')
+            ? 'none'
+            : 'lax',
         },
       );
 
@@ -161,11 +163,13 @@ export class SignInCoreSessionsService {
       login_token,
       {
         httpOnly: true,
-        secure: true,
+        secure: !!this.configService.getOrThrow('cookies.secure'),
         domain: this.configService.getOrThrow('cookies.domain'),
         path: '/',
         expires: remember ? expires : undefined,
-        sameSite: 'none',
+        sameSite: this.configService.getOrThrow('cookies.secure')
+          ? 'none'
+          : 'lax',
       },
     );
 

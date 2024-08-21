@@ -50,11 +50,13 @@ export class DeviceSignInCoreSessionsService {
       device.id,
       {
         httpOnly: true,
-        secure: true,
+        secure: !!this.configService.getOrThrow('cookies.secure'),
         domain: this.configService.getOrThrow('cookies.domain'),
         path: '/',
         expires,
-        sameSite: 'none',
+        sameSite: this.configService.getOrThrow('cookies.secure')
+          ? 'none'
+          : 'lax',
       },
     );
 
