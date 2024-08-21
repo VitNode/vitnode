@@ -30,10 +30,12 @@ export class SignOutCoreSessionsService {
 
     res.clearCookie(this.configService.getOrThrow('cookies.login_token.name'), {
       httpOnly: true,
-      secure: true,
+      secure: !!this.configService.getOrThrow('cookies.secure'),
       domain: this.configService.getOrThrow('cookies.domain'),
       path: '/',
-      sameSite: 'none',
+      sameSite: this.configService.getOrThrow('cookies.secure')
+        ? 'none'
+        : 'lax',
     });
 
     return 'You are logged out';
