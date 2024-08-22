@@ -16,7 +16,7 @@
 > [!WARNING]
 > 🛠️ VitNode is still in development! You can try it out, but it is not recommended to use it now in production.
 
-VitNode is a `Community Managment Framework (CMF)` built on top of [NextJS (React)](https://nextjs.org/), [NestJS (Fastify)](https://nestjs.com/) and [PostgreSQL](https://www.postgresql.org/).
+VitNode is a `Community Managment Framework (CMF)` built on top of [NextJS (React)](https://nextjs.org/), [NestJS (Express)](https://nestjs.com/) and [PostgreSQL](https://www.postgresql.org/).
 
 **CMF (Community Management Framework)** is more than a CMS — it's a full-stack solution designed to empower developers with flexibility and ease. With built-in community features like user management, notifications, activity feeds, search content, device tracker, and more. **VitNode** is the perfect solution for building websites and applications that engage users and grow communities.
 

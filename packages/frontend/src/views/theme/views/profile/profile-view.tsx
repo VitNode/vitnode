@@ -25,11 +25,7 @@ const getData = async ({ id }: { id: string }) => {
   return data;
 };
 
-export interface ProfileViewProps {
-  params: { id: string };
-}
-
-export const ProfileView = async ({ params: { id } }: ProfileViewProps) => {
+export const ProfileView = async ({ id }: { id: string }) => {
   const {
     core_members__show: { edges },
   } = await getData({ id });
