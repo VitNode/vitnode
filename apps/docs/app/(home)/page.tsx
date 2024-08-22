@@ -27,7 +27,7 @@ export default function Page() {
 
           <div className="flex flex-wrap items-center gap-2 md:gap-4">
             <Button className="rounded-full px-6" asChild>
-              <Link href="/docs">Get Started</Link>
+              <Link href="/docs/dev">Get Started</Link>
             </Button>
 
             <Button className="rounded-full px-6" variant="ghost" asChild>
@@ -72,7 +72,7 @@ export default function Page() {
 
           <div className="mt-10 flex flex-1 flex-wrap items-center justify-center gap-2 sm:gap-6">
             <Link
-              href="/docs"
+              href="/docs/dev"
               className={cn(
                 buttonVariants({
                   className: 'font-medium sm:h-12 sm:px-8 sm:text-lg',

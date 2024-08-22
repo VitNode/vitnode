@@ -29,8 +29,6 @@ const init = () => {
       path: join('admin', '(auth)', '(vitnode)'),
       isInsideAppDir: true,
     },
-  ];
-  const pathsToFoldersOptional: Folders[] = [
     {
       path: join('(main)', '(vitnode)'),
       isInsideAppDir: true,
@@ -41,11 +39,6 @@ const init = () => {
     file: string;
     isInsideAppDir?: boolean;
   }[] = [
-    {
-      path: join('(main)', '[...rest]'),
-      isInsideAppDir: true,
-      file: 'page.tsx',
-    },
     {
       path: 'app',
       file: 'not-found.tsx',
@@ -103,53 +96,6 @@ const init = () => {
     }
 
     fs.cpSync(packagePath, appPath, { recursive: true });
-  });
-
-  // Copy folders if don't exist
-  pathsToFoldersOptional.forEach(folder => {
-    const appPath = join(
-      frontendAppPath,
-      folder.isInsideAppDir ? localePath : '',
-      folder.path,
-    );
-    const packagePath = join(
-      frontendPackagePath,
-      folder.isInsideAppDir ? join('app', '[locale]') : '',
-      folder.path,
-    );
-
-    if (!fs.existsSync(packagePath)) {
-      console.error(
-        `${initConsole} ⛔️ "${packagePath}" folder does not exist in the frontend package. Please report this issue to the VitNode GitHub.`,
-      );
-      process.exit(1);
-    }
-
-    const files = getAllFiles(packagePath);
-
-    files.forEach(file => {
-      const dir = file.dir.replace(packagePath, '');
-      const appFilePath = dir ? join(appPath, dir) : join(appPath);
-      const packageFilePath = dir
-        ? join(
-            frontendPackagePath,
-            folder.isInsideAppDir ? join('app', '[locale]') : '',
-            folder.path,
-            dir,
-            file.name,
-          )
-        : join(
-            frontendPackagePath,
-            folder.isInsideAppDir ? join('app', '[locale]') : '',
-            folder.path,
-            file.name,
-          );
-
-      if (!fs.existsSync(join(appFilePath, file.name))) {
-        fs.mkdirSync(appFilePath, { recursive: true });
-        fs.copyFileSync(packageFilePath, join(appFilePath, file.name));
-      }
-    });
   });
 
   pathsToFile.forEach(file => {
