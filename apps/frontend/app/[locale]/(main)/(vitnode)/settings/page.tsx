@@ -1,6 +1,5 @@
-import React from 'react';
-import { OverviewSettingsView } from 'vitnode-frontend/views/theme/views/settings/views/overview/overview-settings-view';
+import { redirect } from 'vitnode-frontend/navigation';
 
 export default function Page() {
-  return <OverviewSettingsView />;
+  redirect('/settings/overview');
 }

@@ -58,15 +58,11 @@ import {
   DiagnosticToolsView,
   generateMetadataDiagnosticAdmin,
 } from './core/diagnostic/diagnostic-tools-view';
-
-export interface SlugAdminViewProps {
-  params: { locale: string; slug: string[] };
-  searchParams: Record<string, unknown>;
-}
+import { SlugViewProps } from '@/views/slug';
 
 export const generateMetadataSlugAdmin = async ({
   params: { slug },
-}: SlugAdminViewProps): Promise<Metadata> => {
+}: SlugViewProps): Promise<Metadata> => {
   switch (slug[0]) {
     case 'core':
       switch (slug[1]) {
@@ -129,7 +125,7 @@ export const generateMetadataSlugAdmin = async ({
   return {};
 };
 
-export const SlugAdminView = (props: SlugAdminViewProps) => {
+export const SlugAdminView = (props: SlugViewProps) => {
   const {
     params: { slug },
   } = props;
