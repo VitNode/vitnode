@@ -3,7 +3,6 @@
 import { useTranslations } from 'next-intl';
 
 import { useSignUpView } from '@/hooks/core/sign/up/use-sign-up-view';
-import { CardContent } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Button } from '@/components/ui/button';
 import { removeSpecialCharacters } from '@/helpers/special-characters';
@@ -22,7 +21,7 @@ export const FormSignUp = () => {
   }
 
   return (
-    <CardContent>
+    <>
       <AutoForm
         onValuesChange={setValues}
         formSchema={formSchema}
@@ -107,6 +106,6 @@ export const FormSignUp = () => {
       >
         <div id="vitnode_captcha" />
       </AutoForm>
-    </CardContent>
+    </>
   );
 };

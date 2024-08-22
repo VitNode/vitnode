@@ -2,7 +2,7 @@ import React from 'react';
 import {
   generateMetadataLayoutSettings,
   LayoutSettingsView,
-} from 'vitnode-frontend/views/theme/views/settings/layout-settings-view';
+} from 'vitnode-frontend/views/theme/views/settings/layout';
 
 export const generateMetadata = generateMetadataLayoutSettings;
 

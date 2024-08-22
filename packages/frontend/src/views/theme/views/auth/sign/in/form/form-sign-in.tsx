@@ -4,7 +4,6 @@ import { useTranslations } from 'next-intl';
 import { AlertCircle } from 'lucide-react';
 import React from 'react';
 
-import { CardContent } from '@/components/ui/card';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { useSignInView } from '@/hooks/core/sign/in/use-sign-in-view';
@@ -17,7 +16,7 @@ export const FormSignIn = () => {
   const { error, formSchema, onSubmit } = useSignInView();
 
   return (
-    <CardContent>
+    <>
       {error && (
         <div className="mb-6 space-y-4">
           {error?.extensions?.code === 'ACCESS_DENIED' && (
@@ -64,6 +63,6 @@ export const FormSignIn = () => {
           </Button>
         )}
       />
-    </CardContent>
+    </>
   );
 };

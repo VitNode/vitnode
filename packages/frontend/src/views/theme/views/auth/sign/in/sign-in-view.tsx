@@ -5,6 +5,7 @@ import { getTranslations } from 'next-intl/server';
 import { FormSignIn } from './form/form-sign-in';
 import {
   Card,
+  CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
@@ -33,7 +34,10 @@ export const SignInView = () => {
             })}
           </CardDescription>
         </CardHeader>
-        <FormSignIn />
+
+        <CardContent>
+          <FormSignIn />
+        </CardContent>
       </Card>
     </div>
   );

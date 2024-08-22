@@ -58,7 +58,7 @@ export const AuthUserBar = () => {
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
-            <Link href="/settings">
+            <Link href="/settings/overview">
               <Settings />
               <span>{t('user-bar.settings')}</span>
             </Link>
