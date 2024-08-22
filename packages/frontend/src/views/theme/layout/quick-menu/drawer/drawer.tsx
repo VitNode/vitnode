@@ -47,7 +47,7 @@ export const DrawerQuickMenu = ({
 
           <DrawerClose asChild>
             <Link
-              href="/settings"
+              href="/settings/overview"
               className={cn(
                 buttonVariants({
                   variant: 'ghost',

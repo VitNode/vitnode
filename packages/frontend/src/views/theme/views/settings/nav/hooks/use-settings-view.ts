@@ -24,7 +24,7 @@ export const useSettingsView = (): ReturnValues => {
   return {
     navItems: [
       {
-        href: '/settings',
+        href: '/settings/overview',
         icon: Cog,
         text: t('overview.title'),
       },
