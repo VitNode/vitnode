@@ -1,0 +1,5 @@
+mutation Admin__core_authorization_settings__edit($forceLogin: Boolean!) {
+  admin__core_authorization_settings__edit(force_login: $forceLogin) {
+    force_login
+  }
+}

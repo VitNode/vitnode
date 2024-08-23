@@ -19,6 +19,7 @@ export class ShowCoreMiddlewareService {
         ...plugins.filter(plugin => !['plugins.module.ts'].includes(plugin)),
       ],
       ...config,
+      ...config.settings,
     };
   }
 }

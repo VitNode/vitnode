@@ -30,6 +30,11 @@ export type AuthorizationAdminSessionsObj = {
   version: Scalars['String']['output'];
 };
 
+export type AuthorizationCoreMiddleware = {
+  __typename?: 'AuthorizationCoreMiddleware';
+  force_login: Scalars['Boolean']['output'];
+};
+
 export type AuthorizationCoreSessionsObj = {
   __typename?: 'AuthorizationCoreSessionsObj';
   files: FilesAuthorizationCoreSessions;
@@ -244,6 +249,7 @@ export type LogosEditAdminThemeEditor = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  admin__core_authorization_settings__edit: ShowAdminAuthorizationSettingsObj;
   admin__core_email_settings__edit: ShowAdminEmailSettingsServiceObj;
   admin__core_email_settings__test: Scalars['String']['output'];
   admin__core_files__delete: Scalars['String']['output'];
@@ -290,6 +296,11 @@ export type Mutation = {
   core_sessions__sign_in: Scalars['String']['output'];
   core_sessions__sign_out: Scalars['String']['output'];
   core_sessions__sign_up: SignUpCoreSessionsObj;
+};
+
+
+export type MutationAdmin__Core_Authorization_Settings__EditArgs = {
+  force_login: Scalars['Boolean']['input'];
 };
 
 
@@ -624,6 +635,7 @@ export type PageInfo = {
 
 export type Query = {
   __typename?: 'Query';
+  admin__core_authorization_settings__show: ShowAdminAuthorizationSettingsObj;
   admin__core_email_settings__show: ShowAdminEmailSettingsServiceObj;
   admin__core_files__show: ShowAdminFilesObj;
   admin__core_groups__show: ShowAdminGroupsObj;
@@ -778,6 +790,11 @@ export type SearchAdminSessionsObj = {
 export type SecurityCoreMiddleware = {
   __typename?: 'SecurityCoreMiddleware';
   captcha: CaptchaSecurityCoreMiddleware;
+};
+
+export type ShowAdminAuthorizationSettingsObj = {
+  __typename?: 'ShowAdminAuthorizationSettingsObj';
+  force_login: Scalars['Boolean']['output'];
 };
 
 export type ShowAdminCaptchaSecurityObj = {
@@ -1115,6 +1132,7 @@ export const ShowCoreMembersSortingColumnEnum = {
 export type ShowCoreMembersSortingColumnEnum = typeof ShowCoreMembersSortingColumnEnum[keyof typeof ShowCoreMembersSortingColumnEnum];
 export type ShowCoreMiddlewareObj = {
   __typename?: 'ShowCoreMiddlewareObj';
+  authorization: AuthorizationCoreMiddleware;
   editor: EditorShowCoreMiddleware;
   languages: Array<LanguagesCoreMiddleware>;
   plugins: Array<Scalars['String']['output']>;
@@ -1260,7 +1278,7 @@ export type UploadCoreFilesObj = {
 
 export type UploadWithKeepCoreFilesArgs = {
   file?: InputMaybe<Scalars['Upload']['input']>;
-  keep: Scalars['Boolean']['input'];
+  keep?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export type User = {
