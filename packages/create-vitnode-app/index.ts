@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* eslint-disable no-console */
 // Ref: https://github.com/vercel/next.js/blob/canary/packages/create-next-app/index.ts
 import { basename, dirname, resolve } from 'path';
 import { existsSync } from 'fs';
@@ -15,7 +16,7 @@ import { isWriteable } from './helpers/is-writeable';
 import { createVitNode } from './templates/create-vitnode';
 import { createCli, onPromptState } from './cli';
 
-let projectPath: string = '';
+let projectPath = '';
 
 const program = new Command()
   .version(packageJson.version)
@@ -41,7 +42,7 @@ program.option(
 
 program.parse(process.argv);
 
-(async () => {
+void (async () => {
   console.log(
     color.blue(
       figlet.textSync('VitNode', {
@@ -57,7 +58,7 @@ program.parse(process.argv);
       name: 'path',
       message: 'What is your project named?',
       initial: 'my-vitnode',
-      validate: name => {
+      validate: (name: string) => {
         const validation = validateNpmName({ name: basename(resolve(name)) });
         if (validation.valid) return true;
 
@@ -97,9 +98,9 @@ program.parse(process.argv);
       )} because of npm naming restrictions:`,
     );
 
-    validation.problems.forEach(p =>
-      console.error(`${color.red(color.bold('*'))} ${p}`),
-    );
+    validation.problems.forEach(p => {
+      console.error(`${color.red(color.bold('*'))} ${p}`);
+    });
     process.exit(1);
   }
 

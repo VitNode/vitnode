@@ -60,7 +60,7 @@ export class AdminPermissionGuards implements CanActivate {
       // if (permissions[permission] === true) return true;
 
       return false;
-    } catch (_e) {
+    } catch (_) {
       // Return true if auth is optional
       return true;
     }

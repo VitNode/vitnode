@@ -43,12 +43,11 @@ export const getTranslationForEmail = (
         }
 
         message = next;
-      } catch (_e) {
+      } catch (_) {
         return key;
       }
     });
 
-     
     return message;
   };
 };

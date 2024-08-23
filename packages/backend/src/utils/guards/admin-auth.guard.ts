@@ -38,7 +38,7 @@ export class AdminAuthGuards implements CanActivate {
 
     try {
       return !!(await this.getAuth(ctx));
-    } catch (_e) {
+    } catch (_) {
       // Return true if auth is optional
       return true;
     }

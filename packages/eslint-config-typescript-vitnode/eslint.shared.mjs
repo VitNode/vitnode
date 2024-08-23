@@ -1,12 +1,17 @@
 // @ts-check
 import eslint from '@eslint/js';
 import tsEslint from 'typescript-eslint';
+import eslintConfigPrettier from 'eslint-config-prettier';
 
 export default [
   eslint.configs.recommended,
   ...tsEslint.configs.stylisticTypeChecked,
   ...tsEslint.configs.strictTypeChecked,
+  eslintConfigPrettier,
   { files: ['**/*.{js,mjs,cjs,ts}'] },
+  {
+    ignores: ['tsup.config.ts'],
+  },
   {
     languageOptions: {
       parserOptions: {

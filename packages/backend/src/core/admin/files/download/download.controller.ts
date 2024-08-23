@@ -72,7 +72,7 @@ export class DownloadFilesAdminController {
 
           return null;
         }
-      } catch (_e) {
+      } catch (_) {
         res.status(404);
 
         return null;
@@ -89,7 +89,7 @@ export class DownloadFilesAdminController {
 
           return null;
         }
-      } catch (_e) {
+      } catch (_) {
         res.status(404);
 
         return null;

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { cpSync, mkdirSync, readFileSync, renameSync, writeFileSync } from 'fs';
 import { join } from 'path';
 import { randomBytes } from 'crypto';

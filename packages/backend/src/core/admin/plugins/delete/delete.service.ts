@@ -60,7 +60,7 @@ export class DeleteAdminPluginsService {
 
     try {
       await this.databaseService.db.execute(sql.raw(deleteQueries.join(' ')));
-    } catch (_e) {
+    } catch (_) {
       throw new CustomError({
         code: 'DELETE_TABLE_ERROR',
         message: `Error deleting tables for plugin ${code}`,

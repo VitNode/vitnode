@@ -59,7 +59,7 @@ export function tryGitInit(root: string): boolean {
     });
 
     return true;
-  } catch (e) {
+  } catch (_) {
     if (didInit) {
       try {
         rmSync(join(root, '.git'), { recursive: true, force: true });

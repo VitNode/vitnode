@@ -84,7 +84,7 @@ export class DownloadAdminCoreLanguageService {
 
       // Remove temp folder
       fs.rmSync(pathTemp, { recursive: true });
-    } catch (_e) {
+    } catch (_) {
       throw new CustomError({
         code: 'LANGUAGE_DOWNLOAD_ERROR',
         message: 'Error creating tgz',

@@ -43,7 +43,7 @@ export class AuthGuards implements CanActivate {
     } else {
       try {
         return !!(await this.getAuth(ctx));
-      } catch (_e) {
+      } catch (_) {
         // Return true if auth is optional
         return true;
       }

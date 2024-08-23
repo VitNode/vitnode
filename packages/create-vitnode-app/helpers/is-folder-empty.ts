@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { lstatSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 
@@ -44,10 +45,10 @@ export function isFolderEmpty(root: string, name: string): boolean {
         if (stats.isDirectory()) {
           console.log(`${colors.blue(file)}/`);
         } else {
-          console.log(`${file}`);
+          console.log(file);
         }
       } catch {
-        console.log(`${file}`);
+        console.log(file);
       }
     }
 

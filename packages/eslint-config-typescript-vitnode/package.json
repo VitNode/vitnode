@@ -13,11 +13,11 @@
   "type": "module",
   "files": [
     "eslint.shared.mjs",
+    "eslint.frontend.mjs",
+    "eslint.react.mjs",
     "tsconfig.shared.json",
     "tsconfig.nest.json",
     "tsconfig.next.json",
-    ".eslintrc.shared.json",
-    ".eslintrc.react.json",
     "prettierrc.mjs"
   ],
   "keywords": [
@@ -36,19 +36,17 @@
     "typescript": "^5.5.4"
   },
   "devDependencies": {
+    "@types/eslint__js": "^8.42.3",
     "typescript": "^5.5.4"
   },
   "dependencies": {
-    "@typescript-eslint/eslint-plugin": "^7.18.0",
-    "@typescript-eslint/parser": "^7.18.0",
+    "@eslint/js": "^9.9.1",
     "eslint": "^9.9.0",
     "eslint-config-next": "15.0.0-canary.98",
     "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-eslint-comments": "^3.2.0",
     "eslint-plugin-jsx-a11y": "^6.9.0",
     "eslint-plugin-prettier": "^5.2.1",
-    "eslint-plugin-sort-destructure-keys": "^2.0.0",
-    "eslint-plugin-typescript-sort-keys": "^3.2.0",
-    "prettier-plugin-tailwindcss": "^0.6.5"
+    "prettier-plugin-tailwindcss": "^0.6.6",
+    "typescript-eslint": "^8.2.0"
   }
 }

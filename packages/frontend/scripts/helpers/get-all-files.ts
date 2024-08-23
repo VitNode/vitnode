@@ -10,6 +10,7 @@ export const getAllFiles = (dir: string): { name: string; dir: string }[] => {
         name: file,
         dir: isDirectory ? name : dir,
       };
+
       return isDirectory
         ? [...files, ...getAllFiles(name)]
         : [...files, fileInfo];

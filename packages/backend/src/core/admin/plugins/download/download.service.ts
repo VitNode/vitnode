@@ -145,7 +145,7 @@ export class DownloadAdminPluginsService {
       await execShellCommand(
         'npm run drizzle-kit up && npm run drizzle-kit generate',
       );
-    } catch (_e) {
+    } catch (_) {
       throw new CustomError({
         code: 'GENERATE_MIGRATION_ERROR',
         message: 'Error generating migration',
@@ -190,7 +190,7 @@ export class DownloadAdminPluginsService {
           // Remove temp folder
           fs.rmSync(tempPath, { recursive: true });
         });
-    } catch (_e) {
+    } catch (_) {
       throw new CustomError({
         code: 'CREATE_TGZ_ERROR',
         message: 'Error creating tgz file',

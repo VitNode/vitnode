@@ -90,7 +90,7 @@ export class HelpersParserTextLanguageCoreHelpersService {
       const json = JSON.parse(content).content as TextLanguageJSONContentType[];
 
       mapContent(json);
-    } catch (_e) {
+    } catch (_) {
       /* empty */
     }
 
