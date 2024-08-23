@@ -2,12 +2,18 @@ import { useTranslations } from 'next-intl';
 
 import { buttonVariants } from '@/components/ui/button';
 import { Link } from '@/navigation';
+import { cn } from '@/helpers/classnames';
 
-export const UserBar = () => {
+export const UserBar = ({ className }: { className?: string }) => {
   const t = useTranslations('core');
 
   return (
-    <div className="hidden items-center justify-center gap-4 sm:flex">
+    <div
+      className={cn(
+        'hidden items-center justify-center gap-4 sm:flex',
+        className,
+      )}
+    >
       <Link
         href="/login"
         className={buttonVariants({

@@ -17,8 +17,9 @@ import { Button } from '@/components/ui/button';
 import { AvatarUser } from '@/components/ui/user/avatar';
 import { Link } from '@/navigation';
 import { useSignOutApi } from '@/hooks/core/sign/out/use-sign-out-api';
+import { cn } from '@/helpers/classnames';
 
-export const AuthUserBar = () => {
+export const AuthUserBar = ({ className }: { className?: string }) => {
   const t = useTranslations('core');
   const { session } = useSession();
   const { onSubmit } = useSignOutApi();
@@ -31,7 +32,7 @@ export const AuthUserBar = () => {
       <DropdownMenuTrigger asChild>
         <Button
           variant="ghost"
-          className="hidden shrink-0 rounded-full sm:flex"
+          className={cn('hidden shrink-0 rounded-full sm:flex', className)}
           size="icon"
           ariaLabel=""
         >

@@ -4,7 +4,6 @@ import { RefreshCcw, RotateCcw, WifiOff } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 import { mutationClearCache } from './mutation-clear-cache';
-import { PoweredByVitNode } from '../powered-by';
 
 import { useRouter } from '../../../navigation';
 import { CONFIG } from '../../../helpers/config-with-env';
@@ -16,11 +15,7 @@ import {
 } from '../../../components/ui/card';
 import { Button } from '../../../components/ui/button';
 
-export const InternalErrorView = ({
-  showPoweredBy,
-}: {
-  showPoweredBy?: boolean;
-}) => {
+export const InternalErrorView = () => {
   const t = useTranslations('core');
   const { back } = useRouter();
 
@@ -71,12 +66,6 @@ export const InternalErrorView = ({
           code: () => <span className="font-semibold">{500}</span>,
         })}
       </div>
-
-      {showPoweredBy && (
-        <footer className="p-5 text-center text-sm">
-          <PoweredByVitNode />
-        </footer>
-      )}
     </div>
   );
 };

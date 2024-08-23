@@ -4,8 +4,9 @@ import { flattenTree } from '@/helpers/flatten-tree';
 import { getSessionData } from '@/graphql/get-session-data';
 import { Icon } from '@/components/icon/icon';
 import { ShowCoreNav } from '@/graphql/types';
+import { cn } from '@/helpers/classnames';
 
-export const QuickMenu = async () => {
+export const QuickMenu = async ({ className }: { className?: string }) => {
   const data = await getSessionData();
 
   const flattenData = flattenTree<ShowCoreNav>({
@@ -27,7 +28,12 @@ export const QuickMenu = async () => {
   }));
 
   return (
-    <div className="supports-backdrop-blur:bg-background/60 bg-card/75 fixed bottom-0 z-20 flex w-full border-t backdrop-blur sm:hidden">
+    <div
+      className={cn(
+        'supports-backdrop-blur:bg-background/60 bg-card/75 fixed bottom-0 z-20 flex w-full border-t backdrop-blur sm:hidden',
+        className,
+      )}
+    >
       <QuickMenuWrapper>
         <ButtonDrawer navIcons={navIcons} />
       </QuickMenuWrapper>
