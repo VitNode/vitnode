@@ -45,6 +45,19 @@ export class ShowAdminNavService {
               href: 'email',
               keywords: ['email', 'e-mail', 'mail', 'smtp'],
             },
+            {
+              code: 'authorization',
+              href: 'authorization',
+              keywords: [
+                'authorization',
+                'auth',
+                'login',
+                'register',
+                'force login',
+                'sign in',
+                'sign up',
+              ],
+            },
           ],
         },
         {

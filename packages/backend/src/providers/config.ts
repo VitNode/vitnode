@@ -56,6 +56,9 @@ export interface ConfigType {
     };
   };
   settings: {
+    authorization: {
+      force_login: boolean;
+    };
     email: {
       color_primary: string;
       color_primary_foreground: string;
@@ -100,6 +103,9 @@ export const DEFAULT_CONFIG_DATA: ConfigType = {
       provider: EmailProvider.none,
       color_primary: 'hsl(220, 74%, 50%)',
       color_primary_foreground: 'hsl(210, 40%, 98%)',
+    },
+    authorization: {
+      force_login: false,
     },
   },
   langs: [

@@ -59,6 +59,10 @@ import {
   generateMetadataDiagnosticAdmin,
 } from './core/diagnostic/diagnostic-tools-view';
 import { SlugViewProps } from '@/views/slug';
+import {
+  AuthorizationSettingsCoreAdminView,
+  generateMetadataAuthorizationSettingsAdmin,
+} from './core/settings/authorization/authorization-settings-core-admin-view';
 
 export const generateMetadataSlugAdmin = async ({
   params: { slug },
@@ -92,6 +96,8 @@ export const generateMetadataSlugAdmin = async ({
               return generateMetadataManifestMetadataCoreAdmin();
             case 'email':
               return generateMetadataEmailSettingsAdmin();
+            case 'authorization':
+              return generateMetadataAuthorizationSettingsAdmin();
           }
           break;
         case 'langs':
@@ -157,6 +163,8 @@ export const SlugAdminView = (props: SlugViewProps) => {
               return <ManifestMetadataCoreAdminView />;
             case 'email':
               return <EmailSettingsAdminView />;
+            case 'authorization':
+              return <AuthorizationSettingsCoreAdminView />;
           }
           break;
         case 'langs':
