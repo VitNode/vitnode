@@ -62,6 +62,12 @@ export class SecurityCoreMiddleware {
 }
 
 @ObjectType()
+export class AuthorizationCoreMiddleware {
+  @Field(() => Boolean)
+  force_login: boolean;
+}
+
+@ObjectType()
 export class ShowCoreMiddlewareObj {
   @Field(() => [LanguagesCoreMiddleware])
   languages: LanguagesCoreMiddleware[];
@@ -77,4 +83,7 @@ export class ShowCoreMiddlewareObj {
 
   @Field(() => SecurityCoreMiddleware)
   security: SecurityCoreMiddleware;
+
+  @Field(() => AuthorizationCoreMiddleware)
+  authorization: AuthorizationCoreMiddleware;
 }

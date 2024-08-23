@@ -6,5 +6,8 @@ query Core_middleware__show {
       enabled
     }
     plugins
+    authorization {
+      force_login
+    }
   }
 }

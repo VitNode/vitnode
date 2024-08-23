@@ -14,6 +14,10 @@ type AuthorizationAdminSessionsObj {
   version: String!
 }
 
+type AuthorizationCoreMiddleware {
+  force_login: Boolean!
+}
+
 type AuthorizationCoreSessionsObj {
   files: FilesAuthorizationCoreSessions!
   plugin_default: String!
@@ -212,6 +216,7 @@ input LogosEditAdminThemeEditor {
 }
 
 type Mutation {
+  admin__core_authorization_settings__edit(force_login: Boolean!): ShowAdminAuthorizationSettingsObj!
   admin__core_email_settings__edit(color_primary: String!, color_primary_foreground: String!, logo: UploadWithKeepCoreFilesArgs, provider: EmailProvider!, resend_key: String, smtp: SMTPEditAdminEmailSettingsService): ShowAdminEmailSettingsServiceObj!
   admin__core_email_settings__test(from: String!, message: String!, preview_text: String, subject: String!, to: String!): String!
   admin__core_files__delete(id: Int!): String!
@@ -279,6 +284,7 @@ type PageInfo {
 }
 
 type Query {
+  admin__core_authorization_settings__show: ShowAdminAuthorizationSettingsObj!
   admin__core_email_settings__show: ShowAdminEmailSettingsServiceObj!
   admin__core_files__show(cursor: Int, first: Int, last: Int, search: String, sortBy: ShowCoreFilesSortByArgs): ShowAdminFilesObj!
   admin__core_groups__show(cursor: Int, first: Int, last: Int, search: String, sortBy: ShowAdminGroupsSortByArgs): ShowAdminGroupsObj!
@@ -326,6 +332,10 @@ type SearchAdminSessionsObj {
 
 type SecurityCoreMiddleware {
   captcha: CaptchaSecurityCoreMiddleware!
+}
+
+type ShowAdminAuthorizationSettingsObj {
+  force_login: Boolean!
 }
 
 type ShowAdminCaptchaSecurityObj {
@@ -630,6 +640,7 @@ enum ShowCoreMembersSortingColumnEnum {
 }
 
 type ShowCoreMiddlewareObj {
+  authorization: AuthorizationCoreMiddleware!
   editor: EditorShowCoreMiddleware!
   languages: [LanguagesCoreMiddleware!]!
   plugins: [String!]!

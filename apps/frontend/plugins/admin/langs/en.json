@@ -137,6 +137,12 @@
             "site_key": "Site Key",
             "secret_key": "Secret Key"
           }
+        },
+        "authorization": {
+          "force_login": {
+            "title": "Force Login",
+            "desc": "This option will block your site access from guest users."
+          }
         }
       },
       "metadata": {

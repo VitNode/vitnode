@@ -79,21 +79,68 @@ In our example we want to change the `login` page. You can find it in [`auth/sig
 
 You can copy the view to your project and change it as you want.
 
-For example I don't want the header of card, so I will replace it to something alse.
+For example I want to implement authentication page like in [this example in ShadcnUI](https://ui.shadcn.com/examples/authentication). Copy, paset, make some changes and done.
 
 ```tsx title="apps/frontend/app/[locale]/login/page.tsx"
+import { useTranslations } from 'next-intl';
+import { Link } from 'vitnode-frontend/navigation';
+import { LogoHeader } from 'vitnode-frontend/views/theme/layout/header/logo';
 import { FormSignIn } from 'vitnode-frontend/views/theme/views/auth/sign/in/form/form-sign-in';
 
 export default function Page() {
-  return (
-    <div className="container my-10 flex max-w-5xl flex-wrap gap-10">
-      <div className="flex-1">Something here</div>
+  const t = useTranslations('core.sign_in');
 
-      <FormSignIn />
+  return (
+    <div className="container relative min-h-screen flex-col items-center justify-center lg:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
+      <div className="bg-muted relative hidden h-full flex-col p-10 text-white lg:flex dark:border-r">
+        <div className="absolute inset-0 bg-zinc-900" />
+
+        <div className="relative z-20">
+          <LogoHeader className="text-lg font-medium text-white" />
+        </div>
+        <div className="relative z-20 mt-auto">
+          <blockquote className="space-y-2">
+            <p className="text-lg">
+              &ldquo;This library has saved me countless hours of work and
+              helped me deliver stunning designs to my clients faster than ever
+              before.&rdquo;
+            </p>
+            <footer className="text-sm">Sofia Davis</footer>
+          </blockquote>
+        </div>
+      </div>
+      <div className="py-8 lg:p-8">
+        <div className="mx-auto flex w-full max-w-[350px] flex-col justify-center space-y-6">
+          <div className="flex flex-col space-y-2 text-center">
+            <h1 className="text-2xl font-semibold tracking-tight">
+              {t('title')}
+            </h1>
+            <p className="text-muted-foreground text-sm">
+              {t.rich('desc', {
+                link: () => <Link href="/register">{t('sign_up')}</Link>,
+              })}
+            </p>
+          </div>
+          <FormSignIn />
+        </div>
+      </div>
     </div>
   );
 }
 ```
+
+Before:
+
+import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
+import img from '@/assets/ui/theme-before.png';
+
+<ImageZoom src={img} className="max-w-xl" alt="Theme Before Changes" />
+
+After:
+
+import img2 from '@/assets/ui/theme-after.png';
+
+<ImageZoom src={img2} className="max-w-xl" alt="Theme After Changes" />
 
 </Step>
 </Steps>

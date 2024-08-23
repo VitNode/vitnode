@@ -10,14 +10,14 @@ import {
 
 const getI18n = async () => {
   try {
-    const {
-      core_middleware__show: { languages: langs },
-    } = await fetcher<
+    const { core_middleware__show } = await fetcher<
       Core_Middleware__ShowQuery,
       Core_Middleware__ShowQueryVariables
     >({
       query: Core_Middleware__Show,
     });
+
+    const { languages: langs } = core_middleware__show;
 
     const languages = langs.filter(lang => lang.enabled);
     const defaultLanguage = langs.find(lang => lang.default)?.code ?? 'en';
@@ -27,14 +27,17 @@ const getI18n = async () => {
       defaultLocale: defaultLanguage,
     };
 
-    return i18n;
+    return {
+      ...i18n,
+      core_middleware__show,
+    };
   } catch (err) {
     const i18n = {
       locales: ['en'],
       defaultLocale: 'en',
     };
 
-    return i18n;
+    return { ...i18n, core_middleware__show: null };
   }
 };
 
@@ -61,7 +64,24 @@ export default function createMiddleware() {
       request.nextUrl.pathname,
       i18n.locales,
     );
-    const cookieAdmin = request.cookies.get('vitnode-login-token-admin');
+    const cookieSession = {
+      default: request.cookies.get('vitnode-login-token'),
+      admin: request.cookies.get('vitnode-login-token-admin'),
+    };
+
+    if (i18n.core_middleware__show) {
+      const { authorization } = i18n.core_middleware__show;
+      // Redirect if force login is true
+      if (
+        authorization.force_login &&
+        !cookieSession.default &&
+        !pathname.startsWith('/admin') &&
+        pathname !== '/login' &&
+        pathname !== '/register'
+      ) {
+        return NextResponse.redirect(new URL('/login', request.url));
+      }
+    }
 
     // Redirect to /admin if the user is not logged in to AdminCP
     if (
@@ -69,7 +89,7 @@ export default function createMiddleware() {
       pathname !== '/admin' &&
       pathname !== '/admin/theme-editor' &&
       pathname !== '/admin/install' &&
-      !cookieAdmin
+      !cookieSession.admin
     ) {
       return NextResponse.redirect(new URL('/admin', request.url));
     }

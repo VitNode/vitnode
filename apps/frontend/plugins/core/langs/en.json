@@ -345,6 +345,7 @@
         "settings_security": "Security",
         "settings_metadata": "Metadata",
         "settings_email": "Email",
+        "settings_authorization": "Authorization",
         "plugins": "Plugins",
         "styles": "Styles",
         "styles_theme-editor": "Theme Editor",
