@@ -47,11 +47,15 @@ const ComponentList = ({
     }
   };
 
-  const upHandler = () =>
+  const upHandler = () => {
     setSelectedIndex((selectedIndex + items.length - 1) % items.length);
-  const downHandler = () =>
+  };
+  const downHandler = () => {
     setSelectedIndex((selectedIndex + 1) % items.length);
-  const enterHandler = () => selectItem(selectedIndex);
+  };
+  const enterHandler = () => {
+    selectItem(selectedIndex);
+  };
 
   React.useEffect(() => {
     setSelectedIndex(0);
@@ -97,7 +101,9 @@ const ComponentList = ({
                 'bg-accent': index === selectedIndex,
               })}
               key={index}
-              onClick={() => selectItem(index)}
+              onClick={() => {
+                selectItem(index);
+              }}
               size="sm"
             >
               <span>{icon}</span> {emoji.id}
@@ -112,7 +118,7 @@ const ComponentList = ({
 };
 
 let component: ReactRenderer<ComponentListRef> | null = null;
-let popup: Instance<Props>[] | null = null;
+let popup: Instance[] | null = null;
 
 export function onStart<T>(props: SuggestionProps<T>) {
   component = new ReactRenderer(ComponentList, {
@@ -128,7 +134,7 @@ export function onStart<T>(props: SuggestionProps<T>) {
   popup = tippy('body', {
     getReferenceClientRect: props.clientRect,
     appendTo: () => document.body,
-    content: component?.element,
+    content: component.element,
     showOnCreate: true,
     interactive: true,
     trigger: 'manual',

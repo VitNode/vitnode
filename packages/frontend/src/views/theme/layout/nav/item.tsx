@@ -84,7 +84,9 @@ export const ItemNav = ({
               className="group h-auto w-full justify-start gap-4 px-4 py-2"
               variant="ghost"
               size="sm"
-              onClick={() => setOpenChild(null)}
+              onClick={() => {
+                setOpenChild(null);
+              }}
               asChild
             >
               <Link

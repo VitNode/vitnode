@@ -17,7 +17,7 @@ export const AutoFormTextArea = ({
 
   return (
     <AutoFormWrapper theme={theme}>
-      {fieldConfigItem?.label && (
+      {fieldConfigItem.label && (
         <AutoFormLabel
           label={fieldConfigItem.label}
           isRequired={isRequired}

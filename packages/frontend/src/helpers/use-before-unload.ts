@@ -30,7 +30,9 @@ export const useBeforeUnload = (
 
     window.addEventListener('beforeunload', handler);
 
-    return () => window.removeEventListener('beforeunload', handler);
+    return () => {
+      window.removeEventListener('beforeunload', handler);
+    };
   }, [enabled, handler]);
 };
 

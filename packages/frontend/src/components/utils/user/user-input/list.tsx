@@ -32,12 +32,12 @@ export const UserInputContentList = ({
         <CommandItem
           className="gap-2"
           key={item.id}
-          onSelect={() =>
+          onSelect={() => {
             onSelect({
               id: item.id,
               name: item.name,
-            })
-          }
+            });
+          }}
         >
           <div
             className={cn(

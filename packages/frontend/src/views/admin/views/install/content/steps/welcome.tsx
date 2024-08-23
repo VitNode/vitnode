@@ -13,7 +13,11 @@ export const WelcomeInstallConfigsView = () => {
       </CardContent>
 
       <CardFooter>
-        <Button onClick={() => setCurrentStep(prev => prev + 1)}>
+        <Button
+          onClick={() => {
+            setCurrentStep(prev => prev + 1);
+          }}
+        >
           Next step
         </Button>
       </CardFooter>

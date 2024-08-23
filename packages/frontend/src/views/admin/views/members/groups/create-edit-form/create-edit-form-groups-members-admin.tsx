@@ -54,14 +54,18 @@ export const CreateEditFormGroupsMembersAdmin = ({
           <TabsTrigger
             id="main"
             active={activeTab === TabsEnum.MAIN}
-            onClick={() => setActiveTab(TabsEnum.MAIN)}
+            onClick={() => {
+              setActiveTab(TabsEnum.MAIN);
+            }}
           >
             {t('create_edit.main')}
           </TabsTrigger>
           <TabsTrigger
             id="content"
             active={activeTab === TabsEnum.CONTENT}
-            onClick={() => setActiveTab(TabsEnum.CONTENT)}
+            onClick={() => {
+              setActiveTab(TabsEnum.CONTENT);
+            }}
           >
             {t('create_edit.content')}
           </TabsTrigger>

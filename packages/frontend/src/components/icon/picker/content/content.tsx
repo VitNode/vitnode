@@ -51,14 +51,18 @@ export const ContentIconInput = (props: IconPickerProps) => {
           <TabsTrigger
             id={Tab.Icon}
             active={activeTab === Tab.Icon}
-            onClick={() => setActiveTab(Tab.Icon)}
+            onClick={() => {
+              setActiveTab(Tab.Icon);
+            }}
           >
             {t('tabs.icons')}
           </TabsTrigger>
           <TabsTrigger
             id={Tab.Emoji}
             active={activeTab === Tab.Emoji}
-            onClick={() => setActiveTab(Tab.Emoji)}
+            onClick={() => {
+              setActiveTab(Tab.Emoji);
+            }}
           >
             {t('tabs.emojis')}
           </TabsTrigger>
@@ -71,7 +75,9 @@ export const ContentIconInput = (props: IconPickerProps) => {
                 ? 'icons.placeholder'
                 : 'emojis.placeholder',
             )}
-            onChange={e => setSearch(e.target.value)}
+            onChange={e => {
+              setSearch(e.target.value);
+            }}
             value={search}
             className="h-9"
           />

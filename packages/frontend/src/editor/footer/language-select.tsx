@@ -57,7 +57,7 @@ export const LanguageSelectFooterEditor = ({
 
       <SelectContent onCloseAutoFocus={() => editor.commands.focus()}>
         {languages.map(language => (
-          <SelectItem key={language.code} value={`${language.code}`}>
+          <SelectItem key={language.code} value={language.code}>
             {language.name}
           </SelectItem>
         ))}

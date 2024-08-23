@@ -61,7 +61,9 @@ export const PermissionsTable = ({
     <>
       <Input
         value={searchValue}
-        onChange={e => setSearchValue(e.target.value)}
+        onChange={e => {
+          setSearchValue(e.target.value);
+        }}
         placeholder="Search group..."
       />
 
@@ -85,7 +87,9 @@ export const PermissionsTable = ({
                 <div className="flex items-center justify-center gap-4">
                   <span>{permission.title}</span>
                   <Switch
-                    onClick={() => onToggleAll(permission.id)}
+                    onClick={() => {
+                      onToggleAll(permission.id);
+                    }}
                     checked={field.value[`can_all_${permission.id}`]}
                   />
                 </div>
@@ -184,7 +188,7 @@ export const PermissionsTable = ({
                 // Check if:
                 // 1. The permission is enabled for all groups
                 // 2. The permission is enabled for the current group
-                const checked: boolean = !!(
+                const checked = !!(
                   (field.value[`can_all_${permission.id}`] ||
                     findItem?.[permission.id]) &&
                   item.guest !== permission.disableForGuest

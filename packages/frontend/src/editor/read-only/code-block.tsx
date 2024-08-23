@@ -35,7 +35,7 @@ const renderElement = (node: Node | WithTagName): JSX.Element => {
   return React.createElement(
     node.tagName,
     {
-      className: node.properties?.className?.join(' '),
+      className: node.properties.className?.join(' '),
       key: `${node.tagName}-${new Date().getTime()}-${generateRandomString(10)}`,
     },
     ...children,
@@ -49,7 +49,7 @@ export const changeCodeBlock = ({ children }: Element) => {
   }
 
   const language =
-    (element?.attribs?.class ?? '')
+    (element.attribs.class ?? '')
       .replace('language-', '')
       .replace('react', '') || 'plaintext';
   const text =
@@ -57,7 +57,7 @@ export const changeCodeBlock = ({ children }: Element) => {
       element.children[0] as {
         data: string;
       }
-    )?.data ?? '';
+    ).data ?? '';
 
   const highlighted = lowlight.highlight(language, text);
   // TODO: Fix types
@@ -73,7 +73,7 @@ export const changeCodeBlock = ({ children }: Element) => {
     React.createElement(
       'code',
       {
-        className: element?.attribs?.class,
+        className: element.attribs.class,
       },
       content,
     ),

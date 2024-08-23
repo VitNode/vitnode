@@ -32,14 +32,14 @@ export const useUploadPluginAdmin = ({ data }: UploadPluginAdminProps) => {
     const mutation = await mutationApi(formData);
 
     if (!mutation.data || mutation.error) {
-      const error = mutation.error as FetcherErrorType;
+      const error = mutation.error;
 
       if (
         error.extensions?.code === 'PLUGIN_ALREADY_EXISTS' ||
         error.extensions?.code === 'PLUGIN_VERSION_IS_LOWER'
       ) {
         form.setError('file', {
-          message: t(`errors.${error?.extensions?.code}`),
+          message: t(`errors.${error.extensions.code}`),
         });
 
         return;

@@ -18,7 +18,9 @@ export const MainTabThemeEditor = () => {
           <Button
             className="w-full justify-start"
             variant="ghost"
-            onClick={() => setActiveTab(ThemeEditorTab.Colors)}
+            onClick={() => {
+              setActiveTab(ThemeEditorTab.Colors);
+            }}
           >
             <span>{t('colors.title')}</span>
             <ChevronRight className="text-muted-foreground ml-auto" />
@@ -28,7 +30,9 @@ export const MainTabThemeEditor = () => {
         <Button
           className="w-full justify-start"
           variant="ghost"
-          onClick={() => setActiveTab(ThemeEditorTab.Logos)}
+          onClick={() => {
+            setActiveTab(ThemeEditorTab.Logos);
+          }}
         >
           <span>{t('logos.title')}</span>
           <ChevronRight className="text-muted-foreground ml-auto" />

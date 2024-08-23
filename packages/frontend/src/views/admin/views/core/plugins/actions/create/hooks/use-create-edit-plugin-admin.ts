@@ -96,7 +96,7 @@ export const useCreateEditPluginAdmin = ({ data }: Args) => {
     }
 
     if (error) {
-      if (error?.extensions?.code === 'PLUGIN_ALREADY_EXISTS') {
+      if (error.extensions?.code === 'PLUGIN_ALREADY_EXISTS') {
         form.setError('code', {
           message: t('create.code.exists'),
         });

@@ -19,7 +19,7 @@ export const AutoFormColor = ({
 
   return (
     <AutoFormWrapper theme={theme}>
-      {fieldConfigItem?.label && (
+      {fieldConfigItem.label && (
         <AutoFormLabel
           description={fieldConfigItem.description}
           label={fieldConfigItem.label}

@@ -162,7 +162,9 @@ export const FileInput = ({
             className="hidden"
             disabled={disabled}
             ref={inputRef}
-            onChange={e => handleUploadFile(e.target.files)}
+            onChange={e => {
+              handleUploadFile(e.target.files);
+            }}
             multiple={multiple}
             value=""
             {...props}

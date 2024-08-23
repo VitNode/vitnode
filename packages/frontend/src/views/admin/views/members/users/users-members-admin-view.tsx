@@ -55,7 +55,7 @@ export const UsersMembersAdminView = async ({
       defaultPageSize: 10,
     }),
     groups: Array.isArray(searchParams.groups)
-      ? searchParams.groups?.map(group => Number(group))
+      ? searchParams.groups.map(group => Number(group))
       : Number(searchParams.groups),
   };
 

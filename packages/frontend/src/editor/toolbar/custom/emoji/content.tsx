@@ -29,7 +29,9 @@ export const ContentEmojiToolbarEditor = ({
         <div className="flex gap-2">
           <Input
             placeholder={t('emojis.placeholder')}
-            onChange={e => setSearch(e.target.value)}
+            onChange={e => {
+              setSearch(e.target.value);
+            }}
             value={search}
             className="h-9"
           />

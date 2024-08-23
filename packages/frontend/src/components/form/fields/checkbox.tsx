@@ -20,7 +20,7 @@ export const AutoFormCheckbox = ({
     <AutoFormWrapper
       className={cn('flex items-start space-x-3 space-y-0', {
         'rounded-md border p-4':
-          fieldConfigItem?.label && fieldConfigItem.description,
+          fieldConfigItem.label && fieldConfigItem.description,
       })}
       theme={theme}
     >
@@ -35,9 +35,9 @@ export const AutoFormCheckbox = ({
         </FormControl>
       </ParentWrapper>
 
-      {(fieldConfigItem?.label || fieldConfigItem.description) && (
+      {(fieldConfigItem.label || fieldConfigItem.description) && (
         <div className="space-y-1 leading-none">
-          {fieldConfigItem?.label && (
+          {fieldConfigItem.label && (
             <AutoFormLabel
               description={fieldConfigItem.description}
               label={fieldConfigItem.label}

@@ -61,9 +61,9 @@ export const TableNavAdmin = ({ core_nav__show: { edges }, icons }: Props) => {
       collisionDetection={closestCorners}
       onDragCancel={resetState}
       onDragOver={onDragOver}
-      onDragMove={e =>
-        onDragMove({ ...e, flattenedItems, indentationWidth, maxDepth: 1 })
-      }
+      onDragMove={e => {
+        onDragMove({ ...e, flattenedItems, indentationWidth, maxDepth: 1 });
+      }}
       onDragStart={onDragStart}
       onDragEnd={async event => {
         const moveTo = onDragEnd<ShowCoreNav>({

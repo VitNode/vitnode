@@ -1,13 +1,13 @@
 // @ts-check
 import eslint from '@eslint/js';
 import tsEslint from 'typescript-eslint';
-import eslintConfigPrettier from 'eslint-config-prettier';
+import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 
 export default [
   eslint.configs.recommended,
   ...tsEslint.configs.stylisticTypeChecked,
   ...tsEslint.configs.strictTypeChecked,
-  eslintConfigPrettier,
+  eslintPluginPrettierRecommended,
   { files: ['**/*.{js,mjs,cjs,ts}'] },
   {
     ignores: ['tsup.config.ts'],

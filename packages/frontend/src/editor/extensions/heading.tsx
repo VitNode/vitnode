@@ -20,7 +20,7 @@ export const HeadingExtensionEditor = () => {
       return [
         `h${level}`,
         mergeAttributes(this.options.HTMLAttributes, HTMLAttributes, {
-          class: `${classes[level]}`,
+          class: classes[level],
         }),
         0,
       ];

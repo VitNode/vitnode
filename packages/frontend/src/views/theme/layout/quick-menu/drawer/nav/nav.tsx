@@ -1,7 +1,6 @@
 import React from 'react';
 import * as Accordion from '@radix-ui/react-accordion';
 import { ChevronDown } from 'lucide-react';
-
 import { ItemNavDrawerQuickMenu } from './item';
 import { classNameDrawerQuickMenu } from '../drawer';
 import { useSession } from '@/hooks/use-session';
@@ -43,13 +42,13 @@ export const NavDrawerQuickMenu = ({
                     ),
                   }),
                 )}
-                onClick={() =>
+                onClick={() => {
                   setActiveItems(prev =>
                     prev.includes(item.id.toString())
                       ? prev.filter(el => el !== item.id.toString())
                       : [...prev, item.id.toString()],
-                  )
-                }
+                  );
+                }}
               >
                 <div className="[&>svg]:text-muted-foreground flex w-full flex-wrap items-center gap-2">
                   {item.icon

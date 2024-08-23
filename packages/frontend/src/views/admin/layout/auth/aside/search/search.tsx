@@ -28,7 +28,9 @@ export const SearchAsideAuthAdmin = () => {
     };
     document.addEventListener('keydown', down);
 
-    return () => document.removeEventListener('keydown', down);
+    return () => {
+      document.removeEventListener('keydown', down);
+    };
   }, []);
 
   const handleSearchInput = useDebouncedCallback((value: string) => {
@@ -41,7 +43,9 @@ export const SearchAsideAuthAdmin = () => {
         data-search-full=""
         className="bg-secondary/50 text-muted-foreground hover:bg-accent hover:text-accent-foreground flex w-full items-center gap-2 rounded-lg border p-1.5 text-sm transition-colors max-md:hidden"
         type="button"
-        onClick={() => setOpen(true)}
+        onClick={() => {
+          setOpen(true);
+        }}
       >
         <SearchIcon className="ms-1 size-4" />
         {t('placeholder')}

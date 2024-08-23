@@ -13,7 +13,7 @@ export function getObjectFormSchema(
   schema: ZodObjectOrWrapped,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): z.ZodObject<any, any> {
-  if (schema?._def.typeName === 'ZodEffects') {
+  if (schema._def.typeName === 'ZodEffects') {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const typedSchema = schema as z.ZodEffects<z.ZodObject<any, any>>;
 
@@ -39,7 +39,7 @@ export function getBaseSchema<
     return getBaseSchema(schema._def.innerType as ChildType);
   }
   if ('schema' in schema._def) {
-    return getBaseSchema(schema._def.schema as ChildType);
+    return getBaseSchema(schema._def.schema);
   }
 
   if ('type' in schema._def && isArray) {
@@ -239,9 +239,8 @@ export function getDefaultValues<Schema extends z.ZodObject<any, any>>(
         (defaultValue === null || defaultValue === '') &&
         fieldConfig?.[key]
       ) {
-        defaultValue = (
-          fieldConfig?.[key] as unknown as { defaultValue: string }
-        ).defaultValue;
+        defaultValue = (fieldConfig[key] as unknown as { defaultValue: string })
+          .defaultValue;
       }
       if (defaultValue !== undefined) {
         defaultValues[key as keyof DefaultValuesType] = defaultValue;

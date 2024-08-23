@@ -36,7 +36,6 @@ export const AutoFormRadioGroup = ({
     >;
   }) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const baseValues = (getBaseSchema(zodItem) as unknown as z.ZodEnum<any>)._def
     .values;
 
@@ -51,7 +50,7 @@ export const AutoFormRadioGroup = ({
 
   return (
     <AutoFormWrapper theme={theme}>
-      {fieldConfigItem?.label && (
+      {fieldConfigItem.label && (
         <AutoFormLabel
           description={fieldConfigItem.description}
           label={fieldConfigItem.label}
@@ -68,7 +67,7 @@ export const AutoFormRadioGroup = ({
             {...props}
           >
             {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-            {values?.map((value: any) => {
+            {values.map((value: any) => {
               const label = labels?.[value[0]]?.title || value[1];
               const description = labels?.[value[0]]?.description;
 

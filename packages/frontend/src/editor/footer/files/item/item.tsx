@@ -68,7 +68,7 @@ export const ItemListFilesFooterEditor = ({
         className={cn(
           'relative flex size-10 flex-shrink-0 items-center justify-center overflow-hidden rounded-lg',
           {
-            'h-14 w-20': data?.width && data?.height && !isLoading && !error,
+            'h-14 w-20': data?.width && data.height && !isLoading && !error,
           },
         )}
       >
@@ -153,7 +153,7 @@ export const ItemListFilesFooterEditor = ({
               setFiles(prev => prev.filter(item => item.id !== id));
               const mutation = await deleteMutationApi({
                 id,
-                securityKey: data?.security_key,
+                securityKey: data.security_key,
               });
 
               if (mutation?.error) {

@@ -54,7 +54,7 @@ export function AutoFormObject<T extends z.ZodObject<any, any>>({
               form={form}
               dependencies={dependencies}
               fieldConfig={
-                (fieldConfig?.[name] ?? {}) as FieldConfig<z.infer<typeof item>>
+                (fieldConfig[name] ?? {}) as FieldConfig<z.infer<typeof item>>
               }
               path={[...path, name]}
               theme={theme}

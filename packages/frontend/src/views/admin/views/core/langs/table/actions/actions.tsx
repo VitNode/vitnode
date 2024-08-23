@@ -34,12 +34,18 @@ export const ActionsTableLangsCoreAdmin = (data: ShowCoreLanguages) => {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
-            <DropdownMenuItem onClick={() => setIsOpenUploadDialog(true)}>
+            <DropdownMenuItem
+              onClick={() => {
+                setIsOpenUploadDialog(true);
+              }}
+            >
               <Upload /> {t('upload_new_version')}
             </DropdownMenuItem>
             {!data.default && (
               <DropdownMenuItem
-                onClick={() => setIsOpenDeleteDialog(true)}
+                onClick={() => {
+                  setIsOpenDeleteDialog(true);
+                }}
                 disabled={locale === data.code}
                 destructive
               >

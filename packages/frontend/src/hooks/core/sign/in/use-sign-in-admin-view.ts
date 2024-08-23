@@ -16,7 +16,7 @@ export const useSignInAdminView = () => {
     setError(null);
     const mutation = await mutationApi({ ...values, admin: true });
     if (mutation?.error) {
-      setError(mutation?.error);
+      setError(mutation.error);
     }
   };
 

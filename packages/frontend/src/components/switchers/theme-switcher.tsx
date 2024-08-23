@@ -40,16 +40,25 @@ export const ThemeSwitcher = () => {
         >
           <DropdownMenuRadioItem
             value="light"
-            onClick={() => setTheme('light')}
+            onClick={() => {
+              setTheme('light');
+            }}
           >
             <span>{t('light')}</span>
           </DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="dark" onClick={() => setTheme('dark')}>
+          <DropdownMenuRadioItem
+            value="dark"
+            onClick={() => {
+              setTheme('dark');
+            }}
+          >
             <span>{t('dark')}</span>
           </DropdownMenuRadioItem>
           <DropdownMenuRadioItem
             value="system"
-            onClick={() => setTheme('system')}
+            onClick={() => {
+              setTheme('system');
+            }}
           >
             <span>{t('system')}</span>
           </DropdownMenuRadioItem>

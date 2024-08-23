@@ -49,7 +49,7 @@ const FileFromNextWithNode = ({
               {data.file_name_original}
             </span>
             <div className="text-muted-foreground space-x-2 text-sm">
-              <span>{formatBytes(data?.file_size ?? 0)}</span>
+              <span>{formatBytes(data.file_size ?? 0)}</span>
               <span>&middot;</span>
               <span>{data.mimetype}</span>
             </div>

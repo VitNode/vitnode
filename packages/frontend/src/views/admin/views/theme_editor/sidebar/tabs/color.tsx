@@ -33,7 +33,9 @@ export const ColorsTabThemeEditor = () => {
           className="size-8"
           size="icon"
           ariaLabel={tCore('go_back')}
-          onClick={() => setActiveTab(ThemeEditorTab.Main)}
+          onClick={() => {
+            setActiveTab(ThemeEditorTab.Main);
+          }}
         >
           <ChevronLeft />
         </Button>

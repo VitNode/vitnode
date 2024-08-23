@@ -16,9 +16,9 @@ export const AuthProviders = ({
   return (
     <SessionContext.Provider
       value={{
-        session: data?.core_sessions__authorization.user,
-        nav: data?.core_nav__show.edges ?? [],
-        files: data?.core_sessions__authorization.files,
+        session: data.core_sessions__authorization.user,
+        nav: data.core_nav__show.edges ?? [],
+        files: data.core_sessions__authorization.files,
       }}
     >
       {children}

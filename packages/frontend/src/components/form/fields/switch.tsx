@@ -22,7 +22,7 @@ export const AutoFormSwitch = ({
       theme={theme}
     >
       <div>
-        {fieldConfigItem?.label && (
+        {fieldConfigItem.label && (
           <AutoFormLabel
             label={fieldConfigItem.label}
             isRequired={isRequired}

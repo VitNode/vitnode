@@ -7,7 +7,7 @@ export const NavAdmin = async () => {
 
   return (
     <NavAdminWrapper>
-      {data?.admin__nav__show.map(item => (
+      {data.admin__nav__show.map(item => (
         <ItemNavAdmin
           key={item.code}
           id={item.code}

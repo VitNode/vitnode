@@ -71,7 +71,9 @@ export const ContentNavDevPluginAdmin = ({
       collisionDetection={closestCorners}
       onDragCancel={resetState}
       onDragOver={onDragOver}
-      onDragMove={e => onDragMove({ ...e, flattenedItems, maxDepth: 1 })}
+      onDragMove={e => {
+        onDragMove({ ...e, flattenedItems, maxDepth: 1 });
+      }}
       onDragStart={onDragStart}
       onDragEnd={async event => {
         const moveTo = onDragEnd<ShowAdminNavPluginsObj>({

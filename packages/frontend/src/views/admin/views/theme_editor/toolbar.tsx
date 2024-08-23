@@ -66,7 +66,9 @@ export const ToolbarThemeEditor = ({
       <div className="flex flex-col gap-1 py-2">
         <ButtonWithTooltip
           active={activeMode === ThemeEditorViewEnum.Desktop}
-          onClick={() => setActiveMode(ThemeEditorViewEnum.Desktop)}
+          onClick={() => {
+            setActiveMode(ThemeEditorViewEnum.Desktop);
+          }}
           ariaLabel={t(`theme_editor.${ThemeEditorViewEnum.Desktop}`)}
         >
           <Monitor />
@@ -74,7 +76,9 @@ export const ToolbarThemeEditor = ({
 
         <ButtonWithTooltip
           active={activeMode === ThemeEditorViewEnum.Tablet}
-          onClick={() => setActiveMode(ThemeEditorViewEnum.Tablet)}
+          onClick={() => {
+            setActiveMode(ThemeEditorViewEnum.Tablet);
+          }}
           ariaLabel={t(`theme_editor.${ThemeEditorViewEnum.Tablet}`)}
         >
           <Tablet />
@@ -82,7 +86,9 @@ export const ToolbarThemeEditor = ({
 
         <ButtonWithTooltip
           active={activeMode === ThemeEditorViewEnum.Mobile}
-          onClick={() => setActiveMode(ThemeEditorViewEnum.Mobile)}
+          onClick={() => {
+            setActiveMode(ThemeEditorViewEnum.Mobile);
+          }}
           ariaLabel={t(`theme_editor.${ThemeEditorViewEnum.Mobile}`)}
         >
           <Smartphone />
@@ -92,7 +98,9 @@ export const ToolbarThemeEditor = ({
       <div className="flex flex-col gap-1 py-2">
         <ButtonWithTooltip
           active={activeTheme === 'light'}
-          onClick={() => setTheme('light')}
+          onClick={() => {
+            setTheme('light');
+          }}
           ariaLabel={tCore('user-bar.dark_light_switcher.light')}
         >
           <Sun />
@@ -100,7 +108,9 @@ export const ToolbarThemeEditor = ({
 
         <ButtonWithTooltip
           active={activeTheme === 'dark'}
-          onClick={() => setTheme('dark')}
+          onClick={() => {
+            setTheme('dark');
+          }}
           ariaLabel={tCore('user-bar.dark_light_switcher.dark')}
         >
           <Moon />

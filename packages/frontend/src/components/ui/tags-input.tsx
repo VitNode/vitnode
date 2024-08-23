@@ -96,7 +96,9 @@ export const TagsInput = ({
 
       {((!multiple && values.length <= 0) || multiple) && (
         <Input
-          onChange={e => setTextInput(e.target.value)}
+          onChange={e => {
+            setTextInput(e.target.value);
+          }}
           value={textInput}
           disabled={(!multiple && values.length > 0) || disabled}
           onKeyDown={e => {

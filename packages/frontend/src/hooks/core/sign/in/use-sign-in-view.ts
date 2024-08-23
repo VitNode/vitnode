@@ -17,7 +17,7 @@ export const useSignInView = () => {
     setError(null);
     const mutation = await mutationApi(values);
     if (mutation?.error) {
-      setError(mutation?.error);
+      setError(mutation.error);
     }
   };
 

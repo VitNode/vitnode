@@ -32,10 +32,10 @@ export const ContentFilesAdvancedCoreAdminView = ({
           id: 'id',
           cell: ({ row }) => {
             const src =
-              row?.width && row.height
+              row.width && row.height
                 ? `${CONFIG.graphql_public_url}/${row.dir_folder}/${row.file_name}`
                 : null;
-            const alt = row?.file_alt ?? row?.file_name ?? '';
+            const alt = row.file_alt ?? row.file_name ?? '';
 
             return (
               <div className="relative flex h-14 w-20 shrink-0 items-center justify-center overflow-hidden rounded-lg">
@@ -65,7 +65,7 @@ export const ContentFilesAdvancedCoreAdminView = ({
                 </span>
                 <div className="text-muted-foreground flex flex-wrap items-center gap-2 text-sm">
                   <span>{row.mimetype}</span>
-                  {row?.width && row?.height && (
+                  {row.width && row.height && (
                     <>
                       <span>&middot;</span>
                       <span>
