@@ -5,7 +5,7 @@ import { getSessionData } from '@/graphql/get-session-data';
 import { CONFIG } from '@/helpers/config-with-env';
 import { cn } from '@/helpers/classnames';
 
-export const LogoHeader = async () => {
+export const LogoHeader = async ({ className }: { className?: string }) => {
   const {
     core_theme_editor__show: { logos },
   } = await getSessionData();
@@ -27,7 +27,10 @@ export const LogoHeader = async () => {
       !logos.mobile_light ? (
         <span
           id="vitnode_logo_text"
-          className="text-foreground inline-block whitespace-nowrap font-bold"
+          className={cn(
+            'text-foreground inline-block whitespace-nowrap font-bold',
+            className,
+          )}
         >
           {logos.text}
         </span>
@@ -40,10 +43,14 @@ export const LogoHeader = async () => {
           width={logos.light.width}
           height={logos.light.height}
           sizes="100vw"
-          className={cn('w-[--logo-mobile-width] sm:w-[--logo-width]', {
-            'dark:hidden': logos.dark,
-            'hidden sm:block': logos.mobile_light || logos.mobile_dark,
-          })}
+          className={cn(
+            'w-[--logo-mobile-width] sm:w-[--logo-width]',
+            className,
+            {
+              'dark:hidden': logos.dark,
+              'hidden sm:block': logos.mobile_light || logos.mobile_dark,
+            },
+          )}
           alt={logos.text}
         />
       )}
@@ -54,12 +61,16 @@ export const LogoHeader = async () => {
           width={logos.dark.width}
           height={logos.dark.height}
           sizes="100vw"
-          className={cn('w-[--logo-mobile-width] sm:w-[--logo-width]', {
-            'hidden dark:block': logos.light,
-            'hidden sm:block': !logos.light,
-            'dark:hidden dark:sm:block':
-              logos.mobile_dark || logos.mobile_light,
-          })}
+          className={cn(
+            'w-[--logo-mobile-width] sm:w-[--logo-width]',
+            className,
+            {
+              'hidden dark:block': logos.light,
+              'hidden sm:block': !logos.light,
+              'dark:hidden dark:sm:block':
+                logos.mobile_dark || logos.mobile_light,
+            },
+          )}
           alt={logos.text}
         />
       )}
@@ -71,10 +82,14 @@ export const LogoHeader = async () => {
           width={logos.mobile_light.width}
           height={logos.mobile_light.height}
           sizes="100vw"
-          className={cn('w-[--logo-mobile-width] sm:w-[--logo-width]', {
-            'block sm:hidden': logos.light || logos.dark,
-            'dark:hidden': logos.mobile_dark,
-          })}
+          className={cn(
+            'w-[--logo-mobile-width] sm:w-[--logo-width]',
+            className,
+            {
+              'block sm:hidden': logos.light || logos.dark,
+              'dark:hidden': logos.mobile_dark,
+            },
+          )}
           alt={logos.text}
         />
       )}
@@ -85,11 +100,15 @@ export const LogoHeader = async () => {
           width={logos.mobile_dark.width}
           height={logos.mobile_dark.height}
           sizes="100vw"
-          className={cn('w-[--logo-mobile-width] sm:w-[--logo-width]', {
-            'block sm:hidden dark:block dark:sm:hidden':
-              logos.dark || logos.light,
-            'hidden dark:block': logos.mobile_light,
-          })}
+          className={cn(
+            'w-[--logo-mobile-width] sm:w-[--logo-width]',
+            className,
+            {
+              'block sm:hidden dark:block dark:sm:hidden':
+                logos.dark || logos.light,
+              'hidden dark:block': logos.mobile_light,
+            },
+          )}
           alt={logos.text}
         />
       )}

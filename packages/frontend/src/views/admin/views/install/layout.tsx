@@ -4,8 +4,6 @@ import { LogoVitNode } from '@/components/logo-vitnode';
 import { ThemeSwitcher } from '@/components/switchers/theme-switcher';
 import { Card } from '@/components/ui/card';
 
-import { PoweredByVitNode } from '../../../global';
-
 export const InstallConfigLayout = ({
   children,
 }: {
@@ -24,7 +22,6 @@ export const InstallConfigLayout = ({
       </Card>
 
       <div className="mt-5 flex flex-col items-center justify-center gap-4">
-        <PoweredByVitNode />
         <ThemeSwitcher />
       </div>
     </div>
