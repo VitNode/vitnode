@@ -95,9 +95,9 @@ const db = async () => {
 };
 
 if (process.argv[2] === 'init') {
-  init();
+  void init();
 }
 
 if (process.argv[2] === 'db') {
-  db();
+  void db();
 }

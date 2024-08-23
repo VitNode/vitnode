@@ -31,12 +31,12 @@ export class DownloadFilesAdminController {
     @Res({ passthrough: true }) res: Response,
     @Req() req: Request,
     @Param() { file }: { file: string },
-  ): Promise<StreamableFile | void> {
+  ): Promise<StreamableFile | null> {
     const path = join(ABSOLUTE_PATHS_BACKEND.uploads.temp, file);
     if (!existsSync(path)) {
       res.status(404);
 
-      return;
+      return null;
     }
     const userId = file.split('.')[0].split('--')[1].split('-')[0];
     const currentFile = {
@@ -51,7 +51,7 @@ export class DownloadFilesAdminController {
     if (!user) {
       res.status(404);
 
-      return;
+      return null;
     }
 
     const isAdmin =
@@ -70,12 +70,12 @@ export class DownloadFilesAdminController {
         if (+userId !== data.id) {
           res.status(404);
 
-          return;
+          return null;
         }
-      } catch (e) {
+      } catch (_e) {
         res.status(404);
 
-        return;
+        return null;
       }
     } else {
       try {
@@ -87,12 +87,12 @@ export class DownloadFilesAdminController {
         if (+userId !== data.id) {
           res.status(404);
 
-          return;
+          return null;
         }
-      } catch (e) {
+      } catch (_e) {
         res.status(404);
 
-        return;
+        return null;
       }
     }
 

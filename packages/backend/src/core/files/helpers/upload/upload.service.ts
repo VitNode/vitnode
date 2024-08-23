@@ -91,7 +91,7 @@ export class FilesService extends HelpersUploadCoreFilesService {
     await new Promise((resolve, reject) =>
       stream
         .pipe(createWriteStream(url))
-        .on('finish', () => resolve(url))
+        .on('finish', () => { resolve(url); })
         .on('error', reject),
     );
 

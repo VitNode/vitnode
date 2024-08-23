@@ -42,22 +42,13 @@ export class UploadAvatarCoreMembersService {
       });
     }
 
-    const uploadFiles = await this.files.upload({
+    const uploadFile = await this.files.upload({
       file,
       maxUploadSizeBytes: 1e6, // 1MB,
       acceptMimeType: ['image/png', 'image/jpeg'],
       plugin: 'core',
       folder: 'avatars',
     });
-
-    const uploadFile = uploadFiles[0];
-
-    if (!uploadFile) {
-      throw new CustomError({
-        code: 'INTERNAL_SERVER_ERROR',
-        message: 'We could not upload your avatar. This is error from engine.',
-      });
-    }
 
     // Save to database
     const recordFromDb = await this.databaseService.db

@@ -21,11 +21,9 @@ export const core_files = pgTable(
       length: 255,
     }).notNull(),
     dir_folder: varchar('dir_folder', { length: 255 }).notNull(),
-    user_id: integer('user_id')
-      .notNull()
-      .references(() => core_users.id, {
-        onDelete: 'cascade',
-      }),
+    user_id: integer('user_id').references(() => core_users.id, {
+      onDelete: 'cascade',
+    }),
     created: timestamp('created').notNull().defaultNow(),
     file_size: integer('file_size').notNull(),
     mimetype: varchar('mimetype', { length: 255 }).notNull(),

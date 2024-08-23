@@ -106,7 +106,7 @@ export class AuthorizationCoreSessionsService {
           space_used: countStorageUsed * 1024,
         },
       };
-    } catch (error) {
+    } catch (_e) {
       const guestGroup =
         await this.databaseService.db.query.core_groups.findFirst({
           where: (table, { eq }) => eq(table.guest, true),

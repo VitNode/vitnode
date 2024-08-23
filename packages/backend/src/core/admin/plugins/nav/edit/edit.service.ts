@@ -50,7 +50,7 @@ export class EditAdminNavPluginsService {
       }
 
       // Build new children nav
-      const children = parent.children || [];
+      const children = parent.children ?? [];
       const navIndex = children.findIndex(nav => nav.code === previous_code);
 
       children[navIndex] = {

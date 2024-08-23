@@ -33,7 +33,7 @@ export const IsTextLanguageInput = () => {
           if (!item) return false;
 
           return (Array.isArray(item) ? item : [item]).every(
-            item => item.value?.trim().length > 0,
+            item => item.value.trim().length > 0,
           );
         },
       },
@@ -55,7 +55,7 @@ export const MaxLengthLanguageInput = ({ length }: { length: number }) => {
           if (!item) return true;
 
           return (Array.isArray(item) ? item : [item]).every(
-            item => item.value?.trim().length <= length,
+            item => item.value.trim().length <= length,
           );
         },
       },
@@ -76,7 +76,7 @@ export const MinLengthLanguageInput = ({ length }: { length: number }) => {
           if (!item) return true;
 
           return (Array.isArray(item) ? item : [item]).every(
-            item => item.value?.trim().length >= length,
+            item => item.value.trim().length >= length,
           );
         },
       },
@@ -92,7 +92,7 @@ export const TransformTextLanguageInput = ({
   if (Array.isArray(value)) {
     let current = value.map(item => ({
       ...item,
-      value: item.value?.trimStart().trimEnd(),
+      value: item.value.trimStart().trimEnd(),
     }));
 
     // If is only one item and isn't english then change to english
@@ -112,7 +112,7 @@ export const TransformTextLanguageInput = ({
 
   return {
     ...value,
-    value: value.value?.trimStart().trimEnd(),
+    value: value.value.trimStart().trimEnd(),
   };
 };
 
@@ -122,7 +122,7 @@ export const TransformString = ({
   value: string[] | string | null;
 }) => {
   if (Array.isArray(value)) {
-    return value.map(item => item?.trimStart().trimEnd());
+    return value.map(item => item.trimStart().trimEnd());
   }
 
   return value?.trimStart().trimEnd();

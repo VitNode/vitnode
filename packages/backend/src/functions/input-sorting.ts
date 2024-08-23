@@ -26,7 +26,7 @@ export function inputSorting<T>({
     return [
       {
         [`${defaultSortBy?.column}`]:
-          defaultSortBy?.direction || SortDirectionEnum.asc,
+          defaultSortBy?.direction ?? SortDirectionEnum.asc,
       },
       sortById,
     ];
@@ -34,7 +34,7 @@ export function inputSorting<T>({
 
   return [
     ...sortBy.map(item => ({
-      [`${item.column}`]: item.direction,
+      [item.column]: item.direction,
     })),
     sortById,
   ];

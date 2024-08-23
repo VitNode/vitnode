@@ -27,7 +27,7 @@ export class ShowSettingsService {
         'manifest.webmanifest',
       );
       const data = fs.readFileSync(path, 'utf8');
-      const manifest: ManifestWithLang = JSON.parse(data);
+      const manifest = JSON.parse(data) as ManifestWithLang;
 
       return manifest;
     });

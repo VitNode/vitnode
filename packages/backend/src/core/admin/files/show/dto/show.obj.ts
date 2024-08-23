@@ -6,8 +6,8 @@ import { ShowCoreFiles } from '@/core/files/show/dto/show.obj';
 
 @ObjectType()
 export class ShowAdminFiles extends ShowCoreFiles {
-  @Field(() => User)
-  user: User;
+  @Field(() => User, { nullable: true })
+  user: User | null;
 }
 
 @ObjectType()

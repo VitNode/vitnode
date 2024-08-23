@@ -71,7 +71,7 @@ export class ChangePositionAdminNavPluginsService extends HelpersAdminNavPlugins
         throw new NotFoundError('Parent');
       }
 
-      parentItem.children = parentItem.children || [];
+      parentItem.children = parentItem.children ?? [];
       parentItem.children.splice(index_to_move, 0, itemToMove);
     } else {
       // If parent_code is not provided, add the item to the root of the nav array

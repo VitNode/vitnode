@@ -25,7 +25,7 @@ export class ShowAdminNavPluginsService {
     return config.nav.map(nav => {
       return {
         ...nav,
-        keywords: nav.keywords || [],
+        keywords: nav.keywords,
       };
     });
   }

@@ -79,17 +79,13 @@ export class ShowCoreThemeEditorService {
     }
 
     const cssAsString = fs.readFileSync(pathToCss, 'utf8');
-    const colors: ColorsShowCoreThemeEditor = keysFromCSSThemeEditor.reduce(
-      (acc, variable) => {
-        acc[variable.replace('-', '_')] = this.getVariable({
-          cssAsString,
-          variable,
-        });
-
-        return acc;
-      },
-      {} as ColorsShowCoreThemeEditor,
-    );
+    const colors: ColorsShowCoreThemeEditor = {} as ColorsShowCoreThemeEditor;
+    for (const variable of keysFromCSSThemeEditor) {
+      colors[variable.replace('-', '_')] = this.getVariable({
+        cssAsString,
+        variable,
+      });
+    }
 
     return colors;
   }

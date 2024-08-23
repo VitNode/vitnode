@@ -34,11 +34,11 @@ export class AdminAuthGuards implements CanActivate {
   }
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
-    const ctx = GqlExecutionContext.create(context).getContext();
+    const ctx: GqlContext = GqlExecutionContext.create(context).getContext();
 
     try {
       return !!(await this.getAuth(ctx));
-    } catch (e) {
+    } catch (_e) {
       // Return true if auth is optional
       return true;
     }

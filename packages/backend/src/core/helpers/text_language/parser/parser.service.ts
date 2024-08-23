@@ -35,7 +35,7 @@ export class ParserTextLanguageCoreHelpersService extends HelpersParserTextLangu
     content: string;
     infoOldData: InfoFromTextLanguageContentReturnValues[];
   }) {
-    const oldInfo = infoOldData.reduce(
+    const oldInfo = infoOldData.reduce<InfoFromTextLanguageContentReturnValues>(
       (acc, item) => {
         // Check if already exists file id
         item.fileIds.forEach(id => {
@@ -46,7 +46,7 @@ export class ParserTextLanguageCoreHelpersService extends HelpersParserTextLangu
 
         return acc;
       },
-      { fileIds: [] } as InfoFromTextLanguageContentReturnValues,
+      { fileIds: [] },
     );
     const info = this.getInfoFromContent({ content });
 
@@ -62,6 +62,7 @@ export class ParserTextLanguageCoreHelpersService extends HelpersParserTextLangu
     item_id,
   }: Args<T>): Promise<ReturnValues[]> {
     ['language_code', 'value', 'item_id'].forEach(key => {
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
       if (!database[key]) {
         throw new CustomError({
           code: 'DATABASE_COLUMN_NOT_FOUND',
@@ -101,7 +102,7 @@ export class ParserTextLanguageCoreHelpersService extends HelpersParserTextLangu
               [Key in keyof PgTableWithColumns<T>['$inferInsert']]:
                 | PgTableWithColumns<T>['$inferInsert'][Key]
                 | Placeholder<string, unknown>
-                | SQL<unknown>;
+                | SQL;
             })
             .where(eq(database.id, itemExist.id))
             .returning();
@@ -115,7 +116,7 @@ export class ParserTextLanguageCoreHelpersService extends HelpersParserTextLangu
             [Key in keyof PgTableWithColumns<T>['$inferInsert']]:
               | PgTableWithColumns<T>['$inferInsert'][Key]
               | Placeholder<string, unknown>
-              | SQL<unknown>;
+              | SQL;
           })
           .returning();
 
@@ -155,6 +156,7 @@ export class ParserTextLanguageCoreHelpersService extends HelpersParserTextLangu
     item_id,
   }: Omit<Args<T>, 'data'>) {
     ['language_code', 'value', 'item_id'].forEach(key => {
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
       if (!database[key]) {
         throw new CustomError({
           code: 'DATABASE_COLUMN_NOT_FOUND',

@@ -1,6 +1,5 @@
 import { join } from 'path';
 import * as fs from 'fs';
-import { copyFile } from 'fs/promises';
 
 import { Injectable } from '@nestjs/common';
 import * as tar from 'tar';
@@ -57,6 +56,7 @@ export class DownloadAdminCoreLanguageService {
         ABSOLUTE_PATHS_BACKEND.plugin({ code: plugin.code }).frontend.language,
         `${code}.json`,
       );
+
       if (
         !fs.existsSync(path) ||
         (pluginsToInclude.length > 0 && !pluginsToInclude.includes(plugin.code))
@@ -64,7 +64,7 @@ export class DownloadAdminCoreLanguageService {
         return;
       }
 
-      copyFile(path, join(pathTemp, `${plugin.code}.json`));
+      fs.copyFileSync(path, join(pathTemp, `${plugin.code}.json`));
     });
 
     const name = removeSpecialCharacters(
@@ -84,7 +84,7 @@ export class DownloadAdminCoreLanguageService {
 
       // Remove temp folder
       fs.rmSync(pathTemp, { recursive: true });
-    } catch (error) {
+    } catch (_e) {
       throw new CustomError({
         code: 'LANGUAGE_DOWNLOAD_ERROR',
         message: 'Error creating tgz',

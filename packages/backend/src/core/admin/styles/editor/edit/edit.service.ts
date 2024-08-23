@@ -9,8 +9,6 @@ import { EditorShowCoreMiddleware } from '@/core/middleware/show/dto/show.obj';
 
 @Injectable()
 export class EditAdminEditorStylesService {
-  constructor() {}
-
   edit(data: EditAdminEditorStylesArgs): EditorShowCoreMiddleware {
     const config = getConfigFile();
 

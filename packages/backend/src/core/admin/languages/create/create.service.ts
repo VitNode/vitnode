@@ -30,7 +30,7 @@ export class CreateAdminCoreLanguageService {
       },
     });
 
-    [...plugins, { code: 'core' }, { code: 'admin' }].forEach(async plugin => {
+    [...plugins, { code: 'core' }, { code: 'admin' }].forEach(plugin => {
       const path = join(
         ABSOLUTE_PATHS_BACKEND.plugin({ code: plugin.code }).frontend.language,
         `${pluginCode}.json`,
@@ -119,7 +119,7 @@ export class CreateAdminCoreLanguageService {
       })
       .returning();
 
-    await setRebuildRequired({ set: 'langs' });
+    setRebuildRequired({ set: 'langs' });
 
     return newLanguage[0];
   }

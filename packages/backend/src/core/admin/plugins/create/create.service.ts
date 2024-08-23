@@ -61,7 +61,7 @@ export class CreateAdminPluginsService {
         orderBy: (table, { asc }) => asc(table.code),
       });
 
-    languages.forEach(async lang => {
+    languages.forEach(lang => {
       const langPath = join(
         ABSOLUTE_PATHS_BACKEND.plugin({ code }).frontend.language,
       );

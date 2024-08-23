@@ -17,7 +17,7 @@ interface Args {
   graphqlUpload?: ProcessRequestOptions;
 }
 
-export const nestjsMainApp = async (app: INestApplication, options?: Args) => {
+export const nestjsMainApp = (app: INestApplication, options?: Args) => {
   app.use(cookieParser());
   app.use(
     helmet({
@@ -25,6 +25,7 @@ export const nestjsMainApp = async (app: INestApplication, options?: Args) => {
         process.env.NODE_ENV === 'production' ? undefined : false,
     }),
   );
+
   app.enableCors({
     ...options?.cors,
     credentials: true,

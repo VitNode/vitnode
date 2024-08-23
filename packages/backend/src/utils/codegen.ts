@@ -29,7 +29,7 @@ export const codegenConfig = ({
       },
     },
     generates: {
-      [`${join(pathOutGql, 'types.ts')}`]: {
+      [join(pathOutGql, 'types.ts')]: {
         plugins: ['typescript'],
       },
       [pathOutGql]: {

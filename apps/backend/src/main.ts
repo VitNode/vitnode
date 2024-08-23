@@ -18,10 +18,10 @@ async function bootstrap() {
     },
   });
 
-  await app.listen(process.env.PORT ?? '8080', '', () => {
-    console.log(
-      `Application is running on: http://localhost:${process.env.PORT ?? 8080}/graphql`,
-    );
+  const port = Number(process.env.PORT) || 8080;
+  await app.listen(port, '', () => {
+    console.log(`Application is running on: http://localhost:${port}/graphql`);
   });
 }
-bootstrap();
+
+void bootstrap();

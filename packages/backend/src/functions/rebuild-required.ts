@@ -3,11 +3,7 @@ import * as fs from 'fs';
 import { ConfigType, configPath, getConfigFile } from '../providers/config';
 import { CustomError } from '../errors';
 
-export const setRebuildRequired = async ({
-  set,
-}: {
-  set: 'langs' | 'plugins';
-}) => {
+export const setRebuildRequired = ({ set }: { set: 'langs' | 'plugins' }) => {
   const config = getConfigFile();
 
   const newData: ConfigType = {

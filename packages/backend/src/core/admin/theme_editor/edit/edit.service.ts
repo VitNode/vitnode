@@ -84,7 +84,8 @@ export class EditAdminThemeEditorService {
             dir_folder: config.logos[el].dir_folder,
             file_name: config.logos[el].file_name,
           });
-          delete config.logos[el];
+
+          config.logos[el] = undefined;
         }
 
         if (logos[el]?.file) {

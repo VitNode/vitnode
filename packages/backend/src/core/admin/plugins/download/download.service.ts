@@ -47,7 +47,7 @@ export class DownloadAdminPluginsService {
     }
   }
 
-  protected async prepareTgz({ code }: { code: string }): Promise<string> {
+  protected prepareTgz({ code }: { code: string }): string {
     // Create temp folder
     const tempNameFolder = `${code}-download-${generateRandomString(5)}-${currentUnixDate()}`;
     const tempPath = join(this.tempPath, tempNameFolder);
@@ -89,8 +89,8 @@ export class DownloadAdminPluginsService {
       ABSOLUTE_PATHS_BACKEND.plugin({ code }).frontend.default_page,
     );
     infoJSON.allow_default = allow_default;
-    infoJSON.version = version || infoJSON.version;
-    infoJSON.version_code = version_code || infoJSON.version_code;
+    infoJSON.version = version ?? infoJSON.version;
+    infoJSON.version_code = version_code ?? infoJSON.version_code;
 
     fs.writeFile(
       pathInfoJSON,
@@ -145,7 +145,7 @@ export class DownloadAdminPluginsService {
       await execShellCommand(
         'npm run drizzle-kit up && npm run drizzle-kit generate',
       );
-    } catch (err) {
+    } catch (_e) {
       throw new CustomError({
         code: 'GENERATE_MIGRATION_ERROR',
         message: 'Error generating migration',
@@ -174,10 +174,10 @@ export class DownloadAdminPluginsService {
         version && version_code ? version_code : plugin.version_code
       }--${userId}-${generateRandomString(5)}-${currentUnixDate()}`,
     );
-    const tempPath = await this.prepareTgz({ code });
+    const tempPath = this.prepareTgz({ code });
 
     try {
-      tar
+      void tar
         .c(
           {
             gzip: true,
@@ -190,7 +190,7 @@ export class DownloadAdminPluginsService {
           // Remove temp folder
           fs.rmSync(tempPath, { recursive: true });
         });
-    } catch (error) {
+    } catch (_e) {
       throw new CustomError({
         code: 'CREATE_TGZ_ERROR',
         message: 'Error creating tgz file',

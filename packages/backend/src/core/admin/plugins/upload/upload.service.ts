@@ -124,7 +124,7 @@ export class UploadAdminPluginsService {
       await fs.promises.cp(source, destination, {
         recursive: true,
       });
-    } catch (error) {
+    } catch (_e) {
       throw new CustomError({
         code: 'COPY_FILES_TO_PLUGIN_FOLDER_ERROR',
         message: `Source: ${source}, Destination: ${destination}`,
@@ -138,12 +138,12 @@ export class UploadAdminPluginsService {
   }: {
     destination: string;
     source: string;
-  }): Promise<void> {
+  }) {
     if (!fs.existsSync(source)) return;
 
     try {
       await fs.promises.copyFile(source, destination);
-    } catch (error) {
+    } catch (_e) {
       throw new CustomError({
         code: 'COPY_FILE_TO_PLUGIN_FOLDER_ERROR',
         message: `Source: ${source}, Destination: ${destination}`,
@@ -201,7 +201,7 @@ export class UploadAdminPluginsService {
         `${lang.code}.json`,
       );
 
-      this.copyFileToPluginFolder({ source, destination });
+      void this.copyFileToPluginFolder({ source, destination });
     });
   }
 

@@ -34,18 +34,21 @@ export function graphqlUploadExpress({
     response: Response,
     next: NextFunction,
   ) {
-    if (!request.is('multipart/form-data')) return next();
+    if (!request.is('multipart/form-data')) {
+      next();
+
+      return;
+    }
 
     const requestEnd = new Promise(resolve => request.on('end', resolve));
     const { send } = response;
 
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error Todo: Find a less hacky way to prevent sending a response
     // before the request has ended.
     response.send =
       /** @param {Array<unknown>} args */
       (...args: unknown[]) => {
-        requestEnd.then(() => {
+        void requestEnd.then(() => {
           response.send = send;
           response.send(...args);
         });

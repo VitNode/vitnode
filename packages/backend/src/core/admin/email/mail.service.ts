@@ -55,7 +55,7 @@ export class MailService extends HelpersAdminEmailSettingsService {
         {
           host: config.smtp_host,
           port: config.smtp_port,
-          secure: config.smtp_secure || false,
+          secure: config.smtp_secure ?? false,
           auth: {
             user: config.smtp_user,
             pass: config.smtp_password,

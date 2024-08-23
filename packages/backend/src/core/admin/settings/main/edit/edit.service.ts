@@ -22,7 +22,7 @@ import { ManifestWithLang } from '@/core/settings/settings.module';
 export class EditAdminMainSettingsService {
   constructor(private readonly databaseService: InternalDatabaseService) {}
 
-  protected async updateDescription({
+  protected updateDescription({
     languages,
     site_description,
   }: {
@@ -67,8 +67,7 @@ export class EditAdminMainSettingsService {
       .map(item => {
         const value =
           site_description.find(el => el.language_code === 'en')?.value ??
-          site_description[0]?.value ??
-          '';
+          (site_description[0]?.value || '');
 
         const path = join(
           ABSOLUTE_PATHS_BACKEND.uploads.public,
@@ -154,7 +153,7 @@ export class EditAdminMainSettingsService {
     const languages = await this.databaseService.db
       .select()
       .from(core_languages);
-    await this.updateDescription({ site_description, languages });
+    this.updateDescription({ site_description, languages });
     await this.updateCopyright({ site_copyright, languages });
 
     return {

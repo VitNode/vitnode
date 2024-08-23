@@ -12,6 +12,7 @@
   },
   "type": "module",
   "files": [
+    "eslint.shared.mjs",
     "tsconfig.shared.json",
     "tsconfig.nest.json",
     "tsconfig.next.json",
@@ -21,6 +22,7 @@
   ],
   "keywords": [
     "eslint",
+    "eslint9",
     "tsconfig",
     "vitnode",
     "eslintplugin",
@@ -30,16 +32,16 @@
     "prettierrc"
   ],
   "peerDependencies": {
-    "eslint": "^8.57.0",
+    "eslint": "^9.9.0",
     "typescript": "^5.5.4"
   },
   "devDependencies": {
-    "eslint": "^8.57.0",
     "typescript": "^5.5.4"
   },
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
+    "eslint": "^9.9.0",
     "eslint-config-next": "15.0.0-canary.98",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-eslint-comments": "^3.2.0",

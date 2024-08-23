@@ -13,9 +13,9 @@ export class EditAdminEditorStylesResolver {
 
   @Mutation(() => EditorShowCoreMiddleware)
   @UseGuards(AdminAuthGuards)
-  async admin__core_styles__editor__edit(
+  admin__core_styles__editor__edit(
     @Args() args: EditAdminEditorStylesArgs,
-  ): Promise<EditorShowCoreMiddleware> {
+  ): EditorShowCoreMiddleware {
     return this.service.edit(args);
   }
 }

@@ -39,13 +39,13 @@ export class HelpersAdminEmailSettingsService {
 
     return {
       smtp_host:
-        emailCredentials.smtp_host || defaultEmailCredentials.smtp_host,
+        emailCredentials.smtp_host ?? defaultEmailCredentials.smtp_host,
       smtp_port:
-        emailCredentials.smtp_port || defaultEmailCredentials.smtp_port,
+        emailCredentials.smtp_port ?? defaultEmailCredentials.smtp_port,
       smtp_secure:
-        emailCredentials.smtp_secure || defaultEmailCredentials.smtp_secure,
+        emailCredentials.smtp_secure ?? defaultEmailCredentials.smtp_secure,
       smtp_user:
-        emailCredentials.smtp_user || defaultEmailCredentials.smtp_user,
+        emailCredentials.smtp_user ?? defaultEmailCredentials.smtp_user,
       smtp_password:
         emailCredentials.smtp_password || defaultEmailCredentials.smtp_password,
       resend_key:

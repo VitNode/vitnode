@@ -79,7 +79,7 @@ export class UpdateAdminCoreLanguageService {
       .set({ updated: new Date() })
       .where(eq(core_languages.code, code));
 
-    await setRebuildRequired({ set: 'langs' });
+    setRebuildRequired({ set: 'langs' });
 
     return 'Success!';
   }

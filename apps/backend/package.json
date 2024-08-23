@@ -32,6 +32,7 @@
     "rxjs": "^7.8.1"
   },
   "devDependencies": {
+    "@eslint/js": "^9.9.0",
     "@graphql-codegen/cli": "^5.0.2",
     "@graphql-codegen/typescript": "^4.0.9",
     "@graphql-codegen/typescript-document-nodes": "^4.0.9",
@@ -41,6 +42,7 @@
     "@react-email/components": "^0.0.22",
     "@swc/cli": "^0.4.0",
     "@swc/core": "^1.7.6",
+    "@types/eslint__js": "^8.42.3",
     "@types/express": "^4.17.21",
     "@types/node": "^22.1.0",
     "@types/pg": "^8.11.6",
@@ -48,7 +50,7 @@
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
     "cross-env": "^7.0.3",
-    "eslint": "^8.57.0",
+    "eslint": "^9.9.0",
     "eslint-config-typescript-vitnode": "workspace:*",
     "object-path": "^0.11.8",
     "source-map-support": "^0.5.21",
@@ -57,6 +59,7 @@
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.5.4",
+    "typescript-eslint": "^8.2.0",
     "vitnode-backend": "workspace:*"
   }
 }

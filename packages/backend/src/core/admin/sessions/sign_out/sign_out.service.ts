@@ -14,7 +14,7 @@ export class SignOutAdminSessionsService {
   ) {}
 
   async signOut({ req, res }: GqlContext) {
-    const login_token =
+    const login_token: string =
       req.cookies[
         this.configService.getOrThrow('cookies.login_token.admin.name')
       ];

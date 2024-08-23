@@ -32,7 +32,7 @@ export class AuthorizationAdminSessionsService {
       throw new NotFoundError('User-Agent');
     }
 
-    const login_token =
+    const login_token: string =
       req.cookies[
         this.configService.getOrThrow('cookies.login_token.admin.name')
       ];
@@ -74,7 +74,7 @@ export class AuthorizationAdminSessionsService {
     }
 
     const decodeAccessToken = this.jwtService.decode(login_token);
-    if (!decodeAccessToken || decodeAccessToken['exp'] < currentUnixDate()) {
+    if (!decodeAccessToken || decodeAccessToken.exp < currentUnixDate()) {
       throw new AccessDeniedError();
     }
 

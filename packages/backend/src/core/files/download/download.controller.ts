@@ -25,7 +25,7 @@ export class DownloadSecureFilesController {
     @Res({ passthrough: true }) res: Response,
     @Param() { id }: { id: string },
     @Query() { security_key }: { security_key: string },
-  ): Promise<StreamableFile | void> {
+  ): Promise<StreamableFile | null> {
     const file = await this.databaseService.db.query.core_files.findFirst({
       where: (table, { eq }) => eq(table.id, +id),
     });
@@ -33,7 +33,7 @@ export class DownloadSecureFilesController {
     if (!file || file.security_key !== security_key) {
       res.status(404);
 
-      return;
+      return null;
     }
 
     const path = join(

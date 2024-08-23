@@ -14,9 +14,10 @@ import { InternalDatabaseService } from '@/utils/database/internal_database.serv
 import { User } from '../../../decorators';
 import { AccessDeniedError } from '../../../errors';
 import { core_files } from '../../../database/schema/files';
-import { getConfigFile } from '../../../providers/config';
+import { AllowTypeFilesEnum, getConfigFile } from '../../../providers/config';
 import { generateRandomString } from '@/functions/generate-random-string';
 import { FilesService } from '@/core/files/helpers/upload/upload.service';
+import { UploadCoreFilesObj } from '@/core/files/helpers/upload/dto/upload.obj';
 
 interface GetFilesAfterUploadArgs extends UploadCoreEditorArgs {
   maxUploadSizeKb: number;
@@ -43,11 +44,11 @@ export class UploadCoreEditorService extends HelpersUploadCoreFilesService {
       },
     } = getConfigFile();
 
-    if (allow_type === 'images_videos') {
+    if (allow_type === AllowTypeFilesEnum.images_videos) {
       return [...acceptMimeTypeImage, ...acceptMimeTypeVideo];
     }
 
-    if (allow_type === 'images') {
+    if (allow_type === AllowTypeFilesEnum.images) {
       return acceptMimeTypeImage;
     }
 
@@ -59,7 +60,7 @@ export class UploadCoreEditorService extends HelpersUploadCoreFilesService {
     folder,
     maxUploadSizeKb,
     plugin,
-  }: GetFilesAfterUploadArgs) {
+  }: GetFilesAfterUploadArgs): Promise<UploadCoreFilesObj> {
     const acceptMimeType = this.getAcceptMineType();
     const allowUploadToFrontend = await this.checkAcceptMimeType({
       file,
@@ -140,17 +141,19 @@ export class UploadCoreEditorService extends HelpersUploadCoreFilesService {
       maxUploadSizeKb,
     });
 
+    const security_key = this.acceptMimeTypeToFrontend.includes(
+      uploadFile.mimetype,
+    )
+      ? null
+      : generateRandomString(32);
+
     // Save to database
     const data = await this.databaseService.db
       .insert(core_files)
       .values({
         user_id: user?.id,
         ...uploadFile,
-        security_key: this.acceptMimeTypeToFrontend.includes(
-          uploadFile.mimetype,
-        )
-          ? null
-          : generateRandomString(32),
+        security_key,
       })
       .returning();
 

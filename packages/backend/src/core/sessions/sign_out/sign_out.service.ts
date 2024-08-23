@@ -14,8 +14,9 @@ export class SignOutCoreSessionsService {
   ) {}
 
   async signOut({ req, res }: GqlContext) {
-    const login_token =
-      req.cookies[this.configService.getOrThrow('cookies.login_token.name')];
+    const login_token = req.cookies[
+      this.configService.getOrThrow('cookies.login_token.name')
+    ] as string;
 
     if (!login_token) {
       return 'You are not logged in';

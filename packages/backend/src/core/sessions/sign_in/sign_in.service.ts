@@ -43,9 +43,6 @@ export class SignInCoreSessionsService {
       this.configService.getOrThrow('login_token_secret');
 
     const device = await this.deviceService.getDevice({ req, res });
-    if (!device) {
-      throw new AccessDeniedError();
-    }
 
     if (device.uagent_os === 'Uagent from tests') {
       throw new CustomError({

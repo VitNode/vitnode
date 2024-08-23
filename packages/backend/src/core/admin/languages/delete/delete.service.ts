@@ -1,4 +1,3 @@
-import { rm } from 'fs/promises';
 import { join } from 'path';
 import * as fs from 'fs';
 
@@ -52,7 +51,7 @@ export class DeleteAdminCoreLanguageService {
       },
     });
 
-    [...plugins, { code: 'core' }, { code: 'admin' }].forEach(async plugin => {
+    [...plugins, { code: 'core' }, { code: 'admin' }].forEach(plugin => {
       fs.unlinkSync(
         join(
           ABSOLUTE_PATHS_BACKEND.plugin({ code: plugin.code }).frontend
@@ -68,7 +67,8 @@ export class DeleteAdminCoreLanguageService {
       'assets',
       code,
     );
-    rm(assetsPath, { recursive: true });
+
+    fs.rmSync(assetsPath, { recursive: true });
 
     // Update config file
     const config: ConfigType = getConfigFile();
@@ -79,7 +79,7 @@ export class DeleteAdminCoreLanguageService {
       .delete(core_languages)
       .where(eq(core_languages.code, code));
 
-    await setRebuildRequired({ set: 'langs' });
+    setRebuildRequired({ set: 'langs' });
 
     return 'Success!';
   }

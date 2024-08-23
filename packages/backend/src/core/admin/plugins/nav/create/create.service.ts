@@ -54,7 +54,7 @@ export class CreateAdminNavPluginsService extends HelpersAdminNavPluginsService 
         throw new NotFoundError('Parent');
       }
 
-      parent.children = parent.children || [];
+      parent.children = parent.children ?? [];
       parent.children.push({
         code: currentCode,
         href,

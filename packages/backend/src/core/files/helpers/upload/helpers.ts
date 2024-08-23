@@ -25,10 +25,8 @@ export class HelpersUploadCoreFilesService {
 
     // Read the file data and calculate its size
     for await (const chunk of stream) {
-      // Typescript does not allow to push a Buffer into an array
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
-      chunks.push(chunk);
+      // Typescript does not allow to push a Buffer into an array of unknown type
+      chunks.push(chunk as never);
     }
 
     const fileSizeInBytes = Buffer.concat(chunks).length;

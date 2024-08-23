@@ -35,7 +35,7 @@ export class AuthGuards implements CanActivate {
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const optionalAuth = this.reflector.get(OptionalAuth, context.getHandler());
 
-    const ctx = GqlExecutionContext.create(context).getContext();
+    const ctx: GqlContext = GqlExecutionContext.create(context).getContext();
 
     // If optional auth decorator is not set, check auth
     if (optionalAuth === undefined) {
@@ -43,7 +43,7 @@ export class AuthGuards implements CanActivate {
     } else {
       try {
         return !!(await this.getAuth(ctx));
-      } catch (e) {
+      } catch (_e) {
         // Return true if auth is optional
         return true;
       }

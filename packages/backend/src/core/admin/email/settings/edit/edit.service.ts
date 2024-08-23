@@ -105,7 +105,7 @@ export class EditAdminEmailSettingsService extends HelpersAdminEmailSettingsServ
 
     if (provider === EmailProvider.resend) {
       const updateData: Partial<EmailCredentialsFile> = {
-        resend_key: resend_key || emailCredentials.resend_key,
+        resend_key: resend_key ?? emailCredentials.resend_key,
       };
 
       fs.writeFileSync(this.path, JSON.stringify(updateData, null, 2));

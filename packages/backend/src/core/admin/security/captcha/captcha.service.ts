@@ -25,7 +25,7 @@ export class CaptchaCoreCaptchaSecurityService extends HelpersAdminCaptchaSecuri
       security: { captcha: config },
     } = getConfigFile();
     // If captcha is disabled, return success
-    if (config.type === CaptchaTypeEnum.none || !config.type) {
+    if (config.type === CaptchaTypeEnum.none) {
       return {
         success: true,
         score: 1,
@@ -63,9 +63,11 @@ export class CaptchaCoreCaptchaSecurityService extends HelpersAdminCaptchaSecuri
 
       return data;
     } else if (
-      config.type === CaptchaTypeEnum.recaptcha_v2_checkbox ||
-      config.type === CaptchaTypeEnum.recaptcha_v2_invisible ||
-      config.type === CaptchaTypeEnum.recaptcha_v3
+      [
+        CaptchaTypeEnum.recaptcha_v2_checkbox,
+        CaptchaTypeEnum.recaptcha_v2_invisible,
+        CaptchaTypeEnum.recaptcha_v3,
+      ].includes(config.type)
     ) {
       const res = await fetch(
         `https://www.google.com/recaptcha/api/siteverify?secret=${captchaSecurityConfig.secret_key}&response=${captchaKey}&remoteip=${userIp}`,
