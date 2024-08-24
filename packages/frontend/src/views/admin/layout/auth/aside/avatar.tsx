@@ -14,8 +14,6 @@ import { AvatarUser } from '@/components/ui/user/avatar';
 import { useSessionAdmin } from '@/hooks/use-session-admin';
 import { Link } from '@/navigation';
 import {
-  GitBranch,
-  Globe,
   HammerIcon,
   Home,
   LogOut,
@@ -89,8 +87,7 @@ export const AvatarAsideAuthAdmin = () => {
               rel="noopener noreferrer"
               target="_blank"
             >
-              <Globe />
-              <span>VitNode</span>
+              VitNode
               <SquareArrowOutUpRight />
             </Link>
           </DropdownMenuItem>
@@ -101,8 +98,7 @@ export const AvatarAsideAuthAdmin = () => {
               rel="noopener noreferrer"
               target="_blank"
             >
-              <GitBranch />
-              <span>VitNode GitHub</span>
+              VitNode GitHub
               <SquareArrowOutUpRight />
             </Link>
           </DropdownMenuItem>

@@ -3,6 +3,7 @@
     "title": "Admin Control Panel",
     "title_short": "Admin",
     "home_page": "Home Page",
+    "version": "Version: {version}",
     "search": {
       "placeholder": "Search...",
       "no_results": "No results found.",

@@ -26,7 +26,7 @@ export const RebuildRequiredAdmin = () => {
   }
 
   return (
-    <Alert className="my-2" variant="destructive">
+    <Alert className="my-2" variant="warn">
       <RefreshCcw />
 
       <AlertTitle>{t('title')}</AlertTitle>

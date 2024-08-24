@@ -48,6 +48,10 @@ export const SearchAsideAuthAdmin = () => {
       >
         <SearchIcon className="ms-1 size-4" />
         {t('placeholder')}
+        <div className="ms-auto inline-flex gap-0.5">
+          <kbd className="bg-background rounded-md border px-1.5">⌘</kbd>
+          <kbd className="bg-background rounded-md border px-1.5">K</kbd>
+        </div>
       </button>
 
       <CommandDialog onOpenChange={setOpen} open={open} shouldFilter={false}>

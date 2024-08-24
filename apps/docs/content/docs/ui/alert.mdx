@@ -3,11 +3,10 @@ title: Alert
 description: Provides a callout to capture user attention.
 ---
 
-<Callout title="Shadcn UI">
-  This component is part of [Shadcn
-  UI](https://ui.shadcn.com/docs/components/alert).
-</Callout>
+import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
+import img from '@/assets/ui/components/alert.png';
 
+<ImageZoom src={img} className="max-w-xl" alt="Alert" />
 ## Usage
 
 ```tsx
@@ -35,7 +34,7 @@ import { TypeTable } from 'fumadocs-ui/components/type-table';
 <TypeTable
   type={{
     variant: {
-      type: 'default | destructive',
+      type: 'default | error | warn | primary',
       default: 'default',
     },
   }}

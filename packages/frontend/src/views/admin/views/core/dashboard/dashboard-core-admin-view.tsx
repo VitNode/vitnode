@@ -1,17 +1,21 @@
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { HeaderContent } from '@/components/ui/header-content';
 import { getSessionAdminData } from '@/graphql/get-session-admin';
 import { CONFIG } from '@/helpers/config-with-env';
-import { AlertTriangle } from 'lucide-react';
+import { Link } from '@/navigation';
+import { AlertTriangle, HammerIcon } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 
 import { RebuildRequiredAdmin } from '../../../global/rebuild-required';
 
 export const DashboardCoreAdminView = async () => {
-  const t = await getTranslations('core');
-  const {
-    admin__sessions__authorization: { version },
-  } = await getSessionAdminData();
+  const [
+    {
+      admin__sessions__authorization: { version },
+    },
+    t,
+  ] = await Promise.all([getSessionAdminData(), getTranslations('admin')]);
 
   return (
     <>
@@ -30,7 +34,14 @@ export const DashboardCoreAdminView = async () => {
             )}
           </>
         }
-      />
+      >
+        <Button asChild>
+          <Link href="/admin/core/diagnostic">
+            <HammerIcon />
+            {t('core.diagnostic.title')}
+          </Link>
+        </Button>
+      </HeaderContent>
 
       <RebuildRequiredAdmin />
     </>
