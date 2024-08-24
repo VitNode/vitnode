@@ -1,15 +1,15 @@
-import { UseFormReturn } from 'react-hook-form';
-import * as z from 'zod';
-import { toast } from 'sonner';
+import { useDialog } from '@/components/ui/dialog';
+import { FetcherErrorType } from '@/graphql/fetcher';
+import { ShowAdminPlugins } from '@/graphql/types';
+import { useSessionAdmin } from '@/hooks/use-session-admin';
+import { usePathname, useRouter } from '@/navigation';
 import { useTranslations } from 'next-intl';
+import { UseFormReturn } from 'react-hook-form';
+import { toast } from 'sonner';
+import * as z from 'zod';
 
 import { mutationCreateApi } from './mutation-create-api';
 import { mutationEditApi } from './mutation-edit-api';
-import { useDialog } from '@/components/ui/dialog';
-import { usePathname, useRouter } from '@/navigation';
-import { useSessionAdmin } from '@/hooks/use-session-admin';
-import { FetcherErrorType } from '@/graphql/fetcher';
-import { ShowAdminPlugins } from '@/graphql/types';
 
 export const codePluginRegex = /^[a-z0-9-]*$/;
 

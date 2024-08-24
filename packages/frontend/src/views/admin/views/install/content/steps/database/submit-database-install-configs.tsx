@@ -1,11 +1,10 @@
+import { Button } from '@/components/ui/button';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 import { toast } from 'sonner';
 
-import { mutationApi } from './mutation-api';
-import { Button } from '@/components/ui/button';
-
 import { useInstallVitnode } from '../../hooks/use-install-vitnode';
+import { mutationApi } from './mutation-api';
 
 export const SubmitDatabaseInstallConfigs = () => {
   const [isPending, setPending] = React.useState(false);
@@ -14,6 +13,7 @@ export const SubmitDatabaseInstallConfigs = () => {
 
   return (
     <Button
+      loading={isPending}
       onClick={async () => {
         setPending(true);
 
@@ -30,7 +30,6 @@ export const SubmitDatabaseInstallConfigs = () => {
         setPending(false);
         setCurrentStep(prev => prev + 1);
       }}
-      loading={isPending}
     >
       Create Records
     </Button>

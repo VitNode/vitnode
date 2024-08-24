@@ -1,7 +1,3 @@
-import { useTranslations } from 'next-intl';
-
-import { SubmitContentDeletePluginActionsAdmin } from './submit';
-import { useDeletePluginAdmin } from './hooks/use-delete-plugin-admin';
 import {
   AlertDialogCancel,
   AlertDialogDescription,
@@ -11,6 +7,10 @@ import {
 } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
 import { ShowAdminPlugins } from '@/graphql/types';
+import { useTranslations } from 'next-intl';
+
+import { useDeletePluginAdmin } from './hooks/use-delete-plugin-admin';
+import { SubmitContentDeletePluginActionsAdmin } from './submit';
 
 export const ContentDeletePluginActionsAdmin = ({
   author,

@@ -1,20 +1,20 @@
+import {
+  Command,
+  commandInputClassName,
+  CommandList,
+} from '@/components/ui/command';
+import { Input } from '@/components/ui/input';
+import { Loader } from '@/components/ui/loader';
+import { UserInputItem } from '@/components/ui/user/user-input';
+import { getUsersShortApi } from '@/graphql/get-users-short-api';
+import { cn } from '@/helpers/classnames';
+import { useQuery } from '@tanstack/react-query';
 import { Search } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import React from 'react';
-import { useQuery } from '@tanstack/react-query';
 import { useDebouncedCallback } from 'use-debounce';
 
 import { UserInputContentList } from './list';
-import { UserInputItem } from '@/components/ui/user/user-input';
-import { getUsersShortApi } from '@/graphql/get-users-short-api';
-import {
-  Command,
-  CommandList,
-  commandInputClassName,
-} from '@/components/ui/command';
-import { Input } from '@/components/ui/input';
-import { cn } from '@/helpers/classnames';
-import { Loader } from '@/components/ui/loader';
 
 export const UserInputContent = (props: {
   onSelect: (value: UserInputItem) => void;

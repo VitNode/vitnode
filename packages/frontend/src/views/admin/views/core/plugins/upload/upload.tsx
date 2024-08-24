@@ -1,16 +1,16 @@
-import { useTranslations } from 'next-intl';
-
-import { useUploadPluginAdmin } from './hooks/use-upload-plugin-admin';
+import { AutoForm } from '@/components/form/auto-form';
+import { AutoFormFile } from '@/components/form/fields/file';
+import { AutoFormInputComponentProps } from '@/components/form/type';
+import { Button } from '@/components/ui/button';
 import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
 import { ShowAdminPlugins } from '@/graphql/types';
-import { AutoForm } from '@/components/form/auto-form';
-import { AutoFormInputComponentProps } from '@/components/form/type';
-import { AutoFormFile } from '@/components/form/fields/file';
+import { useTranslations } from 'next-intl';
+
+import { useUploadPluginAdmin } from './hooks/use-upload-plugin-admin';
 
 export interface UploadPluginAdminProps {
   data?: Pick<ShowAdminPlugins, 'code' | 'name'>;
@@ -28,15 +28,12 @@ export const UploadPluginAdmin = ({ data }: UploadPluginAdminProps) => {
       </DialogHeader>
 
       <AutoForm
-        formSchema={formSchema}
-        onSubmit={onSubmit}
-        submitButton={props => <Button {...props}>{t('submit')}</Button>}
         fieldConfig={{
           file: {
             fieldType: (props: AutoFormInputComponentProps) => (
               <AutoFormFile
-                className="mt-5"
                 acceptExtensions={['tgz']}
+                className="mt-5"
                 maxFileSizeInMb={0}
                 showInfo
                 {...props}
@@ -44,6 +41,9 @@ export const UploadPluginAdmin = ({ data }: UploadPluginAdminProps) => {
             ),
           },
         }}
+        formSchema={formSchema}
+        onSubmit={onSubmit}
+        submitButton={props => <Button {...props}>{t('submit')}</Button>}
       />
     </>
   );

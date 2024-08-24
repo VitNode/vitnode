@@ -1,11 +1,10 @@
-import { Args, Mutation, Resolver } from '@nestjs/graphql';
-import { UseGuards } from '@nestjs/common';
-
-import { TestAdminEmailSettingsService } from './test.service';
-import { TestAdminEmailSettingsServiceArgs } from './dto/test.args';
-
-import { AdminAuthGuards } from '@/utils';
 import { CurrentUser, User } from '@/decorators';
+import { AdminAuthGuards } from '@/utils';
+import { UseGuards } from '@nestjs/common';
+import { Args, Mutation, Resolver } from '@nestjs/graphql';
+
+import { TestAdminEmailSettingsServiceArgs } from './dto/test.args';
+import { TestAdminEmailSettingsService } from './test.service';
 
 @Resolver()
 export class TestAdminEmailSettingsResolver {

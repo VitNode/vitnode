@@ -1,14 +1,14 @@
 'use client';
 
+import { DateFormat } from '@/components/date-format';
+import { Badge } from '@/components/ui/badge';
+import { DataTable } from '@/components/ui/data-table';
+import { Admin__Core_Languages__ShowQuery } from '@/graphql/queries/admin/languages/admin__core_languages__show.generated';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
-import { ActionsTableLangsCoreAdmin } from './table/actions/actions';
 import { EnabledRowTableLangsCoreAdmin } from './enabled-row';
-import { Badge } from '@/components/ui/badge';
-import { DateFormat } from '@/components/date-format';
-import { DataTable } from '@/components/ui/data-table';
-import { Admin__Core_Languages__ShowQuery } from '@/graphql/queries/admin/languages/admin__core_languages__show.generated';
+import { ActionsTableLangsCoreAdmin } from './table/actions/actions';
 
 export const ContentLangsCoreAdminView = ({
   core_languages__show: { edges, pageInfo },
@@ -18,13 +18,6 @@ export const ContentLangsCoreAdminView = ({
 
   return (
     <DataTable
-      data={edges}
-      pageInfo={pageInfo}
-      searchPlaceholder={t('search_placeholder')}
-      defaultSorting={{
-        sortBy: 'created',
-        sortDirection: 'desc',
-      }}
       columns={[
         {
           id: 'name',
@@ -75,6 +68,13 @@ export const ContentLangsCoreAdminView = ({
           },
         },
       ]}
+      data={edges}
+      defaultSorting={{
+        sortBy: 'created',
+        sortDirection: 'desc',
+      }}
+      pageInfo={pageInfo}
+      searchPlaceholder={t('search_placeholder')}
     />
   );
 };

@@ -1,11 +1,11 @@
+import { NotFoundError } from '@/errors';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
-import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { core_sessions_known_devices } from '../../../database/schema/sessions';
+import { getUserAgentData, getUserIp } from '../../../functions';
 import { GqlContext } from '../../../utils';
-import { getUserIp, getUserAgentData } from '../../../functions';
-import { NotFoundError } from '@/errors';
 
 interface DeviceType {
   id: number;

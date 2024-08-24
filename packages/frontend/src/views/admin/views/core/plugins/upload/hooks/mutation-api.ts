@@ -1,14 +1,13 @@
 'use server';
 
-import { revalidatePath } from 'next/cache';
-
 import { fetcher, FetcherErrorType } from '@/graphql/fetcher';
-import { CONFIG } from '@/helpers/config-with-env';
 import {
   Admin__Core_Plugins__Upload,
   Admin__Core_Plugins__UploadMutation,
   Admin__Core_Plugins__UploadMutationVariables,
 } from '@/graphql/mutations/admin/plugins/admin__core_plugins__upload.generated';
+import { CONFIG } from '@/helpers/config-with-env';
+import { revalidatePath } from 'next/cache';
 
 export const mutationApi = async (formData: FormData) => {
   const files = formData.get('file') as File;

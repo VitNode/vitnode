@@ -1,21 +1,21 @@
-import React from 'react';
+import { TextLanguage } from '@/graphql/types';
 import { Editor } from '@tiptap/react';
+import React from 'react';
 
 import { FileStateEditor } from '../extensions/files/files';
 import {
   UploadFilesHandlerArgs,
   UploadFilesHandlerEditorArgs,
 } from '../extensions/files/hooks/use-upload-files-handler-editor.ts';
-import { TextLanguage } from '@/graphql/types';
 
 interface Args extends Omit<UploadFilesHandlerEditorArgs, 'value'> {
   editor: Editor;
   files: FileStateEditor[];
-  onChange: (value: TextLanguage[] | string) => void;
+  onChange: (value: string | TextLanguage[]) => void;
   selectedLanguage: string;
   setFiles: React.Dispatch<React.SetStateAction<FileStateEditor[]>>;
   uploadFiles: (args: UploadFilesHandlerArgs) => Promise<void>;
-  value: TextLanguage[] | string;
+  value: string | TextLanguage[];
 }
 
 export const EditorStateContext = React.createContext<Args>({

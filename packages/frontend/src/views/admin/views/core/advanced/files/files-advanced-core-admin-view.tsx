@@ -1,20 +1,20 @@
-import { getTranslations } from 'next-intl/server';
-import { Metadata } from 'next';
-
-import { ContentFilesAdvancedCoreAdminView } from './content';
-import {
-  SearchParamsPagination,
-  getPaginationTool,
-} from '@/graphql/get-pagination-tool';
-import { HeaderContent } from '@/components/ui/header-content';
 import { Card } from '@/components/ui/card';
+import { HeaderContent } from '@/components/ui/header-content';
 import { fetcher } from '@/graphql/fetcher';
+import {
+  getPaginationTool,
+  SearchParamsPagination,
+} from '@/graphql/get-pagination-tool';
 import {
   Admin__Core_Files__Show,
   Admin__Core_Files__ShowQuery,
   Admin__Core_Files__ShowQueryVariables,
 } from '@/graphql/queries/admin/advanced/files/admin__core_files__show.generated';
 import { ShowCoreFilesSortingColumnEnum } from '@/graphql/types';
+import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
+
+import { ContentFilesAdvancedCoreAdminView } from './content';
 
 const getData = async (variables: Admin__Core_Files__ShowQueryVariables) => {
   const data = await fetcher<

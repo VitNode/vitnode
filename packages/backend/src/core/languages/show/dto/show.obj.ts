@@ -1,23 +1,16 @@
-import { Field, Int, ObjectType } from '@nestjs/graphql';
-
 import { PageInfo } from '@/utils';
+import { Field, Int, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
 export class ShowCoreLanguages {
-  @Field(() => Int)
-  id: number;
+  @Field(() => Boolean)
+  allow_in_input: boolean;
 
   @Field(() => String)
   code: string;
 
-  @Field(() => String)
-  name: string;
-
-  @Field(() => String)
-  timezone: string;
-
-  @Field(() => Boolean)
-  protected: boolean;
+  @Field(() => Date)
+  created: Date;
 
   @Field(() => Boolean)
   default: boolean;
@@ -25,17 +18,23 @@ export class ShowCoreLanguages {
   @Field(() => Boolean)
   enabled: boolean;
 
-  @Field(() => Boolean)
-  time_24: boolean;
+  @Field(() => Int)
+  id: number;
 
   @Field(() => String)
   locale: string;
 
-  @Field(() => Boolean)
-  allow_in_input: boolean;
+  @Field(() => String)
+  name: string;
 
-  @Field(() => Date)
-  created: Date;
+  @Field(() => Boolean)
+  protected: boolean;
+
+  @Field(() => Boolean)
+  time_24: boolean;
+
+  @Field(() => String)
+  timezone: string;
 
   @Field(() => Date)
   updated: Date;

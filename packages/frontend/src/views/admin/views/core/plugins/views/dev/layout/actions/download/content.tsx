@@ -1,18 +1,18 @@
-import { useTranslations } from 'next-intl';
-
-import { useDownloadPluginAdmin } from './hooks/use-download-plugin-admin';
+import { AutoForm } from '@/components/form/auto-form';
+import { AutoFormInput } from '@/components/form/fields/input';
+import { AutoFormRadioGroup } from '@/components/form/fields/radio-group';
+import { DependencyType } from '@/components/form/type';
+import { Button } from '@/components/ui/button';
 import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
 import { ShowAdminPlugins } from '@/graphql/types';
-import { AutoForm } from '@/components/form/auto-form';
-import { AutoFormInput } from '@/components/form/fields/input';
-import { DependencyType } from '@/components/form/type';
-import { AutoFormRadioGroup } from '@/components/form/fields/radio-group';
+import { useTranslations } from 'next-intl';
+
+import { useDownloadPluginAdmin } from './hooks/use-download-plugin-admin';
 
 export const ContentDownloadActionDevPluginAdmin = ({
   code,
@@ -37,8 +37,27 @@ export const ContentDownloadActionDevPluginAdmin = ({
       </DialogHeader>
 
       <AutoForm
-        formSchema={formSchema}
-        onSubmit={onSubmit}
+        dependencies={[
+          {
+            sourceField: 'type',
+            type: DependencyType.HIDES,
+            targetField: 'version',
+            when: (provider: string) => provider !== 'new_version',
+          },
+          {
+            sourceField: 'type',
+            type: DependencyType.HIDES,
+            targetField: 'version_code',
+            when: (provider: string) => provider !== 'new_version',
+          },
+          {
+            sourceField: 'type',
+            type: DependencyType.SETS_OPTIONS,
+            targetField: 'type',
+            when: () => !version_code,
+            options: ['new_version'],
+          },
+        ]}
         fieldConfig={{
           type: {
             fieldType: props => (
@@ -66,27 +85,8 @@ export const ContentDownloadActionDevPluginAdmin = ({
             fieldType: props => <AutoFormInput type="number" {...props} />,
           },
         }}
-        dependencies={[
-          {
-            sourceField: 'type',
-            type: DependencyType.HIDES,
-            targetField: 'version',
-            when: (provider: string) => provider !== 'new_version',
-          },
-          {
-            sourceField: 'type',
-            type: DependencyType.HIDES,
-            targetField: 'version_code',
-            when: (provider: string) => provider !== 'new_version',
-          },
-          {
-            sourceField: 'type',
-            type: DependencyType.SETS_OPTIONS,
-            targetField: 'type',
-            when: () => !version_code,
-            options: ['new_version'],
-          },
-        ]}
+        formSchema={formSchema}
+        onSubmit={onSubmit}
         submitButton={props => (
           <DialogFooter>
             <Button {...props}>{t('submit')}</Button>

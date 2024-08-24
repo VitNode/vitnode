@@ -1,12 +1,10 @@
-import * as fs from 'fs';
-
-import { Injectable } from '@nestjs/common';
-
-import { ChangePositionAdminNavPluginsArgs } from './dto/change_position.args';
-import { HelpersAdminNavPluginsService } from '../helpers.service';
-
 import { NotFoundError } from '@/errors';
 import { ABSOLUTE_PATHS_BACKEND, ConfigPlugin } from '@/index';
+import { Injectable } from '@nestjs/common';
+import * as fs from 'fs';
+
+import { HelpersAdminNavPluginsService } from '../helpers.service';
+import { ChangePositionAdminNavPluginsArgs } from './dto/change_position.args';
 
 @Injectable()
 export class ChangePositionAdminNavPluginsService extends HelpersAdminNavPluginsService {

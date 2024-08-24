@@ -1,6 +1,3 @@
-import { useTranslations } from 'next-intl';
-import { toast } from 'sonner';
-
 import {
   AlertDialogAction,
   AlertDialogCancel,
@@ -10,6 +7,9 @@ import {
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
+import { useTranslations } from 'next-intl';
+import { toast } from 'sonner';
+
 import { mutationApi } from './hooks/mutation-api';
 
 export const ContentClearCacheActionDiagnostic = () => {
@@ -26,11 +26,11 @@ export const ContentClearCacheActionDiagnostic = () => {
         <AlertDialogCancel>{tCore('cancel')}</AlertDialogCancel>
         <AlertDialogAction asChild>
           <Button
-            variant="destructive"
             onClick={() => {
               mutationApi();
               toast.success(t('success'));
             }}
+            variant="destructive"
           >
             {t('confirm')}
           </Button>

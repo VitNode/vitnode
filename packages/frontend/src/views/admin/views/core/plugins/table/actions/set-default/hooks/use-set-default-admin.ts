@@ -1,7 +1,6 @@
-import { toast } from 'sonner';
-import { useTranslations } from 'next-intl';
-
 import { ShowAdminPlugins } from '@/graphql/types';
+import { useTranslations } from 'next-intl';
+import { toast } from 'sonner';
 
 import { mutationEditApi } from '../../../../actions/create/hooks/mutation-edit-api';
 

@@ -1,17 +1,17 @@
+import { ShowCoreNav } from '@/graphql/types';
+import { FlatTree } from '@/helpers/flatten-tree';
+import { useTextLang } from '@/hooks/use-text-lang';
 import { ExternalLink } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 import { ActionsTableNavAdmin } from './actions/actions';
-import { FlatTree } from '@/helpers/flatten-tree';
-import { useTextLang } from '@/hooks/use-text-lang';
-import { ShowCoreNav } from '@/graphql/types';
 
 export const ItemContentTableContentNavAdmin = ({
   data,
   icon,
 }: {
   data: FlatTree<Omit<ShowCoreNav, '__typename'>>;
-  icon: React.ReactNode | null;
+  icon: null | React.ReactNode;
 }) => {
   const t = useTranslations('admin.core.styles.nav');
   const { convertText } = useTextLang();

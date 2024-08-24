@@ -1,8 +1,7 @@
-import React from 'react';
-
 import { Dialog, DialogContent } from '@/components/ui/dialog';
 import { Loader } from '@/components/ui/loader';
 import { ShowCoreLanguages } from '@/graphql/types';
+import React from 'react';
 
 const Content = React.lazy(async () =>
   import('./content').then(module => ({
@@ -21,7 +20,7 @@ export const UpdateActionsTableLangsCoreAdmin = ({
   ...props
 }: Props) => {
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog onOpenChange={setOpen} open={open}>
       <DialogContent>
         <React.Suspense fallback={<Loader />}>
           <Content {...props} />

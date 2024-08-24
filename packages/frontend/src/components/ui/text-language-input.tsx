@@ -1,6 +1,10 @@
-import React from 'react';
+import { TextLanguage } from '@/graphql/types';
 import { useLocale } from 'next-intl';
+import React from 'react';
 
+import { cn } from '../../helpers/classnames';
+import { useGlobals } from '../../hooks/use-globals';
+import { FormControl } from './form';
 import { Input } from './input';
 import {
   Select,
@@ -9,20 +13,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from './select';
-import { FormControl } from './form';
-import { TextLanguage } from '@/graphql/types';
-
-import { useGlobals } from '../../hooks/use-globals';
-import { cn } from '../../helpers/classnames';
 
 interface Props
   extends Omit<
     React.InputHTMLAttributes<HTMLInputElement>,
     'onChange' | 'value'
   > {
+  className?: string;
   onChange: (value: TextLanguage[]) => void;
   value: TextLanguage[];
-  className?: string;
 }
 
 export const TextLanguageInput = ({
@@ -46,7 +45,6 @@ export const TextLanguageInput = ({
     <div className={cn('flex w-full flex-col gap-2', className)}>
       <Input
         className="w-full"
-        type="text"
         onChange={e => {
           const value = e.target.value;
 
@@ -70,6 +68,7 @@ export const TextLanguageInput = ({
             ),
           );
         }}
+        type="text"
         value={currentValue}
         {...props}
       />

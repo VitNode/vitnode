@@ -1,8 +1,3 @@
-import { useTranslations } from 'next-intl';
-import { toast } from 'sonner';
-
-import { mutationApi } from './mutation-api';
-import { SubmitDeleteActionsTableAdministratorsStaffAdmin } from './submit';
 import {
   AlertDialogCancel,
   AlertDialogDescription,
@@ -13,6 +8,11 @@ import {
 } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
 import { ShowAdminStaffAdministrators } from '@/graphql/types';
+import { useTranslations } from 'next-intl';
+import { toast } from 'sonner';
+
+import { mutationApi } from './mutation-api';
+import { SubmitDeleteActionsTableAdministratorsStaffAdmin } from './submit';
 
 export const ContentDeleteActionsAdministratorsStaffAdmin = ({
   data: { id },

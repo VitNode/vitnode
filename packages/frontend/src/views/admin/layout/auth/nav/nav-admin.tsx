@@ -1,6 +1,7 @@
+import { getSessionAdminData } from '@/graphql/get-session-admin';
+
 import { ItemNavAdmin } from './item/item';
 import { NavAdminWrapper } from './wrapper';
-import { getSessionAdminData } from '@/graphql/get-session-admin';
 
 export const NavAdmin = async () => {
   const data = await getSessionAdminData();
@@ -9,7 +10,6 @@ export const NavAdmin = async () => {
     <NavAdminWrapper>
       {data.admin__nav__show.map(item => (
         <ItemNavAdmin
-          key={item.code}
           id={item.code}
           items={item.nav.map(navItem => ({
             id: navItem.code,
@@ -20,6 +20,7 @@ export const NavAdmin = async () => {
               href: child.href,
             })),
           }))}
+          key={item.code}
         />
       ))}
     </NavAdminWrapper>

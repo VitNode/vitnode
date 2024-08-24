@@ -1,10 +1,5 @@
-import { getTranslations } from 'next-intl/server';
-
-import { CreateNavDevPluginAdmin } from './actions/create/create';
-import { ContentNavDevPluginAdmin } from './content';
 import { Icon } from '@/components/icon/icon';
 import { HeaderContent } from '@/components/ui/header-content';
-import { flattenTree } from '@/helpers/flatten-tree';
 import { fetcher } from '@/graphql/fetcher';
 import {
   Admin__Core_Plugins__Nav__Show,
@@ -12,6 +7,11 @@ import {
   Admin__Core_Plugins__Nav__ShowQueryVariables,
 } from '@/graphql/queries/admin/plugins/dev/nav/admin__core_plugins__nav__show.generated';
 import { ShowAdminNavPluginsObj } from '@/graphql/types';
+import { flattenTree } from '@/helpers/flatten-tree';
+import { getTranslations } from 'next-intl/server';
+
+import { CreateNavDevPluginAdmin } from './actions/create/create';
+import { ContentNavDevPluginAdmin } from './content';
 
 const getData = async (
   variables: Admin__Core_Plugins__Nav__ShowQueryVariables,

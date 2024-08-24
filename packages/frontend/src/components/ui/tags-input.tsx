@@ -1,8 +1,8 @@
 'use client';
 
-import React from 'react';
-import { X } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { X } from 'lucide-react';
+import React from 'react';
 
 import { badgeVariants } from './badge';
 import { Input } from './input';
@@ -14,11 +14,11 @@ interface TagsInputItemProps {
 
 interface Props
   extends Omit<React.HTMLAttributes<HTMLInputElement>, 'onChange'> {
+  className?: string;
+  disabled?: boolean;
   onChange: (
     value?: TagsInputItemProps | TagsInputItemProps[] | undefined,
   ) => void;
-  className?: string;
-  disabled?: boolean;
 }
 
 interface MultiProps extends Props {
@@ -63,16 +63,15 @@ export const TagsInput = ({
 
               return (
                 <motion.div
-                  initial={{ opacity: 0, scale: 0.5 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.5 }}
-                  layout
                   className={badgeVariants({
                     variant: 'outline',
                     className: 'shrink-0 cursor-pointer [&>svg]:size-4',
                   })}
+                  exit={{ opacity: 0, scale: 0.5 }}
+                  initial={{ opacity: 0, scale: 0.5 }}
                   key={item.id}
-                  tabIndex={0}
+                  layout
                   onClick={e => {
                     e.stopPropagation();
                     e.preventDefault();
@@ -85,6 +84,7 @@ export const TagsInput = ({
                       onRemove();
                     }
                   }}
+                  tabIndex={0}
                 >
                   {item.value} <X />
                 </motion.div>
@@ -96,11 +96,10 @@ export const TagsInput = ({
 
       {((!multiple && values.length <= 0) || multiple) && (
         <Input
+          disabled={(!multiple && values.length > 0) || disabled}
           onChange={e => {
             setTextInput(e.target.value);
           }}
-          value={textInput}
-          disabled={(!multiple && values.length > 0) || disabled}
           onKeyDown={e => {
             if ((e.key === 'Enter' || e.key === ',') && textInput) {
               e.preventDefault();
@@ -116,6 +115,7 @@ export const TagsInput = ({
               setTextInput('');
             }
           }}
+          value={textInput}
           {...rest}
           type="text"
         />

@@ -1,13 +1,13 @@
-import { UseFormReturn } from 'react-hook-form';
-import * as z from 'zod';
-import { toast } from 'sonner';
+import { Admin__Core_Email_Settings__ShowQuery } from '@/graphql/queries/admin/settings/admin__core_email_settings__show.generated';
+import { EmailProvider } from '@/graphql/types';
+import { getHSLFromString, isColorBrightness } from '@/helpers/colors';
+import { zodFile } from '@/helpers/zod';
 import { useTranslations } from 'next-intl';
+import { UseFormReturn } from 'react-hook-form';
+import { toast } from 'sonner';
+import * as z from 'zod';
 
 import { mutationApi } from './mutation-api';
-import { Admin__Core_Email_Settings__ShowQuery } from '@/graphql/queries/admin/settings/admin__core_email_settings__show.generated';
-import { getHSLFromString, isColorBrightness } from '@/helpers/colors';
-import { EmailProvider } from '@/graphql/types';
-import { zodFile } from '@/helpers/zod';
 
 export const useEmailSettingsFormAdmin = ({
   admin__core_email_settings__show: data,

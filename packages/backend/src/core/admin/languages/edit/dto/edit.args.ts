@@ -7,12 +7,12 @@ export class EditCoreAdminLanguagesArgs extends OmitType(
   CreateCoreAdminLanguagesArgs,
   ['code'] as const,
 ) {
-  @Field(() => Int)
-  id: number;
+  @Field(() => Boolean)
+  default: boolean;
 
   @Field(() => Boolean)
   enabled: boolean;
 
-  @Field(() => Boolean)
-  default: boolean;
+  @Field(() => Int)
+  id: number;
 }

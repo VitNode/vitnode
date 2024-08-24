@@ -1,10 +1,9 @@
-import React from 'react';
-
-import { AuthProviders } from './providers';
 import { getGlobalData } from '@/graphql/get-global-data';
 import { getSessionData } from '@/graphql/get-session-data';
+import React from 'react';
 
 import { redirect } from '../../../navigation';
+import { AuthProviders } from './providers';
 
 export const AuthLayout = async ({
   children,

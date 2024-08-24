@@ -9,8 +9,8 @@ export const AutoFormWrapper = ({
   theme,
 }: {
   children: React.ReactNode;
-  theme: AutoFormInputComponentProps['autoFormProps']['theme'];
   className?: string;
+  theme: AutoFormInputComponentProps['autoFormProps']['theme'];
 }) => {
   return (
     <FormItem

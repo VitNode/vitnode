@@ -1,12 +1,11 @@
-import React from 'react';
-import { useTranslations } from 'next-intl';
-
-import { SkinSelectEmojisContentIconInput } from './emojis/skin-select';
 import { CONFIG } from '@/helpers/config-with-env';
+import { useTranslations } from 'next-intl';
+import React from 'react';
 
-import { Tabs, TabsTrigger } from '../../../ui/tabs';
 import { Input } from '../../../ui/input';
 import { Loader } from '../../../ui/loader';
+import { Tabs, TabsTrigger } from '../../../ui/tabs';
+import { SkinSelectEmojisContentIconInput } from './emojis/skin-select';
 
 // import { SkinSelectEmojiButtonEditor } from "@/components/editor/toolbar/buttons/emoji/skin-select";
 
@@ -29,8 +28,8 @@ export interface IconPickerProps {
 }
 
 enum Tab {
-  Icon = 'icon',
   Emoji = 'emoji',
+  Icon = 'icon',
 }
 
 export const ContentIconInput = (props: IconPickerProps) => {
@@ -49,8 +48,8 @@ export const ContentIconInput = (props: IconPickerProps) => {
       <div className="bg-popover sticky top-0 z-10 flex flex-col gap-3 p-4">
         <Tabs>
           <TabsTrigger
-            id={Tab.Icon}
             active={activeTab === Tab.Icon}
+            id={Tab.Icon}
             onClick={() => {
               setActiveTab(Tab.Icon);
             }}
@@ -58,8 +57,8 @@ export const ContentIconInput = (props: IconPickerProps) => {
             {t('tabs.icons')}
           </TabsTrigger>
           <TabsTrigger
-            id={Tab.Emoji}
             active={activeTab === Tab.Emoji}
+            id={Tab.Emoji}
             onClick={() => {
               setActiveTab(Tab.Emoji);
             }}
@@ -70,22 +69,22 @@ export const ContentIconInput = (props: IconPickerProps) => {
 
         <div className="flex gap-2">
           <Input
+            className="h-9"
+            onChange={e => {
+              setSearch(e.target.value);
+            }}
             placeholder={t(
               activeTab === Tab.Icon
                 ? 'icons.placeholder'
                 : 'emojis.placeholder',
             )}
-            onChange={e => {
-              setSearch(e.target.value);
-            }}
             value={search}
-            className="h-9"
           />
 
           {activeTab === Tab.Emoji && (
             <SkinSelectEmojisContentIconInput
-              skinToneIndex={skinToneIndex}
               setSkinToneIndex={setSkinToneIndex}
+              skinToneIndex={skinToneIndex}
             />
           )}
         </div>

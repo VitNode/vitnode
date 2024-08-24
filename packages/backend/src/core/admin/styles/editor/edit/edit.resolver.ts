@@ -1,11 +1,10 @@
-import { Args, Mutation, Resolver } from '@nestjs/graphql';
-import { UseGuards } from '@nestjs/common';
-
-import { EditAdminEditorStylesService } from './edit.service';
-import { EditAdminEditorStylesArgs } from './dto/edit.args';
-
-import { AdminAuthGuards } from '@/utils/guards/admin-auth.guard';
 import { EditorShowCoreMiddleware } from '@/core/middleware/show/dto/show.obj';
+import { AdminAuthGuards } from '@/utils/guards/admin-auth.guard';
+import { UseGuards } from '@nestjs/common';
+import { Args, Mutation, Resolver } from '@nestjs/graphql';
+
+import { EditAdminEditorStylesArgs } from './dto/edit.args';
+import { EditAdminEditorStylesService } from './edit.service';
 
 @Resolver()
 export class EditAdminEditorStylesResolver {

@@ -1,11 +1,11 @@
 import { INestApplication, ValidationPipe } from '@nestjs/common';
+import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface';
 import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
-import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface';
 
 import {
-  ProcessRequestOptions,
   graphqlUploadExpress,
+  ProcessRequestOptions,
 } from './graphql-upload/graphql-upload-express';
 
 interface CorsOptionsMain extends Omit<CorsOptions, 'credentials'> {

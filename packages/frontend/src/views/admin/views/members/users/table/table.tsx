@@ -1,22 +1,21 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
-import React from 'react';
-import { Pencil } from 'lucide-react';
-
-import { AvatarUser } from '@/components/ui/user/avatar';
 import { DateFormat } from '@/components/date-format';
+import { buttonVariants } from '@/components/ui/button';
+import { DataTable } from '@/components/ui/data-table';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-import { Link } from '@/navigation';
-import { buttonVariants } from '@/components/ui/button';
-import { DataTable } from '@/components/ui/data-table';
+import { AvatarUser } from '@/components/ui/user/avatar';
 import { GroupFormat } from '@/components/ui/user/group-format';
 import { Admin__Core_Members__ShowQuery } from '@/graphql/queries/admin/members/users/admin__core_members__show.generated';
+import { Link } from '@/navigation';
+import { Pencil } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import React from 'react';
 
 export const TableUsersMembersAdmin = ({
   admin__core_members__show: { edges, pageInfo },
@@ -26,8 +25,6 @@ export const TableUsersMembersAdmin = ({
 
   return (
     <DataTable
-      data={edges}
-      pageInfo={pageInfo}
       columns={[
         {
           id: 'name',
@@ -35,7 +32,7 @@ export const TableUsersMembersAdmin = ({
           cell: ({ row }) => {
             return (
               <div className="flex flex-wrap items-center gap-2">
-                <AvatarUser user={row} sizeInRem={2} />
+                <AvatarUser sizeInRem={2} user={row} />
 
                 <span>{row.name}</span>
               </div>
@@ -70,11 +67,11 @@ export const TableUsersMembersAdmin = ({
                   <Tooltip>
                     <TooltipTrigger asChild>
                       <Link
-                        href={`/admin/members/users/${row.id}`}
                         className={buttonVariants({
                           variant: 'ghost',
                           size: 'icon',
                         })}
+                        href={`/admin/members/users/${row.id}`}
                       >
                         <Pencil />
                         <span className="sr-only">{tCore('edit')}</span>
@@ -88,13 +85,15 @@ export const TableUsersMembersAdmin = ({
           },
         },
       ]}
-      searchPlaceholder={t('search_placeholder')}
-      // filters={<GroupsFiltersUsersMembersAdmin />}
+      data={edges}
       // advancedFilters={<AdvancedFiltersUsersMembersAdmin />}
       defaultSorting={{
         sortBy: 'joined',
         sortDirection: 'desc',
       }}
+      pageInfo={pageInfo}
+      // filters={<GroupsFiltersUsersMembersAdmin />}
+      searchPlaceholder={t('search_placeholder')}
     />
   );
 };

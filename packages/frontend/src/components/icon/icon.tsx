@@ -1,15 +1,13 @@
+import { cn } from '@/helpers/classnames';
+import { LucideIcon } from 'lucide-react';
+import dynamicIconImports from 'lucide-react/dynamicIconImports';
+import dynamic from 'next/dynamic';
+import React from 'react';
 import 'server-only';
 
-import { LucideIcon } from 'lucide-react';
-import dynamic from 'next/dynamic';
-import dynamicIconImports from 'lucide-react/dynamicIconImports';
-import React from 'react';
-
-import { cn } from '@/helpers/classnames';
-
 interface Props extends Omit<LucideIcon, '$$typeof'> {
-  name: string;
   className?: string;
+  name: string;
 }
 
 export const Icon = ({ className, name, ...props }: Props) => {

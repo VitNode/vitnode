@@ -1,13 +1,12 @@
-import React from 'react';
+import { UploadCoreFilesObj } from '@/graphql/types';
 import { Upload } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import React from 'react';
 import { toast } from 'sonner';
 
-import { UploadCoreFilesObj } from '@/graphql/types';
-import { PreviewFilesInput } from '../utils/files/preview-files-input';
-
-import { useMergeRefs } from '../../helpers/use-merge-refs';
 import { cn } from '../../helpers/classnames';
+import { useMergeRefs } from '../../helpers/use-merge-refs';
+import { PreviewFilesInput } from '../utils/files/preview-files-input';
 
 export type FilesInputValue = File | UploadCoreFilesObj;
 
@@ -29,9 +28,9 @@ interface WithMultiple extends FilesInputInputProps {
 }
 
 interface WithoutMultiple extends FilesInputInputProps {
+  multiple?: false;
   onChange: (e: FilesInputValue | null) => void;
   value: FilesInputValue | null;
-  multiple?: false;
 }
 
 export const FileInput = ({
@@ -104,22 +103,7 @@ export const FileInput = ({
               'ring-ring outline-none ring-2 ring-offset-2': isDrag,
             },
           )}
-          role="button"
-          tabIndex={disabled ? -1 : 0}
           onClick={() => currentRef.current?.click()}
-          onKeyDown={e => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              e.preventDefault();
-              currentRef.current?.click();
-            }
-          }}
-          onDragOver={e => {
-            if (!e.dataTransfer.types.includes('Files')) return;
-            e.preventDefault();
-            e.stopPropagation();
-
-            setDrag(true);
-          }}
           onDragLeave={e => {
             if (!e.dataTransfer.types.includes('Files')) return;
             e.preventDefault();
@@ -128,6 +112,13 @@ export const FileInput = ({
             if (e.currentTarget.contains(e.relatedTarget as Node)) return;
             setDrag(false);
           }}
+          onDragOver={e => {
+            if (!e.dataTransfer.types.includes('Files')) return;
+            e.preventDefault();
+            e.stopPropagation();
+
+            setDrag(true);
+          }}
           onDrop={e => {
             if (!e.dataTransfer.types.includes('Files')) return;
             e.preventDefault();
@@ -135,6 +126,14 @@ export const FileInput = ({
             setDrag(false);
             handleUploadFile(e.dataTransfer.files);
           }}
+          onKeyDown={e => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              currentRef.current?.click();
+            }
+          }}
+          role="button"
+          tabIndex={disabled ? -1 : 0}
         >
           <div className="text-muted-foreground @xs:p-4 flex items-center gap-4 p-1">
             <Upload className="size-5 flex-shrink-0" />
@@ -157,15 +156,15 @@ export const FileInput = ({
             </div>
           </div>
           <input
-            id="dropzone-file"
-            type="file"
             className="hidden"
             disabled={disabled}
-            ref={inputRef}
+            id="dropzone-file"
+            multiple={multiple}
             onChange={e => {
               handleUploadFile(e.target.files);
             }}
-            multiple={multiple}
+            ref={inputRef}
+            type="file"
             value=""
             {...props}
           />
@@ -173,10 +172,10 @@ export const FileInput = ({
       )}
 
       <PreviewFilesInput
-        value={value as FilesInputValue[]}
+        multiple={multiple as true}
         onChange={onChange as (e: FilesInputValue[]) => void}
         showInfo={showInfo}
-        multiple={multiple as true}
+        value={value as FilesInputValue[]}
       />
     </div>
   );

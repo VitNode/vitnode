@@ -1,14 +1,13 @@
-import { Injectable } from '@nestjs/common';
-import { desc, eq } from 'drizzle-orm';
-
-import { ShowCoreSessionDevicesObj } from './dto/show.obj';
-
-import { InternalDatabaseService } from '@/utils/database/internal_database.service';
-import { User } from '@/decorators';
 import {
   core_sessions,
   core_sessions_known_devices,
 } from '@/database/schema/sessions';
+import { User } from '@/decorators';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
+import { Injectable } from '@nestjs/common';
+import { desc, eq } from 'drizzle-orm';
+
+import { ShowCoreSessionDevicesObj } from './dto/show.obj';
 
 @Injectable()
 export class ShowCoreSessionDevicesService {

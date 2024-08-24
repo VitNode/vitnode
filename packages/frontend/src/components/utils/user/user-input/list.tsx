@@ -1,12 +1,11 @@
-import { useTranslations } from 'next-intl';
-import { CheckIcon } from 'lucide-react';
-
 import { CommandGroup, CommandItem } from '@/components/ui/command';
-import { UserInputItem } from '@/components/ui/user/user-input';
-import { cn } from '@/helpers/classnames';
 import { AvatarUser } from '@/components/ui/user/avatar';
 import { GroupFormat } from '@/components/ui/user/group-format';
+import { UserInputItem } from '@/components/ui/user/user-input';
 import { ShowCoreMembers } from '@/graphql/types';
+import { cn } from '@/helpers/classnames';
+import { CheckIcon } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 export const UserInputContentList = ({
   edges,
@@ -15,7 +14,7 @@ export const UserInputContentList = ({
 }: {
   edges: Pick<
     ShowCoreMembers,
-    'avatar_color' | 'avatar' | 'group' | 'id' | 'name_seo' | 'name'
+    'avatar' | 'avatar_color' | 'group' | 'id' | 'name' | 'name_seo'
   >[];
   onSelect: (value: UserInputItem) => void;
   values: UserInputItem[];

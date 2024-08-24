@@ -1,12 +1,11 @@
 'use client';
 
+import { CommandDialog, CommandInput } from '@/components/ui/command';
+import { Loader } from '@/components/ui/loader';
 import { SearchIcon } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import React, { Suspense } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
-
-import { CommandDialog, CommandInput } from '@/components/ui/command';
-import { Loader } from '@/components/ui/loader';
 
 const Content = React.lazy(async () =>
   import('./content').then(module => ({
@@ -40,18 +39,18 @@ export const SearchAsideAuthAdmin = () => {
   return (
     <>
       <button
-        data-search-full=""
         className="bg-secondary/50 text-muted-foreground hover:bg-accent hover:text-accent-foreground flex w-full items-center gap-2 rounded-lg border p-1.5 text-sm transition-colors max-md:hidden"
-        type="button"
+        data-search-full=""
         onClick={() => {
           setOpen(true);
         }}
+        type="button"
       >
         <SearchIcon className="ms-1 size-4" />
         {t('placeholder')}
       </button>
 
-      <CommandDialog open={open} onOpenChange={setOpen} shouldFilter={false}>
+      <CommandDialog onOpenChange={setOpen} open={open} shouldFilter={false}>
         <CommandInput
           onValueChange={handleSearchInput}
           placeholder={t('placeholder')}

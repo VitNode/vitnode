@@ -1,9 +1,8 @@
-import { join } from 'path';
 import * as fs from 'fs';
-
-import { ShowAdminManifestMetadataObj } from './show/dto/show.obj';
+import { join } from 'path';
 
 import { ABSOLUTE_PATHS_BACKEND, NotFoundError } from '../../../..';
+import { ShowAdminManifestMetadataObj } from './show/dto/show.obj';
 
 export const getManifest = ({
   lang_code,

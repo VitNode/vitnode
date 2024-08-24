@@ -1,18 +1,16 @@
+import { core_languages } from '@/database/schema/languages';
+import { NotFoundError } from '@/errors';
+import { generateRandomString } from '@/functions/generate-random-string';
+import { setRebuildRequired } from '@/functions/rebuild-required';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
+import { Injectable } from '@nestjs/common';
+import { eq } from 'drizzle-orm';
 import * as fs from 'fs';
 import { join } from 'path';
-
-import { Injectable } from '@nestjs/common';
 import * as tar from 'tar';
-import { eq } from 'drizzle-orm';
 
-import { UpdateCoreAdminLanguagesArgs } from './dto/update.args';
-
-import { InternalDatabaseService } from '@/utils/database/internal_database.service';
-import { NotFoundError } from '@/errors';
 import { ABSOLUTE_PATHS_BACKEND, currentUnixDate } from '../../../..';
-import { core_languages } from '@/database/schema/languages';
-import { setRebuildRequired } from '@/functions/rebuild-required';
-import { generateRandomString } from '@/functions/generate-random-string';
+import { UpdateCoreAdminLanguagesArgs } from './dto/update.args';
 
 @Injectable()
 export class UpdateAdminCoreLanguageService {

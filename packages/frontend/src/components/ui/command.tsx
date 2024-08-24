@@ -1,13 +1,12 @@
 'use client';
 
-import React from 'react';
 import { DialogProps } from '@radix-ui/react-dialog';
 import { Command as CommandPrimitive } from 'cmdk';
 import { Search } from 'lucide-react';
-
-import { Dialog, DialogContent } from './dialog';
+import React from 'react';
 
 import { cn } from '../../helpers/classnames';
+import { Dialog, DialogContent } from './dialog';
 
 const Command = ({
   className,
@@ -129,11 +128,11 @@ const CommandShortcut = ({
 export {
   Command,
   CommandDialog,
-  CommandInput,
-  CommandList,
   CommandEmpty,
   CommandGroup,
+  CommandInput,
   CommandItem,
-  CommandShortcut,
+  CommandList,
   CommandSeparator,
+  CommandShortcut,
 };

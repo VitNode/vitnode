@@ -1,15 +1,15 @@
 'use client';
 
+import { DateFormat } from '@/components/date-format';
+import { Badge } from '@/components/ui/badge';
+import { DataTable } from '@/components/ui/data-table';
+import { GroupFormat } from '@/components/ui/user/group-format';
+import { Admin__Core_Groups__ShowQuery } from '@/graphql/queries/admin/members/groups/admin__core_groups__show.generated';
+import { Link } from '@/navigation';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
 import { ActionsTableGroupsMembersAdmin } from './actions/actions';
-import { Badge } from '@/components/ui/badge';
-import { Link } from '@/navigation';
-import { DateFormat } from '@/components/date-format';
-import { DataTable } from '@/components/ui/data-table';
-import { GroupFormat } from '@/components/ui/user/group-format';
-import { Admin__Core_Groups__ShowQuery } from '@/graphql/queries/admin/members/groups/admin__core_groups__show.generated';
 
 export const TableGroupsMembersAdmin = ({
   admin__core_groups__show: { edges, pageInfo },
@@ -19,8 +19,6 @@ export const TableGroupsMembersAdmin = ({
 
   return (
     <DataTable
-      data={edges}
-      pageInfo={pageInfo}
       columns={[
         {
           id: 'name',
@@ -63,11 +61,13 @@ export const TableGroupsMembersAdmin = ({
           },
         },
       ]}
-      searchPlaceholder={t('search_placeholder')}
+      data={edges}
       defaultSorting={{
         sortBy: 'updated',
         sortDirection: 'desc',
       }}
+      pageInfo={pageInfo}
+      searchPlaceholder={t('search_placeholder')}
     />
   );
 };

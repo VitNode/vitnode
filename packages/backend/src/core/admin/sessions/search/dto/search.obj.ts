@@ -1,6 +1,5 @@
-import { Field, ObjectType } from '@nestjs/graphql';
-
 import { ShowAdminNavPlugins } from '@/core/admin/plugins/nav/show/dto/show.obj';
+import { Field, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
 export class NavSearchAdminSessions extends ShowAdminNavPlugins {

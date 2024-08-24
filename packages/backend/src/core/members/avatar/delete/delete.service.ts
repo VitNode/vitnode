@@ -1,10 +1,9 @@
+import { FilesService } from '@/core/files/helpers/upload/upload.service';
+import { core_files_avatars } from '@/database/schema/users';
+import { User } from '@/decorators';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
-
-import { InternalDatabaseService } from '@/utils/database/internal_database.service';
-import { User } from '@/decorators';
-import { core_files_avatars } from '@/database/schema/users';
-import { FilesService } from '@/core/files/helpers/upload/upload.service';
 
 @Injectable()
 export class DeleteAvatarCoreMembersService {

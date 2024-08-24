@@ -12,6 +12,32 @@ export const acceptMimeTypeImage = [
 export const acceptMimeTypeVideo = ['video/mp4', 'video/webm', 'video/ogg'];
 
 export class HelpersUploadCoreFilesService {
+  protected async checkAcceptMimeType({
+    acceptMimeType,
+    disableThrowError,
+    file,
+  }: {
+    acceptMimeType: string[];
+    disableThrowError?: boolean;
+    file: Promise<FileUpload>;
+  }): Promise<boolean> {
+    const { filename, mimetype } = await file;
+    if (acceptMimeType.length === 0) {
+      return true;
+    }
+
+    if (!acceptMimeType.includes(mimetype) && !disableThrowError) {
+      throw new CustomError({
+        code: 'INVALID_TYPE_FILE',
+        message: `${filename} file has invalid type! We only accept the following types: ${acceptMimeType.join(
+          ', ',
+        )}.`,
+      });
+    }
+
+    return acceptMimeType.includes(mimetype);
+  }
+
   protected async checkSizeFile({
     file,
     maxUploadSizeBytes,
@@ -41,31 +67,5 @@ export class HelpersUploadCoreFilesService {
     stream.destroy();
 
     return fileSizeInBytes;
-  }
-
-  protected async checkAcceptMimeType({
-    acceptMimeType,
-    disableThrowError,
-    file,
-  }: {
-    acceptMimeType: string[];
-    file: Promise<FileUpload>;
-    disableThrowError?: boolean;
-  }): Promise<boolean> {
-    const { filename, mimetype } = await file;
-    if (acceptMimeType.length === 0) {
-      return true;
-    }
-
-    if (!acceptMimeType.includes(mimetype) && !disableThrowError) {
-      throw new CustomError({
-        code: 'INVALID_TYPE_FILE',
-        message: `${filename} file has invalid type! We only accept the following types: ${acceptMimeType.join(
-          ', ',
-        )}.`,
-      });
-    }
-
-    return acceptMimeType.includes(mimetype);
   }
 }

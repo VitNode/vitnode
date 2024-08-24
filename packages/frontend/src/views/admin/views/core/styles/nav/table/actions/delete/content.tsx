@@ -1,9 +1,4 @@
-import { useTranslations } from 'next-intl';
-import { Trash } from 'lucide-react';
-
-import { useDeleteNavAdmin } from './hooks/use-delete-nav-admin';
-import { SubmitDeleteActionTableNavAdmin } from './submit';
-import { useTextLang } from '@/hooks/use-text-lang';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import {
   AlertDialogCancel,
   AlertDialogDescription,
@@ -11,9 +6,14 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { ShowCoreNav } from '@/graphql/types';
+import { useTextLang } from '@/hooks/use-text-lang';
+import { Trash } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+
+import { useDeleteNavAdmin } from './hooks/use-delete-nav-admin';
+import { SubmitDeleteActionTableNavAdmin } from './submit';
 
 export const ContentDeleteActionTableNavAdmin = ({
   children,

@@ -1,13 +1,13 @@
-import { useTranslations } from 'next-intl';
-
-import { ButtonSetDefaultPluginActionsAdmin } from './button';
-import { useSetDefaultPluginAdmin } from './hooks/use-set-default-admin';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
 } from '@/components/ui/tooltip';
 import { ShowAdminPlugins } from '@/graphql/types';
+import { useTranslations } from 'next-intl';
+
+import { ButtonSetDefaultPluginActionsAdmin } from './button';
+import { useSetDefaultPluginAdmin } from './hooks/use-set-default-admin';
 
 export const SetDefaultPluginActionsAdmin = (props: ShowAdminPlugins) => {
   const t = useTranslations('admin.core.plugins');

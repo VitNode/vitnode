@@ -1,15 +1,15 @@
+import { buttonVariants } from '@/components/ui/button';
+import { Form } from '@/components/ui/form';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { Link } from '@/navigation';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 
 import { ThemeEditorTab, useThemeEditor } from '../hooks/use-theme-editor';
-import { ColorsTabThemeEditor } from './tabs/color';
-import { MainTabThemeEditor } from './tabs/main';
 import { SubmitSidebarThemeEditor } from './submit';
-import { Form } from '@/components/ui/form';
-import { buttonVariants } from '@/components/ui/button';
-import { Link } from '@/navigation';
+import { ColorsTabThemeEditor } from './tabs/color';
 import { LogosTabThemeEditor } from './tabs/logos';
-import { ScrollArea } from '@/components/ui/scroll-area';
+import { MainTabThemeEditor } from './tabs/main';
 
 export const SidebarThemeEditor = () => {
   const {
@@ -33,11 +33,16 @@ export const SidebarThemeEditor = () => {
         className="relative flex h-full w-64 flex-1 flex-col border-e"
         onSubmit={form.handleSubmit(onSubmit)}
       >
-        <AnimatePresence mode="popLayout" initial={false}>
+        <AnimatePresence initial={false} mode="popLayout">
           <ScrollArea className="flex-1">
             <motion.div
-              key={activeTab}
+              animate="active"
               className="p-4"
+              custom={direction}
+              exit="exit"
+              initial="initial"
+              key={activeTab}
+              transition={{ duration: 0.25, type: 'spring', bounce: 0 }}
               variants={{
                 initial: direction => {
                   return { x: `${110 * direction}%`, opacity: 0 };
@@ -47,11 +52,6 @@ export const SidebarThemeEditor = () => {
                   return { x: `${110 * direction}%`, opacity: 0 };
                 },
               }}
-              initial="initial"
-              animate="active"
-              exit="exit"
-              custom={direction}
-              transition={{ duration: 0.25, type: 'spring', bounce: 0 }}
             >
               {tabs[activeTab]}
             </motion.div>
@@ -60,20 +60,20 @@ export const SidebarThemeEditor = () => {
 
         <div className="bg-card/75 flex items-center gap-2 border-t p-3 backdrop-blur">
           <Link
-            href="/admin/core/dashboard"
+            aria-label={t('close')}
             className={buttonVariants({
               variant: 'ghost',
               size: 'sm',
               className: 'w-full',
             })}
-            aria-label={t('close')}
+            href="/admin/core/dashboard"
           >
             {t('cancel')}
           </Link>
 
           <SubmitSidebarThemeEditor
-            onClick={async () => form.handleSubmit(onSubmit)()}
             isPending={form.formState.isSubmitting}
+            onClick={async () => form.handleSubmit(onSubmit)()}
             openSubmitDialog={openSubmitDialog}
             setOpenSubmitDialog={setOpenSubmitDialog}
           />

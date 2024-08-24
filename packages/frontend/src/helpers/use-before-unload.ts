@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const useBeforeUnload = (
-  enabled: boolean | (() => boolean) = true,
+  enabled: (() => boolean) | boolean = true,
   message?: string,
 ) => {
   const handler = React.useCallback(

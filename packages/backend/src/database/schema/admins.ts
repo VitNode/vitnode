@@ -1,3 +1,4 @@
+import { relations } from 'drizzle-orm';
 import {
   boolean,
   index,
@@ -8,11 +9,10 @@ import {
   timestamp,
   varchar,
 } from 'drizzle-orm/pg-core';
-import { relations } from 'drizzle-orm';
 
 import { core_groups } from './groups';
-import { core_users } from './users';
 import { core_sessions_known_devices } from './sessions';
+import { core_users } from './users';
 
 export const core_admin_permissions = pgTable(
   'core_admin_permissions',

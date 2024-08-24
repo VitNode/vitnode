@@ -1,11 +1,10 @@
+import { core_groups, core_groups_names } from '@/database/schema/groups';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
 
+import { ParserTextLanguageCoreHelpersService } from '../../../helpers/text_language/parser/parser.service';
 import { ShowAdminGroups } from '../show/dto/show.obj';
 import { CreateAdminGroupsArgs } from './dto/create.args';
-
-import { InternalDatabaseService } from '@/utils/database/internal_database.service';
-import { ParserTextLanguageCoreHelpersService } from '../../../helpers/text_language/parser/parser.service';
-import { core_groups, core_groups_names } from '@/database/schema/groups';
 
 @Injectable()
 export class CreateAdminGroupsService {

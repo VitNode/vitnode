@@ -1,14 +1,12 @@
+import { getConfigFile } from '@/providers/config';
+import { Injectable } from '@nestjs/common';
 import * as fs from 'fs';
 
-import { Injectable } from '@nestjs/common';
-
-import { ShowAdminCaptchaSecurityObj } from './dto/show.obj';
 import {
   CaptchaSecurityConfig,
   HelpersAdminCaptchaSecurityService,
 } from '../helpers.service';
-
-import { getConfigFile } from '@/providers/config';
+import { ShowAdminCaptchaSecurityObj } from './dto/show.obj';
 
 @Injectable()
 export class ShowAdminCaptchaSecurityService extends HelpersAdminCaptchaSecurityService {

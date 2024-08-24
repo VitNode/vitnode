@@ -1,22 +1,21 @@
-import React from 'react';
-import { TableVirtuoso } from 'react-virtuoso';
-import { ControllerRenderProps, FieldValues } from 'react-hook-form';
-import { keyBy, mapValues } from 'lodash';
-
-import { Loader } from './loader';
-import { Input } from './input';
-import { Switch } from './switch';
 import { ShowAdminGroups } from '@/graphql/types';
-import { usePermissionsGroupsAdminAPI } from '../utils/permissions-table/use-permissions-table-api';
+import { keyBy, mapValues } from 'lodash';
+import React from 'react';
+import { ControllerRenderProps, FieldValues } from 'react-hook-form';
+import { TableVirtuoso } from 'react-virtuoso';
 
 import { useTextLang } from '../../hooks/use-text-lang';
+import { usePermissionsGroupsAdminAPI } from '../utils/permissions-table/use-permissions-table-api';
+import { Input } from './input';
+import { Loader } from './loader';
+import { Switch } from './switch';
 
 export const PermissionsTable = ({
   field,
   permissions,
 }: {
   field: ControllerRenderProps<FieldValues, 'permissions'>;
-  permissions: { id: string; title: string; disableForGuest?: boolean }[];
+  permissions: { disableForGuest?: boolean; id: string; title: string }[];
 }) => {
   const [searchValue, setSearchValue] = React.useState('');
   const { convertText } = useTextLang();
@@ -62,37 +61,35 @@ export const PermissionsTable = ({
   return (
     <>
       <Input
-        value={searchValue}
         onChange={e => {
           setSearchValue(e.target.value);
         }}
         placeholder="Search group..."
+        value={searchValue}
       />
 
       <TableVirtuoso
-        style={{ height: '50vh' }}
-        data={data}
-        overscan={200}
         className="rounded-md border"
         components={{
           Table,
           TableRow,
         }}
+        data={data}
         fixedHeaderContent={() => (
           <tr className="bg-card border-b">
             <th />
             {permissions.map(permission => (
               <th
-                key={`header_can_${permission.id}`}
                 className="text-muted-foreground px-4 py-3 align-middle font-medium"
+                key={`header_can_${permission.id}`}
               >
                 <div className="flex items-center justify-center gap-4">
                   <span>{permission.title}</span>
                   <Switch
+                    checked={field.value[`can_all_${permission.id}`]}
                     onClick={() => {
                       onToggleAll(permission.id);
                     }}
-                    checked={field.value[`can_all_${permission.id}`]}
                   />
                 </div>
               </th>
@@ -117,6 +114,7 @@ export const PermissionsTable = ({
                 <div className="flex flex-col gap-2">
                   <span>{convertText(item.name)}</span>
                   <Switch
+                    checked={isAllPermissionsEnabled}
                     onClick={() => {
                       if (isAllPermissionsEnabled) {
                         const disableAllPermissions = mapValues(
@@ -180,7 +178,6 @@ export const PermissionsTable = ({
                         ],
                       });
                     }}
-                    checked={isAllPermissionsEnabled}
                   />
                 </div>
               </td>
@@ -196,8 +193,10 @@ export const PermissionsTable = ({
                 );
 
                 return (
-                  <td key={permission.id} className="px-4 py-2 text-center">
+                  <td className="px-4 py-2 text-center" key={permission.id}>
                     <Switch
+                      checked={checked}
+                      disabled={item.guest === permission.disableForGuest}
                       onClick={() => {
                         if (field.value[`can_all_${permission.id}`]) {
                           const groupPermissions = mapValues(
@@ -290,8 +289,6 @@ export const PermissionsTable = ({
                           ],
                         });
                       }}
-                      checked={checked}
-                      disabled={item.guest === permission.disableForGuest}
                     />
                   </td>
                 );
@@ -299,6 +296,8 @@ export const PermissionsTable = ({
             </>
           );
         }}
+        overscan={200}
+        style={{ height: '50vh' }}
       />
     </>
   );

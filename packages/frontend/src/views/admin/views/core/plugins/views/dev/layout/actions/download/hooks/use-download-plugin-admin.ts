@@ -1,18 +1,18 @@
+import { useDialog } from '@/components/ui/dialog';
+import { ShowAdminPlugins } from '@/graphql/types';
+import { CONFIG } from '@/helpers/config-with-env';
+import { increaseVersionString } from '@/helpers/increase-version-string';
 import { useTranslations } from 'next-intl';
-import * as z from 'zod';
 import { toast } from 'sonner';
+import * as z from 'zod';
 
 import { mutationApi } from './mutation-api';
-import { useDialog } from '@/components/ui/dialog';
-import { increaseVersionString } from '@/helpers/increase-version-string';
-import { CONFIG } from '@/helpers/config-with-env';
-import { ShowAdminPlugins } from '@/graphql/types';
 
 export const useDownloadPluginAdmin = ({
   code,
   version,
   version_code,
-}: Pick<ShowAdminPlugins, 'code' | 'version_code' | 'version'>) => {
+}: Pick<ShowAdminPlugins, 'code' | 'version' | 'version_code'>) => {
   const t = useTranslations('core');
   const { setOpen } = useDialog();
   const formSchema = z.object({

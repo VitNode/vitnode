@@ -3,17 +3,16 @@
 import { RefreshCcw, RotateCcw, WifiOff } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
-import { mutationClearCache } from './mutation-clear-cache';
-
-import { useRouter } from '../../../navigation';
-import { CONFIG } from '../../../helpers/config-with-env';
+import { Button } from '../../../components/ui/button';
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
 } from '../../../components/ui/card';
-import { Button } from '../../../components/ui/button';
+import { CONFIG } from '../../../helpers/config-with-env';
+import { useRouter } from '../../../navigation';
+import { mutationClearCache } from './mutation-clear-cache';
 
 export const InternalErrorView = () => {
   const t = useTranslations('core');

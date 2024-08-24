@@ -1,14 +1,12 @@
-import { join } from 'path';
-import * as fs from 'fs';
-
-import { Injectable } from '@nestjs/common';
-
-import { ShowSettingsObj } from './dto/show.obj';
-import { ManifestWithLang } from '../settings.module';
-
 import { InternalDatabaseService } from '@/utils/database/internal_database.service';
+import { Injectable } from '@nestjs/common';
+import * as fs from 'fs';
+import { join } from 'path';
+
 import { ABSOLUTE_PATHS_BACKEND, getConfigFile } from '../../..';
 import { core_languages } from '../../../database/schema/languages';
+import { ManifestWithLang } from '../settings.module';
+import { ShowSettingsObj } from './dto/show.obj';
 
 @Injectable()
 export class ShowSettingsService {

@@ -1,16 +1,15 @@
-import { Baseline, ChevronDownIcon } from 'lucide-react';
-import React from 'react';
-
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
-import { getHSLFromString } from '@/helpers/colors';
 import { HslColor } from '@/graphql/types';
+import { getHSLFromString } from '@/helpers/colors';
+import { Baseline, ChevronDownIcon } from 'lucide-react';
+import React from 'react';
 
-import { ButtonToolbarEditor } from '../../button';
 import { useEditorState } from '../../../hooks/use-editor-state';
+import { ButtonToolbarEditor } from '../../button';
 
 export const ColorToolbarEditor = () => {
   const [open, setOpen] = React.useState(false);
@@ -31,9 +30,10 @@ export const ColorToolbarEditor = () => {
   }, [color]);
 
   return (
-    <Popover open={open} onOpenChange={setOpen} modal>
+    <Popover modal onOpenChange={setOpen} open={open}>
       <PopoverTrigger asChild>
         <ButtonToolbarEditor
+          className="w-14 justify-center gap-1 p-0 [&>svg:last-child]:size-4 [&>svg:not(:last-child)]:size-5"
           name="color_text"
           style={{
             backgroundColor: color
@@ -43,7 +43,6 @@ export const ColorToolbarEditor = () => {
               ? `hsl(${color.h} ${color.s}% ${color.l}%)`
               : undefined,
           }}
-          className="w-14 justify-center gap-1 p-0 [&>svg:last-child]:size-4 [&>svg:not(:last-child)]:size-5"
         >
           <Baseline />
           <ChevronDownIcon className="opacity-50" />

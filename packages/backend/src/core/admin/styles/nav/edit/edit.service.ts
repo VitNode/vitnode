@@ -1,17 +1,16 @@
-import { Injectable } from '@nestjs/common';
-import { eq } from 'drizzle-orm';
-
-import { EditAdminNavStylesArgs } from './dto/edit.args';
-
-import { InternalDatabaseService } from '@/utils/database/internal_database.service';
-import { NotFoundError } from '@/errors';
+import { ParserTextLanguageCoreHelpersService } from '@/core/helpers/text_language/parser/parser.service';
+import { ShowCoreNav } from '@/core/nav/show/dto/show.obj';
 import {
   core_nav,
   core_nav_description,
   core_nav_name,
 } from '@/database/schema/nav';
-import { ParserTextLanguageCoreHelpersService } from '@/core/helpers/text_language/parser/parser.service';
-import { ShowCoreNav } from '@/core/nav/show/dto/show.obj';
+import { NotFoundError } from '@/errors';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
+import { Injectable } from '@nestjs/common';
+import { eq } from 'drizzle-orm';
+
+import { EditAdminNavStylesArgs } from './dto/edit.args';
 
 @Injectable()
 export class EditAdminNavStylesService {

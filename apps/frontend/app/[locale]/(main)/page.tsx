@@ -2,9 +2,9 @@
 
 import React from 'react';
 import {
-  generateMetadataDefaultPage,
-  DefaultPageProps,
   DefaultPage,
+  DefaultPageProps,
+  generateMetadataDefaultPage,
 } from 'vitnode-frontend/views/theme/views/default-page';
 
 export const generateMetadata = generateMetadataDefaultPage;

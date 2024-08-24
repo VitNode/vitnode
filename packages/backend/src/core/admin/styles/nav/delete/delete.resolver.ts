@@ -1,10 +1,9 @@
-import { Args, Mutation, Resolver } from '@nestjs/graphql';
+import { AdminAuthGuards } from '@/utils';
 import { UseGuards } from '@nestjs/common';
+import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 import { DeleteAdminNavStylesService } from './delete.service';
 import { DeleteAdminNavStylesArgs } from './dto/delete.args';
-
-import { AdminAuthGuards } from '@/utils';
 
 @Resolver()
 export class DeleteAdminNavStylesResolver {

@@ -1,7 +1,7 @@
+import { formatBytes } from '@/helpers/format-bytes';
 import { useTranslations } from 'next-intl';
 
 import { ItemListFilesFooterEditorProps } from './item';
-import { formatBytes } from '@/helpers/format-bytes';
 
 export const ContentItemListFilesFooterEditor = ({
   data,

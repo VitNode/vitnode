@@ -1,10 +1,11 @@
 import { FileInput } from '@/components/ui/file-input';
+import { FormControl, FormMessage } from '@/components/ui/form';
+
 import { AutoFormInputComponentProps } from '../type';
 import { DefaultParent } from './common/children';
 import { AutoFormLabel } from './common/label';
-import { AutoFormWrapper } from './common/wrapper';
-import { FormControl, FormMessage } from '@/components/ui/form';
 import { AutoFormTooltip } from './common/tooltip';
+import { AutoFormWrapper } from './common/wrapper';
 
 export const AutoFormFile = ({
   autoFormProps: { isRequired, fieldConfigItem, field, theme, isDisabled },
@@ -18,8 +19,8 @@ export const AutoFormFile = ({
       {fieldConfigItem.label && (
         <AutoFormLabel
           description={fieldConfigItem.description}
-          label={fieldConfigItem.label}
           isRequired={isRequired}
+          label={fieldConfigItem.label}
           theme={theme}
         />
       )}

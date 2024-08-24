@@ -1,14 +1,13 @@
 'use client';
 
+import { formatBytes } from '@/helpers/format-bytes';
 import { File } from 'lucide-react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
-import { acceptMimeTypeImage } from '../extensions/files/files';
-import { formatBytes } from '@/helpers/format-bytes';
-
 import { Button } from '../../components/ui/button';
 import { CONFIG } from '../../helpers/config-with-env';
+import { acceptMimeTypeImage } from '../extensions/files/files';
 
 export const FileDownloadButton = ({
   allowDownloadAttachments,
@@ -23,15 +22,15 @@ export const FileDownloadButton = ({
   security_key,
   width,
 }: {
+  allowDownloadAttachments?: boolean;
   dir_folder: string;
+  file_alt?: string;
   file_name: string;
   file_name_original: string;
   file_size: number;
+  height?: number;
   id: number;
   mimetype: string;
-  allowDownloadAttachments?: boolean;
-  file_alt?: string;
-  height?: number;
   security_key?: string;
   width?: number;
 }) => {
@@ -41,12 +40,12 @@ export const FileDownloadButton = ({
     return (
       <span className="inline-block">
         <Image
-          src={`${CONFIG.graphql_public_url}/${dir_folder}/${file_name}`}
           alt={file_alt ?? file_name_original}
-          sizes="100vw"
           className="h-auto w-full"
-          width={width}
           height={height}
+          sizes="100vw"
+          src={`${CONFIG.graphql_public_url}/${dir_folder}/${file_name}`}
+          width={width}
         />
       </span>
     );
@@ -55,9 +54,9 @@ export const FileDownloadButton = ({
   if (!allowDownloadAttachments) {
     return (
       <Button
-        variant="outline"
         className="bg-muted h-auto max-w-full gap-5 px-5 py-2 text-left [&>svg]:size-7"
         disabled
+        variant="outline"
       >
         <File className="text-muted-foreground" />
         <div className="text-muted-foreground text-sm">
@@ -69,7 +68,6 @@ export const FileDownloadButton = ({
 
   return (
     <Button
-      variant="outline"
       className="bg-muted h-auto gap-5 px-5 py-2 text-left [&>svg]:size-7"
       onClick={() => {
         if (!security_key) return;
@@ -79,6 +77,7 @@ export const FileDownloadButton = ({
           '_blank',
         );
       }}
+      variant="outline"
     >
       <File className="text-muted-foreground" />
       <div className="min-w-0 flex-1 overflow-hidden truncate">

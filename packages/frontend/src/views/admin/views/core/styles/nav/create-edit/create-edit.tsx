@@ -1,20 +1,20 @@
-import { useTranslations } from 'next-intl';
-
-import {
-  useCreateEditNavAdmin,
-  CreateEditNavAdminArgs,
-} from './hooks/use-create-edit-nav-admin';
+import { AutoForm } from '@/components/form/auto-form';
+import { AutoFormIcon } from '@/components/form/fields/icon';
+import { AutoFormInput } from '@/components/form/fields/input';
+import { AutoFormSwitch } from '@/components/form/fields/switch';
+import { AutoFormTextLanguageInput } from '@/components/form/fields/text-language-input';
+import { Button } from '@/components/ui/button';
 import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
-import { AutoForm } from '@/components/form/auto-form';
-import { AutoFormInput } from '@/components/form/fields/input';
-import { AutoFormIcon } from '@/components/form/fields/icon';
-import { AutoFormSwitch } from '@/components/form/fields/switch';
-import { AutoFormTextLanguageInput } from '@/components/form/fields/text-language-input';
+import { useTranslations } from 'next-intl';
+
+import {
+  CreateEditNavAdminArgs,
+  useCreateEditNavAdmin,
+} from './hooks/use-create-edit-nav-admin';
 
 export const ContentCreateEditNavAdmin = ({ data }: CreateEditNavAdminArgs) => {
   const t = useTranslations('admin.core.styles.nav');
@@ -28,13 +28,6 @@ export const ContentCreateEditNavAdmin = ({ data }: CreateEditNavAdminArgs) => {
       </DialogHeader>
 
       <AutoForm
-        formSchema={formSchema}
-        onSubmit={onSubmit}
-        submitButton={props => (
-          <DialogFooter>
-            <Button {...props}>{tCore(data ? 'edit' : 'create')}</Button>
-          </DialogFooter>
-        )}
         fieldConfig={{
           name: {
             label: t('create.name.label'),
@@ -59,6 +52,13 @@ export const ContentCreateEditNavAdmin = ({ data }: CreateEditNavAdminArgs) => {
             fieldType: AutoFormSwitch,
           },
         }}
+        formSchema={formSchema}
+        onSubmit={onSubmit}
+        submitButton={props => (
+          <DialogFooter>
+            <Button {...props}>{tCore(data ? 'edit' : 'create')}</Button>
+          </DialogFooter>
+        )}
       />
     </>
   );

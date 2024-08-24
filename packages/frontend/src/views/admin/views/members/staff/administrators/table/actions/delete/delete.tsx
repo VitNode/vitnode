@@ -1,7 +1,3 @@
-import { Trash2 } from 'lucide-react';
-import { useTranslations } from 'next-intl';
-import React from 'react';
-
 import {
   AlertDialog,
   AlertDialogContent,
@@ -10,6 +6,9 @@ import {
 import { Button } from '@/components/ui/button';
 import { Loader } from '@/components/ui/loader';
 import { ShowAdminStaffAdministrators } from '@/graphql/types';
+import { Trash2 } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import React from 'react';
 
 const ContentDeleteActionsTableAdministratorsStaffAdmin = React.lazy(async () =>
   import('./content').then(module => ({
@@ -25,7 +24,7 @@ export const DeleteActionsTableAdministratorsStaffAdmin = (props: {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button variant="destructiveGhost" size="icon" ariaLabel={t('delete')}>
+        <Button ariaLabel={t('delete')} size="icon" variant="destructiveGhost">
           <Trash2 />
         </Button>
       </AlertDialogTrigger>

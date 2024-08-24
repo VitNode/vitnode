@@ -5,9 +5,9 @@ export const changeModuleRootSchema = ({
   code,
   content,
 }: {
+  admin?: boolean;
   code: string;
   content: string;
-  admin?: boolean;
 }) => {
   const name = `${admin ? 'Admin' : ''}${changeCodePluginToCapitalLetters(code)}`;
 
@@ -27,9 +27,9 @@ export const changeDatabaseService = ({
   code,
   content,
 }: {
+  admin?: boolean;
   code: string;
   content: string;
-  admin?: boolean;
 }) => {
   const name = `${admin ? 'Admin' : ''}${changeCodePluginToCapitalLetters(code)}`;
 

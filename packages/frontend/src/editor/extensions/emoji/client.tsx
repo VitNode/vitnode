@@ -1,21 +1,20 @@
 'use client';
 
+import { Emoji } from '@emoji-mart/data';
 import { ReactRenderer } from '@tiptap/react';
+import { useTranslations } from 'next-intl';
 import React from 'react';
 import tippy, { Instance } from 'tippy.js';
-import { useTranslations } from 'next-intl';
-import { Emoji } from '@emoji-mart/data';
 
+import { Button } from '../../../components/ui/button';
+import { classPopover } from '../../../components/ui/popover';
+import { cn } from '../../../helpers/classnames';
+import { CONFIG } from '../../../helpers/config-with-env';
 import {
   ComponentListRef,
   SuggestionKeyDownProps,
   SuggestionProps,
 } from '../mentions/client';
-
-import { Button } from '../../../components/ui/button';
-import { classPopover } from '../../../components/ui/popover';
-import { CONFIG } from '../../../helpers/config-with-env';
-import { cn } from '../../../helpers/classnames';
 
 const ComponentList = ({
   command,
@@ -94,7 +93,6 @@ const ComponentList = ({
 
           return (
             <Button
-              variant="ghost"
               className={cn('justify-start', {
                 'bg-accent': index === selectedIndex,
               })}
@@ -103,6 +101,7 @@ const ComponentList = ({
                 selectItem(index);
               }}
               size="sm"
+              variant="ghost"
             >
               <span>{icon}</span> {emoji.id}
             </Button>
@@ -115,7 +114,7 @@ const ComponentList = ({
   );
 };
 
-let component: ReactRenderer<ComponentListRef> | null = null;
+let component: null | ReactRenderer<ComponentListRef> = null;
 let popup: Instance[] | null = null;
 
 export function onStart<T>(props: SuggestionProps<T>) {

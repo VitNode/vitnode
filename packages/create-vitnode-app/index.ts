@@ -1,20 +1,19 @@
 #!/usr/bin/env node
 /* eslint-disable no-console */
+import { Command, Option } from 'commander';
+import figlet from 'figlet';
+import { existsSync } from 'fs';
 // Ref: https://github.com/vercel/next.js/blob/canary/packages/create-next-app/index.ts
 import { basename, dirname, resolve } from 'path';
-import { existsSync } from 'fs';
-
-import { Command, Option } from 'commander';
 import color from 'picocolors';
-import figlet from 'figlet';
 import prompts from 'prompts';
 
-import packageJson from './package.json' assert { type: 'json' };
-import { validateNpmName } from './helpers/validate-pkg';
+import { createCli, onPromptState } from './cli';
 import { isFolderEmpty } from './helpers/is-folder-empty';
 import { isWriteable } from './helpers/is-writeable';
+import { validateNpmName } from './helpers/validate-pkg';
+import packageJson from './package.json' assert { type: 'json' };
 import { createVitNode } from './templates/create-vitnode';
-import { createCli, onPromptState } from './cli';
 
 let projectPath = '';
 

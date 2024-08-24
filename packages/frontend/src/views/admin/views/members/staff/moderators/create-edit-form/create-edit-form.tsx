@@ -1,6 +1,9 @@
-import { useTranslations } from 'next-intl';
-
-import { useFormCreateEditFormGroupsMembersAdmin } from './hooks/use-form';
+import { Button } from '@/components/ui/button';
+import {
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
 import {
   Form,
   FormControl,
@@ -10,17 +13,14 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import {
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
-import { UserInput } from '@/components/ui/user/user-input';
-import { GroupInput } from '@/components/ui/user/group-input';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Switch } from '@/components/ui/switch';
-import { Button } from '@/components/ui/button';
+import { GroupInput } from '@/components/ui/user/group-input';
+import { UserInput } from '@/components/ui/user/user-input';
+import { useTranslations } from 'next-intl';
+
+import { useFormCreateEditFormGroupsMembersAdmin } from './hooks/use-form';
 
 export const CreateEditFormModeratorsStaffAdmin = () => {
   const t = useTranslations('admin.members.staff');
@@ -33,7 +33,7 @@ export const CreateEditFormModeratorsStaffAdmin = () => {
         <DialogTitle>{t('moderators.add.title')}</DialogTitle>
       </DialogHeader>
 
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+      <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
         <FormField
           control={form.control}
           name="type"
@@ -41,20 +41,20 @@ export const CreateEditFormModeratorsStaffAdmin = () => {
             <FormItem>
               <FormLabel>{t('create_edit.type.title')}</FormLabel>
               <RadioGroup
+                defaultValue={field.value}
                 onValueChange={el => {
                   form.resetField('user');
                   form.resetField('group');
                   field.onChange(el);
                 }}
-                defaultValue={field.value}
               >
                 <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="group" id="r1" />
+                  <RadioGroupItem id="r1" value="group" />
                   <Label htmlFor="r1">{t('create_edit.type.group')}</Label>
                 </div>
 
                 <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="user" id="r2" />
+                  <RadioGroupItem id="r2" value="user" />
                   <Label htmlFor="r2">{t('create_edit.type.user')}</Label>
                 </div>
               </RadioGroup>
@@ -103,10 +103,10 @@ export const CreateEditFormModeratorsStaffAdmin = () => {
               </div>
               <FormControl>
                 <Switch
-                  checked={field.value}
-                  onCheckedChange={field.onChange}
                   aria-readonly
+                  checked={field.value}
                   disabled
+                  onCheckedChange={field.onChange}
                 />
               </FormControl>
             </FormItem>

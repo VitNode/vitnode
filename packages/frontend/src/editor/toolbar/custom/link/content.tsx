@@ -1,8 +1,4 @@
-import * as z from 'zod';
-import { useForm } from 'react-hook-form';
-import { useTranslations } from 'next-intl';
-import { zodResolver } from '@hookform/resolvers/zod';
-
+import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -11,7 +7,10 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useTranslations } from 'next-intl';
+import { useForm } from 'react-hook-form';
+import * as z from 'zod';
 
 import { useEditorState } from '../../../hooks/use-editor-state';
 
@@ -69,8 +68,8 @@ export const ContentLinkToolbarEditor = ({
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit(onSubmit)}
         className="flex flex-col gap-2"
+        onSubmit={form.handleSubmit(onSubmit)}
       >
         <FormField
           control={form.control}
@@ -91,7 +90,7 @@ export const ContentLinkToolbarEditor = ({
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Input type="url" placeholder={t('href')} {...field} />
+                <Input placeholder={t('href')} type="url" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -100,20 +99,20 @@ export const ContentLinkToolbarEditor = ({
 
         <div className="flex items-center gap-2 [&>button]:flex-1 [&>button]:shrink-0">
           <Button
+            disabled={!editor.isActive('link')}
             onClick={() => {
               editor.chain().unsetLink().run();
               setOpen(false);
             }}
-            variant="destructiveGhost"
             size="sm"
-            disabled={!editor.isActive('link')}
+            variant="destructiveGhost"
           >
             {t('delete')}
           </Button>
           <Button
-            onClick={form.handleSubmit(onSubmit)}
-            loading={form.formState.isSubmitting}
             disabled={!form.formState.isValid}
+            loading={form.formState.isSubmitting}
+            onClick={form.handleSubmit(onSubmit)}
             size="sm"
           >
             {t('insert')}

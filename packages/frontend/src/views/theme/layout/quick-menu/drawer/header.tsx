@@ -1,12 +1,11 @@
-import { useTranslations } from 'next-intl';
-
-import { useSession } from '@/hooks/use-session';
-import { DrawerClose } from '@/components/ui/drawer';
-import { Link } from '@/navigation';
-import { buttonVariants } from '@/components/ui/button';
 import { LanguageSwitcher } from '@/components/switchers/language-switcher';
 import { ThemeSwitcher } from '@/components/switchers/theme-switcher';
+import { buttonVariants } from '@/components/ui/button';
+import { DrawerClose } from '@/components/ui/drawer';
 import { AvatarUser } from '@/components/ui/user/avatar';
+import { useSession } from '@/hooks/use-session';
+import { Link } from '@/navigation';
+import { useTranslations } from 'next-intl';
 
 export const HeaderDrawerQuickMenu = () => {
   const t = useTranslations('core');
@@ -18,11 +17,11 @@ export const HeaderDrawerQuickMenu = () => {
         <div className="flex gap-5">
           <DrawerClose asChild>
             <Link
-              href="/login"
               className={buttonVariants({
                 variant: 'outline',
                 className: 'flex-1',
               })}
+              href="/login"
             >
               {t('user-bar.sign_in')}
             </Link>
@@ -30,10 +29,10 @@ export const HeaderDrawerQuickMenu = () => {
 
           <DrawerClose asChild>
             <Link
-              href="/register"
               className={buttonVariants({
                 className: 'flex-1',
               })}
+              href="/register"
             >
               {t('user-bar.sign_up')}
             </Link>
@@ -52,7 +51,7 @@ export const HeaderDrawerQuickMenu = () => {
   return (
     <div className="flex items-center justify-between gap-2 p-5">
       <div className="flex flex-row items-center gap-2 space-y-0 text-left">
-        <AvatarUser user={{ name, ...rest }} sizeInRem={1.75} />
+        <AvatarUser sizeInRem={1.75} user={{ name, ...rest }} />
         <div className="flex flex-col gap-1">
           <p className="text-base font-medium leading-none">{name}</p>
           <p className="text-muted-foreground text-sm leading-none">{email}</p>

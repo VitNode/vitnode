@@ -1,17 +1,17 @@
 import { SortDirectionEnum } from '../utils';
 
 interface Args<T> {
+  defaultSortBy?: {
+    column: T;
+    direction: SortDirectionEnum;
+  };
+
   sortBy:
     | {
         column: string;
         direction: SortDirectionEnum;
       }[]
     | undefined;
-
-  defaultSortBy?: {
-    column: T;
-    direction: SortDirectionEnum;
-  };
 }
 
 export function inputSorting<T>({

@@ -1,12 +1,11 @@
-import { Args, Query, Resolver } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
+import { Args, Query, Resolver } from '@nestjs/graphql';
 
-import { ShowCoreFilesService } from './show.service';
-import { ShowCoreFilesObj } from './dto/show.obj';
-import { ShowCoreFilesArgs } from './dto/show.args';
-
-import { AuthGuards } from '../../../utils';
 import { CurrentUser, User } from '../../../decorators';
+import { AuthGuards } from '../../../utils';
+import { ShowCoreFilesArgs } from './dto/show.args';
+import { ShowCoreFilesObj } from './dto/show.obj';
+import { ShowCoreFilesService } from './show.service';
 
 @Resolver()
 export class ShowCoreFilesResolver {

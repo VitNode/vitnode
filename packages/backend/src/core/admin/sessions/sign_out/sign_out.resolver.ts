@@ -1,9 +1,8 @@
-import { Context, Mutation, Resolver } from '@nestjs/graphql';
+import { AdminAuthGuards, GqlContext } from '@/utils';
 import { UseGuards } from '@nestjs/common';
+import { Context, Mutation, Resolver } from '@nestjs/graphql';
 
 import { SignOutAdminSessionsService } from './sign_out.service';
-
-import { AdminAuthGuards, GqlContext } from '@/utils';
 
 @Resolver()
 export class SignOutAdminSessionsResolver {

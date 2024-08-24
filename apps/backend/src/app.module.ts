@@ -1,11 +1,10 @@
-import { join } from 'path';
-
 import { Module } from '@nestjs/common';
+import { join } from 'path';
 import { VitNodeCoreModule } from 'vitnode-backend';
 
-import { PluginsModule } from './plugins/plugins.module';
 import { DATABASE_ENVS, schemaDatabase } from './database/config';
 import { DatabaseModule } from './database/database.module';
+import { PluginsModule } from './plugins/plugins.module';
 
 @Module({
   imports: [

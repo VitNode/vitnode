@@ -1,21 +1,20 @@
 'use client';
 
-import { AlertTriangle, Home } from 'lucide-react';
-import { useTranslations } from 'next-intl';
-
-import { cn } from '@/helpers/classnames';
+import { buttonVariants } from '@/components/ui/button';
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
 } from '@/components/ui/card';
+import { cn } from '@/helpers/classnames';
 import { Link } from '@/navigation';
-import { buttonVariants } from '@/components/ui/button';
+import { AlertTriangle, Home } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 export interface ErrorViewProps {
-  code: '403' | '404' | '500';
   className?: string;
+  code: '403' | '404' | '500';
 }
 
 export const ErrorView = ({ className, code }: ErrorViewProps) => {
@@ -35,7 +34,7 @@ export const ErrorView = ({ className, code }: ErrorViewProps) => {
         </CardContent>
 
         <CardFooter className="justify-center">
-          <Link href="/" className={buttonVariants({ variant: 'outline' })}>
+          <Link className={buttonVariants({ variant: 'outline' })} href="/">
             <Home className="size-5" /> {t('errors.actions.back_home')}
           </Link>
         </CardFooter>

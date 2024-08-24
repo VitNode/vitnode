@@ -1,3 +1,7 @@
+import { CustomError, InternalServerError } from '@/errors';
+import { generateRandomString } from '@/functions/generate-random-string';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
+import { Injectable } from '@nestjs/common';
 import {
   createWriteStream,
   existsSync,
@@ -7,24 +11,56 @@ import {
   unlink,
 } from 'fs';
 import { join } from 'path';
-
 import sharp from 'sharp';
-import { Injectable } from '@nestjs/common';
 
+import { ABSOLUTE_PATHS_BACKEND, removeSpecialCharacters } from '../../../..';
+import { DeleteCoreFilesArgs } from './dto/delete.args';
 import { UploadCoreFilesArgs } from './dto/upload.args';
 import { UploadCoreFilesObj } from './dto/upload.obj';
-import { HelpersUploadCoreFilesService, acceptMimeTypeImage } from './helpers';
-import { DeleteCoreFilesArgs } from './dto/delete.args';
-
-import { InternalDatabaseService } from '@/utils/database/internal_database.service';
-import { CustomError, InternalServerError } from '@/errors';
-import { ABSOLUTE_PATHS_BACKEND, removeSpecialCharacters } from '../../../..';
-import { generateRandomString } from '@/functions/generate-random-string';
+import { acceptMimeTypeImage, HelpersUploadCoreFilesService } from './helpers';
 
 @Injectable()
 export class FilesService extends HelpersUploadCoreFilesService {
   constructor(private readonly databaseService: InternalDatabaseService) {
     super();
+  }
+
+  checkIfFileExistsAndReturnPath({
+    dir_folder,
+    file_name,
+    secure,
+  }: DeleteCoreFilesArgs) {
+    const path = secure
+      ? ABSOLUTE_PATHS_BACKEND.uploads.private
+      : ABSOLUTE_PATHS_BACKEND.uploads.public;
+
+    const filePath = join(path, dir_folder, file_name);
+
+    // Check if file exists
+    if (!existsSync(filePath)) {
+      throw new CustomError({
+        code: 'FILE_NOT_FOUND',
+        message: `File "${filePath}" not found`,
+      });
+    }
+
+    return filePath;
+  }
+
+  delete({ dir_folder, file_name, secure }: DeleteCoreFilesArgs) {
+    const path = this.checkIfFileExistsAndReturnPath({
+      dir_folder,
+      file_name,
+      secure,
+    });
+
+    // Remove file from server
+    unlink(path, err => {
+      // eslint-disable-next-line no-console
+      if (err) console.error(err);
+    });
+
+    return 'Success!';
   }
 
   async upload({
@@ -128,43 +164,5 @@ export class FilesService extends HelpersUploadCoreFilesService {
       width: null,
       height: null,
     };
-  }
-
-  checkIfFileExistsAndReturnPath({
-    dir_folder,
-    file_name,
-    secure,
-  }: DeleteCoreFilesArgs) {
-    const path = secure
-      ? ABSOLUTE_PATHS_BACKEND.uploads.private
-      : ABSOLUTE_PATHS_BACKEND.uploads.public;
-
-    const filePath = join(path, dir_folder, file_name);
-
-    // Check if file exists
-    if (!existsSync(filePath)) {
-      throw new CustomError({
-        code: 'FILE_NOT_FOUND',
-        message: `File "${filePath}" not found`,
-      });
-    }
-
-    return filePath;
-  }
-
-  delete({ dir_folder, file_name, secure }: DeleteCoreFilesArgs) {
-    const path = this.checkIfFileExistsAndReturnPath({
-      dir_folder,
-      file_name,
-      secure,
-    });
-
-    // Remove file from server
-    unlink(path, err => {
-      // eslint-disable-next-line no-console
-      if (err) console.error(err);
-    });
-
-    return 'Success!';
   }
 }

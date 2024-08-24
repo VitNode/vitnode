@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
 import { lstatSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
-
 import colors from 'picocolors';
 
 export function isFolderEmpty(root: string, name: string): boolean {

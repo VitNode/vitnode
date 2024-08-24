@@ -3,7 +3,13 @@ import { Field, ObjectType } from '@nestjs/graphql';
 @ObjectType()
 export class ShowAdminManifestMetadataObj {
   @Field(() => String)
+  background_color: string;
+
+  @Field(() => String)
   display: string;
+
+  @Field(() => String)
+  id: string;
 
   @Field(() => String)
   lang: string;
@@ -12,11 +18,5 @@ export class ShowAdminManifestMetadataObj {
   start_url: string;
 
   @Field(() => String)
-  id: string;
-
-  @Field(() => String)
   theme_color: string;
-
-  @Field(() => String)
-  background_color: string;
 }

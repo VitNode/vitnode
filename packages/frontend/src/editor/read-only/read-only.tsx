@@ -1,24 +1,23 @@
-import { useLocale } from 'next-intl';
-import parse, { Element, HTMLReactParserOptions } from 'html-react-parser';
+import { TextLanguage } from '@/graphql/types';
 import { generateHTML } from '@tiptap/html';
-import Image from 'next/image';
 import { JSONContent } from '@tiptap/react';
+import parse, { Element, HTMLReactParserOptions } from 'html-react-parser';
+import Image from 'next/image';
+import { useLocale } from 'next-intl';
 
+import { cn } from '../../helpers/classnames';
 import { extensionsEditor } from '../extensions/extensions';
 import { changeCodeBlock } from './code-block';
 import { FileDownloadButton } from './file-download-button';
-import { TextLanguage } from '@/graphql/types';
-
-import { cn } from '../../helpers/classnames';
 
 export const ReadOnlyEditor = ({
   allowDownloadAttachments,
   className,
   value,
 }: {
-  value: TextLanguage[];
   allowDownloadAttachments?: boolean;
   className?: string;
+  value: TextLanguage[];
 }) => {
   const locale = useLocale();
 
@@ -67,15 +66,15 @@ export const ReadOnlyEditor = ({
       if (name === 'img') {
         return (
           <Image
-            src={domNode.attribs.src}
             alt=""
+            height={300}
             sizes="100vw"
+            src={domNode.attribs.src}
             style={{
               width: '100%',
               height: 'auto',
             }}
             width={500}
-            height={300}
           />
         );
       }
@@ -87,17 +86,17 @@ export const ReadOnlyEditor = ({
       if (name === 'button' && domNode.attribs['data-type'] === 'file') {
         return (
           <FileDownloadButton
-            file_name_original={domNode.attribs.file_name_original}
-            mimetype={domNode.attribs.mimetype}
-            file_size={parseInt(domNode.attribs.file_size, 10)}
-            id={+domNode.attribs.id}
-            width={+domNode.attribs.width}
-            height={+domNode.attribs.height}
-            dir_folder={domNode.attribs.dir_folder}
-            file_name={domNode.attribs.file_name}
-            file_alt={domNode.attribs.file_alt}
-            security_key={domNode.attribs.security_key}
             allowDownloadAttachments={allowDownloadAttachments}
+            dir_folder={domNode.attribs.dir_folder}
+            file_alt={domNode.attribs.file_alt}
+            file_name={domNode.attribs.file_name}
+            file_name_original={domNode.attribs.file_name_original}
+            file_size={parseInt(domNode.attribs.file_size, 10)}
+            height={+domNode.attribs.height}
+            id={+domNode.attribs.id}
+            mimetype={domNode.attribs.mimetype}
+            security_key={domNode.attribs.security_key}
+            width={+domNode.attribs.width}
           />
         );
       }

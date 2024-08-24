@@ -1,9 +1,8 @@
-import { Injectable } from '@nestjs/common';
-
 import {
   ConfigPlugin,
   NavPluginInfoJSONTypeWithChildren,
 } from '@/providers/plugins.type';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class HelpersAdminNavPluginsService {

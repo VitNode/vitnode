@@ -1,17 +1,16 @@
-import { Upload } from 'lucide-react';
-import { useTranslations } from 'next-intl';
-import React from 'react';
-
+import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import { Loader } from '@/components/ui/loader';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-import { Button } from '@/components/ui/button';
-import { Loader } from '@/components/ui/loader';
 import { ShowAdminPlugins } from '@/graphql/types';
+import { Upload } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import React from 'react';
 
 export const UploadPluginActionsAdmin = (
   props: Pick<ShowAdminPlugins, 'code' | 'name'>,
@@ -31,9 +30,9 @@ export const UploadPluginActionsAdmin = (
           <TooltipTrigger asChild>
             <DialogTrigger asChild>
               <Button
-                variant="ghost"
-                size="icon"
                 ariaLabel={t('upload_new_version')}
+                size="icon"
+                variant="ghost"
               >
                 <Upload />
               </Button>

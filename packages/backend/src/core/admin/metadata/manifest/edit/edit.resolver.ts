@@ -1,11 +1,10 @@
-import { Args, Mutation, Resolver } from '@nestjs/graphql';
-import { UseGuards } from '@nestjs/common';
-
-import { EditAdminManifestMetadataService } from './edit.service';
-import { EditAdminManifestMetadataObj } from './dto/edit.args';
-import { ShowAdminManifestMetadataObj } from '../show/dto/show.obj';
-
 import { AdminAuthGuards } from '@/utils';
+import { UseGuards } from '@nestjs/common';
+import { Args, Mutation, Resolver } from '@nestjs/graphql';
+
+import { ShowAdminManifestMetadataObj } from '../show/dto/show.obj';
+import { EditAdminManifestMetadataObj } from './dto/edit.args';
+import { EditAdminManifestMetadataService } from './edit.service';
 
 @Resolver()
 export class EditAdminManifestMetadataResolver {

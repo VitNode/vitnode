@@ -1,8 +1,8 @@
 import { Field, ObjectType, registerEnumType } from '@nestjs/graphql';
 
 export enum LayoutAdminInstallEnum {
-  DATABASE = 'DATABASE',
   ACCOUNT = 'ACCOUNT',
+  DATABASE = 'DATABASE',
   FINISH = 'FINISH',
 }
 

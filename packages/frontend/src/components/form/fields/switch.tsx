@@ -1,11 +1,12 @@
+import { FormControl, FormMessage } from '@/components/ui/form';
 import { Switch } from '@/components/ui/switch';
 import { cn } from '@/helpers/classnames';
+
 import { AutoFormInputComponentProps } from '../type';
-import { FormControl, FormMessage } from '@/components/ui/form';
-import { AutoFormWrapper } from './common/wrapper';
 import { DefaultParent } from './common/children';
 import { AutoFormLabel } from './common/label';
 import { AutoFormTooltip } from './common/tooltip';
+import { AutoFormWrapper } from './common/wrapper';
 
 export const AutoFormSwitch = ({
   autoFormProps: { isRequired, fieldConfigItem, field, theme, isDisabled },
@@ -24,10 +25,10 @@ export const AutoFormSwitch = ({
       <div>
         {fieldConfigItem.label && (
           <AutoFormLabel
-            label={fieldConfigItem.label}
-            isRequired={isRequired}
-            theme={theme}
             description={fieldConfigItem.description}
+            isRequired={isRequired}
+            label={fieldConfigItem.label}
+            theme={theme}
           />
         )}
         {fieldConfigItem.description && theme === 'vertical' && (

@@ -1,16 +1,15 @@
+import { TextLanguage } from '@/graphql/types';
+import { X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import React from 'react';
-import { X } from 'lucide-react';
 
-import { Popover, PopoverContent, PopoverTrigger } from '../popover';
-import { Button } from '../button';
-import { Badge } from '../badge';
-import { Loader } from '../loader';
-import { TextLanguage } from '@/graphql/types';
-
-import { GroupInputContent } from '../../utils/user/group-input/content';
-import { useTextLang } from '../../../hooks/use-text-lang';
 import { cn } from '../../../helpers/classnames';
+import { useTextLang } from '../../../hooks/use-text-lang';
+import { GroupInputContent } from '../../utils/user/group-input/content';
+import { Badge } from '../badge';
+import { Button } from '../button';
+import { Loader } from '../loader';
+import { Popover, PopoverContent, PopoverTrigger } from '../popover';
 
 export interface GroupInputItem {
   id: number;
@@ -18,10 +17,10 @@ export interface GroupInputItem {
 }
 
 interface Props {
-  onChange: (value?: GroupInputItem | GroupInputItem[]) => void;
   className?: string;
   disabled?: boolean;
   onBlur?: () => void;
+  onChange: (value?: GroupInputItem | GroupInputItem[]) => void;
 }
 
 interface MultiProps extends Props {
@@ -53,13 +52,13 @@ export const GroupInput = ({
   const { convertText } = useTextLang();
 
   return (
-    <Popover open={open} onOpenChange={setOpen} modal>
+    <Popover modal onOpenChange={setOpen} open={open}>
       <PopoverTrigger asChild>
         <Button
-          variant="outline"
           className={cn('w-full justify-start', className, {
             'text-muted-foreground': values.length === 0,
           })}
+          variant="outline"
           {...rest}
         >
           {values.length === 0
@@ -79,7 +78,6 @@ export const GroupInput = ({
                   <Badge
                     className="shrink-0 [&>svg]:size-4"
                     key={item.id}
-                    tabIndex={0}
                     onClick={e => {
                       e.stopPropagation();
                       e.preventDefault();
@@ -92,6 +90,7 @@ export const GroupInput = ({
                         onRemove();
                       }
                     }}
+                    tabIndex={0}
                   >
                     {convertText(item.name)} <X />
                   </Badge>
@@ -100,10 +99,9 @@ export const GroupInput = ({
         </Button>
       </PopoverTrigger>
 
-      <PopoverContent className="w-64 p-0" align="start">
+      <PopoverContent align="start" className="w-64 p-0">
         <React.Suspense fallback={<Loader className="p-4" />}>
           <GroupInputContent
-            values={values}
             onSelect={item => {
               if (multiple) {
                 if (values.find(value => value.id === item.id)) {
@@ -119,6 +117,7 @@ export const GroupInput = ({
               onChange(item.id !== values[0]?.id ? item : undefined);
               setOpen(false);
             }}
+            values={values}
           />
         </React.Suspense>
       </PopoverContent>

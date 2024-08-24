@@ -3,6 +3,10 @@
 import { Languages } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 
+import { CONFIG } from '../../helpers/config-with-env';
+import { useGlobals } from '../../hooks/use-globals';
+import { usePathname, useRouter } from '../../navigation';
+import { Button } from '../ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,11 +14,6 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu';
-import { Button } from '../ui/button';
-
-import { useGlobals } from '../../hooks/use-globals';
-import { usePathname, useRouter } from '../../navigation';
-import { CONFIG } from '../../helpers/config-with-env';
 
 export const LanguageSwitcher = () => {
   const t = useTranslations('core');
@@ -38,19 +37,19 @@ export const LanguageSwitcher = () => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
-          variant="ghost"
-          size="icon"
           ariaLabel={t('user-bar.language.change')}
+          size="icon"
+          variant="ghost"
         >
           <Languages className="size-[1.2rem]" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuRadioGroup
-          value={locale}
           onValueChange={id => {
             replace(pathname, { locale: id });
           }}
+          value={locale}
         >
           {enableLocales.map(language => (
             <DropdownMenuRadioItem key={language.code} value={language.code}>

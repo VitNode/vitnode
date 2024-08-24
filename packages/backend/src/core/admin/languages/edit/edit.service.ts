@@ -1,15 +1,13 @@
-import * as fs from 'fs';
-
+import { core_languages } from '@/database/schema/languages';
+import { NotFoundError } from '@/errors';
+import { configPath, ConfigType, getConfigFile } from '@/providers';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
+import * as fs from 'fs';
 
-import { EditCoreAdminLanguagesArgs } from './dto/edit.args';
-
-import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { ShowCoreLanguages } from '../../../languages/show/dto/show.obj';
-import { NotFoundError } from '@/errors';
-import { core_languages } from '@/database/schema/languages';
-import { configPath, ConfigType, getConfigFile } from '@/providers';
+import { EditCoreAdminLanguagesArgs } from './dto/edit.args';
 
 @Injectable()
 export class EditAdminCoreLanguagesService {

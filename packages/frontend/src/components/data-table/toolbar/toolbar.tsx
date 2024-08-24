@@ -1,13 +1,13 @@
 import React from 'react';
 
-import { SearchToolbarDataTable } from './search';
 import { AdvancedFilterToolbarDataTable } from './advanced-filter/advanced-filter-toolbar-data-table';
+import { SearchToolbarDataTable } from './search';
 
 export interface ToolbarDataTableProps {
-  startTransition: React.TransitionStartFunction;
   advancedFilters?: React.ReactNode;
   filters?: React.ReactNode;
   searchPlaceholder?: string;
+  startTransition: React.TransitionStartFunction;
 }
 
 export const ToolbarDataTable = ({
@@ -22,8 +22,8 @@ export const ToolbarDataTable = ({
     <div className="flex flex-wrap items-center gap-2">
       {searchPlaceholder && (
         <SearchToolbarDataTable
-          startTransition={startTransition}
           searchPlaceholder={searchPlaceholder}
+          startTransition={startTransition}
         />
       )}
       {filters}

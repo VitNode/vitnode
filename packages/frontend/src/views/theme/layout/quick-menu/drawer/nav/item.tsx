@@ -1,11 +1,11 @@
+import { buttonVariants } from '@/components/ui/button';
+import { DrawerClose } from '@/components/ui/drawer';
+import { ShowCoreNav } from '@/graphql/types';
+import { cn } from '@/helpers/classnames';
+import { Link, usePathname } from '@/navigation';
 import React from 'react';
 
 import { classNameDrawerQuickMenu } from '../drawer';
-import { Link, usePathname } from '@/navigation';
-import { DrawerClose } from '@/components/ui/drawer';
-import { cn } from '@/helpers/classnames';
-import { buttonVariants } from '@/components/ui/button';
-import { ShowCoreNav } from '@/graphql/types';
 
 interface Props extends Omit<ShowCoreNav, '__typename' | 'children'> {
   children: React.ReactNode;
@@ -23,9 +23,8 @@ export const ItemNavDrawerQuickMenu = ({
     href === pathname || (pathname.startsWith(href) && href !== '/');
 
   return (
-    <DrawerClose key={id} asChild>
+    <DrawerClose asChild key={id}>
       <Link
-        href={href}
         className={cn(
           buttonVariants({
             variant: 'ghost',
@@ -38,8 +37,9 @@ export const ItemNavDrawerQuickMenu = ({
             ),
           }),
         )}
-        target={external ? '_blank' : undefined}
+        href={href}
         rel={external ? 'noopener noreferrer' : undefined}
+        target={external ? '_blank' : undefined}
       >
         {children}
       </Link>

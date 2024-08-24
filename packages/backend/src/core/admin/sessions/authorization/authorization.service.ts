@@ -1,19 +1,17 @@
+import { core_sessions_known_devices } from '@/database/schema/sessions';
+import { currentUnixDate, getUserAgentData, getUserIp } from '@/functions';
+import { AccessDeniedError, GqlContext, NotFoundError } from '@/index';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
+import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { JwtService } from '@nestjs/jwt';
+import { eq } from 'drizzle-orm';
 import * as fs from 'fs';
 import { join } from 'path';
 
-import { Injectable } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
-import { ConfigService } from '@nestjs/config';
-import { eq } from 'drizzle-orm';
-
-import { AuthorizationAdminSessionsObj } from './dto/authorization.obj';
-
-import { InternalDatabaseService } from '@/utils/database/internal_database.service';
-import { DeviceSignInCoreSessionsService } from '../../../sessions/sign_in/device.service';
-import { AccessDeniedError, GqlContext, NotFoundError } from '@/index';
 import { AuthorizationCurrentUserObj } from '../../../sessions/authorization/dto/authorization.obj';
-import { core_sessions_known_devices } from '@/database/schema/sessions';
-import { currentUnixDate, getUserAgentData, getUserIp } from '@/functions';
+import { DeviceSignInCoreSessionsService } from '../../../sessions/sign_in/device.service';
+import { AuthorizationAdminSessionsObj } from './dto/authorization.obj';
 
 @Injectable()
 export class AuthorizationAdminSessionsService {
@@ -23,6 +21,25 @@ export class AuthorizationAdminSessionsService {
     private readonly configService: ConfigService,
     private readonly deviceService: DeviceSignInCoreSessionsService,
   ) {}
+
+  async authorization(
+    context: GqlContext,
+  ): Promise<AuthorizationAdminSessionsObj> {
+    const user = await this.initialAuthorization(context);
+
+    const packageJSONPath = join(__dirname, '../../../../../../package.json');
+    if (!fs.existsSync(packageJSONPath)) {
+      throw new Error(`package.json not found in ${packageJSONPath}`);
+    }
+    const packageJSON: { version: string } = JSON.parse(
+      fs.readFileSync(packageJSONPath, 'utf8'),
+    );
+
+    return {
+      user,
+      version: packageJSON.version,
+    };
+  }
 
   async initialAuthorization({
     req,
@@ -92,25 +109,6 @@ export class AuthorizationAdminSessionsService {
       ...session.user,
       is_admin: true,
       is_mod: true,
-    };
-  }
-
-  async authorization(
-    context: GqlContext,
-  ): Promise<AuthorizationAdminSessionsObj> {
-    const user = await this.initialAuthorization(context);
-
-    const packageJSONPath = join(__dirname, '../../../../../../package.json');
-    if (!fs.existsSync(packageJSONPath)) {
-      throw new Error(`package.json not found in ${packageJSONPath}`);
-    }
-    const packageJSON: { version: string } = JSON.parse(
-      fs.readFileSync(packageJSONPath, 'utf8'),
-    );
-
-    return {
-      user,
-      version: packageJSON.version,
     };
   }
 }

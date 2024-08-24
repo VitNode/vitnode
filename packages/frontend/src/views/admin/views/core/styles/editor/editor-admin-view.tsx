@@ -1,9 +1,9 @@
-import { getTranslations } from 'next-intl/server';
-import { Metadata } from 'next';
-
-import { ContentEditorAdmin } from './content';
 import { HeaderContent } from '@/components/ui/header-content';
 import { getGlobalData } from '@/graphql/get-global-data';
+import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
+
+import { ContentEditorAdmin } from './content';
 
 export const generateMetadataEditorAdmin = async (): Promise<Metadata> => {
   const t = await getTranslations('admin.core.styles.editor');

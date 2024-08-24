@@ -1,12 +1,10 @@
-import * as fs from 'fs';
-
+import { NotFoundError } from '@/errors';
+import { ABSOLUTE_PATHS_BACKEND, ConfigPlugin } from '@/index';
 import { Injectable } from '@nestjs/common';
+import * as fs from 'fs';
 
 import { ShowAdminNavPluginsArgs } from './dto/show.args';
 import { ShowAdminNavPluginsObj } from './dto/show.obj';
-
-import { NotFoundError } from '@/errors';
-import { ABSOLUTE_PATHS_BACKEND, ConfigPlugin } from '@/index';
 
 @Injectable()
 export class ShowAdminNavPluginsService {

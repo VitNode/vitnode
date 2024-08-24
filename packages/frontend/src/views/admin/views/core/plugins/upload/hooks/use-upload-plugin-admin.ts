@@ -1,12 +1,12 @@
-import { useTranslations } from 'next-intl';
-import { UseFormReturn } from 'react-hook-form';
-import * as z from 'zod';
-import { toast } from 'sonner';
-
-import { mutationApi } from './mutation-api';
-import { UploadPluginAdminProps } from '../upload';
 import { useDialog } from '@/components/ui/dialog';
 import { zodFile } from '@/helpers/zod';
+import { useTranslations } from 'next-intl';
+import { UseFormReturn } from 'react-hook-form';
+import { toast } from 'sonner';
+import * as z from 'zod';
+
+import { UploadPluginAdminProps } from '../upload';
+import { mutationApi } from './mutation-api';
 
 export const useUploadPluginAdmin = ({ data }: UploadPluginAdminProps) => {
   const t = useTranslations('admin.core.plugins.upload');

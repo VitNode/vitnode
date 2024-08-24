@@ -1,11 +1,11 @@
 'use client';
 
-import React from 'react';
+import { usePathname, useRouter } from '@/navigation';
 import { ArrowLeft, Search } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import React from 'react';
 
 import { ItemQuickMenu } from './item';
-import { usePathname, useRouter } from '@/navigation';
 
 export const QuickMenuWrapper = ({
   children,
@@ -24,7 +24,7 @@ export const QuickMenuWrapper = ({
           <span>{t('back')}</span>
         </ItemQuickMenu>
       )}
-      <ItemQuickMenu href="/search" active={pathname.startsWith('/search')}>
+      <ItemQuickMenu active={pathname.startsWith('/search')} href="/search">
         <Search />
         <span>{t('search')}</span>
       </ItemQuickMenu>

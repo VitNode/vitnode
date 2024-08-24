@@ -1,6 +1,5 @@
-import { useTranslations } from 'next-intl';
-
-import { useDeleteLangAdmin } from './hooks/use-delete-lang-admin';
+import { AutoForm } from '@/components/form/auto-form';
+import { AutoFormInput } from '@/components/form/fields/input';
 import {
   AlertDialogCancel,
   AlertDialogDescription,
@@ -10,8 +9,9 @@ import {
 } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
 import { ShowCoreLanguages } from '@/graphql/types';
-import { AutoForm } from '@/components/form/auto-form';
-import { AutoFormInput } from '@/components/form/fields/input';
+import { useTranslations } from 'next-intl';
+
+import { useDeleteLangAdmin } from './hooks/use-delete-lang-admin';
 
 export const ContentDeleteActionsTableLangsCoreAdmin = ({
   code,
@@ -36,6 +36,11 @@ export const ContentDeleteActionsTableLangsCoreAdmin = ({
       </AlertDialogDescription>
 
       <AutoForm
+        fieldConfig={{
+          name: {
+            fieldType: AutoFormInput,
+          },
+        }}
         formSchema={formSchema}
         onSubmit={onSubmit}
         submitButton={props => (
@@ -51,11 +56,6 @@ export const ContentDeleteActionsTableLangsCoreAdmin = ({
             </Button>
           </AlertDialogFooter>
         )}
-        fieldConfig={{
-          name: {
-            fieldType: AutoFormInput,
-          },
-        }}
       />
     </AlertDialogHeader>
   );

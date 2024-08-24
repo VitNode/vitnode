@@ -1,13 +1,12 @@
-import { useTranslations } from 'next-intl';
-
 import { CommandItem, CommandShortcut } from '@/components/ui/command';
-import { useRouter } from '@/navigation';
 import { NavSearchAdminSessions } from '@/graphql/types';
+import { useRouter } from '@/navigation';
+import { useTranslations } from 'next-intl';
 
 interface Props
   extends Pick<
     NavSearchAdminSessions,
-    'code_plugin' | 'code' | 'href' | 'parent_nav_code'
+    'code' | 'code_plugin' | 'href' | 'parent_nav_code'
   > {
   setOpen: (open: boolean) => void;
 }

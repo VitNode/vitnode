@@ -16,9 +16,9 @@ interface ManifestType {
     | 'window-controls-overlay'
   )[];
   icons?: {
-    src: string;
     purpose?: 'any' | 'badge' | 'maskable' | 'monochrome';
     sizes?: string;
+    src: string;
     type?: string;
   }[];
   id?: string;
@@ -26,30 +26,30 @@ interface ManifestType {
   name?: string;
   orientation?:
     | 'any'
+    | 'landscape'
     | 'landscape-primary'
     | 'landscape-secondary'
-    | 'landscape'
     | 'natural'
+    | 'portrait'
     | 'portrait-primary'
-    | 'portrait-secondary'
-    | 'portrait';
+    | 'portrait-secondary';
   screenshots?: {
-    src: string;
     sizes?: string;
+    src: string;
     type?: string;
   }[];
   short_name?: string;
   shortcuts?: {
-    name: string;
-    url: string;
     description?: string;
     icons?: {
-      src: string;
       purpose?: 'any' | 'badge' | 'maskable' | 'monochrome';
       sizes?: string;
+      src: string;
       type?: string;
     }[];
+    name: string;
     short_name?: string;
+    url: string;
   }[];
   start_url?: string;
   theme_color?: string;

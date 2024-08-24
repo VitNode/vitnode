@@ -1,10 +1,11 @@
+import { FormControl, FormMessage } from '@/components/ui/form';
 import { TextLanguageInput } from '@/components/ui/text-language-input';
+
 import { AutoFormInputComponentProps } from '../type';
 import { DefaultParent } from './common/children';
-import { AutoFormWrapper } from './common/wrapper';
 import { AutoFormLabel } from './common/label';
-import { FormControl, FormMessage } from '@/components/ui/form';
 import { AutoFormTooltip } from './common/tooltip';
+import { AutoFormWrapper } from './common/wrapper';
 
 export const AutoFormTextLanguageInput = ({
   autoFormProps: { isRequired, fieldConfigItem, field, theme, isDisabled },
@@ -20,10 +21,10 @@ export const AutoFormTextLanguageInput = ({
     <AutoFormWrapper theme={theme}>
       {fieldConfigItem.label && (
         <AutoFormLabel
-          label={fieldConfigItem.label}
-          isRequired={isRequired}
-          theme={theme}
           description={fieldConfigItem.description}
+          isRequired={isRequired}
+          label={fieldConfigItem.label}
+          theme={theme}
         />
       )}
       <ParentWrapper field={field}>

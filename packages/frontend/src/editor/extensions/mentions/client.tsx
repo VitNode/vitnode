@@ -2,15 +2,16 @@
 
 import { EditorView } from '@tiptap/pm/view';
 import { Editor, ReactRenderer } from '@tiptap/react';
+import { useTranslations } from 'next-intl';
 import React from 'react';
 import tippy, { GetReferenceClientRect, Instance } from 'tippy.js';
-import { useTranslations } from 'next-intl';
 
 import { Button } from '../../../components/ui/button';
-import { cn } from '../../../helpers/classnames';
 import { classPopover } from '../../../components/ui/popover';
+import { cn } from '../../../helpers/classnames';
 
 export interface SuggestionProps<I> {
+  clientRect?: GetReferenceClientRect;
   command: (props: I) => void;
   contentComponent: React.ComponentType<{ item: I }>;
   decorationNode: Element | null;
@@ -19,7 +20,6 @@ export interface SuggestionProps<I> {
   query: string;
   range: Range;
   text: string;
-  clientRect?: GetReferenceClientRect;
 }
 
 export interface SuggestionKeyDownProps {
@@ -93,7 +93,6 @@ const ComponentList = ({ command, items, ref }: ComponentListProps) => {
       {items.length ? (
         items.map((item, index) => (
           <Button
-            variant="ghost"
             className={cn('justify-start', {
               'bg-accent': index === selectedIndex,
             })}
@@ -102,6 +101,7 @@ const ComponentList = ({ command, items, ref }: ComponentListProps) => {
               selectItem(index);
             }}
             size="sm"
+            variant="ghost"
           >
             {item}
           </Button>
@@ -113,7 +113,7 @@ const ComponentList = ({ command, items, ref }: ComponentListProps) => {
   );
 };
 
-let component: ReactRenderer<ComponentListRef> | null = null;
+let component: null | ReactRenderer<ComponentListRef> = null;
 let popup: Instance[] | null = null;
 
 export function onStart<T>(props: SuggestionProps<T>) {

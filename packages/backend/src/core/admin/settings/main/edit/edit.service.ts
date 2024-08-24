@@ -1,26 +1,69 @@
-import * as fs from 'fs';
-import { join } from 'path';
-
+import { ManifestWithLang } from '@/core/settings/settings.module';
+import { core_languages } from '@/database/schema/languages';
+import {
+  ABSOLUTE_PATHS_BACKEND,
+  configPath,
+  ConfigType,
+  getConfigFile,
+  InternalServerError,
+} from '@/index';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
+import * as fs from 'fs';
+import { join } from 'path';
 
 import { EditAdminMainSettingsArgs } from './dto/edit.args';
 import { EditAdminSettingsObj } from './dto/edit.obj';
 
-import { InternalDatabaseService } from '@/utils/database/internal_database.service';
-import {
-  ABSOLUTE_PATHS_BACKEND,
-  ConfigType,
-  InternalServerError,
-  configPath,
-  getConfigFile,
-} from '@/index';
-import { core_languages } from '@/database/schema/languages';
-import { ManifestWithLang } from '@/core/settings/settings.module';
-
 @Injectable()
 export class EditAdminMainSettingsService {
   constructor(private readonly databaseService: InternalDatabaseService) {}
+
+  protected async updateCopyright({
+    languages,
+    site_copyright,
+  }: {
+    languages: { code: string }[];
+    site_copyright: EditAdminMainSettingsArgs['site_copyright'];
+  }) {
+    // Update site_description
+    const update = await Promise.all(
+      site_copyright.map(async item => {
+        const itemExists = languages.find(
+          language => language.code === item.language_code,
+        );
+
+        if (!itemExists) return;
+
+        const update = await this.databaseService.db
+          .update(core_languages)
+          .set({
+            site_copyright: item.value,
+          })
+          .where(eq(core_languages.code, item.language_code))
+          .returning();
+
+        return update[0];
+      }),
+    );
+
+    await Promise.all(
+      languages.map(async item => {
+        const exist = update
+          .filter(item => item)
+          .find(el => el?.code === item.code);
+        if (exist) return;
+
+        await this.databaseService.db
+          .update(core_languages)
+          .set({
+            site_copyright: '',
+          })
+          .where(eq(core_languages.code, item.code));
+      }),
+    );
+  }
 
   protected updateDescription({
     languages,
@@ -85,51 +128,6 @@ export class EditAdminMainSettingsService {
 
         fs.writeFileSync(path, JSON.stringify(newData, null, 2), 'utf8');
       });
-  }
-
-  protected async updateCopyright({
-    languages,
-    site_copyright,
-  }: {
-    languages: { code: string }[];
-    site_copyright: EditAdminMainSettingsArgs['site_copyright'];
-  }) {
-    // Update site_description
-    const update = await Promise.all(
-      site_copyright.map(async item => {
-        const itemExists = languages.find(
-          language => language.code === item.language_code,
-        );
-
-        if (!itemExists) return;
-
-        const update = await this.databaseService.db
-          .update(core_languages)
-          .set({
-            site_copyright: item.value,
-          })
-          .where(eq(core_languages.code, item.language_code))
-          .returning();
-
-        return update[0];
-      }),
-    );
-
-    await Promise.all(
-      languages.map(async item => {
-        const exist = update
-          .filter(item => item)
-          .find(el => el?.code === item.code);
-        if (exist) return;
-
-        await this.databaseService.db
-          .update(core_languages)
-          .set({
-            site_copyright: '',
-          })
-          .where(eq(core_languages.code, item.code));
-      }),
-    );
   }
 
   async edit({

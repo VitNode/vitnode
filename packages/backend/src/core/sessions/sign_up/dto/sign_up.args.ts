@@ -1,4 +1,6 @@
+import { TransformString } from '@/utils';
 import { ArgsType, Field } from '@nestjs/graphql';
+import { Transform } from 'class-transformer';
 import {
   IsEmail,
   IsStrongPassword,
@@ -6,9 +8,6 @@ import {
   MaxLength,
   MinLength,
 } from 'class-validator';
-import { Transform } from 'class-transformer';
-
-import { TransformString } from '@/utils';
 
 export const nameRegex = /^(?!.* {2})[\p{L}\p{N}._@ -]*$/u;
 
@@ -26,6 +25,9 @@ export class SignUpCoreSessionsArgs {
   @Matches(nameRegex)
   name: string;
 
+  @Field(() => Boolean, { nullable: true })
+  newsletter?: boolean;
+
   @IsStrongPassword({
     minLength: 8,
     minLowercase: 1,
@@ -35,7 +37,4 @@ export class SignUpCoreSessionsArgs {
   })
   @Field(() => String)
   password: string;
-
-  @Field(() => Boolean, { nullable: true })
-  newsletter?: boolean;
 }

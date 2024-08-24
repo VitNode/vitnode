@@ -1,8 +1,7 @@
-import { useTranslations } from 'next-intl';
-
 import { buttonVariants } from '@/components/ui/button';
-import { Link } from '@/navigation';
 import { cn } from '@/helpers/classnames';
+import { Link } from '@/navigation';
+import { useTranslations } from 'next-intl';
 
 export const UserBar = ({ className }: { className?: string }) => {
   const t = useTranslations('core');
@@ -15,20 +14,20 @@ export const UserBar = ({ className }: { className?: string }) => {
       )}
     >
       <Link
-        href="/login"
         className={buttonVariants({
           size: 'sm',
           variant: 'outline',
         })}
+        href="/login"
       >
         {t('user-bar.sign_in')}
       </Link>
 
       <Link
-        href="/register"
         className={buttonVariants({
           size: 'sm',
         })}
+        href="/register"
       >
         {t('user-bar.sign_up')}
       </Link>

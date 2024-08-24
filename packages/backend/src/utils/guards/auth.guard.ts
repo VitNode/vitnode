@@ -4,12 +4,11 @@ import {
   Inject,
   Injectable,
 } from '@nestjs/common';
-import { GqlExecutionContext } from '@nestjs/graphql';
 import { Reflector } from '@nestjs/core';
-
-import { GqlContext } from '../context';
+import { GqlExecutionContext } from '@nestjs/graphql';
 
 import { User } from '../../decorators';
+import { GqlContext } from '../context';
 
 interface IOAuthGuards {
   authorization: (context: GqlContext) => Promise<User>;

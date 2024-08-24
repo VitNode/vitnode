@@ -9,6 +9,9 @@ export class SignUpCoreSessionsObj {
   @IsEmail()
   email: string;
 
+  @Field(() => Int)
+  group_id: number;
+
   @Field(() => String)
   @MinLength(3)
   @MaxLength(32)
@@ -17,7 +20,4 @@ export class SignUpCoreSessionsObj {
 
   @Field(() => Boolean, { nullable: true })
   newsletter: boolean | null;
-
-  @Field(() => Int)
-  group_id: number;
 }

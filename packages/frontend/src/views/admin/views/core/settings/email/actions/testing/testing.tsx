@@ -1,10 +1,9 @@
+import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import { Loader } from '@/components/ui/loader';
 import { FlaskConical } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import React from 'react';
-
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
-import { Loader } from '@/components/ui/loader';
 
 const Content = React.lazy(async () =>
   import('./content').then(module => ({
@@ -22,7 +21,7 @@ export const TestingActionEmailSettingsAdmin = ({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline" disabled={disabled}>
+        <Button disabled={disabled} variant="outline">
           <FlaskConical />
           {t('title')}
         </Button>

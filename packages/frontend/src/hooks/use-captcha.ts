@@ -1,11 +1,10 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-import React from 'react';
+import { CaptchaTypeEnum } from '@/graphql/types';
 import { useLocale } from 'next-intl';
 import { useTheme } from 'next-themes';
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+import React from 'react';
 
 import { useGlobals } from './use-globals';
-import { CaptchaTypeEnum } from '@/graphql/types';
 
 export const useCaptcha = () => {
   const locale = useLocale();

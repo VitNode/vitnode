@@ -1,15 +1,13 @@
-import * as fs from 'fs';
-
+import { core_plugins } from '@/database/schema/plugins';
+import { CustomError, NotFoundError } from '@/errors';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
 import { eq, ne } from 'drizzle-orm';
+import * as fs from 'fs';
 
+import { ABSOLUTE_PATHS_BACKEND, ConfigPlugin } from '../../../..';
 import { ShowAdminPlugins } from '../show/dto/show.obj';
 import { EditAdminPluginsArgs } from './dto/edit.args';
-
-import { InternalDatabaseService } from '@/utils/database/internal_database.service';
-import { CustomError, NotFoundError } from '@/errors';
-import { core_plugins } from '@/database/schema/plugins';
-import { ABSOLUTE_PATHS_BACKEND, ConfigPlugin } from '../../../..';
 
 @Injectable()
 export class EditAdminPluginsService {

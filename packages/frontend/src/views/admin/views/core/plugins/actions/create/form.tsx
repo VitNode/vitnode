@@ -1,18 +1,18 @@
+import { AutoForm } from '@/components/form/auto-form';
+import { AutoFormInput } from '@/components/form/fields/input';
+import { ShowAdminPlugins } from '@/graphql/types';
 import { useTranslations } from 'next-intl';
 
-import { AutoFormInput } from '@/components/form/fields/input';
-import { AutoForm } from '@/components/form/auto-form';
 import { useCreateEditPluginAdmin } from './hooks/use-create-edit-plugin-admin';
-import { ShowAdminPlugins } from '@/graphql/types';
 
 export const FormCreateEditPluginAdmin = ({
   data,
   submitButton,
   className,
 }: {
-  submitButton: React.ComponentProps<typeof AutoForm>['submitButton'];
   className?: string;
   data?: ShowAdminPlugins;
+  submitButton: React.ComponentProps<typeof AutoForm>['submitButton'];
 }) => {
   const t = useTranslations('admin.core.plugins');
   const { onSubmit, formSchema } = useCreateEditPluginAdmin({ data });
@@ -20,9 +20,6 @@ export const FormCreateEditPluginAdmin = ({
   return (
     <AutoForm
       className={className}
-      formSchema={formSchema}
-      onSubmit={onSubmit}
-      submitButton={submitButton}
       fieldConfig={{
         name: {
           label: t('create.name.label'),
@@ -56,6 +53,9 @@ export const FormCreateEditPluginAdmin = ({
           fieldType: props => <AutoFormInput type="url" {...props} />,
         },
       }}
+      formSchema={formSchema}
+      onSubmit={onSubmit}
+      submitButton={submitButton}
     />
   );
 };

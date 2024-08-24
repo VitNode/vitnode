@@ -1,6 +1,4 @@
-import { Check } from 'lucide-react';
-import { useTranslations } from 'next-intl';
-
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -13,7 +11,8 @@ import {
 } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
 import { CONFIG } from '@/helpers/config-with-env';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { Check } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 export const SubmitSidebarThemeEditor = ({
   isPending,
@@ -30,7 +29,7 @@ export const SubmitSidebarThemeEditor = ({
   const tCore = useTranslations('core');
 
   return (
-    <AlertDialog open={openSubmitDialog} onOpenChange={setOpenSubmitDialog}>
+    <AlertDialog onOpenChange={setOpenSubmitDialog} open={openSubmitDialog}>
       <AlertDialogTrigger asChild>
         <Button className="w-full" size="sm">
           {tCore('save')}
@@ -58,7 +57,7 @@ export const SubmitSidebarThemeEditor = ({
             </Button>
           </AlertDialogCancel>
 
-          <Button variant="destructive" onClick={onClick} loading={isPending}>
+          <Button loading={isPending} onClick={onClick} variant="destructive">
             {t('submit')}
           </Button>
         </AlertDialogFooter>

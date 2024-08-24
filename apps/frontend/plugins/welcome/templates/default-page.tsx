@@ -15,17 +15,17 @@ export default function DefaultPage() {
         </p>
 
         <div className="flex flex-wrap items-center gap-2 md:gap-4">
-          <Button className="rounded-full px-6" asChild>
+          <Button asChild className="rounded-full px-6">
             <Link href="/admin" target="_blank">
               Go to AdminCP
             </Link>
           </Button>
 
-          <Button className="rounded-full px-6" variant="ghost" asChild>
+          <Button asChild className="rounded-full px-6" variant="ghost">
             <Link
               href="https://vitnode.com/docs"
-              target="_blank"
               rel="noopener noreferrer"
+              target="_blank"
             >
               Read our Docs
             </Link>

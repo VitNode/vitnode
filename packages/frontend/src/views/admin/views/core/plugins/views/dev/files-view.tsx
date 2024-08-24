@@ -1,12 +1,11 @@
-import { getTranslations } from 'next-intl/server';
-
-import { cn } from '@/helpers/classnames';
 import { fetcher } from '@/graphql/fetcher';
 import {
   Admin__Core_Plugins__Files,
   Admin__Core_Plugins__FilesQuery,
   Admin__Core_Plugins__FilesQueryVariables,
 } from '@/graphql/queries/admin/plugins/dev/admin__core_plugins__files.generated';
+import { cn } from '@/helpers/classnames';
+import { getTranslations } from 'next-intl/server';
 
 const getData = async (variables: Admin__Core_Plugins__FilesQueryVariables) => {
   const data = await fetcher<

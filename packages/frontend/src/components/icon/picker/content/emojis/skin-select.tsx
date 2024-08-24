@@ -1,14 +1,13 @@
-import { useTranslations } from 'next-intl';
-import { Check } from 'lucide-react';
-
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Button } from '@/components/ui/button';
 import { CONFIG } from '@/helpers/config-with-env';
+import { Check } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 const skinToneEmoji = [
   '43.55deg 100% 61.37%',
@@ -32,10 +31,10 @@ export const SkinSelectEmojisContentIconInput = ({
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
+          ariaLabel={t('skin.title')}
           className="size-9 shrink-0"
           size="icon"
           variant="ghost"
-          ariaLabel={t('skin.title')}
         >
           <div
             className="size-5 rounded-md"
@@ -47,8 +46,8 @@ export const SkinSelectEmojisContentIconInput = ({
       <DropdownMenuContent>
         {skinToneEmoji.map((item, index) => (
           <DropdownMenuItem
-            key={item}
             className="flex gap-2"
+            key={item}
             onClick={() => {
               localStorage.setItem(
                 CONFIG.local_storage.editor_skin_tone,

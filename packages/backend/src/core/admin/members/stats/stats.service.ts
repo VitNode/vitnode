@@ -1,9 +1,8 @@
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
 import { sql } from 'drizzle-orm';
 
 import { SignUpStatsAdminMembers } from './dto/stats.obj';
-
-import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 
 @Injectable()
 export class StatsAdminMembersService {

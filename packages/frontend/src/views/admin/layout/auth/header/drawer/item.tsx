@@ -1,9 +1,8 @@
-import React from 'react';
-
-import { cn } from '@/helpers/classnames';
 import { Button, buttonVariants } from '@/components/ui/button';
-import { Link } from '@/navigation';
 import { SheetClose } from '@/components/ui/sheet';
+import { cn } from '@/helpers/classnames';
+import { Link } from '@/navigation';
+import React from 'react';
 
 export const ItemDrawerHeaderAdmin = ({
   children,
@@ -23,7 +22,6 @@ export const ItemDrawerHeaderAdmin = ({
     if (href) {
       return (
         <Link
-          href={href}
           className={cn(
             buttonVariants({
               variant: 'ghost',
@@ -31,8 +29,9 @@ export const ItemDrawerHeaderAdmin = ({
               className,
             }),
           )}
-          target={target}
+          href={href}
           onClick={onClick}
+          target={target}
         >
           {children}
         </Link>
@@ -40,7 +39,7 @@ export const ItemDrawerHeaderAdmin = ({
     }
 
     return (
-      <Button variant="ghost" size="sm" className={className} onClick={onClick}>
+      <Button className={className} onClick={onClick} size="sm" variant="ghost">
         {children}
       </Button>
     );

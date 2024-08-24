@@ -1,22 +1,22 @@
-import { useTranslations } from 'next-intl';
-import { useParams } from 'next/navigation';
-import { Ban } from 'lucide-react';
-
-import { useCreateNavPluginAdmin } from './hooks/use-create-nav-plugin-admin';
+import { AutoForm } from '@/components/form/auto-form';
+import { AutoFormIcon } from '@/components/form/fields/icon';
+import { AutoFormInput } from '@/components/form/fields/input';
+import { AutoFormSelect } from '@/components/form/fields/select';
+import { AutoFormTags } from '@/components/form/fields/tags';
 import { DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Admin__Core_Plugins__Nav__ShowQuery } from '@/graphql/queries/admin/plugins/dev/nav/admin__core_plugins__nav__show.generated';
 import { ShowAdminNavPluginsObj } from '@/graphql/types';
 import { removeSpecialCharacters } from '@/helpers/special-characters';
-import { AutoForm } from '@/components/form/auto-form';
-import { AutoFormInput } from '@/components/form/fields/input';
-import { AutoFormIcon } from '@/components/form/fields/icon';
-import { AutoFormSelect } from '@/components/form/fields/select';
-import { AutoFormTags } from '@/components/form/fields/tags';
+import { Ban } from 'lucide-react';
+import { useParams } from 'next/navigation';
+import { useTranslations } from 'next-intl';
+
+import { useCreateNavPluginAdmin } from './hooks/use-create-nav-plugin-admin';
 
 export interface CreateEditNavDevPluginAdminProps {
+  data?: ShowAdminNavPluginsObj;
   dataFromSSR: Admin__Core_Plugins__Nav__ShowQuery['admin__core_plugins__nav__show'];
   icons: { icon: React.ReactNode; id: string }[];
-  data?: ShowAdminNavPluginsObj;
   parentId?: string;
 }
 
@@ -46,9 +46,6 @@ export const CreateEditNavDevPluginAdmin = ({
       </DialogHeader>
 
       <AutoForm
-        formSchema={formSchema}
-        onSubmit={onSubmit}
-        onValuesChange={setValues}
         fieldConfig={{
           code: {
             label: t('create.code.label'),
@@ -80,8 +77,8 @@ export const CreateEditNavDevPluginAdmin = ({
                     dataFromSSR.map(nav => [
                       nav.code,
                       <div
-                        key={nav.code}
                         className="flex flex-wrap items-center gap-2"
+                        key={nav.code}
                       >
                         {nav.icon
                           ? icons.find(icon => icon.id === nav.code)?.icon
@@ -106,6 +103,9 @@ export const CreateEditNavDevPluginAdmin = ({
             fieldType: props => <AutoFormTags {...props} multiple />,
           },
         }}
+        formSchema={formSchema}
+        onSubmit={onSubmit}
+        onValuesChange={setValues}
       />
     </>
   );

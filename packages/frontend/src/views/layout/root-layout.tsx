@@ -1,15 +1,14 @@
-import React from 'react';
-import NextTopLoader from 'nextjs-toploader';
+import { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
-import { Metadata } from 'next';
-
-import { RootProviders } from './providers';
-import { WrapperRootLayout } from './wrapper';
-import { InternalErrorView } from '../global';
+import NextTopLoader from 'nextjs-toploader';
+import React from 'react';
 
 import { getGlobalData } from '../../graphql/get-global-data';
 import { CONFIG } from '../../helpers/config-with-env';
+import { InternalErrorView } from '../global';
+import { RootProviders } from './providers';
+import { WrapperRootLayout } from './wrapper';
 
 export interface RootLayoutProps {
   children: React.ReactNode;
@@ -62,11 +61,11 @@ export const RootLayout = async ({
     const middlewareData = await getGlobalData();
 
     return (
-      <WrapperRootLayout locale={locale} className={className}>
+      <WrapperRootLayout className={className} locale={locale}>
         <NextTopLoader
           color="hsl(var(--primary))"
-          showSpinner={false}
           height={4}
+          showSpinner={false}
         />
         <RootProviders middlewareData={middlewareData}>
           <NextIntlClientProvider messages={messages}>

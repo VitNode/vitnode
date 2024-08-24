@@ -1,14 +1,13 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
-
-import { useSignUpView } from '@/hooks/core/sign/up/use-sign-up-view';
-import { Progress } from '@/components/ui/progress';
-import { Button } from '@/components/ui/button';
-import { removeSpecialCharacters } from '@/helpers/special-characters';
-import { AutoFormCheckbox } from '@/components/form/fields/checkbox';
 import { AutoForm } from '@/components/form/auto-form';
+import { AutoFormCheckbox } from '@/components/form/fields/checkbox';
 import { AutoFormInput } from '@/components/form/fields/input';
+import { Button } from '@/components/ui/button';
+import { Progress } from '@/components/ui/progress';
+import { removeSpecialCharacters } from '@/helpers/special-characters';
+import { useSignUpView } from '@/hooks/core/sign/up/use-sign-up-view';
+import { useTranslations } from 'next-intl';
 
 import { useInstallVitnode } from '../../hooks/use-install-vitnode';
 
@@ -19,8 +18,7 @@ export const AccountInstallConfigsView = () => {
 
   return (
     <AutoForm
-      formSchema={formSchema}
-      onValuesChange={setValues}
+      className="max-w-2xl p-6 pt-0"
       fieldConfig={{
         name: {
           label: t('sign_up.form.name.label'),
@@ -94,11 +92,12 @@ export const AccountInstallConfigsView = () => {
           fieldType: AutoFormCheckbox,
         },
       }}
-      className="max-w-2xl p-6 pt-0"
+      formSchema={formSchema}
       onSubmit={async (val, form) => {
         await onSubmit(val, form);
         setCurrentStep(prev => prev + 1);
       }}
+      onValuesChange={setValues}
       submitButton={props => (
         <Button {...props} className="w-full">
           {t('sign_up.form.submit')}

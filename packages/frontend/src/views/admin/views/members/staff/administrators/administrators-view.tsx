@@ -1,21 +1,21 @@
-import { getTranslations } from 'next-intl/server';
-import { Metadata } from 'next';
-
-import { TableAdministratorsStaffAdmin } from './table/table';
-import { ActionsAdministratorsStaffAdmin } from './actions/actions';
-import { HeaderContent } from '@/components/ui/header-content';
 import { Card } from '@/components/ui/card';
-import {
-  SearchParamsPagination,
-  getPaginationTool,
-} from '@/graphql/get-pagination-tool';
+import { HeaderContent } from '@/components/ui/header-content';
 import { fetcher } from '@/graphql/fetcher';
+import {
+  getPaginationTool,
+  SearchParamsPagination,
+} from '@/graphql/get-pagination-tool';
 import {
   Admin__Core_Staff_Administrators__Show,
   Admin__Core_Staff_Administrators__ShowQuery,
   Admin__Core_Staff_Administrators__ShowQueryVariables,
 } from '@/graphql/queries/admin/members/staff/admin__core_staff_administrators__show.generated';
 import { ShowAdminStaffAdministratorsSortingColumnEnum } from '@/graphql/types';
+import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
+
+import { ActionsAdministratorsStaffAdmin } from './actions/actions';
+import { TableAdministratorsStaffAdmin } from './table/table';
 
 const getData = async (
   variables: Admin__Core_Staff_Administrators__ShowQueryVariables,

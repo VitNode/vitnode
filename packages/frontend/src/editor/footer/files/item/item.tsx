@@ -1,18 +1,17 @@
+import { Button } from '@/components/ui/button';
+import { TextLanguage } from '@/graphql/types';
+import { cn } from '@/helpers/classnames';
+import { CONFIG } from '@/helpers/config-with-env';
+import { JSONContent } from '@tiptap/react';
 import { Plus, Trash2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
-import { JSONContent } from '@tiptap/react';
 
-import { IconItemListFilesFooterEditor } from './icon';
+import { FileStateEditor } from '../../../extensions/files/files';
+import { useEditorState } from '../../../hooks/use-editor-state';
 import { ContentItemListFilesFooterEditor } from './content';
 import { deleteMutationApi } from './hooks/delete-mutation-api';
-import { Button } from '@/components/ui/button';
-import { cn } from '@/helpers/classnames';
-import { CONFIG } from '@/helpers/config-with-env';
-import { TextLanguage } from '@/graphql/types';
-
-import { useEditorState } from '../../../hooks/use-editor-state';
-import { FileStateEditor } from '../../../extensions/files/files';
+import { IconItemListFilesFooterEditor } from './icon';
 
 export interface ItemListFilesFooterEditorProps
   extends Omit<FileStateEditor, 'file'> {
@@ -73,9 +72,9 @@ export const ItemListFilesFooterEditor = ({
         )}
       >
         <IconItemListFilesFooterEditor
-          isLoading={isLoading}
-          isError={!!error}
           alt={data?.file_alt ?? data?.file_name ?? file?.name ?? ''}
+          isError={!!error}
+          isLoading={isLoading}
           src={
             data?.width && data.height
               ? `${CONFIG.graphql_public_url}/${data.dir_folder}/${data.file_name}`
@@ -92,9 +91,9 @@ export const ItemListFilesFooterEditor = ({
         <div className="text-muted-foreground space-x-2 text-sm">
           <ContentItemListFilesFooterEditor
             data={data}
+            error={error}
             file={file}
             isLoading={isLoading}
-            error={error}
           />
         </div>
       </div>
@@ -102,7 +101,6 @@ export const ItemListFilesFooterEditor = ({
       {!error && !isLoading && data && (
         <div className="flex shrink-0 flex-wrap items-center gap-1">
           <Button
-            variant="ghost"
             onClick={() => {
               editor.commands.insertFile({
                 ...data,
@@ -114,12 +112,11 @@ export const ItemListFilesFooterEditor = ({
               });
               editor.commands.focus();
             }}
+            variant="ghost"
           >
             <Plus /> {t('insert')}
           </Button>
           <Button
-            size="icon"
-            variant="destructiveGhost"
             ariaLabel={tCore('delete')}
             onClick={async () => {
               // Remove files from the editor
@@ -162,6 +159,8 @@ export const ItemListFilesFooterEditor = ({
                 });
               }
             }}
+            size="icon"
+            variant="destructiveGhost"
           >
             <Trash2 />
           </Button>

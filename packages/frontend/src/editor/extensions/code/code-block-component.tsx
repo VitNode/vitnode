@@ -1,15 +1,9 @@
 'use client';
 
 import { NodeViewContent, NodeViewWrapper } from '@tiptap/react';
-import React from 'react';
 import { CheckIcon, SortAscIcon } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import { cn } from 'vitnode-frontend/helpers/classnames';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from 'vitnode-frontend/components/ui/popover';
+import React from 'react';
 import { Button } from 'vitnode-frontend/components/ui/button';
 import {
   Command,
@@ -19,6 +13,12 @@ import {
   CommandItem,
   CommandList,
 } from 'vitnode-frontend/components/ui/command';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from 'vitnode-frontend/components/ui/popover';
+import { cn } from 'vitnode-frontend/helpers/classnames';
 
 import { classNameCodeBlock } from './code';
 
@@ -55,14 +55,14 @@ export const CodeBlockComponent = ({
       </pre>
 
       <div className="border-muted-foreground/10 border-t p-2">
-        <Popover open={open} onOpenChange={setOpen}>
+        <Popover onOpenChange={setOpen} open={open}>
           <PopoverTrigger asChild>
             <Button
-              variant="outline"
-              role="combobox"
-              size="sm"
               aria-expanded={open}
               className="w-40 justify-between"
+              role="combobox"
+              size="sm"
+              variant="outline"
             >
               {value || t('auto')}
               <SortAscIcon className="ml-2 size-4 shrink-0 opacity-50" />
@@ -71,7 +71,7 @@ export const CodeBlockComponent = ({
 
           <PopoverContent className="w-40 p-0">
             <Command>
-              <CommandInput placeholder={tCore('search')} className="h-9" />
+              <CommandInput className="h-9" placeholder={tCore('search')} />
 
               <CommandList>
                 <CommandEmpty>{tCore('no_results')}</CommandEmpty>
@@ -79,13 +79,13 @@ export const CodeBlockComponent = ({
                   {extension.options.lowlight.listLanguages().map(lang => (
                     <CommandItem
                       key={lang}
-                      value={lang}
                       onSelect={currentValue => {
                         const val = currentValue === value ? '' : currentValue;
                         updateAttributes({ language: val });
                         setValue(val);
                         setOpen(false);
                       }}
+                      value={lang}
                     >
                       {lang}
                       <CheckIcon

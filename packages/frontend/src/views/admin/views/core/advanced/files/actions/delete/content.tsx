@@ -1,7 +1,3 @@
-import { useTranslations } from 'next-intl';
-
-import { SubmitDeleteActionFilesAdvancedCoreAdmin } from './submit';
-import { useDeleteFileAdvancedAdmin } from './hooks/use-delete-file-advanced-admin';
 import {
   AlertDialogCancel,
   AlertDialogDescription,
@@ -11,6 +7,10 @@ import {
 } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
 import { Admin__Core_Files__ShowQuery } from '@/graphql/queries/admin/advanced/files/admin__core_files__show.generated';
+import { useTranslations } from 'next-intl';
+
+import { useDeleteFileAdvancedAdmin } from './hooks/use-delete-file-advanced-admin';
+import { SubmitDeleteActionFilesAdvancedCoreAdmin } from './submit';
 
 export type ContentDeleteActionFilesAdvancedCoreAdminProps = Pick<
   Admin__Core_Files__ShowQuery['admin__core_files__show']['edges'][0],

@@ -1,9 +1,8 @@
 'use client';
 
+import { usePathname } from '@/navigation';
 import * as Accordion from '@radix-ui/react-accordion';
 import React from 'react';
-
-import { usePathname } from '@/navigation';
 
 export const NavAdminWrapper = ({
   children,
@@ -15,8 +14,8 @@ export const NavAdminWrapper = ({
 
   return (
     <Accordion.Root
-      type="multiple"
       defaultValue={[`${segments[1]}_${segments[2]}`]}
+      type="multiple"
     >
       {children}
     </Accordion.Root>

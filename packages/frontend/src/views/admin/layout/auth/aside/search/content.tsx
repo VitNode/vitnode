@@ -1,12 +1,12 @@
-import { useTranslations } from 'next-intl';
-
 import {
   CommandEmpty,
   CommandGroup,
   CommandList,
 } from '@/components/ui/command';
-import { useSearchAdminApi } from './hooks/use-search-admin-api';
 import { Loader } from '@/components/ui/loader';
+import { useTranslations } from 'next-intl';
+
+import { useSearchAdminApi } from './hooks/use-search-admin-api';
 import { PageItemContentSearchAsideAuthAdmin } from './items/page';
 
 export const ContentSearchAsideAuthAdmin = ({

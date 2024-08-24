@@ -1,13 +1,12 @@
 'use server';
 
-import { revalidatePath } from 'next/cache';
-
 import { fetcher, FetcherErrorType } from '@/graphql/fetcher';
 import {
   Admin__Core_Plugins__Edit,
   Admin__Core_Plugins__EditMutation,
   Admin__Core_Plugins__EditMutationVariables,
 } from '@/graphql/mutations/admin/plugins/dev/admin__core_plugins__edit.generated';
+import { revalidatePath } from 'next/cache';
 
 export const mutationEditApi = async (
   variables: Admin__Core_Plugins__EditMutationVariables,

@@ -1,16 +1,15 @@
-import { Metadata } from 'next';
-
-import { ContentInstallConfigsView } from './content/content';
-import { FetcherErrorType, fetcher } from '@/graphql/fetcher';
-import { redirect } from '@/navigation';
-import { InstallConfigLayout } from './layout';
+import { fetcher, FetcherErrorType } from '@/graphql/fetcher';
 import {
   Admin__Install__Layout,
   Admin__Install__LayoutQuery,
   Admin__Install__LayoutQueryVariables,
 } from '@/graphql/queries/admin/install/admin__install__layout.generated';
+import { redirect } from '@/navigation';
+import { Metadata } from 'next';
 
 import { InternalErrorView } from '../../../global';
+import { ContentInstallConfigsView } from './content/content';
+import { InstallConfigLayout } from './layout';
 
 const getData = async () => {
   const data = await fetcher<

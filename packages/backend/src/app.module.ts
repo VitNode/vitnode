@@ -1,24 +1,23 @@
+import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { DynamicModule, Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+import { APP_GUARD } from '@nestjs/core';
+import { GraphQLModule } from '@nestjs/graphql';
+import { JwtModule } from '@nestjs/jwt';
+import { ScheduleModule } from '@nestjs/schedule';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { ThrottlerModule } from '@nestjs/throttler';
 import { join } from 'path';
 
-import { DynamicModule, Module } from '@nestjs/common';
-import { ScheduleModule } from '@nestjs/schedule';
-import { JwtModule } from '@nestjs/jwt';
-import { ServeStaticModule } from '@nestjs/serve-static';
-import { GraphQLModule } from '@nestjs/graphql';
-import { ConfigModule } from '@nestjs/config';
-import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
-import { ThrottlerModule } from '@nestjs/throttler';
-import { APP_GUARD } from '@nestjs/core';
-
-import { GqlContext } from './utils';
 import { CoreModule } from './core/core.module';
 import { GlobalProvidersModule } from './providers/providers.module';
-import { GqlThrottlerGuard } from './utils/guards/gql-throttler.guard';
+import { GqlContext } from './utils';
 import {
-  InternalDatabaseModule,
   DatabaseModuleArgs,
+  InternalDatabaseModule,
 } from './utils/database/database.module';
+import { GqlThrottlerGuard } from './utils/guards/gql-throttler.guard';
 
 interface Args {
   database: DatabaseModuleArgs;

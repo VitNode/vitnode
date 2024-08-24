@@ -1,6 +1,7 @@
-import { useShortShowGroupsAdminAPI } from './hooks/use-short-show-groups-admin-api';
 import { ContentFilterToolbarDataTable } from '@/components/data-table/toolbar/filter/content/content';
 import { useTextLang } from '@/hooks/use-text-lang';
+
+import { useShortShowGroupsAdminAPI } from './hooks/use-short-show-groups-admin-api';
 
 export const ContentGroupsFiltersUsersMembersAdmin = () => {
   const { data, isFetching, setTextSearch } = useShortShowGroupsAdminAPI();
@@ -9,7 +10,6 @@ export const ContentGroupsFiltersUsersMembersAdmin = () => {
   return (
     <ContentFilterToolbarDataTable
       isFetching={isFetching}
-      searchOnChange={setTextSearch}
       options={
         data?.admin__core_groups__show.edges
           .filter(item => !item.guest)
@@ -18,6 +18,7 @@ export const ContentGroupsFiltersUsersMembersAdmin = () => {
             value: `${group.id}`,
           })) ?? []
       }
+      searchOnChange={setTextSearch}
     />
   );
 };

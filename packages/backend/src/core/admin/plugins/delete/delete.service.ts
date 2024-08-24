@@ -1,17 +1,15 @@
+import { core_plugins } from '@/database/schema/plugins';
+import { CustomError, NotFoundError } from '@/errors';
+import { setRebuildRequired } from '@/functions/rebuild-required';
+import { ABSOLUTE_PATHS_BACKEND } from '@/index';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
+import { Injectable } from '@nestjs/common';
+import { eq, sql } from 'drizzle-orm';
 import * as fs from 'fs';
 import { join } from 'path';
 
-import { Injectable } from '@nestjs/common';
-import { eq, sql } from 'drizzle-orm';
-
-import { DeleteAdminPluginsArgs } from './dto/delete.args';
 import { ChangeFilesAdminPluginsService } from '../helpers/files/change/change.service';
-
-import { InternalDatabaseService } from '@/utils/database/internal_database.service';
-import { CustomError, NotFoundError } from '@/errors';
-import { ABSOLUTE_PATHS_BACKEND } from '@/index';
-import { core_plugins } from '@/database/schema/plugins';
-import { setRebuildRequired } from '@/functions/rebuild-required';
+import { DeleteAdminPluginsArgs } from './dto/delete.args';
 
 @Injectable()
 export class DeleteAdminPluginsService {

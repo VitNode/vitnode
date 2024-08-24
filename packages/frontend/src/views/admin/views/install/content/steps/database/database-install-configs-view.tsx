@@ -1,5 +1,6 @@
-import { SubmitDatabaseInstallConfigs } from './submit-database-install-configs';
 import { CardContent, CardFooter } from '@/components/ui/card';
+
+import { SubmitDatabaseInstallConfigs } from './submit-database-install-configs';
 
 export const DatabaseInstallConfigsView = () => {
   return (

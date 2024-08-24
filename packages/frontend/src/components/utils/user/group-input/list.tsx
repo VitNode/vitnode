@@ -1,11 +1,10 @@
-import { useTranslations } from 'next-intl';
-import { CheckIcon } from 'lucide-react';
-
 import { CommandGroup, CommandItem } from '@/components/ui/command';
-import { cn } from '@/helpers/classnames';
 import { GroupFormat } from '@/components/ui/user/group-format';
 import { GroupInputItem } from '@/components/ui/user/group-input';
 import { Admin__Core_Groups__Show_ShortQuery } from '@/graphql/queries/admin/groups/admin__core_groups__show_short.generated';
+import { cn } from '@/helpers/classnames';
+import { CheckIcon } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 export const GroupInputContentList = ({
   edges,
@@ -13,9 +12,9 @@ export const GroupInputContentList = ({
   values,
 }: {
   edges: Admin__Core_Groups__Show_ShortQuery['admin__core_groups__show']['edges'];
+  multiple?: boolean;
   onSelect: (value: GroupInputItem) => void;
   values: GroupInputItem[];
-  multiple?: boolean;
 }) => {
   const t = useTranslations('core');
 

@@ -4,19 +4,19 @@ import { registerDecorator } from 'class-validator';
 @ObjectType()
 export class TextLanguage {
   @Field(() => String)
-  value: string;
+  language_code: string;
 
   @Field(() => String)
-  language_code: string;
+  value: string;
 }
 
 @InputType()
 export class TextLanguageInput {
   @Field(() => String)
-  value: string;
+  language_code: string;
 
   @Field(() => String)
-  language_code: string;
+  value: string;
 }
 
 export const IsTextLanguageInput = () => {
@@ -29,7 +29,7 @@ export const IsTextLanguageInput = () => {
         message: 'Each language must have a value',
       },
       validator: {
-        validate(item: TextLanguageInput | TextLanguageInput[] | null) {
+        validate(item: null | TextLanguageInput | TextLanguageInput[]) {
           if (!item) return false;
 
           return (Array.isArray(item) ? item : [item]).every(
@@ -51,7 +51,7 @@ export const MaxLengthLanguageInput = ({ length }: { length: number }) => {
         message: `Each language must have a value with a maximum length of ${length}`,
       },
       validator: {
-        validate(item: TextLanguageInput | TextLanguageInput[] | null) {
+        validate(item: null | TextLanguageInput | TextLanguageInput[]) {
           if (!item) return true;
 
           return (Array.isArray(item) ? item : [item]).every(
@@ -72,7 +72,7 @@ export const MinLengthLanguageInput = ({ length }: { length: number }) => {
         message: `Each language must have a value with a minimum length of ${length}`,
       },
       validator: {
-        validate(item: TextLanguageInput | TextLanguageInput[] | null) {
+        validate(item: null | TextLanguageInput | TextLanguageInput[]) {
           if (!item) return true;
 
           return (Array.isArray(item) ? item : [item]).every(
@@ -87,7 +87,7 @@ export const MinLengthLanguageInput = ({ length }: { length: number }) => {
 export const TransformTextLanguageInput = ({
   value,
 }: {
-  value: TextLanguageInput | TextLanguageInput[] | null;
+  value: null | TextLanguageInput | TextLanguageInput[];
 }) => {
   if (Array.isArray(value)) {
     let current = value.map(item => ({
@@ -119,7 +119,7 @@ export const TransformTextLanguageInput = ({
 export const TransformString = ({
   value,
 }: {
-  value: string[] | string | null;
+  value: null | string | string[];
 }) => {
   if (Array.isArray(value)) {
     return value.map(item => item.trimStart().trimEnd());

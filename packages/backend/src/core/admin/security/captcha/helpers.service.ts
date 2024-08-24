@@ -1,6 +1,5 @@
-import { join } from 'path';
-
 import { ABSOLUTE_PATHS_BACKEND } from '@/index';
+import { join } from 'path';
 
 export interface CaptchaSecurityConfig {
   secret_key: string;

@@ -1,8 +1,7 @@
-import { join } from 'path';
-
-import { drizzle } from 'drizzle-orm/node-postgres';
-import { Pool, PoolConfig } from 'pg';
 import * as dotenv from 'dotenv';
+import { drizzle } from 'drizzle-orm/node-postgres';
+import { join } from 'path';
+import { Pool, PoolConfig } from 'pg';
 
 dotenv.config({
   path: join(process.cwd(), '..', '..', '.env'),

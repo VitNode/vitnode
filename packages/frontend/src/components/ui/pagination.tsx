@@ -1,14 +1,11 @@
+import { PageInfo } from '@/graphql/types';
+import { usePathname, useRouter } from '@/navigation';
+import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
+import { useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import React from 'react';
-import { useSearchParams } from 'next/navigation';
-import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
 
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from './tooltip';
+import { Button } from './button';
 import {
   Select,
   SelectContent,
@@ -16,9 +13,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from './select';
-import { usePathname, useRouter } from '@/navigation';
-import { Button } from './button';
-import { PageInfo } from '@/graphql/types';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from './tooltip';
 
 const PAGE_SIZES = [10, 20, 30, 40, 50];
 
@@ -60,7 +60,6 @@ export const Pagination = ({
         <TooltipProvider>
           <Tooltip>
             <Select
-              value={`${pageSizeValue}`}
               onValueChange={value => {
                 const params = new URLSearchParams(searchParams.toString());
                 if (params.has('last')) {
@@ -74,6 +73,7 @@ export const Pagination = ({
                   scroll: false,
                 });
               }}
+              value={`${pageSizeValue}`}
             >
               <TooltipTrigger asChild>
                 <SelectTrigger className="h-8 w-[70px]">
@@ -95,10 +95,8 @@ export const Pagination = ({
 
         <div className="flex items-center space-x-2">
           <Button
-            variant="outline"
-            size="icon"
-            disabled={!pageInfo.hasPreviousPage}
             ariaLabel={t('pagination.previous')}
+            disabled={!pageInfo.hasPreviousPage}
             onClick={() => {
               if (!pageInfo.startCursor) return;
 
@@ -110,12 +108,12 @@ export const Pagination = ({
                 scroll: false,
               });
             }}
+            size="icon"
+            variant="outline"
           >
             <ChevronLeftIcon className="size-4" />
           </Button>
           <Button
-            variant="outline"
-            size="icon"
             ariaLabel={t('pagination.next')}
             disabled={!pageInfo.hasNextPage}
             onClick={() => {
@@ -129,6 +127,8 @@ export const Pagination = ({
                 scroll: false,
               });
             }}
+            size="icon"
+            variant="outline"
           >
             <ChevronRightIcon className="size-4" />
           </Button>

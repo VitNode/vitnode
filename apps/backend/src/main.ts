@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
-import { NestFactory } from '@nestjs/core';
 import { INestApplication } from '@nestjs/common';
+import { NestFactory } from '@nestjs/core';
 import { nestjsMainApp } from 'vitnode-backend';
 
 import { AppModule } from './app.module';

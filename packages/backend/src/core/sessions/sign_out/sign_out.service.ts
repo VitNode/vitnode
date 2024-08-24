@@ -1,10 +1,10 @@
-import { Injectable } from '@nestjs/common';
-import { eq } from 'drizzle-orm';
-import { ConfigService } from '@nestjs/config';
-
 import { InternalDatabaseService } from '@/utils/database/internal_database.service';
-import { GqlContext } from '../../../utils';
+import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { eq } from 'drizzle-orm';
+
 import { core_sessions } from '../../../database/schema/sessions';
+import { GqlContext } from '../../../utils';
 
 @Injectable()
 export class SignOutCoreSessionsService {

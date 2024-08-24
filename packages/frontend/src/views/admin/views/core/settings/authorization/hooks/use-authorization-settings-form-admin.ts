@@ -1,9 +1,9 @@
-import * as z from 'zod';
-import { toast } from 'sonner';
+import { Admin__Core_Authorization_Settings__ShowQuery } from '@/graphql/queries/admin/settings/authorization/admin__core_authorization_settings__show.generated';
 import { useTranslations } from 'next-intl';
+import { toast } from 'sonner';
+import * as z from 'zod';
 
 import { mutationApi } from './mutation-api';
-import { Admin__Core_Authorization_Settings__ShowQuery } from '@/graphql/queries/admin/settings/authorization/admin__core_authorization_settings__show.generated';
 
 export const useAuthorizationFormAdmin = ({
   admin__core_authorization_settings__show: data,

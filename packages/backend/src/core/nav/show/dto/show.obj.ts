@@ -1,29 +1,28 @@
-import { Field, Int, ObjectType } from '@nestjs/graphql';
-
 import { PageInfo, TextLanguage } from '@/utils';
+import { Field, Int, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
 class ShowCoreNavItem {
+  @Field(() => [TextLanguage])
+  description: TextLanguage[];
+
+  @Field(() => Boolean)
+  external: boolean;
+
+  @Field(() => String)
+  href: string;
+
+  @Field(() => String, { nullable: true })
+  icon: null | string;
+
   @Field(() => Int)
   id: number;
 
   @Field(() => [TextLanguage])
   name: TextLanguage[];
 
-  @Field(() => [TextLanguage])
-  description: TextLanguage[];
-
-  @Field(() => String)
-  href: string;
-
   @Field(() => Int)
   position: number;
-
-  @Field(() => Boolean)
-  external: boolean;
-
-  @Field(() => String, { nullable: true })
-  icon: string | null;
 }
 
 @ObjectType()

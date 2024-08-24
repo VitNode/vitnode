@@ -6,9 +6,8 @@ import {
 } from '@nestjs/common';
 import { GqlExecutionContext } from '@nestjs/graphql';
 
-import { GqlContext } from '../context';
-
 import { AuthorizationAdminSessionsObj } from '../../core/admin/sessions/authorization/dto/authorization.obj';
+import { GqlContext } from '../context';
 
 export interface IOAdminAuthGuards {
   authorization: (

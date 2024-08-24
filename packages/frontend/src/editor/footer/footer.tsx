@@ -1,13 +1,12 @@
+import { useGlobals } from '../../hooks/use-globals';
+import { useSession } from '../../hooks/use-session';
+import { useEditorState } from '../hooks/use-editor-state';
+import { FilesButtonFooterEditor } from './files/button';
+import { ListFilesFooterEditor } from './files/list';
 import {
   LanguageSelectFooterEditor,
   LanguageSelectFooterEditorProps,
 } from './language-select';
-import { FilesButtonFooterEditor } from './files/button';
-import { ListFilesFooterEditor } from './files/list';
-import { useEditorState } from '../hooks/use-editor-state';
-
-import { useGlobals } from '../../hooks/use-globals';
-import { useSession } from '../../hooks/use-session';
 
 interface Props extends LanguageSelectFooterEditorProps {
   disableLanguages?: boolean;

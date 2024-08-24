@@ -2,12 +2,14 @@
 import eslint from '@eslint/js';
 import tsEslint from 'typescript-eslint';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
+import perfectionist from 'eslint-plugin-perfectionist';
 
 export default [
   eslint.configs.recommended,
   ...tsEslint.configs.stylisticTypeChecked,
   ...tsEslint.configs.strictTypeChecked,
   eslintPluginPrettierRecommended,
+  perfectionist.configs['recommended-natural'],
   { files: ['**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}'] },
   {
     ignores: ['tsup.config.ts', 'codegen.ts'],
@@ -21,6 +23,28 @@ export default [
   },
   {
     rules: {
+      '@typescript-eslint/no-unsafe-call': 'off',
+      'perfectionist/sort-objects': 'off',
+      'perfectionist/sort-classes': [
+        'warn',
+        {
+          groups: [
+            'constructor',
+            'static-block',
+            'index-signature',
+            'static-property',
+            ['protected-property', 'protected-accessor-property'],
+            ['private-property', 'private-accessor-property'],
+            ['property', 'accessor-property'],
+            'static-method',
+            'protected-method',
+            'private-method',
+            'method',
+            ['get-method', 'set-method'],
+            'unknown',
+          ],
+        },
+      ],
       'no-console': 'error',
       'consistent-return': 'off',
       '@typescript-eslint/no-unused-vars': [
@@ -48,10 +72,6 @@ export default [
       '@typescript-eslint/method-signature-style': 'warn',
       '@typescript-eslint/no-import-type-side-effects': 'warn',
       'newline-before-return': 'warn',
-      '@typescript-eslint/member-ordering': [
-        'warn',
-        { default: ['field', 'constructor', 'signature', 'method'] },
-      ],
       '@typescript-eslint/consistent-type-imports': [
         'warn',
         { prefer: 'no-type-imports' },

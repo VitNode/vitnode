@@ -1,7 +1,7 @@
-import React from 'react';
 import { UniqueIdentifier } from '@dnd-kit/core';
 import { arrayMove } from '@dnd-kit/sortable';
 import { Coordinates } from '@dnd-kit/utilities';
+import React from 'react';
 
 import { FlatTree } from '../../helpers/flatten-tree';
 
@@ -35,14 +35,14 @@ export interface ProjectionReturnType {
   depth: number;
   maxDepth: number;
   minDepth: number;
-  parentId: number | string | null;
+  parentId: null | number | string;
 }
 
 export const useProjection = () => {
-  const [activeId, setActiveId] = React.useState<UniqueIdentifier | null>(null);
-  const [overId, setOverId] = React.useState<UniqueIdentifier | null>(null);
+  const [activeId, setActiveId] = React.useState<null | UniqueIdentifier>(null);
+  const [overId, setOverId] = React.useState<null | UniqueIdentifier>(null);
   const [projected, setProjected] =
-    React.useState<ProjectionReturnType | null>();
+    React.useState<null | ProjectionReturnType>();
 
   function getProjection<T extends object>({
     delta,
@@ -83,7 +83,7 @@ export const useProjection = () => {
       depth = minDepth;
     }
 
-    const getParentId = (): number | string | null => {
+    const getParentId = (): null | number | string => {
       if (depth === 0 || !previousItem) {
         return null;
       }

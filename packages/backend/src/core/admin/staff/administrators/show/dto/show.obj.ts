@@ -1,13 +1,12 @@
+import { GroupUser, User } from '@/decorators';
+import { PageInfo, TextLanguage } from '@/utils';
 import {
+  createUnionType,
   Field,
   Int,
   ObjectType,
   OmitType,
-  createUnionType,
 } from '@nestjs/graphql';
-
-import { GroupUser, User } from '@/decorators';
-import { PageInfo, TextLanguage } from '@/utils';
 
 @ObjectType()
 export class ShowAdminStaffAdministratorsObj {
@@ -42,20 +41,20 @@ export const UserOrGroupCoreStaffUnion = createUnionType({
 
 @ObjectType()
 export class ShowAdminStaffAdministrators {
+  @Field(() => Date)
+  created: Date;
+
   @Field(() => Int)
   id: number;
+
+  @Field(() => Boolean)
+  protected: boolean;
 
   @Field(() => Boolean)
   unrestricted: boolean;
 
   @Field(() => Date)
-  created: Date;
-
-  @Field(() => Date)
   updated: Date;
-
-  @Field(() => Boolean)
-  protected: boolean;
 
   @Field(() => UserOrGroupCoreStaffUnion)
   user_or_group: StaffGroupUser | User;

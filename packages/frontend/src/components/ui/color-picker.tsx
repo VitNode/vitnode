@@ -1,23 +1,22 @@
 'use client';
 
-import React from 'react';
-import { useTranslations } from 'next-intl';
-import { RemoveFormatting } from 'lucide-react';
-
-import { Button } from './button';
 import {
   convertColor,
   getHSLFromString,
   isColorBrightness,
 } from '@/helpers/colors';
+import { RemoveFormatting } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import React from 'react';
+
+import { cn } from '../../helpers/classnames';
+import { Button } from './button';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from './tooltip';
-
-import { cn } from '../../helpers/classnames';
 
 export const ColorPicker = ({
   required,
@@ -28,13 +27,13 @@ export const ColorPicker = ({
   id,
   ref: refFromProps,
 }: {
-  onChange: (value: string | null) => void;
-  value: string | null;
   className?: string;
   disabled?: boolean;
   id?: string;
+  onChange: (value: null | string) => void;
   ref?: React.RefCallback<HTMLButtonElement>;
   required?: boolean;
+  value: null | string;
 }) => {
   const t = useTranslations('core.colors');
   const ref = React.useRef<HTMLInputElement>(null);
@@ -44,8 +43,6 @@ export const ColorPicker = ({
   return (
     <div className="flex items-center gap-2">
       <Button
-        type="button"
-        variant="outline"
         className={cn(
           'relative flex min-w-40 max-w-52 justify-start',
           className,
@@ -54,30 +51,32 @@ export const ColorPicker = ({
             'text-white': value && !colorBrightness,
           },
         )}
+        disabled={disabled}
+        onClick={() => {
+          ref.current?.click();
+        }}
+        ref={refFromProps}
         style={{
           backgroundColor: value
             ? `hsl(${value.h}, ${value.s}%, ${value.l}%)`
             : '',
         }}
-        ref={refFromProps}
-        onClick={() => {
-          ref.current?.click();
-        }}
-        disabled={disabled}
+        type="button"
+        variant="outline"
       >
         <input
-          id={id}
-          ref={ref}
           className="invisible absolute bottom-0 left-0 h-0 w-0"
-          type="color"
+          disabled={disabled}
+          id={id}
           onChange={e => {
             const color = convertColor.hexToHSL(e.target.value);
             if (!color) return;
 
             onChange(`hsl(${color.h}, ${color.s}%, ${color.l}%)`);
           }}
+          ref={ref}
+          type="color"
           value={value ? `#${convertColor.hslToHex(value)}` : '#000000'}
-          disabled={disabled}
         />
         <span
           className={cn({
@@ -93,13 +92,13 @@ export const ColorPicker = ({
           <Tooltip>
             <TooltipTrigger asChild>
               <Button
-                size="icon"
-                className="shrink-0"
                 ariaLabel={t('remove')}
-                variant="ghost"
+                className="shrink-0"
                 onClick={() => {
                   onChange(null);
                 }}
+                size="icon"
+                variant="ghost"
               >
                 <RemoveFormatting />
               </Button>

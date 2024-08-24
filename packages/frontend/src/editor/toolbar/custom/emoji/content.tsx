@@ -1,10 +1,9 @@
+import { EmojisContentIconInput } from '@/components/icon/picker/content/emojis/emojis';
+import { SkinSelectEmojisContentIconInput } from '@/components/icon/picker/content/emojis/skin-select';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 import { Input } from 'vitnode-frontend/components/ui/input';
 import { CONFIG } from 'vitnode-frontend/helpers/config-with-env';
-
-import { SkinSelectEmojisContentIconInput } from '@/components/icon/picker/content/emojis/skin-select';
-import { EmojisContentIconInput } from '@/components/icon/picker/content/emojis/emojis';
 
 import { useEditorState } from '../../../hooks/use-editor-state';
 
@@ -28,32 +27,32 @@ export const ContentEmojiToolbarEditor = ({
       <div className="bg-popover sticky top-0 z-10 flex flex-col gap-3 p-4">
         <div className="flex gap-2">
           <Input
-            placeholder={t('emojis.placeholder')}
+            className="h-9"
             onChange={e => {
               setSearch(e.target.value);
             }}
+            placeholder={t('emojis.placeholder')}
             value={search}
-            className="h-9"
           />
 
           <SkinSelectEmojisContentIconInput
-            skinToneIndex={skinToneIndex}
             setSkinToneIndex={setSkinToneIndex}
+            skinToneIndex={skinToneIndex}
           />
         </div>
       </div>
 
       <div className="max-h-64 p-4 pt-0">
         <EmojisContentIconInput
-          search={search}
+          classNameHeaders="top-[4rem]"
           onChange={emoji => {
             if (!emoji) return;
 
             editor.commands.insertContent(emoji);
             setIsOpen?.(false);
           }}
+          search={search}
           skinToneIndex={skinToneIndex}
-          classNameHeaders="top-[4rem]"
           value=""
         />
       </div>

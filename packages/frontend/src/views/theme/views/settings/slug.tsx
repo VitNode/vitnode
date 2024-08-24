@@ -1,8 +1,7 @@
-import { notFound } from 'next/navigation';
-import { Metadata } from 'next';
-
 import { SlugViewProps } from '@/views/slug';
-import { OverviewSettingsView } from './views/overview/overview-settings-view';
+import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+
 import {
   DevicesSettingsView,
   generateMetadataDevicesSettings,
@@ -11,6 +10,7 @@ import {
   FilesSettingsView,
   generateMetadataFilesSettings,
 } from './views/files/files-settings-view';
+import { OverviewSettingsView } from './views/overview/overview-settings-view';
 
 export const generateMetadataSlugSettings = async ({
   params: { slug },

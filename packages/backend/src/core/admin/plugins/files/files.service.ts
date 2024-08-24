@@ -1,13 +1,11 @@
+import { NotFoundError } from '@/errors';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
+import { Injectable } from '@nestjs/common';
 import * as fs from 'fs';
 
-import { Injectable } from '@nestjs/common';
-
+import { ABSOLUTE_PATHS_BACKEND } from '../../../..';
 import { FilesAdminPluginsArgs } from './dto/files.args';
 import { FilesAdminPluginsObj } from './dto/files.obj';
-
-import { InternalDatabaseService } from '@/utils/database/internal_database.service';
-import { NotFoundError } from '@/errors';
-import { ABSOLUTE_PATHS_BACKEND } from '../../../..';
 
 @Injectable()
 export class FilesAdminPluginsService {

@@ -1,18 +1,18 @@
-import React from 'react';
+import { DateFormat } from '@/components/date-format';
+import { Badge } from '@/components/ui/badge';
+import { Card } from '@/components/ui/card';
+import { HeaderContent } from '@/components/ui/header-content';
+import { Tabs, TabsTrigger } from '@/components/ui/tabs';
+import { getGlobalData } from '@/graphql/get-global-data';
+import { CONFIG } from '@/helpers/config-with-env';
+import { redirect } from '@/navigation';
 import { ExternalLink } from 'lucide-react';
-import { getTranslations } from 'next-intl/server';
 import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
+import React from 'react';
 
 import { ActionsDevPluginAdmin } from './actions/actions';
 import { getPluginDataAdmin } from './query-api';
-import { HeaderContent } from '@/components/ui/header-content';
-import { Badge } from '@/components/ui/badge';
-import { DateFormat } from '@/components/date-format';
-import { Tabs, TabsTrigger } from '@/components/ui/tabs';
-import { Card } from '@/components/ui/card';
-import { CONFIG } from '@/helpers/config-with-env';
-import { getGlobalData } from '@/graphql/get-global-data';
-import { redirect } from '@/navigation';
 
 export interface DevPluginAdminLayoutProps {
   children: React.ReactNode;
@@ -76,12 +76,6 @@ export const DevPluginAdminLayout = async ({
   return (
     <>
       <HeaderContent
-        h1={
-          <div className="flex flex-wrap items-center gap-2">
-            <span>{name}</span>
-            {isDefault && <Badge>{tCore('default')}</Badge>}
-          </div>
-        }
         desc={
           <div>
             {description && (
@@ -97,8 +91,8 @@ export const DevPluginAdminLayout = async ({
             )}
             {author_url ? (
               <a
-                href={author_url}
                 className="inline-flex gap-1"
+                href={author_url}
                 rel="noopener noreferrer"
                 target="_blank"
               >
@@ -109,21 +103,27 @@ export const DevPluginAdminLayout = async ({
             )}
           </div>
         }
+        h1={
+          <div className="flex flex-wrap items-center gap-2">
+            <span>{name}</span>
+            {isDefault && <Badge>{tCore('default')}</Badge>}
+          </div>
+        }
       >
         <ActionsDevPluginAdmin {...plugin} />
       </HeaderContent>
 
       <Tabs className="mb-5">
         <TabsTrigger
-          id="overview"
           href={`/admin/core/plugins/${code}/dev/overview`}
+          id="overview"
         >
           {t('overview.title')}
         </TabsTrigger>
-        <TabsTrigger id="files" href={`/admin/core/plugins/${code}/dev/files`}>
+        <TabsTrigger href={`/admin/core/plugins/${code}/dev/files`} id="files">
           {t('files.title')}
         </TabsTrigger>
-        <TabsTrigger id="nav" href={`/admin/core/plugins/${code}/dev/nav`}>
+        <TabsTrigger href={`/admin/core/plugins/${code}/dev/nav`} id="nav">
           {t('nav.title')}
         </TabsTrigger>
       </Tabs>

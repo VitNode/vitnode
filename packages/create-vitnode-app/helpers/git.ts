@@ -1,6 +1,6 @@
 import { execSync } from 'child_process';
-import { join } from 'path';
 import { rmSync } from 'fs';
+import { join } from 'path';
 
 function isInGitRepository(): boolean {
   try {

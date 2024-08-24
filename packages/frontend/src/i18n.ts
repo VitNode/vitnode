@@ -1,5 +1,5 @@
-import { IntlConfig } from 'next-intl';
 import { notFound } from 'next/navigation';
+import { IntlConfig } from 'next-intl';
 
 import { fetcher } from './graphql/fetcher';
 import {

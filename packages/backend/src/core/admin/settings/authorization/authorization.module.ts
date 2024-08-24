@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 
-import { ShowAdminAuthorizationSettingsService } from './show/show.service';
-import { ShowAdminAuthorizationSettingsResolver } from './show/show.resolver';
-import { EditAdminAuthorizationSettingsService } from './edit/edit.service';
 import { EditAdminAuthorizationSettingsResolver } from './edit/edit.resolver';
+import { EditAdminAuthorizationSettingsService } from './edit/edit.service';
+import { ShowAdminAuthorizationSettingsResolver } from './show/show.resolver';
+import { ShowAdminAuthorizationSettingsService } from './show/show.service';
 
 @Module({
   providers: [

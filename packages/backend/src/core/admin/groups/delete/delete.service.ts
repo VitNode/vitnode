@@ -1,12 +1,11 @@
+import { core_groups } from '@/database/schema/groups';
+import { core_users } from '@/database/schema/users';
+import { NotFoundError } from '@/errors';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
 
 import { DeleteAdminGroupsArgs } from './dto/delete.args';
-
-import { InternalDatabaseService } from '@/utils/database/internal_database.service';
-import { NotFoundError } from '@/errors';
-import { core_users } from '@/database/schema/users';
-import { core_groups } from '@/database/schema/groups';
 
 @Injectable()
 export class DeleteAdminGroupsService {

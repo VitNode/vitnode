@@ -1,12 +1,12 @@
-import { AnyColumn, SQL, asc, desc, eq, gt, gte, lt, lte } from 'drizzle-orm';
-import { PgTableWithColumns, TableConfig } from 'drizzle-orm/pg-core';
+import { AnyColumn, asc, desc, eq, gt, gte, lt, lte, SQL } from 'drizzle-orm';
 import { NodePgDatabase } from 'drizzle-orm/node-postgres';
+import { PgTableWithColumns, TableConfig } from 'drizzle-orm/pg-core';
 
 import { PageInfo, SortDirectionEnum } from '../utils';
 
-type DataInterface<T> = T & {
+type DataInterface<T> = {
   id: number;
-};
+} & T;
 
 interface OutputPaginationArgs<T> {
   cursor: number | undefined;
@@ -104,8 +104,8 @@ interface InputPaginationCursorArgs<T extends TableConfig> {
 }
 
 interface Return {
-  orderBy: SQL;
   limit?: number;
+  orderBy: SQL;
   where?: SQL;
 }
 

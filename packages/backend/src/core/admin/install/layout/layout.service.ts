@@ -1,3 +1,9 @@
+import { core_admin_sessions } from '@/database/schema/admins';
+import { core_languages } from '@/database/schema/languages';
+import { core_sessions } from '@/database/schema/sessions';
+import { core_users } from '@/database/schema/users';
+import { AccessDeniedError } from '@/errors';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
 import { count } from 'drizzle-orm';
 
@@ -5,13 +11,6 @@ import {
   LayoutAdminInstallEnum,
   LayoutAdminInstallObj,
 } from './dto/layout.obj';
-
-import { InternalDatabaseService } from '@/utils/database/internal_database.service';
-import { core_users } from '@/database/schema/users';
-import { core_sessions } from '@/database/schema/sessions';
-import { core_admin_sessions } from '@/database/schema/admins';
-import { AccessDeniedError } from '@/errors';
-import { core_languages } from '@/database/schema/languages';
 
 @Injectable()
 export class LayoutAdminInstallService {

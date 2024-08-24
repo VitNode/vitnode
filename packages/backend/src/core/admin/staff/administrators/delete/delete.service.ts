@@ -1,11 +1,10 @@
+import { core_admin_permissions } from '@/database/schema/admins';
+import { CustomError, NotFoundError } from '@/errors';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
 
 import { DeleteAdminStaffAdministratorsArgs } from './dto/delete.args';
-
-import { InternalDatabaseService } from '@/utils/database/internal_database.service';
-import { CustomError, NotFoundError } from '@/errors';
-import { core_admin_permissions } from '@/database/schema/admins';
 
 @Injectable()
 export class DeleteAdminStaffAdministratorsService {

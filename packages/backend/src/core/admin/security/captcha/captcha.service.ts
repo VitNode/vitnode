@@ -1,16 +1,14 @@
+import { CaptchaTypeEnum, getConfigFile } from '@/providers';
+import { Injectable } from '@nestjs/common';
 import * as fs from 'fs';
 
-import { Injectable } from '@nestjs/common';
-
+import { CustomError } from '../../../../errors';
+import { getUserIp } from '../../../../functions';
+import { GqlContext } from '../../../../utils';
 import {
   CaptchaSecurityConfig,
   HelpersAdminCaptchaSecurityService,
 } from './helpers.service';
-
-import { GqlContext } from '../../../../utils';
-import { CustomError } from '../../../../errors';
-import { getUserIp } from '../../../../functions';
-import { CaptchaTypeEnum, getConfigFile } from '@/providers';
 
 @Injectable()
 export class CaptchaCoreCaptchaSecurityService extends HelpersAdminCaptchaSecurityService {
@@ -18,9 +16,9 @@ export class CaptchaCoreCaptchaSecurityService extends HelpersAdminCaptchaSecuri
     captchaKey,
     userIp,
   }: {
-    captchaKey: string[] | string;
+    captchaKey: string | string[];
     userIp: string;
-  }): Promise<{ score: number; success: boolean; 'error-codes'?: string[] }> {
+  }): Promise<{ 'error-codes'?: string[]; score: number; success: boolean }> {
     const {
       security: { captcha: config },
     } = getConfigFile();

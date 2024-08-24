@@ -1,13 +1,12 @@
 'use server';
 
-import { revalidatePath } from 'next/cache';
-
 import { fetcher, FetcherErrorType } from '@/graphql/fetcher';
 import {
   Admin__Core_Styles__Nav__Edit,
   Admin__Core_Styles__Nav__EditMutation,
   Admin__Core_Styles__Nav__EditMutationVariables,
 } from '@/graphql/mutations/admin/styles/nav/core_styles__nav__edit.generated';
+import { revalidatePath } from 'next/cache';
 
 export const editMutationApi = async (
   variables: Admin__Core_Styles__Nav__EditMutationVariables,

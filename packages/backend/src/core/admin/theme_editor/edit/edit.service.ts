@@ -1,9 +1,7 @@
-import { join } from 'path';
-import * as fs from 'fs';
-
+import { FilesService } from '@/core/files/helpers/upload/upload.service';
 import { Injectable } from '@nestjs/common';
-
-import { EditAdminThemeEditorArgs, ThemeVariableInput } from './dto/edit.args';
+import * as fs from 'fs';
+import { join } from 'path';
 
 import {
   ABSOLUTE_PATHS_BACKEND,
@@ -12,7 +10,7 @@ import {
   NotFoundError,
 } from '../../../..';
 import { keysFromCSSThemeEditor } from '../../../theme_editor/theme_editor.module';
-import { FilesService } from '@/core/files/helpers/upload/upload.service';
+import { EditAdminThemeEditorArgs, ThemeVariableInput } from './dto/edit.args';
 
 @Injectable()
 export class EditAdminThemeEditorService {

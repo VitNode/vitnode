@@ -1,24 +1,21 @@
-export type WithChildren<T extends object> = Omit<
-  T,
-  '__typename' | 'children'
-> & {
+export type WithChildren<T extends object> = {
   children: WithChildren<T>[];
   id: number | string;
-};
+} & Omit<T, '__typename' | 'children'>;
 
-export type FlatTree<T extends object> = WithChildren<T> & {
+export type FlatTree<T extends object> = {
   depth: number;
-  parentId: number | string | null;
-};
+  parentId: null | number | string;
+} & WithChildren<T>;
 
 export function flattenTree<T extends object>({
   depth = 0,
   parentId = null,
   tree,
 }: {
-  tree: WithChildren<T>[];
   depth?: number;
-  parentId?: number | string | null;
+  parentId?: null | number | string;
+  tree: WithChildren<T>[];
 }): FlatTree<T>[] {
   return tree.reduce<FlatTree<T>[]>((previousValue, currentValue) => {
     const children =

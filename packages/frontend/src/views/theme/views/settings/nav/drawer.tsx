@@ -1,14 +1,14 @@
-import { useTranslations } from 'next-intl';
-
-import { ItemNavSettings } from './item/item-nav-settings';
-import { useSettingsView } from './hooks/use-settings-view';
+import { buttonVariants } from '@/components/ui/button';
 import {
   Drawer,
   DrawerClose,
   DrawerContent,
   DrawerTrigger,
 } from '@/components/ui/drawer';
-import { buttonVariants } from '@/components/ui/button';
+import { useTranslations } from 'next-intl';
+
+import { useSettingsView } from './hooks/use-settings-view';
+import { ItemNavSettings } from './item/item-nav-settings';
 
 export const DrawerNavSettings = () => {
   const t = useTranslations('core');

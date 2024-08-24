@@ -1,15 +1,14 @@
-import React from 'react';
-import { ChevronDownIcon, SmileIcon } from 'lucide-react';
-
+import { Loader } from '@/components/ui/loader';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
-import { Loader } from '@/components/ui/loader';
+import { ChevronDownIcon, SmileIcon } from 'lucide-react';
+import React from 'react';
 
-import { ButtonToolbarEditor } from '../../button';
 import { useEditorState } from '../../../hooks/use-editor-state';
+import { ButtonToolbarEditor } from '../../button';
 
 const Content = React.lazy(async () =>
   import('./content').then(module => ({
@@ -22,11 +21,11 @@ export const EmojiToolbarEditor = () => {
   const { editor } = useEditorState();
 
   return (
-    <Popover modal open={isOpen} onOpenChange={setIsOpen}>
+    <Popover modal onOpenChange={setIsOpen} open={isOpen}>
       <PopoverTrigger asChild>
         <ButtonToolbarEditor
-          name="emoji.title"
           className="w-14 justify-center gap-1 p-0 [&>svg:last-child]:size-4 [&>svg:not(:last-child)]:size-5"
+          name="emoji.title"
         >
           <SmileIcon />
           <ChevronDownIcon className="opacity-50" />

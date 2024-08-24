@@ -3,7 +3,7 @@ import { Field, Int, ObjectType } from '@nestjs/graphql';
 @ObjectType()
 export class ShowCoreSessionDevicesObj {
   @Field(() => Date)
-  last_seen: Date;
+  created: Date;
 
   @Field(() => Date)
   expires: Date;
@@ -12,20 +12,20 @@ export class ShowCoreSessionDevicesObj {
   id: number;
 
   @Field(() => String)
-  uagent_browser: string;
+  ip_address: string;
 
-  @Field(() => String)
-  uagent_version: string;
-
-  @Field(() => String)
-  uagent_os: string;
+  @Field(() => Date)
+  last_seen: Date;
 
   @Field(() => String)
   login_token: string;
 
   @Field(() => String)
-  ip_address: string;
+  uagent_browser: string;
 
-  @Field(() => Date)
-  created: Date;
+  @Field(() => String)
+  uagent_os: string;
+
+  @Field(() => String)
+  uagent_version: string;
 }

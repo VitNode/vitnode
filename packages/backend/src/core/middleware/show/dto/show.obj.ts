@@ -1,6 +1,5 @@
-import { Field, ObjectType, registerEnumType } from '@nestjs/graphql';
-
 import { AllowTypeFilesEnum, CaptchaTypeEnum } from '@/providers/config';
+import { Field, ObjectType, registerEnumType } from '@nestjs/graphql';
 
 registerEnumType(AllowTypeFilesEnum, {
   name: 'AllowTypeFilesEnum',
@@ -27,11 +26,11 @@ export class FilesEditorShowCoreMiddleware {
 
 @ObjectType()
 export class EditorShowCoreMiddleware {
-  @Field(() => Boolean)
-  sticky: boolean;
-
   @Field(() => FilesEditorShowCoreMiddleware)
   files: FilesEditorShowCoreMiddleware;
+
+  @Field(() => Boolean)
+  sticky: boolean;
 }
 
 @ObjectType()
@@ -40,19 +39,19 @@ export class LanguagesCoreMiddleware {
   code: string;
 
   @Field(() => Boolean)
-  enabled: boolean;
+  default: boolean;
 
   @Field(() => Boolean)
-  default: boolean;
+  enabled: boolean;
 }
 
 @ObjectType()
 export class CaptchaSecurityCoreMiddleware {
-  @Field(() => CaptchaTypeEnum)
-  type: CaptchaTypeEnum;
-
   @Field(() => String)
   site_key: string;
+
+  @Field(() => CaptchaTypeEnum)
+  type: CaptchaTypeEnum;
 }
 
 @ObjectType()
@@ -69,21 +68,21 @@ export class AuthorizationCoreMiddleware {
 
 @ObjectType()
 export class ShowCoreMiddlewareObj {
+  @Field(() => AuthorizationCoreMiddleware)
+  authorization: AuthorizationCoreMiddleware;
+
+  @Field(() => EditorShowCoreMiddleware)
+  editor: EditorShowCoreMiddleware;
+
   @Field(() => [LanguagesCoreMiddleware])
   languages: LanguagesCoreMiddleware[];
 
   @Field(() => [String])
   plugins: string[];
 
-  @Field(() => EditorShowCoreMiddleware)
-  editor: EditorShowCoreMiddleware;
-
   @Field(() => RebuildRequiredEditorShowCoreMiddleware)
   rebuild_required: RebuildRequiredEditorShowCoreMiddleware;
 
   @Field(() => SecurityCoreMiddleware)
   security: SecurityCoreMiddleware;
-
-  @Field(() => AuthorizationCoreMiddleware)
-  authorization: AuthorizationCoreMiddleware;
 }

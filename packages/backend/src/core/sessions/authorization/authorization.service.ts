@@ -1,13 +1,12 @@
+import { NotFoundError } from '@/errors';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
 import { eq, sum } from 'drizzle-orm';
 
-import { InternalAuthorizationCoreSessionsService } from './internal/internal_authorization.service';
-import { AuthorizationCoreSessionsObj } from './dto/authorization.obj';
-
-import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { core_files } from '../../../database/schema/files';
 import { GqlContext } from '../../../utils';
-import { NotFoundError } from '@/errors';
+import { AuthorizationCoreSessionsObj } from './dto/authorization.obj';
+import { InternalAuthorizationCoreSessionsService } from './internal/internal_authorization.service';
 
 @Injectable()
 export class AuthorizationCoreSessionsService {

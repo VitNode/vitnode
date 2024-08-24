@@ -1,23 +1,23 @@
 'use client';
 
-import React from 'react';
-import { useTranslations } from 'next-intl';
+import { buttonVariants } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Loader } from '@/components/ui/loader';
+import { Core_Theme_Editor__ShowQuery } from '@/graphql/queries/admin/theme_editor/core_theme_editor__show.generated';
+import { cn } from '@/helpers/classnames';
+import { CONFIG } from '@/helpers/config-with-env';
+import { Link } from '@/navigation';
 import { Undo2 } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import React from 'react';
 
-import { ThemeEditorViewEnum, ToolbarThemeEditor } from './toolbar';
 import { ThemeEditorContext, ThemeEditorTab } from './hooks/use-theme-editor';
-import { SidebarThemeEditor } from './sidebar/sidebar';
 import {
   keysFromCSSThemeEditor,
   useThemeEditorApi,
 } from './hooks/use-theme-editor-api';
-import { CONFIG } from '@/helpers/config-with-env';
-import { cn } from '@/helpers/classnames';
-import { Loader } from '@/components/ui/loader';
-import { Card } from '@/components/ui/card';
-import { Link } from '@/navigation';
-import { buttonVariants } from '@/components/ui/button';
-import { Core_Theme_Editor__ShowQuery } from '@/graphql/queries/admin/theme_editor/core_theme_editor__show.generated';
+import { SidebarThemeEditor } from './sidebar/sidebar';
+import { ThemeEditorViewEnum, ToolbarThemeEditor } from './toolbar';
 
 export const ContentThemeEditor = (props: Core_Theme_Editor__ShowQuery) => {
   const t = useTranslations('admin.configs');
@@ -55,9 +55,9 @@ export const ContentThemeEditor = (props: Core_Theme_Editor__ShowQuery) => {
         <Card className="space-y-4 p-5 text-center sm:hidden">
           <div>{t('mobile_not_supported')}</div>
           <Link
-            href="/admin/core/dashboard"
-            className={buttonVariants({})}
             aria-label={tCore('go_back')}
+            className={buttonVariants({})}
+            href="/admin/core/dashboard"
           >
             <Undo2 />
             {tCore('go_back')}
@@ -68,16 +68,14 @@ export const ContentThemeEditor = (props: Core_Theme_Editor__ShowQuery) => {
       <div className="bg-card flex h-dvh w-full">
         <div className="bg-card fixed left-0 top-0 z-30 flex h-dvh">
           <ToolbarThemeEditor
-            setActiveMode={setActiveMode}
             activeMode={activeMode}
+            setActiveMode={setActiveMode}
           />
           <SidebarThemeEditor />
         </div>
 
         <div className="ml-[313] flex flex-1 items-center justify-center">
           <iframe
-            ref={iframeRef}
-            title={CONFIG.frontend_url}
             className={cn('bg-background transition-all', {
               'h-full w-full': activeMode === ThemeEditorViewEnum.Desktop,
               'h-5/6 w-[768px] rounded-md border':
@@ -85,7 +83,6 @@ export const ContentThemeEditor = (props: Core_Theme_Editor__ShowQuery) => {
               'h-5/6 w-[375px] rounded-md border':
                 activeMode === ThemeEditorViewEnum.Mobile,
             })}
-            src={CONFIG.frontend_url}
             onLoad={() => {
               const colors = rest.form.getValues().colors;
               if (CONFIG.node_development || !colors) {
@@ -106,6 +103,9 @@ export const ContentThemeEditor = (props: Core_Theme_Editor__ShowQuery) => {
                 );
               });
             }}
+            ref={iframeRef}
+            src={CONFIG.frontend_url}
+            title={CONFIG.frontend_url}
           />
         </div>
       </div>

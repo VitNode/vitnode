@@ -1,11 +1,12 @@
-import { NavAdmin } from '../nav/nav-admin';
 import { LogoVitNode } from '@/components/logo-vitnode';
 import { LanguageSwitcher } from '@/components/switchers/language-switcher';
 import { ThemeSwitcher } from '@/components/switchers/theme-switcher';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { Link } from '@/navigation';
-import { AvatarAsideAuthAdmin } from './avatar';
 import { CONFIG } from '@/helpers/config-with-env';
+import { Link } from '@/navigation';
+
+import { NavAdmin } from '../nav/nav-admin';
+import { AvatarAsideAuthAdmin } from './avatar';
 import { SearchAsideAuthAdmin } from './search/search';
 
 export const AsideAuthAdmin = () => {

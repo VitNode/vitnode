@@ -1,19 +1,19 @@
-import { Pencil } from 'lucide-react';
-import { useTranslations } from 'next-intl';
-import React from 'react';
-
-import { useItemNavDevPluginAdmin } from '../hooks/use-item-nav-dev-plugin-admin';
-import { FlatTree } from '@/helpers/flatten-tree';
+import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import { Loader } from '@/components/ui/loader';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-import { Button } from '@/components/ui/button';
-import { Loader } from '@/components/ui/loader';
 import { ShowAdminNavPluginsObj } from '@/graphql/types';
+import { FlatTree } from '@/helpers/flatten-tree';
+import { Pencil } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import React from 'react';
+
+import { useItemNavDevPluginAdmin } from '../hooks/use-item-nav-dev-plugin-admin';
 
 const Content = React.lazy(async () =>
   import('../../create-edit/create-edit').then(module => ({
@@ -33,7 +33,7 @@ export const EditActionTableNavDevPluginAdmin = (
         <Tooltip>
           <TooltipTrigger asChild>
             <DialogTrigger asChild>
-              <Button variant="ghost" size="icon" ariaLabel={t('edit')}>
+              <Button ariaLabel={t('edit')} size="icon" variant="ghost">
                 <Pencil />
               </Button>
             </DialogTrigger>

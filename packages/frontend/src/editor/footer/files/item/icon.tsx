@@ -1,7 +1,6 @@
+import { Loader } from '@/components/ui/loader';
 import { CircleX, File } from 'lucide-react';
 import Image from 'next/image';
-
-import { Loader } from '@/components/ui/loader';
 
 export const IconItemListFilesFooterEditor = ({
   alt,
@@ -12,7 +11,7 @@ export const IconItemListFilesFooterEditor = ({
   alt: string;
   isError: boolean | undefined;
   isLoading: boolean;
-  src: string | null;
+  src: null | string;
 }) => {
   if (isLoading) {
     return <Loader />;
@@ -25,11 +24,11 @@ export const IconItemListFilesFooterEditor = ({
   if (src) {
     return (
       <Image
-        src={src}
-        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        className="object-cover"
         alt={alt}
+        className="object-cover"
         fill
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        src={src}
       />
     );
   }

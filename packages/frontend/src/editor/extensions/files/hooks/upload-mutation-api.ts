@@ -1,13 +1,12 @@
 'use server';
 
-import { revalidatePath } from 'next/cache';
-import { fetcher, FetcherErrorType } from 'vitnode-frontend/graphql/fetcher';
-
 import {
   Core_Editor_Files__Upload,
   Core_Editor_Files__UploadMutation,
   Core_Editor_Files__UploadMutationVariables,
 } from '@/graphql/mutations/editor/core_editor_files__upload.generated';
+import { revalidatePath } from 'next/cache';
+import { fetcher, FetcherErrorType } from 'vitnode-frontend/graphql/fetcher';
 
 export const uploadMutationApi = async (formData: FormData) => {
   const file = formData.get('file') as File;

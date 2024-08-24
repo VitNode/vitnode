@@ -1,12 +1,12 @@
 import { Global, Module } from '@nestjs/common';
 
+import { AdminNavModule } from '../nav/nav.module';
 import { AuthorizationAdminSessionsResolver } from './authorization/authorization.resolver';
 import { AuthorizationAdminSessionsService } from './authorization/authorization.service';
-import { SignOutAdminSessionsService } from './sign_out/sign_out.service';
-import { SignOutAdminSessionsResolver } from './sign_out/sign_out.resolver';
-import { AdminNavModule } from '../nav/nav.module';
-import { SearchAdminSessionsService } from './search/search.service';
 import { SearchAdminSessionsResolver } from './search/search.resolver';
+import { SearchAdminSessionsService } from './search/search.service';
+import { SignOutAdminSessionsResolver } from './sign_out/sign_out.resolver';
+import { SignOutAdminSessionsService } from './sign_out/sign_out.service';
 
 @Module({
   providers: [SignOutAdminSessionsService, SignOutAdminSessionsResolver],

@@ -1,5 +1,5 @@
+import { cva, VariantProps } from 'class-variance-authority';
 import React from 'react';
-import { VariantProps, cva } from 'class-variance-authority';
 
 import { cn } from '../../helpers/classnames';
 
@@ -26,8 +26,8 @@ const Alert = ({
 }: React.HTMLAttributes<HTMLDivElement> &
   VariantProps<typeof alertVariants>) => (
   <div
-    role="alert"
     className={cn(alertVariants({ variant }), className)}
+    role="alert"
     {...props}
   />
 );
@@ -50,4 +50,4 @@ const AlertDescription = ({
   <div className={cn('text-sm [&_p]:leading-relaxed', className)} {...props} />
 );
 
-export { Alert, AlertTitle, AlertDescription };
+export { Alert, AlertDescription, AlertTitle };

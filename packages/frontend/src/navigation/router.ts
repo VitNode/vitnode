@@ -1,8 +1,8 @@
 'use client';
 
-import NProgress from 'nprogress';
-import { createSharedPathnamesNavigation } from 'next-intl/navigation';
 import { useSearchParams } from 'next/navigation';
+import { createSharedPathnamesNavigation } from 'next-intl/navigation';
+import NProgress from 'nprogress';
 import React from 'react';
 
 const { useRouter: useRouterI18n, usePathname } =

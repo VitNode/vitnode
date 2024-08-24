@@ -4,12 +4,11 @@ import { Plus, X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
-import { IconPickerProps } from './content/content';
-
-import { Popover, PopoverContent, PopoverTrigger } from '../../ui/popover';
 import { cn } from '../../../helpers/classnames';
 import { Button } from '../../ui/button';
 import { Loader } from '../../ui/loader';
+import { Popover, PopoverContent, PopoverTrigger } from '../../ui/popover';
+import { IconPickerProps } from './content/content';
 
 const IconClient = React.lazy(async () =>
   import('../icon-client').then(module => ({
@@ -40,14 +39,14 @@ export const IconPicker = ({
   const [open, setOpen] = React.useState(false);
 
   return (
-    <Popover open={open} onOpenChange={setOpen} modal>
+    <Popover modal onOpenChange={setOpen} open={open}>
       <div className={cn('flex flex-col gap-2', className)}>
         <div className="flex gap-2">
           <PopoverTrigger asChild>
             <Button
-              variant="outline"
               className="w-full max-w-52 justify-start"
               disabled={disabled}
+              variant="outline"
             >
               <Plus /> {t('icon_picker.title')}
             </Button>
@@ -55,10 +54,10 @@ export const IconPicker = ({
 
           {value && !required && (
             <Button
-              variant="destructiveGhost"
               onClick={() => {
                 onChange(undefined);
               }}
+              variant="destructiveGhost"
             >
               <X /> {t('icon_picker.remove')}
             </Button>
@@ -76,7 +75,7 @@ export const IconPicker = ({
             <Loader className="h-64 max-h-[var(--radix-popover-content-available-height)] p-4" />
           }
         >
-          <Content onChange={onChange} value={value} setOpen={setOpen} />
+          <Content onChange={onChange} setOpen={setOpen} value={value} />
         </React.Suspense>
       </PopoverContent>
     </Popover>

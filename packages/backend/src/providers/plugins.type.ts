@@ -3,7 +3,7 @@ import { CreateAdminPluginsArgs } from '../core/admin/plugins/create/dto/create.
 interface NavPluginInfoJSONType {
   code: string;
   href: string;
-  icon: string | null;
+  icon: null | string;
   keywords: string[];
 }
 

@@ -1,14 +1,13 @@
+import { core_files_avatars } from '@/database/schema/users';
+import { User } from '@/decorators';
+import { CustomError } from '@/errors';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
 
+import { FilesService } from '../../../files/helpers/upload/upload.service';
 import { UploadAvatarCoreMembersArgs } from './dto/upload.args';
 import { UploadAvatarCoreMembersObj } from './dto/upload.obj';
-
-import { FilesService } from '../../../files/helpers/upload/upload.service';
-import { InternalDatabaseService } from '@/utils/database/internal_database.service';
-import { User } from '@/decorators';
-import { core_files_avatars } from '@/database/schema/users';
-import { CustomError } from '@/errors';
 
 @Injectable()
 export class UploadAvatarCoreMembersService {

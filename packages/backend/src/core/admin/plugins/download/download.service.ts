@@ -1,37 +1,27 @@
-import { join } from 'path';
-import * as fs from 'fs';
-
-import { Injectable } from '@nestjs/common';
-import * as tar from 'tar';
-import { eq } from 'drizzle-orm';
-
-import { DownloadAdminPluginsArgs } from './dto/download.args';
-
-import { InternalDatabaseService } from '@/utils/database/internal_database.service';
+import { core_plugins } from '@/database/schema/plugins';
+import { User } from '@/decorators';
 import { CustomError, NotFoundError } from '@/errors';
 import {
   currentUnixDate,
   execShellCommand,
   removeSpecialCharacters,
 } from '@/functions';
-import { User } from '@/decorators';
-import { ABSOLUTE_PATHS_BACKEND, PluginInfoJSONType } from '../../../..';
-import { core_plugins } from '@/database/schema/plugins';
 import { generateRandomString } from '@/functions/generate-random-string';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
+import { Injectable } from '@nestjs/common';
+import { eq } from 'drizzle-orm';
+import * as fs from 'fs';
+import { join } from 'path';
+import * as tar from 'tar';
+
+import { ABSOLUTE_PATHS_BACKEND, PluginInfoJSONType } from '../../../..';
+import { DownloadAdminPluginsArgs } from './dto/download.args';
 
 @Injectable()
 export class DownloadAdminPluginsService {
-  protected tempPath = join(ABSOLUTE_PATHS_BACKEND.uploads.temp, 'plugins');
-
   constructor(private readonly databaseService: InternalDatabaseService) {}
 
-  protected createFolders(path: string): void {
-    if (!fs.existsSync(path)) {
-      fs.mkdirSync(path, {
-        recursive: true,
-      });
-    }
-  }
+  protected tempPath = join(ABSOLUTE_PATHS_BACKEND.uploads.temp, 'plugins');
 
   protected copyFiles({
     destination,
@@ -43,6 +33,36 @@ export class DownloadAdminPluginsService {
     if (fs.existsSync(source)) {
       fs.cpSync(source, destination, {
         recursive: true,
+      });
+    }
+  }
+
+  protected createFolders(path: string): void {
+    if (!fs.existsSync(path)) {
+      fs.mkdirSync(path, {
+        recursive: true,
+      });
+    }
+  }
+
+  protected async generateMigration({ code }: { code: string }): Promise<void> {
+    const path = ABSOLUTE_PATHS_BACKEND.plugin({ code }).database.migrations;
+    const schemaPath = ABSOLUTE_PATHS_BACKEND.plugin({ code }).database.schema;
+    if (!fs.existsSync(schemaPath)) return;
+    if (!fs.existsSync(path)) {
+      fs.mkdirSync(path, {
+        recursive: true,
+      });
+    }
+
+    try {
+      await execShellCommand(
+        'npm run drizzle-kit up && npm run drizzle-kit generate',
+      );
+    } catch (_) {
+      throw new CustomError({
+        code: 'GENERATE_MIGRATION_ERROR',
+        message: 'Error generating migration',
       });
     }
   }
@@ -129,28 +149,6 @@ export class DownloadAdminPluginsService {
       })
       .where(eq(core_plugins.code, code))
       .returning();
-  }
-
-  protected async generateMigration({ code }: { code: string }): Promise<void> {
-    const path = ABSOLUTE_PATHS_BACKEND.plugin({ code }).database.migrations;
-    const schemaPath = ABSOLUTE_PATHS_BACKEND.plugin({ code }).database.schema;
-    if (!fs.existsSync(schemaPath)) return;
-    if (!fs.existsSync(path)) {
-      fs.mkdirSync(path, {
-        recursive: true,
-      });
-    }
-
-    try {
-      await execShellCommand(
-        'npm run drizzle-kit up && npm run drizzle-kit generate',
-      );
-    } catch (_) {
-      throw new CustomError({
-        code: 'GENERATE_MIGRATION_ERROR',
-        message: 'Error generating migration',
-      });
-    }
   }
 
   async download(

@@ -1,15 +1,14 @@
+import { CustomError } from '@/errors';
+import { TextLanguageInput } from '@/utils';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
-import { Placeholder, SQL, eq } from 'drizzle-orm';
+import { eq, Placeholder, SQL } from 'drizzle-orm';
 import { PgTableWithColumns, TableConfig } from 'drizzle-orm/pg-core';
 
 import {
   HelpersParserTextLanguageCoreHelpersService,
   InfoFromTextLanguageContentReturnValues,
 } from './helpers.service';
-
-import { TextLanguageInput } from '@/utils';
-import { InternalDatabaseService } from '@/utils/database/internal_database.service';
-import { CustomError } from '@/errors';
 
 interface Args<T extends TableConfig> {
   data: TextLanguageInput[];
@@ -53,6 +52,39 @@ export class ParserTextLanguageCoreHelpersService extends HelpersParserTextLangu
     await this.parseFiles({
       oldFileIds: oldInfo.fileIds,
       fileIds: info.fileIds,
+    });
+  }
+
+  async delete<T extends TableConfig>({
+    database,
+    item_id,
+  }: Omit<Args<T>, 'data'>) {
+    ['language_code', 'value', 'item_id'].forEach(key => {
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+      if (!database[key]) {
+        throw new CustomError({
+          code: 'DATABASE_COLUMN_NOT_FOUND',
+          message: `Column ${key} not found in database`,
+        });
+      }
+    });
+
+    const oldData: ReturnValues[] = (await this.databaseService.db
+      .select({
+        id: database.id,
+        language_code: database.language_code,
+        value: database.value,
+      })
+      .from(database)
+      .where(eq(database.item_id, item_id))) as unknown as ReturnValues[];
+
+    const infoOldData: InfoFromTextLanguageContentReturnValues[] = oldData.map(
+      item => this.getInfoFromContent({ content: item.value }),
+    );
+
+    await this.contentParser({
+      content: '',
+      infoOldData,
     });
   }
 
@@ -149,38 +181,5 @@ export class ParserTextLanguageCoreHelpersService extends HelpersParserTextLangu
     };
 
     return updateData;
-  }
-
-  async delete<T extends TableConfig>({
-    database,
-    item_id,
-  }: Omit<Args<T>, 'data'>) {
-    ['language_code', 'value', 'item_id'].forEach(key => {
-      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-      if (!database[key]) {
-        throw new CustomError({
-          code: 'DATABASE_COLUMN_NOT_FOUND',
-          message: `Column ${key} not found in database`,
-        });
-      }
-    });
-
-    const oldData: ReturnValues[] = (await this.databaseService.db
-      .select({
-        id: database.id,
-        language_code: database.language_code,
-        value: database.value,
-      })
-      .from(database)
-      .where(eq(database.item_id, item_id))) as unknown as ReturnValues[];
-
-    const infoOldData: InfoFromTextLanguageContentReturnValues[] = oldData.map(
-      item => this.getInfoFromContent({ content: item.value }),
-    );
-
-    await this.contentParser({
-      content: '',
-      infoOldData,
-    });
   }
 }

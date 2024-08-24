@@ -1,15 +1,15 @@
-import { useTranslations } from 'next-intl';
-
-import { useTestingEmailAdmin } from './hooks/use-testing-email-admin';
+import { AutoForm } from '@/components/form/auto-form';
+import { AutoFormInput } from '@/components/form/fields/input';
+import { AutoFormTextArea } from '@/components/form/fields/textarea';
+import { Button } from '@/components/ui/button';
 import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
-import { AutoForm } from '@/components/form/auto-form';
-import { AutoFormInput } from '@/components/form/fields/input';
-import { AutoFormTextArea } from '@/components/form/fields/textarea';
+import { useTranslations } from 'next-intl';
+
+import { useTestingEmailAdmin } from './hooks/use-testing-email-admin';
 
 export const ContentTestingActionEmailSettingsAdmin = () => {
   const t = useTranslations('admin.core.settings.email.test');
@@ -22,13 +22,6 @@ export const ContentTestingActionEmailSettingsAdmin = () => {
       </DialogHeader>
 
       <AutoForm
-        formSchema={formSchema}
-        onSubmit={onSubmit}
-        submitButton={props => (
-          <DialogFooter>
-            <Button {...props}>{t('send_testing_email')}</Button>
-          </DialogFooter>
-        )}
         fieldConfig={{
           from: {
             label: t('from'),
@@ -47,6 +40,13 @@ export const ContentTestingActionEmailSettingsAdmin = () => {
             fieldType: AutoFormTextArea,
           },
         }}
+        formSchema={formSchema}
+        onSubmit={onSubmit}
+        submitButton={props => (
+          <DialogFooter>
+            <Button {...props}>{t('send_testing_email')}</Button>
+          </DialogFooter>
+        )}
       />
     </>
   );

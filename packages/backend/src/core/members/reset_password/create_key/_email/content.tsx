@@ -1,7 +1,6 @@
-import React from 'react';
-import { Text, Section, Button } from '@react-email/components';
-
 import { GetHelpersForEmailType, getTranslationForEmail } from '@/providers';
+import { Button, Section, Text } from '@react-email/components';
+import React from 'react';
 
 export const ContentCreateKeyEmail = ({
   language,

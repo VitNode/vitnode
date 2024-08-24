@@ -1,14 +1,13 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
-import { AlertCircle } from 'lucide-react';
-
-import { useSignInAdminView } from '@/hooks/core/sign/in/use-sign-in-admin-view';
-import { CardContent } from '@/components/ui/card';
+import { AutoForm } from '@/components/form/auto-form';
+import { AutoFormInput } from '@/components/form/fields/input';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
-import { AutoFormInput } from '@/components/form/fields/input';
-import { AutoForm } from '@/components/form/auto-form';
+import { CardContent } from '@/components/ui/card';
+import { useSignInAdminView } from '@/hooks/core/sign/in/use-sign-in-admin-view';
+import { AlertCircle } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 export const FormSignInAdmin = () => {
   const t = useTranslations('core');
@@ -25,7 +24,6 @@ export const FormSignInAdmin = () => {
       )}
 
       <AutoForm
-        formSchema={formSchema}
         fieldConfig={{
           email: {
             label: t('sign_in.form.email.label'),
@@ -36,6 +34,7 @@ export const FormSignInAdmin = () => {
             fieldType: props => <AutoFormInput type="password" {...props} />,
           },
         }}
+        formSchema={formSchema}
         onSubmit={onSubmit}
         submitButton={props => (
           <Button className="w-full" {...props}>

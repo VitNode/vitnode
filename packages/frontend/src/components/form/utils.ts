@@ -1,5 +1,5 @@
-import * as z from 'zod';
 import { DefaultValues, FieldValues, UseFormWatch } from 'react-hook-form';
+import * as z from 'zod';
 
 import {
   Dependency,
@@ -64,12 +64,12 @@ export const getBaseType = (schema: z.ZodAny): string => {
  */
 export function zodToHtmlInputProps(
   schema:
+    | z.ZodAny
     | z.ZodNumber
     | z.ZodOptional<z.ZodNumber | z.ZodString>
-    | z.ZodString
-    | z.ZodAny,
+    | z.ZodString,
 ): React.InputHTMLAttributes<HTMLInputElement> {
-  if (['ZodOptional', 'ZodNullable'].includes(schema._def.typeName as string)) {
+  if (['ZodNullable', 'ZodOptional'].includes(schema._def.typeName as string)) {
     const typedSchema = schema as z.ZodOptional<z.ZodNumber | z.ZodString>;
 
     return {

@@ -1,15 +1,15 @@
+import { Color } from '@tiptap/extension-color';
+import { Link } from '@tiptap/extension-link';
 import { TextAlign } from '@tiptap/extension-text-align';
+import { TextStyle } from '@tiptap/extension-text-style';
 import { Underline } from '@tiptap/extension-underline';
 import { Extensions } from '@tiptap/react';
 import { StarterKit } from '@tiptap/starter-kit';
-import { Link } from '@tiptap/extension-link';
-import { Color } from '@tiptap/extension-color';
-import { TextStyle } from '@tiptap/extension-text-style';
 
 import { CodeBlockLowlightExtensionEditor } from './code/code';
-import { MentionExtensionEditor } from './mentions/emoji';
 import { FilesHandler, FilesHandlerArgs } from './files/files';
 import { HeadingExtensionEditor } from './heading';
+import { MentionExtensionEditor } from './mentions/emoji';
 
 export const extensionsEditor = ({
   uploadFiles,

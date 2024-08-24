@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
+import emojiMartData, { Emoji } from '@emoji-mart/data';
 import { Mention } from '@tiptap/extension-mention';
 import { PluginKey } from '@tiptap/pm/state';
-import emojiMartData, { Emoji } from '@emoji-mart/data';
-import { SearchIndex, init } from 'emoji-mart';
+import { init, SearchIndex } from 'emoji-mart';
 
 import { onExit, onKeyDown, onStart, onUpdate } from './client';
 

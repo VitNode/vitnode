@@ -1,7 +1,6 @@
-import { ItemListFilesFooterEditor } from './item/item';
-
-import { useEditorState } from '../../hooks/use-editor-state';
 import { cn } from '../../../helpers/classnames';
+import { useEditorState } from '../../hooks/use-editor-state';
+import { ItemListFilesFooterEditor } from './item/item';
 
 export const ListFilesFooterEditor = () => {
   const { files } = useEditorState();
@@ -11,13 +10,13 @@ export const ListFilesFooterEditor = () => {
       {files.map(item => {
         return (
           <li
-            key={`editor_file_${item.id}`}
             className={cn(
               'bg-card flex flex-col items-center gap-5 rounded-lg border px-5 py-4 shadow-sm transition-colors md:flex-row',
               {
                 'border-destructive': item.error,
               },
             )}
+            key={`editor_file_${item.id}`}
           >
             <ItemListFilesFooterEditor {...item} />
           </li>

@@ -1,5 +1,7 @@
-import React from 'react';
+import { TextLanguage } from '@/graphql/types';
+import { formatBytes } from '@/helpers/format-bytes';
 import { useTranslations } from 'next-intl';
+import React from 'react';
 import { toast } from 'sonner';
 import { useGlobals } from 'vitnode-frontend/hooks/use-globals';
 import { useSession } from 'vitnode-frontend/hooks/use-session';
@@ -9,10 +11,8 @@ import {
   acceptMimeTypeVideo,
   FileStateEditor,
 } from '../files';
-import { uploadMutationApi } from './upload-mutation-api';
 import { getFilesFromContent } from './functions';
-import { TextLanguage } from '@/graphql/types';
-import { formatBytes } from '@/helpers/format-bytes';
+import { uploadMutationApi } from './upload-mutation-api';
 
 export interface UploadFilesHandlerArgs {
   files: FileStateEditor[];
@@ -20,11 +20,11 @@ export interface UploadFilesHandlerArgs {
 }
 
 export interface UploadFilesHandlerEditorArgs {
-  value: TextLanguage[] | string;
   allowUploadFiles?: {
     folder: string;
     plugin: string;
   };
+  value: string | TextLanguage[];
 }
 
 export const useUploadFilesHandlerEditor = ({

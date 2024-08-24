@@ -1,9 +1,9 @@
 import { Args, Query, Resolver } from '@nestjs/graphql';
 import { SkipThrottle } from '@nestjs/throttler';
 
-import { ShowCoreLanguageService } from './show.service';
 import { ShowCoreLanguagesArgs } from './dto/show.args';
 import { ShowCoreLanguagesObj } from './dto/show.obj';
+import { ShowCoreLanguageService } from './show.service';
 
 @Resolver()
 export class ShowCoreLanguagesResolver {

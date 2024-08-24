@@ -1,7 +1,6 @@
-import React from 'react';
-
 import { cn } from '@/helpers/classnames';
 import { Link } from '@/navigation';
+import React from 'react';
 
 export const ItemQuickMenu = ({
   active,
@@ -10,8 +9,8 @@ export const ItemQuickMenu = ({
   onClick,
   ref,
 }: {
-  children: React.ReactNode;
   active?: boolean;
+  children: React.ReactNode;
   href?: string;
   onClick?: () => void;
   ref?: React.Ref<HTMLAnchorElement> | React.RefObject<HTMLButtonElement>;
@@ -26,8 +25,8 @@ export const ItemQuickMenu = ({
   if (href) {
     return (
       <Link
-        href={href}
         className={className}
+        href={href}
         onClick={onClick}
         ref={ref as React.Ref<HTMLAnchorElement>}
       >
@@ -38,10 +37,10 @@ export const ItemQuickMenu = ({
 
   return (
     <button
-      type="button"
       className={className}
       onClick={onClick}
       ref={ref as React.Ref<HTMLButtonElement>}
+      type="button"
     >
       {children}
     </button>

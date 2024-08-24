@@ -1,9 +1,9 @@
-import { Node, mergeAttributes } from '@tiptap/react';
+import { Core_Editor_Files__UploadMutation } from '@/graphql/mutations/editor/core_editor_files__upload.generated';
 import { Plugin } from '@tiptap/pm/state';
+import { mergeAttributes, Node } from '@tiptap/react';
 
 import { renderReactNode } from './client';
 import { UploadFilesHandlerArgs } from './hooks/use-upload-files-handler-editor.ts';
-import { Core_Editor_Files__UploadMutation } from '@/graphql/mutations/editor/core_editor_files__upload.generated';
 
 export const acceptMimeTypeImage = [
   'image/jpeg',
@@ -17,13 +17,13 @@ export const acceptMimeTypeVideo = ['video/mp4', 'video/webm', 'video/ogg'];
 
 export interface FilesHandlerAttributes {
   dir_folder: string;
+  file_alt?: string;
   file_name: string;
   file_name_original: string;
   file_size: number;
+  height?: number;
   id: number;
   mimetype: string;
-  file_alt?: string;
-  height?: number;
   security_key?: string;
   width?: number;
 }
@@ -37,11 +37,11 @@ declare module '@tiptap/react' {
 }
 
 export interface FileStateEditor {
-  id: number;
-  isLoading: boolean;
   data?: Core_Editor_Files__UploadMutation['core_editor_files__upload'];
   error?: string;
   file?: File;
+  id: number;
+  isLoading: boolean;
 }
 
 export interface FilesHandlerArgs {

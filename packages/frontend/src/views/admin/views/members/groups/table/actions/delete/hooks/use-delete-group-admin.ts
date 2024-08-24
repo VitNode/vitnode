@@ -1,12 +1,12 @@
-import { toast } from 'sonner';
+import { useAlertDialog } from '@/components/ui/alert-dialog';
+import { ShowAdminGroups } from '@/graphql/types';
+import { useTextLang } from '@/hooks/use-text-lang';
+import { usePathname, useRouter } from '@/navigation';
 import { useTranslations } from 'next-intl';
+import { toast } from 'sonner';
 import * as z from 'zod';
 
 import { mutationApi } from './mutation-api';
-import { useTextLang } from '@/hooks/use-text-lang';
-import { useAlertDialog } from '@/components/ui/alert-dialog';
-import { usePathname, useRouter } from '@/navigation';
-import { ShowAdminGroups } from '@/graphql/types';
 
 export const useDeleteGroupAdmin = ({
   id,

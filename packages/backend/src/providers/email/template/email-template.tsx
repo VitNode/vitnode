@@ -4,12 +4,12 @@ import {
   Head,
   Hr,
   Html,
+  Img,
   Link,
   Preview,
   Section,
-  Text,
   Tailwind,
-  Img,
+  Text,
 } from '@react-email/components';
 import React from 'react';
 
@@ -18,13 +18,13 @@ import { GetHelpersForEmailType } from '../email-helpers.type';
 
 export interface EmailTemplateProps {
   children: React.ReactNode;
+  header?: React.ReactNode;
   helpers: GetHelpersForEmailType;
+  preview_text?: string;
   user: {
     language: string;
     name: string;
   };
-  header?: React.ReactNode;
-  preview_text?: string;
 }
 
 export const EmailTemplate = ({
@@ -111,9 +111,9 @@ export const EmailTemplate = ({
             <Section className="my-8 text-xl">
               {logo ? (
                 <Img
-                  src={`${backend_url}/public/${logo.dir_folder}/${logo.file_name}`}
-                  className="max-w-xs"
                   alt={site_name}
+                  className="max-w-xs"
+                  src={`${backend_url}/public/${logo.dir_folder}/${logo.file_name}`}
                 />
               ) : (
                 site_name
@@ -144,8 +144,8 @@ export const EmailTemplate = ({
               <Text className={`text-xs text-${color.muted.foreground}`}>
                 {t('footer')}{' '}
                 <Link
-                  href="mailto:aXenDeveloper@gmail.com"
                   className={`text-${color.primary.DEFAULT}`}
+                  href="mailto:aXenDeveloper@gmail.com"
                 >
                   aXenDeveloper@gmail.com
                 </Link>
@@ -154,8 +154,8 @@ export const EmailTemplate = ({
 
             <Section className="my-8 text-center text-sm">
               <Link
-                href={frontend_url}
                 className={`text-${color.muted.foreground}`}
+                href={frontend_url}
               >
                 {site_short_name} © {new Date().getFullYear()}
               </Link>

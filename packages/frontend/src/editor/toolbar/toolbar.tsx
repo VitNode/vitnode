@@ -1,17 +1,16 @@
 import { Bold, Italic, Underline } from 'lucide-react';
 
-import { ToggleToolbarEditor } from './toggle';
-import { LinkToolbarEditor } from './custom/link/link';
-import { HeadingToolbarEditor } from './custom/heading';
+import { cn } from '../../helpers/classnames';
+import { useGlobals } from '../../hooks/use-globals';
+import { useEditorState } from '../hooks/use-editor-state';
 import { ColorToolbarEditor } from './custom/color/color';
 import { EmojiToolbarEditor } from './custom/emoji/emoji';
+import { HeadingToolbarEditor } from './custom/heading';
+import { LinkToolbarEditor } from './custom/link/link';
 import { MoreToolbarEditor } from './custom/more';
 import { PlusToolbarEditor } from './custom/plus';
 import { TextAlignToolbarEditor } from './custom/text-align';
-import { useEditorState } from '../hooks/use-editor-state';
-
-import { useGlobals } from '../../hooks/use-globals';
-import { cn } from '../../helpers/classnames';
+import { ToggleToolbarEditor } from './toggle';
 
 export const ToolBarEditor = () => {
   const { config } = useGlobals();
@@ -28,22 +27,22 @@ export const ToolBarEditor = () => {
       )}
     >
       <ToggleToolbarEditor
-        pressed={editor.isActive('bold')}
         onPressedChange={() => editor.chain().focus().toggleBold().run()}
+        pressed={editor.isActive('bold')}
       >
         <Bold />
       </ToggleToolbarEditor>
 
       <ToggleToolbarEditor
-        pressed={editor.isActive('italic')}
         onPressedChange={() => editor.chain().focus().toggleItalic().run()}
+        pressed={editor.isActive('italic')}
       >
         <Italic />
       </ToggleToolbarEditor>
 
       <ToggleToolbarEditor
-        pressed={editor.isActive('underline')}
         onPressedChange={() => editor.chain().focus().toggleUnderline().run()}
+        pressed={editor.isActive('underline')}
       >
         <Underline />
       </ToggleToolbarEditor>

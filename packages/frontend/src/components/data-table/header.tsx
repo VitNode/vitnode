@@ -1,9 +1,8 @@
-import React from 'react';
+import { Button } from '@/components/ui/button';
+import { usePathname, useRouter } from '@/navigation';
 import { ArrowDown, ArrowUp, ArrowUpDown } from 'lucide-react';
 import { useSearchParams } from 'next/navigation';
-
-import { usePathname, useRouter } from '@/navigation';
-import { Button } from '@/components/ui/button';
+import React from 'react';
 
 export const HeaderDataTable = ({
   children,
@@ -39,9 +38,7 @@ export const HeaderDataTable = ({
 
   return (
     <Button
-      variant="ghost"
       className="-ml-3"
-      size="sm"
       onClick={() => {
         const params = new URLSearchParams(searchParams);
         params.set('sortBy', columnId);
@@ -63,6 +60,8 @@ export const HeaderDataTable = ({
 
         push(`${pathname}?${params.toString()}`);
       }}
+      size="sm"
+      variant="ghost"
     >
       {children}
       {icon()}

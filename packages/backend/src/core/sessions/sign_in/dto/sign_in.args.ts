@@ -2,6 +2,9 @@ import { ArgsType, Field } from '@nestjs/graphql';
 
 @ArgsType()
 export class SignInCoreSessionsArgs {
+  @Field(() => Boolean, { nullable: true })
+  admin?: boolean;
+
   @Field(() => String)
   email: string;
 
@@ -10,7 +13,4 @@ export class SignInCoreSessionsArgs {
 
   @Field(() => Boolean, { nullable: true })
   remember?: boolean;
-
-  @Field(() => Boolean, { nullable: true })
-  admin?: boolean;
 }

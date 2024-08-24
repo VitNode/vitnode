@@ -1,22 +1,22 @@
 'use client';
 
-import { useEditor, EditorContent, Content } from '@tiptap/react';
-import React from 'react';
-import { useLocale } from 'next-intl';
-
-import { ToolBarEditor } from './toolbar/toolbar';
-import { FooterEditor } from './footer/footer';
-import { extensionsEditor } from './extensions/extensions';
-import { EmojiExtensionEditor } from './extensions/emoji/emoji';
-import {
-  useUploadFilesHandlerEditor,
-  UploadFilesHandlerEditorArgs,
-} from './extensions/files/hooks/use-upload-files-handler-editor.ts';
-import { EditorStateContext } from './hooks/use-editor-state';
-import { useGlobals } from '../hooks/use-globals';
-import { cn } from '../helpers/classnames';
-import { Skeleton } from '../components/ui/skeleton';
 import { TextLanguage } from '@/graphql/types';
+import { Content, EditorContent, useEditor } from '@tiptap/react';
+import { useLocale } from 'next-intl';
+import React from 'react';
+
+import { Skeleton } from '../components/ui/skeleton';
+import { cn } from '../helpers/classnames';
+import { useGlobals } from '../hooks/use-globals';
+import { EmojiExtensionEditor } from './extensions/emoji/emoji';
+import { extensionsEditor } from './extensions/extensions';
+import {
+  UploadFilesHandlerEditorArgs,
+  useUploadFilesHandlerEditor,
+} from './extensions/files/hooks/use-upload-files-handler-editor.ts';
+import { FooterEditor } from './footer/footer';
+import { EditorStateContext } from './hooks/use-editor-state';
+import { ToolBarEditor } from './toolbar/toolbar';
 
 interface Props extends Omit<UploadFilesHandlerEditorArgs, 'value'> {
   autoFocus?: boolean;
@@ -24,9 +24,9 @@ interface Props extends Omit<UploadFilesHandlerEditorArgs, 'value'> {
 }
 
 interface WithLanguage extends Props {
+  disableLanguages?: never;
   onChange: (value: TextLanguage[]) => void;
   value: TextLanguage[];
-  disableLanguages?: never;
 }
 
 interface WithoutLanguage extends Props {
@@ -134,7 +134,7 @@ export const Editor = ({
         uploadFiles,
         allowUploadFiles,
         value,
-        onChange: onChange as (value: TextLanguage[] | string) => void,
+        onChange: onChange as (value: string | TextLanguage[]) => void,
         selectedLanguage,
         setFiles,
       }}

@@ -1,10 +1,9 @@
-import { useTranslations } from 'next-intl';
-import { Plus } from 'lucide-react';
-import React from 'react';
-
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { Loader } from '@/components/ui/loader';
+import { Plus } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import React from 'react';
 
 const CreateEditFormAdministratorsStaffAdmin = React.lazy(async () =>
   import('../create-edit-form/create-edit-form').then(module => ({

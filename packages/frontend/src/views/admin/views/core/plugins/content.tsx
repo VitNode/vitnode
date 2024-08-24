@@ -1,14 +1,14 @@
 'use client';
 
-import React from 'react';
-import { useTranslations } from 'next-intl';
-import { ExternalLink } from 'lucide-react';
-
-import { ActionsItemPluginsAdmin } from './table/actions/actions';
 import { DateFormat } from '@/components/date-format';
 import { Badge } from '@/components/ui/badge';
 import { DataTable } from '@/components/ui/data-table';
 import { Admin__Core_Plugins__ShowQuery } from '@/graphql/queries/admin/plugins/admin__core_plugins__show.generated';
+import { ExternalLink } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import React from 'react';
+
+import { ActionsItemPluginsAdmin } from './table/actions/actions';
 
 export const ContentPluginsCoreAdmin = ({
   admin__core_plugins__show: { edges, pageInfo },
@@ -61,8 +61,8 @@ export const ContentPluginsCoreAdmin = ({
             if (row.author_url) {
               return (
                 <a
-                  href={row.author_url}
                   className="flex gap-1"
+                  href={row.author_url}
                   rel="noopener noreferrer"
                   target="_blank"
                 >
@@ -94,8 +94,8 @@ export const ContentPluginsCoreAdmin = ({
         sortBy: 'updated',
         sortDirection: 'desc',
       }}
-      searchPlaceholder={t('search_placeholder')}
       pageInfo={pageInfo}
+      searchPlaceholder={t('search_placeholder')}
     />
   );
 };

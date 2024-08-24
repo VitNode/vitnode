@@ -1,13 +1,12 @@
 'use server';
 
-import { revalidatePath } from 'next/cache';
-
-import { FetcherErrorType, fetcher } from '@/graphql/fetcher';
+import { fetcher, FetcherErrorType } from '@/graphql/fetcher';
 import {
   Core_Sessions__Sign_Up,
   Core_Sessions__Sign_UpMutation,
   Core_Sessions__Sign_UpMutationVariables,
 } from '@/graphql/mutations/sessions/core_Sessions__sign_up.generated';
+import { revalidatePath } from 'next/cache';
 
 interface Args extends Core_Sessions__Sign_UpMutationVariables {
   token: string;

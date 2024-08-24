@@ -1,10 +1,9 @@
-import React from 'react';
-import { Element } from 'html-react-parser';
-
-import { classNameCodeBlock, lowlight } from '../extensions/code/code';
 import { generateRandomString } from '@/helpers/generate-random-string';
+import { Element } from 'html-react-parser';
+import React from 'react';
 
 import { cn } from '../../helpers/classnames';
+import { classNameCodeBlock, lowlight } from '../extensions/code/code';
 
 interface Node {
   type: 'text';

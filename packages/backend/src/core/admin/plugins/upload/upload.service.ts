@@ -1,16 +1,12 @@
-import { join } from 'path';
-import * as fs from 'fs';
-
-import { Injectable } from '@nestjs/common';
-import * as tar from 'tar';
-import { eq } from 'drizzle-orm';
-
-import { ShowAdminPlugins } from '../show/dto/show.obj';
-import { UploadAdminPluginsArgs } from './dto/upload.args';
-import { ChangeFilesAdminPluginsService } from '../helpers/files/change/change.service';
-
 import { core_plugins } from '@/database/schema/plugins';
+import { generateRandomString } from '@/functions/generate-random-string';
 import { InternalDatabaseService } from '@/utils/database/internal_database.service';
+import { Injectable } from '@nestjs/common';
+import { eq } from 'drizzle-orm';
+import * as fs from 'fs';
+import { join } from 'path';
+import * as tar from 'tar';
+
 import {
   ABSOLUTE_PATHS_BACKEND,
   ConfigPlugin,
@@ -18,98 +14,23 @@ import {
   CustomError,
   FileUpload,
 } from '../../../..';
-import { generateRandomString } from '@/functions/generate-random-string';
+import { ChangeFilesAdminPluginsService } from '../helpers/files/change/change.service';
+import { ShowAdminPlugins } from '../show/dto/show.obj';
+import { UploadAdminPluginsArgs } from './dto/upload.args';
 
 @Injectable()
 export class UploadAdminPluginsService {
+  constructor(
+    private readonly databaseService: InternalDatabaseService,
+    private readonly changeFilesService: ChangeFilesAdminPluginsService,
+  ) {}
   protected path: string = join(process.cwd());
+
   protected tempPath: string = join(
     ABSOLUTE_PATHS_BACKEND.uploads.temp,
     'plugins',
     `upload-${generateRandomString(5)}${currentUnixDate()}`,
   );
-
-  constructor(
-    private readonly databaseService: InternalDatabaseService,
-    private readonly changeFilesService: ChangeFilesAdminPluginsService,
-  ) {}
-
-  protected async removeTempFolder(): Promise<void> {
-    // Delete temp folder
-    await fs.promises.rm(this.tempPath, { recursive: true });
-  }
-
-  protected async getPluginConfig({
-    tgz,
-  }: {
-    tgz: FileUpload;
-  }): Promise<ConfigPlugin> {
-    // Create folders
-    await fs.promises.mkdir(this.tempPath, { recursive: true });
-
-    // Upload to temp folder
-    await new Promise((resolve, reject) => {
-      tgz
-        .createReadStream()
-        .pipe(
-          tar.extract({
-            C: this.tempPath,
-            strip: 1,
-          }),
-        )
-        .on('error', err => {
-          throw new reject(err.message);
-        })
-        .on('finish', () => {
-          resolve('success');
-        });
-    });
-
-    const pathInfoJSON = join(this.tempPath, 'backend', 'config.json');
-    const pluginFile = await fs.promises.readFile(pathInfoJSON, 'utf8');
-    const config: ConfigPlugin = JSON.parse(pluginFile);
-
-    // Check if variables exists
-    if (
-      !config.name ||
-      !config.author ||
-      !config.code ||
-      !config.support_url ||
-      !config.version ||
-      !config.version_code
-    ) {
-      await this.removeTempFolder();
-      throw new CustomError({
-        code: 'PLUGIN_CONFIG_VARIABLES_NOT_FOUND',
-        message: 'Plugin config variables not found',
-      });
-    }
-
-    return config;
-  }
-
-  protected async createPluginBackend({
-    config,
-    upload_new_version,
-  }: {
-    config: ConfigPlugin;
-    upload_new_version?: boolean;
-  }): Promise<void> {
-    const newPathBackend = ABSOLUTE_PATHS_BACKEND.plugin({
-      code: config.code,
-    }).root;
-    if (fs.existsSync(newPathBackend)) {
-      await fs.promises.rm(newPathBackend, { recursive: true });
-    }
-    await fs.promises.mkdir(newPathBackend);
-
-    // Copy temp folder to plugin folder
-    const backendSource = join(this.tempPath, 'backend');
-    await fs.promises.cp(backendSource, newPathBackend, { recursive: true });
-    if (!upload_new_version) {
-      this.changeFilesService.changeFilesWhenCreate({ code: config.code });
-    }
-  }
 
   protected async copyFilesToPluginFolder({
     destination,
@@ -148,6 +69,29 @@ export class UploadAdminPluginsService {
         code: 'COPY_FILE_TO_PLUGIN_FOLDER_ERROR',
         message: `Source: ${source}, Destination: ${destination}`,
       });
+    }
+  }
+
+  protected async createPluginBackend({
+    config,
+    upload_new_version,
+  }: {
+    config: ConfigPlugin;
+    upload_new_version?: boolean;
+  }): Promise<void> {
+    const newPathBackend = ABSOLUTE_PATHS_BACKEND.plugin({
+      code: config.code,
+    }).root;
+    if (fs.existsSync(newPathBackend)) {
+      await fs.promises.rm(newPathBackend, { recursive: true });
+    }
+    await fs.promises.mkdir(newPathBackend);
+
+    // Copy temp folder to plugin folder
+    const backendSource = join(this.tempPath, 'backend');
+    await fs.promises.cp(backendSource, newPathBackend, { recursive: true });
+    if (!upload_new_version) {
+      this.changeFilesService.changeFilesWhenCreate({ code: config.code });
     }
   }
 
@@ -203,6 +147,60 @@ export class UploadAdminPluginsService {
 
       void this.copyFileToPluginFolder({ source, destination });
     });
+  }
+
+  protected async getPluginConfig({
+    tgz,
+  }: {
+    tgz: FileUpload;
+  }): Promise<ConfigPlugin> {
+    // Create folders
+    await fs.promises.mkdir(this.tempPath, { recursive: true });
+
+    // Upload to temp folder
+    await new Promise((resolve, reject) => {
+      tgz
+        .createReadStream()
+        .pipe(
+          tar.extract({
+            C: this.tempPath,
+            strip: 1,
+          }),
+        )
+        .on('error', err => {
+          throw new reject(err.message);
+        })
+        .on('finish', () => {
+          resolve('success');
+        });
+    });
+
+    const pathInfoJSON = join(this.tempPath, 'backend', 'config.json');
+    const pluginFile = await fs.promises.readFile(pathInfoJSON, 'utf8');
+    const config: ConfigPlugin = JSON.parse(pluginFile);
+
+    // Check if variables exists
+    if (
+      !config.name ||
+      !config.author ||
+      !config.code ||
+      !config.support_url ||
+      !config.version ||
+      !config.version_code
+    ) {
+      await this.removeTempFolder();
+      throw new CustomError({
+        code: 'PLUGIN_CONFIG_VARIABLES_NOT_FOUND',
+        message: 'Plugin config variables not found',
+      });
+    }
+
+    return config;
+  }
+
+  protected async removeTempFolder(): Promise<void> {
+    // Delete temp folder
+    await fs.promises.rm(this.tempPath, { recursive: true });
   }
 
   async upload({

@@ -5,16 +5,15 @@ import {
   DragStartEvent,
   UniqueIdentifier,
 } from '@dnd-kit/core';
-import React from 'react';
 import { arrayMove } from '@dnd-kit/sortable';
-
-import { useProjection } from './use-projection';
+import React from 'react';
 
 import {
+  flattenTree,
   FlatTree,
   WithChildren,
-  flattenTree,
 } from '../../helpers/flatten-tree';
+import { useProjection } from './use-projection';
 
 function removeChildrenOf<T extends object>({
   ids,
@@ -223,9 +222,9 @@ export function useDragAndDrop<T extends object>({ data }: Args<T>) {
     onCollapse,
   }: {
     data: {
-      id: number | string;
       children?: unknown[];
       depth?: number;
+      id: number | string;
     };
     indentationWidth?: number;
     onCollapse?: ({ isOpen }: { isOpen: boolean }) => void;

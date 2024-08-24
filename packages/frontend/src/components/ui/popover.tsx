@@ -23,11 +23,11 @@ const PopoverContent = ({
   <PopoverPrimitive.Portal>
     <PopoverPrimitive.Content
       align={align}
-      sideOffset={sideOffset}
       className={cn(classPopover, className)}
+      sideOffset={sideOffset}
       {...props}
     />
   </PopoverPrimitive.Portal>
 );
 
-export { Popover, PopoverTrigger, PopoverContent, PopoverAnchor };
+export { Popover, PopoverAnchor, PopoverContent, PopoverTrigger };

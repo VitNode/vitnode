@@ -1,24 +1,23 @@
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
+import { JwtService } from '@nestjs/jwt';
 import { and, eq } from 'drizzle-orm';
 
-import { SignInCoreSessionsArgs } from './dto/sign_in.args';
-import { DeviceSignInCoreSessionsService } from './device.service';
-import { verifyPassword } from '../password';
-
-import { GqlContext } from '../../../utils';
-import { InternalDatabaseService } from '@/utils/database/internal_database.service';
-import { AccessDeniedError, CustomError } from '../../../errors';
 import { core_admin_sessions } from '../../../database/schema/admins';
 import { core_sessions } from '../../../database/schema/sessions';
+import { AccessDeniedError, CustomError } from '../../../errors';
+import { GqlContext } from '../../../utils';
+import { verifyPassword } from '../password';
+import { DeviceSignInCoreSessionsService } from './device.service';
+import { SignInCoreSessionsArgs } from './dto/sign_in.args';
 
 interface CreateSessionArgs extends GqlContext {
+  admin?: boolean;
   email: string;
   name: string;
-  userId: number;
-  admin?: boolean;
   remember?: boolean;
+  userId: number;
 }
 
 @Injectable()

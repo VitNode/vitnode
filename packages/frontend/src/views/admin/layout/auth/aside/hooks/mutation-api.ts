@@ -1,14 +1,13 @@
 'use server';
 
-import { revalidatePath } from 'next/cache';
-
 import { fetcher, FetcherErrorType } from '@/graphql/fetcher';
-import { redirect } from '@/navigation';
 import {
   Admin_Sessions__Sign_Out,
   Admin_Sessions__Sign_OutMutation,
   Admin_Sessions__Sign_OutMutationVariables,
 } from '@/graphql/mutations/admin/sessions/admin_sessions__sign_out.generated';
+import { redirect } from '@/navigation';
+import { revalidatePath } from 'next/cache';
 
 export const mutationApi = async () => {
   try {
