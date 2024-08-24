@@ -2,7 +2,7 @@ export type WithChildren<T extends object> = Omit<
   T,
   '__typename' | 'children'
 > & {
-  children: WithChildren<T>[] | undefined;
+  children: WithChildren<T>[];
   id: number | string;
 };
 
@@ -21,13 +21,14 @@ export function flattenTree<T extends object>({
   parentId?: number | string | null;
 }): FlatTree<T>[] {
   return tree.reduce<FlatTree<T>[]>((previousValue, currentValue) => {
-    const children = currentValue.children
-      ? flattenTree({
-          tree: currentValue.children,
-          parentId: currentValue.id,
-          depth: depth + 1,
-        })
-      : [];
+    const children =
+      currentValue.children.length > 0
+        ? flattenTree({
+            tree: currentValue.children,
+            parentId: currentValue.id,
+            depth: depth + 1,
+          })
+        : [];
 
     return [
       ...previousValue,

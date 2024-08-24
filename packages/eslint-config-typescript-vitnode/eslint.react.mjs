@@ -29,7 +29,6 @@ export default [
       '/src/graphql',
       'plugins/**/*/graphql',
       'next.config.ts',
-      'codegen.ts',
     ],
   },
 ];

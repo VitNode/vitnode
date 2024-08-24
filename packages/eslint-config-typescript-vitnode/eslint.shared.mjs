@@ -10,7 +10,7 @@ export default [
   eslintPluginPrettierRecommended,
   { files: ['**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}'] },
   {
-    ignores: ['tsup.config.ts'],
+    ignores: ['tsup.config.ts', 'codegen.ts'],
   },
   {
     languageOptions: {
