@@ -1,6 +1,5 @@
-import { ArgsType, Field, InputType, registerEnumType } from '@nestjs/graphql';
-
 import { PaginationArgs, SortDirectionEnum } from '@/utils';
+import { ArgsType, Field, InputType, registerEnumType } from '@nestjs/graphql';
 
 enum ShowAdminPluginsSortingColumnEnum {
   created = 'created',
@@ -22,12 +21,12 @@ class ShowAdminPluginsSortByArgs {
 
 @ArgsType()
 export class ShowAdminPluginsArgs extends PaginationArgs {
-  @Field(() => ShowAdminPluginsSortByArgs, { nullable: true })
-  sortBy?: ShowAdminPluginsSortByArgs;
+  @Field(() => String, { nullable: true })
+  code?: string;
 
   @Field(() => String, { nullable: true })
   search?: string;
 
-  @Field(() => String, { nullable: true })
-  code?: string;
+  @Field(() => ShowAdminPluginsSortByArgs, { nullable: true })
+  sortBy?: ShowAdminPluginsSortByArgs;
 }

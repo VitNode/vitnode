@@ -1,13 +1,12 @@
+import { FilesService } from '@/core/files/helpers/upload/upload.service';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
 import { count, eq } from 'drizzle-orm';
 
-import { DeleteCoreEditorArgs } from './dto/delete.args';
-
-import { InternalDatabaseService } from '@/utils/database/internal_database.service';
+import { core_files, core_files_using } from '../../../database/schema/files';
 import { User } from '../../../decorators';
 import { AccessDeniedError } from '../../../errors';
-import { core_files, core_files_using } from '../../../database/schema/files';
-import { FilesService } from '@/core/files/helpers/upload/upload.service';
+import { DeleteCoreEditorArgs } from './dto/delete.args';
 
 @Injectable()
 export class DeleteCoreEditorService {

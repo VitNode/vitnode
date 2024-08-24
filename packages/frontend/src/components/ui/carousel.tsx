@@ -1,12 +1,11 @@
 'use client';
 
-import React from 'react';
 import useEmblaCarousel, { UseEmblaCarouselType } from 'embla-carousel-react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
-
-import { Button } from './button';
+import React from 'react';
 
 import { cn } from '../../helpers/classnames';
+import { Button } from './button';
 
 type CarouselApi = UseEmblaCarouselType[1];
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;
@@ -20,14 +19,14 @@ interface CarouselProps {
   setApi?: (api: CarouselApi) => void;
 }
 
-type CarouselContextProps = CarouselProps & {
+type CarouselContextProps = {
   api: ReturnType<typeof useEmblaCarousel>[1];
   canScrollNext: boolean;
   canScrollPrev: boolean;
   carouselRef: ReturnType<typeof useEmblaCarousel>[0];
   scrollNext: () => void;
   scrollPrev: () => void;
-};
+} & CarouselProps;
 
 const CarouselContext = React.createContext<CarouselContextProps | null>(null);
 
@@ -108,7 +107,7 @@ function Carousel({
     api.on('select', onSelect);
 
     return () => {
-      api?.off('select', onSelect);
+      api.off('select', onSelect);
     };
   }, [api, onSelect]);
 
@@ -118,8 +117,7 @@ function Carousel({
         carouselRef,
         api: api,
         opts,
-        orientation:
-          orientation || (opts?.axis === 'y' ? 'vertical' : 'horizontal'),
+        orientation,
         scrollPrev,
         scrollNext,
         canScrollPrev,
@@ -127,10 +125,10 @@ function Carousel({
       }}
     >
       <div
-        onKeyDownCapture={handleKeyDown}
-        className={cn('relative', className)}
-        role="region"
         aria-roledescription="carousel"
+        className={cn('relative', className)}
+        onKeyDownCapture={handleKeyDown}
+        role="region"
         {...props}
       >
         {children}
@@ -146,7 +144,7 @@ function CarouselContent({
   const { carouselRef, orientation } = useCarousel();
 
   return (
-    <div ref={carouselRef} className="overflow-hidden">
+    <div className="overflow-hidden" ref={carouselRef}>
       <div
         className={cn(
           'flex',
@@ -167,13 +165,13 @@ function CarouselItem({
 
   return (
     <div
-      role="group"
       aria-roledescription="slide"
       className={cn(
         'min-w-0 shrink-0 grow-0 basis-full',
         orientation === 'horizontal' ? 'pl-4' : 'pt-4',
         className,
       )}
+      role="group"
       {...props}
     />
   );
@@ -189,8 +187,6 @@ function CarouselPrevious({
 
   return (
     <Button
-      variant={variant}
-      size={size as 'default' | 'lg' | 'sm' | undefined}
       className={cn(
         'absolute h-8 w-8 rounded-full',
         orientation === 'horizontal'
@@ -200,6 +196,8 @@ function CarouselPrevious({
       )}
       disabled={!canScrollPrev}
       onClick={scrollPrev}
+      size={size as 'default' | 'lg' | 'sm' | undefined}
+      variant={variant}
       {...props}
     >
       <ArrowLeft className="size-4" />
@@ -218,8 +216,6 @@ function CarouselNext({
 
   return (
     <Button
-      variant={variant}
-      size={size as 'default' | 'lg' | 'sm' | undefined}
       className={cn(
         'absolute h-8 w-8 rounded-full',
         orientation === 'horizontal'
@@ -229,6 +225,8 @@ function CarouselNext({
       )}
       disabled={!canScrollNext}
       onClick={scrollNext}
+      size={size as 'default' | 'lg' | 'sm' | undefined}
+      variant={variant}
       {...props}
     >
       <ArrowRight className="size-4" />
@@ -241,6 +239,6 @@ export {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselPrevious,
   CarouselNext,
+  CarouselPrevious,
 };

@@ -1,10 +1,10 @@
-import { Cropper } from 'react-cropper';
+import { Button } from '@/components/ui/button';
+import { DialogFooter } from '@/components/ui/dialog';
+import 'cropperjs/dist/cropper.css';
 import { useTranslations } from 'next-intl';
+import { Cropper } from 'react-cropper';
 
 import { useCopperModalChangeAvatar } from './hooks/use-copper-modal-change-avatar';
-import { DialogFooter } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
-import 'cropperjs/dist/cropper.css';
 
 export const CropperModalChangeAvatar = ({ file }: { file: File }) => {
   const t = useTranslations('core');
@@ -13,21 +13,21 @@ export const CropperModalChangeAvatar = ({ file }: { file: File }) => {
   return (
     <>
       <Cropper
-        ref={cropperRef}
-        style={{ height: 200, width: '100%' }}
-        src={URL.createObjectURL(file)}
         aspectRatio={1}
-        viewMode={1}
+        autoCropArea={1}
+        background={false}
+        checkOrientation={false}
         minCropBoxHeight={100}
         minCropBoxWidth={100}
-        background={false}
-        autoCropArea={1}
-        checkOrientation={false}
+        ref={cropperRef}
         rotatable={false}
+        src={URL.createObjectURL(file)}
+        style={{ height: 200, width: '100%' }}
+        viewMode={1}
       />
 
       <DialogFooter>
-        <Button onClick={onSubmit} loading={isPending}>
+        <Button loading={isPending} onClick={onSubmit}>
           {t('settings.change_avatar.submit')}
         </Button>
       </DialogFooter>

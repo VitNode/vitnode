@@ -1,13 +1,12 @@
 'use server';
 
-import { revalidatePath } from 'next/cache';
-
 import { fetcher, FetcherErrorType } from '@/graphql/fetcher';
 import {
   Admin__Core_Languages__Update,
   Admin__Core_Languages__UpdateMutation,
   Admin__Core_Languages__UpdateMutationVariables,
 } from '@/graphql/mutations/admin/languages/admin__core_languages__update.generated';
+import { revalidatePath } from 'next/cache';
 
 export const mutationApi = async (formData: FormData) => {
   const files = formData.get('file') as File;

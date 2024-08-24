@@ -2,14 +2,14 @@ import { readFileSync, writeFileSync } from 'fs';
 import { join } from 'path';
 
 interface PackageJSON {
-  name: string;
-  private: boolean;
-  version: string;
   dependencies?: Record<string, string>;
   devDependencies?: Record<string, string>;
+  name: string;
   overrides?: Record<string, string>;
   packageManager?: string;
+  private: boolean;
   scripts?: Record<string, string>;
+  version: string;
   workspaces?: string[];
 }
 

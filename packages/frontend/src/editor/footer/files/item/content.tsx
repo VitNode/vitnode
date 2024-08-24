@@ -1,7 +1,7 @@
+import { formatBytes } from '@/helpers/format-bytes';
 import { useTranslations } from 'next-intl';
 
 import { ItemListFilesFooterEditorProps } from './item';
-import { formatBytes } from '@/helpers/format-bytes';
 
 export const ContentItemListFilesFooterEditor = ({
   data,
@@ -26,7 +26,7 @@ export const ContentItemListFilesFooterEditor = ({
       <span>{formatBytes(file?.size ?? data?.file_size ?? 0)}</span>
       <span>&middot;</span>
       <span>{file?.type ?? data?.mimetype ?? 'Error!'}</span>
-      {data?.width && data?.height && (
+      {data?.width && data.height && (
         <>
           <span>&middot;</span>
           <span>

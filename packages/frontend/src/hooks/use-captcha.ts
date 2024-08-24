@@ -1,10 +1,10 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-import React from 'react';
+import { CaptchaTypeEnum } from '@/graphql/types';
 import { useLocale } from 'next-intl';
 import { useTheme } from 'next-themes';
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+import React from 'react';
 
 import { useGlobals } from './use-globals';
-import { CaptchaTypeEnum } from '@/graphql/types';
 
 export const useCaptcha = () => {
   const locale = useLocale();
@@ -57,7 +57,7 @@ export const useCaptcha = () => {
   };
 
   React.useEffect(() => {
-    if (!config.type || config.type === CaptchaTypeEnum.none) {
+    if (config.type === CaptchaTypeEnum.none) {
       setIsReady(true);
 
       return;
@@ -77,7 +77,7 @@ export const useCaptcha = () => {
       script.src = `${googleCaptchaDomain}&render=explicit`;
     } else if (config.type === CaptchaTypeEnum.recaptcha_v3) {
       script.src = `${googleCaptchaDomain}&render=${config.site_key}`;
-    } else if (config.type === CaptchaTypeEnum.cloudflare_turnstile) {
+    } else {
       window[functionCF] = handleLoaded;
 
       script.src = `https://challenges.cloudflare.com/turnstile/v0/api.js?onload=${functionCF}`;
@@ -102,9 +102,12 @@ export const useCaptcha = () => {
         window.grecaptcha.ready(async () => {
           try {
             // @ts-expect-error
-            const token = await window.grecaptcha.execute(config.site_key, {
-              action: 'submit',
-            });
+            const token: string = await window.grecaptcha.execute(
+              config.site_key,
+              {
+                action: 'submit',
+              },
+            );
 
             resolve(token);
           } catch (error) {

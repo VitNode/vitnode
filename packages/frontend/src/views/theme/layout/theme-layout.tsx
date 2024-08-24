@@ -1,7 +1,7 @@
 import { useLocale } from 'next-intl';
 
-import { Header } from './header/header';
 import { Footer } from './footer';
+import { Header } from './header/header';
 import { QuickMenu } from './quick-menu/quick-menu';
 
 export const ThemeLayout = ({ children }: { children: React.ReactNode }) => {

@@ -1,22 +1,20 @@
-import * as fs from 'fs';
-
+import { FilesService } from '@/core/files/helpers/upload/upload.service';
+import { InternalServerError, NotFoundError } from '@/errors';
+import {
+  configPath,
+  ConfigType,
+  EmailProvider,
+  getConfigFile,
+} from '@/providers/config';
 import { Injectable } from '@nestjs/common';
-
-import { ShowAdminEmailSettingsServiceObj } from '../show/dto/show.obj';
-import { EditAdminEmailSettingsServiceArgs } from './dto/edit.args';
+import * as fs from 'fs';
 
 import {
   EmailCredentialsFile,
   HelpersAdminEmailSettingsService,
 } from '../../helpers.service';
-import {
-  ConfigType,
-  EmailProvider,
-  configPath,
-  getConfigFile,
-} from '@/providers/config';
-import { InternalServerError, NotFoundError } from '@/errors';
-import { FilesService } from '@/core/files/helpers/upload/upload.service';
+import { ShowAdminEmailSettingsServiceObj } from '../show/dto/show.obj';
+import { EditAdminEmailSettingsServiceArgs } from './dto/edit.args';
 
 @Injectable()
 export class EditAdminEmailSettingsService extends HelpersAdminEmailSettingsService {
@@ -105,7 +103,7 @@ export class EditAdminEmailSettingsService extends HelpersAdminEmailSettingsServ
 
     if (provider === EmailProvider.resend) {
       const updateData: Partial<EmailCredentialsFile> = {
-        resend_key: resend_key || emailCredentials.resend_key,
+        resend_key: resend_key ?? emailCredentials.resend_key,
       };
 
       fs.writeFileSync(this.path, JSON.stringify(updateData, null, 2));

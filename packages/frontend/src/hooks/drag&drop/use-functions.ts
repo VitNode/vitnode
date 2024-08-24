@@ -5,16 +5,15 @@ import {
   DragStartEvent,
   UniqueIdentifier,
 } from '@dnd-kit/core';
-import React from 'react';
 import { arrayMove } from '@dnd-kit/sortable';
-
-import { useProjection } from './use-projection';
+import React from 'react';
 
 import {
+  flattenTree,
   FlatTree,
   WithChildren,
-  flattenTree,
 } from '../../helpers/flatten-tree';
+import { useProjection } from './use-projection';
 
 function removeChildrenOf<T extends object>({
   ids,
@@ -27,7 +26,7 @@ function removeChildrenOf<T extends object>({
 
   return tree.filter(item => {
     if (item.parentId && excludeParentIds.includes(item.parentId)) {
-      if ((item.children?.length ?? 0) > 0) {
+      if (item.children.length > 0) {
         excludeParentIds.push(item.id);
       }
 
@@ -129,7 +128,9 @@ export function useDragAndDrop<T extends object>({ data }: Args<T>) {
     setProjected(null);
   };
 
-  const onDragOver = ({ over }: DragOverEvent) => setOverId(over?.id ?? null);
+  const onDragOver = ({ over }: DragOverEvent) => {
+    setOverId(over?.id ?? null);
+  };
 
   const onDragStart = ({ active }: DragStartEvent) => {
     setActiveId(active.id);
@@ -204,7 +205,7 @@ export function useDragAndDrop<T extends object>({ data }: Args<T>) {
     if (!findActive) return;
 
     // Do nothing if drag and drop on the same item on the same level
-    if (findActive?.parentId === parentId && active.id === over.id) {
+    if (findActive.parentId === parentId && active.id === over.id) {
       return;
     }
 
@@ -221,9 +222,9 @@ export function useDragAndDrop<T extends object>({ data }: Args<T>) {
     onCollapse,
   }: {
     data: {
-      id: number | string;
       children?: unknown[];
       depth?: number;
+      id: number | string;
     };
     indentationWidth?: number;
     onCollapse?: ({ isOpen }: { isOpen: boolean }) => void;
@@ -248,8 +249,7 @@ export function useDragAndDrop<T extends object>({ data }: Args<T>) {
       isDropHere: projected?.parentId === data.id,
       active: activeId === data.id,
       depth:
-        (activeId === data.id && projected ? projected?.depth : data.depth) ??
-        0,
+        (activeId === data.id && projected ? projected.depth : data.depth) ?? 0,
       indentationWidth,
       id: data.id,
       childrenLength: data.children ? data.children.length : 0,

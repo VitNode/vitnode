@@ -1,22 +1,22 @@
+import { UploadCoreFilesObj } from '@/core/files/helpers/upload/dto/upload.obj';
+import { FilesService } from '@/core/files/helpers/upload/upload.service';
+import { generateRandomString } from '@/functions/generate-random-string';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
 import { eq, sum } from 'drizzle-orm';
 
-import { UploadCoreEditorArgs } from './dto/upload.args';
-
-import {
-  HelpersUploadCoreFilesService,
-  acceptMimeTypeImage,
-  acceptMimeTypeVideo,
-} from '../../files/helpers/upload/helpers';
-import { UploadCoreFilesArgs } from '../../files/helpers/upload/dto/upload.args';
-import { ShowCoreFiles } from '../../files/show/dto/show.obj';
-import { InternalDatabaseService } from '@/utils/database/internal_database.service';
+import { core_files } from '../../../database/schema/files';
 import { User } from '../../../decorators';
 import { AccessDeniedError } from '../../../errors';
-import { core_files } from '../../../database/schema/files';
-import { getConfigFile } from '../../../providers/config';
-import { generateRandomString } from '@/functions/generate-random-string';
-import { FilesService } from '@/core/files/helpers/upload/upload.service';
+import { AllowTypeFilesEnum, getConfigFile } from '../../../providers/config';
+import { UploadCoreFilesArgs } from '../../files/helpers/upload/dto/upload.args';
+import {
+  acceptMimeTypeImage,
+  acceptMimeTypeVideo,
+  HelpersUploadCoreFilesService,
+} from '../../files/helpers/upload/helpers';
+import { ShowCoreFiles } from '../../files/show/dto/show.obj';
+import { UploadCoreEditorArgs } from './dto/upload.args';
 
 interface GetFilesAfterUploadArgs extends UploadCoreEditorArgs {
   maxUploadSizeKb: number;
@@ -24,17 +24,17 @@ interface GetFilesAfterUploadArgs extends UploadCoreEditorArgs {
 
 @Injectable()
 export class UploadCoreEditorService extends HelpersUploadCoreFilesService {
-  protected acceptMimeTypeToFrontend = [
-    ...acceptMimeTypeImage,
-    ...acceptMimeTypeVideo,
-  ];
-
   constructor(
     private readonly databaseService: InternalDatabaseService,
     private readonly files: FilesService,
   ) {
     super();
   }
+
+  protected acceptMimeTypeToFrontend = [
+    ...acceptMimeTypeImage,
+    ...acceptMimeTypeVideo,
+  ];
 
   private getAcceptMineType(): string[] {
     const {
@@ -43,11 +43,11 @@ export class UploadCoreEditorService extends HelpersUploadCoreFilesService {
       },
     } = getConfigFile();
 
-    if (allow_type === 'images_videos') {
+    if (allow_type === AllowTypeFilesEnum.images_videos) {
       return [...acceptMimeTypeImage, ...acceptMimeTypeVideo];
     }
 
-    if (allow_type === 'images') {
+    if (allow_type === AllowTypeFilesEnum.images) {
       return acceptMimeTypeImage;
     }
 
@@ -59,7 +59,7 @@ export class UploadCoreEditorService extends HelpersUploadCoreFilesService {
     folder,
     maxUploadSizeKb,
     plugin,
-  }: GetFilesAfterUploadArgs) {
+  }: GetFilesAfterUploadArgs): Promise<UploadCoreFilesObj> {
     const acceptMimeType = this.getAcceptMineType();
     const allowUploadToFrontend = await this.checkAcceptMimeType({
       file,
@@ -93,7 +93,7 @@ export class UploadCoreEditorService extends HelpersUploadCoreFilesService {
 
   async upload(
     { file, folder, plugin }: UploadCoreEditorArgs,
-    user: User | undefined,
+    user: undefined | User,
   ): Promise<ShowCoreFiles> {
     // Check permission for upload files
     const findGroup = await this.databaseService.db.query.core_groups.findFirst(
@@ -140,17 +140,19 @@ export class UploadCoreEditorService extends HelpersUploadCoreFilesService {
       maxUploadSizeKb,
     });
 
+    const security_key = this.acceptMimeTypeToFrontend.includes(
+      uploadFile.mimetype,
+    )
+      ? null
+      : generateRandomString(32);
+
     // Save to database
     const data = await this.databaseService.db
       .insert(core_files)
       .values({
         user_id: user?.id,
         ...uploadFile,
-        security_key: this.acceptMimeTypeToFrontend.includes(
-          uploadFile.mimetype,
-        )
-          ? null
-          : generateRandomString(32),
+        security_key,
       })
       .returning();
 

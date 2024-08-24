@@ -1,11 +1,10 @@
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
 
-import { DeleteCoreMembersArgs } from './dto/delete.args';
-
 import { core_users } from '../../../database/schema/users';
-import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { AccessDeniedError, NotFoundError } from '../../../errors';
+import { DeleteCoreMembersArgs } from './dto/delete.args';
 
 @Injectable()
 export class DeleteCoreMembersService {

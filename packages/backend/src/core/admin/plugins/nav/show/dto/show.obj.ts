@@ -5,11 +5,11 @@ export class ShowAdminNavPlugins {
   @Field(() => String)
   code: string;
 
-  @Field(() => String, { nullable: true })
-  icon?: string | null;
-
   @Field(() => String)
   href: string;
+
+  @Field(() => String, { nullable: true })
+  icon?: null | string;
 
   @Field(() => [String])
   keywords: string[];
@@ -18,5 +18,5 @@ export class ShowAdminNavPlugins {
 @ObjectType()
 export class ShowAdminNavPluginsObj extends ShowAdminNavPlugins {
   @Field(() => [ShowAdminNavPlugins], { nullable: true })
-  children?: ShowAdminNavPlugins[] | null;
+  children?: null | ShowAdminNavPlugins[];
 }

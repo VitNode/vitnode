@@ -1,12 +1,11 @@
 'use client';
 
+import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import { Loader } from '@/components/ui/loader';
 import { Plus } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import React from 'react';
-
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
-import { Loader } from '@/components/ui/loader';
 
 const Content = React.lazy(async () =>
   import('../create-edit/create-edit').then(module => ({

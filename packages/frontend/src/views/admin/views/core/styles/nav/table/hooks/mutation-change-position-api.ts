@@ -1,13 +1,12 @@
 'use server';
 
-import { revalidatePath } from 'next/cache';
-
 import { fetcher, FetcherErrorType } from '@/graphql/fetcher';
 import {
   Admin__Core_Nav_Styles__Change_Position,
   Admin__Core_Nav_Styles__Change_PositionMutation,
   Admin__Core_Nav_Styles__Change_PositionMutationVariables,
 } from '@/graphql/mutations/admin/styles/nav/core_nav_styles__change_position.generated';
+import { revalidatePath } from 'next/cache';
 
 export const mutationChangePositionApi = async (
   variables: Admin__Core_Nav_Styles__Change_PositionMutationVariables,

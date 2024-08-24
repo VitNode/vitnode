@@ -14,28 +14,28 @@ export const AvatarUser = ({
   sizeInRem,
   user: { avatar, avatar_color, name },
 }: {
+  className?: string;
   sizeInRem: number;
   user: {
+    avatar?: Pick<AvatarUserType, 'dir_folder' | 'file_name'>;
     avatar_color: string;
     name: string;
     name_seo: string;
-    avatar?: Pick<AvatarUserType, 'dir_folder' | 'file_name'>;
   };
-  className?: string;
 }) => {
   return (
     <Img
+      alt={name}
       className={cn('flex-shrink-0 rounded-full', className)}
+      height={sizeInRem * 16}
       imageClassName="object-cover"
+      priority={!avatar}
       src={
         avatar
           ? `${CONFIG.graphql_public_url}/${avatar.dir_folder}/${avatar.file_name}`
           : generateLetterPhoto(name.slice(0, 1), avatar_color)
       }
-      alt={name}
       width={sizeInRem * 16}
-      height={sizeInRem * 16}
-      priority={!avatar}
     />
   );
 };

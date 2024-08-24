@@ -1,18 +1,18 @@
 'use client';
 
-import { ChevronDown } from 'lucide-react';
-import React from 'react';
-
-import { useTextLang } from '@/hooks/use-text-lang';
-import { Link, usePathname } from '@/navigation';
 import { Button } from '@/components/ui/button';
-import { ShowCoreNav } from '@/graphql/types';
-import { useNav } from './hooks/use-nav';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
+import { ShowCoreNav } from '@/graphql/types';
+import { useTextLang } from '@/hooks/use-text-lang';
+import { Link, usePathname } from '@/navigation';
+import { ChevronDown } from 'lucide-react';
+import React from 'react';
+
+import { useNav } from './hooks/use-nav';
 
 interface Props extends Omit<ShowCoreNav, 'icon'> {
   icons: { icon: React.ReactNode; id: number }[];
@@ -41,15 +41,15 @@ export const ItemNav = ({
   if (children.length === 0) {
     return (
       <Button
-        className="px-6"
-        variant={active ? 'secondary' : 'ghost'}
-        size="sm"
         asChild
+        className="px-6"
+        size="sm"
+        variant={active ? 'secondary' : 'ghost'}
       >
         <Link
           href={href}
-          target={external ? '_blank' : undefined}
           rel={external ? 'noopener noreferrer' : undefined}
+          target={external ? '_blank' : undefined}
         >
           {content}
         </Link>
@@ -59,16 +59,16 @@ export const ItemNav = ({
 
   return (
     <Popover
-      open={openChild === id}
       onOpenChange={val => {
         setOpenChild(val ? id : null);
       }}
+      open={openChild === id}
     >
       <PopoverTrigger asChild>
         <Button
           className="px-6"
-          variant={active ? 'default' : 'ghost'}
           size="sm"
+          variant={active ? 'default' : 'ghost'}
         >
           {content}
         </Button>
@@ -80,17 +80,19 @@ export const ItemNav = ({
 
           return (
             <Button
-              key={item.id}
-              className="group h-auto w-full justify-start gap-4 px-4 py-2"
-              variant="ghost"
-              size="sm"
-              onClick={() => setOpenChild(null)}
               asChild
+              className="group h-auto w-full justify-start gap-4 px-4 py-2"
+              key={item.id}
+              onClick={() => {
+                setOpenChild(null);
+              }}
+              size="sm"
+              variant="ghost"
             >
               <Link
                 href={item.href}
-                target={item.external ? '_blank' : undefined}
                 rel={item.external ? 'noopener noreferrer' : undefined}
+                target={item.external ? '_blank' : undefined}
               >
                 {icon && (
                   <div className="group-hover:bg-primary-foreground group-hover:text-primary flex size-10 shrink-0 items-center justify-center rounded-sm border text-xl transition-colors [&>svg]:size-5">
@@ -100,7 +102,7 @@ export const ItemNav = ({
 
                 <div>
                   {convertText(item.name)}
-                  {item.description && (
+                  {item.description.length > 0 && (
                     <p className="text-muted-foreground line-clamp-2 truncate whitespace-normal text-sm leading-snug">
                       {convertText(item.description)}
                     </p>

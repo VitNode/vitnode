@@ -1,10 +1,10 @@
 import { Global, Module } from '@nestjs/common';
 
-import { FilesService } from './helpers/upload/upload.service';
-import { ShowCoreFilesService } from './show/show.service';
-import { ShowCoreFilesResolver } from './show/show.resolver';
-import { CoreFilesCron } from './files.cron';
 import { DownloadSecureFilesController } from './download/download.controller';
+import { CoreFilesCron } from './files.cron';
+import { FilesService } from './helpers/upload/upload.service';
+import { ShowCoreFilesResolver } from './show/show.resolver';
+import { ShowCoreFilesService } from './show/show.service';
 
 @Module({
   providers: [ShowCoreFilesService, ShowCoreFilesResolver, CoreFilesCron],

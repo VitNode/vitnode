@@ -1,11 +1,10 @@
+import { core_languages } from '@/database/schema/languages';
+import { setRebuildRequired } from '@/functions/rebuild-required';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
+import { Injectable } from '@nestjs/common';
 import * as fs from 'fs';
 import { join } from 'path';
 
-import { Injectable } from '@nestjs/common';
-
-import { CreateCoreAdminLanguagesArgs } from './dto/create.args';
-
-import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import {
   ABSOLUTE_PATHS_BACKEND,
   configPath,
@@ -14,9 +13,8 @@ import {
   getConfigFile,
   NotFoundError,
 } from '../../../..';
-import { core_languages } from '@/database/schema/languages';
 import { ShowCoreLanguages } from '../../../languages/show/dto/show.obj';
-import { setRebuildRequired } from '@/functions/rebuild-required';
+import { CreateCoreAdminLanguagesArgs } from './dto/create.args';
 
 @Injectable()
 export class CreateAdminCoreLanguageService {
@@ -30,7 +28,7 @@ export class CreateAdminCoreLanguageService {
       },
     });
 
-    [...plugins, { code: 'core' }, { code: 'admin' }].forEach(async plugin => {
+    [...plugins, { code: 'core' }, { code: 'admin' }].forEach(plugin => {
       const path = join(
         ABSOLUTE_PATHS_BACKEND.plugin({ code: plugin.code }).frontend.language,
         `${pluginCode}.json`,
@@ -119,7 +117,7 @@ export class CreateAdminCoreLanguageService {
       })
       .returning();
 
-    await setRebuildRequired({ set: 'langs' });
+    setRebuildRequired({ set: 'langs' });
 
     return newLanguage[0];
   }

@@ -1,13 +1,6 @@
-import React from 'react';
-import { getTranslations } from 'next-intl/server';
-import { Metadata } from 'next';
-
-import { TableNavAdmin } from './table/table';
-import { ActionsNavAdmin } from './actions/actions';
-import { flattenTree } from '@/helpers/flatten-tree';
 import { Icon } from '@/components/icon/icon';
-import { HeaderContent } from '@/components/ui/header-content';
 import { Card } from '@/components/ui/card';
+import { HeaderContent } from '@/components/ui/header-content';
 import { fetcher } from '@/graphql/fetcher';
 import {
   Admin__Core_Nav__Show,
@@ -15,6 +8,13 @@ import {
   Admin__Core_Nav__ShowQueryVariables,
 } from '@/graphql/queries/admin/styles/nav/admin__core_nav__show.generated';
 import { ShowCoreNav } from '@/graphql/types';
+import { flattenTree } from '@/helpers/flatten-tree';
+import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
+import React from 'react';
+
+import { ActionsNavAdmin } from './actions/actions';
+import { TableNavAdmin } from './table/table';
 
 const getData = async () => {
   const data = await fetcher<

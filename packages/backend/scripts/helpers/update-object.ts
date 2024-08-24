@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function updateObject<T extends Record<string, any>>(
   config: T,
   defaultData: T,
@@ -7,7 +8,7 @@ export function updateObject<T extends Record<string, any>>(
     if (Array.isArray(defaultData[key])) {
       // If the key corresponds to an array and it's not empty, don't edit
       if (!config[key] || config[key].length === 0) {
-        updatedConfig[key] = [] as any;
+        updatedConfig[key] = [] as never;
       }
     } else if (
       typeof defaultData[key] === 'object' &&
@@ -32,11 +33,11 @@ export function updateObject<T extends Record<string, any>>(
   return updatedConfig;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unnecessary-type-parameters
 export function objectToArray<T extends Record<string, any>>(
   obj: T,
 ): Record<string, unknown> {
-  if (typeof obj !== 'object' || obj === null) {
+  if (typeof obj !== 'object') {
     return obj;
   }
 

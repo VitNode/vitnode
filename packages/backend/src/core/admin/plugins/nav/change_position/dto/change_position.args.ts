@@ -8,9 +8,9 @@ export class ChangePositionAdminNavPluginsArgs {
   @Field(() => Int)
   index_to_move: number;
 
-  @Field(() => String)
-  plugin_code: string;
-
   @Field(() => String, { nullable: true })
   parent_code?: string;
+
+  @Field(() => String)
+  plugin_code: string;
 }

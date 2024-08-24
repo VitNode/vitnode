@@ -1,12 +1,11 @@
-import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
+import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
-import { UploadCoreEditorService } from './upload.service';
-import { UploadCoreEditorArgs } from './dto/upload.args';
-
-import { ShowCoreFiles } from '../../files/show/dto/show.obj';
-import { AuthGuards, OptionalAuth } from '../../../utils';
 import { CurrentUser, User } from '../../../decorators';
+import { AuthGuards, OptionalAuth } from '../../../utils';
+import { ShowCoreFiles } from '../../files/show/dto/show.obj';
+import { UploadCoreEditorArgs } from './dto/upload.args';
+import { UploadCoreEditorService } from './upload.service';
 
 @Resolver()
 export class UploadCoreEditorResolver {

@@ -1,10 +1,11 @@
-import { DefaultParent } from './common/children';
-import { AutoFormInputComponentProps } from '../type';
-import { AutoFormWrapper } from './common/wrapper';
-import { AutoFormLabel } from './common/label';
-import { FormControl, FormMessage } from '@/components/ui/form';
-import { AutoFormTooltip } from './common/tooltip';
 import { DatePicker } from '@/components/ui/date-picker';
+import { FormControl, FormMessage } from '@/components/ui/form';
+
+import { AutoFormInputComponentProps } from '../type';
+import { DefaultParent } from './common/children';
+import { AutoFormLabel } from './common/label';
+import { AutoFormTooltip } from './common/tooltip';
+import { AutoFormWrapper } from './common/wrapper';
 
 export const AutoFormDate = ({
   autoFormProps: { isRequired, fieldConfigItem, field, theme, isDisabled },
@@ -15,11 +16,11 @@ export const AutoFormDate = ({
 
   return (
     <AutoFormWrapper theme={theme}>
-      {fieldConfigItem?.label && (
+      {fieldConfigItem.label && (
         <AutoFormLabel
           description={fieldConfigItem.description}
-          label={fieldConfigItem.label}
           isRequired={isRequired}
+          label={fieldConfigItem.label}
           theme={theme}
         />
       )}
@@ -29,8 +30,8 @@ export const AutoFormDate = ({
             {...props}
             {...field}
             className="flex"
-            value={field.value}
             disabled={isDisabled || props.disabled}
+            value={field.value}
           />
         </FormControl>
       </ParentWrapper>

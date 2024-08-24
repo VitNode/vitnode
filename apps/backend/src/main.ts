@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
-import { NestFactory } from '@nestjs/core';
 import { INestApplication } from '@nestjs/common';
+import { NestFactory } from '@nestjs/core';
 import { nestjsMainApp } from 'vitnode-backend';
 
 import { AppModule } from './app.module';
@@ -18,10 +18,10 @@ async function bootstrap() {
     },
   });
 
-  await app.listen(process.env.PORT ?? '8080', '', () => {
-    console.log(
-      `Application is running on: http://localhost:${process.env.PORT ?? 8080}/graphql`,
-    );
+  const port = Number(process.env.PORT) || 8080;
+  await app.listen(port, '', () => {
+    console.log(`Application is running on: http://localhost:${port}/graphql`);
   });
 }
-bootstrap();
+
+void bootstrap();

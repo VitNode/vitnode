@@ -1,10 +1,9 @@
-import React from 'react';
-import { Element } from 'html-react-parser';
-
-import { classNameCodeBlock, lowlight } from '../extensions/code/code';
 import { generateRandomString } from '@/helpers/generate-random-string';
+import { Element } from 'html-react-parser';
+import React from 'react';
 
 import { cn } from '../../helpers/classnames';
+import { classNameCodeBlock, lowlight } from '../extensions/code/code';
 
 interface Node {
   type: 'text';
@@ -12,7 +11,7 @@ interface Node {
 }
 
 interface WithTagName {
-  children: Node[];
+  children: Node[] | undefined;
   properties: {
     className?: string[];
   };
@@ -35,7 +34,7 @@ const renderElement = (node: Node | WithTagName): JSX.Element => {
   return React.createElement(
     node.tagName,
     {
-      className: node.properties?.className?.join(' '),
+      className: node.properties.className?.join(' '),
       key: `${node.tagName}-${new Date().getTime()}-${generateRandomString(10)}`,
     },
     ...children,
@@ -49,7 +48,7 @@ export const changeCodeBlock = ({ children }: Element) => {
   }
 
   const language =
-    (element?.attribs?.class ?? '')
+    (element.attribs.class || '')
       .replace('language-', '')
       .replace('react', '') || 'plaintext';
   const text =
@@ -57,7 +56,7 @@ export const changeCodeBlock = ({ children }: Element) => {
       element.children[0] as {
         data: string;
       }
-    )?.data ?? '';
+    ).data || '';
 
   const highlighted = lowlight.highlight(language, text);
   // TODO: Fix types
@@ -73,7 +72,7 @@ export const changeCodeBlock = ({ children }: Element) => {
     React.createElement(
       'code',
       {
-        className: element?.attribs?.class,
+        className: element.attribs.class,
       },
       content,
     ),

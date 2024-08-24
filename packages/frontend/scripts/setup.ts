@@ -1,13 +1,12 @@
 #!/usr/bin/env node
 /* eslint-disable no-console */
 
-import path, { join } from 'path';
 import * as fs from 'fs';
-import { getAllFiles } from './helpers/get-all-files';
+import { join } from 'path';
 
 interface Folders {
-  path: string;
   isInsideAppDir?: boolean;
+  path: string;
 }
 
 const init = () => {
@@ -35,9 +34,9 @@ const init = () => {
     },
   ];
   const pathsToFile: {
-    path: string;
     file: string;
     isInsideAppDir?: boolean;
+    path: string;
   }[] = [
     {
       path: 'app',

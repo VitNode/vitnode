@@ -1,10 +1,9 @@
-import { Injectable } from '@nestjs/common';
-import { eq } from 'drizzle-orm';
-import { ConfigService } from '@nestjs/config';
-
-import { InternalDatabaseService } from '@/utils/database/internal_database.service';
-import { GqlContext } from '@/utils';
 import { core_admin_sessions } from '@/database/schema/admins';
+import { GqlContext } from '@/utils';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
+import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { eq } from 'drizzle-orm';
 
 @Injectable()
 export class SignOutAdminSessionsService {
@@ -14,7 +13,7 @@ export class SignOutAdminSessionsService {
   ) {}
 
   async signOut({ req, res }: GqlContext) {
-    const login_token =
+    const login_token: string =
       req.cookies[
         this.configService.getOrThrow('cookies.login_token.admin.name')
       ];

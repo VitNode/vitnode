@@ -6,15 +6,14 @@ import {
   ChevronDownIcon,
 } from 'lucide-react';
 
-import { ButtonToolbarEditor } from '../button';
-import { ToggleToolbarEditor } from '../toggle';
-
-import { useEditorState } from '../../hooks/use-editor-state';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '../../../components/ui/popover';
+import { useEditorState } from '../../hooks/use-editor-state';
+import { ButtonToolbarEditor } from '../button';
+import { ToggleToolbarEditor } from '../toggle';
 
 export const TextAlignToolbarEditor = () => {
   const { editor } = useEditorState();
@@ -35,8 +34,8 @@ export const TextAlignToolbarEditor = () => {
     <Popover>
       <PopoverTrigger asChild>
         <ButtonToolbarEditor
-          name="align"
           className="h-9 w-14 justify-center gap-1 p-0 [&>svg:last-child]:size-4 [&>svg:not(:last-child)]:size-5"
+          name="align"
         >
           {getCurrentIcon()}
           <ChevronDownIcon className="opacity-50" />
@@ -45,41 +44,41 @@ export const TextAlignToolbarEditor = () => {
 
       <PopoverContent className="flex w-fit max-w-80 flex-wrap gap-1 p-2">
         <ToggleToolbarEditor
-          pressed={editor.isActive({ textAlign: 'left' })}
           onPressedChange={() => {
             editor.commands.setTextAlign('left');
             editor.commands.focus();
           }}
+          pressed={editor.isActive({ textAlign: 'left' })}
         >
           <AlignLeft />
         </ToggleToolbarEditor>
 
         <ToggleToolbarEditor
-          pressed={editor.isActive({ textAlign: 'center' })}
           onPressedChange={() => {
             editor.commands.setTextAlign('center');
             editor.commands.focus();
           }}
+          pressed={editor.isActive({ textAlign: 'center' })}
         >
           <AlignCenter />
         </ToggleToolbarEditor>
 
         <ToggleToolbarEditor
-          pressed={editor.isActive({ textAlign: 'right' })}
           onPressedChange={() => {
             editor.commands.setTextAlign('right');
             editor.commands.focus();
           }}
+          pressed={editor.isActive({ textAlign: 'right' })}
         >
           <AlignRight />
         </ToggleToolbarEditor>
 
         <ToggleToolbarEditor
-          pressed={editor.isActive({ textAlign: 'justify' })}
           onPressedChange={() => {
             editor.commands.setTextAlign('justify');
             editor.commands.focus();
           }}
+          pressed={editor.isActive({ textAlign: 'justify' })}
         >
           <AlignJustify />
         </ToggleToolbarEditor>

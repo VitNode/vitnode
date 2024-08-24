@@ -1,11 +1,10 @@
-import { Args, Query, Resolver } from '@nestjs/graphql';
+import { AdminAuthGuards } from '@/utils';
 import { UseGuards } from '@nestjs/common';
+import { Args, Query, Resolver } from '@nestjs/graphql';
 
-import { SearchAdminSessionsService } from './search.service';
 import { SearchAdminSessionsArgs } from './dto/search.args';
 import { SearchAdminSessionsObj } from './dto/search.obj';
-
-import { AdminAuthGuards } from '@/utils';
+import { SearchAdminSessionsService } from './search.service';
 
 @Resolver()
 export class SearchAdminSessionsResolver {

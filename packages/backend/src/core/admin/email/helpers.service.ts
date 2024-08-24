@@ -1,9 +1,8 @@
-import { join } from 'path';
+import { ABSOLUTE_PATHS_BACKEND, getConfigFile } from '@/index';
 import * as fs from 'fs';
+import { join } from 'path';
 
 import { ShowAdminEmailSettingsServiceObj } from './settings/show/dto/show.obj';
-
-import { ABSOLUTE_PATHS_BACKEND, getConfigFile } from '@/index';
 
 export interface EmailCredentialsFile
   extends Pick<
@@ -39,13 +38,13 @@ export class HelpersAdminEmailSettingsService {
 
     return {
       smtp_host:
-        emailCredentials.smtp_host || defaultEmailCredentials.smtp_host,
+        emailCredentials.smtp_host ?? defaultEmailCredentials.smtp_host,
       smtp_port:
-        emailCredentials.smtp_port || defaultEmailCredentials.smtp_port,
+        emailCredentials.smtp_port ?? defaultEmailCredentials.smtp_port,
       smtp_secure:
-        emailCredentials.smtp_secure || defaultEmailCredentials.smtp_secure,
+        emailCredentials.smtp_secure ?? defaultEmailCredentials.smtp_secure,
       smtp_user:
-        emailCredentials.smtp_user || defaultEmailCredentials.smtp_user,
+        emailCredentials.smtp_user ?? defaultEmailCredentials.smtp_user,
       smtp_password:
         emailCredentials.smtp_password || defaultEmailCredentials.smtp_password,
       resend_key:

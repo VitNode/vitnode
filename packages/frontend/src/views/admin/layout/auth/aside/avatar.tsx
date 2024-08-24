@@ -1,17 +1,5 @@
 'use client';
 
-import {
-  GitBranch,
-  Globe,
-  HammerIcon,
-  Home,
-  LogOut,
-  SquareArrowOutUpRight,
-  User,
-} from 'lucide-react';
-import { useTranslations } from 'next-intl';
-import { toast } from 'sonner';
-
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -25,6 +13,18 @@ import {
 import { AvatarUser } from '@/components/ui/user/avatar';
 import { useSessionAdmin } from '@/hooks/use-session-admin';
 import { Link } from '@/navigation';
+import {
+  GitBranch,
+  Globe,
+  HammerIcon,
+  Home,
+  LogOut,
+  SquareArrowOutUpRight,
+  User,
+} from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import { toast } from 'sonner';
+
 import { mutationApi } from './hooks/mutation-api';
 
 export const AvatarAsideAuthAdmin = () => {
@@ -39,15 +39,15 @@ export const AvatarAsideAuthAdmin = () => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
-          variant="ghost"
+          ariaLabel=""
           className="hidden shrink-0 rounded-full sm:flex"
           size="icon"
-          ariaLabel=""
+          variant="ghost"
         >
-          <AvatarUser user={session} sizeInRem={1.75} />
+          <AvatarUser sizeInRem={1.75} user={session} />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-64 p-2" align="start">
+      <DropdownMenuContent align="start" className="w-64 p-2">
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
             <p className="text-base font-medium leading-none">{name}</p>
@@ -86,8 +86,8 @@ export const AvatarAsideAuthAdmin = () => {
           <DropdownMenuItem asChild>
             <Link
               href="https://vitnode.com/"
-              target="_blank"
               rel="noopener noreferrer"
+              target="_blank"
             >
               <Globe />
               <span>VitNode</span>
@@ -98,8 +98,8 @@ export const AvatarAsideAuthAdmin = () => {
           <DropdownMenuItem asChild>
             <Link
               href="https://github.com/VitNode/vitnode"
-              target="_blank"
               rel="noopener noreferrer"
+              target="_blank"
             >
               <GitBranch />
               <span>VitNode GitHub</span>

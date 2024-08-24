@@ -1,10 +1,10 @@
-import { Injectable } from '@nestjs/common';
-import { eq } from 'drizzle-orm';
-import { ConfigService } from '@nestjs/config';
-
 import { InternalDatabaseService } from '@/utils/database/internal_database.service';
-import { GqlContext } from '../../../utils';
+import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { eq } from 'drizzle-orm';
+
 import { core_sessions } from '../../../database/schema/sessions';
+import { GqlContext } from '../../../utils';
 
 @Injectable()
 export class SignOutCoreSessionsService {
@@ -14,8 +14,9 @@ export class SignOutCoreSessionsService {
   ) {}
 
   async signOut({ req, res }: GqlContext) {
-    const login_token =
-      req.cookies[this.configService.getOrThrow('cookies.login_token.name')];
+    const login_token = req.cookies[
+      this.configService.getOrThrow('cookies.login_token.name')
+    ] as string;
 
     if (!login_token) {
       return 'You are not logged in';

@@ -1,5 +1,5 @@
-import { cn } from '@/helpers/classnames';
 import { GroupUser } from '@/graphql/types';
+import { cn } from '@/helpers/classnames';
 
 import { useTextLang } from '../../../hooks/use-text-lang';
 
@@ -7,8 +7,8 @@ export const GroupFormat = ({
   className,
   group: { name, color },
 }: {
-  group: Omit<GroupUser, '__typename'>;
   className?: string;
+  group: Omit<GroupUser, '__typename'>;
 }) => {
   const { convertText } = useTextLang();
 

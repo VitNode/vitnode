@@ -6,11 +6,11 @@ export const WrapperRootLayout = ({
   children,
 }: {
   children: React.ReactNode;
-  locale: string;
   className?: string;
+  locale: string;
 }) => {
   return (
-    <html lang={locale} className={className} suppressHydrationWarning>
+    <html className={className} lang={locale} suppressHydrationWarning>
       <body>{children}</body>
     </html>
   );

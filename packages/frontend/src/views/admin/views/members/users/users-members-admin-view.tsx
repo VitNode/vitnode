@@ -1,13 +1,9 @@
-import { getTranslations } from 'next-intl/server';
-import { Metadata } from 'next';
-
-import { TableUsersMembersAdmin } from './table/table';
-import { fetcher } from '@/graphql/fetcher';
-import { HeaderContent } from '@/components/ui/header-content';
 import { Card } from '@/components/ui/card';
+import { HeaderContent } from '@/components/ui/header-content';
+import { fetcher } from '@/graphql/fetcher';
 import {
-  SearchParamsPagination,
   getPaginationTool,
+  SearchParamsPagination,
 } from '@/graphql/get-pagination-tool';
 import {
   Admin__Core_Members__Show,
@@ -15,6 +11,10 @@ import {
   Admin__Core_Members__ShowQueryVariables,
 } from '@/graphql/queries/admin/members/users/admin__core_members__show.generated';
 import { ShowAdminMembersSortingColumnEnum } from '@/graphql/types';
+import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
+
+import { TableUsersMembersAdmin } from './table/table';
 
 const getData = async (variables: Admin__Core_Members__ShowQueryVariables) => {
   const data = await fetcher<
@@ -55,7 +55,7 @@ export const UsersMembersAdminView = async ({
       defaultPageSize: 10,
     }),
     groups: Array.isArray(searchParams.groups)
-      ? searchParams.groups?.map(group => Number(group))
+      ? searchParams.groups.map(group => Number(group))
       : Number(searchParams.groups),
   };
 

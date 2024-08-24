@@ -1,5 +1,5 @@
-import { IntlConfig } from 'next-intl';
 import { notFound } from 'next/navigation';
+import { IntlConfig } from 'next-intl';
 
 import { fetcher } from './graphql/fetcher';
 import {
@@ -37,7 +37,7 @@ export const i18nConfig = async ({
     }
 
     plugins = pluginsFromServer;
-  } catch (e) {
+  } catch (_) {
     plugins = ['core', 'admin'];
   }
 
@@ -51,7 +51,7 @@ export const i18nConfig = async ({
         });
 
         return message.default;
-      } catch (e) {
+      } catch (_) {
         return {};
       }
     }),

@@ -1,4 +1,11 @@
+import {
+  IsTextLanguageInput,
+  TextLanguageInput,
+  TransformString,
+  TransformTextLanguageInput,
+} from '@/utils';
 import { ArgsType, Field } from '@nestjs/graphql';
+import { Transform } from 'class-transformer';
 import {
   ArrayMinSize,
   IsArray,
@@ -6,25 +13,9 @@ import {
   MaxLength,
   ValidateNested,
 } from 'class-validator';
-import { Transform } from 'class-transformer';
-
-import {
-  IsTextLanguageInput,
-  TextLanguageInput,
-  TransformString,
-  TransformTextLanguageInput,
-} from '@/utils';
 
 @ArgsType()
 export class CreateAdminNavStylesArgs {
-  @IsArray()
-  @ValidateNested({ each: true })
-  @ArrayMinSize(1)
-  @IsTextLanguageInput()
-  @Transform(TransformTextLanguageInput)
-  @Field(() => [TextLanguageInput])
-  name: TextLanguageInput[];
-
   @IsArray()
   @ValidateNested({ each: true })
   @IsTextLanguageInput()
@@ -42,5 +33,13 @@ export class CreateAdminNavStylesArgs {
   href: string;
 
   @Field(() => String, { nullable: true })
-  icon: string | null;
+  icon: null | string;
+
+  @IsArray()
+  @ValidateNested({ each: true })
+  @ArrayMinSize(1)
+  @IsTextLanguageInput()
+  @Transform(TransformTextLanguageInput)
+  @Field(() => [TextLanguageInput])
+  name: TextLanguageInput[];
 }

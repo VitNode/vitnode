@@ -1,14 +1,13 @@
+import { core_groups, core_groups_names } from '@/database/schema/groups';
+import { core_users } from '@/database/schema/users';
+import { NotFoundError } from '@/errors';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
 import { count, eq } from 'drizzle-orm';
 
-import { EditAdminGroupsArgs } from './dto/edit.args';
-import { ShowAdminGroups } from '../show/dto/show.obj';
-
-import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { ParserTextLanguageCoreHelpersService } from '../../../helpers/text_language/parser/parser.service';
-import { NotFoundError } from '@/errors';
-import { core_groups, core_groups_names } from '@/database/schema/groups';
-import { core_users } from '@/database/schema/users';
+import { ShowAdminGroups } from '../show/dto/show.obj';
+import { EditAdminGroupsArgs } from './dto/edit.args';
 
 @Injectable()
 export class EditAdminGroupsService {

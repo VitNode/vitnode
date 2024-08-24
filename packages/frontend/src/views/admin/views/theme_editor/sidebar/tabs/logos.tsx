@@ -1,7 +1,5 @@
-import { ChevronLeft } from 'lucide-react';
-import { useTranslations } from 'next-intl';
-
 import { Button } from '@/components/ui/button';
+import { FileInput, FilesInputValue } from '@/components/ui/file-input';
 import {
   FormControl,
   FormField,
@@ -9,11 +7,12 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { FileInput, FilesInputValue } from '@/components/ui/file-input';
+import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
 import { Slider } from '@/components/ui/slider';
-import { Input } from '@/components/ui/input';
 import { cn } from '@/helpers/classnames';
+import { ChevronLeft } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 import { ThemeEditorTab, useThemeEditor } from '../../hooks/use-theme-editor';
 
@@ -23,10 +22,10 @@ export const LogosTabThemeEditor = () => {
   const tCore = useTranslations('core');
 
   enum ids {
-    light = 'vitnode_logo_light',
     dark = 'vitnode_logo_dark',
-    mobile_light = 'vitnode_logo_mobile_light',
+    light = 'vitnode_logo_light',
     mobile_dark = 'vitnode_logo_mobile_dark',
+    mobile_light = 'vitnode_logo_mobile_light',
   }
 
   const updateLogo = ({
@@ -45,22 +44,22 @@ export const LogosTabThemeEditor = () => {
       vitnode_logo_light: cn(commonClassName, {
         'dark:hidden': form.watch('logos.dark'),
         'hidden sm:block':
-          form.watch('logos.mobile_light') || form.watch('logos.mobile_dark'),
+          form.watch('logos.mobile_light') ?? form.watch('logos.mobile_dark'),
       }),
       vitnode_logo_dark: cn(commonClassName, {
         'hidden dark:block': form.watch('logos.light'),
         'hidden sm:block': !form.watch('logos.light'),
         'dark:hidden dark:sm:block':
-          form.watch('logos.mobile_dark') || form.watch('logos.mobile_light'),
+          form.watch('logos.mobile_dark') ?? form.watch('logos.mobile_light'),
       }),
       vitnode_logo_mobile_light: cn(commonClassName, {
         'block sm:hidden':
-          form.watch('logos.light') || form.watch('logos.dark'),
+          form.watch('logos.light') ?? form.watch('logos.dark'),
         'dark:hidden': form.watch('logos.mobile_dark'),
       }),
       vitnode_logo_mobile_dark: cn(commonClassName, {
         'block sm:hidden dark:block dark:sm:hidden':
-          form.watch('logos.light') || form.watch('logos.dark'),
+          form.watch('logos.light') ?? form.watch('logos.dark'),
         'hidden dark:block': form.watch('logos.mobile_light'),
       }),
     };
@@ -90,17 +89,17 @@ export const LogosTabThemeEditor = () => {
       // Update rest of the logos
       if (element) {
         switch (key) {
-          case ids.light:
-            element.className = classNames.vitnode_logo_light;
-            break;
           case ids.dark:
             element.className = classNames.vitnode_logo_dark;
             break;
-          case ids.mobile_light:
-            element.className = classNames.vitnode_logo_mobile_light;
+          case ids.light:
+            element.className = classNames.vitnode_logo_light;
             break;
           case ids.mobile_dark:
             element.className = classNames.vitnode_logo_mobile_dark;
+            break;
+          case ids.mobile_light:
+            element.className = classNames.vitnode_logo_mobile_light;
             break;
         }
       }
@@ -139,11 +138,13 @@ export const LogosTabThemeEditor = () => {
     <>
       <div className="flex items-center gap-2">
         <Button
-          variant="ghost"
-          className="size-8"
-          size="icon"
           ariaLabel={tCore('go_back')}
-          onClick={() => setActiveTab(ThemeEditorTab.Main)}
+          className="size-8"
+          onClick={() => {
+            setActiveTab(ThemeEditorTab.Main);
+          }}
+          size="icon"
+          variant="ghost"
         >
           <ChevronLeft />
         </Button>
@@ -187,12 +188,12 @@ export const LogosTabThemeEditor = () => {
                 <FileInput
                   id="logos.light"
                   {...field}
+                  acceptExtensions={['png', 'jpg', 'jpeg', 'svg', 'webp']}
+                  maxFileSizeInMb={2}
                   onChange={file => {
                     field.onChange(file);
                     updateLogo({ file, id: ids.light });
                   }}
-                  acceptExtensions={['png', 'jpg', 'jpeg', 'svg', 'webp']}
-                  maxFileSizeInMb={2}
                 />
               </FormControl>
               <FormMessage />
@@ -210,12 +211,12 @@ export const LogosTabThemeEditor = () => {
                 <FileInput
                   id="logos.dark"
                   {...field}
+                  acceptExtensions={['png', 'jpg', 'jpeg', 'svg', 'webp']}
+                  maxFileSizeInMb={2}
                   onChange={file => {
                     field.onChange(file);
                     updateLogo({ file, id: ids.dark });
                   }}
-                  acceptExtensions={['png', 'jpg', 'jpeg', 'svg', 'webp']}
-                  maxFileSizeInMb={2}
                 />
               </FormControl>
               <FormMessage />
@@ -231,6 +232,8 @@ export const LogosTabThemeEditor = () => {
               <FormLabel>{t('width')}</FormLabel>
               <FormControl>
                 <Slider
+                  max={30}
+                  min={1}
                   onValueChange={e => {
                     field.onChange(e[0]);
                     const logoElement =
@@ -243,10 +246,8 @@ export const LogosTabThemeEditor = () => {
                       `${e[0]}rem`,
                     );
                   }}
-                  value={[field.value]}
-                  min={1}
-                  max={30}
                   step={0.5}
+                  value={[field.value]}
                 />
               </FormControl>
               <p className="text-muted-foreground mt-2 text-sm">
@@ -269,12 +270,12 @@ export const LogosTabThemeEditor = () => {
                 <FileInput
                   id="logos.mobile_light"
                   {...field}
+                  acceptExtensions={['png', 'jpg', 'jpeg', 'svg', 'webp']}
+                  maxFileSizeInMb={2}
                   onChange={file => {
                     field.onChange(file);
                     updateLogo({ file, id: ids.mobile_light });
                   }}
-                  acceptExtensions={['png', 'jpg', 'jpeg', 'svg', 'webp']}
-                  maxFileSizeInMb={2}
                 />
               </FormControl>
               <FormMessage />
@@ -292,12 +293,12 @@ export const LogosTabThemeEditor = () => {
                 <FileInput
                   id="logos.mobile_dark"
                   {...field}
+                  acceptExtensions={['png', 'jpg', 'jpeg', 'svg', 'webp']}
+                  maxFileSizeInMb={2}
                   onChange={file => {
                     field.onChange(file);
                     updateLogo({ file, id: ids.mobile_dark });
                   }}
-                  acceptExtensions={['png', 'jpg', 'jpeg', 'svg', 'webp']}
-                  maxFileSizeInMb={2}
                 />
               </FormControl>
               <FormMessage />
@@ -313,6 +314,8 @@ export const LogosTabThemeEditor = () => {
               <FormLabel>{t('mobile_width')}</FormLabel>
               <FormControl>
                 <Slider
+                  max={20}
+                  min={1}
                   onValueChange={e => {
                     field.onChange(e[0]);
                     const logoElement =
@@ -325,10 +328,8 @@ export const LogosTabThemeEditor = () => {
                       `${e[0]}rem`,
                     );
                   }}
-                  value={[field.value]}
-                  min={1}
-                  max={20}
                   step={0.5}
+                  value={[field.value]}
                 />
               </FormControl>
               <p className="text-muted-foreground mt-2 text-sm">

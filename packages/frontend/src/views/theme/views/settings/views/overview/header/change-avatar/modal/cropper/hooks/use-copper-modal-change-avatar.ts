@@ -1,11 +1,11 @@
+import { useDialog } from '@/components/ui/dialog';
+import { useSession } from '@/hooks/use-session';
+import { useTranslations } from 'next-intl';
 import React from 'react';
 import { ReactCropperElement } from 'react-cropper';
-import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 
 import { mutationApi } from './mutation-api';
-import { useSession } from '@/hooks/use-session';
-import { useDialog } from '@/components/ui/dialog';
 
 export const useCopperModalChangeAvatar = () => {
   const t = useTranslations('core');

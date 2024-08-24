@@ -1,3 +1,13 @@
+import { Button } from '@/components/ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { ShowAdminPlugins } from '@/graphql/types';
+import { CONFIG } from '@/helpers/config-with-env';
+import { Link, usePathname, useRouter } from '@/navigation';
 import { BadgeHelp, ChevronDown, CodeXml, Trash2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import React from 'react';
@@ -5,16 +15,6 @@ import React from 'react';
 import { DeletePluginActionsAdmin } from './delete/delete';
 import { SetDefaultPluginActionsAdmin } from './set-default/set-default';
 import { UploadPluginActionsAdmin } from './upload';
-import { Link, usePathname, useRouter } from '@/navigation';
-import { CONFIG } from '@/helpers/config-with-env';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Button } from '@/components/ui/button';
-import { ShowAdminPlugins } from '@/graphql/types';
 
 export const ActionsItemPluginsAdmin = (props: ShowAdminPlugins) => {
   const t = useTranslations('admin.core.plugins');
@@ -35,7 +35,7 @@ export const ActionsItemPluginsAdmin = (props: ShowAdminPlugins) => {
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost" size="icon" ariaLabel={tCore('more_actions')}>
+          <Button ariaLabel={tCore('more_actions')} size="icon" variant="ghost">
             <ChevronDown />
           </Button>
         </DropdownMenuTrigger>
@@ -44,7 +44,9 @@ export const ActionsItemPluginsAdmin = (props: ShowAdminPlugins) => {
           {CONFIG.node_development && (
             <>
               <DropdownMenuItem
-                onClick={() => push(`${pathname}/${props.code}/dev/overview`)}
+                onClick={() => {
+                  push(`${pathname}/${props.code}/dev/overview`);
+                }}
               >
                 <CodeXml /> {t('dev_tools')}
               </DropdownMenuItem>
@@ -54,8 +56,8 @@ export const ActionsItemPluginsAdmin = (props: ShowAdminPlugins) => {
           <DropdownMenuItem asChild>
             <Link
               href={props.support_url}
-              target="_blank"
               rel="noopener noreferrer"
+              target="_blank"
             >
               <BadgeHelp /> {t('get_help')}
             </Link>
@@ -63,8 +65,10 @@ export const ActionsItemPluginsAdmin = (props: ShowAdminPlugins) => {
 
           {!props.default && (
             <DropdownMenuItem
-              onClick={() => setIsOpenDeleteDialog(true)}
               destructive
+              onClick={() => {
+                setIsOpenDeleteDialog(true);
+              }}
             >
               <Trash2 /> {tCore('delete')}
             </DropdownMenuItem>

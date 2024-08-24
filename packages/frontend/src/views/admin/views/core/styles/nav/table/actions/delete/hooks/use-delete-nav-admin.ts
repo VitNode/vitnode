@@ -1,10 +1,10 @@
+import { useAlertDialog } from '@/components/ui/alert-dialog';
+import { ShowCoreNav } from '@/graphql/types';
+import { useTextLang } from '@/hooks/use-text-lang';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 
 import { mutationApi } from './mutation-api';
-import { useAlertDialog } from '@/components/ui/alert-dialog';
-import { useTextLang } from '@/hooks/use-text-lang';
-import { ShowCoreNav } from '@/graphql/types';
 
 export const useDeleteNavAdmin = ({
   id,

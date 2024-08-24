@@ -1,8 +1,10 @@
 'use client';
 
-import React from 'react';
+import { useBeforeUnload } from '@/helpers/use-before-unload';
 import * as LabelPrimitive from '@radix-ui/react-label';
 import { Slot } from '@radix-ui/react-slot';
+import { useTranslations } from 'next-intl';
+import React from 'react';
 import {
   Controller,
   ControllerProps,
@@ -12,13 +14,10 @@ import {
   FormProviderProps,
   useFormContext,
 } from 'react-hook-form';
-import { useTranslations } from 'next-intl';
-
-import { useBeforeUnload } from '@/helpers/use-before-unload';
-import { Label } from './label';
-import { useDialog } from './dialog';
 
 import { cn } from '../../helpers/classnames';
+import { useDialog } from './dialog';
+import { Label } from './label';
 
 interface FormProps<
   TFieldValues extends FieldValues,
@@ -81,6 +80,7 @@ const useFormField = () => {
 
   const fieldState = getFieldState(fieldContext.name, formState);
 
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   if (!fieldContext) {
     throw new Error('useFormField should be used within <FormField>');
   }
@@ -152,13 +152,11 @@ const FormControl = ({ ...props }: React.ComponentProps<typeof Slot>) => {
 
   return (
     <Slot
-      id={formItemId}
       aria-describedby={
-        !error
-          ? `${formDescriptionId}`
-          : `${formDescriptionId} ${formMessageId}`
+        !error ? formDescriptionId : `${formDescriptionId} ${formMessageId}`
       }
       aria-invalid={!!error}
+      id={formItemId}
       {...props}
     />
   );
@@ -172,8 +170,8 @@ const FormDescription = ({
 
   return (
     <p
-      id={formDescriptionId}
       className={cn('text-muted-foreground text-sm', className)}
+      id={formDescriptionId}
       {...props}
     />
   );
@@ -185,7 +183,7 @@ const FormMessage = ({
   ...props
 }: React.HTMLAttributes<HTMLParagraphElement>) => {
   const { error, formMessageId } = useFormField();
-  const body = error ? String(error?.message) : children;
+  const body = error ? String(error.message) : children;
 
   if (!body) {
     return null;
@@ -193,8 +191,8 @@ const FormMessage = ({
 
   return (
     <p
-      id={formMessageId}
       className={cn('text-destructive text-sm font-medium', className)}
+      id={formMessageId}
       {...props}
     >
       {body}
@@ -224,8 +222,8 @@ const FormFieldRender = ({
   description,
 }: {
   children: React.ReactNode;
-  label: string;
   description?: string;
+  label: string;
   optional?: boolean;
 }) => {
   const t = useTranslations('core');
@@ -247,14 +245,14 @@ const FormFieldRender = ({
 };
 
 export {
-  useFormField,
   Form,
-  FormItem,
-  FormLabel,
   FormControl,
   FormDescription,
-  FormMessage,
   FormField,
-  FormWrapper,
   FormFieldRender,
+  FormItem,
+  FormLabel,
+  FormMessage,
+  FormWrapper,
+  useFormField,
 };

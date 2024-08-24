@@ -1,10 +1,10 @@
-import { useTranslations } from 'next-intl';
+import { ShowAdminNavPluginsObj } from '@/graphql/types';
+import { FlatTree } from '@/helpers/flatten-tree';
 import { useParams } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 
 import { ActionsTableNavDevPluginAdmin } from './actions/actions';
 import { useItemNavDevPluginAdmin } from './hooks/use-item-nav-dev-plugin-admin';
-import { FlatTree } from '@/helpers/flatten-tree';
-import { ShowAdminNavPluginsObj } from '@/graphql/types';
 
 export const ItemContentNavDevPluginAdmin = (
   data: FlatTree<ShowAdminNavPluginsObj>,

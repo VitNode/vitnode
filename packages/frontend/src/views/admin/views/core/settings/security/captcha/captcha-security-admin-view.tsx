@@ -1,14 +1,14 @@
-import { getTranslations } from 'next-intl/server';
-import { Metadata } from 'next';
-
-import { ContentCaptchaSecurityAdmin } from './content';
-import { HeaderContent } from '@/components/ui/header-content';
 import { Card, CardContent } from '@/components/ui/card';
+import { HeaderContent } from '@/components/ui/header-content';
 import { fetcher } from '@/graphql/fetcher';
 import {
   Admin__Core_Security__Captcha__Show,
   Admin__Core_Security__Captcha__ShowQuery,
 } from '@/graphql/queries/admin/security/admin__core_security__captcha__show.generated';
+import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
+
+import { ContentCaptchaSecurityAdmin } from './content';
 
 const getData = async () => {
   const data = await fetcher<Admin__Core_Security__Captcha__ShowQuery>({
@@ -36,7 +36,7 @@ export const CaptchaSecurityAdminView = async () => {
 
   return (
     <>
-      <HeaderContent h1={t('title')} desc={t('desc')} />
+      <HeaderContent desc={t('desc')} h1={t('title')} />
 
       <Card>
         <CardContent className="p-6">

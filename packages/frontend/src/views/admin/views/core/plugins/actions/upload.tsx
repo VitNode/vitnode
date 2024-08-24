@@ -1,13 +1,12 @@
 'use client';
 
+import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import { Loader } from '@/components/ui/loader';
+import { CONFIG } from '@/helpers/config-with-env';
 import { Upload } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import React from 'react';
-
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
-import { CONFIG } from '@/helpers/config-with-env';
-import { Loader } from '@/components/ui/loader';
 
 const Content = React.lazy(async () =>
   import('../upload/upload').then(module => ({

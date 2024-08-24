@@ -1,32 +1,39 @@
-import { join } from 'path';
-import * as fs from 'fs';
-
+import { ABSOLUTE_PATHS_BACKEND, getConfigFile } from '@/index';
 import { Injectable } from '@nestjs/common';
+import * as fs from 'fs';
+import { join } from 'path';
 
+import { keysFromCSSThemeEditor } from '../theme_editor.module';
 import {
   ColorsShowCoreThemeEditor,
   HslColor,
   ShowCoreThemeEditorObj,
 } from './dto/show.obj';
-import { keysFromCSSThemeEditor } from '../theme_editor.module';
-
-import { ABSOLUTE_PATHS_BACKEND, getConfigFile } from '@/index';
 
 @Injectable()
 export class ShowCoreThemeEditorService {
-  private parseStringToHsl(string: string): HslColor {
-    const values = string
-      .trim()
-      .replaceAll('%', '')
-      .replaceAll('deg', '')
-      .split(' ')
-      .map(v => parseInt(v));
+  protected getColors(): ShowCoreThemeEditorObj['colors'] {
+    const pathToCss = join(
+      ABSOLUTE_PATHS_BACKEND.frontend.init,
+      'app',
+      '[locale]',
+      'global.css',
+    );
 
-    return {
-      h: values[0],
-      s: values[1],
-      l: values[2],
-    };
+    if (!fs.existsSync(pathToCss)) {
+      return;
+    }
+
+    const cssAsString = fs.readFileSync(pathToCss, 'utf8');
+    const colors: ColorsShowCoreThemeEditor = {} as ColorsShowCoreThemeEditor;
+    for (const variable of keysFromCSSThemeEditor) {
+      colors[variable.replace('-', '_')] = this.getVariable({
+        cssAsString,
+        variable,
+      });
+    }
+
+    return colors;
   }
 
   protected getVariable({
@@ -40,7 +47,7 @@ export class ShowCoreThemeEditorService {
     light: HslColor;
   } {
     const regex = new RegExp(`:root\\s*{([^}]*)}|\\.dark\\s*{([^}]*)}`, 'g');
-    let match: RegExpExecArray | null;
+    let match: null | RegExpExecArray;
     const values = {
       light: '',
       dark: '',
@@ -66,32 +73,19 @@ export class ShowCoreThemeEditorService {
     };
   }
 
-  protected getColors(): ShowCoreThemeEditorObj['colors'] {
-    const pathToCss = join(
-      ABSOLUTE_PATHS_BACKEND.frontend.init,
-      'app',
-      '[locale]',
-      'global.css',
-    );
+  private parseStringToHsl(string: string): HslColor {
+    const values = string
+      .trim()
+      .replaceAll('%', '')
+      .replaceAll('deg', '')
+      .split(' ')
+      .map(v => parseInt(v));
 
-    if (!fs.existsSync(pathToCss)) {
-      return;
-    }
-
-    const cssAsString = fs.readFileSync(pathToCss, 'utf8');
-    const colors: ColorsShowCoreThemeEditor = keysFromCSSThemeEditor.reduce(
-      (acc, variable) => {
-        acc[variable.replace('-', '_')] = this.getVariable({
-          cssAsString,
-          variable,
-        });
-
-        return acc;
-      },
-      {} as ColorsShowCoreThemeEditor,
-    );
-
-    return colors;
+    return {
+      h: values[0],
+      s: values[1],
+      l: values[2],
+    };
   }
 
   show(): ShowCoreThemeEditorObj {

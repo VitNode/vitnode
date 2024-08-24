@@ -1,15 +1,14 @@
-import { LinkIcon } from 'lucide-react';
-import React from 'react';
-
+import { Loader } from '@/components/ui/loader';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
-import { Loader } from '@/components/ui/loader';
+import { LinkIcon } from 'lucide-react';
+import React from 'react';
 
-import { ButtonToolbarEditor } from '../../button';
 import { useEditorState } from '../../../hooks/use-editor-state';
+import { ButtonToolbarEditor } from '../../button';
 
 const Content = React.lazy(async () =>
   import('./content').then(module => ({
@@ -22,9 +21,9 @@ export const LinkToolbarEditor = () => {
   const { editor } = useEditorState();
 
   return (
-    <Popover open={open} onOpenChange={setOpen}>
+    <Popover onOpenChange={setOpen} open={open}>
       <PopoverTrigger asChild>
-        <ButtonToolbarEditor name="link.title" active={editor.isActive('link')}>
+        <ButtonToolbarEditor active={editor.isActive('link')} name="link.title">
           <LinkIcon />
         </ButtonToolbarEditor>
       </PopoverTrigger>

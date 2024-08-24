@@ -4,7 +4,7 @@ import { join } from 'path';
 export const getTranslationForEmail = (
   namespaces: string,
   language: string,
-) => {
+): ((key: string) => string) => {
   const resolveNamespace = namespaces.split('.');
   let path = join(
     process.cwd(),
@@ -36,14 +36,14 @@ export const getTranslationForEmail = (
 
     [...resolveNamespace, ...key.split('.')].forEach(part => {
       try {
-        const next = message[part as any];
+        const next = message[part as never];
 
-        if (part === null || next === null) {
+        if (!part || next === null) {
           return key;
         }
 
         message = next;
-      } catch (e) {
+      } catch (_) {
         return key;
       }
     });

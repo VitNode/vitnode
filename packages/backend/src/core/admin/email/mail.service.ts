@@ -1,24 +1,22 @@
-import * as fs from 'fs';
-
 import { Injectable } from '@nestjs/common';
 import { render } from '@react-email/render';
+import * as fs from 'fs';
 import * as nodemailer from 'nodemailer';
 import React from 'react';
 import { Resend } from 'resend';
 
-import {
-  HelpersAdminEmailSettingsService,
-  EmailCredentialsFile,
-} from './helpers.service';
-
 import { CustomError } from '../../../errors';
 import { EmailProvider, getConfigFile } from '../../../providers/config';
+import {
+  EmailCredentialsFile,
+  HelpersAdminEmailSettingsService,
+} from './helpers.service';
 
 export interface SendMailServiceArgs {
   subject: string;
   template: React.ReactElement;
-  to: string;
   text?: string;
+  to: string;
 }
 
 @Injectable()
@@ -55,7 +53,7 @@ export class MailService extends HelpersAdminEmailSettingsService {
         {
           host: config.smtp_host,
           port: config.smtp_port,
-          secure: config.smtp_secure || false,
+          secure: config.smtp_secure ?? false,
           auth: {
             user: config.smtp_user,
             pass: config.smtp_password,

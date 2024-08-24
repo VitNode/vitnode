@@ -1,16 +1,14 @@
+import { core_languages } from '@/database/schema/languages';
+import { ABSOLUTE_PATHS_BACKEND } from '@/index';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
+import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import * as fs from 'fs';
 import { join } from 'path';
 
-import { Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
-
-import { EditAdminManifestMetadataObj } from './dto/edit.args';
-import { ShowAdminManifestMetadataObj } from '../show/dto/show.obj';
 import { getManifest } from '../functions';
-
-import { InternalDatabaseService } from '@/utils/database/internal_database.service';
-import { ABSOLUTE_PATHS_BACKEND } from '@/index';
-import { core_languages } from '@/database/schema/languages';
+import { ShowAdminManifestMetadataObj } from '../show/dto/show.obj';
+import { EditAdminManifestMetadataObj } from './dto/edit.args';
 
 @Injectable()
 export class EditAdminManifestMetadataService {

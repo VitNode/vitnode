@@ -1,11 +1,10 @@
+import { core_nav } from '@/database/schema/nav';
+import { NotFoundError } from '@/errors';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
 
 import { ChangePositionAdminNavStylesArgs } from './dto/change_position.args';
-
-import { InternalDatabaseService } from '@/utils/database/internal_database.service';
-import { NotFoundError } from '@/errors';
-import { core_nav } from '@/database/schema/nav';
 
 @Injectable()
 export class ChangePositionAdminNavStylesService {

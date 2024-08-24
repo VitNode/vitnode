@@ -1,7 +1,5 @@
-import { ChevronLeft } from 'lucide-react';
-import { useTranslations } from 'next-intl';
-
 import { Button } from '@/components/ui/button';
+import { ColorPicker } from '@/components/ui/color-picker';
 import {
   FormControl,
   FormField,
@@ -9,12 +7,13 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { ColorPicker } from '@/components/ui/color-picker';
 import {
   getHSLFromString,
   getStringFromHSL,
   isColorBrightness,
 } from '@/helpers/colors';
+import { ChevronLeft } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 import { ThemeEditorTab, useThemeEditor } from '../../hooks/use-theme-editor';
 
@@ -23,17 +22,20 @@ export const ColorsTabThemeEditor = () => {
   const tCore = useTranslations('core');
   const { activeTheme, changeColor, form, setActiveTab } = useThemeEditor();
 
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   if (!form.watch('colors.primary')) return;
 
   return (
     <>
       <div className="flex items-center gap-2">
         <Button
-          variant="ghost"
-          className="size-8"
-          size="icon"
           ariaLabel={tCore('go_back')}
-          onClick={() => setActiveTab(ThemeEditorTab.Main)}
+          className="size-8"
+          onClick={() => {
+            setActiveTab(ThemeEditorTab.Main);
+          }}
+          size="icon"
+          variant="ghost"
         >
           <ChevronLeft />
         </Button>
@@ -77,8 +79,8 @@ export const ColorsTabThemeEditor = () => {
                           },
                     });
                   }}
-                  value={getStringFromHSL(field.value[activeTheme])}
                   required
+                  value={getStringFromHSL(field.value[activeTheme])}
                 />
               </FormControl>
               <FormMessage />
@@ -121,8 +123,8 @@ export const ColorsTabThemeEditor = () => {
                           },
                     });
                   }}
-                  value={getStringFromHSL(field.value[activeTheme])}
                   required
+                  value={getStringFromHSL(field.value[activeTheme])}
                 />
               </FormControl>
               <FormMessage />
@@ -238,8 +240,8 @@ export const ColorsTabThemeEditor = () => {
                       },
                     });
                   }}
-                  value={getStringFromHSL(field.value[activeTheme])}
                   required
+                  value={getStringFromHSL(field.value[activeTheme])}
                 />
               </FormControl>
               <FormMessage />
@@ -282,8 +284,8 @@ export const ColorsTabThemeEditor = () => {
                           },
                     });
                   }}
-                  value={getStringFromHSL(field.value[activeTheme])}
                   required
+                  value={getStringFromHSL(field.value[activeTheme])}
                 />
               </FormControl>
               <FormMessage />

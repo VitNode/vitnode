@@ -1,19 +1,18 @@
 'use client';
 
-import { Pencil } from 'lucide-react';
-import { useTranslations } from 'next-intl';
-import React from 'react';
-
+import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import { Loader } from '@/components/ui/loader';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-import { Loader } from '@/components/ui/loader';
-import { Button } from '@/components/ui/button';
 import { ShowCoreNav } from '@/graphql/types';
+import { Pencil } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import React from 'react';
 
 const Content = React.lazy(async () =>
   import('../../create-edit/create-edit').then(module => ({
@@ -32,7 +31,7 @@ export const EditActionTableNavAdmin = (
         <Tooltip>
           <TooltipTrigger asChild>
             <DialogTrigger asChild>
-              <Button variant="ghost" size="icon" ariaLabel={t('edit')}>
+              <Button ariaLabel={t('edit')} size="icon" variant="ghost">
                 <Pencil />
               </Button>
             </DialogTrigger>

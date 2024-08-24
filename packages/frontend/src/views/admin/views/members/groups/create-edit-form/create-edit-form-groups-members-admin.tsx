@@ -1,34 +1,35 @@
-import React from 'react';
-import { useTranslations } from 'next-intl';
-
+import { AutoForm } from '@/components/form/auto-form';
+import { AutoFormColor } from '@/components/form/fields/color';
+import { AutoFormInput } from '@/components/form/fields/input';
+import { AutoFormSwitch } from '@/components/form/fields/switch';
+import { AutoFormTextLanguageInput } from '@/components/form/fields/text-language-input';
 import {
-  useCreateEditFormGroupsMembersAdmin,
-  CreateEditFormGroupsMembersAdminArgs,
-} from './hooks/use-create-edit-form-groups-members-admin';
-import { useTextLang } from '@/hooks/use-text-lang';
+  AutoFormInputComponentProps,
+  DependencyType,
+  FieldRenderParentProps,
+} from '@/components/form/type';
+import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
 import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { Tabs, TabsTrigger } from '@/components/ui/tabs';
-import { Button } from '@/components/ui/button';
-import { AutoForm } from '@/components/form/auto-form';
-import { AutoFormInput } from '@/components/form/fields/input';
-import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
+import { Tabs, TabsTrigger } from '@/components/ui/tabs';
+import { useTextLang } from '@/hooks/use-text-lang';
+import { useTranslations } from 'next-intl';
+import React from 'react';
+
 import {
-  AutoFormInputComponentProps,
-  DependencyType,
-} from '@/components/form/type';
-import { AutoFormColor } from '@/components/form/fields/color';
-import { AutoFormSwitch } from '@/components/form/fields/switch';
-import { AutoFormTextLanguageInput } from '@/components/form/fields/text-language-input';
+  CreateEditFormGroupsMembersAdminArgs,
+  useCreateEditFormGroupsMembersAdmin,
+} from './hooks/use-create-edit-form-groups-members-admin';
 
 enum TabsEnum {
-  MAIN = 'main',
   CONTENT = 'content',
+  MAIN = 'main',
 }
 
 export const CreateEditFormGroupsMembersAdmin = ({
@@ -52,16 +53,20 @@ export const CreateEditFormGroupsMembersAdmin = ({
 
         <Tabs>
           <TabsTrigger
-            id="main"
             active={activeTab === TabsEnum.MAIN}
-            onClick={() => setActiveTab(TabsEnum.MAIN)}
+            id="main"
+            onClick={() => {
+              setActiveTab(TabsEnum.MAIN);
+            }}
           >
             {t('create_edit.main')}
           </TabsTrigger>
           <TabsTrigger
-            id="content"
             active={activeTab === TabsEnum.CONTENT}
-            onClick={() => setActiveTab(TabsEnum.CONTENT)}
+            id="content"
+            onClick={() => {
+              setActiveTab(TabsEnum.CONTENT);
+            }}
           >
             {t('create_edit.content')}
           </TabsTrigger>
@@ -69,13 +74,20 @@ export const CreateEditFormGroupsMembersAdmin = ({
       </DialogHeader>
 
       <AutoForm
-        onSubmit={onSubmit}
-        formSchema={formSchema}
-        submitButton={props => (
-          <DialogFooter>
-            <Button {...props}>{tCore('save')}</Button>
-          </DialogFooter>
-        )}
+        dependencies={[
+          {
+            sourceField: 'main',
+            type: DependencyType.HIDES,
+            targetField: 'main',
+            when: () => activeTab !== TabsEnum.MAIN,
+          },
+          {
+            sourceField: 'content',
+            type: DependencyType.HIDES,
+            targetField: 'content',
+            when: () => activeTab !== TabsEnum.CONTENT,
+          },
+        ]}
         fieldConfig={{
           main: {
             name: {
@@ -100,20 +112,21 @@ export const CreateEditFormGroupsMembersAdmin = ({
                 return (
                   <AutoFormInput
                     className="max-w-32"
-                    type="number"
                     disabled={value === -1}
+                    type="number"
                     value={value === -1 ? '' : value}
                     {...props}
                   />
                 );
               },
-              renderParent: ({ children, field }) => (
+              renderParent: ({ children, field }: FieldRenderParentProps) => (
                 <div className="flex flex-wrap items-center gap-2">
                   {children}
                   <span>{t('create_edit.in_kb')}</span>
                   <div className="flex shrink-0 items-center gap-2">
                     <span>{tCore('or')}</span>
                     <Checkbox
+                      checked={field.value === -1}
                       id="content.files_total_max_storage.unlimited"
                       onClick={() => {
                         if (field.value === -1) {
@@ -124,7 +137,6 @@ export const CreateEditFormGroupsMembersAdmin = ({
 
                         field.onChange(-1);
                       }}
-                      checked={field.value === -1}
                     />
                     <Label htmlFor="content.files_total_max_storage.unlimited">
                       {tCore('unlimited')}
@@ -135,13 +147,14 @@ export const CreateEditFormGroupsMembersAdmin = ({
             },
             files_max_storage_for_submit: {
               label: t('create_edit.files.max_storage_for_submit.label'),
-              renderParent: ({ children, field }) => (
+              renderParent: ({ children, field }: FieldRenderParentProps) => (
                 <div className="flex flex-wrap items-center gap-2">
                   {children}
                   <span>{t('create_edit.in_kb')}</span>
                   <div className="flex shrink-0 items-center gap-2">
                     <span>{tCore('or')}</span>
                     <Checkbox
+                      checked={field.value === -1}
                       id="content.files_max_storage_for_submit.unlimited"
                       onClick={() => {
                         if (field.value === -1) {
@@ -152,7 +165,6 @@ export const CreateEditFormGroupsMembersAdmin = ({
 
                         field.onChange(-1);
                       }}
-                      checked={field.value === -1}
                     />
                     <Label htmlFor="content.files_max_storage_for_submit.unlimited">
                       {tCore('unlimited')}
@@ -166,8 +178,8 @@ export const CreateEditFormGroupsMembersAdmin = ({
                 return (
                   <AutoFormInput
                     className="max-w-32"
-                    type="number"
                     disabled={value === -1}
+                    type="number"
                     value={value === -1 ? '' : value}
                     {...props}
                   />
@@ -176,20 +188,13 @@ export const CreateEditFormGroupsMembersAdmin = ({
             },
           },
         }}
-        dependencies={[
-          {
-            sourceField: 'main',
-            type: DependencyType.HIDES,
-            targetField: 'main',
-            when: () => activeTab !== TabsEnum.MAIN,
-          },
-          {
-            sourceField: 'content',
-            type: DependencyType.HIDES,
-            targetField: 'content',
-            when: () => activeTab !== TabsEnum.CONTENT,
-          },
-        ]}
+        formSchema={formSchema}
+        onSubmit={onSubmit}
+        submitButton={props => (
+          <DialogFooter>
+            <Button {...props}>{tCore('save')}</Button>
+          </DialogFooter>
+        )}
       />
     </>
   );

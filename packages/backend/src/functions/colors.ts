@@ -21,9 +21,9 @@ export const convertColor = {
   },
 
   hexToHSL: (hex: string): HslColor | undefined => {
-    let r = 0,
+    let b = 0,
       g = 0,
-      b = 0;
+      r = 0;
 
     // 3 digits
     if (hex.length == 4) {
@@ -56,14 +56,14 @@ export const convertColor = {
       const d = max - min;
       s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
       switch (max) {
-        case r:
-          h = (g - b) / d + (g < b ? 6 : 0);
+        case b:
+          h = (r - g) / d + 4;
           break;
         case g:
           h = (b - r) / d + 2;
           break;
-        case b:
-          h = (r - g) / d + 4;
+        case r:
+          h = (g - b) / d + (g < b ? 6 : 0);
           break;
       }
       h /= 6;
@@ -83,13 +83,13 @@ export const convertColor = {
     b /= 255;
 
     // Find greatest and smallest channel values
-    const cmin = Math.min(r, g, b),
-      cmax = Math.max(r, g, b),
+    const cmax = Math.max(r, g, b),
+      cmin = Math.min(r, g, b),
       delta = cmax - cmin;
 
     let h = 0,
-      s = 0,
-      l = 0;
+      l = 0,
+      s = 0;
 
     // Calculate hue
     if (delta == 0) h = 0;

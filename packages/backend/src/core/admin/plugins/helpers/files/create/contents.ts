@@ -1,4 +1,5 @@
 import { PluginInfoJSONType } from '@/providers/plugins.type';
+
 import { changeCodePluginToCapitalLetters } from '../../change-code-plugin-to-capital-letters';
 
 export const createModuleSchema = ({ code }: { code: string }) => {

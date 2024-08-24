@@ -1,11 +1,10 @@
-import React from 'react';
+import { FilesInputValue } from '@/components/ui/file-input';
+import { cn } from '@/helpers/classnames';
+import { CONFIG } from '@/helpers/config-with-env';
 import { Trash2 } from 'lucide-react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-
-import { CONFIG } from '@/helpers/config-with-env';
-import { FilesInputValue } from '@/components/ui/file-input';
-import { cn } from '@/helpers/classnames';
+import React from 'react';
 
 import { acceptMimeTypeImage } from '../../../helpers/files-support';
 
@@ -22,9 +21,9 @@ interface WithMultiple extends Props {
 }
 
 interface WithoutMultiple extends Props {
+  multiple?: false;
   onChange: (e: FilesInputValue | null) => void;
   value: FilesInputValue | null;
-  multiple?: false;
 }
 
 export const ItemPreviewFilesInput = ({
@@ -80,15 +79,15 @@ export const ItemPreviewFilesInput = ({
           })}
         >
           <Image
+            alt={file instanceof File ? file.name : file.file_name_original}
+            className="object-contain"
+            fill
+            sizes="100px"
             src={
               file instanceof File
                 ? URL.createObjectURL(file)
                 : `${CONFIG.backend_public_url}/${file.dir_folder}/${file.file_name}`
             }
-            className="object-contain"
-            alt={file instanceof File ? file.name : file.file_name_original}
-            sizes="100px"
-            fill
           />
         </div>
       )}
@@ -99,7 +98,6 @@ export const ItemPreviewFilesInput = ({
         <p className="text-muted-foreground @xs:text-sm text-xs">{size}</p>
       </div>
       <button
-        type="button"
         className={cn(
           'ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground ml-auto flex size-7 flex-shrink-0 items-center justify-center rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none',
           {
@@ -107,6 +105,7 @@ export const ItemPreviewFilesInput = ({
           },
         )}
         onClick={handleRemoveFile}
+        type="button"
       >
         <Trash2 className="size-4" />
         <span className="sr-only">{t('delete')}</span>

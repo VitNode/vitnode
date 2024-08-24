@@ -1,11 +1,11 @@
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { Cron, CronExpression } from '@nestjs/schedule';
 import { and, lte } from 'drizzle-orm';
-import { ConfigService } from '@nestjs/config';
 
-import { core_sessions } from '../../database/schema/sessions';
 import { core_admin_sessions } from '../../database/schema/admins';
-import { InternalDatabaseService } from '@/utils/database/internal_database.service';
+import { core_sessions } from '../../database/schema/sessions';
 
 @Injectable()
 export class CoreSessionsCron {

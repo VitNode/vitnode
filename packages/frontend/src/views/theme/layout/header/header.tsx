@@ -1,13 +1,13 @@
-import React from 'react';
-
-import { Nav } from '../nav/nav';
-import { UserBar } from './user-bar/user-bar';
-import { AuthUserBar } from './user-bar/auth';
 import { LanguageSwitcher } from '@/components/switchers/language-switcher';
 import { ThemeSwitcher } from '@/components/switchers/theme-switcher';
 import { getSessionData } from '@/graphql/get-session-data';
-import { LogoHeader } from './logo';
 import { cn } from '@/helpers/classnames';
+import React from 'react';
+
+import { Nav } from '../nav/nav';
+import { LogoHeader } from './logo';
+import { AuthUserBar } from './user-bar/auth';
+import { UserBar } from './user-bar/user-bar';
 
 export const Header = async ({ className }: { className?: string }) => {
   const {

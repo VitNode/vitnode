@@ -1,5 +1,5 @@
-import { IsStrongPassword } from 'class-validator';
 import { ArgsType, Field } from '@nestjs/graphql';
+import { IsStrongPassword } from 'class-validator';
 
 @ArgsType()
 export class ChangePasswordCoreMembersArgs {

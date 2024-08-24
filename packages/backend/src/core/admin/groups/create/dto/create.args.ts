@@ -1,12 +1,11 @@
-import { ArgsType, Field, InputType, Int } from '@nestjs/graphql';
-import { ArrayMinSize, IsArray, Min, ValidateNested } from 'class-validator';
-import { Transform } from 'class-transformer';
-
 import {
   IsTextLanguageInput,
   TextLanguageInput,
   TransformTextLanguageInput,
 } from '@/utils';
+import { ArgsType, Field, InputType, Int } from '@nestjs/graphql';
+import { Transform } from 'class-transformer';
+import { ArrayMinSize, IsArray, Min, ValidateNested } from 'class-validator';
 
 @InputType()
 export class ContentCreateAdminGroups {
@@ -15,15 +14,21 @@ export class ContentCreateAdminGroups {
 
   @Field(() => Int)
   @Min(-1)
-  files_total_max_storage: number;
+  files_max_storage_for_submit: number;
 
   @Field(() => Int)
   @Min(-1)
-  files_max_storage_for_submit: number;
+  files_total_max_storage: number;
 }
 
 @ArgsType()
 export class CreateAdminGroupsArgs {
+  @Field(() => String, { nullable: true })
+  color?: string;
+
+  @Field(() => ContentCreateAdminGroups)
+  content: ContentCreateAdminGroups;
+
   @IsArray()
   @ValidateNested({ each: true })
   @ArrayMinSize(1)
@@ -31,10 +36,4 @@ export class CreateAdminGroupsArgs {
   @Transform(TransformTextLanguageInput)
   @Field(() => [TextLanguageInput])
   name: TextLanguageInput[];
-
-  @Field(() => ContentCreateAdminGroups)
-  content: ContentCreateAdminGroups;
-
-  @Field(() => String, { nullable: true })
-  color?: string;
 }

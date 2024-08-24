@@ -1,20 +1,10 @@
+import { TransformString } from '@/utils';
 import { ArgsType, Field } from '@nestjs/graphql';
 import { Transform } from 'class-transformer';
 import { IsEmail } from 'class-validator';
 
-import { TransformString } from '@/utils';
-
 @ArgsType()
 export class TestAdminEmailSettingsServiceArgs {
-  @Field(() => String)
-  @Transform(TransformString)
-  message: string;
-
-  @IsEmail()
-  @Field(() => String)
-  @Transform(TransformString)
-  to: string;
-
   @IsEmail()
   @Field(() => String)
   @Transform(TransformString)
@@ -22,9 +12,18 @@ export class TestAdminEmailSettingsServiceArgs {
 
   @Field(() => String)
   @Transform(TransformString)
-  subject: string;
+  message: string;
 
   @Field(() => String, { nullable: true })
   @Transform(TransformString)
   preview_text?: string;
+
+  @Field(() => String)
+  @Transform(TransformString)
+  subject: string;
+
+  @IsEmail()
+  @Field(() => String)
+  @Transform(TransformString)
+  to: string;
 }

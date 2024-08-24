@@ -7,6 +7,12 @@ export enum SortDirectionEnum {
 
 @ObjectType()
 export class PageInfo {
+  @Field(() => Number)
+  count: number;
+
+  @Field(() => Int, { nullable: true })
+  endCursor: null | number;
+
   @Field(() => Boolean)
   hasNextPage: boolean;
 
@@ -14,16 +20,10 @@ export class PageInfo {
   hasPreviousPage: boolean;
 
   @Field(() => Int, { nullable: true })
-  startCursor: number | null;
-
-  @Field(() => Int, { nullable: true })
-  endCursor: number | null;
+  startCursor: null | number;
 
   @Field(() => Number)
   totalCount: number;
-
-  @Field(() => Number)
-  count: number;
 }
 
 @ArgsType()
@@ -41,11 +41,11 @@ export class PaginationArgs {
 @InputType()
 export class PaginationInput {
   @Field(() => Int, { nullable: true })
-  cursor: number | null;
+  cursor: null | number;
 
   @Field(() => Int, { nullable: true })
-  first: number | null;
+  first: null | number;
 
   @Field(() => Int, { nullable: true })
-  last: number | null;
+  last: null | number;
 }

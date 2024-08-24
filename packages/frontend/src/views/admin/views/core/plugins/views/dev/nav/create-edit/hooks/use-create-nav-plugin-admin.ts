@@ -1,25 +1,25 @@
-import { UseFormReturn } from 'react-hook-form';
-import * as z from 'zod';
-import React from 'react';
+import { useDialog } from '@/components/ui/dialog';
+import { FetcherErrorType } from '@/graphql/fetcher';
+import { Admin__Core_Plugins__Nav__ShowQuery } from '@/graphql/queries/admin/plugins/dev/nav/admin__core_plugins__nav__show.generated';
+import { ShowAdminNavPluginsObj } from '@/graphql/types';
+import { zodTag } from '@/helpers/zod';
 import { useParams } from 'next/navigation';
-import { toast } from 'sonner';
 import { useTranslations } from 'next-intl';
+import React from 'react';
+import { UseFormReturn } from 'react-hook-form';
+import { toast } from 'sonner';
+import * as z from 'zod';
 
 import { createMutationApi } from './create-mutation-api';
 import { editMutationApi } from './edit-mutation-api';
-import { useDialog } from '@/components/ui/dialog';
-import { FetcherErrorType } from '@/graphql/fetcher';
-import { ShowAdminNavPluginsObj } from '@/graphql/types';
-import { Admin__Core_Plugins__Nav__ShowQuery } from '@/graphql/queries/admin/plugins/dev/nav/admin__core_plugins__nav__show.generated';
-import { zodTag } from '@/helpers/zod';
 
 export const useCreateNavPluginAdmin = ({
   data,
   parentId,
   dataFromSSR,
 }: {
-  dataFromSSR: Admin__Core_Plugins__Nav__ShowQuery['admin__core_plugins__nav__show'];
   data?: ShowAdminNavPluginsObj;
+  dataFromSSR: Admin__Core_Plugins__Nav__ShowQuery['admin__core_plugins__nav__show'];
   parentId?: string;
 }) => {
   const t = useTranslations('admin.core.plugins.dev.nav');
@@ -32,18 +32,18 @@ export const useCreateNavPluginAdmin = ({
       .string()
       .min(3)
       .max(50)
-      .default(data?.code || ''),
+      .default(data?.code ?? ''),
     href: z
       .string()
       .min(1)
       .max(100)
-      .default(data?.href || ''),
+      .default(data?.href ?? ''),
     parent_code: z
       .enum(['null', ...dataFromSSR.map(nav => nav.code)])
-      .default(parentId || 'null'),
+      .default(parentId ?? 'null'),
     icon: z
       .string()
-      .default(data?.icon || '')
+      .default(data?.icon ?? '')
       .optional(),
     keywords: zodTag
       .default(
@@ -73,7 +73,7 @@ export const useCreateNavPluginAdmin = ({
         pluginCode: Array.isArray(code) ? code[0] : code,
         parentCode:
           values.parent_code === 'null' ? undefined : values.parent_code,
-        keywords: (values.keywords || []).map(keyword => keyword.value),
+        keywords: (values.keywords ?? []).map(keyword => keyword.value),
       });
 
       if (mutation?.error) {
@@ -85,7 +85,7 @@ export const useCreateNavPluginAdmin = ({
         pluginCode: Array.isArray(code) ? code[0] : code,
         parentCode:
           values.parent_code === 'null' ? undefined : values.parent_code,
-        keywords: (values.keywords || []).map(keyword => keyword.value),
+        keywords: (values.keywords ?? []).map(keyword => keyword.value),
       });
       if (mutation?.error) {
         error = mutation.error;

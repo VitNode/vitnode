@@ -1,10 +1,9 @@
+import { Badge } from '@/components/ui/badge';
+import { HeaderContent } from '@/components/ui/header-content';
+import { getSessionAdminData } from '@/graphql/get-session-admin';
+import { CONFIG } from '@/helpers/config-with-env';
 import { AlertTriangle } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
-
-import { getSessionAdminData } from '@/graphql/get-session-admin';
-import { HeaderContent } from '@/components/ui/header-content';
-import { CONFIG } from '@/helpers/config-with-env';
-import { Badge } from '@/components/ui/badge';
 
 import { RebuildRequiredAdmin } from '../../../global/rebuild-required';
 
@@ -17,20 +16,20 @@ export const DashboardCoreAdminView = async () => {
   return (
     <>
       <HeaderContent
+        desc={t('version', { version })}
         h1={
           <>
             <span>VitNode</span>
             {CONFIG.node_development && (
               <Badge
-                variant="destructive"
                 className="ml-2 bg-yellow-500 text-black hover:bg-yellow-500"
+                variant="destructive"
               >
                 <AlertTriangle className="size-4" /> Developer Mode
               </Badge>
             )}
           </>
         }
-        desc={t('version', { version })}
       />
 
       <RebuildRequiredAdmin />

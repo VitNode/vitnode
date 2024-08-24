@@ -1,14 +1,14 @@
 'use client';
 
+import { AutoForm } from '@/components/form/auto-form';
+import { AutoFormRadioGroup } from '@/components/form/fields/radio-group';
+import { AutoFormSwitch } from '@/components/form/fields/switch';
+import { AutoFormInputComponentProps } from '@/components/form/type';
+import { Card } from '@/components/ui/card';
+import { Core_GlobalQuery } from '@/graphql/queries/core_global.generated';
 import { useTranslations } from 'next-intl';
 
 import { useEditorAdmin } from './hooks/use-editor-admin';
-import { Card } from '@/components/ui/card';
-import { Core_GlobalQuery } from '@/graphql/queries/core_global.generated';
-import { AutoForm } from '@/components/form/auto-form';
-import { AutoFormInputComponentProps } from '@/components/form/type';
-import { AutoFormRadioGroup } from '@/components/form/fields/radio-group';
-import { AutoFormSwitch } from '@/components/form/fields/switch';
 
 export const ContentEditorAdmin = (
   data: Core_GlobalQuery['core_middleware__show']['editor'],
@@ -19,9 +19,6 @@ export const ContentEditorAdmin = (
   return (
     <Card className="p-6">
       <AutoForm
-        theme="horizontal"
-        formSchema={formSchema}
-        onSubmit={onSubmit}
         fieldConfig={{
           sticky: {
             label: t('sticky.label'),
@@ -53,6 +50,9 @@ export const ContentEditorAdmin = (
             },
           },
         }}
+        formSchema={formSchema}
+        onSubmit={onSubmit}
+        theme="horizontal"
       />
     </Card>
   );

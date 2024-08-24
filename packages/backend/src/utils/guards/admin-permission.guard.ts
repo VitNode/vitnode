@@ -5,7 +5,6 @@ import {
   Injectable,
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
-import { GqlExecutionContext } from '@nestjs/graphql';
 
 import { GqlContext } from '../context';
 import { IOAdminAuthGuards } from './admin-auth.guard';
@@ -34,8 +33,8 @@ export class AdminPermissionGuards implements CanActivate {
     return data;
   }
 
-  async canActivate(context: ExecutionContext): Promise<boolean> {
-    const ctx = GqlExecutionContext.create(context).getContext();
+  canActivate(context: ExecutionContext): boolean {
+    // const ctx: GqlContext = GqlExecutionContext.create(context).getContext();
 
     try {
       // const permission = this.reflector.get<string>(
@@ -61,7 +60,7 @@ export class AdminPermissionGuards implements CanActivate {
       // if (permissions[permission] === true) return true;
 
       return false;
-    } catch (e) {
+    } catch (_) {
       // Return true if auth is optional
       return true;
     }

@@ -1,6 +1,5 @@
-import { Field, Float, Int, ObjectType } from '@nestjs/graphql';
-
 import { UploadCoreFilesObj } from '@/core/files/helpers/upload/dto/upload.obj';
+import { Field, Float, Int, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
 export class HslColor {
@@ -8,23 +7,56 @@ export class HslColor {
   h: number;
 
   @Field(() => Int)
-  s: number;
+  l: number;
 
   @Field(() => Int)
-  l: number;
+  s: number;
 }
 
 @ObjectType()
 class ThemeVariable {
   @Field(() => HslColor)
-  light: HslColor;
+  dark: HslColor;
 
   @Field(() => HslColor)
-  dark: HslColor;
+  light: HslColor;
 }
 
 @ObjectType()
 export class ColorsShowCoreThemeEditor {
+  @Field(() => ThemeVariable)
+  accent: ThemeVariable;
+
+  @Field(() => ThemeVariable)
+  accent_foreground: ThemeVariable;
+
+  @Field(() => ThemeVariable)
+  background: ThemeVariable;
+
+  @Field(() => ThemeVariable)
+  border: ThemeVariable;
+
+  @Field(() => ThemeVariable)
+  card: ThemeVariable;
+
+  @Field(() => ThemeVariable)
+  cover: ThemeVariable;
+
+  @Field(() => ThemeVariable)
+  cover_foreground: ThemeVariable;
+
+  @Field(() => ThemeVariable)
+  destructive: ThemeVariable;
+
+  @Field(() => ThemeVariable)
+  destructive_foreground: ThemeVariable;
+
+  @Field(() => ThemeVariable)
+  muted: ThemeVariable;
+
+  @Field(() => ThemeVariable)
+  muted_foreground: ThemeVariable;
+
   @Field(() => ThemeVariable)
   primary: ThemeVariable;
 
@@ -36,63 +68,30 @@ export class ColorsShowCoreThemeEditor {
 
   @Field(() => ThemeVariable)
   secondary_foreground: ThemeVariable;
-
-  @Field(() => ThemeVariable)
-  background: ThemeVariable;
-
-  @Field(() => ThemeVariable)
-  destructive: ThemeVariable;
-
-  @Field(() => ThemeVariable)
-  destructive_foreground: ThemeVariable;
-
-  @Field(() => ThemeVariable)
-  cover: ThemeVariable;
-
-  @Field(() => ThemeVariable)
-  cover_foreground: ThemeVariable;
-
-  @Field(() => ThemeVariable)
-  muted: ThemeVariable;
-
-  @Field(() => ThemeVariable)
-  muted_foreground: ThemeVariable;
-
-  @Field(() => ThemeVariable)
-  accent: ThemeVariable;
-
-  @Field(() => ThemeVariable)
-  accent_foreground: ThemeVariable;
-
-  @Field(() => ThemeVariable)
-  card: ThemeVariable;
-
-  @Field(() => ThemeVariable)
-  border: ThemeVariable;
 }
 
 @ObjectType()
 export class LogoShowCoreThemeEditor {
-  @Field(() => String)
-  text: string;
-
-  @Field(() => Float)
-  width: number;
-
-  @Field(() => Float)
-  mobile_width: number;
+  @Field(() => UploadCoreFilesObj, { nullable: true })
+  dark?: UploadCoreFilesObj;
 
   @Field(() => UploadCoreFilesObj, { nullable: true })
   light?: UploadCoreFilesObj;
 
   @Field(() => UploadCoreFilesObj, { nullable: true })
-  dark?: UploadCoreFilesObj;
+  mobile_dark?: UploadCoreFilesObj;
 
   @Field(() => UploadCoreFilesObj, { nullable: true })
   mobile_light?: UploadCoreFilesObj;
 
-  @Field(() => UploadCoreFilesObj, { nullable: true })
-  mobile_dark?: UploadCoreFilesObj;
+  @Field(() => Float)
+  mobile_width: number;
+
+  @Field(() => String)
+  text: string;
+
+  @Field(() => Float)
+  width: number;
 }
 
 @ObjectType()

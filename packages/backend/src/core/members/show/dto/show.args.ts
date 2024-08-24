@@ -1,15 +1,14 @@
+import { PaginationArgs, SortDirectionEnum, TransformString } from '@/utils';
 import { ArgsType, Field, InputType, registerEnumType } from '@nestjs/graphql';
 import { Transform } from 'class-transformer';
 
-import { PaginationArgs, SortDirectionEnum, TransformString } from '@/utils';
-
 enum ShowCoreMembersSortingColumnEnum {
-  name = 'name',
-  joined = 'joined',
   first_name = 'first_name',
-  last_name = 'last_name',
-  posts = 'posts',
   followers = 'followers',
+  joined = 'joined',
+  last_name = 'last_name',
+  name = 'name',
+  posts = 'posts',
   reactions = 'reactions',
 }
 
@@ -28,14 +27,14 @@ class ShowCoreMembersSortByArgs {
 
 @ArgsType()
 export class ShowCoreMembersArgs extends PaginationArgs {
-  @Field(() => ShowCoreMembersSortByArgs, { nullable: true })
-  sortBy?: ShowCoreMembersSortByArgs;
+  @Transform(TransformString)
+  @Field(() => String, { nullable: true })
+  name_seo?: string;
 
   @Transform(TransformString)
   @Field(() => String, { nullable: true })
   search?: string;
 
-  @Transform(TransformString)
-  @Field(() => String, { nullable: true })
-  name_seo?: string;
+  @Field(() => ShowCoreMembersSortByArgs, { nullable: true })
+  sortBy?: ShowCoreMembersSortByArgs;
 }

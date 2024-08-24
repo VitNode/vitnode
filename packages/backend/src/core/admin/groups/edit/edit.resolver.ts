@@ -1,11 +1,10 @@
-import { Args, Mutation, Resolver } from '@nestjs/graphql';
+import { AdminAuthGuards } from '@/utils';
 import { UseGuards } from '@nestjs/common';
+import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 import { ShowAdminGroups } from '../show/dto/show.obj';
-import { EditAdminGroupsService } from './edit.service';
 import { EditAdminGroupsArgs } from './dto/edit.args';
-
-import { AdminAuthGuards } from '@/utils';
+import { EditAdminGroupsService } from './edit.service';
 
 @Resolver()
 export class EditAdminGroupsResolver {

@@ -1,16 +1,14 @@
+import { CaptchaTypeEnum, getConfigFile } from '@/providers';
+import { Injectable } from '@nestjs/common';
 import * as fs from 'fs';
 
-import { Injectable } from '@nestjs/common';
-
+import { CustomError } from '../../../../errors';
+import { getUserIp } from '../../../../functions';
+import { GqlContext } from '../../../../utils';
 import {
   CaptchaSecurityConfig,
   HelpersAdminCaptchaSecurityService,
 } from './helpers.service';
-
-import { GqlContext } from '../../../../utils';
-import { CustomError } from '../../../../errors';
-import { getUserIp } from '../../../../functions';
-import { CaptchaTypeEnum, getConfigFile } from '@/providers';
 
 @Injectable()
 export class CaptchaCoreCaptchaSecurityService extends HelpersAdminCaptchaSecurityService {
@@ -18,14 +16,14 @@ export class CaptchaCoreCaptchaSecurityService extends HelpersAdminCaptchaSecuri
     captchaKey,
     userIp,
   }: {
-    captchaKey: string[] | string;
+    captchaKey: string | string[];
     userIp: string;
-  }): Promise<{ score: number; success: boolean; 'error-codes'?: string[] }> {
+  }): Promise<{ 'error-codes'?: string[]; score: number; success: boolean }> {
     const {
       security: { captcha: config },
     } = getConfigFile();
     // If captcha is disabled, return success
-    if (config.type === CaptchaTypeEnum.none || !config.type) {
+    if (config.type === CaptchaTypeEnum.none) {
       return {
         success: true,
         score: 1,
@@ -63,9 +61,11 @@ export class CaptchaCoreCaptchaSecurityService extends HelpersAdminCaptchaSecuri
 
       return data;
     } else if (
-      config.type === CaptchaTypeEnum.recaptcha_v2_checkbox ||
-      config.type === CaptchaTypeEnum.recaptcha_v2_invisible ||
-      config.type === CaptchaTypeEnum.recaptcha_v3
+      [
+        CaptchaTypeEnum.recaptcha_v2_checkbox,
+        CaptchaTypeEnum.recaptcha_v2_invisible,
+        CaptchaTypeEnum.recaptcha_v3,
+      ].includes(config.type)
     ) {
       const res = await fetch(
         `https://www.google.com/recaptcha/api/siteverify?secret=${captchaSecurityConfig.secret_key}&response=${captchaKey}&remoteip=${userIp}`,

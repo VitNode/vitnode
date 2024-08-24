@@ -1,19 +1,19 @@
-import { useTranslations } from 'next-intl';
-
-import { useCreateEditLangAdmin } from './hooks/use-create-edit-lang-admin';
+import { AutoForm } from '@/components/form/auto-form';
+import { AutoFormCombobox } from '@/components/form/fields/combobox';
+import { AutoFormInput } from '@/components/form/fields/input';
+import { AutoFormSwitch } from '@/components/form/fields/switch';
+import { DependencyType } from '@/components/form/type';
+import { Button } from '@/components/ui/button';
 import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
 import { ShowCoreLanguages } from '@/graphql/types';
-import { AutoForm } from '@/components/form/auto-form';
-import { AutoFormInput } from '@/components/form/fields/input';
+import { useTranslations } from 'next-intl';
+
+import { useCreateEditLangAdmin } from './hooks/use-create-edit-lang-admin';
 import { locales } from './locales';
-import { DependencyType } from '@/components/form/type';
-import { AutoFormCombobox } from '@/components/form/fields/combobox';
-import { AutoFormSwitch } from '@/components/form/fields/switch';
 
 export const CreateEditLangAdmin = ({ data }: { data?: ShowCoreLanguages }) => {
   const t = useTranslations('admin.core.langs.actions');
@@ -27,13 +27,20 @@ export const CreateEditLangAdmin = ({ data }: { data?: ShowCoreLanguages }) => {
       </DialogHeader>
 
       <AutoForm
-        formSchema={formSchema}
-        onSubmit={onSubmit}
-        submitButton={props => (
-          <Button {...props}>
-            {t(data ? 'edit.submit' : 'create.submit')}
-          </Button>
-        )}
+        dependencies={[
+          {
+            sourceField: 'default',
+            type: DependencyType.HIDES,
+            targetField: 'default',
+            when: () => !data,
+          },
+          {
+            sourceField: 'code',
+            type: DependencyType.HIDES,
+            targetField: 'code',
+            when: () => !!data,
+          },
+        ]}
         fieldConfig={{
           name: {
             label: t('create.name.label'),
@@ -83,20 +90,13 @@ export const CreateEditLangAdmin = ({ data }: { data?: ShowCoreLanguages }) => {
             description: t('edit.default.desc'),
           },
         }}
-        dependencies={[
-          {
-            sourceField: 'default',
-            type: DependencyType.HIDES,
-            targetField: 'default',
-            when: () => !data,
-          },
-          {
-            sourceField: 'code',
-            type: DependencyType.HIDES,
-            targetField: 'code',
-            when: () => !!data,
-          },
-        ]}
+        formSchema={formSchema}
+        onSubmit={onSubmit}
+        submitButton={props => (
+          <Button {...props}>
+            {t(data ? 'edit.submit' : 'create.submit')}
+          </Button>
+        )}
       />
     </>
   );

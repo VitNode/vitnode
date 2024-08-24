@@ -1,15 +1,14 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
-import { AlertCircle } from 'lucide-react';
-import React from 'react';
-
+import { AutoForm } from '@/components/form/auto-form';
+import { AutoFormCheckbox } from '@/components/form/fields/checkbox';
+import { AutoFormInput } from '@/components/form/fields/input';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { useSignInView } from '@/hooks/core/sign/in/use-sign-in-view';
-import { AutoForm } from '@/components/form/auto-form';
-import { AutoFormInput } from '@/components/form/fields/input';
-import { AutoFormCheckbox } from '@/components/form/fields/checkbox';
+import { AlertCircle } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import React from 'react';
 
 export const FormSignIn = () => {
   const t = useTranslations('core');
@@ -19,7 +18,7 @@ export const FormSignIn = () => {
     <>
       {error && (
         <div className="mb-6 space-y-4">
-          {error?.extensions?.code === 'ACCESS_DENIED' && (
+          {error.extensions?.code === 'ACCESS_DENIED' && (
             <Alert variant="destructive">
               <AlertCircle className="size-4" />
               <AlertTitle>{t('sign_in.error.title')}</AlertTitle>
@@ -27,7 +26,7 @@ export const FormSignIn = () => {
             </Alert>
           )}
 
-          {error && error.extensions?.code !== 'ACCESS_DENIED' && (
+          {error.extensions?.code !== 'ACCESS_DENIED' && (
             <Alert variant="destructive">
               <AlertCircle className="size-4" />
               <AlertTitle>{t('errors.title')}</AlertTitle>
@@ -40,7 +39,6 @@ export const FormSignIn = () => {
       )}
 
       <AutoForm
-        formSchema={formSchema}
         fieldConfig={{
           email: {
             fieldType: props => <AutoFormInput type="email" {...props} />,
@@ -56,6 +54,7 @@ export const FormSignIn = () => {
             description: t('sign_in.form.remember.desc'),
           },
         }}
+        formSchema={formSchema}
         onSubmit={onSubmit}
         submitButton={props => (
           <Button {...props} className="w-full">

@@ -4,19 +4,19 @@ import { cn } from '../helpers/classnames';
 
 interface InitialProps {
   alt: string;
-  src: StaticImageData | string;
   className?: string;
   imageClassName?: string;
   priority?: boolean;
   quality?: number;
   sizes?: string;
+  src: StaticImageData | string;
 }
 
 interface PropsWithWidthAndHeight extends InitialProps {
-  height: number;
-  width: number;
   fill?: never;
+  height: number;
   heightLoading?: number;
+  width: number;
 }
 
 interface PropsWithFill extends InitialProps {
@@ -53,18 +53,18 @@ export const Img = ({
       }}
     >
       <Image
-        width={width}
-        height={height}
-        sizes={sizes}
-        quality={quality}
-        src={src}
         alt={alt}
-        priority={priority}
-        fill={fill}
         className={imageClassName}
+        fill={fill}
+        height={height}
+        priority={priority}
+        quality={quality}
+        sizes={sizes}
+        src={src}
         style={{
           height: height !== undefined ? `${height}px` : undefined,
         }}
+        width={width}
       />
     </div>
   );

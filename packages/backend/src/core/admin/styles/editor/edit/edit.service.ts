@@ -1,16 +1,12 @@
-import * as fs from 'fs';
-
+import { EditorShowCoreMiddleware } from '@/core/middleware/show/dto/show.obj';
+import { configPath, getConfigFile } from '@/providers/config';
 import { Injectable } from '@nestjs/common';
+import * as fs from 'fs';
 
 import { EditAdminEditorStylesArgs } from './dto/edit.args';
 
-import { configPath, getConfigFile } from '@/providers/config';
-import { EditorShowCoreMiddleware } from '@/core/middleware/show/dto/show.obj';
-
 @Injectable()
 export class EditAdminEditorStylesService {
-  constructor() {}
-
   edit(data: EditAdminEditorStylesArgs): EditorShowCoreMiddleware {
     const config = getConfigFile();
 

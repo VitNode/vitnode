@@ -99,7 +99,7 @@ export class WriteStream extends Writable {
   private _fd: number | null = null;
   private _path: string | null = null;
   private _pos = 0;
-  private readonly _readStreams: Set<ReadStream> = new Set();
+  private readonly _readStreams = new Set<ReadStream>();
   private _released = false;
 
   constructor(options?: WriteStreamOptions) {
@@ -189,7 +189,9 @@ export class WriteStream extends Writable {
 
   _final(callback: (error?: Error | null) => unknown): void {
     if (typeof this._fd !== 'number') {
-      this.once('ready', () => this._final(callback));
+      this.once('ready', () => {
+        this._final(callback);
+      });
 
       return;
     }
@@ -202,7 +204,9 @@ export class WriteStream extends Writable {
     callback: (error?: Error | null) => unknown,
   ): void {
     if (typeof this._fd !== 'number') {
-      this.once('ready', () => this._write(chunk, encoding, callback));
+      this.once('ready', () => {
+        this._write(chunk, encoding, callback);
+      });
 
       return;
     }

@@ -1,11 +1,10 @@
+import { core_admin_permissions } from '@/database/schema/admins';
+import { CustomError, NotFoundError } from '@/errors';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
 
 import { ShowAdminStaffAdministrators } from '../show/dto/show.obj';
 import { CreateAdminStaffAdministratorsArgs } from './dto/create.args';
-
-import { CustomError, NotFoundError } from '@/errors';
-import { InternalDatabaseService } from '@/utils/database/internal_database.service';
-import { core_admin_permissions } from '@/database/schema/admins';
 
 @Injectable()
 export class CreateAdminStaffAdministratorsService {

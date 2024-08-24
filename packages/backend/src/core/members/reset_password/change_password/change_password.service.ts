@@ -1,12 +1,11 @@
+import { encryptPassword } from '@/core/sessions/password';
+import { core_users, core_users_pass_reset } from '@/database/schema/users';
+import { InternalServerError } from '@/errors';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
 
 import { ChangePasswordCoreMembersArgs } from './dto/change_password.args';
-
-import { InternalDatabaseService } from '@/utils/database/internal_database.service';
-import { encryptPassword } from '@/core/sessions/password';
-import { core_users, core_users_pass_reset } from '@/database/schema/users';
-import { InternalServerError } from '@/errors';
 
 @Injectable()
 export class ChangePasswordCoreMembersService {

@@ -1,22 +1,22 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
-import { SquareArrowOutUpRight } from 'lucide-react';
-
-import { useEmailSettingsFormAdmin } from './hooks/use-email-settings-form-admin';
-import { Separator } from '@/components/ui/separator';
-import { Admin__Core_Email_Settings__ShowQuery } from '@/graphql/queries/admin/settings/admin__core_email_settings__show.generated';
-import { Link } from '@/navigation';
 import { AutoForm } from '@/components/form/auto-form';
+import { AutoFormColor } from '@/components/form/fields/color';
+import { AutoFormFile } from '@/components/form/fields/file';
 import { AutoFormInput } from '@/components/form/fields/input';
+import { AutoFormRadioGroup } from '@/components/form/fields/radio-group';
+import { AutoFormSwitch } from '@/components/form/fields/switch';
 import {
   AutoFormInputComponentProps,
   DependencyType,
 } from '@/components/form/type';
-import { AutoFormColor } from '@/components/form/fields/color';
-import { AutoFormFile } from '@/components/form/fields/file';
-import { AutoFormRadioGroup } from '@/components/form/fields/radio-group';
-import { AutoFormSwitch } from '@/components/form/fields/switch';
+import { Separator } from '@/components/ui/separator';
+import { Admin__Core_Email_Settings__ShowQuery } from '@/graphql/queries/admin/settings/admin__core_email_settings__show.generated';
+import { Link } from '@/navigation';
+import { SquareArrowOutUpRight } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+
+import { useEmailSettingsFormAdmin } from './hooks/use-email-settings-form-admin';
 
 export const ContentEmailSettingsAdmin = (
   props: Admin__Core_Email_Settings__ShowQuery,
@@ -40,9 +40,6 @@ export const ContentEmailSettingsAdmin = (
           when: (provider: string) => provider !== 'resend',
         },
       ]}
-      theme="horizontal"
-      formSchema={formSchema}
-      onSubmit={onSubmit}
       fieldConfig={{
         color_primary: {
           label: t('color_primary'),
@@ -52,9 +49,9 @@ export const ContentEmailSettingsAdmin = (
           label: t('logo'),
           fieldType: props => (
             <AutoFormFile
+              accept="image/png, image/gif, image/jpeg"
               acceptExtensions={['png', 'jpg', 'gif']}
               maxFileSizeInMb={2}
-              accept="image/png, image/gif, image/jpeg"
               showInfo
               {...props}
             />
@@ -81,10 +78,10 @@ export const ContentEmailSettingsAdmin = (
                     description: t.rich('provider.resend_desc', {
                       link: text => (
                         <Link
-                          href="https://resend.com/"
-                          target="_blank"
-                          rel="noopener noreferrer"
                           className="flex items-center gap-1"
+                          href="https://resend.com/"
+                          rel="noopener noreferrer"
+                          target="_blank"
                         >
                           {text}
                           <SquareArrowOutUpRight className="size-3" />
@@ -115,8 +112,8 @@ export const ContentEmailSettingsAdmin = (
             label: t('smtp_password'),
             fieldType: (props: AutoFormInputComponentProps) => (
               <AutoFormInput
-                type="password"
                 placeholder="**********"
+                type="password"
                 {...props}
               />
             ),
@@ -136,13 +133,16 @@ export const ContentEmailSettingsAdmin = (
           label: t('resend_key'),
           fieldType: props => (
             <AutoFormInput
-              type="password"
               placeholder="**********"
+              type="password"
               {...props}
             />
           ),
         },
       }}
+      formSchema={formSchema}
+      onSubmit={onSubmit}
+      theme="horizontal"
     />
   );
 };

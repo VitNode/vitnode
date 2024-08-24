@@ -1,7 +1,4 @@
-import * as z from 'zod';
-import { useTranslations } from 'next-intl';
-
-import { AutoFormInputComponentProps } from '../type';
+import { FormControl, FormMessage } from '@/components/ui/form';
 import {
   Select,
   SelectContent,
@@ -9,12 +6,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { useTranslations } from 'next-intl';
+import * as z from 'zod';
+
+import { AutoFormInputComponentProps } from '../type';
 import { getBaseSchema } from '../utils';
 import { DefaultParent } from './common/children';
-import { AutoFormWrapper } from './common/wrapper';
 import { AutoFormLabel } from './common/label';
-import { FormControl, FormMessage } from '@/components/ui/form';
 import { AutoFormTooltip } from './common/tooltip';
+import { AutoFormWrapper } from './common/wrapper';
 
 export const AutoFormSelect = ({
   autoFormProps: {
@@ -28,11 +28,11 @@ export const AutoFormSelect = ({
   labels,
   placeholder,
   ...props
-}: AutoFormInputComponentProps &
-  Omit<React.ComponentProps<typeof Select>, 'onValueChange'> & {
-    labels?: Record<string, JSX.Element | string>;
-    placeholder?: string;
-  }) => {
+}: {
+  labels?: Record<string, JSX.Element | string>;
+  placeholder?: string;
+} & AutoFormInputComponentProps &
+  Omit<React.ComponentProps<typeof Select>, 'onValueChange'>) => {
   const t = useTranslations('core');
   const ParentWrapper = fieldConfigItem.renderParent ?? DefaultParent;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -41,7 +41,7 @@ export const AutoFormSelect = ({
 
   let values: [string, string][] = [];
   if (!Array.isArray(baseValues)) {
-    values = Object.entries(baseValues);
+    values = Object.entries(baseValues as object);
   } else {
     values = baseValues.map(value => [value, value]);
   }
@@ -51,28 +51,28 @@ export const AutoFormSelect = ({
     const item = current?.[1];
 
     if (current) {
-      return labels?.[current[0]] || item;
+      return labels?.[current[0]] ?? item;
     }
 
-    return item || t('select_option');
+    return item ?? t('select_option');
   };
 
   return (
     <AutoFormWrapper theme={theme}>
-      {fieldConfigItem?.label && (
+      {fieldConfigItem.label && (
         <AutoFormLabel
-          label={fieldConfigItem.label}
-          isRequired={isRequired}
-          theme={theme}
           description={fieldConfigItem.description}
+          isRequired={isRequired}
+          label={fieldConfigItem.label}
+          theme={theme}
         />
       )}
       <ParentWrapper field={field}>
         <FormControl>
           <Select
-            onValueChange={field.onChange}
             defaultValue={props.value ?? field.value}
             disabled={isDisabled || props.disabled}
+            onValueChange={field.onChange}
             {...props}
           >
             <SelectTrigger {...props}>
@@ -85,7 +85,7 @@ export const AutoFormSelect = ({
                 const label = labels?.[value] ?? labelFromProps;
 
                 return (
-                  <SelectItem value={labelFromProps} key={value}>
+                  <SelectItem key={value} value={labelFromProps}>
                     {label}
                   </SelectItem>
                 );

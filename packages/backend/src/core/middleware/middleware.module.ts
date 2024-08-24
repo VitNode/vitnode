@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 
 import { CoreMiddlewareCron } from './middleware.cron';
-import { ShowCoreMiddlewareService } from './show/show.service';
 import { ShowCoreMiddlewareResolver } from './show/show.resolver';
+import { ShowCoreMiddlewareService } from './show/show.service';
 
 @Module({
   providers: [

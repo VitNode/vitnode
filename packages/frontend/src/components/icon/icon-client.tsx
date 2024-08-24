@@ -1,18 +1,19 @@
 'use client';
 
 import { Loader2 } from 'lucide-react';
-import React from 'react';
 import dynamicIconImports from 'lucide-react/dynamicIconImports';
 import dynamic from 'next/dynamic';
+import React from 'react';
 
 import { cn } from '../../helpers/classnames';
 
 export const IconClient = React.memo(
-  ({ name, className }: { name: string; className?: string }) => {
+  ({ name, className }: { className?: string; name: string }) => {
     if (/\p{Extended_Pictographic}/gu.test(name)) {
       return <span className={className}>{name}</span>;
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     const LucideIcon = dynamic(dynamicIconImports[name]);
 
     return (

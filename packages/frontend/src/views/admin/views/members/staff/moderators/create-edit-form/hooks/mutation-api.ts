@@ -1,13 +1,12 @@
 'use server';
 
-import { revalidatePath } from 'next/cache';
-
 import { fetcher, FetcherErrorType } from '@/graphql/fetcher';
 import {
   Admin__Core_Staff_Moderators__Create,
   Admin__Core_Staff_Moderators__CreateMutation,
   Admin__Core_Staff_Moderators__CreateMutationVariables,
 } from '@/graphql/mutations/admin/members/staff/moderators/admin__core_staff_moderators__create.generated';
+import { revalidatePath } from 'next/cache';
 
 export const mutationApi = async (
   variables: Admin__Core_Staff_Moderators__CreateMutationVariables,

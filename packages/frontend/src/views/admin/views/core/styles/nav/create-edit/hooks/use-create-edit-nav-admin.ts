@@ -1,13 +1,13 @@
+import { useDialog } from '@/components/ui/dialog';
+import { ShowCoreNav } from '@/graphql/types';
+import { zodLanguageInput } from '@/helpers/zod';
+import { useTextLang } from '@/hooks/use-text-lang';
 import { useTranslations } from 'next-intl';
-import * as z from 'zod';
 import { toast } from 'sonner';
+import * as z from 'zod';
 
 import { createMutationApi } from './create-mutation-api';
 import { editMutationApi } from './edit-mutation-api';
-import { useDialog } from '@/components/ui/dialog';
-import { useTextLang } from '@/hooks/use-text-lang';
-import { ShowCoreNav } from '@/graphql/types';
-import { zodLanguageInput } from '@/helpers/zod';
 
 export interface CreateEditNavAdminArgs {
   data?: Omit<ShowCoreNav, 'children'>;
@@ -43,8 +43,8 @@ export const useCreateEditNavAdmin = ({ data }: CreateEditNavAdminArgs) => {
       const mutation = await editMutationApi({
         ...values,
         id: data.id,
-        description: values.description || [],
-        external: values.external || false,
+        description: values.description ?? [],
+        external: values.external ?? false,
       });
       if (mutation?.error) {
         isError = true;
@@ -52,8 +52,8 @@ export const useCreateEditNavAdmin = ({ data }: CreateEditNavAdminArgs) => {
     } else {
       const mutation = await createMutationApi({
         ...values,
-        description: values.description || [],
-        external: values.external || false,
+        description: values.description ?? [],
+        external: values.external ?? false,
       });
       if (mutation?.error) {
         isError = true;

@@ -13,11 +13,11 @@ export const ButtonToolbarEditor = ({
   className,
   ...rest
 }: {
-  children: React.ReactNode;
-  name: string;
   active?: boolean;
+  children: React.ReactNode;
   className?: string;
   disabled?: boolean;
+  name: string;
   onClick?: () => void;
   style?: React.CSSProperties;
 }) => {
@@ -25,16 +25,16 @@ export const ButtonToolbarEditor = ({
 
   return (
     <Button
-      variant="ghost"
-      className={cn('hover:bg-muted size-9 shadow-none', className, {
-        'bg-accent': active,
-      })}
-      size="icon"
-      onClick={onClick}
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-expect-error
       ariaLabel={t(name)}
+      className={cn('hover:bg-muted size-9 shadow-none', className, {
+        'bg-accent': active,
+      })}
       disabled={disabled}
+      onClick={onClick}
+      size="icon"
+      variant="ghost"
       {...rest}
     >
       {children}

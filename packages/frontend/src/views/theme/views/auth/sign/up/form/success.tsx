@@ -1,8 +1,7 @@
-import { Mailbox } from 'lucide-react';
-import { useTranslations } from 'next-intl';
-
 import { buttonVariants } from '@/components/ui/button';
 import { Link } from '@/navigation';
+import { Mailbox } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 export const SuccessFormSignUp = ({ name }: { name: string }) => {
   const t = useTranslations('core.sign_up.form.success');
@@ -18,10 +17,10 @@ export const SuccessFormSignUp = ({ name }: { name: string }) => {
       <p className="text-muted-foreground mb-4 mt-2">{t('desc')}</p>
 
       <Link
-        href="/login"
         className={buttonVariants({
           className: 'px-10',
         })}
+        href="/login"
       >
         {t('sign_in')}
       </Link>

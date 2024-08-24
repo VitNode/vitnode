@@ -1,7 +1,7 @@
 import { Global, Module } from '@nestjs/common';
 
-import { DatabaseService } from './database.service';
 import { DATABASE_ENVS, schemaDatabase } from './config';
+import { DatabaseService } from './database.service';
 
 @Global()
 @Module({

@@ -1,7 +1,6 @@
-import { Field, Int, ObjectType } from '@nestjs/graphql';
-
-import { PageInfo } from '@/utils';
 import { GroupUser } from '@/decorators';
+import { PageInfo } from '@/utils';
+import { Field, Int, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
 export class ContentShowAdminGroups {
@@ -9,28 +8,19 @@ export class ContentShowAdminGroups {
   files_allow_upload: boolean;
 
   @Field(() => Int)
-  files_total_max_storage: number;
+  files_max_storage_for_submit: number;
 
   @Field(() => Int)
-  files_max_storage_for_submit: number;
+  files_total_max_storage: number;
 }
 
 @ObjectType()
 export class ShowAdminGroups extends GroupUser {
-  @Field(() => Int)
-  users_count: number;
+  @Field(() => ContentShowAdminGroups)
+  content: ContentShowAdminGroups;
 
   @Field(() => Date)
   created: Date;
-
-  @Field(() => Date)
-  updated: Date;
-
-  @Field(() => Boolean)
-  protected: boolean;
-
-  @Field(() => Boolean)
-  root: boolean;
 
   @Field(() => Boolean)
   default: boolean;
@@ -38,8 +28,17 @@ export class ShowAdminGroups extends GroupUser {
   @Field(() => Boolean)
   guest: boolean;
 
-  @Field(() => ContentShowAdminGroups)
-  content: ContentShowAdminGroups;
+  @Field(() => Boolean)
+  protected: boolean;
+
+  @Field(() => Boolean)
+  root: boolean;
+
+  @Field(() => Date)
+  updated: Date;
+
+  @Field(() => Int)
+  users_count: number;
 }
 
 @ObjectType()

@@ -1,10 +1,10 @@
-import { useForm } from 'react-hook-form';
+import { useDialog } from '@/components/ui/dialog';
 import { useTranslations } from 'next-intl';
 import React from 'react';
+import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
 import { mutationApi } from './mutation-api';
-import { useDialog } from '@/components/ui/dialog';
 
 interface FormType {
   file: File | null;

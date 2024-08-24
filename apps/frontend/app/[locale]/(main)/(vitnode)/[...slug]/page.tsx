@@ -1,7 +1,7 @@
 import {
+  generateMetadataSlug,
   SlugView,
   SlugViewProps,
-  generateMetadataSlug,
 } from 'vitnode-frontend/views/slug';
 
 export const generateMetadata = generateMetadataSlug;

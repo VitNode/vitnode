@@ -5,8 +5,8 @@ import React from 'react';
 export interface ItemNavSettingsProps {
   href: string;
   icon: LucideIcon;
-  text: string;
   onClick?: () => void;
+  text: string;
 }
 
 export interface LinkItemNavSettingsProps

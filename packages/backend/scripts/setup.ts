@@ -1,17 +1,16 @@
 #!/usr/bin/env node
 /* eslint-disable no-console */
 
+import { createClientDatabase, DATABASE_ENVS } from '@/utils/database/client';
 import * as fs from 'fs';
 import { join } from 'path';
 
-import { copyFiles } from './copy-files';
-import { generateManifest } from './generate-manifest';
-import { updatePlugins } from './update-plugins';
 import coreSchemaDatabase from '../src/database';
+import { copyFiles } from './copy-files';
 import { generateDatabaseMigrations, runMigrations } from './database';
 import { generateConfig } from './generate-config';
-
-import { createClientDatabase, DATABASE_ENVS } from '@/utils/database/client';
+import { generateManifest } from './generate-manifest';
+import { updatePlugins } from './update-plugins';
 
 const initConsole = '\x1b[34m[VitNode]\x1b[0m \x1b[33m[Backend]\x1b[0m';
 
@@ -95,9 +94,9 @@ const db = async () => {
 };
 
 if (process.argv[2] === 'init') {
-  init();
+  void init();
 }
 
 if (process.argv[2] === 'db') {
-  db();
+  void db();
 }

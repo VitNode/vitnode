@@ -1,7 +1,6 @@
+import { Button } from '@/components/ui/button';
 import { ChevronRight } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-
-import { Button } from '@/components/ui/button';
 
 import { ThemeEditorTab, useThemeEditor } from '../../hooks/use-theme-editor';
 
@@ -14,11 +13,14 @@ export const MainTabThemeEditor = () => {
       <h1 className="px-3 text-lg font-bold">{t('title')}</h1>
 
       <div className="mt-4 space-y-1">
+        {/* eslint-disable-next-line @typescript-eslint/no-unnecessary-condition */}
         {form.watch('colors.primary') && (
           <Button
             className="w-full justify-start"
+            onClick={() => {
+              setActiveTab(ThemeEditorTab.Colors);
+            }}
             variant="ghost"
-            onClick={() => setActiveTab(ThemeEditorTab.Colors)}
           >
             <span>{t('colors.title')}</span>
             <ChevronRight className="text-muted-foreground ml-auto" />
@@ -27,8 +29,10 @@ export const MainTabThemeEditor = () => {
 
         <Button
           className="w-full justify-start"
+          onClick={() => {
+            setActiveTab(ThemeEditorTab.Logos);
+          }}
           variant="ghost"
-          onClick={() => setActiveTab(ThemeEditorTab.Logos)}
         >
           <span>{t('logos.title')}</span>
           <ChevronRight className="text-muted-foreground ml-auto" />

@@ -1,21 +1,21 @@
 'use client';
 
-import React from 'react';
-
-import { WelcomeInstallConfigsView } from './steps/welcome';
-import { InstallVitNodeContext } from './hooks/use-install-vitnode';
-import { LicenseInstallConfigsView } from './steps/license/license-install-configs-view';
-import { DatabaseInstallConfigsView } from './steps/database/database-install-configs-view';
-import { AccountInstallConfigsView } from './steps/account/account-install-configs-view';
-import { FinishInstallConfigsView } from './finish/finish-install-config-view';
-import { ItemStepProps, Steps } from '@/components/ui/steps';
 import {
   Card,
   CardDescription,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import { ItemStepProps, Steps } from '@/components/ui/steps';
 import { LayoutAdminInstallEnum } from '@/graphql/types';
+import React from 'react';
+
+import { FinishInstallConfigsView } from './finish/finish-install-config-view';
+import { InstallVitNodeContext } from './hooks/use-install-vitnode';
+import { AccountInstallConfigsView } from './steps/account/account-install-configs-view';
+import { DatabaseInstallConfigsView } from './steps/database/database-install-configs-view';
+import { LicenseInstallConfigsView } from './steps/license/license-install-configs-view';
+import { WelcomeInstallConfigsView } from './steps/welcome';
 
 export const ContentInstallConfigsView = ({
   data,

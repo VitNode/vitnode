@@ -1,91 +1,24 @@
-import * as fs from 'fs';
-import { join } from 'path';
-
+import { ManifestWithLang } from '@/core/settings/settings.module';
+import { core_languages } from '@/database/schema/languages';
+import {
+  ABSOLUTE_PATHS_BACKEND,
+  configPath,
+  ConfigType,
+  getConfigFile,
+  InternalServerError,
+} from '@/index';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
+import * as fs from 'fs';
+import { join } from 'path';
 
 import { EditAdminMainSettingsArgs } from './dto/edit.args';
 import { EditAdminSettingsObj } from './dto/edit.obj';
 
-import { InternalDatabaseService } from '@/utils/database/internal_database.service';
-import {
-  ABSOLUTE_PATHS_BACKEND,
-  ConfigType,
-  InternalServerError,
-  configPath,
-  getConfigFile,
-} from '@/index';
-import { core_languages } from '@/database/schema/languages';
-import { ManifestWithLang } from '@/core/settings/settings.module';
-
 @Injectable()
 export class EditAdminMainSettingsService {
   constructor(private readonly databaseService: InternalDatabaseService) {}
-
-  protected async updateDescription({
-    languages,
-    site_description,
-  }: {
-    languages: { code: string }[];
-    site_description: EditAdminMainSettingsArgs['site_description'];
-  }) {
-    const update = site_description.map(el => {
-      const item =
-        el.value !== undefined
-          ? el
-          : site_description.find(el => el.language_code === 'en')?.value
-            ? site_description.find(el => el.language_code === 'en')
-            : site_description.find(el => el.value);
-
-      // Still not found?
-      if (!item) {
-        throw new InternalServerError();
-      }
-
-      const path = join(
-        ABSOLUTE_PATHS_BACKEND.uploads.public,
-        'assets',
-        item.language_code,
-        'manifest.webmanifest',
-      );
-      const data = fs.readFileSync(path, 'utf8');
-      const manifest: ManifestWithLang = JSON.parse(data);
-      const newData: ManifestWithLang = {
-        ...manifest,
-        lang: el.language_code,
-        description: item.value,
-      };
-
-      fs.writeFileSync(path, JSON.stringify(newData, null, 2), 'utf8');
-
-      return el.language_code;
-    });
-
-    // Update rest of the languages
-    languages
-      .filter(item => !update.includes(item.code))
-      .map(item => {
-        const value =
-          site_description.find(el => el.language_code === 'en')?.value ??
-          site_description[0]?.value ??
-          '';
-
-        const path = join(
-          ABSOLUTE_PATHS_BACKEND.uploads.public,
-          'assets',
-          item.code,
-          'manifest.webmanifest',
-        );
-        const data = fs.readFileSync(path, 'utf8');
-        const manifest: ManifestWithLang = JSON.parse(data);
-        const newData: ManifestWithLang = {
-          ...manifest,
-          description: value,
-        };
-
-        fs.writeFileSync(path, JSON.stringify(newData, null, 2), 'utf8');
-      });
-  }
 
   protected async updateCopyright({
     languages,
@@ -132,6 +65,71 @@ export class EditAdminMainSettingsService {
     );
   }
 
+  protected updateDescription({
+    languages,
+    site_description,
+  }: {
+    languages: { code: string }[];
+    site_description: EditAdminMainSettingsArgs['site_description'];
+  }) {
+    const update = site_description.map(el => {
+      const item =
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+        el.value !== undefined
+          ? el
+          : site_description.find(el => el.language_code === 'en')?.value
+            ? site_description.find(el => el.language_code === 'en')
+            : site_description.find(el => el.value);
+
+      // Still not found?
+      if (!item) {
+        throw new InternalServerError();
+      }
+
+      const path = join(
+        ABSOLUTE_PATHS_BACKEND.uploads.public,
+        'assets',
+        item.language_code,
+        'manifest.webmanifest',
+      );
+      const data = fs.readFileSync(path, 'utf8');
+      const manifest: ManifestWithLang = JSON.parse(data);
+      const newData: ManifestWithLang = {
+        ...manifest,
+        lang: el.language_code,
+        description: item.value,
+      };
+
+      fs.writeFileSync(path, JSON.stringify(newData, null, 2), 'utf8');
+
+      return el.language_code;
+    });
+
+    // Update rest of the languages
+    languages
+      .filter(item => !update.includes(item.code))
+      .map(item => {
+        const value =
+          site_description.find(el => el.language_code === 'en')?.value ??
+          (site_description[0]?.value || '');
+
+        const path = join(
+          ABSOLUTE_PATHS_BACKEND.uploads.public,
+          'assets',
+          item.code,
+          'manifest.webmanifest',
+        );
+        const data = fs.readFileSync(path, 'utf8');
+        const manifest: ManifestWithLang = JSON.parse(data);
+        const newData: ManifestWithLang = {
+          ...manifest,
+          description: value,
+        };
+
+        fs.writeFileSync(path, JSON.stringify(newData, null, 2), 'utf8');
+      });
+  }
+
   async edit({
     site_copyright,
     site_description,
@@ -154,7 +152,7 @@ export class EditAdminMainSettingsService {
     const languages = await this.databaseService.db
       .select()
       .from(core_languages);
-    await this.updateDescription({ site_description, languages });
+    this.updateDescription({ site_description, languages });
     await this.updateCopyright({ site_copyright, languages });
 
     return {

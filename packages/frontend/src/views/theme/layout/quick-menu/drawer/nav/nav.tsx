@@ -1,14 +1,14 @@
-import React from 'react';
-import * as Accordion from '@radix-ui/react-accordion';
-import { ChevronDown } from 'lucide-react';
-
-import { ItemNavDrawerQuickMenu } from './item';
-import { classNameDrawerQuickMenu } from '../drawer';
-import { useSession } from '@/hooks/use-session';
-import { useTextLang } from '@/hooks/use-text-lang';
-import { cn } from '@/helpers/classnames';
 import { buttonVariants } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
+import { cn } from '@/helpers/classnames';
+import { useSession } from '@/hooks/use-session';
+import { useTextLang } from '@/hooks/use-text-lang';
+import * as Accordion from '@radix-ui/react-accordion';
+import { ChevronDown } from 'lucide-react';
+import React from 'react';
+
+import { classNameDrawerQuickMenu } from '../drawer';
+import { ItemNavDrawerQuickMenu } from './item';
 
 export const NavDrawerQuickMenu = ({
   navIcons,
@@ -23,11 +23,11 @@ export const NavDrawerQuickMenu = ({
 
   return (
     <Accordion.Root
-      type="multiple"
-      defaultValue={activeItems}
       className={cn('flex flex-col px-2', {
         'pb-5': !session,
       })}
+      defaultValue={activeItems}
+      type="multiple"
     >
       {nav.map(item => {
         if (item.children.length > 0) {
@@ -43,13 +43,13 @@ export const NavDrawerQuickMenu = ({
                     ),
                   }),
                 )}
-                onClick={() =>
+                onClick={() => {
                   setActiveItems(prev =>
                     prev.includes(item.id.toString())
                       ? prev.filter(el => el !== item.id.toString())
                       : [...prev, item.id.toString()],
-                  )
-                }
+                  );
+                }}
               >
                 <div className="[&>svg]:text-muted-foreground flex w-full flex-wrap items-center gap-2">
                   {item.icon

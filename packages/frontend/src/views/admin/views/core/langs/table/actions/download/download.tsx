@@ -1,11 +1,10 @@
+import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import { Loader } from '@/components/ui/loader';
+import { ShowCoreLanguages } from '@/graphql/types';
 import { Download } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import React from 'react';
-
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
-import { Loader } from '@/components/ui/loader';
-import { ShowCoreLanguages } from '@/graphql/types';
 
 const Content = React.lazy(async () =>
   import('./content').then(module => ({
@@ -21,7 +20,7 @@ export const DownloadActionsTableLangsCoreAdmin = (
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="ghost" size="icon" ariaLabel={t('download')}>
+        <Button ariaLabel={t('download')} size="icon" variant="ghost">
           <Download />
         </Button>
       </DialogTrigger>

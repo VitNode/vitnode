@@ -1,22 +1,22 @@
-import emojiMartData, { Emoji, EmojiMartData } from '@emoji-mart/data';
-import { init, SearchIndex } from 'emoji-mart';
-import React from 'react';
-import { useTranslations } from 'next-intl';
-
-import { IconPickerProps } from '../content';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/helpers/classnames';
+import emojiMartData, { Emoji, EmojiMartData } from '@emoji-mart/data';
+import { init, SearchIndex } from 'emoji-mart';
+import { useTranslations } from 'next-intl';
+import React from 'react';
+
+import { IconPickerProps } from '../content';
 
 interface Props extends Omit<IconPickerProps, 'setOpen'> {
-  search: string;
-  skinToneIndex: number;
   classNameHeaders?: string;
+  search: string;
   setOpen?: (open: boolean) => void;
+  skinToneIndex: number;
 }
 
 const emojiMart = emojiMartData as EmojiMartData;
 
-init({ data: emojiMartData });
+void init({ data: emojiMartData });
 
 export const EmojisContentIconInput = ({
   classNameHeaders,
@@ -27,7 +27,7 @@ export const EmojisContentIconInput = ({
   value,
 }: Props) => {
   const t = useTranslations('core');
-  const [searchResults, setSearchResults] = React.useState<string[] | null>(
+  const [searchResults, setSearchResults] = React.useState<null | string[]>(
     null,
   );
 
@@ -43,7 +43,7 @@ export const EmojisContentIconInput = ({
   };
 
   React.useEffect(() => {
-    setResults(search);
+    void setResults(search);
   }, [search]);
 
   if (search) {
@@ -71,11 +71,9 @@ export const EmojisContentIconInput = ({
 
               return (
                 <Button
-                  key={`search_${id}`}
-                  size="icon"
-                  className="size-9 text-2xl"
                   ariaLabel={emoji.name}
-                  variant={value === icon ? 'default' : 'ghost'}
+                  className="size-9 text-2xl"
+                  key={`search_${id}`}
                   onClick={() => {
                     if (value === icon) {
                       onChange('');
@@ -87,6 +85,8 @@ export const EmojisContentIconInput = ({
                     onChange(icon);
                     setOpen?.(false);
                   }}
+                  size="icon"
+                  variant={value === icon ? 'default' : 'ghost'}
                 >
                   {icon}
                 </Button>
@@ -123,11 +123,9 @@ export const EmojisContentIconInput = ({
 
               return (
                 <Button
-                  key={`${id}_${category.id}`}
-                  size="icon"
-                  className="size-9 text-2xl"
                   ariaLabel={emoji.name}
-                  variant={value === icon ? 'default' : 'ghost'}
+                  className="size-9 text-2xl"
+                  key={`${id}_${category.id}`}
                   onClick={() => {
                     if (value === icon) {
                       onChange('');
@@ -139,6 +137,8 @@ export const EmojisContentIconInput = ({
                     onChange(icon);
                     setOpen?.(false);
                   }}
+                  size="icon"
+                  variant={value === icon ? 'default' : 'ghost'}
                 >
                   {icon}
                 </Button>

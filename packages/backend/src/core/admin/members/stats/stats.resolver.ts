@@ -1,10 +1,9 @@
-import { Query, Resolver } from '@nestjs/graphql';
-import { UseGuards } from '@nestjs/common';
-
-import { StatsAdminMembersService } from './stats.service';
-import { SignUpStatsAdminMembers } from './dto/stats.obj';
-
 import { AdminAuthGuards } from '@/utils';
+import { UseGuards } from '@nestjs/common';
+import { Query, Resolver } from '@nestjs/graphql';
+
+import { SignUpStatsAdminMembers } from './dto/stats.obj';
+import { StatsAdminMembersService } from './stats.service';
 
 @Resolver()
 export class StatsAdminMembersResolver {

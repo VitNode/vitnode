@@ -1,11 +1,10 @@
-import { Pencil } from 'lucide-react';
-import React from 'react';
-import { useTranslations } from 'next-intl';
-
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { Loader } from '@/components/ui/loader';
 import { ShowAdminGroups } from '@/graphql/types';
+import { Pencil } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import React from 'react';
 
 const CreateEditFormGroupsMembersAdmin = React.lazy(async () =>
   import('../../create-edit-form/create-edit-form-groups-members-admin').then(
@@ -21,7 +20,7 @@ export const EditGroupsMembersDialogAdmin = (data: ShowAdminGroups) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="ghost" size="icon" ariaLabel={t('edit')}>
+        <Button ariaLabel={t('edit')} size="icon" variant="ghost">
           <Pencil />
         </Button>
       </DialogTrigger>

@@ -1,14 +1,13 @@
-import React from 'react';
-import { useSearchParams } from 'next/navigation';
 import { PlusCircle } from 'lucide-react';
+import { useSearchParams } from 'next/navigation';
+import React from 'react';
 
-import { FilterToolbarDataTableContext } from './hooks/use-filter-toolbar-data-table';
-
-import { Popover, PopoverContent, PopoverTrigger } from '../../../ui/popover';
-import { Button } from '../../../ui/button';
-import { Separator } from '../../../ui/separator';
 import { Badge } from '../../../ui/badge';
+import { Button } from '../../../ui/button';
 import { Loader } from '../../../ui/loader';
+import { Popover, PopoverContent, PopoverTrigger } from '../../../ui/popover';
+import { Separator } from '../../../ui/separator';
+import { FilterToolbarDataTableContext } from './hooks/use-filter-toolbar-data-table';
 
 export interface FilterToolbarDataTableProps {
   children: React.ReactNode;
@@ -27,22 +26,22 @@ export function FilterToolbarDataTable({
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button variant="outline" size="sm" className="h-10">
+        <Button className="h-10" size="sm" variant="outline">
           <PlusCircle className="mr-2 size-4" />
           {title}
           {selectedValues.length > 0 && (
             <>
-              <Separator orientation="vertical" className="mx-2 h-4" />
+              <Separator className="mx-2 h-4" orientation="vertical" />
               <Badge
-                variant="secondary"
                 className="rounded-sm px-1 font-normal lg:hidden"
+                variant="secondary"
               >
                 {selectedValues.length}
               </Badge>
               <div className="hidden space-x-1 lg:flex">
                 <Badge
-                  variant="secondary"
                   className="rounded-sm px-1 font-normal"
+                  variant="secondary"
                 >
                   +{selectedValues.length}
                 </Badge>
@@ -52,7 +51,7 @@ export function FilterToolbarDataTable({
         </Button>
       </PopoverTrigger>
 
-      <PopoverContent className="w-56 p-0" align="start">
+      <PopoverContent align="start" className="w-56 p-0">
         <FilterToolbarDataTableContext.Provider value={{ title, id }}>
           <React.Suspense fallback={<Loader className="p-4" />}>
             {children}

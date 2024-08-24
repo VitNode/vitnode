@@ -1,12 +1,10 @@
-import * as fs from 'fs';
-
-import { Injectable } from '@nestjs/common';
-
-import { ChangePositionAdminNavPluginsArgs } from './dto/change_position.args';
-import { HelpersAdminNavPluginsService } from '../helpers.service';
-
 import { NotFoundError } from '@/errors';
 import { ABSOLUTE_PATHS_BACKEND, ConfigPlugin } from '@/index';
+import { Injectable } from '@nestjs/common';
+import * as fs from 'fs';
+
+import { HelpersAdminNavPluginsService } from '../helpers.service';
+import { ChangePositionAdminNavPluginsArgs } from './dto/change_position.args';
 
 @Injectable()
 export class ChangePositionAdminNavPluginsService extends HelpersAdminNavPluginsService {
@@ -71,7 +69,7 @@ export class ChangePositionAdminNavPluginsService extends HelpersAdminNavPlugins
         throw new NotFoundError('Parent');
       }
 
-      parentItem.children = parentItem.children || [];
+      parentItem.children = parentItem.children ?? [];
       parentItem.children.splice(index_to_move, 0, itemToMove);
     } else {
       // If parent_code is not provided, add the item to the root of the nav array

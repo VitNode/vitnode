@@ -2,9 +2,9 @@ import { Paperclip } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
+import { Button } from '../../../components/ui/button';
 import { FileStateEditor } from '../../extensions/files/files';
 import { useEditorState } from '../../hooks/use-editor-state';
-import { Button } from '../../../components/ui/button';
 
 export const FilesButtonFooterEditor = () => {
   const t = useTranslations('core.editor');
@@ -13,13 +13,12 @@ export const FilesButtonFooterEditor = () => {
 
   return (
     <>
-      <Button variant="ghost" onClick={() => ref.current?.click()}>
+      <Button onClick={() => ref.current?.click()} variant="ghost">
         <Paperclip /> {t('files.attach')}
       </Button>
       <input
-        type="file"
         className="hidden"
-        ref={ref}
+        multiple
         onChange={async e => {
           const files: FileStateEditor[] = [...(e.target.files ?? [])].map(
             file => ({
@@ -31,7 +30,8 @@ export const FilesButtonFooterEditor = () => {
 
           await uploadFiles({ files });
         }}
-        multiple
+        ref={ref}
+        type="file"
         value=""
       />
     </>

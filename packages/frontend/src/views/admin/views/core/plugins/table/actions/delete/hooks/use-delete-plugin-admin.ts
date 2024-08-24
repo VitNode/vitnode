@@ -1,8 +1,8 @@
+import { useAlertDialog } from '@/components/ui/alert-dialog';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 
 import { mutationApi } from './mutation-api';
-import { useAlertDialog } from '@/components/ui/alert-dialog';
 
 interface Args {
   code: string;

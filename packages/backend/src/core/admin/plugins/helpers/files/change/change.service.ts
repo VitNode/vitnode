@@ -1,21 +1,19 @@
-import { join } from 'path';
-import * as fs from 'fs';
-
+import { CustomError } from '@/errors';
+import { ABSOLUTE_PATHS_BACKEND } from '@/index';
 import { Injectable } from '@nestjs/common';
-
-import {
-  changeDatabaseService,
-  changeLangTypes,
-  changeModuleRootSchema,
-} from './contents';
+import * as fs from 'fs';
+import { join } from 'path';
 
 import {
   removeDatabaseFromService,
   removeLangFromTypes,
   removeModuleFromRootSchema,
 } from '../../../delete/contents';
-import { CustomError } from '@/errors';
-import { ABSOLUTE_PATHS_BACKEND } from '@/index';
+import {
+  changeDatabaseService,
+  changeLangTypes,
+  changeModuleRootSchema,
+} from './contents';
 
 interface ChangeFilesContentType {
   condition: (content: string) => boolean;

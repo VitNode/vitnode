@@ -6,9 +6,8 @@ import {
 } from '@nestjs/common';
 import { GqlExecutionContext } from '@nestjs/graphql';
 
-import { GqlContext } from '../context';
-
 import { AuthorizationAdminSessionsObj } from '../../core/admin/sessions/authorization/dto/authorization.obj';
+import { GqlContext } from '../context';
 
 export interface IOAdminAuthGuards {
   authorization: (
@@ -34,11 +33,11 @@ export class AdminAuthGuards implements CanActivate {
   }
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
-    const ctx = GqlExecutionContext.create(context).getContext();
+    const ctx: GqlContext = GqlExecutionContext.create(context).getContext();
 
     try {
       return !!(await this.getAuth(ctx));
-    } catch (e) {
+    } catch (_) {
       // Return true if auth is optional
       return true;
     }

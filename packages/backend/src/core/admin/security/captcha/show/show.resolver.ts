@@ -1,10 +1,9 @@
-import { Query, Resolver } from '@nestjs/graphql';
-import { UseGuards } from '@nestjs/common';
-
-import { ShowAdminCaptchaSecurityService } from './show.service';
-import { ShowAdminCaptchaSecurityObj } from './dto/show.obj';
-
 import { AdminAuthGuards } from '@/utils/guards/admin-auth.guard';
+import { UseGuards } from '@nestjs/common';
+import { Query, Resolver } from '@nestjs/graphql';
+
+import { ShowAdminCaptchaSecurityObj } from './dto/show.obj';
+import { ShowAdminCaptchaSecurityService } from './show.service';
 
 @Resolver()
 export class ShowAdminCaptchaSecurityResolver {

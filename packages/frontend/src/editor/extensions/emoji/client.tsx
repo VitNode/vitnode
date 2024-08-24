@@ -1,21 +1,20 @@
 'use client';
 
-import { ReactRenderer } from '@tiptap/react';
-import React from 'react';
-import tippy, { Instance, Props } from 'tippy.js';
-import { useTranslations } from 'next-intl';
 import { Emoji } from '@emoji-mart/data';
+import { ReactRenderer } from '@tiptap/react';
+import { useTranslations } from 'next-intl';
+import React from 'react';
+import tippy, { Instance } from 'tippy.js';
 
+import { Button } from '../../../components/ui/button';
+import { classPopover } from '../../../components/ui/popover';
+import { cn } from '../../../helpers/classnames';
+import { CONFIG } from '../../../helpers/config-with-env';
 import {
   ComponentListRef,
   SuggestionKeyDownProps,
   SuggestionProps,
 } from '../mentions/client';
-
-import { Button } from '../../../components/ui/button';
-import { classPopover } from '../../../components/ui/popover';
-import { CONFIG } from '../../../helpers/config-with-env';
-import { cn } from '../../../helpers/classnames';
 
 const ComponentList = ({
   command,
@@ -42,16 +41,18 @@ const ComponentList = ({
         ? emoji.skins[skinToneIndex].native
         : emoji.skins[0].native;
 
-    if (emoji) {
-      command({ id: icon });
-    }
+    command({ id: icon });
   };
 
-  const upHandler = () =>
+  const upHandler = () => {
     setSelectedIndex((selectedIndex + items.length - 1) % items.length);
-  const downHandler = () =>
+  };
+  const downHandler = () => {
     setSelectedIndex((selectedIndex + 1) % items.length);
-  const enterHandler = () => selectItem(selectedIndex);
+  };
+  const enterHandler = () => {
+    selectItem(selectedIndex);
+  };
 
   React.useEffect(() => {
     setSelectedIndex(0);
@@ -92,13 +93,15 @@ const ComponentList = ({
 
           return (
             <Button
-              variant="ghost"
               className={cn('justify-start', {
                 'bg-accent': index === selectedIndex,
               })}
               key={index}
-              onClick={() => selectItem(index)}
+              onClick={() => {
+                selectItem(index);
+              }}
               size="sm"
+              variant="ghost"
             >
               <span>{icon}</span> {emoji.id}
             </Button>
@@ -111,8 +114,8 @@ const ComponentList = ({
   );
 };
 
-let component: ReactRenderer<ComponentListRef> | null = null;
-let popup: Instance<Props>[] | null = null;
+let component: null | ReactRenderer<ComponentListRef> = null;
+let popup: Instance[] | null = null;
 
 export function onStart<T>(props: SuggestionProps<T>) {
   component = new ReactRenderer(ComponentList, {
@@ -128,7 +131,7 @@ export function onStart<T>(props: SuggestionProps<T>) {
   popup = tippy('body', {
     getReferenceClientRect: props.clientRect,
     appendTo: () => document.body,
-    content: component?.element,
+    content: component.element,
     showOnCreate: true,
     interactive: true,
     trigger: 'manual',

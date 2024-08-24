@@ -10,11 +10,11 @@ export const AutoFormLabel = ({
   theme,
   description,
 }: {
+  className?: string;
   description: React.ReactNode | undefined;
   isRequired: boolean;
   label: string;
   theme: AutoFormInputComponentProps['autoFormProps']['theme'];
-  className?: string;
 }) => {
   return (
     <FormLabel

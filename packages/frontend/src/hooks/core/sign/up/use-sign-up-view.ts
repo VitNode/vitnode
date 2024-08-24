@@ -1,12 +1,11 @@
 import { useTranslations } from 'next-intl';
-import * as z from 'zod';
 import React from 'react';
-import { toast } from 'sonner';
 import { UseFormReturn } from 'react-hook-form';
-
-import { mutationApi } from './mutation-api';
+import { toast } from 'sonner';
+import * as z from 'zod';
 
 import { useCaptcha } from '../../../use-captcha';
+import { mutationApi } from './mutation-api';
 
 const nameRegex = /^(?!.* {2})[\p{L}\p{N}._@ -]*$/u;
 

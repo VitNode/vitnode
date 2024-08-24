@@ -40,7 +40,7 @@ export const createCli = async (program: Command): Promise<CreateCliReturn> => {
   if (!optionsFromProgram.packageManager) {
     const availablePackageManagers = await getAvailablePackageManagers();
     const text = color.blue('package manager');
-    const { packageManager } = await prompts<string>({
+    const { packageManager } = await prompts({
       onState: onPromptState,
       name: 'packageManager',
       type: 'select',

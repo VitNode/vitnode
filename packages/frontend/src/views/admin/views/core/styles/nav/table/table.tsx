@@ -1,20 +1,20 @@
 'use client';
 
-import { DndContext, closestCorners, DragOverlay } from '@dnd-kit/core';
+import { ItemDragAndDrop } from '@/components/drag&drop-item';
+import { Admin__Core_Nav__ShowQuery } from '@/graphql/queries/admin/styles/nav/admin__core_nav__show.generated';
+import { ShowCoreNav } from '@/graphql/types';
+import { useDragAndDrop } from '@/hooks/drag&drop/use-functions';
+import { closestCorners, DndContext, DragOverlay } from '@dnd-kit/core';
 import {
   SortableContext,
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
-import React from 'react';
 import { useTranslations } from 'next-intl';
+import React from 'react';
 import { toast } from 'sonner';
 
-import { ItemContentTableContentNavAdmin } from './item';
 import { mutationChangePositionApi } from './hooks/mutation-change-position-api';
-import { useDragAndDrop } from '@/hooks/drag&drop/use-functions';
-import { ItemDragAndDrop } from '@/components/drag&drop-item';
-import { Admin__Core_Nav__ShowQuery } from '@/graphql/queries/admin/styles/nav/admin__core_nav__show.generated';
-import { ShowCoreNav } from '@/graphql/types';
+import { ItemContentTableContentNavAdmin } from './item';
 
 const indentationWidth = 20;
 
@@ -47,12 +47,10 @@ export const TableNavAdmin = ({ core_nav__show: { edges }, icons }: Props) => {
 
   // Revalidate items when edges change
   React.useEffect(() => {
-    if (!edges || !data) return;
-
     setData(edges);
   }, [edges]);
 
-  if (!data || data.length === 0) {
+  if (data.length === 0) {
     return <div className="text-center">{t('no_results')}</div>;
   }
 
@@ -60,11 +58,6 @@ export const TableNavAdmin = ({ core_nav__show: { edges }, icons }: Props) => {
     <DndContext
       collisionDetection={closestCorners}
       onDragCancel={resetState}
-      onDragOver={onDragOver}
-      onDragMove={e =>
-        onDragMove({ ...e, flattenedItems, indentationWidth, maxDepth: 1 })
-      }
-      onDragStart={onDragStart}
       onDragEnd={async event => {
         const moveTo = onDragEnd<ShowCoreNav>({
           data,
@@ -80,12 +73,17 @@ export const TableNavAdmin = ({ core_nav__show: { edges }, icons }: Props) => {
             indexToMove: moveTo.indexToMove,
             parentId: Number(moveTo.parentId),
           });
-        } catch (error) {
+        } catch (_) {
           toast.error(t('errors.title'), {
             description: t('errors.internal_server_error'),
           });
         }
       }}
+      onDragMove={e => {
+        onDragMove({ ...e, flattenedItems, indentationWidth, maxDepth: 1 });
+      }}
+      onDragOver={onDragOver}
+      onDragStart={onDragStart}
     >
       <SortableContext items={sortedIds} strategy={verticalListSortingStrategy}>
         {flattenedItems.map(item => (

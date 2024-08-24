@@ -1,5 +1,3 @@
-import React from 'react';
-import { useTranslations } from 'next-intl';
 import {
   Code,
   Heading1,
@@ -10,14 +8,16 @@ import {
   Heading6,
   Pilcrow,
 } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import React from 'react';
 
-import { useEditorState } from '../../hooks/use-editor-state';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
 } from '../../../components/ui/select';
+import { useEditorState } from '../../hooks/use-editor-state';
 
 const getHeadingIcon = (level: number) => {
   switch (level) {
@@ -71,7 +71,6 @@ export const HeadingToolbarEditor = () => {
 
   return (
     <Select
-      value={value.toString()}
       onValueChange={val => {
         const value = Number(val);
         if (value === 0) {
@@ -89,6 +88,7 @@ export const HeadingToolbarEditor = () => {
         const level = (value - 1) as 1 | 2 | 3 | 4 | 5 | 6;
         editor.chain().setHeading({ level }).run();
       }}
+      value={value.toString()}
     >
       <SelectTrigger className="hover:bg-muted h-9 w-14 justify-center gap-1 border-0 p-0 shadow-none [&>svg:not(:last-child)]:size-5">
         {getHeadingIcon(value)}

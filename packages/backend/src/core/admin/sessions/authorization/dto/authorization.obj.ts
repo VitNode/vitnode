@@ -1,6 +1,5 @@
-import { Field, ObjectType } from '@nestjs/graphql';
-
 import { AuthorizationCurrentUserObj } from '@/core/sessions/authorization/dto/authorization.obj';
+import { Field, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
 export class AuthorizationAdminSessionsObj {

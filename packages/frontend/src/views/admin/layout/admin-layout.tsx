@@ -1,11 +1,11 @@
+import { getGlobalData } from '@/graphql/get-global-data';
+import { getSessionAdminData } from '@/graphql/get-session-admin';
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
-import { AdminProviders } from './providers';
-import { getSessionAdminData } from '@/graphql/get-session-admin';
-import { getGlobalData } from '@/graphql/get-global-data';
 import { AsideAuthAdmin } from './auth/aside/aside';
 import { HeaderAdmin } from './auth/header/header';
+import { AdminProviders } from './providers';
 
 export const generateMetadataAdminLayout = async (): Promise<Metadata> => {
   const [data, t] = await Promise.all([

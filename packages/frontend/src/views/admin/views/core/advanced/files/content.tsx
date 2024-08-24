@@ -1,23 +1,23 @@
 'use client';
 
-import { Clock, File } from 'lucide-react';
-import { useTranslations } from 'next-intl';
-import Image from 'next/image';
-import React from 'react';
-
-import { ActionsFilesAdvancedCoreAdmin } from './actions/actions';
-import { CONFIG } from '@/helpers/config-with-env';
 import { DateFormat } from '@/components/date-format';
-import { Link } from '@/navigation';
+import { DataTable } from '@/components/ui/data-table';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-import { DataTable } from '@/components/ui/data-table';
 import { Admin__Core_Files__ShowQuery } from '@/graphql/queries/admin/advanced/files/admin__core_files__show.generated';
+import { CONFIG } from '@/helpers/config-with-env';
 import { formatBytes } from '@/helpers/format-bytes';
+import { Link } from '@/navigation';
+import { Clock, File } from 'lucide-react';
+import Image from 'next/image';
+import { useTranslations } from 'next-intl';
+import React from 'react';
+
+import { ActionsFilesAdvancedCoreAdmin } from './actions/actions';
 
 export const ContentFilesAdvancedCoreAdminView = ({
   admin__core_files__show: { edges, pageInfo },
@@ -32,20 +32,20 @@ export const ContentFilesAdvancedCoreAdminView = ({
           id: 'id',
           cell: ({ row }) => {
             const src =
-              row?.width && row.height
+              row.width && row.height
                 ? `${CONFIG.graphql_public_url}/${row.dir_folder}/${row.file_name}`
                 : null;
-            const alt = row?.file_alt ?? row?.file_name ?? '';
+            const alt = row.file_alt ?? row.file_name;
 
             return (
               <div className="relative flex h-14 w-20 shrink-0 items-center justify-center overflow-hidden rounded-lg">
                 {row.width && row.height && src ? (
                   <Image
-                    src={src}
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    className="object-cover"
                     alt={alt}
+                    className="object-cover"
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    src={src}
                   />
                 ) : (
                   <File className="text-muted-foreground size-8" />
@@ -65,7 +65,7 @@ export const ContentFilesAdvancedCoreAdminView = ({
                 </span>
                 <div className="text-muted-foreground flex flex-wrap items-center gap-2 text-sm">
                   <span>{row.mimetype}</span>
-                  {row?.width && row?.height && (
+                  {row.width && row.height && (
                     <>
                       <span>&middot;</span>
                       <span>
@@ -136,11 +136,11 @@ export const ContentFilesAdvancedCoreAdminView = ({
         },
       ]}
       data={edges}
-      pageInfo={pageInfo}
       defaultSorting={{
         sortBy: 'created',
         sortDirection: 'desc',
       }}
+      pageInfo={pageInfo}
       searchPlaceholder={t('search')}
     />
   );

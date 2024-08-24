@@ -1,7 +1,7 @@
 'use client';
 
-import { Link, usePathname } from '@/navigation';
 import { Button } from '@/components/ui/button';
+import { Link, usePathname } from '@/navigation';
 
 import { LinkItemNavSettingsProps } from '../../hooks/use-settings-view';
 
@@ -15,10 +15,10 @@ export const LinkItemNavSettings = ({
 
   return (
     <Button
-      variant={active ? 'default' : 'ghost'}
-      size="sm"
-      className="relative justify-start gap-2"
       asChild
+      className="relative justify-start gap-2"
+      size="sm"
+      variant={active ? 'default' : 'ghost'}
     >
       <Link href={href} onClick={onClick}>
         {children}

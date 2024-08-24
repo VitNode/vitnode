@@ -1,15 +1,14 @@
-import React from 'react';
 import { Ellipsis, Minus, Quote } from 'lucide-react';
+import React from 'react';
 
-import { ButtonToolbarEditor } from '../button';
-import { ToggleToolbarEditor } from '../toggle';
-
-import { useEditorState } from '../../hooks/use-editor-state';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '../../../components/ui/popover';
+import { useEditorState } from '../../hooks/use-editor-state';
+import { ButtonToolbarEditor } from '../button';
+import { ToggleToolbarEditor } from '../toggle';
 
 export const MoreToolbarEditor = () => {
   const { editor } = useEditorState();
@@ -17,7 +16,7 @@ export const MoreToolbarEditor = () => {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <ButtonToolbarEditor name="more" active={editor.isActive('link')}>
+        <ButtonToolbarEditor active={editor.isActive('link')} name="more">
           <Ellipsis />
         </ButtonToolbarEditor>
       </PopoverTrigger>
@@ -31,10 +30,10 @@ export const MoreToolbarEditor = () => {
         </ButtonToolbarEditor>
 
         <ToggleToolbarEditor
-          pressed={editor.isActive('blockquote')}
           onPressedChange={() =>
             editor.chain().focus().toggleBlockquote().run()
           }
+          pressed={editor.isActive('blockquote')}
         >
           <Quote />
         </ToggleToolbarEditor>

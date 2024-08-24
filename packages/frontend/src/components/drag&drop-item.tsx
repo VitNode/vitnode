@@ -20,14 +20,14 @@ export const ItemDragAndDrop = ({
 }: {
   active: boolean;
   children: React.ReactNode;
-  id: number | string;
-  isDropHere: boolean;
-  onCollapse: () => void;
   childrenLength?: number;
   className?: string;
   depth?: number;
+  id: number | string;
   indentationWidth?: number;
+  isDropHere: boolean;
   isOpenChildren?: boolean;
+  onCollapse: () => void;
 }) => {
   const {
     attributes,
@@ -47,11 +47,11 @@ export const ItemDragAndDrop = ({
 
   return (
     <div
-      ref={setDroppableNodeRef}
       className={cn(
         'rounded-lg pl-[var(--spacing)] transition-all [&:not(:first-child)]:mt-2',
         className,
       )}
+      ref={setDroppableNodeRef}
       style={
         {
           '--spacing': `${indentationWidth * depth}px`,
@@ -67,18 +67,18 @@ export const ItemDragAndDrop = ({
             'shadow-lg': active,
           },
         )}
+        ref={setDraggableNodeRef}
         style={{
           transform: CSS.Transform.toString(transform),
           transition,
         }}
-        ref={setDraggableNodeRef}
       >
         <div className="flex shrink-0 gap-2">
           <Button
-            className={cn('w-8')}
-            variant="ghost"
-            size="icon"
             ariaLabel=""
+            className={cn('w-8')}
+            size="icon"
+            variant="ghost"
             {...attributes}
             {...listeners}
           >
@@ -87,10 +87,10 @@ export const ItemDragAndDrop = ({
 
           {allowOpenChildren && (
             <Button
-              onClick={onCollapse}
-              variant="ghost"
-              size="icon"
               ariaLabel=""
+              onClick={onCollapse}
+              size="icon"
+              variant="ghost"
             >
               <ChevronRight
                 className={cn('text-muted-foreground transition-transform', {

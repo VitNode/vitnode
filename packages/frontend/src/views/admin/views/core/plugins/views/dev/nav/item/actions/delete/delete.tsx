@@ -1,23 +1,22 @@
-import { Trash2 } from 'lucide-react';
-import { useTranslations } from 'next-intl';
-import React from 'react';
-
-import { ContentDeleteActionTableNavDevPluginAdminProps } from './content';
 import {
   AlertDialog,
   AlertDialogContent,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
+import { Button } from '@/components/ui/button';
+import { Loader } from '@/components/ui/loader';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-import { Button } from '@/components/ui/button';
-import { Loader } from '@/components/ui/loader';
+import { Trash2 } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import React from 'react';
 
 import { useItemNavDevPluginAdmin } from '../../hooks/use-item-nav-dev-plugin-admin';
+import { ContentDeleteActionTableNavDevPluginAdminProps } from './content';
 
 const Content = React.lazy(async () =>
   import('./content').then(module => ({
@@ -38,9 +37,9 @@ export const DeleteActionTableNavDevPluginAdmin = (
           <TooltipTrigger asChild>
             <AlertDialogTrigger asChild>
               <Button
-                variant="destructiveGhost"
-                size="icon"
                 ariaLabel={t('delete')}
+                size="icon"
+                variant="destructiveGhost"
               >
                 <Trash2 />
               </Button>

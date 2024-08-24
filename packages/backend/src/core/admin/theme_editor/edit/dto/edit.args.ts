@@ -1,6 +1,5 @@
-import { ArgsType, Field, Float, InputType, Int } from '@nestjs/graphql';
-
 import { UploadWithKeepCoreFilesArgs } from '@/core/files/helpers/upload/dto/upload.args';
+import { ArgsType, Field, Float, InputType, Int } from '@nestjs/graphql';
 
 @InputType()
 export class HslColorInput {
@@ -8,23 +7,56 @@ export class HslColorInput {
   h: number;
 
   @Field(() => Int)
-  s: number;
+  l: number;
 
   @Field(() => Int)
-  l: number;
+  s: number;
 }
 
 @InputType()
 export class ThemeVariableInput {
   @Field(() => HslColorInput)
-  light: HslColorInput;
+  dark: HslColorInput;
 
   @Field(() => HslColorInput)
-  dark: HslColorInput;
+  light: HslColorInput;
 }
 
 @InputType()
 class ColorsEditAdminThemeEditor {
+  @Field(() => ThemeVariableInput)
+  accent: ThemeVariableInput;
+
+  @Field(() => ThemeVariableInput)
+  accent_foreground: ThemeVariableInput;
+
+  @Field(() => ThemeVariableInput)
+  background: ThemeVariableInput;
+
+  @Field(() => ThemeVariableInput)
+  border: ThemeVariableInput;
+
+  @Field(() => ThemeVariableInput)
+  card: ThemeVariableInput;
+
+  @Field(() => ThemeVariableInput)
+  cover: ThemeVariableInput;
+
+  @Field(() => ThemeVariableInput)
+  cover_foreground: ThemeVariableInput;
+
+  @Field(() => ThemeVariableInput)
+  destructive: ThemeVariableInput;
+
+  @Field(() => ThemeVariableInput)
+  destructive_foreground: ThemeVariableInput;
+
+  @Field(() => ThemeVariableInput)
+  muted: ThemeVariableInput;
+
+  @Field(() => ThemeVariableInput)
+  muted_foreground: ThemeVariableInput;
+
   @Field(() => ThemeVariableInput)
   primary: ThemeVariableInput;
 
@@ -36,52 +68,10 @@ class ColorsEditAdminThemeEditor {
 
   @Field(() => ThemeVariableInput)
   secondary_foreground: ThemeVariableInput;
-
-  @Field(() => ThemeVariableInput)
-  background: ThemeVariableInput;
-
-  @Field(() => ThemeVariableInput)
-  destructive: ThemeVariableInput;
-
-  @Field(() => ThemeVariableInput)
-  destructive_foreground: ThemeVariableInput;
-
-  @Field(() => ThemeVariableInput)
-  cover: ThemeVariableInput;
-
-  @Field(() => ThemeVariableInput)
-  cover_foreground: ThemeVariableInput;
-
-  @Field(() => ThemeVariableInput)
-  muted: ThemeVariableInput;
-
-  @Field(() => ThemeVariableInput)
-  muted_foreground: ThemeVariableInput;
-
-  @Field(() => ThemeVariableInput)
-  accent: ThemeVariableInput;
-
-  @Field(() => ThemeVariableInput)
-  accent_foreground: ThemeVariableInput;
-
-  @Field(() => ThemeVariableInput)
-  card: ThemeVariableInput;
-
-  @Field(() => ThemeVariableInput)
-  border: ThemeVariableInput;
 }
 
 @InputType()
 class LogosEditAdminThemeEditor {
-  @Field(() => Float)
-  width: number;
-
-  @Field(() => Float)
-  mobile_width: number;
-
-  @Field()
-  text: string;
-
   @Field(() => UploadWithKeepCoreFilesArgs, { nullable: true })
   dark?: UploadWithKeepCoreFilesArgs;
 
@@ -93,6 +83,15 @@ class LogosEditAdminThemeEditor {
 
   @Field(() => UploadWithKeepCoreFilesArgs, { nullable: true })
   mobile_light?: UploadWithKeepCoreFilesArgs;
+
+  @Field(() => Float)
+  mobile_width: number;
+
+  @Field()
+  text: string;
+
+  @Field(() => Float)
+  width: number;
 }
 
 @ArgsType()

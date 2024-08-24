@@ -1,14 +1,15 @@
 'use client';
 
+import { AutoForm } from '@/components/form/auto-form';
+import { AutoFormColor } from '@/components/form/fields/color';
+import { AutoFormInput } from '@/components/form/fields/input';
+import { AutoFormRadioGroup } from '@/components/form/fields/radio-group';
+import { FieldRenderParentProps } from '@/components/form/type';
+import { Admin__Core_Manifest_Metadata__ShowQuery } from '@/graphql/queries/admin/settings/admin__core_manifest_metadata__show.generated';
+import { CONFIG } from '@/helpers/config-with-env';
 import { useTranslations } from 'next-intl';
 
 import { useManifestCoreAdminView } from './hooks/use-manifest-core-admin-view';
-import { CONFIG } from '@/helpers/config-with-env';
-import { Admin__Core_Manifest_Metadata__ShowQuery } from '@/graphql/queries/admin/settings/admin__core_manifest_metadata__show.generated';
-import { AutoForm } from '@/components/form/auto-form';
-import { AutoFormInput } from '@/components/form/fields/input';
-import { AutoFormColor } from '@/components/form/fields/color';
-import { AutoFormRadioGroup } from '@/components/form/fields/radio-group';
 
 export const ContentManifestMetadataCoreAdmin = (
   props: Admin__Core_Manifest_Metadata__ShowQuery,
@@ -18,9 +19,6 @@ export const ContentManifestMetadataCoreAdmin = (
 
   return (
     <AutoForm
-      theme="horizontal"
-      formSchema={formSchema}
-      onSubmit={onSubmit}
       fieldConfig={{
         display: {
           label: t('display.label'),
@@ -53,7 +51,7 @@ export const ContentManifestMetadataCoreAdmin = (
           label: t('start_url.label'),
           description: t('start_url.desc'),
           fieldType: props => <AutoFormInput className="w-64" {...props} />,
-          renderParent: ({ children }) => (
+          renderParent: ({ children }: FieldRenderParentProps) => (
             <div className="flex flex-wrap items-center gap-1">
               <span>{CONFIG.frontend_url}</span>
               {children}
@@ -69,6 +67,9 @@ export const ContentManifestMetadataCoreAdmin = (
           fieldType: AutoFormColor,
         },
       }}
+      formSchema={formSchema}
+      onSubmit={onSubmit}
+      theme="horizontal"
     />
   );
 };

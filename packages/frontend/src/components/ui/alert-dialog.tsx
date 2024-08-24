@@ -1,11 +1,10 @@
 'use client';
 
-import React from 'react';
 import * as AlertDialogPrimitive from '@radix-ui/react-alert-dialog';
-
-import { buttonVariants } from './button';
+import React from 'react';
 
 import { cn } from '../../helpers/classnames';
+import { buttonVariants } from './button';
 
 interface AlertDialogContextArgs {
   open: boolean;
@@ -32,8 +31,8 @@ const AlertDialog = ({
       value={{ open: openProp ?? open, setOpen: onOpenChange ?? setOpen }}
     >
       <AlertDialogPrimitive.Root
-        open={openProp ?? open}
         onOpenChange={onOpenChange ?? setOpen}
+        open={openProp ?? open}
         {...props}
       >
         {children}
@@ -147,14 +146,14 @@ const AlertDialogCancel = ({
 
 export {
   AlertDialog,
-  AlertDialogPortal,
-  AlertDialogOverlay,
-  AlertDialogTrigger,
-  AlertDialogContent,
-  AlertDialogHeader,
-  AlertDialogFooter,
-  AlertDialogTitle,
-  AlertDialogDescription,
   AlertDialogAction,
   AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogOverlay,
+  AlertDialogPortal,
+  AlertDialogTitle,
+  AlertDialogTrigger,
 };

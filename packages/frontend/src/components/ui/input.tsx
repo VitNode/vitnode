@@ -13,8 +13,8 @@ const classNameInput = cn(
 
 const Input = ({ className, type, ...props }: InputProps) => {
   return (
-    <input type={type} className={cn(classNameInput, className)} {...props} />
+    <input className={cn(classNameInput, className)} type={type} {...props} />
   );
 };
 
-export { Input, classNameInput };
+export { classNameInput, Input };

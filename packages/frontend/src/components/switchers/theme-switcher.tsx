@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl';
 import { useTheme } from 'next-themes';
 import React from 'react';
 
+import { Button } from '../ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,7 +13,6 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu';
-import { Button } from '../ui/button';
 
 export const ThemeSwitcher = () => {
   const t = useTranslations('core.user-bar.dark_light_switcher');
@@ -22,10 +22,10 @@ export const ThemeSwitcher = () => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
-          variant="ghost"
-          size="icon"
-          className="relative"
           ariaLabel={t('toggle')}
+          className="relative"
+          size="icon"
+          variant="ghost"
         >
           <Sun className="size-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
           <Moon className="absolute size-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
@@ -33,23 +33,32 @@ export const ThemeSwitcher = () => {
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuRadioGroup
-          value={theme}
           onValueChange={id => {
             setTheme(id);
           }}
+          value={theme}
         >
           <DropdownMenuRadioItem
+            onClick={() => {
+              setTheme('light');
+            }}
             value="light"
-            onClick={() => setTheme('light')}
           >
             <span>{t('light')}</span>
           </DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="dark" onClick={() => setTheme('dark')}>
+          <DropdownMenuRadioItem
+            onClick={() => {
+              setTheme('dark');
+            }}
+            value="dark"
+          >
             <span>{t('dark')}</span>
           </DropdownMenuRadioItem>
           <DropdownMenuRadioItem
+            onClick={() => {
+              setTheme('system');
+            }}
             value="system"
-            onClick={() => setTheme('system')}
           >
             <span>{t('system')}</span>
           </DropdownMenuRadioItem>

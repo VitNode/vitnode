@@ -9,8 +9,8 @@ export const SearchToolbarDataTable = ({
   searchPlaceholder,
   startTransition,
 }: {
-  startTransition: React.TransitionStartFunction;
   searchPlaceholder?: string;
+  startTransition: React.TransitionStartFunction;
 }) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -41,14 +41,14 @@ export const SearchToolbarDataTable = ({
 
   return (
     <Input
-      placeholder={searchPlaceholder}
-      value={value}
+      className="w-[150px] grow lg:w-[250px]"
       onChange={e => {
         const value = e.target.value;
         setValue(value);
         handleSearch(value);
       }}
-      className="w-[150px] grow lg:w-[250px]"
+      placeholder={searchPlaceholder}
+      value={value}
     />
   );
 };

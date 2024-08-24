@@ -1,20 +1,19 @@
-import { Monitor, Moon, Smartphone, Sun, Tablet } from 'lucide-react';
-import { useTranslations } from 'next-intl';
-import React from 'react';
-import { useTheme } from 'next-themes';
-
+import { Button } from '@/components/ui/button';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-import { Button } from '@/components/ui/button';
+import { Monitor, Moon, Smartphone, Sun, Tablet } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import { useTheme } from 'next-themes';
+import React from 'react';
 
 export enum ThemeEditorViewEnum {
   Desktop = 'desktop',
-  Tablet = 'tablet',
   Mobile = 'mobile',
+  Tablet = 'tablet',
 }
 
 export const ToolbarThemeEditor = ({
@@ -45,11 +44,11 @@ export const ToolbarThemeEditor = ({
         <Tooltip>
           <TooltipTrigger asChild>
             <Button
-              size="icon"
               ariaLabel={ariaLabel}
-              variant={active ? 'default' : 'ghost'}
               className="relative shrink-0"
               onClick={onClick}
+              size="icon"
+              variant={active ? 'default' : 'ghost'}
             >
               {children}
             </Button>
@@ -66,24 +65,30 @@ export const ToolbarThemeEditor = ({
       <div className="flex flex-col gap-1 py-2">
         <ButtonWithTooltip
           active={activeMode === ThemeEditorViewEnum.Desktop}
-          onClick={() => setActiveMode(ThemeEditorViewEnum.Desktop)}
           ariaLabel={t(`theme_editor.${ThemeEditorViewEnum.Desktop}`)}
+          onClick={() => {
+            setActiveMode(ThemeEditorViewEnum.Desktop);
+          }}
         >
           <Monitor />
         </ButtonWithTooltip>
 
         <ButtonWithTooltip
           active={activeMode === ThemeEditorViewEnum.Tablet}
-          onClick={() => setActiveMode(ThemeEditorViewEnum.Tablet)}
           ariaLabel={t(`theme_editor.${ThemeEditorViewEnum.Tablet}`)}
+          onClick={() => {
+            setActiveMode(ThemeEditorViewEnum.Tablet);
+          }}
         >
           <Tablet />
         </ButtonWithTooltip>
 
         <ButtonWithTooltip
           active={activeMode === ThemeEditorViewEnum.Mobile}
-          onClick={() => setActiveMode(ThemeEditorViewEnum.Mobile)}
           ariaLabel={t(`theme_editor.${ThemeEditorViewEnum.Mobile}`)}
+          onClick={() => {
+            setActiveMode(ThemeEditorViewEnum.Mobile);
+          }}
         >
           <Smartphone />
         </ButtonWithTooltip>
@@ -92,16 +97,20 @@ export const ToolbarThemeEditor = ({
       <div className="flex flex-col gap-1 py-2">
         <ButtonWithTooltip
           active={activeTheme === 'light'}
-          onClick={() => setTheme('light')}
           ariaLabel={tCore('user-bar.dark_light_switcher.light')}
+          onClick={() => {
+            setTheme('light');
+          }}
         >
           <Sun />
         </ButtonWithTooltip>
 
         <ButtonWithTooltip
           active={activeTheme === 'dark'}
-          onClick={() => setTheme('dark')}
           ariaLabel={tCore('user-bar.dark_light_switcher.dark')}
+          onClick={() => {
+            setTheme('dark');
+          }}
         >
           <Moon />
         </ButtonWithTooltip>

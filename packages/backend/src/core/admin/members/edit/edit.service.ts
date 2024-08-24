@@ -1,12 +1,11 @@
+import { core_users } from '@/database/schema/users';
+import { AccessDeniedError, NotFoundError } from '@/errors';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
 
 import { EditAdminMembersArgs } from './dto/edit.args';
 import { EditAdminMembersObj } from './dto/edit.obj';
-
-import { InternalDatabaseService } from '@/utils/database/internal_database.service';
-import { core_users } from '@/database/schema/users';
-import { AccessDeniedError, NotFoundError } from '@/errors';
 
 @Injectable()
 export class EditAdminMembersService {

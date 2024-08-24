@@ -4,12 +4,11 @@ import {
   Inject,
   Injectable,
 } from '@nestjs/common';
-import { GqlExecutionContext } from '@nestjs/graphql';
 import { Reflector } from '@nestjs/core';
-
-import { GqlContext } from '../context';
+import { GqlExecutionContext } from '@nestjs/graphql';
 
 import { User } from '../../decorators';
+import { GqlContext } from '../context';
 
 interface IOAuthGuards {
   authorization: (context: GqlContext) => Promise<User>;
@@ -35,7 +34,7 @@ export class AuthGuards implements CanActivate {
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const optionalAuth = this.reflector.get(OptionalAuth, context.getHandler());
 
-    const ctx = GqlExecutionContext.create(context).getContext();
+    const ctx: GqlContext = GqlExecutionContext.create(context).getContext();
 
     // If optional auth decorator is not set, check auth
     if (optionalAuth === undefined) {
@@ -43,7 +42,7 @@ export class AuthGuards implements CanActivate {
     } else {
       try {
         return !!(await this.getAuth(ctx));
-      } catch (e) {
+      } catch (_) {
         // Return true if auth is optional
         return true;
       }

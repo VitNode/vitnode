@@ -8,9 +8,9 @@ import {
   AlertDescription,
   AlertTitle,
 } from '../../../components/ui/alert';
+import { buttonVariants } from '../../../components/ui/button';
 import { CONFIG } from '../../../helpers/config-with-env';
 import { useGlobals } from '../../../hooks/use-globals';
-import { buttonVariants } from '../../../components/ui/button';
 
 export const RebuildRequiredAdmin = () => {
   const t = useTranslations('admin.rebuild_required');
@@ -53,12 +53,12 @@ export const RebuildRequiredAdmin = () => {
 
       <div className="mt-2">
         <a
-          href="https://vitnode.com/help/rebuild"
-          rel="noopener noreferrer"
-          target="_blank"
           className={buttonVariants({
             variant: 'outline',
           })}
+          href="https://vitnode.com/help/rebuild"
+          rel="noopener noreferrer"
+          target="_blank"
         >
           {t('submit')}
         </a>

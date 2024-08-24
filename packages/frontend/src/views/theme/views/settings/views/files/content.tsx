@@ -1,23 +1,22 @@
 'use client';
 
-import React from 'react';
-import { useTranslations } from 'next-intl';
-import Image from 'next/image';
-import { Clock, Download, File } from 'lucide-react';
-
-import { CONFIG } from '@/helpers/config-with-env';
+import { DateFormat } from '@/components/date-format';
+import { buttonVariants } from '@/components/ui/button';
+import { DataTable } from '@/components/ui/data-table';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-import { Link } from '@/navigation';
-import { buttonVariants } from '@/components/ui/button';
-import { DateFormat } from '@/components/date-format';
-import { DataTable } from '@/components/ui/data-table';
 import { Core_Members__Files__ShowQuery } from '@/graphql/queries/settings/core_members__files__show.generated';
+import { CONFIG } from '@/helpers/config-with-env';
 import { formatBytes } from '@/helpers/format-bytes';
+import { Link } from '@/navigation';
+import { Clock, Download, File } from 'lucide-react';
+import Image from 'next/image';
+import { useTranslations } from 'next-intl';
+import React from 'react';
 
 export const ContentFilesSettings = ({
   core_files__show: { edges, pageInfo },
@@ -27,32 +26,25 @@ export const ContentFilesSettings = ({
 
   return (
     <DataTable
-      data={edges}
-      pageInfo={pageInfo}
-      defaultSorting={{
-        sortBy: 'created',
-        sortDirection: 'desc',
-      }}
-      searchPlaceholder={t('search')}
       columns={[
         {
           id: 'id',
           cell: ({ row }) => {
             const src =
-              row?.width && row.height
+              row.width && row.height
                 ? `${CONFIG.graphql_public_url}/${row.dir_folder}/${row.file_name}`
                 : null;
-            const alt = row?.file_alt ?? row?.file_name ?? '';
+            const alt = row.file_alt ?? row.file_name;
 
             return (
               <div className="relative flex h-14 w-20 shrink-0 items-center justify-center overflow-hidden rounded-lg">
                 {row.width && row.height && src ? (
                   <Image
-                    src={src}
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    className="object-cover"
                     alt={alt}
+                    className="object-cover"
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    src={src}
                   />
                 ) : (
                   <File className="text-muted-foreground size-8" />
@@ -72,7 +64,7 @@ export const ContentFilesSettings = ({
                 </span>
                 <div className="text-muted-foreground flex flex-wrap items-center gap-2 text-sm">
                   <span>{row.mimetype}</span>
-                  {row?.width && row?.height && (
+                  {row.width && row.height && (
                     <>
                       <span>&middot;</span>
                       <span>
@@ -132,6 +124,7 @@ export const ContentFilesSettings = ({
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <Link
+                      aria-label={tCore('download')}
                       className={buttonVariants({
                         size: 'icon',
                         variant: 'ghost',
@@ -142,7 +135,6 @@ export const ContentFilesSettings = ({
                           : `${CONFIG.backend_url}/secure_files/${row.id}?security_key=${row.security_key}`
                       }
                       target="_blank"
-                      aria-label={tCore('download')}
                     >
                       <Download />
                     </Link>
@@ -155,6 +147,13 @@ export const ContentFilesSettings = ({
           },
         },
       ]}
+      data={edges}
+      defaultSorting={{
+        sortBy: 'created',
+        sortDirection: 'desc',
+      }}
+      pageInfo={pageInfo}
+      searchPlaceholder={t('search')}
     />
   );
 };

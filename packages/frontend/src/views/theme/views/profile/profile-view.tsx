@@ -1,13 +1,12 @@
-import { notFound } from 'next/navigation';
-
-import { fetcher } from '@/graphql/fetcher';
 import { AvatarUser } from '@/components/ui/user/avatar';
 import { GroupFormat } from '@/components/ui/user/group-format';
+import { fetcher } from '@/graphql/fetcher';
 import {
   Core_Members__Profiles,
   Core_Members__ProfilesQuery,
   Core_Members__ProfilesQueryVariables,
 } from '@/graphql/queries/profiles/core_members__profiles.generated';
+import { notFound } from 'next/navigation';
 
 const getData = async ({ id }: { id: string }) => {
   const data = await fetcher<

@@ -1,11 +1,11 @@
-import * as z from 'zod';
+import { useAlertDialog } from '@/components/ui/alert-dialog';
+import { ShowCoreLanguages } from '@/graphql/types';
+import { usePathname, useRouter } from '@/navigation';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
+import * as z from 'zod';
 
 import { mutationApi } from './mutation-api';
-import { useAlertDialog } from '@/components/ui/alert-dialog';
-import { usePathname, useRouter } from '@/navigation';
-import { ShowCoreLanguages } from '@/graphql/types';
 
 export const useDeleteLangAdmin = ({
   code,

@@ -1,16 +1,16 @@
 'use client';
 
+import { DateFormat } from '@/components/date-format';
+import { Badge } from '@/components/ui/badge';
+import { DataTable } from '@/components/ui/data-table';
+import { GroupFormat } from '@/components/ui/user/group-format';
+import { UserLink } from '@/components/ui/user/link';
+import { Admin__Core_Staff_Moderators__ShowQuery } from '@/graphql/queries/admin/members/staff/admin__core_staff_moderators__show.generated';
+import { InfinityIcon, ShieldAlert } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import React from 'react';
-import { InfinityIcon, ShieldAlert } from 'lucide-react';
 
 import { ActionsTableModeratorsStaffAdmin } from './actions/actions';
-import { UserLink } from '@/components/ui/user/link';
-import { GroupFormat } from '@/components/ui/user/group-format';
-import { Badge } from '@/components/ui/badge';
-import { DateFormat } from '@/components/date-format';
-import { DataTable } from '@/components/ui/data-table';
-import { Admin__Core_Staff_Moderators__ShowQuery } from '@/graphql/queries/admin/members/staff/admin__core_staff_moderators__show.generated';
 
 export const TableModeratorsStaffAdmin = ({
   admin__core_staff_moderators__show: { edges, pageInfo },
@@ -19,8 +19,6 @@ export const TableModeratorsStaffAdmin = ({
 
   return (
     <DataTable
-      data={edges}
-      pageInfo={pageInfo}
       columns={[
         {
           id: 'name',
@@ -30,18 +28,14 @@ export const TableModeratorsStaffAdmin = ({
               return <UserLink user={row.user_or_group} />;
             }
 
-            if (row.user_or_group.__typename === 'StaffGroupUser') {
-              return (
-                <GroupFormat
-                  group={{
-                    ...row.user_or_group,
-                    name: row.user_or_group.group_name,
-                  }}
-                />
-              );
-            }
-
-            return null;
+            return (
+              <GroupFormat
+                group={{
+                  ...row.user_or_group,
+                  name: row.user_or_group.group_name,
+                }}
+              />
+            );
           },
         },
         {
@@ -89,10 +83,12 @@ export const TableModeratorsStaffAdmin = ({
           },
         },
       ]}
+      data={edges}
       defaultSorting={{
         sortBy: 'updated',
         sortDirection: 'desc',
       }}
+      pageInfo={pageInfo}
     />
   );
 };

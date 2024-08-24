@@ -1,10 +1,11 @@
-import { ItemNav } from './item';
-import { getSessionData } from '@/graphql/get-session-data';
-import { flattenTree } from '@/helpers/flatten-tree';
 import { Icon } from '@/components/icon/icon';
+import { getSessionData } from '@/graphql/get-session-data';
 import { ShowCoreNav } from '@/graphql/types';
-import { NavWrapper } from './wrapper';
 import { cn } from '@/helpers/classnames';
+import { flattenTree } from '@/helpers/flatten-tree';
+
+import { ItemNav } from './item';
+import { NavWrapper } from './wrapper';
 
 export const Nav = async ({ className }: { className?: string }) => {
   const data = await getSessionData();

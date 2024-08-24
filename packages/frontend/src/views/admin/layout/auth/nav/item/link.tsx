@@ -1,20 +1,19 @@
 'use client';
 
-import React from 'react';
-import * as Accordion from '@radix-ui/react-accordion';
-import { useTranslations } from 'next-intl';
-import { ChevronDown, Menu } from 'lucide-react';
-
-import { Link, usePathname } from '@/navigation';
-import { cn } from '@/helpers/classnames';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { useSheet } from '@/components/ui/sheet';
+import { cn } from '@/helpers/classnames';
+import { Link, usePathname } from '@/navigation';
+import * as Accordion from '@radix-ui/react-accordion';
+import { ChevronDown, Menu } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import React from 'react';
 
 export interface ItemItemNavAdminProps {
-  href: string;
-  id: string;
   children?: Omit<ItemItemNavAdminProps, 'icon'>[];
+  href: string;
   icon?: string;
+  id: string;
 }
 
 interface Props extends ItemItemNavAdminProps {
@@ -56,9 +55,9 @@ export const LinkItemNavAdmin = ({
       {children && children.length > 0 ? (
         <Accordion.Trigger asChild>
           <Button
-            variant="ghost"
-            size="sm"
             className={buttonClass(active && !isChildActive)}
+            size="sm"
+            variant="ghost"
           >
             {icon ? icons.find(i => i.id === id)?.icon : <Menu />}
             {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
@@ -69,11 +68,11 @@ export const LinkItemNavAdmin = ({
         </Accordion.Trigger>
       ) : (
         <Link
-          href={href}
           className={cn(
             buttonVariants({ variant: 'ghost', size: 'sm' }),
             buttonClass(active),
           )}
+          href={href}
           onClick={() => setOpen?.(false)}
         >
           {icon ? icons.find(i => i.id === id)?.icon : <Menu />}
@@ -92,12 +91,12 @@ export const LinkItemNavAdmin = ({
 
               return (
                 <Link
-                  key={`${plugin_code}_${child.id}`}
-                  href={href}
                   className={cn(
                     buttonVariants({ variant: 'ghost', size: 'sm' }),
                     buttonClass(active),
                   )}
+                  href={href}
+                  key={`${plugin_code}_${child.id}`}
                   onClick={() => setOpen?.(false)}
                 >
                   {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}

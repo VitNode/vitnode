@@ -1,11 +1,11 @@
+import { useDialog } from '@/components/ui/dialog';
+import { ShowCoreLanguages } from '@/graphql/types';
+import { zodFile } from '@/helpers/zod';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 import * as z from 'zod';
 
 import { mutationApi } from './mutation-api';
-import { useDialog } from '@/components/ui/dialog';
-import { ShowCoreLanguages } from '@/graphql/types';
-import { zodFile } from '@/helpers/zod';
 
 export const useUpdateLangAdmin = ({
   code,
@@ -19,7 +19,7 @@ export const useUpdateLangAdmin = ({
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    if (!values.lang_file || !(values.lang_file instanceof File)) return;
+    if (!(values.lang_file instanceof File)) return;
 
     const formData = new FormData();
     formData.append('file', values.lang_file);

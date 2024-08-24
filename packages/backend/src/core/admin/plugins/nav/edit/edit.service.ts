@@ -1,16 +1,14 @@
-import * as fs from 'fs';
-
-import { Injectable } from '@nestjs/common';
-
-import { ShowAdminNavPluginsObj } from '../show/dto/show.obj';
-import { EditCreateAdminNavPluginsArgs } from './dto/edit.args';
-
 import { CustomError, NotFoundError } from '@/errors';
 import {
   ABSOLUTE_PATHS_BACKEND,
   ConfigPlugin,
   removeSpecialCharacters,
 } from '@/index';
+import { Injectable } from '@nestjs/common';
+import * as fs from 'fs';
+
+import { ShowAdminNavPluginsObj } from '../show/dto/show.obj';
+import { EditCreateAdminNavPluginsArgs } from './dto/edit.args';
 
 @Injectable()
 export class EditAdminNavPluginsService {
@@ -50,7 +48,7 @@ export class EditAdminNavPluginsService {
       }
 
       // Build new children nav
-      const children = parent.children || [];
+      const children = parent.children ?? [];
       const navIndex = children.findIndex(nav => nav.code === previous_code);
 
       children[navIndex] = {

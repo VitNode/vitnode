@@ -1,6 +1,5 @@
-import React from 'react';
-
 import { User } from '@/graphql/types';
+import React from 'react';
 
 import { Link } from '../../../navigation';
 
@@ -9,12 +8,12 @@ interface Props
     React.AnchorHTMLAttributes<HTMLAnchorElement>,
     'children' | 'href'
   > {
-  user: Pick<User, 'name_seo' | 'name'>;
+  user: Pick<User, 'name' | 'name_seo'>;
 }
 
 export const UserLink = ({ user: { name, name_seo }, ...props }: Props) => {
   return (
-    <Link href={`/profile/${name_seo}`} className="font-medium" {...props}>
+    <Link className="font-medium" href={`/profile/${name_seo}`} {...props}>
       {name}
     </Link>
   );

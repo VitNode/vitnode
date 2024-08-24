@@ -1,68 +1,68 @@
-import { notFound } from 'next/navigation';
+import { SlugViewProps } from '@/views/slug';
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 
-import {
-  generateMetadataMainSettingsCoreAdmin,
-  MainSettingsCoreAdminView,
-} from './core/settings/main/main-settings-core-admin-view';
-import {
-  CaptchaSecurityAdminView,
-  generateMetadataCaptchaSecurityAdmin,
-} from './core/settings/security/captcha/captcha-security-admin-view';
-import {
-  generateMetadataManifestMetadataCoreAdmin,
-  ManifestMetadataCoreAdminView,
-} from './core/settings/metadata/manifest/manifest-metadata-core-view';
-import {
-  EmailSettingsAdminView,
-  generateMetadataEmailSettingsAdmin,
-} from './core/settings/email/email-settings-admin-view';
-import {
-  generateMetadataUsersMembersAdmin,
-  UsersMembersAdminView,
-} from './members/users/users-members-admin-view';
-import {
-  generateMetadataLangsCoreAdmin,
-  LangsCoreAdminView,
-} from './core/langs/langs-core-admin-view';
-import { DashboardCoreAdminView } from './core/dashboard/dashboard-core-admin-view';
 import {
   FilesAdvancedCoreAdminView,
   generateMetadataFilesAdvancedCoreAdmin,
 } from './core/advanced/files/files-advanced-core-admin-view';
+import { DashboardCoreAdminView } from './core/dashboard/dashboard-core-admin-view';
 import {
-  generateMetadataNavAdmin,
-  NavAdminView,
-} from './core/styles/nav/nav-admin-view';
+  DiagnosticToolsView,
+  generateMetadataDiagnosticAdmin,
+} from './core/diagnostic/diagnostic-tools-view';
 import {
-  EditorAdminView,
-  generateMetadataEditorAdmin,
-} from './core/styles/editor/editor-admin-view';
-import {
-  generateMetadataModeratorsStaffAdmin,
-  ModeratorsStaffAdminView,
-} from './members/staff/moderators/moderators-view';
-import {
-  AdministratorsStaffAdminView,
-  generateMetadataAdministratorsStaffAdmin,
-} from './members/staff/administrators/administrators-view';
-import {
-  generateMetadataGroupsMembersAdmin,
-  GroupsMembersAdminView,
-} from './members/groups/groups-members-admin-view';
+  generateMetadataLangsCoreAdmin,
+  LangsCoreAdminView,
+} from './core/langs/langs-core-admin-view';
 import {
   generateMetadataPluginsAdmin,
   PluginsAdminView,
 } from './core/plugins/plugins-admin-view';
 import {
-  DiagnosticToolsView,
-  generateMetadataDiagnosticAdmin,
-} from './core/diagnostic/diagnostic-tools-view';
-import { SlugViewProps } from '@/views/slug';
-import {
   AuthorizationSettingsCoreAdminView,
   generateMetadataAuthorizationSettingsAdmin,
 } from './core/settings/authorization/authorization-settings-core-admin-view';
+import {
+  EmailSettingsAdminView,
+  generateMetadataEmailSettingsAdmin,
+} from './core/settings/email/email-settings-admin-view';
+import {
+  generateMetadataMainSettingsCoreAdmin,
+  MainSettingsCoreAdminView,
+} from './core/settings/main/main-settings-core-admin-view';
+import {
+  generateMetadataManifestMetadataCoreAdmin,
+  ManifestMetadataCoreAdminView,
+} from './core/settings/metadata/manifest/manifest-metadata-core-view';
+import {
+  CaptchaSecurityAdminView,
+  generateMetadataCaptchaSecurityAdmin,
+} from './core/settings/security/captcha/captcha-security-admin-view';
+import {
+  EditorAdminView,
+  generateMetadataEditorAdmin,
+} from './core/styles/editor/editor-admin-view';
+import {
+  generateMetadataNavAdmin,
+  NavAdminView,
+} from './core/styles/nav/nav-admin-view';
+import {
+  generateMetadataGroupsMembersAdmin,
+  GroupsMembersAdminView,
+} from './members/groups/groups-members-admin-view';
+import {
+  AdministratorsStaffAdminView,
+  generateMetadataAdministratorsStaffAdmin,
+} from './members/staff/administrators/administrators-view';
+import {
+  generateMetadataModeratorsStaffAdmin,
+  ModeratorsStaffAdminView,
+} from './members/staff/moderators/moderators-view';
+import {
+  generateMetadataUsersMembersAdmin,
+  UsersMembersAdminView,
+} from './members/users/users-members-admin-view';
 
 export const generateMetadataSlugAdmin = async ({
   params: { slug },

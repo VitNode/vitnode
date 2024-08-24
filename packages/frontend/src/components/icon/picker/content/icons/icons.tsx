@@ -1,11 +1,10 @@
-import dynamicIconImports from 'lucide-react/dynamicIconImports';
-import React from 'react';
-import { useTranslations } from 'next-intl';
-
-import { IconPickerProps } from '../content';
 import { Button } from '@/components/ui/button';
+import dynamicIconImports from 'lucide-react/dynamicIconImports';
+import { useTranslations } from 'next-intl';
+import React from 'react';
 
 import { IconClient } from '../../../icon-client';
+import { IconPickerProps } from '../content';
 
 interface Props extends IconPickerProps {
   search: string;
@@ -32,10 +31,8 @@ export const IconsContentIconInput = ({
     <>
       {data.slice(0, 42).map(name => (
         <Button
-          key={name}
-          size="icon"
           ariaLabel={name}
-          variant={value === name ? 'default' : 'ghost'}
+          key={name}
           onClick={() => {
             if (value === name) {
               onChange('');
@@ -47,6 +44,8 @@ export const IconsContentIconInput = ({
             onChange(name);
             setOpen(false);
           }}
+          size="icon"
+          variant={value === name ? 'default' : 'ghost'}
         >
           <IconClient name={name} />
         </Button>

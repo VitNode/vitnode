@@ -1,23 +1,22 @@
-import { getTranslations } from 'next-intl/server';
-import { Metadata } from 'next';
-
-import { ActionsLangsAdmin } from './actions/actions';
-import { ContentLangsCoreAdminView } from './content';
-import {
-  SearchParamsPagination,
-  getPaginationTool,
-} from '@/graphql/get-pagination-tool';
-import { HeaderContent } from '@/components/ui/header-content';
 import { Card } from '@/components/ui/card';
+import { HeaderContent } from '@/components/ui/header-content';
 import { fetcher } from '@/graphql/fetcher';
+import {
+  getPaginationTool,
+  SearchParamsPagination,
+} from '@/graphql/get-pagination-tool';
 import {
   Admin__Core_Languages__Show,
   Admin__Core_Languages__ShowQuery,
   Admin__Core_Languages__ShowQueryVariables,
 } from '@/graphql/queries/admin/languages/admin__core_languages__show.generated';
 import { ShowCoreLanguagesSortingColumnEnum } from '@/graphql/types';
+import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 
 import { RebuildRequiredAdmin } from '../../../global/rebuild-required';
+import { ActionsLangsAdmin } from './actions/actions';
+import { ContentLangsCoreAdminView } from './content';
 
 const getData = async (
   variables: Admin__Core_Languages__ShowQueryVariables,

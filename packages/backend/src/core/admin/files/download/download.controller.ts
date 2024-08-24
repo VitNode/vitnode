@@ -1,6 +1,4 @@
-import { createReadStream, existsSync, unlinkSync } from 'fs';
-import { join } from 'path';
-
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import {
   Controller,
   Get,
@@ -9,13 +7,14 @@ import {
   Res,
   StreamableFile,
 } from '@nestjs/common';
-import { Request, Response } from 'express';
 import { SkipThrottle } from '@nestjs/throttler';
+import { Request, Response } from 'express';
+import { createReadStream, existsSync, unlinkSync } from 'fs';
+import { join } from 'path';
 
+import { ABSOLUTE_PATHS_BACKEND } from '../../../..';
 import { InternalAuthorizationCoreSessionsService } from '../../../sessions/authorization/internal/internal_authorization.service';
 import { AuthorizationAdminSessionsService } from '../../sessions/authorization/authorization.service';
-import { InternalDatabaseService } from '@/utils/database/internal_database.service';
-import { ABSOLUTE_PATHS_BACKEND } from '../../../..';
 
 @SkipThrottle()
 @Controller('files')
@@ -31,12 +30,12 @@ export class DownloadFilesAdminController {
     @Res({ passthrough: true }) res: Response,
     @Req() req: Request,
     @Param() { file }: { file: string },
-  ): Promise<StreamableFile | void> {
+  ): Promise<null | StreamableFile> {
     const path = join(ABSOLUTE_PATHS_BACKEND.uploads.temp, file);
     if (!existsSync(path)) {
       res.status(404);
 
-      return;
+      return null;
     }
     const userId = file.split('.')[0].split('--')[1].split('-')[0];
     const currentFile = {
@@ -51,7 +50,7 @@ export class DownloadFilesAdminController {
     if (!user) {
       res.status(404);
 
-      return;
+      return null;
     }
 
     const isAdmin =
@@ -70,12 +69,12 @@ export class DownloadFilesAdminController {
         if (+userId !== data.id) {
           res.status(404);
 
-          return;
+          return null;
         }
-      } catch (e) {
+      } catch (_) {
         res.status(404);
 
-        return;
+        return null;
       }
     } else {
       try {
@@ -87,12 +86,12 @@ export class DownloadFilesAdminController {
         if (+userId !== data.id) {
           res.status(404);
 
-          return;
+          return null;
         }
-      } catch (e) {
+      } catch (_) {
         res.status(404);
 
-        return;
+        return null;
       }
     }
 

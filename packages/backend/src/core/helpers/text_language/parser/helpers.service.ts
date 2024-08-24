@@ -1,12 +1,11 @@
+import { core_files_using } from '@/database/schema/files';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
-
-import { InternalDatabaseService } from '@/utils/database/internal_database.service';
-import { core_files_using } from '@/database/schema/files';
 interface TextLanguageJSONContentType {
-  type: string;
   attrs?: { id: number };
   content?: TextLanguageJSONContentType[];
+  type: string;
 }
 
 export interface InfoFromTextLanguageContentReturnValues {
@@ -15,11 +14,44 @@ export interface InfoFromTextLanguageContentReturnValues {
 
 @Injectable()
 export class HelpersParserTextLanguageCoreHelpersService {
+  constructor(protected databaseService: InternalDatabaseService) {}
+
   protected state: InfoFromTextLanguageContentReturnValues = {
     fileIds: [],
   };
 
-  constructor(protected databaseService: InternalDatabaseService) {}
+  protected getInfoFromContent({
+    content,
+  }: {
+    content: string;
+  }): InfoFromTextLanguageContentReturnValues {
+    const fileIds: number[] = [];
+
+    const mapContent = (values: TextLanguageJSONContentType[]) => {
+      values.forEach(value => {
+        if (!value.attrs) return;
+
+        // Get all file ids
+        if (value.type === 'files' && !fileIds.includes(value.attrs.id)) {
+          fileIds.push(value.attrs.id);
+        }
+
+        if (value.content) {
+          mapContent(value.content);
+        }
+      });
+    };
+
+    try {
+      const json = JSON.parse(content).content as TextLanguageJSONContentType[];
+
+      mapContent(json);
+    } catch (_) {
+      /* empty */
+    }
+
+    return { fileIds };
+  }
 
   protected async parseFiles({
     fileIds,
@@ -62,38 +94,5 @@ export class HelpersParserTextLanguageCoreHelpersService {
           .where(eq(core_files_using.id, fileUsing.id));
       }),
     );
-  }
-
-  protected getInfoFromContent({
-    content,
-  }: {
-    content: string;
-  }): InfoFromTextLanguageContentReturnValues {
-    const fileIds: number[] = [];
-
-    const mapContent = (values: TextLanguageJSONContentType[]) => {
-      values.forEach(value => {
-        if (!value.attrs) return;
-
-        // Get all file ids
-        if (value.type === 'files' && !fileIds.includes(value.attrs.id)) {
-          fileIds.push(value.attrs.id);
-        }
-
-        if (value.content) {
-          mapContent(value.content);
-        }
-      });
-    };
-
-    try {
-      const json = JSON.parse(content).content as TextLanguageJSONContentType[];
-
-      mapContent(json);
-    } catch (error) {
-      /* empty */
-    }
-
-    return { fileIds };
   }
 }

@@ -1,11 +1,10 @@
-import { Args, Mutation, Resolver } from '@nestjs/graphql';
+import { AdminAuthGuards } from '@/utils';
 import { UseGuards } from '@nestjs/common';
+import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
-import { EditAdminCaptchaSecurityService } from './edit.service';
 import { ShowAdminCaptchaSecurityObj } from '../show/dto/show.obj';
 import { EditAdminCaptchaSecurityArgs } from './dto/edit.args';
-
-import { AdminAuthGuards } from '@/utils';
+import { EditAdminCaptchaSecurityService } from './edit.service';
 
 @Resolver()
 export class EditAdminCaptchaSecurityResolver {

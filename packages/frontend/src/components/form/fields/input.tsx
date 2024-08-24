@@ -1,10 +1,11 @@
-import { DefaultParent } from './common/children';
-import { AutoFormInputComponentProps } from '../type';
-import { AutoFormWrapper } from './common/wrapper';
-import { AutoFormLabel } from './common/label';
 import { FormControl, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+
+import { AutoFormInputComponentProps } from '../type';
+import { DefaultParent } from './common/children';
+import { AutoFormLabel } from './common/label';
 import { AutoFormTooltip } from './common/tooltip';
+import { AutoFormWrapper } from './common/wrapper';
 
 export const AutoFormInput = ({
   autoFormProps: { isRequired, fieldConfigItem, field, theme, isDisabled },
@@ -16,11 +17,11 @@ export const AutoFormInput = ({
 
   return (
     <AutoFormWrapper theme={theme}>
-      {fieldConfigItem?.label && (
+      {fieldConfigItem.label && (
         <AutoFormLabel
           description={fieldConfigItem.description}
-          label={fieldConfigItem.label}
           isRequired={isRequired}
+          label={fieldConfigItem.label}
           theme={theme}
         />
       )}
@@ -29,8 +30,8 @@ export const AutoFormInput = ({
           <Input
             {...props}
             {...field}
-            value={props.value ?? value}
             disabled={isDisabled || props.disabled}
+            value={props.value ?? value}
           />
         </FormControl>
       </ParentWrapper>

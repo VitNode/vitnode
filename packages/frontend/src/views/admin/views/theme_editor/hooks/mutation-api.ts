@@ -1,17 +1,16 @@
 'use server';
 
-import { revalidatePath } from 'next/cache';
-
 import { fetcher, FetcherErrorType, FetcherUploads } from '@/graphql/fetcher';
-import { ColorsEditAdminThemeEditor } from '@/graphql/types';
 import {
   Admin__Core_Theme_Editor__Edit,
   Admin__Core_Theme_Editor__EditMutation,
   Admin__Core_Theme_Editor__EditMutationVariables,
 } from '@/graphql/mutations/admin/theme_editor/admin__core_theme_editor__edit.generated';
+import { ColorsEditAdminThemeEditor } from '@/graphql/types';
+import { revalidatePath } from 'next/cache';
 
 export const mutationApi = async (formData: FormData) => {
-  const formColors = formData.get('colors') as string | null;
+  const formColors = formData.get('colors') as null | string;
   const colors = formColors
     ? (JSON.parse(formColors) as ColorsEditAdminThemeEditor)
     : undefined;

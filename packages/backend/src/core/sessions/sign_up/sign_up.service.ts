@@ -1,17 +1,16 @@
+import { CaptchaCoreCaptchaSecurityService } from '@/core/admin/security/captcha/captcha.service';
+import { GqlContext } from '@/utils';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
 import { count } from 'drizzle-orm';
 
+import { core_users } from '../../../database/schema/users';
+import { CustomError, NotFoundError } from '../../../errors';
+import { getUserIp, removeSpecialCharacters } from '../../../functions';
+import { encryptPassword } from '../password';
 import { SignUpCoreSessionsArgs } from './dto/sign_up.args';
 import { SignUpCoreSessionsObj } from './dto/sign_up.obj';
 import { AvatarColorService } from './helpers/avatar-color.service';
-import { encryptPassword } from '../password';
-
-import { CaptchaCoreCaptchaSecurityService } from '@/core/admin/security/captcha/captcha.service';
-import { core_users } from '../../../database/schema/users';
-import { InternalDatabaseService } from '@/utils/database/internal_database.service';
-import { GqlContext } from '@/utils';
-import { CustomError, NotFoundError } from '../../../errors';
-import { getUserIp, removeSpecialCharacters } from '../../../functions';
 
 @Injectable()
 export class SignUpCoreSessionsService extends AvatarColorService {

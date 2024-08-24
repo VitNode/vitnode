@@ -1,10 +1,11 @@
 import { ColorPicker } from '@/components/ui/color-picker';
+import { FormControl, FormMessage } from '@/components/ui/form';
+
 import { AutoFormInputComponentProps } from '../type';
 import { DefaultParent } from './common/children';
-import { AutoFormWrapper } from './common/wrapper';
 import { AutoFormLabel } from './common/label';
-import { FormControl, FormMessage } from '@/components/ui/form';
 import { AutoFormTooltip } from './common/tooltip';
+import { AutoFormWrapper } from './common/wrapper';
 
 export const AutoFormColor = ({
   autoFormProps: { isRequired, fieldConfigItem, field, theme, isDisabled },
@@ -19,11 +20,11 @@ export const AutoFormColor = ({
 
   return (
     <AutoFormWrapper theme={theme}>
-      {fieldConfigItem?.label && (
+      {fieldConfigItem.label && (
         <AutoFormLabel
           description={fieldConfigItem.description}
-          label={fieldConfigItem.label}
           isRequired={isRequired}
+          label={fieldConfigItem.label}
           theme={theme}
         />
       )}

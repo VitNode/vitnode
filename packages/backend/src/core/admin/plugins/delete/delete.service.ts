@@ -1,17 +1,15 @@
+import { core_plugins } from '@/database/schema/plugins';
+import { CustomError, NotFoundError } from '@/errors';
+import { setRebuildRequired } from '@/functions/rebuild-required';
+import { ABSOLUTE_PATHS_BACKEND } from '@/index';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
+import { Injectable } from '@nestjs/common';
+import { eq, sql } from 'drizzle-orm';
 import * as fs from 'fs';
 import { join } from 'path';
 
-import { Injectable } from '@nestjs/common';
-import { eq, sql } from 'drizzle-orm';
-
-import { DeleteAdminPluginsArgs } from './dto/delete.args';
 import { ChangeFilesAdminPluginsService } from '../helpers/files/change/change.service';
-
-import { InternalDatabaseService } from '@/utils/database/internal_database.service';
-import { CustomError, NotFoundError } from '@/errors';
-import { ABSOLUTE_PATHS_BACKEND } from '@/index';
-import { core_plugins } from '@/database/schema/plugins';
-import { setRebuildRequired } from '@/functions/rebuild-required';
+import { DeleteAdminPluginsArgs } from './dto/delete.args';
 
 @Injectable()
 export class DeleteAdminPluginsService {
@@ -60,7 +58,7 @@ export class DeleteAdminPluginsService {
 
     try {
       await this.databaseService.db.execute(sql.raw(deleteQueries.join(' ')));
-    } catch (error) {
+    } catch (_) {
       throw new CustomError({
         code: 'DELETE_TABLE_ERROR',
         message: `Error deleting tables for plugin ${code}`,
@@ -75,7 +73,7 @@ export class DeleteAdminPluginsService {
     const modulePath = ABSOLUTE_PATHS_BACKEND.plugin({ code }).root;
     this.deleteFolderWhenExists(modulePath);
     // Frontend
-    const frontendPaths = ['admin_pages', 'pages', 'plugin'];
+    const frontendPaths = ['admin_pages', 'pages', 'plugin'] as const;
     frontendPaths.forEach(path => {
       this.deleteFolderWhenExists(
         ABSOLUTE_PATHS_BACKEND.plugin({ code }).frontend[path],
@@ -86,7 +84,7 @@ export class DeleteAdminPluginsService {
       .delete(core_plugins)
       .where(eq(core_plugins.code, code));
 
-    await setRebuildRequired({ set: 'plugins' });
+    setRebuildRequired({ set: 'plugins' });
 
     return 'Success!';
   }

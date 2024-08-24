@@ -1,12 +1,11 @@
-import { Args, Mutation, Resolver } from '@nestjs/graphql';
+import { CurrentUser, User } from '@/decorators';
+import { AuthGuards } from '@/utils';
 import { UseGuards } from '@nestjs/common';
+import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
-import { UploadAvatarCoreMembersService } from './upload.service';
 import { UploadAvatarCoreMembersArgs } from './dto/upload.args';
 import { UploadAvatarCoreMembersObj } from './dto/upload.obj';
-
-import { AuthGuards } from '@/utils';
-import { CurrentUser, User } from '@/decorators';
+import { UploadAvatarCoreMembersService } from './upload.service';
 
 @Resolver()
 export class UploadAvatarCoreMembersResolver {

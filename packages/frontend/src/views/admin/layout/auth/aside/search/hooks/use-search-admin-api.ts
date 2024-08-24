@@ -8,10 +8,6 @@ export const useSearchAdminApi = (search: string) => {
     queryFn: async () => {
       const mutation = await queryApi({ search });
 
-      if (!mutation.data) {
-        throw mutation.error;
-      }
-
       return mutation.data;
     },
     enabled: search.length >= 3,

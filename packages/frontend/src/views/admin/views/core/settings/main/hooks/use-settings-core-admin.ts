@@ -1,10 +1,10 @@
+import { Core_Main_Settings__ShowQuery } from '@/graphql/queries/admin/settings/core_main_settings__show.generated';
+import { zodLanguageInput } from '@/helpers/zod';
 import { useTranslations } from 'next-intl';
-import * as z from 'zod';
 import { toast } from 'sonner';
+import * as z from 'zod';
 
 import { mutationApi } from './mutation-api';
-import { zodLanguageInput } from '@/helpers/zod';
-import { Core_Main_Settings__ShowQuery } from '@/graphql/queries/admin/settings/core_main_settings__show.generated';
 
 export const useSettingsCoreAdmin = ({
   core_settings__show: data,

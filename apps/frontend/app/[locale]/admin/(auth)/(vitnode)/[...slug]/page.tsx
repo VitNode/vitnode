@@ -1,6 +1,6 @@
 import {
-  SlugAdminView,
   generateMetadataSlugAdmin,
+  SlugAdminView,
 } from 'vitnode-frontend/views/admin/views/slug';
 import { SlugViewProps } from 'vitnode-frontend/views/slug';
 

@@ -1,3 +1,4 @@
+import { relations } from 'drizzle-orm';
 import {
   boolean,
   index,
@@ -6,7 +7,6 @@ import {
   serial,
   timestamp,
 } from 'drizzle-orm/pg-core';
-import { relations } from 'drizzle-orm';
 
 import { core_groups } from './groups';
 import { core_users } from './users';

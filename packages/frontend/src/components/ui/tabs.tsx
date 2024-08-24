@@ -2,10 +2,9 @@
 
 import React from 'react';
 
-import { buttonVariants } from './button';
-
-import { Link, usePathname } from '../../navigation';
 import { cn } from '../../helpers/classnames';
+import { Link, usePathname } from '../../navigation';
+import { buttonVariants } from './button';
 
 export const Tabs = ({
   children,
@@ -31,11 +30,11 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => {
 };
 
 export interface TabsTriggerProps {
-  children: React.ReactNode;
-  id: string;
   active?: boolean;
+  children: React.ReactNode;
   className?: string;
   href?: string;
+  id: string;
   onClick?: () => void;
 }
 
@@ -47,7 +46,7 @@ export const TabsTrigger = ({
   onClick,
 }: TabsTriggerProps) => {
   const pathname = usePathname();
-  const active = activeFromProps || (href && pathname.includes(href));
+  const active = activeFromProps ?? (href && pathname.includes(href));
   const dataState = active ? 'active' : 'inactive';
 
   const className = buttonVariants({
@@ -70,9 +69,9 @@ export const TabsTrigger = ({
     return (
       <Wrapper>
         <Link
-          href={href}
-          data-state={dataState}
           className={className}
+          data-state={dataState}
+          href={href}
           onClick={onClick}
         >
           {children}
@@ -84,10 +83,10 @@ export const TabsTrigger = ({
   return (
     <Wrapper>
       <button
-        type="button"
-        data-state={dataState}
         className={className}
+        data-state={dataState}
         onClick={onClick}
+        type="button"
       >
         {children}
         {underline}

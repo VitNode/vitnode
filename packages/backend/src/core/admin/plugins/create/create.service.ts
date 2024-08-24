@@ -1,17 +1,15 @@
-import { join } from 'path';
-import * as fs from 'fs';
-
-import { Injectable } from '@nestjs/common';
-
-import { CreateAdminPluginsArgs } from './dto/create.args';
-import { ShowAdminPlugins } from '../show/dto/show.obj';
-import { CreateFilesAdminPluginsService } from '../helpers/files/create/create-files.service';
-import { ChangeFilesAdminPluginsService } from '../helpers/files/change/change.service';
-
-import { InternalDatabaseService } from '@/utils/database/internal_database.service';
-import { CustomError } from '@/errors';
-import { ABSOLUTE_PATHS_BACKEND } from '../../../..';
 import { core_plugins } from '@/database/schema/plugins';
+import { CustomError } from '@/errors';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
+import { Injectable } from '@nestjs/common';
+import * as fs from 'fs';
+import { join } from 'path';
+
+import { ABSOLUTE_PATHS_BACKEND } from '../../../..';
+import { ChangeFilesAdminPluginsService } from '../helpers/files/change/change.service';
+import { CreateFilesAdminPluginsService } from '../helpers/files/create/create-files.service';
+import { ShowAdminPlugins } from '../show/dto/show.obj';
+import { CreateAdminPluginsArgs } from './dto/create.args';
 
 @Injectable()
 export class CreateAdminPluginsService {
@@ -61,7 +59,7 @@ export class CreateAdminPluginsService {
         orderBy: (table, { asc }) => asc(table.code),
       });
 
-    languages.forEach(async lang => {
+    languages.forEach(lang => {
       const langPath = join(
         ABSOLUTE_PATHS_BACKEND.plugin({ code }).frontend.language,
       );

@@ -1,32 +1,32 @@
-import { Search } from 'lucide-react';
-import { useTranslations } from 'next-intl';
-import { useSearchParams } from 'next/navigation';
-import React from 'react';
-import { useDebouncedCallback } from 'use-debounce';
-
-import { ListContentFilterToolbarDataTable } from './list';
-import { useFilterToolbarDataTable } from '../hooks/use-filter-toolbar-data-table';
-import { usePathname, useRouter } from '@/navigation';
 import {
   Command,
   CommandEmpty,
   CommandGroup,
   CommandInput,
+  commandInputClassName,
   CommandItem,
   CommandList,
   CommandSeparator,
-  commandInputClassName,
 } from '@/components/ui/command';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/helpers/classnames';
+import { usePathname, useRouter } from '@/navigation';
+import { Search } from 'lucide-react';
+import { useSearchParams } from 'next/navigation';
+import { useTranslations } from 'next-intl';
+import React from 'react';
+import { useDebouncedCallback } from 'use-debounce';
+
+import { useFilterToolbarDataTable } from '../hooks/use-filter-toolbar-data-table';
+import { ListContentFilterToolbarDataTable } from './list';
 
 export interface ContentFilterToolbarDataTableProps {
+  isFetching?: boolean;
   options: {
+    icon?: React.ComponentType<{ className?: string }>;
     label: string;
     value: string;
-    icon?: React.ComponentType<{ className?: string }>;
   }[];
-  isFetching?: boolean;
   searchOnChange?: (value: string) => void;
 }
 
@@ -53,11 +53,11 @@ export const ContentFilterToolbarDataTable = ({
         <div className="flex items-center border-b px-3">
           <Search className="mr-2 size-4 shrink-0 opacity-50" />
           <Input
-            onChange={e => handleSearchInput(e.target.value)}
             className={cn(
               commandInputClassName,
               'border-0 px-0 focus-visible:ring-0 focus-visible:ring-offset-0',
             )}
+            onChange={e => handleSearchInput(e.target.value)}
             placeholder={title}
           />
         </div>
@@ -77,8 +77,10 @@ export const ContentFilterToolbarDataTable = ({
             <CommandSeparator />
             <CommandGroup>
               <CommandItem
-                onSelect={() => push(pathname, { scroll: false })}
                 className="justify-center text-center"
+                onSelect={() => {
+                  push(pathname, { scroll: false });
+                }}
               >
                 {t('clear')}
               </CommandItem>

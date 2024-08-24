@@ -4,20 +4,20 @@ import { cn } from '../../helpers/classnames';
 import { Link } from '../../navigation';
 
 export interface ItemStepProps {
-  component: React.ReactNode;
-  id: string;
-  title: string;
   checked?: boolean;
+  component: React.ReactNode;
   description?: string;
   href?: string;
+  id: string;
+  title: string;
 }
 
 export const Steps = ({
   className,
   items,
 }: {
-  items: ItemStepProps[];
   className?: string;
+  items: ItemStepProps[];
 }) => {
   if (items.length === 0) return null;
 
@@ -38,7 +38,7 @@ export const Steps = ({
             </span>
             <div className="ml-6">
               {item.href ? (
-                <Link href={item.href} className="text-lg font-semibold">
+                <Link className="text-lg font-semibold" href={item.href}>
                   {item.title}
                 </Link>
               ) : (

@@ -1,10 +1,7 @@
 'use client';
 
-import React from 'react';
-import { Home, LogOut } from 'lucide-react';
-import { toast } from 'sonner';
-import { useTranslations } from 'next-intl';
-
+import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
 import {
   Sheet,
   SheetContent,
@@ -13,11 +10,13 @@ import {
 } from '@/components/ui/sheet';
 import { AvatarUser } from '@/components/ui/user/avatar';
 import { useSessionAdmin } from '@/hooks/use-session-admin';
-import { Button } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
-import { ItemDrawerHeaderAdmin } from './item';
+import { Home, LogOut } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import React from 'react';
+import { toast } from 'sonner';
 
 import { mutationApi } from '../../aside/hooks/mutation-api';
+import { ItemDrawerHeaderAdmin } from './item';
 
 export const DrawerHeaderAdmin = ({
   navComponent,
@@ -32,15 +31,15 @@ export const DrawerHeaderAdmin = ({
   const { email, name } = session;
 
   return (
-    <Sheet open={open} onOpenChange={setOpen}>
+    <Sheet onOpenChange={setOpen} open={open}>
       <SheetTrigger asChild>
         <Button
-          variant="ghost"
+          ariaLabel=""
           className="flex shrink-0 rounded-full"
           size="icon"
-          ariaLabel=""
+          variant="ghost"
         >
-          <AvatarUser user={session} sizeInRem={1.75} />
+          <AvatarUser sizeInRem={1.75} user={session} />
         </Button>
       </SheetTrigger>
 
@@ -65,7 +64,7 @@ export const DrawerHeaderAdmin = ({
             onClick={async () => {
               try {
                 await mutationApi();
-              } catch (error) {
+              } catch (_) {
                 toast.error(tCore('errors.title'), {
                   description: tCore('errors.internal_server_error'),
                 });

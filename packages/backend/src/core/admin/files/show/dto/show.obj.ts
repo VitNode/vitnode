@@ -1,13 +1,12 @@
-import { Field, ObjectType } from '@nestjs/graphql';
-
+import { ShowCoreFiles } from '@/core/files/show/dto/show.obj';
 import { User } from '@/decorators';
 import { PageInfo } from '@/utils';
-import { ShowCoreFiles } from '@/core/files/show/dto/show.obj';
+import { Field, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
 export class ShowAdminFiles extends ShowCoreFiles {
-  @Field(() => User)
-  user: User;
+  @Field(() => User, { nullable: true })
+  user: null | User;
 }
 
 @ObjectType()

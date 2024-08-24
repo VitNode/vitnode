@@ -1,13 +1,12 @@
-import React from 'react';
-import { useTranslations } from 'next-intl';
 import { X } from 'lucide-react';
-
-import { Popover, PopoverContent, PopoverTrigger } from '../popover';
-import { Button } from '../button';
-import { Loader } from '../loader';
-import { Badge } from '../badge';
+import { useTranslations } from 'next-intl';
+import React from 'react';
 
 import { cn } from '../../../helpers/classnames';
+import { Badge } from '../badge';
+import { Button } from '../button';
+import { Loader } from '../loader';
+import { Popover, PopoverContent, PopoverTrigger } from '../popover';
 
 const UserInputContent = React.lazy(async () =>
   import('../../utils/user/user-input/content').then(module => ({
@@ -21,8 +20,8 @@ export interface UserInputItem {
 }
 
 interface Props {
-  onChange: (value?: UserInputItem | UserInputItem[]) => void;
   className?: string;
+  onChange: (value?: UserInputItem | UserInputItem[]) => void;
 }
 
 interface MultiProps extends Props {
@@ -53,13 +52,13 @@ export const UserInput = ({
   const [open, setOpen] = React.useState(false);
 
   return (
-    <Popover open={open} onOpenChange={setOpen} modal>
+    <Popover modal onOpenChange={setOpen} open={open}>
       <PopoverTrigger asChild>
         <Button
-          variant="outline"
           className={cn('w-full justify-start', className, {
             'text-muted-foreground': values.length === 0,
           })}
+          variant="outline"
           {...rest}
         >
           {values.length === 0
@@ -79,7 +78,6 @@ export const UserInput = ({
                   <Badge
                     className="shrink-0 [&>svg]:size-4"
                     key={item.id}
-                    tabIndex={0}
                     onClick={e => {
                       e.stopPropagation();
                       e.preventDefault();
@@ -92,6 +90,7 @@ export const UserInput = ({
                         onRemove();
                       }
                     }}
+                    tabIndex={0}
                   >
                     {item.name} <X />
                   </Badge>
@@ -100,10 +99,9 @@ export const UserInput = ({
         </Button>
       </PopoverTrigger>
 
-      <PopoverContent className="w-64 p-0" align="start">
+      <PopoverContent align="start" className="w-64 p-0">
         <React.Suspense fallback={<Loader className="p-4" />}>
           <UserInputContent
-            values={values}
             onSelect={item => {
               if (multiple) {
                 if (values.find(value => value.id === item.id)) {
@@ -119,6 +117,7 @@ export const UserInput = ({
               onChange(item.id !== values[0]?.id ? item : undefined);
               setOpen(false);
             }}
+            values={values}
           />
         </React.Suspense>
       </PopoverContent>

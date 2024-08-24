@@ -1,7 +1,8 @@
-import { EditActionTableNavDevPluginAdmin } from './edit';
-import { DeleteActionTableNavDevPluginAdmin } from './delete/delete';
-import { FlatTree } from '@/helpers/flatten-tree';
 import { ShowAdminNavPluginsObj } from '@/graphql/types';
+import { FlatTree } from '@/helpers/flatten-tree';
+
+import { DeleteActionTableNavDevPluginAdmin } from './delete/delete';
+import { EditActionTableNavDevPluginAdmin } from './edit';
 
 export const ActionsTableNavDevPluginAdmin = (
   props: FlatTree<ShowAdminNavPluginsObj>,

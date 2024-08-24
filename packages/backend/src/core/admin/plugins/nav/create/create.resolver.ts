@@ -1,11 +1,10 @@
-import { Args, Mutation, Resolver } from '@nestjs/graphql';
-import { UseGuards } from '@nestjs/common';
-
-import { CreateAdminNavPluginsService } from './create.service';
-import { ShowAdminNavPluginsObj } from '../show/dto/show.obj';
-import { CreateAdminNavPluginsArgs } from './dto/create.args';
-
 import { AdminAuthGuards, OnlyForDevelopment } from '@/utils';
+import { UseGuards } from '@nestjs/common';
+import { Args, Mutation, Resolver } from '@nestjs/graphql';
+
+import { ShowAdminNavPluginsObj } from '../show/dto/show.obj';
+import { CreateAdminNavPluginsService } from './create.service';
+import { CreateAdminNavPluginsArgs } from './dto/create.args';
 
 @Resolver()
 export class CreateAdminNavPluginsResolver {

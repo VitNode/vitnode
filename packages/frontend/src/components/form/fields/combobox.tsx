@@ -1,18 +1,9 @@
-import * as z from 'zod';
-import React from 'react';
-import { useTranslations } from 'next-intl';
-import { Check, ChevronsUpDown } from 'lucide-react';
-
 import { cn } from '@/helpers/classnames';
-import { getBaseSchema } from '../utils';
-import { AutoFormInputComponentProps } from '../type';
-import { DefaultParent } from './common/children';
-import { AutoFormWrapper } from './common/wrapper';
-import { AutoFormLabel } from './common/label';
-import { AutoFormTooltip } from './common/tooltip';
+import { Check, ChevronsUpDown } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import React from 'react';
+import * as z from 'zod';
 
-import { FormControl, FormMessage } from '../../ui/form';
-import { Popover, PopoverContent, PopoverTrigger } from '../../ui/popover';
 import { Button } from '../../ui/button';
 import {
   Command,
@@ -22,6 +13,14 @@ import {
   CommandItem,
   CommandList,
 } from '../../ui/command';
+import { FormControl, FormMessage } from '../../ui/form';
+import { Popover, PopoverContent, PopoverTrigger } from '../../ui/popover';
+import { AutoFormInputComponentProps } from '../type';
+import { getBaseSchema } from '../utils';
+import { DefaultParent } from './common/children';
+import { AutoFormLabel } from './common/label';
+import { AutoFormTooltip } from './common/tooltip';
+import { AutoFormWrapper } from './common/wrapper';
 
 export const AutoFormCombobox = ({
   autoFormProps: {
@@ -36,12 +35,12 @@ export const AutoFormCombobox = ({
   placeholderSearchInput,
   multiple,
   ...props
-}: AutoFormInputComponentProps &
-  Omit<React.ComponentProps<typeof Button>, 'role' | 'variant'> & {
-    labels?: Record<string, JSX.Element | string>;
-    multiple?: boolean;
-    placeholderSearchInput?: string;
-  }) => {
+}: {
+  labels?: Record<string, JSX.Element | string>;
+  multiple?: boolean;
+  placeholderSearchInput?: string;
+} & AutoFormInputComponentProps &
+  Omit<React.ComponentProps<typeof Button>, 'role' | 'variant'>) => {
   const t = useTranslations('core');
   const [open, setOpen] = React.useState(false);
   const ParentWrapper = fieldConfigItem.renderParent ?? DefaultParent;
@@ -51,7 +50,7 @@ export const AutoFormCombobox = ({
 
   let values: [string, string][] = [];
   if (!Array.isArray(baseValues)) {
-    values = Object.entries(baseValues);
+    values = Object.entries(baseValues as object);
   } else {
     values = baseValues.map(value => [value, value]);
   }
@@ -65,32 +64,32 @@ export const AutoFormCombobox = ({
     const item = current?.[1];
 
     if (current) {
-      return labels?.[current[0]] || item;
+      return labels?.[current[0]] ?? item;
     }
 
-    return item || t('select_option');
+    return item ?? t('select_option');
   };
 
   return (
     <AutoFormWrapper theme={theme}>
-      {fieldConfigItem?.label && (
+      {fieldConfigItem.label && (
         <AutoFormLabel
-          label={fieldConfigItem.label}
-          isRequired={isRequired}
-          theme={theme}
           description={fieldConfigItem.description}
+          isRequired={isRequired}
+          label={fieldConfigItem.label}
+          theme={theme}
         />
       )}
       <ParentWrapper field={field}>
-        <Popover open={open} onOpenChange={setOpen} modal>
+        <Popover modal onOpenChange={setOpen} open={open}>
           <PopoverTrigger asChild>
             <FormControl>
               <Button
-                className={cn('w-full justify-start', props.className)}
-                variant="outline"
-                role="combobox"
                 ariaLabel={fieldConfigItem.label ?? ''}
+                className={cn('w-full justify-start', props.className)}
                 disabled={isDisabled || props.disabled}
+                role="combobox"
+                variant="outline"
                 {...props}
               >
                 {buttonPlaceholder()}
@@ -120,7 +119,6 @@ export const AutoFormCombobox = ({
 
                     return (
                       <CommandItem
-                        value={labelFromProps}
                         key={value}
                         onSelect={() => {
                           if (multiple) {
@@ -136,6 +134,7 @@ export const AutoFormCombobox = ({
                           field.onChange(value);
                           setOpen(false);
                         }}
+                        value={labelFromProps}
                       >
                         <Check
                           className={cn(

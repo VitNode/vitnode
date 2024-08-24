@@ -1,6 +1,5 @@
-import { ArgsType, Field } from '@nestjs/graphql';
-
 import { FileUpload, GraphQLUpload } from '@/graphql-upload';
+import { ArgsType, Field } from '@nestjs/graphql';
 
 @ArgsType()
 export class UploadCoreEditorArgs {

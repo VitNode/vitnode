@@ -1,18 +1,17 @@
-import { createReadStream } from 'fs';
-import { join } from 'path';
-
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import {
   Controller,
   Get,
   Param,
+  Query,
   Res,
   StreamableFile,
-  Query,
 } from '@nestjs/common';
-import { Response } from 'express';
 import { SkipThrottle } from '@nestjs/throttler';
+import { Response } from 'express';
+import { createReadStream } from 'fs';
+import { join } from 'path';
 
-import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { ABSOLUTE_PATHS_BACKEND } from '../../..';
 
 @SkipThrottle()
@@ -25,7 +24,7 @@ export class DownloadSecureFilesController {
     @Res({ passthrough: true }) res: Response,
     @Param() { id }: { id: string },
     @Query() { security_key }: { security_key: string },
-  ): Promise<StreamableFile | void> {
+  ): Promise<null | StreamableFile> {
     const file = await this.databaseService.db.query.core_files.findFirst({
       where: (table, { eq }) => eq(table.id, +id),
     });
@@ -33,7 +32,7 @@ export class DownloadSecureFilesController {
     if (!file || file.security_key !== security_key) {
       res.status(404);
 
-      return;
+      return null;
     }
 
     const path = join(

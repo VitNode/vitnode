@@ -19,7 +19,7 @@ Package providing ESLint & TypeScript _(TSConfig)_ configuration from [VitNode](
 > This package is not for only VitNode, you can use it in any project where is TypeScript.
 
 > [!CAUTION]
-> Only ESLint 8 is supported. ESLint 9 is not supported yet.
+> Only ESLint 9+ is supported.
 
 ## Installation
 
@@ -37,26 +37,38 @@ pnpm add --save-dev eslint-config-typescript-vitnode
 
 ### Shared
 
-`.eslint.shared.json` can be used for any TypeScript project.
+`eslint.shared.mjs` can be used for any TypeScript project.
 
-File: `.eslintrc.json`
+File: `eslint.config.mjs`
 
 ```json
-{
-  "extends": "eslint-config-typescript-vitnode/.eslintrc.shared.json"
-}
+import eslintVitNode from 'eslint-config-typescript-vitnode/eslint.shared.mjs';
+
+export default [...eslintVitNode];
 ```
 
 ### React / NextJS
 
-`.eslint.react.json` can be used for any React / NextJS project.
+`eslint.react.mjs` can be used for any React / NextJS project.
 
-File: `.eslintrc.json`
+File: `eslint.config.mjs`
 
 ```json
-{
-  "extends": "eslint-config-typescript-vitnode/.eslintrc.react.json"
-}
+import eslintVitNode from 'eslint-config-typescript-vitnode/eslint.react.mjs';
+
+export default [...eslintVitNode];
+```
+
+### Frontend
+
+`eslint.frontend.mjs` can be used for any frontend project.
+
+File: `eslint.config.mjs`
+
+```json
+import eslintVitNode from 'eslint-config-typescript-vitnode/eslint.frontend.mjs';
+
+export default [...eslintVitNode];
 ```
 
 ## TSConfig

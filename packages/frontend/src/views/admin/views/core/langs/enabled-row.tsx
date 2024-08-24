@@ -1,10 +1,10 @@
-import { useLocale, useTranslations } from 'next-intl';
-import { toast } from 'sonner';
-import React from 'react';
-
-import { editMutationApi } from './create-edit/hooks/edit-mutation-api';
 import { Switch } from '@/components/ui/switch';
 import { ShowCoreLanguages } from '@/graphql/types';
+import { useLocale, useTranslations } from 'next-intl';
+import React from 'react';
+import { toast } from 'sonner';
+
+import { editMutationApi } from './create-edit/hooks/edit-mutation-api';
 
 export const EnabledRowTableLangsCoreAdmin = ({
   data,
@@ -17,8 +17,8 @@ export const EnabledRowTableLangsCoreAdmin = ({
 
   return (
     <Switch
-      disabled={data.default || data.protected || data.code === locale}
       checked={checked}
+      disabled={data.default || data.protected || data.code === locale}
       onClick={async () => {
         changeChecked(!checked);
 
@@ -29,7 +29,7 @@ export const EnabledRowTableLangsCoreAdmin = ({
             time24: data.time_24,
             allowInInput: data.allow_in_input,
           });
-        } catch (error) {
+        } catch (_) {
           toast.error(t('errors.title'), {
             description: t('errors.internal_server_error'),
           });

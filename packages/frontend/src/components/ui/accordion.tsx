@@ -1,8 +1,8 @@
 'use client';
 
-import React from 'react';
 import * as AccordionPrimitive from '@radix-ui/react-accordion';
 import { ChevronDown } from 'lucide-react';
+import React from 'react';
 
 import { cn } from '../../helpers/classnames';
 
@@ -47,4 +47,4 @@ const AccordionContent = ({
   </AccordionPrimitive.Content>
 );
 
-export { Accordion, AccordionItem, AccordionTrigger, AccordionContent };
+export { Accordion, AccordionContent, AccordionItem, AccordionTrigger };

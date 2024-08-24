@@ -1,7 +1,11 @@
+import {
+  ABSOLUTE_PATHS_BACKEND,
+  CustomError,
+  PluginInfoJSONType,
+} from '@/index';
+import { Injectable } from '@nestjs/common';
 import * as fs from 'fs';
 import { join } from 'path';
-
-import { Injectable } from '@nestjs/common';
 
 import {
   createDefaultPage,
@@ -10,12 +14,6 @@ import {
   createModuleAdminSchema,
   createModuleSchema,
 } from './contents';
-
-import {
-  ABSOLUTE_PATHS_BACKEND,
-  CustomError,
-  PluginInfoJSONType,
-} from '@/index';
 
 @Injectable()
 export class CreateFilesAdminPluginsService {

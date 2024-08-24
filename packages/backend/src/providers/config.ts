@@ -1,27 +1,26 @@
+import { UploadCoreFilesObj } from '@/core/files/helpers/upload/dto/upload.obj';
 import * as fs from 'fs';
 import { join } from 'path';
 
-import { UploadCoreFilesObj } from '@/core/files/helpers/upload/dto/upload.obj';
-
 export enum AllowTypeFilesEnum {
   all = 'all',
-  images_videos = 'images_videos',
   images = 'images',
+  images_videos = 'images_videos',
   none = 'none',
 }
 
 export enum CaptchaTypeEnum {
-  none = 'none',
-  recaptcha_v2_invisible = 'recaptcha_v2_invisible',
-  recaptcha_v2_checkbox = 'recaptcha_v2_checkbox',
-  recaptcha_v3 = 'recaptcha_v3',
   cloudflare_turnstile = 'cloudflare_turnstile',
+  none = 'none',
+  recaptcha_v2_checkbox = 'recaptcha_v2_checkbox',
+  recaptcha_v2_invisible = 'recaptcha_v2_invisible',
+  recaptcha_v3 = 'recaptcha_v3',
 }
 
 export enum EmailProvider {
   none = 'none',
-  smtp = 'smtp',
   resend = 'resend',
+  smtp = 'smtp',
 }
 
 export interface ConfigType {
@@ -37,13 +36,13 @@ export interface ConfigType {
     enabled: boolean;
   }[];
   logos: {
-    mobile_width: number;
-    text: string;
-    width: number;
     dark?: UploadCoreFilesObj;
     light?: UploadCoreFilesObj;
     mobile_dark?: UploadCoreFilesObj;
     mobile_light?: UploadCoreFilesObj;
+    mobile_width: number;
+    text: string;
+    width: number;
   };
   rebuild_required: {
     langs: boolean;
@@ -62,8 +61,8 @@ export interface ConfigType {
     email: {
       color_primary: string;
       color_primary_foreground: string;
-      provider: EmailProvider;
       logo?: UploadCoreFilesObj;
+      provider: EmailProvider;
     };
     general: {
       site_name: string;

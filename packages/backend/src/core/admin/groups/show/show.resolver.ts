@@ -1,11 +1,10 @@
+import { AdminAuthGuards } from '@/utils';
 import { UseGuards } from '@nestjs/common';
 import { Args, Query, Resolver } from '@nestjs/graphql';
 
-import { ShowAdminGroupsService } from './show.service';
-import { ShowAdminGroupsObj } from './dto/show.obj';
 import { ShowAdminGroupsArgs } from './dto/show.args';
-
-import { AdminAuthGuards } from '@/utils';
+import { ShowAdminGroupsObj } from './dto/show.obj';
+import { ShowAdminGroupsService } from './show.service';
 
 @Resolver()
 export class ShowAdminGroupsResolver {

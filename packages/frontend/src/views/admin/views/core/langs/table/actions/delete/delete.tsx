@@ -1,8 +1,7 @@
-import React from 'react';
-
 import { AlertDialog, AlertDialogContent } from '@/components/ui/alert-dialog';
 import { Loader } from '@/components/ui/loader';
 import { ShowCoreLanguages } from '@/graphql/types';
+import React from 'react';
 
 const Content = React.lazy(async () =>
   import('./content').then(module => ({
@@ -21,7 +20,7 @@ export const DeleteActionsTableLangsCoreAdmin = ({
   ...props
 }: Props) => {
   return (
-    <AlertDialog open={open} onOpenChange={setOpen}>
+    <AlertDialog onOpenChange={setOpen} open={open}>
       <AlertDialogContent>
         <React.Suspense fallback={<Loader />}>
           <Content {...props} />

@@ -1,7 +1,5 @@
 'use server';
 
-import { revalidatePath } from 'next/cache';
-
 import { fetcher, FetcherErrorType } from '@/graphql/fetcher';
 import {
   Admin__Core_Email_Settings__Edit,
@@ -9,6 +7,7 @@ import {
   Admin__Core_Email_Settings__EditMutationVariables,
 } from '@/graphql/mutations/admin/settings/email/admin__core_email_settings__edit.generated';
 import { EmailProvider } from '@/graphql/types';
+import { revalidatePath } from 'next/cache';
 
 export const mutationApi = async (formData: FormData) => {
   const provider = formData.get('provider') as EmailProvider;

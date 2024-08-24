@@ -1,10 +1,9 @@
-import { Monitor, Smartphone } from 'lucide-react';
-import { useTranslations } from 'next-intl';
-
-import { Badge } from '@/components/ui/badge';
 import { DateFormat } from '@/components/date-format';
+import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { Core_Sessions__Devices__ShowQuery } from '@/graphql/queries/settings/core_sessions__devices__show.generated';
+import { Monitor, Smartphone } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 const getDeviceIcon = (device: string) => {
   if (
@@ -32,7 +31,7 @@ export const ContentDevicesSettings = ({
   return (
     <div className="space-y-6">
       {devices.map(device => (
-        <div key={device.id} className="space-y-4 rounded-md border p-6">
+        <div className="space-y-4 rounded-md border p-6" key={device.id}>
           <div className="flex flex-wrap items-center gap-4">
             <div className="bg-primary/10 [&>svg]:text-primary flex shrink-0 items-center justify-center rounded-sm p-2 [&>svg]:size-8">
               {getDeviceIcon(device.uagent_os)}

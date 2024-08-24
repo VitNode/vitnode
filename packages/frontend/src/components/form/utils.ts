@@ -1,5 +1,5 @@
-import * as z from 'zod';
 import { DefaultValues, FieldValues, UseFormWatch } from 'react-hook-form';
+import * as z from 'zod';
 
 import {
   Dependency,
@@ -13,7 +13,7 @@ export function getObjectFormSchema(
   schema: ZodObjectOrWrapped,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): z.ZodObject<any, any> {
-  if (schema?._def.typeName === 'ZodEffects') {
+  if (schema._def.typeName === 'ZodEffects') {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const typedSchema = schema as z.ZodEffects<z.ZodObject<any, any>>;
 
@@ -34,12 +34,11 @@ export function getBaseSchema<
   schema: ChildType | z.ZodEffects<ChildType>,
   isArray?: boolean,
 ): ChildType | null {
-  if (!schema) return null;
   if ('innerType' in schema._def) {
     return getBaseSchema(schema._def.innerType as ChildType);
   }
   if ('schema' in schema._def) {
-    return getBaseSchema(schema._def.schema as ChildType);
+    return getBaseSchema(schema._def.schema);
   }
 
   if ('type' in schema._def && isArray) {
@@ -65,13 +64,12 @@ export const getBaseType = (schema: z.ZodAny): string => {
  */
 export function zodToHtmlInputProps(
   schema:
+    | z.ZodAny
     | z.ZodNumber
     | z.ZodOptional<z.ZodNumber | z.ZodString>
-    | z.ZodString
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    | any,
+    | z.ZodString,
 ): React.InputHTMLAttributes<HTMLInputElement> {
-  if (['ZodOptional', 'ZodNullable'].includes(schema._def.typeName)) {
+  if (['ZodNullable', 'ZodOptional'].includes(schema._def.typeName as string)) {
     const typedSchema = schema as z.ZodOptional<z.ZodNumber | z.ZodString>;
 
     return {
@@ -90,7 +88,7 @@ export function zodToHtmlInputProps(
   const inputProps: React.InputHTMLAttributes<HTMLInputElement> = {
     required: true,
   };
-  const type = getBaseType(schema);
+  const type = getBaseType(schema as z.ZodAny);
 
   for (const check of checks) {
     if (check.kind === 'min') {
@@ -177,7 +175,8 @@ export function getDefaultValueInZodStack(schema: z.ZodAny): any {
     z.ZodNumber | z.ZodString
   >;
 
-  if (typedSchema._def.typeName === 'ZodDefault') {
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+  if (typedSchema._def.typeName === z.ZodFirstPartyTypeKind.ZodDefault) {
     return typedSchema._def.defaultValue();
   }
 
@@ -207,13 +206,12 @@ export function getDefaultValues<Schema extends z.ZodObject<any, any>>(
   schema: Schema,
   fieldConfig?: FieldConfig<z.infer<Schema>>,
 ) {
-  if (!schema) return null;
   const { shape } = schema;
   type DefaultValuesType = DefaultValues<Partial<z.infer<Schema>>>;
   const defaultValues = {} as DefaultValuesType;
   if (!shape) return defaultValues;
 
-  for (const key of Object.keys(shape)) {
+  for (const key of Object.keys(shape as object)) {
     const item = shape[key] as z.ZodAny;
 
     if (getBaseType(item) === 'ZodObject') {
@@ -223,6 +221,7 @@ export function getDefaultValues<Schema extends z.ZodObject<any, any>>(
         fieldConfig?.[key] as FieldConfig<z.infer<Schema>>,
       );
 
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
       if (defaultItems !== null) {
         const obj: Record<string, unknown> = {};
 
@@ -239,9 +238,8 @@ export function getDefaultValues<Schema extends z.ZodObject<any, any>>(
         (defaultValue === null || defaultValue === '') &&
         fieldConfig?.[key]
       ) {
-        defaultValue = (
-          fieldConfig?.[key] as unknown as { defaultValue: string }
-        ).defaultValue;
+        defaultValue = (fieldConfig[key] as unknown as { defaultValue: string })
+          .defaultValue;
       }
       if (defaultValue !== undefined) {
         defaultValues[key as keyof DefaultValuesType] = defaultValue;

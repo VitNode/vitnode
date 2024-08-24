@@ -1,10 +1,11 @@
-import React from 'react';
 import { GeistSans } from 'geist/font/sans';
+import React from 'react';
 import {
+  generateMetadataRootLayout,
   RootLayout,
   RootLayoutProps,
-  generateMetadataRootLayout,
 } from 'vitnode-frontend/views/layout/root-layout';
+
 import './global.css';
 
 export const generateMetadata = generateMetadataRootLayout;

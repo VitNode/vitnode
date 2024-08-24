@@ -2,14 +2,14 @@
 
 import React from 'react';
 import {
-  generateMetadataDefaultPage,
-  DefaultPageProps,
   DefaultPage,
+  DefaultPageProps,
+  generateMetadataDefaultPage,
 } from 'vitnode-frontend/views/theme/views/default-page';
 
 export const generateMetadata = generateMetadataDefaultPage;
 
-export default async function Page(props: DefaultPageProps) {
+export default function Page(props: DefaultPageProps) {
   return (
     <DefaultPage
       pathToDefaultPage={async plugin =>

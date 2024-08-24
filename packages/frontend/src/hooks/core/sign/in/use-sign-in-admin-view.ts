@@ -1,8 +1,8 @@
-import * as z from 'zod';
+import { FetcherErrorType } from '@/graphql/fetcher';
 import React from 'react';
+import * as z from 'zod';
 
 import { mutationApi } from './mutation-api';
-import { FetcherErrorType } from '@/graphql/fetcher';
 
 export const useSignInAdminView = () => {
   const [error, setError] = React.useState<FetcherErrorType | null>(null);
@@ -16,7 +16,7 @@ export const useSignInAdminView = () => {
     setError(null);
     const mutation = await mutationApi({ ...values, admin: true });
     if (mutation?.error) {
-      setError(mutation?.error);
+      setError(mutation.error);
     }
   };
 

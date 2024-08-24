@@ -1,8 +1,8 @@
 'use client';
 
 import * as SelectPrimitive from '@radix-ui/react-select';
-import { ComponentProps } from 'react';
 import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from 'lucide-react';
+import { ComponentProps } from 'react';
 
 import { cn } from '../../helpers/classnames';
 
@@ -136,13 +136,13 @@ const SelectSeparator = ({
 
 export {
   Select,
-  SelectGroup,
-  SelectValue,
-  SelectTrigger,
   SelectContent,
-  SelectLabel,
+  SelectGroup,
   SelectItem,
-  SelectSeparator,
-  SelectScrollUpButton,
+  SelectLabel,
   SelectScrollDownButton,
+  SelectScrollUpButton,
+  SelectSeparator,
+  SelectTrigger,
+  SelectValue,
 };

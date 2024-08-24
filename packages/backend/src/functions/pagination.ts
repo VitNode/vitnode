@@ -1,12 +1,12 @@
-import { AnyColumn, SQL, asc, desc, eq, gt, gte, lt, lte } from 'drizzle-orm';
-import { PgTableWithColumns, TableConfig } from 'drizzle-orm/pg-core';
+import { AnyColumn, asc, desc, eq, gt, gte, lt, lte, SQL } from 'drizzle-orm';
 import { NodePgDatabase } from 'drizzle-orm/node-postgres';
+import { PgTableWithColumns, TableConfig } from 'drizzle-orm/pg-core';
 
 import { PageInfo, SortDirectionEnum } from '../utils';
 
-type DataInterface<T> = T & {
+type DataInterface<T> = {
   id: number;
-};
+} & T;
 
 interface OutputPaginationArgs<T> {
   cursor: number | undefined;
@@ -53,8 +53,8 @@ export function outputPagination<T>({
         count: edges.length,
         hasNextPage: false,
         hasPreviousPage: false,
-        startCursor: edgesCursor.start || null,
-        endCursor: edgesCursor.end || null,
+        startCursor: edgesCursor.start ?? null,
+        endCursor: edgesCursor.end ?? null,
       },
     };
   }
@@ -66,8 +66,8 @@ export function outputPagination<T>({
         cursor && first
           ? !!edges.at(first)
           : edges.length > currentEdges.length,
-      startCursor: edgesCursor.start || null,
-      endCursor: edgesCursor.end || null,
+      startCursor: edgesCursor.start ?? null,
+      endCursor: edgesCursor.end ?? null,
       totalCount: totalCount[0].count,
       count: currentEdges.length,
       hasPreviousPage:
@@ -104,9 +104,9 @@ interface InputPaginationCursorArgs<T extends TableConfig> {
 }
 
 interface Return {
-  orderBy: SQL<unknown>;
   limit?: number;
-  where?: SQL<unknown>;
+  orderBy: SQL;
+  where?: SQL;
 }
 
 export async function inputPaginationCursor<T extends TableConfig>({
@@ -133,7 +133,7 @@ export async function inputPaginationCursor<T extends TableConfig>({
       : desc;
   const orderBy: SQL = fn(database[currentSortBy.column]);
 
-  let where: SQL<unknown> | undefined;
+  let where: SQL | undefined;
   if (cursorId) {
     const cursorData = await databaseService.db
       .select()
@@ -142,14 +142,6 @@ export async function inputPaginationCursor<T extends TableConfig>({
       .limit(1);
 
     const cursorItem = cursorData[0];
-
-    if (!cursorItem) {
-      return {
-        where: eq(database.id, -1),
-        orderBy,
-        limit: undefined,
-      };
-    }
 
     const { column, schema } = primaryCursor;
     const fn = last

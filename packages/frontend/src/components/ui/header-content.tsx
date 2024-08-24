@@ -15,8 +15,8 @@ interface HeaderContentH1Props extends HeaderContentProps {
 }
 
 interface HeaderContentH2Props extends HeaderContentProps {
-  h2: React.ReactNode | string;
   h1?: never;
+  h2: React.ReactNode | string;
 }
 
 export const HeaderContent = ({
@@ -29,11 +29,11 @@ export const HeaderContent = ({
 }: HeaderContentH1Props | HeaderContentH2Props) => {
   return (
     <div
-      ref={ref}
       className={cn(
         'mb-4 flex min-h-9 flex-col items-start gap-2 sm:flex-row sm:gap-4',
         className,
       )}
+      ref={ref}
     >
       <div className="h-full flex-1 space-y-1 text-left sm:self-center">
         {h1 ? (

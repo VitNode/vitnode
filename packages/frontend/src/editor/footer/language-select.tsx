@@ -1,8 +1,6 @@
 import { useTranslations } from 'next-intl';
 
-import { useEditorState } from '../hooks/use-editor-state';
-
-import { useGlobals } from '../../hooks/use-globals';
+import { buttonVariants } from '../../components/ui/button';
 import {
   Select,
   SelectContent,
@@ -16,7 +14,8 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '../../components/ui/tooltip';
-import { buttonVariants } from '../../components/ui/button';
+import { useGlobals } from '../../hooks/use-globals';
+import { useEditorState } from '../hooks/use-editor-state';
 
 export interface LanguageSelectFooterEditorProps {
   selectedLanguage: string;
@@ -35,7 +34,7 @@ export const LanguageSelectFooterEditor = ({
   if (languages.length <= 1) return null;
 
   return (
-    <Select value={selectedLanguage} onValueChange={setSelectedLanguage}>
+    <Select onValueChange={setSelectedLanguage} value={selectedLanguage}>
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger asChild>
@@ -57,7 +56,7 @@ export const LanguageSelectFooterEditor = ({
 
       <SelectContent onCloseAutoFocus={() => editor.commands.focus()}>
         {languages.map(language => (
-          <SelectItem key={language.code} value={`${language.code}`}>
+          <SelectItem key={language.code} value={language.code}>
             {language.name}
           </SelectItem>
         ))}

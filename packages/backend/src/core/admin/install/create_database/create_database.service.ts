@@ -1,12 +1,11 @@
+import { core_admin_permissions } from '@/database/schema/admins';
+import { core_groups, core_groups_names } from '@/database/schema/groups';
+import { core_languages } from '@/database/schema/languages';
+import { core_moderators_permissions } from '@/database/schema/moderators';
+import { CustomError } from '@/errors';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
 import { count } from 'drizzle-orm';
-
-import { InternalDatabaseService } from '@/utils/database/internal_database.service';
-import { CustomError } from '@/errors';
-import { core_languages } from '@/database/schema/languages';
-import { core_groups, core_groups_names } from '@/database/schema/groups';
-import { core_admin_permissions } from '@/database/schema/admins';
-import { core_moderators_permissions } from '@/database/schema/moderators';
 
 @Injectable()
 export class CreateDatabaseAdminInstallService {

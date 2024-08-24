@@ -1,10 +1,10 @@
-import { UseFormReturn } from 'react-hook-form';
-import * as z from 'zod';
-import { toast } from 'sonner';
+import { Admin__Core_Security__Captcha__ShowQuery } from '@/graphql/queries/admin/security/admin__core_security__captcha__show.generated';
 import { useTranslations } from 'next-intl';
+import { UseFormReturn } from 'react-hook-form';
+import { toast } from 'sonner';
+import * as z from 'zod';
 
 import { mutationApi } from './mutation-api';
-import { Admin__Core_Security__Captcha__ShowQuery } from '@/graphql/queries/admin/security/admin__core_security__captcha__show.generated';
 
 export const useCaptchaSecurityAdmin = ({
   admin__core_security__captcha__show: data,

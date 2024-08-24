@@ -1,13 +1,11 @@
-/* eslint-disable no-console */
+import { eq, sql } from 'drizzle-orm';
+import { NodePgDatabase } from 'drizzle-orm/node-postgres';
 import * as fs from 'fs';
 import { join } from 'path';
 
-import { NodePgDatabase } from 'drizzle-orm/node-postgres';
-import { eq, sql } from 'drizzle-orm';
-
-import { ConfigPlugin } from '../src/providers/plugins.type';
 import coreSchemaDatabase from '../src/database';
 import { core_plugins } from '../src/database/schema/plugins';
+import { ConfigPlugin } from '../src/providers/plugins.type';
 
 export const updatePlugins = async ({
   pluginsPath,
@@ -16,7 +14,7 @@ export const updatePlugins = async ({
   db: NodePgDatabase<typeof coreSchemaDatabase>;
   pluginsPath: string;
 }) => {
-  let isDefaultIndex: number | null = null;
+  let isDefaultIndex: null | number = null;
   const defaultPlugin = await db.query.core_plugins.findFirst({
     where: (table, { eq }) => eq(table.default, true),
   });

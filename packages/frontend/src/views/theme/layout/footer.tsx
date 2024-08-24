@@ -7,8 +7,8 @@ export const Footer = async ({
   locale,
   className,
 }: {
-  locale: string;
   className?: string;
+  locale: string;
 }) => {
   const { convertText } = getTextLang({ locale });
   const {

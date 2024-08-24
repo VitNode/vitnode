@@ -1,14 +1,14 @@
-import { useQuery } from '@tanstack/react-query';
-import * as z from 'zod';
-import { toast } from 'sonner';
-import { useTranslations } from 'next-intl';
-
-import { queryApi } from './query-api';
-import { mutationApi } from './mutation-api';
 import { useDialog } from '@/components/ui/dialog';
-import { CONFIG } from '@/helpers/config-with-env';
 import { ShowCoreLanguages } from '@/graphql/types';
+import { CONFIG } from '@/helpers/config-with-env';
 import { useSessionAdmin } from '@/hooks/use-session-admin';
+import { useQuery } from '@tanstack/react-query';
+import { useTranslations } from 'next-intl';
+import { toast } from 'sonner';
+import * as z from 'zod';
+
+import { mutationApi } from './mutation-api';
+import { queryApi } from './query-api';
 
 export const useDownloadLangAdmin = ({
   code,
@@ -20,10 +20,6 @@ export const useDownloadLangAdmin = ({
     queryKey: ['Admin__Core_Plugins__Show__Quick'],
     queryFn: async () => {
       const query = await queryApi({});
-
-      if (!query.data) {
-        throw query.error;
-      }
 
       return query.data;
     },
@@ -64,7 +60,7 @@ export const useDownloadLangAdmin = ({
       plugins: values.all ? [] : values.plugins,
     });
 
-    if (mutation?.error || !mutation.data) {
+    if (mutation.error) {
       toast.error(t('errors.title'), {
         description: t('errors.internal_server_error'),
       });

@@ -1,10 +1,11 @@
-import { QuickMenuWrapper } from './wrapper';
-import { ButtonDrawer } from './drawer/button';
-import { flattenTree } from '@/helpers/flatten-tree';
-import { getSessionData } from '@/graphql/get-session-data';
 import { Icon } from '@/components/icon/icon';
+import { getSessionData } from '@/graphql/get-session-data';
 import { ShowCoreNav } from '@/graphql/types';
 import { cn } from '@/helpers/classnames';
+import { flattenTree } from '@/helpers/flatten-tree';
+
+import { ButtonDrawer } from './drawer/button';
+import { QuickMenuWrapper } from './wrapper';
 
 export const QuickMenu = async ({ className }: { className?: string }) => {
   const data = await getSessionData();

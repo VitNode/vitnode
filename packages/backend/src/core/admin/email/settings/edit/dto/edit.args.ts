@@ -1,15 +1,11 @@
-import { ArgsType, Field, InputType, Int } from '@nestjs/graphql';
-
-import { EmailProvider } from '@/providers';
 import { UploadWithKeepCoreFilesArgs } from '@/core/files/helpers/upload/dto/upload.args';
+import { EmailProvider } from '@/providers';
+import { ArgsType, Field, InputType, Int } from '@nestjs/graphql';
 
 @InputType()
 export class SMTPEditAdminEmailSettingsService {
   @Field(() => String)
   host: string;
-
-  @Field(() => String)
-  user: string;
 
   @Field(() => String)
   password: string;
@@ -19,25 +15,28 @@ export class SMTPEditAdminEmailSettingsService {
 
   @Field(() => Boolean)
   secure: boolean;
+
+  @Field(() => String)
+  user: string;
 }
 
 @ArgsType()
 export class EditAdminEmailSettingsServiceArgs {
-  @Field(() => EmailProvider)
-  provider: EmailProvider;
-
-  @Field(() => SMTPEditAdminEmailSettingsService, { nullable: true })
-  smtp?: SMTPEditAdminEmailSettingsService;
-
-  @Field(() => String, { nullable: true })
-  resend_key?: string;
-
-  @Field(() => UploadWithKeepCoreFilesArgs, { nullable: true })
-  logo?: UploadWithKeepCoreFilesArgs;
-
   @Field(() => String)
   color_primary: string;
 
   @Field(() => String)
   color_primary_foreground: string;
+
+  @Field(() => UploadWithKeepCoreFilesArgs, { nullable: true })
+  logo?: UploadWithKeepCoreFilesArgs;
+
+  @Field(() => EmailProvider)
+  provider: EmailProvider;
+
+  @Field(() => String, { nullable: true })
+  resend_key?: string;
+
+  @Field(() => SMTPEditAdminEmailSettingsService, { nullable: true })
+  smtp?: SMTPEditAdminEmailSettingsService;
 }

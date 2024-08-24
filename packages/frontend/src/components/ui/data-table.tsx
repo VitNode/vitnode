@@ -1,8 +1,13 @@
 'use client';
 
+import { PageInfo } from '@/graphql/types';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
+import { HeaderDataTable } from '../data-table/header';
+import { SkeletonDataTable } from '../data-table/skeleton';
+import { ToolbarDataTable } from '../data-table/toolbar/toolbar';
+import { Pagination } from './pagination';
 import {
   Table,
   TableBody,
@@ -11,11 +16,6 @@ import {
   TableHeader,
   TableRow,
 } from './table';
-import { SkeletonDataTable } from '../data-table/skeleton';
-import { ToolbarDataTable } from '../data-table/toolbar/toolbar';
-import { Pagination } from './pagination';
-import { HeaderDataTable } from '../data-table/header';
-import { PageInfo } from '@/graphql/types';
 
 interface TMin {
   id: number;
@@ -23,17 +23,17 @@ interface TMin {
 
 export interface DataTableProps<T extends TMin> {
   columns: {
-    id: string | keyof T;
     cell?: (data: { allData: T[]; row: T }) => React.ReactNode;
+    id: keyof T | string;
     sortable?: boolean;
     title?: string;
   }[];
   data: T[];
+  defaultPageSize?: 10 | 20 | 30 | 40 | 50;
   defaultSorting: {
     sortBy: keyof T;
     sortDirection: 'asc' | 'desc';
   };
-  defaultPageSize?: 10 | 20 | 30 | 40 | 50;
   pageInfo?: PageInfo;
   searchPlaceholder?: string;
 }
@@ -52,8 +52,8 @@ export function DataTable<T extends TMin>({
   return (
     <div className="space-y-4">
       <ToolbarDataTable
-        startTransition={startTransition}
         searchPlaceholder={searchPlaceholder}
+        startTransition={startTransition}
       />
 
       <div className="rounded-md border">
@@ -67,7 +67,7 @@ export function DataTable<T extends TMin>({
                   const text =
                     column.id.toString() === 'actions'
                       ? ''
-                      : column.title || column.id.toString();
+                      : (column.title ?? column.id.toString());
 
                   return (
                     <TableHead key={column.id.toString()}>
@@ -100,7 +100,7 @@ export function DataTable<T extends TMin>({
                         column.id.toString() as keyof T
                       ] as React.ReactNode;
                       const content =
-                        column.cell?.({ row, allData: data }) || cell;
+                        column.cell?.({ row, allData: data }) ?? cell;
 
                       return (
                         <TableCell key={`${column.id.toString()}_${row.id}`}>
@@ -119,8 +119,8 @@ export function DataTable<T extends TMin>({
               ) : (
                 <TableRow>
                   <TableCell
-                    colSpan={columns.length}
                     className="h-24 text-center"
+                    colSpan={columns.length}
                   >
                     {t('no_results')}
                   </TableCell>
@@ -132,7 +132,7 @@ export function DataTable<T extends TMin>({
       </div>
 
       {pageInfo && (
-        <Pagination pageInfo={pageInfo} defaultPageSize={defaultPageSize} />
+        <Pagination defaultPageSize={defaultPageSize} pageInfo={pageInfo} />
       )}
     </div>
   );

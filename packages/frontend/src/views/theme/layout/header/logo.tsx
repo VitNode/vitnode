@@ -1,9 +1,8 @@
-import Image from 'next/image';
-
-import { Link } from '@/navigation';
 import { getSessionData } from '@/graphql/get-session-data';
-import { CONFIG } from '@/helpers/config-with-env';
 import { cn } from '@/helpers/classnames';
+import { CONFIG } from '@/helpers/config-with-env';
+import { Link } from '@/navigation';
+import Image from 'next/image';
 
 export const LogoHeader = async ({ className }: { className?: string }) => {
   const {
@@ -12,8 +11,8 @@ export const LogoHeader = async ({ className }: { className?: string }) => {
 
   return (
     <Link
-      id="vitnode_logo"
       href="/"
+      id="vitnode_logo"
       style={
         {
           '--logo-width': `${logos.width}rem`,
@@ -26,11 +25,11 @@ export const LogoHeader = async ({ className }: { className?: string }) => {
       !logos.light &&
       !logos.mobile_light ? (
         <span
-          id="vitnode_logo_text"
           className={cn(
             'text-foreground inline-block whitespace-nowrap font-bold',
             className,
           )}
+          id="vitnode_logo_text"
         >
           {logos.text}
         </span>
@@ -38,29 +37,25 @@ export const LogoHeader = async ({ className }: { className?: string }) => {
 
       {logos.light && (
         <Image
-          id="vitnode_logo_light"
-          src={`${CONFIG.backend_public_url}/${logos.light.dir_folder}/${logos.light.file_name}`}
-          width={logos.light.width}
-          height={logos.light.height}
-          sizes="100vw"
+          alt={logos.text}
           className={cn(
             'w-[--logo-mobile-width] sm:w-[--logo-width]',
             className,
             {
               'dark:hidden': logos.dark,
-              'hidden sm:block': logos.mobile_light || logos.mobile_dark,
+              'hidden sm:block': logos.mobile_light ?? logos.mobile_dark,
             },
           )}
-          alt={logos.text}
+          height={logos.light.height}
+          id="vitnode_logo_light"
+          sizes="100vw"
+          src={`${CONFIG.backend_public_url}/${logos.light.dir_folder}/${logos.light.file_name}`}
+          width={logos.light.width}
         />
       )}
       {logos.dark && (
         <Image
-          id="vitnode_logo_dark"
-          src={`${CONFIG.backend_public_url}/${logos.dark.dir_folder}/${logos.dark.file_name}`}
-          width={logos.dark.width}
-          height={logos.dark.height}
-          sizes="100vw"
+          alt={logos.text}
           className={cn(
             'w-[--logo-mobile-width] sm:w-[--logo-width]',
             className,
@@ -68,48 +63,52 @@ export const LogoHeader = async ({ className }: { className?: string }) => {
               'hidden dark:block': logos.light,
               'hidden sm:block': !logos.light,
               'dark:hidden dark:sm:block':
-                logos.mobile_dark || logos.mobile_light,
+                logos.mobile_dark ?? logos.mobile_light,
             },
           )}
-          alt={logos.text}
+          height={logos.dark.height}
+          id="vitnode_logo_dark"
+          sizes="100vw"
+          src={`${CONFIG.backend_public_url}/${logos.dark.dir_folder}/${logos.dark.file_name}`}
+          width={logos.dark.width}
         />
       )}
 
       {logos.mobile_light && (
         <Image
-          id="vitnode_logo_mobile_light"
-          src={`${CONFIG.backend_public_url}/${logos.mobile_light.dir_folder}/${logos.mobile_light.file_name}`}
-          width={logos.mobile_light.width}
-          height={logos.mobile_light.height}
-          sizes="100vw"
+          alt={logos.text}
           className={cn(
             'w-[--logo-mobile-width] sm:w-[--logo-width]',
             className,
             {
-              'block sm:hidden': logos.light || logos.dark,
+              'block sm:hidden': logos.light ?? logos.dark,
               'dark:hidden': logos.mobile_dark,
             },
           )}
-          alt={logos.text}
+          height={logos.mobile_light.height}
+          id="vitnode_logo_mobile_light"
+          sizes="100vw"
+          src={`${CONFIG.backend_public_url}/${logos.mobile_light.dir_folder}/${logos.mobile_light.file_name}`}
+          width={logos.mobile_light.width}
         />
       )}
       {logos.mobile_dark && (
         <Image
-          id="vitnode_logo_mobile_dark"
-          src={`${CONFIG.backend_public_url}/${logos.mobile_dark.dir_folder}/${logos.mobile_dark.file_name}`}
-          width={logos.mobile_dark.width}
-          height={logos.mobile_dark.height}
-          sizes="100vw"
+          alt={logos.text}
           className={cn(
             'w-[--logo-mobile-width] sm:w-[--logo-width]',
             className,
             {
               'block sm:hidden dark:block dark:sm:hidden':
-                logos.dark || logos.light,
+                logos.dark ?? logos.light,
               'hidden dark:block': logos.mobile_light,
             },
           )}
-          alt={logos.text}
+          height={logos.mobile_dark.height}
+          id="vitnode_logo_mobile_dark"
+          sizes="100vw"
+          src={`${CONFIG.backend_public_url}/${logos.mobile_dark.dir_folder}/${logos.mobile_dark.file_name}`}
+          width={logos.mobile_dark.width}
         />
       )}
     </Link>

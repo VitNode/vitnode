@@ -1,22 +1,22 @@
-import { Baseline, ChevronDownIcon } from 'lucide-react';
-import React from 'react';
-
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
-import { getHSLFromString } from '@/helpers/colors';
 import { HslColor } from '@/graphql/types';
+import { getHSLFromString } from '@/helpers/colors';
+import { Baseline, ChevronDownIcon } from 'lucide-react';
+import React from 'react';
 
-import { ButtonToolbarEditor } from '../../button';
 import { useEditorState } from '../../../hooks/use-editor-state';
+import { ButtonToolbarEditor } from '../../button';
 
 export const ColorToolbarEditor = () => {
   const [open, setOpen] = React.useState(false);
   const { editor } = useEditorState();
+  const colorFromEditor: string = editor.getAttributes('textStyle').color;
   const [color] = React.useState<HslColor | null>(
-    getHSLFromString(editor.getAttributes('textStyle').color),
+    getHSLFromString(colorFromEditor),
   );
 
   React.useEffect(() => {
@@ -29,24 +29,20 @@ export const ColorToolbarEditor = () => {
     editor.commands.setColor(`hsl(${color.h}, ${color.s}%, ${color.l}%)`);
   }, [color]);
 
-  const currentColor = getHSLFromString(
-    editor.getAttributes('textStyle').color,
-  );
-
   return (
-    <Popover open={open} onOpenChange={setOpen} modal>
+    <Popover modal onOpenChange={setOpen} open={open}>
       <PopoverTrigger asChild>
         <ButtonToolbarEditor
+          className="w-14 justify-center gap-1 p-0 [&>svg:last-child]:size-4 [&>svg:not(:last-child)]:size-5"
           name="color_text"
           style={{
-            backgroundColor: currentColor
-              ? `hsl(${currentColor.h} ${currentColor.s}% ${currentColor.l}% / 10%)`
+            backgroundColor: color
+              ? `hsl(${color.h} ${color.s}% ${color.l}% / 10%)`
               : undefined,
-            color: currentColor
-              ? `hsl(${currentColor.h} ${currentColor.s}% ${currentColor.l}%)`
+            color: color
+              ? `hsl(${color.h} ${color.s}% ${color.l}%)`
               : undefined,
           }}
-          className="w-14 justify-center gap-1 p-0 [&>svg:last-child]:size-4 [&>svg:not(:last-child)]:size-5"
         >
           <Baseline />
           <ChevronDownIcon className="opacity-50" />

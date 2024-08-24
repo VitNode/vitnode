@@ -1,5 +1,6 @@
-import color from 'picocolors';
+/* eslint-disable no-console */
 import spawn from 'cross-spawn';
+import color from 'picocolors';
 
 import { CreateCliReturn } from '../cli';
 import { getOnline } from './is-online';

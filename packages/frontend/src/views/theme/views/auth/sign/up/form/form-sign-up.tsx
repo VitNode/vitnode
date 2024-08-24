@@ -1,15 +1,15 @@
 'use client';
 
+import { AutoForm } from '@/components/form/auto-form';
+import { AutoFormCheckbox } from '@/components/form/fields/checkbox';
+import { AutoFormInput } from '@/components/form/fields/input';
+import { Button } from '@/components/ui/button';
+import { Progress } from '@/components/ui/progress';
+import { removeSpecialCharacters } from '@/helpers/special-characters';
+import { useSignUpView } from '@/hooks/core/sign/up/use-sign-up-view';
 import { useTranslations } from 'next-intl';
 
-import { useSignUpView } from '@/hooks/core/sign/up/use-sign-up-view';
-import { Progress } from '@/components/ui/progress';
-import { Button } from '@/components/ui/button';
-import { removeSpecialCharacters } from '@/helpers/special-characters';
-import { AutoForm } from '@/components/form/auto-form';
-import { AutoFormInput } from '@/components/form/fields/input';
 import { SuccessFormSignUp } from './success';
-import { AutoFormCheckbox } from '@/components/form/fields/checkbox';
 
 export const FormSignUp = () => {
   const t = useTranslations('core');
@@ -23,14 +23,12 @@ export const FormSignUp = () => {
   return (
     <>
       <AutoForm
-        onValuesChange={setValues}
-        formSchema={formSchema}
         fieldConfig={{
           name: {
             label: t('sign_up.form.name.label'),
             fieldType: AutoFormInput,
             description: (() => {
-              const value = (values.name || '').trimStart().trimEnd();
+              const value = (values.name ?? '').trimStart().trimEnd();
 
               return (
                 <>
@@ -58,7 +56,7 @@ export const FormSignUp = () => {
             label: t('sign_up.form.password.label'),
             fieldType: props => <AutoFormInput type="password" {...props} />,
             description: (() => {
-              const value = values.password || '';
+              const value = values.password ?? '';
               const regexArray = [
                 /^.{8,}$/, // Min 8 characters
                 /[a-z]/, // Min 1 lowercase
@@ -97,7 +95,9 @@ export const FormSignUp = () => {
             fieldType: AutoFormCheckbox,
           },
         }}
+        formSchema={formSchema}
         onSubmit={onSubmit}
+        onValuesChange={setValues}
         submitButton={props => (
           <Button {...props} className="w-full">
             {t('sign_up.form.submit')}

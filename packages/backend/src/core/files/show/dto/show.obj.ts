@@ -1,24 +1,24 @@
+import { PageInfo } from '@/utils';
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 
 import { UploadCoreFilesObj } from '../../helpers/upload/dto/upload.obj';
-import { PageInfo } from '@/utils';
 
 @ObjectType()
 export class ShowCoreFiles extends UploadCoreFilesObj {
   @Field(() => Int)
-  id: number;
+  count_uses: number;
 
   @Field(() => Date)
   created: Date;
 
   @Field(() => String, { nullable: true })
-  security_key: string | null;
-
-  @Field(() => String, { nullable: true })
-  file_alt: string | null;
+  file_alt: null | string;
 
   @Field(() => Int)
-  count_uses: number;
+  id: number;
+
+  @Field(() => String, { nullable: true })
+  security_key: null | string;
 }
 
 @ObjectType()

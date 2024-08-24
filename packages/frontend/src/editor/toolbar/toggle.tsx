@@ -8,15 +8,15 @@ export const ToggleToolbarEditor = ({
   pressed,
 }: {
   children: React.ReactNode;
+  disabled?: boolean;
   onPressedChange: () => void;
   pressed: boolean;
-  disabled?: boolean;
 }) => {
   return (
     <Toggle
-      pressed={pressed}
-      onPressedChange={onPressedChange}
       disabled={disabled}
+      onPressedChange={onPressedChange}
+      pressed={pressed}
       size="sm"
     >
       {children}

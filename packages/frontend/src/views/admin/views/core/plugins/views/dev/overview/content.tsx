@@ -1,9 +1,8 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
-
 import { Button } from '@/components/ui/button';
 import { ShowAdminPlugins } from '@/graphql/types';
+import { useTranslations } from 'next-intl';
 
 import { FormCreateEditPluginAdmin } from '../../../actions/create/form';
 
@@ -12,8 +11,8 @@ export const ContentOverviewDevPluginAdmin = (data: ShowAdminPlugins) => {
 
   return (
     <FormCreateEditPluginAdmin
-      data={data}
       className="max-w-xl"
+      data={data}
       submitButton={props => <Button {...props}>{t('edit')}</Button>}
     />
   );

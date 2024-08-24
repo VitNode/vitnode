@@ -1,8 +1,3 @@
-import { useTranslations } from 'next-intl';
-import { Metadata } from 'next';
-import { getTranslations } from 'next-intl/server';
-
-import { FormSignUp } from './form/form-sign-up';
 import {
   Card,
   CardContent,
@@ -11,6 +6,11 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Link } from '@/navigation';
+import { Metadata } from 'next';
+import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
+
+import { FormSignUp } from './form/form-sign-up';
 
 export const generateMetadataSignUp = async (): Promise<Metadata> => {
   const t = await getTranslations('core.sign_up');

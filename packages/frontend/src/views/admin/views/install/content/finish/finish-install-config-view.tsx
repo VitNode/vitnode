@@ -1,5 +1,4 @@
-import { Home, KeyRound } from 'lucide-react';
-
+import { buttonVariants } from '@/components/ui/button';
 import {
   Card,
   CardContent,
@@ -9,7 +8,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Link } from '@/navigation';
-import { buttonVariants } from '@/components/ui/button';
+import { Home, KeyRound } from 'lucide-react';
 
 export const FinishInstallConfigsView = () => {
   return (
@@ -24,14 +23,14 @@ export const FinishInstallConfigsView = () => {
         </p>
       </CardContent>
       <CardFooter className="flex items-center justify-center gap-4">
-        <Link href="/" className={buttonVariants()}>
+        <Link className={buttonVariants()} href="/">
           <Home /> Home Page
         </Link>
         <Link
-          href="/admin"
           className={buttonVariants({
             variant: 'ghost',
           })}
+          href="/admin"
         >
           <KeyRound /> Admin Control Panel
         </Link>

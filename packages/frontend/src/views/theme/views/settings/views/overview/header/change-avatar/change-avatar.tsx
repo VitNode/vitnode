@@ -1,18 +1,17 @@
-import { useTranslations } from 'next-intl';
-import React from 'react';
-import { ImageIcon } from 'lucide-react';
-
-import { useSession } from '@/hooks/use-session';
-import { AvatarUser } from '@/components/ui/user/avatar';
+import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import { Loader } from '@/components/ui/loader';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
-import { Loader } from '@/components/ui/loader';
+import { AvatarUser } from '@/components/ui/user/avatar';
+import { useSession } from '@/hooks/use-session';
+import { ImageIcon } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import React from 'react';
 
 const ModalChangeAvatar = React.lazy(async () =>
   import('./modal/modal-change-avatar').then(module => ({
@@ -34,10 +33,10 @@ export const ChangeAvatar = () => {
             <TooltipTrigger asChild>
               <DialogTrigger asChild>
                 <Button
-                  variant="outline"
-                  size="icon"
-                  className="absolute -bottom-2 -left-2"
                   ariaLabel=""
+                  className="absolute -bottom-2 -left-2"
+                  size="icon"
+                  variant="outline"
                 >
                   <ImageIcon size={20} />
                 </Button>

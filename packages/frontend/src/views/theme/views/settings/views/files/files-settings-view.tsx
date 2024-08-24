@@ -1,13 +1,9 @@
-import React from 'react';
-import { getTranslations } from 'next-intl/server';
-import { Metadata } from 'next';
-
-import { fetcher } from '@/graphql/fetcher';
 import { CardContent, CardDescription, CardHeader } from '@/components/ui/card';
 import { Loader } from '@/components/ui/loader';
+import { fetcher } from '@/graphql/fetcher';
 import {
-  SearchParamsPagination,
   getPaginationTool,
+  SearchParamsPagination,
 } from '@/graphql/get-pagination-tool';
 import {
   Core_Members__Files__Show,
@@ -15,6 +11,9 @@ import {
   Core_Members__Files__ShowQueryVariables,
 } from '@/graphql/queries/settings/core_members__files__show.generated';
 import { ShowCoreFilesSortingColumnEnum } from '@/graphql/types';
+import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
+import React from 'react';
 
 const getData = async (variables: Core_Members__Files__ShowQueryVariables) => {
   const data = await fetcher<

@@ -1,28 +1,29 @@
-import React from 'react';
-import { TableVirtuoso } from 'react-virtuoso';
-import { ControllerRenderProps, FieldValues } from 'react-hook-form';
-import { keyBy, mapValues } from 'lodash';
-
-import { Loader } from './loader';
-import { Input } from './input';
-import { Switch } from './switch';
 import { ShowAdminGroups } from '@/graphql/types';
-import { usePermissionsGroupsAdminAPI } from '../utils/permissions-table/use-permissions-table-api';
+import { keyBy, mapValues } from 'lodash';
+import React from 'react';
+import { ControllerRenderProps, FieldValues } from 'react-hook-form';
+import { TableVirtuoso } from 'react-virtuoso';
 
 import { useTextLang } from '../../hooks/use-text-lang';
+import { usePermissionsGroupsAdminAPI } from '../utils/permissions-table/use-permissions-table-api';
+import { Input } from './input';
+import { Loader } from './loader';
+import { Switch } from './switch';
 
 export const PermissionsTable = ({
   field,
   permissions,
 }: {
   field: ControllerRenderProps<FieldValues, 'permissions'>;
-  permissions: { id: string; title: string; disableForGuest?: boolean }[];
+  permissions: { disableForGuest?: boolean; id: string; title: string }[];
 }) => {
   const [searchValue, setSearchValue] = React.useState('');
   const { convertText } = useTextLang();
   const { data, isError, isLoading } = usePermissionsGroupsAdminAPI({
     searchValue,
   });
+
+  const fieldValue: { groups: { id: number }[] } = field.value;
 
   const Table = React.useCallback(
     ({ ...props }) => <table className="w-full" {...props} />,
@@ -44,7 +45,7 @@ export const PermissionsTable = ({
     field.onChange({
       ...field.value,
       [`can_all_${id}`]: stateToUpdate,
-      groups: field.value.groups.map((group: { id: number }) => {
+      groups: fieldValue.groups.map(group => {
         return {
           ...group,
           [id]: stateToUpdate,
@@ -60,33 +61,35 @@ export const PermissionsTable = ({
   return (
     <>
       <Input
-        value={searchValue}
-        onChange={e => setSearchValue(e.target.value)}
+        onChange={e => {
+          setSearchValue(e.target.value);
+        }}
         placeholder="Search group..."
+        value={searchValue}
       />
 
       <TableVirtuoso
-        style={{ height: '50vh' }}
-        data={data}
-        overscan={200}
         className="rounded-md border"
         components={{
           Table,
           TableRow,
         }}
+        data={data}
         fixedHeaderContent={() => (
           <tr className="bg-card border-b">
             <th />
             {permissions.map(permission => (
               <th
-                key={`header_can_${permission.id}`}
                 className="text-muted-foreground px-4 py-3 align-middle font-medium"
+                key={`header_can_${permission.id}`}
               >
                 <div className="flex items-center justify-center gap-4">
                   <span>{permission.title}</span>
                   <Switch
-                    onClick={() => onToggleAll(permission.id)}
                     checked={field.value[`can_all_${permission.id}`]}
+                    onClick={() => {
+                      onToggleAll(permission.id);
+                    }}
                   />
                 </div>
               </th>
@@ -94,8 +97,8 @@ export const PermissionsTable = ({
           </tr>
         )}
         itemContent={(index, item) => {
-          const findItem = field.value.groups.find(
-            (group: { id: number }) => group.id === item.id,
+          const findItem = fieldValue.groups.find(
+            group => group.id === item.id,
           );
           // Check if:
           // 1. The permission is enabled for all groups
@@ -111,6 +114,7 @@ export const PermissionsTable = ({
                 <div className="flex flex-col gap-2">
                   <span>{convertText(item.name)}</span>
                   <Switch
+                    checked={isAllPermissionsEnabled}
                     onClick={() => {
                       if (isAllPermissionsEnabled) {
                         const disableAllPermissions = mapValues(
@@ -135,10 +139,9 @@ export const PermissionsTable = ({
                                   return true;
                                 }
 
-                                const findGroupInField =
-                                  field.value.groups.find(
-                                    ({ id }: { id: number }) => id === group.id,
-                                  );
+                                const findGroupInField = fieldValue.groups.find(
+                                  ({ id }) => id === group.id,
+                                );
 
                                 if (findGroupInField) {
                                   return findGroupInField[el.id];
@@ -165,8 +168,8 @@ export const PermissionsTable = ({
                       field.onChange({
                         ...field.value,
                         groups: [
-                          ...field.value.groups.filter(
-                            (group: { id: number }) => group.id !== item.id,
+                          ...fieldValue.groups.filter(
+                            group => group.id !== item.id,
                           ),
                           {
                             id: item.id,
@@ -175,7 +178,6 @@ export const PermissionsTable = ({
                         ],
                       });
                     }}
-                    checked={isAllPermissionsEnabled}
                   />
                 </div>
               </td>
@@ -184,15 +186,17 @@ export const PermissionsTable = ({
                 // Check if:
                 // 1. The permission is enabled for all groups
                 // 2. The permission is enabled for the current group
-                const checked: boolean = !!(
+                const checked = !!(
                   (field.value[`can_all_${permission.id}`] ||
                     findItem?.[permission.id]) &&
                   item.guest !== permission.disableForGuest
                 );
 
                 return (
-                  <td key={permission.id} className="px-4 py-2 text-center">
+                  <td className="px-4 py-2 text-center" key={permission.id}>
                     <Switch
+                      checked={checked}
+                      disabled={item.guest === permission.disableForGuest}
                       onClick={() => {
                         if (field.value[`can_all_${permission.id}`]) {
                           const groupPermissions = mapValues(
@@ -207,8 +211,8 @@ export const PermissionsTable = ({
 
                           const groups = data.map(
                             (group: Pick<ShowAdminGroups, 'id'>) => {
-                              const findExistingGroup = field.value.groups.find(
-                                ({ id }: { id: number }) => id === group.id,
+                              const findExistingGroup = fieldValue.groups.find(
+                                ({ id }) => id === group.id,
                               );
 
                               if (group.id === item.id) {
@@ -270,8 +274,8 @@ export const PermissionsTable = ({
                           return;
                         }
 
-                        const otherGroups = field.value.groups.filter(
-                          (group: { id: number }) => group.id !== item.id,
+                        const otherGroups = fieldValue.groups.filter(
+                          group => group.id !== item.id,
                         );
 
                         field.onChange({
@@ -285,8 +289,6 @@ export const PermissionsTable = ({
                           ],
                         });
                       }}
-                      checked={checked}
-                      disabled={item.guest === permission.disableForGuest}
                     />
                   </td>
                 );
@@ -294,6 +296,8 @@ export const PermissionsTable = ({
             </>
           );
         }}
+        overscan={200}
+        style={{ height: '50vh' }}
       />
     </>
   );

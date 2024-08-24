@@ -1,23 +1,23 @@
-import { useTranslations } from 'next-intl';
-import React from 'react';
-
-import { useDownloadLangAdmin } from './hooks/use-download-lang-admin';
-import { Loader } from '@/components/ui/loader';
+import { AutoForm } from '@/components/form/auto-form';
+import { AutoFormCombobox } from '@/components/form/fields/combobox';
+import { AutoFormSwitch } from '@/components/form/fields/switch';
+import {
+  AutoFormInputComponentProps,
+  DependencyType,
+} from '@/components/form/type';
+import { Button } from '@/components/ui/button';
 import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
+import { Loader } from '@/components/ui/loader';
 import { ShowCoreLanguages } from '@/graphql/types';
-import { AutoForm } from '@/components/form/auto-form';
-import {
-  AutoFormInputComponentProps,
-  DependencyType,
-} from '@/components/form/type';
-import { AutoFormCombobox } from '@/components/form/fields/combobox';
-import { AutoFormSwitch } from '@/components/form/fields/switch';
+import { useTranslations } from 'next-intl';
+import React from 'react';
+
+import { useDownloadLangAdmin } from './hooks/use-download-lang-admin';
 export const ContentDownloadActionsTableLangsCoreAdmin = ({
   code,
 }: Pick<ShowCoreLanguages, 'code'>) => {
@@ -39,13 +39,14 @@ export const ContentDownloadActionsTableLangsCoreAdmin = ({
       </DialogHeader>
 
       <AutoForm
-        formSchema={formSchema}
-        onSubmit={onSubmit}
-        submitButton={props => (
-          <DialogFooter>
-            <Button {...props}>{t('submit')}</Button>
-          </DialogFooter>
-        )}
+        dependencies={[
+          {
+            sourceField: 'all',
+            type: DependencyType.HIDES,
+            targetField: 'plugins',
+            when: (provider: boolean) => !!provider,
+          },
+        ]}
         fieldConfig={{
           all: {
             label: t('all.label'),
@@ -71,14 +72,13 @@ export const ContentDownloadActionsTableLangsCoreAdmin = ({
             ),
           },
         }}
-        dependencies={[
-          {
-            sourceField: 'all',
-            type: DependencyType.HIDES,
-            targetField: 'plugins',
-            when: (provider: boolean) => !!provider,
-          },
-        ]}
+        formSchema={formSchema}
+        onSubmit={onSubmit}
+        submitButton={props => (
+          <DialogFooter>
+            <Button {...props}>{t('submit')}</Button>
+          </DialogFooter>
+        )}
       />
     </>
   );

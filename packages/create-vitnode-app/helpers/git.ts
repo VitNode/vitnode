@@ -1,6 +1,6 @@
 import { execSync } from 'child_process';
-import { join } from 'path';
 import { rmSync } from 'fs';
+import { join } from 'path';
 
 function isInGitRepository(): boolean {
   try {
@@ -59,7 +59,7 @@ export function tryGitInit(root: string): boolean {
     });
 
     return true;
-  } catch (e) {
+  } catch (_) {
     if (didInit) {
       try {
         rmSync(join(root, '.git'), { recursive: true, force: true });

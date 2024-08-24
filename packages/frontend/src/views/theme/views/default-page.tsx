@@ -1,7 +1,6 @@
+import { getSessionData } from '@/graphql/get-session-data';
 import { Metadata } from 'next';
 import React from 'react';
-
-import { getSessionData } from '@/graphql/get-session-data';
 
 export interface DefaultPageProps {
   params: {

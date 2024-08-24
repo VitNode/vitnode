@@ -1,13 +1,12 @@
-import { join } from 'path';
-
 import { CodegenConfig } from '@graphql-codegen/cli';
+import { join } from 'path';
 
 export const codegenConfig = ({
   config,
   pathOutGql,
 }: {
-  pathOutGql: string;
   config?: Omit<CodegenConfig, 'generates'>;
+  pathOutGql: string;
 }): CodegenConfig => {
   return {
     ...config,
@@ -29,7 +28,7 @@ export const codegenConfig = ({
       },
     },
     generates: {
-      [`${join(pathOutGql, 'types.ts')}`]: {
+      [join(pathOutGql, 'types.ts')]: {
         plugins: ['typescript'],
       },
       [pathOutGql]: {

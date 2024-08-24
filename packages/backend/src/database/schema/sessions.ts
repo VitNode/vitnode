@@ -1,3 +1,4 @@
+import { relations } from 'drizzle-orm';
 import {
   index,
   integer,
@@ -7,10 +8,9 @@ import {
   timestamp,
   varchar,
 } from 'drizzle-orm/pg-core';
-import { relations } from 'drizzle-orm';
 
-import { core_users } from './users';
 import { core_admin_sessions } from './admins';
+import { core_users } from './users';
 
 export const core_sessions = pgTable(
   'core_sessions',

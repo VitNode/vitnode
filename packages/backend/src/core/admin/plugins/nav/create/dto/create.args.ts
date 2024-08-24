@@ -1,14 +1,10 @@
+import { TransformString } from '@/utils';
 import { ArgsType, Field } from '@nestjs/graphql';
 import { Transform } from 'class-transformer';
 import { IsNotEmpty, MaxLength, MinLength } from 'class-validator';
 
-import { TransformString } from '@/utils';
-
 @ArgsType()
 export class CreateAdminNavPluginsArgs {
-  @Field(() => String)
-  plugin_code: string;
-
   @Field(() => String)
   @MinLength(3)
   @MaxLength(100)
@@ -22,11 +18,14 @@ export class CreateAdminNavPluginsArgs {
   href: string;
 
   @Field(() => String, { nullable: true })
-  icon: string | null;
+  icon: null | string;
+
+  @Field(() => [String])
+  keywords: string[];
 
   @Field(() => String, { nullable: true })
   parent_code?: string;
 
-  @Field(() => [String])
-  keywords: string[];
+  @Field(() => String)
+  plugin_code: string;
 }

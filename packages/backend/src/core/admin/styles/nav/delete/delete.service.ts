@@ -1,16 +1,15 @@
-import { Injectable } from '@nestjs/common';
-import { eq } from 'drizzle-orm';
-
-import { DeleteAdminNavStylesArgs } from './dto/delete.args';
-
-import { InternalDatabaseService } from '@/utils/database/internal_database.service';
-import { NotFoundError } from '@/errors';
+import { ParserTextLanguageCoreHelpersService } from '@/core/helpers/text_language/parser/parser.service';
 import {
   core_nav,
   core_nav_description,
   core_nav_name,
 } from '@/database/schema/nav';
-import { ParserTextLanguageCoreHelpersService } from '@/core/helpers/text_language/parser/parser.service';
+import { NotFoundError } from '@/errors';
+import { InternalDatabaseService } from '@/utils/database/internal_database.service';
+import { Injectable } from '@nestjs/common';
+import { eq } from 'drizzle-orm';
+
+import { DeleteAdminNavStylesArgs } from './dto/delete.args';
 
 @Injectable()
 export class DeleteAdminNavStylesService {

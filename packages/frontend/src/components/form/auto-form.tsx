@@ -1,17 +1,17 @@
 'use client';
 
-import { DefaultValues, useForm, UseFormReturn } from 'react-hook-form';
-import * as z from 'zod';
-import React from 'react';
+import { AutoFormObject } from '@/components/form/object';
+import { cn } from '@/helpers/classnames';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
+import React from 'react';
+import { DefaultValues, useForm, UseFormReturn } from 'react-hook-form';
+import * as z from 'zod';
 
-import { Form } from '../ui/form';
 import { Button } from '../ui/button';
-import { cn } from '@/helpers/classnames';
-import { AutoFormObject } from '@/components/form/object';
-import { getDefaultValues, getObjectFormSchema } from './utils';
+import { Form } from '../ui/form';
 import { Dependency, FieldConfig, ZodObjectOrWrapped } from './type';
+import { getDefaultValues, getObjectFormSchema } from './utils';
 
 export function AutoForm<T extends ZodObjectOrWrapped>({
   formSchema,
@@ -24,15 +24,15 @@ export function AutoForm<T extends ZodObjectOrWrapped>({
   theme = 'vertical',
   onValuesChange,
 }: {
-  fieldConfig: FieldConfig<z.infer<T>>;
-  formSchema: T;
   children?: React.ReactNode;
   className?: string;
   dependencies?: Dependency<z.infer<T>>[];
+  fieldConfig: FieldConfig<z.infer<T>>;
+  formSchema: T;
   onSubmit?: (
     values: z.infer<T>,
     form: UseFormReturn<z.infer<T>>,
-  ) => Promise<void>;
+  ) => Promise<void> | void;
   onValuesChange?: (values: Partial<z.infer<T>>) => void;
   submitButton?: (props: {
     disabled: boolean;
@@ -48,7 +48,7 @@ export function AutoForm<T extends ZodObjectOrWrapped>({
 
   const form = useForm<z.infer<typeof objectFormSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: defaultValues ?? undefined,
+    defaultValues,
   });
   const values = form.watch();
   // valuesString is needed because form.watch() returns a new object every time
@@ -57,14 +57,14 @@ export function AutoForm<T extends ZodObjectOrWrapped>({
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const parsedValues = formSchema.safeParse(values);
     if (parsedValues.success) {
-      await onSubmitProp?.(parsedValues.data, form);
+      await onSubmitProp?.(parsedValues.data as z.infer<T>, form);
     }
   };
 
   React.useEffect(() => {
     const parsedValues = formSchema.safeParse(values);
     if (parsedValues.success) {
-      onValuesChange?.(parsedValues.data);
+      onValuesChange?.(parsedValues.data as z.infer<T>);
     }
   }, [valuesString]);
 
@@ -78,10 +78,10 @@ export function AutoForm<T extends ZodObjectOrWrapped>({
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <AutoFormObject
-          schema={objectFormSchema}
-          form={form}
           dependencies={dependencies}
           fieldConfig={fieldConfig}
+          form={form}
+          schema={objectFormSchema}
           theme={theme}
         />
         {children}
@@ -93,9 +93,9 @@ export function AutoForm<T extends ZodObjectOrWrapped>({
           })
         ) : (
           <Button
-            type="submit"
             disabled={!form.formState.isValid}
             loading={form.formState.isSubmitting}
+            type="submit"
           >
             {t('save')}
           </Button>

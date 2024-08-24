@@ -1,6 +1,5 @@
-import { ArgsType, Field, InputType, registerEnumType } from '@nestjs/graphql';
-
 import { PaginationArgs, SortDirectionEnum } from '@/utils';
+import { ArgsType, Field, InputType, registerEnumType } from '@nestjs/graphql';
 
 enum ShowCoreFilesSortingColumnEnum {
   created = 'created',
@@ -22,9 +21,9 @@ class ShowCoreFilesSortByArgs {
 
 @ArgsType()
 export class ShowCoreFilesArgs extends PaginationArgs {
-  @Field(() => ShowCoreFilesSortByArgs, { nullable: true })
-  sortBy?: ShowCoreFilesSortByArgs;
-
   @Field(() => String, { nullable: true })
   search?: string;
+
+  @Field(() => ShowCoreFilesSortByArgs, { nullable: true })
+  sortBy?: ShowCoreFilesSortByArgs;
 }

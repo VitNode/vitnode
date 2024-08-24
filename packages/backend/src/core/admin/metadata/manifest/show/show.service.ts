@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
-import { ShowAdminManifestMetadataObj } from './dto/show.obj';
 import { getManifest } from '../functions';
+import { ShowAdminManifestMetadataObj } from './dto/show.obj';
 
 @Injectable()
 export class ShowAdminManifestMetadataService {

@@ -4,16 +4,18 @@ import * as z from 'zod';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type ZodObjectOrWrapped = z.Schema<any, any>;
 
+export interface FieldRenderParentProps {
+  children: React.ReactNode;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  field: ControllerRenderProps<FieldValues, any>;
+}
+
 export interface FieldConfigItem {
-  fieldType: (props: AutoFormInputComponentProps) => React.ReactNode;
   description?: React.ReactNode;
+  fieldType: (props: AutoFormInputComponentProps) => React.ReactNode;
   label?: string;
 
-  renderParent?: (props: {
-    children: React.ReactNode;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    field: ControllerRenderProps<FieldValues, any>;
-  }) => React.ReactElement | null;
+  renderParent?: (props: FieldRenderParentProps) => null | React.ReactElement;
 }
 
 export type FieldConfig<T extends FieldValues> = {
@@ -31,28 +33,28 @@ export enum DependencyType {
 }
 
 interface BaseDependency<T extends FieldValues> {
-  sourceField: string | keyof T;
-  targetField: string | keyof T;
+  sourceField: keyof T | string;
+  targetField: keyof T | string;
   type: DependencyType;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   when: (sourceFieldValue: any, targetFieldValue: unknown) => boolean;
 }
 
-export type ValueDependency<T extends FieldValues> = BaseDependency<T> & {
+export type ValueDependency<T extends FieldValues> = {
   type:
     | DependencyType.DISABLES
     | DependencyType.HIDES
     | DependencyType.REQUIRES;
-};
+} & BaseDependency<T>;
 
 export type EnumValues = readonly [string, ...string[]];
 
-export type OptionsDependency<T extends FieldValues> = BaseDependency<T> & {
+export type OptionsDependency<T extends FieldValues> = {
   // Partial array of values from sourceField that will trigger the dependency
   options: EnumValues;
 
   type: DependencyType.SETS_OPTIONS;
-};
+} & BaseDependency<T>;
 
 export type Dependency<T extends FieldValues> =
   | OptionsDependency<T>

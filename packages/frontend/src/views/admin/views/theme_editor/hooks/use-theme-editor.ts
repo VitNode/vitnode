@@ -1,14 +1,14 @@
+import { FilesInputValue } from '@/components/ui/file-input';
+import { HslColor } from '@/graphql/types';
 import React from 'react';
 import { UseFormReturn } from 'react-hook-form';
 
 import { formSchemaColorsThemeEditor } from './use-theme-editor-api';
-import { HslColor } from '@/graphql/types';
-import { FilesInputValue } from '@/components/ui/file-input';
 
 export enum ThemeEditorTab {
-  Main = 'main',
   Colors = 'colors',
   Logos = 'logos',
+  Main = 'main',
 }
 
 interface ColorObj {
@@ -17,15 +17,6 @@ interface ColorObj {
 }
 
 interface ThemeEditorFormObj {
-  logos: {
-    dark: FilesInputValue | null;
-    light: FilesInputValue | null;
-    mobile_dark: FilesInputValue | null;
-    mobile_light: FilesInputValue | null;
-    mobile_width: number;
-    text: string;
-    width: number;
-  };
   colors?: {
     accent: ColorObj;
     'accent-foreground': ColorObj;
@@ -43,6 +34,15 @@ interface ThemeEditorFormObj {
     secondary: ColorObj;
     'secondary-foreground': ColorObj;
   };
+  logos: {
+    dark: FilesInputValue | null;
+    light: FilesInputValue | null;
+    mobile_dark: FilesInputValue | null;
+    mobile_light: FilesInputValue | null;
+    mobile_width: number;
+    text: string;
+    width: number;
+  };
 }
 
 interface Args {
@@ -57,7 +57,7 @@ interface Args {
   }) => void;
   direction: number;
   form: UseFormReturn<ThemeEditorFormObj>;
-  iframeRef: React.RefObject<HTMLIFrameElement> | null;
+  iframeRef: null | React.RefObject<HTMLIFrameElement>;
   onSubmit: (values: ThemeEditorFormObj) => void;
   openSubmitDialog: boolean;
   setActiveTab: (tab: ThemeEditorTab) => void;

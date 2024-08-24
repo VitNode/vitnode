@@ -1,12 +1,12 @@
-import { UseFormReturn } from 'react-hook-form';
-import * as z from 'zod';
-import { useTranslations } from 'next-intl';
-import { toast } from 'sonner';
-
-import { mutationApi } from './mutation-api';
-import { CONFIG } from '@/helpers/config-with-env';
 import { Admin__Core_Manifest_Metadata__ShowQuery } from '@/graphql/queries/admin/settings/admin__core_manifest_metadata__show.generated';
 import { convertColor, getHSLFromString } from '@/helpers/colors';
+import { CONFIG } from '@/helpers/config-with-env';
+import { useTranslations } from 'next-intl';
+import { UseFormReturn } from 'react-hook-form';
+import { toast } from 'sonner';
+import * as z from 'zod';
+
+import { mutationApi } from './mutation-api';
 
 const ManifestDisplay = {
   fullscreen: 'fullscreen',
@@ -25,7 +25,9 @@ export const useManifestCoreAdminView = ({
   const formSchema = z.object({
     display: z
       .nativeEnum(ManifestDisplay)
-      .default(data.display as z.infer<typeof formSchema>['display']),
+      .default(
+        data.display as 'browser' | 'fullscreen' | 'minimal-ui' | 'standalone',
+      ),
     start_url: z
       .string()
       .default(data.start_url.replace(`${CONFIG.frontend_url}/en`, '')),

@@ -1,11 +1,10 @@
-import { Args, Query, Resolver } from '@nestjs/graphql';
+import { AdminAuthGuards, OnlyForDevelopment } from '@/utils';
 import { UseGuards } from '@nestjs/common';
+import { Args, Query, Resolver } from '@nestjs/graphql';
 
-import { FilesAdminPluginsService } from './files.service';
 import { FilesAdminPluginsArgs } from './dto/files.args';
 import { FilesAdminPluginsObj } from './dto/files.obj';
-
-import { AdminAuthGuards, OnlyForDevelopment } from '@/utils';
+import { FilesAdminPluginsService } from './files.service';
 
 @Resolver()
 export class FilesAdminPluginsResolver {

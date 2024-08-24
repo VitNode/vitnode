@@ -1,7 +1,6 @@
-import { toast } from 'sonner';
-import { useTranslations } from 'next-intl';
-
 import { ShowAdminPlugins } from '@/graphql/types';
+import { useTranslations } from 'next-intl';
+import { toast } from 'sonner';
 
 import { mutationEditApi } from '../../../../actions/create/hooks/mutation-edit-api';
 
@@ -20,7 +19,7 @@ export const useSetDefaultPluginAdmin = (data: ShowAdminPlugins) => {
         default: true,
         supportUrl: data.support_url,
       });
-    } catch (error) {
+    } catch (_) {
       toast.error(tCore('errors.title'), {
         description: tCore('errors.internal_server_error'),
       });

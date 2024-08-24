@@ -1,6 +1,5 @@
-import { ArgsType, Field, InputType } from '@nestjs/graphql';
-
 import { AllowTypeFilesEnum } from '@/providers/config';
+import { ArgsType, Field, InputType } from '@nestjs/graphql';
 
 @InputType()
 class FilesEditAdminEditorStyles {
@@ -10,9 +9,9 @@ class FilesEditAdminEditorStyles {
 
 @ArgsType()
 export class EditAdminEditorStylesArgs {
-  @Field(() => Boolean)
-  sticky: boolean;
-
   @Field(() => FilesEditAdminEditorStyles)
   files: FilesEditAdminEditorStyles;
+
+  @Field(() => Boolean)
+  sticky: boolean;
 }

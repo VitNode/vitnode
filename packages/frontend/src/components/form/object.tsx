@@ -1,13 +1,13 @@
-import * as z from 'zod';
 import { useForm, useFormContext } from 'react-hook-form';
+import * as z from 'zod';
 
+import { FormField } from '../ui/form';
 import { Dependency, FieldConfig } from './type';
 import resolveDependencies, {
   getBaseSchema,
   getBaseType,
   zodToHtmlInputProps,
 } from './utils';
-import { FormField } from '../ui/form';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function AutoFormObject<T extends z.ZodObject<any, any>>({
@@ -18,21 +18,20 @@ export function AutoFormObject<T extends z.ZodObject<any, any>>({
   dependencies = [],
   theme,
 }: {
+  dependencies?: Dependency<z.infer<T>>[];
   fieldConfig: FieldConfig<z.infer<T>>;
   form: ReturnType<typeof useForm>;
+  path?: string[];
   schema: T | z.ZodEffects<T>;
   theme: 'horizontal' | 'vertical';
-  dependencies?: Dependency<z.infer<T>>[];
-  path?: string[];
 }) {
   const { watch } = useFormContext();
-  if (!schema) return null;
-  const { shape } = getBaseSchema<T>(schema) || {};
+  const { shape } = getBaseSchema<T>(schema) ?? {};
   if (!shape) return null;
 
   return (
     <>
-      {Object.keys(shape).map(name => {
+      {Object.keys(shape as object).map(name => {
         let item = shape[name] as z.ZodAny;
         const zodBaseType = getBaseType(item);
         const key = [...path, name].join('.');
@@ -49,14 +48,14 @@ export function AutoFormObject<T extends z.ZodObject<any, any>>({
         if (zodBaseType === 'ZodObject') {
           return (
             <AutoFormObject
-              key={name}
-              schema={item as unknown as T}
-              form={form}
               dependencies={dependencies}
               fieldConfig={
-                (fieldConfig?.[name] ?? {}) as FieldConfig<z.infer<typeof item>>
+                (fieldConfig[name] ?? {}) as FieldConfig<z.infer<typeof item>>
               }
+              form={form}
+              key={name}
               path={[...path, name]}
+              schema={item as unknown as T}
               theme={theme}
             />
           );
@@ -73,8 +72,8 @@ export function AutoFormObject<T extends z.ZodObject<any, any>>({
 
         return (
           <FormField
-            key={name}
             control={form.control}
+            key={name}
             name={key}
             render={({ field }) => {
               const InputComponent = fieldConfigItem.fieldType;
@@ -88,16 +87,17 @@ export function AutoFormObject<T extends z.ZodObject<any, any>>({
 
               return (
                 <InputComponent
-                  key={key}
                   autoFormProps={{
                     field,
                     fieldConfigItem,
                     isRequired:
-                      isRequiredByDependency || zodInputProps.required || false,
+                      (isRequiredByDependency || zodInputProps.required) ??
+                      false,
                     zodItem: item,
                     theme,
                     isDisabled,
                   }}
+                  key={key}
                   {...zodToHtmlInputProps(item)}
                 />
               );

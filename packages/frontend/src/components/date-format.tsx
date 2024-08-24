@@ -2,13 +2,13 @@
 
 import React from 'react';
 
+import { useDateFormat } from './date-format-hooks/use-date-format';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from './ui/tooltip';
-import { useDateFormat } from './date-format-hooks/use-date-format';
 
 export const DateFormat = ({
   className,
@@ -16,8 +16,8 @@ export const DateFormat = ({
   ref,
   showFullDate,
 }: {
-  date: Date;
   className?: string;
+  date: Date;
   ref?: React.RefCallback<HTMLTimeElement>;
   showFullDate?: boolean;
 }) => {
@@ -31,9 +31,9 @@ export const DateFormat = ({
         <Tooltip>
           <TooltipTrigger asChild>
             <time
-              ref={ref}
-              dateTime={fullDate.toString()}
               className={className}
+              dateTime={fullDate.toString()}
+              ref={ref}
             >
               {getDate()}
             </time>
@@ -47,7 +47,7 @@ export const DateFormat = ({
   }
 
   return (
-    <time ref={ref} dateTime={fullDate.toString()} className={className}>
+    <time className={className} dateTime={fullDate.toString()} ref={ref}>
       {fullDate}
     </time>
   );

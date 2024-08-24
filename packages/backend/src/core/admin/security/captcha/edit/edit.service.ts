@@ -1,6 +1,6 @@
-import * as fs from 'fs';
-
+import { configPath, getConfigFile } from '@/providers';
 import { Injectable } from '@nestjs/common';
+import * as fs from 'fs';
 
 import {
   CaptchaSecurityConfig,
@@ -8,8 +8,6 @@ import {
 } from '../helpers.service';
 import { ShowAdminCaptchaSecurityObj } from '../show/dto/show.obj';
 import { EditAdminCaptchaSecurityArgs } from './dto/edit.args';
-
-import { configPath, getConfigFile } from '@/providers';
 
 @Injectable()
 export class EditAdminCaptchaSecurityService extends HelpersAdminCaptchaSecurityService {

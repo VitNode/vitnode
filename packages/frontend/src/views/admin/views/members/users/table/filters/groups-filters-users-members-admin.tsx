@@ -1,7 +1,6 @@
-import React from 'react';
-import { useTranslations } from 'next-intl';
-
 import { FilterToolbarDataTable } from '@/components/data-table/toolbar/filter/filter';
+import { useTranslations } from 'next-intl';
+import React from 'react';
 
 const ContentGroupsFiltersUsersMembersAdmin = React.lazy(async () =>
   import('./content').then(module => ({
@@ -13,7 +12,7 @@ export const GroupsFiltersUsersMembersAdmin = () => {
   const t = useTranslations('admin.members.users.filters');
 
   return (
-    <FilterToolbarDataTable title={t('groups')} id="groups">
+    <FilterToolbarDataTable id="groups" title={t('groups')}>
       <ContentGroupsFiltersUsersMembersAdmin />
     </FilterToolbarDataTable>
   );
