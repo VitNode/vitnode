@@ -40,7 +40,7 @@ export const ContentDeleteActionTableNavAdmin = ({
         </AlertDialogDescription>
 
         {children.length > 0 && (
-          <Alert variant="destructive">
+          <Alert variant="warn">
             <Trash className="size-4" />
             <AlertTitle>{tCore('hands_up')}</AlertTitle>
             <AlertDescription>{t('desc_with_children')}</AlertDescription>

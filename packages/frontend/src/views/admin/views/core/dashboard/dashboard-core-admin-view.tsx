@@ -1,11 +1,10 @@
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { HeaderContent } from '@/components/ui/header-content';
 import { getSessionAdminData } from '@/graphql/get-session-admin';
 import { CONFIG } from '@/helpers/config-with-env';
 import { Link } from '@/navigation';
-import { AlertTriangle, HammerIcon, TerminalIcon } from 'lucide-react';
+import { AlertTriangle, HammerIcon } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 
 import { RebuildRequiredAdmin } from '../../../global/rebuild-required';
@@ -43,40 +42,6 @@ export const DashboardCoreAdminView = async () => {
           </Link>
         </Button>
       </HeaderContent>
-
-      <div className="max-w-3xl space-y-6 p-32">
-        <Alert>
-          <TerminalIcon className="size-4" />
-          <AlertTitle>Heads up!</AlertTitle>
-          <AlertDescription>
-            You can add components and dependencies to your app using the cli.
-          </AlertDescription>
-        </Alert>
-
-        <Alert variant="error">
-          <TerminalIcon className="size-4" />
-          <AlertTitle>Heads up!</AlertTitle>
-          <AlertDescription>
-            You can add components and dependencies to your app using the cli.
-          </AlertDescription>
-        </Alert>
-
-        <Alert variant="warn">
-          <TerminalIcon className="size-4" />
-          <AlertTitle>Heads up!</AlertTitle>
-          <AlertDescription>
-            You can add components and dependencies to your app using the cli.
-          </AlertDescription>
-        </Alert>
-
-        <Alert variant="primary">
-          <TerminalIcon className="size-4" />
-          <AlertTitle>Heads up!</AlertTitle>
-          <AlertDescription>
-            You can add components and dependencies to your app using the cli.
-          </AlertDescription>
-        </Alert>
-      </div>
 
       <RebuildRequiredAdmin />
     </>
