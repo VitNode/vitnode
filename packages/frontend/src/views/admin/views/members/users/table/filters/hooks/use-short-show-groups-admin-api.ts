@@ -11,10 +11,6 @@ export const useShortShowGroupsAdminAPI = () => {
     queryFn: async () => {
       const mutation = await getGroupsShortApi({ search: textSearch });
 
-      if (!mutation.data) {
-        throw mutation.error;
-      }
-
       return mutation.data;
     },
     refetchOnMount: true,

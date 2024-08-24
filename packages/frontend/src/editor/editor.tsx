@@ -1,6 +1,6 @@
 'use client';
 
-import { useEditor, EditorContent } from '@tiptap/react';
+import { useEditor, EditorContent, Content } from '@tiptap/react';
 import React from 'react';
 import { useLocale } from 'next-intl';
 
@@ -54,7 +54,7 @@ export const Editor = ({
   const locale = useLocale();
   const { defaultLanguage } = useGlobals();
   const [selectedLanguage, setSelectedLanguage] = React.useState(
-    locale ?? defaultLanguage,
+    locale || defaultLanguage,
   );
   const editor = useEditor({
     autofocus: autoFocus,
@@ -78,7 +78,7 @@ export const Editor = ({
 
       try {
         return JSON.parse(current);
-      } catch (e) {
+      } catch (_) {
         return current;
       }
     })(),
@@ -120,7 +120,8 @@ export const Editor = ({
       return;
     }
 
-    editor.commands.setContent(JSON.parse(findValue));
+    const content: Content = JSON.parse(findValue);
+    editor.commands.setContent(content);
   }, [selectedLanguage]);
 
   if (!editor) return null;

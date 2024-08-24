@@ -5,7 +5,6 @@ import { useTranslations } from 'next-intl';
 import React from 'react';
 
 import { IconPickerProps } from './content/content';
-import { IconLucideNames } from '../icon';
 
 import { Popover, PopoverContent, PopoverTrigger } from '../../ui/popover';
 import { cn } from '../../../helpers/classnames';
@@ -67,12 +66,7 @@ export const IconPicker = ({
         </div>
 
         <React.Suspense fallback={<Loader className="p-4" />}>
-          {value && (
-            <IconClient
-              className="size-10 text-4xl"
-              name={value as IconLucideNames}
-            />
-          )}
+          {value && <IconClient className="size-10 text-4xl" name={value} />}
         </React.Suspense>
       </div>
 

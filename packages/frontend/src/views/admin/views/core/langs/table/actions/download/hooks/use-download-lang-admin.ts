@@ -21,10 +21,6 @@ export const useDownloadLangAdmin = ({
     queryFn: async () => {
       const query = await queryApi({});
 
-      if (!query.data) {
-        throw query.error;
-      }
-
       return query.data;
     },
   });
@@ -64,7 +60,7 @@ export const useDownloadLangAdmin = ({
       plugins: values.all ? [] : values.plugins,
     });
 
-    if (mutation.error || !mutation.data) {
+    if (mutation.error) {
       toast.error(t('errors.title'), {
         description: t('errors.internal_server_error'),
       });

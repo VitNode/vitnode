@@ -2,6 +2,6 @@
 
 import { revalidatePath } from 'next/cache';
 
-export const mutationApi = async () => {
+export const mutationApi = () => {
   revalidatePath('/', 'layout');
 };

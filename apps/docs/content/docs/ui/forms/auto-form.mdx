@@ -227,7 +227,7 @@ Avaliable props:
       label: t('start_url.label'),
       description: t('start_url.desc'),
       fieldType: props => <AutoFormInput className="w-64" {...props} />,
-      renderParent: ({ children, field }) => (
+      renderParent: ({ children, field }: FieldRenderParentProps) => (
         <div className="flex flex-wrap items-center gap-1">
           <span>Something</span>
           {children} // Here is the input

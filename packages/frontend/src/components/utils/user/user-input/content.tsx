@@ -31,10 +31,6 @@ export const UserInputContent = (props: {
         search,
       });
 
-      if (!mutation.data) {
-        throw mutation.error;
-      }
-
       return mutation.data;
     },
   });

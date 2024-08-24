@@ -21,6 +21,7 @@ import { Label } from '@/components/ui/label';
 import {
   AutoFormInputComponentProps,
   DependencyType,
+  FieldRenderParentProps,
 } from '@/components/form/type';
 import { AutoFormColor } from '@/components/form/fields/color';
 import { AutoFormSwitch } from '@/components/form/fields/switch';
@@ -111,7 +112,7 @@ export const CreateEditFormGroupsMembersAdmin = ({
                   />
                 );
               },
-              renderParent: ({ children, field }) => (
+              renderParent: ({ children, field }: FieldRenderParentProps) => (
                 <div className="flex flex-wrap items-center gap-2">
                   {children}
                   <span>{t('create_edit.in_kb')}</span>
@@ -139,7 +140,7 @@ export const CreateEditFormGroupsMembersAdmin = ({
             },
             files_max_storage_for_submit: {
               label: t('create_edit.files.max_storage_for_submit.label'),
-              renderParent: ({ children, field }) => (
+              renderParent: ({ children, field }: FieldRenderParentProps) => (
                 <div className="flex flex-wrap items-center gap-2">
                   {children}
                   <span>{t('create_edit.in_kb')}</span>

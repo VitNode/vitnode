@@ -65,7 +65,7 @@ export const DrawerHeaderAdmin = ({
             onClick={async () => {
               try {
                 await mutationApi();
-              } catch (error) {
+              } catch (_) {
                 toast.error(tCore('errors.title'), {
                   description: tCore('errors.internal_server_error'),
                 });

@@ -11,9 +11,9 @@ import { MentionExtensionEditor } from './mentions/emoji';
 import { FilesHandler, FilesHandlerArgs } from './files/files';
 import { HeadingExtensionEditor } from './heading';
 
-interface Args extends FilesHandlerArgs {}
-
-export const extensionsEditor = ({ uploadFiles }: Args): Extensions => [
+export const extensionsEditor = ({
+  uploadFiles,
+}: FilesHandlerArgs): Extensions => [
   StarterKit.configure({
     heading: false,
     bulletList: {

@@ -136,7 +136,7 @@ export const FilesHandler = ({ uploadFiles }: FilesHandlerArgs) =>
               if (!files.length || !uploadFiles) return false;
               const { schema } = view.state;
 
-              uploadFiles({
+              void uploadFiles({
                 files,
                 finishUpload: file => {
                   const node = schema.nodes.files.create(file.data);
@@ -157,7 +157,7 @@ export const FilesHandler = ({ uploadFiles }: FilesHandlerArgs) =>
               }));
               if ((moved && !files.length) || !uploadFiles) return false;
 
-              uploadFiles({
+              void uploadFiles({
                 files,
                 finishUpload: file => {
                   const { schema } = view.state;

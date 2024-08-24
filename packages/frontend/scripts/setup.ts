@@ -1,9 +1,8 @@
 #!/usr/bin/env node
 /* eslint-disable no-console */
 
-import path, { join } from 'path';
+import { join } from 'path';
 import * as fs from 'fs';
-import { getAllFiles } from './helpers/get-all-files';
 
 interface Folders {
   path: string;

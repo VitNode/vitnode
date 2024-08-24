@@ -74,7 +74,7 @@ export const ColorPicker = ({
             const color = convertColor.hexToHSL(e.target.value);
             if (!color) return;
 
-            onChange(color ? `hsl(${color.h}, ${color.s}%, ${color.l}%)` : '');
+            onChange(`hsl(${color.h}, ${color.s}%, ${color.l}%)`);
           }}
           value={value ? `#${convertColor.hslToHex(value)}` : '#000000'}
           disabled={disabled}

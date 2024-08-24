@@ -51,7 +51,7 @@ export const AutoFormCombobox = ({
 
   let values: [string, string][] = [];
   if (!Array.isArray(baseValues)) {
-    values = Object.entries(baseValues);
+    values = Object.entries(baseValues as object);
   } else {
     values = baseValues.map(value => [value, value]);
   }
@@ -65,10 +65,10 @@ export const AutoFormCombobox = ({
     const item = current?.[1];
 
     if (current) {
-      return labels?.[current[0]] || item;
+      return labels?.[current[0]] ?? item;
     }
 
-    return item || t('select_option');
+    return item ?? t('select_option');
   };
 
   return (

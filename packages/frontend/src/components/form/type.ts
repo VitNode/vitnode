@@ -4,16 +4,18 @@ import * as z from 'zod';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type ZodObjectOrWrapped = z.Schema<any, any>;
 
+export interface FieldRenderParentProps {
+  children: React.ReactNode;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  field: ControllerRenderProps<FieldValues, any>;
+}
+
 export interface FieldConfigItem {
   fieldType: (props: AutoFormInputComponentProps) => React.ReactNode;
   description?: React.ReactNode;
   label?: string;
 
-  renderParent?: (props: {
-    children: React.ReactNode;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    field: ControllerRenderProps<FieldValues, any>;
-  }) => React.ReactElement | null;
+  renderParent?: (props: FieldRenderParentProps) => React.ReactElement | null;
 }
 
 export type FieldConfig<T extends FieldValues> = {

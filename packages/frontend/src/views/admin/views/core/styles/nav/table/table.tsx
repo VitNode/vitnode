@@ -47,12 +47,10 @@ export const TableNavAdmin = ({ core_nav__show: { edges }, icons }: Props) => {
 
   // Revalidate items when edges change
   React.useEffect(() => {
-    if (!edges || !data) return;
-
     setData(edges);
   }, [edges]);
 
-  if (!data || data.length === 0) {
+  if (data.length === 0) {
     return <div className="text-center">{t('no_results')}</div>;
   }
 
@@ -80,7 +78,7 @@ export const TableNavAdmin = ({ core_nav__show: { edges }, icons }: Props) => {
             indexToMove: moveTo.indexToMove,
             parentId: Number(moveTo.parentId),
           });
-        } catch (error) {
+        } catch (_) {
           toast.error(t('errors.title'), {
             description: t('errors.internal_server_error'),
           });

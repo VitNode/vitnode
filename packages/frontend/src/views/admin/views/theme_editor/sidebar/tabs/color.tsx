@@ -23,6 +23,7 @@ export const ColorsTabThemeEditor = () => {
   const tCore = useTranslations('core');
   const { activeTheme, changeColor, form, setActiveTab } = useThemeEditor();
 
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   if (!form.watch('colors.primary')) return;
 
   return (

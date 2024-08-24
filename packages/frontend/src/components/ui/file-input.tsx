@@ -25,7 +25,7 @@ interface FilesInputInputProps
 interface WithMultiple extends FilesInputInputProps {
   multiple: true;
   onChange: (e: FilesInputValue[]) => void;
-  value: FilesInputValue[];
+  value: FilesInputValue[] | null;
 }
 
 interface WithoutMultiple extends FilesInputInputProps {
@@ -81,7 +81,7 @@ export const FileInput = ({
     if (currentFiles.length === 0) return;
 
     if (multiple) {
-      onChange([...(value || []), ...currentFiles]);
+      onChange([...(value ?? []), ...currentFiles]);
 
       return;
     }

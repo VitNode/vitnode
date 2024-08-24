@@ -29,7 +29,7 @@ export const EnabledRowTableLangsCoreAdmin = ({
             time24: data.time_24,
             allowInInput: data.allow_in_input,
           });
-        } catch (error) {
+        } catch (_) {
           toast.error(t('errors.title'), {
             description: t('errors.internal_server_error'),
           });

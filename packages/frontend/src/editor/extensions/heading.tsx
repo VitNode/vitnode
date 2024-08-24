@@ -1,11 +1,11 @@
-import { Heading } from '@tiptap/extension-heading';
+import { Heading, Level } from '@tiptap/extension-heading';
 import { mergeAttributes } from '@tiptap/react';
 
 export const HeadingExtensionEditor = () => {
   return Heading.extend({
     levels: [1, 2],
     renderHTML({ HTMLAttributes, node }) {
-      const level = this.options.levels.includes(node.attrs.level)
+      const level = this.options.levels.includes(node.attrs.level as Level)
         ? node.attrs.level
         : this.options.levels[0];
       const classes: Record<number, string> = {

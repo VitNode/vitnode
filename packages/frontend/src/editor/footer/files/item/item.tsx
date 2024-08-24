@@ -134,7 +134,7 @@ export const ItemListFilesFooterEditor = ({
 
                 onChange(content);
 
-                const parseContent = JSON.parse(
+                const parseContent: string = JSON.parse(
                   content.find(item => item.language_code === selectedLanguage)
                     ?.value ?? '',
                 );

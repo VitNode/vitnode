@@ -79,9 +79,11 @@ export const ContentThemeEditor = (props: Core_Theme_Editor__ShowQuery) => {
             ref={iframeRef}
             title={CONFIG.frontend_url}
             className={cn('bg-background transition-all', {
-              'h-full w-full': activeMode === 'desktop',
-              'h-5/6 w-[768px] rounded-md border': activeMode === 'tablet',
-              'h-5/6 w-[375px] rounded-md border': activeMode === 'mobile',
+              'h-full w-full': activeMode === ThemeEditorViewEnum.Desktop,
+              'h-5/6 w-[768px] rounded-md border':
+                activeMode === ThemeEditorViewEnum.Tablet,
+              'h-5/6 w-[375px] rounded-md border':
+                activeMode === ThemeEditorViewEnum.Mobile,
             })}
             src={CONFIG.frontend_url}
             onLoad={() => {

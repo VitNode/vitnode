@@ -33,7 +33,7 @@ export const generateMetadataThemeEditor = async (): Promise<Metadata> => {
 export const ThemeEditorView = async () => {
   const [data, session] = await Promise.all([getData(), getSessionAdminData()]);
 
-  if (!session) {
+  if (!session.admin__sessions__authorization.user) {
     redirect('/admin');
   }
 

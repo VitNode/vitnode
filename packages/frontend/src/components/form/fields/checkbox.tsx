@@ -35,7 +35,7 @@ export const AutoFormCheckbox = ({
         </FormControl>
       </ParentWrapper>
 
-      {(fieldConfigItem.label || fieldConfigItem.description) && (
+      {(fieldConfigItem.label ?? fieldConfigItem.description) && (
         <div className="space-y-1 leading-none">
           {fieldConfigItem.label && (
             <AutoFormLabel

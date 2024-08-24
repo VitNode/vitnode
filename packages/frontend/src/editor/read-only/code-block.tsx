@@ -12,7 +12,7 @@ interface Node {
 }
 
 interface WithTagName {
-  children: Node[];
+  children: Node[] | undefined;
   properties: {
     className?: string[];
   };
@@ -49,7 +49,7 @@ export const changeCodeBlock = ({ children }: Element) => {
   }
 
   const language =
-    (element.attribs.class ?? '')
+    (element.attribs.class || '')
       .replace('language-', '')
       .replace('react', '') || 'plaintext';
   const text =
@@ -57,7 +57,7 @@ export const changeCodeBlock = ({ children }: Element) => {
       element.children[0] as {
         data: string;
       }
-    ).data ?? '';
+    ).data || '';
 
   const highlighted = lowlight.highlight(language, text);
   // TODO: Fix types

@@ -27,7 +27,7 @@ function removeChildrenOf<T extends object>({
 
   return tree.filter(item => {
     if (item.parentId && excludeParentIds.includes(item.parentId)) {
-      if ((item.children.length ?? 0) > 0) {
+      if ((item.children ?? []).length > 0) {
         excludeParentIds.push(item.id);
       }
 
@@ -65,7 +65,7 @@ export function buildTree<T extends object>({
 
     tree[parentIndex] = {
       ...parent,
-      children: [...parent.children, item],
+      children: [...(parent.children ?? []), item],
     };
   });
 
@@ -113,7 +113,9 @@ export function useDragAndDrop<T extends object>({ data }: Args<T>) {
 
     const collapsedItems = tree.reduce<UniqueIdentifier[]>(
       (acc, { children, id }) =>
-        !isOpenChildren.includes(id) && children.length ? [...acc, id] : acc,
+        !isOpenChildren.includes(id) && (children ?? []).length
+          ? [...acc, id]
+          : acc,
       [],
     );
 

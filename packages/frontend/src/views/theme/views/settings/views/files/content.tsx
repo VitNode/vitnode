@@ -42,7 +42,7 @@ export const ContentFilesSettings = ({
               row.width && row.height
                 ? `${CONFIG.graphql_public_url}/${row.dir_folder}/${row.file_name}`
                 : null;
-            const alt = row.file_alt ?? row.file_name ?? '';
+            const alt = row.file_alt ?? row.file_name;
 
             return (
               <div className="relative flex h-14 w-20 shrink-0 items-center justify-center overflow-hidden rounded-lg">

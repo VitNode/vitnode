@@ -57,12 +57,10 @@ export const ContentNavDevPluginAdmin = ({
 
   // Revalidate items when edges change
   React.useEffect(() => {
-    if (!edges || !data) return;
-
     setData(edges);
   }, [edges]);
 
-  if (!data || data.length === 0) {
+  if (data.length === 0) {
     return <div className="text-center">{t('no_results')}</div>;
   }
 

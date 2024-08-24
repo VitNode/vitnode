@@ -30,18 +30,14 @@ export const TableModeratorsStaffAdmin = ({
               return <UserLink user={row.user_or_group} />;
             }
 
-            if (row.user_or_group.__typename === 'StaffGroupUser') {
-              return (
-                <GroupFormat
-                  group={{
-                    ...row.user_or_group,
-                    name: row.user_or_group.group_name,
-                  }}
-                />
-              );
-            }
-
-            return null;
+            return (
+              <GroupFormat
+                group={{
+                  ...row.user_or_group,
+                  name: row.user_or_group.group_name,
+                }}
+              />
+            );
           },
         },
         {

@@ -18,7 +18,7 @@ export const FormLicenseInstallConfigs = () => {
   });
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const onSubmit = async (_: z.infer<typeof formSchema>) => {
+  const onSubmit = (_: z.infer<typeof formSchema>) => {
     setCurrentStep(prev => prev + 1);
   };
 

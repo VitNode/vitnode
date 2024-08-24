@@ -53,7 +53,7 @@ export const useUploadFilesHandlerEditor = ({
     formData.append('folder', allowUploadFiles.folder);
     const mutation = await uploadMutationApi(formData);
 
-    if (!mutation.data || mutation.error) {
+    if (mutation.error) {
       toast.error(tCore('errors.title'), {
         description: tCore('errors.internal_server_error'),
       });
@@ -93,12 +93,12 @@ export const useUploadFilesHandlerEditor = ({
     return files.filter(file => {
       if (config.editor.files.allow_type === 'images_videos') {
         return [...acceptMimeTypeImage, ...acceptMimeTypeVideo].includes(
-          file.file?.type || '',
+          file.file?.type ?? '',
         );
       }
 
       if (config.editor.files.allow_type === 'images') {
-        return acceptMimeTypeImage.includes(file.file?.type || '');
+        return acceptMimeTypeImage.includes(file.file?.type ?? '');
       }
     });
   };

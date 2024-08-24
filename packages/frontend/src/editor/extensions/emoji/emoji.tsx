@@ -6,7 +6,7 @@ import { SearchIndex, init } from 'emoji-mart';
 
 import { onExit, onKeyDown, onStart, onUpdate } from './client';
 
-init({ data: emojiMartData });
+void init({ data: emojiMartData });
 
 const EmojiPluginKey = new PluginKey('emoji-search');
 

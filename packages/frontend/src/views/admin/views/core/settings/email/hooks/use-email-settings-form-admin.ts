@@ -20,16 +20,16 @@ export const useEmailSettingsFormAdmin = ({
       logo: zodFile.optional(),
       provider: z.nativeEnum(EmailProvider).default(data.provider),
       smtp: z.object({
-        host: z.string().default(data.smtp_host || ''),
-        user: z.string().default(data.smtp_user || ''),
+        host: z.string().default(data.smtp_host ?? ''),
+        user: z.string().default(data.smtp_user ?? ''),
         password: z.string().default('').optional(),
-        secure: z.boolean().default(data.smtp_secure || false),
+        secure: z.boolean().default(data.smtp_secure ?? false),
         port: z
           .number()
           .int()
           .min(1)
           .max(999)
-          .default(data.smtp_port || 587),
+          .default(data.smtp_port ?? 587),
       }),
       resend_key: z.string().default('').optional(),
     })
@@ -55,7 +55,7 @@ export const useEmailSettingsFormAdmin = ({
       'color_primary_foreground',
       `hsl(${isColorBrightness(primaryHSL) ? `${primaryHSL.h}, 40%, 2%` : `${primaryHSL.h}, 40%, 98%`})`,
     );
-    if (values.provider === 'smtp' && values.smtp) {
+    if (values.provider === 'smtp') {
       formData.append('smtp_host', values.smtp.host);
       formData.append('smtp_user', values.smtp.user);
       formData.append('smtp_port', values.smtp.port.toString());

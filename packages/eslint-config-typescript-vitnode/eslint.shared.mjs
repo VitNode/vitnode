@@ -8,7 +8,7 @@ export default [
   ...tsEslint.configs.stylisticTypeChecked,
   ...tsEslint.configs.strictTypeChecked,
   eslintPluginPrettierRecommended,
-  { files: ['**/*.{js,mjs,cjs,ts}'] },
+  { files: ['**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}'] },
   {
     ignores: ['tsup.config.ts'],
   },
@@ -30,6 +30,9 @@ export default [
           caughtErrorsIgnorePattern: '^_',
         },
       ],
+      '@typescript-eslint/no-empty-function': 'off',
+      '@typescript-eslint/unbound-method': 'off',
+      '@typescript-eslint/no-misused-promises': 'off',
       '@typescript-eslint/no-unsafe-return': 'off',
       '@typescript-eslint/no-unsafe-assignment': 'off',
       '@typescript-eslint/no-unsafe-member-access': 'off',

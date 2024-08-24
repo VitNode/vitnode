@@ -36,7 +36,7 @@ export const useDownloadPluginAdmin = ({
         values.type === 'new_version' ? values.version_code : undefined,
     });
 
-    if (mutation.error || !mutation.data) {
+    if (mutation.error) {
       toast.error(t('errors.title'), {
         description: t('errors.internal_server_error'),
       });

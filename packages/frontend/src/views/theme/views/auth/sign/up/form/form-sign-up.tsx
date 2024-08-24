@@ -30,7 +30,7 @@ export const FormSignUp = () => {
             label: t('sign_up.form.name.label'),
             fieldType: AutoFormInput,
             description: (() => {
-              const value = (values.name || '').trimStart().trimEnd();
+              const value = (values.name ?? '').trimStart().trimEnd();
 
               return (
                 <>
@@ -58,7 +58,7 @@ export const FormSignUp = () => {
             label: t('sign_up.form.password.label'),
             fieldType: props => <AutoFormInput type="password" {...props} />,
             description: (() => {
-              const value = values.password || '';
+              const value = values.password ?? '';
               const regexArray = [
                 /^.{8,}$/, // Min 8 characters
                 /[a-z]/, // Min 1 lowercase

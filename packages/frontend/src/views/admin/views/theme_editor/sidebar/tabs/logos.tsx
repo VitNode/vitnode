@@ -45,22 +45,22 @@ export const LogosTabThemeEditor = () => {
       vitnode_logo_light: cn(commonClassName, {
         'dark:hidden': form.watch('logos.dark'),
         'hidden sm:block':
-          form.watch('logos.mobile_light') || form.watch('logos.mobile_dark'),
+          form.watch('logos.mobile_light') ?? form.watch('logos.mobile_dark'),
       }),
       vitnode_logo_dark: cn(commonClassName, {
         'hidden dark:block': form.watch('logos.light'),
         'hidden sm:block': !form.watch('logos.light'),
         'dark:hidden dark:sm:block':
-          form.watch('logos.mobile_dark') || form.watch('logos.mobile_light'),
+          form.watch('logos.mobile_dark') ?? form.watch('logos.mobile_light'),
       }),
       vitnode_logo_mobile_light: cn(commonClassName, {
         'block sm:hidden':
-          form.watch('logos.light') || form.watch('logos.dark'),
+          form.watch('logos.light') ?? form.watch('logos.dark'),
         'dark:hidden': form.watch('logos.mobile_dark'),
       }),
       vitnode_logo_mobile_dark: cn(commonClassName, {
         'block sm:hidden dark:block dark:sm:hidden':
-          form.watch('logos.light') || form.watch('logos.dark'),
+          form.watch('logos.light') ?? form.watch('logos.dark'),
         'hidden dark:block': form.watch('logos.mobile_light'),
       }),
     };

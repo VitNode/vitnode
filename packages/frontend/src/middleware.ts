@@ -31,7 +31,7 @@ const getI18n = async () => {
       ...i18n,
       core_middleware__show,
     };
-  } catch (err) {
+  } catch (_) {
     const i18n = {
       locales: ['en'],
       defaultLocale: 'en',

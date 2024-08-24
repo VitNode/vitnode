@@ -41,7 +41,7 @@ export const AutoFormRadioGroup = ({
 
   let values: [string, string][] = [];
   if (!Array.isArray(baseValues)) {
-    values = Object.entries(baseValues);
+    values = Object.entries(baseValues as object);
   } else {
     values = baseValues.map(value => [value, value]);
   }
@@ -68,7 +68,7 @@ export const AutoFormRadioGroup = ({
           >
             {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
             {values.map((value: any) => {
-              const label = labels?.[value[0]]?.title || value[1];
+              const label = labels?.[value[0]]?.title ?? value[1];
               const description = labels?.[value[0]]?.description;
 
               return (

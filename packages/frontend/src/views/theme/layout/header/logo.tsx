@@ -48,7 +48,7 @@ export const LogoHeader = async ({ className }: { className?: string }) => {
             className,
             {
               'dark:hidden': logos.dark,
-              'hidden sm:block': logos.mobile_light || logos.mobile_dark,
+              'hidden sm:block': logos.mobile_light ?? logos.mobile_dark,
             },
           )}
           alt={logos.text}
@@ -68,7 +68,7 @@ export const LogoHeader = async ({ className }: { className?: string }) => {
               'hidden dark:block': logos.light,
               'hidden sm:block': !logos.light,
               'dark:hidden dark:sm:block':
-                logos.mobile_dark || logos.mobile_light,
+                logos.mobile_dark ?? logos.mobile_light,
             },
           )}
           alt={logos.text}
@@ -86,7 +86,7 @@ export const LogoHeader = async ({ className }: { className?: string }) => {
             'w-[--logo-mobile-width] sm:w-[--logo-width]',
             className,
             {
-              'block sm:hidden': logos.light || logos.dark,
+              'block sm:hidden': logos.light ?? logos.dark,
               'dark:hidden': logos.mobile_dark,
             },
           )}
@@ -105,7 +105,7 @@ export const LogoHeader = async ({ className }: { className?: string }) => {
             className,
             {
               'block sm:hidden dark:block dark:sm:hidden':
-                logos.dark || logos.light,
+                logos.dark ?? logos.light,
               'hidden dark:block': logos.mobile_light,
             },
           )}

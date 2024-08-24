@@ -27,7 +27,7 @@ export const FormSignIn = () => {
             </Alert>
           )}
 
-          {error && error.extensions?.code !== 'ACCESS_DENIED' && (
+          {error.extensions?.code !== 'ACCESS_DENIED' && (
             <Alert variant="destructive">
               <AlertCircle className="size-4" />
               <AlertTitle>{t('errors.title')}</AlertTitle>

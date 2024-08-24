@@ -26,13 +26,12 @@ export function AutoFormObject<T extends z.ZodObject<any, any>>({
   path?: string[];
 }) {
   const { watch } = useFormContext();
-  if (!schema) return null;
-  const { shape } = getBaseSchema<T>(schema) || {};
+  const { shape } = getBaseSchema<T>(schema) ?? {};
   if (!shape) return null;
 
   return (
     <>
-      {Object.keys(shape).map(name => {
+      {Object.keys(shape as object).map(name => {
         let item = shape[name] as z.ZodAny;
         const zodBaseType = getBaseType(item);
         const key = [...path, name].join('.');
@@ -93,7 +92,8 @@ export function AutoFormObject<T extends z.ZodObject<any, any>>({
                     field,
                     fieldConfigItem,
                     isRequired:
-                      isRequiredByDependency || zodInputProps.required || false,
+                      (isRequiredByDependency || zodInputProps.required) ??
+                      false,
                     zodItem: item,
                     theme,
                     isDisabled,

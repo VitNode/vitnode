@@ -36,12 +36,12 @@ export const ContentLinkToolbarEditor = ({
           editor.view.state.selection.from,
           editor.view.state.selection.to,
           '',
-        ) ?? '',
+        ) || '',
       href: editor.getAttributes('link').href ?? '',
     },
   });
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  const onSubmit = (values: z.infer<typeof formSchema>) => {
     editor
       .chain()
 

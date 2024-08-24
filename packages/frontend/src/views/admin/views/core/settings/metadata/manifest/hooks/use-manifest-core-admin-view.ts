@@ -25,7 +25,9 @@ export const useManifestCoreAdminView = ({
   const formSchema = z.object({
     display: z
       .nativeEnum(ManifestDisplay)
-      .default(data.display as z.infer<typeof formSchema>['display']),
+      .default(
+        data.display as 'minimal-ui' | 'fullscreen' | 'standalone' | 'browser',
+      ),
     start_url: z
       .string()
       .default(data.start_url.replace(`${CONFIG.frontend_url}/en`, '')),

@@ -24,6 +24,8 @@ export const PermissionsTable = ({
     searchValue,
   });
 
+  const fieldValue: { groups: { id: number }[] } = field.value;
+
   const Table = React.useCallback(
     ({ ...props }) => <table className="w-full" {...props} />,
     [],
@@ -44,7 +46,7 @@ export const PermissionsTable = ({
     field.onChange({
       ...field.value,
       [`can_all_${id}`]: stateToUpdate,
-      groups: field.value.groups.map((group: { id: number }) => {
+      groups: fieldValue.groups.map(group => {
         return {
           ...group,
           [id]: stateToUpdate,
@@ -98,8 +100,8 @@ export const PermissionsTable = ({
           </tr>
         )}
         itemContent={(index, item) => {
-          const findItem = field.value.groups.find(
-            (group: { id: number }) => group.id === item.id,
+          const findItem = fieldValue.groups.find(
+            group => group.id === item.id,
           );
           // Check if:
           // 1. The permission is enabled for all groups
@@ -139,10 +141,9 @@ export const PermissionsTable = ({
                                   return true;
                                 }
 
-                                const findGroupInField =
-                                  field.value.groups.find(
-                                    ({ id }: { id: number }) => id === group.id,
-                                  );
+                                const findGroupInField = fieldValue.groups.find(
+                                  ({ id }) => id === group.id,
+                                );
 
                                 if (findGroupInField) {
                                   return findGroupInField[el.id];
@@ -169,8 +170,8 @@ export const PermissionsTable = ({
                       field.onChange({
                         ...field.value,
                         groups: [
-                          ...field.value.groups.filter(
-                            (group: { id: number }) => group.id !== item.id,
+                          ...fieldValue.groups.filter(
+                            group => group.id !== item.id,
                           ),
                           {
                             id: item.id,
@@ -211,8 +212,8 @@ export const PermissionsTable = ({
 
                           const groups = data.map(
                             (group: Pick<ShowAdminGroups, 'id'>) => {
-                              const findExistingGroup = field.value.groups.find(
-                                ({ id }: { id: number }) => id === group.id,
+                              const findExistingGroup = fieldValue.groups.find(
+                                ({ id }) => id === group.id,
                               );
 
                               if (group.id === item.id) {
@@ -274,8 +275,8 @@ export const PermissionsTable = ({
                           return;
                         }
 
-                        const otherGroups = field.value.groups.filter(
-                          (group: { id: number }) => group.id !== item.id,
+                        const otherGroups = fieldValue.groups.filter(
+                          group => group.id !== item.id,
                         );
 
                         field.onChange({

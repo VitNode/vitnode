@@ -27,9 +27,8 @@ export const ContentClearCacheActionDiagnostic = () => {
         <AlertDialogAction asChild>
           <Button
             variant="destructive"
-            onClick={async () => {
-              await mutationApi();
-
+            onClick={() => {
+              mutationApi();
               toast.success(t('success'));
             }}
           >

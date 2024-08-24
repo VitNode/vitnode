@@ -42,7 +42,7 @@ export const generateMetadataRootLayout = async ({
         template: `%s - ${site_short_name}`,
       },
     };
-  } catch (e) {
+  } catch (_) {
     return {
       ...metadata,
       title: 'Error 500!',
@@ -75,7 +75,7 @@ export const RootLayout = async ({
         </RootProviders>
       </WrapperRootLayout>
     );
-  } catch (e) {
+  } catch (_) {
     return (
       <WrapperRootLayout locale={locale}>
         <RootProviders>

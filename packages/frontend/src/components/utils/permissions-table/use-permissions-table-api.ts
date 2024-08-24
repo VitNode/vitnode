@@ -12,10 +12,6 @@ export const usePermissionsGroupsAdminAPI = ({ searchValue }: Args) => {
     queryFn: async () => {
       const mutation = await getGroupsShortApi({ search: searchValue });
 
-      if (!mutation.data) {
-        throw mutation.error;
-      }
-
       return mutation.data;
     },
     placeholderData: previousData => previousData,

@@ -18,7 +18,7 @@ const getDragDepth = ({
 function getMaxDepth<T extends object>({
   previousItem,
 }: {
-  previousItem: FlatTree<T>;
+  previousItem: FlatTree<T> | undefined;
 }) {
   return previousItem ? previousItem.depth + 1 : 0;
 }
@@ -26,7 +26,7 @@ function getMaxDepth<T extends object>({
 function getMinDepth<T extends object>({
   nextItem,
 }: {
-  nextItem: FlatTree<T>;
+  nextItem: FlatTree<T> | undefined;
 }) {
   return nextItem ? nextItem.depth : 0;
 }
@@ -62,19 +62,18 @@ export const useProjection = () => {
     );
     const activeItem = flattenedItems[activeItemIndex];
     const newItems = arrayMove(flattenedItems, activeItemIndex, overItemIndex);
-    const previousItem = newItems[overItemIndex - 1];
-    const nextItem = newItems[overItemIndex + 1];
+    const previousItem = newItems.at(overItemIndex - 1);
+    const nextItem = newItems.at(overItemIndex + 1);
     const dragDepth = getDragDepth({
       offset: dragOffset,
       indentationWidth,
     });
     const projectedDepth = activeItem.depth + dragDepth;
     const maxDepth =
-      maxDepthProp !== undefined
-        ? maxDepthProp
-        : getMaxDepth({
-            previousItem,
-          });
+      maxDepthProp ??
+      getMaxDepth({
+        previousItem,
+      });
     const minDepth = getMinDepth({ nextItem });
     let depth = projectedDepth;
 

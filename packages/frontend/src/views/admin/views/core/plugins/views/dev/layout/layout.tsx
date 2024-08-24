@@ -31,7 +31,7 @@ export async function generateMetadataDevPluginAdminLayout({
   ]);
 
   const data = await getPluginDataAdmin({ code });
-  if (!data || data.admin__core_plugins__show.edges.length === 0) return {};
+  if (data.admin__core_plugins__show.edges.length === 0) return {};
 
   const defaultTitle = `${data.admin__core_plugins__show.edges[0].name} - ${tCore('nav.plugins')} - ${t('title_short')} - ${config.core_settings__show.site_short_name}`;
 
@@ -50,7 +50,7 @@ export const DevPluginAdminLayout = async ({
   if (!CONFIG.node_development) redirect('/admin');
   const data = await getPluginDataAdmin({ code });
 
-  if (!data || data.admin__core_plugins__show.edges.length === 0) {
+  if (data.admin__core_plugins__show.edges.length === 0) {
     redirect('/admin');
   }
 

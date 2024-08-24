@@ -15,8 +15,9 @@ import { useEditorState } from '../../../hooks/use-editor-state';
 export const ColorToolbarEditor = () => {
   const [open, setOpen] = React.useState(false);
   const { editor } = useEditorState();
+  const colorFromEditor: string = editor.getAttributes('textStyle').color;
   const [color] = React.useState<HslColor | null>(
-    getHSLFromString(editor.getAttributes('textStyle').color),
+    getHSLFromString(colorFromEditor),
   );
 
   React.useEffect(() => {
@@ -29,21 +30,17 @@ export const ColorToolbarEditor = () => {
     editor.commands.setColor(`hsl(${color.h}, ${color.s}%, ${color.l}%)`);
   }, [color]);
 
-  const currentColor = getHSLFromString(
-    editor.getAttributes('textStyle').color,
-  );
-
   return (
     <Popover open={open} onOpenChange={setOpen} modal>
       <PopoverTrigger asChild>
         <ButtonToolbarEditor
           name="color_text"
           style={{
-            backgroundColor: currentColor
-              ? `hsl(${currentColor.h} ${currentColor.s}% ${currentColor.l}% / 10%)`
+            backgroundColor: color
+              ? `hsl(${color.h} ${color.s}% ${color.l}% / 10%)`
               : undefined,
-            color: currentColor
-              ? `hsl(${currentColor.h} ${currentColor.s}% ${currentColor.l}%)`
+            color: color
+              ? `hsl(${color.h} ${color.s}% ${color.l}%)`
               : undefined,
           }}
           className="w-14 justify-center gap-1 p-0 [&>svg:last-child]:size-4 [&>svg:not(:last-child)]:size-5"

@@ -34,7 +34,6 @@ export function getBaseSchema<
   schema: ChildType | z.ZodEffects<ChildType>,
   isArray?: boolean,
 ): ChildType | null {
-  if (!schema) return null;
   if ('innerType' in schema._def) {
     return getBaseSchema(schema._def.innerType as ChildType);
   }
@@ -68,10 +67,9 @@ export function zodToHtmlInputProps(
     | z.ZodNumber
     | z.ZodOptional<z.ZodNumber | z.ZodString>
     | z.ZodString
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    | any,
+    | z.ZodAny,
 ): React.InputHTMLAttributes<HTMLInputElement> {
-  if (['ZodOptional', 'ZodNullable'].includes(schema._def.typeName)) {
+  if (['ZodOptional', 'ZodNullable'].includes(schema._def.typeName as string)) {
     const typedSchema = schema as z.ZodOptional<z.ZodNumber | z.ZodString>;
 
     return {
@@ -90,7 +88,7 @@ export function zodToHtmlInputProps(
   const inputProps: React.InputHTMLAttributes<HTMLInputElement> = {
     required: true,
   };
-  const type = getBaseType(schema);
+  const type = getBaseType(schema as z.ZodAny);
 
   for (const check of checks) {
     if (check.kind === 'min') {
@@ -177,7 +175,8 @@ export function getDefaultValueInZodStack(schema: z.ZodAny): any {
     z.ZodNumber | z.ZodString
   >;
 
-  if (typedSchema._def.typeName === 'ZodDefault') {
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+  if (typedSchema._def.typeName === z.ZodFirstPartyTypeKind.ZodDefault) {
     return typedSchema._def.defaultValue();
   }
 
@@ -207,13 +206,12 @@ export function getDefaultValues<Schema extends z.ZodObject<any, any>>(
   schema: Schema,
   fieldConfig?: FieldConfig<z.infer<Schema>>,
 ) {
-  if (!schema) return null;
   const { shape } = schema;
   type DefaultValuesType = DefaultValues<Partial<z.infer<Schema>>>;
   const defaultValues = {} as DefaultValuesType;
   if (!shape) return defaultValues;
 
-  for (const key of Object.keys(shape)) {
+  for (const key of Object.keys(shape as object)) {
     const item = shape[key] as z.ZodAny;
 
     if (getBaseType(item) === 'ZodObject') {
@@ -223,6 +221,7 @@ export function getDefaultValues<Schema extends z.ZodObject<any, any>>(
         fieldConfig?.[key] as FieldConfig<z.infer<Schema>>,
       );
 
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
       if (defaultItems !== null) {
         const obj: Record<string, unknown> = {};
 

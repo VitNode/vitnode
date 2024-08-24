@@ -14,6 +14,7 @@ export const MainTabThemeEditor = () => {
       <h1 className="px-3 text-lg font-bold">{t('title')}</h1>
 
       <div className="mt-4 space-y-1">
+        {/* eslint-disable-next-line @typescript-eslint/no-unnecessary-condition */}
         {form.watch('colors.primary') && (
           <Button
             className="w-full justify-start"

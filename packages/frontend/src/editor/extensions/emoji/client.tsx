@@ -2,7 +2,7 @@
 
 import { ReactRenderer } from '@tiptap/react';
 import React from 'react';
-import tippy, { Instance, Props } from 'tippy.js';
+import tippy, { Instance } from 'tippy.js';
 import { useTranslations } from 'next-intl';
 import { Emoji } from '@emoji-mart/data';
 
@@ -42,9 +42,7 @@ const ComponentList = ({
         ? emoji.skins[skinToneIndex].native
         : emoji.skins[0].native;
 
-    if (emoji) {
-      command({ id: icon });
-    }
+    command({ id: icon });
   };
 
   const upHandler = () => {

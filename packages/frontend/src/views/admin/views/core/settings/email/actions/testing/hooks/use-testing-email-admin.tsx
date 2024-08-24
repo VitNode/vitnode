@@ -17,7 +17,7 @@ export const useTestingEmailAdmin = () => {
       .string()
       .min(1)
       .email()
-      .default(session?.email || ''),
+      .default(session?.email ?? ''),
     subject: z.string().min(1).default(t('test.subject')),
     message: z.string().min(1).default(t('test.message')),
     preview_text: z.string().default(t('test.preview_text')).optional(),

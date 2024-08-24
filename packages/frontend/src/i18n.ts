@@ -37,7 +37,7 @@ export const i18nConfig = async ({
     }
 
     plugins = pluginsFromServer;
-  } catch (e) {
+  } catch (_) {
     plugins = ['core', 'admin'];
   }
 
@@ -51,7 +51,7 @@ export const i18nConfig = async ({
         });
 
         return message.default;
-      } catch (e) {
+      } catch (_) {
         return {};
       }
     }),

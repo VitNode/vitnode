@@ -54,7 +54,6 @@ export default class Upload {
 
     // Prevent errors crashing Node.js, see:
     // https://github.com/nodejs/node/issues/20392
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
     this.promise.catch(() => {});
   }
 }

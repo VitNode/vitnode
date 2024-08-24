@@ -38,7 +38,7 @@ export const AutoFormSwitch = ({
       <ParentWrapper field={field}>
         <FormControl>
           <Switch
-            checked={props.value || field.value}
+            checked={props.value ?? field.value}
             onCheckedChange={e => {
               field.onChange(e);
               props.onCheckedChange?.(e);

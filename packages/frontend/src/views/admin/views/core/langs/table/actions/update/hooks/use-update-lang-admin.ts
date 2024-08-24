@@ -19,7 +19,7 @@ export const useUpdateLangAdmin = ({
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    if (!values.lang_file || !(values.lang_file instanceof File)) return;
+    if (!(values.lang_file instanceof File)) return;
 
     const formData = new FormData();
     formData.append('file', values.lang_file);

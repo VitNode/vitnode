@@ -9,6 +9,7 @@ import { AutoForm } from '@/components/form/auto-form';
 import { AutoFormInput } from '@/components/form/fields/input';
 import { AutoFormColor } from '@/components/form/fields/color';
 import { AutoFormRadioGroup } from '@/components/form/fields/radio-group';
+import { FieldRenderParentProps } from '@/components/form/type';
 
 export const ContentManifestMetadataCoreAdmin = (
   props: Admin__Core_Manifest_Metadata__ShowQuery,
@@ -53,7 +54,7 @@ export const ContentManifestMetadataCoreAdmin = (
           label: t('start_url.label'),
           description: t('start_url.desc'),
           fieldType: props => <AutoFormInput className="w-64" {...props} />,
-          renderParent: ({ children }) => (
+          renderParent: ({ children }: FieldRenderParentProps) => (
             <div className="flex flex-wrap items-center gap-1">
               <span>{CONFIG.frontend_url}</span>
               {children}

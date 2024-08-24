@@ -67,7 +67,7 @@ export function DataTable<T extends TMin>({
                   const text =
                     column.id.toString() === 'actions'
                       ? ''
-                      : column.title || column.id.toString();
+                      : (column.title ?? column.id.toString());
 
                   return (
                     <TableHead key={column.id.toString()}>
@@ -100,7 +100,7 @@ export function DataTable<T extends TMin>({
                         column.id.toString() as keyof T
                       ] as React.ReactNode;
                       const content =
-                        column.cell?.({ row, allData: data }) || cell;
+                        column.cell?.({ row, allData: data }) ?? cell;
 
                       return (
                         <TableCell key={`${column.id.toString()}_${row.id}`}>

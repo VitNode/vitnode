@@ -32,18 +32,18 @@ export const useCreateNavPluginAdmin = ({
       .string()
       .min(3)
       .max(50)
-      .default(data?.code || ''),
+      .default(data?.code ?? ''),
     href: z
       .string()
       .min(1)
       .max(100)
-      .default(data?.href || ''),
+      .default(data?.href ?? ''),
     parent_code: z
       .enum(['null', ...dataFromSSR.map(nav => nav.code)])
-      .default(parentId || 'null'),
+      .default(parentId ?? 'null'),
     icon: z
       .string()
-      .default(data?.icon || '')
+      .default(data?.icon ?? '')
       .optional(),
     keywords: zodTag
       .default(
@@ -73,7 +73,7 @@ export const useCreateNavPluginAdmin = ({
         pluginCode: Array.isArray(code) ? code[0] : code,
         parentCode:
           values.parent_code === 'null' ? undefined : values.parent_code,
-        keywords: (values.keywords || []).map(keyword => keyword.value),
+        keywords: (values.keywords ?? []).map(keyword => keyword.value),
       });
 
       if (mutation?.error) {
@@ -85,7 +85,7 @@ export const useCreateNavPluginAdmin = ({
         pluginCode: Array.isArray(code) ? code[0] : code,
         parentCode:
           values.parent_code === 'null' ? undefined : values.parent_code,
-        keywords: (values.keywords || []).map(keyword => keyword.value),
+        keywords: (values.keywords ?? []).map(keyword => keyword.value),
       });
       if (mutation?.error) {
         error = mutation.error;

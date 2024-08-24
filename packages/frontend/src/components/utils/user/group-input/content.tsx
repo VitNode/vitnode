@@ -31,10 +31,6 @@ export const GroupInputContent = ({
     queryFn: async () => {
       const mutation = await getGroupsShortApi({ search });
 
-      if (!mutation.data) {
-        throw mutation.error;
-      }
-
       return mutation.data;
     },
   });

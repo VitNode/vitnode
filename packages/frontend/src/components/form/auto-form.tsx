@@ -32,7 +32,7 @@ export function AutoForm<T extends ZodObjectOrWrapped>({
   onSubmit?: (
     values: z.infer<T>,
     form: UseFormReturn<z.infer<T>>,
-  ) => Promise<void>;
+  ) => Promise<void> | void;
   onValuesChange?: (values: Partial<z.infer<T>>) => void;
   submitButton?: (props: {
     disabled: boolean;
@@ -48,7 +48,7 @@ export function AutoForm<T extends ZodObjectOrWrapped>({
 
   const form = useForm<z.infer<typeof objectFormSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: defaultValues ?? undefined,
+    defaultValues,
   });
   const values = form.watch();
   // valuesString is needed because form.watch() returns a new object every time
@@ -57,14 +57,14 @@ export function AutoForm<T extends ZodObjectOrWrapped>({
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const parsedValues = formSchema.safeParse(values);
     if (parsedValues.success) {
-      await onSubmitProp?.(parsedValues.data, form);
+      await onSubmitProp?.(parsedValues.data as z.infer<T>, form);
     }
   };
 
   React.useEffect(() => {
     const parsedValues = formSchema.safeParse(values);
     if (parsedValues.success) {
-      onValuesChange?.(parsedValues.data);
+      onValuesChange?.(parsedValues.data as z.infer<T>);
     }
   }, [valuesString]);
 

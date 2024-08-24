@@ -102,7 +102,7 @@ export const ItemNav = ({
 
                 <div>
                   {convertText(item.name)}
-                  {item.description && (
+                  {item.description.length > 0 && (
                     <p className="text-muted-foreground line-clamp-2 truncate whitespace-normal text-sm leading-snug">
                       {convertText(item.description)}
                     </p>

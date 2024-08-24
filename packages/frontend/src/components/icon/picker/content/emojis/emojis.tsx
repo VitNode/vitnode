@@ -16,7 +16,7 @@ interface Props extends Omit<IconPickerProps, 'setOpen'> {
 
 const emojiMart = emojiMartData as EmojiMartData;
 
-init({ data: emojiMartData });
+void init({ data: emojiMartData });
 
 export const EmojisContentIconInput = ({
   classNameHeaders,
@@ -43,7 +43,7 @@ export const EmojisContentIconInput = ({
   };
 
   React.useEffect(() => {
-    setResults(search);
+    void setResults(search);
   }, [search]);
 
   if (search) {

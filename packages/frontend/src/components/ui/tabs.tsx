@@ -47,7 +47,7 @@ export const TabsTrigger = ({
   onClick,
 }: TabsTriggerProps) => {
   const pathname = usePathname();
-  const active = activeFromProps || (href && pathname.includes(href));
+  const active = activeFromProps ?? (href && pathname.includes(href));
   const dataState = active ? 'active' : 'inactive';
 
   const className = buttonVariants({

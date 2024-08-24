@@ -35,7 +35,7 @@ export const TextLanguageInput = ({
   const { defaultLanguage, languages: languagesFromGlobal } = useGlobals();
   const languages = languagesFromGlobal.filter(item => item.allow_in_input);
   const [selectedLanguage, setSelectedLanguage] = React.useState(
-    locale ?? defaultLanguage,
+    locale || defaultLanguage,
   );
   const valueAsArray = Array.isArray(value) ? value : [];
   const currentValue =

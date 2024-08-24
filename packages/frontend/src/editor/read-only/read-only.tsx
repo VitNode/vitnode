@@ -2,6 +2,7 @@ import { useLocale } from 'next-intl';
 import parse, { Element, HTMLReactParserOptions } from 'html-react-parser';
 import { generateHTML } from '@tiptap/html';
 import Image from 'next/image';
+import { JSONContent } from '@tiptap/react';
 
 import { extensionsEditor } from '../extensions/extensions';
 import { changeCodeBlock } from './code-block';
@@ -10,7 +11,7 @@ import { TextLanguage } from '@/graphql/types';
 
 import { cn } from '../../helpers/classnames';
 
-export const ReadOnlyEditor = async ({
+export const ReadOnlyEditor = ({
   allowDownloadAttachments,
   className,
   value,
@@ -46,14 +47,17 @@ export const ReadOnlyEditor = async ({
 
   const getText = (): string => {
     try {
-      return generateHTML(JSON.parse(currentValue()), extensionsEditor({}));
-    } catch (e) {
+      const json: JSONContent = JSON.parse(currentValue());
+
+      return generateHTML(json, extensionsEditor({}));
+    } catch (_) {
       return currentValue();
     }
   };
 
   const options: HTMLReactParserOptions = {
     replace: domNode => {
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
       if (!(domNode instanceof Element && domNode.attribs)) {
         return;
       }

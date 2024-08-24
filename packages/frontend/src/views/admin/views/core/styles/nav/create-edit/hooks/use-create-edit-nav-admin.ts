@@ -43,8 +43,8 @@ export const useCreateEditNavAdmin = ({ data }: CreateEditNavAdminArgs) => {
       const mutation = await editMutationApi({
         ...values,
         id: data.id,
-        description: values.description || [],
-        external: values.external || false,
+        description: values.description ?? [],
+        external: values.external ?? false,
       });
       if (mutation?.error) {
         isError = true;
@@ -52,8 +52,8 @@ export const useCreateEditNavAdmin = ({ data }: CreateEditNavAdminArgs) => {
     } else {
       const mutation = await createMutationApi({
         ...values,
-        description: values.description || [],
-        external: values.external || false,
+        description: values.description ?? [],
+        external: values.external ?? false,
       });
       if (mutation?.error) {
         isError = true;

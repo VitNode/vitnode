@@ -6,7 +6,6 @@ import { toast } from 'sonner';
 import { mutationApi } from './mutation-api';
 import { UploadPluginAdminProps } from '../upload';
 import { useDialog } from '@/components/ui/dialog';
-import { FetcherErrorType } from '@/graphql/fetcher';
 import { zodFile } from '@/helpers/zod';
 
 export const useUploadPluginAdmin = ({ data }: UploadPluginAdminProps) => {
@@ -21,7 +20,7 @@ export const useUploadPluginAdmin = ({ data }: UploadPluginAdminProps) => {
     values: z.infer<typeof formSchema>,
     form: UseFormReturn<z.infer<typeof formSchema>>,
   ) => {
-    if (!values.file || !(values.file instanceof File)) return;
+    if (!(values.file instanceof File)) return;
 
     const formData = new FormData();
     formData.append('file', values.file);
@@ -31,7 +30,7 @@ export const useUploadPluginAdmin = ({ data }: UploadPluginAdminProps) => {
 
     const mutation = await mutationApi(formData);
 
-    if (!mutation.data || mutation.error) {
+    if (mutation.error) {
       const error = mutation.error;
 
       if (

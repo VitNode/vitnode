@@ -64,7 +64,7 @@ export const CodeBlockComponent = ({
               aria-expanded={open}
               className="w-40 justify-between"
             >
-              {value ?? t('auto')}
+              {value || t('auto')}
               <SortAscIcon className="ml-2 size-4 shrink-0 opacity-50" />
             </Button>
           </PopoverTrigger>
