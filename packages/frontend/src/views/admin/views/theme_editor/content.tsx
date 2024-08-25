@@ -74,7 +74,7 @@ export const ContentThemeEditor = (props: Core_Theme_Editor__ShowQuery) => {
           <SidebarThemeEditor />
         </div>
 
-        <div className="ml-[313] flex flex-1 items-center justify-center">
+        <div className="ml-[313px] flex flex-1 items-center justify-center">
           <iframe
             className={cn('bg-background transition-all', {
               'h-full w-full': activeMode === ThemeEditorViewEnum.Desktop,

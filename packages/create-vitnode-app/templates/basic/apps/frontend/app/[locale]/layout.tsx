@@ -1,4 +1,3 @@
-import React from 'react';
 import { GeistSans } from 'geist/font/sans';
 import {
   RootLayout,

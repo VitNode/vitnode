@@ -23,6 +23,7 @@ export default [
   },
   {
     rules: {
+      'perfectionist/sort-jsx-props': 'warn',
       '@typescript-eslint/no-unsafe-call': 'off',
       'perfectionist/sort-objects': 'off',
       'perfectionist/sort-classes': [

@@ -1,5 +1,4 @@
 import { GeistSans } from 'geist/font/sans';
-import React from 'react';
 import {
   generateMetadataRootLayout,
   RootLayout,

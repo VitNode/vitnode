@@ -79,7 +79,7 @@ const Button = ({
         type="button"
       >
         <Loader small />
-        {size !== 'icon' && text}
+        <span className="truncate">{size !== 'icon' && text}</span>
       </Comp>
     );
   }
