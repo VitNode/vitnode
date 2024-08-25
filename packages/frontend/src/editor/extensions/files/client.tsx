@@ -26,7 +26,7 @@ const FileFromNextWithNode = ({
             className="h-auto w-full"
             height={data.height}
             sizes="100vw"
-            src={`${CONFIG.graphql_public_url}/${data.dir_folder}/${data.file_name}`}
+            src={`${CONFIG.backend_public_url}/${data.dir_folder}/${data.file_name}`}
             width={data.width}
           />
         </div>

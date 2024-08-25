@@ -44,7 +44,7 @@ export const FileDownloadButton = ({
           className="h-auto w-full"
           height={height}
           sizes="100vw"
-          src={`${CONFIG.graphql_public_url}/${dir_folder}/${file_name}`}
+          src={`${CONFIG.backend_public_url}/${dir_folder}/${file_name}`}
           width={width}
         />
       </span>

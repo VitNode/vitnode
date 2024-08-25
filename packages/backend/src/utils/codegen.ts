@@ -10,7 +10,7 @@ export const codegenConfig = ({
 }): CodegenConfig => {
   return {
     ...config,
-    schema: `${process.env.NEXT_PUBLIC_GRAPHQL_URL ?? 'http://localhost:8080'}/graphql`,
+    schema: `${process.env.NEXT_PUBLIC_BACKEND_URL ?? 'http://localhost:8080'}/graphql`,
     documents: [
       ...(Array.isArray(config?.documents) ? config.documents : []),
       join(process.cwd(), '..', 'frontend', 'plugins/**/graphql/**/*.gql'),

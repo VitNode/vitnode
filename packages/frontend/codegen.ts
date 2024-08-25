@@ -8,7 +8,7 @@ dotenv.config({
 });
 
 const config: CodegenConfig = {
-  schema: `${process.env.NEXT_PUBLIC_GRAPHQL_URL ?? 'http://localhost:8080'}/graphql`,
+  schema: `${process.env.NEXT_PUBLIC_BACKEND_URL ?? 'http://localhost:8080'}/graphql`,
   documents: [join(process.cwd(), 'src/graphql/**/*.gql')],
   config: {
     maybeValue: 'T',
