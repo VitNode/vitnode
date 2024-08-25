@@ -21,10 +21,6 @@ export interface SendMailServiceArgs {
 
 @Injectable()
 export class MailService extends HelpersAdminEmailSettingsService {
-  private readonly generateEmail = (template: React.ReactElement) => {
-    return render(template);
-  };
-
   async sendMail({
     to,
     subject,
@@ -38,7 +34,7 @@ export class MailService extends HelpersAdminEmailSettingsService {
       });
     }
 
-    const html = this.generateEmail(template);
+    const html = await Promise.resolve(render(template));
     const data = fs.readFileSync(this.path, 'utf-8');
     const config: EmailCredentialsFile = JSON.parse(data);
     const configSettings = getConfigFile();
@@ -68,7 +64,7 @@ export class MailService extends HelpersAdminEmailSettingsService {
       );
 
       // TODO: Handle errors
-      await transporter.sendMail({
+      void transporter.sendMail({
         to,
         subject,
         html,
