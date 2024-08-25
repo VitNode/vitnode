@@ -27,7 +27,7 @@ export const WelcomeInstallConfigsView = () => {
 
       {windowsLocation && (
         <CardFooter>
-          {windowsLocation !== `${CONFIG.frontend_url}+` ? (
+          {windowsLocation !== CONFIG.frontend_url ? (
             <Alert variant="error">
               <ShieldAlert />
               <AlertTitle>Invalid frontend URL detected!</AlertTitle>
