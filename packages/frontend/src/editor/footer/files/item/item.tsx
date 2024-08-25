@@ -77,7 +77,7 @@ export const ItemListFilesFooterEditor = ({
           isLoading={isLoading}
           src={
             data?.width && data.height
-              ? `${CONFIG.graphql_public_url}/${data.dir_folder}/${data.file_name}`
+              ? `${CONFIG.backend_public_url}/${data.dir_folder}/${data.file_name}`
               : null
           }
         />

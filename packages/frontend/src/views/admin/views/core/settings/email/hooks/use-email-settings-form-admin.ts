@@ -24,18 +24,19 @@ export const useEmailSettingsFormAdmin = ({
         user: z.string().default(data.smtp_user ?? ''),
         password: z.string().default('').optional(),
         secure: z.boolean().default(data.smtp_secure ?? false),
-        port: z
+        port: z.coerce
           .number()
-          .int()
           .min(1)
           .max(999)
           .default(data.smtp_port ?? 587),
       }),
-      resend_key: z.string().default('').optional(),
+      resend_key: z.string().default(''),
     })
     .refine(input => {
       if (input.provider === 'smtp') {
         return input.smtp.host !== '' && input.smtp.user !== '';
+      } else if (input.provider === 'resend') {
+        return input.resend_key !== '';
       }
 
       return true;
@@ -76,7 +77,6 @@ export const useEmailSettingsFormAdmin = ({
     }
 
     const mutation = await mutationApi(formData);
-
     if (mutation?.error) {
       toast.error(t('errors.title'), {
         description: t('errors.internal_server_error'),

@@ -32,7 +32,7 @@ export const ContentFilesSettings = ({
           cell: ({ row }) => {
             const src =
               row.width && row.height
-                ? `${CONFIG.graphql_public_url}/${row.dir_folder}/${row.file_name}`
+                ? `${CONFIG.backend_public_url}/${row.dir_folder}/${row.file_name}`
                 : null;
             const alt = row.file_alt ?? row.file_name;
 

@@ -30,6 +30,7 @@ export const useManifestCoreAdminView = ({
       ),
     start_url: z
       .string()
+      .min(1)
       .default(data.start_url.replace(`${CONFIG.frontend_url}/en`, '')),
     theme_color: z
       .string()

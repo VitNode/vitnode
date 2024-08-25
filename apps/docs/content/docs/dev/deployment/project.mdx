@@ -1,0 +1,41 @@
+---
+title: Project
+description: Test
+---
+
+## Envs
+
+When you're used `create-vitnode-app` to create a new project, you can find the `.env` file in the root of your project. This file contains the environment variables that are used by the project.
+
+### LOGIN_TOKEN_SECRET
+
+This is the secret key used to sign the JWT token for the user session. It is recommended to use a long random string for this value.
+
+<Callout title="Don't change LOGIN_TOKEN_SECRET later!" type="error">
+  If you change this value after the project has been deployed, all existing
+  user sessions will be invalidated.
+</Callout>
+
+```bash title=".env"
+LOGIN_TOKEN_SECRET=your-secret-key
+```
+
+### NEXT_PUBLIC_BACKEND_URL
+
+This is the URL of the backend server that the frontend will connect to. This value is used by the frontend to make API requests to the backend.
+
+```bash title=".env"
+NEXT_PUBLIC_BACKEND_URL=http://localhost:8080
+```
+
+### Database
+
+```bash title=".env"
+DB_USER=root
+DB_PASSWORD=root
+# DB_HOST=database
+# DB_DATABASE=vitnode
+# DB_PORT=5432
+```
+
+<Callout title="Optional envs">Commented envs are optional.</Callout>

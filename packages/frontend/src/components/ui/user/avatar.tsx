@@ -32,7 +32,7 @@ export const AvatarUser = ({
       priority={!avatar}
       src={
         avatar
-          ? `${CONFIG.graphql_public_url}/${avatar.dir_folder}/${avatar.file_name}`
+          ? `${CONFIG.backend_public_url}/${avatar.dir_folder}/${avatar.file_name}`
           : generateLetterPhoto(name.slice(0, 1), avatar_color)
       }
       width={sizeInRem * 16}

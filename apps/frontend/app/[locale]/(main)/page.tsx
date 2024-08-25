@@ -13,7 +13,7 @@ export default function Page(props: DefaultPageProps) {
   return (
     <DefaultPage
       pathToDefaultPage={async plugin =>
-        import(`../../../plugins/${plugin}/templates/default-page`)
+        import(`@/plugins/${plugin}/templates/default-page`)
       }
       {...props}
     />

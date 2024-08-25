@@ -1,5 +1,12 @@
 /* eslint-disable no-console */
-import { cpSync, mkdirSync, readFileSync, renameSync, writeFileSync } from 'fs';
+import {
+  copyFileSync,
+  cpSync,
+  mkdirSync,
+  readFileSync,
+  renameSync,
+  writeFileSync,
+} from 'fs';
 import { join } from 'path';
 import { randomBytes } from 'crypto';
 
@@ -105,7 +112,7 @@ export const createVitNode = async ({
 
   // Change the .env file
   spinner.text = 'Changing .env file...';
-  renameSync(join(root, '.env_template'), join(root, '.env'));
+  copyFileSync(join(root, '.env.template'), join(root, '.env'));
   const envPath = join(root, '.env');
   const env = readFileSync(envPath, 'utf-8');
   const newEnv = env.replace(

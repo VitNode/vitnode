@@ -157,7 +157,7 @@ export async function fetcher<TData, TVariables = object>({
 
   const internalQuery = getGqlString(query);
 
-  const res = await fetch(`${CONFIG.graphql_url}/graphql`, {
+  const res = await fetch(`${CONFIG.backend_url}/graphql`, {
     method: 'POST',
     credentials: 'include',
     mode: 'cors',

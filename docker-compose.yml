@@ -1,4 +1,4 @@
-version: "3.8"
+version: '3.8'
 
 services:
   database:
@@ -10,7 +10,7 @@ services:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: ${DB_DATABASE:-vitnode}
     ports:
-      - "${DB_PORT:-5432}:${DB_PORT:-5432}"
+      - '${DB_PORT:-5432}:${DB_PORT:-5432}'
     volumes:
       - ./docker/prod/database:/var/lib/postgresql/data
     networks:
@@ -31,7 +31,7 @@ services:
       - NEXT_PUBLIC_FRONTEND_URL=${NEXT_PUBLIC_FRONTEND_URL:-http://localhost:3000}
     command: sh -c "cd backend && pnpm config:init && pnpm start:prod"
     ports:
-      - "8080:8080"
+      - '8080:8080'
     depends_on:
       - database
     volumes:
@@ -49,13 +49,12 @@ services:
       context: .
       dockerfile: ./apps/frontend/Dockerfile
       args:
-        - NEXT_PUBLIC_GRAPHQL_URL=${NEXT_PUBLIC_GRAPHQL_URL:-http://backend:8080}
         - NEXT_PUBLIC_BACKEND_URL=${NEXT_PUBLIC_BACKEND_URL:-http://localhost:8080}
         - NEXT_PUBLIC_FRONTEND_URL=${NEXT_PUBLIC_FRONTEND_URL:-http://localhost:3000}
     restart: unless-stopped
     command: sh -c "cd frontend && pnpm start:prod"
     ports:
-      - "3000:3000"
+      - '3000:3000'
     depends_on:
       - backend
     volumes:
