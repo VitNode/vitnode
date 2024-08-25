@@ -63,6 +63,4 @@ yarn-error.log*
 /apps/frontend/app/\[\locale\]\/admin/(vitnode)
 /apps/frontend/app/\[\locale\]\/admin/(auth)/(vitnode)
 /apps/frontend/app/\[\locale\]\/admin/(auth)/layout.tsx
-/apps/frontend/plugins/admin
-/apps/frontend/plugins/core
 /apps/frontend/next-env.d.ts

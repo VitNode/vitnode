@@ -1,3 +1,58 @@
+// import { NextConfig } from 'next';
+// import createNextIntlPlugin from 'next-intl/plugin';
+// import * as dotenv from 'dotenv';
+// import { join } from 'path';
+
+// dotenv.config({
+//   path: join(process.cwd(), '..', '..', '.env'),
+// });
+
+// const withNextIntl = createNextIntlPlugin();
+
+// const nextConfig = (config: NextConfig): NextConfig => {
+//   const ENVS = {
+//     backend_url: process.env.NEXT_PUBLIC_BACKEND_URL,
+//     frontend_url: process.env.NEXT_PUBLIC_FRONTEND_URL,
+//   };
+
+//   const urls = {
+//     backend: new URL(ENVS.backend_url ?? 'http://localhost:8080'),
+//     frontend: new URL(ENVS.frontend_url ?? 'http://localhost:3000'),
+//   };
+
+//   return {
+//     ...config,
+//     devIndicators: {
+//       appIsrStatus: false,
+//     },
+//     env: {
+//       NEXT_PUBLIC_BACKEND_URL: ENVS.backend_url,
+//       NEXT_PUBLIC_FRONTEND_URL: ENVS.frontend_url,
+//     },
+//     // TODO: Remove this when the framer-motion issue is fixed for React 19
+//     reactStrictMode: false,
+//     experimental: {
+//       ppr: true,
+//     },
+//     output: 'standalone',
+//     transpilePackages: ['lucide-react', 'vitnode-frontend'],
+//     images: {
+//       remotePatterns: [
+//         {
+//           protocol: urls.backend.protocol === 'https:' ? 'https' : 'http',
+//           hostname: urls.backend.hostname,
+//           port: urls.backend.port,
+//           pathname: '/public/**',
+//         },
+//       ],
+//     },
+//   };
+// };
+
+// export default function NextConfigDefault(config?: NextConfig): NextConfig {
+//   return withNextIntl(nextConfig(config || {}));
+// }
+
 import { NextConfig } from 'next';
 import createNextIntlPlugin from 'next-intl/plugin';
 import * as dotenv from 'dotenv';
@@ -10,24 +65,14 @@ dotenv.config({
 const withNextIntl = createNextIntlPlugin();
 
 const nextConfig = (config: NextConfig): NextConfig => {
-  const ENVS = {
-    backend_url: process.env.NEXT_PUBLIC_BACKEND_URL,
-    frontend_url: process.env.NEXT_PUBLIC_FRONTEND_URL,
-  };
-
-  const urls = {
-    backend: new URL(ENVS.backend_url ?? 'http://localhost:8080'),
-    frontend: new URL(ENVS.frontend_url ?? 'http://localhost:3000'),
-  };
-
   return {
     ...config,
     devIndicators: {
       appIsrStatus: false,
     },
     env: {
-      NEXT_PUBLIC_BACKEND_URL: ENVS.backend_url,
-      NEXT_PUBLIC_FRONTEND_URL: ENVS.frontend_url,
+      NEXT_PUBLIC_BACKEND_URL: process.env.NEXT_PUBLIC_BACKEND_URL,
+      NEXT_PUBLIC_FRONTEND_URL: process.env.NEXT_PUBLIC_FRONTEND_URL,
     },
     // TODO: Remove this when the framer-motion issue is fixed for React 19
     reactStrictMode: false,
@@ -39,9 +84,9 @@ const nextConfig = (config: NextConfig): NextConfig => {
     images: {
       remotePatterns: [
         {
-          protocol: urls.backend.protocol === 'https:' ? 'https' : 'http',
-          hostname: urls.backend.hostname,
-          port: urls.backend.port,
+          protocol: 'http',
+          hostname: 'localhost',
+          port: '8080',
           pathname: '/public/**',
         },
       ],
