@@ -23,10 +23,10 @@ export class HelpersAdminEmailSettingsService {
   protected getEmailCredentials(): EmailCredentialsFile {
     const config = getConfigFile();
     const defaultEmailCredentials: EmailCredentialsFile = {
-      smtp_host: '',
-      smtp_port: 0,
+      smtp_host: null,
+      smtp_port: null,
       smtp_secure: false,
-      smtp_user: '',
+      smtp_user: null,
       smtp_password: '',
       resend_key: '',
       provider: config.settings.email.provider,

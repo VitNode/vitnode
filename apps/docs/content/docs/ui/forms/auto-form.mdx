@@ -157,16 +157,16 @@ import { AutoFormInputComponentProps } from 'vitnode-frontend/form/type';
 ```ts
 const formSchema = z.object({
   smtp: z.object({
-    host: z.string().default(data.smtp_host || ''),
-    user: z.string().default(data.smtp_user || ''),
+    host: z.string().default(data.smtp_host ?? ''),
+    user: z.string().default(data.smtp_user ?? ''),
     password: z.string().default(''),
-    secure: z.boolean().default(data.smtp_secure || false),
+    secure: z.boolean().default(data.smtp_secure ?? false),
     port: z
       .number()
       .int()
       .min(1)
       .max(999)
-      .default(data.smtp_port || 1),
+      .default(data.smtp_port ?? 1),
   }),
 });
 ```
