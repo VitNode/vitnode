@@ -10,14 +10,24 @@ dotenv.config({
 const withNextIntl = createNextIntlPlugin();
 
 const nextConfig = (config: NextConfig): NextConfig => {
+  const ENVS = {
+    backend_url: process.env.NEXT_PUBLIC_BACKEND_URL,
+    frontend_url: process.env.NEXT_PUBLIC_FRONTEND_URL,
+  };
+
+  const urls = {
+    backend: new URL(ENVS.backend_url ?? 'http://localhost:8080'),
+    frontend: new URL(ENVS.frontend_url ?? 'http://localhost:3000'),
+  };
+
   return {
     ...config,
     devIndicators: {
       appIsrStatus: false,
     },
     env: {
-      NEXT_PUBLIC_BACKEND_URL: process.env.NEXT_PUBLIC_BACKEND_URL,
-      NEXT_PUBLIC_FRONTEND_URL: process.env.NEXT_PUBLIC_FRONTEND_URL,
+      NEXT_PUBLIC_BACKEND_URL: ENVS.backend_url,
+      NEXT_PUBLIC_FRONTEND_URL: ENVS.frontend_url,
     },
     // TODO: Remove this when the framer-motion issue is fixed for React 19
     reactStrictMode: false,
@@ -29,9 +39,9 @@ const nextConfig = (config: NextConfig): NextConfig => {
     images: {
       remotePatterns: [
         {
-          protocol: 'http',
-          hostname: 'localhost',
-          port: '8080',
+          protocol: urls.backend.protocol === 'https:' ? 'https' : 'http',
+          hostname: urls.backend.hostname,
+          port: urls.backend.port,
           pathname: '/public/**',
         },
       ],

@@ -14,6 +14,10 @@
       "desktop": "Desktop",
       "tablet": "Tablet",
       "mobile": "Mobile",
+      "dev_mode_disabled": {
+        "title": "Developer Mode Disabled",
+        "desc": "To unlock some features, you need to enable developer mode."
+      },
       "colors": {
         "title": "Colors",
         "primary": "Primary",
