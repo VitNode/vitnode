@@ -31,17 +31,9 @@
         "mobile_dark": "Mobile Dark",
         "text": "Logo Text"
       },
-      "submit": {
-        "desc": "This action requires rebuild the app. When you save the theme, not everything will be visible until the app is rebuilt.",
-        "dev": {
-          "title": "You are in development mode!",
-          "desc": "You don't have to worry about rebuilding the app. The changes will be visible immediately."
-        },
-        "submit": "Save Theme",
-        "success": {
-          "title": "The theme has been saved successfully!",
-          "desc": "The changes will be visible after the app is rebuilt."
-        }
+      "success": {
+        "title": "The theme has been saved successfully!",
+        "desc": "The changes will be visible after the app is rebuilt."
       }
     },
     "rebuild_required": {

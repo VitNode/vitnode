@@ -1,4 +1,4 @@
-import { buttonVariants } from '@/components/ui/button';
+import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Link } from '@/navigation';
@@ -6,20 +6,12 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 
 import { ThemeEditorTab, useThemeEditor } from '../hooks/use-theme-editor';
-import { SubmitSidebarThemeEditor } from './submit';
 import { ColorsTabThemeEditor } from './tabs/color';
 import { LogosTabThemeEditor } from './tabs/logos';
 import { MainTabThemeEditor } from './tabs/main';
 
 export const SidebarThemeEditor = () => {
-  const {
-    activeTab,
-    direction,
-    form,
-    onSubmit,
-    openSubmitDialog,
-    setOpenSubmitDialog,
-  } = useThemeEditor();
+  const { activeTab, direction, form, onSubmit } = useThemeEditor();
   const t = useTranslations('core');
   const tabs = {
     [ThemeEditorTab.Main]: <MainTabThemeEditor />,
@@ -59,24 +51,18 @@ export const SidebarThemeEditor = () => {
         </AnimatePresence>
 
         <div className="bg-card/75 flex items-center gap-2 border-t p-3 backdrop-blur">
-          <Link
-            aria-label={t('close')}
-            className={buttonVariants({
-              variant: 'ghost',
-              size: 'sm',
-              className: 'w-full',
-            })}
-            href="/admin/core/dashboard"
-          >
-            {t('cancel')}
-          </Link>
+          <Button asChild className="w-full" size="sm" variant="ghost">
+            <Link href="/admin/core/dashboard">{t('cancel')}</Link>
+          </Button>
 
-          <SubmitSidebarThemeEditor
-            isPending={form.formState.isSubmitting}
-            onClick={async () => form.handleSubmit(onSubmit)()}
-            openSubmitDialog={openSubmitDialog}
-            setOpenSubmitDialog={setOpenSubmitDialog}
-          />
+          <Button
+            className="w-full"
+            loading={form.formState.isSubmitting}
+            size="sm"
+            type="submit"
+          >
+            {t('save')}
+          </Button>
         </div>
       </form>
     </Form>

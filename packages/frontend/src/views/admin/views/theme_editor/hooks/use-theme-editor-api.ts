@@ -61,8 +61,7 @@ export const keysFromCSSThemeEditor = [
 export const useThemeEditorApi = ({
   core_theme_editor__show,
 }: Core_Theme_Editor__ShowQuery) => {
-  const [openSubmitDialog, setOpenSubmitDialog] = React.useState(false);
-  const t = useTranslations('admin.theme_editor.submit');
+  const t = useTranslations('admin.theme_editor');
   const tCore = useTranslations('core');
   const { push } = useRouter();
   const iframeRef = React.useRef<HTMLIFrameElement>(null);
@@ -180,7 +179,6 @@ export const useThemeEditorApi = ({
     toast.success(t('success.title'), {
       description: !CONFIG.node_development && t('success.desc'),
     });
-    setOpenSubmitDialog(false);
     push('/admin/core/dashboard');
   };
 
@@ -219,7 +217,5 @@ export const useThemeEditorApi = ({
     iframeRef,
     changeColor,
     activeTheme,
-    openSubmitDialog,
-    setOpenSubmitDialog,
   };
 };

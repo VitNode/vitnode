@@ -59,9 +59,7 @@ interface Args {
   form: UseFormReturn<ThemeEditorFormObj>;
   iframeRef: null | React.RefObject<HTMLIFrameElement>;
   onSubmit: (values: ThemeEditorFormObj) => void;
-  openSubmitDialog: boolean;
   setActiveTab: (tab: ThemeEditorTab) => void;
-  setOpenSubmitDialog: (open: boolean) => void;
 }
 
 export const ThemeEditorContext = React.createContext<Args>({
@@ -72,8 +70,6 @@ export const ThemeEditorContext = React.createContext<Args>({
   onSubmit: () => {},
   changeColor: () => {},
   activeTheme: 'light',
-  openSubmitDialog: false,
-  setOpenSubmitDialog: () => {},
   iframeRef: null,
 });
 
