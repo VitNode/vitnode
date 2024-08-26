@@ -287,7 +287,7 @@ function logError(error) {
     ];
     const pathsToFiles = [
       {
-        folder: 'app',
+        folder: join('src', 'app'),
         file: 'not-found.tsx',
       },
       {
