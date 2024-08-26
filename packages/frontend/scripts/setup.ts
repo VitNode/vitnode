@@ -40,6 +40,7 @@ const init = () => {
   }[] = [
     {
       path: 'app',
+      isInsideAppDir: true,
       file: 'not-found.tsx',
     },
     {
@@ -110,7 +111,7 @@ const init = () => {
     );
 
     if (!fs.existsSync(packagePath)) {
-      console.log(
+      console.error(
         `${initConsole} ⛔️ "${packagePath}" file does not exist in the frontend package. Please report this issue to the VitNode GitHub.`,
       );
       process.exit(1);
