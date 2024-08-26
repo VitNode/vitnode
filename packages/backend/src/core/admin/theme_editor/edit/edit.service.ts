@@ -45,6 +45,7 @@ export class EditAdminThemeEditorService {
     if (!colors) return;
     const pathToCss = join(
       ABSOLUTE_PATHS_BACKEND.frontend.init,
+      'src',
       'app',
       '[locale]',
       'global.css',

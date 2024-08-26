@@ -6,9 +6,9 @@ const config = {
   content: [
     './node_modules/vitnode-frontend/src/components/**/*.tsx',
     './node_modules/vitnode-frontend/src/views/**/*.tsx',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './plugins/**/*.{ts,tsx}',
+    './src/components/**/*.{ts,tsx}',
+    './src/app/**/*.{ts,tsx}',
+    './src/plugins/**/*.{ts,tsx}',
   ],
 } satisfies Config;
 

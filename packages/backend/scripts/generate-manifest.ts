@@ -85,6 +85,7 @@ export const generateManifest = () => {
     process.cwd(),
     '..',
     'frontend',
+    'src',
     'plugins',
     'core',
     'langs',
