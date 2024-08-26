@@ -281,9 +281,9 @@ function logError(error) {
     );
     const frontendAppPath = path.join(WORKSPACE, 'apps', 'frontend');
     const pathsToFoldersForce = [
-      join('app', '[locale]', 'admin', '(vitnode)'),
-      join('app', '[locale]', 'admin', '(auth)', '(vitnode)'),
-      join('app', '[locale]', '(main)', '(vitnode)'),
+      join('src', 'app', '[locale]', 'admin', '(vitnode)'),
+      join('src', 'app', '[locale]', 'admin', '(auth)', '(vitnode)'),
+      join('src', 'app', '[locale]', '(main)', '(vitnode)'),
     ];
     const pathsToFiles = [
       {
@@ -291,23 +291,23 @@ function logError(error) {
         file: 'not-found.tsx',
       },
       {
-        folder: join('app', `[locale]`, 'admin'),
+        folder: join('src', 'app', `[locale]`, 'admin'),
         file: 'layout.tsx',
       },
       {
-        folder: join('app', `[locale]`, '(main)'),
+        folder: join('src', 'app', `[locale]`, '(main)'),
         file: 'page.tsx',
       },
       {
-        folder: join('app', `[locale]`, 'admin', '(auth)'),
+        folder: join('src', 'app', `[locale]`, 'admin', '(auth)'),
         file: 'layout.tsx',
       },
       {
-        folder: join('plugins', 'core', 'langs'),
+        folder: join('src', 'plugins', 'core', 'langs'),
         file: 'en.json',
       },
       {
-        folder: join('plugins', 'admin', 'langs'),
+        folder: join('src', 'plugins', 'admin', 'langs'),
         file: 'en.json',
       },
     ];

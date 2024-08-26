@@ -26,7 +26,7 @@ interface Args {
 
 const internalPaths = {
   backend: join(process.cwd(), 'src'),
-  frontend: join(process.cwd(), '..', 'frontend'),
+  frontend: join(process.cwd(), '..', 'frontend', 'src'),
   uploads: join(process.cwd(), 'uploads'),
   plugins: join(process.cwd(), 'src', 'plugins'),
 };
@@ -82,7 +82,14 @@ export const ABSOLUTE_PATHS_BACKEND = {
         'templates',
         'default-page.tsx',
       ),
-      pages: join(internalPaths.frontend, 'app', '[locale]', '(main)', code),
+      pages: join(
+        internalPaths.frontend,
+        'src',
+        'app',
+        '[locale]',
+        '(main)',
+        code,
+      ),
       templates: join(internalPaths.frontend, 'plugins', code, 'templates'),
       plugin: join(internalPaths.frontend, 'plugins', code),
       language: join(internalPaths.frontend, 'plugins', code, 'langs'),

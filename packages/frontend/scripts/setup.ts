@@ -15,9 +15,9 @@ const init = () => {
   const frontendPackagePath = join(__dirname, '..', '..', 'folders_to_copy');
   const frontendAppPath = process.cwd();
   const isLocaleFolder = fs.existsSync(
-    join(frontendAppPath, 'app', '[locale]'),
+    join(frontendAppPath, 'src', 'app', '[locale]'),
   );
-  const localePath = isLocaleFolder ? join('app', '[locale]') : 'app';
+  const localePath = isLocaleFolder ? join('src', 'app', '[locale]') : 'app';
 
   const pathsToFolders: Folders[] = [
     {
@@ -58,11 +58,11 @@ const init = () => {
       file: 'page.tsx',
     },
     {
-      path: join('plugins', 'core', 'langs'),
+      path: join('src', 'plugins', 'core', 'langs'),
       file: 'en.json',
     },
     {
-      path: join('plugins', 'admin', 'langs'),
+      path: join('src', 'plugins', 'admin', 'langs'),
       file: 'en.json',
     },
   ];
@@ -83,7 +83,7 @@ const init = () => {
     );
     const packagePath = join(
       frontendPackagePath,
-      folder.isInsideAppDir ? join('app', '[locale]') : '',
+      folder.isInsideAppDir ? join('src', 'app', '[locale]') : '',
       folder.path,
     );
 
@@ -105,7 +105,7 @@ const init = () => {
     );
     const packagePath = join(
       frontendPackagePath,
-      file.isInsideAppDir ? join('app', '[locale]') : '',
+      file.isInsideAppDir ? join('src', 'app', '[locale]') : '',
       file.path,
     );
 
