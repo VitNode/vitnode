@@ -39,8 +39,7 @@ const init = () => {
     path: string;
   }[] = [
     {
-      path: '',
-      isInsideAppDir: true,
+      path: join('src', 'app'),
       file: 'not-found.tsx',
     },
     {
