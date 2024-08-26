@@ -39,7 +39,7 @@ const init = () => {
     path: string;
   }[] = [
     {
-      path: 'app',
+      path: '',
       isInsideAppDir: true,
       file: 'not-found.tsx',
     },
