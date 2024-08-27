@@ -1,6 +1,5 @@
-import { defineConfig } from 'drizzle-kit';
-
 import { DATABASE_ENVS } from '@/database/config';
+import { defineConfig } from 'drizzle-kit';
 
 export default defineConfig({
   dialect: 'postgresql',

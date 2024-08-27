@@ -5,7 +5,6 @@ import tableWelcome from '@/plugins/welcome/admin/database/index';
 
 export const schemaDatabase = {
   ...tableWelcome,
-
   // ! === MODULE ===
   ...tableCore,
 };
