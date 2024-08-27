@@ -10,7 +10,7 @@ export type Admin__Core_Files__ShowQueryVariables = Types.Exact<{
 }>;
 
 
-export type Admin__Core_Files__ShowQuery = { __typename?: 'Query', admin__core_files__show: { __typename?: 'ShowAdminFilesObj', pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number, totalCount: number }, edges: Array<{ __typename?: 'ShowAdminFiles', count_uses: number, created: Date, dir_folder: string, extension: string, file_alt?: string, file_name: string, file_name_original: string, file_size: number, height?: number, id: number, mimetype: string, security_key?: string, width?: number, user: { __typename?: 'User', id: number, name: string, name_seo: string } }> } };
+export type Admin__Core_Files__ShowQuery = { __typename?: 'Query', admin__core_files__show: { __typename?: 'ShowAdminFilesObj', pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number, totalCount: number }, edges: Array<{ __typename?: 'ShowAdminFiles', count_uses: number, created: Date, dir_folder: string, extension: string, file_alt?: string, file_name: string, file_name_original: string, file_size: number, height?: number, id: number, mimetype: string, security_key?: string, width?: number, user?: { __typename?: 'User', id: number, name: string, name_seo: string } }> } };
 
 
 export const Admin__Core_Files__Show = gql`

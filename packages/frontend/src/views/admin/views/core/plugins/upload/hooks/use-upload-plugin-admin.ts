@@ -30,7 +30,7 @@ export const useUploadPluginAdmin = ({ data }: UploadPluginAdminProps) => {
 
     const mutation = await mutationApi(formData);
 
-    if (mutation.error || !mutation.data) {
+    if (mutation?.error) {
       const error = mutation.error;
 
       if (
@@ -56,10 +56,9 @@ export const useUploadPluginAdmin = ({ data }: UploadPluginAdminProps) => {
       window.location.reload();
     }, 3000);
 
-    toast.success(t(data ? 'success_update' : 'success'), {
-      description: mutation.data.admin__core_plugins__upload.name,
+    toast.success(t(data ? 'success.update' : 'success.title'), {
+      description: t('success.desc'),
     });
-
     setOpen?.(false);
   };
 

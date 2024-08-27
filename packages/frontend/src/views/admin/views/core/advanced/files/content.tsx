@@ -98,11 +98,13 @@ export const ContentFilesAdvancedCoreAdminView = ({
           id: 'user',
           title: t('table.user'),
           cell: ({ row }) => {
-            return (
-              <Link href={`/admin/members/users/${row.user.id}`}>
-                {row.user.name}
-              </Link>
-            );
+            if (row.user?.id) {
+              return (
+                <Link href={`/admin/members/users/${row.user.id}`}>
+                  {row.user.name}
+                </Link>
+              );
+            }
           },
         },
         {

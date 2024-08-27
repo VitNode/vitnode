@@ -19,6 +19,6 @@ export const mutationApi = async (
       variables,
     });
   } catch (e) {
-    return { error: e as string };
+    if (typeof e === 'string') return { error: e };
   }
 };

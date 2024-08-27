@@ -11,7 +11,7 @@ export const mutationApi = async (formData: FormData) => {
   const files = formData.get('file') as File;
 
   try {
-    const data = await fetcher<
+    await fetcher<
       Admin__Core_Plugins__UploadMutation,
       Omit<Admin__Core_Plugins__UploadMutationVariables, 'file'>
     >({
@@ -26,9 +26,7 @@ export const mutationApi = async (formData: FormData) => {
         },
       ],
     });
-
-    return { data };
   } catch (e) {
-    return { error: e as string };
+    if (typeof e === 'string') return { error: e };
   }
 };
