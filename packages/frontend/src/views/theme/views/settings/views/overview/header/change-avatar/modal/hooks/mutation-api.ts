@@ -18,7 +18,9 @@ export const mutationApi = async () => {
     });
 
     revalidatePath('/', 'layout');
-  } catch (e) {
-    return { error: e as string };
+  } catch (error) {
+    const e = error as Error;
+
+    return { error: e.message };
   }
 };

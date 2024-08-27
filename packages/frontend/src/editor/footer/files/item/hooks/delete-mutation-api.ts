@@ -19,8 +19,10 @@ export const deleteMutationApi = async (
       query: Core_Editor_Files__Delete,
       variables,
     });
-  } catch (e) {
-    return { error: e as string };
+  } catch (error) {
+    const e = error as Error;
+
+    return { error: e.message };
   }
 
   revalidatePath('/settings/files', 'page');

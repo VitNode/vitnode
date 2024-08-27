@@ -19,8 +19,10 @@ export const mutationApi = async (
       query: Admin__Core_Styles__Nav__Delete,
       variables,
     });
-  } catch (e) {
-    return { error: e as string };
+  } catch (error) {
+    const e = error as Error;
+
+    return { error: e.message };
   }
 
   revalidatePath('/', 'layout');
