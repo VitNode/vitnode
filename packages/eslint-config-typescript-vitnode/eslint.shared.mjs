@@ -24,6 +24,7 @@ export default [
   {
     rules: {
       'perfectionist/sort-jsx-props': 'warn',
+      'perfectionist/sort-imports': 'warn',
       '@typescript-eslint/no-unsafe-call': 'off',
       'perfectionist/sort-objects': 'off',
       'perfectionist/sort-classes': [
