@@ -1,19 +1,17 @@
 'use server';
 
-import { fetcher, FetcherErrorType } from '@/graphql/fetcher';
+import { fetcher } from '@/graphql/fetcher';
 import {
   Admin__Core_Plugins__Upload,
   Admin__Core_Plugins__UploadMutation,
   Admin__Core_Plugins__UploadMutationVariables,
 } from '@/graphql/mutations/admin/plugins/admin__core_plugins__upload.generated';
-import { CONFIG } from '@/helpers/config-with-env';
-import { revalidatePath } from 'next/cache';
 
 export const mutationApi = async (formData: FormData) => {
   const files = formData.get('file') as File;
 
   try {
-    const data = await fetcher<
+    await fetcher<
       Admin__Core_Plugins__UploadMutation,
       Omit<Admin__Core_Plugins__UploadMutationVariables, 'file'>
     >({
@@ -28,21 +26,7 @@ export const mutationApi = async (formData: FormData) => {
         },
       ],
     });
-
-    if (CONFIG.node_development) {
-      // Revalidate after 3 seconds in promise. Wait for fast refresh to compilation files.
-      await new Promise<void>(resolve =>
-        setTimeout(() => {
-          revalidatePath('/', 'layout');
-          resolve();
-        }, 3000),
-      );
-    } else {
-      revalidatePath('/', 'layout');
-    }
-
-    return { data };
   } catch (e) {
-    return { error: e as FetcherErrorType };
+    if (typeof e === 'string') return { error: e };
   }
 };

@@ -30,15 +30,15 @@ export const useUploadPluginAdmin = ({ data }: UploadPluginAdminProps) => {
 
     const mutation = await mutationApi(formData);
 
-    if (mutation.error) {
+    if (mutation?.error) {
       const error = mutation.error;
 
       if (
-        error.extensions?.code === 'PLUGIN_ALREADY_EXISTS' ||
-        error.extensions?.code === 'PLUGIN_VERSION_IS_LOWER'
+        error === 'PLUGIN_ALREADY_EXISTS' ||
+        error === 'PLUGIN_VERSION_IS_LOWER'
       ) {
         form.setError('file', {
-          message: t(`errors.${error.extensions.code}`),
+          message: t(`errors.${error}`),
         });
 
         return;
@@ -51,10 +51,14 @@ export const useUploadPluginAdmin = ({ data }: UploadPluginAdminProps) => {
       return;
     }
 
-    toast.success(t(data ? 'success_update' : 'success'), {
-      description: mutation.data.admin__core_plugins__upload.name,
-    });
+    // Refresh page
+    setTimeout(() => {
+      window.location.reload();
+    }, 3000);
 
+    toast.success(t(data ? 'success.update' : 'success.title'), {
+      description: t('success.desc'),
+    });
     setOpen?.(false);
   };
 

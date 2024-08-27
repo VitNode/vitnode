@@ -62,7 +62,7 @@ export const TabsTrigger = ({
   });
 
   const underline = active && (
-    <div className="bg-primary absolute bottom-0 left-0 h-1 w-full rounded-md" />
+    <div className="bg-primary absolute bottom-0 left-0 z-10 h-1 w-full rounded-md" />
   );
 
   if (href) {
@@ -75,6 +75,7 @@ export const TabsTrigger = ({
           onClick={onClick}
         >
           {children}
+          {underline}
         </Link>
       </Wrapper>
     );

@@ -271,7 +271,7 @@ To send files to the server, you need to use the `FormData` function as the argu
 ```ts title="mutation-api.ts"
 'use server';
 
-import { fetcher, FetcherErrorType } from 'vitnode-frontend/graphql/fetcher';
+import { fetcher } from 'vitnode-frontend/graphql/fetcher';
 
 import {
   Core_Editor_Files__Upload,
@@ -304,7 +304,7 @@ export const mutationApi = async (formData: FormData) => {
 
     return { data };
   } catch (e) {
-    return { error: e as FetcherErrorType };
+    return { error: e as string };
   }
 };
 ```

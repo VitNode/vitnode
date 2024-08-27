@@ -1,6 +1,6 @@
 'use server';
 
-import { fetcher, FetcherErrorType } from '@/graphql/fetcher';
+import { fetcher } from '@/graphql/fetcher';
 import {
   Core_Members__Avatar__Upload,
   Core_Members__Avatar__UploadMutation,
@@ -25,7 +25,7 @@ export const mutationApi = async (formData: FormData) => {
       ],
     });
   } catch (e) {
-    return { error: e as FetcherErrorType };
+    return { error: e as string };
   }
 
   revalidatePath('/', 'layout');

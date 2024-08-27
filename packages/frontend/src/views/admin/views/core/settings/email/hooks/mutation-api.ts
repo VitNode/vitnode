@@ -1,6 +1,6 @@
 'use server';
 
-import { fetcher, FetcherErrorType } from '@/graphql/fetcher';
+import { fetcher } from '@/graphql/fetcher';
 import {
   Admin__Core_Email_Settings__Edit,
   Admin__Core_Email_Settings__EditMutation,
@@ -51,7 +51,7 @@ export const mutationApi = async (formData: FormData) => {
       ],
     });
   } catch (e) {
-    return { error: e as FetcherErrorType };
+    return { error: e as string };
   }
 
   revalidatePath('/admin/core/settings/email', 'page');

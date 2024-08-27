@@ -7,7 +7,7 @@ description: How to get data from backend and revalidate it.
 
 The best way to fetch data is using [React Server Components (RSC)](https://react.dev/reference/rsc/server-components) with our `fetcher` function which support GraphQL queries and mutations.
 
-```tsx title="example-component.tss"
+```tsx title="example-component.tsx"
 import { fetcher } from 'vitnode-frontend/graphql/fetcher';
 
 import {
@@ -36,6 +36,42 @@ export const ExampleComponent = async () => {
 };
 ```
 
+### Handle Errors
+
+#### error.tsx
+
+You can create a page `error.tsx` to handle errors.
+
+```tsx title="error.tsx"
+'use client';
+
+import { ErrorView } from 'vitnode-frontend/views/theme/views/error/error-view';
+
+export default function Error() {
+  return <ErrorView code="500" />;
+}
+```
+
+#### try-catch
+
+You can use `try-catch` to handle errors.
+
+```tsx title="example-component.tsx"
+import { notFound } from 'next/navigation';
+
+export const ExampleComponent = async () => {
+  try {
+    const data = await getData({ id: '1' });
+
+    return <div>{data.forum.name}</div>;
+  } catch (e) {
+    if (e === 'NOT_FOUND') notFound();
+
+    throw e;
+  }
+};
+```
+
 ## Mutations
 
 To mutate data, you can use [Server Action from NextJS](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations) with the `fetcher` function.
@@ -48,7 +84,7 @@ import {
   Core_Sessions__Sign_OutMutation,
   Core_Sessions__Sign_OutMutationVariables,
 } from '@/graphql/graphql';
-import { fetcher, FetcherErrorType } from 'vitnode-frontend/graphql/fetcher';
+import { fetcher } from 'vitnode-frontend/graphql/fetcher';
 
 export const mutationApi = async (
   variables: Core_Sessions__Sign_OutMutationVariables,
@@ -64,7 +100,7 @@ export const mutationApi = async (
 
     return { data };
   } catch (e) {
-    return { error: e as FetcherErrorType };
+    return { error: e as string };
   }
 };
 ```
@@ -72,6 +108,40 @@ export const mutationApi = async (
 <Callout title="Cache Mutation" type="warn">
   Don't cache mutation data, because it will cause a problem with the mutation.
 </Callout>
+
+### Handle Errors
+
+Based on preview example, you can handle errors using `mutation?.error`. This variable return `string` if there is an error as code error from backend.
+
+```tsx title="use-form.ts"
+const onSubmit = async (
+  values: z.infer<typeof formSchema>,
+  form: UseFormReturn<z.infer<typeof formSchema>>,
+) => {
+  const mutation = await mutationApi(values);
+
+  if (mutation?.error) {
+    if (
+      mutation.error === 'PLUGIN_ALREADY_EXISTS' ||
+      mutation.error === 'PLUGIN_VERSION_IS_LOWER'
+    ) {
+      form.setError('file', {
+        message: t(`errors.${error}`),
+      });
+
+      return;
+    }
+
+    toast.error(tCore('errors.title'), {
+      description: tCore('errors.internal_server_error'),
+    });
+
+    return;
+  }
+
+  toast.success(t(data ? 'success_update' : 'success'));
+};
+```
 
 ## Debounced fetching
 

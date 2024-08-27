@@ -1,6 +1,6 @@
 'use server';
 
-import { fetcher, FetcherErrorType } from '@/graphql/fetcher';
+import { fetcher } from '@/graphql/fetcher';
 import {
   Admin__Core_Plugins__Nav__Edit,
   Admin__Core_Plugins__Nav__EditMutation,
@@ -22,7 +22,7 @@ export const editMutationApi = async (variables: Args) => {
       variables,
     });
   } catch (e) {
-    return { error: e as FetcherErrorType };
+    return { error: e as string };
   }
 
   revalidatePath('/[locale]/admin/(auth)/(vitnode)', 'layout');

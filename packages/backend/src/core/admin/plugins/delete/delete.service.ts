@@ -1,12 +1,10 @@
 import { core_plugins } from '@/database/schema/plugins';
 import { CustomError, NotFoundError } from '@/errors';
-import { setRebuildRequired } from '@/functions/rebuild-required';
-import { ABSOLUTE_PATHS_BACKEND } from '@/index';
+import { ABSOLUTE_PATHS_BACKEND, execShellCommand } from '@/index';
 import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
-import { eq, sql } from 'drizzle-orm';
+import { eq } from 'drizzle-orm';
 import * as fs from 'fs';
-import { join } from 'path';
 
 import { ChangeFilesAdminPluginsService } from '../helpers/files/change/change.service';
 import { DeleteAdminPluginsArgs } from './dto/delete.args';
@@ -40,33 +38,6 @@ export class DeleteAdminPluginsService {
       });
     }
 
-    // Drop tables
-    const tables: { getTables: () => string[] } = await import(
-      join(
-        process.cwd(),
-        'dist',
-        'plugins',
-        code,
-        'admin',
-        'database',
-        'functions.js',
-      )
-    );
-    const deleteQueries = tables.getTables().map(table => {
-      return `DROP TABLE IF EXISTS ${table} CASCADE;`;
-    });
-
-    try {
-      await this.databaseService.db.execute(sql.raw(deleteQueries.join(' ')));
-    } catch (_) {
-      throw new CustomError({
-        code: 'DELETE_TABLE_ERROR',
-        message: `Error deleting tables for plugin ${code}`,
-      });
-    }
-    // Generate migrations
-    // TODO: Generate migrations
-
     // Change files when delete
     this.changeFilesService.changeFilesWhenDelete({ code });
 
@@ -84,7 +55,17 @@ export class DeleteAdminPluginsService {
       .delete(core_plugins)
       .where(eq(core_plugins.code, code));
 
-    setRebuildRequired({ set: 'plugins' });
+    // Generate migration
+    try {
+      await execShellCommand(
+        'npm run drizzle-kit up && npm run drizzle-kit generate',
+      );
+    } catch (_) {
+      throw new CustomError({
+        code: 'GENERATE_MIGRATION_ERROR',
+        message: 'Error generating migration',
+      });
+    }
 
     return 'Success!';
   }

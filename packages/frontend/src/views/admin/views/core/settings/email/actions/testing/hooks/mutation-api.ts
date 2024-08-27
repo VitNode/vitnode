@@ -1,6 +1,6 @@
 'use server';
 
-import { fetcher, FetcherErrorType } from '@/graphql/fetcher';
+import { fetcher } from '@/graphql/fetcher';
 import {
   Admin__Core_Email_Settings__Test,
   Admin__Core_Email_Settings__TestMutation,
@@ -19,6 +19,6 @@ export const mutationApi = async (
       variables,
     });
   } catch (e) {
-    return { error: e as FetcherErrorType };
+    return { error: e as string };
   }
 };

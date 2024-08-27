@@ -1,6 +1,6 @@
 'use server';
 
-import { fetcher, FetcherErrorType } from './fetcher';
+import { fetcher } from './fetcher';
 import {
   Core_Members__Show__Search,
   Core_Members__Show__SearchQuery,
@@ -21,6 +21,6 @@ export const getUsersShortApi = async (
 
     return { data };
   } catch (e) {
-    return { error: e as FetcherErrorType };
+    return { error: e as string };
   }
 };

@@ -11,10 +11,10 @@ import {
   Admin__Core_Plugins__ShowQueryVariables,
 } from '@/graphql/queries/admin/plugins/admin__core_plugins__show.generated';
 import { ShowAdminPluginsSortingColumnEnum } from '@/graphql/types';
+import { CONFIG } from '@/helpers/config-with-env';
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
-import { RebuildRequiredAdmin } from '../../../global/rebuild-required';
 import { ActionsPluginsAdmin } from './actions/actions';
 import { ContentPluginsCoreAdmin } from './content';
 
@@ -29,7 +29,7 @@ const getData = async (variables: Admin__Core_Plugins__ShowQueryVariables) => {
   >({
     query: Admin__Core_Plugins__Show,
     variables,
-    cache: 'force-cache',
+    cache: CONFIG.node_development ? 'default' : 'force-cache',
   });
 
   return data;
@@ -63,7 +63,6 @@ export const PluginsAdminView = async ({
       </HeaderContent>
 
       <Card className="p-6">
-        <RebuildRequiredAdmin />
         <ContentPluginsCoreAdmin {...data} />
       </Card>
     </>

@@ -1,6 +1,6 @@
 'use server';
 
-import { fetcher, FetcherErrorType } from '@/graphql/fetcher';
+import { fetcher } from '@/graphql/fetcher';
 import {
   Core_Editor_Files__Delete,
   Core_Editor_Files__DeleteMutation,
@@ -20,7 +20,7 @@ export const deleteMutationApi = async (
       variables,
     });
   } catch (e) {
-    return { error: e as FetcherErrorType };
+    return { error: e as string };
   }
 
   revalidatePath('/settings/files', 'page');

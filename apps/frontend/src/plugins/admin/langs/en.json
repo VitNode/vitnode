@@ -1,5 +1,6 @@
 {
   "admin": {
+    "dev_mode": "Development Mode",
     "title": "Admin Control Panel",
     "title_short": "Admin",
     "home_page": "Home Page",
@@ -15,8 +16,8 @@
       "tablet": "Tablet",
       "mobile": "Mobile",
       "dev_mode_disabled": {
-        "title": "Developer Mode Disabled",
-        "desc": "To unlock some features, you need to enable developer mode."
+        "title": "Development Mode Disabled",
+        "desc": "To unlock some features, you need to enable development mode."
       },
       "colors": {
         "title": "Colors",
@@ -39,13 +40,6 @@
         "title": "The theme has been saved successfully!",
         "desc": "The changes will be visible after the app is rebuilt."
       }
-    },
-    "rebuild_required": {
-      "title": "Rebuild Required",
-      "desc": "We're detecting that you need to rebuild your website, because you have made changes in:",
-      "plugins": "<bold>Plugins</bold> - Temporary disabled",
-      "langs": "<bold>Languages</bold> - Changing language disabled",
-      "submit": "Read How To Rebuild"
     },
     "core": {
       "diagnostic": {
@@ -248,7 +242,7 @@
             "label": "Code",
             "desc": "Must be unique. Min 3-50 characters. Allowed characters: a-z, 0-9, -",
             "invalid": "You can use only a-z, 0-9, -",
-            "exists": "Plugin with this code already exists."
+            "exists": "Plugin with this code already exists. If you want to update the plugin, use the upload new version form from the plugin dropdown menu."
           },
           "description": {
             "label": "Description"
@@ -271,10 +265,13 @@
         "upload": {
           "title": "Upload Plugin",
           "title_new_version": "Upload New Version Plugin",
-          "success": "Successfully uploaded plugin.",
-          "success_update": "Successfully updated plugin.",
+          "success": {
+            "title": "Successfully uploaded plugin.",
+            "update": "The plugin has been updated.",
+            "desc": "After 3 seconds, your page will be refreshed."
+          },
           "errors": {
-            "PLUGIN_ALREADY_EXISTS": "Plugin with this code already exists.",
+            "PLUGIN_ALREADY_EXISTS": "Plugin with this code already exists. If you want to update the plugin, use the upload new version form from the plugin dropdown menu.",
             "PLUGIN_VERSION_IS_LOWER": "The version of the uploaded plugin is lower than the current version."
           },
           "submit": "Upload"
@@ -282,7 +279,11 @@
         "delete": {
           "submit": "Yes, delete plugin",
           "desc": "This action will delete <name></name> plugin created by <author></author> and all data associated with it.",
-          "success": "Plugin has been deleted."
+          "alert": {
+            "title": "Warning",
+            "desc": "You may see the errors while the system is changing files."
+          },
+          "success": "Plugin has been deleted. After 3 seconds, your page will be refreshed."
         },
         "download": {
           "title": "Download Plugin",

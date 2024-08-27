@@ -768,12 +768,6 @@ export type QueryCore_Nav__ShowArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
 };
 
-export type RebuildRequiredEditorShowCoreMiddleware = {
-  __typename?: 'RebuildRequiredEditorShowCoreMiddleware';
-  langs: Scalars['Boolean']['output'];
-  plugins: Scalars['Boolean']['output'];
-};
-
 export type SmtpEditAdminEmailSettingsService = {
   host: Scalars['String']['input'];
   password: Scalars['String']['input'];
@@ -829,7 +823,7 @@ export type ShowAdminFiles = {
   id: Scalars['Int']['output'];
   mimetype: Scalars['String']['output'];
   security_key?: Maybe<Scalars['String']['output']>;
-  user: User;
+  user?: Maybe<User>;
   width?: Maybe<Scalars['Int']['output']>;
 };
 
@@ -1136,7 +1130,6 @@ export type ShowCoreMiddlewareObj = {
   editor: EditorShowCoreMiddleware;
   languages: Array<LanguagesCoreMiddleware>;
   plugins: Array<Scalars['String']['output']>;
-  rebuild_required: RebuildRequiredEditorShowCoreMiddleware;
   security: SecurityCoreMiddleware;
 };
 

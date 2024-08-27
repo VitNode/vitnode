@@ -1,6 +1,6 @@
 'use server';
 
-import { fetcher, FetcherErrorType } from '@/graphql/fetcher';
+import { fetcher } from '@/graphql/fetcher';
 import {
   Core_Sessions__Sign_In,
   Core_Sessions__Sign_InMutation,
@@ -21,7 +21,7 @@ export const mutationApi = async (
       variables,
     });
   } catch (e) {
-    return { error: e as FetcherErrorType };
+    return { error: e as string };
   }
 
   revalidatePath(variables.admin ? '/admin' : '/', 'layout');

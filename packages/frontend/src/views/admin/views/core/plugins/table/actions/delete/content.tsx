@@ -1,3 +1,4 @@
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import {
   AlertDialogCancel,
   AlertDialogDescription,
@@ -7,6 +8,7 @@ import {
 } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
 import { ShowAdminPlugins } from '@/graphql/types';
+import { InfoIcon } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 import { useDeletePluginAdmin } from './hooks/use-delete-plugin-admin';
@@ -36,6 +38,12 @@ export const ContentDeletePluginActionsAdmin = ({
           })}
         </AlertDialogDescription>
       </AlertDialogHeader>
+
+      <Alert className="mt-4" variant="primary">
+        <InfoIcon className="size-4" />
+        <AlertTitle>{t('alert.title')}</AlertTitle>
+        <AlertDescription>{t('alert.desc')}</AlertDescription>
+      </Alert>
 
       <AlertDialogFooter className="mt-6">
         <AlertDialogCancel asChild>

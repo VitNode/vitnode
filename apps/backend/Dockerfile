@@ -26,7 +26,6 @@ RUN pnpm i
 # Build the project and its dependencies
 COPY --from=builder /app/out/full/ .
 COPY turbo.json turbo.json
-COPY .prettierrc .prettierrc
 
 RUN pnpm turbo build --filter=backend...
 

@@ -4,6 +4,7 @@ import { AutoFormInputComponentProps } from '@/components/form/type';
 import { Button } from '@/components/ui/button';
 import {
   DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
@@ -33,7 +34,6 @@ export const UploadPluginAdmin = ({ data }: UploadPluginAdminProps) => {
             fieldType: (props: AutoFormInputComponentProps) => (
               <AutoFormFile
                 acceptExtensions={['tgz']}
-                className="mt-5"
                 maxFileSizeInMb={0}
                 showInfo
                 {...props}
@@ -43,7 +43,11 @@ export const UploadPluginAdmin = ({ data }: UploadPluginAdminProps) => {
         }}
         formSchema={formSchema}
         onSubmit={onSubmit}
-        submitButton={props => <Button {...props}>{t('submit')}</Button>}
+        submitButton={props => (
+          <DialogFooter>
+            <Button {...props}>{t('submit')}</Button>
+          </DialogFooter>
+        )}
       />
     </>
   );

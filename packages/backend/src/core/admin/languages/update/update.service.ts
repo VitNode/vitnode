@@ -1,7 +1,6 @@
 import { core_languages } from '@/database/schema/languages';
 import { NotFoundError } from '@/errors';
 import { generateRandomString } from '@/functions/generate-random-string';
-import { setRebuildRequired } from '@/functions/rebuild-required';
 import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
@@ -76,8 +75,6 @@ export class UpdateAdminCoreLanguageService {
       .update(core_languages)
       .set({ updated: new Date() })
       .where(eq(core_languages.code, code));
-
-    setRebuildRequired({ set: 'langs' });
 
     return 'Success!';
   }

@@ -1,5 +1,4 @@
 import { useDialog } from '@/components/ui/dialog';
-import { FetcherErrorType } from '@/graphql/fetcher';
 import { Admin__Core_Plugins__Nav__ShowQuery } from '@/graphql/queries/admin/plugins/dev/nav/admin__core_plugins__nav__show.generated';
 import { ShowAdminNavPluginsObj } from '@/graphql/types';
 import { zodTag } from '@/helpers/zod';
@@ -64,7 +63,7 @@ export const useCreateNavPluginAdmin = ({
     form: UseFormReturn<z.infer<typeof formSchema>>,
   ) => {
     if (!code) return;
-    let error: FetcherErrorType | null = null;
+    let error = '';
 
     if (data) {
       const mutation = await editMutationApi({
@@ -93,7 +92,7 @@ export const useCreateNavPluginAdmin = ({
     }
 
     if (error) {
-      if (error.extensions?.code === 'CODE_ALREADY_EXISTS') {
+      if (error === 'CODE_ALREADY_EXISTS') {
         form.setError('code', {
           message: t('create.code.exists'),
         });

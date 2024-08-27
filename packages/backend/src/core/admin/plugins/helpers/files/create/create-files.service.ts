@@ -9,7 +9,6 @@ import { join } from 'path';
 
 import {
   createDefaultPage,
-  createFunctionsDatabase,
   createInfoJSON,
   createModuleAdminSchema,
   createModuleSchema,
@@ -59,10 +58,6 @@ export class CreateFilesAdminPluginsService {
           {
             name: 'index.ts',
             content: `export default {};\n`,
-          },
-          {
-            name: 'functions.ts',
-            content: createFunctionsDatabase(),
           },
         ],
       },

@@ -16,6 +16,11 @@ export const useDeletePluginAdmin = ({ code, name }: Args) => {
 
   const onSubmit = async () => {
     const mutation = await mutationApi({ code });
+
+    setTimeout(() => {
+      window.location.reload();
+    }, 3000);
+
     if (mutation?.error) {
       toast.error(tCore('errors.title'), {
         description: tCore('errors.internal_server_error'),

@@ -10,6 +10,23 @@ description: A popup that displays information related to an element when the el
 
 ## Usage
 
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+
+<Tabs items={['Wrapper', 'Manual']}>
+  <Tab value="Wrapper">
+```tsx
+import { TooltipWrapper } from 'vitnode-frontend/components/ui/tooltip';
+```
+
+```tsx
+<TooltipWrapper content={<p>Add to library</p>}>
+  <Button>Hover</Button>
+</TooltipWrapper>
+```
+
+  </Tab>
+
+  <Tab value="Manual">
 ```tsx
 import {
   Tooltip,
@@ -29,6 +46,9 @@ import {
   </Tooltip>
 </TooltipProvider>
 ```
+
+  </Tab>
+</Tabs>
 
 ## API Reference
 

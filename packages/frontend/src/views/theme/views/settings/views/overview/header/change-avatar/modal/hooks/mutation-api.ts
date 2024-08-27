@@ -1,6 +1,6 @@
 'use server';
 
-import { fetcher, FetcherErrorType } from '@/graphql/fetcher';
+import { fetcher } from '@/graphql/fetcher';
 import {
   Core_Members__Avatar__Delete,
   Core_Members__Avatar__DeleteMutation,
@@ -19,6 +19,6 @@ export const mutationApi = async () => {
 
     revalidatePath('/', 'layout');
   } catch (e) {
-    return { error: e as FetcherErrorType };
+    return { error: e as string };
   }
 };

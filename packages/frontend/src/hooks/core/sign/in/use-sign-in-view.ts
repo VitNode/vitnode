@@ -1,11 +1,10 @@
-import { FetcherErrorType } from '@/graphql/fetcher';
 import React from 'react';
 import * as z from 'zod';
 
 import { mutationApi } from './mutation-api';
 
 export const useSignInView = () => {
-  const [error, setError] = React.useState<FetcherErrorType | null>(null);
+  const [error, setError] = React.useState('');
 
   const formSchema = z.object({
     email: z.string().email().default(''),
@@ -14,7 +13,7 @@ export const useSignInView = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    setError(null);
+    setError('');
     const mutation = await mutationApi(values);
     if (mutation?.error) {
       setError(mutation.error);

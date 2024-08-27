@@ -7,8 +7,6 @@ import { Link } from '@/navigation';
 import { AlertTriangle, HammerIcon } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 
-import { RebuildRequiredAdmin } from '../../../global/rebuild-required';
-
 export const DashboardCoreAdminView = async () => {
   const [
     {
@@ -29,7 +27,7 @@ export const DashboardCoreAdminView = async () => {
                 className="ml-2 bg-yellow-500 text-black hover:bg-yellow-500"
                 variant="destructive"
               >
-                <AlertTriangle className="size-4" /> Developer Mode
+                <AlertTriangle className="size-4" /> {t('dev_mode')}
               </Badge>
             )}
           </>
@@ -42,8 +40,6 @@ export const DashboardCoreAdminView = async () => {
           </Link>
         </Button>
       </HeaderContent>
-
-      <RebuildRequiredAdmin />
     </>
   );
 };

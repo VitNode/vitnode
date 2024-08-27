@@ -1,13 +1,11 @@
 'use server';
 
-import { fetcher, FetcherErrorType } from '@/graphql/fetcher';
+import { fetcher } from '@/graphql/fetcher';
 import {
   Admin__Core_Plugins__Delete,
   Admin__Core_Plugins__DeleteMutation,
   Admin__Core_Plugins__DeleteMutationVariables,
 } from '@/graphql/mutations/admin/plugins/admin__core_plugins__delete.generated';
-import { CONFIG } from '@/helpers/config-with-env';
-import { revalidatePath } from 'next/cache';
 
 export const mutationApi = async (
   variables: Admin__Core_Plugins__DeleteMutationVariables,
@@ -21,18 +19,6 @@ export const mutationApi = async (
       variables,
     });
   } catch (e) {
-    return { error: e as FetcherErrorType };
-  }
-
-  if (CONFIG.node_development) {
-    // Revalidate after 3 seconds in promise. Wait for fast refresh to compilation files.
-    await new Promise<void>(resolve =>
-      setTimeout(() => {
-        revalidatePath('/', 'layout');
-        resolve();
-      }, 3000),
-    );
-  } else {
-    revalidatePath('/', 'layout');
+    if (typeof e === 'string') return { error: e };
   }
 };

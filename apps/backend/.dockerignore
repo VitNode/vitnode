@@ -5,5 +5,4 @@ npm-debug.log
 README.md
 .git
 public
-.env
-.env.example
+.turbo

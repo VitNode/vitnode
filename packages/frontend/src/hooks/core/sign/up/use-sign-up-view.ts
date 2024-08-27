@@ -64,10 +64,8 @@ export const useSignUpView = () => {
     const { terms, ...rest } = values;
     const mutation = await mutationApi({ ...rest, token });
 
-    if (mutation?.error.extensions) {
-      const { code } = mutation.error.extensions;
-
-      if (code === 'CAPTCHA_FAILED') {
+    if (mutation?.error) {
+      if (mutation.error === 'CAPTCHA_FAILED') {
         toast.error(t('errors.title'), {
           description: t('errors.captcha_failed'),
         });
@@ -75,7 +73,7 @@ export const useSignUpView = () => {
         return;
       }
 
-      if (code === 'EMAIL_ALREADY_EXISTS') {
+      if (mutation.error === 'EMAIL_ALREADY_EXISTS') {
         form.setError(
           'email',
           {
@@ -90,7 +88,7 @@ export const useSignUpView = () => {
         return;
       }
 
-      if (code === 'NAME_ALREADY_EXISTS') {
+      if (mutation.error === 'NAME_ALREADY_EXISTS') {
         form.setError(
           'name',
           {

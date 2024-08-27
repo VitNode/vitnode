@@ -10,15 +10,6 @@ registerEnumType(CaptchaTypeEnum, {
 });
 
 @ObjectType()
-export class RebuildRequiredEditorShowCoreMiddleware {
-  @Field(() => Boolean)
-  langs: boolean;
-
-  @Field(() => Boolean)
-  plugins: boolean;
-}
-
-@ObjectType()
 export class FilesEditorShowCoreMiddleware {
   @Field(() => AllowTypeFilesEnum)
   allow_type: AllowTypeFilesEnum;
@@ -79,9 +70,6 @@ export class ShowCoreMiddlewareObj {
 
   @Field(() => [String])
   plugins: string[];
-
-  @Field(() => RebuildRequiredEditorShowCoreMiddleware)
-  rebuild_required: RebuildRequiredEditorShowCoreMiddleware;
 
   @Field(() => SecurityCoreMiddleware)
   security: SecurityCoreMiddleware;

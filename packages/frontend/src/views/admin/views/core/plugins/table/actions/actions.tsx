@@ -5,10 +5,11 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { TooltipWrapper } from '@/components/ui/tooltip';
 import { ShowAdminPlugins } from '@/graphql/types';
 import { CONFIG } from '@/helpers/config-with-env';
 import { Link, usePathname, useRouter } from '@/navigation';
-import { BadgeHelp, ChevronDown, CodeXml, Trash2 } from 'lucide-react';
+import { BadgeHelp, ChevronDown, CodeXml, Trash2, Upload } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
@@ -23,6 +24,7 @@ export const ActionsItemPluginsAdmin = (props: ShowAdminPlugins) => {
   const { push } = useRouter();
 
   const [isOpenDeleteDialog, setIsOpenDeleteDialog] = React.useState(false);
+  const [isOpenUploadDialog, setIsOpenUploadDialog] = React.useState(false);
 
   return (
     <>
@@ -31,18 +33,41 @@ export const ActionsItemPluginsAdmin = (props: ShowAdminPlugins) => {
         (props.allow_default || CONFIG.node_development) && (
           <SetDefaultPluginActionsAdmin {...props} />
         )}
-      <UploadPluginActionsAdmin {...props} />
 
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button ariaLabel={tCore('more_actions')} size="icon" variant="ghost">
-            <ChevronDown />
-          </Button>
-        </DropdownMenuTrigger>
+      <TooltipWrapper content={t('get_help')}>
+        <Button ariaLabel={t('get_help')} asChild size="icon" variant="ghost">
+          <Link
+            href={props.support_url}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <BadgeHelp />
+          </Link>
+        </Button>
+      </TooltipWrapper>
 
-        <DropdownMenuContent className="w-52">
-          {CONFIG.node_development && (
-            <>
+      {CONFIG.node_development && (
+        <>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button
+                ariaLabel={tCore('more_actions')}
+                size="icon"
+                variant="ghost"
+              >
+                <ChevronDown />
+              </Button>
+            </DropdownMenuTrigger>
+
+            <DropdownMenuContent className="w-52">
+              <DropdownMenuItem
+                onClick={() => {
+                  setIsOpenUploadDialog(true);
+                }}
+              >
+                <Upload /> {tCore('upload_new_version')}
+              </DropdownMenuItem>
+
               <DropdownMenuItem
                 onClick={() => {
                   push(`${pathname}/${props.code}/dev/overview`);
@@ -50,38 +75,34 @@ export const ActionsItemPluginsAdmin = (props: ShowAdminPlugins) => {
               >
                 <CodeXml /> {t('dev_tools')}
               </DropdownMenuItem>
-            </>
-          )}
 
-          <DropdownMenuItem asChild>
-            <Link
-              href={props.support_url}
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              <BadgeHelp /> {t('get_help')}
-            </Link>
-          </DropdownMenuItem>
+              {!props.default && (
+                <DropdownMenuItem
+                  destructive
+                  onClick={() => {
+                    setIsOpenDeleteDialog(true);
+                  }}
+                >
+                  <Trash2 /> {tCore('delete')}
+                </DropdownMenuItem>
+              )}
+            </DropdownMenuContent>
+          </DropdownMenu>
+
+          <UploadPluginActionsAdmin
+            open={isOpenUploadDialog}
+            setOpen={setIsOpenUploadDialog}
+            {...props}
+          />
 
           {!props.default && (
-            <DropdownMenuItem
-              destructive
-              onClick={() => {
-                setIsOpenDeleteDialog(true);
-              }}
-            >
-              <Trash2 /> {tCore('delete')}
-            </DropdownMenuItem>
+            <DeletePluginActionsAdmin
+              open={isOpenDeleteDialog}
+              setOpen={setIsOpenDeleteDialog}
+              {...props}
+            />
           )}
-        </DropdownMenuContent>
-      </DropdownMenu>
-
-      {!props.default && (
-        <DeletePluginActionsAdmin
-          open={isOpenDeleteDialog}
-          setOpen={setIsOpenDeleteDialog}
-          {...props}
-        />
+        </>
       )}
     </>
   );

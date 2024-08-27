@@ -313,11 +313,6 @@ type Query {
   core_theme_editor__show: ShowCoreThemeEditorObj!
 }
 
-type RebuildRequiredEditorShowCoreMiddleware {
-  langs: Boolean!
-  plugins: Boolean!
-}
-
 input SMTPEditAdminEmailSettingsService {
   host: String!
   password: String!
@@ -644,7 +639,6 @@ type ShowCoreMiddlewareObj {
   editor: EditorShowCoreMiddleware!
   languages: [LanguagesCoreMiddleware!]!
   plugins: [String!]!
-  rebuild_required: RebuildRequiredEditorShowCoreMiddleware!
   security: SecurityCoreMiddleware!
 }
 

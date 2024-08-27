@@ -1,6 +1,6 @@
 'use server';
 
-import { fetcher, FetcherErrorType } from '@/graphql/fetcher';
+import { fetcher } from '@/graphql/fetcher';
 import {
   Admin__Core_Languages__Update,
   Admin__Core_Languages__UpdateMutation,
@@ -29,7 +29,7 @@ export const mutationApi = async (formData: FormData) => {
       },
     });
   } catch (e) {
-    return { error: e as FetcherErrorType };
+    return { error: e as string };
   }
 
   revalidatePath('/', 'layout');
