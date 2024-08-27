@@ -4,9 +4,8 @@ import { setRebuildRequired } from '@/functions/rebuild-required';
 import { ABSOLUTE_PATHS_BACKEND } from '@/index';
 import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
-import { eq, sql } from 'drizzle-orm';
+import { eq } from 'drizzle-orm';
 import * as fs from 'fs';
-import { join } from 'path';
 
 import { ChangeFilesAdminPluginsService } from '../helpers/files/change/change.service';
 import { DeleteAdminPluginsArgs } from './dto/delete.args';
@@ -40,30 +39,6 @@ export class DeleteAdminPluginsService {
       });
     }
 
-    // Drop tables
-    const tables: { getTables: () => string[] } = await import(
-      join(
-        process.cwd(),
-        'dist',
-        'plugins',
-        code,
-        'admin',
-        'database',
-        'functions.js',
-      )
-    );
-    const deleteQueries = tables.getTables().map(table => {
-      return `DROP TABLE IF EXISTS ${table} CASCADE;`;
-    });
-
-    try {
-      await this.databaseService.db.execute(sql.raw(deleteQueries.join(' ')));
-    } catch (_) {
-      throw new CustomError({
-        code: 'DELETE_TABLE_ERROR',
-        message: `Error deleting tables for plugin ${code}`,
-      });
-    }
     // Generate migrations
     // TODO: Generate migrations
 
