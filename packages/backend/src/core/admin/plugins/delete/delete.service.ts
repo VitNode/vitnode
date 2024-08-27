@@ -1,6 +1,5 @@
 import { core_plugins } from '@/database/schema/plugins';
 import { CustomError, NotFoundError } from '@/errors';
-import { setRebuildRequired } from '@/functions/rebuild-required';
 import { ABSOLUTE_PATHS_BACKEND } from '@/index';
 import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
@@ -58,8 +57,6 @@ export class DeleteAdminPluginsService {
     await this.databaseService.db
       .delete(core_plugins)
       .where(eq(core_plugins.code, code));
-
-    setRebuildRequired({ set: 'plugins' });
 
     return 'Success!';
   }

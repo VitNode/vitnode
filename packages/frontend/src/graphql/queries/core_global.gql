@@ -34,10 +34,6 @@ query Core_global {
       }
       sticky
     }
-    rebuild_required {
-      langs
-      plugins
-    }
     security {
       captcha {
         site_key

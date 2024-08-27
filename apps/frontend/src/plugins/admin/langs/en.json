@@ -40,13 +40,6 @@
         "desc": "The changes will be visible after the app is rebuilt."
       }
     },
-    "rebuild_required": {
-      "title": "Rebuild Required",
-      "desc": "We're detecting that you need to rebuild your website, because you have made changes in:",
-      "plugins": "<bold>Plugins</bold> - Temporary disabled",
-      "langs": "<bold>Languages</bold> - Changing language disabled",
-      "submit": "Read How To Rebuild"
-    },
     "core": {
       "diagnostic": {
         "title": "Diagnostic Tools",

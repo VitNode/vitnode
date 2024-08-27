@@ -3,7 +3,6 @@
 import { Languages } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 
-import { CONFIG } from '../../helpers/config-with-env';
 import { useGlobals } from '../../hooks/use-globals';
 import { usePathname, useRouter } from '../../navigation';
 import { Button } from '../ui/button';
@@ -17,19 +16,13 @@ import {
 
 export const LanguageSwitcher = () => {
   const t = useTranslations('core');
-  const {
-    config: { rebuild_required },
-    languages,
-  } = useGlobals();
+  const { languages } = useGlobals();
   const locale = useLocale();
   const { replace } = useRouter();
   const pathname = usePathname();
   const enableLocales = languages.filter(lang => lang.enabled);
 
-  if (
-    enableLocales.length <= 1 ||
-    (rebuild_required.langs && !CONFIG.node_development)
-  ) {
+  if (enableLocales.length <= 1) {
     return null;
   }
 

@@ -9,16 +9,14 @@ const ContentDeletePluginActionsAdmin = React.lazy(async () =>
   })),
 );
 
-interface Props extends ShowAdminPlugins {
-  open: boolean;
-  setOpen: (value: boolean) => void;
-}
-
 export const DeletePluginActionsAdmin = ({
   open,
   setOpen,
   ...props
-}: Props) => {
+}: {
+  open: boolean;
+  setOpen: (value: boolean) => void;
+} & ShowAdminPlugins) => {
   return (
     <AlertDialog onOpenChange={setOpen} open={open}>
       <AlertDialogContent>

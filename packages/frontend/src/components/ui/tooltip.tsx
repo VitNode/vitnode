@@ -26,4 +26,28 @@ const TooltipContent = ({
   />
 );
 
-export { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger };
+const TooltipWrapper = ({
+  children,
+  content,
+  ...props
+}: {
+  children: React.ReactNode;
+  content: JSX.Element | string;
+} & React.ComponentProps<typeof TooltipPrimitive.Provider>) => {
+  return (
+    <TooltipProvider {...props}>
+      <Tooltip>
+        <TooltipTrigger asChild>{children}</TooltipTrigger>
+        <TooltipContent>{content}</TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
+  );
+};
+
+export {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+  TooltipWrapper,
+};

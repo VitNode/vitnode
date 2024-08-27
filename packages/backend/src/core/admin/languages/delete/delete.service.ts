@@ -1,6 +1,5 @@
 import { core_languages } from '@/database/schema/languages';
 import { CustomError, NotFoundError } from '@/errors';
-import { setRebuildRequired } from '@/functions/rebuild-required';
 import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
@@ -76,8 +75,6 @@ export class DeleteAdminCoreLanguageService {
     await this.databaseService.db
       .delete(core_languages)
       .where(eq(core_languages.code, code));
-
-    setRebuildRequired({ set: 'langs' });
 
     return 'Success!';
   }

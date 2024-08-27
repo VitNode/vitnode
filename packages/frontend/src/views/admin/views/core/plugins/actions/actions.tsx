@@ -6,8 +6,8 @@ import { UploadActionPluginAdmin } from './upload';
 export const ActionsPluginsAdmin = () => {
   return (
     <>
-      <UploadActionPluginAdmin />
-      {CONFIG.node_development && <CreateActionPluginAdmin />}
+      {CONFIG.node_development && <UploadActionPluginAdmin />}
+      <CreateActionPluginAdmin />
     </>
   );
 };

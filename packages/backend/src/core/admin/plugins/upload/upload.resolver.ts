@@ -1,4 +1,4 @@
-import { AdminAuthGuards } from '@/utils';
+import { AdminAuthGuards, OnlyForDevelopment } from '@/utils';
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
@@ -12,6 +12,7 @@ export class UploadAdminPluginsResolver {
 
   @Mutation(() => ShowAdminPlugins)
   @UseGuards(AdminAuthGuards)
+  @UseGuards(OnlyForDevelopment)
   async admin__core_plugins__upload(
     @Args() args: UploadAdminPluginsArgs,
   ): Promise<ShowAdminPlugins> {

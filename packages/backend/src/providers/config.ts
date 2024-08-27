@@ -44,10 +44,6 @@ export interface ConfigType {
     text: string;
     width: number;
   };
-  rebuild_required: {
-    langs: boolean;
-    plugins: boolean;
-  };
   security: {
     captcha: {
       site_key: string;
@@ -82,10 +78,6 @@ export const DEFAULT_CONFIG_DATA: ConfigType = {
       type: CaptchaTypeEnum.none,
       site_key: '',
     },
-  },
-  rebuild_required: {
-    langs: false,
-    plugins: false,
   },
   editor: {
     sticky: true,

@@ -14,7 +14,6 @@ import { ShowAdminPluginsSortingColumnEnum } from '@/graphql/types';
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
-import { RebuildRequiredAdmin } from '../../../global/rebuild-required';
 import { ActionsPluginsAdmin } from './actions/actions';
 import { ContentPluginsCoreAdmin } from './content';
 
@@ -63,7 +62,6 @@ export const PluginsAdminView = async ({
       </HeaderContent>
 
       <Card className="p-6">
-        <RebuildRequiredAdmin />
         <ContentPluginsCoreAdmin {...data} />
       </Card>
     </>

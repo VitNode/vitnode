@@ -1,5 +1,4 @@
 import { core_languages } from '@/database/schema/languages';
-import { setRebuildRequired } from '@/functions/rebuild-required';
 import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
 import * as fs from 'fs';
@@ -116,8 +115,6 @@ export class CreateAdminCoreLanguageService {
         site_copyright: defaultLanguage.site_copyright,
       })
       .returning();
-
-    setRebuildRequired({ set: 'langs' });
 
     return newLanguage[0];
   }
