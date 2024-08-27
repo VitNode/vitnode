@@ -24,8 +24,10 @@ export const mutationApi = async (formData: FormData) => {
         },
       ],
     });
-  } catch (e) {
-    return { error: e as string };
+  } catch (error) {
+    const e = error as Error;
+
+    return { error: e.message };
   }
 
   revalidatePath('/', 'layout');

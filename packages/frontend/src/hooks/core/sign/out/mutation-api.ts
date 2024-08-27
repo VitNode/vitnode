@@ -17,8 +17,10 @@ export const mutationApi = async () => {
     >({
       query: Core_Sessions__Sign_Out,
     });
-  } catch (e) {
-    return { error: e as string };
+  } catch (error) {
+    const e = error as Error;
+
+    return { error: e.message };
   }
 
   revalidatePath('/', 'page');

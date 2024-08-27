@@ -192,12 +192,16 @@ export async function fetcher<TData, TVariables = object>({
   const json = await res.json();
 
   if (json.errors) {
-    // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors
-    return Promise.reject(
-      (json.errors.at(0) as FetcherErrorType).extensions?.code ??
-        'INTERNAL_SERVER_ERROR',
-    );
+    const errors = json.errors.at(0) as FetcherErrorType | undefined;
+
+    throw new Error(errors?.extensions?.code ?? 'INTERNAL_SERVER_ERROR');
   }
+
+  // if (json.errors) {
+  //   const errors = json.errors.at(0) as FetcherErrorType | undefined;
+
+  //   return Promise.reject(errors);
+  // }
 
   return json.data;
 }

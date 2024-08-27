@@ -65,7 +65,8 @@ export const ExampleComponent = async () => {
 
     return <div>{data.forum.name}</div>;
   } catch (e) {
-    if (e === 'NOT_FOUND') notFound();
+    const error = e as Error;
+    if (e.message === 'NOT_FOUND') notFound();
 
     throw e;
   }
@@ -99,8 +100,10 @@ export const mutationApi = async (
     });
 
     return { data };
-  } catch (e) {
-    return { error: e as string };
+  } catch (error) {
+    const e = error as Error;
+
+    return { error: e.message };
   }
 };
 ```
@@ -111,7 +114,7 @@ export const mutationApi = async (
 
 ### Handle Errors
 
-Based on preview example, you can handle errors using `mutation?.error`. This variable return `string` if there is an error as code error from backend.
+Based on preview example, you can handle errors using `mutation?.error`. This variable return `{ error: string }` if there is an error as code error from backend.
 
 ```tsx title="use-form.ts"
 const onSubmit = async (
@@ -121,9 +124,10 @@ const onSubmit = async (
   const mutation = await mutationApi(values);
 
   if (mutation?.error) {
+    const error = mutation.error as string;
     if (
-      mutation.error === 'PLUGIN_ALREADY_EXISTS' ||
-      mutation.error === 'PLUGIN_VERSION_IS_LOWER'
+      error === 'PLUGIN_ALREADY_EXISTS' ||
+      error === 'PLUGIN_VERSION_IS_LOWER'
     ) {
       form.setError('file', {
         message: t(`errors.${error}`),

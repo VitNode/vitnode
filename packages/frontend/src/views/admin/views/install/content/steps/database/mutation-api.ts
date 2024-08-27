@@ -16,8 +16,10 @@ export const mutationApi = async () => {
     >({
       query: Admin__Install__Create_Database,
     });
-  } catch (e) {
-    return { error: e as string };
+  } catch (error) {
+    const e = error as Error;
+
+    return { error: e.message };
   }
 
   revalidatePath('/[locale]/admin/(vitnode)/install', 'page');

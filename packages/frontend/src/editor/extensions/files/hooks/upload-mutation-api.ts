@@ -34,7 +34,9 @@ export const uploadMutationApi = async (formData: FormData) => {
     revalidatePath('/settings/files', 'page');
 
     return { data };
-  } catch (e) {
-    return { error: e as string };
+  } catch (error) {
+    const e = error as Error;
+
+    return { error: e.message };
   }
 };

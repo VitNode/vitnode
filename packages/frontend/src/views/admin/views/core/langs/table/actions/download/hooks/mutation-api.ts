@@ -23,7 +23,9 @@ export const mutationApi = async (
     revalidatePath('/admin/core/langs', 'page');
 
     return { data };
-  } catch (e) {
-    return { error: e as string };
+  } catch (error) {
+    const e = error as Error;
+
+    return { error: e.message };
   }
 };

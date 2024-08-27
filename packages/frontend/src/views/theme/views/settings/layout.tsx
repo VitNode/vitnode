@@ -1,8 +1,9 @@
 import { Card } from '@/components/ui/card';
 import { HeaderContent } from '@/components/ui/header-content';
 import { getGlobalData } from '@/graphql/get-global-data';
+import { getSessionData } from '@/graphql/get-session-data';
 import { Metadata } from 'next';
-import { useTranslations } from 'next-intl';
+import { notFound } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
 import React from 'react';
 
@@ -23,12 +24,19 @@ export const generateMetadataLayoutSettings = async (): Promise<Metadata> => {
   };
 };
 
-export const LayoutSettingsView = ({
+export const LayoutSettingsView = async ({
   children,
 }: {
   children: React.ReactNode;
 }) => {
-  const t = useTranslations('core');
+  const [t, session] = await Promise.all([
+    getTranslations('core'),
+    getSessionData(),
+  ]);
+
+  if (!session.core_sessions__authorization.user) {
+    notFound();
+  }
 
   return (
     <div className="container my-4">

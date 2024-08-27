@@ -21,8 +21,10 @@ export const mutationApi = async (variables: Args) => {
       query: Admin__Core_Plugins__Nav__Delete,
       variables,
     });
-  } catch (e) {
-    return { error: e as string };
+  } catch (error) {
+    const e = error as Error;
+
+    return { error: e.message };
   }
 
   revalidatePath('/[locale]/admin/(auth)/(vitnode)', 'layout');
