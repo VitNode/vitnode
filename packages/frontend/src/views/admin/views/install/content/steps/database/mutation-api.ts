@@ -1,6 +1,6 @@
 'use server';
 
-import { fetcher, FetcherErrorType } from '@/graphql/fetcher';
+import { fetcher } from '@/graphql/fetcher';
 import {
   Admin__Install__Create_Database,
   Admin__Install__Create_DatabaseMutation,
@@ -17,7 +17,7 @@ export const mutationApi = async () => {
       query: Admin__Install__Create_Database,
     });
   } catch (e) {
-    return { error: e as FetcherErrorType };
+    return { error: e as string };
   }
 
   revalidatePath('/[locale]/admin/(vitnode)/install', 'page');

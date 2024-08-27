@@ -15,7 +15,7 @@ export const FormSignInAdmin = () => {
 
   return (
     <CardContent className="p-6">
-      {error?.extensions?.code === 'ACCESS_DENIED' && (
+      {error === 'ACCESS_DENIED' && (
         <Alert className="mb-6" variant="error">
           <AlertCircle className="size-4" />
           <AlertTitle>{t('sign_in.error.title')}</AlertTitle>

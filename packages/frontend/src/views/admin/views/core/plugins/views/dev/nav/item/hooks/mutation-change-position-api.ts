@@ -1,6 +1,6 @@
 'use server';
 
-import { fetcher, FetcherErrorType } from '@/graphql/fetcher';
+import { fetcher } from '@/graphql/fetcher';
 import {
   Admin__Core_Plugins__Nav__Change_Position,
   Admin__Core_Plugins__Nav__Change_PositionMutation,
@@ -24,6 +24,6 @@ export const mutationChangePositionApi = async (
 
     return { data };
   } catch (e) {
-    return { error: e as FetcherErrorType };
+    return { error: e as string };
   }
 };

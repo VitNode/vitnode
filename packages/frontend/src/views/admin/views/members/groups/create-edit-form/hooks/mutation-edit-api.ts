@@ -1,6 +1,6 @@
 'use server';
 
-import { fetcher, FetcherErrorType } from '@/graphql/fetcher';
+import { fetcher } from '@/graphql/fetcher';
 import {
   Admin__Core_Groups__Edit,
   Admin__Core_Groups__EditMutation,
@@ -20,7 +20,7 @@ export const mutationEditApi = async (
       variables,
     });
   } catch (e) {
-    return { error: e as FetcherErrorType };
+    return { error: e as string };
   }
 
   revalidatePath('/', 'layout');

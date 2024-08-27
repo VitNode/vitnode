@@ -1,6 +1,6 @@
 'use server';
 
-import { fetcher, FetcherErrorType } from '@/graphql/fetcher';
+import { fetcher } from '@/graphql/fetcher';
 import {
   Admin_Sessions__Sign_Out,
   Admin_Sessions__Sign_OutMutation,
@@ -18,7 +18,7 @@ export const mutationApi = async () => {
       query: Admin_Sessions__Sign_Out,
     });
   } catch (e) {
-    return { error: e as FetcherErrorType };
+    return { error: e as string };
   }
 
   revalidatePath('/admin', 'layout');

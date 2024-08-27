@@ -1,5 +1,6 @@
 {
   "admin": {
+    "dev_mode": "Development Mode",
     "title": "Admin Control Panel",
     "title_short": "Admin",
     "home_page": "Home Page",
@@ -15,8 +16,8 @@
       "tablet": "Tablet",
       "mobile": "Mobile",
       "dev_mode_disabled": {
-        "title": "Developer Mode Disabled",
-        "desc": "To unlock some features, you need to enable developer mode."
+        "title": "Development Mode Disabled",
+        "desc": "To unlock some features, you need to enable development mode."
       },
       "colors": {
         "title": "Colors",
@@ -241,7 +242,7 @@
             "label": "Code",
             "desc": "Must be unique. Min 3-50 characters. Allowed characters: a-z, 0-9, -",
             "invalid": "You can use only a-z, 0-9, -",
-            "exists": "Plugin with this code already exists."
+            "exists": "Plugin with this code already exists. If you want to update the plugin, use the upload new version form from the plugin dropdown menu."
           },
           "description": {
             "label": "Description"
@@ -267,7 +268,7 @@
           "success": "Successfully uploaded plugin.",
           "success_update": "Successfully updated plugin.",
           "errors": {
-            "PLUGIN_ALREADY_EXISTS": "Plugin with this code already exists.",
+            "PLUGIN_ALREADY_EXISTS": "Plugin with this code already exists. If you want to update the plugin, use the upload new version form from the plugin dropdown menu.",
             "PLUGIN_VERSION_IS_LOWER": "The version of the uploaded plugin is lower than the current version."
           },
           "submit": "Upload"

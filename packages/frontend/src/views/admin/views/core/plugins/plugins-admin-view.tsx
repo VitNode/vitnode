@@ -16,6 +16,7 @@ import { getTranslations } from 'next-intl/server';
 
 import { ActionsPluginsAdmin } from './actions/actions';
 import { ContentPluginsCoreAdmin } from './content';
+import { CONFIG } from '@/helpers/config-with-env';
 
 export interface PluginsAdminViewProps {
   searchParams: SearchParamsPagination;
@@ -28,7 +29,7 @@ const getData = async (variables: Admin__Core_Plugins__ShowQueryVariables) => {
   >({
     query: Admin__Core_Plugins__Show,
     variables,
-    cache: 'force-cache',
+    cache: CONFIG.node_development ? 'default' : 'force-cache',
   });
 
   return data;

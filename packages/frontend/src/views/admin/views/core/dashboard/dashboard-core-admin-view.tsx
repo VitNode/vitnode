@@ -27,7 +27,7 @@ export const DashboardCoreAdminView = async () => {
                 className="ml-2 bg-yellow-500 text-black hover:bg-yellow-500"
                 variant="destructive"
               >
-                <AlertTriangle className="size-4" /> Developer Mode
+                <AlertTriangle className="size-4" /> {t('dev_mode')}
               </Badge>
             )}
           </>

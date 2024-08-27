@@ -71,6 +71,13 @@ export interface FetcherArgs<TVariables> {
   variables?: TVariables;
 }
 
+interface FetcherErrorType {
+  message: string;
+  extensions?: {
+    code: string;
+  };
+}
+
 export async function fetcher<TData, TVariables = object>({
   cache,
   headers,
@@ -186,15 +193,11 @@ export async function fetcher<TData, TVariables = object>({
 
   if (json.errors) {
     // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors
-    return Promise.reject(json.errors.at(0));
+    return Promise.reject(
+      (json.errors.at(0) as FetcherErrorType).extensions?.code ??
+        'INTERNAL_SERVER_ERROR',
+    );
   }
 
   return json.data;
-}
-
-export interface FetcherErrorType {
-  message: string;
-  extensions?: {
-    code: string;
-  };
 }

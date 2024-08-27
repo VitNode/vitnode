@@ -1,6 +1,6 @@
 'use server';
 
-import { fetcher, FetcherErrorType } from './fetcher';
+import { fetcher } from './fetcher';
 import {
   Admin__Core_Groups__Show_Short,
   Admin__Core_Groups__Show_ShortQuery,
@@ -21,6 +21,6 @@ export const getGroupsShortApi = async (
 
     return { data };
   } catch (e) {
-    return { error: e as FetcherErrorType };
+    return { error: e as string };
   }
 };

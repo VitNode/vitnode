@@ -12,6 +12,7 @@ import {
   ConfigPlugin,
   currentUnixDate,
   CustomError,
+  execShellCommand,
   FileUpload,
 } from '../../../..';
 import { ChangeFilesAdminPluginsService } from '../helpers/files/change/change.service';
@@ -275,9 +276,17 @@ export class UploadAdminPluginsService {
 
     const plugin = plugins[0];
 
-    // Run migration
-    // TODO: Fix this
-    // await migrate({ pluginCode: config.code });
+    // Generate migration
+    try {
+      await execShellCommand(
+        'npm run drizzle-kit up && npm run drizzle-kit generate',
+      );
+    } catch (_) {
+      throw new CustomError({
+        code: 'GENERATE_MIGRATION_ERROR',
+        message: 'Error generating migration',
+      });
+    }
 
     return plugin;
   }

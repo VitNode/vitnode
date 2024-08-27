@@ -1,5 +1,4 @@
 import { useDialog } from '@/components/ui/dialog';
-import { FetcherErrorType } from '@/graphql/fetcher';
 import { ShowAdminPlugins } from '@/graphql/types';
 import { useSessionAdmin } from '@/hooks/use-session-admin';
 import { usePathname, useRouter } from '@/navigation';
@@ -64,7 +63,7 @@ export const useCreateEditPluginAdmin = ({ data }: Args) => {
     values: z.infer<typeof formSchema>,
     form: UseFormReturn<z.infer<typeof formSchema>>,
   ) => {
-    let error: FetcherErrorType | null = null;
+    let error = '';
 
     if (data) {
       const mutation = await mutationEditApi({
@@ -96,7 +95,7 @@ export const useCreateEditPluginAdmin = ({ data }: Args) => {
     }
 
     if (error) {
-      if (error.extensions?.code === 'PLUGIN_ALREADY_EXISTS') {
+      if (error === 'PLUGIN_ALREADY_EXISTS') {
         form.setError('code', {
           message: t('create.code.exists'),
         });

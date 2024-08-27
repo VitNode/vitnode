@@ -53,7 +53,7 @@ export const useUploadFilesHandlerEditor = ({
     formData.append('folder', allowUploadFiles.folder);
     const mutation = await uploadMutationApi(formData);
 
-    if (mutation.error) {
+    if (!mutation.data) {
       toast.error(tCore('errors.title'), {
         description: tCore('errors.internal_server_error'),
       });

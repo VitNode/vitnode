@@ -1,6 +1,6 @@
 'use server';
 
-import { fetcher, FetcherErrorType, FetcherUploads } from '@/graphql/fetcher';
+import { fetcher, FetcherUploads } from '@/graphql/fetcher';
 import {
   Admin__Core_Theme_Editor__Edit,
   Admin__Core_Theme_Editor__EditMutation,
@@ -46,7 +46,7 @@ export const mutationApi = async (formData: FormData) => {
       files,
     });
   } catch (e) {
-    return { error: e as FetcherErrorType };
+    return { error: e as string };
   }
 
   revalidatePath('/', 'layout');

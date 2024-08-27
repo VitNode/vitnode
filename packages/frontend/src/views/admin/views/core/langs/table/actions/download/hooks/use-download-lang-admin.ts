@@ -60,7 +60,7 @@ export const useDownloadLangAdmin = ({
       plugins: values.all ? [] : values.plugins,
     });
 
-    if (mutation.error) {
+    if (!mutation.data) {
       toast.error(t('errors.title'), {
         description: t('errors.internal_server_error'),
       });

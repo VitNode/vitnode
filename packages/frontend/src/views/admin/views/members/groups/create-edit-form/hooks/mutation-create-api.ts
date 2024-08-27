@@ -1,6 +1,6 @@
 'use server';
 
-import { fetcher, FetcherErrorType } from '@/graphql/fetcher';
+import { fetcher } from '@/graphql/fetcher';
 import {
   Admin__Core_Groups__Create,
   Admin__Core_Groups__CreateMutation,
@@ -20,7 +20,7 @@ export const mutationCreateApi = async (
       variables,
     });
   } catch (e) {
-    return { error: e as FetcherErrorType };
+    return { error: e as string };
   }
 
   revalidatePath('/admin/members/groups', 'page');

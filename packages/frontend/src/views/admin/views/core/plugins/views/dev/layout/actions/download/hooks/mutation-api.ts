@@ -1,6 +1,6 @@
 'use server';
 
-import { fetcher, FetcherErrorType } from '@/graphql/fetcher';
+import { fetcher } from '@/graphql/fetcher';
 import {
   Admin__Core_Plugins__Download,
   Admin__Core_Plugins__DownloadMutation,
@@ -20,12 +20,10 @@ export const mutationApi = async (
       variables,
     });
 
-    if (variables.version && variables.versionCode) {
-      revalidatePath(`/admin/core/plugins/${variables.code}/dev`, 'layout');
-    }
+    revalidatePath('/', 'layout');
 
     return { data };
   } catch (e) {
-    return { error: e as FetcherErrorType };
+    return { error: e as string };
   }
 };

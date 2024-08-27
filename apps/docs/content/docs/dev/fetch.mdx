@@ -36,6 +36,10 @@ export const ExampleComponent = async () => {
 };
 ```
 
+### Handle Errors
+
+// TODO: Add error handling
+
 ## Mutations
 
 To mutate data, you can use [Server Action from NextJS](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations) with the `fetcher` function.
@@ -48,7 +52,7 @@ import {
   Core_Sessions__Sign_OutMutation,
   Core_Sessions__Sign_OutMutationVariables,
 } from '@/graphql/graphql';
-import { fetcher, FetcherErrorType } from 'vitnode-frontend/graphql/fetcher';
+import { fetcher } from 'vitnode-frontend/graphql/fetcher';
 
 export const mutationApi = async (
   variables: Core_Sessions__Sign_OutMutationVariables,
@@ -64,7 +68,7 @@ export const mutationApi = async (
 
     return { data };
   } catch (e) {
-    return { error: e as FetcherErrorType };
+    return { error: e as string };
   }
 };
 ```
