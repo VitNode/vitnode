@@ -5,13 +5,13 @@ import { cn } from '@/helpers/classnames';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 import React from 'react';
-import { DefaultValues, useForm, UseFormReturn } from 'react-hook-form';
+import { useForm, UseFormReturn } from 'react-hook-form';
 import * as z from 'zod';
 
 import { Button } from '../ui/button';
 import { Form } from '../ui/form';
 import { Dependency, FieldConfig, ZodObjectOrWrapped } from './type';
-import { getDefaultValues, getObjectFormSchema } from './utils';
+import { getBaseSchema, getDefaultValues, getObjectFormSchema } from './utils';
 
 export function AutoForm<T extends ZodObjectOrWrapped>({
   formSchema,
@@ -43,16 +43,15 @@ export function AutoForm<T extends ZodObjectOrWrapped>({
 }) {
   const t = useTranslations('core');
   const objectFormSchema = getObjectFormSchema(formSchema);
-  const defaultValues: DefaultValues<z.infer<typeof objectFormSchema>> | null =
-    getDefaultValues(objectFormSchema, fieldConfig);
+  const defaultValues = getDefaultValues(objectFormSchema);
 
   const form = useForm<z.infer<typeof objectFormSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues,
   });
-  const values = form.watch();
+  // const values = form.watch();
   // valuesString is needed because form.watch() returns a new object every time
-  const valuesString = JSON.stringify(values);
+  // const valuesString = JSON.stringify(values);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const parsedValues = formSchema.safeParse(values);
@@ -61,12 +60,12 @@ export function AutoForm<T extends ZodObjectOrWrapped>({
     }
   };
 
-  React.useEffect(() => {
-    const parsedValues = formSchema.safeParse(values);
-    if (parsedValues.success) {
-      onValuesChange?.(parsedValues.data as z.infer<T>);
-    }
-  }, [valuesString]);
+  // React.useEffect(() => {
+  //   const parsedValues = formSchema.safeParse(values);
+  //   if (parsedValues.success) {
+  //     onValuesChange?.(parsedValues.data as z.infer<T>);
+  //   }
+  // }, [valuesString]);
 
   return (
     <Form {...form}>

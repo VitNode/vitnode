@@ -31,6 +31,7 @@ export const AutoFormInput = ({
             {...props}
             {...field}
             disabled={isDisabled || props.disabled}
+            onChange={field.onChange}
             value={props.value ?? value}
           />
         </FormControl>

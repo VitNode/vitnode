@@ -2,6 +2,7 @@ import { useForm, useFormContext } from 'react-hook-form';
 import * as z from 'zod';
 
 import { FormField } from '../ui/form';
+import { AutoFormInput } from './fields/input';
 import { Dependency, FieldConfig } from './type';
 import resolveDependencies, {
   getBaseSchema,
@@ -33,6 +34,7 @@ export function AutoFormObject<T extends z.ZodObject<any, any>>({
     <>
       {Object.keys(shape as object).map(name => {
         let item = shape[name] as z.ZodAny;
+
         const zodBaseType = getBaseType(item);
         const key = [...path, name].join('.');
 
@@ -63,6 +65,10 @@ export function AutoFormObject<T extends z.ZodObject<any, any>>({
 
         const fieldConfigItem = fieldConfig[name];
         if (!fieldConfigItem) return;
+        const InputComponent = fieldConfigItem.fieldType ?? AutoFormInput;
+        if (typeof InputComponent !== 'function') {
+          return <></>;
+        }
 
         const zodInputProps = zodToHtmlInputProps(item);
 
@@ -75,33 +81,21 @@ export function AutoFormObject<T extends z.ZodObject<any, any>>({
             control={form.control}
             key={name}
             name={key}
-            render={({ field }) => {
-              const InputComponent = fieldConfigItem.fieldType;
-
-              if (
-                InputComponent === undefined ||
-                typeof InputComponent !== 'function'
-              ) {
-                return <></>;
-              }
-
-              return (
-                <InputComponent
-                  autoFormProps={{
-                    field,
-                    fieldConfigItem,
-                    isRequired:
-                      (isRequiredByDependency || zodInputProps.required) ??
-                      false,
-                    zodItem: item,
-                    theme,
-                    isDisabled,
-                  }}
-                  key={key}
-                  {...zodToHtmlInputProps(item)}
-                />
-              );
-            }}
+            render={({ field }) => (
+              <InputComponent
+                autoFormProps={{
+                  field,
+                  fieldConfigItem,
+                  isRequired:
+                    (isRequiredByDependency || zodInputProps.required) ?? false,
+                  zodItem: item,
+                  theme,
+                  isDisabled,
+                }}
+                key={key}
+                {...zodToHtmlInputProps(item)}
+              />
+            )}
           />
         );
       })}

@@ -1,6 +1,7 @@
 import { useDialog } from '@/components/ui/dialog';
 import { nameRegex } from '@/hooks/core/sign/up/use-sign-up-view';
 import { useTranslations } from 'next-intl';
+import React from 'react';
 import { UseFormReturn } from 'react-hook-form';
 import { toast } from 'sonner';
 import * as z from 'zod';
@@ -9,6 +10,9 @@ import { mutationApi } from './mutation-api';
 
 export const useCreateUserAdmin = () => {
   const t = useTranslations('admin.members.users.create');
+  const [values, setValues] = React.useState<
+    Partial<z.infer<typeof formSchema>>
+  >({});
   const tCore = useTranslations('core');
   const { setOpen } = useDialog();
 
@@ -84,5 +88,5 @@ export const useCreateUserAdmin = () => {
     });
   };
 
-  return { formSchema, onSubmit };
+  return { formSchema, onSubmit, values, setValues };
 };

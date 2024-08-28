@@ -14,7 +14,6 @@ export interface FieldConfigItem {
   description?: React.ReactNode;
   fieldType: (props: AutoFormInputComponentProps) => React.ReactNode;
   label?: string;
-
   renderParent?: (props: FieldRenderParentProps) => null | React.ReactElement;
 }
 
@@ -47,11 +46,9 @@ export type ValueDependency<T extends FieldValues> = {
     | DependencyType.REQUIRES;
 } & BaseDependency<T>;
 
-export type EnumValues = readonly [string, ...string[]];
-
 export type OptionsDependency<T extends FieldValues> = {
   // Partial array of values from sourceField that will trigger the dependency
-  options: EnumValues;
+  options: z.EnumValues;
 
   type: DependencyType.SETS_OPTIONS;
 } & BaseDependency<T>;

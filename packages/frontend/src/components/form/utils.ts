@@ -4,7 +4,6 @@ import * as z from 'zod';
 import {
   Dependency,
   DependencyType,
-  EnumValues,
   FieldConfig,
   ZodObjectOrWrapped,
 } from './type';
@@ -122,7 +121,7 @@ export default function resolveDependencies<
   let isDisabled = false;
   let isHidden = false;
   let isRequired = false;
-  let overrideOptions: EnumValues | undefined;
+  let overrideOptions: undefined | z.EnumValues;
 
   const currentFieldValue = watch(currentFieldName as string);
 
@@ -205,7 +204,6 @@ export function getDefaultValueInZodStack(schema: z.ZodAny): any {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function getDefaultValues<Schema extends z.ZodObject<any, any>>(
   schema: Schema,
-  fieldConfig?: FieldConfig<z.infer<Schema>>,
 ) {
   const { shape } = schema;
   type DefaultValuesType = DefaultValues<Partial<z.infer<Schema>>>;
@@ -219,7 +217,6 @@ export function getDefaultValues<Schema extends z.ZodObject<any, any>>(
       const defaultItems = getDefaultValues(
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         getBaseSchema(item) as unknown as z.ZodObject<any, any>,
-        fieldConfig?.[key] as FieldConfig<z.infer<Schema>>,
       );
 
       // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
@@ -234,14 +231,8 @@ export function getDefaultValues<Schema extends z.ZodObject<any, any>>(
         }
       }
     } else {
-      let defaultValue = getDefaultValueInZodStack(item);
-      if (
-        (defaultValue === null || defaultValue === '') &&
-        fieldConfig?.[key]
-      ) {
-        defaultValue = (fieldConfig[key] as unknown as { defaultValue: string })
-          .defaultValue;
-      }
+      const defaultValue = getDefaultValueInZodStack(item);
+
       if (defaultValue !== undefined) {
         defaultValues[key as keyof DefaultValuesType] = defaultValue;
       }
