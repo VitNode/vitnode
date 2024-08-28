@@ -450,7 +450,8 @@
           "joined": "Joined"
         },
         "create": {
-          "title": "Create User"
+          "title": "Create User",
+          "success": "User has been created."
         }
       },
       "groups": {

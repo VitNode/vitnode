@@ -10,6 +10,7 @@ import { SignInCoreSessionsResolver } from './sign_in/sign_in.resolver';
 import { SignInCoreSessionsService } from './sign_in/sign_in.service';
 import { SignOutCoreSessionsResolver } from './sign_out/sign_out.resolver';
 import { SignOutCoreSessionsService } from './sign_out/sign_out.service';
+import { SignUpHelperService } from './sign_up/helpers/sign-up-helper.service';
 import { SignUpCoreSessionsResolver } from './sign_up/sign_up.resolver';
 import { SignUpCoreSessionsService } from './sign_up/sign_up.service';
 
@@ -24,6 +25,7 @@ import { SignUpCoreSessionsService } from './sign_up/sign_up.service';
     CoreSessionsCron,
     SignUpCoreSessionsResolver,
     SignUpCoreSessionsService,
+    SignUpHelperService,
   ],
   imports: [DevicesCoreSessionsModule],
 })

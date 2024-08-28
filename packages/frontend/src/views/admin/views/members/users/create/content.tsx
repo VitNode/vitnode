@@ -18,7 +18,7 @@ export const ContentCreateUserUsersMembersAdmin = () => {
       fieldConfig={{
         name: {
           label: t('sign_up.form.name.label'),
-          fieldType: AutoFormInput,
+          fieldType: props => <AutoFormInput max={32} min={3} {...props} />,
           renderParent: ({ children, field }: FieldRenderParentProps) => {
             const value: string = field.value ?? '';
 
@@ -26,7 +26,7 @@ export const ContentCreateUserUsersMembersAdmin = () => {
               <>
                 {children}
                 {value.length > 0 && (
-                  <span className="text-muted-foreground mt-1 block text-sm">
+                  <span className="text-muted-foreground mt-1 block max-w-md truncate text-sm">
                     {t.rich('sign_up.form.name.your_id', {
                       id: () => (
                         <span className="text-foreground font-medium">

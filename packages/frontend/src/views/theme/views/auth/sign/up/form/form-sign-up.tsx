@@ -25,7 +25,7 @@ export const FormSignUp = () => {
       fieldConfig={{
         name: {
           label: t('sign_up.form.name.label'),
-          fieldType: AutoFormInput,
+          fieldType: props => <AutoFormInput max={32} min={3} {...props} />,
           renderParent: ({ children, field }: FieldRenderParentProps) => {
             const value: string = field.value ?? '';
 

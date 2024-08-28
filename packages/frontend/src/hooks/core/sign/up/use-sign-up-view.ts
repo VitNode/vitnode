@@ -17,7 +17,9 @@ export const useSignUpView = () => {
   const formSchema = z.object({
     name: z
       .string()
-      .min(3)
+      .min(3, {
+        message: t('forms.min_length', { length: 3 }),
+      })
       .max(32, {
         message: t('forms.max_length', { length: 32 }),
       })
@@ -25,7 +27,12 @@ export const useSignUpView = () => {
         message: t('sign_up.form.name.invalid'),
       })
       .default(''),
-    email: z.string().email().default(''),
+    email: z
+      .string()
+      .email({
+        message: t('forms.email_invalid'),
+      })
+      .default(''),
     password: z
       .string()
       .regex(
@@ -78,11 +85,7 @@ export const useSignUpView = () => {
             shouldFocus: true,
           },
         );
-
-        return;
-      }
-
-      if (mutation.error === 'NAME_ALREADY_EXISTS') {
+      } else if (mutation.error === 'NAME_ALREADY_EXISTS') {
         form.setError(
           'name',
           {
