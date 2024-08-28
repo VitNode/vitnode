@@ -14,6 +14,7 @@ import { ShowAdminMembersSortingColumnEnum } from '@/graphql/types';
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
+import { CreateUserUsersMembersAdmin } from './create/create';
 import { TableUsersMembersAdmin } from './table/table';
 
 const getData = async (variables: Admin__Core_Members__ShowQueryVariables) => {
@@ -66,7 +67,9 @@ export const UsersMembersAdminView = async ({
 
   return (
     <>
-      <HeaderContent h1={t('title')} />
+      <HeaderContent h1={t('title')}>
+        <CreateUserUsersMembersAdmin />
+      </HeaderContent>
 
       <Card className="p-6">
         <TableUsersMembersAdmin {...data} />

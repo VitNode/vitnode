@@ -7,20 +7,19 @@ import * as z from 'zod';
 import { useCaptcha } from '../../../use-captcha';
 import { mutationApi } from './mutation-api';
 
-const nameRegex = /^(?!.* {2})[\p{L}\p{N}._@ -]*$/u;
+export const nameRegex = /^(?!.* {2})[\p{L}\p{N}._@ -]*$/u;
 
 export const useSignUpView = () => {
   const t = useTranslations('core');
   const [successName, setSuccessName] = React.useState('');
-  const [values, setValues] = React.useState<
-    Partial<z.infer<typeof formSchema>>
-  >({});
   const { getTokenFromCaptcha, isReady } = useCaptcha();
 
   const formSchema = z.object({
     name: z
       .string()
-      .min(3)
+      .min(3, {
+        message: t('forms.min_length', { length: 3 }),
+      })
       .max(32, {
         message: t('forms.max_length', { length: 32 }),
       })
@@ -28,14 +27,16 @@ export const useSignUpView = () => {
         message: t('sign_up.form.name.invalid'),
       })
       .default(''),
-    email: z.string().email().default(''),
+    email: z
+      .string()
+      .email({
+        message: t('forms.email_invalid'),
+      })
+      .default(''),
     password: z
       .string()
       .regex(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-_=+{};:,<.>]).{8,}$/,
-        {
-          message: t('sign_up.form.password.invalid'),
-        },
       )
       .default(''),
     terms: z
@@ -84,11 +85,7 @@ export const useSignUpView = () => {
             shouldFocus: true,
           },
         );
-
-        return;
-      }
-
-      if (mutation.error === 'NAME_ALREADY_EXISTS') {
+      } else if (mutation.error === 'NAME_ALREADY_EXISTS') {
         form.setError(
           'name',
           {
@@ -114,8 +111,6 @@ export const useSignUpView = () => {
   };
 
   return {
-    values,
-    setValues,
     formSchema,
     onSubmit,
     isReady,

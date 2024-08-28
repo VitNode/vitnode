@@ -1,25 +1,20 @@
-'use client';
-
 import { AutoForm } from '@/components/form/auto-form';
-import { AutoFormCheckbox } from '@/components/form/fields/checkbox';
 import { AutoFormInput } from '@/components/form/fields/input';
 import { FieldRenderParentProps } from '@/components/form/type';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { removeSpecialCharacters } from '@/helpers/special-characters';
-import { useSignUpView } from '@/hooks/core/sign/up/use-sign-up-view';
 import { useTranslations } from 'next-intl';
 
-import { useInstallVitnode } from '../../hooks/use-install-vitnode';
+import { useCreateUserAdmin } from './hooks/use-create-user-admin';
 
-export const AccountInstallConfigsView = () => {
+export const ContentCreateUserUsersMembersAdmin = () => {
+  const { formSchema, onSubmit } = useCreateUserAdmin();
+
   const t = useTranslations('core');
-  const { onSubmit, formSchema } = useSignUpView();
-  const { setCurrentStep } = useInstallVitnode();
 
   return (
     <AutoForm
-      className="max-w-2xl p-6 pt-0"
       fieldConfig={{
         name: {
           label: t('sign_up.form.name.label'),
@@ -31,7 +26,7 @@ export const AccountInstallConfigsView = () => {
               <>
                 {children}
                 {value.length > 0 && (
-                  <span className="text-muted-foreground mt-1 block text-sm">
+                  <span className="text-muted-foreground mt-1 block max-w-md truncate text-sm">
                     {t.rich('sign_up.form.name.your_id', {
                       id: () => (
                         <span className="text-foreground font-medium">
@@ -86,29 +81,14 @@ export const AccountInstallConfigsView = () => {
             );
           },
         },
-        terms: {
-          label: t('sign_up.form.terms.label'),
-          description: t('sign_up.form.terms.desc'),
-          fieldType: AutoFormCheckbox,
-        },
-        newsletter: {
-          label: t('sign_up.form.newsletter.label'),
-          description: t('sign_up.form.newsletter.desc'),
-          fieldType: AutoFormCheckbox,
-        },
       }}
       formSchema={formSchema}
-      onSubmit={async (val, form) => {
-        await onSubmit(val, form);
-        setCurrentStep(prev => prev + 1);
-      }}
+      onSubmit={onSubmit}
       submitButton={props => (
         <Button {...props} className="w-full">
           {t('sign_up.form.submit')}
         </Button>
       )}
-    >
-      <div id="vitnode_captcha" />
-    </AutoForm>
+    />
   );
 };

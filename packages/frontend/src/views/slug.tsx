@@ -19,11 +19,9 @@ export interface SlugViewProps {
 export const generateMetadataSlug = async ({
   params: { slug },
 }: SlugViewProps): Promise<Metadata> => {
-  switch (slug[0]) {
-    case 'login':
-      return generateMetadataSignIn();
-    case 'register':
-      return generateMetadataSignUp();
+  if (!slug[1]) {
+    if (slug[0] === 'login') return generateMetadataSignIn();
+    if (slug[0] === 'register') return generateMetadataSignUp();
   }
 
   return {};
@@ -34,15 +32,12 @@ export const SlugView = (props: SlugViewProps) => {
     params: { slug },
   } = props;
 
-  switch (slug[0]) {
-    case 'login':
-      return <SignInView />;
-    case 'register':
-      return <SignUpView />;
-    case 'profile':
-      if (slug[1]) {
-        return <ProfileView id={slug[1]} />;
-      }
+  if (slug[0] === 'profile' && slug[1] && !slug[2])
+    return <ProfileView id={slug[1]} />;
+
+  if (!slug[1]) {
+    if (slug[0] === 'login') return <SignInView />;
+    if (slug[0] === 'register') return <SignUpView />;
   }
 
   return notFound();

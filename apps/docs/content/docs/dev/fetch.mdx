@@ -58,6 +58,7 @@ You can use `try-catch` to handle errors.
 
 ```tsx title="example-component.tsx"
 import { notFound } from 'next/navigation';
+import { ErrorView } from 'vitnode-frontend/views/theme/views/error/error-view';
 
 export const ExampleComponent = async () => {
   try {
@@ -65,10 +66,13 @@ export const ExampleComponent = async () => {
 
     return <div>{data.forum.name}</div>;
   } catch (e) {
-    const error = e as Error;
-    if (e.message === 'NOT_FOUND') notFound();
+    const e = error as Error;
 
-    throw e;
+    if (e.message === 'ACCESS_DENIED') {
+      return <ErrorView code="403" />;
+    }
+
+    throw new Error(e.message);
   }
 };
 ```

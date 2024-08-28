@@ -52,15 +52,7 @@ yarn-error.log*
 /apps/backend/schema.gql
 
 ## Configuration
-/apps/backend/src/plugins/*/admin/database/migrations
 /apps/backend/src/plugins/core/
 
 ## Frontend
-/apps/frontend/app/not-found.tsx
-/apps/frontend/app/\[\locale\]\/(main)/(vitnode)
-/apps/frontend/app/\[\locale\]\/(main)/page.tsx
-/apps/frontend/app/\[\locale\]\/admin/layout.tsx
-/apps/frontend/app/\[\locale\]\/admin/(vitnode)
-/apps/frontend/app/\[\locale\]\/admin/(auth)/(vitnode)
-/apps/frontend/app/\[\locale\]\/admin/(auth)/layout.tsx
 /apps/frontend/next-env.d.ts
