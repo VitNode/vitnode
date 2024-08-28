@@ -448,6 +448,9 @@
           "email": "Email",
           "group": "Group",
           "joined": "Joined"
+        },
+        "create": {
+          "title": "Create User"
         }
       },
       "groups": {

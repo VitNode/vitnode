@@ -16,13 +16,11 @@ export const SlugDevPluginsAdminView = (props: SlugDevPluginsAdminProps) => {
     params: { slug },
   } = props;
 
-  switch (slug[0]) {
-    case 'overview':
+  if (!slug[1]) {
+    if (slug[0] === 'overview')
       return <OverviewDevPluginAdminView {...props} />;
-    case 'files':
-      return <FilesDevPluginAdminView {...props} />;
-    case 'nav':
-      return <NavDevPluginAdminView {...props} />;
+    if (slug[0] === 'files') return <FilesDevPluginAdminView {...props} />;
+    if (slug[0] === 'nav') return <NavDevPluginAdminView {...props} />;
   }
 
   notFound();

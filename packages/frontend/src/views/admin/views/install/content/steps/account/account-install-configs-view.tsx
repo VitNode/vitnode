@@ -3,6 +3,7 @@
 import { AutoForm } from '@/components/form/auto-form';
 import { AutoFormCheckbox } from '@/components/form/fields/checkbox';
 import { AutoFormInput } from '@/components/form/fields/input';
+import { FieldRenderParentProps } from '@/components/form/type';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { removeSpecialCharacters } from '@/helpers/special-characters';
@@ -13,7 +14,7 @@ import { useInstallVitnode } from '../../hooks/use-install-vitnode';
 
 export const AccountInstallConfigsView = () => {
   const t = useTranslations('core');
-  const { onSubmit, formSchema, values, setValues } = useSignUpView();
+  const { onSubmit, formSchema } = useSignUpView();
   const { setCurrentStep } = useInstallVitnode();
 
   return (
@@ -23,14 +24,14 @@ export const AccountInstallConfigsView = () => {
         name: {
           label: t('sign_up.form.name.label'),
           fieldType: AutoFormInput,
-          description: (() => {
-            const value = (values.name ?? '').trimStart().trimEnd();
+          renderParent: ({ children, field }: FieldRenderParentProps) => {
+            const value: string = field.value ?? '';
 
             return (
               <>
-                <span className="block">{t('sign_up.form.name.desc')}</span>
+                {children}
                 {value.length > 0 && (
-                  <span className="mt-1 block">
+                  <span className="text-muted-foreground mt-1 block text-sm">
                     {t.rich('sign_up.form.name.your_id', {
                       id: () => (
                         <span className="text-foreground font-medium">
@@ -42,7 +43,8 @@ export const AccountInstallConfigsView = () => {
                 )}
               </>
             );
-          })(),
+          },
+          description: t('sign_up.form.name.desc'),
         },
         email: {
           label: t('sign_up.form.email.label'),
@@ -51,8 +53,9 @@ export const AccountInstallConfigsView = () => {
         password: {
           label: t('sign_up.form.password.label'),
           fieldType: props => <AutoFormInput type="password" {...props} />,
-          description: (() => {
-            const value = values.password ?? '';
+          description: t('sign_up.form.password.desc'),
+          renderParent: ({ children, field }: FieldRenderParentProps) => {
+            const value: string = field.value ?? '';
             const regexArray = [
               /^.{8,}$/, // Min 8 characters
               /[a-z]/, // Min 1 lowercase
@@ -65,21 +68,23 @@ export const AccountInstallConfigsView = () => {
               return acc + Number(regex.test(value));
             }, 0);
 
-            if (value.length <= 0) return;
-
             return (
-              <span className="mt-1">
-                <span className="mb-2 flex justify-between text-xs font-semibold">
-                  <span>{t('week')}</span>
-                  <span>{t('strong')}</span>
-                </span>
-                <Progress
-                  value={(100 / regexArray.length) * passRegexPassword}
-                />
-                <span />
-              </span>
+              <>
+                {children}
+                {value.length > 0 && (
+                  <div className="mt-1">
+                    <div className="mb-2 flex justify-between text-xs font-semibold">
+                      <span>{t('week')}</span>
+                      <span>{t('strong')}</span>
+                    </div>
+                    <Progress
+                      value={(100 / regexArray.length) * passRegexPassword}
+                    />
+                  </div>
+                )}
+              </>
             );
-          })(),
+          },
         },
         terms: {
           label: t('sign_up.form.terms.label'),
@@ -97,7 +102,6 @@ export const AccountInstallConfigsView = () => {
         await onSubmit(val, form);
         setCurrentStep(prev => prev + 1);
       }}
-      onValuesChange={setValues}
       submitButton={props => (
         <Button {...props} className="w-full">
           {t('sign_up.form.submit')}

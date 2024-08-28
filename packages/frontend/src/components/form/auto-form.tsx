@@ -5,7 +5,7 @@ import { cn } from '@/helpers/classnames';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 import React from 'react';
-import { DefaultValues, useForm, UseFormReturn } from 'react-hook-form';
+import { DefaultValues, Mode, useForm, UseFormReturn } from 'react-hook-form';
 import * as z from 'zod';
 
 import { Button } from '../ui/button';

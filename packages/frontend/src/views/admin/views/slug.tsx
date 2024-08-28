@@ -1,3 +1,4 @@
+import { redirect } from '@/navigation';
 import { SlugViewProps } from '@/views/slug';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
@@ -67,65 +68,47 @@ import {
 export const generateMetadataSlugAdmin = async ({
   params: { slug },
 }: SlugViewProps): Promise<Metadata> => {
-  switch (slug[0]) {
-    case 'core':
-      switch (slug[1]) {
-        case 'diagnostic':
-          return generateMetadataDiagnosticAdmin();
-        case 'advanced':
-          switch (slug[2]) {
-            case 'files':
-              return generateMetadataFilesAdvancedCoreAdmin();
-          }
-          break;
-        case 'styles':
-          switch (slug[2]) {
-            case 'nav':
-              return generateMetadataNavAdmin();
-            case 'editor':
-              return generateMetadataEditorAdmin();
-          }
-          break;
-        case 'settings':
-          switch (slug[2]) {
-            case 'general':
-              return generateMetadataMainSettingsCoreAdmin();
-            case 'security':
-              return generateMetadataCaptchaSecurityAdmin();
-            case 'metadata':
-              return generateMetadataManifestMetadataCoreAdmin();
-            case 'email':
-              return generateMetadataEmailSettingsAdmin();
-            case 'authorization':
-              return generateMetadataAuthorizationSettingsAdmin();
-          }
-          break;
-        case 'langs':
-          return generateMetadataLangsCoreAdmin();
-        case 'plugins':
-          return generateMetadataPluginsAdmin();
-        case 'dashboard':
-          return {};
-      }
-      break;
-    case 'members':
-      switch (slug[1]) {
-        case 'users':
-          return generateMetadataUsersMembersAdmin();
-        case 'groups':
-          return generateMetadataGroupsMembersAdmin();
-      }
-      switch (slug[1]) {
-        case 'staff':
-          switch (slug[2]) {
-            case 'moderators':
-              return generateMetadataModeratorsStaffAdmin();
-            case 'administrators':
-              return generateMetadataAdministratorsStaffAdmin();
-          }
-          break;
-      }
-      break;
+  // Core routes
+  if (slug[0] === 'core') {
+    if (slug[1] === 'advanced' && !slug[3]) {
+      if (slug[2] === 'files') return generateMetadataFilesAdvancedCoreAdmin();
+    }
+
+    if (slug[1] === 'styles' && !slug[3]) {
+      if (slug[2] === 'nav') return generateMetadataNavAdmin();
+      if (slug[2] === 'editor') return generateMetadataEditorAdmin();
+    }
+
+    if (slug[1] === 'settings' && !slug[3]) {
+      if (slug[2] === 'general') return generateMetadataMainSettingsCoreAdmin();
+      if (slug[2] === 'security') return generateMetadataCaptchaSecurityAdmin();
+      if (slug[2] === 'metadata')
+        return generateMetadataManifestMetadataCoreAdmin();
+      if (slug[2] === 'email') return generateMetadataEmailSettingsAdmin();
+      if (slug[2] === 'authorization')
+        return generateMetadataAuthorizationSettingsAdmin();
+    }
+
+    if (!slug[2]) {
+      if (slug[1] === 'langs') return generateMetadataLangsCoreAdmin();
+      if (slug[1] === 'plugins') return generateMetadataPluginsAdmin();
+      if (slug[1] === 'diagnostic') return generateMetadataDiagnosticAdmin();
+    }
+  }
+
+  // Members routes
+  if (slug[0] === 'members') {
+    if (slug[1] === 'staff') {
+      if (slug[2] === 'moderators' && !slug[3])
+        return generateMetadataModeratorsStaffAdmin();
+      if (slug[2] === 'administrators' && !slug[3])
+        return generateMetadataAdministratorsStaffAdmin();
+    }
+
+    if (!slug[2]) {
+      if (slug[1] === 'users') return generateMetadataUsersMembersAdmin();
+      if (slug[1] === 'groups') return generateMetadataGroupsMembersAdmin();
+    }
   }
 
   return {};
@@ -136,65 +119,55 @@ export const SlugAdminView = (props: SlugViewProps) => {
     params: { slug },
   } = props;
 
-  switch (slug[0]) {
-    case 'core':
-      switch (slug[1]) {
-        case 'advanced':
-          switch (slug[2]) {
-            case 'files':
-              return <FilesAdvancedCoreAdminView {...props} />;
-          }
-          break;
-        case 'styles':
-          switch (slug[2]) {
-            case 'nav':
-              return <NavAdminView />;
-            case 'editor':
-              return <EditorAdminView />;
-          }
-          break;
-        case 'settings':
-          switch (slug[2]) {
-            case 'general':
-              return <MainSettingsCoreAdminView />;
-            case 'security':
-              return <CaptchaSecurityAdminView />;
-            case 'metadata':
-              return <ManifestMetadataCoreAdminView />;
-            case 'email':
-              return <EmailSettingsAdminView />;
-            case 'authorization':
-              return <AuthorizationSettingsCoreAdminView />;
-          }
-          break;
-        case 'langs':
-          return <LangsCoreAdminView {...props} />;
-        case 'plugins':
-          return <PluginsAdminView {...props} />;
-        case 'diagnostic':
-          return <DiagnosticToolsView />;
-        case 'dashboard':
-          return <DashboardCoreAdminView />;
-      }
-      break;
-    case 'members':
-      switch (slug[1]) {
-        case 'users':
-          return <UsersMembersAdminView {...props} />;
-        case 'groups':
-          return <GroupsMembersAdminView {...props} />;
-      }
-      switch (slug[1]) {
-        case 'staff':
-          switch (slug[2]) {
-            case 'moderators':
-              return <ModeratorsStaffAdminView {...props} />;
-            case 'administrators':
-              return <AdministratorsStaffAdminView {...props} />;
-          }
-          break;
-      }
-      break;
+  // Core routes
+  if (slug[0] === 'core') {
+    if (slug[1] === 'advanced' && !slug[3]) {
+      if (slug[2] === 'files') return <FilesAdvancedCoreAdminView {...props} />;
+
+      if (!slug[2]) redirect('/admin/core/advanced/files');
+    }
+
+    if (slug[1] === 'styles' && !slug[3]) {
+      if (slug[2] === 'nav') return <NavAdminView />;
+      if (slug[2] === 'editor') return <EditorAdminView />;
+
+      if (!slug[2]) redirect('/admin/core/styles/nav');
+    }
+
+    if (slug[1] === 'settings' && !slug[3]) {
+      if (slug[2] === 'general') return <MainSettingsCoreAdminView />;
+      if (slug[2] === 'security') return <CaptchaSecurityAdminView />;
+      if (slug[2] === 'metadata') return <ManifestMetadataCoreAdminView />;
+      if (slug[2] === 'email') return <EmailSettingsAdminView />;
+      if (slug[2] === 'authorization')
+        return <AuthorizationSettingsCoreAdminView />;
+
+      if (!slug[2]) redirect('/admin/core/settings/general');
+    }
+
+    if (!slug[2]) {
+      if (slug[1] === 'langs') return <LangsCoreAdminView {...props} />;
+      if (slug[1] === 'plugins') return <PluginsAdminView {...props} />;
+      if (slug[1] === 'diagnostic') return <DiagnosticToolsView />;
+      if (slug[1] === 'dashboard') return <DashboardCoreAdminView />;
+    }
+  }
+
+  // Members routes
+  if (slug[0] === 'members') {
+    if (slug[1] === 'staff') {
+      if (slug[2] === 'moderators' && !slug[3])
+        return <ModeratorsStaffAdminView {...props} />;
+      if (slug[2] === 'administrators' && !slug[3])
+        return <AdministratorsStaffAdminView {...props} />;
+
+      if (!slug[2]) redirect('/admin/members/staff/moderators');
+    }
+
+    if (!slug[2]) {
+      if (slug[1] === 'users') return <UsersMembersAdminView {...props} />;
+      if (slug[1] === 'groups') return <GroupsMembersAdminView {...props} />;
+    }
   }
 
   return notFound();

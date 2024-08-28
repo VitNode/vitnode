@@ -191,7 +191,9 @@
     },
     "forms": {
       "empty": "This field is required.",
+      "min_length": "This field must be at least {length} characters.",
       "max_length": "This field must be less than {length} characters.",
+      "email_invalid": "Invalid email address.",
       "files": {
         "title": "Click to upload",
         "drop_here": "Drop here to upload",
@@ -242,7 +244,7 @@
         },
         "password": {
           "label": "Password",
-          "invalid": "Min 8 characters, lowercase uppercase letter, number and special character."
+          "desc": "Min 8 characters, lowercase uppercase letter, number and special character."
         },
         "terms": {
           "label": "Accept terms and conditions",

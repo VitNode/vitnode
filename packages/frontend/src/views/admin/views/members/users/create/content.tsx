@@ -1,24 +1,17 @@
-'use client';
-
 import { AutoForm } from '@/components/form/auto-form';
-import { AutoFormCheckbox } from '@/components/form/fields/checkbox';
 import { AutoFormInput } from '@/components/form/fields/input';
 import { FieldRenderParentProps } from '@/components/form/type';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { removeSpecialCharacters } from '@/helpers/special-characters';
-import { useSignUpView } from '@/hooks/core/sign/up/use-sign-up-view';
 import { useTranslations } from 'next-intl';
 
-import { SuccessFormSignUp } from './success';
+import { useCreateUserAdmin } from './hooks/use-create-user-admin';
 
-export const FormSignUp = () => {
+export const ContentCreateUserUsersMembersAdmin = () => {
+  const { formSchema, onSubmit } = useCreateUserAdmin();
+
   const t = useTranslations('core');
-  const { formSchema, onSubmit, successName } = useSignUpView();
-
-  if (successName) {
-    return <SuccessFormSignUp name={successName} />;
-  }
 
   return (
     <AutoForm
@@ -88,16 +81,6 @@ export const FormSignUp = () => {
             );
           },
         },
-        terms: {
-          label: t('sign_up.form.terms.label'),
-          description: t('sign_up.form.terms.desc'),
-          fieldType: AutoFormCheckbox,
-        },
-        newsletter: {
-          label: t('sign_up.form.newsletter.label'),
-          description: t('sign_up.form.newsletter.desc'),
-          fieldType: AutoFormCheckbox,
-        },
       }}
       formSchema={formSchema}
       onSubmit={onSubmit}
@@ -106,8 +89,6 @@ export const FormSignUp = () => {
           {t('sign_up.form.submit')}
         </Button>
       )}
-    >
-      <div id="vitnode_captcha" />
-    </AutoForm>
+    />
   );
 };

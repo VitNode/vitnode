@@ -7,14 +7,11 @@ import * as z from 'zod';
 import { useCaptcha } from '../../../use-captcha';
 import { mutationApi } from './mutation-api';
 
-const nameRegex = /^(?!.* {2})[\p{L}\p{N}._@ -]*$/u;
+export const nameRegex = /^(?!.* {2})[\p{L}\p{N}._@ -]*$/u;
 
 export const useSignUpView = () => {
   const t = useTranslations('core');
   const [successName, setSuccessName] = React.useState('');
-  const [values, setValues] = React.useState<
-    Partial<z.infer<typeof formSchema>>
-  >({});
   const { getTokenFromCaptcha, isReady } = useCaptcha();
 
   const formSchema = z.object({
@@ -33,9 +30,6 @@ export const useSignUpView = () => {
       .string()
       .regex(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-_=+{};:,<.>]).{8,}$/,
-        {
-          message: t('sign_up.form.password.invalid'),
-        },
       )
       .default(''),
     terms: z
@@ -114,8 +108,6 @@ export const useSignUpView = () => {
   };
 
   return {
-    values,
-    setValues,
     formSchema,
     onSubmit,
     isReady,
