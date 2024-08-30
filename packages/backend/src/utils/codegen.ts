@@ -13,7 +13,13 @@ export const codegenConfig = ({
     schema: `${process.env.NEXT_PUBLIC_BACKEND_URL ?? 'http://localhost:8080'}/graphql`,
     documents: [
       ...(Array.isArray(config?.documents) ? config.documents : []),
-      join(process.cwd(), '..', 'frontend', 'plugins/**/graphql/**/*.gql'),
+      join(
+        process.cwd(),
+        '..',
+        'frontend',
+        'src',
+        'plugins/**/graphql/**/*.gql',
+      ),
     ],
     config: {
       maybeValue: 'T',
