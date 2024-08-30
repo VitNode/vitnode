@@ -1,12 +1,15 @@
-import { FormControl } from '@/components/ui/form';
+'use client';
+
+import { FormControl, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { FieldValues } from 'react-hook-form';
 
 import { AutoFormItemProps } from '../auto-form';
 import { AutoFormLabel } from './common/label';
 import { AutoFormTooltip } from './common/tooltip';
+import { AutoFormWrapper } from './common/wrapper';
 
-export type AutoFormInputComponentProps = Omit<
+export type AutoFormInputProps = Omit<
   React.InputHTMLAttributes<HTMLInputElement>,
   'onChange' | 'value'
 >;
@@ -19,11 +22,12 @@ export function AutoFormInput<T extends FieldValues>({
   isRequired,
   theme,
   isDisabled,
-  overrideOptions,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  overrideOptions: _,
   ...props
-}: AutoFormInputComponentProps & AutoFormItemProps<T>) {
+}: AutoFormInputProps & AutoFormItemProps<T>) {
   return (
-    <>
+    <AutoFormWrapper theme={theme}>
       {label && (
         <AutoFormLabel
           description={description}
@@ -40,6 +44,7 @@ export function AutoFormInput<T extends FieldValues>({
       {description && theme === 'vertical' && (
         <AutoFormTooltip description={description} />
       )}
-    </>
+      <FormMessage />
+    </AutoFormWrapper>
   );
 }

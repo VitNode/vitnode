@@ -1,5 +1,8 @@
 import { AutoForm } from '@/components/auto-form/auto-form';
-import { AutoFormInput } from '@/components/auto-form/fields/input';
+import {
+  AutoFormInput,
+  AutoFormInputProps,
+} from '@/components/auto-form/fields/input';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { removeSpecialCharacters } from '@/helpers/special-characters';
@@ -39,6 +42,9 @@ export const ContentCreateUserUsersMembersAdmin = () => {
         {
           id: 'email',
           component: AutoFormInput,
+          componentProps: {
+            type: 'email',
+          } as AutoFormInputProps,
           label: t('sign_up.form.email.label'),
         },
         {
@@ -46,6 +52,9 @@ export const ContentCreateUserUsersMembersAdmin = () => {
           label: t('sign_up.form.password.label'),
           description: t('sign_up.form.password.desc'),
           component: AutoFormInput,
+          componentProps: {
+            type: 'password',
+          } as AutoFormInputProps,
           childComponent: ({ field }) => {
             const value: string = field.value ?? '';
             const regexArray = [

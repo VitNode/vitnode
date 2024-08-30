@@ -1,8 +1,13 @@
 'use client';
 
-import { AutoForm } from '@/components/form/auto-form';
-import { AutoFormCheckbox } from '@/components/form/fields/checkbox';
-import { AutoFormInput } from '@/components/form/fields/input';
+// import { AutoFormCheckbox } from '@/components/form/fields/checkbox';
+import { AutoForm } from '@/components/auto-form/auto-form';
+import { AutoFormCheckbox } from '@/components/auto-form/fields/checkbox';
+import {
+  AutoFormInput,
+  AutoFormInputProps,
+} from '@/components/auto-form/fields/input';
+// import { AutoFormInput } from '@/components/form/fields/input';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { useSignInView } from '@/hooks/core/sign/in/use-sign-in-view';
@@ -39,21 +44,30 @@ export const FormSignIn = () => {
       )}
 
       <AutoForm
-        fieldConfig={{
-          email: {
-            fieldType: props => <AutoFormInput type="email" {...props} />,
+        fields={[
+          {
+            id: 'email',
             label: t('sign_in.form.email.label'),
+            component: AutoFormInput,
+            componentProps: {
+              type: 'email',
+            } as AutoFormInputProps,
           },
-          password: {
-            fieldType: props => <AutoFormInput type="password" {...props} />,
+          {
+            id: 'password',
             label: t('sign_in.form.password.label'),
+            component: AutoFormInput,
+            componentProps: {
+              type: 'password',
+            } as AutoFormInputProps,
           },
-          remember: {
-            fieldType: AutoFormCheckbox,
+          {
+            id: 'remember',
             label: t('sign_in.form.remember.label'),
             description: t('sign_in.form.remember.desc'),
+            component: AutoFormCheckbox,
           },
-        }}
+        ]}
         formSchema={formSchema}
         onSubmit={onSubmit}
         submitButton={props => (

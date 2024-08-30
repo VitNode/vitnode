@@ -64,6 +64,7 @@ export function AutoForm<T extends z.ZodObject<z.ZodRawShape>>({
     component: (
       props: AutoFormItemProps<Record<string, unknown>>,
     ) => JSX.Element;
+    componentProps?: Record<string, unknown>;
     description?: React.ReactNode | string;
     id: FieldPath<z.infer<T>>;
     label?: string;
@@ -137,26 +138,20 @@ export function AutoForm<T extends z.ZodObject<z.ZodRawShape>>({
               render={({ field }) => {
                 return (
                   <>
-                    <FormItem
-                      className={cn(className, {
-                        '@xs:flex-row @xs:gap-6 flex w-full flex-col space-y-2':
-                          theme === 'horizontal',
-                      })}
-                    >
-                      <Component
-                        description={item.description}
-                        field={field}
-                        isDisabled={isDisabled}
-                        isRequired={
-                          (isRequired || zodInputProps.required) ?? false
-                        }
-                        label={item.label}
-                        overrideOptions={overrideOptions}
-                        theme={theme}
-                        zodInputProps={zodInputProps}
-                      />
-                      <ChildComponent field={field} />
-                    </FormItem>
+                    <Component
+                      description={item.description}
+                      field={field}
+                      isDisabled={isDisabled}
+                      isRequired={
+                        (isRequired || zodInputProps.required) ?? false
+                      }
+                      label={item.label}
+                      overrideOptions={overrideOptions}
+                      theme={theme}
+                      zodInputProps={zodInputProps}
+                      {...item.componentProps}
+                    />
+                    <ChildComponent field={field} />
                   </>
                 );
               }}
