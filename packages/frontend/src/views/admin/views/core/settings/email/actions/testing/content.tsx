@@ -1,6 +1,9 @@
-import { AutoForm } from '@/components/form/auto-form';
-import { AutoFormInput } from '@/components/form/fields/input';
-import { AutoFormTextArea } from '@/components/form/fields/textarea';
+import { AutoForm } from '@/components/auto-form/auto-form';
+import {
+  AutoFormInput,
+  AutoFormInputProps,
+} from '@/components/auto-form/fields/input';
+import { AutoTextArea } from '@/components/auto-form/fields/textarea';
 import { Button } from '@/components/ui/button';
 import {
   DialogFooter,
@@ -22,24 +25,30 @@ export const ContentTestingActionEmailSettingsAdmin = () => {
       </DialogHeader>
 
       <AutoForm
-        fieldConfig={{
-          from: {
-            label: t('from'),
-            fieldType: props => <AutoFormInput type="email" {...props} />,
+        fields={[
+          {
+            id: 'from',
+            component: AutoFormInput,
+            componentProps: {
+              type: 'email',
+            } as AutoFormInputProps,
           },
-          to: {
-            label: t('to'),
-            fieldType: props => <AutoFormInput type="email" {...props} />,
+          {
+            id: 'to',
+            component: AutoFormInput,
+            componentProps: {
+              type: 'email',
+            } as AutoFormInputProps,
           },
-          subject: {
-            label: t('subject'),
-            fieldType: AutoFormInput,
+          {
+            id: 'subject',
+            component: AutoFormInput,
           },
-          message: {
-            label: t('message'),
-            fieldType: AutoFormTextArea,
+          {
+            id: 'message',
+            component: AutoTextArea,
           },
-        }}
+        ]}
         formSchema={formSchema}
         onSubmit={onSubmit}
         submitButton={props => (

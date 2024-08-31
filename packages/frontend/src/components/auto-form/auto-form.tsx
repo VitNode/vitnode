@@ -34,7 +34,9 @@ export interface AutoFormItemProps<T extends FieldValues> {
   overrideOptions: undefined | z.EnumValues;
   shape: z.ZodAny;
   theme: Theme;
-  zodInputProps: React.InputHTMLAttributes<HTMLInputElement>;
+  zodInputProps: React.InputHTMLAttributes<
+    HTMLInputElement | HTMLTextAreaElement
+  >;
 }
 
 export const getShapeFromSchema = (

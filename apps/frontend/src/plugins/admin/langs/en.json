@@ -252,10 +252,12 @@
             "desc": "URL to the support page for this plugin."
           },
           "author": {
-            "label": "Author"
+            "label": "Author",
+            "desc": "Name of the author."
           },
           "author_url": {
-            "label": "Author URL"
+            "label": "Author URL",
+            "desc": "URL to the author's website."
           }
         },
         "edit": {

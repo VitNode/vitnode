@@ -65,7 +65,7 @@ export function zodToHtmlInputProps(
     | z.ZodNumber
     | z.ZodOptional<z.ZodNumber | z.ZodString>
     | z.ZodString,
-): React.InputHTMLAttributes<HTMLInputElement> {
+): React.InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement> {
   if (['ZodNullable', 'ZodOptional'].includes(schema._def.typeName as string)) {
     const typedSchema = schema as z.ZodOptional<z.ZodNumber | z.ZodString>;
 
