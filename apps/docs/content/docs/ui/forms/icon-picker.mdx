@@ -12,7 +12,7 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 ```ts
 import * as z from 'zod';
 import { AutoForm } from 'vitnode-frontend/form/auto-form';
-import { AutoFormIcon } from 'vitnode-frontend/form/fields/icon';
+import { AutoFormIconPicker } from 'vitnode-frontend/form/fields/icon';
 ```
 
 ```ts
@@ -24,12 +24,12 @@ const formSchema = z.object({
 ```tsx
 <AutoForm
   formSchema={formSchema}
-  fieldConfig={{
-    icon: {
-      label: 'Prefix Icon',
-      fieldType: AutoFormIcon, // [!code highlight]
+  fields={[
+    {
+      id: 'icon',
+      component: AutoFormIconPicker, // [!code highlight]
     },
-  }}
+  ]}
 />
 ```
 

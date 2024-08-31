@@ -30,12 +30,12 @@ const formSchema = z.object({
 ```tsx
 <AutoForm
   formSchema={formSchema}
-  fieldConfig={{
-    description: {
-      label: 'Description',
-      fieldType: AutoFormTextLanguageInput,
+  fields={[
+    {
+      id: 'description',
+      component: AutoFormTextLanguageInput,
     },
-  }}
+  ]}
 />
 ```
 

@@ -29,12 +29,12 @@ const formSchema = z.object({
 ```tsx
 <AutoForm
   formSchema={formSchema}
-  fieldConfig={{
-    color_primary: {
-      label: 'Color picker',
-      fieldType: AutoFormColor, // [!code highlight]
+  fields={[
+    {
+      id: 'color_primary',
+      component: AutoFormColor, // [!code highlight]
     },
-  }}
+  ]}
 />
 ```
 
