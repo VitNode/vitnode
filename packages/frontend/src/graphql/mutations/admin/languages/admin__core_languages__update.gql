@@ -1,3 +1,0 @@
-mutation Admin__core_languages__update($code: String!, $file: Upload!) {
-  admin__core_languages__update(code: $code, file: $file)
-}
