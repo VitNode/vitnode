@@ -1,5 +1,5 @@
-import { AutoForm } from '@/components/form/auto-form';
-import { AutoFormInput } from '@/components/form/fields/input';
+import { AutoForm } from '@/components/auto-form/auto-form';
+import { AutoFormInput } from '@/components/auto-form/fields/input';
 import {
   AlertDialogCancel,
   AlertDialogDescription,
@@ -36,11 +36,12 @@ export const ContentDeleteActionsTableLangsCoreAdmin = ({
       </AlertDialogDescription>
 
       <AutoForm
-        fieldConfig={{
-          name: {
-            fieldType: AutoFormInput,
+        fields={[
+          {
+            id: 'name',
+            component: AutoFormInput,
           },
-        }}
+        ]}
         formSchema={formSchema}
         onSubmit={onSubmit}
         submitButton={props => (

@@ -40,21 +40,19 @@ const formSchema = z.object({
 ```tsx
 <AutoForm
   formSchema={formSchema}
-  fieldConfig={{
-    type: {
-      label: 'Combobox Example',
-      fieldType: props => (
-        <AutoFormCombobox
-          {...props}
-          placeholderSearchInput="Search options..."
-          labels={{
-            ['option-one']: 'Option One',
-            ['option-two']: 'Option Two',
-          }}
-        />
-      ),
+  fields={[
+    {
+      id: 'type',
+      component: AutoFormCombobox,
+      props: {
+        placeholderSearchInput: 'Search options...',
+        labels: {
+          ['option-one']: 'Option One',
+          ['option-two']: 'Option Two',
+        },
+      },
     },
-  }}
+  ]}
 />
 ```
 
@@ -173,24 +171,20 @@ const formSchema = z.object({
 ```tsx
 <AutoForm
   formSchema={formSchema}
-  fieldConfig={{
-    type: {
-      label: 'Combobox Example',
-      fieldType: (
-        props: AutoFormInputComponentProps, // [!code highlight]
-      ) => (
-        <AutoFormCombobox
-          {...props}
-          placeholderSearchInput="Search options..."
-          labels={{
-            ['option-one']: 'Option One',
-            ['option-two']: 'Option Two',
-          }}
-          multiple // [!code highlight]
-        />
-      ),
+  fields={[
+    {
+      id: 'type',
+      component: AutoFormCombobox,
+      props: {
+        placeholderSearchInput: 'Search options...',
+        labels: {
+          ['option-one']: 'Option One',
+          ['option-two']: 'Option Two',
+        },
+        multiple: true, // [!code highlight]
+      },
     },
-  }}
+  ]}
 />
 ```
 

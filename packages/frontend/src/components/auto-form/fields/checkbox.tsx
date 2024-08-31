@@ -17,15 +17,15 @@ export type AutoFormCheckboxProps = Omit<
 
 export function AutoFormCheckbox<T extends FieldValues>({
   field,
-  zodInputProps,
   label,
   description,
   isRequired,
   theme,
   isDisabled,
-  overrideOptions,
-  ...props
-}: AutoFormCheckboxProps & AutoFormItemProps<T>) {
+  componentProps,
+}: {
+  componentProps?: AutoFormCheckboxProps;
+} & AutoFormItemProps<T>) {
   const value: boolean = field.value || false;
 
   return (
@@ -38,9 +38,9 @@ export function AutoFormCheckbox<T extends FieldValues>({
       <FormControl>
         <Checkbox
           checked={value}
-          disabled={isDisabled || props.disabled}
+          disabled={isDisabled || componentProps?.disabled}
           onCheckedChange={field.onChange}
-          {...props}
+          {...componentProps}
         />
       </FormControl>
 

@@ -27,24 +27,22 @@ export function getObjectFormSchema(
  * Get the lowest level Zod type.
  * This will unpack optionals, refinements, etc.
  */
-export function getBaseSchema<
-  ChildType extends z.AnyZodObject | z.ZodAny = z.ZodAny,
->(
-  schema: ChildType | z.ZodEffects<ChildType>,
+export function getBaseSchema<T extends z.AnyZodObject | z.ZodAny = z.ZodAny>(
+  schema: T | z.ZodEffects<T>,
   isArray?: boolean,
-): ChildType | null {
+): null | T {
   if ('innerType' in schema._def) {
-    return getBaseSchema(schema._def.innerType as ChildType);
+    return getBaseSchema(schema._def.innerType as T, isArray);
   }
   if ('schema' in schema._def) {
-    return getBaseSchema(schema._def.schema);
+    return getBaseSchema(schema._def.schema, isArray);
   }
 
   if ('type' in schema._def && isArray) {
-    return getBaseSchema(schema._def.type as ChildType);
+    return getBaseSchema(schema._def.type as T, isArray);
   }
 
-  return schema as ChildType;
+  return schema as T;
 }
 
 /**

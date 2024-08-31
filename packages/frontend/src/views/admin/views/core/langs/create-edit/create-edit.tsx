@@ -1,7 +1,10 @@
-import { AutoForm } from '@/components/form/auto-form';
-import { AutoFormCombobox } from '@/components/form/fields/combobox';
-import { AutoFormInput } from '@/components/form/fields/input';
-import { AutoFormSwitch } from '@/components/form/fields/switch';
+import { AutoForm } from '@/components/auto-form/auto-form';
+import {
+  AutoFormCombobox,
+  AutoFormComboboxProps,
+} from '@/components/auto-form/fields/combobox';
+import { AutoFormInput } from '@/components/auto-form/fields/input';
+import { AutoFormSwitch } from '@/components/auto-form/fields/switch';
 import { DependencyType } from '@/components/form/type';
 import { Button } from '@/components/ui/button';
 import {
@@ -41,55 +44,62 @@ export const CreateEditLangAdmin = ({ data }: { data?: ShowCoreLanguages }) => {
             when: () => !!data,
           },
         ]}
-        fieldConfig={{
-          name: {
+        fields={[
+          {
+            id: 'name',
+            component: AutoFormInput,
             label: t('create.name.label'),
-            fieldType: props => (
-              <AutoFormInput
-                placeholder={t('create.name.placeholder')}
-                {...props}
-              />
-            ),
           },
-          timezone: {
+          {
+            id: 'timezone',
             label: t('create.timezone.label'),
-            fieldType: AutoFormCombobox,
+            component: AutoFormCombobox,
+            componentProps: {
+              labels: Object.fromEntries(
+                locales.map(item => [
+                  item.locale,
+                  `${item.name} - ${item.locale}`,
+                ]),
+              ),
+            } as AutoFormComboboxProps,
           },
-          locale: {
+          {
+            id: 'locale',
+            component: AutoFormCombobox,
             label: t('create.locale.label'),
-            fieldType: props => (
-              <AutoFormCombobox
-                {...props}
-                labels={Object.fromEntries(
-                  locales.map(item => [
-                    item.locale,
-                    `${item.name} - ${item.locale}`,
-                  ]),
-                )}
-              />
-            ),
+            componentProps: {
+              labels: Object.fromEntries(
+                locales.map(item => [
+                  item.locale,
+                  `${item.name} - ${item.locale}`,
+                ]),
+              ),
+            } as AutoFormComboboxProps,
           },
-          code: {
+          {
+            id: 'code',
+            component: AutoFormInput,
             label: t('create.code.label'),
-            fieldType: props => <AutoFormInput {...props} />,
-            description: t('create.code.desc'),
           },
-          time_24: {
+          {
+            id: 'time_24',
+            component: AutoFormSwitch,
             label: t('create.time_24.label'),
-            fieldType: props => <AutoFormSwitch {...props} />,
             description: t('create.time_24.desc'),
           },
-          allow_in_input: {
+          {
+            id: 'allow_in_input',
+            component: AutoFormSwitch,
             label: t('create.allow_in_input.label'),
-            fieldType: props => <AutoFormSwitch {...props} />,
             description: t('create.allow_in_input.desc'),
           },
-          default: {
+          {
+            id: 'default',
+            component: AutoFormSwitch,
             label: t('edit.default.label'),
-            fieldType: props => <AutoFormSwitch {...props} />,
             description: t('edit.default.desc'),
           },
-        }}
+        ]}
         formSchema={formSchema}
         onSubmit={onSubmit}
         submitButton={props => (

@@ -1,5 +1,5 @@
-import { AutoForm } from '@/components/form/auto-form';
-import { AutoFormCheckbox } from '@/components/form/fields/checkbox';
+import { AutoForm } from '@/components/auto-form/auto-form';
+import { AutoFormCheckbox } from '@/components/auto-form/fields/checkbox';
 import { Button } from '@/components/ui/button';
 import { useTranslations } from 'next-intl';
 import * as z from 'zod';
@@ -23,12 +23,12 @@ export const FormLicenseInstallConfigs = () => {
 
   return (
     <AutoForm
-      fieldConfig={{
-        agree: {
-          label: 'I agree to the terms of the license agreement.',
-          fieldType: AutoFormCheckbox,
+      fields={[
+        {
+          id: 'agree',
+          component: AutoFormCheckbox,
         },
-      }}
+      ]}
       formSchema={formSchema}
       onSubmit={onSubmit}
       submitButton={props => <Button {...props}>Next step</Button>}

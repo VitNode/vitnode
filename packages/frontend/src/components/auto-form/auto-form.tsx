@@ -20,29 +20,39 @@ import resolveDependencies, {
   zodToHtmlInputProps,
 } from '../form/utils';
 import { Button } from '../ui/button';
-import { Form, FormField, FormItem } from '../ui/form';
+import { Form, FormField } from '../ui/form';
 
 type Theme = 'horizontal' | 'vertical';
 
 export interface AutoFormItemProps<T extends FieldValues> {
+  componentProps?: Record<string, unknown>;
   description: React.ReactNode | string | undefined;
   field: ControllerRenderProps<T>;
   isDisabled: boolean;
   isRequired: boolean;
   label: string | undefined;
   overrideOptions: undefined | z.EnumValues;
+  shape: z.ZodAny;
   theme: Theme;
   zodInputProps: React.InputHTMLAttributes<HTMLInputElement>;
 }
 
 export const getShapeFromSchema = (
-  schema: z.ZodObject<z.ZodRawShape>,
+  schema: z.ZodEffects<z.ZodObject<z.ZodRawShape>> | z.ZodObject<z.ZodRawShape>,
   id: string,
 ): z.ZodAny => {
-  return schema.shape[id] as z.ZodAny;
+  if (schema._def.typeName === z.ZodFirstPartyTypeKind.ZodEffects) {
+    return schema._def.schema.shape[id] as z.ZodAny;
+  }
+
+  return (schema as z.ZodObject<z.ZodRawShape>).shape[id] as z.ZodAny;
 };
 
-export function AutoForm<T extends z.ZodObject<z.ZodRawShape>>({
+export function AutoForm<
+  T extends
+    | z.ZodEffects<z.ZodObject<z.ZodRawShape>>
+    | z.ZodObject<z.ZodRawShape>,
+>({
   onSubmit: onSubmitProp,
   formSchema,
   className,
@@ -136,9 +146,12 @@ export function AutoForm<T extends z.ZodObject<z.ZodRawShape>>({
               key={item.id}
               name={item.id}
               render={({ field }) => {
+                if (!shape) return <></>;
+
                 return (
                   <>
                     <Component
+                      componentProps={item.componentProps}
                       description={item.description}
                       field={field}
                       isDisabled={isDisabled}
@@ -147,9 +160,9 @@ export function AutoForm<T extends z.ZodObject<z.ZodRawShape>>({
                       }
                       label={item.label}
                       overrideOptions={overrideOptions}
+                      shape={shape}
                       theme={theme}
                       zodInputProps={zodInputProps}
-                      {...item.componentProps}
                     />
                     <ChildComponent field={field} />
                   </>

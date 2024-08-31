@@ -1,10 +1,10 @@
-import { AutoForm } from '@/components/form/auto-form';
-import { AutoFormCombobox } from '@/components/form/fields/combobox';
-import { AutoFormSwitch } from '@/components/form/fields/switch';
+import { AutoForm } from '@/components/auto-form/auto-form';
 import {
-  AutoFormInputComponentProps,
-  DependencyType,
-} from '@/components/form/type';
+  AutoFormCombobox,
+  AutoFormComboboxProps,
+} from '@/components/auto-form/fields/combobox';
+import { AutoFormSwitch } from '@/components/auto-form/fields/switch';
+import { DependencyType } from '@/components/form/type';
 import { Button } from '@/components/ui/button';
 import {
   DialogDescription,
@@ -47,31 +47,31 @@ export const ContentDownloadActionsTableLangsCoreAdmin = ({
             when: (provider: boolean) => !!provider,
           },
         ]}
-        fieldConfig={{
-          all: {
+        fields={[
+          {
+            id: 'all',
+            component: AutoFormSwitch,
             label: t('all.label'),
             description: t('all.desc'),
-            fieldType: AutoFormSwitch,
           },
-          plugins: {
+          {
+            id: 'plugins',
             label: t('plugins'),
-            fieldType: (props: AutoFormInputComponentProps) => (
-              <AutoFormCombobox
-                {...props}
-                labels={Object.fromEntries(
-                  plugins.map(plugin => [
-                    plugin.code,
-                    <div className="flex flex-wrap gap-2" key={plugin.code}>
-                      <span className="font-semibold">{plugin.name}</span>
-                      <span>{plugin.version}</span>
-                    </div>,
-                  ]),
-                )}
-                multiple
-              />
-            ),
+            component: AutoFormCombobox,
+            componentProps: {
+              labels: Object.fromEntries(
+                plugins.map(plugin => [
+                  plugin.code,
+                  <div className="flex flex-wrap gap-2" key={plugin.code}>
+                    <span className="font-semibold">{plugin.name}</span>
+                    <span>{plugin.version}</span>
+                  </div>,
+                ]),
+              ),
+              multiple: true,
+            } as AutoFormComboboxProps,
           },
-        }}
+        ]}
         formSchema={formSchema}
         onSubmit={onSubmit}
         submitButton={props => (

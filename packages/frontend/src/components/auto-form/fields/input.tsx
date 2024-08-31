@@ -22,10 +22,10 @@ export function AutoFormInput<T extends FieldValues>({
   isRequired,
   theme,
   isDisabled,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  overrideOptions: _,
-  ...props
-}: AutoFormInputProps & AutoFormItemProps<T>) {
+  componentProps,
+}: {
+  componentProps?: AutoFormInputProps;
+} & AutoFormItemProps<T>) {
   return (
     <AutoFormWrapper theme={theme}>
       {label && (
@@ -38,7 +38,12 @@ export function AutoFormInput<T extends FieldValues>({
       )}
 
       <FormControl>
-        <Input {...field} {...zodInputProps} {...props} disabled={isDisabled} />
+        <Input
+          {...field}
+          {...zodInputProps}
+          {...componentProps}
+          disabled={isDisabled}
+        />
       </FormControl>
 
       {description && theme === 'vertical' && (

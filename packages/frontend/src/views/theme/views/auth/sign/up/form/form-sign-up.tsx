@@ -1,9 +1,11 @@
 'use client';
 
-import { AutoForm } from '@/components/form/auto-form';
-import { AutoFormCheckbox } from '@/components/form/fields/checkbox';
-import { AutoFormInput } from '@/components/form/fields/input';
-import { FieldRenderParentProps } from '@/components/form/type';
+import { AutoForm } from '@/components/auto-form/auto-form';
+import { AutoFormCheckbox } from '@/components/auto-form/fields/checkbox';
+import {
+  AutoFormInput,
+  AutoFormInputProps,
+} from '@/components/auto-form/fields/input';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { removeSpecialCharacters } from '@/helpers/special-characters';
@@ -22,41 +24,45 @@ export const FormSignUp = () => {
 
   return (
     <AutoForm
-      fieldConfig={{
-        name: {
-          label: t('sign_up.form.name.label'),
-          fieldType: props => <AutoFormInput max={32} min={3} {...props} />,
-          renderParent: ({ children, field }: FieldRenderParentProps) => {
+      fields={[
+        {
+          id: 'name',
+          component: AutoFormInput,
+          description: t('sign_up.form.name.desc'),
+          childComponent: ({ field }) => {
             const value: string = field.value ?? '';
+            if (!value.length) return null;
 
             return (
-              <>
-                {children}
-                {value.length > 0 && (
-                  <span className="text-muted-foreground mt-1 block text-sm">
-                    {t.rich('sign_up.form.name.your_id', {
-                      id: () => (
-                        <span className="text-foreground font-medium">
-                          {removeSpecialCharacters(value)}
-                        </span>
-                      ),
-                    })}
-                  </span>
-                )}
-              </>
+              <span className="text-muted-foreground mt-1 block max-w-md truncate text-sm">
+                {t.rich('sign_up.form.name.your_id', {
+                  id: () => (
+                    <span className="text-foreground font-medium">
+                      {removeSpecialCharacters(value)}
+                    </span>
+                  ),
+                })}
+              </span>
             );
           },
-          description: t('sign_up.form.name.desc'),
         },
-        email: {
+        {
+          id: 'email',
+          component: AutoFormInput,
+          componentProps: {
+            type: 'email',
+          } as AutoFormInputProps,
           label: t('sign_up.form.email.label'),
-          fieldType: props => <AutoFormInput type="email" {...props} />,
         },
-        password: {
+        {
+          id: 'password',
           label: t('sign_up.form.password.label'),
-          fieldType: props => <AutoFormInput type="password" {...props} />,
           description: t('sign_up.form.password.desc'),
-          renderParent: ({ children, field }: FieldRenderParentProps) => {
+          component: AutoFormInput,
+          componentProps: {
+            type: 'password',
+          } as AutoFormInputProps,
+          childComponent: ({ field }) => {
             const value: string = field.value ?? '';
             const regexArray = [
               /^.{8,}$/, // Min 8 characters
@@ -70,35 +76,34 @@ export const FormSignUp = () => {
               return acc + Number(regex.test(value));
             }, 0);
 
+            if (!value.length) return null;
+
             return (
-              <>
-                {children}
-                {value.length > 0 && (
-                  <div className="mt-1">
-                    <div className="mb-2 flex justify-between text-xs font-semibold">
-                      <span>{t('week')}</span>
-                      <span>{t('strong')}</span>
-                    </div>
-                    <Progress
-                      value={(100 / regexArray.length) * passRegexPassword}
-                    />
-                  </div>
-                )}
-              </>
+              <div className="mt-1">
+                <div className="mb-2 flex justify-between text-xs font-semibold">
+                  <span>{t('week')}</span>
+                  <span>{t('strong')}</span>
+                </div>
+                <Progress
+                  value={(100 / regexArray.length) * passRegexPassword}
+                />
+              </div>
             );
           },
         },
-        terms: {
+        {
+          id: 'terms',
           label: t('sign_up.form.terms.label'),
           description: t('sign_up.form.terms.desc'),
-          fieldType: AutoFormCheckbox,
+          component: AutoFormCheckbox,
         },
-        newsletter: {
+        {
+          id: 'newsletter',
           label: t('sign_up.form.newsletter.label'),
           description: t('sign_up.form.newsletter.desc'),
-          fieldType: AutoFormCheckbox,
+          component: AutoFormCheckbox,
         },
-      }}
+      ]}
       formSchema={formSchema}
       onSubmit={onSubmit}
       submitButton={props => (

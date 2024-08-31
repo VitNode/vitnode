@@ -34,12 +34,12 @@ const formSchema = z.object({
 ```tsx
 <AutoForm
   formSchema={formSchema}
-  fieldConfig={{
-    username: {
-      label: 'Username',
-      fieldType: AutoFormInput, // [!code highlight]
+  fields={[
+    {
+      id: 'username',
+      component: AutoFormInput, // [!code highlight]
     },
-  }}
+  ]}
 />
 ```
 
@@ -65,14 +65,15 @@ import { Input } from 'vitnode-frontend/components/ui/input';
 ```tsx
 <AutoForm
   formSchema={formSchema}
-  fieldConfig={{
-    username: {
-      label: 'Username',
-      fieldType: props => (
-        <AutoFormInput placeholder="Type username" {...props} /> // [!code highlight]
-      ),
+  fields={[
+    {
+      id: 'name',
+      component: AutoFormInput,
+      componentProps: {
+        placeholder: 'Type your name', // [!code highlight]
+      } as AutoFormInputProps,
     },
-  }}
+  ]}
 />
 ```
 
@@ -101,12 +102,15 @@ const formSchema = z.object({
 ```tsx
 <AutoForm
   formSchema={formSchema}
-  fieldConfig={{
-    count: {
-      label: 'Count',
-      fieldType: props => <AutoFormInput type="number" {...props} />, // [!code highlight]
+  fields={[
+    {
+      id: 'count',
+      component: AutoFormInput,
+      componentProps: {
+        type: 'number', // [!code highlight]
+      } as AutoFormInputProps,
     },
-  }}
+  ]}
 />
 ```
 
@@ -135,12 +139,15 @@ const formSchema = z.object({
 ```tsx
 <AutoForm
   formSchema={formSchema}
-  fieldConfig={{
-    start_day: {
-      label: 'Start Date',
-      fieldType: props => <AutoFormInput type="date" {...props} />, // [!code highlight]
+  fields={[
+    {
+      id: 'start_day',
+      component: AutoFormInput,
+      componentProps: {
+        type: 'date', // [!code highlight]
+      } as AutoFormInputProps,
     },
-  }}
+  ]}
 />
 ```
 

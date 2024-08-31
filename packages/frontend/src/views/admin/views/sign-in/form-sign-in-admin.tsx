@@ -1,7 +1,10 @@
 'use client';
 
-import { AutoForm } from '@/components/form/auto-form';
-import { AutoFormInput } from '@/components/form/fields/input';
+import { AutoForm } from '@/components/auto-form/auto-form';
+import {
+  AutoFormInput,
+  AutoFormInputProps,
+} from '@/components/auto-form/fields/input';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { CardContent } from '@/components/ui/card';
@@ -24,16 +27,24 @@ export const FormSignInAdmin = () => {
       )}
 
       <AutoForm
-        fieldConfig={{
-          email: {
+        fields={[
+          {
+            id: 'email',
+            component: AutoFormInput,
+            componentProps: {
+              type: 'email',
+            } as AutoFormInputProps,
             label: t('sign_in.form.email.label'),
-            fieldType: props => <AutoFormInput type="email" {...props} />,
           },
-          password: {
+          {
+            id: 'password',
+            component: AutoFormInput,
+            componentProps: {
+              type: 'password',
+            } as AutoFormInputProps,
             label: t('sign_in.form.password.label'),
-            fieldType: props => <AutoFormInput type="password" {...props} />,
           },
-        }}
+        ]}
         formSchema={formSchema}
         onSubmit={onSubmit}
         submitButton={props => (
