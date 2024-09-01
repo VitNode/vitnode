@@ -21,7 +21,7 @@ import { AutoFormTooltip } from './common/tooltip';
 import { AutoFormWrapper } from './common/wrapper';
 
 export type AutoFormSelectProps = {
-  labels?: Record<string, JSX.Element | string>;
+  labels?: Record<string, React.JSX.Element | string>;
   placeholder?: string;
 } & Omit<React.ComponentProps<typeof Select>, 'onValueChange' | 'value'>;
 

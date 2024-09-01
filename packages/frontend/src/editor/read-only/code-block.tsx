@@ -20,7 +20,7 @@ interface WithTagName {
   value?: never;
 }
 
-const renderElement = (node: Node | WithTagName): JSX.Element => {
+const renderElement = (node: Node | WithTagName): React.JSX.Element => {
   if (node.value !== undefined) {
     return React.createElement(
       React.Fragment,

@@ -87,7 +87,7 @@ export function AutoForm<
     className?: string;
     component: (
       props: AutoFormItemProps<Record<string, unknown>>,
-    ) => JSX.Element;
+    ) => React.JSX.Element;
     componentProps?: Record<string, unknown>;
     description?: React.ReactNode | string;
     id: FieldPath<z.infer<T>>;
