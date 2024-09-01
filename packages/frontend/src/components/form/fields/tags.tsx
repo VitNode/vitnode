@@ -1,5 +1,5 @@
 import { FormControl, FormMessage } from '@/components/ui/form';
-import { TagsInput } from '@/components/ui/tags-input';
+import { TagInput } from '@/components/ui/tag-input';
 
 import { AutoFormInputComponentProps } from '../type';
 import { DefaultParent } from './common/children';
@@ -11,7 +11,7 @@ export const AutoFormTags = ({
   autoFormProps: { isRequired, fieldConfigItem, field, theme, isDisabled },
   ...props
 }: AutoFormInputComponentProps &
-  Omit<React.ComponentProps<typeof TagsInput>, 'onChange'>) => {
+  Omit<React.ComponentProps<typeof TagInput>, 'onChange'>) => {
   const value = field.value || '';
   const ParentWrapper = fieldConfigItem.renderParent ?? DefaultParent;
 
@@ -27,7 +27,7 @@ export const AutoFormTags = ({
       )}
       <ParentWrapper field={field}>
         <FormControl>
-          <TagsInput
+          <TagInput
             {...props}
             {...field}
             disabled={isDisabled || props.disabled}

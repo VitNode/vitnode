@@ -10,12 +10,12 @@ import { AutoFormLabel } from './common/label';
 import { AutoFormTooltip } from './common/tooltip';
 import { AutoFormWrapper } from './common/wrapper';
 
-export type AutoFormFileProps = Omit<
+export type AutoFormFileInputProps = Omit<
   React.ComponentProps<typeof FileInput>,
   'onChange' | 'value'
 >;
 
-export function AutoFormFile<T extends FieldValues>({
+export function AutoFormFileInput<T extends FieldValues>({
   field,
   label,
   description,
@@ -26,7 +26,7 @@ export function AutoFormFile<T extends FieldValues>({
   className,
   childComponent: ChildComponent,
 }: {
-  componentProps?: AutoFormFileProps;
+  componentProps?: AutoFormFileInputProps;
 } & AutoFormItemProps<T>) {
   return (
     <AutoFormWrapper theme={theme}>
@@ -48,16 +48,17 @@ export function AutoFormFile<T extends FieldValues>({
             required={isRequired}
             {...field}
             {...componentProps}
+            className="w-full"
             disabled={isDisabled || componentProps?.disabled}
           />
         </FormControl>
+        {ChildComponent && <ChildComponent field={field} />}
       </AutoFormInputWrapper>
 
       {description && theme === 'vertical' && (
         <AutoFormTooltip description={description} />
       )}
       <FormMessage />
-      <ChildComponent field={field} />
     </AutoFormWrapper>
   );
 }

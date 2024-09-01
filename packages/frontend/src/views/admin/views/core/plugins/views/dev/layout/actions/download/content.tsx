@@ -1,6 +1,12 @@
-import { AutoForm } from '@/components/form/auto-form';
-import { AutoFormInput } from '@/components/form/fields/input';
-import { AutoFormRadioGroup } from '@/components/form/fields/radio-group';
+import { AutoForm } from '@/components/auto-form/auto-form';
+import {
+  AutoFormInput,
+  AutoFormInputProps,
+} from '@/components/auto-form/fields/input';
+import {
+  AutoFormRadioGroup,
+  AutoFormRadioGroupProps,
+} from '@/components/auto-form/fields/radio-group';
 import { DependencyType } from '@/components/form/type';
 import { Button } from '@/components/ui/button';
 import {
@@ -58,33 +64,37 @@ export const ContentDownloadActionDevPluginAdmin = ({
             options: ['new_version'],
           },
         ]}
-        fieldConfig={{
-          type: {
-            fieldType: props => (
-              <AutoFormRadioGroup
-                {...props}
-                labels={{
-                  rebuild: {
-                    title: t('type.rebuild', {
-                      version: `${version} (${version_code})`,
-                    }),
-                  },
-                  new_version: {
-                    title: t('type.new_version'),
-                  },
-                }}
-              />
-            ),
+        fields={[
+          {
+            id: 'type',
+            component: AutoFormRadioGroup,
+            componentProps: {
+              labels: {
+                rebuild: {
+                  title: t('type.rebuild', {
+                    version: `${version} (${version_code})`,
+                  }),
+                },
+                new_version: {
+                  title: t('type.new_version'),
+                },
+              },
+            } as AutoFormRadioGroupProps,
           },
-          version: {
+          {
+            id: 'version',
             label: t('version.label'),
-            fieldType: AutoFormInput,
+            component: AutoFormInput,
           },
-          version_code: {
+          {
+            id: 'version_code',
             label: t('version_code.label'),
-            fieldType: props => <AutoFormInput type="number" {...props} />,
+            component: AutoFormInput,
+            componentProps: {
+              type: 'number',
+            } as AutoFormInputProps,
           },
-        }}
+        ]}
         formSchema={formSchema}
         onSubmit={onSubmit}
         submitButton={props => (

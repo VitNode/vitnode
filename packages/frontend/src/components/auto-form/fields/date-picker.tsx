@@ -1,6 +1,6 @@
 'use client';
 
-import { ColorPicker } from '@/components/ui/color-picker';
+import { DatePicker } from '@/components/ui/date-picker';
 import { FormControl, FormMessage } from '@/components/ui/form';
 import { FieldValues } from 'react-hook-form';
 
@@ -10,14 +10,13 @@ import { AutoFormLabel } from './common/label';
 import { AutoFormTooltip } from './common/tooltip';
 import { AutoFormWrapper } from './common/wrapper';
 
-export type AutoFormColorPickerProps = Omit<
-  React.ComponentProps<typeof ColorPicker>,
-  'onChange' | 'required' | 'value'
+export type AutoFormDatePickerProps = Omit<
+  React.ComponentProps<typeof DatePicker>,
+  'onChange' | 'value'
 >;
 
-export function AutoFormColorPicker<T extends FieldValues>({
+export function AutoFormDatePicker<T extends FieldValues>({
   field,
-  zodInputProps,
   label,
   description,
   isRequired,
@@ -27,10 +26,8 @@ export function AutoFormColorPicker<T extends FieldValues>({
   className,
   childComponent: ChildComponent,
 }: {
-  componentProps?: AutoFormColorPickerProps;
+  componentProps?: AutoFormDatePickerProps;
 } & AutoFormItemProps<T>) {
-  const value = field.value || '';
-
   return (
     <AutoFormWrapper theme={theme}>
       {label && (
@@ -47,14 +44,11 @@ export function AutoFormColorPicker<T extends FieldValues>({
         withChildren={!!ChildComponent}
       >
         <FormControl>
-          <ColorPicker
-            required={isRequired}
+          <DatePicker
             {...field}
-            {...zodInputProps}
             {...componentProps}
+            className="flex"
             disabled={isDisabled || componentProps?.disabled}
-            onChange={field.onChange as (value: null | string) => void}
-            value={value}
           />
         </FormControl>
         {ChildComponent && <ChildComponent field={field} />}

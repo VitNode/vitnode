@@ -55,7 +55,7 @@ export function AutoTextArea<T extends FieldValues>({
             disabled={isDisabled || componentProps?.disabled}
           />
         </FormControl>
-        <ChildComponent field={field} />
+        {ChildComponent && <ChildComponent field={field} />}
       </AutoFormInputWrapper>
 
       {description && theme === 'vertical' && (

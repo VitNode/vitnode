@@ -69,7 +69,7 @@ export function AutoFormSwitch<T extends FieldValues>({
             disabled={isDisabled || componentProps?.disabled}
           />
         </FormControl>
-        <ChildComponent field={field} />
+        {ChildComponent && <ChildComponent field={field} />}
       </AutoFormInputWrapper>
     </AutoFormWrapper>
   );

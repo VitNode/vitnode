@@ -25,7 +25,7 @@ import { Form, FormField } from '../ui/form';
 type Theme = 'horizontal' | 'vertical';
 
 export interface AutoFormItemProps<T extends FieldValues> {
-  childComponent: (props: {
+  childComponent?: (props: {
     field: ControllerRenderProps<T>;
   }) => React.ReactNode;
   className?: string;
@@ -151,7 +151,6 @@ export function AutoForm<
           const zodInputProps = zodToHtmlInputProps(shape);
 
           const Component = item.component;
-          const ChildComponent = item.childComponent ?? (() => null);
 
           return (
             <FormField
@@ -161,7 +160,7 @@ export function AutoForm<
               render={({ field }) => {
                 return (
                   <Component
-                    childComponent={ChildComponent}
+                    childComponent={item.childComponent}
                     className={item.className}
                     componentProps={item.componentProps}
                     description={item.description}

@@ -101,7 +101,7 @@ export function AutoFormSelect<T extends FieldValues>({
             </SelectContent>
           </Select>
         </FormControl>
-        <ChildComponent field={field} />
+        {ChildComponent && <ChildComponent field={field} />}
       </AutoFormInputWrapper>
 
       {description && theme === 'vertical' && (

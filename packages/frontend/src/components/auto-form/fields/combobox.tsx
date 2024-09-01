@@ -112,7 +112,7 @@ export function AutoFormCombobox<T extends FieldValues>({
               </Button>
             </FormControl>
           </PopoverTrigger>
-          <ChildComponent field={field} />
+          {ChildComponent && <ChildComponent field={field} />}
         </AutoFormInputWrapper>
         <PopoverContent className="p-0">
           <Command>

@@ -51,7 +51,7 @@ export function AutoFormCheckbox<T extends FieldValues>({
             {...componentProps}
           />
         </FormControl>
-        <ChildComponent field={field} />
+        {ChildComponent && <ChildComponent field={field} />}
       </AutoFormInputWrapper>
 
       {(label ?? description) && (

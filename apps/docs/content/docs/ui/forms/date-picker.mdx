@@ -17,7 +17,7 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 ```ts
 import * as z from 'zod';
 import { AutoForm } from 'vitnode-frontend/form/auto-form';
-import { AutoFormDate } from 'vitnode-frontend/form/fields/date';
+import { AutoFormDatePicker } from 'vitnode-frontend/form/fields/date';
 ```
 
 ```ts
@@ -29,12 +29,12 @@ const formSchema = z.object({
 ```tsx
 <AutoForm
   formSchema={formSchema}
-  fieldConfig={{
-    birthday: {
-      label: 'Birthday',
-      fieldType: AutoFormDate,
+  fields={[
+    {
+      id: 'birthday',
+      component: AutoFormDatePicker,
     },
-  }}
+  ]}
 />
 ```
 
@@ -67,20 +67,18 @@ Enable dropdown for month and year.
 ```tsx
 <AutoForm
   formSchema={formSchema}
-  fieldConfig={{
-    birthday: {
-      label: 'Birthday',
-      fieldType: (props: AutoFormInputComponentProps) => (
-        <AutoFormDate
-          {...props}
-          controlledMouthAndYear={{
-            fromYear: 1900, // [!code highlight]
-            toYear: new Date().getFullYear(), // [!code highlight]
-          }}
-        />
-      ),
+  fields={[
+    {
+      id: 'birthday',
+      component: AutoFormDatePicker,
+      componentProps: {
+        controlledMouthAndYear: {
+          fromYear: 1900,
+          toYear: new Date().getFullYear(),
+        },
+      } as AutoFormDatePickerProps,
     },
-  }}
+  ]}
 />
 ```
 

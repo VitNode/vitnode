@@ -1,7 +1,7 @@
 'use client';
 
-import { ColorPicker } from '@/components/ui/color-picker';
 import { FormControl, FormMessage } from '@/components/ui/form';
+import { TagInput } from '@/components/ui/tag-input';
 import { FieldValues } from 'react-hook-form';
 
 import { AutoFormItemProps } from '../auto-form';
@@ -10,14 +10,13 @@ import { AutoFormLabel } from './common/label';
 import { AutoFormTooltip } from './common/tooltip';
 import { AutoFormWrapper } from './common/wrapper';
 
-export type AutoFormColorPickerProps = Omit<
-  React.ComponentProps<typeof ColorPicker>,
-  'onChange' | 'required' | 'value'
+export type AutoFormTagInputProps = Omit<
+  React.ComponentProps<typeof TagInput>,
+  'onChange' | 'value'
 >;
 
-export function AutoFormColorPicker<T extends FieldValues>({
+export function AutoFormTagInput<T extends FieldValues>({
   field,
-  zodInputProps,
   label,
   description,
   isRequired,
@@ -27,10 +26,8 @@ export function AutoFormColorPicker<T extends FieldValues>({
   className,
   childComponent: ChildComponent,
 }: {
-  componentProps?: AutoFormColorPickerProps;
+  componentProps?: AutoFormTagInputProps;
 } & AutoFormItemProps<T>) {
-  const value = field.value || '';
-
   return (
     <AutoFormWrapper theme={theme}>
       {label && (
@@ -47,14 +44,10 @@ export function AutoFormColorPicker<T extends FieldValues>({
         withChildren={!!ChildComponent}
       >
         <FormControl>
-          <ColorPicker
-            required={isRequired}
+          <TagInput
             {...field}
-            {...zodInputProps}
             {...componentProps}
             disabled={isDisabled || componentProps?.disabled}
-            onChange={field.onChange as (value: null | string) => void}
-            value={value}
           />
         </FormControl>
         {ChildComponent && <ChildComponent field={field} />}

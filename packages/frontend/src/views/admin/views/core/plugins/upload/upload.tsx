@@ -1,8 +1,8 @@
 import { AutoForm } from '@/components/auto-form/auto-form';
 import {
-  AutoFormFile,
-  AutoFormFileProps,
-} from '@/components/auto-form/fields/file';
+  AutoFormFileInput,
+  AutoFormFileInputProps,
+} from '@/components/auto-form/fields/file-input';
 import { Button } from '@/components/ui/button';
 import {
   DialogDescription,
@@ -34,12 +34,12 @@ export const UploadPluginAdmin = ({ data }: UploadPluginAdminProps) => {
         fields={[
           {
             id: 'file',
-            component: AutoFormFile,
+            component: AutoFormFileInput,
             componentProps: {
               acceptExtensions: ['tgz'],
               maxFileSizeInMb: 0,
               showInfo: true,
-            } as AutoFormFileProps,
+            } as AutoFormFileInputProps,
           },
         ]}
         formSchema={formSchema}

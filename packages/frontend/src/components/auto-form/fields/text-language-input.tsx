@@ -55,7 +55,7 @@ export function AutoFormTextLanguageInput<T extends FieldValues>({
             value={field.value as TextLanguage[]}
           />
         </FormControl>
-        <ChildComponent field={field} />
+        {ChildComponent && <ChildComponent field={field} />}
       </AutoFormInputWrapper>
 
       {description && theme === 'vertical' && (

@@ -104,7 +104,7 @@ export function AutoFormRadioGroup<T extends FieldValues>({
             })}
           </RadioGroup>
         </FormControl>
-        <ChildComponent field={field} />
+        {ChildComponent && <ChildComponent field={field} />}
       </AutoFormInputWrapper>
 
       {description && theme === 'vertical' && (

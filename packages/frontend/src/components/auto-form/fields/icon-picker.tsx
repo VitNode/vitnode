@@ -57,7 +57,7 @@ export function AutoFormIconPicker<T extends FieldValues>({
             value={value}
           />
         </FormControl>
-        <ChildComponent field={field} />
+        {ChildComponent && <ChildComponent field={field} />}
       </AutoFormInputWrapper>
 
       {description && theme === 'vertical' && (
