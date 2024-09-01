@@ -5,6 +5,7 @@ import {
   ListOrdered,
   Minus,
   Quote,
+  RemoveFormatting,
   Strikethrough,
   Underline,
 } from 'lucide-react';
@@ -34,6 +35,17 @@ export const ToolBarEditor = () => {
         },
       )}
     >
+      <ButtonToolbarEditor
+        name="remove_formatting"
+        onClick={() =>
+          editor.chain().focus().clearNodes().unsetAllMarks().run()
+        }
+      >
+        <RemoveFormatting />
+      </ButtonToolbarEditor>
+
+      <HeadingToolbarEditor />
+
       <ToggleToolbarEditor
         onPressedChange={() => editor.chain().focus().toggleBold().run()}
         pressed={editor.isActive('bold')}
@@ -76,7 +88,6 @@ export const ToolBarEditor = () => {
         <ListOrdered />
       </ToggleToolbarEditor>
 
-      <HeadingToolbarEditor />
       <ColorToolbarEditor />
       <TextAlignToolbarEditor />
       <LinkToolbarEditor />

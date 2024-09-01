@@ -6,7 +6,7 @@ description: Rich text editor that uses TipTap library.
 ## Usage
 
 ```tsx
-import { Editor } from 'vitnode-frontend/editor';
+import { Editor } from 'vitnode-frontend/components/editor/editor';
 ```
 
 ```tsx
@@ -78,7 +78,6 @@ import { TypeTable } from 'fumadocs-ui/components/type-table';
 
 We have implemented the following extensions:
 
-- [Blockquote](https://tiptap.dev/docs/editor/api/nodes/blockquote),
 - [BulletList](https://tiptap.dev/docs/editor/api/nodes/bullet-list),
 - [CodeBlock](https://tiptap.dev/docs/editor/api/nodes/code-block),
 - [HardBreak](https://tiptap.dev/docs/editor/api/nodes/hard-break),
@@ -91,14 +90,18 @@ We have implemented the following extensions:
 - [Code](https://tiptap.dev/docs/editor/api/marks/code),
 - [Italic](https://tiptap.dev/docs/editor/api/marks/italic),
 - [Strike](https://tiptap.dev/docs/editor/api/marks/strike),
-- [Dropcursor](https://tiptap.dev/docs/editor/api/extensions/dropcursor),
-- [Gapcursor](https://tiptap.dev/docs/editor/api/extensions/gapcursor),
 - [History](https://tiptap.dev/docs/editor/api/extensions/history),
 - [Underline](https://tiptap.dev/docs/editor/api/marks/underline),
 - [TextAlign](https://tiptap.dev/docs/editor/api/extensions/text-align),
+- [TextStyle](https://tiptap.dev/docs/editor/api/marks/text-style),
+
+To Improve:
+
+- [Blockquote](https://tiptap.dev/docs/editor/api/nodes/blockquote),
+- [Dropcursor](https://tiptap.dev/docs/editor/api/extensions/dropcursor),
+- [Gapcursor](https://tiptap.dev/docs/editor/api/extensions/gapcursor),
 - [CodeBlockLowlight](https://tiptap.dev/docs/editor/api/nodes/code-block-lowlight),
 - [Link](https://tiptap.dev/docs/editor/api/marks/link),
-- [TextStyle](https://tiptap.dev/docs/editor/api/marks/text-style),
 - [Color](https://tiptap.dev/docs/editor/api/extensions/color)
 
 and extra extensions unique to our implementation:
@@ -112,7 +115,7 @@ and extra extensions unique to our implementation:
 To display content form editor you have to use `ReadOnlyEditor` component.
 
 ```tsx
-import { ReadOnlyEditor } from 'vitnode-frontend/editor/read-only';
+import { ReadOnlyEditor } from 'vitnode-frontend/components/editor/read-only';
 ```
 
 ```tsx
