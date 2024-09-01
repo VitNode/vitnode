@@ -1,5 +1,6 @@
 query Admin__core_authorization_settings__show {
   admin__core_authorization_settings__show {
     force_login
+    lock_register
   }
 }

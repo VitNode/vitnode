@@ -53,6 +53,7 @@ export interface ConfigType {
   settings: {
     authorization: {
       force_login: boolean;
+      lock_register: boolean;
     };
     email: {
       color_primary: string;
@@ -97,6 +98,7 @@ export const DEFAULT_CONFIG_DATA: ConfigType = {
     },
     authorization: {
       force_login: false,
+      lock_register: false,
     },
   },
   langs: [

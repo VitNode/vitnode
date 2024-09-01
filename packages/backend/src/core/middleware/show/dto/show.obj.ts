@@ -55,6 +55,9 @@ export class SecurityCoreMiddleware {
 export class AuthorizationCoreMiddleware {
   @Field(() => Boolean)
   force_login: boolean;
+
+  @Field(() => Boolean)
+  lock_register: boolean;
 }
 
 @ObjectType()

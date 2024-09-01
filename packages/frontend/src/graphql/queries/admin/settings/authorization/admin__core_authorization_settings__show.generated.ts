@@ -4,13 +4,14 @@ import gql from 'graphql-tag';
 export type Admin__Core_Authorization_Settings__ShowQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
 
-export type Admin__Core_Authorization_Settings__ShowQuery = { __typename?: 'Query', admin__core_authorization_settings__show: { __typename?: 'ShowAdminAuthorizationSettingsObj', force_login: boolean } };
+export type Admin__Core_Authorization_Settings__ShowQuery = { __typename?: 'Query', admin__core_authorization_settings__show: { __typename?: 'ShowAdminAuthorizationSettingsObj', force_login: boolean, lock_register: boolean } };
 
 
 export const Admin__Core_Authorization_Settings__Show = gql`
     query Admin__core_authorization_settings__show {
   admin__core_authorization_settings__show {
     force_login
+    lock_register
   }
 }
     `;

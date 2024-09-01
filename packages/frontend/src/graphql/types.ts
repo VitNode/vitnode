@@ -33,6 +33,7 @@ export type AuthorizationAdminSessionsObj = {
 export type AuthorizationCoreMiddleware = {
   __typename?: 'AuthorizationCoreMiddleware';
   force_login: Scalars['Boolean']['output'];
+  lock_register: Scalars['Boolean']['output'];
 };
 
 export type AuthorizationCoreSessionsObj = {
@@ -301,6 +302,7 @@ export type Mutation = {
 
 export type MutationAdmin__Core_Authorization_Settings__EditArgs = {
   force_login: Scalars['Boolean']['input'];
+  lock_register: Scalars['Boolean']['input'];
 };
 
 
@@ -790,6 +792,7 @@ export type SecurityCoreMiddleware = {
 export type ShowAdminAuthorizationSettingsObj = {
   __typename?: 'ShowAdminAuthorizationSettingsObj';
   force_login: Scalars['Boolean']['output'];
+  lock_register: Scalars['Boolean']['output'];
 };
 
 export type ShowAdminCaptchaSecurityObj = {
