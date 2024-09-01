@@ -1,11 +1,10 @@
-import { AutoForm } from '@/components/auto-form/auto-form';
+import { AutoForm, DependencyType } from '@/components/form/auto-form';
 import {
   AutoFormCombobox,
   AutoFormComboboxProps,
-} from '@/components/auto-form/fields/combobox';
-import { AutoFormInput } from '@/components/auto-form/fields/input';
-import { AutoFormSwitch } from '@/components/auto-form/fields/switch';
-import { DependencyType } from '@/components/form/type';
+} from '@/components/form/fields/combobox';
+import { AutoFormInput } from '@/components/form/fields/input';
+import { AutoFormSwitch } from '@/components/form/fields/switch';
 import { Button } from '@/components/ui/button';
 import {
   DialogDescription,

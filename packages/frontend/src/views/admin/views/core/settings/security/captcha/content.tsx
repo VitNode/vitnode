@@ -1,12 +1,11 @@
 'use client';
 
-import { AutoForm } from '@/components/auto-form/auto-form';
-import { AutoFormInput } from '@/components/auto-form/fields/input';
+import { AutoForm, DependencyType } from '@/components/form/auto-form';
+import { AutoFormInput } from '@/components/form/fields/input';
 import {
   AutoFormRadioGroup,
   AutoFormRadioGroupProps,
-} from '@/components/auto-form/fields/radio-group';
-import { DependencyType } from '@/components/form/type';
+} from '@/components/form/fields/radio-group';
 import { Admin__Core_Security__Captcha__ShowQuery } from '@/graphql/queries/admin/security/admin__core_security__captcha__show.generated';
 import { Link } from '@/navigation';
 import { SquareArrowOutUpRight } from 'lucide-react';

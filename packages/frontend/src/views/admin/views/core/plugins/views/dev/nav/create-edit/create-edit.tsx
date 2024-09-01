@@ -1,11 +1,11 @@
-import { AutoForm } from '@/components/auto-form/auto-form';
-import { AutoFormIconPicker } from '@/components/auto-form/fields/icon-picker';
+import { AutoForm } from '@/components/form/auto-form';
+import { AutoFormIconPicker } from '@/components/form/fields/icon-picker';
 import {
   AutoFormInput,
   AutoFormInputProps,
-} from '@/components/auto-form/fields/input';
-import { AutoFormSelect } from '@/components/auto-form/fields/select';
-import { AutoFormTagInput } from '@/components/auto-form/fields/tags-input';
+} from '@/components/form/fields/input';
+import { AutoFormSelect } from '@/components/form/fields/select';
+import { AutoFormTagInput } from '@/components/form/fields/tags-input';
 import { DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Admin__Core_Plugins__Nav__ShowQuery } from '@/graphql/queries/admin/plugins/dev/nav/admin__core_plugins__nav__show.generated';
 import { ShowAdminNavPluginsObj } from '@/graphql/types';

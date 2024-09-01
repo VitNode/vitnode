@@ -1,5 +1,5 @@
-import { AutoForm } from '@/components/auto-form/auto-form';
-import { AutoFormCheckbox } from '@/components/auto-form/fields/checkbox';
+import { AutoForm } from '@/components/form/auto-form';
+import { AutoFormCheckbox } from '@/components/form/fields/checkbox';
 import { Button } from '@/components/ui/button';
 import { useTranslations } from 'next-intl';
 import * as z from 'zod';

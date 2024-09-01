@@ -1,3 +1,6 @@
+'use client';
+
+import { getBaseSchema } from '@/components/form/utils';
 import { FormControl, FormMessage } from '@/components/ui/form';
 import {
   Select,
@@ -7,37 +10,39 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { useTranslations } from 'next-intl';
+import React from 'react';
+import { FieldValues } from 'react-hook-form';
 import * as z from 'zod';
 
-import { AutoFormInputComponentProps } from '../type';
-import { getBaseSchema } from '../utils';
-import { DefaultParent } from './common/children';
+import { AutoFormItemProps } from '../auto-form';
+import { AutoFormInputWrapper } from './common/input-wrapper';
 import { AutoFormLabel } from './common/label';
 import { AutoFormTooltip } from './common/tooltip';
 import { AutoFormWrapper } from './common/wrapper';
 
-export const AutoFormSelect = ({
-  autoFormProps: {
-    isRequired,
-    fieldConfigItem,
-    zodItem,
-    field,
-    theme,
-    isDisabled,
-  },
-  labels,
-  placeholder,
-  ...props
-}: {
+export type AutoFormSelectProps = {
   labels?: Record<string, JSX.Element | string>;
   placeholder?: string;
-} & AutoFormInputComponentProps &
-  Omit<React.ComponentProps<typeof Select>, 'onValueChange'>) => {
+} & Omit<React.ComponentProps<typeof Select>, 'onValueChange' | 'value'>;
+
+export function AutoFormSelect<T extends FieldValues>({
+  field,
+  label,
+  description,
+  isRequired,
+  theme,
+  isDisabled,
+  shape,
+  componentProps,
+  className,
+  childComponent: ChildComponent,
+}: {
+  componentProps?: AutoFormSelectProps;
+} & AutoFormItemProps<T>) {
   const t = useTranslations('core');
-  const ParentWrapper = fieldConfigItem.renderParent ?? DefaultParent;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const baseValues = (getBaseSchema(zodItem) as unknown as z.ZodEnum<any>)._def
-    .values;
+  const baseValues = (
+    getBaseSchema(shape, true) as unknown as z.ZodEnum<[string, ...string[]]>
+  )._def.values;
 
   let values: [string, string][] = [];
   if (!Array.isArray(baseValues)) {
@@ -51,7 +56,7 @@ export const AutoFormSelect = ({
     const item = current?.[1];
 
     if (current) {
-      return labels?.[current[0]] ?? item;
+      return componentProps?.labels?.[current[0]] ?? item;
     }
 
     return item ?? t('select_option');
@@ -59,30 +64,33 @@ export const AutoFormSelect = ({
 
   return (
     <AutoFormWrapper theme={theme}>
-      {fieldConfigItem.label && (
+      {label && (
         <AutoFormLabel
-          description={fieldConfigItem.description}
+          description={description}
           isRequired={isRequired}
-          label={fieldConfigItem.label}
+          label={label}
           theme={theme}
         />
       )}
-      <ParentWrapper field={field}>
+
+      <AutoFormInputWrapper
+        className={className}
+        withChildren={!!ChildComponent}
+      >
         <FormControl>
           <Select
-            defaultValue={props.value ?? field.value}
-            disabled={isDisabled || props.disabled}
+            defaultValue={field.value}
+            disabled={isDisabled || componentProps?.disabled}
             onValueChange={field.onChange}
-            {...props}
           >
-            <SelectTrigger {...props}>
-              <SelectValue placeholder={placeholder}>
+            <SelectTrigger {...componentProps}>
+              <SelectValue placeholder={componentProps?.placeholder}>
                 {buttonPlaceholder()}
               </SelectValue>
             </SelectTrigger>
             <SelectContent>
               {values.map(([value, labelFromProps]) => {
-                const label = labels?.[value] ?? labelFromProps;
+                const label = componentProps?.labels?.[value] ?? labelFromProps;
 
                 return (
                   <SelectItem key={value} value={labelFromProps}>
@@ -93,11 +101,13 @@ export const AutoFormSelect = ({
             </SelectContent>
           </Select>
         </FormControl>
-      </ParentWrapper>
-      {fieldConfigItem.description && theme === 'vertical' && (
-        <AutoFormTooltip description={fieldConfigItem.description} />
+        {ChildComponent && <ChildComponent field={field} />}
+      </AutoFormInputWrapper>
+
+      {description && theme === 'vertical' && (
+        <AutoFormTooltip description={description} />
       )}
       <FormMessage />
     </AutoFormWrapper>
   );
-};
+}

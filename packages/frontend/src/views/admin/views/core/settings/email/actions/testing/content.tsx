@@ -1,9 +1,9 @@
-import { AutoForm } from '@/components/auto-form/auto-form';
+import { AutoForm } from '@/components/form/auto-form';
 import {
   AutoFormInput,
   AutoFormInputProps,
-} from '@/components/auto-form/fields/input';
-import { AutoTextArea } from '@/components/auto-form/fields/textarea';
+} from '@/components/form/fields/input';
+import { AutoTextArea } from '@/components/form/fields/textarea';
 import { Button } from '@/components/ui/button';
 import {
   DialogFooter,

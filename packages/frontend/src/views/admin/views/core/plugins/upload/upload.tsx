@@ -1,8 +1,8 @@
-import { AutoForm } from '@/components/auto-form/auto-form';
+import { AutoForm } from '@/components/form/auto-form';
 import {
   AutoFormFileInput,
   AutoFormFileInputProps,
-} from '@/components/auto-form/fields/file-input';
+} from '@/components/form/fields/file-input';
 import { Button } from '@/components/ui/button';
 import {
   DialogDescription,

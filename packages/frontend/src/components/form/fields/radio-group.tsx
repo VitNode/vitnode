@@ -1,3 +1,6 @@
+'use client';
+
+import { getBaseSchema } from '@/components/form/utils';
 import {
   FormControl,
   FormItem,
@@ -5,27 +8,17 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import React from 'react';
+import { FieldValues } from 'react-hook-form';
 import * as z from 'zod';
 
-import { AutoFormInputComponentProps } from '../type';
-import { getBaseSchema } from '../utils';
-import { DefaultParent } from './common/children';
+import { AutoFormItemProps } from '../auto-form';
+import { AutoFormInputWrapper } from './common/input-wrapper';
 import { AutoFormLabel } from './common/label';
 import { AutoFormTooltip } from './common/tooltip';
 import { AutoFormWrapper } from './common/wrapper';
 
-export const AutoFormRadioGroup = ({
-  autoFormProps: {
-    isRequired,
-    fieldConfigItem,
-    zodItem,
-    field,
-    theme,
-    isDisabled,
-  },
-  labels,
-  ...props
-}: {
+export type AutoFormRadioGroupProps = {
   labels?: Record<
     string,
     {
@@ -33,11 +26,25 @@ export const AutoFormRadioGroup = ({
       title: string;
     }
   >;
-} & AutoFormInputComponentProps &
-  React.ComponentProps<typeof RadioGroup>) => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const baseValues = (getBaseSchema(zodItem) as unknown as z.ZodEnum<any>)._def
-    .values;
+} & Omit<React.ComponentProps<typeof RadioGroup>, 'role' | 'variant'>;
+
+export function AutoFormRadioGroup<T extends FieldValues>({
+  field,
+  label,
+  description,
+  isRequired,
+  theme,
+  isDisabled,
+  shape,
+  componentProps,
+  className,
+  childComponent: ChildComponent,
+}: {
+  componentProps?: AutoFormRadioGroupProps;
+} & AutoFormItemProps<T>) {
+  const baseValues = (
+    getBaseSchema(shape, true) as unknown as z.ZodEnum<[string, ...string[]]>
+  )._def.values;
 
   let values: [string, string][] = [];
   if (!Array.isArray(baseValues)) {
@@ -46,30 +53,34 @@ export const AutoFormRadioGroup = ({
     values = baseValues.map(value => [value, value]);
   }
 
-  const ParentWrapper = fieldConfigItem.renderParent ?? DefaultParent;
-
   return (
     <AutoFormWrapper theme={theme}>
-      {fieldConfigItem.label && (
+      {label && (
         <AutoFormLabel
-          description={fieldConfigItem.description}
+          description={description}
           isRequired={isRequired}
-          label={fieldConfigItem.label}
+          label={label}
           theme={theme}
         />
       )}
-      <ParentWrapper field={field}>
+
+      <AutoFormInputWrapper
+        className={className}
+        withChildren={!!ChildComponent}
+      >
         <FormControl>
           <RadioGroup
             defaultValue={field.value}
-            disabled={isDisabled || props.disabled}
+            disabled={isDisabled || componentProps?.disabled}
             onValueChange={field.onChange}
-            {...props}
+            {...componentProps}
           >
             {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
             {values.map((value: any) => {
-              const label = labels?.[value[0]]?.title ?? value[1];
-              const description = labels?.[value[0]]?.description;
+              const label =
+                componentProps?.labels?.[value[0]]?.title ?? value[1];
+              const description =
+                componentProps?.labels?.[value[0]]?.description;
 
               return (
                 <FormItem
@@ -93,11 +104,13 @@ export const AutoFormRadioGroup = ({
             })}
           </RadioGroup>
         </FormControl>
-      </ParentWrapper>
-      {fieldConfigItem.description && theme === 'vertical' && (
-        <AutoFormTooltip description={fieldConfigItem.description} />
+        {ChildComponent && <ChildComponent field={field} />}
+      </AutoFormInputWrapper>
+
+      {description && theme === 'vertical' && (
+        <AutoFormTooltip description={description} />
       )}
       <FormMessage />
     </AutoFormWrapper>
   );
-};
+}

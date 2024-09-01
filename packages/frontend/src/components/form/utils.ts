@@ -1,7 +1,36 @@
 import { DefaultValues, FieldValues, UseFormWatch } from 'react-hook-form';
 import * as z from 'zod';
 
-import { Dependency, DependencyType, ZodObjectOrWrapped } from './type';
+import { DependencyType } from './auto-form';
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type ZodObjectOrWrapped = z.Schema<any, any>;
+
+interface BaseDependency<T extends FieldValues> {
+  sourceField: keyof T | string;
+  targetField: keyof T | string;
+  type: DependencyType;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  when: (sourceFieldValue: any, targetFieldValue: unknown) => boolean;
+}
+
+export type ValueDependency<T extends FieldValues> = {
+  type:
+    | DependencyType.DISABLES
+    | DependencyType.HIDES
+    | DependencyType.REQUIRES;
+} & BaseDependency<T>;
+
+export type OptionsDependency<T extends FieldValues> = {
+  // Partial array of values from sourceField that will trigger the dependency
+  options: z.EnumValues;
+
+  type: DependencyType.SETS_OPTIONS;
+} & BaseDependency<T>;
+
+export type Dependency<T extends FieldValues> =
+  | OptionsDependency<T>
+  | ValueDependency<T>;
 
 export function getObjectFormSchema(
   schema: ZodObjectOrWrapped,

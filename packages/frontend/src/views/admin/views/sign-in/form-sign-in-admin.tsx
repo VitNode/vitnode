@@ -1,10 +1,10 @@
 'use client';
 
-import { AutoForm } from '@/components/auto-form/auto-form';
+import { AutoForm } from '@/components/form/auto-form';
 import {
   AutoFormInput,
   AutoFormInputProps,
-} from '@/components/auto-form/fields/input';
+} from '@/components/form/fields/input';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { CardContent } from '@/components/ui/card';

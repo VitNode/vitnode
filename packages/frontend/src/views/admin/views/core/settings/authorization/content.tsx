@@ -1,7 +1,7 @@
 'use client';
 
-import { AutoForm } from '@/components/auto-form/auto-form';
-import { AutoFormSwitch } from '@/components/auto-form/fields/switch';
+import { AutoForm } from '@/components/form/auto-form';
+import { AutoFormSwitch } from '@/components/form/fields/switch';
 import { Admin__Core_Authorization_Settings__ShowQuery } from '@/graphql/queries/admin/settings/authorization/admin__core_authorization_settings__show.generated';
 import { useTranslations } from 'next-intl';
 

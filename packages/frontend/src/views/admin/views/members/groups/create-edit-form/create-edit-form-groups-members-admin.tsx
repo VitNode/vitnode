@@ -1,12 +1,11 @@
-import { AutoForm } from '@/components/auto-form/auto-form';
-import { AutoFormColorPicker } from '@/components/auto-form/fields/color-picker';
+import { AutoForm, DependencyType } from '@/components/form/auto-form';
+import { AutoFormColorPicker } from '@/components/form/fields/color-picker';
 import {
   AutoFormInput,
   AutoFormInputProps,
-} from '@/components/auto-form/fields/input';
-import { AutoFormSwitch } from '@/components/auto-form/fields/switch';
-import { AutoFormTextLanguageInput } from '@/components/auto-form/fields/text-language-input';
-import { DependencyType } from '@/components/form/type';
+} from '@/components/form/fields/input';
+import { AutoFormSwitch } from '@/components/form/fields/switch';
+import { AutoFormTextLanguageInput } from '@/components/form/fields/text-language-input';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import {

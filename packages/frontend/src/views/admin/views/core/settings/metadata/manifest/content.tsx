@@ -1,15 +1,15 @@
 'use client';
 
-import { AutoForm } from '@/components/auto-form/auto-form';
-import { AutoFormColorPicker } from '@/components/auto-form/fields/color-picker';
+import { AutoForm } from '@/components/form/auto-form';
+import { AutoFormColorPicker } from '@/components/form/fields/color-picker';
 import {
   AutoFormInput,
   AutoFormInputProps,
-} from '@/components/auto-form/fields/input';
+} from '@/components/form/fields/input';
 import {
   AutoFormRadioGroup,
   AutoFormRadioGroupProps,
-} from '@/components/auto-form/fields/radio-group';
+} from '@/components/form/fields/radio-group';
 import { Admin__Core_Manifest_Metadata__ShowQuery } from '@/graphql/queries/admin/settings/admin__core_manifest_metadata__show.generated';
 import { CONFIG } from '@/helpers/config-with-env';
 import { useTranslations } from 'next-intl';

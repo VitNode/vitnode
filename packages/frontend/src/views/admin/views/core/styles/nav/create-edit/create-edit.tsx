@@ -1,8 +1,8 @@
-import { AutoForm } from '@/components/auto-form/auto-form';
-import { AutoFormIconPicker } from '@/components/auto-form/fields/icon-picker';
-import { AutoFormInput } from '@/components/auto-form/fields/input';
-import { AutoFormSwitch } from '@/components/auto-form/fields/switch';
-import { AutoFormTextLanguageInput } from '@/components/auto-form/fields/text-language-input';
+import { AutoForm } from '@/components/form/auto-form';
+import { AutoFormIconPicker } from '@/components/form/fields/icon-picker';
+import { AutoFormInput } from '@/components/form/fields/input';
+import { AutoFormSwitch } from '@/components/form/fields/switch';
+import { AutoFormTextLanguageInput } from '@/components/form/fields/text-language-input';
 import { Button } from '@/components/ui/button';
 import {
   DialogFooter,

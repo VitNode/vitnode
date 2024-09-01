@@ -1,21 +1,20 @@
 'use client';
 
-import { AutoForm } from '@/components/auto-form/auto-form';
-import { AutoFormColorPicker } from '@/components/auto-form/fields/color-picker';
+import { AutoForm, DependencyType } from '@/components/form/auto-form';
+import { AutoFormColorPicker } from '@/components/form/fields/color-picker';
 import {
   AutoFormFileInput,
   AutoFormFileInputProps,
-} from '@/components/auto-form/fields/file-input';
+} from '@/components/form/fields/file-input';
 import {
   AutoFormInput,
   AutoFormInputProps,
-} from '@/components/auto-form/fields/input';
+} from '@/components/form/fields/input';
 import {
   AutoFormRadioGroup,
   AutoFormRadioGroupProps,
-} from '@/components/auto-form/fields/radio-group';
-import { AutoFormSwitch } from '@/components/auto-form/fields/switch';
-import { DependencyType } from '@/components/form/type';
+} from '@/components/form/fields/radio-group';
+import { AutoFormSwitch } from '@/components/form/fields/switch';
 import { Admin__Core_Email_Settings__ShowQuery } from '@/graphql/queries/admin/settings/admin__core_email_settings__show.generated';
 import { Link } from '@/navigation';
 import { SquareArrowOutUpRight } from 'lucide-react';

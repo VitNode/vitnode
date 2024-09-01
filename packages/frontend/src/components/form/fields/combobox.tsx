@@ -1,10 +1,7 @@
-import { cn } from '@/helpers/classnames';
-import { Check, ChevronsUpDown } from 'lucide-react';
-import { useTranslations } from 'next-intl';
-import React from 'react';
-import * as z from 'zod';
+'use client';
 
-import { Button } from '../../ui/button';
+import { getBaseSchema } from '@/components/form/utils';
+import { Button } from '@/components/ui/button';
 import {
   Command,
   CommandEmpty,
@@ -12,41 +9,52 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from '../../ui/command';
-import { FormControl, FormMessage } from '../../ui/form';
-import { Popover, PopoverContent, PopoverTrigger } from '../../ui/popover';
-import { AutoFormInputComponentProps } from '../type';
-import { getBaseSchema } from '../utils';
-import { DefaultParent } from './common/children';
+} from '@/components/ui/command';
+import { FormControl, FormMessage } from '@/components/ui/form';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
+import { cn } from '@/helpers/classnames';
+import { Check, ChevronsUpDownIcon } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import React from 'react';
+import { FieldValues } from 'react-hook-form';
+import * as z from 'zod';
+
+import { AutoFormItemProps } from '../auto-form';
+import { AutoFormInputWrapper } from './common/input-wrapper';
 import { AutoFormLabel } from './common/label';
 import { AutoFormTooltip } from './common/tooltip';
 import { AutoFormWrapper } from './common/wrapper';
 
-export const AutoFormCombobox = ({
-  autoFormProps: {
-    isRequired,
-    fieldConfigItem,
-    zodItem,
-    field,
-    theme,
-    isDisabled,
-  },
-  labels,
-  placeholderSearchInput,
-  multiple,
-  ...props
-}: {
+export type AutoFormComboboxProps = {
   labels?: Record<string, JSX.Element | string>;
   multiple?: boolean;
   placeholderSearchInput?: string;
-} & AutoFormInputComponentProps &
-  Omit<React.ComponentProps<typeof Button>, 'role' | 'variant'>) => {
+} & Omit<React.ComponentProps<typeof Button>, 'role' | 'variant'>;
+
+export function AutoFormCombobox<T extends FieldValues>({
+  field,
+  label,
+  description,
+  isRequired,
+  theme,
+  isDisabled,
+  shape,
+  componentProps,
+  className,
+  childComponent: ChildComponent,
+}: {
+  componentProps?: AutoFormComboboxProps;
+} & AutoFormItemProps<T>) {
   const t = useTranslations('core');
   const [open, setOpen] = React.useState(false);
-  const ParentWrapper = fieldConfigItem.renderParent ?? DefaultParent;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const baseValues = (getBaseSchema(zodItem, true) as unknown as z.ZodEnum<any>)
-    ._def.values;
+  const value: string | string[] | undefined = field.value;
+  const baseValues = (
+    getBaseSchema(shape, true) as unknown as z.ZodEnum<[string, ...string[]]>
+  )._def.values;
 
   let values: [string, string][] = [];
   if (!Array.isArray(baseValues)) {
@@ -56,15 +64,15 @@ export const AutoFormCombobox = ({
   }
 
   const buttonPlaceholder = () => {
-    if (multiple && Array.isArray(field.value)) {
-      return t('selected', { count: field.value.length });
+    if (componentProps?.multiple && Array.isArray(value)) {
+      return t('selected', { count: value.length });
     }
 
-    const current = values.find(item => item[0] === field.value);
+    const current = values.find(item => item[0] === value);
     const item = current?.[1];
 
     if (current) {
-      return labels?.[current[0]] ?? item;
+      return componentProps?.labels?.[current[0]] ?? item;
     }
 
     return item ?? t('select_option');
@@ -72,96 +80,108 @@ export const AutoFormCombobox = ({
 
   return (
     <AutoFormWrapper theme={theme}>
-      {fieldConfigItem.label && (
+      {label && (
         <AutoFormLabel
-          description={fieldConfigItem.description}
+          description={description}
           isRequired={isRequired}
-          label={fieldConfigItem.label}
+          label={label}
           theme={theme}
         />
       )}
-      <ParentWrapper field={field}>
-        <Popover modal onOpenChange={setOpen} open={open}>
+
+      <Popover modal onOpenChange={setOpen} open={open}>
+        <AutoFormInputWrapper
+          className={className}
+          withChildren={!!ChildComponent}
+        >
           <PopoverTrigger asChild>
             <FormControl>
               <Button
-                ariaLabel={fieldConfigItem.label ?? ''}
-                className={cn('w-full justify-start', props.className)}
-                disabled={isDisabled || props.disabled}
+                ariaLabel={label ?? ''}
+                className={cn(
+                  'w-full justify-start',
+                  componentProps?.className,
+                )}
+                disabled={isDisabled || componentProps?.disabled}
                 role="combobox"
                 variant="outline"
-                {...props}
+                {...componentProps}
               >
                 {buttonPlaceholder()}
-                <ChevronsUpDown className="ml-auto size-4 shrink-0 opacity-50" />
+                <ChevronsUpDownIcon className="ml-auto size-4 shrink-0 opacity-50" />
               </Button>
             </FormControl>
           </PopoverTrigger>
-          <PopoverContent className="p-0">
-            <Command>
-              <CommandInput
-                placeholder={
-                  placeholderSearchInput
-                    ? placeholderSearchInput
-                    : t('search_placeholder')
-                }
-              />
-              <CommandList>
-                <CommandEmpty>{t('no_results')}</CommandEmpty>
-                <CommandGroup>
-                  {values.map(([value, labelFromProps]) => {
-                    const label = labels?.[value] ?? labelFromProps;
-                    const currentArrayValues = Array.isArray(field.value)
-                      ? field.value
-                      : field.value
-                        ? [field.value]
-                        : [];
+          {ChildComponent && <ChildComponent field={field} />}
+        </AutoFormInputWrapper>
+        <PopoverContent className="p-0">
+          <Command>
+            <CommandInput
+              placeholder={
+                componentProps?.placeholderSearchInput
+                  ? componentProps.placeholderSearchInput
+                  : t('search_placeholder')
+              }
+            />
+            <CommandList>
+              <CommandEmpty>{t('no_results')}</CommandEmpty>
+              <CommandGroup>
+                {values.map(([valueItem, labelFromProps]) => {
+                  const label =
+                    componentProps?.labels?.[valueItem] ?? labelFromProps;
+                  const currentArrayValues = Array.isArray(value)
+                    ? value
+                    : value
+                      ? [value]
+                      : [];
 
-                    return (
-                      <CommandItem
-                        key={value}
-                        onSelect={() => {
-                          if (multiple) {
-                            field.onChange(
-                              currentArrayValues.includes(value)
-                                ? currentArrayValues.filter(el => el !== value)
-                                : [...currentArrayValues, value],
-                            );
+                  return (
+                    <CommandItem
+                      key={valueItem}
+                      onSelect={() => {
+                        if (componentProps?.multiple) {
+                          field.onChange(
+                            currentArrayValues.includes(valueItem)
+                              ? currentArrayValues.filter(
+                                  el => el !== valueItem,
+                                )
+                              : [...currentArrayValues, valueItem],
+                          );
 
-                            return;
-                          }
+                          return;
+                        }
 
-                          field.onChange(value);
-                          setOpen(false);
-                        }}
-                        value={labelFromProps}
-                      >
-                        <Check
-                          className={cn(
-                            'mr-2 size-4',
-                            (
-                              multiple
-                                ? currentArrayValues.includes(value)
-                                : value === field.value
-                            )
-                              ? 'opacity-100'
-                              : 'opacity-0',
-                          )}
-                        />
-                        {label}
-                      </CommandItem>
-                    );
-                  })}
-                </CommandGroup>
-              </CommandList>
-            </Command>
-          </PopoverContent>
-        </Popover>
-      </ParentWrapper>
-      {fieldConfigItem.description && theme === 'vertical' && (
-        <AutoFormTooltip description={fieldConfigItem.description} />
+                        field.onChange(valueItem);
+                        setOpen(false);
+                      }}
+                      value={labelFromProps}
+                    >
+                      <Check
+                        className={cn(
+                          'mr-2 size-4',
+                          (
+                            componentProps?.multiple
+                              ? currentArrayValues.includes(valueItem)
+                              : value === valueItem
+                          )
+                            ? 'opacity-100'
+                            : 'opacity-0',
+                        )}
+                      />
+                      {label}
+                    </CommandItem>
+                  );
+                })}
+              </CommandGroup>
+            </CommandList>
+          </Command>
+        </PopoverContent>
+      </Popover>
+
+      {description && theme === 'vertical' && (
+        <AutoFormTooltip description={description} />
       )}
       <FormMessage />
     </AutoFormWrapper>
   );
-};
+}

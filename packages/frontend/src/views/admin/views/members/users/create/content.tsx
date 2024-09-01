@@ -1,8 +1,8 @@
-import { AutoForm } from '@/components/auto-form/auto-form';
+import { AutoForm } from '@/components/form/auto-form';
 import {
   AutoFormInput,
   AutoFormInputProps,
-} from '@/components/auto-form/fields/input';
+} from '@/components/form/fields/input';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { removeSpecialCharacters } from '@/helpers/special-characters';

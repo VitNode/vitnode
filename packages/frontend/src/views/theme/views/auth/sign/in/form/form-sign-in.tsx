@@ -1,12 +1,12 @@
 'use client';
 
 // import { AutoFormCheckbox } from '@/components/form/fields/checkbox';
-import { AutoForm } from '@/components/auto-form/auto-form';
-import { AutoFormCheckbox } from '@/components/auto-form/fields/checkbox';
+import { AutoForm } from '@/components/form/auto-form';
+import { AutoFormCheckbox } from '@/components/form/fields/checkbox';
 import {
   AutoFormInput,
   AutoFormInputProps,
-} from '@/components/auto-form/fields/input';
+} from '@/components/form/fields/input';
 // import { AutoFormInput } from '@/components/form/fields/input';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';

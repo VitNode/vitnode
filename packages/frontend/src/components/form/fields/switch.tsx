@@ -1,18 +1,35 @@
+'use client';
+
 import { FormControl, FormMessage } from '@/components/ui/form';
 import { Switch } from '@/components/ui/switch';
 import { cn } from '@/helpers/classnames';
+import { FieldValues } from 'react-hook-form';
 
-import { AutoFormInputComponentProps } from '../type';
-import { DefaultParent } from './common/children';
+import { AutoFormItemProps } from '../auto-form';
+import { AutoFormInputWrapper } from './common/input-wrapper';
 import { AutoFormLabel } from './common/label';
 import { AutoFormTooltip } from './common/tooltip';
 import { AutoFormWrapper } from './common/wrapper';
 
-export const AutoFormSwitch = ({
-  autoFormProps: { isRequired, fieldConfigItem, field, theme, isDisabled },
-  ...props
-}: AutoFormInputComponentProps & React.ComponentProps<typeof Switch>) => {
-  const ParentWrapper = fieldConfigItem.renderParent ?? DefaultParent;
+export type AutoFormSwitchProps = Omit<
+  React.ComponentProps<typeof Switch>,
+  'checked'
+>;
+
+export function AutoFormSwitch<T extends FieldValues>({
+  field,
+  label,
+  description,
+  isRequired,
+  theme,
+  isDisabled,
+  componentProps,
+  className,
+  childComponent: ChildComponent,
+}: {
+  componentProps?: AutoFormSwitchProps;
+} & AutoFormItemProps<T>) {
+  const value: boolean = field.value || false;
 
   return (
     <AutoFormWrapper
@@ -23,32 +40,37 @@ export const AutoFormSwitch = ({
       theme={theme}
     >
       <div>
-        {fieldConfigItem.label && (
+        {label && (
           <AutoFormLabel
-            description={fieldConfigItem.description}
+            description={description}
             isRequired={isRequired}
-            label={fieldConfigItem.label}
+            label={label}
             theme={theme}
           />
         )}
-        {fieldConfigItem.description && theme === 'vertical' && (
-          <AutoFormTooltip description={fieldConfigItem.description} />
+        {description && theme === 'vertical' && (
+          <AutoFormTooltip description={description} />
         )}
         <FormMessage />
       </div>
-      <ParentWrapper field={field}>
+
+      <AutoFormInputWrapper
+        className={className}
+        withChildren={!!ChildComponent}
+      >
         <FormControl>
           <Switch
-            checked={props.value ?? field.value}
+            checked={value}
             onCheckedChange={e => {
               field.onChange(e);
-              props.onCheckedChange?.(e);
+              componentProps?.onCheckedChange?.(e);
             }}
-            {...props}
-            disabled={isDisabled || props.disabled}
+            {...componentProps}
+            disabled={isDisabled || componentProps?.disabled}
           />
         </FormControl>
-      </ParentWrapper>
+        {ChildComponent && <ChildComponent field={field} />}
+      </AutoFormInputWrapper>
     </AutoFormWrapper>
   );
-};
+}

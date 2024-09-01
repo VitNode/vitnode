@@ -1,11 +1,11 @@
 'use client';
 
-import { AutoForm } from '@/components/auto-form/auto-form';
+import { AutoForm } from '@/components/form/auto-form';
 import {
   AutoFormRadioGroup,
   AutoFormRadioGroupProps,
-} from '@/components/auto-form/fields/radio-group';
-import { AutoFormSwitch } from '@/components/auto-form/fields/switch';
+} from '@/components/form/fields/radio-group';
+import { AutoFormSwitch } from '@/components/form/fields/switch';
 import { Card } from '@/components/ui/card';
 import { Core_GlobalQuery } from '@/graphql/queries/core_global.generated';
 import { useTranslations } from 'next-intl';

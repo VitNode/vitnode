@@ -1,13 +1,12 @@
-import { AutoForm } from '@/components/auto-form/auto-form';
+import { AutoForm, DependencyType } from '@/components/form/auto-form';
 import {
   AutoFormInput,
   AutoFormInputProps,
-} from '@/components/auto-form/fields/input';
+} from '@/components/form/fields/input';
 import {
   AutoFormRadioGroup,
   AutoFormRadioGroupProps,
-} from '@/components/auto-form/fields/radio-group';
-import { DependencyType } from '@/components/form/type';
+} from '@/components/form/fields/radio-group';
 import { Button } from '@/components/ui/button';
 import {
   DialogDescription,
