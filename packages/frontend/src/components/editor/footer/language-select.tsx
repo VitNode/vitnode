@@ -1,20 +1,20 @@
 import { useTranslations } from 'next-intl';
 
-import { buttonVariants } from '../../components/ui/button';
+import { useGlobals } from '../../../hooks/use-globals';
+import { buttonVariants } from '../../ui/button';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '../../components/ui/select';
+} from '../../ui/select';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '../../components/ui/tooltip';
-import { useGlobals } from '../../hooks/use-globals';
+} from '../../ui/tooltip';
 import { useEditorState } from '../hooks/use-editor-state';
 
 export interface LanguageSelectFooterEditorProps {

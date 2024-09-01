@@ -1,14 +1,22 @@
-import { Bold, Italic, Underline } from 'lucide-react';
+import {
+  Bold,
+  Italic,
+  List,
+  ListOrdered,
+  Minus,
+  Quote,
+  Strikethrough,
+  Underline,
+} from 'lucide-react';
 
-import { cn } from '../../helpers/classnames';
-import { useGlobals } from '../../hooks/use-globals';
+import { cn } from '../../../helpers/classnames';
+import { useGlobals } from '../../../hooks/use-globals';
 import { useEditorState } from '../hooks/use-editor-state';
+import { ButtonToolbarEditor } from './button';
 import { ColorToolbarEditor } from './custom/color/color';
 import { EmojiToolbarEditor } from './custom/emoji/emoji';
 import { HeadingToolbarEditor } from './custom/heading';
 import { LinkToolbarEditor } from './custom/link/link';
-import { MoreToolbarEditor } from './custom/more';
-import { PlusToolbarEditor } from './custom/plus';
 import { TextAlignToolbarEditor } from './custom/text-align';
 import { ToggleToolbarEditor } from './toggle';
 
@@ -47,13 +55,46 @@ export const ToolBarEditor = () => {
         <Underline />
       </ToggleToolbarEditor>
 
+      <ToggleToolbarEditor
+        onPressedChange={() => editor.chain().focus().toggleStrike().run()}
+        pressed={editor.isActive('strike')}
+      >
+        <Strikethrough />
+      </ToggleToolbarEditor>
+
+      <ToggleToolbarEditor
+        onPressedChange={() => editor.chain().focus().toggleBulletList().run()}
+        pressed={editor.isActive('bulletList')}
+      >
+        <List />
+      </ToggleToolbarEditor>
+
+      <ToggleToolbarEditor
+        onPressedChange={() => editor.chain().focus().toggleOrderedList().run()}
+        pressed={editor.isActive('orderedList')}
+      >
+        <ListOrdered />
+      </ToggleToolbarEditor>
+
       <HeadingToolbarEditor />
-      <PlusToolbarEditor />
       <ColorToolbarEditor />
       <TextAlignToolbarEditor />
       <LinkToolbarEditor />
       <EmojiToolbarEditor />
-      <MoreToolbarEditor />
+
+      <ButtonToolbarEditor
+        name="horizontal_rule"
+        onClick={() => editor.chain().focus().setHorizontalRule().run()}
+      >
+        <Minus />
+      </ButtonToolbarEditor>
+
+      <ToggleToolbarEditor
+        onPressedChange={() => editor.chain().focus().toggleBlockquote().run()}
+        pressed={editor.isActive('blockquote')}
+      >
+        <Quote />
+      </ToggleToolbarEditor>
     </div>
   );
 };

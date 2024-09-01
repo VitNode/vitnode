@@ -5,9 +5,9 @@ import { Content, EditorContent, useEditor } from '@tiptap/react';
 import { useLocale } from 'next-intl';
 import React from 'react';
 
-import { Skeleton } from '../components/ui/skeleton';
-import { cn } from '../helpers/classnames';
-import { useGlobals } from '../hooks/use-globals';
+import { cn } from '../../helpers/classnames';
+import { useGlobals } from '../../hooks/use-globals';
+import { Skeleton } from '../ui/skeleton';
 import { EmojiExtensionEditor } from './extensions/emoji/emoji';
 import { extensionsEditor } from './extensions/extensions';
 import {

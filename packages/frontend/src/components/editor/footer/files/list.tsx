@@ -1,4 +1,4 @@
-import { cn } from '../../../helpers/classnames';
+import { cn } from '../../../../helpers/classnames';
 import { useEditorState } from '../../hooks/use-editor-state';
 import { ItemListFilesFooterEditor } from './item/item';
 

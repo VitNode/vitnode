@@ -5,7 +5,7 @@ import parse, { Element, HTMLReactParserOptions } from 'html-react-parser';
 import Image from 'next/image';
 import { useLocale } from 'next-intl';
 
-import { cn } from '../../helpers/classnames';
+import { cn } from '../../../helpers/classnames';
 import { extensionsEditor } from '../extensions/extensions';
 import { changeCodeBlock } from './code-block';
 import { FileDownloadButton } from './file-download-button';

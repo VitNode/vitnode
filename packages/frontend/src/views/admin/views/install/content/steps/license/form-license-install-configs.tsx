@@ -26,6 +26,7 @@ export const FormLicenseInstallConfigs = () => {
       fields={[
         {
           id: 'agree',
+          label: 'I agree to the terms of the license agreement.',
           component: AutoFormCheckbox,
         },
       ]}

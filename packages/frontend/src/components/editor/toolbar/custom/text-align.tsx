@@ -6,11 +6,7 @@ import {
   ChevronDownIcon,
 } from 'lucide-react';
 
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '../../../components/ui/popover';
+import { Popover, PopoverContent, PopoverTrigger } from '../../../ui/popover';
 import { useEditorState } from '../../hooks/use-editor-state';
 import { ButtonToolbarEditor } from '../button';
 import { ToggleToolbarEditor } from '../toggle';

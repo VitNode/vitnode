@@ -1,8 +1,8 @@
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
-import { Button } from '../../components/ui/button';
-import { cn } from '../../helpers/classnames';
+import { cn } from '../../../helpers/classnames';
+import { Button } from '../../ui/button';
 
 export const ButtonToolbarEditor = ({
   active,

@@ -16,7 +16,7 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-} from '../../../components/ui/select';
+} from '../../../ui/select';
 import { useEditorState } from '../../hooks/use-editor-state';
 
 const getHeadingIcon = (level: number) => {

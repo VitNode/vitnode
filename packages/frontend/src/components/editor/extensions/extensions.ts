@@ -18,18 +18,17 @@ export const extensionsEditor = ({
     heading: false,
     bulletList: {
       HTMLAttributes: {
-        class: 'list-disc',
+        class: 'pl-5 list-disc',
       },
     },
     listItem: {
       HTMLAttributes: {
-        class:
-          'ml-[2em] [&>p:first-of-type]:mb-0 [&:not(:first-child)]:mt-[.25em]',
+        class: 'ml-1 [&>p:first-of-type]:mb-0 [&:not(:first-child)]:mt-1',
       },
     },
     orderedList: {
       HTMLAttributes: {
-        class: 'list-decimal',
+        class: 'pl-5 list-decimal',
       },
     },
     blockquote: {

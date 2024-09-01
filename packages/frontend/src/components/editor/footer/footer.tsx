@@ -1,5 +1,5 @@
-import { useGlobals } from '../../hooks/use-globals';
-import { useSession } from '../../hooks/use-session';
+import { useGlobals } from '../../../hooks/use-globals';
+import { useSession } from '../../../hooks/use-session';
 import { useEditorState } from '../hooks/use-editor-state';
 import { FilesButtonFooterEditor } from './files/button';
 import { ListFilesFooterEditor } from './files/list';

@@ -6,9 +6,9 @@ import { useTranslations } from 'next-intl';
 import React from 'react';
 import tippy, { GetReferenceClientRect, Instance } from 'tippy.js';
 
-import { Button } from '../../../components/ui/button';
-import { classPopover } from '../../../components/ui/popover';
-import { cn } from '../../../helpers/classnames';
+import { cn } from '../../../../helpers/classnames';
+import { Button } from '../../../ui/button';
+import { classPopover } from '../../../ui/popover';
 
 export interface SuggestionProps<I> {
   clientRect?: GetReferenceClientRect;
