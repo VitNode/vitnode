@@ -34,12 +34,12 @@ const formSchema = z.object({
 ```tsx
 <AutoForm
   formSchema={formSchema}
-  fieldConfig={{
-    allow_files: {
-      label: 'Allow Files',
-      fieldType: AutoFormCheckbox, // [!code highlight]
+  fields={[
+    {
+      id: 'allow_files',
+      component: AutoFormCheckbox, // [!code highlight]
     },
-  }}
+  ]}
 />
 ```
 

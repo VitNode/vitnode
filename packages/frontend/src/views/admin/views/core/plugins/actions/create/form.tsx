@@ -1,5 +1,8 @@
 import { AutoForm } from '@/components/form/auto-form';
-import { AutoFormInput } from '@/components/form/fields/input';
+import {
+  AutoFormInput,
+  AutoFormInputProps,
+} from '@/components/form/fields/input';
 import { ShowAdminPlugins } from '@/graphql/types';
 import { useTranslations } from 'next-intl';
 
@@ -20,39 +23,51 @@ export const FormCreateEditPluginAdmin = ({
   return (
     <AutoForm
       className={className}
-      fieldConfig={{
-        name: {
+      fields={[
+        {
+          id: 'name',
+          component: AutoFormInput,
           label: t('create.name.label'),
-          description: t('create.name.desc'),
-          fieldType: AutoFormInput,
         },
-        description: {
+        {
+          id: 'description',
+          component: AutoFormInput,
           label: t('create.description.label'),
-          fieldType: AutoFormInput,
         },
-        code: {
+        {
+          id: 'code',
+          component: AutoFormInput,
+          componentProps: {
+            placeholder: 'vitnode-plugin-example',
+          } as AutoFormInputProps,
           label: t('create.code.label'),
           description: t('create.code.desc'),
-          fieldType: props => (
-            <AutoFormInput placeholder="vitnode-plugin-example" {...props} />
-          ),
         },
-        support_url: {
+        {
+          id: 'support_url',
+          component: AutoFormInput,
+          componentProps: {
+            type: 'url',
+          } as AutoFormInputProps,
           label: t('create.support_url.label'),
           description: t('create.support_url.desc'),
-          fieldType: props => <AutoFormInput type="url" {...props} />,
         },
-        author: {
-          label: 'Author',
-          description: 'The author of the plugin',
-          fieldType: AutoFormInput,
+        {
+          id: 'author',
+          component: AutoFormInput,
+          label: t('create.author.label'),
+          description: t('create.author.desc'),
         },
-        author_url: {
-          label: 'Author URL',
-          description: 'The URL of the author',
-          fieldType: props => <AutoFormInput type="url" {...props} />,
+        {
+          id: 'author_url',
+          component: AutoFormInput,
+          componentProps: {
+            type: 'url',
+          } as AutoFormInputProps,
+          label: t('create.author_url.label'),
+          description: t('create.author_url.desc'),
         },
-      }}
+      ]}
       formSchema={formSchema}
       onSubmit={onSubmit}
       submitButton={submitButton}

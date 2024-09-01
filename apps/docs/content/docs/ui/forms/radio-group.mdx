@@ -22,7 +22,7 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 ```ts
 import * as z from 'zod';
 import { AutoForm } from 'vitnode-frontend/form/auto-form';
-import { AutoFormRadioGroup } from 'vitnode-frontend/form/fields/radio-group';
+import { AutoFormRadioGroup, AutoFormRadioGroupProps } from 'vitnode-frontend/form/fields/radio-group';
 ````
 
 ```ts
@@ -40,26 +40,24 @@ const formSchema = z.object({
 ```tsx
 <AutoForm
   formSchema={formSchema}
-  fieldConfig={{
-    type: {
-      label: 'Radio Group Example',
-      fieldType: props => (
-        <AutoFormRadioGroup
-          {...props}
-          labels={{
-            ['option-one']: {
-              title: 'Option One',
-              description: 'Option One Description',
-            },
-            ['option-two']: {
-              title: 'Option Two',
-              description: 'Option Two Description',
-            },
-          }}
-        />
-      ),
+  fields={[
+    {
+      id: 'type',
+      component: AutoFormRadioGroup,
+      componentProps: {
+        labels: {
+          ['option-one']: {
+            title: 'Option One',
+            description: 'Option One Description',
+          },
+          ['option-two']: {
+            title: 'Option Two',
+            description: 'Option Two Description',
+          },
+        },
+      } as AutoFormRadioGroupProps,
     },
-  }}
+  ]}
 />
 ```
 

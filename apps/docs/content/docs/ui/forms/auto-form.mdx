@@ -3,8 +3,6 @@ title: Auto Form
 description: Automatically generate form fields based on a schema.
 ---
 
-Component created based on [Auto Form by vantezzen](https://github.com/vantezzen/auto-form).
-
 ## Support Fileds
 
 - [Color Picker](/docs/ui/forms/color-picker)
@@ -17,7 +15,7 @@ Component created based on [Auto Form by vantezzen](https://github.com/vantezzen
 - [Switch](/docs/ui/forms/switch)
 - [Text Language Input](/docs/ui/forms/text-language-input)
 - [Icon Picker](/docs/ui/forms/icon-picker)
-- [Tags Input](/docs/ui/forms/tags-input)
+- [Tag Input](/docs/ui/forms/tag-input)
 - [Combobox](/docs/ui/forms/combobox)
 - [Date Picker](/docs/ui/forms/date-picker)
 
@@ -56,13 +54,57 @@ const formSchema = z.object({
 ```tsx
 <AutoForm
   formSchema={formSchema}
-  fieldConfig={{
-    name: {
-      fieldType: AutoFormInput,
+  fields={[
+    {
+      id: 'username',
+      component: AutoFormInput,
     },
-  }}
+  ]}
 />
 ```
+
+## Component Props
+
+Each field has a set of props with `Props` surfix that can be passed to the component. For example, for the `AutoFormInput` component, you can pass the `AutoFormInputProps` props using the `componentProps` prop.
+
+```tsx
+import {
+  AutoFormInput,
+  AutoFormInputProps,
+} from 'vitnode-frontend/components/auto-form/fields/input';
+
+<AutoForm
+  formSchema={formSchema}
+  fields={[
+    {
+      id: 'username',
+      component: AutoFormInput,
+      componentProps: {
+        type: 'password',
+      } as AutoFormInputProps,
+    },
+  ]}
+/>;
+```
+
+<Callout title="Avoid function for component argument!" type="error">
+ Do not use function for component argument like this:
+
+```tsx
+<AutoForm
+  formSchema={formSchema}
+  fields={[
+    {
+      id: 'username',
+      component: props => <AutoFormInput {...props} />, // [!code highlight]
+    },
+  ]}
+/>
+```
+
+This will cause the component to re-render on every change.
+
+</Callout>
 
 ## Zod Configuration
 
@@ -74,39 +116,18 @@ Validation methods not supported by HTML will automatically be checked when the 
 
 ### Descriptions
 
-You can add a description to your schema fields by using the `description` method.
-
-```ts
-const formSchema = z.object({
-  username: z.string().describe('Your username'),
-});
-```
-
-or using the `description` method in the `fieldConfig` object.
+You can add a description to your field by passing the `description` prop.
 
 ```tsx
 <AutoForm
   formSchema={formSchema}
-  fieldConfig={{
-    name: {
-      fieldType: AutoFormInput
-      description: 'Test description',
+  fields={[
+    {
+      id: 'username',
+      component: AutoFormInput,
+      description: 'Test description', // [!code highlight]
     },
-  }}
-/>
-```
-
-You can also use the `description` as function to get the current value of the field.
-
-```tsx
-<AutoForm
-  formSchema={formSchema}
-  fieldConfig={{
-    name: {
-      fieldType: AutoFormInput
-      description: value => `The current value is ${value}`,
-    },
-  }}
+  ]}
 />
 ```
 
@@ -137,12 +158,13 @@ You can set a label for a field by using the `label` method.
 ```tsx
 <AutoForm
   formSchema={formSchema}
-  fieldConfig={{
-    username: {
-      label: 'Your username',
-      fieldType: AutoFormInput,
+  fields={[
+    {
+      id: 'username',
+      component: AutoFormInput,
+      label: 'Your username', // [!code highlight]
     },
-  }}
+  ]}
 />
 ```
 
@@ -210,31 +232,31 @@ const formSchema = z.object({
 />
 ```
 
-### Render Parent
+### Child Component
 
-You can render the parent object by using the `renderParent` prop.
-
-Avaliable props:
-
-- `children`: The children of the parent object.
-- `field`: The field object `ControllerRenderProps` from `react-hook-form`.
+If you want to render something below the field, you can use the `childComponent` prop.
 
 ```tsx
 <AutoForm
   formSchema={formSchema}
-  fieldConfig={{
-    start_url: {
-      label: t('start_url.label'),
-      description: t('start_url.desc'),
-      fieldType: props => <AutoFormInput className="w-64" {...props} />,
-      renderParent: ({ children, field }: FieldRenderParentProps) => (
-        <div className="flex flex-wrap items-center gap-1">
-          <span>Something</span>
-          {children} // Here is the input
-        </div>
-      ),
+  fields={[
+    {
+      id: 'name',
+      label: t('sign_up.form.name.label'),
+      description: t('sign_up.form.name.desc'),
+      component: AutoFormInput,
+      childComponent: ({ field }) => {
+        const value: string = field.value ?? '';
+        if (!value.length) return null;
+
+        return (
+          <span className="text-muted-foreground mt-1 block max-w-md truncate text-sm">
+            {value}
+          </span>
+        );
+      },
     },
-  }}
+  ]}
 />
 ```
 
@@ -245,11 +267,12 @@ You can use the `onSubmit` prop to get the form data.
 ```tsx
 <AutoForm
   formSchema={formSchema}
-  fieldConfig={{
-    username: {
-      fieldType: AutoFormInput,
+  fields={[
+    {
+      id: 'username',
+      component: AutoFormInput,
     },
-  }}
+  ]}
   onSubmit={data => {
     console.log(data);
   }}
@@ -261,15 +284,17 @@ You can get access to the `form` from `react-hook-form` by using the `form` prop
 ```tsx
 <AutoForm
   formSchema={formSchema}
-    fieldConfig={{
-    username: {
-      fieldType: AutoFormInput,
+  fields={[
+    {
+      id: 'username',
+      component: AutoFormInput,
     },
-  }}
+  ]}
   onSubmit={(data, form) => {
     console.log(data);
-    form.setError("username", { type: "manual", message: "This is an error" });
+    form.setError('username', { type: 'manual', message: 'This is an error' });
   }}
+/>
 ```
 
 You can also move `onSubmit` to a separate function.
@@ -315,11 +340,12 @@ Component has a submit button by default with the text `Save` include translatio
 ```tsx
 <AutoForm
   formSchema={formSchema}
-  fieldConfig={{
-    username: {
-      fieldType: AutoFormInput,
+  fields={[
+    {
+      id: 'username',
+      component: AutoFormInput,
     },
-  }}
+  ]}
   submitButton={props => (
     <Button {...props} className="w-full">
       {t('sign_in.form.submit')}
@@ -337,16 +363,17 @@ You can change the theme of the form by using the `theme` prop and passing `hori
 ```tsx
 <AutoForm
   formSchema={formSchema}
-  fieldConfig={{
-    username: {
-      fieldType: AutoFormInput,
+  fields={[
+    {
+      id: 'username',
+      component: AutoFormInput,
     },
-  }}
+  ]}
   theme="horizontal" // [!code highlight]
 />
 ```
 
-### Get Values from Form
+## Get Values from Form
 
 You can get the values from the form by using the `onValuesChange` prop.
 
@@ -371,7 +398,7 @@ For example if `provider` is not `smtp`, the field `smtp` will be hidden.
 ```tsx
 <AutoForm
   formSchema={formSchema}
-  fieldConfig={{}}
+  fields={[]}
   dependencies={[
     {
       sourceField: 'provider',
@@ -390,7 +417,7 @@ For example if `provider` is `resend`, the field `resend_key` will be required.
 ```tsx
 <AutoForm
   formSchema={formSchema}
-  fieldConfig={{}}
+  fields={[]}
   dependencies={[
     {
       sourceField: 'email.provider',
@@ -409,7 +436,7 @@ For example if `provider` is not `smtp`, the field `smtp` will be disabled.
 ```tsx
 <AutoForm
   formSchema={formSchema}
-  fieldConfig={{}}
+  fields={[]}
   dependencies={[
     {
       sourceField: 'email.provider',
@@ -428,7 +455,7 @@ For example if `vegetarian` checkbox hides the `Beef Wellington` option from `me
 ```tsx
 <AutoForm
   formSchema={formSchema}
-  fieldConfig={{}}
+  fields={[]}
   dependencies={[
     {
       sourceField: 'vegetarian',

@@ -1,5 +1,5 @@
 import { AutoForm } from '@/components/form/auto-form';
-import { AutoFormIcon } from '@/components/form/fields/icon';
+import { AutoFormIconPicker } from '@/components/form/fields/icon-picker';
 import { AutoFormInput } from '@/components/form/fields/input';
 import { AutoFormSwitch } from '@/components/form/fields/switch';
 import { AutoFormTextLanguageInput } from '@/components/form/fields/text-language-input';
@@ -28,30 +28,35 @@ export const ContentCreateEditNavAdmin = ({ data }: CreateEditNavAdminArgs) => {
       </DialogHeader>
 
       <AutoForm
-        fieldConfig={{
-          name: {
+        fields={[
+          {
+            id: 'name',
+            component: AutoFormTextLanguageInput,
             label: t('create.name.label'),
-            fieldType: AutoFormTextLanguageInput,
           },
-          description: {
+          {
+            id: 'description',
+            component: AutoFormTextLanguageInput,
             label: t('create.description.label'),
-            fieldType: AutoFormTextLanguageInput,
           },
-          href: {
+          {
+            id: 'href',
+            component: AutoFormInput,
             label: t('create.href.label'),
             description: t('create.href.desc'),
-            fieldType: AutoFormInput,
           },
-          icon: {
+          {
+            id: 'icon',
+            component: AutoFormIconPicker,
             label: t('create.icon.label'),
-            fieldType: AutoFormIcon,
           },
-          external: {
+          {
+            id: 'external',
+            component: AutoFormSwitch,
             label: t('create.external.label'),
             description: t('create.external.desc'),
-            fieldType: AutoFormSwitch,
           },
-        }}
+        ]}
         formSchema={formSchema}
         onSubmit={onSubmit}
         submitButton={props => (

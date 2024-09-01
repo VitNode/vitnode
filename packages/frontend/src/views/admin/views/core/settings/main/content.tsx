@@ -16,24 +16,28 @@ export const ContentMainSettingsCoreAdmin = (
 
   return (
     <AutoForm
-      fieldConfig={{
-        name: {
+      fields={[
+        {
+          id: 'name',
+          component: AutoFormInput,
           label: t('name.label'),
-          fieldType: AutoFormInput,
         },
-        short_name: {
+        {
+          id: 'short_name',
+          component: AutoFormInput,
           label: t('short_name.label'),
-          fieldType: AutoFormInput,
         },
-        description: {
+        {
+          id: 'description',
+          component: AutoFormTextLanguageInput,
           label: t('description.label'),
-          fieldType: AutoFormTextLanguageInput,
         },
-        copyright: {
+        {
+          id: 'copyright',
+          component: AutoFormTextLanguageInput,
           label: t('copyright.label'),
-          fieldType: AutoFormTextLanguageInput,
         },
-      }}
+      ]}
       formSchema={formSchema}
       onSubmit={onSubmit}
       theme="horizontal"

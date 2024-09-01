@@ -1,7 +1,7 @@
 'use client';
 
 import { FormControl, FormMessage } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
+import { TagInput } from '@/components/ui/tag-input';
 import { FieldValues } from 'react-hook-form';
 
 import { AutoFormItemProps } from '../auto-form';
@@ -10,14 +10,13 @@ import { AutoFormLabel } from './common/label';
 import { AutoFormTooltip } from './common/tooltip';
 import { AutoFormWrapper } from './common/wrapper';
 
-export type AutoFormInputProps = Omit<
-  React.InputHTMLAttributes<HTMLInputElement>,
+export type AutoFormTagInputProps = Omit<
+  React.ComponentProps<typeof TagInput>,
   'onChange' | 'value'
 >;
 
-export function AutoFormInput<T extends FieldValues>({
+export function AutoFormTagInput<T extends FieldValues>({
   field,
-  zodInputProps,
   label,
   description,
   isRequired,
@@ -27,7 +26,7 @@ export function AutoFormInput<T extends FieldValues>({
   className,
   childComponent: ChildComponent,
 }: {
-  componentProps?: AutoFormInputProps;
+  componentProps?: AutoFormTagInputProps;
 } & AutoFormItemProps<T>) {
   return (
     <AutoFormWrapper theme={theme}>
@@ -45,9 +44,8 @@ export function AutoFormInput<T extends FieldValues>({
         withChildren={!!ChildComponent}
       >
         <FormControl>
-          <Input
+          <TagInput
             {...field}
-            {...zodInputProps}
             {...componentProps}
             disabled={isDisabled || componentProps?.disabled}
           />

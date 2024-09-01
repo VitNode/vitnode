@@ -26,25 +26,6 @@ export const ContentDeleteGroupsMembersDialogAdmin = ({
 
   return (
     <>
-      <AutoForm
-        fieldConfig={{
-          name: {
-            fieldType: AutoFormInput,
-          },
-        }}
-        formSchema={formSchema}
-        submitButton={props => (
-          <AlertDialogFooter className="mt-6">
-            <AlertDialogCancel asChild>
-              <Button type="button" variant="outline">
-                {tCore('cancel')}
-              </Button>
-            </AlertDialogCancel>
-            <Button {...props}>{t('submit')}</Button>
-          </AlertDialogFooter>
-        )}
-      />
-
       <AlertDialogHeader>
         <AlertDialogTitle>{tCore('are_you_absolutely_sure')}</AlertDialogTitle>
         <AlertDialogDescription className="flex flex-col gap-4">
@@ -62,17 +43,23 @@ export const ContentDeleteGroupsMembersDialogAdmin = ({
       </AlertDialogHeader>
 
       <AutoForm
-        fieldConfig={{
-          name: {
-            fieldType: AutoFormInput,
+        fields={[
+          {
+            id: 'name',
+            component: AutoFormInput,
           },
-        }}
+        ]}
         formSchema={formSchema}
         onSubmit={onSubmit}
         submitButton={props => (
-          <Button {...props} variant="destructive">
-            {t('submit')}
-          </Button>
+          <AlertDialogFooter className="mt-6">
+            <AlertDialogCancel asChild>
+              <Button type="button" variant="outline">
+                {tCore('cancel')}
+              </Button>
+            </AlertDialogCancel>
+            <Button {...props}>{t('submit')}</Button>
+          </AlertDialogFooter>
         )}
       />
     </>

@@ -227,7 +227,6 @@ type Mutation {
   admin__core_languages__delete(code: String!): String!
   admin__core_languages__download(code: String!, plugins: [String!]!): String!
   admin__core_languages__edit(allow_in_input: Boolean!, default: Boolean!, enabled: Boolean!, id: Int!, locale: String!, name: String!, time_24: Boolean!, timezone: String!): ShowCoreLanguages!
-  admin__core_languages__update(code: String!, file: Upload!): String!
   admin__core_main_settings__edit(site_copyright: [TextLanguageInput!]!, site_description: [TextLanguageInput!]!, site_name: String!, site_short_name: String!): EditAdminSettingsObj!
   admin__core_manifest_metadata__edit(background_color: String!, display: String!, start_url: String!, theme_color: String!): ShowAdminManifestMetadataObj!
   admin__core_members__create(email: String!, name: String!, password: String!): SignUpCoreSessionsObj!

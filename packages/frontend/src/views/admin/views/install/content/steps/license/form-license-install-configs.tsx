@@ -23,12 +23,12 @@ export const FormLicenseInstallConfigs = () => {
 
   return (
     <AutoForm
-      fieldConfig={{
-        agree: {
-          label: 'I agree to the terms of the license agreement.',
-          fieldType: AutoFormCheckbox,
+      fields={[
+        {
+          id: 'agree',
+          component: AutoFormCheckbox,
         },
-      }}
+      ]}
       formSchema={formSchema}
       onSubmit={onSubmit}
       submitButton={props => <Button {...props}>Next step</Button>}

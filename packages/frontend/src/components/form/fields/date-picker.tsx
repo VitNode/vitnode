@@ -1,7 +1,7 @@
 'use client';
 
+import { DatePicker } from '@/components/ui/date-picker';
 import { FormControl, FormMessage } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
 import { FieldValues } from 'react-hook-form';
 
 import { AutoFormItemProps } from '../auto-form';
@@ -10,14 +10,13 @@ import { AutoFormLabel } from './common/label';
 import { AutoFormTooltip } from './common/tooltip';
 import { AutoFormWrapper } from './common/wrapper';
 
-export type AutoFormInputProps = Omit<
-  React.InputHTMLAttributes<HTMLInputElement>,
+export type AutoFormDatePickerProps = Omit<
+  React.ComponentProps<typeof DatePicker>,
   'onChange' | 'value'
 >;
 
-export function AutoFormInput<T extends FieldValues>({
+export function AutoFormDatePicker<T extends FieldValues>({
   field,
-  zodInputProps,
   label,
   description,
   isRequired,
@@ -27,7 +26,7 @@ export function AutoFormInput<T extends FieldValues>({
   className,
   childComponent: ChildComponent,
 }: {
-  componentProps?: AutoFormInputProps;
+  componentProps?: AutoFormDatePickerProps;
 } & AutoFormItemProps<T>) {
   return (
     <AutoFormWrapper theme={theme}>
@@ -45,10 +44,10 @@ export function AutoFormInput<T extends FieldValues>({
         withChildren={!!ChildComponent}
       >
         <FormControl>
-          <Input
+          <DatePicker
             {...field}
-            {...zodInputProps}
             {...componentProps}
+            className="flex"
             disabled={isDisabled || componentProps?.disabled}
           />
         </FormControl>

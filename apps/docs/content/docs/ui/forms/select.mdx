@@ -22,7 +22,7 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 ```ts
 import * as z from 'zod';
 import { AutoForm } from 'vitnode-frontend/form/auto-form';
-import { AutoFormSelect } from 'vitnode-frontend/form/fields/select';
+import { AutoFormSelect, AutoFormSelectProps } from 'vitnode-frontend/form/fields/select';
 ```
 
 ```ts
@@ -40,21 +40,19 @@ const formSchema = z.object({
 ```tsx
 <AutoForm
   formSchema={formSchema}
-  fieldConfig={{
-    type: {
-      label: 'Select Example',
-      fieldType: props => (
-        <AutoFormSelect
-          {...props}
-          placeholder="Select example"
-          labels={{
-            ['option-one']: 'Option One',
-            ['option-two']: 'Option Two',
-          }}
-        />
-      ),
+  filds={[
+    {
+      id: 'type',
+      component: AutoFormSelect,
+      componentProps: {
+        placeholder: 'Select example',
+        labels: {
+          ['option-one']: 'Option One',
+          ['option-two']: 'Option Two',
+        },
+      } as AutoFormSelectProps,
     },
-  }}
+  ]}
 />
 ```
 

@@ -23,6 +23,9 @@ export default [
   },
   {
     rules: {
+      'perfectionist/sort-intersection-types': 'warn',
+      'perfectionist/sort-interfaces': 'warn',
+      'perfectionist/sort-union-types': 'warn',
       'perfectionist/sort-object-types': 'warn',
       'perfectionist/sort-jsx-props': 'warn',
       'perfectionist/sort-imports': 'warn',

@@ -6,20 +6,18 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { ShowCoreLanguages } from '@/graphql/types';
-import { ChevronDown, Trash2, Upload } from 'lucide-react';
+import { ChevronDown, Trash2 } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 import React from 'react';
 
 import { DeleteActionsTableLangsCoreAdmin } from './delete/delete';
 import { DownloadActionsTableLangsCoreAdmin } from './download/download';
 import { EditActionsTableLangsCoreAdmin } from './edit';
-import { UpdateActionsTableLangsCoreAdmin } from './update/update';
 
 export const ActionsTableLangsCoreAdmin = (data: ShowCoreLanguages) => {
   const t = useTranslations('core');
   const locale = useLocale();
   const [isOpenDeleteDialog, setIsOpenDeleteDialog] = React.useState(false);
-  const [isOpenUploadDialog, setIsOpenUploadDialog] = React.useState(false);
 
   return (
     <>
@@ -34,13 +32,6 @@ export const ActionsTableLangsCoreAdmin = (data: ShowCoreLanguages) => {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
-            <DropdownMenuItem
-              onClick={() => {
-                setIsOpenUploadDialog(true);
-              }}
-            >
-              <Upload /> {t('upload_new_version')}
-            </DropdownMenuItem>
             {!data.default && (
               <DropdownMenuItem
                 destructive
@@ -61,13 +52,6 @@ export const ActionsTableLangsCoreAdmin = (data: ShowCoreLanguages) => {
         setOpen={setIsOpenDeleteDialog}
         {...data}
       />
-      {!data.protected && (
-        <UpdateActionsTableLangsCoreAdmin
-          open={isOpenUploadDialog}
-          setOpen={setIsOpenUploadDialog}
-          {...data}
-        />
-      )}
     </>
   );
 };

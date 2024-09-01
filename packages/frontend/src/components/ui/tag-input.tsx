@@ -7,7 +7,7 @@ import React from 'react';
 import { badgeVariants } from './badge';
 import { Input } from './input';
 
-interface TagsInputItemProps {
+interface TagInputItemProps {
   id: number | string;
   value: string;
 }
@@ -17,28 +17,28 @@ interface Props
   className?: string;
   disabled?: boolean;
   onChange: (
-    value?: TagsInputItemProps | TagsInputItemProps[] | undefined,
+    value?: TagInputItemProps | TagInputItemProps[] | undefined,
   ) => void;
 }
 
 interface MultiProps extends Props {
   multiple?: true;
-  value?: TagsInputItemProps[] | undefined;
+  value?: TagInputItemProps[] | undefined;
 }
 
 interface SingleProps extends Props {
   multiple?: never;
-  value?: TagsInputItemProps | undefined;
+  value?: TagInputItemProps | undefined;
 }
 
-export const TagsInput = ({
+export const TagInput = ({
   multiple,
   onChange,
   value: valueFromProps,
   disabled,
   ...rest
 }: MultiProps | SingleProps) => {
-  const values: TagsInputItemProps[] = Array.isArray(valueFromProps)
+  const values: TagInputItemProps[] = Array.isArray(valueFromProps)
     ? valueFromProps
     : valueFromProps
       ? [valueFromProps]

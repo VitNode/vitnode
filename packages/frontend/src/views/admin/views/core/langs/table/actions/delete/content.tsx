@@ -36,11 +36,12 @@ export const ContentDeleteActionsTableLangsCoreAdmin = ({
       </AlertDialogDescription>
 
       <AutoForm
-        fieldConfig={{
-          name: {
-            fieldType: AutoFormInput,
+        fields={[
+          {
+            id: 'name',
+            component: AutoFormInput,
           },
-        }}
+        ]}
         formSchema={formSchema}
         onSubmit={onSubmit}
         submitButton={props => (

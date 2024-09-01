@@ -1,7 +1,7 @@
 'use client';
 
+import { FileInput } from '@/components/ui/file-input';
 import { FormControl, FormMessage } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
 import { FieldValues } from 'react-hook-form';
 
 import { AutoFormItemProps } from '../auto-form';
@@ -10,14 +10,13 @@ import { AutoFormLabel } from './common/label';
 import { AutoFormTooltip } from './common/tooltip';
 import { AutoFormWrapper } from './common/wrapper';
 
-export type AutoFormInputProps = Omit<
-  React.InputHTMLAttributes<HTMLInputElement>,
+export type AutoFormFileInputProps = Omit<
+  React.ComponentProps<typeof FileInput>,
   'onChange' | 'value'
 >;
 
-export function AutoFormInput<T extends FieldValues>({
+export function AutoFormFileInput<T extends FieldValues>({
   field,
-  zodInputProps,
   label,
   description,
   isRequired,
@@ -27,7 +26,7 @@ export function AutoFormInput<T extends FieldValues>({
   className,
   childComponent: ChildComponent,
 }: {
-  componentProps?: AutoFormInputProps;
+  componentProps?: AutoFormFileInputProps;
 } & AutoFormItemProps<T>) {
   return (
     <AutoFormWrapper theme={theme}>
@@ -45,10 +44,11 @@ export function AutoFormInput<T extends FieldValues>({
         withChildren={!!ChildComponent}
       >
         <FormControl>
-          <Input
+          <FileInput
+            required={isRequired}
             {...field}
-            {...zodInputProps}
             {...componentProps}
+            className="w-full"
             disabled={isDisabled || componentProps?.disabled}
           />
         </FormControl>

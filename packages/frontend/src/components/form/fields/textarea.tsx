@@ -1,45 +1,67 @@
+'use client';
+
 import { FormControl, FormMessage } from '@/components/ui/form';
 import { Textarea } from '@/components/ui/textarea';
+import { FieldValues } from 'react-hook-form';
 
-import { AutoFormInputComponentProps } from '../type';
-import { DefaultParent } from './common/children';
+import { AutoFormItemProps } from '../auto-form';
+import { AutoFormInputWrapper } from './common/input-wrapper';
 import { AutoFormLabel } from './common/label';
 import { AutoFormTooltip } from './common/tooltip';
 import { AutoFormWrapper } from './common/wrapper';
 
-export const AutoFormTextArea = ({
-  autoFormProps: { isRequired, fieldConfigItem, field, theme, isDisabled },
-  ...props
-}: AutoFormInputComponentProps &
-  React.InputHTMLAttributes<HTMLTextAreaElement>) => {
-  const value = field.value || '';
+export type AutoFormTextAreaProps = Omit<
+  React.InputHTMLAttributes<HTMLTextAreaElement>,
+  'onChange' | 'value'
+>;
 
-  const ParentWrapper = fieldConfigItem.renderParent ?? DefaultParent;
+export function AutoTextArea<T extends FieldValues>({
+  field,
+  zodInputProps,
+  label,
+  description,
+  isRequired,
+  theme,
+  isDisabled,
+  componentProps,
+  className,
+  childComponent: ChildComponent,
+}: {
+  componentProps?: AutoFormTextAreaProps;
+} & AutoFormItemProps<T>) {
+  const value = field.value || '';
 
   return (
     <AutoFormWrapper theme={theme}>
-      {fieldConfigItem.label && (
+      {label && (
         <AutoFormLabel
-          description={fieldConfigItem.description}
+          description={description}
           isRequired={isRequired}
-          label={fieldConfigItem.label}
+          label={label}
           theme={theme}
         />
       )}
-      <ParentWrapper field={field}>
+
+      <AutoFormInputWrapper
+        className={className}
+        withChildren={!!ChildComponent}
+      >
         <FormControl>
           <Textarea
             {...field}
-            value={props.value ?? value}
-            {...props}
-            disabled={isDisabled || props.disabled}
+            value={value}
+            {...componentProps}
+            {...zodInputProps}
+            disabled={isDisabled || componentProps?.disabled}
           />
         </FormControl>
-      </ParentWrapper>
-      {fieldConfigItem.description && theme === 'vertical' && (
-        <AutoFormTooltip description={fieldConfigItem.description} />
+        {ChildComponent && <ChildComponent field={field} />}
+      </AutoFormInputWrapper>
+
+      {description && theme === 'vertical' && (
+        <AutoFormTooltip description={description} />
       )}
       <FormMessage />
     </AutoFormWrapper>
   );
-};
+}

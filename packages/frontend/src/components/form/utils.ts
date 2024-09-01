@@ -1,13 +1,36 @@
 import { DefaultValues, FieldValues, UseFormWatch } from 'react-hook-form';
 import * as z from 'zod';
 
-import {
-  Dependency,
-  DependencyType,
-  EnumValues,
-  FieldConfig,
-  ZodObjectOrWrapped,
-} from './type';
+import { DependencyType } from './auto-form';
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type ZodObjectOrWrapped = z.Schema<any, any>;
+
+interface BaseDependency<T extends FieldValues> {
+  sourceField: keyof T | string;
+  targetField: keyof T | string;
+  type: DependencyType;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  when: (sourceFieldValue: any, targetFieldValue: unknown) => boolean;
+}
+
+export type ValueDependency<T extends FieldValues> = {
+  type:
+    | DependencyType.DISABLES
+    | DependencyType.HIDES
+    | DependencyType.REQUIRES;
+} & BaseDependency<T>;
+
+export type OptionsDependency<T extends FieldValues> = {
+  // Partial array of values from sourceField that will trigger the dependency
+  options: z.EnumValues;
+
+  type: DependencyType.SETS_OPTIONS;
+} & BaseDependency<T>;
+
+export type Dependency<T extends FieldValues> =
+  | OptionsDependency<T>
+  | ValueDependency<T>;
 
 export function getObjectFormSchema(
   schema: ZodObjectOrWrapped,
@@ -28,24 +51,22 @@ export function getObjectFormSchema(
  * Get the lowest level Zod type.
  * This will unpack optionals, refinements, etc.
  */
-export function getBaseSchema<
-  ChildType extends z.AnyZodObject | z.ZodAny = z.ZodAny,
->(
-  schema: ChildType | z.ZodEffects<ChildType>,
+export function getBaseSchema<T extends z.AnyZodObject | z.ZodAny = z.ZodAny>(
+  schema: T | z.ZodEffects<T>,
   isArray?: boolean,
-): ChildType | null {
+): null | T {
   if ('innerType' in schema._def) {
-    return getBaseSchema(schema._def.innerType as ChildType);
+    return getBaseSchema(schema._def.innerType as T, isArray);
   }
   if ('schema' in schema._def) {
-    return getBaseSchema(schema._def.schema);
+    return getBaseSchema(schema._def.schema, isArray);
   }
 
   if ('type' in schema._def && isArray) {
-    return getBaseSchema(schema._def.type as ChildType);
+    return getBaseSchema(schema._def.type as T, isArray);
   }
 
-  return schema as ChildType;
+  return schema as T;
 }
 
 /**
@@ -68,7 +89,7 @@ export function zodToHtmlInputProps(
     | z.ZodNumber
     | z.ZodOptional<z.ZodNumber | z.ZodString>
     | z.ZodString,
-): React.InputHTMLAttributes<HTMLInputElement> {
+): React.InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement> {
   if (['ZodNullable', 'ZodOptional'].includes(schema._def.typeName as string)) {
     const typedSchema = schema as z.ZodOptional<z.ZodNumber | z.ZodString>;
 
@@ -122,17 +143,34 @@ export default function resolveDependencies<
   let isDisabled = false;
   let isHidden = false;
   let isRequired = false;
-  let overrideOptions: EnumValues | undefined;
+  let overrideOptions: undefined | z.EnumValues;
 
-  const currentFieldValue = watch(currentFieldName as string);
-
-  const currentFieldDependencies = dependencies.filter(
+  const currentFieldValue = watch(currentFieldName.toString());
+  let currentFieldDependencies: Dependency<SchemaType>[] = dependencies.filter(
     dependency => dependency.targetField === currentFieldName,
   );
 
+  // If the field has no dependencies, it's a top-level field. We need to check for nested dependencies.
+  if (!currentFieldDependencies.length) {
+    currentFieldName
+      .toString()
+      .split('.')
+      .reduce((acc, key) => {
+        const nextAcc = acc ? `${acc}.${key}` : key;
+        const nextFieldDependencies = dependencies.filter(
+          dependency => dependency.targetField === nextAcc,
+        );
+
+        if (nextFieldDependencies.length) {
+          currentFieldDependencies = nextFieldDependencies;
+        }
+
+        return nextAcc;
+      }, '');
+  }
+
   for (const dependency of currentFieldDependencies) {
     const watchedValue = watch(dependency.sourceField as string);
-
     const conditionMet = dependency.when(watchedValue, currentFieldValue);
 
     switch (dependency.type) {
@@ -205,7 +243,6 @@ export function getDefaultValueInZodStack(schema: z.ZodAny): any {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function getDefaultValues<Schema extends z.ZodObject<any, any>>(
   schema: Schema,
-  fieldConfig?: FieldConfig<z.infer<Schema>>,
 ) {
   const { shape } = schema;
   type DefaultValuesType = DefaultValues<Partial<z.infer<Schema>>>;
@@ -219,7 +256,6 @@ export function getDefaultValues<Schema extends z.ZodObject<any, any>>(
       const defaultItems = getDefaultValues(
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         getBaseSchema(item) as unknown as z.ZodObject<any, any>,
-        fieldConfig?.[key] as FieldConfig<z.infer<Schema>>,
       );
 
       // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
@@ -234,14 +270,8 @@ export function getDefaultValues<Schema extends z.ZodObject<any, any>>(
         }
       }
     } else {
-      let defaultValue = getDefaultValueInZodStack(item);
-      if (
-        (defaultValue === null || defaultValue === '') &&
-        fieldConfig?.[key]
-      ) {
-        defaultValue = (fieldConfig[key] as unknown as { defaultValue: string })
-          .defaultValue;
-      }
+      const defaultValue = getDefaultValueInZodStack(item);
+
       if (defaultValue !== undefined) {
         defaultValues[key as keyof DefaultValuesType] = defaultValue;
       }

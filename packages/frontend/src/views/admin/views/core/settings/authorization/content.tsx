@@ -15,13 +15,14 @@ export const ContentAuthorizationSettingsCoreAdmin = (
 
   return (
     <AutoForm
-      fieldConfig={{
-        force_login: {
+      fields={[
+        {
+          id: 'force_login',
+          component: AutoFormSwitch,
           label: t('force_login.title'),
-          fieldType: AutoFormSwitch,
           description: t('force_login.desc'),
         },
-      }}
+      ]}
       formSchema={formSchema}
       onSubmit={onSubmit}
       theme="horizontal"

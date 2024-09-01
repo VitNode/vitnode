@@ -1,8 +1,6 @@
 import { FormLabel } from '@/components/ui/form';
 import { cn } from '@/helpers/classnames';
 
-import { AutoFormInputComponentProps } from '../../type';
-
 export const AutoFormLabel = ({
   label,
   isRequired,
@@ -14,7 +12,7 @@ export const AutoFormLabel = ({
   description: React.ReactNode | undefined;
   isRequired: boolean;
   label: string;
-  theme: AutoFormInputComponentProps['autoFormProps']['theme'];
+  theme: 'horizontal' | 'vertical';
 }) => {
   return (
     <FormLabel

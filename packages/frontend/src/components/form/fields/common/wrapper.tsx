@@ -1,8 +1,6 @@
 import { FormItem } from '@/components/ui/form';
 import { cn } from '@/helpers/classnames';
 
-import { AutoFormInputComponentProps } from '../../type';
-
 export const AutoFormWrapper = ({
   children,
   className,
@@ -10,7 +8,7 @@ export const AutoFormWrapper = ({
 }: {
   children: React.ReactNode;
   className?: string;
-  theme: AutoFormInputComponentProps['autoFormProps']['theme'];
+  theme: 'horizontal' | 'vertical';
 }) => {
   return (
     <FormItem
