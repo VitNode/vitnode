@@ -5,6 +5,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { FieldValues } from 'react-hook-form';
 
 import { AutoFormItemProps } from '../auto-form';
+import { AutoFormInputWrapper } from './common/input-wrapper';
 import { AutoFormLabel } from './common/label';
 import { AutoFormTooltip } from './common/tooltip';
 import { AutoFormWrapper } from './common/wrapper';
@@ -23,6 +24,8 @@ export function AutoTextArea<T extends FieldValues>({
   theme,
   isDisabled,
   componentProps,
+  className,
+  childComponent: ChildComponent,
 }: {
   componentProps?: AutoFormTextAreaProps;
 } & AutoFormItemProps<T>) {
@@ -39,15 +42,21 @@ export function AutoTextArea<T extends FieldValues>({
         />
       )}
 
-      <FormControl>
-        <Textarea
-          {...field}
-          value={value}
-          {...componentProps}
-          {...zodInputProps}
-          disabled={isDisabled || componentProps?.disabled}
-        />
-      </FormControl>
+      <AutoFormInputWrapper
+        className={className}
+        withChildren={!!ChildComponent}
+      >
+        <FormControl>
+          <Textarea
+            {...field}
+            value={value}
+            {...componentProps}
+            {...zodInputProps}
+            disabled={isDisabled || componentProps?.disabled}
+          />
+        </FormControl>
+        <ChildComponent field={field} />
+      </AutoFormInputWrapper>
 
       {description && theme === 'vertical' && (
         <AutoFormTooltip description={description} />

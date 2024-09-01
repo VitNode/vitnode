@@ -5,6 +5,7 @@ import { FormControl, FormMessage } from '@/components/ui/form';
 import { FieldValues } from 'react-hook-form';
 
 import { AutoFormItemProps } from '../auto-form';
+import { AutoFormInputWrapper } from './common/input-wrapper';
 import { AutoFormLabel } from './common/label';
 import { AutoFormTooltip } from './common/tooltip';
 import { AutoFormWrapper } from './common/wrapper';
@@ -23,6 +24,8 @@ export function AutoFormColorPicker<T extends FieldValues>({
   theme,
   isDisabled,
   componentProps,
+  className,
+  childComponent: ChildComponent,
 }: {
   componentProps?: AutoFormColorPickerProps;
 } & AutoFormItemProps<T>) {
@@ -39,17 +42,23 @@ export function AutoFormColorPicker<T extends FieldValues>({
         />
       )}
 
-      <FormControl>
-        <ColorPicker
-          required={isRequired}
-          {...field}
-          {...zodInputProps}
-          {...componentProps}
-          disabled={isDisabled || componentProps?.disabled}
-          onChange={field.onChange as (value: null | string) => void}
-          value={value}
-        />
-      </FormControl>
+      <AutoFormInputWrapper
+        className={className}
+        withChildren={!!ChildComponent}
+      >
+        <FormControl>
+          <ColorPicker
+            required={isRequired}
+            {...field}
+            {...zodInputProps}
+            {...componentProps}
+            disabled={isDisabled || componentProps?.disabled}
+            onChange={field.onChange as (value: null | string) => void}
+            value={value}
+          />
+        </FormControl>
+        <ChildComponent field={field} />
+      </AutoFormInputWrapper>
 
       {description && theme === 'vertical' && (
         <AutoFormTooltip description={description} />

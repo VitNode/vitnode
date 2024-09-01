@@ -1,13 +1,12 @@
-import { AutoForm } from '@/components/form/auto-form';
-import { AutoFormColor } from '@/components/form/fields/color';
-import { AutoFormInput } from '@/components/form/fields/input';
-import { AutoFormSwitch } from '@/components/form/fields/switch';
-import { AutoFormTextLanguageInput } from '@/components/form/fields/text-language-input';
+import { AutoForm } from '@/components/auto-form/auto-form';
+import { AutoFormColorPicker } from '@/components/auto-form/fields/color-picker';
 import {
-  AutoFormInputComponentProps,
-  DependencyType,
-  FieldRenderParentProps,
-} from '@/components/form/type';
+  AutoFormInput,
+  AutoFormInputProps,
+} from '@/components/auto-form/fields/input';
+import { AutoFormSwitch } from '@/components/auto-form/fields/switch';
+import { AutoFormTextLanguageInput } from '@/components/auto-form/fields/text-language-input';
+import { DependencyType } from '@/components/form/type';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import {
@@ -38,9 +37,10 @@ export const CreateEditFormGroupsMembersAdmin = ({
   const t = useTranslations('admin.members.groups');
   const tCore = useTranslations('core');
   const [activeTab, setActiveTab] = React.useState<TabsEnum>(TabsEnum.MAIN);
-  const { onSubmit, formSchema } = useCreateEditFormGroupsMembersAdmin({
-    data,
-  });
+  const { onSubmit, formSchema, setValues, values } =
+    useCreateEditFormGroupsMembersAdmin({
+      data,
+    });
   const { convertText } = useTextLang();
 
   return (
@@ -88,40 +88,36 @@ export const CreateEditFormGroupsMembersAdmin = ({
             when: () => activeTab !== TabsEnum.CONTENT,
           },
         ]}
-        fieldConfig={{
-          main: {
-            name: {
-              label: t('create_edit.name'),
-              fieldType: AutoFormTextLanguageInput,
-            },
-            color: {
-              label: t('create_edit.color'),
-              fieldType: AutoFormColor,
-            },
+        fields={[
+          {
+            id: 'main.name',
+            component: AutoFormTextLanguageInput,
+            label: t('create_edit.name'),
           },
-          content: {
-            files_allow_upload: {
-              label: t('create_edit.files.allow_upload'),
-              fieldType: AutoFormSwitch,
-            },
-            files_total_max_storage: {
-              label: t('create_edit.files.total_max_storage'),
-              fieldType: (props: AutoFormInputComponentProps) => {
-                const value = props.autoFormProps.field.value;
-
-                return (
-                  <AutoFormInput
-                    className="max-w-32"
-                    disabled={value === -1}
-                    type="number"
-                    value={value === -1 ? '' : value}
-                    {...props}
-                  />
-                );
-              },
-              renderParent: ({ children, field }: FieldRenderParentProps) => (
-                <div className="flex flex-wrap items-center gap-2">
-                  {children}
+          {
+            id: 'main.color',
+            component: AutoFormColorPicker,
+            label: t('create_edit.color'),
+          },
+          {
+            id: 'content.files_allow_upload',
+            component: AutoFormSwitch,
+            label: t('create_edit.files.allow_upload'),
+          },
+          {
+            id: 'content.files_total_max_storage',
+            component: AutoFormInput,
+            componentProps: {
+              type: 'number',
+              className: 'max-w-32',
+              min: 0,
+              disabled: values.content?.files_total_max_storage === -1,
+            } as AutoFormInputProps,
+            label: t('create_edit.files.total_max_storage'),
+            className: 'flex flex-wrap items-center gap-2',
+            childComponent: ({ field }) => {
+              return (
+                <>
                   <span>{t('create_edit.in_kb')}</span>
                   <div className="flex shrink-0 items-center gap-2">
                     <span>{tCore('or')}</span>
@@ -130,7 +126,7 @@ export const CreateEditFormGroupsMembersAdmin = ({
                       id="content.files_total_max_storage.unlimited"
                       onClick={() => {
                         if (field.value === -1) {
-                          field.onChange(10000);
+                          field.onChange(0);
 
                           return;
                         }
@@ -142,14 +138,24 @@ export const CreateEditFormGroupsMembersAdmin = ({
                       {tCore('unlimited')}
                     </Label>
                   </div>
-                </div>
-              ),
+                </>
+              );
             },
-            files_max_storage_for_submit: {
-              label: t('create_edit.files.max_storage_for_submit.label'),
-              renderParent: ({ children, field }: FieldRenderParentProps) => (
-                <div className="flex flex-wrap items-center gap-2">
-                  {children}
+          },
+          {
+            id: 'content.files_max_storage_for_submit',
+            component: AutoFormInput,
+            componentProps: {
+              type: 'number',
+              className: 'max-w-32',
+              min: 0,
+              disabled: values.content?.files_max_storage_for_submit === -1,
+            } as AutoFormInputProps,
+            label: t('create_edit.files.max_storage_for_submit.label'),
+            className: 'flex flex-wrap items-center gap-2',
+            childComponent: ({ field }) => {
+              return (
+                <>
                   <span>{t('create_edit.in_kb')}</span>
                   <div className="flex shrink-0 items-center gap-2">
                     <span>{tCore('or')}</span>
@@ -158,7 +164,7 @@ export const CreateEditFormGroupsMembersAdmin = ({
                       id="content.files_max_storage_for_submit.unlimited"
                       onClick={() => {
                         if (field.value === -1) {
-                          field.onChange(10000);
+                          field.onChange(0);
 
                           return;
                         }
@@ -170,26 +176,14 @@ export const CreateEditFormGroupsMembersAdmin = ({
                       {tCore('unlimited')}
                     </Label>
                   </div>
-                </div>
-              ),
-              fieldType: (props: AutoFormInputComponentProps) => {
-                const value = props.autoFormProps.field.value;
-
-                return (
-                  <AutoFormInput
-                    className="max-w-32"
-                    disabled={value === -1}
-                    type="number"
-                    value={value === -1 ? '' : value}
-                    {...props}
-                  />
-                );
-              },
+                </>
+              );
             },
           },
-        }}
+        ]}
         formSchema={formSchema}
         onSubmit={onSubmit}
+        onValuesChange={setValues}
         submitButton={props => (
           <DialogFooter>
             <Button {...props}>{tCore('save')}</Button>

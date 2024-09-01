@@ -6,6 +6,7 @@ import { cn } from '@/helpers/classnames';
 import { FieldValues } from 'react-hook-form';
 
 import { AutoFormItemProps } from '../auto-form';
+import { AutoFormInputWrapper } from './common/input-wrapper';
 import { AutoFormLabel } from './common/label';
 import { AutoFormTooltip } from './common/tooltip';
 import { AutoFormWrapper } from './common/wrapper';
@@ -23,6 +24,8 @@ export function AutoFormCheckbox<T extends FieldValues>({
   theme,
   isDisabled,
   componentProps,
+  className,
+  childComponent: ChildComponent,
 }: {
   componentProps?: AutoFormCheckboxProps;
 } & AutoFormItemProps<T>) {
@@ -30,19 +33,26 @@ export function AutoFormCheckbox<T extends FieldValues>({
 
   return (
     <AutoFormWrapper
-      className={cn('flex items-start space-x-3 space-y-0', {
-        'rounded-md border p-4': label && description,
-      })}
+      className={cn(
+        'flex items-start space-x-3 space-y-0',
+        {
+          'rounded-md border p-4': label && description,
+        },
+        className,
+      )}
       theme={theme}
     >
-      <FormControl>
-        <Checkbox
-          checked={value}
-          disabled={isDisabled || componentProps?.disabled}
-          onCheckedChange={field.onChange}
-          {...componentProps}
-        />
-      </FormControl>
+      <AutoFormInputWrapper withChildren={!!ChildComponent}>
+        <FormControl>
+          <Checkbox
+            checked={value}
+            disabled={isDisabled || componentProps?.disabled}
+            onCheckedChange={field.onChange}
+            {...componentProps}
+          />
+        </FormControl>
+        <ChildComponent field={field} />
+      </AutoFormInputWrapper>
 
       {(label ?? description) && (
         <div className="space-y-1 leading-none">

@@ -25,6 +25,10 @@ import { Form, FormField } from '../ui/form';
 type Theme = 'horizontal' | 'vertical';
 
 export interface AutoFormItemProps<T extends FieldValues> {
+  childComponent: (props: {
+    field: ControllerRenderProps<T>;
+  }) => React.ReactNode;
+  className?: string;
   componentProps?: Record<string, unknown>;
   description: React.ReactNode | string | undefined;
   field: ControllerRenderProps<T>;
@@ -42,7 +46,7 @@ export interface AutoFormItemProps<T extends FieldValues> {
 export const getShapeFromSchema = (
   schema: z.ZodEffects<z.ZodObject<z.ZodRawShape>> | z.ZodObject<z.ZodRawShape>,
   id: string,
-): z.ZodAny => {
+): null | z.ZodAny => {
   if (schema._def.typeName === z.ZodFirstPartyTypeKind.ZodEffects) {
     return schema._def.schema.shape[id] as z.ZodAny;
   }
@@ -73,6 +77,7 @@ export function AutoForm<
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       field: ControllerRenderProps<Record<string, any>>;
     }) => React.ReactNode;
+    className?: string;
     component: (
       props: AutoFormItemProps<Record<string, unknown>>,
     ) => JSX.Element;
@@ -131,11 +136,17 @@ export function AutoForm<
             resolveDependencies(dependencies, item.id, form.watch);
           if (isHidden) return null;
 
+          let shape: null | z.ZodAny = null;
           const ids = item.id.split('.');
-          let shape: undefined | z.ZodAny;
-          ids.forEach(id => {
-            shape = getShapeFromSchema(formSchema, id);
-          });
+          for (const id of ids) {
+            shape = getShapeFromSchema(
+              shape
+                ? (shape as unknown as z.ZodObject<z.ZodRawShape>)
+                : formSchema,
+              id,
+            );
+          }
+
           if (!shape) return null;
           const zodInputProps = zodToHtmlInputProps(shape);
 
@@ -148,26 +159,21 @@ export function AutoForm<
               key={item.id}
               name={item.id}
               render={({ field }) => {
-                if (!shape) return <></>;
-
                 return (
-                  <>
-                    <Component
-                      componentProps={item.componentProps}
-                      description={item.description}
-                      field={field}
-                      isDisabled={isDisabled}
-                      isRequired={
-                        (isRequired || zodInputProps.required) ?? false
-                      }
-                      label={item.label}
-                      overrideOptions={overrideOptions}
-                      shape={shape}
-                      theme={theme}
-                      zodInputProps={zodInputProps}
-                    />
-                    <ChildComponent field={field} />
-                  </>
+                  <Component
+                    childComponent={ChildComponent}
+                    className={item.className}
+                    componentProps={item.componentProps}
+                    description={item.description}
+                    field={field}
+                    isDisabled={isDisabled}
+                    isRequired={(isRequired || zodInputProps.required) ?? false}
+                    label={item.label}
+                    overrideOptions={overrideOptions}
+                    shape={shape}
+                    theme={theme}
+                    zodInputProps={zodInputProps}
+                  />
                 );
               }}
             />

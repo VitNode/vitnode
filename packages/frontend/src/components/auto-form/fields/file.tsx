@@ -1,6 +1,6 @@
 'use client';
 
-import { IconPicker } from '@/components/icon/picker/icon-picker';
+import { FileInput } from '@/components/ui/file-input';
 import { FormControl, FormMessage } from '@/components/ui/form';
 import { FieldValues } from 'react-hook-form';
 
@@ -10,14 +10,13 @@ import { AutoFormLabel } from './common/label';
 import { AutoFormTooltip } from './common/tooltip';
 import { AutoFormWrapper } from './common/wrapper';
 
-export type AutoFormIconPickerProps = Omit<
-  React.ComponentProps<typeof IconPicker>,
+export type AutoFormFileProps = Omit<
+  React.ComponentProps<typeof FileInput>,
   'onChange' | 'value'
 >;
 
-export function AutoFormIconPicker<T extends FieldValues>({
+export function AutoFormFile<T extends FieldValues>({
   field,
-  zodInputProps,
   label,
   description,
   isRequired,
@@ -27,10 +26,8 @@ export function AutoFormIconPicker<T extends FieldValues>({
   className,
   childComponent: ChildComponent,
 }: {
-  componentProps?: AutoFormIconPickerProps;
+  componentProps?: AutoFormFileProps;
 } & AutoFormItemProps<T>) {
-  const value = field.value || '';
-
   return (
     <AutoFormWrapper theme={theme}>
       {label && (
@@ -47,23 +44,20 @@ export function AutoFormIconPicker<T extends FieldValues>({
         withChildren={!!ChildComponent}
       >
         <FormControl>
-          <IconPicker
+          <FileInput
             required={isRequired}
             {...field}
-            {...zodInputProps}
             {...componentProps}
             disabled={isDisabled || componentProps?.disabled}
-            onChange={field.onChange as (value?: string) => void}
-            value={value}
           />
         </FormControl>
-        <ChildComponent field={field} />
       </AutoFormInputWrapper>
 
       {description && theme === 'vertical' && (
         <AutoFormTooltip description={description} />
       )}
       <FormMessage />
+      <ChildComponent field={field} />
     </AutoFormWrapper>
   );
 }

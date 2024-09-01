@@ -6,6 +6,7 @@ import { TextLanguage } from '@/graphql/types';
 import { FieldValues } from 'react-hook-form';
 
 import { AutoFormItemProps } from '../auto-form';
+import { AutoFormInputWrapper } from './common/input-wrapper';
 import { AutoFormLabel } from './common/label';
 import { AutoFormTooltip } from './common/tooltip';
 import { AutoFormWrapper } from './common/wrapper';
@@ -24,6 +25,8 @@ export function AutoFormTextLanguageInput<T extends FieldValues>({
   theme,
   isDisabled,
   componentProps,
+  className,
+  childComponent: ChildComponent,
 }: {
   componentProps?: AutoFormTextLanguageInputProps;
 } & AutoFormItemProps<T>) {
@@ -38,16 +41,22 @@ export function AutoFormTextLanguageInput<T extends FieldValues>({
         />
       )}
 
-      <FormControl>
-        <TextLanguageInput
-          {...field}
-          {...zodInputProps}
-          {...componentProps}
-          disabled={isDisabled || componentProps?.disabled}
-          onChange={field.onChange as (value: TextLanguage[]) => void}
-          value={field.value as TextLanguage[]}
-        />
-      </FormControl>
+      <AutoFormInputWrapper
+        className={className}
+        withChildren={!!ChildComponent}
+      >
+        <FormControl>
+          <TextLanguageInput
+            {...field}
+            {...zodInputProps}
+            {...componentProps}
+            disabled={isDisabled || componentProps?.disabled}
+            onChange={field.onChange as (value: TextLanguage[]) => void}
+            value={field.value as TextLanguage[]}
+          />
+        </FormControl>
+        <ChildComponent field={field} />
+      </AutoFormInputWrapper>
 
       {description && theme === 'vertical' && (
         <AutoFormTooltip description={description} />

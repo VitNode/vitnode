@@ -24,6 +24,7 @@ import { FieldValues } from 'react-hook-form';
 import * as z from 'zod';
 
 import { AutoFormItemProps } from '../auto-form';
+import { AutoFormInputWrapper } from './common/input-wrapper';
 import { AutoFormLabel } from './common/label';
 import { AutoFormTooltip } from './common/tooltip';
 import { AutoFormWrapper } from './common/wrapper';
@@ -43,6 +44,8 @@ export function AutoFormCombobox<T extends FieldValues>({
   isDisabled,
   shape,
   componentProps,
+  className,
+  childComponent: ChildComponent,
 }: {
   componentProps?: AutoFormComboboxProps;
 } & AutoFormItemProps<T>) {
@@ -87,21 +90,30 @@ export function AutoFormCombobox<T extends FieldValues>({
       )}
 
       <Popover modal onOpenChange={setOpen} open={open}>
-        <PopoverTrigger asChild>
-          <FormControl>
-            <Button
-              ariaLabel={label ?? ''}
-              className={cn('w-full justify-start', componentProps?.className)}
-              disabled={isDisabled || componentProps?.disabled}
-              role="combobox"
-              variant="outline"
-              {...componentProps}
-            >
-              {buttonPlaceholder()}
-              <ChevronsUpDownIcon className="ml-auto size-4 shrink-0 opacity-50" />
-            </Button>
-          </FormControl>
-        </PopoverTrigger>
+        <AutoFormInputWrapper
+          className={className}
+          withChildren={!!ChildComponent}
+        >
+          <PopoverTrigger asChild>
+            <FormControl>
+              <Button
+                ariaLabel={label ?? ''}
+                className={cn(
+                  'w-full justify-start',
+                  componentProps?.className,
+                )}
+                disabled={isDisabled || componentProps?.disabled}
+                role="combobox"
+                variant="outline"
+                {...componentProps}
+              >
+                {buttonPlaceholder()}
+                <ChevronsUpDownIcon className="ml-auto size-4 shrink-0 opacity-50" />
+              </Button>
+            </FormControl>
+          </PopoverTrigger>
+          <ChildComponent field={field} />
+        </AutoFormInputWrapper>
         <PopoverContent className="p-0">
           <Command>
             <CommandInput

@@ -11,7 +11,7 @@ import * as z from 'zod';
 import { Button } from '../ui/button';
 import { Form } from '../ui/form';
 import { Dependency, FieldConfig, ZodObjectOrWrapped } from './type';
-import { getBaseSchema, getDefaultValues, getObjectFormSchema } from './utils';
+import { getDefaultValues, getObjectFormSchema } from './utils';
 
 export function AutoForm<T extends ZodObjectOrWrapped>({
   formSchema,

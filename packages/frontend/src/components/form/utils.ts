@@ -1,12 +1,7 @@
 import { DefaultValues, FieldValues, UseFormWatch } from 'react-hook-form';
 import * as z from 'zod';
 
-import {
-  Dependency,
-  DependencyType,
-  FieldConfig,
-  ZodObjectOrWrapped,
-} from './type';
+import { Dependency, DependencyType, ZodObjectOrWrapped } from './type';
 
 export function getObjectFormSchema(
   schema: ZodObjectOrWrapped,
@@ -121,15 +116,32 @@ export default function resolveDependencies<
   let isRequired = false;
   let overrideOptions: undefined | z.EnumValues;
 
-  const currentFieldValue = watch(currentFieldName as string);
-
-  const currentFieldDependencies = dependencies.filter(
+  const currentFieldValue = watch(currentFieldName.toString());
+  let currentFieldDependencies: Dependency<SchemaType>[] = dependencies.filter(
     dependency => dependency.targetField === currentFieldName,
   );
 
+  // If the field has no dependencies, it's a top-level field. We need to check for nested dependencies.
+  if (!currentFieldDependencies.length) {
+    currentFieldName
+      .toString()
+      .split('.')
+      .reduce((acc, key) => {
+        const nextAcc = acc ? `${acc}.${key}` : key;
+        const nextFieldDependencies = dependencies.filter(
+          dependency => dependency.targetField === nextAcc,
+        );
+
+        if (nextFieldDependencies.length) {
+          currentFieldDependencies = nextFieldDependencies;
+        }
+
+        return nextAcc;
+      }, '');
+  }
+
   for (const dependency of currentFieldDependencies) {
     const watchedValue = watch(dependency.sourceField as string);
-
     const conditionMet = dependency.when(watchedValue, currentFieldValue);
 
     switch (dependency.type) {

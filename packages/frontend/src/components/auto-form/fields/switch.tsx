@@ -6,6 +6,7 @@ import { cn } from '@/helpers/classnames';
 import { FieldValues } from 'react-hook-form';
 
 import { AutoFormItemProps } from '../auto-form';
+import { AutoFormInputWrapper } from './common/input-wrapper';
 import { AutoFormLabel } from './common/label';
 import { AutoFormTooltip } from './common/tooltip';
 import { AutoFormWrapper } from './common/wrapper';
@@ -23,6 +24,8 @@ export function AutoFormSwitch<T extends FieldValues>({
   theme,
   isDisabled,
   componentProps,
+  className,
+  childComponent: ChildComponent,
 }: {
   componentProps?: AutoFormSwitchProps;
 } & AutoFormItemProps<T>) {
@@ -51,17 +54,23 @@ export function AutoFormSwitch<T extends FieldValues>({
         <FormMessage />
       </div>
 
-      <FormControl>
-        <Switch
-          checked={value}
-          onCheckedChange={e => {
-            field.onChange(e);
-            componentProps?.onCheckedChange?.(e);
-          }}
-          {...componentProps}
-          disabled={isDisabled || componentProps?.disabled}
-        />
-      </FormControl>
+      <AutoFormInputWrapper
+        className={className}
+        withChildren={!!ChildComponent}
+      >
+        <FormControl>
+          <Switch
+            checked={value}
+            onCheckedChange={e => {
+              field.onChange(e);
+              componentProps?.onCheckedChange?.(e);
+            }}
+            {...componentProps}
+            disabled={isDisabled || componentProps?.disabled}
+          />
+        </FormControl>
+        <ChildComponent field={field} />
+      </AutoFormInputWrapper>
     </AutoFormWrapper>
   );
 }

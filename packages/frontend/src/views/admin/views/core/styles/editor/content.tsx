@@ -1,9 +1,11 @@
 'use client';
 
-import { AutoForm } from '@/components/form/auto-form';
-import { AutoFormRadioGroup } from '@/components/form/fields/radio-group';
-import { AutoFormSwitch } from '@/components/form/fields/switch';
-import { AutoFormInputComponentProps } from '@/components/form/type';
+import { AutoForm } from '@/components/auto-form/auto-form';
+import {
+  AutoFormRadioGroup,
+  AutoFormRadioGroupProps,
+} from '@/components/auto-form/fields/radio-group';
+import { AutoFormSwitch } from '@/components/auto-form/fields/switch';
 import { Card } from '@/components/ui/card';
 import { Core_GlobalQuery } from '@/graphql/queries/core_global.generated';
 import { useTranslations } from 'next-intl';
@@ -19,37 +21,35 @@ export const ContentEditorAdmin = (
   return (
     <Card className="p-6">
       <AutoForm
-        fieldConfig={{
-          sticky: {
+        fields={[
+          {
+            id: 'sticky',
             label: t('sticky.label'),
             description: t('sticky.desc'),
-            fieldType: AutoFormSwitch,
+            component: AutoFormSwitch,
           },
-          files: {
-            allow_type: {
-              label: t('files.allow_type.title'),
-              fieldType: (props: AutoFormInputComponentProps) => (
-                <AutoFormRadioGroup
-                  labels={{
-                    all: {
-                      title: t('files.allow_type.all'),
-                    },
-                    images_videos: {
-                      title: t('files.allow_type.images_videos'),
-                    },
-                    images: {
-                      title: t('files.allow_type.images'),
-                    },
-                    none: {
-                      title: t('files.allow_type.none'),
-                    },
-                  }}
-                  {...props}
-                />
-              ),
-            },
+          {
+            id: 'files.allow_type',
+            label: t('files.allow_type.title'),
+            component: AutoFormRadioGroup,
+            componentProps: {
+              labels: {
+                all: {
+                  title: t('files.allow_type.all'),
+                },
+                images_videos: {
+                  title: t('files.allow_type.images_videos'),
+                },
+                images: {
+                  title: t('files.allow_type.images'),
+                },
+                none: {
+                  title: t('files.allow_type.none'),
+                },
+              },
+            } as AutoFormRadioGroupProps,
           },
-        }}
+        ]}
         formSchema={formSchema}
         onSubmit={onSubmit}
         theme="horizontal"

@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input';
 import { FieldValues } from 'react-hook-form';
 
 import { AutoFormItemProps } from '../auto-form';
+import { AutoFormInputWrapper } from './common/input-wrapper';
 import { AutoFormLabel } from './common/label';
 import { AutoFormTooltip } from './common/tooltip';
 import { AutoFormWrapper } from './common/wrapper';
@@ -23,6 +24,8 @@ export function AutoFormInput<T extends FieldValues>({
   theme,
   isDisabled,
   componentProps,
+  className,
+  childComponent: ChildComponent,
 }: {
   componentProps?: AutoFormInputProps;
 } & AutoFormItemProps<T>) {
@@ -37,14 +40,20 @@ export function AutoFormInput<T extends FieldValues>({
         />
       )}
 
-      <FormControl>
-        <Input
-          {...field}
-          {...zodInputProps}
-          {...componentProps}
-          disabled={isDisabled}
-        />
-      </FormControl>
+      <AutoFormInputWrapper
+        className={className}
+        withChildren={!!ChildComponent}
+      >
+        <FormControl>
+          <Input
+            {...field}
+            {...zodInputProps}
+            {...componentProps}
+            disabled={isDisabled || componentProps?.disabled}
+          />
+        </FormControl>
+        <ChildComponent field={field} />
+      </AutoFormInputWrapper>
 
       {description && theme === 'vertical' && (
         <AutoFormTooltip description={description} />
