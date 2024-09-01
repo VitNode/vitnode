@@ -5,9 +5,10 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import { getSessionData } from '@/graphql/get-session-data';
 import { Link } from '@/navigation';
 import { Metadata } from 'next';
-import { useTranslations } from 'next-intl';
+import { notFound } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
 
 import { FormSignUp } from './form/form-sign-up';
@@ -20,8 +21,19 @@ export const generateMetadataSignUp = async (): Promise<Metadata> => {
   };
 };
 
-export const SignUpView = () => {
-  const t = useTranslations('core.sign_up');
+export const SignUpView = async () => {
+  const [
+    t,
+    {
+      core_middleware__show: {
+        authorization: { lock_register },
+      },
+    },
+  ] = await Promise.all([getTranslations('core.sign_up'), getSessionData()]);
+
+  if (lock_register) {
+    return notFound();
+  }
 
   return (
     <div className="container mx-auto max-w-lg pt-10">

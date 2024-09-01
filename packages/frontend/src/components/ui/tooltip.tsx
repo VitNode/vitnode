@@ -32,7 +32,7 @@ const TooltipWrapper = ({
   ...props
 }: {
   children: React.ReactNode;
-  content: JSX.Element | string;
+  content: React.JSX.Element | string;
 } & React.ComponentProps<typeof TooltipPrimitive.Provider>) => {
   return (
     <TooltipProvider {...props}>

@@ -1,12 +1,13 @@
 import { EmailHelpersServiceType } from '@/providers/email/email-helpers.type';
 import { EmailTemplateProps } from '@/providers/email/template/email-template';
 import { Inject, Injectable } from '@nestjs/common';
+import React from 'react';
 
 import { MailService } from '../mail.service';
 
 interface Args extends Pick<EmailTemplateProps, 'preview_text' | 'user'> {
   from?: string;
-  message: JSX.Element | string;
+  message: React.JSX.Element | string;
   subject: string;
   to: string;
 }

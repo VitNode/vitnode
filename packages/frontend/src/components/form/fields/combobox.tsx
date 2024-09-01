@@ -30,7 +30,7 @@ import { AutoFormTooltip } from './common/tooltip';
 import { AutoFormWrapper } from './common/wrapper';
 
 export type AutoFormComboboxProps = {
-  labels?: Record<string, JSX.Element | string>;
+  labels?: Record<string, React.JSX.Element | string>;
   multiple?: boolean;
   placeholderSearchInput?: string;
 } & Omit<React.ComponentProps<typeof Button>, 'role' | 'variant'>;

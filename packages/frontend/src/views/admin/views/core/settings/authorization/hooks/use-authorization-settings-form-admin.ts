@@ -11,11 +11,13 @@ export const useAuthorizationFormAdmin = ({
   const t = useTranslations('core');
   const formSchema = z.object({
     force_login: z.boolean().default(data.force_login).optional(),
+    lock_register: z.boolean().default(data.lock_register).optional(),
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const mutation = await mutationApi({
       forceLogin: values.force_login ?? false,
+      lockRegister: values.lock_register ?? false,
     });
 
     if (mutation?.error) {

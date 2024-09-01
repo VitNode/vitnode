@@ -133,6 +133,10 @@
           "force_login": {
             "title": "Force Login",
             "desc": "This option will block your site access from guest users."
+          },
+          "lock_register": {
+            "title": "Lock Register",
+            "desc": "This option will lock users from registering on your site."
           }
         }
       },

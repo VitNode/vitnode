@@ -22,6 +22,12 @@ export const ContentAuthorizationSettingsCoreAdmin = (
           label: t('force_login.title'),
           description: t('force_login.desc'),
         },
+        {
+          id: 'lock_register',
+          component: AutoFormSwitch,
+          label: t('lock_register.title'),
+          description: t('lock_register.desc'),
+        },
       ]}
       formSchema={formSchema}
       onSubmit={onSubmit}

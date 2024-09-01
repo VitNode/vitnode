@@ -1,4 +1,5 @@
 import { UploadCoreFilesObj } from '@/core/files/helpers/upload/dto/upload.obj';
+import React from 'react';
 
 import { EmailTemplateProps } from './template/email-template';
 
@@ -26,5 +27,5 @@ export interface GetHelpersForEmailType {
 
 export interface EmailHelpersServiceType {
   getHelpersForEmail: () => GetHelpersForEmailType;
-  template: (props: Omit<EmailTemplateProps, 'helpers'>) => JSX.Element;
+  template: (props: Omit<EmailTemplateProps, 'helpers'>) => React.JSX.Element;
 }

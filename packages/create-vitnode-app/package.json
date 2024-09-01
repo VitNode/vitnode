@@ -41,13 +41,13 @@
   "devDependencies": {
     "@types/cross-spawn": "^6.0.6",
     "@types/figlet": "^1.5.8",
-    "@types/node": "^22.5.0",
+    "@types/node": "^22.5.1",
     "@types/prompts": "^2.4.9",
     "@types/validate-npm-package-name": "^4.0.2",
     "commander": "^12.1.0",
     "cross-spawn": "^7.0.3",
     "eslint-config-typescript-vitnode": "workspace:*",
-    "ora": "^8.0.1",
+    "ora": "^8.1.0",
     "tsup": "^8.2.4",
     "typescript": "^5.5.4"
   }

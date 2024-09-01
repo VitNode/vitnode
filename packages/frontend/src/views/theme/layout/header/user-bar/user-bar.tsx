@@ -1,10 +1,18 @@
 import { buttonVariants } from '@/components/ui/button';
+import { getSessionData } from '@/graphql/get-session-data';
 import { cn } from '@/helpers/classnames';
 import { Link } from '@/navigation';
-import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 
-export const UserBar = ({ className }: { className?: string }) => {
-  const t = useTranslations('core');
+export const UserBar = async ({ className }: { className?: string }) => {
+  const [
+    t,
+    {
+      core_middleware__show: {
+        authorization: { lock_register },
+      },
+    },
+  ] = await Promise.all([getTranslations('core'), getSessionData()]);
 
   return (
     <div
@@ -23,14 +31,16 @@ export const UserBar = ({ className }: { className?: string }) => {
         {t('user-bar.sign_in')}
       </Link>
 
-      <Link
-        className={buttonVariants({
-          size: 'sm',
-        })}
-        href="/register"
-      >
-        {t('user-bar.sign_up')}
-      </Link>
+      {!lock_register && (
+        <Link
+          className={buttonVariants({
+            size: 'sm',
+          })}
+          href="/register"
+        >
+          {t('user-bar.sign_up')}
+        </Link>
+      )}
     </div>
   );
 };

@@ -125,4 +125,9 @@ query Core_sessions__authorization {
       width
     }
   }
+  core_middleware__show {
+    authorization {
+      lock_register
+    }
+  }
 }

@@ -15,7 +15,9 @@ export const useBeforeUnload = (
       event.preventDefault();
 
       if (message) {
-        event.returnValue = message || '';
+        event.preventDefault();
+
+        return message;
       }
 
       return message;
