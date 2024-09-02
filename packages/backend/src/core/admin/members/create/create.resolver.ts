@@ -3,8 +3,8 @@ import { AdminAuthGuards, GqlContext } from '@/utils';
 import { UseGuards } from '@nestjs/common';
 import { Args, Context, Mutation, Resolver } from '@nestjs/graphql';
 
+import { CreateAdminMembersArgs } from './create.dto';
 import { CreateAdminMembersService } from './create.service';
-import { CreateAdminMembersArgs } from './dto/create.args';
 
 @Resolver()
 export class CreateAdminMembersResolver {

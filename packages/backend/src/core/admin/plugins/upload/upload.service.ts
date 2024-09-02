@@ -16,8 +16,8 @@ import {
   FileUpload,
 } from '../../../..';
 import { ChangeFilesAdminPluginsService } from '../helpers/files/change/change.service';
-import { ShowAdminPlugins } from '../show/dto/show.obj';
-import { UploadAdminPluginsArgs } from './dto/upload.args';
+import { ShowAdminPlugins } from '../show/show.dto';
+import { UploadAdminPluginsArgs } from './upload.dto';
 
 @Injectable()
 export class UploadAdminPluginsService {

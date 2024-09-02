@@ -5,8 +5,7 @@ import { InternalDatabaseService } from '@/utils/database/internal_database.serv
 import { Injectable } from '@nestjs/common';
 import { and, count, eq, ilike, or } from 'drizzle-orm';
 
-import { ShowAdminFilesArgs } from './dto/show.args';
-import { ShowAdminFilesObj } from './dto/show.obj';
+import { ShowAdminFilesArgs, ShowAdminFilesObj } from './show.dto';
 
 @Injectable()
 export class ShowAdminFilesService {

@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { readdir } from 'fs/promises';
 
 import { ABSOLUTE_PATHS_BACKEND, getConfigFile } from '../../..';
-import { ShowCoreMiddlewareObj } from './dto/show.obj';
+import { ShowCoreMiddlewareObj } from './show.dto';
 
 @Injectable()
 export class ShowCoreMiddlewareService {

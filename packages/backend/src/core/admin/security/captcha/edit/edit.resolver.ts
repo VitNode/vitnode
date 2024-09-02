@@ -2,8 +2,8 @@ import { AdminAuthGuards } from '@/utils';
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
-import { ShowAdminCaptchaSecurityObj } from '../show/dto/show.obj';
-import { EditAdminCaptchaSecurityArgs } from './dto/edit.args';
+import { ShowAdminCaptchaSecurityObj } from '../show/show.dto';
+import { EditAdminCaptchaSecurityArgs } from './edit.dto';
 import { EditAdminCaptchaSecurityService } from './edit.service';
 
 @Resolver()

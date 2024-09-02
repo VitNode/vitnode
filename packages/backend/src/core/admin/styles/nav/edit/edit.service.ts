@@ -10,7 +10,7 @@ import { InternalDatabaseService } from '@/utils/database/internal_database.serv
 import { Injectable } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
 
-import { EditAdminNavStylesArgs } from './dto/edit.args';
+import { EditAdminNavStylesArgs } from './edit.dto';
 
 @Injectable()
 export class EditAdminNavStylesService {

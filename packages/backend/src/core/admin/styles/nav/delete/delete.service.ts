@@ -9,7 +9,7 @@ import { InternalDatabaseService } from '@/utils/database/internal_database.serv
 import { Injectable } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
 
-import { DeleteAdminNavStylesArgs } from './dto/delete.args';
+import { DeleteAdminNavStylesArgs } from './delete.dto';
 
 @Injectable()
 export class DeleteAdminNavStylesService {

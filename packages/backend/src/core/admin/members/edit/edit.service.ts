@@ -4,8 +4,7 @@ import { InternalDatabaseService } from '@/utils/database/internal_database.serv
 import { Injectable } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
 
-import { EditAdminMembersArgs } from './dto/edit.args';
-import { EditAdminMembersObj } from './dto/edit.obj';
+import { EditAdminMembersArgs, EditAdminMembersObj } from './edit.dto';
 
 @Injectable()
 export class EditAdminMembersService {

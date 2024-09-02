@@ -11,7 +11,7 @@ import { join } from 'path';
 
 import { AuthorizationCurrentUserObj } from '../../../sessions/authorization/dto/authorization.obj';
 import { DeviceSignInCoreSessionsService } from '../../../sessions/sign_in/device.service';
-import { AuthorizationAdminSessionsObj } from './dto/authorization.obj';
+import { AuthorizationAdminSessionsObj } from './authorization.dto';
 
 @Injectable()
 export class AuthorizationAdminSessionsService {

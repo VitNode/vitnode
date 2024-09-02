@@ -8,7 +8,7 @@ import {
 import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
 
-import { CreateAdminNavStylesArgs } from './dto/create.args';
+import { CreateAdminNavStylesArgs } from './create.dto';
 
 @Injectable()
 export class CreateAdminNavStylesService {

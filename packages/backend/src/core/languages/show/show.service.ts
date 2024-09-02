@@ -5,8 +5,7 @@ import { and, count, ilike } from 'drizzle-orm';
 import { core_languages } from '../../../database/schema/languages';
 import { inputPaginationCursor, outputPagination } from '../../../functions';
 import { SortDirectionEnum } from '../../../utils';
-import { ShowCoreLanguagesArgs } from './dto/show.args';
-import { ShowCoreLanguagesObj } from './dto/show.obj';
+import { ShowCoreLanguagesArgs, ShowCoreLanguagesObj } from './show.dto';
 
 @Injectable()
 export class ShowCoreLanguageService {

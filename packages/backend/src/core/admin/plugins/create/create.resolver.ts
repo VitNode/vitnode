@@ -2,9 +2,9 @@ import { AdminAuthGuards, OnlyForDevelopment } from '@/utils';
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
-import { ShowAdminPlugins } from '../show/dto/show.obj';
+import { ShowAdminPlugins } from '../show/show.dto';
+import { CreateAdminPluginsArgs } from './create.dto';
 import { CreateAdminPluginsService } from './create.service';
-import { CreateAdminPluginsArgs } from './dto/create.args';
 
 @Resolver()
 export class CreateAdminPluginsResolver {

@@ -1,7 +1,7 @@
 import { Query, Resolver } from '@nestjs/graphql';
 import { SkipThrottle } from '@nestjs/throttler';
 
-import { ShowCoreMiddlewareObj } from './dto/show.obj';
+import { ShowCoreMiddlewareObj } from './show.dto';
 import { ShowCoreMiddlewareService } from './show.service';
 
 @Resolver()

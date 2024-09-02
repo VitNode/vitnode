@@ -1,4 +1,4 @@
-import { UploadCoreFilesObj } from '@/core/files/helpers/upload/dto/upload.obj';
+import { UploadCoreFilesObj } from '@/core/files/helpers/upload/upload.dto';
 import { Field, Float, Int, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()

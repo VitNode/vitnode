@@ -2,8 +2,8 @@ import { AdminAuthGuards, OnlyForDevelopment } from '@/utils';
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
-import { ShowAdminPlugins } from '../show/dto/show.obj';
-import { UploadAdminPluginsArgs } from './dto/upload.args';
+import { ShowAdminPlugins } from '../show/show.dto';
+import { UploadAdminPluginsArgs } from './upload.dto';
 import { UploadAdminPluginsService } from './upload.service';
 
 @Resolver()

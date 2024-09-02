@@ -3,8 +3,8 @@ import { CustomError, NotFoundError } from '@/errors';
 import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
 
-import { ShowAdminStaffModerators } from '../show/dto/show.obj';
-import { CreateAdminStaffModeratorsArgs } from './dto/create.args';
+import { ShowAdminStaffModerators } from '../show/show.dto';
+import { CreateAdminStaffModeratorsArgs } from './create.dto';
 
 @Injectable()
 export class CreateAdminStaffModeratorsService {

@@ -13,8 +13,8 @@ import {
   EmailCredentialsFile,
   HelpersAdminEmailSettingsService,
 } from '../../helpers.service';
-import { ShowAdminEmailSettingsServiceObj } from '../show/dto/show.obj';
-import { EditAdminEmailSettingsServiceArgs } from './dto/edit.args';
+import { ShowAdminEmailSettingsServiceObj } from '../show/show.dto';
+import { EditAdminEmailSettingsServiceArgs } from './edit.dto';
 
 @Injectable()
 export class EditAdminEmailSettingsService extends HelpersAdminEmailSettingsService {

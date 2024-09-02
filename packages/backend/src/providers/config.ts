@@ -1,4 +1,4 @@
-import { UploadCoreFilesObj } from '@/core/files/helpers/upload/dto/upload.obj';
+import { UploadCoreFilesObj } from '@/core/files/helpers/upload/upload.dto';
 import * as fs from 'fs';
 import { join } from 'path';
 

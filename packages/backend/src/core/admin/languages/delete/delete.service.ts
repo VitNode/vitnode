@@ -12,7 +12,7 @@ import {
   ConfigType,
   getConfigFile,
 } from '../../../..';
-import { DeleteCoreAdminLanguagesArgs } from './dto/delete.args';
+import { DeleteCoreAdminLanguagesArgs } from './delete.dto';
 @Injectable()
 export class DeleteAdminCoreLanguageService {
   constructor(private readonly databaseService: InternalDatabaseService) {}

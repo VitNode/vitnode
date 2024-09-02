@@ -1,6 +1,6 @@
 import { Query, Resolver } from '@nestjs/graphql';
 
-import { LayoutAdminInstallObj } from './dto/layout.obj';
+import { LayoutAdminInstallObj } from './layout.dto';
 import { LayoutAdminInstallService } from './layout.service';
 
 @Resolver()

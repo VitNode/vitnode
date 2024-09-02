@@ -13,8 +13,7 @@ import { eq } from 'drizzle-orm';
 import * as fs from 'fs';
 import { join } from 'path';
 
-import { EditAdminMainSettingsArgs } from './dto/edit.args';
-import { EditAdminSettingsObj } from './dto/edit.obj';
+import { EditAdminMainSettingsArgs, EditAdminSettingsObj } from './edit.dto';
 
 @Injectable()
 export class EditAdminMainSettingsService {

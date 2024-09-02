@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 
 import { ShowAdminNavService } from '../../nav/show/show.service';
-import { SearchAdminSessionsArgs } from './dto/search.args';
 import {
   NavSearchAdminSessions,
+  SearchAdminSessionsArgs,
   SearchAdminSessionsObj,
-} from './dto/search.obj';
+} from './search.dto';
 
 @Injectable()
 export class SearchAdminSessionsService {

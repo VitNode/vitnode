@@ -3,7 +3,7 @@ import { SignUpHelperService } from '@/core/sessions/sign_up/helpers/sign-up-hel
 import { GqlContext } from '@/utils';
 import { Injectable } from '@nestjs/common';
 
-import { CreateAdminMembersArgs } from './dto/create.args';
+import { CreateAdminMembersArgs } from './create.dto';
 
 @Injectable()
 export class CreateAdminMembersService {

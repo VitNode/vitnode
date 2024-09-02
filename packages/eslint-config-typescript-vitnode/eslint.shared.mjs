@@ -23,6 +23,7 @@ export default [
   },
   {
     rules: {
+      'perfectionist/sort-named-imports': 'warn',
       'perfectionist/sort-intersection-types': 'warn',
       'perfectionist/sort-interfaces': 'warn',
       'perfectionist/sort-union-types': 'warn',

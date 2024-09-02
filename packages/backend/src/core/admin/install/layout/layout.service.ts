@@ -7,10 +7,7 @@ import { InternalDatabaseService } from '@/utils/database/internal_database.serv
 import { Injectable } from '@nestjs/common';
 import { count } from 'drizzle-orm';
 
-import {
-  LayoutAdminInstallEnum,
-  LayoutAdminInstallObj,
-} from './dto/layout.obj';
+import { LayoutAdminInstallEnum, LayoutAdminInstallObj } from './layout.dto';
 
 @Injectable()
 export class LayoutAdminInstallService {

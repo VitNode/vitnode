@@ -2,8 +2,8 @@ import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 import { AdminAuthGuards } from '../../../utils';
+import { DeleteCoreMembersArgs } from './delete.dto';
 import { DeleteCoreMembersService } from './delete.service';
-import { DeleteCoreMembersArgs } from './dto/delete.args';
 
 @Resolver()
 export class DeleteCoreMembersResolver {

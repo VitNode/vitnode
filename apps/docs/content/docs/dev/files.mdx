@@ -44,7 +44,7 @@ export class ExampleArgs {
 
 Object looks like this:
 
-```ts title="upload.obj.ts"
+```ts title="upload.dto.ts"
 @InputType()
 export class UploadWithKeepCoreFilesArgs {
   @Field(() => GraphQLUpload, { nullable: true })
@@ -64,7 +64,7 @@ This object only accepts a single file. If you need to upload multiple files as 
 
 ### Return Object
 
-```ts title="example.obj.ts"
+```ts title="example.dto.ts"
 import { Field, ObjectType } from '@nestjs/graphql';
 import { UploadCoreFilesObj } from 'vitnode-frontend';
 

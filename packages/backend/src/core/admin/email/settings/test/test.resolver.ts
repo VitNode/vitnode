@@ -3,7 +3,7 @@ import { AdminAuthGuards } from '@/utils';
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
-import { TestAdminEmailSettingsServiceArgs } from './dto/test.args';
+import { TestAdminEmailSettingsServiceArgs } from './test.dto';
 import { TestAdminEmailSettingsService } from './test.service';
 
 @Resolver()

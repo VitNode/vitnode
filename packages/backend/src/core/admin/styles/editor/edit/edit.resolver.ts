@@ -1,9 +1,9 @@
-import { EditorShowCoreMiddleware } from '@/core/middleware/show/dto/show.obj';
+import { EditorShowCoreMiddleware } from '@/core/middleware/show/show.dto';
 import { AdminAuthGuards } from '@/utils/guards/admin-auth.guard';
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
-import { EditAdminEditorStylesArgs } from './dto/edit.args';
+import { EditAdminEditorStylesArgs } from './edit.dto';
 import { EditAdminEditorStylesService } from './edit.service';
 
 @Resolver()
