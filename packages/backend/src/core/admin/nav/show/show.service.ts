@@ -58,6 +58,11 @@ export class ShowAdminNavService {
                 'sign up',
               ],
             },
+            {
+              code: 'legal',
+              href: 'legal',
+              keywords: ['legal', 'terms', 'privacy', 'policy', 'tos', 'pp'],
+            },
           ],
         },
         {

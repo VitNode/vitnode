@@ -347,6 +347,7 @@
         "settings_metadata": "Metadata",
         "settings_email": "Email",
         "settings_authorization": "Authorization",
+        "settings_legal": "Legal & Policies",
         "plugins": "Plugins",
         "styles": "Styles",
         "styles_theme-editor": "Theme Editor",

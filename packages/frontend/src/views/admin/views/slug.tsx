@@ -29,6 +29,10 @@ import {
   generateMetadataEmailSettingsAdmin,
 } from './core/settings/email/email-settings-admin-view';
 import {
+  generateMetadataLegalSettingsAdmin,
+  LegalSettingsAdminView,
+} from './core/settings/legal/legal-core-admin-view';
+import {
   generateMetadataMainSettingsCoreAdmin,
   MainSettingsCoreAdminView,
 } from './core/settings/main/main-settings-core-admin-view';
@@ -87,6 +91,7 @@ export const generateMetadataSlugAdmin = async ({
       if (slug[2] === 'email') return generateMetadataEmailSettingsAdmin();
       if (slug[2] === 'authorization')
         return generateMetadataAuthorizationSettingsAdmin();
+      if (slug[2] === 'legal') return generateMetadataLegalSettingsAdmin();
     }
 
     if (!slug[2]) {
@@ -141,6 +146,7 @@ export const SlugAdminView = (props: SlugViewProps) => {
       if (slug[2] === 'email') return <EmailSettingsAdminView />;
       if (slug[2] === 'authorization')
         return <AuthorizationSettingsCoreAdminView />;
+      if (slug[2] === 'legal') return <LegalSettingsAdminView />;
 
       if (!slug[2]) redirect('/admin/core/settings/general');
     }

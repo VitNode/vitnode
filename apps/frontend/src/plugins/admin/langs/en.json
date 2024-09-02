@@ -138,6 +138,14 @@
             "title": "Lock Register",
             "desc": "This option will lock users from registering on your site."
           }
+        },
+        "legal": {
+          "title": "Legal & Policies",
+          "desc": "These settings are used to generate the legal pages on your website.",
+          "create_edit": {
+            "create": "Create Policy",
+            "edit": "Edit Policy"
+          }
         }
       },
       "metadata": {
