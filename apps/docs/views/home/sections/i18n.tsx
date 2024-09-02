@@ -8,7 +8,7 @@ export const I18nSectionFeatures = () => {
     <SectionFeatures
       img={img}
       icon={<Languages />}
-      title="Internationalization (i18n) Support"
+      title="Internationalization (i18n)"
       desc="Reach a global audience with our comprehensive internationalization support."
       checklist={[
         {
