@@ -8,8 +8,8 @@ import { join } from 'path';
 import { ABSOLUTE_PATHS_BACKEND } from '../../../..';
 import { ChangeFilesAdminPluginsService } from '../helpers/files/change/change.service';
 import { CreateFilesAdminPluginsService } from '../helpers/files/create/create-files.service';
-import { ShowAdminPlugins } from '../show/dto/show.obj';
-import { CreateAdminPluginsArgs } from './dto/create.args';
+import { ShowAdminPlugins } from '../show/show.dto';
+import { CreateAdminPluginsArgs } from './create.dto';
 
 @Injectable()
 export class CreateAdminPluginsService {

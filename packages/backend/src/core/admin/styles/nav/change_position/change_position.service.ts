@@ -4,7 +4,7 @@ import { InternalDatabaseService } from '@/utils/database/internal_database.serv
 import { Injectable } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
 
-import { ChangePositionAdminNavStylesArgs } from './dto/change_position.args';
+import { ChangePositionAdminNavStylesArgs } from './change_position.dto';
 
 @Injectable()
 export class ChangePositionAdminNavStylesService {

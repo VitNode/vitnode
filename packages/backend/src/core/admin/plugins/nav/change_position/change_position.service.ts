@@ -4,7 +4,7 @@ import { Injectable } from '@nestjs/common';
 import * as fs from 'fs';
 
 import { HelpersAdminNavPluginsService } from '../helpers.service';
-import { ChangePositionAdminNavPluginsArgs } from './dto/change_position.args';
+import { ChangePositionAdminNavPluginsArgs } from './change_position.dto';
 
 @Injectable()
 export class ChangePositionAdminNavPluginsService extends HelpersAdminNavPluginsService {

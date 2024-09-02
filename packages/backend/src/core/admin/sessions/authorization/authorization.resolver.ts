@@ -1,8 +1,8 @@
 import { GqlContext } from '@/utils';
 import { Context, Query, Resolver } from '@nestjs/graphql';
 
+import { AuthorizationAdminSessionsObj } from './authorization.dto';
 import { AuthorizationAdminSessionsService } from './authorization.service';
-import { AuthorizationAdminSessionsObj } from './dto/authorization.obj';
 
 @Resolver()
 export class AuthorizationAdminSessionsResolver {

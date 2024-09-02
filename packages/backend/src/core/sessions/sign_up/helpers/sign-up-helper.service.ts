@@ -6,8 +6,7 @@ import { Injectable } from '@nestjs/common';
 import { count } from 'drizzle-orm';
 
 import { encryptPassword } from '../../password';
-import { SignUpCoreSessionsArgs } from '../dto/sign_up.args';
-import { SignUpCoreSessionsObj } from '../dto/sign_up.obj';
+import { SignUpCoreSessionsArgs, SignUpCoreSessionsObj } from '../sign_up.dto';
 import { AvatarColorService } from './avatar-color.service';
 
 @Injectable()

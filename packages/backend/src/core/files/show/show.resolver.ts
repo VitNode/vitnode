@@ -3,8 +3,7 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 
 import { CurrentUser, User } from '../../../decorators';
 import { AuthGuards } from '../../../utils';
-import { ShowCoreFilesArgs } from './dto/show.args';
-import { ShowCoreFilesObj } from './dto/show.obj';
+import { ShowCoreFilesArgs, ShowCoreFilesObj } from './show.dto';
 import { ShowCoreFilesService } from './show.service';
 
 @Resolver()

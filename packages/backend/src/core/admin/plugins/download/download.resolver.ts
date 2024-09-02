@@ -3,8 +3,8 @@ import { AdminAuthGuards, OnlyForDevelopment } from '@/utils';
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
+import { DownloadAdminPluginsArgs } from './download.dto';
 import { DownloadAdminPluginsService } from './download.service';
-import { DownloadAdminPluginsArgs } from './dto/download.args';
 
 @Resolver()
 export class DownloadAdminPluginsResolver {

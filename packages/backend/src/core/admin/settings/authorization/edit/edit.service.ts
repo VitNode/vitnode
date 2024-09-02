@@ -2,8 +2,8 @@ import { configPath, getConfigFile } from '@/providers';
 import { Injectable } from '@nestjs/common';
 import * as fs from 'fs';
 
-import { ShowAdminAuthorizationSettingsObj } from '../show/dto/show.obj';
-import { EditAdminAuthorizationSettingsArgs } from './dto/edit.args';
+import { ShowAdminAuthorizationSettingsObj } from '../show/show.dto';
+import { EditAdminAuthorizationSettingsArgs } from './edit.dto';
 
 @Injectable()
 export class EditAdminAuthorizationSettingsService {

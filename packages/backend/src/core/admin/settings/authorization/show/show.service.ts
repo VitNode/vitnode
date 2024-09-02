@@ -1,7 +1,7 @@
 import { getConfigFile } from '@/providers';
 import { Injectable } from '@nestjs/common';
 
-import { ShowAdminAuthorizationSettingsObj } from './dto/show.obj';
+import { ShowAdminAuthorizationSettingsObj } from './show.dto';
 
 @Injectable()
 export class ShowAdminAuthorizationSettingsService {

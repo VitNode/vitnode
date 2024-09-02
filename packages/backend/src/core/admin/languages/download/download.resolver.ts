@@ -3,8 +3,8 @@ import { AdminAuthGuards } from '@/utils';
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
+import { DownloadCoreAdminLanguagesArgs } from './download.dto';
 import { DownloadAdminCoreLanguageService } from './download.service';
-import { DownloadCoreAdminLanguagesArgs } from './dto/download.args';
 
 @Resolver()
 export class DownloadAdminCoreLanguagesResolver {

@@ -22,7 +22,7 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 Create enum with columns to sort by.
 
-```ts title="dto/show.args.ts"
+```ts title="show.dto.ts"
 enum ShowTestSortingColumnEnum {
   created = 'created',
   updated = 'updated',
@@ -42,7 +42,7 @@ enum ShowTestSortingColumnEnum {
 
 NestJS require to register the enum in the GraphQL schema. You can read more in [NestJS documentation](https://docs.nestjs.com/graphql/unions-and-enums).
 
-```ts title="dto/show.args.ts"
+```ts title="show.dto.ts"
 import { registerEnumType } from '@nestjs/graphql';
 
 registerEnumType(ShowTestSortingColumnEnum, {
@@ -54,7 +54,7 @@ registerEnumType(ShowTestSortingColumnEnum, {
 
 Create input type to use the enum in the args type. You need to create input type with `column` and `direction` fields.
 
-```ts title="dto/show.args.ts"
+```ts title="show.dto.ts"
 import { InputType } from '@nestjs/graphql';
 import { SortDirectionEnum } from 'vitnode-backend';
 

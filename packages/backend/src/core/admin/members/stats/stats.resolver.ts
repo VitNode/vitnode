@@ -2,7 +2,7 @@ import { AdminAuthGuards } from '@/utils';
 import { UseGuards } from '@nestjs/common';
 import { Query, Resolver } from '@nestjs/graphql';
 
-import { SignUpStatsAdminMembers } from './dto/stats.obj';
+import { SignUpStatsAdminMembers } from './stats.dto';
 import { StatsAdminMembersService } from './stats.service';
 
 @Resolver()

@@ -1,7 +1,7 @@
 import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
 
-import { ShowCorePluginsObj } from './dto/show.obj';
+import { ShowCorePluginsObj } from './show.dto';
 
 @Injectable()
 export class ShowCorePluginsService {

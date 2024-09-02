@@ -4,9 +4,8 @@ import { getConfigFile } from '@/providers';
 import { GqlContext } from '@/utils';
 import { Injectable } from '@nestjs/common';
 
-import { SignUpCoreSessionsArgs } from './dto/sign_up.args';
-import { SignUpCoreSessionsObj } from './dto/sign_up.obj';
 import { SignUpHelperService } from './helpers/sign-up-helper.service';
+import { SignUpCoreSessionsArgs, SignUpCoreSessionsObj } from './sign_up.dto';
 
 @Injectable()
 export class SignUpCoreSessionsService {

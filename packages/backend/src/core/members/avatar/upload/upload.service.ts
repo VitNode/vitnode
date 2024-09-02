@@ -6,8 +6,10 @@ import { Injectable } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
 
 import { FilesService } from '../../../files/helpers/upload/upload.service';
-import { UploadAvatarCoreMembersArgs } from './dto/upload.args';
-import { UploadAvatarCoreMembersObj } from './dto/upload.obj';
+import {
+  UploadAvatarCoreMembersArgs,
+  UploadAvatarCoreMembersObj,
+} from './upload.dto';
 
 @Injectable()
 export class UploadAvatarCoreMembersService {

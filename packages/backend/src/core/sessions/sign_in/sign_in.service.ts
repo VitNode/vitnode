@@ -10,7 +10,7 @@ import { AccessDeniedError, CustomError } from '../../../errors';
 import { GqlContext } from '../../../utils';
 import { verifyPassword } from '../password';
 import { DeviceSignInCoreSessionsService } from './device.service';
-import { SignInCoreSessionsArgs } from './dto/sign_in.args';
+import { SignInCoreSessionsArgs } from './sign_in.dto';
 
 interface CreateSessionArgs extends GqlContext {
   admin?: boolean;

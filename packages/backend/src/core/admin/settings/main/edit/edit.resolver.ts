@@ -2,8 +2,7 @@ import { AdminAuthGuards } from '@/utils';
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
-import { EditAdminMainSettingsArgs } from './dto/edit.args';
-import { EditAdminSettingsObj } from './dto/edit.obj';
+import { EditAdminMainSettingsArgs, EditAdminSettingsObj } from './edit.dto';
 import { EditAdminMainSettingsService } from './edit.service';
 
 @Resolver()

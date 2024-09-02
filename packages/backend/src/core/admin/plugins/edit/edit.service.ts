@@ -6,8 +6,8 @@ import { eq, ne } from 'drizzle-orm';
 import * as fs from 'fs';
 
 import { ABSOLUTE_PATHS_BACKEND, ConfigPlugin } from '../../../..';
-import { ShowAdminPlugins } from '../show/dto/show.obj';
-import { EditAdminPluginsArgs } from './dto/edit.args';
+import { ShowAdminPlugins } from '../show/show.dto';
+import { EditAdminPluginsArgs } from './edit.dto';
 
 @Injectable()
 export class EditAdminPluginsService {

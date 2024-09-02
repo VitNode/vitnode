@@ -2,7 +2,7 @@ import { User } from '@/decorators';
 import { Injectable } from '@nestjs/common';
 
 import { SendAdminEmailService } from '../../send/send.service';
-import { TestAdminEmailSettingsServiceArgs } from './dto/test.args';
+import { TestAdminEmailSettingsServiceArgs } from './test.dto';
 
 @Injectable()
 export class TestAdminEmailSettingsService extends SendAdminEmailService {

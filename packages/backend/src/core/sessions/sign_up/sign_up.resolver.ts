@@ -1,8 +1,7 @@
 import { Args, Context, Mutation, Resolver } from '@nestjs/graphql';
 
 import { GqlContext } from '../../../utils';
-import { SignUpCoreSessionsArgs } from './dto/sign_up.args';
-import { SignUpCoreSessionsObj } from './dto/sign_up.obj';
+import { SignUpCoreSessionsArgs, SignUpCoreSessionsObj } from './sign_up.dto';
 import { SignUpCoreSessionsService } from './sign_up.service';
 
 @Resolver()

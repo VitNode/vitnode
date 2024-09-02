@@ -1,7 +1,7 @@
 import { Query, Resolver } from '@nestjs/graphql';
 import { SkipThrottle } from '@nestjs/throttler';
 
-import { ShowCorePluginsObj } from './dto/show.obj';
+import { ShowCorePluginsObj } from './show.dto';
 import { ShowCorePluginsService } from './show.service';
 
 @Resolver()

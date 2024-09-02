@@ -1,5 +1,5 @@
 import { ParserTextLanguageCoreHelpersService } from '@/core/helpers/text_language/parser/parser.service';
-import { ShowCoreNav } from '@/core/nav/show/dto/show.obj';
+import { ShowCoreNav } from '@/core/nav/show/show.dto';
 import {
   core_nav,
   core_nav_description,
@@ -10,7 +10,7 @@ import { InternalDatabaseService } from '@/utils/database/internal_database.serv
 import { Injectable } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
 
-import { EditAdminNavStylesArgs } from './dto/edit.args';
+import { EditAdminNavStylesArgs } from './edit.dto';
 
 @Injectable()
 export class EditAdminNavStylesService {

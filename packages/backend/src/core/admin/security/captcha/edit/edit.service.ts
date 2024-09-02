@@ -6,8 +6,8 @@ import {
   CaptchaSecurityConfig,
   HelpersAdminCaptchaSecurityService,
 } from '../helpers.service';
-import { ShowAdminCaptchaSecurityObj } from '../show/dto/show.obj';
-import { EditAdminCaptchaSecurityArgs } from './dto/edit.args';
+import { ShowAdminCaptchaSecurityObj } from '../show/show.dto';
+import { EditAdminCaptchaSecurityArgs } from './edit.dto';
 
 @Injectable()
 export class EditAdminCaptchaSecurityService extends HelpersAdminCaptchaSecurityService {

@@ -4,7 +4,7 @@ import { eq } from 'drizzle-orm';
 
 import { core_users } from '../../../database/schema/users';
 import { AccessDeniedError, NotFoundError } from '../../../errors';
-import { DeleteCoreMembersArgs } from './dto/delete.args';
+import { DeleteCoreMembersArgs } from './delete.dto';
 
 @Injectable()
 export class DeleteCoreMembersService {

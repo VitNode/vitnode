@@ -3,7 +3,7 @@ import { InternalDatabaseService } from '@/utils/database/internal_database.serv
 import { Injectable } from '@nestjs/common';
 import * as fs from 'fs';
 
-import { ShowAdminNavObj } from './dto/show.obj';
+import { ShowAdminNavObj } from './show.dto';
 
 @Injectable()
 export class ShowAdminNavService {

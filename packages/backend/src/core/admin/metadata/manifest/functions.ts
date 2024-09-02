@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import { join } from 'path';
 
 import { ABSOLUTE_PATHS_BACKEND, NotFoundError } from '../../../..';
-import { ShowAdminManifestMetadataObj } from './show/dto/show.obj';
+import { ShowAdminManifestMetadataObj } from './show/show.dto';
 
 export const getManifest = ({
   lang_code,

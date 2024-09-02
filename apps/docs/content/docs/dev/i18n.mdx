@@ -122,7 +122,7 @@ export const blog_categories_name = pgTable(
 
 Inside input DTO you can use `TextLanguageInput[]` for translation fields.
 
-```ts title="backend/plugins/blog/categories/show/dto/show.args.ts"
+```ts title="backend/plugins/blog/categories/show/show.dto.ts"
 import { ArgsType, Field } from '@nestjs/graphql';
 import { IsArray } from 'class-validator';
 import { Transform } from 'class-transformer';
@@ -299,11 +299,11 @@ export class EditBlogCategoriesService {
 
 ---
 
-### Display text
+## Display text
 
 On the frontend you can display text depends on display language.
 
-#### Using hook
+### Using hook
 
 ```tsx title="example.tsx"
 import { useTextLang } from 'vitnode-frontend/hooks/use-text-lang';
@@ -321,7 +321,7 @@ export const ExampleComponent = ({ value }: Props) => {
 };
 ```
 
-#### Using function (async component)
+### Using function (async component)
 
 ```tsx title="example.tsx"
 import { useTextLang } from 'vitnode-frontend/hooks/use-text-lang';
@@ -340,7 +340,7 @@ export const ExampleComponent = async ({ locale, value }: Props) => {
 };
 ```
 
-### Form
+## Form
 
 Create form with translations is very similar to normal [Forms](/docs/ui/forms).
 
@@ -349,7 +349,7 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
 <Steps>
 
 <Step>
-#### Define schema
+### Define schema
 
 ```ts title="use-example.ts"
 import * as z from 'zod';
@@ -379,7 +379,7 @@ const formSchema = z.object({
 </Step>
 
 <Step>
-#### Set initial values
+### Set initial values
 
 ```ts title="example.ts"
 import { useForm } from 'react-hook-form';
@@ -411,7 +411,7 @@ export const useExample = () => {
 
 <Step>
 
-#### Form Field
+### Form Field
 
 ```tsx
 import {

@@ -2,8 +2,8 @@ import { AdminAuthGuards } from '@/utils';
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
-import { ShowCoreLanguages } from '../../../languages/show/dto/show.obj';
-import { EditCoreAdminLanguagesArgs } from './dto/edit.args';
+import { ShowCoreLanguages } from '../../../languages/show/show.dto';
+import { EditCoreAdminLanguagesArgs } from './edit.dto';
 import { EditAdminCoreLanguagesService } from './edit.service';
 
 @Resolver()

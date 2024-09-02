@@ -3,7 +3,7 @@ import { ABSOLUTE_PATHS_BACKEND, ConfigPlugin } from '@/index';
 import { Injectable } from '@nestjs/common';
 import * as fs from 'fs';
 
-import { DeleteCreateAdminNavPluginsArgs } from './dto/delete.args';
+import { DeleteCreateAdminNavPluginsArgs } from './delete.dto';
 
 @Injectable()
 export class DeleteAdminNavPluginsService {

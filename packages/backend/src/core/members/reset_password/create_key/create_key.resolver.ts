@@ -1,7 +1,7 @@
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
+import { CreateKeyResetPasswordCoreMembersArgs } from './create_key.dto';
 import { CreateKeyResetPasswordCoreMembersService } from './create_key.service';
-import { CreateKeyResetPasswordCoreMembersArgs } from './dto/create_key.args';
 
 @Resolver()
 export class CreateKeyResetPasswordCoreMembersResolver {

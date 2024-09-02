@@ -8,8 +8,8 @@ import { Injectable } from '@nestjs/common';
 import * as fs from 'fs';
 
 import { HelpersAdminNavPluginsService } from '../helpers.service';
-import { ShowAdminNavPluginsObj } from '../show/dto/show.obj';
-import { CreateAdminNavPluginsArgs } from './dto/create.args';
+import { ShowAdminNavPluginsObj } from '../show/show.dto';
+import { CreateAdminNavPluginsArgs } from './create.dto';
 
 @Injectable()
 export class CreateAdminNavPluginsService extends HelpersAdminNavPluginsService {

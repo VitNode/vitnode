@@ -6,8 +6,8 @@ import { Injectable } from '@nestjs/common';
 import { count, eq } from 'drizzle-orm';
 
 import { ParserTextLanguageCoreHelpersService } from '../../../helpers/text_language/parser/parser.service';
-import { ShowAdminGroups } from '../show/dto/show.obj';
-import { EditAdminGroupsArgs } from './dto/edit.args';
+import { ShowAdminGroups } from '../show/show.dto';
+import { EditAdminGroupsArgs } from './edit.dto';
 
 @Injectable()
 export class EditAdminGroupsService {

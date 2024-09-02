@@ -3,8 +3,10 @@ import { AuthGuards } from '@/utils';
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
-import { UploadAvatarCoreMembersArgs } from './dto/upload.args';
-import { UploadAvatarCoreMembersObj } from './dto/upload.obj';
+import {
+  UploadAvatarCoreMembersArgs,
+  UploadAvatarCoreMembersObj,
+} from './upload.dto';
 import { UploadAvatarCoreMembersService } from './upload.service';
 
 @Resolver()

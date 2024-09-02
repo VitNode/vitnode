@@ -2,7 +2,7 @@ import { ABSOLUTE_PATHS_BACKEND, getConfigFile } from '@/index';
 import * as fs from 'fs';
 import { join } from 'path';
 
-import { ShowAdminEmailSettingsServiceObj } from './settings/show/dto/show.obj';
+import { ShowAdminEmailSettingsServiceObj } from './settings/show/show.dto';
 
 export interface EmailCredentialsFile
   extends Pick<

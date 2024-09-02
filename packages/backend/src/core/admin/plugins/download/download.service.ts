@@ -15,7 +15,7 @@ import { join } from 'path';
 import * as tar from 'tar';
 
 import { ABSOLUTE_PATHS_BACKEND, PluginInfoJSONType } from '../../../..';
-import { DownloadAdminPluginsArgs } from './dto/download.args';
+import { DownloadAdminPluginsArgs } from './download.dto';
 
 @Injectable()
 export class DownloadAdminPluginsService {

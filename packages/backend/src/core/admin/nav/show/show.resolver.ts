@@ -2,7 +2,7 @@ import { AdminAuthGuards } from '@/utils';
 import { UseGuards } from '@nestjs/common';
 import { Query, Resolver } from '@nestjs/graphql';
 
-import { ShowAdminNavObj } from './dto/show.obj';
+import { ShowAdminNavObj } from './show.dto';
 import { ShowAdminNavService } from './show.service';
 
 @Resolver()

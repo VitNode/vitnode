@@ -1,6 +1,6 @@
 import { Query, Resolver } from '@nestjs/graphql';
 
-import { ShowCoreThemeEditorObj } from './dto/show.obj';
+import { ShowCoreThemeEditorObj } from './show.dto';
 import { ShowCoreThemeEditorService } from './show.service';
 
 @Resolver()

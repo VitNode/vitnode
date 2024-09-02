@@ -1,9 +1,9 @@
-import { SignUpCoreSessionsObj } from '@/core/sessions/sign_up/dto/sign_up.obj';
 import { SignUpHelperService } from '@/core/sessions/sign_up/helpers/sign-up-helper.service';
+import { SignUpCoreSessionsObj } from '@/core/sessions/sign_up/sign_up.dto';
 import { GqlContext } from '@/utils';
 import { Injectable } from '@nestjs/common';
 
-import { CreateAdminMembersArgs } from './dto/create.args';
+import { CreateAdminMembersArgs } from './create.dto';
 
 @Injectable()
 export class CreateAdminMembersService {

@@ -5,8 +5,7 @@ import { and, count, eq, ilike, or } from 'drizzle-orm';
 import { core_users } from '../../../database/schema/users';
 import { inputPaginationCursor, outputPagination } from '../../../functions';
 import { SortDirectionEnum } from '../../../utils';
-import { ShowCoreMembersArgs } from './dto/show.args';
-import { ShowCoreMembersObj } from './dto/show.obj';
+import { ShowCoreMembersArgs, ShowCoreMembersObj } from './show.dto';
 
 @Injectable()
 export class ShowCoreMembersService {

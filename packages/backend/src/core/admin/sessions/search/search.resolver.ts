@@ -2,8 +2,7 @@ import { AdminAuthGuards } from '@/utils';
 import { UseGuards } from '@nestjs/common';
 import { Args, Query, Resolver } from '@nestjs/graphql';
 
-import { SearchAdminSessionsArgs } from './dto/search.args';
-import { SearchAdminSessionsObj } from './dto/search.obj';
+import { SearchAdminSessionsArgs, SearchAdminSessionsObj } from './search.dto';
 import { SearchAdminSessionsService } from './search.service';
 
 @Resolver()

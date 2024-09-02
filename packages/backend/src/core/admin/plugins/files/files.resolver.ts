@@ -2,8 +2,7 @@ import { AdminAuthGuards, OnlyForDevelopment } from '@/utils';
 import { UseGuards } from '@nestjs/common';
 import { Args, Query, Resolver } from '@nestjs/graphql';
 
-import { FilesAdminPluginsArgs } from './dto/files.args';
-import { FilesAdminPluginsObj } from './dto/files.obj';
+import { FilesAdminPluginsArgs, FilesAdminPluginsObj } from './files.dto';
 import { FilesAdminPluginsService } from './files.service';
 
 @Resolver()
