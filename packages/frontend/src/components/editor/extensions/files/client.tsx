@@ -5,7 +5,7 @@ import { NodeViewWrapper, ReactNodeViewRenderer } from '@tiptap/react';
 import { File } from 'lucide-react';
 import Image from 'next/image';
 
-import { CONFIG } from '../../../helpers/config-with-env';
+import { CONFIG } from '../../../../helpers/config-with-env';
 import { acceptMimeTypeImage, FilesHandlerAttributes } from './files';
 
 const FileFromNextWithNode = ({

@@ -6,10 +6,10 @@ import { useTranslations } from 'next-intl';
 import React from 'react';
 import tippy, { Instance } from 'tippy.js';
 
-import { Button } from '../../../components/ui/button';
-import { classPopover } from '../../../components/ui/popover';
-import { cn } from '../../../helpers/classnames';
-import { CONFIG } from '../../../helpers/config-with-env';
+import { cn } from '../../../../helpers/classnames';
+import { CONFIG } from '../../../../helpers/config-with-env';
+import { Button } from '../../../ui/button';
+import { classPopover } from '../../../ui/popover';
 import {
   ComponentListRef,
   SuggestionKeyDownProps,

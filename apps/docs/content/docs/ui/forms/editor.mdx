@@ -5,43 +5,52 @@ description: Rich text editor that uses TipTap library.
 
 ## Usage
 
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+
+<Tabs items={['Auto Form', 'Manual']}>
+  <Tab value="Auto Form">
+```ts
+import * as z from 'zod';
+import { AutoForm } from 'vitnode-frontend/form/auto-form';
+import { AutoFormEditor } from 'vitnode-frontend/form/fields/editor';
+import { zodLanguageInput } from 'vitnode-frontend/helpers/zod';
+```
+
+```ts
+const formSchema = z.object({
+  content: zodLanguageInput, // [!code highlight]
+});
+```
+
 ```tsx
-import { Editor } from 'vitnode-frontend/editor';
+<AutoForm
+  formSchema={formSchema}
+  fields={[
+    {
+      id: 'content',
+      component: AutoFormEditor,
+    },
+  ]}
+/>
+```
+
+  </Tab>
+
+  <Tab value="Manual">
+```ts
+import { Editor } from 'vitnode-frontend/components/editor/editor';
+```
+
+```ts
+const [value, setValue] = useState<TextLanguage[]>([]);
 ```
 
 ```tsx
 <Editor onChange={onChange} value={value} />
 ```
 
-### With Form
-
-```tsx
-
-```
-
-### With Upload Files
-
-```tsx
-
-```
-
-### Form Schema
-
-```ts {1, 4}
-import { zodLanguageInput } from 'vitnode-frontend/helpers/zod';
-
-const formSchema = z.object({
-  content: zodLanguageInput,
-});
-```
-
-You can set this field as **required**:
-
-```ts
-const formSchema = z.object({
-  content: zodLanguageInput.min(1),
-});
-```
+  </Tab>
+</Tabs>
 
 ## API Reference
 
@@ -71,6 +80,11 @@ import { TypeTable } from 'fumadocs-ui/components/type-table';
       description: 'Allow upload files.',
       type: '{ plugin: string, folder: string }',
     },
+    disabled: {
+      description: 'Disable editor.',
+      type: 'boolean',
+      default: 'false',
+    },
   }}
 />
 
@@ -78,7 +92,6 @@ import { TypeTable } from 'fumadocs-ui/components/type-table';
 
 We have implemented the following extensions:
 
-- [Blockquote](https://tiptap.dev/docs/editor/api/nodes/blockquote),
 - [BulletList](https://tiptap.dev/docs/editor/api/nodes/bullet-list),
 - [CodeBlock](https://tiptap.dev/docs/editor/api/nodes/code-block),
 - [HardBreak](https://tiptap.dev/docs/editor/api/nodes/hard-break),
@@ -91,20 +104,25 @@ We have implemented the following extensions:
 - [Code](https://tiptap.dev/docs/editor/api/marks/code),
 - [Italic](https://tiptap.dev/docs/editor/api/marks/italic),
 - [Strike](https://tiptap.dev/docs/editor/api/marks/strike),
-- [Dropcursor](https://tiptap.dev/docs/editor/api/extensions/dropcursor),
-- [Gapcursor](https://tiptap.dev/docs/editor/api/extensions/gapcursor),
 - [History](https://tiptap.dev/docs/editor/api/extensions/history),
 - [Underline](https://tiptap.dev/docs/editor/api/marks/underline),
 - [TextAlign](https://tiptap.dev/docs/editor/api/extensions/text-align),
-- [CodeBlockLowlight](https://tiptap.dev/docs/editor/api/nodes/code-block-lowlight),
-- [Link](https://tiptap.dev/docs/editor/api/marks/link),
 - [TextStyle](https://tiptap.dev/docs/editor/api/marks/text-style),
-- [Color](https://tiptap.dev/docs/editor/api/extensions/color)
+- [CodeBlockLowlight](https://tiptap.dev/docs/editor/api/nodes/code-block-lowlight),
+- [Color](https://tiptap.dev/docs/editor/api/extensions/color),
+- [Link](https://tiptap.dev/docs/editor/api/marks/link),
+- [Blockquote](https://tiptap.dev/docs/editor/api/nodes/blockquote),
+
+To Improve:
+
+- [Dropcursor](https://tiptap.dev/docs/editor/api/extensions/dropcursor),
+- [Gapcursor](https://tiptap.dev/docs/editor/api/extensions/gapcursor),
 
 and extra extensions unique to our implementation:
 
+- Remove Formatting,
 - Emoji,
-- Image,
+- Images,
 - Files
 
 ## Read only mode
@@ -112,7 +130,7 @@ and extra extensions unique to our implementation:
 To display content form editor you have to use `ReadOnlyEditor` component.
 
 ```tsx
-import { ReadOnlyEditor } from 'vitnode-frontend/editor/read-only';
+import { ReadOnlyEditor } from 'vitnode-frontend/components/editor/read-only';
 ```
 
 ```tsx

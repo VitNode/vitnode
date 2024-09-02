@@ -2,7 +2,7 @@ import { Paperclip } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
-import { Button } from '../../../components/ui/button';
+import { Button } from '../../../ui/button';
 import { FileStateEditor } from '../../extensions/files/files';
 import { useEditorState } from '../../hooks/use-editor-state';
 

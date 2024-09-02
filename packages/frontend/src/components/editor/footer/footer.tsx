@@ -1,5 +1,5 @@
-import { useGlobals } from '../../hooks/use-globals';
-import { useSession } from '../../hooks/use-session';
+import { useGlobals } from '../../../hooks/use-globals';
+import { useSession } from '../../../hooks/use-session';
 import { useEditorState } from '../hooks/use-editor-state';
 import { FilesButtonFooterEditor } from './files/button';
 import { ListFilesFooterEditor } from './files/list';
@@ -20,6 +20,10 @@ export const FooterEditor = ({
   const { files: permissionFiles } = useSession();
   const { allowUploadFiles, files } = useEditorState();
   const { config } = useGlobals();
+
+  if (!disableLanguages && !allowUploadFiles) {
+    return null;
+  }
 
   return (
     <div className="bg-background rounded-b-md p-2">

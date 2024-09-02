@@ -5,8 +5,8 @@ import { File } from 'lucide-react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
-import { Button } from '../../components/ui/button';
-import { CONFIG } from '../../helpers/config-with-env';
+import { CONFIG } from '../../../helpers/config-with-env';
+import { Button } from '../../ui/button';
 import { acceptMimeTypeImage } from '../extensions/files/files';
 
 export const FileDownloadButton = ({

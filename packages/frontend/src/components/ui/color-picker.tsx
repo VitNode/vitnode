@@ -26,8 +26,10 @@ export const ColorPicker = ({
   className,
   id,
   ref: refFromProps,
+  clearOnClick,
 }: {
   className?: string;
+  clearOnClick?: () => void;
   disabled?: boolean;
   id?: string;
   onChange: (value: null | string) => void;
@@ -96,6 +98,7 @@ export const ColorPicker = ({
                 className="shrink-0"
                 onClick={() => {
                   onChange(null);
+                  clearOnClick?.();
                 }}
                 size="icon"
                 variant="ghost"
