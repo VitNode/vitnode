@@ -1,4 +1,4 @@
-import { UploadWithKeepCoreFilesArgs } from '@/core/files/helpers/upload/dto/upload.args';
+import { UploadWithKeepCoreFilesArgs } from '@/core/files/helpers/upload/upload.dto';
 import { ArgsType, Field, Float, InputType, Int } from '@nestjs/graphql';
 
 @InputType()

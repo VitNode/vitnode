@@ -12,7 +12,7 @@ VitNode has a file system that allows you to upload files to the system dynamica
 
 ### Arguments
 
-```ts title="example.args.ts"
+```ts title="example.dto.ts"
 import { ArgsType, Field } from '@nestjs/graphql';
 import { FileUpload, GraphQLUpload } from 'vitnode-backend';
 
@@ -31,9 +31,9 @@ In some cases, you may want to mutate data without replacing the file. Your code
 
 For this case, we created the `UploadWithKeepCoreFilesArgs` object.
 
-```ts title="example.args.ts"
+```ts title="example.dto.ts"
 import { ArgsType, Field } from '@nestjs/graphql';
-import { UploadWithKeepCoreFilesArgs } from 'vitnode-frontend';
+import { UploadWithKeepCoreFilesArgs } from 'vitnode-backend';
 
 @ArgsType()
 export class ExampleArgs {

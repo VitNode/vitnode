@@ -1,4 +1,4 @@
-import { SignUpCoreSessionsArgs } from '@/core/sessions/sign_up/dto/sign_up.args';
+import { SignUpCoreSessionsArgs } from '@/core/sessions/sign_up/sign_up.dto';
 import { ArgsType, OmitType } from '@nestjs/graphql';
 
 @ArgsType()

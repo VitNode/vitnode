@@ -1,5 +1,5 @@
 import { TransformString } from '@/utils';
-import { ArgsType, Field } from '@nestjs/graphql';
+import { ArgsType, Field, Int, ObjectType } from '@nestjs/graphql';
 import { Transform } from 'class-transformer';
 import {
   IsEmail,
@@ -37,4 +37,23 @@ export class SignUpCoreSessionsArgs {
   })
   @Field(() => String)
   password: string;
+}
+
+@ObjectType()
+export class SignUpCoreSessionsObj {
+  @Field(() => String)
+  @IsEmail()
+  email: string;
+
+  @Field(() => Int)
+  group_id: number;
+
+  @Field(() => String)
+  @MinLength(3)
+  @MaxLength(32)
+  @Matches(nameRegex)
+  name: string;
+
+  @Field(() => Boolean, { nullable: true })
+  newsletter: boolean | null;
 }

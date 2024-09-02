@@ -1,4 +1,4 @@
-import { ShowSettingsObj } from '@/core/settings/show/dto/show.obj';
+import { ShowSettingsObj } from '@/core/settings/show/show.dto';
 import { TextLanguageInput } from '@/utils';
 import { ArgsType, Field, ObjectType, PickType } from '@nestjs/graphql';
 

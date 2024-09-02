@@ -14,9 +14,8 @@ import { join } from 'path';
 import sharp from 'sharp';
 
 import { ABSOLUTE_PATHS_BACKEND, removeSpecialCharacters } from '../../../..';
-import { UploadCoreFilesArgs } from './dto/upload.args';
 import { acceptMimeTypeImage, HelpersUploadCoreFilesService } from './helpers';
-import { UploadCoreFilesObj } from './upload.dto';
+import { UploadCoreFilesArgs, UploadCoreFilesObj } from './upload.dto';
 
 export interface DeleteCoreFilesArgs {
   dir_folder: string;

@@ -1,4 +1,4 @@
-import { AuthorizationCurrentUserObj } from '@/core/sessions/authorization/dto/authorization.obj';
+import { AuthorizationCurrentUserObj } from '@/core/sessions/authorization/authorization.dto';
 import { Field, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()

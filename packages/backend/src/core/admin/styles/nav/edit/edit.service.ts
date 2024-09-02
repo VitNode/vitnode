@@ -1,5 +1,5 @@
 import { ParserTextLanguageCoreHelpersService } from '@/core/helpers/text_language/parser/parser.service';
-import { ShowCoreNav } from '@/core/nav/show/dto/show.obj';
+import { ShowCoreNav } from '@/core/nav/show/show.dto';
 import {
   core_nav,
   core_nav_description,

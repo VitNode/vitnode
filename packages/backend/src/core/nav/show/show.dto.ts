@@ -1,5 +1,8 @@
-import { PageInfo, TextLanguage } from '@/utils';
-import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { PageInfo, PaginationArgs, TextLanguage } from '@/utils';
+import { ArgsType, Field, Int, ObjectType } from '@nestjs/graphql';
+
+@ArgsType()
+export class ShowCoreNavArgs extends PaginationArgs {}
 
 @ObjectType()
 class ShowCoreNavItem {

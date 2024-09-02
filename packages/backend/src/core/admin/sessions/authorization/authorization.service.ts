@@ -9,7 +9,7 @@ import { eq } from 'drizzle-orm';
 import * as fs from 'fs';
 import { join } from 'path';
 
-import { AuthorizationCurrentUserObj } from '../../../sessions/authorization/dto/authorization.obj';
+import { AuthorizationCurrentUserObj } from '../../../sessions/authorization/authorization.dto';
 import { DeviceSignInCoreSessionsService } from '../../../sessions/sign_in/device.service';
 import { AuthorizationAdminSessionsObj } from './authorization.dto';
 
