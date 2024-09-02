@@ -4,6 +4,9 @@ import { FeaturesHome } from '@/views/home/features';
 import Link from 'fumadocs-core/link';
 import { Check } from 'lucide-react';
 import { AnimatedBeamHome } from '../../components/animated-beam-home';
+import { PreviewHome } from '@/views/home/preview/preview';
+import { MoreFeaturesHome } from '@/views/home/more-features/more-features';
+import { MarketplaceHome } from '@/views/home/marketplace';
 
 export default function Page() {
   return (
@@ -25,8 +28,8 @@ export default function Page() {
             </h1>
 
             <p className="text-muted-foreground text-pretty">
-              SEO-friendly sites effortlessly, customize with ease, and enjoy
-              security, speed, and efficiency.
+              Community Management System, SEO-friendly, customize with ease and
+              enjoy security, speed, and efficiency.
             </p>
 
             <div className="flex flex-wrap items-center gap-2 pt-4 md:gap-4">
@@ -50,7 +53,10 @@ export default function Page() {
         </div>
       </div>
 
+      <PreviewHome />
       <FeaturesHome />
+      <MoreFeaturesHome />
+      <MarketplaceHome />
     </>
   );
 }

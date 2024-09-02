@@ -8,9 +8,8 @@ export const PluginsSectionFeatures = () => {
     <SectionFeatures
       img={img}
       icon={<Plug />}
-      title="Plugins System"
-      desc="Enhance your app with powerful plugins extend the functionality of
-          your app."
+      title="Plugin System"
+      desc="Enhance your app with powerful plugins extend the functionality in just one click."
       checklist={[
         {
           id: 1,

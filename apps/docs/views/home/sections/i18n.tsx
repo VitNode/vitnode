@@ -28,6 +28,7 @@ export const I18nSectionFeatures = () => {
           text: 'Inputs & WYSIWYG editor with i18n support',
         },
       ]}
+      reverse
     >
       <Button variant="ghost" className="!bg-card border">
         Test 123
