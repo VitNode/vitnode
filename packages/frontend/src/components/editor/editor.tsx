@@ -21,6 +21,7 @@ import { ToolBarEditor } from './toolbar/toolbar';
 interface Props extends Omit<UploadFilesHandlerEditorArgs, 'value'> {
   autoFocus?: boolean;
   className?: string;
+  disabled?: boolean;
 }
 
 interface WithLanguage extends Props {
@@ -46,6 +47,7 @@ export const Editor = ({
   disableLanguages,
   onChange,
   value,
+  disabled,
 }: WithLanguage | WithoutLanguage) => {
   const { files, setFiles, uploadFiles } = useUploadFilesHandlerEditor({
     value,
@@ -58,6 +60,7 @@ export const Editor = ({
   );
   const editor = useEditor({
     autofocus: autoFocus,
+    immediatelyRender: false,
     extensions: [
       ...extensionsEditor({
         uploadFiles,
@@ -140,7 +143,9 @@ export const Editor = ({
       }}
     >
       <div
-        className={cn('border-input rounded-md border shadow-sm', className)}
+        className={cn('border-input rounded-md border shadow-sm', className, {
+          'pointer-events-none cursor-not-allowed opacity-50': disabled,
+        })}
       >
         <div className="relative">
           <ToolBarEditor />

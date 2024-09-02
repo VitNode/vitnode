@@ -21,6 +21,10 @@ export const FooterEditor = ({
   const { allowUploadFiles, files } = useEditorState();
   const { config } = useGlobals();
 
+  if (!disableLanguages && !allowUploadFiles) {
+    return null;
+  }
+
   return (
     <div className="bg-background rounded-b-md p-2">
       <div className="flex w-full flex-wrap items-center justify-between gap-2 [&>*]:w-full [&>*]:sm:w-auto">
