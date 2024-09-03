@@ -26,8 +26,8 @@ export class ShowCoreTermsService {
         schema: core_terms.id,
       },
       defaultSortBy: {
-        direction: SortDirectionEnum.asc,
-        column: 'created',
+        direction: SortDirectionEnum.desc,
+        column: 'updated',
       },
     });
 

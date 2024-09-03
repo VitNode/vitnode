@@ -358,6 +358,11 @@
         "advanced": "Advanced",
         "advanced_files": "Files"
       }
+    },
+    "legal": {
+      "title": "Explore our Legal documents and Policies",
+      "last_updated": "Last updated: <date></date>",
+      "read_document": "Read Document"
     }
   },
   "members": {

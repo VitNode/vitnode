@@ -45,8 +45,8 @@ export const ContentLegalSettingsAdmin = ({
       ]}
       data={edges}
       defaultSorting={{
-        sortBy: 'created',
-        sortDirection: 'asc',
+        sortBy: 'updated',
+        sortDirection: 'desc',
       }}
       pageInfo={pageInfo}
     />

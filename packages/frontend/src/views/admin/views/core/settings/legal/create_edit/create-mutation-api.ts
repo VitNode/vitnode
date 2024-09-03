@@ -20,7 +20,7 @@ export const createMutationApi = async (
       variables,
     });
 
-    revalidatePath('/admin/core/settings/legal', 'page');
+    revalidatePath('/[locale]/admin/(auth)/(vitnode)/[...slug]', 'page');
   } catch (error) {
     const e = error as Error;
 
