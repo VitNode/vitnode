@@ -66,6 +66,7 @@
       "next": "Next"
     },
     "table": {
+      "title": "Title",
       "name": "Name",
       "created": "Created",
       "updated": "Updated",

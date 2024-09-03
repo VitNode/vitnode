@@ -146,7 +146,7 @@ export const SlugAdminView = (props: SlugViewProps) => {
       if (slug[2] === 'email') return <EmailSettingsAdminView />;
       if (slug[2] === 'authorization')
         return <AuthorizationSettingsCoreAdminView />;
-      if (slug[2] === 'legal') return <LegalSettingsAdminView />;
+      if (slug[2] === 'legal') return <LegalSettingsAdminView {...props} />;
 
       if (!slug[2]) redirect('/admin/core/settings/general');
     }

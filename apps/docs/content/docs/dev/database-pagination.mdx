@@ -196,25 +196,11 @@ const getData = async (variables: Test_Query__ShowQueryVariables) => {
   >({
     query: Test_Query__Show,
     variables,
+    cache: 'force-cache',
   });
 
   return data;
 };
-```
-
-</Step>
-<Step>
- 
-### Get Search Params
-
-Create new interface for page props.
-
-```tsx title="example-page.tsx"
-import { SearchParamsPagination } from 'vitnode-frontend/graphql/get-pagination-tool';
-
-export interface ExamplePageProps {
-  searchParams: SearchParamsPagination;
-}
 ```
 
 </Step>
@@ -224,7 +210,13 @@ export interface ExamplePageProps {
 ### Provide Interface to Component
 
 ```tsx title="example-page.tsx"
-export default async function Page({ searchParams }: ExamplePageProps) {}
+import { SearchParamsPagination } from 'vitnode-frontend/graphql/get-pagination-tool';
+
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: SearchParamsPagination;
+}) {}
 ```
 
 </Step>
@@ -239,7 +231,11 @@ import {
   SearchParamsPagination,
 } from 'vitnode-frontend/graphql/get-pagination-tool';
 
-export default async function Page({ searchParams }: ExamplePageProps) {
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: SearchParamsPagination;
+}) {
   // [!code word:getPaginationTool]
   const variables = getPaginationTool({
     searchParams,
@@ -257,7 +253,11 @@ This function will automatically handle the pagination, search and sorting for y
 ### Data Table
 
 ```tsx title="example-page.tsx"
-export default async function Page({ searchParams }: ExamplePageProps) {
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: SearchParamsPagination;
+}) {
   const variables = getPaginationTool({
     searchParams,
     defaultPageSize: 10,

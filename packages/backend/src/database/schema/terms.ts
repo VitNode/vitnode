@@ -35,6 +35,16 @@ export const core_terms_title = pgTable('core_terms_title', {
   value: varchar('value').notNull(),
 });
 
+export const core_terms_title_relations = relations(
+  core_terms_title,
+  ({ one }) => ({
+    file: one(core_terms, {
+      fields: [core_terms_title.item_id],
+      references: [core_terms.id],
+    }),
+  }),
+);
+
 export const core_terms_content = pgTable('core_terms_content', {
   id: serial('id').primaryKey(),
   item_id: integer('item_id').references(() => core_terms.id, {
@@ -47,3 +57,13 @@ export const core_terms_content = pgTable('core_terms_content', {
     }),
   value: text('value').notNull(),
 });
+
+export const core_terms_content_relations = relations(
+  core_terms_content,
+  ({ one }) => ({
+    item: one(core_terms, {
+      fields: [core_terms_content.item_id],
+      references: [core_terms.id],
+    }),
+  }),
+);
