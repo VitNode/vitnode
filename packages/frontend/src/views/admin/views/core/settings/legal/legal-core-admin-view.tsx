@@ -12,8 +12,8 @@ import {
 } from '@/graphql/queries/terms/core_terms__show.generated';
 import { getTranslations } from 'next-intl/server';
 
+import { ActionsLegalSettingsAdmin } from './actions';
 import { ContentLegalSettingsAdmin } from './content';
-import { CreateLegalPage } from './create/create';
 
 const getData = async (variables: Core_Terms__ShowQueryVariables) => {
   const data = await fetcher<
@@ -54,7 +54,7 @@ export const LegalSettingsAdminView = async ({
   return (
     <>
       <HeaderContent desc={t('desc')} h1={t('title')}>
-        <CreateLegalPage />
+        <ActionsLegalSettingsAdmin />
       </HeaderContent>
 
       <Card>

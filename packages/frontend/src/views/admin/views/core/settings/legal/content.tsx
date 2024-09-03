@@ -1,5 +1,6 @@
 'use client';
 
+import { DateFormat } from '@/components/date-format';
 import { DataTable } from '@/components/ui/data-table';
 import { Core_Terms__ShowQuery } from '@/graphql/queries/terms/core_terms__show.generated';
 import { useTextLang } from '@/hooks/use-text-lang';
@@ -21,8 +22,20 @@ export const ContentLegalSettingsAdmin = ({
             return convertText(row.title);
           },
         },
-        { title: t('created'), id: 'created' },
-        { title: t('updated'), id: 'updated' },
+        {
+          title: t('created'),
+          id: 'created',
+          cell: ({ row }) => {
+            return <DateFormat date={row.created} />;
+          },
+        },
+        {
+          title: t('updated'),
+          id: 'updated',
+          cell: ({ row }) => {
+            return <DateFormat date={row.updated} />;
+          },
+        },
         {
           id: 'actions',
           cell: ({ row }) => {

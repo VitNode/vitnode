@@ -430,6 +430,30 @@ For example if `provider` is `resend`, the field `resend_key` will be required.
 />
 ```
 
+This dependencie will hide only the `Optional` text. That's mean you should change your `formSchema` to make the field required.
+
+For example using `refine` method from `Zod`.
+
+```ts
+const formSchema = z
+  .object({
+    provider: z.nativeEnum(EmailProvider).default(data.provider),
+    smtp: z.object({
+      host: z.string().default(data.smtp_host ?? ''),
+    }),
+    resend_key: z.string().default(''),
+  })
+  .refine(input => {
+    if (input.provider === 'smtp') {
+      return input.smtp.host !== '';
+    } else if (input.provider === 'resend') {
+      return input.resend_key !== '';
+    }
+
+    return true;
+  });
+```
+
 ### Disables
 
 For example if `provider` is not `smtp`, the field `smtp` will be disabled.
