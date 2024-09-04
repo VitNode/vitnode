@@ -1,4 +1,3 @@
-import { Card } from '@/components/ui/card';
 import { HeaderContent } from '@/components/ui/header-content';
 import { fetcher } from '@/graphql/fetcher';
 import {
@@ -71,9 +70,7 @@ export const UsersMembersAdminView = async ({
         <CreateUserUsersMembersAdmin />
       </HeaderContent>
 
-      <Card className="p-6">
-        <TableUsersMembersAdmin {...data} />
-      </Card>
+      <TableUsersMembersAdmin {...data} />
     </>
   );
 };

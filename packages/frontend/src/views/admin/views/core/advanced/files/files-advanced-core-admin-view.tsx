@@ -1,4 +1,3 @@
-import { Card } from '@/components/ui/card';
 import { HeaderContent } from '@/components/ui/header-content';
 import { fetcher } from '@/graphql/fetcher';
 import {
@@ -59,9 +58,7 @@ export const FilesAdvancedCoreAdminView = async ({
     <>
       <HeaderContent h1={t('title')} />
 
-      <Card className="p-6">
-        <ContentFilesAdvancedCoreAdminView {...data} />
-      </Card>
+      <ContentFilesAdvancedCoreAdminView {...data} />
     </>
   );
 };

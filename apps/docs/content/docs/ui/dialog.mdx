@@ -38,7 +38,7 @@ import {
 
 ### Lazy Load Content
 
-To improve performance and reduce the size of the initial bundle use [React Lazy](https://react.dev/reference/react/lazy) to lazy load the dialog content.
+To improve performance and reduce the size of the initial bundle use [React Lazy](https://react.dev/reference/react/lazy) to lazy load the dialog content. Use this if you have a large components inside the dialog.
 
 import { Step, Steps } from 'fumadocs-ui/components/steps';
  
@@ -52,6 +52,9 @@ import {
   Dialog,
   DialogContent,
   DialogTrigger,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
 } from 'vitnode-frontend/components/ui/dialog';
 import { Button } from 'vitnode-frontend/components/ui/button';
 
@@ -65,6 +68,11 @@ export const Test = () => {
       </DialogTrigger>
 
       <DialogContent>
+        <DialogHeader>
+          <DialogTitle>This is title</DialogTitle>
+          <DialogDescription>This is description</DialogDescription>
+        </DialogHeader>
+
         <div>Content</div>
       </DialogContent>
     </Dialog>
@@ -79,17 +87,12 @@ export const Test = () => {
 Your dialog content should be in a separate file, for example `content.tsx`.
 
 ```tsx title="content.tsx"
-import { DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogClose } from 'vitnode-frontend/components/ui/dialog';
+import { DialogFooter, DialogClose } from 'vitnode-frontend/components/ui/dialog';
 import { Button } from 'vitnode-frontend/components/ui/button';
 
 export const ContentTest = () => {
   return (
     <>
-     <DialogHeader>
-        <DialogTitle>This is title</DialogTitle>
-        <DialogDescription>This is description</DialogDescription>
-      </DialogHeader>
-
       <div>Content</div>
 
       <DialogFooter>
@@ -116,6 +119,9 @@ import {
   Dialog,
   DialogContent,
   DialogTrigger,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
 } from 'vitnode-frontend/components/ui/dialog';
 import { Loader } from 'vitnode-frontend/components/ui/loader';
 
@@ -131,6 +137,11 @@ export const Test = () => {
       <DialogTrigger asChild>...</DialogTrigger>
 
       <DialogContent>
+        <DialogHeader>
+          <DialogTitle>This is title</DialogTitle>
+          <DialogDescription>This is description</DialogDescription>
+        </DialogHeader>
+
         <React.Suspense fallback={<Loader />}>
           <Content /> // [!code highlight]
         </React.Suspense>

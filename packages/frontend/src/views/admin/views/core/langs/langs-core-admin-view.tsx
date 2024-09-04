@@ -1,4 +1,3 @@
-import { Card } from '@/components/ui/card';
 import { HeaderContent } from '@/components/ui/header-content';
 import { fetcher } from '@/graphql/fetcher';
 import {
@@ -67,9 +66,7 @@ export const LangsCoreAdminView = async ({
         <ActionsLangsAdmin />
       </HeaderContent>
 
-      <Card className="p-6">
-        <ContentLangsCoreAdminView {...data} />
-      </Card>
+      <ContentLangsCoreAdminView {...data} />
     </>
   );
 };

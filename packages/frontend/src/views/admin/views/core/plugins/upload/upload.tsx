@@ -4,12 +4,7 @@ import {
   AutoFormFileInputProps,
 } from '@/components/form/fields/file-input';
 import { Button } from '@/components/ui/button';
-import {
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog';
+import { DialogFooter } from '@/components/ui/dialog';
 import { ShowAdminPlugins } from '@/graphql/types';
 import { useTranslations } from 'next-intl';
 
@@ -24,32 +19,25 @@ export const UploadPluginAdmin = ({ data }: UploadPluginAdminProps) => {
   const { onSubmit, formSchema } = useUploadPluginAdmin({ data });
 
   return (
-    <>
-      <DialogHeader>
-        <DialogTitle>{t(data ? 'title_new_version' : 'title')}</DialogTitle>
-        {data?.name && <DialogDescription>{data.name}</DialogDescription>}
-      </DialogHeader>
-
-      <AutoForm
-        fields={[
-          {
-            id: 'file',
-            component: AutoFormFileInput,
-            componentProps: {
-              acceptExtensions: ['tgz'],
-              maxFileSizeInMb: 0,
-              showInfo: true,
-            } as AutoFormFileInputProps,
-          },
-        ]}
-        formSchema={formSchema}
-        onSubmit={onSubmit}
-        submitButton={props => (
-          <DialogFooter>
-            <Button {...props}>{t('submit')}</Button>
-          </DialogFooter>
-        )}
-      />
-    </>
+    <AutoForm
+      fields={[
+        {
+          id: 'file',
+          component: AutoFormFileInput,
+          componentProps: {
+            acceptExtensions: ['tgz'],
+            maxFileSizeInMb: 0,
+            showInfo: true,
+          } as AutoFormFileInputProps,
+        },
+      ]}
+      formSchema={formSchema}
+      onSubmit={onSubmit}
+      submitButton={props => (
+        <DialogFooter>
+          <Button {...props}>{t('submit')}</Button>
+        </DialogFooter>
+      )}
+    />
   );
 };

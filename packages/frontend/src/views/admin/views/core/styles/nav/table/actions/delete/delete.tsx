@@ -4,7 +4,6 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
-import { Loader } from '@/components/ui/loader';
 import {
   Tooltip,
   TooltipContent,
@@ -16,11 +15,7 @@ import { Trash2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
-const Content = React.lazy(async () =>
-  import('./content').then(module => ({
-    default: module.ContentDeleteActionTableNavAdmin,
-  })),
-);
+import { ContentDeleteActionTableNavAdmin } from './content';
 
 export const DeleteActionTableNavAdmin = (
   props: Pick<ShowCoreNav, 'children' | 'id' | 'name'>,
@@ -48,9 +43,7 @@ export const DeleteActionTableNavAdmin = (
       </TooltipProvider>
 
       <AlertDialogContent>
-        <React.Suspense fallback={<Loader />}>
-          <Content {...props} />
-        </React.Suspense>
+        <ContentDeleteActionTableNavAdmin {...props} />
       </AlertDialogContent>
     </AlertDialog>
   );

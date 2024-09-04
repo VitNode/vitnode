@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 
-import { getPluginDataAdmin } from '../layout/query-api';
-import { ContentOverviewDevPluginAdmin } from './content';
+import { FormCreateEditPluginAdmin } from '../../actions/create/form';
+import { getPluginDataAdmin } from './layout/query-api';
 
 export interface OverviewDevPluginAdminViewProps {
   params: { code: string };
@@ -14,8 +14,9 @@ export const OverviewDevPluginAdminView = async ({
   if (data.admin__core_plugins__show.edges.length === 0) notFound();
 
   return (
-    <ContentOverviewDevPluginAdmin
-      {...data.admin__core_plugins__show.edges[0]}
+    <FormCreateEditPluginAdmin
+      className="max-w-xl"
+      data={data.admin__core_plugins__show.edges[0]}
     />
   );
 };

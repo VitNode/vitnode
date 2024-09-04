@@ -1,18 +1,24 @@
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 import { Loader } from '@/components/ui/loader';
 import { Plus } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
-const CreateEditFormModeratorsStaffAdmin = React.lazy(async () =>
+const Content = React.lazy(async () =>
   import('../create-edit-form/create-edit-form').then(module => ({
     default: module.CreateEditFormModeratorsStaffAdmin,
   })),
 );
 
 export const CreateActionsModeratorsStaffAdmin = () => {
-  const t = useTranslations('core');
+  const t = useTranslations('admin.members.staff.moderators.add');
 
   return (
     <>
@@ -20,13 +26,17 @@ export const CreateActionsModeratorsStaffAdmin = () => {
         <DialogTrigger asChild>
           <Button>
             <Plus />
-            {t('create')}
+            {t('title')}
           </Button>
         </DialogTrigger>
 
         <DialogContent className="max-w-4xl">
+          <DialogHeader className="flex flex-col gap-4">
+            <DialogTitle>{t('title')}</DialogTitle>
+          </DialogHeader>
+
           <React.Suspense fallback={<Loader />}>
-            <CreateEditFormModeratorsStaffAdmin />
+            <Content />
           </React.Suspense>
         </DialogContent>
       </Dialog>
