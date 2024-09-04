@@ -1,4 +1,4 @@
-import { Card, CardContent } from '@/components/ui/card';
+import { Card } from '@/components/ui/card';
 import { HeaderContent } from '@/components/ui/header-content';
 import { fetcher } from '@/graphql/fetcher';
 import {
@@ -38,10 +38,8 @@ export const CaptchaSecurityAdminView = async () => {
     <>
       <HeaderContent desc={t('desc')} h1={t('title')} />
 
-      <Card>
-        <CardContent className="p-6">
-          <ContentCaptchaSecurityAdmin {...data} />
-        </CardContent>
+      <Card className="p-6">
+        <ContentCaptchaSecurityAdmin {...data} />
       </Card>
     </>
   );

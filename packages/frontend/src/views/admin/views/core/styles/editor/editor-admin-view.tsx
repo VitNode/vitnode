@@ -1,3 +1,4 @@
+import { Card } from '@/components/ui/card';
 import { HeaderContent } from '@/components/ui/header-content';
 import { getGlobalData } from '@/graphql/get-global-data';
 import { Metadata } from 'next';
@@ -22,7 +23,10 @@ export const EditorAdminView = async () => {
   return (
     <>
       <HeaderContent h1={t('title')} />
-      <ContentEditorAdmin {...data.core_middleware__show.editor} />
+
+      <Card className="p-6">
+        <ContentEditorAdmin {...data.core_middleware__show.editor} />
+      </Card>
     </>
   );
 };

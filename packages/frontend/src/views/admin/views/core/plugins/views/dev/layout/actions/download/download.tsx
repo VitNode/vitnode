@@ -1,5 +1,12 @@
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 import { Loader } from '@/components/ui/loader';
 import { ShowAdminPlugins } from '@/graphql/types';
 import { Download } from 'lucide-react';
@@ -13,17 +20,24 @@ const Content = React.lazy(async () =>
 );
 
 export const DownloadActionDevPluginAdmin = (props: ShowAdminPlugins) => {
-  const t = useTranslations('core');
+  const t = useTranslations('admin.core.plugins.download');
 
   return (
     <Dialog>
       <DialogTrigger asChild>
         <Button>
-          <Download /> {t('download')}
+          <Download /> {t('title')}
         </Button>
       </DialogTrigger>
 
       <DialogContent className="max-w-xl">
+        <DialogHeader>
+          <DialogTitle>{t('title')}</DialogTitle>
+          <DialogDescription className="text-muted-foreground text-sm">
+            {props.name}
+          </DialogDescription>
+        </DialogHeader>
+
         <React.Suspense fallback={<Loader />}>
           <Content {...props} />
         </React.Suspense>

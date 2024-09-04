@@ -30,7 +30,7 @@ export const HeaderContent = ({
   return (
     <div
       className={cn(
-        'mb-4 flex min-h-9 flex-col items-start gap-2 sm:flex-row sm:gap-4',
+        'mb-6 flex min-h-9 flex-col items-start gap-2 sm:flex-row sm:gap-4',
         className,
       )}
       ref={ref}

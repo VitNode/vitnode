@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 
 import { FilesDevPluginAdminView } from './files-view';
 import { NavDevPluginAdminView } from './nav/nav';
-import { OverviewDevPluginAdminView } from './overview/overview';
+import { OverviewDevPluginAdminView } from './overview';
 
 export interface SlugDevPluginsAdminProps extends SlugViewProps {
   params: {

@@ -1,7 +1,13 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 import { Loader } from '@/components/ui/loader';
 import { CONFIG } from '@/helpers/config-with-env';
 import { Link } from '@/navigation';
@@ -10,13 +16,13 @@ import { useTranslations } from 'next-intl';
 import React from 'react';
 
 const Content = React.lazy(async () =>
-  import('./content').then(module => ({
-    default: module.CreatePluginAdmin,
+  import('./form').then(module => ({
+    default: module.FormCreateEditPluginAdmin,
   })),
 );
 
 export const CreateActionPluginAdmin = () => {
-  const t = useTranslations('core');
+  const t = useTranslations('admin.core.plugins');
 
   if (!CONFIG.node_development) {
     return (
@@ -27,7 +33,7 @@ export const CreateActionPluginAdmin = () => {
           target="_blank"
         >
           <Plus />
-          {t('create')}
+          {t('create.title')}
           <SquareArrowUpRight />
         </Link>
       </Button>
@@ -39,11 +45,15 @@ export const CreateActionPluginAdmin = () => {
       <DialogTrigger asChild>
         <Button>
           <Plus />
-          {t('create')}
+          {t('create.title')}
         </Button>
       </DialogTrigger>
 
       <DialogContent className="max-w-xl">
+        <DialogHeader>
+          <DialogTitle>{t('create.title')}</DialogTitle>
+        </DialogHeader>
+
         <React.Suspense fallback={<Loader />}>
           <Content />
         </React.Suspense>

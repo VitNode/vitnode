@@ -1,9 +1,5 @@
 import { Button } from '@/components/ui/button';
-import {
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog';
+import { DialogFooter } from '@/components/ui/dialog';
 import {
   Form,
   FormControl,
@@ -29,10 +25,6 @@ export const CreateEditFormAdministratorsStaffAdmin = () => {
 
   return (
     <Form {...form}>
-      <DialogHeader className="flex flex-col gap-4">
-        <DialogTitle>{t('administrators.add.title')}</DialogTitle>
-      </DialogHeader>
-
       {/* <AutoForm
         formSchema={formSchema}
         onSubmit={onSubmit}

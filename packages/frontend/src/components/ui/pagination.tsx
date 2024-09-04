@@ -51,7 +51,7 @@ export const Pagination = ({
   }, [pagination, defaultPageSize]);
 
   return (
-    <div className="flex flex-wrap items-center justify-center gap-4 px-2 pt-4 sm:justify-end">
+    <div className="flex flex-wrap items-center justify-center gap-4 sm:justify-end">
       <span className="text-muted-foreground text-sm">
         {t('table.total_count', { count: pageInfo.totalCount })}
       </span>
@@ -76,7 +76,7 @@ export const Pagination = ({
               value={`${pageSizeValue}`}
             >
               <TooltipTrigger asChild>
-                <SelectTrigger className="h-8 w-[70px]">
+                <SelectTrigger className="bg-card h-8 w-[70px]">
                   <SelectValue placeholder={pageSizeValue} />
                 </SelectTrigger>
               </TooltipTrigger>
@@ -96,6 +96,7 @@ export const Pagination = ({
         <div className="flex items-center space-x-2">
           <Button
             ariaLabel={t('pagination.previous')}
+            className="bg-card size-9"
             disabled={!pageInfo.hasPreviousPage}
             onClick={() => {
               if (!pageInfo.startCursor) return;
@@ -115,6 +116,7 @@ export const Pagination = ({
           </Button>
           <Button
             ariaLabel={t('pagination.next')}
+            className="bg-card size-9"
             disabled={!pageInfo.hasNextPage}
             onClick={() => {
               if (!pageInfo.endCursor) return;

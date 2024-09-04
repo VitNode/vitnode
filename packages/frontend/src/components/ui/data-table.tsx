@@ -50,13 +50,15 @@ export function DataTable<T extends TMin>({
   const [isPending, startTransition] = React.useTransition();
 
   return (
-    <div className="space-y-4">
-      <ToolbarDataTable
-        searchPlaceholder={searchPlaceholder}
-        startTransition={startTransition}
-      />
+    <div className="space-y-6">
+      {searchPlaceholder && (
+        <ToolbarDataTable
+          searchPlaceholder={searchPlaceholder}
+          startTransition={startTransition}
+        />
+      )}
 
-      <div className="rounded-md border">
+      <div className="bg-card rounded-md border">
         {isPending ? (
           <SkeletonDataTable />
         ) : (

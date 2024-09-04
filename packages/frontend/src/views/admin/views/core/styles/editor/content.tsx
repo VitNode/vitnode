@@ -6,7 +6,6 @@ import {
   AutoFormRadioGroupProps,
 } from '@/components/form/fields/radio-group';
 import { AutoFormSwitch } from '@/components/form/fields/switch';
-import { Card } from '@/components/ui/card';
 import { Core_GlobalQuery } from '@/graphql/queries/core_global.generated';
 import { useTranslations } from 'next-intl';
 
@@ -19,41 +18,39 @@ export const ContentEditorAdmin = (
   const { onSubmit, formSchema } = useEditorAdmin(data);
 
   return (
-    <Card className="p-6">
-      <AutoForm
-        fields={[
-          {
-            id: 'sticky',
-            label: t('sticky.label'),
-            description: t('sticky.desc'),
-            component: AutoFormSwitch,
-          },
-          {
-            id: 'files.allow_type',
-            label: t('files.allow_type.title'),
-            component: AutoFormRadioGroup,
-            componentProps: {
-              labels: {
-                all: {
-                  title: t('files.allow_type.all'),
-                },
-                images_videos: {
-                  title: t('files.allow_type.images_videos'),
-                },
-                images: {
-                  title: t('files.allow_type.images'),
-                },
-                none: {
-                  title: t('files.allow_type.none'),
-                },
+    <AutoForm
+      fields={[
+        {
+          id: 'sticky',
+          label: t('sticky.label'),
+          description: t('sticky.desc'),
+          component: AutoFormSwitch,
+        },
+        {
+          id: 'files.allow_type',
+          label: t('files.allow_type.title'),
+          component: AutoFormRadioGroup,
+          componentProps: {
+            labels: {
+              all: {
+                title: t('files.allow_type.all'),
               },
-            } as AutoFormRadioGroupProps,
-          },
-        ]}
-        formSchema={formSchema}
-        onSubmit={onSubmit}
-        theme="horizontal"
-      />
-    </Card>
+              images_videos: {
+                title: t('files.allow_type.images_videos'),
+              },
+              images: {
+                title: t('files.allow_type.images'),
+              },
+              none: {
+                title: t('files.allow_type.none'),
+              },
+            },
+          } as AutoFormRadioGroupProps,
+        },
+      ]}
+      formSchema={formSchema}
+      onSubmit={onSubmit}
+      theme="horizontal"
+    />
   );
 };

@@ -1,7 +1,13 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 import { Loader } from '@/components/ui/loader';
 import {
   Tooltip,
@@ -23,7 +29,7 @@ const Content = React.lazy(async () =>
 export const EditActionTableNavAdmin = (
   props: Omit<ShowCoreNav, 'children'>,
 ) => {
-  const t = useTranslations('core');
+  const t = useTranslations('admin.core.styles.nav.edit');
 
   return (
     <Dialog>
@@ -31,17 +37,21 @@ export const EditActionTableNavAdmin = (
         <Tooltip>
           <TooltipTrigger asChild>
             <DialogTrigger asChild>
-              <Button ariaLabel={t('edit')} size="icon" variant="ghost">
+              <Button ariaLabel={t('title')} size="icon" variant="ghost">
                 <Pencil />
               </Button>
             </DialogTrigger>
           </TooltipTrigger>
 
-          <TooltipContent>{t('edit')}</TooltipContent>
+          <TooltipContent>{t('title')}</TooltipContent>
         </Tooltip>
       </TooltipProvider>
 
       <DialogContent className="max-w-2xl">
+        <DialogHeader>
+          <DialogTitle>{t('title')}</DialogTitle>
+        </DialogHeader>
+
         <React.Suspense fallback={<Loader />}>
           <Content data={props} />
         </React.Suspense>

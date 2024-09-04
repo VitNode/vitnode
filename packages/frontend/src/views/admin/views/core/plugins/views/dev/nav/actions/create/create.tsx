@@ -1,7 +1,13 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 import { Loader } from '@/components/ui/loader';
 import { Plus } from 'lucide-react';
 import { useTranslations } from 'next-intl';
@@ -30,6 +36,10 @@ export const CreateNavDevPluginAdmin = (
       </DialogTrigger>
 
       <DialogContent className="max-w-2xl">
+        <DialogHeader>
+          <DialogTitle>{t('create')}</DialogTitle>
+        </DialogHeader>
+
         <React.Suspense fallback={<Loader />}>
           <Content {...props} />
         </React.Suspense>
