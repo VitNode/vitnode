@@ -8,13 +8,19 @@ import { getTranslations } from 'next-intl/server';
 
 import { ItemLegal } from './item';
 
-const getData = async () => {
+export const getLegalData = async (
+  variables: Core_Terms__ShowQueryVariables,
+) => {
   const data = await fetcher<
     Core_Terms__ShowQuery,
     Core_Terms__ShowQueryVariables
   >({
     query: Core_Terms__Show,
+    variables,
     cache: 'force-cache',
+    next: {
+      tags: ['core_terms__show'],
+    },
   });
 
   return data;
@@ -26,15 +32,15 @@ export const LegalView = async () => {
     {
       core_terms__show: { edges },
     },
-  ] = await Promise.all([getTranslations('core.legal'), getData()]);
+  ] = await Promise.all([getTranslations('core.legal'), getLegalData({})]);
 
   return (
-    <div className="container my-14 flex max-w-6xl flex-col justify-between gap-14 md:flex-row">
-      <div className="max-w-sm">
+    <div className="container my-14 flex max-w-5xl flex-col justify-between gap-14 md:flex-row">
+      <div className="max-w-xs">
         <h1 className="text-3xl font-semibold">{t('title')}</h1>
       </div>
 
-      <ul className="flex-1 space-y-6">
+      <ul className="flex-1 space-y-10">
         {edges.map(edge => (
           <ItemLegal key={edge.id} {...edge} />
         ))}

@@ -11,6 +11,7 @@ export const codegenConfig = ({
   return {
     ...config,
     schema: `${process.env.NEXT_PUBLIC_BACKEND_URL ?? 'http://localhost:8080'}/graphql`,
+    ignoreNoDocuments: true,
     documents: [
       ...(Array.isArray(config?.documents) ? config.documents : []),
       join(
