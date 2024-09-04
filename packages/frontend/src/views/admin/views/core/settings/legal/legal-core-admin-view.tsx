@@ -7,8 +7,8 @@ import {
 import { getLegalData } from '@/views/theme/views/legal/legal-view';
 import { getTranslations } from 'next-intl/server';
 
-import { ActionsLegalSettingsAdmin } from './actions';
-import { ContentLegalSettingsAdmin } from './content';
+import { ContentLegalSettingsAdmin } from './content/content';
+import { CreateLegalSettingsAdmin } from './create';
 
 export const generateMetadataLegalSettingsAdmin = async () => {
   const t = await getTranslations('admin.core.settings.legal');
@@ -36,7 +36,7 @@ export const LegalSettingsAdminView = async ({
   return (
     <>
       <HeaderContent desc={t('desc')} h1={t('title')}>
-        <ActionsLegalSettingsAdmin />
+        <CreateLegalSettingsAdmin />
       </HeaderContent>
 
       <Card>

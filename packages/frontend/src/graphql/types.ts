@@ -285,6 +285,7 @@ export type Mutation = {
   admin__core_styles__nav__delete: Scalars['String']['output'];
   admin__core_styles__nav__edit: ShowCoreNav;
   admin__core_terms_settings__create: ShowCoreTerms;
+  admin__core_terms_settings__edit: ShowCoreTerms;
   admin__core_theme_editor__edit: Scalars['String']['output'];
   admin__install__create_database: Scalars['String']['output'];
   admin_sessions__sign_out: Scalars['String']['output'];
@@ -565,6 +566,14 @@ export type MutationAdmin__Core_Styles__Nav__EditArgs = {
 export type MutationAdmin__Core_Terms_Settings__CreateArgs = {
   content: Array<TextLanguageInput>;
   href?: InputMaybe<Scalars['String']['input']>;
+  title: Array<TextLanguageInput>;
+};
+
+
+export type MutationAdmin__Core_Terms_Settings__EditArgs = {
+  content: Array<TextLanguageInput>;
+  href?: InputMaybe<Scalars['String']['input']>;
+  id: Scalars['Float']['input'];
   title: Array<TextLanguageInput>;
 };
 

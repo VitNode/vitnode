@@ -6,6 +6,8 @@ import { Core_Terms__ShowQuery } from '@/graphql/queries/terms/core_terms__show.
 import { useTextLang } from '@/hooks/use-text-lang';
 import { useTranslations } from 'next-intl';
 
+import { EditContentLegalSettingsAdmin } from './actions/edit';
+
 export const ContentLegalSettingsAdmin = ({
   core_terms__show: { edges, pageInfo },
 }: Core_Terms__ShowQuery) => {
@@ -39,7 +41,11 @@ export const ContentLegalSettingsAdmin = ({
         {
           id: 'actions',
           cell: ({ row }) => {
-            return <>Action</>;
+            return (
+              <>
+                <EditContentLegalSettingsAdmin {...row} />
+              </>
+            );
           },
         },
       ]}

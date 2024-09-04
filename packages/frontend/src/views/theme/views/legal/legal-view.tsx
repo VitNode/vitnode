@@ -35,16 +35,16 @@ export const LegalView = async () => {
   ] = await Promise.all([getTranslations('core.legal'), getLegalData({})]);
 
   return (
-    <div className="container my-14 flex max-w-5xl flex-col justify-between gap-14 md:flex-row">
+    <div className="container my-14 flex max-w-5xl flex-col justify-between gap-10 md:flex-row">
       <div className="max-w-xs">
         <h1 className="text-3xl font-semibold">{t('title')}</h1>
       </div>
 
-      <ul className="flex-1 space-y-10">
+      <div className="flex-1 space-y-10">
         {edges.map(edge => (
           <ItemLegal key={edge.id} {...edge} />
         ))}
-      </ul>
+      </div>
     </div>
   );
 };

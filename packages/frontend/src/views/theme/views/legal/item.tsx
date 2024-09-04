@@ -1,5 +1,6 @@
 import { DateFormat } from '@/components/date-format';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
 import { Core_Terms__ShowQuery } from '@/graphql/queries/terms/core_terms__show.generated';
 import { useTextLang } from '@/hooks/use-text-lang';
 import { Link } from '@/navigation';
@@ -14,19 +15,21 @@ export const ItemLegal = ({
   const t = useTranslations('core.legal');
 
   return (
-    <li className="flex items-center justify-between gap-4">
-      <div className="space-y-2">
-        <span className="text-xl font-semibold">{convertText(title)}</span>
-        <p className="text-muted-foreground text-sm">
-          {t.rich('last_updated', {
-            date: () => <DateFormat date={updated} />,
-          })}
-        </p>
-      </div>
+    <Card>
+      <CardContent className="flex items-center justify-between gap-4 p-6">
+        <div className="space-y-2">
+          <span className="text-xl font-semibold">{convertText(title)}</span>
+          <p className="text-muted-foreground text-sm">
+            {t.rich('last_updated', {
+              date: () => <DateFormat date={updated} />,
+            })}
+          </p>
+        </div>
 
-      <Button asChild className="bg-card rounded-full" variant="outline">
-        <Link href={`/legal/${id}`}>{t('read_document')}</Link>
-      </Button>
-    </li>
+        <Button asChild className="rounded-full" variant="outline">
+          <Link href={`/legal/${id}`}>{t('read_document')}</Link>
+        </Button>
+      </CardContent>
+    </Card>
   );
 };

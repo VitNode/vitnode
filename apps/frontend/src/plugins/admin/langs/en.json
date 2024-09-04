@@ -151,8 +151,14 @@
               "href": "URL",
               "external_href": "Use external URL"
             },
-            "create_success": "Policy has been created.",
-            "edit_success": "Policy has been updated."
+            "submit": {
+              "create": "Create Policy",
+              "edit": "Edit Policy"
+            },
+            "success": {
+              "create": "Policy has been created.",
+              "edit": "Policy has been updated."
+            }
           }
         }
       },

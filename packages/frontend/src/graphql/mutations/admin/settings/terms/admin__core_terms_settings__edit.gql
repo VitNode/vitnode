@@ -1,0 +1,15 @@
+mutation Admin__core_terms_settings__edit(
+  $content: [TextLanguageInput!]!
+  $id: Float!
+  $title: [TextLanguageInput!]!
+  $href: String
+) {
+  admin__core_terms_settings__edit(
+    content: $content
+    id: $id
+    title: $title
+    href: $href
+  ) {
+    id
+  }
+}

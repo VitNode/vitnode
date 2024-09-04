@@ -6,7 +6,9 @@ import {
 } from '@/components/form/fields/input';
 import { AutoFormSwitch } from '@/components/form/fields/switch';
 import { AutoFormTextLanguageInput } from '@/components/form/fields/text-language-input';
-import { useDialog } from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
+import { DialogFooter, useDialog } from '@/components/ui/dialog';
+import { Core_Terms__ShowQuery } from '@/graphql/queries/terms/core_terms__show.generated';
 import { zodLanguageInput } from '@/helpers/zod';
 import { useTextLang } from '@/hooks/use-text-lang';
 import { useTranslations } from 'next-intl';
@@ -14,8 +16,13 @@ import { toast } from 'sonner';
 import * as z from 'zod';
 
 import { createMutationApi } from './create-mutation-api';
+import { editMutationApi } from './edit-mutation-api';
 
-export const ContentCreateEditLegalPage = () => {
+export const ContentCreateEditLegalPage = ({
+  data,
+}: {
+  data?: Core_Terms__ShowQuery['core_terms__show']['edges'][0];
+}) => {
   const t = useTranslations('admin.core.settings.legal.create_edit');
   const tCore = useTranslations('core.errors');
   const { convertText } = useTextLang();
@@ -23,10 +30,13 @@ export const ContentCreateEditLegalPage = () => {
 
   const formSchema = z
     .object({
-      title: zodLanguageInput,
-      content: zodLanguageInput.optional(),
-      external_href: z.boolean().optional(),
-      href: z.string().optional(),
+      title: zodLanguageInput.default(data?.title ?? []),
+      content: zodLanguageInput.default(data?.content ?? []).optional(),
+      external_href: z.boolean().default(!!data?.href).optional(),
+      href: z
+        .string()
+        .default(data?.href ?? '')
+        .optional(),
     })
     .refine(data => {
       if (data.external_href) {
@@ -37,13 +47,32 @@ export const ContentCreateEditLegalPage = () => {
     });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const createMutation = await createMutationApi({
-      title: values.title,
-      content: values.external_href ? [] : (values.content ?? []),
-      href: values.external_href ? values.href : undefined,
-    });
+    let error = '';
 
-    if (createMutation?.error) {
+    if (data) {
+      const mutation = await editMutationApi({
+        id: data.id,
+        title: values.title,
+        content: values.external_href ? [] : (values.content ?? []),
+        href: values.external_href ? values.href : undefined,
+      });
+
+      if (mutation?.error) {
+        error = mutation.error;
+      }
+    } else {
+      const mutation = await createMutationApi({
+        title: values.title,
+        content: values.external_href ? [] : (values.content ?? []),
+        href: values.external_href ? values.href : undefined,
+      });
+
+      if (mutation?.error) {
+        error = mutation.error;
+      }
+    }
+
+    if (error) {
       toast.error(tCore('title'), {
         description: tCore('internal_server_error'),
       });
@@ -52,7 +81,7 @@ export const ContentCreateEditLegalPage = () => {
     }
 
     setOpen?.(false);
-    toast.success(t('create_success'), {
+    toast.success(t(`success.${data ? 'edit' : 'create'}`), {
       description: convertText(values.title),
     });
   };
@@ -113,6 +142,13 @@ export const ContentCreateEditLegalPage = () => {
         ]}
         formSchema={formSchema}
         onSubmit={onSubmit}
+        submitButton={props => (
+          <DialogFooter>
+            <Button {...props}>
+              {t(`submit.${data ? 'edit' : 'create'}`)}
+            </Button>
+          </DialogFooter>
+        )}
       />
     </>
   );
