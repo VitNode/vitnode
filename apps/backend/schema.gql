@@ -252,6 +252,7 @@ type Mutation {
   admin__core_styles__nav__delete(id: Int!): String!
   admin__core_styles__nav__edit(description: [TextLanguageInput!]!, external: Boolean!, href: String!, icon: String, id: Int!, name: [TextLanguageInput!]!): ShowCoreNav!
   admin__core_terms_settings__create(content: [TextLanguageInput!]!, href: String, title: [TextLanguageInput!]!): ShowCoreTerms!
+  admin__core_terms_settings__delete(id: Int!): String!
   admin__core_terms_settings__edit(content: [TextLanguageInput!]!, href: String, id: Float!, title: [TextLanguageInput!]!): ShowCoreTerms!
   admin__core_theme_editor__edit(colors: ColorsEditAdminThemeEditor, logos: LogosEditAdminThemeEditor!): String!
   admin__install__create_database: String!

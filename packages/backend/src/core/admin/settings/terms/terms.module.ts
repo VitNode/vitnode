@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common';
 
 import { CreateAdminTermsSettingsResolver } from './create/create.resolver';
 import { CreateAdminTermsSettingsService } from './create/create.service';
+import { DeleteAdminTermsSettingsResolver } from './delete/delete.resolver';
+import { DeleteAdminTermsSettingsService } from './delete/delete.service';
 import { EditAdminTermsSettingsResolver } from './edit/edit.resolver';
 import { EditAdminTermsSettingsService } from './edit/edit.service';
 
@@ -11,6 +13,8 @@ import { EditAdminTermsSettingsService } from './edit/edit.service';
     CreateAdminTermsSettingsService,
     EditAdminTermsSettingsResolver,
     EditAdminTermsSettingsService,
+    DeleteAdminTermsSettingsResolver,
+    DeleteAdminTermsSettingsService,
   ],
 })
 export class AdminTermsSettingsModule {}

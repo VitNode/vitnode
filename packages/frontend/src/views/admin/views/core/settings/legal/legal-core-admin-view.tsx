@@ -1,4 +1,3 @@
-import { Card, CardContent } from '@/components/ui/card';
 import { HeaderContent } from '@/components/ui/header-content';
 import {
   getPaginationTool,
@@ -39,11 +38,7 @@ export const LegalSettingsAdminView = async ({
         <CreateLegalSettingsAdmin />
       </HeaderContent>
 
-      <Card>
-        <CardContent className="p-6">
-          <ContentLegalSettingsAdmin {...data} />
-        </CardContent>
-      </Card>
+      <ContentLegalSettingsAdmin {...data} />
     </>
   );
 };

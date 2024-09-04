@@ -142,6 +142,7 @@
         "legal": {
           "title": "Legal & Policies",
           "desc": "These settings are used to generate the legal pages on your website.",
+          "preview": "Preview",
           "create_edit": {
             "create": "Create Policy",
             "edit": "Edit Policy",
@@ -159,6 +160,12 @@
               "create": "Policy has been created.",
               "edit": "Policy has been updated."
             }
+          },
+          "delete": {
+            "title": "Delete Policy",
+            "desc": "This action will delete the policy <name></name>.",
+            "confirm": "Yes, delete policy",
+            "success": "Policy has been deleted."
           }
         }
       },
