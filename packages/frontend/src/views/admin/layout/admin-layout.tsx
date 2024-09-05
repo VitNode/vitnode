@@ -1,5 +1,6 @@
 import { getGlobalData } from '@/graphql/get-global-data';
 import { getSessionAdminData } from '@/graphql/get-session-admin';
+import { redirect } from '@/navigation';
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
@@ -26,15 +27,23 @@ export const AdminLayout = async ({
 }: {
   children: React.ReactNode;
 }) => {
-  const data = await getSessionAdminData();
+  try {
+    const data = await getSessionAdminData();
 
-  return (
-    <AdminProviders data={data}>
-      <AsideAuthAdmin />
-      <HeaderAdmin />
-      <main className="text-card-foreground mt-16 px-2 py-6 md:my-0 md:ml-[240px] md:mt-0 md:px-6 lg:px-10 xl:ml-[260px]">
-        <div className="container">{children}</div>
-      </main>
-    </AdminProviders>
-  );
+    return (
+      <AdminProviders data={data}>
+        <AsideAuthAdmin />
+        <HeaderAdmin />
+        <main className="text-card-foreground mt-16 px-2 py-6 md:my-0 md:ml-[240px] md:mt-0 md:px-6 lg:px-10 xl:ml-[260px]">
+          <div className="container">{children}</div>
+        </main>
+      </AdminProviders>
+    );
+  } catch (err) {
+    if (err instanceof Error && err.message === 'ACCESS_DENIED') {
+      redirect('/admin');
+    }
+
+    throw err;
+  }
 };

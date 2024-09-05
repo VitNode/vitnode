@@ -41,7 +41,7 @@ export const SearchToolbarDataTable = ({
 
   return (
     <Input
-      className="w-[150px] grow lg:w-[250px]"
+      className="bg-card w-[150px] grow lg:w-[250px]"
       onChange={e => {
         const value = e.target.value;
         setValue(value);
