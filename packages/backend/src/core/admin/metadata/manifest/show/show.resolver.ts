@@ -2,7 +2,7 @@ import { AdminAuthGuards } from '@/utils';
 import { UseGuards } from '@nestjs/common';
 import { Query, Resolver } from '@nestjs/graphql';
 
-import { ShowAdminManifestMetadataObj } from './dto/show.obj';
+import { ShowAdminManifestMetadataObj } from './show.dto';
 import { ShowAdminManifestMetadataService } from './show.service';
 
 @Resolver()

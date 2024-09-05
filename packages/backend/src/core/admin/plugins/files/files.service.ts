@@ -4,8 +4,7 @@ import { Injectable } from '@nestjs/common';
 import * as fs from 'fs';
 
 import { ABSOLUTE_PATHS_BACKEND } from '../../../..';
-import { FilesAdminPluginsArgs } from './dto/files.args';
-import { FilesAdminPluginsObj } from './dto/files.obj';
+import { FilesAdminPluginsArgs, FilesAdminPluginsObj } from './files.dto';
 
 @Injectable()
 export class FilesAdminPluginsService {

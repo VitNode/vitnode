@@ -6,8 +6,7 @@ import { core_files, core_files_using } from '../../../database/schema/files';
 import { User } from '../../../decorators';
 import { inputPaginationCursor, outputPagination } from '../../../functions';
 import { SortDirectionEnum } from '../../../utils';
-import { ShowCoreFilesArgs } from './dto/show.args';
-import { ShowCoreFilesObj } from './dto/show.obj';
+import { ShowCoreFilesArgs, ShowCoreFilesObj } from './show.dto';
 
 @Injectable()
 export class ShowCoreFilesService {

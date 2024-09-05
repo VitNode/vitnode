@@ -12,8 +12,8 @@ import {
   getConfigFile,
   NotFoundError,
 } from '../../../..';
-import { ShowCoreLanguages } from '../../../languages/show/dto/show.obj';
-import { CreateCoreAdminLanguagesArgs } from './dto/create.args';
+import { ShowCoreLanguages } from '../../../languages/show/show.dto';
+import { CreateCoreAdminLanguagesArgs } from './create.dto';
 
 @Injectable()
 export class CreateAdminCoreLanguageService {

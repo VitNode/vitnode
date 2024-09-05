@@ -4,7 +4,6 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
-import { Loader } from '@/components/ui/loader';
 import {
   Tooltip,
   TooltipContent,
@@ -15,13 +14,10 @@ import { Trash2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
-import { ContentDeleteActionFilesAdvancedCoreAdminProps } from './content';
-
-const Content = React.lazy(async () =>
-  import('./content').then(module => ({
-    default: module.ContentDeleteActionFilesAdvancedCoreAdmin,
-  })),
-);
+import {
+  ContentDeleteActionFilesAdvancedCoreAdmin,
+  ContentDeleteActionFilesAdvancedCoreAdminProps,
+} from './content';
 
 export const DeleteActionFilesAdvancedCoreAdmin = (
   props: ContentDeleteActionFilesAdvancedCoreAdminProps,
@@ -49,9 +45,7 @@ export const DeleteActionFilesAdvancedCoreAdmin = (
       </TooltipProvider>
 
       <AlertDialogContent>
-        <React.Suspense fallback={<Loader />}>
-          <Content {...props} />
-        </React.Suspense>
+        <ContentDeleteActionFilesAdvancedCoreAdmin {...props} />
       </AlertDialogContent>
     </AlertDialog>
   );

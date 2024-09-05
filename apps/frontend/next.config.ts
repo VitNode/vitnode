@@ -7,6 +7,12 @@ const withBundleAnalyzer = bundleAnalyzer({
 });
 
 // @ts-ignore
-const nextConfig: NextConfig = withBundleAnalyzer({});
+const nextConfig: NextConfig = withBundleAnalyzer({
+  logging: {
+    fetches: {
+      fullUrl: process.env.NODE_ENV === 'development',
+    },
+  },
+});
 
 export default VitNodeConfig(nextConfig);

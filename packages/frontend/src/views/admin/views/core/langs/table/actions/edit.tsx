@@ -1,5 +1,12 @@
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 import { Loader } from '@/components/ui/loader';
 import { ShowCoreLanguages } from '@/graphql/types';
 import { Pencil } from 'lucide-react';
@@ -13,17 +20,23 @@ const Content = React.lazy(async () =>
 );
 
 export const EditActionsTableLangsCoreAdmin = (data: ShowCoreLanguages) => {
-  const t = useTranslations('core');
+  const t = useTranslations('admin.core.langs.actions');
+  const tCore = useTranslations('core');
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button ariaLabel={t('edit')} size="icon" variant="ghost">
+        <Button ariaLabel={tCore('edit')} size="icon" variant="ghost">
           <Pencil />
         </Button>
       </DialogTrigger>
 
       <DialogContent>
+        <DialogHeader>
+          <DialogTitle>{t('edit.title')}</DialogTitle>
+          <DialogDescription>{data.name}</DialogDescription>
+        </DialogHeader>
+
         <React.Suspense fallback={<Loader />}>
           <Content data={data} />
         </React.Suspense>

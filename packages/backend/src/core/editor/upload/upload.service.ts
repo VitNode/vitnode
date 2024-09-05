@@ -1,4 +1,7 @@
-import { UploadCoreFilesObj } from '@/core/files/helpers/upload/dto/upload.obj';
+import {
+  UploadCoreFilesArgs,
+  UploadCoreFilesObj,
+} from '@/core/files/helpers/upload/upload.dto';
 import { FilesService } from '@/core/files/helpers/upload/upload.service';
 import { generateRandomString } from '@/functions/generate-random-string';
 import { InternalDatabaseService } from '@/utils/database/internal_database.service';
@@ -9,14 +12,13 @@ import { core_files } from '../../../database/schema/files';
 import { User } from '../../../decorators';
 import { AccessDeniedError } from '../../../errors';
 import { AllowTypeFilesEnum, getConfigFile } from '../../../providers/config';
-import { UploadCoreFilesArgs } from '../../files/helpers/upload/dto/upload.args';
 import {
   acceptMimeTypeImage,
   acceptMimeTypeVideo,
   HelpersUploadCoreFilesService,
 } from '../../files/helpers/upload/helpers';
-import { ShowCoreFiles } from '../../files/show/dto/show.obj';
-import { UploadCoreEditorArgs } from './dto/upload.args';
+import { ShowCoreFiles } from '../../files/show/show.dto';
+import { UploadCoreEditorArgs } from './upload.dto';
 
 interface GetFilesAfterUploadArgs extends UploadCoreEditorArgs {
   maxUploadSizeKb: number;

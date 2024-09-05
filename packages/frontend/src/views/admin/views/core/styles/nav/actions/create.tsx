@@ -1,7 +1,13 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 import { Loader } from '@/components/ui/loader';
 import { Plus } from 'lucide-react';
 import { useTranslations } from 'next-intl';
@@ -14,18 +20,22 @@ const Content = React.lazy(async () =>
 );
 
 export const CreateActionNavAdmin = () => {
-  const t = useTranslations('core');
+  const t = useTranslations('admin.core.styles.nav.create');
 
   return (
     <Dialog>
       <DialogTrigger asChild>
         <Button>
           <Plus />
-          {t('create')}
+          {t('title')}
         </Button>
       </DialogTrigger>
 
       <DialogContent className="max-w-2xl">
+        <DialogHeader>
+          <DialogTitle>{t('title')}</DialogTitle>
+        </DialogHeader>
+
         <React.Suspense fallback={<Loader />}>
           <Content />
         </React.Suspense>

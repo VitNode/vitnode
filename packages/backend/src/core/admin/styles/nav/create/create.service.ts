@@ -1,5 +1,5 @@
 import { ParserTextLanguageCoreHelpersService } from '@/core/helpers/text_language/parser/parser.service';
-import { ShowCoreNav } from '@/core/nav/show/dto/show.obj';
+import { ShowCoreNav } from '@/core/nav/show/show.dto';
 import {
   core_nav,
   core_nav_description,
@@ -8,7 +8,7 @@ import {
 import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
 
-import { CreateAdminNavStylesArgs } from './dto/create.args';
+import { CreateAdminNavStylesArgs } from './create.dto';
 
 @Injectable()
 export class CreateAdminNavStylesService {

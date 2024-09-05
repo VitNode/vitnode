@@ -14,6 +14,7 @@ import {
   GlobalCoreSessionsModule,
 } from './sessions/sessions.module';
 import { CoreSettingsModule } from './settings/settings.module';
+import { TermsCoreModule } from './terms/terms.module';
 import { CoreThemeEditorModule } from './theme_editor/theme_editor.module';
 
 @Module({
@@ -32,6 +33,7 @@ import { CoreThemeEditorModule } from './theme_editor/theme_editor.module';
     CoreMiddlewareModule,
     CoreSettingsModule,
     CoreThemeEditorModule,
+    TermsCoreModule,
   ],
 })
 export class CoreModule {}

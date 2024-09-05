@@ -19,7 +19,7 @@ import { EditorStateContext } from './hooks/use-editor-state';
 import { ToolBarEditor } from './toolbar/toolbar';
 
 interface Props extends Omit<UploadFilesHandlerEditorArgs, 'value'> {
-  autoFocus?: boolean;
+  autofocus?: boolean;
   className?: string;
   disabled?: boolean;
 }
@@ -42,7 +42,7 @@ export const EditorSkeleton = ({ className }: { className?: string }) => {
 
 export const Editor = ({
   allowUploadFiles,
-  autoFocus,
+  autofocus,
   className,
   disableLanguages,
   onChange,
@@ -59,7 +59,7 @@ export const Editor = ({
     locale || defaultLanguage,
   );
   const editor = useEditor({
-    autofocus: autoFocus,
+    autofocus: !!autofocus,
     immediatelyRender: false,
     extensions: [
       ...extensionsEditor({

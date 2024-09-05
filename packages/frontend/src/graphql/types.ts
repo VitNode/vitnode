@@ -284,6 +284,9 @@ export type Mutation = {
   admin__core_styles__nav__create: ShowCoreNav;
   admin__core_styles__nav__delete: Scalars['String']['output'];
   admin__core_styles__nav__edit: ShowCoreNav;
+  admin__core_terms_settings__create: ShowCoreTerms;
+  admin__core_terms_settings__delete: Scalars['String']['output'];
+  admin__core_terms_settings__edit: ShowCoreTerms;
   admin__core_theme_editor__edit: Scalars['String']['output'];
   admin__install__create_database: Scalars['String']['output'];
   admin_sessions__sign_out: Scalars['String']['output'];
@@ -561,6 +564,28 @@ export type MutationAdmin__Core_Styles__Nav__EditArgs = {
 };
 
 
+export type MutationAdmin__Core_Terms_Settings__CreateArgs = {
+  code: Scalars['String']['input'];
+  content: Array<TextLanguageInput>;
+  href?: InputMaybe<Scalars['String']['input']>;
+  title: Array<TextLanguageInput>;
+};
+
+
+export type MutationAdmin__Core_Terms_Settings__DeleteArgs = {
+  id: Scalars['Int']['input'];
+};
+
+
+export type MutationAdmin__Core_Terms_Settings__EditArgs = {
+  code: Scalars['String']['input'];
+  content: Array<TextLanguageInput>;
+  href?: InputMaybe<Scalars['String']['input']>;
+  id: Scalars['Float']['input'];
+  title: Array<TextLanguageInput>;
+};
+
+
 export type MutationAdmin__Core_Theme_Editor__EditArgs = {
   colors?: InputMaybe<ColorsEditAdminThemeEditor>;
   logos: LogosEditAdminThemeEditor;
@@ -664,6 +689,7 @@ export type Query = {
   core_sessions__authorization: AuthorizationCoreSessionsObj;
   core_sessions__devices__show: Array<ShowCoreSessionDevicesObj>;
   core_settings__show: ShowSettingsObj;
+  core_terms__show: ShowCoreTermsObj;
   core_theme_editor__show: ShowCoreThemeEditorObj;
 };
 
@@ -766,6 +792,14 @@ export type QueryCore_Members__ShowArgs = {
 
 
 export type QueryCore_Nav__ShowArgs = {
+  cursor?: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type QueryCore_Terms__ShowArgs = {
+  code?: InputMaybe<Scalars['String']['input']>;
   cursor?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
@@ -1183,6 +1217,23 @@ export type ShowCoreSessionDevicesObj = {
   uagent_browser: Scalars['String']['output'];
   uagent_os: Scalars['String']['output'];
   uagent_version: Scalars['String']['output'];
+};
+
+export type ShowCoreTerms = {
+  __typename?: 'ShowCoreTerms';
+  code: Scalars['String']['output'];
+  content: Array<TextLanguage>;
+  created: Scalars['DateTime']['output'];
+  href?: Maybe<Scalars['String']['output']>;
+  id: Scalars['Float']['output'];
+  title: Array<TextLanguage>;
+  updated: Scalars['DateTime']['output'];
+};
+
+export type ShowCoreTermsObj = {
+  __typename?: 'ShowCoreTermsObj';
+  edges: Array<ShowCoreTerms>;
+  pageInfo: PageInfo;
 };
 
 export type ShowCoreThemeEditorObj = {

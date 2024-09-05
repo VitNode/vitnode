@@ -29,7 +29,7 @@ export const SectionFeatures = ({
         className={cn('rounded-md border shadow', {
           'order-1 lg:order-2': reverse,
         })}
-        alt="test"
+        alt={title}
       />
 
       <div className={cn({ 'order-2 lg:order-1': reverse })}>

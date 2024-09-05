@@ -66,6 +66,7 @@
       "next": "Next"
     },
     "table": {
+      "title": "Title",
       "name": "Name",
       "created": "Created",
       "updated": "Updated",
@@ -347,6 +348,7 @@
         "settings_metadata": "Metadata",
         "settings_email": "Email",
         "settings_authorization": "Authorization",
+        "settings_legal": "Legal & Policies",
         "plugins": "Plugins",
         "styles": "Styles",
         "styles_theme-editor": "Theme Editor",
@@ -356,6 +358,13 @@
         "advanced": "Advanced",
         "advanced_files": "Files"
       }
+    },
+    "legal": {
+      "title": "Legal & Policies",
+      "title_page": "Explore our Legal documents and Policies",
+      "last_updated": "Last updated: <date></date>",
+      "read_document": "Read Document",
+      "empty": "No documents found."
     }
   },
   "members": {

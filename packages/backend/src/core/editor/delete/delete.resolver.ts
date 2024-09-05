@@ -3,8 +3,8 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 import { CurrentUser, User } from '../../../decorators';
 import { AuthGuards } from '../../../utils';
+import { DeleteCoreEditorArgs } from './delete.dto';
 import { DeleteCoreEditorService } from './delete.service';
-import { DeleteCoreEditorArgs } from './dto/delete.args';
 
 @Resolver()
 export class DeleteCoreEditorResolver {

@@ -3,7 +3,7 @@ import { AuthGuards } from '@/utils/guards/auth.guard';
 import { UseGuards } from '@nestjs/common';
 import { Query, Resolver } from '@nestjs/graphql';
 
-import { ShowCoreSessionDevicesObj } from './dto/show.obj';
+import { ShowCoreSessionDevicesObj } from './show.dto';
 import { ShowCoreSessionDevicesService } from './show.service';
 
 @Resolver()

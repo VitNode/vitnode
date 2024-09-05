@@ -12,7 +12,7 @@ import {
   currentUnixDate,
   removeSpecialCharacters,
 } from '../../../..';
-import { DownloadCoreAdminLanguagesArgs } from './dto/download.args';
+import { DownloadCoreAdminLanguagesArgs } from './download.dto';
 
 @Injectable()
 export class DownloadAdminCoreLanguageService {

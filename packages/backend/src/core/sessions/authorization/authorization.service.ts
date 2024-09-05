@@ -5,7 +5,7 @@ import { eq, sum } from 'drizzle-orm';
 
 import { core_files } from '../../../database/schema/files';
 import { GqlContext } from '../../../utils';
-import { AuthorizationCoreSessionsObj } from './dto/authorization.obj';
+import { AuthorizationCoreSessionsObj } from './authorization.dto';
 import { InternalAuthorizationCoreSessionsService } from './internal/internal_authorization.service';
 
 @Injectable()

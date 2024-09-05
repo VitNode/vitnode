@@ -1,7 +1,7 @@
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
+import { ChangePasswordCoreMembersArgs } from './change_password.dto';
 import { ChangePasswordCoreMembersService } from './change_password.service';
-import { ChangePasswordCoreMembersArgs } from './dto/change_password.args';
 
 @Resolver()
 export class ChangePasswordCoreMembersResolver {

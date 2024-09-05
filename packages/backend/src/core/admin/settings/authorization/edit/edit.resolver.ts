@@ -2,8 +2,8 @@ import { AdminAuthGuards } from '@/utils';
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
-import { ShowAdminAuthorizationSettingsObj } from '../show/dto/show.obj';
-import { EditAdminAuthorizationSettingsArgs } from './dto/edit.args';
+import { ShowAdminAuthorizationSettingsObj } from '../show/show.dto';
+import { EditAdminAuthorizationSettingsArgs } from './edit.dto';
 import { EditAdminAuthorizationSettingsService } from './edit.service';
 
 @Resolver()

@@ -14,10 +14,14 @@ import { join } from 'path';
 import sharp from 'sharp';
 
 import { ABSOLUTE_PATHS_BACKEND, removeSpecialCharacters } from '../../../..';
-import { DeleteCoreFilesArgs } from './dto/delete.args';
-import { UploadCoreFilesArgs } from './dto/upload.args';
-import { UploadCoreFilesObj } from './dto/upload.obj';
 import { acceptMimeTypeImage, HelpersUploadCoreFilesService } from './helpers';
+import { UploadCoreFilesArgs, UploadCoreFilesObj } from './upload.dto';
+
+export interface DeleteCoreFilesArgs {
+  dir_folder: string;
+  file_name: string;
+  secure?: boolean;
+}
 
 @Injectable()
 export class FilesService extends HelpersUploadCoreFilesService {

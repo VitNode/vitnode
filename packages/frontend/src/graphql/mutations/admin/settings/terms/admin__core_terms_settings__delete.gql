@@ -1,0 +1,3 @@
+mutation Admin__core_terms_settings__delete($id: Int!) {
+  admin__core_terms_settings__delete(id: $id)
+}

@@ -1,9 +1,9 @@
-import { ShowCoreNav } from '@/core/nav/show/dto/show.obj';
+import { ShowCoreNav } from '@/core/nav/show/show.dto';
 import { AdminAuthGuards } from '@/utils';
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
-import { EditAdminNavStylesArgs } from './dto/edit.args';
+import { EditAdminNavStylesArgs } from './edit.dto';
 import { EditAdminNavStylesService } from './edit.service';
 
 @Resolver()

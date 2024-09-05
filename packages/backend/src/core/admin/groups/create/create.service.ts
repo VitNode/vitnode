@@ -3,8 +3,8 @@ import { InternalDatabaseService } from '@/utils/database/internal_database.serv
 import { Injectable } from '@nestjs/common';
 
 import { ParserTextLanguageCoreHelpersService } from '../../../helpers/text_language/parser/parser.service';
-import { ShowAdminGroups } from '../show/dto/show.obj';
-import { CreateAdminGroupsArgs } from './dto/create.args';
+import { ShowAdminGroups } from '../show/show.dto';
+import { CreateAdminGroupsArgs } from './create.dto';
 
 @Injectable()
 export class CreateAdminGroupsService {

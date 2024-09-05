@@ -5,7 +5,7 @@ import { InternalDatabaseService } from '@/utils/database/internal_database.serv
 import { Injectable } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
 
-import { ChangePasswordCoreMembersArgs } from './dto/change_password.args';
+import { ChangePasswordCoreMembersArgs } from './change_password.dto';
 
 @Injectable()
 export class ChangePasswordCoreMembersService {

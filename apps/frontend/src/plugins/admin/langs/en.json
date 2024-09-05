@@ -138,6 +138,41 @@
             "title": "Lock Register",
             "desc": "This option will lock users from registering on your site."
           }
+        },
+        "legal": {
+          "title": "Legal & Policies",
+          "desc": "These settings are used to generate the legal pages on your website.",
+          "preview": "Preview",
+          "create_edit": {
+            "create": "Create Policy",
+            "edit": "Edit Policy",
+            "form": {
+              "title": "Title",
+              "code": {
+                "title": "Code",
+                "desc": "Code should be unique. This code is used to generate the URL of the policy page.",
+                "preview_url": "Preview URL of the policy page: <url></url>",
+                "already_exists": "Policy with this code already exists."
+              },
+              "content": "Content",
+              "href": "URL",
+              "external_href": "Use external URL"
+            },
+            "submit": {
+              "create": "Create Policy",
+              "edit": "Edit Policy"
+            },
+            "success": {
+              "create": "Policy has been created.",
+              "edit": "Policy has been updated."
+            }
+          },
+          "delete": {
+            "title": "Delete Policy",
+            "desc": "This action will delete the policy <name></name>.",
+            "confirm": "Yes, delete policy",
+            "success": "Policy has been deleted."
+          }
         }
       },
       "metadata": {

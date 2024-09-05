@@ -1,10 +1,10 @@
-import { SignUpCoreSessionsObj } from '@/core/sessions/sign_up/dto/sign_up.obj';
+import { SignUpCoreSessionsObj } from '@/core/sessions/sign_up/sign_up.dto';
 import { AdminAuthGuards, GqlContext } from '@/utils';
 import { UseGuards } from '@nestjs/common';
 import { Args, Context, Mutation, Resolver } from '@nestjs/graphql';
 
+import { CreateAdminMembersArgs } from './create.dto';
 import { CreateAdminMembersService } from './create.service';
-import { CreateAdminMembersArgs } from './dto/create.args';
 
 @Resolver()
 export class CreateAdminMembersResolver {

@@ -4,16 +4,11 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
-import { Loader } from '@/components/ui/loader';
 import { EraserIcon } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
-const Content = React.lazy(async () =>
-  import('./content').then(module => ({
-    default: module.ContentClearCacheActionDiagnostic,
-  })),
-);
+import { ContentClearCacheActionDiagnostic } from './content';
 
 export const ClearCacheActionDiagnostic = () => {
   const t = useTranslations('admin.core.diagnostic.clear_cache');
@@ -29,9 +24,7 @@ export const ClearCacheActionDiagnostic = () => {
         </AlertDialogTrigger>
 
         <AlertDialogContent>
-          <React.Suspense fallback={<Loader />}>
-            <Content />
-          </React.Suspense>
+          <ContentClearCacheActionDiagnostic />
         </AlertDialogContent>
       </AlertDialog>
     </>

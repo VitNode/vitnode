@@ -2,8 +2,10 @@ import { AdminAuthGuards } from '@/utils';
 import { UseGuards } from '@nestjs/common';
 import { Args, Query, Resolver } from '@nestjs/graphql';
 
-import { ShowAdminStaffModeratorsArgs } from './dto/show.args';
-import { ShowAdminStaffModeratorsObj } from './dto/show.obj';
+import {
+  ShowAdminStaffModeratorsArgs,
+  ShowAdminStaffModeratorsObj,
+} from './show.dto';
 import { ShowAdminStaffModeratorsService } from './show.service';
 
 @Resolver()

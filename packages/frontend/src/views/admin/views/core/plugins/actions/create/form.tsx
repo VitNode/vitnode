@@ -1,3 +1,5 @@
+'use client';
+
 import { AutoForm } from '@/components/form/auto-form';
 import {
   AutoFormInput,
@@ -10,12 +12,10 @@ import { useCreateEditPluginAdmin } from './hooks/use-create-edit-plugin-admin';
 
 export const FormCreateEditPluginAdmin = ({
   data,
-  submitButton,
   className,
 }: {
   className?: string;
   data?: ShowAdminPlugins;
-  submitButton: React.ComponentProps<typeof AutoForm>['submitButton'];
 }) => {
   const t = useTranslations('admin.core.plugins');
   const { onSubmit, formSchema } = useCreateEditPluginAdmin({ data });
@@ -70,7 +70,6 @@ export const FormCreateEditPluginAdmin = ({
       ]}
       formSchema={formSchema}
       onSubmit={onSubmit}
-      submitButton={submitButton}
     />
   );
 };

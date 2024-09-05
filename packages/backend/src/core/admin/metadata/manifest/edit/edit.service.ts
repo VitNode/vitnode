@@ -7,8 +7,8 @@ import * as fs from 'fs';
 import { join } from 'path';
 
 import { getManifest } from '../functions';
-import { ShowAdminManifestMetadataObj } from '../show/dto/show.obj';
-import { EditAdminManifestMetadataObj } from './dto/edit.args';
+import { ShowAdminManifestMetadataObj } from '../show/show.dto';
+import { EditAdminManifestMetadataObj } from './edit.dto';
 
 @Injectable()
 export class EditAdminManifestMetadataService {

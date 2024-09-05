@@ -8,7 +8,7 @@ import {
   ColorsShowCoreThemeEditor,
   HslColor,
   ShowCoreThemeEditorObj,
-} from './dto/show.obj';
+} from './show.dto';
 
 @Injectable()
 export class ShowCoreThemeEditorService {

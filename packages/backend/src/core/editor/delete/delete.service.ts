@@ -6,7 +6,7 @@ import { count, eq } from 'drizzle-orm';
 import { core_files, core_files_using } from '../../../database/schema/files';
 import { User } from '../../../decorators';
 import { AccessDeniedError } from '../../../errors';
-import { DeleteCoreEditorArgs } from './dto/delete.args';
+import { DeleteCoreEditorArgs } from './delete.dto';
 
 @Injectable()
 export class DeleteCoreEditorService {

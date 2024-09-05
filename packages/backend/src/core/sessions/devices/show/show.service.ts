@@ -7,7 +7,7 @@ import { InternalDatabaseService } from '@/utils/database/internal_database.serv
 import { Injectable } from '@nestjs/common';
 import { desc, eq } from 'drizzle-orm';
 
-import { ShowCoreSessionDevicesObj } from './dto/show.obj';
+import { ShowCoreSessionDevicesObj } from './show.dto';
 
 @Injectable()
 export class ShowCoreSessionDevicesService {

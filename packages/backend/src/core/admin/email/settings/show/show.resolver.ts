@@ -2,7 +2,7 @@ import { AdminAuthGuards } from '@/utils';
 import { UseGuards } from '@nestjs/common';
 import { Query, Resolver } from '@nestjs/graphql';
 
-import { ShowAdminEmailSettingsServiceObj } from './dto/show.obj';
+import { ShowAdminEmailSettingsServiceObj } from './show.dto';
 import { ShowAdminEmailSettingsService } from './show.service';
 
 @Resolver()

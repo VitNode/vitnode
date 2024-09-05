@@ -251,6 +251,9 @@ type Mutation {
   admin__core_styles__nav__create(description: [TextLanguageInput!]!, external: Boolean!, href: String!, icon: String, name: [TextLanguageInput!]!): ShowCoreNav!
   admin__core_styles__nav__delete(id: Int!): String!
   admin__core_styles__nav__edit(description: [TextLanguageInput!]!, external: Boolean!, href: String!, icon: String, id: Int!, name: [TextLanguageInput!]!): ShowCoreNav!
+  admin__core_terms_settings__create(code: String!, content: [TextLanguageInput!]!, href: String, title: [TextLanguageInput!]!): ShowCoreTerms!
+  admin__core_terms_settings__delete(id: Int!): String!
+  admin__core_terms_settings__edit(code: String!, content: [TextLanguageInput!]!, href: String, id: Float!, title: [TextLanguageInput!]!): ShowCoreTerms!
   admin__core_theme_editor__edit(colors: ColorsEditAdminThemeEditor, logos: LogosEditAdminThemeEditor!): String!
   admin__install__create_database: String!
   admin_sessions__sign_out: String!
@@ -311,6 +314,7 @@ type Query {
   core_sessions__authorization: AuthorizationCoreSessionsObj!
   core_sessions__devices__show: [ShowCoreSessionDevicesObj!]!
   core_settings__show: ShowSettingsObj!
+  core_terms__show(code: String, cursor: Int, first: Int, last: Int): ShowCoreTermsObj!
   core_theme_editor__show: ShowCoreThemeEditorObj!
 }
 
@@ -685,6 +689,21 @@ type ShowCoreSessionDevicesObj {
   uagent_browser: String!
   uagent_os: String!
   uagent_version: String!
+}
+
+type ShowCoreTerms {
+  code: String!
+  content: [TextLanguage!]!
+  created: DateTime!
+  href: String
+  id: Float!
+  title: [TextLanguage!]!
+  updated: DateTime!
+}
+
+type ShowCoreTermsObj {
+  edges: [ShowCoreTerms!]!
+  pageInfo: PageInfo!
 }
 
 type ShowCoreThemeEditorObj {

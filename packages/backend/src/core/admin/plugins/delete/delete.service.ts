@@ -7,7 +7,7 @@ import { eq } from 'drizzle-orm';
 import * as fs from 'fs';
 
 import { ChangeFilesAdminPluginsService } from '../helpers/files/change/change.service';
-import { DeleteAdminPluginsArgs } from './dto/delete.args';
+import { DeleteAdminPluginsArgs } from './delete.dto';
 
 @Injectable()
 export class DeleteAdminPluginsService {

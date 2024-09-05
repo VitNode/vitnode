@@ -1,0 +1,19 @@
+query Core_terms__show($code: String) {
+  core_terms__show(code: $code) {
+    edges {
+      content {
+        language_code
+        value
+      }
+      code
+      created
+      href
+      id
+      title {
+        language_code
+        value
+      }
+      updated
+    }
+  }
+}

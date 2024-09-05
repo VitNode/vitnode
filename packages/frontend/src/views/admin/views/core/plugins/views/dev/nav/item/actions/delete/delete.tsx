@@ -4,7 +4,6 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
-import { Loader } from '@/components/ui/loader';
 import {
   Tooltip,
   TooltipContent,
@@ -16,13 +15,10 @@ import { useTranslations } from 'next-intl';
 import React from 'react';
 
 import { useItemNavDevPluginAdmin } from '../../hooks/use-item-nav-dev-plugin-admin';
-import { ContentDeleteActionTableNavDevPluginAdminProps } from './content';
-
-const Content = React.lazy(async () =>
-  import('./content').then(module => ({
-    default: module.ContentDeleteActionTableNavDevPluginAdmin,
-  })),
-);
+import {
+  ContentDeleteActionTableNavDevPluginAdmin,
+  ContentDeleteActionTableNavDevPluginAdminProps,
+} from './content';
 
 export const DeleteActionTableNavDevPluginAdmin = (
   props: ContentDeleteActionTableNavDevPluginAdminProps,
@@ -51,9 +47,10 @@ export const DeleteActionTableNavDevPluginAdmin = (
       </TooltipProvider>
 
       <AlertDialogContent>
-        <React.Suspense fallback={<Loader />}>
-          <Content {...props} parentCode={parentId} />
-        </React.Suspense>
+        <ContentDeleteActionTableNavDevPluginAdmin
+          {...props}
+          parentCode={parentId}
+        />
       </AlertDialogContent>
     </AlertDialog>
   );

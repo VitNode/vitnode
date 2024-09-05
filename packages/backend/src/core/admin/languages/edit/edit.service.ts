@@ -6,8 +6,8 @@ import { Injectable } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
 import * as fs from 'fs';
 
-import { ShowCoreLanguages } from '../../../languages/show/dto/show.obj';
-import { EditCoreAdminLanguagesArgs } from './dto/edit.args';
+import { ShowCoreLanguages } from '../../../languages/show/show.dto';
+import { EditCoreAdminLanguagesArgs } from './edit.dto';
 
 @Injectable()
 export class EditAdminCoreLanguagesService {

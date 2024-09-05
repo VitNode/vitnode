@@ -1,9 +1,9 @@
-import { EditorShowCoreMiddleware } from '@/core/middleware/show/dto/show.obj';
+import { EditorShowCoreMiddleware } from '@/core/middleware/show/show.dto';
 import { configPath, getConfigFile } from '@/providers/config';
 import { Injectable } from '@nestjs/common';
 import * as fs from 'fs';
 
-import { EditAdminEditorStylesArgs } from './dto/edit.args';
+import { EditAdminEditorStylesArgs } from './edit.dto';
 
 @Injectable()
 export class EditAdminEditorStylesService {

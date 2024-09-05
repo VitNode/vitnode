@@ -9,6 +9,7 @@ export default function Layout({ children }: { children: ReactNode }) {
     <html lang="en" className={GeistSans.className} suppressHydrationWarning>
       <Body>
         <RootProvider>{children}</RootProvider>
+        <footer className="container my-10">Footer</footer>
       </Body>
     </html>
   );

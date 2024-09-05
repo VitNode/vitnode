@@ -10,7 +10,7 @@ import {
   NotFoundError,
 } from '../../../..';
 import { keysFromCSSThemeEditor } from '../../../theme_editor/theme_editor.module';
-import { EditAdminThemeEditorArgs, ThemeVariableInput } from './dto/edit.args';
+import { EditAdminThemeEditorArgs, ThemeVariableInput } from './edit.dto';
 
 @Injectable()
 export class EditAdminThemeEditorService {

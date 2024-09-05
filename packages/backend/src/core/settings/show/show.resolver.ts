@@ -1,7 +1,7 @@
 import { Query, Resolver } from '@nestjs/graphql';
 import { SkipThrottle } from '@nestjs/throttler';
 
-import { ShowSettingsObj } from './dto/show.obj';
+import { ShowSettingsObj } from './show.dto';
 import { ShowSettingsService } from './show.service';
 
 @Resolver()

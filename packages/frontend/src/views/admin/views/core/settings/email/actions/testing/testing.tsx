@@ -1,5 +1,11 @@
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 import { Loader } from '@/components/ui/loader';
 import { FlaskConical } from 'lucide-react';
 import { useTranslations } from 'next-intl';
@@ -28,6 +34,10 @@ export const TestingActionEmailSettingsAdmin = ({
       </DialogTrigger>
 
       <DialogContent className="max-w-xl">
+        <DialogHeader>
+          <DialogTitle>{t('title')}</DialogTitle>
+        </DialogHeader>
+
         <React.Suspense fallback={<Loader />}>
           <Content />
         </React.Suspense>

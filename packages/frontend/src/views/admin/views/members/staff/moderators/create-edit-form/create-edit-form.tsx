@@ -1,9 +1,5 @@
 import { Button } from '@/components/ui/button';
-import {
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog';
+import { DialogFooter } from '@/components/ui/dialog';
 import {
   Form,
   FormControl,
@@ -29,10 +25,6 @@ export const CreateEditFormModeratorsStaffAdmin = () => {
 
   return (
     <Form {...form}>
-      <DialogHeader className="flex flex-col gap-4">
-        <DialogTitle>{t('moderators.add.title')}</DialogTitle>
-      </DialogHeader>
-
       <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
         <FormField
           control={form.control}
