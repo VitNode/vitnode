@@ -2,10 +2,16 @@ import { PageInfo, PaginationArgs, TextLanguage } from '@/utils';
 import { ArgsType, Field, ObjectType } from '@nestjs/graphql';
 
 @ArgsType()
-export class ShowCoreTermsArgs extends PaginationArgs {}
+export class ShowCoreTermsArgs extends PaginationArgs {
+  @Field(() => String, { nullable: true })
+  code?: string;
+}
 
 @ObjectType()
 export class ShowCoreTerms {
+  @Field(() => String)
+  code: string;
+
   @Field(() => [TextLanguage])
   content: TextLanguage[];
 

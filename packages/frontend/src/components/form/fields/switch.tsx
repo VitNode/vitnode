@@ -34,8 +34,7 @@ export function AutoFormSwitch<T extends FieldValues>({
   return (
     <AutoFormWrapper
       className={cn({
-        'flex flex-row items-center justify-between gap-4 rounded-lg border p-4':
-          theme === 'vertical',
+        'gap-4 rounded-lg border p-4': theme === 'vertical',
       })}
       theme={theme}
     >

@@ -7,7 +7,7 @@ import {
   useAlertDialog,
 } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
-import { Core_Terms__ShowQuery } from '@/graphql/queries/terms/core_terms__show.generated';
+import { Admin_Core_Terms__ShowQuery } from '@/graphql/queries/admin/settings/terms/Admin_core_terms__show.generated';
 import { useTextLang } from '@/hooks/use-text-lang';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
@@ -19,7 +19,7 @@ export const ContentDeleteContentLegalSettingsAdmin = ({
   id,
   title,
 }: Pick<
-  Core_Terms__ShowQuery['core_terms__show']['edges'][0],
+  Admin_Core_Terms__ShowQuery['core_terms__show']['edges'][0],
   'id' | 'title'
 >) => {
   const t = useTranslations('admin.core.settings.legal.delete');

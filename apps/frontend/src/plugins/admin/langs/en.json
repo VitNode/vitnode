@@ -148,6 +148,12 @@
             "edit": "Edit Policy",
             "form": {
               "title": "Title",
+              "code": {
+                "title": "Code",
+                "desc": "Code should be unique. This code is used to generate the URL of the policy page.",
+                "preview_url": "Preview URL of the policy page: <url></url>",
+                "already_exists": "Policy with this code already exists."
+              },
               "content": "Content",
               "href": "URL",
               "external_href": "Use external URL"

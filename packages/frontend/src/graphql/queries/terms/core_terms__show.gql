@@ -1,18 +1,11 @@
-query Core_terms__show($cursor: Int, $first: Int, $last: Int) {
-  core_terms__show(cursor: $cursor, first: $first, last: $last) {
-    pageInfo {
-      count
-      endCursor
-      hasNextPage
-      hasPreviousPage
-      startCursor
-      totalCount
-    }
+query Core_terms__show($code: String) {
+  core_terms__show(code: $code) {
     edges {
       content {
         language_code
         value
       }
+      code
       created
       href
       id

@@ -8,10 +8,12 @@ import { AutoFormSwitch } from '@/components/form/fields/switch';
 import { AutoFormTextLanguageInput } from '@/components/form/fields/text-language-input';
 import { Button } from '@/components/ui/button';
 import { DialogFooter, useDialog } from '@/components/ui/dialog';
-import { Core_Terms__ShowQuery } from '@/graphql/queries/terms/core_terms__show.generated';
+import { Admin_Core_Terms__ShowQuery } from '@/graphql/queries/admin/settings/terms/Admin_core_terms__show.generated';
+import { removeSpecialCharacters } from '@/helpers/special-characters';
 import { zodLanguageInput } from '@/helpers/zod';
 import { useTextLang } from '@/hooks/use-text-lang';
 import { useTranslations } from 'next-intl';
+import { UseFormReturn } from 'react-hook-form';
 import { toast } from 'sonner';
 import * as z from 'zod';
 
@@ -21,7 +23,7 @@ import { editMutationApi } from './edit-mutation-api';
 export const ContentCreateEditLegalPage = ({
   data,
 }: {
-  data?: Core_Terms__ShowQuery['core_terms__show']['edges'][0];
+  data?: Admin_Core_Terms__ShowQuery['core_terms__show']['edges'][0];
 }) => {
   const t = useTranslations('admin.core.settings.legal.create_edit');
   const tCore = useTranslations('core.errors');
@@ -32,6 +34,7 @@ export const ContentCreateEditLegalPage = ({
     .object({
       title: zodLanguageInput.default(data?.title ?? []),
       content: zodLanguageInput.default(data?.content ?? []).optional(),
+      code: z.string().default(data?.code ?? ''),
       external_href: z.boolean().default(!!data?.href).optional(),
       href: z
         .string()
@@ -46,7 +49,10 @@ export const ContentCreateEditLegalPage = ({
       return data.content?.length;
     });
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  const onSubmit = async (
+    values: z.infer<typeof formSchema>,
+    form: UseFormReturn<z.infer<typeof formSchema>>,
+  ) => {
     let error = '';
 
     if (data) {
@@ -55,6 +61,8 @@ export const ContentCreateEditLegalPage = ({
         title: values.title,
         content: values.external_href ? [] : (values.content ?? []),
         href: values.external_href ? values.href : undefined,
+        code: values.code,
+        prevCode: data.code,
       });
 
       if (mutation?.error) {
@@ -65,6 +73,7 @@ export const ContentCreateEditLegalPage = ({
         title: values.title,
         content: values.external_href ? [] : (values.content ?? []),
         href: values.external_href ? values.href : undefined,
+        code: values.code,
       });
 
       if (mutation?.error) {
@@ -73,6 +82,14 @@ export const ContentCreateEditLegalPage = ({
     }
 
     if (error) {
+      if (error === 'ALREADY_EXISTS') {
+        form.setError('code', {
+          message: t('form.code.already_exists'),
+        });
+
+        return;
+      }
+
       toast.error(tCore('title'), {
         description: tCore('internal_server_error'),
       });
@@ -120,6 +137,26 @@ export const ContentCreateEditLegalPage = ({
             id: 'title',
             label: t('form.title'),
             component: AutoFormTextLanguageInput,
+          },
+          {
+            id: 'code',
+            label: t('form.code.title'),
+            description: t('form.code.desc'),
+            component: AutoFormInput,
+            childComponent: ({ field }) => {
+              const value: string = field.value ?? '';
+              const parsedValue = removeSpecialCharacters(value);
+
+              return (
+                <div className="text-muted-foreground mt-1 text-sm">
+                  {t.rich('form.code.preview_url', {
+                    url: () => (
+                      <span className="text-foreground font-semibold">{`/legal/${parsedValue}`}</span>
+                    ),
+                  })}
+                </div>
+              );
+            },
           },
           {
             id: 'external_href',

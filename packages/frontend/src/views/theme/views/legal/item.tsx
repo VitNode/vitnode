@@ -1,22 +1,25 @@
 import { DateFormat } from '@/components/date-format';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { Core_Terms__ShowQuery } from '@/graphql/queries/terms/core_terms__show.generated';
+import { Admin_Core_Terms__ShowQuery } from '@/graphql/queries/admin/settings/terms/Admin_core_terms__show.generated';
 import { useTextLang } from '@/hooks/use-text-lang';
 import { Link } from '@/navigation';
 import { useTranslations } from 'next-intl';
 
 export const ItemLegal = ({
-  id,
+  code,
   title,
   updated,
-}: Core_Terms__ShowQuery['core_terms__show']['edges'][0]) => {
+}: Admin_Core_Terms__ShowQuery['core_terms__show']['edges'][0]) => {
   const { convertText } = useTextLang();
   const t = useTranslations('core.legal');
 
   return (
-    <Card>
-      <CardContent className="flex items-center justify-between gap-4 p-6">
+    <Button
+      asChild
+      className="bg-card hover:bg-muted flex h-auto cursor-pointer items-center justify-between gap-4 p-6"
+      variant="outline"
+    >
+      <Link href={`/legal/${code}`}>
         <div className="space-y-2">
           <span className="text-xl font-semibold">{convertText(title)}</span>
           <p className="text-muted-foreground text-sm">
@@ -26,10 +29,10 @@ export const ItemLegal = ({
           </p>
         </div>
 
-        <Button asChild className="rounded-full" variant="outline">
-          <Link href={`/legal/${id}`}>{t('read_document')}</Link>
+        <Button className="rounded-full" variant="outline">
+          {t('read_document')}
         </Button>
-      </CardContent>
-    </Card>
+      </Link>
+    </Button>
   );
 };

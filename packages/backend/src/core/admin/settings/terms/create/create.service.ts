@@ -5,6 +5,8 @@ import {
   core_terms_content,
   core_terms_title,
 } from '@/database/schema/terms';
+import { CustomError } from '@/errors';
+import { removeSpecialCharacters } from '@/functions';
 import { InternalDatabaseService } from '@/utils';
 import { Injectable } from '@nestjs/common';
 
@@ -21,10 +23,22 @@ export class CreateAdminTermsSettingsService {
     title,
     content,
     href,
+    code,
   }: CreateAdminTermsSettingsArgs): Promise<ShowCoreTerms> {
+    const termExist = await this.databaseService.db.query.core_terms.findFirst({
+      where: (table, { eq }) => eq(table.code, code),
+    });
+
+    if (termExist) {
+      throw new CustomError({
+        code: 'ALREADY_EXISTS',
+        message: 'Term already exists',
+      });
+    }
+
     const [term] = await this.databaseService.db
       .insert(core_terms)
-      .values({ href })
+      .values({ href, code: removeSpecialCharacters(code) })
       .returning();
 
     const titleTerm = await this.parserTextLang.parse({

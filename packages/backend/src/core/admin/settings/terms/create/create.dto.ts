@@ -9,6 +9,9 @@ import { IsArray } from 'class-validator';
 
 @ArgsType()
 export class CreateAdminTermsSettingsArgs {
+  @Field(() => String)
+  code: string;
+
   @IsArray()
   @IsTextLanguageInput()
   @Transform(TransformTextLanguageInput)

@@ -12,6 +12,7 @@ import { core_languages } from './languages';
 
 export const core_terms = pgTable('core_terms', {
   id: serial('id').primaryKey(),
+  code: varchar('code').notNull().unique(),
   created: timestamp('created').notNull().defaultNow(),
   updated: timestamp('updated').notNull().defaultNow(),
   href: varchar('href'),

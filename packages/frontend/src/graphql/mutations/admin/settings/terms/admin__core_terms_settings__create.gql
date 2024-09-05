@@ -2,11 +2,13 @@ mutation Admin__core_terms_settings__create(
   $content: [TextLanguageInput!]!
   $title: [TextLanguageInput!]!
   $href: String
+  $code: String!
 ) {
   admin__core_terms_settings__create(
     content: $content
     title: $title
     href: $href
+    code: $code
   ) {
     id
   }

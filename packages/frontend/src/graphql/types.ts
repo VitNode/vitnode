@@ -565,6 +565,7 @@ export type MutationAdmin__Core_Styles__Nav__EditArgs = {
 
 
 export type MutationAdmin__Core_Terms_Settings__CreateArgs = {
+  code: Scalars['String']['input'];
   content: Array<TextLanguageInput>;
   href?: InputMaybe<Scalars['String']['input']>;
   title: Array<TextLanguageInput>;
@@ -577,6 +578,7 @@ export type MutationAdmin__Core_Terms_Settings__DeleteArgs = {
 
 
 export type MutationAdmin__Core_Terms_Settings__EditArgs = {
+  code: Scalars['String']['input'];
   content: Array<TextLanguageInput>;
   href?: InputMaybe<Scalars['String']['input']>;
   id: Scalars['Float']['input'];
@@ -797,6 +799,7 @@ export type QueryCore_Nav__ShowArgs = {
 
 
 export type QueryCore_Terms__ShowArgs = {
+  code?: InputMaybe<Scalars['String']['input']>;
   cursor?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
@@ -1218,6 +1221,7 @@ export type ShowCoreSessionDevicesObj = {
 
 export type ShowCoreTerms = {
   __typename?: 'ShowCoreTerms';
+  code: Scalars['String']['output'];
   content: Array<TextLanguage>;
   created: Scalars['DateTime']['output'];
   href?: Maybe<Scalars['String']['output']>;

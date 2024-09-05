@@ -3,7 +3,7 @@
 import { DateFormat } from '@/components/date-format';
 import { Button } from '@/components/ui/button';
 import { DataTable } from '@/components/ui/data-table';
-import { Core_Terms__ShowQuery } from '@/graphql/queries/terms/core_terms__show.generated';
+import { Admin_Core_Terms__ShowQuery } from '@/graphql/queries/admin/settings/terms/Admin_core_terms__show.generated';
 import { useTextLang } from '@/hooks/use-text-lang';
 import { Link } from '@/navigation';
 import { Eye } from 'lucide-react';
@@ -14,7 +14,7 @@ import { EditContentLegalSettingsAdmin } from './actions/edit';
 
 export const ContentLegalSettingsAdmin = ({
   core_terms__show: { edges, pageInfo },
-}: Core_Terms__ShowQuery) => {
+}: Admin_Core_Terms__ShowQuery) => {
   const t = useTranslations('core.table');
   const tAdmin = useTranslations('admin.core.settings.legal');
   const { convertText } = useTextLang();
@@ -54,7 +54,7 @@ export const ContentLegalSettingsAdmin = ({
                   size="icon"
                   variant="ghost"
                 >
-                  <Link href={`/legal/${row.id}`} target="_blank">
+                  <Link href={`/legal/${row.code}`} target="_blank">
                     <Eye />
                   </Link>
                 </Button>

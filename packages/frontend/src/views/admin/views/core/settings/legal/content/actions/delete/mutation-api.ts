@@ -6,7 +6,8 @@ import {
   Admin__Core_Terms_Settings__DeleteMutation,
   Admin__Core_Terms_Settings__DeleteMutationVariables,
 } from '@/graphql/mutations/admin/settings/terms/admin__core_terms_settings__delete.generated';
-import { revalidateTag } from 'next/cache';
+
+import { revalidateApi } from '../../../revalidate-api';
 
 export const mutationApi = async (
   variables: Admin__Core_Terms_Settings__DeleteMutationVariables,
@@ -20,7 +21,7 @@ export const mutationApi = async (
       variables,
     });
 
-    revalidateTag('core_terms__show');
+    revalidateApi();
   } catch (error) {
     const e = error as Error;
 

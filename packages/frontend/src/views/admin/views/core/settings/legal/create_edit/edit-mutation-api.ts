@@ -6,10 +6,13 @@ import {
   Admin__Core_Terms_Settings__EditMutation,
   Admin__Core_Terms_Settings__EditMutationVariables,
 } from '@/graphql/mutations/admin/settings/terms/admin__core_terms_settings__edit.generated';
-import { revalidateTag } from 'next/cache';
+
+import { revalidateApi } from '../revalidate-api';
 
 export const editMutationApi = async (
-  variables: Admin__Core_Terms_Settings__EditMutationVariables,
+  variables: {
+    prevCode: string;
+  } & Admin__Core_Terms_Settings__EditMutationVariables,
 ) => {
   try {
     await fetcher<
@@ -20,7 +23,7 @@ export const editMutationApi = async (
       variables,
     });
 
-    revalidateTag('core_terms__show');
+    revalidateApi(variables.code, variables.prevCode);
   } catch (error) {
     const e = error as Error;
 
