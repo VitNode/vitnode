@@ -31,11 +31,22 @@ export const generateMetadataThemeEditor = async (): Promise<Metadata> => {
 };
 
 export const ThemeEditorView = async () => {
-  const [data, session] = await Promise.all([getData(), getSessionAdminData()]);
+  try {
+    const [data, session] = await Promise.all([
+      getData(),
+      getSessionAdminData(),
+    ]);
 
-  if (!session.admin__sessions__authorization.user) {
-    redirect('/admin');
+    if (!session.admin__sessions__authorization.user) {
+      redirect('/admin');
+    }
+
+    return <ContentThemeEditor {...data} />;
+  } catch (err) {
+    if (err instanceof Error && err.message === 'ACCESS_DENIED') {
+      redirect('/admin');
+    }
+
+    throw err;
   }
-
-  return <ContentThemeEditor {...data} />;
 };
