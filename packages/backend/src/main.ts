@@ -55,26 +55,24 @@ export const nestjsMainApp = async (app: INestApplication, options?: Args) => {
   );
 
   const port = Number(process.env.PORT) || 8080;
-  const hostname = process.env.HOSTNAME ?? '';
+  const hostname = process.env.HOSTNAME ?? 'localhost';
   await app.listen(port, hostname, async () => {
     const initConsole = '\x1b[34m[VitNode]\x1b[0m';
 
-    if (process.env.NODE_ENV === 'development') {
-      try {
-        console.log(
-          initConsole,
-          'GraphQL API is generating, please wait for a moment...',
-        );
+    try {
+      console.log(
+        initConsole,
+        'GraphQL API is generating, please wait for a moment...',
+      );
 
-        await execShellCommand('npm run codegen');
-      } catch (error) {
-        console.error(initConsole, error);
-      }
+      await execShellCommand('npm run codegen');
+    } catch (error) {
+      console.error(initConsole, error);
     }
 
     console.log(
       initConsole,
-      `Application is running on: http://localhost:${port}/graphql`,
+      `Application is running on: http://${hostname}:${port}/graphql`,
     );
   });
 };
