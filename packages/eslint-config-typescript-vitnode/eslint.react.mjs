@@ -22,12 +22,6 @@ export default [
     },
   },
   {
-    ignores: [
-      '.next',
-      'global.d.ts',
-      'graphql',
-      'next.config.ts',
-      'src/graphql/types.ts',
-    ],
+    ignores: ['.next', 'global.d.ts', 'next.config.ts'],
   },
 ];
