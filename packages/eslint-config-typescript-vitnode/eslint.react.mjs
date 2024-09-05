@@ -25,10 +25,9 @@ export default [
     ignores: [
       '.next',
       'global.d.ts',
-      '/graphql',
-      '/src/graphql',
-      'plugins/**/*/graphql',
+      'graphql',
       'next.config.ts',
+      'src/graphql/types.ts',
     ],
   },
 ];
