@@ -3,22 +3,7 @@ title: Internationalization (i18n)
 description: Translate your plugin to multiple languages.
 ---
 
-VitNode supports multiple languages out of the box. You can easily translate your content inside plugin. Input and WYSIWYG fields are supported also with i18n.
-
-Each translations are stored in database as `array`.
-
-```ts
-[
-  {
-    language_code: 'en',
-    value: 'Hello world',
-  },
-  {
-    language_code: 'pl',
-    value: 'Witaj świecie',
-  },
-];
-```
+VitNode supports multiple languages out of the box. You can easily translate your content inside plugin using `JSON` file. Input and WYSIWYG fields are supported also with i18n using `core_languages_words` database.
 
 ## Content
 
@@ -26,7 +11,7 @@ Thanks to [next-intl](https://next-intl-docs.vercel.app/) you can easily transla
 
 To translate your content select the plugin in `frontend`, go to `langs` folder and pick the language you want to translate. You can also add a new language by creating a new one in AdminCP.
 
-```json title="frontend/plugins/{your_plugin}/langs/en.json"
+```json title="apps/frontend/src/plugins/{your_plugin}/langs/en.json"
 {
   "{your_plugin}": {
     "hello": "Hello World",
@@ -40,7 +25,7 @@ To translate your content select the plugin in `frontend`, go to `langs` folder 
 
 You cannnot do this:
 
-```json title="frontend/plugins/{your_plugin}/langs/en.json"
+```json title="apps/frontend/src/plugins/{your_plugin}/langs/en.json"
 {
   "{your_plugin}": {
     "hello": "Hello World"
@@ -53,7 +38,7 @@ You cannnot do this:
 
 ## Translation Fields
 
-VitNode has a built-in translation fields for input and WYSIWYG fields. You can easily translate your content in the AdminCP.
+VitNode has a built-in translation fields for input and WYSIWYG fields.
 
 As an example, we will create a translation field for the `title` field in the `blog_categories` table.
 
@@ -80,51 +65,7 @@ export const blog_categories = pgTable('blog_categories', {
   created: timestamp('created').notNull().defaultNow(),
   position: integer('position').notNull().default(0),
 });
-
-export const blog_categories_relations = relations(
-  blog_categories,
-  ({ many }) => ({
-    name: many(blog_categories_name),
-  }),
-);
-
-export const blog_categories_name = pgTable(
-  'blog_categories_name',
-  {
-    id: serial('id').primaryKey(),
-    item_id: integer('item_id').references(() => blog_categories.id, {
-      onDelete: 'cascade',
-    }),
-    language_code: varchar('language_code')
-      .notNull()
-      .references(() => core_languages.code, {
-        onDelete: 'cascade',
-      }),
-    value: varchar('value', { length: 100 }).notNull(),
-  },
-  table => ({
-    item_id_idx: index('blog_categories_name_item_id_idx').on(table.item_id),
-    language_code_idx: index('blog_categories_name_language_code_idx').on(
-      table.language_code,
-    ),
-  }),
-);
-
-export const blog_categories_name_relations = relations(
-  blog_categories_name,
-  ({ one }) => ({
-    file: one(blog_categories, {
-      fields: [blog_categories_name.item_id],
-      references: [blog_categories.id],
-    }),
-  }),
-);
 ```
-
-<Callout title="References">
-  Remember to set `onDelete: 'cascade'` action into references and set `indexes`
-  for best performerce. We want to delete translation when we delete main table.
-</Callout>
 
 ### Data Transfer Objects (DTO)
 

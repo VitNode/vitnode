@@ -1,9 +1,5 @@
-import { ParserStringLanguageCoreHelpersService } from '@/core/helpers/text_language/parser/parser.service';
-import {
-  core_nav,
-  core_nav_description,
-  core_nav_name,
-} from '@/database/schema/nav';
+import { StringLanguageHelper } from '@/core/helpers/string_language/helpers.service';
+import { core_nav } from '@/database/schema/nav';
 import { NotFoundError } from '@/errors';
 import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
@@ -15,7 +11,7 @@ import { DeleteAdminNavStylesArgs } from './delete.dto';
 export class DeleteAdminNavStylesService {
   constructor(
     private readonly databaseService: InternalDatabaseService,
-    private readonly parserTextLang: ParserStringLanguageCoreHelpersService,
+    private readonly stringLanguageHelper: StringLanguageHelper,
   ) {}
 
   async delete({ id }: DeleteAdminNavStylesArgs): Promise<string> {
@@ -33,19 +29,14 @@ export class DeleteAdminNavStylesService {
       .set({ parent_id: 0 })
       .where(eq(core_nav.parent_id, id));
 
-    await this.parserTextLang.delete({
-      database: core_nav_name,
-      item_id: id,
-    });
-
-    // TODO: Check if it's necessary to delete
-    await this.parserTextLang.delete({
-      database: core_nav_description,
-      item_id: id,
-    });
-
     // Delete nav
     await this.databaseService.db.delete(core_nav).where(eq(core_nav.id, id));
+
+    await this.stringLanguageHelper.delete({
+      database: core_nav,
+      item_id: id,
+      plugin_code: 'core',
+    });
 
     return 'Success!';
   }

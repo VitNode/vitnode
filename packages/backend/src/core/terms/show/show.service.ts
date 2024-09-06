@@ -2,7 +2,7 @@ import { core_terms } from '@/database/schema/terms';
 import { inputPaginationCursor, outputPagination } from '@/functions';
 import { InternalDatabaseService, SortDirectionEnum } from '@/utils';
 import { Injectable } from '@nestjs/common';
-import { and, count, eq, or } from 'drizzle-orm';
+import { and, count, eq, inArray, or } from 'drizzle-orm';
 
 import { ShowCoreTermsArgs, ShowCoreTermsObj } from './show.dto';
 
@@ -39,39 +39,15 @@ export class ShowCoreTermsService {
         where: and(pagination.where, where),
       },
     );
-
-    const edges = await Promise.all(
-      edgesFromDb.map(async edge => {
-        const title =
-          await this.databaseService.db.query.core_languages_words.findMany({
-            where: (table, { and, eq }) =>
-              and(
-                eq(table.item_id, edge.id),
-                or(eq(table.variable, 'title'), eq(table.variable, 'content')),
-              ),
-          });
-
-        return {
-          ...edge,
-          title: title.filter(value => value.variable === 'title'),
-          content: title.filter(value => value.variable === 'content'),
-        };
-      }),
-    );
-
-    // const edges = await this.databaseService.db
-    //   .select()
-    //   .from(core_terms)
-    //   .limit(pagination.limit ?? 0)
-    //   .orderBy(pagination.orderBy)
-    //   .where(and(pagination.where, where))
-    //   .leftJoin(
-    //     core_languages_words,
-    //     and(
-    //       eq(core_terms.id, core_languages_words.item_id),
-    //       eq(core_languages_words.variable, 'title'),
-    //     ),
-    //   );
+    const ids = edgesFromDb.map(edge => edge.id);
+    const i18n =
+      await this.databaseService.db.query.core_languages_words.findMany({
+        where: (table, { and, eq }) =>
+          and(
+            inArray(table.item_id, ids),
+            or(eq(table.variable, 'title'), eq(table.variable, 'content')),
+          ),
+      });
 
     const totalCount = await this.databaseService.db
       .select({ count: count() })
@@ -79,7 +55,15 @@ export class ShowCoreTermsService {
       .where(where);
 
     return outputPagination({
-      edges,
+      edges: edgesFromDb.map(edge => {
+        const currentI18n = i18n.filter(item => item.item_id === edge.id);
+
+        return {
+          ...edge,
+          title: currentI18n.filter(value => value.variable === 'title'),
+          content: currentI18n.filter(value => value.variable === 'content'),
+        };
+      }),
       totalCount,
       first,
       cursor,
