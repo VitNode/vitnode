@@ -338,6 +338,26 @@ function logError(error) {
       });
     });
 
+    // Copy src in frontend to create-vitnode-app
+    const createVitnodeAppPath = path.join(
+      WORKSPACE,
+      'packages',
+      'create-vitnode-app',
+      'templates',
+      'basic',
+      'apps',
+      'frontend',
+      'src',
+    );
+    const frontendSrcPath = path.join(WORKSPACE, 'apps', 'frontend', 'src');
+    if (!fs.existsSync(createVitnodeAppPath)) {
+      fs.mkdirSync(createVitnodeAppPath, { recursive: true });
+    }
+
+    fs.cpSync(frontendSrcPath, createVitnodeAppPath, {
+      recursive: true,
+    });
+
     exitSuccess('Version bumped!');
   } catch (e) {
     logError(e);
