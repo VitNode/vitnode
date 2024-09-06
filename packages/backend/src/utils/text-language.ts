@@ -2,7 +2,7 @@ import { Field, InputType, ObjectType } from '@nestjs/graphql';
 import { registerDecorator } from 'class-validator';
 
 @ObjectType()
-export class TextLanguage {
+export class StringLanguage {
   @Field(() => String)
   language_code: string;
 
@@ -11,7 +11,7 @@ export class TextLanguage {
 }
 
 @InputType()
-export class TextLanguageInput {
+export class StringLanguageInput {
   @Field(() => String)
   language_code: string;
 
@@ -19,7 +19,7 @@ export class TextLanguageInput {
   value: string;
 }
 
-export const IsTextLanguageInput = () => {
+export const IsStringLanguageInput = () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return (object: Record<string, any>, propertyName: string) => {
     registerDecorator({
@@ -29,7 +29,7 @@ export const IsTextLanguageInput = () => {
         message: 'Each language must have a value',
       },
       validator: {
-        validate(item: null | TextLanguageInput | TextLanguageInput[]) {
+        validate(item: null | StringLanguageInput | StringLanguageInput[]) {
           if (!item) return false;
 
           return (Array.isArray(item) ? item : [item]).every(
@@ -51,7 +51,7 @@ export const MaxLengthLanguageInput = ({ length }: { length: number }) => {
         message: `Each language must have a value with a maximum length of ${length}`,
       },
       validator: {
-        validate(item: null | TextLanguageInput | TextLanguageInput[]) {
+        validate(item: null | StringLanguageInput | StringLanguageInput[]) {
           if (!item) return true;
 
           return (Array.isArray(item) ? item : [item]).every(
@@ -72,7 +72,7 @@ export const MinLengthLanguageInput = ({ length }: { length: number }) => {
         message: `Each language must have a value with a minimum length of ${length}`,
       },
       validator: {
-        validate(item: null | TextLanguageInput | TextLanguageInput[]) {
+        validate(item: null | StringLanguageInput | StringLanguageInput[]) {
           if (!item) return true;
 
           return (Array.isArray(item) ? item : [item]).every(
@@ -84,10 +84,10 @@ export const MinLengthLanguageInput = ({ length }: { length: number }) => {
   };
 };
 
-export const TransformTextLanguageInput = ({
+export const TransformStringLanguageInput = ({
   value,
 }: {
-  value: null | TextLanguageInput | TextLanguageInput[];
+  value: null | StringLanguageInput | StringLanguageInput[];
 }) => {
   if (Array.isArray(value)) {
     let current = value.map(item => ({

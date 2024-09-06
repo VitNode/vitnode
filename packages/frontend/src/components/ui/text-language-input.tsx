@@ -1,4 +1,4 @@
-import { TextLanguage } from '@/graphql/types';
+import { StringLanguage } from '@/graphql/types';
 import { useLocale } from 'next-intl';
 import React from 'react';
 
@@ -20,11 +20,11 @@ interface Props
     'onChange' | 'value'
   > {
   className?: string;
-  onChange: (value: TextLanguage[]) => void;
-  value: TextLanguage[];
+  onChange: (value: StringLanguage[]) => void;
+  value: StringLanguage[];
 }
 
-export const TextLanguageInput = ({
+export const StringLanguageInput = ({
   className,
   onChange,
   value,

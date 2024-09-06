@@ -1,13 +1,13 @@
-import { TextLanguage } from '@/utils';
+import { StringLanguage } from '@/utils';
 import { Field, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
 export class ShowSettingsObj {
-  @Field(() => [TextLanguage])
-  site_copyright: TextLanguage[];
+  @Field(() => [StringLanguage])
+  site_copyright: StringLanguage[];
 
-  @Field(() => [TextLanguage])
-  site_description: TextLanguage[];
+  @Field(() => [StringLanguage])
+  site_description: StringLanguage[];
 
   @Field(() => String)
   site_name: string;

@@ -5,7 +5,7 @@ import { InternalDatabaseService } from '@/utils/database/internal_database.serv
 import { Injectable } from '@nestjs/common';
 import { count, eq } from 'drizzle-orm';
 
-import { ParserTextLanguageCoreHelpersService } from '../../../helpers/text_language/parser/parser.service';
+import { ParserStringLanguageCoreHelpersService } from '../../../helpers/text_language/parser/parser.service';
 import { ShowAdminGroups } from '../show/show.dto';
 import { EditAdminGroupsArgs } from './edit.dto';
 
@@ -13,7 +13,7 @@ import { EditAdminGroupsArgs } from './edit.dto';
 export class EditAdminGroupsService {
   constructor(
     private readonly databaseService: InternalDatabaseService,
-    private readonly parserTextLang: ParserTextLanguageCoreHelpersService,
+    private readonly parserTextLang: ParserStringLanguageCoreHelpersService,
   ) {}
 
   async edit({

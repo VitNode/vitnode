@@ -5,7 +5,7 @@ import {
   AutoFormInputProps,
 } from '@/components/form/fields/input';
 import { AutoFormSwitch } from '@/components/form/fields/switch';
-import { AutoFormTextLanguageInput } from '@/components/form/fields/text-language-input';
+import { AutoFormStringLanguageInput } from '@/components/form/fields/text-language-input';
 import { Button } from '@/components/ui/button';
 import { DialogFooter, useDialog } from '@/components/ui/dialog';
 import { Admin_Core_Terms__ShowQuery } from '@/graphql/queries/admin/settings/terms/Admin_core_terms__show.generated';
@@ -136,7 +136,7 @@ export const ContentCreateEditLegalPage = ({
           {
             id: 'title',
             label: t('form.title'),
-            component: AutoFormTextLanguageInput,
+            component: AutoFormStringLanguageInput,
           },
           {
             id: 'code',

@@ -1,4 +1,4 @@
-import { PageInfo, PaginationArgs, TextLanguage } from '@/utils';
+import { PageInfo, PaginationArgs, StringLanguage } from '@/utils';
 import { ArgsType, Field, ObjectType } from '@nestjs/graphql';
 
 @ArgsType()
@@ -12,8 +12,8 @@ export class ShowCoreTerms {
   @Field(() => String)
   code: string;
 
-  @Field(() => [TextLanguage])
-  content: TextLanguage[];
+  @Field(() => [StringLanguage])
+  content: StringLanguage[];
 
   @Field(() => Date)
   created: Date;
@@ -24,8 +24,8 @@ export class ShowCoreTerms {
   @Field(() => Number)
   id: number;
 
-  @Field(() => [TextLanguage])
-  title: TextLanguage[];
+  @Field(() => [StringLanguage])
+  title: StringLanguage[];
 
   @Field(() => Date)
   updated: Date;

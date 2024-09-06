@@ -130,40 +130,40 @@ export const blog_categories_name_relations = relations(
 
 #### Input
 
-Inside input DTO you can use `TextLanguageInput[]` for translation fields.
+Inside input DTO you can use `StringLanguageInput[]` for translation fields.
 
 ```ts title="backend/plugins/blog/categories/show/show.dto.ts"
 import { ArgsType, Field } from '@nestjs/graphql';
 import { IsArray } from 'class-validator';
 import { Transform } from 'class-transformer';
 import {
-  IsTextLanguageInput,
-  TextLanguageInput,
-  TransformTextLanguageInput,
+  IsStringLanguageInput,
+  StringLanguageInput,
+  TransformStringLanguageInput,
 } from 'vitnode-backend';
 
 @ArgsType()
 export class ShowBlogCategoriesArgs {
   @IsArray()
-  @IsTextLanguageInput()
-  @Transform(TransformTextLanguageInput)
-  @Field(() => [TextLanguageInput])
-  title: TextLanguageInput[];
+  @IsStringLanguageInput()
+  @Transform(TransformStringLanguageInput)
+  @Field(() => [StringLanguageInput])
+  title: StringLanguageInput[];
 }
 ```
 
 #### Object
 
-Inside object DTO you can use `TextLanguage` for translation fields.
+Inside object DTO you can use `StringLanguage` for translation fields.
 
 ```ts
 import { Field, ObjectType } from '@nestjs/graphql';
-import { TextLanguage } from 'vitnode-backend';
+import { StringLanguage } from 'vitnode-backend';
 
 @ObjectType()
 export class ShowBlogCategoriesObj {
-  @Field(() => [TextLanguage])
-  title: TextLanguage[];
+  @Field(() => [StringLanguage])
+  title: StringLanguage[];
 }
 ```
 
@@ -208,13 +208,13 @@ export class ShowBlogCategoriesService {
 
 ### Create / Edit
 
-To create or edit translation fields you need to use `ParserTextLanguageCoreHelpersService` service. This service will help you to parse the translation fields.
+To create or edit translation fields you need to use `ParserStringLanguageCoreHelpersService` service. This service will help you to parse the translation fields.
 
 ```ts title="backend/plugins/blog/categories/edit/edit.service.ts"
 import { Injectable } from '@nestjs/common';
 import {
   NotFoundError,
-  ParserTextLanguageCoreHelpersService,
+  ParserStringLanguageCoreHelpersService,
 } from 'vitnode-backend';
 
 import { EditBlogCategories } from './dto/show.obj';
@@ -226,7 +226,7 @@ import { blog_categories_name } from '@/plugins/blog/admin/database/schema/categ
 export class EditBlogCategoriesService {
   constructor(
     private databaseServices: DatabaseService,
-    private parserTextLang: ParserTextLanguageCoreHelpersService,
+    private parserTextLang: ParserStringLanguageCoreHelpersService,
   ) {}
 
   async edit({
@@ -257,13 +257,13 @@ export class EditBlogCategoriesService {
 
 ### Delete
 
-To delete translation fields you need to use `ParserTextLanguageCoreHelpersService` service. This service will help you to delete the translation fields and remove sub-features like mentions, attachments, etc.
+To delete translation fields you need to use `ParserStringLanguageCoreHelpersService` service. This service will help you to delete the translation fields and remove sub-features like mentions, attachments, etc.
 
 ```ts title="backend/plugins/blog/categories/delete/delete.service.ts"
 import { Injectable } from '@nestjs/common';
 import {
   NotFoundError,
-  ParserTextLanguageCoreHelpersService,
+  ParserStringLanguageCoreHelpersService,
 } from 'vitnode-backend';
 
 import { EditBlogCategories } from './dto/show.obj';
@@ -278,7 +278,7 @@ import {
 export class EditBlogCategoriesService {
   constructor(
     private databaseServices: DatabaseService,
-    private parserTextLang: ParserTextLanguageCoreHelpersService,
+    private parserTextLang: ParserStringLanguageCoreHelpersService,
   ) {}
 
   async delete({ id }: DeleteBlogCategoriesArgs): Promise<string> {
@@ -318,10 +318,10 @@ On the frontend you can display text depends on display language.
 ```tsx title="example.tsx"
 import { useTextLang } from 'vitnode-frontend/hooks/use-text-lang';
 
-import { TextLanguage } from '@/utils/graphql/graphql';
+import { StringLanguage } from '@/utils/graphql/graphql';
 
 interface Props {
-  value: TextLanguage[];
+  value: StringLanguage[];
 }
 
 export const ExampleComponent = ({ value }: Props) => {
@@ -336,10 +336,10 @@ export const ExampleComponent = ({ value }: Props) => {
 ```tsx title="example.tsx"
 import { useTextLang } from 'vitnode-frontend/hooks/use-text-lang';
 
-import { TextLanguage } from '@/utils/graphql/graphql';
+import { StringLanguage } from '@/utils/graphql/graphql';
 
 interface Props {
-  value: TextLanguage[];
+  value: StringLanguage[];
   locale: string;
 }
 
@@ -432,7 +432,7 @@ import {
   FormLabel,
   FormMessage,
 } from 'vitnode-frontend/components/ui/form';
-import { TextLanguageInput } from 'vitnode-frontend/components/ui/text-language-input'; // [!code highlight]
+import { StringLanguageInput } from 'vitnode-frontend/components/ui/text-language-input'; // [!code highlight]
 
 import { useExample } from './use-example';
 
@@ -449,7 +449,7 @@ export const ExampleForm = () => {
             <FormItem>
               <FormLabel>Title</FormLabel>
               <FormControl>
-                <TextLanguageInput {...field} /> // [!code highlight]
+                <StringLanguageInput {...field} /> // [!code highlight]
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -469,7 +469,7 @@ export const ExampleForm = () => {
 };
 ```
 
-Instead of `TextLanguageInput` you can use `Editor` component. [Read more](/docs/ui/editor#form).
+Instead of `StringLanguageInput` you can use `Editor` component. [Read more](/docs/ui/editor#form).
 
 </Step>
 

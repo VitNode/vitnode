@@ -1,4 +1,4 @@
-import { ParserTextLanguageCoreHelpersService } from '@/core/helpers/text_language/parser/parser.service';
+import { ParserStringLanguageCoreHelpersService } from '@/core/helpers/text_language/parser/parser.service';
 import {
   core_nav,
   core_nav_description,
@@ -15,7 +15,7 @@ import { DeleteAdminNavStylesArgs } from './delete.dto';
 export class DeleteAdminNavStylesService {
   constructor(
     private readonly databaseService: InternalDatabaseService,
-    private readonly parserTextLang: ParserTextLanguageCoreHelpersService,
+    private readonly parserTextLang: ParserStringLanguageCoreHelpersService,
   ) {}
 
   async delete({ id }: DeleteAdminNavStylesArgs): Promise<string> {

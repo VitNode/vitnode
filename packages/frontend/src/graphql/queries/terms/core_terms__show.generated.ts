@@ -6,7 +6,7 @@ export type Core_Terms__ShowQueryVariables = Types.Exact<{
 }>;
 
 
-export type Core_Terms__ShowQuery = { __typename?: 'Query', core_terms__show: { __typename?: 'ShowCoreTermsObj', edges: Array<{ __typename?: 'ShowCoreTerms', code: string, created: Date, href?: string, id: number, updated: Date, content: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, title: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }> } };
+export type Core_Terms__ShowQuery = { __typename?: 'Query', core_terms__show: { __typename?: 'ShowCoreTermsObj', edges: Array<{ __typename?: 'ShowCoreTerms', code: string, created: Date, href?: string, id: number, updated: Date, content: Array<{ __typename?: 'StringLanguage', language_code: string, value: string }>, title: Array<{ __typename?: 'StringLanguage', language_code: string, value: string }> }> } };
 
 
 export const Core_Terms__Show = gql`

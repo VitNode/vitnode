@@ -1,6 +1,6 @@
 mutation Admin__core_groups__edit(
   $id: Int!
-  $name: [TextLanguageInput!]!
+  $name: [StringLanguageInput!]!
   $content: ContentCreateAdminGroups!
   $color: String
 ) {

@@ -1,8 +1,8 @@
 mutation Admin__core_main_settings__edit(
   $siteName: String!
   $siteShortName: String!
-  $siteDescription: [TextLanguageInput!]!
-  $siteCopyright: [TextLanguageInput!]!
+  $siteDescription: [StringLanguageInput!]!
+  $siteCopyright: [StringLanguageInput!]!
 ) {
   admin__core_main_settings__edit(
     site_name: $siteName

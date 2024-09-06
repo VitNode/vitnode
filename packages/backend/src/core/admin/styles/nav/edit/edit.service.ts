@@ -1,4 +1,4 @@
-import { ParserTextLanguageCoreHelpersService } from '@/core/helpers/text_language/parser/parser.service';
+import { ParserStringLanguageCoreHelpersService } from '@/core/helpers/text_language/parser/parser.service';
 import { ShowCoreNav } from '@/core/nav/show/show.dto';
 import {
   core_nav,
@@ -16,7 +16,7 @@ import { EditAdminNavStylesArgs } from './edit.dto';
 export class EditAdminNavStylesService {
   constructor(
     private readonly databaseService: InternalDatabaseService,
-    private readonly parserTextLang: ParserTextLanguageCoreHelpersService,
+    private readonly parserTextLang: ParserStringLanguageCoreHelpersService,
   ) {}
 
   async edit({

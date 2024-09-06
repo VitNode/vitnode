@@ -122,8 +122,8 @@ type EditAdminMembersObj {
 }
 
 type EditAdminSettingsObj {
-  site_copyright: [TextLanguage!]!
-  site_description: [TextLanguage!]!
+  site_copyright: [StringLanguage!]!
+  site_description: [StringLanguage!]!
   site_name: String!
 }
 
@@ -165,7 +165,7 @@ type FilesEditorShowCoreMiddleware {
 type GroupUser {
   color: String
   id: Int!
-  name: [TextLanguage!]!
+  name: [StringLanguage!]!
 }
 
 type HslColor {
@@ -221,14 +221,14 @@ type Mutation {
   admin__core_email_settings__edit(color_primary: String!, color_primary_foreground: String!, logo: UploadWithKeepCoreFilesArgs, provider: EmailProvider!, resend_key: String, smtp: SMTPEditAdminEmailSettingsService): ShowAdminEmailSettingsServiceObj!
   admin__core_email_settings__test(from: String!, message: String!, preview_text: String, subject: String!, to: String!): String!
   admin__core_files__delete(id: Int!): String!
-  admin__core_groups__create(color: String, content: ContentCreateAdminGroups!, name: [TextLanguageInput!]!): ShowAdminGroups!
+  admin__core_groups__create(color: String, content: ContentCreateAdminGroups!, name: [StringLanguageInput!]!): ShowAdminGroups!
   admin__core_groups__delete(id: Int!): String!
-  admin__core_groups__edit(color: String, content: ContentCreateAdminGroups!, id: Int!, name: [TextLanguageInput!]!): ShowAdminGroups!
+  admin__core_groups__edit(color: String, content: ContentCreateAdminGroups!, id: Int!, name: [StringLanguageInput!]!): ShowAdminGroups!
   admin__core_languages__create(allow_in_input: Boolean!, code: String!, locale: String!, name: String!, time_24: Boolean!, timezone: String!): ShowCoreLanguages!
   admin__core_languages__delete(code: String!): String!
   admin__core_languages__download(code: String!, plugins: [String!]!): String!
   admin__core_languages__edit(allow_in_input: Boolean!, default: Boolean!, enabled: Boolean!, id: Int!, locale: String!, name: String!, time_24: Boolean!, timezone: String!): ShowCoreLanguages!
-  admin__core_main_settings__edit(site_copyright: [TextLanguageInput!]!, site_description: [TextLanguageInput!]!, site_name: String!, site_short_name: String!): EditAdminSettingsObj!
+  admin__core_main_settings__edit(site_copyright: [StringLanguageInput!]!, site_description: [StringLanguageInput!]!, site_name: String!, site_short_name: String!): EditAdminSettingsObj!
   admin__core_manifest_metadata__edit(background_color: String!, display: String!, start_url: String!, theme_color: String!): ShowAdminManifestMetadataObj!
   admin__core_members__create(email: String!, name: String!, password: String!): SignUpCoreSessionsObj!
   admin__core_members__edit(birthday: DateTime, email: String!, first_name: String, id: Int!, last_name: String, name: String!, newsletter: Boolean!): EditAdminMembersObj!
@@ -248,12 +248,12 @@ type Mutation {
   admin__core_staff_moderators__create(group_id: Int, unrestricted: Boolean!, user_id: Int): ShowAdminStaffModerators!
   admin__core_staff_moderators__delete(id: Int!): String!
   admin__core_styles__editor__edit(files: FilesEditAdminEditorStyles!, sticky: Boolean!): EditorShowCoreMiddleware!
-  admin__core_styles__nav__create(description: [TextLanguageInput!]!, external: Boolean!, href: String!, icon: String, name: [TextLanguageInput!]!): ShowCoreNav!
+  admin__core_styles__nav__create(description: [StringLanguageInput!]!, external: Boolean!, href: String!, icon: String, name: [StringLanguageInput!]!): ShowCoreNav!
   admin__core_styles__nav__delete(id: Int!): String!
-  admin__core_styles__nav__edit(description: [TextLanguageInput!]!, external: Boolean!, href: String!, icon: String, id: Int!, name: [TextLanguageInput!]!): ShowCoreNav!
-  admin__core_terms_settings__create(code: String!, content: [TextLanguageInput!]!, href: String, title: [TextLanguageInput!]!): ShowCoreTerms!
-  admin__core_terms_settings__delete(id: Int!): String!
-  admin__core_terms_settings__edit(code: String!, content: [TextLanguageInput!]!, href: String, id: Float!, title: [TextLanguageInput!]!): ShowCoreTerms!
+  admin__core_styles__nav__edit(description: [StringLanguageInput!]!, external: Boolean!, href: String!, icon: String, id: Int!, name: [StringLanguageInput!]!): ShowCoreNav!
+  admin__core_terms_settings__create(code: String!, content: [StringLanguageInput!]!, href: String, title: [StringLanguageInput!]!): ShowCoreTerms!
+  admin__core_terms_settings__delete(code: String!): String!
+  admin__core_terms_settings__edit(code: String!, content: [StringLanguageInput!]!, href: String, id: Float!, title: [StringLanguageInput!]!): ShowCoreTerms!
   admin__core_theme_editor__edit(colors: ColorsEditAdminThemeEditor, logos: LogosEditAdminThemeEditor!): String!
   admin__install__create_database: String!
   admin_sessions__sign_out: String!
@@ -384,7 +384,7 @@ type ShowAdminGroups {
   default: Boolean!
   guest: Boolean!
   id: Int!
-  name: [TextLanguage!]!
+  name: [StringLanguage!]!
   protected: Boolean!
   root: Boolean!
   updated: DateTime!
@@ -650,22 +650,22 @@ type ShowCoreMiddlewareObj {
 
 type ShowCoreNav {
   children: [ShowCoreNavItem!]!
-  description: [TextLanguage!]!
+  description: [StringLanguage!]!
   external: Boolean!
   href: String!
   icon: String
   id: Int!
-  name: [TextLanguage!]!
+  name: [StringLanguage!]!
   position: Int!
 }
 
 type ShowCoreNavItem {
-  description: [TextLanguage!]!
+  description: [StringLanguage!]!
   external: Boolean!
   href: String!
   icon: String
   id: Int!
-  name: [TextLanguage!]!
+  name: [StringLanguage!]!
   position: Int!
 }
 
@@ -693,11 +693,11 @@ type ShowCoreSessionDevicesObj {
 
 type ShowCoreTerms {
   code: String!
-  content: [TextLanguage!]!
+  content: [StringLanguage!]!
   created: DateTime!
   href: String
   id: Float!
-  title: [TextLanguage!]!
+  title: [StringLanguage!]!
   updated: DateTime!
 }
 
@@ -712,8 +712,8 @@ type ShowCoreThemeEditorObj {
 }
 
 type ShowSettingsObj {
-  site_copyright: [TextLanguage!]!
-  site_description: [TextLanguage!]!
+  site_copyright: [StringLanguage!]!
+  site_description: [StringLanguage!]!
   site_name: String!
   site_short_name: String!
 }
@@ -737,16 +737,16 @@ enum SortDirectionEnum {
 
 type StaffGroupUser {
   color: String
-  group_name: [TextLanguage!]!
+  group_name: [StringLanguage!]!
   id: Int!
 }
 
-type TextLanguage {
+type StringLanguage {
   language_code: String!
   value: String!
 }
 
-input TextLanguageInput {
+input StringLanguageInput {
   language_code: String!
   value: String!
 }

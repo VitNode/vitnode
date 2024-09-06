@@ -2,10 +2,10 @@ import * as Types from '../../../../types';
 
 import gql from 'graphql-tag';
 export type Admin__Core_Styles__Nav__CreateMutationVariables = Types.Exact<{
-  description: Array<Types.TextLanguageInput> | Types.TextLanguageInput;
+  description: Array<Types.StringLanguageInput> | Types.StringLanguageInput;
   external: Types.Scalars['Boolean']['input'];
   href: Types.Scalars['String']['input'];
-  name: Array<Types.TextLanguageInput> | Types.TextLanguageInput;
+  name: Array<Types.StringLanguageInput> | Types.StringLanguageInput;
   icon?: Types.InputMaybe<Types.Scalars['String']['input']>;
 }>;
 
@@ -14,7 +14,7 @@ export type Admin__Core_Styles__Nav__CreateMutation = { __typename?: 'Mutation',
 
 
 export const Admin__Core_Styles__Nav__Create = gql`
-    mutation Admin__core_styles__nav__create($description: [TextLanguageInput!]!, $external: Boolean!, $href: String!, $name: [TextLanguageInput!]!, $icon: String) {
+    mutation Admin__core_styles__nav__create($description: [StringLanguageInput!]!, $external: Boolean!, $href: String!, $name: [StringLanguageInput!]!, $icon: String) {
   admin__core_styles__nav__create(
     description: $description
     external: $external

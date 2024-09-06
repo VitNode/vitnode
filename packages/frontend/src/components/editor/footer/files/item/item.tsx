@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { TextLanguage } from '@/graphql/types';
+import { StringLanguage } from '@/graphql/types';
 import { cn } from '@/helpers/classnames';
 import { CONFIG } from '@/helpers/config-with-env';
 import { JSONContent } from '@tiptap/react';
@@ -121,7 +121,7 @@ export const ItemListFilesFooterEditor = ({
             onClick={async () => {
               // Remove files from the editor
               if (Array.isArray(value)) {
-                const content: TextLanguage[] = value.map(item => ({
+                const content: StringLanguage[] = value.map(item => ({
                   language_code: item.language_code,
                   value: handleDelete({
                     content: item.value,

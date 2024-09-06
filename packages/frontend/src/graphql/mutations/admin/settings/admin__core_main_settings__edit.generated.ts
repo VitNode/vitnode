@@ -4,8 +4,8 @@ import gql from 'graphql-tag';
 export type Admin__Core_Main_Settings__EditMutationVariables = Types.Exact<{
   siteName: Types.Scalars['String']['input'];
   siteShortName: Types.Scalars['String']['input'];
-  siteDescription: Array<Types.TextLanguageInput> | Types.TextLanguageInput;
-  siteCopyright: Array<Types.TextLanguageInput> | Types.TextLanguageInput;
+  siteDescription: Array<Types.StringLanguageInput> | Types.StringLanguageInput;
+  siteCopyright: Array<Types.StringLanguageInput> | Types.StringLanguageInput;
 }>;
 
 
@@ -13,7 +13,7 @@ export type Admin__Core_Main_Settings__EditMutation = { __typename?: 'Mutation',
 
 
 export const Admin__Core_Main_Settings__Edit = gql`
-    mutation Admin__core_main_settings__edit($siteName: String!, $siteShortName: String!, $siteDescription: [TextLanguageInput!]!, $siteCopyright: [TextLanguageInput!]!) {
+    mutation Admin__core_main_settings__edit($siteName: String!, $siteShortName: String!, $siteDescription: [StringLanguageInput!]!, $siteCopyright: [StringLanguageInput!]!) {
   admin__core_main_settings__edit(
     site_name: $siteName
     site_short_name: $siteShortName

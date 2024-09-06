@@ -1,9 +1,9 @@
 mutation Admin__core_styles__nav__edit(
-  $description: [TextLanguageInput!]!
+  $description: [StringLanguageInput!]!
   $external: Boolean!
   $href: String!
   $id: Int!
-  $name: [TextLanguageInput!]!
+  $name: [StringLanguageInput!]!
   $icon: String
 ) {
   admin__core_styles__nav__edit(

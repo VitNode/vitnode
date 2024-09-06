@@ -1,4 +1,4 @@
-import { TextLanguage } from '@/graphql/types';
+import { StringLanguage } from '@/graphql/types';
 import { removeSpecialCharacters } from '@/helpers/special-characters';
 import { useLocale } from 'next-intl';
 
@@ -7,7 +7,7 @@ const getConvertTextLang = ({
   text,
 }: {
   locale: string;
-  text?: TextLanguage[];
+  text?: StringLanguage[];
 }): string => {
   if (!text || text.length === 0) {
     return '';
@@ -33,7 +33,7 @@ export const getConvertNameToLink = ({
 }: {
   id: number;
   locale: string;
-  name: TextLanguage[];
+  name: StringLanguage[];
 }) => {
   const text = removeSpecialCharacters(
     getConvertTextLang({ locale, text: name }),
@@ -46,18 +46,18 @@ export const useTextLang = () => {
   const locale = useLocale();
 
   return {
-    convertText: (text?: TextLanguage[]) =>
+    convertText: (text?: StringLanguage[]) =>
       getConvertTextLang({ locale, text }),
-    convertNameToLink: ({ id, name }: { id: number; name: TextLanguage[] }) =>
+    convertNameToLink: ({ id, name }: { id: number; name: StringLanguage[] }) =>
       getConvertNameToLink({ id, name, locale }),
   };
 };
 
 export const getTextLang = ({ locale }: { locale: string }) => {
   return {
-    convertText: (text?: TextLanguage[]) =>
+    convertText: (text?: StringLanguage[]) =>
       getConvertTextLang({ locale, text }),
-    convertNameToLink: ({ id, name }: { id: number; name: TextLanguage[] }) =>
+    convertNameToLink: ({ id, name }: { id: number; name: StringLanguage[] }) =>
       getConvertNameToLink({ id, name, locale }),
   };
 };

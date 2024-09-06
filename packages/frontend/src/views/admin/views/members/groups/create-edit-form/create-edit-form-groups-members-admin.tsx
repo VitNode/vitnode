@@ -5,7 +5,7 @@ import {
   AutoFormInputProps,
 } from '@/components/form/fields/input';
 import { AutoFormSwitch } from '@/components/form/fields/switch';
-import { AutoFormTextLanguageInput } from '@/components/form/fields/text-language-input';
+import { AutoFormStringLanguageInput } from '@/components/form/fields/text-language-input';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import {
@@ -90,7 +90,7 @@ export const CreateEditFormGroupsMembersAdmin = ({
         fields={[
           {
             id: 'main.name',
-            component: AutoFormTextLanguageInput,
+            component: AutoFormStringLanguageInput,
             label: t('create_edit.name'),
           },
           {

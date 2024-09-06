@@ -2,7 +2,7 @@ import { core_groups, core_groups_names } from '@/database/schema/groups';
 import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
 
-import { ParserTextLanguageCoreHelpersService } from '../../../helpers/text_language/parser/parser.service';
+import { ParserStringLanguageCoreHelpersService } from '../../../helpers/text_language/parser/parser.service';
 import { ShowAdminGroups } from '../show/show.dto';
 import { CreateAdminGroupsArgs } from './create.dto';
 
@@ -10,7 +10,7 @@ import { CreateAdminGroupsArgs } from './create.dto';
 export class CreateAdminGroupsService {
   constructor(
     private readonly databaseService: InternalDatabaseService,
-    private readonly parserTextLang: ParserTextLanguageCoreHelpersService,
+    private readonly parserTextLang: ParserStringLanguageCoreHelpersService,
   ) {}
 
   async create({

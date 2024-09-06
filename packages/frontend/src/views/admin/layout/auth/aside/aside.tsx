@@ -25,10 +25,15 @@ export const AsideAuthAdmin = () => {
       <div className="space-y-2 px-4 pt-2 md:px-3 md:pt-4">
         <div className="flex flex-row items-center justify-between pb-2">
           <Link href="/admin/core/dashboard">
-            <LogoVitNode className="h-8" />
+            <LogoVitNode className="h-8" small />
           </Link>
 
-          <AvatarAsideAuthAdmin />
+          <div className="flex items-center gap-2">
+            <LanguageSwitcher />
+            <ThemeSwitcher />
+
+            <AvatarAsideAuthAdmin />
+          </div>
         </div>
 
         <SearchAsideAuthAdmin />
@@ -39,11 +44,6 @@ export const AsideAuthAdmin = () => {
           <NavAdmin />
         </div>
       </ScrollArea>
-
-      <div className="flex flex-row items-center gap-1 border-t px-4 py-2">
-        <LanguageSwitcher />
-        <ThemeSwitcher />
-      </div>
     </aside>
   );
 };

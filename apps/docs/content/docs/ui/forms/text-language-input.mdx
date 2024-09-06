@@ -18,7 +18,7 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import * as z from 'zod';
 import { zodLanguageInput } from 'vitnode-frontend/helpers/zod';
 import { AutoForm } from 'vitnode-frontend/form/auto-form';
-import { AutoFormTextLanguageInput } from 'vitnode-frontend/form/fields/text-language-input';
+import { AutoFormStringLanguageInput } from 'vitnode-frontend/form/fields/text-language-input';
 ```
 
 ```ts
@@ -33,7 +33,7 @@ const formSchema = z.object({
   fields={[
     {
       id: 'description',
-      component: AutoFormTextLanguageInput,
+      component: AutoFormStringLanguageInput,
     },
   ]}
 />
@@ -43,11 +43,11 @@ const formSchema = z.object({
 
   <Tab value="Manual">
 ```ts
-import { TextLanguageInput } from 'vitnode-frontend/components/ui/text-language-input'; 
+import { StringLanguageInput } from 'vitnode-frontend/components/ui/text-language-input'; 
 ```
 
 ```tsx
-<TextLanguageInput onChange={onChange} value={value} />
+<StringLanguageInput onChange={onChange} value={value} />
 ```
 
   </Tab>
@@ -61,11 +61,11 @@ import { TypeTable } from 'fumadocs-ui/components/type-table';
   type={{
     onChange: {
       description: 'Function to be called when the value changes.',
-      type: '(value: value: TextLanguage[]]) => void',
+      type: '(value: value: StringLanguage[]]) => void',
     },
     value: {
       description: 'Value of the input.',
-      type: 'TextLanguage[]',
+      type: 'StringLanguage[]',
     },
   }}
 />

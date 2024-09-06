@@ -1,4 +1,4 @@
-import { TextLanguage } from '@/graphql/types';
+import { StringLanguage } from '@/graphql/types';
 import { X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import React from 'react';
@@ -13,7 +13,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '../popover';
 
 export interface GroupInputItem {
   id: number;
-  name: TextLanguage[];
+  name: StringLanguage[];
 }
 
 interface Props {

@@ -3,7 +3,7 @@ import {
   PageInfo,
   PaginationArgs,
   SortDirectionEnum,
-  TextLanguage,
+  StringLanguage,
   TransformString,
 } from '@/utils';
 import {
@@ -64,8 +64,8 @@ export class ShowCoreMembersObj {
 
 @ObjectType()
 export class GroupShowCoreMembers {
-  @Field(() => [TextLanguage])
-  name: TextLanguage[];
+  @Field(() => [StringLanguage])
+  name: StringLanguage[];
 }
 
 @ObjectType()
