@@ -49,7 +49,6 @@ yarn-error.log*
 !/apps/backend/uploads/public/index.html
 !/apps/backend/uploads/private/index.html
 !/apps/backend/uploads/temp/index.html
-/apps/backend/schema.gql
 
 ## Configuration
 /apps/backend/src/plugins/core/

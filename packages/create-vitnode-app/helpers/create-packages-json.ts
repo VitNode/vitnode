@@ -132,6 +132,7 @@ export const createPackagesJSON = ({
       '@nestjs/common': '^10.4.1',
       '@nestjs/core': '^10.4.1',
       '@nestjs/graphql': '^12.2.0',
+      '@nestjs/schedule': '^4.1.0',
       '@react-email/components': '^0.0.24',
       'class-transformer': '^0.5.1',
       'class-validator': '^0.14.1',
