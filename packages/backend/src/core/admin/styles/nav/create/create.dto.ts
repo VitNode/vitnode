@@ -1,8 +1,8 @@
 import {
-  IsTextLanguageInput,
-  TextLanguageInput,
+  IsStringLanguageInput,
+  StringLanguageInput,
   TransformString,
-  TransformTextLanguageInput,
+  TransformStringLanguageInput,
 } from '@/utils';
 import { ArgsType, Field } from '@nestjs/graphql';
 import { Transform } from 'class-transformer';
@@ -18,10 +18,10 @@ import {
 export class CreateAdminNavStylesArgs {
   @IsArray()
   @ValidateNested({ each: true })
-  @IsTextLanguageInput()
-  @Transform(TransformTextLanguageInput)
-  @Field(() => [TextLanguageInput])
-  description: TextLanguageInput[];
+  @IsStringLanguageInput()
+  @Transform(TransformStringLanguageInput)
+  @Field(() => [StringLanguageInput])
+  description: StringLanguageInput[];
 
   @Field(() => Boolean)
   external: boolean;
@@ -38,8 +38,8 @@ export class CreateAdminNavStylesArgs {
   @IsArray()
   @ValidateNested({ each: true })
   @ArrayMinSize(1)
-  @IsTextLanguageInput()
-  @Transform(TransformTextLanguageInput)
-  @Field(() => [TextLanguageInput])
-  name: TextLanguageInput[];
+  @IsStringLanguageInput()
+  @Transform(TransformStringLanguageInput)
+  @Field(() => [StringLanguageInput])
+  name: StringLanguageInput[];
 }

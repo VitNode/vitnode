@@ -1,7 +1,7 @@
 mutation Admin__core_terms_settings__edit(
-  $content: [TextLanguageInput!]!
+  $content: [StringLanguageInput!]!
   $id: Float!
-  $title: [TextLanguageInput!]!
+  $title: [StringLanguageInput!]!
   $href: String
   $code: String!
 ) {

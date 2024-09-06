@@ -8,7 +8,7 @@ export type Admin_Core_Terms__ShowQueryVariables = Types.Exact<{
 }>;
 
 
-export type Admin_Core_Terms__ShowQuery = { __typename?: 'Query', core_terms__show: { __typename?: 'ShowCoreTermsObj', pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number, totalCount: number }, edges: Array<{ __typename?: 'ShowCoreTerms', code: string, created: Date, href?: string, id: number, updated: Date, content: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, title: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> }> } };
+export type Admin_Core_Terms__ShowQuery = { __typename?: 'Query', core_terms__show: { __typename?: 'ShowCoreTermsObj', pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number, totalCount: number }, edges: Array<{ __typename?: 'ShowCoreTerms', code: string, created: Date, href?: string, id: number, updated: Date, content: Array<{ __typename?: 'StringLanguage', language_code: string, value: string }>, title: Array<{ __typename?: 'StringLanguage', language_code: string, value: string }> }> } };
 
 
 export const Admin_Core_Terms__Show = gql`

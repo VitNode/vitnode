@@ -1,7 +1,7 @@
 import {
-  IsTextLanguageInput,
-  TextLanguageInput,
-  TransformTextLanguageInput,
+  IsStringLanguageInput,
+  StringLanguageInput,
+  TransformStringLanguageInput,
 } from '@/utils';
 import { ArgsType, Field, InputType, Int } from '@nestjs/graphql';
 import { Transform } from 'class-transformer';
@@ -32,8 +32,8 @@ export class CreateAdminGroupsArgs {
   @IsArray()
   @ValidateNested({ each: true })
   @ArrayMinSize(1)
-  @IsTextLanguageInput()
-  @Transform(TransformTextLanguageInput)
-  @Field(() => [TextLanguageInput])
-  name: TextLanguageInput[];
+  @IsStringLanguageInput()
+  @Transform(TransformStringLanguageInput)
+  @Field(() => [StringLanguageInput])
+  name: StringLanguageInput[];
 }

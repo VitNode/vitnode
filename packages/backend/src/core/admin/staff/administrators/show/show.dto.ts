@@ -3,7 +3,7 @@ import {
   PageInfo,
   PaginationArgs,
   SortDirectionEnum,
-  TextLanguage,
+  StringLanguage,
 } from '@/utils';
 import {
   ArgsType,
@@ -50,8 +50,8 @@ export class ShowAdminStaffAdministratorsObj {
 
 @ObjectType()
 export class StaffGroupUser extends OmitType(GroupUser, ['name'] as const) {
-  @Field(() => [TextLanguage])
-  group_name: TextLanguage[];
+  @Field(() => [StringLanguage])
+  group_name: StringLanguage[];
 }
 
 export const UserOrGroupCoreStaffUnion = createUnionType({

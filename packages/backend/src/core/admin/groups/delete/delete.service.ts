@@ -1,3 +1,4 @@
+import { StringLanguageHelper } from '@/core/helpers/string_language/helpers.service';
 import { core_groups } from '@/database/schema/groups';
 import { core_users } from '@/database/schema/users';
 import { NotFoundError } from '@/errors';
@@ -9,7 +10,10 @@ import { DeleteAdminGroupsArgs } from './delete.dto';
 
 @Injectable()
 export class DeleteAdminGroupsService {
-  constructor(private readonly databaseService: InternalDatabaseService) {}
+  constructor(
+    private readonly databaseService: InternalDatabaseService,
+    private readonly stringLanguageHelper: StringLanguageHelper,
+  ) {}
 
   async delete({ id }: DeleteAdminGroupsArgs): Promise<string> {
     const group = await this.databaseService.db.query.core_groups.findFirst({
@@ -42,6 +46,12 @@ export class DeleteAdminGroupsService {
     await this.databaseService.db
       .delete(core_groups)
       .where(eq(core_groups.id, id));
+
+    await this.stringLanguageHelper.delete({
+      database: core_groups,
+      item_id: group.id,
+      plugin_code: 'core',
+    });
 
     return 'Success!';
   }

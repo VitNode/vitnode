@@ -3,22 +3,7 @@ title: Internationalization (i18n)
 description: Translate your plugin to multiple languages.
 ---
 
-VitNode supports multiple languages out of the box. You can easily translate your content inside plugin. Input and WYSIWYG fields are supported also with i18n.
-
-Each translations are stored in database as `array`.
-
-```ts
-[
-  {
-    language_code: 'en',
-    value: 'Hello world',
-  },
-  {
-    language_code: 'pl',
-    value: 'Witaj świecie',
-  },
-];
-```
+VitNode supports multiple languages out of the box. You can easily translate your content inside plugin using `JSON` file. Input and WYSIWYG fields are supported also with i18n using `core_languages_words` database.
 
 ## Content
 
@@ -26,7 +11,7 @@ Thanks to [next-intl](https://next-intl-docs.vercel.app/) you can easily transla
 
 To translate your content select the plugin in `frontend`, go to `langs` folder and pick the language you want to translate. You can also add a new language by creating a new one in AdminCP.
 
-```json title="frontend/plugins/{your_plugin}/langs/en.json"
+```json title="apps/frontend/src/plugins/{your_plugin}/langs/en.json"
 {
   "{your_plugin}": {
     "hello": "Hello World",
@@ -40,7 +25,7 @@ To translate your content select the plugin in `frontend`, go to `langs` folder 
 
 You cannnot do this:
 
-```json title="frontend/plugins/{your_plugin}/langs/en.json"
+```json title="apps/frontend/src/plugins/{your_plugin}/langs/en.json"
 {
   "{your_plugin}": {
     "hello": "Hello World"
@@ -53,7 +38,7 @@ You cannnot do this:
 
 ## Translation Fields
 
-VitNode has a built-in translation fields for input and WYSIWYG fields. You can easily translate your content in the AdminCP.
+VitNode has a built-in translation fields for input and WYSIWYG fields.
 
 As an example, we will create a translation field for the `title` field in the `blog_categories` table.
 
@@ -80,90 +65,46 @@ export const blog_categories = pgTable('blog_categories', {
   created: timestamp('created').notNull().defaultNow(),
   position: integer('position').notNull().default(0),
 });
-
-export const blog_categories_relations = relations(
-  blog_categories,
-  ({ many }) => ({
-    name: many(blog_categories_name),
-  }),
-);
-
-export const blog_categories_name = pgTable(
-  'blog_categories_name',
-  {
-    id: serial('id').primaryKey(),
-    item_id: integer('item_id').references(() => blog_categories.id, {
-      onDelete: 'cascade',
-    }),
-    language_code: varchar('language_code')
-      .notNull()
-      .references(() => core_languages.code, {
-        onDelete: 'cascade',
-      }),
-    value: varchar('value', { length: 100 }).notNull(),
-  },
-  table => ({
-    item_id_idx: index('blog_categories_name_item_id_idx').on(table.item_id),
-    language_code_idx: index('blog_categories_name_language_code_idx').on(
-      table.language_code,
-    ),
-  }),
-);
-
-export const blog_categories_name_relations = relations(
-  blog_categories_name,
-  ({ one }) => ({
-    file: one(blog_categories, {
-      fields: [blog_categories_name.item_id],
-      references: [blog_categories.id],
-    }),
-  }),
-);
 ```
-
-<Callout title="References">
-  Remember to set `onDelete: 'cascade'` action into references and set `indexes`
-  for best performerce. We want to delete translation when we delete main table.
-</Callout>
 
 ### Data Transfer Objects (DTO)
 
 #### Input
 
-Inside input DTO you can use `TextLanguageInput[]` for translation fields.
+Inside input DTO you can use `StringLanguageInput[]` for translation fields.
 
 ```ts title="backend/plugins/blog/categories/show/show.dto.ts"
 import { ArgsType, Field } from '@nestjs/graphql';
 import { IsArray } from 'class-validator';
 import { Transform } from 'class-transformer';
 import {
-  IsTextLanguageInput,
-  TextLanguageInput,
-  TransformTextLanguageInput,
+  IsStringLanguageInput,
+  StringLanguageInput,
+  TransformStringLanguageInput,
 } from 'vitnode-backend';
 
 @ArgsType()
 export class ShowBlogCategoriesArgs {
   @IsArray()
-  @IsTextLanguageInput()
-  @Transform(TransformTextLanguageInput)
-  @Field(() => [TextLanguageInput])
-  title: TextLanguageInput[];
+  @IsStringLanguageInput()
+  @Transform(TransformStringLanguageInput)
+  @Field(() => [StringLanguageInput])
+  title: StringLanguageInput[];
 }
 ```
 
 #### Object
 
-Inside object DTO you can use `TextLanguage` for translation fields.
+Inside object DTO you can use `StringLanguage` for translation fields.
 
 ```ts
 import { Field, ObjectType } from '@nestjs/graphql';
-import { TextLanguage } from 'vitnode-backend';
+import { StringLanguage } from 'vitnode-backend';
 
 @ObjectType()
 export class ShowBlogCategoriesObj {
-  @Field(() => [TextLanguage])
-  title: TextLanguage[];
+  @Field(() => [StringLanguage])
+  title: StringLanguage[];
 }
 ```
 
@@ -208,13 +149,13 @@ export class ShowBlogCategoriesService {
 
 ### Create / Edit
 
-To create or edit translation fields you need to use `ParserTextLanguageCoreHelpersService` service. This service will help you to parse the translation fields.
+To create or edit translation fields you need to use `ParserStringLanguageCoreHelpersService` service. This service will help you to parse the translation fields.
 
 ```ts title="backend/plugins/blog/categories/edit/edit.service.ts"
 import { Injectable } from '@nestjs/common';
 import {
   NotFoundError,
-  ParserTextLanguageCoreHelpersService,
+  ParserStringLanguageCoreHelpersService,
 } from 'vitnode-backend';
 
 import { EditBlogCategories } from './dto/show.obj';
@@ -226,7 +167,7 @@ import { blog_categories_name } from '@/plugins/blog/admin/database/schema/categ
 export class EditBlogCategoriesService {
   constructor(
     private databaseServices: DatabaseService,
-    private parserTextLang: ParserTextLanguageCoreHelpersService,
+    private parserTextLang: ParserStringLanguageCoreHelpersService,
   ) {}
 
   async edit({
@@ -257,13 +198,13 @@ export class EditBlogCategoriesService {
 
 ### Delete
 
-To delete translation fields you need to use `ParserTextLanguageCoreHelpersService` service. This service will help you to delete the translation fields and remove sub-features like mentions, attachments, etc.
+To delete translation fields you need to use `ParserStringLanguageCoreHelpersService` service. This service will help you to delete the translation fields and remove sub-features like mentions, attachments, etc.
 
 ```ts title="backend/plugins/blog/categories/delete/delete.service.ts"
 import { Injectable } from '@nestjs/common';
 import {
   NotFoundError,
-  ParserTextLanguageCoreHelpersService,
+  ParserStringLanguageCoreHelpersService,
 } from 'vitnode-backend';
 
 import { EditBlogCategories } from './dto/show.obj';
@@ -278,7 +219,7 @@ import {
 export class EditBlogCategoriesService {
   constructor(
     private databaseServices: DatabaseService,
-    private parserTextLang: ParserTextLanguageCoreHelpersService,
+    private parserTextLang: ParserStringLanguageCoreHelpersService,
   ) {}
 
   async delete({ id }: DeleteBlogCategoriesArgs): Promise<string> {
@@ -318,10 +259,10 @@ On the frontend you can display text depends on display language.
 ```tsx title="example.tsx"
 import { useTextLang } from 'vitnode-frontend/hooks/use-text-lang';
 
-import { TextLanguage } from '@/utils/graphql/graphql';
+import { StringLanguage } from '@/utils/graphql/graphql';
 
 interface Props {
-  value: TextLanguage[];
+  value: StringLanguage[];
 }
 
 export const ExampleComponent = ({ value }: Props) => {
@@ -336,10 +277,10 @@ export const ExampleComponent = ({ value }: Props) => {
 ```tsx title="example.tsx"
 import { useTextLang } from 'vitnode-frontend/hooks/use-text-lang';
 
-import { TextLanguage } from '@/utils/graphql/graphql';
+import { StringLanguage } from '@/utils/graphql/graphql';
 
 interface Props {
-  value: TextLanguage[];
+  value: StringLanguage[];
   locale: string;
 }
 
@@ -432,7 +373,7 @@ import {
   FormLabel,
   FormMessage,
 } from 'vitnode-frontend/components/ui/form';
-import { TextLanguageInput } from 'vitnode-frontend/components/ui/text-language-input'; // [!code highlight]
+import { StringLanguageInput } from 'vitnode-frontend/components/ui/text-language-input'; // [!code highlight]
 
 import { useExample } from './use-example';
 
@@ -449,7 +390,7 @@ export const ExampleForm = () => {
             <FormItem>
               <FormLabel>Title</FormLabel>
               <FormControl>
-                <TextLanguageInput {...field} /> // [!code highlight]
+                <StringLanguageInput {...field} /> // [!code highlight]
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -469,7 +410,7 @@ export const ExampleForm = () => {
 };
 ```
 
-Instead of `TextLanguageInput` you can use `Editor` component. [Read more](/docs/ui/editor#form).
+Instead of `StringLanguageInput` you can use `Editor` component. [Read more](/docs/ui/editor#form).
 
 </Step>
 

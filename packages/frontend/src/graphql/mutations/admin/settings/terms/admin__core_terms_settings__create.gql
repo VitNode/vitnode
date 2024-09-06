@@ -1,6 +1,6 @@
 mutation Admin__core_terms_settings__create(
-  $content: [TextLanguageInput!]!
-  $title: [TextLanguageInput!]!
+  $content: [StringLanguageInput!]!
+  $title: [StringLanguageInput!]!
   $href: String
   $code: String!
 ) {

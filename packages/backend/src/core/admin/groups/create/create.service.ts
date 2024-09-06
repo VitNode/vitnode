@@ -1,8 +1,8 @@
-import { core_groups, core_groups_names } from '@/database/schema/groups';
+import { StringLanguageHelper } from '@/core/helpers/string_language/helpers.service';
+import { core_groups } from '@/database/schema/groups';
 import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
 
-import { ParserTextLanguageCoreHelpersService } from '../../../helpers/text_language/parser/parser.service';
 import { ShowAdminGroups } from '../show/show.dto';
 import { CreateAdminGroupsArgs } from './create.dto';
 
@@ -10,7 +10,7 @@ import { CreateAdminGroupsArgs } from './create.dto';
 export class CreateAdminGroupsService {
   constructor(
     private readonly databaseService: InternalDatabaseService,
-    private readonly parserTextLang: ParserTextLanguageCoreHelpersService,
+    private readonly stringLanguageHelper: StringLanguageHelper,
   ) {}
 
   async create({
@@ -18,7 +18,7 @@ export class CreateAdminGroupsService {
     name,
     color,
   }: CreateAdminGroupsArgs): Promise<ShowAdminGroups> {
-    const group = await this.databaseService.db
+    const [group] = await this.databaseService.db
       .insert(core_groups)
       .values({
         ...content,
@@ -26,14 +26,16 @@ export class CreateAdminGroupsService {
       })
       .returning();
 
-    const groupNames = await this.parserTextLang.parse({
-      item_id: group[0].id,
-      database: core_groups_names,
+    const groupNames = await this.stringLanguageHelper.parse({
+      item_id: group.id,
+      plugin_code: 'core',
+      database: core_groups,
       data: name,
+      variable: 'name',
     });
 
     return {
-      ...group[0],
+      ...group,
       name: groupNames,
       users_count: 0,
       content,

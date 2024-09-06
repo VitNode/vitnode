@@ -42,7 +42,7 @@ import { Editor } from 'vitnode-frontend/components/editor/editor';
 ```
 
 ```ts
-const [value, setValue] = useState<TextLanguage[]>([]);
+const [value, setValue] = useState<StringLanguage[]>([]);
 ```
 
 ```tsx
@@ -60,11 +60,11 @@ import { TypeTable } from 'fumadocs-ui/components/type-table';
   type={{
     onChange: {
       description: 'Callback when the value changes.',
-      type: '(value: TextLanguage[]) => void | (value: string) => void',
+      type: '(value: StringLanguage[]) => void | (value: string) => void',
     },
     value: {
       description: 'Value of the editor.',
-      type: 'TextLanguage[] | string',
+      type: 'StringLanguage[] | string',
     },
     disableLanguages: {
       description: 'Disable languages in editor.',
@@ -143,7 +143,7 @@ import { ReadOnlyEditor } from 'vitnode-frontend/components/editor/read-only';
   type={{
     value: {
       description: 'Value of the editor.',
-      type: 'TextLanguage[]',
+      type: 'StringLanguage[]',
       default: '[]',
     },
     allowDownloadAttachments: {

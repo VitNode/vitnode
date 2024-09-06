@@ -1,8 +1,8 @@
 'use client';
 
 import { FormControl, FormMessage } from '@/components/ui/form';
-import { TextLanguageInput } from '@/components/ui/text-language-input';
-import { TextLanguage } from '@/graphql/types';
+import { StringLanguageInput } from '@/components/ui/text-language-input';
+import { StringLanguage } from '@/graphql/types';
 import { FieldValues } from 'react-hook-form';
 
 import { AutoFormItemProps } from '../auto-form';
@@ -11,12 +11,12 @@ import { AutoFormLabel } from './common/label';
 import { AutoFormTooltip } from './common/tooltip';
 import { AutoFormWrapper } from './common/wrapper';
 
-export type AutoFormTextLanguageInputProps = Omit<
-  React.ComponentProps<typeof TextLanguageInput>,
+export type AutoFormStringLanguageInputProps = Omit<
+  React.ComponentProps<typeof StringLanguageInput>,
   'onChange' | 'value'
 >;
 
-export function AutoFormTextLanguageInput<T extends FieldValues>({
+export function AutoFormStringLanguageInput<T extends FieldValues>({
   field,
   zodInputProps,
   label,
@@ -28,7 +28,7 @@ export function AutoFormTextLanguageInput<T extends FieldValues>({
   className,
   childComponent: ChildComponent,
 }: {
-  componentProps?: AutoFormTextLanguageInputProps;
+  componentProps?: AutoFormStringLanguageInputProps;
 } & AutoFormItemProps<T>) {
   return (
     <AutoFormWrapper theme={theme}>
@@ -46,13 +46,13 @@ export function AutoFormTextLanguageInput<T extends FieldValues>({
         withChildren={!!ChildComponent}
       >
         <FormControl>
-          <TextLanguageInput
+          <StringLanguageInput
             {...field}
             {...zodInputProps}
             {...componentProps}
             disabled={isDisabled || componentProps?.disabled}
-            onChange={field.onChange as (value: TextLanguage[]) => void}
-            value={field.value as TextLanguage[]}
+            onChange={field.onChange as (value: StringLanguage[]) => void}
+            value={field.value as StringLanguage[]}
           />
         </FormControl>
         {ChildComponent && <ChildComponent field={field} />}

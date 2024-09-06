@@ -1,7 +1,7 @@
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
 import { Field, GqlExecutionContext, Int, ObjectType } from '@nestjs/graphql';
 
-import { GqlContext, TextLanguage } from '../utils';
+import { GqlContext, StringLanguage } from '../utils';
 
 export const CurrentUser = createParamDecorator(
   (_data: unknown, payloadContext: ExecutionContext) => {
@@ -20,8 +20,8 @@ export class GroupUser {
   @Field(() => Int)
   id: number;
 
-  @Field(() => [TextLanguage])
-  name: TextLanguage[];
+  @Field(() => [StringLanguage])
+  name: StringLanguage[];
 }
 
 @ObjectType()

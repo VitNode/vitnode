@@ -2,21 +2,21 @@ import { core_files_using } from '@/database/schema/files';
 import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
-interface TextLanguageJSONContentType {
+interface StringLanguageJSONContentType {
   attrs?: { id: number };
-  content?: TextLanguageJSONContentType[];
+  content?: StringLanguageJSONContentType[];
   type: string;
 }
 
-export interface InfoFromTextLanguageContentReturnValues {
+export interface InfoFromStringLanguageContentReturnValues {
   fileIds: number[];
 }
 
 @Injectable()
-export class HelpersParserTextLanguageCoreHelpersService {
+export class HelpersParserStringLanguageCoreHelpersService {
   constructor(protected databaseService: InternalDatabaseService) {}
 
-  protected state: InfoFromTextLanguageContentReturnValues = {
+  protected state: InfoFromStringLanguageContentReturnValues = {
     fileIds: [],
   };
 
@@ -24,10 +24,10 @@ export class HelpersParserTextLanguageCoreHelpersService {
     content,
   }: {
     content: string;
-  }): InfoFromTextLanguageContentReturnValues {
+  }): InfoFromStringLanguageContentReturnValues {
     const fileIds: number[] = [];
 
-    const mapContent = (values: TextLanguageJSONContentType[]) => {
+    const mapContent = (values: StringLanguageJSONContentType[]) => {
       values.forEach(value => {
         if (!value.attrs) return;
 
@@ -43,7 +43,8 @@ export class HelpersParserTextLanguageCoreHelpersService {
     };
 
     try {
-      const json = JSON.parse(content).content as TextLanguageJSONContentType[];
+      const json = JSON.parse(content)
+        .content as StringLanguageJSONContentType[];
 
       mapContent(json);
     } catch (_) {
@@ -57,8 +58,8 @@ export class HelpersParserTextLanguageCoreHelpersService {
     fileIds,
     oldFileIds,
   }: {
-    fileIds: InfoFromTextLanguageContentReturnValues['fileIds'];
-    oldFileIds: InfoFromTextLanguageContentReturnValues['fileIds'];
+    fileIds: InfoFromStringLanguageContentReturnValues['fileIds'];
+    oldFileIds: InfoFromStringLanguageContentReturnValues['fileIds'];
   }) {
     await Promise.all(
       fileIds.map(async id => {

@@ -1,8 +1,11 @@
+import { relations } from 'drizzle-orm';
 import {
   boolean,
   index,
+  integer,
   pgTable,
   serial,
+  text,
   timestamp,
   varchar,
 } from 'drizzle-orm/pg-core';
@@ -29,5 +32,37 @@ export const core_languages = pgTable(
   table => ({
     code_idx: index('core_languages_code_idx').on(table.code),
     name_idx: index('core_languages_name_idx').on(table.name),
+  }),
+);
+
+export const core_languages_words = pgTable(
+  'core_languages_words',
+  {
+    id: serial('id').primaryKey(),
+    language_code: varchar('language_code')
+      .notNull()
+      .references(() => core_languages.code, {
+        onDelete: 'cascade',
+      }),
+    plugin_code: varchar('plugin_code', { length: 50 }).notNull(),
+    item_id: integer('item_id').notNull(),
+    value: text('value').notNull(),
+    table_name: varchar('table_name', { length: 255 }).notNull(),
+    variable: varchar('variable', { length: 255 }).notNull(),
+  },
+  table => ({
+    language_code_idx: index('core_languages_words_lang_code_idx').on(
+      table.language_code,
+    ),
+  }),
+);
+
+export const core_languages_words_relations = relations(
+  core_languages_words,
+  ({ one }) => ({
+    language: one(core_languages, {
+      fields: [core_languages_words.language_code],
+      references: [core_languages.code],
+    }),
   }),
 );

@@ -1,4 +1,4 @@
-import { TextLanguage } from '@/graphql/types';
+import { StringLanguage } from '@/graphql/types';
 import { formatBytes } from '@/helpers/format-bytes';
 import { useTranslations } from 'next-intl';
 import React from 'react';
@@ -24,7 +24,7 @@ export interface UploadFilesHandlerEditorArgs {
     folder: string;
     plugin: string;
   };
-  value: string | TextLanguage[];
+  value: string | StringLanguage[];
 }
 
 export const useUploadFilesHandlerEditor = ({

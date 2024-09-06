@@ -1,10 +1,10 @@
 import { Global, Module } from '@nestjs/common';
 
-import { ParserTextLanguageCoreHelpersService } from './text_language/parser/parser.service';
+import { StringLanguageHelper } from './string_language/helpers.service';
 
 @Global()
 @Module({
-  providers: [ParserTextLanguageCoreHelpersService],
-  exports: [ParserTextLanguageCoreHelpersService],
+  providers: [StringLanguageHelper],
+  exports: [StringLanguageHelper],
 })
 export class GlobalCoreHelpersModule {}

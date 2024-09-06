@@ -1,6 +1,6 @@
 import { AdminAuthGuards } from '@/utils';
 import { UseGuards } from '@nestjs/common';
-import { Args, Int, Mutation, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 import { DeleteAdminTermsSettingsService } from './delete.service';
 
@@ -11,8 +11,8 @@ export class DeleteAdminTermsSettingsResolver {
   @Mutation(() => String)
   @UseGuards(AdminAuthGuards)
   async admin__core_terms_settings__delete(
-    @Args({ name: 'id', type: () => Int }) id: number,
+    @Args({ name: 'code', type: () => String }) code: string,
   ): Promise<string> {
-    return this.service.delete({ id });
+    return this.service.delete({ code });
   }
 }

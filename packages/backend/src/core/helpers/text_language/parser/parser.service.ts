@@ -1,28 +1,28 @@
 import { CustomError } from '@/errors';
-import { TextLanguageInput } from '@/utils';
+import { StringLanguageInput } from '@/utils';
 import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
 import { eq, Placeholder, SQL } from 'drizzle-orm';
 import { PgTableWithColumns, TableConfig } from 'drizzle-orm/pg-core';
 
 import {
-  HelpersParserTextLanguageCoreHelpersService,
-  InfoFromTextLanguageContentReturnValues,
+  HelpersParserStringLanguageCoreHelpersService,
+  InfoFromStringLanguageContentReturnValues,
 } from './helpers.service';
 
 interface Args<T extends TableConfig> {
-  data: TextLanguageInput[];
+  data: StringLanguageInput[];
   database: PgTableWithColumns<T>;
   item_id: number;
 }
 
-interface ReturnValues extends TextLanguageInput {
+interface ReturnValues extends StringLanguageInput {
   id: number;
   item_id: number;
 }
 
 @Injectable()
-export class ParserTextLanguageCoreHelpersService extends HelpersParserTextLanguageCoreHelpersService {
+export class ParserStringLanguageCoreHelpersService extends HelpersParserStringLanguageCoreHelpersService {
   constructor(databaseService: InternalDatabaseService) {
     super(databaseService);
   }
@@ -32,21 +32,22 @@ export class ParserTextLanguageCoreHelpersService extends HelpersParserTextLangu
     infoOldData,
   }: {
     content: string;
-    infoOldData: InfoFromTextLanguageContentReturnValues[];
+    infoOldData: InfoFromStringLanguageContentReturnValues[];
   }) {
-    const oldInfo = infoOldData.reduce<InfoFromTextLanguageContentReturnValues>(
-      (acc, item) => {
-        // Check if already exists file id
-        item.fileIds.forEach(id => {
-          if (!acc.fileIds.includes(id)) {
-            acc.fileIds.push(id);
-          }
-        });
+    const oldInfo =
+      infoOldData.reduce<InfoFromStringLanguageContentReturnValues>(
+        (acc, item) => {
+          // Check if already exists file id
+          item.fileIds.forEach(id => {
+            if (!acc.fileIds.includes(id)) {
+              acc.fileIds.push(id);
+            }
+          });
 
-        return acc;
-      },
-      { fileIds: [] },
-    );
+          return acc;
+        },
+        { fileIds: [] },
+      );
     const info = this.getInfoFromContent({ content });
 
     await this.parseFiles({
@@ -78,9 +79,8 @@ export class ParserTextLanguageCoreHelpersService extends HelpersParserTextLangu
       .from(database)
       .where(eq(database.item_id, item_id))) as unknown as ReturnValues[];
 
-    const infoOldData: InfoFromTextLanguageContentReturnValues[] = oldData.map(
-      item => this.getInfoFromContent({ content: item.value }),
-    );
+    const infoOldData: InfoFromStringLanguageContentReturnValues[] =
+      oldData.map(item => this.getInfoFromContent({ content: item.value }));
 
     await this.contentParser({
       content: '',
@@ -112,10 +112,10 @@ export class ParserTextLanguageCoreHelpersService extends HelpersParserTextLangu
       .from(database)
       .where(eq(database.item_id, item_id))) as unknown as ReturnValues[];
 
-    const infoOldData: InfoFromTextLanguageContentReturnValues[] = oldData.map(
-      item => this.getInfoFromContent({ content: item.value }),
-    );
+    const infoOldData: InfoFromStringLanguageContentReturnValues[] =
+      oldData.map(item => this.getInfoFromContent({ content: item.value }));
 
+    // Update
     const updateData: ReturnValues[] = await Promise.all(
       data.map(async item => {
         const itemExist = oldData.find(

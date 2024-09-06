@@ -1,11 +1,11 @@
-import { core_groups, core_groups_names } from '@/database/schema/groups';
+import { StringLanguageHelper } from '@/core/helpers/string_language/helpers.service';
+import { core_groups } from '@/database/schema/groups';
 import { core_users } from '@/database/schema/users';
 import { NotFoundError } from '@/errors';
 import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
 import { count, eq } from 'drizzle-orm';
 
-import { ParserTextLanguageCoreHelpersService } from '../../../helpers/text_language/parser/parser.service';
 import { ShowAdminGroups } from '../show/show.dto';
 import { EditAdminGroupsArgs } from './edit.dto';
 
@@ -13,7 +13,7 @@ import { EditAdminGroupsArgs } from './edit.dto';
 export class EditAdminGroupsService {
   constructor(
     private readonly databaseService: InternalDatabaseService,
-    private readonly parserTextLang: ParserTextLanguageCoreHelpersService,
+    private readonly stringLanguageHelper: StringLanguageHelper,
   ) {}
 
   async edit({
@@ -30,10 +30,12 @@ export class EditAdminGroupsService {
       throw new NotFoundError('Group');
     }
 
-    await this.parserTextLang.parse({
-      item_id: id,
-      database: core_groups_names,
+    const groupNames = await this.stringLanguageHelper.parse({
+      item_id: group.id,
+      plugin_code: 'core',
+      database: core_groups,
       data: name,
+      variable: 'name',
     });
 
     const usersCount = await this.databaseService.db
@@ -54,9 +56,6 @@ export class EditAdminGroupsService {
     const updateGroup =
       await this.databaseService.db.query.core_groups.findFirst({
         where: (table, { eq }) => eq(table.id, id),
-        with: {
-          name: true,
-        },
       });
 
     if (!updateGroup) {
@@ -66,6 +65,7 @@ export class EditAdminGroupsService {
     return {
       users_count: usersCount[0].count,
       ...updateGroup,
+      name: groupNames,
       content,
     };
   }

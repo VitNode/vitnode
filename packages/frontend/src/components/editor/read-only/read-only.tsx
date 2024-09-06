@@ -1,4 +1,4 @@
-import { TextLanguage } from '@/graphql/types';
+import { StringLanguage } from '@/graphql/types';
 import { generateHTML } from '@tiptap/html';
 import { JSONContent } from '@tiptap/react';
 import parse, { Element, HTMLReactParserOptions } from 'html-react-parser';
@@ -17,7 +17,7 @@ export const ReadOnlyEditor = ({
 }: {
   allowDownloadAttachments?: boolean;
   className?: string;
-  value: TextLanguage[];
+  value: StringLanguage[];
 }) => {
   const locale = useLocale();
 

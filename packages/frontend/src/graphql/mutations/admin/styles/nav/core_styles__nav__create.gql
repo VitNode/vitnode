@@ -1,8 +1,8 @@
 mutation Admin__core_styles__nav__create(
-  $description: [TextLanguageInput!]!
+  $description: [StringLanguageInput!]!
   $external: Boolean!
   $href: String!
-  $name: [TextLanguageInput!]!
+  $name: [StringLanguageInput!]!
   $icon: String
 ) {
   admin__core_styles__nav__create(

@@ -2,7 +2,7 @@
 
 import { AutoForm } from '@/components/form/auto-form';
 import { AutoFormInput } from '@/components/form/fields/input';
-import { AutoFormTextLanguageInput } from '@/components/form/fields/text-language-input';
+import { AutoFormStringLanguageInput } from '@/components/form/fields/text-language-input';
 import { Core_Main_Settings__ShowQuery } from '@/graphql/queries/admin/settings/core_main_settings__show.generated';
 import { useTranslations } from 'next-intl';
 
@@ -29,12 +29,12 @@ export const ContentMainSettingsCoreAdmin = (
         },
         {
           id: 'description',
-          component: AutoFormTextLanguageInput,
+          component: AutoFormStringLanguageInput,
           label: t('description.label'),
         },
         {
           id: 'copyright',
-          component: AutoFormTextLanguageInput,
+          component: AutoFormStringLanguageInput,
           label: t('copyright.label'),
         },
       ]}

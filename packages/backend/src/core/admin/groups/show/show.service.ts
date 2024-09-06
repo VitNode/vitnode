@@ -1,10 +1,10 @@
-import { core_groups, core_groups_names } from '@/database/schema/groups';
+import { core_groups } from '@/database/schema/groups';
 import { core_users } from '@/database/schema/users';
 import { inputPaginationCursor, outputPagination } from '@/functions';
 import { SortDirectionEnum } from '@/utils';
 import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
-import { and, count, eq, ilike, inArray } from 'drizzle-orm';
+import { count, eq } from 'drizzle-orm';
 
 import { ShowAdminGroupsArgs, ShowAdminGroupsObj } from './show.dto';
 
@@ -16,18 +16,19 @@ export class ShowAdminGroupsService {
     cursor,
     first,
     last,
-    search,
+    // search,
     sortBy,
   }: ShowAdminGroupsArgs): Promise<ShowAdminGroupsObj> {
-    let filtersName: number[] = [];
+    // TODO: Add search by name
+    // let filtersName: number[] = [];
 
-    if (search) {
-      filtersName = await this.databaseService.db
-        .select({ item_id: core_groups_names.item_id })
-        .from(core_groups_names)
-        .where(ilike(core_groups_names.value, `%${search}%`))
-        .then(res => res.map(({ item_id }) => item_id));
-    }
+    // if (search) {
+    //   filtersName = await this.databaseService.db
+    //     .select({ item_id: core_groups_names.item_id })
+    //     .from(core_groups_names)
+    //     .where(ilike(core_groups_names.value, `%${search}%`))
+    //     .then(res => res.map(({ item_id }) => item_id));
+    // }
 
     const pagination = await inputPaginationCursor({
       cursor,
@@ -46,12 +47,12 @@ export class ShowAdminGroupsService {
       sortBy,
     });
 
-    const where =
-      filtersName.length > 0 ? inArray(core_groups.id, filtersName) : undefined;
+    // const where =
+    //   filtersName.length > 0 ? inArray(core_groups.id, filtersName) : undefined;
 
     const edges = await this.databaseService.db.query.core_groups.findMany({
       ...pagination,
-      where: and(pagination.where, where),
+      // where: and(pagination.where, where),
       with: {
         name: {
           columns: {
@@ -64,8 +65,8 @@ export class ShowAdminGroupsService {
 
     const totalCount = await this.databaseService.db
       .select({ count: count() })
-      .from(core_groups)
-      .where(where);
+      .from(core_groups);
+    // .where(where);
 
     const currentEdges = await Promise.all(
       edges.map(async edge => {
@@ -82,17 +83,14 @@ export class ShowAdminGroupsService {
     );
 
     return outputPagination({
-      edges:
-        search && filtersName.length === 0
-          ? []
-          : currentEdges.map(edge => ({
-              ...edge,
-              content: {
-                files_allow_upload: edge.files_allow_upload,
-                files_max_storage_for_submit: edge.files_max_storage_for_submit,
-                files_total_max_storage: edge.files_total_max_storage,
-              },
-            })),
+      edges: currentEdges.map(edge => ({
+        ...edge,
+        content: {
+          files_allow_upload: edge.files_allow_upload,
+          files_max_storage_for_submit: edge.files_max_storage_for_submit,
+          files_total_max_storage: edge.files_total_max_storage,
+        },
+      })),
       totalCount,
       first,
       cursor,

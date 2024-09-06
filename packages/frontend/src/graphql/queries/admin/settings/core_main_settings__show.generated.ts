@@ -4,7 +4,7 @@ import gql from 'graphql-tag';
 export type Core_Main_Settings__ShowQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
 
-export type Core_Main_Settings__ShowQuery = { __typename?: 'Query', core_settings__show: { __typename?: 'ShowSettingsObj', site_name: string, site_short_name: string, site_copyright: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }>, site_description: Array<{ __typename?: 'TextLanguage', language_code: string, value: string }> } };
+export type Core_Main_Settings__ShowQuery = { __typename?: 'Query', core_settings__show: { __typename?: 'ShowSettingsObj', site_name: string, site_short_name: string, site_copyright: Array<{ __typename?: 'StringLanguage', language_code: string, value: string }>, site_description: Array<{ __typename?: 'StringLanguage', language_code: string, value: string }> } };
 
 
 export const Core_Main_Settings__Show = gql`

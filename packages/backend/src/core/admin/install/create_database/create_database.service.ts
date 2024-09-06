@@ -1,5 +1,6 @@
+import { StringLanguageHelper } from '@/core/helpers/string_language/helpers.service';
 import { core_admin_permissions } from '@/database/schema/admins';
-import { core_groups, core_groups_names } from '@/database/schema/groups';
+import { core_groups } from '@/database/schema/groups';
 import { core_languages } from '@/database/schema/languages';
 import { core_moderators_permissions } from '@/database/schema/moderators';
 import { CustomError } from '@/errors';
@@ -9,7 +10,10 @@ import { count } from 'drizzle-orm';
 
 @Injectable()
 export class CreateDatabaseAdminInstallService {
-  constructor(private readonly databaseService: InternalDatabaseService) {}
+  constructor(
+    private readonly databaseService: InternalDatabaseService,
+    private readonly stringLanguageHelper: StringLanguageHelper,
+  ) {}
 
   protected throwError() {
     throw new CustomError({
@@ -50,7 +54,7 @@ export class CreateDatabaseAdminInstallService {
       this.throwError();
     }
 
-    const guestGroup = await this.databaseService.db
+    const [guestGroup] = await this.databaseService.db
       .insert(core_groups)
       .values({
         protected: true,
@@ -60,15 +64,20 @@ export class CreateDatabaseAdminInstallService {
       })
       .returning();
 
-    await this.databaseService.db.insert(core_groups_names).values([
-      {
-        item_id: guestGroup[0].id,
-        language_code: 'en',
-        value: 'Guest',
-      },
-    ]);
+    await this.stringLanguageHelper.parse({
+      item_id: guestGroup.id,
+      plugin_code: 'core',
+      database: core_groups,
+      data: [
+        {
+          language_code: 'en',
+          value: 'Guest',
+        },
+      ],
+      variable: 'name',
+    });
 
-    const memberGroup = await this.databaseService.db
+    const [memberGroup] = await this.databaseService.db
       .insert(core_groups)
       .values({
         protected: true,
@@ -76,15 +85,20 @@ export class CreateDatabaseAdminInstallService {
       })
       .returning();
 
-    await this.databaseService.db.insert(core_groups_names).values([
-      {
-        item_id: memberGroup[0].id,
-        language_code: 'en',
-        value: 'Member',
-      },
-    ]);
+    await this.stringLanguageHelper.parse({
+      item_id: memberGroup.id,
+      plugin_code: 'core',
+      database: core_groups,
+      data: [
+        {
+          language_code: 'en',
+          value: 'Member',
+        },
+      ],
+      variable: 'name',
+    });
 
-    const moderatorGroup = await this.databaseService.db
+    const [moderatorGroup] = await this.databaseService.db
       .insert(core_groups)
       .values({
         protected: true,
@@ -92,13 +106,18 @@ export class CreateDatabaseAdminInstallService {
       })
       .returning();
 
-    await this.databaseService.db.insert(core_groups_names).values([
-      {
-        item_id: moderatorGroup[0].id,
-        language_code: 'en',
-        value: 'Moderator',
-      },
-    ]);
+    await this.stringLanguageHelper.parse({
+      item_id: moderatorGroup.id,
+      plugin_code: 'core',
+      database: core_groups,
+      data: [
+        {
+          language_code: 'en',
+          value: 'Moderator',
+        },
+      ],
+      variable: 'name',
+    });
 
     await this.databaseService.db.insert(core_moderators_permissions).values({
       group_id: moderatorGroup[0].id,
@@ -106,7 +125,7 @@ export class CreateDatabaseAdminInstallService {
       protected: true,
     });
 
-    const adminGroup = await this.databaseService.db
+    const [adminGroup] = await this.databaseService.db
       .insert(core_groups)
       .values({
         protected: true,
@@ -115,13 +134,18 @@ export class CreateDatabaseAdminInstallService {
       })
       .returning();
 
-    await this.databaseService.db.insert(core_groups_names).values([
-      {
-        item_id: adminGroup[0].id,
-        language_code: 'en',
-        value: 'Administrator',
-      },
-    ]);
+    await this.stringLanguageHelper.parse({
+      item_id: adminGroup.id,
+      plugin_code: 'core',
+      database: core_groups,
+      data: [
+        {
+          language_code: 'en',
+          value: 'Administrator',
+        },
+      ],
+      variable: 'name',
+    });
 
     await this.databaseService.db.insert(core_admin_permissions).values({
       group_id: adminGroup[0].id,

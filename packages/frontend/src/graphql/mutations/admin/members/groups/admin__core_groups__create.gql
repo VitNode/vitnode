@@ -1,5 +1,5 @@
 mutation Admin__core_groups__create(
-  $name: [TextLanguageInput!]!
+  $name: [StringLanguageInput!]!
   $content: ContentCreateAdminGroups!
   $color: String
 ) {

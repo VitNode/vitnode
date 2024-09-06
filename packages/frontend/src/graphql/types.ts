@@ -143,8 +143,8 @@ export type EditAdminMembersObj = {
 
 export type EditAdminSettingsObj = {
   __typename?: 'EditAdminSettingsObj';
-  site_copyright: Array<TextLanguage>;
-  site_description: Array<TextLanguage>;
+  site_copyright: Array<StringLanguage>;
+  site_description: Array<StringLanguage>;
   site_name: Scalars['String']['output'];
 };
 
@@ -192,7 +192,7 @@ export type GroupUser = {
   __typename?: 'GroupUser';
   color?: Maybe<Scalars['String']['output']>;
   id: Scalars['Int']['output'];
-  name: Array<TextLanguage>;
+  name: Array<StringLanguage>;
 };
 
 export type HslColor = {
@@ -336,7 +336,7 @@ export type MutationAdmin__Core_Files__DeleteArgs = {
 export type MutationAdmin__Core_Groups__CreateArgs = {
   color?: InputMaybe<Scalars['String']['input']>;
   content: ContentCreateAdminGroups;
-  name: Array<TextLanguageInput>;
+  name: Array<StringLanguageInput>;
 };
 
 
@@ -349,7 +349,7 @@ export type MutationAdmin__Core_Groups__EditArgs = {
   color?: InputMaybe<Scalars['String']['input']>;
   content: ContentCreateAdminGroups;
   id: Scalars['Int']['input'];
-  name: Array<TextLanguageInput>;
+  name: Array<StringLanguageInput>;
 };
 
 
@@ -387,8 +387,8 @@ export type MutationAdmin__Core_Languages__EditArgs = {
 
 
 export type MutationAdmin__Core_Main_Settings__EditArgs = {
-  site_copyright: Array<TextLanguageInput>;
-  site_description: Array<TextLanguageInput>;
+  site_copyright: Array<StringLanguageInput>;
+  site_description: Array<StringLanguageInput>;
   site_name: Scalars['String']['input'];
   site_short_name: Scalars['String']['input'];
 };
@@ -541,11 +541,11 @@ export type MutationAdmin__Core_Styles__Editor__EditArgs = {
 
 
 export type MutationAdmin__Core_Styles__Nav__CreateArgs = {
-  description: Array<TextLanguageInput>;
+  description: Array<StringLanguageInput>;
   external: Scalars['Boolean']['input'];
   href: Scalars['String']['input'];
   icon?: InputMaybe<Scalars['String']['input']>;
-  name: Array<TextLanguageInput>;
+  name: Array<StringLanguageInput>;
 };
 
 
@@ -555,34 +555,34 @@ export type MutationAdmin__Core_Styles__Nav__DeleteArgs = {
 
 
 export type MutationAdmin__Core_Styles__Nav__EditArgs = {
-  description: Array<TextLanguageInput>;
+  description: Array<StringLanguageInput>;
   external: Scalars['Boolean']['input'];
   href: Scalars['String']['input'];
   icon?: InputMaybe<Scalars['String']['input']>;
   id: Scalars['Int']['input'];
-  name: Array<TextLanguageInput>;
+  name: Array<StringLanguageInput>;
 };
 
 
 export type MutationAdmin__Core_Terms_Settings__CreateArgs = {
   code: Scalars['String']['input'];
-  content: Array<TextLanguageInput>;
+  content: Array<StringLanguageInput>;
   href?: InputMaybe<Scalars['String']['input']>;
-  title: Array<TextLanguageInput>;
+  title: Array<StringLanguageInput>;
 };
 
 
 export type MutationAdmin__Core_Terms_Settings__DeleteArgs = {
-  id: Scalars['Int']['input'];
+  code: Scalars['String']['input'];
 };
 
 
 export type MutationAdmin__Core_Terms_Settings__EditArgs = {
   code: Scalars['String']['input'];
-  content: Array<TextLanguageInput>;
+  content: Array<StringLanguageInput>;
   href?: InputMaybe<Scalars['String']['input']>;
   id: Scalars['Float']['input'];
-  title: Array<TextLanguageInput>;
+  title: Array<StringLanguageInput>;
 };
 
 
@@ -879,7 +879,7 @@ export type ShowAdminGroups = {
   default: Scalars['Boolean']['output'];
   guest: Scalars['Boolean']['output'];
   id: Scalars['Int']['output'];
-  name: Array<TextLanguage>;
+  name: Array<StringLanguage>;
   protected: Scalars['Boolean']['output'];
   root: Scalars['Boolean']['output'];
   updated: Scalars['DateTime']['output'];
@@ -1174,23 +1174,23 @@ export type ShowCoreMiddlewareObj = {
 export type ShowCoreNav = {
   __typename?: 'ShowCoreNav';
   children: Array<ShowCoreNavItem>;
-  description: Array<TextLanguage>;
+  description: Array<StringLanguage>;
   external: Scalars['Boolean']['output'];
   href: Scalars['String']['output'];
   icon?: Maybe<Scalars['String']['output']>;
   id: Scalars['Int']['output'];
-  name: Array<TextLanguage>;
+  name: Array<StringLanguage>;
   position: Scalars['Int']['output'];
 };
 
 export type ShowCoreNavItem = {
   __typename?: 'ShowCoreNavItem';
-  description: Array<TextLanguage>;
+  description: Array<StringLanguage>;
   external: Scalars['Boolean']['output'];
   href: Scalars['String']['output'];
   icon?: Maybe<Scalars['String']['output']>;
   id: Scalars['Int']['output'];
-  name: Array<TextLanguage>;
+  name: Array<StringLanguage>;
   position: Scalars['Int']['output'];
 };
 
@@ -1222,11 +1222,11 @@ export type ShowCoreSessionDevicesObj = {
 export type ShowCoreTerms = {
   __typename?: 'ShowCoreTerms';
   code: Scalars['String']['output'];
-  content: Array<TextLanguage>;
+  content: Array<StringLanguage>;
   created: Scalars['DateTime']['output'];
   href?: Maybe<Scalars['String']['output']>;
   id: Scalars['Float']['output'];
-  title: Array<TextLanguage>;
+  title: Array<StringLanguage>;
   updated: Scalars['DateTime']['output'];
 };
 
@@ -1244,8 +1244,8 @@ export type ShowCoreThemeEditorObj = {
 
 export type ShowSettingsObj = {
   __typename?: 'ShowSettingsObj';
-  site_copyright: Array<TextLanguage>;
-  site_description: Array<TextLanguage>;
+  site_copyright: Array<StringLanguage>;
+  site_description: Array<StringLanguage>;
   site_name: Scalars['String']['output'];
   site_short_name: Scalars['String']['output'];
 };
@@ -1273,17 +1273,17 @@ export type SortDirectionEnum = typeof SortDirectionEnum[keyof typeof SortDirect
 export type StaffGroupUser = {
   __typename?: 'StaffGroupUser';
   color?: Maybe<Scalars['String']['output']>;
-  group_name: Array<TextLanguage>;
+  group_name: Array<StringLanguage>;
   id: Scalars['Int']['output'];
 };
 
-export type TextLanguage = {
-  __typename?: 'TextLanguage';
+export type StringLanguage = {
+  __typename?: 'StringLanguage';
   language_code: Scalars['String']['output'];
   value: Scalars['String']['output'];
 };
 
-export type TextLanguageInput = {
+export type StringLanguageInput = {
   language_code: Scalars['String']['input'];
   value: Scalars['String']['input'];
 };

@@ -1,10 +1,6 @@
-import { ParserTextLanguageCoreHelpersService } from '@/core/helpers/text_language/parser/parser.service';
+import { StringLanguageHelper } from '@/core/helpers/string_language/helpers.service';
 import { ShowCoreTerms } from '@/core/terms/show/show.dto';
-import {
-  core_terms,
-  core_terms_content,
-  core_terms_title,
-} from '@/database/schema/terms';
+import { core_terms } from '@/database/schema/terms';
 import { CustomError, NotFoundError } from '@/errors';
 import { removeSpecialCharacters } from '@/functions';
 import { InternalDatabaseService } from '@/utils';
@@ -17,7 +13,7 @@ import { EditAdminTermsSettingsArgs } from './edit.dto';
 export class EditAdminTermsSettingsService {
   constructor(
     private readonly databaseService: InternalDatabaseService,
-    private readonly parserTextLang: ParserTextLanguageCoreHelpersService,
+    private readonly stringLanguageHelper: StringLanguageHelper,
   ) {}
 
   async edit({
@@ -51,15 +47,20 @@ export class EditAdminTermsSettingsService {
       .set({ href, updated: new Date(), code: removeSpecialCharacters(code) })
       .where(eq(core_terms.id, id));
 
-    const titleTerm = await this.parserTextLang.parse({
+    const titleTerm = await this.stringLanguageHelper.parse({
       item_id: term.id,
-      database: core_terms_title,
+      plugin_code: 'core',
+      database: core_terms,
       data: title,
+      variable: 'title',
     });
-    const contentTerm = await this.parserTextLang.parse({
+
+    const contentTerm = await this.stringLanguageHelper.parse({
       item_id: term.id,
-      database: core_terms_content,
+      plugin_code: 'core',
+      database: core_terms,
       data: content,
+      variable: 'content',
     });
 
     return {

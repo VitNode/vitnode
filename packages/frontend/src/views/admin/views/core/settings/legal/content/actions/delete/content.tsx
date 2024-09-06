@@ -16,11 +16,11 @@ import { mutationApi } from './mutation-api';
 import { SubmitDeleteContentLegalSettingsAdmin } from './submit';
 
 export const ContentDeleteContentLegalSettingsAdmin = ({
-  id,
+  code,
   title,
 }: Pick<
   Admin_Core_Terms__ShowQuery['core_terms__show']['edges'][0],
-  'id' | 'title'
+  'code' | 'title'
 >) => {
   const t = useTranslations('admin.core.settings.legal.delete');
   const tCore = useTranslations('core');
@@ -29,7 +29,7 @@ export const ContentDeleteContentLegalSettingsAdmin = ({
   const convertedTitle = convertText(title);
 
   const onSubmit = async () => {
-    const mutation = await mutationApi({ id });
+    const mutation = await mutationApi({ code });
 
     if (mutation?.error) {
       toast.error(tCore('errors.title'), {

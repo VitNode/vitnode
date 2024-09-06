@@ -1,6 +1,6 @@
 'use client';
 
-import { TextLanguage } from '@/graphql/types';
+import { StringLanguage } from '@/graphql/types';
 import { Content, EditorContent, useEditor } from '@tiptap/react';
 import { useLocale } from 'next-intl';
 import React from 'react';
@@ -26,8 +26,8 @@ interface Props extends Omit<UploadFilesHandlerEditorArgs, 'value'> {
 
 interface WithLanguage extends Props {
   disableLanguages?: never;
-  onChange: (value: TextLanguage[]) => void;
-  value: TextLanguage[];
+  onChange: (value: StringLanguage[]) => void;
+  value: StringLanguage[];
 }
 
 interface WithoutLanguage extends Props {
@@ -137,7 +137,7 @@ export const Editor = ({
         uploadFiles,
         allowUploadFiles,
         value,
-        onChange: onChange as (value: string | TextLanguage[]) => void,
+        onChange: onChange as (value: string | StringLanguage[]) => void,
         selectedLanguage,
         setFiles,
       }}

@@ -21,7 +21,7 @@ export const mutationApi = async (
       variables,
     });
 
-    revalidateApi();
+    revalidateApi(variables.code);
   } catch (error) {
     const e = error as Error;
 

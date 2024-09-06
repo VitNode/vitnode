@@ -1,4 +1,4 @@
-import { PageInfo, PaginationArgs, TextLanguage } from '@/utils';
+import { PageInfo, PaginationArgs, StringLanguage } from '@/utils';
 import { ArgsType, Field, Int, ObjectType } from '@nestjs/graphql';
 
 @ArgsType()
@@ -6,8 +6,8 @@ export class ShowCoreNavArgs extends PaginationArgs {}
 
 @ObjectType()
 class ShowCoreNavItem {
-  @Field(() => [TextLanguage])
-  description: TextLanguage[];
+  @Field(() => [StringLanguage])
+  description: StringLanguage[];
 
   @Field(() => Boolean)
   external: boolean;
@@ -21,8 +21,8 @@ class ShowCoreNavItem {
   @Field(() => Int)
   id: number;
 
-  @Field(() => [TextLanguage])
-  name: TextLanguage[];
+  @Field(() => [StringLanguage])
+  name: StringLanguage[];
 
   @Field(() => Int)
   position: number;

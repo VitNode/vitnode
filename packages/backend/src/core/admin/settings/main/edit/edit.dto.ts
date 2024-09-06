@@ -1,14 +1,14 @@
 import { ShowSettingsObj } from '@/core/settings/show/show.dto';
-import { TextLanguageInput } from '@/utils';
+import { StringLanguageInput } from '@/utils';
 import { ArgsType, Field, ObjectType, PickType } from '@nestjs/graphql';
 
 @ArgsType()
 export class EditAdminMainSettingsArgs {
-  @Field(() => [TextLanguageInput])
-  site_copyright: TextLanguageInput[];
+  @Field(() => [StringLanguageInput])
+  site_copyright: StringLanguageInput[];
 
-  @Field(() => [TextLanguageInput])
-  site_description: TextLanguageInput[];
+  @Field(() => [StringLanguageInput])
+  site_description: StringLanguageInput[];
 
   @Field(() => String)
   site_name: string;

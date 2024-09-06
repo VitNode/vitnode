@@ -2,7 +2,7 @@ import { AutoForm } from '@/components/form/auto-form';
 import { AutoFormIconPicker } from '@/components/form/fields/icon-picker';
 import { AutoFormInput } from '@/components/form/fields/input';
 import { AutoFormSwitch } from '@/components/form/fields/switch';
-import { AutoFormTextLanguageInput } from '@/components/form/fields/text-language-input';
+import { AutoFormStringLanguageInput } from '@/components/form/fields/text-language-input';
 import { Button } from '@/components/ui/button';
 import { DialogFooter } from '@/components/ui/dialog';
 import { useTranslations } from 'next-intl';
@@ -22,12 +22,12 @@ export const ContentCreateEditNavAdmin = ({ data }: CreateEditNavAdminArgs) => {
       fields={[
         {
           id: 'name',
-          component: AutoFormTextLanguageInput,
+          component: AutoFormStringLanguageInput,
           label: t('create.name.label'),
         },
         {
           id: 'description',
-          component: AutoFormTextLanguageInput,
+          component: AutoFormStringLanguageInput,
           label: t('create.description.label'),
         },
         {

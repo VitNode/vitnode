@@ -1,10 +1,6 @@
-import { ParserTextLanguageCoreHelpersService } from '@/core/helpers/text_language/parser/parser.service';
+import { StringLanguageHelper } from '@/core/helpers/string_language/helpers.service';
 import { ShowCoreNav } from '@/core/nav/show/show.dto';
-import {
-  core_nav,
-  core_nav_description,
-  core_nav_name,
-} from '@/database/schema/nav';
+import { core_nav } from '@/database/schema/nav';
 import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
 
@@ -14,7 +10,7 @@ import { CreateAdminNavStylesArgs } from './create.dto';
 export class CreateAdminNavStylesService {
   constructor(
     private readonly databaseService: InternalDatabaseService,
-    private readonly parserTextLang: ParserTextLanguageCoreHelpersService,
+    private readonly stringLanguageHelper: StringLanguageHelper,
   ) {}
 
   async create({
@@ -30,7 +26,7 @@ export class CreateAdminNavStylesService {
         orderBy: (table, { desc }) => desc(table.position),
       });
 
-    const nav = await this.databaseService.db
+    const [nav] = await this.databaseService.db
       .insert(core_nav)
       .values({
         href,
@@ -42,22 +38,24 @@ export class CreateAdminNavStylesService {
       })
       .returning();
 
-    const id = nav[0].id;
-
-    const namesNav = await this.parserTextLang.parse({
-      item_id: id,
-      database: core_nav_name,
+    const namesNav = await this.stringLanguageHelper.parse({
+      item_id: nav.id,
+      plugin_code: 'core',
+      database: core_nav,
       data: name,
+      variable: 'name',
     });
 
-    const descriptionNav = await this.parserTextLang.parse({
-      item_id: id,
-      database: core_nav_description,
+    const descriptionNav = await this.stringLanguageHelper.parse({
+      item_id: nav.id,
+      plugin_code: 'core',
+      database: core_nav,
       data: description,
+      variable: 'description',
     });
 
     return {
-      ...nav[0],
+      ...nav,
       name: namesNav,
       description: descriptionNav,
       children: [],
