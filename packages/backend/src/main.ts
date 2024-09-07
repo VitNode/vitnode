@@ -44,6 +44,7 @@ export const nestjsMainApp = async (app: INestApplication, options?: Args) => {
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,
+      enableDebugMessages: process.env.NODE_ENV === 'development',
     }),
   );
 

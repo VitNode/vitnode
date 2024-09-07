@@ -124,7 +124,7 @@ export class CreateAdminTermsSettingsArgs {
 
 `TransformStringLanguageInput` is a custom decorator that will transform the input to the correct format.
 
-To required translation fields you can use `@ArrayMinSize(2)` decorator.
+To required translation fields you can use `@ArrayMinSize(1)` decorator.
 
 ````ts title="backend/plugins/{your_plugin}/terms/create/create.dto.ts"
 import {

@@ -45,8 +45,8 @@ export const getUser = async ({
       and(
         eq(table.item_id, user.group.id),
         eq(table.plugin_code, 'core'),
-        eq(table.table_name, 'core_users'),
-        eq(table.table_name, 'core_users'),
+        eq(table.variable, 'name'),
+        eq(table.table_name, 'core_groups'),
       ),
   });
 

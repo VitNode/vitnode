@@ -43,6 +43,9 @@ export class ShowAdminMembersArgs extends PaginationArgs {
   @Field(() => [Int], { nullable: true })
   groups?: number[];
 
+  @Field(() => Number, { nullable: true })
+  id?: number;
+
   @Transform(TransformString)
   @Field(() => String, { nullable: true })
   search?: string;

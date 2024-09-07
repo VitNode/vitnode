@@ -194,14 +194,12 @@ export async function fetcher<TData, TVariables = object>({
   if (json.errors) {
     const errors = json.errors.at(0) as FetcherErrorType | undefined;
 
+    if (CONFIG.node_development) {
+      console.error(errors);
+    }
+
     throw new Error(errors?.extensions?.code ?? 'INTERNAL_SERVER_ERROR');
   }
-
-  // if (json.errors) {
-  //   const errors = json.errors.at(0) as FetcherErrorType | undefined;
-
-  //   return Promise.reject(errors);
-  // }
 
   return json.data;
 }
