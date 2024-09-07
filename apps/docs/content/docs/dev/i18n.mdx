@@ -40,210 +40,374 @@ You cannnot do this:
 
 VitNode has a built-in translation fields for input and WYSIWYG fields.
 
-As an example, we will create a translation field for the `title` field in the `blog_categories` table.
+As an example, we will create a translation field for the `title (input)` and `content (WYSIWYG)` fields in the `core_terms` table.
+
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+<Steps>
+<Step>
 
 ### Database
 
 For the translation fields, you need to create a new table in the database where you will store the translations.
 
-```ts title="backend/plugins/blog/admin/database/schema/categories.ts"
-import {
-  boolean,
-  index,
-  integer,
-  pgTable,
-  serial,
-  timestamp,
-  varchar,
-} from 'drizzle-orm/pg-core';
-import { relations } from 'drizzle-orm';
+```ts title="backend/plugins/{your_plugin}/admin/database/schema/terms.ts"
+import { pgTable, serial, timestamp, varchar } from 'drizzle-orm/pg-core';
 
-import { core_languages } from '@/plugins/core/admin/database/schema/languages';
-
-export const blog_categories = pgTable('blog_categories', {
+export const core_terms = pgTable('core_terms', {
   id: serial('id').primaryKey(),
+  code: varchar('code').notNull().unique(),
   created: timestamp('created').notNull().defaultNow(),
-  position: integer('position').notNull().default(0),
+  updated: timestamp('updated').notNull().defaultNow(),
+  href: varchar('href'),
 });
 ```
 
-### Data Transfer Objects (DTO)
+You can find more information about the database schema in the [documentation](/docs/dev/database).
 
-#### Input
+As you can see in the example above, we haven't added the translation fields yet. We will add them in `service` later.
 
-Inside input DTO you can use `StringLanguageInput[]` for translation fields.
+</Step>
 
-```ts title="backend/plugins/blog/categories/show/show.dto.ts"
-import { ArgsType, Field } from '@nestjs/graphql';
-import { IsArray } from 'class-validator';
-import { Transform } from 'class-transformer';
+<Step>
+
+### DTO Object
+
+For the translation fields to show data, you need to use `StringLanguage[]` type in the DTO for the object.
+
+```ts title="backend/plugins/{your_plugin}/terms/show/show.dto.ts"
+import { PageInfo, StringLanguage } from 'vtinode-backend';
+import { Field, ObjectType } from '@nestjs/graphql';
+
+@ObjectType()
+export class ShowCoreTerms {
+  @Field(() => [StringLanguage]) // [!code highlight]
+  content: StringLanguage[]; // [!code highlight]
+
+  @Field(() => [StringLanguage]) // [!code highlight]
+  title: StringLanguage[]; // [!code highlight]
+}
+
+@ObjectType()
+export class ShowCoreTermsObj {
+  @Field(() => [ShowCoreTerms])
+  edges: ShowCoreTerms[];
+
+  @Field(() => PageInfo)
+  pageInfo: PageInfo;
+}
+```
+
+### DTO Input
+
+For the translation fields to work in the input, you need to use `StringLanguage` type in the DTO for the input.
+
+```ts title="backend/plugins/{your_plugin}/terms/create/create.dto.ts"
 import {
   IsStringLanguageInput,
   StringLanguageInput,
   TransformStringLanguageInput,
 } from 'vitnode-backend';
+import { ArgsType, Field } from '@nestjs/graphql';
+import { Transform } from 'class-transformer';
+import { IsArray } from 'class-validator';
 
 @ArgsType()
-export class ShowBlogCategoriesArgs {
+export class CreateAdminTermsSettingsArgs {
   @IsArray()
   @IsStringLanguageInput()
   @Transform(TransformStringLanguageInput)
-  @Field(() => [StringLanguageInput])
-  title: StringLanguageInput[];
+  @Field(() => [StringLanguageInput]) // [!code highlight]
+  content: StringLanguageInput[]; // [!code highlight]
+
+  @IsArray()
+  @IsStringLanguageInput()
+  @Transform(TransformStringLanguageInput)
+  @Field(() => [StringLanguageInput]) // [!code highlight]
+  title: StringLanguageInput[]; // [!code highlight]
 }
 ```
 
-#### Object
+</Step>
 
-Inside object DTO you can use `StringLanguage` for translation fields.
+<Step>
 
-```ts
-import { Field, ObjectType } from '@nestjs/graphql';
-import { StringLanguage } from 'vitnode-backend';
+### Create / Edit Service
 
-@ObjectType()
-export class ShowBlogCategoriesObj {
-  @Field(() => [StringLanguage])
-  title: StringLanguage[];
-}
-```
+To create or edit translation fields you need to use `StringLanguageHelper` service with `parse()` method.
 
-### Service
+As an example, we will create a translation field for the `title` and `content` fields in the `core_terms` table.
 
-Here is an example of how to use translation fields in the service.
-
-#### Show
-
-Using object DTO you can easily return translation fields by query to the database.
-
-```ts title="backend/plugins/blog/categories/show/show.service.ts"
-import { Injectable } from '@nestjs/common';
-import { NotFoundError } from 'vitnode-backend';
-
-import { ShowBlogCategories } from './dto/show.obj';
-import { ShowBlogCategoriesArgs } from './dto/show.args';
-
-@Injectable()
-export class ShowBlogCategoriesService {
-  constructor(private databaseServices: DatabaseService) {}
-
-  async show({ id }: ShowBlogCategoriesArgs): Promise<ShowBlogCategoriesObj> {
-    const category =
-      await this.databaseService.db.query.blog_categories.findFirst({
-        where: (table, { eq }) => eq(table.id, id),
-      });
-
-    if (!category) {
-      throw new NotFoundError('Category');
-    }
-
-    return {
-      title: category.title,
-    };
-  }
-}
-```
-
-### Create / Edit
-
-To create or edit translation fields you need to use `ParserStringLanguageCoreHelpersService` service. This service will help you to parse the translation fields.
-
-```ts title="backend/plugins/blog/categories/edit/edit.service.ts"
-import { Injectable } from '@nestjs/common';
+```ts title="backend/plugins/{your_plugin}/terms/create/create.service.ts"
+import { ShowCoreTerms } from '@/core/terms/show/show.dto';
+import { core_terms } from '@/database/schema/terms';
 import {
-  NotFoundError,
-  ParserStringLanguageCoreHelpersService,
+  DatabaseService,
+  CustomError,
+  StringLanguageHelper, // [!code highlight]
 } from 'vitnode-backend';
+import { Injectable } from '@nestjs/common';
 
-import { EditBlogCategories } from './dto/show.obj';
-import { EditBlogCategoriesArgs } from './dto/show.args';
-
-import { blog_categories_name } from '@/plugins/blog/admin/database/schema/categories';
+import { CreateAdminTermsSettingsArgs } from './create.dto';
 
 @Injectable()
-export class EditBlogCategoriesService {
+export class CreateAdminTermsSettingsService {
   constructor(
-    private databaseServices: DatabaseService,
-    private parserTextLang: ParserStringLanguageCoreHelpersService,
+    private readonly databaseService: DatabaseService,
+    private readonly stringLanguageHelper: StringLanguageHelper, // [!code highlight]
   ) {}
 
-  async edit({
-    id,
+  async create({
     title,
-  }: EditBlogCategoriesArgs): Promise<ShowBlogCategoriesObj> {
-    const category =
-      await this.databaseService.db.query.blog_categories.findFirst({
-        where: (table, { eq }) => eq(table.id, id),
-      });
+    content,
+    href,
+  }: CreateAdminTermsSettingsArgs): Promise<ShowCoreTerms> {
+    const termExist = await this.databaseService.db.query.core_terms.findFirst({
+      where: (table, { eq }) => eq(table.code, code),
+    });
 
-    if (!category) {
-      throw new NotFoundError('Category');
+    if (termExist) {
+      throw new CustomError({
+        code: 'ALREADY_EXISTS',
+        message: 'Term already exists',
+      });
     }
 
-    const titleCategory = await this.parserTextLang.parse({
-      item_id: id,
-      database: blog_categories_name,
+    const [term] = await this.databaseService.db
+      .insert(core_terms)
+      .values({ href })
+      .returning();
+
+    // [!code word:stringLanguageHelper]
+    const titleTerm = await this.stringLanguageHelper.parse({
+      item_id: term.id,
+      plugin_code: 'core',
+      database: core_terms,
       data: title,
+      variable: 'title',
+    });
+
+    const contentTerm = await this.stringLanguageHelper.parse({
+      item_id: term.id,
+      plugin_code: 'core',
+      database: core_terms,
+      data: content,
+      variable: 'content',
     });
 
     return {
-      title: titleCategory,
+      ...term,
+      title: titleTerm,
+      content: contentTerm,
     };
   }
 }
 ```
 
-### Delete
+This method will create a translation inside `core_languages_words` table and processing content to send notifications, attachments, etc.
 
-To delete translation fields you need to use `ParserStringLanguageCoreHelpersService` service. This service will help you to delete the translation fields and remove sub-features like mentions, attachments, etc.
+#### API Reference
 
-```ts title="backend/plugins/blog/categories/delete/delete.service.ts"
-import { Injectable } from '@nestjs/common';
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+<TypeTable
+  type={{
+    item_id: {
+      description: 'Item ID from the main table.',
+      type: 'number',
+    },
+    plugin_code: {
+      description: 'Plugin code.',
+      type: 'string',
+    },
+    database: {
+      description: 'Database schema.',
+      type: 'DatabaseSchema',
+    },
+    data: {
+      description: 'Data to parse.',
+      type: 'StringLanguageInput[]',
+    },
+    variable: {
+      description: 'Variable name.',
+      type: 'string',
+    },
+  }}
+/>
+
+</Step>
+
+<Step>
+
+### Delete Service
+
+As we mention before, when you create or edit translation fields then our `parser()` method will processing content. To delete translations and other things related to it you need to use `delete()` method.
+
+```ts title="backend/plugins/{your_plugin}/terms/delete/delete.service.ts"
+import { core_terms } from '@/database/schema/terms';
 import {
+  DatabaseService,
+  StringLanguageHelper,
   NotFoundError,
-  ParserStringLanguageCoreHelpersService,
-} from 'vitnode-backend';
-
-import { EditBlogCategories } from './dto/show.obj';
-import { EditBlogCategoriesArgs } from './dto/show.args';
-
-import {
-  blog_categories,
-  blog_categories_name,
-} from '@/plugins/blog/admin/database/schema/categories';
+} from 'vitnode-frontend';
+import { Injectable } from '@nestjs/common';
+import { eq } from 'drizzle-orm';
 
 @Injectable()
-export class EditBlogCategoriesService {
+export class DeleteAdminTermsSettingsService {
   constructor(
-    private databaseServices: DatabaseService,
-    private parserTextLang: ParserStringLanguageCoreHelpersService,
+    private readonly databaseService: DatabaseService,
+    private readonly stringLanguageHelper: StringLanguageHelper,
   ) {}
 
-  async delete({ id }: DeleteBlogCategoriesArgs): Promise<string> {
-    const category =
-      await this.databaseService.db.query.blog_categories.findFirst({
-        where: (table, { eq }) => eq(table.id, id),
-      });
-
-    if (!category) {
-      throw new NotFoundError('Category');
-    }
-
-    // Delete translations
-    await this.parserTextLang.delete({
-      database: blog_categories_name,
-      item_id: id,
+  async delete({ code }: { code: string }): Promise<string> {
+    const term = await this.databaseService.db.query.core_terms.findFirst({
+      where: (table, { eq }) => eq(table.code, code),
+      columns: {
+        id: true,
+      },
     });
 
-    // Delete main record
-    await this.databaseService.db
-      .delete(blog_categories)
-      .where(eq(blog_categories.id, id));
+    if (!term) {
+      throw new NotFoundError('Term');
+    }
 
-    return 'Category deleted!';
+    await this.databaseService.db
+      .delete(core_terms)
+      .where(eq(core_terms.id, term.id));
+
+    // [!code word:stringLanguageHelper]
+    await this.stringLanguageHelper.delete({
+      database: core_terms,
+      item_id: term.id,
+      plugin_code: 'core',
+    });
+
+    return 'Term deleted!';
   }
 }
 ```
+
+<Callout
+  title="Always delete translation when delete primary record!"
+  type="error"
+>
+  This is important to delete translation. Otherwise, translations will be still
+  in the database.
+</Callout>
+
+#### API Reference
+
+<TypeTable
+  type={{
+    database: {
+      description: 'Database schema.',
+      type: 'DatabaseSchema',
+    },
+    item_id: {
+      description: 'Item ID from the main table.',
+      type: 'number',
+    },
+    plugin_code: {
+      description: 'Plugin code.',
+      type: 'string',
+    },
+  }}
+/>
+
+</Step>
+
+<Step>
+
+### Show Service
+
+`core_languages_words` table doesn't have relation so you need to use `StringLanguageHelper` service with `show()` to get translations.
+
+In return service we will filter translation by `item_id` and `variable` to get the correct translation for the `title` and `content` fields.
+
+```ts title="backend/plugins/{your_plugin}/terms/show/show.service.ts"
+import { core_terms } from '@/database/schema/terms';
+import {
+  InternalDatabaseService,
+  SortDirectionEnum,
+  inputPaginationCursor,
+  outputPagination,
+  StringLanguageHelper,
+} from 'vitnode-backend';
+import { Injectable } from '@nestjs/common';
+import { and, count, eq } from 'drizzle-orm';
+
+import { ShowCoreTermsArgs, ShowCoreTermsObj } from './show.dto';
+
+@Injectable()
+export class ShowCoreTermsService {
+  constructor(
+    private readonly databaseService: InternalDatabaseService,
+    private readonly stringLanguageHelper: StringLanguageHelper, // [!code highlight]
+  ) {}
+
+  async show({
+    cursor,
+    first,
+    last,
+    code,
+  }: ShowCoreTermsArgs): Promise<ShowCoreTermsObj> {
+    const pagination = await inputPaginationCursor({
+      cursor,
+      database: core_terms,
+      databaseService: this.databaseService,
+      first,
+      last,
+      primaryCursor: {
+        column: 'id',
+        schema: core_terms.id,
+      },
+      defaultSortBy: {
+        direction: SortDirectionEnum.desc,
+        column: 'updated',
+      },
+    });
+
+    const edgesFromDb = await this.databaseService.db.query.core_terms.findMany(
+      {
+        ...pagination,
+      },
+    );
+    const ids = edgesFromDb.map(edge => edge.id);
+    // [!code word:stringLanguageHelper]
+    const i18n = await this.stringLanguageHelper.get({
+      item_ids: ids,
+      database: core_terms,
+      plugin_code: 'core',
+      variables: ['title', 'content'],
+    });
+
+    const totalCount = await this.databaseService.db
+      .select({ count: count() })
+      .from(core_terms);
+
+    return outputPagination({
+      edges: edgesFromDb.map(edge => {
+        const currentI18n = i18n.filter(item => item.item_id === edge.id); // [!code highlight]
+
+        return {
+          ...edge,
+          title: currentI18n.filter(value => value.variable === 'title'), // [!code highlight]
+          content: currentI18n.filter(value => value.variable === 'content'), // [!code highlight]
+        };
+      }),
+      totalCount,
+      first,
+      cursor,
+      last,
+    });
+  }
+}
+```
+
+</Step>
+
+</Steps>
 
 ---
 
@@ -263,7 +427,7 @@ interface Props {
 }
 
 export const ExampleComponent = ({ value }: Props) => {
-  const { convertText } = useTextLang();
+  const { convertText } = useTextLang(); // [!code highlight]
 
   return <div>{convertText(value)}</div>;
 };
@@ -282,7 +446,7 @@ interface Props {
 }
 
 export const ExampleComponent = async ({ locale, value }: Props) => {
-  const { convertText } = getTextLang({ locale });
+  const { convertText } = getTextLang({ locale }); // [!code highlight]
 
   return <div>{convertText(value)}</div>;
 };
@@ -291,8 +455,6 @@ export const ExampleComponent = async ({ locale, value }: Props) => {
 ## Form
 
 Create form with translations is very similar to normal [Forms](/docs/ui/forms).
-
-import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 <Steps>
 
@@ -407,7 +569,7 @@ export const ExampleForm = () => {
 };
 ```
 
-Instead of `StringLanguageInput` you can use `Editor` component. [Read more](/docs/ui/editor#form).
+Instead of `StringLanguageInput` you can use `Editor` component. [Read more](/docs/ui/forms/editor).
 
 </Step>
 
