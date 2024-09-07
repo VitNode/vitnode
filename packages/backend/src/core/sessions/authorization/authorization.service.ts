@@ -1,4 +1,5 @@
 import { NotFoundError } from '@/errors';
+import { getUser } from '@/utils/database/helpers/get-user';
 import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
 import { eq, sum } from 'drizzle-orm';
@@ -58,10 +59,11 @@ export class AuthorizationCoreSessionsService {
       const user = await this.databaseService.db.query.core_users.findFirst({
         where: (table, { eq }) => eq(table.id, currentUser.id),
         with: {
-          avatar: true,
           group: {
-            with: {
-              name: true,
+            columns: {
+              files_allow_upload: true,
+              files_max_storage_for_submit: true,
+              files_total_max_storage: true,
             },
           },
         },
@@ -70,6 +72,11 @@ export class AuthorizationCoreSessionsService {
       if (!user) {
         throw new NotFoundError('User');
       }
+
+      const userBasic = await getUser({
+        id: currentUser.id,
+        db: this.databaseService.db,
+      });
 
       const countStorageUsedDb = await this.databaseService.db
         .select({
@@ -82,13 +89,14 @@ export class AuthorizationCoreSessionsService {
       return {
         user: {
           ...user,
+          ...userBasic,
           group: currentUser.group,
           is_admin: await this.isAdmin({
-            group_id: user.group.id,
+            group_id: userBasic.group.id,
             user_id: user.id,
           }),
           is_mod: await this.isMod({
-            group_id: user.group.id,
+            group_id: userBasic.group.id,
             user_id: user.id,
           }),
           avatar_color: user.avatar_color,

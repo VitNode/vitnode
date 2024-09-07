@@ -1,3 +1,4 @@
+import { StringLanguageHelper } from '@/core/helpers/string_language/helpers.service';
 import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
 import { and, count, eq } from 'drizzle-orm';
@@ -9,7 +10,10 @@ import { ShowCoreNavArgs, ShowCoreNavObj } from './show.dto';
 
 @Injectable()
 export class ShowCoreNavService {
-  constructor(private readonly databaseService: InternalDatabaseService) {}
+  constructor(
+    private readonly databaseService: InternalDatabaseService,
+    private readonly stringLanguageHelper: StringLanguageHelper,
+  ) {}
 
   async show({
     cursor,
@@ -35,30 +39,50 @@ export class ShowCoreNavService {
     const itemsParent = await this.databaseService.db.query.core_nav.findMany({
       ...pagination,
       where: and(pagination.where, eq(core_nav.parent_id, 0)),
-      with: {
-        name: true,
-        description: true,
-      },
+    });
+    const ids = itemsParent.map(item => item.id);
+    const i18n = await this.stringLanguageHelper.get({
+      item_ids: ids,
+      database: core_nav,
+      plugin_code: 'core',
+      variables: ['name', 'description'],
     });
 
     const totalCount = await this.databaseService.db
       .select({ count: count() })
       .from(core_nav);
 
-    const edges = await Promise.all(
+    const edges: ShowCoreNavObj['edges'] = await Promise.all(
       itemsParent.map(async item => {
         const children = await this.databaseService.db.query.core_nav.findMany({
           where: (table, { eq }) => eq(table.parent_id, item.id),
           orderBy: (table, { asc }) => asc(table.position),
-          with: {
-            name: true,
-            description: true,
-          },
+        });
+        const ids = children.map(child => child.id);
+        const childrenI18n = await this.stringLanguageHelper.get({
+          item_ids: ids,
+          database: core_nav,
+          plugin_code: 'core',
+          variables: ['name', 'description'],
         });
 
         return {
           ...item,
-          children,
+          name: i18n.filter(
+            i => i.item_id === item.id && i.variable === 'name',
+          ),
+          description: i18n.filter(
+            i => i.item_id === item.id && i.variable === 'description',
+          ),
+          children: children.map(child => ({
+            ...child,
+            name: childrenI18n.filter(
+              i => i.item_id === child.id && i.variable === 'name',
+            ),
+            description: childrenI18n.filter(
+              i => i.item_id === child.id && i.variable === 'description',
+            ),
+          })),
         };
       }),
     );

@@ -1,5 +1,6 @@
 import { core_admin_permissions } from '@/database/schema/admins';
 import { CustomError, NotFoundError } from '@/errors';
+import { getUser } from '@/utils/database/helpers/get-user';
 import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
 
@@ -51,19 +52,10 @@ export class CreateAdminStaffAdministratorsService {
       await this.databaseService.db.query.core_admin_permissions.findFirst({
         where: (table, { eq }) => eq(table.id, permission[0].id),
         with: {
-          user: {
-            with: {
-              avatar: true,
-              group: {
-                with: {
-                  name: true,
-                },
-              },
-            },
-          },
           group: {
-            with: {
-              name: true,
+            columns: {
+              id: true,
+              color: true,
             },
           },
         },
@@ -73,11 +65,16 @@ export class CreateAdminStaffAdministratorsService {
       throw new NotFoundError('Permission');
     }
 
-    if (data.user) {
+    if (data.user_id) {
+      const user = await getUser({
+        id: data.user_id,
+        db: this.databaseService.db,
+      });
+
       return {
         ...data,
         user_or_group: {
-          ...data.user,
+          ...user,
         },
       };
     }
@@ -90,7 +87,7 @@ export class CreateAdminStaffAdministratorsService {
       ...data,
       user_or_group: {
         ...data.group,
-        group_name: data.group.name,
+        group_name: [],
       },
     };
   }

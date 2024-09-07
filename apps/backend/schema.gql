@@ -426,7 +426,6 @@ type ShowAdminMembers {
   name: String!
   name_seo: String!
   newsletter: Boolean!
-  posts: Int!
 }
 
 type ShowAdminMembersObj {
@@ -617,7 +616,6 @@ type ShowCoreMembers {
   language: String!
   name: String!
   name_seo: String!
-  posts: Int!
 }
 
 type ShowCoreMembersObj {

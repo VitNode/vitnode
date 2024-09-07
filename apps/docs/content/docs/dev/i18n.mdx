@@ -131,9 +131,6 @@ export class ShowBlogCategoriesService {
     const category =
       await this.databaseService.db.query.blog_categories.findFirst({
         where: (table, { eq }) => eq(table.id, id),
-        with: {
-          title: true,
-        },
       });
 
     if (!category) {

@@ -22,7 +22,6 @@ export const core_users = pgTable(
     email: varchar('email', { length: 255 }).notNull().unique(),
     password: text('password').notNull(),
     joined: timestamp('joined').notNull().defaultNow(),
-    posts: integer('posts').notNull().default(0),
     newsletter: boolean('newsletter').notNull().default(false),
     avatar_color: varchar('avatar_color', { length: 6 }).notNull(),
     group_id: integer('group_id')

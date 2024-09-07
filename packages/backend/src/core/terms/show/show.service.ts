@@ -1,14 +1,18 @@
+import { StringLanguageHelper } from '@/core/helpers/string_language/helpers.service';
 import { core_terms } from '@/database/schema/terms';
 import { inputPaginationCursor, outputPagination } from '@/functions';
 import { InternalDatabaseService, SortDirectionEnum } from '@/utils';
 import { Injectable } from '@nestjs/common';
-import { and, count, eq, inArray, or } from 'drizzle-orm';
+import { and, count, eq } from 'drizzle-orm';
 
 import { ShowCoreTermsArgs, ShowCoreTermsObj } from './show.dto';
 
 @Injectable()
 export class ShowCoreTermsService {
-  constructor(private readonly databaseService: InternalDatabaseService) {}
+  constructor(
+    private readonly databaseService: InternalDatabaseService,
+    private readonly stringLanguageHelper: StringLanguageHelper,
+  ) {}
 
   async show({
     cursor,
@@ -40,14 +44,12 @@ export class ShowCoreTermsService {
       },
     );
     const ids = edgesFromDb.map(edge => edge.id);
-    const i18n =
-      await this.databaseService.db.query.core_languages_words.findMany({
-        where: (table, { and, eq }) =>
-          and(
-            inArray(table.item_id, ids),
-            or(eq(table.variable, 'title'), eq(table.variable, 'content')),
-          ),
-      });
+    const i18n = await this.stringLanguageHelper.get({
+      item_ids: ids,
+      database: core_terms,
+      plugin_code: 'core',
+      variables: ['title', 'content'],
+    });
 
     const totalCount = await this.databaseService.db
       .select({ count: count() })

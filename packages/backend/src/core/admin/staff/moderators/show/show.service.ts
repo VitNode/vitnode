@@ -2,6 +2,7 @@ import { core_moderators_permissions } from '@/database/schema/moderators';
 import { NotFoundError } from '@/errors';
 import { inputPaginationCursor, outputPagination } from '@/functions';
 import { SortDirectionEnum } from '@/utils';
+import { getUser } from '@/utils/database/helpers/get-user';
 import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
 import { count } from 'drizzle-orm';
@@ -43,18 +44,9 @@ export class ShowAdminStaffModeratorsService {
         ...pagination,
         with: {
           group: {
-            with: {
-              name: true,
-            },
-          },
-          user: {
-            with: {
-              avatar: true,
-              group: {
-                with: {
-                  name: true,
-                },
-              },
+            columns: {
+              id: true,
+              color: true,
             },
           },
         },
@@ -65,28 +57,35 @@ export class ShowAdminStaffModeratorsService {
       .from(core_moderators_permissions);
 
     return outputPagination({
-      edges: edges.map(edge => {
-        if (edge.user) {
+      edges: await Promise.all(
+        edges.map(async edge => {
+          if (edge.user_id) {
+            const user = await getUser({
+              id: edge.user_id,
+              db: this.databaseService.db,
+            });
+
+            return {
+              ...edge,
+              user_or_group: {
+                ...user,
+              },
+            };
+          }
+
+          if (!edge.group) {
+            throw new NotFoundError('Group');
+          }
+
           return {
             ...edge,
             user_or_group: {
-              ...edge.user,
+              ...edge.group,
+              group_name: [],
             },
           };
-        }
-
-        if (!edge.group) {
-          throw new NotFoundError('Group');
-        }
-
-        return {
-          ...edge,
-          user_or_group: {
-            ...edge.group,
-            group_name: edge.group.name,
-          },
-        };
-      }),
+        }),
+      ),
       totalCount,
       first,
       cursor,

@@ -59,17 +59,28 @@ export class EditAdminNavStylesService {
 
     const children = await this.databaseService.db.query.core_nav.findMany({
       where: (table, { eq }) => eq(table.parent_id, id),
-      with: {
-        name: true,
-        description: true,
-      },
+    });
+
+    const childrenI18n = await this.stringLanguageHelper.get({
+      plugin_code: 'core',
+      item_ids: [id],
+      database: core_nav,
+      variables: ['name', 'description'],
     });
 
     return {
       ...updatedNav,
       name: namesNav,
       description: descriptionNav,
-      children,
+      children: children.map(child => ({
+        ...child,
+        name: childrenI18n.filter(
+          item => item.item_id === child.id && item.variable === 'name',
+        ),
+        description: childrenI18n.filter(
+          item => item.item_id === child.id && item.variable === 'description',
+        ),
+      })),
     };
   }
 }

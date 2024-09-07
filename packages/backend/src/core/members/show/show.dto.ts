@@ -10,7 +10,6 @@ import {
   ArgsType,
   Field,
   InputType,
-  Int,
   ObjectType,
   registerEnumType,
 } from '@nestjs/graphql';
@@ -72,7 +71,4 @@ export class GroupShowCoreMembers {
 export class ShowCoreMembers extends User {
   @Field(() => Date)
   joined: Date;
-
-  @Field(() => Int)
-  posts: number;
 }

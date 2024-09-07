@@ -1,6 +1,7 @@
 import { core_users } from '@/database/schema/users';
 import { inputPaginationCursor, outputPagination } from '@/functions';
 import { SortDirectionEnum } from '@/utils';
+import { getUser } from '@/utils/database/helpers/get-user';
 import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
 import { and, count, eq, ilike, inArray, or } from 'drizzle-orm';
@@ -47,26 +48,37 @@ export class ShowAdminMembersService {
         : undefined,
     );
 
-    const edges = await this.databaseService.db.query.core_users.findMany({
-      ...pagination,
-      where: and(pagination.where, where),
-      columns: {
-        password: false,
-      },
-      with: {
-        group: {
-          with: {
-            name: true,
-          },
+    const edgesFromDb = await this.databaseService.db.query.core_users.findMany(
+      {
+        ...pagination,
+        where: and(pagination.where, where),
+        columns: {
+          email: true,
+          id: true,
+          newsletter: true,
+          joined: true,
         },
-        avatar: true,
       },
-    });
+    );
 
     const totalCount = await this.databaseService.db
       .select({ count: count() })
       .from(core_users)
       .where(where);
+
+    const edges = await Promise.all(
+      edgesFromDb.map(async edge => {
+        const user = await getUser({
+          id: edge.id,
+          db: this.databaseService.db,
+        });
+
+        return {
+          ...user,
+          ...edge,
+        };
+      }),
+    );
 
     return outputPagination({ edges, totalCount, first, cursor, last });
   }
