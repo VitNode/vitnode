@@ -65,6 +65,10 @@ import {
   ModeratorsStaffAdminView,
 } from './members/staff/moderators/moderators-view';
 import {
+  generateMetadataUserMembersAdmin,
+  UserMembersAdminView,
+} from './members/users/user/user-members-admin-view';
+import {
   generateMetadataUsersMembersAdmin,
   UsersMembersAdminView,
 } from './members/users/users-members-admin-view';
@@ -110,9 +114,15 @@ export const generateMetadataSlugAdmin = async ({
         return generateMetadataAdministratorsStaffAdmin();
     }
 
-    if (!slug[2]) {
-      if (slug[1] === 'users') return generateMetadataUsersMembersAdmin();
-      if (slug[1] === 'groups') return generateMetadataGroupsMembersAdmin();
+    if (slug[1] === 'groups' && !slug[2])
+      return generateMetadataGroupsMembersAdmin();
+
+    if (slug[1] === 'users' && !slug[3]) {
+      if (slug[2]) {
+        return generateMetadataUserMembersAdmin({ id: +slug[2] });
+      }
+
+      return generateMetadataUsersMembersAdmin();
     }
   }
 
@@ -170,9 +180,15 @@ export const SlugAdminView = (props: SlugViewProps) => {
       if (!slug[2]) redirect('/admin/members/staff/moderators');
     }
 
-    if (!slug[2]) {
-      if (slug[1] === 'users') return <UsersMembersAdminView {...props} />;
-      if (slug[1] === 'groups') return <GroupsMembersAdminView {...props} />;
+    if (slug[1] === 'groups' && !slug[2])
+      return <GroupsMembersAdminView {...props} />;
+
+    if (slug[1] === 'users' && !slug[3]) {
+      if (slug[2]) {
+        return <UserMembersAdminView id={+slug[2]} />;
+      }
+
+      return <UsersMembersAdminView {...props} />;
     }
   }
 

@@ -1,19 +1,13 @@
 'use client';
 
 import { DateFormat } from '@/components/date-format';
-import { buttonVariants } from '@/components/ui/button';
+import { Button } from '@/components/ui/button';
 import { DataTable } from '@/components/ui/data-table';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '@/components/ui/tooltip';
 import { AvatarUser } from '@/components/ui/user/avatar';
 import { GroupFormat } from '@/components/ui/user/group-format';
 import { Admin__Core_Members__ShowQuery } from '@/graphql/queries/admin/members/users/admin__core_members__show.generated';
 import { Link } from '@/navigation';
-import { Pencil } from 'lucide-react';
+import { Eye } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
@@ -63,23 +57,16 @@ export const TableUsersMembersAdmin = ({
           cell: ({ row }) => {
             return (
               <>
-                <TooltipProvider>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <Link
-                        className={buttonVariants({
-                          variant: 'ghost',
-                          size: 'icon',
-                        })}
-                        href={`/admin/members/users/${row.id}`}
-                      >
-                        <Pencil />
-                        <span className="sr-only">{tCore('edit')}</span>
-                      </Link>
-                    </TooltipTrigger>
-                    <TooltipContent>{tCore('edit')}</TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
+                <Button
+                  ariaLabel={tCore('edit')}
+                  asChild
+                  size="icon"
+                  variant="ghost"
+                >
+                  <Link href={`/admin/members/users/${row.id}`}>
+                    <Eye />
+                  </Link>
+                </Button>
               </>
             );
           },

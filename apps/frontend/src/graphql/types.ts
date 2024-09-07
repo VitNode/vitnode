@@ -716,6 +716,7 @@ export type QueryAdmin__Core_Members__ShowArgs = {
   cursor?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   groups?: InputMaybe<Array<Scalars['Int']['input']>>;
+  id?: InputMaybe<Scalars['Float']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
   search?: InputMaybe<Scalars['String']['input']>;
   sortBy?: InputMaybe<ShowAdminMembersSortByArgs>;
