@@ -33,6 +33,39 @@ export class StringLanguageHelper extends ParseStringLanguageHelper {
       );
   }
 
+  async get<T extends TableConfig>({
+    plugin_code,
+    item_ids,
+    database,
+    variables,
+  }: {
+    database: PgTableWithColumns<T>;
+    item_ids: number[];
+    plugin_code: string;
+    variables: string[];
+  }) {
+    const tableName = getTableName(database);
+
+    const strings =
+      await this.databaseService.db.query.core_languages_words.findMany({
+        columns: {
+          language_code: true,
+          value: true,
+          variable: true,
+          item_id: true,
+        },
+        where: (table, { eq, and, inArray }) =>
+          and(
+            eq(table.plugin_code, plugin_code),
+            inArray(table.item_id, item_ids),
+            eq(table.table_name, tableName),
+            inArray(table.variable, variables),
+          ),
+      });
+
+    return strings;
+  }
+
   async parse<T extends TableConfig>({
     plugin_code,
     item_id,

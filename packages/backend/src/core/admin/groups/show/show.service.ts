@@ -1,3 +1,4 @@
+import { StringLanguageHelper } from '@/core/helpers/string_language/helpers.service';
 import { core_groups } from '@/database/schema/groups';
 import { core_users } from '@/database/schema/users';
 import { inputPaginationCursor, outputPagination } from '@/functions';
@@ -10,7 +11,10 @@ import { ShowAdminGroupsArgs, ShowAdminGroupsObj } from './show.dto';
 
 @Injectable()
 export class ShowAdminGroupsService {
-  constructor(private readonly databaseService: InternalDatabaseService) {}
+  constructor(
+    private readonly databaseService: InternalDatabaseService,
+    private readonly stringLanguageHelper: StringLanguageHelper,
+  ) {}
 
   async show({
     cursor,
@@ -53,14 +57,6 @@ export class ShowAdminGroupsService {
     const edges = await this.databaseService.db.query.core_groups.findMany({
       ...pagination,
       // where: and(pagination.where, where),
-      with: {
-        name: {
-          columns: {
-            value: true,
-            language_code: true,
-          },
-        },
-      },
     });
 
     const totalCount = await this.databaseService.db
@@ -82,6 +78,14 @@ export class ShowAdminGroupsService {
       }),
     );
 
+    const ids = currentEdges.map(edge => edge.id);
+    const names = await this.stringLanguageHelper.get({
+      database: core_groups,
+      item_ids: ids,
+      plugin_code: 'core',
+      variables: ['name'],
+    });
+
     return outputPagination({
       edges: currentEdges.map(edge => ({
         ...edge,
@@ -90,6 +94,7 @@ export class ShowAdminGroupsService {
           files_max_storage_for_submit: edge.files_max_storage_for_submit,
           files_total_max_storage: edge.files_total_max_storage,
         },
+        name: names.filter(name => name.item_id === edge.id),
       })),
       totalCount,
       first,

@@ -1,11 +1,7 @@
-import {
-  IsStringLanguageInput,
-  StringLanguageInput,
-  TransformStringLanguageInput,
-} from '@/utils';
+import { StringLanguageInput, TransformStringLanguageInput } from '@/utils';
 import { ArgsType, Field, InputType, Int } from '@nestjs/graphql';
 import { Transform } from 'class-transformer';
-import { ArrayMinSize, IsArray, Min, ValidateNested } from 'class-validator';
+import { ArrayMinSize, Min } from 'class-validator';
 
 @InputType()
 export class ContentCreateAdminGroups {
@@ -29,10 +25,7 @@ export class CreateAdminGroupsArgs {
   @Field(() => ContentCreateAdminGroups)
   content: ContentCreateAdminGroups;
 
-  @IsArray()
-  @ValidateNested({ each: true })
   @ArrayMinSize(1)
-  @IsStringLanguageInput()
   @Transform(TransformStringLanguageInput)
   @Field(() => [StringLanguageInput])
   name: StringLanguageInput[];

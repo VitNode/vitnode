@@ -1,6 +1,7 @@
 import { core_files, core_files_using } from '@/database/schema/files';
 import { inputPaginationCursor, outputPagination } from '@/functions';
 import { SortDirectionEnum } from '@/utils';
+import { getUser } from '@/utils/database/helpers/get-user';
 import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
 import { and, count, eq, ilike, or } from 'drizzle-orm';
@@ -44,18 +45,6 @@ export class ShowAdminFilesService {
     const initEdges = await this.databaseService.db.query.core_files.findMany({
       ...pagination,
       where: and(pagination.where, where),
-      with: {
-        user: {
-          with: {
-            avatar: true,
-            group: {
-              with: {
-                name: true,
-              },
-            },
-          },
-        },
-      },
     });
 
     const totalCount = await this.databaseService.db
@@ -65,7 +54,7 @@ export class ShowAdminFilesService {
 
     const edges = await Promise.all(
       initEdges.map(async edge => {
-        const countFileUsing = await this.databaseService.db
+        const [countFileUsing] = await this.databaseService.db
           .select({
             count: count(),
           })
@@ -74,7 +63,13 @@ export class ShowAdminFilesService {
 
         return {
           ...edge,
-          count_uses: countFileUsing[0].count,
+          user: edge.user_id
+            ? await getUser({
+                id: edge.user_id,
+                db: this.databaseService.db,
+              })
+            : null,
+          count_uses: countFileUsing.count,
         };
       }),
     );

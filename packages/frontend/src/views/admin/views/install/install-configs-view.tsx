@@ -39,9 +39,7 @@ export const InstallConfigsView = async () => {
       </InstallConfigLayout>
     );
   } catch (error) {
-    const code = error as string;
-
-    if (code === 'ACCESS_DENIED') {
+    if (error instanceof Error && error.message === 'ACCESS_DENIED') {
       redirect('/admin');
     }
 

@@ -1,19 +1,14 @@
-import {
-  IsStringLanguageInput,
-  StringLanguageInput,
-  TransformStringLanguageInput,
-} from '@/utils';
+import { StringLanguageInput, TransformStringLanguageInput } from '@/utils';
 import { ArgsType, Field } from '@nestjs/graphql';
 import { Transform } from 'class-transformer';
-import { IsArray } from 'class-validator';
+import { ArrayMinSize } from 'class-validator';
 
 @ArgsType()
 export class CreateAdminTermsSettingsArgs {
   @Field(() => String)
   code: string;
 
-  @IsArray()
-  @IsStringLanguageInput()
+  @ArrayMinSize(1)
   @Transform(TransformStringLanguageInput)
   @Field(() => [StringLanguageInput])
   content: StringLanguageInput[];
@@ -21,8 +16,7 @@ export class CreateAdminTermsSettingsArgs {
   @Field(() => String, { nullable: true })
   href?: string;
 
-  @IsArray()
-  @IsStringLanguageInput()
+  @ArrayMinSize(1)
   @Transform(TransformStringLanguageInput)
   @Field(() => [StringLanguageInput])
   title: StringLanguageInput[];

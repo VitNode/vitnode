@@ -4,6 +4,7 @@ import { User } from '@/decorators';
 import { AccessDeniedError, NotFoundError } from '@/errors';
 import { currentUnixDate, getUserAgentData, getUserIp } from '@/functions';
 import { GqlContext } from '@/utils';
+import { getUser } from '@/utils/database/helpers/get-user';
 import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
@@ -49,15 +50,14 @@ export class InternalAuthorizationCoreSessionsService {
             eq(table.device_id, device.id),
             gt(table.expires, new Date()),
           ),
+        columns: {
+          user_id: true,
+        },
         with: {
           user: {
-            with: {
-              avatar: true,
-              group: {
-                with: {
-                  name: true,
-                },
-              },
+            columns: {
+              email: true,
+              language: true,
             },
           },
           device: true,
@@ -96,7 +96,7 @@ export class InternalAuthorizationCoreSessionsService {
         .set({
           language: languageToSet,
         })
-        .where(eq(core_users.id, session.user.id));
+        .where(eq(core_users.id, session.user_id));
     }
 
     // Update last seen
@@ -130,6 +130,11 @@ export class InternalAuthorizationCoreSessionsService {
       },
     );
 
-    return session.user;
+    const user = await getUser({
+      id: session.user_id,
+      db: this.databaseService.db,
+    });
+
+    return user;
   }
 }

@@ -1,6 +1,7 @@
 import { core_sessions_known_devices } from '@/database/schema/sessions';
 import { currentUnixDate, getUserAgentData, getUserIp } from '@/functions';
 import { AccessDeniedError, GqlContext, NotFoundError } from '@/index';
+import { getUser } from '@/utils/database/helpers/get-user';
 import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
@@ -74,13 +75,9 @@ export class AuthorizationAdminSessionsService {
           ),
         with: {
           user: {
-            with: {
-              avatar: true,
-              group: {
-                with: {
-                  name: true,
-                },
-              },
+            columns: {
+              email: true,
+              newsletter: true,
             },
           },
         },
@@ -105,7 +102,13 @@ export class AuthorizationAdminSessionsService {
       })
       .where(eq(core_sessions_known_devices.id, device.id));
 
+    const user = await getUser({
+      id: session.user_id,
+      db: this.databaseService.db,
+    });
+
     return {
+      ...user,
       ...session.user,
       is_admin: true,
       is_mod: true,

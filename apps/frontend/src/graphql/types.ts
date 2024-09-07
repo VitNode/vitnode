@@ -925,7 +925,6 @@ export type ShowAdminMembers = {
   name: Scalars['String']['output'];
   name_seo: Scalars['String']['output'];
   newsletter: Scalars['Boolean']['output'];
-  posts: Scalars['Int']['output'];
 };
 
 export type ShowAdminMembersObj = {
@@ -1137,7 +1136,6 @@ export type ShowCoreMembers = {
   language: Scalars['String']['output'];
   name: Scalars['String']['output'];
   name_seo: Scalars['String']['output'];
-  posts: Scalars['Int']['output'];
 };
 
 export type ShowCoreMembersObj = {

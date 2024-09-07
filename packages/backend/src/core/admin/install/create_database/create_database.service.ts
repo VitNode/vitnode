@@ -120,7 +120,7 @@ export class CreateDatabaseAdminInstallService {
     });
 
     await this.databaseService.db.insert(core_moderators_permissions).values({
-      group_id: moderatorGroup[0].id,
+      group_id: moderatorGroup.id,
       unrestricted: true,
       protected: true,
     });
@@ -148,13 +148,13 @@ export class CreateDatabaseAdminInstallService {
     });
 
     await this.databaseService.db.insert(core_admin_permissions).values({
-      group_id: adminGroup[0].id,
+      group_id: adminGroup.id,
       unrestricted: true,
       protected: true,
     });
 
     await this.databaseService.db.insert(core_moderators_permissions).values({
-      group_id: adminGroup[0].id,
+      group_id: adminGroup.id,
       unrestricted: true,
       protected: true,
     });

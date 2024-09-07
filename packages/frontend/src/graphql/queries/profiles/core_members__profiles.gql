@@ -19,7 +19,6 @@ query Core_members__profiles($first: Int, $nameSeo: String!) {
       joined
       name
       name_seo
-      posts
     }
   }
 }
