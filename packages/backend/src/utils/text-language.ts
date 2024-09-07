@@ -19,28 +19,6 @@ export class StringLanguageInput {
   value: string;
 }
 
-export const IsStringLanguageInput = () => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return (object: Record<string, any>, propertyName: string) => {
-    registerDecorator({
-      target: object.constructor,
-      propertyName,
-      options: {
-        message: 'Each language must have a value',
-      },
-      validator: {
-        validate(item: null | StringLanguageInput | StringLanguageInput[]) {
-          if (!item) return false;
-
-          return (Array.isArray(item) ? item : [item]).every(
-            item => item.value.trim().length > 0,
-          );
-        },
-      },
-    });
-  };
-};
-
 export const MaxLengthLanguageInput = ({ length }: { length: number }) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return (object: Record<string, any>, propertyName: string) => {

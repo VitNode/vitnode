@@ -104,29 +104,50 @@ For the translation fields to work in the input, you need to use `StringLanguage
 
 ```ts title="backend/plugins/{your_plugin}/terms/create/create.dto.ts"
 import {
-  IsStringLanguageInput,
   StringLanguageInput,
   TransformStringLanguageInput,
 } from 'vitnode-backend';
 import { ArgsType, Field } from '@nestjs/graphql';
 import { Transform } from 'class-transformer';
-import { IsArray } from 'class-validator';
 
 @ArgsType()
 export class CreateAdminTermsSettingsArgs {
-  @IsArray()
-  @IsStringLanguageInput()
-  @Transform(TransformStringLanguageInput)
+  @Transform(TransformStringLanguageInput) // [!code highlight]
   @Field(() => [StringLanguageInput]) // [!code highlight]
   content: StringLanguageInput[]; // [!code highlight]
 
-  @IsArray()
-  @IsStringLanguageInput()
-  @Transform(TransformStringLanguageInput)
+  @Transform(TransformStringLanguageInput) // [!code highlight]
   @Field(() => [StringLanguageInput]) // [!code highlight]
   title: StringLanguageInput[]; // [!code highlight]
 }
 ```
+
+`TransformStringLanguageInput` is a custom decorator that will transform the input to the correct format.
+
+To required translation fields you can use `@ArrayMinSize(2)` decorator.
+
+````ts title="backend/plugins/{your_plugin}/terms/create/create.dto.ts"
+import {
+  StringLanguageInput,
+  TransformStringLanguageInput,
+} from 'vitnode-backend';
+import { ArgsType, Field } from '@nestjs/graphql';
+import { Transform } from 'class-transformer';
+  import { ArrayMinSize } from 'class-validator';
+
+@ArgsType()
+export class CreateAdminTermsSettingsArgs {
+  @ArrayMinSize(1) // [!code highlight]
+  @Transform(TransformStringLanguageInput)
+  @Field(() => [StringLanguageInput])
+  content: StringLanguageInput[];
+
+  @ArrayMinSize(1) // [!code highlight]
+  @Transform(TransformStringLanguageInput)
+  @Field(() => [StringLanguageInput])
+  title: StringLanguageInput[];
+}
+
 
 </Step>
 
@@ -202,7 +223,7 @@ export class CreateAdminTermsSettingsService {
     };
   }
 }
-```
+````
 
 This method will create a translation inside `core_languages_words` table and processing content to send notifications, attachments, etc.
 
