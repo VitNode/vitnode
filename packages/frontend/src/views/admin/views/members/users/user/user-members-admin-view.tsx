@@ -25,6 +25,10 @@ const getData = async (
   >({
     query: Admin__Core_Members__Show__Item,
     variables,
+    cache: 'force-cache',
+    next: {
+      tags: [`admin__core_members__show-${variables.id}`],
+    },
   });
 
   return data;
