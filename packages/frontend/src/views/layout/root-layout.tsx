@@ -1,7 +1,6 @@
 import { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
-import NextTopLoader from 'nextjs-toploader';
 import React from 'react';
 
 import { getGlobalData } from '../../graphql/get-global-data';
@@ -62,11 +61,6 @@ export const RootLayout = async ({
 
     return (
       <WrapperRootLayout className={className} locale={locale}>
-        <NextTopLoader
-          color="hsl(var(--primary))"
-          height={4}
-          showSpinner={false}
-        />
         <RootProviders middlewareData={middlewareData}>
           <NextIntlClientProvider messages={messages}>
             {children}

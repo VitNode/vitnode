@@ -35,7 +35,12 @@ export const ActionsUserMembersAdmin = (
     <>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button ariaLabel={t('user_menu')} size="icon" variant="ghost">
+          <Button
+            ariaLabel={t('user_menu')}
+            className="@lg:relative @lg:right-auto @lg:top-auto absolute right-4 top-20"
+            size="icon"
+            variant="ghost"
+          >
             <EllipsisIcon />
           </Button>
         </DropdownMenuTrigger>
