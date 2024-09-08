@@ -493,6 +493,20 @@
         "create": {
           "title": "Create User",
           "success": "User has been created."
+        },
+        "item": {
+          "user_menu": "User Menu",
+          "info": {
+            "title": "Info User",
+            "joined": "Joined",
+            "email": "Email"
+          },
+          "edit": {
+            "title": "Edit User"
+          },
+          "delete": {
+            "title": "Delete User"
+          }
         }
       },
       "groups": {

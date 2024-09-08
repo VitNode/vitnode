@@ -28,7 +28,7 @@ export const ContentCreateUserUsersMembersAdmin = () => {
             if (!value.length) return null;
 
             return (
-              <span className="text-muted-foreground mt-1 block max-w-md truncate text-sm">
+              <span className="text-muted-foreground mt-2 block max-w-md truncate text-sm">
                 {t.rich('sign_up.form.name.your_id', {
                   id: () => (
                     <span className="text-foreground font-medium">

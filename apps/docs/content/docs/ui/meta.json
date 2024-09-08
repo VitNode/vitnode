@@ -6,6 +6,7 @@
     "index",
     "theme",
     "navigation",
+    "container-queries",
     "---Components---",
     "forms",
     "users",

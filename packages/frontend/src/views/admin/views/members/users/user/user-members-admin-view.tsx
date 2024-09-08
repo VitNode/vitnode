@@ -1,3 +1,4 @@
+import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { AvatarUser } from '@/components/ui/user/avatar';
 import { GroupFormat } from '@/components/ui/user/group-format';
@@ -8,6 +9,9 @@ import {
   Admin__Core_Members__Show__ItemQueryVariables,
 } from '@/graphql/queries/admin/members/users/item/admin__core_members__show__item.generated';
 import { notFound } from 'next/navigation';
+
+import { ActionsUserMembersAdmin } from './actions/actions';
+import { InfoBlockUserMembersAdmin } from './blocks/info';
 
 const getData = async (
   variables: Admin__Core_Members__Show__ItemQueryVariables,
@@ -50,19 +54,42 @@ export const UserMembersAdminView = async ({ id }: Props) => {
     return notFound();
   }
 
-  const { name, group } = edges[0];
+  const { name, group, joined, email } = edges[0];
 
   return (
-    <Card className="max-w-xl">
-      <div className="bg-secondary h-20 rounded-t-md" />
-      <div className="-mt-14 flex items-end gap-6 p-6">
-        <AvatarUser sizeInRem={6} user={edges[0]} />
+    <div className="space-y-8">
+      <Card>
+        <div className="bg-secondary h-20 rounded-t-md" />
+        <div className="relative flex items-center gap-6 p-4">
+          <div className="basis-24">
+            <AvatarUser
+              className="border-card absolute bottom-4 -mb-2 border-4"
+              sizeInRem={6}
+              user={edges[0]}
+            />
+          </div>
 
-        <div className="flex-1">
-          <h1 className="truncate text-2xl font-semibold">{name}</h1>
-          <GroupFormat group={group} />
+          <div className="flex-1">
+            <h1 className="truncate text-2xl font-semibold">
+              {name}
+              {name}
+              {name}
+              {name}
+              {name}
+              {name}
+              {name}
+            </h1>
+            <GroupFormat group={group} />
+          </div>
+
+          <Button>Something</Button>
+          <Button>Something</Button>
+
+          <ActionsUserMembersAdmin {...edges[0]} />
         </div>
-      </div>
-    </Card>
+      </Card>
+
+      <InfoBlockUserMembersAdmin email={email} joined={joined} />
+    </div>
   );
 };
