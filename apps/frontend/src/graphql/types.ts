@@ -410,11 +410,8 @@ export type MutationAdmin__Core_Members__CreateArgs = {
 
 
 export type MutationAdmin__Core_Members__EditArgs = {
-  birthday?: InputMaybe<Scalars['DateTime']['input']>;
   email: Scalars['String']['input'];
-  first_name?: InputMaybe<Scalars['String']['input']>;
   id: Scalars['Int']['input'];
-  last_name?: InputMaybe<Scalars['String']['input']>;
   name: Scalars['String']['input'];
   newsletter: Scalars['Boolean']['input'];
 };

@@ -142,6 +142,7 @@
         "legal": {
           "title": "Legal & Policies",
           "desc": "These settings are used to generate the legal pages on your website.",
+          "legal_public": "Public Legal",
           "preview": "Preview",
           "create_edit": {
             "create": "Create Policy",
@@ -493,6 +494,22 @@
         "create": {
           "title": "Create User",
           "success": "User has been created."
+        },
+        "item": {
+          "user_menu": "User Menu",
+          "public_profile": "Public Profile",
+          "info": {
+            "title": "Info User",
+            "joined": "Joined",
+            "email": "Email"
+          },
+          "edit": {
+            "title": "Edit User",
+            "success": "User has been updated."
+          },
+          "delete": {
+            "title": "Delete User"
+          }
         }
       },
       "groups": {

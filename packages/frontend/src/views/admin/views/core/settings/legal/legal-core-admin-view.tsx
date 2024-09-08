@@ -1,3 +1,4 @@
+import { Button } from '@/components/ui/button';
 import { HeaderContent } from '@/components/ui/header-content';
 import { fetcher } from '@/graphql/fetcher';
 import {
@@ -9,6 +10,8 @@ import {
   Admin_Core_Terms__ShowQuery,
   Admin_Core_Terms__ShowQueryVariables,
 } from '@/graphql/queries/admin/settings/terms/Admin_core_terms__show.generated';
+import { Link } from '@/navigation';
+import { SquareArrowOutUpRight } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 
 import { ContentLegalSettingsAdmin } from './content/content';
@@ -58,6 +61,11 @@ export const LegalSettingsAdminView = async ({
   return (
     <>
       <HeaderContent desc={t('desc')} h1={t('title')}>
+        <Button asChild variant="ghost">
+          <Link href="/legal" target="_blank">
+            {t('legal_public')} <SquareArrowOutUpRight />
+          </Link>
+        </Button>
         <CreateLegalSettingsAdmin />
       </HeaderContent>
 

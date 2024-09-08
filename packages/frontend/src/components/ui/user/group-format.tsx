@@ -14,7 +14,7 @@ export const GroupFormat = ({
 
   return (
     <span
-      className={cn('font-medium text-[--group-color]', className)}
+      className={cn('text-[--group-color]', className)}
       style={{ '--group-color': color } as React.CSSProperties}
     >
       {convertText(name)}
