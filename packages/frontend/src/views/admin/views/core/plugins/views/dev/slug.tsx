@@ -1,7 +1,6 @@
 import { SlugViewProps } from '@/views/slug';
 import { notFound } from 'next/navigation';
 
-import { FilesDevPluginAdminView } from './files-view';
 import { NavDevPluginAdminView } from './nav/nav';
 import { OverviewDevPluginAdminView } from './overview';
 
@@ -19,7 +18,6 @@ export const SlugDevPluginsAdminView = (props: SlugDevPluginsAdminProps) => {
   if (!slug[1]) {
     if (slug[0] === 'overview')
       return <OverviewDevPluginAdminView {...props} />;
-    if (slug[0] === 'files') return <FilesDevPluginAdminView {...props} />;
     if (slug[0] === 'nav') return <NavDevPluginAdminView {...props} />;
   }
 

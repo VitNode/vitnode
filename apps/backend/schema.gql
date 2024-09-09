@@ -138,15 +138,6 @@ enum EmailProvider {
   smtp
 }
 
-type FilesAdminPluginsObj {
-  admin_pages: Int!
-  admin_templates: Int!
-  databases: Int!
-  default_page: Boolean!
-  pages: Int!
-  templates: Int!
-}
-
 type FilesAuthorizationCoreSessions {
   allow_upload: Boolean!
   max_storage_for_submit: Int!
@@ -294,7 +285,6 @@ type Query {
   admin__core_manifest_metadata__show: ShowAdminManifestMetadataObj!
   admin__core_members__show(cursor: Int, first: Int, groups: [Int!], id: Float, last: Int, search: String, sortBy: ShowAdminMembersSortByArgs): ShowAdminMembersObj!
   admin__core_members__stats_sign_up: [SignUpStatsAdminMembers!]!
-  admin__core_plugins__files(code: String!): FilesAdminPluginsObj!
   admin__core_plugins__nav__show(plugin_code: String!): [ShowAdminNavPluginsObj!]!
   admin__core_plugins__show(code: String, cursor: Int, first: Int, last: Int, search: String, sortBy: ShowAdminPluginsSortByArgs): ShowAdminPluginsObj!
   admin__core_security__captcha__show: ShowAdminCaptchaSecurityObj!
