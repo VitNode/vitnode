@@ -508,7 +508,14 @@
             "success": "User has been updated."
           },
           "delete": {
-            "title": "Delete User"
+            "title": "Delete User",
+            "desc": "This action will delete the user <name></name> and all data associated with it permanently.",
+            "submit": "Yes, delete user",
+            "success": "User has been deleted.",
+            "delete_admin": {
+              "title": "You cannot delete this admin",
+              "desc": "Please remove the admin permissions before deleting this user."
+            }
           }
         }
       },

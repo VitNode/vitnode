@@ -3,6 +3,8 @@ import { Module } from '@nestjs/common';
 
 import { CreateAdminMembersResolver } from './create/create.resolver';
 import { CreateAdminMembersService } from './create/create.service';
+import { DeleteAdminMembersResolver } from './delete/delete.resolver';
+import { DeleteAdminMembersService } from './delete/delete.service';
 import { EditAdminMembersResolver } from './edit/edit.resolver';
 import { EditAdminMembersService } from './edit/edit.service';
 import { ShowAdminMembersResolver } from './show/show.resolver';
@@ -21,6 +23,8 @@ import { StatsAdminMembersService } from './stats/stats.service';
     CreateAdminMembersResolver,
     CreateAdminMembersService,
     SignUpHelperService,
+    DeleteAdminMembersResolver,
+    DeleteAdminMembersService,
   ],
 })
 export class AdminMembersModule {}

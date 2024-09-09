@@ -8,6 +8,7 @@ import { useDialog } from '@/components/ui/dialog';
 import { Admin__Core_Members__Show__ItemQuery } from '@/graphql/queries/admin/members/users/item/admin__core_members__show__item.generated';
 import { nameRegex } from '@/hooks/core/sign/up/use-sign-up-view';
 import { useTranslations } from 'next-intl';
+import { UseFormReturn } from 'react-hook-form';
 import { toast } from 'sonner';
 import * as z from 'zod';
 
@@ -48,7 +49,10 @@ export const EditActionUserMembersAdmin = ({
     newsletter: z.boolean().default(newsletter).optional(),
   });
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  const onSubmit = async (
+    values: z.infer<typeof formSchema>,
+    form: UseFormReturn<z.infer<typeof formSchema>>,
+  ) => {
     const mutation = await mutationApi({
       id,
       ...values,
@@ -56,6 +60,14 @@ export const EditActionUserMembersAdmin = ({
     });
 
     if (mutation?.error) {
+      if (mutation.error === 'EMAIL_ALREADY_EXISTS') {
+        form.setError('email', {
+          message: tCore('sign_up.form.email.already_exists'),
+        });
+
+        return;
+      }
+
       toast.error(tCore('errors.title'), {
         description: tCore('errors.internal_server_error'),
       });

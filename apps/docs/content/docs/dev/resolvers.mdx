@@ -5,11 +5,13 @@ description: Expose your data to the world for GraphQL.
 
 Resolvers are the functions that are responsible for populating the data for a single field in your schema. They are the bridge between the GraphQL server and your data.
 
+## Usage
+
 import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 <Steps>
 <Step>
-## Create a Resolver
+### Create a Resolver
 
 In regard to the [previews](/docs/dev/services) section, let's create a simple logic where we're using the service.
 
@@ -63,7 +65,7 @@ Read more about [Return Object](/docs/dev/services#return-object).
 </Step>
 <Step>
 
-## Provide into the Module
+### Provide into the Module
 
 ```ts title="backend/plugins/blog/categories/categories.module.ts"
 import { Module } from '@nestjs/common';
@@ -79,3 +81,48 @@ export class BlogCategoriesModule {}
 
 </Step>
 </Steps>
+
+## Resolver Arguments
+
+You can pass arguments to the resolver function. For example, let's say we want to get a single category by its ID:
+
+```ts title="backend/plugins/blog/categories/show/show.resolver.ts"
+import { Resolver, Query, Args, Int } from '@nestjs/graphql';
+
+import { ShowBlogCategoriesService } from './show.service';
+import { ShowBlogCategories } from './dto/show.obj';
+
+@Resolver()
+export class ShowBlogCategoriesResolver {
+  constructor(private readonly service: ShowBlogCategoriesService) {}
+
+  @Query(() => ShowBlogCategoriesObj)
+  async blog_categories__show(
+    @Args('id', { type: () => Int }) id: number, // [!code highlight]
+  ): Promise<ShowBlogCategoriesObj> {
+    return this.service.show(id);
+  }
+}
+```
+
+or you can use [Data Transfer Object (DTO)](/docs/dev/dto) for the arguments:
+
+```ts title="backend/plugins/blog/categories/show/show.resolver.ts"
+import { Resolver, Query, Args } from '@nestjs/graphql';
+
+import { ShowBlogCategoriesService } from './show.service';
+import { ShowBlogCategories } from './dto/show.obj';
+import { ShowBlogCategoriesArgs } from './dto/show.args'; // [!code highlight]
+
+@Resolver()
+export class ShowBlogCategoriesResolver {
+  constructor(private readonly service: ShowBlogCategoriesService) {}
+
+  @Query(() => ShowBlogCategoriesObj)
+  async blog_categories__show(
+    @Args() args: ShowBlogCategoriesArgs, // [!code highlight]
+  ): Promise<ShowBlogCategoriesObj> {
+    return this.service.show(args);
+  }
+}
+```

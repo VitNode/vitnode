@@ -1,9 +1,11 @@
 'use client';
 
+import { AlertDialog } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
@@ -15,9 +17,12 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Loader } from '@/components/ui/loader';
 import { Admin__Core_Members__Show__ItemQuery } from '@/graphql/queries/admin/members/users/item/admin__core_members__show__item.generated';
+import { useSessionAdmin } from '@/hooks/use-session-admin';
 import { EllipsisIcon, Pencil, UserMinus } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import React from 'react';
+
+import { DeleteActionUserMembersAdmin } from './delete/delete';
 
 const EditActionUserMembersAdmin = React.lazy(async () =>
   import('./edit/edit').then(module => ({
@@ -25,11 +30,14 @@ const EditActionUserMembersAdmin = React.lazy(async () =>
   })),
 );
 
-export const ActionsUserMembersAdmin = (
-  props: Admin__Core_Members__Show__ItemQuery['admin__core_members__show']['edges'][0],
-) => {
+export const ActionsUserMembersAdmin = ({
+  name,
+  ...props
+}: Admin__Core_Members__Show__ItemQuery['admin__core_members__show']['edges'][0]) => {
   const t = useTranslations('admin.members.users.item');
   const [isOpenEdit, setIsOpenEdit] = React.useState(false);
+  const [isOpenDelete, setIsOpenDelete] = React.useState(false);
+  const { session } = useSessionAdmin();
 
   return (
     <>
@@ -54,7 +62,13 @@ export const ActionsUserMembersAdmin = (
             <Pencil />
             {t('edit.title')}
           </DropdownMenuItem>
-          <DropdownMenuItem destructive disabled>
+          <DropdownMenuItem
+            destructive
+            disabled={session?.id === props.id}
+            onClick={() => {
+              setIsOpenDelete(true);
+            }}
+          >
             <UserMinus />
             {t('delete.title')}
           </DropdownMenuItem>
@@ -65,13 +79,18 @@ export const ActionsUserMembersAdmin = (
         <DialogContent>
           <DialogHeader>
             <DialogTitle>{t('edit.title')}</DialogTitle>
+            <DialogDescription>{name}</DialogDescription>
           </DialogHeader>
 
           <React.Suspense fallback={<Loader />}>
-            <EditActionUserMembersAdmin {...props} />
+            <EditActionUserMembersAdmin name={name} {...props} />
           </React.Suspense>
         </DialogContent>
       </Dialog>
+
+      <AlertDialog onOpenChange={setIsOpenDelete} open={isOpenDelete}>
+        <DeleteActionUserMembersAdmin name={name} {...props} />
+      </AlertDialog>
     </>
   );
 };
