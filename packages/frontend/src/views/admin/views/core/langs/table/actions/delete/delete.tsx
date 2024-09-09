@@ -1,6 +1,12 @@
-import { AlertDialog, AlertDialogContent } from '@/components/ui/alert-dialog';
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogTrigger,
+} from '@/components/ui/alert-dialog';
+import { Button } from '@/components/ui/button';
 import { Loader } from '@/components/ui/loader';
-import { ShowCoreLanguages } from '@/graphql/types';
+import { Trash2 } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import React from 'react';
 
 const Content = React.lazy(async () =>
@@ -9,18 +15,18 @@ const Content = React.lazy(async () =>
   })),
 );
 
-interface Props extends Pick<ShowCoreLanguages, 'code' | 'name'> {
-  open: boolean;
-  setOpen: (value: boolean) => void;
-}
+export const DeleteActionsTableLangsCoreAdmin = (
+  props: React.ComponentProps<typeof Content>,
+) => {
+  const t = useTranslations('core');
 
-export const DeleteActionsTableLangsCoreAdmin = ({
-  open,
-  setOpen,
-  ...props
-}: Props) => {
   return (
-    <AlertDialog onOpenChange={setOpen} open={open}>
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <Button ariaLabel={t('delete')} size="icon" variant="destructiveGhost">
+          <Trash2 />
+        </Button>
+      </AlertDialogTrigger>
       <AlertDialogContent>
         <React.Suspense fallback={<Loader />}>
           <Content {...props} />
