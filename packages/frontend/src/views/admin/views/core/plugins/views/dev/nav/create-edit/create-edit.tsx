@@ -38,7 +38,7 @@ export const CreateEditNavDevPluginAdmin = ({
   const tPlugin = useTranslations(
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
-    `${Array.isArray(code) ? code[0] : code}.admin.nav`,
+    `admin_${Array.isArray(code) ? code[0] : code}.nav`,
   );
 
   return (

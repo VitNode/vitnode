@@ -12,7 +12,7 @@ export const ItemContentNavDevPluginAdmin = (
   const { code: pluginCode } = useParams();
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-expect-error
-  const t = useTranslations(`${pluginCode}.admin.nav`);
+  const t = useTranslations(`admin_${pluginCode}.nav`);
   const tAdmin = useTranslations('admin.core.plugins.dev.nav');
   const tCore = useTranslations('core');
   const { parentId, icons } = useItemNavDevPluginAdmin();
@@ -30,7 +30,7 @@ export const ItemContentNavDevPluginAdmin = (
         <p className="text-muted-foreground text-sm">
           {tAdmin.rich('lang_key', {
             key: () => (
-              <span className="text-foreground">{`${pluginCode}.admin.nav.${langKey}`}</span>
+              <span className="text-foreground">{`admin_${pluginCode}.nav.${langKey}`}</span>
             ),
           })}
         </p>

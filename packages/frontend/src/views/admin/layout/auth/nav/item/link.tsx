@@ -31,7 +31,7 @@ export const LinkItemNavAdmin = ({
 }: Props) => {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-expect-error
-  const t = useTranslations(`${plugin_code}.admin.nav`);
+  const t = useTranslations(`admin_${plugin_code}.nav`);
   const pathname = usePathname();
   const href = `/admin/${plugin_code}/${hrefFromProps}`;
   const active = pathname.startsWith(`/admin/${plugin_code}/${id}`);

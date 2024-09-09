@@ -52,21 +52,20 @@ Default language is English `en`. If you have more then one language add keys to
 
 ### Language Keys
 
-- **Title Plugin** - key is always `{your_plugin_code}.admin.nav.title`.  
+- **Title Plugin** - key is always `admin_{your_plugin_code}.nav.title`.  
   For example: `blog.admin.nav.title`,
-- **Navigation item** - key is always `{your_plugin_code}.admin.nav.{navigation_item_name}`.  
+- **Navigation item** - key is always `admin_{your_plugin_code}.nav.{navigation_item_name}`.  
   For example: `blog.admin.nav.categories`.
 
 Here is an example of the language keys:
 
 ```json title="en.json"
 {
-  "blog": {
-    "admin": {
-      "nav": {
-        "title": "Blog",
-        "categories": "Categories"
-      }
+  "blog": {},
+  "admin_blog": {
+    "nav": {
+      "title": "Blog",
+      "categories": "Categories"
     }
   }
 }

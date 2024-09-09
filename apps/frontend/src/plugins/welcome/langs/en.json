@@ -1,5 +1,4 @@
 {
-  "welcome": {
-    "admin": {}
-  }
+  "welcome": {},
+  "admin_welcome": {}
 }

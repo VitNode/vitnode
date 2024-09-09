@@ -72,9 +72,8 @@ export class CreateAdminPluginsService {
         join(langPath, `${lang.code}.json`),
         JSON.stringify(
           {
-            [code]: {
-              admin: {},
-            },
+            [code]: {},
+            [`admin_${code}`]: {},
           },
           null,
           2,

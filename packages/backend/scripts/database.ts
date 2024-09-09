@@ -7,8 +7,6 @@ const execShellCommand = async (cmd: string) => {
         reject(error);
       }
       const result = stdout ? stdout : stderr;
-      // eslint-disable-next-line no-console
-      console.log(result);
 
       resolve(result);
     });
