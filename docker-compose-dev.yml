@@ -1,4 +1,4 @@
-version: "3.8"
+version: '3.8'
 
 services:
   database:
@@ -9,11 +9,11 @@ services:
       POSTGRES_USER: ${DB_USER-root}
       POSTGRES_PASSWORD: ${DB_PASSWORD-root}
       POSTGRES_DB: vitnode
-    command: ["postgres", "-c", "log_statement=all"] # log all sql queries
+    command: ['postgres', '-c', 'log_statement=all'] # log all sql queries
     volumes:
-      - ./docker/dev/database:/var/lib/postgresql/data
+      - ./docker/dev:/var/lib/postgresql/data
     ports:
-      - "5432:5432"
+      - '5432:5432'
     networks:
       - vitnode_dev
 
@@ -25,7 +25,7 @@ services:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
       PGADMIN_DEFAULT_PASSWORD: admin
     ports:
-      - "5050:80"
+      - '5050:80'
     depends_on:
       - database
     networks:

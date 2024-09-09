@@ -16,11 +16,23 @@ const execShellCommand = async (cmd: string) => {
 };
 
 export const generateDatabaseMigrations = async () => {
-  await execShellCommand(
-    'npm run drizzle-kit up && npm run drizzle-kit generate',
-  );
+  try {
+    await execShellCommand(
+      'npm run drizzle-kit up && npm run drizzle-kit generate',
+    );
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error(err);
+    process.exit(1);
+  }
 };
 
 export const runMigrations = async () => {
-  await execShellCommand('npm run drizzle-kit migrate');
+  try {
+    await execShellCommand('npm run drizzle-kit migrate');
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error(err);
+    process.exit(1);
+  }
 };
