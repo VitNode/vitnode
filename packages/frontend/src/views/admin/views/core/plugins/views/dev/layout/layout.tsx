@@ -26,7 +26,7 @@ export async function generateMetadataDevPluginAdminLayout({
 }: DevPluginAdminLayoutProps): Promise<Metadata> {
   const [t, tCore, config] = await Promise.all([
     getTranslations('admin'),
-    getTranslations('core.admin'),
+    getTranslations('admin_core'),
     getGlobalData(),
   ]);
 
