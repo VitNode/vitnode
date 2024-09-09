@@ -338,27 +338,6 @@
         "contact": "Contact with Us"
       }
     },
-    "admin": {
-      "nav": {
-        "title": "Core",
-        "dashboard": "Dashboard",
-        "settings": "Settings",
-        "settings_general": "General",
-        "settings_security": "Security",
-        "settings_metadata": "Metadata",
-        "settings_email": "Email",
-        "settings_authorization": "Authorization",
-        "settings_legal": "Legal & Policies",
-        "plugins": "Plugins",
-        "styles": "Styles",
-        "styles_theme-editor": "Theme Editor",
-        "styles_nav": "Navigation",
-        "styles_editor": "Editor",
-        "langs": "Languages",
-        "advanced": "Advanced",
-        "advanced_files": "Files"
-      }
-    },
     "legal": {
       "title": "Legal & Policies",
       "title_page": "Explore our Legal documents and Policies",
@@ -367,16 +346,35 @@
       "empty": "No documents found."
     }
   },
-  "members": {
-    "admin": {
-      "nav": {
-        "title": "Members",
-        "users": "Users List",
-        "groups": "Groups",
-        "staff": "Staff",
-        "staff_moderators": "Moderators",
-        "staff_administrators": "Administrators"
-      }
+  "admin_core": {
+    "nav": {
+      "title": "Core",
+      "dashboard": "Dashboard",
+      "settings": "Settings",
+      "settings_general": "General",
+      "settings_security": "Security",
+      "settings_metadata": "Metadata",
+      "settings_email": "Email",
+      "settings_authorization": "Authorization",
+      "settings_legal": "Legal & Policies",
+      "plugins": "Plugins",
+      "styles": "Styles",
+      "styles_theme-editor": "Theme Editor",
+      "styles_nav": "Navigation",
+      "styles_editor": "Editor",
+      "langs": "Languages",
+      "advanced": "Advanced",
+      "advanced_files": "Files"
+    }
+  },
+  "admin_members": {
+    "nav": {
+      "title": "Members",
+      "users": "Users List",
+      "groups": "Groups",
+      "staff": "Staff",
+      "staff_moderators": "Moderators",
+      "staff_administrators": "Administrators"
     }
   }
 }

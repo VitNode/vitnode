@@ -26,7 +26,7 @@ const getData = async () => {
 
 export const generateMetadataEmailSettingsAdmin =
   async (): Promise<Metadata> => {
-    const t = await getTranslations('core.admin.nav');
+    const t = await getTranslations('admin_core.nav');
 
     return {
       title: t('settings_email'),
@@ -35,7 +35,7 @@ export const generateMetadataEmailSettingsAdmin =
 
 export const EmailSettingsAdminView = async () => {
   const [t, data] = await Promise.all([
-    getTranslations('core.admin.nav'),
+    getTranslations('admin_core.nav'),
     getData(),
   ]);
 

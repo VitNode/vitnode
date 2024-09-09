@@ -23,7 +23,7 @@ const getData = async () => {
 };
 
 export const generateMetadataThemeEditor = async (): Promise<Metadata> => {
-  const t = await getTranslations('core.admin.nav');
+  const t = await getTranslations('admin_core.nav');
 
   return {
     title: t('styles_theme-editor'),

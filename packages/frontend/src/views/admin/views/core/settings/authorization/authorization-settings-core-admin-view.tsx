@@ -21,7 +21,7 @@ const getData = async () => {
 
 export const generateMetadataAuthorizationSettingsAdmin =
   async (): Promise<Metadata> => {
-    const t = await getTranslations('core.admin.nav');
+    const t = await getTranslations('admin_core.nav');
 
     return {
       title: t('settings_authorization'),
@@ -30,7 +30,7 @@ export const generateMetadataAuthorizationSettingsAdmin =
 
 export const AuthorizationSettingsCoreAdminView = async () => {
   const [t, data] = await Promise.all([
-    getTranslations('core.admin.nav'),
+    getTranslations('admin_core.nav'),
     getData(),
   ]);
 

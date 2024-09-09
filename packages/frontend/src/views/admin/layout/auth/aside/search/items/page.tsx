@@ -20,7 +20,7 @@ export const PageItemContentSearchAsideAuthAdmin = ({
 }: Props) => {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-expect-error
-  const t = useTranslations(`${code_plugin}.admin`);
+  const t = useTranslations(`admin_${code_plugin}`);
   const { push } = useRouter();
   const href = parent_nav_code
     ? `/admin/${code_plugin}/${parent_nav_code}/${hrefFromProps}`
