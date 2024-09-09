@@ -1,12 +1,10 @@
 import { CurrentUser, User } from '@/decorators';
+import { FileUpload, GraphQLUpload } from '@/graphql-upload';
 import { AuthGuards } from '@/utils';
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
-import {
-  UploadAvatarCoreMembersArgs,
-  UploadAvatarCoreMembersObj,
-} from './upload.dto';
+import { UploadAvatarCoreMembersObj } from './upload.dto';
 import { UploadAvatarCoreMembersService } from './upload.service';
 
 @Resolver()
@@ -17,8 +15,8 @@ export class UploadAvatarCoreMembersResolver {
   @UseGuards(AuthGuards)
   async core_members__avatar__upload(
     @CurrentUser() currentUser: User,
-    @Args() args: UploadAvatarCoreMembersArgs,
+    @Args('file', { type: () => GraphQLUpload }) file: Promise<FileUpload>,
   ): Promise<UploadAvatarCoreMembersObj> {
-    return this.service.uploadAvatar(currentUser, args);
+    return this.service.uploadAvatar(currentUser, { file });
   }
 }

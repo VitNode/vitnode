@@ -3,11 +3,11 @@ import { ABSOLUTE_PATHS_BACKEND, ConfigPlugin } from '@/index';
 import { Injectable } from '@nestjs/common';
 import * as fs from 'fs';
 
-import { ShowAdminNavPluginsArgs, ShowAdminNavPluginsObj } from './show.dto';
+import { ShowAdminNavPluginsObj } from './show.dto';
 
 @Injectable()
 export class ShowAdminNavPluginsService {
-  show({ plugin_code }: ShowAdminNavPluginsArgs): ShowAdminNavPluginsObj[] {
+  show({ plugin_code }: { plugin_code: string }): ShowAdminNavPluginsObj[] {
     const pathConfig = ABSOLUTE_PATHS_BACKEND.plugin({
       code: plugin_code,
     }).config;

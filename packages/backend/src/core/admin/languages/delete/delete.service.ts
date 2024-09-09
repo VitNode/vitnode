@@ -12,12 +12,11 @@ import {
   ConfigType,
   getConfigFile,
 } from '../../../..';
-import { DeleteCoreAdminLanguagesArgs } from './delete.dto';
 @Injectable()
 export class DeleteAdminCoreLanguageService {
   constructor(private readonly databaseService: InternalDatabaseService) {}
 
-  async delete({ code }: DeleteCoreAdminLanguagesArgs): Promise<string> {
+  async delete({ code }: { code: string }): Promise<string> {
     const language =
       await this.databaseService.db.query.core_languages.findFirst({
         where: (table, { eq }) => eq(table.code, code),

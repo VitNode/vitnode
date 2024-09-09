@@ -6,8 +6,6 @@ import { InternalDatabaseService } from '@/utils/database/internal_database.serv
 import { Injectable } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
 
-import { DeleteAdminGroupsArgs } from './delete.dto';
-
 @Injectable()
 export class DeleteAdminGroupsService {
   constructor(
@@ -15,7 +13,7 @@ export class DeleteAdminGroupsService {
     private readonly stringLanguageHelper: StringLanguageHelper,
   ) {}
 
-  async delete({ id }: DeleteAdminGroupsArgs): Promise<string> {
+  async delete({ id }: { id: number }): Promise<string> {
     const group = await this.databaseService.db.query.core_groups.findFirst({
       where: (table, { eq }) => eq(table.id, id),
     });

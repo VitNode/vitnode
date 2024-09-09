@@ -2,7 +2,6 @@ import { AdminAuthGuards, OnlyForDevelopment } from '@/utils';
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
-import { DeleteAdminPluginsArgs } from './delete.dto';
 import { DeleteAdminPluginsService } from './delete.service';
 
 @Resolver()
@@ -13,8 +12,8 @@ export class DeleteAdminPluginsResolver {
   @UseGuards(AdminAuthGuards)
   @UseGuards(OnlyForDevelopment)
   async admin__core_plugins__delete(
-    @Args() args: DeleteAdminPluginsArgs,
+    @Args('code', { type: () => String }) code: string,
   ): Promise<string> {
-    return this.service.delete(args);
+    return this.service.delete({ code });
   }
 }

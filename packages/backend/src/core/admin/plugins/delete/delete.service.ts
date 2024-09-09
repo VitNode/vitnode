@@ -7,7 +7,6 @@ import { eq } from 'drizzle-orm';
 import * as fs from 'fs';
 
 import { ChangeFilesAdminPluginsService } from '../helpers/files/change/change.service';
-import { DeleteAdminPluginsArgs } from './delete.dto';
 
 @Injectable()
 export class DeleteAdminPluginsService {
@@ -22,7 +21,7 @@ export class DeleteAdminPluginsService {
     }
   }
 
-  async delete({ code }: DeleteAdminPluginsArgs): Promise<string> {
+  async delete({ code }: { code: string }): Promise<string> {
     const plugin = await this.databaseService.db.query.core_plugins.findFirst({
       where: (table, { eq }) => eq(table.code, code),
     });
