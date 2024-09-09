@@ -4,13 +4,11 @@ import { InternalDatabaseService } from '@/utils/database/internal_database.serv
 import { Injectable } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
 
-import { DeleteAdminStaffAdministratorsArgs } from './delete.dto';
-
 @Injectable()
 export class DeleteAdminStaffAdministratorsService {
   constructor(private readonly databaseService: InternalDatabaseService) {}
 
-  async delete({ id }: DeleteAdminStaffAdministratorsArgs): Promise<string> {
+  async delete({ id }: { id: number }): Promise<string> {
     const permission =
       await this.databaseService.db.query.core_admin_permissions.findFirst({
         where: (table, { eq }) => eq(table.id, id),

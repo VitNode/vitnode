@@ -1,8 +1,7 @@
 import { AdminAuthGuards } from '@/utils';
 import { UseGuards } from '@nestjs/common';
-import { Args, Mutation, Resolver } from '@nestjs/graphql';
+import { Args, Int, Mutation, Resolver } from '@nestjs/graphql';
 
-import { DeleteAdminNavStylesArgs } from './delete.dto';
 import { DeleteAdminNavStylesService } from './delete.service';
 
 @Resolver()
@@ -12,8 +11,8 @@ export class DeleteAdminNavStylesResolver {
   @Mutation(() => String)
   @UseGuards(AdminAuthGuards)
   async admin__core_styles__nav__delete(
-    @Args() args: DeleteAdminNavStylesArgs,
+    @Args('id', { type: () => Int }) id: number,
   ): Promise<string> {
-    return this.service.delete(args);
+    return this.service.delete({ id });
   }
 }

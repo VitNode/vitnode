@@ -264,6 +264,7 @@ export type Mutation = {
   admin__core_main_settings__edit: EditAdminSettingsObj;
   admin__core_manifest_metadata__edit: ShowAdminManifestMetadataObj;
   admin__core_members__create: SignUpCoreSessionsObj;
+  admin__core_members__delete: Scalars['String']['output'];
   admin__core_members__edit: EditAdminMembersObj;
   admin__core_nav_styles__change_position: Scalars['String']['output'];
   admin__core_plugins__create: ShowAdminPlugins;
@@ -295,7 +296,6 @@ export type Mutation = {
   core_members__avatar__delete: Scalars['String']['output'];
   core_members__avatar__upload: UploadAvatarCoreMembersObj;
   core_members__change_password: Scalars['String']['output'];
-  core_members__delete: Scalars['String']['output'];
   core_members__reset_password__create_key: Scalars['String']['output'];
   core_sessions__sign_in: Scalars['String']['output'];
   core_sessions__sign_out: Scalars['String']['output'];
@@ -406,6 +406,11 @@ export type MutationAdmin__Core_Members__CreateArgs = {
   email: Scalars['String']['input'];
   name: Scalars['String']['input'];
   password: Scalars['String']['input'];
+};
+
+
+export type MutationAdmin__Core_Members__DeleteArgs = {
+  id: Scalars['Float']['input'];
 };
 
 
@@ -610,11 +615,6 @@ export type MutationCore_Members__Avatar__UploadArgs = {
 export type MutationCore_Members__Change_PasswordArgs = {
   hashKey: Scalars['String']['input'];
   password: Scalars['String']['input'];
-};
-
-
-export type MutationCore_Members__DeleteArgs = {
-  id: Scalars['Int']['input'];
 };
 
 

@@ -1,15 +1,13 @@
 import { core_files_avatars } from '@/database/schema/users';
 import { User } from '@/decorators';
 import { CustomError } from '@/errors';
+import { FileUpload } from '@/graphql-upload';
 import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
 
 import { FilesService } from '../../../files/helpers/upload/upload.service';
-import {
-  UploadAvatarCoreMembersArgs,
-  UploadAvatarCoreMembersObj,
-} from './upload.dto';
+import { UploadAvatarCoreMembersObj } from './upload.dto';
 
 @Injectable()
 export class UploadAvatarCoreMembersService {
@@ -20,7 +18,7 @@ export class UploadAvatarCoreMembersService {
 
   async uploadAvatar(
     { avatar, id }: User,
-    { file }: UploadAvatarCoreMembersArgs,
+    { file }: { file: Promise<FileUpload> },
   ): Promise<UploadAvatarCoreMembersObj> {
     if (avatar) {
       // Check if avatar exists

@@ -5,8 +5,6 @@ import { InternalDatabaseService } from '@/utils/database/internal_database.serv
 import { Injectable } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
 
-import { DeleteAdminFilesArgs } from './delete.dto';
-
 @Injectable()
 export class DeleteAdminFilesService {
   constructor(
@@ -14,7 +12,7 @@ export class DeleteAdminFilesService {
     private readonly files: FilesService,
   ) {}
 
-  async delete({ id }: DeleteAdminFilesArgs): Promise<string> {
+  async delete({ id }: { id: number }): Promise<string> {
     const findFile = await this.databaseService.db.query.core_files.findFirst({
       where: (table, { eq }) => eq(table.id, id),
     });

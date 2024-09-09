@@ -5,8 +5,6 @@ import { InternalDatabaseService } from '@/utils/database/internal_database.serv
 import { Injectable } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
 
-import { DeleteAdminNavStylesArgs } from './delete.dto';
-
 @Injectable()
 export class DeleteAdminNavStylesService {
   constructor(
@@ -14,7 +12,7 @@ export class DeleteAdminNavStylesService {
     private readonly stringLanguageHelper: StringLanguageHelper,
   ) {}
 
-  async delete({ id }: DeleteAdminNavStylesArgs): Promise<string> {
+  async delete({ id }: { id: number }): Promise<string> {
     const nav = await this.databaseService.db.query.core_nav.findFirst({
       where: (table, { eq }) => eq(table.id, id),
     });

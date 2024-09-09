@@ -4,7 +4,7 @@ import { Injectable } from '@nestjs/common';
 import * as fs from 'fs';
 
 import { ABSOLUTE_PATHS_BACKEND } from '../../../..';
-import { FilesAdminPluginsArgs, FilesAdminPluginsObj } from './files.dto';
+import { FilesAdminPluginsObj } from './files.dto';
 
 @Injectable()
 export class FilesAdminPluginsService {
@@ -22,7 +22,7 @@ export class FilesAdminPluginsService {
       : 0;
   }
 
-  async check({ code }: FilesAdminPluginsArgs): Promise<FilesAdminPluginsObj> {
+  async check({ code }: { code: string }): Promise<FilesAdminPluginsObj> {
     const plugin = await this.databaseService.db.query.core_plugins.findFirst({
       where: (table, { eq }) => eq(table.code, code),
     });

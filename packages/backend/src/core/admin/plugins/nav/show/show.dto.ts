@@ -1,10 +1,4 @@
-import { ArgsType, Field, ObjectType } from '@nestjs/graphql';
-
-@ArgsType()
-export class ShowAdminNavPluginsArgs {
-  @Field(() => String)
-  plugin_code: string;
-}
+import { Field, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
 export class ShowAdminNavPlugins {
