@@ -259,7 +259,6 @@ export type Mutation = {
   admin__core_groups__edit: ShowAdminGroups;
   admin__core_languages__create: ShowCoreLanguages;
   admin__core_languages__delete: Scalars['String']['output'];
-  admin__core_languages__download: Scalars['String']['output'];
   admin__core_languages__edit: ShowCoreLanguages;
   admin__core_main_settings__edit: EditAdminSettingsObj;
   admin__core_manifest_metadata__edit: ShowAdminManifestMetadataObj;
@@ -365,12 +364,6 @@ export type MutationAdmin__Core_Languages__CreateArgs = {
 
 export type MutationAdmin__Core_Languages__DeleteArgs = {
   code: Scalars['String']['input'];
-};
-
-
-export type MutationAdmin__Core_Languages__DownloadArgs = {
-  code: Scalars['String']['input'];
-  plugins: Array<Scalars['String']['input']>;
 };
 
 

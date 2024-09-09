@@ -138,15 +138,6 @@ enum EmailProvider {
   smtp
 }
 
-type FilesAdminPluginsObj {
-  admin_pages: Int!
-  admin_templates: Int!
-  databases: Int!
-  default_page: Boolean!
-  pages: Int!
-  templates: Int!
-}
-
 type FilesAuthorizationCoreSessions {
   allow_upload: Boolean!
   max_storage_for_submit: Int!
@@ -226,7 +217,6 @@ type Mutation {
   admin__core_groups__edit(color: String, content: ContentCreateAdminGroups!, id: Int!, name: [StringLanguageInput!]!): ShowAdminGroups!
   admin__core_languages__create(allow_in_input: Boolean!, code: String!, locale: String!, name: String!, time_24: Boolean!, timezone: String!): ShowCoreLanguages!
   admin__core_languages__delete(code: String!): String!
-  admin__core_languages__download(code: String!, plugins: [String!]!): String!
   admin__core_languages__edit(allow_in_input: Boolean!, default: Boolean!, enabled: Boolean!, id: Int!, locale: String!, name: String!, time_24: Boolean!, timezone: String!): ShowCoreLanguages!
   admin__core_main_settings__edit(site_copyright: [StringLanguageInput!]!, site_description: [StringLanguageInput!]!, site_name: String!, site_short_name: String!): EditAdminSettingsObj!
   admin__core_manifest_metadata__edit(background_color: String!, display: String!, start_url: String!, theme_color: String!): ShowAdminManifestMetadataObj!
@@ -295,7 +285,6 @@ type Query {
   admin__core_manifest_metadata__show: ShowAdminManifestMetadataObj!
   admin__core_members__show(cursor: Int, first: Int, groups: [Int!], id: Float, last: Int, search: String, sortBy: ShowAdminMembersSortByArgs): ShowAdminMembersObj!
   admin__core_members__stats_sign_up: [SignUpStatsAdminMembers!]!
-  admin__core_plugins__files(code: String!): FilesAdminPluginsObj!
   admin__core_plugins__nav__show(plugin_code: String!): [ShowAdminNavPluginsObj!]!
   admin__core_plugins__show(code: String, cursor: Int, first: Int, last: Int, search: String, sortBy: ShowAdminPluginsSortByArgs): ShowAdminPluginsObj!
   admin__core_security__captcha__show: ShowAdminCaptchaSecurityObj!

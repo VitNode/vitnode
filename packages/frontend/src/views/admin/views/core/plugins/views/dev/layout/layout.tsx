@@ -120,9 +120,6 @@ export const DevPluginAdminLayout = async ({
         >
           {t('overview.title')}
         </TabsTrigger>
-        <TabsTrigger href={`/admin/core/plugins/${code}/dev/files`} id="files">
-          {t('files.title')}
-        </TabsTrigger>
         <TabsTrigger href={`/admin/core/plugins/${code}/dev/nav`} id="nav">
           {t('nav.title')}
         </TabsTrigger>

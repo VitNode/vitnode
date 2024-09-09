@@ -8,8 +8,6 @@ import { DownloadAdminPluginsResolver } from './download/download.resolver';
 import { DownloadAdminPluginsService } from './download/download.service';
 import { EditAdminPluginsResolver } from './edit/edit.resolver';
 import { EditAdminPluginsService } from './edit/edit.service';
-import { FilesAdminPluginsResolver } from './files/files.resolver';
-import { FilesAdminPluginsService } from './files/files.service';
 import { ChangeFilesAdminPluginsService } from './helpers/files/change/change.service';
 import { CreateFilesAdminPluginsService } from './helpers/files/create/create-files.service';
 import { AdminNavPluginsModule } from './nav/nav-plugins.module';
@@ -32,8 +30,6 @@ import { UploadAdminPluginsService } from './upload/upload.service';
     DownloadAdminPluginsService,
     UploadAdminPluginsResolver,
     UploadAdminPluginsService,
-    FilesAdminPluginsService,
-    FilesAdminPluginsResolver,
     EditAdminPluginsResolver,
     EditAdminPluginsService,
   ],

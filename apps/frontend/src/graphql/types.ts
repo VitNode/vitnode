@@ -161,16 +161,6 @@ export const EmailProvider = {
 } as const;
 
 export type EmailProvider = typeof EmailProvider[keyof typeof EmailProvider];
-export type FilesAdminPluginsObj = {
-  __typename?: 'FilesAdminPluginsObj';
-  admin_pages: Scalars['Int']['output'];
-  admin_templates: Scalars['Int']['output'];
-  databases: Scalars['Int']['output'];
-  default_page: Scalars['Boolean']['output'];
-  pages: Scalars['Int']['output'];
-  templates: Scalars['Int']['output'];
-};
-
 export type FilesAuthorizationCoreSessions = {
   __typename?: 'FilesAuthorizationCoreSessions';
   allow_upload: Scalars['Boolean']['output'];
@@ -259,7 +249,6 @@ export type Mutation = {
   admin__core_groups__edit: ShowAdminGroups;
   admin__core_languages__create: ShowCoreLanguages;
   admin__core_languages__delete: Scalars['String']['output'];
-  admin__core_languages__download: Scalars['String']['output'];
   admin__core_languages__edit: ShowCoreLanguages;
   admin__core_main_settings__edit: EditAdminSettingsObj;
   admin__core_manifest_metadata__edit: ShowAdminManifestMetadataObj;
@@ -365,12 +354,6 @@ export type MutationAdmin__Core_Languages__CreateArgs = {
 
 export type MutationAdmin__Core_Languages__DeleteArgs = {
   code: Scalars['String']['input'];
-};
-
-
-export type MutationAdmin__Core_Languages__DownloadArgs = {
-  code: Scalars['String']['input'];
-  plugins: Array<Scalars['String']['input']>;
 };
 
 
@@ -667,7 +650,6 @@ export type Query = {
   admin__core_manifest_metadata__show: ShowAdminManifestMetadataObj;
   admin__core_members__show: ShowAdminMembersObj;
   admin__core_members__stats_sign_up: Array<SignUpStatsAdminMembers>;
-  admin__core_plugins__files: FilesAdminPluginsObj;
   admin__core_plugins__nav__show: Array<ShowAdminNavPluginsObj>;
   admin__core_plugins__show: ShowAdminPluginsObj;
   admin__core_security__captcha__show: ShowAdminCaptchaSecurityObj;
@@ -717,11 +699,6 @@ export type QueryAdmin__Core_Members__ShowArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
   search?: InputMaybe<Scalars['String']['input']>;
   sortBy?: InputMaybe<ShowAdminMembersSortByArgs>;
-};
-
-
-export type QueryAdmin__Core_Plugins__FilesArgs = {
-  code: Scalars['String']['input'];
 };
 
 
