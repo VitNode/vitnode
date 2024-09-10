@@ -9,6 +9,7 @@ interface NavPluginInfoJSONType {
 export interface NavPluginInfoJSONTypeWithChildren
   extends NavPluginInfoJSONType {
   children?: NavPluginInfoJSONType[];
+  parent_code?: string;
 }
 
 export interface PluginInfoJSONType extends CreateAdminPluginsArgs {

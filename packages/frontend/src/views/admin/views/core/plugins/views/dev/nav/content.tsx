@@ -88,7 +88,11 @@ export const ContentNavDevPluginAdmin = ({
           toast.error(t('errors.title'), {
             description: t('errors.internal_server_error'),
           });
+
+          return;
         }
+
+        window.location.reload();
       }}
       onDragMove={e => {
         onDragMove({ ...e, flattenedItems, maxDepth: 1 });

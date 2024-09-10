@@ -1,4 +1,4 @@
-import { AutoForm } from '@/components/form/auto-form';
+import { AutoForm, DependencyType } from '@/components/form/auto-form';
 import { AutoFormIconPicker } from '@/components/form/fields/icon-picker';
 import {
   AutoFormInput,
@@ -42,6 +42,14 @@ export const CreateEditNavDevPluginAdmin = ({
 
   return (
     <AutoForm
+      dependencies={[
+        {
+          sourceField: 'parent_code',
+          type: DependencyType.HIDES,
+          targetField: 'parent_code',
+          when: () => !!data,
+        },
+      ]}
       fields={[
         {
           id: 'code',

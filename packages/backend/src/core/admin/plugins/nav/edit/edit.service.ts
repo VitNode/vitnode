@@ -5,30 +5,29 @@ import {
   removeSpecialCharacters,
 } from '@/index';
 import { Injectable } from '@nestjs/common';
-import * as fs from 'fs';
+import { existsSync } from 'fs';
+import { readFile, writeFile } from 'fs/promises';
 
 import { ShowAdminNavPluginsObj } from '../show/show.dto';
 import { EditCreateAdminNavPluginsArgs } from './edit.dto';
 
 @Injectable()
 export class EditAdminNavPluginsService {
-  edit({
+  async edit({
     code,
     icon,
     previous_code,
     plugin_code,
     parent_code,
     keywords,
-  }: EditCreateAdminNavPluginsArgs): ShowAdminNavPluginsObj {
+  }: EditCreateAdminNavPluginsArgs): Promise<ShowAdminNavPluginsObj> {
     const pathConfig = ABSOLUTE_PATHS_BACKEND.plugin({
       code: plugin_code,
     }).config;
-    if (!fs.existsSync(pathConfig)) {
+    if (!existsSync(pathConfig)) {
       throw new NotFoundError('Plugin');
     }
-    const config: ConfigPlugin = JSON.parse(
-      fs.readFileSync(pathConfig, 'utf8'),
-    );
+    const config: ConfigPlugin = JSON.parse(await readFile(pathConfig, 'utf8'));
 
     const currentCode = removeSpecialCharacters(code);
     const existsNavCode = config.nav.find(nav => nav.code === currentCode);
@@ -64,8 +63,7 @@ export class EditAdminNavPluginsService {
       };
     }
 
-    // Save config
-    fs.writeFileSync(pathConfig, JSON.stringify(config, null, 2));
+    await writeFile(pathConfig, JSON.stringify(config, null, 2));
 
     return {
       code: currentCode,

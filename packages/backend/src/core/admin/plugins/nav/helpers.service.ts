@@ -21,7 +21,10 @@ export class HelpersAdminNavPluginsService {
       if (item.children) {
         const found = this.findItemByCode({ items: item.children, code });
         if (found) {
-          return found;
+          return {
+            ...found,
+            parent_code: item.code,
+          };
         }
       }
     }
