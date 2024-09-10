@@ -6,8 +6,7 @@ import {
 } from '@/index';
 import { Injectable } from '@nestjs/common';
 import { existsSync } from 'fs';
-import { mkdir, readdir, readFile, writeFile } from 'fs/promises';
-import { join } from 'path';
+import { readFile, writeFile } from 'fs/promises';
 
 import { HelpersAdminNavPluginsService } from '../helpers.service';
 import { ShowAdminNavPluginsObj } from '../show/show.dto';
@@ -15,40 +14,6 @@ import { CreateAdminNavPluginsArgs } from './create.dto';
 
 @Injectable()
 export class CreateAdminNavPluginsService extends HelpersAdminNavPluginsService {
-  private async createI18n({
-    code,
-    parent_code,
-    plugin_code,
-  }: Pick<CreateAdminNavPluginsArgs, 'code' | 'parent_code' | 'plugin_code'>) {
-    const files = await readdir(
-      ABSOLUTE_PATHS_BACKEND.plugin({ code: plugin_code }).frontend.languages,
-    );
-
-    await Promise.all(
-      files.map(async file => {
-        const path = join(
-          ABSOLUTE_PATHS_BACKEND.plugin({ code: plugin_code }).frontend
-            .languages,
-          file,
-        );
-
-        const lang = JSON.parse(await readFile(path, 'utf8'));
-        if (parent_code) {
-          lang[`admin_${plugin_code}`].nav = {
-            ...lang[`admin_${plugin_code}`].nav,
-            [`${parent_code}_${code}`]: code,
-          };
-        } else {
-          lang[`admin_${plugin_code}`].nav = {
-            ...lang[`admin_${plugin_code}`].nav,
-            [code]: code,
-          };
-        }
-        await writeFile(path, JSON.stringify(lang, null, 2));
-      }),
-    );
-  }
-
   async create({
     code,
     icon,
@@ -100,33 +65,6 @@ export class CreateAdminNavPluginsService extends HelpersAdminNavPluginsService 
     }
 
     await writeFile(pathConfig, JSON.stringify(config, null, 2));
-
-    // Update i18n
-    await this.createI18n({
-      code: currentCode,
-      parent_code,
-      plugin_code,
-    });
-
-    // Create page in AdminCP
-    const pathPage = join(
-      ABSOLUTE_PATHS_BACKEND.plugin({
-        code: plugin_code,
-      }).frontend.admin_pages,
-      parent_code ? join(parent_code, currentCode) : currentCode,
-    );
-
-    if (!existsSync(pathPage)) {
-      await mkdir(pathPage, { recursive: true });
-    }
-
-    await writeFile(
-      join(pathPage, 'page.tsx'),
-      `export default function Page() {
-  return <div>Page for ${code}</div>;
-}
-`,
-    );
 
     return {
       code: currentCode,
