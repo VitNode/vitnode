@@ -2,6 +2,7 @@ import { NotFoundError } from '@/errors';
 import { ABSOLUTE_PATHS_BACKEND, ConfigPlugin } from '@/index';
 import { Injectable } from '@nestjs/common';
 import * as fs from 'fs';
+import { join } from 'path';
 
 import { DeleteCreateAdminNavPluginsArgs } from './delete.dto';
 
@@ -44,6 +45,19 @@ export class DeleteAdminNavPluginsService {
 
     // Save config
     fs.writeFileSync(pathConfig, JSON.stringify(config, null, 2));
+
+    // Delete page from AdminCP
+    const pathPage = join(
+      ABSOLUTE_PATHS_BACKEND.plugin({
+        code: plugin_code,
+      }).frontend.admin_pages,
+      code,
+      'page.tsx',
+    );
+
+    if (fs.existsSync(pathPage)) {
+      fs.unlinkSync(pathPage);
+    }
 
     return 'Success!';
   }

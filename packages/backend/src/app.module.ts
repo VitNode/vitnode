@@ -69,7 +69,6 @@ export const ABSOLUTE_PATHS_BACKEND = {
         internalPaths.frontend,
         'app',
         '[locale]',
-        '(admin)',
         'admin',
         '(auth)',
         code,

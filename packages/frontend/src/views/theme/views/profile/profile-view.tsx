@@ -18,7 +18,6 @@ const getData = async ({ id }: { id: string }) => {
       first: 1,
       nameSeo: id,
     },
-    cache: 'force-cache',
   });
 
   return data;

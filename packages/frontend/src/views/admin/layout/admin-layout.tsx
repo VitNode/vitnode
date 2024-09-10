@@ -1,4 +1,3 @@
-import { getGlobalData } from '@/graphql/get-global-data';
 import { getSessionAdminData } from '@/graphql/get-session-admin';
 import { redirect } from '@/navigation';
 import { Metadata } from 'next';
@@ -9,15 +8,12 @@ import { HeaderAdmin } from './auth/header/header';
 import { AdminProviders } from './providers';
 
 export const generateMetadataAdminLayout = async (): Promise<Metadata> => {
-  const [data, t] = await Promise.all([
-    getGlobalData(),
-    getTranslations('admin'),
-  ]);
+  const t = await getTranslations('admin');
 
   return {
     title: {
       default: t('title_short'),
-      template: `%s - ${t('title_short')} - ${data.core_settings__show.site_short_name}`,
+      template: `%s - ${t('title_short')}`,
     },
   };
 };

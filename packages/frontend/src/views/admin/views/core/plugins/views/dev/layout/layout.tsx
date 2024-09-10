@@ -3,7 +3,6 @@ import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import { HeaderContent } from '@/components/ui/header-content';
 import { Tabs, TabsTrigger } from '@/components/ui/tabs';
-import { getGlobalData } from '@/graphql/get-global-data';
 import { CONFIG } from '@/helpers/config-with-env';
 import { redirect } from '@/navigation';
 import { ExternalLink } from 'lucide-react';
@@ -24,16 +23,10 @@ export interface DevPluginAdminLayoutProps {
 export async function generateMetadataDevPluginAdminLayout({
   params: { code },
 }: DevPluginAdminLayoutProps): Promise<Metadata> {
-  const [t, tCore, config] = await Promise.all([
-    getTranslations('admin'),
-    getTranslations('admin_core'),
-    getGlobalData(),
-  ]);
-
   const data = await getPluginDataAdmin({ code });
   if (data.admin__core_plugins__show.edges.length === 0) return {};
 
-  const defaultTitle = `${data.admin__core_plugins__show.edges[0].name} - ${tCore('nav.plugins')} - ${t('title_short')} - ${config.core_settings__show.site_short_name}`;
+  const defaultTitle = data.admin__core_plugins__show.edges[0].name;
 
   return {
     title: {

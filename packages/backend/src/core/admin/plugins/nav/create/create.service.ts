@@ -6,6 +6,7 @@ import {
 } from '@/index';
 import { Injectable } from '@nestjs/common';
 import * as fs from 'fs';
+import { join } from 'path';
 
 import { HelpersAdminNavPluginsService } from '../helpers.service';
 import { ShowAdminNavPluginsObj } from '../show/show.dto';
@@ -70,6 +71,26 @@ export class CreateAdminNavPluginsService extends HelpersAdminNavPluginsService 
 
     // Save config
     fs.writeFileSync(pathConfig, JSON.stringify(config, null, 2));
+
+    // Create page in AdminCP
+    const pathPage = join(
+      ABSOLUTE_PATHS_BACKEND.plugin({
+        code: plugin_code,
+      }).frontend.admin_pages,
+      code,
+    );
+
+    if (!fs.existsSync(pathPage)) {
+      fs.mkdirSync(pathPage, { recursive: true });
+    }
+
+    fs.writeFileSync(
+      join(pathPage, 'page.tsx'),
+      `export default function Page() {
+  return <div>Page for ${code}</div>;
+}
+`,
+    );
 
     return {
       code: currentCode,
