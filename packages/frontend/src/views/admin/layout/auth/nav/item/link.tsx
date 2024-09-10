@@ -11,7 +11,6 @@ import React from 'react';
 
 export interface ItemItemNavAdminProps {
   children?: Omit<ItemItemNavAdminProps, 'icon'>[];
-  href: string;
   icon?: string;
   id: string;
 }
@@ -23,7 +22,6 @@ interface Props extends ItemItemNavAdminProps {
 
 export const LinkItemNavAdmin = ({
   icons,
-  href: hrefFromProps,
   plugin_code,
   id,
   icon,
@@ -33,11 +31,11 @@ export const LinkItemNavAdmin = ({
   // @ts-expect-error
   const t = useTranslations(`admin_${plugin_code}.nav`);
   const pathname = usePathname();
-  const href = `/admin/${plugin_code}/${hrefFromProps}`;
+  const href = `/admin/${plugin_code}/${id}`;
   const active = pathname.startsWith(`/admin/${plugin_code}/${id}`);
   const isChildActive =
     children?.some(child =>
-      pathname.startsWith(`/admin/${plugin_code}/${id}/${child.href}`),
+      pathname.startsWith(`/admin/${plugin_code}/${id}/${child.id}`),
     ) ?? false;
   const { setOpen } = useSheet();
 
@@ -86,7 +84,7 @@ export const LinkItemNavAdmin = ({
         <Accordion.Content className="data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down my-1 overflow-hidden transition-all">
           <div className="ml-7 space-y-1">
             {children.map(child => {
-              const href = `/admin/${plugin_code}/${id}/${child.href}`;
+              const href = `/admin/${plugin_code}/${id}/${child.id}`;
               const active = pathname.startsWith(href);
 
               return (

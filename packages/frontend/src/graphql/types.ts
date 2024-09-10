@@ -161,16 +161,6 @@ export const EmailProvider = {
 } as const;
 
 export type EmailProvider = typeof EmailProvider[keyof typeof EmailProvider];
-export type FilesAdminPluginsObj = {
-  __typename?: 'FilesAdminPluginsObj';
-  admin_pages: Scalars['Int']['output'];
-  admin_templates: Scalars['Int']['output'];
-  databases: Scalars['Int']['output'];
-  default_page: Scalars['Boolean']['output'];
-  pages: Scalars['Int']['output'];
-  templates: Scalars['Int']['output'];
-};
-
 export type FilesAuthorizationCoreSessions = {
   __typename?: 'FilesAuthorizationCoreSessions';
   allow_upload: Scalars['Boolean']['output'];
@@ -466,7 +456,6 @@ export type MutationAdmin__Core_Plugins__Nav__Change_PositionArgs = {
 
 export type MutationAdmin__Core_Plugins__Nav__CreateArgs = {
   code: Scalars['String']['input'];
-  href: Scalars['String']['input'];
   icon?: InputMaybe<Scalars['String']['input']>;
   keywords: Array<Scalars['String']['input']>;
   parent_code?: InputMaybe<Scalars['String']['input']>;
@@ -483,7 +472,6 @@ export type MutationAdmin__Core_Plugins__Nav__DeleteArgs = {
 
 export type MutationAdmin__Core_Plugins__Nav__EditArgs = {
   code: Scalars['String']['input'];
-  href: Scalars['String']['input'];
   icon?: InputMaybe<Scalars['String']['input']>;
   keywords: Array<Scalars['String']['input']>;
   parent_code?: InputMaybe<Scalars['String']['input']>;
@@ -635,7 +623,6 @@ export type NavSearchAdminSessions = {
   __typename?: 'NavSearchAdminSessions';
   code: Scalars['String']['output'];
   code_plugin: Scalars['String']['output'];
-  href: Scalars['String']['output'];
   icon?: Maybe<Scalars['String']['output']>;
   keywords: Array<Scalars['String']['output']>;
   parent_nav_code?: Maybe<Scalars['String']['output']>;
@@ -660,7 +647,6 @@ export type Query = {
   admin__core_manifest_metadata__show: ShowAdminManifestMetadataObj;
   admin__core_members__show: ShowAdminMembersObj;
   admin__core_members__stats_sign_up: Array<SignUpStatsAdminMembers>;
-  admin__core_plugins__files: FilesAdminPluginsObj;
   admin__core_plugins__nav__show: Array<ShowAdminNavPluginsObj>;
   admin__core_plugins__show: ShowAdminPluginsObj;
   admin__core_security__captcha__show: ShowAdminCaptchaSecurityObj;
@@ -710,11 +696,6 @@ export type QueryAdmin__Core_Members__ShowArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
   search?: InputMaybe<Scalars['String']['input']>;
   sortBy?: InputMaybe<ShowAdminMembersSortByArgs>;
-};
-
-
-export type QueryAdmin__Core_Plugins__FilesArgs = {
-  code: Scalars['String']['input'];
 };
 
 
@@ -949,7 +930,6 @@ export type ShowAdminNavObj = {
 export type ShowAdminNavPlugins = {
   __typename?: 'ShowAdminNavPlugins';
   code: Scalars['String']['output'];
-  href: Scalars['String']['output'];
   icon?: Maybe<Scalars['String']['output']>;
   keywords: Array<Scalars['String']['output']>;
 };
@@ -958,7 +938,6 @@ export type ShowAdminNavPluginsObj = {
   __typename?: 'ShowAdminNavPluginsObj';
   children?: Maybe<Array<ShowAdminNavPlugins>>;
   code: Scalars['String']['output'];
-  href: Scalars['String']['output'];
   icon?: Maybe<Scalars['String']['output']>;
   keywords: Array<Scalars['String']['output']>;
 };

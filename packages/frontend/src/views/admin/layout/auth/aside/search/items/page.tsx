@@ -6,7 +6,7 @@ import { useTranslations } from 'next-intl';
 interface Props
   extends Pick<
     NavSearchAdminSessions,
-    'code' | 'code_plugin' | 'href' | 'parent_nav_code'
+    'code' | 'code_plugin' | 'parent_nav_code'
   > {
   setOpen: (open: boolean) => void;
 }
@@ -15,7 +15,6 @@ export const PageItemContentSearchAsideAuthAdmin = ({
   code,
   code_plugin,
   parent_nav_code,
-  href: hrefFromProps,
   setOpen,
 }: Props) => {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -23,8 +22,8 @@ export const PageItemContentSearchAsideAuthAdmin = ({
   const t = useTranslations(`admin_${code_plugin}`);
   const { push } = useRouter();
   const href = parent_nav_code
-    ? `/admin/${code_plugin}/${parent_nav_code}/${hrefFromProps}`
-    : `/admin/${code_plugin}/${hrefFromProps}`;
+    ? `/admin/${code_plugin}/${parent_nav_code}/${code}`
+    : `/admin/${code_plugin}/${code}`;
 
   return (
     <CommandItem

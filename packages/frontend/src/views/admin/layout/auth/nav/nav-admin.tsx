@@ -13,11 +13,9 @@ export const NavAdmin = async () => {
           id={item.code}
           items={item.nav.map(navItem => ({
             id: navItem.code,
-            href: navItem.href,
             icon: navItem.icon ?? undefined,
             children: navItem.children?.map(child => ({
               id: child.code,
-              href: child.href,
             })),
           }))}
           key={item.code}

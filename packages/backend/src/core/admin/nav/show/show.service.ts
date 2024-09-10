@@ -15,39 +15,32 @@ export class ShowAdminNavService {
       nav: [
         {
           code: 'dashboard',
-          href: 'dashboard',
           icon: 'layout-dashboard',
           keywords: [],
         },
         {
           code: 'settings',
-          href: 'settings/general',
           icon: 'settings',
           keywords: [],
           children: [
             {
               code: 'general',
-              href: 'general',
               keywords: ['name', 'title', 'description', 'desc', 'copyright'],
             },
             {
               code: 'security',
-              href: 'security',
               keywords: ['captcha'],
             },
             {
               code: 'metadata',
-              href: 'metadata',
               keywords: ['manifest', 'pwa', 'seo'],
             },
             {
               code: 'email',
-              href: 'email',
               keywords: ['email', 'e-mail', 'mail', 'smtp'],
             },
             {
               code: 'authorization',
-              href: 'authorization',
               keywords: [
                 'authorization',
                 'auth',
@@ -60,55 +53,46 @@ export class ShowAdminNavService {
             },
             {
               code: 'legal',
-              href: 'legal',
               keywords: ['legal', 'terms', 'privacy', 'policy', 'tos', 'pp'],
             },
           ],
         },
         {
           code: 'plugins',
-          href: 'plugins',
           icon: 'plug',
           keywords: ['plug', 'plugin'],
         },
         {
           code: 'styles',
-          href: 'styles/nav',
           icon: 'paintbrush',
           keywords: [],
           children: [
             {
               code: 'theme-editor',
-              href: '/theme-editor',
               keywords: ['theme', 'editor', 'color', 'logo'],
             },
             {
               code: 'nav',
-              href: 'nav',
               keywords: ['nav', 'navigation'],
             },
             {
               code: 'editor',
-              href: 'editor',
               keywords: ['editor', 'tiptap'],
             },
           ],
         },
         {
           code: 'langs',
-          href: 'langs',
           icon: 'languages',
           keywords: ['language'],
         },
         {
           code: 'advanced',
-          href: 'advanced/files',
           icon: 'cog',
           keywords: [],
           children: [
             {
               code: 'files',
-              href: 'files',
               keywords: ['file'],
             },
           ],
@@ -120,30 +104,25 @@ export class ShowAdminNavService {
       nav: [
         {
           code: 'users',
-          href: 'users',
           icon: 'users',
           keywords: ['user'],
         },
         {
           code: 'groups',
-          href: 'groups',
           icon: 'group',
           keywords: ['group', 'permission', 'file', 'upload', 'storage'],
         },
         {
           code: 'staff',
-          href: 'staff/moderators',
           icon: 'user-cog',
           keywords: [],
           children: [
             {
               code: 'moderators',
-              href: 'moderators',
               keywords: [],
             },
             {
               code: 'administrators',
-              href: 'administrators',
               keywords: [],
             },
           ],

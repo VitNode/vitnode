@@ -61,7 +61,7 @@ export class CreateAdminPluginsService {
 
     languages.forEach(lang => {
       const langPath = join(
-        ABSOLUTE_PATHS_BACKEND.plugin({ code }).frontend.language,
+        ABSOLUTE_PATHS_BACKEND.plugin({ code }).frontend.languages,
       );
 
       if (!fs.existsSync(langPath)) {
@@ -73,7 +73,11 @@ export class CreateAdminPluginsService {
         JSON.stringify(
           {
             [code]: {},
-            [`admin_${code}`]: {},
+            [`admin_${code}`]: {
+              nav: {
+                title: name,
+              },
+            },
           },
           null,
           2,

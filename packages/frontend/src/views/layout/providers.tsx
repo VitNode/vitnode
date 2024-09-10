@@ -3,6 +3,7 @@
 import { Core_GlobalQuery } from '@/graphql/queries/core_global.generated';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
+import NextTopLoader from 'nextjs-toploader';
 import React from 'react';
 
 import { Toaster } from '../../components/ui/sonner';
@@ -50,6 +51,11 @@ export const RootProviders = ({
             ({} as Core_GlobalQuery['core_middleware__show']),
         }}
       >
+        <NextTopLoader
+          color="hsl(var(--primary))"
+          height={4}
+          showSpinner={false}
+        />
         <NextThemesProvider
           attribute="class"
           defaultTheme="system"

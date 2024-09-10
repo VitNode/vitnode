@@ -69,7 +69,6 @@ export const ABSOLUTE_PATHS_BACKEND = {
         internalPaths.frontend,
         'app',
         '[locale]',
-        '(admin)',
         'admin',
         '(auth)',
         code,
@@ -92,7 +91,7 @@ export const ABSOLUTE_PATHS_BACKEND = {
       ),
       templates: join(internalPaths.frontend, 'plugins', code, 'templates'),
       plugin: join(internalPaths.frontend, 'plugins', code),
-      language: join(internalPaths.frontend, 'plugins', code, 'langs'),
+      languages: join(internalPaths.frontend, 'plugins', code, 'langs'),
     },
   }),
   frontend: {

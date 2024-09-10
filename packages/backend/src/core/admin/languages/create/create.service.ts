@@ -29,7 +29,7 @@ export class CreateAdminCoreLanguageService {
 
     [...plugins, { code: 'core' }, { code: 'admin' }].forEach(plugin => {
       const path = join(
-        ABSOLUTE_PATHS_BACKEND.plugin({ code: plugin.code }).frontend.language,
+        ABSOLUTE_PATHS_BACKEND.plugin({ code: plugin.code }).frontend.languages,
         `${pluginCode}.json`,
       );
       if (fs.existsSync(path)) return;
@@ -37,7 +37,7 @@ export class CreateAdminCoreLanguageService {
       fs.cpSync(
         join(
           ABSOLUTE_PATHS_BACKEND.plugin({ code: plugin.code }).frontend
-            .language,
+            .languages,
           'en.json',
         ),
         path,

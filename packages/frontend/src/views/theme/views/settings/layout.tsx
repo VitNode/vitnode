@@ -1,6 +1,5 @@
 import { Card } from '@/components/ui/card';
 import { HeaderContent } from '@/components/ui/header-content';
-import { getGlobalData } from '@/graphql/get-global-data';
 import { getSessionData } from '@/graphql/get-session-data';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
@@ -10,15 +9,12 @@ import React from 'react';
 import { NavSettings } from './nav/nav-settings';
 
 export const generateMetadataLayoutSettings = async (): Promise<Metadata> => {
-  const [data, t] = await Promise.all([
-    getGlobalData(),
-    getTranslations('core.settings'),
-  ]);
+  const t = await getTranslations('core.settings');
 
   return {
     title: {
       default: t('title'),
-      template: `%s - ${t('title')} - ${data.core_settings__show.site_short_name}`,
+      template: `%s - ${t('title')}`,
     },
     robots: 'noindex, nofollow',
   };

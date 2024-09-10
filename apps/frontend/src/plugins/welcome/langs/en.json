@@ -1,4 +1,8 @@
 {
   "welcome": {},
-  "admin_welcome": {}
+  "admin_welcome": {
+    "nav": {
+      "title": "Welcome"
+    }
+  }
 }

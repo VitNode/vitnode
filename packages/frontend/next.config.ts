@@ -29,8 +29,6 @@ const nextConfig = (config: NextConfig): NextConfig => {
       NEXT_PUBLIC_BACKEND_URL: ENVS.backend_url,
       NEXT_PUBLIC_FRONTEND_URL: ENVS.frontend_url,
     },
-    // TODO: Remove this when the framer-motion issue is fixed for React 19
-    reactStrictMode: false,
     experimental: {
       ppr: true,
     },
