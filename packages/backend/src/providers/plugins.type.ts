@@ -2,7 +2,6 @@ import { CreateAdminPluginsArgs } from '../core/admin/plugins/create/create.dto'
 
 interface NavPluginInfoJSONType {
   code: string;
-  href: string;
   icon: null | string;
   keywords: string[];
 }
@@ -10,6 +9,7 @@ interface NavPluginInfoJSONType {
 export interface NavPluginInfoJSONTypeWithChildren
   extends NavPluginInfoJSONType {
   children?: NavPluginInfoJSONType[];
+  parent_code?: string;
 }
 
 export interface PluginInfoJSONType extends CreateAdminPluginsArgs {

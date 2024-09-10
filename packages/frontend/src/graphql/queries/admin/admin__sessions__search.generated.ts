@@ -6,7 +6,7 @@ export type Admin__Sessions__SearchQueryVariables = Types.Exact<{
 }>;
 
 
-export type Admin__Sessions__SearchQuery = { __typename?: 'Query', admin__sessions__search: { __typename?: 'SearchAdminSessionsObj', nav: Array<{ __typename?: 'NavSearchAdminSessions', code: string, code_plugin: string, href: string, keywords: Array<string>, icon?: string, parent_nav_code?: string }> } };
+export type Admin__Sessions__SearchQuery = { __typename?: 'Query', admin__sessions__search: { __typename?: 'SearchAdminSessionsObj', nav: Array<{ __typename?: 'NavSearchAdminSessions', code: string, code_plugin: string, keywords: Array<string>, icon?: string, parent_nav_code?: string }> } };
 
 
 export const Admin__Sessions__Search = gql`
@@ -15,7 +15,6 @@ export const Admin__Sessions__Search = gql`
     nav {
       code
       code_plugin
-      href
       keywords
       icon
       parent_nav_code

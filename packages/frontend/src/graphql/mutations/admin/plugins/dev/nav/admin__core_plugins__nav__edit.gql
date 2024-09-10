@@ -1,6 +1,5 @@
 mutation Admin__core_plugins__nav__edit(
   $code: String!
-  $href: String!
   $icon: String
   $pluginCode: String!
   $previousCode: String!
@@ -9,7 +8,6 @@ mutation Admin__core_plugins__nav__edit(
 ) {
   admin__core_plugins__nav__edit(
     code: $code
-    href: $href
     icon: $icon
     plugin_code: $pluginCode
     previous_code: $previousCode

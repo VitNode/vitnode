@@ -32,11 +32,10 @@ export const useDeleteNavPluginAdmin = ({
       return;
     }
 
+    setOpen(false);
     toast.success(t('success'), {
       description: code,
     });
-
-    setOpen(false);
   };
 
   return { onSubmit };

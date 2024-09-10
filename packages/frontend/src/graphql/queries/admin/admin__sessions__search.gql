@@ -3,7 +3,6 @@ query Admin__sessions__search($search: String!) {
     nav {
       code
       code_plugin
-      href
       keywords
       icon
       parent_nav_code

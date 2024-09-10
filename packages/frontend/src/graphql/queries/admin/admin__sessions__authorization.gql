@@ -29,11 +29,9 @@ query Admin__sessions__authorization {
   admin__nav__show {
     code
     nav {
-      href
       code
       children {
         icon
-        href
         code
       }
       icon

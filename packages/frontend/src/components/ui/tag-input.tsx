@@ -16,9 +16,7 @@ interface Props
   extends Omit<React.HTMLAttributes<HTMLInputElement>, 'onChange'> {
   className?: string;
   disabled?: boolean;
-  onChange: (
-    value?: TagInputItemProps | TagInputItemProps[] | undefined,
-  ) => void;
+  onChange: (value?: TagInputItemProps | TagInputItemProps[]) => void;
 }
 
 interface MultiProps extends Props {
