@@ -8,7 +8,6 @@ import { AutoFormSelect } from '@/components/form/fields/select';
 import { AutoFormTagInput } from '@/components/form/fields/tags-input';
 import { Admin__Core_Plugins__Nav__ShowQuery } from '@/graphql/queries/admin/plugins/dev/nav/admin__core_plugins__nav__show.generated';
 import { ShowAdminNavPluginsObj } from '@/graphql/types';
-import { removeSpecialCharacters } from '@/helpers/special-characters';
 import { Ban } from 'lucide-react';
 import { useParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
@@ -29,7 +28,7 @@ export const CreateEditNavDevPluginAdmin = ({
   parentId,
 }: CreateEditNavDevPluginAdminProps) => {
   const t = useTranslations('admin.core.plugins.dev.nav');
-  const { onSubmit, formSchema, values, setValues } = useCreateNavPluginAdmin({
+  const { onSubmit, formSchema } = useCreateNavPluginAdmin({
     data,
     parentId,
     dataFromSSR,
@@ -48,16 +47,6 @@ export const CreateEditNavDevPluginAdmin = ({
           id: 'code',
           label: t('create.code.label'),
           description: t('create.code.desc'),
-          component: AutoFormInput,
-        },
-        {
-          id: 'href',
-          label: t('create.href.label'),
-          description: t.rich('create.href.desc', {
-            link: () => (
-              <span className="text-foreground font-bold">{`${code}/${values.parent_code !== 'null' ? `${values.parent_code}/` : ''}${removeSpecialCharacters(values.href ?? '')}`}</span>
-            ),
-          }),
           component: AutoFormInput,
         },
         {
@@ -108,7 +97,6 @@ export const CreateEditNavDevPluginAdmin = ({
       ]}
       formSchema={formSchema}
       onSubmit={onSubmit}
-      onValuesChange={setValues}
     />
   );
 };

@@ -5,7 +5,8 @@ import {
   removeSpecialCharacters,
 } from '@/index';
 import { Injectable } from '@nestjs/common';
-import * as fs from 'fs';
+import { existsSync } from 'fs';
+import { mkdir, readdir, readFile, writeFile } from 'fs/promises';
 import { join } from 'path';
 
 import { HelpersAdminNavPluginsService } from '../helpers.service';
@@ -14,23 +15,54 @@ import { CreateAdminNavPluginsArgs } from './create.dto';
 
 @Injectable()
 export class CreateAdminNavPluginsService extends HelpersAdminNavPluginsService {
-  create({
+  private async createI18n({
     code,
-    href,
+    parent_code,
+    plugin_code,
+  }: Pick<CreateAdminNavPluginsArgs, 'code' | 'parent_code' | 'plugin_code'>) {
+    const files = await readdir(
+      ABSOLUTE_PATHS_BACKEND.plugin({ code: plugin_code }).frontend.languages,
+    );
+
+    await Promise.all(
+      files.map(async file => {
+        const path = join(
+          ABSOLUTE_PATHS_BACKEND.plugin({ code: plugin_code }).frontend
+            .languages,
+          file,
+        );
+
+        const lang = JSON.parse(await readFile(path, 'utf8'));
+        if (parent_code) {
+          lang[`admin_${plugin_code}`].nav = {
+            ...lang[`admin_${plugin_code}`].nav,
+            [`${parent_code}_${code}`]: code,
+          };
+        } else {
+          lang[`admin_${plugin_code}`].nav = {
+            ...lang[`admin_${plugin_code}`].nav,
+            [code]: code,
+          };
+        }
+        await writeFile(path, JSON.stringify(lang, null, 2));
+      }),
+    );
+  }
+
+  async create({
+    code,
     icon,
     plugin_code,
     parent_code,
     keywords,
-  }: CreateAdminNavPluginsArgs): ShowAdminNavPluginsObj {
+  }: CreateAdminNavPluginsArgs): Promise<ShowAdminNavPluginsObj> {
     const pathConfig = ABSOLUTE_PATHS_BACKEND.plugin({
       code: plugin_code,
     }).config;
-    if (!fs.existsSync(pathConfig)) {
+    if (!existsSync(pathConfig)) {
       throw new NotFoundError('Plugin');
     }
-    const config: ConfigPlugin = JSON.parse(
-      fs.readFileSync(pathConfig, 'utf8'),
-    );
+    const config: ConfigPlugin = JSON.parse(await readFile(pathConfig, 'utf8'));
 
     const currentCode = removeSpecialCharacters(code);
     const codeExists = this.findItemByCode({
@@ -56,35 +88,39 @@ export class CreateAdminNavPluginsService extends HelpersAdminNavPluginsService 
       parent.children = parent.children ?? [];
       parent.children.push({
         code: currentCode,
-        href,
         icon,
         keywords,
       });
     } else {
       config.nav.push({
         code: currentCode,
-        href,
         icon,
         keywords,
       });
     }
 
-    // Save config
-    fs.writeFileSync(pathConfig, JSON.stringify(config, null, 2));
+    await writeFile(pathConfig, JSON.stringify(config, null, 2));
+
+    // Update i18n
+    await this.createI18n({
+      code: currentCode,
+      parent_code,
+      plugin_code,
+    });
 
     // Create page in AdminCP
     const pathPage = join(
       ABSOLUTE_PATHS_BACKEND.plugin({
         code: plugin_code,
       }).frontend.admin_pages,
-      code,
+      parent_code ? join(parent_code, currentCode) : currentCode,
     );
 
-    if (!fs.existsSync(pathPage)) {
-      fs.mkdirSync(pathPage, { recursive: true });
+    if (!existsSync(pathPage)) {
+      await mkdir(pathPage, { recursive: true });
     }
 
-    fs.writeFileSync(
+    await writeFile(
       join(pathPage, 'page.tsx'),
       `export default function Page() {
   return <div>Page for ${code}</div>;
@@ -94,7 +130,6 @@ export class CreateAdminNavPluginsService extends HelpersAdminNavPluginsService 
 
     return {
       code: currentCode,
-      href,
       icon,
       keywords,
     };

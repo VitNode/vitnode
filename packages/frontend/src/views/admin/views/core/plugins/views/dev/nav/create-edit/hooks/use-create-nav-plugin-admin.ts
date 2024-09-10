@@ -4,7 +4,6 @@ import { ShowAdminNavPluginsObj } from '@/graphql/types';
 import { zodTag } from '@/helpers/zod';
 import { useParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import React from 'react';
 import { UseFormReturn } from 'react-hook-form';
 import { toast } from 'sonner';
 import * as z from 'zod';
@@ -32,11 +31,6 @@ export const useCreateNavPluginAdmin = ({
       .min(3)
       .max(50)
       .default(data?.code ?? ''),
-    href: z
-      .string()
-      .min(1)
-      .max(100)
-      .default(data?.href ?? ''),
     parent_code: z
       .enum(['null', ...dataFromSSR.map(nav => nav.code)])
       .default(parentId ?? 'null'),
@@ -53,10 +47,6 @@ export const useCreateNavPluginAdmin = ({
       )
       .optional(),
   });
-
-  const [values, setValues] = React.useState<
-    Partial<z.infer<typeof formSchema>>
-  >({});
 
   const onSubmit = async (
     values: z.infer<typeof formSchema>,
@@ -107,14 +97,11 @@ export const useCreateNavPluginAdmin = ({
       return;
     }
 
-    toast.success(t(data ? 'edit.success' : 'create.success'));
-
     setOpen?.(false);
+    toast.success(t(data ? 'edit.success' : 'create.success'));
   };
 
   return {
-    values,
-    setValues,
     onSubmit,
     formSchema,
   };

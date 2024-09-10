@@ -456,7 +456,6 @@ export type MutationAdmin__Core_Plugins__Nav__Change_PositionArgs = {
 
 export type MutationAdmin__Core_Plugins__Nav__CreateArgs = {
   code: Scalars['String']['input'];
-  href: Scalars['String']['input'];
   icon?: InputMaybe<Scalars['String']['input']>;
   keywords: Array<Scalars['String']['input']>;
   parent_code?: InputMaybe<Scalars['String']['input']>;
@@ -473,7 +472,6 @@ export type MutationAdmin__Core_Plugins__Nav__DeleteArgs = {
 
 export type MutationAdmin__Core_Plugins__Nav__EditArgs = {
   code: Scalars['String']['input'];
-  href: Scalars['String']['input'];
   icon?: InputMaybe<Scalars['String']['input']>;
   keywords: Array<Scalars['String']['input']>;
   parent_code?: InputMaybe<Scalars['String']['input']>;
@@ -625,7 +623,6 @@ export type NavSearchAdminSessions = {
   __typename?: 'NavSearchAdminSessions';
   code: Scalars['String']['output'];
   code_plugin: Scalars['String']['output'];
-  href: Scalars['String']['output'];
   icon?: Maybe<Scalars['String']['output']>;
   keywords: Array<Scalars['String']['output']>;
   parent_nav_code?: Maybe<Scalars['String']['output']>;
@@ -933,7 +930,6 @@ export type ShowAdminNavObj = {
 export type ShowAdminNavPlugins = {
   __typename?: 'ShowAdminNavPlugins';
   code: Scalars['String']['output'];
-  href: Scalars['String']['output'];
   icon?: Maybe<Scalars['String']['output']>;
   keywords: Array<Scalars['String']['output']>;
 };
@@ -942,7 +938,6 @@ export type ShowAdminNavPluginsObj = {
   __typename?: 'ShowAdminNavPluginsObj';
   children?: Maybe<Array<ShowAdminNavPlugins>>;
   code: Scalars['String']['output'];
-  href: Scalars['String']['output'];
   icon?: Maybe<Scalars['String']['output']>;
   keywords: Array<Scalars['String']['output']>;
 };

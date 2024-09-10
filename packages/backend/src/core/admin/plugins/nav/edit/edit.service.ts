@@ -14,7 +14,6 @@ import { EditCreateAdminNavPluginsArgs } from './edit.dto';
 export class EditAdminNavPluginsService {
   edit({
     code,
-    href,
     icon,
     previous_code,
     plugin_code,
@@ -53,7 +52,6 @@ export class EditAdminNavPluginsService {
 
       children[navIndex] = {
         code: currentCode,
-        href,
         icon: icon ?? null,
         keywords,
       };
@@ -61,7 +59,6 @@ export class EditAdminNavPluginsService {
       const navIndex = config.nav.findIndex(nav => nav.code === previous_code);
       config.nav[navIndex] = {
         code: currentCode,
-        href,
         icon: icon ?? null,
         keywords,
       };
@@ -72,7 +69,6 @@ export class EditAdminNavPluginsService {
 
     return {
       code: currentCode,
-      href,
       icon,
       keywords,
     };

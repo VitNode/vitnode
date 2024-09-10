@@ -12,9 +12,9 @@ export class DeleteAdminNavPluginsResolver {
   @Mutation(() => String)
   @UseGuards(AdminAuthGuards)
   @UseGuards(OnlyForDevelopment)
-  admin__core_plugins__nav__delete(
+  async admin__core_plugins__nav__delete(
     @Args() args: DeleteCreateAdminNavPluginsArgs,
-  ): string {
+  ): Promise<string> {
     return this.service.delete(args);
   }
 }

@@ -125,7 +125,7 @@ export class UploadAdminPluginsService {
       const checkExist = join(
         ABSOLUTE_PATHS_BACKEND.plugin({
           code: config.code,
-        }).frontend.language,
+        }).frontend.languages,
         `${lang.code}.json`,
       );
 
@@ -136,13 +136,13 @@ export class UploadAdminPluginsService {
       const source = join(
         ABSOLUTE_PATHS_BACKEND.plugin({
           code: config.code,
-        }).frontend.language,
+        }).frontend.languages,
         `en.json`,
       );
       const destination = join(
         ABSOLUTE_PATHS_BACKEND.plugin({
           code: config.code,
-        }).frontend.language,
+        }).frontend.languages,
         `${lang.code}.json`,
       );
 

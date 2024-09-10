@@ -233,10 +233,6 @@
                 "desc": "Should be unique. Min 3-50 characters.",
                 "exists": "Navigation with this code already exists."
               },
-              "href": {
-                "label": "URL",
-                "desc": "Your link will be: /admin/<link></link>"
-              },
               "icon": {
                 "label": "Icon"
               },

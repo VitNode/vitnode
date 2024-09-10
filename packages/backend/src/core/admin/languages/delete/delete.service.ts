@@ -51,7 +51,7 @@ export class DeleteAdminCoreLanguageService {
       fs.unlinkSync(
         join(
           ABSOLUTE_PATHS_BACKEND.plugin({ code: plugin.code }).frontend
-            .language,
+            .languages,
           `${code}.json`,
         ),
       );
