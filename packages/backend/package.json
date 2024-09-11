@@ -65,6 +65,7 @@
     "@nestjs/config": "^3.2.3",
     "@nestjs/jwt": "^10.2.0",
     "@nestjs/serve-static": "^4.0.2",
+    "@nestjs/swagger": "^7.4.0",
     "@nestjs/throttler": "^6.2.1",
     "@react-email/render": "^1.0.1",
     "@swc/cli": "^0.4.0",

@@ -1,5 +1,14 @@
 import { StringLanguage } from '@/utils';
 import { Field, ObjectType } from '@nestjs/graphql';
+import { ApiProperty } from '@nestjs/swagger';
+
+export class ShowSettingsResponse {
+  @ApiProperty()
+  site_name: string;
+
+  @ApiProperty()
+  site_short_name: string;
+}
 
 @ObjectType()
 export class ShowSettingsObj {

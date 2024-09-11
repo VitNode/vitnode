@@ -17,7 +17,7 @@ import {
   DatabaseModuleArgs,
   InternalDatabaseModule,
 } from './utils/database/database.module';
-import { GqlThrottlerGuard } from './utils/guards/gql-throttler.guard';
+// import { GqlThrottlerGuard } from './utils/guards/gql-throttler.guard';
 
 interface Args {
   database: DatabaseModuleArgs;
@@ -211,12 +211,12 @@ export class VitNodeCoreModule {
         GlobalProvidersModule,
         CoreModule,
       ],
-      providers: [
-        {
-          provide: APP_GUARD,
-          useClass: GqlThrottlerGuard,
-        },
-      ],
+      // providers: [
+      //   {
+      //     provide: APP_GUARD,
+      //     useClass: GqlThrottlerGuard,
+      //   },
+      // ],
     };
   }
 }
