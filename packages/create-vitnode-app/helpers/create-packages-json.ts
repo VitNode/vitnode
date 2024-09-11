@@ -60,7 +60,6 @@ export const createPackagesJSON = ({
         : {}),
       'eslint-config-typescript-vitnode': `^${pkg.version}`,
       turbo: '^2.1.1',
-      typescript: '^5.6.2',
     },
     packageManager,
     workspaces: ['apps/*'],
