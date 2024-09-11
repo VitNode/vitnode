@@ -7,8 +7,6 @@
     "build:scripts": "turbo build:scripts && pnpm i",
     "build": "turbo build",
     "dev": "pnpm build:scripts && turbo dev",
-    "dev:docs": "cd apps/docs && pnpm dev:docs",
-    "build:docs": "cd apps/docs && pnpm build:docs",
     "lint": "turbo lint",
     "lint:fix": "turbo lint:fix",
     "start": "turbo start",
