@@ -29,7 +29,9 @@ export const mutationApi = async (formData: FormData) => {
     });
 
     revalidatePath('/', 'layout');
-  } catch (e) {
-    if (typeof e === 'string') return { error: e };
+  } catch (error) {
+    const e = error as Error;
+
+    return { error: e.message };
   }
 };

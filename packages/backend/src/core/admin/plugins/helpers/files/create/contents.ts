@@ -42,6 +42,8 @@ export const createInfoJSON = ({
   name,
   nav,
   support_url,
+  version,
+  version_code,
 }: PluginInfoJSONType): string => {
   const json = {
     name,
@@ -52,6 +54,8 @@ export const createInfoJSON = ({
     support_url,
     allow_default,
     nav,
+    version,
+    version_code,
   };
 
   return JSON.stringify(json, null, 2);

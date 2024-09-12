@@ -56,9 +56,12 @@ export const createPackagesJSON = ({
       : {},
     devDependencies: {
       ...(eslint
-        ? { prettier: '^3.3.3', 'prettier-plugin-tailwindcss': '^0.6.6' }
+        ? {
+            'eslint-config-typescript-vitnode': `^${pkg.version}`,
+            prettier: '^3.3.3',
+            'prettier-plugin-tailwindcss': '^0.6.6',
+          }
         : {}),
-      'eslint-config-typescript-vitnode': `^${pkg.version}`,
       turbo: '^2.1.1',
     },
     packageManager,
@@ -83,14 +86,14 @@ export const createPackagesJSON = ({
       'lint:fix': 'eslint . --fix',
     },
     dependencies: {
+      '@hookform/resolvers': '^3.9.0',
       geist: '^1.3.1',
       'lucide-react': '^0.439.0',
       next: '15.0.0-canary.146',
-      react: '^19.0.0-rc.0',
-      'react-dom': '^19.0.0-rc.0',
       'next-intl': '^3.19.1',
+      react: '^19.0.0-rc-d6cb4e77-20240911',
+      'react-dom': '^19.0.0-rc-d6cb4e77-20240911',
       'react-hook-form': '^7.53.0',
-      '@hookform/resolvers': '^3.9.0',
       'vitnode-frontend': `^${pkg.version}`,
     },
     devDependencies: {
@@ -98,9 +101,9 @@ export const createPackagesJSON = ({
       '@types/react': '^18.3.5',
       '@types/react-dom': '^18.3.0',
       autoprefixer: '^10.4.20',
-      'graphql-tag': '^2.12.6',
       ...(eslint ? { eslint: '^9.10.0' } : {}),
       'eslint-config-typescript-vitnode': `^${pkg.version}`,
+      'graphql-tag': '^2.12.6',
       postcss: '^8.4.45',
       tailwindcss: '^3.4.10',
       typescript: '^5.6.2',
