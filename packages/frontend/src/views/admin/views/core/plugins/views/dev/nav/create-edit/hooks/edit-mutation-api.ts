@@ -21,11 +21,11 @@ export const editMutationApi = async (variables: Args) => {
       query: Admin__Core_Plugins__Nav__Edit,
       variables,
     });
+
+    revalidatePath('/', 'layout');
   } catch (error) {
     const e = error as Error;
 
     return { error: e.message };
   }
-
-  revalidatePath('/[locale]/admin/(auth)/(vitnode)', 'layout');
 };

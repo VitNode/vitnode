@@ -1,7 +1,6 @@
 import { LogoVitNode } from '@/components/logo-vitnode';
 import { LanguageSwitcher } from '@/components/switchers/language-switcher';
 import { ThemeSwitcher } from '@/components/switchers/theme-switcher';
-import { ScrollArea } from '@/components/ui/scroll-area';
 import { CONFIG } from '@/helpers/config-with-env';
 import { Link } from '@/navigation';
 
@@ -39,11 +38,7 @@ export const AsideAuthAdmin = () => {
         <SearchAsideAuthAdmin />
       </div>
 
-      <ScrollArea className="flex-1">
-        <div className="px-3 py-6">
-          <NavAdmin />
-        </div>
-      </ScrollArea>
+      <NavAdmin />
     </aside>
   );
 };

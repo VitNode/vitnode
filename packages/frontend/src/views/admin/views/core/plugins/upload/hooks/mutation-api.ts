@@ -6,6 +6,7 @@ import {
   Admin__Core_Plugins__UploadMutation,
   Admin__Core_Plugins__UploadMutationVariables,
 } from '@/graphql/mutations/admin/plugins/admin__core_plugins__upload.generated';
+import { revalidatePath } from 'next/cache';
 
 export const mutationApi = async (formData: FormData) => {
   const files = formData.get('file') as File;
@@ -26,7 +27,13 @@ export const mutationApi = async (formData: FormData) => {
         },
       ],
     });
-  } catch (e) {
-    if (typeof e === 'string') return { error: e };
+  } catch (error) {
+    const e = error as Error;
+
+    if (e.message !== 'fetch failed') {
+      return { error: e.message };
+    }
   }
+
+  revalidatePath('/', 'layout');
 };

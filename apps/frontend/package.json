@@ -1,6 +1,6 @@
 {
   "name": "frontend",
-  "version": "0.0.9-canary.48",
+  "version": "0.0.9-canary.49",
   "author": "Maciej Piotr (aXenDev) Balcerzak",
   "license": "GPL-3.0 license",
   "scripts": {
@@ -20,8 +20,8 @@
     "lucide-react": "^0.437.0",
     "next": "15.0.0-canary.146",
     "next-intl": "^3.19.1",
-    "react": "19.0.0-rc-e56f4ae3-20240830",
-    "react-dom": "19.0.0-rc-e56f4ae3-20240830",
+    "react": "^19.0.0-rc-d6cb4e77-20240911",
+    "react-dom": "^19.0.0-rc-d6cb4e77-20240911",
     "vitnode-frontend": "workspace:*"
   },
   "devDependencies": {

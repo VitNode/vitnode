@@ -1,6 +1,6 @@
 {
   "name": "backend",
-  "version": "0.0.9-canary.48",
+  "version": "0.0.9-canary.49",
   "license": "MIT",
   "scripts": {
     "drizzle-kit": "drizzle-kit",
@@ -24,8 +24,8 @@
     "@nestjs/schedule": "^4.1.0",
     "@nestjs/serve-static": "^4.0.2",
     "pg": "^8.12.0",
-    "react": "19.0.0-rc-e56f4ae3-20240830",
-    "react-dom": "19.0.0-rc-e56f4ae3-20240830",
+    "react": "^19.0.0-rc-d6cb4e77-20240911",
+    "react-dom": "^19.0.0-rc-d6cb4e77-20240911",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1"
   },

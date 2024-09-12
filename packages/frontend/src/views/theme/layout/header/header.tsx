@@ -12,6 +12,7 @@ import { UserBar } from './user-bar/user-bar';
 export const Header = async ({ className }: { className?: string }) => {
   const {
     core_sessions__authorization: { user },
+    core_nav__show: { edges },
   } = await getSessionData();
 
   return (
@@ -23,7 +24,7 @@ export const Header = async ({ className }: { className?: string }) => {
     >
       <div className="container flex h-16 items-center gap-5 px-5">
         <LogoHeader />
-        <Nav />
+        {edges.length > 0 && <Nav />}
 
         <div className="ml-auto hidden gap-2 sm:flex">
           <LanguageSwitcher />

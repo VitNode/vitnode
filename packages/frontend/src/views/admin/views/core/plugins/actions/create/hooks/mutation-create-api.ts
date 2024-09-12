@@ -6,7 +6,6 @@ import {
   Admin__Core_Plugins__CreateMutation,
   Admin__Core_Plugins__CreateMutationVariables,
 } from '@/graphql/mutations/admin/plugins/admin__core_plugins__create.generated';
-import { CONFIG } from '@/helpers/config-with-env';
 import { revalidatePath } from 'next/cache';
 
 export const mutationCreateApi = async (
@@ -20,13 +19,7 @@ export const mutationCreateApi = async (
       query: Admin__Core_Plugins__Create,
       variables,
     });
-  } catch (error) {
-    const e = error as Error;
 
-    return { error: e.message };
-  }
-
-  if (CONFIG.node_development) {
     // Revalidate after 3 seconds in promise. Wait for fast refresh to compilation files.
     await new Promise<void>(resolve =>
       setTimeout(() => {
@@ -34,5 +27,9 @@ export const mutationCreateApi = async (
         resolve();
       }, 3000),
     );
+  } catch (error) {
+    const e = error as Error;
+
+    return { error: e.message };
   }
 };

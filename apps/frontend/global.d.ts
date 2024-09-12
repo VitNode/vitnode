@@ -1,6 +1,6 @@
-import type core from '@/src/plugins/core/langs/en.json';
-import type admin from '@/src/plugins/admin/langs/en.json';
-import type welcome from '@/src/plugins/welcome/langs/en.json';
+import type core from '@/plugins/core/langs/en.json';
+import type admin from '@/plugins/admin/langs/en.json';
+import type welcome from '@/plugins/welcome/langs/en.json';
 
 // ! === IMPORT ===
 
