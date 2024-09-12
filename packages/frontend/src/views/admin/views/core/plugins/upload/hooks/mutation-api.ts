@@ -27,11 +27,13 @@ export const mutationApi = async (formData: FormData) => {
         },
       ],
     });
-
-    revalidatePath('/', 'layout');
   } catch (error) {
     const e = error as Error;
 
-    return { error: e.message };
+    if (e.message !== 'fetch failed') {
+      return { error: e.message };
+    }
   }
+
+  revalidatePath('/', 'layout');
 };

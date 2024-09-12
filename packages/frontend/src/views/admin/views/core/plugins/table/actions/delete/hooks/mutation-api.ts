@@ -6,6 +6,7 @@ import {
   Admin__Core_Plugins__DeleteMutation,
   Admin__Core_Plugins__DeleteMutationVariables,
 } from '@/graphql/mutations/admin/plugins/admin__core_plugins__delete.generated';
+import { revalidatePath } from 'next/cache';
 
 export const mutationApi = async (
   variables: Admin__Core_Plugins__DeleteMutationVariables,
@@ -21,6 +22,10 @@ export const mutationApi = async (
   } catch (error) {
     const e = error as Error;
 
-    return { error: e.message };
+    if (e.message !== 'fetch failed') {
+      return { error: e.message };
+    }
   }
+
+  revalidatePath('/', 'layout');
 };
