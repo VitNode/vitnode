@@ -1,9 +1,8 @@
-import { core_plugins } from '@/database/schema/plugins';
 import { generateRandomString } from '@/functions/generate-random-string';
 import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
-import { eq } from 'drizzle-orm';
-import * as fs from 'fs';
+import { existsSync } from 'fs';
+import { copyFile, cp, mkdir, readFile, rm } from 'fs/promises';
 import { join } from 'path';
 import * as tar from 'tar';
 
@@ -12,11 +11,9 @@ import {
   ConfigPlugin,
   currentUnixDate,
   CustomError,
-  execShellCommand,
   FileUpload,
 } from '../../../..';
 import { ChangeFilesAdminPluginsService } from '../helpers/files/change/change.service';
-import { ShowAdminPlugins } from '../show/show.dto';
 import { UploadAdminPluginsArgs } from './upload.dto';
 
 @Injectable()
@@ -40,10 +37,10 @@ export class UploadAdminPluginsService {
     destination: string;
     source: string;
   }): Promise<void> {
-    if (!fs.existsSync(source)) return;
+    if (!existsSync(source)) return;
 
     try {
-      await fs.promises.cp(source, destination, {
+      await cp(source, destination, {
         recursive: true,
       });
     } catch (_) {
@@ -61,10 +58,10 @@ export class UploadAdminPluginsService {
     destination: string;
     source: string;
   }) {
-    if (!fs.existsSync(source)) return;
+    if (!existsSync(source)) return;
 
     try {
-      await fs.promises.copyFile(source, destination);
+      await copyFile(source, destination);
     } catch (_) {
       throw new CustomError({
         code: 'COPY_FILE_TO_PLUGIN_FOLDER_ERROR',
@@ -83,14 +80,14 @@ export class UploadAdminPluginsService {
     const newPathBackend = ABSOLUTE_PATHS_BACKEND.plugin({
       code: config.code,
     }).root;
-    if (fs.existsSync(newPathBackend)) {
-      await fs.promises.rm(newPathBackend, { recursive: true });
+    if (existsSync(newPathBackend)) {
+      await rm(newPathBackend, { recursive: true });
     }
-    await fs.promises.mkdir(newPathBackend);
+    await mkdir(newPathBackend);
 
     // Copy temp folder to plugin folder
     const backendSource = join(this.tempPath, 'backend');
-    await fs.promises.cp(backendSource, newPathBackend, { recursive: true });
+    await cp(backendSource, newPathBackend, { recursive: true });
     if (!upload_new_version) {
       this.changeFilesService.changeFilesWhenCreate({ code: config.code });
     }
@@ -129,7 +126,7 @@ export class UploadAdminPluginsService {
         `${lang.code}.json`,
       );
 
-      if (fs.existsSync(checkExist)) {
+      if (existsSync(checkExist)) {
         return;
       }
 
@@ -156,7 +153,7 @@ export class UploadAdminPluginsService {
     tgz: FileUpload;
   }): Promise<ConfigPlugin> {
     // Create folders
-    await fs.promises.mkdir(this.tempPath, { recursive: true });
+    await mkdir(this.tempPath, { recursive: true });
 
     // Upload to temp folder
     await new Promise((resolve, reject) => {
@@ -177,7 +174,7 @@ export class UploadAdminPluginsService {
     });
 
     const pathInfoJSON = join(this.tempPath, 'backend', 'config.json');
-    const pluginFile = await fs.promises.readFile(pathInfoJSON, 'utf8');
+    const pluginFile = await readFile(pathInfoJSON, 'utf8');
     const config: ConfigPlugin = JSON.parse(pluginFile);
 
     // Check if variables exists
@@ -201,13 +198,10 @@ export class UploadAdminPluginsService {
 
   protected async removeTempFolder(): Promise<void> {
     // Delete temp folder
-    await fs.promises.rm(this.tempPath, { recursive: true });
+    await rm(this.tempPath, { recursive: true });
   }
 
-  async upload({
-    code,
-    file,
-  }: UploadAdminPluginsArgs): Promise<ShowAdminPlugins> {
+  async upload({ code, file }: UploadAdminPluginsArgs): Promise<string> {
     const tgz = await file;
     const config = await this.getPluginConfig({ tgz });
 
@@ -245,49 +239,6 @@ export class UploadAdminPluginsService {
     await this.createPluginFrontend({ config });
     await this.removeTempFolder();
 
-    if (code) {
-      const plugins = await this.databaseService.db
-        .update(core_plugins)
-        .set({
-          updated: new Date(),
-          name: config.name,
-          description: config.description,
-          support_url: config.support_url,
-          author: config.author,
-          author_url: config.author_url,
-          version: config.version,
-          version_code: config.version_code,
-          allow_default: config.allow_default,
-        })
-        .where(eq(core_plugins.code, code))
-        .returning();
-
-      const plugin = plugins[0];
-
-      return plugin;
-    }
-
-    const plugins = await this.databaseService.db
-      .insert(core_plugins)
-      .values({
-        ...config,
-      })
-      .returning();
-
-    const plugin = plugins[0];
-
-    // Generate migration
-    try {
-      await execShellCommand(
-        'npm run drizzle-kit up && npm run drizzle-kit generate',
-      );
-    } catch (_) {
-      throw new CustomError({
-        code: 'GENERATE_MIGRATION_ERROR',
-        message: 'Error generating migration',
-      });
-    }
-
-    return plugin;
+    return 'Success!';
   }
 }

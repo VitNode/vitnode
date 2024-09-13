@@ -5,8 +5,8 @@
   "license": "GPL-3.0 license",
   "scripts": {
     "config:init": "vitnode-frontend init",
-    "dev": "next dev --turbo",
-    "dev:turbo": "next dev --turbo",
+    "config:dev": "vitnode-frontend dev",
+    "dev": "vitnode-frontend dev && next dev --turbo",
     "build": "next build",
     "analyze": "cross-env ANALYZE=true pnpm build",
     "start": "next start",

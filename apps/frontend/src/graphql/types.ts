@@ -264,7 +264,7 @@ export type Mutation = {
   admin__core_plugins__nav__create: ShowAdminNavPluginsObj;
   admin__core_plugins__nav__delete: Scalars['String']['output'];
   admin__core_plugins__nav__edit: ShowAdminNavPluginsObj;
-  admin__core_plugins__upload: ShowAdminPlugins;
+  admin__core_plugins__upload: Scalars['String']['output'];
   admin__core_security__captcha__edit: ShowAdminCaptchaSecurityObj;
   admin__core_staff_administrators__create: ShowAdminStaffAdministrators;
   admin__core_staff_administrators__delete: Scalars['String']['output'];

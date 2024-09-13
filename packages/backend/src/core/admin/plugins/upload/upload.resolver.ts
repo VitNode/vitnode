@@ -10,12 +10,12 @@ import { UploadAdminPluginsService } from './upload.service';
 export class UploadAdminPluginsResolver {
   constructor(private readonly service: UploadAdminPluginsService) {}
 
-  @Mutation(() => ShowAdminPlugins)
+  @Mutation(() => String)
   @UseGuards(AdminAuthGuards)
   @UseGuards(OnlyForDevelopment)
   async admin__core_plugins__upload(
     @Args() args: UploadAdminPluginsArgs,
-  ): Promise<ShowAdminPlugins> {
+  ): Promise<string> {
     return this.service.upload(args);
   }
 }
