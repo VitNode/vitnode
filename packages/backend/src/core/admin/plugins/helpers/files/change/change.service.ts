@@ -1,5 +1,10 @@
 import { CustomError } from '@/errors';
-import { ABSOLUTE_PATHS_BACKEND } from '@/index';
+import {
+  ABSOLUTE_PATHS_BACKEND,
+  configPath,
+  ConfigType,
+  getConfigFile,
+} from '@/index';
 import { Injectable } from '@nestjs/common';
 import * as fs from 'fs';
 import { join } from 'path';
@@ -118,5 +123,20 @@ export class ChangeFilesAdminPluginsService {
     ];
 
     this.changeContent({ files });
+  }
+
+  setServerToRestartConfig(): void {
+    const config = getConfigFile();
+
+    const updatedConfig: ConfigType = {
+      ...config,
+      restart_server: true,
+    };
+
+    fs.writeFileSync(
+      configPath,
+      JSON.stringify(updatedConfig, null, 2),
+      'utf8',
+    );
   }
 }

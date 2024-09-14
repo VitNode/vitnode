@@ -24,5 +24,13 @@ export const generateConfig = ({ pluginsPath }: { pluginsPath: string }) => {
   const config = getConfigFile();
   const updatedConfig = updateObject(config, DEFAULT_CONFIG_DATA);
 
-  fs.writeFileSync(configPath, JSON.stringify(updatedConfig, null, 2), 'utf8');
+  fs.writeFileSync(
+    configPath,
+    JSON.stringify(
+      { ...updatedConfig, restart_server: DEFAULT_CONFIG_DATA.restart_server },
+      null,
+      2,
+    ),
+    'utf8',
+  );
 };

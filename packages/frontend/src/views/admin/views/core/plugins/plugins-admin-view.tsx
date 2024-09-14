@@ -10,12 +10,12 @@ import {
   Admin__Core_Plugins__ShowQueryVariables,
 } from '@/graphql/queries/admin/plugins/admin__core_plugins__show.generated';
 import { ShowAdminPluginsSortingColumnEnum } from '@/graphql/types';
-import { CONFIG } from '@/helpers/config-with-env';
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
 import { ActionsPluginsAdmin } from './actions/actions';
 import { ContentPluginsCoreAdmin } from './content';
+import { WarnReqRestartServer } from './warn-req-restart-server';
 
 export interface PluginsAdminViewProps {
   searchParams: SearchParamsPagination;
@@ -28,7 +28,10 @@ const getData = async (variables: Admin__Core_Plugins__ShowQueryVariables) => {
   >({
     query: Admin__Core_Plugins__Show,
     variables,
-    cache: CONFIG.node_development ? 'default' : 'force-cache',
+    cache: 'force-cache',
+    next: {
+      tags: ['Admin__Core_Plugins__Show'],
+    },
   });
 
   return data;
@@ -61,6 +64,7 @@ export const PluginsAdminView = async ({
         <ActionsPluginsAdmin />
       </HeaderContent>
 
+      <WarnReqRestartServer />
       <ContentPluginsCoreAdmin {...data} />
     </>
   );

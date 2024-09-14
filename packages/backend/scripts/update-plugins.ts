@@ -33,6 +33,11 @@ export const updatePlugins = async ({
     await Promise.all(
       plugins.map(async (code, index) => {
         const pluginPath = join(pluginsPath, code);
+        const configPath = join(pluginPath, 'config.json');
+        if (!fs.existsSync(configPath)) {
+          return;
+        }
+
         const config: ConfigPlugin = JSON.parse(
           fs.readFileSync(join(pluginPath, 'config.json'), 'utf8'),
         );

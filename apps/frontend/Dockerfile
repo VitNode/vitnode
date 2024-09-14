@@ -1,5 +1,5 @@
 FROM node:20-alpine AS base
-RUN npm i -g pnpm@9.5.0
+RUN npm i -g pnpm@9.10.0
 
 FROM base AS builder
 RUN apk update

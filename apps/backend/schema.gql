@@ -10,6 +10,7 @@ enum AllowTypeFilesEnum {
 }
 
 type AuthorizationAdminSessionsObj {
+  restart_server: Boolean!
   user: AuthorizationCurrentUserObj
   version: String!
 }
@@ -232,7 +233,7 @@ type Mutation {
   admin__core_plugins__nav__create(code: String!, icon: String, keywords: [String!]!, parent_code: String, plugin_code: String!): ShowAdminNavPluginsObj!
   admin__core_plugins__nav__delete(code: String!, parent_code: String, plugin_code: String!): String!
   admin__core_plugins__nav__edit(code: String!, icon: String, keywords: [String!]!, parent_code: String, plugin_code: String!, previous_code: String!): ShowAdminNavPluginsObj!
-  admin__core_plugins__upload(code: String, file: Upload!): ShowAdminPlugins!
+  admin__core_plugins__upload(code: String, file: Upload!): String!
   admin__core_security__captcha__edit(secret_key: String!, site_key: String!, type: CaptchaTypeEnum!): ShowAdminCaptchaSecurityObj!
   admin__core_staff_administrators__create(group_id: Int, unrestricted: Boolean!, user_id: Int): ShowAdminStaffAdministrators!
   admin__core_staff_administrators__delete(id: Int!): String!

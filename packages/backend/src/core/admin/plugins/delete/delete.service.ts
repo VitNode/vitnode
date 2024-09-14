@@ -1,6 +1,6 @@
 import { core_plugins } from '@/database/schema/plugins';
 import { CustomError, NotFoundError } from '@/errors';
-import { ABSOLUTE_PATHS_BACKEND, execShellCommand } from '@/index';
+import { ABSOLUTE_PATHS_BACKEND } from '@/index';
 import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
@@ -49,22 +49,11 @@ export class DeleteAdminPluginsService {
         ABSOLUTE_PATHS_BACKEND.plugin({ code }).frontend[path],
       );
     });
+    this.changeFilesService.setServerToRestartConfig();
 
     await this.databaseService.db
       .delete(core_plugins)
       .where(eq(core_plugins.code, code));
-
-    // Generate migration
-    try {
-      await execShellCommand(
-        'npm run drizzle-kit up && npm run drizzle-kit generate',
-      );
-    } catch (_) {
-      throw new CustomError({
-        code: 'GENERATE_MIGRATION_ERROR',
-        message: 'Error generating migration',
-      });
-    }
 
     return 'Success!';
   }

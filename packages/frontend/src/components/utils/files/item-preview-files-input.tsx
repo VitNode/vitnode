@@ -37,8 +37,9 @@ export const ItemPreviewFilesInput = ({
   const t = useTranslations('core');
 
   const size = React.useMemo(() => {
-    const sizeInKb = file instanceof File ? file.size : file.file_size / 1024;
-    if (sizeInKb < 1024) return `${sizeInKb.toFixed(2)} KB`;
+    const sizeInBytes = file instanceof File ? file.size : file.file_size;
+    const sizeInKb = sizeInBytes / 1024;
+    if (sizeInBytes < 2048) return `${Math.ceil(sizeInKb)} KB`;
 
     const sizeInMb = sizeInKb / 1024;
     if (sizeInMb < 1024) return `${sizeInMb.toFixed(2)} MB`;

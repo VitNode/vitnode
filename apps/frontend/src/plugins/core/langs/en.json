@@ -196,8 +196,9 @@
       "max_length": "This field must be less than {length} characters.",
       "email_invalid": "Invalid email address.",
       "files": {
-        "title": "Click to upload",
+        "title": "Upload file",
         "drop_here": "Drop here to upload",
+        "extensions": "Allowed extensions: <extensions></extensions>",
         "allow_size_per_file": "(max {size} MB per file)",
         "errors": {
           "extension": "The file {file} have an invalid extension.",

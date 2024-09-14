@@ -29,7 +29,6 @@ export const useUploadPluginAdmin = ({ data }: UploadPluginAdminProps) => {
     }
 
     const mutation = await mutationApi(formData);
-
     if (mutation?.error) {
       const error = mutation.error;
 
@@ -51,15 +50,15 @@ export const useUploadPluginAdmin = ({ data }: UploadPluginAdminProps) => {
       return;
     }
 
-    // Refresh page
-    setTimeout(() => {
-      window.location.reload();
-    }, 3000);
-
+    setOpen?.(false);
     toast.success(t(data ? 'success.update' : 'success.title'), {
       description: t('success.desc'),
     });
-    setOpen?.(false);
+
+    // Wait 3 seconds before reloading the page
+    setTimeout(() => {
+      window.location.reload();
+    }, 3000);
   };
 
   return { onSubmit, formSchema };

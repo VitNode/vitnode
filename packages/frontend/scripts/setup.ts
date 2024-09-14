@@ -9,8 +9,21 @@ interface Folders {
   path: string;
 }
 
-const init = () => {
+const init = ({ dev }: { dev: boolean }) => {
   const initConsole = '\x1b[34m[VitNode]\x1b[0m \x1b[33m[Frontend]\x1b[0m';
+
+  // Delete cache folder
+  const cachePath = join(process.cwd(), '.next', 'cache');
+  if (fs.existsSync(cachePath)) {
+    console.log(`${initConsole} Deleting cache folder...`);
+    fs.rmSync(cachePath, { recursive: true });
+  }
+
+  if (dev) {
+    console.log(`${initConsole} ✅ Development environment is ready.`);
+    process.exit(0);
+  }
+
   // Copy frontend files from app dir
   const frontendPackagePath = join(__dirname, '..', '..', 'folders_to_copy');
   const frontendAppPath = process.cwd();
@@ -128,5 +141,7 @@ const init = () => {
 };
 
 if (process.argv[2] === 'init') {
-  init();
+  init({ dev: false });
+} else if (process.argv[2] === 'dev') {
+  init({ dev: true });
 }

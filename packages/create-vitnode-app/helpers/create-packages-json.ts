@@ -62,7 +62,7 @@ export const createPackagesJSON = ({
             'prettier-plugin-tailwindcss': '^0.6.6',
           }
         : {}),
-      turbo: '^2.1.1',
+      turbo: '^2.1.2',
     },
     packageManager,
     workspaces: ['apps/*'],
@@ -88,8 +88,8 @@ export const createPackagesJSON = ({
     dependencies: {
       '@hookform/resolvers': '^3.9.0',
       geist: '^1.3.1',
-      'lucide-react': '^0.439.0',
-      next: '15.0.0-canary.146',
+      'lucide-react': '^0.441.0',
+      next: '^15.0.0-canary.155',
       'next-intl': '^3.19.1',
       react: '^19.0.0-rc-d6cb4e77-20240911',
       'react-dom': '^19.0.0-rc-d6cb4e77-20240911',
@@ -97,7 +97,7 @@ export const createPackagesJSON = ({
       'vitnode-frontend': `^${pkg.version}`,
     },
     devDependencies: {
-      '@types/node': '^22.5.4',
+      '@types/node': '^22.5.5',
       '@types/react': '^18.3.5',
       '@types/react-dom': '^18.3.0',
       autoprefixer: '^10.4.20',
@@ -105,7 +105,7 @@ export const createPackagesJSON = ({
       'eslint-config-typescript-vitnode': `^${pkg.version}`,
       'graphql-tag': '^2.12.6',
       postcss: '^8.4.45',
-      tailwindcss: '^3.4.10',
+      tailwindcss: '^3.4.11',
       typescript: '^5.6.2',
     },
   };
@@ -149,8 +149,8 @@ export const createPackagesJSON = ({
       '@nestjs/platform-express': '^10.4.1',
       '@nestjs/schematics': '^10.1.4',
       '@types/express': '^4.17.21',
-      '@types/node': '^22.5.4',
-      '@types/pg': '^8.11.6',
+      '@types/node': '^22.5.5',
+      '@types/pg': '^8.11.10',
       '@types/react': '^18.3.5',
       'cross-env': '^7.0.3',
       'drizzle-kit': '^0.24.2',

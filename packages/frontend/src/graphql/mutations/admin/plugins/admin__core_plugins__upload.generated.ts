@@ -7,14 +7,11 @@ export type Admin__Core_Plugins__UploadMutationVariables = Types.Exact<{
 }>;
 
 
-export type Admin__Core_Plugins__UploadMutation = { __typename?: 'Mutation', admin__core_plugins__upload: { __typename?: 'ShowAdminPlugins', id: number, name: string } };
+export type Admin__Core_Plugins__UploadMutation = { __typename?: 'Mutation', admin__core_plugins__upload: string };
 
 
 export const Admin__Core_Plugins__Upload = gql`
     mutation Admin__core_plugins__upload($file: Upload!, $code: String) {
-  admin__core_plugins__upload(file: $file, code: $code) {
-    id
-    name
-  }
+  admin__core_plugins__upload(file: $file, code: $code)
 }
     `;

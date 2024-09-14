@@ -4,22 +4,13 @@ import { toast } from 'sonner';
 
 import { mutationApi } from './mutation-api';
 
-interface Args {
-  code: string;
-  name: string;
-}
-
-export const useDeletePluginAdmin = ({ code, name }: Args) => {
+export const useDeletePluginAdmin = ({ code }: { code: string }) => {
   const t = useTranslations('admin.core.plugins.delete');
   const tCore = useTranslations('core');
   const { setOpen } = useAlertDialog();
 
   const onSubmit = async () => {
     const mutation = await mutationApi({ code });
-
-    setTimeout(() => {
-      window.location.reload();
-    }, 3000);
 
     if (mutation?.error) {
       toast.error(tCore('errors.title'), {
@@ -29,11 +20,15 @@ export const useDeletePluginAdmin = ({ code, name }: Args) => {
       return;
     }
 
-    toast.success(t('success'), {
-      description: name,
+    setOpen(false);
+    toast.success(t('success.title'), {
+      description: t('success.desc'),
     });
 
-    setOpen(false);
+    // Wait 3 seconds before reloading the page
+    setTimeout(() => {
+      window.location.reload();
+    }, 3000);
   };
 
   return {

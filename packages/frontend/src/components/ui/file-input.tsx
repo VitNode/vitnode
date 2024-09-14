@@ -135,21 +135,27 @@ export const FileInput = ({
           role="button"
           tabIndex={disabled ? -1 : 0}
         >
-          <div className="text-muted-foreground @xs:p-4 flex items-center gap-4 p-1">
-            <Upload className="size-5 flex-shrink-0" />
+          <div className="text-muted-foreground @xs:p-4 @xs:flex-col @xs:text-center flex items-center gap-4 text-left">
+            <Upload className="@xs:size-7 size-5 flex-shrink-0" />
 
             <div className="space-y-1">
-              <p className="text-sm">
+              <p className="text-foreground text-sm font-medium">
                 {t(isDrag ? 'forms.files.drop_here' : 'forms.files.title')}
               </p>
 
-              {showInfo && (
+              {(acceptExtensions?.length ?? maxFileSizeInMb) && (
                 <p className="text-xs">
-                  {acceptExtensions?.join(', ').toUpperCase()}{' '}
-                  {maxFileSizeInMb
-                    ? t('forms.files.allow_size_per_file', {
-                        size: maxFileSizeInMb,
+                  {acceptExtensions?.length
+                    ? t.rich('forms.files.extensions', {
+                        extensions: () =>
+                          acceptExtensions.join(', ').toUpperCase(),
                       })
+                    : ''}
+
+                  {maxFileSizeInMb
+                    ? `, ${t('forms.files.allow_size_per_file', {
+                        size: maxFileSizeInMb,
+                      })}`
                     : ''}
                 </p>
               )}

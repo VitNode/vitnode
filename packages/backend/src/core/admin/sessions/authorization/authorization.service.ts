@@ -1,6 +1,11 @@
 import { core_sessions_known_devices } from '@/database/schema/sessions';
 import { currentUnixDate, getUserAgentData, getUserIp } from '@/functions';
-import { AccessDeniedError, GqlContext, NotFoundError } from '@/index';
+import {
+  AccessDeniedError,
+  getConfigFile,
+  GqlContext,
+  NotFoundError,
+} from '@/index';
 import { getUser } from '@/utils/database/helpers/get-user';
 import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
@@ -27,6 +32,7 @@ export class AuthorizationAdminSessionsService {
     context: GqlContext,
   ): Promise<AuthorizationAdminSessionsObj> {
     const user = await this.initialAuthorization(context);
+    const config = getConfigFile();
 
     const packageJSONPath = join(__dirname, '../../../../../../package.json');
     if (!fs.existsSync(packageJSONPath)) {
@@ -39,6 +45,7 @@ export class AuthorizationAdminSessionsService {
     return {
       user,
       version: packageJSON.version,
+      restart_server: config.restart_server,
     };
   }
 
