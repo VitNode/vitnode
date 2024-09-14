@@ -24,7 +24,11 @@ export const useDeletePluginAdmin = ({ code }: { code: string }) => {
     toast.success(t('success.title'), {
       description: t('success.desc'),
     });
-    window.location.reload();
+
+    // Wait 3 seconds before reloading the page
+    setTimeout(() => {
+      window.location.reload();
+    }, 3000);
   };
 
   return {

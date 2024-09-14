@@ -50,9 +50,15 @@ export const useUploadPluginAdmin = ({ data }: UploadPluginAdminProps) => {
       return;
     }
 
-    toast.success(t(data ? 'success.update' : 'success.title'));
     setOpen?.(false);
-    window.location.reload();
+    toast.success(t(data ? 'success.update' : 'success.title'), {
+      description: t('success.desc'),
+    });
+
+    // Wait 3 seconds before reloading the page
+    setTimeout(() => {
+      window.location.reload();
+    }, 3000);
   };
 
   return { onSubmit, formSchema };

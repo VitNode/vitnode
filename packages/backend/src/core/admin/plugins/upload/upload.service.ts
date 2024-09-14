@@ -1,6 +1,8 @@
+import { core_plugins } from '@/database/schema/plugins';
 import { generateRandomString } from '@/functions/generate-random-string';
 import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
+import { eq } from 'drizzle-orm';
 import { existsSync } from 'fs';
 import { copyFile, cp, mkdir, readFile, rm } from 'fs/promises';
 import { join } from 'path';
@@ -240,6 +242,29 @@ export class UploadAdminPluginsService {
     await this.removeTempFolder();
     this.changeFilesService.setServerToRestartConfig();
 
-    return 'Success!';
+    if (code) {
+      await this.databaseService.db
+        .update(core_plugins)
+        .set({
+          updated: new Date(),
+          name: config.name,
+          description: config.description,
+          support_url: config.support_url,
+          author: config.author,
+          author_url: config.author_url,
+          version: config.version,
+          version_code: config.version_code,
+          allow_default: config.allow_default,
+        })
+        .where(eq(core_plugins.code, code));
+
+      return 'Plugin updated';
+    }
+
+    await this.databaseService.db.insert(core_plugins).values({
+      ...config,
+    });
+
+    return 'Plugin uploaded';
   }
 }
