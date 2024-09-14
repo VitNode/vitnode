@@ -10,6 +10,7 @@ enum AllowTypeFilesEnum {
 }
 
 type AuthorizationAdminSessionsObj {
+  restart_server: Boolean!
   user: AuthorizationCurrentUserObj
   version: String!
 }

@@ -16,6 +16,7 @@ import { getTranslations } from 'next-intl/server';
 
 import { ActionsPluginsAdmin } from './actions/actions';
 import { ContentPluginsCoreAdmin } from './content';
+import { WarnReqRestartServer } from './warn-req-restart-server';
 
 export interface PluginsAdminViewProps {
   searchParams: SearchParamsPagination;
@@ -61,6 +62,7 @@ export const PluginsAdminView = async ({
         <ActionsPluginsAdmin />
       </HeaderContent>
 
+      <WarnReqRestartServer />
       <ContentPluginsCoreAdmin {...data} />
     </>
   );

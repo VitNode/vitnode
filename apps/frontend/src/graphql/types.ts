@@ -26,6 +26,7 @@ export const AllowTypeFilesEnum = {
 export type AllowTypeFilesEnum = typeof AllowTypeFilesEnum[keyof typeof AllowTypeFilesEnum];
 export type AuthorizationAdminSessionsObj = {
   __typename?: 'AuthorizationAdminSessionsObj';
+  restart_server: Scalars['Boolean']['output'];
   user?: Maybe<AuthorizationCurrentUserObj>;
   version: Scalars['String']['output'];
 };

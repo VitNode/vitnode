@@ -238,6 +238,7 @@ export class UploadAdminPluginsService {
     await this.createPluginBackend({ config, upload_new_version: !!code });
     await this.createPluginFrontend({ config });
     await this.removeTempFolder();
+    this.changeFilesService.setServerToRestartConfig();
 
     return 'Success!';
   }

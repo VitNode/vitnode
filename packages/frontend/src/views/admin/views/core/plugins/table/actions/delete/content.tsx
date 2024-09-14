@@ -1,4 +1,4 @@
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 import {
   AlertDialogCancel,
   AlertDialogDescription,
@@ -8,7 +8,6 @@ import {
 } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
 import { ShowAdminPlugins } from '@/graphql/types';
-import { InfoIcon } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 import { useDeletePluginAdmin } from './hooks/use-delete-plugin-admin';
@@ -21,7 +20,7 @@ export const ContentDeletePluginActionsAdmin = ({
 }: ShowAdminPlugins) => {
   const t = useTranslations('admin.core.plugins.delete');
   const tCore = useTranslations('core');
-  const { onSubmit } = useDeletePluginAdmin({ code, name });
+  const { onSubmit } = useDeletePluginAdmin({ code });
 
   return (
     <form action={onSubmit}>
@@ -40,9 +39,7 @@ export const ContentDeletePluginActionsAdmin = ({
       </AlertDialogHeader>
 
       <Alert className="mt-4" variant="primary">
-        <InfoIcon className="size-4" />
-        <AlertTitle>{t('alert.title')}</AlertTitle>
-        <AlertDescription>{t('alert.desc')}</AlertDescription>
+        <AlertDescription>{t('info')}</AlertDescription>
       </Alert>
 
       <AlertDialogFooter className="mt-6">

@@ -25,6 +25,7 @@ query Admin__sessions__authorization {
       }
     }
     version
+    restart_server
   }
   admin__nav__show {
     code

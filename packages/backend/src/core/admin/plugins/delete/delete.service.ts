@@ -49,6 +49,7 @@ export class DeleteAdminPluginsService {
         ABSOLUTE_PATHS_BACKEND.plugin({ code }).frontend[path],
       );
     });
+    this.changeFilesService.setServerToRestartConfig();
 
     await this.databaseService.db
       .delete(core_plugins)

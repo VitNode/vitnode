@@ -60,15 +60,17 @@ export const nestjsMainApp = async (app: INestApplication, options?: Args) => {
   await app.listen(port, hostname, async () => {
     const initConsole = '\x1b[34m[VitNode]\x1b[0m';
 
-    try {
-      console.log(
-        initConsole,
-        'GraphQL API is generating, please wait for a moment...',
-      );
+    if (process.env.NODE_ENV === 'development') {
+      try {
+        console.log(
+          initConsole,
+          'GraphQL API is generating, please wait for a moment...',
+        );
 
-      await execShellCommand('npm run codegen');
-    } catch (error) {
-      console.error(initConsole, error);
+        await execShellCommand('npm run codegen');
+      } catch (error) {
+        console.error(initConsole, error);
+      }
     }
 
     console.log(

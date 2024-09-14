@@ -44,6 +44,7 @@ export interface ConfigType {
     text: string;
     width: number;
   };
+  restart_server: boolean;
   security: {
     captcha: {
       site_key: string;
@@ -69,6 +70,7 @@ export interface ConfigType {
 }
 
 export const DEFAULT_CONFIG_DATA: ConfigType = {
+  restart_server: false,
   logos: {
     text: 'VitNode',
     width: 10,

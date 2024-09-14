@@ -50,10 +50,9 @@ export const useUploadPluginAdmin = ({ data }: UploadPluginAdminProps) => {
       return;
     }
 
-    toast.success(t(data ? 'success.update' : 'success.title'), {
-      description: t('success.desc'),
-    });
+    toast.success(t(data ? 'success.update' : 'success.title'));
     setOpen?.(false);
+    window.location.reload();
   };
 
   return { onSubmit, formSchema };

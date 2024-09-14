@@ -218,6 +218,10 @@
         "get_help": "Get help",
         "search_placeholder": "Search by name...",
         "dev_tools": "Developer Tools",
+        "warn_req_restart_server": {
+          "title": "Required Restart Server",
+          "desc": "We're detected changes in <bold>the plugin system</bold>. To apply these changes, you need to <bold>restart the server</bold>."
+        },
         "dev": {
           "overview": {
             "title": "Overview"
@@ -293,10 +297,11 @@
         "upload": {
           "title": "Upload Plugin",
           "title_new_version": "Upload New Version Plugin",
+          "info": "After uploading the plugin, you need to restart the server to apply the changes.",
           "success": {
-            "title": "Successfully uploaded plugin.",
+            "title": "Plugin has been uploaded.",
             "update": "The plugin has been updated.",
-            "desc": "After 3 seconds, your page will be refreshed."
+            "desc": "You can now restart the server to apply the changes."
           },
           "errors": {
             "PLUGIN_ALREADY_EXISTS": "Plugin with this code already exists. If you want to update the plugin, use the upload new version form from the plugin dropdown menu.",
@@ -307,11 +312,11 @@
         "delete": {
           "submit": "Yes, delete plugin",
           "desc": "This action will delete <name></name> plugin created by <author></author> and all data associated with it.",
-          "alert": {
-            "title": "Warning",
-            "desc": "You may see the errors while the system is changing files."
-          },
-          "success": "Plugin has been deleted. After 3 seconds, your page will be refreshed."
+          "info": "You may see the errors while the system is changing files. After the process is complete, you need to restart the server to apply the changes.",
+          "success": {
+            "title": "Plugin has been deleted.",
+            "desc": "You can now restart the server to apply the changes."
+          }
         },
         "download": {
           "title": "Download Plugin",

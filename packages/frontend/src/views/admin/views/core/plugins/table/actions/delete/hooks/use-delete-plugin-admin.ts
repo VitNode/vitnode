@@ -4,12 +4,7 @@ import { toast } from 'sonner';
 
 import { mutationApi } from './mutation-api';
 
-interface Args {
-  code: string;
-  name: string;
-}
-
-export const useDeletePluginAdmin = ({ code, name }: Args) => {
+export const useDeletePluginAdmin = ({ code }: { code: string }) => {
   const t = useTranslations('admin.core.plugins.delete');
   const tCore = useTranslations('core');
   const { setOpen } = useAlertDialog();
@@ -26,9 +21,10 @@ export const useDeletePluginAdmin = ({ code, name }: Args) => {
     }
 
     setOpen(false);
-    toast.success(t('success'), {
-      description: name,
+    toast.success(t('success.title'), {
+      description: t('success.desc'),
     });
+    window.location.reload();
   };
 
   return {
