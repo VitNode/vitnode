@@ -1,6 +1,6 @@
 {
   "name": "backend",
-  "version": "0.0.9-canary.51",
+  "version": "0.0.9-canary.52",
   "license": "MIT",
   "scripts": {
     "drizzle-kit": "drizzle-kit",
