@@ -45,7 +45,7 @@ export const removeLangFromTypes = ({
 }) => {
   // Remove the import statement for the module
   let updatedCode = content.replace(
-    `\nimport type ${code} from '@/plugins/${code}/langs/en.json';`,
+    `\nimport ${code.replace('-', '')} from '@/plugins/${code}/langs/en.json';`,
     '',
   );
 
