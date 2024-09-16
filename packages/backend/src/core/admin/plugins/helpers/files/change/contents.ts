@@ -54,7 +54,10 @@ export const changeLangTypes = ({
   return content
     .replace(
       '// ! === IMPORT ===',
-      `import ${code.replace('-', '')} from '@/plugins/${code}/langs/en.json';\n// ! === IMPORT ===`,
+      `import ${code.replaceAll('-', '')} from '@/plugins/${code}/langs/en.json';\n// ! === IMPORT ===`,
     )
-    .replace('; // ! === MODULE ===', ` & typeof ${code}; // ! === MODULE ===`);
+    .replace(
+      '; // ! === MODULE ===',
+      ` & typeof ${code.replaceAll('-', '')}; // ! === MODULE ===`,
+    );
 };

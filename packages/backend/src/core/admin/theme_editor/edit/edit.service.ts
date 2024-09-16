@@ -59,7 +59,7 @@ export class EditAdminThemeEditorService {
     let colorsStringUpdate = cssAsString;
 
     keysFromCSSThemeEditor.forEach(key => {
-      const formatKey = key.replace('-', '_');
+      const formatKey = key.replaceAll('-', '_');
 
       colorsStringUpdate = this.changeVariable({
         cssAsString: colorsStringUpdate,
