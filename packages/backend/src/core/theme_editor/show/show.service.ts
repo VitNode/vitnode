@@ -28,7 +28,7 @@ export class ShowCoreThemeEditorService {
     const cssAsString = fs.readFileSync(pathToCss, 'utf8');
     const colors: ColorsShowCoreThemeEditor = {} as ColorsShowCoreThemeEditor;
     for (const variable of keysFromCSSThemeEditor) {
-      colors[variable.replace('-', '_')] = this.getVariable({
+      colors[variable.replaceAll('-', '_')] = this.getVariable({
         cssAsString,
         variable,
       });
