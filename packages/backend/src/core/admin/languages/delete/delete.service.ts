@@ -3,7 +3,8 @@ import { CustomError, NotFoundError } from '@/errors';
 import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
-import * as fs from 'fs';
+import { existsSync } from 'fs';
+import { rm, unlink, writeFile } from 'fs/promises';
 import { join } from 'path';
 
 import {
@@ -47,15 +48,21 @@ export class DeleteAdminCoreLanguageService {
       },
     });
 
-    [...plugins, { code: 'core' }, { code: 'admin' }].forEach(plugin => {
-      fs.unlinkSync(
-        join(
+    await Promise.all(
+      [...plugins, { code: 'core' }, { code: 'admin' }].map(async plugin => {
+        const path = join(
           ABSOLUTE_PATHS_BACKEND.plugin({ code: plugin.code }).frontend
             .languages,
           `${code}.json`,
-        ),
-      );
-    });
+        );
+
+        if (!existsSync(path)) {
+          return;
+        }
+
+        await unlink(path);
+      }),
+    );
 
     // Remove assets
     const assetsPath = join(
@@ -64,12 +71,12 @@ export class DeleteAdminCoreLanguageService {
       code,
     );
 
-    fs.rmSync(assetsPath, { recursive: true });
+    await rm(assetsPath, { recursive: true });
 
     // Update config file
     const config: ConfigType = getConfigFile();
     config.langs = config.langs.filter(lang => lang.code !== code);
-    fs.writeFileSync(configPath, JSON.stringify(config, null, 2), 'utf-8');
+    await writeFile(configPath, JSON.stringify(config, null, 2), 'utf-8');
 
     await this.databaseService.db
       .delete(core_languages)
