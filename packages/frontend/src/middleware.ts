@@ -58,7 +58,10 @@ const removeLocaleFromUrl = (urlPath: string, locales: string[]): string => {
 export default function createMiddleware() {
   return async function middleware(request: NextRequest) {
     const i18n = await getI18n();
-    const handleI18nRouting = createIntlMiddleware(i18n);
+    const handleI18nRouting = createIntlMiddleware({
+      ...i18n,
+      localePrefix: i18n.locales.length > 1 ? 'always' : 'as-needed',
+    });
     const response = handleI18nRouting(request);
     const pathname = removeLocaleFromUrl(
       request.nextUrl.pathname,
