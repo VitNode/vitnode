@@ -1,4 +1,3 @@
-import { NextConfig } from 'next';
 import createNextIntlPlugin from 'next-intl/plugin';
 import * as dotenv from 'dotenv';
 import { join } from 'path';
@@ -9,7 +8,7 @@ dotenv.config({
 
 const withNextIntl = createNextIntlPlugin();
 
-const nextConfig = (config: NextConfig): NextConfig => {
+const nextConfig = config => {
   const ENVS = {
     backend_url: process.env.NEXT_PUBLIC_BACKEND_URL,
     frontend_url: process.env.NEXT_PUBLIC_FRONTEND_URL,
@@ -47,6 +46,6 @@ const nextConfig = (config: NextConfig): NextConfig => {
   };
 };
 
-export default function NextConfigDefault(config?: NextConfig): NextConfig {
+export default function NextConfigDefault(config) {
   return withNextIntl(nextConfig(config || {}));
 }

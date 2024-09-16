@@ -22,6 +22,6 @@ export default [
     },
   },
   {
-    ignores: ['.next', 'global.d.ts', 'next.config.ts'],
+    ignores: ['.next', 'global.d.ts', 'next.config.ts', 'next.config.mjs'],
   },
 ];
