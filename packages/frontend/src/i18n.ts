@@ -1,4 +1,3 @@
-import { notFound } from 'next/navigation';
 import { IntlConfig } from 'next-intl';
 
 import { fetcher } from './graphql/fetcher';
@@ -20,7 +19,7 @@ export const i18nConfig = async ({
     locale: string;
     plugin: string;
   }) => Promise<{ default: unknown }>;
-}): Promise<Omit<IntlConfig, 'locale'>> => {
+}): Promise<IntlConfig> => {
   let plugins: string[] = [];
   try {
     const {
@@ -33,7 +32,7 @@ export const i18nConfig = async ({
     });
 
     if (!languages.find(lang => lang.code === locale)) {
-      notFound();
+      plugins = ['core', 'admin'];
     }
 
     plugins = pluginsFromServer;
@@ -58,6 +57,7 @@ export const i18nConfig = async ({
   );
 
   return {
+    locale,
     messages: {
       ...messagesFormApps.reduce(
         (acc, messages) => ({ ...acc, ...messages }),

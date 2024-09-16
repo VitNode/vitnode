@@ -6,7 +6,7 @@ import {
   Core_Sessions__Sign_InMutation,
   Core_Sessions__Sign_InMutationVariables,
 } from '@/graphql/mutations/sessions/core_sessions__sign_in.generated';
-import { redirect } from '@/navigation';
+
 import { revalidatePath } from 'next/cache';
 
 export const mutationApi = async (
@@ -27,5 +27,4 @@ export const mutationApi = async (
   }
 
   revalidatePath(variables.admin ? '/admin' : '/', 'layout');
-  redirect(variables.admin ? '/admin/core/dashboard' : '/');
 };

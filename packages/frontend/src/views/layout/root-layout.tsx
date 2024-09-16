@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
+import { getLocale, getMessages } from 'next-intl/server';
 import React from 'react';
 
 import { getGlobalData } from '../../graphql/get-global-data';
@@ -19,8 +19,13 @@ interface Props extends RootLayoutProps {
 }
 
 export const generateMetadataRootLayout = async ({
-  params: { locale },
+  params: { locale: localeFromParams },
 }: RootLayoutProps): Promise<Metadata> => {
+  let locale = localeFromParams;
+  if (!locale) {
+    locale = await getLocale();
+  }
+
   const metadata: Metadata = {
     manifest: `${CONFIG.backend_public_url}/assets/${locale}/manifest.webmanifest`,
     icons: {
@@ -51,9 +56,14 @@ export const generateMetadataRootLayout = async ({
 
 export const RootLayout = async ({
   children,
-  params: { locale },
+  params: { locale: localeFromParams },
   className,
 }: Props) => {
+  let locale = localeFromParams;
+  if (!locale) {
+    locale = await getLocale();
+  }
+
   const messages = await getMessages({ locale });
 
   try {

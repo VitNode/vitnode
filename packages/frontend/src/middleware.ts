@@ -7,6 +7,8 @@ import {
   Core_Middleware__ShowQuery,
   Core_Middleware__ShowQueryVariables,
 } from './graphql/queries/core_middleware__show.generated';
+import { join } from 'path';
+import { existsSync } from 'fs';
 
 const getI18n = async () => {
   try {
@@ -55,11 +57,14 @@ const removeLocaleFromUrl = (urlPath: string, locales: string[]): string => {
   return `/${parts.join('/')}`;
 };
 
-export default function createMiddleware() {
+export default function createMiddleware({
+  isLocalePathRoute,
+}: {
+  isLocalePathRoute?: boolean;
+}) {
   return async function middleware(request: NextRequest) {
     const i18n = await getI18n();
-    const handleI18nRouting = createIntlMiddleware(i18n);
-    const response = handleI18nRouting(request);
+
     const pathname = removeLocaleFromUrl(
       request.nextUrl.pathname,
       i18n.locales,
@@ -94,6 +99,11 @@ export default function createMiddleware() {
       return NextResponse.redirect(new URL('/admin', request.url));
     }
 
-    return response;
+    if (isLocalePathRoute) {
+      const handleI18nRouting = createIntlMiddleware(i18n);
+      const response = handleI18nRouting(request);
+
+      return response;
+    }
   };
 }
