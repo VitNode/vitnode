@@ -1,3 +1,4 @@
+import { core_languages_words } from '@/database/schema/languages';
 import { core_plugins } from '@/database/schema/plugins';
 import { CustomError, NotFoundError } from '@/errors';
 import { ABSOLUTE_PATHS_BACKEND } from '@/index';
@@ -54,6 +55,11 @@ export class DeleteAdminPluginsService {
     await this.databaseService.db
       .delete(core_plugins)
       .where(eq(core_plugins.code, code));
+
+    // Delete i18n
+    await this.databaseService.db
+      .delete(core_languages_words)
+      .where(eq(core_languages_words.plugin_code, code));
 
     return 'Success!';
   }
