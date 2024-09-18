@@ -1,33 +1,9 @@
-import { Icon } from '@/components/icon/icon';
-import { getSessionData } from '@/graphql/get-session-data';
-import { ShowCoreNav } from '@/graphql/types';
 import { cn } from '@/helpers/classnames';
-import { flattenTree } from '@/helpers/flatten-tree';
 
 import { ButtonDrawer } from './drawer/button';
 import { QuickMenuWrapper } from './wrapper';
 
-export const QuickMenu = async ({ className }: { className?: string }) => {
-  const data = await getSessionData();
-
-  const flattenData = flattenTree<ShowCoreNav>({
-    tree: data.core_nav__show.edges.map(nav => ({
-      ...nav,
-      children: nav.children.map(child => ({
-        ...child,
-        children: [],
-      })),
-    })),
-  });
-
-  const navIcons: {
-    icon: React.ReactNode;
-    id: number;
-  }[] = flattenData.map(item => ({
-    icon: item.icon ? <Icon className="size-4" name={item.icon} /> : null,
-    id: item.id,
-  }));
-
+export const QuickMenu = ({ className }: { className?: string }) => {
   return (
     <div
       className={cn(
@@ -36,7 +12,7 @@ export const QuickMenu = async ({ className }: { className?: string }) => {
       )}
     >
       <QuickMenuWrapper>
-        <ButtonDrawer navIcons={navIcons} />
+        <ButtonDrawer />
       </QuickMenuWrapper>
     </div>
   );

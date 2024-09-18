@@ -6,7 +6,6 @@ export type Admin__Core_Styles__Nav__CreateMutationVariables = Types.Exact<{
   external: Types.Scalars['Boolean']['input'];
   href: Types.Scalars['String']['input'];
   name: Array<Types.StringLanguageInput> | Types.StringLanguageInput;
-  icon?: Types.InputMaybe<Types.Scalars['String']['input']>;
 }>;
 
 
@@ -14,13 +13,12 @@ export type Admin__Core_Styles__Nav__CreateMutation = { __typename?: 'Mutation',
 
 
 export const Admin__Core_Styles__Nav__Create = gql`
-    mutation Admin__core_styles__nav__create($description: [StringLanguageInput!]!, $external: Boolean!, $href: String!, $name: [StringLanguageInput!]!, $icon: String) {
+    mutation Admin__core_styles__nav__create($description: [StringLanguageInput!]!, $external: Boolean!, $href: String!, $name: [StringLanguageInput!]!) {
   admin__core_styles__nav__create(
     description: $description
     external: $external
     href: $href
     name: $name
-    icon: $icon
   ) {
     id
   }

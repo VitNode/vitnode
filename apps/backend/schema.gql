@@ -240,9 +240,9 @@ type Mutation {
   admin__core_staff_moderators__create(group_id: Int, unrestricted: Boolean!, user_id: Int): ShowAdminStaffModerators!
   admin__core_staff_moderators__delete(id: Int!): String!
   admin__core_styles__editor__edit(files: FilesEditAdminEditorStyles!, sticky: Boolean!): EditorShowCoreMiddleware!
-  admin__core_styles__nav__create(description: [StringLanguageInput!]!, external: Boolean!, href: String!, icon: String, name: [StringLanguageInput!]!): ShowCoreNav!
+  admin__core_styles__nav__create(description: [StringLanguageInput!]!, external: Boolean!, href: String!, name: [StringLanguageInput!]!): ShowCoreNav!
   admin__core_styles__nav__delete(id: Int!): String!
-  admin__core_styles__nav__edit(description: [StringLanguageInput!]!, external: Boolean!, href: String!, icon: String, id: Int!, name: [StringLanguageInput!]!): ShowCoreNav!
+  admin__core_styles__nav__edit(description: [StringLanguageInput!]!, external: Boolean!, href: String!, id: Int!, name: [StringLanguageInput!]!): ShowCoreNav!
   admin__core_terms_settings__create(code: String!, content: [StringLanguageInput!]!, href: String, title: [StringLanguageInput!]!): ShowCoreTerms!
   admin__core_terms_settings__delete(code: String!): String!
   admin__core_terms_settings__edit(code: String!, content: [StringLanguageInput!]!, href: String, id: Float!, title: [StringLanguageInput!]!): ShowCoreTerms!
@@ -638,7 +638,6 @@ type ShowCoreNav {
   description: [StringLanguage!]!
   external: Boolean!
   href: String!
-  icon: String
   id: Int!
   name: [StringLanguage!]!
   position: Int!
@@ -648,7 +647,6 @@ type ShowCoreNavItem {
   description: [StringLanguage!]!
   external: Boolean!
   href: String!
-  icon: String
   id: Int!
   name: [StringLanguage!]!
   position: Int!

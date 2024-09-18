@@ -60,4 +60,7 @@ const FileFromNextWithNode = ({
 };
 
 export const renderReactNode = () =>
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
+  // TODO: Fix this
   ReactNodeViewRenderer(FileFromNextWithNode);

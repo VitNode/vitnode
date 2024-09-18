@@ -19,7 +19,6 @@ export class EditAdminNavStylesService {
     description,
     external,
     href,
-    icon,
     id,
     name,
   }: EditAdminNavStylesArgs): Promise<ShowCoreNav> {
@@ -36,7 +35,6 @@ export class EditAdminNavStylesService {
       .set({
         href,
         external,
-        icon,
       })
       .where(eq(core_nav.id, id))
       .returning();

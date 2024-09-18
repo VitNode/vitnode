@@ -3,14 +3,12 @@ mutation Admin__core_styles__nav__create(
   $external: Boolean!
   $href: String!
   $name: [StringLanguageInput!]!
-  $icon: String
 ) {
   admin__core_styles__nav__create(
     description: $description
     external: $external
     href: $href
     name: $name
-    icon: $icon
   ) {
     id
   }

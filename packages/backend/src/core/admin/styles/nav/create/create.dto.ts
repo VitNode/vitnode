@@ -22,9 +22,6 @@ export class CreateAdminNavStylesArgs {
   @MaxLength(255)
   href: string;
 
-  @Field(() => String, { nullable: true })
-  icon: null | string;
-
   @ArrayMinSize(1)
   @Transform(TransformStringLanguageInput)
   @Field(() => [StringLanguageInput])
