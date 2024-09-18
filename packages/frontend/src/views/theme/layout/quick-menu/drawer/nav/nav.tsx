@@ -10,11 +10,7 @@ import React from 'react';
 import { classNameDrawerQuickMenu } from '../drawer';
 import { ItemNavDrawerQuickMenu } from './item';
 
-export const NavDrawerQuickMenu = ({
-  navIcons,
-}: {
-  navIcons: { icon: React.ReactNode; id: number }[];
-}) => {
+export const NavDrawerQuickMenu = () => {
   const { nav, session } = useSession();
   const [activeItems, setActiveItems] = React.useState<string[]>([]);
   const { convertText } = useTextLang();
@@ -52,9 +48,6 @@ export const NavDrawerQuickMenu = ({
                 }}
               >
                 <div className="[&>svg]:text-muted-foreground flex w-full flex-wrap items-center gap-2">
-                  {item.icon
-                    ? navIcons.find(el => el.id === item.id)?.icon
-                    : null}
                   <span>{convertText(item.name)}</span>
 
                   <ChevronDown
@@ -80,13 +73,6 @@ export const NavDrawerQuickMenu = ({
                 <div className="pl-5">
                   {item.children.map(child => (
                     <ItemNavDrawerQuickMenu key={child.id} {...child}>
-                      <div className="[&>svg]:text-muted-foreground flex items-center gap-2">
-                        {child.icon
-                          ? navIcons.find(el => el.id === child.id)?.icon
-                          : null}
-                        <span>{convertText(child.name)}</span>
-                      </div>
-
                       {child.description.length > 0 && (
                         <span className="text-muted-foreground text-sm leading-none">
                           {convertText(child.description)}
@@ -103,7 +89,6 @@ export const NavDrawerQuickMenu = ({
         return (
           <ItemNavDrawerQuickMenu key={item.id} {...item}>
             <span className="[&>svg]:text-muted-foreground flex flex-wrap items-center gap-2">
-              {item.icon ? navIcons.find(el => el.id === item.id)?.icon : null}
               <span>{convertText(item.name)}</span>
             </span>
 

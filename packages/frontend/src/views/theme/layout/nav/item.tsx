@@ -14,18 +14,13 @@ import React from 'react';
 
 import { useNav } from './hooks/use-nav';
 
-interface Props extends Omit<ShowCoreNav, 'icon'> {
-  icons: { icon: React.ReactNode; id: number }[];
-}
-
 export const ItemNav = ({
   children,
   external,
   href,
   name,
-  icons,
   id,
-}: Props) => {
+}: ShowCoreNav) => {
   const { convertText } = useTextLang();
   const { setOpenChild, openChild } = useNav();
   const pathname = usePathname();
@@ -33,7 +28,6 @@ export const ItemNav = ({
 
   const content = (
     <>
-      {icons.find(icon => icon.id === id)?.icon}
       {convertText(name)} {children.length > 0 && <ChevronDown />}
     </>
   );
@@ -68,7 +62,7 @@ export const ItemNav = ({
         <Button
           className="px-6"
           size="sm"
-          variant={active ? 'default' : 'ghost'}
+          variant={active ? 'secondary' : 'ghost'}
         >
           {content}
         </Button>
@@ -76,12 +70,10 @@ export const ItemNav = ({
 
       <PopoverContent className="w-fit max-w-96 p-2">
         {children.map(item => {
-          const icon = icons.find(childIcon => childIcon.id === item.id)?.icon;
-
           return (
             <Button
               asChild
-              className="group h-auto w-full justify-start gap-4 px-4 py-2"
+              className="group flex h-auto w-full flex-col items-start gap-1 px-4 py-2 text-left"
               key={item.id}
               onClick={() => {
                 setOpenChild(null);
@@ -94,20 +86,12 @@ export const ItemNav = ({
                 rel={item.external ? 'noopener noreferrer' : undefined}
                 target={item.external ? '_blank' : undefined}
               >
-                {icon && (
-                  <div className="group-hover:bg-primary-foreground group-hover:text-primary flex size-10 shrink-0 items-center justify-center rounded-sm border text-xl transition-colors [&>svg]:size-5">
-                    {icon}
-                  </div>
+                {convertText(item.name)}
+                {item.description.length > 0 && (
+                  <p className="text-muted-foreground line-clamp-2 truncate whitespace-normal text-sm leading-snug">
+                    {convertText(item.description)}
+                  </p>
                 )}
-
-                <div>
-                  {convertText(item.name)}
-                  {item.description.length > 0 && (
-                    <p className="text-muted-foreground line-clamp-2 truncate whitespace-normal text-sm leading-snug">
-                      {convertText(item.description)}
-                    </p>
-                  )}
-                </div>
               </Link>
             </Button>
           );

@@ -18,11 +18,9 @@ import { ItemContentTableContentNavAdmin } from './item';
 
 const indentationWidth = 20;
 
-interface Props extends Admin__Core_Nav__ShowQuery {
-  icons: { icon: React.ReactNode; id: number }[];
-}
-
-export const TableNavAdmin = ({ core_nav__show: { edges }, icons }: Props) => {
+export const TableNavAdmin = ({
+  core_nav__show: { edges },
+}: Admin__Core_Nav__ShowQuery) => {
   const t = useTranslations('core');
   const [initData, setData] =
     React.useState<Omit<ShowCoreNav, '__typename'>[]>(edges);
@@ -94,12 +92,7 @@ export const TableNavAdmin = ({ core_nav__show: { edges }, icons }: Props) => {
               indentationWidth,
             })}
           >
-            <ItemContentTableContentNavAdmin
-              data={item}
-              icon={
-                item.icon ? icons.find(el => el.id === item.id)?.icon : null
-              }
-            />
+            <ItemContentTableContentNavAdmin data={item} />
           </ItemDragAndDrop>
         ))}
 
@@ -110,14 +103,7 @@ export const TableNavAdmin = ({ core_nav__show: { edges }, icons }: Props) => {
                 data: activeItemOverlay,
               })}
             >
-              <ItemContentTableContentNavAdmin
-                data={activeItemOverlay}
-                icon={
-                  activeItemOverlay.icon
-                    ? icons.find(el => el.id === activeItemOverlay.id)?.icon
-                    : null
-                }
-              />
+              <ItemContentTableContentNavAdmin data={activeItemOverlay} />
             </ItemDragAndDrop>
           )}
         </DragOverlay>

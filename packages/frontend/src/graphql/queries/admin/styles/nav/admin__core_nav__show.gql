@@ -14,7 +14,6 @@ query Admin__Core_nav__show {
         href
         external
         position
-        icon
       }
       description {
         language_code
@@ -28,7 +27,6 @@ query Admin__Core_nav__show {
       href
       external
       position
-      icon
     }
   }
 }

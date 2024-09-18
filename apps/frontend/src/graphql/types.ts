@@ -528,7 +528,6 @@ export type MutationAdmin__Core_Styles__Nav__CreateArgs = {
   description: Array<StringLanguageInput>;
   external: Scalars['Boolean']['input'];
   href: Scalars['String']['input'];
-  icon?: InputMaybe<Scalars['String']['input']>;
   name: Array<StringLanguageInput>;
 };
 
@@ -542,7 +541,6 @@ export type MutationAdmin__Core_Styles__Nav__EditArgs = {
   description: Array<StringLanguageInput>;
   external: Scalars['Boolean']['input'];
   href: Scalars['String']['input'];
-  icon?: InputMaybe<Scalars['String']['input']>;
   id: Scalars['Int']['input'];
   name: Array<StringLanguageInput>;
 };
@@ -1146,7 +1144,6 @@ export type ShowCoreNav = {
   description: Array<StringLanguage>;
   external: Scalars['Boolean']['output'];
   href: Scalars['String']['output'];
-  icon?: Maybe<Scalars['String']['output']>;
   id: Scalars['Int']['output'];
   name: Array<StringLanguage>;
   position: Scalars['Int']['output'];
@@ -1157,7 +1154,6 @@ export type ShowCoreNavItem = {
   description: Array<StringLanguage>;
   external: Scalars['Boolean']['output'];
   href: Scalars['String']['output'];
-  icon?: Maybe<Scalars['String']['output']>;
   id: Scalars['Int']['output'];
   name: Array<StringLanguage>;
   position: Scalars['Int']['output'];

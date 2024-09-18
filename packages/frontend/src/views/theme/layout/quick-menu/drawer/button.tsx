@@ -10,11 +10,7 @@ import React from 'react';
 import { ItemQuickMenu } from '../item';
 import { DrawerQuickMenu } from './drawer';
 
-export const ButtonDrawer = ({
-  navIcons,
-}: {
-  navIcons: { icon: React.ReactNode; id: number }[];
-}) => {
+export const ButtonDrawer = () => {
   const t = useTranslations('core.mobile_nav');
   const { session } = useSession();
 
@@ -27,7 +23,7 @@ export const ButtonDrawer = ({
         </ItemQuickMenu>
       </DrawerTrigger>
 
-      <DrawerQuickMenu navIcons={navIcons} />
+      <DrawerQuickMenu />
     </Drawer>
   );
 };

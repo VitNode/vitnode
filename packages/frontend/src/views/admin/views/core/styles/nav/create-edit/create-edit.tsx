@@ -1,5 +1,4 @@
 import { AutoForm } from '@/components/form/auto-form';
-import { AutoFormIconPicker } from '@/components/form/fields/icon-picker';
 import { AutoFormInput } from '@/components/form/fields/input';
 import { AutoFormSwitch } from '@/components/form/fields/switch';
 import { AutoFormStringLanguageInput } from '@/components/form/fields/text-language-input';
@@ -35,11 +34,6 @@ export const ContentCreateEditNavAdmin = ({ data }: CreateEditNavAdminArgs) => {
           component: AutoFormInput,
           label: t('create.href.label'),
           description: t('create.href.desc'),
-        },
-        {
-          id: 'icon',
-          component: AutoFormIconPicker,
-          label: t('create.icon.label'),
         },
         {
           id: 'external',

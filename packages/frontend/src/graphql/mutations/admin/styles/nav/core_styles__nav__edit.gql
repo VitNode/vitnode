@@ -4,7 +4,6 @@ mutation Admin__core_styles__nav__edit(
   $href: String!
   $id: Int!
   $name: [StringLanguageInput!]!
-  $icon: String
 ) {
   admin__core_styles__nav__edit(
     description: $description
@@ -12,7 +11,6 @@ mutation Admin__core_styles__nav__edit(
     href: $href
     id: $id
     name: $name
-    icon: $icon
   ) {
     id
   }

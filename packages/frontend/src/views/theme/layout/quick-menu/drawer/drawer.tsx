@@ -15,11 +15,7 @@ import { NavDrawerQuickMenu } from './nav/nav';
 export const classNameDrawerQuickMenu =
   'w-full justify-start [&>svg]:text-muted-foreground font-normal';
 
-export const DrawerQuickMenu = ({
-  navIcons,
-}: {
-  navIcons: { icon: React.ReactNode; id: number }[];
-}) => {
+export const DrawerQuickMenu = () => {
   const t = useTranslations('core');
   const { onSubmit } = useSignOutApi();
   const { session } = useSession();
@@ -64,7 +60,7 @@ export const DrawerQuickMenu = ({
         </div>
       )}
 
-      <NavDrawerQuickMenu navIcons={navIcons} />
+      <NavDrawerQuickMenu />
 
       {session && (
         <div className="flex flex-col px-2 pb-5">

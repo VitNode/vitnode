@@ -15,9 +15,6 @@ class ShowCoreNavItem {
   @Field(() => String)
   href: string;
 
-  @Field(() => String, { nullable: true })
-  icon: null | string;
-
   @Field(() => Int)
   id: number;
 

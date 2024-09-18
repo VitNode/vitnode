@@ -26,10 +26,6 @@ export const useCreateEditNavAdmin = ({ data }: CreateEditNavAdminArgs) => {
       .min(1)
       .max(255)
       .default(data?.href ?? ''),
-    icon: z
-      .string()
-      .default(data?.icon ?? '')
-      .optional(),
     external: z
       .boolean()
       .default(data?.external ?? false)

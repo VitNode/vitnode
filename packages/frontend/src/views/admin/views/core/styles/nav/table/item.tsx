@@ -8,10 +8,8 @@ import { ActionsTableNavAdmin } from './actions/actions';
 
 export const ItemContentTableContentNavAdmin = ({
   data,
-  icon,
 }: {
   data: FlatTree<Omit<ShowCoreNav, '__typename'>>;
-  icon: null | React.ReactNode;
 }) => {
   const t = useTranslations('admin.core.styles.nav');
   const { convertText } = useTextLang();
@@ -21,7 +19,7 @@ export const ItemContentTableContentNavAdmin = ({
       <div className="flex flex-1 flex-col">
         <div className="flex items-center gap-2">
           <span className="flex items-center gap-1 font-semibold">
-            {icon} {convertText(data.name)}
+            {convertText(data.name)}
           </span>
         </div>
 
