@@ -17,6 +17,7 @@ export const Icon = ({ className, name, ...props }: Props) => {
     );
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   const LucideIcon = dynamic(dynamicIconImports[name]);
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
