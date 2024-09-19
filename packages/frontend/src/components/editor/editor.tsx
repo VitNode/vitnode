@@ -143,17 +143,20 @@ export const Editor = ({
       }}
     >
       <div
-        className={cn('border-input rounded-md border shadow-sm', className, {
-          'pointer-events-none cursor-not-allowed opacity-50': disabled,
-        })}
+        className={cn(
+          'border-input relative rounded-md border shadow-sm',
+          className,
+          {
+            'pointer-events-none cursor-not-allowed opacity-50': disabled,
+          },
+        )}
       >
-        <div className="relative">
-          <ToolBarEditor />
-          <EditorContent
-            className="[&_.ProseMirror-selectednode]:ring-ring break-words [&_.ProseMirror-selectednode]:w-fit [&_.ProseMirror-selectednode]:outline-none [&_.ProseMirror-selectednode]:ring-4 [&_.ProseMirror-selectednode]:ring-offset-2 [&_.node-files]:inline-flex"
-            editor={editor}
-          />
-        </div>
+        <ToolBarEditor />
+        <EditorContent
+          className="[&_.ProseMirror-selectednode]:ring-ring break-words [&_.ProseMirror-selectednode]:w-fit [&_.ProseMirror-selectednode]:outline-none [&_.ProseMirror-selectednode]:ring-4 [&_.ProseMirror-selectednode]:ring-offset-2 [&_.node-files]:inline-flex"
+          editor={editor}
+        />
+
         <FooterEditor
           disableLanguages={disableLanguages}
           selectedLanguage={selectedLanguage}

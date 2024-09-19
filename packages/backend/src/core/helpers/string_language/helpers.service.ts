@@ -22,6 +22,25 @@ export class StringLanguageHelper extends ParseStringLanguageHelper {
     item_id: number;
     plugin_code: string;
   }) {
+    const oldData =
+      await this.databaseService.db.query.core_languages_words.findMany({
+        where: (table, { eq, and }) =>
+          and(
+            eq(table.plugin_code, plugin_code),
+            eq(table.item_id, item_id),
+            eq(table.table_name, getTableName(database)),
+          ),
+        columns: {
+          value: true,
+        },
+      });
+
+    await this.parseContent({
+      content: [],
+      oldContent: oldData.map(({ value }) => value),
+      plugin_code,
+    });
+
     await this.databaseService.db
       .delete(core_languages_words)
       .where(
@@ -82,6 +101,9 @@ export class StringLanguageHelper extends ParseStringLanguageHelper {
     // Check if plugin exists
     const plugin = await this.databaseService.db.query.core_plugins.findFirst({
       where: (table, { eq }) => eq(table.code, plugin_code),
+      columns: {
+        id: true,
+      },
     });
 
     if (!plugin && plugin_code !== 'core') {
@@ -99,6 +121,11 @@ export class StringLanguageHelper extends ParseStringLanguageHelper {
             eq(table.table_name, tableName),
             eq(table.variable, variable),
           ),
+        columns: {
+          id: true,
+          language_code: true,
+          value: true,
+        },
       });
 
     const updateData = await Promise.all(
@@ -134,6 +161,12 @@ export class StringLanguageHelper extends ParseStringLanguageHelper {
         return insert;
       }),
     );
+
+    await this.parseContent({
+      oldContent: oldString.map(({ value }) => value),
+      content: updateData.map(({ value }) => value),
+      plugin_code,
+    });
 
     // Delete remaining strings
     await Promise.all(

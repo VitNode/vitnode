@@ -1,5 +1,8 @@
 import { AutoForm, DependencyType } from '@/components/form/auto-form';
-import { AutoFormEditor } from '@/components/form/fields/editor';
+import {
+  AutoFormEditor,
+  AutoFormEditorProps,
+} from '@/components/form/fields/editor';
 import {
   AutoFormInput,
   AutoFormInputProps,
@@ -175,6 +178,12 @@ export const ContentCreateEditLegalPage = ({
             id: 'content',
             label: t('form.content'),
             component: AutoFormEditor,
+            componentProps: {
+              allowUploadFiles: {
+                folder: 'legal',
+                plugin: 'core',
+              },
+            } as AutoFormEditorProps,
           },
         ]}
         formSchema={formSchema}

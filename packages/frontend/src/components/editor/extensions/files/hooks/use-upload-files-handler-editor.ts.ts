@@ -58,6 +58,20 @@ export const useUploadFilesHandlerEditor = ({
         description: tCore('errors.internal_server_error'),
       });
 
+      setFiles(prev =>
+        prev.map(item => {
+          if (item.id === data.id) {
+            return {
+              ...item,
+              error: tCore('errors.internal_server_error'),
+              isLoading: false,
+            };
+          }
+
+          return item;
+        }),
+      );
+
       return;
     }
 
@@ -90,17 +104,19 @@ export const useUploadFilesHandlerEditor = ({
     // console.log(files);
     if (config.editor.files.allow_type === 'all') return files;
 
-    return files.filter(file => {
-      if (config.editor.files.allow_type === 'images_videos') {
-        return [...acceptMimeTypeImage, ...acceptMimeTypeVideo].includes(
-          file.file?.type ?? '',
-        );
-      }
+    return files
+      .filter(file => !file.error)
+      .filter(file => {
+        if (config.editor.files.allow_type === 'images_videos') {
+          return [...acceptMimeTypeImage, ...acceptMimeTypeVideo].includes(
+            file.file?.type ?? '',
+          );
+        }
 
-      if (config.editor.files.allow_type === 'images') {
-        return acceptMimeTypeImage.includes(file.file?.type ?? '');
-      }
-    });
+        if (config.editor.files.allow_type === 'images') {
+          return acceptMimeTypeImage.includes(file.file?.type ?? '');
+        }
+      });
   };
 
   const validateSizeFiles = (items: FileStateEditor[]): FileStateEditor[] => {
@@ -111,11 +127,14 @@ export const useUploadFilesHandlerEditor = ({
       remainingStorage > 0
         ? remainingStorage
         : permissionFiles.max_storage_for_submit;
-    const totalSize = [...files, ...items].reduce((acc, file) => {
-      if (!file.file) return acc;
+    const totalSize = [...files.filter(file => !file.error), ...items].reduce(
+      (acc, file) => {
+        if (!file.file) return acc;
 
-      return acc + file.file.size;
-    }, 0);
+        return acc + file.file.size;
+      },
+      0,
+    );
 
     if (totalSize > max) {
       toast.error(t('errors.max_storage_for_submit.title'), {

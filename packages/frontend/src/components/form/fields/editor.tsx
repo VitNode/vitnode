@@ -11,7 +11,7 @@ import { AutoFormTooltip } from './common/tooltip';
 import { AutoFormWrapper } from './common/wrapper';
 
 export type AutoFormEditorProps = Omit<
-  React.InputHTMLAttributes<HTMLInputElement>,
+  React.ComponentProps<typeof Editor>,
   'onChange' | 'value'
 >;
 
