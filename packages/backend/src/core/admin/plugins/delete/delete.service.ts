@@ -1,3 +1,4 @@
+import { core_files_using } from '@/database/schema/files';
 import { core_languages_words } from '@/database/schema/languages';
 import { core_plugins } from '@/database/schema/plugins';
 import { CustomError, NotFoundError } from '@/errors';
@@ -60,6 +61,11 @@ export class DeleteAdminPluginsService {
     await this.databaseService.db
       .delete(core_languages_words)
       .where(eq(core_languages_words.plugin_code, code));
+
+    // Delete using files
+    await this.databaseService.db
+      .delete(core_files_using)
+      .where(eq(core_files_using.plugin, code));
 
     return 'Success!';
   }

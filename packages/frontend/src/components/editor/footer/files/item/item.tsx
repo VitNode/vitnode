@@ -98,29 +98,31 @@ export const ItemListFilesFooterEditor = ({
         </div>
       </div>
 
-      {!error && !isLoading && data && (
+      {!isLoading && (
         <div className="flex shrink-0 flex-wrap items-center gap-1">
-          <Button
-            onClick={() => {
-              editor.commands.insertFile({
-                ...data,
-                file_alt: data.file_alt ?? '',
-                width: data.width ?? 0,
-                height: data.height ?? 0,
-                security_key: data.security_key ?? '',
-                id,
-              });
-              editor.commands.focus();
-            }}
-            variant="ghost"
-          >
-            <Plus /> {t('insert')}
-          </Button>
+          {!error && data && (
+            <Button
+              onClick={() => {
+                editor.commands.insertFile({
+                  ...data,
+                  file_alt: data.file_alt ?? '',
+                  width: data.width ?? 0,
+                  height: data.height ?? 0,
+                  security_key: data.security_key ?? '',
+                  id,
+                });
+                editor.commands.focus();
+              }}
+              variant="ghost"
+            >
+              <Plus /> {t('insert')}
+            </Button>
+          )}
           <Button
             ariaLabel={tCore('delete')}
             onClick={async () => {
               // Remove files from the editor
-              if (Array.isArray(value)) {
+              if (Array.isArray(value) && value.length > 0) {
                 const content: StringLanguage[] = value.map(item => ({
                   language_code: item.language_code,
                   value: handleDelete({
@@ -138,7 +140,7 @@ export const ItemListFilesFooterEditor = ({
 
                 editor.commands.clearContent();
                 editor.commands.setContent(parseContent);
-              } else {
+              } else if (typeof value === 'string') {
                 const content = handleDelete({
                   content: value,
                   file_id: id,
@@ -148,15 +150,17 @@ export const ItemListFilesFooterEditor = ({
               }
 
               setFiles(prev => prev.filter(item => item.id !== id));
-              const mutation = await deleteMutationApi({
-                id,
-                securityKey: data.security_key,
-              });
-
-              if (mutation?.error) {
-                toast.error(tCore('errors.title'), {
-                  description: tCore('errors.internal_server_error'),
+              if (data) {
+                const mutation = await deleteMutationApi({
+                  id,
+                  securityKey: data.security_key,
                 });
+
+                if (mutation?.error) {
+                  toast.error(tCore('errors.title'), {
+                    description: tCore('errors.internal_server_error'),
+                  });
+                }
               }
             }}
             size="icon"

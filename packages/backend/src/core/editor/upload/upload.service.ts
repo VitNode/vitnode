@@ -76,21 +76,21 @@ export class UploadCoreEditorService extends HelpersUploadCoreFilesService {
     };
 
     if (allowUploadToFrontend) {
-      const current = await this.files.upload({
+      const data = await this.files.upload({
         ...args,
         acceptMimeType,
       });
 
-      return current[0];
+      return data;
     }
 
-    const current = await this.files.upload({
+    const data = await this.files.upload({
       ...args,
       acceptMimeType,
       secure: true,
     });
 
-    return current[0];
+    return data;
   }
 
   async upload(
