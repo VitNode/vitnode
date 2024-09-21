@@ -17,7 +17,7 @@ export class AuthorizationCurrentUserObj extends User {
 }
 
 @ObjectType()
-class FilesAuthorizationCoreSessions {
+export class FilesAuthorizationCoreSessions {
   @Field(() => Boolean)
   allow_upload: boolean;
 

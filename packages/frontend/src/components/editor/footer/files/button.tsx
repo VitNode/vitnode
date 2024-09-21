@@ -3,32 +3,23 @@ import { useTranslations } from 'next-intl';
 import React from 'react';
 
 import { Button } from '../../../ui/button';
-import { FileStateEditor } from '../../extensions/files/files';
 import { useEditorState } from '../../hooks/use-editor-state';
 
 export const FilesButtonFooterEditor = () => {
-  const t = useTranslations('core.editor');
+  const t = useTranslations('core.editor.files');
   const ref = React.useRef<HTMLInputElement>(null);
-  const { uploadFiles } = useEditorState();
+  const { editor } = useEditorState();
 
   return (
     <>
       <Button onClick={() => ref.current?.click()} variant="ghost">
-        <Paperclip /> {t('files.attach')}
+        <Paperclip /> {t('attach')}
       </Button>
       <input
         className="hidden"
         multiple
-        onChange={async e => {
-          const files: FileStateEditor[] = [...(e.target.files ?? [])].map(
-            file => ({
-              file,
-              isLoading: true,
-              id: Math.floor(Math.random() * 1000) + file.size,
-            }),
-          );
-
-          await uploadFiles({ files });
+        onChange={e => {
+          editor.commands.uploadFiles([...(e.target.files ?? [])]);
         }}
         ref={ref}
         type="file"

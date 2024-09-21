@@ -21,7 +21,7 @@ import { ShowCoreFiles } from '../../files/show/show.dto';
 import { UploadCoreEditorArgs } from './upload.dto';
 
 interface GetFilesAfterUploadArgs extends UploadCoreEditorArgs {
-  maxUploadSizeKb: number;
+  maxUploadSizeBytes: number;
 }
 
 @Injectable()
@@ -59,7 +59,7 @@ export class UploadCoreEditorService extends HelpersUploadCoreFilesService {
   private async getFilesAfterUpload({
     file,
     folder,
-    maxUploadSizeKb,
+    maxUploadSizeBytes,
     plugin,
   }: GetFilesAfterUploadArgs): Promise<UploadCoreFilesObj> {
     const acceptMimeType = this.getAcceptMineType();
@@ -70,7 +70,7 @@ export class UploadCoreEditorService extends HelpersUploadCoreFilesService {
     });
     const args: Omit<UploadCoreFilesArgs, 'acceptMimeType' | 'secure'> = {
       file,
-      maxUploadSizeBytes: maxUploadSizeKb * 1024,
+      maxUploadSizeBytes,
       plugin,
       folder,
     };
@@ -127,19 +127,27 @@ export class UploadCoreEditorService extends HelpersUploadCoreFilesService {
       : 0;
 
     const remainingStorage =
-      findGroup.files_total_max_storage - countStorageUsed;
+      findGroup.files_total_max_storage !== 0
+        ? findGroup.files_total_max_storage * 1024 - countStorageUsed
+        : 0;
+    const maxStorage = (() => {
+      if (remainingStorage) {
+        return findGroup.files_max_storage_for_submit
+          ? Math.min(
+              findGroup.files_max_storage_for_submit * 1024,
+              remainingStorage,
+            )
+          : remainingStorage;
+      }
 
-    const maxUploadSizeKb =
-      remainingStorage < findGroup.files_max_storage_for_submit &&
-      remainingStorage > 0
-        ? remainingStorage
-        : findGroup.files_max_storage_for_submit;
+      return findGroup.files_max_storage_for_submit * 1024 || -1;
+    })();
 
     const uploadFile = await this.getFilesAfterUpload({
       file,
       plugin,
       folder,
-      maxUploadSizeKb,
+      maxUploadSizeBytes: maxStorage,
     });
 
     const security_key = this.acceptMimeTypeToFrontend.includes(

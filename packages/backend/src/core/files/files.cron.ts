@@ -19,7 +19,7 @@ export class CoreFilesCron {
       .select()
       .from(core_files)
       .leftJoin(core_files_using, eq(core_files_using.file_id, core_files.id))
-      .where(lt(core_files.created, new Date(Date.now() - 1000 * 60 * 60 * 24)))
+      .where(lt(core_files.created, new Date(Date.now() - 1000 * 60 * 60))) // 1 hours
       .groupBy(
         core_files.id,
         core_files_using.file_id,

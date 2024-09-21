@@ -147,7 +147,7 @@
           },
           "max_storage_for_submit": {
             "title": "Maximum storage reached!",
-            "desc": "You can't upload more files then total {size} for one submit."
+            "desc": "You can't upload more files then total {size, plural, =0 {unlimited} other {#}} for one submit."
           }
         }
       },
@@ -294,6 +294,7 @@
         "desc": "Manage your files.",
         "search": "Search files by name...",
         "temp_file": "Temporary File will be deleted soon",
+        "storage_usage": "{used} of {total} ({percent}%) storage used",
         "table": {
           "file_size": "File Size",
           "count_uses": "Count Uses",

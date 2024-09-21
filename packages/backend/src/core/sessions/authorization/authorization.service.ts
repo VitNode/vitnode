@@ -110,7 +110,7 @@ export class AuthorizationCoreSessionsService {
           total_max_storage: user.group.files_total_max_storage
             ? user.group.files_total_max_storage * 1024
             : user.group.files_total_max_storage,
-          space_used: countStorageUsed * 1024,
+          space_used: countStorageUsed,
         },
       };
     } catch (_) {

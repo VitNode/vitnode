@@ -7,8 +7,8 @@ export const useSignInAdminView = () => {
   const [error, setError] = React.useState<string>('');
 
   const formSchema = z.object({
-    email: z.string().min(1),
-    password: z.string().min(1),
+    email: z.string().min(1).default(''),
+    password: z.string().min(1).default(''),
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {

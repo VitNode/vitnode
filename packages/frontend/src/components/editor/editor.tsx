@@ -1,6 +1,8 @@
 'use client';
 
 import { StringLanguage } from '@/graphql/types';
+import { useSession } from '@/hooks/use-session';
+import { useSessionAdmin } from '@/hooks/use-session-admin';
 import { Content, EditorContent, useEditor } from '@tiptap/react';
 import { useLocale } from 'next-intl';
 import React from 'react';
@@ -9,16 +11,18 @@ import { cn } from '../../helpers/classnames';
 import { useGlobals } from '../../hooks/use-globals';
 import { Skeleton } from '../ui/skeleton';
 import { EmojiExtensionEditor } from './extensions/emoji/emoji';
-import { extensionsEditor } from './extensions/extensions';
-import {
-  UploadFilesHandlerEditorArgs,
-  useUploadFilesHandlerEditor,
-} from './extensions/files/hooks/use-upload-files-handler-editor.ts';
+import { useExtensionsEditor } from './extensions/extensions';
+import { getFilesFromContent } from './extensions/files/hooks/functions';
+import { useFilesExtensionEditor } from './extensions/files/hooks/use-files-extension-editor';
 import { FooterEditor } from './footer/footer';
 import { EditorStateContext } from './hooks/use-editor-state';
 import { ToolBarEditor } from './toolbar/toolbar';
 
-interface Props extends Omit<UploadFilesHandlerEditorArgs, 'value'> {
+interface Props {
+  allowUploadFiles?: {
+    folder: string;
+    plugin: string;
+  };
   autofocus?: boolean;
   className?: string;
   disabled?: boolean;
@@ -49,24 +53,36 @@ export const Editor = ({
   value,
   disabled,
 }: WithLanguage | WithoutLanguage) => {
-  const { files, setFiles, uploadFiles } = useUploadFilesHandlerEditor({
-    value,
-    allowUploadFiles,
-  });
   const locale = useLocale();
   const { defaultLanguage } = useGlobals();
   const [selectedLanguage, setSelectedLanguage] = React.useState(
     locale || defaultLanguage,
   );
+  const session = useSession();
+  const adminSession = useSessionAdmin();
+  const allowUploadFilesSession =
+    session.files.allow_upload || adminSession.files.allow_upload;
+  const { handleDelete, checkUploadFile, uploadFile } = useFilesExtensionEditor(
+    {
+      allowUploadFiles,
+    },
+  );
+  const extensions = useExtensionsEditor({
+    fileSystem: {
+      editorValue: value,
+      files: Array.isArray(value) ? getFilesFromContent(value) : [],
+      selectedLanguage,
+      handleDelete,
+      checkUploadFile,
+      uploadFile,
+      allowUpload: allowUploadFilesSession,
+    },
+  });
+
   const editor = useEditor({
     autofocus: !!autofocus,
     immediatelyRender: false,
-    extensions: [
-      ...extensionsEditor({
-        uploadFiles,
-      }),
-      EmojiExtensionEditor,
-    ],
+    extensions: [...extensions, EmojiExtensionEditor],
     editorProps: {
       attributes: {
         class: cn(
@@ -132,14 +148,13 @@ export const Editor = ({
   return (
     <EditorStateContext.Provider
       value={{
-        files,
         editor,
-        uploadFiles,
-        allowUploadFiles,
+        allowUploadFiles: allowUploadFilesSession
+          ? allowUploadFiles
+          : undefined,
         value,
         onChange: onChange as (value: string | StringLanguage[]) => void,
         selectedLanguage,
-        setFiles,
       }}
     >
       <div

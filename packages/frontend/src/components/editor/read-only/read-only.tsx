@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { useLocale } from 'next-intl';
 
 import { cn } from '../../../helpers/classnames';
-import { extensionsEditor } from '../extensions/extensions';
+import { useExtensionsEditor } from '../extensions/extensions';
 import { changeCodeBlock } from './code-block';
 import { FileDownloadButton } from './file-download-button';
 
@@ -20,6 +20,7 @@ export const ReadOnlyEditor = ({
   value: StringLanguage[];
 }) => {
   const locale = useLocale();
+  const extensions = useExtensionsEditor({});
 
   const currentValue = (): string => {
     const current =
@@ -48,7 +49,7 @@ export const ReadOnlyEditor = ({
     try {
       const json: JSONContent = JSON.parse(currentValue());
 
-      return generateHTML(json, extensionsEditor({}));
+      return generateHTML(json, extensions);
     } catch (_) {
       return currentValue();
     }
