@@ -23,6 +23,7 @@ export default [
   },
   {
     rules: {
+      'perfectionist/sort-exports': 'warn',
       '@typescript-eslint/no-dynamic-delete': 'off',
       'perfectionist/sort-named-imports': 'warn',
       'perfectionist/sort-intersection-types': 'warn',

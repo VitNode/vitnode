@@ -450,6 +450,13 @@
             "submit": "Yes, delete file"
           }
         }
+      },
+      "ai": {
+        "title": "Artificial Intelligence (AI)",
+        "desc": "Integrate AI to boost user experience with personalized content, smarter search, and SEO optimization. Gain insights and enhance engagement with powerful AI tools.",
+        "tabs": {
+          "provider": "Provider"
+        }
       }
     },
     "members": {

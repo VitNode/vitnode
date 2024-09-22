@@ -282,6 +282,7 @@ export type Mutation = {
   admin__core_theme_editor__edit: Scalars['String']['output'];
   admin__install__create_database: Scalars['String']['output'];
   admin_sessions__sign_out: Scalars['String']['output'];
+  core_ai__test: Scalars['String']['output'];
   core_editor_files__delete: Scalars['String']['output'];
   core_editor_files__upload: ShowCoreFiles;
   core_members__avatar__delete: Scalars['String']['output'];
