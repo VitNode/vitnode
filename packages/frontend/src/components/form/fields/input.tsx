@@ -50,6 +50,8 @@ export function AutoFormInput<T extends FieldValues>({
             {...zodInputProps}
             {...componentProps}
             disabled={isDisabled || componentProps?.disabled}
+            onChange={field.onChange}
+            value={field.value}
           />
         </FormControl>
         {ChildComponent && <ChildComponent field={field} />}

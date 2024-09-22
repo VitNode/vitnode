@@ -60,7 +60,6 @@ export class CreateDatabaseAdminInstallService {
         protected: true,
         guest: true,
         files_allow_upload: false,
-        files_total_max_storage: -1,
       })
       .returning();
 

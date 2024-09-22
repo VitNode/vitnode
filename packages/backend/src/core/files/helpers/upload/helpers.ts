@@ -57,7 +57,7 @@ export class HelpersUploadCoreFilesService {
 
     const fileSizeInBytes = Buffer.concat(chunks).length;
 
-    if (fileSizeInBytes > maxUploadSizeBytes) {
+    if (fileSizeInBytes > maxUploadSizeBytes && maxUploadSizeBytes !== -1) {
       throw new CustomError({
         code: 'FILE_TOO_LARGE',
         message: `${filename} file is too large! We only accept files up to ${maxUploadSizeBytes} bytes.`,

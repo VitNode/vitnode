@@ -4,7 +4,7 @@ import gql from 'graphql-tag';
 export type Admin__Sessions__AuthorizationQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
 
-export type Admin__Sessions__AuthorizationQuery = { __typename?: 'Query', admin__sessions__authorization: { __typename?: 'AuthorizationAdminSessionsObj', version: string, restart_server: boolean, user?: { __typename?: 'AuthorizationCurrentUserObj', email: string, id: number, name_seo: string, is_admin: boolean, is_mod: boolean, name: string, newsletter: boolean, avatar_color: string, language: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, file_name: string }, group: { __typename?: 'GroupUser', color?: string, id: number, name: Array<{ __typename?: 'StringLanguage', language_code: string, value: string }> } } }, admin__nav__show: Array<{ __typename?: 'ShowAdminNavObj', code: string, nav: Array<{ __typename?: 'ShowAdminNavPluginsObj', code: string, icon?: string, children?: Array<{ __typename?: 'ShowAdminNavPlugins', icon?: string, code: string }> }> }> };
+export type Admin__Sessions__AuthorizationQuery = { __typename?: 'Query', admin__sessions__authorization: { __typename?: 'AuthorizationAdminSessionsObj', version: string, restart_server: boolean, user?: { __typename?: 'AuthorizationCurrentUserObj', email: string, id: number, name_seo: string, is_admin: boolean, is_mod: boolean, name: string, newsletter: boolean, avatar_color: string, language: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, file_name: string }, group: { __typename?: 'GroupUser', color?: string, id: number, name: Array<{ __typename?: 'StringLanguage', language_code: string, value: string }> } }, files: { __typename?: 'FilesAuthorizationCoreSessions', allow_upload: boolean, max_storage_for_submit: number, space_used: number, total_max_storage: number } }, admin__nav__show: Array<{ __typename?: 'ShowAdminNavObj', code: string, nav: Array<{ __typename?: 'ShowAdminNavPluginsObj', code: string, icon?: string, children?: Array<{ __typename?: 'ShowAdminNavPlugins', icon?: string, code: string }> }> }> };
 
 
 export const Admin__Sessions__Authorization = gql`
@@ -36,6 +36,12 @@ export const Admin__Sessions__Authorization = gql`
     }
     version
     restart_server
+    files {
+      allow_upload
+      max_storage_for_submit
+      space_used
+      total_max_storage
+    }
   }
   admin__nav__show {
     code

@@ -1,9 +1,11 @@
+import { core_files } from '@/database/schema/files';
 import { core_sessions_known_devices } from '@/database/schema/sessions';
 import { currentUnixDate, getUserAgentData, getUserIp } from '@/functions';
 import {
   AccessDeniedError,
   getConfigFile,
   GqlContext,
+  InternalServerError,
   NotFoundError,
 } from '@/index';
 import { getUser } from '@/utils/database/helpers/get-user';
@@ -11,7 +13,7 @@ import { InternalDatabaseService } from '@/utils/database/internal_database.serv
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
-import { eq } from 'drizzle-orm';
+import { eq, sum } from 'drizzle-orm';
 import * as fs from 'fs';
 import { join } from 'path';
 
@@ -31,7 +33,27 @@ export class AuthorizationAdminSessionsService {
   async authorization(
     context: GqlContext,
   ): Promise<AuthorizationAdminSessionsObj> {
-    const user = await this.initialAuthorization(context);
+    const currentUser = await this.initialAuthorization(context);
+    const user = await this.databaseService.db.query.core_users.findFirst({
+      where: (table, { eq }) => eq(table.id, currentUser.id),
+      columns: {
+        id: true,
+      },
+      with: {
+        group: {
+          columns: {
+            files_allow_upload: true,
+            files_max_storage_for_submit: true,
+            files_total_max_storage: true,
+          },
+        },
+      },
+    });
+
+    if (!user) {
+      throw new InternalServerError();
+    }
+
     const config = getConfigFile();
 
     const packageJSONPath = join(__dirname, '../../../../../../package.json');
@@ -42,10 +64,28 @@ export class AuthorizationAdminSessionsService {
       fs.readFileSync(packageJSONPath, 'utf8'),
     );
 
+    const countStorageUsedDb = await this.databaseService.db
+      .select({
+        space_used: sum(core_files.file_size),
+      })
+      .from(core_files)
+      .where(eq(core_files.user_id, currentUser.id));
+    const countStorageUsed = +(countStorageUsedDb[0].space_used ?? 0);
+
     return {
-      user,
+      user: currentUser,
       version: packageJSON.version,
       restart_server: config.restart_server,
+      files: {
+        allow_upload: user.group.files_allow_upload,
+        max_storage_for_submit: user.group.files_max_storage_for_submit
+          ? user.group.files_max_storage_for_submit * 1024
+          : user.group.files_max_storage_for_submit,
+        total_max_storage: user.group.files_total_max_storage
+          ? user.group.files_total_max_storage * 1024
+          : user.group.files_total_max_storage,
+        space_used: countStorageUsed,
+      },
     };
   }
 

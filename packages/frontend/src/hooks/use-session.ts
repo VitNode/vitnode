@@ -12,9 +12,9 @@ export const SessionContext = React.createContext<Args>({
   session: null,
   nav: [],
   files: {
-    allow_upload: true,
-    max_storage_for_submit: 10000,
-    total_max_storage: 500000,
+    allow_upload: false,
+    max_storage_for_submit: 0,
+    total_max_storage: 0,
     space_used: 0,
   },
 });

@@ -1,3 +1,4 @@
+import { deleteMutationApi } from '@/components/editor/extensions/files/hooks/delete-mutation-api';
 import { Button } from '@/components/ui/button';
 import { StringLanguage } from '@/graphql/types';
 import { cn } from '@/helpers/classnames';
@@ -10,7 +11,6 @@ import { toast } from 'sonner';
 import { FileStateEditor } from '../../../extensions/files/files';
 import { useEditorState } from '../../../hooks/use-editor-state';
 import { ContentItemListFilesFooterEditor } from './content';
-import { deleteMutationApi } from './hooks/delete-mutation-api';
 import { IconItemListFilesFooterEditor } from './icon';
 
 export interface ItemListFilesFooterEditorProps
@@ -27,8 +27,7 @@ export const ItemListFilesFooterEditor = ({
 }: ItemListFilesFooterEditorProps) => {
   const t = useTranslations('core.editor.files');
   const tCore = useTranslations('core');
-  const { editor, onChange, selectedLanguage, setFiles, value } =
-    useEditorState();
+  const { editor, onChange, selectedLanguage, value } = useEditorState();
 
   const handleDelete = ({
     content,
@@ -103,14 +102,7 @@ export const ItemListFilesFooterEditor = ({
           {!error && data && (
             <Button
               onClick={() => {
-                editor.commands.insertFile({
-                  ...data,
-                  file_alt: data.file_alt ?? '',
-                  width: data.width ?? 0,
-                  height: data.height ?? 0,
-                  security_key: data.security_key ?? '',
-                  id,
-                });
+                editor.commands.insertFileIntoContent(id);
                 editor.commands.focus();
               }}
               variant="ghost"
@@ -148,8 +140,8 @@ export const ItemListFilesFooterEditor = ({
 
                 onChange(content);
               }
+              editor.commands.deleteFile(id);
 
-              setFiles(prev => prev.filter(item => item.id !== id));
               if (data) {
                 const mutation = await deleteMutationApi({
                   id,

@@ -110,7 +110,7 @@ export const CreateEditFormGroupsMembersAdmin = ({
               type: 'number',
               className: 'max-w-32',
               min: 0,
-              disabled: values.content?.files_total_max_storage === -1,
+              disabled: values.content?.files_total_max_storage === 0,
             } as AutoFormInputProps,
             label: t('create_edit.files.total_max_storage'),
             className: 'flex flex-wrap items-center gap-2',
@@ -121,16 +121,16 @@ export const CreateEditFormGroupsMembersAdmin = ({
                   <div className="flex shrink-0 items-center gap-2">
                     <span>{tCore('or')}</span>
                     <Checkbox
-                      checked={field.value === -1}
+                      checked={field.value === 0}
                       id="content.files_total_max_storage.unlimited"
                       onClick={() => {
-                        if (field.value === -1) {
-                          field.onChange(0);
+                        if (field.value === 0) {
+                          field.onChange(51200);
 
                           return;
                         }
 
-                        field.onChange(-1);
+                        field.onChange(0);
                       }}
                     />
                     <Label htmlFor="content.files_total_max_storage.unlimited">
@@ -148,7 +148,7 @@ export const CreateEditFormGroupsMembersAdmin = ({
               type: 'number',
               className: 'max-w-32',
               min: 0,
-              disabled: values.content?.files_max_storage_for_submit === -1,
+              disabled: values.content?.files_max_storage_for_submit === 0,
             } as AutoFormInputProps,
             label: t('create_edit.files.max_storage_for_submit.label'),
             className: 'flex flex-wrap items-center gap-2',
@@ -159,16 +159,16 @@ export const CreateEditFormGroupsMembersAdmin = ({
                   <div className="flex shrink-0 items-center gap-2">
                     <span>{tCore('or')}</span>
                     <Checkbox
-                      checked={field.value === -1}
+                      checked={field.value === 0}
                       id="content.files_max_storage_for_submit.unlimited"
                       onClick={() => {
-                        if (field.value === -1) {
-                          field.onChange(0);
+                        if (field.value === 0) {
+                          field.onChange(5120);
 
                           return;
                         }
 
-                        field.onChange(-1);
+                        field.onChange(0);
                       }}
                     />
                     <Label htmlFor="content.files_max_storage_for_submit.unlimited">
