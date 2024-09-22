@@ -1,7 +1,7 @@
 import { Core_Editor_Files__UploadMutation } from '@/graphql/mutations/editor/core_editor_files__upload.generated';
 import { StringLanguage } from '@/graphql/types';
 import { Plugin } from '@tiptap/pm/state';
-import { JSONContent, mergeAttributes, Node } from '@tiptap/react';
+import { mergeAttributes, Node } from '@tiptap/react';
 
 import { renderReactNode } from './client';
 
@@ -131,37 +131,6 @@ export const FilesHandler = ({ fileSystem }: FilesHandlerProps) =>
     },
 
     addCommands() {
-      const handleDelete = ({
-        content,
-        file_id,
-      }: {
-        content: string;
-        file_id: number;
-      }): string => {
-        const parseValue: { content: JSONContent[]; type: string } =
-          JSON.parse(content);
-
-        const mapContent = (values: JSONContent[]): JSONContent[] => {
-          return values.filter(value => {
-            if (value.type === 'files' && value.attrs?.id === file_id) {
-              return false;
-            }
-            if (value.content) {
-              value.content = mapContent(value.content);
-            }
-
-            return true;
-          });
-        };
-
-        const valueReturn = {
-          ...parseValue,
-          content: mapContent(parseValue.content),
-        };
-
-        return JSON.stringify(valueReturn);
-      };
-
       return {
         insertFileIntoContent:
           id =>
@@ -211,57 +180,13 @@ export const FilesHandler = ({ fileSystem }: FilesHandlerProps) =>
 
           return true;
         },
-        deleteFile:
-          id =>
-          ({ commands }) => {
-            if (!fileSystem?.editorValue) return false;
-            const file = this.storage.files.find(file => file.id === id);
-            if (!file) return false;
+        deleteFile: id => () => {
+          this.storage.files = this.storage.files.filter(
+            file => file.id !== id,
+          );
 
-            if (
-              Array.isArray(fileSystem.editorValue) &&
-              fileSystem.editorValue.length > 0
-            ) {
-              const content: StringLanguage[] = fileSystem.editorValue.map(
-                item => ({
-                  language_code: item.language_code,
-                  value: handleDelete({
-                    content: item.value,
-                    file_id: id,
-                  }),
-                }),
-              );
-
-              const parseContent: string = JSON.parse(
-                content.find(
-                  item => item.language_code === fileSystem.selectedLanguage,
-                )?.value ?? '',
-              );
-
-              commands.clearContent();
-              commands.setContent(parseContent);
-            } else if (typeof fileSystem.editorValue === 'string') {
-              const content = handleDelete({
-                content: fileSystem.editorValue,
-                file_id: id,
-              });
-
-              commands.clearContent();
-              commands.setContent(content);
-            }
-
-            this.storage.files = this.storage.files.filter(
-              file => file.id !== id,
-            );
-            if (file.data) {
-              void fileSystem.handleDelete({
-                id,
-                securityKey: file.data.security_key,
-              });
-            }
-
-            return true;
-          },
+          return true;
+        },
       };
     },
 

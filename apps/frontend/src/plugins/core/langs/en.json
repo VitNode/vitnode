@@ -141,14 +141,8 @@
         "images_videos": "Images & Videos",
         "images": "Images",
         "errors": {
-          "invalid_file_type": {
-            "title": "Invalid file type!",
-            "desc": "Allowed types: {types}."
-          },
-          "max_storage_for_submit": {
-            "title": "Maximum storage reached!",
-            "desc": "You can't upload more files then total {size, plural, =0 {unlimited} other {#}} for one submit."
-          }
+          "max_storage_extended": "Max storage exceeded. You can't upload more files. Max storage is {size}.",
+          "invalid_file_type": "Invalid file type! Allowed types: {types}."
         }
       },
 

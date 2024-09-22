@@ -1,4 +1,5 @@
 import { FilesAuthorizationCoreSessions } from '@/graphql/types';
+import { formatBytes } from '@/helpers/format-bytes';
 import { useGlobals } from '@/hooks/use-globals';
 import { useSession } from '@/hooks/use-session';
 import { useSessionAdmin } from '@/hooks/use-session-admin';
@@ -21,6 +22,7 @@ export const useFilesExtensionEditor = ({
     plugin: string;
   };
 }) => {
+  const t = useTranslations('core.editor.files.errors');
   const tCore = useTranslations('core.errors');
   const session = useSession();
   const adminSession = useSessionAdmin();
@@ -56,10 +58,13 @@ export const useFilesExtensionEditor = ({
 
   const validateMimeTypeFile = (file: FileStateEditor): FileStateEditor => {
     if (file.error)
-      return { ...file, error: 'Internal Server Error', isLoading: false };
+      return {
+        ...file,
+        error: tCore('internal_server_error'),
+        isLoading: false,
+      };
 
     const { allow_type } = config.editor.files;
-
     if (allow_type === 'all') return file;
 
     const isValidType = (types: string[]) =>
@@ -67,11 +72,23 @@ export const useFilesExtensionEditor = ({
 
     if (allow_type === 'images_videos') {
       if (!isValidType([...acceptMimeTypeImage, ...acceptMimeTypeVideo])) {
-        return { ...file, error: 'Invalid file type', isLoading: false };
+        return {
+          ...file,
+          error: t('invalid_file_type', {
+            types: [...acceptMimeTypeImage, ...acceptMimeTypeVideo].join(', '),
+          }),
+          isLoading: false,
+        };
       }
     } else if (allow_type === 'images') {
       if (!isValidType(acceptMimeTypeImage)) {
-        return { ...file, error: 'Invalid file type', isLoading: false };
+        return {
+          ...file,
+          error: t('invalid_file_type', {
+            types: acceptMimeTypeImage.join(', '),
+          }),
+          isLoading: false,
+        };
       }
     }
 
@@ -86,7 +103,11 @@ export const useFilesExtensionEditor = ({
     fileState: FileStateEditor[];
   }): FileStateEditor => {
     if (file.error)
-      return { ...file, error: 'Internal Server Error', isLoading: false };
+      return {
+        ...file,
+        error: tCore('internal_server_error'),
+        isLoading: false,
+      };
 
     if (
       permissionFiles.max_storage_for_submit === 0 &&
@@ -120,7 +141,13 @@ export const useFilesExtensionEditor = ({
     );
 
     if (totalSize > maxStorage && maxStorage !== -1) {
-      return { ...file, error: 'Max storage exceeded', isLoading: false };
+      return {
+        ...file,
+        error: t('max_storage_extended', {
+          size: formatBytes(maxStorage),
+        }),
+        isLoading: false,
+      };
     }
 
     return file;
@@ -157,7 +184,11 @@ export const useFilesExtensionEditor = ({
   ): Promise<FileStateEditor> => {
     const formData = new FormData();
     if (!file.file || !allowUploadFiles) {
-      return { ...file, error: 'Internal Server Error', isLoading: false };
+      return {
+        ...file,
+        error: tCore('internal_server_error'),
+        isLoading: false,
+      };
     }
     formData.append('file', file.file);
     formData.append('plugin', allowUploadFiles.plugin);
@@ -165,7 +196,11 @@ export const useFilesExtensionEditor = ({
     const mutation = await uploadMutationApi(formData);
 
     if (mutation.error || !mutation.data?.core_editor_files__upload) {
-      return { ...file, error: 'Internal Server Error', isLoading: false };
+      return {
+        ...file,
+        error: tCore('internal_server_error'),
+        isLoading: false,
+      };
     }
     const { core_editor_files__upload } = mutation.data;
 
