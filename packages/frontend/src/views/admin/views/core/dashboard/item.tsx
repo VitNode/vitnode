@@ -5,27 +5,29 @@ import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { ChevronRight, GripVertical } from 'lucide-react';
 
-export const SortableTreeItem = ({
+import { TreeItem } from './types';
+
+export function SortableTreeItem<T extends TreeItem<T>>({
   childCount,
   clone,
   depth,
   indentationWidth,
   collapsed,
-  value,
   className,
   id,
   onCollapse,
+  children,
   ...props
 }: {
   childCount?: number;
+  children: React.ReactNode;
   clone?: boolean;
   collapsed?: boolean;
   depth: number;
   id: UniqueIdentifier;
   indentationWidth: number;
   onCollapse?: () => void;
-  value: UniqueIdentifier;
-} & Omit<React.HTMLAttributes<HTMLLIElement>, 'id' | 'style'>) => {
+} & Omit<React.HTMLAttributes<HTMLLIElement>, 'id' | 'style'>) {
   const {
     attributes,
     // isDragging,
@@ -57,7 +59,7 @@ export const SortableTreeItem = ({
     >
       <div
         className={cn(
-          'bg-card relative flex items-center border px-[10px] py-[var(--vertical-padding)]',
+          'bg-card relative flex items-center gap-2 border px-[10px] py-[var(--vertical-padding)]',
           {
             'rounded-sm pr-[24px] shadow': clone,
           },
@@ -91,7 +93,7 @@ export const SortableTreeItem = ({
           </Button>
         )}
 
-        <div>test123</div>
+        {children}
         {clone && childCount && childCount > 1 ? (
           <span className="bg-primary text-primary-foreground absolute -right-[10px] -top-[10px] flex size-[24px] items-center justify-center rounded-full text-sm">
             {childCount}
@@ -100,4 +102,4 @@ export const SortableTreeItem = ({
       </div>
     </li>
   );
-};
+}
