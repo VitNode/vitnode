@@ -1,6 +1,5 @@
 import { Button } from '@/components/ui/button';
 import { cn } from '@/helpers/classnames';
-import { UniqueIdentifier } from '@dnd-kit/core';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { ChevronRight, GripVertical } from 'lucide-react';
@@ -24,13 +23,12 @@ export function SortableTreeItem<T extends TreeItem<T>>({
   clone?: boolean;
   collapsed?: boolean;
   depth: number;
-  id: UniqueIdentifier;
+  id: number | string;
   indentationWidth: number;
   onCollapse?: () => void;
 } & Omit<React.HTMLAttributes<HTMLLIElement>, 'id' | 'style'>) {
   const {
     attributes,
-    // isDragging,
     isSorting,
     listeners,
     setDraggableNodeRef,

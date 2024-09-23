@@ -1,14 +1,11 @@
 import { ShowAdminNavPluginsObj } from '@/graphql/types';
-import { FlatTree } from '@/helpers/flatten-tree';
 import { useParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 
 import { ActionsTableNavDevPluginAdmin } from './actions/actions';
 import { useItemNavDevPluginAdmin } from './hooks/use-item-nav-dev-plugin-admin';
 
-export const ItemContentNavDevPluginAdmin = (
-  data: FlatTree<ShowAdminNavPluginsObj>,
-) => {
+export const ItemContentNavDevPluginAdmin = (data: ShowAdminNavPluginsObj) => {
   const { code: pluginCode } = useParams();
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-expect-error

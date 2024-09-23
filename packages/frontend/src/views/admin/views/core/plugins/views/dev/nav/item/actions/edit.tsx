@@ -14,7 +14,6 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 import { ShowAdminNavPluginsObj } from '@/graphql/types';
-import { FlatTree } from '@/helpers/flatten-tree';
 import { Pencil } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import React from 'react';
@@ -28,7 +27,7 @@ const Content = React.lazy(async () =>
 );
 
 export const EditActionTableNavDevPluginAdmin = (
-  data: FlatTree<ShowAdminNavPluginsObj>,
+  data: ShowAdminNavPluginsObj,
 ) => {
   const t = useTranslations('admin.core.plugins.dev.nav');
   const rest = useItemNavDevPluginAdmin();

@@ -1,6 +1,6 @@
 'use client';
 
-import { DragAndDropSortableList } from './list';
+import { DragAndDropSortableList } from '@/components/drag&drop/sortable-list/list';
 
 export const CategoriesBlogAdminView = () => {
   const data = [

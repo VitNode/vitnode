@@ -10,7 +10,6 @@ import {
   DragOverlay,
   DragStartEvent,
   MeasuringStrategy,
-  UniqueIdentifier,
 } from '@dnd-kit/core';
 import {
   arrayMove,
@@ -18,14 +17,15 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import { useTranslations } from 'next-intl';
 import React, { useEffect, useId, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
 
+import { flattenTree } from './flat';
 import { SortableTreeItem } from './item';
 import { FlattenedItem, TreeItem } from './types';
 import {
   buildTree,
-  flattenTree,
   getChildCount,
   getProjection,
   removeChildrenOf,
@@ -34,22 +34,31 @@ import {
 
 const indentationWidth = 50;
 
-export function DragAndDropSortableList<T extends TreeItem<T>>({
+export function DragAndDropSortableList<
+  T extends TreeItem<Omit<T, '__typename'>>,
+>({
   data,
   componentItem,
+  onCollapse,
+  maxDepth,
+  onDragEnd,
 }: {
-  componentItem: (item: Omit<FlattenedItem<T>, 'children'>) => React.ReactNode;
+  componentItem: (item: T) => React.ReactNode;
   data: T[];
+  maxDepth?: number;
+  onCollapse?: (props: { id: number | string; isOpen: boolean }) => void;
+  onDragEnd?: (props: {
+    id: number | string;
+    indexToMove: number;
+    parentId: null | number | string;
+  }) => void;
 }) {
+  const t = useTranslations('core');
   const [isReadyDocument, setIsReadyDocument] = useState(false);
   const [items, setItems] = useState(data);
-  const [activeId, setActiveId] = useState<null | UniqueIdentifier>(null);
-  const [overId, setOverId] = useState<null | UniqueIdentifier>(null);
+  const [activeId, setActiveId] = useState<null | number | string>(null);
+  const [overId, setOverId] = useState<null | number | string>(null);
   const [offsetLeft, setOffsetLeft] = useState(0);
-  const [currentPosition, setCurrentPosition] = useState<{
-    overId: UniqueIdentifier;
-    parentId: null | UniqueIdentifier;
-  } | null>(null);
   const id = useId();
 
   // Refetch data
@@ -59,7 +68,7 @@ export function DragAndDropSortableList<T extends TreeItem<T>>({
 
   const flattenedItems = useMemo(() => {
     const flattenedTree = flattenTree(items);
-    const collapsedItems = flattenedTree.reduce<UniqueIdentifier[]>(
+    const collapsedItems = flattenedTree.reduce<(number | string)[]>(
       (acc, { children, collapsed, id }) =>
         collapsed && children.length ? [...acc, id] : acc,
       [],
@@ -79,6 +88,7 @@ export function DragAndDropSortableList<T extends TreeItem<T>>({
           overId,
           offsetLeft,
           indentationWidth,
+          maxDepth,
         )
       : null;
   const activeItem = activeId
@@ -93,15 +103,6 @@ export function DragAndDropSortableList<T extends TreeItem<T>>({
   function handleDragStart({ active: { id: activeId } }: DragStartEvent) {
     setActiveId(activeId);
     setOverId(activeId);
-
-    const activeItem = flattenedItems.find(({ id }) => id === activeId);
-
-    if (activeItem) {
-      setCurrentPosition({
-        parentId: activeItem.parentId,
-        overId: activeId,
-      });
-    }
 
     document.body.style.setProperty('cursor', 'grabbing');
   }
@@ -118,51 +119,71 @@ export function DragAndDropSortableList<T extends TreeItem<T>>({
     setOverId(null);
     setActiveId(null);
     setOffsetLeft(0);
-    setCurrentPosition(null);
 
     document.body.style.setProperty('cursor', '');
   }
 
   function handleDragEnd({ active, over }: DragEndEvent) {
     resetState();
+    if (!projected || !over) return;
 
-    if (projected && over) {
-      const { depth, parentId } = projected;
-      const clonedItems: FlattenedItem<T>[] = JSON.parse(
-        JSON.stringify(flattenTree(items)),
-      );
-      const overIndex = clonedItems.findIndex(({ id }) => id === over.id);
-      const activeIndex = clonedItems.findIndex(({ id }) => id === active.id);
-      const activeTreeItem = clonedItems[activeIndex];
+    const { depth, parentId } = projected;
+    const clonedItems: FlattenedItem<Omit<T, '__typename'>>[] = JSON.parse(
+      JSON.stringify(flattenTree(items)),
+    );
+    const overIndex = clonedItems.findIndex(({ id }) => id === over.id);
+    const activeIndex = clonedItems.findIndex(({ id }) => id === active.id);
+    const activeTreeItem = clonedItems[activeIndex];
 
-      clonedItems[activeIndex] = { ...activeTreeItem, depth, parentId };
+    clonedItems[activeIndex] = { ...activeTreeItem, depth, parentId };
 
-      const sortedItems = arrayMove(clonedItems, activeIndex, overIndex);
-      const newItems = buildTree<T>(sortedItems);
+    const sortedItems = arrayMove(clonedItems, activeIndex, overIndex);
+    const newItems = buildTree<Omit<T, '__typename'>>(sortedItems);
 
-      setItems(newItems);
-    }
+    setItems(newItems as T[]);
+
+    onDragEnd?.({
+      id: active.id,
+      parentId: parentId,
+      indexToMove: overIndex,
+    });
   }
 
   function handleDragCancel() {
     resetState();
   }
 
-  function handleCollapse(id: UniqueIdentifier) {
-    const newItems = setProperty<T>(items, id, 'collapsed', value => {
-      if (value === undefined) {
-        return false;
-      }
+  function handleCollapse(id: number | string) {
+    const newItems = setProperty<Omit<T, '__typename'>>(
+      items,
+      id,
+      'collapsed',
+      value => {
+        if (value === undefined) {
+          return false;
+        }
 
-      return !value;
+        return !value;
+      },
+    );
+
+    onCollapse?.({
+      id,
+      isOpen: newItems.find(item => item.id === id)?.collapsed ?? true,
     });
 
-    setItems(newItems);
+    setItems(newItems as T[]);
   }
 
   useEffect(() => {
     setIsReadyDocument(true);
   }, []);
+
+  if (!data.length) {
+    return (
+      <div className="text-muted-foreground text-center">{t('no_results')}</div>
+    );
+  }
 
   return (
     <DndContext
@@ -180,22 +201,24 @@ export function DragAndDropSortableList<T extends TreeItem<T>>({
       onDragStart={handleDragStart}
     >
       <SortableContext items={sortedIds} strategy={verticalListSortingStrategy}>
-        {flattenedItems.map(({ id, children, collapsed, depth, ...rest }) => (
-          <SortableTreeItem<T>
-            collapsed={Boolean(collapsed && children.length)}
-            depth={id === activeId && projected ? projected.depth : depth}
-            id={id}
+        {flattenedItems.map(item => (
+          <SortableTreeItem
+            collapsed={Boolean(item.collapsed && item.children.length)}
+            depth={
+              item.id === activeId && projected ? projected.depth : item.depth
+            }
+            id={item.id}
             indentationWidth={indentationWidth}
-            key={id}
+            key={item.id}
             onCollapse={
-              children.length
+              item.children.length
                 ? () => {
-                    handleCollapse(id);
+                    handleCollapse(item.id);
                   }
                 : undefined
             }
           >
-            {componentItem({ ...rest, id, depth })}
+            {componentItem(item as unknown as T)}
           </SortableTreeItem>
         ))}
         {isReadyDocument &&
@@ -235,7 +258,7 @@ export function DragAndDropSortableList<T extends TreeItem<T>>({
                   id={activeId}
                   indentationWidth={indentationWidth}
                 >
-                  {componentItem(activeItem)}
+                  {componentItem(activeItem as unknown as T)}
                 </SortableTreeItem>
               ) : null}
             </DragOverlay>,
