@@ -18,7 +18,7 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useId, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 import { SortableTreeItem } from './item';
@@ -29,6 +29,7 @@ import {
   getChildCount,
   getProjection,
   removeChildrenOf,
+  setProperty,
 } from './utilities';
 
 const indentationWidth = 50;
@@ -60,7 +61,8 @@ export const CategoriesBlogAdminView = () => {
       ],
     },
   ];
-  const [items, setItems] = useState(() => defaultItems);
+  const [isReadyDocument, setIsReadyDocument] = useState(false);
+  const [items, setItems] = useState(defaultItems);
   const [activeId, setActiveId] = useState<null | UniqueIdentifier>(null);
   const [overId, setOverId] = useState<null | UniqueIdentifier>(null);
   const [offsetLeft, setOffsetLeft] = useState(0);
@@ -68,6 +70,7 @@ export const CategoriesBlogAdminView = () => {
     overId: UniqueIdentifier;
     parentId: null | UniqueIdentifier;
   } | null>(null);
+  const id = useId();
 
   const flattenedItems = useMemo(() => {
     const flattenedTree = flattenTree(items);
@@ -82,6 +85,7 @@ export const CategoriesBlogAdminView = () => {
       activeId ? [activeId, ...collapsedItems] : collapsedItems,
     );
   }, [activeId, items]);
+
   const projected =
     activeId && overId
       ? getProjection(
@@ -159,9 +163,26 @@ export const CategoriesBlogAdminView = () => {
     resetState();
   }
 
+  function handleCollapse(id: UniqueIdentifier) {
+    const newItems = setProperty(items, id, 'collapsed', value => {
+      if (value === undefined) {
+        return false;
+      }
+
+      return !value;
+    });
+
+    setItems(newItems);
+  }
+
+  useEffect(() => {
+    setIsReadyDocument(true);
+  }, []);
+
   return (
     <DndContext
       collisionDetection={closestCenter}
+      id={id}
       measuring={{
         droppable: {
           strategy: MeasuringStrategy.Always,
@@ -181,50 +202,58 @@ export const CategoriesBlogAdminView = () => {
             id={id}
             indentationWidth={indentationWidth}
             key={id}
+            onCollapse={
+              children.length
+                ? () => {
+                    handleCollapse(id);
+                  }
+                : undefined
+            }
             value={id}
           />
         ))}
-        {createPortal(
-          <DragOverlay
-            dropAnimation={{
-              keyframes({ transform }) {
-                return [
-                  {
-                    opacity: 1,
-                    transform: CSS.Transform.toString(transform.initial),
-                  },
-                  {
-                    opacity: 0,
-                    transform: CSS.Transform.toString({
-                      ...transform.final,
-                      x: transform.final.x + 5,
-                      y: transform.final.y + 5,
-                    }),
-                  },
-                ];
-              },
-              easing: 'ease-out',
-              sideEffects({ active }) {
-                active.node.animate([{ opacity: 0 }, { opacity: 1 }], {
-                  duration: defaultDropAnimation.duration,
-                  easing: defaultDropAnimation.easing,
-                });
-              },
-            }}
-          >
-            {activeId && activeItem ? (
-              <SortableTreeItem
-                childCount={getChildCount(items, activeId) + 1}
-                clone
-                depth={activeItem.depth}
-                id={activeId}
-                indentationWidth={indentationWidth}
-                value={activeId.toString()}
-              />
-            ) : null}
-          </DragOverlay>,
-          document.body,
-        )}
+        {isReadyDocument &&
+          createPortal(
+            <DragOverlay
+              dropAnimation={{
+                keyframes({ transform }) {
+                  return [
+                    {
+                      opacity: 1,
+                      transform: CSS.Transform.toString(transform.initial),
+                    },
+                    {
+                      opacity: 0,
+                      transform: CSS.Transform.toString({
+                        ...transform.final,
+                        x: transform.final.x + 5,
+                        y: transform.final.y + 5,
+                      }),
+                    },
+                  ];
+                },
+                easing: 'ease-out',
+                sideEffects({ active }) {
+                  active.node.animate([{ opacity: 0 }, { opacity: 1 }], {
+                    duration: defaultDropAnimation.duration,
+                    easing: defaultDropAnimation.easing,
+                  });
+                },
+              }}
+            >
+              {activeId && activeItem ? (
+                <SortableTreeItem
+                  childCount={getChildCount(items, activeId) + 1}
+                  clone
+                  depth={activeItem.depth}
+                  id={activeId}
+                  indentationWidth={indentationWidth}
+                  value={activeId.toString()}
+                />
+              ) : null}
+            </DragOverlay>,
+            document.body,
+          )}
       </SortableContext>
     </DndContext>
   );

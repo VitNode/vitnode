@@ -3,7 +3,7 @@ import { cn } from '@/helpers/classnames';
 import { UniqueIdentifier } from '@dnd-kit/core';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { GripVertical } from 'lucide-react';
+import { ChevronRight, GripVertical } from 'lucide-react';
 
 export const SortableTreeItem = ({
   childCount,
@@ -14,6 +14,7 @@ export const SortableTreeItem = ({
   value,
   className,
   id,
+  onCollapse,
   ...props
 }: {
   childCount?: number;
@@ -22,6 +23,7 @@ export const SortableTreeItem = ({
   depth: number;
   id: UniqueIdentifier;
   indentationWidth: number;
+  onCollapse?: () => void;
   value: UniqueIdentifier;
 } & Omit<React.HTMLAttributes<HTMLLIElement>, 'id' | 'style'>) => {
   const {
@@ -79,6 +81,16 @@ export const SortableTreeItem = ({
         >
           <GripVertical />
         </Button>
+        {onCollapse && (
+          <Button ariaLabel="" onClick={onCollapse} size="icon" variant="ghost">
+            <ChevronRight
+              className={cn('text-muted-foreground transition-transform', {
+                'rotate-90': collapsed,
+              })}
+            />
+          </Button>
+        )}
+
         <div>test123</div>
         {clone && childCount && childCount > 1 ? (
           <span className="bg-primary text-primary-foreground absolute -right-[10px] -top-[10px] flex size-[24px] items-center justify-center rounded-full text-sm">

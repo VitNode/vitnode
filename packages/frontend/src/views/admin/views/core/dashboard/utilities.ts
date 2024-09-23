@@ -86,7 +86,7 @@ function flatten(
   return items.reduce<FlattenedItem[]>((acc, item, index) => {
     return [
       ...acc,
-      { ...item, parentId, depth, index },
+      { ...item, parentId, depth, index, collapsed: item.collapsed ?? true },
       ...flatten(item.children, item.id, depth + 1),
     ];
   }, []);
@@ -97,9 +97,12 @@ export function flattenTree(items: TreeItems): FlattenedItem[] {
 }
 
 export function buildTree(flattenedItems: FlattenedItem[]): TreeItems {
-  const root: TreeItem = { id: 'root', children: [] };
+  const root: TreeItem = { id: 'root', children: [], collapsed: true };
   const nodes: Record<string, TreeItem> = { [root.id]: root };
-  const items = flattenedItems.map(item => ({ ...item, children: [] }));
+  const items = flattenedItems.map(item => ({
+    ...item,
+    children: [],
+  }));
 
   for (const item of items) {
     const { id, children } = item;
