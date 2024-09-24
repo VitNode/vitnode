@@ -320,6 +320,7 @@ export type MutationAdmin__Core_Authorization_Settings__EditArgs = {
 export type MutationAdmin__Core_Email_Settings__EditArgs = {
   color_primary: Scalars['String']['input'];
   color_primary_foreground: Scalars['String']['input'];
+  from: Scalars['String']['input'];
   logo?: InputMaybe<UploadWithKeepCoreFilesArgs>;
   provider: EmailProvider;
   resend_key?: InputMaybe<Scalars['String']['input']>;
@@ -328,7 +329,6 @@ export type MutationAdmin__Core_Email_Settings__EditArgs = {
 
 
 export type MutationAdmin__Core_Email_Settings__TestArgs = {
-  from: Scalars['String']['input'];
   message: Scalars['String']['input'];
   preview_text?: InputMaybe<Scalars['String']['input']>;
   subject: Scalars['String']['input'];
@@ -836,6 +836,7 @@ export type ShowAdminCaptchaSecurityObj = {
 export type ShowAdminEmailSettingsServiceObj = {
   __typename?: 'ShowAdminEmailSettingsServiceObj';
   color_primary: Scalars['String']['output'];
+  from: Scalars['String']['output'];
   logo?: Maybe<UploadCoreFilesObj>;
   provider: EmailProvider | `${EmailProvider}`;
   smtp_host?: Maybe<Scalars['String']['output']>;

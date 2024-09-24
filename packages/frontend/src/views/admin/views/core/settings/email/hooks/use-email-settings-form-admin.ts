@@ -40,6 +40,7 @@ export const useEmailSettingsFormAdmin = ({
         .optional(),
     }),
     resend_key: z.string().default('').optional(),
+    from: z.string().default(data.from),
   });
   const onSubmit = async (
     values: z.infer<typeof formSchema>,
@@ -50,6 +51,7 @@ export const useEmailSettingsFormAdmin = ({
 
     const formData = new FormData();
     formData.append('provider', values.provider);
+    formData.append('from', values.from);
     formData.append('color_primary', values.color_primary);
     formData.append(
       'color_primary_foreground',

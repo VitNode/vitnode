@@ -5,11 +5,6 @@ import { IsEmail } from 'class-validator';
 
 @ArgsType()
 export class TestAdminEmailSettingsServiceArgs {
-  @IsEmail()
-  @Field(() => String)
-  @Transform(TransformString)
-  from: string;
-
   @Field(() => String)
   @Transform(TransformString)
   message: string;

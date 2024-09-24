@@ -13,6 +13,7 @@ export const mutationApi = async (formData: FormData) => {
   const provider = formData.get('provider') as EmailProvider;
   const variables: Admin__Core_Email_Settings__EditMutationVariables = {
     provider,
+    from: formData.get('from') as string,
     colorPrimary: formData.get('color_primary') as string,
     colorPrimaryForeground: formData.get('color_primary_foreground') as string,
     smtp:

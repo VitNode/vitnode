@@ -7,17 +7,10 @@ import { TestAdminEmailSettingsServiceArgs } from './test.dto';
 @Injectable()
 export class TestAdminEmailSettingsService extends SendAdminEmailService {
   async test(
-    {
-      from,
-      to,
-      subject,
-      message,
-      preview_text,
-    }: TestAdminEmailSettingsServiceArgs,
+    { to, subject, message, preview_text }: TestAdminEmailSettingsServiceArgs,
     user: User,
   ): Promise<string> {
     await this.send({
-      from,
       to,
       subject,
       message,

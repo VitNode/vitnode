@@ -99,6 +99,10 @@
             "resend": "Resend Email",
             "resend_desc": "Read more on <link>Resend Email</link>."
           },
+          "from": {
+            "title": "From",
+            "desc": "This email address will be used as the sender of the emails sent from your website."
+          },
           "logo": "Logo",
           "resend_key": "Resend Key",
           "smtp_host": "SMTP Host",
@@ -109,7 +113,6 @@
           "color_primary": "Primary Color",
           "test": {
             "title": "Test Email Send",
-            "from": "From",
             "to": "To",
             "subject": "Subject",
             "preview_text": "Preview Message",
