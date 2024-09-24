@@ -77,7 +77,9 @@
           "desc": "Send emails from your website. Unlock more features like password reset, email verification, and more.",
           "logs": {
             "title": "Email Error Logs",
-            "from": "From",
+            "id": "ID",
+            "to": "To",
+            "provider": "Provider",
             "subject": "Subject",
             "created": "Created",
             "error": "Error"

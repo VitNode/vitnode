@@ -41,7 +41,7 @@ export const EmailSettingsAdminView = async () => {
 
   return (
     <>
-      <HeaderContent h1={t('title')} desc={t('desc')}>
+      <HeaderContent desc={t('desc')} h1={t('title')}>
         <ActionsEmailSettingsAdmin
           disabled={
             data.admin__core_email_settings__show.provider ===

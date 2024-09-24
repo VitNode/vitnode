@@ -1,8 +1,9 @@
-import { Link } from '@/navigation';
-import { TestingActionEmailSettingsAdmin } from './testing/testing';
 import { Button } from '@/components/ui/button';
-import { useTranslations } from 'next-intl';
+import { Link } from '@/navigation';
 import { MailWarningIcon } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+
+import { TestingActionEmailSettingsAdmin } from './testing/testing';
 
 export const ActionsEmailSettingsAdmin = ({
   disabled,

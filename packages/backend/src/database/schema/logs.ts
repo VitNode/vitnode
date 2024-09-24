@@ -5,5 +5,7 @@ export const core_logs_email = pgTable('core_logs_email', {
   to: varchar('to', { length: 255 }).notNull(),
   subject: varchar('subject', { length: 255 }).notNull(),
   created: timestamp('created').notNull().defaultNow(),
-  error: text('error'),
+  error: text('error').notNull(),
+  html: text('html').notNull(),
+  provider: varchar('provider', { length: 20 }).notNull().default('SMTP'),
 });

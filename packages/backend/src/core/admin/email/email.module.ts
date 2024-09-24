@@ -1,5 +1,7 @@
 import { Global, Module } from '@nestjs/common';
 
+import { LogsAdminEmailResolver } from './logs/logs.resolver';
+import { LogsAdminEmailService } from './logs/logs.service';
 import { MailService } from './mail.service';
 import { SendAdminEmailService } from './send/send.service';
 import { EditAdminEmailSettingsResolver } from './settings/edit/edit.resolver';
@@ -17,6 +19,8 @@ import { TestAdminEmailSettingsService } from './settings/test/test.service';
     EditAdminEmailSettingsService,
     TestAdminEmailSettingsService,
     TestAdminEmailSettingsResolver,
+    LogsAdminEmailService,
+    LogsAdminEmailResolver,
   ],
 })
 export class AdminEmailModule {}

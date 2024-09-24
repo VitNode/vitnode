@@ -19,6 +19,7 @@ export const ContentTestingActionEmailSettingsAdmin = () => {
       fields={[
         {
           id: 'from',
+          label: t('from'),
           component: AutoFormInput,
           componentProps: {
             type: 'email',
@@ -26,6 +27,7 @@ export const ContentTestingActionEmailSettingsAdmin = () => {
         },
         {
           id: 'to',
+          label: t('to'),
           component: AutoFormInput,
           componentProps: {
             type: 'email',
@@ -33,10 +35,12 @@ export const ContentTestingActionEmailSettingsAdmin = () => {
         },
         {
           id: 'subject',
+          label: t('subject'),
           component: AutoFormInput,
         },
         {
           id: 'message',
+          label: t('message'),
           component: AutoTextArea,
         },
       ]}

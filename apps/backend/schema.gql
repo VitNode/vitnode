@@ -209,6 +209,21 @@ input LogosEditAdminThemeEditor {
   width: Float!
 }
 
+type LogsAdminEmail {
+  created: DateTime!
+  error: String!
+  html: String!
+  id: Float!
+  provider: String!
+  subject: String!
+  to: String!
+}
+
+type LogsAdminEmailObj {
+  edges: [LogsAdminEmail!]!
+  pageInfo: PageInfo!
+}
+
 type Mutation {
   admin__core_authorization_settings__edit(force_login: Boolean!, lock_register: Boolean!): ShowAdminAuthorizationSettingsObj!
   admin__core_email_settings__edit(color_primary: String!, color_primary_foreground: String!, logo: UploadWithKeepCoreFilesArgs, provider: EmailProvider!, resend_key: String, smtp: SMTPEditAdminEmailSettingsService): ShowAdminEmailSettingsServiceObj!
@@ -280,6 +295,7 @@ type PageInfo {
 
 type Query {
   admin__core_authorization_settings__show: ShowAdminAuthorizationSettingsObj!
+  admin__core_email__logs(cursor: Int, first: Int, last: Int): LogsAdminEmailObj!
   admin__core_email_settings__show: ShowAdminEmailSettingsServiceObj!
   admin__core_files__show(cursor: Int, first: Int, last: Int, search: String, sortBy: ShowCoreFilesSortByArgs): ShowAdminFilesObj!
   admin__core_groups__show(cursor: Int, first: Int, last: Int, search: String, sortBy: ShowAdminGroupsSortByArgs): ShowAdminGroupsObj!
