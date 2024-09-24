@@ -3,13 +3,13 @@ import { useParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 
-import { ContentDeleteActionTableNavDevPluginAdminProps } from '../content';
+import { ContentDeleteActionTableNavDevPluginAdmin } from '../content';
 import { mutationApi } from './mutation-api';
 
 export const useDeleteNavPluginAdmin = ({
   code,
-  parentCode,
-}: ContentDeleteActionTableNavDevPluginAdminProps) => {
+  parentId,
+}: React.ComponentProps<typeof ContentDeleteActionTableNavDevPluginAdmin>) => {
   const t = useTranslations('admin.core.plugins.dev.nav.delete');
   const tCore = useTranslations('core');
   const { setOpen } = useAlertDialog();
@@ -21,7 +21,7 @@ export const useDeleteNavPluginAdmin = ({
     const mutation = await mutationApi({
       code,
       pluginCode: Array.isArray(pluginCode) ? pluginCode[0] : pluginCode,
-      parentCode,
+      parentCode: parentId,
     });
 
     if (mutation?.error) {

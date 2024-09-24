@@ -1,3 +1,4 @@
+import { flattenTree } from '@/components/drag&drop/sortable-list/flat';
 import { Icon } from '@/components/icon/icon';
 import { HeaderContent } from '@/components/ui/header-content';
 import { fetcher } from '@/graphql/fetcher';
@@ -7,7 +8,6 @@ import {
   Admin__Core_Plugins__Nav__ShowQueryVariables,
 } from '@/graphql/queries/admin/plugins/dev/nav/admin__core_plugins__nav__show.generated';
 import { ShowAdminNavPluginsObj } from '@/graphql/types';
-import { flattenTree } from '@/helpers/flatten-tree';
 import { getTranslations } from 'next-intl/server';
 
 import { CreateNavDevPluginAdmin } from './actions/create/create';
@@ -27,6 +27,11 @@ const getData = async (
   return data;
 };
 
+interface NavItem extends Omit<ShowAdminNavPluginsObj, 'children'> {
+  children: NavItem[];
+  id: string;
+}
+
 export interface NavDevPluginAdminViewProps {
   params: { code: string };
 }
@@ -39,18 +44,17 @@ export const NavDevPluginAdminView = async ({
     getTranslations('admin.core.plugins.dev.nav'),
   ]);
 
-  const flattenData = flattenTree<ShowAdminNavPluginsObj>({
-    tree: data.admin__core_plugins__nav__show.map(nav => ({
+  const flattenData = flattenTree<NavItem>(
+    data.admin__core_plugins__nav__show.map(nav => ({
       id: nav.code,
       ...nav,
-      children:
-        nav.children?.map(child => ({
-          id: `${nav.code}_${child.code}`,
-          ...child,
-          children: [],
-        })) ?? [],
+      children: (nav.children?.map(child => ({
+        id: `${nav.code}_${child.code}`,
+        ...child,
+        children: [],
+      })) ?? []) as NavItem[],
     })),
-  });
+  );
 
   const icons: {
     icon: React.ReactNode;

@@ -1,70 +1,56 @@
 'use client';
 
-import { ItemDragAndDrop } from '@/components/drag&drop-item';
+import { DragAndDropSortableList } from '@/components/drag&drop/sortable-list/list';
 import { Admin__Core_Nav__ShowQuery } from '@/graphql/queries/admin/styles/nav/admin__core_nav__show.generated';
-import { ShowCoreNav } from '@/graphql/types';
-import { useDragAndDrop } from '@/hooks/drag&drop/use-functions';
-import { closestCorners, DndContext, DragOverlay } from '@dnd-kit/core';
-import {
-  SortableContext,
-  verticalListSortingStrategy,
-} from '@dnd-kit/sortable';
+import { useTextLang } from '@/hooks/use-text-lang';
+import { ExternalLink } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 import { toast } from 'sonner';
 
+import { ActionsTableNavAdmin } from './actions/actions';
 import { mutationChangePositionApi } from './hooks/mutation-change-position-api';
-import { ItemContentTableContentNavAdmin } from './item';
-
-const indentationWidth = 20;
 
 export const TableNavAdmin = ({
   core_nav__show: { edges },
 }: Admin__Core_Nav__ShowQuery) => {
-  const t = useTranslations('core');
-  const [initData, setData] =
-    React.useState<Omit<ShowCoreNav, '__typename'>[]>(edges);
-  const data = initData.map(item => ({
-    ...item,
-    children: item.children.map(child => ({ ...child, children: [] })),
-  }));
-
-  const {
-    actionsItem,
-    activeItemOverlay,
-    flattenedItems,
-    onDragEnd,
-    onDragMove,
-    onDragOver,
-    onDragStart,
-    resetState,
-    sortedIds,
-  } = useDragAndDrop<Omit<ShowCoreNav, '__typename'>>({
-    data,
-  });
-
-  // Revalidate items when edges change
-  React.useEffect(() => {
-    setData(edges);
-  }, [edges]);
-
-  if (data.length === 0) {
-    return <div className="text-center">{t('no_results')}</div>;
-  }
+  const t = useTranslations('admin.core.styles.nav');
+  const tCore = useTranslations('core.errors');
+  const { convertText } = useTextLang();
 
   return (
-    <DndContext
-      collisionDetection={closestCorners}
-      onDragCancel={resetState}
-      onDragEnd={async event => {
-        const moveTo = onDragEnd<ShowCoreNav>({
-          data,
-          setData,
-          ...event,
-        });
+    <DragAndDropSortableList
+      componentItem={data => {
+        return (
+          <div className="flex flex-1 items-center justify-between gap-2">
+            <div className="flex flex-1 flex-col">
+              <div className="flex items-center gap-2">
+                <span className="flex items-center gap-1 font-semibold">
+                  {convertText(data.name)}
+                </span>
+              </div>
 
-        if (!moveTo) return;
+              <span className="text-muted-foreground line-clamp-2 flex items-center gap-2 text-sm">
+                {t('href', { href: data.href })}{' '}
+                {data.external && <ExternalLink className="size-4" />}
+              </span>
 
+              {data.description.length > 0 && (
+                <span className="text-muted-foreground line-clamp-2 text-sm">
+                  {convertText(data.description)}
+                </span>
+              )}
+            </div>
+            <ActionsTableNavAdmin {...data} />
+          </div>
+        );
+      }}
+      data={edges.map(item => ({
+        ...item,
+        children: item.children.map(child => ({ ...child, children: [] })),
+      }))}
+      maxDepth={1}
+      onDragEnd={async moveTo => {
         try {
           await mutationChangePositionApi({
             id: Number(moveTo.id),
@@ -72,42 +58,11 @@ export const TableNavAdmin = ({
             parentId: Number(moveTo.parentId),
           });
         } catch (_) {
-          toast.error(t('errors.title'), {
-            description: t('errors.internal_server_error'),
+          toast.error(tCore('title'), {
+            description: tCore('internal_server_error'),
           });
         }
       }}
-      onDragMove={e => {
-        onDragMove({ ...e, flattenedItems, indentationWidth, maxDepth: 1 });
-      }}
-      onDragOver={onDragOver}
-      onDragStart={onDragStart}
-    >
-      <SortableContext items={sortedIds} strategy={verticalListSortingStrategy}>
-        {flattenedItems.map(item => (
-          <ItemDragAndDrop
-            key={item.id}
-            {...actionsItem({
-              data: item,
-              indentationWidth,
-            })}
-          >
-            <ItemContentTableContentNavAdmin data={item} />
-          </ItemDragAndDrop>
-        ))}
-
-        <DragOverlay>
-          {activeItemOverlay && (
-            <ItemDragAndDrop
-              {...actionsItem({
-                data: activeItemOverlay,
-              })}
-            >
-              <ItemContentTableContentNavAdmin data={activeItemOverlay} />
-            </ItemDragAndDrop>
-          )}
-        </DragOverlay>
-      </SortableContext>
-    </DndContext>
+    />
   );
 };

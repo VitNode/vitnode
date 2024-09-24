@@ -14,17 +14,12 @@ import { Trash2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
-import { useItemNavDevPluginAdmin } from '../../hooks/use-item-nav-dev-plugin-admin';
-import {
-  ContentDeleteActionTableNavDevPluginAdmin,
-  ContentDeleteActionTableNavDevPluginAdminProps,
-} from './content';
+import { ContentDeleteActionTableNavDevPluginAdmin } from './content';
 
 export const DeleteActionTableNavDevPluginAdmin = (
-  props: ContentDeleteActionTableNavDevPluginAdminProps,
+  props: React.ComponentProps<typeof ContentDeleteActionTableNavDevPluginAdmin>,
 ) => {
   const t = useTranslations('core');
-  const { parentId } = useItemNavDevPluginAdmin();
 
   return (
     <AlertDialog>
@@ -47,10 +42,7 @@ export const DeleteActionTableNavDevPluginAdmin = (
       </TooltipProvider>
 
       <AlertDialogContent>
-        <ContentDeleteActionTableNavDevPluginAdmin
-          {...props}
-          parentCode={parentId}
-        />
+        <ContentDeleteActionTableNavDevPluginAdmin {...props} />
       </AlertDialogContent>
     </AlertDialog>
   );
