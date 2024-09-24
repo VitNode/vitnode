@@ -8,6 +8,7 @@ import React from 'react';
 import { toast } from 'sonner';
 
 import { mutationChangePositionApi } from './item/hooks/mutation-change-position-api';
+import { ItemContentNavDevPluginAdmin } from './item/item';
 
 interface Props extends Admin__Core_Plugins__Nav__ShowQuery {
   icons: { icon: React.ReactNode; id: string }[];
@@ -22,9 +23,15 @@ export const ContentNavDevPluginAdmin = ({
 
   return (
     <DragAndDropSortableList
-      componentItem={data => {
-        // TODO: Implement the componentItem function
-        return <div>test</div>;
+      componentItem={(data, parentId) => {
+        return (
+          <ItemContentNavDevPluginAdmin
+            data={data}
+            dataFromSSR={edges}
+            icons={icons}
+            parentId={parentId?.toString()}
+          />
+        );
       }}
       data={edges.map(item => ({
         ...item,

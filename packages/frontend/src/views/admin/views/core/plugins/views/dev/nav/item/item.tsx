@@ -1,18 +1,27 @@
+import { Admin__Core_Plugins__Nav__ShowQuery } from '@/graphql/queries/admin/plugins/dev/nav/admin__core_plugins__nav__show.generated';
 import { ShowAdminNavPluginsObj } from '@/graphql/types';
 import { useParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 
 import { ActionsTableNavDevPluginAdmin } from './actions/actions';
-import { useItemNavDevPluginAdmin } from './hooks/use-item-nav-dev-plugin-admin';
 
-export const ItemContentNavDevPluginAdmin = (data: ShowAdminNavPluginsObj) => {
+export const ItemContentNavDevPluginAdmin = ({
+  data,
+  parentId,
+  icons,
+  dataFromSSR,
+}: {
+  data: ShowAdminNavPluginsObj;
+  dataFromSSR: Admin__Core_Plugins__Nav__ShowQuery['admin__core_plugins__nav__show'];
+  icons: { icon: React.ReactNode; id: string }[];
+  parentId?: string;
+}) => {
   const { code: pluginCode } = useParams();
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-expect-error
   const t = useTranslations(`admin_${pluginCode}.nav`);
   const tAdmin = useTranslations('admin.core.plugins.dev.nav');
   const tCore = useTranslations('core');
-  const { parentId, icons } = useItemNavDevPluginAdmin();
   const langKey = parentId ? `${parentId}_${data.code}` : data.code;
 
   return (
@@ -49,7 +58,12 @@ export const ItemContentNavDevPluginAdmin = (data: ShowAdminNavPluginsObj) => {
         </p>
       </div>
 
-      <ActionsTableNavDevPluginAdmin {...data} />
+      <ActionsTableNavDevPluginAdmin
+        data={data}
+        dataFromSSR={dataFromSSR}
+        icons={icons}
+        parentId={parentId}
+      />
     </>
   );
 };

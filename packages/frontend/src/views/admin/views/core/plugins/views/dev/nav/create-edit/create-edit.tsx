@@ -14,19 +14,17 @@ import { useTranslations } from 'next-intl';
 
 import { useCreateNavPluginAdmin } from './hooks/use-create-nav-plugin-admin';
 
-export interface CreateEditNavDevPluginAdminProps {
-  data?: ShowAdminNavPluginsObj;
-  dataFromSSR: Admin__Core_Plugins__Nav__ShowQuery['admin__core_plugins__nav__show'];
-  icons: { icon: React.ReactNode; id: string }[];
-  parentId?: string;
-}
-
 export const CreateEditNavDevPluginAdmin = ({
   data,
   dataFromSSR,
   icons,
   parentId,
-}: CreateEditNavDevPluginAdminProps) => {
+}: {
+  data?: ShowAdminNavPluginsObj;
+  dataFromSSR: Admin__Core_Plugins__Nav__ShowQuery['admin__core_plugins__nav__show'];
+  icons: { icon: React.ReactNode; id: string }[];
+  parentId?: string;
+}) => {
   const t = useTranslations('admin.core.plugins.dev.nav');
   const { onSubmit, formSchema } = useCreateNavPluginAdmin({
     data,

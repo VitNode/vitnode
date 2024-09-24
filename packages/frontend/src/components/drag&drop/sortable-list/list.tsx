@@ -43,7 +43,7 @@ export function DragAndDropSortableList<
   maxDepth,
   onDragEnd,
 }: {
-  componentItem: (item: T) => React.ReactNode;
+  componentItem: (item: T, parentId: null | number | string) => React.ReactNode;
   data: T[];
   maxDepth?: number;
   onCollapse?: (props: { id: number | string; isOpen: boolean }) => void;
@@ -218,7 +218,7 @@ export function DragAndDropSortableList<
                 : undefined
             }
           >
-            {componentItem(item as unknown as T)}
+            {componentItem(item as unknown as T, item.parentId)}
           </SortableTreeItem>
         ))}
         {isReadyDocument &&
@@ -258,7 +258,10 @@ export function DragAndDropSortableList<
                   id={activeId}
                   indentationWidth={indentationWidth}
                 >
-                  {componentItem(activeItem as unknown as T)}
+                  {componentItem(
+                    activeItem as unknown as T,
+                    activeItem.parentId,
+                  )}
                 </SortableTreeItem>
               ) : null}
             </DragOverlay>,
