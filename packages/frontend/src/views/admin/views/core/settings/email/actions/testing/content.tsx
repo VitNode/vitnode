@@ -18,14 +18,6 @@ export const ContentTestingActionEmailSettingsAdmin = () => {
     <AutoForm
       fields={[
         {
-          id: 'from',
-          label: t('from'),
-          component: AutoFormInput,
-          componentProps: {
-            type: 'email',
-          } as AutoFormInputProps,
-        },
-        {
           id: 'to',
           label: t('to'),
           component: AutoFormInput,

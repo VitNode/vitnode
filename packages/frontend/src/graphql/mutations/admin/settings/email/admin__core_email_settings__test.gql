@@ -1,13 +1,11 @@
 mutation Admin__core_email_settings__test(
   $to: String!
-  $from: String!
   $message: String!
   $subject: String!
   $previewText: String
 ) {
   admin__core_email_settings__test(
     to: $to
-    from: $from
     message: $message
     subject: $subject
     preview_text: $previewText

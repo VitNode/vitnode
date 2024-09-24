@@ -29,6 +29,7 @@ export class EditAdminEmailSettingsService extends HelpersAdminEmailSettingsServ
     provider,
     resend_key,
     logo,
+    from,
   }: EditAdminEmailSettingsServiceArgs): Promise<ShowAdminEmailSettingsServiceObj> {
     const emailCredentials = this.getEmailCredentials();
     const configSettings = getConfigFile();
@@ -42,6 +43,7 @@ export class EditAdminEmailSettingsService extends HelpersAdminEmailSettingsServ
           provider,
           color_primary,
           color_primary_foreground,
+          from,
         },
       },
     };

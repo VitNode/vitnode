@@ -6,7 +6,6 @@ import React from 'react';
 import { MailService } from '../mail.service';
 
 interface Args extends Pick<EmailTemplateProps, 'preview_text' | 'user'> {
-  from?: string;
   message: React.JSX.Element | string;
   subject: string;
   to: string;
@@ -22,7 +21,6 @@ export class SendAdminEmailService {
 
   async send({
     to,
-    from,
     subject,
     message,
     preview_text,
