@@ -73,6 +73,15 @@
           }
         },
         "email": {
+          "title": "Email",
+          "desc": "Send emails from your website. Unlock more features like password reset, email verification, and more.",
+          "logs": {
+            "title": "Email Error Logs",
+            "from": "From",
+            "subject": "Subject",
+            "created": "Created",
+            "error": "Error"
+          },
           "provider": {
             "title": "Email Provider",
             "none": "None",

@@ -8,6 +8,7 @@ import * as plugins from './schema/plugins';
 import * as sessions from './schema/sessions';
 import * as terms from './schema/terms';
 import * as users from './schema/users';
+import * as logs from './schema/logs';
 
 export default {
   ...groups,
@@ -20,4 +21,5 @@ export default {
   ...moderators,
   ...plugins,
   ...nav,
+  ...logs,
 };
