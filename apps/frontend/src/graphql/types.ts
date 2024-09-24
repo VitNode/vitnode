@@ -240,6 +240,23 @@ export type LogosEditAdminThemeEditor = {
   width: Scalars['Float']['input'];
 };
 
+export type LogsAdminEmail = {
+  __typename?: 'LogsAdminEmail';
+  created: Scalars['DateTime']['output'];
+  error: Scalars['String']['output'];
+  html: Scalars['String']['output'];
+  id: Scalars['Float']['output'];
+  provider: Scalars['String']['output'];
+  subject: Scalars['String']['output'];
+  to: Scalars['String']['output'];
+};
+
+export type LogsAdminEmailObj = {
+  __typename?: 'LogsAdminEmailObj';
+  edges: Array<LogsAdminEmail>;
+  pageInfo: PageInfo;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   admin__core_authorization_settings__edit: ShowAdminAuthorizationSettingsObj;
@@ -641,6 +658,7 @@ export type PageInfo = {
 export type Query = {
   __typename?: 'Query';
   admin__core_authorization_settings__show: ShowAdminAuthorizationSettingsObj;
+  admin__core_email__logs: LogsAdminEmailObj;
   admin__core_email_settings__show: ShowAdminEmailSettingsServiceObj;
   admin__core_files__show: ShowAdminFilesObj;
   admin__core_groups__show: ShowAdminGroupsObj;
@@ -667,6 +685,13 @@ export type Query = {
   core_settings__show: ShowSettingsObj;
   core_terms__show: ShowCoreTermsObj;
   core_theme_editor__show: ShowCoreThemeEditorObj;
+};
+
+
+export type QueryAdmin__Core_Email__LogsArgs = {
+  cursor?: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 

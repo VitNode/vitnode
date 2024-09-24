@@ -2,6 +2,7 @@ import * as admins from './schema/admins';
 import * as files from './schema/files';
 import * as groups from './schema/groups';
 import * as languages from './schema/languages';
+import * as logs from './schema/logs';
 import * as moderators from './schema/moderators';
 import * as nav from './schema/nav';
 import * as plugins from './schema/plugins';
@@ -20,4 +21,5 @@ export default {
   ...moderators,
   ...plugins,
   ...nav,
+  ...logs,
 };
