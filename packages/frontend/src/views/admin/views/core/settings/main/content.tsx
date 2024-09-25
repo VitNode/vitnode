@@ -28,6 +28,12 @@ export const ContentMainSettingsCoreAdmin = (
           label: t('short_name.label'),
         },
         {
+          id: 'contactEmail',
+          component: AutoFormInput,
+          label: t('contact_email.label'),
+          description: t('contact_email.desc'),
+        },
+        {
           id: 'description',
           component: AutoFormStringLanguageInput,
           label: t('description.label'),

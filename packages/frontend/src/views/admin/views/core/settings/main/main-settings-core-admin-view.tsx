@@ -24,22 +24,22 @@ const getData = async () => {
 
 export const generateMetadataMainSettingsCoreAdmin =
   async (): Promise<Metadata> => {
-    const t = await getTranslations('admin_core.nav');
+    const t = await getTranslations('admin.core.settings.main');
 
     return {
-      title: t('settings_general'),
+      title: t('title'),
     };
   };
 
 export const MainSettingsCoreAdminView = async () => {
   const [t, data] = await Promise.all([
-    getTranslations('admin_core.nav'),
+    getTranslations('admin.core.settings.main'),
     getData(),
   ]);
 
   return (
     <>
-      <HeaderContent h1={t('settings_general')} />
+      <HeaderContent desc={t('desc')} h1={t('title')} />
 
       <Card className="p-6">
         <ContentMainSettingsCoreAdmin {...data} />

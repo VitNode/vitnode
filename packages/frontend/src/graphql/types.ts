@@ -389,6 +389,7 @@ export type MutationAdmin__Core_Languages__EditArgs = {
 
 
 export type MutationAdmin__Core_Main_Settings__EditArgs = {
+  contact_email: Scalars['String']['input'];
   site_copyright: Array<StringLanguageInput>;
   site_description: Array<StringLanguageInput>;
   site_name: Scalars['String']['input'];
@@ -1236,6 +1237,7 @@ export type ShowCoreThemeEditorObj = {
 
 export type ShowSettingsObj = {
   __typename?: 'ShowSettingsObj';
+  contact_email: Scalars['String']['output'];
   site_copyright: Array<StringLanguage>;
   site_description: Array<StringLanguage>;
   site_name: Scalars['String']['output'];

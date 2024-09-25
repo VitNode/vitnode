@@ -126,8 +126,8 @@ export const generateManifest = () => {
     const defaultManifest = generateDefaultManifest({
       langCode,
       frontendUrl,
-      siteName: config.settings.general.site_name,
-      siteShortName: config.settings.general.site_short_name,
+      siteName: config.settings.main.site_name,
+      siteShortName: config.settings.main.site_short_name,
     });
 
     const pathToUpload = join(

@@ -47,7 +47,7 @@ export class ShowSettingsService {
     });
 
     return {
-      ...config.settings.general,
+      ...config.settings.main,
       site_description: manifest.map(item => ({
         language_code: item.lang,
         value: item.description,

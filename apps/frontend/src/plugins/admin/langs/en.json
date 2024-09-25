@@ -59,6 +59,7 @@
       "settings": {
         "main": {
           "title": "Main Settings",
+          "desc": "These settings are used to configure the main features of your website.",
           "name": {
             "label": "Name Site"
           },
@@ -70,6 +71,10 @@
           },
           "copyright": {
             "label": "Copyright Site"
+          },
+          "contact_email": {
+            "label": "Contact Email",
+            "desc": "This email address will be applied to the contact form and other contact points on your website."
           }
         },
         "email": {

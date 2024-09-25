@@ -134,16 +134,18 @@ export class EditAdminMainSettingsService {
     site_description,
     site_name,
     site_short_name,
+    contact_email,
   }: EditAdminMainSettingsArgs): Promise<EditAdminSettingsObj> {
     const config = getConfigFile();
     const newData: ConfigType = {
       ...config,
       settings: {
         ...config.settings,
-        general: {
-          ...config.settings.general,
+        main: {
+          ...config.settings.main,
           site_name,
           site_short_name,
+          contact_email,
         },
       },
     };

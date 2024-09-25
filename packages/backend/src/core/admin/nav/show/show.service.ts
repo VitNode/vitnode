@@ -24,7 +24,7 @@ export class ShowAdminNavService {
           keywords: [],
           children: [
             {
-              code: 'general',
+              code: 'main',
               keywords: ['name', 'title', 'description', 'desc', 'copyright'],
             },
             {
