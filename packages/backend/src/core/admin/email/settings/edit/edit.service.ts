@@ -71,7 +71,7 @@ export class EditAdminEmailSettingsService extends HelpersAdminEmailSettingsServ
 
     fs.writeFileSync(configPath, JSON.stringify(newData, null, 2), 'utf8');
 
-    // Remove email.config.json if provider is none
+    // Remove .email.config.json if provider is none
     if (provider === EmailProvider.none && fs.existsSync(this.path)) {
       fs.unlinkSync(this.path);
 
