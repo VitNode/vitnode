@@ -63,7 +63,8 @@ export interface ConfigType {
       logo?: UploadCoreFilesObj;
       provider: EmailProvider;
     };
-    general: {
+    main: {
+      contact_email: string;
       site_name: string;
       site_short_name: string;
     };
@@ -90,9 +91,10 @@ export const DEFAULT_CONFIG_DATA: ConfigType = {
     },
   },
   settings: {
-    general: {
+    main: {
       site_name: 'VitNode',
       site_short_name: 'VitNode',
+      contact_email: 'contact@your-website.com',
     },
     email: {
       provider: EmailProvider.none,

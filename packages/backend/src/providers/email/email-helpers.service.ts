@@ -21,11 +21,12 @@ export class EmailHelpersService {
     );
 
     return {
-      site_name: config.settings.general.site_name,
-      site_short_name: config.settings.general.site_short_name,
+      site_name: config.settings.main.site_name,
+      site_short_name: config.settings.main.site_short_name,
       logo: config.settings.email.logo,
       frontend_url,
       backend_url,
+      contact_email: config.settings.main.contact_email,
       color: {
         primary: {
           DEFAULT: `[${primaryHSL ? convertColor.hslToHex(primaryHSL) : '#215fdc'}]`,

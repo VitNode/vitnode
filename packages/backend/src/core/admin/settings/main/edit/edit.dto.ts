@@ -4,6 +4,9 @@ import { ArgsType, Field, ObjectType, PickType } from '@nestjs/graphql';
 
 @ArgsType()
 export class EditAdminMainSettingsArgs {
+  @Field(() => String)
+  contact_email: string;
+
   @Field(() => [StringLanguageInput])
   site_copyright: StringLanguageInput[];
 

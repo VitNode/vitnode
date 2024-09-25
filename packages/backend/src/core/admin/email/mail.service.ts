@@ -85,7 +85,7 @@ export class MailService extends HelpersAdminEmailSettingsService {
         },
         {
           from: {
-            name: configSettings.settings.general.site_name,
+            name: configSettings.settings.main.site_name,
             address: configSettings.settings.email.from,
           },
         },
@@ -116,7 +116,7 @@ export class MailService extends HelpersAdminEmailSettingsService {
 
       try {
         const provider = await resend.emails.send({
-          from: `${configSettings.settings.general.site_name} <${configSettings.settings.email.from}>`,
+          from: `${configSettings.settings.main.site_name} <${configSettings.settings.email.from}>`,
           to,
           subject,
           html,

@@ -99,8 +99,7 @@ export const generateMetadataSlugAdmin = async ({
       }
 
       if (!slug[3]) {
-        if (slug[2] === 'general')
-          return generateMetadataMainSettingsCoreAdmin();
+        if (slug[2] === 'main') return generateMetadataMainSettingsCoreAdmin();
         if (slug[2] === 'security')
           return generateMetadataCaptchaSecurityAdmin();
         if (slug[2] === 'metadata')
@@ -171,7 +170,7 @@ export const SlugAdminView = (props: SlugViewProps) => {
       }
 
       if (!slug[3]) {
-        if (slug[2] === 'general') return <MainSettingsCoreAdminView />;
+        if (slug[2] === 'main') return <MainSettingsCoreAdminView />;
         if (slug[2] === 'security') return <CaptchaSecurityAdminView />;
         if (slug[2] === 'metadata') return <ManifestMetadataCoreAdminView />;
 
@@ -179,7 +178,7 @@ export const SlugAdminView = (props: SlugViewProps) => {
           return <AuthorizationSettingsCoreAdminView />;
         if (slug[2] === 'legal') return <LegalSettingsAdminView {...props} />;
       }
-      if (!slug[2]) redirect('/admin/core/settings/general');
+      if (!slug[2]) redirect('/admin/core/settings/main');
     }
 
     if (!slug[2]) {
