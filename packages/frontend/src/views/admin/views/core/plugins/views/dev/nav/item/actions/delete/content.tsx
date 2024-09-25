@@ -12,18 +12,17 @@ import { useTranslations } from 'next-intl';
 import { useDeleteNavPluginAdmin } from './hooks/use-delete-nav-plugin-admin';
 import { SubmitDeleteActionTableNavDevPluginAdmin } from './submit';
 
-export interface ContentDeleteActionTableNavDevPluginAdminProps
-  extends Pick<ShowAdminNavPluginsObj, 'code'> {
-  parentCode?: string;
+interface Props extends Pick<ShowAdminNavPluginsObj, 'code'> {
+  parentId: string | undefined;
 }
 
 export const ContentDeleteActionTableNavDevPluginAdmin = ({
   code,
-  parentCode,
-}: ContentDeleteActionTableNavDevPluginAdminProps) => {
+  parentId,
+}: Props) => {
   const t = useTranslations('admin.core.plugins.dev.nav.delete');
   const tCore = useTranslations('core');
-  const { onSubmit } = useDeleteNavPluginAdmin({ code, parentCode });
+  const { onSubmit } = useDeleteNavPluginAdmin({ code, parentId });
 
   return (
     <form action={onSubmit}>

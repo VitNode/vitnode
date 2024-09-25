@@ -35,13 +35,13 @@ export const generateMetadataEmailSettingsAdmin =
 
 export const EmailSettingsAdminView = async () => {
   const [t, data] = await Promise.all([
-    getTranslations('admin_core.nav'),
+    getTranslations('admin.core.settings.email'),
     getData(),
   ]);
 
   return (
     <>
-      <HeaderContent h1={t('settings_email')}>
+      <HeaderContent desc={t('desc')} h1={t('title')}>
         <ActionsEmailSettingsAdmin
           disabled={
             data.admin__core_email_settings__show.provider ===

@@ -11,6 +11,9 @@ export class ShowAdminEmailSettingsServiceObj {
   @Field(() => String)
   color_primary: string;
 
+  @Field(() => String)
+  from: string;
+
   @Field(() => UploadCoreFilesObj, { nullable: true })
   logo?: UploadCoreFilesObj;
 

@@ -8,6 +8,7 @@ export type Admin__Core_Email_Settings__EditMutationVariables = Types.Exact<{
   resendKey?: Types.InputMaybe<Types.Scalars['String']['input']>;
   smtp?: Types.InputMaybe<Types.SmtpEditAdminEmailSettingsService>;
   logo?: Types.InputMaybe<Types.UploadWithKeepCoreFilesArgs>;
+  from: Types.Scalars['String']['input'];
 }>;
 
 
@@ -15,7 +16,7 @@ export type Admin__Core_Email_Settings__EditMutation = { __typename?: 'Mutation'
 
 
 export const Admin__Core_Email_Settings__Edit = gql`
-    mutation Admin__core_email_settings__edit($colorPrimary: String!, $colorPrimaryForeground: String!, $provider: EmailProvider!, $resendKey: String, $smtp: SMTPEditAdminEmailSettingsService, $logo: UploadWithKeepCoreFilesArgs) {
+    mutation Admin__core_email_settings__edit($colorPrimary: String!, $colorPrimaryForeground: String!, $provider: EmailProvider!, $resendKey: String, $smtp: SMTPEditAdminEmailSettingsService, $logo: UploadWithKeepCoreFilesArgs, $from: String!) {
   admin__core_email_settings__edit(
     color_primary: $colorPrimary
     color_primary_foreground: $colorPrimaryForeground
@@ -23,6 +24,7 @@ export const Admin__Core_Email_Settings__Edit = gql`
     resend_key: $resendKey
     smtp: $smtp
     logo: $logo
+    from: $from
   ) {
     provider
   }

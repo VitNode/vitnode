@@ -209,10 +209,25 @@ input LogosEditAdminThemeEditor {
   width: Float!
 }
 
+type LogsAdminEmail {
+  created: DateTime!
+  error: String!
+  html: String!
+  id: Float!
+  provider: String!
+  subject: String!
+  to: String!
+}
+
+type LogsAdminEmailObj {
+  edges: [LogsAdminEmail!]!
+  pageInfo: PageInfo!
+}
+
 type Mutation {
   admin__core_authorization_settings__edit(force_login: Boolean!, lock_register: Boolean!): ShowAdminAuthorizationSettingsObj!
-  admin__core_email_settings__edit(color_primary: String!, color_primary_foreground: String!, logo: UploadWithKeepCoreFilesArgs, provider: EmailProvider!, resend_key: String, smtp: SMTPEditAdminEmailSettingsService): ShowAdminEmailSettingsServiceObj!
-  admin__core_email_settings__test(from: String!, message: String!, preview_text: String, subject: String!, to: String!): String!
+  admin__core_email_settings__edit(color_primary: String!, color_primary_foreground: String!, from: String!, logo: UploadWithKeepCoreFilesArgs, provider: EmailProvider!, resend_key: String, smtp: SMTPEditAdminEmailSettingsService): ShowAdminEmailSettingsServiceObj!
+  admin__core_email_settings__test(message: String!, preview_text: String, subject: String!, to: String!): String!
   admin__core_files__delete(id: Int!): String!
   admin__core_groups__create(color: String, content: ContentCreateAdminGroups!, name: [StringLanguageInput!]!): ShowAdminGroups!
   admin__core_groups__delete(id: Int!): String!
@@ -220,7 +235,7 @@ type Mutation {
   admin__core_languages__create(allow_in_input: Boolean!, code: String!, locale: String!, name: String!, time_24: Boolean!, timezone: String!): ShowCoreLanguages!
   admin__core_languages__delete(code: String!): String!
   admin__core_languages__edit(allow_in_input: Boolean!, default: Boolean!, enabled: Boolean!, id: Int!, locale: String!, name: String!, time_24: Boolean!, timezone: String!): ShowCoreLanguages!
-  admin__core_main_settings__edit(site_copyright: [StringLanguageInput!]!, site_description: [StringLanguageInput!]!, site_name: String!, site_short_name: String!): EditAdminSettingsObj!
+  admin__core_main_settings__edit(contact_email: String!, site_copyright: [StringLanguageInput!]!, site_description: [StringLanguageInput!]!, site_name: String!, site_short_name: String!): EditAdminSettingsObj!
   admin__core_manifest_metadata__edit(background_color: String!, display: String!, start_url: String!, theme_color: String!): ShowAdminManifestMetadataObj!
   admin__core_members__create(email: String!, name: String!, password: String!): SignUpCoreSessionsObj!
   admin__core_members__delete(id: Float!): String!
@@ -281,6 +296,7 @@ type PageInfo {
 
 type Query {
   admin__core_authorization_settings__show: ShowAdminAuthorizationSettingsObj!
+  admin__core_email__logs(cursor: Int, first: Int, last: Int): LogsAdminEmailObj!
   admin__core_email_settings__show: ShowAdminEmailSettingsServiceObj!
   admin__core_files__show(cursor: Int, first: Int, last: Int, search: String, sortBy: ShowCoreFilesSortByArgs): ShowAdminFilesObj!
   admin__core_groups__show(cursor: Int, first: Int, last: Int, search: String, sortBy: ShowAdminGroupsSortByArgs): ShowAdminGroupsObj!
@@ -338,6 +354,7 @@ type ShowAdminCaptchaSecurityObj {
 
 type ShowAdminEmailSettingsServiceObj {
   color_primary: String!
+  from: String!
   logo: UploadCoreFilesObj
   provider: EmailProvider!
   smtp_host: String
@@ -697,6 +714,7 @@ type ShowCoreThemeEditorObj {
 }
 
 type ShowSettingsObj {
+  contact_email: String!
   site_copyright: [StringLanguage!]!
   site_description: [StringLanguage!]!
   site_name: String!

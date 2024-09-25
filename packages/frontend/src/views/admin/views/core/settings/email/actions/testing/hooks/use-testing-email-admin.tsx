@@ -12,7 +12,6 @@ export const useTestingEmailAdmin = () => {
   const { setOpen } = useDialog();
   const { session } = useSessionAdmin();
   const formSchema = z.object({
-    from: z.string().min(1).email().default(''),
     to: z
       .string()
       .min(1)

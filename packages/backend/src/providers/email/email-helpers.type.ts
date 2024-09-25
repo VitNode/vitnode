@@ -19,6 +19,7 @@ export interface GetHelpersForEmailType {
       foreground: string;
     };
   };
+  contact_email: string;
   frontend_url: string;
   logo?: UploadCoreFilesObj;
   site_name: string;

@@ -240,6 +240,23 @@ export type LogosEditAdminThemeEditor = {
   width: Scalars['Float']['input'];
 };
 
+export type LogsAdminEmail = {
+  __typename?: 'LogsAdminEmail';
+  created: Scalars['DateTime']['output'];
+  error: Scalars['String']['output'];
+  html: Scalars['String']['output'];
+  id: Scalars['Float']['output'];
+  provider: Scalars['String']['output'];
+  subject: Scalars['String']['output'];
+  to: Scalars['String']['output'];
+};
+
+export type LogsAdminEmailObj = {
+  __typename?: 'LogsAdminEmailObj';
+  edges: Array<LogsAdminEmail>;
+  pageInfo: PageInfo;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   admin__core_authorization_settings__edit: ShowAdminAuthorizationSettingsObj;
@@ -304,6 +321,7 @@ export type MutationAdmin__Core_Authorization_Settings__EditArgs = {
 export type MutationAdmin__Core_Email_Settings__EditArgs = {
   color_primary: Scalars['String']['input'];
   color_primary_foreground: Scalars['String']['input'];
+  from: Scalars['String']['input'];
   logo?: InputMaybe<UploadWithKeepCoreFilesArgs>;
   provider: EmailProvider;
   resend_key?: InputMaybe<Scalars['String']['input']>;
@@ -312,7 +330,6 @@ export type MutationAdmin__Core_Email_Settings__EditArgs = {
 
 
 export type MutationAdmin__Core_Email_Settings__TestArgs = {
-  from: Scalars['String']['input'];
   message: Scalars['String']['input'];
   preview_text?: InputMaybe<Scalars['String']['input']>;
   subject: Scalars['String']['input'];
@@ -373,6 +390,7 @@ export type MutationAdmin__Core_Languages__EditArgs = {
 
 
 export type MutationAdmin__Core_Main_Settings__EditArgs = {
+  contact_email: Scalars['String']['input'];
   site_copyright: Array<StringLanguageInput>;
   site_description: Array<StringLanguageInput>;
   site_name: Scalars['String']['input'];
@@ -642,6 +660,7 @@ export type PageInfo = {
 export type Query = {
   __typename?: 'Query';
   admin__core_authorization_settings__show: ShowAdminAuthorizationSettingsObj;
+  admin__core_email__logs: LogsAdminEmailObj;
   admin__core_email_settings__show: ShowAdminEmailSettingsServiceObj;
   admin__core_files__show: ShowAdminFilesObj;
   admin__core_groups__show: ShowAdminGroupsObj;
@@ -668,6 +687,13 @@ export type Query = {
   core_settings__show: ShowSettingsObj;
   core_terms__show: ShowCoreTermsObj;
   core_theme_editor__show: ShowCoreThemeEditorObj;
+};
+
+
+export type QueryAdmin__Core_Email__LogsArgs = {
+  cursor?: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
@@ -812,6 +838,7 @@ export type ShowAdminCaptchaSecurityObj = {
 export type ShowAdminEmailSettingsServiceObj = {
   __typename?: 'ShowAdminEmailSettingsServiceObj';
   color_primary: Scalars['String']['output'];
+  from: Scalars['String']['output'];
   logo?: Maybe<UploadCoreFilesObj>;
   provider: EmailProvider | `${EmailProvider}`;
   smtp_host?: Maybe<Scalars['String']['output']>;
@@ -1211,6 +1238,7 @@ export type ShowCoreThemeEditorObj = {
 
 export type ShowSettingsObj = {
   __typename?: 'ShowSettingsObj';
+  contact_email: Scalars['String']['output'];
   site_copyright: Array<StringLanguage>;
   site_description: Array<StringLanguage>;
   site_name: Scalars['String']['output'];

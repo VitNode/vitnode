@@ -1,3 +1,5 @@
+import { core_logs_email } from '@/database/schema/logs';
+import { InternalDatabaseService } from '@/utils';
 import { Injectable } from '@nestjs/common';
 import { render } from '@react-email/render';
 import * as fs from 'fs';
@@ -21,6 +23,32 @@ export interface SendMailServiceArgs {
 
 @Injectable()
 export class MailService extends HelpersAdminEmailSettingsService {
+  constructor(private readonly databaseService: InternalDatabaseService) {
+    super();
+  }
+
+  private async handleErrors({
+    to,
+    html,
+    error,
+    subject,
+    provider,
+  }: {
+    error: string;
+    html: string;
+    provider?: string;
+    subject: string;
+    to: string;
+  }) {
+    await this.databaseService.db.insert(core_logs_email).values({
+      to,
+      subject,
+      error,
+      html,
+      provider,
+    });
+  }
+
   async sendMail({
     to,
     subject,
@@ -57,18 +85,27 @@ export class MailService extends HelpersAdminEmailSettingsService {
         },
         {
           from: {
-            name: configSettings.settings.general.site_name,
-            address: 'aXenDeveloper@gmail.com',
+            name: configSettings.settings.main.site_name,
+            address: configSettings.settings.email.from,
           },
         },
       );
 
-      // TODO: Handle errors
-      void transporter.sendMail({
-        to,
-        subject,
-        html,
-      });
+      try {
+        await transporter.sendMail({
+          to,
+          subject,
+          html,
+        });
+      } catch (e) {
+        const error = e as Error;
+        await this.handleErrors({
+          error: error.message,
+          html,
+          subject,
+          to,
+        });
+      }
     }
 
     if (
@@ -77,13 +114,33 @@ export class MailService extends HelpersAdminEmailSettingsService {
     ) {
       const resend = new Resend(config.resend_key);
 
-      // TODO: Handle errors
-      await resend.emails.send({
-        from: `${configSettings.settings.general.site_name} <delivered@resend.dev>`,
-        to,
-        subject,
-        html,
-      });
+      try {
+        const provider = await resend.emails.send({
+          from: `${configSettings.settings.main.site_name} <${configSettings.settings.email.from}>`,
+          to,
+          subject,
+          html,
+        });
+
+        if (provider.error) {
+          await this.handleErrors({
+            error: `[${provider.error.name}]: ${provider.error.message}`,
+            html,
+            subject,
+            to,
+            provider: 'Resend',
+          });
+        }
+      } catch (e) {
+        const error = e as Error;
+        await this.handleErrors({
+          error: error.message,
+          html,
+          subject,
+          to,
+          provider: 'Resend',
+        });
+      }
     }
   }
 }

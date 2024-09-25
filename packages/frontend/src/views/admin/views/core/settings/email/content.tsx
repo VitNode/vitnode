@@ -63,6 +63,16 @@ export const ContentEmailSettingsAdmin = (
             } as AutoFormFileInputProps,
           },
           {
+            id: 'from',
+            label: t('from.title'),
+            description: t('from.desc'),
+            component: AutoFormInput,
+            componentProps: {
+              type: 'email',
+              placeholder: 'no-replay@vitnode.com',
+            } as AutoFormInputProps,
+          },
+          {
             id: 'provider',
             label: t('provider.title'),
             component: AutoFormRadioGroup,

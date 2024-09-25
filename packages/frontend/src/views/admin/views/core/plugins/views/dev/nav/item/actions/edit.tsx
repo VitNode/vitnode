@@ -13,13 +13,9 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-import { ShowAdminNavPluginsObj } from '@/graphql/types';
-import { FlatTree } from '@/helpers/flatten-tree';
 import { Pencil } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import React from 'react';
-
-import { useItemNavDevPluginAdmin } from '../hooks/use-item-nav-dev-plugin-admin';
 
 const Content = React.lazy(async () =>
   import('../../create-edit/create-edit').then(module => ({
@@ -28,10 +24,9 @@ const Content = React.lazy(async () =>
 );
 
 export const EditActionTableNavDevPluginAdmin = (
-  data: FlatTree<ShowAdminNavPluginsObj>,
+  props: React.ComponentProps<typeof Content>,
 ) => {
   const t = useTranslations('admin.core.plugins.dev.nav');
-  const rest = useItemNavDevPluginAdmin();
 
   return (
     <Dialog>
@@ -55,7 +50,7 @@ export const EditActionTableNavDevPluginAdmin = (
         </DialogHeader>
 
         <React.Suspense fallback={<Loader />}>
-          <Content data={data} {...rest} />
+          <Content {...props} />
         </React.Suspense>
       </DialogContent>
     </Dialog>

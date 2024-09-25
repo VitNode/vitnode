@@ -6,6 +6,7 @@ query Admin__core_email_settings__show {
     smtp_user
     color_primary
     provider
+    from
     logo {
       dir_folder
       extension

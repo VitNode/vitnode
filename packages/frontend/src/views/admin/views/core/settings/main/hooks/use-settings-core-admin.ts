@@ -16,6 +16,7 @@ export const useSettingsCoreAdmin = ({
     short_name: z.string().min(1).default(data.site_short_name),
     description: zodLanguageInput.default(data.site_description).optional(),
     copyright: zodLanguageInput.default(data.site_copyright).optional(),
+    contactEmail: z.string().email().default(data.contact_email),
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -24,6 +25,7 @@ export const useSettingsCoreAdmin = ({
       siteShortName: values.short_name,
       siteDescription: values.description ?? [],
       siteCopyright: values.copyright ?? [],
+      contactEmail: values.contactEmail,
     });
 
     if (mutation?.error) {

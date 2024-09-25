@@ -5,6 +5,7 @@ mutation Admin__core_email_settings__edit(
   $resendKey: String
   $smtp: SMTPEditAdminEmailSettingsService
   $logo: UploadWithKeepCoreFilesArgs
+  $from: String!
 ) {
   admin__core_email_settings__edit(
     color_primary: $colorPrimary
@@ -13,6 +14,7 @@ mutation Admin__core_email_settings__edit(
     resend_key: $resendKey
     smtp: $smtp
     logo: $logo
+    from: $from
   ) {
     provider
   }

@@ -7,7 +7,12 @@ import { ShowAdminEmailSettingsServiceObj } from './settings/show/show.dto';
 export interface EmailCredentialsFile
   extends Pick<
     ShowAdminEmailSettingsServiceObj,
-    'provider' | 'smtp_host' | 'smtp_port' | 'smtp_secure' | 'smtp_user'
+    | 'from'
+    | 'provider'
+    | 'smtp_host'
+    | 'smtp_port'
+    | 'smtp_secure'
+    | 'smtp_user'
   > {
   resend_key: string;
   smtp_password: string;
@@ -30,6 +35,7 @@ export class HelpersAdminEmailSettingsService {
       smtp_password: '',
       resend_key: '',
       provider: config.settings.email.provider,
+      from: config.settings.email.from,
     };
 
     const emailCredentials: EmailCredentialsFile = fs.existsSync(this.path)
@@ -37,6 +43,7 @@ export class HelpersAdminEmailSettingsService {
       : defaultEmailCredentials;
 
     return {
+      ...defaultEmailCredentials,
       smtp_host:
         emailCredentials.smtp_host ?? defaultEmailCredentials.smtp_host,
       smtp_port:
@@ -49,7 +56,6 @@ export class HelpersAdminEmailSettingsService {
         emailCredentials.smtp_password || defaultEmailCredentials.smtp_password,
       resend_key:
         emailCredentials.resend_key || defaultEmailCredentials.resend_key,
-      provider: defaultEmailCredentials.provider,
     };
   }
 }

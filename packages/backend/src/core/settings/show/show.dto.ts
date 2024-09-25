@@ -3,6 +3,9 @@ import { Field, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
 export class ShowSettingsObj {
+  @Field(() => String)
+  contact_email: string;
+
   @Field(() => [StringLanguage])
   site_copyright: StringLanguage[];
 

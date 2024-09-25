@@ -37,6 +37,7 @@ export const EmailTemplate = ({
     site_short_name,
     backend_url,
     logo,
+    contact_email,
   },
   user,
 }: EmailTemplateProps) => {
@@ -145,9 +146,9 @@ export const EmailTemplate = ({
                 {t('footer')}{' '}
                 <Link
                   className={`text-${color.primary.DEFAULT}`}
-                  href="mailto:aXenDeveloper@gmail.com"
+                  href={`mailto:${contact_email}`}
                 >
-                  aXenDeveloper@gmail.com
+                  {contact_email}
                 </Link>
               </Text>
             </Section>

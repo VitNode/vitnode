@@ -13,8 +13,6 @@ import { Plus } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
-import { CreateEditNavDevPluginAdminProps } from '../../create-edit/create-edit';
-
 const Content = React.lazy(async () =>
   import('../../create-edit/create-edit').then(module => ({
     default: module.CreateEditNavDevPluginAdmin,
@@ -22,7 +20,7 @@ const Content = React.lazy(async () =>
 );
 
 export const CreateNavDevPluginAdmin = (
-  props: CreateEditNavDevPluginAdminProps,
+  props: React.ComponentProps<typeof Content>,
 ) => {
   const t = useTranslations('core');
 
