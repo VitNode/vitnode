@@ -482,6 +482,7 @@
     "members": {
       "users": {
         "title": "Users List",
+        "desc": "Manage users on your website.",
         "search_placeholder": "Search by name or email...",
         "filters": {
           "groups": "Groups"
@@ -501,7 +502,8 @@
           "info": {
             "title": "Info User",
             "joined": "Joined",
-            "email": "Email"
+            "email": "Email",
+            "not_email_verified": "This user has not verified their email address."
           },
           "edit": {
             "title": "Edit User",

@@ -70,7 +70,7 @@ export const UsersMembersAdminView = async ({
 
   return (
     <>
-      <HeaderContent h1={t('title')}>
+      <HeaderContent desc={t('desc')} h1={t('title')}>
         <CreateUserUsersMembersAdmin />
       </HeaderContent>
 

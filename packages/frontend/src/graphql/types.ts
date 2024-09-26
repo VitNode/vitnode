@@ -917,6 +917,7 @@ export type ShowAdminMembers = {
   avatar?: Maybe<AvatarUser>;
   avatar_color: Scalars['String']['output'];
   email: Scalars['String']['output'];
+  email_verified: Scalars['Boolean']['output'];
   group: GroupUser;
   id: Scalars['Int']['output'];
   joined: Scalars['DateTime']['output'];

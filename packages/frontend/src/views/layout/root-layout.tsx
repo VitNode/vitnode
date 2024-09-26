@@ -39,6 +39,9 @@ export const generateMetadataRootLayout = async ({
         default: site_name,
         template: `%s - ${site_short_name}`,
       },
+      openGraph: {
+        title: site_name,
+      },
     };
   } catch (_) {
     return {

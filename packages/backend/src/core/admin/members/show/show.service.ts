@@ -60,6 +60,7 @@ export class ShowAdminMembersService {
           id: true,
           newsletter: true,
           joined: true,
+          email_verified: true,
         },
       },
     );

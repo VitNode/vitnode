@@ -426,6 +426,7 @@ type ShowAdminMembers {
   avatar: AvatarUser
   avatar_color: String!
   email: String!
+  email_verified: Boolean!
   group: GroupUser!
   id: Int!
   joined: DateTime!

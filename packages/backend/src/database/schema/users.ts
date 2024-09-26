@@ -24,6 +24,7 @@ export const core_users = pgTable(
     joined: timestamp('joined').notNull().defaultNow(),
     newsletter: boolean('newsletter').notNull().default(false),
     avatar_color: varchar('avatar_color', { length: 6 }).notNull(),
+    email_verified: boolean('email_verified').notNull().default(false),
     group_id: integer('group_id')
       .references(() => core_groups.id)
       .notNull(),

@@ -15,7 +15,10 @@ export class SignUpHelperService extends AvatarColorService {
     super();
   }
 
-  private readonly getGroupId = async (): Promise<number> => {
+  private readonly getDefaultData = async (): Promise<{
+    email_verified: boolean;
+    group_id: number;
+  }> => {
     const countUsers = await this.databaseService.db
       .select({ count: count() })
       .from(core_users);
@@ -32,7 +35,10 @@ export class SignUpHelperService extends AvatarColorService {
         throw new NotFoundError('Root Group');
       }
 
-      return rootGroup.id;
+      return {
+        group_id: rootGroup.id,
+        email_verified: true,
+      };
     }
 
     const defaultGroup =
@@ -45,7 +51,10 @@ export class SignUpHelperService extends AvatarColorService {
       throw new NotFoundError('Default Group');
     }
 
-    return defaultGroup.id;
+    return {
+      group_id: defaultGroup.id,
+      email_verified: false,
+    };
   };
 
   async signUp(
@@ -80,6 +89,7 @@ export class SignUpHelperService extends AvatarColorService {
     }
 
     const hashPassword = await encryptPassword(password);
+    const { group_id, email_verified } = await this.getDefaultData();
 
     const user = await this.databaseService.db
       .insert(core_users)
@@ -90,7 +100,8 @@ export class SignUpHelperService extends AvatarColorService {
         newsletter,
         password: hashPassword,
         avatar_color: this.generateAvatarColor(name),
-        group_id: await this.getGroupId(),
+        group_id,
+        email_verified,
         ip_address: getUserIp(req),
       })
       .returning();

@@ -22,6 +22,7 @@ query Admin__core_members__show__item($id: Float) {
       name
       name_seo
       newsletter
+      email_verified
     }
   }
 }
