@@ -1,0 +1,6 @@
+query Admin__core_ai__show {
+  admin__core_ai__show {
+    key
+    provider
+  }
+}

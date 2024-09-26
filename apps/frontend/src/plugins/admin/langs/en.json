@@ -480,9 +480,19 @@
       },
       "ai": {
         "title": "Artificial Intelligence (AI)",
-        "desc": "Integrate AI to boost user experience with personalized content, smarter search, and SEO optimization. Gain insights and enhance engagement with powerful AI tools.",
+        "desc": "Integrate powerful AI to boost user experience with personalized content, smarter search, SEO optimization and more.",
         "tabs": {
           "provider": "Provider"
+        },
+        "testing": {
+          "title": "Test Your AI"
+        },
+        "provider": {
+          "title": "Provider",
+          "desc": "Choose the AI provider to use in your website.",
+          "none": "None",
+          "google": "Google AI",
+          "openai": "OpenAI"
         }
       }
     },

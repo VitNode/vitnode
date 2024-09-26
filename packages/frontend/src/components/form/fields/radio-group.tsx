@@ -53,6 +53,13 @@ export function AutoFormRadioGroup<T extends FieldValues>({
     values = baseValues.map(value => [value, value]);
   }
 
+  // Move 'none' to the top
+  const noneValue = values.find(value => value[0] === 'none');
+  if (noneValue) {
+    values = values.filter(value => value[0] !== 'none');
+    values.unshift(noneValue);
+  }
+
   return (
     <AutoFormWrapper theme={theme}>
       {label && (

@@ -16,6 +16,13 @@ export type Scalars = {
   Upload: { input: File; output: File; }
 };
 
+export const AiProvider = {
+  google: 'google',
+  none: 'none',
+  openai: 'openai'
+} as const;
+
+export type AiProvider = typeof AiProvider[keyof typeof AiProvider];
 export const AllowTypeFilesEnum = {
   all: 'all',
   images: 'images',
@@ -659,6 +666,7 @@ export type PageInfo = {
 
 export type Query = {
   __typename?: 'Query';
+  admin__core_ai__show: ShowAdminCoreAiObj;
   admin__core_authorization_settings__show: ShowAdminAuthorizationSettingsObj;
   admin__core_email__logs: LogsAdminEmailObj;
   admin__core_email_settings__show: ShowAdminEmailSettingsServiceObj;
@@ -833,6 +841,12 @@ export type ShowAdminCaptchaSecurityObj = {
   secret_key: Scalars['String']['output'];
   site_key: Scalars['String']['output'];
   type: CaptchaTypeEnum | `${CaptchaTypeEnum}`;
+};
+
+export type ShowAdminCoreAiObj = {
+  __typename?: 'ShowAdminCoreAiObj';
+  key: Scalars['String']['output'];
+  provider: AiProvider | `${AiProvider}`;
 };
 
 export type ShowAdminEmailSettingsServiceObj = {

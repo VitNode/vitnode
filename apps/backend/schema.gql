@@ -2,6 +2,12 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+enum AiProvider {
+  google
+  none
+  openai
+}
+
 enum AllowTypeFilesEnum {
   all
   images
@@ -295,6 +301,7 @@ type PageInfo {
 }
 
 type Query {
+  admin__core_ai__show: ShowAdminCoreAiObj!
   admin__core_authorization_settings__show: ShowAdminAuthorizationSettingsObj!
   admin__core_email__logs(cursor: Int, first: Int, last: Int): LogsAdminEmailObj!
   admin__core_email_settings__show: ShowAdminEmailSettingsServiceObj!
@@ -350,6 +357,11 @@ type ShowAdminCaptchaSecurityObj {
   secret_key: String!
   site_key: String!
   type: CaptchaTypeEnum!
+}
+
+type ShowAdminCoreAiObj {
+  key: String!
+  provider: AiProvider!
 }
 
 type ShowAdminEmailSettingsServiceObj {
