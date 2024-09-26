@@ -231,6 +231,7 @@ type LogsAdminEmailObj {
 }
 
 type Mutation {
+  admin__core_ai__edit(key: String, provider: AiProvider!): ShowAdminCoreAiObj!
   admin__core_authorization_settings__edit(force_login: Boolean!, lock_register: Boolean!): ShowAdminAuthorizationSettingsObj!
   admin__core_email_settings__edit(color_primary: String!, color_primary_foreground: String!, from: String!, logo: UploadWithKeepCoreFilesArgs, provider: EmailProvider!, resend_key: String, smtp: SMTPEditAdminEmailSettingsService): ShowAdminEmailSettingsServiceObj!
   admin__core_email_settings__test(message: String!, preview_text: String, subject: String!, to: String!): String!
@@ -360,7 +361,6 @@ type ShowAdminCaptchaSecurityObj {
 }
 
 type ShowAdminCoreAiObj {
-  key: String!
   provider: AiProvider!
 }
 

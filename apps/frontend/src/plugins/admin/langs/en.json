@@ -487,6 +487,7 @@
         "testing": {
           "title": "Test Your AI"
         },
+        "key": "API Key",
         "provider": {
           "title": "Provider",
           "desc": "Choose the AI provider to use in your website.",

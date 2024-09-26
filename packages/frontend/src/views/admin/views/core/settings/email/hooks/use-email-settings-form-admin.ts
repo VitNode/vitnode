@@ -42,6 +42,7 @@ export const useEmailSettingsFormAdmin = ({
     resend_key: z.string().default('').optional(),
     from: z.string().default(data.from),
   });
+
   const onSubmit = async (
     values: z.infer<typeof formSchema>,
     form: UseFormReturn<z.infer<typeof formSchema>>,

@@ -7,9 +7,6 @@ registerEnumType(AiProvider, {
 
 @ObjectType()
 export class ShowAdminCoreAiObj {
-  @Field(() => String)
-  key: string;
-
   @Field(() => AiProvider)
   provider: AiProvider;
 }

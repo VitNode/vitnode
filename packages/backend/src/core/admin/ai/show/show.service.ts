@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 
-import { HelpersCoreAi } from '../ai.helpers';
+import { HelpersCoreAi } from '../../../ai/ai.helpers';
 import { ShowAdminCoreAiObj } from './show.dto';
 
 @Injectable()

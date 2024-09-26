@@ -4,13 +4,12 @@ import gql from 'graphql-tag';
 export type Admin__Core_Ai__ShowQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
 
-export type Admin__Core_Ai__ShowQuery = { __typename?: 'Query', admin__core_ai__show: { __typename?: 'ShowAdminCoreAiObj', key: string, provider: Types.AiProvider } };
+export type Admin__Core_Ai__ShowQuery = { __typename?: 'Query', admin__core_ai__show: { __typename?: 'ShowAdminCoreAiObj', provider: Types.AiProvider } };
 
 
 export const Admin__Core_Ai__Show = gql`
     query Admin__core_ai__show {
   admin__core_ai__show {
-    key
     provider
   }
 }

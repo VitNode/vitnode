@@ -266,6 +266,7 @@ export type LogsAdminEmailObj = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  admin__core_ai__edit: ShowAdminCoreAiObj;
   admin__core_authorization_settings__edit: ShowAdminAuthorizationSettingsObj;
   admin__core_email_settings__edit: ShowAdminEmailSettingsServiceObj;
   admin__core_email_settings__test: Scalars['String']['output'];
@@ -316,6 +317,12 @@ export type Mutation = {
   core_sessions__sign_in: Scalars['String']['output'];
   core_sessions__sign_out: Scalars['String']['output'];
   core_sessions__sign_up: SignUpCoreSessionsObj;
+};
+
+
+export type MutationAdmin__Core_Ai__EditArgs = {
+  key?: InputMaybe<Scalars['String']['input']>;
+  provider: AiProvider;
 };
 
 
@@ -845,7 +852,6 @@ export type ShowAdminCaptchaSecurityObj = {
 
 export type ShowAdminCoreAiObj = {
   __typename?: 'ShowAdminCoreAiObj';
-  key: Scalars['String']['output'];
   provider: AiProvider | `${AiProvider}`;
 };
 
