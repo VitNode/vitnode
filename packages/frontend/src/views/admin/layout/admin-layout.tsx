@@ -1,4 +1,4 @@
-import { getSessionAdminData } from '@/graphql/get-session-admin';
+import { getSessionAdminData } from '@/graphql/get-session-admin-data';
 import { redirect } from '@/navigation';
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';

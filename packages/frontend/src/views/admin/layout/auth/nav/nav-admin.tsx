@@ -1,5 +1,5 @@
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { getSessionAdminData } from '@/graphql/get-session-admin';
+import { getSessionAdminData } from '@/graphql/get-session-admin-data';
 
 import { ItemNavAdmin } from './item/item';
 import { NavAdminWrapper } from './wrapper';

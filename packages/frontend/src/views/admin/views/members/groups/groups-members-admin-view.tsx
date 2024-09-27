@@ -23,6 +23,7 @@ const getData = async (variables: Admin__Core_Groups__ShowQueryVariables) => {
   >({
     query: Admin__Core_Groups__Show,
     variables,
+    cache: 'force-cache',
   });
 
   return data;

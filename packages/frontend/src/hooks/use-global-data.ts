@@ -15,4 +15,4 @@ export const GlobalsContext = React.createContext<Args>({
   config: {} as Core_GlobalQuery['core_middleware__show'],
 });
 
-export const useGlobals = () => React.useContext(GlobalsContext);
+export const useGlobalData = () => React.useContext(GlobalsContext);

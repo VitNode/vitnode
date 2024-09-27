@@ -1,5 +1,5 @@
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { getSessionAdminData } from '@/graphql/get-session-admin';
+import { getSessionAdminData } from '@/graphql/get-session-admin-data';
 import { TriangleAlertIcon } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 

@@ -6,6 +6,8 @@ import {
 
 export const generateMetadata = generateMetadataLayoutSettings;
 
-export default function Layout({ children }: { children: React.ReactNode }) {
-  return <LayoutSettingsView>{children}</LayoutSettingsView>;
+export default function Layout(
+  props: React.ComponentProps<typeof LayoutSettingsView>,
+) {
+  return <LayoutSettingsView {...props} />;
 }

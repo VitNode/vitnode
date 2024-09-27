@@ -156,8 +156,10 @@ const config = () => {
         expiresIn: 3, // 3 days
         expiresInRemember: 90, // 90 days
         name: 'vitnode-login-token',
+        user_id: 'vitnode-user-id',
         admin: {
           name: 'vitnode-login-token-admin',
+          admin_id: 'vitnode-admin-id',
           expiresIn: 1, // 1 day
         },
       },

@@ -13,6 +13,7 @@ import { ContentAuthorizationSettingsCoreAdmin } from './content';
 const getData = async () => {
   const data = await fetcher<Admin__Core_Authorization_Settings__ShowQuery>({
     query: Admin__Core_Authorization_Settings__Show,
+    cache: 'force-cache',
   });
 
   return data;

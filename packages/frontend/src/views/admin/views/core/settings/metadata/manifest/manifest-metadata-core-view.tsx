@@ -17,6 +17,7 @@ const getData = async () => {
     Admin__Core_Manifest_Metadata__ShowQueryVariables
   >({
     query: Admin__Core_Manifest_Metadata__Show,
+    cache: 'force-cache',
   });
 
   return data;

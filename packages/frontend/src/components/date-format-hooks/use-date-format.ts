@@ -1,6 +1,6 @@
 import { useFormatter, useLocale, useNow } from 'next-intl';
 
-import { useGlobals } from '../../hooks/use-globals';
+import { useGlobalData } from '../../hooks/use-global-data';
 
 interface Args {
   date: Date;
@@ -8,7 +8,7 @@ interface Args {
 
 export const useDateFormat = ({ date }: Args) => {
   const currentLocale = useLocale();
-  const { languages } = useGlobals();
+  const { languages } = useGlobalData();
   const format = useFormatter();
   const currentLanguage = languages.find(
     language => language.code === currentLocale,

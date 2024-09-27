@@ -3,7 +3,7 @@ import { useLocale } from 'next-intl';
 import React from 'react';
 
 import { cn } from '../../helpers/classnames';
-import { useGlobals } from '../../hooks/use-globals';
+import { useGlobalData } from '../../hooks/use-global-data';
 import { FormControl } from './form';
 import { Input } from './input';
 import {
@@ -31,7 +31,7 @@ export const StringLanguageInput = ({
   ...props
 }: Props) => {
   const locale = useLocale();
-  const { defaultLanguage, languages: languagesFromGlobal } = useGlobals();
+  const { defaultLanguage, languages: languagesFromGlobal } = useGlobalData();
   const languages = languagesFromGlobal.filter(item => item.allow_in_input);
   const [selectedLanguage, setSelectedLanguage] = React.useState(
     locale || defaultLanguage,
