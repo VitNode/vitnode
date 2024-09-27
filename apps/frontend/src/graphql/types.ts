@@ -271,6 +271,7 @@ export type Mutation = {
   admin__core_languages__edit: ShowCoreLanguages;
   admin__core_main_settings__edit: EditAdminSettingsObj;
   admin__core_manifest_metadata__edit: ShowAdminManifestMetadataObj;
+  admin__core_members__confirm_email: Scalars['String']['output'];
   admin__core_members__create: SignUpCoreSessionsObj;
   admin__core_members__delete: Scalars['String']['output'];
   admin__core_members__edit: EditAdminMembersObj;
@@ -402,6 +403,11 @@ export type MutationAdmin__Core_Manifest_Metadata__EditArgs = {
   display: Scalars['String']['input'];
   start_url: Scalars['String']['input'];
   theme_color: Scalars['String']['input'];
+};
+
+
+export type MutationAdmin__Core_Members__Confirm_EmailArgs = {
+  id: Scalars['Float']['input'];
 };
 
 

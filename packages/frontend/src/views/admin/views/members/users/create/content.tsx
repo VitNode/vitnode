@@ -4,7 +4,7 @@ import {
   AutoFormInputProps,
 } from '@/components/form/fields/input';
 import { Button } from '@/components/ui/button';
-import { DialogClose, DialogFooter } from '@/components/ui/dialog';
+import { DialogFooter } from '@/components/ui/dialog';
 import { Progress } from '@/components/ui/progress';
 import { removeSpecialCharacters } from '@/helpers/special-characters';
 import { useTranslations } from 'next-intl';
@@ -90,9 +90,6 @@ export const ContentCreateUserUsersMembersAdmin = () => {
       onSubmit={onSubmit}
       submitButton={props => (
         <DialogFooter>
-          <DialogClose asChild>
-            <Button variant="ghost">{t('cancel')}</Button>
-          </DialogClose>
           <Button {...props}>{t('sign_up.form.submit')}</Button>
         </DialogFooter>
       )}

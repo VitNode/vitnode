@@ -67,7 +67,7 @@ export const UserMembersAdminView = async ({ id }: Props) => {
     return notFound();
   }
 
-  const { name, group, joined, email, name_seo } = edges[0];
+  const { name, group, joined, email, name_seo, email_verified } = edges[0];
 
   return (
     <div className="space-y-8">
@@ -97,7 +97,11 @@ export const UserMembersAdminView = async ({ id }: Props) => {
         </div>
       </Card>
 
-      <InfoBlockUserMembersAdmin email={email} joined={joined} />
+      <InfoBlockUserMembersAdmin
+        email={email}
+        email_verified={email_verified}
+        joined={joined}
+      />
     </div>
   );
 };

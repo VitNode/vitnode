@@ -499,6 +499,10 @@
         "item": {
           "user_menu": "User Menu",
           "public_profile": "Public Profile",
+          "confirm_email": {
+            "title": "Confirm Email",
+            "success": "Email has been confirmed."
+          },
           "info": {
             "title": "Info User",
             "joined": "Joined",

@@ -40,7 +40,6 @@ export const TableUsersMembersAdmin = ({
           cell: ({ row }) => {
             return (
               <div className="flex flex-wrap items-center gap-2">
-                <span>{row.email}</span>
                 {!row.email_verified && (
                   <TooltipWrapper
                     content={t('item.info.not_email_verified')}
@@ -49,6 +48,7 @@ export const TableUsersMembersAdmin = ({
                     <MailWarning className="text-destructive size-5" />
                   </TooltipWrapper>
                 )}
+                <span>{row.email}</span>
               </div>
             );
           },
