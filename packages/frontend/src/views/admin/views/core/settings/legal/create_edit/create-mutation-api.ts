@@ -6,8 +6,7 @@ import {
   Admin__Core_Terms_Settings__CreateMutation,
   Admin__Core_Terms_Settings__CreateMutationVariables,
 } from '@/graphql/mutations/admin/settings/terms/admin__core_terms_settings__create.generated';
-
-import { revalidateApi } from '../revalidate-api';
+import { revalidateTags } from '@/graphql/revalidate-tags';
 
 export const createMutationApi = async (
   variables: Admin__Core_Terms_Settings__CreateMutationVariables,
@@ -21,7 +20,7 @@ export const createMutationApi = async (
       variables,
     });
 
-    revalidateApi(variables.code);
+    revalidateTags.terms(variables.code);
   } catch (error) {
     const e = error as Error;
 

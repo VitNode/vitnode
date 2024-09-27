@@ -29,9 +29,6 @@ const getData = async (variables: Admin__Core_Plugins__ShowQueryVariables) => {
     query: Admin__Core_Plugins__Show,
     variables,
     cache: 'force-cache',
-    next: {
-      tags: ['Admin__Core_Plugins__Show'],
-    },
   });
 
   return data;

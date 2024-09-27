@@ -17,6 +17,7 @@ const getData = async () => {
     Core_Main_Settings__ShowQueryVariables
   >({
     query: Core_Main_Settings__Show,
+    cache: 'force-cache',
   });
 
   return data;

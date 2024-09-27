@@ -6,7 +6,7 @@ import {
   Admin__Core_Members__Confirm_EmailMutation,
   Admin__Core_Members__Confirm_EmailMutationVariables,
 } from '@/graphql/mutations/admin/members/users/user/admin__core_members__confirm_email.generated';
-import { revalidatePath } from 'next/cache';
+import { revalidateTags } from '@/graphql/revalidate-tags';
 
 export const mutationApi = async (
   variables: Admin__Core_Members__Confirm_EmailMutationVariables,
@@ -20,7 +20,7 @@ export const mutationApi = async (
       variables,
     });
 
-    revalidatePath('/', 'layout');
+    revalidateTags.session(variables.id);
   } catch (error) {
     const e = error as Error;
 

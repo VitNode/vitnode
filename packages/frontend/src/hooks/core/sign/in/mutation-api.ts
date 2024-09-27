@@ -1,6 +1,7 @@
 'use server';
 
 import { fetcher } from '@/graphql/fetcher';
+import { getAdminIdCookie } from '@/graphql/get-user-id-cookie';
 import {
   Core_Sessions__Sign_In,
   Core_Sessions__Sign_InMutation,
@@ -29,7 +30,7 @@ export const mutationApi = async (
         revalidateTags.session(+userIdFromCookie);
       }
     } else {
-      const adminIdFromCookie = cookie.get('vitnode-admin-id')?.value;
+      const adminIdFromCookie = getAdminIdCookie();
       if (adminIdFromCookie) {
         revalidateTags.sessionAdmin(+adminIdFromCookie);
       }

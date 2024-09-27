@@ -25,6 +25,7 @@ const getData = async (
   >({
     query: Admin__Core_Languages__Show,
     variables,
+    cache: 'force-cache',
   });
 
   return data;

@@ -17,6 +17,7 @@ const getData = async () => {
     Core_Theme_Editor__ShowQueryVariables
   >({
     query: Core_Theme_Editor__Show,
+    cache: 'force-cache',
   });
 
   return data;
