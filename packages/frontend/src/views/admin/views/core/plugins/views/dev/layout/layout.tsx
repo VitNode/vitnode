@@ -2,7 +2,6 @@ import { DateFormat } from '@/components/date-format';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import { HeaderContent } from '@/components/ui/header-content';
-import { Tabs, TabsTrigger } from '@/components/ui/tabs';
 import { CONFIG } from '@/helpers/config-with-env';
 import { redirect } from '@/navigation';
 import { ExternalLink } from 'lucide-react';
@@ -12,6 +11,7 @@ import React from 'react';
 
 import { ActionsDevPluginAdmin } from './actions/actions';
 import { getPluginDataAdmin } from './query-api';
+import { TabsDevPluginAdmin } from './tabs';
 
 export interface DevPluginAdminLayoutProps {
   children: React.ReactNode;
@@ -41,16 +41,14 @@ export const DevPluginAdminLayout = async ({
   children,
 }: DevPluginAdminLayoutProps) => {
   if (!CONFIG.node_development) redirect('/admin');
-  const data = await getPluginDataAdmin({ code });
+  const [data, t] = await Promise.all([
+    getPluginDataAdmin({ code }),
+    getTranslations('core'),
+  ]);
 
   if (data.admin__core_plugins__show.edges.length === 0) {
     redirect('/admin');
   }
-
-  const [t, tCore] = await Promise.all([
-    getTranslations('admin.core.plugins.dev'),
-    getTranslations('core'),
-  ]);
 
   const plugin = data.admin__core_plugins__show.edges.at(0);
   if (!plugin) return null;
@@ -99,24 +97,14 @@ export const DevPluginAdminLayout = async ({
         h1={
           <div className="flex flex-wrap items-center gap-2">
             <span>{name}</span>
-            {isDefault && <Badge>{tCore('default')}</Badge>}
+            {isDefault && <Badge>{t('default')}</Badge>}
           </div>
         }
       >
         <ActionsDevPluginAdmin {...plugin} />
       </HeaderContent>
 
-      <Tabs className="mb-5">
-        <TabsTrigger
-          href={`/admin/core/plugins/${code}/dev/overview`}
-          id="overview"
-        >
-          {t('overview.title')}
-        </TabsTrigger>
-        <TabsTrigger href={`/admin/core/plugins/${code}/dev/nav`} id="nav">
-          {t('nav.title')}
-        </TabsTrigger>
-      </Tabs>
+      <TabsDevPluginAdmin code={code} />
 
       <Card className="p-6">{children}</Card>
     </>
