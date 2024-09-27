@@ -1,5 +1,5 @@
 import { redirect } from '@/navigation';
-import { SlugViewProps } from '@/views/slug';
+// import { SlugViewProps } from '@/views/slug';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
@@ -79,7 +79,9 @@ import {
 
 export const generateMetadataSlugAdmin = async ({
   params: { slug },
-}: SlugViewProps): Promise<Metadata> => {
+}: {
+  params: { slug: string[] };
+}): Promise<Metadata> => {
   // Core routes
   if (slug[0] === 'core') {
     if (slug[1] === 'advanced' && !slug[3]) {
@@ -141,7 +143,7 @@ export const generateMetadataSlugAdmin = async ({
   return {};
 };
 
-export const SlugAdminView = (props: SlugViewProps) => {
+export const SlugAdminView = (props: { params: { slug: string[] } }) => {
   const {
     params: { slug },
   } = props;
@@ -149,7 +151,7 @@ export const SlugAdminView = (props: SlugViewProps) => {
   // Core routes
   if (slug[0] === 'core') {
     if (slug[1] === 'advanced' && !slug[3]) {
-      if (slug[2] === 'files') return <FilesAdvancedCoreAdminView {...props} />;
+      // if (slug[2] === 'files') return <FilesAdvancedCoreAdminView {...props} />;
 
       if (!slug[2]) redirect('/admin/core/advanced/files');
     }
@@ -163,8 +165,8 @@ export const SlugAdminView = (props: SlugViewProps) => {
 
     if (slug[1] === 'settings' && !slug[4]) {
       if (slug[2] === 'email') {
-        if (slug[3] === 'logs')
-          return <LogsEmailSettingsAdminView {...props} />;
+        // if (slug[3] === 'logs')
+        //   return <LogsEmailSettingsAdminView {...props} />;
 
         if (!slug[3]) return <EmailSettingsAdminView />;
       }
@@ -176,14 +178,14 @@ export const SlugAdminView = (props: SlugViewProps) => {
 
         if (slug[2] === 'authorization')
           return <AuthorizationSettingsCoreAdminView />;
-        if (slug[2] === 'legal') return <LegalSettingsAdminView {...props} />;
+        // if (slug[2] === 'legal') return <LegalSettingsAdminView {...props} />;
       }
       if (!slug[2]) redirect('/admin/core/settings/main');
     }
 
     if (!slug[2]) {
-      if (slug[1] === 'langs') return <LangsCoreAdminView {...props} />;
-      if (slug[1] === 'plugins') return <PluginsAdminView {...props} />;
+      // if (slug[1] === 'langs') return <LangsCoreAdminView {...props} />;
+      // if (slug[1] === 'plugins') return <PluginsAdminView {...props} />;
       if (slug[1] === 'diagnostic') return <DiagnosticToolsView />;
       if (slug[1] === 'dashboard') return <DashboardCoreAdminView />;
     }
@@ -192,23 +194,23 @@ export const SlugAdminView = (props: SlugViewProps) => {
   // Members routes
   if (slug[0] === 'members') {
     if (slug[1] === 'staff') {
-      if (slug[2] === 'moderators' && !slug[3])
-        return <ModeratorsStaffAdminView {...props} />;
-      if (slug[2] === 'administrators' && !slug[3])
-        return <AdministratorsStaffAdminView {...props} />;
+      // if (slug[2] === 'moderators' && !slug[3])
+      //   return <ModeratorsStaffAdminView {...props} />;
+      // if (slug[2] === 'administrators' && !slug[3])
+      //   return <AdministratorsStaffAdminView {...props} />;
 
       if (!slug[2]) redirect('/admin/members/staff/moderators');
     }
 
-    if (slug[1] === 'groups' && !slug[2])
-      return <GroupsMembersAdminView {...props} />;
+    // if (slug[1] === 'groups' && !slug[2])
+    //   return <GroupsMembersAdminView {...props} />;
 
     if (slug[1] === 'users' && !slug[3]) {
       if (slug[2]) {
         return <UserMembersAdminView id={+slug[2]} />;
       }
 
-      return <UsersMembersAdminView {...props} />;
+      // return <UsersMembersAdminView {...props} />;
     }
   }
 

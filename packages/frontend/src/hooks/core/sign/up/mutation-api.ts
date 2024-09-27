@@ -6,7 +6,6 @@ import {
   Core_Sessions__Sign_UpMutation,
   Core_Sessions__Sign_UpMutationVariables,
 } from '@/graphql/mutations/sessions/core_Sessions__sign_up.generated';
-import { revalidatePath } from 'next/cache';
 
 interface Args extends Core_Sessions__Sign_UpMutationVariables {
   token: string;
@@ -29,6 +28,4 @@ export const mutationApi = async (variables: Args) => {
 
     return { error: e.message };
   }
-
-  revalidatePath('/[locale]/(main)', 'page');
 };

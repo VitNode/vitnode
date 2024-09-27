@@ -49,7 +49,7 @@ export const DrawerQuickMenu = () => {
                   className: classNameDrawerQuickMenu,
                 }),
               )}
-              href="/settings/overview"
+              href="/settings"
             >
               <Settings />
               <span>{t('user-bar.settings')}</span>

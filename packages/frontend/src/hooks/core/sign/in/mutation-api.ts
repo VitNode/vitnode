@@ -6,8 +6,9 @@ import {
   Core_Sessions__Sign_InMutation,
   Core_Sessions__Sign_InMutationVariables,
 } from '@/graphql/mutations/sessions/core_sessions__sign_in.generated';
+import { revalidateTags } from '@/graphql/revalidate-tags';
 import { redirect } from '@/navigation';
-import { revalidatePath } from 'next/cache';
+import { cookies } from 'next/headers';
 
 export const mutationApi = async (
   variables: Core_Sessions__Sign_InMutationVariables,
@@ -20,12 +21,24 @@ export const mutationApi = async (
       query: Core_Sessions__Sign_In,
       variables,
     });
+
+    const cookie = cookies();
+    if (!variables.admin) {
+      const userIdFromCookie = cookie.get('vitnode-user-id')?.value;
+      if (userIdFromCookie) {
+        revalidateTags.session(+userIdFromCookie);
+      }
+    } else {
+      const adminIdFromCookie = cookie.get('vitnode-admin-id')?.value;
+      if (adminIdFromCookie) {
+        revalidateTags.sessionAdmin(+adminIdFromCookie);
+      }
+    }
   } catch (error) {
     const e = error as Error;
 
     return { error: e.message };
   }
 
-  revalidatePath(variables.admin ? '/admin' : '/', 'layout');
   redirect(variables.admin ? '/admin/core/dashboard' : '/');
 };

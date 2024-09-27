@@ -11,7 +11,7 @@ import {
 } from 'lucide-react';
 
 import { cn } from '../../../helpers/classnames';
-import { useGlobals } from '../../../hooks/use-globals';
+import { useGlobalData } from '../../../hooks/use-global-data';
 import { useEditorState } from '../hooks/use-editor-state';
 import { ButtonToolbarEditor } from './button';
 import { ColorToolbarEditor } from './custom/color/color';
@@ -22,7 +22,7 @@ import { TextAlignToolbarEditor } from './custom/text-align';
 import { ToggleToolbarEditor } from './toggle';
 
 export const ToolBarEditor = () => {
-  const { config } = useGlobals();
+  const { config } = useGlobalData();
   const { editor } = useEditorState();
 
   return (

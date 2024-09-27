@@ -1,13 +1,13 @@
-import { SlugViewProps } from '@/views/slug';
 import { notFound } from 'next/navigation';
 
 import { NavDevPluginAdminView } from './nav/nav';
 import { OverviewDevPluginAdminView } from './overview';
 
-export interface SlugDevPluginsAdminProps extends SlugViewProps {
+export interface SlugDevPluginsAdminProps {
   params: {
     code: string;
-  } & SlugViewProps['params'];
+    slug: string[];
+  };
 }
 
 export const SlugDevPluginsAdminView = (props: SlugDevPluginsAdminProps) => {

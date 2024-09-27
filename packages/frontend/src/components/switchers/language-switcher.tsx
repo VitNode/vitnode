@@ -3,7 +3,7 @@
 import { Languages } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 
-import { useGlobals } from '../../hooks/use-globals';
+import { useGlobalData } from '../../hooks/use-global-data';
 import { usePathname, useRouter } from '../../navigation';
 import { Button } from '../ui/button';
 import {
@@ -16,7 +16,7 @@ import {
 
 export const LanguageSwitcher = () => {
   const t = useTranslations('core');
-  const { languages } = useGlobals();
+  const { languages } = useGlobalData();
   const locale = useLocale();
   const { replace } = useRouter();
   const pathname = usePathname();

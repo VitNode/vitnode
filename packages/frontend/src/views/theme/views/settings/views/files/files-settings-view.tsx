@@ -37,10 +37,6 @@ const ContentFilesSettings = React.lazy(async () =>
   })),
 );
 
-export interface FilesSettingsViewProps {
-  searchParams: SearchParamsPagination;
-}
-
 export const generateMetadataFilesSettings = async (): Promise<Metadata> => {
   const t = await getTranslations('core.settings.files');
 
@@ -52,7 +48,9 @@ export const generateMetadataFilesSettings = async (): Promise<Metadata> => {
 
 export const FilesSettingsView = async ({
   searchParams,
-}: FilesSettingsViewProps) => {
+}: {
+  searchParams: SearchParamsPagination;
+}) => {
   const variables = getPaginationTool({
     searchParams,
     defaultPageSize: 10,
