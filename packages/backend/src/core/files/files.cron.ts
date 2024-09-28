@@ -13,7 +13,9 @@ export class CoreFilesCron {
     private readonly files: FilesService,
   ) {}
 
-  @Cron(CronExpression.EVERY_HOUR)
+  @Cron(CronExpression.EVERY_HOUR, {
+    name: 'ClearTempFiles',
+  })
   async clearTempFiles() {
     const tempFiles = await this.databaseService.db
       .select()

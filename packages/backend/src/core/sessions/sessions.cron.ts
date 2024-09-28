@@ -14,7 +14,9 @@ export class CoreSessionsCron {
     private readonly configService: ConfigService,
   ) {}
 
-  @Cron(CronExpression.EVERY_MINUTE)
+  @Cron(CronExpression.EVERY_MINUTE, {
+    name: 'ClearExpiredSessions',
+  })
   async clearExpiredSessions() {
     const expiresIn = new Date();
     const expiresInDeviceCookie: number = this.configService.getOrThrow(

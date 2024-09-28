@@ -13,7 +13,9 @@ export class CoreMiddlewareCron {
     private readonly configService: ConfigService,
   ) {}
 
-  @Cron(CronExpression.EVERY_HOUR)
+  @Cron(CronExpression.EVERY_HOUR, {
+    name: 'ClearKnownDevices',
+  })
   // Clear known devices that have not been seen for 90 days
   async clearKnowDevices() {
     const lastSeen = new Date();

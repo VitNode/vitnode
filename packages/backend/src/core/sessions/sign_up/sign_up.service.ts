@@ -32,7 +32,7 @@ export class SignUpCoreSessionsService {
       !user.email_verified
     ) {
       await this.confirmEmailService.sendConfirmEmail({
-        user,
+        userId: user.id,
       });
     }
 

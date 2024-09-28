@@ -3,6 +3,7 @@ import { Global, Module } from '@nestjs/common';
 import { AuthorizationCoreSessionsResolver } from './authorization/authorization.resolver';
 import { AuthorizationCoreSessionsService } from './authorization/authorization.service';
 import { InternalAuthorizationCoreSessionsService } from './authorization/internal/internal_authorization.service';
+import { ClearTokenConfirmEmailCoreSessionsCron } from './confirm_email/clear_tokens_email.cron';
 import { SendConfirmEmailCoreSessionsService } from './confirm_email/send.confirm_email.service';
 import { DevicesCoreSessionsModule } from './devices/devices.module';
 import { CoreSessionsCron } from './sessions.cron';
@@ -28,6 +29,7 @@ import { SignUpCoreSessionsService } from './sign_up/sign_up.service';
     SignUpCoreSessionsService,
     SignUpHelperService,
     SendConfirmEmailCoreSessionsService,
+    ClearTokenConfirmEmailCoreSessionsCron,
   ],
   imports: [DevicesCoreSessionsModule],
 })

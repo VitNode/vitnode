@@ -66,10 +66,9 @@
     }
   },
   "scripts": {
-    "test": "tsc -w",
     "build:scripts": "tsup",
     "build": "tsc && swc src -d ./dist --config-file .swcrc",
-    "dev": "concurrently \"tsc -w\" \"swc src -d dist --config-file .swcrc -w\"",
+    "dev": "concurrently \"tsc -w --preserveWatchOutput\" \"swc src -d dist --config-file .swcrc -w\"",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "codegen": "graphql-codegen --config codegen.ts"

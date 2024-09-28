@@ -59,6 +59,10 @@ export const core_users_relations = relations(core_users, ({ one }) => ({
     fields: [core_users.language],
     references: [core_languages.code],
   }),
+  confirm_email: one(core_users_confirm_emails, {
+    fields: [core_users.id],
+    references: [core_users_confirm_emails.user_id],
+  }),
 }));
 
 export const core_files_avatars = pgTable('core_files_avatars', {
@@ -113,7 +117,7 @@ export const core_users_confirm_emails = pgTable('core_users_confirm_emails', {
       onDelete: 'cascade',
     })
     .notNull(),
-  key: varchar('key', { length: 100 }).notNull().unique(),
+  token: varchar('token', { length: 100 }).notNull().unique(),
   created: timestamp('created').notNull().defaultNow(),
   expires: timestamp('expires').notNull(),
 });
