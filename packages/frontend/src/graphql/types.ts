@@ -690,6 +690,7 @@ export type Query = {
   core_plugins__show: Array<ShowCorePluginsObj>;
   core_sessions__authorization: AuthorizationCoreSessionsObj;
   core_sessions__devices__show: Array<ShowCoreSessionDevicesObj>;
+  core_sessions__email_verify: Scalars['String']['output'];
   core_settings__show: ShowSettingsObj;
   core_terms__show: ShowCoreTermsObj;
   core_theme_editor__show: ShowCoreThemeEditorObj;
@@ -800,6 +801,12 @@ export type QueryCore_Nav__ShowArgs = {
   cursor?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type QueryCore_Sessions__Email_VerifyArgs = {
+  token: Scalars['String']['input'];
+  user_id: Scalars['Float']['input'];
 };
 
 
@@ -1257,7 +1264,10 @@ export type ShowSettingsObj = {
 export type SignUpCoreSessionsObj = {
   __typename?: 'SignUpCoreSessionsObj';
   email: Scalars['String']['output'];
+  email_verified: Scalars['Boolean']['output'];
   group_id: Scalars['Int']['output'];
+  id: Scalars['Float']['output'];
+  language: Scalars['String']['output'];
   name: Scalars['String']['output'];
   newsletter?: Maybe<Scalars['Boolean']['output']>;
 };

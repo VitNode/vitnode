@@ -320,6 +320,7 @@ type Query {
   core_plugins__show: [ShowCorePluginsObj!]!
   core_sessions__authorization: AuthorizationCoreSessionsObj!
   core_sessions__devices__show: [ShowCoreSessionDevicesObj!]!
+  core_sessions__email_verify(token: String!, user_id: Float!): String!
   core_settings__show: ShowSettingsObj!
   core_terms__show(code: String, cursor: Int, first: Int, last: Int): ShowCoreTermsObj!
   core_theme_editor__show: ShowCoreThemeEditorObj!

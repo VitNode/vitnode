@@ -1,8 +1,26 @@
 import { Button } from '@/components/ui/button';
+import { fetcher } from '@/graphql/fetcher';
+import {
+  Core_Sessions__Email_Verify,
+  Core_Sessions__Email_VerifyQuery,
+  Core_Sessions__Email_VerifyQueryVariables,
+} from '@/graphql/queries/sessions/core_sessions__email_verify.generated';
 import { Link, redirect } from '@/navigation';
 import { CircleCheckIcon, LogIn } from 'lucide-react';
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
+
+const getData = async (
+  variables: Core_Sessions__Email_VerifyQueryVariables,
+) => {
+  await fetcher<
+    Core_Sessions__Email_VerifyQuery,
+    Core_Sessions__Email_VerifyQueryVariables
+  >({
+    query: Core_Sessions__Email_Verify,
+    variables,
+  });
+};
 
 export const metadataConfirmEmailSignUp: Metadata = {
   robots: 'noindex, nofollow',
@@ -18,6 +36,17 @@ export const ConfirmEmailSignUpView = async ({
 }) => {
   const t = await getTranslations('core.sign_up.confirm_email');
   if (!userId || !token) {
+    redirect('/');
+
+    return;
+  }
+
+  try {
+    await getData({
+      token,
+      userId: +userId,
+    });
+  } catch (_e) {
     redirect('/');
   }
 

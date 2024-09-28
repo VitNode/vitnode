@@ -65,7 +65,7 @@ export class SendConfirmEmailCoreSessionsService {
     }
 
     // Hash token
-    const hashToken = await this.encryptToken(user.email);
+    const hashToken = await this.encryptToken(user.id.toString());
 
     // Save token
     await this.databaseService.db.insert(core_users_confirm_emails).values({
