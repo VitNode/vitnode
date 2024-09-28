@@ -85,6 +85,8 @@ export const useSignUpView = () => {
             shouldFocus: true,
           },
         );
+
+        return;
       } else if (mutation.error === 'NAME_ALREADY_EXISTS') {
         form.setError(
           'name',

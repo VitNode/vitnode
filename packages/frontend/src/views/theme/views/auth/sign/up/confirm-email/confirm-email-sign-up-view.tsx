@@ -36,7 +36,7 @@ export const ConfirmEmailSignUpView = async ({
 }) => {
   const t = await getTranslations('core.sign_up.confirm_email');
   if (!userId || !token) {
-    redirect('/');
+    redirect('/login');
 
     return;
   }
@@ -47,7 +47,7 @@ export const ConfirmEmailSignUpView = async ({
       userId: +userId,
     });
   } catch (_e) {
-    redirect('/');
+    redirect('/login');
   }
 
   return (

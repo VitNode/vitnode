@@ -1,3 +1,4 @@
+import { EmailProvider, getConfigFile } from '@/providers';
 import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
@@ -8,6 +9,7 @@ import { core_admin_sessions } from '../../../database/schema/admins';
 import { core_sessions } from '../../../database/schema/sessions';
 import { AccessDeniedError, CustomError } from '../../../errors';
 import { GqlContext } from '../../../utils';
+import { SendConfirmEmailCoreSessionsService } from '../confirm_email/send.confirm_email.service';
 import { verifyPassword } from '../password';
 import { DeviceSignInCoreSessionsService } from './device.service';
 import { SignInCoreSessionsArgs } from './sign_in.dto';
@@ -27,6 +29,7 @@ export class SignInCoreSessionsService {
     private readonly jwtService: JwtService,
     private readonly configService: ConfigService,
     private readonly deviceService: DeviceSignInCoreSessionsService,
+    private readonly sendConfirmEmailCoreSessionsService: SendConfirmEmailCoreSessionsService,
   ) {}
 
   protected async createSession({
@@ -205,14 +208,33 @@ export class SignInCoreSessionsService {
     { admin, email: emailRaw, password, remember }: SignInCoreSessionsArgs,
     context: GqlContext,
   ) {
+    const { settings } = getConfigFile();
     const email = emailRaw.toLowerCase();
     const user = await this.databaseService.db.query.core_users.findFirst({
       where: (table, { eq }) => eq(table.email, email),
+      with: {
+        confirm_email: true,
+      },
     });
     if (!user) throw new AccessDeniedError();
 
     const validPassword = await verifyPassword(password, user.password);
     if (!validPassword) throw new AccessDeniedError();
+
+    if (
+      !user.email_verified &&
+      settings.authorization.require_confirm_email &&
+      settings.email.provider !== EmailProvider.none
+    ) {
+      await this.sendConfirmEmailCoreSessionsService.sendConfirmEmail({
+        userId: user.id,
+      });
+
+      throw new CustomError({
+        code: 'EMAIL_NOT_VERIFIED',
+        message: 'Email not verified',
+      });
+    }
 
     // If admin mode is enabled, check if user has access to admin cp
     if (admin) {
