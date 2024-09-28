@@ -2,7 +2,7 @@ import { core_users } from '@/database/schema/users';
 import { CustomError, NotFoundError } from '@/errors';
 import { getUserIp, removeSpecialCharacters } from '@/functions';
 import { getConfigFile } from '@/providers';
-import { GqlContext, InternalDatabaseService } from '@/utils';
+import { AuthRequest, GqlContext, InternalDatabaseService } from '@/utils';
 import { Injectable } from '@nestjs/common';
 import { count } from 'drizzle-orm';
 
@@ -58,6 +58,27 @@ export class SignUpHelperService extends AvatarColorService {
     };
   };
 
+  private readonly getLanguage = async (req: AuthRequest): Promise<string> => {
+    const languageToSet: string =
+      (Array.isArray(req.headers['x-vitnode-user-language'])
+        ? req.headers['x-vitnode-user-language'][0]
+        : req.headers['x-vitnode-user-language']) ?? 'en';
+
+    // Check if language exists
+    const lang = await this.databaseService.db.query.core_languages.findMany({
+      columns: {
+        code: true,
+        default: true,
+      },
+    });
+
+    if (!lang.find(l => l.code === languageToSet)) {
+      return lang.find(l => l.default)?.code ?? 'en';
+    }
+
+    return languageToSet;
+  };
+
   async signUp(
     { email: emailRaw, name, newsletter, password }: SignUpCoreSessionsArgs,
     { req }: GqlContext,
@@ -107,6 +128,7 @@ export class SignUpHelperService extends AvatarColorService {
           ? email_verified
           : true,
         ip_address: getUserIp(req),
+        language: await this.getLanguage(req),
       })
       .returning();
 

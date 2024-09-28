@@ -11,7 +11,7 @@ export default function DefaultPage() {
         </h1>
 
         <p className="text-muted-foreground text-pretty">
-          Dive in and create install or your first plugin!
+          Dive in. Create or install your first plugin!
         </p>
 
         <div className="flex flex-wrap items-center gap-2 md:gap-4">

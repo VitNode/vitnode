@@ -261,7 +261,15 @@
       "confirm_email": {
         "title": "Confirmation Successful",
         "desc": "Thank you for confirming your email address. You can now access to our platform.",
-        "sign_in": "Sign In"
+        "sign_in": "Sign In",
+        "mail": {
+          "subject": "Confirm your email address",
+          "preview": "You're receiving this email because you created an account on our platform.",
+          "welcome": "Thank you for signing up!",
+          "desc": "To complete your registration, please confirm your email address by clicking the link below:",
+          "ignore": "If you didn't create an account, you can ignore this email.",
+          "button": "Confirm Email"
+        }
       }
     },
     "settings": {

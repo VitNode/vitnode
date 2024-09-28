@@ -1257,7 +1257,10 @@ export type ShowSettingsObj = {
 export type SignUpCoreSessionsObj = {
   __typename?: 'SignUpCoreSessionsObj';
   email: Scalars['String']['output'];
+  email_verified: Scalars['Boolean']['output'];
   group_id: Scalars['Int']['output'];
+  id: Scalars['Float']['output'];
+  language: Scalars['String']['output'];
   name: Scalars['String']['output'];
   newsletter?: Maybe<Scalars['Boolean']['output']>;
 };

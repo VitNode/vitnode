@@ -95,7 +95,7 @@ export const DEFAULT_CONFIG_DATA: ConfigType = {
     main: {
       site_name: 'VitNode',
       site_short_name: 'VitNode',
-      contact_email: 'contact@your-website.com',
+      contact_email: '',
     },
     email: {
       provider: EmailProvider.none,

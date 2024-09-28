@@ -81,10 +81,22 @@ export class InternalAuthorizationCoreSessionsService {
       throw new AccessDeniedError();
     }
 
-    const languageToSet: string =
+    let languageToSet: string =
       (Array.isArray(req.headers['x-vitnode-user-language'])
         ? req.headers['x-vitnode-user-language'][0]
         : req.headers['x-vitnode-user-language']) ?? 'en';
+
+    // Check if language exists
+    const lang = await this.databaseService.db.query.core_languages.findMany({
+      columns: {
+        code: true,
+        default: true,
+      },
+    });
+
+    if (!lang.find(l => l.code === languageToSet)) {
+      languageToSet = lang.find(l => l.default)?.code ?? 'en';
+    }
 
     if (
       req.headers['x-vitnode-user-language'] &&

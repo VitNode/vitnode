@@ -9,16 +9,20 @@ import { eq } from 'drizzle-orm';
 export class DeleteAdminMembersService {
   constructor(private readonly databaseService: InternalDatabaseService) {}
 
-  async delete({ id }: { id: number }, user: User): Promise<string> {
-    const findUser = await this.databaseService.db.query.core_users.findFirst({
+  async delete({ id }: { id: number }, currentUser: User): Promise<string> {
+    const user = await this.databaseService.db.query.core_users.findFirst({
       where: (table, { eq }) => eq(table.id, id),
+      columns: {
+        id: true,
+        group_id: true,
+      },
     });
 
-    if (!findUser) {
+    if (!user) {
       throw new NotFoundError('User');
     }
 
-    if (user.id === id) {
+    if (currentUser.id === id) {
       throw new CustomError({
         code: 'DELETE_YOURSELF',
         message: 'You cannot delete yourself',
@@ -28,7 +32,7 @@ export class DeleteAdminMembersService {
     const admin =
       await this.databaseService.db.query.core_admin_permissions.findFirst({
         where: (table, { or, eq }) =>
-          or(eq(table.user_id, user.id), eq(table.group_id, user.group.id)),
+          or(eq(table.user_id, user.id), eq(table.group_id, user.group_id)),
       });
 
     if (admin) {

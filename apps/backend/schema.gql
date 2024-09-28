@@ -726,7 +726,10 @@ type ShowSettingsObj {
 
 type SignUpCoreSessionsObj {
   email: String!
+  email_verified: Boolean!
   group_id: Int!
+  id: Float!
+  language: String!
   name: String!
   newsletter: Boolean
 }
