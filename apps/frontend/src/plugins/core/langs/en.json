@@ -212,6 +212,10 @@
       "error": {
         "title": "Invalid credentials",
         "desc": "The email address or password was incorrect. Please try again (make sure your caps lock is off)."
+      },
+      "not_verified": {
+        "title": "Email is not verified",
+        "desc": "Please check your inbox and click the link to activate your account."
       }
     },
     "sign_up": {

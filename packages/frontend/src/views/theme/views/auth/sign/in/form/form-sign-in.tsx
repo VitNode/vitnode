@@ -9,7 +9,7 @@ import {
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { useSignInView } from '@/hooks/core/sign/in/use-sign-in-view';
-import { AlertCircle, LogIn } from 'lucide-react';
+import { AlertCircle, LogIn, MailQuestion } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
@@ -21,15 +21,21 @@ export const FormSignIn = () => {
     <>
       {error && (
         <div className="mb-6 space-y-4">
-          {error === 'ACCESS_DENIED' && (
+          {error === 'EMAIL_NOT_VERIFIED' ? (
+            <Alert variant="warn">
+              <MailQuestion className="size-4" />
+              <AlertTitle>{t('sign_in.not_verified.title')}</AlertTitle>
+              <AlertDescription>
+                {t('sign_in.not_verified.desc')}
+              </AlertDescription>
+            </Alert>
+          ) : error === 'ACCESS_DENIED' ? (
             <Alert variant="error">
               <AlertCircle className="size-4" />
               <AlertTitle>{t('sign_in.error.title')}</AlertTitle>
               <AlertDescription>{t('sign_in.error.desc')}</AlertDescription>
             </Alert>
-          )}
-
-          {error !== 'ACCESS_DENIED' && (
+          ) : (
             <Alert variant="error">
               <AlertCircle className="size-4" />
               <AlertTitle>{t('errors.title')}</AlertTitle>
