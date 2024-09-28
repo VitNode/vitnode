@@ -10,6 +10,9 @@ export class ShowAdminAuthorizationSettingsService {
 
     return {
       ...config.settings.authorization,
+      require_confirm_email:
+        config.settings.authorization.require_confirm_email &&
+        config.settings.email.provider !== EmailProvider.none,
       is_email_enabled: config.settings.email.provider !== EmailProvider.none,
     };
   }

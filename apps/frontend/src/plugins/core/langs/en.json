@@ -257,6 +257,11 @@
           "desc": "Your account has been created successfully. Now you can sign in.",
           "sign_in": "Sign In"
         }
+      },
+      "confirm_email": {
+        "title": "Confirmation Successful",
+        "desc": "Thank you for confirming your email address. You can now access to our platform.",
+        "sign_in": "Sign In"
       }
     },
     "settings": {

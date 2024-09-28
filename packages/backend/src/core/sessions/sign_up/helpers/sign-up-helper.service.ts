@@ -1,6 +1,7 @@
 import { core_users } from '@/database/schema/users';
 import { CustomError, NotFoundError } from '@/errors';
 import { getUserIp, removeSpecialCharacters } from '@/functions';
+import { getConfigFile } from '@/providers';
 import { GqlContext, InternalDatabaseService } from '@/utils';
 import { Injectable } from '@nestjs/common';
 import { count } from 'drizzle-orm';
@@ -89,6 +90,7 @@ export class SignUpHelperService extends AvatarColorService {
     }
 
     const hashPassword = await encryptPassword(password);
+    const config = getConfigFile();
     const { group_id, email_verified } = await this.getDefaultData();
 
     const user = await this.databaseService.db
@@ -101,7 +103,9 @@ export class SignUpHelperService extends AvatarColorService {
         password: hashPassword,
         avatar_color: this.generateAvatarColor(name),
         group_id,
-        email_verified,
+        email_verified: config.settings.authorization.require_confirm_email
+          ? email_verified
+          : true,
         ip_address: getUserIp(req),
       })
       .returning();
