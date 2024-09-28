@@ -1,5 +1,5 @@
+import { useSignUp } from '@/views/theme/views/auth/sign/up/use-sign-up';
 import { useTranslations } from 'next-intl';
-import React from 'react';
 import { UseFormReturn } from 'react-hook-form';
 import { toast } from 'sonner';
 import * as z from 'zod';
@@ -11,7 +11,7 @@ export const nameRegex = /^(?!.* {2})[\p{L}\p{N}._@ -]*$/u;
 
 export const useSignUpView = () => {
   const t = useTranslations('core');
-  const [successName, setSuccessName] = React.useState('');
+  const { setEmailSuccess } = useSignUp();
   const { getTokenFromCaptcha, isReady } = useCaptcha();
 
   const formSchema = z.object({
@@ -107,13 +107,12 @@ export const useSignUpView = () => {
       return;
     }
 
-    setSuccessName(values.name);
+    setEmailSuccess(values.email);
   };
 
   return {
     formSchema,
     onSubmit,
     isReady,
-    successName,
   };
 };

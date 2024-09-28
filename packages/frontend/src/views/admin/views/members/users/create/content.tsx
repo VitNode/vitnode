@@ -73,7 +73,7 @@ export const ContentCreateUserUsersMembersAdmin = () => {
             if (!value.length) return null;
 
             return (
-              <div className="mt-1">
+              <div className="mt-2">
                 <div className="mb-2 flex justify-between text-xs font-semibold">
                   <span>{t('week')}</span>
                   <span>{t('strong')}</span>

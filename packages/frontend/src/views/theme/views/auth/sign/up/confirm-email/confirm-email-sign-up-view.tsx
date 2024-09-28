@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { Link, redirect } from '@/navigation';
-import { CircleCheckIcon } from 'lucide-react';
+import { CircleCheckIcon, LogIn } from 'lucide-react';
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
@@ -30,7 +30,10 @@ export const ConfirmEmailSignUpView = async ({
       <p className="text-muted-foreground mt-4">{t('desc')}</p>
 
       <Button asChild className="mt-6" size="lg">
-        <Link href="/login">{t('sign_in')}</Link>
+        <Link href="/login">
+          <LogIn />
+          {t('sign_in')}
+        </Link>
       </Button>
     </div>
   );
