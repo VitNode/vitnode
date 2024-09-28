@@ -159,11 +159,15 @@
         "authorization": {
           "force_login": {
             "title": "Force Login",
-            "desc": "This option will block your site access from guest users."
+            "desc": "Force users to log in before they can access your website."
           },
           "lock_register": {
             "title": "Lock Register",
-            "desc": "This option will lock users from registering on your site."
+            "desc": "Don't allow users to register on your website."
+          },
+          "require_confirm_email": {
+            "title": "Require Confirm Email",
+            "desc": "Require users to confirm their email address before they can access your site."
           }
         },
         "legal": {

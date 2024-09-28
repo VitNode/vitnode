@@ -36,6 +36,7 @@ export function AutoFormSelect<T extends FieldValues>({
   componentProps,
   className,
   childComponent: ChildComponent,
+  hideOptionalLabel,
 }: {
   componentProps?: AutoFormSelectProps;
 } & AutoFormItemProps<T>) {
@@ -67,6 +68,7 @@ export function AutoFormSelect<T extends FieldValues>({
       {label && (
         <AutoFormLabel
           description={description}
+          hideOptionalLabel={hideOptionalLabel}
           isRequired={isRequired}
           label={label}
           theme={theme}

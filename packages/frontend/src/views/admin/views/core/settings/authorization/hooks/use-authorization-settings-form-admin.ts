@@ -12,12 +12,17 @@ export const useAuthorizationFormAdmin = ({
   const formSchema = z.object({
     force_login: z.boolean().default(data.force_login).optional(),
     lock_register: z.boolean().default(data.lock_register).optional(),
+    require_confirm_email: z
+      .boolean()
+      .default(data.require_confirm_email)
+      .optional(),
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const mutation = await mutationApi({
       forceLogin: values.force_login ?? false,
       lockRegister: values.lock_register ?? false,
+      requireConfirmEmail: values.require_confirm_email ?? false,
     });
 
     if (mutation?.error) {

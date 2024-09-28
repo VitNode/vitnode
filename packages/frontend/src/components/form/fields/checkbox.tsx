@@ -26,6 +26,7 @@ export function AutoFormCheckbox<T extends FieldValues>({
   componentProps,
   className,
   childComponent: ChildComponent,
+  hideOptionalLabel,
 }: {
   componentProps?: AutoFormCheckboxProps;
 } & AutoFormItemProps<T>) {
@@ -59,6 +60,7 @@ export function AutoFormCheckbox<T extends FieldValues>({
           {label && (
             <AutoFormLabel
               description={description}
+              hideOptionalLabel={hideOptionalLabel}
               isRequired={isRequired}
               label={label}
               theme={theme}

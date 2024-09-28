@@ -26,6 +26,7 @@ export function AutoFormColorPicker<T extends FieldValues>({
   componentProps,
   className,
   childComponent: ChildComponent,
+  hideOptionalLabel,
 }: {
   componentProps?: AutoFormColorPickerProps;
 } & AutoFormItemProps<T>) {
@@ -36,6 +37,7 @@ export function AutoFormColorPicker<T extends FieldValues>({
       {label && (
         <AutoFormLabel
           description={description}
+          hideOptionalLabel={hideOptionalLabel}
           isRequired={isRequired}
           label={label}
           theme={theme}

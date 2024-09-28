@@ -105,3 +105,25 @@ export const core_users_pass_reset_relations = relations(
     }),
   }),
 );
+
+export const core_users_confirm_emails = pgTable('core_users_confirm_emails', {
+  id: serial('id').primaryKey(),
+  user_id: integer('user_id')
+    .references(() => core_users.id, {
+      onDelete: 'cascade',
+    })
+    .notNull(),
+  key: varchar('key', { length: 100 }).notNull().unique(),
+  created: timestamp('created').notNull().defaultNow(),
+  expires: timestamp('expires').notNull(),
+});
+
+export const core_users_confirm_emails_relations = relations(
+  core_users_confirm_emails,
+  ({ one }) => ({
+    user: one(core_users, {
+      fields: [core_users_confirm_emails.user_id],
+      references: [core_users.id],
+    }),
+  }),
+);

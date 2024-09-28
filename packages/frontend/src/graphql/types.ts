@@ -315,6 +315,7 @@ export type Mutation = {
 export type MutationAdmin__Core_Authorization_Settings__EditArgs = {
   force_login: Scalars['Boolean']['input'];
   lock_register: Scalars['Boolean']['input'];
+  require_confirm_email: Scalars['Boolean']['input'];
 };
 
 
@@ -830,7 +831,9 @@ export type SecurityCoreMiddleware = {
 export type ShowAdminAuthorizationSettingsObj = {
   __typename?: 'ShowAdminAuthorizationSettingsObj';
   force_login: Scalars['Boolean']['output'];
+  is_email_enabled: Scalars['Boolean']['output'];
   lock_register: Scalars['Boolean']['output'];
+  require_confirm_email: Scalars['Boolean']['output'];
 };
 
 export type ShowAdminCaptchaSecurityObj = {

@@ -26,6 +26,7 @@ export function AutoFormSwitch<T extends FieldValues>({
   componentProps,
   className,
   childComponent: ChildComponent,
+  hideOptionalLabel,
 }: {
   componentProps?: AutoFormSwitchProps;
 } & AutoFormItemProps<T>) {
@@ -42,6 +43,7 @@ export function AutoFormSwitch<T extends FieldValues>({
         {label && (
           <AutoFormLabel
             description={description}
+            hideOptionalLabel={hideOptionalLabel}
             isRequired={isRequired}
             label={label}
             theme={theme}

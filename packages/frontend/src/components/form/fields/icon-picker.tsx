@@ -26,6 +26,7 @@ export function AutoFormIconPicker<T extends FieldValues>({
   componentProps,
   className,
   childComponent: ChildComponent,
+  hideOptionalLabel,
 }: {
   componentProps?: AutoFormIconPickerProps;
 } & AutoFormItemProps<T>) {
@@ -36,6 +37,7 @@ export function AutoFormIconPicker<T extends FieldValues>({
       {label && (
         <AutoFormLabel
           description={description}
+          hideOptionalLabel={hideOptionalLabel}
           isRequired={isRequired}
           label={label}
           theme={theme}

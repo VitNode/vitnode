@@ -225,7 +225,7 @@ type LogsAdminEmailObj {
 }
 
 type Mutation {
-  admin__core_authorization_settings__edit(force_login: Boolean!, lock_register: Boolean!): ShowAdminAuthorizationSettingsObj!
+  admin__core_authorization_settings__edit(force_login: Boolean!, lock_register: Boolean!, require_confirm_email: Boolean!): ShowAdminAuthorizationSettingsObj!
   admin__core_email_settings__edit(color_primary: String!, color_primary_foreground: String!, from: String!, logo: UploadWithKeepCoreFilesArgs, provider: EmailProvider!, resend_key: String, smtp: SMTPEditAdminEmailSettingsService): ShowAdminEmailSettingsServiceObj!
   admin__core_email_settings__test(message: String!, preview_text: String, subject: String!, to: String!): String!
   admin__core_files__delete(id: Int!): String!
@@ -343,7 +343,9 @@ type SecurityCoreMiddleware {
 
 type ShowAdminAuthorizationSettingsObj {
   force_login: Boolean!
+  is_email_enabled: Boolean!
   lock_register: Boolean!
+  require_confirm_email: Boolean!
 }
 
 type ShowAdminCaptchaSecurityObj {
