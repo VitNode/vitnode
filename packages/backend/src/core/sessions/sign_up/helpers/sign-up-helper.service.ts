@@ -1,7 +1,8 @@
 import { core_users } from '@/database/schema/users';
 import { CustomError, NotFoundError } from '@/errors';
 import { getUserIp, removeSpecialCharacters } from '@/functions';
-import { GqlContext, InternalDatabaseService } from '@/utils';
+import { getConfigFile } from '@/providers';
+import { AuthRequest, GqlContext, InternalDatabaseService } from '@/utils';
 import { Injectable } from '@nestjs/common';
 import { count } from 'drizzle-orm';
 
@@ -15,7 +16,10 @@ export class SignUpHelperService extends AvatarColorService {
     super();
   }
 
-  private readonly getGroupId = async (): Promise<number> => {
+  private readonly getDefaultData = async (): Promise<{
+    email_verified: boolean;
+    group_id: number;
+  }> => {
     const countUsers = await this.databaseService.db
       .select({ count: count() })
       .from(core_users);
@@ -32,7 +36,10 @@ export class SignUpHelperService extends AvatarColorService {
         throw new NotFoundError('Root Group');
       }
 
-      return rootGroup.id;
+      return {
+        group_id: rootGroup.id,
+        email_verified: true,
+      };
     }
 
     const defaultGroup =
@@ -45,7 +52,31 @@ export class SignUpHelperService extends AvatarColorService {
       throw new NotFoundError('Default Group');
     }
 
-    return defaultGroup.id;
+    return {
+      group_id: defaultGroup.id,
+      email_verified: false,
+    };
+  };
+
+  private readonly getLanguage = async (req: AuthRequest): Promise<string> => {
+    const languageToSet: string =
+      (Array.isArray(req.headers['x-vitnode-user-language'])
+        ? req.headers['x-vitnode-user-language'][0]
+        : req.headers['x-vitnode-user-language']) ?? 'en';
+
+    // Check if language exists
+    const lang = await this.databaseService.db.query.core_languages.findMany({
+      columns: {
+        code: true,
+        default: true,
+      },
+    });
+
+    if (!lang.find(l => l.code === languageToSet)) {
+      return lang.find(l => l.default)?.code ?? 'en';
+    }
+
+    return languageToSet;
   };
 
   async signUp(
@@ -80,6 +111,8 @@ export class SignUpHelperService extends AvatarColorService {
     }
 
     const hashPassword = await encryptPassword(password);
+    const config = getConfigFile();
+    const { group_id, email_verified } = await this.getDefaultData();
 
     const user = await this.databaseService.db
       .insert(core_users)
@@ -90,8 +123,12 @@ export class SignUpHelperService extends AvatarColorService {
         newsletter,
         password: hashPassword,
         avatar_color: this.generateAvatarColor(name),
-        group_id: await this.getGroupId(),
+        group_id,
+        email_verified: config.settings.authorization.require_confirm_email
+          ? email_verified
+          : true,
         ip_address: getUserIp(req),
+        language: await this.getLanguage(req),
       })
       .returning();
 

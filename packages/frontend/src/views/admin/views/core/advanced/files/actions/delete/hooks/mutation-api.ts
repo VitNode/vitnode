@@ -20,8 +20,10 @@ export const mutationApi = async (
       variables,
     });
 
-    revalidatePath('/admin/core/advanced/files', 'page');
-    revalidatePath('/settings/files', 'page');
+    revalidatePath(
+      '/[locale]/admin/(auth)/(vitnode)/core/advanced/files',
+      'page',
+    );
 
     return { data };
   } catch (error) {

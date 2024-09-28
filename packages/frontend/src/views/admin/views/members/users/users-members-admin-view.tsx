@@ -23,10 +23,6 @@ const getData = async (variables: Admin__Core_Members__ShowQueryVariables) => {
   >({
     query: Admin__Core_Members__Show,
     variables,
-    cache: 'force-cache',
-    next: {
-      tags: ['admin__core_members__show'],
-    },
   });
 
   return data;
@@ -70,7 +66,7 @@ export const UsersMembersAdminView = async ({
 
   return (
     <>
-      <HeaderContent h1={t('title')}>
+      <HeaderContent desc={t('desc')} h1={t('title')}>
         <CreateUserUsersMembersAdmin />
       </HeaderContent>
 

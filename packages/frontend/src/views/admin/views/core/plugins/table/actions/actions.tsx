@@ -8,7 +8,7 @@ import {
 import { TooltipWrapper } from '@/components/ui/tooltip';
 import { ShowAdminPlugins } from '@/graphql/types';
 import { CONFIG } from '@/helpers/config-with-env';
-import { Link, usePathname, useRouter } from '@/navigation';
+import { Link, usePathname } from '@/navigation';
 import { BadgeHelp, ChevronDown, CodeXml, Trash2, Upload } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import React from 'react';
@@ -21,7 +21,6 @@ export const ActionsItemPluginsAdmin = (props: ShowAdminPlugins) => {
   const t = useTranslations('admin.core.plugins');
   const tCore = useTranslations('core');
   const pathname = usePathname();
-  const { push } = useRouter();
 
   const [isOpenDeleteDialog, setIsOpenDeleteDialog] = React.useState(false);
   const [isOpenUploadDialog, setIsOpenUploadDialog] = React.useState(false);
@@ -68,12 +67,10 @@ export const ActionsItemPluginsAdmin = (props: ShowAdminPlugins) => {
                 <Upload /> {tCore('upload_new_version')}
               </DropdownMenuItem>
 
-              <DropdownMenuItem
-                onClick={() => {
-                  push(`${pathname}/${props.code}/dev/overview`);
-                }}
-              >
-                <CodeXml /> {t('dev_tools')}
+              <DropdownMenuItem asChild>
+                <Link href={`${pathname}/${props.code}/dev`}>
+                  <CodeXml /> {t('dev_tools')}
+                </Link>
               </DropdownMenuItem>
 
               {!props.default && (

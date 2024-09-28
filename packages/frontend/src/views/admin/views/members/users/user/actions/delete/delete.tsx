@@ -1,18 +1,13 @@
 import {
-  AlertDialogCancel,
   AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
   useAlertDialog,
 } from '@/components/ui/alert-dialog';
-import { Button } from '@/components/ui/button';
 import { Admin__Core_Members__Show__ItemQuery } from '@/graphql/queries/admin/members/users/item/admin__core_members__show__item.generated';
 import { useRouter } from '@/navigation';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 
+import { ContentDeleteActionUserMembersAdmin } from './content';
 import { mutationApi } from './mutation-api';
 
 export const DeleteActionUserMembersAdmin = ({
@@ -56,27 +51,7 @@ export const DeleteActionUserMembersAdmin = ({
   return (
     <AlertDialogContent>
       <form action={onSubmit}>
-        <AlertDialogHeader>
-          <AlertDialogTitle>
-            {tCore('are_you_absolutely_sure')}
-          </AlertDialogTitle>
-          <AlertDialogDescription>
-            {t.rich('desc', {
-              name: () => (
-                <span className="text-foreground font-semibold">{name}</span>
-              ),
-            })}
-          </AlertDialogDescription>
-        </AlertDialogHeader>
-
-        <AlertDialogFooter>
-          <AlertDialogCancel asChild>
-            <Button variant="ghost">{tCore('cancel')}</Button>
-          </AlertDialogCancel>
-          <Button type="submit" variant="destructive">
-            {t('submit')}
-          </Button>
-        </AlertDialogFooter>
+        <ContentDeleteActionUserMembersAdmin name={name} />
       </form>
     </AlertDialogContent>
   );

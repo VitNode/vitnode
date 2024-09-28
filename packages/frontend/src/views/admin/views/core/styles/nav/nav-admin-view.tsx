@@ -18,6 +18,7 @@ const getData = async () => {
     Admin__Core_Nav__ShowQueryVariables
   >({
     query: Admin__Core_Nav__Show,
+    cache: 'force-cache',
   });
 
   return data;

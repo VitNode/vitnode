@@ -6,27 +6,36 @@ import {
   Core_Members__ProfilesQuery,
   Core_Members__ProfilesQueryVariables,
 } from '@/graphql/queries/profiles/core_members__profiles.generated';
+import { RevalidateTagEnum } from '@/graphql/revalidate-tags';
 import { notFound } from 'next/navigation';
 
-const getData = async ({ id }: { id: string }) => {
+interface Props {
+  params: { id: string };
+}
+
+const getData = async (id: string) => {
   const data = await fetcher<
     Core_Members__ProfilesQuery,
     Core_Members__ProfilesQueryVariables
   >({
     query: Core_Members__Profiles,
+    cache: 'force-cache',
     variables: {
       first: 1,
       nameSeo: id,
+    },
+    next: {
+      tags: [`${RevalidateTagEnum.Core_Members__Profiles}--${id}`],
     },
   });
 
   return data;
 };
 
-export const ProfileView = async ({ id }: { id: string }) => {
+export const ProfileView = async ({ params: { id } }: Props) => {
   const {
     core_members__show: { edges },
-  } = await getData({ id });
+  } = await getData(id);
   const data = edges.at(0);
   if (!data) {
     notFound();

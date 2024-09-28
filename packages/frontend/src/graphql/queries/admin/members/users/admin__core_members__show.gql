@@ -42,6 +42,7 @@ query Admin__core_members__show(
         }
         color
       }
+      email_verified
     }
   }
 }

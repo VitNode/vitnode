@@ -1,6 +1,6 @@
 import { useTranslations } from 'next-intl';
 
-import { useGlobals } from '../../../hooks/use-globals';
+import { useGlobalData } from '../../../hooks/use-global-data';
 import { buttonVariants } from '../../ui/button';
 import {
   Select,
@@ -27,7 +27,7 @@ export const LanguageSelectFooterEditor = ({
   setSelectedLanguage,
 }: LanguageSelectFooterEditorProps) => {
   const t = useTranslations('core.editor');
-  const { languages: languagesFromGlobal } = useGlobals();
+  const { languages: languagesFromGlobal } = useGlobalData();
   const { editor } = useEditorState();
   const languages = languagesFromGlobal.filter(item => item.allow_in_input);
 

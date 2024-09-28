@@ -4,7 +4,7 @@ import { useTheme } from 'next-themes';
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import React from 'react';
 
-import { useGlobals } from './use-globals';
+import { useGlobalData } from './use-global-data';
 
 export const useCaptcha = () => {
   const locale = useLocale();
@@ -14,7 +14,7 @@ export const useCaptcha = () => {
     config: {
       security: { captcha: config },
     },
-  } = useGlobals();
+  } = useGlobalData();
   const [token, setToken] = React.useState<string>(
     config.type === CaptchaTypeEnum.none ? 'none' : '',
   );

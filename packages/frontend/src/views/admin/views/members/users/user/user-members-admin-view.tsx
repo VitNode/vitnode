@@ -25,21 +25,19 @@ const getData = async (
   >({
     query: Admin__Core_Members__Show__Item,
     variables,
-    cache: 'force-cache',
-    next: {
-      tags: [`admin__core_members__show-${variables.id}`],
-    },
   });
 
   return data;
 };
 
 interface Props {
-  id: number;
+  params: { id: string };
 }
 
-export const generateMetadataUserMembersAdmin = async ({ id }: Props) => {
-  const data = await getData({ id });
+export const generateMetadataUserMembersAdmin = async ({
+  params: { id },
+}: Props) => {
+  const data = await getData({ id: +id });
 
   if (data.admin__core_members__show.edges.length === 0) {
     return {};
@@ -52,7 +50,7 @@ export const generateMetadataUserMembersAdmin = async ({ id }: Props) => {
   };
 };
 
-export const UserMembersAdminView = async ({ id }: Props) => {
+export const UserMembersAdminView = async ({ params: { id } }: Props) => {
   const [
     t,
     {
@@ -60,14 +58,14 @@ export const UserMembersAdminView = async ({ id }: Props) => {
     },
   ] = await Promise.all([
     getTranslations('admin.members.users.item'),
-    getData({ id }),
+    getData({ id: +id }),
   ]);
 
   if (edges.length === 0) {
     return notFound();
   }
 
-  const { name, group, joined, email, name_seo } = edges[0];
+  const { name, group, joined, email, name_seo, email_verified } = edges[0];
 
   return (
     <div className="space-y-8">
@@ -97,7 +95,11 @@ export const UserMembersAdminView = async ({ id }: Props) => {
         </div>
       </Card>
 
-      <InfoBlockUserMembersAdmin email={email} joined={joined} />
+      <InfoBlockUserMembersAdmin
+        email={email}
+        email_verified={email_verified}
+        joined={joined}
+      />
     </div>
   );
 };

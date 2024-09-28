@@ -14,7 +14,7 @@ export class TestAdminEmailSettingsService extends SendAdminEmailService {
       to,
       subject,
       message,
-      preview_text,
+      previewText: preview_text,
       user,
     });
 

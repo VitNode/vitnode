@@ -51,11 +51,14 @@ export const mutationApi = async (formData: FormData) => {
         },
       ],
     });
+
+    revalidatePath(
+      '/[locale]/admin/(auth)/(vitnode)/core/settings/email',
+      'page',
+    );
   } catch (error) {
     const e = error as Error;
 
     return { error: e.message };
   }
-
-  revalidatePath('/admin/core/settings/email', 'page');
 };

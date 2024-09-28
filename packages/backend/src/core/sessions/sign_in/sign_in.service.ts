@@ -118,6 +118,21 @@ export class SignInCoreSessionsService {
         },
       );
 
+      res.cookie(
+        this.configService.getOrThrow('cookies.login_token.admin.admin_id'),
+        userId,
+        {
+          httpOnly: true,
+          secure: !!this.configService.getOrThrow('cookies.secure'),
+          domain: this.configService.getOrThrow('cookies.domain'),
+          path: '/',
+          expires,
+          sameSite: this.configService.getOrThrow('cookies.secure')
+            ? 'none'
+            : 'lax',
+        },
+      );
+
       return login_token;
     }
 
@@ -157,6 +172,20 @@ export class SignInCoreSessionsService {
     res.cookie(
       this.configService.getOrThrow('cookies.login_token.name'),
       login_token,
+      {
+        httpOnly: true,
+        secure: !!this.configService.getOrThrow('cookies.secure'),
+        domain: this.configService.getOrThrow('cookies.domain'),
+        path: '/',
+        expires: remember ? expires : undefined,
+        sameSite: this.configService.getOrThrow('cookies.secure')
+          ? 'none'
+          : 'lax',
+      },
+    );
+    res.cookie(
+      this.configService.getOrThrow('cookies.login_token.user_id'),
+      userId,
       {
         httpOnly: true,
         secure: !!this.configService.getOrThrow('cookies.secure'),

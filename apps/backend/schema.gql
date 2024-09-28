@@ -225,7 +225,7 @@ type LogsAdminEmailObj {
 }
 
 type Mutation {
-  admin__core_authorization_settings__edit(force_login: Boolean!, lock_register: Boolean!): ShowAdminAuthorizationSettingsObj!
+  admin__core_authorization_settings__edit(force_login: Boolean!, lock_register: Boolean!, require_confirm_email: Boolean!): ShowAdminAuthorizationSettingsObj!
   admin__core_email_settings__edit(color_primary: String!, color_primary_foreground: String!, from: String!, logo: UploadWithKeepCoreFilesArgs, provider: EmailProvider!, resend_key: String, smtp: SMTPEditAdminEmailSettingsService): ShowAdminEmailSettingsServiceObj!
   admin__core_email_settings__test(message: String!, preview_text: String, subject: String!, to: String!): String!
   admin__core_files__delete(id: Int!): String!
@@ -237,6 +237,7 @@ type Mutation {
   admin__core_languages__edit(allow_in_input: Boolean!, default: Boolean!, enabled: Boolean!, id: Int!, locale: String!, name: String!, time_24: Boolean!, timezone: String!): ShowCoreLanguages!
   admin__core_main_settings__edit(contact_email: String!, site_copyright: [StringLanguageInput!]!, site_description: [StringLanguageInput!]!, site_name: String!, site_short_name: String!): EditAdminSettingsObj!
   admin__core_manifest_metadata__edit(background_color: String!, display: String!, start_url: String!, theme_color: String!): ShowAdminManifestMetadataObj!
+  admin__core_members__confirm_email(id: Float!): String!
   admin__core_members__create(email: String!, name: String!, password: String!): SignUpCoreSessionsObj!
   admin__core_members__delete(id: Float!): String!
   admin__core_members__edit(email: String!, id: Int!, name: String!, newsletter: Boolean!): EditAdminMembersObj!
@@ -319,6 +320,7 @@ type Query {
   core_plugins__show: [ShowCorePluginsObj!]!
   core_sessions__authorization: AuthorizationCoreSessionsObj!
   core_sessions__devices__show: [ShowCoreSessionDevicesObj!]!
+  core_sessions__email_verify(token: String!, user_id: Float!): String!
   core_settings__show: ShowSettingsObj!
   core_terms__show(code: String, cursor: Int, first: Int, last: Int): ShowCoreTermsObj!
   core_theme_editor__show: ShowCoreThemeEditorObj!
@@ -342,7 +344,9 @@ type SecurityCoreMiddleware {
 
 type ShowAdminAuthorizationSettingsObj {
   force_login: Boolean!
+  is_email_enabled: Boolean!
   lock_register: Boolean!
+  require_confirm_email: Boolean!
 }
 
 type ShowAdminCaptchaSecurityObj {
@@ -426,6 +430,7 @@ type ShowAdminMembers {
   avatar: AvatarUser
   avatar_color: String!
   email: String!
+  email_verified: Boolean!
   group: GroupUser!
   id: Int!
   joined: DateTime!
@@ -722,7 +727,10 @@ type ShowSettingsObj {
 
 type SignUpCoreSessionsObj {
   email: String!
+  email_verified: Boolean!
   group_id: Int!
+  id: Float!
+  language: String!
   name: String!
   newsletter: Boolean
 }

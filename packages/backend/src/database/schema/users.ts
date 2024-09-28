@@ -24,6 +24,7 @@ export const core_users = pgTable(
     joined: timestamp('joined').notNull().defaultNow(),
     newsletter: boolean('newsletter').notNull().default(false),
     avatar_color: varchar('avatar_color', { length: 6 }).notNull(),
+    email_verified: boolean('email_verified').notNull().default(false),
     group_id: integer('group_id')
       .references(() => core_groups.id)
       .notNull(),
@@ -57,6 +58,10 @@ export const core_users_relations = relations(core_users, ({ one }) => ({
   language: one(core_languages, {
     fields: [core_users.language],
     references: [core_languages.code],
+  }),
+  confirm_email: one(core_users_confirm_emails, {
+    fields: [core_users.id],
+    references: [core_users_confirm_emails.user_id],
   }),
 }));
 
@@ -100,6 +105,28 @@ export const core_users_pass_reset_relations = relations(
   ({ one }) => ({
     user: one(core_users, {
       fields: [core_users_pass_reset.user_id],
+      references: [core_users.id],
+    }),
+  }),
+);
+
+export const core_users_confirm_emails = pgTable('core_users_confirm_emails', {
+  id: serial('id').primaryKey(),
+  user_id: integer('user_id')
+    .references(() => core_users.id, {
+      onDelete: 'cascade',
+    })
+    .notNull(),
+  token: varchar('token', { length: 100 }).notNull().unique(),
+  created: timestamp('created').notNull().defaultNow(),
+  expires: timestamp('expires').notNull(),
+});
+
+export const core_users_confirm_emails_relations = relations(
+  core_users_confirm_emails,
+  ({ one }) => ({
+    user: one(core_users, {
+      fields: [core_users_confirm_emails.user_id],
       references: [core_users.id],
     }),
   }),

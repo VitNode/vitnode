@@ -1,17 +1,15 @@
 'use client';
 
-// import { AutoFormCheckbox } from '@/components/form/fields/checkbox';
 import { AutoForm } from '@/components/form/auto-form';
 import { AutoFormCheckbox } from '@/components/form/fields/checkbox';
 import {
   AutoFormInput,
   AutoFormInputProps,
 } from '@/components/form/fields/input';
-// import { AutoFormInput } from '@/components/form/fields/input';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { useSignInView } from '@/hooks/core/sign/in/use-sign-in-view';
-import { AlertCircle } from 'lucide-react';
+import { AlertCircle, LogIn } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
@@ -51,6 +49,7 @@ export const FormSignIn = () => {
             component: AutoFormInput,
             componentProps: {
               type: 'email',
+              className: 'bg-card shadow-sm',
             } as AutoFormInputProps,
           },
           {
@@ -59,6 +58,7 @@ export const FormSignIn = () => {
             component: AutoFormInput,
             componentProps: {
               type: 'password',
+              className: 'bg-card shadow-sm',
             } as AutoFormInputProps,
           },
           {
@@ -66,13 +66,14 @@ export const FormSignIn = () => {
             label: t('sign_in.form.remember.label'),
             description: t('sign_in.form.remember.desc'),
             component: AutoFormCheckbox,
+            className: 'bg-card',
           },
         ]}
         formSchema={formSchema}
         onSubmit={onSubmit}
         submitButton={props => (
           <Button {...props} className="w-full">
-            {t('sign_in.form.submit')}
+            <LogIn /> {t('sign_in.form.submit')}
           </Button>
         )}
       />

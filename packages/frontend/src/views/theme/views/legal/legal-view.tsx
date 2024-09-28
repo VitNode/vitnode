@@ -5,6 +5,7 @@ import {
   Core_Terms__ShowQuery,
   Core_Terms__ShowQueryVariables,
 } from '@/graphql/queries/terms/core_terms__show.generated';
+import { RevalidateTagEnum } from '@/graphql/revalidate-tags';
 import { getTranslations } from 'next-intl/server';
 
 import { ItemLegal } from './item';
@@ -20,7 +21,9 @@ export const getLegalData = async (
     variables,
     cache: 'force-cache',
     next: {
-      tags: [`core_terms__show${variables.code ? `-${variables.code}` : ''}`],
+      tags: [
+        `${RevalidateTagEnum.Core_Terms_Show}${variables.code ? `--${variables.code}` : ''}`,
+      ],
     },
   });
 

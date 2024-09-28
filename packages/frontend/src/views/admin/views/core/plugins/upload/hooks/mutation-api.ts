@@ -6,7 +6,7 @@ import {
   Admin__Core_Plugins__UploadMutation,
   Admin__Core_Plugins__UploadMutationVariables,
 } from '@/graphql/mutations/admin/plugins/admin__core_plugins__upload.generated';
-import { revalidatePath, revalidateTag } from 'next/cache';
+import { revalidatePath } from 'next/cache';
 
 export const mutationApi = async (formData: FormData) => {
   const files = formData.get('file') as File;
@@ -36,5 +36,4 @@ export const mutationApi = async (formData: FormData) => {
   }
 
   revalidatePath('/', 'layout');
-  revalidateTag('Admin__Core_Plugins__Show');
 };

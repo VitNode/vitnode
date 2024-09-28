@@ -11,17 +11,17 @@ export default function DefaultPage() {
         </h1>
 
         <p className="text-muted-foreground text-pretty">
-          Dive in and create install or your first plugin!
+          Dive in. Create or install your first plugin!
         </p>
 
         <div className="flex flex-wrap items-center gap-2 md:gap-4">
-          <Button asChild className="rounded-full px-6">
+          <Button asChild>
             <Link href="/admin" target="_blank">
               Go to AdminCP
             </Link>
           </Button>
 
-          <Button asChild className="rounded-full px-6" variant="ghost">
+          <Button asChild variant="ghost">
             <Link
               href="https://vitnode.com/docs"
               rel="noopener noreferrer"

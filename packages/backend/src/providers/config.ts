@@ -55,6 +55,7 @@ export interface ConfigType {
     authorization: {
       force_login: boolean;
       lock_register: boolean;
+      require_confirm_email: boolean;
     };
     email: {
       color_primary: string;
@@ -94,7 +95,7 @@ export const DEFAULT_CONFIG_DATA: ConfigType = {
     main: {
       site_name: 'VitNode',
       site_short_name: 'VitNode',
-      contact_email: 'contact@your-website.com',
+      contact_email: '',
     },
     email: {
       provider: EmailProvider.none,
@@ -105,6 +106,7 @@ export const DEFAULT_CONFIG_DATA: ConfigType = {
     authorization: {
       force_login: false,
       lock_register: false,
+      require_confirm_email: true,
     },
   },
   langs: [

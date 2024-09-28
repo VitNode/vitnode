@@ -271,6 +271,7 @@ export type Mutation = {
   admin__core_languages__edit: ShowCoreLanguages;
   admin__core_main_settings__edit: EditAdminSettingsObj;
   admin__core_manifest_metadata__edit: ShowAdminManifestMetadataObj;
+  admin__core_members__confirm_email: Scalars['String']['output'];
   admin__core_members__create: SignUpCoreSessionsObj;
   admin__core_members__delete: Scalars['String']['output'];
   admin__core_members__edit: EditAdminMembersObj;
@@ -314,6 +315,7 @@ export type Mutation = {
 export type MutationAdmin__Core_Authorization_Settings__EditArgs = {
   force_login: Scalars['Boolean']['input'];
   lock_register: Scalars['Boolean']['input'];
+  require_confirm_email: Scalars['Boolean']['input'];
 };
 
 
@@ -402,6 +404,11 @@ export type MutationAdmin__Core_Manifest_Metadata__EditArgs = {
   display: Scalars['String']['input'];
   start_url: Scalars['String']['input'];
   theme_color: Scalars['String']['input'];
+};
+
+
+export type MutationAdmin__Core_Members__Confirm_EmailArgs = {
+  id: Scalars['Float']['input'];
 };
 
 
@@ -683,6 +690,7 @@ export type Query = {
   core_plugins__show: Array<ShowCorePluginsObj>;
   core_sessions__authorization: AuthorizationCoreSessionsObj;
   core_sessions__devices__show: Array<ShowCoreSessionDevicesObj>;
+  core_sessions__email_verify: Scalars['String']['output'];
   core_settings__show: ShowSettingsObj;
   core_terms__show: ShowCoreTermsObj;
   core_theme_editor__show: ShowCoreThemeEditorObj;
@@ -796,6 +804,12 @@ export type QueryCore_Nav__ShowArgs = {
 };
 
 
+export type QueryCore_Sessions__Email_VerifyArgs = {
+  token: Scalars['String']['input'];
+  user_id: Scalars['Float']['input'];
+};
+
+
 export type QueryCore_Terms__ShowArgs = {
   code?: InputMaybe<Scalars['String']['input']>;
   cursor?: InputMaybe<Scalars['Int']['input']>;
@@ -824,7 +838,9 @@ export type SecurityCoreMiddleware = {
 export type ShowAdminAuthorizationSettingsObj = {
   __typename?: 'ShowAdminAuthorizationSettingsObj';
   force_login: Scalars['Boolean']['output'];
+  is_email_enabled: Scalars['Boolean']['output'];
   lock_register: Scalars['Boolean']['output'];
+  require_confirm_email: Scalars['Boolean']['output'];
 };
 
 export type ShowAdminCaptchaSecurityObj = {
@@ -917,6 +933,7 @@ export type ShowAdminMembers = {
   avatar?: Maybe<AvatarUser>;
   avatar_color: Scalars['String']['output'];
   email: Scalars['String']['output'];
+  email_verified: Scalars['Boolean']['output'];
   group: GroupUser;
   id: Scalars['Int']['output'];
   joined: Scalars['DateTime']['output'];
@@ -1247,7 +1264,10 @@ export type ShowSettingsObj = {
 export type SignUpCoreSessionsObj = {
   __typename?: 'SignUpCoreSessionsObj';
   email: Scalars['String']['output'];
+  email_verified: Scalars['Boolean']['output'];
   group_id: Scalars['Int']['output'];
+  id: Scalars['Float']['output'];
+  language: Scalars['String']['output'];
   name: Scalars['String']['output'];
   newsletter?: Maybe<Scalars['Boolean']['output']>;
 };

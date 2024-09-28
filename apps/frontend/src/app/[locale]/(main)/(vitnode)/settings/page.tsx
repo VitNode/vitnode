@@ -1,5 +1,5 @@
-import { redirect } from 'vitnode-frontend/navigation';
+import { OverviewSettingsView } from 'vitnode-frontend/views/theme/views/settings/views/overview/overview-settings-view';
 
 export default function Page() {
-  redirect('/settings/overview');
+  return <OverviewSettingsView />;
 }

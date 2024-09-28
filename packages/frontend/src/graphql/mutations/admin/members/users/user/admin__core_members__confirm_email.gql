@@ -1,0 +1,3 @@
+mutation Admin__core_members__confirm_email($id: Float!) {
+  admin__core_members__confirm_email(id: $id)
+}

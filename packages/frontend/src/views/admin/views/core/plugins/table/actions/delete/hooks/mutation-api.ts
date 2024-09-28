@@ -6,7 +6,7 @@ import {
   Admin__Core_Plugins__DeleteMutation,
   Admin__Core_Plugins__DeleteMutationVariables,
 } from '@/graphql/mutations/admin/plugins/admin__core_plugins__delete.generated';
-import { revalidatePath, revalidateTag } from 'next/cache';
+import { revalidatePath } from 'next/cache';
 
 export const mutationApi = async (
   variables: Admin__Core_Plugins__DeleteMutationVariables,
@@ -28,5 +28,4 @@ export const mutationApi = async (
   }
 
   revalidatePath('/', 'layout');
-  revalidateTag('Admin__Core_Plugins__Show');
 };

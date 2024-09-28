@@ -1,5 +1,5 @@
 import { fetcher } from '@/graphql/fetcher';
-import { getSessionAdminData } from '@/graphql/get-session-admin';
+import { getSessionAdminData } from '@/graphql/get-session-admin-data';
 import {
   Core_Theme_Editor__Show,
   Core_Theme_Editor__ShowQuery,
@@ -17,6 +17,7 @@ const getData = async () => {
     Core_Theme_Editor__ShowQueryVariables
   >({
     query: Core_Theme_Editor__Show,
+    cache: 'force-cache',
   });
 
   return data;

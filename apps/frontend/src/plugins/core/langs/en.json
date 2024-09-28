@@ -171,15 +171,7 @@
       "my_profile": "My Profile",
       "settings": "Settings",
       "admin_cp": "Admin Panel",
-      "dark_light_switcher": {
-        "light": "Light",
-        "dark": "Dark",
-        "system": "System",
-        "toggle": "Toggle Mode"
-      },
-      "theme": {
-        "change": "Change Theme"
-      },
+      "dark_light_switcher": "Toggle Theme",
       "language": {
         "change": "Change Language"
       }
@@ -215,7 +207,7 @@
           "label": "Remember me",
           "desc": "Not recommended on shared computers."
         },
-        "submit": "Sign In"
+        "submit": "Log In"
       },
       "error": {
         "title": "Invalid credentials",
@@ -244,7 +236,7 @@
         },
         "terms": {
           "label": "Accept terms and conditions",
-          "desc": "You agree to our Terms of Service and Privacy Policy.",
+          "desc": "You agree to our <link>Legal documents & Policies</link>.",
           "empty": "You must agree to the Terms of Service."
         },
         "newsletter": {
@@ -253,9 +245,22 @@
         },
         "submit": "Sign Up",
         "success": {
-          "title": "Hi <name></name>! 🎉",
-          "desc": "Your account has been created successfully. Now you can sign in.",
+          "title": "Account Created!",
+          "desc": "We've sent a verification email to <email></email>. Please check your inbox and click the link to activate your account.",
           "sign_in": "Sign In"
+        }
+      },
+      "confirm_email": {
+        "title": "Confirmation Successful",
+        "desc": "Thank you for confirming your email address. You can now access to our platform.",
+        "sign_in": "Sign In",
+        "mail": {
+          "subject": "Confirm your email address",
+          "preview": "You're receiving this email because you created an account on our platform.",
+          "welcome": "Thank you for signing up!",
+          "desc": "To complete your registration, please confirm your email address by clicking the link below:",
+          "ignore": "If you didn't create an account, you can ignore this email.",
+          "button": "Confirm Email"
         }
       }
     },

@@ -27,9 +27,6 @@ export const getData = async (
     query: Admin_Core_Terms__Show,
     variables,
     cache: 'force-cache',
-    next: {
-      tags: ['core_terms__show'],
-    },
   });
 
   return data;

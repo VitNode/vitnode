@@ -55,7 +55,7 @@ const removeLocaleFromUrl = (urlPath: string, locales: string[]): string => {
   return `/${parts.join('/')}`;
 };
 
-export default function createMiddleware() {
+export function createMiddleware() {
   return async function middleware(request: NextRequest) {
     const i18n = await getI18n();
     const handleI18nRouting = createIntlMiddleware({

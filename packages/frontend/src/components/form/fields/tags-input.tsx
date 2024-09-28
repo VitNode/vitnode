@@ -25,6 +25,7 @@ export function AutoFormTagInput<T extends FieldValues>({
   componentProps,
   className,
   childComponent: ChildComponent,
+  hideOptionalLabel,
 }: {
   componentProps?: AutoFormTagInputProps;
 } & AutoFormItemProps<T>) {
@@ -33,6 +34,7 @@ export function AutoFormTagInput<T extends FieldValues>({
       {label && (
         <AutoFormLabel
           description={description}
+          hideOptionalLabel={hideOptionalLabel}
           isRequired={isRequired}
           label={label}
           theme={theme}

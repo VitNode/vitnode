@@ -7,4 +7,7 @@ export class EditAdminAuthorizationSettingsArgs {
 
   @Field(() => Boolean)
   lock_register: boolean;
+
+  @Field(() => Boolean)
+  require_confirm_email: boolean;
 }
