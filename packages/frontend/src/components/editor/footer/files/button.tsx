@@ -6,7 +6,7 @@ import { Button } from '../../../ui/button';
 import { useEditorState } from '../../hooks/use-editor-state';
 
 export const FilesButtonFooterEditor = () => {
-  const t = useTranslations('core.editor.files');
+  const t = useTranslations('core.global.editor.files');
   const ref = React.useRef<HTMLInputElement>(null);
   const { editor } = useEditorState();
 

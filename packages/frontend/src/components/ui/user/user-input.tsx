@@ -1,5 +1,4 @@
 import { X } from 'lucide-react';
-import { useTranslations } from 'next-intl';
 import React from 'react';
 
 import { cn } from '../../../helpers/classnames';
@@ -43,7 +42,6 @@ export const UserInput = ({
   value: currentValue,
   ...rest
 }: MultiProps | SingleProps) => {
-  const t = useTranslations('core.user_input');
   const values = Array.isArray(currentValue)
     ? currentValue
     : currentValue
@@ -62,7 +60,8 @@ export const UserInput = ({
           {...rest}
         >
           {values.length === 0
-            ? t('placeholder')
+            ? // TODO: Add placeholder translation
+              'Select user'
             : values.map(item => {
                 const onRemove = () => {
                   if (multiple) {

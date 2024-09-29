@@ -16,14 +16,14 @@ export const TableUsersMembersAdmin = ({
   admin__core_members__show: { edges, pageInfo },
 }: Admin__Core_Members__ShowQuery) => {
   const t = useTranslations('admin.members.users');
-  const tCore = useTranslations('core');
+  const tCore = useTranslations('core.global');
 
   return (
     <DataTable
       columns={[
         {
           id: 'name',
-          title: tCore('table.name'),
+          title: t('name'),
           cell: ({ row }) => {
             return (
               <div className="flex flex-wrap items-center gap-2">
@@ -36,7 +36,7 @@ export const TableUsersMembersAdmin = ({
         },
         {
           id: 'email',
-          title: t('table.email'),
+          title: t('email'),
           cell: ({ row }) => {
             return (
               <div className="flex flex-wrap items-center gap-2">
@@ -55,14 +55,14 @@ export const TableUsersMembersAdmin = ({
         },
         {
           id: 'group',
-          title: t('table.group'),
+          title: t('group'),
           cell: ({ row }) => {
             return <GroupFormat group={row.group} />;
           },
         },
         {
           id: 'joined',
-          title: t('table.joined'),
+          title: t('joined'),
           sortable: true,
           cell: ({ row }) => {
             return <DateFormat date={row.joined} />;

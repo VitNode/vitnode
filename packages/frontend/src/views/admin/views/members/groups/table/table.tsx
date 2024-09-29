@@ -15,14 +15,13 @@ export const TableGroupsMembersAdmin = ({
   admin__core_groups__show: { edges, pageInfo },
 }: Admin__Core_Groups__ShowQuery) => {
   const t = useTranslations('admin.members.groups');
-  const tCore = useTranslations('core');
 
   return (
     <DataTable
       columns={[
         {
           id: 'name',
-          title: tCore('table.name'),
+          title: t('name'),
           cell: ({ row }) => {
             return (
               <div className="flex items-center gap-4">
@@ -48,7 +47,7 @@ export const TableGroupsMembersAdmin = ({
         },
         {
           id: 'updated',
-          title: tCore('table.updated'),
+          title: t('updated'),
           sortable: true,
           cell: ({ row }) => {
             return <DateFormat date={row.updated} />;

@@ -27,7 +27,7 @@ import { mutationApi } from './hooks/mutation-api';
 
 export const AvatarAsideAuthAdmin = () => {
   const t = useTranslations('admin');
-  const tCore = useTranslations('core');
+  const tCore = useTranslations('core.global');
   const { session } = useSessionAdmin();
 
   if (!session) return null;

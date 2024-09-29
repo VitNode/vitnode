@@ -19,7 +19,7 @@ export const UserInputContentList = ({
   onSelect: (value: UserInputItem) => void;
   values: UserInputItem[];
 }) => {
-  const t = useTranslations('core');
+  const t = useTranslations('core.global');
 
   if (edges.length === 0) {
     return <div className="py-6 text-center text-sm">{t('no_results')}</div>;

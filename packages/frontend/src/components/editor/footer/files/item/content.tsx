@@ -9,7 +9,7 @@ export const ContentItemListFilesFooterEditor = ({
   file,
   isLoading,
 }: Omit<ItemListFilesFooterEditorProps, 'editor' | 'id' | 'setFiles'>) => {
-  const t = useTranslations('core.editor.files');
+  const t = useTranslations('core.global.editor.files');
 
   if (isLoading) {
     return t('state.loading');

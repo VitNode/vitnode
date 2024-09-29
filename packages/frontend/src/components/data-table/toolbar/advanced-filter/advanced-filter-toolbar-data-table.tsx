@@ -1,5 +1,4 @@
 import { Filter } from 'lucide-react';
-import { useTranslations } from 'next-intl';
 import React from 'react';
 
 import { Button } from '../../../ui/button';
@@ -17,13 +16,12 @@ export const AdvancedFilterToolbarDataTable = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const t = useTranslations('core');
-
   return (
     <Sheet>
       <SheetTrigger asChild>
         <Button
-          ariaLabel={t('filters')}
+          // TODO: Add translations
+          ariaLabel={'Filters'}
           className="ml-auto"
           size="icon"
           variant="outline"
@@ -34,7 +32,8 @@ export const AdvancedFilterToolbarDataTable = ({
 
       <SheetContent>
         <SheetHeader>
-          <SheetTitle>{t('filters')}</SheetTitle>
+          // TODO: Add translations
+          <SheetTitle>{'Filters'}</SheetTitle>
         </SheetHeader>
 
         <React.Suspense fallback={<Loader />}>{children}</React.Suspense>

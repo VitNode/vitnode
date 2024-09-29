@@ -8,7 +8,7 @@ import { mutationApi } from './mutation-api';
 export const useAuthorizationFormAdmin = ({
   admin__core_authorization_settings__show: data,
 }: Admin__Core_Authorization_Settings__ShowQuery) => {
-  const t = useTranslations('core');
+  const t = useTranslations('core.global');
   const formSchema = z.object({
     force_login: z.boolean().default(data.force_login).optional(),
     lock_register: z.boolean().default(data.lock_register).optional(),

@@ -21,7 +21,7 @@ export const useCreateEditFormGroupsMembersAdmin = ({
 }: CreateEditFormGroupsMembersAdminArgs) => {
   const [values, setValues] = useState<Partial<z.infer<typeof formSchema>>>({});
   const t = useTranslations('admin.members.groups');
-  const tCore = useTranslations('core');
+  const tCore = useTranslations('core.global.errors');
   const { setOpen } = useDialog();
   const { convertText } = useTextLang();
   const pathname = usePathname();
@@ -81,8 +81,8 @@ export const useCreateEditFormGroupsMembersAdmin = ({
     }
 
     if (isError) {
-      toast.error(tCore('errors.title'), {
-        description: tCore('errors.internal_server_error'),
+      toast.error(tCore('title'), {
+        description: tCore('internal_server_error'),
       });
 
       return;

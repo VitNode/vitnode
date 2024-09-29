@@ -11,15 +11,15 @@ export const useDeleteNavAdmin = ({
   name,
 }: Pick<ShowCoreNav, 'id' | 'name'>) => {
   const t = useTranslations('admin.core.styles.nav.delete');
-  const tCore = useTranslations('core');
+  const tCore = useTranslations('core.global.errors');
   const { setOpen } = useAlertDialog();
   const { convertText } = useTextLang();
 
   const onSubmit = async () => {
     const mutation = await mutationApi({ id });
     if (mutation?.error) {
-      toast.error(tCore('errors.title'), {
-        description: tCore('errors.internal_server_error'),
+      toast.error(tCore('title'), {
+        description: tCore('internal_server_error'),
       });
 
       return;

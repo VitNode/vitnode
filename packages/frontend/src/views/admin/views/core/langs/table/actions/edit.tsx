@@ -21,7 +21,7 @@ const Content = React.lazy(async () =>
 
 export const EditActionsTableLangsCoreAdmin = (data: ShowCoreLanguages) => {
   const t = useTranslations('admin.core.langs.actions');
-  const tCore = useTranslations('core');
+  const tCore = useTranslations('core.global');
 
   return (
     <Dialog>

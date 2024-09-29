@@ -23,7 +23,7 @@ export const ContentDeleteActionFilesAdvancedCoreAdmin = ({
   id,
 }: ContentDeleteActionFilesAdvancedCoreAdminProps) => {
   const t = useTranslations('admin.core.advanced.files.delete');
-  const tCore = useTranslations('core');
+  const tCore = useTranslations('core.global');
   const { onSubmit } = useDeleteFileAdvancedAdmin({
     file_name_original,
     id,

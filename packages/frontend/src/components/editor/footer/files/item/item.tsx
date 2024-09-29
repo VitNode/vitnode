@@ -25,8 +25,8 @@ export const ItemListFilesFooterEditor = ({
   id,
   isLoading,
 }: ItemListFilesFooterEditorProps) => {
-  const t = useTranslations('core.editor.files');
-  const tCore = useTranslations('core');
+  const t = useTranslations('core.global.editor.files');
+  const tCore = useTranslations('core.global');
   const { editor, onChange, selectedLanguage, value } = useEditorState();
 
   const handleDelete = ({

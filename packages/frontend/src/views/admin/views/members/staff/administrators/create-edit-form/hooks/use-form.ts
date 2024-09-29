@@ -11,7 +11,7 @@ import { mutationApi } from './mutation-api';
 
 export const useFormCreateEditFormGroupsMembersAdmin = () => {
   const t = useTranslations('admin.members.staff');
-  const tCore = useTranslations('core');
+  const tCore = useTranslations('core.global');
   const { convertText } = useTextLang();
   const { setOpen } = useDialog();
 

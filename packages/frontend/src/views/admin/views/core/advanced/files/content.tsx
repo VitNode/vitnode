@@ -56,7 +56,7 @@ export const ContentFilesAdvancedCoreAdminView = ({
         },
         {
           id: 'file_name',
-          title: tCore('table.name'),
+          title: t('name'),
           cell: ({ row }) => {
             return (
               <div>
@@ -81,7 +81,7 @@ export const ContentFilesAdvancedCoreAdminView = ({
         {
           id: 'created',
           sortable: true,
-          title: tCore('table.created'),
+          title: t('created'),
           cell: ({ row }) => {
             return <DateFormat date={row.created} />;
           },

@@ -15,7 +15,7 @@ import { LogIn } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 export const FormSignUp = () => {
-  const t = useTranslations('core');
+  const t = useTranslations('core.sign_up');
   const { formSchema, onSubmit } = useSignUpView({});
 
   return (
@@ -24,15 +24,15 @@ export const FormSignUp = () => {
         {
           id: 'name',
           component: AutoFormInput,
-          label: t('sign_up.form.name.label'),
-          description: t('sign_up.form.name.desc'),
+          label: t('name.label'),
+          description: t('name.desc'),
           childComponent: ({ field }) => {
             const value: string = field.value ?? '';
             if (!value.length) return null;
 
             return (
               <span className="text-muted-foreground mt-2 block max-w-md truncate text-sm">
-                {t.rich('sign_up.form.name.your_id', {
+                {t.rich('name.your_id', {
                   id: () => (
                     <span className="text-foreground font-medium">
                       {removeSpecialCharacters(value)}
@@ -53,12 +53,12 @@ export const FormSignUp = () => {
             type: 'email',
             className: 'bg-card shadow-sm',
           } as AutoFormInputProps,
-          label: t('sign_up.form.email.label'),
+          label: t('email.label'),
         },
         {
           id: 'password',
-          label: t('sign_up.form.password.label'),
-          description: t('sign_up.form.password.desc'),
+          label: t('password.label'),
+          description: t('password.desc'),
           component: AutoFormInput,
           componentProps: {
             type: 'password',
@@ -83,8 +83,8 @@ export const FormSignUp = () => {
             return (
               <div className="mt-2">
                 <div className="mb-2 flex justify-between text-xs font-semibold">
-                  <span>{t('week')}</span>
-                  <span>{t('strong')}</span>
+                  <span>{t('week_password')}</span>
+                  <span>{t('strong_password')}</span>
                 </div>
                 <Progress
                   value={(100 / regexArray.length) * passRegexPassword}
@@ -95,9 +95,9 @@ export const FormSignUp = () => {
         },
         {
           id: 'terms',
-          label: t('sign_up.form.terms.label'),
+          label: t('terms.label'),
           className: 'bg-card',
-          description: t.rich('sign_up.form.terms.desc', {
+          description: t.rich('terms.desc', {
             link: text => (
               <Link href="/legal" target="_blank">
                 {text}
@@ -109,8 +109,8 @@ export const FormSignUp = () => {
         {
           id: 'newsletter',
           className: 'bg-card',
-          label: t('sign_up.form.newsletter.label'),
-          description: t('sign_up.form.newsletter.desc'),
+          label: t('newsletter.label'),
+          description: t('newsletter.desc'),
           component: AutoFormCheckbox,
         },
       ]}
@@ -119,7 +119,7 @@ export const FormSignUp = () => {
       submitButton={props => (
         <Button {...props} className="w-full">
           <LogIn />
-          {t('sign_up.form.submit')}
+          {t('submit')}
         </Button>
       )}
     >

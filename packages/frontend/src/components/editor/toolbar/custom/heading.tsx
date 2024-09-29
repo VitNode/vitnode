@@ -41,7 +41,7 @@ const getHeadingIcon = (level: number) => {
 };
 
 export const HeadingToolbarEditor = () => {
-  const t = useTranslations('core.editor.heading');
+  const t = useTranslations('core.global.editor.heading');
   const { editor } = useEditorState();
 
   const value = React.useMemo(() => {

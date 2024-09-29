@@ -34,7 +34,7 @@ export const ContentFilterToolbarDataTable = ({
   searchOnChange,
   ...props
 }: ContentFilterToolbarDataTableProps) => {
-  const t = useTranslations('core');
+  const t = useTranslations('core.global');
   const { id, title } = useFilterToolbarDataTable();
   const searchParams = useSearchParams();
   const selectedValues = searchParams.getAll(id);

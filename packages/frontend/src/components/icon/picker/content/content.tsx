@@ -33,7 +33,7 @@ enum Tab {
 }
 
 export const ContentIconInput = (props: IconPickerProps) => {
-  const t = useTranslations('core.icon_picker');
+  const t = useTranslations('core.global.icon_picker');
   const [search, setSearch] = React.useState('');
   const [activeTab, setActiveTab] = React.useState<Tab>(Tab.Icon);
   const localStorageSkinToneIndex = localStorage.getItem(
@@ -54,7 +54,7 @@ export const ContentIconInput = (props: IconPickerProps) => {
               setActiveTab(Tab.Icon);
             }}
           >
-            {t('tabs.icons')}
+            {t('icons.title')}
           </TabsTrigger>
           <TabsTrigger
             active={activeTab === Tab.Emoji}
@@ -63,7 +63,7 @@ export const ContentIconInput = (props: IconPickerProps) => {
               setActiveTab(Tab.Emoji);
             }}
           >
-            {t('tabs.emojis')}
+            {t('emojis.title')}
           </TabsTrigger>
         </Tabs>
 

@@ -18,7 +18,7 @@ export const IconsContentIconInput = ({
   setOpen,
   value,
 }: Props) => {
-  const t = useTranslations('core.icon_picker.icons');
+  const t = useTranslations('core.global.icon_picker.icons');
   const data = iconNamesArray.filter(name =>
     name.toLowerCase().includes(search.toLowerCase()),
   );

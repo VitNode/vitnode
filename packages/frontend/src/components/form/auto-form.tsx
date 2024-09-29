@@ -108,7 +108,7 @@ export function AutoForm<
   }) => React.ReactNode;
   theme?: 'horizontal' | 'vertical';
 }) {
-  const t = useTranslations('core');
+  const t = useTranslations('core.global');
   const objectFormSchema = getObjectFormSchema(formSchema);
   const defaultValues = getDefaultValues(objectFormSchema);
 

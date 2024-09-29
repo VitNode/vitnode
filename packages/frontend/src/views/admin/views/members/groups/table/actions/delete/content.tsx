@@ -19,7 +19,7 @@ export const ContentDeleteGroupsMembersDialogAdmin = ({
   name,
 }: Pick<ShowAdminGroups, 'id' | 'name'>) => {
   const t = useTranslations('admin.members.groups.delete');
-  const tCore = useTranslations('core');
+  const tCore = useTranslations('core.global');
   const { convertText } = useTextLang();
   const formatName = convertText(name);
   const { onSubmit, formSchema } = useDeleteGroupAdmin({ name, id });

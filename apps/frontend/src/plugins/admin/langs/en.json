@@ -174,6 +174,8 @@
           "title": "Legal & Policies",
           "desc": "These settings are used to generate the legal pages on your website.",
           "legal_public": "Public Legal",
+          "created": "Created",
+          "updated": "Updated",
           "preview": "Preview",
           "create_edit": {
             "create": "Create Policy",
@@ -245,10 +247,15 @@
       },
       "plugins": {
         "title": "Plugins",
+        "upload_new_version": "Upload New Version",
         "set_default": "Set as default",
         "get_help": "Get help",
         "search_placeholder": "Search by name...",
         "dev_tools": "Developer Tools",
+        "name": "Name",
+        "version": "Version",
+        "author": "Author",
+        "updated": "Updated",
         "warn_req_restart_server": {
           "title": "Required Restart Server",
           "desc": "We're detected changes in <bold>the plugin system</bold>. To apply these changes, you need to <bold>restart the server</bold>."
@@ -261,6 +268,7 @@
             "title": "Navigation in AdminCP",
             "lang_key": "Lang Key: <key></key>",
             "keywords": "Keywords: <keywords></keywords>",
+            "link_url_with_link": "Link URL: <link></link>",
             "create": {
               "title": "Create Navigation",
               "code": {
@@ -423,7 +431,10 @@
         "table": {
           "key": "Key",
           "time_24": "24h Format",
-          "locale": "Locale"
+          "locale": "Locale",
+          "name": "Name",
+          "created": "Created",
+          "enabled": "Enabled"
         },
         "actions": {
           "create": {
@@ -488,13 +499,12 @@
         "title": "Users List",
         "desc": "Manage users on your website.",
         "search_placeholder": "Search by name or email...",
+        "name": "Name",
+        "email": "Email",
+        "group": "Group",
+        "joined": "Joined",
         "filters": {
           "groups": "Groups"
-        },
-        "table": {
-          "email": "Email",
-          "group": "Group",
-          "joined": "Joined"
         },
         "create": {
           "title": "Create User",
@@ -531,6 +541,8 @@
       },
       "groups": {
         "title": "Groups",
+        "name": "Name",
+        "updated": "Updated",
         "search_placeholder": "Search by name...",
         "default": "Default",
         "root": "Admin Root",

@@ -24,7 +24,7 @@ export const ToolbarThemeEditor = ({
   setActiveMode: (mode: ThemeEditorViewEnum) => void;
 }) => {
   const t = useTranslations('admin');
-  const tCore = useTranslations('core');
+  const tCore = useTranslations('core.global');
   const { resolvedTheme, setTheme } = useTheme();
 
   const ButtonWithTooltip = ({
@@ -95,7 +95,7 @@ export const ToolbarThemeEditor = ({
 
       <div className="flex flex-col gap-1 py-2">
         <ButtonWithTooltip
-          ariaLabel={tCore('user-bar.dark_light_switcher')}
+          ariaLabel={tCore('dark_light_switcher')}
           onClick={() => {
             const nextTheme = resolvedTheme === 'dark' ? 'light' : 'dark';
             setTheme(nextTheme);

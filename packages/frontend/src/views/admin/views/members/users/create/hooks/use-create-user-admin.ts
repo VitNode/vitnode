@@ -10,29 +10,30 @@ import { mutationApi } from './mutation-api';
 
 export const useCreateUserAdmin = () => {
   const t = useTranslations('admin.members.users.create');
+  const tSignUp = useTranslations('core.sign_up');
+  const tCore = useTranslations('core.global.errors');
   const [values, setValues] = React.useState<
     Partial<z.infer<typeof formSchema>>
   >({});
-  const tCore = useTranslations('core');
   const { setOpen } = useDialog();
 
   const formSchema = z.object({
     name: z
       .string()
       .min(3, {
-        message: tCore('forms.min_length', { length: 3 }),
+        message: tCore('min_length', { length: 3 }),
       })
       .max(32, {
-        message: tCore('forms.max_length', { length: 32 }),
+        message: tCore('max_length', { length: 32 }),
       })
       .refine(value => nameRegex.test(value), {
-        message: tCore('sign_up.form.name.invalid'),
+        message: tSignUp('name.invalid'),
       })
       .default(''),
     email: z
       .string()
       .email({
-        message: tCore('forms.email_invalid'),
+        message: tSignUp('email_invalid'),
       })
       .default(''),
     password: z
@@ -54,7 +55,7 @@ export const useCreateUserAdmin = () => {
           'email',
           {
             type: 'manual',
-            message: tCore('sign_up.form.email.already_exists'),
+            message: tSignUp('email.already_exists'),
           },
           {
             shouldFocus: true,
@@ -65,7 +66,7 @@ export const useCreateUserAdmin = () => {
           'name',
           {
             type: 'manual',
-            message: tCore('sign_up.form.name.already_exists'),
+            message: tSignUp('name.already_exists'),
           },
           {
             shouldFocus: true,
@@ -75,8 +76,8 @@ export const useCreateUserAdmin = () => {
         return;
       }
 
-      toast.error(tCore('errors.title'), {
-        description: tCore('errors.internal_server_error'),
+      toast.error(tCore('title'), {
+        description: tCore('internal_server_error'),
       });
 
       return;

@@ -11,7 +11,7 @@ import { ItemQuickMenu } from '../item';
 import { DrawerQuickMenu } from './drawer';
 
 export const ButtonDrawer = () => {
-  const t = useTranslations('core.mobile_nav');
+  const t = useTranslations('core.global.mobile_nav');
   const { session } = useSession();
 
   return (

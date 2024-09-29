@@ -50,7 +50,7 @@ export function AutoFormCombobox<T extends FieldValues>({
 }: {
   componentProps?: AutoFormComboboxProps;
 } & AutoFormItemProps<T>) {
-  const t = useTranslations('core');
+  const t = useTranslations('core.global');
   const [open, setOpen] = React.useState(false);
   const value: string | string[] | undefined = field.value;
   const baseValues = (

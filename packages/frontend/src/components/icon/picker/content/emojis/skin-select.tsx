@@ -25,7 +25,7 @@ export const SkinSelectEmojisContentIconInput = ({
   setSkinToneIndex: (value: number) => void;
   skinToneIndex: number;
 }) => {
-  const t = useTranslations('core.editor.emoji');
+  const t = useTranslations('core.global.editor.emoji');
 
   return (
     <DropdownMenu>

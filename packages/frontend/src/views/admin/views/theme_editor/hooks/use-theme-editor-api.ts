@@ -62,7 +62,7 @@ export const useThemeEditorApi = ({
   core_theme_editor__show,
 }: Core_Theme_Editor__ShowQuery) => {
   const t = useTranslations('admin.theme_editor');
-  const tCore = useTranslations('core');
+  const tError = useTranslations('core.global.errors');
   const { push } = useRouter();
   const iframeRef = React.useRef<HTMLIFrameElement>(null);
   const formSchema = z.object({
@@ -169,8 +169,8 @@ export const useThemeEditorApi = ({
     const mutation = await mutationApi(formData);
 
     if (mutation?.error) {
-      toast.error(tCore('errors.title'), {
-        description: tCore('errors.internal_server_error'),
+      toast.error(tError('title'), {
+        description: tError('internal_server_error'),
       });
 
       return;

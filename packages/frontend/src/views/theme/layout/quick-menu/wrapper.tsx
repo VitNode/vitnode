@@ -12,7 +12,7 @@ export const QuickMenuWrapper = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const t = useTranslations('core.mobile_nav');
+  const t = useTranslations('core.global.mobile_nav');
   const pathname = usePathname();
   const { back } = useRouter();
 

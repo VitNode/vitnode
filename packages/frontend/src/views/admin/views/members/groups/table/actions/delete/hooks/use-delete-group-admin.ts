@@ -13,7 +13,7 @@ export const useDeleteGroupAdmin = ({
   name,
 }: Pick<ShowAdminGroups, 'id' | 'name'>) => {
   const t = useTranslations('admin.members.groups.delete');
-  const tCore = useTranslations('core');
+  const tCore = useTranslations('core.global.errors');
   const { convertText } = useTextLang();
   const formatName = convertText(name);
   const { setOpen } = useAlertDialog();
@@ -29,8 +29,8 @@ export const useDeleteGroupAdmin = ({
     const mutation = await mutationApi({ id });
 
     if (mutation?.error) {
-      toast.error(tCore('errors.title'), {
-        description: tCore('errors.internal_server_error'),
+      toast.error(tCore('title'), {
+        description: tCore('internal_server_error'),
       });
 
       return;

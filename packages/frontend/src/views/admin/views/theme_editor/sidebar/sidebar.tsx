@@ -12,7 +12,7 @@ import { MainTabThemeEditor } from './tabs/main';
 
 export const SidebarThemeEditor = () => {
   const { activeTab, direction, form, onSubmit } = useThemeEditor();
-  const t = useTranslations('core');
+  const t = useTranslations('core.global');
   const tabs = {
     [ThemeEditorTab.Main]: <MainTabThemeEditor />,
     [ThemeEditorTab.Colors]: <ColorsTabThemeEditor />,

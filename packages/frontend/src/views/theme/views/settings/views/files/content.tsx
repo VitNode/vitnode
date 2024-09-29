@@ -22,7 +22,7 @@ export const ContentFilesSettings = ({
   core_files__show: { edges, pageInfo },
 }: Core_Members__Files__ShowQuery) => {
   const t = useTranslations('core.settings.files');
-  const tCore = useTranslations('core');
+  const tCore = useTranslations('core.global');
 
   return (
     <DataTable
@@ -55,7 +55,7 @@ export const ContentFilesSettings = ({
         },
         {
           id: 'file_name',
-          title: tCore('table.name'),
+          title: t('name'),
           cell: ({ row }) => {
             return (
               <div>
@@ -79,7 +79,7 @@ export const ContentFilesSettings = ({
         },
         {
           id: 'created',
-          title: tCore('table.created'),
+          title: t('created'),
           sortable: true,
           cell: ({ row }) => {
             return <DateFormat date={row.created} />;

@@ -13,7 +13,7 @@ export const ListContentFilterToolbarDataTable = ({
   isFetching,
   options,
 }: Pick<ContentFilterToolbarDataTableProps, 'isFetching' | 'options'>) => {
-  const t = useTranslations('core');
+  const t = useTranslations('core.global');
   const { id } = useFilterToolbarDataTable();
   const { push } = useRouter();
   const pathname = usePathname();

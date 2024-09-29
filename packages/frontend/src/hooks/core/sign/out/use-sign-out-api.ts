@@ -4,14 +4,14 @@ import { toast } from 'sonner';
 import { mutationApi } from './mutation-api';
 
 export const useSignOutApi = () => {
-  const t = useTranslations('core');
+  const t = useTranslations('core.global.errors');
 
   const onSubmit = async () => {
     const mutation = await mutationApi();
 
     if (mutation?.error) {
-      toast.error(t('errors.title'), {
-        description: t('errors.internal_server_error'),
+      toast.error(t('title'), {
+        description: t('internal_server_error'),
       });
     }
   };

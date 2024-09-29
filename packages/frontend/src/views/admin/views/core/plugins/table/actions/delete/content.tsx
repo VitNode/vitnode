@@ -19,7 +19,7 @@ export const ContentDeletePluginActionsAdmin = ({
   name,
 }: ShowAdminPlugins) => {
   const t = useTranslations('admin.core.plugins.delete');
-  const tCore = useTranslations('core');
+  const tCore = useTranslations('core.global');
   const { onSubmit } = useDeletePluginAdmin({ code });
 
   return (

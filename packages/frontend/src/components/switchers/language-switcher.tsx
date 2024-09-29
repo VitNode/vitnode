@@ -15,7 +15,7 @@ import {
 } from '../ui/dropdown-menu';
 
 export const LanguageSwitcher = () => {
-  const t = useTranslations('core');
+  const t = useTranslations('core.global');
   const { languages } = useGlobalData();
   const locale = useLocale();
   const { replace } = useRouter();
@@ -29,11 +29,7 @@ export const LanguageSwitcher = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button
-          ariaLabel={t('user-bar.language.change')}
-          size="icon"
-          variant="ghost"
-        >
+        <Button ariaLabel={t('language_change')} size="icon" variant="ghost">
           <Languages className="size-[1.2rem]" />
         </Button>
       </DropdownMenuTrigger>

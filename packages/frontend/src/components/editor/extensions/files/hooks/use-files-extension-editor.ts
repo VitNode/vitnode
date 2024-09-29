@@ -22,8 +22,8 @@ export const useFilesExtensionEditor = ({
     plugin: string;
   };
 }) => {
-  const t = useTranslations('core.editor.files.errors');
-  const tCore = useTranslations('core.errors');
+  const t = useTranslations('core.global.editor.files.errors');
+  const tCore = useTranslations('core.global.errors');
   const session = useSession();
   const adminSession = useSessionAdmin();
   const { config } = useGlobalData();

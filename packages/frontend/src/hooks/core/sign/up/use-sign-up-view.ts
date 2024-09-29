@@ -10,7 +10,8 @@ import { mutationApi } from './mutation-api';
 export const nameRegex = /^(?!.* {2})[\p{L}\p{N}._@ -]*$/u;
 
 export const useSignUpView = ({ installPage }: { installPage?: boolean }) => {
-  const t = useTranslations('core');
+  const t = useTranslations('core.sign_up');
+  const tCore = useTranslations('core.global');
   const { setEmailSuccess } = useSignUp();
   const { getTokenFromCaptcha, isReady } = useCaptcha();
 
@@ -18,19 +19,19 @@ export const useSignUpView = ({ installPage }: { installPage?: boolean }) => {
     name: z
       .string()
       .min(3, {
-        message: t('forms.min_length', { length: 3 }),
+        message: tCore('errors.min_length', { length: 3 }),
       })
       .max(32, {
-        message: t('forms.max_length', { length: 32 }),
+        message: tCore('errors.max_length', { length: 32 }),
       })
       .refine(value => nameRegex.test(value), {
-        message: t('sign_up.form.name.invalid'),
+        message: t('name.invalid'),
       })
       .default(''),
     email: z
       .string()
       .email({
-        message: t('forms.email_invalid'),
+        message: t('email_invalid'),
       })
       .default(''),
     password: z
@@ -44,7 +45,7 @@ export const useSignUpView = ({ installPage }: { installPage?: boolean }) => {
       : z
           .boolean()
           .refine(value => value, {
-            message: t('sign_up.form.terms.empty'),
+            message: t('terms.empty'),
           })
           .default(false),
     newsletter: z.boolean().default(false).optional(),
@@ -56,8 +57,8 @@ export const useSignUpView = ({ installPage }: { installPage?: boolean }) => {
   ) => {
     const token = await getTokenFromCaptcha();
     if (!token) {
-      toast.error(t('errors.title'), {
-        description: t('errors.captcha_empty'),
+      toast.error(tCore('errors.title'), {
+        description: tCore('errors.captcha_empty'),
       });
 
       return;
@@ -74,8 +75,8 @@ export const useSignUpView = ({ installPage }: { installPage?: boolean }) => {
 
     if (mutation?.error) {
       if (mutation.error === 'CAPTCHA_FAILED') {
-        toast.error(t('errors.title'), {
-          description: t('errors.captcha_failed'),
+        toast.error(tCore('errors.title'), {
+          description: tCore('errors.captcha_failed'),
         });
 
         return;
@@ -86,7 +87,7 @@ export const useSignUpView = ({ installPage }: { installPage?: boolean }) => {
           'email',
           {
             type: 'manual',
-            message: t('sign_up.form.email.already_exists'),
+            message: t('email.already_exists'),
           },
           {
             shouldFocus: true,
@@ -99,7 +100,7 @@ export const useSignUpView = ({ installPage }: { installPage?: boolean }) => {
           'name',
           {
             type: 'manual',
-            message: t('sign_up.form.name.already_exists'),
+            message: t('name.already_exists'),
           },
           {
             shouldFocus: true,
@@ -109,8 +110,8 @@ export const useSignUpView = ({ installPage }: { installPage?: boolean }) => {
         return;
       }
 
-      toast.error(t('errors.title'), {
-        description: t('errors.internal_server_error'),
+      toast.error(tCore('errors.title'), {
+        description: tCore('errors.internal_server_error'),
       });
 
       return;

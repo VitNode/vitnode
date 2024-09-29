@@ -26,7 +26,7 @@ export const EmojisContentIconInput = ({
   skinToneIndex,
   value,
 }: Props) => {
-  const t = useTranslations('core');
+  const t = useTranslations('core.global');
   const [searchResults, setSearchResults] = React.useState<null | string[]>(
     null,
   );
@@ -55,7 +55,7 @@ export const EmojisContentIconInput = ({
             classNameHeaders,
           )}
         >
-          {t('editor.emoji.search_results')}
+          {t('search_results')}
         </div>
         <div className="pb-3 pt-1">
           {searchResults?.length === 0 ? (

@@ -23,7 +23,7 @@ export const ContentDeleteContentLegalSettingsAdmin = ({
   'code' | 'title'
 >) => {
   const t = useTranslations('admin.core.settings.legal.delete');
-  const tCore = useTranslations('core');
+  const tCore = useTranslations('core.global');
   const { setOpen } = useAlertDialog();
   const { convertText } = useTextLang();
   const convertedTitle = convertText(title);

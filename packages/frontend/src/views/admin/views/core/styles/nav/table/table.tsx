@@ -15,7 +15,7 @@ export const TableNavAdmin = ({
   core_nav__show: { edges },
 }: Admin__Core_Nav__ShowQuery) => {
   const t = useTranslations('admin.core.styles.nav');
-  const tCore = useTranslations('core.errors');
+  const tCore = useTranslations('core.global.errors');
   const { convertText } = useTextLang();
 
   return (

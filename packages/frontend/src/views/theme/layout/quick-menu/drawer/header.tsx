@@ -8,7 +8,7 @@ import { Link } from '@/navigation';
 import { useTranslations } from 'next-intl';
 
 export const HeaderDrawerQuickMenu = () => {
-  const t = useTranslations('core');
+  const t = useTranslations('core.global.user-bar');
   const { session } = useSession();
 
   if (!session)
@@ -23,7 +23,7 @@ export const HeaderDrawerQuickMenu = () => {
               })}
               href="/login"
             >
-              {t('user-bar.sign_in')}
+              {t('sign_in')}
             </Link>
           </DrawerClose>
 
@@ -34,7 +34,7 @@ export const HeaderDrawerQuickMenu = () => {
               })}
               href="/register"
             >
-              {t('user-bar.sign_up')}
+              {t('sign_up')}
             </Link>
           </DrawerClose>
         </div>

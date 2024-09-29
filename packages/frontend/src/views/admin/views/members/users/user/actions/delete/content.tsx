@@ -17,7 +17,7 @@ export const ContentDeleteActionUserMembersAdmin = ({
   'name'
 >) => {
   const t = useTranslations('admin.members.users.item.delete');
-  const tCore = useTranslations('core');
+  const tCore = useTranslations('core.global');
   const { pending } = useFormStatus();
 
   return (

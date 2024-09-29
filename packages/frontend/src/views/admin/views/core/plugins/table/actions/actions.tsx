@@ -19,7 +19,7 @@ import { UploadPluginActionsAdmin } from './upload';
 
 export const ActionsItemPluginsAdmin = (props: ShowAdminPlugins) => {
   const t = useTranslations('admin.core.plugins');
-  const tCore = useTranslations('core');
+  const tCore = useTranslations('core.global');
   const pathname = usePathname();
 
   const [isOpenDeleteDialog, setIsOpenDeleteDialog] = React.useState(false);
@@ -64,7 +64,7 @@ export const ActionsItemPluginsAdmin = (props: ShowAdminPlugins) => {
                   setIsOpenUploadDialog(true);
                 }}
               >
-                <Upload /> {tCore('upload_new_version')}
+                <Upload /> {t('upload_new_version')}
               </DropdownMenuItem>
 
               <DropdownMenuItem asChild>
