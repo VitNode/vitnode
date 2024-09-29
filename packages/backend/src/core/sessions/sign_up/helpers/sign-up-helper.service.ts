@@ -1,7 +1,7 @@
 import { core_users } from '@/database/schema/users';
 import { CustomError, NotFoundError } from '@/errors';
 import { getUserIp, removeSpecialCharacters } from '@/functions';
-import { getConfigFile } from '@/providers';
+import { EmailProvider, getConfigFile } from '@/providers';
 import { AuthRequest, GqlContext, InternalDatabaseService } from '@/utils';
 import { Injectable } from '@nestjs/common';
 import { count } from 'drizzle-orm';
@@ -124,9 +124,11 @@ export class SignUpHelperService extends AvatarColorService {
         password: hashPassword,
         avatar_color: this.generateAvatarColor(name),
         group_id,
-        email_verified: config.settings.authorization.require_confirm_email
-          ? email_verified
-          : true,
+        email_verified:
+          config.settings.authorization.require_confirm_email &&
+          config.settings.email.provider !== EmailProvider.none
+            ? email_verified
+            : true,
         ip_address: getUserIp(req),
         language: await this.getLanguage(req),
       })

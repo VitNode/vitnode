@@ -1,6 +1,6 @@
 import { CaptchaCoreCaptchaSecurityService } from '@/core/admin/security/captcha/captcha.service';
 import { AccessDeniedError } from '@/errors';
-import { getConfigFile } from '@/providers';
+import { EmailProvider, getConfigFile } from '@/providers';
 import { GqlContext } from '@/utils';
 import { Injectable } from '@nestjs/common';
 
@@ -29,7 +29,8 @@ export class SignUpCoreSessionsService {
 
     if (
       config.settings.authorization.require_confirm_email &&
-      !user.email_verified
+      !user.email_verified &&
+      config.settings.email.provider !== EmailProvider.none
     ) {
       await this.confirmEmailService.sendConfirmEmail({
         userId: user.id,
