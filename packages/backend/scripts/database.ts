@@ -4,7 +4,7 @@ import { spawn } from 'child_process';
 // Function to run commands interactively with the ability to handle user input
 const runInteractiveShellCommand = async (cmd: string, args: string[] = []) => {
   return new Promise((resolve, reject) => {
-    const child = spawn(cmd, args, { stdio: 'inherit' });
+    const child = spawn(cmd, args, { stdio: 'inherit', shell: true });
 
     child.on('error', error => {
       reject(error);
