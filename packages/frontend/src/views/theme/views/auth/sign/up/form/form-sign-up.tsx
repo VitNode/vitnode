@@ -16,7 +16,7 @@ import { useTranslations } from 'next-intl';
 
 export const FormSignUp = () => {
   const t = useTranslations('core');
-  const { formSchema, onSubmit } = useSignUpView();
+  const { formSchema, onSubmit } = useSignUpView({});
 
   return (
     <AutoForm

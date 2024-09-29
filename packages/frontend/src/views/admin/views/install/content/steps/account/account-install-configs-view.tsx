@@ -1,7 +1,6 @@
 'use client';
 
 import { AutoForm } from '@/components/form/auto-form';
-import { AutoFormCheckbox } from '@/components/form/fields/checkbox';
 import {
   AutoFormInput,
   AutoFormInputProps,
@@ -16,7 +15,7 @@ import { useInstallVitnode } from '../../hooks/use-install-vitnode';
 
 export const AccountInstallConfigsView = () => {
   const t = useTranslations('core');
-  const { onSubmit, formSchema } = useSignUpView();
+  const { onSubmit, formSchema } = useSignUpView({ installPage: true });
   const { setCurrentStep } = useInstallVitnode();
 
   return (
@@ -89,17 +88,6 @@ export const AccountInstallConfigsView = () => {
               </div>
             );
           },
-        },
-        {
-          id: 'terms',
-          label: t('sign_up.form.terms.label'),
-          component: AutoFormCheckbox,
-        },
-        {
-          id: 'newsletter',
-          label: t('sign_up.form.newsletter.label'),
-          description: t('sign_up.form.newsletter.desc'),
-          component: AutoFormCheckbox,
         },
       ]}
       formSchema={formSchema}
