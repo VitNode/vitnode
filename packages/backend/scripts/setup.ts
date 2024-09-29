@@ -7,6 +7,7 @@ import { join } from 'path';
 
 import coreSchemaDatabase from '../src/database';
 import { copyFiles } from './copy-files';
+import { generateDatabaseMigrations, runMigrations } from './database';
 import { generateConfig } from './generate-config';
 import { generateManifest } from './generate-manifest';
 import { updatePlugins } from './update-plugins';
@@ -49,6 +50,9 @@ const init = async () => {
     process.exit(0);
   }
 
+  console.log(`${initConsole} [3/6] Generating database migrations...`);
+  await generateDatabaseMigrations();
+
   console.log(`${initConsole} [4/6] Generating the manifest files...`);
   generateManifest();
 
@@ -56,6 +60,11 @@ const init = async () => {
     config: DATABASE_ENVS,
     schemaDatabase: coreSchemaDatabase,
   });
+
+  console.log(
+    `${initConsole} [5/6] Create tables in database using migrations...`,
+  );
+  await runMigrations();
 
   console.log(`${initConsole} [6/6] Updating plugins...`);
   await updatePlugins({ pluginsPath, db: database.db });
@@ -65,6 +74,29 @@ const init = async () => {
   process.exit(0);
 };
 
+const db = async () => {
+  console.log(`${initConsole} [1/2] Generating database migrations...`);
+  await generateDatabaseMigrations();
+
+  const database = createClientDatabase({
+    config: DATABASE_ENVS,
+    schemaDatabase: coreSchemaDatabase,
+  });
+
+  console.log(
+    `${initConsole} [2/2] Create tables in database using migrations...`,
+  );
+  await runMigrations();
+
+  await database.poolDB.end();
+  console.log(`${initConsole} ✅ Project setup complete.`);
+  process.exit(0);
+};
+
 if (process.argv[2] === 'init') {
   void init();
+}
+
+if (process.argv[2] === 'db') {
+  void db();
 }

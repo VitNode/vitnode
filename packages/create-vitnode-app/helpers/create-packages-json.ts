@@ -36,7 +36,7 @@ export const createPackagesJSON = ({
     private: true,
     scripts: {
       'config:init': 'turbo config:init',
-      dev: 'turbo dev',
+      dev: 'turbo config:init && turbo dev',
       build: 'turbo build',
       start: 'turbo start',
       codegen: 'turbo codegen',
@@ -79,7 +79,7 @@ export const createPackagesJSON = ({
     private: true,
     scripts: {
       'config:init': 'vitnode-frontend init',
-      dev: 'vitnode-frontend init && next dev --turbo',
+      dev: 'next dev --turbo',
       build: 'next build',
       start: 'next start',
       lint: 'eslint .',
@@ -125,12 +125,12 @@ export const createPackagesJSON = ({
       'drizzle-kit': 'drizzle-kit',
       'config:init': 'vitnode-backend init',
       codegen: 'graphql-codegen',
-      dev: 'npm run db && vitnode-backend init && cross-env NODE_ENV=development nest start -w',
+      dev: 'cross-env NODE_ENV=development nest start -w',
       build: 'nest build',
       start: 'node dist/main',
       lint: 'eslint .',
       'lint:fix': 'eslint . --fix',
-      db: 'drizzle-kit up && drizzle-kit generate && drizzle-kit migrate',
+      db: 'vitnode-backend db',
     },
     dependencies: {
       '@nestjs/common': '^10.4.4',
