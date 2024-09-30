@@ -23,7 +23,7 @@ export const DrawerHeaderAdmin = ({
 }: {
   navComponent: React.ReactNode;
 }) => {
-  const t = useTranslations('admin');
+  const t = useTranslations('admin.global');
   const tCore = useTranslations('core.global');
   const [open, setOpen] = React.useState(false);
   const { session } = useSessionAdmin();

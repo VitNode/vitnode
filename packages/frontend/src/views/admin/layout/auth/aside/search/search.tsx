@@ -14,7 +14,7 @@ const Content = React.lazy(async () =>
 );
 
 export const SearchAsideAuthAdmin = () => {
-  const t = useTranslations('admin.search');
+  const t = useTranslations('admin.global.search');
   const [open, setOpen] = React.useState(false);
   const [search, setSearch] = React.useState('');
 

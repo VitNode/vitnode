@@ -1,15 +1,15 @@
+import { TranslationsProvider } from '@/components/translations-provider';
 import { getSessionAdminData } from '@/graphql/get-session-admin-data';
 import { redirect } from '@/navigation';
 import { Metadata } from 'next';
-import { NextIntlClientProvider } from 'next-intl';
-import { getMessages, getTranslations } from 'next-intl/server';
+import { getTranslations } from 'next-intl/server';
 
 import { AsideAuthAdmin } from './auth/aside/aside';
 import { HeaderAdmin } from './auth/header/header';
 import { AdminProviders } from './providers';
 
 export const generateMetadataAdminLayout = async (): Promise<Metadata> => {
-  const t = await getTranslations('admin');
+  const t = await getTranslations('admin.global');
 
   return {
     title: {
@@ -21,19 +21,14 @@ export const generateMetadataAdminLayout = async (): Promise<Metadata> => {
 
 export const AdminLayout = async ({
   children,
-  params: { locale },
 }: {
   children: React.ReactNode;
-  params: { locale: string };
 }) => {
   try {
-    const [messages, data] = await Promise.all([
-      getMessages({ locale }),
-      getSessionAdminData(),
-    ]);
+    const data = await getSessionAdminData();
 
     return (
-      <NextIntlClientProvider messages={messages}>
+      <TranslationsProvider namespaces={['admin.global']}>
         <AdminProviders data={data}>
           <AsideAuthAdmin />
           <HeaderAdmin />
@@ -41,7 +36,7 @@ export const AdminLayout = async ({
             <div className="container">{children}</div>
           </main>
         </AdminProviders>
-      </NextIntlClientProvider>
+      </TranslationsProvider>
     );
   } catch (err) {
     if (err instanceof Error && err.message === 'ACCESS_DENIED') {

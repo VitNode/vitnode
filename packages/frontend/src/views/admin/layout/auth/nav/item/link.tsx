@@ -6,7 +6,6 @@ import { cn } from '@/helpers/classnames';
 import { Link, usePathname } from '@/navigation';
 import * as Accordion from '@radix-ui/react-accordion';
 import { ChevronDown, Menu } from 'lucide-react';
-import { useTranslations } from 'next-intl';
 import React from 'react';
 
 export interface ItemItemNavAdminProps {
@@ -15,21 +14,21 @@ export interface ItemItemNavAdminProps {
   id: string;
 }
 
-interface Props extends ItemItemNavAdminProps {
-  icons: { icon: React.ReactNode; id: string }[];
-  plugin_code: string;
-}
-
 export const LinkItemNavAdmin = ({
   icons,
   plugin_code,
   id,
   icon,
   children,
-}: Props) => {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-expect-error
-  const t = useTranslations(`admin_${plugin_code}.nav`);
+  i18n,
+}: {
+  i18n: {
+    children?: { id: string; title: string }[];
+    title: string;
+  };
+  icons: { icon: React.ReactNode; id: string }[];
+  plugin_code: string;
+} & ItemItemNavAdminProps) => {
   const pathname = usePathname();
   const href = `/admin/${plugin_code}/${id}`;
   const active = pathname.startsWith(`/admin/${plugin_code}/${id}`);
@@ -58,9 +57,7 @@ export const LinkItemNavAdmin = ({
             variant="ghost"
           >
             {icon ? icons.find(i => i.id === id)?.icon : <Menu />}
-            {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-            {/* @ts-expect-error */}
-            <span>{t(id)}</span>
+            <span>{i18n.title}</span>
             <ChevronDown className="ml-auto transition-transform" />
           </Button>
         </Accordion.Trigger>
@@ -74,9 +71,7 @@ export const LinkItemNavAdmin = ({
           onClick={() => setOpen?.(false)}
         >
           {icon ? icons.find(i => i.id === id)?.icon : <Menu />}
-          {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-          {/* @ts-expect-error */}
-          <span>{t(id)}</span>
+          <span>{i18n.title}</span>
         </Link>
       )}
 
@@ -86,6 +81,9 @@ export const LinkItemNavAdmin = ({
             {children.map(child => {
               const href = `/admin/${plugin_code}/${id}/${child.id}`;
               const active = pathname.startsWith(href);
+              const title =
+                i18n.children?.find(c => c.id === child.id)?.title ??
+                `${id}_${child.id}`;
 
               return (
                 <Link
@@ -97,9 +95,7 @@ export const LinkItemNavAdmin = ({
                   key={`${plugin_code}_${child.id}`}
                   onClick={() => setOpen?.(false)}
                 >
-                  {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-                  {/* @ts-expect-error */}
-                  <span>{t(`${id}_${child.id}`)}</span>
+                  <span>{title}</span>
                 </Link>
               );
             })}

@@ -1,14 +1,17 @@
 {
   "admin": {
-    "dev_mode": "Development Mode",
-    "title": "Admin Control Panel",
-    "title_short": "Admin",
-    "home_page": "Home Page",
-    "version": "Version: {version}",
-    "search": {
-      "placeholder": "Search...",
-      "no_results": "No results found.",
-      "pages": "Pages"
+    "global": {
+      "dev_mode": "Development Mode",
+      "title": "Admin Control Panel",
+      "title_short": "Admin",
+      "version": "Version: {version}",
+      "diagnostic_tools": "Diagnostic Tools",
+      "home_page": "Home Page",
+      "search": {
+        "placeholder": "Search...",
+        "no_results": "No results found.",
+        "pages": "Pages"
+      }
     },
     "theme_editor": {
       "title": "Theme Editor",
