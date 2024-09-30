@@ -1,6 +1,5 @@
+import { TranslationsProvider } from '@/components/translations-provider';
 import { Metadata } from 'next';
-import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
 import React from 'react';
 
 import { getGlobalData } from '../../graphql/get-global-data';
@@ -52,49 +51,20 @@ export const generateMetadataRootLayout = async ({
   }
 };
 
-function pick(obj: object, paths: string[]) {
-  const result = {};
-  for (const path of paths) {
-    const keys = path.split('.');
-    let src: object | undefined = obj;
-    let dest = result;
-    for (let i = 0; i < keys.length; i++) {
-      const key = keys[i];
-      if (src && Object.prototype.hasOwnProperty.call(src, key)) {
-        if (i === keys.length - 1) {
-          dest[key] = src[key];
-        } else {
-          if (!dest[key]) {
-            dest[key] = {};
-          }
-          dest = dest[key];
-          src = src[key];
-        }
-      } else {
-        break;
-      }
-    }
-  }
-
-  return result;
-}
-
 export const RootLayout = async ({
   children,
   params: { locale },
   className,
 }: Props) => {
-  const messages = await getMessages({ locale });
-
   try {
     const middlewareData = await getGlobalData();
 
     return (
       <WrapperRootLayout className={className} locale={locale}>
         <RootProviders middlewareData={middlewareData}>
-          <NextIntlClientProvider messages={messages}>
+          <TranslationsProvider namespaces={[]}>
             {children}
-          </NextIntlClientProvider>
+          </TranslationsProvider>
         </RootProviders>
       </WrapperRootLayout>
     );
@@ -102,9 +72,9 @@ export const RootLayout = async ({
     return (
       <WrapperRootLayout locale={locale}>
         <RootProviders>
-          <NextIntlClientProvider messages={messages}>
+          <TranslationsProvider namespaces={[]}>
             <InternalErrorView />
-          </NextIntlClientProvider>
+          </TranslationsProvider>
         </RootProviders>
       </WrapperRootLayout>
     );

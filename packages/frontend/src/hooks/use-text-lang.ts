@@ -1,6 +1,7 @@
 import { StringLanguage } from '@/graphql/types';
 import { removeSpecialCharacters } from '@/helpers/special-characters';
 import { useLocale } from 'next-intl';
+import { getLocale } from 'next-intl/server';
 
 const getConvertTextLang = ({
   locale,
@@ -53,7 +54,9 @@ export const useTextLang = () => {
   };
 };
 
-export const getTextLang = ({ locale }: { locale: string }) => {
+export const getTextLang = async () => {
+  const locale = await getLocale();
+
   return {
     convertText: (text?: StringLanguage[]) =>
       getConvertTextLang({ locale, text }),

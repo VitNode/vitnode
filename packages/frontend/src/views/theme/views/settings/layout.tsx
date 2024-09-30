@@ -1,3 +1,4 @@
+import { TranslationsProvider } from '@/components/translations-provider';
 import { Card } from '@/components/ui/card';
 import { HeaderContent } from '@/components/ui/header-content';
 import { getSessionData } from '@/graphql/get-session-data';
@@ -35,17 +36,19 @@ export const LayoutSettingsView = async ({
   }
 
   return (
-    <div className="container my-4">
-      <HeaderContent
-        className="mb-5"
-        desc={t('settings.desc')}
-        h2={t('settings.title')}
-      />
+    <TranslationsProvider namespaces={['core.settings']}>
+      <div className="container my-4">
+        <HeaderContent
+          className="mb-5"
+          desc={t('settings.desc')}
+          h2={t('settings.title')}
+        />
 
-      <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:gap-8">
-        <NavSettings />
-        <Card className="grow">{children}</Card>
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:gap-8">
+          <NavSettings />
+          <Card className="grow">{children}</Card>
+        </div>
       </div>
-    </div>
+    </TranslationsProvider>
   );
 };

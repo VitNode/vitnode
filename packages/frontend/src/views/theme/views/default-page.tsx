@@ -1,3 +1,4 @@
+import { TranslationsProvider } from '@/components/translations-provider';
 import { getSessionData } from '@/graphql/get-session-data';
 import { Metadata } from 'next';
 import React from 'react';
@@ -51,5 +52,11 @@ export const DefaultPage = async ({ pathToDefaultPage, ...rest }: Props) => {
     })),
   );
 
-  return <PageFromTheme {...rest} />;
+  return (
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    <TranslationsProvider namespaces={[`${plugin_default}.home`]}>
+      <PageFromTheme {...rest} />
+    </TranslationsProvider>
+  );
 };

@@ -8,17 +8,23 @@ import { getTranslations } from 'next-intl/server';
 import { getLegalData } from '../legal-view';
 
 interface Props {
-  params: { code: string; locale: string };
+  params: { code: string };
 }
 
 export const generateMetadataItemLegal = async ({
-  params: { locale, code },
+  params: { code },
 }: Props): Promise<Metadata> => {
-  const {
-    core_terms__show: { edges },
-  } = await getLegalData({
-    code,
-  });
+  const [
+    { convertText },
+    {
+      core_terms__show: { edges },
+    },
+  ] = await Promise.all([
+    getTextLang(),
+    getLegalData({
+      code,
+    }),
+  ]);
 
   if (edges.length !== 1) {
     return {};
@@ -26,21 +32,21 @@ export const generateMetadataItemLegal = async ({
 
   const { title } = edges[0];
 
-  const { convertText } = getTextLang({ locale });
-
   return {
     title: convertText(title),
   };
 };
 
-export const ItemLegalView = async ({ params: { locale, code } }: Props) => {
+export const ItemLegalView = async ({ params: { code } }: Props) => {
   const [
     t,
+    { convertText },
     {
       core_terms__show: { edges },
     },
   ] = await Promise.all([
     getTranslations('core.legal'),
+    getTextLang(),
     getLegalData({
       code,
     }),
@@ -50,7 +56,6 @@ export const ItemLegalView = async ({ params: { locale, code } }: Props) => {
     return notFound();
   }
 
-  const { convertText } = getTextLang({ locale });
   const { updated, title, content } = edges[0];
 
   return (

@@ -1,7 +1,8 @@
 import { getSessionAdminData } from '@/graphql/get-session-admin-data';
 import { redirect } from '@/navigation';
 import { Metadata } from 'next';
-import { getTranslations } from 'next-intl/server';
+import { NextIntlClientProvider } from 'next-intl';
+import { getMessages, getTranslations } from 'next-intl/server';
 
 import { AsideAuthAdmin } from './auth/aside/aside';
 import { HeaderAdmin } from './auth/header/header';
@@ -20,20 +21,27 @@ export const generateMetadataAdminLayout = async (): Promise<Metadata> => {
 
 export const AdminLayout = async ({
   children,
+  params: { locale },
 }: {
   children: React.ReactNode;
+  params: { locale: string };
 }) => {
   try {
-    const data = await getSessionAdminData();
+    const [messages, data] = await Promise.all([
+      getMessages({ locale }),
+      getSessionAdminData(),
+    ]);
 
     return (
-      <AdminProviders data={data}>
-        <AsideAuthAdmin />
-        <HeaderAdmin />
-        <main className="text-card-foreground mt-16 px-2 py-6 md:my-0 md:ml-[240px] md:mt-0 md:px-6 lg:px-10 xl:ml-[260px]">
-          <div className="container">{children}</div>
-        </main>
-      </AdminProviders>
+      <NextIntlClientProvider messages={messages}>
+        <AdminProviders data={data}>
+          <AsideAuthAdmin />
+          <HeaderAdmin />
+          <main className="text-card-foreground mt-16 px-2 py-6 md:my-0 md:ml-[240px] md:mt-0 md:px-6 lg:px-10 xl:ml-[260px]">
+            <div className="container">{children}</div>
+          </main>
+        </AdminProviders>
+      </NextIntlClientProvider>
     );
   } catch (err) {
     if (err instanceof Error && err.message === 'ACCESS_DENIED') {
