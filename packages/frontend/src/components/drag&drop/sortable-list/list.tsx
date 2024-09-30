@@ -53,7 +53,7 @@ export function DragAndDropSortableList<
     parentId: null | number | string;
   }) => void;
 }) {
-  const t = useTranslations('core');
+  const t = useTranslations('core.global');
   const [isReadyDocument, setIsReadyDocument] = useState(false);
   const [items, setItems] = useState(data);
   const [activeId, setActiveId] = useState<null | number | string>(null);

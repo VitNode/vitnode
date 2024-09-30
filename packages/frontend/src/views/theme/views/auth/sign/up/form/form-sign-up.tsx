@@ -10,17 +10,13 @@ import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { removeSpecialCharacters } from '@/helpers/special-characters';
 import { useSignUpView } from '@/hooks/core/sign/up/use-sign-up-view';
+import { Link } from '@/navigation';
+import { LogIn } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
-import { SuccessFormSignUp } from './success';
-
 export const FormSignUp = () => {
-  const t = useTranslations('core');
-  const { formSchema, onSubmit, successName } = useSignUpView();
-
-  if (successName) {
-    return <SuccessFormSignUp name={successName} />;
-  }
+  const t = useTranslations('core.sign_up');
+  const { formSchema, onSubmit } = useSignUpView({});
 
   return (
     <AutoForm
@@ -28,14 +24,15 @@ export const FormSignUp = () => {
         {
           id: 'name',
           component: AutoFormInput,
-          description: t('sign_up.form.name.desc'),
+          label: t('name.label'),
+          description: t('name.desc'),
           childComponent: ({ field }) => {
             const value: string = field.value ?? '';
             if (!value.length) return null;
 
             return (
               <span className="text-muted-foreground mt-2 block max-w-md truncate text-sm">
-                {t.rich('sign_up.form.name.your_id', {
+                {t.rich('name.your_id', {
                   id: () => (
                     <span className="text-foreground font-medium">
                       {removeSpecialCharacters(value)}
@@ -45,22 +42,27 @@ export const FormSignUp = () => {
               </span>
             );
           },
+          componentProps: {
+            className: 'bg-card shadow-sm',
+          } as AutoFormInputProps,
         },
         {
           id: 'email',
           component: AutoFormInput,
           componentProps: {
             type: 'email',
+            className: 'bg-card shadow-sm',
           } as AutoFormInputProps,
-          label: t('sign_up.form.email.label'),
+          label: t('email.label'),
         },
         {
           id: 'password',
-          label: t('sign_up.form.password.label'),
-          description: t('sign_up.form.password.desc'),
+          label: t('password.label'),
+          description: t('password.desc'),
           component: AutoFormInput,
           componentProps: {
             type: 'password',
+            className: 'bg-card shadow-sm',
           } as AutoFormInputProps,
           childComponent: ({ field }) => {
             const value: string = field.value ?? '';
@@ -79,10 +81,10 @@ export const FormSignUp = () => {
             if (!value.length) return null;
 
             return (
-              <div className="mt-1">
+              <div className="mt-2">
                 <div className="mb-2 flex justify-between text-xs font-semibold">
-                  <span>{t('week')}</span>
-                  <span>{t('strong')}</span>
+                  <span>{t('week_password')}</span>
+                  <span>{t('strong_password')}</span>
                 </div>
                 <Progress
                   value={(100 / regexArray.length) * passRegexPassword}
@@ -93,14 +95,22 @@ export const FormSignUp = () => {
         },
         {
           id: 'terms',
-          label: t('sign_up.form.terms.label'),
-          description: t('sign_up.form.terms.desc'),
+          label: t('terms.label'),
+          className: 'bg-card',
+          description: t.rich('terms.desc', {
+            link: text => (
+              <Link href="/legal" target="_blank">
+                {text}
+              </Link>
+            ),
+          }),
           component: AutoFormCheckbox,
         },
         {
           id: 'newsletter',
-          label: t('sign_up.form.newsletter.label'),
-          description: t('sign_up.form.newsletter.desc'),
+          className: 'bg-card',
+          label: t('newsletter.label'),
+          description: t('newsletter.desc'),
           component: AutoFormCheckbox,
         },
       ]}
@@ -108,7 +118,8 @@ export const FormSignUp = () => {
       onSubmit={onSubmit}
       submitButton={props => (
         <Button {...props} className="w-full">
-          {t('sign_up.form.submit')}
+          <LogIn />
+          {t('submit')}
         </Button>
       )}
     >

@@ -29,11 +29,11 @@ export class EmailHelpersService {
       contact_email: config.settings.main.contact_email,
       color: {
         primary: {
-          DEFAULT: `[${primaryHSL ? convertColor.hslToHex(primaryHSL) : '#215fdc'}]`,
-          foreground: `[${
+          DEFAULT: `[#${primaryHSL ? convertColor.hslToHex(primaryHSL) : '215fdc'}]`,
+          foreground: `[#${
             primaryForegroundHSL
               ? convertColor.hslToHex(primaryForegroundHSL)
-              : '#131415'
+              : '131415'
           }]`,
         },
         background: '[#f8f9fc]',

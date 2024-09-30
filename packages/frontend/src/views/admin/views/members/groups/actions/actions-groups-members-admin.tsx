@@ -16,7 +16,7 @@ const Content = React.lazy(async () =>
 );
 
 export const ActionsGroupsMembersAdmin = () => {
-  const t = useTranslations('core');
+  const t = useTranslations('core.global');
 
   return (
     <Dialog>

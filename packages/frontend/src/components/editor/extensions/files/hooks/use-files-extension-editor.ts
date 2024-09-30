@@ -1,6 +1,6 @@
 import { FilesAuthorizationCoreSessions } from '@/graphql/types';
 import { formatBytes } from '@/helpers/format-bytes';
-import { useGlobals } from '@/hooks/use-globals';
+import { useGlobalData } from '@/hooks/use-global-data';
 import { useSession } from '@/hooks/use-session';
 import { useSessionAdmin } from '@/hooks/use-session-admin';
 import { useTranslations } from 'next-intl';
@@ -22,11 +22,11 @@ export const useFilesExtensionEditor = ({
     plugin: string;
   };
 }) => {
-  const t = useTranslations('core.editor.files.errors');
-  const tCore = useTranslations('core.errors');
+  const t = useTranslations('core.global.editor.files.errors');
+  const tCore = useTranslations('core.global.errors');
   const session = useSession();
   const adminSession = useSessionAdmin();
-  const { config } = useGlobals();
+  const { config } = useGlobalData();
   const permissionFiles: FilesAuthorizationCoreSessions = {
     allow_upload: session.files.allow_upload || adminSession.files.allow_upload,
     max_storage_for_submit:

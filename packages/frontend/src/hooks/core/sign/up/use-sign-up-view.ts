@@ -1,5 +1,5 @@
+import { useSignUp } from '@/views/theme/views/auth/sign/up/use-sign-up';
 import { useTranslations } from 'next-intl';
-import React from 'react';
 import { UseFormReturn } from 'react-hook-form';
 import { toast } from 'sonner';
 import * as z from 'zod';
@@ -9,28 +9,29 @@ import { mutationApi } from './mutation-api';
 
 export const nameRegex = /^(?!.* {2})[\p{L}\p{N}._@ -]*$/u;
 
-export const useSignUpView = () => {
-  const t = useTranslations('core');
-  const [successName, setSuccessName] = React.useState('');
+export const useSignUpView = ({ installPage }: { installPage?: boolean }) => {
+  const t = useTranslations('core.sign_up');
+  const tCore = useTranslations('core.global');
+  const { setEmailSuccess } = useSignUp();
   const { getTokenFromCaptcha, isReady } = useCaptcha();
 
   const formSchema = z.object({
     name: z
       .string()
       .min(3, {
-        message: t('forms.min_length', { length: 3 }),
+        message: tCore('errors.min_length', { length: 3 }),
       })
       .max(32, {
-        message: t('forms.max_length', { length: 32 }),
+        message: tCore('errors.max_length', { length: 32 }),
       })
       .refine(value => nameRegex.test(value), {
-        message: t('sign_up.form.name.invalid'),
+        message: t('name.invalid'),
       })
       .default(''),
     email: z
       .string()
       .email({
-        message: t('forms.email_invalid'),
+        message: t('email_invalid'),
       })
       .default(''),
     password: z
@@ -39,12 +40,14 @@ export const useSignUpView = () => {
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-_=+{};:,<.>]).{8,}$/,
       )
       .default(''),
-    terms: z
-      .boolean()
-      .refine(value => value, {
-        message: t('sign_up.form.terms.empty'),
-      })
-      .default(false),
+    terms: installPage
+      ? z.boolean().optional()
+      : z
+          .boolean()
+          .refine(value => value, {
+            message: t('terms.empty'),
+          })
+          .default(false),
     newsletter: z.boolean().default(false).optional(),
   });
 
@@ -54,8 +57,8 @@ export const useSignUpView = () => {
   ) => {
     const token = await getTokenFromCaptcha();
     if (!token) {
-      toast.error(t('errors.title'), {
-        description: t('errors.captcha_empty'),
+      toast.error(tCore('errors.title'), {
+        description: tCore('errors.captcha_empty'),
       });
 
       return;
@@ -63,12 +66,17 @@ export const useSignUpView = () => {
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { terms, ...rest } = values;
-    const mutation = await mutationApi({ ...rest, token });
+    const mutation = await mutationApi({
+      ...rest,
+      token,
+      installPage,
+      newsletter: installPage ? true : values.newsletter,
+    });
 
     if (mutation?.error) {
       if (mutation.error === 'CAPTCHA_FAILED') {
-        toast.error(t('errors.title'), {
-          description: t('errors.captcha_failed'),
+        toast.error(tCore('errors.title'), {
+          description: tCore('errors.captcha_failed'),
         });
 
         return;
@@ -79,18 +87,20 @@ export const useSignUpView = () => {
           'email',
           {
             type: 'manual',
-            message: t('sign_up.form.email.already_exists'),
+            message: t('email.already_exists'),
           },
           {
             shouldFocus: true,
           },
         );
+
+        return;
       } else if (mutation.error === 'NAME_ALREADY_EXISTS') {
         form.setError(
           'name',
           {
             type: 'manual',
-            message: t('sign_up.form.name.already_exists'),
+            message: t('name.already_exists'),
           },
           {
             shouldFocus: true,
@@ -100,20 +110,19 @@ export const useSignUpView = () => {
         return;
       }
 
-      toast.error(t('errors.title'), {
-        description: t('errors.internal_server_error'),
+      toast.error(tCore('errors.title'), {
+        description: tCore('errors.internal_server_error'),
       });
 
       return;
     }
 
-    setSuccessName(values.name);
+    setEmailSuccess(values.email);
   };
 
   return {
     formSchema,
     onSubmit,
     isReady,
-    successName,
   };
 };

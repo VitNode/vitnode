@@ -4,7 +4,7 @@ import {
   AutoFormInputProps,
 } from '@/components/form/fields/input';
 import { Button } from '@/components/ui/button';
-import { DialogClose, DialogFooter } from '@/components/ui/dialog';
+import { DialogFooter } from '@/components/ui/dialog';
 import { Progress } from '@/components/ui/progress';
 import { removeSpecialCharacters } from '@/helpers/special-characters';
 import { useTranslations } from 'next-intl';
@@ -13,15 +13,15 @@ import { useCreateUserAdmin } from './hooks/use-create-user-admin';
 
 export const ContentCreateUserUsersMembersAdmin = () => {
   const { formSchema, onSubmit } = useCreateUserAdmin();
-  const t = useTranslations('core');
+  const t = useTranslations('core.sign_up');
 
   return (
     <AutoForm
       fields={[
         {
           id: 'name',
-          label: t('sign_up.form.name.label'),
-          description: t('sign_up.form.name.desc'),
+          label: t('name.label'),
+          description: t('name.desc'),
           component: AutoFormInput,
           childComponent: ({ field }) => {
             const value: string = field.value ?? '';
@@ -29,7 +29,7 @@ export const ContentCreateUserUsersMembersAdmin = () => {
 
             return (
               <span className="text-muted-foreground mt-2 block max-w-md truncate text-sm">
-                {t.rich('sign_up.form.name.your_id', {
+                {t.rich('name.your_id', {
                   id: () => (
                     <span className="text-foreground font-medium">
                       {removeSpecialCharacters(value)}
@@ -46,12 +46,12 @@ export const ContentCreateUserUsersMembersAdmin = () => {
           componentProps: {
             type: 'email',
           } as AutoFormInputProps,
-          label: t('sign_up.form.email.label'),
+          label: t('email.label'),
         },
         {
           id: 'password',
-          label: t('sign_up.form.password.label'),
-          description: t('sign_up.form.password.desc'),
+          label: t('password.label'),
+          description: t('password.desc'),
           component: AutoFormInput,
           componentProps: {
             type: 'password',
@@ -73,10 +73,10 @@ export const ContentCreateUserUsersMembersAdmin = () => {
             if (!value.length) return null;
 
             return (
-              <div className="mt-1">
+              <div className="mt-2">
                 <div className="mb-2 flex justify-between text-xs font-semibold">
-                  <span>{t('week')}</span>
-                  <span>{t('strong')}</span>
+                  <span>{t('week_password')}</span>
+                  <span>{t('strong_password')}</span>
                 </div>
                 <Progress
                   value={(100 / regexArray.length) * passRegexPassword}
@@ -90,10 +90,7 @@ export const ContentCreateUserUsersMembersAdmin = () => {
       onSubmit={onSubmit}
       submitButton={props => (
         <DialogFooter>
-          <DialogClose asChild>
-            <Button variant="ghost">{t('cancel')}</Button>
-          </DialogClose>
-          <Button {...props}>{t('sign_up.form.submit')}</Button>
+          <Button {...props}>{t('submit')}</Button>
         </DialogFooter>
       )}
     />

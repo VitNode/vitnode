@@ -15,7 +15,7 @@ import { useRouter } from '../../../navigation';
 import { mutationClearCache } from './mutation-clear-cache';
 
 export const InternalErrorView = () => {
-  const t = useTranslations('core');
+  const t = useTranslations('core.global');
   const { back } = useRouter();
 
   return (
@@ -54,8 +54,8 @@ export const InternalErrorView = () => {
             <RefreshCcw />
             {t(
               CONFIG.node_development
-                ? 'clear_cache_and_reload'
-                : 'reload_page',
+                ? 'errors.clear_cache_and_reload'
+                : 'errors.reload_page',
             )}
           </Button>
         </CardFooter>

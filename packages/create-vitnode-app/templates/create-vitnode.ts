@@ -71,7 +71,7 @@ export const createVitNode = async ({
 
   // Change tailwind.config.ts based on package manager
   spinner.text = 'Changing tailwind.config.ts...';
-  if (packageManager.startsWith('pnpm')) {
+  if (packageManager.startsWith('npm')) {
     const tailwindConfigPath = join(
       root,
       'apps',
@@ -81,12 +81,12 @@ export const createVitNode = async ({
     const tailwindConfig = readFileSync(tailwindConfigPath, 'utf-8');
     const newTailwindConfig = tailwindConfig
       .replace(
-        '../../node_modules/vitnode-frontend/src/components/**/*.tsx',
         './node_modules/vitnode-frontend/src/components/**/*.tsx',
+        '../../node_modules/vitnode-frontend/src/components/**/*.tsx',
       )
       .replace(
-        '../../node_modules/vitnode-frontend/src/views/**/*.tsx',
         './node_modules/vitnode-frontend/src/views/**/*.tsx',
+        '../../node_modules/vitnode-frontend/src/views/**/*.tsx',
       );
 
     writeFileSync(tailwindConfigPath, newTailwindConfig);

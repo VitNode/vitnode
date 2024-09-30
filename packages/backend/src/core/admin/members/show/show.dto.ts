@@ -60,6 +60,9 @@ export class ShowAdminMembers extends ShowCoreMembers {
   email: string;
 
   @Field(() => Boolean)
+  email_verified: boolean;
+
+  @Field(() => Boolean)
   newsletter: boolean;
 }
 

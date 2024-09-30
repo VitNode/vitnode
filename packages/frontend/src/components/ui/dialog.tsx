@@ -76,7 +76,7 @@ const DialogContent = ({
   children,
   ...props
 }: React.ComponentProps<typeof DialogPrimitive.Content>) => {
-  const t = useTranslations('core');
+  const t = useTranslations('core.global');
   const { isDirty, setOpen } = useDialog();
 
   const handleBeforeUnload = (

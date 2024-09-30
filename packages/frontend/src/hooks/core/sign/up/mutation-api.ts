@@ -8,11 +8,12 @@ import {
 } from '@/graphql/mutations/sessions/core_Sessions__sign_up.generated';
 import { revalidatePath } from 'next/cache';
 
-interface Args extends Core_Sessions__Sign_UpMutationVariables {
-  token: string;
-}
-
-export const mutationApi = async (variables: Args) => {
+export const mutationApi = async (
+  variables: {
+    installPage?: boolean;
+    token: string;
+  } & Core_Sessions__Sign_UpMutationVariables,
+) => {
   try {
     await fetcher<
       Core_Sessions__Sign_UpMutation,
@@ -24,11 +25,13 @@ export const mutationApi = async (variables: Args) => {
         'x-vitnode-captcha-token': variables.token,
       },
     });
+
+    if (variables.installPage) {
+      revalidatePath('/', 'layout');
+    }
   } catch (error) {
     const e = error as Error;
 
     return { error: e.message };
   }
-
-  revalidatePath('/[locale]/(main)', 'page');
 };

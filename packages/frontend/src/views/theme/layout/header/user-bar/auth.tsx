@@ -19,7 +19,7 @@ import { KeyRound, LogOut, Settings, User } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 export const AuthUserBar = ({ className }: { className?: string }) => {
-  const t = useTranslations('core');
+  const t = useTranslations('core.global.user-bar');
   const { session } = useSession();
   const { onSubmit } = useSignOutApi();
 
@@ -54,13 +54,13 @@ export const AuthUserBar = ({ className }: { className?: string }) => {
           <DropdownMenuItem asChild>
             <Link href={`/profile/${name_seo}`}>
               <User />
-              <span>{t('user-bar.my_profile')}</span>
+              <span>{t('my_profile')}</span>
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
-            <Link href="/settings/overview">
+            <Link href="/settings">
               <Settings />
-              <span>{t('user-bar.settings')}</span>
+              <span>{t('settings')}</span>
             </Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
@@ -74,7 +74,7 @@ export const AuthUserBar = ({ className }: { className?: string }) => {
                 <DropdownMenuItem asChild>
                   <Link href="/admin" target="_blank">
                     <KeyRound />
-                    <span>{t('user-bar.admin_cp')}</span>
+                    <span>{t('admin_cp')}</span>
                   </Link>
                 </DropdownMenuItem>
               )}
@@ -87,7 +87,7 @@ export const AuthUserBar = ({ className }: { className?: string }) => {
         <DropdownMenuGroup>
           <DropdownMenuItem onClick={onSubmit}>
             <LogOut />
-            <span>{t('user-bar.log_out')}</span>
+            <span>{t('log_out')}</span>
           </DropdownMenuItem>
         </DropdownMenuGroup>
       </DropdownMenuContent>

@@ -5,7 +5,7 @@ import React from 'react';
 
 import { MailService } from '../mail.service';
 
-interface Args extends Pick<EmailTemplateProps, 'preview_text' | 'user'> {
+interface Args extends Pick<EmailTemplateProps, 'previewText' | 'user'> {
   message: React.JSX.Element | string;
   subject: string;
   to: string;
@@ -23,14 +23,14 @@ export class SendAdminEmailService {
     to,
     subject,
     message,
-    preview_text,
+    previewText,
     user,
   }: Args): Promise<string> {
     await this.mailService.sendMail({
       to,
       subject,
       template: this.emailHelpersService.template({
-        preview_text,
+        previewText,
         children: message,
         user,
       }),

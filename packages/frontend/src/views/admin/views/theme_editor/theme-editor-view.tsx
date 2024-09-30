@@ -1,5 +1,6 @@
+import { TranslationsProvider } from '@/components/translations-provider';
 import { fetcher } from '@/graphql/fetcher';
-import { getSessionAdminData } from '@/graphql/get-session-admin';
+import { getSessionAdminData } from '@/graphql/get-session-admin-data';
 import {
   Core_Theme_Editor__Show,
   Core_Theme_Editor__ShowQuery,
@@ -17,6 +18,7 @@ const getData = async () => {
     Core_Theme_Editor__ShowQueryVariables
   >({
     query: Core_Theme_Editor__Show,
+    cache: 'force-cache',
   });
 
   return data;
@@ -41,7 +43,11 @@ export const ThemeEditorView = async () => {
       redirect('/admin');
     }
 
-    return <ContentThemeEditor {...data} />;
+    return (
+      <TranslationsProvider namespaces={['admin.theme_editor', 'admin.global']}>
+        <ContentThemeEditor {...data} />
+      </TranslationsProvider>
+    );
   } catch (err) {
     if (err instanceof Error && err.message === 'ACCESS_DENIED') {
       redirect('/admin');

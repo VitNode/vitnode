@@ -1,3 +1,4 @@
+import { TranslationsProvider } from '@/components/translations-provider';
 import { HeaderContent } from '@/components/ui/header-content';
 import { fetcher } from '@/graphql/fetcher';
 import {
@@ -25,6 +26,7 @@ const getData = async (
   >({
     query: Admin__Core_Languages__Show,
     variables,
+    cache: 'force-cache',
   });
 
   return data;
@@ -60,12 +62,12 @@ export const LangsCoreAdminView = async ({
   ]);
 
   return (
-    <>
+    <TranslationsProvider namespaces={['admin.core.langs']}>
       <HeaderContent h1={t('title')}>
         <ActionsLangsAdmin />
       </HeaderContent>
 
       <ContentLangsCoreAdminView {...data} />
-    </>
+    </TranslationsProvider>
   );
 };

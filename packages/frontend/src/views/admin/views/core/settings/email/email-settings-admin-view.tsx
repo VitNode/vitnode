@@ -19,6 +19,7 @@ const getData = async () => {
     Admin__Core_Email_Settings__ShowQueryVariables
   >({
     query: Admin__Core_Email_Settings__Show,
+    cache: 'force-cache',
   });
 
   return data;

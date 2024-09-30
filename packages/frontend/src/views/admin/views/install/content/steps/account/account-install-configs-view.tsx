@@ -1,7 +1,6 @@
 'use client';
 
 import { AutoForm } from '@/components/form/auto-form';
-import { AutoFormCheckbox } from '@/components/form/fields/checkbox';
 import {
   AutoFormInput,
   AutoFormInputProps,
@@ -15,8 +14,8 @@ import { useTranslations } from 'next-intl';
 import { useInstallVitnode } from '../../hooks/use-install-vitnode';
 
 export const AccountInstallConfigsView = () => {
-  const t = useTranslations('core');
-  const { onSubmit, formSchema } = useSignUpView();
+  const t = useTranslations('core.sign_up');
+  const { onSubmit, formSchema } = useSignUpView({ installPage: true });
   const { setCurrentStep } = useInstallVitnode();
 
   return (
@@ -25,8 +24,8 @@ export const AccountInstallConfigsView = () => {
       fields={[
         {
           id: 'name',
-          label: t('sign_up.form.name.label'),
-          description: t('sign_up.form.name.desc'),
+          label: t('name.label'),
+          description: t('name.desc'),
           component: AutoFormInput,
           childComponent: ({ field }) => {
             const value: string = field.value ?? '';
@@ -34,7 +33,7 @@ export const AccountInstallConfigsView = () => {
 
             return (
               <span className="text-muted-foreground mt-2 block max-w-md truncate text-sm">
-                {t.rich('sign_up.form.name.your_id', {
+                {t.rich('name.your_id', {
                   id: () => (
                     <span className="text-foreground font-medium">
                       {removeSpecialCharacters(value)}
@@ -51,12 +50,12 @@ export const AccountInstallConfigsView = () => {
           componentProps: {
             type: 'email',
           } as AutoFormInputProps,
-          label: t('sign_up.form.email.label'),
+          label: t('email.label'),
         },
         {
           id: 'password',
-          label: t('sign_up.form.password.label'),
-          description: t('sign_up.form.password.desc'),
+          label: t('password.label'),
+          description: t('password.desc'),
           component: AutoFormInput,
           componentProps: {
             type: 'password',
@@ -78,10 +77,10 @@ export const AccountInstallConfigsView = () => {
             if (!value.length) return null;
 
             return (
-              <div className="mt-1">
+              <div className="mt-2">
                 <div className="mb-2 flex justify-between text-xs font-semibold">
-                  <span>{t('week')}</span>
-                  <span>{t('strong')}</span>
+                  <span>{t('week_password')}</span>
+                  <span>{t('strong_password')}</span>
                 </div>
                 <Progress
                   value={(100 / regexArray.length) * passRegexPassword}
@@ -89,18 +88,6 @@ export const AccountInstallConfigsView = () => {
               </div>
             );
           },
-        },
-        {
-          id: 'terms',
-          label: t('sign_up.form.terms.label'),
-          description: t('sign_up.form.terms.desc'),
-          component: AutoFormCheckbox,
-        },
-        {
-          id: 'newsletter',
-          label: t('sign_up.form.newsletter.label'),
-          description: t('sign_up.form.newsletter.desc'),
-          component: AutoFormCheckbox,
         },
       ]}
       formSchema={formSchema}
@@ -110,7 +97,7 @@ export const AccountInstallConfigsView = () => {
       }}
       submitButton={props => (
         <Button {...props} className="w-full">
-          {t('sign_up.form.submit')}
+          {t('submit')}
         </Button>
       )}
     >

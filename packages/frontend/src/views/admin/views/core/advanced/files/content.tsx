@@ -23,7 +23,6 @@ export const ContentFilesAdvancedCoreAdminView = ({
   admin__core_files__show: { edges, pageInfo },
 }: Admin__Core_Files__ShowQuery) => {
   const t = useTranslations('core.settings.files');
-  const tCore = useTranslations('core');
 
   return (
     <DataTable
@@ -56,7 +55,7 @@ export const ContentFilesAdvancedCoreAdminView = ({
         },
         {
           id: 'file_name',
-          title: tCore('table.name'),
+          title: t('name'),
           cell: ({ row }) => {
             return (
               <div>
@@ -81,7 +80,7 @@ export const ContentFilesAdvancedCoreAdminView = ({
         {
           id: 'created',
           sortable: true,
-          title: tCore('table.created'),
+          title: t('created'),
           cell: ({ row }) => {
             return <DateFormat date={row.created} />;
           },

@@ -16,7 +16,7 @@ export const classNameDrawerQuickMenu =
   'w-full justify-start [&>svg]:text-muted-foreground font-normal';
 
 export const DrawerQuickMenu = () => {
-  const t = useTranslations('core');
+  const t = useTranslations('core.global.user-bar');
   const { onSubmit } = useSignOutApi();
   const { session } = useSession();
 
@@ -37,7 +37,7 @@ export const DrawerQuickMenu = () => {
               href={`/profile/${session.name_seo}`}
             >
               <User />
-              <span>{t('user-bar.my_profile')}</span>
+              <span>{t('my_profile')}</span>
             </Link>
           </DrawerClose>
 
@@ -49,10 +49,10 @@ export const DrawerQuickMenu = () => {
                   className: classNameDrawerQuickMenu,
                 }),
               )}
-              href="/settings/overview"
+              href="/settings"
             >
               <Settings />
-              <span>{t('user-bar.settings')}</span>
+              <span>{t('settings')}</span>
             </Link>
           </DrawerClose>
 
@@ -72,7 +72,7 @@ export const DrawerQuickMenu = () => {
                 variant="ghost"
               >
                 <KeyRound />
-                <span>{t('user-bar.admin_cp')}</span>
+                <span>{t('admin_cp')}</span>
               </Button>
             </DrawerClose>
           )}
@@ -87,7 +87,7 @@ export const DrawerQuickMenu = () => {
               onClick={onSubmit}
               variant="ghost"
             >
-              <LogOut /> <span>{t('user-bar.log_out')}</span>
+              <LogOut /> <span>{t('log_out')}</span>
             </Button>
           </DrawerClose>
         </div>

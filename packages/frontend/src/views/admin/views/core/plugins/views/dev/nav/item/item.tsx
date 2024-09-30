@@ -21,7 +21,6 @@ export const ItemContentNavDevPluginAdmin = ({
   // @ts-expect-error
   const t = useTranslations(`admin_${pluginCode}.nav`);
   const tAdmin = useTranslations('admin.core.plugins.dev.nav');
-  const tCore = useTranslations('core');
   const langKey = parentId ? `${parentId}_${data.code}` : data.code;
 
   return (
@@ -41,7 +40,7 @@ export const ItemContentNavDevPluginAdmin = ({
           })}
         </p>
         <p className="text-muted-foreground text-sm">
-          {tCore.rich('link_url_with_link', {
+          {tAdmin.rich('link_url_with_link', {
             link: () => (
               <span className="text-foreground">{`/admin/${pluginCode}/${parentId ? `${parentId}/` : ''}${data.code}`}</span>
             ),

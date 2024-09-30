@@ -24,26 +24,27 @@ export const EditActionUserMembersAdmin = ({
   'email' | 'id' | 'name' | 'newsletter'
 >) => {
   const t = useTranslations('admin.members.users.item.edit');
-  const tCore = useTranslations('core');
+  const tSignUp = useTranslations('core.sign_up');
+  const tCore = useTranslations('core.global.errors');
   const { setOpen } = useDialog();
 
   const formSchema = z.object({
     name: z
       .string()
       .min(3, {
-        message: tCore('forms.min_length', { length: 3 }),
+        message: tCore('min_length', { length: 3 }),
       })
       .max(32, {
-        message: tCore('forms.max_length', { length: 32 }),
+        message: tCore('max_length', { length: 32 }),
       })
       .refine(value => nameRegex.test(value), {
-        message: tCore('sign_up.form.name.invalid'),
+        message: tSignUp('name.invalid'),
       })
       .default(name),
     email: z
       .string()
       .email({
-        message: tCore('forms.email_invalid'),
+        message: tSignUp('email_invalid'),
       })
       .default(email),
     newsletter: z.boolean().default(newsletter).optional(),
@@ -62,14 +63,14 @@ export const EditActionUserMembersAdmin = ({
     if (mutation?.error) {
       if (mutation.error === 'EMAIL_ALREADY_EXISTS') {
         form.setError('email', {
-          message: tCore('sign_up.form.email.already_exists'),
+          message: tSignUp('email.already_exists'),
         });
 
         return;
       }
 
-      toast.error(tCore('errors.title'), {
-        description: tCore('errors.internal_server_error'),
+      toast.error(tCore('title'), {
+        description: tCore('internal_server_error'),
       });
 
       return;
@@ -87,7 +88,7 @@ export const EditActionUserMembersAdmin = ({
         {
           id: 'name',
           component: AutoFormInput,
-          description: tCore('sign_up.form.name.desc'),
+          description: tSignUp('name.desc'),
         },
         {
           id: 'email',
@@ -95,12 +96,12 @@ export const EditActionUserMembersAdmin = ({
           componentProps: {
             type: 'email',
           } as AutoFormInputProps,
-          label: tCore('sign_up.form.email.label'),
+          label: tSignUp('email.label'),
         },
         {
           id: 'newsletter',
-          label: tCore('sign_up.form.newsletter.label'),
-          description: tCore('sign_up.form.newsletter.desc'),
+          label: tSignUp('newsletter.label'),
+          description: tSignUp('newsletter.desc'),
           component: AutoFormCheckbox,
         },
       ]}

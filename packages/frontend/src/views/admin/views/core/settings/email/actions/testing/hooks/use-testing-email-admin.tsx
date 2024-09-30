@@ -8,7 +8,7 @@ import { mutationApi } from './mutation-api';
 
 export const useTestingEmailAdmin = () => {
   const t = useTranslations('admin.core.settings.email.test');
-  const tCore = useTranslations('core');
+  const tCore = useTranslations('core.global.errors');
   const { setOpen } = useDialog();
   const { session } = useSessionAdmin();
   const formSchema = z.object({
@@ -29,8 +29,8 @@ export const useTestingEmailAdmin = () => {
     });
 
     if (mutation?.error) {
-      toast.error(tCore('errors.title'), {
-        description: tCore('errors.internal_server_error'),
+      toast.error(tCore('title'), {
+        description: tCore('internal_server_error'),
       });
 
       return;

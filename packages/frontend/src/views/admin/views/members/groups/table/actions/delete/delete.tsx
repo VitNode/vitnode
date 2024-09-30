@@ -25,7 +25,7 @@ const Content = React.lazy(async () =>
 export const DeleteGroupsMembersDialogAdmin = (
   props: Pick<ShowAdminGroups, 'id' | 'name' | 'protected'>,
 ) => {
-  const t = useTranslations('core');
+  const t = useTranslations('core.global');
 
   if (props.protected) return null;
 

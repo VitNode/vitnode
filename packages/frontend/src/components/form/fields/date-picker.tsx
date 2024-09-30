@@ -25,6 +25,7 @@ export function AutoFormDatePicker<T extends FieldValues>({
   componentProps,
   className,
   childComponent: ChildComponent,
+  hideOptionalLabel,
 }: {
   componentProps?: AutoFormDatePickerProps;
 } & AutoFormItemProps<T>) {
@@ -33,6 +34,7 @@ export function AutoFormDatePicker<T extends FieldValues>({
       {label && (
         <AutoFormLabel
           description={description}
+          hideOptionalLabel={hideOptionalLabel}
           isRequired={isRequired}
           label={label}
           theme={theme}

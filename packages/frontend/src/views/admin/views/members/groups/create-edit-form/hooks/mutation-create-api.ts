@@ -19,11 +19,10 @@ export const mutationCreateApi = async (
       query: Admin__Core_Groups__Create,
       variables,
     });
+    revalidatePath('/[locale]/admin/(vitnode)/members/groups', 'page');
   } catch (error) {
     const e = error as Error;
 
     return { error: e.message };
   }
-
-  revalidatePath('/admin/members/groups', 'page');
 };

@@ -1,7 +1,7 @@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { HeaderContent } from '@/components/ui/header-content';
-import { getSessionAdminData } from '@/graphql/get-session-admin';
+import { getSessionAdminData } from '@/graphql/get-session-admin-data';
 import { CONFIG } from '@/helpers/config-with-env';
 import { Link } from '@/navigation';
 import { AlertTriangle, HammerIcon } from 'lucide-react';
@@ -15,7 +15,10 @@ export const DashboardCoreAdminView = async () => {
       admin__sessions__authorization: { version },
     },
     t,
-  ] = await Promise.all([getSessionAdminData(), getTranslations('admin')]);
+  ] = await Promise.all([
+    getSessionAdminData(),
+    getTranslations('admin.global'),
+  ]);
 
   return (
     <>
@@ -38,7 +41,7 @@ export const DashboardCoreAdminView = async () => {
         <Button asChild>
           <Link href="/admin/core/diagnostic">
             <HammerIcon />
-            {t('core.diagnostic.title')}
+            {t('diagnostic_tools')}
           </Link>
         </Button>
       </HeaderContent>

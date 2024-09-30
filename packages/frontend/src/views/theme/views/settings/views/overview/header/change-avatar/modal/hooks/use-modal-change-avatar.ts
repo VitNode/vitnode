@@ -13,7 +13,8 @@ interface FormType {
 
 export const useModalChangeAvatar = () => {
   const [isPending, setPending] = React.useState(false);
-  const t = useTranslations('core');
+  const t = useTranslations('core.settings.change_avatar.options.delete');
+  const tGlobal = useTranslations('core.global.errors');
   const { setOpen } = useDialog();
 
   const form = useForm<FormType>({
@@ -29,8 +30,8 @@ export const useModalChangeAvatar = () => {
       setPending(true);
       const mutation = await mutationApi();
       if (mutation?.error) {
-        toast.error(t('errors.title'), {
-          description: t('settings.change_avatar.options.delete.error'),
+        toast.error(tGlobal('title'), {
+          description: t('error'),
         });
         setPending(false);
 
@@ -39,8 +40,8 @@ export const useModalChangeAvatar = () => {
 
       setPending(false);
       setOpen?.(false);
-      toast.success(t('settings.change_avatar.options.delete.title'), {
-        description: t('settings.change_avatar.options.delete.success'),
+      toast.success(t('title'), {
+        description: t('success'),
       });
     }
   };

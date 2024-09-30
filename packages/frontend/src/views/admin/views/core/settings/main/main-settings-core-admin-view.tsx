@@ -1,3 +1,4 @@
+import { TranslationsProvider } from '@/components/translations-provider';
 import { Card } from '@/components/ui/card';
 import { HeaderContent } from '@/components/ui/header-content';
 import { fetcher } from '@/graphql/fetcher';
@@ -17,6 +18,7 @@ const getData = async () => {
     Core_Main_Settings__ShowQueryVariables
   >({
     query: Core_Main_Settings__Show,
+    cache: 'force-cache',
   });
 
   return data;
@@ -38,12 +40,12 @@ export const MainSettingsCoreAdminView = async () => {
   ]);
 
   return (
-    <>
+    <TranslationsProvider namespaces="admin.core.settings.main">
       <HeaderContent desc={t('desc')} h1={t('title')} />
 
       <Card className="p-6">
         <ContentMainSettingsCoreAdmin {...data} />
       </Card>
-    </>
+    </TranslationsProvider>
   );
 };

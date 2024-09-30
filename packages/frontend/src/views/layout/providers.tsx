@@ -7,7 +7,7 @@ import NextTopLoader from 'nextjs-toploader';
 import React from 'react';
 
 import { Toaster } from '../../components/ui/sonner';
-import { GlobalsContext } from '../../hooks/use-globals';
+import { GlobalsContext } from '../../hooks/use-global-data';
 
 export const RootProviders = ({
   children,

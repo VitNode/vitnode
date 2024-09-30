@@ -10,7 +10,7 @@ import { mutationApi } from './mutation-api';
 
 export const useUploadPluginAdmin = ({ data }: UploadPluginAdminProps) => {
   const t = useTranslations('admin.core.plugins.upload');
-  const tCore = useTranslations('core');
+  const tCore = useTranslations('core.global.errors');
   const { setOpen } = useDialog();
   const formSchema = z.object({
     file: zodFile,
@@ -43,8 +43,8 @@ export const useUploadPluginAdmin = ({ data }: UploadPluginAdminProps) => {
         return;
       }
 
-      toast.error(tCore('errors.title'), {
-        description: tCore('errors.internal_server_error'),
+      toast.error(tCore('title'), {
+        description: tCore('internal_server_error'),
       });
 
       return;

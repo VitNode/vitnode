@@ -15,7 +15,7 @@ interface Args {
 
 export const useCreateEditLangAdmin = ({ data }: Args) => {
   const t = useTranslations('admin.core.langs.actions');
-  const tCore = useTranslations('core');
+  const tCore = useTranslations('core.global.errors');
   const { setOpen } = useDialog();
 
   const formSchema = z.object({
@@ -74,8 +74,8 @@ export const useCreateEditLangAdmin = ({ data }: Args) => {
     }
 
     if (isError) {
-      toast.error(tCore('errors.title'), {
-        description: tCore('errors.internal_server_error'),
+      toast.error(tCore('title'), {
+        description: tCore('internal_server_error'),
       });
 
       return;

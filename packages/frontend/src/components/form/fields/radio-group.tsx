@@ -39,6 +39,7 @@ export function AutoFormRadioGroup<T extends FieldValues>({
   componentProps,
   className,
   childComponent: ChildComponent,
+  hideOptionalLabel,
 }: {
   componentProps?: AutoFormRadioGroupProps;
 } & AutoFormItemProps<T>) {
@@ -65,6 +66,7 @@ export function AutoFormRadioGroup<T extends FieldValues>({
       {label && (
         <AutoFormLabel
           description={description}
+          hideOptionalLabel={hideOptionalLabel}
           isRequired={isRequired}
           label={label}
           theme={theme}

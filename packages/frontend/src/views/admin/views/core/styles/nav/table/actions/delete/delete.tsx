@@ -20,7 +20,7 @@ import { ContentDeleteActionTableNavAdmin } from './content';
 export const DeleteActionTableNavAdmin = (
   props: Pick<ShowCoreNav, 'children' | 'id' | 'name'>,
 ) => {
-  const t = useTranslations('core');
+  const t = useTranslations('core.global');
 
   return (
     <AlertDialog>

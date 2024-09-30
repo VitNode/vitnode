@@ -10,7 +10,6 @@ import { getUsersShortApi } from '@/graphql/get-users-short-api';
 import { cn } from '@/helpers/classnames';
 import { useQuery } from '@tanstack/react-query';
 import { Search } from 'lucide-react';
-import { useTranslations } from 'next-intl';
 import React from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 
@@ -20,7 +19,6 @@ export const UserInputContent = (props: {
   onSelect: (value: UserInputItem) => void;
   values: UserInputItem[];
 }) => {
-  const t = useTranslations('core');
   const [search, setSearch] = React.useState('');
 
   const { data, isLoading } = useQuery({
@@ -49,7 +47,8 @@ export const UserInputContent = (props: {
             commandInputClassName,
           )}
           onChange={e => handleSearchInput(e.target.value)}
-          placeholder={t('user_input.search')}
+          // TODO: Add placeholder translation
+          placeholder={'Search users...'}
         />
       </div>
 

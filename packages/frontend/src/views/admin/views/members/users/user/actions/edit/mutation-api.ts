@@ -6,7 +6,7 @@ import {
   Admin__Core_Members__EditMutation,
   Admin__Core_Members__EditMutationVariables,
 } from '@/graphql/mutations/admin/members/users/user/admin__core_members__edit.generated';
-import { revalidatePath } from 'next/cache';
+import { revalidateTags } from '@/graphql/revalidate-tags';
 
 export const mutationApi = async (
   variables: Admin__Core_Members__EditMutationVariables,
@@ -20,7 +20,8 @@ export const mutationApi = async (
       variables,
     });
 
-    revalidatePath('/', 'layout');
+    revalidateTags.session(variables.id);
+    revalidateTags.sessionAdmin(variables.id);
   } catch (error) {
     const e = error as Error;
 

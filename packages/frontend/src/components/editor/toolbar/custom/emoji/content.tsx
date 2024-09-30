@@ -12,7 +12,7 @@ export const ContentEmojiToolbarEditor = ({
 }: {
   setIsOpen?: (open: boolean) => void;
 }) => {
-  const t = useTranslations('core.icon_picker');
+  const t = useTranslations('core.global.icon_picker');
   const { editor } = useEditorState();
   const [search, setSearch] = React.useState('');
   const localStorageSkinToneIndex = localStorage.getItem(

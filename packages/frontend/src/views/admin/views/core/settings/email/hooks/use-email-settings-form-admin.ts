@@ -12,8 +12,7 @@ import { mutationApi } from './mutation-api';
 export const useEmailSettingsFormAdmin = ({
   admin__core_email_settings__show: data,
 }: Admin__Core_Email_Settings__ShowQuery) => {
-  const t = useTranslations('core');
-
+  const t = useTranslations('core.global');
   const formSchema = z.object({
     color_primary: z.string().default(data.color_primary),
     logo: zodFile.default(data.logo ?? zodFileDefaultObject).optional(),

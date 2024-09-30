@@ -49,7 +49,7 @@ export class CreateKeyResetPasswordCoreMembersService {
         helpers: this.emailHelpersService.getHelpersForEmail(),
         key: '',
       }),
-      preview_text: t('preview_text'),
+      previewText: t('preview_text'),
       user,
     });
 

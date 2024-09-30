@@ -18,7 +18,7 @@ const Content = React.lazy(async () =>
 export const DeleteActionsTableLangsCoreAdmin = (
   props: React.ComponentProps<typeof Content>,
 ) => {
-  const t = useTranslations('core');
+  const t = useTranslations('core.global');
 
   return (
     <AlertDialog>

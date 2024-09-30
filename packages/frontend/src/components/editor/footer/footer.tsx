@@ -1,4 +1,4 @@
-import { useGlobals } from '../../../hooks/use-globals';
+import { useGlobalData } from '../../../hooks/use-global-data';
 import { FileStateEditor } from '../extensions/files/files';
 import { useEditorState } from '../hooks/use-editor-state';
 import { FilesButtonFooterEditor } from './files/button';
@@ -19,7 +19,7 @@ export const FooterEditor = ({
 }: Props) => {
   const { allowUploadFiles, editor } = useEditorState();
   const files: FileStateEditor[] = editor.storage.files.files;
-  const { config } = useGlobals();
+  const { config } = useGlobalData();
 
   if (!disableLanguages && !allowUploadFiles) {
     return null;

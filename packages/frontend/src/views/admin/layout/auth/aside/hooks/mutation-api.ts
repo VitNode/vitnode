@@ -1,13 +1,14 @@
 'use server';
 
 import { fetcher } from '@/graphql/fetcher';
+import { getAdminIdCookie } from '@/graphql/get-user-id-cookie';
 import {
   Admin_Sessions__Sign_Out,
   Admin_Sessions__Sign_OutMutation,
   Admin_Sessions__Sign_OutMutationVariables,
 } from '@/graphql/mutations/admin/sessions/admin_sessions__sign_out.generated';
+import { revalidateTags } from '@/graphql/revalidate-tags';
 import { redirect } from '@/navigation';
-import { revalidatePath } from 'next/cache';
 
 export const mutationApi = async () => {
   try {
@@ -17,12 +18,16 @@ export const mutationApi = async () => {
     >({
       query: Admin_Sessions__Sign_Out,
     });
+
+    const adminIdFromCookie = getAdminIdCookie();
+    if (adminIdFromCookie) {
+      revalidateTags.sessionAdmin(+adminIdFromCookie);
+    }
   } catch (error) {
     const e = error as Error;
 
     return { error: e.message };
   }
 
-  revalidatePath('/admin', 'layout');
   redirect('/admin');
 };

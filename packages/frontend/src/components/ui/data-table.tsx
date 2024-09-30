@@ -46,7 +46,7 @@ export function DataTable<T extends TMin>({
   pageInfo,
   defaultPageSize = 10,
 }: DataTableProps<T>) {
-  const t = useTranslations('core');
+  const t = useTranslations('core.global');
   const [isPending, startTransition] = React.useTransition();
 
   return (

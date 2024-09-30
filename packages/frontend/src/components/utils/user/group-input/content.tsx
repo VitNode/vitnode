@@ -10,7 +10,6 @@ import { getGroupsShortApi } from '@/graphql/get-groups-short-api';
 import { cn } from '@/helpers/classnames';
 import { useQuery } from '@tanstack/react-query';
 import { Search } from 'lucide-react';
-import { useTranslations } from 'next-intl';
 import React from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 
@@ -23,7 +22,6 @@ export const GroupInputContent = ({
   onSelect: (value: GroupInputItem) => void;
   values: GroupInputItem[];
 }) => {
-  const t = useTranslations('core');
   const [search, setSearch] = React.useState('');
 
   const { data, isLoading } = useQuery({
@@ -49,7 +47,8 @@ export const GroupInputContent = ({
             commandInputClassName,
           )}
           onChange={e => handleSearchInput(e.target.value)}
-          placeholder={t('group_input.search')}
+          // TODO: Add placeholder translation
+          placeholder={'Search group...'}
         />
       </div>
 

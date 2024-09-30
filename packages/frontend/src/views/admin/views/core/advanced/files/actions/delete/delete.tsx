@@ -22,7 +22,7 @@ import {
 export const DeleteActionFilesAdvancedCoreAdmin = (
   props: ContentDeleteActionFilesAdvancedCoreAdminProps,
 ) => {
-  const t = useTranslations('core');
+  const t = useTranslations('core.global');
 
   return (
     <AlertDialog>

@@ -9,7 +9,7 @@ import { mutationApi } from './mutation-api';
 export const useCaptchaSecurityAdmin = ({
   admin__core_security__captcha__show: data,
 }: Admin__Core_Security__Captcha__ShowQuery) => {
-  const t = useTranslations('core');
+  const t = useTranslations('core.global');
   const formSchema = z
     .object({
       type: z

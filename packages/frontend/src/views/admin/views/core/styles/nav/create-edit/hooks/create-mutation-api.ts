@@ -19,11 +19,10 @@ export const createMutationApi = async (
       query: Admin__Core_Styles__Nav__Create,
       variables,
     });
+    revalidatePath('/', 'layout');
   } catch (error) {
     const e = error as Error;
 
     return { error: e.message };
   }
-
-  revalidatePath('/', 'layout');
 };

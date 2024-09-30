@@ -4,6 +4,7 @@ import gql from 'graphql-tag';
 export type Admin__Core_Authorization_Settings__EditMutationVariables = Types.Exact<{
   forceLogin: Types.Scalars['Boolean']['input'];
   lockRegister: Types.Scalars['Boolean']['input'];
+  requireConfirmEmail: Types.Scalars['Boolean']['input'];
 }>;
 
 
@@ -11,10 +12,11 @@ export type Admin__Core_Authorization_Settings__EditMutation = { __typename?: 'M
 
 
 export const Admin__Core_Authorization_Settings__Edit = gql`
-    mutation Admin__core_authorization_settings__edit($forceLogin: Boolean!, $lockRegister: Boolean!) {
+    mutation Admin__core_authorization_settings__edit($forceLogin: Boolean!, $lockRegister: Boolean!, $requireConfirmEmail: Boolean!) {
   admin__core_authorization_settings__edit(
     force_login: $forceLogin
     lock_register: $lockRegister
+    require_confirm_email: $requireConfirmEmail
   ) {
     force_login
   }

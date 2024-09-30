@@ -20,7 +20,7 @@ export const ContentDeleteActionsTableModeratorsStaffAdmin = ({
   data: Pick<ShowAdminStaffModerators, 'id'>;
 }) => {
   const t = useTranslations('admin.members.staff.moderators.delete');
-  const tCore = useTranslations('core');
+  const tCore = useTranslations('core.global');
   const { setOpen } = useAlertDialog();
 
   const onSubmit = async () => {

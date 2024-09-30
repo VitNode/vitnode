@@ -6,7 +6,7 @@ export type Admin__Core_Members__Show__ItemQueryVariables = Types.Exact<{
 }>;
 
 
-export type Admin__Core_Members__Show__ItemQuery = { __typename?: 'Query', admin__core_members__show: { __typename?: 'ShowAdminMembersObj', edges: Array<{ __typename?: 'ShowAdminMembers', avatar_color: string, email: string, id: number, joined: Date, language: string, name: string, name_seo: string, newsletter: boolean, avatar?: { __typename?: 'AvatarUser', dir_folder: string, file_name: string, id: number }, group: { __typename?: 'GroupUser', color?: string, id: number, name: Array<{ __typename?: 'StringLanguage', language_code: string, value: string }> } }> } };
+export type Admin__Core_Members__Show__ItemQuery = { __typename?: 'Query', admin__core_members__show: { __typename?: 'ShowAdminMembersObj', edges: Array<{ __typename?: 'ShowAdminMembers', avatar_color: string, email: string, id: number, joined: Date, language: string, name: string, name_seo: string, newsletter: boolean, email_verified: boolean, avatar?: { __typename?: 'AvatarUser', dir_folder: string, file_name: string, id: number }, group: { __typename?: 'GroupUser', color?: string, id: number, name: Array<{ __typename?: 'StringLanguage', language_code: string, value: string }> } }> } };
 
 
 export const Admin__Core_Members__Show__Item = gql`
@@ -34,6 +34,7 @@ export const Admin__Core_Members__Show__Item = gql`
       name
       name_seo
       newsletter
+      email_verified
     }
   }
 }

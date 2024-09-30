@@ -18,7 +18,7 @@ export const ContentDeleteActionsTableLangsCoreAdmin = ({
   name,
 }: Pick<ShowCoreLanguages, 'code' | 'name'>) => {
   const t = useTranslations('admin.core.langs.actions.delete');
-  const tCore = useTranslations('core');
+  const tCore = useTranslations('core.global');
   const { onSubmit, formSchema } = useDeleteLangAdmin({ name, code });
 
   return (

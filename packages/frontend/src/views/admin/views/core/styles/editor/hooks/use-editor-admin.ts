@@ -10,7 +10,7 @@ import { mutationApi } from './mutation-api';
 export const useEditorAdmin = (
   data: Core_GlobalQuery['core_middleware__show']['editor'],
 ) => {
-  const t = useTranslations('core');
+  const t = useTranslations('core.global');
   const formSchema = z.object({
     sticky: z.boolean().default(data.sticky),
     files: z.object({

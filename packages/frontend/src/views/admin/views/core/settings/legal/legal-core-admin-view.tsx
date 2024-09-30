@@ -1,3 +1,4 @@
+import { TranslationsProvider } from '@/components/translations-provider';
 import { Button } from '@/components/ui/button';
 import { HeaderContent } from '@/components/ui/header-content';
 import { fetcher } from '@/graphql/fetcher';
@@ -27,9 +28,6 @@ export const getData = async (
     query: Admin_Core_Terms__Show,
     variables,
     cache: 'force-cache',
-    next: {
-      tags: ['core_terms__show'],
-    },
   });
 
   return data;
@@ -59,7 +57,7 @@ export const LegalSettingsAdminView = async ({
   ]);
 
   return (
-    <>
+    <TranslationsProvider namespaces="admin.core.settings.legal">
       <HeaderContent desc={t('desc')} h1={t('title')}>
         <Button asChild variant="ghost">
           <Link href="/legal" target="_blank">
@@ -70,6 +68,6 @@ export const LegalSettingsAdminView = async ({
       </HeaderContent>
 
       <ContentLegalSettingsAdmin {...data} />
-    </>
+    </TranslationsProvider>
   );
 };

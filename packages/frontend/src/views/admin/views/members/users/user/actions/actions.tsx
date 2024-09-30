@@ -22,6 +22,7 @@ import { EllipsisIcon, Pencil, UserMinus } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
+import { ConfirmEmailActionUserMembersAdmin } from './confirm-email/confirm-email';
 import { DeleteActionUserMembersAdmin } from './delete/delete';
 
 const EditActionUserMembersAdmin = React.lazy(async () =>
@@ -32,6 +33,7 @@ const EditActionUserMembersAdmin = React.lazy(async () =>
 
 export const ActionsUserMembersAdmin = ({
   name,
+  email_verified,
   ...props
 }: Admin__Core_Members__Show__ItemQuery['admin__core_members__show']['edges'][0]) => {
   const t = useTranslations('admin.members.users.item');
@@ -41,6 +43,8 @@ export const ActionsUserMembersAdmin = ({
 
   return (
     <>
+      {!email_verified && <ConfirmEmailActionUserMembersAdmin {...props} />}
+
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button

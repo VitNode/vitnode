@@ -14,7 +14,7 @@ import { ContentDeleteActionsTableModeratorsStaffAdmin } from './content';
 export const DeleteActionsTableModeratorsStaffAdmin = (props: {
   data: Pick<ShowAdminStaffModerators, 'id'>;
 }) => {
-  const t = useTranslations('core');
+  const t = useTranslations('core.global');
 
   return (
     <AlertDialog>

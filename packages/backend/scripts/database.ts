@@ -1,25 +1,30 @@
-import { exec } from 'child_process';
+/* eslint-disable no-console */
+import { spawn } from 'child_process';
 
-const execShellCommand = async (cmd: string) => {
+// Function to run commands interactively with the ability to handle user input
+const runInteractiveShellCommand = async (cmd: string, args: string[] = []) => {
   return new Promise((resolve, reject) => {
-    exec(cmd, (error, stdout, stderr) => {
-      if (error) {
-        reject(error);
-      }
-      const result = stdout ? stdout : stderr;
+    const child = spawn(cmd, args, { stdio: 'inherit', shell: true });
 
-      resolve(result);
+    child.on('error', error => {
+      reject(error);
+    });
+
+    child.on('close', code => {
+      if (code !== 0) {
+        reject(new Error(`Command failed with exit code ${code}`));
+      } else {
+        resolve(true);
+      }
     });
   });
 };
 
 export const generateDatabaseMigrations = async () => {
   try {
-    await execShellCommand(
-      'npm run drizzle-kit up && npm run drizzle-kit generate',
-    );
+    await runInteractiveShellCommand('npm', ['run', 'drizzle-kit', 'up']);
+    await runInteractiveShellCommand('npm', ['run', 'drizzle-kit', 'generate']);
   } catch (err) {
-    // eslint-disable-next-line no-console
     console.error(err);
     process.exit(1);
   }
@@ -27,9 +32,8 @@ export const generateDatabaseMigrations = async () => {
 
 export const runMigrations = async () => {
   try {
-    await execShellCommand('npm run drizzle-kit migrate');
+    await runInteractiveShellCommand('npm', ['run', 'drizzle-kit', 'migrate']);
   } catch (err) {
-    // eslint-disable-next-line no-console
     console.error(err);
     process.exit(1);
   }

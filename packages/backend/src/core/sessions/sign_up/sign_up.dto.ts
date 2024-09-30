@@ -42,16 +42,21 @@ export class SignUpCoreSessionsArgs {
 @ObjectType()
 export class SignUpCoreSessionsObj {
   @Field(() => String)
-  @IsEmail()
   email: string;
+
+  @Field(() => Boolean)
+  email_verified: boolean;
 
   @Field(() => Int)
   group_id: number;
 
+  @Field(() => Number)
+  id: number;
+
   @Field(() => String)
-  @MinLength(3)
-  @MaxLength(32)
-  @Matches(nameRegex)
+  language: string;
+
+  @Field(() => String)
   name: string;
 
   @Field(() => Boolean, { nullable: true })

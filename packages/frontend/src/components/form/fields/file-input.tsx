@@ -24,6 +24,7 @@ export function AutoFormFileInput<T extends FieldValues>({
   isDisabled,
   componentProps,
   className,
+  hideOptionalLabel,
   childComponent: ChildComponent,
 }: {
   componentProps?: AutoFormFileInputProps;
@@ -33,6 +34,7 @@ export function AutoFormFileInput<T extends FieldValues>({
       {label && (
         <AutoFormLabel
           description={description}
+          hideOptionalLabel={hideOptionalLabel}
           isRequired={isRequired}
           label={label}
           theme={theme}

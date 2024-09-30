@@ -12,7 +12,7 @@ export const EnabledRowTableLangsCoreAdmin = ({
   data: ShowCoreLanguages;
 }) => {
   const locale = useLocale();
-  const t = useTranslations('core');
+  const t = useTranslations('core.global.errors');
   const [checked, changeChecked] = React.useOptimistic(data.enabled);
 
   return (
@@ -30,8 +30,8 @@ export const EnabledRowTableLangsCoreAdmin = ({
             allowInInput: data.allow_in_input,
           });
         } catch (_) {
-          toast.error(t('errors.title'), {
-            description: t('errors.internal_server_error'),
+          toast.error(t('title'), {
+            description: t('internal_server_error'),
           });
           changeChecked(!checked);
         }

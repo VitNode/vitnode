@@ -3,17 +3,13 @@ import { cn } from '@/helpers/classnames';
 import { getSessionData } from '../../../graphql/get-session-data';
 import { getTextLang } from '../../../hooks/use-text-lang';
 
-export const Footer = async ({
-  locale,
-  className,
-}: {
-  className?: string;
-  locale: string;
-}) => {
-  const { convertText } = getTextLang({ locale });
-  const {
-    core_settings__show: { site_copyright },
-  } = await getSessionData();
+export const Footer = async ({ className }: { className?: string }) => {
+  const [
+    { convertText },
+    {
+      core_settings__show: { site_copyright },
+    },
+  ] = await Promise.all([getTextLang(), getSessionData()]);
 
   if (!site_copyright.length) return null;
 

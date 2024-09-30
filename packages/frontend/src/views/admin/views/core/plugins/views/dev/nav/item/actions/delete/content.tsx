@@ -21,7 +21,7 @@ export const ContentDeleteActionTableNavDevPluginAdmin = ({
   parentId,
 }: Props) => {
   const t = useTranslations('admin.core.plugins.dev.nav.delete');
-  const tCore = useTranslations('core');
+  const tCore = useTranslations('core.global');
   const { onSubmit } = useDeleteNavPluginAdmin({ code, parentId });
 
   return (

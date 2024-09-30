@@ -21,7 +21,7 @@ export const ButtonToolbarEditor = ({
   onClick?: () => void;
   style?: React.CSSProperties;
 }) => {
-  const t = useTranslations('core.editor');
+  const t = useTranslations('core.global.editor');
 
   return (
     <Button

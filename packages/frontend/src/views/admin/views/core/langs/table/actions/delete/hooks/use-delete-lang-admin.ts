@@ -12,7 +12,7 @@ export const useDeleteLangAdmin = ({
   name,
 }: Pick<ShowCoreLanguages, 'code' | 'name'>) => {
   const t = useTranslations('admin.core.langs.actions.delete');
-  const tCore = useTranslations('core');
+  const tCore = useTranslations('core.global.errors');
   const { setOpen } = useAlertDialog();
   const pathname = usePathname();
   const { push } = useRouter();
@@ -24,8 +24,8 @@ export const useDeleteLangAdmin = ({
     if (values.name !== name) return;
     const mutation = await mutationApi({ code });
     if (mutation?.error) {
-      toast.error(tCore('errors.title'), {
-        description: tCore('errors.internal_server_error'),
+      toast.error(tCore('title'), {
+        description: tCore('internal_server_error'),
       });
 
       return;

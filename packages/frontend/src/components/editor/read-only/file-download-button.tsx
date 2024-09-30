@@ -34,7 +34,7 @@ export const FileDownloadButton = ({
   security_key?: string;
   width?: number;
 }) => {
-  const t = useTranslations('core.editor.files');
+  const t = useTranslations('core.global.editor.files');
 
   if (acceptMimeTypeImage.includes(mimetype) && width && height) {
     return (

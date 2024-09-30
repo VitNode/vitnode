@@ -41,8 +41,8 @@ export const CodeBlockComponent = ({
 }) => {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(defaultLanguage);
-  const t = useTranslations('core.editor.heading.code_block');
-  const tCore = useTranslations('core');
+  const t = useTranslations('core.global.editor.heading.code_block');
+  const tCore = useTranslations('core.global');
 
   return (
     <NodeViewWrapper className="bg-muted relative rounded-md">
@@ -71,7 +71,7 @@ export const CodeBlockComponent = ({
 
           <PopoverContent className="w-40 p-0">
             <Command>
-              <CommandInput className="h-9" placeholder={tCore('search')} />
+              <CommandInput className="h-9" placeholder={t('search')} />
 
               <CommandList>
                 <CommandEmpty>{tCore('no_results')}</CommandEmpty>

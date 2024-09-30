@@ -1,3 +1,4 @@
+import { TranslationsProvider } from '@/components/translations-provider';
 import { HeaderContent } from '@/components/ui/header-content';
 import { fetcher } from '@/graphql/fetcher';
 import {
@@ -18,6 +19,7 @@ const getData = async () => {
     Admin__Core_Nav__ShowQueryVariables
   >({
     query: Admin__Core_Nav__Show,
+    cache: 'force-cache',
   });
 
   return data;
@@ -38,12 +40,12 @@ export const NavAdminView = async () => {
   ]);
 
   return (
-    <>
+    <TranslationsProvider namespaces="admin.core.styles.nav">
       <HeaderContent h1={t('title')}>
         <ActionsNavAdmin />
       </HeaderContent>
 
       <TableNavAdmin {...data} />
-    </>
+    </TranslationsProvider>
   );
 };

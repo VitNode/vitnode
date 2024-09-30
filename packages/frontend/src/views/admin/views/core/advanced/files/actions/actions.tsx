@@ -16,7 +16,7 @@ import { DeleteActionFilesAdvancedCoreAdmin } from './delete/delete';
 export const ActionsFilesAdvancedCoreAdmin = (
   data: Admin__Core_Files__ShowQuery['admin__core_files__show']['edges'][0],
 ) => {
-  const t = useTranslations('core');
+  const t = useTranslations('core.global');
 
   return (
     <>

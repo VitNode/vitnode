@@ -27,6 +27,7 @@ export function AutoFormStringLanguageInput<T extends FieldValues>({
   componentProps,
   className,
   childComponent: ChildComponent,
+  hideOptionalLabel,
 }: {
   componentProps?: AutoFormStringLanguageInputProps;
 } & AutoFormItemProps<T>) {
@@ -35,6 +36,7 @@ export function AutoFormStringLanguageInput<T extends FieldValues>({
       {label && (
         <AutoFormLabel
           description={description}
+          hideOptionalLabel={hideOptionalLabel}
           isRequired={isRequired}
           label={label}
           theme={theme}

@@ -46,10 +46,11 @@ export function AutoFormCombobox<T extends FieldValues>({
   componentProps,
   className,
   childComponent: ChildComponent,
+  hideOptionalLabel,
 }: {
   componentProps?: AutoFormComboboxProps;
 } & AutoFormItemProps<T>) {
-  const t = useTranslations('core');
+  const t = useTranslations('core.global');
   const [open, setOpen] = React.useState(false);
   const value: string | string[] | undefined = field.value;
   const baseValues = (
@@ -83,6 +84,7 @@ export function AutoFormCombobox<T extends FieldValues>({
       {label && (
         <AutoFormLabel
           description={description}
+          hideOptionalLabel={hideOptionalLabel}
           isRequired={isRequired}
           label={label}
           theme={theme}

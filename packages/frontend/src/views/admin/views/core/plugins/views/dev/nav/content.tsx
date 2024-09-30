@@ -18,7 +18,7 @@ export const ContentNavDevPluginAdmin = ({
   admin__core_plugins__nav__show: edges,
   icons,
 }: Props) => {
-  const t = useTranslations('core');
+  const t = useTranslations('core.global.errors');
   const { code } = useParams();
 
   return (
@@ -55,8 +55,8 @@ export const ContentNavDevPluginAdmin = ({
         });
 
         if (mutation.error) {
-          toast.error(t('errors.title'), {
-            description: t('errors.internal_server_error'),
+          toast.error(t('title'), {
+            description: t('internal_server_error'),
           });
         }
       }}

@@ -24,9 +24,8 @@ export const ToolbarThemeEditor = ({
   setActiveMode: (mode: ThemeEditorViewEnum) => void;
 }) => {
   const t = useTranslations('admin');
-  const tCore = useTranslations('core');
-  const { resolvedTheme, setTheme, theme } = useTheme();
-  const activeTheme = resolvedTheme ?? theme ?? 'light';
+  const tCore = useTranslations('core.global');
+  const { resolvedTheme, setTheme } = useTheme();
 
   const ButtonWithTooltip = ({
     active,
@@ -34,7 +33,7 @@ export const ToolbarThemeEditor = ({
     children,
     onClick,
   }: {
-    active: boolean;
+    active?: boolean;
     ariaLabel: string;
     children: React.ReactNode;
     onClick: () => void;
@@ -96,23 +95,14 @@ export const ToolbarThemeEditor = ({
 
       <div className="flex flex-col gap-1 py-2">
         <ButtonWithTooltip
-          active={activeTheme === 'light'}
-          ariaLabel={tCore('user-bar.dark_light_switcher.light')}
+          ariaLabel={tCore('dark_light_switcher')}
           onClick={() => {
-            setTheme('light');
+            const nextTheme = resolvedTheme === 'dark' ? 'light' : 'dark';
+            setTheme(nextTheme);
           }}
         >
-          <Sun />
-        </ButtonWithTooltip>
-
-        <ButtonWithTooltip
-          active={activeTheme === 'dark'}
-          ariaLabel={tCore('user-bar.dark_light_switcher.dark')}
-          onClick={() => {
-            setTheme('dark');
-          }}
-        >
-          <Moon />
+          <Sun className="size-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+          <Moon className="absolute size-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
         </ButtonWithTooltip>
       </div>
     </div>

@@ -5,7 +5,7 @@ import { toast } from 'sonner';
 import { mutationEditApi } from '../../../../actions/create/hooks/mutation-edit-api';
 
 export const useSetDefaultPluginAdmin = (data: ShowAdminPlugins) => {
-  const tCore = useTranslations('core');
+  const tCore = useTranslations('core.global.errors');
 
   const onSubmit = async () => {
     try {
@@ -20,8 +20,8 @@ export const useSetDefaultPluginAdmin = (data: ShowAdminPlugins) => {
         supportUrl: data.support_url,
       });
     } catch (_) {
-      toast.error(tCore('errors.title'), {
-        description: tCore('errors.internal_server_error'),
+      toast.error(tCore('title'), {
+        description: tCore('internal_server_error'),
       });
 
       return;

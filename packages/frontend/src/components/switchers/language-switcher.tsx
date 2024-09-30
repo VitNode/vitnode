@@ -3,7 +3,7 @@
 import { Languages } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 
-import { useGlobals } from '../../hooks/use-globals';
+import { useGlobalData } from '../../hooks/use-global-data';
 import { usePathname, useRouter } from '../../navigation';
 import { Button } from '../ui/button';
 import {
@@ -15,8 +15,8 @@ import {
 } from '../ui/dropdown-menu';
 
 export const LanguageSwitcher = () => {
-  const t = useTranslations('core');
-  const { languages } = useGlobals();
+  const t = useTranslations('core.global');
+  const { languages } = useGlobalData();
   const locale = useLocale();
   const { replace } = useRouter();
   const pathname = usePathname();
@@ -29,11 +29,7 @@ export const LanguageSwitcher = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button
-          ariaLabel={t('user-bar.language.change')}
-          size="icon"
-          variant="ghost"
-        >
+        <Button ariaLabel={t('language_change')} size="icon" variant="ghost">
           <Languages className="size-[1.2rem]" />
         </Button>
       </DropdownMenuTrigger>

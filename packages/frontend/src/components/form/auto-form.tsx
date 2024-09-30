@@ -39,6 +39,7 @@ export interface AutoFormItemProps<T extends FieldValues> {
   componentProps?: Record<string, unknown>;
   description: React.ReactNode | string | undefined;
   field: ControllerRenderProps<T>;
+  hideOptionalLabel?: boolean;
   isDisabled: boolean;
   isRequired: boolean;
   label: string | undefined;
@@ -90,6 +91,7 @@ export function AutoForm<
     ) => React.JSX.Element;
     componentProps?: Record<string, unknown>;
     description?: React.ReactNode | string;
+    hideOptionalLabel?: boolean;
     id: FieldPath<z.infer<T>>;
     label?: string;
   }[];
@@ -106,7 +108,7 @@ export function AutoForm<
   }) => React.ReactNode;
   theme?: 'horizontal' | 'vertical';
 }) {
-  const t = useTranslations('core');
+  const t = useTranslations('core.global');
   const objectFormSchema = getObjectFormSchema(formSchema);
   const defaultValues = getDefaultValues(objectFormSchema);
 
@@ -172,6 +174,7 @@ export function AutoForm<
                     componentProps={item.componentProps}
                     description={item.description}
                     field={field}
+                    hideOptionalLabel={item.hideOptionalLabel}
                     isDisabled={isDisabled}
                     isRequired={(isRequired || zodInputProps.required) ?? false}
                     label={item.label}

@@ -42,6 +42,19 @@ export class SignOutAdminSessionsService {
       },
     );
 
+    res.clearCookie(
+      this.configService.getOrThrow('cookies.login_token.admin.admin_id'),
+      {
+        httpOnly: true,
+        secure: !!this.configService.getOrThrow('cookies.secure'),
+        domain: this.configService.getOrThrow('cookies.domain'),
+        path: '/',
+        sameSite: this.configService.getOrThrow('cookies.secure')
+          ? 'none'
+          : 'lax',
+      },
+    );
+
     return 'You are logged out';
   }
 }

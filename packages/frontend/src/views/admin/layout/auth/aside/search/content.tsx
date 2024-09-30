@@ -16,7 +16,7 @@ export const ContentSearchAsideAuthAdmin = ({
   search: string;
   setOpen: (open: boolean) => void;
 }) => {
-  const t = useTranslations('admin.search');
+  const t = useTranslations('admin.global.search');
 
   const { data, isLoading } = useSearchAdminApi(search);
 

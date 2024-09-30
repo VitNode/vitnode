@@ -14,7 +14,7 @@ import { mutationApi } from './hooks/mutation-api';
 
 export const ContentClearCacheActionDiagnostic = () => {
   const t = useTranslations('admin.core.diagnostic.clear_cache');
-  const tCore = useTranslations('core');
+  const tCore = useTranslations('core.global');
 
   return (
     <>

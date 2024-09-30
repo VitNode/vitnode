@@ -1,3 +1,4 @@
+import { TranslationsProvider } from '@/components/translations-provider';
 import { Card } from '@/components/ui/card';
 import { HeaderContent } from '@/components/ui/header-content';
 import { fetcher } from '@/graphql/fetcher';
@@ -13,6 +14,7 @@ import { ContentAuthorizationSettingsCoreAdmin } from './content';
 const getData = async () => {
   const data = await fetcher<Admin__Core_Authorization_Settings__ShowQuery>({
     query: Admin__Core_Authorization_Settings__Show,
+    cache: 'force-cache',
   });
 
   return data;
@@ -34,12 +36,12 @@ export const AuthorizationSettingsCoreAdminView = async () => {
   ]);
 
   return (
-    <>
+    <TranslationsProvider namespaces="admin.core.settings.authorization">
       <HeaderContent h1={t('settings_authorization')} />
 
       <Card className="p-6">
         <ContentAuthorizationSettingsCoreAdmin {...data} />
       </Card>
-    </>
+    </TranslationsProvider>
   );
 };

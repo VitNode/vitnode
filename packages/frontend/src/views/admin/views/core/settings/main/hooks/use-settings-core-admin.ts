@@ -9,7 +9,7 @@ import { mutationApi } from './mutation-api';
 export const useSettingsCoreAdmin = ({
   core_settings__show: data,
 }: Core_Main_Settings__ShowQuery) => {
-  const t = useTranslations('core');
+  const t = useTranslations('core.global');
 
   const formSchema = z.object({
     name: z.string().min(1).default(data.site_name),
