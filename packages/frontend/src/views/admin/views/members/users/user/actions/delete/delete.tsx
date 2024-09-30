@@ -18,7 +18,7 @@ export const DeleteActionUserMembersAdmin = ({
   'id' | 'name'
 >) => {
   const t = useTranslations('admin.members.users.item.delete');
-  const tCore = useTranslations('core');
+  const tError = useTranslations('core.global.errors');
   const { setOpen } = useAlertDialog();
   const { push } = useRouter();
 
@@ -34,8 +34,8 @@ export const DeleteActionUserMembersAdmin = ({
         return;
       }
 
-      toast.error(tCore('errors.title'), {
-        description: tCore('errors.internal_server_error'),
+      toast.error(tError('title'), {
+        description: tError('internal_server_error'),
       });
 
       return;

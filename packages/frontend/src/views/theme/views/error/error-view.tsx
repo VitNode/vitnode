@@ -18,7 +18,7 @@ export interface ErrorViewProps {
 }
 
 export const ErrorView = ({ className, code }: ErrorViewProps) => {
-  const t = useTranslations('core');
+  const t = useTranslations('core.global.errors');
 
   return (
     <div className={cn('mx-auto my-10 max-w-2xl px-4', className)}>
@@ -27,20 +27,18 @@ export const ErrorView = ({ className, code }: ErrorViewProps) => {
           <AlertTriangle className="size-16" />
         </CardHeader>
         <CardContent className="flex flex-col items-center pb-4 text-center">
-          <span className="text-muted-foreground">{t('errors.title')}</span>
-          <p className="mt-1 text-xl font-semibold tracking-tight">
-            {t(`errors.${code}`)}
-          </p>
+          <span className="text-muted-foreground">{t('title')}</span>
+          <p className="mt-1 text-xl font-semibold tracking-tight">{t(code)}</p>
         </CardContent>
 
         <CardFooter className="justify-center">
           <Link className={buttonVariants({ variant: 'outline' })} href="/">
-            <Home className="size-5" /> {t('errors.actions.back_home')}
+            <Home className="size-5" /> {t('actions.back_home')}
           </Link>
         </CardFooter>
       </Card>
       <div className="text-muted-foreground pt-2 text-right italic">
-        {t.rich('errors.code', {
+        {t.rich('code', {
           code: () => (
             <span className="font-semibold">{code.toLocaleLowerCase()}</span>
           ),

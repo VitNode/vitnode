@@ -19,7 +19,7 @@ import { ThemeEditorTab, useThemeEditor } from '../../hooks/use-theme-editor';
 export const LogosTabThemeEditor = () => {
   const { form, setActiveTab, iframeRef } = useThemeEditor();
   const t = useTranslations('admin.theme_editor.logos');
-  const tCore = useTranslations('core');
+  const tCore = useTranslations('core.global');
 
   enum ids {
     dark = 'vitnode_logo_dark',

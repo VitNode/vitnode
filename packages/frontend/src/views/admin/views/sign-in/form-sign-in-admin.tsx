@@ -13,7 +13,7 @@ import { AlertCircle } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 export const FormSignInAdmin = () => {
-  const t = useTranslations('core');
+  const t = useTranslations('core.sign_in');
   const { error, onSubmit, formSchema } = useSignInAdminView();
 
   return (
@@ -21,8 +21,8 @@ export const FormSignInAdmin = () => {
       {error === 'ACCESS_DENIED' && (
         <Alert className="mb-6" variant="error">
           <AlertCircle className="size-4" />
-          <AlertTitle>{t('sign_in.error.title')}</AlertTitle>
-          <AlertDescription>{t('sign_in.error.desc')}</AlertDescription>
+          <AlertTitle>{t('error.title')}</AlertTitle>
+          <AlertDescription>{t('error.desc')}</AlertDescription>
         </Alert>
       )}
 
@@ -34,7 +34,7 @@ export const FormSignInAdmin = () => {
             componentProps: {
               type: 'email',
             } as AutoFormInputProps,
-            label: t('sign_in.form.email.label'),
+            label: t('email'),
           },
           {
             id: 'password',
@@ -42,14 +42,14 @@ export const FormSignInAdmin = () => {
             componentProps: {
               type: 'password',
             } as AutoFormInputProps,
-            label: t('sign_in.form.password.label'),
+            label: t('password'),
           },
         ]}
         formSchema={formSchema}
         onSubmit={onSubmit}
         submitButton={props => (
           <Button className="w-full" {...props}>
-            {t('sign_in.form.submit')}
+            {t('submit')}
           </Button>
         )}
       />

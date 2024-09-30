@@ -9,7 +9,7 @@ import { Button } from '../ui/button';
 import { TooltipWrapper } from '../ui/tooltip';
 
 export const ThemeSwitcher = () => {
-  const t = useTranslations('core.user-bar');
+  const t = useTranslations('core.global');
   const { setTheme, resolvedTheme } = useTheme();
 
   return (

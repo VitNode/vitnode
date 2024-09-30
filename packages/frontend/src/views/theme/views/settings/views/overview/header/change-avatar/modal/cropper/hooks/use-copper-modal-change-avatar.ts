@@ -8,7 +8,8 @@ import { toast } from 'sonner';
 import { mutationApi } from './mutation-api';
 
 export const useCopperModalChangeAvatar = () => {
-  const t = useTranslations('core');
+  const t = useTranslations('core.settings.change_avatar.options.upload');
+  const tErrors = useTranslations('core.global.errors');
   const cropperRef = React.useRef<ReactCropperElement>(null);
   const [isPending, setPending] = React.useState(false);
   const { session } = useSession();
@@ -33,16 +34,16 @@ export const useCopperModalChangeAvatar = () => {
 
     const mutation = await mutationApi(formData);
     if (mutation?.error) {
-      toast.error(t('errors.title'), {
-        description: t('errors.internal_server_error'),
+      toast.error(tErrors('title'), {
+        description: tErrors('internal_server_error'),
       });
       setPending(false);
 
       return;
     }
 
-    toast.success(t('settings.change_avatar.options.upload.title'), {
-      description: t('settings.change_avatar.options.upload.success'),
+    toast.success(t('title'), {
+      description: t('success'),
     });
     setOpen?.(false);
 

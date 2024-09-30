@@ -26,8 +26,8 @@ import { toast } from 'sonner';
 import { mutationApi } from './hooks/mutation-api';
 
 export const AvatarAsideAuthAdmin = () => {
-  const t = useTranslations('admin');
-  const tCore = useTranslations('core');
+  const t = useTranslations('admin.global');
+  const tCore = useTranslations('core.global');
   const { session } = useSessionAdmin();
 
   if (!session) return null;
@@ -73,7 +73,7 @@ export const AvatarAsideAuthAdmin = () => {
           <DropdownMenuItem asChild>
             <Link href="/admin/core/diagnostic">
               <HammerIcon />
-              <span>{t('core.diagnostic.title')}</span>
+              <span>{t('diagnostic_tools')}</span>
             </Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>

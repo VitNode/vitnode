@@ -6,14 +6,14 @@ import { mutationApi } from './mutation-api';
 
 export const ConfirmEmailActionUserMembersAdmin = ({ id }: { id: number }) => {
   const t = useTranslations('admin.members.users.item.confirm_email');
-  const tCore = useTranslations('core.errors');
+  const tError = useTranslations('core.global.errors');
 
   const onSubmit = async () => {
     const mutation = await mutationApi({ id });
 
     if (mutation?.error) {
-      toast.error(tCore('title'), {
-        description: tCore('internal_server_error'),
+      toast.error(tError('title'), {
+        description: tError('internal_server_error'),
       });
 
       return;

@@ -43,7 +43,7 @@ export const DevPluginAdminLayout = async ({
   if (!CONFIG.node_development) redirect('/admin');
   const [data, t] = await Promise.all([
     getPluginDataAdmin({ code }),
-    getTranslations('core'),
+    getTranslations('core.global'),
   ]);
 
   if (data.admin__core_plugins__show.edges.length === 0) {

@@ -18,7 +18,7 @@ const ManifestDisplay = {
 export const useManifestCoreAdminView = ({
   admin__core_manifest_metadata__show: data,
 }: Admin__Core_Manifest_Metadata__ShowQuery) => {
-  const t = useTranslations('core');
+  const t = useTranslations('core.global');
   const themeColor = convertColor.hexToHSL(data.theme_color);
   const backgroundColor = convertColor.hexToHSL(data.background_color);
 

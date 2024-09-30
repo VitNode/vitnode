@@ -37,7 +37,7 @@ export const ColorPicker = ({
   required?: boolean;
   value: null | string;
 }) => {
-  const t = useTranslations('core.colors');
+  const t = useTranslations('core.global');
   const ref = React.useRef<HTMLInputElement>(null);
   const value = getHSLFromString(valueProp ?? '');
   const colorBrightness = value ? isColorBrightness(value) : false;

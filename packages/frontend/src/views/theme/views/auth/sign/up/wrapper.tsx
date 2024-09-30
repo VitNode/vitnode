@@ -9,7 +9,7 @@ import React from 'react';
 import { SignUpContext } from './use-sign-up';
 
 export const SignUpWrapper = ({ children }: { children: React.ReactNode }) => {
-  const t = useTranslations('core.sign_up.form.success');
+  const t = useTranslations('core.sign_up.success');
   const [emailSuccess, setEmailSuccess] = React.useState('');
 
   if (!emailSuccess) {

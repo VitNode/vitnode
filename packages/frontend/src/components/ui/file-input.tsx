@@ -45,7 +45,7 @@ export const FileInput = ({
   showInfo,
   ...props
 }: WithMultiple | WithoutMultiple) => {
-  const t = useTranslations('core');
+  const t = useTranslations('core.global.files');
   const [isDrag, setDrag] = React.useState(false);
   const currentRef = React.useRef<HTMLInputElement>(null);
   const inputRef = useMergeRefs([ref, currentRef]);
@@ -63,13 +63,13 @@ export const FileInput = ({
         acceptExtensions &&
         !acceptExtensions.includes(extensionType)
       ) {
-        toast.error(t('forms.files.errors.extension', { file: file.name }));
+        toast.error(t('errors.extension', { file: file.name }));
 
         return;
       }
 
       if (maxFileSizeInMb && file.size > maxFileSizeInMb * 1024 * 1024) {
-        toast.error(t('forms.files.errors.max_size', { file: file.name }));
+        toast.error(t('errors.max_size', { file: file.name }));
 
         return;
       }
@@ -140,20 +140,20 @@ export const FileInput = ({
 
             <div className="space-y-1">
               <p className="text-foreground text-sm font-medium">
-                {t(isDrag ? 'forms.files.drop_here' : 'forms.files.title')}
+                {t(isDrag ? 'drop_here' : 'title')}
               </p>
 
               {(acceptExtensions?.length ?? maxFileSizeInMb) && (
                 <p className="text-xs">
                   {acceptExtensions?.length
-                    ? t.rich('forms.files.extensions', {
+                    ? t.rich('extensions', {
                         extensions: () =>
                           acceptExtensions.join(', ').toUpperCase(),
                       })
                     : ''}
 
                   {maxFileSizeInMb
-                    ? `, ${t('forms.files.allow_size_per_file', {
+                    ? `, ${t('allow_size_per_file', {
                         size: maxFileSizeInMb,
                       })}`
                     : ''}

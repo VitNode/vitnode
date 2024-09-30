@@ -12,7 +12,10 @@ export const UserBar = async ({ className }: { className?: string }) => {
         authorization: { lock_register },
       },
     },
-  ] = await Promise.all([getTranslations('core'), getSessionData()]);
+  ] = await Promise.all([
+    getTranslations('core.global.user-bar'),
+    getSessionData(),
+  ]);
 
   return (
     <div
@@ -28,7 +31,7 @@ export const UserBar = async ({ className }: { className?: string }) => {
         })}
         href="/login"
       >
-        {t('user-bar.sign_in')}
+        {t('sign_in')}
       </Link>
 
       {!lock_register && (
@@ -38,7 +41,7 @@ export const UserBar = async ({ className }: { className?: string }) => {
           })}
           href="/register"
         >
-          {t('user-bar.sign_up')}
+          {t('sign_up')}
         </Link>
       )}
     </div>

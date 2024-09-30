@@ -15,8 +15,7 @@ import { EditContentLegalSettingsAdmin } from './actions/edit';
 export const ContentLegalSettingsAdmin = ({
   core_terms__show: { edges, pageInfo },
 }: Admin_Core_Terms__ShowQuery) => {
-  const t = useTranslations('core.table');
-  const tAdmin = useTranslations('admin.core.settings.legal');
+  const t = useTranslations('admin.core.settings.legal');
   const { convertText } = useTextLang();
 
   return (
@@ -49,7 +48,7 @@ export const ContentLegalSettingsAdmin = ({
             return (
               <>
                 <Button
-                  ariaLabel={tAdmin('preview')}
+                  ariaLabel={t('preview')}
                   asChild
                   size="icon"
                   variant="ghost"

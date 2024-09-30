@@ -20,39 +20,11 @@ import { useFormCreateEditFormGroupsMembersAdmin } from './hooks/use-form';
 
 export const CreateEditFormAdministratorsStaffAdmin = () => {
   const t = useTranslations('admin.members.staff');
-  const tCore = useTranslations('core');
+  const tCore = useTranslations('core.global');
   const { form, onSubmit } = useFormCreateEditFormGroupsMembersAdmin();
 
   return (
     <Form {...form}>
-      {/* <AutoForm
-        formSchema={formSchema}
-        onSubmit={onSubmit}
-        submitButton={props => (
-          <DialogFooter>
-            <Button {...props}>{tCore('save')}</Button>
-          </DialogFooter>
-        )}
-        fieldConfig={{
-          type: {
-            label: t('create_edit.type.title'),
-            fieldType: props => (
-              <AutoFormRadioGroup
-                {...props}
-                labels={{
-                  group: {
-                    title: t('create_edit.type.group'),
-                  },
-                  user: {
-                    title: t('create_edit.type.user'),
-                  },
-                }}
-              />
-            ),
-          },
-        }}
-      /> */}
-
       <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
         <FormField
           control={form.control}

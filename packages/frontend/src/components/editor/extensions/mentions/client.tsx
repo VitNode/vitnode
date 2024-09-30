@@ -39,7 +39,7 @@ export interface ComponentListProps {
 }
 
 const ComponentList = ({ command, items, ref }: ComponentListProps) => {
-  const t = useTranslations('core');
+  const t = useTranslations('core.global');
   const [selectedIndex, setSelectedIndex] = React.useState(0);
 
   const selectItem = (index: number) => {

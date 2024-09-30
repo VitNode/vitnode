@@ -19,7 +19,7 @@ import { ContentDeleteActionTableNavDevPluginAdmin } from './content';
 export const DeleteActionTableNavDevPluginAdmin = (
   props: React.ComponentProps<typeof ContentDeleteActionTableNavDevPluginAdmin>,
 ) => {
-  const t = useTranslations('core');
+  const t = useTranslations('core.global');
 
   return (
     <AlertDialog>

@@ -1,3 +1,4 @@
+import { TranslationsProvider } from '@/components/translations-provider';
 import { fetcher } from '@/graphql/fetcher';
 import {
   Admin__Install__Layout,
@@ -34,9 +35,13 @@ export const InstallConfigsView = async () => {
     const data = await getData();
 
     return (
-      <InstallConfigLayout>
-        <ContentInstallConfigsView data={data.admin__install__layout.status} />
-      </InstallConfigLayout>
+      <TranslationsProvider namespaces="core.sign_up">
+        <InstallConfigLayout>
+          <ContentInstallConfigsView
+            data={data.admin__install__layout.status}
+          />
+        </InstallConfigLayout>
+      </TranslationsProvider>
     );
   } catch (error) {
     if (error instanceof Error && error.message === 'ACCESS_DENIED') {

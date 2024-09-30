@@ -1,3 +1,4 @@
+import { TranslationsProvider } from '@/components/translations-provider';
 import { getSessionAdminData } from '@/graphql/get-session-admin-data';
 import { redirect } from '@/navigation';
 import { Metadata } from 'next';
@@ -8,7 +9,7 @@ import { HeaderAdmin } from './auth/header/header';
 import { AdminProviders } from './providers';
 
 export const generateMetadataAdminLayout = async (): Promise<Metadata> => {
-  const t = await getTranslations('admin');
+  const t = await getTranslations('admin.global');
 
   return {
     title: {
@@ -27,13 +28,15 @@ export const AdminLayout = async ({
     const data = await getSessionAdminData();
 
     return (
-      <AdminProviders data={data}>
-        <AsideAuthAdmin />
-        <HeaderAdmin />
-        <main className="text-card-foreground mt-16 px-2 py-6 md:my-0 md:ml-[240px] md:mt-0 md:px-6 lg:px-10 xl:ml-[260px]">
-          <div className="container">{children}</div>
-        </main>
-      </AdminProviders>
+      <TranslationsProvider namespaces="admin.global">
+        <AdminProviders data={data}>
+          <AsideAuthAdmin />
+          <HeaderAdmin />
+          <main className="text-card-foreground mt-16 px-2 py-6 md:my-0 md:ml-[240px] md:mt-0 md:px-6 lg:px-10 xl:ml-[260px]">
+            <div className="container">{children}</div>
+          </main>
+        </AdminProviders>
+      </TranslationsProvider>
     );
   } catch (err) {
     if (err instanceof Error && err.message === 'ACCESS_DENIED') {

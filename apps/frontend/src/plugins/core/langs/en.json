@@ -1,186 +1,44 @@
 {
   "core": {
-    "pick_date": "Pick a date",
-    "select_option": "Select an option",
-    "selected": "{count, plural, =0 {No items} =1 {1 item} other {# items}} selected",
-    "week": "Week",
-    "strong": "Strong",
-    "reload_page": "Reload Page",
-    "link_url_with_link": "Link URL: <link></link>",
-    "yes": "Yes",
-    "no": "No",
-    "or": "or",
-    "unlimited": "Unlimited",
-    "clear_cache_and_reload": "Clear Cache and Reload",
-    "drag_to_change_position": "Drag to change position",
-    "optional": "Optional",
-    "go_back": "Go Back",
-    "open_menu": "Open Menu",
-    "loading": "Loading...",
-    "save": "Save",
-    "saved_success": "Saved successfully.",
-    "no_results": "No results found.",
-    "results": "Results",
-    "clear": "Clear",
-    "filters": "Filters",
-    "search": "Search",
-    "search_placeholder": "Search...",
-    "delete": "Delete",
-    "edit": "Edit",
-    "create": "Create",
-    "upload": "Upload",
-    "upload_new_version": "Upload New Version",
-    "more_actions": "More Actions",
-    "download": "Download",
-    "are_you_sure": "Are you sure?",
-    "are_you_absolutely_sure": "Are you absolutely sure?",
-    "are_you_sure_want_to_leave_form": "Are you sure you want to leave the form? Your changes may not be saved.",
-    "hands_up": "Hands up!",
-    "cancel": "Cancel",
-    "confirm": "Confirm",
-    "close": "Close",
-    "default": "Default",
-    "checked_number": "Checked: {count}",
-    "prev_page": "Previous Page",
-    "home": "Home",
-    "colors": {
-      "none": "No Color",
-      "remove": "Remove color"
-    },
-    "mobile_nav": {
-      "back": "Back",
-      "messages": "Messages",
+    "global": {
+      "loading": "Loading...",
+      "optional": "Optional",
+      "yes": "Yes",
+      "no": "No",
+      "default": "Default",
+      "pick_date": "Pick a date",
+      "are_you_sure": "Are you sure?",
+      "are_you_absolutely_sure": "Are you absolutely sure?",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "are_you_sure_want_to_leave_form": "Are you sure you want to leave the form? Your changes may not be saved.",
+      "checked_number": "Checked: {count}",
+      "close": "Close",
+      "save": "Save",
       "search": "Search",
-      "menu": "Menu"
-    },
-    "user_input": {
-      "placeholder": "Click to chose user...",
-      "search": "Search users..."
-    },
-    "group_input": {
-      "placeholder": "Click to chose group...",
-      "search": "Search group..."
-    },
-    "pagination": {
+      "search_placeholder": "Search...",
+      "delete": "Delete",
+      "edit": "Edit",
+      "create": "Create",
+      "upload": "Upload",
       "previous": "Previous",
-      "next": "Next"
-    },
-    "table": {
-      "title": "Title",
-      "name": "Name",
-      "created": "Created",
-      "updated": "Updated",
-      "version": "Version",
-      "author": "Author",
-      "enabled": "Enabled",
+      "next": "Next",
+      "more_actions": "More Actions",
+      "saved_success": "Saved successfully.",
+      "unlimited": "Unlimited",
+      "selected": "{count, plural, =0 {No items} =1 {1 item} other {# items}} selected",
+      "or": "or",
+      "results": "Results",
+      "no_results": "No results found.",
+      "search_results": "Search Results",
+      "select_option": "Select an option",
+      "go_back": "Go Back",
+      "clear": "Clear",
+      "download": "Download",
+      "none": "None",
+      "remove": "Remove",
       "rows_per_page": "Rows per page",
-      "total_count": "Total Count: {count}"
-    },
-    "editor": {
-      "extra_tools": "Extra Tools",
-      "text_align": "Text Align",
-      "horizontal_rule": "Horizontal Rule",
-      "more": "More",
-      "align": "Align",
-      "link": {
-        "title": "Link",
-        "text": "Text",
-        "href": "URL",
-        "delete": "Delete Link",
-        "insert": "Insert Link"
-      },
-      "heading": {
-        "h1": "Heading H1",
-        "h2": "Heading H2",
-        "h3": "Heading H3",
-        "h4": "Heading H4",
-        "h5": "Heading H5",
-        "h6": "Heading H6",
-        "paragraph": "Paragraph",
-        "code_block": {
-          "title": "Code Block",
-          "auto": "Auto"
-        }
-      },
-      "color_text": "Text Color",
-      "change_language": "Change Language",
-      "emoji": {
-        "title": "Emoji",
-        "search_results": "Search Results",
-        "categories": {
-          "all": "All",
-          "frequent": "Frequently Used",
-          "people": "Smileys & People",
-          "nature": "Animals & Nature",
-          "foods": "Food & Drink",
-          "activity": "Activity",
-          "places": "Travel & Places",
-          "objects": "Objects",
-          "symbols": "Symbols",
-          "flags": "Flags",
-          "customs": "Customs"
-        },
-        "skin": {
-          "title": "Skin Tone",
-          "skin_0": "Default",
-          "skin_1": "Light",
-          "skin_2": "Medium-Light",
-          "skin_3": "Medium",
-          "skin_4": "Medium-Dark",
-          "skin_5": "Dark"
-        }
-      },
-      "files": {
-        "attach": "Attach Files",
-        "state": {
-          "loading": "Uploading...",
-          "error": "Oops! Something went wrong. {error}"
-        },
-        "insert": "Insert",
-        "access_denied_download": "You don't have permission to download this file.",
-        "images_videos": "Images & Videos",
-        "images": "Images",
-        "errors": {
-          "max_storage_extended": "Max storage exceeded. You can't upload more files. Max storage is {size}.",
-          "invalid_file_type": "Invalid file type! Allowed types: {types}."
-        }
-      },
-
-      "remove_formatting": "Remove Formatting"
-    },
-    "icon_picker": {
-      "title": "Choose an icon",
-      "remove": "Remove Icon",
-      "tabs": {
-        "icons": "Icons",
-        "emojis": "Emojis"
-      },
-      "icons": {
-        "placeholder": "Search icon...",
-        "not_found": "No icons found."
-      },
-      "emojis": {
-        "placeholder": "Search emoji...",
-        "not_found": "No emojis found."
-      }
-    },
-    "user-bar": {
-      "sign_in": "Login",
-      "sign_up": "Register",
-      "log_out": "Log out",
-      "my_profile": "My Profile",
-      "settings": "Settings",
-      "admin_cp": "Admin Panel",
-      "dark_light_switcher": "Toggle Theme",
-      "language": {
-        "change": "Change Language"
-      }
-    },
-    "forms": {
-      "empty": "This field is required.",
-      "min_length": "This field must be at least {length} characters.",
-      "max_length": "This field must be less than {length} characters.",
-      "email_invalid": "Invalid email address.",
+      "total_count": "Total Count: {count}",
       "files": {
         "title": "Upload file",
         "drop_here": "Drop here to upload",
@@ -190,82 +48,128 @@
           "extension": "The file {file} have an invalid extension.",
           "max_size": "The file {file} is too large."
         }
-      }
-    },
-    "sign_in": {
-      "title": "Login",
-      "desc": "You don't have an account? <link></link>.",
-      "sign_up": "Sign Up",
-      "form": {
-        "email": {
-          "label": "Email"
-        },
-        "password": {
-          "label": "Password"
-        },
-        "remember": {
-          "label": "Remember me",
-          "desc": "Not recommended on shared computers."
-        },
-        "submit": "Log In"
       },
-      "error": {
-        "title": "Invalid credentials",
-        "desc": "The email address or password was incorrect. Please try again (make sure your caps lock is off)."
+      "errors": {
+        "title": "Oops! Something went wrong",
+        "reload_page": "Reload Page",
+        "code": "Error code: <code></code>",
+        "no_connection_api": "No connection to the API",
+        "no_connection_api_dev": "This happens when the API makes some changes in your code or when the API is down.",
+        "access_denied": "Access denied",
+        "internal_server_error": "Internal server error.",
+        "captcha_empty": "Captcha is empty.",
+        "captcha_failed": "Captcha is invalid. Please try again. If you can't see the captcha, please refresh the page.",
+        "required": "This field is required.",
+        "min_length": "This field must be at least {length} characters.",
+        "max_length": "This field must be less than {length} characters.",
+        "403": "Access denied",
+        "404": "Page not found",
+        "500": "Internal server error",
+        "actions": {
+          "back_home": "Home Page",
+          "contact": "Contact with Us"
+        },
+        "clear_cache_and_reload": "Clear Cache and Reload"
       },
-      "not_verified": {
-        "title": "Email is not verified",
-        "desc": "Please check your inbox and click the link to activate your account."
-      }
-    },
-    "sign_up": {
-      "title": "Register",
-      "desc": "You already have an account? <link></link>.",
-      "sign_in": "Sign In",
-      "form": {
-        "name": {
-          "label": "Nickname",
-          "desc": "You can use letters, numbers and special characters: @.-_.",
-          "already_exists": "This nickname is already in use.",
-          "invalid": "This nickname is invalid.",
-          "your_id": "Your ID: <id></id>"
+      "dark_light_switcher": "Toggle Theme",
+      "language_change": "Change Language",
+      "user-bar": {
+        "sign_in": "Login",
+        "sign_up": "Register",
+        "log_out": "Log out",
+        "my_profile": "My Profile",
+        "settings": "Settings",
+        "admin_cp": "Admin Panel"
+      },
+      "mobile_nav": {
+        "back": "Back",
+        "search": "Search",
+        "menu": "Menu"
+      },
+      "icon_picker": {
+        "title": "Choose an icon",
+        "remove": "Remove Icon",
+        "icons": {
+          "title": "Icons",
+          "placeholder": "Search icon...",
+          "not_found": "No icons found."
         },
-        "email": {
-          "label": "Email",
-          "already_exists": "This email address is already in use."
-        },
-        "password": {
-          "label": "Password",
-          "desc": "Min 8 characters, lowercase uppercase letter, number and special character."
-        },
-        "terms": {
-          "label": "Accept terms and conditions",
-          "desc": "You agree to our <link>Legal documents & Policies</link>.",
-          "empty": "You must agree to the Terms of Service."
-        },
-        "newsletter": {
-          "label": "Newsletter",
-          "desc": "Receive information about new features, updates and events related to the application."
-        },
-        "submit": "Sign Up",
-        "success": {
-          "title": "Account Created!",
-          "desc": "We've sent a verification email to <email></email>. Please check your inbox and click the link to activate your account.",
-          "sign_in": "Sign In"
+        "emojis": {
+          "title": "Emojis",
+          "placeholder": "Search emoji...",
+          "not_found": "No emojis found."
         }
       },
-      "confirm_email": {
-        "title": "Confirmation Successful",
-        "desc": "Thank you for confirming your email address. You can now access to our platform.",
-        "sign_in": "Sign In",
-        "mail": {
-          "subject": "Confirm your email address",
-          "preview": "You're receiving this email because you created an account on our platform.",
-          "welcome": "Thank you for signing up!",
-          "desc": "To complete your registration, please confirm your email address by clicking the link below:",
-          "ignore": "If you didn't create an account, you can ignore this email.",
-          "button": "Confirm Email"
-        }
+      "editor": {
+        "extra_tools": "Extra Tools",
+        "text_align": "Text Align",
+        "horizontal_rule": "Horizontal Rule",
+        "more": "More",
+        "align": "Align",
+        "link": {
+          "title": "Link",
+          "text": "Text",
+          "href": "URL",
+          "delete": "Delete Link",
+          "insert": "Insert Link"
+        },
+        "heading": {
+          "h1": "Heading H1",
+          "h2": "Heading H2",
+          "h3": "Heading H3",
+          "h4": "Heading H4",
+          "h5": "Heading H5",
+          "h6": "Heading H6",
+          "paragraph": "Paragraph",
+          "code_block": {
+            "title": "Code Block",
+            "auto": "Auto",
+            "search": "Search..."
+          }
+        },
+        "color_text": "Text Color",
+        "change_language": "Change Language",
+        "emoji": {
+          "title": "Emoji",
+          "categories": {
+            "all": "All",
+            "frequent": "Frequently Used",
+            "people": "Smileys & People",
+            "nature": "Animals & Nature",
+            "foods": "Food & Drink",
+            "activity": "Activity",
+            "places": "Travel & Places",
+            "objects": "Objects",
+            "symbols": "Symbols",
+            "flags": "Flags",
+            "customs": "Customs"
+          },
+          "skin": {
+            "title": "Skin Tone",
+            "skin_0": "Default",
+            "skin_1": "Light",
+            "skin_2": "Medium-Light",
+            "skin_3": "Medium",
+            "skin_4": "Medium-Dark",
+            "skin_5": "Dark"
+          }
+        },
+        "files": {
+          "attach": "Attach Files",
+          "state": {
+            "loading": "Uploading...",
+            "error": "Oops! Something went wrong. {error}"
+          },
+          "insert": "Insert",
+          "access_denied_download": "You don't have permission to download this file.",
+          "images_videos": "Images & Videos",
+          "images": "Images",
+          "errors": {
+            "max_storage_extended": "Max storage exceeded. You can't upload more files. Max storage is {size}.",
+            "invalid_file_type": "Invalid file type! Allowed types: {types}."
+          }
+        },
+        "remove_formatting": "Remove Formatting"
       }
     },
     "settings": {
@@ -298,6 +202,8 @@
         "search": "Search files by name...",
         "temp_file": "Temporary File will be deleted soon",
         "storage_usage": "{used} of {total} ({percent}%) storage used",
+        "name": "Name",
+        "created": "Created",
         "table": {
           "file_size": "File Size",
           "count_uses": "Count Uses",
@@ -314,6 +220,77 @@
         "ip_address": "IP Address"
       }
     },
+    "sign_in": {
+      "title": "Login",
+      "desc": "You don't have an account? <link></link>.",
+      "sign_up": "Sign Up",
+      "email": "Email",
+      "password": "Password",
+      "remember": {
+        "label": "Remember me",
+        "desc": "Not recommended on shared computers."
+      },
+      "submit": "Log In",
+      "error": {
+        "title": "Invalid credentials",
+        "desc": "The email address or password was incorrect. Please try again (make sure your caps lock is off)."
+      },
+      "not_verified": {
+        "title": "Email is not verified",
+        "desc": "Please check your inbox and click the link to activate your account."
+      }
+    },
+    "sign_up": {
+      "title": "Register",
+      "desc": "You already have an account? <link></link>.",
+      "sign_in": "Sign In",
+      "week_password": "Week",
+      "strong_password": "Strong",
+      "email_invalid": "This email address is invalid.",
+      "name": {
+        "label": "Nickname",
+        "desc": "You can use letters, numbers and special characters: @.-_.",
+        "already_exists": "This nickname is already in use.",
+        "invalid": "This nickname is invalid.",
+        "your_id": "Your ID: <id></id>"
+      },
+      "email": {
+        "label": "Email",
+        "already_exists": "This email address is already in use."
+      },
+      "password": {
+        "label": "Password",
+        "desc": "Min 8 characters, lowercase uppercase letter, number and special character."
+      },
+      "terms": {
+        "label": "Accept terms and conditions",
+        "desc": "You agree to our <link>Legal documents & Policies</link>.",
+        "empty": "You must agree to the Terms of Service."
+      },
+      "newsletter": {
+        "label": "Newsletter",
+        "desc": "Receive information about new features, updates and events related to the application."
+      },
+      "submit": "Sign Up",
+      "success": {
+        "title": "Account Created!",
+        "desc": "We've sent a verification email to <email></email>. Please check your inbox and click the link to activate your account.",
+        "sign_in": "Sign In"
+      },
+      "confirm_email": {
+        "title": "Confirmation Successful",
+        "desc": "Thank you for confirming your email address. You can now access to our platform.",
+        "sign_in": "Sign In",
+        "mail": {
+          "subject": "Confirm your email address",
+          "preview": "You're receiving this email because you created an account on our platform.",
+          "welcome": "Thank you for signing up!",
+          "desc": "To complete your registration, please confirm your email address by clicking the link below:",
+          "ignore": "If you didn't create an account, you can ignore this email.",
+          "button": "Confirm Email"
+        }
+      }
+    },
     "reset_password": {
       "title": "Reset Password",
       "preview_text": "You're receiving this email because you requested a password reset for your account.",
@@ -321,26 +298,6 @@
         "title": "Someone recently requested a password change for your account. If this was you, you can set a new password here:",
         "button": "Reset Password",
         "desc": "If you don't want to change your password or didn't request this, just ignore and delete this message."
-      }
-    },
-    "errors": {
-      "title": "Oops! Something went wrong",
-      "code": "Error code: <code></code>",
-      "no_connection_api": "No connection to the API",
-      "no_connection_api_dev": "This happens when the API makes some changes in your code or when the API is down.",
-      "access_denied": "Access denied",
-      "internal_server_error": "Internal server error.",
-      "captcha_empty": "Captcha is empty.",
-      "captcha_failed": "Captcha is invalid. Please try again. If you can't see the captcha, please refresh the page.",
-      "required": "This field is required.",
-      "min_length": "This field must be at least {length} characters.",
-      "max_length": "This field must be less than {length} characters.",
-      "403": "Access denied",
-      "404": "Page not found",
-      "500": "Internal server error",
-      "actions": {
-        "back_home": "Home Page",
-        "contact": "Contact with Us"
       }
     },
     "legal": {

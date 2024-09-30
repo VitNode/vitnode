@@ -21,7 +21,7 @@ export const ContentDeleteActionTableNavAdmin = ({
   name,
 }: Pick<ShowCoreNav, 'children' | 'id' | 'name'>) => {
   const t = useTranslations('admin.core.styles.nav.delete');
-  const tCore = useTranslations('core');
+  const tCore = useTranslations('core.global');
   const { onSubmit } = useDeleteNavAdmin({ id, name });
   const { convertText } = useTextLang();
 
@@ -42,7 +42,7 @@ export const ContentDeleteActionTableNavAdmin = ({
         {children.length > 0 && (
           <Alert variant="warn">
             <Trash className="size-4" />
-            <AlertTitle>{tCore('hands_up')}</AlertTitle>
+            <AlertTitle>{tCore('are_you_sure')}</AlertTitle>
             <AlertDescription>{t('desc_with_children')}</AlertDescription>
           </Alert>
         )}

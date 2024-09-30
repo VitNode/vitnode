@@ -25,7 +25,7 @@ const ComponentList = ({
   items: Emoji[];
   ref: React.RefCallback<ComponentListRef>;
 }) => {
-  const t = useTranslations('core');
+  const t = useTranslations('core.global');
   const [selectedIndex, setSelectedIndex] = React.useState(0);
   const skinToneIndexLocalStorage = localStorage.getItem(
     CONFIG.local_storage.editor_skin_tone,

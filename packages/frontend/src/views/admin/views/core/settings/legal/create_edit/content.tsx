@@ -29,7 +29,7 @@ export const ContentCreateEditLegalPage = ({
   data?: Admin_Core_Terms__ShowQuery['core_terms__show']['edges'][0];
 }) => {
   const t = useTranslations('admin.core.settings.legal.create_edit');
-  const tCore = useTranslations('core.errors');
+  const tCore = useTranslations('core.global.errors');
   const { convertText } = useTextLang();
   const { setOpen } = useDialog();
 

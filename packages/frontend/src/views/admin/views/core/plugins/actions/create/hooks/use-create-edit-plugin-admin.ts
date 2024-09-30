@@ -18,7 +18,7 @@ interface Args {
 
 export const useCreateEditPluginAdmin = ({ data }: Args) => {
   const t = useTranslations('admin.core.plugins');
-  const tCore = useTranslations('core');
+  const tCore = useTranslations('core.global.errors');
   const { setOpen } = useDialog();
   const pathname = usePathname();
   const { push } = useRouter();
@@ -103,8 +103,8 @@ export const useCreateEditPluginAdmin = ({ data }: Args) => {
         return;
       }
 
-      toast.error(tCore('errors.title'), {
-        description: tCore('errors.internal_server_error'),
+      toast.error(tCore('title'), {
+        description: tCore('internal_server_error'),
       });
 
       return;

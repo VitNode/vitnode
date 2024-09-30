@@ -1,3 +1,4 @@
+import { TranslationsProvider } from '@/components/translations-provider';
 import { Card } from '@/components/ui/card';
 import { HeaderContent } from '@/components/ui/header-content';
 import { getGlobalData } from '@/graphql/get-global-data';
@@ -21,12 +22,12 @@ export const EditorAdminView = async () => {
   ]);
 
   return (
-    <>
+    <TranslationsProvider namespaces="admin.core.styles.editor">
       <HeaderContent h1={t('title')} />
 
       <Card className="p-6">
         <ContentEditorAdmin {...data.core_middleware__show.editor} />
       </Card>
-    </>
+    </TranslationsProvider>
   );
 };

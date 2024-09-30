@@ -7,7 +7,7 @@ export const InstallConfigLayout = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const t = useTranslations('admin.configs');
+  const t = useTranslations('admin.global');
 
   return (
     <div className="container my-10">

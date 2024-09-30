@@ -8,7 +8,7 @@ import { mutationApi } from './mutation-api';
 
 export const SubmitDatabaseInstallConfigs = () => {
   const [isPending, setPending] = React.useState(false);
-  const tCore = useTranslations('core');
+  const tCore = useTranslations('core.global.errors');
   const { setCurrentStep } = useInstallVitnode();
 
   return (
@@ -19,8 +19,8 @@ export const SubmitDatabaseInstallConfigs = () => {
 
         const mutation = await mutationApi();
         if (mutation?.error) {
-          toast.error(tCore('errors.title'), {
-            description: tCore('errors.internal_server_error'),
+          toast.error(tCore('title'), {
+            description: tCore('internal_server_error'),
           });
           setPending(false);
 

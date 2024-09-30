@@ -13,7 +13,7 @@ export const useDownloadPluginAdmin = ({
   version,
   version_code,
 }: Pick<ShowAdminPlugins, 'code' | 'version' | 'version_code'>) => {
-  const t = useTranslations('core');
+  const t = useTranslations('core.global.errors');
   const { setOpen } = useDialog();
   const formSchema = z.object({
     type: z
@@ -37,8 +37,8 @@ export const useDownloadPluginAdmin = ({
     });
 
     if (!mutation.data) {
-      toast.error(t('errors.title'), {
-        description: t('errors.internal_server_error'),
+      toast.error(t('title'), {
+        description: t('internal_server_error'),
       });
 
       return;

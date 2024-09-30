@@ -34,7 +34,7 @@ export const ItemPreviewFilesInput = ({
   showInfo,
   multiple,
 }: WithMultiple | WithoutMultiple) => {
-  const t = useTranslations('core');
+  const t = useTranslations('core.global');
 
   const size = React.useMemo(() => {
     const sizeInBytes = file instanceof File ? file.size : file.file_size;

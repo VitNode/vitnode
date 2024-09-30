@@ -1,6 +1,5 @@
+import { TranslationsProvider } from '@/components/translations-provider';
 import { Metadata } from 'next';
-import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
 import React from 'react';
 
 import { getGlobalData } from '../../graphql/get-global-data';
@@ -57,17 +56,15 @@ export const RootLayout = async ({
   params: { locale },
   className,
 }: Props) => {
-  const messages = await getMessages({ locale });
-
   try {
     const middlewareData = await getGlobalData();
 
     return (
       <WrapperRootLayout className={className} locale={locale}>
         <RootProviders middlewareData={middlewareData}>
-          <NextIntlClientProvider messages={messages}>
+          <TranslationsProvider namespaces={[]}>
             {children}
-          </NextIntlClientProvider>
+          </TranslationsProvider>
         </RootProviders>
       </WrapperRootLayout>
     );
@@ -75,9 +72,9 @@ export const RootLayout = async ({
     return (
       <WrapperRootLayout locale={locale}>
         <RootProviders>
-          <NextIntlClientProvider messages={messages}>
+          <TranslationsProvider namespaces={[]}>
             <InternalErrorView />
-          </NextIntlClientProvider>
+          </TranslationsProvider>
         </RootProviders>
       </WrapperRootLayout>
     );

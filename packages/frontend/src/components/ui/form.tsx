@@ -32,7 +32,7 @@ function Form<
   TContext = unknown,
   TTransformedValues extends FieldValues = TFieldValues,
 >(props: FormProps<TFieldValues, TContext, TTransformedValues>) {
-  const t = useTranslations('core');
+  const t = useTranslations('core.global');
   const formIsDirty = props.formState.isDirty;
   useBeforeUnload(
     formIsDirty && !props.disableBeforeUnload,
@@ -130,7 +130,7 @@ const FormLabel = ({
   ...props
 }: FormLabelProps) => {
   const { error, formItemId } = useFormField();
-  const t = useTranslations('core');
+  const t = useTranslations('core.global');
 
   return (
     <Label
@@ -226,7 +226,7 @@ const FormFieldRender = ({
   label: string;
   optional?: boolean;
 }) => {
-  const t = useTranslations('core');
+  const t = useTranslations('core.global');
 
   return (
     <FormItem className="@xs:flex-row @xs:gap-6 flex w-full flex-col">

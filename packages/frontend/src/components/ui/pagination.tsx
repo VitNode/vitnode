@@ -29,7 +29,7 @@ export const Pagination = ({
   defaultPageSize: 10 | 20 | 30 | 40 | 50;
   pageInfo: PageInfo;
 }) => {
-  const t = useTranslations('core');
+  const t = useTranslations('core.global');
   const { push } = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -53,7 +53,7 @@ export const Pagination = ({
   return (
     <div className="flex flex-wrap items-center justify-center gap-4 sm:justify-end">
       <span className="text-muted-foreground text-sm">
-        {t('table.total_count', { count: pageInfo.totalCount })}
+        {t('total_count', { count: pageInfo.totalCount })}
       </span>
 
       <div className="flex flex-wrap items-center justify-center gap-4">
@@ -89,13 +89,13 @@ export const Pagination = ({
               </SelectContent>
             </Select>
 
-            <TooltipContent>{t('table.rows_per_page')}</TooltipContent>
+            <TooltipContent>{t('rows_per_page')}</TooltipContent>
           </Tooltip>
         </TooltipProvider>
 
         <div className="flex items-center space-x-2">
           <Button
-            ariaLabel={t('pagination.previous')}
+            ariaLabel={t('previous')}
             className="bg-card size-9"
             disabled={!pageInfo.hasPreviousPage}
             onClick={() => {
@@ -115,7 +115,7 @@ export const Pagination = ({
             <ChevronLeftIcon className="size-4" />
           </Button>
           <Button
-            ariaLabel={t('pagination.next')}
+            ariaLabel={t('next')}
             className="bg-card size-9"
             disabled={!pageInfo.hasNextPage}
             onClick={() => {

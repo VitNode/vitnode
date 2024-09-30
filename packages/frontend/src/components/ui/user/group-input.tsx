@@ -1,6 +1,5 @@
 import { StringLanguage } from '@/graphql/types';
 import { X } from 'lucide-react';
-import { useTranslations } from 'next-intl';
 import React from 'react';
 
 import { cn } from '../../../helpers/classnames';
@@ -42,7 +41,6 @@ export const GroupInput = ({
   value: currentValue,
   ...rest
 }: MultiProps | SingleProps) => {
-  const t = useTranslations('core.group_input');
   const values = Array.isArray(currentValue)
     ? currentValue
     : currentValue
@@ -62,7 +60,8 @@ export const GroupInput = ({
           {...rest}
         >
           {values.length === 0
-            ? t('placeholder')
+            ? // TODO: Add placeholder translation
+              'Select group...'
             : values.map(item => {
                 const onRemove = () => {
                   if (multiple) {

@@ -6,15 +6,15 @@ import { mutationApi } from './mutation-api';
 
 export const useDeletePluginAdmin = ({ code }: { code: string }) => {
   const t = useTranslations('admin.core.plugins.delete');
-  const tCore = useTranslations('core');
+  const tCore = useTranslations('core.global.errors');
   const { setOpen } = useAlertDialog();
 
   const onSubmit = async () => {
     const mutation = await mutationApi({ code });
 
     if (mutation?.error) {
-      toast.error(tCore('errors.title'), {
-        description: tCore('errors.internal_server_error'),
+      toast.error(tCore('title'), {
+        description: tCore('internal_server_error'),
       });
 
       return;

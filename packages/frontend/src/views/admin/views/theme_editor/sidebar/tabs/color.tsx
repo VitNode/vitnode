@@ -19,7 +19,7 @@ import { ThemeEditorTab, useThemeEditor } from '../../hooks/use-theme-editor';
 
 export const ColorsTabThemeEditor = () => {
   const t = useTranslations('admin.theme_editor.colors');
-  const tCore = useTranslations('core');
+  const tCore = useTranslations('core.global');
   const { activeTheme, changeColor, form, setActiveTab } = useThemeEditor();
 
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition

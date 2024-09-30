@@ -35,7 +35,7 @@ export const IconPicker = ({
   disabled,
   required,
 }: Props) => {
-  const t = useTranslations('core');
+  const t = useTranslations('core.global.icon_picker');
   const [open, setOpen] = React.useState(false);
 
   return (
@@ -48,7 +48,7 @@ export const IconPicker = ({
               disabled={disabled}
               variant="outline"
             >
-              <Plus /> {t('icon_picker.title')}
+              <Plus /> {t('title')}
             </Button>
           </PopoverTrigger>
 
@@ -59,7 +59,7 @@ export const IconPicker = ({
               }}
               variant="destructiveGhost"
             >
-              <X /> {t('icon_picker.remove')}
+              <X /> {t('remove')}
             </Button>
           )}
         </div>

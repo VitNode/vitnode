@@ -14,14 +14,14 @@ export const ContentPluginsCoreAdmin = ({
   admin__core_plugins__show: { edges, pageInfo },
 }: Admin__Core_Plugins__ShowQuery) => {
   const t = useTranslations('admin.core.plugins');
-  const tCore = useTranslations('core');
+  const tCore = useTranslations('core.global');
 
   return (
     <DataTable
       columns={[
         {
           id: 'name',
-          title: tCore('table.name'),
+          title: t('name'),
           cell: ({ row }) => {
             return (
               <>
@@ -40,7 +40,7 @@ export const ContentPluginsCoreAdmin = ({
         },
         {
           id: 'version',
-          title: tCore('table.version'),
+          title: t('version'),
           cell: ({ row }) => {
             if (!row.version_code) return null;
 
@@ -56,7 +56,7 @@ export const ContentPluginsCoreAdmin = ({
         },
         {
           id: 'author',
-          title: tCore('table.author'),
+          title: t('author'),
           cell: ({ row }) => {
             if (row.author_url) {
               return (
@@ -76,7 +76,7 @@ export const ContentPluginsCoreAdmin = ({
         },
         {
           id: 'updated',
-          title: tCore('table.updated'),
+          title: t('updated'),
           sortable: true,
           cell: ({ row }) => {
             return <DateFormat date={row.updated} />;

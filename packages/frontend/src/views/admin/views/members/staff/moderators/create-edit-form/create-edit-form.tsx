@@ -20,7 +20,7 @@ import { useFormCreateEditFormGroupsMembersAdmin } from './hooks/use-form';
 
 export const CreateEditFormModeratorsStaffAdmin = () => {
   const t = useTranslations('admin.members.staff');
-  const tCore = useTranslations('core');
+  const tCore = useTranslations('core.global');
   const { form, onSubmit } = useFormCreateEditFormGroupsMembersAdmin();
 
   return (

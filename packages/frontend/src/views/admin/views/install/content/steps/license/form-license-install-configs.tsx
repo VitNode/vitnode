@@ -1,19 +1,15 @@
 import { AutoForm } from '@/components/form/auto-form';
 import { AutoFormCheckbox } from '@/components/form/fields/checkbox';
 import { Button } from '@/components/ui/button';
-import { useTranslations } from 'next-intl';
 import * as z from 'zod';
 
 import { useInstallVitnode } from '../../hooks/use-install-vitnode';
 
 export const FormLicenseInstallConfigs = () => {
-  const tCore = useTranslations('core');
   const { setCurrentStep } = useInstallVitnode();
 
   const formSchema = z.object({
-    agree: z.boolean({
-      required_error: tCore('forms.empty'),
-    }),
+    agree: z.boolean(),
   });
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

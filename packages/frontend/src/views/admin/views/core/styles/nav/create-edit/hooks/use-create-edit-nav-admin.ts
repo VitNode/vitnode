@@ -15,7 +15,7 @@ export interface CreateEditNavAdminArgs {
 
 export const useCreateEditNavAdmin = ({ data }: CreateEditNavAdminArgs) => {
   const t = useTranslations('admin.core.styles.nav');
-  const tCore = useTranslations('core');
+  const tCore = useTranslations('core.global.errors');
   const { setOpen } = useDialog();
   const { convertText } = useTextLang();
   const formSchema = z.object({
@@ -57,8 +57,8 @@ export const useCreateEditNavAdmin = ({ data }: CreateEditNavAdminArgs) => {
     }
 
     if (isError) {
-      toast.error(tCore('errors.title'), {
-        description: tCore('errors.internal_server_error'),
+      toast.error(tCore('title'), {
+        description: tCore('internal_server_error'),
       });
 
       return;

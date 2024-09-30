@@ -13,7 +13,7 @@ import {
 
 export const ContentCreateEditNavAdmin = ({ data }: CreateEditNavAdminArgs) => {
   const t = useTranslations('admin.core.styles.nav');
-  const tCore = useTranslations('core');
+  const tCore = useTranslations('core.global');
   const { onSubmit, formSchema } = useCreateEditNavAdmin({ data });
 
   return (

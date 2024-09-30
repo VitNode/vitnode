@@ -12,13 +12,13 @@ export const ItemNavAdmin = ({
 }) => {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-expect-error
-  const t = useTranslations(`admin_${id}`);
+  const t = useTranslations(`admin_${id}.nav`);
 
   return (
     <>
       {id !== 'core' && (
         <div className="mb-2 mt-8 px-2 font-medium first:mt-0">
-          {t('nav.title')}
+          {t('title')}
         </div>
       )}
 
@@ -27,6 +27,17 @@ export const ItemNavAdmin = ({
           {items.map(item => (
             <li key={item.id}>
               <LinkItemNavAdmin
+                i18n={{
+                  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                  // @ts-expect-error
+                  title: t(item.id),
+                  children: item.children?.map(child => ({
+                    id: child.id,
+                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                    // @ts-expect-error
+                    title: t(`${item.id}_${child.id}`),
+                  })),
+                }}
                 key={item.id}
                 plugin_code={id}
                 {...item}

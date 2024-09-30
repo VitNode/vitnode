@@ -1,3 +1,4 @@
+import { TranslationsProvider } from '@/components/translations-provider';
 import { Card } from '@/components/ui/card';
 import { HeaderContent } from '@/components/ui/header-content';
 import { fetcher } from '@/graphql/fetcher';
@@ -35,12 +36,12 @@ export const CaptchaSecurityAdminView = async () => {
   ]);
 
   return (
-    <>
+    <TranslationsProvider namespaces="admin.core.settings.security.captcha">
       <HeaderContent desc={t('desc')} h1={t('title')} />
 
       <Card className="p-6">
         <ContentCaptchaSecurityAdmin {...data} />
       </Card>
-    </>
+    </TranslationsProvider>
   );
 };

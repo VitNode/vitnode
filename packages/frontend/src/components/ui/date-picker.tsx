@@ -26,7 +26,7 @@ export const DatePicker = ({
   value: Date | undefined;
 }) => {
   const format = useFormatter();
-  const t = useTranslations('core');
+  const t = useTranslations('core.global');
 
   return (
     <Popover>

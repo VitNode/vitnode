@@ -34,7 +34,7 @@ export const CreateEditFormGroupsMembersAdmin = ({
   data,
 }: CreateEditFormGroupsMembersAdminArgs) => {
   const t = useTranslations('admin.members.groups');
-  const tCore = useTranslations('core');
+  const tCore = useTranslations('core.global');
   const [activeTab, setActiveTab] = React.useState<TabsEnum>(TabsEnum.MAIN);
   const { onSubmit, formSchema, setValues, values } =
     useCreateEditFormGroupsMembersAdmin({

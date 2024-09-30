@@ -40,7 +40,7 @@ export function AutoFormSelect<T extends FieldValues>({
 }: {
   componentProps?: AutoFormSelectProps;
 } & AutoFormItemProps<T>) {
-  const t = useTranslations('core');
+  const t = useTranslations('core.global');
   const baseValues = (
     getBaseSchema(shape, true) as unknown as z.ZodEnum<[string, ...string[]]>
   )._def.values;

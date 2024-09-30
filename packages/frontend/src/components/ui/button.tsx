@@ -64,7 +64,7 @@ const Button = ({
   loadingText,
   ...props
 }: ButtonProps | IconButtonProps) => {
-  const t = useTranslations('core');
+  const t = useTranslations('core.global');
   const Comp = asChild ? Slot : 'button';
 
   if (loading) {

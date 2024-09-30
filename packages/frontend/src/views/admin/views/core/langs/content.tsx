@@ -14,14 +14,14 @@ export const ContentLangsCoreAdminView = ({
   core_languages__show: { edges, pageInfo },
 }: Admin__Core_Languages__ShowQuery) => {
   const t = useTranslations('admin.core.langs');
-  const tCore = useTranslations('core');
+  const tCore = useTranslations('core.global');
 
   return (
     <DataTable
       columns={[
         {
           id: 'name',
-          title: tCore('table.name'),
+          title: t('table.name'),
           cell: ({ row }) => {
             return (
               <div className="flex items-center gap-4">
@@ -48,7 +48,7 @@ export const ContentLangsCoreAdminView = ({
         },
         {
           id: 'created',
-          title: tCore('table.created'),
+          title: t('table.created'),
           sortable: true,
           cell: ({ row }) => {
             return <DateFormat date={row.created} />;
@@ -56,7 +56,7 @@ export const ContentLangsCoreAdminView = ({
         },
         {
           id: 'enabled',
-          title: tCore('table.enabled'),
+          title: t('table.enabled'),
           cell: ({ row }) => {
             return <EnabledRowTableLangsCoreAdmin data={row} />;
           },

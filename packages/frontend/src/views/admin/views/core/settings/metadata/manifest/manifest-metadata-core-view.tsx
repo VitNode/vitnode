@@ -1,3 +1,4 @@
+import { TranslationsProvider } from '@/components/translations-provider';
 import { Card } from '@/components/ui/card';
 import { HeaderContent } from '@/components/ui/header-content';
 import { fetcher } from '@/graphql/fetcher';
@@ -39,12 +40,12 @@ export const ManifestMetadataCoreAdminView = async () => {
   ]);
 
   return (
-    <>
+    <TranslationsProvider namespaces="admin.core.metadata.manifest">
       <HeaderContent desc={t('desc')} h1={t('title')} />
 
       <Card className="p-6">
         <ContentManifestMetadataCoreAdmin {...data} />
       </Card>
-    </>
+    </TranslationsProvider>
   );
 };
