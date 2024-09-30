@@ -28,7 +28,7 @@ export const AdminLayout = async ({
     const data = await getSessionAdminData();
 
     return (
-      <TranslationsProvider namespaces={['admin.global']}>
+      <TranslationsProvider namespaces="admin.global">
         <AdminProviders data={data}>
           <AsideAuthAdmin />
           <HeaderAdmin />

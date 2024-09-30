@@ -20,7 +20,7 @@ import { SidebarThemeEditor } from './sidebar/sidebar';
 import { ThemeEditorViewEnum, ToolbarThemeEditor } from './toolbar';
 
 export const ContentThemeEditor = (props: Core_Theme_Editor__ShowQuery) => {
-  const t = useTranslations('admin.configs');
+  const t = useTranslations('admin.global');
   const tCore = useTranslations('core.global');
   const { activeTheme, iframeRef, ...rest } = useThemeEditorApi(props);
   const [activeMode, setActiveMode] = React.useState<ThemeEditorViewEnum>(

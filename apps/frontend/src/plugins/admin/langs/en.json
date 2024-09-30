@@ -7,6 +7,7 @@
       "version": "Version: {version}",
       "diagnostic_tools": "Diagnostic Tools",
       "home_page": "Home Page",
+      "mobile_not_supported": "Mobile devices are not supported.",
       "search": {
         "placeholder": "Search...",
         "no_results": "No results found.",
@@ -633,9 +634,6 @@
           }
         }
       }
-    },
-    "configs": {
-      "mobile_not_supported": "This view is not supported on mobile devices."
     }
   }
 }

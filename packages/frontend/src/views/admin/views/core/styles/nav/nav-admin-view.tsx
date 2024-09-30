@@ -1,3 +1,4 @@
+import { TranslationsProvider } from '@/components/translations-provider';
 import { HeaderContent } from '@/components/ui/header-content';
 import { fetcher } from '@/graphql/fetcher';
 import {
@@ -39,12 +40,12 @@ export const NavAdminView = async () => {
   ]);
 
   return (
-    <>
+    <TranslationsProvider namespaces="admin.core.styles.nav">
       <HeaderContent h1={t('title')}>
         <ActionsNavAdmin />
       </HeaderContent>
 
       <TableNavAdmin {...data} />
-    </>
+    </TranslationsProvider>
   );
 };

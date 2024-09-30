@@ -1,3 +1,4 @@
+import { TranslationsProvider } from '@/components/translations-provider';
 import { HeaderContent } from '@/components/ui/header-content';
 import { fetcher } from '@/graphql/fetcher';
 import {
@@ -61,12 +62,12 @@ export const LangsCoreAdminView = async ({
   ]);
 
   return (
-    <>
+    <TranslationsProvider namespaces={['admin.core.langs']}>
       <HeaderContent h1={t('title')}>
         <ActionsLangsAdmin />
       </HeaderContent>
 
       <ContentLangsCoreAdminView {...data} />
-    </>
+    </TranslationsProvider>
   );
 };

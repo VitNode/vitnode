@@ -38,11 +38,14 @@ export async function TranslationsProvider<
   namespaces,
 }: {
   children: React.ReactNode;
-  namespaces: NestedKey[];
+  namespaces: NestedKey | NestedKey[];
 }) {
   const locale = await getLocale();
   const messagesInit = await getMessages({ locale });
-  const messages = pick(messagesInit, ['core.global', ...namespaces]);
+  const messages = pick(messagesInit, [
+    'core.global',
+    ...(Array.isArray(namespaces) ? namespaces : [namespaces]),
+  ]);
 
   return (
     <NextIntlClientProvider messages={messages}>

@@ -36,7 +36,7 @@ export const LayoutSettingsView = async ({
   }
 
   return (
-    <TranslationsProvider namespaces={['core.settings']}>
+    <TranslationsProvider namespaces="core.settings">
       <div className="container my-4">
         <HeaderContent
           className="mb-5"

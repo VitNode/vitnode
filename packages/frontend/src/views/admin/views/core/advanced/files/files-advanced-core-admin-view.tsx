@@ -1,3 +1,4 @@
+import { TranslationsProvider } from '@/components/translations-provider';
 import { HeaderContent } from '@/components/ui/header-content';
 import { fetcher } from '@/graphql/fetcher';
 import {
@@ -55,10 +56,12 @@ export const FilesAdvancedCoreAdminView = async ({
   ]);
 
   return (
-    <>
+    <TranslationsProvider
+      namespaces={['admin.core.advanced.files', 'core.settings.files']}
+    >
       <HeaderContent h1={t('title')} />
 
       <ContentFilesAdvancedCoreAdminView {...data} />
-    </>
+    </TranslationsProvider>
   );
 };

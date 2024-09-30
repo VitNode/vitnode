@@ -2,7 +2,7 @@ import { TranslationsProvider } from 'vitnode-frontend/components/translations-p
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <TranslationsProvider namespaces="core.sign_in">
+    <TranslationsProvider namespaces="admin.core.settings.email">
       {children}
     </TranslationsProvider>
   );
