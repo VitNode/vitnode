@@ -89,13 +89,19 @@ export class ShowAdminNavService {
         {
           code: 'ai',
           icon: 'brain',
-          keywords: [
-            'artificial',
-            'intelligence',
-            'gpt',
-            'openai',
-            'google',
-            'gemini',
+          keywords: [],
+          children: [
+            {
+              code: 'settings',
+              keywords: [
+                'artificial',
+                'intelligence',
+                'gpt',
+                'openai',
+                'google',
+                'gemini',
+              ],
+            },
           ],
         },
         {

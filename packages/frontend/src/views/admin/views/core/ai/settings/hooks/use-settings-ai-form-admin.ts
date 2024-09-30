@@ -6,13 +6,13 @@ import * as z from 'zod';
 
 import { mutationApi } from './mutation-api';
 
-export const useProvidersAiFormAdmin = (
+export const useSettingsAiFormAdmin = (
   data: Admin__Core_Ai__ShowQuery['admin__core_ai__show'],
 ) => {
-  const t = useTranslations('core');
+  const t = useTranslations('core.global');
   const formSchema = z.object({
     provider: z.nativeEnum(AiProvider).default(data.provider),
-    key: z.string().optional(),
+    key: z.string().default('').optional(),
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {

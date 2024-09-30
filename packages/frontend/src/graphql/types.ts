@@ -267,6 +267,7 @@ export type LogsAdminEmailObj = {
 export type Mutation = {
   __typename?: 'Mutation';
   admin__core_ai__edit: ShowAdminCoreAiObj;
+  admin__core_ai__test: Scalars['String']['output'];
   admin__core_authorization_settings__edit: ShowAdminAuthorizationSettingsObj;
   admin__core_email_settings__edit: ShowAdminEmailSettingsServiceObj;
   admin__core_email_settings__test: Scalars['String']['output'];
@@ -308,7 +309,6 @@ export type Mutation = {
   admin__core_theme_editor__edit: Scalars['String']['output'];
   admin__install__create_database: Scalars['String']['output'];
   admin_sessions__sign_out: Scalars['String']['output'];
-  core_ai__test: Scalars['String']['output'];
   core_editor_files__delete: Scalars['String']['output'];
   core_editor_files__upload: ShowCoreFiles;
   core_members__avatar__delete: Scalars['String']['output'];
@@ -324,6 +324,11 @@ export type Mutation = {
 export type MutationAdmin__Core_Ai__EditArgs = {
   key?: InputMaybe<Scalars['String']['input']>;
   provider: AiProvider;
+};
+
+
+export type MutationAdmin__Core_Ai__TestArgs = {
+  prompt: Scalars['String']['input'];
 };
 
 

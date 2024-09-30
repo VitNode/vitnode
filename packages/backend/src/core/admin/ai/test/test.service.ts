@@ -1,16 +1,15 @@
+import { AiService } from '@/core/ai/provider/ai.service';
 import { Injectable } from '@nestjs/common';
 
-import { AiService } from '../provider/ai.service';
-
 @Injectable()
-export class TestCoreAiService {
+export class TestAdminCoreAiService {
   constructor(private readonly aiService: AiService) {}
 
-  async test(): Promise<string> {
+  async test(prompt: string): Promise<string> {
     const results = await this.aiService.generateText({
-      prompt: 'Tell me a joke',
+      prompt,
     });
 
-    return 'test';
+    return results.text;
   }
 }

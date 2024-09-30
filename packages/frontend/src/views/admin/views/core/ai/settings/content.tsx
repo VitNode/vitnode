@@ -10,15 +10,16 @@ import {
   AutoFormRadioGroupProps,
 } from '@/components/form/fields/radio-group';
 import { Admin__Core_Ai__ShowQuery } from '@/graphql/queries/admin/ai/admin__core_ai__show.generated';
+import { Link } from '@/navigation';
 import { useTranslations } from 'next-intl';
 
-import { useProvidersAiFormAdmin } from './hooks/use-providers-ai-form-admin';
+import { useSettingsAiFormAdmin } from './hooks/use-settings-ai-form-admin';
 
-export const ContentProvidersAiAdmin = ({
+export const ContentSettingsAiAdmin = ({
   admin__core_ai__show: data,
 }: Admin__Core_Ai__ShowQuery) => {
-  const t = useTranslations('admin.core.ai');
-  const { formSchema, onSubmit } = useProvidersAiFormAdmin(data);
+  const t = useTranslations('admin.core.ai.settings');
+  const { formSchema, onSubmit } = useSettingsAiFormAdmin(data);
 
   return (
     <>
@@ -35,18 +36,37 @@ export const ContentProvidersAiAdmin = ({
           {
             id: 'provider',
             component: AutoFormRadioGroup,
-            label: t('provider.title'),
-            description: t('provider.desc'),
+            label: t('provider'),
             componentProps: {
               labels: {
                 none: {
-                  title: t('provider.none'),
+                  title: t('none'),
                 },
                 google: {
-                  title: t('provider.google'),
+                  title: t('google.title'),
+                  description: t.rich('google.desc', {
+                    link: text => (
+                      <Link
+                        href="https://vitnode.com/docs/guides/ai/google-ai"
+                        target="_blank"
+                      >
+                        {text}
+                      </Link>
+                    ),
+                  }),
                 },
                 openai: {
-                  title: t('provider.openai'),
+                  title: t('openai.title'),
+                  description: t.rich('openai.desc', {
+                    link: text => (
+                      <Link
+                        href="https://vitnode.com/docs/guides/ai/google-ai"
+                        target="_blank"
+                      >
+                        {text}
+                      </Link>
+                    ),
+                  }),
                 },
               },
             } as AutoFormRadioGroupProps,
