@@ -1,10 +1,15 @@
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { getSessionAdminData } from '@/graphql/get-session-admin-data';
 
+import { TextAndIconsAsideAdmin } from '../aside/aside';
 import { ItemNavAdmin } from './item/item';
 import { NavAdminWrapper } from './wrapper';
 
-export const NavAdmin = async () => {
+export const NavAdmin = async ({
+  textsAndIcons,
+}: {
+  textsAndIcons: TextAndIconsAsideAdmin[];
+}) => {
   const data = await getSessionAdminData();
 
   return (
@@ -22,6 +27,7 @@ export const NavAdmin = async () => {
                 })),
               }))}
               key={item.code}
+              textsAndIcons={textsAndIcons}
             />
           ))}
         </NavAdminWrapper>

@@ -1,25 +1,22 @@
 import { CommandItem, CommandShortcut } from '@/components/ui/command';
 import { NavSearchAdminSessions } from '@/graphql/types';
 import { useRouter } from '@/navigation';
-import { useTranslations } from 'next-intl';
 
-interface Props
-  extends Pick<
-    NavSearchAdminSessions,
-    'code' | 'code_plugin' | 'parent_nav_code'
-  > {
-  setOpen: (open: boolean) => void;
-}
+import { TextAndIconsAsideAdmin } from '../../aside';
 
 export const PageItemContentSearchAsideAuthAdmin = ({
   code,
   code_plugin,
   parent_nav_code,
   setOpen,
-}: Props) => {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-expect-error
-  const t = useTranslations(`admin_${code_plugin}`);
+  textAndIcon,
+}: {
+  setOpen: (open: boolean) => void;
+  textAndIcon: TextAndIconsAsideAdmin;
+} & Pick<
+  NavSearchAdminSessions,
+  'code' | 'code_plugin' | 'parent_nav_code'
+>) => {
   const { push } = useRouter();
   const href = parent_nav_code
     ? `/admin/${code_plugin}/${parent_nav_code}/${code}`
@@ -33,20 +30,14 @@ export const PageItemContentSearchAsideAuthAdmin = ({
       }}
     >
       <div>
-        <span>
-          {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-          {/* @ts-expect-error */}
-          {t(`nav.${parent_nav_code ? `${parent_nav_code}_` : ''}${code}`)}
+        <span className="[&>svg]:text-muted-foreground flex flex-wrap items-center gap-1 [&>svg]:flex-shrink-0">
+          {textAndIcon.icon} <span>{textAndIcon.text}</span>
         </span>
         {parent_nav_code && (
-          <p className="text-muted-foreground">
-            {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-            {/* @ts-expect-error */}
-            {t(`nav.${parent_nav_code}`)}
-          </p>
+          <p className="text-muted-foreground">{textAndIcon.parent_text}</p>
         )}
       </div>
-      <CommandShortcut>{t('nav.title')}</CommandShortcut>
+      <CommandShortcut>{textAndIcon.plugin}</CommandShortcut>
     </CommandItem>
   );
 };

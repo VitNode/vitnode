@@ -19,25 +19,30 @@ export class SearchAdminSessionsService {
       : [];
 
     // Flat map to remove children
-    const nav: NavSearchAdminSessions[] = (
-      await this.navAdminService.show()
-    ).flatMap(item => {
-      const nav = item.nav.flatMap(nav => ({
-        code_plugin: item.code,
-        ...nav,
-      }));
-
-      return nav.flatMap(nav => {
-        const children = nav.children ?? [];
-        const mappedChildren = children.map(child => ({
-          code_plugin: nav.code_plugin,
-          parent_nav_code: nav.children ? nav.code : undefined,
-          ...child,
+    const nav: NavSearchAdminSessions[] = (await this.navAdminService.show())
+      .flatMap(item => {
+        const nav = item.nav.flatMap(nav => ({
+          code_plugin: item.code,
+          ...nav,
         }));
 
-        return [nav, ...mappedChildren];
-      });
-    });
+        return nav.flatMap(nav => {
+          const mappedChildren = (nav.children ?? []).map(child => ({
+            code_plugin: nav.code_plugin,
+            parent_nav_code: nav.children ? nav.code : undefined,
+            ...child,
+          }));
+
+          return [nav, ...mappedChildren];
+        });
+      })
+      .filter(nav => nav.keywords.length);
+
+    if (search.length === 0) {
+      return {
+        nav: nav.splice(0, 10),
+      };
+    }
 
     return {
       nav: nav.filter(

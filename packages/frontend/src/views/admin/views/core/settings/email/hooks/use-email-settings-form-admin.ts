@@ -1,7 +1,7 @@
 import { Admin__Core_Email_Settings__ShowQuery } from '@/graphql/queries/admin/settings/admin__core_email_settings__show.generated';
 import { EmailProvider } from '@/graphql/types';
 import { getHSLFromString, isColorBrightness } from '@/helpers/colors';
-import { zodFile, zodFileDefaultObject } from '@/helpers/zod';
+import { zodFile } from '@/helpers/zod';
 import { useTranslations } from 'next-intl';
 import { UseFormReturn } from 'react-hook-form';
 import { toast } from 'sonner';
@@ -15,7 +15,10 @@ export const useEmailSettingsFormAdmin = ({
   const t = useTranslations('core.global');
   const formSchema = z.object({
     color_primary: z.string().default(data.color_primary),
-    logo: zodFile.default(data.logo ?? zodFileDefaultObject).optional(),
+    logo: zodFile
+      .nullable()
+      .default(data.logo ?? null)
+      .optional(),
     provider: z.nativeEnum(EmailProvider).default(data.provider),
     smtp: z.object({
       host: z

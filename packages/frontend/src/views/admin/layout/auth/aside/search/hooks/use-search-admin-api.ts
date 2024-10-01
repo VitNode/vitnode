@@ -10,7 +10,7 @@ export const useSearchAdminApi = (search: string) => {
 
       return mutation.data;
     },
-    enabled: search.length >= 3,
+    enabled: search.length >= 3 || search.length === 0,
   });
 
   return query;

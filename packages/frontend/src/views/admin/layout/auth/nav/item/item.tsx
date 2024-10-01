@@ -1,14 +1,16 @@
-import { Icon } from '@/components/icon/icon';
 import { useTranslations } from 'next-intl';
 
+import { TextAndIconsAsideAdmin } from '../../aside/aside';
 import { ItemItemNavAdminProps, LinkItemNavAdmin } from './link';
 
 export const ItemNavAdmin = ({
   id,
   items,
+  textsAndIcons,
 }: {
   id: string;
   items: ItemItemNavAdminProps[];
+  textsAndIcons: TextAndIconsAsideAdmin[];
 }) => {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-expect-error
@@ -27,26 +29,10 @@ export const ItemNavAdmin = ({
           {items.map(item => (
             <li key={item.id}>
               <LinkItemNavAdmin
-                i18n={{
-                  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                  // @ts-expect-error
-                  title: t(item.id),
-                  children: item.children?.map(child => ({
-                    id: child.id,
-                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                    // @ts-expect-error
-                    title: t(`${item.id}_${child.id}`),
-                  })),
-                }}
                 key={item.id}
                 plugin_code={id}
+                textsAndIcons={textsAndIcons}
                 {...item}
-                icons={[
-                  {
-                    id: item.id,
-                    icon: item.icon ? <Icon name={item.icon} /> : null,
-                  },
-                ]}
               />
             </li>
           ))}

@@ -1,3 +1,4 @@
+import { TranslationsProvider } from '@/components/translations-provider';
 import { HeaderContent } from '@/components/ui/header-content';
 import { Metadata } from 'next';
 import { useTranslations } from 'next-intl';
@@ -18,12 +19,12 @@ export const DiagnosticToolsView = () => {
   const t = useTranslations('admin.core.diagnostic');
 
   return (
-    <>
+    <TranslationsProvider namespaces="admin.core.diagnostic">
       <HeaderContent desc={t('desc')} h1={t('title')}>
         <ActionsDiagnosticTools />
       </HeaderContent>
 
       <WarnReqRestartServer />
-    </>
+    </TranslationsProvider>
   );
 };

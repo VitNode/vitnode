@@ -5,8 +5,10 @@ import { useSheet } from '@/components/ui/sheet';
 import { cn } from '@/helpers/classnames';
 import { Link, usePathname } from '@/navigation';
 import * as Accordion from '@radix-ui/react-accordion';
-import { ChevronDown, Menu } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import React from 'react';
+
+import { TextAndIconsAsideAdmin } from '../../aside/aside';
 
 export interface ItemItemNavAdminProps {
   children?: Omit<ItemItemNavAdminProps, 'icon'>[];
@@ -15,20 +17,14 @@ export interface ItemItemNavAdminProps {
 }
 
 export const LinkItemNavAdmin = ({
-  icons,
   plugin_code,
   id,
-  icon,
   children,
-  i18n,
+  textsAndIcons,
 }: {
-  i18n: {
-    children?: { id: string; title: string }[];
-    title: string;
-  };
-  icons: { icon: React.ReactNode; id: string }[];
   plugin_code: string;
-} & ItemItemNavAdminProps) => {
+  textsAndIcons: TextAndIconsAsideAdmin[];
+} & Omit<ItemItemNavAdminProps, 'icon'>) => {
   const pathname = usePathname();
   const href = `/admin/${plugin_code}/${id}`;
   const active = pathname.startsWith(`/admin/${plugin_code}/${id}`);
@@ -47,6 +43,9 @@ export const LinkItemNavAdmin = ({
       },
     );
 
+  const textAndIcon = textsAndIcons.find(item => item.id === id);
+  if (!textAndIcon) return null;
+
   return (
     <Accordion.Item value={`${plugin_code}_${id}`}>
       {children && children.length > 0 ? (
@@ -56,8 +55,8 @@ export const LinkItemNavAdmin = ({
             size="sm"
             variant="ghost"
           >
-            {icon ? icons.find(i => i.id === id)?.icon : <Menu />}
-            <span>{i18n.title}</span>
+            {textAndIcon.icon}
+            <span>{textAndIcon.text}</span>
             <ChevronDown className="ml-auto transition-transform" />
           </Button>
         </Accordion.Trigger>
@@ -70,8 +69,8 @@ export const LinkItemNavAdmin = ({
           href={href}
           onClick={() => setOpen?.(false)}
         >
-          {icon ? icons.find(i => i.id === id)?.icon : <Menu />}
-          <span>{i18n.title}</span>
+          {textAndIcon.icon}
+          <span>{textAndIcon.text}</span>
         </Link>
       )}
 
@@ -81,9 +80,10 @@ export const LinkItemNavAdmin = ({
             {children.map(child => {
               const href = `/admin/${plugin_code}/${id}/${child.id}`;
               const active = pathname.startsWith(href);
-              const title =
-                i18n.children?.find(c => c.id === child.id)?.title ??
-                `${id}_${child.id}`;
+              const textAndIcon = textsAndIcons.find(
+                item => item.id === `${id}_${child.id}`,
+              );
+              if (!textAndIcon) return null;
 
               return (
                 <Link
@@ -95,7 +95,7 @@ export const LinkItemNavAdmin = ({
                   key={`${plugin_code}_${child.id}`}
                   onClick={() => setOpen?.(false)}
                 >
-                  <span>{title}</span>
+                  <span>{textAndIcon.text}</span>
                 </Link>
               );
             })}

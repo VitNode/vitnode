@@ -21,15 +21,6 @@ export const zodFile = z.union([
   }),
 ]);
 
-export const zodFileDefaultObject = {
-  mimetype: '',
-  file_name: '',
-  file_name_original: '',
-  dir_folder: '',
-  extension: '',
-  file_size: 0,
-};
-
 export const zodTag = z.array(
   z.object({
     id: z.number(),

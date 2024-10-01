@@ -7,13 +7,19 @@ import { useTranslations } from 'next-intl';
 import React, { Suspense } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 
+import { TextAndIconsAsideAdmin } from '../aside';
+
 const Content = React.lazy(async () =>
   import('./content').then(module => ({
     default: module.ContentSearchAsideAuthAdmin,
   })),
 );
 
-export const SearchAsideAuthAdmin = () => {
+export const SearchAsideAuthAdmin = ({
+  textsAndIcons,
+}: {
+  textsAndIcons: TextAndIconsAsideAdmin[];
+}) => {
   const t = useTranslations('admin.global.search');
   const [open, setOpen] = React.useState(false);
   const [search, setSearch] = React.useState('');
@@ -33,7 +39,9 @@ export const SearchAsideAuthAdmin = () => {
   }, []);
 
   const handleSearchInput = useDebouncedCallback((value: string) => {
-    setSearch(value);
+    if (value.length >= 3 || value.length === 0) {
+      setSearch(value);
+    }
   }, 500);
 
   return (
@@ -60,7 +68,11 @@ export const SearchAsideAuthAdmin = () => {
           placeholder={t('placeholder')}
         />
         <Suspense fallback={<Loader className="p-4" />}>
-          <Content search={search} setOpen={setOpen} />
+          <Content
+            search={search}
+            setOpen={setOpen}
+            textsAndIcons={textsAndIcons}
+          />
         </Suspense>
       </CommandDialog>
     </>
