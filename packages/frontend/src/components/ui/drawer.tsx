@@ -6,13 +6,9 @@ import { Drawer as DrawerPrimitive } from 'vaul';
 import { cn } from '../../helpers/classnames';
 
 const Drawer = ({
-  shouldScaleBackground = true,
   ...props
 }: React.ComponentProps<typeof DrawerPrimitive.Root>) => (
-  <DrawerPrimitive.Root
-    shouldScaleBackground={shouldScaleBackground}
-    {...props}
-  />
+  <DrawerPrimitive.Root {...props} />
 );
 
 const DrawerTrigger = DrawerPrimitive.Trigger;
@@ -26,7 +22,7 @@ const DrawerOverlay = ({
   ...props
 }: React.ComponentProps<typeof DrawerPrimitive.Overlay>) => (
   <DrawerPrimitive.Overlay
-    className={cn('fixed inset-0 z-50 bg-black/80', className)}
+    className={cn('fixed inset-0 z-40 bg-black/60', className)}
     {...props}
   />
 );
@@ -34,19 +30,31 @@ const DrawerOverlay = ({
 const DrawerContent = ({
   className,
   children,
+  direction = 'bottom',
   ...props
-}: React.ComponentProps<typeof DrawerPrimitive.Content>) => (
+}: {
+  direction?: React.ComponentProps<typeof DrawerPrimitive.Root>['direction'];
+} & React.ComponentProps<typeof DrawerPrimitive.Content>) => (
   <DrawerPortal>
     <DrawerOverlay />
     <DrawerPrimitive.Content
       className={cn(
-        'bg-background fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto max-h-[calc(100vh-4rem)] flex-col rounded-t-[10px] border',
+        'bg-card fixed z-50 flex flex-col outline-none',
+        {
+          'left-0 right-0 top-0 mb-24 max-h-[80%] rounded-b-[10px]':
+            direction === 'top',
+          'bottom-0 left-0 mr-24 h-full max-w-[80%] rounded-r-[10px]':
+            direction === 'left',
+          'bottom-0 right-0 top-0 ml-24 max-w-[80%] rounded-l-[10px]':
+            direction === 'right',
+          'bottom-0 left-0 right-0 mt-24 max-h-[80%] rounded-t-[10px]':
+            direction === 'bottom',
+        },
         className,
       )}
       {...props}
     >
-      <div className="bg-muted mx-auto mt-4 h-2 w-[100px] rounded-full" />
-      <div className="overflow-auto">{children}</div>
+      <div className="flex-1 overflow-y-auto rounded-t-[10px]">{children}</div>
     </DrawerPrimitive.Content>
   </DrawerPortal>
 );
