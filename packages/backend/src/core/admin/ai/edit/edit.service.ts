@@ -11,6 +11,7 @@ export class EditAdminCoreAiService extends HelpersCoreAi {
   async edit({
     provider,
     key,
+    model,
   }: EditAdminCoreAiArgs): Promise<ShowAdminCoreAiObj> {
     const configSettings = getConfigFile();
 
@@ -20,6 +21,7 @@ export class EditAdminCoreAiService extends HelpersCoreAi {
       ai: {
         ...configSettings.ai,
         provider,
+        model,
       },
     };
     await writeFile(configPath, JSON.stringify(newData, null, 2));

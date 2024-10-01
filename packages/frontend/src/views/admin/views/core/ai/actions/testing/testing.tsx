@@ -81,7 +81,7 @@ export const TestingActionAiAdmin = ({ disabled }: { disabled: boolean }) => {
             <div className="space-y-2">
               <Label htmlFor="response">{t('response')}</Label>
               <Textarea
-                className="text-primary"
+                className="text-primary min-h-32"
                 id="response"
                 readOnly
                 value={response}

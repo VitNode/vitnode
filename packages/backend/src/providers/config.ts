@@ -31,6 +31,7 @@ export enum AiProvider {
 
 export interface ConfigType {
   ai: {
+    model?: string;
     provider: AiProvider;
   };
   editor: {

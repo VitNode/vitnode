@@ -6,6 +6,8 @@ import { ShowAdminCoreAiObj } from './show.dto';
 @Injectable()
 export class ShowAdminCoreAiService extends HelpersCoreAi {
   show(): ShowAdminCoreAiObj {
-    return this.getAiCredentials();
+    const data = this.getAiCredentials();
+
+    return data;
   }
 }

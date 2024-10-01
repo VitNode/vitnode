@@ -511,6 +511,7 @@
             "title": "OpenAI",
             "desc": "Read more on <link>OpenAI - VitNode Docs</link>."
           },
+          "model": "Model",
           "provider": "Provider",
           "testing": {
             "title": "Test Your AI",

@@ -323,6 +323,7 @@ export type Mutation = {
 
 export type MutationAdmin__Core_Ai__EditArgs = {
   key?: InputMaybe<Scalars['String']['input']>;
+  model: Scalars['String']['input'];
   provider: AiProvider;
 };
 
@@ -873,6 +874,7 @@ export type ShowAdminCaptchaSecurityObj = {
 
 export type ShowAdminCoreAiObj = {
   __typename?: 'ShowAdminCoreAiObj';
+  model?: Maybe<Scalars['String']['output']>;
   provider: AiProvider | `${AiProvider}`;
 };
 

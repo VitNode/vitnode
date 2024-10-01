@@ -4,6 +4,7 @@ import gql from 'graphql-tag';
 export type Admin__Core_Ai__EditMutationVariables = Types.Exact<{
   provider: Types.AiProvider;
   key?: Types.InputMaybe<Types.Scalars['String']['input']>;
+  model: Types.Scalars['String']['input'];
 }>;
 
 
@@ -11,8 +12,8 @@ export type Admin__Core_Ai__EditMutation = { __typename?: 'Mutation', admin__cor
 
 
 export const Admin__Core_Ai__Edit = gql`
-    mutation Admin__core_ai__edit($provider: AiProvider!, $key: String) {
-  admin__core_ai__edit(provider: $provider, key: $key) {
+    mutation Admin__core_ai__edit($provider: AiProvider!, $key: String, $model: String!) {
+  admin__core_ai__edit(provider: $provider, key: $key, model: $model) {
     provider
   }
 }
