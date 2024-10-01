@@ -1,0 +1,13 @@
+import { Injectable } from '@nestjs/common';
+
+import { HelpersCoreAi } from '../../../ai/ai.helpers';
+import { ShowAdminCoreAiObj } from './show.dto';
+
+@Injectable()
+export class ShowAdminCoreAiService extends HelpersCoreAi {
+  show(): ShowAdminCoreAiObj {
+    const data = this.getAiCredentials();
+
+    return data;
+  }
+}

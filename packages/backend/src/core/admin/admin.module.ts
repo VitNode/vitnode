@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 
+import { AdminAiModule } from './ai/ai.module';
 import { AdminEmailModule, GlobalAdminEmailModule } from './email/email.module';
 import { AdminFilesModule } from './files/files.module';
 import { AdminGroupsModule } from './groups/groups.module';
@@ -42,6 +43,7 @@ import { AdminThemeEditorModule } from './theme_editor/theme_editor.module';
     AdminEmailModule,
     AdminSecurityModule,
     AdminNavModule,
+    AdminAiModule,
   ],
 })
 export class AdminModule {}

@@ -16,6 +16,13 @@ export type Scalars = {
   Upload: { input: File; output: File; }
 };
 
+export const AiProvider = {
+  google: 'google',
+  none: 'none',
+  openai: 'openai'
+} as const;
+
+export type AiProvider = typeof AiProvider[keyof typeof AiProvider];
 export const AllowTypeFilesEnum = {
   all: 'all',
   images: 'images',
@@ -259,6 +266,8 @@ export type LogsAdminEmailObj = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  admin__core_ai__edit: ShowAdminCoreAiObj;
+  admin__core_ai__test: Scalars['String']['output'];
   admin__core_authorization_settings__edit: ShowAdminAuthorizationSettingsObj;
   admin__core_email_settings__edit: ShowAdminEmailSettingsServiceObj;
   admin__core_email_settings__test: Scalars['String']['output'];
@@ -309,6 +318,18 @@ export type Mutation = {
   core_sessions__sign_in: Scalars['String']['output'];
   core_sessions__sign_out: Scalars['String']['output'];
   core_sessions__sign_up: SignUpCoreSessionsObj;
+};
+
+
+export type MutationAdmin__Core_Ai__EditArgs = {
+  key?: InputMaybe<Scalars['String']['input']>;
+  model: Scalars['String']['input'];
+  provider: AiProvider;
+};
+
+
+export type MutationAdmin__Core_Ai__TestArgs = {
+  prompt: Scalars['String']['input'];
 };
 
 
@@ -665,6 +686,7 @@ export type PageInfo = {
 
 export type Query = {
   __typename?: 'Query';
+  admin__core_ai__show: ShowAdminCoreAiObj;
   admin__core_authorization_settings__show: ShowAdminAuthorizationSettingsObj;
   admin__core_email__logs: LogsAdminEmailObj;
   admin__core_email_settings__show: ShowAdminEmailSettingsServiceObj;
@@ -848,6 +870,12 @@ export type ShowAdminCaptchaSecurityObj = {
   secret_key: Scalars['String']['output'];
   site_key: Scalars['String']['output'];
   type: CaptchaTypeEnum | `${CaptchaTypeEnum}`;
+};
+
+export type ShowAdminCoreAiObj = {
+  __typename?: 'ShowAdminCoreAiObj';
+  model?: Maybe<Scalars['String']['output']>;
+  provider: AiProvider | `${AiProvider}`;
 };
 
 export type ShowAdminEmailSettingsServiceObj = {

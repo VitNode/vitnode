@@ -37,6 +37,7 @@ export function AutoFormSelect<T extends FieldValues>({
   className,
   childComponent: ChildComponent,
   hideOptionalLabel,
+  overrideOptions,
 }: {
   componentProps?: AutoFormSelectProps;
 } & AutoFormItemProps<T>) {
@@ -46,7 +47,9 @@ export function AutoFormSelect<T extends FieldValues>({
   )._def.values;
 
   let values: [string, string][] = [];
-  if (!Array.isArray(baseValues)) {
+  if (overrideOptions?.length) {
+    values = overrideOptions.map(value => [value, value]);
+  } else if (!Array.isArray(baseValues)) {
     values = Object.entries(baseValues as object);
   } else {
     values = baseValues.map(value => [value, value]);
@@ -86,7 +89,9 @@ export function AutoFormSelect<T extends FieldValues>({
             onValueChange={field.onChange}
           >
             <SelectTrigger {...componentProps}>
-              <SelectValue placeholder={componentProps?.placeholder}>
+              <SelectValue
+                placeholder={componentProps?.placeholder ?? buttonPlaceholder()}
+              >
                 {buttonPlaceholder()}
               </SelectValue>
             </SelectTrigger>

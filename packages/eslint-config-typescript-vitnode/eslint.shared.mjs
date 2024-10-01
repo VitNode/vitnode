@@ -23,6 +23,9 @@ export default [
   },
   {
     rules: {
+      'perfectionist/sort-named-exports': 'warn',
+      'perfectionist/sort-enums': 'warn',
+      'perfectionist/sort-exports': 'warn',
       '@typescript-eslint/no-dynamic-delete': 'off',
       'perfectionist/sort-named-imports': 'warn',
       'perfectionist/sort-intersection-types': 'warn',

@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 
 import { AdminModule } from './admin/admin.module';
+import { GlobalCoreAiModule } from './ai/ai.module';
 import { CoreEditorModule } from './editor/editor.module';
 import { CoreFilesModule, GlobalCoreFilesModule } from './files/files.module';
 import { GlobalCoreHelpersModule } from './helpers/helpers.module';
@@ -34,6 +35,7 @@ import { CoreThemeEditorModule } from './theme_editor/theme_editor.module';
     CoreSettingsModule,
     CoreThemeEditorModule,
     TermsCoreModule,
+    GlobalCoreAiModule,
   ],
 })
 export class CoreModule {}

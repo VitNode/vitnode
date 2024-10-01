@@ -1,0 +1,9 @@
+mutation Admin__core_ai__edit(
+  $provider: AiProvider!
+  $key: String
+  $model: String!
+) {
+  admin__core_ai__edit(provider: $provider, key: $key, model: $model) {
+    provider
+  }
+}

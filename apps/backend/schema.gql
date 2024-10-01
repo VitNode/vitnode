@@ -2,6 +2,12 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+enum AiProvider {
+  google
+  none
+  openai
+}
+
 enum AllowTypeFilesEnum {
   all
   images
@@ -225,6 +231,8 @@ type LogsAdminEmailObj {
 }
 
 type Mutation {
+  admin__core_ai__edit(key: String, model: String!, provider: AiProvider!): ShowAdminCoreAiObj!
+  admin__core_ai__test(prompt: String!): String!
   admin__core_authorization_settings__edit(force_login: Boolean!, lock_register: Boolean!, require_confirm_email: Boolean!): ShowAdminAuthorizationSettingsObj!
   admin__core_email_settings__edit(color_primary: String!, color_primary_foreground: String!, from: String!, logo: UploadWithKeepCoreFilesArgs, provider: EmailProvider!, resend_key: String, smtp: SMTPEditAdminEmailSettingsService): ShowAdminEmailSettingsServiceObj!
   admin__core_email_settings__test(message: String!, preview_text: String, subject: String!, to: String!): String!
@@ -295,6 +303,7 @@ type PageInfo {
 }
 
 type Query {
+  admin__core_ai__show: ShowAdminCoreAiObj!
   admin__core_authorization_settings__show: ShowAdminAuthorizationSettingsObj!
   admin__core_email__logs(cursor: Int, first: Int, last: Int): LogsAdminEmailObj!
   admin__core_email_settings__show: ShowAdminEmailSettingsServiceObj!
@@ -353,6 +362,11 @@ type ShowAdminCaptchaSecurityObj {
   secret_key: String!
   site_key: String!
   type: CaptchaTypeEnum!
+}
+
+type ShowAdminCoreAiObj {
+  model: String
+  provider: AiProvider!
 }
 
 type ShowAdminEmailSettingsServiceObj {

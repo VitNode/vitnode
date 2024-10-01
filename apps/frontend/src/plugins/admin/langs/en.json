@@ -496,6 +496,33 @@
             "submit": "Yes, delete file"
           }
         }
+      },
+      "ai": {
+        "settings": {
+          "key": "API Key",
+          "title": "Settings (AI)",
+          "desc": "Integrate powerful Artificial Intelligence to boost user experience with personalized content, smarter search, SEO optimization and more.",
+          "none": "None",
+          "google": {
+            "title": "Google AI",
+            "desc": "Read more on <link>Google AI - VitNode Docs</link>."
+          },
+          "openai": {
+            "title": "OpenAI",
+            "desc": "Read more on <link>OpenAI - VitNode Docs</link>."
+          },
+          "model": "Model",
+          "provider": "Provider",
+          "testing": {
+            "title": "Test Your AI",
+            "desc": "Here you can test your AI to see how it works.",
+            "response": "Response",
+            "response_success": "If you see the response, your AI is working correctly.",
+            "prompt": "Prompt",
+            "prompt_placeholder": "Ask a question...",
+            "submit": "Ask"
+          }
+        }
       }
     },
     "members": {

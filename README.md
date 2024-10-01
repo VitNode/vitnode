@@ -13,12 +13,15 @@
 
 # VitNode
 
-> [!WARNING]
-> 🛠️ VitNode is still in development! You can try it out, but it is not recommended to use it now in production.
+VitNode is a **Modular Application Platform** build on top of [NextJS (React)](https://nextjs.org/), [NestJS (Express)](https://nestjs.com/) and [PostgreSQL](https://www.postgresql.org/) offering a customizable, scalable environment for building apps. Its easy-to-use plugin system, modern tools, and flexible integrations let you develop complex apps or launch quickly with simplicity, security, and efficiency.
 
-VitNode is a Community Management Software built on top of [NextJS (React)](https://nextjs.org/), [NestJS (Express)](https://nestjs.com/) and [PostgreSQL](https://www.postgresql.org/).
+## Why VitNode?
 
-**Community Management Software** is more than a CMS — it's a full-stack solution designed to empower developers with flexibility and ease. With built-in community features like user management, notifications, activity feeds, search content, device tracker, and more. **VitNode** is the perfect solution for building websites and applications that engage users and grow communities.
+- **Purpose & Flexibility**: If you’re looking to build a full-stack web application (all-in-one) that needs modularity and includes complex backend logic, integrations, and the ability to manage both content and features like a CMS,
+- **Freandly for No-dev users** - who can use drag-and-drop interfaces and customizable themes,
+- **Freandly for Developers** - who can dive into code for API integrations, CRON jobs, etc.
+- **Development Tools and Features** - VitNode provides an entire ecosystem for building and managing applications. It integrates features like email management, CRON jobs, group and user management, security settings, and more.
+- **Security and Compliance** - Comes with built-in security features such as CSRF protection, CORS, rate limiting, CAPTCHA integrations, and more.
 
 ## 🚀 Installation
 
@@ -33,11 +36,6 @@ pnpm create vitnode-app@latest
 ```
 
 ## Requirements
-
-| 📦 Package Manager | Minimum | Recommended |
-| :----------------- | :------ | :---------- |
-| npm                | 7       | 9           |
-| pnpm               | 8       | 9           |
 
 | 🛠️ Software | Minimum | Recommended |
 | :---------- | :------ | :---------- |

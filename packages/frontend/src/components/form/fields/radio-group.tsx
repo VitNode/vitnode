@@ -40,6 +40,7 @@ export function AutoFormRadioGroup<T extends FieldValues>({
   className,
   childComponent: ChildComponent,
   hideOptionalLabel,
+  overrideOptions,
 }: {
   componentProps?: AutoFormRadioGroupProps;
 } & AutoFormItemProps<T>) {
@@ -48,10 +49,19 @@ export function AutoFormRadioGroup<T extends FieldValues>({
   )._def.values;
 
   let values: [string, string][] = [];
-  if (!Array.isArray(baseValues)) {
+  if (overrideOptions?.length) {
+    values = overrideOptions.map(value => [value, value]);
+  } else if (!Array.isArray(baseValues)) {
     values = Object.entries(baseValues as object);
   } else {
     values = baseValues.map(value => [value, value]);
+  }
+
+  // Move 'none' to the top
+  const noneValue = values.find(value => value[0] === 'none');
+  if (noneValue) {
+    values = values.filter(value => value[0] !== 'none');
+    values.unshift(noneValue);
   }
 
   return (
