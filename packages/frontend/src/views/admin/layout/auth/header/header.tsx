@@ -3,10 +3,15 @@ import { LanguageSwitcher } from '@/components/switchers/language-switcher';
 import { ThemeSwitcher } from '@/components/switchers/theme-switcher';
 import { Link } from '@/navigation';
 
+import { TextAndIconsAsideAdmin } from '../../admin-layout';
 import { NavAdmin } from '../nav/nav-admin';
 import { DrawerHeaderAdmin } from './drawer/drawer';
 
-export const HeaderAdmin = () => {
+export const HeaderAdmin = ({
+  textsAndIcons,
+}: {
+  textsAndIcons: TextAndIconsAsideAdmin[];
+}) => {
   return (
     <header className="bg-card/75 fixed left-0 right-0 top-0 z-20 flex h-16 items-center border-b px-5 backdrop-blur md:hidden">
       <Link
@@ -19,7 +24,9 @@ export const HeaderAdmin = () => {
       <div className="flex items-center justify-center gap-2">
         <LanguageSwitcher />
         <ThemeSwitcher />
-        <DrawerHeaderAdmin navComponent={<NavAdmin />} />
+        <DrawerHeaderAdmin
+          navComponent={<NavAdmin textsAndIcons={textsAndIcons} />}
+        />
       </div>
     </header>
   );

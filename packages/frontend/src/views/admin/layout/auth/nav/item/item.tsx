@@ -1,6 +1,6 @@
 import { useTranslations } from 'next-intl';
 
-import { TextAndIconsAsideAdmin } from '../../aside/aside';
+import { TextAndIconsAsideAdmin } from '../../../admin-layout';
 import { ItemItemNavAdminProps, LinkItemNavAdmin } from './link';
 
 export const ItemNavAdmin = ({

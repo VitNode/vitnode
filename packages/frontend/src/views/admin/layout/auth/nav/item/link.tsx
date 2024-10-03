@@ -8,7 +8,7 @@ import * as Accordion from '@radix-ui/react-accordion';
 import { ChevronDown } from 'lucide-react';
 import React from 'react';
 
-import { TextAndIconsAsideAdmin } from '../../aside/aside';
+import { TextAndIconsAsideAdmin } from '../../../admin-layout';
 
 export interface ItemItemNavAdminProps {
   children?: Omit<ItemItemNavAdminProps, 'icon'>[];
