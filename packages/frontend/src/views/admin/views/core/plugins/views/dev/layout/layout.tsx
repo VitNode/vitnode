@@ -13,16 +13,18 @@ import { ActionsDevPluginAdmin } from './actions/actions';
 import { getPluginDataAdmin } from './query-api';
 import { TabsDevPluginAdmin } from './tabs';
 
-export interface DevPluginAdminLayoutProps {
+interface Props {
   children: React.ReactNode;
-  params: {
+  params: Promise<{
     code: string;
-  };
+    locale: string;
+  }>;
 }
 
 export async function generateMetadataDevPluginAdminLayout({
-  params: { code },
-}: DevPluginAdminLayoutProps): Promise<Metadata> {
+  params,
+}: Props): Promise<Metadata> {
+  const { code } = await params;
   const data = await getPluginDataAdmin({ code });
   if (data.admin__core_plugins__show.edges.length === 0) return {};
 
@@ -36,18 +38,16 @@ export async function generateMetadataDevPluginAdminLayout({
   };
 }
 
-export const DevPluginAdminLayout = async ({
-  params: { code },
-  children,
-}: DevPluginAdminLayoutProps) => {
-  if (!CONFIG.node_development) redirect('/admin');
+export const DevPluginAdminLayout = async ({ params, children }: Props) => {
+  const { code, locale } = await params;
+  if (!CONFIG.node_development) redirect({ href: '/admin', locale });
   const [data, t] = await Promise.all([
     getPluginDataAdmin({ code }),
     getTranslations('core.global'),
   ]);
 
   if (data.admin__core_plugins__show.edges.length === 0) {
-    redirect('/admin');
+    redirect({ href: '/admin', locale });
   }
 
   const plugin = data.admin__core_plugins__show.edges.at(0);

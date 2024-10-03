@@ -8,18 +8,16 @@ import { InternalErrorView } from '../global';
 import { RootProviders } from './providers';
 import { WrapperRootLayout } from './wrapper';
 
-export interface RootLayoutProps {
+interface Props {
   children: React.ReactNode;
-  params: { locale: string };
-}
-
-interface Props extends RootLayoutProps {
   className?: string;
+  params: Promise<{ locale: string }>;
 }
 
 export const generateMetadataRootLayout = async ({
-  params: { locale },
-}: RootLayoutProps): Promise<Metadata> => {
+  params,
+}: Omit<Props, 'className'>): Promise<Metadata> => {
+  const { locale } = await params;
   const metadata: Metadata = {
     manifest: `${CONFIG.backend_public_url}/assets/${locale}/manifest.webmanifest`,
     icons: {
@@ -51,11 +49,8 @@ export const generateMetadataRootLayout = async ({
   }
 };
 
-export const RootLayout = async ({
-  children,
-  params: { locale },
-  className,
-}: Props) => {
+export const RootLayout = async ({ children, params, className }: Props) => {
+  const { locale } = await params;
   try {
     const middlewareData = await getGlobalData();
 

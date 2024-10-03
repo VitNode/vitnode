@@ -38,13 +38,13 @@ const cookieFromStringToObject = (
 
 export const setCookieFromApi = ({ res }: { res: Response }) => {
   return cookieFromStringToObject(res.headers.getSetCookie()).forEach(
-    cookie => {
+    async cookie => {
       const key = Object.keys(cookie)[0];
       const value = Object.values(cookie)[0];
 
       if (typeof value !== 'string' || typeof key !== 'string') return;
 
-      cookies().set(key, value, {
+      (await cookies()).set(key, value, {
         domain: cookie.Domain,
         path: cookie.Path,
         expires: new Date(cookie.Expires),
@@ -150,15 +150,18 @@ export async function fetcher<TData, TVariables = object>({
     });
   }
 
-  const nextInternalHeaders = nextHeaders();
+  const [nextInternalHeaders, cookie] = await Promise.all([
+    nextHeaders(),
+    cookies(),
+  ]);
 
   const internalHeaders = {
-    Cookie: cookies().toString(),
+    Cookie: cookie.toString(),
     ['user-agent']: nextInternalHeaders.get('user-agent') ?? 'node',
     ['x-forwarded-for']:
       nextInternalHeaders.get('x-forwarded-for') ?? '0.0.0.0',
     ['x-real-ip']: nextInternalHeaders.get('x-real-ip') ?? '0.0.0.0',
-    'x-vitnode-user-language': cookies().get('NEXT_LOCALE')?.value ?? 'en',
+    'x-vitnode-user-language': cookie.get('NEXT_LOCALE')?.value ?? 'en',
     ...headers,
   };
 

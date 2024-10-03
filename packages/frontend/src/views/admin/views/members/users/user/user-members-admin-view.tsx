@@ -31,12 +31,11 @@ const getData = async (
 };
 
 interface Props {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
-export const generateMetadataUserMembersAdmin = async ({
-  params: { id },
-}: Props) => {
+export const generateMetadataUserMembersAdmin = async ({ params }: Props) => {
+  const { id } = await params;
   const data = await getData({ id: +id });
 
   if (data.admin__core_members__show.edges.length === 0) {
@@ -50,7 +49,8 @@ export const generateMetadataUserMembersAdmin = async ({
   };
 };
 
-export const UserMembersAdminView = async ({ params: { id } }: Props) => {
+export const UserMembersAdminView = async ({ params }: Props) => {
+  const { id } = await params;
   const [
     t,
     {

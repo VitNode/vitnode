@@ -30,9 +30,12 @@ export const generateMetadataAdminLayout = async (): Promise<Metadata> => {
 
 export const AdminLayout = async ({
   children,
+  params,
 }: {
   children: React.ReactNode;
+  params: Promise<{ locale: string }>;
 }) => {
+  const { locale } = await params;
   try {
     const [t, data] = await Promise.all([
       getTranslations(),
@@ -109,7 +112,7 @@ export const AdminLayout = async ({
     );
   } catch (err) {
     if (err instanceof Error && err.message === 'ACCESS_DENIED') {
-      redirect('/admin');
+      redirect({ href: '/admin', locale });
     }
 
     throw err;

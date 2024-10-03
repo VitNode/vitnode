@@ -29,7 +29,7 @@ const getData = async (variables: Admin__Core_Files__ShowQueryVariables) => {
 };
 
 export interface FilesAdvancedCoreAdminViewProps {
-  searchParams: SearchParamsPagination;
+  searchParams: Promise<SearchParamsPagination>;
 }
 
 export const generateMetadataFilesAdvancedCoreAdmin =
@@ -44,7 +44,7 @@ export const generateMetadataFilesAdvancedCoreAdmin =
 export const FilesAdvancedCoreAdminView = async ({
   searchParams,
 }: FilesAdvancedCoreAdminViewProps) => {
-  const variables = getPaginationTool({
+  const variables = await getPaginationTool({
     searchParams,
     defaultPageSize: 10,
     sortByEnum: ShowCoreFilesSortingColumnEnum,

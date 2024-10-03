@@ -10,9 +10,8 @@ import {
 
 export const i18nConfig = async ({
   pathsToMessagesFromPlugins,
-  locale,
+  requestLocale,
 }: {
-  locale: string;
   pathsToMessagesFromPlugins: ({
     plugin,
     locale,
@@ -20,7 +19,11 @@ export const i18nConfig = async ({
     locale: string;
     plugin: string;
   }) => Promise<{ default: unknown }>;
+  requestLocale: Promise<string | undefined>;
 }): Promise<Omit<IntlConfig, 'locale'>> => {
+  const locale = await requestLocale;
+  if (!locale) notFound();
+
   let plugins: string[] = [];
   try {
     const {

@@ -4,15 +4,15 @@ import { Metadata } from 'next';
 import React from 'react';
 
 export interface DefaultPageProps {
-  params: {
+  params: Promise<{
     locale: string;
-  };
+  }>;
 }
 
 const getDescription = async ({
   locale,
 }: {
-  locale: DefaultPageProps['params']['locale'];
+  locale: string;
 }): Promise<string> => {
   const {
     core_settings__show: { site_description },
@@ -28,8 +28,10 @@ const getDescription = async ({
 };
 
 export const generateMetadataDefaultPage = async ({
-  params: { locale },
+  params,
 }: DefaultPageProps): Promise<Metadata> => {
+  const { locale } = await params;
+
   return {
     description: await getDescription({ locale }),
   };

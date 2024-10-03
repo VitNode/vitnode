@@ -38,9 +38,9 @@ export const generateMetadataLogsEmailSettingsAdmin =
 export const LogsEmailSettingsAdminView = async ({
   searchParams,
 }: {
-  searchParams: SearchParamsPagination;
+  searchParams: Promise<SearchParamsPagination>;
 }) => {
-  const variables = getPaginationTool({
+  const variables = await getPaginationTool({
     searchParams,
     defaultPageSize: 10,
   });

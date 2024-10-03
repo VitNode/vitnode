@@ -8,7 +8,7 @@ import {
 } from '@/graphql/queries/admin/theme_editor/core_theme_editor__show.generated';
 import { redirect } from '@/navigation';
 import { Metadata } from 'next';
-import { getTranslations } from 'next-intl/server';
+import { getLocale, getTranslations } from 'next-intl/server';
 
 import { ContentThemeEditor } from './content';
 
@@ -33,6 +33,8 @@ export const generateMetadataThemeEditor = async (): Promise<Metadata> => {
 };
 
 export const ThemeEditorView = async () => {
+  const locale = await getLocale();
+
   try {
     const [data, session] = await Promise.all([
       getData(),
@@ -40,7 +42,7 @@ export const ThemeEditorView = async () => {
     ]);
 
     if (!session.admin__sessions__authorization.user) {
-      redirect('/admin');
+      redirect({ href: '/admin', locale });
     }
 
     return (
@@ -50,7 +52,7 @@ export const ThemeEditorView = async () => {
     );
   } catch (err) {
     if (err instanceof Error && err.message === 'ACCESS_DENIED') {
-      redirect('/admin');
+      redirect({ href: '/admin', locale });
     }
 
     throw err;
