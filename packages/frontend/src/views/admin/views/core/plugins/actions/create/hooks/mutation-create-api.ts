@@ -19,17 +19,13 @@ export const mutationCreateApi = async (
       query: Admin__Core_Plugins__Create,
       variables,
     });
-
-    // Revalidate after 3 seconds in promise. Wait for fast refresh to compilation files.
-    await new Promise<void>(resolve =>
-      setTimeout(() => {
-        revalidatePath('/', 'layout');
-        resolve();
-      }, 3000),
-    );
   } catch (error) {
     const e = error as Error;
 
-    return { error: e.message };
+    if (e.message !== 'fetch failed') {
+      return { error: e.message };
+    }
   }
+
+  revalidatePath('/', 'layout');
 };

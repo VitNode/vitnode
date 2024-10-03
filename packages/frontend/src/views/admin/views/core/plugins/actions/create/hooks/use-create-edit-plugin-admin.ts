@@ -1,12 +1,11 @@
-import { useDialog } from '@/components/ui/dialog';
 import { ShowAdminPlugins } from '@/graphql/types';
 import { useSessionAdmin } from '@/hooks/use-session-admin';
-import { usePathname, useRouter } from '@/navigation';
 import { useTranslations } from 'next-intl';
 import { UseFormReturn } from 'react-hook-form';
 import { toast } from 'sonner';
 import * as z from 'zod';
 
+import { checkConnectionMutationApi } from '../../../hooks/check-connection-mutation-api';
 import { mutationCreateApi } from './mutation-create-api';
 import { mutationEditApi } from './mutation-edit-api';
 
@@ -19,9 +18,6 @@ interface Args {
 export const useCreateEditPluginAdmin = ({ data }: Args) => {
   const t = useTranslations('admin.core.plugins');
   const tCore = useTranslations('core.global.errors');
-  const { setOpen } = useDialog();
-  const pathname = usePathname();
-  const { push } = useRouter();
   const { session } = useSessionAdmin();
 
   const formSchema = z.object({
@@ -110,14 +106,32 @@ export const useCreateEditPluginAdmin = ({ data }: Args) => {
       return;
     }
 
-    toast.success(t(data ? 'edit.success' : 'create.success'), {
+    if (!data) {
+      // Wait 3 seconds before reloading the page
+      await new Promise<void>(resolve =>
+        setTimeout(async () => {
+          form.reset({}, { keepValues: true });
+          const data = await checkConnectionMutationApi();
+
+          if (data?.error) {
+            toast.error(tCore('title'), {
+              description: tCore('internal_server_error'),
+            });
+
+            resolve();
+          }
+
+          window.location.reload();
+          resolve();
+        }, 3000),
+      );
+
+      return;
+    }
+
+    toast.success(t('edit.success'), {
       description: values.name,
     });
-
-    if (!data) {
-      push(pathname);
-      setOpen?.(false);
-    }
   };
 
   return {
