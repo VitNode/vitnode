@@ -4,18 +4,17 @@ import React from 'react';
 
 import { redirect } from '../../../navigation';
 import { AuthProviders } from './providers';
+import { getLocale } from 'next-intl/server';
 
 export const AuthLayout = async ({
   children,
-  params,
 }: {
   children: React.ReactNode;
-  params: Promise<{ locale: string }>;
 }) => {
-  const { locale } = await params;
-  const [data, { core_languages__show }] = await Promise.all([
+  const [data, { core_languages__show }, locale] = await Promise.all([
     getSessionData(),
     getGlobalData(),
+    getLocale(),
   ]);
 
   // TODO: Improve this check, make this based on the users count

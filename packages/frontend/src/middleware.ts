@@ -62,7 +62,6 @@ export function createMiddleware() {
       ...i18n,
       localePrefix: i18n.locales.length > 1 ? 'always' : 'as-needed',
     });
-    const response = handleI18nRouting(request);
     const pathname = removeLocaleFromUrl(
       request.nextUrl.pathname,
       i18n.locales,
@@ -97,6 +96,6 @@ export function createMiddleware() {
       return NextResponse.redirect(new URL('/admin', request.url));
     }
 
-    return response;
+    return handleI18nRouting(request);
   };
 }
