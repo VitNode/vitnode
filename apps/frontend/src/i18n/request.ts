@@ -1,13 +1,26 @@
 import { getRequestConfig } from 'next-intl/server';
-import { i18nConfig } from 'vitnode-frontend/i18n';
 
-export default getRequestConfig(async args => {
-  const config = await i18nConfig({
-    ...args,
-    pathsToMessagesFromPlugins: async ({ plugin, locale }) => {
-      return import(`@/plugins/${plugin}/langs/${locale}.json`);
+export default getRequestConfig(async ({ requestLocale }) => {
+  // This typically corresponds to the `[locale]` segment
+  let locale = await requestLocale;
+
+  // Ensure that a valid locale is used
+  if (!locale) {
+    locale = 'en';
+  }
+
+  const core = (await import(`@/plugins/core/langs/${locale}.json`)).default;
+  const admin = (await import(`@/plugins/admin/langs/${locale}.json`)).default;
+  const welcome = (await import(`@/plugins/welcome/langs/${locale}.json`))
+    .default;
+
+  return {
+    locale,
+    messages: {
+      ...core,
+      ...admin,
+      ...welcome,
     },
-  });
-
-  return config;
+    timeZone: 'UTC',
+  };
 });

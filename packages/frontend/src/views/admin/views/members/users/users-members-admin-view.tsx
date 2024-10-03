@@ -65,6 +65,8 @@ export const UsersMembersAdminView = async ({
     getTranslations('admin.members.users'),
   ]);
 
+  // console.log('data', data);
+
   return (
     <>
       <HeaderContent desc={t('desc')} h1={t('title')}>
