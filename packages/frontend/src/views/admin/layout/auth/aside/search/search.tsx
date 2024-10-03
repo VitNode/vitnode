@@ -7,7 +7,7 @@ import { useTranslations } from 'next-intl';
 import React, { Suspense } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 
-import { TextAndIconsAsideAdmin } from '../aside';
+import { TextAndIconsAsideAdmin } from '../../../admin-layout';
 
 const Content = React.lazy(async () =>
   import('./content').then(module => ({

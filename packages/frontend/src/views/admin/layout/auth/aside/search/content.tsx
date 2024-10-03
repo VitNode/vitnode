@@ -6,7 +6,7 @@ import {
 import { Loader } from '@/components/ui/loader';
 import { useTranslations } from 'next-intl';
 
-import { TextAndIconsAsideAdmin } from '../aside';
+import { TextAndIconsAsideAdmin } from '../../../admin-layout';
 import { useSearchAdminApi } from './hooks/use-search-admin-api';
 import { PageItemContentSearchAsideAuthAdmin } from './items/page';
 

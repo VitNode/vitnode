@@ -1,8 +1,7 @@
 import { CommandItem, CommandShortcut } from '@/components/ui/command';
 import { NavSearchAdminSessions } from '@/graphql/types';
 import { useRouter } from '@/navigation';
-
-import { TextAndIconsAsideAdmin } from '../../aside';
+import { TextAndIconsAsideAdmin } from '@/views/admin/layout/admin-layout';
 
 export const PageItemContentSearchAsideAuthAdmin = ({
   code,

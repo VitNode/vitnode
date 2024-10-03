@@ -1,7 +1,7 @@
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { getSessionAdminData } from '@/graphql/get-session-admin-data';
 
-import { TextAndIconsAsideAdmin } from '../aside/aside';
+import { TextAndIconsAsideAdmin } from '../../admin-layout';
 import { ItemNavAdmin } from './item/item';
 import { NavAdminWrapper } from './wrapper';
 

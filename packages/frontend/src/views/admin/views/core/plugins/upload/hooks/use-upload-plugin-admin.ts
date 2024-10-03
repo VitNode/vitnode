@@ -1,17 +1,16 @@
-import { useDialog } from '@/components/ui/dialog';
 import { zodFile } from '@/helpers/zod';
 import { useTranslations } from 'next-intl';
 import { UseFormReturn } from 'react-hook-form';
 import { toast } from 'sonner';
 import * as z from 'zod';
 
+import { checkConnectionMutationApi } from '../../hooks/check-connection-mutation-api';
 import { UploadPluginAdminProps } from '../upload';
 import { mutationApi } from './mutation-api';
 
 export const useUploadPluginAdmin = ({ data }: UploadPluginAdminProps) => {
   const t = useTranslations('admin.core.plugins.upload');
   const tCore = useTranslations('core.global.errors');
-  const { setOpen } = useDialog();
   const formSchema = z.object({
     file: zodFile,
   });
@@ -50,15 +49,23 @@ export const useUploadPluginAdmin = ({ data }: UploadPluginAdminProps) => {
       return;
     }
 
-    setOpen?.(false);
-    toast.success(t(data ? 'success.update' : 'success.title'), {
-      description: t('success.desc'),
-    });
-
     // Wait 3 seconds before reloading the page
-    setTimeout(() => {
-      window.location.reload();
-    }, 3000);
+    await new Promise<void>(resolve =>
+      setTimeout(async () => {
+        const data = await checkConnectionMutationApi();
+
+        if (data?.error) {
+          toast.error(tCore('title'), {
+            description: tCore('internal_server_error'),
+          });
+
+          resolve();
+        }
+
+        window.location.reload();
+        resolve();
+      }, 3000),
+    );
   };
 
   return { onSubmit, formSchema };
