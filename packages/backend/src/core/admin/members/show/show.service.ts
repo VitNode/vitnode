@@ -41,11 +41,13 @@ export class ShowAdminMembersService {
     const where = id
       ? eq(core_users.id, id)
       : and(
-          or(
-            ilike(core_users.name, `%${search}%`),
-            ilike(core_users.email, `%${search}%`),
-            Number(search) ? eq(core_users.id, Number(search)) : undefined,
-          ),
+          search
+            ? or(
+                ilike(core_users.name, `%${search}%`),
+                ilike(core_users.email, `%${search}%`),
+                Number(search) ? eq(core_users.id, Number(search)) : undefined,
+              )
+            : undefined,
           groups && groups.length > 0
             ? inArray(core_users.group_id, groups)
             : undefined,
