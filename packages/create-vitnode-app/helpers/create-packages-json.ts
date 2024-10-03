@@ -100,7 +100,7 @@ export const createPackagesJSON = ({
     },
     devDependencies: {
       '@types/node': '^22.7.4',
-      '@types/react': '^18.3.10',
+      '@types/react': '^18.3.11',
       '@types/react-dom': '^18.3.0',
       autoprefixer: '^10.4.20',
       ...(eslint ? { eslint: '^9.11.1' } : {}),
@@ -154,7 +154,7 @@ export const createPackagesJSON = ({
       '@types/express': '^4.17.21',
       '@types/node': '^22.7.4',
       '@types/pg': '^8.11.10',
-      '@types/react': '^18.3.10',
+      '@types/react': '^18.3.11',
       'cross-env': '^7.0.3',
       'drizzle-kit': '^0.24.2',
       'drizzle-orm': '^0.33.0',

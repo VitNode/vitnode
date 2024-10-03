@@ -56,8 +56,8 @@
     "typescript": "^5.5.4"
   },
   "dependencies": {
-    "@ai-sdk/google": "^0.0.48",
-    "@ai-sdk/openai": "^0.0.61",
+    "@ai-sdk/google": "^0.0.51",
+    "@ai-sdk/openai": "^0.0.64",
     "@apollo/server": "^4.11.0",
     "@graphql-codegen/near-operation-file-preset": "^3.0.0",
     "@graphql-codegen/typescript": "^4.0.9",
@@ -70,7 +70,7 @@
     "@react-email/render": "^1.0.1",
     "@swc/cli": "^0.4.0",
     "@swc/core": "^1.7.28",
-    "ai": "^3.4.0",
+    "ai": "^3.4.8",
     "busboy": "^1.6.0",
     "cookie-parser": "^1.4.6",
     "helmet": "^8.0.0",
@@ -98,7 +98,7 @@
     "@types/nodemailer": "^6.4.16",
     "@types/object-path": "^0.11.4",
     "@types/pg": "^8.11.10",
-    "@types/react": "^18.3.10",
+    "@types/react": "^18.3.11",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
     "concurrently": "^9.0.1",
