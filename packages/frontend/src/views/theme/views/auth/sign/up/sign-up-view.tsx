@@ -21,7 +21,7 @@ export const SignUpView = async () => {
     t,
     {
       core_middleware__show: {
-        authorization: { lock_register },
+        authorization: { lock_register, is_email_enabled },
       },
     },
   ] = await Promise.all([getTranslations('core.sign_up'), getSessionData()]);
@@ -31,7 +31,7 @@ export const SignUpView = async () => {
   }
 
   return (
-    <SignUpWrapper>
+    <SignUpWrapper isEmailEnabled={is_email_enabled}>
       <div className="container mx-auto max-w-md pt-10">
         <div className="mb-10 space-y-1 text-center">
           <CardTitle className="text-3xl">{t('title')}</CardTitle>

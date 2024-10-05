@@ -42,6 +42,7 @@ export type AuthorizationAdminSessionsObj = {
 export type AuthorizationCoreMiddleware = {
   __typename?: 'AuthorizationCoreMiddleware';
   force_login: Scalars['Boolean']['output'];
+  is_email_enabled: Scalars['Boolean']['output'];
   lock_register: Scalars['Boolean']['output'];
 };
 
@@ -335,7 +336,6 @@ export type MutationAdmin__Core_Authorization_Settings__EditArgs = {
 export type MutationAdmin__Core_Email_Settings__EditArgs = {
   color_primary: Scalars['String']['input'];
   color_primary_foreground: Scalars['String']['input'];
-  from: Scalars['String']['input'];
   logo?: InputMaybe<UploadWithKeepCoreFilesArgs>;
 };
 
@@ -862,7 +862,6 @@ export type ShowAdminCoreAiObj = {
 export type ShowAdminEmailSettingsServiceObj = {
   __typename?: 'ShowAdminEmailSettingsServiceObj';
   color_primary: Scalars['String']['output'];
-  from: Scalars['String']['output'];
   is_enabled: Scalars['Boolean']['output'];
   logo?: Maybe<UploadCoreFilesObj>;
 };

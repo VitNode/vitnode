@@ -1,7 +1,6 @@
 query Admin__core_email_settings__show {
   admin__core_email_settings__show {
     color_primary
-    from
     is_enabled
     logo {
       dir_folder

@@ -18,7 +18,6 @@ export const useEmailSettingsFormAdmin = ({
       .nullable()
       .default(data.logo ?? null)
       .optional(),
-    from: z.string().default(data.from),
   });
 
   const onSubmit = async (
@@ -29,7 +28,6 @@ export const useEmailSettingsFormAdmin = ({
     if (!primaryHSL) return;
 
     const formData = new FormData();
-    formData.append('from', values.from);
     formData.append('color_primary', values.color_primary);
     formData.append(
       'color_primary_foreground',

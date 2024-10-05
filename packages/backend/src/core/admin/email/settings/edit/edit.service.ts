@@ -15,7 +15,6 @@ export class EditAdminEmailSettingsService {
     color_primary,
     color_primary_foreground,
     logo,
-    from,
   }: EditAdminEmailSettingsServiceArgs): Promise<ShowAdminEmailSettingsServiceObj> {
     const configSettings = getConfigFile();
     // Update settings
@@ -27,7 +26,6 @@ export class EditAdminEmailSettingsService {
           ...configSettings.settings.email,
           color_primary,
           color_primary_foreground,
-          from,
         },
       },
     };

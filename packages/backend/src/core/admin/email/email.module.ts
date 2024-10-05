@@ -13,7 +13,6 @@ import { TestAdminEmailSettingsResolver } from './settings/test/test.resolver';
 import { TestAdminEmailSettingsService } from './settings/test/test.service';
 
 export interface EmailSenderArgs {
-  from: string;
   html: string;
   site_short_name: string;
   subject: string;

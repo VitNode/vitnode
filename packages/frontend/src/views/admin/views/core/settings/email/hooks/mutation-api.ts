@@ -10,7 +10,6 @@ import { revalidatePath } from 'next/cache';
 
 export const mutationApi = async (formData: FormData) => {
   const variables: Admin__Core_Email_Settings__EditMutationVariables = {
-    from: formData.get('from') as string,
     colorPrimary: formData.get('color_primary') as string,
     colorPrimaryForeground: formData.get('color_primary_foreground') as string,
     logo: {

@@ -9,9 +9,6 @@ export class EditAdminEmailSettingsServiceArgs {
   @Field(() => String)
   color_primary_foreground: string;
 
-  @Field(() => String)
-  from: string;
-
   @Field(() => UploadWithKeepCoreFilesArgs, { nullable: true })
   logo?: UploadWithKeepCoreFilesArgs;
 }

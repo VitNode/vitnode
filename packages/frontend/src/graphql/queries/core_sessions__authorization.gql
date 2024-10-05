@@ -126,6 +126,7 @@ query Core_sessions__authorization {
   core_middleware__show {
     authorization {
       lock_register
+      is_email_enabled
     }
   }
 }

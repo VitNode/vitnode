@@ -1,3 +1,4 @@
+import { SendAdminEmailService } from '@/core/admin/email/send/send.service';
 import { Injectable } from '@nestjs/common';
 import { readdir } from 'fs/promises';
 
@@ -6,6 +7,8 @@ import { ShowCoreMiddlewareObj } from './show.dto';
 
 @Injectable()
 export class ShowCoreMiddlewareService {
+  constructor(private readonly mailService: SendAdminEmailService) {}
+
   async show(): Promise<ShowCoreMiddlewareObj> {
     const config = getConfigFile();
     const plugins = await readdir(ABSOLUTE_PATHS_BACKEND.plugins);
@@ -18,6 +21,10 @@ export class ShowCoreMiddlewareService {
       ],
       ...config,
       ...config.settings,
+      authorization: {
+        ...config.settings.authorization,
+        is_email_enabled: this.mailService.checkIfEnable(),
+      },
     };
   }
 }

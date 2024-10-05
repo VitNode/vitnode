@@ -57,6 +57,9 @@ export class AuthorizationCoreMiddleware {
   force_login: boolean;
 
   @Field(() => Boolean)
+  is_email_enabled: boolean;
+
+  @Field(() => Boolean)
   lock_register: boolean;
 }
 

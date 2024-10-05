@@ -100,10 +100,6 @@
               "subject": "Subject"
             }
           },
-          "from": {
-            "title": "From",
-            "desc": "This email address will be used as the sender of the emails sent from your website."
-          },
           "logo": "Logo",
           "resend_key": "Resend Key",
           "smtp_host": "SMTP Host",

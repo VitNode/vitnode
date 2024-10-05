@@ -54,7 +54,6 @@ export class MailService {
         to,
         subject,
         html,
-        from: settings.email.from,
         site_short_name: settings.main.site_short_name,
       });
     } catch (e) {

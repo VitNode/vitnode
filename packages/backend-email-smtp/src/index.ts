@@ -29,7 +29,7 @@ export const emailSMTPResend = ({
     const transporter = nodemailer.createTransport(
       {
         host,
-        port,
+        port: port ? +port : 587,
         secure: secure ?? false,
         auth: {
           user,

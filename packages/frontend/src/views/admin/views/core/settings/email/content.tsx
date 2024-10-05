@@ -6,10 +6,6 @@ import {
   AutoFormFileInput,
   AutoFormFileInputProps,
 } from '@/components/form/fields/file-input';
-import {
-  AutoFormInput,
-  AutoFormInputProps,
-} from '@/components/form/fields/input';
 import { Admin__Core_Email_Settings__ShowQuery } from '@/graphql/queries/admin/settings/admin__core_email_settings__show.generated';
 import { useTranslations } from 'next-intl';
 
@@ -39,16 +35,6 @@ export const ContentEmailSettingsAdmin = (
             maxFileSizeInMb: 2,
             showInfo: true,
           } as AutoFormFileInputProps,
-        },
-        {
-          id: 'from',
-          label: t('from.title'),
-          description: t('from.desc'),
-          component: AutoFormInput,
-          componentProps: {
-            type: 'email',
-            placeholder: 'no-replay@vitnode.com',
-          } as AutoFormInputProps,
         },
       ]}
       formSchema={formSchema}

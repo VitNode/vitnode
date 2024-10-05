@@ -1,16 +1,20 @@
 import { Resend } from 'resend';
 
-export const emailSenderResend = ({ api_key }: { api_key?: string }) => {
+export const emailSenderResend = ({
+  api_key = '',
+  from = '',
+}: {
+  api_key: string | undefined;
+  from: string | undefined;
+}) => {
   const resend = new Resend(api_key);
 
   return async ({
     to,
     subject,
     html,
-    from,
     site_short_name,
   }: {
-    from: string;
     html: string;
     site_short_name: string;
     subject: string;

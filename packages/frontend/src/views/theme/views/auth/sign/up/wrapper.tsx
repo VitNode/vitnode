@@ -8,7 +8,13 @@ import React from 'react';
 
 import { SignUpContext } from './use-sign-up';
 
-export const SignUpWrapper = ({ children }: { children: React.ReactNode }) => {
+export const SignUpWrapper = ({
+  children,
+  isEmailEnabled,
+}: {
+  children: React.ReactNode;
+  isEmailEnabled: boolean;
+}) => {
   const t = useTranslations('core.sign_up.success');
   const [emailSuccess, setEmailSuccess] = React.useState('');
 
@@ -27,11 +33,15 @@ export const SignUpWrapper = ({ children }: { children: React.ReactNode }) => {
         {t('title')}
       </h1>
       <p className="text-muted-foreground mt-4">
-        {t.rich('desc', {
-          email: () => (
-            <span className="text-primary font-semibold">{emailSuccess}</span>
-          ),
-        })}
+        {isEmailEnabled
+          ? t.rich('desc', {
+              email: () => (
+                <span className="text-primary font-semibold">
+                  {emailSuccess}
+                </span>
+              ),
+            })
+          : t('desc_without_email')}
       </p>
 
       <div className="mt-6">

@@ -6,9 +6,6 @@ export class ShowAdminEmailSettingsServiceObj {
   @Field(() => String)
   color_primary: string;
 
-  @Field(() => String)
-  from: string;
-
   @Field(() => Boolean)
   is_enabled: boolean;
 
