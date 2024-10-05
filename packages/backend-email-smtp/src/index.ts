@@ -1,26 +1,26 @@
 import * as nodemailer from 'nodemailer';
 
-export const emailSMTPResend = ({
-  host,
+export const emailSenderSMTP = ({
+  host = '',
   port,
   secure,
   user,
   password,
+  from = '',
 }: {
-  host?: string;
+  from: string | undefined;
+  host: string | undefined;
   password?: string;
   port?: string;
   secure?: boolean;
-  user?: string;
+  user: string | undefined;
 }) => {
   return async ({
     to,
     subject,
     html,
-    from,
     site_short_name,
   }: {
-    from: string;
     html: string;
     site_short_name: string;
     subject: string;

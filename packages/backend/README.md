@@ -1,3 +1,7 @@
+# (Vitnode) Backend Package
+
+This package is used to create wrapper for a backend server in NestJS for the VitNode app.
+
 <p align="center">
   <br>
   <a href="https://vitnode.com/" target="_blank">
@@ -10,19 +14,3 @@
   <br>
   <br>
 </p>
-
-# (Vitnode) Backend Package
-
-This package is used to create wrapper for a backend server in NestJS for the VitNode app.
-
-## Installation
-
-```bash
-npm install vitnode-backend
-```
-
-or
-
-```bash
-pnpm add vitnode-backend
-```

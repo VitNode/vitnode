@@ -1,3 +1,9 @@
+# (VitNode) Create App
+
+This package is a CLI tool to create a new VitNode app quickly.
+
+Script based on [Create Next App](https://nextjs.org/).
+
 <p align="center">
   <br>
   <a href="https://vitnode.com/" target="_blank">
@@ -10,12 +16,6 @@
   <br>
   <br>
 </p>
-
-# (VitNode) Create App
-
-This package is a CLI tool to create a new VitNode app quickly.
-
-Script based on [Create Next App](https://nextjs.org/).
 
 ## Usage
 
