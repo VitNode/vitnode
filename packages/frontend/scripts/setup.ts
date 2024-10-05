@@ -4,11 +4,6 @@
 import * as fs from 'fs';
 import { join } from 'path';
 
-interface Folders {
-  isInsideAppDir?: boolean;
-  path: string;
-}
-
 const init = ({ dev }: { dev: boolean }) => {
   const initConsole = '\x1b[34m[VitNode]\x1b[0m \x1b[33m[Frontend]\x1b[0m';
 
@@ -27,28 +22,13 @@ const init = ({ dev }: { dev: boolean }) => {
   // Copy frontend files from app dir
   const frontendPackagePath = join(__dirname, '..', '..', 'folders_to_copy');
   const frontendAppPath = process.cwd();
-  const isLocaleFolder = fs.existsSync(
-    join(frontendAppPath, 'src', 'app', '[locale]'),
-  );
-  const localePath = isLocaleFolder ? join('src', 'app', '[locale]') : 'app';
-
-  const pathsToFolders: Folders[] = [
-    {
-      path: join('admin', '(vitnode)'),
-      isInsideAppDir: true,
-    },
-    {
-      path: join('admin', '(auth)', '(vitnode)'),
-      isInsideAppDir: true,
-    },
-    {
-      path: join('(main)', '(vitnode)'),
-      isInsideAppDir: true,
-    },
+  const pathsToFolders = [
+    join('src', 'app', '[locale]', 'admin', '(vitnode)'),
+    join('src', 'app', '[locale]', 'admin', '(auth)', '(vitnode)'),
+    join('src', 'app', '[locale]', '(main)', '(layout)', '(vitnode)'),
   ];
   const pathsToFile: {
     file: string;
-    isInsideAppDir?: boolean;
     path: string;
   }[] = [
     {
@@ -56,19 +36,8 @@ const init = ({ dev }: { dev: boolean }) => {
       file: 'not-found.tsx',
     },
     {
-      path: 'admin',
-      isInsideAppDir: true,
+      path: join('src', 'app'),
       file: 'layout.tsx',
-    },
-    {
-      path: join('admin', '(auth)'),
-      isInsideAppDir: true,
-      file: 'layout.tsx',
-    },
-    {
-      path: '(main)',
-      isInsideAppDir: true,
-      file: 'page.tsx',
     },
     {
       path: join('src', 'plugins', 'core', 'langs'),
@@ -89,16 +58,8 @@ const init = ({ dev }: { dev: boolean }) => {
 
   // Copy folders
   pathsToFolders.forEach(folder => {
-    const appPath = join(
-      frontendAppPath,
-      folder.isInsideAppDir ? localePath : '',
-      folder.path,
-    );
-    const packagePath = join(
-      frontendPackagePath,
-      folder.isInsideAppDir ? join('src', 'app', '[locale]') : '',
-      folder.path,
-    );
+    const appPath = join(frontendAppPath, folder);
+    const packagePath = join(frontendPackagePath, folder);
 
     if (!fs.existsSync(packagePath)) {
       console.error(
@@ -110,17 +71,10 @@ const init = ({ dev }: { dev: boolean }) => {
     fs.cpSync(packagePath, appPath, { recursive: true });
   });
 
+  // Copy files
   pathsToFile.forEach(file => {
-    const appPath = join(
-      frontendAppPath,
-      file.isInsideAppDir ? localePath : '',
-      file.path,
-    );
-    const packagePath = join(
-      frontendPackagePath,
-      file.isInsideAppDir ? join('src', 'app', '[locale]') : '',
-      file.path,
-    );
+    const appPath = join(frontendAppPath, file.path);
+    const packagePath = join(frontendPackagePath, file.path);
 
     if (!fs.existsSync(packagePath)) {
       console.error(

@@ -285,7 +285,7 @@ function logError(error) {
     const pathsToFoldersForce = [
       join('src', 'app', '[locale]', 'admin', '(vitnode)'),
       join('src', 'app', '[locale]', 'admin', '(auth)', '(vitnode)'),
-      join('src', 'app', '[locale]', '(main)', '(vitnode)'),
+      join('src', 'app', '[locale]', '(main)', '(layout)', '(vitnode)'),
     ];
     const pathsToFiles = [
       {
@@ -293,12 +293,12 @@ function logError(error) {
         file: 'not-found.tsx',
       },
       {
-        folder: join('src', 'app', `[locale]`, 'admin'),
+        folder: join('src', 'app'),
         file: 'layout.tsx',
       },
       {
-        folder: join('src', 'app', `[locale]`, '(main)'),
-        file: 'page.tsx',
+        folder: join('src', 'app', `[locale]`, 'admin'),
+        file: 'layout.tsx',
       },
       {
         folder: join('src', 'app', `[locale]`, 'admin', '(auth)'),
