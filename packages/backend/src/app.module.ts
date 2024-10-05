@@ -8,12 +8,14 @@ import { JwtModule } from '@nestjs/jwt';
 import { ScheduleModule } from '@nestjs/schedule';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { ThrottlerModule } from '@nestjs/throttler';
+import { LanguageModel } from 'ai';
 import { join } from 'path';
 
 import {
   EmailSenderFunction,
   GlobalAdminEmailModule,
 } from './core/admin/email/email.module';
+import { GlobalCoreAiModule } from './core/ai/ai.module';
 import { CoreModule } from './core/core.module';
 import { GlobalProvidersModule } from './providers/providers.module';
 import { GqlContext } from './utils';
@@ -182,7 +184,9 @@ export class VitNodeCoreModule {
     pathToEnvFile,
     database,
     email,
+    ai,
   }: {
+    ai?: LanguageModel;
     database: DatabaseModuleArgs;
     email?: EmailSenderFunction;
     pathToEnvFile: string;
@@ -220,6 +224,7 @@ export class VitNodeCoreModule {
         GlobalProvidersModule,
         CoreModule,
         GlobalAdminEmailModule.register({ email }),
+        GlobalCoreAiModule.register({ aiModel: ai }),
       ],
       providers: [
         {

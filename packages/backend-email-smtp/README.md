@@ -1,6 +1,6 @@
 # (Vitnode) Backend SMTP Email Provider
 
-This package is used to create a provider for SMTP server to send emails in the VitNode app.
+This package is used to create a provider for send emails using SMTP into the VitNode app.
 
 <p align="center">
   <br>
@@ -42,13 +42,13 @@ EMAIL_SMTP_PASSWORD={your_password}
 
 ### Provide config
 
-Provide `emailSenderSMTP` to `VitNodeCoreModule`:
+Provide `emailSMTP` to `VitNodeCoreModule`:
 
 ```ts title="apps/backend/src/app.module.ts"
 import { Module } from '@nestjs/common';
 import { join } from 'path';
 import { VitNodeCoreModule } from 'vitnode-backend';
-import { emailSenderSMTP } from 'vitnode-backend-email-smtp';
+import { emailSMTP } from 'vitnode-backend-email-smtp';
 
 import { DATABASE_ENVS, schemaDatabase } from './database/config';
 import { DatabaseModule } from './database/database.module';
@@ -62,7 +62,7 @@ import { PluginsModule } from './plugins/plugins.module';
         config: DATABASE_ENVS,
         schemaDatabase,
       },
-      email: emailSenderSMTP({
+      email: emailSMTP({
         host: process.env.EMAIL_SMTP_HOST,
         port: process.env.EMAIL_SMTP_PORT,
         secure: process.env.EMAIL_SMTP_SECURE === 'true',

@@ -1,6 +1,6 @@
-# (Vitnode) Backend Resend Email Provider
+# (Vitnode) Backend Google AI Provider
 
-This package is used to create a provider for send emails using [Resend](https://resend.com/) into the VitNode app.
+This package is used to create a provider for AI using [Google AI Dev](https://ai.google.dev/) into the VitNode app.
 
 <p align="center">
   <br>

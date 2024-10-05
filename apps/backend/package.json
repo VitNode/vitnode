@@ -30,7 +30,8 @@
     "rxjs": "^7.8.1",
     "vitnode-backend": "workspace:*",
     "vitnode-backend-email-resend": "workspace:*",
-    "vitnode-backend-email-smtp": "workspace:*"
+    "vitnode-backend-email-smtp": "workspace:*",
+    "vitnode-backend-ai-google": "workspace:*"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^5.0.2",

@@ -1,6 +1,6 @@
 import { Resend } from 'resend';
 
-export const emailSenderResend = ({
+export const emailResend = ({
   api_key = '',
   from = '',
 }: {
