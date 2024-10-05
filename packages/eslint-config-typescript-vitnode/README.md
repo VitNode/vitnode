@@ -1,3 +1,13 @@
+# (VitNode) ESLint Config
+
+Package providing ESLint & TypeScript _(TSConfig)_ configuration from [VitNode](https://vitnode.com/).
+
+> [!TIP]
+> This package is not for only VitNode, you can use it in any project where is TypeScript.
+
+> [!CAUTION]
+> Only ESLint 9+ is supported.
+
 <p align="center">
   <br>
   <a href="https://vitnode.com/" target="_blank">
@@ -10,16 +20,6 @@
   <br>
   <br>
 </p>
-
-# (VitNode) ESLint Config
-
-Package providing ESLint & TypeScript _(TSConfig)_ configuration from [VitNode](https://vitnode.com/).
-
-> [!TIP]
-> This package is not for only VitNode, you can use it in any project where is TypeScript.
-
-> [!CAUTION]
-> Only ESLint 9+ is supported.
 
 ## Installation
 

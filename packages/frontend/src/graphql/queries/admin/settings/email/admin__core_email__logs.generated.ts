@@ -8,7 +8,7 @@ export type Admin__Core_Email__LogsQueryVariables = Types.Exact<{
 }>;
 
 
-export type Admin__Core_Email__LogsQuery = { __typename?: 'Query', admin__core_email__logs: { __typename?: 'LogsAdminEmailObj', edges: Array<{ __typename?: 'LogsAdminEmail', created: Date, error: string, html: string, id: number, subject: string, to: string, provider: string }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number, totalCount: number } } };
+export type Admin__Core_Email__LogsQuery = { __typename?: 'Query', admin__core_email__logs: { __typename?: 'LogsAdminEmailObj', edges: Array<{ __typename?: 'LogsAdminEmail', created: Date, error: string, html: string, id: number, subject: string, to: string }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number, totalCount: number } } };
 
 
 export const Admin__Core_Email__Logs = gql`
@@ -21,7 +21,6 @@ export const Admin__Core_Email__Logs = gql`
       id
       subject
       to
-      provider
     }
     pageInfo {
       count

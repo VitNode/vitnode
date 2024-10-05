@@ -24,6 +24,7 @@ type AuthorizationAdminSessionsObj {
 
 type AuthorizationCoreMiddleware {
   force_login: Boolean!
+  is_email_enabled: Boolean!
   lock_register: Boolean!
 }
 
@@ -140,12 +141,6 @@ type EditorShowCoreMiddleware {
   sticky: Boolean!
 }
 
-enum EmailProvider {
-  none
-  resend
-  smtp
-}
-
 type FilesAuthorizationCoreSessions {
   allow_upload: Boolean!
   max_storage_for_submit: Int!
@@ -220,7 +215,6 @@ type LogsAdminEmail {
   error: String!
   html: String!
   id: Float!
-  provider: String!
   subject: String!
   to: String!
 }
@@ -234,7 +228,7 @@ type Mutation {
   admin__core_ai__edit(key: String, model: String!, provider: AiProvider!): ShowAdminCoreAiObj!
   admin__core_ai__test(prompt: String!): String!
   admin__core_authorization_settings__edit(force_login: Boolean!, lock_register: Boolean!, require_confirm_email: Boolean!): ShowAdminAuthorizationSettingsObj!
-  admin__core_email_settings__edit(color_primary: String!, color_primary_foreground: String!, from: String!, logo: UploadWithKeepCoreFilesArgs, provider: EmailProvider!, resend_key: String, smtp: SMTPEditAdminEmailSettingsService): ShowAdminEmailSettingsServiceObj!
+  admin__core_email_settings__edit(color_primary: String!, color_primary_foreground: String!, logo: UploadWithKeepCoreFilesArgs): ShowAdminEmailSettingsServiceObj!
   admin__core_email_settings__test(message: String!, preview_text: String, subject: String!, to: String!): String!
   admin__core_files__delete(id: Int!): String!
   admin__core_groups__create(color: String, content: ContentCreateAdminGroups!, name: [StringLanguageInput!]!): ShowAdminGroups!
@@ -335,14 +329,6 @@ type Query {
   core_theme_editor__show: ShowCoreThemeEditorObj!
 }
 
-input SMTPEditAdminEmailSettingsService {
-  host: String!
-  password: String!
-  port: Int!
-  secure: Boolean!
-  user: String!
-}
-
 type SearchAdminSessionsObj {
   nav: [NavSearchAdminSessions!]!
 }
@@ -371,13 +357,8 @@ type ShowAdminCoreAiObj {
 
 type ShowAdminEmailSettingsServiceObj {
   color_primary: String!
-  from: String!
+  is_enabled: Boolean!
   logo: UploadCoreFilesObj
-  provider: EmailProvider!
-  smtp_host: String
-  smtp_port: Int
-  smtp_secure: Boolean
-  smtp_user: String
 }
 
 type ShowAdminFiles {

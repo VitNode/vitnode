@@ -23,6 +23,8 @@ const packages = [
   'create-vitnode-app',
   'frontend',
   'eslint-config-typescript-vitnode',
+  'backend-email-resend',
+  'backend-email-smtp',
 ];
 
 const getPackageJson = () => {

@@ -19,9 +19,6 @@ export class LogsAdminEmail {
   id: number;
 
   @Field(() => String)
-  provider: string;
-
-  @Field(() => String)
   subject: string;
 
   @Field(() => String)

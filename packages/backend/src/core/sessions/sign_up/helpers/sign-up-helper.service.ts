@@ -1,7 +1,8 @@
+import { SendAdminEmailService } from '@/core/admin/email/send/send.service';
 import { core_users } from '@/database/schema/users';
 import { CustomError, NotFoundError } from '@/errors';
 import { getUserIp, removeSpecialCharacters } from '@/functions';
-import { EmailProvider, getConfigFile } from '@/providers';
+import { getConfigFile } from '@/providers';
 import { AuthRequest, GqlContext, InternalDatabaseService } from '@/utils';
 import { Injectable } from '@nestjs/common';
 import { count } from 'drizzle-orm';
@@ -12,7 +13,10 @@ import { AvatarColorService } from './avatar-color.service';
 
 @Injectable()
 export class SignUpHelperService extends AvatarColorService {
-  constructor(private readonly databaseService: InternalDatabaseService) {
+  constructor(
+    private readonly databaseService: InternalDatabaseService,
+    private readonly mailService: SendAdminEmailService,
+  ) {
     super();
   }
 
@@ -126,7 +130,7 @@ export class SignUpHelperService extends AvatarColorService {
         group_id,
         email_verified:
           config.settings.authorization.require_confirm_email &&
-          config.settings.email.provider !== EmailProvider.none
+          this.mailService.checkIfEnable()
             ? email_verified
             : true,
         ip_address: getUserIp(req),

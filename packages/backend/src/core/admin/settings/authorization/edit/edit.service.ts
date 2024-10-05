@@ -1,4 +1,5 @@
-import { configPath, EmailProvider, getConfigFile } from '@/providers';
+import { SendAdminEmailService } from '@/core/admin/email/send/send.service';
+import { configPath, getConfigFile } from '@/providers';
 import { Injectable } from '@nestjs/common';
 import * as fs from 'fs';
 
@@ -7,6 +8,8 @@ import { EditAdminAuthorizationSettingsArgs } from './edit.dto';
 
 @Injectable()
 export class EditAdminAuthorizationSettingsService {
+  constructor(private readonly mailService: SendAdminEmailService) {}
+
   edit(
     args: EditAdminAuthorizationSettingsArgs,
   ): ShowAdminAuthorizationSettingsObj {
@@ -16,7 +19,7 @@ export class EditAdminAuthorizationSettingsService {
 
     return {
       ...config.settings.authorization,
-      is_email_enabled: config.settings.email.provider !== EmailProvider.none,
+      is_email_enabled: this.mailService.checkIfEnable(),
     };
   }
 }

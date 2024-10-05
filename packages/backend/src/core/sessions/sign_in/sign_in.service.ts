@@ -1,4 +1,5 @@
-import { EmailProvider, getConfigFile } from '@/providers';
+import { SendAdminEmailService } from '@/core/admin/email/send/send.service';
+import { getConfigFile } from '@/providers';
 import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
@@ -30,6 +31,7 @@ export class SignInCoreSessionsService {
     private readonly configService: ConfigService,
     private readonly deviceService: DeviceSignInCoreSessionsService,
     private readonly sendConfirmEmailCoreSessionsService: SendConfirmEmailCoreSessionsService,
+    private readonly mailService: SendAdminEmailService,
   ) {}
 
   protected async createSession({
@@ -224,7 +226,7 @@ export class SignInCoreSessionsService {
     if (
       !user.email_verified &&
       settings.authorization.require_confirm_email &&
-      settings.email.provider !== EmailProvider.none
+      this.mailService.checkIfEnable()
     ) {
       await this.sendConfirmEmailCoreSessionsService.sendConfirmEmail({
         userId: user.id,

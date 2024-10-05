@@ -275,6 +275,7 @@
       "success": {
         "title": "Account Created!",
         "desc": "We've sent a verification email to <email></email>. Please check your inbox and click the link to activate your account.",
+        "desc_without_email": "Your account has been created successfully. You can now log in.",
         "sign_in": "Sign In"
       },
       "confirm_email": {

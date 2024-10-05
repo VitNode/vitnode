@@ -1,4 +1,3 @@
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -22,7 +21,6 @@ export const ShowActionLogsEmailSettingsAdmin = ({
   to,
   html,
   error,
-  provider,
 }: Admin__Core_Email__LogsQuery['admin__core_email__logs']['edges'][0]) => {
   const t = useTranslations('admin.core.settings.email.logs.show');
 
@@ -47,7 +45,6 @@ export const ShowActionLogsEmailSettingsAdmin = ({
             {t.rich('to', {
               to,
               email: text => <span className="text-foreground">{text}</span>,
-              provider: () => <Badge variant="secondary">{provider}</Badge>,
             })}
           </DialogDescription>
         </DialogHeader>

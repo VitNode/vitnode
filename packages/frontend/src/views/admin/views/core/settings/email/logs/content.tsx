@@ -1,7 +1,6 @@
 'use client';
 
 import { DateFormat } from '@/components/date-format';
-import { Badge } from '@/components/ui/badge';
 import { DataTable } from '@/components/ui/data-table';
 import { Admin__Core_Email__LogsQuery } from '@/graphql/queries/admin/settings/email/admin__core_email__logs.generated';
 import { useTranslations } from 'next-intl';
@@ -24,13 +23,6 @@ export const ContentLogsEmailSettingsAdmin = ({
           {
             id: 'to',
             title: t('to'),
-          },
-          {
-            id: 'provider',
-            title: t('provider'),
-            cell: ({ row }) => {
-              return <Badge variant="secondary">{row.provider}</Badge>;
-            },
           },
           {
             id: 'subject',

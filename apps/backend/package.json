@@ -27,7 +27,10 @@
     "react": "19.0.0-rc-1460d67c-20241003",
     "react-dom": "19.0.0-rc-1460d67c-20241003",
     "reflect-metadata": "^0.2.2",
-    "rxjs": "^7.8.1"
+    "rxjs": "^7.8.1",
+    "vitnode-backend": "workspace:*",
+    "vitnode-backend-email-resend": "workspace:*",
+    "vitnode-backend-email-smtp": "workspace:*"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^5.0.2",
@@ -54,7 +57,6 @@
     "ts-loader": "^9.5.1",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "^5.6.2",
-    "vitnode-backend": "workspace:*"
+    "typescript": "^5.6.2"
   }
 }

@@ -7,7 +7,6 @@ query Admin__core_email__logs($cursor: Int, $first: Int, $last: Int) {
       id
       subject
       to
-      provider
     }
     pageInfo {
       count

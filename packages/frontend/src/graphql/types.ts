@@ -42,6 +42,7 @@ export type AuthorizationAdminSessionsObj = {
 export type AuthorizationCoreMiddleware = {
   __typename?: 'AuthorizationCoreMiddleware';
   force_login: Scalars['Boolean']['output'];
+  is_email_enabled: Scalars['Boolean']['output'];
   lock_register: Scalars['Boolean']['output'];
 };
 
@@ -163,13 +164,6 @@ export type EditorShowCoreMiddleware = {
   sticky: Scalars['Boolean']['output'];
 };
 
-export const EmailProvider = {
-  none: 'none',
-  resend: 'resend',
-  smtp: 'smtp'
-} as const;
-
-export type EmailProvider = typeof EmailProvider[keyof typeof EmailProvider];
 export type FilesAuthorizationCoreSessions = {
   __typename?: 'FilesAuthorizationCoreSessions';
   allow_upload: Scalars['Boolean']['output'];
@@ -253,7 +247,6 @@ export type LogsAdminEmail = {
   error: Scalars['String']['output'];
   html: Scalars['String']['output'];
   id: Scalars['Float']['output'];
-  provider: Scalars['String']['output'];
   subject: Scalars['String']['output'];
   to: Scalars['String']['output'];
 };
@@ -343,11 +336,7 @@ export type MutationAdmin__Core_Authorization_Settings__EditArgs = {
 export type MutationAdmin__Core_Email_Settings__EditArgs = {
   color_primary: Scalars['String']['input'];
   color_primary_foreground: Scalars['String']['input'];
-  from: Scalars['String']['input'];
   logo?: InputMaybe<UploadWithKeepCoreFilesArgs>;
-  provider: EmailProvider;
-  resend_key?: InputMaybe<Scalars['String']['input']>;
-  smtp?: InputMaybe<SmtpEditAdminEmailSettingsService>;
 };
 
 
@@ -839,14 +828,6 @@ export type QueryCore_Terms__ShowArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
 };
 
-export type SmtpEditAdminEmailSettingsService = {
-  host: Scalars['String']['input'];
-  password: Scalars['String']['input'];
-  port: Scalars['Int']['input'];
-  secure: Scalars['Boolean']['input'];
-  user: Scalars['String']['input'];
-};
-
 export type SearchAdminSessionsObj = {
   __typename?: 'SearchAdminSessionsObj';
   nav: Array<NavSearchAdminSessions>;
@@ -881,13 +862,8 @@ export type ShowAdminCoreAiObj = {
 export type ShowAdminEmailSettingsServiceObj = {
   __typename?: 'ShowAdminEmailSettingsServiceObj';
   color_primary: Scalars['String']['output'];
-  from: Scalars['String']['output'];
+  is_enabled: Scalars['Boolean']['output'];
   logo?: Maybe<UploadCoreFilesObj>;
-  provider: EmailProvider | `${EmailProvider}`;
-  smtp_host?: Maybe<Scalars['String']['output']>;
-  smtp_port?: Maybe<Scalars['Int']['output']>;
-  smtp_secure?: Maybe<Scalars['Boolean']['output']>;
-  smtp_user?: Maybe<Scalars['String']['output']>;
 };
 
 export type ShowAdminFiles = {

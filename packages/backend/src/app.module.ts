@@ -10,6 +10,10 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { ThrottlerModule } from '@nestjs/throttler';
 import { join } from 'path';
 
+import {
+  EmailSenderFunction,
+  GlobalAdminEmailModule,
+} from './core/admin/email/email.module';
 import { CoreModule } from './core/core.module';
 import { GlobalProvidersModule } from './providers/providers.module';
 import { GqlContext } from './utils';
@@ -18,11 +22,6 @@ import {
   InternalDatabaseModule,
 } from './utils/database/database.module';
 import { GqlThrottlerGuard } from './utils/guards/gql-throttler.guard';
-
-interface Args {
-  database: DatabaseModuleArgs;
-  pathToEnvFile: string;
-}
 
 const internalPaths = {
   backend: join(process.cwd(), 'src'),
@@ -179,7 +178,15 @@ const config = () => {
 
 @Module({})
 export class VitNodeCoreModule {
-  static register({ pathToEnvFile, database }: Args): DynamicModule {
+  static register({
+    pathToEnvFile,
+    database,
+    email,
+  }: {
+    database: DatabaseModuleArgs;
+    email?: EmailSenderFunction;
+    pathToEnvFile: string;
+  }): DynamicModule {
     return {
       module: VitNodeCoreModule,
       imports: [
@@ -212,6 +219,7 @@ export class VitNodeCoreModule {
         InternalDatabaseModule.register(database),
         GlobalProvidersModule,
         CoreModule,
+        GlobalAdminEmailModule.register({ email }),
       ],
       providers: [
         {

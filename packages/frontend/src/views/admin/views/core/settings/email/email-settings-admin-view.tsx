@@ -6,7 +6,6 @@ import {
   Admin__Core_Email_Settings__ShowQuery,
   Admin__Core_Email_Settings__ShowQueryVariables,
 } from '@/graphql/queries/admin/settings/admin__core_email_settings__show.generated';
-import { EmailProvider } from '@/graphql/types';
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
@@ -19,7 +18,6 @@ const getData = async () => {
     Admin__Core_Email_Settings__ShowQueryVariables
   >({
     query: Admin__Core_Email_Settings__Show,
-    cache: 'force-cache',
   });
 
   return data;
@@ -44,10 +42,7 @@ export const EmailSettingsAdminView = async () => {
     <>
       <HeaderContent desc={t('desc')} h1={t('title')}>
         <ActionsEmailSettingsAdmin
-          disabled={
-            data.admin__core_email_settings__show.provider ===
-            EmailProvider.none
-          }
+          disabled={!data.admin__core_email_settings__show.is_enabled}
         />
       </HeaderContent>
 

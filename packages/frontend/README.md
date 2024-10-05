@@ -1,3 +1,7 @@
+# (Vitnode) Frontend Package
+
+This package is used to create wrapper for a frontend server in NextJS for the VitNode app.
+
 <p align="center">
   <br>
   <a href="https://vitnode.com/" target="_blank">
@@ -10,19 +14,3 @@
   <br>
   <br>
 </p>
-
-# (Vitnode) Frontend Package
-
-This package is used to create wrapper for a frontend server in NextJS for the VitNode app.
-
-## Installation
-
-```bash
-npm install vitnode-frontend
-```
-
-or
-
-```bash
-pnpm add vitnode-frontend
-```

@@ -1,6 +1,7 @@
+import { SendAdminEmailService } from '@/core/admin/email/send/send.service';
 import { CaptchaCoreCaptchaSecurityService } from '@/core/admin/security/captcha/captcha.service';
 import { AccessDeniedError } from '@/errors';
-import { EmailProvider, getConfigFile } from '@/providers';
+import { getConfigFile } from '@/providers';
 import { GqlContext } from '@/utils';
 import { Injectable } from '@nestjs/common';
 
@@ -14,6 +15,7 @@ export class SignUpCoreSessionsService {
     private readonly captchaService: CaptchaCoreCaptchaSecurityService,
     private readonly signUpService: SignUpHelperService,
     private readonly confirmEmailService: SendConfirmEmailCoreSessionsService,
+    private readonly mailService: SendAdminEmailService,
   ) {}
 
   async signUp(
@@ -30,7 +32,7 @@ export class SignUpCoreSessionsService {
     if (
       config.settings.authorization.require_confirm_email &&
       !user.email_verified &&
-      config.settings.email.provider !== EmailProvider.none
+      this.mailService.checkIfEnable()
     ) {
       await this.confirmEmailService.sendConfirmEmail({
         userId: user.id,

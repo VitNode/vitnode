@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 
 import { AdminAiModule } from './ai/ai.module';
-import { AdminEmailModule, GlobalAdminEmailModule } from './email/email.module';
+import { AdminEmailModule } from './email/email.module';
 import { AdminFilesModule } from './files/files.module';
 import { AdminGroupsModule } from './groups/groups.module';
 import { AdminInstallModule } from './install/install.module';
@@ -27,7 +27,6 @@ import { AdminThemeEditorModule } from './theme_editor/theme_editor.module';
   imports: [
     GlobalAdminSecurityModule,
     GlobalAdminSessionsModule,
-    GlobalAdminEmailModule,
     AdminSessionsModule,
     AdminPluginsModule,
     AdminStylesModule,

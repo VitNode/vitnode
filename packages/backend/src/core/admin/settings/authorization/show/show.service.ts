@@ -1,19 +1,22 @@
-import { EmailProvider, getConfigFile } from '@/providers';
+import { SendAdminEmailService } from '@/core/admin/email/send/send.service';
+import { getConfigFile } from '@/providers';
 import { Injectable } from '@nestjs/common';
 
 import { ShowAdminAuthorizationSettingsObj } from './show.dto';
 
 @Injectable()
 export class ShowAdminAuthorizationSettingsService {
+  constructor(private readonly mailService: SendAdminEmailService) {}
+
   show(): ShowAdminAuthorizationSettingsObj {
     const config = getConfigFile();
+    const isEmailEnabled = this.mailService.checkIfEnable();
 
     return {
       ...config.settings.authorization,
       require_confirm_email:
-        config.settings.authorization.require_confirm_email &&
-        config.settings.email.provider !== EmailProvider.none,
-      is_email_enabled: config.settings.email.provider !== EmailProvider.none,
+        config.settings.authorization.require_confirm_email && isEmailEnabled,
+      is_email_enabled: isEmailEnabled,
     };
   }
 }

@@ -1,21 +1,13 @@
 mutation Admin__core_email_settings__edit(
   $colorPrimary: String!
   $colorPrimaryForeground: String!
-  $provider: EmailProvider!
-  $resendKey: String
-  $smtp: SMTPEditAdminEmailSettingsService
   $logo: UploadWithKeepCoreFilesArgs
-  $from: String!
 ) {
   admin__core_email_settings__edit(
     color_primary: $colorPrimary
     color_primary_foreground: $colorPrimaryForeground
-    provider: $provider
-    resend_key: $resendKey
-    smtp: $smtp
     logo: $logo
-    from: $from
   ) {
-    provider
+    color_primary
   }
 }

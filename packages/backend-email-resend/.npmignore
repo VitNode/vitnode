@@ -1,0 +1,6 @@
+/src
+/.turbo
+/node_modules
+/.eslintrc.json
+/tsconfig.json
+/.swcrc
