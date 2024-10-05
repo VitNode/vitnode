@@ -50,7 +50,7 @@ jobs:
         run: pnpm run build:scripts
 
       - name: Build Projects
-        run: pnpm run build --filter=vitnode-backend --filter=vitnode-frontend
+        run: pnpm run build --filter=vitnode-backend --filter=vitnode-frontend --filter=vitnode-backend-email-resend --filter=vitnode-backend-email-smtp
 
       - name: Run script to bump version
         run: pnpm run release
