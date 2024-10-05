@@ -8,8 +8,6 @@ import {
   Core_Sessions__Sign_OutMutationVariables,
 } from '@/graphql/mutations/sessions/core_sessions__sign_out.generated';
 import { revalidateTags } from '@/graphql/revalidate-tags';
-import { redirect } from '@/navigation';
-import { getLocale } from 'next-intl/server';
 
 export const mutationApi = async () => {
   try {
@@ -29,7 +27,4 @@ export const mutationApi = async () => {
 
     return { error: e.message };
   }
-
-  const locale = await getLocale();
-  redirect({ href: '/', locale });
 };

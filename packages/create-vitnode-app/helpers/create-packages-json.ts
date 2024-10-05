@@ -50,8 +50,8 @@ export const createPackagesJSON = ({
     },
     overrides: packageManager.startsWith('npm')
       ? {
-          react: '^19.0.0-rc.0',
-          'react-dom': '^19.0.0-rc.0',
+          react: '19.0.0-rc-1460d67c-20241003',
+          'react-dom': '19.0.0-rc-1460d67c-20241003',
         }
       : {},
     devDependencies: {
@@ -89,10 +89,10 @@ export const createPackagesJSON = ({
       '@hookform/resolvers': '^3.9.0',
       geist: '^1.3.1',
       'lucide-react': '^0.446.0',
-      next: '15.0.0-canary.155',
-      'next-intl': '^3.20.0',
-      react: '^19.0.0-rc-d6cb4e77-20240911',
-      'react-dom': '^19.0.0-rc-d6cb4e77-20240911',
+      next: '15.0.0-canary.179',
+      'next-intl': '^3.21.0-canary.0',
+      react: '19.0.0-rc-1460d67c-20241003',
+      'react-dom': '19.0.0-rc-1460d67c-20241003',
       'react-hook-form': '^7.53.0',
       sonner: '^1.5.0',
       'vitnode-frontend': `^${pkg.version}`,
@@ -141,8 +141,8 @@ export const createPackagesJSON = ({
       '@react-email/components': '^0.0.25',
       'class-transformer': '^0.5.1',
       'class-validator': '^0.14.1',
-      react: '^19.0.0-rc.0',
-      'react-dom': '^19.0.0-rc.0',
+      react: '19.0.0-rc-1460d67c-20241003',
+      'react-dom': '19.0.0-rc-1460d67c-20241003',
       'reflect-metadata': '^0.2.2',
       'vitnode-backend': `^${pkg.version}`,
     },

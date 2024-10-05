@@ -42,6 +42,8 @@ export const mutationApi = async (
     return { error: e.message };
   }
 
-  const locale = await getLocale();
-  redirect({ href: variables.admin ? '/admin/core/dashboard' : '/', locale });
+  if (variables.admin) {
+    const locale = await getLocale();
+    redirect({ href: '/admin/core/dashboard', locale });
+  }
 };

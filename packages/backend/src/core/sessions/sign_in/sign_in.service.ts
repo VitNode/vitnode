@@ -46,13 +46,13 @@ export class SignInCoreSessionsService {
 
     const device = await this.deviceService.getDevice({ req, res });
 
-    if (device.uagent_os === 'Uagent from tests') {
-      throw new CustomError({
-        code: 'INVALID_DEVICE',
-        message:
-          'We have detected that you are using an invalid device. Please try again.',
-      });
-    }
+    // if (device.uagent_os === 'Uagent from tests') {
+    //   throw new CustomError({
+    //     code: 'INVALID_DEVICE',
+    //     message:
+    //       'We have detected that you are using an invalid device. Please try again.',
+    //   });
+    // }
 
     const login_token = this.jwtService.sign(
       {

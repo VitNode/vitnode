@@ -1,11 +1,12 @@
-import React from 'react';
+import { TranslationsProvider } from 'vitnode-frontend/components/translations-provider';
 import { AuthLayout } from 'vitnode-frontend/views/layout/auth/auth-layout';
-import { ThemeLayout } from 'vitnode-frontend/views/theme/layout/theme-layout';
+
+import './global.css';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <AuthLayout>
-      <ThemeLayout>{children}</ThemeLayout>
-    </AuthLayout>
+    <TranslationsProvider namespaces={[]}>
+      <AuthLayout>{children}</AuthLayout>
+    </TranslationsProvider>
   );
 }

@@ -14,6 +14,9 @@ export const useSignOutApi = () => {
         description: t('internal_server_error'),
       });
     }
+
+    // Redirect to home
+    window.location.href = '/';
   };
 
   return {

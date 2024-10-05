@@ -6,7 +6,7 @@ dotenv.config({
   path: join(process.cwd(), '..', '..', '.env'),
 });
 
-const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts');
+const withNextIntl = createNextIntlPlugin('./src/i18n.ts');
 
 const nextConfig = config => {
   const ENVS = {

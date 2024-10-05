@@ -18,10 +18,10 @@
   "dependencies": {
     "geist": "^1.3.1",
     "lucide-react": "^0.446.0",
-    "next": "15.0.0-canary.177",
+    "next": "15.0.0-canary.179",
     "next-intl": "3.21.0-canary.0",
-    "react": "19.0.0-rc-fb9a90fa48-20240614",
-    "react-dom": "19.0.0-rc-fb9a90fa48-20240614",
+    "react": "19.0.0-rc-1460d67c-20241003",
+    "react-dom": "19.0.0-rc-1460d67c-20241003",
     "react-hook-form": "^7.53.0",
     "sonner": "^1.5.0",
     "vitnode-frontend": "workspace:*",

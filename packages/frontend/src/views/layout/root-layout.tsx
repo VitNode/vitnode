@@ -57,9 +57,7 @@ export const RootLayout = async ({ children, params, className }: Props) => {
     return (
       <WrapperRootLayout className={className} locale={locale}>
         <RootProviders middlewareData={middlewareData}>
-          <TranslationsProvider namespaces={[]}>
-            {children}
-          </TranslationsProvider>
+          {children}
         </RootProviders>
       </WrapperRootLayout>
     );
