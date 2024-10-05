@@ -49,9 +49,9 @@ export const generateMetadataFilesSettings = async (): Promise<Metadata> => {
 export const FilesSettingsView = async ({
   searchParams,
 }: {
-  searchParams: SearchParamsPagination;
+  searchParams: Promise<SearchParamsPagination>;
 }) => {
-  const variables = getPaginationTool({
+  const variables = await getPaginationTool({
     searchParams,
     defaultPageSize: 10,
     sortByEnum: ShowCoreFilesSortingColumnEnum,

@@ -32,13 +32,12 @@ interface NavItem extends Omit<ShowAdminNavPluginsObj, 'children'> {
   id: string;
 }
 
-export interface NavDevPluginAdminViewProps {
-  params: { code: string };
-}
-
 export const NavDevPluginAdminView = async ({
-  params: { code },
-}: NavDevPluginAdminViewProps) => {
+  params,
+}: {
+  params: Promise<{ code: string }>;
+}) => {
+  const { code } = await params;
   const [data, t] = await Promise.all([
     getData({ pluginCode: code }),
     getTranslations('admin.core.plugins.dev.nav'),

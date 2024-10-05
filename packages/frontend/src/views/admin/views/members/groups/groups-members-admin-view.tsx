@@ -31,7 +31,7 @@ const getData = async (variables: Admin__Core_Groups__ShowQueryVariables) => {
 };
 
 export interface GroupsMembersAdminViewProps {
-  searchParams: SearchParamsPagination;
+  searchParams: Promise<SearchParamsPagination>;
 }
 
 export const generateMetadataGroupsMembersAdmin =
@@ -46,7 +46,7 @@ export const generateMetadataGroupsMembersAdmin =
 export const GroupsMembersAdminView = async ({
   searchParams,
 }: GroupsMembersAdminViewProps) => {
-  const variables = getPaginationTool({
+  const variables = await getPaginationTool({
     searchParams,
     sortByEnum: ShowAdminGroupsSortingColumnEnum,
     defaultPageSize: 10,

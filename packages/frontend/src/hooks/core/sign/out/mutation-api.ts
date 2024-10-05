@@ -8,7 +8,6 @@ import {
   Core_Sessions__Sign_OutMutationVariables,
 } from '@/graphql/mutations/sessions/core_sessions__sign_out.generated';
 import { revalidateTags } from '@/graphql/revalidate-tags';
-import { redirect } from '@/navigation';
 
 export const mutationApi = async () => {
   try {
@@ -19,7 +18,7 @@ export const mutationApi = async () => {
       query: Core_Sessions__Sign_Out,
     });
 
-    const userIdFromCookie = getUserIdCookie();
+    const userIdFromCookie = await getUserIdCookie();
     if (userIdFromCookie) {
       revalidateTags.session(+userIdFromCookie);
     }
@@ -28,6 +27,4 @@ export const mutationApi = async () => {
 
     return { error: e.message };
   }
-
-  redirect('/');
 };

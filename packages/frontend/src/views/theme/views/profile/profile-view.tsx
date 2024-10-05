@@ -10,7 +10,7 @@ import { RevalidateTagEnum } from '@/graphql/revalidate-tags';
 import { notFound } from 'next/navigation';
 
 interface Props {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
 const getData = async (id: string) => {
@@ -32,7 +32,8 @@ const getData = async (id: string) => {
   return data;
 };
 
-export const ProfileView = async ({ params: { id } }: Props) => {
+export const ProfileView = async ({ params }: Props) => {
+  const { id } = await params;
   const {
     core_members__show: { edges },
   } = await getData(id);

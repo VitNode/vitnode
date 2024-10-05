@@ -15,7 +15,7 @@ export const AsideAuthAdmin = ({
   textsAndIcons: TextAndIconsAsideAdmin[];
 }) => {
   return (
-    <aside className="bg-card fixed left-0 top-0 z-30 hidden h-dvh flex-col border-e md:flex md:w-[240px] xl:w-[260px]">
+    <aside className="bg-card fixed left-0 top-0 z-30 hidden h-dvh flex-col border-e md:flex xl:w-[260px]">
       {CONFIG.node_development && (
         <div
           className="absolute left-0 top-0 z-50 h-1 w-full"

@@ -10,6 +10,7 @@ import {
 import { revalidateTags } from '@/graphql/revalidate-tags';
 import { redirect } from '@/navigation';
 import { cookies } from 'next/headers';
+import { getLocale } from 'next-intl/server';
 
 export const mutationApi = async (
   variables: Core_Sessions__Sign_InMutationVariables,
@@ -23,14 +24,14 @@ export const mutationApi = async (
       variables,
     });
 
-    const cookie = cookies();
+    const cookie = await cookies();
     if (!variables.admin) {
       const userIdFromCookie = cookie.get('vitnode-user-id')?.value;
       if (userIdFromCookie) {
         revalidateTags.session(+userIdFromCookie);
       }
     } else {
-      const adminIdFromCookie = getAdminIdCookie();
+      const adminIdFromCookie = await getAdminIdCookie();
       if (adminIdFromCookie) {
         revalidateTags.sessionAdmin(+adminIdFromCookie);
       }
@@ -41,5 +42,8 @@ export const mutationApi = async (
     return { error: e.message };
   }
 
-  redirect(variables.admin ? '/admin/core/dashboard' : '/');
+  if (variables.admin) {
+    const locale = await getLocale();
+    redirect({ href: '/admin/core/dashboard', locale });
+  }
 };

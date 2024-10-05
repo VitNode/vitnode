@@ -18,7 +18,7 @@ import { ContentPluginsCoreAdmin } from './content';
 import { WarnReqRestartServer } from './warn-req-restart-server';
 
 export interface PluginsAdminViewProps {
-  searchParams: SearchParamsPagination;
+  searchParams: Promise<SearchParamsPagination>;
 }
 
 const getData = async (variables: Admin__Core_Plugins__ShowQueryVariables) => {
@@ -44,7 +44,7 @@ export const generateMetadataPluginsAdmin = async (): Promise<Metadata> => {
 export const PluginsAdminView = async ({
   searchParams,
 }: PluginsAdminViewProps) => {
-  const variables = getPaginationTool({
+  const variables = await getPaginationTool({
     searchParams,
     sortByEnum: ShowAdminPluginsSortingColumnEnum,
     defaultPageSize: 10,

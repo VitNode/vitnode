@@ -11,7 +11,7 @@ export interface SearchParamsPagination {
 
 interface Args<T> {
   defaultPageSize: 10 | 20 | 30 | 40 | 50;
-  searchParams: SearchParamsPagination;
+  searchParams: Promise<SearchParamsPagination>;
   search?: boolean;
   sortByEnum?: T;
 }
@@ -23,11 +23,13 @@ interface ReturnValues<T> {
   sortBy?: { column: keyof T; direction: SortDirectionEnum };
 }
 
-export function getPaginationTool<T extends Record<string, unknown>>({
+export async function getPaginationTool<T extends Record<string, unknown>>({
   defaultPageSize,
-  searchParams,
+  searchParams: searchParamsPromise,
   sortByEnum,
-}: Args<T>): ReturnValues<T> {
+}: Args<T>): Promise<ReturnValues<T>> {
+  const searchParams = await searchParamsPromise;
+
   const pagination = {
     first: Number(searchParams?.last ?? 0)
       ? null

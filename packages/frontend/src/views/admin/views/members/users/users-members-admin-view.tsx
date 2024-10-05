@@ -33,7 +33,7 @@ interface SearchParams extends SearchParamsPagination {
 }
 
 export interface UsersMembersAdminViewProps {
-  searchParams: SearchParams;
+  searchParams: Promise<SearchParams>;
 }
 
 export const generateMetadataUsersMembersAdmin =
@@ -48,21 +48,24 @@ export const generateMetadataUsersMembersAdmin =
 export const UsersMembersAdminView = async ({
   searchParams,
 }: UsersMembersAdminViewProps) => {
+  const { groups } = await searchParams;
   const variables: Admin__Core_Members__ShowQueryVariables = {
     ...getPaginationTool({
       searchParams,
       sortByEnum: ShowAdminMembersSortingColumnEnum,
       defaultPageSize: 10,
     }),
-    groups: Array.isArray(searchParams.groups)
-      ? searchParams.groups.map(group => Number(group))
-      : Number(searchParams.groups),
+    groups: Array.isArray(groups)
+      ? groups.map(group => Number(group))
+      : Number(groups),
   };
 
   const [data, t] = await Promise.all([
     getData(variables),
     getTranslations('admin.members.users'),
   ]);
+
+  // console.log('data', data);
 
   return (
     <>

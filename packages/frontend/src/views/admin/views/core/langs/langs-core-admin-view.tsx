@@ -32,11 +32,8 @@ const getData = async (
   return data;
 };
 
-export interface LangsCoreAdminViewProps {
-  params: {
-    locale: string;
-  };
-  searchParams: SearchParamsPagination;
+interface Props {
+  searchParams: Promise<SearchParamsPagination>;
 }
 
 export const generateMetadataLangsCoreAdmin = async (): Promise<Metadata> => {
@@ -47,10 +44,8 @@ export const generateMetadataLangsCoreAdmin = async (): Promise<Metadata> => {
   };
 };
 
-export const LangsCoreAdminView = async ({
-  searchParams,
-}: LangsCoreAdminViewProps) => {
-  const variables = getPaginationTool({
+export const LangsCoreAdminView = async ({ searchParams }: Props) => {
+  const variables = await getPaginationTool({
     searchParams,
     defaultPageSize: 10,
     sortByEnum: ShowCoreLanguagesSortingColumnEnum,

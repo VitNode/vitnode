@@ -30,10 +30,6 @@ const getData = async (
   return data;
 };
 
-export interface AdministratorsStaffAdminViewProps {
-  searchParams: SearchParamsPagination;
-}
-
 export const generateMetadataAdministratorsStaffAdmin =
   async (): Promise<Metadata> => {
     const t = await getTranslations('admin.members.staff.administrators');
@@ -45,8 +41,10 @@ export const generateMetadataAdministratorsStaffAdmin =
 
 export const AdministratorsStaffAdminView = async ({
   searchParams,
-}: AdministratorsStaffAdminViewProps) => {
-  const variables = getPaginationTool({
+}: {
+  searchParams: Promise<SearchParamsPagination>;
+}) => {
+  const variables = await getPaginationTool({
     searchParams,
     sortByEnum: ShowAdminStaffAdministratorsSortingColumnEnum,
     defaultPageSize: 10,

@@ -8,12 +8,13 @@ import { getTranslations } from 'next-intl/server';
 import { getLegalData } from '../legal-view';
 
 interface Props {
-  params: { code: string };
+  params: Promise<{ code: string }>;
 }
 
 export const generateMetadataItemLegal = async ({
-  params: { code },
+  params,
 }: Props): Promise<Metadata> => {
+  const { code } = await params;
   const [
     { convertText },
     {
@@ -37,7 +38,8 @@ export const generateMetadataItemLegal = async ({
   };
 };
 
-export const ItemLegalView = async ({ params: { code } }: Props) => {
+export const ItemLegalView = async ({ params }: Props) => {
+  const { code } = await params;
   const [
     t,
     { convertText },
