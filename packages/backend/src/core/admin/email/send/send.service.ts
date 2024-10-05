@@ -17,7 +17,13 @@ export class SendAdminEmailService {
     private readonly mailService: MailService,
     @Inject('EmailHelpersService')
     private readonly emailHelpersService: EmailHelpersServiceType,
+    @Inject('VITNODE_EMAIL_SENDER_IS_ENABLED')
+    private readonly isEmailEnabled: boolean,
   ) {}
+
+  checkIfEnable(): boolean {
+    return this.isEmailEnabled;
+  }
 
   async send({
     to,

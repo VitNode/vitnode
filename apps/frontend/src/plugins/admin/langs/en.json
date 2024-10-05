@@ -88,25 +88,17 @@
             "title": "Email Error Logs",
             "id": "ID",
             "to": "To",
-            "provider": "Provider",
             "subject": "Subject",
             "created": "Created",
             "error": "Error",
             "show": {
               "title": "Show log",
               "title_dialog": "Email Log - #{id}",
-              "to": "To: <email>{to}</email>, Using: <provider></provider>",
+              "to": "To: <email>{to}</email>",
               "html": "HTML",
               "error": "Error Message",
               "subject": "Subject"
             }
-          },
-          "provider": {
-            "title": "Email Provider",
-            "none": "None",
-            "smtp": "SMTP",
-            "resend": "Resend Email",
-            "resend_desc": "Read more on <link>Resend Email</link>."
           },
           "from": {
             "title": "From",

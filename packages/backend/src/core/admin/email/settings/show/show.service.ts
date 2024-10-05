@@ -1,20 +1,21 @@
 import { getConfigFile } from '@/providers/config';
 import { Injectable } from '@nestjs/common';
 
-import { HelpersAdminEmailSettingsService } from '../../helpers.service';
+import { SendAdminEmailService } from '../../send/send.service';
 import { ShowAdminEmailSettingsServiceObj } from './show.dto';
 
 @Injectable()
-export class ShowAdminEmailSettingsService extends HelpersAdminEmailSettingsService {
+export class ShowAdminEmailSettingsService {
+  constructor(private readonly mailService: SendAdminEmailService) {}
+
   show(): ShowAdminEmailSettingsServiceObj {
     const {
       settings: { email: emailSettings },
     } = getConfigFile();
-    const config = this.getEmailCredentials();
 
     return {
-      ...config,
       ...emailSettings,
+      is_enabled: this.mailService.checkIfEnable(),
     };
   }
 }

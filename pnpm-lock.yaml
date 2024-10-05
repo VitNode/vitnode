@@ -68,6 +68,15 @@ importers:
       rxjs:
         specifier: ^7.8.1
         version: 7.8.1
+      vitnode-backend:
+        specifier: workspace:*
+        version: link:../../packages/backend
+      vitnode-backend-email-resend:
+        specifier: workspace:*
+        version: link:../../packages/backend-email-resend
+      vitnode-backend-email-smtp:
+        specifier: workspace:*
+        version: link:../../packages/backend-email-smtp
     devDependencies:
       '@graphql-codegen/cli':
         specifier: ^5.0.2
@@ -144,9 +153,6 @@ importers:
       typescript:
         specifier: ^5.6.2
         version: 5.6.2
-      vitnode-backend:
-        specifier: workspace:*
-        version: link:../../packages/backend
 
   apps/frontend:
     dependencies:
@@ -268,15 +274,9 @@ importers:
       http-errors:
         specifier: ^2.0.0
         version: 2.0.0
-      nodemailer:
-        specifier: ^6.9.15
-        version: 6.9.15
       object-path:
         specifier: ^0.11.8
         version: 0.11.8
-      resend:
-        specifier: ^4.0.0
-        version: 4.0.0(react-dom@19.0.0-rc-1460d67c-20241003(react@19.0.0-rc-1460d67c-20241003))(react@19.0.0-rc-1460d67c-20241003)
       sharp:
         specifier: ^0.33.5
         version: 0.33.5
@@ -323,9 +323,6 @@ importers:
       '@types/node':
         specifier: ^22.7.4
         version: 22.7.4
-      '@types/nodemailer':
-        specifier: ^6.4.16
-        version: 6.4.16
       '@types/object-path':
         specifier: ^0.11.4
         version: 0.11.4
@@ -377,6 +374,59 @@ importers:
       tsup:
         specifier: ^8.3.0
         version: 8.3.0(@swc/core@1.7.28(@swc/helpers@0.5.13))(jiti@1.21.6)(postcss@8.4.47)(typescript@5.6.2)(yaml@2.5.1)
+      typescript:
+        specifier: ^5.6.2
+        version: 5.6.2
+
+  packages/backend-email-resend:
+    dependencies:
+      resend:
+        specifier: ^4.0.0
+        version: 4.0.0(react-dom@19.0.0-rc-1460d67c-20241003(react@19.0.0-rc-1460d67c-20241003))(react@19.0.0-rc-1460d67c-20241003)
+    devDependencies:
+      '@swc/cli':
+        specifier: ^0.4.0
+        version: 0.4.0(@swc/core@1.7.28(@swc/helpers@0.5.13))(chokidar@3.6.0)
+      '@swc/core':
+        specifier: ^1.7.28
+        version: 1.7.28(@swc/helpers@0.5.13)
+      '@types/node':
+        specifier: ^22.7.4
+        version: 22.7.4
+      concurrently:
+        specifier: ^9.0.1
+        version: 9.0.1
+      eslint-config-typescript-vitnode:
+        specifier: workspace:*
+        version: link:../eslint-config-typescript-vitnode
+      typescript:
+        specifier: ^5.6.2
+        version: 5.6.2
+
+  packages/backend-email-smtp:
+    dependencies:
+      nodemailer:
+        specifier: ^6.9.15
+        version: 6.9.15
+    devDependencies:
+      '@swc/cli':
+        specifier: ^0.4.0
+        version: 0.4.0(@swc/core@1.7.28(@swc/helpers@0.5.13))(chokidar@3.6.0)
+      '@swc/core':
+        specifier: ^1.7.28
+        version: 1.7.28(@swc/helpers@0.5.13)
+      '@types/node':
+        specifier: ^22.7.4
+        version: 22.7.4
+      '@types/nodemailer':
+        specifier: ^6.4.16
+        version: 6.4.16
+      concurrently:
+        specifier: ^9.0.1
+        version: 9.0.1
+      eslint-config-typescript-vitnode:
+        specifier: workspace:*
+        version: link:../eslint-config-typescript-vitnode
       typescript:
         specifier: ^5.6.2
         version: 5.6.2

@@ -1,18 +1,11 @@
 import { core_logs_email } from '@/database/schema/logs';
 import { InternalDatabaseService } from '@/utils';
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { render } from '@react-email/render';
-import * as fs from 'fs';
-import * as nodemailer from 'nodemailer';
 import React from 'react';
-import { Resend } from 'resend';
 
-import { CustomError } from '../../../errors';
-import { EmailProvider, getConfigFile } from '../../../providers/config';
-import {
-  EmailCredentialsFile,
-  HelpersAdminEmailSettingsService,
-} from './helpers.service';
+import { getConfigFile } from '../../../providers/config';
+import { EmailSenderFunction } from './email.module';
 
 export interface SendMailServiceArgs {
   subject: string;
@@ -22,21 +15,21 @@ export interface SendMailServiceArgs {
 }
 
 @Injectable()
-export class MailService extends HelpersAdminEmailSettingsService {
-  constructor(private readonly databaseService: InternalDatabaseService) {
-    super();
-  }
+export class MailService {
+  constructor(
+    private readonly databaseService: InternalDatabaseService,
+    @Inject('VITNODE_EMAIL_SENDER')
+    private readonly emailSender: EmailSenderFunction,
+  ) {}
 
   private async handleErrors({
     to,
     html,
     error,
     subject,
-    provider,
   }: {
     error: string;
     html: string;
-    provider?: string;
     subject: string;
     to: string;
   }) {
@@ -45,7 +38,6 @@ export class MailService extends HelpersAdminEmailSettingsService {
       subject,
       error,
       html,
-      provider,
     });
   }
 
@@ -54,93 +46,25 @@ export class MailService extends HelpersAdminEmailSettingsService {
     subject,
     template,
   }: SendMailServiceArgs): Promise<void> {
-    if (!fs.existsSync(this.path)) {
-      throw new CustomError({
-        code: 'EMAIL_NOT_CONFIGURED',
-        message:
-          'Email settings are not configured. Please configure them in the AdminCP.',
-      });
-    }
-
     const html = await Promise.resolve(render(template));
-    const data = fs.readFileSync(this.path, 'utf-8');
-    const config: EmailCredentialsFile = JSON.parse(data);
-    const configSettings = getConfigFile();
+    const { settings } = getConfigFile();
 
-    if (
-      configSettings.settings.email.provider === EmailProvider.smtp &&
-      config.smtp_host &&
-      config.smtp_user &&
-      config.smtp_port
-    ) {
-      const transporter = nodemailer.createTransport(
-        {
-          host: config.smtp_host,
-          port: config.smtp_port,
-          secure: config.smtp_secure ?? false,
-          auth: {
-            user: config.smtp_user,
-            pass: config.smtp_password,
-          },
-        },
-        {
-          from: {
-            name: configSettings.settings.main.site_name,
-            address: configSettings.settings.email.from,
-          },
-        },
-      );
-
-      try {
-        await transporter.sendMail({
-          to,
-          subject,
-          html,
-        });
-      } catch (e) {
-        const error = e as Error;
-        await this.handleErrors({
-          error: error.message,
-          html,
-          subject,
-          to,
-        });
-      }
-    }
-
-    if (
-      configSettings.settings.email.provider === EmailProvider.resend &&
-      config.resend_key
-    ) {
-      const resend = new Resend(config.resend_key);
-
-      try {
-        const provider = await resend.emails.send({
-          from: `${configSettings.settings.main.site_name} <${configSettings.settings.email.from}>`,
-          to,
-          subject,
-          html,
-        });
-
-        if (provider.error) {
-          await this.handleErrors({
-            error: `[${provider.error.name}]: ${provider.error.message}`,
-            html,
-            subject,
-            to,
-            provider: 'Resend',
-          });
-        }
-      } catch (e) {
-        const error = e as Error;
-        await this.handleErrors({
-          error: error.message,
-          html,
-          subject,
-          to,
-          provider: 'Resend',
-        });
-      }
+    try {
+      await this.emailSender({
+        to,
+        subject,
+        html,
+        from: settings.email.from,
+        site_short_name: settings.main.site_short_name,
+      });
+    } catch (e) {
+      const error = e as Error;
+      await this.handleErrors({
+        error: error.message,
+        html,
+        subject,
+        to,
+      });
     }
   }
 }

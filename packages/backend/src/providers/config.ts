@@ -17,12 +17,6 @@ export enum CaptchaTypeEnum {
   recaptcha_v3 = 'recaptcha_v3',
 }
 
-export enum EmailProvider {
-  none = 'none',
-  resend = 'resend',
-  smtp = 'smtp',
-}
-
 export enum AiProvider {
   google = 'google',
   none = 'none',
@@ -72,7 +66,6 @@ export interface ConfigType {
       color_primary_foreground: string;
       from: string;
       logo?: UploadCoreFilesObj;
-      provider: EmailProvider;
     };
     main: {
       contact_email: string;
@@ -111,7 +104,6 @@ export const DEFAULT_CONFIG_DATA: ConfigType = {
       contact_email: '',
     },
     email: {
-      provider: EmailProvider.none,
       color_primary: 'hsl(220, 74%, 50%)',
       color_primary_foreground: 'hsl(210, 40%, 98%)',
       from: '',
