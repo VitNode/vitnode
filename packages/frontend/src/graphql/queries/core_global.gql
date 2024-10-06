@@ -28,6 +28,8 @@ query Core_global {
     site_short_name
   }
   core_middleware__show {
+    is_email_enabled
+    is_ai_enabled
     editor {
       files {
         allow_type

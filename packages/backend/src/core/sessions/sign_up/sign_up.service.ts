@@ -1,4 +1,4 @@
-import { SendAdminEmailService } from '@/core/admin/email/send/send.service';
+import { EmailService } from '@/core/admin/email/email.service';
 import { CaptchaCoreCaptchaSecurityService } from '@/core/admin/security/captcha/captcha.service';
 import { AccessDeniedError } from '@/errors';
 import { getConfigFile } from '@/providers';
@@ -15,7 +15,7 @@ export class SignUpCoreSessionsService {
     private readonly captchaService: CaptchaCoreCaptchaSecurityService,
     private readonly signUpService: SignUpHelperService,
     private readonly confirmEmailService: SendConfirmEmailCoreSessionsService,
-    private readonly mailService: SendAdminEmailService,
+    private readonly mailService: EmailService,
   ) {}
 
   async signUp(

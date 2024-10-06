@@ -55,6 +55,17 @@ export class ShowAdminNavService {
               code: 'legal',
               keywords: ['legal', 'terms', 'privacy', 'policy', 'tos', 'pp'],
             },
+            {
+              code: 'ai',
+              keywords: [
+                'artificial',
+                'intelligence',
+                'gpt',
+                'openai',
+                'google',
+                'gemini',
+              ],
+            },
           ],
         },
         {
@@ -85,24 +96,6 @@ export class ShowAdminNavService {
           code: 'langs',
           icon: 'languages',
           keywords: ['language'],
-        },
-        {
-          code: 'ai',
-          icon: 'brain',
-          keywords: [],
-          children: [
-            {
-              code: 'settings',
-              keywords: [
-                'artificial',
-                'intelligence',
-                'gpt',
-                'openai',
-                'google',
-                'gemini',
-              ],
-            },
-          ],
         },
         {
           code: 'advanced',

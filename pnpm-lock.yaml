@@ -71,6 +71,12 @@ importers:
       vitnode-backend:
         specifier: workspace:*
         version: link:../../packages/backend
+      vitnode-backend-ai-google:
+        specifier: workspace:*
+        version: link:../../packages/backend-ai-google
+      vitnode-backend-ai-open-ai:
+        specifier: workspace:*
+        version: link:../../packages/backend-ai-open-ai
       vitnode-backend-email-resend:
         specifier: workspace:*
         version: link:../../packages/backend-email-resend
@@ -92,7 +98,7 @@ importers:
         version: 4.2.3(graphql@16.9.0)
       '@nestjs/cli':
         specifier: ^10.4.5
-        version: 10.4.5(@swc/cli@0.4.0(@swc/core@1.7.28(@swc/helpers@0.5.13))(chokidar@3.6.0))(@swc/core@1.7.28(@swc/helpers@0.5.13))
+        version: 10.4.5(@swc/cli@0.4.0(@swc/core@1.7.28(@swc/helpers@0.5.13))(chokidar@3.6.0))(@swc/core@1.7.28(@swc/helpers@0.5.13))(esbuild@0.19.12)
       '@nestjs/schematics':
         specifier: ^10.1.4
         version: 10.1.4(chokidar@3.6.0)(typescript@5.6.2)
@@ -143,7 +149,7 @@ importers:
         version: 0.5.21
       ts-loader:
         specifier: ^9.5.1
-        version: 9.5.1(typescript@5.6.2)(webpack@5.94.0(@swc/core@1.7.28(@swc/helpers@0.5.13)))
+        version: 9.5.1(typescript@5.6.2)(webpack@5.94.0(@swc/core@1.7.28(@swc/helpers@0.5.13))(esbuild@0.19.12))
       ts-node:
         specifier: ^10.9.2
         version: 10.9.2(@swc/core@1.7.28(@swc/helpers@0.5.13))(@types/node@22.7.4)(typescript@5.6.2)
@@ -217,12 +223,6 @@ importers:
 
   packages/backend:
     dependencies:
-      '@ai-sdk/google':
-        specifier: ^0.0.48
-        version: 0.0.48(zod@3.23.8)
-      '@ai-sdk/openai':
-        specifier: ^0.0.61
-        version: 0.0.61(zod@3.23.8)
       '@apollo/server':
         specifier: ^4.11.0
         version: 4.11.0(graphql@16.9.0)
@@ -374,6 +374,62 @@ importers:
       tsup:
         specifier: ^8.3.0
         version: 8.3.0(@swc/core@1.7.28(@swc/helpers@0.5.13))(jiti@1.21.6)(postcss@8.4.47)(typescript@5.6.2)(yaml@2.5.1)
+      typescript:
+        specifier: ^5.6.2
+        version: 5.6.2
+
+  packages/backend-ai-google:
+    dependencies:
+      '@ai-sdk/google':
+        specifier: ^0.0.48
+        version: 0.0.48(zod@3.23.8)
+    devDependencies:
+      '@swc/cli':
+        specifier: ^0.4.0
+        version: 0.4.0(@swc/core@1.7.28(@swc/helpers@0.5.13))(chokidar@3.6.0)
+      '@swc/core':
+        specifier: ^1.7.28
+        version: 1.7.28(@swc/helpers@0.5.13)
+      '@types/node':
+        specifier: ^22.7.4
+        version: 22.7.4
+      ai:
+        specifier: ^3.4.9
+        version: 3.4.9(react@19.0.0-rc-1460d67c-20241003)(sswr@2.1.0(svelte@4.2.19))(svelte@4.2.19)(vue@3.5.8(typescript@5.6.2))(zod@3.23.8)
+      concurrently:
+        specifier: ^9.0.1
+        version: 9.0.1
+      eslint-config-typescript-vitnode:
+        specifier: workspace:*
+        version: link:../eslint-config-typescript-vitnode
+      typescript:
+        specifier: ^5.6.2
+        version: 5.6.2
+
+  packages/backend-ai-open-ai:
+    dependencies:
+      '@ai-sdk/openai':
+        specifier: ^0.0.61
+        version: 0.0.61(zod@3.23.8)
+    devDependencies:
+      '@swc/cli':
+        specifier: ^0.4.0
+        version: 0.4.0(@swc/core@1.7.28(@swc/helpers@0.5.13))(chokidar@3.6.0)
+      '@swc/core':
+        specifier: ^1.7.28
+        version: 1.7.28(@swc/helpers@0.5.13)
+      '@types/node':
+        specifier: ^22.7.4
+        version: 22.7.4
+      ai:
+        specifier: ^3.4.9
+        version: 3.4.9(react@19.0.0-rc-1460d67c-20241003)(sswr@2.1.0(svelte@4.2.19))(svelte@4.2.19)(vue@3.5.8(typescript@5.6.2))(zod@3.23.8)
+      concurrently:
+        specifier: ^9.0.1
+        version: 9.0.1
+      eslint-config-typescript-vitnode:
+        specifier: workspace:*
+        version: link:../eslint-config-typescript-vitnode
       typescript:
         specifier: ^5.6.2
         version: 5.6.2
@@ -10238,7 +10294,7 @@ snapshots:
       lodash.omit: 4.5.0
       tslib: 2.6.3
 
-  '@nestjs/cli@10.4.5(@swc/cli@0.4.0(@swc/core@1.7.28(@swc/helpers@0.5.13))(chokidar@3.6.0))(@swc/core@1.7.28(@swc/helpers@0.5.13))':
+  '@nestjs/cli@10.4.5(@swc/cli@0.4.0(@swc/core@1.7.28(@swc/helpers@0.5.13))(chokidar@3.6.0))(@swc/core@1.7.28(@swc/helpers@0.5.13))(esbuild@0.19.12)':
     dependencies:
       '@angular-devkit/core': 17.3.8(chokidar@3.6.0)
       '@angular-devkit/schematics': 17.3.8(chokidar@3.6.0)
@@ -10248,7 +10304,7 @@ snapshots:
       chokidar: 3.6.0
       cli-table3: 0.6.5
       commander: 4.1.1
-      fork-ts-checker-webpack-plugin: 9.0.2(typescript@5.3.3)(webpack@5.94.0(@swc/core@1.7.28(@swc/helpers@0.5.13)))
+      fork-ts-checker-webpack-plugin: 9.0.2(typescript@5.3.3)(webpack@5.94.0(@swc/core@1.7.28(@swc/helpers@0.5.13))(esbuild@0.19.12))
       glob: 10.4.2
       inquirer: 8.2.6
       node-emoji: 1.11.0
@@ -10257,7 +10313,7 @@ snapshots:
       tsconfig-paths: 4.2.0
       tsconfig-paths-webpack-plugin: 4.1.0
       typescript: 5.3.3
-      webpack: 5.94.0(@swc/core@1.7.28(@swc/helpers@0.5.13))
+      webpack: 5.94.0(@swc/core@1.7.28(@swc/helpers@0.5.13))(esbuild@0.19.12)
       webpack-node-externals: 3.0.0
     optionalDependencies:
       '@swc/cli': 0.4.0(@swc/core@1.7.28(@swc/helpers@0.5.13))(chokidar@3.6.0)
@@ -13646,7 +13702,7 @@ snapshots:
       cross-spawn: 7.0.3
       signal-exit: 4.1.0
 
-  fork-ts-checker-webpack-plugin@9.0.2(typescript@5.3.3)(webpack@5.94.0(@swc/core@1.7.28(@swc/helpers@0.5.13))):
+  fork-ts-checker-webpack-plugin@9.0.2(typescript@5.3.3)(webpack@5.94.0(@swc/core@1.7.28(@swc/helpers@0.5.13))(esbuild@0.19.12)):
     dependencies:
       '@babel/code-frame': 7.24.7
       chalk: 4.1.2
@@ -13661,7 +13717,7 @@ snapshots:
       semver: 7.6.3
       tapable: 2.2.1
       typescript: 5.3.3
-      webpack: 5.94.0(@swc/core@1.7.28(@swc/helpers@0.5.13))
+      webpack: 5.94.0(@swc/core@1.7.28(@swc/helpers@0.5.13))(esbuild@0.19.12)
 
   form-data@4.0.0:
     dependencies:
@@ -15936,16 +15992,17 @@ snapshots:
       mkdirp: 3.0.1
       yallist: 5.0.0
 
-  terser-webpack-plugin@5.3.10(@swc/core@1.7.28(@swc/helpers@0.5.13))(webpack@5.94.0(@swc/core@1.7.28(@swc/helpers@0.5.13))):
+  terser-webpack-plugin@5.3.10(@swc/core@1.7.28(@swc/helpers@0.5.13))(esbuild@0.19.12)(webpack@5.94.0(@swc/core@1.7.28(@swc/helpers@0.5.13))(esbuild@0.19.12)):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.25
       jest-worker: 27.5.1
       schema-utils: 3.3.0
       serialize-javascript: 6.0.2
       terser: 5.34.1
-      webpack: 5.94.0(@swc/core@1.7.28(@swc/helpers@0.5.13))
+      webpack: 5.94.0(@swc/core@1.7.28(@swc/helpers@0.5.13))(esbuild@0.19.12)
     optionalDependencies:
       '@swc/core': 1.7.28(@swc/helpers@0.5.13)
+      esbuild: 0.19.12
 
   terser@5.34.1:
     dependencies:
@@ -16014,7 +16071,7 @@ snapshots:
 
   ts-interface-checker@0.1.13: {}
 
-  ts-loader@9.5.1(typescript@5.6.2)(webpack@5.94.0(@swc/core@1.7.28(@swc/helpers@0.5.13))):
+  ts-loader@9.5.1(typescript@5.6.2)(webpack@5.94.0(@swc/core@1.7.28(@swc/helpers@0.5.13))(esbuild@0.19.12)):
     dependencies:
       chalk: 4.1.2
       enhanced-resolve: 5.17.1
@@ -16022,7 +16079,7 @@ snapshots:
       semver: 7.6.3
       source-map: 0.7.4
       typescript: 5.6.2
-      webpack: 5.94.0(@swc/core@1.7.28(@swc/helpers@0.5.13))
+      webpack: 5.94.0(@swc/core@1.7.28(@swc/helpers@0.5.13))(esbuild@0.19.12)
 
   ts-log@2.2.7: {}
 
@@ -16333,7 +16390,7 @@ snapshots:
 
   webpack-sources@3.2.3: {}
 
-  webpack@5.94.0(@swc/core@1.7.28(@swc/helpers@0.5.13)):
+  webpack@5.94.0(@swc/core@1.7.28(@swc/helpers@0.5.13))(esbuild@0.19.12):
     dependencies:
       '@types/estree': 1.0.6
       '@webassemblyjs/ast': 1.12.1
@@ -16355,7 +16412,7 @@ snapshots:
       neo-async: 2.6.2
       schema-utils: 3.3.0
       tapable: 2.2.1
-      terser-webpack-plugin: 5.3.10(@swc/core@1.7.28(@swc/helpers@0.5.13))(webpack@5.94.0(@swc/core@1.7.28(@swc/helpers@0.5.13)))
+      terser-webpack-plugin: 5.3.10(@swc/core@1.7.28(@swc/helpers@0.5.13))(esbuild@0.19.12)(webpack@5.94.0(@swc/core@1.7.28(@swc/helpers@0.5.13))(esbuild@0.19.12))
       watchpack: 2.4.2
       webpack-sources: 3.2.3
     transitivePeerDependencies:

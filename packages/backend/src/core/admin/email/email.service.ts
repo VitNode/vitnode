@@ -1,4 +1,6 @@
 import { core_logs_email } from '@/database/schema/logs';
+import { EmailHelpersServiceType } from '@/providers';
+import { EmailTemplateProps } from '@/providers/email/template/email-template';
 import { InternalDatabaseService } from '@/utils';
 import { Inject, Injectable } from '@nestjs/common';
 import { render } from '@react-email/render';
@@ -7,19 +9,16 @@ import React from 'react';
 import { getConfigFile } from '../../../providers/config';
 import { EmailSenderFunction } from './email.module';
 
-export interface SendMailServiceArgs {
-  subject: string;
-  template: React.ReactElement;
-  text?: string;
-  to: string;
-}
-
 @Injectable()
-export class MailService {
+export class EmailService {
   constructor(
     private readonly databaseService: InternalDatabaseService,
     @Inject('VITNODE_EMAIL_SENDER')
     private readonly emailSender: EmailSenderFunction,
+    @Inject('VITNODE_EMAIL_SENDER_IS_ENABLED')
+    private readonly isEmailEnabled: boolean,
+    @Inject('EmailHelpersService')
+    private readonly emailHelpersService: EmailHelpersServiceType,
   ) {}
 
   private async handleErrors({
@@ -41,11 +40,15 @@ export class MailService {
     });
   }
 
-  async sendMail({
+  private async processEmail({
     to,
     subject,
     template,
-  }: SendMailServiceArgs): Promise<void> {
+  }: {
+    subject: string;
+    template: React.ReactElement;
+    to: string;
+  }): Promise<void> {
     const html = await Promise.resolve(render(template));
     const { settings } = getConfigFile();
 
@@ -65,5 +68,33 @@ export class MailService {
         to,
       });
     }
+  }
+
+  checkIfEnable(): boolean {
+    return this.isEmailEnabled;
+  }
+
+  async send({
+    to,
+    subject,
+    message,
+    previewText,
+    user,
+  }: {
+    message: React.JSX.Element | string;
+    subject: string;
+    to: string;
+  } & Pick<EmailTemplateProps, 'previewText' | 'user'>): Promise<string> {
+    await this.processEmail({
+      to,
+      subject,
+      template: this.emailHelpersService.template({
+        previewText,
+        children: message,
+        user,
+      }),
+    });
+
+    return 'Email sent with Message!';
   }
 }

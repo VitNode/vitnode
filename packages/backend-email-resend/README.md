@@ -1,6 +1,6 @@
 # (Vitnode) Backend Resend Email Provider
 
-This package is used to create a provider for [Resend](https://resend.com/) to send emails in the VitNode app.
+This package is used to create a provider for send emails using [Resend](https://resend.com/) into the VitNode app.
 
 <p align="center">
   <br>
@@ -38,13 +38,13 @@ EMAIL_RESEND_FROM={your_from_email}
 
 ### Provide config
 
-Provide `emailSenderResend` to `VitNodeCoreModule`:
+Provide `emailResend` to `VitNodeCoreModule`:
 
 ```ts title="apps/backend/src/app.module.ts"
 import { Module } from '@nestjs/common';
 import { join } from 'path';
 import { VitNodeCoreModule } from 'vitnode-backend';
-import { emailSenderResend } from 'vitnode-backend-email-resend';
+import { emailResend } from 'vitnode-backend-email-resend';
 
 import { DATABASE_ENVS, schemaDatabase } from './database/config';
 import { DatabaseModule } from './database/database.module';
@@ -58,7 +58,7 @@ import { PluginsModule } from './plugins/plugins.module';
         config: DATABASE_ENVS,
         schemaDatabase,
       },
-      email: emailSenderResend({
+      email: emailResend({
         api_key: process.env.EMAIL_RESEND_API_KEY,
         from: process.env.EMAIL_RESEND_FROM,
       }),

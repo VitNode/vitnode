@@ -1,0 +1,40 @@
+{
+  "name": "vitnode-backend-ai-open-ai",
+  "version": "0.0.9-canary.65",
+  "description": "OpenAI provider for VitNode projects.",
+  "author": "VitNode Team",
+  "license": "MIT",
+  "homepage": "https://vitnode.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VitNode/vitnode.git",
+    "directory": "packages/backend-ai-open-ai"
+  },
+  "scripts": {
+    "build": "tsc && swc src -d dist --config-file .swcrc",
+    "dev": "concurrently \"tsc -w --preserveWatchOutput\" \"swc src -d dist --config-file .swcrc -w\"",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "main": "./dist/src/index.js",
+  "types": "./dist/src/index.d.ts",
+  "keywords": [
+    "vitnode",
+    "ai",
+    "openai",
+    "gpt",
+    "chatgpt"
+  ],
+  "devDependencies": {
+    "@swc/cli": "^0.4.0",
+    "@swc/core": "^1.7.28",
+    "@types/node": "^22.7.4",
+    "ai": "^3.4.9",
+    "concurrently": "^9.0.1",
+    "eslint-config-typescript-vitnode": "workspace:*",
+    "typescript": "^5.6.2"
+  },
+  "dependencies": {
+    "@ai-sdk/openai": "^0.0.61"
+  }
+}

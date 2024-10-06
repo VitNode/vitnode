@@ -5,7 +5,7 @@ import {
   Admin__Core_Ai__Test,
   Admin__Core_Ai__TestMutation,
   Admin__Core_Ai__TestMutationVariables,
-} from '@/graphql/queries/admin/ai/admin__core_ai__test.generated';
+} from '@/graphql/mutations/admin/ai/admin__core_ai__test.generated';
 
 export const mutationApi = async (
   variables: Admin__Core_Ai__TestMutationVariables,

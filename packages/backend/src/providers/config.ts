@@ -17,17 +17,7 @@ export enum CaptchaTypeEnum {
   recaptcha_v3 = 'recaptcha_v3',
 }
 
-export enum AiProvider {
-  google = 'google',
-  none = 'none',
-  openai = 'openai',
-}
-
 export interface ConfigType {
-  ai: {
-    model?: string;
-    provider: AiProvider;
-  };
   editor: {
     files: {
       allow_type: AllowTypeFilesEnum;
@@ -92,9 +82,6 @@ export const DEFAULT_CONFIG_DATA: ConfigType = {
     files: {
       allow_type: AllowTypeFilesEnum.all,
     },
-  },
-  ai: {
-    provider: AiProvider.none,
   },
   settings: {
     main: {

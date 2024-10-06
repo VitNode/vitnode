@@ -1,4 +1,5 @@
 import { CardDescription, CardTitle } from '@/components/ui/card';
+import { getGlobalData } from '@/graphql/get-global-data';
 import { getSessionData } from '@/graphql/get-session-data';
 import { Link } from '@/navigation';
 import { Metadata } from 'next';
@@ -21,10 +22,17 @@ export const SignUpView = async () => {
     t,
     {
       core_middleware__show: {
-        authorization: { lock_register, is_email_enabled },
+        authorization: { lock_register },
       },
     },
-  ] = await Promise.all([getTranslations('core.sign_up'), getSessionData()]);
+    {
+      core_middleware__show: { is_email_enabled },
+    },
+  ] = await Promise.all([
+    getTranslations('core.sign_up'),
+    getSessionData(),
+    getGlobalData(),
+  ]);
 
   if (lock_register) {
     return notFound();

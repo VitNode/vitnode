@@ -1,4 +1,4 @@
-import { SendAdminEmailService } from '@/core/admin/email/send/send.service';
+import { EmailService } from '@/core/admin/email/email.service';
 import { core_users } from '@/database/schema/users';
 import { CustomError, NotFoundError } from '@/errors';
 import { getUserIp, removeSpecialCharacters } from '@/functions';
@@ -15,7 +15,7 @@ import { AvatarColorService } from './avatar-color.service';
 export class SignUpHelperService extends AvatarColorService {
   constructor(
     private readonly databaseService: InternalDatabaseService,
-    private readonly mailService: SendAdminEmailService,
+    private readonly mailService: EmailService,
   ) {
     super();
   }

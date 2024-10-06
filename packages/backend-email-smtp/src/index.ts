@@ -1,6 +1,6 @@
 import * as nodemailer from 'nodemailer';
 
-export const emailSenderSMTP = ({
+export const emailSMTP = ({
   host = '',
   port,
   secure,

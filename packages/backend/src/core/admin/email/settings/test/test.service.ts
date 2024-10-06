@@ -1,12 +1,12 @@
 import { User } from '@/decorators';
 import { Injectable } from '@nestjs/common';
 
-import { SendAdminEmailService } from '../../send/send.service';
+import { EmailService } from '../../email.service';
 import { TestAdminEmailSettingsServiceArgs } from './test.dto';
 
 @Injectable()
 export class TestAdminEmailSettingsService {
-  constructor(private readonly mailService: SendAdminEmailService) {}
+  constructor(private readonly mailService: EmailService) {}
 
   async test(
     { to, subject, message, preview_text }: TestAdminEmailSettingsServiceArgs,

@@ -1,4 +1,4 @@
-import { SendAdminEmailService } from '@/core/admin/email/send/send.service';
+import { EmailService } from '@/core/admin/email/email.service';
 import { getConfigFile } from '@/providers';
 import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
@@ -31,7 +31,7 @@ export class SignInCoreSessionsService {
     private readonly configService: ConfigService,
     private readonly deviceService: DeviceSignInCoreSessionsService,
     private readonly sendConfirmEmailCoreSessionsService: SendConfirmEmailCoreSessionsService,
-    private readonly mailService: SendAdminEmailService,
+    private readonly mailService: EmailService,
   ) {}
 
   protected async createSession({

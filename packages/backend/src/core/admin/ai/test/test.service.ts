@@ -1,4 +1,4 @@
-import { AiService } from '@/core/ai/provider/ai.service';
+import { AiService } from '@/core/ai/ai.service';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
