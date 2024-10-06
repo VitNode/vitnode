@@ -25,7 +25,7 @@ import { z } from 'zod';
 import { mutationApi } from './mutation-api';
 
 export const TestingActionAiAdmin = ({ disabled }: { disabled: boolean }) => {
-  const t = useTranslations('admin.core.ai.settings.testing');
+  const t = useTranslations('admin.core.settings.ai.testing');
   const tCore = useTranslations('core.global.errors');
   const [response, setResponse] = React.useState<string>('');
 

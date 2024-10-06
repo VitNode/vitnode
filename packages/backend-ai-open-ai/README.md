@@ -1,6 +1,6 @@
-# (Vitnode) Backend Google AI Provider
+# (Vitnode) Backend OpenAI Provider
 
-This package is used to create a provider for AI using [Google AI Dev](https://ai.google.dev/) into the VitNode app.
+This package is used to create a provider for AI using [OpenAI Platform](https://platform.openai.com/) into the VitNode app.
 
 <p align="center">
   <br>
@@ -18,13 +18,13 @@ This package is used to create a provider for AI using [Google AI Dev](https://a
 ## Installation
 
 ```bash tab="pnpm"
-pnpm i backend-ai-google --filter backend
+pnpm i backend-ai-open-ai --filter backend
 ```
 
 or
 
 ```bash tab="npm"
-npn i backend-ai-google --workspace=backend
+npn i backend-ai-open-ai --workspace=backend
 ```
 
 ### .env file

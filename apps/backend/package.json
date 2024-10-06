@@ -31,7 +31,8 @@
     "vitnode-backend": "workspace:*",
     "vitnode-backend-email-resend": "workspace:*",
     "vitnode-backend-email-smtp": "workspace:*",
-    "vitnode-backend-ai-google": "workspace:*"
+    "vitnode-backend-ai-google": "workspace:*",
+    "vitnode-backend-ai-open-ai": "workspace:*"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^5.0.2",
