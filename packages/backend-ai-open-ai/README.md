@@ -32,19 +32,18 @@ npn i backend-ai-open-ai --workspace=backend
 Add the following to your `.env` file:
 
 ```env
-EMAIL_RESEND_API_KEY={your_api_key}
-EMAIL_RESEND_FROM={your_from_email}
+AI_OPENAI_API_KEY={your_api_key}
 ```
 
 ### Provide config
 
-Provide `emailResend` to `VitNodeCoreModule`:
+Provide `aiOpenAi` to `VitNodeCoreModule` and chose the model you want to use:
 
 ```ts title="apps/backend/src/app.module.ts"
 import { Module } from '@nestjs/common';
 import { join } from 'path';
 import { VitNodeCoreModule } from 'vitnode-backend';
-import { emailResend } from 'vitnode-backend-email-resend';
+import { aiOpenAi } from 'vitnode-backend-ai-open-ai';
 
 import { DATABASE_ENVS, schemaDatabase } from './database/config';
 import { DatabaseModule } from './database/database.module';
@@ -58,9 +57,9 @@ import { PluginsModule } from './plugins/plugins.module';
         config: DATABASE_ENVS,
         schemaDatabase,
       },
-      email: emailResend({
-        api_key: process.env.EMAIL_RESEND_API_KEY,
-        from: process.env.EMAIL_RESEND_FROM,
+      ai: aiOpenAi({
+        api_key: process.env.AI_OPENAI_API_KEY,
+        model: 'gpt-4-turbo',
       }),
     }),
     DatabaseModule,

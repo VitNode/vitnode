@@ -35,7 +35,6 @@ export type AuthorizationAdminSessionsObj = {
 export type AuthorizationCoreMiddleware = {
   __typename?: 'AuthorizationCoreMiddleware';
   force_login: Scalars['Boolean']['output'];
-  is_email_enabled: Scalars['Boolean']['output'];
   lock_register: Scalars['Boolean']['output'];
 };
 
@@ -825,7 +824,6 @@ export type SecurityCoreMiddleware = {
 export type ShowAdminAuthorizationSettingsObj = {
   __typename?: 'ShowAdminAuthorizationSettingsObj';
   force_login: Scalars['Boolean']['output'];
-  is_email_enabled: Scalars['Boolean']['output'];
   lock_register: Scalars['Boolean']['output'];
   require_confirm_email: Scalars['Boolean']['output'];
 };
@@ -1160,6 +1158,8 @@ export type ShowCoreMiddlewareObj = {
   __typename?: 'ShowCoreMiddlewareObj';
   authorization: AuthorizationCoreMiddleware;
   editor: EditorShowCoreMiddleware;
+  is_ai_enabled: Scalars['Boolean']['output'];
+  is_email_enabled: Scalars['Boolean']['output'];
   languages: Array<LanguagesCoreMiddleware>;
   plugins: Array<Scalars['String']['output']>;
   security: SecurityCoreMiddleware;

@@ -1,10 +1,9 @@
 import { CustomError } from '@/errors';
 import { DynamicModule, Global, Module } from '@nestjs/common';
 
+import { EmailService } from './email.service';
 import { LogsAdminEmailResolver } from './logs/logs.resolver';
 import { LogsAdminEmailService } from './logs/logs.service';
-import { MailService } from './mail.service';
-import { SendAdminEmailService } from './send/send.service';
 import { EditAdminEmailSettingsResolver } from './settings/edit/edit.resolver';
 import { EditAdminEmailSettingsService } from './settings/edit/edit.service';
 import { ShowAdminEmailSettingsResolver } from './settings/show/show.resolver';
@@ -45,10 +44,9 @@ export class GlobalAdminEmailModule {
           provide: 'VITNODE_EMAIL_SENDER_IS_ENABLED',
           useValue: !!options.email,
         },
-        SendAdminEmailService,
-        MailService,
+        EmailService,
       ],
-      exports: [SendAdminEmailService, MailService],
+      exports: [EmailService],
     };
   }
 }

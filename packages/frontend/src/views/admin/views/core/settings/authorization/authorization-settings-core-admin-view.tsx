@@ -2,6 +2,7 @@ import { TranslationsProvider } from '@/components/translations-provider';
 import { Card } from '@/components/ui/card';
 import { HeaderContent } from '@/components/ui/header-content';
 import { fetcher } from '@/graphql/fetcher';
+import { getGlobalData } from '@/graphql/get-global-data';
 import {
   Admin__Core_Authorization_Settings__Show,
   Admin__Core_Authorization_Settings__ShowQuery,
@@ -30,9 +31,16 @@ export const generateMetadataAuthorizationSettingsAdmin =
   };
 
 export const AuthorizationSettingsCoreAdminView = async () => {
-  const [t, data] = await Promise.all([
+  const [
+    t,
+    data,
+    {
+      core_middleware__show: { is_email_enabled },
+    },
+  ] = await Promise.all([
     getTranslations('admin_core.nav'),
     getData(),
+    getGlobalData(),
   ]);
 
   return (
@@ -40,7 +48,10 @@ export const AuthorizationSettingsCoreAdminView = async () => {
       <HeaderContent h1={t('settings_authorization')} />
 
       <Card className="p-6">
-        <ContentAuthorizationSettingsCoreAdmin {...data} />
+        <ContentAuthorizationSettingsCoreAdmin
+          isEmailEnabled={is_email_enabled}
+          {...data}
+        />
       </Card>
     </TranslationsProvider>
   );

@@ -74,6 +74,9 @@ importers:
       vitnode-backend-ai-google:
         specifier: workspace:*
         version: link:../../packages/backend-ai-google
+      vitnode-backend-ai-open-ai:
+        specifier: workspace:*
+        version: link:../../packages/backend-ai-open-ai
       vitnode-backend-email-resend:
         specifier: workspace:*
         version: link:../../packages/backend-email-resend

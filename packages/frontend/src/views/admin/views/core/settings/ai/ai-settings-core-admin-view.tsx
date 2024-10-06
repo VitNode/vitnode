@@ -1,6 +1,7 @@
 import { TranslationsProvider } from '@/components/translations-provider';
 import { Card } from '@/components/ui/card';
 import { HeaderContent } from '@/components/ui/header-content';
+import { getGlobalData } from '@/graphql/get-global-data';
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
@@ -15,13 +16,20 @@ export const generateMetadataAiSettingsAdmin = async (): Promise<Metadata> => {
 };
 
 export const AiSettingsCoreAdminView = async () => {
-  const [t] = await Promise.all([getTranslations('admin.core.settings.ai')]);
+  const [
+    t,
+    {
+      core_middleware__show: { is_ai_enabled },
+    },
+  ] = await Promise.all([
+    getTranslations('admin.core.settings.ai'),
+    getGlobalData(),
+  ]);
 
-  // TODO: Add disabled variable
   return (
     <TranslationsProvider namespaces="admin.core.settings.ai">
       <HeaderContent desc={t('desc')} h1={t('title')}>
-        <TestingActionAiAdmin disabled={true} />
+        <TestingActionAiAdmin disabled={!is_ai_enabled} />
       </HeaderContent>
 
       <Card className="p-6">

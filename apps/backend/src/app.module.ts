@@ -4,7 +4,7 @@ import { VitNodeCoreModule } from 'vitnode-backend';
 import { emailResend } from 'vitnode-backend-email-resend';
 // import { emailSMTP } from 'vitnode-backend-email-smtp';
 import { aiGoogle } from 'vitnode-backend-ai-google';
-// import { aiOpenai } from 'vitnode-backend-ai-open-ai';
+// import { aiOpenAi } from 'vitnode-backend-ai-open-ai';
 
 import { DATABASE_ENVS, schemaDatabase } from './database/config';
 import { DatabaseModule } from './database/database.module';
@@ -34,7 +34,7 @@ import { PluginsModule } from './plugins/plugins.module';
         api_key: process.env.AI_GOOGLE_API_KEY,
         model: 'gemini-1.0-pro',
       }),
-      // ai: aiOpenai({
+      // ai: aiOpenAi({
       //   api_key: process.env.AI_OPENAI_API_KEY,
       //   model: 'gpt-4-turbo',
       // }),

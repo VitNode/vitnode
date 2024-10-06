@@ -1,4 +1,4 @@
-import { SendAdminEmailService } from '@/core/admin/email/send/send.service';
+import { EmailService } from '@/core/admin/email/email.service';
 import { core_users_confirm_emails } from '@/database/schema/users';
 import { CustomError, NotFoundError } from '@/errors';
 import { EmailHelpersServiceType, getTranslationForEmail } from '@/providers';
@@ -13,7 +13,7 @@ import { ConfirmEmailTemplate } from './confirm_email.email';
 export class SendConfirmEmailCoreSessionsService {
   constructor(
     private readonly databaseService: InternalDatabaseService,
-    private readonly mailService: SendAdminEmailService,
+    private readonly mailService: EmailService,
     @Inject('EmailHelpersService')
     private readonly emailHelpersService: EmailHelpersServiceType,
   ) {}

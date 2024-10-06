@@ -1,7 +1,7 @@
 import { createOpenAI } from '@ai-sdk/openai';
 import { LanguageModel } from 'ai';
 
-export const aiGoogle = ({
+export const aiOpenAi = ({
   api_key = '',
   model,
 }: {

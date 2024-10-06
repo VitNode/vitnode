@@ -2,16 +2,12 @@ import { CustomError } from '@/errors';
 import { Inject, Injectable } from '@nestjs/common';
 import { generateText, LanguageModel, streamText } from 'ai';
 
-import { HelpersCoreAi } from '../ai.helpers';
-
 @Injectable()
-export class AiService extends HelpersCoreAi {
+export class AiService {
   constructor(
     @Inject('VITNODE_AI_MODEL')
     private readonly model?: LanguageModel,
-  ) {
-    super();
-  }
+  ) {}
 
   private getModel(): LanguageModel {
     if (!this.model) {
@@ -22,6 +18,10 @@ export class AiService extends HelpersCoreAi {
     }
 
     return this.model;
+  }
+
+  checkIfEnable(): boolean {
+    return !!this.model;
   }
 
   async generateText(args: Omit<Parameters<typeof generateText>[0], 'model'>) {

@@ -10,9 +10,12 @@ import { useTranslations } from 'next-intl';
 
 import { useAuthorizationFormAdmin } from './hooks/use-authorization-settings-form-admin';
 
-export const ContentAuthorizationSettingsCoreAdmin = (
-  props: Admin__Core_Authorization_Settings__ShowQuery,
-) => {
+export const ContentAuthorizationSettingsCoreAdmin = ({
+  isEmailEnabled,
+  ...props
+}: {
+  isEmailEnabled: boolean;
+} & Admin__Core_Authorization_Settings__ShowQuery) => {
   const t = useTranslations('admin.core.settings.authorization');
   const { formSchema, onSubmit } = useAuthorizationFormAdmin(props);
 
@@ -40,8 +43,7 @@ export const ContentAuthorizationSettingsCoreAdmin = (
           label: t('require_confirm_email.title'),
           description: t('require_confirm_email.desc'),
           componentProps: {
-            disabled:
-              !props.admin__core_authorization_settings__show.is_email_enabled,
+            disabled: !isEmailEnabled,
           } as AutoFormSwitchProps,
         },
       ]}

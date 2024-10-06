@@ -32,19 +32,18 @@ npn i backend-ai-google --workspace=backend
 Add the following to your `.env` file:
 
 ```env
-EMAIL_RESEND_API_KEY={your_api_key}
-EMAIL_RESEND_FROM={your_from_email}
+AI_GOOGLE_API_KEY={your_api_key}
 ```
 
 ### Provide config
 
-Provide `emailResend` to `VitNodeCoreModule`:
+Provide `aiGoogle` to `VitNodeCoreModule` and chose the model you want to use:
 
 ```ts title="apps/backend/src/app.module.ts"
 import { Module } from '@nestjs/common';
 import { join } from 'path';
 import { VitNodeCoreModule } from 'vitnode-backend';
-import { emailResend } from 'vitnode-backend-email-resend';
+import { aiGoogle } from 'vitnode-backend-ai-google';
 
 import { DATABASE_ENVS, schemaDatabase } from './database/config';
 import { DatabaseModule } from './database/database.module';
@@ -58,9 +57,9 @@ import { PluginsModule } from './plugins/plugins.module';
         config: DATABASE_ENVS,
         schemaDatabase,
       },
-      email: emailResend({
-        api_key: process.env.EMAIL_RESEND_API_KEY,
-        from: process.env.EMAIL_RESEND_FROM,
+      ai: aiGoogle({
+        api_key: process.env.AI_GOOGLE_API_KEY,
+        model: 'gemini-1.0-pro',
       }),
     }),
     DatabaseModule,

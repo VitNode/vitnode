@@ -1,7 +1,7 @@
 import { DynamicModule, Global, Module } from '@nestjs/common';
 import { LanguageModel } from 'ai';
 
-import { AiService } from './provider/ai.service';
+import { AiService } from './ai.service';
 
 @Global()
 @Module({})

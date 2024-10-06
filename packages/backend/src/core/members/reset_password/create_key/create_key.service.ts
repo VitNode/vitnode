@@ -1,10 +1,10 @@
+import { EmailService } from '@/core/admin/email/email.service';
 import { NotFoundError } from '@/errors';
 import { EmailHelpersServiceType, getTranslationForEmail } from '@/providers';
 import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Inject, Injectable } from '@nestjs/common';
 
 // import { core_users_pass_reset } from '@/plugins/core/admin/database/schema/users';
-import { SendAdminEmailService } from '../../../admin/email/send/send.service';
 import { ContentCreateKeyEmail } from './_email/content';
 import { CreateKeyResetPasswordCoreMembersArgs } from './create_key.dto';
 
@@ -12,7 +12,7 @@ import { CreateKeyResetPasswordCoreMembersArgs } from './create_key.dto';
 export class CreateKeyResetPasswordCoreMembersService {
   constructor(
     private readonly databaseService: InternalDatabaseService,
-    private readonly mailService: SendAdminEmailService,
+    private readonly mailService: EmailService,
     @Inject('EmailHelpersService')
     private readonly emailHelpersService: EmailHelpersServiceType,
   ) {}
