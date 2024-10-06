@@ -1,4 +1,6 @@
+import { StringLanguageHelper } from '@/core/helpers/string_language/helpers.service';
 import { core_admin_permissions } from '@/database/schema/admins';
+import { core_groups } from '@/database/schema/groups';
 import { NotFoundError } from '@/errors';
 import { inputPaginationCursor, outputPagination } from '@/functions';
 import { SortDirectionEnum } from '@/utils';
@@ -14,7 +16,10 @@ import {
 
 @Injectable()
 export class ShowAdminStaffAdministratorsService {
-  constructor(private readonly databaseService: InternalDatabaseService) {}
+  constructor(
+    private readonly databaseService: InternalDatabaseService,
+    private readonly stringLanguageHelper: StringLanguageHelper,
+  ) {}
 
   async show({
     cursor,
@@ -77,11 +82,18 @@ export class ShowAdminStaffAdministratorsService {
             throw new NotFoundError('Group');
           }
 
+          const group_name = await this.stringLanguageHelper.get({
+            database: core_groups,
+            item_ids: [edge.group.id],
+            plugin_code: 'core',
+            variables: ['name'],
+          });
+
           return {
             ...edge,
             user_or_group: {
               ...edge.group,
-              group_name: [],
+              group_name,
             },
           };
         }),

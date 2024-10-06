@@ -1,3 +1,4 @@
+import { TranslationsProvider } from '@/components/translations-provider';
 import { HeaderContent } from '@/components/ui/header-content';
 import { fetcher } from '@/graphql/fetcher';
 import {
@@ -56,12 +57,17 @@ export const ModeratorsStaffAdminView = async ({
   ]);
 
   return (
-    <>
-      <HeaderContent h1={t('title')}>
+    <TranslationsProvider
+      namespaces={[
+        'admin.members.staff.moderators',
+        'admin.members.staff.shared',
+      ]}
+    >
+      <HeaderContent desc={t('desc')} h1={t('title')}>
         <ActionsModeratorsStaffAdmin />
       </HeaderContent>
 
       <TableModeratorsStaffAdmin {...data} />
-    </>
+    </TranslationsProvider>
   );
 };

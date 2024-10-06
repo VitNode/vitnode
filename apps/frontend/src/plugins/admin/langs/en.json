@@ -577,18 +577,9 @@
       },
       "staff": {
         "title": "Staff",
-        "unrestricted": "Unrestricted",
-        "restricted": "Restricted",
         "user": "User",
         "group": "Group",
         "already_exists": "This permission is already on the list.",
-        "table": {
-          "administrator": "Administrator",
-          "moderator": "Moderator",
-          "type": "Type",
-          "updated": "Updated",
-          "permissions": "Permissions"
-        },
         "create_edit": {
           "type": {
             "title": "Type",
@@ -600,8 +591,19 @@
             "desc": "Unrestricted administrators have full access to the admin control panel (AdminCP)."
           }
         },
+        "shared": {
+          "type": "Type",
+          "updated": "Updated",
+          "permissions": "Permissions",
+          "unrestricted": "Unrestricted",
+          "restricted": "Restricted",
+          "user": "User",
+          "group": "Group"
+        },
         "moderators": {
           "title": "Moderators",
+          "desc": "Manage access to the moderator panel (ModCP).",
+          "moderator": "Moderator",
           "add": {
             "title": "Add Moderator",
             "success": "Moderator has been added"
@@ -614,6 +616,8 @@
         },
         "administrators": {
           "title": "Administrators",
+          "desc": "Manage access to the administrator panel (AdminCP).",
+          "administrator": "Administrator",
           "add": {
             "title": "Add Administrator",
             "success": "Administrator has been added"

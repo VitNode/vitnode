@@ -62,7 +62,7 @@ export const UserOrGroupCoreStaffUnion = createUnionType({
       return User;
     }
 
-    if (Array.isArray(value.name)) {
+    if (Array.isArray(value.group_name)) {
       return StaffGroupUser;
     }
 
