@@ -317,6 +317,15 @@
                 "null": "No parent permission"
               },
               "create_success": "Permission has been created."
+            },
+            "delete": {
+              "desc": "This action will delete the permission <id></id>. Remember to delete all conditions associated with this permission.",
+              "submit": "Yes, delete permission",
+              "success": "Permission has been deleted.",
+              "children_warn": {
+                "title": "This permission has children",
+                "desc": "If you delete this permission, all children will be deleted too."
+              }
             }
           }
         },

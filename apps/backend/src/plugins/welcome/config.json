@@ -8,50 +8,6 @@
   "author_url": "https://vitnode.com/",
   "support_url": "https://github.com/VitNode/vitnode/issues",
   "allow_default": true,
-  "nav": [
-    {
-      "code": "test",
-      "icon": "accessibility",
-      "keywords": [],
-      "children": [
-        {
-          "code": "testchild",
-          "icon": "",
-          "keywords": [],
-          "parent_code": "test"
-        }
-      ]
-    }
-  ],
-  "permissions_admin": [
-    {
-      "id": "elo",
-      "children": [
-        {
-          "id": "txd",
-          "children": []
-        }
-      ]
-    },
-    {
-      "id": "elo1",
-      "children": []
-    },
-    {
-      "id": "123",
-      "children": []
-    },
-    {
-      "id": "1234",
-      "children": []
-    },
-    {
-      "id": "child",
-      "children": []
-    },
-    {
-      "id": "test13",
-      "children": []
-    }
-  ]
+  "nav": [],
+  "permissions_admin": []
 }

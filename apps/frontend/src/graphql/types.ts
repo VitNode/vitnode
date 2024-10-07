@@ -278,6 +278,7 @@ export type Mutation = {
   admin__core_plugins__nav__delete: Scalars['String']['output'];
   admin__core_plugins__nav__edit: ShowAdminNavPluginsObj;
   admin__core_plugins__permissions_admin__create_edit: ShowAdminPermissionsAdminPluginsObj;
+  admin__core_plugins__permissions_admin__delete: Scalars['String']['output'];
   admin__core_plugins__upload: Scalars['String']['output'];
   admin__core_security__captcha__edit: ShowAdminCaptchaSecurityObj;
   admin__core_staff_administrators__create: ShowAdminStaffAdministrators;
@@ -505,6 +506,13 @@ export type MutationAdmin__Core_Plugins__Nav__EditArgs = {
 export type MutationAdmin__Core_Plugins__Permissions_Admin__Create_EditArgs = {
   id: Scalars['String']['input'];
   old_id?: InputMaybe<Scalars['String']['input']>;
+  parent_id?: InputMaybe<Scalars['String']['input']>;
+  plugin_code: Scalars['String']['input'];
+};
+
+
+export type MutationAdmin__Core_Plugins__Permissions_Admin__DeleteArgs = {
+  id: Scalars['String']['input'];
   parent_id?: InputMaybe<Scalars['String']['input']>;
   plugin_code: Scalars['String']['input'];
 };
