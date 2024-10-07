@@ -1,4 +1,3 @@
-import { flattenTree } from '@/components/drag&drop/sortable-list/flat';
 import { Icon } from '@/components/icon/icon';
 import { HeaderContent } from '@/components/ui/header-content';
 import { fetcher } from '@/graphql/fetcher';
@@ -7,7 +6,7 @@ import {
   Admin__Core_Plugins__Nav__ShowQuery,
   Admin__Core_Plugins__Nav__ShowQueryVariables,
 } from '@/graphql/queries/admin/plugins/dev/nav/admin__core_plugins__nav__show.generated';
-import { ShowAdminNavPluginsObj } from '@/graphql/types';
+import { TextAndIconsAsideAdmin } from '@/views/admin/layout/admin-layout';
 import { getTranslations } from 'next-intl/server';
 
 import { CreateNavDevPluginAdmin } from './actions/create/create';
@@ -27,52 +26,69 @@ const getData = async (
   return data;
 };
 
-interface NavItem extends Omit<ShowAdminNavPluginsObj, 'children'> {
-  children: NavItem[];
-  id: string;
-}
-
 export const NavDevPluginAdminView = async ({
   params,
 }: {
   params: Promise<{ code: string }>;
 }) => {
   const { code } = await params;
-  const [data, t] = await Promise.all([
+  const [data, t, tGlobal] = await Promise.all([
     getData({ pluginCode: code }),
     getTranslations('admin.core.plugins.dev.nav'),
+    getTranslations(),
   ]);
 
-  const flattenData = flattenTree<NavItem>(
-    data.admin__core_plugins__nav__show.map(nav => ({
-      id: nav.code,
-      ...nav,
-      children: (nav.children?.map(child => ({
-        id: `${nav.code}_${child.code}`,
-        ...child,
-        children: [],
-      })) ?? []) as NavItem[],
-    })),
-  );
+  // Flat map to remove children
+  const nav: {
+    code: string;
+    icon?: string;
+    parent_icon?: string;
+    parent_nav_code?: string;
+    plugin: string;
+  }[] = data.admin__core_plugins__nav__show.flatMap(nav => {
+    const children = nav.children ?? [];
+    const mappedChildren = children.map(child => ({
+      parent_nav_code: nav.children ? nav.code : undefined,
+      ...child,
+      parent_icon: nav.icon,
+      plugin: code,
+    }));
 
-  const icons: {
-    icon: React.ReactNode;
-    id: string;
-  }[] = flattenData.map(item => ({
-    icon: item.icon ? <Icon className="size-6" name={item.icon} /> : null,
-    id: item.id.toString(),
-  }));
+    return [{ ...nav, plugin: code }, ...mappedChildren];
+  });
+
+  const textsAndIcons: TextAndIconsAsideAdmin[] = nav.map(item => {
+    const id = item.parent_nav_code
+      ? `${item.parent_nav_code}_${item.code}`
+      : item.code;
+
+    return {
+      id,
+      parent_text: item.parent_nav_code
+        ? // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-expect-error
+          tGlobal(`admin_${item.plugin}.nav.${item.parent_nav_code}`)
+        : undefined,
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
+      text: tGlobal(`admin_${item.plugin}.nav.${id}`),
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
+      plugin: tGlobal(`admin_${item.plugin}.nav.title`),
+      icon: item.icon ? <Icon name={item.icon} /> : null,
+    };
+  });
 
   return (
     <>
       <HeaderContent h1={t('title')}>
         <CreateNavDevPluginAdmin
           dataFromSSR={data.admin__core_plugins__nav__show}
-          icons={icons}
+          textsAndIcons={textsAndIcons}
         />
       </HeaderContent>
 
-      <ContentNavDevPluginAdmin {...data} icons={icons} />
+      <ContentNavDevPluginAdmin textsAndIcons={textsAndIcons} {...data} />
     </>
   );
 };

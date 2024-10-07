@@ -8,8 +8,8 @@ import { AutoFormSelect } from '@/components/form/fields/select';
 import { AutoFormTagInput } from '@/components/form/fields/tags-input';
 import { Admin__Core_Plugins__Nav__ShowQuery } from '@/graphql/queries/admin/plugins/dev/nav/admin__core_plugins__nav__show.generated';
 import { ShowAdminNavPluginsObj } from '@/graphql/types';
+import { TextAndIconsAsideAdmin } from '@/views/admin/layout/admin-layout';
 import { Ban } from 'lucide-react';
-import { useParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 
 import { useCreateNavPluginAdmin } from './hooks/use-create-nav-plugin-admin';
@@ -17,13 +17,13 @@ import { useCreateNavPluginAdmin } from './hooks/use-create-nav-plugin-admin';
 export const CreateEditNavDevPluginAdmin = ({
   data,
   dataFromSSR,
-  icons,
+  textsAndIcons,
   parentId,
 }: {
   data?: ShowAdminNavPluginsObj;
   dataFromSSR: Admin__Core_Plugins__Nav__ShowQuery['admin__core_plugins__nav__show'];
-  icons: { icon: React.ReactNode; id: string }[];
   parentId?: string;
+  textsAndIcons: TextAndIconsAsideAdmin[];
 }) => {
   const t = useTranslations('admin.core.plugins.dev.nav');
   const { onSubmit, formSchema } = useCreateNavPluginAdmin({
@@ -31,12 +31,6 @@ export const CreateEditNavDevPluginAdmin = ({
     parentId,
     dataFromSSR,
   });
-  const { code } = useParams();
-  const tPlugin = useTranslations(
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
-    `admin_${Array.isArray(code) ? code[0] : code}.nav`,
-  );
 
   return (
     <AutoForm
@@ -68,20 +62,25 @@ export const CreateEditNavDevPluginAdmin = ({
                 </div>
               ),
               ...Object.fromEntries(
-                dataFromSSR.map(nav => [
-                  nav.code,
-                  <div
-                    className="flex flex-wrap items-center gap-2"
-                    key={nav.code}
-                  >
-                    {nav.icon
-                      ? icons.find(icon => icon.id === nav.code)?.icon
-                      : null}
-                    {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-                    {/* @ts-expect-error */}
-                    <span>{tPlugin(nav.code)}</span>
-                  </div>,
-                ]),
+                dataFromSSR.map(nav => {
+                  const textAndIcon = textsAndIcons.find(
+                    item => item.id === nav.code,
+                  );
+
+                  if (!textAndIcon) return [nav.code, nav.code];
+
+                  return [
+                    nav.code,
+                    <div
+                      className="flex flex-wrap items-center gap-2"
+                      key={nav.code}
+                    >
+                      {textAndIcon.icon}
+
+                      <span>{textAndIcon.text}</span>
+                    </div>,
+                  ];
+                }),
               ),
             },
           } as AutoFormInputProps,

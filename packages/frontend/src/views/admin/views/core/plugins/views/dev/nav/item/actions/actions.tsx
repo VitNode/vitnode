@@ -7,7 +7,7 @@ import { EditActionTableNavDevPluginAdmin } from './edit';
 export const ActionsTableNavDevPluginAdmin = ({
   data,
   parentId,
-  icons,
+  textsAndIcons,
   dataFromSSR,
 }: {
   dataFromSSR: Admin__Core_Plugins__Nav__ShowQuery['admin__core_plugins__nav__show'];
@@ -17,7 +17,7 @@ export const ActionsTableNavDevPluginAdmin = ({
       <EditActionTableNavDevPluginAdmin
         data={data}
         dataFromSSR={dataFromSSR}
-        icons={icons}
+        textsAndIcons={textsAndIcons}
       />
       <DeleteActionTableNavDevPluginAdmin {...data} parentId={parentId} />
     </div>

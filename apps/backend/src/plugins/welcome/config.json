@@ -8,5 +8,18 @@
   "author_url": "https://vitnode.com/",
   "support_url": "https://github.com/VitNode/vitnode/issues",
   "allow_default": true,
-  "nav": []
+  "nav": [
+    {
+      "code": "test",
+      "icon": "a-arrow-down",
+      "keywords": [],
+      "children": [
+        {
+          "code": "testchild",
+          "icon": "",
+          "keywords": []
+        }
+      ]
+    }
+  ]
 }

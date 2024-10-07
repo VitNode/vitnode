@@ -303,6 +303,9 @@
               "desc": "This action will delete <code></code> navigation.",
               "success": "Navigation has been deleted."
             }
+          },
+          "permissions-admin": {
+            "title": "Permissions in AdminCP"
           }
         },
         "create": {

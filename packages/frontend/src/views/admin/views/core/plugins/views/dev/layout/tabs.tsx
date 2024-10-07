@@ -20,6 +20,12 @@ export const TabsDevPluginAdmin = ({ code }: { code: string }) => {
       <TabsTrigger href={`/admin/core/plugins/${code}/dev/nav`} id="nav">
         {t('nav.title')}
       </TabsTrigger>
+      <TabsTrigger
+        href={`/admin/core/plugins/${code}/dev/permissions-admin`}
+        id="permissions-admin"
+      >
+        {t('permissions-admin.title')}
+      </TabsTrigger>
     </Tabs>
   );
 };
