@@ -16,6 +16,7 @@ export function SortableTreeItem<T extends TreeItem<T>>({
   id,
   onCollapse,
   children,
+  isDragEnd = true,
   ...props
 }: {
   childCount?: number;
@@ -25,6 +26,7 @@ export function SortableTreeItem<T extends TreeItem<T>>({
   depth: number;
   id: number | string;
   indentationWidth: number;
+  isDragEnd?: boolean;
   onCollapse?: () => void;
 } & Omit<React.HTMLAttributes<HTMLLIElement>, 'id' | 'style'>) {
   const {
@@ -71,16 +73,18 @@ export function SortableTreeItem<T extends TreeItem<T>>({
           } as React.CSSProperties
         }
       >
-        <Button
-          ariaLabel=""
-          className={cn('w-8 cursor-grab')}
-          size="icon"
-          variant="ghost"
-          {...attributes}
-          {...listeners}
-        >
-          <GripVertical />
-        </Button>
+        {isDragEnd && (
+          <Button
+            ariaLabel=""
+            className={cn('w-8 cursor-grab')}
+            size="icon"
+            variant="ghost"
+            {...attributes}
+            {...listeners}
+          >
+            <GripVertical />
+          </Button>
+        )}
         {onCollapse && (
           <Button ariaLabel="" onClick={onCollapse} size="icon" variant="ghost">
             <ChevronRight

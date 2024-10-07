@@ -209,6 +209,7 @@ export function DragAndDropSortableList<
             }
             id={item.id}
             indentationWidth={indentationWidth}
+            isDragEnd={!!onDragEnd}
             key={item.id}
             onCollapse={
               item.children.length

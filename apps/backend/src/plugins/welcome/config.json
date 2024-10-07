@@ -17,9 +17,41 @@
         {
           "code": "testchild",
           "icon": "",
-          "keywords": []
+          "keywords": [],
+          "parent_code": "test"
         }
       ]
+    }
+  ],
+  "permissions_admin": [
+    {
+      "id": "elo",
+      "children": [
+        {
+          "id": "txd",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "elo1",
+      "children": []
+    },
+    {
+      "id": "123",
+      "children": []
+    },
+    {
+      "id": "1234",
+      "children": []
+    },
+    {
+      "id": "child",
+      "children": []
+    },
+    {
+      "id": "test13",
+      "children": []
     }
   ]
 }

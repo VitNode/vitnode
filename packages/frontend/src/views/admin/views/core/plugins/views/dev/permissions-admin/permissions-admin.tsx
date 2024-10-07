@@ -7,6 +7,7 @@ import {
 } from '@/graphql/queries/admin/plugins/dev/permissions-admin/admin__core_plugins__permissions_admin__show.generated';
 import { getTranslations } from 'next-intl/server';
 
+import { ActionsPermissionsAdminDevPluginAdminView } from './actions';
 import { ContentPermissionsAdminDevPluginAdminView } from './content';
 
 const getData = async (
@@ -37,7 +38,9 @@ export const PermissionsAdminDevPluginAdminView = async ({
 
   return (
     <>
-      <HeaderContent h1={t('title')} />
+      <HeaderContent h1={t('title')}>
+        <ActionsPermissionsAdminDevPluginAdminView dataFromSSR={data} />
+      </HeaderContent>
 
       <ContentPermissionsAdminDevPluginAdminView {...data} />
     </>

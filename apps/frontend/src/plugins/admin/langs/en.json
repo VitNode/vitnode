@@ -305,7 +305,19 @@
             }
           },
           "permissions-admin": {
-            "title": "Permissions in AdminCP"
+            "title": "Permissions in AdminCP",
+            "create_edit": {
+              "id": {
+                "label": "ID",
+                "desc": "Unique ID for this permission.",
+                "exists": "Permission with this ID already exists."
+              },
+              "parent": {
+                "label": "Parent Permission",
+                "null": "No parent permission"
+              },
+              "create_success": "Permission has been created."
+            }
           }
         },
         "create": {

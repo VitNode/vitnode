@@ -14,20 +14,20 @@ import React from 'react';
 
 const Content = React.lazy(async () =>
   import('../../create-edit/create-edit').then(module => ({
-    default: module.CreateEditNavDevPluginAdmin,
+    default: module.CreateEditPermissionsAdminDevPluginAdmin,
   })),
 );
 
-export const EditActionTableNavDevPluginAdmin = (
+export const EditActionItemPermissionsAdminDevPluginAdmin = (
   props: React.ComponentProps<typeof Content>,
 ) => {
-  const t = useTranslations('admin.core.plugins.dev.nav');
+  const t = useTranslations('core.global');
 
   return (
     <Dialog>
-      <TooltipWrapper content={t('edit.title')}>
+      <TooltipWrapper content={t('edit')}>
         <DialogTrigger asChild>
-          <Button ariaLabel={t('edit.title')} size="icon" variant="ghost">
+          <Button ariaLabel={t('edit')} size="icon" variant="ghost">
             <Pencil />
           </Button>
         </DialogTrigger>
@@ -35,7 +35,7 @@ export const EditActionTableNavDevPluginAdmin = (
 
       <DialogContent className="max-w-2xl">
         <DialogHeader>
-          <DialogTitle>{t('edit.title')}</DialogTitle>
+          <DialogTitle>{t('edit')}</DialogTitle>
         </DialogHeader>
 
         <React.Suspense fallback={<Loader />}>
