@@ -25,6 +25,8 @@ const packages = [
   'eslint-config-typescript-vitnode',
   'backend-email-resend',
   'backend-email-smtp',
+  'backend-ai-open-ai',
+  'backend-ai-google',
 ];
 
 const getPackageJson = () => {

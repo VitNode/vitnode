@@ -2,7 +2,7 @@
 !/src/database
 /.turbo
 /node_modules
-/.eslintrc.json
+/eslint.config.mjs
 /tsconfig.json
 /tsup.config.ts
 /.swcrc

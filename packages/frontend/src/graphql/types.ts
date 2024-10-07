@@ -668,6 +668,7 @@ export type Query = {
   admin__core_members__show: ShowAdminMembersObj;
   admin__core_members__stats_sign_up: Array<SignUpStatsAdminMembers>;
   admin__core_plugins__nav__show: Array<ShowAdminNavPluginsObj>;
+  admin__core_plugins__permissions_admin__show: Array<ShowAdminPermissionsAdminPluginsObj>;
   admin__core_plugins__show: ShowAdminPluginsObj;
   admin__core_security__captcha__show: ShowAdminCaptchaSecurityObj;
   admin__core_staff_administrators__show: ShowAdminStaffAdministratorsObj;
@@ -728,6 +729,11 @@ export type QueryAdmin__Core_Members__ShowArgs = {
 
 
 export type QueryAdmin__Core_Plugins__Nav__ShowArgs = {
+  plugin_code: Scalars['String']['input'];
+};
+
+
+export type QueryAdmin__Core_Plugins__Permissions_Admin__ShowArgs = {
   plugin_code: Scalars['String']['input'];
 };
 
@@ -964,6 +970,17 @@ export type ShowAdminNavPluginsObj = {
   code: Scalars['String']['output'];
   icon?: Maybe<Scalars['String']['output']>;
   keywords: Array<Scalars['String']['output']>;
+};
+
+export type ShowAdminPermissionsAdminPlugins = {
+  __typename?: 'ShowAdminPermissionsAdminPlugins';
+  id: Scalars['String']['output'];
+};
+
+export type ShowAdminPermissionsAdminPluginsObj = {
+  __typename?: 'ShowAdminPermissionsAdminPluginsObj';
+  children: Array<ShowAdminPermissionsAdminPlugins>;
+  id: Scalars['String']['output'];
 };
 
 export type ShowAdminPlugins = {

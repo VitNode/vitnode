@@ -8,4 +8,4 @@
 /index.ts
 /tsconfig.json
 /tsup.config.ts
-/.eslintrc.json
+/eslint.config.mjs

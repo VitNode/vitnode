@@ -3,7 +3,7 @@
 !/src/global.css
 /scripts
 /node_modules
-/.eslintrc.json
+/eslint.config.mjs
 /codegen.ts
 /next-env.d.ts
 /tsconfig.json

@@ -15,6 +15,7 @@ export interface NavPluginInfoJSONTypeWithChildren
 export interface PluginInfoJSONType extends CreateAdminPluginsArgs {
   allow_default: boolean;
   nav: NavPluginInfoJSONTypeWithChildren[];
+  permissions_admin?: [];
   version: string;
   version_code: number;
 }
