@@ -72,7 +72,7 @@ export const TableModeratorsStaffAdmin = ({
                 variant={unrestricted ? 'default' : 'secondary'}
               >
                 {unrestricted ? <InfinityIcon /> : <ShieldAlert />}
-                {tShared(unrestricted ? 'unrestricted' : 'restricted')}
+                {tShared(unrestricted ? 'unrestricted.title' : 'restricted')}
               </Badge>
             );
           },
