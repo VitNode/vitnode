@@ -11,6 +11,7 @@ import { EditAdminPluginsService } from './edit/edit.service';
 import { ChangeFilesAdminPluginsService } from './helpers/files/change/change.service';
 import { CreateFilesAdminPluginsService } from './helpers/files/create/create-files.service';
 import { AdminNavPluginsModule } from './nav/nav-plugins.module';
+import { AdminPermissionsAdminPluginsModule } from './permissions-admin/permissions-admin.module';
 import { ShowAdminPluginsResolver } from './show/show.resolver';
 import { ShowAdminPluginsService } from './show/show.service';
 import { UploadAdminPluginsResolver } from './upload/upload.resolver';
@@ -33,6 +34,6 @@ import { UploadAdminPluginsService } from './upload/upload.service';
     EditAdminPluginsResolver,
     EditAdminPluginsService,
   ],
-  imports: [AdminNavPluginsModule],
+  imports: [AdminNavPluginsModule, AdminPermissionsAdminPluginsModule],
 })
 export class AdminPluginsModule {}

@@ -1,5 +1,6 @@
 import { NamespaceKeys, NestedKeyOf, NextIntlClientProvider } from 'next-intl';
 import { getLocale, getMessages } from 'next-intl/server';
+import 'server-only';
 
 const pick = (obj: object, paths: string[]) => {
   const result = {};

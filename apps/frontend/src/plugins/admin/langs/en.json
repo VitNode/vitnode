@@ -303,6 +303,30 @@
               "desc": "This action will delete <code></code> navigation.",
               "success": "Navigation has been deleted."
             }
+          },
+          "permissions-admin": {
+            "title": "Permissions in AdminCP",
+            "create_edit": {
+              "id": {
+                "label": "ID",
+                "desc": "Unique ID for this permission.",
+                "exists": "Permission with this ID already exists."
+              },
+              "parent": {
+                "label": "Parent Permission",
+                "null": "No parent permission"
+              },
+              "create_success": "Permission has been created."
+            },
+            "delete": {
+              "desc": "This action will delete the permission <id></id>. Remember to delete all conditions associated with this permission.",
+              "submit": "Yes, delete permission",
+              "success": "Permission has been deleted.",
+              "children_warn": {
+                "title": "This permission has children",
+                "desc": "If you delete this permission, all children will be deleted too."
+              }
+            }
           }
         },
         "create": {
@@ -576,25 +600,14 @@
         }
       },
       "staff": {
-        "title": "Staff",
-        "unrestricted": "Unrestricted",
-        "restricted": "Restricted",
-        "user": "User",
-        "group": "Group",
-        "already_exists": "This permission is already on the list.",
-        "table": {
-          "administrator": "Administrator",
-          "moderator": "Moderator",
+        "shared": {
           "type": "Type",
           "updated": "Updated",
-          "permissions": "Permissions"
-        },
-        "create_edit": {
-          "type": {
-            "title": "Type",
-            "user": "User",
-            "group": "Group"
-          },
+          "permissions": "Permissions",
+          "restricted": "Restricted",
+          "user": "User",
+          "group": "Group",
+          "already_exists": "This permission is already on the list.",
           "unrestricted": {
             "title": "Unrestricted",
             "desc": "Unrestricted administrators have full access to the admin control panel (AdminCP)."
@@ -602,6 +615,8 @@
         },
         "moderators": {
           "title": "Moderators",
+          "desc": "Manage access to the moderator panel (ModCP).",
+          "moderator": "Moderator",
           "add": {
             "title": "Add Moderator",
             "success": "Moderator has been added"
@@ -614,6 +629,8 @@
         },
         "administrators": {
           "title": "Administrators",
+          "desc": "Manage access to the administrator panel (AdminCP).",
+          "administrator": "Administrator",
           "add": {
             "title": "Add Administrator",
             "success": "Administrator has been added"

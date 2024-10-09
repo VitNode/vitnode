@@ -2,6 +2,7 @@
 
 import { DragAndDropSortableList } from '@/components/drag&drop/sortable-list/list';
 import { Admin__Core_Plugins__Nav__ShowQuery } from '@/graphql/queries/admin/plugins/dev/nav/admin__core_plugins__nav__show.generated';
+import { TextAndIconsAsideAdmin } from '@/views/admin/layout/admin-layout';
 import { useParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import React from 'react';
@@ -11,12 +12,12 @@ import { mutationChangePositionApi } from './item/hooks/mutation-change-position
 import { ItemContentNavDevPluginAdmin } from './item/item';
 
 interface Props extends Admin__Core_Plugins__Nav__ShowQuery {
-  icons: { icon: React.ReactNode; id: string }[];
+  textsAndIcons: TextAndIconsAsideAdmin[];
 }
 
 export const ContentNavDevPluginAdmin = ({
   admin__core_plugins__nav__show: edges,
-  icons,
+  textsAndIcons,
 }: Props) => {
   const t = useTranslations('core.global.errors');
   const { code } = useParams();
@@ -28,8 +29,8 @@ export const ContentNavDevPluginAdmin = ({
           <ItemContentNavDevPluginAdmin
             data={data}
             dataFromSSR={edges}
-            icons={icons}
             parentId={parentId?.toString()}
+            textsAndIcons={textsAndIcons}
           />
         );
       }}

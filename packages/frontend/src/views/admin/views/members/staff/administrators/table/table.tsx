@@ -15,14 +15,15 @@ import { ActionsTableAdministratorsStaffAdmin } from './actions/actions';
 export const TableAdministratorsStaffAdmin = ({
   admin__core_staff_administrators__show: { edges, pageInfo },
 }: Admin__Core_Staff_Administrators__ShowQuery) => {
-  const t = useTranslations('admin.members.staff');
+  const t = useTranslations('admin.members.staff.administrators');
+  const tShared = useTranslations('admin.members.staff.shared');
 
   return (
     <DataTable
       columns={[
         {
           id: 'name',
-          title: t('table.administrator'),
+          title: t('administrator'),
           cell: ({ row }) => {
             if (row.user_or_group.__typename === 'User') {
               return <UserLink user={row.user_or_group} />;
@@ -40,18 +41,20 @@ export const TableAdministratorsStaffAdmin = ({
         },
         {
           id: 'type',
-          title: t('table.type'),
+          title: tShared('type'),
           cell: ({ row }) => {
             return (
               <Badge variant="outline">
-                {t(row.user_or_group.__typename === 'User' ? 'user' : 'group')}
+                {tShared(
+                  row.user_or_group.__typename === 'User' ? 'user' : 'group',
+                )}
               </Badge>
             );
           },
         },
         {
           id: 'updated',
-          title: t('table.updated'),
+          title: tShared('updated'),
           sortable: true,
           cell: ({ row }) => {
             return <DateFormat date={row.updated} />;
@@ -59,7 +62,7 @@ export const TableAdministratorsStaffAdmin = ({
         },
         {
           id: 'permissions',
-          title: t('table.permissions'),
+          title: tShared('permissions'),
           cell: ({ row }) => {
             const unrestricted = row.unrestricted;
 
@@ -69,7 +72,7 @@ export const TableAdministratorsStaffAdmin = ({
                 variant={unrestricted ? 'default' : 'secondary'}
               >
                 {unrestricted ? <InfinityIcon /> : <ShieldAlert />}
-                {t(unrestricted ? 'unrestricted' : 'restricted')}
+                {tShared(unrestricted ? 'unrestricted.title' : 'restricted')}
               </Badge>
             );
           },

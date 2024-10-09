@@ -60,6 +60,7 @@ export class EditAdminNavPluginsService {
         code: currentCode,
         icon: icon ?? null,
         keywords,
+        children: config.nav[navIndex]?.children,
       };
     }
 

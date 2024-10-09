@@ -9,7 +9,9 @@
   },
   "admin_welcome": {
     "nav": {
-      "title": "Welcome"
+      "title": "Welcome",
+      "test": "Test",
+      "test_testchild": "Test Child"
     }
   }
 }

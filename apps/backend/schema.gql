@@ -244,6 +244,8 @@ type Mutation {
   admin__core_plugins__nav__create(code: String!, icon: String, keywords: [String!]!, parent_code: String, plugin_code: String!): ShowAdminNavPluginsObj!
   admin__core_plugins__nav__delete(code: String!, parent_code: String, plugin_code: String!): String!
   admin__core_plugins__nav__edit(code: String!, icon: String, keywords: [String!]!, parent_code: String, plugin_code: String!, previous_code: String!): ShowAdminNavPluginsObj!
+  admin__core_plugins__permissions_admin__create_edit(id: String!, old_id: String, parent_id: String, plugin_code: String!): ShowAdminPermissionsAdminPluginsObj!
+  admin__core_plugins__permissions_admin__delete(id: String!, parent_id: String, plugin_code: String!): String!
   admin__core_plugins__upload(code: String, file: Upload!): String!
   admin__core_security__captcha__edit(secret_key: String!, site_key: String!, type: CaptchaTypeEnum!): ShowAdminCaptchaSecurityObj!
   admin__core_staff_administrators__create(group_id: Int, unrestricted: Boolean!, user_id: Int): ShowAdminStaffAdministrators!
@@ -288,6 +290,12 @@ type PageInfo {
   totalCount: Float!
 }
 
+type PermissionsAdminStaffAdministrators {
+  permissions: [ShowAdminPermissionsAdminPluginsObj!]!
+  plugin: String!
+  plugin_code: String!
+}
+
 type Query {
   admin__core_authorization_settings__show: ShowAdminAuthorizationSettingsObj!
   admin__core_email__logs(cursor: Int, first: Int, last: Int): LogsAdminEmailObj!
@@ -298,6 +306,7 @@ type Query {
   admin__core_members__show(cursor: Int, first: Int, groups: [Int!], id: Float, last: Int, search: String, sortBy: ShowAdminMembersSortByArgs): ShowAdminMembersObj!
   admin__core_members__stats_sign_up: [SignUpStatsAdminMembers!]!
   admin__core_plugins__nav__show(plugin_code: String!): [ShowAdminNavPluginsObj!]!
+  admin__core_plugins__permissions_admin__show(plugin_code: String!): [ShowAdminPermissionsAdminPluginsObj!]!
   admin__core_plugins__show(code: String, cursor: Int, first: Int, last: Int, search: String, sortBy: ShowAdminPluginsSortByArgs): ShowAdminPluginsObj!
   admin__core_security__captcha__show: ShowAdminCaptchaSecurityObj!
   admin__core_staff_administrators__show(cursor: Int, first: Int, last: Int, sortBy: ShowAdminStaffAdministratorsSortByArgs): ShowAdminStaffAdministratorsObj!
@@ -458,6 +467,15 @@ type ShowAdminNavPluginsObj {
   keywords: [String!]!
 }
 
+type ShowAdminPermissionsAdminPlugins {
+  id: String!
+}
+
+type ShowAdminPermissionsAdminPluginsObj {
+  children: [ShowAdminPermissionsAdminPlugins!]!
+  id: String!
+}
+
 type ShowAdminPlugins {
   allow_default: Boolean!
   author: String!
@@ -502,6 +520,7 @@ type ShowAdminStaffAdministrators {
 type ShowAdminStaffAdministratorsObj {
   edges: [ShowAdminStaffAdministrators!]!
   pageInfo: PageInfo!
+  permissions: [PermissionsAdminStaffAdministrators!]!
 }
 
 input ShowAdminStaffAdministratorsSortByArgs {

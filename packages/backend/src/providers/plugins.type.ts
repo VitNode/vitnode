@@ -6,6 +6,10 @@ interface NavPluginInfoJSONType {
   keywords: string[];
 }
 
+interface PermissionsAdminPluginInfoJSONType {
+  id: string;
+}
+
 export interface NavPluginInfoJSONTypeWithChildren
   extends NavPluginInfoJSONType {
   children?: NavPluginInfoJSONType[];
@@ -15,6 +19,9 @@ export interface NavPluginInfoJSONTypeWithChildren
 export interface PluginInfoJSONType extends CreateAdminPluginsArgs {
   allow_default: boolean;
   nav: NavPluginInfoJSONTypeWithChildren[];
+  permissions_admin?: ({
+    children: PermissionsAdminPluginInfoJSONType[];
+  } & PermissionsAdminPluginInfoJSONType)[];
   version: string;
   version_code: number;
 }

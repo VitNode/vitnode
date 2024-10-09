@@ -1,3 +1,4 @@
+import { ShowAdminPermissionsAdminPluginsObj } from '@/core/admin/plugins/permissions-admin/show/show.dto';
 import { GroupUser, User } from '@/decorators';
 import {
   PageInfo,
@@ -40,15 +41,6 @@ export class ShowAdminStaffAdministratorsArgs extends PaginationArgs {
 }
 
 @ObjectType()
-export class ShowAdminStaffAdministratorsObj {
-  @Field(() => [ShowAdminStaffAdministrators])
-  edges: ShowAdminStaffAdministrators[];
-
-  @Field(() => PageInfo)
-  pageInfo: PageInfo;
-}
-
-@ObjectType()
 export class StaffGroupUser extends OmitType(GroupUser, ['name'] as const) {
   @Field(() => [StringLanguage])
   group_name: StringLanguage[];
@@ -62,7 +54,7 @@ export const UserOrGroupCoreStaffUnion = createUnionType({
       return User;
     }
 
-    if (Array.isArray(value.name)) {
+    if (Array.isArray(value.group_name)) {
       return StaffGroupUser;
     }
 
@@ -89,4 +81,28 @@ export class ShowAdminStaffAdministrators {
 
   @Field(() => UserOrGroupCoreStaffUnion)
   user_or_group: StaffGroupUser | User;
+}
+
+@ObjectType()
+class PermissionsAdminStaffAdministrators {
+  @Field(() => [ShowAdminPermissionsAdminPluginsObj])
+  permissions: ShowAdminPermissionsAdminPluginsObj[];
+
+  @Field(() => String)
+  plugin: string;
+
+  @Field(() => String)
+  plugin_code: string;
+}
+
+@ObjectType()
+export class ShowAdminStaffAdministratorsObj {
+  @Field(() => [ShowAdminStaffAdministrators])
+  edges: ShowAdminStaffAdministrators[];
+
+  @Field(() => PageInfo)
+  pageInfo: PageInfo;
+
+  @Field(() => [PermissionsAdminStaffAdministrators])
+  permissions: PermissionsAdminStaffAdministrators[];
 }

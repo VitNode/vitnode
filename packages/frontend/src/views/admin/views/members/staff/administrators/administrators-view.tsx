@@ -1,3 +1,4 @@
+import { TranslationsProvider } from '@/components/translations-provider';
 import { HeaderContent } from '@/components/ui/header-content';
 import { fetcher } from '@/graphql/fetcher';
 import {
@@ -56,12 +57,17 @@ export const AdministratorsStaffAdminView = async ({
   ]);
 
   return (
-    <>
+    <TranslationsProvider
+      namespaces={[
+        'admin.members.staff.administrators',
+        'admin.members.staff.shared',
+      ]}
+    >
       <HeaderContent h1={t('title')}>
         <ActionsAdministratorsStaffAdmin />
       </HeaderContent>
 
       <TableAdministratorsStaffAdmin {...data} />
-    </>
+    </TranslationsProvider>
   );
 };
