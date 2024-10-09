@@ -1,14 +1,5 @@
 import { relations } from 'drizzle-orm';
-import {
-  boolean,
-  index,
-  integer,
-  jsonb,
-  pgTable,
-  serial,
-  timestamp,
-  varchar,
-} from 'drizzle-orm/pg-core';
+import { index, pgTable } from 'drizzle-orm/pg-core';
 
 import { core_groups } from './groups';
 import { core_sessions_known_devices } from './sessions';
@@ -16,20 +7,20 @@ import { core_users } from './users';
 
 export const core_admin_permissions = pgTable(
   'core_admin_permissions',
-  {
-    id: serial('id').primaryKey(),
-    group_id: integer('group_id').references(() => core_groups.id, {
+  t => ({
+    id: t.serial().primaryKey(),
+    group_id: t.integer().references(() => core_groups.id, {
       onDelete: 'cascade',
     }),
-    user_id: integer('user_id').references(() => core_users.id, {
+    user_id: t.integer().references(() => core_users.id, {
       onDelete: 'cascade',
     }),
-    unrestricted: boolean('unrestricted').notNull().default(false),
-    created: timestamp('created').notNull().defaultNow(),
-    updated: timestamp('updated').notNull().defaultNow(),
-    protected: boolean('protected').notNull().default(false),
-    permissions: jsonb('permissions').default('{}'),
-  },
+    unrestricted: t.boolean().notNull().default(false),
+    created: t.timestamp().notNull().defaultNow(),
+    updated: t.timestamp().notNull().defaultNow(),
+    protected: t.boolean().notNull().default(false),
+    permissions: t.jsonb().default('{}'),
+  }),
   table => ({
     group_id_idx: index('core_admin_permissions_group_id_idx').on(
       table.group_id,
@@ -54,22 +45,24 @@ export const core_admin_permissions_relations = relations(
 
 export const core_admin_sessions = pgTable(
   'core_admin_sessions',
-  {
-    login_token: varchar('login_token', { length: 255 }).primaryKey(),
-    user_id: integer('user_id')
+  t => ({
+    login_token: t.varchar({ length: 255 }).primaryKey(),
+    user_id: t
+      .integer()
       .notNull()
       .references(() => core_users.id, {
         onDelete: 'cascade',
       }),
-    created: timestamp('created').notNull().defaultNow(),
-    last_seen: timestamp('last_seen').notNull().defaultNow(),
-    expires: timestamp('expires').notNull(),
-    device_id: integer('device_id')
+    created: t.timestamp().notNull().defaultNow(),
+    last_seen: t.timestamp().notNull().defaultNow(),
+    expires: t.timestamp().notNull(),
+    device_id: t
+      .integer()
       .references(() => core_sessions_known_devices.id, {
         onDelete: 'cascade',
       })
       .notNull(),
-  },
+  }),
   table => ({
     login_token_idx: index('core_admin_sessions_login_token_idx').on(
       table.login_token,

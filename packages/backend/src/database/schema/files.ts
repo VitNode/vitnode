@@ -1,36 +1,31 @@
 import { relations } from 'drizzle-orm';
-import {
-  index,
-  integer,
-  pgTable,
-  serial,
-  timestamp,
-  varchar,
-} from 'drizzle-orm/pg-core';
+import { index, pgTable } from 'drizzle-orm/pg-core';
 
 import { core_users } from './users';
 
 export const core_files = pgTable(
   'core_files',
-  {
-    id: serial('id').primaryKey(),
-    extension: varchar('extension', { length: 32 }).notNull(),
-    file_alt: varchar('file_alt', { length: 255 }),
-    file_name: varchar('file_name', { length: 255 }).notNull(),
-    file_name_original: varchar('file_name_original', {
-      length: 255,
-    }).notNull(),
-    dir_folder: varchar('dir_folder', { length: 255 }).notNull(),
-    user_id: integer('user_id').references(() => core_users.id, {
+  t => ({
+    id: t.serial().primaryKey(),
+    extension: t.varchar({ length: 32 }).notNull(),
+    file_alt: t.varchar({ length: 255 }),
+    file_name: t.varchar({ length: 255 }).notNull(),
+    file_name_original: t
+      .varchar({
+        length: 255,
+      })
+      .notNull(),
+    dir_folder: t.varchar({ length: 255 }).notNull(),
+    user_id: t.integer().references(() => core_users.id, {
       onDelete: 'cascade',
     }),
-    created: timestamp('created').notNull().defaultNow(),
-    file_size: integer('file_size').notNull(),
-    mimetype: varchar('mimetype', { length: 255 }).notNull(),
-    width: integer('width'),
-    height: integer('height'),
-    security_key: varchar('security_key', { length: 255 }),
-  },
+    created: t.timestamp().notNull().defaultNow(),
+    file_size: t.integer().notNull(),
+    mimetype: t.varchar({ length: 255 }).notNull(),
+    width: t.integer(),
+    height: t.integer(),
+    security_key: t.varchar({ length: 255 }),
+  }),
   table => ({
     user_id_idx: index('core_files_user_id_idx').on(table.user_id),
   }),
@@ -46,14 +41,15 @@ export const core_files_relations = relations(core_files, ({ many, one }) => ({
 
 export const core_files_using = pgTable(
   'core_files_using',
-  {
-    id: serial('id').primaryKey(),
-    file_id: integer('file_id')
+  t => ({
+    id: t.serial().primaryKey(),
+    file_id: t
+      .integer()
       .notNull()
       .references(() => core_files.id),
-    plugin: varchar('plugin', { length: 255 }).notNull(),
-    folder: varchar('folder', { length: 255 }).notNull(),
-  },
+    plugin: t.varchar({ length: 255 }).notNull(),
+    folder: t.varchar({ length: 255 }).notNull(),
+  }),
   table => ({
     file_id_idx: index('core_files_using_file_id_idx').on(table.file_id),
   }),

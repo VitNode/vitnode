@@ -1,44 +1,37 @@
 import { relations } from 'drizzle-orm';
-import {
-  boolean,
-  index,
-  integer,
-  pgTable,
-  serial,
-  text,
-  timestamp,
-  varchar,
-} from 'drizzle-orm/pg-core';
+import { index, pgTable } from 'drizzle-orm/pg-core';
 
 import { core_groups } from './groups';
 import { core_languages } from './languages';
 
 export const core_users = pgTable(
   'core_users',
-  {
-    id: serial('id').primaryKey(),
-    name_seo: varchar('name_seo', { length: 255 }).notNull().unique(),
-    name: varchar('name', { length: 255 }).notNull().unique(),
-    email: varchar('email', { length: 255 }).notNull().unique(),
-    password: text('password').notNull(),
-    joined: timestamp('joined').notNull().defaultNow(),
-    newsletter: boolean('newsletter').notNull().default(false),
-    avatar_color: varchar('avatar_color', { length: 6 }).notNull(),
-    email_verified: boolean('email_verified').notNull().default(false),
-    group_id: integer('group_id')
+  t => ({
+    id: t.serial().primaryKey(),
+    name_seo: t.varchar({ length: 255 }).notNull().unique(),
+    name: t.varchar({ length: 255 }).notNull().unique(),
+    email: t.varchar({ length: 255 }).notNull().unique(),
+    password: t.varchar().notNull(),
+    joined: t.timestamp().notNull().defaultNow(),
+    newsletter: t.boolean().notNull().default(false),
+    avatar_color: t.varchar({ length: 6 }).notNull(),
+    email_verified: t.boolean().notNull().default(false),
+    group_id: t
+      .integer()
       .references(() => core_groups.id)
       .notNull(),
-    first_name: varchar('first_name', { length: 255 }),
-    last_name: varchar('last_name', { length: 255 }),
-    birthday: timestamp('birthday'),
-    ip_address: varchar('ip_address', { length: 255 }).notNull(),
-    language: varchar('language', { length: 5 })
+    first_name: t.varchar({ length: 255 }),
+    last_name: t.varchar({ length: 255 }),
+    birthday: t.timestamp(),
+    ip_address: t.varchar({ length: 255 }).notNull(),
+    language: t
+      .varchar({ length: 5 })
       .notNull()
       .default('en')
       .references(() => core_languages.code, {
         onDelete: 'set default',
       }),
-  },
+  }),
   table => ({
     name_seo_idx: index('core_users_name_seo_idx').on(table.name_seo),
     name_idx: index('core_users_name_idx').on(table.name),
@@ -65,18 +58,18 @@ export const core_users_relations = relations(core_users, ({ one }) => ({
   }),
 }));
 
-export const core_files_avatars = pgTable('core_files_avatars', {
-  id: serial('id').primaryKey(),
-  dir_folder: varchar('dir_folder', { length: 255 }).notNull(),
-  file_name: varchar('file_name', { length: 255 }).notNull(),
-  created: timestamp('created').notNull().defaultNow(),
-  file_size: integer('file_size').notNull(),
-  mimetype: varchar('mimetype', { length: 255 }).notNull(),
-  extension: varchar('extension', { length: 32 }).notNull(),
-  user_id: integer('user_id').references(() => core_users.id, {
+export const core_files_avatars = pgTable('core_files_avatars', t => ({
+  id: t.serial().primaryKey(),
+  dir_folder: t.varchar({ length: 255 }).notNull(),
+  file_name: t.varchar({ length: 255 }).notNull(),
+  created: t.timestamp().notNull().defaultNow(),
+  file_size: t.integer().notNull(),
+  mimetype: t.varchar({ length: 255 }).notNull(),
+  extension: t.varchar({ length: 32 }).notNull(),
+  user_id: t.integer().references(() => core_users.id, {
     onDelete: 'cascade',
   }),
-});
+}));
 
 export const core_files_avatars_relations = relations(
   core_files_avatars,
@@ -88,17 +81,18 @@ export const core_files_avatars_relations = relations(
   }),
 );
 
-export const core_users_pass_reset = pgTable('core_users_pass_reset', {
-  id: serial('id').primaryKey(),
-  user_id: integer('user_id')
+export const core_users_pass_reset = pgTable('core_users_pass_reset', t => ({
+  id: t.serial().primaryKey(),
+  user_id: t
+    .integer()
     .references(() => core_users.id, {
       onDelete: 'cascade',
     })
     .notNull(),
-  key: varchar('key', { length: 100 }).notNull().unique(),
-  created: timestamp('created').notNull().defaultNow(),
-  expires: timestamp('expires').notNull(),
-});
+  key: t.varchar({ length: 100 }).notNull().unique(),
+  created: t.timestamp().notNull().defaultNow(),
+  expires: t.timestamp().notNull(),
+}));
 
 export const core_users_pass_reset_relations = relations(
   core_users_pass_reset,
@@ -110,17 +104,21 @@ export const core_users_pass_reset_relations = relations(
   }),
 );
 
-export const core_users_confirm_emails = pgTable('core_users_confirm_emails', {
-  id: serial('id').primaryKey(),
-  user_id: integer('user_id')
-    .references(() => core_users.id, {
-      onDelete: 'cascade',
-    })
-    .notNull(),
-  token: varchar('token', { length: 100 }).notNull().unique(),
-  created: timestamp('created').notNull().defaultNow(),
-  expires: timestamp('expires').notNull(),
-});
+export const core_users_confirm_emails = pgTable(
+  'core_users_confirm_emails',
+  t => ({
+    id: t.serial().primaryKey(),
+    user_id: t
+      .integer()
+      .references(() => core_users.id, {
+        onDelete: 'cascade',
+      })
+      .notNull(),
+    token: t.varchar({ length: 100 }).notNull().unique(),
+    created: t.timestamp().notNull().defaultNow(),
+    expires: t.timestamp().notNull(),
+  }),
+);
 
 export const core_users_confirm_emails_relations = relations(
   core_users_confirm_emails,

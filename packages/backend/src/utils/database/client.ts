@@ -1,11 +1,20 @@
 import * as dotenv from 'dotenv';
-import { drizzle } from 'drizzle-orm/node-postgres';
+import { drizzle } from 'drizzle-orm/connect';
+import { NodePgDatabase } from 'drizzle-orm/node-postgres';
 import { join } from 'path';
-import { Pool, PoolConfig } from 'pg';
+// import { Pool as NodePgPool } from 'pg';
+import { PoolConfig } from 'pg';
 
 dotenv.config({
   path: join(process.cwd(), '..', '..', '.env'),
 });
+
+// export type DetermineClient<TSchema extends Record<string, unknown>> = {
+//   $client: NodePgPool;
+// } & NodePgDatabase<TSchema>;
+
+export type DetermineClient<T extends Record<string, unknown>> =
+  NodePgDatabase<T>;
 
 interface Args<T> {
   config: PoolConfig;
@@ -21,14 +30,26 @@ export const DATABASE_ENVS = {
   ssl: process.env.DB_SSL ? process.env.DB_SSL === 'true' : false,
 };
 
-export function createClientDatabase<
+export async function createClientDatabase<
   T extends Record<string, unknown> = Record<string, unknown>,
 >({ config, schemaDatabase }: Args<T>) {
-  const poolDB = new Pool(config);
-  const db = drizzle<T>(poolDB, { schema: schemaDatabase });
+  const db: DetermineClient<T> = await drizzle<'node-postgres', T>(
+    'node-postgres',
+    {
+      connection: {
+        host: DATABASE_ENVS.host,
+        port: DATABASE_ENVS.port,
+        user: DATABASE_ENVS.user,
+        password: DATABASE_ENVS.password,
+        database: DATABASE_ENVS.database,
+        ssl: DATABASE_ENVS.ssl,
+      },
+      schema: schemaDatabase,
+      ...config,
+    },
+  );
 
   return {
     db,
-    poolDB,
   };
 }

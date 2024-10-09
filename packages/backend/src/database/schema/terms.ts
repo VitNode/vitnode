@@ -1,9 +1,9 @@
-import { pgTable, serial, timestamp, varchar } from 'drizzle-orm/pg-core';
+import { pgTable } from 'drizzle-orm/pg-core';
 
-export const core_terms = pgTable('core_terms', {
-  id: serial('id').primaryKey(),
-  code: varchar('code').notNull().unique(),
-  created: timestamp('created').notNull().defaultNow(),
-  updated: timestamp('updated').notNull().defaultNow(),
-  href: varchar('href'),
-});
+export const core_terms = pgTable('core_terms', t => ({
+  id: t.serial().primaryKey(),
+  code: t.varchar().notNull().unique(),
+  created: t.timestamp().notNull().defaultNow(),
+  updated: t.timestamp().notNull().defaultNow(),
+  href: t.varchar(),
+}));
