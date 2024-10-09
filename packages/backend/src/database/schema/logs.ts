@@ -1,10 +1,10 @@
-import { pgTable, serial, text, timestamp, varchar } from 'drizzle-orm/pg-core';
+import { pgTable } from 'drizzle-orm/pg-core';
 
-export const core_logs_email = pgTable('core_logs_email', {
-  id: serial('id').primaryKey(),
-  to: varchar('to', { length: 255 }).notNull(),
-  subject: varchar('subject', { length: 255 }).notNull(),
-  created: timestamp('created').notNull().defaultNow(),
-  error: text('error').notNull(),
-  html: text('html').notNull(),
-});
+export const core_logs_email = pgTable('core_logs_email', t => ({
+  id: t.serial().primaryKey(),
+  to: t.varchar({ length: 255 }).notNull(),
+  subject: t.varchar({ length: 255 }).notNull(),
+  created: t.timestamp().notNull().defaultNow(),
+  error: t.text().notNull(),
+  html: t.text().notNull(),
+}));

@@ -56,7 +56,7 @@ const init = async () => {
   console.log(`${initConsole} [4/6] Generating the manifest files...`);
   generateManifest();
 
-  const database = createClientDatabase({
+  const database = await createClientDatabase({
     config: DATABASE_ENVS,
     schemaDatabase: coreSchemaDatabase,
   });
@@ -69,7 +69,6 @@ const init = async () => {
   console.log(`${initConsole} [6/6] Updating plugins...`);
   await updatePlugins({ pluginsPath, db: database.db });
 
-  await database.poolDB.end();
   console.log(`${initConsole} ✅ Project setup complete.`);
   process.exit(0);
 };
@@ -78,17 +77,11 @@ const db = async () => {
   console.log(`${initConsole} [1/2] Generating database migrations...`);
   await generateDatabaseMigrations();
 
-  const database = createClientDatabase({
-    config: DATABASE_ENVS,
-    schemaDatabase: coreSchemaDatabase,
-  });
-
   console.log(
     `${initConsole} [2/2] Create tables in database using migrations...`,
   );
   await runMigrations();
 
-  await database.poolDB.end();
   console.log(`${initConsole} ✅ Project setup complete.`);
   process.exit(0);
 };

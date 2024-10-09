@@ -1,34 +1,27 @@
 import { relations } from 'drizzle-orm';
-import {
-  boolean,
-  index,
-  integer,
-  pgTable,
-  serial,
-  text,
-  timestamp,
-  varchar,
-} from 'drizzle-orm/pg-core';
+import { index, pgTable } from 'drizzle-orm/pg-core';
 
 export const core_languages = pgTable(
   'core_languages',
-  {
-    id: serial('id').primaryKey(),
-    code: varchar('code', { length: 32 }).notNull().unique(),
-    name: varchar('name', { length: 255 }).notNull(),
-    timezone: varchar('timezone', { length: 255 }).notNull().default('UTC'),
-    protected: boolean('protected').notNull().default(false),
-    default: boolean('default').notNull().default(false),
-    enabled: boolean('enabled').notNull().default(true),
-    created: timestamp('created').notNull().defaultNow(),
-    updated: timestamp('updated').notNull().defaultNow(),
-    time_24: boolean('time_24').notNull().default(false),
-    locale: varchar('locale', { length: 50 }).notNull().default('en'),
-    allow_in_input: boolean('allow_in_input').default(true).notNull(),
-    site_copyright: varchar('site_copyright', {
-      length: 255,
-    }).default(''),
-  },
+  t => ({
+    id: t.serial().primaryKey(),
+    code: t.varchar({ length: 32 }).notNull().unique(),
+    name: t.varchar({ length: 255 }).notNull(),
+    timezone: t.varchar({ length: 255 }).notNull().default('UTC'),
+    protected: t.boolean().notNull().default(false),
+    default: t.boolean().notNull().default(false),
+    enabled: t.boolean().notNull().default(true),
+    created: t.timestamp().notNull().defaultNow(),
+    updated: t.timestamp().notNull().defaultNow(),
+    time_24: t.boolean().notNull().default(false),
+    locale: t.varchar({ length: 50 }).notNull().default('en'),
+    allow_in_input: t.boolean().default(true).notNull(),
+    site_copyright: t
+      .varchar({
+        length: 255,
+      })
+      .default(''),
+  }),
   table => ({
     code_idx: index('core_languages_code_idx').on(table.code),
     name_idx: index('core_languages_name_idx').on(table.name),
@@ -37,19 +30,20 @@ export const core_languages = pgTable(
 
 export const core_languages_words = pgTable(
   'core_languages_words',
-  {
-    id: serial('id').primaryKey(),
-    language_code: varchar('language_code')
+  t => ({
+    id: t.serial().primaryKey(),
+    language_code: t
+      .varchar()
       .notNull()
       .references(() => core_languages.code, {
         onDelete: 'cascade',
       }),
-    plugin_code: varchar('plugin_code', { length: 50 }).notNull(),
-    item_id: integer('item_id').notNull(),
-    value: text('value').notNull(),
-    table_name: varchar('table_name', { length: 255 }).notNull(),
-    variable: varchar('variable', { length: 255 }).notNull(),
-  },
+    plugin_code: t.varchar({ length: 50 }).notNull(),
+    item_id: t.integer().notNull(),
+    value: t.text().notNull(),
+    table_name: t.varchar({ length: 255 }).notNull(),
+    variable: t.varchar({ length: 255 }).notNull(),
+  }),
   table => ({
     language_code_idx: index('core_languages_words_lang_code_idx').on(
       table.language_code,
