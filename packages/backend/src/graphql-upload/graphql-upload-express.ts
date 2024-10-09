@@ -1,7 +1,7 @@
+// Part of GraphQL Upload implementation - 17.0.0
+
 import { IncomingMessage, ServerResponse } from 'http';
-
 import { NextFunction, Request, Response } from 'express';
-
 import defaultProcessRequest from './process-request';
 
 export interface ProcessRequestOptions {
@@ -34,37 +34,29 @@ export function graphqlUploadExpress({
     response: Response,
     next: NextFunction,
   ) {
-    if (!request.is('multipart/form-data')) {
-      next();
+    if (request.is('multipart/form-data')) {
+      const requestEnd = new Promise(resolve => request.on('end', resolve));
+      const { send } = response;
 
-      return;
-    }
-
-    const requestEnd = new Promise(resolve => request.on('end', resolve));
-    const { send } = response;
-
-    // @ts-expect-error Todo: Find a less hacky way to prevent sending a response
-    // before the request has ended.
-    response.send =
-      /** @param {Array<unknown>} args */
-      (...args: unknown[]) => {
-        void requestEnd.then(() => {
+      // @ts-ignore Todo: Find a less hacky way to prevent sending a response
+      // before the request has ended.
+      response.send = (...args) => {
+        requestEnd.then(() => {
           response.send = send;
           response.send(...args);
         });
       };
 
-    processRequest(request, response, processRequestOptions)
-      .then(body => {
-        request.body = body;
-        next();
-      })
-      .catch((err: unknown) => {
-        const error = err as { expose?: boolean; status?: number };
-
-        if (error.status && error.expose) response.status(error.status);
-        next(error);
-      });
+      processRequest(request, response, processRequestOptions)
+        .then(body => {
+          request.body = body;
+          next();
+        })
+        .catch(error => {
+          if (error.status && error.expose) response.status(error.status);
+          next(error);
+        });
+    } else next();
   }
 
   return graphqlUploadExpressMiddleware;
