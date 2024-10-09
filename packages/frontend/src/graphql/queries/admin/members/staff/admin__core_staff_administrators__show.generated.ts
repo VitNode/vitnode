@@ -9,7 +9,7 @@ export type Admin__Core_Staff_Administrators__ShowQueryVariables = Types.Exact<{
 }>;
 
 
-export type Admin__Core_Staff_Administrators__ShowQuery = { __typename?: 'Query', admin__core_staff_administrators__show: { __typename?: 'ShowAdminStaffAdministratorsObj', edges: Array<{ __typename?: 'ShowAdminStaffAdministrators', created: Date, id: number, unrestricted: boolean, updated: Date, protected: boolean, user_or_group: { __typename: 'StaffGroupUser', color?: string, id: number, group_name: Array<{ __typename?: 'StringLanguage', language_code: string, value: string }> } | { __typename: 'User', avatar_color: string, language: string, name_seo: string, id: number, name: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, file_name: string }, group: { __typename?: 'GroupUser', id: number, color?: string, name: Array<{ __typename?: 'StringLanguage', language_code: string, value: string }> } } }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number, totalCount: number } } };
+export type Admin__Core_Staff_Administrators__ShowQuery = { __typename?: 'Query', admin__core_staff_administrators__show: { __typename?: 'ShowAdminStaffAdministratorsObj', edges: Array<{ __typename?: 'ShowAdminStaffAdministrators', created: Date, id: number, unrestricted: boolean, updated: Date, protected: boolean, user_or_group: { __typename: 'StaffGroupUser', color?: string, id: number, group_name: Array<{ __typename?: 'StringLanguage', language_code: string, value: string }> } | { __typename: 'User', avatar_color: string, language: string, name_seo: string, id: number, name: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, file_name: string }, group: { __typename?: 'GroupUser', id: number, color?: string, name: Array<{ __typename?: 'StringLanguage', language_code: string, value: string }> } } }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number, totalCount: number }, permissions: Array<{ __typename?: 'PermissionsAdminStaffAdministrators', plugin_code: string, permissions: Array<{ __typename?: 'ShowAdminPermissionsAdminPluginsObj', id: string, children: Array<{ __typename?: 'ShowAdminPermissionsAdminPlugins', id: string }> }> }> } };
 
 
 export const Admin__Core_Staff_Administrators__Show = gql`
@@ -65,6 +65,15 @@ export const Admin__Core_Staff_Administrators__Show = gql`
       hasPreviousPage
       startCursor
       totalCount
+    }
+    permissions {
+      permissions {
+        id
+        children {
+          id
+        }
+      }
+      plugin_code
     }
   }
 }

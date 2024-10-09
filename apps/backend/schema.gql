@@ -290,6 +290,12 @@ type PageInfo {
   totalCount: Float!
 }
 
+type PermissionsAdminStaffAdministrators {
+  permissions: [ShowAdminPermissionsAdminPluginsObj!]!
+  plugin: String!
+  plugin_code: String!
+}
+
 type Query {
   admin__core_authorization_settings__show: ShowAdminAuthorizationSettingsObj!
   admin__core_email__logs(cursor: Int, first: Int, last: Int): LogsAdminEmailObj!
@@ -514,6 +520,7 @@ type ShowAdminStaffAdministrators {
 type ShowAdminStaffAdministratorsObj {
   edges: [ShowAdminStaffAdministrators!]!
   pageInfo: PageInfo!
+  permissions: [PermissionsAdminStaffAdministrators!]!
 }
 
 input ShowAdminStaffAdministratorsSortByArgs {

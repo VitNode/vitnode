@@ -61,47 +61,50 @@ export class ShowAdminStaffAdministratorsService {
       .select({ count: count() })
       .from(core_admin_permissions);
 
-    return outputPagination({
-      edges: await Promise.all(
-        edges.map(async edge => {
-          if (edge.user_id) {
-            const user = await getUser({
-              id: edge.user_id,
-              db: this.databaseService.db,
+    return {
+      ...outputPagination({
+        edges: await Promise.all(
+          edges.map(async edge => {
+            if (edge.user_id) {
+              const user = await getUser({
+                id: edge.user_id,
+                db: this.databaseService.db,
+              });
+
+              return {
+                ...edge,
+                user_or_group: {
+                  ...user,
+                },
+              };
+            }
+
+            if (!edge.group) {
+              throw new NotFoundError('Group');
+            }
+
+            const group_name = await this.stringLanguageHelper.get({
+              database: core_groups,
+              item_ids: [edge.group.id],
+              plugin_code: 'core',
+              variables: ['name'],
             });
 
             return {
               ...edge,
               user_or_group: {
-                ...user,
+                ...edge.group,
+                group_name,
               },
             };
-          }
-
-          if (!edge.group) {
-            throw new NotFoundError('Group');
-          }
-
-          const group_name = await this.stringLanguageHelper.get({
-            database: core_groups,
-            item_ids: [edge.group.id],
-            plugin_code: 'core',
-            variables: ['name'],
-          });
-
-          return {
-            ...edge,
-            user_or_group: {
-              ...edge.group,
-              group_name,
-            },
-          };
-        }),
-      ),
-      totalCount,
-      first,
-      cursor,
-      last,
-    });
+          }),
+        ),
+        totalCount,
+        first,
+        cursor,
+        last,
+      }),
+      permissions: [],
+    };
   }
 }

@@ -600,29 +600,18 @@
         }
       },
       "staff": {
-        "title": "Staff",
-        "user": "User",
-        "group": "Group",
-        "already_exists": "This permission is already on the list.",
-        "create_edit": {
-          "type": {
-            "title": "Type",
-            "user": "User",
-            "group": "Group"
-          },
-          "unrestricted": {
-            "title": "Unrestricted",
-            "desc": "Unrestricted administrators have full access to the admin control panel (AdminCP)."
-          }
-        },
         "shared": {
           "type": "Type",
           "updated": "Updated",
           "permissions": "Permissions",
-          "unrestricted": "Unrestricted",
           "restricted": "Restricted",
           "user": "User",
-          "group": "Group"
+          "group": "Group",
+          "already_exists": "This permission is already on the list.",
+          "unrestricted": {
+            "title": "Unrestricted",
+            "desc": "Unrestricted administrators have full access to the admin control panel (AdminCP)."
+          }
         },
         "moderators": {
           "title": "Moderators",

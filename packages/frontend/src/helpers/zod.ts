@@ -7,6 +7,11 @@ export const zodLanguageInput = z.array(
   }),
 );
 
+export const zodComboBoxWithFetcher = z.object({
+  key: z.string(),
+  value: z.union([z.string(), zodLanguageInput]),
+});
+
 export const zodFile = z.union([
   z.instanceof(File),
   z.object({

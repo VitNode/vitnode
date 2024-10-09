@@ -1,49 +1,44 @@
 import { useDialog } from '@/components/ui/dialog';
-import { zodLanguageInput } from '@/helpers/zod';
+import { zodComboBoxWithFetcher } from '@/helpers/zod';
 import { useTextLang } from '@/hooks/use-text-lang';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
-import { useForm } from 'react-hook-form';
+import { UseFormReturn } from 'react-hook-form';
 import { toast } from 'sonner';
 import * as z from 'zod';
 
 import { mutationApi } from './mutation-api';
 
 export const useFormCreateEditFormGroupsMembersAdmin = () => {
-  const t = useTranslations('admin.members.staff');
+  const t = useTranslations('admin.members.staff.moderators.add');
+  const tShared = useTranslations('admin.members.staff.shared');
   const tCore = useTranslations('core.global');
   const { convertText } = useTextLang();
   const { setOpen } = useDialog();
 
-  const formSchema = z.object({
-    type: z.enum(['group', 'user']),
-    user: z
-      .object({
-        id: z.number(),
-        name: z.string(),
-      })
-      .optional(),
-    group: z
-      .object({
-        id: z.number(),
-        name: zodLanguageInput,
-      })
-      .optional(),
-    unrestricted: z.boolean(),
-  });
+  const formSchema = z
+    .object({
+      type: z.enum(['group', 'user']).default('group'),
+      user: zodComboBoxWithFetcher.optional(),
+      group: zodComboBoxWithFetcher.optional(),
+      unrestricted: z.boolean().default(true),
+    })
+    .refine(data => {
+      return data.type === 'group' ? data.group : data.user;
+    });
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      type: 'group',
-      unrestricted: true,
-    },
-  });
-
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  const onSubmit = async (
+    values: z.infer<typeof formSchema>,
+    form: UseFormReturn<z.infer<typeof formSchema>>,
+  ) => {
     const mutation = await mutationApi({
-      groupId: values.type === 'group' ? values.group?.id : undefined,
-      userId: values.type === 'user' ? values.user?.id : undefined,
+      groupId:
+        values.type === 'group' && values.group?.key
+          ? +values.group.key
+          : undefined,
+      userId:
+        values.type === 'user' && values.user?.key
+          ? +values.user.key
+          : undefined,
       unrestricted: values.unrestricted,
     });
 
@@ -51,7 +46,7 @@ export const useFormCreateEditFormGroupsMembersAdmin = () => {
       if (mutation.error === 'ALREADY_EXISTS') {
         form.setError(values.type === 'user' ? 'user' : 'group', {
           type: 'manual',
-          message: t('already_exists'),
+          message: tShared('already_exists'),
         });
 
         return;
@@ -65,16 +60,18 @@ export const useFormCreateEditFormGroupsMembersAdmin = () => {
     }
 
     setOpen?.(false);
-    toast.success(t('moderators.add.success'), {
+    toast.success(t('success'), {
       description:
-        values.type === 'group'
-          ? convertText(values.group?.name)
-          : values.user?.name,
+        values.type === 'group' && Array.isArray(values.group?.value)
+          ? convertText(values.group.value)
+          : Array.isArray(values.user?.value)
+            ? null
+            : values.user?.value,
     });
   };
 
   return {
-    form,
     onSubmit,
+    formSchema,
   };
 };

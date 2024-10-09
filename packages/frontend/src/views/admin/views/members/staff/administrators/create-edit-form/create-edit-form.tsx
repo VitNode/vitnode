@@ -1,123 +1,136 @@
-import { Button } from '@/components/ui/button';
-import { DialogFooter } from '@/components/ui/dialog';
+import { AutoForm, DependencyType } from '@/components/form/auto-form';
 import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
-import { Label } from '@/components/ui/label';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { Switch } from '@/components/ui/switch';
-import { GroupInput } from '@/components/ui/user/group-input';
-import { UserInput } from '@/components/ui/user/user-input';
+  AutoFormCombobox,
+  AutoFormComboboxProps,
+} from '@/components/form/fields/combobox';
+import {
+  AutoFormRadioGroup,
+  AutoFormRadioGroupProps,
+} from '@/components/form/fields/radio-group';
+import {
+  AutoFormSwitch,
+  AutoFormSwitchProps,
+} from '@/components/form/fields/switch';
+import { AvatarUser } from '@/components/ui/user/avatar';
+import { GroupFormat } from '@/components/ui/user/group-format';
+import { getGroupsShortApi } from '@/graphql/get-groups-short-api';
+import { getUsersShortApi } from '@/graphql/get-users-short-api';
 import { useTranslations } from 'next-intl';
 
 import { useFormCreateEditFormGroupsMembersAdmin } from './hooks/use-form';
 
 export const CreateEditFormAdministratorsStaffAdmin = () => {
-  const t = useTranslations('admin.members.staff');
-  const tCore = useTranslations('core.global');
-  const { form, onSubmit } = useFormCreateEditFormGroupsMembersAdmin();
+  const t = useTranslations('admin.members.staff.shared');
+  const { onSubmit, formSchema } = useFormCreateEditFormGroupsMembersAdmin();
 
   return (
-    <Form {...form}>
-      <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
-        <FormField
-          control={form.control}
-          name="type"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{t('create_edit.type.title')}</FormLabel>
-              <RadioGroup
-                defaultValue={field.value}
-                onValueChange={el => {
-                  form.resetField('user');
-                  form.resetField('group');
-                  field.onChange(el);
-                }}
-              >
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem id="r1" value="group" />
-                  <Label htmlFor="r1">{t('create_edit.type.group')}</Label>
-                </div>
+    <AutoForm
+      dependencies={[
+        {
+          sourceField: 'type',
+          type: DependencyType.HIDES,
+          targetField: 'group',
+          when: (provider: 'group' | 'user') => provider !== 'group',
+        },
+        {
+          sourceField: 'type',
+          type: DependencyType.HIDES,
+          targetField: 'user',
+          when: (provider: 'group' | 'user') => provider !== 'user',
+        },
+        {
+          sourceField: 'type',
+          type: DependencyType.REQUIRES,
+          targetField: 'user',
+          when: (provider: 'group' | 'user') => provider === 'user',
+        },
+        {
+          sourceField: 'type',
+          type: DependencyType.REQUIRES,
+          targetField: 'group',
+          when: (provider: 'group' | 'user') => provider === 'group',
+        },
+      ]}
+      fields={[
+        {
+          id: 'type',
+          label: t('type'),
+          component: AutoFormRadioGroup,
+          componentProps: {
+            labels: {
+              group: {
+                title: t('group'),
+              },
+              user: {
+                title: t('user'),
+              },
+            },
+          } as AutoFormRadioGroupProps,
+        },
+        {
+          id: 'group',
+          label: t('group'),
+          component: AutoFormCombobox,
+          componentProps: {
+            withFetcher: {
+              queryKey: 'Admin__Core_Groups__Show_Short',
+              search: true,
+              queryFn: async ({ search }) => {
+                const mutation = await getGroupsShortApi({ search });
 
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem id="r2" value="user" />
-                  <Label htmlFor="r2">{t('create_edit.type.user')}</Label>
-                </div>
-              </RadioGroup>
-            </FormItem>
-          )}
-        />
+                return (mutation.data?.admin__core_groups__show.edges ?? [])
+                  .filter(item => !item.guest)
+                  .map(item => ({
+                    key: item.id.toString(),
+                    value: item.name,
+                    valueWithFormatting: <GroupFormat group={item} />,
+                  }));
+              },
+            },
+          } as AutoFormComboboxProps,
+        },
+        {
+          id: 'user',
+          label: t('user'),
+          component: AutoFormCombobox,
+          componentProps: {
+            withFetcher: {
+              queryKey: 'Core_Members__Show__Search',
+              search: true,
+              queryFn: async ({ search }) => {
+                const mutation = await getUsersShortApi({ search });
 
-        {form.watch('type') === 'user' ? (
-          <FormField
-            control={form.control}
-            name="user"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{t('create_edit.type.user')}</FormLabel>
-                <UserInput {...field} />
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        ) : (
-          <FormField
-            control={form.control}
-            name="group"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{t('create_edit.type.group')}</FormLabel>
-                <GroupInput {...field} />
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        )}
-
-        <FormField
-          control={form.control}
-          name="unrestricted"
-          render={({ field }) => (
-            <FormItem className="flex flex-row items-center justify-between gap-2 rounded-lg border p-4">
-              <div className="space-y-0.5">
-                <FormLabel className="text-base">
-                  {t('create_edit.unrestricted.title')}
-                </FormLabel>
-                <FormDescription>
-                  {t('create_edit.unrestricted.desc')}
-                </FormDescription>
-              </div>
-              <FormControl>
-                <Switch
-                  aria-readonly
-                  checked={field.value}
-                  disabled
-                  onCheckedChange={field.onChange}
-                />
-              </FormControl>
-            </FormItem>
-          )}
-        />
-
-        <DialogFooter>
-          <Button
-            disabled={
-              !form.formState.isValid ||
-              (!form.watch('user') && !form.watch('group'))
-            }
-            loading={form.formState.isSubmitting}
-            type="submit"
-          >
-            {tCore('save')}
-          </Button>
-        </DialogFooter>
-      </form>
-    </Form>
+                return (mutation.data?.core_members__show.edges ?? []).map(
+                  item => ({
+                    key: item.id.toString(),
+                    value: item.name,
+                    valueWithFormatting: (
+                      <>
+                        <AvatarUser sizeInRem={1.75} user={item} />
+                        <div className="flex flex-col">
+                          <span>{item.name}</span>
+                          <GroupFormat className="text-xs" group={item.group} />
+                        </div>
+                      </>
+                    ),
+                  }),
+                );
+              },
+            },
+          } as AutoFormComboboxProps,
+        },
+        {
+          id: 'unrestricted',
+          component: AutoFormSwitch,
+          label: t('unrestricted.title'),
+          description: t('unrestricted.desc'),
+          componentProps: {
+            disabled: true,
+          } as AutoFormSwitchProps,
+        },
+      ]}
+      formSchema={formSchema}
+      onSubmit={onSubmit}
+    />
   );
 };

@@ -11,13 +11,15 @@ import {
   CommandList,
 } from '@/components/ui/command';
 import { FormControl, FormMessage } from '@/components/ui/form';
+import { Loader } from '@/components/ui/loader';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
+import { StringLanguage } from '@/graphql/types';
 import { cn } from '@/helpers/classnames';
-import { Check, ChevronsUpDownIcon } from 'lucide-react';
+import { Check } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 import { FieldValues } from 'react-hook-form';
@@ -28,11 +30,23 @@ import { AutoFormInputWrapper } from './common/input-wrapper';
 import { AutoFormLabel } from './common/label';
 import { AutoFormTooltip } from './common/tooltip';
 import { AutoFormWrapper } from './common/wrapper';
+import { ComboBoxButton } from './utils/combobox/combobox-button';
+
+const ComboboxContentWithFetcher = React.lazy(async () =>
+  import('./utils/combobox/combobox-content-with-fetcher').then(module => ({
+    default: module.ComboboxContentWithFetcher,
+  })),
+);
 
 export type AutoFormComboboxProps = {
   labels?: Record<string, React.JSX.Element | string>;
   multiple?: boolean;
+  placeholder?: string;
   placeholderSearchInput?: string;
+  withFetcher?: Omit<
+    React.ComponentProps<typeof ComboboxContentWithFetcher>,
+    'multiple' | 'onSelect' | 'placeholder' | 'value'
+  >;
 } & Omit<React.ComponentProps<typeof Button>, 'role' | 'variant'>;
 
 export function AutoFormCombobox<T extends FieldValues>({
@@ -58,25 +72,60 @@ export function AutoFormCombobox<T extends FieldValues>({
   )._def.values;
 
   let values: [string, string][] = [];
-  if (!Array.isArray(baseValues)) {
-    values = Object.entries(baseValues as object);
-  } else {
-    values = baseValues.map(value => [value, value]);
+  if (!componentProps?.withFetcher) {
+    if (!Array.isArray(baseValues)) {
+      values = Object.entries(baseValues as object);
+    } else {
+      values = baseValues.map(value => [value, value]);
+    }
   }
 
-  const buttonPlaceholder = () => {
-    if (componentProps?.multiple && Array.isArray(value)) {
-      return t('selected', { count: value.length });
+  const {
+    withFetcher,
+    placeholderSearchInput,
+    multiple,
+    labels,
+    placeholder,
+    ...props
+  } = componentProps ?? {};
+
+  const onSelectWithFetcher = ({
+    key,
+    value,
+  }: {
+    key: string;
+    value: string | StringLanguage[];
+  }) => {
+    const currentValue:
+      | {
+          key: string;
+          value: string | StringLanguage[];
+        }
+      | {
+          key: string;
+          value: string | StringLanguage[];
+        }[]
+      | undefined = field.value;
+    const currentArrayValues = Array.isArray(currentValue)
+      ? currentValue
+      : currentValue
+        ? [currentValue]
+        : [];
+
+    const findKey = currentArrayValues.find(el => el.key === key);
+
+    if (multiple) {
+      field.onChange(
+        findKey
+          ? currentArrayValues.filter(el => el.key !== key)
+          : [...currentArrayValues, { key, value }],
+      );
+
+      return;
     }
 
-    const current = values.find(item => item[0] === value);
-    const item = current?.[1];
-
-    if (current) {
-      return componentProps?.labels?.[current[0]] ?? item;
-    }
-
-    return item ?? t('select_option');
+    field.onChange(findKey ? undefined : { key, value });
+    setOpen(false);
   };
 
   return (
@@ -98,85 +147,103 @@ export function AutoFormCombobox<T extends FieldValues>({
         >
           <PopoverTrigger asChild>
             <FormControl>
-              <Button
-                ariaLabel={label ?? ''}
-                className={cn(
-                  'w-full justify-start',
-                  componentProps?.className,
-                )}
+              <ComboBoxButton
+                className={componentProps?.className}
                 disabled={isDisabled || componentProps?.disabled}
-                role="combobox"
-                variant="outline"
-                {...componentProps}
-              >
-                {buttonPlaceholder()}
-                <ChevronsUpDownIcon className="ml-auto size-4 shrink-0 opacity-50" />
-              </Button>
+                field={field}
+                label={label}
+                labels={labels}
+                multiple={multiple}
+                placeholder={placeholder}
+                values={values}
+                withFetcher={!!withFetcher}
+                {...props}
+              />
             </FormControl>
           </PopoverTrigger>
           {ChildComponent && <ChildComponent field={field} />}
         </AutoFormInputWrapper>
-        <PopoverContent className="p-0">
-          <Command>
-            <CommandInput
-              placeholder={
-                componentProps?.placeholderSearchInput
-                  ? componentProps.placeholderSearchInput
-                  : t('search_placeholder')
-              }
-            />
-            <CommandList>
-              <CommandEmpty>{t('no_results')}</CommandEmpty>
-              <CommandGroup>
-                {values.map(([valueItem, labelFromProps]) => {
-                  const label =
-                    componentProps?.labels?.[valueItem] ?? labelFromProps;
-                  const currentArrayValues = Array.isArray(value)
-                    ? value
-                    : value
-                      ? [value]
-                      : [];
 
-                  return (
-                    <CommandItem
-                      key={valueItem}
-                      onSelect={() => {
-                        if (componentProps?.multiple) {
-                          field.onChange(
-                            currentArrayValues.includes(valueItem)
-                              ? currentArrayValues.filter(
-                                  el => el !== valueItem,
-                                )
-                              : [...currentArrayValues, valueItem],
-                          );
+        <PopoverContent align="start" className="p-0">
+          {withFetcher ? (
+            <React.Suspense fallback={<Loader className="p-4" />}>
+              <ComboboxContentWithFetcher
+                {...withFetcher}
+                multiple={multiple}
+                onSelect={onSelectWithFetcher}
+                placeholder={placeholderSearchInput}
+                value={field.value}
+              />
+            </React.Suspense>
+          ) : (
+            <Command>
+              <CommandInput
+                placeholder={
+                  placeholderSearchInput
+                    ? placeholderSearchInput
+                    : t('search_placeholder')
+                }
+              />
+              <CommandList>
+                <CommandEmpty>{t('no_results')}</CommandEmpty>
+                <CommandGroup>
+                  {values.map(([valueItem, labelFromProps]) => {
+                    const label = labels?.[valueItem] ?? labelFromProps;
+                    const currentArrayValues = Array.isArray(value)
+                      ? value
+                      : value
+                        ? [value]
+                        : [];
 
-                          return;
-                        }
+                    return (
+                      <CommandItem
+                        key={valueItem}
+                        onSelect={() => {
+                          if (multiple) {
+                            field.onChange(
+                              currentArrayValues.includes(valueItem)
+                                ? currentArrayValues.filter(
+                                    el => el !== valueItem,
+                                  )
+                                : [...currentArrayValues, valueItem],
+                            );
 
-                        field.onChange(valueItem);
-                        setOpen(false);
-                      }}
-                      value={labelFromProps}
-                    >
-                      <Check
-                        className={cn(
-                          'mr-2 size-4',
-                          (
-                            componentProps?.multiple
-                              ? currentArrayValues.includes(valueItem)
-                              : value === valueItem
-                          )
-                            ? 'opacity-100'
-                            : 'opacity-0',
+                            return;
+                          }
+
+                          field.onChange(valueItem);
+                          setOpen(false);
+                        }}
+                        value={labelFromProps}
+                      >
+                        {multiple ? (
+                          <div
+                            className={cn(
+                              'border-primary mr-2 flex size-4 items-center justify-center rounded-sm border',
+                              currentArrayValues.includes(valueItem)
+                                ? 'bg-primary text-primary-foreground'
+                                : 'opacity-50 [&_svg]:invisible',
+                            )}
+                          >
+                            <Check />
+                          </div>
+                        ) : (
+                          <Check
+                            className={cn(
+                              'mr-2 size-4',
+                              value === valueItem ? 'opacity-100' : 'opacity-0',
+                            )}
+                          />
                         )}
-                      />
-                      {label}
-                    </CommandItem>
-                  );
-                })}
-              </CommandGroup>
-            </CommandList>
-          </Command>
+
+                        {label}
+                      </CommandItem>
+                    );
+                  })}
+                </CommandGroup>
+              </CommandList>
+            </Command>
+          )}
         </PopoverContent>
       </Popover>
 

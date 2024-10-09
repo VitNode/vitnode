@@ -674,6 +674,12 @@ export type PageInfo = {
   totalCount: Scalars['Float']['output'];
 };
 
+export type PermissionsAdminStaffAdministrators = {
+  __typename?: 'PermissionsAdminStaffAdministrators';
+  permissions: Array<ShowAdminPermissionsAdminPluginsObj>;
+  plugin_code: Scalars['String']['output'];
+};
+
 export type Query = {
   __typename?: 'Query';
   admin__core_authorization_settings__show: ShowAdminAuthorizationSettingsObj;
@@ -1049,6 +1055,7 @@ export type ShowAdminStaffAdministratorsObj = {
   __typename?: 'ShowAdminStaffAdministratorsObj';
   edges: Array<ShowAdminStaffAdministrators>;
   pageInfo: PageInfo;
+  permissions: Array<PermissionsAdminStaffAdministrators>;
 };
 
 export type ShowAdminStaffAdministratorsSortByArgs = {
