@@ -57,7 +57,7 @@ const init = ({ dev }: { dev: boolean }) => {
     const packageFromCopyPath = join(packagePath, file.path, file.file);
     const rootToCopyPath = join(process.cwd(), file.path);
 
-    fs.cpSync(packageFromCopyPath, rootToCopyPath, { recursive: true });
+    fs.writeFileSync(packageFromCopyPath, rootToCopyPath);
   });
 
   // Stage 3 - Force copy folders
@@ -71,7 +71,7 @@ const init = ({ dev }: { dev: boolean }) => {
     const packageFromCopyPath = join(packagePath, folder);
     const rootToCopyPath = join(process.cwd(), folder);
 
-    fs.writeFileSync(packageFromCopyPath, rootToCopyPath);
+    fs.cpSync(packageFromCopyPath, rootToCopyPath, { recursive: true });
   });
 
   // Stage 5 - Copy folders if not exist
