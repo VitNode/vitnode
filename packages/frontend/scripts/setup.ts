@@ -55,9 +55,9 @@ const init = ({ dev }: { dev: boolean }) => {
   // Stage 2 - Force files
   forcePathFiles.forEach(file => {
     const packageFromCopyPath = join(packagePath, file.path, file.file);
-    const rootToCopyPath = join(process.cwd(), file.path);
+    const rootToCopyPath = join(process.cwd(), file.path, file.file);
 
-    fs.writeFileSync(packageFromCopyPath, rootToCopyPath);
+    fs.copyFileSync(packageFromCopyPath, rootToCopyPath);
   });
 
   // Stage 3 - Force copy folders
