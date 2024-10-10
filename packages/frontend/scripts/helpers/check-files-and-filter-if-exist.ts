@@ -76,10 +76,13 @@ export const checkFilesAndFilterIfExist = ({
     // Reconstruct the path key without namespaces
     const pathKey = nonNamespaceSegments.join(sep);
 
-    // If this pathKey hasn't been seen before, add it to the set and keep the full path
+    // If this pathKey hasn't been seen before, add it to the set and keep the relative path
     if (!uniquePathsSet.has(pathKey)) {
       uniquePathsSet.add(pathKey);
-      uniqueDirectoryPaths.push(fullPath);
+
+      // Push the relative path from packagesFromCopyPath instead of the full path
+      const pathWithoutPackagePath = relative(packagesFromCopyPath, fullPath);
+      uniqueDirectoryPaths.push(pathWithoutPackagePath);
     }
     // Else, it's a duplicate and we skip it
   }
