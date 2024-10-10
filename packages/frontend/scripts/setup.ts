@@ -89,9 +89,13 @@ const init = ({ dev }: { dev: boolean }) => {
     dirPath: join(process.cwd(), 'src', 'app'),
   });
 
-  foldersOptional.forEach(folders => {
-    const packageFromCopyPath = join(packagePath, folders);
-    const rootToCopyPath = join(process.cwd(), folders);
+  foldersOptional.forEach(folder => {
+    const packageFromCopyPath = join(packagePath, folder);
+    const rootToCopyPath = join(process.cwd(), folder);
+
+    console.log(
+      `${initConsole} Copying from "${packageFromCopyPath}" to "${rootToCopyPath}"...`,
+    );
 
     fs.cpSync(packageFromCopyPath, rootToCopyPath, { recursive: true });
   });
