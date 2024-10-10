@@ -57,16 +57,7 @@ const init = ({ dev }: { dev: boolean }) => {
     const packageFromCopyPath = join(packagePath, file.path, file.file);
     const rootToCopyPath = join(process.cwd(), file.path);
 
-    if (!fs.existsSync(packageFromCopyPath)) {
-      console.error(
-        `${initConsole} ⛔️ "${packageFromCopyPath}" file does not exist in the frontend package. Please report this issue to the VitNode GitHub.`,
-      );
-      process.exit(1);
-    }
-
-    if (!fs.existsSync(rootToCopyPath)) {
-      fs.mkdirSync(rootToCopyPath, { recursive: true });
-    }
+    fs.cpSync(packageFromCopyPath, rootToCopyPath, { recursive: true });
   });
 
   // Stage 3 - Force copy folders
