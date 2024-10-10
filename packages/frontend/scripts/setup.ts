@@ -84,18 +84,14 @@ const init = ({ dev }: { dev: boolean }) => {
   });
 
   // Stage 5 - Copy folders if not exist
-  const foldersOptional = checkFilesAndFilterIfExist({
-    packagesFromCopyPath: packagePath,
-    dirPath: join(process.cwd(), 'src', 'app'),
-  });
+  const foldersOptional = checkFilesAndFilterIfExist(
+    packagePath,
+    process.cwd(),
+  );
 
   foldersOptional.forEach(folder => {
     const packageFromCopyPath = join(packagePath, folder);
     const rootToCopyPath = join(process.cwd(), folder);
-
-    console.log(
-      `${initConsole} Copying from "${packageFromCopyPath}" to "${rootToCopyPath}"...`,
-    );
 
     fs.cpSync(packageFromCopyPath, rootToCopyPath, { recursive: true });
   });

@@ -1,91 +1,132 @@
-import { readdirSync } from 'fs';
-import { dirname, join, relative, sep } from 'path';
+import * as fs from 'fs';
+import * as path from 'path';
 
-export const checkFilesAndFilterIfExist = ({
-  packagesFromCopyPath,
-  dirPath,
-}: {
-  dirPath: string;
-  packagesFromCopyPath: string;
-}): string[] => {
-  const pageFiles: string[] = [];
+/**
+ * Recursively checks for 'page.tsx' files in `fromPath` and returns an array of relative paths
+ * of those that do not exist in `toPath`, sorted with root folders on top and nested items below.
+ * Skips paths if their non-namespace equivalent exists in `toPath` under any namespace directories.
+ * @param fromPath - The source directory containing files and folders to check.
+ * @param toPath - The target directory to compare against.
+ * @returns An array of relative paths from `fromPath` where 'page.tsx' files do not exist in `toPath`, without 'page.tsx' at the end, sorted by depth.
+ */
+export function checkFilesAndFilterIfExist(
+  fromPath: string,
+  toPath: string,
+): string[] {
+  const missingPaths: string[] = [];
+  const toPathNormalizedSet = new Set<string>();
 
-  function traverseDirectory(currentPath: string) {
-    const entries = readdirSync(currentPath, { withFileTypes: true });
+  /**
+   * Normalizes a path by removing namespace directories (enclosed in parentheses or square brackets).
+   * @param dirPath - The directory path to normalize.
+   * @returns The normalized path.
+   */
+  function normalizePath(dirPath: string): string {
+    const segments = dirPath.split(path.sep);
+    const normalizedSegments = segments.filter(segment => {
+      return !(
+        (segment.startsWith('(') && segment.endsWith(')')) ||
+        (segment.startsWith('[') && segment.endsWith(']'))
+      );
+    });
+
+    return normalizedSegments.join(path.sep);
+  }
+
+  /**
+   * Traverses `toPath` to build a map of normalized paths to their actual paths.
+   * @param currentPath - The current directory path being traversed.
+   */
+  function traverseToPath(currentPath: string) {
+    const entries = fs.readdirSync(currentPath, { withFileTypes: true });
+
     for (const entry of entries) {
-      const fullPath = join(currentPath, entry.name);
+      const fullPath = path.join(currentPath, entry.name);
+
       if (entry.isDirectory()) {
-        traverseDirectory(fullPath);
-      } else if (entry.isFile() && entry.name === 'page.tsx') {
-        pageFiles.push(fullPath);
+        traverseToPath(fullPath);
+      } else if (entry.name === 'page.tsx') {
+        const relativePath = path.relative(toPath, fullPath);
+        const dirPath = path.dirname(relativePath);
+        const normalizedPath = normalizePath(dirPath);
+        toPathNormalizedSet.add(normalizedPath);
       }
     }
   }
 
-  traverseDirectory(dirPath);
+  traverseToPath(toPath);
 
-  // Sort the results based on directory depth
-  pageFiles.sort((a, b) => {
-    const depthA = a.split(sep).length;
-    const depthB = b.split(sep).length;
+  /**
+   * Recursively traverses `fromPath` and updates the missingPaths array.
+   * @param currentPath - The current directory path being traversed.
+   */
+  function traverseFromPath(currentPath: string) {
+    const entries = fs.readdirSync(currentPath, { withFileTypes: true });
 
-    if (depthA !== depthB) {
-      return depthA - depthB; // Shallower paths come first
-    } else {
-      return a.localeCompare(b); // If same depth, sort alphabetically
+    for (const entry of entries) {
+      const fullPath = path.join(currentPath, entry.name);
+      const relativePath = path.relative(fromPath, fullPath);
+
+      if (entry.isDirectory()) {
+        traverseFromPath(fullPath);
+      } else if (entry.name === 'page.tsx') {
+        const dirPath = path.dirname(relativePath);
+
+        // Skip paths that consist only of namespace directories after "app"
+        if (!hasNonBracketedSegment(dirPath)) {
+          continue;
+        }
+
+        const normalizedPath = normalizePath(dirPath);
+
+        if (!toPathNormalizedSet.has(normalizedPath)) {
+          missingPaths.push(dirPath);
+        }
+      }
     }
-  });
-
-  // Filter out the admin paths
-  const filteredFiles = pageFiles.filter(
-    file => !file.includes(join('src', 'app', '[locale]', 'admin')),
-  );
-
-  // Remove 'page.tsx' from the end of each path to get the directory
-  const directoryPaths = filteredFiles.map(file => dirname(file));
-
-  // Remove directories where the last segment is a namespace
-  const directoryPathsWithoutEndingNamespace = directoryPaths.filter(
-    fullPath => {
-      // Get the last segment of the path
-      const segments = fullPath.split(sep);
-      const lastSegment = segments[segments.length - 1];
-
-      // Exclude the path if the last segment is a namespace
-      return !(lastSegment.startsWith('(') && lastSegment.endsWith(')'));
-    },
-  );
-
-  // Remove duplicates based on paths without namespace segments
-  const basePath = join(packagesFromCopyPath, 'src', 'app', '[locale]');
-  const uniquePathsSet = new Set<string>();
-  const uniqueDirectoryPaths: string[] = [];
-
-  for (const fullPath of directoryPathsWithoutEndingNamespace) {
-    // Get the relative path from basePath
-    const relativePath = relative(basePath, fullPath);
-
-    // Split the path into segments
-    const segments = relativePath.split(sep);
-
-    // Remove namespace segments (those starting and ending with parentheses)
-    const nonNamespaceSegments = segments.filter(
-      segment => !(segment.startsWith('(') && segment.endsWith(')')),
-    );
-
-    // Reconstruct the path key without namespaces
-    const pathKey = nonNamespaceSegments.join(sep);
-
-    // If this pathKey hasn't been seen before, add it to the set and keep the relative path
-    if (!uniquePathsSet.has(pathKey)) {
-      uniquePathsSet.add(pathKey);
-
-      // Push the relative path from packagesFromCopyPath instead of the full path
-      const pathWithoutPackagePath = relative(packagesFromCopyPath, fullPath);
-      uniqueDirectoryPaths.push(pathWithoutPackagePath);
-    }
-    // Else, it's a duplicate and we skip it
   }
 
-  return uniqueDirectoryPaths;
-};
+  traverseFromPath(fromPath);
+
+  // Sort missingPaths by depth (number of path separators), with shallower paths first
+  missingPaths.sort((a, b) => {
+    const depthA = a.split(path.sep).length;
+    const depthB = b.split(path.sep).length;
+
+    return depthA - depthB;
+  });
+
+  return missingPaths;
+}
+
+/**
+ * Checks if the path contains any directory segments not enclosed in parentheses or square brackets, after "app".
+ * @param relativePath - The relative path to check.
+ * @returns True if there is at least one segment not enclosed in parentheses or square brackets after "app".
+ */
+function hasNonBracketedSegment(relativePath: string): boolean {
+  const segments = relativePath.split(path.sep);
+
+  // Find the index of "app" in the segments
+  const appIndex = segments.findIndex(segment => segment === 'app');
+
+  // Start checking from the segment after "app"
+  const startIndex = appIndex >= 0 ? appIndex + 1 : 0;
+
+  for (let i = startIndex; i < segments.length; i++) {
+    const segment = segments[i];
+    // Skip empty segments (can occur if path starts with separator)
+    if (segment === '') continue;
+
+    if (
+      !(
+        (segment.startsWith('(') && segment.endsWith(')')) ||
+        (segment.startsWith('[') && segment.endsWith(']'))
+      )
+    ) {
+      return true; // Found a non-namespace segment
+    }
+  }
+
+  return false; // All segments are namespace directories
+}
