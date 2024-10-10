@@ -71,7 +71,7 @@ const init = ({ dev }: { dev: boolean }) => {
     const packageFromCopyPath = join(packagePath, folder);
     const rootToCopyPath = join(process.cwd(), folder);
 
-    fs.cpSync(packageFromCopyPath, rootToCopyPath, { recursive: true });
+    fs.writeFileSync(packageFromCopyPath, rootToCopyPath);
   });
 
   // Stage 5 - Copy folders if not exist
