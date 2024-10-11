@@ -1,5 +1,5 @@
 import { Args, Query, Resolver } from '@nestjs/graphql';
-import { SkipThrottle } from '@nestjs/throttler';
+// import { SkipThrottle } from '@nestjs/throttler';
 
 import { ShowCoreLanguagesArgs, ShowCoreLanguagesObj } from './show.dto';
 import { ShowCoreLanguageService } from './show.service';
@@ -8,7 +8,7 @@ import { ShowCoreLanguageService } from './show.service';
 export class ShowCoreLanguagesResolver {
   constructor(private readonly service: ShowCoreLanguageService) {}
 
-  @SkipThrottle()
+  // @SkipThrottle()
   @Query(() => ShowCoreLanguagesObj)
   async core_languages__show(
     @Args() args: ShowCoreLanguagesArgs,

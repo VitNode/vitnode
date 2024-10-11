@@ -7,7 +7,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { JwtModule } from '@nestjs/jwt';
 import { ScheduleModule } from '@nestjs/schedule';
 import { ServeStaticModule } from '@nestjs/serve-static';
-import { ThrottlerModule } from '@nestjs/throttler';
+// import { ThrottlerModule } from '@nestjs/throttler';
 import { LanguageModel } from 'ai';
 import { join } from 'path';
 
@@ -199,12 +199,12 @@ export class VitNodeCoreModule {
           load: [config],
           envFilePath: pathToEnvFile,
         }),
-        ThrottlerModule.forRoot([
-          {
-            ttl: 1000,
-            limit: 30,
-          },
-        ]),
+        // ThrottlerModule.forRoot([
+        //   {
+        //     ttl: 1000,
+        //     limit: 30,
+        //   },
+        // ]),
         GraphQLModule.forRoot<ApolloDriverConfig>({
           driver: ApolloDriver,
           autoSchemaFile: ABSOLUTE_PATHS_BACKEND.schema,
@@ -226,12 +226,12 @@ export class VitNodeCoreModule {
         GlobalAdminEmailModule.register({ email }),
         GlobalCoreAiModule.register({ aiModel: ai }),
       ],
-      providers: [
-        {
-          provide: APP_GUARD,
-          useClass: GqlThrottlerGuard,
-        },
-      ],
+      // providers: [
+      //   {
+      //     provide: APP_GUARD,
+      //     useClass: GqlThrottlerGuard,
+      //   },
+      // ],
     };
   }
 }

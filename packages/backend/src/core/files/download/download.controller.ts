@@ -7,14 +7,12 @@ import {
   Res,
   StreamableFile,
 } from '@nestjs/common';
-import { SkipThrottle } from '@nestjs/throttler';
 import { Response } from 'express';
 import { createReadStream } from 'fs';
 import { join } from 'path';
 
 import { ABSOLUTE_PATHS_BACKEND } from '../../..';
 
-@SkipThrottle()
 @Controller('secure_files')
 export class DownloadSecureFilesController {
   constructor(private readonly databaseService: InternalDatabaseService) {}

@@ -9,6 +9,7 @@ import {
   graphqlUploadExpress,
   ProcessRequestOptions,
 } from './graphql-upload/graphql-upload-express';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 interface CorsOptionsMain extends Omit<CorsOptions, 'credentials'> {
   origin?: (RegExp | string)[];
@@ -20,6 +21,13 @@ interface Args {
 }
 
 export const nestjsMainApp = async (app: INestApplication, options?: Args) => {
+  const config = new DocumentBuilder()
+    .setTitle('VitNode API')
+    .setVersion('1.0')
+    .build();
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api', app, document);
+
   app.use(cookieParser());
   app.use(
     helmet({

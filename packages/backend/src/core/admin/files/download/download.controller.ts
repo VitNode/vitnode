@@ -7,7 +7,6 @@ import {
   Res,
   StreamableFile,
 } from '@nestjs/common';
-import { SkipThrottle } from '@nestjs/throttler';
 import { Request, Response } from 'express';
 import { createReadStream, existsSync, unlinkSync } from 'fs';
 import { join } from 'path';
@@ -16,7 +15,6 @@ import { ABSOLUTE_PATHS_BACKEND } from '../../../..';
 import { InternalAuthorizationCoreSessionsService } from '../../../sessions/authorization/internal/internal_authorization.service';
 import { AuthorizationAdminSessionsService } from '../../sessions/authorization/authorization.service';
 
-@SkipThrottle()
 @Controller('files')
 export class DownloadFilesAdminController {
   constructor(

@@ -1,5 +1,5 @@
 import { Query, Resolver } from '@nestjs/graphql';
-import { SkipThrottle } from '@nestjs/throttler';
+// import { SkipThrottle } from '@nestjs/throttler';
 
 import { ShowCoreMiddlewareObj } from './show.dto';
 import { ShowCoreMiddlewareService } from './show.service';
@@ -8,7 +8,7 @@ import { ShowCoreMiddlewareService } from './show.service';
 export class ShowCoreMiddlewareResolver {
   constructor(private readonly service: ShowCoreMiddlewareService) {}
 
-  @SkipThrottle()
+  // @SkipThrottle()
   @Query(() => ShowCoreMiddlewareObj)
   async core_middleware__show(): Promise<ShowCoreMiddlewareObj> {
     return this.service.show();

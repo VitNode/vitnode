@@ -44,7 +44,7 @@ export const i18nConfigVitNode = async ({
     }
   } catch (_) {
     // If the request fails, we will use the default plugins
-    plugins = ['core', 'admin', 'welcome'];
+    plugins = ['core', 'admin'];
   }
 
   let messages = {};
