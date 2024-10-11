@@ -295,18 +295,6 @@ function logError(error) {
         file: 'not-found.tsx',
       },
       {
-        folder: join('src', 'app'),
-        file: 'layout.tsx',
-      },
-      {
-        folder: join('src', 'app', `[locale]`, 'admin'),
-        file: 'layout.tsx',
-      },
-      {
-        folder: join('src', 'app', `[locale]`, 'admin', '(auth)'),
-        file: 'layout.tsx',
-      },
-      {
         folder: join('src', 'plugins', 'core', 'langs'),
         file: 'en.json',
       },

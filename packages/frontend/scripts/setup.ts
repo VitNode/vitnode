@@ -39,10 +39,6 @@ const init = ({ dev }: { dev: boolean }) => {
       file: 'not-found.tsx',
     },
     {
-      path: join('src', 'app'),
-      file: 'layout.tsx',
-    },
-    {
       path: join('src', 'plugins', 'core', 'langs'),
       file: 'en.json',
     },

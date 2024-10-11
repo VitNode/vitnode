@@ -47,7 +47,6 @@
       "types": "./dist/src/views/admin/views/*.tsx",
       "default": "./dist/src/views/admin/views/*.js"
     },
-    "./admin/css": "./src/global.css",
     "./components/*": {
       "types": "./dist/src/components/*.tsx",
       "default": "./dist/src/components/*.js"

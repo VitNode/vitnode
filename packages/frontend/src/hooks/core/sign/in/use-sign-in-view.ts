@@ -18,14 +18,22 @@ export const useSignInView = () => {
     form: UseFormReturn<z.infer<typeof formSchema>>,
   ) => {
     setError('');
-    form.reset({}, { keepValues: true });
+    // form.reset({}, { keepValues: true });
     const mutation = await mutationApi(values);
     if (mutation?.error) {
       setError(mutation.error);
     }
 
+    await new Promise<void>(resolve => {
+      form.reset({}, { keepValues: true });
+
+      resolve();
+    });
+
     // Redirect to home
-    window.location.href = '/';
+    setTimeout(() => {
+      window.location.href = '/';
+    }, 0);
   };
 
   return {
