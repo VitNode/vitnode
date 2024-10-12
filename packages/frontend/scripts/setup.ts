@@ -5,6 +5,7 @@ import * as fs from 'fs';
 import { join } from 'path';
 
 import { checkFilesAndFilterIfExist } from './helpers/check-files-and-filter-if-exist';
+import { codegen } from './codegen';
 
 const init = ({ dev }: { dev: boolean }) => {
   const initConsole = '\x1b[34m[VitNode]\x1b[0m \x1b[33m[Frontend]\x1b[0m';
@@ -91,4 +92,6 @@ if (process.argv[2] === 'init') {
   init({ dev: false });
 } else if (process.argv[2] === 'dev') {
   init({ dev: true });
+} else if (process.argv[2] === 'codegen') {
+  codegen();
 }

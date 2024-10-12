@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 
@@ -9,7 +10,6 @@ import {
   graphqlUploadExpress,
   ProcessRequestOptions,
 } from './graphql-upload/graphql-upload-express';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 interface CorsOptionsMain extends Omit<CorsOptions, 'credentials'> {
   origin?: (RegExp | string)[];
@@ -26,7 +26,9 @@ export const nestjsMainApp = async (app: INestApplication, options?: Args) => {
     .setVersion('1.0')
     .build();
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+  SwaggerModule.setup('api', app, document, {
+    jsonDocumentUrl: '/api/swagger.json',
+  });
 
   app.use(cookieParser());
   app.use(

@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 
+import { MiddlewareController } from './middleware.controller';
 import { CoreMiddlewareCron } from './middleware.cron';
 import { ShowCoreMiddlewareResolver } from './show/show.resolver';
 import { ShowCoreMiddlewareService } from './show/show.service';
@@ -10,5 +11,6 @@ import { ShowCoreMiddlewareService } from './show/show.service';
     ShowCoreMiddlewareService,
     ShowCoreMiddlewareResolver,
   ],
+  controllers: [MiddlewareController],
 })
 export class CoreMiddlewareModule {}
