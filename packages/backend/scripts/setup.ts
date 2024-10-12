@@ -27,28 +27,14 @@ const getPluginsPath = () => {
 };
 
 const init = async () => {
-  let skipDatabase = false;
-  if (process.argv[3] === '--skip-database') {
-    const skipDatabaseMessage = `${initConsole} '--skip-database' flag detected. Skipping database setup...`;
-    console.log(skipDatabaseMessage);
-    skipDatabase = true;
-  }
-
   const pluginsPath = getPluginsPath();
   console.log(
-    `${initConsole} [1/${skipDatabase ? 2 : 6}] Setup the project. Generating the config file...`,
+    `${initConsole} [1/6] Setup the project. Generating the config file...`,
   );
   generateConfig({ pluginsPath });
 
-  console.log(
-    `${initConsole} [2/${skipDatabase ? 2 : 6}] Copying files into backend...`,
-  );
+  console.log(`${initConsole} [2/6] Copying files into backend...`);
   copyFiles({ pluginsPath });
-
-  if (skipDatabase) {
-    console.log(`${initConsole} ✅ Project setup complete.`);
-    process.exit(0);
-  }
 
   console.log(`${initConsole} [3/6] Generating database migrations...`);
   await generateDatabaseMigrations();

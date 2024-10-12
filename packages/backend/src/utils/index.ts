@@ -1,4 +1,3 @@
-export * from './codegen';
 export type * from './context';
 export * from './database/internal_database.service';
 export * from './guards';

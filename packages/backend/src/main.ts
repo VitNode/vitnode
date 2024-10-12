@@ -4,7 +4,6 @@ import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.int
 import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 
-import { execShellCommand } from './functions';
 import {
   graphqlUploadExpress,
   ProcessRequestOptions,
@@ -57,25 +56,16 @@ export const nestjsMainApp = async (app: INestApplication, options?: Args) => {
 
   const port = Number(process.env.PORT) || 8080;
   const hostname = process.env.HOSTNAME ?? 'localhost';
-  await app.listen(port, hostname, async () => {
+  await app.listen(port, hostname, () => {
     const initConsole = '\x1b[34m[VitNode]\x1b[0m';
-
-    if (process.env.NODE_ENV === 'development') {
-      try {
-        console.log(
-          initConsole,
-          'GraphQL API is generating, please wait for a moment...',
-        );
-
-        await execShellCommand('npm run codegen');
-      } catch (error) {
-        console.error(initConsole, error);
-      }
-    }
 
     console.log(
       initConsole,
-      `Application is running on: http://${hostname}:${port}/graphql`,
+      `Backend is running on: http://${hostname}:${port}/`,
+    );
+    console.log(
+      initConsole,
+      `Apollo GraphQL Playground is running on: http://${hostname}:${port}/graphql`,
     );
   });
 };

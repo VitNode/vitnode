@@ -14,13 +14,7 @@ export const codegenConfig = ({
     ignoreNoDocuments: true,
     documents: [
       ...(Array.isArray(config?.documents) ? config.documents : []),
-      join(
-        process.cwd(),
-        '..',
-        'frontend',
-        'src',
-        'plugins/**/graphql/**/*.gql',
-      ),
+      join(process.cwd(), 'src', 'plugins/**/graphql/**/*.gql'),
     ],
     config: {
       maybeValue: 'T',

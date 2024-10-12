@@ -84,6 +84,7 @@ export const createPackagesJSON = ({
       start: 'next start',
       lint: 'eslint .',
       'lint:fix': 'eslint . --fix',
+      codegen: 'graphql-codegen',
     },
     dependencies: {
       '@hookform/resolvers': '^3.9.0',
@@ -99,6 +100,7 @@ export const createPackagesJSON = ({
       zod: '^3.23.8',
     },
     devDependencies: {
+      '@graphql-codegen/cli': '^5.0.3',
       '@types/node': '^22.7.5',
       '@types/react': '^18.3.10',
       '@types/react-dom': '^18.3.0',
@@ -124,7 +126,6 @@ export const createPackagesJSON = ({
     scripts: {
       'drizzle-kit': 'drizzle-kit',
       'config:init': 'vitnode-backend init',
-      codegen: 'graphql-codegen',
       dev: 'cross-env NODE_ENV=development nest start -w',
       build: 'nest build',
       start: 'node dist/main',
@@ -147,7 +148,6 @@ export const createPackagesJSON = ({
       'vitnode-backend': `^${pkg.version}`,
     },
     devDependencies: {
-      '@graphql-codegen/cli': '^5.0.3',
       '@nestjs/cli': '^10.4.5',
       '@nestjs/platform-express': '^10.4.4',
       '@nestjs/schematics': '^10.1.4',
