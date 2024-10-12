@@ -193,6 +193,9 @@ importers:
         specifier: ^3.23.8
         version: 3.23.8
     devDependencies:
+      '@graphql-codegen/cli':
+        specifier: ^5.0.3
+        version: 5.0.3(@types/node@22.7.5)(graphql@16.9.0)(typescript@5.6.3)
       '@types/node':
         specifier: ^22.7.5
         version: 22.7.5

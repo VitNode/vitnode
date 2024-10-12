@@ -10,7 +10,6 @@
     "start": "node dist/main",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "codegen": "graphql-codegen",
     "db": "vitnode-backend db"
   },
   "dependencies": {
