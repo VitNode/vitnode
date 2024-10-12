@@ -3,6 +3,7 @@
   "license": "MIT",
   "scripts": {
     "config:init": "cd apps/backend && pnpm config:init && cd ../..",
+    "config:init:skip-database": "cd apps/backend && pnpm config:init --skip-database && cd ../..",
     "build:scripts": "turbo build:scripts && pnpm i",
     "build": "turbo build",
     "dev": "pnpm build:scripts && turbo dev",
