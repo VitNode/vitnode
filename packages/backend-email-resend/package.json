@@ -1,6 +1,6 @@
 {
   "name": "vitnode-backend-email-resend",
-  "version": "0.0.9-canary.78",
+  "version": "0.0.9-canary.79",
   "description": "Resend email provider for VitNode projects.",
   "author": "VitNode Team",
   "license": "MIT",
