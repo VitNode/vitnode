@@ -50,11 +50,11 @@ export const UsersMembersAdminView = async ({
 }: UsersMembersAdminViewProps) => {
   const { groups } = await searchParams;
   const variables: Admin__Core_Members__ShowQueryVariables = {
-    ...getPaginationTool({
+    ...(await getPaginationTool({
       searchParams,
       sortByEnum: ShowAdminMembersSortingColumnEnum,
       defaultPageSize: 10,
-    }),
+    })),
     groups: Array.isArray(groups)
       ? groups.map(group => Number(group))
       : Number(groups),

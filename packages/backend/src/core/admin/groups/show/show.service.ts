@@ -1,7 +1,6 @@
 import { StringLanguageHelper } from '@/core/helpers/string_language/helpers.service';
 import { core_groups } from '@/database/schema/groups';
 import { core_users } from '@/database/schema/users';
-import { inputPaginationCursor, outputPagination } from '@/functions';
 import { SortDirectionEnum } from '@/utils';
 import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
@@ -34,38 +33,31 @@ export class ShowAdminGroupsService {
     //     .then(res => res.map(({ item_id }) => item_id));
     // }
 
-    const pagination = await inputPaginationCursor({
+    const pagination = await this.databaseService.paginationCursor({
       cursor,
       database: core_groups,
-      databaseService: this.databaseService,
       first,
       last,
-      primaryCursor: {
-        column: 'id',
-        schema: core_groups.id,
-      },
+      primaryCursor: 'id',
       defaultSortBy: {
         direction: SortDirectionEnum.desc,
         column: 'updated',
       },
       sortBy,
+      query: async args =>
+        await this.databaseService.db.query.core_groups.findMany(args),
     });
 
-    // const where =
-    //   filtersName.length > 0 ? inArray(core_groups.id, filtersName) : undefined;
-
-    const edges = await this.databaseService.db.query.core_groups.findMany({
-      ...pagination,
-      // where: and(pagination.where, where),
+    const ids = pagination.edges.map(edge => edge.id);
+    const names = await this.stringLanguageHelper.get({
+      database: core_groups,
+      item_ids: ids,
+      plugin_code: 'core',
+      variables: ['name'],
     });
 
-    const totalCount = await this.databaseService.db
-      .select({ count: count() })
-      .from(core_groups);
-    // .where(where);
-
-    const currentEdges = await Promise.all(
-      edges.map(async edge => {
+    const edges = await Promise.all(
+      pagination.edges.map(async edge => {
         const usersCount = await this.databaseService.db
           .select({ count: count() })
           .from(core_users)
@@ -74,32 +66,19 @@ export class ShowAdminGroupsService {
         return {
           ...edge,
           users_count: usersCount[0].count,
+          content: {
+            files_allow_upload: edge.files_allow_upload,
+            files_max_storage_for_submit: edge.files_max_storage_for_submit,
+            files_total_max_storage: edge.files_total_max_storage,
+          },
+          name: names.filter(name => name.item_id === edge.id),
         };
       }),
     );
 
-    const ids = currentEdges.map(edge => edge.id);
-    const names = await this.stringLanguageHelper.get({
-      database: core_groups,
-      item_ids: ids,
-      plugin_code: 'core',
-      variables: ['name'],
-    });
-
-    return outputPagination({
-      edges: currentEdges.map(edge => ({
-        ...edge,
-        content: {
-          files_allow_upload: edge.files_allow_upload,
-          files_max_storage_for_submit: edge.files_max_storage_for_submit,
-          files_total_max_storage: edge.files_total_max_storage,
-        },
-        name: names.filter(name => name.item_id === edge.id),
-      })),
-      totalCount,
-      first,
-      cursor,
-      last,
-    });
+    return {
+      ...pagination,
+      edges,
+    };
   }
 }
