@@ -677,6 +677,7 @@ export type PageInfo = {
 export type PermissionsAdminStaffAdministrators = {
   __typename?: 'PermissionsAdminStaffAdministrators';
   permissions: Array<ShowAdminPermissionsAdminPluginsObj>;
+  plugin: Scalars['String']['output'];
   plugin_code: Scalars['String']['output'];
 };
 
@@ -995,14 +996,9 @@ export type ShowAdminNavPluginsObj = {
   keywords: Array<Scalars['String']['output']>;
 };
 
-export type ShowAdminPermissionsAdminPlugins = {
-  __typename?: 'ShowAdminPermissionsAdminPlugins';
-  id: Scalars['String']['output'];
-};
-
 export type ShowAdminPermissionsAdminPluginsObj = {
   __typename?: 'ShowAdminPermissionsAdminPluginsObj';
-  children: Array<ShowAdminPermissionsAdminPlugins>;
+  children: Array<Scalars['String']['output']>;
   id: Scalars['String']['output'];
 };
 

@@ -4,6 +4,7 @@ import { CreateAdminStaffAdministratorResolver } from './administrators/create/c
 import { CreateAdminStaffAdministratorsService } from './administrators/create/create.service';
 import { DeleteAdminStaffAdministratorsResolver } from './administrators/delete/delete.resolver';
 import { DeleteAdminStaffAdministratorsService } from './administrators/delete/delete.service';
+import { PermissionsAdminStaffAdministratorsService } from './administrators/permissions/permissions.service';
 import { ShowAdminStaffAdministratorResolver } from './administrators/show/show.resolver';
 import { ShowAdminStaffAdministratorsService } from './administrators/show/show.service';
 import { CreateAdminStaffModeratorsResolver } from './moderators/create/create.resolver';
@@ -27,6 +28,7 @@ import { ShowAdminStaffModeratorsService } from './moderators/show/show.service'
     DeleteAdminStaffAdministratorsResolver,
     DeleteAdminStaffModeratorsService,
     DeleteAdminStaffModeratorsResolver,
+    PermissionsAdminStaffAdministratorsService,
   ],
 })
 export class AdminStaffModule {}

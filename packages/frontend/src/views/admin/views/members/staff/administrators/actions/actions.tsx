@@ -2,10 +2,12 @@
 
 import { CreateActionsAdministratorsStaffAdmin } from './create';
 
-export const ActionsAdministratorsStaffAdmin = () => {
+export const ActionsAdministratorsStaffAdmin = (
+  props: React.ComponentProps<typeof CreateActionsAdministratorsStaffAdmin>,
+) => {
   return (
     <>
-      <CreateActionsAdministratorsStaffAdmin />
+      <CreateActionsAdministratorsStaffAdmin {...props} />
     </>
   );
 };

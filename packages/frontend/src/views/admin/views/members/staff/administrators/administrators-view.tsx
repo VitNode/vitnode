@@ -64,7 +64,9 @@ export const AdministratorsStaffAdminView = async ({
       ]}
     >
       <HeaderContent h1={t('title')}>
-        <ActionsAdministratorsStaffAdmin />
+        <ActionsAdministratorsStaffAdmin
+          permissions={data.admin__core_staff_administrators__show.permissions}
+        />
       </HeaderContent>
 
       <TableAdministratorsStaffAdmin {...data} />

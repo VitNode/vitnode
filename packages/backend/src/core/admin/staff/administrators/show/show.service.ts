@@ -7,6 +7,7 @@ import { getUser } from '@/utils/database/helpers/get-user';
 import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
 
+import { PermissionsAdminStaffAdministratorsService } from '../permissions/permissions.service';
 import {
   ShowAdminStaffAdministratorsArgs,
   ShowAdminStaffAdministratorsObj,
@@ -17,6 +18,7 @@ export class ShowAdminStaffAdministratorsService {
   constructor(
     private readonly databaseService: InternalDatabaseService,
     private readonly stringLanguageHelper: StringLanguageHelper,
+    private readonly permissionsService: PermissionsAdminStaffAdministratorsService,
   ) {}
 
   async show({
@@ -90,7 +92,7 @@ export class ShowAdminStaffAdministratorsService {
     return {
       ...pagination,
       edges,
-      permissions: [],
+      permissions: await this.permissionsService.getPermissions(),
     };
   }
 }

@@ -12,7 +12,7 @@ export const ContentPermissionsAdminDevPluginAdminView = (
     item => ({
       ...item,
       children: item.children.map(child => ({
-        ...child,
+        id: child,
         children: [],
       })),
     }),
@@ -24,6 +24,7 @@ export const ContentPermissionsAdminDevPluginAdminView = (
         return (
           <ItemPermissionsAdminDevPluginAdmin
             {...data}
+            children={data.children.map(child => child.id)}
             dataFromSSR={dataFromSSR}
             parentId={parentId?.toString()}
           />

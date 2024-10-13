@@ -40,7 +40,7 @@ export class CreateEditAdminPermissionsAdminPluginsService {
     // Check if the id already exists
     if (old_id !== id) {
       const existsPermission = parent
-        ? parent.children.find(child => child.id === id)
+        ? parent.children.find(child => child === id)
         : config.permissions_admin?.find(permission => permission.id === id);
 
       if (existsPermission) {
@@ -54,7 +54,7 @@ export class CreateEditAdminPermissionsAdminPluginsService {
     // Edit
     if (old_id) {
       const oldPermission = parent
-        ? parent.children.find(child => child.id === old_id)
+        ? parent.children.find(child => child === old_id)
         : config.permissions_admin?.find(
             permission => permission.id === old_id,
           );
@@ -73,10 +73,8 @@ export class CreateEditAdminPermissionsAdminPluginsService {
               return {
                 ...permission,
                 children: permission.children.map(child => {
-                  if (child.id === old_id) {
-                    return {
-                      id,
-                    };
+                  if (child === old_id) {
+                    return id;
                   }
 
                   return child;
@@ -129,13 +127,7 @@ export class CreateEditAdminPermissionsAdminPluginsService {
           if (permission.id === parent.id) {
             return {
               ...permission,
-              children: [
-                ...permission.children,
-                {
-                  id,
-                  children: [],
-                },
-              ],
+              children: [...permission.children, id],
             };
           }
 

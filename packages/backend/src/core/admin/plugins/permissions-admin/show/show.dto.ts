@@ -1,13 +1,10 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
-export class ShowAdminPermissionsAdminPlugins {
+export class ShowAdminPermissionsAdminPluginsObj {
+  @Field(() => [String])
+  children: string[];
+
   @Field(() => String)
   id: string;
-}
-
-@ObjectType()
-export class ShowAdminPermissionsAdminPluginsObj extends ShowAdminPermissionsAdminPlugins {
-  @Field(() => [ShowAdminPermissionsAdminPlugins])
-  children: ShowAdminPermissionsAdminPlugins[];
 }

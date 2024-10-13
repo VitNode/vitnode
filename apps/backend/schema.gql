@@ -467,12 +467,8 @@ type ShowAdminNavPluginsObj {
   keywords: [String!]!
 }
 
-type ShowAdminPermissionsAdminPlugins {
-  id: String!
-}
-
 type ShowAdminPermissionsAdminPluginsObj {
-  children: [ShowAdminPermissionsAdminPlugins!]!
+  children: [String!]!
   id: String!
 }
 

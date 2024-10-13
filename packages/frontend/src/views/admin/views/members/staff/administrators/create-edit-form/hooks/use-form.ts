@@ -21,6 +21,14 @@ export const useFormCreateEditFormGroupsMembersAdmin = () => {
       user: zodComboBoxWithFetcher.optional(),
       group: zodComboBoxWithFetcher.optional(),
       unrestricted: z.boolean().default(true),
+      permissions: z
+        .array(
+          z.object({
+            id: z.string(),
+            children: z.array(z.string()),
+          }),
+        )
+        .default([]),
     })
     .refine(data => {
       return data.type === 'group' ? data.group : data.user;
