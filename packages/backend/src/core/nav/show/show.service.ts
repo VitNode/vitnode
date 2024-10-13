@@ -1,10 +1,9 @@
 import { StringLanguageHelper } from '@/core/helpers/string_language/helpers.service';
 import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
-import { and, count, eq } from 'drizzle-orm';
+import { eq } from 'drizzle-orm';
 
 import { core_nav } from '../../../database/schema/nav';
-import { inputPaginationCursor, outputPagination } from '../../../functions';
 import { SortDirectionEnum } from '../../../utils';
 import { ShowCoreNavArgs, ShowCoreNavObj } from './show.dto';
 
@@ -20,27 +19,22 @@ export class ShowCoreNavService {
     first,
     last,
   }: ShowCoreNavArgs): Promise<ShowCoreNavObj> {
-    const pagination = await inputPaginationCursor({
+    const pagination = await this.databaseService.paginationCursor({
       cursor,
       database: core_nav,
-      databaseService: this.databaseService,
       first,
       last,
-      primaryCursor: {
-        column: 'id',
-        schema: core_nav.id,
-      },
+      primaryCursor: 'id',
       defaultSortBy: {
         direction: SortDirectionEnum.asc,
         column: 'position',
       },
+      where: eq(core_nav.parent_id, 0),
+      query: async args =>
+        await this.databaseService.db.query.core_nav.findMany(args),
     });
 
-    const itemsParent = await this.databaseService.db.query.core_nav.findMany({
-      ...pagination,
-      where: and(pagination.where, eq(core_nav.parent_id, 0)),
-    });
-    const ids = itemsParent.map(item => item.id);
+    const ids = pagination.edges.map(item => item.id);
     const i18n = await this.stringLanguageHelper.get({
       item_ids: ids,
       database: core_nav,
@@ -48,12 +42,8 @@ export class ShowCoreNavService {
       variables: ['name', 'description'],
     });
 
-    const totalCount = await this.databaseService.db
-      .select({ count: count() })
-      .from(core_nav);
-
     const edges: ShowCoreNavObj['edges'] = await Promise.all(
-      itemsParent.map(async item => {
+      pagination.edges.map(async item => {
         const children = await this.databaseService.db.query.core_nav.findMany({
           where: (table, { eq }) => eq(table.parent_id, item.id),
           orderBy: (table, { asc }) => asc(table.position),
@@ -87,12 +77,6 @@ export class ShowCoreNavService {
       }),
     );
 
-    return outputPagination({
-      edges,
-      totalCount,
-      first,
-      cursor,
-      last,
-    });
+    return { ...pagination, edges };
   }
 }

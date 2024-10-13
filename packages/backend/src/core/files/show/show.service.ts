@@ -4,7 +4,6 @@ import { and, count, eq, ilike, or } from 'drizzle-orm';
 
 import { core_files, core_files_using } from '../../../database/schema/files';
 import { User } from '../../../decorators';
-import { inputPaginationCursor, outputPagination } from '../../../functions';
 import { SortDirectionEnum } from '../../../utils';
 import { ShowCoreFilesArgs, ShowCoreFilesObj } from './show.dto';
 
@@ -16,23 +15,6 @@ export class ShowCoreFilesService {
     { id: user_id }: User,
     { cursor, first, last, search = '', sortBy }: ShowCoreFilesArgs,
   ): Promise<ShowCoreFilesObj> {
-    const pagination = await inputPaginationCursor({
-      cursor,
-      database: core_files,
-      databaseService: this.databaseService,
-      first,
-      last,
-      primaryCursor: {
-        column: 'id',
-        schema: core_files.id,
-      },
-      defaultSortBy: {
-        direction: SortDirectionEnum.desc,
-        column: 'created',
-      },
-      sortBy,
-    });
-
     const where = and(
       eq(core_files.user_id, user_id),
       or(
@@ -42,18 +24,24 @@ export class ShowCoreFilesService {
       ),
     );
 
-    const initEdges = await this.databaseService.db.query.core_files.findMany({
-      ...pagination,
-      where: and(pagination.where, where),
+    const pagination = await this.databaseService.paginationCursor({
+      cursor,
+      database: core_files,
+      first,
+      last,
+      primaryCursor: 'id',
+      defaultSortBy: {
+        direction: SortDirectionEnum.desc,
+        column: 'created',
+      },
+      sortBy,
+      where,
+      query: async args =>
+        await this.databaseService.db.query.core_files.findMany(args),
     });
 
-    const totalCount = await this.databaseService.db
-      .select({ count: count() })
-      .from(core_files)
-      .where(where);
-
     const edges = await Promise.all(
-      initEdges.map(async edge => {
+      pagination.edges.map(async edge => {
         const countFileUsing = await this.databaseService.db
           .select({
             count: count(),
@@ -68,6 +56,6 @@ export class ShowCoreFilesService {
       }),
     );
 
-    return outputPagination({ edges, totalCount, first, cursor, last });
+    return { ...pagination, edges };
   }
 }
