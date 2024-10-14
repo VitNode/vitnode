@@ -73,7 +73,6 @@ export class EditAdminMainSettingsService {
   }) {
     const update = site_description.map(el => {
       const item =
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
         el.value !== undefined
           ? el
           : site_description.find(el => el.language_code === 'en')?.value

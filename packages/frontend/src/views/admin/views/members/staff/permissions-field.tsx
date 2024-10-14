@@ -9,7 +9,7 @@ import { Switch } from '@/components/ui/switch';
 import { Tabs, TabsTrigger } from '@/components/ui/tabs';
 import { Admin__Core_Staff_Administrators__ShowQuery } from '@/graphql/queries/admin/members/staff/admin__core_staff_administrators__show.generated';
 import { cn } from '@/helpers/classnames';
-import { AccordionHeader, AccordionTrigger } from '@radix-ui/react-accordion';
+import { AccordionTrigger } from '@radix-ui/react-accordion';
 import { ChevronDown } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import React from 'react';

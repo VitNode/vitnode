@@ -57,7 +57,6 @@ export class SendConfirmEmailCoreSessionsService {
     }
 
     // If user has confirm email, delete it
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     if (user.confirm_email?.id) {
       // Skip if email was sent less than 10 minutes ago
       if (user.confirm_email.created > new Date(Date.now() - 1000 * 60 * 10)) {

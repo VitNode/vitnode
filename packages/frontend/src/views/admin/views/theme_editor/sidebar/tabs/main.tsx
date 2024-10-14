@@ -35,7 +35,6 @@ export const MainTabThemeEditor = () => {
 
         <Button
           className="w-full justify-start"
-          // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
           disabled={!form.watch('colors.primary') || !CONFIG.node_development}
           onClick={() => {
             setActiveTab(ThemeEditorTab.Colors);
