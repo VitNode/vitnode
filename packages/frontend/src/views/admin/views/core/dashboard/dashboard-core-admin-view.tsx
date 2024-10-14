@@ -8,6 +8,7 @@ import { AlertTriangle, HammerIcon } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 
 import { WarnReqRestartServer } from '../plugins/warn-req-restart-server';
+import { Test } from './test';
 
 export const DashboardCoreAdminView = async () => {
   const [
@@ -47,6 +48,8 @@ export const DashboardCoreAdminView = async () => {
       </HeaderContent>
 
       <WarnReqRestartServer />
+
+      <Test />
     </>
   );
 };

@@ -20,9 +20,10 @@
     "lucide-react": "^0.451.0",
     "next": "15.0.0-canary.181",
     "next-intl": "3.21.0-canary.0",
-    "react": "19.0.0-rc-d5bba18b-20241009",
-    "react-dom": "19.0.0-rc-d5bba18b-20241009",
+    "react": "19.0.0-rc-6cf85185-20241014",
+    "react-dom": "19.0.0-rc-6cf85185-20241014",
     "react-hook-form": "^7.53.0",
+    "recharts": "^2.13.0",
     "sonner": "^1.5.0",
     "vitnode-frontend": "workspace:*",
     "zod": "^3.23.8"

@@ -214,7 +214,6 @@ export function getDefaultValueInZodStack(schema: z.ZodAny): any {
     z.ZodNumber | z.ZodString
   >;
 
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   if (typedSchema._def.typeName === z.ZodFirstPartyTypeKind.ZodDefault) {
     return typedSchema._def.defaultValue();
   }
@@ -258,7 +257,6 @@ export function getDefaultValues<Schema extends z.ZodObject<any, any>>(
         getBaseSchema(item) as unknown as z.ZodObject<any, any>,
       );
 
-      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
       if (defaultItems !== null) {
         const obj: Record<string, unknown> = {};
 

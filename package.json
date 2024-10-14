@@ -17,6 +17,11 @@
     "release": "node ./bump-version.mjs",
     "db": "turbo db"
   },
+  "pnpm": {
+    "overrides": {
+      "react-is": "19.0.0-rc-6cf85185-20241014"
+    }
+  },
   "workspaces": [
     "apps/*",
     "packages/*"
