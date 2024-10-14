@@ -1,6 +1,7 @@
 import { TranslationsProvider } from '@/components/translations-provider';
 import { HeaderContent } from '@/components/ui/header-content';
 import { fetcher } from '@/graphql/fetcher';
+import { getGlobalData } from '@/graphql/get-global-data';
 import {
   getPaginationTool,
   SearchParamsPagination,
@@ -51,16 +52,23 @@ export const AdministratorsStaffAdminView = async ({
     defaultPageSize: 10,
   });
 
-  const [data, t] = await Promise.all([
+  const [data, t, global] = await Promise.all([
     getData(variables),
     getTranslations('admin.members.staff.administrators'),
+    getGlobalData(),
   ]);
 
   return (
     <TranslationsProvider
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
       namespaces={[
         'admin.members.staff.administrators',
         'admin.members.staff.shared',
+        'admin_core.admin_permissions',
+        ...global.core_plugins__show.map(
+          plugin => `admin_${plugin.code}.admin_permissions`,
+        ),
       ]}
     >
       <HeaderContent h1={t('title')}>

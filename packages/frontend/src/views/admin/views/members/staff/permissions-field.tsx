@@ -1,9 +1,17 @@
 import { AutoFormItemProps } from '@/components/form/auto-form';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+} from '@/components/ui/accordion';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { Tabs, TabsTrigger } from '@/components/ui/tabs';
 import { Admin__Core_Staff_Administrators__ShowQuery } from '@/graphql/queries/admin/members/staff/admin__core_staff_administrators__show.generated';
 import { cn } from '@/helpers/classnames';
+import { AccordionHeader, AccordionTrigger } from '@radix-ui/react-accordion';
+import { ChevronDown } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import React from 'react';
 import { FieldValues } from 'react-hook-form';
 
@@ -27,9 +35,10 @@ export function PermissionsField<T extends FieldValues>({
   const values: PermissionState[] = Array.isArray(field.value)
     ? field.value
     : [];
+  const t = useTranslations();
 
   return (
-    <div>
+    <Accordion type="multiple">
       <Tabs>
         {permissions.map(permission => (
           <TabsTrigger
@@ -53,7 +62,6 @@ export function PermissionsField<T extends FieldValues>({
         return (
           <div
             className={cn(
-              'hidden',
               activeTab === plugin.plugin_code ? 'block' : 'hidden',
             )}
             key={plugin.plugin_code}
@@ -62,9 +70,14 @@ export function PermissionsField<T extends FieldValues>({
               const permissionValue = valuePlugin?.permissions.find(
                 p => p.id === permission.id,
               );
+              const langKey = `admin_${plugin.plugin_code}.admin_permissions.${permission.id}`;
 
               return (
-                <div className="p-4" key={permission.id}>
+                <AccordionItem
+                  className="py-2 sm:p-4"
+                  key={permission.id}
+                  value={permission.id}
+                >
                   <div className="flex items-center gap-2">
                     <Switch
                       checked={permissionValue?.children.length === 0}
@@ -113,34 +126,79 @@ export function PermissionsField<T extends FieldValues>({
                         );
                       }}
                     />
-                    <Label
-                      className="text-md"
-                      htmlFor={`${plugin.plugin_code}-${permission.id}`}
-                    >
-                      {permission.id}
-                    </Label>
+
+                    <AccordionTrigger asChild>
+                      <div className="text-md flex cursor-pointer items-center gap-2 truncate transition-all [&[data-state=open]>svg]:rotate-180">
+                        <span className="truncate">
+                          {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+                          {/* @ts-expect-error */}
+                          {t.has(langKey) ? t(langKey) : langKey}
+                        </span>
+                        <ChevronDown className="size-5 shrink-0 transition-transform duration-200" />
+                      </div>
+                    </AccordionTrigger>
                   </div>
 
-                  {permission.children.length > 0 && (
-                    <ul className="ml-8 mt-2 space-y-2">
-                      {permission.children.map(child => {
-                        const childValue = permissionValue?.children.find(
-                          c => c === child,
-                        );
+                  <AccordionContent>
+                    {permission.children.length > 0 && (
+                      <ul className="ml-4 mt-2 space-y-2 sm:ml-8">
+                        {permission.children.map(child => {
+                          const childValue = permissionValue?.children.find(
+                            c => c === child,
+                          );
+                          const childLangKey = `${langKey}_${child}`;
 
-                        return (
-                          <li
-                            className="flex items-center gap-2"
-                            key={`${plugin.plugin_code}-${permission.id}-${child}`}
-                          >
-                            <Switch
-                              checked={
-                                !!childValue ||
-                                permissionValue?.children.length === 0
-                              }
-                              id={`${plugin.plugin_code}-${permission.id}-${child}`}
-                              onCheckedChange={checked => {
-                                if (checked) {
+                          return (
+                            <li
+                              className="flex items-center gap-2"
+                              key={`${plugin.plugin_code}-${permission.id}-${child}`}
+                            >
+                              <Switch
+                                checked={
+                                  !!childValue ||
+                                  permissionValue?.children.length === 0
+                                }
+                                id={`${plugin.plugin_code}-${permission.id}-${child}`}
+                                onCheckedChange={checked => {
+                                  if (checked) {
+                                    const valueToChange: PermissionState[] = [
+                                      ...values.filter(
+                                        value =>
+                                          value.plugin_code !==
+                                          plugin.plugin_code,
+                                      ),
+                                      {
+                                        plugin_code: plugin.plugin_code,
+                                        permissions: valuePlugin
+                                          ? [
+                                              ...valuePlugin.permissions.filter(
+                                                p => p.id !== permission.id,
+                                              ),
+                                              {
+                                                id: permission.id,
+                                                children: permissionValue
+                                                  ? [
+                                                      ...permissionValue.children,
+                                                      child,
+                                                    ]
+                                                  : [child],
+                                              },
+                                            ]
+                                          : [
+                                              {
+                                                id: permission.id,
+                                                children: [child],
+                                              },
+                                            ],
+                                      },
+                                    ];
+                                    field.onChange(valueToChange);
+
+                                    return;
+                                  }
+
+                                  if (!valuePlugin) return;
+
                                   const valueToChange: PermissionState[] = [
                                     ...values.filter(
                                       value =>
@@ -148,117 +206,88 @@ export function PermissionsField<T extends FieldValues>({
                                         plugin.plugin_code,
                                     ),
                                     {
-                                      plugin_code: plugin.plugin_code,
-                                      permissions: valuePlugin
-                                        ? [
-                                            ...valuePlugin.permissions.filter(
-                                              p => p.id !== permission.id,
-                                            ),
-                                            {
-                                              id: permission.id,
-                                              children: permissionValue
-                                                ? [
-                                                    ...permissionValue.children,
-                                                    child,
-                                                  ]
-                                                : [child],
-                                            },
-                                          ]
-                                        : [
-                                            {
-                                              id: permission.id,
-                                              children: [child],
-                                            },
-                                          ],
+                                      ...valuePlugin,
+                                      permissions: valuePlugin.permissions.map(
+                                        p => {
+                                          if (p.id !== permission.id) return p;
+
+                                          return {
+                                            ...p,
+                                            children: childValue
+                                              ? p.children.filter(
+                                                  c => c !== child,
+                                                )
+                                              : permission.children.filter(
+                                                  c => c !== child,
+                                                ),
+                                          };
+                                        },
+                                      ),
                                     },
                                   ];
-                                  field.onChange(valueToChange);
 
-                                  return;
-                                }
-
-                                if (!valuePlugin) return;
-
-                                const valueToChange: PermissionState[] = [
-                                  ...values.filter(
+                                  const checkIfEmpty = valueToChange.find(
                                     value =>
-                                      value.plugin_code !== plugin.plugin_code,
-                                  ),
-                                  {
-                                    ...valuePlugin,
-                                    permissions: valuePlugin.permissions.map(
-                                      p => {
-                                        if (p.id !== permission.id) return p;
+                                      value.plugin_code ===
+                                        plugin.plugin_code &&
+                                      value.permissions.find(
+                                        p => p.id === permission.id,
+                                      )?.children.length === 0,
+                                  );
 
-                                        return {
-                                          ...p,
-                                          children: childValue
-                                            ? p.children.filter(
-                                                c => c !== child,
-                                              )
-                                            : permission.children.filter(
-                                                c => c !== child,
-                                              ),
-                                        };
-                                      },
-                                    ),
-                                  },
-                                ];
+                                  const returnValue: PermissionState[] =
+                                    checkIfEmpty?.plugin_code ===
+                                    plugin.plugin_code
+                                      ? valueToChange
+                                          .map(item => {
+                                            if (
+                                              item.plugin_code ===
+                                              plugin.plugin_code
+                                            ) {
+                                              return {
+                                                ...item,
+                                                permissions:
+                                                  item.permissions.filter(
+                                                    p => p.id !== permission.id,
+                                                  ),
+                                              };
+                                            }
 
-                                const checkIfEmpty = valueToChange.find(
-                                  value =>
-                                    value.plugin_code === plugin.plugin_code &&
-                                    value.permissions.find(
-                                      p => p.id === permission.id,
-                                    )?.children.length === 0,
-                                );
+                                            return item;
+                                          })
+                                          .filter(
+                                            plugin =>
+                                              plugin.permissions.length > 0,
+                                          )
+                                      : valueToChange;
 
-                                const returnValue: PermissionState[] =
-                                  checkIfEmpty?.plugin_code ===
-                                  plugin.plugin_code
-                                    ? valueToChange
-                                        .map(item => {
-                                          if (
-                                            item.plugin_code ===
-                                            plugin.plugin_code
-                                          ) {
-                                            return {
-                                              ...item,
-                                              permissions:
-                                                item.permissions.filter(
-                                                  p => p.id !== permission.id,
-                                                ),
-                                            };
-                                          }
-
-                                          return item;
-                                        })
-                                        .filter(
-                                          plugin =>
-                                            plugin.permissions.length > 0,
-                                        )
-                                    : valueToChange;
-
-                                field.onChange(returnValue);
-                              }}
-                            />
-                            <Label
-                              className="text-md"
-                              htmlFor={`${plugin.plugin_code}-${permission.id}-${child}`}
-                            >
-                              {child}
-                            </Label>
-                          </li>
-                        );
-                      })}
-                    </ul>
-                  )}
-                </div>
+                                  field.onChange(returnValue);
+                                }}
+                              />
+                              <Label
+                                className="text-muted-foreground truncate"
+                                htmlFor={`${plugin.plugin_code}-${permission.id}-${child}`}
+                              >
+                                {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+                                {/* @ts-expect-error */}
+                                {t.has(childLangKey)
+                                  ? // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                                    // @ts-expect-error
+                                    t(childLangKey)
+                                  : childLangKey}
+                              </Label>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    )}
+                  </AccordionContent>
+                </AccordionItem>
               );
             })}
           </div>
         );
       })}
-    </div>
+    </Accordion>
   );
 }

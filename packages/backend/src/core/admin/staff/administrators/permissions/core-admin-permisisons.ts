@@ -7,18 +7,26 @@ export const coreAdminPermissions: ShowAdminStaffAdministratorsObj['permissions'
       plugin_code: 'core',
       permissions: [
         {
-          id: 'staff',
-          children: ['can_view_staff'],
+          id: 'dashboard',
+          children: ['can_manage_diagnostic_tools'],
         },
         {
-          id: 'test',
-          children: ['can_view_test', 'can_view_test_2', 'can_view_test_3'],
+          id: 'settings',
+          children: [
+            'can_manage_settings_main',
+            'can_manage_settings_security',
+            'can_manage_settings_metadata',
+            'can_manage_settings_email',
+            'can_manage_settings_authorization',
+            'can_manage_settings_legal',
+            'can_manage_settings_ai',
+          ],
         },
       ],
     },
     {
-      plugin: 'Test',
-      plugin_code: 'test',
+      plugin: 'Members',
+      plugin_code: 'members',
       permissions: [
         {
           id: 'staff',

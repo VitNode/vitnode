@@ -61,12 +61,20 @@ export const ItemListFilesFooterEditor = ({
   };
 
   return (
-    <>
+    <li
+      className={cn(
+        'bg-card flex flex-col items-center justify-center gap-2 rounded-lg border p-4 shadow-sm transition-colors sm:flex-row sm:flex-nowrap sm:gap-4',
+        {
+          'border-destructive': error,
+        },
+      )}
+    >
       <div
         className={cn(
           'relative flex size-10 flex-shrink-0 items-center justify-center overflow-hidden rounded-lg',
           {
-            'h-14 w-20': data?.width && data.height && !isLoading && !error,
+            'h-10 w-14 sm:h-14 sm:w-20':
+              data?.width && data.height && !isLoading && !error,
           },
         )}
       >
@@ -82,12 +90,12 @@ export const ItemListFilesFooterEditor = ({
         />
       </div>
 
-      <div className="min-w-0 flex-1 break-words md:truncate">
-        <span className="leading-tight">
+      <div className="inline-block w-full min-w-0 flex-1">
+        <span className="block truncate leading-tight">
           {file?.name ?? data?.file_name ?? 'Error!'}
         </span>
 
-        <div className="text-muted-foreground space-x-2 text-sm">
+        <div className="text-muted-foreground flex flex-wrap justify-center gap-x-2 text-sm sm:justify-start">
           <ContentItemListFilesFooterEditor
             data={data}
             error={error}
@@ -98,7 +106,7 @@ export const ItemListFilesFooterEditor = ({
       </div>
 
       {!isLoading && (
-        <div className="flex shrink-0 flex-wrap items-center gap-1">
+        <div className="flex shrink-0 flex-wrap items-center justify-center gap-1">
           {!error && data && (
             <Button
               onClick={() => {
@@ -162,6 +170,6 @@ export const ItemListFilesFooterEditor = ({
           </Button>
         </div>
       )}
-    </>
+    </li>
   );
 };
