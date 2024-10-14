@@ -24,8 +24,13 @@ export const useFormCreateEditFormGroupsMembersAdmin = () => {
       permissions: z
         .array(
           z.object({
-            id: z.string(),
-            children: z.array(z.string()),
+            plugin_code: z.string(),
+            permissions: z.array(
+              z.object({
+                id: z.string(),
+                children: z.array(z.string()),
+              }),
+            ),
           }),
         )
         .default([]),

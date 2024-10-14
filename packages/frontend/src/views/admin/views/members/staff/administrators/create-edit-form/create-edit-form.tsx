@@ -15,6 +15,7 @@ import { getUsersShortApi } from '@/graphql/get-users-short-api';
 import { Admin__Core_Staff_Administrators__ShowQuery } from '@/graphql/queries/admin/members/staff/admin__core_staff_administrators__show.generated';
 import { useTranslations } from 'next-intl';
 
+import { PermissionsField } from '../../permissions-field';
 import { useFormCreateEditFormGroupsMembersAdmin } from './hooks/use-form';
 
 export const CreateEditFormAdministratorsStaffAdmin = ({
@@ -39,6 +40,12 @@ export const CreateEditFormAdministratorsStaffAdmin = ({
           type: DependencyType.HIDES,
           targetField: 'user',
           when: (provider: 'group' | 'user') => provider !== 'user',
+        },
+        {
+          sourceField: 'unrestricted',
+          type: DependencyType.HIDES,
+          targetField: 'permissions',
+          when: (unrestricted: boolean) => unrestricted,
         },
         {
           sourceField: 'type',
@@ -126,6 +133,19 @@ export const CreateEditFormAdministratorsStaffAdmin = ({
           component: AutoFormSwitch,
           label: t('unrestricted.title'),
           description: t('unrestricted.desc'),
+        },
+        {
+          id: 'permissions',
+          component: props => (
+            <PermissionsField {...props} permissions={permissions} />
+          ),
+          componentProps: {
+            labels: {
+              can_view_staff: {
+                title: 'Can view staff',
+              },
+            },
+          },
         },
       ]}
       formSchema={formSchema}

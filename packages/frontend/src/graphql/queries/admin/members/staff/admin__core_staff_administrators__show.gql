@@ -61,6 +61,7 @@ query Admin__core_staff_administrators__show(
         id
         children
       }
+      plugin
       plugin_code
     }
   }
