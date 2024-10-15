@@ -28,9 +28,6 @@ const nextConfig = config => {
       NEXT_PUBLIC_BACKEND_URL: ENVS.backend_url,
       NEXT_PUBLIC_FRONTEND_URL: ENVS.frontend_url,
     },
-    experimental: {
-      ppr: true,
-    },
     output: 'standalone',
     transpilePackages: ['lucide-react', 'vitnode-frontend'],
     images: {
