@@ -533,6 +533,7 @@ export type MutationAdmin__Core_Security__Captcha__EditArgs = {
 
 export type MutationAdmin__Core_Staff_Administrators__CreateArgs = {
   group_id?: InputMaybe<Scalars['Int']['input']>;
+  permissions?: InputMaybe<Array<PermissionsStaffArgs>>;
   unrestricted: Scalars['Boolean']['input'];
   user_id?: InputMaybe<Scalars['Int']['input']>;
 };
@@ -679,6 +680,16 @@ export type PermissionsAdminStaffAdministrators = {
   permissions: Array<ShowAdminPermissionsAdminPluginsObj>;
   plugin: Scalars['String']['output'];
   plugin_code: Scalars['String']['output'];
+};
+
+export type PermissionsStaff = {
+  children: Array<Scalars['String']['input']>;
+  id: Scalars['String']['input'];
+};
+
+export type PermissionsStaffArgs = {
+  permissions: Array<PermissionsStaff>;
+  plugin_code: Scalars['String']['input'];
 };
 
 export type Query = {

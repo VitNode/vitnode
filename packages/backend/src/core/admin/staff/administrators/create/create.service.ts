@@ -15,6 +15,7 @@ export class CreateAdminStaffAdministratorsService {
     group_id,
     unrestricted,
     user_id,
+    permissions,
   }: CreateAdminStaffAdministratorsArgs): Promise<ShowAdminStaffAdministrators> {
     if (!group_id && !user_id) {
       throw new CustomError({

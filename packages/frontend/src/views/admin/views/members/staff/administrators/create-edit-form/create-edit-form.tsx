@@ -139,13 +139,6 @@ export const CreateEditFormAdministratorsStaffAdmin = ({
           component: props => (
             <PermissionsField {...props} permissions={permissions} />
           ),
-          componentProps: {
-            labels: {
-              can_view_staff: {
-                title: 'Can view staff',
-              },
-            },
-          },
         },
       ]}
       formSchema={formSchema}

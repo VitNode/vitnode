@@ -49,6 +49,6 @@
     "eslint-plugin-react": "^7.37.1",
     "globals": "^15.11.0",
     "prettier-plugin-tailwindcss": "^0.6.8",
-    "typescript-eslint": "^8.8.1"
+    "typescript-eslint": "^8.9.0"
   }
 }
