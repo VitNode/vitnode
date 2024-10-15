@@ -7,21 +7,28 @@ import {
   AutoFormRadioGroup,
   AutoFormRadioGroupProps,
 } from '@/components/form/fields/radio-group';
-import {
-  AutoFormSwitch,
-  AutoFormSwitchProps,
-} from '@/components/form/fields/switch';
+import { AutoFormSwitch } from '@/components/form/fields/switch';
 import { AvatarUser } from '@/components/ui/user/avatar';
 import { GroupFormat } from '@/components/ui/user/group-format';
 import { getGroupsShortApi } from '@/graphql/get-groups-short-api';
 import { getUsersShortApi } from '@/graphql/get-users-short-api';
+import { Admin__Core_Staff_Administrators__ShowQuery } from '@/graphql/queries/admin/members/staff/admin__core_staff_administrators__show.generated';
 import { useTranslations } from 'next-intl';
 
+import { PermissionsField } from '../../permissions-field';
 import { useFormCreateEditFormGroupsMembersAdmin } from './hooks/use-form';
 
-export const CreateEditFormAdministratorsStaffAdmin = () => {
+export const CreateEditFormAdministratorsStaffAdmin = ({
+  permissions,
+  data,
+}: {
+  data?: Admin__Core_Staff_Administrators__ShowQuery['admin__core_staff_administrators__show']['edges'][0];
+  permissions: Admin__Core_Staff_Administrators__ShowQuery['admin__core_staff_administrators__show']['permissions'];
+}) => {
   const t = useTranslations('admin.members.staff.shared');
-  const { onSubmit, formSchema } = useFormCreateEditFormGroupsMembersAdmin();
+  const { onSubmit, formSchema } = useFormCreateEditFormGroupsMembersAdmin({
+    data,
+  });
 
   return (
     <AutoForm
@@ -29,14 +36,26 @@ export const CreateEditFormAdministratorsStaffAdmin = () => {
         {
           sourceField: 'type',
           type: DependencyType.HIDES,
+          targetField: 'type',
+          when: () => !!data,
+        },
+        {
+          sourceField: 'type',
+          type: DependencyType.HIDES,
           targetField: 'group',
-          when: (provider: 'group' | 'user') => provider !== 'group',
+          when: (provider: 'group' | 'user') => provider !== 'group' || !!data,
         },
         {
           sourceField: 'type',
           type: DependencyType.HIDES,
           targetField: 'user',
-          when: (provider: 'group' | 'user') => provider !== 'user',
+          when: (provider: 'group' | 'user') => provider !== 'user' || !!data,
+        },
+        {
+          sourceField: 'unrestricted',
+          type: DependencyType.HIDES,
+          targetField: 'permissions',
+          when: (unrestricted: boolean) => unrestricted,
         },
         {
           sourceField: 'type',
@@ -124,9 +143,12 @@ export const CreateEditFormAdministratorsStaffAdmin = () => {
           component: AutoFormSwitch,
           label: t('unrestricted.title'),
           description: t('unrestricted.desc'),
-          componentProps: {
-            disabled: true,
-          } as AutoFormSwitchProps,
+        },
+        {
+          id: 'permissions',
+          component: props => (
+            <PermissionsField {...props} permissions={permissions} />
+          ),
         },
       ]}
       formSchema={formSchema}

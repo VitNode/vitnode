@@ -124,7 +124,7 @@ export function AutoFormCombobox<T extends FieldValues>({
       return;
     }
 
-    field.onChange(findKey ? undefined : { key, value });
+    field.onChange(findKey ? [] : [{ key, value }]);
     setOpen(false);
   };
 

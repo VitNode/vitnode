@@ -1,9 +1,8 @@
+import { PermissionsStaff } from '@/core/admin/staff/administrators/permissions/dto';
 import { ABSOLUTE_PATHS_BACKEND, ConfigPlugin, NotFoundError } from '@/index';
 import { Injectable } from '@nestjs/common';
 import { existsSync } from 'fs';
 import { readFile } from 'fs/promises';
-
-import { ShowAdminPermissionsAdminPluginsObj } from './show.dto';
 
 @Injectable()
 export class ShowAdminPermissionsAdminPluginsService {
@@ -11,7 +10,7 @@ export class ShowAdminPermissionsAdminPluginsService {
     plugin_code,
   }: {
     plugin_code: string;
-  }): Promise<ShowAdminPermissionsAdminPluginsObj[]> {
+  }): Promise<PermissionsStaff[]> {
     const pathConfig = ABSOLUTE_PATHS_BACKEND.plugin({
       code: plugin_code,
     }).config;

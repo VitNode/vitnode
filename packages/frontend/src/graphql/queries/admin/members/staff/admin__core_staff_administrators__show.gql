@@ -47,6 +47,13 @@ query Admin__core_staff_administrators__show(
       }
       updated
       protected
+      permissions {
+        permissions {
+          children
+          id
+        }
+        plugin_code
+      }
     }
     pageInfo {
       count
@@ -59,10 +66,9 @@ query Admin__core_staff_administrators__show(
     permissions {
       permissions {
         id
-        children {
-          id
-        }
+        children
       }
+      plugin
       plugin_code
     }
   }

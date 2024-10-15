@@ -17,7 +17,9 @@ const Content = React.lazy(async () =>
   })),
 );
 
-export const CreateActionsAdministratorsStaffAdmin = () => {
+export const CreateActionsAdministratorsStaffAdmin = (
+  props: React.ComponentProps<typeof Content>,
+) => {
   const t = useTranslations('admin.members.staff.administrators.add');
 
   return (
@@ -35,7 +37,7 @@ export const CreateActionsAdministratorsStaffAdmin = () => {
         </DialogHeader>
 
         <React.Suspense fallback={<Loader />}>
-          <Content />
+          <Content {...props} />
         </React.Suspense>
       </DialogContent>
     </Dialog>

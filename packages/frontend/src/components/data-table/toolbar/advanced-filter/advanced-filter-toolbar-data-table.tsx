@@ -32,7 +32,6 @@ export const AdvancedFilterToolbarDataTable = ({
 
       <SheetContent>
         <SheetHeader>
-          // TODO: Add translations
           <SheetTitle>{'Filters'}</SheetTitle>
         </SheetHeader>
 

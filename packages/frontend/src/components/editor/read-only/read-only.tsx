@@ -57,7 +57,6 @@ export const ReadOnlyEditor = ({
 
   const options: HTMLReactParserOptions = {
     replace: domNode => {
-      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
       if (!(domNode instanceof Element && domNode.attribs)) {
         return;
       }

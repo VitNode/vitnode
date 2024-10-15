@@ -22,7 +22,7 @@ export const SearchToolbarDataTable = ({
     if (searchParams.get('search')) return;
 
     setValue('');
-  }, [searchParams.get('search')]);
+  }, [searchParams]);
 
   const handleSearch = useDebouncedCallback((value: string) => {
     const params = new URLSearchParams(searchParams);

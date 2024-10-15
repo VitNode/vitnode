@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common';
 
-import { CreateAdminStaffAdministratorResolver } from './administrators/create/create.resolver';
-import { CreateAdminStaffAdministratorsService } from './administrators/create/create.service';
+import { CreateEditAdminStaffAdministratorResolver } from './administrators/create-edit/create-edit.resolver';
+import { CreateEditAdminStaffAdministratorsService } from './administrators/create-edit/create-edit.service';
 import { DeleteAdminStaffAdministratorsResolver } from './administrators/delete/delete.resolver';
 import { DeleteAdminStaffAdministratorsService } from './administrators/delete/delete.service';
+import { PermissionsAdminStaffAdministratorsService } from './administrators/permissions/permissions.service';
 import { ShowAdminStaffAdministratorResolver } from './administrators/show/show.resolver';
 import { ShowAdminStaffAdministratorsService } from './administrators/show/show.service';
 import { CreateAdminStaffModeratorsResolver } from './moderators/create/create.resolver';
@@ -17,8 +18,8 @@ import { ShowAdminStaffModeratorsService } from './moderators/show/show.service'
   providers: [
     ShowAdminStaffAdministratorsService,
     ShowAdminStaffAdministratorResolver,
-    CreateAdminStaffAdministratorsService,
-    CreateAdminStaffAdministratorResolver,
+    CreateEditAdminStaffAdministratorsService,
+    CreateEditAdminStaffAdministratorResolver,
     ShowAdminStaffModeratorsResolver,
     ShowAdminStaffModeratorsService,
     CreateAdminStaffModeratorsService,
@@ -27,6 +28,7 @@ import { ShowAdminStaffModeratorsService } from './moderators/show/show.service'
     DeleteAdminStaffAdministratorsResolver,
     DeleteAdminStaffModeratorsService,
     DeleteAdminStaffModeratorsResolver,
+    PermissionsAdminStaffAdministratorsService,
   ],
 })
 export class AdminStaffModule {}

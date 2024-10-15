@@ -44,7 +44,8 @@ function Form<
     if (props.disableBeforeUnload) return;
 
     setIsDirty?.(formIsDirty);
-  }, [formIsDirty]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [formIsDirty, props.disableBeforeUnload]);
 
   return <FormProvider {...props} />;
 }
@@ -80,7 +81,6 @@ const useFormField = () => {
 
   const fieldState = getFieldState(fieldContext.name, formState);
 
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   if (!fieldContext) {
     throw new Error('useFormField should be used within <FormField>');
   }

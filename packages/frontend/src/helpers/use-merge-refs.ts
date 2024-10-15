@@ -21,5 +21,5 @@ export function useMergeRefs<Instance>(
         }
       });
     };
-  }, refs);
+  }, [refs]);
 }

@@ -1,4 +1,3 @@
-import { ShowAdminPermissionsAdminPluginsObj } from '@/core/admin/plugins/permissions-admin/show/show.dto';
 import { GroupUser, User } from '@/decorators';
 import {
   PageInfo,
@@ -16,6 +15,11 @@ import {
   OmitType,
   registerEnumType,
 } from '@nestjs/graphql';
+
+import {
+  PermissionsStaffObj,
+  PermissionsStaffObjWithoutPluginName,
+} from '../permissions/dto';
 
 enum ShowAdminStaffAdministratorsSortingColumnEnum {
   updated = 'updated',
@@ -70,6 +74,9 @@ export class ShowAdminStaffAdministrators {
   @Field(() => Int)
   id: number;
 
+  @Field(() => [PermissionsStaffObjWithoutPluginName])
+  permissions: PermissionsStaffObjWithoutPluginName[];
+
   @Field(() => Boolean)
   protected: boolean;
 
@@ -84,18 +91,6 @@ export class ShowAdminStaffAdministrators {
 }
 
 @ObjectType()
-class PermissionsAdminStaffAdministrators {
-  @Field(() => [ShowAdminPermissionsAdminPluginsObj])
-  permissions: ShowAdminPermissionsAdminPluginsObj[];
-
-  @Field(() => String)
-  plugin: string;
-
-  @Field(() => String)
-  plugin_code: string;
-}
-
-@ObjectType()
 export class ShowAdminStaffAdministratorsObj {
   @Field(() => [ShowAdminStaffAdministrators])
   edges: ShowAdminStaffAdministrators[];
@@ -103,6 +98,6 @@ export class ShowAdminStaffAdministratorsObj {
   @Field(() => PageInfo)
   pageInfo: PageInfo;
 
-  @Field(() => [PermissionsAdminStaffAdministrators])
-  permissions: PermissionsAdminStaffAdministrators[];
+  @Field(() => [PermissionsStaffObj])
+  permissions: PermissionsStaffObj[];
 }

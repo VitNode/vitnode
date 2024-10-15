@@ -9,7 +9,7 @@ export type Admin__Core_Plugins__Permissions_Admin__Create_EditMutationVariables
 }>;
 
 
-export type Admin__Core_Plugins__Permissions_Admin__Create_EditMutation = { __typename?: 'Mutation', admin__core_plugins__permissions_admin__create_edit: { __typename?: 'ShowAdminPermissionsAdminPluginsObj', id: string } };
+export type Admin__Core_Plugins__Permissions_Admin__Create_EditMutation = { __typename?: 'Mutation', admin__core_plugins__permissions_admin__create_edit: { __typename?: 'PermissionsStaff', id: string } };
 
 
 export const Admin__Core_Plugins__Permissions_Admin__Create_Edit = gql`

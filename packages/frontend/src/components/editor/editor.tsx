@@ -141,6 +141,7 @@ export const Editor = ({
 
     const content: Content = JSON.parse(findValue);
     editor.commands.setContent(content);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedLanguage]);
 
   if (!editor) return null;

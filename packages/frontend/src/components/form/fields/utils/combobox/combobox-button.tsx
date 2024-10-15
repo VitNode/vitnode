@@ -96,13 +96,13 @@ export function ComboBoxButton<T extends FieldValues>({
           onClick={e => {
             e.stopPropagation();
             e.preventDefault();
-            field.onChange(multiple ? [] : undefined);
+            field.onChange([]);
           }}
           onKeyDown={e => {
             if (e.key === 'Enter') {
               e.stopPropagation();
               e.preventDefault();
-              field.onChange(multiple ? [] : undefined);
+              field.onChange([]);
             }
           }}
         >

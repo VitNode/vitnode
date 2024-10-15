@@ -122,7 +122,7 @@ export function AutoForm<
 
   React.useEffect(() => {
     onValuesChange?.(values);
-  }, [valuesString]);
+  }, [valuesString, onValuesChange, values]);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const parsedValues = formSchema.safeParse(values);
@@ -134,7 +134,7 @@ export function AutoForm<
   return (
     <Form {...form}>
       <form
-        className={cn('space-y-6', className, {
+        className={cn('min-w-0 space-y-6', className, {
           '@container flex flex-col items-start [&>a:last-child]:self-end [&>button:last-child]:self-end':
             theme === 'horizontal',
         })}

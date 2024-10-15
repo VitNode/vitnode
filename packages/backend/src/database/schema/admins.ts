@@ -19,7 +19,7 @@ export const core_admin_permissions = pgTable(
     created: t.timestamp().notNull().defaultNow(),
     updated: t.timestamp().notNull().defaultNow(),
     protected: t.boolean().notNull().default(false),
-    permissions: t.jsonb().default('{}'),
+    permissions: t.jsonb().default('[]'),
   }),
   table => ({
     group_id_idx: index('core_admin_permissions_group_id_idx').on(

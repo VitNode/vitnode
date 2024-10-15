@@ -129,12 +129,8 @@ export class ShowAdminNavService {
           keywords: [],
           children: [
             {
-              code: 'moderators',
-              keywords: [],
-            },
-            {
               code: 'administrators',
-              keywords: [],
+              keywords: ['admin', 'administrator'],
             },
           ],
         },

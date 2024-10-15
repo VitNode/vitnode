@@ -32,12 +32,12 @@ export const useFormCreateEditFormGroupsMembersAdmin = () => {
   ) => {
     const mutation = await mutationApi({
       groupId:
-        values.type === 'group' && values.group?.key
-          ? +values.group.key
+        values.type === 'group' && values.group?.[0].key
+          ? +values.group[0].key
           : undefined,
       userId:
-        values.type === 'user' && values.user?.key
-          ? +values.user.key
+        values.type === 'user' && values.user?.[0].key
+          ? +values.user[0].key
           : undefined,
       unrestricted: values.unrestricted,
     });
@@ -62,11 +62,11 @@ export const useFormCreateEditFormGroupsMembersAdmin = () => {
     setOpen?.(false);
     toast.success(t('success'), {
       description:
-        values.type === 'group' && Array.isArray(values.group?.value)
-          ? convertText(values.group.value)
-          : Array.isArray(values.user?.value)
+        values.type === 'group' && Array.isArray(values.group?.[0].value)
+          ? convertText(values.group[0].value)
+          : Array.isArray(values.user?.[0].value)
             ? null
-            : values.user?.value,
+            : values.user?.[0].value,
     });
   };
 

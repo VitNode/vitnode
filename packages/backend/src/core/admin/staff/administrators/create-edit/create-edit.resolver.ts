@@ -3,19 +3,19 @@ import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 import { ShowAdminStaffAdministrators } from '../show/show.dto';
-import { CreateAdminStaffAdministratorsArgs } from './create.dto';
-import { CreateAdminStaffAdministratorsService } from './create.service';
+import { CreateEditAdminStaffAdministratorsArgs } from './create-edit.dto';
+import { CreateEditAdminStaffAdministratorsService } from './create-edit.service';
 
 @Resolver()
-export class CreateAdminStaffAdministratorResolver {
+export class CreateEditAdminStaffAdministratorResolver {
   constructor(
-    private readonly service: CreateAdminStaffAdministratorsService,
+    private readonly service: CreateEditAdminStaffAdministratorsService,
   ) {}
 
   @Mutation(() => ShowAdminStaffAdministrators)
   @UseGuards(AdminAuthGuards)
-  async admin__core_staff_administrators__create(
-    @Args() args: CreateAdminStaffAdministratorsArgs,
+  async admin__core_staff_administrators__create_edit(
+    @Args() args: CreateEditAdminStaffAdministratorsArgs,
   ): Promise<ShowAdminStaffAdministrators> {
     return this.service.create(args);
   }

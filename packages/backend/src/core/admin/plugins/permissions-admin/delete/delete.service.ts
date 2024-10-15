@@ -30,7 +30,7 @@ export class DeleteAdminPermissionsAdminPluginsService {
     }
 
     const existsPermission = parent
-      ? parent.children.find(child => child.id === id)
+      ? parent.children.find(child => child === id)
       : config.permissions_admin?.find(permission => permission.id === id);
 
     if (!existsPermission) {
@@ -41,7 +41,7 @@ export class DeleteAdminPermissionsAdminPluginsService {
       config.permissions_admin = config.permissions_admin?.map(permission => {
         if (permission.id === parent_id) {
           permission.children = permission.children.filter(
-            child => child.id !== id,
+            child => child !== id,
           );
         }
 
