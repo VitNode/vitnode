@@ -122,7 +122,7 @@ export function AutoForm<
 
   React.useEffect(() => {
     onValuesChange?.(values);
-  }, [valuesString]);
+  }, [valuesString, onValuesChange, values]);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const parsedValues = formSchema.safeParse(values);

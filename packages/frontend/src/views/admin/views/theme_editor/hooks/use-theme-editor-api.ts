@@ -127,6 +127,7 @@ export const useThemeEditorApi = ({
         `${hslColor.h} ${hslColor.s}% ${hslColor.l}%`,
       );
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeTheme]);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {

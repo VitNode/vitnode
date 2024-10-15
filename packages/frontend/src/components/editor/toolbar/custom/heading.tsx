@@ -58,16 +58,7 @@ export const HeadingToolbarEditor = () => {
     }
 
     return 0;
-  }, [
-    editor.isActive('paragraph'),
-    editor.isActive('codeBlock'),
-    editor.isActive('heading', { level: 1 }),
-    editor.isActive('heading', { level: 2 }),
-    editor.isActive('heading', { level: 3 }),
-    editor.isActive('heading', { level: 4 }),
-    editor.isActive('heading', { level: 5 }),
-    editor.isActive('heading', { level: 6 }),
-  ]);
+  }, [editor]);
 
   return (
     <Select

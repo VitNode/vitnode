@@ -44,7 +44,8 @@ function Form<
     if (props.disableBeforeUnload) return;
 
     setIsDirty?.(formIsDirty);
-  }, [formIsDirty]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [formIsDirty, props.disableBeforeUnload]);
 
   return <FormProvider {...props} />;
 }

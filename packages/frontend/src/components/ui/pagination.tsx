@@ -33,11 +33,14 @@ export const Pagination = ({
   const { push } = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const pagination = {
-    first: searchParams.get('first'),
-    last: searchParams.get('last'),
-    cursor: searchParams.get('cursor'),
-  };
+  const pagination = React.useMemo(
+    () => ({
+      first: searchParams.get('first'),
+      last: searchParams.get('last'),
+      cursor: searchParams.get('cursor'),
+    }),
+    [searchParams],
+  );
   const pageSizeValue: number = React.useMemo(() => {
     if (PAGE_SIZES.includes(Number(pagination.first))) {
       return Number(pagination.first);

@@ -24,6 +24,7 @@ export const ContentPermissionsAdminDevPluginAdminView = (
         return (
           <ItemPermissionsAdminDevPluginAdmin
             {...data}
+            // eslint-disable-next-line react/no-children-prop
             children={data.children.map(child => child.id)}
             dataFromSSR={dataFromSSR}
             parentId={parentId?.toString()}
