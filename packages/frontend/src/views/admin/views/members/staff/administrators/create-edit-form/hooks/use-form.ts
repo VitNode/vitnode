@@ -1,4 +1,5 @@
 import { useDialog } from '@/components/ui/dialog';
+import { Admin__Core_Staff_Administrators__ShowQuery } from '@/graphql/queries/admin/members/staff/admin__core_staff_administrators__show.generated';
 import { zodComboBoxWithFetcher } from '@/helpers/zod';
 import { useTextLang } from '@/hooks/use-text-lang';
 import { useTranslations } from 'next-intl';
@@ -8,7 +9,11 @@ import * as z from 'zod';
 
 import { mutationApi } from './mutation-api';
 
-export const useFormCreateEditFormGroupsMembersAdmin = () => {
+export const useFormCreateEditFormGroupsMembersAdmin = ({
+  data,
+}: {
+  data?: Admin__Core_Staff_Administrators__ShowQuery['admin__core_staff_administrators__show']['edges'][0];
+}) => {
   const t = useTranslations('admin.members.staff.administrators.add');
   const tShared = useTranslations('admin.members.staff.shared');
   const tCore = useTranslations('core.global');
@@ -17,10 +22,34 @@ export const useFormCreateEditFormGroupsMembersAdmin = () => {
 
   const formSchema = z
     .object({
-      type: z.enum(['group', 'user']).default('group'),
-      user: zodComboBoxWithFetcher.optional(),
-      group: zodComboBoxWithFetcher.optional(),
-      unrestricted: z.boolean().default(true),
+      type: z
+        .enum(['group', 'user'])
+        .default(data?.user_or_group.__typename === 'User' ? 'user' : 'group'),
+      user: zodComboBoxWithFetcher
+        .default(
+          data?.user_or_group.__typename === 'User'
+            ? [
+                {
+                  key: data.user_or_group.id.toString(),
+                  value: data.user_or_group.name,
+                },
+              ]
+            : [],
+        )
+        .optional(),
+      group: zodComboBoxWithFetcher
+        .default(
+          data?.user_or_group.__typename === 'StaffGroupUser'
+            ? [
+                {
+                  key: data.user_or_group.id.toString(),
+                  value: data.user_or_group.group_name,
+                },
+              ]
+            : [],
+        )
+        .optional(),
+      unrestricted: z.boolean().default(data?.unrestricted ?? true),
       permissions: z
         .array(
           z.object({
@@ -33,7 +62,7 @@ export const useFormCreateEditFormGroupsMembersAdmin = () => {
             ),
           }),
         )
-        .default([]),
+        .default(data?.permissions ?? []),
     })
     .refine(data => {
       return data.type === 'group' ? data.group : data.user;
@@ -45,12 +74,12 @@ export const useFormCreateEditFormGroupsMembersAdmin = () => {
   ) => {
     const mutation = await mutationApi({
       groupId:
-        values.type === 'group' && values.group?.key
-          ? +values.group.key
+        values.type === 'group' && values.group?.[0].key
+          ? +values.group[0].key
           : undefined,
       userId:
-        values.type === 'user' && values.user?.key
-          ? +values.user.key
+        values.type === 'user' && values.user?.[0].key
+          ? +values.user[0].key
           : undefined,
       unrestricted: values.unrestricted,
       permissions: values.permissions,
@@ -76,11 +105,11 @@ export const useFormCreateEditFormGroupsMembersAdmin = () => {
     setOpen?.(false);
     toast.success(t('success'), {
       description:
-        values.type === 'group' && Array.isArray(values.group?.value)
-          ? convertText(values.group.value)
-          : Array.isArray(values.user?.value)
+        values.type === 'group' && Array.isArray(values.group?.[0].value)
+          ? convertText(values.group[0].value)
+          : Array.isArray(values.user?.[0].value)
             ? null
-            : values.user?.value,
+            : values.user?.[0].value,
     });
   };
 

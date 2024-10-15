@@ -5,10 +5,10 @@ import { InternalDatabaseService } from '@/utils/database/internal_database.serv
 import { Injectable } from '@nestjs/common';
 
 import { ShowAdminStaffAdministrators } from '../show/show.dto';
-import { CreateAdminStaffAdministratorsArgs } from './create.dto';
+import { CreateEditAdminStaffAdministratorsArgs } from './create-edit.dto';
 
 @Injectable()
-export class CreateAdminStaffAdministratorsService {
+export class CreateEditAdminStaffAdministratorsService {
   constructor(private readonly databaseService: InternalDatabaseService) {}
 
   async create({
@@ -16,7 +16,7 @@ export class CreateAdminStaffAdministratorsService {
     unrestricted,
     user_id,
     permissions,
-  }: CreateAdminStaffAdministratorsArgs): Promise<ShowAdminStaffAdministrators> {
+  }: CreateEditAdminStaffAdministratorsArgs): Promise<ShowAdminStaffAdministrators> {
     if (!group_id && !user_id) {
       throw new CustomError({
         code: 'BAD_REQUEST',
@@ -46,6 +46,7 @@ export class CreateAdminStaffAdministratorsService {
         user_id,
         group_id,
         unrestricted,
+        permissions: unrestricted ? [] : permissions,
       })
       .returning();
 
@@ -77,6 +78,8 @@ export class CreateAdminStaffAdministratorsService {
         user_or_group: {
           ...user,
         },
+        permissions:
+          data.permissions as ShowAdminStaffAdministrators['permissions'],
       };
     }
 
@@ -90,6 +93,8 @@ export class CreateAdminStaffAdministratorsService {
         ...data.group,
         group_name: [],
       },
+      permissions:
+        data.permissions as ShowAdminStaffAdministrators['permissions'],
     };
   }
 }

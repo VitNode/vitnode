@@ -1,3 +1,4 @@
+import { PermissionsStaff } from '@/core/admin/staff/administrators/permissions/dto';
 import {
   ABSOLUTE_PATHS_BACKEND,
   ConfigPlugin,
@@ -9,7 +10,6 @@ import { Injectable } from '@nestjs/common';
 import { existsSync } from 'fs';
 import { readFile, writeFile } from 'fs/promises';
 
-import { ShowAdminPermissionsAdminPluginsObj } from '../show/show.dto';
 import { CreateEditAdminPermissionsAdminPluginsArgs } from './create-edit.dto';
 
 @Injectable()
@@ -19,7 +19,7 @@ export class CreateEditAdminPermissionsAdminPluginsService {
     old_id,
     plugin_code,
     parent_id,
-  }: CreateEditAdminPermissionsAdminPluginsArgs): Promise<ShowAdminPermissionsAdminPluginsObj> {
+  }: CreateEditAdminPermissionsAdminPluginsArgs): Promise<PermissionsStaff> {
     const pathConfig = ABSOLUTE_PATHS_BACKEND.plugin({
       code: plugin_code,
     }).config;

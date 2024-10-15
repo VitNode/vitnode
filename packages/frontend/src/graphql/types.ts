@@ -277,11 +277,11 @@ export type Mutation = {
   admin__core_plugins__nav__create: ShowAdminNavPluginsObj;
   admin__core_plugins__nav__delete: Scalars['String']['output'];
   admin__core_plugins__nav__edit: ShowAdminNavPluginsObj;
-  admin__core_plugins__permissions_admin__create_edit: ShowAdminPermissionsAdminPluginsObj;
+  admin__core_plugins__permissions_admin__create_edit: PermissionsStaff;
   admin__core_plugins__permissions_admin__delete: Scalars['String']['output'];
   admin__core_plugins__upload: Scalars['String']['output'];
   admin__core_security__captcha__edit: ShowAdminCaptchaSecurityObj;
-  admin__core_staff_administrators__create: ShowAdminStaffAdministrators;
+  admin__core_staff_administrators__create_edit: ShowAdminStaffAdministrators;
   admin__core_staff_administrators__delete: Scalars['String']['output'];
   admin__core_staff_moderators__create: ShowAdminStaffModerators;
   admin__core_staff_moderators__delete: Scalars['String']['output'];
@@ -531,7 +531,7 @@ export type MutationAdmin__Core_Security__Captcha__EditArgs = {
 };
 
 
-export type MutationAdmin__Core_Staff_Administrators__CreateArgs = {
+export type MutationAdmin__Core_Staff_Administrators__Create_EditArgs = {
   group_id?: InputMaybe<Scalars['Int']['input']>;
   permissions?: InputMaybe<Array<PermissionsStaffArgs>>;
   unrestricted: Scalars['Boolean']['input'];
@@ -675,21 +675,33 @@ export type PageInfo = {
   totalCount: Scalars['Float']['output'];
 };
 
-export type PermissionsAdminStaffAdministrators = {
-  __typename?: 'PermissionsAdminStaffAdministrators';
-  permissions: Array<ShowAdminPermissionsAdminPluginsObj>;
-  plugin: Scalars['String']['output'];
-  plugin_code: Scalars['String']['output'];
+export type PermissionsStaff = {
+  __typename?: 'PermissionsStaff';
+  children: Array<Scalars['String']['output']>;
+  id: Scalars['String']['output'];
 };
 
-export type PermissionsStaff = {
+export type PermissionsStaffArgs = {
+  permissions: Array<PermissionsStaffInput>;
+  plugin_code: Scalars['String']['input'];
+};
+
+export type PermissionsStaffInput = {
   children: Array<Scalars['String']['input']>;
   id: Scalars['String']['input'];
 };
 
-export type PermissionsStaffArgs = {
+export type PermissionsStaffObj = {
+  __typename?: 'PermissionsStaffObj';
   permissions: Array<PermissionsStaff>;
-  plugin_code: Scalars['String']['input'];
+  plugin: Scalars['String']['output'];
+  plugin_code: Scalars['String']['output'];
+};
+
+export type PermissionsStaffObjWithoutPluginName = {
+  __typename?: 'PermissionsStaffObjWithoutPluginName';
+  permissions: Array<PermissionsStaff>;
+  plugin_code: Scalars['String']['output'];
 };
 
 export type Query = {
@@ -703,7 +715,7 @@ export type Query = {
   admin__core_members__show: ShowAdminMembersObj;
   admin__core_members__stats_sign_up: Array<SignUpStatsAdminMembers>;
   admin__core_plugins__nav__show: Array<ShowAdminNavPluginsObj>;
-  admin__core_plugins__permissions_admin__show: Array<ShowAdminPermissionsAdminPluginsObj>;
+  admin__core_plugins__permissions_admin__show: Array<PermissionsStaff>;
   admin__core_plugins__show: ShowAdminPluginsObj;
   admin__core_security__captcha__show: ShowAdminCaptchaSecurityObj;
   admin__core_staff_administrators__show: ShowAdminStaffAdministratorsObj;
@@ -1007,12 +1019,6 @@ export type ShowAdminNavPluginsObj = {
   keywords: Array<Scalars['String']['output']>;
 };
 
-export type ShowAdminPermissionsAdminPluginsObj = {
-  __typename?: 'ShowAdminPermissionsAdminPluginsObj';
-  children: Array<Scalars['String']['output']>;
-  id: Scalars['String']['output'];
-};
-
 export type ShowAdminPlugins = {
   __typename?: 'ShowAdminPlugins';
   allow_default: Scalars['Boolean']['output'];
@@ -1052,6 +1058,7 @@ export type ShowAdminStaffAdministrators = {
   __typename?: 'ShowAdminStaffAdministrators';
   created: Scalars['DateTime']['output'];
   id: Scalars['Int']['output'];
+  permissions: Array<PermissionsStaffObjWithoutPluginName>;
   protected: Scalars['Boolean']['output'];
   unrestricted: Scalars['Boolean']['output'];
   updated: Scalars['DateTime']['output'];
@@ -1062,7 +1069,7 @@ export type ShowAdminStaffAdministratorsObj = {
   __typename?: 'ShowAdminStaffAdministratorsObj';
   edges: Array<ShowAdminStaffAdministrators>;
   pageInfo: PageInfo;
-  permissions: Array<PermissionsAdminStaffAdministrators>;
+  permissions: Array<PermissionsStaffObj>;
 };
 
 export type ShowAdminStaffAdministratorsSortByArgs = {

@@ -13,7 +13,7 @@ import React from 'react';
 import { ActionsTableAdministratorsStaffAdmin } from './actions/actions';
 
 export const TableAdministratorsStaffAdmin = ({
-  admin__core_staff_administrators__show: { edges, pageInfo },
+  admin__core_staff_administrators__show: { edges, pageInfo, permissions },
 }: Admin__Core_Staff_Administrators__ShowQuery) => {
   const t = useTranslations('admin.members.staff.administrators');
   const tShared = useTranslations('admin.members.staff.shared');
@@ -82,7 +82,12 @@ export const TableAdministratorsStaffAdmin = ({
           cell: ({ row }) => {
             if (row.protected) return null;
 
-            return <ActionsTableAdministratorsStaffAdmin data={row} />;
+            return (
+              <ActionsTableAdministratorsStaffAdmin
+                data={row}
+                permissions={permissions}
+              />
+            );
           },
         },
       ]}

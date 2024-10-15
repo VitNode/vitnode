@@ -4,6 +4,7 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
+import { TooltipWrapper } from '@/components/ui/tooltip';
 import { ShowAdminStaffAdministrators } from '@/graphql/types';
 import { Trash2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
@@ -18,11 +19,17 @@ export const DeleteActionsTableAdministratorsStaffAdmin = (props: {
 
   return (
     <AlertDialog>
-      <AlertDialogTrigger asChild>
-        <Button ariaLabel={t('delete')} size="icon" variant="destructiveGhost">
-          <Trash2 />
-        </Button>
-      </AlertDialogTrigger>
+      <TooltipWrapper content={t('delete')}>
+        <AlertDialogTrigger asChild>
+          <Button
+            ariaLabel={t('delete')}
+            size="icon"
+            variant="destructiveGhost"
+          >
+            <Trash2 />
+          </Button>
+        </AlertDialogTrigger>
+      </TooltipWrapper>
 
       <AlertDialogContent>
         <ContentDeleteActionsAdministratorsStaffAdmin {...props} />

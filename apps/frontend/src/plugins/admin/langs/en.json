@@ -635,6 +635,10 @@
             "title": "Add Administrator",
             "success": "Administrator has been added"
           },
+          "edit": {
+            "title": "Edit Administrator",
+            "success": "Administrator has been updated"
+          },
           "delete": {
             "desc": "This action will deprive the user or users of this group of access to the administrator panel (AdminCP).",
             "submit": "Yes, delete permissions",

@@ -1,10 +1,10 @@
-mutation Admin__core_staff_administrators__create(
+mutation Admin__core_staff_administrators__create_edit(
   $groupId: Int
   $userId: Int
   $unrestricted: Boolean!
   $permissions: [PermissionsStaffArgs!]
 ) {
-  admin__core_staff_administrators__create(
+  admin__core_staff_administrators__create_edit(
     group_id: $groupId
     user_id: $userId
     unrestricted: $unrestricted

@@ -98,7 +98,7 @@ export const createPackagesJSON = ({
       '@hookform/resolvers': '^3.9.0',
       geist: '^1.3.1',
       'lucide-react': '^0.451.0',
-      next: '15.0.0-canary.181',
+      next: '15.0.0-rc.1',
       'next-intl': '^3.21.0-canary.0',
       react: '19.0.0-rc-6cf85185-20241014',
       'react-dom': '19.0.0-rc-6cf85185-20241014',

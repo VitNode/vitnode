@@ -20,11 +20,15 @@ import { useFormCreateEditFormGroupsMembersAdmin } from './hooks/use-form';
 
 export const CreateEditFormAdministratorsStaffAdmin = ({
   permissions,
+  data,
 }: {
+  data?: Admin__Core_Staff_Administrators__ShowQuery['admin__core_staff_administrators__show']['edges'][0];
   permissions: Admin__Core_Staff_Administrators__ShowQuery['admin__core_staff_administrators__show']['permissions'];
 }) => {
   const t = useTranslations('admin.members.staff.shared');
-  const { onSubmit, formSchema } = useFormCreateEditFormGroupsMembersAdmin();
+  const { onSubmit, formSchema } = useFormCreateEditFormGroupsMembersAdmin({
+    data,
+  });
 
   return (
     <AutoForm
@@ -32,14 +36,20 @@ export const CreateEditFormAdministratorsStaffAdmin = ({
         {
           sourceField: 'type',
           type: DependencyType.HIDES,
+          targetField: 'type',
+          when: () => !!data,
+        },
+        {
+          sourceField: 'type',
+          type: DependencyType.HIDES,
           targetField: 'group',
-          when: (provider: 'group' | 'user') => provider !== 'group',
+          when: (provider: 'group' | 'user') => provider !== 'group' || !!data,
         },
         {
           sourceField: 'type',
           type: DependencyType.HIDES,
           targetField: 'user',
-          when: (provider: 'group' | 'user') => provider !== 'user',
+          when: (provider: 'group' | 'user') => provider !== 'user' || !!data,
         },
         {
           sourceField: 'unrestricted',
