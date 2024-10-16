@@ -7,6 +7,9 @@ export class CreateEditAdminStaffAdministratorsArgs {
   @Field(() => Int, { nullable: true })
   group_id: null | number;
 
+  @Field(() => Int, { nullable: true })
+  id: null | number;
+
   @Field(() => [PermissionsStaffArgs], { nullable: true })
   permissions: PermissionsStaffArgs[];
 

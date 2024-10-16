@@ -60,6 +60,8 @@ export class AdminAuthGuards implements CanActivate {
     if (!plugin) throw new AccessDeniedError();
     const group = plugin.groups.find(group => group.id === permission.group);
     if (!group) throw new AccessDeniedError();
+    if (group.permissions.length === 0) return !!authorization;
+
     const permissionObj = group.permissions.find(
       item => item === permission.permission,
     );

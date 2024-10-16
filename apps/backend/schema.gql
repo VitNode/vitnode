@@ -248,7 +248,7 @@ type Mutation {
   admin__core_plugins__permissions_admin__delete(id: String!, parent_id: String, plugin_code: String!): String!
   admin__core_plugins__upload(code: String, file: Upload!): String!
   admin__core_security__captcha__edit(secret_key: String!, site_key: String!, type: CaptchaTypeEnum!): ShowAdminCaptchaSecurityObj!
-  admin__core_staff_administrators__create_edit(group_id: Int, permissions: [PermissionsStaffArgs!], user_id: Int): ShowAdminStaffAdministrators!
+  admin__core_staff_administrators__create_edit(group_id: Int, id: Int, permissions: [PermissionsStaffArgs!], user_id: Int): ShowAdminStaffAdministrators!
   admin__core_staff_administrators__delete(id: Int!): String!
   admin__core_staff_moderators__create(group_id: Int, user_id: Int): ShowAdminStaffModerators!
   admin__core_staff_moderators__delete(id: Int!): String!

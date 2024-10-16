@@ -19,11 +19,11 @@ export const mutationApi = async (
       query: Admin__Core_Staff_Administrators__Create_Edit,
       variables,
     });
+
+    revalidatePath('/', 'layout');
   } catch (error) {
     const e = error as Error;
 
     return { error: e.message };
   }
-
-  revalidatePath('/admin', 'layout');
 };

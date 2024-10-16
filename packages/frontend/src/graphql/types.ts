@@ -533,6 +533,7 @@ export type MutationAdmin__Core_Security__Captcha__EditArgs = {
 
 export type MutationAdmin__Core_Staff_Administrators__Create_EditArgs = {
   group_id?: InputMaybe<Scalars['Int']['input']>;
+  id?: InputMaybe<Scalars['Int']['input']>;
   permissions?: InputMaybe<Array<PermissionsStaffArgs>>;
   user_id?: InputMaybe<Scalars['Int']['input']>;
 };
