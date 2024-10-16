@@ -24,10 +24,10 @@ export const CreateEditLegalPage = ({
   return (
     <DialogContent className="max-w-6xl">
       <DialogHeader>
-        <DialogTitle>{t(data ? 'edit' : 'create')}</DialogTitle>
-        {data && (
-          <DialogDescription>{convertText(data.title)}</DialogDescription>
-        )}
+        <DialogTitle>{t(data ? 'edit' : 'create.title')}</DialogTitle>
+        <DialogDescription>
+          {data ? convertText(data.title) : t('create.desc')}
+        </DialogDescription>
       </DialogHeader>
 
       <React.Suspense fallback={<Loader />}>

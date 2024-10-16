@@ -170,7 +170,7 @@ importers:
         version: 0.451.0(react@19.0.0-rc-6cf85185-20241014)
       next:
         specifier: 15.0.0-rc.1
-        version: 15.0.0-rc.1(@babel/core@7.25.7)(@opentelemetry/api@1.9.0)(react-dom@19.0.0-rc-6cf85185-20241014(react@19.0.0-rc-6cf85185-20241014))(react@19.0.0-rc-6cf85185-20241014)
+        version: 15.0.0-rc.1(@babel/core@7.25.8)(@opentelemetry/api@1.9.0)(react-dom@19.0.0-rc-6cf85185-20241014(react@19.0.0-rc-6cf85185-20241014))(react@19.0.0-rc-6cf85185-20241014)
       next-intl:
         specifier: 3.21.0-canary.0
         version: 3.21.0-canary.0(next@15.0.0-rc.1(@opentelemetry/api@1.9.0)(react-dom@19.0.0-rc-6cf85185-20241014(react@19.0.0-rc-6cf85185-20241014))(react@19.0.0-rc-6cf85185-20241014))(react@19.0.0-rc-6cf85185-20241014)
@@ -736,13 +736,16 @@ importers:
         version: 0.3.0(react-dom@19.0.0-rc-6cf85185-20241014(react@19.0.0-rc-6cf85185-20241014))(react@19.0.0-rc-6cf85185-20241014)
       nextjs-toploader:
         specifier: ^3.7.15
-        version: 3.7.15(next@15.0.0-rc.1(@babel/core@7.25.7)(@opentelemetry/api@1.9.0)(react-dom@19.0.0-rc-6cf85185-20241014(react@19.0.0-rc-6cf85185-20241014))(react@19.0.0-rc-6cf85185-20241014))(react-dom@19.0.0-rc-6cf85185-20241014(react@19.0.0-rc-6cf85185-20241014))(react@19.0.0-rc-6cf85185-20241014)
+        version: 3.7.15(next@15.0.0-rc.1(@babel/core@7.25.8)(@opentelemetry/api@1.9.0)(react-dom@19.0.0-rc-6cf85185-20241014(react@19.0.0-rc-6cf85185-20241014))(react@19.0.0-rc-6cf85185-20241014))(react-dom@19.0.0-rc-6cf85185-20241014(react@19.0.0-rc-6cf85185-20241014))(react@19.0.0-rc-6cf85185-20241014)
       nprogress:
         specifier: ^0.2.0
         version: 0.2.0
       postcss:
         specifier: ^8.4.42
         version: 8.4.47
+      react-colorful:
+        specifier: ^5.6.1
+        version: 5.6.1(react-dom@19.0.0-rc-6cf85185-20241014(react@19.0.0-rc-6cf85185-20241014))(react@19.0.0-rc-6cf85185-20241014)
       react-cropper:
         specifier: ^2.3.3
         version: 2.3.3(react@19.0.0-rc-6cf85185-20241014)
@@ -827,7 +830,7 @@ importers:
         version: 0.451.0(react@19.0.0-rc-6cf85185-20241014)
       next:
         specifier: 15.0.0-rc.1
-        version: 15.0.0-rc.1(@babel/core@7.25.7)(@opentelemetry/api@1.9.0)(react-dom@19.0.0-rc-6cf85185-20241014(react@19.0.0-rc-6cf85185-20241014))(react@19.0.0-rc-6cf85185-20241014)
+        version: 15.0.0-rc.1(@babel/core@7.25.8)(@opentelemetry/api@1.9.0)(react-dom@19.0.0-rc-6cf85185-20241014(react@19.0.0-rc-6cf85185-20241014))(react@19.0.0-rc-6cf85185-20241014)
       next-intl:
         specifier: 3.21.0-canary.0
         version: 3.21.0-canary.0(next@15.0.0-rc.1(@opentelemetry/api@1.9.0)(react-dom@19.0.0-rc-6cf85185-20241014(react@19.0.0-rc-6cf85185-20241014))(react@19.0.0-rc-6cf85185-20241014))(react@19.0.0-rc-6cf85185-20241014)
@@ -7316,6 +7319,12 @@ packages:
   raw-body@2.5.2:
     resolution: {integrity: sha512-8zGqypfENjCIqGhgXToC8aB2r7YrBX+AQAfIPs/Mlk+BtPTztOvTS01NRW/3Eh60J+a48lt8qsCzirQ6loCVfA==}
     engines: {node: '>= 0.8'}
+
+  react-colorful@5.6.1:
+    resolution: {integrity: sha512-1exovf0uGTGyq5mXQT0zgQ80uvj2PCwvF8zY1RN9/vbJVSjSo3fsB/4L3ObbF7u70NduSiK4xu4Y6q1MHoUGEw==}
+    peerDependencies:
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
 
   react-cropper@2.3.3:
     resolution: {integrity: sha512-zghiEYkUb41kqtu+2jpX2Ntigf+Jj1dF9ew4lAobPzI2adaPE31z0p+5TcWngK6TvmWQUwK3lj4G+NDh1PDQ1w==}
@@ -13923,7 +13932,7 @@ snapshots:
 
   geist@1.3.1(next@15.0.0-rc.1(@opentelemetry/api@1.9.0)(react-dom@19.0.0-rc-6cf85185-20241014(react@19.0.0-rc-6cf85185-20241014))(react@19.0.0-rc-6cf85185-20241014)):
     dependencies:
-      next: 15.0.0-rc.1(@babel/core@7.25.7)(@opentelemetry/api@1.9.0)(react-dom@19.0.0-rc-6cf85185-20241014(react@19.0.0-rc-6cf85185-20241014))(react@19.0.0-rc-6cf85185-20241014)
+      next: 15.0.0-rc.1(@babel/core@7.25.8)(@opentelemetry/api@1.9.0)(react-dom@19.0.0-rc-6cf85185-20241014(react@19.0.0-rc-6cf85185-20241014))(react@19.0.0-rc-6cf85185-20241014)
 
   gensync@1.0.0-beta.2: {}
 
@@ -14830,7 +14839,7 @@ snapshots:
     dependencies:
       '@formatjs/intl-localematcher': 0.5.5
       negotiator: 0.6.3
-      next: 15.0.0-rc.1(@babel/core@7.25.7)(@opentelemetry/api@1.9.0)(react-dom@19.0.0-rc-6cf85185-20241014(react@19.0.0-rc-6cf85185-20241014))(react@19.0.0-rc-6cf85185-20241014)
+      next: 15.0.0-rc.1(@babel/core@7.25.8)(@opentelemetry/api@1.9.0)(react-dom@19.0.0-rc-6cf85185-20241014(react@19.0.0-rc-6cf85185-20241014))(react@19.0.0-rc-6cf85185-20241014)
       react: 19.0.0-rc-6cf85185-20241014
       use-intl: 3.21.1(react@19.0.0-rc-6cf85185-20241014)
 
@@ -14839,7 +14848,7 @@ snapshots:
       react: 19.0.0-rc-6cf85185-20241014
       react-dom: 19.0.0-rc-6cf85185-20241014(react@19.0.0-rc-6cf85185-20241014)
 
-  next@15.0.0-rc.1(@babel/core@7.25.7)(@opentelemetry/api@1.9.0)(react-dom@19.0.0-rc-6cf85185-20241014(react@19.0.0-rc-6cf85185-20241014))(react@19.0.0-rc-6cf85185-20241014):
+  next@15.0.0-rc.1(@babel/core@7.25.8)(@opentelemetry/api@1.9.0)(react-dom@19.0.0-rc-6cf85185-20241014(react@19.0.0-rc-6cf85185-20241014))(react@19.0.0-rc-6cf85185-20241014):
     dependencies:
       '@next/env': 15.0.0-rc.1
       '@swc/counter': 0.1.3
@@ -14849,7 +14858,7 @@ snapshots:
       postcss: 8.4.31
       react: 19.0.0-rc-6cf85185-20241014
       react-dom: 19.0.0-rc-6cf85185-20241014(react@19.0.0-rc-6cf85185-20241014)
-      styled-jsx: 5.1.6(@babel/core@7.25.7)(react@19.0.0-rc-6cf85185-20241014)
+      styled-jsx: 5.1.6(@babel/core@7.25.8)(react@19.0.0-rc-6cf85185-20241014)
     optionalDependencies:
       '@next/swc-darwin-arm64': 15.0.0-rc.1
       '@next/swc-darwin-x64': 15.0.0-rc.1
@@ -14865,9 +14874,9 @@ snapshots:
       - '@babel/core'
       - babel-plugin-macros
 
-  nextjs-toploader@3.7.15(next@15.0.0-rc.1(@babel/core@7.25.7)(@opentelemetry/api@1.9.0)(react-dom@19.0.0-rc-6cf85185-20241014(react@19.0.0-rc-6cf85185-20241014))(react@19.0.0-rc-6cf85185-20241014))(react-dom@19.0.0-rc-6cf85185-20241014(react@19.0.0-rc-6cf85185-20241014))(react@19.0.0-rc-6cf85185-20241014):
+  nextjs-toploader@3.7.15(next@15.0.0-rc.1(@babel/core@7.25.8)(@opentelemetry/api@1.9.0)(react-dom@19.0.0-rc-6cf85185-20241014(react@19.0.0-rc-6cf85185-20241014))(react@19.0.0-rc-6cf85185-20241014))(react-dom@19.0.0-rc-6cf85185-20241014(react@19.0.0-rc-6cf85185-20241014))(react@19.0.0-rc-6cf85185-20241014):
     dependencies:
-      next: 15.0.0-rc.1(@babel/core@7.25.7)(@opentelemetry/api@1.9.0)(react-dom@19.0.0-rc-6cf85185-20241014(react@19.0.0-rc-6cf85185-20241014))(react@19.0.0-rc-6cf85185-20241014)
+      next: 15.0.0-rc.1(@babel/core@7.25.8)(@opentelemetry/api@1.9.0)(react-dom@19.0.0-rc-6cf85185-20241014(react@19.0.0-rc-6cf85185-20241014))(react@19.0.0-rc-6cf85185-20241014)
       nprogress: 0.2.0
       prop-types: 15.8.1
       react: 19.0.0-rc-6cf85185-20241014
@@ -15439,6 +15448,11 @@ snapshots:
       http-errors: 2.0.0
       iconv-lite: 0.4.24
       unpipe: 1.0.0
+
+  react-colorful@5.6.1(react-dom@19.0.0-rc-6cf85185-20241014(react@19.0.0-rc-6cf85185-20241014))(react@19.0.0-rc-6cf85185-20241014):
+    dependencies:
+      react: 19.0.0-rc-6cf85185-20241014
+      react-dom: 19.0.0-rc-6cf85185-20241014(react@19.0.0-rc-6cf85185-20241014)
 
   react-cropper@2.3.3(react@19.0.0-rc-6cf85185-20241014):
     dependencies:
@@ -16055,12 +16069,12 @@ snapshots:
     dependencies:
       inline-style-parser: 0.2.4
 
-  styled-jsx@5.1.6(@babel/core@7.25.7)(react@19.0.0-rc-6cf85185-20241014):
+  styled-jsx@5.1.6(@babel/core@7.25.8)(react@19.0.0-rc-6cf85185-20241014):
     dependencies:
       client-only: 0.0.1
       react: 19.0.0-rc-6cf85185-20241014
     optionalDependencies:
-      '@babel/core': 7.25.7
+      '@babel/core': 7.25.8
 
   stylis@4.2.0: {}
 

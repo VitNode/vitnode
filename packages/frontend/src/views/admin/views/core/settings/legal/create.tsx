@@ -8,14 +8,14 @@ import { useTranslations } from 'next-intl';
 import { CreateEditLegalPage } from './create_edit/create_edit';
 
 export const CreateLegalSettingsAdmin = () => {
-  const t = useTranslations('admin.core.settings.legal.create_edit');
+  const t = useTranslations('admin.core.settings.legal.create_edit.create');
 
   return (
     <Dialog>
       <DialogTrigger asChild>
         <Button>
           <Plus />
-          {t('create')}
+          {t('title')}
         </Button>
       </DialogTrigger>
 

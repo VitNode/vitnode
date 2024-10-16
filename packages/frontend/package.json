@@ -182,6 +182,7 @@
     "next-themes": "^0.3.0",
     "nextjs-toploader": "^3.7.15",
     "nprogress": "^0.2.0",
+    "react-colorful": "^5.6.1",
     "react-cropper": "^2.3.3",
     "react-day-picker": "^8.10.1",
     "react-is": "19.0.0-rc-6cf85185-20241014",

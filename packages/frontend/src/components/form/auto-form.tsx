@@ -122,7 +122,8 @@ export function AutoForm<
 
   React.useEffect(() => {
     onValuesChange?.(values);
-  }, [valuesString, onValuesChange, values]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [valuesString]);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const parsedValues = formSchema.safeParse(values);
