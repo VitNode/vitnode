@@ -13,7 +13,6 @@ query Admin__core_staff_moderators__show(
     edges {
       created
       id
-      unrestricted
       user_or_group {
         __typename
         ... on User {

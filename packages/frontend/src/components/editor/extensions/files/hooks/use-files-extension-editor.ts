@@ -1,4 +1,4 @@
-import { FilesAuthorizationCoreSessions } from '@/graphql/types';
+import { FilesPermissionsCoreSessions } from '@/graphql/types';
 import { formatBytes } from '@/helpers/format-bytes';
 import { useGlobalData } from '@/hooks/use-global-data';
 import { useSession } from '@/hooks/use-session';
@@ -27,14 +27,23 @@ export const useFilesExtensionEditor = ({
   const session = useSession();
   const adminSession = useSessionAdmin();
   const { config } = useGlobalData();
-  const permissionFiles: FilesAuthorizationCoreSessions = {
-    allow_upload: session.files.allow_upload || adminSession.files.allow_upload,
+  const permissionFiles: FilesPermissionsCoreSessions = {
+    allow_upload:
+      session.session?.files_permissions.allow_upload ??
+      adminSession.session?.files_permissions.allow_upload ??
+      false,
     max_storage_for_submit:
-      session.files.max_storage_for_submit ||
-      adminSession.files.max_storage_for_submit,
-    space_used: session.files.space_used || adminSession.files.space_used,
+      session.session?.files_permissions.max_storage_for_submit ??
+      adminSession.session?.files_permissions.max_storage_for_submit ??
+      0,
+    space_used:
+      session.session?.files_permissions.space_used ??
+      adminSession.session?.files_permissions.space_used ??
+      0,
     total_max_storage:
-      session.files.total_max_storage || adminSession.files.total_max_storage,
+      session.session?.files_permissions.total_max_storage ??
+      adminSession.session?.files_permissions.total_max_storage ??
+      0,
   };
 
   const handleDelete = async ({

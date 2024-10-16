@@ -1,5 +1,7 @@
-import { User } from '@/decorators';
+import { core_files } from '@/database/schema/files';
+import { UserWithDangerousInfo } from '@/decorators';
 import { NotFoundError } from '@/errors';
+import { eq, sum } from 'drizzle-orm';
 import { NodePgDatabase } from 'drizzle-orm/node-postgres';
 
 import coreSchemaDatabase from '../../../database';
@@ -10,7 +12,7 @@ export const getUser = async ({
 }: {
   db: NodePgDatabase<typeof coreSchemaDatabase>;
   id: number;
-}): Promise<User> => {
+}): Promise<UserWithDangerousInfo> => {
   const user = await db.query.core_users.findFirst({
     where: (table, { eq }) => eq(table.id, id),
     columns: {
@@ -27,6 +29,9 @@ export const getUser = async ({
         columns: {
           id: true,
           color: true,
+          files_allow_upload: true,
+          files_max_storage_for_submit: true,
+          files_total_max_storage: true,
         },
       },
     },
@@ -50,11 +55,29 @@ export const getUser = async ({
       ),
   });
 
+  const countStorageUsedDb = await db
+    .select({
+      space_used: sum(core_files.file_size),
+    })
+    .from(core_files)
+    .where(eq(core_files.user_id, user.id));
+  const countStorageUsed = +(countStorageUsedDb[0].space_used ?? 0);
+
   return {
     ...user,
     group: {
       ...user.group,
       name: userGroupNames,
+    },
+    files_permissions: {
+      space_used: countStorageUsed,
+      allow_upload: user.group.files_allow_upload,
+      max_storage_for_submit: user.group.files_max_storage_for_submit
+        ? user.group.files_max_storage_for_submit * 1024
+        : user.group.files_max_storage_for_submit,
+      total_max_storage: user.group.files_total_max_storage
+        ? user.group.files_total_max_storage * 1024
+        : user.group.files_total_max_storage,
     },
   };
 };

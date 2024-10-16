@@ -49,7 +49,9 @@ export const useFormCreateEditFormGroupsMembersAdmin = ({
             : [],
         )
         .optional(),
-      unrestricted: z.boolean().default(data?.unrestricted ?? true),
+      unrestricted: z
+        .boolean()
+        .default(data ? data.permissions.length === 0 : true),
       permissions: z
         .array(
           z.object({
@@ -81,8 +83,7 @@ export const useFormCreateEditFormGroupsMembersAdmin = ({
         values.type === 'user' && values.user?.[0].key
           ? +values.user[0].key
           : undefined,
-      unrestricted: values.unrestricted,
-      permissions: values.permissions,
+      permissions: values.unrestricted ? [] : values.permissions,
     });
 
     if (mutation?.error) {

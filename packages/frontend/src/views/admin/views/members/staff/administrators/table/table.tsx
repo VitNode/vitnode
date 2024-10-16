@@ -64,7 +64,7 @@ export const TableAdministratorsStaffAdmin = ({
           id: 'permissions',
           title: tShared('permissions'),
           cell: ({ row }) => {
-            const unrestricted = row.unrestricted;
+            const unrestricted = row.permissions.length === 0;
 
             return (
               <Badge

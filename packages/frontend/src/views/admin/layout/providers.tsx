@@ -16,7 +16,6 @@ export const AdminProviders = ({
       value={{
         session: data.admin__sessions__authorization.user,
         version: data.admin__sessions__authorization.version,
-        files: data.admin__sessions__authorization.files,
       }}
     >
       {children}

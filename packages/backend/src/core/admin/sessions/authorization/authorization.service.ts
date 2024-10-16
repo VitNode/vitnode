@@ -1,23 +1,21 @@
-import { core_files } from '@/database/schema/files';
 import { core_sessions_known_devices } from '@/database/schema/sessions';
 import { currentUnixDate, getUserAgentData, getUserIp } from '@/functions';
 import {
   AccessDeniedError,
   getConfigFile,
   GqlContext,
-  InternalServerError,
   NotFoundError,
+  User,
 } from '@/index';
 import { getUser } from '@/utils/database/helpers/get-user';
 import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
-import { eq, sum } from 'drizzle-orm';
+import { eq } from 'drizzle-orm';
 import * as fs from 'fs';
 import { join } from 'path';
 
-import { AuthorizationCurrentUserObj } from '../../../sessions/authorization/authorization.dto';
 import { DeviceSignInCoreSessionsService } from '../../../sessions/sign_in/device.service';
 import { AuthorizationAdminSessionsObj } from './authorization.dto';
 
@@ -30,32 +28,7 @@ export class AuthorizationAdminSessionsService {
     private readonly deviceService: DeviceSignInCoreSessionsService,
   ) {}
 
-  async authorization(
-    context: GqlContext,
-  ): Promise<AuthorizationAdminSessionsObj> {
-    const currentUser = await this.initialAuthorization(context);
-    const user = await this.databaseService.db.query.core_users.findFirst({
-      where: (table, { eq }) => eq(table.id, currentUser.id),
-      columns: {
-        id: true,
-      },
-      with: {
-        group: {
-          columns: {
-            files_allow_upload: true,
-            files_max_storage_for_submit: true,
-            files_total_max_storage: true,
-          },
-        },
-      },
-    });
-
-    if (!user) {
-      throw new InternalServerError();
-    }
-
-    const config = getConfigFile();
-
+  private getPackageJSON() {
     const packageJSONPath = join(__dirname, '../../../../../../package.json');
     if (!fs.existsSync(packageJSONPath)) {
       throw new Error(`package.json not found in ${packageJSONPath}`);
@@ -64,35 +37,43 @@ export class AuthorizationAdminSessionsService {
       fs.readFileSync(packageJSONPath, 'utf8'),
     );
 
-    const countStorageUsedDb = await this.databaseService.db
-      .select({
-        space_used: sum(core_files.file_size),
-      })
-      .from(core_files)
-      .where(eq(core_files.user_id, currentUser.id));
-    const countStorageUsed = +(countStorageUsedDb[0].space_used ?? 0);
+    return packageJSON;
+  }
+
+  private async getPermissions({
+    user,
+  }: {
+    user: User;
+  }): Promise<AuthorizationAdminSessionsObj['permissions']> {
+    const admin =
+      await this.databaseService.db.query.core_admin_permissions.findFirst({
+        where: (table, { or, eq }) =>
+          or(eq(table.user_id, user.id), eq(table.group_id, user.group.id)),
+      });
+
+    if (!admin) {
+      throw new AccessDeniedError();
+    }
+
+    return admin.permissions as AuthorizationAdminSessionsObj['permissions'];
+  }
+
+  async authorization(
+    context: GqlContext,
+  ): Promise<AuthorizationAdminSessionsObj> {
+    const user = await this.initialAuthorization(context);
+    const permissions = await this.getPermissions({ user });
+    const config = getConfigFile();
 
     return {
-      user: currentUser,
-      version: packageJSON.version,
+      user,
+      version: this.getPackageJSON().version,
       restart_server: config.restart_server,
-      files: {
-        allow_upload: user.group.files_allow_upload,
-        max_storage_for_submit: user.group.files_max_storage_for_submit
-          ? user.group.files_max_storage_for_submit * 1024
-          : user.group.files_max_storage_for_submit,
-        total_max_storage: user.group.files_total_max_storage
-          ? user.group.files_total_max_storage * 1024
-          : user.group.files_total_max_storage,
-        space_used: countStorageUsed,
-      },
+      permissions,
     };
   }
 
-  async initialAuthorization({
-    req,
-    res,
-  }: GqlContext): Promise<AuthorizationCurrentUserObj> {
+  async initialAuthorization({ req, res }: GqlContext) {
     if (!req.headers['user-agent']) {
       throw new NotFoundError('User-Agent');
     }
@@ -157,8 +138,6 @@ export class AuthorizationAdminSessionsService {
     return {
       ...user,
       ...session.user,
-      is_admin: true,
-      is_mod: true,
     };
   }
 }

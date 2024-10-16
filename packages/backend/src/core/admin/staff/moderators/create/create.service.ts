@@ -13,7 +13,6 @@ export class CreateAdminStaffModeratorsService {
 
   async create({
     group_id,
-    unrestricted,
     user_id,
   }: CreateAdminStaffModeratorsArgs): Promise<ShowAdminStaffModerators> {
     if (!group_id && !user_id) {
@@ -46,7 +45,6 @@ export class CreateAdminStaffModeratorsService {
       .values({
         user_id,
         group_id,
-        unrestricted,
       })
       .returning();
 

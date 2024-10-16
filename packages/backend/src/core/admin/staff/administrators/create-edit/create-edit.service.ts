@@ -13,7 +13,6 @@ export class CreateEditAdminStaffAdministratorsService {
 
   async create({
     group_id,
-    unrestricted,
     user_id,
     permissions,
   }: CreateEditAdminStaffAdministratorsArgs): Promise<ShowAdminStaffAdministrators> {
@@ -45,8 +44,7 @@ export class CreateEditAdminStaffAdministratorsService {
       .values({
         user_id,
         group_id,
-        unrestricted,
-        permissions: unrestricted ? [] : permissions,
+        permissions,
       })
       .returning();
 

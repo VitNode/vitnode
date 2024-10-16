@@ -10,9 +10,6 @@ export class CreateEditAdminStaffAdministratorsArgs {
   @Field(() => [PermissionsStaffArgs], { nullable: true })
   permissions: PermissionsStaffArgs[];
 
-  @Field(() => Boolean)
-  unrestricted: boolean;
-
   @Field(() => Int, { nullable: true })
   user_id: null | number;
 }

@@ -1,4 +1,4 @@
-import { AdminAuthGuards } from '@/utils';
+import { AdminAuthGuards, AdminPermission } from '@/utils';
 import { UseGuards } from '@nestjs/common';
 import { Query, Resolver } from '@nestjs/graphql';
 
@@ -13,6 +13,7 @@ export class ShowAdminAuthorizationSettingsResolver {
 
   @Query(() => ShowAdminAuthorizationSettingsObj)
   @UseGuards(AdminAuthGuards)
+  @AdminPermission('can_manage_authorization_settings')
   admin__core_authorization_settings__show(): ShowAdminAuthorizationSettingsObj {
     return this.service.show();
   }

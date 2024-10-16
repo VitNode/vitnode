@@ -9,7 +9,7 @@ export type Admin__Core_Staff_Moderators__ShowQueryVariables = Types.Exact<{
 }>;
 
 
-export type Admin__Core_Staff_Moderators__ShowQuery = { __typename?: 'Query', admin__core_staff_moderators__show: { __typename?: 'ShowAdminStaffModeratorsObj', edges: Array<{ __typename?: 'ShowAdminStaffModerators', created: Date, id: number, unrestricted: boolean, updated: Date, protected: boolean, user_or_group: { __typename: 'StaffGroupUser', color?: string, id: number, group_name: Array<{ __typename?: 'StringLanguage', language_code: string, value: string }> } | { __typename: 'User', avatar_color: string, language: string, id: number, name_seo: string, name: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, file_name: string }, group: { __typename?: 'GroupUser', id: number, color?: string, name: Array<{ __typename?: 'StringLanguage', language_code: string, value: string }> } } }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number, totalCount: number } } };
+export type Admin__Core_Staff_Moderators__ShowQuery = { __typename?: 'Query', admin__core_staff_moderators__show: { __typename?: 'ShowAdminStaffModeratorsObj', edges: Array<{ __typename?: 'ShowAdminStaffModerators', created: Date, id: number, updated: Date, protected: boolean, user_or_group: { __typename: 'StaffGroupUser', color?: string, id: number, group_name: Array<{ __typename?: 'StringLanguage', language_code: string, value: string }> } | { __typename: 'User', avatar_color: string, language: string, id: number, name_seo: string, name: string, avatar?: { __typename?: 'AvatarUser', id: number, dir_folder: string, file_name: string }, group: { __typename?: 'GroupUser', id: number, color?: string, name: Array<{ __typename?: 'StringLanguage', language_code: string, value: string }> } } }>, pageInfo: { __typename?: 'PageInfo', count: number, endCursor?: number, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: number, totalCount: number } } };
 
 
 export const Admin__Core_Staff_Moderators__Show = gql`
@@ -23,7 +23,6 @@ export const Admin__Core_Staff_Moderators__Show = gql`
     edges {
       created
       id
-      unrestricted
       user_or_group {
         __typename
         ... on User {

@@ -63,8 +63,8 @@ export const TableModeratorsStaffAdmin = ({
         {
           id: 'permissions',
           title: tShared('permissions'),
-          cell: ({ row }) => {
-            const unrestricted = row.unrestricted;
+          cell: () => {
+            const unrestricted = true;
 
             return (
               <Badge

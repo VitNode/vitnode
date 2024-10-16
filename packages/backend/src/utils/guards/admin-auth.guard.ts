@@ -4,21 +4,24 @@ import {
   Inject,
   Injectable,
 } from '@nestjs/common';
+import { Reflector } from '@nestjs/core';
 import { GqlExecutionContext } from '@nestjs/graphql';
 
 import { AuthorizationAdminSessionsObj } from '../../core/admin/sessions/authorization/authorization.dto';
 import { GqlContext } from '../context';
 
-export interface IOAdminAuthGuards {
-  authorization: (
-    context: GqlContext,
-  ) => Promise<AuthorizationAdminSessionsObj>;
-}
+export const AdminPermission = Reflector.createDecorator<string>();
 
 @Injectable()
 export class AdminAuthGuards implements CanActivate {
   constructor(
-    @Inject('IOAdminAuthGuards') private readonly service: IOAdminAuthGuards,
+    @Inject('IOAdminAuthGuards')
+    private readonly service: {
+      authorization: (
+        context: GqlContext,
+      ) => Promise<AuthorizationAdminSessionsObj>;
+    },
+    private readonly reflector: Reflector,
   ) {}
 
   protected async getAuth({ req, res }: GqlContext) {
@@ -34,12 +37,16 @@ export class AdminAuthGuards implements CanActivate {
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const ctx: GqlContext = GqlExecutionContext.create(context).getContext();
+    const authorization = await this.getAuth(ctx);
+    const permission: string | undefined = this.reflector.get(
+      AdminPermission,
+      context.getHandler(),
+    );
 
-    try {
-      return !!(await this.getAuth(ctx));
-    } catch (_) {
-      // Return true if auth is optional
-      return true;
+    if (!permission) {
+      return !!authorization;
     }
+
+    return !!authorization;
   }
 }
