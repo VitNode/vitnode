@@ -291,28 +291,28 @@ type PageInfo {
 }
 
 type PermissionsStaff {
-  children: [String!]!
   id: String!
+  permissions: [String!]!
 }
 
 input PermissionsStaffArgs {
-  permissions: [PermissionsStaffInput!]!
+  groups: [PermissionsStaffInput!]!
   plugin_code: String!
 }
 
 input PermissionsStaffInput {
-  children: [String!]!
   id: String!
+  permissions: [String!]!
 }
 
 type PermissionsStaffObj {
-  permissions: [PermissionsStaff!]!
+  groups: [PermissionsStaff!]!
   plugin: String!
   plugin_code: String!
 }
 
 type PermissionsStaffObjWithoutPluginName {
-  permissions: [PermissionsStaff!]!
+  groups: [PermissionsStaff!]!
   plugin_code: String!
 }
 

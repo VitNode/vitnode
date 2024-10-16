@@ -20,9 +20,9 @@ export interface PermissionsFieldProps {
 }
 
 interface PermissionState {
-  permissions: {
-    children: string[];
+  groups: {
     id: string;
+    permissions: string[];
   }[];
   plugin_code: string;
 }
@@ -66,8 +66,8 @@ export function PermissionsField<T extends FieldValues>({
             )}
             key={plugin.plugin_code}
           >
-            {plugin.permissions.map(permission => {
-              const permissionValue = valuePlugin?.permissions.find(
+            {plugin.groups.map(permission => {
+              const groupValue = valuePlugin?.groups.find(
                 p => p.id === permission.id,
               );
               const langKey = `admin_${plugin.plugin_code}.admin_permissions.${permission.id}`;
@@ -80,7 +80,7 @@ export function PermissionsField<T extends FieldValues>({
                 >
                   <div className="flex items-center gap-2">
                     <Switch
-                      checked={permissionValue?.children.length === 0}
+                      checked={groupValue?.permissions.length === 0}
                       id={`${plugin.plugin_code}-${permission.id}`}
                       onCheckedChange={checked => {
                         if (checked) {
@@ -90,14 +90,14 @@ export function PermissionsField<T extends FieldValues>({
                             ),
                             {
                               plugin_code: plugin.plugin_code,
-                              permissions: valuePlugin
+                              groups: valuePlugin
                                 ? [
-                                    ...valuePlugin.permissions.filter(
+                                    ...valuePlugin.groups.filter(
                                       p => p.id !== permission.id,
                                     ),
-                                    { id: permission.id, children: [] },
+                                    { id: permission.id, permissions: [] },
                                   ]
-                                : [{ id: permission.id, children: [] }],
+                                : [{ id: permission.id, permissions: [] }],
                             },
                           ];
                           field.onChange(valueToChange);
@@ -113,7 +113,7 @@ export function PermissionsField<T extends FieldValues>({
                           ),
                           {
                             ...valuePlugin,
-                            permissions: valuePlugin.permissions.filter(
+                            groups: valuePlugin.groups.filter(
                               p => p.id !== permission.id,
                             ),
                           },
@@ -121,7 +121,7 @@ export function PermissionsField<T extends FieldValues>({
 
                         field.onChange(
                           valueToChange.filter(
-                            value => value.permissions.length > 0,
+                            value => value.groups.length > 0,
                           ),
                         );
                       }}
@@ -140,10 +140,10 @@ export function PermissionsField<T extends FieldValues>({
                   </div>
 
                   <AccordionContent>
-                    {permission.children.length > 0 && (
+                    {permission.permissions.length > 0 && (
                       <ul className="ml-4 mt-2 space-y-2 sm:ml-8">
-                        {permission.children.map(child => {
-                          const childValue = permissionValue?.children.find(
+                        {permission.permissions.map(child => {
+                          const childValue = groupValue?.permissions.find(
                             c => c === child,
                           );
                           const childLangKey = `${langKey}_${child}`;
@@ -156,7 +156,7 @@ export function PermissionsField<T extends FieldValues>({
                               <Switch
                                 checked={
                                   !!childValue ||
-                                  permissionValue?.children.length === 0
+                                  groupValue?.permissions.length === 0
                                 }
                                 id={`${plugin.plugin_code}-${permission.id}-${child}`}
                                 onCheckedChange={checked => {
@@ -169,16 +169,16 @@ export function PermissionsField<T extends FieldValues>({
                                       ),
                                       {
                                         plugin_code: plugin.plugin_code,
-                                        permissions: valuePlugin
+                                        groups: valuePlugin
                                           ? [
-                                              ...valuePlugin.permissions.filter(
+                                              ...valuePlugin.groups.filter(
                                                 p => p.id !== permission.id,
                                               ),
                                               {
                                                 id: permission.id,
-                                                children: permissionValue
+                                                permissions: groupValue
                                                   ? [
-                                                      ...permissionValue.children,
+                                                      ...groupValue.permissions,
                                                       child,
                                                     ]
                                                   : [child],
@@ -187,7 +187,7 @@ export function PermissionsField<T extends FieldValues>({
                                           : [
                                               {
                                                 id: permission.id,
-                                                children: [child],
+                                                permissions: [child],
                                               },
                                             ],
                                       },
@@ -207,22 +207,20 @@ export function PermissionsField<T extends FieldValues>({
                                     ),
                                     {
                                       ...valuePlugin,
-                                      permissions: valuePlugin.permissions.map(
-                                        p => {
-                                          if (p.id !== permission.id) return p;
+                                      groups: valuePlugin.groups.map(p => {
+                                        if (p.id !== permission.id) return p;
 
-                                          return {
-                                            ...p,
-                                            children: childValue
-                                              ? p.children.filter(
-                                                  c => c !== child,
-                                                )
-                                              : permission.children.filter(
-                                                  c => c !== child,
-                                                ),
-                                          };
-                                        },
-                                      ),
+                                        return {
+                                          ...p,
+                                          permissions: childValue
+                                            ? p.permissions.filter(
+                                                c => c !== child,
+                                              )
+                                            : permission.permissions.filter(
+                                                c => c !== child,
+                                              ),
+                                        };
+                                      }),
                                     },
                                   ];
 
@@ -230,9 +228,9 @@ export function PermissionsField<T extends FieldValues>({
                                     value =>
                                       value.plugin_code ===
                                         plugin.plugin_code &&
-                                      value.permissions.find(
+                                      value.groups.find(
                                         p => p.id === permission.id,
-                                      )?.children.length === 0,
+                                      )?.permissions.length === 0,
                                   );
 
                                   const returnValue: PermissionState[] =
@@ -246,18 +244,16 @@ export function PermissionsField<T extends FieldValues>({
                                             ) {
                                               return {
                                                 ...item,
-                                                permissions:
-                                                  item.permissions.filter(
-                                                    p => p.id !== permission.id,
-                                                  ),
+                                                permissions: item.groups.filter(
+                                                  p => p.id !== permission.id,
+                                                ),
                                               };
                                             }
 
                                             return item;
                                           })
                                           .filter(
-                                            plugin =>
-                                              plugin.permissions.length > 0,
+                                            plugin => plugin.groups.length > 0,
                                           )
                                       : valueToChange;
 

@@ -13,7 +13,11 @@ export class ShowAdminAuthorizationSettingsResolver {
 
   @Query(() => ShowAdminAuthorizationSettingsObj)
   @UseGuards(AdminAuthGuards)
-  @AdminPermission('can_manage_authorization_settings')
+  @AdminPermission({
+    plugin_code: 'core',
+    group: 'settings',
+    permission: 'can_manage_settings_authorization',
+  })
   admin__core_authorization_settings__show(): ShowAdminAuthorizationSettingsObj {
     return this.service.show();
   }

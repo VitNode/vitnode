@@ -6,13 +6,13 @@ export type Admin__Core_Plugins__Permissions_Admin__ShowQueryVariables = Types.E
 }>;
 
 
-export type Admin__Core_Plugins__Permissions_Admin__ShowQuery = { __typename?: 'Query', admin__core_plugins__permissions_admin__show: Array<{ __typename?: 'PermissionsStaff', children: Array<string>, id: string }> };
+export type Admin__Core_Plugins__Permissions_Admin__ShowQuery = { __typename?: 'Query', admin__core_plugins__permissions_admin__show: Array<{ __typename?: 'PermissionsStaff', permissions: Array<string>, id: string }> };
 
 
 export const Admin__Core_Plugins__Permissions_Admin__Show = gql`
     query Admin__core_plugins__permissions_admin__show($pluginCode: String!) {
   admin__core_plugins__permissions_admin__show(plugin_code: $pluginCode) {
-    children
+    permissions
     id
   }
 }

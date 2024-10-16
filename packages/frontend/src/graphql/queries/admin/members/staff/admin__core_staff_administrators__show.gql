@@ -47,8 +47,8 @@ query Admin__core_staff_administrators__show(
       updated
       protected
       permissions {
-        permissions {
-          children
+        groups {
+          permissions
           id
         }
         plugin_code
@@ -63,9 +63,9 @@ query Admin__core_staff_administrators__show(
       totalCount
     }
     permissions {
-      permissions {
+      groups {
         id
-        children
+        permissions
       }
       plugin
       plugin_code

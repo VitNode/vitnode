@@ -1,3 +1,4 @@
+import { AccessDeniedError } from '@/errors';
 import {
   CanActivate,
   ExecutionContext,
@@ -10,7 +11,14 @@ import { GqlExecutionContext } from '@nestjs/graphql';
 import { AuthorizationAdminSessionsObj } from '../../core/admin/sessions/authorization/authorization.dto';
 import { GqlContext } from '../context';
 
-export const AdminPermission = Reflector.createDecorator<string>();
+interface AdminPermissionDecorator {
+  group: string;
+  permission: string;
+  plugin_code: string;
+}
+
+export const AdminPermission =
+  Reflector.createDecorator<AdminPermissionDecorator>();
 
 @Injectable()
 export class AdminAuthGuards implements CanActivate {
@@ -38,14 +46,24 @@ export class AdminAuthGuards implements CanActivate {
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const ctx: GqlContext = GqlExecutionContext.create(context).getContext();
     const authorization = await this.getAuth(ctx);
-    const permission: string | undefined = this.reflector.get(
+    const permission: AdminPermissionDecorator | undefined = this.reflector.get(
       AdminPermission,
       context.getHandler(),
     );
-
-    if (!permission) {
+    if (!permission || authorization.permissions.length === 0) {
       return !!authorization;
     }
+
+    const plugin = authorization.permissions.find(
+      plugin => plugin.plugin_code === permission.plugin_code,
+    );
+    if (!plugin) throw new AccessDeniedError();
+    const group = plugin.groups.find(group => group.id === permission.group);
+    if (!group) throw new AccessDeniedError();
+    const permissionObj = group.permissions.find(
+      item => item === permission.permission,
+    );
+    if (!permissionObj) throw new AccessDeniedError();
 
     return !!authorization;
   }

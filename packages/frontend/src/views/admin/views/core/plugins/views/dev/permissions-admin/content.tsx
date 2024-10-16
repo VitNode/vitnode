@@ -11,7 +11,7 @@ export const ContentPermissionsAdminDevPluginAdminView = (
   const data = dataFromSSR.admin__core_plugins__permissions_admin__show.map(
     item => ({
       ...item,
-      children: item.children.map(child => ({
+      children: item.permissions.map(child => ({
         id: child,
         children: [],
       })),
@@ -24,10 +24,9 @@ export const ContentPermissionsAdminDevPluginAdminView = (
         return (
           <ItemPermissionsAdminDevPluginAdmin
             {...data}
-            // eslint-disable-next-line react/no-children-prop
-            children={data.children.map(child => child.id)}
             dataFromSSR={dataFromSSR}
             parentId={parentId?.toString()}
+            permissions={data.children.map(child => child.id)}
           />
         );
       }}

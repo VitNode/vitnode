@@ -675,30 +675,30 @@ export type PageInfo = {
 
 export type PermissionsStaff = {
   __typename?: 'PermissionsStaff';
-  children: Array<Scalars['String']['output']>;
   id: Scalars['String']['output'];
+  permissions: Array<Scalars['String']['output']>;
 };
 
 export type PermissionsStaffArgs = {
-  permissions: Array<PermissionsStaffInput>;
+  groups: Array<PermissionsStaffInput>;
   plugin_code: Scalars['String']['input'];
 };
 
 export type PermissionsStaffInput = {
-  children: Array<Scalars['String']['input']>;
   id: Scalars['String']['input'];
+  permissions: Array<Scalars['String']['input']>;
 };
 
 export type PermissionsStaffObj = {
   __typename?: 'PermissionsStaffObj';
-  permissions: Array<PermissionsStaff>;
+  groups: Array<PermissionsStaff>;
   plugin: Scalars['String']['output'];
   plugin_code: Scalars['String']['output'];
 };
 
 export type PermissionsStaffObjWithoutPluginName = {
   __typename?: 'PermissionsStaffObjWithoutPluginName';
-  permissions: Array<PermissionsStaff>;
+  groups: Array<PermissionsStaff>;
   plugin_code: Scalars['String']['output'];
 };
 
