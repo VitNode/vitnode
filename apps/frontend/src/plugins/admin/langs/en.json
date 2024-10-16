@@ -170,7 +170,10 @@
           "updated": "Updated",
           "preview": "Preview",
           "create_edit": {
-            "create": "Create Policy",
+            "create": {
+              "title": "Create Policy",
+              "desc": "Create a new policy for your website."
+            },
             "edit": "Edit Policy",
             "form": {
               "title": "Title",
