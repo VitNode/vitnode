@@ -2,6 +2,7 @@ import { TranslationsProvider } from '@/components/translations-provider';
 import { Card } from '@/components/ui/card';
 import { HeaderContent } from '@/components/ui/header-content';
 import { fetcher } from '@/graphql/fetcher';
+import { checkPermissionSessionAdmin } from '@/graphql/get-session-admin-data';
 import {
   Admin__Core_Security__Captcha__Show,
   Admin__Core_Security__Captcha__ShowQuery,
@@ -30,6 +31,12 @@ export const generateMetadataCaptchaSecurityAdmin =
   };
 
 export const CaptchaSecurityAdminView = async () => {
+  const perm = await checkPermissionSessionAdmin({
+    plugin_code: 'core',
+    group: 'settings',
+    permission: 'can_manage_settings_security',
+  });
+  if (perm) return perm;
   const [t, data] = await Promise.all([
     getTranslations('admin.core.settings.security.captcha'),
     getData(),

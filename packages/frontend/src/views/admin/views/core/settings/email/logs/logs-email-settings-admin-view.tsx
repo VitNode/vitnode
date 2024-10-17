@@ -4,6 +4,7 @@ import {
   getPaginationTool,
   SearchParamsPagination,
 } from '@/graphql/get-pagination-tool';
+import { checkPermissionSessionAdmin } from '@/graphql/get-session-admin-data';
 import {
   Admin__Core_Email__Logs,
   Admin__Core_Email__LogsQuery,
@@ -40,6 +41,12 @@ export const LogsEmailSettingsAdminView = async ({
 }: {
   searchParams: Promise<SearchParamsPagination>;
 }) => {
+  const perm = await checkPermissionSessionAdmin({
+    plugin_code: 'core',
+    group: 'settings',
+    permission: 'can_manage_settings_email',
+  });
+  if (perm) return perm;
   const variables = await getPaginationTool({
     searchParams,
     defaultPageSize: 10,

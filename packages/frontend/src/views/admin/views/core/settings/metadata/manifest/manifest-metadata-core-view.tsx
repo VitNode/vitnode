@@ -2,6 +2,7 @@ import { TranslationsProvider } from '@/components/translations-provider';
 import { Card } from '@/components/ui/card';
 import { HeaderContent } from '@/components/ui/header-content';
 import { fetcher } from '@/graphql/fetcher';
+import { checkPermissionSessionAdmin } from '@/graphql/get-session-admin-data';
 import {
   Admin__Core_Manifest_Metadata__Show,
   Admin__Core_Manifest_Metadata__ShowQuery,
@@ -34,6 +35,12 @@ export const generateMetadataManifestMetadataCoreAdmin =
   };
 
 export const ManifestMetadataCoreAdminView = async () => {
+  const perm = await checkPermissionSessionAdmin({
+    plugin_code: 'core',
+    group: 'settings',
+    permission: 'can_manage_settings_metadata',
+  });
+  if (perm) return perm;
   const [t, data] = await Promise.all([
     getTranslations('admin.core.metadata.manifest'),
     getData(),

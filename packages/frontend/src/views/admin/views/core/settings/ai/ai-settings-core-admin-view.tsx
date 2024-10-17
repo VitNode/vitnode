@@ -2,6 +2,7 @@ import { TranslationsProvider } from '@/components/translations-provider';
 import { Card } from '@/components/ui/card';
 import { HeaderContent } from '@/components/ui/header-content';
 import { getGlobalData } from '@/graphql/get-global-data';
+import { checkPermissionSessionAdmin } from '@/graphql/get-session-admin-data';
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
@@ -16,6 +17,12 @@ export const generateMetadataAiSettingsAdmin = async (): Promise<Metadata> => {
 };
 
 export const AiSettingsCoreAdminView = async () => {
+  const perm = await checkPermissionSessionAdmin({
+    plugin_code: 'core',
+    group: 'settings',
+    permission: 'can_manage_settings_ai',
+  });
+  if (perm) return perm;
   const [
     t,
     {

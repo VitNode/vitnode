@@ -1,4 +1,4 @@
-import { AdminAuthGuards } from '@/utils';
+import { AdminAuthGuards, AdminPermission } from '@/utils';
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
@@ -12,6 +12,11 @@ export class EditAdminCaptchaSecurityResolver {
 
   @Mutation(() => ShowAdminCaptchaSecurityObj)
   @UseGuards(AdminAuthGuards)
+  @AdminPermission({
+    plugin_code: 'core',
+    group: 'settings',
+    permission: 'can_manage_settings_security',
+  })
   admin__core_security__captcha__edit(
     @Args() args: EditAdminCaptchaSecurityArgs,
   ): ShowAdminCaptchaSecurityObj {

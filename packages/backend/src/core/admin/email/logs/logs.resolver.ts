@@ -1,4 +1,4 @@
-import { AdminAuthGuards } from '@/utils';
+import { AdminAuthGuards, AdminPermission } from '@/utils';
 import { UseGuards } from '@nestjs/common';
 import { Args, Query, Resolver } from '@nestjs/graphql';
 
@@ -11,6 +11,11 @@ export class LogsAdminEmailResolver {
 
   @Query(() => LogsAdminEmailObj)
   @UseGuards(AdminAuthGuards)
+  @AdminPermission({
+    plugin_code: 'core',
+    group: 'settings',
+    permission: 'can_manage_settings_email',
+  })
   async admin__core_email__logs(
     @Args() args: LogsAdminEmailArgs,
   ): Promise<LogsAdminEmailObj> {

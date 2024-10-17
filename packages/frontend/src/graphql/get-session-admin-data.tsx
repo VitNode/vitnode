@@ -1,5 +1,6 @@
+import { ErrorView } from '@/views/theme/views/error/error-view';
 import { fetcher } from './fetcher';
-import { getAdminIdCookie, getUserIdCookie } from './get-user-id-cookie';
+import { getAdminIdCookie } from './get-user-id-cookie';
 import {
   Admin__Sessions__Authorization,
   Admin__Sessions__AuthorizationQuery,
@@ -26,4 +27,27 @@ export const getSessionAdminData = async () => {
   });
 
   return data;
+};
+
+export const checkPermissionSessionAdmin = async ({
+  plugin_code,
+  group,
+  permission,
+}: {
+  plugin_code: string;
+  group: string;
+  permission: string;
+}) => {
+  const {
+    admin__sessions__authorization: { permissions },
+  } = await getSessionAdminData();
+  const findPlugin = permissions.find(item => item.plugin_code === plugin_code);
+  const findGroup = findPlugin?.groups.find(item => item.id === group);
+  if (findGroup?.permissions.length === 0) return;
+  const findPermission = findGroup?.permissions.find(
+    item => item === permission,
+  );
+  if (!findPermission) return <ErrorView code="403" />;
+
+  return;
 };
