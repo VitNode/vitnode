@@ -6,7 +6,10 @@ import {
   getPaginationTool,
   SearchParamsPagination,
 } from '@/graphql/get-pagination-tool';
-import { checkPermissionSessionAdmin } from '@/graphql/get-session-admin-data';
+import {
+  checkAdminPermission,
+  checkAdminPermissionMetadata,
+} from '@/graphql/get-session-admin-data';
 import {
   Admin_Core_Terms__Show,
   Admin_Core_Terms__ShowQuery,
@@ -34,7 +37,15 @@ export const getData = async (
   return data;
 };
 
+const permission = {
+  plugin_code: 'core',
+  group: 'settings',
+  permission: 'can_manage_settings_legal',
+};
+
 export const generateMetadataLegalSettingsAdmin = async () => {
+  const perm = await checkAdminPermissionMetadata(permission);
+  if (perm) return perm;
   const t = await getTranslations('admin.core.settings.legal');
 
   return {
@@ -47,11 +58,7 @@ export const LegalSettingsAdminView = async ({
 }: {
   searchParams: Promise<SearchParamsPagination>;
 }) => {
-  const perm = await checkPermissionSessionAdmin({
-    plugin_code: 'core',
-    group: 'settings',
-    permission: 'can_manage_settings_legal',
-  });
+  const perm = await checkAdminPermission(permission);
   if (perm) return perm;
   const variables = await getPaginationTool({
     searchParams,

@@ -1,7 +1,10 @@
 import { Card } from '@/components/ui/card';
 import { HeaderContent } from '@/components/ui/header-content';
 import { fetcher } from '@/graphql/fetcher';
-import { checkPermissionSessionAdmin } from '@/graphql/get-session-admin-data';
+import {
+  checkAdminPermission,
+  checkAdminPermissionMetadata,
+} from '@/graphql/get-session-admin-data';
 import {
   Admin__Core_Email_Settings__Show,
   Admin__Core_Email_Settings__ShowQuery,
@@ -24,8 +27,16 @@ const getData = async () => {
   return data;
 };
 
+const permission = {
+  plugin_code: 'core',
+  group: 'settings',
+  permission: 'can_manage_settings_email',
+};
+
 export const generateMetadataEmailSettingsAdmin =
   async (): Promise<Metadata> => {
+    const perm = await checkAdminPermissionMetadata(permission);
+    if (perm) return perm;
     const t = await getTranslations('admin_core.nav');
 
     return {
@@ -34,11 +45,7 @@ export const generateMetadataEmailSettingsAdmin =
   };
 
 export const EmailSettingsAdminView = async () => {
-  const perm = await checkPermissionSessionAdmin({
-    plugin_code: 'core',
-    group: 'settings',
-    permission: 'can_manage_settings_email',
-  });
+  const perm = await checkAdminPermission(permission);
   if (perm) return perm;
   const [t, data] = await Promise.all([
     getTranslations('admin.core.settings.email'),
