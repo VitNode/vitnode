@@ -23,14 +23,14 @@ query Core_sessions__authorization {
         color
         id
       }
+      files_permissions {
+        allow_upload
+        max_storage_for_submit
+        space_used
+        total_max_storage
+      }
     }
     plugin_default
-    files {
-      allow_upload
-      max_storage_for_submit
-      total_max_storage
-      space_used
-    }
   }
   core_nav__show {
     edges {

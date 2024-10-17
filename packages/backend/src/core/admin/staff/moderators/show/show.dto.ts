@@ -57,9 +57,6 @@ export class ShowAdminStaffModerators {
   @Field(() => Boolean)
   protected: boolean;
 
-  @Field(() => Boolean)
-  unrestricted: boolean;
-
   @Field(() => Date)
   updated: Date;
 

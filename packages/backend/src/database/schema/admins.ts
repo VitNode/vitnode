@@ -15,7 +15,6 @@ export const core_admin_permissions = pgTable(
     user_id: t.integer().references(() => core_users.id, {
       onDelete: 'cascade',
     }),
-    unrestricted: t.boolean().notNull().default(false),
     created: t.timestamp().notNull().defaultNow(),
     updated: t.timestamp().notNull().defaultNow(),
     protected: t.boolean().notNull().default(false),

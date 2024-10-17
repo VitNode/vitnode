@@ -4,10 +4,7 @@ query Admin__sessions__authorization {
       email
       id
       name_seo
-      is_admin
-      is_mod
       name
-      newsletter
       avatar_color
       language
       avatar {
@@ -23,14 +20,21 @@ query Admin__sessions__authorization {
         color
         id
       }
+      files_permissions {
+        allow_upload
+        max_storage_for_submit
+        space_used
+        total_max_storage
+      }
     }
     version
     restart_server
-    files {
-      allow_upload
-      max_storage_for_submit
-      space_used
-      total_max_storage
+    permissions {
+      groups {
+        id
+        permissions
+      }
+      plugin_code
     }
   }
   admin__nav__show {

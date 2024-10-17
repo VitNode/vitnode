@@ -1,11 +1,8 @@
-import { User } from '@/decorators';
-import { Field, Float, Int, ObjectType } from '@nestjs/graphql';
+import { UserWithDangerousInfo } from '@/decorators';
+import { Field, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
-export class AuthorizationCurrentUserObj extends User {
-  @Field(() => String)
-  email: string;
-
+export class AuthorizationCurrentUserObj extends UserWithDangerousInfo {
   @Field(() => Boolean)
   is_admin: boolean;
 
@@ -17,25 +14,7 @@ export class AuthorizationCurrentUserObj extends User {
 }
 
 @ObjectType()
-export class FilesAuthorizationCoreSessions {
-  @Field(() => Boolean)
-  allow_upload: boolean;
-
-  @Field(() => Int)
-  max_storage_for_submit: number;
-
-  @Field(() => Float)
-  space_used: number;
-
-  @Field(() => Int)
-  total_max_storage: number;
-}
-
-@ObjectType()
 export class AuthorizationCoreSessionsObj {
-  @Field(() => FilesAuthorizationCoreSessions)
-  files: FilesAuthorizationCoreSessions;
-
   @Field(() => String)
   plugin_default: string;
 

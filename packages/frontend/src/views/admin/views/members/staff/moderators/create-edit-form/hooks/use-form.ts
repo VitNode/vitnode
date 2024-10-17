@@ -39,7 +39,6 @@ export const useFormCreateEditFormGroupsMembersAdmin = () => {
         values.type === 'user' && values.user?.[0].key
           ? +values.user[0].key
           : undefined,
-      unrestricted: values.unrestricted,
     });
 
     if (mutation?.error) {

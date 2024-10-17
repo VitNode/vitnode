@@ -61,7 +61,9 @@ export const Editor = ({
   const session = useSession();
   const adminSession = useSessionAdmin();
   const allowUploadFilesSession =
-    session.files.allow_upload || adminSession.files.allow_upload;
+    session.session?.files_permissions.allow_upload ??
+    adminSession.session?.files_permissions.allow_upload ??
+    false;
   const { handleDelete, checkUploadFile, uploadFile } = useFilesExtensionEditor(
     {
       allowUploadFiles,

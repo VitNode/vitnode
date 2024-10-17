@@ -1,4 +1,4 @@
-import { AdminAuthGuards } from '@/utils';
+import { AdminAuthGuards, AdminPermission } from '@/utils';
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
@@ -12,6 +12,11 @@ export class EditAdminManifestMetadataResolver {
 
   @Mutation(() => ShowAdminManifestMetadataObj)
   @UseGuards(AdminAuthGuards)
+  @AdminPermission({
+    plugin_code: 'core',
+    group: 'settings',
+    permission: 'can_manage_settings_metadata',
+  })
   async admin__core_manifest_metadata__edit(
     @Args() args: EditAdminManifestMetadataObj,
   ): Promise<ShowAdminManifestMetadataObj> {

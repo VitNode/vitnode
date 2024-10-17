@@ -40,7 +40,7 @@ export class CreateEditAdminPermissionsAdminPluginsService {
     // Check if the id already exists
     if (old_id !== id) {
       const existsPermission = parent
-        ? parent.children.find(child => child === id)
+        ? parent.permissions.find(child => child === id)
         : config.permissions_admin?.find(permission => permission.id === id);
 
       if (existsPermission) {
@@ -54,7 +54,7 @@ export class CreateEditAdminPermissionsAdminPluginsService {
     // Edit
     if (old_id) {
       const oldPermission = parent
-        ? parent.children.find(child => child === old_id)
+        ? parent.permissions.find(child => child === old_id)
         : config.permissions_admin?.find(
             permission => permission.id === old_id,
           );
@@ -72,7 +72,7 @@ export class CreateEditAdminPermissionsAdminPluginsService {
             if (permission.id === parent.id) {
               return {
                 ...permission,
-                children: permission.children.map(child => {
+                children: permission.permissions.map(child => {
                   if (child === old_id) {
                     return id;
                   }
@@ -92,7 +92,7 @@ export class CreateEditAdminPermissionsAdminPluginsService {
             if (permission.id === old_id) {
               return {
                 id,
-                children: permission.children,
+                permissions: permission.permissions,
               };
             }
 
@@ -115,7 +115,7 @@ export class CreateEditAdminPermissionsAdminPluginsService {
 
       return {
         id,
-        children: [],
+        permissions: [],
       };
     }
 
@@ -127,7 +127,7 @@ export class CreateEditAdminPermissionsAdminPluginsService {
           if (permission.id === parent.id) {
             return {
               ...permission,
-              children: [...permission.children, id],
+              permissions: [...permission.permissions, id],
             };
           }
 
@@ -141,7 +141,7 @@ export class CreateEditAdminPermissionsAdminPluginsService {
           ...(config.permissions_admin ?? []),
           {
             id,
-            children: [],
+            permissions: [],
           },
         ],
       };

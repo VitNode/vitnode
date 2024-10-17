@@ -10,9 +10,9 @@ enum AllowTypeFilesEnum {
 }
 
 type AuthorizationAdminSessionsObj {
-  files: FilesAuthorizationCoreSessions!
+  permissions: [PermissionsStaffObjWithoutPluginName!]!
   restart_server: Boolean!
-  user: AuthorizationCurrentUserObj
+  user: UserWithDangerousInfo!
   version: String!
 }
 
@@ -22,7 +22,6 @@ type AuthorizationCoreMiddleware {
 }
 
 type AuthorizationCoreSessionsObj {
-  files: FilesAuthorizationCoreSessions!
   plugin_default: String!
   user: AuthorizationCurrentUserObj
 }
@@ -31,6 +30,7 @@ type AuthorizationCurrentUserObj {
   avatar: AvatarUser
   avatar_color: String!
   email: String!
+  files_permissions: FilesPermissionsCoreSessions!
   group: GroupUser!
   id: Int!
   is_admin: Boolean!
@@ -134,19 +134,19 @@ type EditorShowCoreMiddleware {
   sticky: Boolean!
 }
 
-type FilesAuthorizationCoreSessions {
-  allow_upload: Boolean!
-  max_storage_for_submit: Int!
-  space_used: Float!
-  total_max_storage: Int!
-}
-
 input FilesEditAdminEditorStyles {
   allow_type: AllowTypeFilesEnum!
 }
 
 type FilesEditorShowCoreMiddleware {
   allow_type: AllowTypeFilesEnum!
+}
+
+type FilesPermissionsCoreSessions {
+  allow_upload: Boolean!
+  max_storage_for_submit: Int!
+  space_used: Float!
+  total_max_storage: Int!
 }
 
 type GroupUser {
@@ -248,9 +248,9 @@ type Mutation {
   admin__core_plugins__permissions_admin__delete(id: String!, parent_id: String, plugin_code: String!): String!
   admin__core_plugins__upload(code: String, file: Upload!): String!
   admin__core_security__captcha__edit(secret_key: String!, site_key: String!, type: CaptchaTypeEnum!): ShowAdminCaptchaSecurityObj!
-  admin__core_staff_administrators__create_edit(group_id: Int, permissions: [PermissionsStaffArgs!], unrestricted: Boolean!, user_id: Int): ShowAdminStaffAdministrators!
+  admin__core_staff_administrators__create_edit(group_id: Int, id: Int, permissions: [PermissionsStaffArgs!], user_id: Int): ShowAdminStaffAdministrators!
   admin__core_staff_administrators__delete(id: Int!): String!
-  admin__core_staff_moderators__create(group_id: Int, unrestricted: Boolean!, user_id: Int): ShowAdminStaffModerators!
+  admin__core_staff_moderators__create(group_id: Int, user_id: Int): ShowAdminStaffModerators!
   admin__core_staff_moderators__delete(id: Int!): String!
   admin__core_styles__editor__edit(files: FilesEditAdminEditorStyles!, sticky: Boolean!): EditorShowCoreMiddleware!
   admin__core_styles__nav__create(description: [StringLanguageInput!]!, external: Boolean!, href: String!, name: [StringLanguageInput!]!): ShowCoreNav!
@@ -291,28 +291,28 @@ type PageInfo {
 }
 
 type PermissionsStaff {
-  children: [String!]!
   id: String!
+  permissions: [String!]!
 }
 
 input PermissionsStaffArgs {
-  permissions: [PermissionsStaffInput!]!
+  groups: [PermissionsStaffInput!]!
   plugin_code: String!
 }
 
 input PermissionsStaffInput {
-  children: [String!]!
   id: String!
+  permissions: [String!]!
 }
 
 type PermissionsStaffObj {
-  permissions: [PermissionsStaff!]!
+  groups: [PermissionsStaff!]!
   plugin: String!
   plugin_code: String!
 }
 
 type PermissionsStaffObjWithoutPluginName {
-  permissions: [PermissionsStaff!]!
+  groups: [PermissionsStaff!]!
   plugin_code: String!
 }
 
@@ -524,7 +524,6 @@ type ShowAdminStaffAdministrators {
   id: Int!
   permissions: [PermissionsStaffObjWithoutPluginName!]!
   protected: Boolean!
-  unrestricted: Boolean!
   updated: DateTime!
   user_or_group: UserOrGroupCoreStaffUnion!
 }
@@ -548,7 +547,6 @@ type ShowAdminStaffModerators {
   created: DateTime!
   id: Int!
   protected: Boolean!
-  unrestricted: Boolean!
   updated: DateTime!
   user_or_group: UserOrGroupCoreStaffUnion!
 }
@@ -826,3 +824,15 @@ type User {
 }
 
 union UserOrGroupCoreStaffUnion = StaffGroupUser | User
+
+type UserWithDangerousInfo {
+  avatar: AvatarUser
+  avatar_color: String!
+  email: String!
+  files_permissions: FilesPermissionsCoreSessions!
+  group: GroupUser!
+  id: Int!
+  language: String!
+  name: String!
+  name_seo: String!
+}

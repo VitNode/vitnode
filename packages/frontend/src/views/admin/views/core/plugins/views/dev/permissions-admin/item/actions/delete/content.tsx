@@ -16,7 +16,7 @@ import { SubmitDeleteActionItemPermissionsAdminDevPluginAdmin } from './submit';
 export const ContentDeleteActionItemPermissionsAdminDevPluginAdmin = ({
   id,
   parentId,
-  children,
+  permissions,
 }: {
   parentId: string | undefined;
 } & Admin__Core_Plugins__Permissions_Admin__ShowQuery['admin__core_plugins__permissions_admin__show'][0]) => {
@@ -34,7 +34,7 @@ export const ContentDeleteActionItemPermissionsAdminDevPluginAdmin = ({
           })}
         </AlertDialogDescription>
 
-        {children.length > 0 && (
+        {permissions.length > 0 && (
           <Alert variant="warn">
             <AlertTitle>{t('children_warn.title')}</AlertTitle>
             <AlertDescription>{t('children_warn.desc')}</AlertDescription>

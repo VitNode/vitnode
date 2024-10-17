@@ -1,13 +1,5 @@
-mutation Admin__core_staff_moderators__create(
-  $groupId: Int
-  $userId: Int
-  $unrestricted: Boolean!
-) {
-  admin__core_staff_moderators__create(
-    group_id: $groupId
-    user_id: $userId
-    unrestricted: $unrestricted
-  ) {
+mutation Admin__core_staff_moderators__create($groupId: Int, $userId: Int) {
+  admin__core_staff_moderators__create(group_id: $groupId, user_id: $userId) {
     id
   }
 }

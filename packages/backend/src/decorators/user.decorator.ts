@@ -1,5 +1,11 @@
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
-import { Field, GqlExecutionContext, Int, ObjectType } from '@nestjs/graphql';
+import {
+  Field,
+  Float,
+  GqlExecutionContext,
+  Int,
+  ObjectType,
+} from '@nestjs/graphql';
 
 import { GqlContext, StringLanguage } from '../utils';
 
@@ -37,6 +43,21 @@ export class AvatarUser {
 }
 
 @ObjectType()
+export class FilesPermissionsCoreSessions {
+  @Field(() => Boolean)
+  allow_upload: boolean;
+
+  @Field(() => Int)
+  max_storage_for_submit: number;
+
+  @Field(() => Float)
+  space_used: number;
+
+  @Field(() => Int)
+  total_max_storage: number;
+}
+
+@ObjectType()
 export class User {
   @Field(() => AvatarUser, { nullable: true })
   avatar: AvatarUser | null;
@@ -58,4 +79,13 @@ export class User {
 
   @Field(() => String)
   name_seo: string;
+}
+
+@ObjectType()
+export class UserWithDangerousInfo extends User {
+  @Field(() => String)
+  email: string;
+
+  @Field(() => FilesPermissionsCoreSessions)
+  files_permissions: FilesPermissionsCoreSessions;
 }

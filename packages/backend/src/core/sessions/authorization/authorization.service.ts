@@ -2,9 +2,7 @@ import { NotFoundError } from '@/errors';
 import { getUser } from '@/utils/database/helpers/get-user';
 import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
-import { eq, sum } from 'drizzle-orm';
 
-import { core_files } from '../../../database/schema/files';
 import { GqlContext } from '../../../utils';
 import { AuthorizationCoreSessionsObj } from './authorization.dto';
 import { InternalAuthorizationCoreSessionsService } from './internal/internal_authorization.service';
@@ -78,14 +76,6 @@ export class AuthorizationCoreSessionsService {
         db: this.databaseService.db,
       });
 
-      const countStorageUsedDb = await this.databaseService.db
-        .select({
-          space_used: sum(core_files.file_size),
-        })
-        .from(core_files)
-        .where(eq(core_files.user_id, currentUser.id));
-      const countStorageUsed = +(countStorageUsedDb[0].space_used ?? 0);
-
       return {
         user: {
           ...user,
@@ -102,32 +92,11 @@ export class AuthorizationCoreSessionsService {
           avatar_color: user.avatar_color,
         },
         plugin_default: plugin?.code ?? '',
-        files: {
-          allow_upload: user.group.files_allow_upload,
-          max_storage_for_submit: user.group.files_max_storage_for_submit
-            ? user.group.files_max_storage_for_submit * 1024
-            : user.group.files_max_storage_for_submit,
-          total_max_storage: user.group.files_total_max_storage
-            ? user.group.files_total_max_storage * 1024
-            : user.group.files_total_max_storage,
-          space_used: countStorageUsed,
-        },
       };
     } catch (_) {
-      const guestGroup =
-        await this.databaseService.db.query.core_groups.findFirst({
-          where: (table, { eq }) => eq(table.guest, true),
-        });
-
       return {
         user: null,
         plugin_default: plugin?.code ?? '',
-        files: {
-          allow_upload: guestGroup?.files_allow_upload ?? false,
-          max_storage_for_submit: guestGroup?.files_max_storage_for_submit ?? 0,
-          total_max_storage: guestGroup?.files_total_max_storage ?? 0,
-          space_used: 0,
-        },
       };
     }
   }
