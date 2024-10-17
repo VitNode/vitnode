@@ -1,3 +1,4 @@
+import { User } from '@/decorators';
 import { Injectable } from '@nestjs/common';
 
 import { ShowAdminNavService } from '../../nav/show/show.service';
@@ -11,15 +12,18 @@ import {
 export class SearchAdminSessionsService {
   constructor(private readonly navAdminService: ShowAdminNavService) {}
 
-  async search({
-    search: searchFromProp,
-  }: SearchAdminSessionsArgs): Promise<SearchAdminSessionsObj> {
+  async search(
+    { search: searchFromProp }: SearchAdminSessionsArgs,
+    user: User,
+  ): Promise<SearchAdminSessionsObj> {
     const search = searchFromProp
       ? searchFromProp.trim().toLowerCase().split(' ')
       : [];
 
     // Flat map to remove children
-    const nav: NavSearchAdminSessions[] = (await this.navAdminService.show())
+    const nav: NavSearchAdminSessions[] = (
+      await this.navAdminService.show(user)
+    )
       .flatMap(item => {
         const nav = item.nav.flatMap(nav => ({
           code_plugin: item.code,

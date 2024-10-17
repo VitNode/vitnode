@@ -5,7 +5,6 @@ import {
   getConfigFile,
   GqlContext,
   NotFoundError,
-  User,
 } from '@/index';
 import { getUser } from '@/utils/database/helpers/get-user';
 import { InternalDatabaseService } from '@/utils/database/internal_database.service';
@@ -17,6 +16,7 @@ import * as fs from 'fs';
 import { join } from 'path';
 
 import { DeviceSignInCoreSessionsService } from '../../../sessions/sign_in/device.service';
+import { AdminPermissionsAdminSessionsService } from './admin-permissions.service';
 import { AuthorizationAdminSessionsObj } from './authorization.dto';
 
 @Injectable()
@@ -26,6 +26,7 @@ export class AuthorizationAdminSessionsService {
     private readonly jwtService: JwtService,
     private readonly configService: ConfigService,
     private readonly deviceService: DeviceSignInCoreSessionsService,
+    private readonly adminPermissionsService: AdminPermissionsAdminSessionsService,
   ) {}
 
   private getPackageJSON() {
@@ -40,29 +41,13 @@ export class AuthorizationAdminSessionsService {
     return packageJSON;
   }
 
-  private async getPermissions({
-    user,
-  }: {
-    user: User;
-  }): Promise<AuthorizationAdminSessionsObj['permissions']> {
-    const admin =
-      await this.databaseService.db.query.core_admin_permissions.findFirst({
-        where: (table, { or, eq }) =>
-          or(eq(table.user_id, user.id), eq(table.group_id, user.group.id)),
-      });
-
-    if (!admin) {
-      throw new AccessDeniedError();
-    }
-
-    return admin.permissions as AuthorizationAdminSessionsObj['permissions'];
-  }
-
   async authorization(
     context: GqlContext,
   ): Promise<AuthorizationAdminSessionsObj> {
     const user = await this.initialAuthorization(context);
-    const permissions = await this.getPermissions({ user });
+    const permissions = await this.adminPermissionsService.getPermissions({
+      user,
+    });
     const config = getConfigFile();
 
     return {
