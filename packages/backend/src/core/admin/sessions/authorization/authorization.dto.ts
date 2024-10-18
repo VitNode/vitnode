@@ -1,19 +1,18 @@
-import {
-  AuthorizationCurrentUserObj,
-  FilesAuthorizationCoreSessions,
-} from '@/core/sessions/authorization/authorization.dto';
+import { UserWithDangerousInfo } from '@/decorators';
 import { Field, ObjectType } from '@nestjs/graphql';
+
+import { PermissionsStaffObjWithoutPluginName } from '../../staff/administrators/permissions/dto';
 
 @ObjectType()
 export class AuthorizationAdminSessionsObj {
-  @Field(() => FilesAuthorizationCoreSessions)
-  files: FilesAuthorizationCoreSessions;
+  @Field(() => [PermissionsStaffObjWithoutPluginName])
+  permissions: PermissionsStaffObjWithoutPluginName[];
 
   @Field(() => Boolean)
   restart_server: boolean;
 
-  @Field(() => AuthorizationCurrentUserObj, { nullable: true })
-  user: AuthorizationCurrentUserObj | null;
+  @Field(() => UserWithDangerousInfo)
+  user: UserWithDangerousInfo;
 
   @Field(() => String)
   version: string;

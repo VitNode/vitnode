@@ -1,6 +1,7 @@
 import { Global, Module } from '@nestjs/common';
 
 import { AdminNavModule } from '../nav/nav.module';
+import { AdminPermissionsAdminSessionsService } from './authorization/admin-permissions.service';
 import { AuthorizationAdminSessionsResolver } from './authorization/authorization.resolver';
 import { AuthorizationAdminSessionsService } from './authorization/authorization.service';
 import { SearchAdminSessionsResolver } from './search/search.resolver';
@@ -20,6 +21,7 @@ export class AdminSessionsModule {}
     AuthorizationAdminSessionsService,
     SearchAdminSessionsResolver,
     SearchAdminSessionsService,
+    AdminPermissionsAdminSessionsService,
     {
       provide: 'IOAdminAuthGuards',
       useClass: AuthorizationAdminSessionsService,
@@ -28,6 +30,7 @@ export class AdminSessionsModule {}
   exports: [
     AuthorizationAdminSessionsResolver,
     AuthorizationAdminSessionsService,
+    AdminPermissionsAdminSessionsService,
   ],
   imports: [AdminNavModule],
 })

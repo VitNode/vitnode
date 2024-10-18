@@ -5,14 +5,14 @@ export const coreAdminPermissions: ShowAdminStaffAdministratorsObj['permissions'
     {
       plugin: 'Core',
       plugin_code: 'core',
-      permissions: [
+      groups: [
         {
           id: 'dashboard',
-          children: ['can_manage_diagnostic_tools'],
+          permissions: ['can_manage_diagnostic_tools'],
         },
         {
           id: 'settings',
-          children: [
+          permissions: [
             'can_manage_settings_main',
             'can_manage_settings_security',
             'can_manage_settings_metadata',
@@ -27,10 +27,10 @@ export const coreAdminPermissions: ShowAdminStaffAdministratorsObj['permissions'
     {
       plugin: 'Members',
       plugin_code: 'members',
-      permissions: [
+      groups: [
         {
           id: 'staff',
-          children: ['can_view_staff'],
+          permissions: ['can_view_staff'],
         },
       ],
     },

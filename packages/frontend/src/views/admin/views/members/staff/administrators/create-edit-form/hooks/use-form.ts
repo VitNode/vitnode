@@ -14,7 +14,7 @@ export const useFormCreateEditFormGroupsMembersAdmin = ({
 }: {
   data?: Admin__Core_Staff_Administrators__ShowQuery['admin__core_staff_administrators__show']['edges'][0];
 }) => {
-  const t = useTranslations('admin.members.staff.administrators.add');
+  const t = useTranslations('admin.members.staff.administrators');
   const tShared = useTranslations('admin.members.staff.shared');
   const tCore = useTranslations('core.global');
   const { convertText } = useTextLang();
@@ -49,15 +49,17 @@ export const useFormCreateEditFormGroupsMembersAdmin = ({
             : [],
         )
         .optional(),
-      unrestricted: z.boolean().default(data?.unrestricted ?? true),
+      unrestricted: z
+        .boolean()
+        .default(data ? data.permissions.length === 0 : true),
       permissions: z
         .array(
           z.object({
             plugin_code: z.string(),
-            permissions: z.array(
+            groups: z.array(
               z.object({
                 id: z.string(),
-                children: z.array(z.string()),
+                permissions: z.array(z.string()),
               }),
             ),
           }),
@@ -73,16 +75,18 @@ export const useFormCreateEditFormGroupsMembersAdmin = ({
     form: UseFormReturn<z.infer<typeof formSchema>>,
   ) => {
     const mutation = await mutationApi({
-      groupId:
-        values.type === 'group' && values.group?.[0].key
+      groupId: data
+        ? undefined
+        : values.type === 'group' && values.group?.[0].key
           ? +values.group[0].key
           : undefined,
-      userId:
-        values.type === 'user' && values.user?.[0].key
+      userId: data
+        ? undefined
+        : values.type === 'user' && values.user?.[0].key
           ? +values.user[0].key
           : undefined,
-      unrestricted: values.unrestricted,
-      permissions: values.permissions,
+      permissions: values.unrestricted ? [] : values.permissions,
+      id: data?.id,
     });
 
     if (mutation?.error) {
@@ -103,7 +107,7 @@ export const useFormCreateEditFormGroupsMembersAdmin = ({
     }
 
     setOpen?.(false);
-    toast.success(t('success'), {
+    toast.success(t(data ? 'edit.success' : 'add.success'), {
       description:
         values.type === 'group' && Array.isArray(values.group?.[0].value)
           ? convertText(values.group[0].value)

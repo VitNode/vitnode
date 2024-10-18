@@ -56,7 +56,6 @@ export class ShowAdminStaffModeratorsService {
               group_id: true,
               created: true,
               protected: true,
-              unrestricted: true,
             },
           },
         ),

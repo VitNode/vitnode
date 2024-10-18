@@ -1,152 +1,36 @@
-import { ABSOLUTE_PATHS_BACKEND, ConfigPlugin } from '@/index';
+import { ABSOLUTE_PATHS_BACKEND, ConfigPlugin, User } from '@/index';
 import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
 import * as fs from 'fs';
 
+import { AdminPermissionsAdminSessionsService } from '../../sessions/authorization/admin-permissions.service';
+import { coreNav } from './core.nav';
 import { ShowAdminNavObj } from './show.dto';
 
 @Injectable()
 export class ShowAdminNavService {
-  constructor(private readonly databaseService: InternalDatabaseService) {}
+  constructor(
+    private readonly databaseService: InternalDatabaseService,
+    private readonly adminPermissionsService: AdminPermissionsAdminSessionsService,
+  ) {}
 
-  readonly coreNav: ShowAdminNavObj[] = [
-    {
-      code: 'core',
-      nav: [
-        {
-          code: 'dashboard',
-          icon: 'layout-dashboard',
-          keywords: [],
-        },
-        {
-          code: 'settings',
-          icon: 'settings',
-          keywords: [],
-          children: [
-            {
-              code: 'main',
-              keywords: ['name', 'title', 'description', 'desc', 'copyright'],
-            },
-            {
-              code: 'security',
-              keywords: ['captcha'],
-            },
-            {
-              code: 'metadata',
-              keywords: ['manifest', 'pwa', 'seo'],
-            },
-            {
-              code: 'email',
-              keywords: ['email', 'e-mail', 'mail', 'smtp'],
-            },
-            {
-              code: 'authorization',
-              keywords: [
-                'authorization',
-                'auth',
-                'login',
-                'register',
-                'force login',
-                'sign in',
-                'sign up',
-              ],
-            },
-            {
-              code: 'legal',
-              keywords: ['legal', 'terms', 'privacy', 'policy', 'tos', 'pp'],
-            },
-            {
-              code: 'ai',
-              keywords: [
-                'artificial',
-                'intelligence',
-                'gpt',
-                'openai',
-                'google',
-                'gemini',
-              ],
-            },
-          ],
-        },
-        {
-          code: 'plugins',
-          icon: 'plug',
-          keywords: ['plug', 'plugin'],
-        },
-        {
-          code: 'styles',
-          icon: 'paintbrush',
-          keywords: [],
-          children: [
-            {
-              code: 'theme-editor',
-              keywords: ['theme', 'editor', 'color', 'logo'],
-            },
-            {
-              code: 'nav',
-              keywords: ['nav', 'navigation'],
-            },
-            {
-              code: 'editor',
-              keywords: ['editor', 'tiptap'],
-            },
-          ],
-        },
-        {
-          code: 'langs',
-          icon: 'languages',
-          keywords: ['language'],
-        },
-        {
-          code: 'advanced',
-          icon: 'cog',
-          keywords: [],
-          children: [
-            {
-              code: 'files',
-              keywords: ['file'],
-            },
-          ],
-        },
-      ],
-    },
-    {
-      code: 'members',
-      nav: [
-        {
-          code: 'users',
-          icon: 'users',
-          keywords: ['user'],
-        },
-        {
-          code: 'groups',
-          icon: 'group',
-          keywords: ['group', 'permission', 'file', 'upload', 'storage'],
-        },
-        {
-          code: 'staff',
-          icon: 'user-cog',
-          keywords: [],
-          children: [
-            {
-              code: 'administrators',
-              keywords: ['admin', 'administrator'],
-            },
-          ],
-        },
-      ],
-    },
-  ];
-
-  async show(): Promise<ShowAdminNavObj[]> {
-    const adminNav = await this.databaseService.db.query.core_plugins.findMany({
-      orderBy: (table, { asc }) => asc(table.created),
-      columns: {
-        code: true,
-      },
+  async show(user: User): Promise<ShowAdminNavObj[]> {
+    const permissions: {
+      groups: { id: string; permissions: string[] }[];
+      plugin_code: string;
+    }[] = await this.adminPermissionsService.getPermissions({
+      user,
     });
 
-    const navFromPlugins = adminNav.map(({ code }) => {
+    const adminNavPlugins =
+      await this.databaseService.db.query.core_plugins.findMany({
+        orderBy: (table, { asc }) => asc(table.created),
+        columns: {
+          code: true,
+        },
+      });
+
+    const navFromPlugins = adminNavPlugins.map(({ code }) => {
       const pathConfig = ABSOLUTE_PATHS_BACKEND.plugin({ code }).config;
       if (!fs.existsSync(pathConfig)) {
         return {
@@ -165,8 +49,77 @@ export class ShowAdminNavService {
       };
     });
 
-    return [...this.coreNav, ...navFromPlugins].filter(
+    const nav = [...coreNav, ...navFromPlugins].filter(
       plugin => plugin.nav.length > 0,
     );
+    if (permissions.length === 0) return nav;
+
+    // Create a map for quick lookup of permissions by plugin code
+    const permissionMap = new Map(
+      permissions.map(permission => [permission.plugin_code, permission]),
+    );
+
+    // Filter nav to include only plugins present in permissions
+    const pluginsInPermissions = nav.filter(plugin =>
+      permissionMap.has(plugin.code),
+    );
+
+    // Map over the filtered plugins to process their nav items
+    const filterGroups = pluginsInPermissions.map(plugin => {
+      const pluginPermission = permissionMap.get(plugin.code);
+      if (!pluginPermission) return plugin;
+
+      // Create a map of group IDs to group objects with a Set of permissions
+      const groupMap = new Map();
+      pluginPermission.groups.forEach(group => {
+        groupMap.set(group.id, {
+          ...group,
+          permissionSet: new Set(group.permissions),
+        });
+      });
+
+      // Filter the nav items based on the permissions
+      const filteredNav = plugin.nav.filter(navItem => {
+        const baseCode = navItem.code.replace(/^can_manage_/, '');
+
+        return (
+          groupMap.has(navItem.code) ||
+          groupMap.has(baseCode) ||
+          navItem.code === 'dashboard'
+        );
+      });
+
+      // Map over filteredNav to process each navItem
+      const processedNav = filteredNav.map(navItem => {
+        const baseCode = navItem.code.replace(/^can_manage_/, '');
+        const group = groupMap.get(navItem.code) || groupMap.get(baseCode);
+
+        if (!group) {
+          return { ...navItem, permissions: [] };
+        }
+
+        // If group.permissions is empty, return navItem as is
+        if (group.permissions.length === 0) {
+          return navItem;
+        }
+
+        // Filter navItem's children based on group.permissions
+        const filteredChildren = navItem.children?.filter(child =>
+          group.permissionSet.has(`can_manage_${group.id}_${child.code}`),
+        );
+
+        return {
+          ...navItem,
+          children: filteredChildren,
+        };
+      });
+
+      return {
+        ...plugin,
+        nav: processedNav,
+      };
+    });
+
+    return filterGroups;
   }
 }

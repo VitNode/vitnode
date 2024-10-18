@@ -1,3 +1,4 @@
+import { CurrentUser, User } from '@/decorators';
 import { AdminAuthGuards } from '@/utils';
 import { UseGuards } from '@nestjs/common';
 import { Args, Query, Resolver } from '@nestjs/graphql';
@@ -13,7 +14,8 @@ export class SearchAdminSessionsResolver {
   @UseGuards(AdminAuthGuards)
   async admin__sessions__search(
     @Args() args: SearchAdminSessionsArgs,
+    @CurrentUser() user: User,
   ): Promise<SearchAdminSessionsObj> {
-    return this.service.search(args);
+    return this.service.search(args, user);
   }
 }
