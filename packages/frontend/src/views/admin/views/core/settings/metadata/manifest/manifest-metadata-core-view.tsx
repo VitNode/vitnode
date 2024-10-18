@@ -3,8 +3,8 @@ import { Card } from '@/components/ui/card';
 import { HeaderContent } from '@/components/ui/header-content';
 import { fetcher } from '@/graphql/fetcher';
 import {
-  checkAdminPermission,
-  checkAdminPermissionMetadata,
+  checkAdminPermissionPage,
+  checkAdminPermissionPageMetadata,
 } from '@/graphql/get-session-admin-data';
 import {
   Admin__Core_Manifest_Metadata__Show,
@@ -36,7 +36,7 @@ const permission = {
 
 export const generateMetadataManifestMetadataCoreAdmin =
   async (): Promise<Metadata> => {
-    const perm = await checkAdminPermissionMetadata(permission);
+    const perm = await checkAdminPermissionPageMetadata(permission);
     if (perm) return perm;
     const t = await getTranslations('admin.core.metadata.manifest');
 
@@ -46,7 +46,7 @@ export const generateMetadataManifestMetadataCoreAdmin =
   };
 
 export const ManifestMetadataCoreAdminView = async () => {
-  const perm = await checkAdminPermission(permission);
+  const perm = await checkAdminPermissionPage(permission);
   if (perm) return perm;
   const [t, data] = await Promise.all([
     getTranslations('admin.core.metadata.manifest'),

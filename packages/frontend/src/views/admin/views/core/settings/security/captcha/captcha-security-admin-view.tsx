@@ -3,8 +3,8 @@ import { Card } from '@/components/ui/card';
 import { HeaderContent } from '@/components/ui/header-content';
 import { fetcher } from '@/graphql/fetcher';
 import {
-  checkAdminPermission,
-  checkAdminPermissionMetadata,
+  checkAdminPermissionPage,
+  checkAdminPermissionPageMetadata,
 } from '@/graphql/get-session-admin-data';
 import {
   Admin__Core_Security__Captcha__Show,
@@ -32,7 +32,7 @@ const permission = {
 
 export const generateMetadataCaptchaSecurityAdmin =
   async (): Promise<Metadata> => {
-    const perm = await checkAdminPermissionMetadata(permission);
+    const perm = await checkAdminPermissionPageMetadata(permission);
     if (perm) return perm;
     const t = await getTranslations('admin.core.settings.security.captcha');
 
@@ -42,7 +42,7 @@ export const generateMetadataCaptchaSecurityAdmin =
   };
 
 export const CaptchaSecurityAdminView = async () => {
-  const perm = await checkAdminPermission(permission);
+  const perm = await checkAdminPermissionPage(permission);
   if (perm) return perm;
   const [t, data] = await Promise.all([
     getTranslations('admin.core.settings.security.captcha'),

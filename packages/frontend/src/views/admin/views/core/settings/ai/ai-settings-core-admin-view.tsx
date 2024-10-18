@@ -3,8 +3,8 @@ import { Card } from '@/components/ui/card';
 import { HeaderContent } from '@/components/ui/header-content';
 import { getGlobalData } from '@/graphql/get-global-data';
 import {
-  checkAdminPermission,
-  checkAdminPermissionMetadata,
+  checkAdminPermissionPage,
+  checkAdminPermissionPageMetadata,
 } from '@/graphql/get-session-admin-data';
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
@@ -18,7 +18,7 @@ const permission = {
 };
 
 export const generateMetadataAiSettingsAdmin = async (): Promise<Metadata> => {
-  const perm = await checkAdminPermissionMetadata(permission);
+  const perm = await checkAdminPermissionPageMetadata(permission);
   if (perm) return perm;
   const t = await getTranslations('admin.core.settings.ai');
 
@@ -28,7 +28,7 @@ export const generateMetadataAiSettingsAdmin = async (): Promise<Metadata> => {
 };
 
 export const AiSettingsCoreAdminView = async () => {
-  const perm = await checkAdminPermission(permission);
+  const perm = await checkAdminPermissionPage(permission);
   if (perm) return perm;
   const [
     t,

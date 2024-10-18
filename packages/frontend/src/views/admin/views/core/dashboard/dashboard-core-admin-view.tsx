@@ -1,7 +1,10 @@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { HeaderContent } from '@/components/ui/header-content';
-import { getSessionAdminData } from '@/graphql/get-session-admin-data';
+import {
+  getSessionAdminData,
+  isInAdminPermission,
+} from '@/graphql/get-session-admin-data';
 import { CONFIG } from '@/helpers/config-with-env';
 import { Link } from '@/navigation';
 import { AlertTriangle, HammerIcon } from 'lucide-react';
@@ -39,12 +42,18 @@ export const DashboardCoreAdminView = async () => {
           </>
         }
       >
-        <Button asChild>
-          <Link href="/admin/core/diagnostic">
-            <HammerIcon />
-            {t('diagnostic_tools')}
-          </Link>
-        </Button>
+        {(await isInAdminPermission({
+          plugin_code: 'core',
+          group: 'dashboard',
+          permission: 'can_manage_diagnostic_tools',
+        })) && (
+          <Button asChild>
+            <Link href="/admin/core/diagnostic">
+              <HammerIcon />
+              {t('diagnostic_tools')}
+            </Link>
+          </Button>
+        )}
       </HeaderContent>
 
       <WarnReqRestartServer />

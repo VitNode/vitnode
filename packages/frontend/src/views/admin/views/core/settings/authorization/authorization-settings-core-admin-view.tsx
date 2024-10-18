@@ -4,8 +4,8 @@ import { HeaderContent } from '@/components/ui/header-content';
 import { fetcher } from '@/graphql/fetcher';
 import { getGlobalData } from '@/graphql/get-global-data';
 import {
-  checkAdminPermission,
-  checkAdminPermissionMetadata,
+  checkAdminPermissionPage,
+  checkAdminPermissionPageMetadata,
 } from '@/graphql/get-session-admin-data';
 import {
   Admin__Core_Authorization_Settings__Show,
@@ -33,7 +33,7 @@ const permission = {
 
 export const generateMetadataAuthorizationSettingsAdmin =
   async (): Promise<Metadata> => {
-    const perm = await checkAdminPermissionMetadata(permission);
+    const perm = await checkAdminPermissionPageMetadata(permission);
     if (perm) return perm;
     const t = await getTranslations('admin_core.nav');
 
@@ -43,7 +43,7 @@ export const generateMetadataAuthorizationSettingsAdmin =
   };
 
 export const AuthorizationSettingsCoreAdminView = async () => {
-  const perm = await checkAdminPermission(permission);
+  const perm = await checkAdminPermissionPage(permission);
   if (perm) return perm;
   const [
     t,

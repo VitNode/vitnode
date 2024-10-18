@@ -28,7 +28,7 @@ import { mutationApi } from './hooks/mutation-api';
 export const AvatarAsideAuthAdmin = () => {
   const t = useTranslations('admin.global');
   const tCore = useTranslations('core.global');
-  const { session } = useSessionAdmin();
+  const { session, isInAdminPermission } = useSessionAdmin();
 
   if (!session) return null;
   const { email, name, name_seo } = session;
@@ -70,12 +70,18 @@ export const AvatarAsideAuthAdmin = () => {
               <span>{tCore('user-bar.my_profile')}</span>
             </Link>
           </DropdownMenuItem>
-          <DropdownMenuItem asChild>
-            <Link href="/admin/core/diagnostic">
-              <HammerIcon />
-              <span>{t('diagnostic_tools')}</span>
-            </Link>
-          </DropdownMenuItem>
+          {isInAdminPermission({
+            plugin_code: 'core',
+            group: 'dashboard',
+            permission: 'can_manage_diagnostic_tools',
+          }) && (
+            <DropdownMenuItem asChild>
+              <Link href="/admin/core/diagnostic">
+                <HammerIcon />
+                <span>{t('diagnostic_tools')}</span>
+              </Link>
+            </DropdownMenuItem>
+          )}
         </DropdownMenuGroup>
 
         <DropdownMenuSeparator />

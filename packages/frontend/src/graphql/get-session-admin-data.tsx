@@ -37,27 +37,33 @@ export interface PermissionSessionAdmin {
   permission: string;
 }
 
-export const checkAdminPermission = async ({
+export const checkAdminPermissionPage = async ({
   plugin_code,
   group,
   permission,
 }: PermissionSessionAdmin) => {
-  const {
-    admin__sessions__authorization: { permissions },
-  } = await getSessionAdminData();
-  if (permissions.length === 0) return;
-  const findPlugin = permissions.find(item => item.plugin_code === plugin_code);
-  const findGroup = findPlugin?.groups.find(item => item.id === group);
-  if (findGroup?.permissions.length === 0) return;
-  const findPermission = findGroup?.permissions.find(
-    item => item === permission,
-  );
-  if (!findPermission) return <ErrorView code="403" />;
+  try {
+    const {
+      admin__sessions__authorization: { permissions },
+    } = await getSessionAdminData();
+    if (permissions.length === 0) return;
+    const findPlugin = permissions.find(
+      item => item.plugin_code === plugin_code,
+    );
+    const findGroup = findPlugin?.groups.find(item => item.id === group);
+    if (findGroup?.permissions.length === 0) return;
+    const findPermission = findGroup?.permissions.find(
+      item => item === permission,
+    );
+    if (!findPermission) return <ErrorView code="403" />;
 
-  return;
+    return;
+  } catch (error) {
+    return <ErrorView code="500" />;
+  }
 };
 
-export const checkAdminPermissionMetadata = async ({
+export const checkAdminPermissionPageMetadata = async ({
   plugin_code,
   group,
   permission,
@@ -81,4 +87,23 @@ export const checkAdminPermissionMetadata = async ({
   }
 
   return {};
+};
+
+export const isInAdminPermission = async ({
+  plugin_code,
+  group,
+  permission,
+}: PermissionSessionAdmin) => {
+  const {
+    admin__sessions__authorization: { permissions },
+  } = await getSessionAdminData();
+  if (permissions.length === 0) return true;
+  const findPlugin = permissions.find(item => item.plugin_code === plugin_code);
+  const findGroup = findPlugin?.groups.find(item => item.id === group);
+  if (findGroup?.permissions.length === 0) return true;
+  const findPermission = findGroup?.permissions.find(
+    item => item === permission,
+  );
+
+  return !!findPermission;
 };

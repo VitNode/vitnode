@@ -72,47 +72,44 @@ export function PermissionsField<T extends FieldValues>({
                       checked={groupValue?.permissions.length === 0}
                       id={`${plugin.plugin_code}-${permission.id}`}
                       onCheckedChange={checked => {
-                        if (checked) {
-                          const valueToChange: PermissionState[] = [
-                            ...values.filter(
-                              value => value.plugin_code !== plugin.plugin_code,
-                            ),
-                            {
-                              plugin_code: plugin.plugin_code,
-                              groups: valuePlugin
-                                ? [
-                                    ...valuePlugin.groups.filter(
-                                      p => p.id !== permission.id,
-                                    ),
-                                    { id: permission.id, permissions: [] },
-                                  ]
-                                : [{ id: permission.id, permissions: [] }],
-                            },
-                          ];
-                          field.onChange(valueToChange);
-
-                          return;
-                        }
-
-                        if (!valuePlugin) return;
-
-                        const valueToChange: PermissionState[] = [
-                          ...values.filter(
-                            value => value.plugin_code !== plugin.plugin_code,
-                          ),
-                          {
-                            ...valuePlugin,
-                            groups: valuePlugin.groups.filter(
-                              p => p.id !== permission.id,
-                            ),
-                          },
-                        ];
-
-                        field.onChange(
-                          valueToChange.filter(
-                            value => value.groups.length > 0,
-                          ),
+                        const otherValues = values.filter(
+                          value => value.plugin_code !== plugin.plugin_code,
                         );
+
+                        if (checked) {
+                          const newGroups = valuePlugin
+                            ? [
+                                ...valuePlugin.groups.filter(
+                                  p => p.id !== permission.id,
+                                ),
+                                { id: permission.id, permissions: [] },
+                              ]
+                            : [{ id: permission.id, permissions: [] }];
+
+                          const updatedValue = {
+                            plugin_code: plugin.plugin_code,
+                            groups: newGroups,
+                          };
+
+                          field.onChange([...otherValues, updatedValue]);
+                        } else {
+                          if (!valuePlugin) return;
+
+                          const newGroups = valuePlugin.groups.filter(
+                            p => p.id !== permission.id,
+                          );
+
+                          if (newGroups.length > 0) {
+                            const updatedValue = {
+                              ...valuePlugin,
+                              groups: newGroups,
+                            };
+
+                            field.onChange([...otherValues, updatedValue]);
+                          } else {
+                            field.onChange(otherValues);
+                          }
+                        }
                       }}
                     />
 
@@ -210,28 +207,32 @@ export function PermissionsField<T extends FieldValues>({
                                 ];
 
                                 const returnValue: PermissionState[] =
-                                  valueToChange
-                                    .map(item => {
-                                      if (
-                                        item.plugin_code === plugin.plugin_code
-                                      ) {
-                                        const groups = item.groups.filter(
-                                          p => p.permissions.length > 0,
-                                        );
+                                  valueToChange.map(item => {
+                                    if (
+                                      item.plugin_code === plugin.plugin_code
+                                    ) {
+                                      const group = item.groups.find(
+                                        group => group.id === permission.id,
+                                      );
 
-                                        if (groups.length === 0) {
-                                          return null;
-                                        }
+                                      return {
+                                        ...item,
+                                        groups: [
+                                          ...item.groups.filter(
+                                            group => group.id !== permission.id,
+                                          ),
+                                          group?.permissions.length === 0
+                                            ? undefined
+                                            : group,
+                                        ].filter(Boolean) as {
+                                          id: string;
+                                          permissions: string[];
+                                        }[],
+                                      };
+                                    }
 
-                                        return {
-                                          ...item,
-                                          groups,
-                                        };
-                                      }
-
-                                      return item;
-                                    })
-                                    .filter(Boolean) as PermissionState[];
+                                    return item;
+                                  });
 
                                 field.onChange(returnValue);
                               }}

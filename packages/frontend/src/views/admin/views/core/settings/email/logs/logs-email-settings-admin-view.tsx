@@ -5,8 +5,8 @@ import {
   SearchParamsPagination,
 } from '@/graphql/get-pagination-tool';
 import {
-  checkAdminPermission,
-  checkAdminPermissionMetadata,
+  checkAdminPermissionPage,
+  checkAdminPermissionPageMetadata,
 } from '@/graphql/get-session-admin-data';
 import {
   Admin__Core_Email__Logs,
@@ -38,7 +38,7 @@ const permission = {
 
 export const generateMetadataLogsEmailSettingsAdmin =
   async (): Promise<Metadata> => {
-    const perm = await checkAdminPermissionMetadata(permission);
+    const perm = await checkAdminPermissionPageMetadata(permission);
     if (perm) return perm;
     const t = await getTranslations('admin.core.settings.email.logs');
 
@@ -52,7 +52,7 @@ export const LogsEmailSettingsAdminView = async ({
 }: {
   searchParams: Promise<SearchParamsPagination>;
 }) => {
-  const perm = await checkAdminPermission(permission);
+  const perm = await checkAdminPermissionPage(permission);
   if (perm) return perm;
   const variables = await getPaginationTool({
     searchParams,
