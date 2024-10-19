@@ -18,6 +18,7 @@ export class ShowCoreThemeEditorService {
       'src',
       'app',
       '[locale]',
+      '(main)',
       'global.css',
     );
 

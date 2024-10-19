@@ -4,8 +4,8 @@ import gql from 'graphql-tag';
 export type Admin__Core_Staff_Administrators__Create_EditMutationVariables = Types.Exact<{
   groupId?: Types.InputMaybe<Types.Scalars['Int']['input']>;
   userId?: Types.InputMaybe<Types.Scalars['Int']['input']>;
-  unrestricted: Types.Scalars['Boolean']['input'];
   permissions?: Types.InputMaybe<Array<Types.PermissionsStaffArgs> | Types.PermissionsStaffArgs>;
+  id?: Types.InputMaybe<Types.Scalars['Int']['input']>;
 }>;
 
 
@@ -13,12 +13,12 @@ export type Admin__Core_Staff_Administrators__Create_EditMutation = { __typename
 
 
 export const Admin__Core_Staff_Administrators__Create_Edit = gql`
-    mutation Admin__core_staff_administrators__create_edit($groupId: Int, $userId: Int, $unrestricted: Boolean!, $permissions: [PermissionsStaffArgs!]) {
+    mutation Admin__core_staff_administrators__create_edit($groupId: Int, $userId: Int, $permissions: [PermissionsStaffArgs!], $id: Int) {
   admin__core_staff_administrators__create_edit(
     group_id: $groupId
     user_id: $userId
-    unrestricted: $unrestricted
     permissions: $permissions
+    id: $id
   ) {
     id
   }

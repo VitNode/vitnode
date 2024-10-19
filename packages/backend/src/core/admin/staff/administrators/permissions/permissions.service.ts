@@ -2,7 +2,7 @@ import { InternalDatabaseService } from '@/utils';
 import { Injectable } from '@nestjs/common';
 
 import { ShowAdminStaffAdministratorsObj } from '../show/show.dto';
-import { coreAdminPermissions } from './core-admin-permisisons';
+import { coreAdminPermissions } from './core-admin-permissions';
 
 @Injectable()
 export class PermissionsAdminStaffAdministratorsService {
@@ -18,7 +18,7 @@ export class PermissionsAdminStaffAdministratorsService {
       ...plugins.map(plugin => ({
         plugin_code: plugin.code,
         plugin: plugin.name,
-        permissions: [],
+        groups: [],
       })),
     ];
   }

@@ -17,6 +17,6 @@ export class UploadAvatarCoreMembersResolver {
     @CurrentUser() currentUser: User,
     @Args('file', { type: () => GraphQLUpload }) file: Promise<FileUpload>,
   ): Promise<UploadAvatarCoreMembersObj> {
-    return this.service.uploadAvatar(currentUser, { file });
+    return await this.service.uploadAvatar(currentUser, { file });
   }
 }

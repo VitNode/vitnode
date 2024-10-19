@@ -56,18 +56,19 @@ export const FilesSettingsView = async ({
     defaultPageSize: 10,
     sortByEnum: ShowCoreFilesSortingColumnEnum,
   });
-  const [
-    t,
-    data,
-    {
-      core_sessions__authorization: { files },
-    },
-  ] = await Promise.all([
+  const [t, data, { core_sessions__authorization }] = await Promise.all([
     getTranslations('core.settings.files'),
     getData(variables),
     getSessionData(),
   ]);
-  const percentStorage = (files.space_used / files.total_max_storage) * 100;
+  if (!core_sessions__authorization.user) {
+    return null;
+  }
+  const {
+    user: { files_permissions },
+  } = core_sessions__authorization;
+  const percentStorage =
+    (files_permissions.space_used / files_permissions.total_max_storage) * 100;
 
   return (
     <>
@@ -79,7 +80,7 @@ export const FilesSettingsView = async ({
       </CardHeader>
 
       <CardContent>
-        {files.total_max_storage > 0 && (
+        {files_permissions.total_max_storage > 0 && (
           <div className="mb-6 space-y-2">
             <Progress
               className={cn({
@@ -89,8 +90,8 @@ export const FilesSettingsView = async ({
             />
             <div className="text-muted-foreground text-center text-sm">
               {t.rich('storage_usage', {
-                used: formatBytes(files.space_used),
-                total: formatBytes(files.total_max_storage),
+                used: formatBytes(files_permissions.space_used),
+                total: formatBytes(files_permissions.total_max_storage),
                 percent: Math.round(percentStorage),
               })}
             </div>

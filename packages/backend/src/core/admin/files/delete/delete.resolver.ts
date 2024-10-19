@@ -1,4 +1,4 @@
-import { AdminAuthGuards } from '@/utils';
+import { AdminAuthGuards, AdminPermission } from '@/utils';
 import { UseGuards } from '@nestjs/common';
 import { Args, Int, Mutation, Resolver } from '@nestjs/graphql';
 
@@ -10,6 +10,11 @@ export class DeleteAdminFilesResolver {
 
   @Mutation(() => String)
   @UseGuards(AdminAuthGuards)
+  @AdminPermission({
+    plugin_code: 'core',
+    group: 'files',
+    permission: 'can_manage_files',
+  })
   async admin__core_files__delete(
     @Args('id', { type: () => Int }) id: number,
   ): Promise<string> {

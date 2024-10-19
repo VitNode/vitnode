@@ -2,17 +2,17 @@ import { Field, InputType, ObjectType, OmitType } from '@nestjs/graphql';
 
 @InputType()
 class PermissionsStaffInput {
-  @Field(() => [String])
-  children: string[];
-
   @Field(() => String)
   id: string;
+
+  @Field(() => [String])
+  permissions: string[];
 }
 
 @InputType()
 export class PermissionsStaffArgs {
   @Field(() => [PermissionsStaffInput])
-  permissions: PermissionsStaffInput[];
+  groups: PermissionsStaffInput[];
 
   @Field(() => String)
   plugin_code: string;
@@ -20,17 +20,17 @@ export class PermissionsStaffArgs {
 
 @ObjectType()
 export class PermissionsStaff {
-  @Field(() => [String])
-  children: string[];
-
   @Field(() => String)
   id: string;
+
+  @Field(() => [String])
+  permissions: string[];
 }
 
 @ObjectType()
 export class PermissionsStaffObj {
   @Field(() => [PermissionsStaff])
-  permissions: PermissionsStaff[];
+  groups: PermissionsStaff[];
 
   @Field(() => String)
   plugin: string;

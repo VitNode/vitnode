@@ -1,10 +1,7 @@
 'use client';
 
 import { AutoForm } from '@/components/form/auto-form';
-import {
-  AutoFormInput,
-  AutoFormInputProps,
-} from '@/components/form/fields/input';
+import { AutoFormInput } from '@/components/form/fields/input';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -66,11 +63,13 @@ export const TestingActionAiAdmin = ({ disabled }: { disabled: boolean }) => {
           fields={[
             {
               id: 'prompt',
-              component: AutoFormInput,
+              component: props => (
+                <AutoFormInput
+                  {...props}
+                  placeholder={t('prompt_placeholder')}
+                />
+              ),
               label: t('prompt'),
-              componentProps: {
-                placeholder: t('prompt_placeholder'),
-              } as AutoFormInputProps,
             },
           ]}
           formSchema={formSchema}

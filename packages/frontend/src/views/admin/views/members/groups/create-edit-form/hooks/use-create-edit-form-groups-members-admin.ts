@@ -5,7 +5,6 @@ import { zodLanguageInput } from '@/helpers/zod';
 import { useTextLang } from '@/hooks/use-text-lang';
 import { usePathname, useRouter } from '@/navigation';
 import { useTranslations } from 'next-intl';
-import { useState } from 'react';
 import { toast } from 'sonner';
 import * as z from 'zod';
 
@@ -19,7 +18,6 @@ export interface CreateEditFormGroupsMembersAdminArgs {
 export const useCreateEditFormGroupsMembersAdmin = ({
   data,
 }: CreateEditFormGroupsMembersAdminArgs) => {
-  const [values, setValues] = useState<Partial<z.infer<typeof formSchema>>>({});
   const t = useTranslations('admin.members.groups');
   const tCore = useTranslations('core.global.errors');
   const { setOpen } = useDialog();
@@ -97,5 +95,5 @@ export const useCreateEditFormGroupsMembersAdmin = ({
     setOpen?.(false);
   };
 
-  return { formSchema, onSubmit, setValues, values };
+  return { formSchema, onSubmit };
 };

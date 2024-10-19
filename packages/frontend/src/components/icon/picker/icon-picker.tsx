@@ -22,19 +22,18 @@ const Content = React.lazy(async () =>
   })),
 );
 
-interface Props extends Omit<IconPickerProps, 'setOpen'> {
-  className?: string;
-  disabled?: boolean;
-  required?: boolean;
-}
-
 export const IconPicker = ({
   className,
   onChange,
   value,
   disabled,
   required,
-}: Props) => {
+  ...props
+}: {
+  className?: string;
+  disabled?: boolean;
+  required?: boolean;
+} & Omit<IconPickerProps, 'setOpen'>) => {
   const t = useTranslations('core.global.icon_picker');
   const [open, setOpen] = React.useState(false);
 
@@ -47,6 +46,7 @@ export const IconPicker = ({
               className="w-full max-w-52 justify-start"
               disabled={disabled}
               variant="outline"
+              {...props}
             >
               <Plus /> {t('title')}
             </Button>

@@ -1,4 +1,4 @@
-import { AdminAuthGuards } from '@/utils';
+import { AdminAuthGuards, AdminPermission } from '@/utils';
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
@@ -12,8 +12,11 @@ export class CreateAdminGroupsResolver {
 
   @Mutation(() => ShowAdminGroups)
   @UseGuards(AdminAuthGuards)
-  // @UseGuards(AdminPermissionGuards)
-  // @SetMetadata('permission', 'create_group')
+  @AdminPermission({
+    plugin_code: 'members',
+    group: 'can_manage_groups',
+    permission: '',
+  })
   async admin__core_groups__create(
     @Args() args: CreateAdminGroupsArgs,
   ): Promise<ShowAdminGroups> {

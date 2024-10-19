@@ -1,8 +1,5 @@
 import { AutoForm, DependencyType } from '@/components/form/auto-form';
-import {
-  AutoFormCombobox,
-  AutoFormComboboxProps,
-} from '@/components/form/fields/combobox';
+import { AutoFormCombobox } from '@/components/form/fields/combobox';
 import { AutoFormInput } from '@/components/form/fields/input';
 import { AutoFormSwitch } from '@/components/form/fields/switch';
 import { Button } from '@/components/ui/button';
@@ -41,28 +38,32 @@ export const CreateEditLangAdmin = ({ data }: { data?: ShowCoreLanguages }) => {
         {
           id: 'timezone',
           label: t('create.timezone.label'),
-          component: AutoFormCombobox,
-          componentProps: {
-            labels: Object.fromEntries(
-              locales.map(item => [
-                item.locale,
-                `${item.name} - ${item.locale}`,
-              ]),
-            ),
-          } as AutoFormComboboxProps,
+          component: props => (
+            <AutoFormCombobox
+              {...props}
+              labels={Object.fromEntries(
+                locales.map(item => [
+                  item.locale,
+                  `${item.name} - ${item.locale}`,
+                ]),
+              )}
+            />
+          ),
         },
         {
           id: 'locale',
-          component: AutoFormCombobox,
           label: t('create.locale.label'),
-          componentProps: {
-            labels: Object.fromEntries(
-              locales.map(item => [
-                item.locale,
-                `${item.name} - ${item.locale}`,
-              ]),
-            ),
-          } as AutoFormComboboxProps,
+          component: props => (
+            <AutoFormCombobox
+              {...props}
+              labels={Object.fromEntries(
+                locales.map(item => [
+                  item.locale,
+                  `${item.name} - ${item.locale}`,
+                ]),
+              )}
+            />
+          ),
         },
         {
           id: 'code',

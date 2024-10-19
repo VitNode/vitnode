@@ -1,16 +1,7 @@
 import { AutoForm, DependencyType } from '@/components/form/auto-form';
-import {
-  AutoFormCombobox,
-  AutoFormComboboxProps,
-} from '@/components/form/fields/combobox';
-import {
-  AutoFormRadioGroup,
-  AutoFormRadioGroupProps,
-} from '@/components/form/fields/radio-group';
-import {
-  AutoFormSwitch,
-  AutoFormSwitchProps,
-} from '@/components/form/fields/switch';
+import { AutoFormCombobox } from '@/components/form/fields/combobox';
+import { AutoFormRadioGroup } from '@/components/form/fields/radio-group';
+import { AutoFormSwitch } from '@/components/form/fields/switch';
 import { AvatarUser } from '@/components/ui/user/avatar';
 import { GroupFormat } from '@/components/ui/user/group-format';
 import { getGroupsShortApi } from '@/graphql/get-groups-short-api';
@@ -56,78 +47,84 @@ export const CreateEditFormModeratorsStaffAdmin = () => {
         {
           id: 'type',
           label: t('type'),
-          component: AutoFormRadioGroup,
-          componentProps: {
-            labels: {
-              group: {
-                title: t('group'),
-              },
-              user: {
-                title: t('user'),
-              },
-            },
-          } as AutoFormRadioGroupProps,
+          component: props => (
+            <AutoFormRadioGroup
+              {...props}
+              labels={{
+                group: {
+                  title: t('group'),
+                },
+                user: {
+                  title: t('user'),
+                },
+              }}
+            />
+          ),
         },
         {
           id: 'group',
           label: t('group'),
-          component: AutoFormCombobox,
-          componentProps: {
-            withFetcher: {
-              queryKey: 'Admin__Core_Groups__Show_Short',
-              search: true,
-              queryFn: async ({ search }) => {
-                const mutation = await getGroupsShortApi({ search });
+          component: props => (
+            <AutoFormCombobox
+              {...props}
+              withFetcher={{
+                queryKey: 'Admin__Core_Groups__Show_Short',
+                search: true,
+                queryFn: async ({ search }) => {
+                  const mutation = await getGroupsShortApi({ search });
 
-                return (mutation.data?.admin__core_groups__show.edges ?? [])
-                  .filter(item => !item.guest)
-                  .map(item => ({
-                    key: item.id.toString(),
-                    value: item.name,
-                    valueWithFormatting: <GroupFormat group={item} />,
-                  }));
-              },
-            },
-          } as AutoFormComboboxProps,
+                  return (mutation.data?.admin__core_groups__show.edges ?? [])
+                    .filter(item => !item.guest)
+                    .map(item => ({
+                      key: item.id.toString(),
+                      value: item.name,
+                      valueWithFormatting: <GroupFormat group={item} />,
+                    }));
+                },
+              }}
+            />
+          ),
         },
         {
           id: 'user',
           label: t('user'),
-          component: AutoFormCombobox,
-          componentProps: {
-            withFetcher: {
-              queryKey: 'Core_Members__Show__Search',
-              search: true,
-              queryFn: async ({ search }) => {
-                const mutation = await getUsersShortApi({ search });
+          component: props => (
+            <AutoFormCombobox
+              {...props}
+              withFetcher={{
+                queryKey: 'Core_Members__Show__Search',
+                search: true,
+                queryFn: async ({ search }) => {
+                  const mutation = await getUsersShortApi({ search });
 
-                return (mutation.data?.core_members__show.edges ?? []).map(
-                  item => ({
-                    key: item.id.toString(),
-                    value: item.name,
-                    valueWithFormatting: (
-                      <>
-                        <AvatarUser sizeInRem={1.75} user={item} />
-                        <div className="flex flex-col">
-                          <span>{item.name}</span>
-                          <GroupFormat className="text-xs" group={item.group} />
-                        </div>
-                      </>
-                    ),
-                  }),
-                );
-              },
-            },
-          } as AutoFormComboboxProps,
+                  return (mutation.data?.core_members__show.edges ?? []).map(
+                    item => ({
+                      key: item.id.toString(),
+                      value: item.name,
+                      valueWithFormatting: (
+                        <>
+                          <AvatarUser sizeInRem={1.75} user={item} />
+                          <div className="flex flex-col">
+                            <span>{item.name}</span>
+                            <GroupFormat
+                              className="text-xs"
+                              group={item.group}
+                            />
+                          </div>
+                        </>
+                      ),
+                    }),
+                  );
+                },
+              }}
+            />
+          ),
         },
         {
           id: 'unrestricted',
-          component: AutoFormSwitch,
+          component: props => <AutoFormSwitch {...props} disabled />,
           label: t('unrestricted.title'),
           description: t('unrestricted.desc'),
-          componentProps: {
-            disabled: true,
-          } as AutoFormSwitchProps,
         },
       ]}
       formSchema={formSchema}

@@ -1,5 +1,5 @@
 import { CurrentUser, User } from '@/decorators';
-import { AdminAuthGuards } from '@/utils';
+import { AdminAuthGuards, AdminPermission } from '@/utils';
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
@@ -12,6 +12,11 @@ export class TestAdminEmailSettingsResolver {
 
   @Mutation(() => String)
   @UseGuards(AdminAuthGuards)
+  @AdminPermission({
+    plugin_code: 'core',
+    group: 'settings',
+    permission: 'can_manage_settings_email',
+  })
   async admin__core_email_settings__test(
     @Args() args: TestAdminEmailSettingsServiceArgs,
     @CurrentUser() user: User,

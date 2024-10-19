@@ -1,13 +1,24 @@
 import { TranslationsProvider } from '@/components/translations-provider';
 import { HeaderContent } from '@/components/ui/header-content';
+import {
+  checkAdminPermissionPage,
+  checkAdminPermissionPageMetadata,
+} from '@/graphql/get-session-admin-data';
 import { Metadata } from 'next';
-import { useTranslations } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
 
 import { WarnReqRestartServer } from '../plugins/warn-req-restart-server';
 import { ActionsDiagnosticTools } from './actions/actions';
 
+const permission = {
+  plugin_code: 'core',
+  group: 'dashboard',
+  permission: 'can_manage_diagnostic_tools',
+};
+
 export const generateMetadataDiagnosticAdmin = async (): Promise<Metadata> => {
+  const perm = await checkAdminPermissionPageMetadata(permission);
+  if (perm) return perm;
   const t = await getTranslations('admin.core.diagnostic');
 
   return {
@@ -15,8 +26,10 @@ export const generateMetadataDiagnosticAdmin = async (): Promise<Metadata> => {
   };
 };
 
-export const DiagnosticToolsView = () => {
-  const t = useTranslations('admin.core.diagnostic');
+export const DiagnosticToolsView = async () => {
+  const perm = await checkAdminPermissionPage(permission); // [!code highlight]
+  if (perm) return perm;
+  const t = await getTranslations('admin.core.diagnostic');
 
   return (
     <TranslationsProvider namespaces="admin.core.diagnostic">

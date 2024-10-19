@@ -7,7 +7,7 @@ export const AutoFormWrapper = ({
   theme,
 }: {
   children: React.ReactNode;
-  className?: string;
+  className: string | undefined;
   theme: 'horizontal' | 'vertical';
 }) => {
   return (

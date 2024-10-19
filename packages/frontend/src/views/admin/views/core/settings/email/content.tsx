@@ -2,10 +2,7 @@
 
 import { AutoForm } from '@/components/form/auto-form';
 import { AutoFormColorPicker } from '@/components/form/fields/color-picker';
-import {
-  AutoFormFileInput,
-  AutoFormFileInputProps,
-} from '@/components/form/fields/file-input';
+import { AutoFormFileInput } from '@/components/form/fields/file-input';
 import { Admin__Core_Email_Settings__ShowQuery } from '@/graphql/queries/admin/settings/admin__core_email_settings__show.generated';
 import { useTranslations } from 'next-intl';
 
@@ -28,13 +25,15 @@ export const ContentEmailSettingsAdmin = (
         {
           id: 'logo',
           label: t('logo'),
-          component: AutoFormFileInput,
-          componentProps: {
-            accept: 'image/png, image/gif, image/jpeg',
-            acceptExtensions: ['png', 'jpg', 'gif'],
-            maxFileSizeInMb: 2,
-            showInfo: true,
-          } as AutoFormFileInputProps,
+          component: props => (
+            <AutoFormFileInput
+              {...props}
+              accept="image/png, image/gif, image/jpeg"
+              acceptExtensions={['png', 'jpg', 'gif']}
+              maxFileSizeInMb={2}
+              showInfo
+            />
+          ),
         },
       ]}
       formSchema={formSchema}

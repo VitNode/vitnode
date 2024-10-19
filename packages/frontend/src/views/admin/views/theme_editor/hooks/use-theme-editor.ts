@@ -35,10 +35,10 @@ interface ThemeEditorFormObj {
     'secondary-foreground': ColorObj;
   };
   logos: {
-    dark: FilesInputValue | null;
-    light: FilesInputValue | null;
-    mobile_dark: FilesInputValue | null;
-    mobile_light: FilesInputValue | null;
+    dark: FilesInputValue[];
+    light: FilesInputValue[];
+    mobile_dark: FilesInputValue[];
+    mobile_light: FilesInputValue[];
     mobile_width: number;
     text: string;
     width: number;

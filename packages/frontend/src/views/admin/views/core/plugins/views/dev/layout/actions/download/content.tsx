@@ -1,12 +1,6 @@
 import { AutoForm, DependencyType } from '@/components/form/auto-form';
-import {
-  AutoFormInput,
-  AutoFormInputProps,
-} from '@/components/form/fields/input';
-import {
-  AutoFormRadioGroup,
-  AutoFormRadioGroupProps,
-} from '@/components/form/fields/radio-group';
+import { AutoFormInput } from '@/components/form/fields/input';
+import { AutoFormRadioGroup } from '@/components/form/fields/radio-group';
 import { Button } from '@/components/ui/button';
 import { DialogFooter } from '@/components/ui/dialog';
 import { ShowAdminPlugins } from '@/graphql/types';
@@ -52,19 +46,21 @@ export const ContentDownloadActionDevPluginAdmin = ({
       fields={[
         {
           id: 'type',
-          component: AutoFormRadioGroup,
-          componentProps: {
-            labels: {
-              rebuild: {
-                title: t('type.rebuild', {
-                  version: `${version} (${version_code})`,
-                }),
-              },
-              new_version: {
-                title: t('type.new_version'),
-              },
-            },
-          } as AutoFormRadioGroupProps,
+          component: props => (
+            <AutoFormRadioGroup
+              {...props}
+              labels={{
+                rebuild: {
+                  title: t('type.rebuild', {
+                    version: `${version} (${version_code})`,
+                  }),
+                },
+                new_version: {
+                  title: t('type.new_version'),
+                },
+              }}
+            />
+          ),
         },
         {
           id: 'version',
@@ -74,10 +70,7 @@ export const ContentDownloadActionDevPluginAdmin = ({
         {
           id: 'version_code',
           label: t('version_code.label'),
-          component: AutoFormInput,
-          componentProps: {
-            type: 'number',
-          } as AutoFormInputProps,
+          component: props => <AutoFormInput {...props} type="number" />,
         },
       ]}
       formSchema={formSchema}

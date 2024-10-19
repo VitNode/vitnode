@@ -1,8 +1,5 @@
 import { AutoForm } from '@/components/form/auto-form';
-import {
-  AutoFormInput,
-  AutoFormInputProps,
-} from '@/components/form/fields/input';
+import { AutoFormInput } from '@/components/form/fields/input';
 import { AutoFormSelect } from '@/components/form/fields/select';
 import { Admin__Core_Plugins__Permissions_Admin__ShowQuery } from '@/graphql/queries/admin/plugins/dev/permissions-admin/admin__core_plugins__permissions_admin__show.generated';
 import { useTranslations } from 'next-intl';
@@ -39,12 +36,14 @@ export const CreateEditPermissionsAdminDevPluginAdmin = ({
         {
           id: 'parent_id',
           label: t('parent.label'),
-          component: AutoFormSelect,
-          componentProps: {
-            labels: {
-              null: t('parent.null'),
-            },
-          } as AutoFormInputProps,
+          component: props => (
+            <AutoFormSelect
+              {...props}
+              labels={{
+                null: t('parent.null'),
+              }}
+            />
+          ),
         },
       ]}
       formSchema={formSchema}

@@ -1,5 +1,4 @@
 import { FilesService } from '@/core/files/helpers/upload/upload.service';
-import { InternalServerError } from '@/errors';
 import { configPath, ConfigType, getConfigFile } from '@/providers/config';
 import { Injectable } from '@nestjs/common';
 import * as fs from 'fs';
@@ -53,7 +52,10 @@ export class EditAdminEmailSettingsService {
 
     fs.writeFileSync(configPath, JSON.stringify(newData, null, 2), 'utf8');
 
-    // Still here? Something went wrong
-    throw new InternalServerError();
+    return {
+      color_primary,
+      is_enabled: true,
+      logo: newData.settings.email.logo,
+    };
   }
 }

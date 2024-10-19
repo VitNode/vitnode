@@ -18,28 +18,6 @@ import { FooterEditor } from './footer/footer';
 import { EditorStateContext } from './hooks/use-editor-state';
 import { ToolBarEditor } from './toolbar/toolbar';
 
-interface Props {
-  allowUploadFiles?: {
-    folder: string;
-    plugin: string;
-  };
-  autofocus?: boolean;
-  className?: string;
-  disabled?: boolean;
-}
-
-interface WithLanguage extends Props {
-  disableLanguages?: never;
-  onChange: (value: StringLanguage[]) => void;
-  value: StringLanguage[];
-}
-
-interface WithoutLanguage extends Props {
-  disableLanguages: true;
-  onChange: (value: string) => void;
-  value: string;
-}
-
 export const EditorSkeleton = ({ className }: { className?: string }) => {
   return <Skeleton className={cn('h-32 w-full', className)} />;
 };
@@ -52,7 +30,18 @@ export const Editor = ({
   onChange,
   value,
   disabled,
-}: WithLanguage | WithoutLanguage) => {
+}: {
+  allowUploadFiles?: {
+    folder: string;
+    plugin: string;
+  };
+  autofocus?: boolean;
+  className?: string;
+  disabled?: boolean;
+  disableLanguages?: boolean;
+  onChange: (value: StringLanguage[]) => void;
+  value: StringLanguage[];
+}) => {
   const locale = useLocale();
   const { defaultLanguage } = useGlobalData();
   const [selectedLanguage, setSelectedLanguage] = React.useState(
@@ -61,7 +50,9 @@ export const Editor = ({
   const session = useSession();
   const adminSession = useSessionAdmin();
   const allowUploadFilesSession =
-    session.files.allow_upload || adminSession.files.allow_upload;
+    session.session?.files_permissions.allow_upload ??
+    adminSession.session?.files_permissions.allow_upload ??
+    false;
   const { handleDelete, checkUploadFile, uploadFile } = useFilesExtensionEditor(
     {
       allowUploadFiles,
@@ -106,7 +97,7 @@ export const Editor = ({
       const currentValue = Array.isArray(value) ? value : [];
 
       if (disableLanguages) {
-        onChange(content);
+        onChange([{ language_code: selectedLanguage, value: content }]);
 
         return;
       }

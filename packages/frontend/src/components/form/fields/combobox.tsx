@@ -1,6 +1,4 @@
-'use client';
-
-import { getBaseSchema } from '@/components/form/utils';
+import { AutoFormComponentProps } from '@/components/form/auto-form';
 import { Button } from '@/components/ui/button';
 import {
   Command,
@@ -22,10 +20,9 @@ import { cn } from '@/helpers/classnames';
 import { Check } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import React from 'react';
-import { FieldValues } from 'react-hook-form';
 import * as z from 'zod';
 
-import { AutoFormItemProps } from '../auto-form';
+import { getBaseSchema } from '../utils';
 import { AutoFormInputWrapper } from './common/input-wrapper';
 import { AutoFormLabel } from './common/label';
 import { AutoFormTooltip } from './common/tooltip';
@@ -38,7 +35,28 @@ const ComboboxContentWithFetcher = React.lazy(async () =>
   })),
 );
 
-export type AutoFormComboboxProps = {
+export function AutoFormCombobox({
+  field,
+  label,
+  theme,
+  description,
+  isRequired,
+  isDisabled,
+  hideOptionalLabel,
+  wrapper,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  zodInputProps: _zodInputProps,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  overrideOptions: _,
+  shape,
+  withFetcher,
+  multiple,
+  labels,
+  placeholder,
+  placeholderSearchInput,
+  classNameWrapper,
+  ...props
+}: {
   labels?: Record<string, React.JSX.Element | string>;
   multiple?: boolean;
   placeholder?: string;
@@ -47,23 +65,8 @@ export type AutoFormComboboxProps = {
     React.ComponentProps<typeof ComboboxContentWithFetcher>,
     'multiple' | 'onSelect' | 'placeholder' | 'value'
   >;
-} & Omit<React.ComponentProps<typeof Button>, 'role' | 'variant'>;
-
-export function AutoFormCombobox<T extends FieldValues>({
-  field,
-  label,
-  description,
-  isRequired,
-  theme,
-  isDisabled,
-  shape,
-  componentProps,
-  className,
-  childComponent: ChildComponent,
-  hideOptionalLabel,
-}: {
-  componentProps?: AutoFormComboboxProps;
-} & AutoFormItemProps<T>) {
+} & AutoFormComponentProps &
+  Omit<React.ComponentProps<typeof Button>, 'role' | 'variant'>) {
   const t = useTranslations('core.global');
   const [open, setOpen] = React.useState(false);
   const value: string | string[] | undefined = field.value;
@@ -72,22 +75,13 @@ export function AutoFormCombobox<T extends FieldValues>({
   )._def.values;
 
   let values: [string, string][] = [];
-  if (!componentProps?.withFetcher) {
+  if (!withFetcher) {
     if (!Array.isArray(baseValues)) {
       values = Object.entries(baseValues as object);
     } else {
       values = baseValues.map(value => [value, value]);
     }
   }
-
-  const {
-    withFetcher,
-    placeholderSearchInput,
-    multiple,
-    labels,
-    placeholder,
-    ...props
-  } = componentProps ?? {};
 
   const onSelectWithFetcher = ({
     key,
@@ -129,7 +123,7 @@ export function AutoFormCombobox<T extends FieldValues>({
   };
 
   return (
-    <AutoFormWrapper theme={theme}>
+    <AutoFormWrapper className={classNameWrapper} theme={theme}>
       {label && (
         <AutoFormLabel
           description={description}
@@ -141,15 +135,11 @@ export function AutoFormCombobox<T extends FieldValues>({
       )}
 
       <Popover modal onOpenChange={setOpen} open={open}>
-        <AutoFormInputWrapper
-          className={className}
-          withChildren={!!ChildComponent}
-        >
+        <AutoFormInputWrapper field={field} Wrapper={wrapper}>
           <PopoverTrigger asChild>
             <FormControl>
               <ComboBoxButton
-                className={componentProps?.className}
-                disabled={isDisabled || componentProps?.disabled}
+                disabled={isDisabled || props?.disabled}
                 field={field}
                 label={label}
                 labels={labels}
@@ -161,7 +151,6 @@ export function AutoFormCombobox<T extends FieldValues>({
               />
             </FormControl>
           </PopoverTrigger>
-          {ChildComponent && <ChildComponent field={field} />}
         </AutoFormInputWrapper>
 
         <PopoverContent align="start" className="p-0">

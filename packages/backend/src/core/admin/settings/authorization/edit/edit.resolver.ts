@@ -1,4 +1,4 @@
-import { AdminAuthGuards } from '@/utils';
+import { AdminAuthGuards, AdminPermission } from '@/utils';
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
@@ -14,6 +14,11 @@ export class EditAdminAuthorizationSettingsResolver {
 
   @Mutation(() => ShowAdminAuthorizationSettingsObj)
   @UseGuards(AdminAuthGuards)
+  @AdminPermission({
+    plugin_code: 'core',
+    group: 'settings',
+    permission: 'can_manage_settings_authorization',
+  })
   admin__core_authorization_settings__edit(
     @Args() args: EditAdminAuthorizationSettingsArgs,
   ): ShowAdminAuthorizationSettingsObj {

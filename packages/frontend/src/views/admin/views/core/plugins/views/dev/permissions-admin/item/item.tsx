@@ -6,7 +6,7 @@ export const ItemPermissionsAdminDevPluginAdmin = ({
   id,
   parentId,
   dataFromSSR,
-  children,
+  permissions,
 }: {
   dataFromSSR: Admin__Core_Plugins__Permissions_Admin__ShowQuery;
   parentId: string | undefined;
@@ -15,7 +15,7 @@ export const ItemPermissionsAdminDevPluginAdmin = ({
     <div className="flex flex-1 items-center gap-4">
       {id}
       <ActionsItemPermissionsAdminDevPluginAdmin
-        data={{ id, children }}
+        data={{ id, permissions }}
         dataFromSSR={dataFromSSR}
         parentId={parentId}
       />

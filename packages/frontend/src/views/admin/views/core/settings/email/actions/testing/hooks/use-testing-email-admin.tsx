@@ -1,5 +1,4 @@
 import { useDialog } from '@/components/ui/dialog';
-import { useSessionAdmin } from '@/hooks/use-session-admin';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 import * as z from 'zod';
@@ -10,13 +9,8 @@ export const useTestingEmailAdmin = () => {
   const t = useTranslations('admin.core.settings.email.test');
   const tCore = useTranslations('core.global.errors');
   const { setOpen } = useDialog();
-  const { session } = useSessionAdmin();
   const formSchema = z.object({
-    to: z
-      .string()
-      .min(1)
-      .email()
-      .default(session?.email ?? ''),
+    to: z.string().min(1).email().default(''),
     subject: z.string().min(1).default(t('test.subject')),
     message: z.string().min(1).default(t('test.message')),
     preview_text: z.string().default(t('test.preview_text')).optional(),

@@ -1,9 +1,6 @@
 import { AutoForm, DependencyType } from '@/components/form/auto-form';
 import { AutoFormColorPicker } from '@/components/form/fields/color-picker';
-import {
-  AutoFormInput,
-  AutoFormInputProps,
-} from '@/components/form/fields/input';
+import { AutoFormInput } from '@/components/form/fields/input';
 import { AutoFormSwitch } from '@/components/form/fields/switch';
 import { AutoFormStringLanguageInput } from '@/components/form/fields/text-language-input';
 import { Button } from '@/components/ui/button';
@@ -36,10 +33,9 @@ export const CreateEditFormGroupsMembersAdmin = ({
   const t = useTranslations('admin.members.groups');
   const tCore = useTranslations('core.global');
   const [activeTab, setActiveTab] = React.useState<TabsEnum>(TabsEnum.MAIN);
-  const { onSubmit, formSchema, setValues, values } =
-    useCreateEditFormGroupsMembersAdmin({
-      data,
-    });
+  const { onSubmit, formSchema } = useCreateEditFormGroupsMembersAdmin({
+    data,
+  });
   const { convertText } = useTextLang();
 
   return (
@@ -105,18 +101,23 @@ export const CreateEditFormGroupsMembersAdmin = ({
           },
           {
             id: 'content.files_total_max_storage',
-            component: AutoFormInput,
-            componentProps: {
-              type: 'number',
-              className: 'max-w-32',
-              min: 0,
-              disabled: values.content?.files_total_max_storage === 0,
-            } as AutoFormInputProps,
+            component: props => (
+              <AutoFormInput
+                {...props}
+                className="max-w-32"
+                disabled={
+                  props.field.value.content?.files_total_max_storage === 0
+                }
+                min={0}
+                type="number"
+              />
+            ),
             label: t('create_edit.files.total_max_storage'),
-            className: 'flex flex-wrap items-center gap-2',
-            childComponent: ({ field }) => {
+            wrapper: ({ field, children }) => {
               return (
-                <>
+                <div className="flex flex-wrap items-center">
+                  {children}
+
                   <span>{t('create_edit.in_kb')}</span>
                   <div className="flex shrink-0 items-center gap-2">
                     <span>{tCore('or')}</span>
@@ -137,52 +138,53 @@ export const CreateEditFormGroupsMembersAdmin = ({
                       {tCore('unlimited')}
                     </Label>
                   </div>
-                </>
+                </div>
               );
             },
           },
           {
             id: 'content.files_max_storage_for_submit',
-            component: AutoFormInput,
-            componentProps: {
-              type: 'number',
-              className: 'max-w-32',
-              min: 0,
-              disabled: values.content?.files_max_storage_for_submit === 0,
-            } as AutoFormInputProps,
+            component: props => (
+              <AutoFormInput
+                {...props}
+                className="max-w-32"
+                disabled={
+                  props.field.value.content?.files_max_storage_for_submit === 0
+                }
+                min={0}
+                type="number"
+              />
+            ),
+            wrapper: ({ field, children }) => (
+              <div className="flex flex-wrap items-center gap-2">
+                {children}
+                <span>{t('create_edit.in_kb')}</span>
+                <div className="flex shrink-0 items-center gap-2">
+                  <span>{tCore('or')}</span>
+                  <Checkbox
+                    checked={field.value === 0}
+                    id="content.files_max_storage_for_submit.unlimited"
+                    onClick={() => {
+                      if (field.value === 0) {
+                        field.onChange(5120);
+
+                        return;
+                      }
+
+                      field.onChange(0);
+                    }}
+                  />
+                  <Label htmlFor="content.files_max_storage_for_submit.unlimited">
+                    {tCore('unlimited')}
+                  </Label>
+                </div>
+              </div>
+            ),
             label: t('create_edit.files.max_storage_for_submit.label'),
-            className: 'flex flex-wrap items-center gap-2',
-            childComponent: ({ field }) => {
-              return (
-                <>
-                  <span>{t('create_edit.in_kb')}</span>
-                  <div className="flex shrink-0 items-center gap-2">
-                    <span>{tCore('or')}</span>
-                    <Checkbox
-                      checked={field.value === 0}
-                      id="content.files_max_storage_for_submit.unlimited"
-                      onClick={() => {
-                        if (field.value === 0) {
-                          field.onChange(5120);
-
-                          return;
-                        }
-
-                        field.onChange(0);
-                      }}
-                    />
-                    <Label htmlFor="content.files_max_storage_for_submit.unlimited">
-                      {tCore('unlimited')}
-                    </Label>
-                  </div>
-                </>
-              );
-            },
           },
         ]}
         formSchema={formSchema}
         onSubmit={onSubmit}
-        onValuesChange={setValues}
         submitButton={props => (
           <DialogFooter>
             <Button {...props}>{tCore('save')}</Button>

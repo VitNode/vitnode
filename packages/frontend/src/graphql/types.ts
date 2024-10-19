@@ -26,9 +26,9 @@ export const AllowTypeFilesEnum = {
 export type AllowTypeFilesEnum = typeof AllowTypeFilesEnum[keyof typeof AllowTypeFilesEnum];
 export type AuthorizationAdminSessionsObj = {
   __typename?: 'AuthorizationAdminSessionsObj';
-  files: FilesAuthorizationCoreSessions;
+  permissions: Array<PermissionsStaffObjWithoutPluginName>;
   restart_server: Scalars['Boolean']['output'];
-  user?: Maybe<AuthorizationCurrentUserObj>;
+  user: UserWithDangerousInfo;
   version: Scalars['String']['output'];
 };
 
@@ -40,7 +40,6 @@ export type AuthorizationCoreMiddleware = {
 
 export type AuthorizationCoreSessionsObj = {
   __typename?: 'AuthorizationCoreSessionsObj';
-  files: FilesAuthorizationCoreSessions;
   plugin_default: Scalars['String']['output'];
   user?: Maybe<AuthorizationCurrentUserObj>;
 };
@@ -50,6 +49,7 @@ export type AuthorizationCurrentUserObj = {
   avatar?: Maybe<AvatarUser>;
   avatar_color: Scalars['String']['output'];
   email: Scalars['String']['output'];
+  files_permissions: FilesPermissionsCoreSessions;
   group: GroupUser;
   id: Scalars['Int']['output'];
   is_admin: Scalars['Boolean']['output'];
@@ -156,14 +156,6 @@ export type EditorShowCoreMiddleware = {
   sticky: Scalars['Boolean']['output'];
 };
 
-export type FilesAuthorizationCoreSessions = {
-  __typename?: 'FilesAuthorizationCoreSessions';
-  allow_upload: Scalars['Boolean']['output'];
-  max_storage_for_submit: Scalars['Int']['output'];
-  space_used: Scalars['Float']['output'];
-  total_max_storage: Scalars['Int']['output'];
-};
-
 export type FilesEditAdminEditorStyles = {
   allow_type: AllowTypeFilesEnum | `${AllowTypeFilesEnum}`;
 };
@@ -171,6 +163,14 @@ export type FilesEditAdminEditorStyles = {
 export type FilesEditorShowCoreMiddleware = {
   __typename?: 'FilesEditorShowCoreMiddleware';
   allow_type: AllowTypeFilesEnum | `${AllowTypeFilesEnum}`;
+};
+
+export type FilesPermissionsCoreSessions = {
+  __typename?: 'FilesPermissionsCoreSessions';
+  allow_upload: Scalars['Boolean']['output'];
+  max_storage_for_submit: Scalars['Int']['output'];
+  space_used: Scalars['Float']['output'];
+  total_max_storage: Scalars['Int']['output'];
 };
 
 export type GroupUser = {
@@ -533,8 +533,8 @@ export type MutationAdmin__Core_Security__Captcha__EditArgs = {
 
 export type MutationAdmin__Core_Staff_Administrators__Create_EditArgs = {
   group_id?: InputMaybe<Scalars['Int']['input']>;
+  id?: InputMaybe<Scalars['Int']['input']>;
   permissions?: InputMaybe<Array<PermissionsStaffArgs>>;
-  unrestricted: Scalars['Boolean']['input'];
   user_id?: InputMaybe<Scalars['Int']['input']>;
 };
 
@@ -546,7 +546,6 @@ export type MutationAdmin__Core_Staff_Administrators__DeleteArgs = {
 
 export type MutationAdmin__Core_Staff_Moderators__CreateArgs = {
   group_id?: InputMaybe<Scalars['Int']['input']>;
-  unrestricted: Scalars['Boolean']['input'];
   user_id?: InputMaybe<Scalars['Int']['input']>;
 };
 
@@ -677,30 +676,30 @@ export type PageInfo = {
 
 export type PermissionsStaff = {
   __typename?: 'PermissionsStaff';
-  children: Array<Scalars['String']['output']>;
   id: Scalars['String']['output'];
+  permissions: Array<Scalars['String']['output']>;
 };
 
 export type PermissionsStaffArgs = {
-  permissions: Array<PermissionsStaffInput>;
+  groups: Array<PermissionsStaffInput>;
   plugin_code: Scalars['String']['input'];
 };
 
 export type PermissionsStaffInput = {
-  children: Array<Scalars['String']['input']>;
   id: Scalars['String']['input'];
+  permissions: Array<Scalars['String']['input']>;
 };
 
 export type PermissionsStaffObj = {
   __typename?: 'PermissionsStaffObj';
-  permissions: Array<PermissionsStaff>;
+  groups: Array<PermissionsStaff>;
   plugin: Scalars['String']['output'];
   plugin_code: Scalars['String']['output'];
 };
 
 export type PermissionsStaffObjWithoutPluginName = {
   __typename?: 'PermissionsStaffObjWithoutPluginName';
-  permissions: Array<PermissionsStaff>;
+  groups: Array<PermissionsStaff>;
   plugin_code: Scalars['String']['output'];
 };
 
@@ -1060,7 +1059,6 @@ export type ShowAdminStaffAdministrators = {
   id: Scalars['Int']['output'];
   permissions: Array<PermissionsStaffObjWithoutPluginName>;
   protected: Scalars['Boolean']['output'];
-  unrestricted: Scalars['Boolean']['output'];
   updated: Scalars['DateTime']['output'];
   user_or_group: UserOrGroupCoreStaffUnion;
 };
@@ -1087,7 +1085,6 @@ export type ShowAdminStaffModerators = {
   created: Scalars['DateTime']['output'];
   id: Scalars['Int']['output'];
   protected: Scalars['Boolean']['output'];
-  unrestricted: Scalars['Boolean']['output'];
   updated: Scalars['DateTime']['output'];
   user_or_group: UserOrGroupCoreStaffUnion;
 };
@@ -1392,3 +1389,16 @@ export type User = {
 };
 
 export type UserOrGroupCoreStaffUnion = StaffGroupUser | User;
+
+export type UserWithDangerousInfo = {
+  __typename?: 'UserWithDangerousInfo';
+  avatar?: Maybe<AvatarUser>;
+  avatar_color: Scalars['String']['output'];
+  email: Scalars['String']['output'];
+  files_permissions: FilesPermissionsCoreSessions;
+  group: GroupUser;
+  id: Scalars['Int']['output'];
+  language: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+  name_seo: Scalars['String']['output'];
+};

@@ -1,6 +1,4 @@
-'use client';
-
-import { getBaseSchema } from '@/components/form/utils';
+import { AutoFormComponentProps } from '@/components/form/auto-form';
 import { FormControl, FormMessage } from '@/components/ui/form';
 import {
   Select,
@@ -10,37 +8,36 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { useTranslations } from 'next-intl';
-import React from 'react';
-import { FieldValues } from 'react-hook-form';
 import * as z from 'zod';
 
-import { AutoFormItemProps } from '../auto-form';
+import { getBaseSchema } from '../utils';
 import { AutoFormInputWrapper } from './common/input-wrapper';
 import { AutoFormLabel } from './common/label';
 import { AutoFormTooltip } from './common/tooltip';
 import { AutoFormWrapper } from './common/wrapper';
 
-export type AutoFormSelectProps = {
-  labels?: Record<string, React.JSX.Element | string>;
-  placeholder?: string;
-} & Omit<React.ComponentProps<typeof Select>, 'onValueChange' | 'value'>;
-
-export function AutoFormSelect<T extends FieldValues>({
+export function AutoFormSelect({
   field,
   label,
+  theme,
   description,
   isRequired,
-  theme,
   isDisabled,
-  shape,
-  componentProps,
-  className,
-  childComponent: ChildComponent,
   hideOptionalLabel,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  zodInputProps: _,
   overrideOptions,
+  shape,
+  wrapper,
+  labels,
+  placeholder,
+  classNameWrapper,
+  ...props
 }: {
-  componentProps?: AutoFormSelectProps;
-} & AutoFormItemProps<T>) {
+  labels?: Record<string, React.JSX.Element | string>;
+  placeholder?: string;
+} & AutoFormComponentProps &
+  Omit<React.ComponentProps<typeof Select>, 'name' | 'value'>) {
   const t = useTranslations('core.global');
   const baseValues = (
     getBaseSchema(shape, true) as unknown as z.ZodEnum<[string, ...string[]]>
@@ -60,14 +57,14 @@ export function AutoFormSelect<T extends FieldValues>({
     const item = current?.[1];
 
     if (current) {
-      return componentProps?.labels?.[current[0]] ?? item;
+      return labels?.[current[0]] ?? item;
     }
 
     return item ?? t('select_option');
   };
 
   return (
-    <AutoFormWrapper theme={theme}>
+    <AutoFormWrapper className={classNameWrapper} theme={theme}>
       {label && (
         <AutoFormLabel
           description={description}
@@ -78,26 +75,27 @@ export function AutoFormSelect<T extends FieldValues>({
         />
       )}
 
-      <AutoFormInputWrapper
-        className={className}
-        withChildren={!!ChildComponent}
-      >
+      <AutoFormInputWrapper field={field} Wrapper={wrapper}>
         <FormControl>
           <Select
             defaultValue={field.value}
-            disabled={isDisabled || componentProps?.disabled}
-            onValueChange={field.onChange}
+            disabled={isDisabled || props.disabled}
+            onValueChange={e => {
+              field.onChange(e);
+              props?.onValueChange?.(e);
+            }}
           >
-            <SelectTrigger {...componentProps}>
+            <SelectTrigger {...props}>
               <SelectValue
-                placeholder={componentProps?.placeholder ?? buttonPlaceholder()}
+                onBlur={field.onBlur}
+                placeholder={placeholder ?? buttonPlaceholder()}
               >
                 {buttonPlaceholder()}
               </SelectValue>
             </SelectTrigger>
             <SelectContent>
               {values.map(([value, labelFromProps]) => {
-                const label = componentProps?.labels?.[value] ?? labelFromProps;
+                const label = labels?.[value] ?? labelFromProps;
 
                 return (
                   <SelectItem key={value} value={labelFromProps}>
@@ -108,7 +106,6 @@ export function AutoFormSelect<T extends FieldValues>({
             </SelectContent>
           </Select>
         </FormControl>
-        {ChildComponent && <ChildComponent field={field} />}
       </AutoFormInputWrapper>
 
       {description && theme === 'vertical' && (

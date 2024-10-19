@@ -1,5 +1,5 @@
 import { ShowCoreNav } from '@/core/nav/show/show.dto';
-import { AdminAuthGuards } from '@/utils';
+import { AdminAuthGuards, AdminPermission } from '@/utils';
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
@@ -12,6 +12,11 @@ export class EditAdminNavStylesResolver {
 
   @Mutation(() => ShowCoreNav)
   @UseGuards(AdminAuthGuards)
+  @AdminPermission({
+    plugin_code: 'core',
+    group: 'styles',
+    permission: 'can_manage_styles_nav',
+  })
   async admin__core_styles__nav__edit(
     @Args() args: EditAdminNavStylesArgs,
   ): Promise<ShowCoreNav> {

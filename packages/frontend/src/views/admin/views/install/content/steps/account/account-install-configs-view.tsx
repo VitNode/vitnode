@@ -1,10 +1,7 @@
 'use client';
 
 import { AutoForm } from '@/components/form/auto-form';
-import {
-  AutoFormInput,
-  AutoFormInputProps,
-} from '@/components/form/fields/input';
+import { AutoFormInput } from '@/components/form/fields/input';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { removeSpecialCharacters } from '@/helpers/special-characters';
@@ -27,40 +24,38 @@ export const AccountInstallConfigsView = () => {
           label: t('name.label'),
           description: t('name.desc'),
           component: AutoFormInput,
-          childComponent: ({ field }) => {
+          wrapper: ({ field, children }) => {
             const value: string = field.value ?? '';
-            if (!value.length) return null;
 
             return (
-              <span className="text-muted-foreground mt-2 block max-w-md truncate text-sm">
-                {t.rich('name.your_id', {
-                  id: () => (
-                    <span className="text-foreground font-medium">
-                      {removeSpecialCharacters(value)}
-                    </span>
-                  ),
-                })}
-              </span>
+              <>
+                {children}
+                {value.length > 0 && (
+                  <span className="text-muted-foreground mt-2 block max-w-md truncate text-sm">
+                    {t.rich('name.your_id', {
+                      id: () => (
+                        <span className="text-foreground font-medium">
+                          {removeSpecialCharacters(value)}
+                        </span>
+                      ),
+                    })}
+                  </span>
+                )}
+              </>
             );
           },
         },
         {
           id: 'email',
-          component: AutoFormInput,
-          componentProps: {
-            type: 'email',
-          } as AutoFormInputProps,
+          component: props => <AutoFormInput {...props} type="email" />,
           label: t('email.label'),
         },
         {
           id: 'password',
           label: t('password.label'),
           description: t('password.desc'),
-          component: AutoFormInput,
-          componentProps: {
-            type: 'password',
-          } as AutoFormInputProps,
-          childComponent: ({ field }) => {
+          component: props => <AutoFormInput {...props} type="password" />,
+          wrapper: ({ field, children }) => {
             const value: string = field.value ?? '';
             const regexArray = [
               /^.{8,}$/, // Min 8 characters
@@ -74,18 +69,19 @@ export const AccountInstallConfigsView = () => {
               return acc + Number(regex.test(value));
             }, 0);
 
-            if (!value.length) return null;
-
             return (
-              <div className="mt-2">
-                <div className="mb-2 flex justify-between text-xs font-semibold">
-                  <span>{t('week_password')}</span>
-                  <span>{t('strong_password')}</span>
+              <>
+                {children}
+                <div>
+                  <div className="flex justify-between text-xs font-semibold">
+                    <span>{t('week_password')}</span>
+                    <span>{t('strong_password')}</span>
+                  </div>
+                  <Progress
+                    value={(100 / regexArray.length) * passRegexPassword}
+                  />
                 </div>
-                <Progress
-                  value={(100 / regexArray.length) * passRegexPassword}
-                />
-              </div>
+              </>
             );
           },
         },

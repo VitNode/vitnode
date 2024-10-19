@@ -14,10 +14,7 @@ export const useEmailSettingsFormAdmin = ({
   const t = useTranslations('core.global');
   const formSchema = z.object({
     color_primary: z.string().default(data.color_primary),
-    logo: zodFile
-      .nullable()
-      .default(data.logo ?? null)
-      .optional(),
+    logo: zodFile.default(data.logo ? [data.logo] : []).optional(),
   });
 
   const onSubmit = async (
@@ -34,9 +31,9 @@ export const useEmailSettingsFormAdmin = ({
       `hsl(${isColorBrightness(primaryHSL) ? `${primaryHSL.h}, 40%, 2%` : `${primaryHSL.h}, 40%, 98%`})`,
     );
 
-    if (values.logo) {
-      if (values.logo instanceof File) {
-        formData.append('logo.file', values.logo);
+    if (values.logo?.length) {
+      if (values.logo[0] instanceof File) {
+        formData.append('logo.file', values.logo[0]);
       } else {
         formData.append('logo.keep', 'true');
       }

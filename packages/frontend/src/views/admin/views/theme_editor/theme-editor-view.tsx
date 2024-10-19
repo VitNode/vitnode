@@ -1,6 +1,10 @@
 import { TranslationsProvider } from '@/components/translations-provider';
 import { fetcher } from '@/graphql/fetcher';
-import { getSessionAdminData } from '@/graphql/get-session-admin-data';
+import {
+  checkAdminPermissionPage,
+  checkAdminPermissionPageMetadata,
+  getSessionAdminData,
+} from '@/graphql/get-session-admin-data';
 import {
   Core_Theme_Editor__Show,
   Core_Theme_Editor__ShowQuery,
@@ -24,7 +28,15 @@ const getData = async () => {
   return data;
 };
 
+const permission = {
+  plugin_code: 'core',
+  group: 'styles',
+  permission: 'can_manage_styles_theme-editor',
+};
+
 export const generateMetadataThemeEditor = async (): Promise<Metadata> => {
+  const perm = await checkAdminPermissionPageMetadata(permission);
+  if (perm) return perm;
   const t = await getTranslations('admin_core.nav');
 
   return {
@@ -33,6 +45,8 @@ export const generateMetadataThemeEditor = async (): Promise<Metadata> => {
 };
 
 export const ThemeEditorView = async () => {
+  const perm = await checkAdminPermissionPage(permission);
+  if (perm) return perm;
   const locale = await getLocale();
 
   try {
