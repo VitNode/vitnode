@@ -81,7 +81,7 @@ export const FileInput = ({
 
   return (
     <div className="@container flex-1">
-      {((!value && !multiple) || multiple) && (
+      {!value.length || multiple ? (
         <div
           className={cn(
             'm-h-32 border-input bg-background placeholder:text-muted-foreground focus-visible:ring-ring flex w-full flex-col rounded-md border px-3 py-2 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-1 disabled:cursor-not-allowed disabled:opacity-50',
@@ -163,7 +163,7 @@ export const FileInput = ({
             {...props}
           />
         </div>
-      )}
+      ) : null}
 
       <PreviewFilesInput
         multiple={multiple as true}

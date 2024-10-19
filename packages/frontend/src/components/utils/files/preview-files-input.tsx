@@ -13,7 +13,7 @@ export const PreviewFilesInput = ({
   showInfo?: boolean;
   value: FilesInputValue[];
 }) => {
-  if (!value || (Array.isArray(value) && value.length === 0)) return null;
+  if (value.length === 0) return null;
 
   return (
     <ul className="flex flex-col gap-4">

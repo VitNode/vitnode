@@ -50,8 +50,11 @@ export const ContentManifestMetadataCoreAdmin = (
         {
           id: 'start_url',
           component: props => (
+            <AutoFormInput {...props} className="order-2 w-64" />
+          ),
+          wrapper: ({ children }) => (
             <div className="flex flex-wrap items-center gap-1">
-              <AutoFormInput {...props} className="order-2 w-64" />
+              {children}
               <span className="order-1">{CONFIG.frontend_url}</span>
             </div>
           ),

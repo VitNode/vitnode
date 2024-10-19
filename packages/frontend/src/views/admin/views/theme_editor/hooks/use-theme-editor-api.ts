@@ -98,11 +98,19 @@ export const useThemeEditorApi = ({
         ['muted-foreground']: core_theme_editor__show.colors?.muted_foreground,
       },
       logos: {
-        light: [core_theme_editor__show.logos.light],
-        dark: [core_theme_editor__show.logos.dark],
+        light: core_theme_editor__show.logos.light
+          ? [core_theme_editor__show.logos.light]
+          : [],
+        dark: core_theme_editor__show.logos.dark
+          ? [core_theme_editor__show.logos.dark]
+          : [],
         width: core_theme_editor__show.logos.width,
-        mobile_light: [core_theme_editor__show.logos.mobile_light],
-        mobile_dark: [core_theme_editor__show.logos.mobile_dark],
+        mobile_light: core_theme_editor__show.logos.mobile_light
+          ? [core_theme_editor__show.logos.mobile_light]
+          : [],
+        mobile_dark: core_theme_editor__show.logos.mobile_dark
+          ? [core_theme_editor__show.logos.mobile_dark]
+          : [],
         mobile_width: core_theme_editor__show.logos.mobile_width,
         text: core_theme_editor__show.logos.text,
       },

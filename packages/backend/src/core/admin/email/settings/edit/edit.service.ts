@@ -53,7 +53,10 @@ export class EditAdminEmailSettingsService {
 
     fs.writeFileSync(configPath, JSON.stringify(newData, null, 2), 'utf8');
 
-    // Still here? Something went wrong
-    throw new InternalServerError();
+    return {
+      color_primary,
+      is_enabled: true,
+      logo: newData.settings.email.logo,
+    };
   }
 }

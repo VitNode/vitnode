@@ -35,33 +35,44 @@ export const LogosTabThemeEditor = () => {
     file: FilesInputValue[];
     id: ids;
   }) => {
-    if (files.length === 0) return;
     const file = files[0];
     const iFrame = iframeRef?.current?.contentWindow?.document;
     const logoElement = iFrame?.querySelector<HTMLElement>('#vitnode_logo');
     if (!logoElement) return;
 
+    const stateLogos = {
+      light: form.watch('logos.light'),
+      dark: form.watch('logos.dark'),
+      mobile_light: form.watch('logos.mobile_light'),
+      mobile_dark: form.watch('logos.mobile_dark'),
+    };
+
     const commonClassName = 'w-[--logo-mobile-width] sm:w-[--logo-width]';
     const classNames = {
       vitnode_logo_light: cn(commonClassName, {
-        'dark:hidden': form.watch('logos.dark'),
-        'hidden sm:block':
-          form.watch('logos.mobile_light') ?? form.watch('logos.mobile_dark'),
+        'dark:hidden': stateLogos.dark.length,
+        'hidden sm:block': stateLogos.mobile_light.length
+          ? stateLogos.mobile_light
+          : stateLogos.mobile_dark,
       }),
       vitnode_logo_dark: cn(commonClassName, {
-        'hidden dark:block': form.watch('logos.light'),
-        'hidden sm:block': !form.watch('logos.light'),
-        'dark:hidden dark:sm:block':
-          form.watch('logos.mobile_dark') ?? form.watch('logos.mobile_light'),
+        'hidden dark:block': stateLogos.light,
+        'hidden sm:block': !stateLogos.light,
+        'dark:hidden dark:sm:block': stateLogos.mobile_dark.length
+          ? stateLogos.mobile_dark
+          : stateLogos.mobile_light,
       }),
       vitnode_logo_mobile_light: cn(commonClassName, {
-        'block sm:hidden':
-          form.watch('logos.light') ?? form.watch('logos.dark'),
-        'dark:hidden': form.watch('logos.mobile_dark'),
+        'block sm:hidden': stateLogos.light.length
+          ? stateLogos.light
+          : stateLogos.dark,
+
+        'dark:hidden': stateLogos.mobile_dark,
       }),
       vitnode_logo_mobile_dark: cn(commonClassName, {
-        'block sm:hidden dark:block dark:sm:hidden':
-          form.watch('logos.light') ?? form.watch('logos.dark'),
+        'block sm:hidden dark:block dark:sm:hidden': stateLogos.light.length
+          ? stateLogos.light
+          : stateLogos.dark,
         'hidden dark:block': form.watch('logos.mobile_light'),
       }),
     };
