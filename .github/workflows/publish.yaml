@@ -19,6 +19,10 @@ on:
           - patch
           - minor
           - major
+      skip_bump_version:
+        description: 'Skip bumping version in package.json and release notes?'
+        required: false
+        type: boolean
 
 jobs:
   bump-version:
@@ -53,8 +57,18 @@ jobs:
         run: pnpm run build --filter=vitnode-backend --filter=vitnode-frontend --filter=vitnode-backend-email-resend --filter=vitnode-backend-email-smtp --filter=vitnode-backend-ai-google --filter=vitnode-backend-ai-open-ai
 
       - name: Run script to bump version
+        if: github.event.inputs.skip_bump_version == false
         run: pnpm run release
         id: version-bump
+        env:
+          VERSION_TYPE: ${{ github.event.inputs.type }}
+          RELEASE_TYPE: ${{ github.event.inputs.release }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Run script to bump version
+        if: github.event.inputs.skip_bump_version == true
+        run: pnpm run release --without-bump-version
+        id: version-bump-without-bump-version
         env:
           VERSION_TYPE: ${{ github.event.inputs.type }}
           RELEASE_TYPE: ${{ github.event.inputs.release }}

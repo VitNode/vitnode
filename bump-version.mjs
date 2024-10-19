@@ -9,7 +9,7 @@ const ALLOWED_VERSION_TYPES = ['major', 'minor', 'patch'];
 const GIT_USER_NAME = process.env.GITHUB_USER || 'Automated Version Bump';
 const GIT_USER_EMAIL =
   process.env.GITHUB_EMAIL || 'gh-action-bump-version@users.noreply.github.com';
-const WORKSPACE = process.env.GITHUB_WORKSPACE;
+const WORKSPACE = process.env.GITHUB_WORKSPACE || process.cwd();
 const EVENT_PATH = process.env.GITHUB_EVENT_PATH;
 const VERSION_TYPE = process.env.VERSION_TYPE;
 const RELEASE_TYPE = process.env.RELEASE_TYPE;
@@ -115,12 +115,90 @@ function logError(error) {
 }
 
 (async () => {
-  try {
-    if (!WORKSPACE) {
-      exitFailure('GITHUB_WORKSPACE is not defined.');
-      return;
+  if (!WORKSPACE) {
+    exitFailure('GITHUB_WORKSPACE is not defined.');
+    return;
+  }
+
+  if (process.argv[2] === '--without-bump-version') {
+    // Copy frontend files from app dir
+    const frontendPackagePath = path.join(
+      WORKSPACE,
+      'packages',
+      'frontend',
+      'folders_to_copy',
+    );
+    const frontendAppPath = path.join(WORKSPACE, 'apps', 'frontend');
+    const pathsToFoldersForce = [
+      join('src', 'app', '[locale]', 'admin', '(vitnode)'),
+      join('src', 'app', '[locale]', 'admin', '(auth)', '(vitnode)'),
+      join('src', 'app', '[locale]', '(main)', '(layout)', '(vitnode)'),
+    ];
+    const pathsToFiles = [
+      {
+        folder: join('src', 'app'),
+        file: 'not-found.tsx',
+      },
+      {
+        folder: join('src', 'plugins', 'core', 'langs'),
+        file: 'en.json',
+      },
+      {
+        folder: join('src', 'plugins', 'admin', 'langs'),
+        file: 'en.json',
+      },
+    ];
+
+    // Create folder for apps in frontend package
+    if (!fs.existsSync(frontendPackagePath)) {
+      fs.mkdirSync(frontendPackagePath, { recursive: true });
     }
 
+    // Copy folders
+    pathsToFoldersForce.forEach(folder => {
+      const appPath = join(frontendAppPath, folder);
+      const packagePath = join(frontendPackagePath, folder);
+      if (!fs.existsSync(packagePath)) {
+        fs.mkdirSync(packagePath, { recursive: true });
+      }
+
+      fs.cpSync(appPath, packagePath, { recursive: true });
+    });
+
+    // Copy files
+    pathsToFiles.forEach(file => {
+      const appPath = join(frontendAppPath, file.folder, file.file);
+      const packagePath = join(frontendPackagePath, file.folder, file.file);
+
+      fs.cpSync(appPath, packagePath, {
+        recursive: true,
+      });
+    });
+
+    // Copy src in frontend to create-vitnode-app
+    const createVitnodeAppPath = path.join(
+      WORKSPACE,
+      'packages',
+      'create-vitnode-app',
+      'templates',
+      'basic',
+      'apps',
+      'frontend',
+      'src',
+    );
+    const frontendSrcPath = path.join(WORKSPACE, 'apps', 'frontend', 'src');
+    if (!fs.existsSync(createVitnodeAppPath)) {
+      fs.mkdirSync(createVitnodeAppPath, { recursive: true });
+    }
+
+    fs.cpSync(frontendSrcPath, createVitnodeAppPath, {
+      recursive: true,
+    });
+
+    return;
+  }
+
+  try {
     // Check if packages exist
     for (const pkg of packages) {
       if (!existsSync(path.join(WORKSPACE, 'packages', pkg, 'package.json'))) {
@@ -275,80 +353,6 @@ function logError(error) {
 
     const remoteRepo = `https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git`;
     await runInWorkspace('git', ['push', remoteRepo]);
-
-    // Copy frontend files from app dir
-    const frontendPackagePath = path.join(
-      WORKSPACE,
-      'packages',
-      'frontend',
-      'folders_to_copy',
-    );
-    const frontendAppPath = path.join(WORKSPACE, 'apps', 'frontend');
-    const pathsToFoldersForce = [
-      join('src', 'app', '[locale]', 'admin', '(vitnode)'),
-      join('src', 'app', '[locale]', 'admin', '(auth)', '(vitnode)'),
-      join('src', 'app', '[locale]', '(main)', '(layout)', '(vitnode)'),
-    ];
-    const pathsToFiles = [
-      {
-        folder: join('src', 'app'),
-        file: 'not-found.tsx',
-      },
-      {
-        folder: join('src', 'plugins', 'core', 'langs'),
-        file: 'en.json',
-      },
-      {
-        folder: join('src', 'plugins', 'admin', 'langs'),
-        file: 'en.json',
-      },
-    ];
-
-    // Create folder for apps in frontend package
-    if (!fs.existsSync(frontendPackagePath)) {
-      fs.mkdirSync(frontendPackagePath, { recursive: true });
-    }
-
-    // Copy folders
-    pathsToFoldersForce.forEach(folder => {
-      const appPath = join(frontendAppPath, folder);
-      const packagePath = join(frontendPackagePath, folder);
-      if (!fs.existsSync(packagePath)) {
-        fs.mkdirSync(packagePath, { recursive: true });
-      }
-
-      fs.cpSync(appPath, packagePath, { recursive: true });
-    });
-
-    // Copy files
-    pathsToFiles.forEach(file => {
-      const appPath = join(frontendAppPath, file.folder, file.file);
-      const packagePath = join(frontendPackagePath, file.folder, file.file);
-
-      fs.cpSync(appPath, packagePath, {
-        recursive: true,
-      });
-    });
-
-    // Copy src in frontend to create-vitnode-app
-    const createVitnodeAppPath = path.join(
-      WORKSPACE,
-      'packages',
-      'create-vitnode-app',
-      'templates',
-      'basic',
-      'apps',
-      'frontend',
-      'src',
-    );
-    const frontendSrcPath = path.join(WORKSPACE, 'apps', 'frontend', 'src');
-    if (!fs.existsSync(createVitnodeAppPath)) {
-      fs.mkdirSync(createVitnodeAppPath, { recursive: true });
-    }
-
-    fs.cpSync(frontendSrcPath, createVitnodeAppPath, {
-      recursive: true,
-    });
 
     exitSuccess('Version bumped!');
   } catch (e) {
