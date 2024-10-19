@@ -1,7 +1,9 @@
 'use client';
 
-import { ErrorView } from 'vitnode-frontend/views/theme/views/error/error-view';
+import { WrapperError } from 'vitnode-frontend/views/theme/views/error/wrapper-error';
 
-export default function Error() {
-  return <ErrorView code="500" />;
+export default function Error(
+  props: React.ComponentProps<typeof WrapperError>,
+) {
+  return <WrapperError {...props} />;
 }

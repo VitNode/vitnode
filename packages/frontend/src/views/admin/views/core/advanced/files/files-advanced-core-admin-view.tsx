@@ -6,10 +6,6 @@ import {
   SearchParamsPagination,
 } from '@/graphql/get-pagination-tool';
 import {
-  checkAdminPermissionPage,
-  checkAdminPermissionPageMetadata,
-} from '@/graphql/get-session-admin-data';
-import {
   Admin__Core_Files__Show,
   Admin__Core_Files__ShowQuery,
   Admin__Core_Files__ShowQueryVariables,
@@ -36,16 +32,8 @@ export interface FilesAdvancedCoreAdminViewProps {
   searchParams: Promise<SearchParamsPagination>;
 }
 
-const permission = {
-  plugin_code: 'core',
-  group: 'advanced',
-  permission: 'can_manage_advanced_files',
-};
-
 export const generateMetadataFilesAdvancedCoreAdmin =
   async (): Promise<Metadata> => {
-    const perm = await checkAdminPermissionPageMetadata(permission);
-    if (perm) return perm;
     const t = await getTranslations('admin.core.advanced.files');
 
     return {
@@ -56,8 +44,6 @@ export const generateMetadataFilesAdvancedCoreAdmin =
 export const FilesAdvancedCoreAdminView = async ({
   searchParams,
 }: FilesAdvancedCoreAdminViewProps) => {
-  const perm = await checkAdminPermissionPage(permission);
-  if (perm) return perm;
   const variables = await getPaginationTool({
     searchParams,
     defaultPageSize: 10,
