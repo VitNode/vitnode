@@ -6,6 +6,10 @@ import {
   SearchParamsPagination,
 } from '@/graphql/get-pagination-tool';
 import {
+  checkAdminPermissionPage,
+  checkAdminPermissionPageMetadata,
+} from '@/graphql/get-session-admin-data';
+import {
   Admin__Core_Languages__Show,
   Admin__Core_Languages__ShowQuery,
   Admin__Core_Languages__ShowQueryVariables,
@@ -36,7 +40,15 @@ interface Props {
   searchParams: Promise<SearchParamsPagination>;
 }
 
+const permission = {
+  plugin_code: 'core',
+  group: 'can_manage_langs',
+  permission: '',
+};
+
 export const generateMetadataLangsCoreAdmin = async (): Promise<Metadata> => {
+  const perm = await checkAdminPermissionPageMetadata(permission);
+  if (perm) return perm;
   const t = await getTranslations('admin.core.langs');
 
   return {
@@ -45,6 +57,8 @@ export const generateMetadataLangsCoreAdmin = async (): Promise<Metadata> => {
 };
 
 export const LangsCoreAdminView = async ({ searchParams }: Props) => {
+  const perm = await checkAdminPermissionPage(permission);
+  if (perm) return perm;
   const variables = await getPaginationTool({
     searchParams,
     defaultPageSize: 10,

@@ -4,6 +4,10 @@ import { AvatarUser } from '@/components/ui/user/avatar';
 import { GroupFormat } from '@/components/ui/user/group-format';
 import { fetcher } from '@/graphql/fetcher';
 import {
+  checkAdminPermissionPage,
+  checkAdminPermissionPageMetadata,
+} from '@/graphql/get-session-admin-data';
+import {
   Admin__Core_Members__Show__Item,
   Admin__Core_Members__Show__ItemQuery,
   Admin__Core_Members__Show__ItemQueryVariables,
@@ -34,7 +38,15 @@ interface Props {
   params: Promise<{ id: string }>;
 }
 
+const permission = {
+  plugin_code: 'members',
+  group: 'users',
+  permission: 'can_manage_users',
+};
+
 export const generateMetadataUserMembersAdmin = async ({ params }: Props) => {
+  const perm = await checkAdminPermissionPageMetadata(permission);
+  if (perm) return perm;
   const { id } = await params;
   const data = await getData({ id: +id });
 
@@ -50,6 +62,8 @@ export const generateMetadataUserMembersAdmin = async ({ params }: Props) => {
 };
 
 export const UserMembersAdminView = async ({ params }: Props) => {
+  const perm = await checkAdminPermissionPage(permission);
+  if (perm) return perm;
   const { id } = await params;
   const [
     t,

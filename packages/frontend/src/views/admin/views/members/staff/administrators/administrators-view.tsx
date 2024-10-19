@@ -7,6 +7,10 @@ import {
   SearchParamsPagination,
 } from '@/graphql/get-pagination-tool';
 import {
+  checkAdminPermissionPage,
+  checkAdminPermissionPageMetadata,
+} from '@/graphql/get-session-admin-data';
+import {
   Admin__Core_Staff_Administrators__Show,
   Admin__Core_Staff_Administrators__ShowQuery,
   Admin__Core_Staff_Administrators__ShowQueryVariables,
@@ -32,8 +36,16 @@ const getData = async (
   return data;
 };
 
+const permission = {
+  plugin_code: 'members',
+  group: 'staff',
+  permission: 'can_manage_staff_administrators',
+};
+
 export const generateMetadataAdministratorsStaffAdmin =
   async (): Promise<Metadata> => {
+    const perm = await checkAdminPermissionPageMetadata(permission);
+    if (perm) return perm;
     const t = await getTranslations('admin.members.staff.administrators');
 
     return {
@@ -46,6 +58,8 @@ export const AdministratorsStaffAdminView = async ({
 }: {
   searchParams: Promise<SearchParamsPagination>;
 }) => {
+  const perm = await checkAdminPermissionPage(permission);
+  if (perm) return perm;
   const variables = await getPaginationTool({
     searchParams,
     sortByEnum: ShowAdminStaffAdministratorsSortingColumnEnum,

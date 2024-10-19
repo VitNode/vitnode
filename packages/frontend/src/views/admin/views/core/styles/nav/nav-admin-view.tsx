@@ -2,6 +2,10 @@ import { TranslationsProvider } from '@/components/translations-provider';
 import { HeaderContent } from '@/components/ui/header-content';
 import { fetcher } from '@/graphql/fetcher';
 import {
+  checkAdminPermissionPage,
+  checkAdminPermissionPageMetadata,
+} from '@/graphql/get-session-admin-data';
+import {
   Admin__Core_Nav__Show,
   Admin__Core_Nav__ShowQuery,
   Admin__Core_Nav__ShowQueryVariables,
@@ -25,7 +29,15 @@ const getData = async () => {
   return data;
 };
 
+const permission = {
+  plugin_code: 'core',
+  group: 'styles',
+  permission: 'can_manage_styles_nav',
+};
+
 export const generateMetadataNavAdmin = async (): Promise<Metadata> => {
+  const perm = await checkAdminPermissionPageMetadata(permission);
+  if (perm) return perm;
   const t = await getTranslations('admin.core.styles.nav');
 
   return {
@@ -34,6 +46,8 @@ export const generateMetadataNavAdmin = async (): Promise<Metadata> => {
 };
 
 export const NavAdminView = async () => {
+  const perm = await checkAdminPermissionPage(permission);
+  if (perm) return perm;
   const [data, t] = await Promise.all([
     getData(),
     getTranslations('admin.core.styles.nav'),

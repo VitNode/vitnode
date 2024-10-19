@@ -23,5 +23,6 @@
   "module": {
     "type": "nodenext",
     "strict": true
-  }
+  },
+  "minify": true
 }

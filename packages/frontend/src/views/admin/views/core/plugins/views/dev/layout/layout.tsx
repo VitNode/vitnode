@@ -2,6 +2,10 @@ import { DateFormat } from '@/components/date-format';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import { HeaderContent } from '@/components/ui/header-content';
+import {
+  checkAdminPermissionPage,
+  checkAdminPermissionPageMetadata,
+} from '@/graphql/get-session-admin-data';
 import { CONFIG } from '@/helpers/config-with-env';
 import { redirect } from '@/navigation';
 import { ExternalLink } from 'lucide-react';
@@ -21,9 +25,17 @@ interface Props {
   }>;
 }
 
+const permission = {
+  plugin_code: 'core',
+  group: 'can_manage_plugins',
+  permission: '',
+};
+
 export async function generateMetadataDevPluginAdminLayout({
   params,
 }: Props): Promise<Metadata> {
+  const perm = await checkAdminPermissionPageMetadata(permission);
+  if (perm) return perm;
   const { code } = await params;
   const data = await getPluginDataAdmin({ code });
   if (data.admin__core_plugins__show.edges.length === 0) return {};
@@ -39,6 +51,8 @@ export async function generateMetadataDevPluginAdminLayout({
 }
 
 export const DevPluginAdminLayout = async ({ params, children }: Props) => {
+  const perm = await checkAdminPermissionPage(permission);
+  if (perm) return perm;
   const { code, locale } = await params;
   if (!CONFIG.node_development) redirect({ href: '/admin', locale });
   const [data, t] = await Promise.all([
