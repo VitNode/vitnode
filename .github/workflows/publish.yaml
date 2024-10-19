@@ -75,13 +75,13 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create Pre-release
-        if: github.event.inputs.release == 'canary' || github.event.inputs.release == 'release-candidate'
+        if: github.event.inputs.release == 'canary' || github.event.inputs.release == 'release-candidate' && github.event.inputs.skip_bump_version == false
         run: gh release create ${{ steps.version-bump.outputs.newTag }} --generate-notes --prerelease
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create Release
-        if: github.event.inputs.release == 'stable'
+        if: github.event.inputs.release == 'stable' && github.event.inputs.skip_bump_version == false
         run: gh release create ${{ steps.version-bump.outputs.newTag }} --generate-notes
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
