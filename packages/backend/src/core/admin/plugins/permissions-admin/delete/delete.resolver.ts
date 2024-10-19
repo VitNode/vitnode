@@ -1,4 +1,4 @@
-import { AdminAuthGuards, OnlyForDevelopment } from '@/utils';
+import { AdminAuthGuards, AdminPermission, OnlyForDevelopment } from '@/utils';
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
@@ -14,6 +14,11 @@ export class DeleteAdminPermissionsAdminPluginsResolver {
   @Mutation(() => String)
   @UseGuards(AdminAuthGuards)
   @UseGuards(OnlyForDevelopment)
+  @AdminPermission({
+    plugin_code: 'core',
+    group: 'can_manage_plugins',
+    permission: '',
+  })
   async admin__core_plugins__permissions_admin__delete(
     @Args() args: DeleteAdminPermissionsAdminPluginsArgs,
   ): Promise<string> {

@@ -11,6 +11,7 @@ export class StatsAdminMembersResolver {
 
   @Query(() => [SignUpStatsAdminMembers])
   @UseGuards(AdminAuthGuards)
+  // TODO: Add permission
   async admin__core_members__stats_sign_up(): Promise<
     SignUpStatsAdminMembers[]
   > {

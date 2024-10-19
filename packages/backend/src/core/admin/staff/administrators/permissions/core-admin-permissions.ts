@@ -50,7 +50,7 @@ export const coreAdminPermissions: ShowAdminStaffAdministratorsObj['permissions'
       groups: [
         {
           id: 'users',
-          permissions: ['can_manage_users', 'can_edit_admins'],
+          permissions: ['can_manage_users'],
         },
         {
           id: 'can_manage_groups',

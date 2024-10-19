@@ -1,4 +1,4 @@
-import { AdminAuthGuards } from '@/utils';
+import { AdminAuthGuards, AdminPermission } from '@/utils';
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
@@ -12,6 +12,11 @@ export class CreateAdminStaffModeratorsResolver {
 
   @Mutation(() => ShowAdminStaffModerators)
   @UseGuards(AdminAuthGuards)
+  @AdminPermission({
+    plugin_code: 'members',
+    group: 'staff',
+    permission: 'can_manage_staff_moderators',
+  })
   async admin__core_staff_moderators__create(
     @Args() args: CreateAdminStaffModeratorsArgs,
   ): Promise<ShowAdminStaffModerators> {

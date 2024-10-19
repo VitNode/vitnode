@@ -119,6 +119,6 @@ export class ShowAdminNavService {
       };
     });
 
-    return filterGroups;
+    return filterGroups.filter(plugin => plugin.nav.length > 0);
   }
 }

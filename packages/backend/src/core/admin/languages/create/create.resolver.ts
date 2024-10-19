@@ -1,4 +1,4 @@
-import { AdminAuthGuards } from '@/utils';
+import { AdminAuthGuards, AdminPermission } from '@/utils';
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
@@ -12,6 +12,11 @@ export class CreateAdminCoreLanguagesResolver {
 
   @Mutation(() => ShowCoreLanguages)
   @UseGuards(AdminAuthGuards)
+  @AdminPermission({
+    plugin_code: 'core',
+    group: 'languages',
+    permission: 'can_manage_languages',
+  })
   async admin__core_languages__create(
     @Args() args: CreateCoreAdminLanguagesArgs,
   ): Promise<ShowCoreLanguages> {

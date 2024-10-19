@@ -16,11 +16,14 @@ interface PermissionState {
 }
 
 export function PermissionsField({
-  permissions,
+  permissions: permissionsFromProps,
   field,
 }: {
   permissions: Admin__Core_Staff_Administrators__ShowQuery['admin__core_staff_administrators__show']['permissions'];
 } & AutoFormComponentProps) {
+  const permissions = permissionsFromProps.filter(
+    plugin => plugin.groups.length > 0,
+  );
   const [activeTab, setActiveTab] = React.useState(permissions[0].plugin_code);
   const values: PermissionState[] = Array.isArray(field.value)
     ? field.value

@@ -1,4 +1,4 @@
-import { AdminAuthGuards, OnlyForDevelopment } from '@/utils';
+import { AdminAuthGuards, AdminPermission, OnlyForDevelopment } from '@/utils';
 import { UseGuards } from '@nestjs/common';
 import { Args, Query, Resolver } from '@nestjs/graphql';
 
@@ -12,6 +12,11 @@ export class ShowAdminNavPluginsResolver {
   @Query(() => [ShowAdminNavPluginsObj])
   @UseGuards(AdminAuthGuards)
   @UseGuards(OnlyForDevelopment)
+  @AdminPermission({
+    plugin_code: 'core',
+    group: 'can_manage_plugins',
+    permission: '',
+  })
   admin__core_plugins__nav__show(
     @Args('plugin_code', { type: () => String }) plugin_code: string,
   ): ShowAdminNavPluginsObj[] {

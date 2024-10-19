@@ -1,4 +1,4 @@
-import { AdminAuthGuards } from '@/utils';
+import { AdminAuthGuards, AdminPermission } from '@/utils';
 import { UseGuards } from '@nestjs/common';
 import { Args, Query, Resolver } from '@nestjs/graphql';
 
@@ -11,6 +11,11 @@ export class ShowAdminGroupsResolver {
 
   @Query(() => ShowAdminGroupsObj)
   @UseGuards(AdminAuthGuards)
+  @AdminPermission({
+    plugin_code: 'members',
+    group: 'can_manage_groups',
+    permission: '',
+  })
   async admin__core_groups__show(
     @Args() args: ShowAdminGroupsArgs,
   ): Promise<ShowAdminGroupsObj> {

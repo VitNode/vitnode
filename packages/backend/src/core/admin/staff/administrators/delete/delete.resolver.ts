@@ -1,4 +1,4 @@
-import { AdminAuthGuards } from '@/utils';
+import { AdminAuthGuards, AdminPermission } from '@/utils';
 import { UseGuards } from '@nestjs/common';
 import { Args, Int, Mutation, Resolver } from '@nestjs/graphql';
 
@@ -12,6 +12,11 @@ export class DeleteAdminStaffAdministratorsResolver {
 
   @Mutation(() => String)
   @UseGuards(AdminAuthGuards)
+  @AdminPermission({
+    plugin_code: 'members',
+    group: 'staff',
+    permission: 'can_manage_staff_administrators',
+  })
   async admin__core_staff_administrators__delete(
     @Args('id', { type: () => Int }) id: number,
   ): Promise<string> {

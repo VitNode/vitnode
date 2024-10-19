@@ -58,6 +58,7 @@ export function AutoForm<
   dependencies = [],
   submitButton,
   children,
+  onValuesChange,
 }: {
   children?: React.ReactNode;
   className?: string;
@@ -80,6 +81,7 @@ export function AutoForm<
     values: z.infer<T>,
     form: UseFormReturn<z.infer<T>>,
   ) => Promise<void> | void;
+  onValuesChange?: (values: z.infer<T>) => void;
   submitButton?: (props: {
     disabled: boolean;
     loading: boolean;
@@ -107,6 +109,15 @@ export function AutoForm<
       await onSubmitProp?.(parsedValues.data as z.infer<T>, form);
     }
   };
+
+  const values = form.watch();
+  // valuesString is needed because form.watch() returns a new object every time
+  const valuesString = JSON.stringify(values);
+
+  React.useEffect(() => {
+    onValuesChange?.(values);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [valuesString]);
 
   return (
     <Form {...form}>

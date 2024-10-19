@@ -185,7 +185,6 @@ export const CreateEditFormGroupsMembersAdmin = ({
         ]}
         formSchema={formSchema}
         onSubmit={onSubmit}
-        // onValuesChange={setValues}
         submitButton={props => (
           <DialogFooter>
             <Button {...props}>{tCore('save')}</Button>

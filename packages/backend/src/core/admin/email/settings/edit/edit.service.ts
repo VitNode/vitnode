@@ -1,5 +1,4 @@
 import { FilesService } from '@/core/files/helpers/upload/upload.service';
-import { InternalServerError } from '@/errors';
 import { configPath, ConfigType, getConfigFile } from '@/providers/config';
 import { Injectable } from '@nestjs/common';
 import * as fs from 'fs';

@@ -66,6 +66,7 @@ export const AdministratorsStaffAdminView = async ({
         'admin.members.staff.administrators',
         'admin.members.staff.shared',
         'admin_core.admin_permissions',
+        'admin_members.admin_permissions',
         ...global.core_plugins__show.map(
           plugin => `admin_${plugin.code}.admin_permissions`,
         ),
