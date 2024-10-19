@@ -8,24 +8,6 @@ import React from 'react';
 
 import { acceptMimeTypeImage } from '../../../helpers/files-support';
 
-interface Props {
-  file: FilesInputValue;
-  index: number;
-  showInfo?: boolean;
-}
-
-interface WithMultiple extends Props {
-  multiple: true;
-  onChange: (e: FilesInputValue[]) => void;
-  value: FilesInputValue[];
-}
-
-interface WithoutMultiple extends Props {
-  multiple?: false;
-  onChange: (e: FilesInputValue | null) => void;
-  value: FilesInputValue | null;
-}
-
 export const ItemPreviewFilesInput = ({
   file,
   index,
@@ -33,7 +15,14 @@ export const ItemPreviewFilesInput = ({
   value,
   showInfo,
   multiple,
-}: WithMultiple | WithoutMultiple) => {
+}: {
+  file: FilesInputValue;
+  index: number;
+  multiple?: boolean;
+  onChange: (e: FilesInputValue[]) => void;
+  showInfo?: boolean;
+  value: FilesInputValue[];
+}) => {
   const t = useTranslations('core.global');
 
   const size = React.useMemo(() => {
@@ -58,7 +47,7 @@ export const ItemPreviewFilesInput = ({
       return;
     }
 
-    onChange(null);
+    onChange([]);
   };
 
   return (

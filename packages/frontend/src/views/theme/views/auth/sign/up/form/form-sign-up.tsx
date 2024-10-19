@@ -2,10 +2,7 @@
 
 import { AutoForm } from '@/components/form/auto-form';
 import { AutoFormCheckbox } from '@/components/form/fields/checkbox';
-import {
-  AutoFormInput,
-  AutoFormInputProps,
-} from '@/components/form/fields/input';
+import { AutoFormInput } from '@/components/form/fields/input';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { removeSpecialCharacters } from '@/helpers/special-characters';
@@ -23,7 +20,9 @@ export const FormSignUp = () => {
       fields={[
         {
           id: 'name',
-          component: AutoFormInput,
+          component: props => (
+            <AutoFormInput {...props} className="bg-card shadow-sm" />
+          ),
           label: t('name.label'),
           description: t('name.desc'),
           childComponent: ({ field }) => {
@@ -42,28 +41,29 @@ export const FormSignUp = () => {
               </span>
             );
           },
-          componentProps: {
-            className: 'bg-card shadow-sm',
-          } as AutoFormInputProps,
         },
         {
           id: 'email',
-          component: AutoFormInput,
-          componentProps: {
-            type: 'email',
-            className: 'bg-card shadow-sm',
-          } as AutoFormInputProps,
+          component: props => (
+            <AutoFormInput
+              {...props}
+              className="bg-card shadow-sm"
+              type="email"
+            />
+          ),
           label: t('email.label'),
         },
         {
           id: 'password',
           label: t('password.label'),
           description: t('password.desc'),
-          component: AutoFormInput,
-          componentProps: {
-            type: 'password',
-            className: 'bg-card shadow-sm',
-          } as AutoFormInputProps,
+          component: props => (
+            <AutoFormInput
+              {...props}
+              className="bg-card shadow-sm"
+              type="password"
+            />
+          ),
           childComponent: ({ field }) => {
             const value: string = field.value ?? '';
             const regexArray = [

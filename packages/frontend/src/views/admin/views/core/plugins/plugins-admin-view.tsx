@@ -5,6 +5,10 @@ import {
   SearchParamsPagination,
 } from '@/graphql/get-pagination-tool';
 import {
+  checkAdminPermissionPage,
+  checkAdminPermissionPageMetadata,
+} from '@/graphql/get-session-admin-data';
+import {
   Admin__Core_Plugins__Show,
   Admin__Core_Plugins__ShowQuery,
   Admin__Core_Plugins__ShowQueryVariables,
@@ -33,7 +37,15 @@ const getData = async (variables: Admin__Core_Plugins__ShowQueryVariables) => {
   return data;
 };
 
+const permission = {
+  plugin_code: 'core',
+  group: 'can_manage_plugins',
+  permission: '',
+};
+
 export const generateMetadataPluginsAdmin = async (): Promise<Metadata> => {
+  const perm = await checkAdminPermissionPageMetadata(permission);
+  if (perm) return perm;
   const t = await getTranslations('admin.core.plugins');
 
   return {
@@ -44,6 +56,8 @@ export const generateMetadataPluginsAdmin = async (): Promise<Metadata> => {
 export const PluginsAdminView = async ({
   searchParams,
 }: PluginsAdminViewProps) => {
+  const perm = await checkAdminPermissionPage(permission);
+  if (perm) return perm;
   const variables = await getPaginationTool({
     searchParams,
     sortByEnum: ShowAdminPluginsSortingColumnEnum,

@@ -1,9 +1,6 @@
 import { AutoForm } from '@/components/form/auto-form';
 import { AutoFormCheckbox } from '@/components/form/fields/checkbox';
-import {
-  AutoFormInput,
-  AutoFormInputProps,
-} from '@/components/form/fields/input';
+import { AutoFormInput } from '@/components/form/fields/input';
 import { useDialog } from '@/components/ui/dialog';
 import { Admin__Core_Members__Show__ItemQuery } from '@/graphql/queries/admin/members/users/item/admin__core_members__show__item.generated';
 import { nameRegex } from '@/hooks/core/sign/up/use-sign-up-view';
@@ -92,10 +89,7 @@ export const EditActionUserMembersAdmin = ({
         },
         {
           id: 'email',
-          component: AutoFormInput,
-          componentProps: {
-            type: 'email',
-          } as AutoFormInputProps,
+          component: props => <AutoFormInput {...props} type="email" />,
           label: tSignUp('email.label'),
         },
         {

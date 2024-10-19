@@ -1,9 +1,6 @@
 import { AutoForm, DependencyType } from '@/components/form/auto-form';
 import { AutoFormIconPicker } from '@/components/form/fields/icon-picker';
-import {
-  AutoFormInput,
-  AutoFormInputProps,
-} from '@/components/form/fields/input';
+import { AutoFormInput } from '@/components/form/fields/input';
 import { AutoFormSelect } from '@/components/form/fields/select';
 import { AutoFormTagInput } from '@/components/form/fields/tags-input';
 import { Admin__Core_Plugins__Nav__ShowQuery } from '@/graphql/queries/admin/plugins/dev/nav/admin__core_plugins__nav__show.generated';
@@ -52,38 +49,40 @@ export const CreateEditNavDevPluginAdmin = ({
         {
           id: 'parent_code',
           label: t('create.parent.label'),
-          component: AutoFormSelect,
-          componentProps: {
-            labels: {
-              null: (
-                <div className="flex flex-wrap items-center gap-2">
-                  <Ban className="text-muted-foreground size-4" />
-                  <span>{t('create.parent.null')}</span>
-                </div>
-              ),
-              ...Object.fromEntries(
-                dataFromSSR.map(nav => {
-                  const textAndIcon = textsAndIcons.find(
-                    item => item.id === nav.code,
-                  );
+          component: props => (
+            <AutoFormSelect
+              {...props}
+              labels={{
+                null: (
+                  <div className="flex flex-wrap items-center gap-2">
+                    <Ban className="text-muted-foreground size-4" />
+                    <span>{t('create.parent.null')}</span>
+                  </div>
+                ),
+                ...Object.fromEntries(
+                  dataFromSSR.map(nav => {
+                    const textAndIcon = textsAndIcons.find(
+                      item => item.id === nav.code,
+                    );
 
-                  if (!textAndIcon) return [nav.code, nav.code];
+                    if (!textAndIcon) return [nav.code, nav.code];
 
-                  return [
-                    nav.code,
-                    <div
-                      className="flex flex-wrap items-center gap-2"
-                      key={nav.code}
-                    >
-                      {textAndIcon.icon}
+                    return [
+                      nav.code,
+                      <div
+                        className="flex flex-wrap items-center gap-2"
+                        key={nav.code}
+                      >
+                        {textAndIcon.icon}
 
-                      <span>{textAndIcon.text}</span>
-                    </div>,
-                  ];
-                }),
-              ),
-            },
-          } as AutoFormInputProps,
+                        <span>{textAndIcon.text}</span>
+                      </div>,
+                    ];
+                  }),
+                ),
+              }}
+            />
+          ),
         },
         {
           id: 'icon',
@@ -94,10 +93,7 @@ export const CreateEditNavDevPluginAdmin = ({
           id: 'keywords',
           label: t('create.keywords.label'),
           description: t('create.keywords.desc'),
-          component: AutoFormTagInput,
-          componentProps: {
-            multiple: true,
-          } as AutoFormInputProps,
+          component: props => <AutoFormTagInput {...props} multiple />,
         },
       ]}
       formSchema={formSchema}

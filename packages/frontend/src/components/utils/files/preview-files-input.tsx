@@ -2,28 +2,17 @@ import { FilesInputValue } from '@/components/ui/file-input';
 
 import { ItemPreviewFilesInput } from './item-preview-files-input';
 
-interface Props {
-  showInfo?: boolean;
-}
-
-interface WithMultiple extends Props {
-  multiple: true;
-  onChange: (e: FilesInputValue[]) => void;
-  value: FilesInputValue[];
-}
-
-interface WithoutMultiple extends Props {
-  multiple?: false;
-  onChange: (e: FilesInputValue | null) => void;
-  value: FilesInputValue | null;
-}
-
 export const PreviewFilesInput = ({
   onChange,
   value,
   showInfo,
   multiple,
-}: WithMultiple | WithoutMultiple) => {
+}: {
+  multiple?: boolean;
+  onChange: (e: FilesInputValue[]) => void;
+  showInfo?: boolean;
+  value: FilesInputValue[];
+}) => {
   if (!value || (Array.isArray(value) && value.length === 0)) return null;
 
   return (
@@ -37,10 +26,10 @@ export const PreviewFilesInput = ({
               ? `${file.name}_${file.lastModified}_${file.size}`
               : `${file.dir_folder}_${file.file_name}`
           }
-          multiple={multiple as false}
-          onChange={onChange as (e: FilesInputValue | null) => void}
+          multiple={multiple}
+          onChange={onChange}
           showInfo={showInfo}
-          value={value as FilesInputValue | null}
+          value={value}
         />
       ))}
     </ul>

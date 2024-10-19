@@ -1,10 +1,7 @@
 'use client';
 
 import { AutoForm } from '@/components/form/auto-form';
-import {
-  AutoFormSwitch,
-  AutoFormSwitchProps,
-} from '@/components/form/fields/switch';
+import { AutoFormSwitch } from '@/components/form/fields/switch';
 import { Admin__Core_Authorization_Settings__ShowQuery } from '@/graphql/queries/admin/settings/authorization/admin__core_authorization_settings__show.generated';
 import { useTranslations } from 'next-intl';
 
@@ -38,13 +35,12 @@ export const ContentAuthorizationSettingsCoreAdmin = ({
         },
         {
           id: 'require_confirm_email',
-          component: AutoFormSwitch,
+          component: props => (
+            <AutoFormSwitch {...props} disabled={!isEmailEnabled} />
+          ),
           hideOptionalLabel: true,
           label: t('require_confirm_email.title'),
           description: t('require_confirm_email.desc'),
-          componentProps: {
-            disabled: !isEmailEnabled,
-          } as AutoFormSwitchProps,
         },
       ]}
       formSchema={formSchema}

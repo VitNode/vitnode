@@ -22,6 +22,26 @@ export const coreAdminPermissions: ShowAdminStaffAdministratorsObj['permissions'
             'can_manage_settings_ai',
           ],
         },
+        {
+          id: 'can_manage_plugins',
+          permissions: [],
+        },
+        {
+          id: 'styles',
+          permissions: [
+            'can_manage_styles_theme-editor',
+            'can_manage_styles_nav',
+            'can_manage_styles_editor',
+          ],
+        },
+        {
+          id: 'can_manage_langs',
+          permissions: [],
+        },
+        {
+          id: 'advanced',
+          permissions: ['can_manage_advanced_files'],
+        },
       ],
     },
     {
@@ -29,8 +49,16 @@ export const coreAdminPermissions: ShowAdminStaffAdministratorsObj['permissions'
       plugin_code: 'members',
       groups: [
         {
+          id: 'users',
+          permissions: ['can_manage_users', 'can_edit_admins'],
+        },
+        {
+          id: 'can_manage_groups',
+          permissions: [],
+        },
+        {
           id: 'staff',
-          permissions: ['can_view_staff'],
+          permissions: ['can_manage_staff_administrators'],
         },
       ],
     },

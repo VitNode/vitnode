@@ -145,7 +145,7 @@ export const ContentCreateEditLegalPage = ({
             id: 'code',
             label: t('form.code.title'),
             description: t('form.code.desc'),
-            component: AutoFormInput,
+            component: props => <AutoFormInput {...props} />,
             childComponent: ({ field }) => {
               const value: string = field.value ?? '';
               const parsedValue = removeSpecialCharacters(value);

@@ -2,10 +2,7 @@
 
 import { AutoForm } from '@/components/form/auto-form';
 import { AutoFormCheckbox } from '@/components/form/fields/checkbox';
-import {
-  AutoFormInput,
-  AutoFormInputProps,
-} from '@/components/form/fields/input';
+import { AutoFormInput } from '@/components/form/fields/input';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { useSignInView } from '@/hooks/core/sign/in/use-sign-in-view';
@@ -51,27 +48,32 @@ export const FormSignIn = () => {
           {
             id: 'email',
             label: t('email'),
-            component: AutoFormInput,
-            componentProps: {
-              type: 'email',
-              className: 'bg-card shadow-sm',
-            } as AutoFormInputProps,
+            component: props => (
+              <AutoFormInput
+                {...props}
+                className="bg-card shadow-sm"
+                type="email"
+              />
+            ),
           },
           {
             id: 'password',
             label: t('password'),
-            component: AutoFormInput,
-            componentProps: {
-              type: 'password',
-              className: 'bg-card shadow-sm',
-            } as AutoFormInputProps,
+            component: props => (
+              <AutoFormInput
+                {...props}
+                className="bg-card shadow-sm"
+                type="password"
+              />
+            ),
           },
           {
             id: 'remember',
             label: t('remember.label'),
             description: t('remember.desc'),
-            component: AutoFormCheckbox,
-            className: 'bg-card',
+            component: props => (
+              <AutoFormCheckbox {...props} className="bg-card" />
+            ),
           },
         ]}
         formSchema={formSchema}

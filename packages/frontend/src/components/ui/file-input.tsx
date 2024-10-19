@@ -10,29 +10,6 @@ import { PreviewFilesInput } from '../utils/files/preview-files-input';
 
 export type FilesInputValue = File | UploadCoreFilesObj;
 
-interface FilesInputInputProps
-  extends Omit<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    'multiple' | 'onChange' | 'type' | 'value'
-  > {
-  acceptExtensions?: string[];
-  maxFileSizeInMb?: number;
-  ref?: React.RefCallback<HTMLInputElement>;
-  showInfo?: boolean;
-}
-
-interface WithMultiple extends FilesInputInputProps {
-  multiple: true;
-  onChange: (e: FilesInputValue[]) => void;
-  value: FilesInputValue[] | null;
-}
-
-interface WithoutMultiple extends FilesInputInputProps {
-  multiple?: false;
-  onChange: (e: FilesInputValue | null) => void;
-  value: FilesInputValue | null;
-}
-
 export const FileInput = ({
   acceptExtensions,
   className,
@@ -44,7 +21,18 @@ export const FileInput = ({
   ref,
   showInfo,
   ...props
-}: WithMultiple | WithoutMultiple) => {
+}: {
+  acceptExtensions?: string[];
+  maxFileSizeInMb?: number;
+  multiple?: boolean;
+  onChange: (e: FilesInputValue[]) => void;
+  ref?: React.RefCallback<HTMLInputElement>;
+  showInfo?: boolean;
+  value: FilesInputValue[];
+} & Omit<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  'multiple' | 'onChange' | 'type' | 'value'
+>) => {
   const t = useTranslations('core.global.files');
   const [isDrag, setDrag] = React.useState(false);
   const currentRef = React.useRef<HTMLInputElement>(null);
@@ -88,7 +76,7 @@ export const FileInput = ({
     const current = currentFiles.at(0);
     if (!current) return;
 
-    onChange(current);
+    onChange([current]);
   };
 
   return (
@@ -181,7 +169,7 @@ export const FileInput = ({
         multiple={multiple as true}
         onChange={onChange as (e: FilesInputValue[]) => void}
         showInfo={showInfo}
-        value={value as FilesInputValue[]}
+        value={value}
       />
     </div>
   );

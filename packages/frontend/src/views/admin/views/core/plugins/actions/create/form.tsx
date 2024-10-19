@@ -1,10 +1,7 @@
 'use client';
 
 import { AutoForm } from '@/components/form/auto-form';
-import {
-  AutoFormInput,
-  AutoFormInputProps,
-} from '@/components/form/fields/input';
+import { AutoFormInput } from '@/components/form/fields/input';
 import { ShowAdminPlugins } from '@/graphql/types';
 import { useTranslations } from 'next-intl';
 
@@ -36,19 +33,15 @@ export const FormCreateEditPluginAdmin = ({
         },
         {
           id: 'code',
-          component: AutoFormInput,
-          componentProps: {
-            placeholder: 'vitnode-plugin-example',
-          } as AutoFormInputProps,
+          component: props => (
+            <AutoFormInput {...props} placeholder="vitnode-plugin-example" />
+          ),
           label: t('create.code.label'),
           description: t('create.code.desc'),
         },
         {
           id: 'support_url',
-          component: AutoFormInput,
-          componentProps: {
-            type: 'url',
-          } as AutoFormInputProps,
+          component: props => <AutoFormInput {...props} type="url" />,
           label: t('create.support_url.label'),
           description: t('create.support_url.desc'),
         },
@@ -60,10 +53,7 @@ export const FormCreateEditPluginAdmin = ({
         },
         {
           id: 'author_url',
-          component: AutoFormInput,
-          componentProps: {
-            type: 'url',
-          } as AutoFormInputProps,
+          component: props => <AutoFormInput {...props} type="url" />,
           label: t('create.author_url.label'),
           description: t('create.author_url.desc'),
         },

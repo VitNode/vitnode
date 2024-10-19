@@ -1,14 +1,12 @@
 export const AutoFormInputWrapper = ({
-  withChildren,
-  className,
   children,
+  Wrapper,
 }: {
   children: React.ReactNode;
-  className?: string;
-  withChildren: boolean;
+  Wrapper?: (props: { children: React.ReactNode }) => React.ReactNode;
 }) => {
-  if (className || withChildren) {
-    return <div className={className}>{children}</div>;
+  if (Wrapper) {
+    return <Wrapper>{children}</Wrapper>;
   }
 
   return <>{children}</>;

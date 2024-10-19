@@ -1,4 +1,4 @@
-import { AutoFormItemProps } from '@/components/form/auto-form';
+import { AutoFormComponentProps } from '@/components/form/auto-form';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { Tabs, TabsTrigger } from '@/components/ui/tabs';
@@ -6,11 +6,6 @@ import { Admin__Core_Staff_Administrators__ShowQuery } from '@/graphql/queries/a
 import { cn } from '@/helpers/classnames';
 import { useTranslations } from 'next-intl';
 import React from 'react';
-import { FieldValues } from 'react-hook-form';
-
-export interface PermissionsFieldProps {
-  permissions: Admin__Core_Staff_Administrators__ShowQuery['admin__core_staff_administrators__show']['permissions'];
-}
 
 interface PermissionState {
   groups: {
@@ -20,10 +15,12 @@ interface PermissionState {
   plugin_code: string;
 }
 
-export function PermissionsField<T extends FieldValues>({
-  field,
+export function PermissionsField({
   permissions,
-}: AutoFormItemProps<T> & PermissionsFieldProps) {
+  field,
+}: {
+  permissions: Admin__Core_Staff_Administrators__ShowQuery['admin__core_staff_administrators__show']['permissions'];
+} & AutoFormComponentProps) {
   const [activeTab, setActiveTab] = React.useState(permissions[0].plugin_code);
   const values: PermissionState[] = Array.isArray(field.value)
     ? field.value
@@ -129,7 +126,7 @@ export function PermissionsField<T extends FieldValues>({
                         const childValue = groupValue?.permissions.find(
                           c => c === child,
                         );
-                        const childLangKey = `${langKey}_${child}`;
+                        const childLangKey = `admin_${plugin.plugin_code}.admin_permissions.${child}`;
 
                         return (
                           <li
