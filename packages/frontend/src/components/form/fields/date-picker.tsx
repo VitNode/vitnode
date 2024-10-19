@@ -21,12 +21,13 @@ export function AutoFormDatePicker({
   overrideOptions: _,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   shape: _shape,
+  classNameWrapper,
   wrapper,
   ...props
 }: AutoFormComponentProps &
   Omit<React.ComponentProps<typeof DatePicker>, 'name' | 'value'>) {
   return (
-    <AutoFormWrapper theme={theme}>
+    <AutoFormWrapper className={classNameWrapper} theme={theme}>
       {label && (
         <AutoFormLabel
           description={description}
@@ -37,7 +38,7 @@ export function AutoFormDatePicker({
         />
       )}
 
-      <AutoFormInputWrapper Wrapper={wrapper}>
+      <AutoFormInputWrapper field={field} Wrapper={wrapper}>
         <FormControl>
           <DatePicker
             {...field}

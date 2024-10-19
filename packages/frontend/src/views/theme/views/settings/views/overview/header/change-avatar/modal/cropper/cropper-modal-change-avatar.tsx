@@ -6,7 +6,7 @@ import { Cropper } from 'react-cropper';
 
 import { useCopperModalChangeAvatar } from './hooks/use-copper-modal-change-avatar';
 
-export const CropperModalChangeAvatar = ({ file }: { file: File }) => {
+export const CropperModalChangeAvatar = ({ file }: { file: File[] }) => {
   const t = useTranslations('core');
   const { cropperRef, isPending, onSubmit } = useCopperModalChangeAvatar();
 
@@ -21,7 +21,7 @@ export const CropperModalChangeAvatar = ({ file }: { file: File }) => {
         minCropBoxWidth={100}
         ref={cropperRef}
         rotatable={false}
-        src={URL.createObjectURL(file)}
+        src={URL.createObjectURL(file[0])}
         style={{ height: 200, width: '100%' }}
         viewMode={1}
       />

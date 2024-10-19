@@ -28,6 +28,7 @@ export function AutoFormRadioGroup({
   labels,
   shape,
   wrapper,
+  classNameWrapper,
   ...props
 }: {
   labels?: Record<
@@ -60,7 +61,7 @@ export function AutoFormRadioGroup({
   }
 
   return (
-    <AutoFormWrapper theme={theme}>
+    <AutoFormWrapper className={classNameWrapper} theme={theme}>
       {label && (
         <AutoFormLabel
           description={description}
@@ -71,7 +72,7 @@ export function AutoFormRadioGroup({
         />
       )}
 
-      <AutoFormInputWrapper Wrapper={wrapper}>
+      <AutoFormInputWrapper field={field} Wrapper={wrapper}>
         <FormControl>
           <RadioGroup
             defaultValue={field.value}

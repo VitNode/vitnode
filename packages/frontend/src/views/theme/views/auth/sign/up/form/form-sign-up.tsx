@@ -25,20 +25,24 @@ export const FormSignUp = () => {
           ),
           label: t('name.label'),
           description: t('name.desc'),
-          childComponent: ({ field }) => {
+          wrapper: ({ field, children }) => {
             const value: string = field.value ?? '';
-            if (!value.length) return null;
 
             return (
-              <span className="text-muted-foreground mt-2 block max-w-md truncate text-sm">
-                {t.rich('name.your_id', {
-                  id: () => (
-                    <span className="text-foreground font-medium">
-                      {removeSpecialCharacters(value)}
-                    </span>
-                  ),
-                })}
-              </span>
+              <>
+                {children}
+                {value.length > 0 && (
+                  <span className="text-muted-foreground block max-w-md truncate text-sm">
+                    {t.rich('name.your_id', {
+                      id: () => (
+                        <span className="text-foreground font-medium">
+                          {removeSpecialCharacters(value)}
+                        </span>
+                      ),
+                    })}
+                  </span>
+                )}
+              </>
             );
           },
         },
@@ -64,7 +68,7 @@ export const FormSignUp = () => {
               type="password"
             />
           ),
-          childComponent: ({ field }) => {
+          wrapper: ({ field, children }) => {
             const value: string = field.value ?? '';
             const regexArray = [
               /^.{8,}$/, // Min 8 characters
@@ -78,18 +82,21 @@ export const FormSignUp = () => {
               return acc + Number(regex.test(value));
             }, 0);
 
-            if (!value.length) return null;
-
             return (
-              <div className="mt-2">
-                <div className="mb-2 flex justify-between text-xs font-semibold">
-                  <span>{t('week_password')}</span>
-                  <span>{t('strong_password')}</span>
-                </div>
-                <Progress
-                  value={(100 / regexArray.length) * passRegexPassword}
-                />
-              </div>
+              <>
+                {children}
+                {value.length > 0 && (
+                  <div>
+                    <div className="mb-2 flex justify-between text-xs font-semibold">
+                      <span>{t('week_password')}</span>
+                      <span>{t('strong_password')}</span>
+                    </div>
+                    <Progress
+                      value={(100 / regexArray.length) * passRegexPassword}
+                    />
+                  </div>
+                )}
+              </>
             );
           },
         },

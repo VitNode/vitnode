@@ -1,6 +1,12 @@
 import { FormField } from '@/components/ui/form';
 import React from 'react';
-import { Control, FieldPath, FieldValues, UseFormWatch } from 'react-hook-form';
+import {
+  Control,
+  ControllerRenderProps,
+  FieldPath,
+  FieldValues,
+  UseFormWatch,
+} from 'react-hook-form';
 import * as z from 'zod';
 
 import { AutoFormComponentProps } from '../../auto-form';
@@ -26,7 +32,9 @@ export function ItemAutoForm<
   hideOptionalLabel,
   formSchema,
   wrapper,
+  classNameWrapper,
 }: {
+  classNameWrapper?: string;
   component: (props: AutoFormComponentProps) => React.ReactNode;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   control: Control<Record<string, any>> | undefined;
@@ -38,7 +46,11 @@ export function ItemAutoForm<
   label?: string;
   theme: 'horizontal' | 'vertical';
   watch: UseFormWatch<FieldValues>;
-  wrapper?: (props: { children: React.ReactNode }) => React.ReactNode;
+  wrapper?: (props: {
+    children: React.ReactNode;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    field: ControllerRenderProps<Record<string, any>>;
+  }) => React.ReactNode;
 }) {
   const { isHidden, isDisabled, isRequired, overrideOptions } =
     resolveDependencies(dependencies, id, watch);
@@ -68,13 +80,14 @@ export function ItemAutoForm<
               label,
               theme,
               description,
-              isRequired,
+              isRequired: (isRequired || zodInputProps.required) ?? false,
               isDisabled,
               hideOptionalLabel,
               overrideOptions,
               zodInputProps,
               shape,
               wrapper,
+              classNameWrapper,
             })}
           </>
         );

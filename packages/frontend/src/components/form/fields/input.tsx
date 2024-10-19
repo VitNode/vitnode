@@ -21,11 +21,12 @@ export function AutoFormInput({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   shape: _shape,
   wrapper,
+  classNameWrapper,
   ...props
 }: AutoFormComponentProps &
   Omit<React.InputHTMLAttributes<HTMLInputElement>, 'name' | 'value'>) {
   return (
-    <AutoFormWrapper theme={theme}>
+    <AutoFormWrapper className={classNameWrapper} theme={theme}>
       {label && (
         <AutoFormLabel
           description={description}
@@ -36,7 +37,7 @@ export function AutoFormInput({
         />
       )}
 
-      <AutoFormInputWrapper Wrapper={wrapper}>
+      <AutoFormInputWrapper field={field} Wrapper={wrapper}>
         <FormControl>
           <Input
             value={field.value ?? ''}

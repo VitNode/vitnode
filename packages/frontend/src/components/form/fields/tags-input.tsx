@@ -22,11 +22,12 @@ export function AutoFormTagInput({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   shape: _shape,
   wrapper,
+  classNameWrapper,
   ...props
 }: AutoFormComponentProps &
   Omit<React.ComponentProps<typeof TagInput>, 'name' | 'onChange' | 'value'>) {
   return (
-    <AutoFormWrapper theme={theme}>
+    <AutoFormWrapper className={classNameWrapper} theme={theme}>
       {label && (
         <AutoFormLabel
           description={description}
@@ -37,7 +38,7 @@ export function AutoFormTagInput({
         />
       )}
 
-      <AutoFormInputWrapper Wrapper={wrapper}>
+      <AutoFormInputWrapper field={field} Wrapper={wrapper}>
         <FormControl>
           <TagInput
             {...props}

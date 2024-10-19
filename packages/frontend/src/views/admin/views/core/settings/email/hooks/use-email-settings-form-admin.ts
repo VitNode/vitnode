@@ -14,10 +14,7 @@ export const useEmailSettingsFormAdmin = ({
   const t = useTranslations('core.global');
   const formSchema = z.object({
     color_primary: z.string().default(data.color_primary),
-    logo: zodFile
-      .nullable()
-      .default(data.logo ?? null)
-      .optional(),
+    logo: zodFile.default(data.logo ? [data.logo] : []).optional(),
   });
 
   const onSubmit = async (

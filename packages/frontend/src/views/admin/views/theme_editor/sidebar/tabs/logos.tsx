@@ -29,12 +29,14 @@ export const LogosTabThemeEditor = () => {
   }
 
   const updateLogo = ({
-    file,
+    file: files,
     id,
   }: {
-    file: FilesInputValue | null;
+    file: FilesInputValue[];
     id: ids;
   }) => {
+    if (files.length === 0) return;
+    const file = files[0];
     const iFrame = iframeRef?.current?.contentWindow?.document;
     const logoElement = iFrame?.querySelector<HTMLElement>('#vitnode_logo');
     if (!logoElement) return;

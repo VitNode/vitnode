@@ -31,6 +31,7 @@ export function AutoFormSelect({
   wrapper,
   labels,
   placeholder,
+  classNameWrapper,
   ...props
 }: {
   labels?: Record<string, React.JSX.Element | string>;
@@ -63,7 +64,7 @@ export function AutoFormSelect({
   };
 
   return (
-    <AutoFormWrapper theme={theme}>
+    <AutoFormWrapper className={classNameWrapper} theme={theme}>
       {label && (
         <AutoFormLabel
           description={description}
@@ -74,7 +75,7 @@ export function AutoFormSelect({
         />
       )}
 
-      <AutoFormInputWrapper Wrapper={wrapper}>
+      <AutoFormInputWrapper field={field} Wrapper={wrapper}>
         <FormControl>
           <Select
             defaultValue={field.value}

@@ -23,7 +23,7 @@ export function AutoFormCheckbox({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   shape: _shape,
   wrapper,
-  className,
+  classNameWrapper,
   ...props
 }: AutoFormComponentProps &
   Omit<React.ComponentProps<typeof Checkbox>, 'name' | 'value'>) {
@@ -34,21 +34,11 @@ export function AutoFormCheckbox({
         {
           'rounded-md border p-4': label && description,
         },
-        className,
+        classNameWrapper,
       )}
       theme={theme}
     >
-      {label && (
-        <AutoFormLabel
-          description={description}
-          hideOptionalLabel={hideOptionalLabel}
-          isRequired={isRequired}
-          label={label}
-          theme={theme}
-        />
-      )}
-
-      <AutoFormInputWrapper Wrapper={wrapper}>
+      <AutoFormInputWrapper field={field} Wrapper={wrapper}>
         <FormControl>
           <Checkbox
             checked={field.value || false}

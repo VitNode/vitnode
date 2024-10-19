@@ -21,6 +21,7 @@ export function AutoFormStringLanguageInput({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   shape: _shape,
   wrapper,
+  classNameWrapper,
   ...props
 }: AutoFormComponentProps &
   Omit<
@@ -28,7 +29,7 @@ export function AutoFormStringLanguageInput({
     'name' | 'onChange' | 'value'
   >) {
   return (
-    <AutoFormWrapper theme={theme}>
+    <AutoFormWrapper className={classNameWrapper} theme={theme}>
       {label && (
         <AutoFormLabel
           description={description}
@@ -39,7 +40,7 @@ export function AutoFormStringLanguageInput({
         />
       )}
 
-      <AutoFormInputWrapper Wrapper={wrapper}>
+      <AutoFormInputWrapper field={field} Wrapper={wrapper}>
         <FormControl>
           <StringLanguageInput
             {...props}

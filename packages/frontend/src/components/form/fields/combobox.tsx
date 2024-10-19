@@ -54,6 +54,7 @@ export function AutoFormCombobox({
   labels,
   placeholder,
   placeholderSearchInput,
+  classNameWrapper,
   ...props
 }: {
   labels?: Record<string, React.JSX.Element | string>;
@@ -122,7 +123,7 @@ export function AutoFormCombobox({
   };
 
   return (
-    <AutoFormWrapper theme={theme}>
+    <AutoFormWrapper className={classNameWrapper} theme={theme}>
       {label && (
         <AutoFormLabel
           description={description}
@@ -134,7 +135,7 @@ export function AutoFormCombobox({
       )}
 
       <Popover modal onOpenChange={setOpen} open={open}>
-        <AutoFormInputWrapper Wrapper={wrapper}>
+        <AutoFormInputWrapper field={field} Wrapper={wrapper}>
           <PopoverTrigger asChild>
             <FormControl>
               <ComboBoxButton
