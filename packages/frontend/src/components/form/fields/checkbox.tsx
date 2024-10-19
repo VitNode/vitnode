@@ -1,37 +1,32 @@
-'use client';
-
+import { AutoFormComponentProps } from '@/components/form/auto-form';
 import { Checkbox } from '@/components/ui/checkbox';
 import { FormControl, FormMessage } from '@/components/ui/form';
 import { cn } from '@/helpers/classnames';
-import { FieldValues } from 'react-hook-form';
 
-import { AutoFormItemProps } from '../auto-form';
 import { AutoFormInputWrapper } from './common/input-wrapper';
 import { AutoFormLabel } from './common/label';
 import { AutoFormTooltip } from './common/tooltip';
 import { AutoFormWrapper } from './common/wrapper';
 
-export type AutoFormCheckboxProps = Omit<
-  React.ComponentProps<typeof Checkbox>,
-  'onChange' | 'value'
->;
-
-export function AutoFormCheckbox<T extends FieldValues>({
+export function AutoFormCheckbox({
   field,
   label,
+  theme,
   description,
   isRequired,
-  theme,
   isDisabled,
-  componentProps,
-  className,
-  childComponent: ChildComponent,
   hideOptionalLabel,
-}: {
-  componentProps?: AutoFormCheckboxProps;
-} & AutoFormItemProps<T>) {
-  const value: boolean = field.value || false;
-
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  zodInputProps: _ZodInputProps,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  overrideOptions: _,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  shape: _shape,
+  wrapper,
+  classNameWrapper,
+  ...props
+}: AutoFormComponentProps &
+  Omit<React.ComponentProps<typeof Checkbox>, 'name' | 'value'>) {
   return (
     <AutoFormWrapper
       className={cn(
@@ -39,20 +34,22 @@ export function AutoFormCheckbox<T extends FieldValues>({
         {
           'rounded-md border p-4': label && description,
         },
-        className,
+        classNameWrapper,
       )}
       theme={theme}
     >
-      <AutoFormInputWrapper withChildren={!!ChildComponent}>
+      <AutoFormInputWrapper field={field} Wrapper={wrapper}>
         <FormControl>
           <Checkbox
-            checked={value}
-            disabled={isDisabled || componentProps?.disabled}
-            onCheckedChange={field.onChange}
-            {...componentProps}
+            checked={field.value || false}
+            disabled={isDisabled || props.disabled}
+            onCheckedChange={e => {
+              field.onChange(e);
+              props.onCheckedChange?.(e);
+            }}
+            {...props}
           />
         </FormControl>
-        {ChildComponent && <ChildComponent field={field} />}
       </AutoFormInputWrapper>
 
       {(label ?? description) && (

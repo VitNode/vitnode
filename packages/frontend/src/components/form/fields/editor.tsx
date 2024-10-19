@@ -1,36 +1,33 @@
-'use client';
-
 import { Editor } from '@/components/editor/editor';
+import { AutoFormComponentProps } from '@/components/form/auto-form';
 import { FormControl, FormMessage } from '@/components/ui/form';
-import { FieldValues } from 'react-hook-form';
 
-import { AutoFormItemProps } from '../auto-form';
 import { AutoFormInputWrapper } from './common/input-wrapper';
 import { AutoFormLabel } from './common/label';
 import { AutoFormTooltip } from './common/tooltip';
 import { AutoFormWrapper } from './common/wrapper';
 
-export type AutoFormEditorProps = Omit<
-  React.ComponentProps<typeof Editor>,
-  'onChange' | 'value'
->;
-
-export function AutoFormEditor<T extends FieldValues>({
+export function AutoFormEditor({
   field,
   label,
+  theme,
   description,
   isRequired,
-  theme,
   isDisabled,
-  componentProps,
-  className,
-  childComponent: ChildComponent,
   hideOptionalLabel,
-}: {
-  componentProps?: AutoFormEditorProps;
-} & AutoFormItemProps<T>) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  zodInputProps: _ZodInputProps,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  overrideOptions: _,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  shape: _shape,
+  wrapper,
+  classNameWrapper,
+  ...props
+}: AutoFormComponentProps &
+  Omit<React.ComponentProps<typeof Editor>, 'name' | 'onChange' | 'value'>) {
   return (
-    <AutoFormWrapper theme={theme}>
+    <AutoFormWrapper className={classNameWrapper} theme={theme}>
       {label && (
         <AutoFormLabel
           description={description}
@@ -41,18 +38,18 @@ export function AutoFormEditor<T extends FieldValues>({
         />
       )}
 
-      <AutoFormInputWrapper
-        className={className}
-        withChildren={!!ChildComponent}
-      >
+      <AutoFormInputWrapper field={field} Wrapper={wrapper}>
         <FormControl>
           <Editor
             {...field}
-            {...componentProps}
-            disabled={isDisabled || componentProps?.disabled}
+            {...props}
+            disabled={isDisabled || props?.disabled}
+            onChange={e => {
+              field.onChange(e);
+            }}
+            value={field.value ?? []}
           />
         </FormControl>
-        {ChildComponent && <ChildComponent field={field} />}
       </AutoFormInputWrapper>
 
       {description && theme === 'vertical' && (

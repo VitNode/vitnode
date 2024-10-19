@@ -1,10 +1,7 @@
 'use client';
 
 import { AutoForm } from '@/components/form/auto-form';
-import {
-  AutoFormRadioGroup,
-  AutoFormRadioGroupProps,
-} from '@/components/form/fields/radio-group';
+import { AutoFormRadioGroup } from '@/components/form/fields/radio-group';
 import { AutoFormSwitch } from '@/components/form/fields/switch';
 import { Core_GlobalQuery } from '@/graphql/queries/core_global.generated';
 import { useTranslations } from 'next-intl';
@@ -29,23 +26,25 @@ export const ContentEditorAdmin = (
         {
           id: 'files.allow_type',
           label: t('files.allow_type.title'),
-          component: AutoFormRadioGroup,
-          componentProps: {
-            labels: {
-              all: {
-                title: t('files.allow_type.all'),
-              },
-              images_videos: {
-                title: t('files.allow_type.images_videos'),
-              },
-              images: {
-                title: t('files.allow_type.images'),
-              },
-              none: {
-                title: t('files.allow_type.none'),
-              },
-            },
-          } as AutoFormRadioGroupProps,
+          component: props => (
+            <AutoFormRadioGroup
+              {...props}
+              labels={{
+                all: {
+                  title: t('files.allow_type.all'),
+                },
+                images_videos: {
+                  title: t('files.allow_type.images_videos'),
+                },
+                images: {
+                  title: t('files.allow_type.images'),
+                },
+                none: {
+                  title: t('files.allow_type.none'),
+                },
+              }}
+            />
+          ),
         },
       ]}
       formSchema={formSchema}

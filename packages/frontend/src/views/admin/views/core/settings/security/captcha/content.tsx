@@ -2,10 +2,7 @@
 
 import { AutoForm, DependencyType } from '@/components/form/auto-form';
 import { AutoFormInput } from '@/components/form/fields/input';
-import {
-  AutoFormRadioGroup,
-  AutoFormRadioGroupProps,
-} from '@/components/form/fields/radio-group';
+import { AutoFormRadioGroup } from '@/components/form/fields/radio-group';
 import { Admin__Core_Security__Captcha__ShowQuery } from '@/graphql/queries/admin/security/admin__core_security__captcha__show.generated';
 import { Link } from '@/navigation';
 import { SquareArrowOutUpRight } from 'lucide-react';
@@ -51,78 +48,80 @@ export const ContentCaptchaSecurityAdmin = (
         {
           id: 'type',
           label: t('type.title'),
-          component: AutoFormRadioGroup,
-          componentProps: {
-            labels: {
-              none: {
-                title: t('type.none.title'),
-              },
-              cloudflare_turnstile: {
-                title: t('type.cloudflare_turnstile.title'),
-                description: t.rich(`type.cloudflare_turnstile.desc`, {
-                  link: text => (
-                    <Link
-                      className="flex items-center gap-1"
-                      href="https://www.cloudflare.com/products/turnstile/"
-                      rel="noopener noreferrer"
-                      target="_blank"
-                    >
-                      {text}
-                      <SquareArrowOutUpRight className="size-3" />
-                    </Link>
-                  ),
-                }),
-              },
-              recaptcha_v3: {
-                title: t('type.recaptcha_v3'),
-                description: t.rich(`type.recaptcha_desc`, {
-                  link: text => (
-                    <Link
-                      className="flex items-center gap-1"
-                      href="https://www.google.com/recaptcha/about/"
-                      rel="noopener noreferrer"
-                      target="_blank"
-                    >
-                      {text}
-                      <SquareArrowOutUpRight className="size-3" />
-                    </Link>
-                  ),
-                }),
-              },
-              recaptcha_v2_invisible: {
-                title: t('type.recaptcha_v2_invisible'),
-                description: t.rich(`type.recaptcha_desc`, {
-                  link: text => (
-                    <Link
-                      className="flex items-center gap-1"
-                      href="https://www.google.com/recaptcha/about/"
-                      rel="noopener noreferrer"
-                      target="_blank"
-                    >
-                      {text}
-                      <SquareArrowOutUpRight className="size-3" />
-                    </Link>
-                  ),
-                }),
-              },
-              recaptcha_v2_checkbox: {
-                title: t('type.recaptcha_v2_checkbox'),
-                description: t.rich(`type.recaptcha_desc`, {
-                  link: text => (
-                    <Link
-                      className="flex items-center gap-1"
-                      href="https://www.google.com/recaptcha/about/"
-                      rel="noopener noreferrer"
-                      target="_blank"
-                    >
-                      {text}
-                      <SquareArrowOutUpRight className="size-3" />
-                    </Link>
-                  ),
-                }),
-              },
-            },
-          } as AutoFormRadioGroupProps,
+          component: props => (
+            <AutoFormRadioGroup
+              {...props}
+              labels={{
+                none: {
+                  title: t('type.none.title'),
+                },
+                cloudflare_turnstile: {
+                  title: t('type.cloudflare_turnstile.title'),
+                  description: t.rich(`type.cloudflare_turnstile.desc`, {
+                    link: text => (
+                      <Link
+                        className="flex items-center gap-1"
+                        href="https://www.cloudflare.com/products/turnstile/"
+                        rel="noopener noreferrer"
+                        target="_blank"
+                      >
+                        {text}
+                        <SquareArrowOutUpRight className="size-3" />
+                      </Link>
+                    ),
+                  }),
+                },
+                recaptcha_v3: {
+                  title: t('type.recaptcha_v3'),
+                  description: t.rich(`type.recaptcha_desc`, {
+                    link: text => (
+                      <Link
+                        className="flex items-center gap-1"
+                        href="https://www.google.com/recaptcha/about/"
+                        rel="noopener noreferrer"
+                        target="_blank"
+                      >
+                        {text}
+                        <SquareArrowOutUpRight className="size-3" />
+                      </Link>
+                    ),
+                  }),
+                },
+                recaptcha_v2_invisible: {
+                  title: t('type.recaptcha_v2_invisible'),
+                  description: t.rich(`type.recaptcha_desc`, {
+                    link: text => (
+                      <Link
+                        className="flex items-center gap-1"
+                        href="https://www.google.com/recaptcha/about/"
+                        rel="noopener noreferrer"
+                        target="_blank"
+                      >
+                        {text}
+                        <SquareArrowOutUpRight className="size-3" />
+                      </Link>
+                    ),
+                  }),
+                },
+                recaptcha_v2_checkbox: {
+                  title: t('type.recaptcha_v2_checkbox'),
+                  description: t.rich(`type.recaptcha_desc`, {
+                    link: text => (
+                      <Link
+                        className="flex items-center gap-1"
+                        href="https://www.google.com/recaptcha/about/"
+                        rel="noopener noreferrer"
+                        target="_blank"
+                      >
+                        {text}
+                        <SquareArrowOutUpRight className="size-3" />
+                      </Link>
+                    ),
+                  }),
+                },
+              }}
+            />
+          ),
         },
         {
           id: 'site_key',

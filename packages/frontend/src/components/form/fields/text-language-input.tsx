@@ -1,38 +1,35 @@
-'use client';
-
+import { AutoFormComponentProps } from '@/components/form/auto-form';
 import { FormControl, FormMessage } from '@/components/ui/form';
 import { StringLanguageInput } from '@/components/ui/text-language-input';
-import { StringLanguage } from '@/graphql/types';
-import { FieldValues } from 'react-hook-form';
 
-import { AutoFormItemProps } from '../auto-form';
 import { AutoFormInputWrapper } from './common/input-wrapper';
 import { AutoFormLabel } from './common/label';
 import { AutoFormTooltip } from './common/tooltip';
 import { AutoFormWrapper } from './common/wrapper';
 
-export type AutoFormStringLanguageInputProps = Omit<
-  React.ComponentProps<typeof StringLanguageInput>,
-  'onChange' | 'value'
->;
-
-export function AutoFormStringLanguageInput<T extends FieldValues>({
+export function AutoFormStringLanguageInput({
   field,
-  zodInputProps,
   label,
+  theme,
   description,
   isRequired,
-  theme,
   isDisabled,
-  componentProps,
-  className,
-  childComponent: ChildComponent,
   hideOptionalLabel,
-}: {
-  componentProps?: AutoFormStringLanguageInputProps;
-} & AutoFormItemProps<T>) {
+  zodInputProps,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  overrideOptions: _,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  shape: _shape,
+  wrapper,
+  classNameWrapper,
+  ...props
+}: AutoFormComponentProps &
+  Omit<
+    React.ComponentProps<typeof StringLanguageInput>,
+    'name' | 'onChange' | 'value'
+  >) {
   return (
-    <AutoFormWrapper theme={theme}>
+    <AutoFormWrapper className={classNameWrapper} theme={theme}>
       {label && (
         <AutoFormLabel
           description={description}
@@ -43,21 +40,19 @@ export function AutoFormStringLanguageInput<T extends FieldValues>({
         />
       )}
 
-      <AutoFormInputWrapper
-        className={className}
-        withChildren={!!ChildComponent}
-      >
+      <AutoFormInputWrapper field={field} Wrapper={wrapper}>
         <FormControl>
           <StringLanguageInput
-            {...field}
+            {...props}
             {...zodInputProps}
-            {...componentProps}
-            disabled={isDisabled || componentProps?.disabled}
-            onChange={field.onChange as (value: StringLanguage[]) => void}
-            value={field.value as StringLanguage[]}
+            disabled={isDisabled || props.disabled}
+            onBlur={field.onBlur || props.onBlur}
+            onChange={e => {
+              field.onChange(e);
+            }}
+            value={field.value ?? []}
           />
         </FormControl>
-        {ChildComponent && <ChildComponent field={field} />}
       </AutoFormInputWrapper>
 
       {description && theme === 'vertical' && (

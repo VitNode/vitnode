@@ -1,8 +1,5 @@
 import { AutoForm } from '@/components/form/auto-form';
-import {
-  AutoFormInput,
-  AutoFormInputProps,
-} from '@/components/form/fields/input';
+import { AutoFormInput } from '@/components/form/fields/input';
 import { AutoTextArea } from '@/components/form/fields/textarea';
 import { Button } from '@/components/ui/button';
 import { DialogFooter } from '@/components/ui/dialog';
@@ -20,10 +17,7 @@ export const ContentTestingActionEmailSettingsAdmin = () => {
         {
           id: 'to',
           label: t('to'),
-          component: AutoFormInput,
-          componentProps: {
-            type: 'email',
-          } as AutoFormInputProps,
+          component: props => <AutoFormInput {...props} type="email" />,
         },
         {
           id: 'subject',

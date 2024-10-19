@@ -7,7 +7,7 @@ import { toast } from 'sonner';
 import { mutationApi } from './mutation-api';
 
 interface FormType {
-  file: File | null;
+  file: File[];
   type: 'delete' | 'upload';
 }
 
@@ -20,7 +20,7 @@ export const useModalChangeAvatar = () => {
   const form = useForm<FormType>({
     defaultValues: {
       type: 'upload',
-      file: null,
+      file: [],
     },
     mode: 'onChange',
   });

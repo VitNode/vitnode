@@ -333,15 +333,23 @@
     },
     "admin_permissions": {
       "dashboard": "Dashboard",
-      "dashboard_can_manage_diagnostic_tools": "Can manage diagnostic tools?",
+      "can_manage_diagnostic_tools": "Can manage diagnostic tools?",
       "settings": "Settings",
-      "settings_can_manage_settings_main": "Can manage main settings?",
-      "settings_can_manage_settings_security": "Can manage security settings?",
-      "settings_can_manage_settings_metadata": "Can manage metadata settings?",
-      "settings_can_manage_settings_email": "Can manage email settings?",
-      "settings_can_manage_settings_authorization": "Can manage authorization settings?",
-      "settings_can_manage_settings_legal": "Can manage legal settings?",
-      "settings_can_manage_settings_ai": "Can manage AI settings?"
+      "can_manage_settings_main": "Can manage main settings?",
+      "can_manage_settings_security": "Can manage security settings?",
+      "can_manage_settings_metadata": "Can manage metadata settings?",
+      "can_manage_settings_email": "Can manage email settings?",
+      "can_manage_settings_authorization": "Can manage authorization settings?",
+      "can_manage_settings_legal": "Can manage legal settings?",
+      "can_manage_settings_ai": "Can manage AI settings?",
+      "can_manage_plugins": "Can manage plugins?",
+      "styles": "Styles",
+      "can_manage_styles_theme-editor": "Can manage theme editor?",
+      "can_manage_styles_nav": "Can manage navigation?",
+      "can_manage_styles_editor": "Can manage editor?",
+      "can_manage_langs": "Can manage languages?",
+      "advanced": "Advanced",
+      "can_manage_advanced_files": "Can manage files?"
     }
   },
   "admin_members": {

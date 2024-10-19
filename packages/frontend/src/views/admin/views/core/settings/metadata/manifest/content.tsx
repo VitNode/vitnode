@@ -2,14 +2,8 @@
 
 import { AutoForm } from '@/components/form/auto-form';
 import { AutoFormColorPicker } from '@/components/form/fields/color-picker';
-import {
-  AutoFormInput,
-  AutoFormInputProps,
-} from '@/components/form/fields/input';
-import {
-  AutoFormRadioGroup,
-  AutoFormRadioGroupProps,
-} from '@/components/form/fields/radio-group';
+import { AutoFormInput } from '@/components/form/fields/input';
+import { AutoFormRadioGroup } from '@/components/form/fields/radio-group';
 import { Admin__Core_Manifest_Metadata__ShowQuery } from '@/graphql/queries/admin/settings/admin__core_manifest_metadata__show.generated';
 import { CONFIG } from '@/helpers/config-with-env';
 import { useTranslations } from 'next-intl';
@@ -29,40 +23,43 @@ export const ContentManifestMetadataCoreAdmin = (
           id: 'display',
           label: t('display.label'),
           description: t('display.desc'),
-          component: AutoFormRadioGroup,
-          componentProps: {
-            labels: {
-              fullscreen: {
-                title: t('display.fullscreen.title'),
-                description: t('display.fullscreen.desc'),
-              },
-              standalone: {
-                title: t('display.standalone.title'),
-                description: t('display.standalone.desc'),
-              },
-              'minimal-ui': {
-                title: t('display.minimal-ui.title'),
-                description: t('display.minimal-ui.desc'),
-              },
-              browser: {
-                title: t('display.browser.title'),
-                description: t('display.browser.desc'),
-              },
-            },
-          } as AutoFormRadioGroupProps,
+          component: props => (
+            <AutoFormRadioGroup
+              {...props}
+              labels={{
+                fullscreen: {
+                  title: t('display.fullscreen.title'),
+                  description: t('display.fullscreen.desc'),
+                },
+                standalone: {
+                  title: t('display.standalone.title'),
+                  description: t('display.standalone.desc'),
+                },
+                'minimal-ui': {
+                  title: t('display.minimal-ui.title'),
+                  description: t('display.minimal-ui.desc'),
+                },
+                browser: {
+                  title: t('display.browser.title'),
+                  description: t('display.browser.desc'),
+                },
+              }}
+            />
+          ),
         },
         {
           id: 'start_url',
-          component: AutoFormInput,
-          componentProps: {
-            className: 'w-64 order-2',
-          } as AutoFormInputProps,
+          component: props => (
+            <AutoFormInput {...props} className="order-2 w-64" />
+          ),
+          wrapper: ({ children }) => (
+            <div className="flex flex-wrap items-center gap-1">
+              {children}
+              <span className="order-1">{CONFIG.frontend_url}</span>
+            </div>
+          ),
           label: t('start_url.label'),
           description: t('start_url.desc'),
-          className: 'flex flex-wrap items-center gap-1',
-          childComponent: () => (
-            <span className="order-1">{CONFIG.frontend_url}</span>
-          ),
         },
         {
           id: 'theme_color',

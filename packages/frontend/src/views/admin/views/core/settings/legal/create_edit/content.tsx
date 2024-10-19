@@ -1,12 +1,6 @@
 import { AutoForm, DependencyType } from '@/components/form/auto-form';
-import {
-  AutoFormEditor,
-  AutoFormEditorProps,
-} from '@/components/form/fields/editor';
-import {
-  AutoFormInput,
-  AutoFormInputProps,
-} from '@/components/form/fields/input';
+import { AutoFormEditor } from '@/components/form/fields/editor';
+import { AutoFormInput } from '@/components/form/fields/input';
 import { AutoFormSwitch } from '@/components/form/fields/switch';
 import { AutoFormStringLanguageInput } from '@/components/form/fields/text-language-input';
 import { Button } from '@/components/ui/button';
@@ -145,19 +139,22 @@ export const ContentCreateEditLegalPage = ({
             id: 'code',
             label: t('form.code.title'),
             description: t('form.code.desc'),
-            component: AutoFormInput,
-            childComponent: ({ field }) => {
+            component: props => <AutoFormInput {...props} />,
+            wrapper: ({ field, children }) => {
               const value: string = field.value ?? '';
               const parsedValue = removeSpecialCharacters(value);
 
               return (
-                <div className="text-muted-foreground mt-1 text-sm">
-                  {t.rich('form.code.preview_url', {
-                    url: () => (
-                      <span className="text-foreground font-semibold">{`/legal/${parsedValue}`}</span>
-                    ),
-                  })}
-                </div>
+                <>
+                  {children}
+                  <div className="text-muted-foreground mt-1 text-sm">
+                    {t.rich('form.code.preview_url', {
+                      url: () => (
+                        <span className="text-foreground font-semibold">{`/legal/${parsedValue}`}</span>
+                      ),
+                    })}
+                  </div>
+                </>
               );
             },
           },
@@ -169,21 +166,20 @@ export const ContentCreateEditLegalPage = ({
           {
             id: 'href',
             label: t('form.href'),
-            component: AutoFormInput,
-            componentProps: {
-              type: 'url',
-            } as AutoFormInputProps,
+            component: props => <AutoFormInput {...props} type="url" />,
           },
           {
             id: 'content',
             label: t('form.content'),
-            component: AutoFormEditor,
-            componentProps: {
-              allowUploadFiles: {
-                folder: 'legal',
-                plugin: 'core',
-              },
-            } as AutoFormEditorProps,
+            component: props => (
+              <AutoFormEditor
+                {...props}
+                allowUploadFiles={{
+                  folder: 'legal',
+                  plugin: 'core',
+                }}
+              />
+            ),
           },
         ]}
         formSchema={formSchema}

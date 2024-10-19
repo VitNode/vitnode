@@ -39,7 +39,7 @@ export const ModalChangeAvatar = () => {
         </DialogDescription>
       </DialogHeader>
 
-      {form.watch('type') === 'upload' && file ? (
+      {form.watch('type') === 'upload' && file.length ? (
         <React.Suspense fallback={<Loader />}>
           <CropperModalChangeAvatar file={file} />
         </React.Suspense>

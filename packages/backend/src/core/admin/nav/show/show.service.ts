@@ -80,19 +80,18 @@ export class ShowAdminNavService {
 
       // Filter the nav items based on the permissions
       const filteredNav = plugin.nav.filter(navItem => {
-        const baseCode = navItem.code.replace(/^can_manage_/, '');
-
         return (
           groupMap.has(navItem.code) ||
-          groupMap.has(baseCode) ||
+          groupMap.has(`can_manage_${navItem.code}`) ||
           navItem.code === 'dashboard'
         );
       });
 
       // Map over filteredNav to process each navItem
       const processedNav = filteredNav.map(navItem => {
-        const baseCode = navItem.code.replace(/^can_manage_/, '');
-        const group = groupMap.get(navItem.code) || groupMap.get(baseCode);
+        const group =
+          groupMap.get(navItem.code) ||
+          groupMap.get(`can_manage_${navItem.code}`);
 
         if (!group) {
           return { ...navItem, permissions: [] };
