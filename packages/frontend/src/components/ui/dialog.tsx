@@ -16,9 +16,7 @@ interface DialogContextArgs {
 
 export const DialogContext = React.createContext<DialogContextArgs>({
   open: false,
-  setOpen: () => {},
   isDirty: false,
-  setIsDirty: () => {},
 });
 
 export const useDialog = () => React.useContext(DialogContext);
