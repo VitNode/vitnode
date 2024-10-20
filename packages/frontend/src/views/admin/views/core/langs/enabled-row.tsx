@@ -18,7 +18,7 @@ export const EnabledRowTableLangsCoreAdmin = ({
   return (
     <Switch
       checked={checked}
-      disabled={data.default || data.protected || data.code === locale}
+      disabled={data.default || data.code === locale}
       onClick={async () => {
         changeChecked(!checked);
 

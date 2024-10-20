@@ -13,6 +13,7 @@ import {
 import * as z from 'zod';
 
 import { Button } from '../ui/button';
+import { useDialog } from '../ui/dialog';
 import { Form } from '../ui/form';
 import { ItemAutoForm } from './fields/utils/item';
 import { Dependency, getDefaultValues, getObjectFormSchema } from './utils';
@@ -89,6 +90,7 @@ export function AutoForm<
   }) => React.ReactNode;
   theme?: 'horizontal' | 'vertical';
 }) {
+  const { setOpen } = useDialog();
   const t = useTranslations('core.global');
   const objectFormSchema = React.useMemo(
     () => getObjectFormSchema(formSchema),
@@ -143,21 +145,34 @@ export function AutoForm<
         })}
 
         {children}
-        {submitButton ? (
-          submitButton({
-            disabled: !form.formState.isValid,
-            loading: form.formState.isSubmitting,
-            type: 'submit',
-          })
-        ) : (
-          <Button
-            disabled={!form.formState.isValid}
-            loading={form.formState.isSubmitting}
-            type="submit"
-          >
-            {t('save')}
-          </Button>
-        )}
+        <div className="flex w-full flex-wrap items-center justify-end gap-2">
+          {setOpen ? (
+            <Button
+              disabled={form.formState.isSubmitting}
+              onClick={() => {
+                setOpen(false);
+              }}
+              variant="ghost"
+            >
+              {t('cancel')}
+            </Button>
+          ) : null}
+          {submitButton ? (
+            submitButton({
+              disabled: !form.formState.isValid,
+              loading: form.formState.isSubmitting,
+              type: 'submit',
+            })
+          ) : (
+            <Button
+              disabled={!form.formState.isValid}
+              loading={form.formState.isSubmitting}
+              type="submit"
+            >
+              {t('save')}
+            </Button>
+          )}
+        </div>
       </form>
     </Form>
   );

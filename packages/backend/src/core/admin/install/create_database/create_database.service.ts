@@ -40,7 +40,7 @@ export class CreateDatabaseAdminInstallService {
         default: true,
         protected: true,
         timezone: 'America/New_York',
-        locale: 'enUS',
+        locale: 'en',
       },
     ]);
 

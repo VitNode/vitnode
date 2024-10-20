@@ -9,7 +9,6 @@ import {
 } from '@/graphql/mutations/admin/sessions/admin_sessions__sign_out.generated';
 import { revalidateTags } from '@/graphql/revalidate-tags';
 import { redirect } from '@/navigation';
-import { getLocale } from 'next-intl/server';
 
 export const mutationApi = async () => {
   try {
@@ -30,6 +29,5 @@ export const mutationApi = async () => {
     return { error: e.message };
   }
 
-  const locale = await getLocale();
-  redirect({ href: '/admin', locale });
+  await redirect('/admin');
 };

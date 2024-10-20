@@ -6,7 +6,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Loader } from '@/components/ui/loader';
 import { Trash2 } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import React from 'react';
 
 const Content = React.lazy(async () =>
@@ -19,11 +19,17 @@ export const DeleteActionsTableLangsCoreAdmin = (
   props: React.ComponentProps<typeof Content>,
 ) => {
   const t = useTranslations('core.global');
+  const locale = useLocale();
 
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button ariaLabel={t('delete')} size="icon" variant="destructiveGhost">
+        <Button
+          ariaLabel={t('delete')}
+          disabled={locale === props.code}
+          size="icon"
+          variant="destructiveGhost"
+        >
           <Trash2 />
         </Button>
       </AlertDialogTrigger>

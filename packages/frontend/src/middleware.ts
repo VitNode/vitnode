@@ -60,7 +60,7 @@ export function createMiddleware() {
     const i18n = await getI18n();
     const handleI18nRouting = createIntlMiddleware({
       ...i18n,
-      localePrefix: i18n.locales.length > 1 ? 'always' : 'as-needed',
+      localePrefix: 'as-needed',
     });
     const pathname = removeLocaleFromUrl(
       request.nextUrl.pathname,

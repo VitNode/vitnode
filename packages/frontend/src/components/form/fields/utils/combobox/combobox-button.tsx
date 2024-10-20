@@ -85,29 +85,33 @@ export function ComboBoxButton<T extends FieldValues>({
   return (
     <Button
       ariaLabel={label ?? ''}
-      className={cn('w-full justify-start', className)}
+      className={cn('w-full justify-start font-normal', className)}
       role="combobox"
       variant="outline"
       {...props}
     >
       {placeholderButton ? (
-        <Badge
-          className="shrink-0 [&>svg]:size-4"
-          onClick={e => {
-            e.stopPropagation();
-            e.preventDefault();
-            field.onChange([]);
-          }}
-          onKeyDown={e => {
-            if (e.key === 'Enter') {
+        multiple ? (
+          <Badge
+            className="shrink-0 [&>svg]:size-4"
+            onClick={e => {
               e.stopPropagation();
               e.preventDefault();
               field.onChange([]);
-            }
-          }}
-        >
-          {placeholderButton} <X />
-        </Badge>
+            }}
+            onKeyDown={e => {
+              if (e.key === 'Enter') {
+                e.stopPropagation();
+                e.preventDefault();
+                field.onChange([]);
+              }
+            }}
+          >
+            {placeholderButton} <X />
+          </Badge>
+        ) : (
+          <span>{placeholderButton}</span>
+        )
       ) : (
         <span className="text-muted-foreground">
           {placeholder
