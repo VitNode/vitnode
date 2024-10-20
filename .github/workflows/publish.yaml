@@ -56,8 +56,8 @@ jobs:
       - name: Build Projects
         run: pnpm run build --filter=vitnode-backend --filter=vitnode-frontend --filter=vitnode-backend-email-resend --filter=vitnode-backend-email-smtp --filter=vitnode-backend-ai-google --filter=vitnode-backend-ai-open-ai
 
-      - name: Run script to bump version
-        if: github.event.inputs.skip_bump_version == false
+      - name: Run script to bump version & copy files
+        if: github.event.inputs.skip_bump_version == 'false'
         run: pnpm run release
         id: version-bump
         env:
@@ -65,8 +65,8 @@ jobs:
           RELEASE_TYPE: ${{ github.event.inputs.release }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Run script to bump version
-        if: github.event.inputs.skip_bump_version == true
+      - name: Run script to only copy files
+        if: github.event.inputs.skip_bump_version == 'true'
         run: pnpm run release --without-bump-version
         id: version-bump-without-bump-version
         env:
@@ -75,13 +75,13 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create Pre-release
-        if: github.event.inputs.release == 'canary' || github.event.inputs.release == 'release-candidate' && github.event.inputs.skip_bump_version == false
+        if: github.event.inputs.release == 'canary' || github.event.inputs.release == 'release-candidate' && github.event.inputs.skip_bump_version == 'false'
         run: gh release create ${{ steps.version-bump.outputs.newTag }} --generate-notes --prerelease
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create Release
-        if: github.event.inputs.release == 'stable' && github.event.inputs.skip_bump_version == false
+        if: github.event.inputs.release == 'stable' && github.event.inputs.skip_bump_version == 'false'
         run: gh release create ${{ steps.version-bump.outputs.newTag }} --generate-notes
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -9,7 +9,7 @@ import {
 } from '@/components/ui/card';
 import { cn } from '@/helpers/classnames';
 import { Link } from '@/navigation';
-import { AlertTriangle, Home } from 'lucide-react';
+import { AlertTriangle, Home, SearchX, ShieldX } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 export interface ErrorViewProps {
@@ -24,7 +24,16 @@ export const ErrorView = ({ className, code }: ErrorViewProps) => {
     <div className={cn('mx-auto my-10 max-w-2xl px-4', className)}>
       <Card>
         <CardHeader className="items-center pb-2">
-          <AlertTriangle className="size-16" />
+          {(() => {
+            switch (code) {
+              case '403':
+                return <ShieldX className="size-16" />;
+              case '404':
+                return <SearchX className="size-16" />;
+              default:
+                return <AlertTriangle className="size-16" />;
+            }
+          })()}
         </CardHeader>
         <CardContent className="flex flex-col items-center pb-4 text-center">
           <span className="text-muted-foreground">{t('title')}</span>
