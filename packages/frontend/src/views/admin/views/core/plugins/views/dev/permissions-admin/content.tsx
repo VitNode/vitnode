@@ -1,22 +1,22 @@
 'use client';
 
 import { DragAndDropSortableList } from '@/components/drag&drop/sortable-list/list';
-import { Admin__Core_Plugins__Permissions_Admin__ShowQuery } from '@/graphql/queries/admin/plugins/dev/permissions-admin/admin__core_plugins__permissions_admin__show.generated';
 
 import { ItemPermissionsAdminDevPluginAdmin } from './item/item';
+import { PermissionsAdminWithI18n } from './permissions-admin';
 
-export const ContentPermissionsAdminDevPluginAdminView = (
-  dataFromSSR: Admin__Core_Plugins__Permissions_Admin__ShowQuery,
-) => {
-  const data = dataFromSSR.admin__core_plugins__permissions_admin__show.map(
-    item => ({
-      ...item,
-      children: item.permissions.map(child => ({
-        id: child,
-        children: [],
-      })),
-    }),
-  );
+export const ContentPermissionsAdminDevPluginAdminView = ({
+  dataWithI18n,
+}: {
+  dataWithI18n: PermissionsAdminWithI18n[];
+}) => {
+  const data = dataWithI18n.map(item => ({
+    ...item,
+    children: item.permissions.map(child => ({
+      ...child,
+      children: [],
+    })),
+  }));
 
   return (
     <DragAndDropSortableList
@@ -24,9 +24,9 @@ export const ContentPermissionsAdminDevPluginAdminView = (
         return (
           <ItemPermissionsAdminDevPluginAdmin
             {...data}
-            dataFromSSR={dataFromSSR}
+            dataWithI18n={dataWithI18n}
             parentId={parentId?.toString()}
-            permissions={data.children.map(child => child.id)}
+            permissions={data.children}
           />
         );
       }}

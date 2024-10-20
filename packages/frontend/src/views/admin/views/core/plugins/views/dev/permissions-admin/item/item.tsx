@@ -1,22 +1,52 @@
-import { Admin__Core_Plugins__Permissions_Admin__ShowQuery } from '@/graphql/queries/admin/plugins/dev/permissions-admin/admin__core_plugins__permissions_admin__show.generated';
+import { AppWindow } from 'lucide-react';
+import { useParams } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 
+import { PermissionsAdminWithI18n } from '../permissions-admin';
 import { ActionsItemPermissionsAdminDevPluginAdmin } from './actions/actions';
 
 export const ItemPermissionsAdminDevPluginAdmin = ({
   id,
+  name,
   parentId,
-  dataFromSSR,
+  dataWithI18n,
   permissions,
 }: {
-  dataFromSSR: Admin__Core_Plugins__Permissions_Admin__ShowQuery;
+  dataWithI18n: PermissionsAdminWithI18n[];
   parentId: string | undefined;
-} & Admin__Core_Plugins__Permissions_Admin__ShowQuery['admin__core_plugins__permissions_admin__show'][0]) => {
+} & PermissionsAdminWithI18n) => {
+  const t = useTranslations('admin.core.plugins.dev.permissions-admin');
+  const { code } = useParams();
+
   return (
     <div className="flex flex-1 items-center gap-4">
-      {id}
+      <div>
+        <span className="flex flex-wrap items-center gap-2">
+          {id.startsWith('can_manage_') && <AppWindow />}
+          <span className="font-semibold">{name}</span>
+        </span>
+        <p className="text-muted-foreground text-sm">
+          {t.rich('lang_key', {
+            key: () => (
+              <span className="text-foreground">{`admin_${code}.admin_permissions.${id}`}</span>
+            ),
+          })}
+        </p>
+        {id.startsWith('can_manage_') && (
+          <p className="text-muted-foreground text-sm">
+            {t.rich('page_permission', {
+              page: () => (
+                <span className="text-foreground">
+                  {`/admin/${code}/${id.replace('can_manage_', '').split('_').join('/')}`}
+                </span>
+              ),
+            })}
+          </p>
+        )}
+      </div>
       <ActionsItemPermissionsAdminDevPluginAdmin
-        data={{ id, permissions }}
-        dataFromSSR={dataFromSSR}
+        data={{ id, name, permissions }}
+        dataWithI18n={dataWithI18n}
         parentId={parentId}
       />
     </div>

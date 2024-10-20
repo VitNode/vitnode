@@ -1,6 +1,6 @@
 'use client';
 
-import { AutoForm } from '@/components/form/auto-form';
+import { AutoForm, DependencyType } from '@/components/form/auto-form';
 import { AutoFormInput } from '@/components/form/fields/input';
 import { ShowAdminPlugins } from '@/graphql/types';
 import { useTranslations } from 'next-intl';
@@ -20,6 +20,14 @@ export const FormCreateEditPluginAdmin = ({
   return (
     <AutoForm
       className={className}
+      dependencies={[
+        {
+          sourceField: 'code',
+          type: DependencyType.HIDES,
+          targetField: 'code',
+          when: () => !!data,
+        },
+      ]}
       fields={[
         {
           id: 'name',

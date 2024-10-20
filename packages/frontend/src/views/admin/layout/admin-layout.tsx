@@ -14,6 +14,7 @@ export interface TextAndIconsAsideAdmin {
   id: string;
   parent_text?: string;
   plugin: string;
+  plugin_code: string;
   text: string;
 }
 
@@ -93,6 +94,7 @@ export const AdminLayout = async ({
         // @ts-expect-error
         plugin: t(`admin_${item.plugin}.nav.title`),
         icon: getIcon(),
+        plugin_code: item.plugin,
       };
     });
 

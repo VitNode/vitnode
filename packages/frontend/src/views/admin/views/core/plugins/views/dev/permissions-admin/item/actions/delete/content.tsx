@@ -7,9 +7,9 @@ import {
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
-import { Admin__Core_Plugins__Permissions_Admin__ShowQuery } from '@/graphql/queries/admin/plugins/dev/permissions-admin/admin__core_plugins__permissions_admin__show.generated';
 import { useTranslations } from 'next-intl';
 
+import { PermissionsAdminWithI18n } from '../../../permissions-admin';
 import { useDeletePermissionAdminPluginAdmin } from './hooks/use-delete-permission-admin-plugin-admin';
 import { SubmitDeleteActionItemPermissionsAdminDevPluginAdmin } from './submit';
 
@@ -19,7 +19,7 @@ export const ContentDeleteActionItemPermissionsAdminDevPluginAdmin = ({
   permissions,
 }: {
   parentId: string | undefined;
-} & Admin__Core_Plugins__Permissions_Admin__ShowQuery['admin__core_plugins__permissions_admin__show'][0]) => {
+} & PermissionsAdminWithI18n) => {
   const t = useTranslations('admin.core.plugins.dev.permissions-admin.delete');
   const tCore = useTranslations('core.global');
   const { onSubmit } = useDeletePermissionAdminPluginAdmin({ id, parentId });

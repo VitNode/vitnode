@@ -1,20 +1,20 @@
 import { useDialog } from '@/components/ui/dialog';
-import { Admin__Core_Plugins__Permissions_Admin__ShowQuery } from '@/graphql/queries/admin/plugins/dev/permissions-admin/admin__core_plugins__permissions_admin__show.generated';
 import { useParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { UseFormReturn } from 'react-hook-form';
 import { toast } from 'sonner';
 import * as z from 'zod';
 
+import { PermissionsAdminWithI18n } from '../../permissions-admin';
 import { mutationApi } from './mutation-api';
 
 export const useCreateEditPermissionAdminPluginAdmin = ({
-  dataFromSSR,
+  dataWithI18n,
   data,
   parentId,
 }: {
-  data?: Admin__Core_Plugins__Permissions_Admin__ShowQuery['admin__core_plugins__permissions_admin__show'][0];
-  dataFromSSR: Admin__Core_Plugins__Permissions_Admin__ShowQuery;
+  data?: PermissionsAdminWithI18n;
+  dataWithI18n: PermissionsAdminWithI18n[];
   parentId: string | undefined;
 }) => {
   const t = useTranslations(
@@ -28,12 +28,7 @@ export const useCreateEditPermissionAdminPluginAdmin = ({
       .max(50)
       .default(data?.id ?? ''),
     parent_id: z
-      .enum([
-        'null',
-        ...dataFromSSR.admin__core_plugins__permissions_admin__show.map(
-          item => item.id,
-        ),
-      ])
+      .enum(['null', ...dataWithI18n.map(item => item.id)])
       .default(parentId ?? 'null'),
   });
   const { code } = useParams();
