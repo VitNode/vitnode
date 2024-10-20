@@ -308,7 +308,9 @@
             }
           },
           "permissions-admin": {
-            "title": "Permissions in AdminCP",
+            "title": "Admin Permissions",
+            "page_permission": "Page: <page></page>",
+            "lang_key": "Lang Key: <key></key>",
             "create_edit": {
               "id": {
                 "label": "ID",
@@ -316,8 +318,8 @@
                 "exists": "Permission with this ID already exists."
               },
               "parent": {
-                "label": "Parent Permission",
-                "null": "No parent permission"
+                "label": "Group",
+                "null": "No group permission"
               },
               "create_success": "Permission has been created."
             },

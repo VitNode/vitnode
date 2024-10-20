@@ -25,24 +25,52 @@ const getData = async (
   return data;
 };
 
+export interface PermissionsAdminWithI18n {
+  id: string;
+  name: string;
+  permissions: {
+    id: string;
+    name: string;
+  }[];
+}
+
 export const PermissionsAdminDevPluginAdminView = async ({
   params,
 }: {
   params: Promise<{ code: string }>;
 }) => {
   const { code } = await params;
-  const [t, data] = await Promise.all([
+  const [t, data, tPlugin] = await Promise.all([
     getTranslations('admin.core.plugins.dev.permissions-admin'),
     getData({ pluginCode: code }),
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    getTranslations(`admin_${code}`),
   ]);
+
+  const dataWithI18n: PermissionsAdminWithI18n[] =
+    data.admin__core_plugins__permissions_admin__show.map(permission => ({
+      id: permission.id,
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
+      name: tPlugin(`admin_permissions.${permission.id}`),
+      permissions: permission.permissions.map(permission => ({
+        id: permission,
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
+        name: tPlugin(`admin_permissions.${permission}`),
+      })),
+    }));
 
   return (
     <>
       <HeaderContent h1={t('title')}>
-        <ActionsPermissionsAdminDevPluginAdminView dataFromSSR={data} />
+        <ActionsPermissionsAdminDevPluginAdminView
+          dataWithI18n={dataWithI18n}
+        />
       </HeaderContent>
 
-      <ContentPermissionsAdminDevPluginAdminView {...data} />
+      <ContentPermissionsAdminDevPluginAdminView dataWithI18n={dataWithI18n} />
     </>
   );
 };

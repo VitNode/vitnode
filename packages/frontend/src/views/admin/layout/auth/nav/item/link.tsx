@@ -43,7 +43,9 @@ export const LinkItemNavAdmin = ({
       },
     );
 
-  const textAndIcon = textsAndIcons.find(item => item.id === id);
+  const textAndIcon = textsAndIcons.find(
+    item => item.id === id && item.plugin_code === plugin_code,
+  );
   if (!textAndIcon) return null;
 
   return (
@@ -81,7 +83,9 @@ export const LinkItemNavAdmin = ({
               const href = `/admin/${plugin_code}/${id}/${child.id}`;
               const active = pathname.startsWith(href);
               const textAndIcon = textsAndIcons.find(
-                item => item.id === `${id}_${child.id}`,
+                item =>
+                  item.id === `${id}_${child.id}` &&
+                  item.plugin_code === plugin_code,
               );
               if (!textAndIcon) return null;
 

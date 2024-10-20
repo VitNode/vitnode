@@ -76,6 +76,7 @@ export const NavDevPluginAdminView = async ({
       // @ts-expect-error
       plugin: tGlobal(`admin_${item.plugin}.nav.title`),
       icon: item.icon ? <Icon name={item.icon} /> : null,
+      plugin_code: item.plugin,
     };
   });
 

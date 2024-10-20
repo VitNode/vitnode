@@ -1,25 +1,25 @@
 import { AutoForm } from '@/components/form/auto-form';
 import { AutoFormInput } from '@/components/form/fields/input';
 import { AutoFormSelect } from '@/components/form/fields/select';
-import { Admin__Core_Plugins__Permissions_Admin__ShowQuery } from '@/graphql/queries/admin/plugins/dev/permissions-admin/admin__core_plugins__permissions_admin__show.generated';
 import { useTranslations } from 'next-intl';
 
+import { PermissionsAdminWithI18n } from '../permissions-admin';
 import { useCreateEditPermissionAdminPluginAdmin } from './hooks/use-create-edit-permission-admin-plugin-admin';
 
 export const CreateEditPermissionsAdminDevPluginAdmin = ({
-  dataFromSSR,
+  dataWithI18n,
   data,
   parentId,
 }: {
-  data?: Admin__Core_Plugins__Permissions_Admin__ShowQuery['admin__core_plugins__permissions_admin__show'][0];
-  dataFromSSR: Admin__Core_Plugins__Permissions_Admin__ShowQuery;
+  data?: PermissionsAdminWithI18n;
+  dataWithI18n: PermissionsAdminWithI18n[];
   parentId?: string;
 }) => {
   const t = useTranslations(
     'admin.core.plugins.dev.permissions-admin.create_edit',
   );
   const { formSchema, onSubmit } = useCreateEditPermissionAdminPluginAdmin({
-    dataFromSSR,
+    dataWithI18n,
     data,
     parentId,
   });
