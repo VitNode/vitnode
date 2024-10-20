@@ -7,7 +7,6 @@ import {
 } from '@/graphql/queries/admin/install/admin__install__layout.generated';
 import { redirect } from '@/navigation';
 import { Metadata } from 'next';
-import { getLocale } from 'next-intl/server';
 
 import { InternalErrorView } from '../../../global';
 import { ContentInstallConfigsView } from './content/content';
@@ -32,8 +31,6 @@ export const generateMetadataInstallConfigs = (): Metadata => {
 };
 
 export const InstallConfigsView = async () => {
-  const locale = await getLocale();
-
   try {
     const data = await getData();
 
@@ -48,7 +45,7 @@ export const InstallConfigsView = async () => {
     );
   } catch (error) {
     if (error instanceof Error && error.message === 'ACCESS_DENIED') {
-      redirect({ href: '/admin', locale });
+      await redirect('/admin');
     }
 
     return <InternalErrorView />;

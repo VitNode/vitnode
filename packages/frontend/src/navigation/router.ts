@@ -25,4 +25,4 @@ const useRouter = () => {
   return router;
 };
 
-export { useRouter };
+export { usePathname, useRouter };

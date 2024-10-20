@@ -17,7 +17,6 @@ interface Props {
   children: React.ReactNode;
   params: Promise<{
     code: string;
-    locale: string;
   }>;
 }
 
@@ -39,15 +38,15 @@ export async function generateMetadataDevPluginAdminLayout({
 }
 
 export const DevPluginAdminLayout = async ({ params, children }: Props) => {
-  const { code, locale } = await params;
-  if (!CONFIG.node_development) redirect({ href: '/admin', locale });
+  const { code } = await params;
+  if (!CONFIG.node_development) await redirect('/admin');
   const [data, t] = await Promise.all([
     getPluginDataAdmin({ code }),
     getTranslations('core.global'),
   ]);
 
   if (data.admin__core_plugins__show.edges.length === 0) {
-    redirect({ href: '/admin', locale });
+    await redirect('/admin');
   }
 
   const plugin = data.admin__core_plugins__show.edges.at(0);

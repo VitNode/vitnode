@@ -8,7 +8,7 @@ import {
 import { Link, redirect } from '@/navigation';
 import { CircleCheckIcon, LogIn } from 'lucide-react';
 import { Metadata } from 'next';
-import { getLocale, getTranslations } from 'next-intl/server';
+import { getTranslations } from 'next-intl/server';
 
 const getData = async (
   variables: Core_Sessions__Email_VerifyQueryVariables,
@@ -34,14 +34,13 @@ export const ConfirmEmailSignUpView = async ({
     userId?: string;
   }>;
 }) => {
-  const [locale, t, { userId, token }] = await Promise.all([
-    getLocale(),
+  const [t, { userId, token }] = await Promise.all([
     getTranslations('core.sign_up.confirm_email'),
     searchParams,
   ]);
 
   if (!userId || !token) {
-    redirect({ href: '/login', locale });
+    await redirect('/login');
 
     return;
   }
@@ -52,7 +51,7 @@ export const ConfirmEmailSignUpView = async ({
       userId: +userId,
     });
   } catch (_e) {
-    redirect({ href: '/login', locale });
+    await redirect('/login');
   }
 
   return (

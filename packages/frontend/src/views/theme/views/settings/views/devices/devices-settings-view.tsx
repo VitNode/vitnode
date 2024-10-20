@@ -8,7 +8,7 @@ import {
 import { redirect } from '@/navigation';
 import { Metadata } from 'next';
 import { cookies } from 'next/headers';
-import { getLocale, getTranslations } from 'next-intl/server';
+import { getTranslations } from 'next-intl/server';
 
 import { ContentDevicesSettings } from './content';
 
@@ -33,13 +33,17 @@ export const generateMetadataDevicesSettings = async (): Promise<Metadata> => {
 };
 
 export const DevicesSettingsView = async () => {
-  const [t, data] = await Promise.all([
+  const [t, data, cookieStore] = await Promise.all([
     getTranslations('core.settings.devices'),
     getData(),
+    cookies(),
   ]);
-  const [locale, cookieStore] = await Promise.all([getLocale(), cookies()]);
   const loginToken = cookieStore.get('vitnode-login-token')?.value;
-  if (!loginToken) return redirect({ locale, href: '/login' });
+  if (!loginToken) {
+    await redirect('/login');
+
+    return;
+  }
 
   return (
     <>

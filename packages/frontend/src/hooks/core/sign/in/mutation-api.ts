@@ -10,7 +10,6 @@ import {
 import { revalidateTags } from '@/graphql/revalidate-tags';
 import { redirect } from '@/navigation';
 import { cookies } from 'next/headers';
-import { getLocale } from 'next-intl/server';
 
 export const mutationApi = async (
   variables: Core_Sessions__Sign_InMutationVariables,
@@ -43,7 +42,6 @@ export const mutationApi = async (
   }
 
   if (variables.admin) {
-    const locale = await getLocale();
-    redirect({ href: '/admin/core/dashboard', locale });
+    await redirect('/admin/core/dashboard');
   }
 };
