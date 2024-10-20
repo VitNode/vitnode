@@ -120,83 +120,82 @@ function logError(error) {
     return;
   }
 
-  if (process.argv[2] === '--without-bump-version' || !process.argv[2]) {
-    // Copy frontend files from app dir
-    const frontendPackagePath = path.join(
-      WORKSPACE,
-      'packages',
-      'frontend',
-      'folders_to_copy',
-    );
-    const frontendAppPath = path.join(WORKSPACE, 'apps', 'frontend');
-    const pathsToFoldersForce = [
-      join('src', 'app', '[locale]', 'admin', '(vitnode)'),
-      join('src', 'app', '[locale]', 'admin', '(auth)', '(vitnode)'),
-      join('src', 'app', '[locale]', '(main)', '(layout)', '(vitnode)'),
-    ];
-    const pathsToFiles = [
-      {
-        folder: join('src', 'app'),
-        file: 'not-found.tsx',
-      },
-      {
-        folder: join('src', 'plugins', 'core', 'langs'),
-        file: 'en.json',
-      },
-      {
-        folder: join('src', 'plugins', 'admin', 'langs'),
-        file: 'en.json',
-      },
-    ];
+  // Copy frontend files from app dir
+  const frontendPackagePath = path.join(
+    WORKSPACE,
+    'packages',
+    'frontend',
+    'folders_to_copy',
+  );
+  const frontendAppPath = path.join(WORKSPACE, 'apps', 'frontend');
+  const pathsToFoldersForce = [
+    join('src', 'app', '[locale]', 'admin', '(vitnode)'),
+    join('src', 'app', '[locale]', 'admin', '(auth)', '(vitnode)'),
+    join('src', 'app', '[locale]', '(main)', '(layout)', '(vitnode)'),
+  ];
+  const pathsToFiles = [
+    {
+      folder: join('src', 'app'),
+      file: 'not-found.tsx',
+    },
+    {
+      folder: join('src', 'plugins', 'core', 'langs'),
+      file: 'en.json',
+    },
+    {
+      folder: join('src', 'plugins', 'admin', 'langs'),
+      file: 'en.json',
+    },
+  ];
 
-    // Create folder for apps in frontend package
-    if (!fs.existsSync(frontendPackagePath)) {
-      fs.mkdirSync(frontendPackagePath, { recursive: true });
+  // Create folder for apps in frontend package
+  if (!fs.existsSync(frontendPackagePath)) {
+    fs.mkdirSync(frontendPackagePath, { recursive: true });
+  }
+
+  // Copy folders
+  pathsToFoldersForce.forEach(folder => {
+    const appPath = join(frontendAppPath, folder);
+    const packagePath = join(frontendPackagePath, folder);
+    if (!fs.existsSync(packagePath)) {
+      fs.mkdirSync(packagePath, { recursive: true });
     }
 
-    // Copy folders
-    pathsToFoldersForce.forEach(folder => {
-      const appPath = join(frontendAppPath, folder);
-      const packagePath = join(frontendPackagePath, folder);
-      if (!fs.existsSync(packagePath)) {
-        fs.mkdirSync(packagePath, { recursive: true });
-      }
+    fs.cpSync(appPath, packagePath, { recursive: true });
+  });
 
-      fs.cpSync(appPath, packagePath, { recursive: true });
-    });
+  // Copy files
+  pathsToFiles.forEach(file => {
+    const appPath = join(frontendAppPath, file.folder, file.file);
+    const packagePath = join(frontendPackagePath, file.folder, file.file);
 
-    // Copy files
-    pathsToFiles.forEach(file => {
-      const appPath = join(frontendAppPath, file.folder, file.file);
-      const packagePath = join(frontendPackagePath, file.folder, file.file);
-
-      fs.cpSync(appPath, packagePath, {
-        recursive: true,
-      });
-    });
-
-    // Copy src in frontend to create-vitnode-app
-    const createVitnodeAppPath = path.join(
-      WORKSPACE,
-      'packages',
-      'create-vitnode-app',
-      'templates',
-      'basic',
-      'apps',
-      'frontend',
-      'src',
-    );
-    const frontendSrcPath = path.join(WORKSPACE, 'apps', 'frontend', 'src');
-    if (!fs.existsSync(createVitnodeAppPath)) {
-      fs.mkdirSync(createVitnodeAppPath, { recursive: true });
-    }
-
-    fs.cpSync(frontendSrcPath, createVitnodeAppPath, {
+    fs.cpSync(appPath, packagePath, {
       recursive: true,
     });
+  });
 
+  // Copy src in frontend to create-vitnode-app
+  const createVitnodeAppPath = path.join(
+    WORKSPACE,
+    'packages',
+    'create-vitnode-app',
+    'templates',
+    'basic',
+    'apps',
+    'frontend',
+    'src',
+  );
+  const frontendSrcPath = path.join(WORKSPACE, 'apps', 'frontend', 'src');
+  if (!fs.existsSync(createVitnodeAppPath)) {
+    fs.mkdirSync(createVitnodeAppPath, { recursive: true });
+  }
+
+  fs.cpSync(frontendSrcPath, createVitnodeAppPath, {
+    recursive: true,
+  });
+
+  if (process.argv[2] === '--without-bump-version') {
     exitSuccess('Folders & Files copied!');
-
     return;
   }
 
