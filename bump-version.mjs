@@ -120,7 +120,7 @@ function logError(error) {
     return;
   }
 
-  if (process.argv[2] === '--without-bump-version') {
+  if (process.argv[2] === '--without-bump-version' || !process.argv[2]) {
     // Copy frontend files from app dir
     const frontendPackagePath = path.join(
       WORKSPACE,
@@ -194,6 +194,8 @@ function logError(error) {
     fs.cpSync(frontendSrcPath, createVitnodeAppPath, {
       recursive: true,
     });
+
+    exitSuccess('Folders & Files copied!');
 
     return;
   }
