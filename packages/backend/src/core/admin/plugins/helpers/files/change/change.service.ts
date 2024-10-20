@@ -12,13 +12,8 @@ import { join } from 'path';
 import {
   removeDatabaseFromService,
   removeLangFromTypes,
-  removeModuleFromRootSchema,
 } from '../../../delete/contents';
-import {
-  changeDatabaseService,
-  changeLangTypes,
-  changeModuleRootSchema,
-} from './contents';
+import { changeDatabaseService, changeLangTypes } from './contents';
 
 interface ChangeFilesContentType {
   condition: (content: string) => boolean;
@@ -60,15 +55,6 @@ export class ChangeFilesAdminPluginsService {
   changeFilesWhenCreate({ code }: { code: string }): void {
     const files: ChangeFilesContentType[] = [
       {
-        path: join(ABSOLUTE_PATHS_BACKEND.plugins, 'plugins.module.ts'),
-        content: content =>
-          changeModuleRootSchema({
-            content,
-            code,
-          }),
-        condition: content => !content.includes(`./${code}/${code}.module`),
-      },
-      {
         path: join(ABSOLUTE_PATHS_BACKEND.backend, 'database', 'config.ts'),
         content: content =>
           changeDatabaseService({
@@ -93,15 +79,6 @@ export class ChangeFilesAdminPluginsService {
 
   changeFilesWhenDelete({ code }: { code: string }): void {
     const files: ChangeFilesContentType[] = [
-      {
-        path: join(ABSOLUTE_PATHS_BACKEND.plugins, 'plugins.module.ts'),
-        content: content =>
-          removeModuleFromRootSchema({
-            content,
-            code,
-          }),
-        condition: () => true,
-      },
       {
         path: join(ABSOLUTE_PATHS_BACKEND.backend, 'database', 'config.ts'),
         content: content =>

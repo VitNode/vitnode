@@ -9,6 +9,7 @@ import { DownloadAdminPluginsService } from './download/download.service';
 import { EditAdminPluginsResolver } from './edit/edit.resolver';
 import { EditAdminPluginsService } from './edit/edit.service';
 import { ChangeFilesAdminPluginsService } from './helpers/files/change/change.service';
+import { UpdateModuleFileAdminPluginsService } from './helpers/files/change/update-module-file.service';
 import { CreateFilesAdminPluginsService } from './helpers/files/create/create-files.service';
 import { AdminNavPluginsModule } from './nav/nav-plugins.module';
 import { AdminPermissionsAdminPluginsModule } from './permissions-admin/permissions-admin.module';
@@ -33,6 +34,7 @@ import { UploadAdminPluginsService } from './upload/upload.service';
     UploadAdminPluginsService,
     EditAdminPluginsResolver,
     EditAdminPluginsService,
+    UpdateModuleFileAdminPluginsService,
   ],
   imports: [AdminNavPluginsModule, AdminPermissionsAdminPluginsModule],
 })

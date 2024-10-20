@@ -7,6 +7,7 @@ import { join } from 'path';
 
 import { ABSOLUTE_PATHS_BACKEND } from '../../../..';
 import { ChangeFilesAdminPluginsService } from '../helpers/files/change/change.service';
+import { UpdateModuleFileAdminPluginsService } from '../helpers/files/change/update-module-file.service';
 import { CreateFilesAdminPluginsService } from '../helpers/files/create/create-files.service';
 import { ShowAdminPlugins } from '../show/show.dto';
 import { CreateAdminPluginsArgs } from './create.dto';
@@ -17,6 +18,7 @@ export class CreateAdminPluginsService {
     private readonly databaseService: InternalDatabaseService,
     private readonly createFilesService: CreateFilesAdminPluginsService,
     private readonly changeFilesService: ChangeFilesAdminPluginsService,
+    private readonly updateModuleFileService: UpdateModuleFileAdminPluginsService,
   ) {}
 
   async create({
@@ -52,6 +54,7 @@ export class CreateAdminPluginsService {
       version_code: 1,
     });
     this.changeFilesService.changeFilesWhenCreate({ code });
+    await this.updateModuleFileService.updatePluginModuleFile(code, 'add');
 
     // Create lang.json file inside the plugin frontend folder
     const languages =
