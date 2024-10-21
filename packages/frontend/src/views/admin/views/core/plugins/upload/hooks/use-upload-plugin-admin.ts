@@ -4,7 +4,7 @@ import { UseFormReturn } from 'react-hook-form';
 import { toast } from 'sonner';
 import * as z from 'zod';
 
-import { checkConnectionMutationApi } from '../../hooks/check-connection-mutation-api';
+// import { checkConnectionMutationApi } from '../../hooks/check-connection-mutation-api';
 import { UploadPluginAdminProps } from '../upload';
 import { mutationApi } from './mutation-api';
 
@@ -49,23 +49,23 @@ export const useUploadPluginAdmin = ({ data }: UploadPluginAdminProps) => {
       return;
     }
 
-    // Wait 3 seconds before reloading the page
-    await new Promise<void>(resolve =>
-      setTimeout(async () => {
-        const data = await checkConnectionMutationApi();
+    // // Wait 3 seconds before reloading the page
+    // await new Promise<void>(resolve =>
+    //   setTimeout(async () => {
+    //     const data = await checkConnectionMutationApi();
 
-        if (data?.error) {
-          toast.error(tCore('title'), {
-            description: tCore('internal_server_error'),
-          });
+    //     if (data?.error) {
+    //       toast.error(tCore('title'), {
+    //         description: tCore('internal_server_error'),
+    //       });
 
-          resolve();
-        }
+    //       resolve();
+    //     }
 
-        window.location.reload();
-        resolve();
-      }, 3000),
-    );
+    //     window.location.reload();
+    //     resolve();
+    //   }, 3000),
+    // );
   };
 
   return { onSubmit, formSchema };

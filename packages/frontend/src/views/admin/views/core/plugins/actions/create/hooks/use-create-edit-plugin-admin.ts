@@ -5,7 +5,6 @@ import { UseFormReturn } from 'react-hook-form';
 import { toast } from 'sonner';
 import * as z from 'zod';
 
-import { checkConnectionMutationApi } from '../../../hooks/check-connection-mutation-api';
 import { mutationCreateApi } from './mutation-create-api';
 import { mutationEditApi } from './mutation-edit-api';
 
@@ -102,29 +101,6 @@ export const useCreateEditPluginAdmin = ({ data }: Args) => {
       toast.error(tCore('title'), {
         description: tCore('internal_server_error'),
       });
-
-      return;
-    }
-
-    if (!data) {
-      // Wait 3 seconds before reloading the page
-      await new Promise<void>(resolve =>
-        setTimeout(async () => {
-          form.reset({}, { keepValues: true });
-          const data = await checkConnectionMutationApi();
-
-          if (data?.error) {
-            toast.error(tCore('title'), {
-              description: tCore('internal_server_error'),
-            });
-
-            resolve();
-          }
-
-          window.location.reload();
-          resolve();
-        }, 3000),
-      );
 
       return;
     }
