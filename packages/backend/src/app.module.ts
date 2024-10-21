@@ -66,7 +66,7 @@ export const ABSOLUTE_PATHS_BACKEND = {
       ),
     },
     frontend: {
-      admin_pages: join(
+      admin_pages_auth: join(
         internalPaths.frontend,
         'app',
         '[locale]',
@@ -74,7 +74,13 @@ export const ABSOLUTE_PATHS_BACKEND = {
         '(auth)',
         code,
       ),
-      admin_templates: join(internalPaths.frontend, 'plugins', code, 'admin'),
+      admin_pages: join(
+        internalPaths.frontend,
+        'app',
+        '[locale]',
+        'admin',
+        code,
+      ),
       default_page: join(
         internalPaths.frontend,
         'plugins',
@@ -82,12 +88,22 @@ export const ABSOLUTE_PATHS_BACKEND = {
         'templates',
         'default-page.tsx',
       ),
-      pages: join(
+      pages: join(internalPaths.frontend, 'src', 'app', '[locale]', code),
+      pages_main: join(
         internalPaths.frontend,
         'src',
         'app',
         '[locale]',
         '(main)',
+        code,
+      ),
+      pages_main_layout: join(
+        internalPaths.frontend,
+        'src',
+        'app',
+        '[locale]',
+        '(main)',
+        '(layout)',
         code,
       ),
       templates: join(internalPaths.frontend, 'plugins', code, 'templates'),

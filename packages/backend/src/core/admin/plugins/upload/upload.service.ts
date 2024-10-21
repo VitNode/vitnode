@@ -15,7 +15,8 @@ import {
   CustomError,
   FileUpload,
 } from '../../../..';
-import { ChangeFilesAdminPluginsService } from '../helpers/files/change/change.service';
+import { ChangeFilesAdminPluginsService } from '../helpers/change-files.service';
+import { VerifyFilesAdminPluginsService } from '../helpers/verify-files.service';
 import { UploadAdminPluginsArgs } from './upload.dto';
 
 @Injectable()
@@ -23,6 +24,7 @@ export class UploadAdminPluginsService {
   constructor(
     private readonly databaseService: InternalDatabaseService,
     private readonly changeFilesService: ChangeFilesAdminPluginsService,
+    private readonly verifyFilesService: VerifyFilesAdminPluginsService,
   ) {}
   protected path: string = join(process.cwd());
 
@@ -91,7 +93,7 @@ export class UploadAdminPluginsService {
     const backendSource = join(this.tempPath, 'backend');
     await cp(backendSource, newPathBackend, { recursive: true });
     if (!upload_new_version) {
-      this.changeFilesService.changeFilesWhenCreate({ code: config.code });
+      // this.changeFilesService.changeFilesWhenCreate({ code: config.code });
     }
   }
 
@@ -149,11 +151,12 @@ export class UploadAdminPluginsService {
     });
   }
 
-  protected async getPluginConfig({
-    tgz,
+  protected async getPluginConfigAndSaveFilesIntoTempFile({
+    file,
   }: {
-    tgz: FileUpload;
+    file: Promise<FileUpload>;
   }): Promise<ConfigPlugin> {
+    const tgz = await file;
     // Create folders
     await mkdir(this.tempPath, { recursive: true });
 
@@ -204,15 +207,25 @@ export class UploadAdminPluginsService {
   }
 
   async upload({ code, file }: UploadAdminPluginsArgs): Promise<string> {
-    const tgz = await file;
-    const config = await this.getPluginConfig({ tgz });
+    const config = await this.getPluginConfigAndSaveFilesIntoTempFile({ file });
+    this.verifyFilesService.verifyFiles({
+      code: config.code,
+      errorHandler: async () => {
+        await this.removeTempFolder();
+      },
+    });
 
     const checkPlugin =
       await this.databaseService.db.query.core_plugins.findFirst({
         where: (table, { eq }) => eq(table.code, config.code),
       });
 
-    if (checkPlugin && !code) {
+    if (
+      (checkPlugin && !code) ||
+      code === 'core' ||
+      code === 'admin' ||
+      code === 'members'
+    ) {
       await this.removeTempFolder();
       throw new CustomError({
         code: 'PLUGIN_ALREADY_EXISTS',
@@ -236,11 +249,13 @@ export class UploadAdminPluginsService {
       });
     }
 
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
     // Create plugin folder
     await this.createPluginBackend({ config, upload_new_version: !!code });
     await this.createPluginFrontend({ config });
     await this.removeTempFolder();
-    this.changeFilesService.setServerToRestartConfig();
+    await this.changeFilesService.setServerToRestartConfig();
 
     if (code) {
       await this.databaseService.db

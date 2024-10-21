@@ -3,7 +3,6 @@ import { AutoFormInput } from '@/components/form/fields/input';
 import { AutoFormSwitch } from '@/components/form/fields/switch';
 import { AutoFormStringLanguageInput } from '@/components/form/fields/text-language-input';
 import { Button } from '@/components/ui/button';
-import { DialogFooter } from '@/components/ui/dialog';
 import { useTranslations } from 'next-intl';
 
 import {
@@ -45,9 +44,7 @@ export const ContentCreateEditNavAdmin = ({ data }: CreateEditNavAdminArgs) => {
       formSchema={formSchema}
       onSubmit={onSubmit}
       submitButton={props => (
-        <DialogFooter>
-          <Button {...props}>{tCore(data ? 'edit' : 'create')}</Button>
-        </DialogFooter>
+        <Button {...props}>{tCore(data ? 'edit' : 'create')}</Button>
       )}
     />
   );

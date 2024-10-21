@@ -8,8 +8,9 @@ import { DownloadAdminPluginsResolver } from './download/download.resolver';
 import { DownloadAdminPluginsService } from './download/download.service';
 import { EditAdminPluginsResolver } from './edit/edit.resolver';
 import { EditAdminPluginsService } from './edit/edit.service';
-import { ChangeFilesAdminPluginsService } from './helpers/files/change/change.service';
+import { ChangeFilesAdminPluginsService } from './helpers/change-files.service';
 import { CreateFilesAdminPluginsService } from './helpers/files/create/create-files.service';
+import { VerifyFilesAdminPluginsService } from './helpers/verify-files.service';
 import { AdminNavPluginsModule } from './nav/nav-plugins.module';
 import { AdminPermissionsAdminPluginsModule } from './permissions-admin/permissions-admin.module';
 import { ShowAdminPluginsResolver } from './show/show.resolver';
@@ -33,6 +34,7 @@ import { UploadAdminPluginsService } from './upload/upload.service';
     UploadAdminPluginsService,
     EditAdminPluginsResolver,
     EditAdminPluginsService,
+    VerifyFilesAdminPluginsService,
   ],
   imports: [AdminNavPluginsModule, AdminPermissionsAdminPluginsModule],
 })

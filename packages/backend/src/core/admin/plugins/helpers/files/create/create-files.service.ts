@@ -4,7 +4,8 @@ import {
   PluginInfoJSONType,
 } from '@/index';
 import { Injectable } from '@nestjs/common';
-import * as fs from 'fs';
+import { existsSync } from 'fs';
+import { mkdir, writeFile } from 'fs/promises';
 import { join } from 'path';
 
 import {
@@ -16,7 +17,7 @@ import {
 
 @Injectable()
 export class CreateFilesAdminPluginsService {
-  createFiles({ code, ...rest }: PluginInfoJSONType): void {
+  async createFiles({ code, ...rest }: PluginInfoJSONType) {
     const folders: {
       files: { content: string; name: string }[];
       path: string;
@@ -65,7 +66,7 @@ export class CreateFilesAdminPluginsService {
 
     // Check if folder exists
     folders.forEach(folder => {
-      if (fs.existsSync(folder.path)) {
+      if (existsSync(folder.path)) {
         throw new CustomError({
           code: 'PLUGIN_ALREADY_EXISTS',
           message: `Plugin already exists in filesystem with "${code}" code!`,
@@ -73,21 +74,26 @@ export class CreateFilesAdminPluginsService {
       }
     });
 
-    folders.forEach(folder => {
-      // Create folders
-      fs.mkdirSync(folder.path, { recursive: true });
+    await Promise.all(
+      folders.map(async folder => {
+        // Create folders
+        await mkdir(folder.path, { recursive: true });
 
-      // Create files
-      folder.files.forEach(file => {
-        fs.writeFile(join(folder.path, file.name), file.content, err => {
-          if (err) {
-            throw new CustomError({
-              code: 'ERROR_CREATING_FILE',
-              message: err.message,
-            });
-          }
-        });
-      });
-    });
+        // Create files
+        await Promise.all(
+          folder.files.map(async file => {
+            try {
+              await writeFile(join(folder.path, file.name), file.content);
+            } catch (err) {
+              const error = err as Error;
+              throw new CustomError({
+                code: 'ERROR_CREATING_FILE',
+                message: error.message,
+              });
+            }
+          }),
+        );
+      }),
+    );
   }
 }

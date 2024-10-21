@@ -7,7 +7,6 @@ import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import {
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
@@ -185,11 +184,7 @@ export const CreateEditFormGroupsMembersAdmin = ({
         ]}
         formSchema={formSchema}
         onSubmit={onSubmit}
-        submitButton={props => (
-          <DialogFooter>
-            <Button {...props}>{tCore('save')}</Button>
-          </DialogFooter>
-        )}
+        submitButton={props => <Button {...props}>{tCore('save')}</Button>}
       />
     </>
   );

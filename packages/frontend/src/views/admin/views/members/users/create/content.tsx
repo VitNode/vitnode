@@ -1,7 +1,6 @@
 import { AutoForm } from '@/components/form/auto-form';
 import { AutoFormInput } from '@/components/form/fields/input';
 import { Button } from '@/components/ui/button';
-import { DialogFooter } from '@/components/ui/dialog';
 import { Progress } from '@/components/ui/progress';
 import { removeSpecialCharacters } from '@/helpers/special-characters';
 import { useTranslations } from 'next-intl';
@@ -86,11 +85,7 @@ export const ContentCreateUserUsersMembersAdmin = () => {
       ]}
       formSchema={formSchema}
       onSubmit={onSubmit}
-      submitButton={props => (
-        <DialogFooter>
-          <Button {...props}>{t('submit')}</Button>
-        </DialogFooter>
-      )}
+      submitButton={props => <Button {...props}>{t('submit')}</Button>}
     />
   );
 };

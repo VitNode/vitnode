@@ -4,7 +4,7 @@ import { AutoFormInput } from '@/components/form/fields/input';
 import { AutoFormSwitch } from '@/components/form/fields/switch';
 import { AutoFormStringLanguageInput } from '@/components/form/fields/text-language-input';
 import { Button } from '@/components/ui/button';
-import { DialogFooter, useDialog } from '@/components/ui/dialog';
+import { useDialog } from '@/components/ui/dialog';
 import { Admin_Core_Terms__ShowQuery } from '@/graphql/queries/admin/settings/terms/Admin_core_terms__show.generated';
 import { removeSpecialCharacters } from '@/helpers/special-characters';
 import { zodLanguageInput } from '@/helpers/zod';
@@ -185,11 +185,7 @@ export const ContentCreateEditLegalPage = ({
         formSchema={formSchema}
         onSubmit={onSubmit}
         submitButton={props => (
-          <DialogFooter>
-            <Button {...props}>
-              {t(`submit.${data ? 'edit' : 'create'}`)}
-            </Button>
-          </DialogFooter>
+          <Button {...props}>{t(`submit.${data ? 'edit' : 'create'}`)}</Button>
         )}
       />
     </>

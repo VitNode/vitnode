@@ -2,7 +2,6 @@ import { AutoForm } from '@/components/form/auto-form';
 import { AutoFormInput } from '@/components/form/fields/input';
 import { AutoTextArea } from '@/components/form/fields/textarea';
 import { Button } from '@/components/ui/button';
-import { DialogFooter } from '@/components/ui/dialog';
 import { useTranslations } from 'next-intl';
 
 import { useTestingEmailAdmin } from './hooks/use-testing-email-admin';
@@ -33,9 +32,7 @@ export const ContentTestingActionEmailSettingsAdmin = () => {
       formSchema={formSchema}
       onSubmit={onSubmit}
       submitButton={props => (
-        <DialogFooter>
-          <Button {...props}>{t('send_testing_email')}</Button>
-        </DialogFooter>
+        <Button {...props}>{t('send_testing_email')}</Button>
       )}
     />
   );
