@@ -8,7 +8,7 @@ import { Injectable } from '@nestjs/common';
 import { existsSync, promises as fs } from 'fs';
 import { join } from 'path';
 
-import { changeCodePluginToCapitalLetters } from '../../change-code-plugin-to-capital-letters';
+import { changeCodePluginToCapitalLetters } from './change-code-plugin-to-capital-letters';
 
 const { readFile, writeFile } = fs;
 

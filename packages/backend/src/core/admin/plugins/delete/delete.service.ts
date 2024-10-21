@@ -8,7 +8,7 @@ import { Injectable } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
 import * as fs from 'fs';
 
-import { ChangeFilesAdminPluginsService } from '../helpers/files/change/change.service';
+import { ChangeFilesAdminPluginsService } from '../helpers/change-files.service';
 
 @Injectable()
 export class DeleteAdminPluginsService {
@@ -51,7 +51,6 @@ export class DeleteAdminPluginsService {
         ABSOLUTE_PATHS_BACKEND.plugin({ code }).frontend[path],
       );
     });
-    await this.changeFilesService.setServerToRestartConfig();
 
     await this.databaseService.db
       .delete(core_plugins)
@@ -66,6 +65,8 @@ export class DeleteAdminPluginsService {
     await this.databaseService.db
       .delete(core_files_using)
       .where(eq(core_files_using.plugin, code));
+
+    await this.changeFilesService.setServerToRestartConfig();
 
     return 'Success!';
   }

@@ -2,7 +2,6 @@ import { AutoForm, DependencyType } from '@/components/form/auto-form';
 import { AutoFormInput } from '@/components/form/fields/input';
 import { AutoFormRadioGroup } from '@/components/form/fields/radio-group';
 import { Button } from '@/components/ui/button';
-import { DialogFooter } from '@/components/ui/dialog';
 import { ShowAdminPlugins } from '@/graphql/types';
 import { useTranslations } from 'next-intl';
 
@@ -75,11 +74,7 @@ export const ContentDownloadActionDevPluginAdmin = ({
       ]}
       formSchema={formSchema}
       onSubmit={onSubmit}
-      submitButton={props => (
-        <DialogFooter>
-          <Button {...props}>{t('submit')}</Button>
-        </DialogFooter>
-      )}
+      submitButton={props => <Button {...props}>{t('submit')}</Button>}
     />
   );
 };

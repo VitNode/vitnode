@@ -2,7 +2,6 @@ import { AutoForm } from '@/components/form/auto-form';
 import { AutoFormFileInput } from '@/components/form/fields/file-input';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
-import { DialogFooter } from '@/components/ui/dialog';
 import { ShowAdminPlugins } from '@/graphql/types';
 import { useTranslations } from 'next-intl';
 
@@ -38,11 +37,7 @@ export const UploadPluginAdmin = ({ data }: UploadPluginAdminProps) => {
         ]}
         formSchema={formSchema}
         onSubmit={onSubmit}
-        submitButton={props => (
-          <DialogFooter>
-            <Button {...props}>{t('submit')}</Button>
-          </DialogFooter>
-        )}
+        submitButton={props => <Button {...props}>{t('submit')}</Button>}
       />
     </>
   );

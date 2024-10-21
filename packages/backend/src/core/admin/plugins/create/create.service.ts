@@ -2,12 +2,14 @@ import { core_plugins } from '@/database/schema/plugins';
 import { CustomError } from '@/errors';
 import { InternalDatabaseService } from '@/utils/database/internal_database.service';
 import { Injectable } from '@nestjs/common';
-import * as fs from 'fs';
+import { existsSync } from 'fs';
+import { mkdir, writeFile } from 'fs/promises';
 import { join } from 'path';
 
 import { ABSOLUTE_PATHS_BACKEND } from '../../../..';
-import { ChangeFilesAdminPluginsService } from '../helpers/files/change/change.service';
+import { ChangeFilesAdminPluginsService } from '../helpers/change-files.service';
 import { CreateFilesAdminPluginsService } from '../helpers/files/create/create-files.service';
+import { VerifyFilesAdminPluginsService } from '../helpers/verify-files.service';
 import { ShowAdminPlugins } from '../show/show.dto';
 import { CreateAdminPluginsArgs } from './create.dto';
 
@@ -17,7 +19,50 @@ export class CreateAdminPluginsService {
     private readonly databaseService: InternalDatabaseService,
     private readonly createFilesService: CreateFilesAdminPluginsService,
     private readonly changeFilesService: ChangeFilesAdminPluginsService,
+    private readonly verifyFilesService: VerifyFilesAdminPluginsService,
   ) {}
+
+  private async createLanguageFiles({
+    code,
+    name,
+  }: {
+    code: string;
+    name: string;
+  }) {
+    const languages =
+      await this.databaseService.db.query.core_languages.findMany({
+        orderBy: (table, { asc }) => asc(table.code),
+      });
+
+    await Promise.all(
+      languages.map(async lang => {
+        const langPath = join(
+          ABSOLUTE_PATHS_BACKEND.plugin({ code }).frontend.languages,
+        );
+
+        if (!existsSync(langPath)) {
+          await mkdir(langPath, { recursive: true });
+        }
+
+        await writeFile(
+          join(langPath, `${lang.code}.json`),
+          JSON.stringify(
+            {
+              [code]: {},
+              [`admin_${code}`]: {
+                nav: {
+                  title: name,
+                },
+              },
+            },
+            null,
+            2,
+          ),
+          'utf-8',
+        );
+      }),
+    );
+  }
 
   async create({
     author,
@@ -38,8 +83,11 @@ export class CreateAdminPluginsService {
       });
     }
 
-    // Modifying / Create files
-    this.createFilesService.createFiles({
+    // Verify files and folders to check if they exist
+    this.verifyFilesService.verifyFiles({ code });
+
+    // Create basic files
+    await this.createFilesService.createFiles({
       author,
       author_url,
       code,
@@ -51,42 +99,8 @@ export class CreateAdminPluginsService {
       version: '0.0.1',
       version_code: 1,
     });
-    await this.changeFilesService.changeFiles({ code, action: 'add' });
 
-    // Create lang.json file inside the plugin frontend folder
-    const languages =
-      await this.databaseService.db.query.core_languages.findMany({
-        orderBy: (table, { asc }) => asc(table.code),
-      });
-
-    languages.forEach(lang => {
-      const langPath = join(
-        ABSOLUTE_PATHS_BACKEND.plugin({ code }).frontend.languages,
-      );
-
-      if (!fs.existsSync(langPath)) {
-        fs.mkdirSync(langPath, { recursive: true });
-      }
-
-      fs.writeFileSync(
-        join(langPath, `${lang.code}.json`),
-        JSON.stringify(
-          {
-            [code]: {},
-            [`admin_${code}`]: {
-              nav: {
-                title: name,
-              },
-            },
-          },
-          null,
-          2,
-        ),
-        'utf-8',
-      );
-    });
-
-    const data = await this.databaseService.db
+    const [data] = await this.databaseService.db
       .insert(core_plugins)
       .values({
         code,
@@ -98,6 +112,12 @@ export class CreateAdminPluginsService {
       })
       .returning();
 
-    return data[0];
+    // Create i18n files
+    await this.createLanguageFiles({ code, name });
+
+    // Modifying / Create files
+    await this.changeFilesService.changeFiles({ code, action: 'add' });
+
+    return data;
   }
 }
