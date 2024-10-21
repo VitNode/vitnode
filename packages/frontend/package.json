@@ -90,7 +90,7 @@
     "graphql-tag": "^2.12.6",
     "lucide-react": "^0.420.0",
     "next": "15.0.0-canary.179",
-    "next-intl": "^3.21.0-canary.0",
+    "next-intl": "3.21.0-canary.0",
     "postcss": "^8.4.42",
     "react": "^19.0.0-rc-d6cb4e77-20240911",
     "react-dom": "^19.0.0-rc-d6cb4e77-20240911",
