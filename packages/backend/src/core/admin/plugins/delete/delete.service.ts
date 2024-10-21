@@ -9,14 +9,12 @@ import { eq } from 'drizzle-orm';
 import * as fs from 'fs';
 
 import { ChangeFilesAdminPluginsService } from '../helpers/files/change/change.service';
-import { UpdateModuleFileAdminPluginsService } from '../helpers/files/change/update-module-file.service';
 
 @Injectable()
 export class DeleteAdminPluginsService {
   constructor(
     private readonly databaseService: InternalDatabaseService,
     private readonly changeFilesService: ChangeFilesAdminPluginsService,
-    private readonly updateModuleFileService: UpdateModuleFileAdminPluginsService,
   ) {}
 
   protected deleteFolderWhenExists(path: string) {
@@ -42,8 +40,7 @@ export class DeleteAdminPluginsService {
     }
 
     // Change files when delete
-    this.changeFilesService.changeFilesWhenDelete({ code });
-    await this.updateModuleFileService.updatePluginModuleFile(code, 'delete');
+    await this.changeFilesService.changeFiles({ code, action: 'delete' });
 
     const modulePath = ABSOLUTE_PATHS_BACKEND.plugin({ code }).root;
     this.deleteFolderWhenExists(modulePath);
@@ -54,7 +51,7 @@ export class DeleteAdminPluginsService {
         ABSOLUTE_PATHS_BACKEND.plugin({ code }).frontend[path],
       );
     });
-    this.changeFilesService.setServerToRestartConfig();
+    await this.changeFilesService.setServerToRestartConfig();
 
     await this.databaseService.db
       .delete(core_plugins)

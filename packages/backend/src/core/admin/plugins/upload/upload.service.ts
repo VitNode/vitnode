@@ -91,7 +91,7 @@ export class UploadAdminPluginsService {
     const backendSource = join(this.tempPath, 'backend');
     await cp(backendSource, newPathBackend, { recursive: true });
     if (!upload_new_version) {
-      this.changeFilesService.changeFilesWhenCreate({ code: config.code });
+      // this.changeFilesService.changeFilesWhenCreate({ code: config.code });
     }
   }
 
@@ -240,7 +240,7 @@ export class UploadAdminPluginsService {
     await this.createPluginBackend({ config, upload_new_version: !!code });
     await this.createPluginFrontend({ config });
     await this.removeTempFolder();
-    this.changeFilesService.setServerToRestartConfig();
+    await this.changeFilesService.setServerToRestartConfig();
 
     if (code) {
       await this.databaseService.db
