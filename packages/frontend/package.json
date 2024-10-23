@@ -58,6 +58,9 @@
       "default": "./dist/src/editor/read-only/read-only.js"
     }
   },
+  "bin": {
+    "vitnode-frontend": "dist/scripts/setup.js"
+  },
   "scripts": {
     "build:scripts": "tsup",
     "build": "tsc && swc src -d ./dist --config-file .swcrc",

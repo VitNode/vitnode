@@ -3,14 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "config:init": "vitnode-frontend init",
+    "config:dev": "vitnode-frontend dev",
+    "dev": "vitnode-frontend dev && next dev --turbo",
     "build": "next build",
     "start": "next start",
+    "start:prod": "node server.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
     "next": "^15.0.1",
+    "next-intl": "3.23.1",
     "react": "19.0.0-rc-69d4b800-20241021",
     "react-dom": "19.0.0-rc-69d4b800-20241021",
     "shared": "workspace:*",

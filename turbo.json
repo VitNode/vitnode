@@ -3,9 +3,13 @@
   "ui": "tui",
   "tasks": {
     "build": {
-      "dependsOn": ["^build"],
-      "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": [".next/**", "!.next/cache/**"]
+      "outputs": [".next/**", "!.next/cache/**", "dist/**"],
+      "dependsOn": ["^build"]
+    },
+    "start": {
+      "outputs": [".next/**", "!.next/cache/**", "dist/**"],
+      "dependsOn": ["^start"],
+      "persistent": true
     },
     "build:scripts": {
       "outputs": ["dist/**"],
@@ -20,6 +24,10 @@
     "dev": {
       "cache": false,
       "persistent": true
+    },
+    "db": {
+      "dependsOn": ["^db"],
+      "cache": false
     }
   }
 }

@@ -1,6 +1,9 @@
 /* eslint-disable no-console */
 import { INestApplication } from '@nestjs/common';
 import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { readFile } from 'fs/promises';
+import { join } from 'path';
 
 interface CorsOptionsMain extends Omit<CorsOptions, 'credentials'> {
   origin?: (RegExp | string)[];
@@ -11,6 +14,17 @@ interface Args {
 }
 
 export const nestjsMainApp = async (app: INestApplication, options?: Args) => {
+  const pkg: {
+    version: string;
+  } = JSON.parse(await readFile(join(process.cwd(), 'package.json'), 'utf-8'));
+
+  const config = new DocumentBuilder()
+    .setTitle('VitNode App')
+    .setVersion(pkg.version)
+    .build();
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api', app, document);
+
   app.enableCors({
     ...options?.cors,
     credentials: true,
@@ -30,6 +44,10 @@ export const nestjsMainApp = async (app: INestApplication, options?: Args) => {
     console.log(
       initConsole,
       `Backend is running on: http://${hostname}:${port}/`,
+    );
+    console.log(
+      initConsole,
+      `Swagger is running on: http://${hostname}:${port}/api`,
     );
   });
 };
