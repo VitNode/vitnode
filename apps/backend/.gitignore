@@ -1,6 +1,7 @@
 # compiled output
 /dist
 /node_modules
+/build
 
 # Logs
 logs
@@ -34,18 +35,22 @@ lerna-debug.log*
 !.vscode/launch.json
 !.vscode/extensions.json
 
-
-# Others
+# dotenv environment variable files
 .env
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
 
-/uploads/public/*
-/uploads/private/*
-/uploads/temp/*
-!/uploads/index.html
-!/uploads/public/index.html
-!/uploads/private/index.html
-!/uploads/temp/index.html
+# temp directory
+.temp
+.tmp
 
-# Configuration
-/src/plugins/*/admin/database/migrations
-/src/plugins/core/
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Diagnostic reports (https://nodejs.org/api/report.html)
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
