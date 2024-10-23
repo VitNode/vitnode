@@ -86,38 +86,42 @@ export class CreateAdminPluginsService {
     // Verify files and folders to check if they exist
     this.verifyFilesService.verifyFiles({ code });
 
-    // Create basic files
-    await this.createFilesService.createFiles({
-      author,
-      author_url,
-      code,
-      description,
-      name,
-      support_url,
-      allow_default: true,
-      nav: [],
-      version: '0.0.1',
-      version_code: 1,
-    });
+    const [data] = await Promise.all([
+      // Insert into database
+      this.databaseService.db
+        .insert(core_plugins)
+        .values({
+          code,
+          description,
+          name,
+          support_url,
+          author,
+          author_url,
+        })
+        .returning(),
 
-    const [data] = await this.databaseService.db
-      .insert(core_plugins)
-      .values({
+      // Create basic files
+      this.createFilesService.createFiles({
+        author,
+        author_url,
         code,
         description,
         name,
         support_url,
-        author,
-        author_url,
-      })
-      .returning();
+        allow_default: true,
+        nav: [],
+        version: '0.0.1',
+        version_code: 1,
+      }),
 
-    // Create i18n files
-    await this.createLanguageFiles({ code, name });
+      // Create i18n files
+      this.createLanguageFiles({ code, name }),
 
-    // Modifying / Create files
-    await this.changeFilesService.changeFiles({ code, action: 'add' });
+      // Modifying / Create files
+      this.changeFilesService.changeFiles({ code, action: 'add' }),
+      this.changeFilesService.setServerToRestartConfig(),
+    ]);
 
-    return data;
+    return data[0];
   }
 }
