@@ -1,0 +1,40 @@
+{
+  "name": "vitnode-backend-ai-google",
+  "version": "0.0.10-canary.4",
+  "description": "Google AI provider for VitNode projects.",
+  "author": "VitNode Team",
+  "license": "MIT",
+  "homepage": "https://vitnode.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VitNode/vitnode.git",
+    "directory": "packages/backend-ai-google"
+  },
+  "scripts": {
+    "build": "tsc && swc src -d dist --config-file .swcrc",
+    "dev": "concurrently \"tsc -w --preserveWatchOutput\" \"swc src -d dist --config-file .swcrc -w\"",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "main": "./dist/src/index.js",
+  "types": "./dist/src/index.d.ts",
+  "keywords": [
+    "vitnode",
+    "ai",
+    "google",
+    "google-ai",
+    "gemini"
+  ],
+  "devDependencies": {
+    "@swc/cli": "^0.4.0",
+    "@swc/core": "^1.7.39",
+    "@types/node": "^22.7.8",
+    "ai": "^3.4.18",
+    "concurrently": "^9.0.1",
+    "eslint-config-typescript-vitnode": "workspace:*",
+    "typescript": "^5.6.3"
+  },
+  "dependencies": {
+    "@ai-sdk/google": "^0.0.52"
+  }
+}
