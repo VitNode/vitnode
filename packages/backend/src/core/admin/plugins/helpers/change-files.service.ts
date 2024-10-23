@@ -151,6 +151,10 @@ export class ChangeFilesAdminPluginsService {
       }),
       getEntryName: code => `typeof ${code}`,
       reconstructFileContent: (imports, entries, originalContent) => {
+        // TODO: Remove console.log
+        // eslint-disable-next-line no-console
+        console.log({ imports, entries, originalContent });
+
         let newContent = '';
         imports.forEach((path, name) => {
           newContent += `import type ${name} from '${path}';\n`;

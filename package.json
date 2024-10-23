@@ -19,7 +19,7 @@
   },
   "pnpm": {
     "overrides": {
-      "react-is": "19.0.0-rc-6cf85185-20241014"
+      "react-is": "19.0.0-rc-69d4b800-20241021"
     }
   },
   "workspaces": [
@@ -35,7 +35,7 @@
     "eslint-config-typescript-vitnode": "workspace:*",
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.8",
-    "turbo": "^2.1.3"
+    "turbo": "^2.2.3"
   },
   "packageManager": "pnpm@9.10.0"
 }
