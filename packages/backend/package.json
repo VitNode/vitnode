@@ -10,6 +10,9 @@
     "url": "git+https://github.com/VitNode/vitnode.git",
     "directory": "packages/backend"
   },
+  "bin": {
+    "vitnode-backend": "dist/scripts/setup.js"
+  },
   "scripts": {
     "build": "tsc && swc src -d dist --config-file .swcrc",
     "build:scripts": "tsup",
@@ -23,6 +26,18 @@
     "./main": {
       "require": "./dist/src/main.js",
       "types": "./dist/src/main.d.ts"
+    },
+    "./providers/*": {
+      "require": "./dist/src/providers/*.js",
+      "types": "./dist/src/providers/*.d.ts"
+    },
+    "./utils/*": {
+      "require": "./dist/src/utils/*.js",
+      "types": "./dist/src/utils/*.d.ts"
+    },
+    "./app.module": {
+      "require": "./dist/src/app.module.js",
+      "types": "./dist/src/app.module.d.ts"
     }
   },
   "keywords": [
@@ -45,11 +60,20 @@
   ],
   "devDependencies": {
     "@nestjs/common": "^10.0.0",
+    "@nestjs/schedule": "^4.1.1",
     "@swc/cli": "0.4.1-nightly.20240914",
     "@swc/core": "^1.7.39",
     "@types/node": "^22.7.9",
+    "@types/pg": "^8.11.10",
     "concurrently": "^9.0.1",
     "eslint-config-typescript-vitnode": "workspace:*",
+    "tsup": "^8.3.0",
     "typescript": "^5.6.3"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "drizzle-kit": "^0.26.2",
+    "drizzle-orm": "^0.35.3",
+    "pg": "^8.13.0"
   }
 }

@@ -54,3 +54,17 @@ pids
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+
+# Others
+/uploads/public/*
+/uploads/private/*
+/uploads/temp/*
+!/uploads/index.html
+!/uploads/public/index.html
+!/uploads/private/index.html
+!/uploads/temp/index.html
+
+# Configuration
+/src/plugins/*/admin/database/migrations
+/src/plugins/core/
