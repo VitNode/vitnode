@@ -2,7 +2,7 @@ import { Controller, Get } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ShowMiddlewareObj } from 'vitnode-shared/middleware.dto';
 
-import { ShowMiddlewareService } from './services/show.middleware.service';
+import { ShowMiddlewareService } from './services/show.service';
 
 @ApiTags('Core')
 @Controller('core/middleware')

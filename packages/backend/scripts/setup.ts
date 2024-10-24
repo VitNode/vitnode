@@ -4,6 +4,7 @@ import { existsSync } from 'fs';
 import { join } from 'path';
 
 import coreSchemaDatabase from '../src/database';
+import { checkUpdateSchemaDatabase } from './check-update-schema-database';
 import { copyFiles } from './copy-files';
 import { generateDatabaseMigrations, runMigrations } from './database';
 import { generateConfig } from './generate-config';
@@ -48,10 +49,10 @@ const init = async () => {
     process.exit(0);
   }
 
-  console.log(`${initConsole} [3/6] Generating database migrations...`);
+  console.log(`${initConsole} [3/7] Generating database migrations...`);
   await generateDatabaseMigrations();
 
-  console.log(`${initConsole} [4/6] Generating the manifest files...`);
+  console.log(`${initConsole} [4/7] Generating the manifest files...`);
   await generateManifest();
 
   const database = createClientDatabase({
@@ -60,12 +61,15 @@ const init = async () => {
   });
 
   console.log(
-    `${initConsole} [5/6] Create tables in database using migrations...`,
+    `${initConsole} [5/7] Create tables in database using migrations...`,
   );
   await runMigrations();
 
-  console.log(`${initConsole} [6/6] Updating plugins...`);
+  console.log(`${initConsole} [6/7] Updating plugins...`);
   await updatePlugins({ pluginsPath, db: database.db });
+
+  console.log(`${initConsole} [7/7] Checking and updating schema database...`);
+  await checkUpdateSchemaDatabase({ db: database.db });
 
   console.log(`${initConsole} ✅ Project setup complete.`);
   process.exit(0);

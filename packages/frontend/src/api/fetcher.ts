@@ -17,7 +17,12 @@ export async function fetcher<TData extends Record<string, any>>({
       ...options?.headers,
     },
     ...options,
+    cache: 'no-store',
   });
+
+  if (!res.ok) {
+    throw new Error(`${res.status} - ${res.statusText}`);
+  }
 
   const data: TData = await res.json();
 

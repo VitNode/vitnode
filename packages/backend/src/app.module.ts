@@ -3,6 +3,7 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { join } from 'path';
 
 import { CoreModule } from './core/core.module';
+import { GlobalHelpersModule } from './helpers/helpers.module';
 import {
   DatabaseModuleArgs,
   InternalDatabaseModule,
@@ -39,6 +40,7 @@ export class VitNodeCoreModule {
         ScheduleModule.forRoot(),
         CoreModule,
         InternalDatabaseModule.register(database),
+        GlobalHelpersModule,
       ],
     };
   }

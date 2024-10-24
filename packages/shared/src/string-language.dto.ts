@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class StringLanguageInput {
+export class StringLanguage {
   @ApiProperty()
   language_code: string;
 
