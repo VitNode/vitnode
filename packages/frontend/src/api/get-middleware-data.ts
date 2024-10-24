@@ -1,4 +1,4 @@
-import { ShowMiddlewareObj } from 'vitnode-shared/middleware/get.middleware.dto';
+import { ShowMiddlewareObj } from 'vitnode-shared/middleware.dto';
 
 import { fetcher } from './fetcher';
 

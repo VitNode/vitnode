@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 
 import { MiddlewareController } from './middleware.controller';
-import { GetMiddlewareService } from './services/get.middleware.service';
+import { ShowMiddlewareService } from './services/show.middleware.service';
 
 @Module({
-  providers: [GetMiddlewareService],
+  providers: [ShowMiddlewareService],
   controllers: [MiddlewareController],
 })
 export class CoreMiddlewareModule {}

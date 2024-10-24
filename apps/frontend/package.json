@@ -13,6 +13,7 @@
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
+    "geist": "^1.3.1",
     "next": "^15.0.1",
     "next-intl": "3.23.1",
     "react": "19.0.0-rc-69d4b800-20241021",
@@ -26,9 +27,9 @@
     "@types/react-dom": "^18",
     "autoprefixer": "^10.4.20",
     "eslint-config-typescript-vitnode": "workspace:*",
-    "vitnode-shared": "workspace:*",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitnode-shared": "workspace:*"
   }
 }

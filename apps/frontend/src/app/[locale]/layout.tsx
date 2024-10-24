@@ -1,23 +1,15 @@
-import { NextIntlClientProvider } from 'next-intl';
-import { getLocale, getMessages } from 'next-intl/server';
+import { GeistSans } from 'geist/font/sans';
+import {
+  generateMetadataRootLayout,
+  RootLayout,
+} from 'vitnode-frontend/views/layout/root-layout';
 
 import './global.css';
 
-export default async function LocaleLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  const locale = await getLocale();
-  const messages = await getMessages();
+export const generateMetadata = generateMetadataRootLayout;
 
-  return (
-    <html lang={locale}>
-      <body>
-        <NextIntlClientProvider messages={messages}>
-          {children}
-        </NextIntlClientProvider>
-      </body>
-    </html>
-  );
+export default function Layout(
+  props: Omit<React.ComponentProps<typeof RootLayout>, 'className'>,
+) {
+  return <RootLayout className={GeistSans.className} {...props} />;
 }

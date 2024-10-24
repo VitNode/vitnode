@@ -34,4 +34,10 @@ export class ShowMiddlewareObj {
 
   @ApiProperty({ example: ['core', 'admin'] })
   plugins: string[];
+
+  @ApiProperty()
+  site_name: string;
+
+  @ApiProperty()
+  site_short_name: string;
 }

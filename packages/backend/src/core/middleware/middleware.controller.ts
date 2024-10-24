@@ -1,20 +1,20 @@
 import { Controller, Get } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { ShowMiddlewareObj } from 'vitnode-shared/middleware/get.middleware.dto';
+import { ShowMiddlewareObj } from 'vitnode-shared/middleware.dto';
 
-import { GetMiddlewareService } from './services/get.middleware.service';
+import { ShowMiddlewareService } from './services/show.middleware.service';
 
 @ApiTags('Core')
 @Controller('core/middleware')
 export class MiddlewareController {
-  constructor(private readonly getService: GetMiddlewareService) {}
+  constructor(private readonly showService: ShowMiddlewareService) {}
 
   @Get()
   @ApiResponse({
     status: 200,
     type: ShowMiddlewareObj,
   })
-  async get(): Promise<ShowMiddlewareObj> {
-    return this.getService.get();
+  async show(): Promise<ShowMiddlewareObj> {
+    return this.showService.show();
   }
 }

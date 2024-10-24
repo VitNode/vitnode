@@ -1,4 +1,5 @@
-import { DatabaseModuleArgs } from '@/utils/database/database.module';
+import type { DatabaseModuleArgs } from '@/utils/database/database.module';
+
 import { Inject, Injectable } from '@nestjs/common';
 
 import coreSchemaDatabase from '../../database';
