@@ -15,11 +15,19 @@
       "outputs": ["dist/**"],
       "dependsOn": ["^build:scripts"]
     },
+    "build:packages": {
+      "outputs": ["dist/**"],
+      "dependsOn": ["^build:packages"]
+    },
     "lint": {
       "dependsOn": ["^lint"]
     },
     "lint:fix": {
       "dependsOn": ["^lint:fix"]
+    },
+    "dev:packages": {
+      "cache": false,
+      "persistent": true
     },
     "dev": {
       "cache": false,

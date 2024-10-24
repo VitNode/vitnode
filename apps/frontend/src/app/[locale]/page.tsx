@@ -1,5 +1,5 @@
-import { greetTest } from 'shared/types/test';
-import { EditorShowCoreMiddleware } from 'shared/types/user';
+import { greet } from 'shared/core/test';
+import { EditorShowCoreMiddleware } from 'shared/user';
 
 export default function Home() {
   const test: EditorShowCoreMiddleware = {
@@ -9,5 +9,5 @@ export default function Home() {
   // eslint-disable-next-line no-console
   console.log(test);
 
-  return <div>{greetTest('test')}</div>;
+  return <div>{greet('test')}</div>;
 }
