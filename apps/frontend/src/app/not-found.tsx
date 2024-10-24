@@ -1,7 +1,5 @@
-'use client';
+import { ErrorView } from 'vitnode-frontend/views/theme/views/error/error-view';
 
-import { NotFoundView } from 'vitnode-frontend/views/theme/views/not-found';
-
-export default function NotFound() {
-  return <NotFoundView />;
+export default function NotFoundPage() {
+  return <ErrorView code="404" />;
 }
