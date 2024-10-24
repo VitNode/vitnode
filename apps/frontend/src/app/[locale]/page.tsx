@@ -1,10 +1,8 @@
 import { greet } from 'shared/core/test';
-import { EditorShowCoreMiddleware } from 'shared/user';
+import { getMiddlewareData } from 'vitnode-frontend/api/get-middleware-data';
 
-export default function Home() {
-  const test: EditorShowCoreMiddleware = {
-    sticky: true,
-  };
+export default async function Home() {
+  const test = await getMiddlewareData();
 
   // eslint-disable-next-line no-console
   console.log(test);

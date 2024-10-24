@@ -17,10 +17,10 @@
     "lint:fix": "eslint . --fix"
   },
   "exports": {
-    "./types/*": {
-      "require": "./dist/src/types/*.js",
-      "import": "./dist/src/types/*.js",
-      "types": "./dist/types/types/*.d.ts"
+    "./*": {
+      "require": "./dist/src/*.js",
+      "import": "./dist/src/*.js",
+      "types": "./dist/types/*.d.ts"
     }
   },
   "devDependencies": {

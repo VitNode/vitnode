@@ -1,8 +1,10 @@
 /* eslint-disable no-console */
-import { INestApplication } from '@nestjs/common';
+import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import cookieParser from 'cookie-parser';
 import { readFile } from 'fs/promises';
+import helmet from 'helmet';
 import { join } from 'path';
 
 interface CorsOptionsMain extends Omit<CorsOptions, 'credentials'> {
@@ -18,12 +20,33 @@ export const nestjsMainApp = async (app: INestApplication, options?: Args) => {
     version: string;
   } = JSON.parse(await readFile(join(process.cwd(), 'package.json'), 'utf-8'));
 
-  const config = new DocumentBuilder()
-    .setTitle('VitNode App')
-    .setVersion(pkg.version)
-    .build();
-  const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+  app.use(cookieParser());
+  app.use(
+    helmet({
+      contentSecurityPolicy:
+        process.env.NODE_ENV === 'development' ? false : undefined,
+    }),
+  );
+
+  if (process.env.NODE_ENV === 'development') {
+    const config = new DocumentBuilder()
+      .setTitle('VitNode App')
+      .setVersion(pkg.version)
+      .build();
+    const document = SwaggerModule.createDocument(app, config);
+    SwaggerModule.setup('api', app, document, {
+      jsonDocumentUrl: '/api/swagger.json',
+    });
+  }
+
+  // Class Validation
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true,
+      whitelist: true,
+      enableDebugMessages: process.env.NODE_ENV === 'development',
+    }),
+  );
 
   app.enableCors({
     ...options?.cors,

@@ -1,3 +1,5 @@
+import { getMiddlewareData } from './api/get-middleware-data';
+
 export const i18nConfigVitNode = async ({
   pathsToMessagesFromPlugins,
   requestLocale,
@@ -20,20 +22,14 @@ export const i18nConfigVitNode = async ({
 
   let plugins: string[] = [];
   try {
-    // const {
-    //   core_middleware__show: { plugins: pluginsFromServer, languages },
-    // } = await fetcher<
-    //   Core_Middleware__ShowQuery,
-    //   Core_Middleware__ShowQueryVariables
-    // >({
-    //   query: Core_Middleware__Show,
-    // });
-    plugins = ['core', 'admin', 'welcome'];
+    const data = await getMiddlewareData();
+    plugins = data.plugins;
 
-    defaultLocale = 'en';
-    // if (!languages.find(lang => lang.code === locale)) {
-    //   locale = defaultLanguage?.code;
-    // }
+    const defaultLanguage = data.languages.find(lang => lang.default);
+    defaultLocale = defaultLanguage?.code ?? 'en';
+    if (!data.languages.find(lang => lang.code === locale)) {
+      locale = defaultLanguage?.code;
+    }
   } catch (_) {
     // If the request fails, we will use the default plugins
     plugins = ['core', 'admin'];

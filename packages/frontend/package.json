@@ -29,6 +29,10 @@
       "types": "./dist/src/navigation/index.ts",
       "default": "./dist/src/navigation/index.js"
     },
+    "./api/*": {
+      "types": "./dist/src/api/*.ts",
+      "default": "./dist/src/api/*.js"
+    },
     "./helpers/*": {
       "types": "./dist/src/helpers/*.ts",
       "default": "./dist/src/helpers/*.js"
@@ -173,6 +177,7 @@
     "react-cropper": "^2.3.3",
     "react-day-picker": "^8.10.1",
     "react-is": "19.0.0-rc-69d4b800-20241021",
+    "vitnode-shared": "workspace:*",
     "tailwind-merge": "^2.5.4",
     "tailwindcss-animate": "^1.0.7",
     "tippy.js": "^6.3.7",

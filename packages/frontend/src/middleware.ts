@@ -1,26 +1,26 @@
 import { NextRequest, NextResponse } from 'next/server';
 import createIntlMiddleware from 'next-intl/middleware';
 
-// eslint-disable-next-line @typescript-eslint/require-await
+import { getMiddlewareData } from './api/get-middleware-data';
+
 const getI18n = async () => {
   try {
-    // Fetch the i18n configuration from the API
-
+    const { languages: lang } = await getMiddlewareData();
+    const languages = lang.filter(lang => lang.enabled);
+    const defaultLanguage = lang.find(lang => lang.default)?.code ?? 'en';
     const i18n = {
-      locales: ['en'],
-      defaultLocale: 'en',
+      locales: languages.length > 0 ? languages.map(edge => edge.code) : ['en'],
+      defaultLocale: defaultLanguage,
     };
 
-    return {
-      ...i18n,
-    };
+    return i18n;
   } catch (_) {
     const i18n = {
       locales: ['en'],
       defaultLocale: 'en',
     };
 
-    return { ...i18n };
+    return i18n;
   }
 };
 
@@ -41,6 +41,7 @@ const removeLocaleFromUrl = (urlPath: string, locales: string[]): string => {
 export function createMiddleware() {
   return async function middleware(request: NextRequest) {
     const i18n = await getI18n();
+
     const handleI18nRouting = createIntlMiddleware({
       ...i18n,
       localePrefix: 'as-needed',
