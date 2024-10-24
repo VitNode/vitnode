@@ -83,12 +83,7 @@ export default [
       '@typescript-eslint/no-unnecessary-qualifier': 'error',
       '@typescript-eslint/no-useless-empty-export': 'error',
       '@typescript-eslint/method-signature-style': 'warn',
-      '@typescript-eslint/no-import-type-side-effects': 'warn',
       'newline-before-return': 'warn',
-      '@typescript-eslint/consistent-type-imports': [
-        'warn',
-        { prefer: 'no-type-imports' },
-      ],
       'no-restricted-imports': [
         'error',
         {
@@ -101,12 +96,7 @@ export default [
         },
         {
           name: 'next/navigation',
-          importNames: [
-            'redirect',
-            'permanentRedirect',
-            'useRouter',
-            'usePathname',
-          ],
+          importNames: ['useRouter'],
           message: 'Please import from `vitnode-frontend/navigation` instead.',
         },
       ],

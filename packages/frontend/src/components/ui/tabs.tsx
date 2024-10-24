@@ -1,9 +1,10 @@
 'use client';
 
+import { usePathname } from 'next/navigation';
 import React from 'react';
 
 import { cn } from '../../helpers/classnames';
-import { Link, usePathname } from '../../navigation';
+import { Link } from '../../navigation';
 import { buttonVariants } from './button';
 
 export const Tabs = ({

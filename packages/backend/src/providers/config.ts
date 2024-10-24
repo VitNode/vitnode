@@ -1,4 +1,3 @@
-import { UploadCoreFilesObj } from '@/core/files/helpers/upload/upload.dto';
 import * as fs from 'fs';
 import { join } from 'path';
 
@@ -30,10 +29,10 @@ export interface ConfigType {
     enabled: boolean;
   }[];
   logos: {
-    dark?: UploadCoreFilesObj;
-    light?: UploadCoreFilesObj;
-    mobile_dark?: UploadCoreFilesObj;
-    mobile_light?: UploadCoreFilesObj;
+    // dark?: UploadCoreFilesObj;
+    // light?: UploadCoreFilesObj;
+    // mobile_dark?: UploadCoreFilesObj;
+    // mobile_light?: UploadCoreFilesObj;
     mobile_width: number;
     text: string;
     width: number;
@@ -54,7 +53,7 @@ export interface ConfigType {
     email: {
       color_primary: string;
       color_primary_foreground: string;
-      logo?: UploadCoreFilesObj;
+      // logo?: UploadCoreFilesObj;
     };
     main: {
       contact_email: string;

@@ -1,29 +1,11 @@
-import { RedirectType } from 'next/navigation';
-import { createNavigation } from 'next-intl/navigation';
-import { getLocale } from 'next-intl/server';
-import { QueryParams } from 'node_modules/next-intl/dist/types/src/navigation/shared/utils';
+// eslint-disable-next-line no-restricted-imports
+import LinkFromImport from 'next/link';
 import React from 'react';
 
-import { usePathname, useRouter } from './router';
-const { redirect: redirectFromImport, Link: LinkFromImport } =
-  createNavigation();
-
-const redirect = async (
-  href:
-    | {
-        pathname: string;
-        query?: QueryParams;
-      }
-    | string,
-  type?: RedirectType,
-) => {
-  const locale = await getLocale();
-
-  redirectFromImport({ href, locale }, type);
-};
+import { useRouter } from './router';
 
 const Link = (props: React.ComponentProps<typeof LinkFromImport>) => {
   return <LinkFromImport {...props} />;
 };
 
-export { Link, redirect, usePathname, useRouter };
+export { Link, useRouter };

@@ -1,0 +1,37 @@
+{
+  "name": "vitnode-shared",
+  "version": "0.0.10-canary.4",
+  "description": "Shared code between backend and frontend in VitNode projects.",
+  "author": "VitNode Team",
+  "license": "MIT",
+  "homepage": "https://vitnode.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VitNode/vitnode.git",
+    "directory": "packages/shared"
+  },
+  "scripts": {
+    "build": "tsc && swc src -d dist --config-file .swcrc",
+    "dev": "concurrently \"tsc -w --preserveWatchOutput\" \"swc src -d dist --config-file .swcrc -w\"",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "exports": {
+    "./*": {
+      "require": "./dist/src/*.js",
+      "import": "./dist/src/*.js",
+      "types": "./dist/types/*.d.ts"
+    }
+  },
+  "devDependencies": {
+    "@swc/cli": "0.4.1-nightly.20240914",
+    "@swc/core": "^1.7.39",
+    "@types/node": "^20.3.1",
+    "concurrently": "^9.0.1",
+    "eslint-config-typescript-vitnode": "workspace:*",
+    "typescript": "^5.6.3"
+  },
+  "dependencies": {
+    "@nestjs/swagger": "^7.4.2"
+  }
+}
