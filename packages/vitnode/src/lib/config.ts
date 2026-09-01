@@ -1,6 +1,13 @@
 export const INSECURE_DEFAULT_CRON_SECRET =
   "default-cron-secret-change-in-production";
 
+export const INSECURE_CRON_SECRETS: readonly string[] = [
+  INSECURE_DEFAULT_CRON_SECRET,
+  "your-secure-cron-secret-key",
+  "changeme",
+  "secret",
+];
+
 const browserOrigin = (): string | undefined => {
   if (typeof location === "undefined") return undefined;
 
