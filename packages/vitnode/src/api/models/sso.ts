@@ -6,8 +6,10 @@ import { HTTPException } from "hono/http-exception";
 import crypto from "node:crypto";
 
 import { deleteAuthCookie, setAuthCookie } from "@/api/lib/auth-cookie";
+import { matchesEmail, pickAccountForEmail } from "@/api/lib/user-email-lookup";
 import { core_users, core_users_sso } from "@/database/users";
 import { CONFIG } from "@/lib/config";
+import { normalizeEmailAddress } from "@/lib/email-canonical";
 import { removeSpecialCharacters } from "@/lib/special-characters";
 
 import { UserModel } from "./user";
@@ -86,7 +88,11 @@ export class SSOModel {
     }
 
     const ssoToken = await provider.fetchToken(code);
-    const userFromSSO = await provider.fetchUser(ssoToken);
+    const userFromProvider = await provider.fetchUser(ssoToken);
+    const userFromSSO = {
+      ...userFromProvider,
+      email: normalizeEmailAddress(userFromProvider.email),
+    };
 
     return await this.c.get("db").transaction(async tx => {
       const [dataSSOFromDb] = await tx
@@ -104,14 +110,18 @@ export class SSOModel {
         .limit(1);
 
       if (!dataSSOFromDb) {
-        const [userWithEmail] = await tx
+        const accountsWithEmail = await tx
           .select({
             id: core_users.id,
             email: core_users.email,
           })
           .from(core_users)
-          .where(eq(core_users.email, userFromSSO.email))
-          .limit(1);
+          .where(matchesEmail(userFromSSO.email))
+          .limit(2);
+        const userWithEmail = pickAccountForEmail(
+          accountsWithEmail,
+          userFromSSO.email,
+        );
 
         if (!userWithEmail) {
           const signUpUser = await this.signUpUser({

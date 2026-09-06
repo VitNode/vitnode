@@ -73,8 +73,11 @@ For example: `https://your-domain.com/login/sso/google`.
 ## How Accounts Link
 
 When a user signs in via SSO:
-1. **Existing Email Match**: If an existing account shares the verified email, the SSO identity is automatically linked.
-2. **New Visitor**: A new user is created with their social display name, email, and avatar.
+1. **Known Identity**: The provider account was linked before, so the user is signed straight into it.
+2. **Existing Email Match**: An account already uses that address, so the request is refused with `409`. A social login can never take over an account someone else registered with a password.
+3. **New Visitor**: A new user is created with their social display name, email, and avatar.
+
+The address the provider returns is matched in its canonical form, so a Google account that reports `jan.kowalski@gmail.com` finds the member who registered as `jankowalski@gmail.com` instead of quietly becoming a second account. See [One Mailbox, One Account](/docs/dev/advanced/auth#one-mailbox-one-account).
 
 ## Learn More
 

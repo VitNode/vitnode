@@ -1,8 +1,8 @@
 import type { Context } from "hono";
 
-import { eq } from "drizzle-orm";
 import { HTTPException } from "hono/http-exception";
 
+import { matchesEmail, pickAccountForEmail } from "@/api/lib/user-email-lookup";
 import { core_users } from "@/database/users";
 
 import { PasswordModel } from "../password";
@@ -16,7 +16,7 @@ export const signInWithPassword = async ({
   email: string;
   password: string;
 }) => {
-  const [user] = await c
+  const candidates = await c
     .get("db")
     .select({
       id: core_users.id,
@@ -24,8 +24,9 @@ export const signInWithPassword = async ({
       password: core_users.password,
     })
     .from(core_users)
-    .where(eq(core_users.email, email))
-    .limit(1);
+    .where(matchesEmail(email))
+    .limit(2);
+  const user = pickAccountForEmail(candidates, email);
 
   const passwords = new PasswordModel();
 

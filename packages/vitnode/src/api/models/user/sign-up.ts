@@ -3,9 +3,11 @@ import type { Context } from "hono";
 import { and, count, eq, or } from "drizzle-orm";
 import { HTTPException } from "hono/http-exception";
 
+import { emailAliases, matchesEmail } from "@/api/lib/user-email-lookup";
 import { generateAvatarColor } from "@/api/modules/users/avatar-color";
 import { core_roles } from "@/database/roles";
 import { core_users } from "@/database/users";
+import { canonicalizeEmail } from "@/lib/email-canonical";
 import { removeSpecialCharacters } from "@/lib/special-characters";
 
 const getDefaultData = async (
@@ -65,7 +67,7 @@ const getDefaultData = async (
 
 export const signUp = async (
   {
-    email,
+    email: typedEmail,
     name,
     newsletter,
     hashedPassword,
@@ -78,6 +80,8 @@ export const signUp = async (
   c: Context,
 ) => {
   const convertToNameSEO = removeSpecialCharacters(name);
+  const email = canonicalizeEmail(typedEmail);
+  const takenAddresses = new Set(emailAliases(typedEmail));
   const checkIfUserExist = await c
     .get("db")
     .select({
@@ -86,13 +90,12 @@ export const signUp = async (
     })
     .from(core_users)
     .where(
-      or(
-        eq(core_users.email, email),
-        eq(core_users.nameCode, convertToNameSEO),
-      ),
+      or(matchesEmail(typedEmail), eq(core_users.nameCode, convertToNameSEO)),
     );
 
-  const findEmail = checkIfUserExist.find(user => user.email === email);
+  const findEmail = checkIfUserExist.find(user =>
+    takenAddresses.has(user.email),
+  );
   if (findEmail) {
     throw new HTTPException(409, {
       message: "Email already exists",

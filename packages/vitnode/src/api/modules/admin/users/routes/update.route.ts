@@ -3,10 +3,12 @@ import { and, eq, inArray, ne } from "drizzle-orm";
 
 import { buildRoute } from "@/api/lib/route";
 import { invalidateStaffPermissionsForUser } from "@/api/lib/staff-permission-cache";
+import { matchesEmail } from "@/api/lib/user-email-lookup";
 import { invalidateSessionCacheForUser } from "@/api/models/session-revoke";
 import { CONFIG_PLUGIN } from "@/config";
 import { core_roles } from "@/database/roles";
 import { core_users, core_users_secondary_roles } from "@/database/users";
+import { canonicalizeEmail } from "@/lib/email-canonical";
 
 import {
   assertCanAssignRoles,
@@ -134,16 +136,14 @@ export const updateUserAdminRoute = buildRoute({
       const [existing] = await db
         .select({ id: core_users.id })
         .from(core_users)
-        .where(
-          and(eq(core_users.email, body.email), ne(core_users.id, user.id)),
-        )
+        .where(and(matchesEmail(body.email), ne(core_users.id, user.id)))
         .limit(1);
 
       if (existing) {
         return c.json({ error: "Email already exists" }, 409);
       }
 
-      values.email = body.email;
+      values.email = canonicalizeEmail(body.email);
     }
 
     if (body.name !== undefined) {
