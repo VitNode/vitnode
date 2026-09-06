@@ -174,8 +174,8 @@
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "test:types": "vitest run --typecheck.only",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint": "eslint . --cache --cache-location .cache/eslint --cache-strategy content --concurrency auto",
+    "lint:fix": "eslint . --fix --cache --cache-location .cache/eslint --cache-strategy content --concurrency auto"
   },
   "type": "module",
   "dependencies": {

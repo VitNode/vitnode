@@ -19,7 +19,9 @@
     "i18n:check": "turbo i18n:check",
     "i18n:delete": "turbo i18n:delete",
     "i18n:update": "turbo i18n:update",
-    "i18n:update:ai": "turbo i18n:update:ai"
+    "i18n:update:ai": "turbo i18n:update:ai",
+    "format": "prettier . --write --cache --cache-location .cache/prettier",
+    "format:check": "prettier . --check --cache --cache-location .cache/prettier"
   },
   "devDependencies": {
     "@types/node": "^26.1.1",

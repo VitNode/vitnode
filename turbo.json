@@ -59,9 +59,11 @@
       "env": ["POSTGRES_URL", "NEXT_PUBLIC_API_URL", "NEXT_PUBLIC_WEB_URL"]
     },
     "lint": {
-      "dependsOn": ["^lint"]
+      "dependsOn": ["^lint"],
+      "outputs": [".cache/eslint/**"]
     },
     "lint:fix": {
+      "cache": false,
       "dependsOn": ["^lint:fix"]
     },
     "start": {

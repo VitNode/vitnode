@@ -29,9 +29,11 @@
       "dependsOn": ["^start"]
     },
     "lint": {
-      "dependsOn": ["^lint"]
+      "dependsOn": ["^lint"],
+      "outputs": [".cache/eslint/**"]
     },
     "lint:fix": {
+      "cache": false,
       "dependsOn": ["^lint:fix"]
     },
     "i18n:create": {

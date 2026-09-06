@@ -24,8 +24,8 @@
   "scripts": {
     "build:scripts": "tsc -p tsconfig.build.json && node dist/src/prepare/prepare.js",
     "start:scripts": "node dist/src/index.js",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
+    "lint": "eslint . --cache --cache-location .cache/eslint --cache-strategy content --concurrency auto",
+    "lint:fix": "eslint . --fix --cache --cache-location .cache/eslint --cache-strategy content --concurrency auto",
     "test": "vitest run",
     "test:watch": "vitest"
   },

@@ -24,8 +24,8 @@ const paths = (root: string) => ({
  * Shared blocks
  */
 const eslintScripts = {
-  lint: "eslint .",
-  "lint:fix": "eslint . --fix",
+  lint: "eslint . --cache --cache-location .cache/eslint --cache-strategy content --concurrency auto",
+  "lint:fix": "eslint . --fix --cache --cache-location .cache/eslint --cache-strategy content --concurrency auto",
 };
 const i18nScripts = {
   "i18n:create": "vitnode i18n:create",
@@ -69,6 +69,8 @@ export const rootScripts = (
   "i18n:update": "turbo i18n:update",
   "i18n:update:ai": "turbo i18n:update:ai",
   ...withIf(enableEslint, {
+    format: "prettier . --write --cache --cache-location .cache/prettier",
+    "format:check": "prettier . --check --cache --cache-location .cache/prettier",
     lint: "turbo lint",
     "lint:fix": "turbo lint:fix",
   }),

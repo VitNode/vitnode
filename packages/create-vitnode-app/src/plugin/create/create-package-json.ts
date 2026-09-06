@@ -31,8 +31,8 @@ export const createPluginPackageJSON = async ({
       dev: "vitnode dev",
       "dev:email": "email dev --dir src/emails",
       ...withIf(eslint, {
-        lint: "turbo lint",
-        "lint:fix": "turbo lint:fix",
+        lint: "eslint . --cache --cache-location .cache/eslint --cache-strategy content --concurrency auto",
+        "lint:fix": "eslint . --fix --cache --cache-location .cache/eslint --cache-strategy content --concurrency auto",
       }),
     },
     exports: pluginPackageExports(),

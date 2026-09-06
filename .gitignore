@@ -32,3 +32,6 @@ yarn-error.log*
 .vercel
 # next-agents-md
 .next-docs/
+
+# Tool caches
+.cache

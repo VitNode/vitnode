@@ -25,8 +25,8 @@
   "scripts": {
     "build:plugins": "vitnode build",
     "dev:plugins": "vitnode dev",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint": "eslint . --cache --cache-location .cache/eslint --cache-strategy content --concurrency auto",
+    "lint:fix": "eslint . --fix --cache --cache-location .cache/eslint --cache-strategy content --concurrency auto"
   },
   "dependencies": {
     "resend": "^6.18.0"

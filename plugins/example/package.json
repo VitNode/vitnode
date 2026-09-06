@@ -16,8 +16,8 @@
   "scripts": {
     "build:plugins": "vitnode build",
     "dev": "vitnode dev",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
+    "lint": "eslint . --cache --cache-location .cache/eslint --cache-strategy content --concurrency auto",
+    "lint:fix": "eslint . --fix --cache --cache-location .cache/eslint --cache-strategy content --concurrency auto",
     "test": "vitest run",
     "test:watch": "vitest"
   },

@@ -2,7 +2,7 @@
 
 import eslint from "@eslint/js";
 import perfectionist from "eslint-plugin-perfectionist";
-import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended";
+import eslintConfigPrettier from "eslint-config-prettier/flat";
 import tsEslint from "typescript-eslint";
 
 export default [
@@ -24,7 +24,6 @@ export default [
   eslint.configs.recommended,
   ...tsEslint.configs.stylisticTypeChecked,
   ...tsEslint.configs.strictTypeChecked,
-  eslintPluginPrettierRecommended,
   perfectionist.configs["recommended-natural"],
   { files: ["**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}"] },
   {
@@ -121,4 +120,5 @@ export default [
     files: ["**/src/routes.ts", "**/src/routes.tsx"],
     rules: { "@typescript-eslint/promise-function-async": "off" },
   },
+  eslintConfigPrettier,
 ];
