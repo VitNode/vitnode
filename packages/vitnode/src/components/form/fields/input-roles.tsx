@@ -1,5 +1,3 @@
-"use client";
-
 import { XIcon } from "lucide-react";
 import React from "react";
 import { useLocale, useTranslations } from "use-intl";

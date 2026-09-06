@@ -1,5 +1,3 @@
-"use client";
-
 import { useQuery } from "@tanstack/react-query";
 
 import type { SSOCallbackResult } from "./sso-callback-result";

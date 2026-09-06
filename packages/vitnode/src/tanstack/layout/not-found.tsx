@@ -1,5 +1,3 @@
-"use client";
-
 import { useTranslations } from "use-intl";
 
 import { ErrorContent } from "@/views/error/error-content";

@@ -143,12 +143,11 @@ const readRejection = async (
  * Uploads one file for one `file` field and returns its descriptor.
  *
  * **This is the only path binary data takes.** It is a `multipart/form-data`
- * `POST` from the browser to the generated API route, driven by TanStack Query -
- * not a Server Action. A Server Action body is a serialised RSC payload, so an
- * image would be encoded into a string, buffered whole in the Next.js process
- * and capped by a platform body limit that has nothing to do with the field's
- * `maxBytes`. The content mutation that follows is ordinary JSON carrying the
- * identifier this returns.
+ * `POST` from the browser to the generated API route, driven by TanStack Query.
+ * Nothing is base64-encoded into a mutation body, where an image would be
+ * buffered whole and capped by a platform body limit that has nothing to do
+ * with the field's `maxBytes`. The content mutation that follows is ordinary
+ * JSON carrying the identifier this returns.
  *
  * A failure becomes a {@link ContentUploadError} carrying the reason the server
  * gave - never a generic sentence when the server wrote a specific one.

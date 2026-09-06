@@ -103,8 +103,8 @@ describe("the generated route module", () => {
     );
 
     // A route module is compiled into the plugin's `dist` and imported by
-    // whichever app installed it, so `next/*`, `next-intl` and a router are all
-    // ways of making the plugin installable into exactly one kind of app.
+    // whichever app installed it, so a router import is a way of making the
+    // plugin installable into exactly one kind of app.
     expect(imports).toEqual(["use-intl"]);
   });
 

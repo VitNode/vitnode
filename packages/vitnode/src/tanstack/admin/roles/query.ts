@@ -93,8 +93,7 @@ export const useAdminRoleMutations = (): {
         return result;
       },
       onSaved: () => {
-        // The dialogs already invalidated on success; this is the hook the
-        // Next.js version uses to re-render the page, and a router with a query
+        // The dialogs already invalidated on success, and a router with a query
         // cache needs nothing more.
       },
     }),

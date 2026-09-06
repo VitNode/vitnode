@@ -1,5 +1,3 @@
-"use client";
-
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { MenuIcon } from "lucide-react";
 import React from "react";

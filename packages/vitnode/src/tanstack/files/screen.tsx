@@ -1,5 +1,3 @@
-"use client";
-
 import { useSuspenseQuery } from "@tanstack/react-query";
 import React from "react";
 
@@ -53,10 +51,9 @@ export const MyFilesRouteContent = ({
 
         <DataTableNavigationProvider value={navigation}>
           {/*
-            The same component the Next.js page renders, handed the three things
-            a shared table cannot resolve for itself: the page, and the two
-            deletes. Both callbacks end in a query invalidation of the whole
-            `files/me` family rather than in `revalidatePath`, and only when
+            The shared table, handed the three things it cannot resolve for
+            itself: the page, and the two deletes. Both callbacks end in a query
+            invalidation of the whole `files/me` family, and only when
             something actually went: a `409` leaves the file where it was and the
             dialog open, and a bulk run that deleted nothing must not drop the
             selection that is showing which rows were kept.

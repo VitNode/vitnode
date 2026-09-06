@@ -572,8 +572,7 @@ export const buildContentRoutes = <
    *
    * It exists because a Content Engine mutation is JSON - `{ "coverImage": 42 }`
    * - and always will be. Bytes travel here, once, and the mutation carries an
-   * identifier. Nothing is base64-encoded and no binary goes through a Next.js
-   * Server Action: a Server Action body is a serialised RSC payload, so a
+   * identifier. Nothing is base64-encoded into a JSON body, where a
    * five-megabyte image becomes a five-megabyte string that is buffered whole,
    * with no progress, no streaming and a platform body limit that is not the
    * field's `maxBytes`.
@@ -922,7 +921,7 @@ export const buildContentRoutes = <
     pluginId,
     adminStaffPermission: { module, permission: CONTENT_PERMISSIONS.edit },
     route: {
-      // PUT, not PATCH: the Next.js API route handler exports no PATCH.
+      // PUT, not PATCH: an update replaces the record it addresses.
       method: "put",
       path: "/{id}",
       description: `Update a ${name}`,

@@ -16,8 +16,8 @@ const TOKEN = "eyJhdWQiOiJjb250ZW50LXByZXZpZXcifQ.c2lnbmF0dXJl";
 // Deliberately different hosts. Both default to localhost:3000, which would make
 // "did this resolve against the web app or the API" unanswerable.
 beforeEach(() => {
-  vi.stubEnv("NEXT_PUBLIC_WEB_URL", "https://example.com");
-  vi.stubEnv("NEXT_PUBLIC_API_URL", "https://api.example.com");
+  vi.stubEnv("VITNODE_WEB_URL", "https://example.com");
+  vi.stubEnv("VITNODE_API_URL", "https://api.example.com");
 });
 
 afterEach(() => {

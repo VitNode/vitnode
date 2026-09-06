@@ -1,5 +1,3 @@
-"use client";
-
 import { ArrowLeftIcon } from "lucide-react";
 import { useTranslations } from "use-intl";
 

@@ -1,5 +1,3 @@
-"use client";
-
 import type { AuthLinkComponent } from "@/views/auth/auth-link";
 
 import { Header } from "./header";

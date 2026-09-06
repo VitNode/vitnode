@@ -1,5 +1,3 @@
-"use client";
-
 import type { ItemAutoFormComponentProps } from "@vitnode/core/components/form/auto-form";
 
 import { ContentFormFieldSkeleton } from "@vitnode/core/content/admin-form";

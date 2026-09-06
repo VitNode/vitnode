@@ -43,7 +43,7 @@ if (staticStorage) {
 // Allow the web frontend to make credentialed browser requests (e.g. client-side
 // file uploads) when it runs on a different origin than this API. Credentialed
 // requests can't use a wildcard origin, and CSRF must trust it too.
-const webOrigin = process.env.NEXT_PUBLIC_WEB_URL ?? "http://localhost:3000";
+const webOrigin = process.env.VITNODE_WEB_URL ?? "http://localhost:3000";
 
 VitNodeAPI({
   app,

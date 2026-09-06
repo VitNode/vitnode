@@ -1,5 +1,3 @@
-"use client";
-
 import type { ContentCellProps } from "@vitnode/core/lib/plugin";
 
 import { useTranslations } from "use-intl";

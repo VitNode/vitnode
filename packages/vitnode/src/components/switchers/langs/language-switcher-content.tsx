@@ -1,5 +1,3 @@
-"use client";
-
 import { CheckIcon, LanguagesIcon } from "lucide-react";
 import { useTranslations } from "use-intl";
 
@@ -32,7 +30,7 @@ interface LanguageSwitcherPendingProps {
 export type LanguageSwitcherContentProps = (
   LanguageSwitcherPendingProps | LanguageSwitcherReadyProps
 ) & {
-  /** A switch in flight, shown on the trigger. Next.js drives this with a transition. */
+  /** A switch in flight, shown on the trigger. */
   isPending?: boolean;
   /** The languages to offer, in the order they render. */
   options: LocaleConfig[];

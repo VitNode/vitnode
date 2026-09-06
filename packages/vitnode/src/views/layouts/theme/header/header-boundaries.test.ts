@@ -1,16 +1,10 @@
 // @vitest-environment node
-import { existsSync, readFileSync } from "node:fs";
+import { readFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 
-import {
-  externalGraph,
-  NEXT_INTL,
-  NEXT_ONLY,
-  offenders,
-  runtimeImports,
-} from "@/tests/import-graph";
+import { externalGraph, runtimeImports } from "@/tests/import-graph";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const srcRoot = resolve(here, "../../../..");
@@ -28,15 +22,6 @@ const SHARED = {
   ),
 };
 
-const DELETED_NEXT_HALF = {
-  header: join(here, "header.tsx"),
-  headerLink: join(here, "header-next.tsx"),
-  languageSwitcher: join(
-    srcRoot,
-    "components/switchers/langs/language-switcher.tsx",
-  ),
-};
-
 const sharedEntries = Object.entries(SHARED).map(([name, path]) => ({
   name,
   path,
@@ -47,42 +32,25 @@ const withoutComments = (path: string): string =>
     .replace(/\/\/.*$/gm, "");
 
 describe("the shared header is framework-neutral", () => {
-  it.each(sharedEntries)("$name reaches nothing from next/*", ({ path }) => {
-    expect(offenders(path, NEXT_ONLY)).toEqual([]);
-  });
-
   it.each(sharedEntries)(
-    "$name reaches none of next-intl's Next-only entrypoints",
+    "$name never reaches a server-only module",
     ({ path }) => {
-      expect(offenders(path, NEXT_INTL)).toEqual([]);
-    },
-  );
-
-  it.each(sharedEntries)(
-    "$name never reaches the locale-aware navigation module",
-    ({ path }) => {
+      // Importing one pulls the fetcher and the whole API module graph behind
+      // it. The header's one mutation - sign-out - lives in the user slot,
+      // which is a prop.
       const reached = [...externalGraph(path).keys()];
 
-      expect(reached.some(one => one.includes("navigation"))).toBe(false);
+      expect(reached.some(one => one.endsWith(".server"))).toBe(false);
+      expect(runtimeImports(path).some(one => one.includes(".server"))).toBe(
+        false,
+      );
     },
   );
 
-  it.each(sharedEntries)("$name never reaches a server action", ({ path }) => {
-    // A `"use server"` module is the other way Next.js gets in: importing one
-    // pulls the fetcher, `next/headers` and the whole API module graph behind
-    // it. The header's one mutation - sign-out - lives in the user slot, which
-    // is a prop.
-    const reached = [...externalGraph(path).keys()];
-
-    expect(reached.some(one => one.endsWith(".server"))).toBe(false);
-    expect(runtimeImports(path).some(one => one.includes(".server"))).toBe(
-      false,
-    );
-  });
-
   it("never reaches a router", () => {
-    // The mirror of the Next assertions: the shared header must not import
-    // TanStack Router either, or the Next.js app stops being able to render it.
+    // `@vitnode/core` renders in whatever host mounts it, so the shared header
+    // reaches navigation through an injected `LinkComponent` rather than
+    // through a router of its own.
     const reached = [...externalGraph(SHARED.header).keys()];
 
     expect(reached.some(one => one.startsWith("@tanstack/"))).toBe(false);
@@ -104,10 +72,9 @@ describe("the shared header takes its framework parts as props", () => {
   );
 
   it("translates nothing itself", () => {
-    // The nav labels arrive as data. Next.js resolves them on the server, where
-    // they cost the client bundle nothing; `apps/web` resolves them from the
-    // message cache. A `useTranslations` here would force `core.search` into
-    // every Next.js page's client provider for two words.
+    // The nav labels arrive as data, resolved from the message cache. A
+    // `useTranslations` here would force `core.search` into every page's
+    // client provider for two words.
     expect(code).not.toContain("useTranslations");
     expect(code).not.toContain("getTranslations");
   });
@@ -130,10 +97,8 @@ describe("the shared language switcher takes the navigation as a callback", () =
   });
 
   it("is the only copy of the dropdown", () => {
-    // There is one copy now, and this is it. The Next.js wrapper used to hold
-    // the navigation and nothing else, and the risk it carried was growing a
-    // second `DropdownMenu` - which would have meant two applications rendering
-    // different markup for the same control.
+    // One copy, and this is it. A second `DropdownMenu` would mean two
+    // applications rendering different markup for the same control.
     expect(code).toContain("DropdownMenu");
   });
 
@@ -142,13 +107,4 @@ describe("the shared language switcher takes the navigation as a callback", () =
     expect(code).not.toContain("useRouter");
     expect(code).not.toContain("React.Suspense");
   });
-});
-
-describe("the Next.js half of the header is gone", () => {
-  it.each(Object.entries(DELETED_NEXT_HALF))(
-    "%s no longer exists",
-    (_name, path) => {
-      expect(existsSync(path)).toBe(false);
-    },
-  );
 });

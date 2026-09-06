@@ -1,5 +1,3 @@
-"use client";
-
 import {
   DirectionProvider as DirectionProviderPrimitive,
   useDirection,

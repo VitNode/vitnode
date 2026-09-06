@@ -1,5 +1,3 @@
-"use client";
-
 import { LockIcon, PencilIcon, ShieldUserIcon, Trash2Icon } from "lucide-react";
 import { toast } from "sonner";
 import { useTranslations } from "use-intl";

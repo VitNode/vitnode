@@ -18,13 +18,11 @@ const browserOrigin = (): string | undefined => {
 
 export const CONFIG = {
   get api(): URL {
-    // `??` rather than `||`, deliberately: an empty `NEXT_PUBLIC_API_URL` is a
+    // `??` rather than `||`, deliberately: an empty `VITNODE_API_URL` is a
     // deployment that got it wrong, and `contentPreviewConfigProblems` reads the
     // throw to say so. Only an absent one falls through.
     return new URL(
-      process.env.NEXT_PUBLIC_API_URL ??
-        browserOrigin() ??
-        "http://localhost:3000",
+      process.env.VITNODE_API_URL ?? browserOrigin() ?? "http://localhost:3000",
     );
   },
   get cronJobSecret(): string {
@@ -34,6 +32,6 @@ export const CONFIG = {
     return process.env.NODE_ENV === "development";
   },
   get web(): URL {
-    return new URL(process.env.NEXT_PUBLIC_WEB_URL ?? "http://localhost:3000");
+    return new URL(process.env.VITNODE_WEB_URL ?? "http://localhost:3000");
   },
 };

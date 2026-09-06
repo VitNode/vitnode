@@ -14,7 +14,7 @@ describe("fetcherClient", () => {
   let fetchMock: ReturnType<typeof vi.fn>;
 
   beforeEach(() => {
-    vi.stubEnv("NEXT_PUBLIC_API_URL", "http://localhost:8000");
+    vi.stubEnv("VITNODE_API_URL", "http://localhost:8000");
     fetchMock = vi.fn(async () =>
       Promise.resolve(new Response("{}", { status: 200 })),
     );

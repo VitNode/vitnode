@@ -1,5 +1,3 @@
-"use client";
-
 import { useDroppable } from "@dnd-kit/core";
 import { LayoutGridIcon } from "lucide-react";
 import { useTranslations } from "use-intl";

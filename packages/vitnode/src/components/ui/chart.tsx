@@ -1,5 +1,3 @@
-"use client";
-
 import type { TooltipValueType } from "recharts";
 
 import React from "react";

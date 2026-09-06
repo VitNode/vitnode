@@ -134,7 +134,7 @@ Three consequences worth writing down:
 
 | Because the tick is an HTTP call…                     | …this is true                                                                          |
 | ----------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| it needs a URL                                        | the origin comes from `NEXT_PUBLIC_API_URL`, falling back to `http://localhost:3000`   |
+| it needs a URL                                        | the origin comes from `VITNODE_API_URL`, falling back to `http://localhost:3000`       |
 | the API must be able to reach itself over the network | a tick dies where that origin is wrong, unreachable, or fronted by an auth proxy       |
 | the request is authenticated like any other           | an unset `CRON_SECRET` means both sides use the well-known default, and the tick works |
 
@@ -142,9 +142,9 @@ Three consequences worth writing down:
 
 <Callout
   type="warn"
-  title="The tick posts to NEXT_PUBLIC_API_URL, not to the port you booted"
+  title="The tick posts to VITNODE_API_URL, not to the port you booted"
 >
-  `handleCronJobs()` builds its URL from `NEXT_PUBLIC_API_URL` and falls back to
+  `handleCronJobs()` builds its URL from `VITNODE_API_URL` and falls back to
   `http://localhost:3000`. This repo's standalone API listens on **8000** -
   which is exactly why `apps/api/.env.example` sets the variable - so leaving it
   unset sends every tick to port 3000, where the web app lives. Symptom: the

@@ -5,8 +5,8 @@ const STATIC_SEGMENT = /^[a-z0-9][a-z0-9._-]*$/;
 /** A parameter name, i.e. a JavaScript-ish identifier - it becomes one. */
 const PARAM_NAME = /^[a-zA-Z_][a-zA-Z0-9_]*$/;
 
-/** Next.js filesystem syntax: `[id]`, `[...slug]`, `[[...slug]]`. */
-const NEXT_SEGMENT = /^\[.*\]$/;
+/** Bracket filesystem syntax: `[id]`, `[...slug]`, `[[...slug]]`. */
+const BRACKET_SEGMENT = /^\[.*\]$/;
 
 export type ParseRoutePathResult =
   | { ok: false; reason: string }
@@ -19,11 +19,11 @@ const parseSegment = (
     return { reason: "it has an empty segment" };
   }
 
-  if (NEXT_SEGMENT.test(raw)) {
+  if (BRACKET_SEGMENT.test(raw)) {
     const name = raw.replace(/^\[+\.{0,3}|\]+$/g, "");
 
     return {
-      reason: `"${raw}" is Next.js filesystem syntax - write ":${name || "name"}" instead`,
+      reason: `"${raw}" is bracket filesystem syntax - write ":${name || "name"}" instead`,
     };
   }
 

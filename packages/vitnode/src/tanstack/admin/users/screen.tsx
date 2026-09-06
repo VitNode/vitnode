@@ -1,5 +1,3 @@
-"use client";
-
 import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 import React from "react";
 

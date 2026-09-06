@@ -1,4 +1,3 @@
-// No "use client": reached only from `history-action`, which is a client entry.
 import { useQuery } from "@tanstack/react-query";
 import { ChevronDownIcon, RotateCcwIcon } from "lucide-react";
 import React from "react";

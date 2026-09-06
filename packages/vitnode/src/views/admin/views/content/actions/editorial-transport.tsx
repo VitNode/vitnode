@@ -1,6 +1,3 @@
-// No "use client", for the same reason `../form/transport.tsx` has none: this is
-// only reached from a client entry, and a nested one cannot be resolved from
-// inside a published package.
 import React from "react";
 
 import type { ContentRevisionDetail } from "@/content/revisions";

@@ -63,7 +63,7 @@ const load = async (error: Error) =>
 describe("a record that is not there", () => {
   it("is the AdminCP's not-found, not an error screen", async () => {
     // The whole point: a stale link to a deleted article lands on the panel's
-    // own 404, inside the shell, exactly as the Next.js view did.
+    // own 404, inside the shell.
     await expect(
       load(new AdminRequestError(404, "blog.post #999999")),
     ).rejects.toSatisfy(isNotFound);

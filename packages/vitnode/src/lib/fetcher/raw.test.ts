@@ -33,7 +33,7 @@ const mountedApi = () => {
 
 describe("buildApiUrl", () => {
   beforeEach(() => {
-    vi.stubEnv("NEXT_PUBLIC_API_URL", ORIGIN);
+    vi.stubEnv("VITNODE_API_URL", ORIGIN);
   });
 
   afterEach(() => {
@@ -64,7 +64,7 @@ describe("buildApiUrl", () => {
   it("stays on the web origin when the API is mounted same-origin", () => {
     // The whole point of the mount: with the two origins equal, an SSR call
     // never leaves the process that is rendering the page.
-    vi.stubEnv("NEXT_PUBLIC_WEB_URL", ORIGIN);
+    vi.stubEnv("VITNODE_WEB_URL", ORIGIN);
 
     expect(
       buildApiUrl({ module: "middleware", path: "/", pluginId: PLUGIN_ID })
@@ -74,9 +74,9 @@ describe("buildApiUrl", () => {
 
   it("leaves the web origin when the API is configured elsewhere", () => {
     // Pins the env contract rather than an implementation: point
-    // `NEXT_PUBLIC_API_URL` at a second server and the same call becomes a
+    // `VITNODE_API_URL` at a second server and the same call becomes a
     // cross-origin one, cookies and CORS included.
-    vi.stubEnv("NEXT_PUBLIC_API_URL", "https://api.example.com");
+    vi.stubEnv("VITNODE_API_URL", "https://api.example.com");
 
     expect(
       buildApiUrl({ module: "middleware", path: "/", pluginId: PLUGIN_ID })
@@ -116,7 +116,7 @@ describe("rawApiFetch against the mounted API", () => {
   let api: ReturnType<typeof mountedApi>;
 
   beforeEach(() => {
-    vi.stubEnv("NEXT_PUBLIC_API_URL", ORIGIN);
+    vi.stubEnv("VITNODE_API_URL", ORIGIN);
     api = mountedApi();
     vi.stubGlobal(
       "fetch",
@@ -137,7 +137,7 @@ describe("rawApiFetch against the mounted API", () => {
   it("calls the origin passed on the call rather than the configured one", async () => {
     // `rawApiFetch` forwards the override to the URL builder, so a caller that
     // knows its origin per request never has to reach for `fetch` directly.
-    vi.stubEnv("NEXT_PUBLIC_API_URL", "http://localhost:3000");
+    vi.stubEnv("VITNODE_API_URL", "http://localhost:3000");
 
     await rawApiFetch({
       method: "get",

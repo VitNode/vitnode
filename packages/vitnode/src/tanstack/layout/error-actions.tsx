@@ -1,5 +1,3 @@
-"use client";
-
 import { useRouter } from "@tanstack/react-router";
 import { ArrowLeft, HomeIcon } from "lucide-react";
 import { useTranslations } from "use-intl";

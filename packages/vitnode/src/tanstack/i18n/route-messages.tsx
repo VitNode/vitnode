@@ -1,5 +1,3 @@
-"use client";
-
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { createElement } from "react";
 import { IntlProvider } from "use-intl";

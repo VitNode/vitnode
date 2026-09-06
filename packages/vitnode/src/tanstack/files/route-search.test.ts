@@ -261,9 +261,8 @@ describe("the table changes the URL through the route, not around it", () => {
     // column list of its own - cannot put a column in the URL that the API would
     // 400 on. The *direction* survives, and deliberately: `order` alone is what
     // the list route reads as its own default column in that direction
-    // (`orderBy: query.orderBy ? ... : core_files.createdAt`), and the Next.js
-    // page produces exactly the same URL from the same click. One contract, two
-    // frameworks - not two normalisations that agree until they don't.
+    // (`orderBy: query.orderBy ? ... : core_files.createdAt`). One contract for
+    // the whole app - not two normalisations that agree until they don't.
     expect(
       afterControl("", search =>
         toggleTableOrder(search, { column: "password", defaultOrder }),
@@ -301,8 +300,8 @@ describe("the table changes the URL through the route, not around it", () => {
 
   it("changes the page size as a number, so the URL says `first=20`", () => {
     // A *string* `'20'` is written to the address bar as `first=%2220%22` by
-    // TanStack Router's default serializer, which is neither what the Next.js
-    // page produces nor what a person pastes into a browser.
+    // TanStack Router's default serializer, which is not what the API reads nor
+    // what a person pastes into a browser.
     expect(afterControl("", search => withTablePageSize(search, 20))).toEqual({
       first: 20,
     });

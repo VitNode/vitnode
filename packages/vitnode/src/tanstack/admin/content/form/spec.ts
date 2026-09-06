@@ -1,5 +1,3 @@
-"use client";
-
 import { useSuspenseQuery } from "@tanstack/react-query";
 import React from "react";
 import { createTranslator } from "use-intl";

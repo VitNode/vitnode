@@ -1,5 +1,3 @@
-"use client";
-
 import { useMatches, useRouter } from "@tanstack/react-router";
 
 import { BreadcrumbTrailContent } from "@/views/breadcrumb/breadcrumb-trail-content";

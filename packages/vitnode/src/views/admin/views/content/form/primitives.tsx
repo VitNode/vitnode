@@ -1,5 +1,3 @@
-// No "use client": reached only from a layout, which is reached only from
-// `content-form`, which is already a client entry.
 import { EyeOffIcon, SaveIcon, SendIcon } from "lucide-react";
 import React from "react";
 import { useTranslations } from "use-intl";

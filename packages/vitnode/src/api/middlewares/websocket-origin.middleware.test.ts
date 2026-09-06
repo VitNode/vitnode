@@ -18,8 +18,8 @@ const upgrade = async (
 
 describe("websocketOriginMiddleware", () => {
   beforeEach(() => {
-    vi.stubEnv("NEXT_PUBLIC_WEB_URL", "https://web.example");
-    vi.stubEnv("NEXT_PUBLIC_API_URL", "https://api.example");
+    vi.stubEnv("VITNODE_WEB_URL", "https://web.example");
+    vi.stubEnv("VITNODE_API_URL", "https://api.example");
   });
 
   afterEach(() => {

@@ -75,7 +75,7 @@ export const contentI18nKeys = (
 };
 
 /**
- * The translator shape these lookups need, from either half of next-intl.
+ * The translator shape these lookups need.
  *
  * `getTranslations` and `useTranslations` type their keys as a union of every
  * message in the catalogue, which a key assembled at runtime cannot satisfy. One

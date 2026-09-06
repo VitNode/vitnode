@@ -295,7 +295,7 @@ export const buildContentTranslationRoutes = <
     pluginId,
     adminStaffPermission: { module, permission: CONTENT_PERMISSIONS.edit },
     route: {
-      // PUT, not PATCH: the Next.js API route handler exports no PATCH.
+      // PUT, not PATCH: an update replaces the translation it addresses.
       method: "put",
       path: "/{id}/translations/{locale}",
       description: `Update a ${name} translation`,
@@ -801,12 +801,12 @@ export const buildContentTranslationRoutes = <
   /**
    * Which languages this record is publicly reachable in, and under which URL.
    *
-   * Exists for the cache, and only incidentally for the screen. A Server Action
-   * runs in the web app and talks to the API over HTTP, so it cannot evaluate the
-   * fallback rule itself - and a second implementation of "is this locale public"
-   * living in the AdminCP is exactly the copy that drifts, with a stale page in
-   * one language as the symptom. It takes this snapshot on each side of a
-   * mutation and expires the difference.
+   * Exists for the cache, and only incidentally for the screen. The front end
+   * talks to the API over HTTP, so it cannot evaluate the fallback rule itself -
+   * and a second implementation of "is this locale public" living in the AdminCP
+   * is exactly the copy that drifts, with a stale page in one language as the
+   * symptom. It takes this snapshot on each side of a mutation and expires the
+   * difference.
    *
    * `can_view`, because it says no more than the public API already does - which
    * languages have a page, and what its slug is.

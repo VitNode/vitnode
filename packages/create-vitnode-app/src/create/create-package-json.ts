@@ -132,10 +132,10 @@ export const apiScripts = (
  *
  * That line went missing in Stage 17 and it is the regression this file was
  * fixed for. The reasoning at the time was correct about the half it was looking
- * at: `dev` used to be `vitnode init && next dev`, `init` also copied every
- * installed plugin's pages into `src/app/` for Next.js to find, and a plugin's
- * routes are compiled into `src/plugin-routes.gen.ts` by the app's own Vite
- * plugin now - so the *plugin* half of `init` really had nothing left to do. But
+ * at: `init` also copied every installed plugin's pages into the host app, and a
+ * plugin's routes are compiled into `src/plugin-routes.gen.ts` by the app's own
+ * Vite plugin now - so the *plugin* half of `init` really had nothing left to
+ * do. But
  * `init` had a second responsibility nobody was auditing, and dropping the whole
  * command dropped it too: apply pending migrations and seed the roles,
  * languages and permissions a VitNode installation cannot answer a request

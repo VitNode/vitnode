@@ -1,5 +1,3 @@
-"use client";
-
 import { ChevronsUpDownIcon } from "lucide-react";
 import React from "react";
 import { useDebouncedCallback } from "use-debounce";

@@ -1,5 +1,3 @@
-"use client";
-
 import type { ContentFormLayoutProps } from "@vitnode/core/lib/plugin";
 
 import {

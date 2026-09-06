@@ -168,12 +168,12 @@ The adapter builds absolute URLs as `{baseUrl}/{publicPath}/{key}`. `baseUrl`
 defaults to the configured API origin, so this env var is what decides whether
 your file URLs are reachable:
 
-| Variable              | Required    | What it is for                                                                                                                                                             |
-| :-------------------- | :---------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `NEXT_PUBLIC_API_URL` | Recommended | The public origin of the API. Used as the default `baseUrl`, so a wrong value produces URLs that 404. Falls back to the browser's own origin, then `http://localhost:3000` |
+| Variable          | Required    | What it is for                                                                                                                                                             |
+| :---------------- | :---------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `VITNODE_API_URL` | Recommended | The public origin of the API. Used as the default `baseUrl`, so a wrong value produces URLs that 404. Falls back to the browser's own origin, then `http://localhost:3000` |
 
 ```bash title=".env"
-NEXT_PUBLIC_API_URL=http://localhost:8000
+VITNODE_API_URL=http://localhost:8000
 ```
 
 Pass `baseUrl` explicitly if the files are fronted by a different hostname than
@@ -212,7 +212,7 @@ A `200` means the mount is right. A `404` with the file present on disk means th
     },
     baseUrl: {
       description:
-        'Origin used to build absolute URLs. Defaults to the configured API origin (`NEXT_PUBLIC_API_URL`).',
+        'Origin used to build absolute URLs. Defaults to the configured API origin (`VITNODE_API_URL`).',
       type: 'string',
     },
   }}

@@ -170,14 +170,14 @@ export const fetchSearchFeedPageInBrowser: SearchFeedPageFetcher =
  * status checking, and no route implements paging a second time.
  *
  * `fetchPage` is the seam. It defaults to the browser's fetcher, which is what
- * a Next.js client component wants and what a hydrated TanStack page wants too;
- * an app that also fetches during SSR passes one that can do both. It is a
- * plain async function rather than anything framework-shaped, so nothing about
- * this module knows which framework is rendering it.
+ * a hydrated page wants; an app that also fetches during SSR passes one that
+ * can do both. It is a plain async function rather than anything
+ * framework-shaped, so nothing about this module knows which framework is
+ * rendering it.
  *
  * `initialData` is for a server that already has page one in hand and no cache
- * to put it in - Next.js renders the feed from a Server Component and passes it
- * down. A framework that hydrates a real Query cache must **not** use it: the
+ * to put it in. A framework that hydrates a real Query cache must **not** use
+ * it: the
  * page is already in the entry this key names, and passing it again is a second
  * copy of the same bytes that can disagree with the first.
  *

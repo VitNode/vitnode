@@ -81,11 +81,10 @@ export interface ContentApiRead<TSchema extends z.ZodType> {
  * The response, parsed - or a thrown {@link AdminRequestError}.
  *
  * Throwing rather than returning a result object, and that is the difference
- * between this and `contentApiFetch`. The Next.js server actions return
- * `{ data?, error?, status }` because a Server Component decides what to render
- * from it; a TanStack Query function has to **reject**, or the failure is cached
- * as a value and the table renders empty - which looks exactly like a content
- * type with no records in it, the one thing a list must never look like.
+ * between this and `contentApiFetch`, which answers `{ data?, error?, status }`.
+ * A TanStack Query function has to **reject**, or the failure is cached as a
+ * value and the table renders empty - which looks exactly like a content type
+ * with no records in it, the one thing a list must never look like.
  *
  * A schema mismatch throws too, with the same class. It means the installed
  * plugin and the running API disagree about a content type's shape, which is a

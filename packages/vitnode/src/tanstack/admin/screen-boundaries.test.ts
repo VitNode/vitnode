@@ -8,23 +8,15 @@ const here = dirname(fileURLToPath(import.meta.url));
 const packageRoot = resolve(here, "../../..");
 const srcRoot = resolve(here, "../..");
 
-/**
- * Packages that only resolve inside a Next.js application - the package and
- * everything under it.
- */
-const NEXT_PACKAGES = ["next", "next-intl", "server-only"];
-
-const NEXT_MODULES = ["@/lib/fetcher", "@/lib/navigation"];
+/** Modules a browser cannot load: the explicit server fetcher and its barrel. */
+const SERVER_ONLY_MODULES = ["@/lib/fetcher"];
 
 const ALLOWED_PREFIX = "@tanstack/react-start/server-only";
 
 const isForbidden = (specifier: string): boolean => {
   if (specifier.startsWith(ALLOWED_PREFIX)) return false;
-  if (NEXT_MODULES.includes(specifier)) return true;
 
-  return NEXT_PACKAGES.some(
-    entry => specifier === entry || specifier.startsWith(`${entry}/`),
-  );
+  return SERVER_ONLY_MODULES.includes(specifier);
 };
 
 /** The specifier a `from "..."` resolves to, or `null` when it leaves the package. */
@@ -47,7 +39,7 @@ const resolveSpecifier = (specifier: string, from: string): null | string => {
  * Every specifier a file imports **at runtime**.
  *
  * `import type` statements are stripped first: a screen legitimately imports a
- * Next.js module's *types* - `zodSendTestEmailSchema` off an API route, the
+ * server module's *types* - `zodSendTestEmailSchema` off an API route, the
  * plugin config's shape - and those are erased at compile time rather than
  * reaching a bundle.
  */
@@ -108,22 +100,10 @@ const allScreens = readdirSync(here)
 /**
  * Every screen, with no opt-out list.
  *
- * There was one while the migration ran in waves - the seven screens whose
- * graphs were clean, written out by hand so a screen joined the rule "the moment
- * its graph is clean". It is gone, and the reason it is gone is worth keeping,
- * because it is the failure the list itself produced.
- *
- * `roles` sat on the excluded side with a note naming its exact chain:
- *
- *     roles/index.ts -> roles/route.tsx -> roles-table-content.tsx
- *       -> role-form-content.tsx -> components/form/fields/color.tsx
- *       -> components/ui/color-picker.tsx -> next-intl
- *
- * The note ended "whoever migrates it will meet it". The screen was then
- * migrated and shipped, the colour picker was not swapped, and the exclusion
- * stopped describing future work and started hiding a live violation - on a
- * route `apps/web` serves. Nothing failed, because the one test that looks had
- * been told not to look there.
+ * There was one once, and it hid a live violation on a route `apps/web` serves:
+ * the excluded screen was fixed everywhere except the one chain its note named,
+ * and nothing failed, because the one test that looks had been told not to look
+ * there.
  *
  * So the list is derived. A screen is guarded by existing, which means a new one
  * is guarded before anybody remembers this file, and a screen whose graph goes
@@ -153,10 +133,7 @@ describe("this test is looking at the right tree", () => {
   });
 
   it("recognises the import it exists to forbid", () => {
-    expect(isForbidden("server-only")).toBe(true);
     expect(isForbidden("@/lib/fetcher")).toBe(true);
-    expect(isForbidden("next/navigation")).toBe(true);
-    expect(isForbidden("next-intl/server")).toBe(true);
   });
 
   it("allows the Start marker a screen's server module needs", () => {
@@ -169,7 +146,7 @@ describe("this test is looking at the right tree", () => {
   });
 });
 
-describe("an AdminCP screen reaches nothing Next.js-only", () => {
+describe("an AdminCP screen reaches nothing server-only", () => {
   it.each(screens)("%s", screen => {
     const chain = forbiddenChain(join(here, screen, "index.ts"));
 
@@ -179,8 +156,8 @@ describe("an AdminCP screen reaches nothing Next.js-only", () => {
   });
 });
 
-describe("the shell barrel reaches nothing Next.js-only either", () => {
-  it("imports no Next.js module, directly or transitively", () => {
+describe("the shell barrel reaches nothing server-only either", () => {
+  it("imports no server-only module, directly or transitively", () => {
     // Every admin page loads this one, so it is the widest surface of the same
     // rule.
     const chain = forbiddenChain(join(here, "index.ts"));

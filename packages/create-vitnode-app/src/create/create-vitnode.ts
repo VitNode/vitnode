@@ -84,12 +84,12 @@ export const createVitNode = async ({
      *
      * It was one `Promise.all`, which is a race whenever the two trees share a
      * path. They shared two: `.gitignore_template` and `.env.example`. The
-     * overlay's copies were the pre-TanStack ones - ignoring `/.next/` and
-     * `next-env.d.ts` while missing `.output`, `.nitro` and the generated
-     * `src/*.gen.ts`, and dropping `NEXT_PUBLIC_API_URL` and `CRON_SECRET` from
-     * the environment - so which of the two a new project got depended on which
-     * `cp` finished last. Both are deleted; `root` owns every generic host file
-     * and `api-single-app` is a true overlay of API-specific additions.
+     * overlay's copies were stale - missing `.output`, `.nitro` and the
+     * generated `src/*.gen.ts`, and dropping `VITNODE_API_URL` and
+     * `CRON_SECRET` from the environment - so which of the two a new project got
+     * depended on which `cp` finished last. Both are deleted; `root` owns every
+     * generic host file and `api-single-app` is a true overlay of API-specific
+     * additions.
      *
      * The order stays explicit anyway. There is nothing overlapping left to
      * decide, but "the overlay is applied over the base" is the contract, and it

@@ -145,14 +145,14 @@ describe("static segments are lowercase", () => {
   it("keeps naming the framework syntaxes ahead of the case rule", () => {
     // `[Slug]` and `$Slug` are uppercase *and* the wrong syntax. The syntax is
     // the useful thing to say.
-    expect(reason("/example/[Slug]")).toContain("Next.js filesystem syntax");
+    expect(reason("/example/[Slug]")).toContain("bracket filesystem syntax");
     expect(reason("/example/$Slug")).toContain("TanStack Router syntax");
   });
 });
 
 describe("framework syntax is rejected by name", () => {
-  it("rejects Next.js filesystem syntax", () => {
-    expect(reason("/example/[slug]")).toContain("Next.js filesystem syntax");
+  it("rejects bracket filesystem syntax", () => {
+    expect(reason("/example/[slug]")).toContain("bracket filesystem syntax");
     expect(reason("/example/[slug]")).toContain('write ":slug"');
   });
 
@@ -165,7 +165,7 @@ describe("framework syntax is rejected by name", () => {
 describe("route shapes this prototype defers", () => {
   it("rejects a catch-all", () => {
     expect(reason("/example/*")).toContain("catch-all");
-    expect(reason("/example/[...slug]")).toContain("Next.js filesystem syntax");
+    expect(reason("/example/[...slug]")).toContain("bracket filesystem syntax");
   });
 
   it("rejects an optional segment", () => {

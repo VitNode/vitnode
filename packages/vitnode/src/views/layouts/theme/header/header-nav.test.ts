@@ -27,8 +27,8 @@ describe("the main nav", () => {
   });
 
   it("points at internal paths with no locale prefix", () => {
-    // The prefix is the router's to write - `rewrite.output` in `apps/web`, the
-    // locale-aware `Link` in Next.js. A prefix here would be a second one.
+    // The prefix is the router's to write - `rewrite.output` in `apps/web`.
+    // A prefix here would be a second one.
     for (const { href } of headerNavItems(labels)) {
       expect(href.startsWith("/")).toBe(true);
       expect(href).not.toMatch(/^\/(en|pl)\b/);
@@ -53,9 +53,9 @@ describe("the header's destinations", () => {
   });
 
   it("reads its labels from the namespace that already owns them", () => {
-    // `core.search.nav.*`, where the Next.js header has always read them.
-    // Shared as literals so a typed translator still checks them at each call
-    // site - the two translator *types* are not interchangeable.
+    // `core.search.nav.*`, where the header has always read them. Shared as
+    // literals so a typed translator still checks them at each call site - the
+    // two translator *types* are not interchangeable.
     expect(HEADER_NAV_MESSAGE_KEYS).toEqual({
       discover: "nav.discover",
       search: "nav.search",

@@ -36,7 +36,7 @@ config({ quiet: true });
 export const resolveApiOrigin = (): string => {
   // Through `CONFIG` rather than the variable directly, so the empty-value
   // throw stays in one place - see the `??` note there.
-  if (process.env.NEXT_PUBLIC_API_URL !== undefined) return CONFIG.api.origin;
+  if (process.env.VITNODE_API_URL !== undefined) return CONFIG.api.origin;
 
   try {
     return getRequestUrl().origin;
@@ -130,7 +130,7 @@ export async function fetcher<
       ...getForwardedApiHeaders({ captchaToken }),
       ...additionalHeaders,
     },
-    // `NEXT_PUBLIC_API_URL` when a separate API server is configured, this
+    // `VITNODE_API_URL` when a separate API server is configured, this
     // request's own origin otherwise - and an explicit `origin` on the call
     // overrides both.
     origin: origin ?? resolveApiOrigin(),

@@ -1,6 +1,3 @@
-// No "use client" here on purpose, for the same reason `content-form` has
-// none: this is only reached from a client entry, and declaring it again would
-// make it a nested one that `next/dynamic` cannot resolve from a package.
 import { TriangleAlertIcon } from "lucide-react";
 import React from "react";
 import { useTranslations } from "use-intl";

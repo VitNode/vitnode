@@ -1,5 +1,3 @@
-"use client";
-
 import {
   Outlet,
   useLoaderData,
@@ -92,9 +90,9 @@ export const pluginLayoutComponent = (
     return withMessages(
       namespaces,
       // `children` in the props rather than as `createElement`'s third argument
-      // because it is the layout's own prop - the plugin declares it, the same
-      // way a Next.js `layout.tsx` does - and it is applied last so a loader
-      // that returned a key of that name cannot displace the outlet.
+      // because it is the layout's own prop - the plugin declares it - and it is
+      // applied last so a loader that returned a key of that name cannot
+      // displace the outlet.
       createElement(Layout, {
         ...usePluginRoutePageProps(),
         // eslint-disable-next-line @eslint-react/jsx-no-children-prop

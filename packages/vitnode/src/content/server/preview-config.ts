@@ -19,13 +19,13 @@ const originProblem = (name: string, read: () => URL): null | string => {
  * Only the origins: the signing key is no longer something a deployment can get
  * wrong, because the install generates one for itself the first time anything
  * asks (see `ensureContentPreviewSecret`). What is left is the half a generated
- * value cannot supply - an unparseable `NEXT_PUBLIC_WEB_URL` means the link
+ * value cannot supply - an unparseable `VITNODE_WEB_URL` means the link
  * that comes back is not a link.
  */
 export const contentPreviewConfigProblems = (): string[] => {
   const problems = [
-    originProblem("NEXT_PUBLIC_WEB_URL", () => CONFIG.web),
-    originProblem("NEXT_PUBLIC_API_URL", () => CONFIG.api),
+    originProblem("VITNODE_WEB_URL", () => CONFIG.web),
+    originProblem("VITNODE_API_URL", () => CONFIG.api),
   ];
 
   return problems.filter((problem): problem is string => problem !== null);

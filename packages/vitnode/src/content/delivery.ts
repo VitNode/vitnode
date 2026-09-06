@@ -433,7 +433,7 @@ export const contentDeliveryPath = ({
  * A canonical path turned absolute, when the caller has an origin.
  *
  * `origin` is whatever the request or the deployment says it is - a configured
- * public URL, `NEXT_PUBLIC_WEB_URL`, a forwarded host. It is separate from the
+ * public URL, `VITNODE_WEB_URL`, a forwarded host. It is separate from the
  * path for the reason {@link contentDeliveryPath} explains, and it is validated
  * here rather than concatenated: `https://example.com` and
  * `https://example.com/` have to produce the same URL, and a malformed origin

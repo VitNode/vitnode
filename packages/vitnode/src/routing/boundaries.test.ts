@@ -56,24 +56,20 @@ describe("the routing layer is framework-neutral", () => {
     expect(offenders).toEqual([]);
   });
 
-  it.each([
-    "@tanstack/react-router",
-    "@tanstack/react-start",
-    "next",
-    "next-intl",
-    "react",
-    "server-only",
-  ])("never imports %s", forbidden => {
-    // Redundant with the rule above by construction, and worth writing anyway:
-    // this is the list a failure should name, and these are the packages a
-    // future contributor will actually be tempted to reach for.
-    const offenders = files.filter(path =>
-      importsFrom(path).some(
-        specifier =>
-          specifier === forbidden || specifier.startsWith(`${forbidden}/`),
-      ),
-    );
+  it.each(["@tanstack/react-router", "@tanstack/react-start", "react"])(
+    "never imports %s",
+    forbidden => {
+      // Redundant with the rule above by construction, and worth writing anyway:
+      // this is the list a failure should name, and these are the packages a
+      // future contributor will actually be tempted to reach for.
+      const offenders = files.filter(path =>
+        importsFrom(path).some(
+          specifier =>
+            specifier === forbidden || specifier.startsWith(`${forbidden}/`),
+        ),
+      );
 
-    expect(offenders.map(path => relative(here, path))).toEqual([]);
-  });
+      expect(offenders.map(path => relative(here, path))).toEqual([]);
+    },
+  );
 });

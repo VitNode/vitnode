@@ -6,9 +6,9 @@ import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { vitNodeEnv } from "./env";
 
 const ENV_FILE = [
-  "NEXT_PUBLIC_API_URL=https://api.example.test",
-  "NEXT_PUBLIC_WEB_URL=https://web.example.test",
-  "NEXT_PUBLIC_UNLISTED=also-public-by-name",
+  "VITNODE_API_URL=https://api.example.test",
+  "VITNODE_WEB_URL=https://web.example.test",
+  "VITNODE_UNLISTED=also-public-by-name",
   "POSTGRES_URL=postgresql://root:hunter2@db.internal:5432/vitnode",
   "CRON_SECRET=super-secret",
   "REDIS_PASSWORD=another-secret",
@@ -16,10 +16,10 @@ const ENV_FILE = [
 
 const TOUCHED = [
   "CRON_SECRET",
-  "NEXT_PUBLIC_API_URL",
-  "NEXT_PUBLIC_EXTRA",
-  "NEXT_PUBLIC_UNLISTED",
-  "NEXT_PUBLIC_WEB_URL",
+  "VITNODE_API_URL",
+  "VITNODE_EXTRA",
+  "VITNODE_UNLISTED",
+  "VITNODE_WEB_URL",
   "POSTGRES_URL",
   "REDIS_PASSWORD",
 ];
@@ -75,36 +75,34 @@ describe("vitNodeEnv", () => {
     expect(process.env.POSTGRES_URL).toBe(
       "postgresql://root:hunter2@db.internal:5432/vitnode",
     );
-    expect(process.env.NEXT_PUBLIC_API_URL).toBe("https://api.example.test");
+    expect(process.env.VITNODE_API_URL).toBe("https://api.example.test");
   });
 
   it("lets a real environment variable win over the .env file", async () => {
-    process.env.NEXT_PUBLIC_API_URL = "https://from-the-platform.test";
+    process.env.VITNODE_API_URL = "https://from-the-platform.test";
 
     await runConfig(root);
 
-    expect(process.env.NEXT_PUBLIC_API_URL).toBe(
-      "https://from-the-platform.test",
-    );
+    expect(process.env.VITNODE_API_URL).toBe("https://from-the-platform.test");
   });
 
   it("inlines the API and web URLs into the client bundle", async () => {
     expect(clientDefine(await runConfig(root))).toStrictEqual({
-      "process.env.NEXT_PUBLIC_API_URL": '"https://api.example.test"',
-      "process.env.NEXT_PUBLIC_WEB_URL": '"https://web.example.test"',
+      "process.env.VITNODE_API_URL": '"https://api.example.test"',
+      "process.env.VITNODE_WEB_URL": '"https://web.example.test"',
     });
   });
 
   it("publishes nothing to the client beyond the listed keys", async () => {
     // The point of an explicit list. A secret reaching a browser bundle is not
-    // recoverable by rotating a build, and `NEXT_PUBLIC_UNLISTED` shows that
+    // recoverable by rotating a build, and `VITNODE_UNLISTED` shows that
     // even a public-looking name is not enough to get there.
     const define = clientDefine(await runConfig(root));
 
     for (const secret of ["POSTGRES_URL", "CRON_SECRET", "REDIS_PASSWORD"]) {
       expect(define).not.toHaveProperty(`process.env.${secret}`);
     }
-    expect(define).not.toHaveProperty("process.env.NEXT_PUBLIC_UNLISTED");
+    expect(define).not.toHaveProperty("process.env.VITNODE_UNLISTED");
     expect(JSON.stringify(define)).not.toContain("hunter2");
   });
 
@@ -121,11 +119,11 @@ describe("vitNodeEnv", () => {
   it("replaces an unset key with undefined rather than leaving the read in", async () => {
     writeFileSync(join(root, ".env"), "POSTGRES_URL=postgresql://only/this");
 
-    // Left in place, `process.env.NEXT_PUBLIC_API_URL` throws in a browser
+    // Left in place, `process.env.VITNODE_API_URL` throws in a browser
     // instead of falling through to the default the core config has for it.
     expect(clientDefine(await runConfig(root))).toStrictEqual({
-      "process.env.NEXT_PUBLIC_API_URL": "undefined",
-      "process.env.NEXT_PUBLIC_WEB_URL": "undefined",
+      "process.env.VITNODE_API_URL": "undefined",
+      "process.env.VITNODE_WEB_URL": "undefined",
     });
   });
 
@@ -133,26 +131,24 @@ describe("vitNodeEnv", () => {
     it("publishes an application's own key alongside the package's", async () => {
       writeFileSync(
         join(root, ".env"),
-        `${ENV_FILE}\nNEXT_PUBLIC_EXTRA=from-the-app`,
+        `${ENV_FILE}\nVITNODE_EXTRA=from-the-app`,
       );
 
       expect(
-        clientDefine(
-          await runConfig(root, { clientEnv: ["NEXT_PUBLIC_EXTRA"] }),
-        ),
+        clientDefine(await runConfig(root, { clientEnv: ["VITNODE_EXTRA"] })),
       ).toStrictEqual({
-        "process.env.NEXT_PUBLIC_API_URL": '"https://api.example.test"',
-        "process.env.NEXT_PUBLIC_EXTRA": '"from-the-app"',
-        "process.env.NEXT_PUBLIC_WEB_URL": '"https://web.example.test"',
+        "process.env.VITNODE_API_URL": '"https://api.example.test"',
+        "process.env.VITNODE_EXTRA": '"from-the-app"',
+        "process.env.VITNODE_WEB_URL": '"https://web.example.test"',
       });
     });
 
     it("defines an unset one too, so the read is still replaced", async () => {
       const define = clientDefine(
-        await runConfig(root, { clientEnv: ["NEXT_PUBLIC_EXTRA"] }),
+        await runConfig(root, { clientEnv: ["VITNODE_EXTRA"] }),
       );
 
-      expect(define["process.env.NEXT_PUBLIC_EXTRA"]).toBe("undefined");
+      expect(define["process.env.VITNODE_EXTRA"]).toBe("undefined");
     });
 
     it("does not let an app publish a secret by naming it", async () => {
@@ -164,19 +160,19 @@ describe("vitNodeEnv", () => {
       const define = clientDefine(await runConfig(root, { clientEnv: [] }));
 
       expect(Object.keys(define)).toStrictEqual([
-        "process.env.NEXT_PUBLIC_API_URL",
-        "process.env.NEXT_PUBLIC_WEB_URL",
+        "process.env.VITNODE_API_URL",
+        "process.env.VITNODE_WEB_URL",
       ]);
     });
 
     it("de-duplicates a key the package already publishes", async () => {
       const define = clientDefine(
-        await runConfig(root, { clientEnv: ["NEXT_PUBLIC_API_URL"] }),
+        await runConfig(root, { clientEnv: ["VITNODE_API_URL"] }),
       );
 
       expect(Object.keys(define)).toStrictEqual([
-        "process.env.NEXT_PUBLIC_API_URL",
-        "process.env.NEXT_PUBLIC_WEB_URL",
+        "process.env.VITNODE_API_URL",
+        "process.env.VITNODE_WEB_URL",
       ]);
     });
   });

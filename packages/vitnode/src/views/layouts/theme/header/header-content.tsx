@@ -1,5 +1,3 @@
-"use client";
-
 import { ThemeSwitcher } from "@/components/switchers/themes/theme-switcher";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";

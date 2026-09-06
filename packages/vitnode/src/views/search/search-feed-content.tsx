@@ -1,5 +1,3 @@
-"use client";
-
 import { useInfiniteQuery } from "@tanstack/react-query";
 import React from "react";
 import { useTranslations } from "use-intl";

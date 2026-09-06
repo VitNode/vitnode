@@ -1,5 +1,3 @@
-"use client";
-
 import { useTranslations } from "use-intl";
 
 import type { RegisteredFrontendContentType } from "@/content/index";

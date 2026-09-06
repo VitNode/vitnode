@@ -683,9 +683,9 @@ export const databaseBootstrapSteps = ({
  * It was `vitnode init` until Stage 17, and the rename is not cosmetic. That
  * command had two responsibilities bolted together: it prepared the database,
  * and - through `preparePluginsFiles` - it copied every installed plugin's pages
- * into the host app's `src/app/[locale]/…` so Next.js could see them. Removing
- * the copier removed the reason `init` was called `init`, and left a command
- * whose name promised a project-wide setup while doing one thing.
+ * into the host app so the host could see them. Removing the copier removed the
+ * reason `init` was called `init`, and left a command whose name promised a
+ * project-wide setup while doing one thing.
  *
  * A plugin's routes are compiled into a literal registry by the app's own Vite
  * plugin now, on every dev start and every build. Nothing here prepares a

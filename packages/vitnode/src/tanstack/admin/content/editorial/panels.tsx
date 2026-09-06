@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 
 import { DeliveryContentPanel } from "@/views/admin/views/content/actions/delivery-action";

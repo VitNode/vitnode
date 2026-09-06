@@ -1,5 +1,3 @@
-"use client";
-
 import { BrushCleaningIcon } from "lucide-react";
 import { toast } from "sonner";
 import { useTranslations } from "use-intl";

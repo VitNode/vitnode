@@ -1,5 +1,3 @@
-"use client";
-
 import { BugIcon, HomeIcon, LogOut } from "lucide-react";
 import { useTranslations } from "use-intl";
 

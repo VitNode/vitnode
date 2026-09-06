@@ -1,5 +1,3 @@
-"use client";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAnimate, useReducedMotion } from "motion/react";
 import { useEffect } from "react";

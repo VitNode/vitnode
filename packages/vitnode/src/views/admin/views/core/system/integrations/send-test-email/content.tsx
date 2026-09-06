@@ -1,5 +1,3 @@
-"use client";
-
 import { MailCheckIcon } from "lucide-react";
 import { useTranslations } from "use-intl";
 

@@ -80,7 +80,7 @@ beforeEach(() => {
     );
   });
   vi.stubGlobal("fetch", apiFetch);
-  vi.stubEnv("NEXT_PUBLIC_API_URL", undefined);
+  vi.stubEnv("VITNODE_API_URL", undefined);
   requestHeaders.set("cookie", "vitnode_auth=abc");
   queryClient = new QueryClient({
     defaultOptions: { queries: { retry: false } },

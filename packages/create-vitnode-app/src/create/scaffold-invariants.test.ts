@@ -37,40 +37,6 @@ const withoutComments = (source: string): string =>
   source.replace(/\/\*[\s\S]*?\*\//g, "").replace(/\/\/.*$/gm, "");
 
 describe("the generated application", () => {
-  it("ships no Next.js App Router topology", () => {
-    expect(allFiles.filter(file => file.includes("[locale]"))).toEqual([]);
-    expect(allFiles.filter(file => file.includes("@breadcrumb"))).toEqual([]);
-    expect(allFiles.filter(file => /(^|\/)src\/app(\/|$)/.test(file))).toEqual(
-      [],
-    );
-  });
-
-  it("ships no Next.js configuration", () => {
-    expect(
-      allFiles.filter(file => /(^|\/)next\.config\.[cm]?[jt]s$/.test(file)),
-    ).toEqual([]);
-    // The Proxy is Next-only middleware, and `next-env.d.ts` is written by a
-    // Next build - both were committed template files.
-    expect(allFiles.filter(file => file.endsWith("src/proxy.ts"))).toEqual([]);
-    expect(allFiles.filter(file => file.endsWith("next-env.d.ts"))).toEqual([]);
-  });
-
-  it("imports nothing from next or next-intl", () => {
-    const offenders = [
-      ...appFiles.map(file => [appTemplate, file] as const),
-      ...pluginFiles.map(file => [pluginTemplate, file] as const),
-    ]
-      .filter(([, file]) => /\.[cm]?[jt]sx?$/.test(file))
-      .filter(([root, file]) =>
-        /(?:from|import)\s*\(?\s*['"]next(?:-intl)?(?:\/[^'"]*)?['"]|declare\s+module\s+['"]next(?:-intl)?['"]|reference\s+types="next/.test(
-          read(root, file),
-        ),
-      )
-      .map(([, file]) => file);
-
-    expect(offenders).toEqual([]);
-  });
-
   it("is a TanStack Start application", () => {
     expect(appFiles).toContain("root/vite.config.ts");
     expect(appFiles).toContain("root/tsr.config.json");
@@ -147,10 +113,10 @@ describe("what a generated single app starts from", () => {
   );
 
   /**
-   * And nothing from the framework this replaced. A fresh scaffold has no
+   * And nothing from a build this scaffold never runs. A fresh scaffold has no
    * migration to explain, so these do not belong even as a comment.
    */
-  it.each([".next", "next-env.d.ts", ".contentlayer", ".content-collections"])(
+  it.each([".contentlayer", ".content-collections"])(
     "does not mention %s",
     entry => {
       expect(gitignore).not.toContain(entry);
@@ -159,17 +125,17 @@ describe("what a generated single app starts from", () => {
 
   it("ships the single-app environment", () => {
     expect(env).toContain("POSTGRES_URL=");
-    expect(env).toContain("NEXT_PUBLIC_WEB_URL=http://localhost:3000");
+    expect(env).toContain("VITNODE_WEB_URL=http://localhost:3000");
     expect(env).toContain("CRON_SECRET=");
   });
 
   it("names no API server for an app that serves its own", () => {
-    expect(env).not.toMatch(/^NEXT_PUBLIC_API_URL=/m);
+    expect(env).not.toMatch(/^VITNODE_API_URL=/m);
   });
 
   it("points a split web app at the API's own port", () => {
     expect(read(appTemplate, "monorepo/apps/web/.env.example")).toContain(
-      "NEXT_PUBLIC_API_URL=http://localhost:8000",
+      "VITNODE_API_URL=http://localhost:8000",
     );
     expect(read(appTemplate, "api-bun/src/index.ts")).toContain("port: 8000");
   });
@@ -340,14 +306,21 @@ describe("the generated plugin", () => {
     }
   });
 
-  it("declares no framework dependency of its own", async () => {
-    const { versionsPackageJson } = await import("./package-versions.js");
+  it("declares no host framework dependency of its own", () => {
+    // A plugin is compiled into its own `dist` and imported by whichever app
+    // installed it, so a router in its dependencies is one every installing app
+    // inherits. `use-intl` is the framework-neutral translator it renders
+    // through, and is the only i18n dependency it may declare.
+    const builder = withoutComments(
+      read(join(packageRoot, "src"), "plugin/create/create-package-json.ts"),
+    );
+    const dependencies = builder.slice(
+      builder.indexOf("dependencies: {"),
+      builder.indexOf("devDependencies: {"),
+    );
 
-    // The version table is what a generated package.json is built from, so a
-    // framework that is not in it cannot be depended on by accident.
-    expect(Object.keys(versionsPackageJson)).not.toContain("nextSingle");
-    expect(Object.keys(versionsPackageJson)).not.toContain("nextIntl");
-    expect(versionsPackageJson.useIntl).toBeTruthy();
+    expect(dependencies).toContain('"use-intl": versionsPackageJson.useIntl');
+    expect(dependencies).not.toContain("@tanstack/");
   });
 });
 

@@ -1,6 +1,6 @@
 ---
 title: Public API and Caching
-description: Expose safe Content Engine fields from a plugin API and configure cache invalidation without framework-specific server actions.
+description: Expose safe Content Engine fields from a plugin API and configure cache invalidation without framework-specific glue.
 icon: Globe
 ---
 
@@ -83,7 +83,7 @@ export const vitNodeApiConfig = buildApiConfig({
 ```
 
 Leave this unset when the front end reads directly from the public content API.
-There is no server action to wire up in a plugin.
+There is nothing else to wire up in a plugin.
 
   </Step>
 </Steps>

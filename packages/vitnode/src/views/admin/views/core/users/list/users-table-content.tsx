@@ -1,5 +1,3 @@
-"use client";
-
 import { CheckIcon, MailIcon, PenIcon, UserSearchIcon } from "lucide-react";
 import React from "react";
 import { toast } from "sonner";
@@ -71,14 +69,11 @@ const UserRowActions = ({
 /**
  * Marks a user's email verified.
  *
- * A button and `React.useTransition` rather than the `useActionState` +
- * `<form action>` pair this replaces: a form action is a Server Action binding,
- * and the write here is an ordinary promise the caller supplied. The pending
- * state, the icon and the tooltip are the same either way.
+ * A button and `React.useTransition` rather than a form binding: the write here
+ * is an ordinary promise the caller supplied.
  *
  * The toast is the caller's, not this component's: what "it worked" should say
- * differs between an application that revalidates a path and one that
- * invalidates a query, and neither belongs in a table cell.
+ * is the host's decision, and it does not belong in a table cell.
  */
 const VerifyEmailButton = ({
   emailVerified,

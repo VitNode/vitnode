@@ -1,5 +1,3 @@
-"use client";
-
 import { FileIcon } from "lucide-react";
 import React from "react";
 

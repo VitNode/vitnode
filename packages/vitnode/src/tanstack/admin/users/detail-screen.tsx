@@ -1,5 +1,3 @@
-"use client";
-
 import { useSuspenseQuery } from "@tanstack/react-query";
 
 import type { AuthLinkComponent } from "@/views/auth/auth-link";

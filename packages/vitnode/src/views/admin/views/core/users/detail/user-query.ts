@@ -99,10 +99,9 @@ export const adminUserQueryOptions = ({
  *
  * Two permissions, and the second one only sometimes: `users:can_edit` is the
  * baseline, and editing somebody who is *themselves* an administrator
- * additionally needs `users:can_edit_admin`. That is the rule the Next.js detail
- * screen applies with `getSessionAdminApi()` and the one the API enforces on
- * write (`assertCanEditAdminTarget`), stated here so both frontends apply the
- * same one.
+ * additionally needs `users:can_edit_admin`. That is the rule the API enforces
+ * on write (`assertCanEditAdminTarget`), stated here so the detail screen
+ * applies the same one.
  *
  * Pure: the permission set goes in, a boolean comes out. It decides what is
  * *shown*; the API decides what is allowed.

@@ -123,7 +123,7 @@ describe("setAuthCookie", () => {
     });
 
     it("is opt-in, not derived from anything", () => {
-      // The regression this closes: a domain guessed from `NEXT_PUBLIC_WEB_URL`
+      // The regression this closes: a domain guessed from `VITNODE_WEB_URL`
       // is `localhost` in development and the production domain on a preview
       // deployment - wrong in both places, and silent.
       expect(

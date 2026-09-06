@@ -1,5 +1,3 @@
-"use client";
-
 import { ArrowDown, ArrowUp, ChevronsUpDown } from "lucide-react";
 import React from "react";
 

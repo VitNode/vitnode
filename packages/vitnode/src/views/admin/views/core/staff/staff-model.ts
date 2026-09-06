@@ -52,8 +52,8 @@ export const staffEditHref = (
  * `/admin/core/staff` is a nav *group* with no page of its own, and
  * `/admin/core/staff/admins` is in the sidebar under a shorter name than the
  * page's own heading - so both are named explicitly rather than humanised from
- * the URL. Returned as data so the Next.js `@breadcrumb` slot and the TanStack
- * `staticData.breadcrumb` build the same trail from the same two strings.
+ * the URL. Returned as data so every route's `staticData.breadcrumb` builds the
+ * same trail from the same two strings.
  */
 export const staffBreadcrumbLabels = ({
   listLabel,
@@ -137,8 +137,8 @@ export interface StaffPluginGroup {
  * The AdminCP's permission labels are *flat top-level message keys* -
  * `"@vitnode/core:users:can_view"` - because a plugin declares them in its own
  * locale file and they have to merge into one tree. So the lookup is
- * "translate this exact key, or tell me you cannot", which is what both
- * `next-intl`'s root translator and a plain resolved map can answer.
+ * "translate this exact key, or tell me you cannot", which is what both a root
+ * translator and a plain resolved map can answer.
  */
 export type StaffLabelLookup = (key: string) => string | undefined;
 

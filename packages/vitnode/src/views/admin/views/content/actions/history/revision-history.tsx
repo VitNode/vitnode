@@ -1,4 +1,3 @@
-// No "use client": reached only from `history-action`, which is a client entry.
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { HistoryIcon } from "lucide-react";
 import React from "react";

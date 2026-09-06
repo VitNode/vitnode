@@ -1,7 +1,3 @@
-// No "use client" here on purpose: this module is only reached from
-// `content-form`, which is already a client entry.
-// Declaring it again would make it a nested client entry, and `next/dynamic`
-// cannot resolve one from inside a published package.
 import React from "react";
 
 import type {

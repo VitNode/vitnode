@@ -1,5 +1,3 @@
-"use client";
-
 import { useSuspenseQuery } from "@tanstack/react-query";
 import React from "react";
 import { useTranslations } from "use-intl";
@@ -184,10 +182,9 @@ export const ContentListActions = ({
  * The boundary is here rather than around the whole screen on purpose: the
  * heading, the breadcrumb and the create button are known before any request,
  * so a list that is still loading shows a table-shaped skeleton under a real
- * heading rather than replacing the page. It is the same
- * `<Suspense fallback={<DataTableSkeleton …>}>` the Next.js page wraps
- * `ContentTableView` in, with the same column count and the same toolbar rule -
- * and it is a boundary for this screen, not a second global strategy.
+ * heading rather than replacing the page. The fallback matches
+ * `ContentTableView`'s column count and toolbar rule, and it is a boundary for
+ * this screen, not a second global strategy.
  */
 export const ContentListScreen = ({
   contentTypeId,

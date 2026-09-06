@@ -1,5 +1,3 @@
-"use client";
-
 import { ArrowLeftIcon } from "lucide-react";
 
 import type { AuthLinkComponent } from "@/views/auth/auth-link";

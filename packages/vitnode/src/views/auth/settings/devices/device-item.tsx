@@ -1,5 +1,3 @@
-"use client";
-
 import { MonitorIcon, SmartphoneIcon, TabletIcon } from "lucide-react";
 import { useTranslations } from "use-intl";
 

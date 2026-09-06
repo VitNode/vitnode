@@ -1,5 +1,3 @@
-"use client";
-
 import { useTranslations } from "use-intl";
 
 import { DateFormat } from "@/components/date-format";

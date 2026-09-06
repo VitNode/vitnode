@@ -1,5 +1,3 @@
-"use client";
-
 import { SearchIcon } from "lucide-react";
 import { z } from "zod";
 

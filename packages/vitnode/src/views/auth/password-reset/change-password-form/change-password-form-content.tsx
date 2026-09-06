@@ -1,5 +1,3 @@
-"use client";
-
 import { useTranslations } from "use-intl";
 
 import { AutoForm } from "@/components/form/auto-form";

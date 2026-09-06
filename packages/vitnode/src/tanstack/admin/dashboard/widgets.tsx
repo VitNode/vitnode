@@ -1,5 +1,3 @@
-"use client";
-
 import { NotebookPenIcon, SendIcon } from "lucide-react";
 
 import type {

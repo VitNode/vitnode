@@ -44,7 +44,7 @@ beforeEach(() => {
   apiFetch.mockReset();
   apiFetch.mockReturnValue(new Response("{}", { status: 200 }));
   vi.stubGlobal("fetch", apiFetch);
-  vi.stubEnv("NEXT_PUBLIC_API_URL", undefined);
+  vi.stubEnv("VITNODE_API_URL", undefined);
   requestUrl = "https://preview.example.com/discover";
   requestHeaders.set("cookie", "vitnode_auth=abc");
   requestHeaders.set("user-agent", "Mozilla/5.0");
@@ -84,7 +84,7 @@ describe("the server branch is the request-aware transport", () => {
   });
 
   it("calls a separately configured API server instead of itself", async () => {
-    vi.stubEnv("NEXT_PUBLIC_API_URL", "http://localhost:8000");
+    vi.stubEnv("VITNODE_API_URL", "http://localhost:8000");
 
     await fetcher(users, { method: "get", module: "users", path: "/session" });
 
@@ -123,7 +123,7 @@ describe("the server branch is the request-aware transport", () => {
 
 describe("the browser branch talks to the Hono API directly", () => {
   beforeEach(() => {
-    vi.stubEnv("NEXT_PUBLIC_API_URL", "http://localhost:8000");
+    vi.stubEnv("VITNODE_API_URL", "http://localhost:8000");
   });
 
   it("makes one request, to /api/*, with the browser's own cookies", async () => {

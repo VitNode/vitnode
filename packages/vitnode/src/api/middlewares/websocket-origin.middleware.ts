@@ -45,7 +45,7 @@ export const websocketOriginMiddleware = ({
 }: {
   /**
    * Extra origins allowed to open a socket, beyond the configured web and API
-   * origins. Pass the front end's origin when it is not `NEXT_PUBLIC_WEB_URL`.
+   * origins. Pass the front end's origin when it is not `VITNODE_WEB_URL`.
    */
   origin?: string[];
 } = {}) => {
