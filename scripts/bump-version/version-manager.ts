@@ -78,7 +78,7 @@ export class VersionManager {
 
     if (RELEASE_TYPE === "canary" || RELEASE_TYPE === "release-candidate") {
       const type = RELEASE_TYPE === "canary" ? "canary" : "rc";
-      if (currentVersion.includes(type)) {
+      if (currentVersion.includes("-")) {
         return `prerelease --preid=${type}`;
       }
       switch (VERSION_TYPE) {
