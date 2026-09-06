@@ -34,7 +34,6 @@ import { collectLocaleCodes } from "@/lib/i18n/load-messages";
 import { buildApiMessagesSources } from "@/lib/i18n/sources";
 import { realtime } from "@/ws/registry";
 
-import type { TrustProxyConfig } from "../lib/client-ip";
 import type { BuildCronReturn } from "../lib/cron";
 import type { EventListenerConfig } from "../lib/events";
 import type { PermissionStaffCatalogEntry } from "../lib/permission-staff";
@@ -172,7 +171,6 @@ export const globalMiddleware = ({
   search,
   storage,
   cacheClient,
-  trustProxy,
 }: Pick<
   VitNodeApiConfig,
   | "ai"
@@ -190,7 +188,6 @@ export const globalMiddleware = ({
 > &
   Pick<VitNodeConfig, "metadata"> & {
     cacheClient: CacheClient | null;
-    trustProxy: TrustProxyConfig | undefined;
   }) => {
   const pluginsMetadata = plugins.map(plugin => ({
     id: plugin.pluginId,
@@ -319,12 +316,8 @@ export const globalMiddleware = ({
   );
 
   return async (c: Context, next: Next) => {
-    // Normally already resolved by `clientIpMiddleware`, which `VitNodeAPI`
-    // registers ahead of the rate limiter. Repeated here only so that composing
-    // this middleware by hand still yields an `ipAddress`, rather than leaving
-    // an `undefined` one to be used silently as a rate-limit key.
     if (!c.get("ipAddress")) {
-      c.set("ipAddress", resolveClientIp(c, trustProxy));
+      c.set("ipAddress", resolveClientIp(c));
     }
     c.set("db", dbProvider);
     c.set("ai", new AIModel(c));

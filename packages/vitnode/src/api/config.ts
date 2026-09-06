@@ -89,10 +89,7 @@ export function VitNodeAPI({
 
   app.use(cors(corsOptions));
   app.use(csrf(csrfOptions));
-  // Before the rate limiter, which keys its buckets on `ipAddress`. Resolving it
-  // later - as `globalMiddleware` used to - left every request in the
-  // deployment sharing one bucket named after `undefined`.
-  app.use("*", clientIpMiddleware(vitNodeApiConfig.trustProxy));
+  app.use("*", clientIpMiddleware);
   // Nothing bounded a request body before this. `POST /sign_in` reads its JSON
   // and then runs scrypt unconditionally, so a body the server is willing to
   // buffer is memory *and* CPU an unauthenticated caller gets to choose the size
@@ -130,7 +127,6 @@ export function VitNodeAPI({
       storage: vitNodeApiConfig.storage,
       plugins,
       cacheClient: redisClient,
-      trustProxy: vitNodeApiConfig.trustProxy,
     }),
   );
   app.use(async (c, next) => {

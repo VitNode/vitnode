@@ -165,11 +165,13 @@ every time, to both the table and the console. If you want less noise, log less.
   installation runs. Log events, not traffic.
 </Callout>
 
-<Callout type="warn" title="Behind a proxy, every log line says 127.0.0.1">
-  The IP on a log row - and the rate-limit bucket - comes from the request's
-  `X-Forwarded-For` header, falling back to `127.0.0.1` when there is none. A
-  reverse proxy that does not set it makes every visitor look like the same one.
-  See the [reverse proxy step](/docs/dev/deployments/self-hosted).
+<Callout type="warn" title="Behind a proxy, every log line says the same IP">
+  The IP on a log row - and the rate-limit bucket - is the address of the socket
+  VitNode is talking to, because `X-Forwarded-For` is a header the caller writes
+  and nobody should get to pick their own audit trail. Behind a reverse proxy
+  that socket is the proxy, so every visitor looks like the same one. Put the
+  per-visitor rate limit in the [proxy
+  itself](/docs/dev/deployments/self-hosted), where the address is real.
 </Callout>
 
 <Callout type="info" title="Clear Cache clears the front end, not Redis">

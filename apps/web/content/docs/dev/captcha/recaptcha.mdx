@@ -204,11 +204,11 @@ Useful when the console's numbers and your form's behaviour disagree.
 | Threshold        | `0.5`, hardcoded in `captchaMiddleware`                                |
 | Token travels as | the header `x-vitnode-captcha-token`                                   |
 
-The visitor's IP is forwarded as `remoteip`, so the score reflects the person
-filling the form rather than your server. It is read from the first proxy header
-that has a value - `x-forwarded-for` first, then `x-real-ip`,
-`cf-connecting-ip` and a dozen more - and falls back to `127.0.0.1` when a
-request arrives with none of them.
+The visitor's IP is forwarded as `remoteip`. It is the address of the socket the
+request arrived on, falling back to `127.0.0.1` when the runtime exposes no
+connection info. Proxy headers like `x-forwarded-for` are deliberately ignored -
+the caller writes them - so behind a reverse proxy this is your proxy's address
+and the score reflects your server rather than the person filling the form.
 
 ## Gotchas
 
