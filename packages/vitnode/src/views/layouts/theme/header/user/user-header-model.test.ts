@@ -126,10 +126,10 @@ describe("the state the header renders", () => {
     });
   });
 
-  // The Next.js header has always rendered the guest controls here, because
-  // `getSessionApi()` answers `{ user: null }` for any non-200. Note this is a
-  // *rendering* decision and not the one a route guard makes with the same
-  // failure - `ensureAuthState` rejects rather than signing anybody out.
+  // The guest controls render here, because a session read answers
+  // `{ user: null }` for any non-200. Note this is a *rendering* decision and
+  // not the one a route guard makes with the same failure - `ensureAuthState`
+  // rejects rather than signing anybody out.
   it("is anonymous when the read failed with nothing cached", () => {
     expect(userHeaderState({ isError: true })).toEqual({
       status: "anonymous",

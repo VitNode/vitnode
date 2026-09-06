@@ -30,7 +30,7 @@ export const FILES_MODULE = "files";
 
 /**
  * The tuple `<AdminPermissionRequired module="files" permission="can_view">`
- * states in the Next.js page, and the one `listFilesAdminRoute` declares.
+ * states, and the one `listFilesAdminRoute` declares.
  */
 const FILES_VIEW_PERMISSION = {
   module: FILES_MODULE,

@@ -1,5 +1,3 @@
-"use client";
-
 import type { AnyRoute, AnyRouter } from "@tanstack/react-router";
 
 import {

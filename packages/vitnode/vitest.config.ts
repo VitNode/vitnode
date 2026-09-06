@@ -17,7 +17,6 @@ export default defineConfig({
       "**/node_modules/**",
       "**/dist/**",
       "**/build/**",
-      "**/.next/**",
       "**/.turbo/**",
       "**/coverage/**",
       "**/src/tests/**", // Assuming setup files aren't tests
@@ -33,7 +32,6 @@ export default defineConfig({
         "**/node_modules/**",
         "**/dist/**",
         "**/build/**",
-        "**/.next/**",
         "**/.turbo/**",
         "**/coverage/**",
         "**/src/tests/**",

@@ -1,9 +1,6 @@
-"use client";
-
-// The user id comes from whatever the app resolved the session to - a server
-// render in Next.js, the canonical session query in TanStack Start - so the
-// reconnect must be driven by the prop changing (sign-in/sign-out) rather than
-// by a client event handler.
+// The user id comes from whatever the app resolved the session to - the
+// canonical session query - so the reconnect must be driven by the prop changing
+// (sign-in/sign-out) rather than by a client event handler.
 /* eslint-disable react-you-might-not-need-an-effect/no-event-handler */
 import React from "react";
 

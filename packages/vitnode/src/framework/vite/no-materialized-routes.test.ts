@@ -227,7 +227,7 @@ describe("where the generation pass is allowed to write", () => {
 
   /**
    * And it copies nothing. `cp`, `copyFile` and a read-then-write of somebody
-   * else's module are what the deleted Next.js copier was made of; the only read
+   * else's module are what the deleted route copier was made of; the only read
    * here is `writeIfChanged` comparing a generated file to its own previous
    * bytes.
    */

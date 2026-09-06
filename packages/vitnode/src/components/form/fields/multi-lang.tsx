@@ -1,5 +1,3 @@
-"use client";
-
 import type { ControllerRenderProps, FieldValues } from "react-hook-form";
 
 import React from "react";

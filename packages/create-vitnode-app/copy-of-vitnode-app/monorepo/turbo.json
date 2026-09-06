@@ -17,13 +17,13 @@
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
       "outputs": [".output/**", "dist/**"],
-      "env": ["POSTGRES_URL", "NEXT_PUBLIC_API_URL", "NEXT_PUBLIC_WEB_URL"]
+      "env": ["POSTGRES_URL", "VITNODE_API_URL", "VITNODE_WEB_URL"]
     },
     "dev": {
       "cache": false,
       "persistent": true,
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "env": ["POSTGRES_URL", "NEXT_PUBLIC_API_URL", "NEXT_PUBLIC_WEB_URL"]
+      "env": ["POSTGRES_URL", "VITNODE_API_URL", "VITNODE_WEB_URL"]
     },
     "start": {
       "dependsOn": ["^start"]

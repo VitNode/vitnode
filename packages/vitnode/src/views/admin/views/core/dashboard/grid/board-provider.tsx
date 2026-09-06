@@ -1,5 +1,3 @@
-"use client";
-
 import type { DragEndEvent, DragStartEvent } from "@dnd-kit/core";
 
 import {

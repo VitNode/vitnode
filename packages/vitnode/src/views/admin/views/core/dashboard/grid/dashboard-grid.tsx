@@ -1,5 +1,3 @@
-"use client";
-
 import { rectSortingStrategy, SortableContext } from "@dnd-kit/sortable";
 import { LayoutGridIcon, PencilIcon } from "lucide-react";
 import { useTranslations } from "use-intl";

@@ -23,7 +23,7 @@
       "cache": false,
       "persistent": true,
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "env": ["POSTGRES_URL", "NEXT_PUBLIC_API_URL", "NEXT_PUBLIC_WEB_URL"]
+      "env": ["POSTGRES_URL", "VITNODE_API_URL", "VITNODE_WEB_URL"]
     },
     "db:prepare": {
       "dependsOn": ["^build:plugins"],
@@ -45,7 +45,7 @@
       "dependsOn": ["^build:plugins", "^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
       "outputs": [".output/**", "dist/**"],
-      "env": ["POSTGRES_URL", "NEXT_PUBLIC_API_URL", "NEXT_PUBLIC_WEB_URL"]
+      "env": ["POSTGRES_URL", "VITNODE_API_URL", "VITNODE_WEB_URL"]
     },
     "build:scripts": {
       "dependsOn": ["^build:scripts"],
@@ -56,7 +56,7 @@
       "cache": false,
       "persistent": true,
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "env": ["POSTGRES_URL", "NEXT_PUBLIC_API_URL", "NEXT_PUBLIC_WEB_URL"]
+      "env": ["POSTGRES_URL", "VITNODE_API_URL", "VITNODE_WEB_URL"]
     },
     "lint": {
       "dependsOn": ["^lint"]

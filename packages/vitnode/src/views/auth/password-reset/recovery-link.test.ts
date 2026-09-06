@@ -14,8 +14,8 @@ describe("parsing a recovery link", () => {
   });
 
   it("accepts a userId that is already a number", () => {
-    // A TanStack Start route's `validateSearch` may well have coerced it before
-    // this sees it; the Next.js view hands over the raw string.
+    // A route's `validateSearch` may well have coerced it before this sees it,
+    // and a raw query string hands over a string.
     expect(parseRecoveryLink({ token: TOKEN, userId: 123 })).toEqual({
       token: TOKEN,
       userId: 123,

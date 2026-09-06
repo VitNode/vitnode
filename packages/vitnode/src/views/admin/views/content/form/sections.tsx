@@ -1,5 +1,3 @@
-// No "use client": reached only from `content-form`, which is already a client
-// entry - the same reason the primitives beside it declare none.
 import React from "react";
 import { useTranslations } from "use-intl";
 

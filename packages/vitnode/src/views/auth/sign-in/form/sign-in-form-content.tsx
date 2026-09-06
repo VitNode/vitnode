@@ -1,5 +1,3 @@
-"use client";
-
 import { AlertCircle } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import { useTranslations } from "use-intl";

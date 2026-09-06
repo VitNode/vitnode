@@ -35,7 +35,7 @@ const lookup = (path: string): string | undefined => {
   return typeof node === "string" ? node : undefined;
 };
 
-/** `<title></title>` and friends - a tag next-intl expects a function for. */
+/** `<title></title>` and friends - a tag `t.rich` expects a function for. */
 const RICH_TAG = /<([a-zA-Z][\w-]*)>[\s\S]*?<\/\1>/;
 
 /** `const t = useTranslations("core.content.schedule")`, per variable name. */

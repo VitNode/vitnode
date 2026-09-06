@@ -72,8 +72,8 @@ const normalizeIgnoredPath = (path: string): string => {
  * depends on which locales the app serves and how it writes them - and the one
  * thing a routing utility must never do is decide that for itself. Nothing here
  * touches a `Request`, a cookie jar, `window` or a router: it is string in,
- * string out, which is what lets the Next.js app, the TanStack Start app, the
- * server middleware and the tests all reason about the same URLs.
+ * string out, which is what lets the app, the server middleware and the tests
+ * all reason about the same URLs.
  */
 export const createLocaleRouting = ({
   defaultLocale,

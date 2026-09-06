@@ -4,9 +4,9 @@ import { createRouter as createTanStackRouter } from '@tanstack/react-router'
 import { setupRouterSsrQueryIntegration } from '@tanstack/react-router-ssr-query'
 import { createVitNodeQueryClient } from '@vitnode/core/lib/query-client'
 import {
+  Error500Page,
   ErrorActions,
   NotFound,
-  Error500Page,
 } from '@vitnode/core/tanstack/layout'
 import { RoutePendingSpinner } from '@vitnode/core/tanstack/pending'
 import {

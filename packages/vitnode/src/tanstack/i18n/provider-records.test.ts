@@ -18,11 +18,10 @@ describe("RouteMessages provides every intl context core might read", () => {
     // Deleting this line turns a host's `pnpm dev` into a 500 and leaves every
     // other check in this repository green.
     //
-    // It is imported from `@/lib/i18n/provider` rather than from `next-intl`:
-    // that module is loaded by whatever loaded this package, so it *is* the
-    // record core's components read, rather than one that happens to resolve
-    // the same way. It is also what keeps this file Next-free, which a TanStack
-    // Start app requires.
+    // It is imported from `@/lib/i18n/provider` rather than from `use-intl`
+    // directly: that module is loaded by whatever loaded this package, so it
+    // *is* the record core's components read, rather than one that happens to
+    // resolve the same way.
     expect(routeMessages).toMatch(
       /import \{ IntlProvider as CoreIntlProvider \} from "@\/lib\/i18n\/provider"/,
     );
@@ -66,10 +65,5 @@ describe("RouteMessages provides every intl context core might read", () => {
     // Optional on purpose: a host whose every component takes its strings from
     // this package needs no third record, and must not be made to invent one.
     expect(routeMessages).toContain("if (!hostIntlProvider) return provided;");
-  });
-
-  it("reads nothing from next-intl", () => {
-    // The whole reason this component exists outside Next.js.
-    expect(routeMessages).not.toMatch(/from "next-intl/);
   });
 });

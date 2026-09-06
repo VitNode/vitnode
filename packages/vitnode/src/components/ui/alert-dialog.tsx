@@ -1,5 +1,3 @@
-"use client";
-
 import { AlertDialog as AlertDialogPrimitive } from "@base-ui/react/alert-dialog";
 import React from "react";
 import { useTranslations } from "use-intl";

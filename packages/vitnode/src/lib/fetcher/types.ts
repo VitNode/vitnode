@@ -181,7 +181,7 @@ export interface FetcherRequestOptions {
    */
   options?: Omit<RequestInit, "body" | "headers" | "method">;
   /**
-   * Origin to call, instead of the `NEXT_PUBLIC_API_URL` one. Set by a runtime
+   * Origin to call, instead of the `VITNODE_API_URL` one. Set by a runtime
    * that serves the API itself and knows the origin only per request; see
    * `RawApiFetchArgs["origin"]`.
    */

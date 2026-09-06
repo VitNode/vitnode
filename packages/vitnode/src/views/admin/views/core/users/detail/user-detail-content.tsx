@@ -1,5 +1,3 @@
-"use client";
-
 import { ExternalLinkIcon } from "lucide-react";
 import { useTranslations } from "use-intl";
 

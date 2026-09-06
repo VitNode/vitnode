@@ -1,39 +1,17 @@
 // @vitest-environment node
-import { existsSync, readFileSync } from "node:fs";
+import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 
-import {
-  externalGraph,
-  NEXT_INTL,
-  NEXT_ONLY,
-  offenders,
-  runtimeImports,
-} from "@/tests/import-graph";
+import { externalGraph, runtimeImports } from "@/tests/import-graph";
 
 const here = dirname(fileURLToPath(import.meta.url));
 
 const SHARED_ENTRY = join(here, "layout-content.tsx");
 
-const DELETED_NEXT_HALF = join(here, "layout.tsx");
-
 describe("the shared main shell is framework-neutral", () => {
-  it("reaches nothing from next/*", () => {
-    expect(offenders(SHARED_ENTRY, NEXT_ONLY)).toEqual([]);
-  });
-
-  it("reaches none of next-intl's Next-only entrypoints", () => {
-    expect(offenders(SHARED_ENTRY, NEXT_INTL)).toEqual([]);
-  });
-
-  it("never reaches the locale-aware navigation module", () => {
-    const reached = [...externalGraph(SHARED_ENTRY).keys()];
-
-    expect(reached.some(one => one.includes("navigation"))).toBe(false);
-  });
-
-  it("never reaches a server action", () => {
+  it("never reaches a server-only module", () => {
     const reached = [...externalGraph(SHARED_ENTRY).keys()];
 
     expect(reached.some(one => one.endsWith(".server"))).toBe(false);
@@ -70,11 +48,5 @@ describe("the shared main shell takes its framework parts as slots", () => {
    */
   it("owns the one main landmark", () => {
     expect(code.match(/<main>/g)).toHaveLength(1);
-  });
-});
-
-describe("the Next.js half of this subtree is gone", () => {
-  it("no longer exists", () => {
-    expect(existsSync(DELETED_NEXT_HALF)).toBe(false);
   });
 });

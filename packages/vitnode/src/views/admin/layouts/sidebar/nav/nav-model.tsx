@@ -288,8 +288,7 @@ const declaredNavItems = (
  * The first of the model's two stages, and the split is what lets them run in
  * different places. This one is a pure function of `VitNodeConfig` - it needs no
  * request, no session and no locale - so a host may run it wherever the plugin
- * registry actually lives. In the Next.js AdminCP that is the same render pass
- * as everything else; in a TanStack Start host the plugin registry is
+ * registry actually lives. In a TanStack Start host that registry is
  * deliberately kept out of the browser bundle (see `vitnode.shell.config.ts`),
  * so a host with plugins to declare runs this where its config is and hands the
  * result to the shell.
@@ -426,9 +425,9 @@ export const resolveAdminNav = ({
  * The whole AdminCP navigation, both stages, for a caller that has the config to
  * hand.
  *
- * What the Next.js `getAdminNav` calls, and what a TanStack host calls when its
- * plugin registry is reachable from wherever the sidebar is built. A host that
- * has to split the two stages calls them separately instead.
+ * What a host calls when its plugin registry is reachable from wherever the
+ * sidebar is built. A host that has to split the two stages calls them
+ * separately instead.
  */
 export const buildAdminNav = ({
   permissions,

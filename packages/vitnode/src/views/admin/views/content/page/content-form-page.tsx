@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 
 import type { ItemAutoFormComponentProps } from "@/components/form/auto-form";

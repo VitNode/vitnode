@@ -55,7 +55,7 @@ POSTGRES_URL=postgresql://user:password@localhost:5432/vitnode_db
 
 # The origin visitors reach. Email links, SSO callbacks and password-reset
 # links are built from it.
-NEXT_PUBLIC_WEB_URL=https://example.com
+VITNODE_WEB_URL=https://example.com
 
 # Required if anything schedules cron. A long random string.
 CRON_SECRET=change_me_to_a_long_random_secret_string
@@ -67,7 +67,7 @@ REDIS_PASSWORD=change_me_redis_password
 
 ### Where the API lives
 
-A **Single App** answers `/api/*` itself, so leave `NEXT_PUBLIC_API_URL` unset.
+A **Single App** answers `/api/*` itself, so leave `VITNODE_API_URL` unset.
 The server takes the API origin off the request being rendered and the browser
 falls back to the origin the page was served from, so the same build is correct
 on every hostname you point at it.
@@ -79,7 +79,7 @@ the session read on the first render. Set it in the web app's environment, and
 set it before the build: it is compiled into the browser bundle too.
 
 ```bash title="apps/web/.env"
-NEXT_PUBLIC_API_URL=http://localhost:8000
+VITNODE_API_URL=http://localhost:8000
 ```
 
 A value set here wins over the request origin, which is why a Single App must

@@ -128,11 +128,10 @@ describe("prototype safety", () => {
   });
 
   it("keeps the result an ordinary object, which React must be able to serialize", () => {
-    // `Object.create(null)` would be marginally safer here and would have
-    // broken the Next.js host: React's Flight serializer rejects anything whose
-    // prototype is not `Object.prototype`. Kept after that host went, because
-    // `use-intl` walks the record and a null-prototype object is a surprise
-    // waiting for whatever walks it next.
+    // `Object.create(null)` would be marginally safer here, and a serializer
+    // that rejects anything whose prototype is not `Object.prototype` would
+    // reject it. `use-intl` walks the record too, and a null-prototype object is
+    // a surprise waiting for whatever walks it next.
     const result = pickMessages(tree, ["core.global"]);
 
     expect(Object.getPrototypeOf(result)).toBe(Object.prototype);

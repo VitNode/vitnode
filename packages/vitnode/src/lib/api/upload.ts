@@ -42,11 +42,94 @@ export const sanitizeFolder = (folder: string): string => {
   return folder;
 };
 
+const EXTENSIONS_BY_MIME: Record<string, readonly string[]> = {
+  "application/json": [".json"],
+  "application/pdf": [".pdf"],
+  "application/zip": [".zip"],
+  "audio/mpeg": [".mp3"],
+  "audio/ogg": [".ogg"],
+  "audio/wav": [".wav"],
+  "image/avif": [".avif"],
+  "image/gif": [".gif"],
+  "image/jpeg": [".jpg", ".jpeg"],
+  "image/png": [".png"],
+  "image/svg+xml": [".svg"],
+  "image/tiff": [".tif", ".tiff"],
+  "image/webp": [".webp"],
+  "text/csv": [".csv"],
+  "text/plain": [".txt"],
+  "video/mp4": [".mp4"],
+  "video/webm": [".webm"],
+};
+
+const ACTIVE_CONTENT_EXTENSIONS = new Set([
+  ".asp",
+  ".aspx",
+  ".cgi",
+  ".cjs",
+  ".htaccess",
+  ".htm",
+  ".html",
+  ".jre",
+  ".js",
+  ".jsp",
+  ".jspx",
+  ".jsx",
+  ".mjs",
+  ".phar",
+  ".php",
+  ".php3",
+  ".php4",
+  ".php5",
+  ".php7",
+  ".phtml",
+  ".pl",
+  ".py",
+  ".rb",
+  ".sh",
+  ".shtml",
+  ".svgz",
+  ".swf",
+  ".xht",
+  ".xhtml",
+  ".xml",
+  ".xsl",
+  ".xslt",
+]);
+
+const NEUTRAL_EXTENSION = ".bin";
+
+const WELL_FORMED_EXTENSION = /^\.[a-z0-9]{1,16}$/;
+
+export const safeStorageExtension = (
+  extension: string,
+  mimeType?: null | string,
+): string => {
+  const normalized = extension.toLowerCase();
+  const wellFormed = WELL_FORMED_EXTENSION.test(normalized) ? normalized : "";
+
+  const type = mimeType?.toLowerCase().split(";")[0]?.trim();
+  const allowed = type ? EXTENSIONS_BY_MIME[type] : undefined;
+
+  if (allowed) {
+    return allowed.includes(wellFormed) ? wellFormed : allowed[0];
+  }
+
+  if (!wellFormed || ACTIVE_CONTENT_EXTENSIONS.has(wellFormed)) {
+    return NEUTRAL_EXTENSION;
+  }
+
+  return wellFormed;
+};
+
 export const generateStorageFileName = (
   originalName: string,
   extension?: string,
+  mimeType?: null | string,
 ): string => {
-  return `${randomUUID()}${extension ?? getFileExtension(originalName)}`;
+  const chosen = extension ?? getFileExtension(originalName);
+
+  return `${randomUUID()}${safeStorageExtension(chosen, mimeType)}`;
 };
 
 export const buildStorageKey = ({

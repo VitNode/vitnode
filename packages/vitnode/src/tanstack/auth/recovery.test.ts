@@ -137,8 +137,8 @@ describe("the namespaces each recovery screen needs", () => {
     mode => {
       // `RouteMessages` replaces the root's provider, so `core.global` has to be
       // in every set or the error toasts render their keys. The title comes from
-      // `core.auth.reset_password` in *both* modes, which is what the Next.js
-      // route's page-level `generateMetadata` produces.
+      // `core.auth.reset_password` in *both* modes, which is what the route's
+      // own metadata is built from.
       const namespaces = passwordResetNamespaces(mode);
 
       expect(namespaces).toContain("core.global");

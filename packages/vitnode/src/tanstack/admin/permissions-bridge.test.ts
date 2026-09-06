@@ -47,9 +47,9 @@ describe("the permission UI is a bridge, not a second store", () => {
   const permissions = () => sourceNamed("permissions.tsx");
 
   it("mounts the AdminCP's existing permission context", () => {
-    // The same context the Next.js AdminCP mounts, so every screen already
-    // written against `AdminStaffPermissionGate` keeps working as it migrates
-    // and there is never a moment when two states exist and can disagree.
+    // One context for the whole AdminCP, so every screen written against
+    // `AdminStaffPermissionGate` reads the same state and there is never a
+    // moment when two of them exist and can disagree.
     expect(permissions()).toMatch(
       /from\s+"@\/components\/staff-permission\/provider"/,
     );

@@ -1,4 +1,3 @@
-// No "use client": reached only from `schedule-action`, which is a client entry.
 import { useQuery } from "@tanstack/react-query";
 import {
   CalendarClockIcon,

@@ -1,5 +1,3 @@
-"use client";
-
 import { useRouter } from "@tanstack/react-router";
 
 import type { AdminUserSearch } from "@/views/admin/layouts/search/search-users";

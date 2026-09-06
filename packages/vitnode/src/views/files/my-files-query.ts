@@ -86,7 +86,7 @@ export const normalizeMyFilesParams = (
 
 /** One row of the table, as JSON delivers it. */
 export interface MyFile {
-  /** ISO string over the wire; a `Date` when a Next.js render passes it in. */
+  /** ISO string over the wire; a `Date` when a server render passes it in. */
   createdAt: Date | string;
   dimensions: null | { height: number; width: number };
   folder: string;

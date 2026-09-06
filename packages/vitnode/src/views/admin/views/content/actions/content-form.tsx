@@ -1,8 +1,3 @@
-// No "use client" here on purpose: this module is only reached from
-// `create-action`/`edit-action`, which are already client entries. Declaring it
-// again would make this a nested client entry, which neither `next/dynamic` nor
-// `React.lazy` can resolve from inside a published package - the dialog spins
-// forever.
 import React from "react";
 import { toast } from "sonner";
 import { useLocale, useTranslations } from "use-intl";

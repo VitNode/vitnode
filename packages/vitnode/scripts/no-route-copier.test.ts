@@ -98,20 +98,6 @@ describe("the plugin route copier", () => {
 
     expect(offenders).toEqual([]);
   });
-
-  it("copies nothing into an App Router directory", () => {
-    const offenders = scriptFiles.filter(file => {
-      const code = codeOf(file);
-
-      return (
-        code.includes("[locale]") ||
-        code.includes("@breadcrumb") ||
-        code.includes("(plugins)")
-      );
-    });
-
-    expect(offenders).toEqual([]);
-  });
 });
 
 describe("the build-time strangler", () => {

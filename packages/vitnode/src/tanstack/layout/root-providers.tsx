@@ -1,5 +1,3 @@
-"use client";
-
 import type { VitNodeProvidersConfig } from "@/views/layouts/providers";
 
 import { VitNodeProviders } from "@/views/layouts/providers";

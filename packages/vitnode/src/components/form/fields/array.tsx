@@ -1,5 +1,3 @@
-"use client";
-
 import { PlusIcon, Trash2Icon } from "lucide-react";
 import React from "react";
 import { useFieldArray, useFormContext } from "react-hook-form";

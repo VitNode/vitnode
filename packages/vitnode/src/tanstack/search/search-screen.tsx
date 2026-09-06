@@ -1,5 +1,3 @@
-"use client";
-
 import type { SearchFeedLinkComponent } from "@/views/search/search-feed-content";
 
 import { HeaderContent } from "@/components/ui/header-content";

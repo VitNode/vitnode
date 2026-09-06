@@ -1,5 +1,3 @@
-"use client";
-
 import { useMutation } from "@tanstack/react-query";
 import { RotateCcwIcon, XIcon } from "lucide-react";
 import React from "react";

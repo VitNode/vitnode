@@ -46,6 +46,7 @@ import type {
 } from "../models/search";
 import type { SSOApiPlugin } from "../models/sso";
 
+import { resolveClientIp } from "../lib/client-ip";
 import { collectCronJobs } from "../lib/cron";
 import {
   loggerMiddleware,
@@ -185,7 +186,9 @@ export const globalMiddleware = ({
   | "search"
   | "storage"
 > &
-  Pick<VitNodeConfig, "metadata"> & { cacheClient: CacheClient | null }) => {
+  Pick<VitNodeConfig, "metadata"> & {
+    cacheClient: CacheClient | null;
+  }) => {
   const pluginsMetadata = plugins.map(plugin => ({
     id: plugin.pluginId,
   }));
@@ -312,38 +315,10 @@ export const globalMiddleware = ({
     }),
   );
 
-  const ipHeaderKeys = [
-    "x-forwarded-for",
-    "x-real-ip",
-    "cf-connecting-ip",
-    "x-client-ip",
-    "x-forwarded",
-    "x-cluster-client-ip",
-    "forwarded-for",
-    "forwarded",
-    "via",
-    "remote-addr",
-    "client-ip",
-    "ip",
-    "x-ip",
-    "true-client-ip",
-    "fastly-client-ip",
-    "x-fastly-client-ip",
-  ];
-
   return async (c: Context, next: Next) => {
-    let ipAddress: string | undefined;
-
-    for (const key of ipHeaderKeys) {
-      ipAddress = c.req.header(key);
-      if (ipAddress) break;
-
-      ipAddress = c.req.raw.headers.get(key) ?? undefined;
-      if (ipAddress) break;
+    if (!c.get("ipAddress")) {
+      c.set("ipAddress", resolveClientIp(c));
     }
-
-    // Fallback to localhost if nothing found
-    c.set("ipAddress", ipAddress ?? "127.0.0.1");
     c.set("db", dbProvider);
     c.set("ai", new AIModel(c));
     c.set("cache", new CacheModel(cacheClient, c));

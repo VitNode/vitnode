@@ -643,7 +643,7 @@
         "open": "Open",
         "expires": "Expires <when></when>",
         "warning": "Treat it like a password: it works for anyone until it expires, and it cannot be revoked early. It is pinned to this version, so heavy editing can age it out of the history before it expires.",
-        "unavailable": "Preview links cannot be built on this deployment. Check that NEXT_PUBLIC_WEB_URL and NEXT_PUBLIC_API_URL are absolute URLs, then restart the API.",
+        "unavailable": "Preview links cannot be built on this deployment. Check that VITNODE_WEB_URL and VITNODE_API_URL are absolute URLs, then restart the API.",
         "live": "This record has no saved version yet, so the link shows it live - it will follow any edits made before the reviewer opens it."
       },
       "delivery": {

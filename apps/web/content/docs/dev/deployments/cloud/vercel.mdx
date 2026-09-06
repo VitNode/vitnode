@@ -61,15 +61,12 @@ the browser bundle and cannot be changed afterwards without building again.
 | Variable                     | Notes                                                                                                   |
 | ---------------------------- | ------------------------------------------------------------------------------------------------------- |
 | `POSTGRES_URL`               | Required. Nothing works without it.                                                                     |
-| `NEXT_PUBLIC_WEB_URL`        | Your production origin. Email links, SSO callbacks and password-reset links use it.                     |
+| `VITNODE_WEB_URL`            | Your production origin. Email links, SSO callbacks and password-reset links use it.                     |
 | `CRON_SECRET`                | Required if anything schedules cron. A long random string.                                              |
 | `REDIS_URL` `REDIS_PASSWORD` | Strongly recommended - see the rate-limiter gotcha below.                                               |
-| `NEXT_PUBLIC_API_URL`        | Leave it unset. The single app answers `/api/*` itself, and both halves work that out from the request. |
+| `VITNODE_API_URL`            | Leave it unset. The single app answers `/api/*` itself, and both halves work that out from the request. |
 
-<Callout
-  type="warn"
-  title="Do not set NEXT_PUBLIC_API_URL on preview deployments"
->
+<Callout type="warn" title="Do not set VITNODE_API_URL on preview deployments">
   A preview gets a generated hostname, so no configured value can name it. Left
   unset, the server takes the API origin off the request being rendered and the
   browser falls back to the origin the page came from - which is right on every

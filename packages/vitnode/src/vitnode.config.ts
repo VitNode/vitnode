@@ -76,6 +76,17 @@ export interface VitNodeApiConfig {
   };
   cron?: CronAdapter;
   dbProvider: ReturnType<typeof drizzle>;
+  /**
+   * Publishes the OpenAPI document at `/swagger/doc` and Swagger UI at
+   * `/swagger`.
+   *
+   * Defaults to on in development and **off** in production. The document names
+   * every route, parameter and response shape the install has, the admin tree
+   * included, and it is served without authentication - which is a map of the
+   * attack surface handed to anyone who asks. Turn it on deliberately, and put
+   * something in front of it if the install is public.
+   */
+  docs?: { enabled?: boolean };
   email?: {
     adapter?: EmailApiPlugin;
     logo?: DefaultTemplateEmailProps["templateProps"]["logo"];
@@ -87,6 +98,16 @@ export interface VitNodeApiConfig {
   };
 
   i18n?: VitNodeApiI18nConfig;
+  /**
+   * Largest request body the API will read, in bytes. Defaults to 25 MB.
+   *
+   * The outer wall, not the upload rule: a Content Engine file field has its own
+   * `maxBytes` and is checked before a byte reaches storage. This exists because
+   * without it nothing bounded a body at all, and `POST /sign_in` buffers its
+   * JSON and then runs scrypt on it - memory and CPU whose size an
+   * unauthenticated caller was choosing.
+   */
+  maxBodySize?: number;
   metadata: VitNodeMetadata;
   plugins: BuildPluginApiReturn[];
   rateLimiter?: Omit<IRateLimiterOptions, "keyPrefix">;

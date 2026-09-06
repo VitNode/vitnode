@@ -35,18 +35,18 @@ describe("contentPreviewConfigProblems", () => {
 
   it("reports an unparseable web origin", () => {
     // A preview link resolved against this would not be a link.
-    vi.stubEnv("NEXT_PUBLIC_WEB_URL", "not a url");
+    vi.stubEnv("VITNODE_WEB_URL", "not a url");
 
     expect(contentPreviewConfigProblems()).toEqual([
-      expect.stringContaining("NEXT_PUBLIC_WEB_URL"),
+      expect.stringContaining("VITNODE_WEB_URL"),
     ]);
   });
 
   it("reports an unparseable API origin", () => {
-    vi.stubEnv("NEXT_PUBLIC_API_URL", "");
+    vi.stubEnv("VITNODE_API_URL", "");
 
     expect(contentPreviewConfigProblems()).toEqual([
-      expect.stringContaining("NEXT_PUBLIC_API_URL"),
+      expect.stringContaining("VITNODE_API_URL"),
     ]);
   });
 });
@@ -58,7 +58,7 @@ describe("warnAboutContentPreviewConfig", () => {
   it("says nothing when no content type can be previewed", () => {
     // Nothing links to anything, so there is nothing to nag an install about.
     const warn = spyOnWarn();
-    vi.stubEnv("NEXT_PUBLIC_WEB_URL", "not a url");
+    vi.stubEnv("VITNODE_WEB_URL", "not a url");
 
     warnAboutContentPreviewConfig({ contentTypes: withoutPreview });
 
@@ -77,18 +77,18 @@ describe("warnAboutContentPreviewConfig", () => {
 
   it("warns when a link cannot be built", () => {
     const warn = spyOnWarn();
-    vi.stubEnv("NEXT_PUBLIC_WEB_URL", "not a url");
+    vi.stubEnv("VITNODE_WEB_URL", "not a url");
 
     warnAboutContentPreviewConfig({ contentTypes: previewable });
 
     expect(warn).toHaveBeenCalledWith(
-      expect.stringContaining("NEXT_PUBLIC_WEB_URL"),
+      expect.stringContaining("VITNODE_WEB_URL"),
     );
   });
 
   it("names the content types that wanted it", () => {
     const warn = spyOnWarn();
-    vi.stubEnv("NEXT_PUBLIC_WEB_URL", "not a url");
+    vi.stubEnv("VITNODE_WEB_URL", "not a url");
 
     warnAboutContentPreviewConfig({ contentTypes: previewable });
 
@@ -107,7 +107,7 @@ describe("warnAboutContentPreviewConfig", () => {
     const warn = spyOnWarn();
     vi.stubEnv("NODE_ENV", "production");
     vi.stubEnv("NEXT_PHASE", phase);
-    vi.stubEnv("NEXT_PUBLIC_WEB_URL", "not a url");
+    vi.stubEnv("VITNODE_WEB_URL", "not a url");
 
     expect(() =>
       warnAboutContentPreviewConfig({ contentTypes: previewable }),

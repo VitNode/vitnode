@@ -1,5 +1,3 @@
-"use client";
-
 import { useFormatter, useNow } from "use-intl";
 
 import { TooltipWithContent } from "./ui/tooltip";

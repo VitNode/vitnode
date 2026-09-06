@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 
 import { EmailConfirmationView } from "./email-confirmation-view";

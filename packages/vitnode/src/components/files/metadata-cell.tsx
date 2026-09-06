@@ -1,5 +1,3 @@
-"use client";
-
 import { BracesIcon } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";

@@ -1,63 +1,22 @@
 // @vitest-environment node
-import { existsSync, readFileSync } from "node:fs";
+import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 
-import {
-  externalGraph,
-  NEXT_INTL,
-  NEXT_ONLY,
-  offenders,
-  runtimeImports,
-} from "@/tests/import-graph";
+import { runtimeImports } from "@/tests/import-graph";
 
 const here = dirname(fileURLToPath(import.meta.url));
 
 const SHARED = {
-  content: join(here, "content.tsx"),
   filters: join(here, "filters.tsx"),
   orderHead: join(here, "order-table-head.tsx"),
   pagination: join(here, "pagination.tsx"),
   search: join(here, "search.tsx"),
-  seam: join(here, "navigation.tsx"),
-  skeletonAndTypes: join(here, "data-table-content.tsx"),
   urlState: join(here, "url-state.ts"),
 };
 
-/** The Next.js half: locale-aware navigation, and the error screen built on it. */
-
-const DELETED_NEXT_HALF = {
-  navigation: join(here, "navigation-next.tsx"),
-  table: join(here, "data-table.tsx"),
-};
-
-const sharedEntries = Object.entries(SHARED).map(([name, path]) => ({
-  name,
-  path,
-}));
-
 describe("the shared data table is framework-neutral", () => {
-  it.each(sharedEntries)("$name reaches nothing from next/*", ({ path }) => {
-    expect(offenders(path, NEXT_ONLY)).toEqual([]);
-  });
-
-  it.each(sharedEntries)(
-    "$name reaches none of next-intl's Next-only entrypoints",
-    ({ path }) => {
-      expect(offenders(path, NEXT_INTL)).toEqual([]);
-    },
-  );
-
-  it.each(sharedEntries)(
-    "$name never reaches the locale-aware navigation module",
-    ({ path }) => {
-      const reached = [...externalGraph(path).keys()];
-
-      expect(reached.some(one => one.includes("lib/navigation"))).toBe(false);
-    },
-  );
-
   it("keeps the URL arithmetic free of every import", () => {
     // The point of `url-state.ts`: no router, no React, nothing to mock. If an
     // import ever appears here, the seam has started growing a second job.
@@ -103,13 +62,4 @@ describe("the shared controls take their navigation from the seam", () => {
       expect(withoutComments(path)).not.toContain("pathname");
     }
   });
-});
-
-describe("the Next.js half of this subtree is gone", () => {
-  it.each(Object.entries(DELETED_NEXT_HALF))(
-    "%s no longer exists",
-    (_name, path) => {
-      expect(existsSync(path)).toBe(false);
-    },
-  );
 });

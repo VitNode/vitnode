@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 
 const MEDIA = "(prefers-color-scheme: dark)";
@@ -101,10 +99,10 @@ const disableTransitions = (): (() => void) => {
  * system preference is known, and the class or attribute that puts it on
  * `<html>`.
  *
- * Framework-free - it is mounted by the Next.js app and the TanStack Start app
- * alike. The one piece that is not React, the script that paints the theme
- * before the first frame, lives in `theme-script.tsx` and is rendered by whatever
- * owns the document.
+ * Framework-free - whatever host mounts it gets the same behaviour. The one
+ * piece that is not React, the script that paints the theme before the first
+ * frame, lives in `theme-script.tsx` and is rendered by whatever owns the
+ * document.
  */
 export const ThemeProvider = ({
   attribute = "class",

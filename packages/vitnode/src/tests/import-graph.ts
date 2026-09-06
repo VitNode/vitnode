@@ -173,7 +173,7 @@ export const reachedSpecifiers = (
   srcRoot: string = SRC_ROOT,
 ): string[] => [...externalGraph(entry, srcRoot).keys()];
 
-/** A package and its subpaths, so `next` matches `next/headers` but not `next-intl`. */
+/** A package and its subpaths, so `hono` matches `hono/cors` but not `honox`. */
 const matches = (specifier: string, forbidden: string): boolean =>
   specifier === forbidden || specifier.startsWith(`${forbidden}/`);
 
@@ -192,55 +192,3 @@ export const offenders = (
     .filter(([specifier]) => forbidden.some(one => matches(specifier, one)))
     .flatMap(([specifier, chains]) => chains.map(at => `${specifier} in ${at}`))
     .sort();
-
-/**
- * Anything that only resolves inside a Next.js application.
- *
- * `server-only` sits beside `next` because it throws in exactly the same place:
- * its `default` export is a module that exists to fail when a client component
- * imports it, so it is a Next.js convention with a package name rather than a
- * package that happens to be useful elsewhere.
- *
- * Not to be confused with `@tanstack/react-start/server-only`, which is a
- * different package and is permitted - `matches` compares whole path segments,
- * so `server-only` never matches it.
- */
-export const NEXT_ONLY = ["next", "server-only"];
-
-/**
- * `next-intl`, all of it.
- *
- * The root entry is included now, which is the one thing that changed at the
- * cutover. It used to be deliberately absent because it re-exports `use-intl`
- * unchanged, so importing it was harmless in the strict sense - but it made
- * `next-intl` a real dependency of a framework-neutral package, and it was the
- * reason `components/ui/{carousel,pagination}.tsx` read a `use-intl` context
- * from a second module record that nothing in `apps/web` provided into. Both now
- * import `use-intl` directly, and nothing in this package may name `next-intl`
- * again.
- */
-export const NEXT_INTL = ["next-intl"];
-
-/**
- * Routers a framework-neutral module may not import.
- *
- * `@vitnode/core` renders in whatever host mounts it, and it reaches navigation
- * through an injected `LinkComponent` prop and a supplied `pathname` rather than
- * through a router of its own. That seam is what lets one AdminCP shell serve
- * a host that is not this repository's - and importing any router here would
- * quietly close it, because the component would keep working in the one
- * application that happens to provide that router.
- */
-export const HOST_ROUTERS = [
-  "@tanstack/react-router",
-  "@tanstack/react-start",
-  "next",
-  "react-router",
-  "react-router-dom",
-];
-
-/** The committed Next.js import graph the controls scan. See its own docstring. */
-export const NEXT_SPECIMEN = resolve(
-  SRC_ROOT,
-  "../test-fixtures/next-specimen/entry.ts",
-);

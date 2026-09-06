@@ -1,5 +1,3 @@
-"use client";
-
 import { useMatches, useRouter } from "@tanstack/react-router";
 
 import type { AuthLinkComponent } from "@/views/auth/auth-link";

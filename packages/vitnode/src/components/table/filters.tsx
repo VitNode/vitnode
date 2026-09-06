@@ -1,5 +1,3 @@
-"use client";
-
 import { CheckIcon, PlusCircleIcon, Trash2 } from "lucide-react";
 import React from "react";
 import { useDebouncedCallback } from "use-debounce";

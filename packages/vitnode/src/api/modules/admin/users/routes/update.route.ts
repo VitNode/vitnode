@@ -3,12 +3,15 @@ import { and, eq, inArray, ne } from "drizzle-orm";
 
 import { buildRoute } from "@/api/lib/route";
 import { invalidateStaffPermissionsForUser } from "@/api/lib/staff-permission-cache";
+import { matchesEmail } from "@/api/lib/user-email-lookup";
+import { invalidateSessionCacheForUser } from "@/api/models/session-revoke";
 import { CONFIG_PLUGIN } from "@/config";
 import { core_roles } from "@/database/roles";
 import { core_users, core_users_secondary_roles } from "@/database/users";
+import { canonicalizeEmail } from "@/lib/email-canonical";
 
 import {
-  assertCanAssignPrimaryRole,
+  assertCanAssignRoles,
   assertCanEditAdminTarget,
 } from "../lib/assert-edit-user-permission";
 
@@ -133,16 +136,14 @@ export const updateUserAdminRoute = buildRoute({
       const [existing] = await db
         .select({ id: core_users.id })
         .from(core_users)
-        .where(
-          and(eq(core_users.email, body.email), ne(core_users.id, user.id)),
-        )
+        .where(and(matchesEmail(body.email), ne(core_users.id, user.id)))
         .limit(1);
 
       if (existing) {
         return c.json({ error: "Email already exists" }, 409);
       }
 
-      values.email = body.email;
+      values.email = canonicalizeEmail(body.email);
     }
 
     if (body.name !== undefined) {
@@ -207,8 +208,16 @@ export const updateUserAdminRoute = buildRoute({
       }
     }
 
+    // Every role being attached, in one check, before any of them is written.
+    // Secondary roles carry the same weight as the primary one -
+    // `loadStaffPermissions` reads them all - so guarding only `body.roleId`
+    // left `secondaryRoleIds` as a way to hand out root without holding
+    // `can_edit_admin`.
+    if (roleIdsToValidate.length > 0) {
+      await assertCanAssignRoles(c, roleIdsToValidate);
+    }
+
     if (body.roleId !== undefined) {
-      await assertCanAssignPrimaryRole(c, body.roleId);
       values.roleId = body.roleId;
     }
 
@@ -246,7 +255,14 @@ export const updateUserAdminRoute = buildRoute({
         });
 
       if (rolesChanged) {
-        await invalidateStaffPermissionsForUser(c, user.id);
+        // Both caches, not just the permission one. `resolveStaffPermissions`
+        // reads the primary role off the *cached user object*, so recomputing
+        // from a stale `roleId` reaches the same answer it just discarded - and
+        // a demotion applied here would not take effect for another minute.
+        await Promise.all([
+          invalidateStaffPermissionsForUser(c, user.id),
+          invalidateSessionCacheForUser(c, user.id),
+        ]);
       }
 
       await c.get("events").emit("user.updated", {
@@ -271,7 +287,12 @@ export const updateUserAdminRoute = buildRoute({
       .limit(1);
 
     if (rolesChanged) {
-      await invalidateStaffPermissionsForUser(c, user.id);
+      // The same pair as above - and this is the likelier path of the two, since
+      // a request that changes only roles never reaches the `values` branch.
+      await Promise.all([
+        invalidateStaffPermissionsForUser(c, user.id),
+        invalidateSessionCacheForUser(c, user.id),
+      ]);
     }
 
     await c.get("events").emit("user.updated", {

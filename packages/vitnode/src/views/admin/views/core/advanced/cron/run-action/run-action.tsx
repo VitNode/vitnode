@@ -1,5 +1,3 @@
-"use client";
-
 import { PlayIcon } from "lucide-react";
 import { useActionState } from "react";
 import { toast } from "sonner";

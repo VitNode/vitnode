@@ -1,5 +1,3 @@
-// No "use client": reached only from client entries - the history panel and
-// anything else that renders a revision.
 import { useTranslations } from "use-intl";
 
 import type { ContentRevisionMeta } from "@/content/revisions";

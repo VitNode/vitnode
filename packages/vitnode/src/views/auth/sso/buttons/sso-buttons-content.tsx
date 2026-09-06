@@ -1,5 +1,3 @@
-"use client";
-
 import { toast } from "sonner";
 import { useTranslations } from "use-intl";
 

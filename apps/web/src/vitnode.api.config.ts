@@ -13,6 +13,16 @@ config({ quiet: true })
 export const POSTGRES_URL =
   process.env.POSTGRES_URL ?? 'postgresql://root:root@localhost:5432/vitnode'
 
+/**
+ * The API this app serves at `/api/*`, identical in shape to the config
+ * `apps/api` builds. Nothing here is TanStack-specific: the Hono application is
+ * unchanged, only the runtime that hands it requests is.
+ *
+ * Left out on purpose, because each one is a deployment decision rather than
+ * part of the mount: `email`, `storage`, `ai`, `cron` and the SSO adapters. Add
+ * them exactly as `apps/api/src/vitnode.api.config.ts` does when this app needs
+ * them - `buildApiConfig` treats all of them as optional.
+ */
 export const vitNodeApiConfig = buildApiConfig({
   plugins: [blogApiPlugin(), exampleApiPlugin()],
   storage: {

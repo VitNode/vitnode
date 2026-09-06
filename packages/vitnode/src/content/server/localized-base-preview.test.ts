@@ -94,8 +94,8 @@ const payloadOf = (token: string): Record<string, unknown> =>
   ) as Record<string, unknown>;
 
 beforeEach(() => {
-  vi.stubEnv("NEXT_PUBLIC_WEB_URL", "https://example.com");
-  vi.stubEnv("NEXT_PUBLIC_API_URL", "https://api.example.com");
+  vi.stubEnv("VITNODE_WEB_URL", "https://example.com");
+  vi.stubEnv("VITNODE_API_URL", "https://api.example.com");
 });
 
 afterEach(() => {

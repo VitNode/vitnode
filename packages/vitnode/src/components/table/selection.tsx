@@ -1,5 +1,3 @@
-"use client";
-
 import { XIcon } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import React from "react";

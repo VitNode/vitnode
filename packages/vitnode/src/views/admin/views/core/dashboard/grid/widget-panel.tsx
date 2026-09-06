@@ -1,5 +1,3 @@
-"use client";
-
 import { useDraggable } from "@dnd-kit/core";
 import { SearchIcon } from "lucide-react";
 import React from "react";

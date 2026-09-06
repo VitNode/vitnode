@@ -1,5 +1,3 @@
-"use client";
-
 import { useLocale } from "use-intl";
 
 import { cn } from "@/lib/utils";

@@ -1,5 +1,3 @@
-"use client";
-
 import { AlertTriangleIcon, CheckIcon, LoaderCircleIcon } from "lucide-react";
 import React from "react";
 import { useTranslations } from "use-intl";

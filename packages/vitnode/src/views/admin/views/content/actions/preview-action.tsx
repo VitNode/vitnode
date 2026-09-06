@@ -1,5 +1,3 @@
-"use client";
-
 import { CheckIcon, CopyIcon, ExternalLinkIcon } from "lucide-react";
 import React from "react";
 import { toast } from "sonner";

@@ -1,5 +1,3 @@
-"use client";
-
 import {
   ClockIcon,
   DatabaseIcon,
@@ -243,8 +241,8 @@ export const IntegrationsContent = ({
  * The board's shape before its data arrives.
  *
  * Framework-free and beside the board rather than inside it, because a Suspense
- * fallback is rendered *outside* the component it is standing in for - the
- * Next.js page mounts it above `<IntegrationsView>`.
+ * fallback is rendered *outside* the component it is standing in for - a host
+ * mounts it above `<IntegrationsView>`.
  */
 export const IntegrationsViewSkeleton = () => (
   <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">

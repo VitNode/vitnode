@@ -1,5 +1,3 @@
-"use client";
-
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { AlertTriangleIcon } from "lucide-react";
 import React from "react";

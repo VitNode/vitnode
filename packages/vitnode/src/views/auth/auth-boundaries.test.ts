@@ -1,16 +1,10 @@
 // @vitest-environment node
-import { existsSync, readFileSync } from "node:fs";
+import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 
-import {
-  externalGraph,
-  NEXT_INTL,
-  NEXT_ONLY,
-  offenders,
-  runtimeImports,
-} from "@/tests/import-graph";
+import { externalGraph, runtimeImports } from "@/tests/import-graph";
 
 const here = dirname(fileURLToPath(import.meta.url));
 
@@ -41,62 +35,25 @@ const SHARED = {
   ssoCallbackHook: join(here, "sso/callback/use-sso-callback.ts"),
 };
 
-/** The Next.js half: server actions, `next/cache`, locale-aware navigation. */
-
-const DELETED_NEXT_HALF = {
-  breadcrumbTrail: join(here, "../breadcrumb/breadcrumb-main.tsx"),
-  card: join(here, "sign-in/sign-in-card.tsx"),
-  changePasswordForm: join(
-    here,
-    "password-reset/change-password-form/form.tsx",
-  ),
-  passwordResetForm: join(here, "password-reset/form/form.tsx"),
-  settingsNav: join(here, "settings/nav.tsx"),
-  settingsShell: join(here, "settings/shell.tsx"),
-  signInForm: join(here, "sign-in/form/form.tsx"),
-  signUpCard: join(here, "sign-up/sign-up-card.tsx"),
-  signUpForm: join(here, "sign-up/form/form.tsx"),
-  ssoButtons: join(here, "sso/buttons/client.tsx"),
-  ssoCallback: join(here, "sso/callback/client/client.tsx"),
-};
-
 const sharedEntries = Object.entries(SHARED).map(([name, path]) => ({
   name,
   path,
 }));
 
 describe("the shared auth views are framework-neutral", () => {
-  it.each(sharedEntries)("$name reaches nothing from next/*", ({ path }) => {
-    expect(offenders(path, NEXT_ONLY)).toEqual([]);
-  });
-
   it.each(sharedEntries)(
-    "$name reaches none of next-intl's Next-only entrypoints",
+    "$name never reaches a server-only module",
     ({ path }) => {
-      expect(offenders(path, NEXT_INTL)).toEqual([]);
-    },
-  );
-
-  it.each(sharedEntries)(
-    "$name never reaches the locale-aware navigation module",
-    ({ path }) => {
+      // Importing one pulls the fetcher and the whole API module graph behind
+      // it. Every mutation on these screens is a prop instead.
       const reached = [...externalGraph(path).keys()];
 
-      expect(reached.some(one => one.includes("navigation"))).toBe(false);
+      expect(reached.some(one => one.endsWith(".server"))).toBe(false);
+      expect(runtimeImports(path).some(one => one.includes(".server"))).toBe(
+        false,
+      );
     },
   );
-
-  it.each(sharedEntries)("$name never reaches a server action", ({ path }) => {
-    // A `"use server"` module is the other way Next.js gets in: importing one
-    // pulls the fetcher, `next/headers` and the whole API module graph behind
-    // it. Every mutation on these screens is a prop instead.
-    const reached = [...externalGraph(path).keys()];
-
-    expect(reached.some(one => one.endsWith(".server"))).toBe(false);
-    expect(runtimeImports(path).some(one => one.includes(".server"))).toBe(
-      false,
-    );
-  });
 });
 
 describe("the shared views take their framework parts as props", () => {
@@ -149,8 +106,8 @@ describe("the shared views take their framework parts as props", () => {
 
   it("takes where to go after a password change as a callback", () => {
     // The API mints no session on a password change, so the visitor goes to the
-    // login page - but `useRouter().replace` is Next-only and the router
-    // navigation is TanStack-only, so the trip itself is the caller's.
+    // login page - but router navigation belongs to the host, so the trip
+    // itself is the caller's.
     const code = withoutComments(SHARED.changePasswordForm);
 
     expect(code).toContain("onChanged");
@@ -210,9 +167,9 @@ describe("the settings frame is told its framework parts", () => {
   });
 
   it("keeps the menu and the active-item rule as data, not markup", () => {
-    // `settings-nav.ts` is what both frameworks agree through, so it must stay
-    // free of React as well as of Next: a model that rendered would be a third
-    // navigation nobody meant to have.
+    // `settings-nav.ts` is what every host agrees through, so it must stay free
+    // of React: a model that rendered would be a third navigation nobody meant
+    // to have.
     const reached = [...externalGraph(SHARED.settingsNavModel).keys()];
 
     expect(reached).not.toContain("react");
@@ -221,23 +178,9 @@ describe("the settings frame is told its framework parts", () => {
   });
 
   it("reads its strings from use-intl rather than from a request", () => {
-    // The two panels were Server Components calling `getTranslations`, which is
-    // what made a heading Next-only. The scans above pin the absence of that;
-    // this pins what took its place, so a panel cannot pass by translating
-    // nothing at all.
+    // A panel cannot pass the scans above by translating nothing at all.
     for (const path of [SHARED.settingsOverview, SHARED.settingsSecurity]) {
       expect(runtimeImports(path)).toContain("use-intl");
-    }
-  });
-
-  it("has no half left that reads the pathname for itself", () => {
-    // This used to assert the opposite about the two Next.js wrappers: that they
-    // were where `usePathname` lived, so the shared frame could stay ignorant of
-    // it. Both are gone, and the invariant that survives them is that the shared
-    // frame never grew the hook back to fill the gap - which is what a host
-    // supplying `isRoot`/`pathname` would tempt somebody to do.
-    for (const path of Object.values(DELETED_NEXT_HALF)) {
-      expect(existsSync(path)).toBe(false);
     }
   });
 });

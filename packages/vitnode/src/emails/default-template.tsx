@@ -25,10 +25,10 @@ DefaultTemplateEmail.PreviewProps = {
       url: CONFIG.web.href,
     },
     logo: {
-      // Resolved against the configured web origin rather than hardcoded. It was
-      // `http://localhost:3000`, which was the Next.js docs app that served the
-      // asset; the app serving it now listens elsewhere, and an install that
-      // configures its own origin was never served by a literal either.
+      // Resolved against the configured web origin rather than hardcoded. It
+      // was `http://localhost:3000`, which was the app that served the asset at
+      // the time; an install that configures its own origin was never served by
+      // a literal either.
       src: new URL("/logo_vitnode_dark.png", CONFIG.web).href,
     },
   },

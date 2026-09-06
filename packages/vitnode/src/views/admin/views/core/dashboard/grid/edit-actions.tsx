@@ -1,5 +1,3 @@
-"use client";
-
 import { PencilIcon, SaveIcon, XIcon } from "lucide-react";
 import { useTranslations } from "use-intl";
 

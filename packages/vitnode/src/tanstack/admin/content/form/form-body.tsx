@@ -1,5 +1,3 @@
-"use client";
-
 import type { RegisteredFrontendContentType } from "@/content/index";
 import type { ContentRowData } from "@/views/admin/views/content/table/cells";
 

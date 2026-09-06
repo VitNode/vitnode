@@ -1,6 +1,6 @@
 // @vitest-environment node
-import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
-import { dirname, join, relative, resolve } from "node:path";
+import { readdirSync, readFileSync, statSync } from "node:fs";
+import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 
@@ -22,15 +22,6 @@ const filesUnder = (directory: string, skip: string[] = []): string[] => {
   return entries;
 };
 
-const importsFrom = (path: string): string[] =>
-  [
-    ...readFileSync(path, "utf8").matchAll(
-      /from\s+"([^"]+)"|import\s+"([^"]+)"/g,
-    ),
-  ]
-    .map(match => match[1] ?? match[2])
-    .filter(Boolean);
-
 describe("layer boundaries", () => {
   const engineFiles = filesUnder(here).filter(
     path => !/\.test(-d)?\.tsx?$/.test(path),
@@ -42,41 +33,10 @@ describe("layer boundaries", () => {
     expect(engineFiles.length).toBeGreaterThan(10);
   });
 
-  it.each(["next/", "server-only"])(
-    "never imports %s from content/ or content/server/",
-    prefix => {
-      const offenders = engineFiles.filter(path =>
-        importsFrom(path).some(
-          specifier =>
-            specifier === prefix.replace(/\/$/, "") ||
-            specifier.startsWith(prefix),
-        ),
-      );
-
-      expect(offenders.map(path => relative(here, path))).toEqual([]);
-    },
-  );
-
-  it("keeps the Next-only layer out of the engine's import graph", () => {
-    const offenders = engineFiles.filter(path =>
-      importsFrom(path).some(specifier => specifier.includes("content/next")),
-    );
-
-    expect(offenders.map(path => relative(here, path))).toEqual([]);
-  });
-
-  it("has no layer left where those imports were legal", () => {
-    // `content/next/` was that layer. Asserted by absence rather than dropped,
-    // because the shape of the mistake this guards against is recreating it: the
-    // engine's public delivery surface is `content/delivery.ts` plus the Hono
-    // routes in `content/server/delivery-routes.ts`, and a host adapter over
-    // them belongs in the host.
-    expect(existsSync(resolve(here, "next"))).toBe(false);
-  });
-
-  it("still exposes the framework-neutral delivery surface those adapters wrapped", () => {
-    // The capability, as opposed to the adapter. Deleting `content/next/` must
-    // not have taken delivery resolution, SEO or the sitemap with it.
+  it("exposes the framework-neutral delivery surface a host adapter wraps", () => {
+    // The engine's public delivery surface is `content/delivery.ts` plus the
+    // Hono routes in `content/server/delivery-routes.ts`; an adapter over them
+    // belongs in the host.
     const surface = readFileSync(join(here, "index.ts"), "utf8");
 
     for (const name of [

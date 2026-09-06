@@ -2,7 +2,7 @@ import type { Plugin } from "vite";
 
 import { loadEnv } from "vite";
 
-const CLIENT_ENV_KEYS = ["NEXT_PUBLIC_API_URL", "NEXT_PUBLIC_WEB_URL"] as const;
+const CLIENT_ENV_KEYS = ["VITNODE_API_URL", "VITNODE_WEB_URL"] as const;
 
 export interface VitNodeEnvOptions {
   clientEnv?: readonly string[];

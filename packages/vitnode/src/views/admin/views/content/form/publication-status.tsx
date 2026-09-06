@@ -1,5 +1,3 @@
-// No "use client": reached only from `content-form` / a layout, both of which
-// are already inside a client entry.
 import { CircleCheckIcon, FileClockIcon } from "lucide-react";
 import { useTranslations } from "use-intl";
 

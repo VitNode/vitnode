@@ -15,7 +15,7 @@ The repository is a monorepo for the VitNode framework, which includes a backend
 - **Frontend:**
   - TanStack Start on Vite, file-based routes under `apps/web/src/routes/`
   - Navigation: use `@vitnode/core/tanstack/layout`'s `RouterLink`, or TanStack
-    Router's own `Link` / `useNavigate`. Next.js is not a dependency.
+    Router's own `Link` / `useNavigate`.
   - Forms: Use `react-hook-form@7`, `createServerFn` for mutations
   - UI: Shadcn UI, Tailwind CSS 4, dark/light mode with system detection
   - i18n: Use `use-intl`, `t('key')` for translations, `createTranslator`

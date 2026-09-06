@@ -1,4 +1,3 @@
-// No "use client": reached only from `delivery-action`, which is a client entry.
 import { useQuery } from "@tanstack/react-query";
 import { CheckIcon, LinkIcon, XIcon } from "lucide-react";
 import { useTranslations } from "use-intl";

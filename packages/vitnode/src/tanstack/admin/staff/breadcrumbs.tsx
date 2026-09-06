@@ -1,5 +1,3 @@
-"use client";
-
 import { useTranslations } from "use-intl";
 
 import type { PermissionStaffType } from "@/api/lib/permission-staff";

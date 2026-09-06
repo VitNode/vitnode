@@ -1,5 +1,3 @@
-"use client";
-
 import { FileIcon, FolderIcon } from "lucide-react";
 import { useTranslations } from "use-intl";
 

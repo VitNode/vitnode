@@ -349,10 +349,9 @@ export const contentEditHref = (
 /**
  * The edit URL with `{id}` still in it.
  *
- * A create page is a server component and the identifier only exists once the
- * mutation has answered, so the client half is handed a template rather than a
- * callback - a function cannot cross an RSC boundary, and a second copy of the
- * URL shape would be free to drift from {@link contentEditHref}.
+ * The identifier only exists once the mutation has answered, so the screen is
+ * handed a template rather than a callback - a second copy of the URL shape
+ * would be free to drift from {@link contentEditHref}.
  */
 export const contentEditHrefTemplate = (
   definition: ContentAdminAddressable,

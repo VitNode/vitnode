@@ -3,6 +3,7 @@ import { createTranslator } from "use-intl";
 import { z } from "zod";
 
 import { buildRoute } from "@/api/lib/route";
+import { matchesEmail, pickAccountForEmail } from "@/api/lib/user-email-lookup";
 import { ForgotPasswordTokenModel } from "@/api/models/password";
 import { CONFIG_PLUGIN } from "@/config";
 import { core_users, core_users_forgot_password } from "@/database/users";
@@ -39,7 +40,7 @@ export const resetPasswordRoute = buildRoute({
   handler: async c => {
     const RESPONSE_TEXT = c.text("Email sent", 201);
     const { email } = c.req.valid("json");
-    const [findUser] = await c
+    const candidates = await c
       .get("db")
       .select({
         email: core_users.email,
@@ -47,14 +48,22 @@ export const resetPasswordRoute = buildRoute({
         language: core_users.language,
       })
       .from(core_users)
-      .where(eq(core_users.email, email))
-      .limit(1);
+      .where(matchesEmail(email))
+      .limit(2);
+    const findUser = pickAccountForEmail(candidates, email);
 
     if (!findUser) {
       return RESPONSE_TEXT;
     }
 
-    const hashToken = new ForgotPasswordTokenModel().generateResetToken();
+    // Two values, deliberately: the raw token goes in the email and nowhere
+    // else, and only its digest is written down. A reset row used to hold the
+    // live token in plaintext, so anything that could read the table - a
+    // read-replica, a backup, a leaked dump, a stray log line - could reset
+    // every account on the install without knowing a single password.
+    const tokens = new ForgotPasswordTokenModel();
+    const resetToken = tokens.generateResetToken();
+    const hashToken = tokens.hashResetToken(resetToken);
 
     const [findLastRecord] = await c
       .get("db")
@@ -95,7 +104,7 @@ export const resetPasswordRoute = buildRoute({
 
     // Send email
     const resetUrlNative = new URL(
-      `login/reset-password?token=${hashToken}&userId=${findUser.id}`,
+      `login/reset-password?token=${encodeURIComponent(resetToken)}&userId=${findUser.id}`,
       CONFIG.web.href,
     );
 

@@ -231,7 +231,7 @@ describe("minting a locale preview link", () => {
   });
 
   it("503s rather than handing back a link it cannot address", async () => {
-    vi.stubEnv("NEXT_PUBLIC_WEB_URL", "not a url");
+    vi.stubEnv("VITNODE_WEB_URL", "not a url");
     const { app } = harness();
 
     const response = await app.request("/7/translations/pl/preview", {

@@ -1,5 +1,3 @@
-"use client";
-
 import { ChevronRight, MenuIcon } from "lucide-react";
 import React, { useEffect, useState } from "react";
 

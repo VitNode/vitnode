@@ -21,7 +21,7 @@ describe("the composed plugin", () => {
   it("passes clientEnv through to the environment plugin", () => {
     const [env] = vitnode({
       appRoot: "/app",
-      clientEnv: ["NEXT_PUBLIC_MAP_KEY"],
+      clientEnv: ["VITNODE_MAP_KEY"],
     });
     const defined = Object.keys(
       // `config` is the hook the plugin does its work in; calling it directly is
@@ -36,11 +36,11 @@ describe("the composed plugin", () => {
       ).environments.client.define,
     );
 
-    expect(defined).toContain("process.env.NEXT_PUBLIC_MAP_KEY");
+    expect(defined).toContain("process.env.VITNODE_MAP_KEY");
     // The two every VitNode install publishes are still there - `clientEnv`
     // adds to that list rather than replacing it.
-    expect(defined).toContain("process.env.NEXT_PUBLIC_API_URL");
-    expect(defined).toContain("process.env.NEXT_PUBLIC_WEB_URL");
+    expect(defined).toContain("process.env.VITNODE_API_URL");
+    expect(defined).toContain("process.env.VITNODE_WEB_URL");
   });
 
   it("keeps the dev-server-only plugin dev-server-only", () => {

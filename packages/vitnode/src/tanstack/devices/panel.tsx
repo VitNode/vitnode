@@ -1,5 +1,3 @@
-"use client";
-
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { useTranslations } from "use-intl";
 
@@ -31,8 +29,8 @@ export const DevicesPanelContent = ({ userId }: { userId: number }) => {
       <DevicesHeading />
 
       {/*
-        The same component the Next.js page renders, handed the two things a
-        shared list cannot resolve for itself: the devices, and the revoke.
+        The shared list, handed the two things it cannot resolve for itself:
+        the devices, and the revoke.
 
         The revoke goes straight from the browser to Hono - no server function in
         between, because it needs no server-only secret and sets no cookie - and

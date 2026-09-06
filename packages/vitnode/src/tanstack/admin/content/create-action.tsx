@@ -1,5 +1,3 @@
-"use client";
-
 import { PlusIcon } from "lucide-react";
 import { useTranslations } from "use-intl";
 

@@ -92,10 +92,8 @@ export const themeScriptSource = ({
  * and the theme the visitor actually chose arrives a frame later as a flash of
  * the wrong colours.
  *
- * Framework-neutral on purpose: a TanStack Start app renders it in the document
- * head itself, and Next.js hoists it there through `useServerInsertedHTML` (see
- * a host that renders it into its own document head). Every host gets the same
- * script.
+ * Framework-neutral on purpose: whatever owns the document renders it into its
+ * own head. Every host gets the same script.
  */
 export const ThemeScript = ({ nonce, ...props }: ThemeScriptProps) => (
   <script

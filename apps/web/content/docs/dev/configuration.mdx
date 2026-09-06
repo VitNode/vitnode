@@ -267,10 +267,10 @@ server; put a reverse proxy or a platform such as Vercel in front of it for that
 working directory set to wherever the command ran, which in a monorepo is
 regularly the repository root.
 
-Publish an extra `NEXT_PUBLIC_*` key to the browser with `clientEnv`:
+Publish an extra key to the browser with `clientEnv`:
 
 ```ts
-vitnode({ appRoot: import.meta.dirname, clientEnv: ['NEXT_PUBLIC_MAP_KEY'] })
+vitnode({ appRoot: import.meta.dirname, clientEnv: ['VITNODE_MAP_KEY'] })
 ```
 
 Everything named there is compiled into JavaScript anyone can read, so add a key

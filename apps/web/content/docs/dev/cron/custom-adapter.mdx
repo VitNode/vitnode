@@ -67,7 +67,7 @@ import { TypeTable } from 'fumadocs-ui/components/type-table'
 />
 
 `handleCronJobs()` comes from the same module and takes no arguments. It posts to
-`/api/@vitnode/core/cron` on the origin in `NEXT_PUBLIC_API_URL` (falling back to
+`/api/@vitnode/core/cron` on the origin in `VITNODE_API_URL` (falling back to
 `http://localhost:3000`) with `Content-Type: application/json` and
 `Authorization: Bearer $CRON_SECRET`. It resolves as soon as the response
 arrives and never looks at it, so a `403` or a `500` resolves exactly like a

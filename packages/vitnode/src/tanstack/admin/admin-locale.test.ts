@@ -114,10 +114,10 @@ describe("what the AdminCP loads strings for", () => {
     expect(ADMIN_SIGN_IN_NAMESPACES).not.toContain("admin.global");
   });
 
-  it("keeps the sign-in screen's strings the ones the Next.js view asks for", () => {
+  it("keeps the sign-in screen's strings the ones the view asks for", () => {
     // `SignInAdminView` mounts `<I18nProvider namespaces={["core.auth.sign_in"]}>`,
-    // and that provider always prepends `core.global`. Same pair, so a screen's
-    // strings survive the migration unchanged.
+    // and that provider always prepends `core.global`. Same pair, so the route
+    // and the view never disagree about what to load.
     expect([...ADMIN_SIGN_IN_NAMESPACES].sort()).toEqual(
       ["core.auth.sign_in", "core.global"].sort(),
     );

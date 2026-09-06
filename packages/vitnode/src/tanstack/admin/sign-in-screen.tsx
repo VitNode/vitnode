@@ -1,5 +1,3 @@
-"use client";
-
 import { SignInAdminContent } from "@/views/admin/sign-in/sign-in-admin-content";
 import { SignInFormContent } from "@/views/auth/sign-in/form/sign-in-form-content";
 

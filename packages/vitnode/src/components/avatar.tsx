@@ -6,15 +6,15 @@ const generateLetterPhoto = (letter: string, color: string) =>
   )}`;
 
 /**
- * A plain `<img>` rather than `next/image`, on purpose.
+ * A plain `<img>` rather than a host's image component, on purpose.
  *
- * The `src` is always a `data:` URI built in this file, and Next refuses to
- * optimize those - it marks them unoptimized and emits the same tag this does.
- * So the import bought nothing, and it cost the whole component tree that
- * renders an avatar its portability: the search feed, the user bar and the
- * AdminCP tables all become Next-only the moment one of them shows a face.
+ * The `src` is always a `data:` URI built in this file, so there is nothing for
+ * an optimizer to do - and reaching for one would cost the whole component tree
+ * that renders an avatar its portability: the search feed, the user bar and the
+ * AdminCP tables would all be pinned to one host the moment any of them shows a
+ * face.
  *
- * `loading` and `decoding` are spelled out because `next/image` set them, and a
+ * `loading` and `decoding` are spelled out rather than left to a default, and a
  * data URI is inline anyway - the browser has the bytes before it can defer.
  */
 export const Avatar = ({

@@ -1,5 +1,3 @@
-"use client";
-
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { Maximize2Icon, XIcon } from "lucide-react";

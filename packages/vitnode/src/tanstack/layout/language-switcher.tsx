@@ -1,5 +1,3 @@
-"use client";
-
 import { useLanguages } from "@/components/languages-provider";
 import { LanguageSwitcherContent } from "@/components/switchers/langs/language-switcher-content";
 

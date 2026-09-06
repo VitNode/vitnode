@@ -1,5 +1,3 @@
-"use client";
-
 import type { Announcements, UniqueIdentifier } from "@dnd-kit/core";
 
 import {
