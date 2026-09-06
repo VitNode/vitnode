@@ -17,7 +17,6 @@ import { routeContext } from "../types";
 import { coreAuthRoutes } from "./auth";
 import { coreDiscoveryRoutes } from "./discovery";
 import { myFilesRoute } from "./files";
-import { notFoundRoute } from "./not-found";
 import { settingsRoute } from "./settings";
 import { ssoCallbackRoute } from "./sso";
 
@@ -37,7 +36,6 @@ const CORE_PUBLIC_ROUTES: CoreAuthRouteFactory[] = [
   ...coreDiscoveryRoutes,
   ...coreAuthRoutes,
   ssoCallbackRoute,
-  notFoundRoute,
 ];
 
 /** Core's screens that require a signed-in visitor. */

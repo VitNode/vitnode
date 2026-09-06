@@ -68,7 +68,11 @@ export const AgentsSection = ({
           </p>
 
           <div className="flex flex-wrap gap-6">
-            <TextLink href="/llms-full.txt" LinkComponent={LinkComponent}>
+            <TextLink
+              href="/llms-full.txt"
+              LinkComponent={LinkComponent}
+              target="_blank"
+            >
               Docs for your agent
             </TextLink>
             <TextLink href="/docs/dev/ai" LinkComponent={LinkComponent}>

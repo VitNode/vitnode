@@ -2,6 +2,7 @@
 @import 'shadcn/tailwind.css';
 @import 'tw-animate-css';
 @import './theme.css';
+@import '@vitnode/core/styles/tiptap.css';
 @import './site/marketing/marketing.css';
 
 @source "../node_modules/@vitnode/core/dist/src/components";

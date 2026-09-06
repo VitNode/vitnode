@@ -1,9 +1,8 @@
-import type { SerializedPageTree } from 'fumadocs-core/source/client'
+import type { Root } from 'fumadocs-core/page-tree'
 
 import { useRouterState } from '@tanstack/react-router'
 import { LogoVitNode } from '@vitnode/core/components/logo-vitnode'
 import { ThemeSwitcher } from '@vitnode/core/components/switchers/themes/theme-switcher'
-import { deserializePageTree } from 'fumadocs-core/source/client'
 import { DocsLayout } from 'fumadocs-ui/layouts/notebook'
 import { RootProvider } from 'fumadocs-ui/provider/tanstack'
 import React from 'react'
@@ -17,9 +16,8 @@ export const DocsShellContent = ({
   pageTree,
 }: {
   children: React.ReactNode
-  pageTree: SerializedPageTree
+  pageTree: Root
 }) => {
-  const tree = React.useMemo(() => deserializePageTree(pageTree), [pageTree])
   const section = useRouterState({
     select: (state) => docsSectionOf(state.location.pathname),
   })
@@ -65,7 +63,7 @@ export const DocsShellContent = ({
             },
           }}
           slots={{ themeSwitch: ThemeSwitcher }}
-          tree={tree}
+          tree={pageTree}
         >
           {children}
         </DocsLayout>

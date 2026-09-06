@@ -3,7 +3,7 @@ import { devtools } from '@tanstack/devtools-vite'
 import { tanstackStart } from '@tanstack/react-start/plugin/vite'
 import viteReact from '@vitejs/plugin-react'
 import { vitnode } from '@vitnode/core/framework/vite'
-import fumadocsMdx from 'fumadocs-mdx/vite'
+import { fumadocsMdx } from 'fumadocs-mdx/vite'
 import { nitro } from 'nitro/vite'
 import { defineConfig } from 'vite'
 
@@ -15,7 +15,7 @@ const config = defineConfig({
   server: { strictPort: true },
   plugins: [
     vitnode({ appRoot: import.meta.dirname }),
-    fumadocsMdx(),
+    fumadocsMdx({ index: false }),
     devtools(),
     nitro(),
     tailwindcss(),

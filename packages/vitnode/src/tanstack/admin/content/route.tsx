@@ -93,9 +93,6 @@ export const loadContentAdminRoute = async ({
   const screen = resolveContentAdminScreen(segments, registry);
 
   if (!screen) {
-    // TanStack Router's own control-flow signal, answered by `_admin`'s
-    // `notFoundComponent` - the same outcome the Next.js page's `notFound()`
-    // produces, one navigation earlier.
     // eslint-disable-next-line @typescript-eslint/only-throw-error
     throw notFound();
   }

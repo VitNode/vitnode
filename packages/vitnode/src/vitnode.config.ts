@@ -10,6 +10,7 @@ import type { EventsApiPlugin } from "./api/models/events";
 import type { SearchProviderApiPlugin } from "./api/models/search";
 import type { SSOApiPlugin } from "./api/models/sso";
 import type { StorageApiPlugin } from "./api/models/storage";
+import type { VitNodeEditorConfig } from "./components/editor-provider";
 import type { ThemeProviderProps } from "./components/theme-provider";
 import type { DefaultTemplateEmailProps } from "./emails/default-template";
 import type {
@@ -28,6 +29,8 @@ export interface VitNodeConfig<
   AppLocales extends LocaleConfig[] = LocaleConfig[],
 > {
   debug?: boolean;
+  /** Editor settings shared by every `Editor` in the app. */
+  editor?: VitNodeEditorConfig;
   i18n: VitNodeI18nConfig<AppLocales>;
   metadata: VitNodeMetadata;
   plugins: BuildPluginReturn[];

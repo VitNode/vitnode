@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "shadcn/tailwind.css";
 @import "tw-animate-css";
+@import "@vitnode/core/styles/tiptap.css";
 
 @source "../node_modules/@vitnode/core/dist/src/components";
 @source "../node_modules/@vitnode/core/dist/src/tanstack";

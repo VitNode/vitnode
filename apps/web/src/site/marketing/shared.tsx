@@ -99,11 +99,13 @@ export const TextLink = ({
   className,
   href,
   LinkComponent,
+  target,
 }: {
   children: React.ReactNode
   className?: string
   href: string
   LinkComponent: SiteLinkComponent
+  target?: React.HTMLAttributeAnchorTarget
 }) => (
   <LinkComponent
     className={cn(
@@ -111,6 +113,8 @@ export const TextLink = ({
       className,
     )}
     href={href}
+    rel={target === '_blank' ? 'noopener noreferrer' : undefined}
+    target={target}
   >
     {children}
     <ArrowRight

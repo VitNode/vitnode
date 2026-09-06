@@ -1,23 +1,14 @@
-import type { SearchAPI } from 'fumadocs-core/search/server'
-
 import { createFileRoute } from '@tanstack/react-router'
+import { createFromSource } from 'fumadocs-core/search/server'
 
-import { memoizePerSource } from '#/docs/freshness'
+import { source } from '#/docs/source.server'
 
-const docsSearchApi = memoizePerSource(
-  async () => await import('#/docs/source.server'),
-  async ({ source }): Promise<SearchAPI> => {
-    const { createFromSource } = await import('fumadocs-core/search/server')
-
-    return createFromSource(source)
-  },
-)
+const docsSearch = createFromSource(source, { language: 'english' })
 
 export const Route = createFileRoute('/docs/search')({
   server: {
-    handlers: ({ createHandlers }) =>
-      createHandlers({
-        GET: async ({ request }) => await (await docsSearchApi()).GET(request),
-      }),
+    handlers: {
+      GET: async ({ request }) => await docsSearch.GET(request),
+    },
   },
 })

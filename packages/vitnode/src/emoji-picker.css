@@ -1,0 +1,104 @@
+@source inline(
+  "[&>svg]:block absolute animate-pulse antialiased aspect-square"
+);
+@source inline(
+  "backdrop-blur backdrop-filter backdrop-grayscale backdrop-invert"
+);
+@source inline(
+  "backdrop-sepia bg-[var(--emoji-hover-color)] bg-gray-200 bg-repeat"
+);
+@source inline(
+  "bg-slate-100 bg-white/90 bg-zinc-100 bg-zinc-50 block blur border"
+);
+@source inline(
+  "border-b border-collapse border-e border-l border-r border-s border-t"
+);
+@source inline(
+  "border-x border-y border-zinc-200 capitalize collapse container contents"
+);
+@source inline(
+  "dark:bg-gray-700 dark:bg-zinc-800 dark:bg-zinc-900 dark:bg-zinc-950/90"
+);
+@source inline(
+  "dark:border-zinc-800 dark:focus:bg-zinc-800 dark:hover:bg-zinc-800"
+);
+@source inline("dark:hover:text-zinc-400 dark:placeholder:text-zinc-400");
+@source inline("dark:text-gray-400 dark:text-zinc-100 dark:text-zinc-200");
+@source inline(
+  "dark:text-zinc-400 dark:text-zinc-600 diagonal-fractions divide-x"
+);
+@source inline(
+  "divide-x-reverse divide-y divide-y-reverse drop-shadow filter fixed flex"
+);
+@source inline("flex-1 flex-col flex-nowrap flex-shrink-0 flex-wrap flow-root");
+@source inline("focus:bg-[var(--emoji-hover-color)] focus:bg-slate-100");
+@source inline("focus:outline-none focus:ring-1 focus:ring-2");
+@source inline(
+  "focus:ring-[var(--emoji-hover-color)] focus:ring-indigo-500 font-medium"
+);
+@source inline(
+  "font-semibold gap-0.5 gap-2 gap-4 grayscale grid grow h-4 h-7 h-full"
+);
+@source inline("hidden hover:bg-[var(--emoji-hover-color)] hover:bg-slate-100");
+@source inline(
+  "hover:bg-zinc-100 hover:text-zinc-500 inline inline-block inline-flex"
+);
+@source inline("inline-grid inline-table inset-ring invert invisible isolate");
+@source inline(
+  "isolation-auto italic items-center items-start justify-between"
+);
+@source inline(
+  "justify-center justify-start left-2 line-through lining-nums list-item"
+);
+@source inline(
+  "lowercase mask-no-clip mask-repeat mb-2 min-w-0 no-underline normal-case"
+);
+@source inline(
+  "normal-nums not-italic not-sr-only object-contain oldstyle-nums"
+);
+@source inline(
+  "opacity-0 opacity-100 ordinal outline outline-none overflow-hidden"
+);
+@source inline(
+  "overflow-y-auto overline overscroll-contain p-1 p-2 pb-1 pl-2 pl-7"
+);
+@source inline("placeholder:text-zinc-500 pointer-events-none pr-2 pr-7");
+@source inline(
+  "proportional-nums pt-2 px-2 px-3 px-4 py-1.5 py-12 relative resize"
+);
+@source inline(
+  "right-2 ring ring-inset rounded rounded-b rounded-bl rounded-br"
+);
+@source inline(
+  "rounded-e rounded-ee rounded-es rounded-l rounded-lg rounded-md"
+);
+@source inline(
+  "rounded-r rounded-s rounded-se rounded-sm rounded-ss rounded-t"
+);
+@source inline(
+  "rounded-tl rounded-tr scale-3d sepia shadow shadow-lg shrink size-6"
+);
+@source inline(
+  "slashed-zero space-x-reverse space-y-reverse sr-only stacked-fractions"
+);
+@source inline("static sticky subpixel-antialiased");
+@source inline("supports-[backdrop-filter]:backdrop-blur-sm");
+@source inline("supports-[backdrop-filter]:bg-white/50");
+@source inline(
+  "supports-[backdrop-filter]:dark:bg-zinc-950/50 table table-caption"
+);
+@source inline("table-cell table-column table-column-group table-footer-group");
+@source inline(
+  "table-header-group table-row table-row-group tabular-nums text-[10px]"
+);
+@source inline(
+  "text-center text-clip text-ellipsis text-gray-500 text-lg text-nowrap"
+);
+@source inline(
+  "text-sm text-wrap text-xs text-zinc-400 text-zinc-500 text-zinc-900"
+);
+@source inline(
+  "touch-pinch-zoom transform transition transition-colors translate-none"
+);
+@source inline("truncate underline uppercase visible w-4 w-[400px] w-full");
+@source inline("will-change-scroll");

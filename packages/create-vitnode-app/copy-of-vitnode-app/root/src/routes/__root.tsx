@@ -16,11 +16,7 @@ import {
   resolveLocale,
   useLocale,
 } from "@vitnode/core/tanstack/i18n";
-import {
-  ErrorActions,
-  NotFound,
-  VitNodeRootProviders,
-} from "@vitnode/core/tanstack/layout";
+import { VitNodeRootProviders } from "@vitnode/core/tanstack/layout";
 
 import type { Locale } from "#/lib/i18n/shared";
 
@@ -28,7 +24,7 @@ import { vitNodeConfig } from "#/vitnode.config";
 
 import appCss from "../styles.css?url";
 
-const { debug, i18n, metadata, theme } = vitNodeConfig;
+const { debug, editor, i18n, metadata, theme } = vitNodeConfig;
 
 export interface RootRouterContext {
   queryClient: QueryClient;
@@ -61,17 +57,14 @@ export const Route = createRootRouteWithContext<RootRouterContext>()({
       intlQueryOptions({ locale: context.locale }),
     );
   },
-  notFoundComponent: RootNotFound,
   shellComponent: RootDocument,
 });
 
-function RootNotFound() {
-  return <NotFound actions={<ErrorActions />} />;
-}
-
 function RootComponent() {
   return (
-    <VitNodeRootProviders config={{ debug, locales: i18n.locales, theme }}>
+    <VitNodeRootProviders
+      config={{ debug, editor, locales: i18n.locales, theme }}
+    >
       <Outlet />
     </VitNodeRootProviders>
   );

@@ -4,7 +4,13 @@ import { RouterLink } from '@vitnode/core/tanstack/layout'
 import { AUTHOR_NAME, AUTHOR_URL, LICENSE_URL, REPOSITORY_URL } from './links'
 import { CanaryPill, GitHubIcon } from './shared'
 
-const COLUMNS = [
+interface FooterLink {
+  href: string
+  label: string
+  target?: React.HTMLAttributeAnchorTarget
+}
+
+const COLUMNS: { links: FooterLink[]; title: string }[] = [
   {
     links: [
       { href: '/', label: 'Overview' },
@@ -33,7 +39,7 @@ const COLUMNS = [
       { href: '/discover', label: 'Discover' },
       { href: '/search', label: 'Search' },
       { href: '/docs/dev/contribution', label: 'Contribute' },
-      { href: '/llms-full.txt', label: 'Docs for AI agents' },
+      { href: '/llms-full.txt', label: 'Docs for AI agents', target: '_blank' },
     ],
     title: 'Community',
   },
@@ -72,11 +78,15 @@ export const SiteFooter = () => (
           <nav aria-label={title} className="flex flex-col gap-3" key={title}>
             <h2 className="text-sm font-semibold">{title}</h2>
             <ul className="flex flex-col gap-2">
-              {links.map(({ href, label }) => (
+              {links.map(({ href, label, target }) => (
                 <li key={href}>
                   <RouterLink
                     className="text-muted-foreground hover:text-foreground text-sm transition-colors"
                     href={href}
+                    rel={
+                      target === '_blank' ? 'noopener noreferrer' : undefined
+                    }
+                    target={target}
                   >
                     {label}
                   </RouterLink>

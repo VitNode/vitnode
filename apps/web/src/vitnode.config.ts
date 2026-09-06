@@ -4,6 +4,20 @@ import { examplePlugin } from '@vitnode/example/config'
 
 export const vitNodeConfig = buildConfig({
   debug: false,
+  editor: {
+    emojis: [
+      {
+        emojis: [
+          {
+            name: 'vitnode',
+            src: '/logo_vitnode_icon.svg',
+            tags: ['logo', 'brand'],
+          },
+        ],
+        label: 'VitNode',
+      },
+    ],
+  },
   i18n: {
     defaultLocale: 'en',
     locales: [
