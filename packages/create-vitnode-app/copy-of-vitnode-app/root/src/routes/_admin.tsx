@@ -1,18 +1,15 @@
 import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 import {
   ADMIN_ENTRY_PATH,
-  AdminNotFound,
   adminReturnToFor,
   canEnterAdmin,
   ensureAdminAccess,
   loadAdminMessages,
   preloadAdminAccess,
 } from "@vitnode/core/tanstack/admin";
-import { ErrorActions } from "@vitnode/core/tanstack/layout";
 
 import { AdminShell } from "#/components/admin-shell";
 import { pageHead } from "#/lib/page-head";
-
 
 export const Route = createFileRoute("/_admin")({
   beforeLoad: async ({ context, location, preload }) => {
@@ -48,28 +45,16 @@ export const Route = createFileRoute("/_admin")({
     // a page cannot disagree with the guard that let it render.
     return { adminAccess: access };
   },
-  
+
   loader: async ({ context }) => {
     const { adminNav } = await import("#/lib/admin-nav");
 
     await loadAdminMessages({ ...context, namespaces: adminNav.namespaces });
   },
-  
+
   head: () => pageHead({ robots: "noindex, nofollow" }),
-  
-  notFoundComponent: AdminNotFoundScreen,
   component: AdminLayout,
 });
-
-
-function AdminNotFoundScreen() {
-  return (
-    <AdminShell>
-      <AdminNotFound actions={<ErrorActions />} />
-    </AdminShell>
-  );
-}
-
 
 function AdminLayout() {
   return (

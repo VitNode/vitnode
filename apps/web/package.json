@@ -16,8 +16,7 @@
     "start": "node .output/server/index.mjs",
     "typecheck": "tsc --noEmit",
     "lint:fix": "eslint . --fix",
-    "docs:check": "node scripts/check-docs.mjs",
-    "postinstall": "fumadocs-mdx"
+    "docs:check": "node scripts/check-docs.mjs"
   },
   "dependencies": {
     "@hono/zod-openapi": "^1.5.1",
@@ -36,9 +35,9 @@
     "dotenv": "^17.4.2",
     "drizzle-kit": "1.0.0-rc.4",
     "drizzle-orm": "1.0.0-rc.4",
-    "fumadocs-core": "^16.11.5",
-    "fumadocs-mdx": "^15.2.0",
-    "fumadocs-ui": "^16.11.5",
+    "fumadocs-core": "^16.15.7",
+    "fumadocs-mdx": "^15.4.0",
+    "fumadocs-ui": "^16.15.7",
     "hono": "^4.12.31",
     "lucide-react": "^1.25.0",
     "motion": "^12.42.2",

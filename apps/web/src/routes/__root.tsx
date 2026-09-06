@@ -16,11 +16,7 @@ import {
   resolveLocale,
   useLocale,
 } from '@vitnode/core/tanstack/i18n'
-import {
-  ErrorActions,
-  NotFound,
-  VitNodeRootProviders,
-} from '@vitnode/core/tanstack/layout'
+import { VitNodeRootProviders } from '@vitnode/core/tanstack/layout'
 
 import type { Locale } from '#/lib/i18n/shared'
 
@@ -61,13 +57,8 @@ export const Route = createRootRouteWithContext<RootRouterContext>()({
       intlQueryOptions({ locale: context.locale }),
     )
   },
-  notFoundComponent: RootNotFound,
   shellComponent: RootDocument,
 })
-
-function RootNotFound() {
-  return <NotFound actions={<ErrorActions />} />
-}
 
 function RootComponent() {
   return (

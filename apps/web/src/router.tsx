@@ -3,19 +3,26 @@ import type { AnyRouter } from '@tanstack/react-router'
 import { createRouter as createTanStackRouter } from '@tanstack/react-router'
 import { setupRouterSsrQueryIntegration } from '@tanstack/react-router-ssr-query'
 import { createVitNodeQueryClient } from '@vitnode/core/lib/query-client'
+import {
+  ErrorActions,
+  NotFound,
+  Error500Page,
+} from '@vitnode/core/tanstack/layout'
 import { RoutePendingSpinner } from '@vitnode/core/tanstack/pending'
 import {
   pluginRouteSpecs,
   withPluginRoutes,
 } from '@vitnode/core/tanstack/plugin-routes'
+
+import './lib/auth'
+import './lib/admin-auth'
 import {
   withCoreAdminRoutes,
   withCoreMainRoutes,
   withCoreRootRoutes,
 } from '@vitnode/core/tanstack/routes'
 
-import './lib/auth'
-import './lib/admin-auth'
+import { dehydrateDocsPage, hydrateDocsPage } from './docs/hydration'
 import { createLocaleRewrite, localeRouting } from './lib/i18n/runtime'
 import { pageHead } from './lib/page-head'
 import { pluginRouteSources } from './plugin-routes.gen'
@@ -47,14 +54,14 @@ export function getRouter() {
   const router = createTanStackRouter({
     context: { queryClient },
     defaultPendingComponent: RoutePendingSpinner,
-    defaultPendingMs: 150,
-    defaultPendingMinMs: 300,
     defaultPreload: 'intent',
-    defaultPreloadStaleTime: 0,
-    defaultStaleReloadMode: 'blocking',
+    scrollRestoration: true,
+    dehydrate: () => dehydrateDocsPage(holder.current),
+    hydrate: hydrateDocsPage,
     rewrite: createLocaleRewrite(() => holder.current),
     routeTree,
-    scrollRestoration: true,
+    defaultNotFoundComponent: () => <NotFound actions={<ErrorActions />} />,
+    defaultErrorComponent: () => <Error500Page actions={<ErrorActions />} />,
   })
 
   holder.current = router

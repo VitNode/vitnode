@@ -109,6 +109,20 @@ npm run build
 
 ---
 
+## Docs for AI Agents
+
+The documentation portal in `apps/web` speaks Markdown as well as HTML, so agents and LLM tools can read it without scraping:
+
+| URL | What you get |
+| :--- | :--- |
+| `/llms.txt` | An index of every docs page with its title, URL and description |
+| `/llms-full.txt` | The whole documentation as one Markdown document |
+| `/docs/<page>.md` | A single page as Markdown, for example `/docs/dev/setup.md` |
+
+Requesting a docs page with an `Accept: text/markdown` header redirects to its `.md` twin, so a curious agent gets Markdown without asking twice. Every page also has a **Copy Markdown** button and an **Open in** menu for ChatGPT, Claude and friends.
+
+---
+
 ## Pull Request Guidelines
 
 1. **Focused PRs**: Keep changes scoped to a single feature or bug fix.

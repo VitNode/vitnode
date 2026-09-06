@@ -7,7 +7,6 @@ export {
 } from "./breadcrumb";
 export * from "./intl";
 export { AdminNavProvider, useAdminNav, useAdminSearchNavItems } from "./nav";
-export { AdminNotFound } from "./not-found";
 export * from "./permissions";
 export { removeAdminIdentityQueries, removeAdminShellQueries } from "./queries";
 export * from "./return-to";

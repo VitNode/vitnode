@@ -1,29 +1,18 @@
-import { createFileRoute, redirect } from '@tanstack/react-router'
+import { createFileRoute } from '@tanstack/react-router'
+import { Suspense } from 'react'
 
-import { movedDocsSlug } from '#/docs/moved-pages'
 import { DocsPageContent } from '#/docs/page-content'
 import { DocsPagePendingSkeleton } from '#/docs/pending'
+import { DOCS_STALE_TIME } from '#/docs/shared'
 import { getDocsPage } from '#/docs/transport'
 import { pageHead } from '#/lib/page-head'
 
 export const Route = createFileRoute('/_docs/docs/$')({
-  beforeLoad: ({ params }) => {
-    const moved = movedDocsSlug(params._splat ?? '')
-
-    if (moved) {
-      // eslint-disable-next-line @typescript-eslint/only-throw-error
-      throw redirect({
-        params: { _splat: moved },
-        statusCode: 301,
-        to: '/docs/$',
-      })
-    }
-  },
   loader: async ({ params }) => {
     const page = await getDocsPage({ data: params._splat ?? '' })
-    const { docsClientLoader } = await import('#/docs/client-loader')
+    const { docs } = await import('#/docs/source')
 
-    await docsClientLoader.preload(page.path)
+    await docs.getPage(page.path)?.preload()
 
     return page
   },
@@ -38,10 +27,15 @@ export const Route = createFileRoute('/_docs/docs/$')({
       robots: 'index, follow',
       title: loaderData?.metaTitle,
     }),
+  staleTime: DOCS_STALE_TIME,
   component: DocsRoute,
   pendingComponent: DocsPagePendingSkeleton,
 })
 
 function DocsRoute() {
-  return <DocsPageContent {...Route.useLoaderData()} />
+  return (
+    <Suspense fallback={<DocsPagePendingSkeleton />}>
+      <DocsPageContent {...Route.useLoaderData()} />
+    </Suspense>
+  )
 }

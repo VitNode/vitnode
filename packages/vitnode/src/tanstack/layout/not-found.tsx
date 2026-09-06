@@ -16,3 +16,16 @@ export const NotFound = ({ actions }: { actions?: React.ReactNode }) => {
     />
   );
 };
+
+export const Error500Page = ({ actions }: { actions?: React.ReactNode }) => {
+  const t = useTranslations("core.global");
+
+  return (
+    <ErrorContent
+      actions={actions}
+      code={500}
+      description={t("errors.404.desc")}
+      title={t("errors.404.title")}
+    />
+  );
+};

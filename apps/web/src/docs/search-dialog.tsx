@@ -11,7 +11,7 @@ import {
   type SharedProps,
 } from 'fumadocs-ui/components/dialog/search'
 
-import { DOCS_SEARCH_PATH } from './search-path'
+import { DOCS_SEARCH_PATH } from './shared'
 
 const DocsSearchDialog = (props: SharedProps) => {
   const { query, search, setSearch } = useDocsSearch({
