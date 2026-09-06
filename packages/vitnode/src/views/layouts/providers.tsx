@@ -5,6 +5,7 @@ import React from "react";
 import type { LocaleConfig } from "@/lib/i18n/types";
 import type { VitNodeConfig } from "@/vitnode.config";
 
+import { EditorConfigProvider } from "@/components/editor-provider";
 import { LanguagesProvider } from "@/components/languages-provider";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
@@ -15,7 +16,7 @@ import { RateLimitListener } from "./rate-limit-listener";
 
 export interface VitNodeProvidersConfig extends Pick<
   VitNodeConfig,
-  "debug" | "theme"
+  "debug" | "editor" | "theme"
 > {
   locales: LocaleConfig[];
 }
@@ -23,7 +24,7 @@ export interface VitNodeProvidersConfig extends Pick<
 export const VitNodeProviders = ({
   children,
   toaster,
-  config: { debug, locales, theme },
+  config: { debug, editor, locales, theme },
 }: {
   children: React.ReactNode;
   config: VitNodeProvidersConfig;
@@ -50,7 +51,11 @@ export const VitNodeProviders = ({
       />
       <RateLimitListener />
       <TooltipProvider>
-        <LanguagesProvider languages={locales}>{children}</LanguagesProvider>
+        <LanguagesProvider languages={locales}>
+          <EditorConfigProvider config={editor}>
+            {children}
+          </EditorConfigProvider>
+        </LanguagesProvider>
       </TooltipProvider>
     </ThemeProvider>
   );

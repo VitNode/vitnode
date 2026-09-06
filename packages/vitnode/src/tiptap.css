@@ -1,28 +1,125 @@
-@import "tailwindcss";
+@import "./emoji-picker.css";
+
+.tiptap-dropcursor {
+  @apply rounded-full;
+}
 
 .tiptap {
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply [&:not(:first-child)]:mt-6;
+  }
+
   h1 {
     @apply text-4xl font-extrabold tracking-tight text-balance;
   }
 
   h2 {
-    @apply text-3xl font-semibold tracking-tight;
+    @apply text-3xl font-semibold tracking-tight text-balance;
   }
 
   h3 {
-    @apply text-2xl font-semibold tracking-tight;
+    @apply text-2xl font-semibold tracking-tight text-balance;
   }
 
   h4 {
-    @apply text-xl font-semibold tracking-tight;
+    @apply text-xl font-semibold tracking-tight text-balance;
   }
 
   ul,
   ol {
-    @apply my-4 ml-6 space-y-2;
+    @apply my-4 ms-6;
+
+    li:not(:first-child) {
+      @apply mt-2;
+    }
   }
 
   p {
-    @apply [&:not(:first-child)]:mt-2;
+    @apply leading-relaxed [&:not(:first-child)]:mt-2;
+  }
+
+  a {
+    @apply text-primary font-medium underline underline-offset-4 hover:no-underline;
+  }
+
+  blockquote {
+    @apply border-primary/50 text-muted-foreground my-4 border-s-4 ps-4 italic;
+
+    p {
+      @apply mt-0;
+    }
+  }
+
+  code {
+    @apply bg-muted text-foreground rounded-sm px-1.5 py-0.5 font-mono text-[0.875em] font-medium;
+  }
+
+  pre {
+    @apply bg-muted text-foreground ring-border my-4 overflow-x-auto rounded-md p-4 font-mono text-sm leading-relaxed ring-1;
+
+    code {
+      @apply bg-transparent p-0 text-inherit;
+    }
+  }
+
+  hr {
+    @apply border-border my-6 border-t;
+  }
+
+  .tiptap-audio {
+    @apply my-4 w-full;
+  }
+
+  [data-type="emoji"] {
+    @apply inline-block align-middle;
+
+    img {
+      @apply inline-block h-[1.2em] w-auto align-[-0.2em];
+    }
+  }
+
+  .tableWrapper {
+    @apply my-4 overflow-x-auto;
+  }
+
+  table {
+    @apply w-full table-fixed border-collapse text-sm;
+
+    td,
+    th {
+      @apply border-border relative min-w-6 border p-2 align-top;
+    }
+
+    th {
+      @apply bg-muted text-start font-semibold;
+    }
+
+    p {
+      @apply mt-0;
+    }
+
+    .selectedCell::after {
+      @apply bg-primary/20 pointer-events-none absolute inset-0 z-2 content-[""];
+    }
+
+    .column-resize-handle {
+      @apply bg-primary pointer-events-none absolute -end-0.5 top-0 bottom-[-1px] z-2 w-1;
+    }
+  }
+
+  &.resize-cursor {
+    @apply cursor-col-resize;
+  }
+
+  .ProseMirror-selectednode {
+    @apply ring-ring rounded-sm ring-2;
+  }
+
+  .is-editor-empty:first-child::before,
+  .is-empty::before {
+    @apply text-muted-foreground pointer-events-none float-start h-0 content-[attr(data-placeholder)];
   }
 }

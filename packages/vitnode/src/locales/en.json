@@ -156,13 +156,56 @@
         "bullet_list": "Bullet List",
         "text_format_more": {
           "label": "More text formats",
-          "strike": "Strike"
+          "strike": "Strike",
+          "code": "Inline code"
         },
         "alignments": {
           "left": "Left align",
           "center": "Center align",
           "right": "Right align",
           "justify": "Justify align"
+        },
+        "blockquote": "Blockquote",
+        "code_block": "Code block",
+        "horizontal_rule": "Horizontal rule",
+        "placeholder": "Write something…",
+        "drag_handle": "Drag to move block",
+        "font_size": {
+          "label": "Font size",
+          "default": "Default"
+        },
+        "color": {
+          "label": "Text color",
+          "reset": "Reset color"
+        },
+        "emoji": {
+          "label": "Emoji",
+          "search": "Search emoji…",
+          "empty": "No emoji found.",
+          "hint": "Pick an emoji"
+        },
+        "audio": {
+          "label": "Audio",
+          "title": "Insert audio",
+          "desc": "Paste a link to an audio file, for example an mp3, wav or ogg.",
+          "src": {
+            "label": "Audio URL"
+          },
+          "submit": "Insert audio"
+        },
+        "table": {
+          "label": "Table",
+          "insert": "Insert table",
+          "add_column_before": "Add column before",
+          "add_column_after": "Add column after",
+          "add_row_before": "Add row before",
+          "add_row_after": "Add row after",
+          "toggle_header_row": "Toggle header row",
+          "toggle_header_column": "Toggle header column",
+          "merge_or_split": "Merge or split cells",
+          "delete_column": "Delete column",
+          "delete_row": "Delete row",
+          "delete": "Delete table"
         }
       },
       "theme_switcher": "Toggle Theme",

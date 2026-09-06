@@ -1,8 +1,13 @@
+import { useEditorConfig } from "@vitnode/core/components/editor-provider";
+import { EditorContent } from "@vitnode/core/components/ui/editor-content";
 import { definePluginRoute } from "@vitnode/core/routing";
 import { useTranslations } from "use-intl";
 
+import { editorShowcaseHtml } from "./editor-showcase";
+
 const AdminExamplePage = () => {
   const t = useTranslations("@vitnode/example.admin.overview");
+  const { emojis } = useEditorConfig();
 
   return (
     <div className="flex flex-col gap-4 p-4">
@@ -21,6 +26,20 @@ const AdminExamplePage = () => {
         <li>{t("points.path")}</li>
         <li>{t("points.nav")}</li>
       </ul>
+
+      <section className="flex flex-col gap-2">
+        <h2 className="text-xl font-semibold tracking-tight text-balance">
+          {t("editor.title")}
+        </h2>
+
+        <p className="text-muted-foreground leading-relaxed text-pretty">
+          {t("editor.desc")}
+        </p>
+
+        <div className="bg-card w-full rounded-md border p-6 shadow-xs">
+          <EditorContent content={editorShowcaseHtml(emojis?.[0]?.emojis[0])} />
+        </div>
+      </section>
     </div>
   );
 };

@@ -143,13 +143,56 @@
         "bullet_list": "Lista punktowana",
         "text_format_more": {
           "label": "Więcej formatów tekstu",
-          "strike": "Przekreślenie"
+          "strike": "Przekreślenie",
+          "code": "Kod w linii"
         },
         "alignments": {
           "left": "Wyrównaj do lewej",
           "center": "Wyśrodkuj",
           "right": "Wyrównaj do prawej",
           "justify": "Wyjustuj"
+        },
+        "blockquote": "Cytat",
+        "code_block": "Blok kodu",
+        "horizontal_rule": "Linia pozioma",
+        "placeholder": "Napisz coś…",
+        "drag_handle": "Przeciągnij, aby przenieść blok",
+        "font_size": {
+          "label": "Rozmiar czcionki",
+          "default": "Domyślny"
+        },
+        "color": {
+          "label": "Kolor tekstu",
+          "reset": "Resetuj kolor"
+        },
+        "emoji": {
+          "label": "Emoji",
+          "search": "Szukaj emoji…",
+          "empty": "Nie znaleziono emoji.",
+          "hint": "Wybierz emoji"
+        },
+        "audio": {
+          "label": "Audio",
+          "title": "Wstaw audio",
+          "desc": "Wklej link do pliku audio, na przykład mp3, wav lub ogg.",
+          "src": {
+            "label": "Adres URL audio"
+          },
+          "submit": "Wstaw audio"
+        },
+        "table": {
+          "label": "Tabela",
+          "insert": "Wstaw tabelę",
+          "add_column_before": "Dodaj kolumnę przed",
+          "add_column_after": "Dodaj kolumnę po",
+          "add_row_before": "Dodaj wiersz przed",
+          "add_row_after": "Dodaj wiersz po",
+          "toggle_header_row": "Przełącz wiersz nagłówka",
+          "toggle_header_column": "Przełącz kolumnę nagłówka",
+          "merge_or_split": "Scal lub podziel komórki",
+          "delete_column": "Usuń kolumnę",
+          "delete_row": "Usuń wiersz",
+          "delete": "Usuń tabelę"
         }
       },
       "theme_switcher": "Zmień motyw",

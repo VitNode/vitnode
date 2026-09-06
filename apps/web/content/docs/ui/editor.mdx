@@ -8,6 +8,146 @@ icon: PenTool
 
 <Preview name="editor" />
 
+import { TypeTable } from 'fumadocs-ui/components/type-table'
+
+## What you get
+
+The toolbar ships with everything below, and every feature is also available
+through its own keyboard shortcut or markdown-style input rule.
+
+| Group      | Controls                                                                                      |
+| ---------- | --------------------------------------------------------------------------------------------- |
+| History    | Undo, redo                                                                                    |
+| Text       | Paragraph, headings 1-4, font size, bold, italic, underline, strike, inline code, text colour |
+| Layout     | Left / center / right / justify alignment                                                     |
+| Blocks     | Bullet list, ordered list, blockquote, code block, horizontal rule                            |
+| Rich media | Tables, emoji, audio                                                                          |
+
+A few extras run quietly in the background:
+
+- **Typography** turns `(c)`, `->`, `1/2` and friends into `©`, `→` and `½` as you type.
+- **Emoji** has three ways in - see [Emoji](#emoji) below.
+- **Placeholder** shows a hint while the editor is empty. Override it with the
+  `placeholder` prop.
+- **Drag handle** appears next to the block under your cursor so any block -
+  nested ones included - can be dragged somewhere else. A **drop cursor** shows
+  where it will land.
+- **Trailing node** always keeps an empty paragraph at the end, so you can never
+  get stuck under a table or a code block.
+
+### Emoji
+
+There are three ways to get an emoji into the editor, and they all end up as the
+same node:
+
+- **Type a shortcode.** `:tada:` becomes 🎉 the moment you close the second
+  colon.
+- **Use the `:` menu.** Start typing `:tad` and an autocomplete appears. Arrow
+  keys move, `Enter` or `Tab` inserts, `Esc` closes. Results are ranked, so
+  `:flag` puts flags first rather than everything tagged "flag".
+- **Open the picker.** The toolbar's emoji button opens a searchable,
+  virtualised grid with categories and skin tones, from
+  [Ferruccio's emoji picker](https://emoji.ferrucc.io/). Hovering an emoji
+  previews it in the footer with its name and its shortcode, so the picker also
+  teaches you what to type next time.
+
+Pasting a raw emoji character works too - it is upgraded to a node on the way
+in.
+
+#### Custom emoji
+
+Your own emoji are app-wide, so they live in `vitnode.config.ts` and every
+`Editor` in the app picks them up - no props to pass:
+
+```ts title="src/vitnode.config.ts"
+import { buildConfig } from '@vitnode/core/vitnode.config'
+
+export const vitNodeConfig = buildConfig({
+  editor: {
+    emojis: [
+      {
+        label: 'VitNode',
+        emojis: [
+          {
+            name: 'vitnode',
+            src: '/logo_vitnode_icon.svg',
+            tags: ['logo', 'brand'],
+          },
+        ],
+      },
+    ],
+  },
+  // ...the rest of your config
+})
+```
+
+That one entry gives you all three routes at once: `:vitnode:` converts as you
+type, `:vitn` finds it in the `:` menu, and the picker grows a **VitNode**
+section you can search.
+
+<TypeTable
+  type={{
+    label: {
+      required: true,
+      description:
+        'Heading the section gets in the picker. Group related emoji under one label, or add several sections.',
+      type: 'string',
+    },
+    name: {
+      required: true,
+      description:
+        'The shortcode. `vitnode` is typed as `:vitnode:`, so keep it lowercase and free of spaces and colons.',
+      type: 'string',
+    },
+    src: {
+      required: true,
+      description:
+        'Image rendered wherever the emoji appears - a path in `public/`, or an absolute URL. Square images look best; anything else keeps its aspect ratio at line height.',
+      type: 'string',
+    },
+    tags: {
+      description:
+        'Extra words the `:` menu matches on, beyond the name itself.',
+      type: 'string[]',
+      default: '[]',
+    },
+  }}
+/>
+
+A custom emoji is stored as `<span data-type="emoji" data-name="vitnode">` with
+your image inside, so `EditorContent` renders it on public pages exactly as the
+editor does - as long as `src` is still reachable from there.
+
+### Tables
+
+Insert a 3x3 table with a header row from the table menu, then use the same menu
+to add or remove rows and columns, toggle the header row or column, merge or
+split cells, or delete the table. Columns are resizable by dragging their edge,
+and wide tables scroll horizontally instead of breaking the page.
+
+### Audio
+
+Paste a link to an `mp3`, `wav`, `ogg` (or any other browser-playable file) and
+it renders as a native `<audio>` player with controls. Pasting a bare audio URL
+into the editor works too.
+
+## Styles
+
+The editor and `EditorContent` both render inside a `.tiptap` container. One
+import brings in everything - the content styles and the emoji picker's classes:
+
+```css
+@import 'tailwindcss';
+@import '@vitnode/core/styles/tiptap.css';
+```
+
+Apps created with `create-vitnode-app` already have it.
+
+The emoji picker ships Tailwind class names rather than compiled CSS, so those
+classes are safelisted in `emoji-picker.css` next to the stylesheet above. That
+keeps the picker a detail of `@vitnode/core` - your app never has to depend on
+it, or point `@source` into `node_modules` for it.
+
 ## Usage
 
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs'
@@ -106,8 +246,8 @@ Persist the array on the backend with `saveLanguageWords`. See
 
 ## Rendering Content
 
-Use `EditorContent` to render the stored HTML as read-only content outside of
-the editor (e.g. on a public page):
+`Editor` is for editing, and only for editing - there is no read-only mode. To
+show stored content anywhere else, use `EditorContent`:
 
 ```ts
 import { EditorContent } from '@vitnode/core/components/ui/editor-content'
@@ -117,9 +257,26 @@ import { EditorContent } from '@vitnode/core/components/ui/editor-content'
 <EditorContent content="<h2>Title</h2><p>Hello World! 🌎️</p>" />
 ```
 
-## Props
+It drops the HTML into a `.tiptap` container, so it inherits every style on this
+page - headings, blockquotes, code, tables, emoji, the audio player. What it
+does **not** load is tiptap itself: no ProseMirror, no extensions, no emoji
+data, no toolbar. That is the whole point, because a page that only displays
+content has no use for an editing runtime, and that runtime is by far the
+heaviest part of the editor.
 
-import { TypeTable } from 'fumadocs-ui/components/type-table'
+<Callout type="warn">
+  Reach for `EditorContent` even when the content sits inside the AdminCP, and
+  even when you want the editor's chrome around it - a border and some padding
+  gets you there. `/admin/example` renders its showcase exactly this way.
+</Callout>
+
+Because it renders the stored HTML verbatim, whatever produced that HTML has to
+have produced it in full. Custom emoji are the one case worth watching: a stored
+`<span data-type="emoji" data-name="…">` carries its own `<img>`, so it keeps
+working - but the `src` inside it has to stay reachable from wherever the
+content is being read.
+
+## Props
 
 <TypeTable
   type={{
@@ -132,6 +289,12 @@ import { TypeTable } from 'fumadocs-ui/components/type-table'
       description:
         'Called on every change with the current content as an HTML string.',
       type: '(value: string) => void',
+      default: '',
+    },
+    placeholder: {
+      description:
+        'Hint shown while the editor is empty. Falls back to the translated default.',
+      type: 'string',
       default: '',
     },
     disableScroll: {
