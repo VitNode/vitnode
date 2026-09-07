@@ -92,7 +92,8 @@ The route automatically accepts `?cursor=...&first=10` and returns `{ edges, pag
       type: 'PgTable',
     },
     primaryCursor: {
-      description: 'Unique numeric column acting as deterministic tiebreaker.',
+      description:
+        'Integer, bigint or UUID row identifier acting as deterministic tiebreaker.',
       required: true,
       type: 'PaginationCursorColumn',
     },
@@ -120,6 +121,36 @@ The route automatically accepts `?cursor=...&first=10` and returns `{ edges, pag
     },
   }}
 />
+
+---
+
+## Integer, bigint and UUID identifiers
+
+`primaryCursor` accepts integer, bigint and UUID columns. Bigints travel as
+decimal strings inside the opaque cursor, so values above JavaScript's
+safe-integer limit keep their precision. UUIDs stay strings and are validated
+before they reach PostgreSQL.
+
+The order column and the identifier can use different types. A bigint order
+column can take a UUID primary key as its stable tiebreaker:
+
+```ts
+import { bigint, pgTable, uuid } from 'drizzle-orm/pg-core'
+
+const events = pgTable('events', {
+  id: uuid().defaultRandom().primaryKey(),
+  sequence: bigint({ mode: 'bigint' }).notNull(),
+})
+
+await withPagination({
+  // ...
+  primaryCursor: events.id,
+  orderBy: { column: events.sequence, order: 'asc' },
+})
+```
+
+Keep the cursor opaque on the client and hand it back unchanged in the next
+request.
 
 ---
 
