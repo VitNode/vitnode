@@ -1,3 +1,4 @@
+import { cn } from "cn";
 import {
   CheckIcon,
   ChevronsUpDownIcon,
@@ -52,7 +53,6 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Spinner } from "@/components/ui/spinner";
-import { cn } from "@/lib/utils";
 
 export type UpdateAdminUserRoles = (
   id: number,

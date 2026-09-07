@@ -1,4 +1,5 @@
 import { useDraggable } from "@dnd-kit/core";
+import { cn } from "cn";
 import { SearchIcon } from "lucide-react";
 import React from "react";
 import { useTranslations } from "use-intl";
@@ -16,7 +17,6 @@ import {
   SidebarHeader,
   SidebarInput,
 } from "@/components/ui/sidebar";
-import { cn } from "@/lib/utils";
 
 import type { DashboardWidgetOption } from "../widgets/types";
 

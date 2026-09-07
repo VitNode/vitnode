@@ -1,6 +1,5 @@
+import { cn } from "cn";
 import { ArrowLeftIcon } from "lucide-react";
-
-import { cn } from "@/lib/utils";
 
 import { Button } from "./button";
 

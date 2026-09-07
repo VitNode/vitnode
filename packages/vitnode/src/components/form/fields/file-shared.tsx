@@ -1,3 +1,4 @@
+import { cn } from "cn";
 import {
   FileIcon,
   LoaderCircleIcon,
@@ -22,7 +23,6 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Spinner } from "@/components/ui/spinner";
 import { fileFormatLabels } from "@/lib/file-constraints";
 import { formatBytes } from "@/lib/format-bytes";
-import { cn } from "@/lib/utils";
 
 export interface AutoFormFileValue {
   height?: number;

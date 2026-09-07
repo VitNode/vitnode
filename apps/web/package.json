@@ -61,6 +61,7 @@
     "@types/react-dom": "^19.2.0",
     "@vitejs/plugin-react": "^6.0.4",
     "@vitnode/config": "workspace:*",
+    "cn": "^0.2.6",
     "eslint": "^10.7.0",
     "jiti": "^2.7.0",
     "jsdom": "^29.1.1",

@@ -1,6 +1,6 @@
 import type { LucideIcon } from 'lucide-react'
 
-import { cn } from '@vitnode/core/lib/utils'
+import { cn } from 'cn'
 import { Bell, Boxes, Globe, Radio, Search, Sparkles, Zap } from 'lucide-react'
 
 import type { SiteLinkComponent } from '#/site/home/site-link'

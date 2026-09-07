@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "cn";
 
 const generateLetterPhoto = (letter: string, color: string) =>
   `data:image/svg+xml,${encodeURIComponent(

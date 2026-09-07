@@ -1,9 +1,9 @@
+import { cn } from "cn";
 import { useTranslations } from "use-intl";
 
 import type { ContentRevisionMeta } from "@/content/revisions";
 
 import { UserFormat } from "@/components/user-format";
-import { cn } from "@/lib/utils";
 
 import type { ContentFormLinkComponent } from "../../form/context";
 

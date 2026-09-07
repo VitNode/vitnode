@@ -4,10 +4,9 @@ import type {
   SuggestionProps,
 } from "@tiptap/suggestion";
 
+import { cn } from "cn";
 import React from "react";
 import { useTranslations } from "use-intl";
-
-import { cn } from "@/lib/utils";
 
 export interface EmojiSuggestionListRef {
   onKeyDown: (props: SuggestionKeyDownProps) => boolean;

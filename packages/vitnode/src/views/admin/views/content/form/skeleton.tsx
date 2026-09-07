@@ -1,3 +1,4 @@
+import { cn } from "cn";
 import React from "react";
 
 import type { ContentFormSpec } from "@/content/admin/spec";
@@ -5,7 +6,6 @@ import type { AnyContentTypeDefinition } from "@/content/types";
 import type { ContentFormLayout } from "@/lib/plugin";
 
 import { Skeleton } from "@/components/ui/skeleton";
-import { cn } from "@/lib/utils";
 
 import type { ContentFormHeaderValue } from "./context";
 

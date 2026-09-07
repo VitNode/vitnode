@@ -1,4 +1,5 @@
 import { useEditorState } from "@tiptap/react";
+import { cn } from "cn";
 import {
   CodeXmlIcon,
   EllipsisVerticalIcon,
@@ -15,7 +16,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { CtrlOrCommandCharacter } from "@/lib/ctrl-or-command-character";
-import { cn } from "@/lib/utils";
 
 import { useToolbarEditor } from "../../use-toolbar-editor";
 

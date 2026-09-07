@@ -1,10 +1,10 @@
+import { cn } from "cn";
 import { ArrowLeftIcon } from "lucide-react";
 import { useTranslations } from "use-intl";
 
 import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { HeaderContent } from "@/components/ui/header-content";
-import { cn } from "@/lib/utils";
 
 import type { AuthLinkComponent } from "../auth-link";
 

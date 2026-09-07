@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { cn } from "cn";
 import { ChevronDownIcon, RotateCcwIcon } from "lucide-react";
 import React from "react";
 import { toast } from "sonner";
@@ -15,7 +16,6 @@ import { DateFormat } from "@/components/date-format";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Loader } from "@/components/ui/loader";
-import { cn } from "@/lib/utils";
 
 import { contentErrorKey } from "../../lib/mutation-feedback";
 import { contentRevisionQueryOptions } from "../editorial-query";

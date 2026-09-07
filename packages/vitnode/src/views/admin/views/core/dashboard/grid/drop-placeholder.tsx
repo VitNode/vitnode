@@ -1,8 +1,7 @@
 import { useDroppable } from "@dnd-kit/core";
+import { cn } from "cn";
 import { LayoutGridIcon } from "lucide-react";
 import { useTranslations } from "use-intl";
-
-import { cn } from "@/lib/utils";
 
 export const DROP_END_ID = "vitnode-dashboard-drop-end";
 

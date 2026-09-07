@@ -1,7 +1,6 @@
 import { PreviewCard as PreviewCardPrimitive } from "@base-ui/react/preview-card";
+import { cn } from "cn";
 import React from "react";
-
-import { cn } from "@/lib/utils";
 
 function HoverCard({
   ...props

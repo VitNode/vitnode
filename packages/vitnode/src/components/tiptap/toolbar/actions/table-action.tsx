@@ -1,4 +1,5 @@
 import { useEditorState } from "@tiptap/react";
+import { cn } from "cn";
 import {
   BetweenHorizontalStartIcon,
   BetweenVerticalStartIcon,
@@ -19,7 +20,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { cn } from "@/lib/utils";
 
 import { useToolbarEditor } from "../use-toolbar-editor";
 

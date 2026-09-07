@@ -1,3 +1,4 @@
+import { cn } from "cn";
 import {
   ClockIcon,
   DatabaseIcon,
@@ -11,7 +12,6 @@ import { DateFormat } from "@/components/date-format";
 import { DataTableSkeleton } from "@/components/table/data-table-content";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { cn } from "@/lib/utils";
 
 import type { SearchIndexActions } from "./search-index-mutations";
 import type { SearchIndexStatus } from "./search-index-query";

@@ -1,4 +1,5 @@
 import { useEditorState } from "@tiptap/react";
+import { cn } from "cn";
 import { BaselineIcon, XIcon } from "lucide-react";
 import React from "react";
 import { useTranslations } from "use-intl";
@@ -12,7 +13,6 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { TooltipWithContent } from "@/components/ui/tooltip";
-import { cn } from "@/lib/utils";
 
 import { useToolbarEditor } from "../use-toolbar-editor";
 

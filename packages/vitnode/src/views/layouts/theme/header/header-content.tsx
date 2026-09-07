@@ -1,6 +1,7 @@
+import { cn } from "cn";
+
 import { ThemeSwitcher } from "@/components/switchers/themes/theme-switcher";
 import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 
 import type { HeaderLinkComponent, HeaderNavItem } from "./header-nav";
 

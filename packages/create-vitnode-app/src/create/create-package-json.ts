@@ -212,6 +212,7 @@ const apiDevDeps = (pm: string, eslint: boolean) => ({
   "@types/node": versionsPackageJson.typesNode,
   "@types/react": versionsPackageJson.typesReact,
   "@types/react-dom": versionsPackageJson.typesReactDom,
+  cn: versionsPackageJson.cn,
   "@vitnode/config": "",
   dotenv: versionsPackageJson.dotenv,
   ...withIf(eslint, {
@@ -263,6 +264,7 @@ const tanstackWebDevDeps = {
   "@types/node": versionsPackageJson.typesNode,
   "@types/react": versionsPackageJson.typesReact,
   "@types/react-dom": versionsPackageJson.typesReactDom,
+  cn: versionsPackageJson.cn,
   "@vitejs/plugin-react": versionsPackageJson.viteReact,
   "@vitnode/config": "",
   "tw-animate-css": versionsPackageJson.twAnimateCss,

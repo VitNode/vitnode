@@ -1,4 +1,4 @@
-import { cn } from '@vitnode/core/lib/utils'
+import { cn } from 'cn'
 import { ImageZoom } from 'fumadocs-ui/components/image-zoom'
 
 export const ImgDocs = ({

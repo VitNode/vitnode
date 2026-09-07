@@ -13,7 +13,7 @@ import {
 
 import type { AdminDashboardWidgetSpan } from "../widgets/types";
 
-import { useDashboardBoard } from "./board-provider";
+import { useDashboardBoard } from "./board-context";
 import { DropPlaceholder } from "./drop-placeholder";
 import { DashboardPanelActions } from "./edit-actions";
 import { gridClasses } from "./span-classes";

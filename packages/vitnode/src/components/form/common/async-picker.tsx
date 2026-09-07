@@ -1,3 +1,4 @@
+import { cn } from "cn";
 import { ChevronsUpDownIcon } from "lucide-react";
 import React from "react";
 import { useDebouncedCallback } from "use-debounce";
@@ -18,7 +19,6 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Spinner } from "@/components/ui/spinner";
-import { cn } from "@/lib/utils";
 
 /** Anything this picker can offer: an identity and whatever renders it. */
 export interface AsyncPickerOption {

@@ -1,6 +1,6 @@
 import type { LucideIcon } from 'lucide-react'
 
-import { cn } from '@vitnode/core/lib/utils'
+import { cn } from 'cn'
 import {
   Bell,
   Boxes,

@@ -1,5 +1,5 @@
 import { Loader } from '@vitnode/core/components/ui/loader'
-import { cn } from '@vitnode/core/lib/utils'
+import { cn } from 'cn'
 import React from 'react'
 
 const exampleModules = import.meta.glob<{

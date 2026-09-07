@@ -1,5 +1,5 @@
 import { Skeleton } from '@vitnode/core/components/ui/skeleton'
-import { cn } from '@vitnode/core/lib/utils'
+import { cn } from 'cn'
 
 const DocsHeadingPendingSkeleton = () => (
   <div aria-hidden="true" className="flex flex-col gap-4">

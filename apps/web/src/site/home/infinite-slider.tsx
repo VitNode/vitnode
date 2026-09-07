@@ -1,4 +1,4 @@
-import { cn } from '@vitnode/core/lib/utils'
+import { cn } from 'cn'
 import { useEffect, useRef, useSyncExternalStore } from 'react'
 
 const neverChanges = () => () => {}

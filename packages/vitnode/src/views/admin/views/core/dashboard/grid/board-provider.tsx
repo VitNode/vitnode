@@ -12,12 +12,12 @@ import {
 } from "@dnd-kit/core";
 import { restrictToWindowEdges } from "@dnd-kit/modifiers";
 import { sortableKeyboardCoordinates } from "@dnd-kit/sortable";
+import { cn } from "cn";
 import React from "react";
 import { toast } from "sonner";
 import { useTranslations } from "use-intl";
 
 import { Card } from "@/components/ui/card";
-import { cn } from "@/lib/utils";
 
 import type { DashboardActions } from "../widgets/dashboard-actions";
 import type {
@@ -26,41 +26,13 @@ import type {
   DashboardWidgetOption,
   DashboardWidgetView,
 } from "../widgets/types";
-import type { DashboardLayoutAction } from "./layout-reducer";
 
 import { widgetIdOf } from "../widgets/instance-id";
+import { DashboardBoardContext } from "./board-context";
 import { DROP_END_ID } from "./drop-placeholder";
 import { dashboardLayoutReducer, isLayoutDirty } from "./layout-reducer";
 import { panelWidgetId } from "./panel-drag-id";
 import { WidgetCardContent } from "./widget-card";
-
-interface DashboardBoardContextProps {
-  actions: DashboardActions;
-  available: DashboardWidgetOption[];
-  dispatch: React.Dispatch<DashboardLayoutAction>;
-  isDirty: boolean;
-  isEditing: boolean;
-  isPending: boolean;
-  onCancel: () => void;
-  onSave: () => void;
-  placed: DashboardWidgetView[];
-  refreshWidget: (instanceId: string) => void;
-  setIsEditing: (isEditing: boolean) => void;
-}
-
-const DashboardBoardContext =
-  React.createContext<DashboardBoardContextProps | null>(null);
-
-export const useDashboardBoard = () => {
-  const context = React.use(DashboardBoardContext);
-  if (!context) {
-    throw new Error(
-      "useDashboardBoard must be used within a DashboardBoardProvider.",
-    );
-  }
-
-  return context;
-};
 
 const RefreshedWidgetContent = ({
   content,

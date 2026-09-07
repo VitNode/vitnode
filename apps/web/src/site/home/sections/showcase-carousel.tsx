@@ -8,7 +8,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@vitnode/core/components/ui/carousel'
-import { cn } from '@vitnode/core/lib/utils'
+import { cn } from 'cn'
 import { useEffect, useState } from 'react'
 
 import { ScreenFrame } from '#/site/marketing/screen-frame'

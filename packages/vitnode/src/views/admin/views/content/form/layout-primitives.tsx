@@ -1,7 +1,7 @@
+import { cn } from "cn";
 import React from "react";
 
 import { HeaderContent } from "@/components/ui/header-content";
-import { cn } from "@/lib/utils";
 
 import { useContentForm } from "./context";
 

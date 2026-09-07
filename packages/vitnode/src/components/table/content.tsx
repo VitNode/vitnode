@@ -1,3 +1,4 @@
+import { cn } from "cn";
 import { SearchXIcon } from "lucide-react";
 
 import type {
@@ -7,7 +8,6 @@ import type {
   DataTableTMin,
 } from "./data-table-content";
 
-import { cn } from "../../lib/utils";
 import {
   Table,
   TableBody,

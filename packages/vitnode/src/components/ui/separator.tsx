@@ -1,7 +1,6 @@
 import { Separator as SeparatorPrimitive } from "@base-ui/react/separator";
+import { cn } from "cn";
 import React from "react";
-
-import { cn } from "@/lib/utils";
 
 function Separator({
   className,
@@ -11,7 +10,7 @@ function Separator({
   return (
     <SeparatorPrimitive
       className={cn(
-        "bg-border shrink-0 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:w-px data-[orientation=vertical]:self-stretch",
+        "bg-border shrink-0 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px data-[orientation=vertical]:self-center",
         className,
       )}
       data-slot="separator"
