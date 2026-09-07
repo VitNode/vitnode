@@ -54,7 +54,11 @@ export function getRouter() {
   const router = createTanStackRouter({
     context: { queryClient },
     defaultPendingComponent: RoutePendingSpinner,
+    defaultPendingMs: 150,
+    defaultPendingMinMs: 300,
     defaultPreload: 'intent',
+    defaultPreloadStaleTime: 0,
+    defaultStaleReloadMode: 'blocking',
     scrollRestoration: true,
     dehydrate: () => dehydrateDocsPage(holder.current),
     hydrate: hydrateDocsPage,
