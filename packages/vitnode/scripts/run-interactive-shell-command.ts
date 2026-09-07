@@ -1,13 +1,12 @@
-import { spawn } from "node:child_process";
+import { spawnCommand } from "./spawn-command.js";
 
 export const runInteractiveShellCommand = async (
   cmd: string,
   args: string[] = [],
 ) => {
   return await new Promise((resolve, reject) => {
-    const child = spawn(cmd, args, {
+    const child = spawnCommand(cmd, args, {
       stdio: "inherit",
-      shell: true,
       env: process.env,
     });
 

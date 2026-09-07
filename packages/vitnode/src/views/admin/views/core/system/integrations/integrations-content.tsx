@@ -12,6 +12,7 @@ import {
 import { useTranslations } from "use-intl";
 
 import { Skeleton } from "@/components/ui/skeleton";
+import { DOCS_URLS } from "@/lib/docs-links";
 
 import type { AdminIntegrations } from "./integrations-query";
 import type { SendTestEmail } from "./send-test-email/send-test-email-mutation";
@@ -20,18 +21,6 @@ import { IntegrationCard, type IntegrationStatus } from "./integration-card";
 import { SendTestEmailAction } from "./send-test-email/send-test-email";
 import { TestAIAction } from "./test-ai/test-ai";
 import { TestStorageAction } from "./test-storage/test-storage";
-
-const DOCS_URLS = {
-  ai: "https://vitnode.com/docs/dev/ai",
-  captcha: "https://vitnode.com/docs/dev/captcha",
-  contentPreview: "https://vitnode.com/docs/dev/content-engine/preview",
-  cron: "https://vitnode.com/docs/dev/cron",
-  email: "https://vitnode.com/docs/dev/email",
-  queue: "https://vitnode.com/docs/dev/advanced/queue",
-  redis: "https://vitnode.com/docs/dev/advanced/redis",
-  storage: "https://vitnode.com/docs/dev/storage",
-  websocket: "https://vitnode.com/docs/dev/websocket",
-};
 
 const toStatus = (active: boolean): IntegrationStatus =>
   active ? "active" : "inactive";
@@ -237,13 +226,6 @@ export const IntegrationsContent = ({
   );
 };
 
-/**
- * The board's shape before its data arrives.
- *
- * Framework-free and beside the board rather than inside it, because a Suspense
- * fallback is rendered *outside* the component it is standing in for - a host
- * mounts it above `<IntegrationsView>`.
- */
 export const IntegrationsViewSkeleton = () => (
   <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
     {[

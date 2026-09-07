@@ -1,10 +1,9 @@
 /* eslint-disable no-console */
-import { spawn } from "node:child_process";
+import { spawnCommand } from "./spawn-command.js";
 
 const spawnWatch = (command: string, args: string[]) => {
-  const child = spawn(command, args, {
+  const child = spawnCommand(command, args, {
     stdio: "inherit",
-    shell: process.platform === "win32",
     env: process.env,
   });
 

@@ -9,6 +9,7 @@ import {
   AlertTitle,
 } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
+import { DOCS_URLS } from "@/lib/docs-links";
 
 export const CronWarning = () => {
   const t = useTranslations("core.search");
@@ -22,7 +23,15 @@ export const CronWarning = () => {
     <Alert variant="warning">
       <TriangleAlertIcon />
       <AlertTitle>{t("admin.cron.title")}</AlertTitle>
-      <AlertDescription>{t("admin.cron.desc")}</AlertDescription>
+      <AlertDescription>
+        {t.rich("admin.cron.desc", {
+          docs: text => (
+            <a href={DOCS_URLS.cron} rel="noopener noreferrer" target="_blank">
+              {text}
+            </a>
+          ),
+        })}
+      </AlertDescription>
       <AlertAction>
         <Button
           aria-label={t("admin.cron.dismiss")}

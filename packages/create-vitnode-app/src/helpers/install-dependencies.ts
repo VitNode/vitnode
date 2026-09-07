@@ -1,9 +1,9 @@
-import { spawn } from "node:child_process";
 import consoleColor from "picocolors";
 
 import type { CreateCliReturn } from "../questions.js";
 
 import { getOnline } from "./is-online.js";
+import { spawnCommand } from "./spawn-command.js";
 
 function printInstallErrorSuggestions(
   stderr: string,
@@ -66,10 +66,9 @@ export const installDependencies = async ({
     /**
      * Spawn the installation process.
      */
-    const child = spawn(packageManager, args, {
+    const child = spawnCommand(packageManager, args, {
       stdio: "pipe",
       cwd,
-      shell: true, // Use shell to properly handle Windows batch files
       env: {
         ...process.env,
         ADBLOCK: "1",

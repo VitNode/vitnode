@@ -90,7 +90,7 @@
         },
         "cron": {
           "title": "Background jobs require a configured cron adapter",
-          "desc": "A rebuild won't run until cron is active. Configure an adapter in Integrations to enable scheduled reindexing.",
+          "desc": "A rebuild won't run until cron is active. Configure an adapter in Integrations to enable scheduled reindexing. <docs>Read the cron setup guide</docs>.",
           "dismiss": "Dismiss"
         },
         "stats": {

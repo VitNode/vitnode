@@ -86,7 +86,7 @@
         "reindexQueued": "Przeindeksowanie dla {collection} zostało dodane do kolejki.",
         "cron": {
           "title": "Zadania w tle wymagają skonfigurowanego adaptera cron",
-          "desc": "Przebudowa nie zostanie uruchomiona, dopóki cron nie będzie aktywny. Skonfiguruj adapter w Integracjach, aby włączyć zaplanowane ponowne indeksowanie.",
+          "desc": "Przebudowa nie zostanie uruchomiona, dopóki cron nie będzie aktywny. Skonfiguruj adapter w Integracjach, aby włączyć zaplanowane ponowne indeksowanie. <docs>Przeczytaj przewodnik konfiguracji cron</docs>.",
           "dismiss": "Odrzuć"
         },
         "stats": {
