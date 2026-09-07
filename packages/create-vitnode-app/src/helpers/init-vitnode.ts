@@ -1,7 +1,8 @@
-import { spawn } from "node:child_process";
 import color from "picocolors";
 
 import type { CreateCliReturn } from "../questions.js";
+
+import { spawnCommand } from "./spawn-command.js";
 
 export const generateMigrationsVitnode = async ({
   packageManager: pm,
@@ -15,10 +16,9 @@ export const generateMigrationsVitnode = async ({
   await new Promise<void>((resolve, reject) => {
     let output = "";
 
-    const child = spawn(packageManager, args, {
+    const child = spawnCommand(packageManager, args, {
       cwd,
       env: process.env,
-      shell: true, // Use shell to properly handle Windows batch files
       stdio: "pipe",
     });
 

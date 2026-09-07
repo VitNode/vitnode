@@ -244,8 +244,11 @@ describe("creation-time migration generation is awaited", () => {
     expect(helper).toMatch(/code === 0/);
     expect(helper).toMatch(/reject\(/);
     expect(helper).toMatch(/on\("error"/);
-    // Windows package managers are batch files, which `spawn` cannot exec.
-    expect(helper).toContain("shell: true");
+    // Windows package managers are batch files, which `spawn` cannot exec, so
+    // the call goes through `spawnCommand` - `cmd.exe /c` there, and no shell
+    // anywhere, because `args` plus `shell` is deprecated (DEP0190).
+    expect(helper).toContain("spawnCommand(");
+    expect(helper).not.toContain("shell: true");
   });
 
   it("is awaited by the generator, and a failure is surfaced", () => {

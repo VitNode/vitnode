@@ -345,4 +345,16 @@ describe("the generator's own wiring", () => {
 
     expect(offenders).toEqual([]);
   });
+
+  it("spawns package managers without a shell, as DEP0190 requires", () => {
+    const offenders = filesUnder(join(packageRoot, "src"))
+      .filter(file => file.endsWith(".ts") && !file.endsWith(".test.ts"))
+      .filter(file => {
+        const code = withoutComments(read(join(packageRoot, "src"), file));
+
+        return /shell:(?!\s*false)/.test(code);
+      });
+
+    expect(offenders).toEqual([]);
+  });
 });

@@ -70,11 +70,23 @@ describe("devPlugin", () => {
     }
   });
 
-  it("uses a shell on Windows to run .cmd binaries", () => {
+  it("runs .cmd binaries through cmd.exe on Windows rather than a shell", () => {
     withPlatform("win32", () => devPlugin({ initMessage: "dev" }));
 
+    expect(spawn.mock.calls.map(call => call[0])).toEqual([
+      "cmd.exe",
+      "cmd.exe",
+      "cmd.exe",
+    ]);
+    expect(spawn).toHaveBeenNthCalledWith(
+      1,
+      "cmd.exe",
+      ["/c", "tsc", "-w", "-p", "tsconfig.build.json", "--preserveWatchOutput"],
+      expect.any(Object),
+    );
+
     for (const call of spawn.mock.calls) {
-      expect(call[2]).toMatchObject({ shell: true });
+      expect(call[2]).toMatchObject({ shell: false });
     }
   });
 
