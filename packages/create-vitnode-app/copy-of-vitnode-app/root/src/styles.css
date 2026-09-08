@@ -139,8 +139,4 @@
   body {
     @apply bg-background text-foreground antialiased;
   }
-
-  ::selection {
-    @apply bg-primary/20;
-  }
 }
