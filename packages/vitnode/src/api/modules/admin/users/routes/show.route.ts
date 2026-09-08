@@ -12,6 +12,7 @@ import { core_users_secondary_roles } from "@/database/users";
 const roleSchema = z.object({
   id: z.number(),
   color: z.string().nullable(),
+  prefix: z.string().nullable(),
   name: z.array(
     z.object({
       name: z.string(),
@@ -92,6 +93,7 @@ export const showUserAdminRoute = buildRoute({
       .select({
         id: core_roles.id,
         color: core_roles.color,
+        prefix: core_roles.prefix,
       })
       .from(core_users_secondary_roles)
       .innerJoin(
@@ -101,7 +103,11 @@ export const showUserAdminRoute = buildRoute({
       .where(eq(core_users_secondary_roles.userId, user.id));
 
     const [primaryRole] = await db
-      .select({ id: core_roles.id, color: core_roles.color })
+      .select({
+        id: core_roles.id,
+        color: core_roles.color,
+        prefix: core_roles.prefix,
+      })
       .from(core_roles)
       .where(eq(core_roles.id, user.roleId))
       .limit(1);
@@ -123,11 +129,13 @@ export const showUserAdminRoute = buildRoute({
         role: {
           id: user.roleId,
           color: primaryRole?.color ?? null,
+          prefix: primaryRole?.prefix ?? null,
           name: names.get(user.roleId) ?? [],
         },
         secondaryRoles: secondaryRoleRows.map(role => ({
           id: role.id,
           color: role.color,
+          prefix: role.prefix,
           name: names.get(role.id) ?? [],
         })),
       },

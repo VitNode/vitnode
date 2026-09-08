@@ -80,6 +80,7 @@ export const useAdminRoleMutations = (): {
           color: values.color,
           maxStorageForSubmit: values.maxStorageForSubmit,
           name: values.name,
+          prefix: values.prefix,
           totalMaxStorage: values.totalMaxStorage,
         };
         const result =

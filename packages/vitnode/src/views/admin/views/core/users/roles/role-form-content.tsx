@@ -7,10 +7,12 @@ import type { AdminMutationResult } from "@/views/admin/views/core/shared/admin-
 
 import { AutoForm } from "@/components/form/auto-form";
 import { AutoFormColor } from "@/components/form/fields/color";
+import { AutoFormEmojiIcon } from "@/components/form/fields/emoji-icon";
 import { AutoFormInput } from "@/components/form/fields/input";
 import { AutoFormNullableNumber } from "@/components/form/fields/nullable-number";
 import { AutoFormSwitch } from "@/components/form/fields/switch";
 import { useDialog } from "@/components/ui/dialog";
+import { EMOJI_ICON_MAX_LENGTH } from "@/lib/emoji-icon";
 import { multiLangValueSchema } from "@/lib/helpers/multi-lang";
 
 /** The shape the roles API takes, as the form produces it. */
@@ -19,6 +21,7 @@ export interface AdminRoleFormValues {
   color: string;
   maxStorageForSubmit: null | number;
   name: { languageCode: string; value: string }[];
+  prefix: string;
   totalMaxStorage: null | number;
 }
 
@@ -29,6 +32,7 @@ export interface AdminRoleFormData {
   id: number;
   maxStorageForSubmit: null | number;
   name: { languageCode: string; name: string }[];
+  prefix: null | string;
   totalMaxStorage: null | number;
 }
 
@@ -65,6 +69,11 @@ export const AdminRoleFormContent = ({
       .nullable()
       .default(data?.maxStorageForSubmit ?? null)
       .describe(t("form.upload.max_storage_for_submit_desc")),
+    prefix: z
+      .string()
+      .max(EMOJI_ICON_MAX_LENGTH)
+      .default(data?.prefix ?? "")
+      .describe(t("form.prefix_desc")),
     name: multiLangValueSchema({ maxLength: 255, minLength: 1 })
       .min(1)
       .default(
@@ -117,6 +126,17 @@ export const AdminRoleFormContent = ({
             />
           ),
           id: "color",
+          tab: "general",
+        },
+        {
+          component: props => (
+            <AutoFormEmojiIcon
+              allowRemove
+              label={t("form.prefix")}
+              {...props}
+            />
+          ),
+          id: "prefix",
           tab: "general",
         },
         {

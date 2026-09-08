@@ -58,6 +58,7 @@ export const listFilesAdminRoute = buildRoute({
                       role: z.object({
                         id: z.number(),
                         color: z.string().nullable(),
+                        prefix: z.string().nullable(),
                         name: z.array(
                           z.object({
                             name: z.string(),
@@ -108,6 +109,7 @@ export const listFilesAdminRoute = buildRoute({
             userNameCode: core_users.nameCode,
             userRoleId: core_users.roleId,
             userRoleColor: core_roles.color,
+            userRolePrefix: core_roles.prefix,
           })
           .from(core_files)
           .leftJoin(core_users, eq(core_users.id, core_files.userId))
@@ -141,6 +143,7 @@ export const listFilesAdminRoute = buildRoute({
           userNameCode,
           userRoleId,
           userRoleColor,
+          userRolePrefix,
           ...file
         }) => ({
           ...file,
@@ -155,6 +158,7 @@ export const listFilesAdminRoute = buildRoute({
                   role: {
                     id: userRoleId ?? 0,
                     color: userRoleColor ?? null,
+                    prefix: userRolePrefix ?? null,
                     name:
                       userRoleId != null
                         ? (roleNames.get(userRoleId) ?? [])

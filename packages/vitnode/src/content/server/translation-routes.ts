@@ -510,6 +510,7 @@ export const buildContentTranslationRoutes = <
   const zodTranslationRevisionMeta = z.object({
     actorName: z.string().nullable(),
     actorRoleColor: z.string().nullable(),
+    actorRolePrefix: z.string().nullable(),
     actorType: z.enum(CONTENT_ACTOR_TYPES),
     actorUserId: z.number().nullable(),
     changedFields: z.array(z.string()),

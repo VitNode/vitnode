@@ -60,6 +60,7 @@ export interface AdminRoleRow {
   id: number;
   maxStorageForSubmit: null | number;
   name: { languageCode: string; name: string }[];
+  prefix: null | string;
   protected: boolean;
   root: boolean;
   totalMaxStorage: null | number;
@@ -133,6 +134,7 @@ export interface AdminRoleOption {
   color: null | string;
   id: number;
   name: { languageCode: string; name: string }[];
+  prefix: null | string;
 }
 
 /** The signature every role picker takes, wherever the read comes from. */
@@ -143,7 +145,7 @@ export const adminRoleOptionsFrom = (
 ): AdminRoleOption[] =>
   page.edges
     .filter(role => !role.guest)
-    .map(({ color, id, name }) => ({ color, id, name }));
+    .map(({ color, id, name, prefix }) => ({ color, id, name, prefix }));
 
 export const searchAdminRolesInBrowser: AdminRoleSearch = async search => {
   try {

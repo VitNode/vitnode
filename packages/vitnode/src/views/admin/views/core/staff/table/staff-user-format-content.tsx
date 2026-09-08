@@ -4,6 +4,7 @@ import type { RoleNameEntry } from "@/components/role-name";
 
 import { Avatar } from "@/components/avatar";
 import { resolveRoleName } from "@/components/role-name";
+import { UserFormat } from "@/components/user-format";
 
 export const StaffUserFormatContent = ({
   user,
@@ -12,7 +13,12 @@ export const StaffUserFormatContent = ({
     avatarColor: string;
     name: string;
     nameCode: string;
-    role: { color: null | string; id: number; name: RoleNameEntry[] };
+    role: {
+      color: null | string;
+      id: number;
+      name: RoleNameEntry[];
+      prefix?: null | string;
+    };
   };
 }) => {
   const locale = useLocale();
@@ -23,12 +29,7 @@ export const StaffUserFormatContent = ({
       <Avatar size={32} user={user} />
 
       <div className="flex flex-col">
-        <span
-          className="font-medium"
-          style={user.role.color ? { color: user.role.color } : undefined}
-        >
-          {user.name}
-        </span>
+        <UserFormat format user={user} />
         <span className="text-muted-foreground text-sm">
           @{user.nameCode}
           {roleName ? ` · ${roleName}` : ""}

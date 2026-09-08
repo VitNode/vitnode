@@ -239,18 +239,21 @@ describe("the role search", () => {
         guest: false,
         id: 1,
         name: [{ languageCode: "en", name: "Member" }],
+        prefix: null,
       },
       {
         color: "#fff",
         guest: true,
         id: 2,
         name: [{ languageCode: "en", name: "Guest" }],
+        prefix: null,
       },
       {
         color: "#f00",
         guest: false,
         id: 3,
         name: [{ languageCode: "en", name: "Admin" }],
+        prefix: "emoji:🚀",
       },
     ],
   } as unknown as AdminRolesPage;
@@ -264,6 +267,7 @@ describe("the role search", () => {
       color: null,
       id: 1,
       name: [{ languageCode: "en", name: "Member" }],
+      prefix: null,
     });
   });
 
@@ -272,6 +276,7 @@ describe("the role search", () => {
       "color",
       "id",
       "name",
+      "prefix",
     ]);
   });
 

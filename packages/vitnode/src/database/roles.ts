@@ -12,6 +12,7 @@ export const core_roles = camelCase.table.withRLS("core_roles", t => ({
   root: t.boolean().notNull().default(false),
   guest: t.boolean().notNull().default(false),
   color: t.varchar({ length: 50 }),
+  prefix: t.varchar({ length: 64 }),
   allowUploadFiles: t.boolean().notNull().default(false),
   totalMaxStorage: t.integer(),
   maxStorageForSubmit: t.integer(),

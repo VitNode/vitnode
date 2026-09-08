@@ -64,6 +64,7 @@ export interface ContentRevisionMeta {
   actorName: null | string;
 
   actorRoleColor: null | string;
+  actorRolePrefix: null | string;
   actorType: ContentActorType;
   actorUserId: null | number;
   changedFields: string[];

@@ -253,6 +253,18 @@
       "select_options": "Select options",
       "select_language": "Select language",
       "pick_color": "Pick a color",
+      "emoji_icon_picker": {
+        "placeholder": "Pick an emoji or icon",
+        "emoji": "Emoji",
+        "icon": "Icon",
+        "remove": "Remove",
+        "search_emoji": "Search emoji…",
+        "search_icons": "Search icons…",
+        "hint_emoji": "Pick an emoji",
+        "hint_icon": "Pick an icon",
+        "no_icons": "No icons found.",
+        "loading_icons": "Loading icons…"
+      },
       "file": {
         "any_format": "Any file type",
         "max_size": "Maximum file size: {size}",
@@ -1016,6 +1028,8 @@
       "form": {
         "name": "Name",
         "color": "Color",
+        "prefix": "Prefix",
+        "prefix_desc": "An emoji or icon shown before the name of every member of this role.",
         "upload": {
           "allow": "Allow upload files",
           "total_max_storage": "Total Max Storage",
