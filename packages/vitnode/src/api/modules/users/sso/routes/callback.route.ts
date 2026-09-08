@@ -33,18 +33,40 @@ export const callbackRoute = buildRoute({
         description: "URL",
       },
       409: {
-        description: "Email already exists",
+        content: {
+          "application/json": {
+            schema: z.object({
+              email: z.string(),
+              hasPassword: z.boolean(),
+              linkToken: z.string(),
+            }),
+          },
+        },
+        description:
+          "An account with this email already exists; the body carries what the link step needs",
       },
     },
   },
   handler: async c => {
     const { providerId } = c.req.valid("param");
     const { code, state } = c.req.valid("query");
-    const sso = await new SSOModel(c).callback({ providerId, code, state });
+    const outcome = await new SSOModel(c).callback({ providerId, code, state });
+
+    if (outcome.kind === "link_required") {
+      return c.json(
+        {
+          email: outcome.email,
+          hasPassword: outcome.hasPassword,
+          linkToken: outcome.linkToken,
+        },
+        409,
+      );
+    }
+
     const { token } = await new SessionModel(c).createSessionByUserId(
-      sso.userId,
+      outcome.userId,
     );
 
-    return c.json({ id: sso.userId, token });
+    return c.json({ id: outcome.userId, token }, 200);
   },
 });

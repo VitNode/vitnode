@@ -1,10 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 
+import type { SSOLinkOffer } from "../link/schema";
 import type { SSOCallbackResult } from "./sso-callback-result";
 
-/** What the callback screen is showing right now. */
 export type SSOCallbackState =
-  "access_denied" | "email_exists" | "error" | "pending";
+  | { kind: "access_denied" | "error" | "pending" }
+  | { kind: "email_exists"; offer: null | SSOLinkOffer };
 
 export const useSSOCallback = ({
   code,
@@ -14,31 +15,31 @@ export const useSSOCallback = ({
   providerId,
 }: {
   code: string;
-  /** The `error` parameter the provider redirected back with, if any. */
   oauthError?: string;
   onCallback: () => Promise<SSOCallbackResult>;
   onSignedIn: () => void;
   providerId: string;
 }): SSOCallbackState => {
   const denied = oauthError === "access_denied";
-  const { error, isError } = useQuery({
+  const { data, isError } = useQuery({
     enabled: !denied,
-    queryFn: async () => {
-      const result = await onCallback();
-      if (result?.failure) {
-        throw new Error(result.failure);
-      }
-      onSignedIn();
+    queryFn: async (): Promise<Exclude<SSOCallbackResult, undefined>> => {
+      const result = (await onCallback()) ?? {};
 
-      return "";
+      if (!result.failure) onSignedIn();
+
+      return result;
     },
     queryKey: ["core.auth.sso.callback.sign-up", providerId, code],
     retry: false,
   });
 
-  if (denied) return "access_denied";
-  if (error?.message === "email_exists") return "email_exists";
-  if (isError) return "error";
+  if (denied) return { kind: "access_denied" };
+  if (isError) return { kind: "error" };
+  if (data?.failure === "email_exists") {
+    return { kind: "email_exists", offer: data.offer ?? null };
+  }
+  if (data?.failure) return { kind: "error" };
 
-  return "pending";
+  return { kind: "pending" };
 };

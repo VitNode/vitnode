@@ -31,9 +31,9 @@ export const SignInContent = ({
             <CardDescription>{t("desc")}</CardDescription>
           </div>
 
-          {form}
-
           {sso}
+
+          {form}
         </div>
 
         <div className="text-accent-foreground p-6 text-center text-sm">

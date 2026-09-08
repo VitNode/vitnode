@@ -354,12 +354,39 @@
     },
     "auth": {
       "sso": {
-        "or": "Lub kontynuuj przez",
+        "or": "Lub kontynuuj przez e-mail",
         "access_denied": "Odmówiono dostępu do aplikacji lub żądanie wygasło. Spróbuj ponownie.",
         "email_exists": {
           "title": "Nie możesz zalogować się przez <provider></provider>",
-          "desc": "Konto z tym adresem e-mail już istnieje. Zaloguj się inną metodą i połącz konto <provider></provider> w ustawieniach profilu.",
+          "desc": "Konto z tym adresem e-mail już istnieje. Zaloguj się dotychczasową metodą, aby połączyć konto <provider></provider>.",
           "sign_in": "Przejdź do logowania"
+        },
+        "link": {
+          "title": "Połącz <provider></provider> ze swoim kontem",
+          "desc": "Konto z tym adresem e-mail już istnieje. Potwierdź hasłem, że należy do Ciebie, a połączymy <provider></provider> i od razu Cię zalogujemy.",
+          "email": "Adres e-mail",
+          "password": {
+            "label": "Hasło",
+            "required": "Hasło jest wymagane.",
+            "reset": "Nie pamiętasz hasła?"
+          },
+          "submit": "Połącz i zaloguj się",
+          "other_account": "To nie Twoje konto? <link>Zaloguj się inaczej</link>.",
+          "no_password": {
+            "desc": "To konto nie ma jeszcze hasła, więc nie możemy tutaj potwierdzić, że należy do Ciebie. Najpierw je ustaw, a potem zaloguj się przez <provider></provider> ponownie.",
+            "set_password": "Ustaw hasło",
+            "sign_in": "Przejdź do logowania"
+          },
+          "errors": {
+            "access_denied": {
+              "title": "Nieprawidłowe hasło",
+              "desc": "Hasło jest nieprawidłowe. Spróbuj ponownie i sprawdź, czy nie masz włączonego Caps Locka."
+            },
+            "invalid_token": {
+              "title": "Ta prośba wygasła",
+              "desc": "Rozpocznij logowanie ponownie i połącz konto w ciągu dziesięciu minut."
+            }
+          }
         }
       },
       "sign_up": {

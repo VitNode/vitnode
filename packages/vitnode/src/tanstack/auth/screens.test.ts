@@ -6,6 +6,7 @@ import {
   anonymousSession,
   signInFormResult,
   ssoCallbackResult,
+  ssoLinkFormResult,
   ssoStartFeedback,
 } from "./screens";
 
@@ -63,6 +64,50 @@ describe("ssoCallbackResult", () => {
     reason => {
       expect(ssoCallbackResult({ ok: false, reason })).toEqual({
         failure: "unknown",
+      });
+    },
+  );
+});
+
+describe("ssoCallbackResult with a link offer", () => {
+  it("hands the offer to the callback screen", () => {
+    const offer = {
+      email: "jan@example.com",
+      hasPassword: false,
+      linkToken: "t".repeat(40),
+    };
+
+    expect(
+      ssoCallbackResult({ offer, ok: false, reason: "email_exists" }),
+    ).toEqual({ failure: "email_exists", offer });
+  });
+});
+
+describe("ssoLinkFormResult", () => {
+  it("reports no failure on success", () => {
+    expect(ssoLinkFormResult({ ok: true })).toBeUndefined();
+  });
+
+  it("names a wrong password", () => {
+    expect(ssoLinkFormResult({ ok: false, reason: "access_denied" })).toEqual({
+      message: "access_denied",
+    });
+  });
+
+  it.each(["invalid_token", "already_linked"] as const)(
+    "treats %s as an offer that must be restarted",
+    reason => {
+      expect(ssoLinkFormResult({ ok: false, reason })).toEqual({
+        message: "invalid_token",
+      });
+    },
+  );
+
+  it.each(["server_error", "unknown_provider"] as const)(
+    "collapses %s into the generic failure",
+    reason => {
+      expect(ssoLinkFormResult({ ok: false, reason })).toEqual({
+        message: "Internal Server Error",
       });
     },
   );

@@ -7,6 +7,8 @@ import type { SSOApiPlugin } from "@/api/models/sso";
 
 import { getRedirectUri } from "@/api/models/sso";
 
+import { DISCORD_ICON } from "./icons";
+
 export const DiscordSSOApiPlugin = ({
   clientId = "",
   clientSecret = "",
@@ -105,6 +107,7 @@ export const DiscordSSOApiPlugin = ({
 
       return url.toString();
     },
+    icon: DISCORD_ICON,
     id,
     name: "Discord",
   };

@@ -16,6 +16,8 @@ import type {
   SignUpInput,
   SignUpResult,
   SsoCallbackInput,
+  SsoLinkInput,
+  SsoLinkResult,
   SsoStartInput,
   SsoStartResult,
 } from "./contract";
@@ -29,6 +31,7 @@ import {
   signInResultFromStatus,
   signOutResultFromStatus,
   signUpResultFromStatus,
+  ssoLinkResultFromStatus,
   ssoStartResultFromStatus,
 } from "./contract";
 
@@ -157,7 +160,32 @@ export const completeSsoOnApi = async (
 
   if (!response) return { ok: false, reason: "server_error" };
 
+  if (response.status === 409) {
+    return completeSsoResultFromStatus(409, await readJson(response));
+  }
+
   return completeSsoResultFromStatus(response.status);
+};
+
+export const linkSsoOnApi = async (
+  data: SsoLinkInput,
+): Promise<SsoLinkResult> => {
+  const response = await callUsersApi(async () =>
+    fetcher(usersModule, {
+      allowSaveCookies: true,
+      args: {
+        body: { password: data.password, token: data.token },
+        params: { providerId: data.providerId },
+      },
+      method: "post",
+      module: "users/sso",
+      path: "/{providerId}/link",
+    }),
+  );
+
+  if (!response) return { ok: false, reason: "server_error" };
+
+  return ssoLinkResultFromStatus(response.status);
 };
 
 export const signUpOnApi = async ({

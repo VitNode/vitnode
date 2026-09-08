@@ -6,12 +6,24 @@ import { HTTPException } from "hono/http-exception";
 import crypto from "node:crypto";
 
 import { deleteAuthCookie, setAuthCookie } from "@/api/lib/auth-cookie";
-import { matchesEmail, pickAccountForEmail } from "@/api/lib/user-email-lookup";
+import { ensureServerSecret } from "@/api/lib/server-secret";
+import { ssoConfirmsEmail } from "@/api/lib/sso-email-confirmation";
+import {
+  emailAliases,
+  matchesEmail,
+  pickAccountForEmail,
+} from "@/api/lib/user-email-lookup";
 import { core_users, core_users_sso } from "@/database/users";
 import { CONFIG } from "@/lib/config";
 import { normalizeEmailAddress } from "@/lib/email-canonical";
 import { removeSpecialCharacters } from "@/lib/special-characters";
 
+import { PasswordModel } from "./password";
+import {
+  createSsoLinkToken,
+  SSO_LINK_SECRET_NAME,
+  verifySsoLinkToken,
+} from "./sso-link-token";
 import { UserModel } from "./user";
 
 export interface SSOApiPlugin {
@@ -23,9 +35,19 @@ export interface SSOApiPlugin {
     token_type: string;
   }) => Promise<{ email: string; id: string; username: string }>;
   getUrl: (props: { state: string }) => string;
+  icon?: string;
   id: string;
   name: string;
 }
+
+export type SSOCallbackOutcome =
+  | {
+      email: string;
+      hasPassword: boolean;
+      kind: "link_required";
+      linkToken: string;
+    }
+  | { kind: "signed_in"; userId: number };
 
 export const getRedirectUri = (code: string) =>
   new URL(`${CONFIG.web.href}login/sso/${code}`).toString();
@@ -55,6 +77,7 @@ export class SSOModel {
     const data = await new UserModel().signUp(
       {
         email: user.email,
+        emailVerified: true,
         name: removeSpecialCharacters(user.username, false),
         newsletter: false,
         hashedPassword: undefined,
@@ -70,6 +93,19 @@ export class SSOModel {
     return { userId: data.id };
   };
 
+  private async linkSecret(): Promise<string> {
+    return await ensureServerSecret(this.c.get("db"), SSO_LINK_SECRET_NAME);
+  }
+
+  private async mintLinkToken(offer: {
+    email: string;
+    providerAccountId: string;
+    providerId: string;
+    userId: number;
+  }): Promise<string> {
+    return createSsoLinkToken({ offer, secret: await this.linkSecret() }).token;
+  }
+
   async callback({
     code,
     providerId,
@@ -78,9 +114,7 @@ export class SSOModel {
     code: string;
     providerId: string;
     state: string;
-  }): Promise<{
-    userId: number;
-  }> {
+  }): Promise<SSOCallbackOutcome> {
     await this.verifyState(state);
     const provider = this.plugins.find(p => p.id === providerId);
     if (!provider) {
@@ -98,9 +132,11 @@ export class SSOModel {
       const [dataSSOFromDb] = await tx
         .select({
           userId: core_users_sso.userId,
+          email: core_users.email,
+          emailVerified: core_users.emailVerified,
         })
         .from(core_users_sso)
-        .leftJoin(core_users, eq(core_users.id, core_users_sso.userId))
+        .innerJoin(core_users, eq(core_users.id, core_users_sso.userId))
         .where(
           and(
             eq(core_users_sso.providerId, providerId),
@@ -114,6 +150,7 @@ export class SSOModel {
           .select({
             id: core_users.id,
             email: core_users.email,
+            password: core_users.password,
           })
           .from(core_users)
           .where(matchesEmail(userFromSSO.email))
@@ -130,17 +167,36 @@ export class SSOModel {
             c: this.c,
           });
 
-          return signUpUser;
+          return { kind: "signed_in", userId: signUpUser.userId };
         }
 
-        throw new HTTPException(409, {
-          message: "Email already exists",
-        });
+        return {
+          email: userWithEmail.email,
+          hasPassword: userWithEmail.password !== null,
+          kind: "link_required",
+          linkToken: await this.mintLinkToken({
+            email: userFromSSO.email,
+            providerAccountId: userFromSSO.id,
+            providerId,
+            userId: userWithEmail.id,
+          }),
+        };
       }
 
-      return {
-        userId: dataSSOFromDb.userId,
-      };
+      if (
+        ssoConfirmsEmail({
+          accountEmail: dataSSOFromDb.email,
+          emailVerified: dataSSOFromDb.emailVerified,
+          providerEmail: userFromSSO.email,
+        })
+      ) {
+        await tx
+          .update(core_users)
+          .set({ emailVerified: true })
+          .where(eq(core_users.id, dataSSOFromDb.userId));
+      }
+
+      return { kind: "signed_in", userId: dataSSOFromDb.userId };
     });
   }
 
@@ -174,6 +230,100 @@ export class SSOModel {
     }
 
     return provider.getUrl({ state: await this.encryptState() });
+  }
+
+  async link({
+    password,
+    providerId,
+    token,
+  }: {
+    password: string;
+    providerId: string;
+    token: string;
+  }): Promise<{ userId: number }> {
+    if (!this.plugins.some(p => p.id === providerId)) {
+      throw new HTTPException(404);
+    }
+
+    const offer = verifySsoLinkToken({
+      providerId,
+      secret: await this.linkSecret(),
+      token,
+    });
+    if (!offer) {
+      throw new HTTPException(400, { message: "Invalid link token" });
+    }
+
+    const [user] = await this.c
+      .get("db")
+      .select({
+        id: core_users.id,
+        email: core_users.email,
+        emailVerified: core_users.emailVerified,
+        password: core_users.password,
+      })
+      .from(core_users)
+      .where(eq(core_users.id, offer.userId))
+      .limit(1);
+    const passwords = new PasswordModel();
+
+    if (!user?.password || !emailAliases(offer.email).includes(user.email)) {
+      await passwords.verifyDummyPassword(password);
+
+      throw new HTTPException(403);
+    }
+
+    if (!(await passwords.verifyPassword(password, user.password))) {
+      throw new HTTPException(403);
+    }
+
+    await this.c.get("db").transaction(async tx => {
+      const [existing] = await tx
+        .select({ userId: core_users_sso.userId })
+        .from(core_users_sso)
+        .where(
+          and(
+            eq(core_users_sso.providerId, providerId),
+            eq(core_users_sso.providerAccountId, offer.providerAccountId),
+          ),
+        )
+        .limit(1);
+
+      if (existing && existing.userId !== user.id) {
+        throw new HTTPException(409, {
+          message: "Provider account already linked",
+        });
+      }
+
+      if (!existing) {
+        await tx.insert(core_users_sso).values({
+          userId: user.id,
+          providerId,
+          providerAccountId: offer.providerAccountId,
+        });
+      }
+
+      if (
+        ssoConfirmsEmail({
+          accountEmail: user.email,
+          emailVerified: user.emailVerified,
+          providerEmail: offer.email,
+        })
+      ) {
+        await tx
+          .update(core_users)
+          .set({ emailVerified: true })
+          .where(eq(core_users.id, user.id));
+      }
+    });
+
+    await this.c.get("events").emit("user.sso.linked", {
+      email: user.email,
+      providerId,
+      userId: user.id,
+    });
+
+    return { userId: user.id };
   }
 
   async verifyState(state: string) {

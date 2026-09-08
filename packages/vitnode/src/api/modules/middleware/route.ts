@@ -4,7 +4,13 @@ import { buildRoute } from "@/api/lib/route";
 import { CONFIG_PLUGIN } from "@/config";
 
 export const routeMiddlewareSchema = z.object({
-  sso: z.array(z.object({ id: z.string(), name: z.string() })),
+  sso: z.array(
+    z.object({
+      id: z.string(),
+      name: z.string(),
+      icon: z.string().optional(),
+    }),
+  ),
   isEmail: z.boolean(),
   captcha: z
     .object({
@@ -37,7 +43,7 @@ export const routeMiddleware = buildRoute({
     return c.json(
       {
         isEmail: !!c.get("core").email?.adapter,
-        sso: sso.map(s => ({ id: s.id, name: s.name })),
+        sso: sso.map(s => ({ id: s.id, name: s.name, icon: s.icon })),
         captcha: c.get("core").captcha
           ? {
               siteKey: c.get("core").captcha?.siteKey ?? "",

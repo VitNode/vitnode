@@ -15,6 +15,7 @@ const unreachable = () => {
 const stub = {
   changePasswordFromReset: unreachable,
   completeSso: unreachable,
+  linkSso: unreachable,
   readSession: unreachable,
   requestPasswordReset: unreachable,
   signIn: unreachable,

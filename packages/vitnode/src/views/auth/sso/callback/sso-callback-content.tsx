@@ -1,27 +1,36 @@
 import { useTranslations } from "use-intl";
 
 import { Button } from "@/components/ui/button";
+import { Card, CardDescription } from "@/components/ui/card";
 import { Loader } from "@/components/ui/loader";
 import { ErrorContent } from "@/views/error/error-content";
 
 import type { AuthLinkComponent } from "../../auth-link";
+import type { SSOLinkSubmit } from "../link/sso-link-form-content";
 import type { SSOProvider } from "../providers";
 import type { SSOCallbackState } from "./use-sso-callback";
 
 import { AUTH_HREF } from "../../auth-link";
+import { SSOLinkFormContent } from "../link/sso-link-form-content";
 
 export const SSOCallbackContent = ({
   LinkComponent,
   errorActions,
+  onLink,
   providerId,
   providers,
+  resetPasswordHref = AUTH_HREF.resetPassword,
+  showResetPassword = false,
   signInHref = AUTH_HREF.signIn,
   state,
 }: {
   errorActions?: React.ReactNode;
   LinkComponent: AuthLinkComponent;
+  onLink: SSOLinkSubmit;
   providerId: string;
   providers: readonly SSOProvider[];
+  resetPasswordHref?: string;
+  showResetPassword?: boolean;
   signInHref?: string;
   state: SSOCallbackState;
 }) => {
@@ -35,7 +44,7 @@ export const SSOCallbackContent = ({
     <span className="font-semibold">{provider?.name ?? providerId}</span>
   );
 
-  if (state === "access_denied") {
+  if (state.kind === "access_denied") {
     return (
       <ErrorContent
         actions={errorActions}
@@ -46,7 +55,49 @@ export const SSOCallbackContent = ({
     );
   }
 
-  if (state === "email_exists") {
+  if (state.kind === "email_exists" && state.offer) {
+    return (
+      <div className="mx-auto flex max-w-md flex-col justify-center px-4 py-16 md:min-h-[calc(100vh-4rem)]">
+        <Card className="bg-muted gap-0 p-0">
+          <div className="bg-card rounded-xl p-6">
+            <div className="mb-10 flex flex-col gap-2 text-center">
+              <h1 className="text-2xl leading-none font-semibold tracking-tight text-balance">
+                {t.rich("link.title", { provider: providerName })}
+              </h1>
+              <CardDescription className="text-pretty">
+                {t.rich("link.desc", { provider: providerName })}
+              </CardDescription>
+            </div>
+
+            <SSOLinkFormContent
+              LinkComponent={LinkComponent}
+              offer={state.offer}
+              onLink={onLink}
+              providerName={providerName}
+              resetPasswordHref={resetPasswordHref}
+              showResetPassword={showResetPassword}
+              signInHref={signInHref}
+            />
+          </div>
+
+          <div className="text-accent-foreground p-6 text-center text-sm">
+            {t.rich("link.other_account", {
+              link: text => (
+                <LinkComponent
+                  className="text-primary font-semibold"
+                  href={signInHref}
+                >
+                  {text}
+                </LinkComponent>
+              ),
+            })}
+          </div>
+        </Card>
+      </div>
+    );
+  }
+
+  if (state.kind === "email_exists") {
     return (
       <ErrorContent
         actions={
@@ -65,7 +116,7 @@ export const SSOCallbackContent = ({
     );
   }
 
-  if (state === "error") {
+  if (state.kind === "error") {
     return (
       <ErrorContent
         actions={errorActions}

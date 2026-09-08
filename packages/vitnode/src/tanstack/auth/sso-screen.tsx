@@ -7,7 +7,7 @@ import { SSOCallbackContent } from "@/views/auth/sso/callback/sso-callback-conte
 import { useSSOCallback } from "@/views/auth/sso/callback/use-sso-callback";
 
 import { RouteMessages } from "../i18n/route-messages";
-import { useCompleteSsoAction } from "./actions";
+import { useCompleteSsoAction, useLinkSsoAction } from "./actions";
 import { parseSsoCallback } from "./contract";
 import {
   middlewareConfigQueryOptions,
@@ -35,20 +35,22 @@ export const SsoCallbackRouteContent = ({
 
   const parsed = parseSsoCallback({ providerId, query: search });
   const completeSso = useCompleteSsoAction(parsed.ok ? parsed.params : null);
+  // The front page, through the same rule the login form uses. There is no
+  // `returnTo` to honour here and there must not be: this URL is built by the
+  // provider from what the API registered with it, so anything in its query
+  // came back from another origin.
+  const onSignedIn = () => {
+    void router.navigate(
+      parseInternalDestination(postAuthDestination(undefined)),
+    );
+  };
+  const linkSso = useLinkSsoAction({ onSignedIn, providerId });
 
   const state = useSSOCallback({
     code: parsed.ok ? parsed.params.code : "",
     oauthError: search.error,
     onCallback: completeSso,
-    // The front page, through the same rule the login form uses. There is no
-    // `returnTo` to honour here and there must not be: this URL is built by the
-    // provider from what the API registered with it, so anything in its query
-    // came back from another origin.
-    onSignedIn: () => {
-      void router.navigate(
-        parseInternalDestination(postAuthDestination(undefined)),
-      );
-    },
+    onSignedIn,
     providerId,
   });
 
@@ -57,8 +59,10 @@ export const SsoCallbackRouteContent = ({
       <SSOCallbackContent
         errorActions={errorActions}
         LinkComponent={LinkComponent}
+        onLink={linkSso}
         providerId={providerId}
         providers={ssoProvidersOf(config)}
+        showResetPassword={config.isEmail}
         state={state}
       />
     </RouteMessages>
