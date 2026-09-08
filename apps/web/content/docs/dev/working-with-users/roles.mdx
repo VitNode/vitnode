@@ -11,9 +11,9 @@ In VitNode, a role groups users together for display styles (e.g. colored userna
 Resolve a user's complete set of role IDs (primary + secondary) on the API:
 
 ```ts
-import { getUserRoleIds } from "@vitnode/core/api/lib/check-staff-permission"
+import { getUserRoleIds } from '@vitnode/core/api/lib/check-staff-permission'
 
-const user = c.get("user")
+const user = c.get('user')
 // [!code ++:1]
 const roleIds = user ? await getUserRoleIds(c, user) : []
 ```
@@ -24,15 +24,16 @@ const roleIds = user ? await getUserRoleIds(c, user) : []
 
 VitNode automatically seeds four protected system roles upon installation:
 
-| Role | Flags | Default Color | Staff Privileges |
-| :--- | :--- | :--- | :--- |
-| **Guest** | `guest` | None | None (applies to unauthenticated visitors) |
-| **Member** | `default` | None | Standard registered member role |
-| **Moderator** | None | Green (`hsl(122, 80%, 45%)`) | Unrestricted moderation staff |
-| **Administrator** | `root` | Red (`hsl(0, 100%, 50%)`) | Unrestricted administrative staff (`root: true`) |
+| Role              | Flags     | Default Color                | Staff Privileges                                 |
+| :---------------- | :-------- | :--------------------------- | :----------------------------------------------- |
+| **Guest**         | `guest`   | None                         | None (applies to unauthenticated visitors)       |
+| **Member**        | `default` | None                         | Standard registered member role                  |
+| **Moderator**     | None      | Green (`hsl(122, 80%, 45%)`) | Unrestricted moderation staff                    |
+| **Administrator** | `root`    | Red (`hsl(0, 100%, 50%)`)    | Unrestricted administrative staff (`root: true`) |
 
 <Callout type="info" title="First Account is Root">
-  The first user to register during site initialization is automatically assigned the Administrator role.
+  The first user to register during site initialization is automatically
+  assigned the Administrator role.
 </Callout>
 
 ---
@@ -42,6 +43,7 @@ VitNode automatically seeds four protected system roles upon installation:
 `core_roles` defines group styling and properties:
 
 - `color`: CSS color string (e.g. `#ff0000`, `hsl(210, 100%, 50%)`) applied to member usernames across the UI.
+- `prefix`: An emoji or a Lucide icon rendered in front of the role name and in front of every member's username. Stored as `emoji:🚀` or `icon:rocket` - see the [Emoji & Icon Picker](/docs/ui/emoji-icon-picker) for the codec and the components that read it.
 - `root`: When `true`, user bypasses all staff permission checks.
 - `default`: The role automatically assigned to newly registered members.
 - `guest`: Reserved for unauthenticated requests.
@@ -59,6 +61,8 @@ Every user has exactly one **primary role** (stored in `core_users.roleId`). Use
 {/* Image prompt: VitNode AdminCP Roles management page at /admin/core/roles. Table showing custom roles with colored name badges, member counts, and action buttons to reorder, edit, or delete roles. Dark theme, 1440x900. */}
 
 Create, color-code, and organize user groups under **Core → Roles** (`/admin/core/roles`).
+
+The **General** tab of the create/edit dialog carries both display fields: **Color**, which tints member usernames, and **Prefix**, which puts an emoji or an icon in front of them.
 
 ## Learn More
 

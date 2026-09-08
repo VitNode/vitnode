@@ -1,5 +1,9 @@
 import { cn } from "cn";
 
+import { parseEmojiIcon } from "@/lib/emoji-icon";
+
+import { EmojiIcon } from "./ui/emoji-icon";
+
 export const UserFormat = ({
   user,
   format,
@@ -12,19 +16,26 @@ export const UserFormat = ({
     name: string;
     role: {
       color: null | string;
+      prefix?: null | string;
     };
   };
 }) => {
+  const prefix = parseEmojiIcon(user.role.prefix);
+
   return (
     <span
-      className={cn("font-medium", className)}
+      className={cn(
+        "inline-flex min-w-0 items-center gap-1.5 font-medium",
+        className,
+      )}
       style={{
         ...(format && user.role.color ? { color: user.role.color } : {}),
         ...style,
       }}
       {...props}
     >
-      {user.name}
+      {!!prefix && <EmojiIcon value={prefix} />}
+      <span className="truncate">{user.name}</span>
     </span>
   );
 };

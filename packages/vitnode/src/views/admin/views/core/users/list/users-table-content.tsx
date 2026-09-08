@@ -14,6 +14,7 @@ import { useAdminStaffPermission } from "@/components/staff-permission/provider"
 import { ContentDataTable } from "@/components/table/content";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { TooltipWithContent } from "@/components/ui/tooltip";
+import { UserFormat } from "@/components/user-format";
 import { ADMIN_USER_PERMISSIONS } from "@/views/admin/views/core/shared/admin-permissions";
 
 import type { AdminUserRow, AdminUsersPage } from "./users-query";
@@ -155,7 +156,7 @@ export const UsersAdminTableContent = ({
               <Avatar size={32} user={row} />
 
               <div className="flex flex-col">
-                <span className="font-medium">{row.name}</span>
+                <UserFormat user={row} />
                 <span className="text-muted-foreground text-sm">
                   @{row.nameCode}
                 </span>

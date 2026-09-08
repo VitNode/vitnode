@@ -17,6 +17,7 @@ const roleAdminSchema = z.object({
     }),
   ),
   color: z.string().nullable(),
+  prefix: z.string().nullable(),
   protected: z.boolean(),
   default: z.boolean(),
   root: z.boolean(),
@@ -81,6 +82,7 @@ export const showRoleAdminRoute = buildRoute({
       .select({
         id: core_roles.id,
         color: core_roles.color,
+        prefix: core_roles.prefix,
         protected: core_roles.protected,
         default: core_roles.default,
         root: core_roles.root,

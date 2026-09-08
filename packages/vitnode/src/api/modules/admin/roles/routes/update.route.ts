@@ -6,14 +6,20 @@ import { saveLanguageWords } from "@/api/lib/save-language-words";
 import { invalidateAllStaffPermissions } from "@/api/lib/staff-permission-cache";
 import { CONFIG_PLUGIN } from "@/config";
 import { core_roles } from "@/database/roles";
+import { parseEmojiIcon, serializeEmojiIcon } from "@/lib/emoji-icon";
 
 import { assertCanManageAdminRole } from "../lib/assert-manage-admin-role";
-import { zodRoleNameSchema, zodRoleStorageSchema } from "./create.route";
+import {
+  zodRoleNameSchema,
+  zodRolePrefixSchema,
+  zodRoleStorageSchema,
+} from "./create.route";
 
 export const zodUpdateRoleAdminSchema = z
   .object({
     name: zodRoleNameSchema,
     color: z.string().max(50),
+    prefix: zodRolePrefixSchema,
     allowUploadFiles: z.boolean(),
     totalMaxStorage: zodRoleStorageSchema,
     maxStorageForSubmit: zodRoleStorageSchema,
@@ -93,6 +99,9 @@ export const updateRoleAdminRoute = buildRoute({
     };
     if (body.color !== undefined) {
       values.color = body.color.trim() ? body.color : null;
+    }
+    if (body.prefix !== undefined) {
+      values.prefix = serializeEmojiIcon(parseEmojiIcon(body.prefix)) || null;
     }
     if (body.allowUploadFiles !== undefined) {
       values.allowUploadFiles = body.allowUploadFiles;

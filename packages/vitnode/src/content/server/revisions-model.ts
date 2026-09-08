@@ -101,6 +101,7 @@ export const createContentRevisionsModel = <
   const metaSelection = {
     actorName: core_users.name,
     actorRoleColor: core_roles.color,
+    actorRolePrefix: core_roles.prefix,
     actorType: core_content_revisions.actorType,
     actorUserId: core_content_revisions.actorUserId,
     changedFields: core_content_revisions.changedFields,

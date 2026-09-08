@@ -1,0 +1,1 @@
+ALTER TABLE "core_roles" ADD COLUMN "prefix" varchar(64);

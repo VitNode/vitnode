@@ -33,7 +33,11 @@ export const resolveStaffEdges = async (c: Context, edges: RawStaffEdge[]) => {
   const entryRoles = entryRoleIds.length
     ? await c
         .get("db")
-        .select({ id: core_roles.id, color: core_roles.color })
+        .select({
+          id: core_roles.id,
+          color: core_roles.color,
+          prefix: core_roles.prefix,
+        })
         .from(core_roles)
         .where(inArray(core_roles.id, entryRoleIds))
     : [];
@@ -48,6 +52,7 @@ export const resolveStaffEdges = async (c: Context, edges: RawStaffEdge[]) => {
           avatarColor: core_users.avatarColor,
           roleId: core_users.roleId,
           roleColor: core_roles.color,
+          rolePrefix: core_roles.prefix,
         })
         .from(core_users)
         .leftJoin(core_roles, eq(core_roles.id, core_users.roleId))
@@ -79,6 +84,7 @@ export const resolveStaffEdges = async (c: Context, edges: RawStaffEdge[]) => {
         ? {
             id: entryRole.id,
             color: entryRole.color,
+            prefix: entryRole.prefix,
             name: roleNames.get(entryRole.id) ?? [],
           }
         : null,
@@ -91,6 +97,7 @@ export const resolveStaffEdges = async (c: Context, edges: RawStaffEdge[]) => {
             role: {
               id: user.roleId,
               color: user.roleColor,
+              prefix: user.rolePrefix,
               name: roleNames.get(user.roleId) ?? [],
             },
           }

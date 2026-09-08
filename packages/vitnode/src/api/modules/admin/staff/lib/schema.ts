@@ -17,6 +17,7 @@ export const staffListAdminQuery = zodPaginationQuery.extend({
 export const staffRoleSchema = z.object({
   id: z.number(),
   color: z.string().nullable(),
+  prefix: z.string().nullable(),
   name: z.array(
     z.object({
       name: z.string(),

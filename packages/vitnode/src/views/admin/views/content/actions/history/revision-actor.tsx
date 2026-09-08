@@ -11,12 +11,13 @@ import { useContentFormNavigation } from "../../form/navigation";
 
 type RevisionActorMeta = Pick<
   ContentRevisionMeta,
-  "actorName" | "actorRoleColor" | "actorUserId"
+  "actorName" | "actorRoleColor" | "actorRolePrefix" | "actorUserId"
 >;
 
 const RevisionActorLink = ({
   actorName,
   actorRoleColor,
+  actorRolePrefix,
   actorUserId,
   className,
   LinkComponent,
@@ -35,7 +36,10 @@ const RevisionActorLink = ({
   >
     <UserFormat
       format
-      user={{ name: actorName, role: { color: actorRoleColor } }}
+      user={{
+        name: actorName,
+        role: { color: actorRoleColor, prefix: actorRolePrefix },
+      }}
     />
   </LinkComponent>
 );

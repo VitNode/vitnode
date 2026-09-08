@@ -4,6 +4,11 @@ import { buildRoute } from "@/api/lib/route";
 import { saveLanguageWords } from "@/api/lib/save-language-words";
 import { CONFIG_PLUGIN } from "@/config";
 import { core_roles } from "@/database/roles";
+import {
+  EMOJI_ICON_MAX_LENGTH,
+  parseEmojiIcon,
+  serializeEmojiIcon,
+} from "@/lib/emoji-icon";
 
 // Role names are not a column on `core_roles` - every translation lives in
 // `core_languages_words`, so the name is the full list of per-language values.
@@ -19,9 +24,12 @@ export const zodRoleNameSchema = z
 // Storage caps are expressed in kB. `null` means unlimited.
 export const zodRoleStorageSchema = z.number().int().min(0).nullable();
 
+export const zodRolePrefixSchema = z.string().max(EMOJI_ICON_MAX_LENGTH);
+
 export const zodCreateRoleAdminSchema = z.object({
   name: zodRoleNameSchema,
   color: z.string().max(50).optional(),
+  prefix: zodRolePrefixSchema.optional(),
   allowUploadFiles: z.boolean().optional(),
   totalMaxStorage: zodRoleStorageSchema.optional(),
   maxStorageForSubmit: zodRoleStorageSchema.optional(),
@@ -62,6 +70,7 @@ export const createRoleAdminRoute = buildRoute({
     const {
       name,
       color,
+      prefix,
       allowUploadFiles,
       totalMaxStorage,
       maxStorageForSubmit,
@@ -72,6 +81,7 @@ export const createRoleAdminRoute = buildRoute({
       .insert(core_roles)
       .values({
         color: color?.trim() ? color : null,
+        prefix: serializeEmojiIcon(parseEmojiIcon(prefix)) || null,
         allowUploadFiles: allowUploadFiles ?? false,
         totalMaxStorage: totalMaxStorage ?? null,
         maxStorageForSubmit: maxStorageForSubmit ?? null,

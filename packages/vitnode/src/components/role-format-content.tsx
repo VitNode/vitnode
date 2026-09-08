@@ -1,9 +1,12 @@
 import { cn } from "cn";
 import { useLocale } from "use-intl";
 
+import { parseEmojiIcon } from "@/lib/emoji-icon";
+
 import type { RoleNameEntry } from "./role-name";
 
 import { resolveRoleName } from "./role-name";
+import { EmojiIcon } from "./ui/emoji-icon";
 
 export const RoleFormatContent = ({
   className,
@@ -15,17 +18,23 @@ export const RoleFormatContent = ({
     color: null | string;
     id: number;
     name: RoleNameEntry[];
+    prefix?: null | string;
   };
 }) => {
   const locale = useLocale();
+  const prefix = parseEmojiIcon(role.prefix);
 
   return (
     <span
-      className={cn("font-medium", className)}
+      className={cn(
+        "inline-flex min-w-0 items-center gap-1.5 font-medium",
+        className,
+      )}
       style={{ ...(role.color ? { color: role.color } : {}), ...style }}
       {...props}
     >
-      {resolveRoleName(role, locale)}
+      {!!prefix && <EmojiIcon value={prefix} />}
+      <span className="truncate">{resolveRoleName(role, locale)}</span>
     </span>
   );
 };

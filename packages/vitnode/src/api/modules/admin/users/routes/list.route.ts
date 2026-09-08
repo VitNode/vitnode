@@ -46,6 +46,7 @@ export const listUsersAdminRoute = buildRoute({
                   role: z.object({
                     id: z.number(),
                     color: z.string().nullable(),
+                    prefix: z.string().nullable(),
                     name: z.array(
                       z.object({
                         name: z.string(),
@@ -57,6 +58,7 @@ export const listUsersAdminRoute = buildRoute({
                     z.object({
                       id: z.number(),
                       color: z.string().nullable(),
+                      prefix: z.string().nullable(),
                       name: z.array(
                         z.object({
                           name: z.string(),
@@ -105,6 +107,7 @@ export const listUsersAdminRoute = buildRoute({
             emailVerified: core_users.emailVerified,
             roleId: core_users.roleId,
             roleColor: core_roles.color,
+            rolePrefix: core_roles.prefix,
             birthday: core_users.birthday,
             language: core_users.language,
           })
@@ -133,6 +136,7 @@ export const listUsersAdminRoute = buildRoute({
             userId: core_users_secondary_roles.userId,
             roleId: core_users_secondary_roles.roleId,
             roleColor: core_roles.color,
+            rolePrefix: core_roles.prefix,
           })
           .from(core_users_secondary_roles)
           .innerJoin(
@@ -151,11 +155,12 @@ export const listUsersAdminRoute = buildRoute({
 
     return c.json({
       pageInfo: data.pageInfo,
-      edges: data.edges.map(({ roleColor, ...user }) => ({
+      edges: data.edges.map(({ roleColor, rolePrefix, ...user }) => ({
         ...user,
         role: {
           id: user.roleId,
           color: roleColor,
+          prefix: rolePrefix,
           name: roleNames.get(user.roleId) ?? [],
         },
         secondaryRoles: secondaryRoleRows
@@ -163,6 +168,7 @@ export const listUsersAdminRoute = buildRoute({
           .map(row => ({
             id: row.roleId,
             color: row.roleColor,
+            prefix: row.rolePrefix,
             name: roleNames.get(row.roleId) ?? [],
           })),
       })),
