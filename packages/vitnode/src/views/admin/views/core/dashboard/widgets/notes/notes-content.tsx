@@ -1,9 +1,9 @@
+import { cn } from "cn";
 import { AlertTriangleIcon, CheckIcon, LoaderCircleIcon } from "lucide-react";
 import React from "react";
 import { useTranslations } from "use-intl";
 
 import { Textarea } from "@/components/ui/textarea";
-import { cn } from "@/lib/utils";
 
 import { saveWidgetSettingsInBrowser } from "../widget-mutations";
 

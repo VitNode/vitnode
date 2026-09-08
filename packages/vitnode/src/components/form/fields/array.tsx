@@ -1,9 +1,8 @@
+import { cn } from "cn";
 import { PlusIcon, Trash2Icon } from "lucide-react";
 import React from "react";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { useTranslations } from "use-intl";
-
-import { cn } from "@/lib/utils";
 
 import type { InputParams } from "../../../lib/helpers/auto-form";
 import type { ItemAutoFormComponentProps } from "../auto-form";

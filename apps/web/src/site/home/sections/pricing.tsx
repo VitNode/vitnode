@@ -1,5 +1,5 @@
 import { buttonVariants } from '@vitnode/core/components/ui/button'
-import { cn } from '@vitnode/core/lib/utils'
+import { cn } from 'cn'
 import { Check, Coffee, HeartHandshake } from 'lucide-react'
 
 import type { SiteLinkComponent } from '#/site/home/site-link'

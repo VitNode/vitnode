@@ -58,6 +58,7 @@ export const createPluginPackageJSON = async ({
       "@types/react": versionsPackageJson.typesReact,
       "@types/react-dom": versionsPackageJson.typesReactDom,
       "@vitnode/config": vitnodeVersionRange,
+      cn: versionsPackageJson.cn,
       ...withIf(eslint, {
         eslint: versionsPackageJson.eslint,
       }),

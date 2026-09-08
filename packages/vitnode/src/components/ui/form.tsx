@@ -1,5 +1,6 @@
 import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
+import { cn } from "cn";
 import React from "react";
 import {
   Controller,
@@ -12,8 +13,6 @@ import {
   useFormState,
 } from "react-hook-form";
 import { useTranslations } from "use-intl";
-
-import { cn } from "@/lib/utils";
 
 import { useBeforeUnload } from "../../hooks/use-before-unload";
 import { useDialog } from "./dialog";

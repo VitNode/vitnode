@@ -13,6 +13,7 @@ export const versionsPackageJson = {
   prettierTailwind: "^0.8",
   tailwind: "^4.2",
   twAnimateCss: "^1.4.0",
+  cn: "^0.2.6",
 
   react: "^19.2",
   reactDom: "^19.2",

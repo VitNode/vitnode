@@ -1,7 +1,7 @@
+import { cn } from "cn";
 import { useTranslations } from "use-intl";
 
 import { Skeleton } from "@/components/ui/skeleton";
-import { cn } from "@/lib/utils";
 
 import type { AdminDashboardWidgetRows } from "../widgets/types";
 

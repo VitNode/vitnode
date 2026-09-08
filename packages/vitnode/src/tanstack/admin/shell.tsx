@@ -103,7 +103,10 @@ const AdminShellFrame = ({
           <SidebarTrigger className="-ml-1 shrink-0" />
           {breadcrumb != null && (
             <>
-              <Separator className="mr-1 h-4 shrink-0" orientation="vertical" />
+              <Separator
+                className="mr-1 data-[orientation=vertical]:h-4"
+                orientation="vertical"
+              />
               <div className="min-w-0 flex-1">{breadcrumb}</div>
             </>
           )}

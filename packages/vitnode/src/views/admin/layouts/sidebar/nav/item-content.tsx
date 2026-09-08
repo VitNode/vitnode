@@ -1,3 +1,4 @@
+import { cn } from "cn";
 import { ChevronRight, MenuIcon } from "lucide-react";
 import React, { useEffect, useState } from "react";
 
@@ -17,7 +18,6 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { cn } from "@/lib/utils";
 
 import type { AdminNavItem, AdminNavSubItem } from "./nav-model";
 

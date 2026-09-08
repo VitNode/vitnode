@@ -1,6 +1,5 @@
+import { cn } from "cn";
 import { useLocale } from "use-intl";
-
-import { cn } from "@/lib/utils";
 
 import type { RoleNameEntry } from "./role-name";
 

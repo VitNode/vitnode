@@ -1,6 +1,5 @@
+import { cn } from "cn";
 import { Section, Text } from "react-email";
-
-import { cn } from "@/lib/utils";
 
 export const EmailCard = ({
   className,

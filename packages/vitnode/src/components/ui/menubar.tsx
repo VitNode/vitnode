@@ -1,9 +1,8 @@
 import { Menu as MenuPrimitive } from "@base-ui/react/menu";
 import { Menubar as MenubarPrimitive } from "@base-ui/react/menubar";
+import { cn } from "cn";
 import { CheckIcon, ChevronRightIcon } from "lucide-react";
 import React from "react";
-
-import { cn } from "@/lib/utils";
 
 function Menubar({
   className,

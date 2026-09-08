@@ -1,9 +1,8 @@
+import { cn } from "cn";
 import { CheckIcon, PlusCircleIcon, Trash2 } from "lucide-react";
 import React from "react";
 import { useDebouncedCallback } from "use-debounce";
 import { useTranslations } from "use-intl";
-
-import { cn } from "@/lib/utils";
 
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
@@ -101,7 +100,10 @@ function FilterItem({ filter }: { filter: FilterDataTable }) {
         {filter.label}
         {selected.length > 0 && (
           <>
-            <Separator className="mx-0.5 h-4" orientation="vertical" />
+            <Separator
+              className="mx-0.5 data-[orientation=vertical]:h-4"
+              orientation="vertical"
+            />
             {isAsync || selectedStaticOptions.length > 2 ? (
               <Badge>{t("selected_count", { count: selected.length })}</Badge>
             ) : (

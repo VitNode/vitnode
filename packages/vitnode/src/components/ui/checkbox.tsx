@@ -1,8 +1,7 @@
 import { Checkbox as CheckboxPrimitive } from "@base-ui/react/checkbox";
+import { cn } from "cn";
 import { CheckIcon, MinusIcon } from "lucide-react";
 import React from "react";
-
-import { cn } from "@/lib/utils";
 
 function Checkbox({
   className,

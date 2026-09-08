@@ -1,9 +1,8 @@
 import { Dialog as DialogPrimitive } from "@base-ui/react/dialog";
+import { cn } from "cn";
 import { XIcon } from "lucide-react";
 import React from "react";
 import { useTranslations } from "use-intl";
-
-import { cn } from "@/lib/utils";
 
 import {
   AlertDialog,

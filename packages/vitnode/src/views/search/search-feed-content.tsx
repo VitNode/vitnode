@@ -1,4 +1,5 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
+import { cn } from "cn";
 import React from "react";
 import { useTranslations } from "use-intl";
 
@@ -8,7 +9,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { TooltipWithContent } from "@/components/ui/tooltip";
-import { cn } from "@/lib/utils";
 
 import type { SearchFeedQueryOptions } from "./search-feed-query";
 import type { SearchResultItem } from "./types";

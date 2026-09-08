@@ -63,7 +63,7 @@ const ScheduleRow = ({
       </span>
 
       {overdue ? (
-        <span className="text-xs text-amber-600 dark:text-amber-400">
+        <span className="text-xs text-amber-700 dark:text-amber-400">
           {t("overdue")}
         </span>
       ) : null}
@@ -75,7 +75,7 @@ const ScheduleRow = ({
       ) : null}
 
       {schedule.effectsError ? (
-        <span className="w-full text-xs wrap-break-word text-amber-600 dark:text-amber-400">
+        <span className="w-full text-xs wrap-break-word text-amber-700 dark:text-amber-400">
           {t("effects_failed")}
         </span>
       ) : null}

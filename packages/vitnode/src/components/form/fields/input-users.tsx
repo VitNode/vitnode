@@ -1,3 +1,4 @@
+import { cn } from "cn";
 import { UserIcon, XIcon } from "lucide-react";
 import React from "react";
 import { useTranslations } from "use-intl";
@@ -5,7 +6,6 @@ import { useTranslations } from "use-intl";
 import { Avatar } from "@/components/avatar";
 import { Button } from "@/components/ui/button";
 import { FormMessage } from "@/components/ui/form";
-import { cn } from "@/lib/utils";
 
 import type { ItemAutoFormComponentProps } from "../auto-form";
 

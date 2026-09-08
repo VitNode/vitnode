@@ -1,3 +1,4 @@
+import { cn } from "cn";
 import {
   CheckIcon,
   ChevronRightIcon,
@@ -24,7 +25,6 @@ import type {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
-import { cn } from "@/lib/utils";
 import {
   countGrantedStaffPermissions,
   isStaffPermissionLocked,

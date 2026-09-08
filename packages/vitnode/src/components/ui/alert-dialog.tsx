@@ -1,9 +1,9 @@
 import { AlertDialog as AlertDialogPrimitive } from "@base-ui/react/alert-dialog";
+import { cn } from "cn";
 import React from "react";
 import { useTranslations } from "use-intl";
 
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 
 import { Skeleton } from "./skeleton";
 

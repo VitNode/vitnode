@@ -1,7 +1,7 @@
 import { Button as ButtonPrimitive } from "@base-ui/react/button";
+import { cn } from "cn";
 import { useTranslations } from "use-intl";
 
-import { cn } from "../../lib/utils";
 import { type ButtonProps, buttonVariants } from "./button";
 import { Loader } from "./loader";
 

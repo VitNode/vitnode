@@ -1,8 +1,8 @@
+import { cn } from "cn";
 import { useTranslations } from "use-intl";
 
 import { FieldLabel } from "@/components/ui/field";
 import { useFormField } from "@/components/ui/form";
-import { cn } from "@/lib/utils";
 
 export const AutoFormLabel = ({
   children,

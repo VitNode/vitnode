@@ -1,3 +1,4 @@
+import { cn } from "cn";
 import { ArrowRightIcon } from "lucide-react";
 import React from "react";
 import { useTranslations } from "use-intl";
@@ -11,7 +12,6 @@ import type {
 import { DateFormat } from "@/components/date-format";
 import { Badge } from "@/components/ui/badge";
 import { contentRevisionDiff } from "@/content/revisions";
-import { cn } from "@/lib/utils";
 
 const TEXTAREA_PREVIEW_LINES = 8;
 

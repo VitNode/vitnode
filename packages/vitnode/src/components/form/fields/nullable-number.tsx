@@ -1,9 +1,9 @@
+import { cn } from "cn";
 import React from "react";
 
 import { Checkbox } from "@/components/ui/checkbox";
 import { FormControl, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { cn } from "@/lib/utils";
 
 import type { ItemAutoFormComponentProps } from "../auto-form";
 

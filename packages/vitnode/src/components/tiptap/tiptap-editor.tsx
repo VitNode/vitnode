@@ -1,8 +1,8 @@
 import { EditorContent, useEditor } from "@tiptap/react";
+import { cn } from "cn";
 import { useTranslations } from "use-intl";
 
 import { useEditorConfig } from "@/components/editor-provider";
-import { cn } from "@/lib/utils";
 
 import { Loader } from "../ui/loader";
 import { TipTapDragHandle } from "./drag-handle";

@@ -1,3 +1,4 @@
+import { cn } from "cn";
 import {
   ChevronsUpDownIcon,
   ExternalLink,
@@ -54,7 +55,6 @@ import {
 } from "@/components/ui/popover";
 import { Spinner } from "@/components/ui/spinner";
 import { TooltipWithContent } from "@/components/ui/tooltip";
-import { cn } from "@/lib/utils";
 import { ADMIN_ROLE_PERMISSIONS } from "@/views/admin/views/core/shared/admin-permissions";
 
 import type { AdminRoleFormProps } from "./role-form-content";

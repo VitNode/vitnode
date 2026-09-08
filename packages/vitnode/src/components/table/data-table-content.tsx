@@ -1,10 +1,10 @@
+import { cn } from "cn";
 import React from "react";
 
 import type { FilterDataTable } from "./filters";
 import type { PaginationDataTable } from "./pagination";
 import type { SearchDataTable } from "./search";
 
-import { cn } from "../../lib/utils";
 import { Skeleton } from "../ui/skeleton";
 import {
   Table,

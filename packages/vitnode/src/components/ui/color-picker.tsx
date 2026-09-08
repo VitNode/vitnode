@@ -1,8 +1,7 @@
+import { cn } from "cn";
 import { XIcon } from "lucide-react";
 import React from "react";
 import { useTranslations } from "use-intl";
-
-import { cn } from "@/lib/utils";
 
 import { Button } from "./button";
 import { Input } from "./input";

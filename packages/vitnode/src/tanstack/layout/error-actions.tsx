@@ -1,11 +1,11 @@
 import { useRouter } from "@tanstack/react-router";
+import { cn } from "cn";
 import { ArrowLeft, HomeIcon } from "lucide-react";
 import { useTranslations } from "use-intl";
 
 import type { AuthLinkComponent } from "@/views/auth/auth-link";
 
 import { Button, buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 
 import { RouterLink } from "./router-link";
 

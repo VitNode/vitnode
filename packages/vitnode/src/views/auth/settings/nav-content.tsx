@@ -1,3 +1,4 @@
+import { cn } from "cn";
 import {
   ChevronRightIcon,
   KeyRoundIcon,
@@ -7,7 +8,6 @@ import {
 import { useTranslations } from "use-intl";
 
 import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 
 import type { AuthLinkComponent } from "../auth-link";
 import type { SettingsNavKey } from "./settings-nav";

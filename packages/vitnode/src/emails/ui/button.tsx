@@ -1,7 +1,6 @@
 import { cva, type VariantProps } from "class-variance-authority";
+import { cn } from "cn";
 import { Button as ButtonReactEmail } from "react-email";
-
-import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
   "cursor-pointer whitespace-nowrap rounded-md text-sm font-medium outline-none transition-all",

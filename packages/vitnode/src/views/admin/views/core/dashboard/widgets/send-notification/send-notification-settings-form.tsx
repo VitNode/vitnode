@@ -6,7 +6,7 @@ import type { AutoFormOnSubmit } from "@/components/form/auto-form";
 import { AutoForm } from "@/components/form/auto-form";
 import { AutoFormInput } from "@/components/form/fields/input";
 
-import { useWidgetSettingsDialog } from "../../grid/widget-settings-dialog";
+import { useWidgetSettingsDialog } from "../../grid/widget-settings-context";
 
 export const SendNotificationSettingsForm = ({
   defaultTitle,

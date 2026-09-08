@@ -162,11 +162,17 @@ export function BulkActionsDataTable({
               {t("selected_count", { count: selected.length })}
             </span>
 
-            <Separator className="mx-0.5 h-6" orientation="vertical" />
+            <Separator
+              className="mx-0.5 data-[orientation=vertical]:h-6"
+              orientation="vertical"
+            />
 
             {actions}
 
-            <Separator className="mx-0.5 h-6" orientation="vertical" />
+            <Separator
+              className="mx-0.5 data-[orientation=vertical]:h-6"
+              orientation="vertical"
+            />
 
             <TooltipWithContent text={t("data_table.clear_selection")}>
               <Button

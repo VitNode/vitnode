@@ -1,3 +1,4 @@
+import { cn } from "cn";
 import { useTranslations } from "use-intl";
 
 import type { ColumnDef } from "@/components/table/data-table-content";
@@ -12,7 +13,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { cn } from "@/lib/utils";
 import { getSearchTypeRenderer } from "@/views/search/registry";
 
 import type { CollectionStatus, SearchCollection } from "./collection-status";
@@ -44,7 +44,7 @@ const statusStyles: Record<
   stale: {
     bar: "bg-amber-500",
     dot: "bg-amber-500",
-    text: "text-amber-600 dark:text-amber-400",
+    text: "text-amber-700 dark:text-amber-400",
   },
   empty: {
     bar: "bg-muted-foreground/30",

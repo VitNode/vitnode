@@ -1,3 +1,4 @@
+import { cn } from "cn";
 import { ArrowUpRightIcon, type LucideIcon } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
@@ -11,7 +12,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { cn } from "@/lib/utils";
 
 export type IntegrationStatus = "active" | "inactive" | "warning";
 
@@ -64,7 +64,7 @@ export const IntegrationCard = ({
                 "flex size-9 shrink-0 items-center justify-center rounded-lg",
                 isActive && "bg-primary/10 text-primary",
                 isWarning &&
-                  "bg-amber-500/10 text-amber-600 dark:text-amber-400",
+                  "bg-amber-500/10 text-amber-700 dark:text-amber-400",
                 status === "inactive" && "bg-destructive/10 text-destructive",
               )}
             >

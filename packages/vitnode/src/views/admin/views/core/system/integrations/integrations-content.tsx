@@ -95,7 +95,7 @@ export const IntegrationsContent = ({
         Icon={DatabaseIcon}
         meta={
           data.redis.configuredButDown ? (
-            <span className="text-amber-600 dark:text-amber-400">
+            <span className="text-amber-700 dark:text-amber-400">
               {t("redis.down")}
             </span>
           ) : null
@@ -144,11 +144,11 @@ export const IntegrationsContent = ({
           !data.cron.active ? (
             <span>{t("cron.not_configured")}</span>
           ) : data.cron.stale ? (
-            <span className="text-amber-600 dark:text-amber-400">
+            <span className="text-amber-700 dark:text-amber-400">
               {t("cron.stale")}
             </span>
           ) : !data.cron.secure ? (
-            <span className="text-amber-600 dark:text-amber-400">
+            <span className="text-amber-700 dark:text-amber-400">
               {t("cron.insecure")}
             </span>
           ) : (

@@ -1,3 +1,4 @@
+import { cn } from "cn";
 import { EyeOffIcon, SaveIcon, SendIcon } from "lucide-react";
 import React from "react";
 import { useTranslations } from "use-intl";
@@ -6,7 +7,6 @@ import { ConfirmActionAlertDialog } from "@/components/confirm-action/confirm-ac
 import { AutoFormSubmitButton } from "@/components/form/auto-form";
 import { Button } from "@/components/ui/button";
 import { contentPublicationTransition } from "@/content/publication";
-import { cn } from "@/lib/utils";
 
 import type { ContentFormLinkComponent } from "./context";
 

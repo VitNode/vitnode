@@ -1,7 +1,6 @@
 import { Popover as PopoverPrimitive } from "@base-ui/react/popover";
+import { cn } from "cn";
 import React from "react";
-
-import { cn } from "@/lib/utils";
 
 function Popover({
   ...props

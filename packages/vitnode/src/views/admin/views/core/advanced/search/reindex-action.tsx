@@ -1,10 +1,10 @@
+import { cn } from "cn";
 import { RefreshCwIcon } from "lucide-react";
 import React from "react";
 import { toast } from "sonner";
 import { useTranslations } from "use-intl";
 
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 
 import type { RebuildSearchIndex } from "./search-index-mutations";
 

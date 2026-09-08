@@ -3,7 +3,7 @@ import { useTranslations } from "use-intl";
 
 import { Button } from "@/components/ui/button";
 
-import { useDashboardBoard } from "./board-provider";
+import { useDashboardBoard } from "./board-context";
 
 export const DashboardEditActions = () => {
   const t = useTranslations("admin.dashboard.widgets");
