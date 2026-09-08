@@ -7,6 +7,7 @@ import type { SignInSubmit } from "@/views/auth/sign-in/form/sign-in-form-conten
 import type { SignUpSubmit } from "@/views/auth/sign-up/form/sign-up-form-content";
 import type { SSOSelectProvider } from "@/views/auth/sso/buttons/sso-buttons-content";
 import type { SSOCallbackResult } from "@/views/auth/sso/callback/sso-callback-result";
+import type { SSOLinkSubmit } from "@/views/auth/sso/link/use-sso-link-form";
 
 import type { SsoCallbackInput } from "./contract";
 
@@ -19,6 +20,7 @@ import {
   signInFormResult,
   signUpFormResult,
   ssoCallbackResult,
+  ssoLinkFormResult,
   ssoStartFeedback,
 } from "./screens";
 import {
@@ -91,6 +93,33 @@ export const useCompleteSsoAction = (params: null | SsoCallbackInput) => {
     }
 
     return ssoCallbackResult(result);
+  };
+};
+
+export const useLinkSsoAction = ({
+  onSignedIn,
+  providerId,
+}: {
+  onSignedIn: () => void;
+  providerId: string;
+}): SSOLinkSubmit => {
+  const queryClient = useQueryClient();
+
+  return async ({ password, token }) => {
+    const result = await authTransport().linkSso({
+      password,
+      providerId,
+      token,
+    });
+
+    if (!result.ok) return ssoLinkFormResult(result);
+
+    removeAdminIdentityQueries(queryClient);
+    removeUserIdentityQueries(queryClient);
+    await invalidateSession(queryClient);
+    onSignedIn();
+
+    return undefined;
   };
 };
 

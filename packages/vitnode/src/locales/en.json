@@ -385,8 +385,35 @@
         "access_denied": "You have denied access to the application or the request has expired. Please try again.",
         "email_exists": {
           "title": "You cannot sign in with <provider></provider>",
-          "desc": "An account with this email already exists. Please sign in with another method and connect your <provider></provider> account in your profile settings.",
+          "desc": "An account with this email already exists. Sign in using your existing method to connect <provider></provider>.",
           "sign_in": "Go to Login Page"
+        },
+        "link": {
+          "title": "Connect <provider></provider> to your account",
+          "desc": "An account with this email already exists. Confirm it's yours with your password and we'll connect <provider></provider> and sign you in.",
+          "email": "Email",
+          "password": {
+            "label": "Password",
+            "required": "Password is required.",
+            "reset": "Forgot password?"
+          },
+          "submit": "Connect and sign in",
+          "other_account": "Not your account? <link>Sign in another way</link>.",
+          "no_password": {
+            "desc": "This account has no password yet, so we can't confirm it's yours here. Set one first, then sign in with <provider></provider> again.",
+            "set_password": "Set a password",
+            "sign_in": "Go to Login Page"
+          },
+          "errors": {
+            "access_denied": {
+              "title": "Invalid password",
+              "desc": "The password was incorrect. Please try again (make sure your caps lock is off)."
+            },
+            "invalid_token": {
+              "title": "This request has expired",
+              "desc": "Start the sign-in again and connect the account within ten minutes."
+            }
+          }
         }
       },
       "sign_up": {

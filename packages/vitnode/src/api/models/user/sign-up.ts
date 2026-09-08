@@ -68,11 +68,13 @@ const getDefaultData = async (
 export const signUp = async (
   {
     email: typedEmail,
+    emailVerified: emailVerifiedByCaller,
     name,
     newsletter,
     hashedPassword,
   }: {
     email: string;
+    emailVerified?: boolean;
     hashedPassword: string | undefined;
     name: string;
     newsletter?: boolean;
@@ -110,7 +112,8 @@ export const signUp = async (
     });
   }
 
-  const { roleId, emailVerified } = await getDefaultData(c);
+  const defaults = await getDefaultData(c);
+  const emailVerified = emailVerifiedByCaller ?? defaults.emailVerified;
   const [data] = await c
     .get("db")
     .insert(core_users)
@@ -122,7 +125,7 @@ export const signUp = async (
       newsletter,
       password: hashedPassword,
       avatarColor: generateAvatarColor(name),
-      roleId,
+      roleId: defaults.roleId,
       emailVerified,
       ipAddress: c.get("ipAddress"),
       // TODO: Handle language

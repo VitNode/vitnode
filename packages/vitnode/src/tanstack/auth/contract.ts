@@ -49,11 +49,39 @@ export type SsoStartResult =
   | { ok: false; reason: "server_error" | "unknown_provider" }
   | { ok: true; url: string };
 
+export const ssoLinkOfferSchema = z.object({
+  email: z.string().min(3).max(320),
+  hasPassword: z.boolean(),
+  linkToken: z.string().min(16).max(2048),
+});
+
+export type SsoLinkOffer = z.infer<typeof ssoLinkOfferSchema>;
+
 export type CompleteSsoResult =
+  | { offer?: SsoLinkOffer; ok: false; reason: "email_exists" }
+  | {
+      ok: false;
+      reason: "invalid_state" | "server_error" | "unknown_provider";
+    }
+  | { ok: true };
+
+export const ssoLinkInputSchema = z.object({
+  password: z.string().min(1).max(1024),
+  providerId: providerIdSchema,
+  token: z.string().min(16).max(2048),
+});
+
+export type SsoLinkInput = z.infer<typeof ssoLinkInputSchema>;
+
+export type SsoLinkResult =
   | {
       ok: false;
       reason:
-        "email_exists" | "invalid_state" | "server_error" | "unknown_provider";
+        | "access_denied"
+        | "already_linked"
+        | "invalid_token"
+        | "server_error"
+        | "unknown_provider";
     }
   | { ok: true };
 
@@ -105,11 +133,28 @@ export const ssoStartResultFromStatus = (
 
 export const completeSsoResultFromStatus = (
   status: number,
+  body?: unknown,
 ): CompleteSsoResult => {
   if (status === 200) return { ok: true };
   if (status === 400) return { ok: false, reason: "invalid_state" };
   if (status === 404) return { ok: false, reason: "unknown_provider" };
-  if (status === 409) return { ok: false, reason: "email_exists" };
+  if (status === 409) {
+    const offer = ssoLinkOfferSchema.safeParse(body);
+
+    return offer.success
+      ? { offer: offer.data, ok: false, reason: "email_exists" }
+      : { ok: false, reason: "email_exists" };
+  }
+
+  return { ok: false, reason: "server_error" };
+};
+
+export const ssoLinkResultFromStatus = (status: number): SsoLinkResult => {
+  if (status === 201) return { ok: true };
+  if (status === 400) return { ok: false, reason: "invalid_token" };
+  if (status === 403) return { ok: false, reason: "access_denied" };
+  if (status === 404) return { ok: false, reason: "unknown_provider" };
+  if (status === 409) return { ok: false, reason: "already_linked" };
 
   return { ok: false, reason: "server_error" };
 };

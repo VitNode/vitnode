@@ -11,6 +11,8 @@ import {
   signInResultFromStatus,
   signOutResultFromStatus,
   ssoCallbackInputSchema,
+  ssoLinkInputSchema,
+  ssoLinkResultFromStatus,
   ssoStartResultFromStatus,
 } from "./contract";
 
@@ -115,6 +117,78 @@ describe("SSO callback results", () => {
     [500, "server_error"],
   ] as const)("reads %i as %s", (status, reason) => {
     expect(completeSsoResultFromStatus(status)).toEqual({ ok: false, reason });
+  });
+});
+
+describe("SSO link offers", () => {
+  const offer = {
+    email: "jan@example.com",
+    hasPassword: true,
+    linkToken: "t".repeat(40),
+  };
+
+  it("keeps the offer a 409 body carries", () => {
+    expect(completeSsoResultFromStatus(409, offer)).toEqual({
+      offer,
+      ok: false,
+      reason: "email_exists",
+    });
+  });
+
+  it("drops a body it cannot read, and still reports the conflict", () => {
+    for (const body of [
+      undefined,
+      null,
+      "",
+      { email: "x" },
+      { ...offer, linkToken: "short" },
+    ]) {
+      expect(completeSsoResultFromStatus(409, body)).toEqual({
+        ok: false,
+        reason: "email_exists",
+      });
+    }
+  });
+
+  it("ignores a body on any other status", () => {
+    expect(completeSsoResultFromStatus(200, offer)).toEqual({ ok: true });
+  });
+});
+
+describe("SSO link results", () => {
+  it("reads 201 as linked and signed in", () => {
+    expect(ssoLinkResultFromStatus(201)).toEqual({ ok: true });
+  });
+
+  it.each([
+    [400, "invalid_token"],
+    [403, "access_denied"],
+    [404, "unknown_provider"],
+    [409, "already_linked"],
+    [429, "server_error"],
+    [500, "server_error"],
+  ] as const)("reads %i as %s", (status, reason) => {
+    expect(ssoLinkResultFromStatus(status)).toEqual({ ok: false, reason });
+  });
+});
+
+describe("SSO link input validation", () => {
+  const valid = {
+    password: "Test123!",
+    providerId: "facebook",
+    token: "t".repeat(40),
+  };
+
+  it("accepts a password, a provider and the offer's token", () => {
+    expect(ssoLinkInputSchema.safeParse(valid).success).toBe(true);
+  });
+
+  it.each([
+    ["an empty password", { ...valid, password: "" }],
+    ["a token too short to be signed", { ...valid, token: "abc" }],
+    ["a provider id that is not a slug", { ...valid, providerId: "face book" }],
+  ])("rejects %s", (_label, input) => {
+    expect(ssoLinkInputSchema.safeParse(input).success).toBe(false);
   });
 });
 

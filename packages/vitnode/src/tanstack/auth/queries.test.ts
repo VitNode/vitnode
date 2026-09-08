@@ -197,16 +197,17 @@ describe("every public identity boundary drops the private cache", () => {
   });
 
   /**
-   * Four call sites, one per flow that can change who is at the keyboard: a
-   * sign-in, a finished SSO exchange, a sign-out and a *verified* sign-up.
+   * Five call sites, one per flow that can change who is at the keyboard: a
+   * sign-in, a finished SSO exchange, an SSO identity linked with a password
+   * (which mints a session too), a sign-out and a *verified* sign-up.
    *
    * An unverified sign-up is deliberately not one - no session was minted, so
    * nothing about who this browser holds data for has changed - and neither is a
    * password-reset request, which mints nothing and leaves the visitor exactly
    * who they were.
    */
-  it("runs on all four, and only those four", () => {
-    expect(actionsSource().split(CLEANUP).length - 1).toBe(4);
+  it("runs on all five, and only those five", () => {
+    expect(actionsSource().split(CLEANUP).length - 1).toBe(5);
   });
 
   /**
@@ -218,7 +219,7 @@ describe("every public identity boundary drops the private cache", () => {
 
     expect(
       code.split("removeAdminIdentityQueries(queryClient)").length - 1,
-    ).toBe(4);
+    ).toBe(5);
   });
 
   it("clears before it navigates", () => {

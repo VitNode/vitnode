@@ -66,7 +66,8 @@ export const GitHubSSOApiPlugin = ({
       const emailRes = await fetch("https://api.github.com/user/emails", { headers })
       const emails: Array<{ email: string; primary: boolean; verified: boolean }> =
         await emailRes.json()
-      const primaryEmail = emails.find((e) => e.primary && e.verified)?.email ?? user.email
+      const primaryEmail = emails.find((e) => e.primary && e.verified)?.email
+      if (!primaryEmail) throw new Error("GitHub account has no verified email")
 
       return {
         id: String(user.id),
@@ -134,7 +135,7 @@ A **GitHub** login button automatically renders on `/login` and `/register`, and
       type: "(code: string) => Promise<{ access_token: string; token_type: string }>",
     },
     fetchUser: {
-      description: "Fetches user profile (id, email, username, avatarUrl).",
+      description: "Fetches user profile (id, email, username, avatarUrl). Return only an email the provider has verified - VitNode treats it as confirmed and will mark a matching unconfirmed account verified. The built-in adapters reject unverified addresses with a 400.",
       required: true,
       type: "(token: TokenResponse) => Promise<SSOUser>",
     },

@@ -38,7 +38,7 @@ core event as for one of your own.
 
 ## Core events (`@vitnode/core`)
 
-Six names, all declared in `VitNodeEvents` in
+Seven names, all declared in `VitNodeEvents` in
 `packages/vitnode/src/api/models/events.ts`. Every one of them fires **after**
 the write it describes has committed.
 
@@ -47,6 +47,7 @@ the write it describes has committed.
 | `user.created` | `{ userId, email, name, emailVerified }` | A user row is inserted - public sign-up, AdminCP creation, or SSO sign-up |
 | `user.updated` | `{ userId, email, name }`                | A user is edited in the AdminCP (profile fields and/or role assignments)  |
 | `user.deleted` | `{ userId, email }`                      | Never - the name is declared for plugins, core has no deletion flow       |
+| `user.sso.linked` | `{ userId, email, providerId }`       | A visitor proves an existing account is theirs with its password and an SSO identity is linked to it |
 | `role.created` | `{ roleId }`                             | A role is created in the AdminCP                                          |
 | `role.updated` | `{ roleId }`                             | A role is edited in the AdminCP                                           |
 | `role.deleted` | `{ roleId }`                             | A role is deleted in the AdminCP                                          |
@@ -74,7 +75,7 @@ AdminCP, and the first sign-in through an [SSO provider](/docs/dev/sso).
     },
     emailVerified: {
       description:
-        'Whether the account starts verified. True for the very first user in an installation (the root account) and whenever no email adapter is configured, because nothing could send a verification mail.',
+        'Whether the account starts verified. True for the very first user in an installation (the root account), whenever no email adapter is configured (nothing could send a verification mail), and for every account created through an SSO provider, which has already verified the address.',
       type: 'boolean',
     },
   }}
@@ -124,6 +125,35 @@ name, name code) and/or role assignments. The payload carries the user's
 **A listener would** sync the identity into an external system (CRM, mailing
 list), invalidate a plugin-owned cache keyed by user, or audit-log the staff
 edit using the envelope's `actor`.
+
+</Accordion>
+<Accordion title="user.sso.linked">
+
+Emitted by `SSOModel.link` after the `core_users_sso` row is committed - the
+moment a social identity that arrived with an already-registered email is tied
+to that account. It does not fire on the first sign-in through a provider (that
+is a `user.created`) or on a later sign-in through an identity that is already
+linked.
+
+<TypeTable
+  type={{
+    userId: {
+      description: 'Id of the account the identity was linked to.',
+      type: 'number',
+    },
+    email: {
+      description: "The account's email - the address the provider and the account had in common.",
+      type: 'string',
+    },
+    providerId: {
+      description: "The adapter's id, e.g. 'google' or 'facebook'.",
+      type: 'string',
+    },
+  }}
+/>
+
+**A listener would** notify the account owner that a new sign-in method was
+added, or audit-log the link with the envelope's `actor`.
 
 </Accordion>
 <Accordion title="user.deleted (declared, never emitted)">

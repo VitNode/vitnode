@@ -81,8 +81,38 @@ For example: `https://your-domain.com/login/sso/google`.
 
 When a user signs in via SSO:
 1. **Known Identity**: The provider account was linked before, so the user is signed straight into it.
-2. **Existing Email Match**: An account already uses that address, so the request is refused with `409`. A social login can never take over an account someone else registered with a password.
+2. **Existing Email Match**: An account already uses that address. The visitor is asked for that account's password; once it checks out, the provider identity is linked to the account and they are signed in. From then on that provider signs them straight in (case 1). A social login can never take over an account on its own - the password is what proves ownership.
 3. **New Visitor**: A new user is created with their social display name, email, and avatar.
+
+### SSO confirms the email
+
+A provider only hands VitNode an address it has verified itself (the built-in
+adapters refuse anything else), so a social sign-in doubles as email
+confirmation:
+
+- a **new visitor** starts out with `emailVerified: true`, even when an email
+  adapter is configured and password sign-ups would have to confirm first;
+- a **known identity** or a **freshly linked** account whose address is still
+  unconfirmed is marked confirmed - provided the address the provider returned
+  is the one on the account. An account whose email was changed since the link
+  was made is left alone.
+
+### Linking an existing account
+
+The callback answers `409` with a short-lived, signed **link offer** - the
+account's email, whether it has a password, and a token good for ten minutes.
+The login page turns that into a "Connect *Provider* to your account" form: the
+email is shown read-only, the visitor types their password, and
+`POST /users/sso/{providerId}/link` verifies both before it writes the
+`core_users_sso` row and mints a session. The token carries the provider account
+id, so nothing about *which* identity gets linked is taken from the browser.
+
+An account created by another provider has no password to confirm with. When an
+email adapter is configured the form offers **Set a password** (the ordinary
+reset flow) and asks them to try the provider again afterwards; without one it
+points back to the login page.
+
+Every successful link emits [`user.sso.linked`](/docs/dev/events/built-in-events).
 
 The address the provider returns is matched in its canonical form, so a Google account that reports `jan.kowalski@gmail.com` finds the member who registered as `jankowalski@gmail.com` instead of quietly becoming a second account. See [One Mailbox, One Account](/docs/dev/advanced/auth#one-mailbox-one-account).
 

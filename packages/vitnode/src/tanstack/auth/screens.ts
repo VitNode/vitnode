@@ -4,6 +4,7 @@ import type { SignInMutationResult } from "@/views/auth/sign-in/form/schema";
 import type { SignUpMutationResult } from "@/views/auth/sign-up/form/schema";
 import type { SSOStartResult as SsoButtonFeedback } from "@/views/auth/sso/buttons/sso-buttons-content";
 import type { SSOCallbackResult } from "@/views/auth/sso/callback/sso-callback-result";
+import type { SSOLinkMutationResult } from "@/views/auth/sso/link/schema";
 
 import type {
   ChangePasswordResult,
@@ -11,6 +12,7 @@ import type {
   PasswordResetRequestResult,
   SignInResult,
   SignUpResult,
+  SsoLinkResult,
   SsoStartResult,
 } from "./contract";
 import type { SessionApi } from "./session-api";
@@ -33,9 +35,24 @@ export const ssoCallbackResult = (
 ): SSOCallbackResult => {
   if (result.ok) return {};
 
-  return result.reason === "email_exists"
-    ? { failure: "email_exists" }
-    : { failure: "unknown" };
+  if (result.reason !== "email_exists") return { failure: "unknown" };
+
+  return result.offer
+    ? { failure: "email_exists", offer: result.offer }
+    : { failure: "email_exists" };
+};
+
+export const ssoLinkFormResult = (
+  result: SsoLinkResult,
+): SSOLinkMutationResult => {
+  if (result.ok) return undefined;
+
+  if (result.reason === "access_denied") return { message: "access_denied" };
+  if (result.reason === "invalid_token" || result.reason === "already_linked") {
+    return { message: "invalid_token" };
+  }
+
+  return { message: "Internal Server Error" };
 };
 
 export const anonymousSession = (session: SessionApi): SessionApi => ({

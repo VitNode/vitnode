@@ -11,6 +11,8 @@ import type {
   SignUpInput,
   SignUpResult,
   SsoCallbackInput,
+  SsoLinkInput,
+  SsoLinkResult,
   SsoStartInput,
   SsoStartResult,
 } from "./contract";
@@ -21,6 +23,7 @@ export interface AuthTransport {
     input: ChangePasswordInput,
   ) => Promise<ChangePasswordResult>;
   completeSso: (input: SsoCallbackInput) => Promise<CompleteSsoResult>;
+  linkSso: (input: SsoLinkInput) => Promise<SsoLinkResult>;
 
   readSession: () => Promise<SessionApi>;
   requestPasswordReset: (

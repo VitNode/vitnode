@@ -7,11 +7,13 @@ import {
   signOutInputSchema,
   signUpInputSchema,
   ssoCallbackInputSchema,
+  ssoLinkInputSchema,
   ssoStartInputSchema,
 } from "@vitnode/core/tanstack/auth";
 import {
   changePasswordFromResetOnApi,
   completeSsoOnApi,
+  linkSsoOnApi,
   readSessionOnApi,
   requestPasswordResetOnApi,
   signInOnApi,
@@ -40,6 +42,10 @@ export const completeSsoFn = createServerFn({ method: "POST" })
   .validator(ssoCallbackInputSchema)
   .handler(async ({ data }) => await completeSsoOnApi(data));
 
+export const linkSsoFn = createServerFn({ method: "POST" })
+  .validator(ssoLinkInputSchema)
+  .handler(async ({ data }) => await linkSsoOnApi(data));
+
 export const signUpFn = createServerFn({ method: "POST" })
   .validator(signUpInputSchema)
   .handler(async ({ data }) => await signUpOnApi(data));
@@ -56,6 +62,7 @@ setAuthTransport({
   changePasswordFromReset: async input =>
     await changePasswordFromResetFn({ data: input }),
   completeSso: async input => await completeSsoFn({ data: input }),
+  linkSso: async input => await linkSsoFn({ data: input }),
   readSession: async () => await readSessionFn(),
   requestPasswordReset: async input =>
     await requestPasswordResetFn({ data: input }),

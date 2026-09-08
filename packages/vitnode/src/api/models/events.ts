@@ -28,6 +28,11 @@ export interface VitNodeEvents {
     email: string;
     userId: number;
   };
+  "user.sso.linked": {
+    email: string;
+    providerId: string;
+    userId: number;
+  };
   "user.updated": {
     email: string;
     name: string;
