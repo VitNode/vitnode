@@ -310,6 +310,18 @@
         "files": "Moje pliki"
       }
     },
+    "profile": {
+      "title": "Profil {name}",
+      "metaDesc": "Zobacz profil {name}: role i datę dołączenia do społeczności.",
+      "joined": "W społeczności od <time>{date}</time>",
+      "about": "O użytkowniku",
+      "memberSince": "Członek od",
+      "secondaryRoles": "Role dodatkowe",
+      "notFound": {
+        "title": "Nie znaleziono profilu",
+        "desc": "Ten użytkownik nie istnieje lub zmienił swoją nazwę."
+      }
+    },
     "files": {
       "title": "Moje pliki",
       "desc": "Pliki przesłane na Twoje konto.",

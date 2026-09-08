@@ -5,6 +5,7 @@ import { userFilesModule } from "./files/files.module";
 import { changePasswordRoute } from "./routes/change-password.route";
 import { listDevicesRoute } from "./routes/devices.route";
 import { permissionsRoute } from "./routes/permissions.route";
+import { profileRoute } from "./routes/profile.route";
 import { resetPasswordRoute } from "./routes/reset-passowrd.route";
 import { revokeDeviceRoute } from "./routes/revoke-device.route";
 import { sessionRoute } from "./routes/session.route";
@@ -26,6 +27,7 @@ export const usersModule = buildModule({
     permissionsRoute,
     listDevicesRoute,
     revokeDeviceRoute,
+    profileRoute,
   ],
   modules: [ssoUserModule, userFilesModule],
 });

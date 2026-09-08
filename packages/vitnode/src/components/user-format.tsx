@@ -20,7 +20,7 @@ export const UserFormat = ({
     };
   };
 }) => {
-  const prefix = parseEmojiIcon(user.role.prefix);
+  const prefix = format ? parseEmojiIcon(user.role.prefix) : null;
 
   return (
     <span

@@ -337,6 +337,18 @@
         "files": "My Files"
       }
     },
+    "profile": {
+      "title": "{name}'s profile",
+      "metaDesc": "See {name}'s profile: their roles and when they joined the community.",
+      "joined": "Joined <time>{date}</time>",
+      "about": "About",
+      "memberSince": "Member since",
+      "secondaryRoles": "Secondary roles",
+      "notFound": {
+        "title": "Profile not found",
+        "desc": "This user doesn't exist, or their username has changed."
+      }
+    },
     "files": {
       "title": "My Files",
       "desc": "Files you've uploaded to your account.",

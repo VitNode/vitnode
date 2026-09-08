@@ -199,3 +199,48 @@ export const BreadcrumbPendingSkeleton = ({
     <Skeleton aria-hidden="true" className="h-3 w-24" />
   </div>
 );
+
+export const ProfilePendingSkeleton = ({
+  className,
+  label,
+}: Pick<RoutePendingSkeletonProps, "className" | "label">) => (
+  <PendingFrame className={cn("container mx-auto", className)} label={label}>
+    <div aria-hidden="true" className="flex flex-col gap-4 sm:gap-6">
+      <div className="flex flex-col overflow-hidden rounded-xl border">
+        <Skeleton className="h-32 w-full rounded-none sm:h-40 md:h-48" />
+
+        <div className="flex flex-col gap-4 p-6">
+          <div className="flex flex-col items-center gap-3 sm:flex-row sm:items-end sm:gap-6">
+            <Skeleton className="border-background -mt-16 size-24 shrink-0 rounded-full border-4 sm:-mt-20 sm:size-32" />
+            <div className="flex flex-col items-center gap-2 sm:items-start sm:pb-2">
+              <div className="flex items-baseline gap-2">
+                <Skeleton className="h-8 w-40" />
+                <Skeleton className="h-4 w-16" />
+              </div>
+              <Skeleton className="h-4 w-28" />
+            </div>
+          </div>
+          <div className="flex items-center justify-center sm:justify-start">
+            <Skeleton className="h-4 w-40" />
+          </div>
+        </div>
+      </div>
+
+      <div className="grid gap-4 sm:gap-6 lg:grid-cols-3">
+        <div className="flex flex-col gap-5 rounded-xl border p-6 lg:col-span-1">
+          <div className="flex items-center gap-3">
+            <Skeleton className="size-9 rounded-lg" />
+            <Skeleton className="h-5 w-20" />
+          </div>
+
+          {pendingRowKeys(2).map(key => (
+            <div className="flex flex-col gap-2" key={key}>
+              <Skeleton className="h-3 w-24" />
+              <Skeleton className="h-4 w-2/3" />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </PendingFrame>
+);

@@ -130,7 +130,7 @@ export const UserDetailContent = ({
                   nativeButton={false}
                   render={
                     <LinkComponent
-                      href={`/profile/${user.nameCode}`}
+                      href={`/users/${user.nameCode}`}
                       target="_blank"
                     />
                   }

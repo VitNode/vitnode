@@ -1,25 +1,10 @@
 import { z } from "@hono/zod-openapi";
-import { eq } from "drizzle-orm";
 
-import { resolveRoleNames } from "@/api/lib/resolve-role-names";
+import { resolveUserRoles, userRoleSchema } from "@/api/lib/resolve-user-roles";
 import { buildRoute } from "@/api/lib/route";
 import { SessionAdminModel } from "@/api/models/session-admin";
 import { UserModel } from "@/api/models/user";
 import { CONFIG_PLUGIN } from "@/config";
-import { core_roles } from "@/database/roles";
-import { core_users_secondary_roles } from "@/database/users";
-
-const roleSchema = z.object({
-  id: z.number(),
-  color: z.string().nullable(),
-  prefix: z.string().nullable(),
-  name: z.array(
-    z.object({
-      name: z.string(),
-      languageCode: z.string(),
-    }),
-  ),
-});
 
 export const showUserAdminRoute = buildRoute({
   pluginId: CONFIG_PLUGIN.pluginId,
@@ -47,8 +32,8 @@ export const showUserAdminRoute = buildRoute({
               avatarColor: z.string(),
               emailVerified: z.boolean(),
               roleId: z.number(),
-              role: roleSchema,
-              secondaryRoles: z.array(roleSchema),
+              role: userRoleSchema,
+              secondaryRoles: z.array(userRoleSchema),
               birthday: z.date().nullable(),
               language: z.string(),
               isAdmin: z.boolean(),
@@ -88,58 +73,11 @@ export const showUserAdminRoute = buildRoute({
       return c.json({ error: "User not found" }, 404);
     }
 
-    const db = c.get("db");
-    const secondaryRoleRows = await db
-      .select({
-        id: core_roles.id,
-        color: core_roles.color,
-        prefix: core_roles.prefix,
-      })
-      .from(core_users_secondary_roles)
-      .innerJoin(
-        core_roles,
-        eq(core_roles.id, core_users_secondary_roles.roleId),
-      )
-      .where(eq(core_users_secondary_roles.userId, user.id));
-
-    const [primaryRole] = await db
-      .select({
-        id: core_roles.id,
-        color: core_roles.color,
-        prefix: core_roles.prefix,
-      })
-      .from(core_roles)
-      .where(eq(core_roles.id, user.roleId))
-      .limit(1);
-
-    const names = await resolveRoleNames(c, [
-      user.roleId,
-      ...secondaryRoleRows.map(role => role.id),
+    const [roles, isAdmin] = await Promise.all([
+      resolveUserRoles(c, user),
+      new SessionAdminModel(c).checkIfUserIsAdmin(user.id),
     ]);
 
-    // Whether the listed user is themselves an administrator. The frontend uses
-    // this to require the elevated `can_edit_admin` permission before showing
-    // edit controls (the backend enforces the same rule on write).
-    const isAdmin = await new SessionAdminModel(c).checkIfUserIsAdmin(user.id);
-
-    return c.json(
-      {
-        ...user,
-        isAdmin,
-        role: {
-          id: user.roleId,
-          color: primaryRole?.color ?? null,
-          prefix: primaryRole?.prefix ?? null,
-          name: names.get(user.roleId) ?? [],
-        },
-        secondaryRoles: secondaryRoleRows.map(role => ({
-          id: role.id,
-          color: role.color,
-          prefix: role.prefix,
-          name: names.get(role.id) ?? [],
-        })),
-      },
-      200,
-    );
+    return c.json({ ...user, isAdmin, ...roles }, 200);
   },
 });
