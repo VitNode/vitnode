@@ -39,7 +39,7 @@ export const SettingsNavContent = ({
           <LinkComponent
             aria-current={isActive ? "page" : undefined}
             className={cn(
-              buttonVariants({ variant: isActive ? "default" : "ghost" }),
+              buttonVariants({ variant: isActive ? "secondary" : "ghost" }),
               "w-full justify-start gap-2",
             )}
             href={item.href}

@@ -37,6 +37,36 @@ describe("normalising the SSO provider list", () => {
     ).toEqual([{ id: "google", name: "Google" }]);
   });
 
+  it("keeps an icon the button can render", () => {
+    const markup = '<svg viewBox="0 0 24 24"><path d="M0 0h24v24H0z" /></svg>';
+
+    expect(
+      normalizeSSOProviders([
+        { id: "github", name: "GitHub", icon: markup },
+        { id: "slack", name: "Slack", icon: "https://cdn.example.com/s.png" },
+      ]),
+    ).toEqual([
+      { icon: { kind: "svg", markup }, id: "github", name: "GitHub" },
+      {
+        icon: { kind: "image", src: "https://cdn.example.com/s.png" },
+        id: "slack",
+        name: "Slack",
+      },
+    ]);
+  });
+
+  it("drops an icon it cannot render, and keeps the provider", () => {
+    expect(
+      normalizeSSOProviders([
+        { id: "github", name: "GitHub", icon: '<svg onload="x()"></svg>' },
+        { id: "slack", name: "Slack", icon: 42 },
+      ]),
+    ).toEqual([
+      { id: "github", name: "GitHub" },
+      { id: "slack", name: "Slack" },
+    ]);
+  });
+
   it("keeps the first of two providers sharing an id", () => {
     // React keys the row by id, so a duplicate is a warning plus a button that
     // cannot be told apart from the one above it.

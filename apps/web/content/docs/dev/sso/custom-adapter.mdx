@@ -100,7 +100,7 @@ export const vitNodeApiConfig = buildApiConfig({
 })
 ```
 
-A **GitHub** login button automatically renders on `/login` and `/register`, and `/login/sso/github` routes incoming authentication requests.
+A **GitHub** login button automatically renders on `/login` and `/register`, and `/login/sso/github` routes incoming authentication requests. It is text-only until you give the adapter an [icon](/docs/dev/sso/icons).
 
 ---
 
@@ -116,6 +116,11 @@ A **GitHub** login button automatically renders on `/login` and `/register`, and
     name: {
       description: "Display name shown on the login button.",
       required: true,
+      type: "string",
+    },
+    icon: {
+      description: "Brand mark for the login button: inline SVG markup or an image URL. See Provider Icons.",
+      required: false,
       type: "string",
     },
     getUrl: {
@@ -135,6 +140,8 @@ A **GitHub** login button automatically renders on `/login` and `/register`, and
     },
   }}
 />
+
+See [Provider Icons](/docs/dev/sso/icons) for the accepted `icon` formats, and for registering a React component instead.
 
 ## Built-in SSO Adapters
 

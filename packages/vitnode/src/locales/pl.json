@@ -354,7 +354,7 @@
     },
     "auth": {
       "sso": {
-        "or": "Lub kontynuuj przez",
+        "or": "Lub kontynuuj przez e-mail",
         "access_denied": "Odmówiono dostępu do aplikacji lub żądanie wygasło. Spróbuj ponownie.",
         "email_exists": {
           "title": "Nie możesz zalogować się przez <provider></provider>",

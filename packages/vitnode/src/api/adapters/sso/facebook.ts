@@ -7,6 +7,8 @@ import type { SSOApiPlugin } from "@/api/models/sso";
 
 import { getRedirectUri } from "@/api/models/sso";
 
+import { FACEBOOK_ICON } from "./icons";
+
 export const FacebookSSOApiPlugin = ({
   clientId,
   clientSecret,
@@ -27,6 +29,7 @@ export const FacebookSSOApiPlugin = ({
   });
 
   return {
+    icon: FACEBOOK_ICON,
     id,
     name: "Facebook",
     fetchToken: async code => {

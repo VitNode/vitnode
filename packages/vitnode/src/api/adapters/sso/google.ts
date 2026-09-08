@@ -7,6 +7,8 @@ import type { SSOApiPlugin } from "@/api/models/sso";
 
 import { getRedirectUri } from "@/api/models/sso";
 
+import { GOOGLE_ICON } from "./icons";
+
 export const GoogleSSOApiPlugin = ({
   clientId,
   clientSecret,
@@ -28,6 +30,7 @@ export const GoogleSSOApiPlugin = ({
   });
 
   return {
+    icon: GOOGLE_ICON,
     id,
     name: "Google",
     fetchToken: async code => {

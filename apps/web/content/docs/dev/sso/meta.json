@@ -4,6 +4,7 @@
   "icon": "KeyRound",
   "pages": [
     "index",
+    "icons",
     "---Providers---",
     "google",
     "discord",

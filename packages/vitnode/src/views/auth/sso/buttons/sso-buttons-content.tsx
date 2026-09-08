@@ -6,6 +6,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 import type { SSOProvider } from "../providers";
 
+import { SSOProviderIcon } from "./sso-provider-icon";
+
 export type SSOStartResult = undefined | { message?: string };
 
 export type SSOSelectProvider = (providerId: string) => Promise<SSOStartResult>;
@@ -26,16 +28,6 @@ export const SSOButtonsContent = ({
 
   return (
     <>
-      <div className="relative my-6">
-        <div className="absolute inset-0 flex items-center">
-          <span className="w-full border-t" />
-        </div>
-
-        <div className="relative flex justify-center text-xs">
-          <span className="bg-card text-muted-foreground px-4">{t("or")}</span>
-        </div>
-      </div>
-
       <div className="flex flex-wrap items-center justify-center gap-4">
         {providers.map(provider => (
           <Button
@@ -52,9 +44,20 @@ export const SSOButtonsContent = ({
             }}
             variant="outline"
           >
+            <SSOProviderIcon provider={provider} />
             {provider.name}
           </Button>
         ))}
+      </div>
+
+      <div className="relative my-6">
+        <div className="absolute inset-0 flex items-center">
+          <span className="w-full border-t" />
+        </div>
+
+        <div className="relative flex justify-center text-xs">
+          <span className="bg-card text-muted-foreground px-4">{t("or")}</span>
+        </div>
       </div>
     </>
   );
@@ -63,7 +66,7 @@ export const SSOButtonsContent = ({
 /** The row's shape while the deployment configuration is still in flight. */
 export const SSOButtonsSkeleton = () => (
   <div className="flex gap-4">
-    <Skeleton className="mt-6 h-8 w-full" />
-    <Skeleton className="mt-6 h-8 w-full" />
+    <Skeleton className="mb-6 h-8 w-full" />
+    <Skeleton className="mb-6 h-8 w-full" />
   </div>
 );

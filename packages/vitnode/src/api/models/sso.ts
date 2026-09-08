@@ -23,6 +23,7 @@ export interface SSOApiPlugin {
     token_type: string;
   }) => Promise<{ email: string; id: string; username: string }>;
   getUrl: (props: { state: string }) => string;
+  icon?: string;
   id: string;
   name: string;
 }
