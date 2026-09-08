@@ -10,5 +10,6 @@ export {
   CardsPendingSkeleton,
   FeedPendingSkeleton,
   FormPendingSkeleton,
+  ProfilePendingSkeleton,
   TablePendingSkeleton,
 } from "./shapes";
