@@ -16,7 +16,9 @@ const anonymousSession: SessionApi = { ai: { models: [] }, user: null };
 /** A signed-in visitor, exactly as `users/session.route.ts` describes one. */
 const userFixture = (overrides: Partial<AuthUser> = {}): AuthUser => ({
   avatarColor: "#101010",
+  avatarUrl: null,
   birthday: null,
+  coverUrl: null,
   createdAt: new Date("2026-01-01T00:00:00.000Z"),
   email: "test@test.com",
   emailVerified: true,

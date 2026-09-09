@@ -33,7 +33,9 @@ vi.mock("../../api/lib/check-staff-permission", () => ({
 
 const adminUser = {
   avatarColor: "000000",
+  avatarUrl: null,
   birthday: null,
+  coverUrl: null,
   createdAt: new Date(),
   email: "test@test.com",
   emailVerified: true,

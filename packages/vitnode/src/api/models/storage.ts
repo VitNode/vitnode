@@ -5,6 +5,10 @@ import { HTTPException } from "hono/http-exception";
 
 import type { StorageFileInUseBody } from "@/lib/files/in-use";
 
+import {
+  findUserImageHolders,
+  releaseUserImageHolders,
+} from "@/api/lib/user-images";
 import { core_content_file_refs } from "@/database/content";
 import { core_files } from "@/database/files";
 import { isPgReferenceViolation } from "@/lib/api/pg-error";
@@ -86,7 +90,7 @@ export interface StorageUploadOptions {
   /** Allowed MIME types (e.g. `["image/png", "image/jpeg"]`). Omit to allow any. */
   allowedMimeTypes?: string[];
   file: File;
-  /** Sub-folder under the dated prefix, e.g. `avatars` -> `month_7_2026/avatars/…`. */
+  /** Sub-folder under the dated prefix, e.g. `avatars` -> `2026/07/avatars/…`. */
   folder: string;
   /** Maximum file size in bytes. Omit for no limit. */
   maxBytes?: number;
@@ -367,6 +371,8 @@ export class StorageModel {
     // Nothing is committed unless the caller asked for it: the un-forced refusal
     // throws, which rolls the pin delete back with it.
     const deleted = await db.transaction(async tx => {
+      const holders = await findUserImageHolders(tx, id);
+
       const pins = await tx
         .delete(core_content_file_refs)
         .where(eq(core_content_file_refs.fileId, id))
@@ -394,7 +400,7 @@ export class StorageModel {
         throw storageFileInUse({ content: false, id, revisions: pins.length });
       }
 
-      return row;
+      return { holders, row };
     });
 
     // After the commit, and best-effort: the row is gone either way, so a
@@ -402,8 +408,10 @@ export class StorageModel {
     // nobody can remove.
     const provider = this.c.get("core").storage?.adapter;
     if (provider) {
-      await provider.delete(deleted.key).catch(() => undefined);
+      await provider.delete(deleted.row.key).catch(() => undefined);
     }
+
+    await releaseUserImageHolders(this.c, deleted.holders);
   }
 
   getUrl(key: string): string {

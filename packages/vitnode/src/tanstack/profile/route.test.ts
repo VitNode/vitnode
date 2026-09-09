@@ -12,6 +12,8 @@ import { loadProfileRoute, PROFILE_NAMESPACES } from "./route";
 
 const profile: UserProfile = {
   avatarColor: "3b82f6",
+  avatarUrl: null,
+  coverUrl: null,
   createdAt: "2025-11-15T12:18:00.109Z",
   id: 1,
   name: "aXen",

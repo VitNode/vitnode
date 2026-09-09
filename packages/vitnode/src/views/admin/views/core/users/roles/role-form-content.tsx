@@ -10,15 +10,24 @@ import { AutoFormColor } from "@/components/form/fields/color";
 import { AutoFormEmojiIcon } from "@/components/form/fields/emoji-icon";
 import { AutoFormInput } from "@/components/form/fields/input";
 import { AutoFormNullableNumber } from "@/components/form/fields/nullable-number";
+import { AutoFormNumber } from "@/components/form/fields/number";
 import { AutoFormSwitch } from "@/components/form/fields/switch";
 import { useDialog } from "@/components/ui/dialog";
 import { EMOJI_ICON_MAX_LENGTH } from "@/lib/emoji-icon";
 import { multiLangValueSchema } from "@/lib/helpers/multi-lang";
 
+export const ROLE_IMAGE_SIZE_MAX_KB = 1024 * 1024;
+export const ROLE_DEFAULT_AVATAR_SIZE_KB = 2048;
+export const ROLE_DEFAULT_COVER_SIZE_KB = 5120;
+
 /** The shape the roles API takes, as the form produces it. */
 export interface AdminRoleFormValues {
+  allowUploadAvatar: boolean;
+  allowUploadCover: boolean;
   allowUploadFiles: boolean;
   color: string;
+  maxAvatarSize: number;
+  maxCoverSize: number;
   maxStorageForSubmit: null | number;
   name: { languageCode: string; value: string }[];
   prefix: string;
@@ -27,9 +36,13 @@ export interface AdminRoleFormValues {
 
 /** The row an edit re-opens with. Absent for a create. */
 export interface AdminRoleFormData {
+  allowUploadAvatar: boolean;
+  allowUploadCover: boolean;
   allowUploadFiles: boolean;
   color: null | string;
   id: number;
+  maxAvatarSize: number;
+  maxCoverSize: number;
   maxStorageForSubmit: null | number;
   name: { languageCode: string; name: string }[];
   prefix: null | string;
@@ -56,8 +69,24 @@ export const AdminRoleFormContent = ({
   const tCore = useTranslations("core.global.errors");
   const { setIsDirty, setOpen } = useDialog();
 
+  const imageSizeSchema = (fallback: number) =>
+    z
+      .number({ message: tCore("field_required") })
+      .int()
+      .min(1)
+      .max(ROLE_IMAGE_SIZE_MAX_KB)
+      .default(fallback);
+
   const formSchema = z.object({
+    allowUploadAvatar: z.boolean().default(data?.allowUploadAvatar ?? true),
+    allowUploadCover: z.boolean().default(data?.allowUploadCover ?? true),
     allowUploadFiles: z.boolean().default(data?.allowUploadFiles ?? false),
+    maxAvatarSize: imageSizeSchema(
+      data?.maxAvatarSize ?? ROLE_DEFAULT_AVATAR_SIZE_KB,
+    ).describe(t("form.images.avatar.max_size_desc")),
+    maxCoverSize: imageSizeSchema(
+      data?.maxCoverSize ?? ROLE_DEFAULT_COVER_SIZE_KB,
+    ).describe(t("form.images.cover.max_size_desc")),
     color: z
       .string()
       .max(50)
@@ -176,6 +205,50 @@ export const AdminRoleFormContent = ({
           id: "maxStorageForSubmit",
           tab: "content",
         },
+        {
+          component: props => (
+            <AutoFormSwitch label={t("form.images.avatar.allow")} {...props} />
+          ),
+          id: "allowUploadAvatar",
+          tab: "profile",
+        },
+        {
+          component: props => (
+            <AutoFormNumber
+              label={t("form.images.avatar.max_size")}
+              max={ROLE_IMAGE_SIZE_MAX_KB}
+              min={1}
+              step={1}
+              unitLabel={t("form.images.in_unit")}
+              {...props}
+            />
+          ),
+          hidden: values => !values.allowUploadAvatar,
+          id: "maxAvatarSize",
+          tab: "profile",
+        },
+        {
+          component: props => (
+            <AutoFormSwitch label={t("form.images.cover.allow")} {...props} />
+          ),
+          id: "allowUploadCover",
+          tab: "profile",
+        },
+        {
+          component: props => (
+            <AutoFormNumber
+              label={t("form.images.cover.max_size")}
+              max={ROLE_IMAGE_SIZE_MAX_KB}
+              min={1}
+              step={1}
+              unitLabel={t("form.images.in_unit")}
+              {...props}
+            />
+          ),
+          hidden: values => !values.allowUploadCover,
+          id: "maxCoverSize",
+          tab: "profile",
+        },
       ]}
       formSchema={formSchema}
       onSubmit={onSubmit}
@@ -185,6 +258,7 @@ export const AdminRoleFormContent = ({
       tabs={[
         { label: t("tabs.general"), value: "general" },
         { label: t("tabs.content"), value: "content" },
+        { label: t("tabs.profile"), value: "profile" },
       ]}
     />
   );

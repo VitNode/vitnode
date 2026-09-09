@@ -1,5 +1,11 @@
-import { camelCase, index, primaryKey } from "drizzle-orm/pg-core";
+import {
+  type AnyPgColumn,
+  camelCase,
+  index,
+  primaryKey,
+} from "drizzle-orm/pg-core";
 
+import { core_files } from "./files";
 import { core_languages } from "./languages";
 import { core_roles } from "./roles";
 
@@ -28,6 +34,12 @@ export const core_users = camelCase.table.withRLS(
       .references(() => core_languages.code, {
         onDelete: "set default",
       }),
+    avatarId: t.integer().references((): AnyPgColumn => core_files.id, {
+      onDelete: "set null",
+    }),
+    coverId: t.integer().references((): AnyPgColumn => core_files.id, {
+      onDelete: "set null",
+    }),
   }),
   t => [
     index("core_users_name_code_idx").on(t.nameCode),

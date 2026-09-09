@@ -121,7 +121,9 @@ describe("both session models refuse to write a non-positive TTL", () => {
 describe("a user read back from the cache is the user that was written", () => {
   const user = {
     avatarColor: "#123456",
+    avatarUrl: null,
     birthday: new Date("1990-05-04T00:00:00.000Z"),
+    coverUrl: null,
     createdAt: new Date("2024-01-02T03:04:05.000Z"),
     email: "test@test.com",
     emailVerified: true,

@@ -308,6 +308,17 @@
         "admin_cp": "Panel administratora",
         "settings": "Ustawienia",
         "files": "Moje pliki"
+      },
+      "image_crop": {
+        "drop": "Przeciągnij obraz tutaj lub wybierz plik",
+        "change": "Zmień obraz",
+        "zoom": "Powiększenie",
+        "stage_label": "Podgląd kadru",
+        "stage_instructions": "Przeciągnij obraz, aby go przesunąć. Powiększaj suwakiem, kółkiem myszy lub klawiszami + i -, a strzałkami przesuwaj kadr.",
+        "errors": {
+          "unreadable": "Nie udało się odczytać tego obrazu. Spróbuj z innym plikiem.",
+          "too_large_after_crop": "Przycięty obraz ma {size}, czyli więcej niż limit {max}. Powiększ kadr lub wybierz mniejszy obraz."
+        }
       }
     },
     "profile": {
@@ -320,6 +331,37 @@
       "notFound": {
         "title": "Nie znaleziono profilu",
         "desc": "Ten użytkownik nie istnieje lub zmienił swoją nazwę."
+      },
+      "images": {
+        "chooseAction": "Co chcesz zrobić?",
+        "confirmUpload": "Prześlij",
+        "confirmRemove": "Usuń",
+        "uploadedDesc": "Zmiana może potrzebować chwili, żeby pojawić się wszędzie.",
+        "removedDesc": "Odwiedzający Twój profil zobaczą zmianę od razu.",
+        "avatar": {
+          "edit": "Edytuj awatar",
+          "upload": "Prześlij awatar",
+          "change": "Zmień awatar",
+          "remove": "Usuń awatar",
+          "notAllowed": "Twoja rola nie pozwala przesyłać awatara.",
+          "dialogDesc": "Prześlij nowy awatar lub usuń obecny.",
+          "dialogDescEmpty": "Wybierz obraz i wykadruj fragment, który chcesz pokazać. Zostanie przycięty do koła.",
+          "removeDesc": "Zamiast niego pokażemy awatar z literą. Nowy możesz przesłać w każdej chwili.",
+          "uploaded": "Awatar został zaktualizowany.",
+          "removed": "Awatar został usunięty."
+        },
+        "cover": {
+          "edit": "Edytuj obraz tła",
+          "upload": "Prześlij obraz tła",
+          "change": "Zmień obraz tła",
+          "remove": "Usuń obraz tła",
+          "notAllowed": "Twoja rola nie pozwala przesyłać obrazu tła.",
+          "dialogDesc": "Prześlij nowy obraz tła lub usuń obecny.",
+          "dialogDescEmpty": "Wybierz szeroki obraz i wykadruj fragment, który ma być widoczny u góry profilu.",
+          "removeDesc": "Profil wróci do kolorowego gradientu. Nowy obraz możesz przesłać w każdej chwili.",
+          "uploaded": "Obraz tła został zaktualizowany.",
+          "removed": "Obraz tła został usunięty."
+        }
       }
     },
     "files": {
@@ -691,8 +733,6 @@
         "editAvatar": "Edytuj awatar",
         "editName": "Edytuj nazwę użytkownika",
         "editEmail": "Edytuj adres e-mail",
-        "uploadImage": "Prześlij obraz",
-        "removeImage": "Usuń obraz",
         "goToProfile": "Przejdź do profilu publicznego",
         "updateSuccess": "Profil został zaktualizowany.",
         "editNameCode": "Edytuj kod nazwy",
@@ -714,7 +754,37 @@
         "selectRole": "Wybierz rolę",
         "addSecondaryRole": "Dodaj rolę",
         "removeRole": "Usuń rolę",
-        "saveRoles": "Zapisz role"
+        "saveRoles": "Zapisz role",
+        "images": {
+          "chooseAction": "Co chcesz zrobić?",
+          "confirmUpload": "Prześlij",
+          "confirmRemove": "Usuń",
+          "notAllowed": "Role tego użytkownika nie pozwalają na przesyłanie, ale Ty nadal możesz ustawić obraz.",
+          "uploadedDesc": "Użytkownik zobaczy zmianę przy następnym wczytaniu strony.",
+          "removedDesc": "Zapisany plik również został usunięty.",
+          "avatar": {
+            "edit": "Edytuj awatar",
+            "upload": "Prześlij awatar",
+            "change": "Zmień awatar",
+            "remove": "Usuń awatar",
+            "dialogDesc": "Prześlij nowy awatar tego użytkownika lub usuń obecny.",
+            "dialogDescEmpty": "Wybierz obraz i wykadruj fragment do pokazania. Zostanie przycięty do koła.",
+            "removeDesc": "Zamiast niego pokażemy awatar z literą.",
+            "uploaded": "Awatar został zaktualizowany.",
+            "removed": "Awatar został usunięty."
+          },
+          "cover": {
+            "edit": "Edytuj obraz tła",
+            "upload": "Prześlij obraz tła",
+            "change": "Zmień obraz tła",
+            "remove": "Usuń obraz tła",
+            "dialogDesc": "Prześlij nowy obraz tła tego użytkownika lub usuń obecny.",
+            "dialogDescEmpty": "Wybierz szeroki obraz i wykadruj fragment widoczny u góry profilu.",
+            "removeDesc": "Profil wróci do kolorowego gradientu.",
+            "uploaded": "Obraz tła został zaktualizowany.",
+            "removed": "Obraz tła został usunięty."
+          }
+        }
       },
       "verify_email": {
         "label": "Zweryfikuj adres e-mail",
@@ -780,7 +850,8 @@
       },
       "tabs": {
         "general": "Ogólne",
-        "content": "Treść"
+        "content": "Treść",
+        "profile": "Profil"
       },
       "form": {
         "name": "Nazwa",
@@ -795,6 +866,19 @@
           "in_unit": "w kB",
           "or": "lub",
           "unlimited": "Bez limitu"
+        },
+        "images": {
+          "in_unit": "kB",
+          "avatar": {
+            "allow": "Zezwól na przesyłanie awatara",
+            "max_size": "Maksymalny rozmiar awatara",
+            "max_size_desc": "Największy awatar, jaki członek tej roli może przesłać, w kB. Przycięte awatary mają zwykle dużo poniżej 200 kB."
+          },
+          "cover": {
+            "allow": "Zezwól na przesyłanie obrazu tła",
+            "max_size": "Maksymalny rozmiar obrazu tła",
+            "max_size_desc": "Największy obraz tła, jaki członek tej roli może przesłać, w kB."
+          }
         }
       }
     },

@@ -35,6 +35,8 @@ export const sessionRoute = buildRoute({
                   createdAt: z.date(),
                   newsletter: z.boolean(),
                   avatarColor: z.string(),
+                  avatarUrl: z.string().nullable(),
+                  coverUrl: z.string().nullable(),
                   emailVerified: z.boolean(),
                   roleId: z.number(),
                   birthday: z.date().nullable(),

@@ -6,6 +6,10 @@ import React from "react";
 import type { AdminIdentity } from "@/views/admin/views/core/shared/admin-scope";
 import type { UpdateAdminUser } from "@/views/admin/views/core/users/detail/user-fields-content";
 import type {
+  RemoveAdminUserImage,
+  UploadAdminUserImage,
+} from "@/views/admin/views/core/users/detail/user-images-content";
+import type {
   AdminUserDetail,
   AdminUserFetcher,
 } from "@/views/admin/views/core/users/detail/user-query";
@@ -27,8 +31,10 @@ import {
   adminUsersQueryRoot,
 } from "@/views/admin/views/core/users/list/users-query";
 import {
+  removeAdminUserImage,
   updateAdminUser,
   updateAdminUserRoles,
+  uploadAdminUserImage,
   verifyAdminUserEmail,
 } from "@/views/admin/views/core/users/users-mutations";
 
@@ -80,9 +86,21 @@ export const invalidateAfterAdminUserRolesChange = async (
   ]);
 };
 
+export const invalidateAfterAdminUserImageChange = async (
+  queryClient: QueryClient,
+  { adminUserId, userId }: { adminUserId: AdminIdentity; userId: number },
+): Promise<void> => {
+  await Promise.all([
+    invalidateAdminUsers(queryClient, adminUserId),
+    ...(adminUserId === userId ? [invalidateAdminSession(queryClient)] : []),
+  ]);
+};
+
 export const useAdminUserMutations = (): {
+  onRemoveImage: RemoveAdminUserImage;
   onUpdate: UpdateAdminUser;
   onUpdateRoles: UpdateAdminUserRoles;
+  onUploadImage: UploadAdminUserImage;
   onVerifyEmail: VerifyAdminUserEmail;
 } => {
   const queryClient = useQueryClient();
@@ -90,6 +108,13 @@ export const useAdminUserMutations = (): {
 
   return React.useMemo(
     () => ({
+      onRemoveImage: async (id, kind) => {
+        await removeAdminUserImage(id, kind);
+        await invalidateAfterAdminUserImageChange(queryClient, {
+          adminUserId,
+          userId: id,
+        });
+      },
       onUpdate: async (id, input) => {
         const result = await updateAdminUser(id, input);
         if ("data" in result) {
@@ -105,6 +130,13 @@ export const useAdminUserMutations = (): {
         }
 
         return result;
+      },
+      onUploadImage: async (id, kind, file) => {
+        await uploadAdminUserImage(id, kind, file);
+        await invalidateAfterAdminUserImageChange(queryClient, {
+          adminUserId,
+          userId: id,
+        });
       },
       onVerifyEmail: async (id: number) => {
         const result = await verifyAdminUserEmail(id);

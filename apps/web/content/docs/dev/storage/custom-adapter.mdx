@@ -178,7 +178,7 @@ error message in it.
 </Steps>
 
 <Callout type="info" title="Keys are pre-built for you">
-  The framework builds `month_{month}_{year}/{folder}/<uuid>.<ext>` before
+  The framework builds `{year}/{month}/{folder}/<uuid>.<ext>` before
   calling `upload`, checks every folder segment against the traversal guard, and
   stores that key on the `core_files` row. So an adapter stores `body` at the
   key it was handed and never invents path logic - see [storage

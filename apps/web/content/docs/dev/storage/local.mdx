@@ -49,9 +49,11 @@ Uploads then land under the current working directory of the API process:
 <Files>
   <Folder name="public" defaultOpen>
     <Folder name="uploads" defaultOpen>
-      <Folder name="month_9_2026" defaultOpen>
-        <Folder name="avatars" defaultOpen>
-          <File name="1b9d3f7c-0e4a-4c21-9a77-5d6f0b8e1c22.webp" />
+      <Folder name="2026" defaultOpen>
+        <Folder name="09" defaultOpen>
+          <Folder name="avatars" defaultOpen>
+            <File name="1b9d3f7c-0e4a-4c21-9a77-5d6f0b8e1c22.webp" />
+          </Folder>
         </Folder>
       </Folder>
     </Folder>
@@ -191,7 +193,7 @@ Then check the file is really on disk and really served:
 
 ```bash
 ls public/uploads
-curl -I http://localhost:8000/api/uploads/month_9_2026/admin-storage-test/<uuid>.webp
+curl -I http://localhost:8000/api/uploads/2026/09/admin-storage-test/<uuid>.webp
 ```
 
 A `200` means the mount is right. A `404` with the file present on disk means the

@@ -2,6 +2,10 @@ import { z } from "@hono/zod-openapi";
 
 import { resolveUserRoles, userRoleSchema } from "@/api/lib/resolve-user-roles";
 import { buildRoute } from "@/api/lib/route";
+import {
+  resolveUserImagePolicy,
+  zodUserImagePolicy,
+} from "@/api/lib/user-images";
 import { SessionAdminModel } from "@/api/models/session-admin";
 import { UserModel } from "@/api/models/user";
 import { CONFIG_PLUGIN } from "@/config";
@@ -30,6 +34,8 @@ export const showUserAdminRoute = buildRoute({
               createdAt: z.date(),
               newsletter: z.boolean(),
               avatarColor: z.string(),
+              avatarUrl: z.string().nullable(),
+              coverUrl: z.string().nullable(),
               emailVerified: z.boolean(),
               roleId: z.number(),
               role: userRoleSchema,
@@ -37,6 +43,7 @@ export const showUserAdminRoute = buildRoute({
               birthday: z.date().nullable(),
               language: z.string(),
               isAdmin: z.boolean(),
+              imagePolicy: zodUserImagePolicy,
             }),
           },
         },
@@ -73,11 +80,12 @@ export const showUserAdminRoute = buildRoute({
       return c.json({ error: "User not found" }, 404);
     }
 
-    const [roles, isAdmin] = await Promise.all([
+    const [roles, isAdmin, imagePolicy] = await Promise.all([
       resolveUserRoles(c, user),
       new SessionAdminModel(c).checkIfUserIsAdmin(user.id),
+      resolveUserImagePolicy(c, user, { ignoreAllow: true }),
     ]);
 
-    return c.json({ ...user, isAdmin, ...roles }, 200);
+    return c.json({ ...user, imagePolicy, isAdmin, ...roles }, 200);
   },
 });

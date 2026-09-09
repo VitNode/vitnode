@@ -335,6 +335,17 @@
         "admin_cp": "Admin CP",
         "settings": "Settings",
         "files": "My Files"
+      },
+      "image_crop": {
+        "drop": "Drop an image here, or choose one",
+        "change": "Change image",
+        "zoom": "Zoom",
+        "stage_label": "Crop preview",
+        "stage_instructions": "Drag the image to reposition it. Use the slider, scroll, or the + and - keys to zoom, and the arrow keys to nudge.",
+        "errors": {
+          "unreadable": "This image could not be read. Try a different file.",
+          "too_large_after_crop": "The cropped image is {size}, which is over the {max} limit. Zoom in or pick a smaller image."
+        }
       }
     },
     "profile": {
@@ -347,6 +358,37 @@
       "notFound": {
         "title": "Profile not found",
         "desc": "This user doesn't exist, or their username has changed."
+      },
+      "images": {
+        "chooseAction": "What would you like to do?",
+        "confirmUpload": "Upload",
+        "confirmRemove": "Delete",
+        "uploadedDesc": "It can take a moment to show up everywhere.",
+        "removedDesc": "Anyone visiting your profile will see the change right away.",
+        "avatar": {
+          "edit": "Edit avatar",
+          "upload": "Upload avatar",
+          "change": "Change avatar",
+          "remove": "Remove avatar",
+          "notAllowed": "Your role does not allow uploading an avatar.",
+          "dialogDesc": "Upload a new avatar, or remove the one you have.",
+          "dialogDescEmpty": "Pick an image and frame the part you want to show. It will be cropped to a circle.",
+          "removeDesc": "Your letter avatar will be shown instead. You can upload a new one at any time.",
+          "uploaded": "Avatar updated.",
+          "removed": "Avatar removed."
+        },
+        "cover": {
+          "edit": "Edit cover image",
+          "upload": "Upload cover image",
+          "change": "Change cover image",
+          "remove": "Remove cover image",
+          "notAllowed": "Your role does not allow uploading a cover image.",
+          "dialogDesc": "Upload a new cover image, or remove the one you have.",
+          "dialogDescEmpty": "Pick a wide image and frame the part you want to show at the top of your profile.",
+          "removeDesc": "Your profile will fall back to a colour gradient. You can upload a new cover at any time.",
+          "uploaded": "Cover image updated.",
+          "removed": "Cover image removed."
+        }
       }
     },
     "files": {
@@ -946,8 +988,6 @@
         "editAvatar": "Edit avatar",
         "editName": "Edit username",
         "editEmail": "Edit email",
-        "uploadImage": "Upload image",
-        "removeImage": "Remove image",
         "goToProfile": "Go to Public Profile",
         "updateSuccess": "Profile updated.",
         "editNameCode": "Edit name code",
@@ -969,7 +1009,37 @@
         "selectRole": "Select a role",
         "addSecondaryRole": "Add role",
         "removeRole": "Remove role",
-        "saveRoles": "Save roles"
+        "saveRoles": "Save roles",
+        "images": {
+          "chooseAction": "What would you like to do?",
+          "confirmUpload": "Upload",
+          "confirmRemove": "Delete",
+          "notAllowed": "This user's roles do not allow uploads, but you can still set one.",
+          "uploadedDesc": "The user will see it on their next page load.",
+          "removedDesc": "The stored file was deleted too.",
+          "avatar": {
+            "edit": "Edit avatar",
+            "upload": "Upload avatar",
+            "change": "Change avatar",
+            "remove": "Remove avatar",
+            "dialogDesc": "Upload a new avatar for this user, or remove the one they have.",
+            "dialogDescEmpty": "Pick an image and frame the part to show. It will be cropped to a circle.",
+            "removeDesc": "Their letter avatar will be shown instead.",
+            "uploaded": "Avatar updated.",
+            "removed": "Avatar removed."
+          },
+          "cover": {
+            "edit": "Edit cover image",
+            "upload": "Upload cover image",
+            "change": "Change cover image",
+            "remove": "Remove cover image",
+            "dialogDesc": "Upload a new cover image for this user, or remove the one they have.",
+            "dialogDescEmpty": "Pick a wide image and frame the part to show at the top of the profile.",
+            "removeDesc": "Their profile will fall back to a colour gradient.",
+            "uploaded": "Cover image updated.",
+            "removed": "Cover image removed."
+          }
+        }
       },
       "verify_email": {
         "label": "Verify Email",
@@ -1035,7 +1105,8 @@
       },
       "tabs": {
         "general": "General",
-        "content": "Content"
+        "content": "Content",
+        "profile": "Profile"
       },
       "form": {
         "name": "Name",
@@ -1050,6 +1121,19 @@
           "in_unit": "in kB",
           "or": "or",
           "unlimited": "Unlimited"
+        },
+        "images": {
+          "in_unit": "kB",
+          "avatar": {
+            "allow": "Allow avatar upload",
+            "max_size": "Maximum avatar size",
+            "max_size_desc": "The largest avatar a member of this role can upload, in kB. Cropped avatars are usually well under 200 kB."
+          },
+          "cover": {
+            "allow": "Allow cover image upload",
+            "max_size": "Maximum cover size",
+            "max_size_desc": "The largest cover image a member of this role can upload, in kB."
+          }
         }
       }
     },

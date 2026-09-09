@@ -67,7 +67,9 @@ export interface EnvVariablesVitNode {
   admin: null | {
     user: {
       avatarColor: string;
+      avatarUrl: null | string;
       birthday: Date | null;
+      coverUrl: null | string;
       createdAt: Date;
       email: string;
       emailVerified: boolean;
@@ -143,7 +145,9 @@ export interface EnvVariablesVitNode {
   storage: StorageModel;
   user: null | {
     avatarColor: string;
+    avatarUrl: null | string;
     birthday: Date | null;
+    coverUrl: null | string;
     createdAt: Date;
     email: string;
     emailVerified: boolean;

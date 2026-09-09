@@ -1,6 +1,7 @@
 export interface SearchResultItem {
   author: null | {
     avatarColor: string;
+    avatarUrl: null | string;
     id: number;
     name: string;
     nameCode: string;

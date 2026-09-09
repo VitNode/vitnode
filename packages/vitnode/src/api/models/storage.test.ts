@@ -1,11 +1,22 @@
 import type { Context } from "hono";
 
 import { HTTPException } from "hono/http-exception";
-import { describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
+import type * as UserImages from "@/api/lib/user-images";
+import type { UserImageHolder } from "@/api/lib/user-images";
+
+import { releaseUserImageHolders } from "@/api/lib/user-images";
 import { core_content_file_refs } from "@/database/content";
 
 import { STORAGE_FILE_IN_USE, StorageModel } from "./storage";
+
+vi.mock("@/api/lib/user-images", async importOriginal => ({
+  ...(await importOriginal<typeof UserImages>()),
+  releaseUserImageHolders: vi.fn().mockResolvedValue(undefined),
+}));
+
+const released = vi.mocked(releaseUserImageHolders);
 
 const makeCtx = (
   overrides: { admin?: unknown; storage?: unknown } = {},
@@ -68,6 +79,7 @@ const makeCtx = (
 const makeDeleteCtx = (
   row: undefined | { key: string },
   overrides: {
+    holders?: { avatarId: null | number; coverId: null | number; id: number }[];
     pins?: number;
     referenceError?: unknown;
     storage?: unknown;
@@ -76,10 +88,12 @@ const makeDeleteCtx = (
   ctx: Context;
   del: ReturnType<typeof vi.fn>;
   deleteReturning: ReturnType<typeof vi.fn>;
+  holdersWhere: ReturnType<typeof vi.fn>;
   pinsReturning: ReturnType<typeof vi.fn>;
   rolledBack: () => boolean;
 } => {
   const del = vi.fn().mockResolvedValue(undefined);
+  const holdersWhere = vi.fn().mockResolvedValue(overrides.holders ?? []);
   const deleteReturning =
     "referenceError" in overrides
       ? vi.fn().mockRejectedValue(overrides.referenceError)
@@ -97,6 +111,9 @@ const makeDeleteCtx = (
         returning:
           table === core_content_file_refs ? pinsReturning : deleteReturning,
       })),
+    })),
+    select: vi.fn(() => ({
+      from: vi.fn(() => ({ where: holdersWhere })),
     })),
   };
 
@@ -129,13 +146,14 @@ const makeDeleteCtx = (
     ctx: { get: (k: string) => store[k] } as unknown as Context,
     del,
     deleteReturning,
+    holdersWhere,
     pinsReturning,
     rolledBack: () => rolledBack,
   };
 };
 
 describe("StorageModel.upload", () => {
-  it("uploads under month_x_y/{folder} with a generated file name", async () => {
+  it("uploads under {year}/{month}/{folder} with a generated file name", async () => {
     const { ctx, insertValues, upload } = makeCtx();
     const file = new File(["hello"], "photo.png", { type: "image/png" });
 
@@ -146,9 +164,7 @@ describe("StorageModel.upload", () => {
 
     expect(upload).toHaveBeenCalledTimes(1);
     const arg = upload.mock.calls[0][0];
-    expect(arg.key).toMatch(
-      /^month_\d{1,2}_\d{4}\/avatars\/[0-9a-f-]{36}\.png$/,
-    );
+    expect(arg.key).toMatch(/^\d{4}\/\d{2}\/avatars\/[0-9a-f-]{36}\.png$/);
     expect(arg.contentType).toBe("image/png");
     expect(Buffer.isBuffer(arg.body)).toBe(true);
     expect(result.url).toContain(arg.key);
@@ -246,15 +262,19 @@ describe("StorageModel.delete", () => {
   it("delegates to the adapter", async () => {
     const { ctx, del } = makeCtx();
 
-    await new StorageModel(ctx).delete("month_7_2026/avatars/x.png");
+    await new StorageModel(ctx).delete("2026/07/avatars/x.png");
 
-    expect(del).toHaveBeenCalledWith("month_7_2026/avatars/x.png");
+    expect(del).toHaveBeenCalledWith("2026/07/avatars/x.png");
   });
 });
 
 describe("StorageModel.deleteFile", () => {
+  beforeEach(() => {
+    released.mockClear();
+  });
+
   it("deletes the database row first, then the storage object", async () => {
-    const key = "month_7_2026/avatars/x.png";
+    const key = "2026/07/avatars/x.png";
     const { ctx, del, deleteReturning } = makeDeleteCtx({ key });
 
     await new StorageModel(ctx).deleteFile(1);
@@ -274,6 +294,60 @@ describe("StorageModel.deleteFile", () => {
 
     await expect(new StorageModel(ctx).deleteFile(999)).rejects.toThrow();
     expect(del).not.toHaveBeenCalled();
+  });
+
+  it("asks who holds the file as a profile image before the row goes", async () => {
+    const { ctx, deleteReturning, holdersWhere } = makeDeleteCtx({
+      key: "2026/09/avatars/x.webp",
+    });
+
+    await new StorageModel(ctx).deleteFile(1);
+
+    expect(holdersWhere.mock.invocationCallOrder[0]).toBeLessThan(
+      deleteReturning.mock.invocationCallOrder[0],
+    );
+  });
+
+  it("releases every user whose avatar or cover the file was", async () => {
+    const { ctx, del } = makeDeleteCtx(
+      { key: "2026/09/avatars/x.webp" },
+      {
+        holders: [
+          { avatarId: 1, coverId: null, id: 7 },
+          { avatarId: null, coverId: 1, id: 9 },
+        ],
+      },
+    );
+
+    await new StorageModel(ctx).deleteFile(1);
+
+    const expected: UserImageHolder[] = [
+      { kind: "avatar", userId: 7 },
+      { kind: "cover", userId: 9 },
+    ];
+    expect(released).toHaveBeenCalledWith(ctx, expected);
+    expect(del.mock.invocationCallOrder[0]).toBeLessThan(
+      released.mock.invocationCallOrder[0],
+    );
+  });
+
+  it("releases nobody when the file is not a profile image", async () => {
+    const { ctx } = makeDeleteCtx({ key: "2026/09/content/x.webp" });
+
+    await new StorageModel(ctx).deleteFile(1);
+
+    expect(released).toHaveBeenCalledWith(ctx, []);
+  });
+
+  it("releases nobody when the delete was refused", async () => {
+    const { ctx } = makeDeleteCtx(
+      { key: "a/b.png" },
+      { holders: [{ avatarId: 1, coverId: null, id: 7 }], pins: 2 },
+    );
+
+    await new StorageModel(ctx).deleteFile(1).catch(() => undefined);
+
+    expect(released).not.toHaveBeenCalled();
   });
 
   it("still removes the row when no storage adapter is configured", async () => {

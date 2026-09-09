@@ -9,11 +9,11 @@ export { getFileExtension, replaceFileExtension };
 const FOLDER_SEGMENT_PATTERN = /^[a-z0-9][a-z0-9_-]*$/i;
 
 /**
- * Time-based prefix every upload is grouped under, e.g. `month_7_2026`.
+ * Time-based prefix every upload is grouped under, e.g. `2026/07`.
  * `getMonth` is zero-based, so `+ 1` yields the human month number.
  */
-export const buildMonthFolder = (now: Date = new Date()): string => {
-  return `month_${getMonth(now) + 1}_${getYear(now)}`;
+export const buildDateFolder = (now: Date = new Date()): string => {
+  return `${getYear(now)}/${String(getMonth(now) + 1).padStart(2, "0")}`;
 };
 
 /**
@@ -141,7 +141,7 @@ export const buildStorageKey = ({
   folder: string;
   now?: Date;
 }): string => {
-  return `${buildMonthFolder(now)}/${sanitizeFolder(folder)}/${fileName}`;
+  return `${buildDateFolder(now)}/${sanitizeFolder(folder)}/${fileName}`;
 };
 
 export const parseImageDimensions = (

@@ -2,6 +2,7 @@ import { buildModule } from "@/api/lib/module";
 import { CONFIG_PLUGIN } from "@/config";
 
 import { userFilesModule } from "./files/files.module";
+import { userImagesModule } from "./images/images.module";
 import { changePasswordRoute } from "./routes/change-password.route";
 import { listDevicesRoute } from "./routes/devices.route";
 import { permissionsRoute } from "./routes/permissions.route";
@@ -29,5 +30,5 @@ export const usersModule = buildModule({
     revokeDeviceRoute,
     profileRoute,
   ],
-  modules: [ssoUserModule, userFilesModule],
+  modules: [ssoUserModule, userFilesModule, userImagesModule],
 });

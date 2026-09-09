@@ -1,16 +1,21 @@
 import { z } from "@hono/zod-openapi";
 import { eq, inArray } from "drizzle-orm";
+import { alias } from "drizzle-orm/pg-core";
 
 import { resolveRoleNames } from "@/api/lib/resolve-role-names";
 import { buildRoute } from "@/api/lib/route";
+import { storageUrlOf } from "@/api/lib/storage-url";
 import {
   withPagination,
   zodPaginationPageInfo,
   zodPaginationQuery,
 } from "@/api/lib/with-pagination";
 import { CONFIG_PLUGIN } from "@/config";
+import { core_files } from "@/database/files";
 import { core_roles } from "@/database/roles";
 import { core_users, core_users_secondary_roles } from "@/database/users";
+
+const avatarFile = alias(core_files, "user_avatar_file");
 
 export const listUsersAdminRoute = buildRoute({
   pluginId: CONFIG_PLUGIN.pluginId,
@@ -41,6 +46,7 @@ export const listUsersAdminRoute = buildRoute({
                   createdAt: z.date(),
                   newsletter: z.boolean(),
                   avatarColor: z.string(),
+                  avatarUrl: z.string().nullable(),
                   emailVerified: z.boolean(),
                   roleId: z.number(),
                   role: z.object({
@@ -110,9 +116,11 @@ export const listUsersAdminRoute = buildRoute({
             rolePrefix: core_roles.prefix,
             birthday: core_users.birthday,
             language: core_users.language,
+            avatarKey: avatarFile.key,
           })
           .from(core_users)
           .leftJoin(core_roles, eq(core_roles.id, core_users.roleId))
+          .leftJoin(avatarFile, eq(avatarFile.id, core_users.avatarId))
           .where(where)
           .orderBy(orderBy)
           .limit(limit),
@@ -155,23 +163,26 @@ export const listUsersAdminRoute = buildRoute({
 
     return c.json({
       pageInfo: data.pageInfo,
-      edges: data.edges.map(({ roleColor, rolePrefix, ...user }) => ({
-        ...user,
-        role: {
-          id: user.roleId,
-          color: roleColor,
-          prefix: rolePrefix,
-          name: roleNames.get(user.roleId) ?? [],
-        },
-        secondaryRoles: secondaryRoleRows
-          .filter(row => row.userId === user.id)
-          .map(row => ({
-            id: row.roleId,
-            color: row.roleColor,
-            prefix: row.rolePrefix,
-            name: roleNames.get(row.roleId) ?? [],
-          })),
-      })),
+      edges: data.edges.map(
+        ({ avatarKey, roleColor, rolePrefix, ...user }) => ({
+          ...user,
+          avatarUrl: storageUrlOf(c, avatarKey),
+          role: {
+            id: user.roleId,
+            color: roleColor,
+            prefix: rolePrefix,
+            name: roleNames.get(user.roleId) ?? [],
+          },
+          secondaryRoles: secondaryRoleRows
+            .filter(row => row.userId === user.id)
+            .map(row => ({
+              id: row.roleId,
+              color: row.roleColor,
+              prefix: row.rolePrefix,
+              name: roleNames.get(row.roleId) ?? [],
+            })),
+        }),
+      ),
     });
   },
 });

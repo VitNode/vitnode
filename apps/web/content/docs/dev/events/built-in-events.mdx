@@ -38,7 +38,7 @@ core event as for one of your own.
 
 ## Core events (`@vitnode/core`)
 
-Seven names, all declared in `VitNodeEvents` in
+Nine names, all declared in `VitNodeEvents` in
 `packages/vitnode/src/api/models/events.ts`. Every one of them fires **after**
 the write it describes has committed.
 
@@ -48,6 +48,8 @@ the write it describes has committed.
 | `user.updated` | `{ userId, email, name }`                | A user is edited in the AdminCP (profile fields and/or role assignments)  |
 | `user.deleted` | `{ userId, email }`                      | Never - the name is declared for plugins, core has no deletion flow       |
 | `user.sso.linked` | `{ userId, email, providerId }`       | A visitor proves an existing account is theirs with its password and an SSO identity is linked to it |
+| `user.avatar.updated` | `{ userId, fileId }`              | An avatar is uploaded or removed - by the user on their profile, or by staff in the AdminCP |
+| `user.cover.updated` | `{ userId, fileId }`               | A profile cover is uploaded or removed - by the user on their profile, or by staff in the AdminCP |
 | `role.created` | `{ roleId }`                             | A role is created in the AdminCP                                          |
 | `role.updated` | `{ roleId }`                             | A role is edited in the AdminCP                                           |
 | `role.deleted` | `{ roleId }`                             | A role is deleted in the AdminCP                                          |
@@ -125,6 +127,50 @@ name, name code) and/or role assignments. The payload carries the user's
 **A listener would** sync the identity into an external system (CRM, mailing
 list), invalidate a plugin-owned cache keyed by user, or audit-log the staff
 edit using the envelope's `actor`.
+
+</Accordion>
+<Accordion title="user.avatar.updated">
+
+Emitted after an avatar is stored and attached to the user, or after it is
+removed. The same event covers the profile page and the AdminCP - the envelope's
+`actor` tells the two apart.
+
+<TypeTable
+  type={{
+    userId: {
+      description: 'Id of the user whose avatar changed.',
+      type: 'number',
+    },
+    fileId: {
+      description:
+        'The new `core_files` id, or `null` when the avatar was removed and the letter avatar is shown again.',
+      type: 'number | null',
+    },
+  }}
+/>
+
+**A listener would** push the new picture to a chat integration, regenerate a
+cached feed card, or audit-log a staff change with the envelope's `actor`.
+
+</Accordion>
+<Accordion title="user.cover.updated">
+
+The cover image's twin of `user.avatar.updated`, with the same payload and the
+same two triggers.
+
+<TypeTable
+  type={{
+    userId: {
+      description: 'Id of the user whose cover changed.',
+      type: 'number',
+    },
+    fileId: {
+      description:
+        'The new `core_files` id, or `null` when the cover was removed and the profile falls back to its colour gradient.',
+      type: 'number | null',
+    },
+  }}
+/>
 
 </Accordion>
 <Accordion title="user.sso.linked">

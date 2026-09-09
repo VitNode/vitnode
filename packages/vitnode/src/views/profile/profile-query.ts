@@ -28,6 +28,8 @@ export interface ProfileRole {
 
 export interface UserProfile {
   avatarColor: string;
+  avatarUrl: null | string;
+  coverUrl: null | string;
   createdAt: Date | string;
   id: number;
   name: string;
