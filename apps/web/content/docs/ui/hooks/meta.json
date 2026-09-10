@@ -1,6 +1,5 @@
 {
   "title": "Hooks",
-  "description": "Small React hooks for common VitNode interface behavior",
   "icon": "Webhook",
   "pages": ["..."]
 }

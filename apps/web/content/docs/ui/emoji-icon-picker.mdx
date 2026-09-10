@@ -1,40 +1,17 @@
 ---
 title: Emoji & Icon Picker
 description: One picker with segmented emoji and icon modes that returns a discriminated value you can store in a single column.
-icon: Smile
 ---
-
-Sometimes a label is not enough. A role, a category or a workspace reads faster
-with a 🚀 or a shield in front of it - and people are very particular about
-which one. The `EmojiIconPicker` gives them both in a single control: two modes
-behind a segmented switch, one panel size, one value.
 
 ## Preview
 
-<Preview name="emoji-icon-picker" />
+<Preview name="emoji-icon-auto-form" />
 
 ## Usage
 
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs'
 
-<Tabs items={['Standalone', 'Auto Form']}>
-  <Tab value="Standalone">
-
-```ts
-import { EmojiIconPicker } from '@vitnode/core/components/ui/emoji-icon-picker'
-import type { EmojiIconValue } from '@vitnode/core/lib/emoji-icon'
-```
-
-The picker is controlled. It hands you a discriminated value - or `undefined`
-when nothing is selected:
-
-```tsx
-const [icon, setIcon] = useState<EmojiIconValue | undefined>()
-
-;<EmojiIconPicker allowRemove onChange={setIcon} value={icon} />
-```
-
-  </Tab>
+<Tabs items={['Auto Form', 'Standalone']}>
 
   <Tab value="Auto Form">
 
@@ -43,10 +20,6 @@ import { AutoForm } from '@vitnode/core/components/form/auto-form'
 import { AutoFormEmojiIcon } from '@vitnode/core/components/form/fields/emoji-icon'
 import { EMOJI_ICON_MAX_LENGTH } from '@vitnode/core/lib/emoji-icon'
 ```
-
-<Preview name="emoji-icon-auto-form" />
-
-The field stores the serialized string, so the schema is a plain `z.string()`:
 
 ```ts
 const formSchema = z.object({
@@ -68,15 +41,23 @@ const formSchema = z.object({
 />
 ```
 
-`AutoFormEmojiIcon` reads and writes the serialized string for you: it parses
-`field.value` on the way in and calls `field.onChange` with `emoji:🚀` or
-`icon:rocket` on the way out. Clearing the field writes `""`, so an optional
-prefix needs no nullable schema.
+  </Tab>
 
-Every prop `EmojiIconPicker` takes - `allowRemove`, `placeholder` - passes
-straight through, alongside the usual `label` and `description`.
+  <Tab value="Standalone">
+
+```ts
+import { EmojiIconPicker } from '@vitnode/core/components/ui/emoji-icon-picker'
+import type { EmojiIconValue } from '@vitnode/core/lib/emoji-icon'
+```
+
+```tsx
+const [icon, setIcon] = useState<EmojiIconValue | undefined>()
+
+;<EmojiIconPicker allowRemove onChange={setIcon} value={icon} />
+```
 
   </Tab>
+
 </Tabs>
 
 ## The value
