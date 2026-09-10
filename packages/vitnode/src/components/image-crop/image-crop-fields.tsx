@@ -1,4 +1,3 @@
-import { cn } from "cn";
 import { ImageIcon, ZoomInIcon, ZoomOutIcon } from "lucide-react";
 import React from "react";
 import { useTranslations } from "use-intl";
@@ -63,6 +62,20 @@ const useFrameSize = (
 
   return size;
 };
+
+const CIRCLE_MASK_PATH =
+  "M0 0h100v100H0Z M50 0a50 50 0 1 0 0 100 50 50 0 1 0 0-100Z";
+
+const CircleCropMask = () => (
+  <svg
+    aria-hidden="true"
+    className="pointer-events-none absolute inset-0 size-full"
+    preserveAspectRatio="none"
+    viewBox="0 0 100 100"
+  >
+    <path className="fill-black/45" d={CIRCLE_MASK_PATH} fillRule="evenodd" />
+  </svg>
+);
 
 const CropStage = ({
   aspect,
@@ -185,13 +198,7 @@ const CropStage = ({
           width: shown.width,
         }}
       />
-      <div
-        aria-hidden="true"
-        className={cn(
-          "pointer-events-none absolute inset-0 shadow-[0_0_0_9999px_rgba(0,0,0,0.45)]",
-          shape === "circle" ? "rounded-full" : "rounded-xl",
-        )}
-      />
+      {shape === "circle" ? <CircleCropMask /> : null}
     </div>
   );
 };
@@ -265,7 +272,7 @@ export const ImageCropFields = ({
         />
       </div>
 
-      <p className="text-muted-foreground text-xs leading-relaxed">
+      <p className="text-muted-foreground text-sm leading-relaxed">
         {t("stage_instructions")}
       </p>
 

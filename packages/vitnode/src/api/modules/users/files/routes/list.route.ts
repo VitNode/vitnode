@@ -1,9 +1,9 @@
-import { and, eq, notInArray } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 import { HTTPException } from "hono/http-exception";
 import z from "zod";
 
 import { buildRoute } from "@/api/lib/route";
-import { USER_IMAGE_FOLDERS } from "@/api/lib/user-images";
+import { notAttachedAsUserImage } from "@/api/lib/user-images";
 import {
   withPagination,
   zodPaginationPageInfo,
@@ -74,7 +74,7 @@ export const listUserFilesRoute = buildRoute({
       search: [core_files.name],
       where: and(
         eq(core_files.userId, user.id),
-        notInArray(core_files.folder, Object.values(USER_IMAGE_FOLDERS)),
+        notAttachedAsUserImage(c.get("db")),
       ),
       query: async ({ cursorSelection, limit, where, orderBy }) =>
         await c

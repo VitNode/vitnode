@@ -1,12 +1,13 @@
 import type { Context } from "hono";
 
 import { z } from "@hono/zod-openapi";
-import { eq, inArray, or } from "drizzle-orm";
+import { eq, inArray, notExists, or, type SQL, sql } from "drizzle-orm";
 import { HTTPException } from "hono/http-exception";
 
 import type { EnvVitNode } from "@/api/middlewares/global.middleware";
 
 import { invalidateSessionCacheForUser } from "@/api/models/session-revoke";
+import { core_files } from "@/database/files";
 import { core_roles } from "@/database/roles";
 import { core_users } from "@/database/users";
 import {
@@ -189,6 +190,21 @@ export const findUserImageHolders = async (
   return userImageHoldersOf(rows, fileId);
 };
 
+export const notAttachedAsUserImage = (
+  db: Pick<EnvVitNode["Variables"]["db"], "select">,
+): SQL =>
+  notExists(
+    db
+      .select({ one: sql`1` })
+      .from(core_users)
+      .where(
+        or(
+          eq(core_users.avatarId, core_files.id),
+          eq(core_users.coverId, core_files.id),
+        ),
+      ),
+  );
+
 export const releaseUserImageHolders = async (
   c: Context,
   holders: UserImageHolder[],
@@ -218,11 +234,22 @@ export const setUserImage = async (
     userId,
   });
 
-  await c
-    .get("db")
-    .update(core_users)
-    .set(kind === "avatar" ? { avatarId: stored.id } : { coverId: stored.id })
-    .where(eq(core_users.id, userId));
+  try {
+    const [attached] = await c
+      .get("db")
+      .update(core_users)
+      .set(kind === "avatar" ? { avatarId: stored.id } : { coverId: stored.id })
+      .where(eq(core_users.id, userId))
+      .returning({ id: core_users.id });
+
+    if (!attached) {
+      throw new HTTPException(404, { message: "User not found" });
+    }
+  } catch (error) {
+    await discardFile(c, stored.id).catch(() => undefined);
+
+    throw error;
+  }
 
   await discardFile(c, previousId === stored.id ? null : previousId);
   await afterImageChange(c, { fileId: stored.id, kind, userId });

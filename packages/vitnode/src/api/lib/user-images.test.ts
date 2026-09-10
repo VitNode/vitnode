@@ -1,9 +1,18 @@
-import { describe, expect, it } from "vitest";
+import type { Context } from "hono";
+
+import { PgDialect } from "drizzle-orm/pg-core";
+import { drizzle } from "drizzle-orm/postgres-js";
+import { HTTPException } from "hono/http-exception";
+import { describe, expect, it, vi } from "vitest";
+
+import type { EnvVitNode } from "@/api/middlewares/global.middleware";
 
 import {
   effectiveUserImagePolicy,
   KILOBYTE,
+  notAttachedAsUserImage,
   type RoleImageLimits,
+  setUserImage,
   USER_IMAGE_FOLDERS,
   userImageHoldersOf,
   zodUserImageKind,
@@ -126,5 +135,76 @@ describe("USER_IMAGE_FOLDERS", () => {
   it("has one storage folder per kind, and they differ", () => {
     expect(Object.keys(USER_IMAGE_FOLDERS).sort()).toEqual(["avatar", "cover"]);
     expect(USER_IMAGE_FOLDERS.avatar).not.toBe(USER_IMAGE_FOLDERS.cover);
+  });
+});
+
+describe("notAttachedAsUserImage", () => {
+  it("asks whether a profile still points at the file, not what folder it sits in", () => {
+    const { sql } = new PgDialect().sqlToQuery(
+      notAttachedAsUserImage(drizzle.mock()),
+    );
+
+    expect(sql).toContain("not exists");
+    expect(sql).toContain('"core_users"."avatarId" = "core_files"."id"');
+    expect(sql).toContain('"core_users"."coverId" = "core_files"."id"');
+    expect(sql).not.toContain('"folder"');
+  });
+});
+
+const uploadContext = (attached: { id: number }[]) => {
+  const deleteFile = vi.fn(async () => await Promise.resolve());
+  const variables = {
+    db: {
+      select: () => ({
+        from: () => ({
+          where: () => ({
+            limit: async () => await Promise.resolve([{ fileId: 7 }]),
+          }),
+        }),
+      }),
+      update: () => ({
+        set: () => ({
+          where: () => ({
+            returning: async () => await Promise.resolve(attached),
+          }),
+        }),
+      }),
+    },
+    storage: {
+      deleteFile,
+      upload: async () =>
+        await Promise.resolve({ id: 42, url: "/uploads/avatars/new.png" }),
+    },
+  };
+
+  return {
+    c: {
+      get: (key: keyof typeof variables) => variables[key],
+    } as unknown as Context<EnvVitNode>,
+    deleteFile,
+  };
+};
+
+const upload = async (c: Context<EnvVitNode>) =>
+  await setUserImage(c, {
+    file: new File(["x"], "avatar.png", { type: "image/png" }),
+    kind: "avatar",
+    maxBytes: KILOBYTE,
+    userId: 1,
+  });
+
+describe("setUserImage", () => {
+  it("removes the file it just stored when nothing was there to attach it to", async () => {
+    const { c, deleteFile } = uploadContext([]);
+
+    await expect(upload(c)).rejects.toThrow(HTTPException);
+    expect(deleteFile).toHaveBeenCalledExactlyOnceWith(42, { force: true });
+  });
+
+  it("keeps the previous file when the new one could not be attached", async () => {
+    const { c, deleteFile } = uploadContext([]);
+
+    await expect(upload(c)).rejects.toThrow(HTTPException);
+    expect(deleteFile).not.toHaveBeenCalledWith(7, { force: true });
   });
 });

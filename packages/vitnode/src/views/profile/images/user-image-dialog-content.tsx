@@ -169,7 +169,7 @@ export const UserImageDialogContent = ({
           render={<Button variant="ghost">{labels.cancel}</Button>}
         />
         <Button
-          disabled={!canSubmit}
+          disabled={!canSubmit || submit.isPending}
           isLoading={submit.isPending}
           onClick={() => {
             submit.mutate();
