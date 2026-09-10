@@ -50,6 +50,8 @@ export const normalizeAdminRolesParams = (
 
 /** One row of the roles table - everything the edit dialog re-opens with. */
 export interface AdminRoleRow {
+  allowUploadAvatar: boolean;
+  allowUploadCover: boolean;
   allowUploadFiles: boolean;
   color: null | string;
   createdAt: Date | string;
@@ -58,6 +60,8 @@ export interface AdminRoleRow {
   grantsAdmin: boolean;
   guest: boolean;
   id: number;
+  maxAvatarSize: number;
+  maxCoverSize: number;
   maxStorageForSubmit: null | number;
   name: { languageCode: string; name: string }[];
   prefix: null | string;

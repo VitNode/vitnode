@@ -24,6 +24,13 @@ export const zodRoleNameSchema = z
 // Storage caps are expressed in kB. `null` means unlimited.
 export const zodRoleStorageSchema = z.number().int().min(0).nullable();
 
+export const ROLE_IMAGE_SIZE_MAX_KB = 1024 * 1024;
+export const zodRoleImageSizeSchema = z
+  .number()
+  .int()
+  .min(1)
+  .max(ROLE_IMAGE_SIZE_MAX_KB);
+
 export const zodRolePrefixSchema = z.string().max(EMOJI_ICON_MAX_LENGTH);
 
 export const zodCreateRoleAdminSchema = z.object({
@@ -33,6 +40,10 @@ export const zodCreateRoleAdminSchema = z.object({
   allowUploadFiles: z.boolean().optional(),
   totalMaxStorage: zodRoleStorageSchema.optional(),
   maxStorageForSubmit: zodRoleStorageSchema.optional(),
+  allowUploadAvatar: z.boolean().optional(),
+  maxAvatarSize: zodRoleImageSizeSchema.optional(),
+  allowUploadCover: z.boolean().optional(),
+  maxCoverSize: zodRoleImageSizeSchema.optional(),
 });
 
 export const createRoleAdminRoute = buildRoute({
@@ -74,6 +85,10 @@ export const createRoleAdminRoute = buildRoute({
       allowUploadFiles,
       totalMaxStorage,
       maxStorageForSubmit,
+      allowUploadAvatar,
+      maxAvatarSize,
+      allowUploadCover,
+      maxCoverSize,
     } = c.req.valid("json");
 
     const [role] = await c
@@ -85,6 +100,10 @@ export const createRoleAdminRoute = buildRoute({
         allowUploadFiles: allowUploadFiles ?? false,
         totalMaxStorage: totalMaxStorage ?? null,
         maxStorageForSubmit: maxStorageForSubmit ?? null,
+        ...(allowUploadAvatar === undefined ? {} : { allowUploadAvatar }),
+        ...(maxAvatarSize === undefined ? {} : { maxAvatarSize }),
+        ...(allowUploadCover === undefined ? {} : { allowUploadCover }),
+        ...(maxCoverSize === undefined ? {} : { maxCoverSize }),
         updatedAt: new Date(),
       })
       .returning({ id: core_roles.id });

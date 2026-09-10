@@ -170,7 +170,7 @@ Open **AdminCP → Core → System → Integrations** (`/admin/core/system/integ
 The Storage card now reads active; click **Test storage** and upload an image.
 
 On success the dialog says the image is stored in your adapter, and the object
-appears in the bucket under `month_{month}_{year}/admin-storage-test/…`. On
+appears in the bucket under `{year}/{month}/admin-storage-test/…`. On
 failure, check the API logs: the SDK's own error names the cause, and the two
 usual suspects are a bucket in a different region than `S3_REGION` and a token
 without write permission.

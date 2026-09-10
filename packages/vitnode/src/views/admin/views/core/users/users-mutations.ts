@@ -1,4 +1,7 @@
+import type { UserImageKind } from "@/lib/user-images";
+
 import { fetcherClient } from "@/lib/fetcher-client";
+import { readApiErrorMessage } from "@/lib/read-api-error";
 import {
   type AdminMutationResult,
   runAdminApiMutation,
@@ -102,4 +105,70 @@ export const adminUserCreateConflictField = (
   if (value.includes("name already exists")) return "name";
 
   return null;
+};
+
+export class AdminUserImageError extends Error {
+  constructor(status: number, message: string) {
+    super(message);
+    this.name = "AdminUserImageError";
+    this.status = status;
+  }
+
+  readonly status: number;
+}
+
+const imageRejectionOf = async (
+  response: Response,
+  fallback: string,
+): Promise<AdminUserImageError> =>
+  new AdminUserImageError(
+    response.status,
+    (await readApiErrorMessage(response)) ?? fallback,
+  );
+
+export const uploadAdminUserImage = async (
+  id: number,
+  kind: UserImageKind,
+  file: File,
+): Promise<{ url: string }> => {
+  const formData = new FormData();
+  formData.append("file", file);
+
+  const response = await fetcherClient(adminModuleRef, {
+    args: { params: { id: String(id), kind } },
+    formData,
+    method: "post",
+    module: "admin/users",
+    options: { credentials: "include" },
+    path: "/{id}/images/{kind}",
+  });
+
+  if (!response.ok) {
+    throw await imageRejectionOf(
+      response,
+      `The upload answered ${response.status}.`,
+    );
+  }
+
+  return await response.json();
+};
+
+export const removeAdminUserImage = async (
+  id: number,
+  kind: UserImageKind,
+): Promise<void> => {
+  const response = await fetcherClient(adminModuleRef, {
+    args: { params: { id: String(id), kind } },
+    method: "delete",
+    module: "admin/users",
+    options: { credentials: "include" },
+    path: "/{id}/images/{kind}",
+  });
+
+  if (!response.ok) {
+    throw await imageRejectionOf(
+      response,
+      `The removal answered ${response.status}.`,
+    );
+  }
 };

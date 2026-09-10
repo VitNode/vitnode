@@ -2,6 +2,8 @@ import { buildModule } from "@/api/lib/module";
 import { CONFIG_PLUGIN } from "@/config";
 
 import { createUserAdminRoute } from "./routes/create.route";
+import { deleteUserImageAdminRoute } from "./routes/image-delete.route";
+import { uploadUserImageAdminRoute } from "./routes/image-upload.route";
 import { listUsersAdminRoute } from "./routes/list.route";
 import { showUserAdminRoute } from "./routes/show.route";
 import { updateUserAdminRoute } from "./routes/update.route";
@@ -16,5 +18,7 @@ export const usersAdminModule = buildModule({
     showUserAdminRoute,
     updateUserAdminRoute,
     verifyEmailUserAdminRoute,
+    uploadUserImageAdminRoute,
+    deleteUserImageAdminRoute,
   ],
 });

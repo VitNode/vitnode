@@ -25,6 +25,10 @@ const roleAdminSchema = z.object({
   allowUploadFiles: z.boolean(),
   totalMaxStorage: z.number().nullable(),
   maxStorageForSubmit: z.number().nullable(),
+  allowUploadAvatar: z.boolean(),
+  maxAvatarSize: z.number(),
+  allowUploadCover: z.boolean(),
+  maxCoverSize: z.number(),
   createdAt: z.date(),
   updatedAt: z.date(),
 });
@@ -90,6 +94,10 @@ export const showRoleAdminRoute = buildRoute({
         allowUploadFiles: core_roles.allowUploadFiles,
         totalMaxStorage: core_roles.totalMaxStorage,
         maxStorageForSubmit: core_roles.maxStorageForSubmit,
+        allowUploadAvatar: core_roles.allowUploadAvatar,
+        maxAvatarSize: core_roles.maxAvatarSize,
+        allowUploadCover: core_roles.allowUploadCover,
+        maxCoverSize: core_roles.maxCoverSize,
         createdAt: core_roles.createdAt,
       })
       .from(core_roles)

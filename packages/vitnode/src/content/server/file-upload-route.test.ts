@@ -63,11 +63,11 @@ const harness = ({
     return await Promise.resolve({
       dimensions: { height: 900, width: 1600 },
       id: 42,
-      key: "month_8_2026/content/42",
+      key: "2026/08/content/42",
       mimeType: storedMimeType ?? (file.type === "" ? null : file.type),
       name: storedAs ?? file.name,
       size: storedSize ?? file.size,
-      url: "https://cdn.test/month_8_2026/content/42",
+      url: "https://cdn.test/2026/08/content/42",
     });
   });
   const deleteFile = vi.fn().mockResolvedValue(undefined);
@@ -143,7 +143,7 @@ describe("the generated upload route", () => {
       mimeType: "image/gif",
       name: "banner.gif",
       size: 8,
-      url: "https://cdn.test/month_8_2026/content/42",
+      url: "https://cdn.test/2026/08/content/42",
       width: 1600,
     });
     // The field's own ceiling and allowlist reach the adapter too, and the file

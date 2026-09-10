@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import {
-  buildMonthFolder,
+  buildDateFolder,
   buildStorageKey,
   generateStorageFileName,
   getFileExtension,
@@ -11,13 +11,22 @@ import {
   sanitizeFolder,
 } from "./upload";
 
-describe("buildMonthFolder", () => {
-  it("formats as month_{month}_{year} with a 1-based month", () => {
-    expect(buildMonthFolder(new Date(2026, 6, 5))).toBe("month_7_2026");
+describe("buildDateFolder", () => {
+  it("formats as {year}/{month} with a 1-based month", () => {
+    expect(buildDateFolder(new Date(2026, 6, 5))).toBe("2026/07");
   });
 
-  it("uses January as month 1", () => {
-    expect(buildMonthFolder(new Date(2026, 0, 15))).toBe("month_1_2026");
+  it("uses January as month 01", () => {
+    expect(buildDateFolder(new Date(2026, 0, 15))).toBe("2026/01");
+  });
+
+  it("pads the month so it sorts, rather than putting 10 before 9", () => {
+    expect(buildDateFolder(new Date(2026, 8, 30))).toBe("2026/09");
+    expect(buildDateFolder(new Date(2026, 9, 1))).toBe("2026/10");
+  });
+
+  it("keeps the year first, so one year is one folder", () => {
+    expect(buildDateFolder(new Date(2025, 11, 31))).toBe("2025/12");
   });
 });
 
@@ -101,14 +110,24 @@ describe("replaceFileExtension", () => {
 });
 
 describe("buildStorageKey", () => {
-  it("builds month_x_y/{folder}/{fileName}", () => {
+  it("builds {year}/{month}/{folder}/{fileName}", () => {
     expect(
       buildStorageKey({
         folder: "avatars",
         fileName: "abc.png",
         now: new Date(2026, 6, 5),
       }),
-    ).toBe("month_7_2026/avatars/abc.png");
+    ).toBe("2026/07/avatars/abc.png");
+  });
+
+  it("keeps a nested folder under the dated prefix", () => {
+    expect(
+      buildStorageKey({
+        folder: "vitnode-blog/posts",
+        fileName: "abc.webp",
+        now: new Date(2026, 8, 9),
+      }),
+    ).toBe("2026/09/vitnode-blog/posts/abc.webp");
   });
 
   it("rejects an unsafe folder", () => {

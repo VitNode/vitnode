@@ -15,6 +15,7 @@ export type UserHeaderLinkComponent = (
 
 export interface UserHeaderUser {
   avatarColor: string;
+  avatarUrl?: null | string;
   isAdmin: boolean;
   name: string;
   nameCode: string;

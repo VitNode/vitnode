@@ -14,6 +14,14 @@ export interface VitNodeEvents {
   "role.updated": {
     roleId: number;
   };
+  "user.avatar.updated": {
+    fileId: null | number;
+    userId: number;
+  };
+  "user.cover.updated": {
+    fileId: null | number;
+    userId: number;
+  };
   "user.created": {
     email: string;
     emailVerified: boolean;

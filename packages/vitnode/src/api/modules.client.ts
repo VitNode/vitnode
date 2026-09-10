@@ -7,6 +7,7 @@ import type { filesAdminModule as filesAdminModuleType } from "@/api/modules/adm
 import type { middlewareModule as middlewareModuleType } from "@/api/modules/middleware/middleware.module";
 import type { searchModule as searchModuleType } from "@/api/modules/search/search.module";
 import type { userFilesModule as userFilesModuleType } from "@/api/modules/users/files/files.module";
+import type { userImagesModule as userImagesModuleType } from "@/api/modules/users/images/images.module";
 import type { usersModule as usersModuleType } from "@/api/modules/users/users.module";
 
 import { CONFIG_PLUGIN } from "@/config";
@@ -44,6 +45,10 @@ export const searchModule = moduleFor<typeof searchModuleType>(
 );
 
 export const userFilesModule = moduleFor<typeof userFilesModuleType>(
+  CONFIG_PLUGIN.pluginId,
+);
+
+export const userImagesModule = moduleFor<typeof userImagesModuleType>(
   CONFIG_PLUGIN.pluginId,
 );
 

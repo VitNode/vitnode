@@ -1,12 +1,9 @@
 import {
   CheckIcon,
-  ImageIcon,
   LinkIcon,
   MailIcon,
   PencilIcon,
-  Trash2Icon,
   TriangleAlertIcon,
-  UploadIcon,
   XIcon,
 } from "lucide-react";
 import React from "react";
@@ -31,12 +28,6 @@ import {
   DialogTrigger,
   useDialog,
 } from "@/components/ui/dialog";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { TooltipWithContent } from "@/components/ui/tooltip";
 
@@ -182,31 +173,6 @@ export const EditUserFieldContent = ({
         </Button>
       )}
     </div>
-  );
-};
-
-/** The avatar/cover menu. Presentational - uploading is not built yet. */
-export const EditImageButtonContent = ({ label }: { label: string }) => {
-  const t = useTranslations("admin.user.show");
-
-  return (
-    <DropdownMenu>
-      <DropdownMenuTrigger
-        render={<Button aria-label={label} size="icon-sm" variant="outline" />}
-      >
-        <ImageIcon />
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuItem>
-          <UploadIcon />
-          {t("uploadImage")}
-        </DropdownMenuItem>
-        <DropdownMenuItem variant="destructive">
-          <Trash2Icon />
-          {t("removeImage")}
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
   );
 };
 

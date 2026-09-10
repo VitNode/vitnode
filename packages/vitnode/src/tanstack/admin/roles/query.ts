@@ -76,8 +76,12 @@ export const useAdminRoleMutations = (): {
       },
       onSave: async ({ id, values }) => {
         const body = {
+          allowUploadAvatar: values.allowUploadAvatar,
+          allowUploadCover: values.allowUploadCover,
           allowUploadFiles: values.allowUploadFiles,
           color: values.color,
+          maxAvatarSize: values.maxAvatarSize,
+          maxCoverSize: values.maxCoverSize,
           maxStorageForSubmit: values.maxStorageForSubmit,
           name: values.name,
           prefix: values.prefix,

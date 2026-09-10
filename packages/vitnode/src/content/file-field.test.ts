@@ -308,7 +308,7 @@ describe("the public projection", () => {
 
   it("refuses the storage key, the uploader and the metadata bag", () => {
     for (const leak of [
-      { key: "month_8_2026/content/x.webp" },
+      { key: "2026/08/content/x.webp" },
       { userId: 7 },
       { pluginId: "@vitnode/blog" },
       { metadata: { dimensions: { height: 1, width: 1 } } },

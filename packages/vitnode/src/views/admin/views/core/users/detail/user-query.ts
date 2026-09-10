@@ -2,6 +2,7 @@ import { queryOptions } from "@tanstack/react-query";
 
 import type { StaffPermissionSet } from "@/api/lib/permission-staff";
 import type { UniversalFetcher } from "@/lib/fetcher-client";
+import type { UserImagePolicy } from "@/lib/user-images";
 import type { AdminIdentity } from "@/views/admin/views/core/shared/admin-scope";
 import type { AdminUserRole } from "@/views/admin/views/core/users/list/users-query";
 
@@ -31,11 +32,14 @@ export const normalizeAdminUserId = (
 /** The detail screen's user - the list's row, plus what only this route knows. */
 export interface AdminUserDetail {
   avatarColor: string;
+  avatarUrl: null | string;
   birthday: Date | null | string;
+  coverUrl: null | string;
   createdAt: Date | string;
   email: string;
   emailVerified: boolean;
   id: number;
+  imagePolicy: UserImagePolicy;
   /** Whether this user holds administrator access, from the staff tables. */
   isAdmin: boolean;
   language: string;

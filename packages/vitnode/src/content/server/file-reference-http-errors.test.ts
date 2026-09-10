@@ -49,7 +49,9 @@ const PLUGIN_ID = "@vitnode/example";
 
 const adminUser = {
   avatarColor: "000000",
+  avatarUrl: null,
   birthday: null,
+  coverUrl: null,
   createdAt: new Date("2026-01-01T00:00:00.000Z"),
   email: "test@test.com",
   emailVerified: true,

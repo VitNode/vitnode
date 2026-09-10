@@ -10,6 +10,7 @@ import { parseEmojiIcon, serializeEmojiIcon } from "@/lib/emoji-icon";
 
 import { assertCanManageAdminRole } from "../lib/assert-manage-admin-role";
 import {
+  zodRoleImageSizeSchema,
   zodRoleNameSchema,
   zodRolePrefixSchema,
   zodRoleStorageSchema,
@@ -23,6 +24,10 @@ export const zodUpdateRoleAdminSchema = z
     allowUploadFiles: z.boolean(),
     totalMaxStorage: zodRoleStorageSchema,
     maxStorageForSubmit: zodRoleStorageSchema,
+    allowUploadAvatar: z.boolean(),
+    maxAvatarSize: zodRoleImageSizeSchema,
+    allowUploadCover: z.boolean(),
+    maxCoverSize: zodRoleImageSizeSchema,
   })
   .partial()
   .refine(body => Object.values(body).some(value => value !== undefined), {
@@ -112,6 +117,18 @@ export const updateRoleAdminRoute = buildRoute({
     }
     if (body.maxStorageForSubmit !== undefined) {
       values.maxStorageForSubmit = body.maxStorageForSubmit;
+    }
+    if (body.allowUploadAvatar !== undefined) {
+      values.allowUploadAvatar = body.allowUploadAvatar;
+    }
+    if (body.maxAvatarSize !== undefined) {
+      values.maxAvatarSize = body.maxAvatarSize;
+    }
+    if (body.allowUploadCover !== undefined) {
+      values.allowUploadCover = body.allowUploadCover;
+    }
+    if (body.maxCoverSize !== undefined) {
+      values.maxCoverSize = body.maxCoverSize;
     }
 
     await db.update(core_roles).set(values).where(eq(core_roles.id, roleId));

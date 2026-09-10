@@ -15,6 +15,7 @@ import {
   or,
   sql,
 } from "drizzle-orm";
+import { alias } from "drizzle-orm/pg-core";
 
 import type {
   SearchHit,
@@ -23,8 +24,12 @@ import type {
   SearchResult,
 } from "@/api/models/search";
 
+import { storageUrlOf } from "@/api/lib/storage-url";
+import { core_files } from "@/database/files";
 import { core_search_index, resolveSearchTextConfig } from "@/database/search";
 import { core_users } from "@/database/users";
+
+const authorAvatarFile = alias(core_files, "search_author_avatar_file");
 
 const DEFAULT_PAGE_SIZE = 20;
 const MAX_PAGE_SIZE = 100;
@@ -194,9 +199,11 @@ export const PostgresSearchAdapter = (): SearchProviderApiPlugin => ({
           nameCode: core_users.nameCode,
           avatarColor: core_users.avatarColor,
         },
+        authorAvatarKey: authorAvatarFile.key,
       })
       .from(core_search_index)
       .leftJoin(core_users, eq(core_users.id, core_search_index.authorId))
+      .leftJoin(authorAvatarFile, eq(authorAvatarFile.id, core_users.avatarId))
       .where(where)
       .orderBy(...orderBy)
       .limit(size + 1)
@@ -220,7 +227,9 @@ export const PostgresSearchAdapter = (): SearchProviderApiPlugin => ({
       metadata: row.metadata,
       createdAt: row.createdAt,
       score: row.score,
-      author: row.author?.id ? row.author : null,
+      author: row.author?.id
+        ? { ...row.author, avatarUrl: storageUrlOf(c, row.authorAvatarKey) }
+        : null,
     }));
 
     const startCursor = useRelevance ? offset : (edges[0]?.id ?? null);

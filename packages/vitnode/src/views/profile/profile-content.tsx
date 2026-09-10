@@ -1,11 +1,18 @@
 import { CalendarDaysIcon, SparklesIcon } from "lucide-react";
 import { useFormatter, useTranslations } from "use-intl";
 
+import type { UserImageKind } from "@/lib/user-images";
+
 import { Avatar } from "@/components/avatar";
 import { RoleFormatContent } from "@/components/role-format-content";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { UserCoverImage } from "@/components/user-cover-image";
 
+import type { UserImageEditor } from "./images/types";
+import type { UserImageDialogLabels } from "./images/user-image-dialog";
 import type { ProfileRole, UserProfile } from "./profile-query";
+
+import { UserImageDialog } from "./images/user-image-dialog";
 
 const coverStyle = (avatarColor: string): React.CSSProperties => {
   const color = `#${avatarColor}`;
@@ -36,13 +43,81 @@ const SecondaryRoles = ({ roles }: { roles: ProfileRole[] }) => {
   );
 };
 
+const useProfileImageLabels = ({
+  canUpload,
+  hasImage,
+  kind,
+}: {
+  canUpload: boolean;
+  hasImage: boolean;
+  kind: UserImageKind;
+}): UserImageDialogLabels => {
+  const t = useTranslations("core.profile.images");
+  const tKind = useTranslations(`core.profile.images.${kind}`);
+  const tGlobal = useTranslations("core.global");
+
+  return {
+    cancel: tGlobal("cancel"),
+    chooseAction: t("chooseAction"),
+    confirmRemove: t("confirmRemove"),
+    confirmUpload: t("confirmUpload"),
+    desc: hasImage ? tKind("dialogDesc") : tKind("dialogDescEmpty"),
+    remove: tKind("remove"),
+    removeDesc: tKind("removeDesc"),
+    title: tKind("edit"),
+    upload: hasImage ? tKind("change") : tKind("upload"),
+    ...(canUpload ? {} : { uploadDesc: tKind("notAllowed") }),
+  };
+};
+
+const ProfileImageDialog = ({
+  editor,
+  hasImage,
+  kind,
+  size,
+}: {
+  editor: UserImageEditor;
+  hasImage: boolean;
+  kind: UserImageKind;
+  size?: "icon" | "icon-sm";
+}) => {
+  const limit = editor.policy[kind];
+  const labels = useProfileImageLabels({
+    canUpload: limit.allowed,
+    hasImage,
+    kind,
+  });
+
+  return (
+    <UserImageDialog
+      canUpload={limit.allowed}
+      hasImage={hasImage}
+      kind={kind}
+      labels={labels}
+      maxBytes={limit.maxBytes}
+      onRemove={async () => {
+        await editor.onRemove(kind);
+      }}
+      onUpload={async file => {
+        await editor.onUpload(kind, file);
+      }}
+      size={size}
+    />
+  );
+};
+
 export interface ProfileContentProps {
   /** Rendered beside the About card on large screens - a feed, posts, anything the host adds. */
   children?: React.ReactNode;
+  editor?: UserImageEditor;
   user: UserProfile;
 }
 
-export const ProfileContent = ({ children, user }: ProfileContentProps) => {
+export const ProfileContent = ({
+  children,
+  editor,
+  user,
+}: ProfileContentProps) => {
   const t = useTranslations("core.profile");
   const format = useFormatter();
   const joinedAt = new Date(user.createdAt);
@@ -57,19 +132,42 @@ export const ProfileContent = ({ children, user }: ProfileContentProps) => {
     <div className="container mx-auto flex flex-col gap-4 p-4 sm:gap-6">
       <Card className="gap-2 pt-0">
         <div
-          aria-hidden="true"
-          className="bg-muted h-32 w-full sm:h-40 md:h-48"
+          className="bg-muted relative h-32 w-full sm:h-40 md:h-48"
           data-slot="profile-cover"
           style={coverStyle(user.avatarColor)}
-        />
+        >
+          <UserCoverImage fetchPriority="high" url={user.coverUrl} />
+
+          {editor ? (
+            <div className="absolute inset-e-3 top-3">
+              <ProfileImageDialog
+                editor={editor}
+                hasImage={user.coverUrl !== null}
+                kind="cover"
+              />
+            </div>
+          ) : null}
+        </div>
 
         <CardContent className="flex flex-col gap-4">
           <div className="flex flex-col items-center gap-3 text-center sm:flex-row sm:items-end sm:gap-6 sm:text-start">
-            <Avatar
-              className="border-card -mt-16 size-24 shrink-0 border-4 sm:-mt-20 sm:size-32"
-              size={128}
-              user={user}
-            />
+            <div className="relative -mt-16 shrink-0 sm:-mt-20">
+              <Avatar
+                className="border-card size-24 border-4 sm:size-32"
+                loading="eager"
+                size={128}
+                user={user}
+              />
+              {editor ? (
+                <div className="absolute inset-e-0 bottom-0">
+                  <ProfileImageDialog
+                    editor={editor}
+                    hasImage={user.avatarUrl !== null}
+                    kind="avatar"
+                  />
+                </div>
+              ) : null}
+            </div>
 
             <div className="flex max-w-full min-w-0 flex-col items-center gap-1 sm:items-start sm:pb-2">
               <div className="flex max-w-full min-w-0 flex-wrap items-baseline justify-center gap-x-4 sm:justify-start">

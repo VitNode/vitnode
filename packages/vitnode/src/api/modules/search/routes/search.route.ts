@@ -35,6 +35,7 @@ export const zodSearchHitSchema = z.object({
       name: z.string(),
       nameCode: z.string(),
       avatarColor: z.string(),
+      avatarUrl: z.string().nullable(),
     })
     .nullable(),
 });

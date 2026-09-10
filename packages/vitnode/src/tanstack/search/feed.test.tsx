@@ -24,7 +24,13 @@ const { searchFeedQueryKey, searchFeedQueryOptions } =
   await import("@/views/search/search-feed-query");
 
 const item = (id: number): SearchResultItem => ({
-  author: { avatarColor: "ff0000", id: 1, name: "Ada", nameCode: "ada" },
+  author: {
+    avatarColor: "ff0000",
+    avatarUrl: null,
+    id: 1,
+    name: "Ada",
+    nameCode: "ada",
+  },
   authorId: 1,
   containerId: null,
   containerType: null,

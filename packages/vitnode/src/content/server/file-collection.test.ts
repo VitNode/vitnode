@@ -28,7 +28,7 @@ const fileRow = (
   }> = {},
 ) => ({
   id,
-  key: `month_8_2026/content/${id}.webp`,
+  key: `2026/08/content/${id}.webp`,
   metadata: {},
   mimeType: "image/webp",
   name: `photo-${id}.webp`,

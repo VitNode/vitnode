@@ -33,7 +33,7 @@ const fileRow = (
   }> = {},
 ) => ({
   id,
-  key: `month_8_2026/content/${id}.webp`,
+  key: `2026/08/content/${id}.webp`,
   metadata: {},
   mimeType: "image/webp",
   name: `cover-${id}.webp`,
@@ -119,7 +119,7 @@ describe("resolveContentFileDescriptors", () => {
       mimeType: "image/webp",
       name: "cover-1.webp",
       size: 1024,
-      url: "https://cdn.test/month_8_2026/content/1.webp",
+      url: "https://cdn.test/2026/08/content/1.webp",
       width: 1600,
     });
     // The key was read to build the URL and then dropped; the metadata bag never

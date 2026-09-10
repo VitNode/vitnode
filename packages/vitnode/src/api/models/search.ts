@@ -1,10 +1,15 @@
 import type { Context } from "hono";
 
 import { and, eq, inArray } from "drizzle-orm";
+import { alias } from "drizzle-orm/pg-core";
 
+import { storageUrlOf } from "@/api/lib/storage-url";
+import { core_files } from "@/database/files";
 import { core_search_index } from "@/database/search";
 import { core_users } from "@/database/users";
 import { stripHtml } from "@/lib/strip-html";
+
+const authorAvatarFile = alias(core_files, "search_author_avatar_file");
 
 export interface SearchDocument {
   authorId?: null | number;
@@ -47,6 +52,7 @@ export interface SearchQueryParams {
 
 export interface SearchHitAuthor {
   avatarColor: string;
+  avatarUrl: null | string;
   id: number;
   name: string;
   nameCode: string;
@@ -284,11 +290,18 @@ export class SearchModel {
         name: core_users.name,
         nameCode: core_users.nameCode,
         avatarColor: core_users.avatarColor,
+        avatarKey: authorAvatarFile.key,
       })
       .from(core_users)
+      .leftJoin(authorAvatarFile, eq(authorAvatarFile.id, core_users.avatarId))
       .where(inArray(core_users.id, missing));
 
-    const byId = new Map(rows.map(row => [row.id, row]));
+    const byId = new Map(
+      rows.map(({ avatarKey, ...row }) => [
+        row.id,
+        { ...row, avatarUrl: storageUrlOf(this.c, avatarKey) },
+      ]),
+    );
 
     return edges.map(edge =>
       edge.author || !edge.authorId

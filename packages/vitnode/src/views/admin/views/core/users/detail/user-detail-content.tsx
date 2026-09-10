@@ -9,23 +9,30 @@ import { DateFormat } from "@/components/date-format";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { UserCoverImage } from "@/components/user-cover-image";
 
 import type { UpdateAdminUser } from "./user-fields-content";
+import type {
+  RemoveAdminUserImage,
+  UploadAdminUserImage,
+} from "./user-images-content";
 import type { AdminUserDetail } from "./user-query";
 import type { UpdateAdminUserRoles } from "./user-roles-content";
 
 import {
-  EditImageButtonContent,
   EditNameCodeContent,
   EditUserFieldContent,
 } from "./user-fields-content";
+import { AdminUserImageDialog } from "./user-images-content";
 import { UserRolesCardContent } from "./user-roles-content";
 
 export interface UserDetailProps {
   canEdit: boolean;
   LinkComponent: AuthLinkComponent;
+  onRemoveImage: RemoveAdminUserImage;
   onUpdate: UpdateAdminUser;
   onUpdateRoles: UpdateAdminUserRoles;
+  onUploadImage: UploadAdminUserImage;
   searchRoles: AdminRoleSearch;
   timeline: React.ReactNode;
   user: AdminUserDetail;
@@ -34,8 +41,10 @@ export interface UserDetailProps {
 export const UserDetailContent = ({
   canEdit,
   LinkComponent,
+  onRemoveImage,
   onUpdate,
   onUpdateRoles,
+  onUploadImage,
   searchRoles,
   timeline,
   user,
@@ -58,10 +67,20 @@ export const UserDetailContent = ({
         <div className="flex w-full flex-col gap-4">
           <Card className="w-full overflow-hidden pt-0">
             <div className="from-primary/30 to-primary/5 relative h-44 w-full bg-linear-to-br">
-              <span className="sr-only">{t("coverPlaceholder")}</span>
+              <UserCoverImage url={user.coverUrl} />
+              {user.coverUrl ? null : (
+                <span className="sr-only">{t("coverPlaceholder")}</span>
+              )}
               {canEdit && (
                 <div className="absolute inset-e-3 top-3">
-                  <EditImageButtonContent label={t("editCover")} />
+                  <AdminUserImageDialog
+                    hasImage={user.coverUrl !== null}
+                    id={user.id}
+                    kind="cover"
+                    limit={user.imagePolicy.cover}
+                    onRemove={onRemoveImage}
+                    onUpload={onUploadImage}
+                  />
                 </div>
               )}
             </div>
@@ -71,12 +90,20 @@ export const UserDetailContent = ({
                 <div className="relative">
                   <Avatar
                     className="border-card size-32 border-4"
+                    loading="eager"
                     size={128}
                     user={user}
                   />
                   {canEdit && (
-                    <div className="absolute inset-e-0 bottom-0 translate-y-1/4">
-                      <EditImageButtonContent label={t("editAvatar")} />
+                    <div className="absolute inset-e-0 bottom-0">
+                      <AdminUserImageDialog
+                        hasImage={user.avatarUrl !== null}
+                        id={user.id}
+                        kind="avatar"
+                        limit={user.imagePolicy.avatar}
+                        onRemove={onRemoveImage}
+                        onUpload={onUploadImage}
+                      />
                     </div>
                   )}
                 </div>

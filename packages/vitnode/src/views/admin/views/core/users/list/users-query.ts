@@ -95,6 +95,7 @@ export interface AdminUserRole {
 
 export interface AdminUserRow {
   avatarColor: string;
+  avatarUrl: null | string;
   birthday: Date | null | string;
   createdAt: Date | string;
   email: string;

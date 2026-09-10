@@ -1,4 +1,6 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
+import { toast } from "sonner";
+import { useTranslations } from "use-intl";
 
 import type { AuthLinkComponent } from "@/views/auth/auth-link";
 import type { SearchFeedLinkComponent } from "@/views/search/search-feed-content";
@@ -39,35 +41,53 @@ const UserTimeline = ({
   />
 );
 
-export const AdminUserRouteContent = ({
+const AdminUserScreen = ({
   adminUserId,
   id,
   LinkComponent,
   locale,
 }: AdminUserRouteProps) => {
+  const t = useTranslations("admin.user.show.images");
   const { data: user } = useSuspenseQuery(adminUserQuery({ adminUserId, id }));
-  const { onUpdate, onUpdateRoles } = useAdminUserMutations();
+  const { onRemoveImage, onUpdate, onUpdateRoles, onUploadImage } =
+    useAdminUserMutations();
   const permissions = useAdminStaffPermissions();
 
   return (
-    <RouteMessages namespaces={ADMIN_USER_NAMESPACES}>
-      <div className="p-4">
-        <UserDetailContent
-          canEdit={canEditAdminUser(permissions, { isAdmin: user.isAdmin })}
-          LinkComponent={LinkComponent}
-          onUpdate={onUpdate}
-          onUpdateRoles={onUpdateRoles}
-          searchRoles={searchAdminRolesInBrowser}
-          timeline={
-            <UserTimeline
-              LinkComponent={LinkComponent}
-              locale={locale}
-              userId={user.id}
-            />
-          }
-          user={user}
-        />
-      </div>
-    </RouteMessages>
+    <div className="p-4">
+      <UserDetailContent
+        canEdit={canEditAdminUser(permissions, { isAdmin: user.isAdmin })}
+        LinkComponent={LinkComponent}
+        onRemoveImage={async (userId, kind) => {
+          await onRemoveImage(userId, kind);
+          toast.success(t(`${kind}.removed`), {
+            description: t("removedDesc"),
+          });
+        }}
+        onUpdate={onUpdate}
+        onUpdateRoles={onUpdateRoles}
+        onUploadImage={async (userId, kind, file) => {
+          await onUploadImage(userId, kind, file);
+          toast.success(t(`${kind}.uploaded`), {
+            description: t("uploadedDesc"),
+          });
+        }}
+        searchRoles={searchAdminRolesInBrowser}
+        timeline={
+          <UserTimeline
+            LinkComponent={LinkComponent}
+            locale={locale}
+            userId={user.id}
+          />
+        }
+        user={user}
+      />
+    </div>
   );
 };
+
+export const AdminUserRouteContent = (props: AdminUserRouteProps) => (
+  <RouteMessages namespaces={ADMIN_USER_NAMESPACES}>
+    <AdminUserScreen {...props} />
+  </RouteMessages>
+);
