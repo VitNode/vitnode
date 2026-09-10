@@ -82,7 +82,9 @@ export const UserImageDialogContent = ({
   onUpload,
 }: UserImageDialogContentProps) => {
   const { setIsDirty, setOpen } = useDialog();
-  const [action, setAction] = React.useState<UserImageAction>("upload");
+  const [action, setAction] = React.useState<UserImageAction>(
+    canUpload ? "upload" : "remove",
+  );
   const output = USER_IMAGE_OUTPUT[kind];
   const constraints = {
     allowedMimeTypes: USER_IMAGE_MIME_TYPES,

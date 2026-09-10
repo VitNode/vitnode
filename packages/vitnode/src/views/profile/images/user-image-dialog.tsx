@@ -42,33 +42,44 @@ export interface UserImageDialogProps extends Omit<
 }
 
 export const UserImageDialog = ({
+  canUpload,
+  hasImage,
   labels,
   size = "icon-sm",
   ...content
-}: UserImageDialogProps) => (
-  <Dialog>
-    <DialogTrigger
-      render={
-        <Button
-          aria-label={labels.title}
-          className="bg-card text-foreground hover:bg-muted dark:bg-card dark:hover:bg-muted border-border shadow-sm"
-          size={size}
-          variant="outline"
-        />
-      }
-    >
-      <CameraIcon />
-    </DialogTrigger>
+}: UserImageDialogProps) => {
+  if (!canUpload && !hasImage) return null;
 
-    <DialogContent className="sm:max-w-lg">
-      <DialogHeader>
-        <DialogTitle>{labels.title}</DialogTitle>
-        <DialogDescription>{labels.desc}</DialogDescription>
-      </DialogHeader>
+  return (
+    <Dialog>
+      <DialogTrigger
+        render={
+          <Button
+            aria-label={labels.title}
+            className="bg-card text-foreground hover:bg-muted dark:bg-card dark:hover:bg-muted border-border shadow-sm"
+            size={size}
+            variant="outline"
+          />
+        }
+      >
+        <CameraIcon />
+      </DialogTrigger>
 
-      <React.Suspense fallback={<UserImageDialogSkeleton />}>
-        <UserImageDialogContent labels={labels} {...content} />
-      </React.Suspense>
-    </DialogContent>
-  </Dialog>
-);
+      <DialogContent className="sm:max-w-lg">
+        <DialogHeader>
+          <DialogTitle>{labels.title}</DialogTitle>
+          <DialogDescription>{labels.desc}</DialogDescription>
+        </DialogHeader>
+
+        <React.Suspense fallback={<UserImageDialogSkeleton />}>
+          <UserImageDialogContent
+            canUpload={canUpload}
+            hasImage={hasImage}
+            labels={labels}
+            {...content}
+          />
+        </React.Suspense>
+      </DialogContent>
+    </Dialog>
+  );
+};
