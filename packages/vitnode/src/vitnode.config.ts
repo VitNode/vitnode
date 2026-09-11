@@ -128,6 +128,8 @@ export interface VitNodeApiConfig {
   };
 }
 
+const DEFAULT_TIME_ZONE = "UTC";
+
 let registeredVitNodeConfig: undefined | VitNodeConfig;
 
 export function buildConfig<const AppLocales extends LocaleConfig[]>(
@@ -138,6 +140,7 @@ export function buildConfig<const AppLocales extends LocaleConfig[]>(
     i18n: {
       ...args.i18n,
       localePrefix: args.i18n.localePrefix ?? "as-needed",
+      timeZone: args.i18n.timeZone ?? DEFAULT_TIME_ZONE,
     },
   };
 

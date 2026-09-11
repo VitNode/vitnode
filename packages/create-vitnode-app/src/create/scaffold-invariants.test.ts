@@ -159,6 +159,12 @@ describe("what a generated single app starts from", () => {
     ).toMatch(/i18n:\s*vitNodeConfig\.i18n/);
   });
 
+  it("declares the time zone both runtimes format dates in", () => {
+    expect(
+      withoutComments(read(appTemplate, "root/src/vitnode.config.ts")),
+    ).toMatch(/timeZone:\s*"/);
+  });
+
   /**
    * The split shape has the same obligation, one declaration each: two packages,
    * so neither can import the other's, and the API's is the one the seed reads.

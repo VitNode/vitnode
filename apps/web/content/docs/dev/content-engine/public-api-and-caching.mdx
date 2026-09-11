@@ -72,10 +72,11 @@ export const blogApiPlugin = () =>
 ```
 
 The module exposes two public endpoints:
+
 - `GET /api/{pluginId}/{path}`: Lists published records with cursor pagination, optional `search`, equality `filters`, and `orderBy`.
 - `GET /api/{pluginId}/{path}/{slug}`: Retrieves a single published record resolved by its public slug.
 
-  </Step>
+</Step>
   <Step>
 
 ### Only configure revalidation when a front end caches renders
