@@ -3,10 +3,9 @@ import type { AdminUserSearch } from "@vitnode/core/tanstack/admin";
 import { AdminShellContent } from "@vitnode/core/tanstack/admin";
 import { LanguageSwitcher } from "@vitnode/core/tanstack/layout";
 
-import { adminNav } from "#/lib/admin-nav";
-import { adminUserSearchFn } from "#/lib/admin-search";
-import { useAppNavigate } from "#/lib/navigation";
-
+import { adminNav } from "@/lib/admin-nav";
+import { adminUserSearchFn } from "@/lib/admin-search";
+import { useAppNavigate } from "@/lib/navigation";
 
 const searchUsers: AdminUserSearch = async search =>
   await adminUserSearchFn({ data: { search } });
