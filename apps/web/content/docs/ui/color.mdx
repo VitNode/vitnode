@@ -1,6 +1,6 @@
 ---
 title: Color
-description: Color picker field with an oklch preset palette and a free-form picker that stores oklch too.
+description: Color picker field with a preset palette and a free-form picker, both storing HSL.
 ---
 
 ## Preview
@@ -60,7 +60,7 @@ const [color, setColor] = useState('hsl(240, 80%, 60%)')
 
 The popover opens with a grid of preset swatches - eight hues (gray, red,
 orange, yellow, green, teal, blue and purple) in three tones each. Click one and
-the field stores it as an oklch string, for example `oklch(0.58 0.19 258)`. The
+the field stores it as an HSL string, for example `hsl(215, 81%, 52%)`. The
 swatches form a single radio group, so arrow keys move between them and the
 selected one shows a check mark.
 
@@ -68,10 +68,10 @@ The first swatch is the default, and it carries no color of its own. It renders
 in the current theme's text color and stores an empty value, which is how you
 say "no color" without leaving the palette.
 
-The presets are written in oklch, like the rest of the theme tokens, which is
-what makes the three tone rows perceptually even instead of merely numerically
-even. Every tone keeps at least a 3:1 contrast ratio against both the light and
-the dark theme background, so a color chosen by an author in one theme stays
+The three tone rows were picked in OKLCH, so they step evenly to the eye rather
+than just on paper, and then written out as HSL - the format the picker itself
+speaks. Every tone keeps at least a 3:1 contrast ratio against both the light
+and the dark theme background, so a color chosen by an author in one theme stays
 readable for a reader in the other. A unit test enforces that, so keep it in
 mind if you fork the palette.
 
@@ -87,12 +87,12 @@ import { ColorPresetPicker } from '@vitnode/core/components/ui/color-preset-pick
 ```
 
 <Callout type="info" title="Output format">
-  Both the presets and the free-form picker store an oklch string such as
-  `oklch(0.58 0.19 258)`, and the two stay in sync - click a preset and the
+  Both the presets and the free-form picker store an HSL string such as
+  `hsl(215, 81%, 52%)`, and the two stay in sync - click a preset and the
   picker's handle moves onto that color. The text field below takes any CSS
   color you paste into it, so the stored value is whatever you type there. Hex,
-  `rgb(...)`, `hsl(...)` and oklch all show up on the picker; anything else
-  leaves it parked on black until you drag it. The picker is powered by
+  `rgb(...)`, `hsl(...)` and `oklch(...)` all show up on the picker; anything
+  else leaves it parked on black until you drag it. The picker is powered by
   [react-colorful](https://github.com/omgovich/react-colorful) and is
   lazy-loaded, so its bundle only ships once the popover is opened.
 </Callout>

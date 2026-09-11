@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { colorContrastRatio } from "@/lib/colors";
+import { colorContrastRatio, colorToHslString } from "@/lib/colors";
 
 import {
   COLOR_PRESET_ROWS,
@@ -14,6 +14,7 @@ import {
 
 const LIGHT_THEME_BACKGROUND = "oklch(1 0 0)";
 const DARK_THEME_BACKGROUND = "oklch(0.163 0.009 264)";
+const PICKER_FORMAT = /^hsl\(\d+, \d+%, \d+%\)$/;
 const MINIMUM_CONTRAST = 3;
 
 const COLORED_PRESETS = COLOR_PRESETS.filter(preset => preset.value);
@@ -37,7 +38,7 @@ describe("color presets", () => {
     expect(new Set(values).size).toBe(values.length);
     expect(new Set(ids).size).toBe(ids.length);
     for (const value of values) {
-      expect(value).toMatch(/^oklch\(0\.\d+ 0\.\d+ \d+\)$/);
+      expect(value).toMatch(PICKER_FORMAT);
     }
   });
 
@@ -54,8 +55,8 @@ describe("color presets", () => {
   it("keeps the check mark readable on every swatch", () => {
     for (const preset of COLORED_PRESETS) {
       const checkMark = prefersDarkCheckMark(preset.value)
-        ? "oklch(0.13 0.028 262)"
-        : "oklch(1 0 0)";
+        ? "hsl(224, 71%, 4%)"
+        : "hsl(0, 0%, 100%)";
 
       expect(
         colorContrastRatio(preset.value, checkMark),
@@ -64,21 +65,27 @@ describe("color presets", () => {
     }
   });
 
+  it("writes colors in the format the free-form picker emits", () => {
+    for (const preset of COLORED_PRESETS) {
+      expect(colorToHslString(preset.value), preset.id).toBe(preset.value);
+    }
+  });
+
   it("matches a preset regardless of casing and spacing", () => {
-    expect(findColorPreset(" OKLCH(0.58  0.19 258) ")?.id).toBe("blue");
-    expect(findColorPreset("oklch(0.58 0.19 258)")?.id).toBe("blue");
+    expect(findColorPreset(" HSL(215,  81%, 52%) ")?.id).toBe("blue");
+    expect(findColorPreset("hsl(215, 81%, 52%)")?.id).toBe("blue");
     expect(findColorPreset("")?.id).toBe("default");
     expect(findColorPreset("hsl(240, 80%, 60%)")).toBeUndefined();
   });
 
   it("maps a color to the swatch that owns it", () => {
-    expect(getColorPresetId("oklch(0.597 0.19 25)")).toBe("red");
+    expect(getColorPresetId("hsl(0, 67%, 55%)")).toBe("red");
     expect(getColorPresetId("")).toBe("default");
     expect(getColorPresetId("hsl(240, 80%, 60%)")).toBeNull();
   });
 
   it("maps a swatch back to the color it stores", () => {
-    expect(getColorPresetValue("dark_teal")).toBe("oklch(0.492 0.084 205)");
+    expect(getColorPresetValue("dark_teal")).toBe("hsl(185, 100%, 24%)");
     expect(getColorPresetValue("default")).toBe("");
     expect(getColorPresetValue("not_a_preset")).toBe("");
   });

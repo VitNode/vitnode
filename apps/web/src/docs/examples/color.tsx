@@ -4,7 +4,7 @@ import { z } from 'zod'
 
 export default function ColorExample() {
   const formSchema = z.object({
-    color: z.string().default('oklch(0.58 0.19 258)'),
+    color: z.string().default('hsl(215, 81%, 52%)'),
   })
 
   return (
@@ -14,7 +14,7 @@ export default function ColorExample() {
           id: 'color',
           component: (props) => (
             <AutoFormColor
-              description="Pick a color. The value is stored as an oklch string."
+              description="Pick a color. The value is stored as an HSL string."
               label="Color"
               {...props}
             />

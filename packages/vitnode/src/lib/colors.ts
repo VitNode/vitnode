@@ -296,8 +296,11 @@ export const getStringFromHSL = ({ h, l, s }: HslColor): string => {
   return `hsl(${h}, ${s}%, ${l}%)`;
 };
 
+export const normalizeColorString = (value: string): string =>
+  value.trim().toLowerCase().replace(/\s+/g, " ");
+
 export const getOklchFromString = (value: string): null | OklchColor => {
-  const parsed = oklchRegex.exec(value.trim().replace(/\s+/g, " "));
+  const parsed = oklchRegex.exec(normalizeColorString(value));
   if (!parsed) return null;
 
   const [, lightness, lightnessUnit, chroma, chromaUnit, hue] = parsed;
@@ -313,7 +316,7 @@ export const getStringFromOklch = ({ c, h, l }: OklchColor): string =>
   `oklch(${l} ${c} ${h})`;
 
 export const colorToHex = (value: string): string | undefined => {
-  const color = value.trim().replace(/\s+/g, " ");
+  const color = normalizeColorString(value);
   const channels = getRgbChannelsFromHex(color);
   if (channels) {
     return `#${channels.map(channel => channel.toString(16).padStart(2, "0")).join("")}`;
@@ -334,6 +337,17 @@ export const colorToHex = (value: string): string | undefined => {
   }
 
   return undefined;
+};
+
+export const colorToHslString = (value: string): string | undefined => {
+  const color = normalizeColorString(value);
+  const hsl = getHSLFromString(color);
+  if (hsl) return getStringFromHSL(hsl);
+
+  const hex = colorToHex(color);
+  const converted = hex ? convertColor.hexToHSL(hex) : undefined;
+
+  return converted ? getStringFromHSL(converted) : undefined;
 };
 
 export const colorLuminance = (value: string): number | undefined => {

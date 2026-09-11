@@ -7,6 +7,7 @@ import {
   colorContrastRatio,
   colorLuminance,
   colorToHex,
+  colorToHslString,
   convertColor,
   getHSLFromString,
   getOklchFromString,
@@ -239,6 +240,26 @@ describe("colorToHex", () => {
   it("returns nothing for a color it cannot read", () => {
     expect(colorToHex("")).toBeUndefined();
     expect(colorToHex("rebeccapurple")).toBeUndefined();
+  });
+});
+
+describe("colorToHslString", () => {
+  it("passes an hsl string through untouched", () => {
+    expect(colorToHslString("hsl(215, 81%, 52%)")).toBe("hsl(215, 81%, 52%)");
+    expect(colorToHslString(" HSL(215,  81%, 52%) ")).toBe(
+      "hsl(215, 81%, 52%)",
+    );
+  });
+
+  it("converts the other formats it can read", () => {
+    expect(colorToHslString("#ff0000")).toBe("hsl(0, 100%, 50%)");
+    expect(colorToHslString("oklch(0.58 0.19 258)")).toBe("hsl(215, 81%, 52%)");
+    expect(colorToHslString("rgb(255, 0, 0)")).toBe("hsl(0, 100%, 50%)");
+  });
+
+  it("returns nothing for a color it cannot read", () => {
+    expect(colorToHslString("")).toBeUndefined();
+    expect(colorToHslString("rebeccapurple")).toBeUndefined();
   });
 });
 

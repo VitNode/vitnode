@@ -3,7 +3,7 @@ import { XIcon } from "lucide-react";
 import React from "react";
 import { useTranslations } from "use-intl";
 
-import { colorToHex, convertColor, getStringFromOklch } from "@/lib/colors";
+import { colorToHslString } from "@/lib/colors";
 
 import { Button } from "./button";
 import { ColorPresetPicker } from "./color-preset-picker";
@@ -12,11 +12,11 @@ import { Loader } from "./loader";
 import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 
 // react-colorful only ships in the bundle once the picker is actually opened.
-const HexColorPicker = React.lazy(async () => ({
-  default: (await import("react-colorful")).HexColorPicker,
+const HslStringColorPicker = React.lazy(async () => ({
+  default: (await import("react-colorful")).HslStringColorPicker,
 }));
 
-const FALLBACK_PICKER_COLOR = "#000000";
+const FALLBACK_PICKER_COLOR = "hsl(0, 0%, 0%)";
 
 export const ColorPicker = ({
   value = "",
@@ -63,20 +63,16 @@ export const ColorPicker = ({
             </div>
           }
         >
-          <HexColorPicker
-            color={colorToHex(value) ?? FALLBACK_PICKER_COLOR}
-            onChange={hex => {
-              const oklch = convertColor.hexToOklch(hex);
-
-              onChange?.(oklch ? getStringFromOklch(oklch) : hex);
-            }}
+          <HslStringColorPicker
+            color={colorToHslString(value) ?? FALLBACK_PICKER_COLOR}
+            onChange={onChange}
           />
         </React.Suspense>
 
         <Input
           className="w-full"
           onChange={event => onChange?.(event.target.value)}
-          placeholder={placeholder ?? "oklch(0.58 0.19 258)"}
+          placeholder={placeholder ?? "hsl(215, 81%, 52%)"}
           value={value}
         />
 
