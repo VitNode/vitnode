@@ -163,7 +163,7 @@
         },
         "color": {
           "label": "Kolor tekstu",
-          "reset": "Resetuj kolor"
+          "remove": "Usuń kolor"
         },
         "emoji": {
           "label": "Emoji",
@@ -240,6 +240,33 @@
       "select_options": "Wybierz opcje",
       "select_language": "Wybierz język",
       "pick_color": "Wybierz kolor",
+      "color_presets": {
+        "label": "Predefiniowane kolory",
+        "default": "Domyślny",
+        "light_red": "Jasnoczerwony",
+        "light_orange": "Jasnopomarańczowy",
+        "light_yellow": "Jasnożółty",
+        "light_green": "Jasnozielony",
+        "light_teal": "Jasnomorski",
+        "light_blue": "Jasnoniebieski",
+        "light_purple": "Jasnofioletowy",
+        "gray": "Szary",
+        "red": "Czerwony",
+        "orange": "Pomarańczowy",
+        "yellow": "Żółty",
+        "green": "Zielony",
+        "teal": "Morski",
+        "blue": "Niebieski",
+        "purple": "Fioletowy",
+        "dark_gray": "Ciemnoszary",
+        "dark_red": "Ciemnoczerwony",
+        "dark_orange": "Ciemnopomarańczowy",
+        "dark_yellow": "Ciemnożółty",
+        "dark_green": "Ciemnozielony",
+        "dark_teal": "Ciemnomorski",
+        "dark_blue": "Ciemnoniebieski",
+        "dark_purple": "Ciemnofioletowy"
+      },
       "emoji_icon_picker": {
         "placeholder": "Wybierz emoji lub ikonę",
         "emoji": "Emoji",

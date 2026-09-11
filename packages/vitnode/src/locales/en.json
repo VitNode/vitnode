@@ -176,7 +176,7 @@
         },
         "color": {
           "label": "Text color",
-          "reset": "Reset color"
+          "remove": "Remove color"
         },
         "emoji": {
           "label": "Emoji",
@@ -253,6 +253,33 @@
       "select_options": "Select options",
       "select_language": "Select language",
       "pick_color": "Pick a color",
+      "color_presets": {
+        "label": "Preset colors",
+        "default": "Default",
+        "light_red": "Light red",
+        "light_orange": "Light orange",
+        "light_yellow": "Light yellow",
+        "light_green": "Light green",
+        "light_teal": "Light teal",
+        "light_blue": "Light blue",
+        "light_purple": "Light purple",
+        "gray": "Gray",
+        "red": "Red",
+        "orange": "Orange",
+        "yellow": "Yellow",
+        "green": "Green",
+        "teal": "Teal",
+        "blue": "Blue",
+        "purple": "Purple",
+        "dark_gray": "Dark gray",
+        "dark_red": "Dark red",
+        "dark_orange": "Dark orange",
+        "dark_yellow": "Dark yellow",
+        "dark_green": "Dark green",
+        "dark_teal": "Dark teal",
+        "dark_blue": "Dark blue",
+        "dark_purple": "Dark purple"
+      },
       "emoji_icon_picker": {
         "placeholder": "Pick an emoji or icon",
         "emoji": "Emoji",

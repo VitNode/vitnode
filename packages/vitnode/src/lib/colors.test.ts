@@ -4,9 +4,15 @@ import type { HslColor } from "./colors";
 
 import {
   checkColorType,
+  colorContrastRatio,
+  colorLuminance,
+  colorToHex,
+  colorToHslString,
   convertColor,
   getHSLFromString,
+  getOklchFromString,
   getStringFromHSL,
+  getStringFromOklch,
 } from "./colors";
 
 describe("convertColor", () => {
@@ -148,5 +154,125 @@ describe("getStringFromHSL", () => {
     expect(getStringFromHSL({ h: 240, s: 50, l: 30 })).toBe(
       "hsl(240, 50%, 30%)",
     );
+  });
+});
+
+describe("oklch", () => {
+  const ROUND_TRIP_SAMPLES = [
+    "#000000",
+    "#ffffff",
+    "#808080",
+    "#ff0000",
+    "#00ff00",
+    "#0000ff",
+    "#2275e8",
+    "#f75c59",
+    "#0c0e12",
+    "#3da354",
+    "#863fc4",
+    "#aa8e2e",
+  ];
+
+  it("survives a hex round trip without drifting", () => {
+    for (const hex of ROUND_TRIP_SAMPLES) {
+      const oklch = convertColor.hexToOklch(hex);
+      if (!oklch) throw new Error(`${hex} could not be read as oklch`);
+
+      expect(`#${convertColor.oklchToHex(oklch)}`, hex).toBe(hex);
+    }
+  });
+
+  it("converts a known color both ways", () => {
+    expect(convertColor.oklchToHex({ l: 0.58, c: 0.19, h: 258 })).toBe(
+      "2275e8",
+    );
+    expect(convertColor.hexToOklch("#ffffff")).toEqual({ l: 1, c: 0, h: 0 });
+    expect(convertColor.hexToOklch("#000000")).toEqual({ l: 0, c: 0, h: 0 });
+  });
+
+  it("clamps colors that fall outside the sRGB gamut", () => {
+    expect(convertColor.oklchToHex({ l: 0.7, c: 0.4, h: 145 })).toMatch(
+      /^[0-9a-f]{6}$/,
+    );
+  });
+
+  it("rejects a hex string it cannot read", () => {
+    expect(convertColor.hexToOklch("nope")).toBeUndefined();
+    expect(convertColor.hexToOklch("#12345")).toBeUndefined();
+  });
+
+  it("parses oklch strings, with or without units", () => {
+    expect(getOklchFromString("oklch(0.58 0.19 258)")).toEqual({
+      l: 0.58,
+      c: 0.19,
+      h: 258,
+    });
+    expect(getOklchFromString("  OKLCH(58%  0.19  258deg) ")).toEqual({
+      l: 0.58,
+      c: 0.19,
+      h: 258,
+    });
+    expect(getOklchFromString("hsl(240, 80%, 60%)")).toBeNull();
+  });
+
+  it("formats an oklch color object", () => {
+    expect(getStringFromOklch({ l: 0.58, c: 0.19, h: 258 })).toBe(
+      "oklch(0.58 0.19 258)",
+    );
+  });
+
+  it("reports oklch as its own color type", () => {
+    expect(checkColorType("oklch(0.58 0.19 258)")).toBe("oklch");
+    expect(checkColorType("#2275e8")).toBe("hex");
+  });
+});
+
+describe("colorToHex", () => {
+  it("reads every format the color picker can hold", () => {
+    expect(colorToHex("#2275e8")).toBe("#2275e8");
+    expect(colorToHex("#abc")).toBe("#aabbcc");
+    expect(colorToHex("oklch(0.58 0.19 258)")).toBe("#2275e8");
+    expect(colorToHex("hsl(0, 100%, 50%)")).toBe("#ff0000");
+    expect(colorToHex("rgb(255, 0, 0)")).toBe("#ff0000");
+    expect(colorToHex("rgb(0 128 255)")).toBe("#0080ff");
+  });
+
+  it("returns nothing for a color it cannot read", () => {
+    expect(colorToHex("")).toBeUndefined();
+    expect(colorToHex("rebeccapurple")).toBeUndefined();
+  });
+});
+
+describe("colorToHslString", () => {
+  it("passes an hsl string through untouched", () => {
+    expect(colorToHslString("hsl(215, 81%, 52%)")).toBe("hsl(215, 81%, 52%)");
+    expect(colorToHslString(" HSL(215,  81%, 52%) ")).toBe(
+      "hsl(215, 81%, 52%)",
+    );
+  });
+
+  it("converts the other formats it can read", () => {
+    expect(colorToHslString("#ff0000")).toBe("hsl(0, 100%, 50%)");
+    expect(colorToHslString("oklch(0.58 0.19 258)")).toBe("hsl(215, 81%, 52%)");
+    expect(colorToHslString("rgb(255, 0, 0)")).toBe("hsl(0, 100%, 50%)");
+  });
+
+  it("returns nothing for a color it cannot read", () => {
+    expect(colorToHslString("")).toBeUndefined();
+    expect(colorToHslString("rebeccapurple")).toBeUndefined();
+  });
+});
+
+describe("colorLuminance", () => {
+  it("measures the extremes", () => {
+    expect(colorLuminance("oklch(1 0 0)")).toBeCloseTo(1, 3);
+    expect(colorLuminance("#000000")).toBe(0);
+    expect(colorLuminance("nope")).toBeUndefined();
+  });
+
+  it("computes contrast between two readable colors", () => {
+    expect(colorContrastRatio("#000000", "#ffffff")).toBeCloseTo(21, 5);
+    expect(colorContrastRatio("oklch(1 0 0)", "#ffffff")).toBeCloseTo(1, 3);
+    expect(colorContrastRatio("nope", "#ffffff")).toBeUndefined();
   });
 });

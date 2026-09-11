@@ -20,7 +20,7 @@ export const categoryContentType = defineContentType({
   tableName: "blog_categories",
   fields: {
     name: field.text({ required: true, minLength: 2, maxLength: 100 }),
-    slug: field.slug({ from: "name", required: true }),
+    slug: field.slug({ source: "name" }),
   },
 })
 ```

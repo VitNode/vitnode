@@ -35,18 +35,24 @@ export const articleContentType = defineContentType({
 
 ### 2. Connect Drizzle References
 
+When a relation targets another content type, provide the referenced primary key column in `createContentModel`:
+
 ```ts title="plugins/blog/src/database/articles.ts"
 import { createContentModel } from "@vitnode/core/content/server"
 import { articleContentType } from "../content/article"
-import { blog_categories } from "./categories"
+import { blogCategoriesTable } from "./categories"
 
 export const articleContent = createContentModel(articleContentType, {
   // [!code ++:3]
   references: {
-    category: () => blog_categories.id,
+    category: () => blogCategoriesTable.id,
   },
 })
+
+export const blogArticlesTable = articleContent.table
 ```
+
+Self-referencing relations (`self: true`), `field.user`, and `field.file` resolve their references automatically and do not require entries in `references`.
 
 ---
 
@@ -54,11 +60,11 @@ export const articleContent = createContentModel(articleContentType, {
 
 | Shape | Declaration | Database Structure |
 | :--- | :--- | :--- |
-| **To-One** | `field.relation({ target })` | Foreign key column on table |
-| **To-Many** | `field.relation({ target, multiple: true })` | Auto-generated junction table |
-| **Self-Referencing** | `field.relation({ self: true })` | FK to same table (e.g. parent category) |
-| **User Relation** | `field.user({ multiple?: boolean })` | FK / junction to `core_users` |
-| **File Relation** | `field.file({ multiple?: boolean })` | FK / junction to `core_files` |
+| **To-One** | `field.relation({ target })` | Foreign key column on base table (`categoryId`). |
+| **To-Many** | `field.relation({ target, multiple: true })` | Auto-generated junction table (`{tableName}_{field}`). |
+| **Self-Referencing** | `field.relation({ self: true })` | Foreign key referencing the same table's `id`. |
+| **User Relation** | `field.user({ multiple?: boolean })` | FK to `core_users.id` (or junction table if `multiple: true`). |
+| **File Relation** | `field.file({ multiple?: boolean })` | FK to `core_files.id` (or junction table if `multiple: true`). |
 
 ---
 
@@ -68,10 +74,11 @@ Support multi-category selection or ordered co-authors:
 
 ```ts title="plugins/blog/src/content/post.ts"
 fields: {
-  // [!code ++:6]
+  // [!code ++:10]
   categories: field.relation({
     multiple: true,
     min: 1, // Enforce at least 1 selected
+    onDelete: "cascade", // "cascade" or "restrict" (cannot be "set null" on junction)
     target: () => categoryContentType,
   }),
   authors: field.user({
@@ -79,6 +86,27 @@ fields: {
     ordered: true, // Preserves drag-and-drop order
   }),
 }
+```
+
+### Exporting Junction Tables for Migrations
+
+To-many relations generate junction tables accessible via `model.advancedTables.junctions`. Export them so Drizzle Kit generates their schema migrations:
+
+```ts title="plugins/blog/src/database/posts.ts"
+import { createContentModel } from "@vitnode/core/content/server"
+import { postContentType } from "../content/post"
+import { blogCategoriesTable } from "./categories"
+
+export const postContent = createContentModel(postContentType, {
+  references: {
+    categories: () => blogCategoriesTable.id,
+  },
+})
+
+export const blogPostsTable = postContent.table
+// [!code ++:2]
+export const blogPostsCategoriesJunctionTable =
+  postContent.advancedTables.junctions.categories
 ```
 
 ---
@@ -100,20 +128,20 @@ fields: {
 }
 ```
 
-Columns are created as `seo_meta_title`, `seo_meta_description`, and `seo_no_index` on the main table.
+Columns are created with snake_case prefixes on the base table (`seo_meta_title`, `seo_meta_description`, `seo_no_index`).
 
 ---
 
 ## Repeatable Child Rows (`field.repeatable`)
 
-Create structured arrays backed by a real child table:
+Create structured arrays backed by a real child database table:
 
 ```ts
 fields: {
   // [!code ++:7]
   faqItems: field.repeatable({
     min: 1,
-    max: 10,
+    max: 10, // Defaults to 100
     fields: {
       question: field.text({ required: true }),
       answer: field.textarea({ required: true }),
@@ -121,6 +149,19 @@ fields: {
   }),
 }
 ```
+
+### Exporting Repeatable Tables for Migrations
+
+Repeatable child tables are stored under `model.advancedTables.repeatables`. Export them alongside your base table:
+
+```ts title="plugins/blog/src/database/posts.ts"
+export const blogPostsTable = postContent.table
+// [!code ++:2]
+export const blogPostsFaqItemsChildTable =
+  postContent.advancedTables.repeatables.faqItems
+```
+
+Each repeatable row carries `id`, `itemId` (FK cascading to the parent record), `position`, `createdAt`, and the child field columns.
 
 ---
 
@@ -144,13 +185,18 @@ fields: {
     },
     onDelete: {
       default: "'restrict'",
-      description: "Postgres referential action on target deletion.",
+      description: "Postgres referential action on target deletion. Junction tables reject 'set null'.",
       type: "'cascade' | 'restrict' | 'set null'",
     },
     ordered: {
       default: "false",
       description: "Preserves user-defined order in junction tables.",
       type: "boolean",
+    },
+    min: {
+      default: "undefined",
+      description: "Minimum number of related items required when multiple is true.",
+      type: "number",
     },
   }}
 />

@@ -3,7 +3,10 @@ import { XIcon } from "lucide-react";
 import React from "react";
 import { useTranslations } from "use-intl";
 
+import { colorToHslString } from "@/lib/colors";
+
 import { Button } from "./button";
+import { ColorPresetPicker } from "./color-preset-picker";
 import { Input } from "./input";
 import { Loader } from "./loader";
 import { Popover, PopoverContent, PopoverTrigger } from "./popover";
@@ -12,6 +15,8 @@ import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 const HslStringColorPicker = React.lazy(async () => ({
   default: (await import("react-colorful")).HslStringColorPicker,
 }));
+
+const FALLBACK_PICKER_COLOR = "hsl(0, 0%, 0%)";
 
 export const ColorPicker = ({
   value = "",
@@ -49,6 +54,8 @@ export const ColorPicker = ({
       </PopoverTrigger>
 
       <PopoverContent className="w-auto gap-3">
+        <ColorPresetPicker onChange={onChange} value={value} />
+
         <React.Suspense
           fallback={
             <div className="flex size-50 items-center justify-center">
@@ -56,19 +63,22 @@ export const ColorPicker = ({
             </div>
           }
         >
-          <HslStringColorPicker color={value} onChange={onChange} />
+          <HslStringColorPicker
+            color={colorToHslString(value) ?? FALLBACK_PICKER_COLOR}
+            onChange={onChange}
+          />
         </React.Suspense>
 
         <Input
-          className="w-50"
+          className="w-full"
           onChange={event => onChange?.(event.target.value)}
-          placeholder={placeholder ?? "hsl(240, 80%, 60%)"}
+          placeholder={placeholder ?? "hsl(215, 81%, 52%)"}
           value={value}
         />
 
         {allowRemoveColor && value && (
           <Button
-            className="w-50"
+            className="w-full"
             onClick={() => onChange?.("")}
             size="sm"
             type="button"

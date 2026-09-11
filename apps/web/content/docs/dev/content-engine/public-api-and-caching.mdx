@@ -15,78 +15,100 @@ column at 2 a.m.
 
 ### Define the public response
 
-```ts title="plugins/site-notes/src/content/article.ts"
+Public API generation requires `publication: { enabled: true }` and at least one exposed `slug` field in `publicApi.fields` for the detail route:
+
+```ts title="plugins/blog/src/content/article.ts"
+import { defineContentType, field } from "@vitnode/core/content"
+
 export const articleContentType = defineContentType({
-  id: '@acme/site-notes.article',
-  tableName: 'site_notes_articles',
+  id: "blog.article",
+  tableName: "blog_articles",
   fields: {
     adminNotes: field.textarea({ nullable: true }),
     excerpt: field.textarea({ nullable: true }),
-    slug: field.slug({ source: 'title' }),
+    slug: field.slug({ source: "title" }),
     title: field.text({ required: true }),
   },
-  // [!code ++:5]
+  // [!code ++:10]
+  publication: { enabled: true },
   publicApi: {
     enabled: true,
-    fields: ['id', 'title', 'slug', 'excerpt', 'publishedAt'],
-    path: 'articles',
+    path: "articles",
+    fields: ["id", "title", "slug", "excerpt", "publishedAt"],
+    searchableFields: ["title", "excerpt"],
+    orderableFields: ["title"],
+    defaultOrderBy: "publishedAt",
+    defaultOrder: "desc",
   },
 })
 ```
 
-`adminNotes` remains private because it is not in `fields`.
+`adminNotes` remains private because it is not listed in `fields`.
 
   </Step>
   <Step>
 
 ### Build the public module in the plugin API
 
-```ts title="plugins/site-notes/src/config.api.ts"
-import { buildApiPlugin } from '@vitnode/core/api/lib/plugin'
-import { buildContentPublicModule } from '@vitnode/core/content/server'
+Register the content type's public routes using `buildContentPublicModule`:
 
-import { CONFIG_PLUGIN } from './const'
-import { articleContent } from './database/articles'
+```ts title="plugins/blog/src/config.api.ts"
+import { buildApiPlugin } from "@vitnode/core/api/lib/plugin"
+import { buildContentPublicModule } from "@vitnode/core/content/server"
 
-export const siteNotesApiPlugin = () =>
+import { articleContent } from "./content/articles"
+
+export const blogApiPlugin = () =>
   buildApiPlugin({
-    pluginId: CONFIG_PLUGIN.pluginId,
+    pluginId: "blog",
     modules: [
       // [!code ++:4]
       buildContentPublicModule({
         contentTypes: [articleContent],
-        pluginId: CONFIG_PLUGIN.pluginId,
+        pluginId: "blog",
       }),
     ],
   })
 ```
 
-The module serves published records under the plugin’s public content path, for
-example `/api/@acme/site-notes/articles`.
+The module exposes two public endpoints:
 
-  </Step>
+- `GET /api/{pluginId}/{path}`: Lists published records with cursor pagination, optional `search`, equality `filters`, and `orderBy`.
+- `GET /api/{pluginId}/{path}/{slug}`: Retrieves a single published record resolved by its public slug.
+
+</Step>
   <Step>
 
 ### Only configure revalidation when a front end caches renders
 
-Content mutations already invalidate VitNode’s content tags. If a separate front
-end caches its rendered pages, add its origin so the API can notify it through
-the framework-neutral revalidation endpoint:
+Content mutations already invalidate VitNode's internal content cache tags. If a separate frontend application caches rendered pages, add its origin so the API can notify it through the framework-neutral revalidation endpoint:
 
 ```ts title="apps/api/src/vitnode.api.config.ts"
 export const vitNodeApiConfig = buildApiConfig({
   content: {
     // [!code ++]
-    revalidateOrigins: ['https://www.example.com'],
+    revalidateOrigins: ["https://www.example.com"],
   },
 })
 ```
 
-Leave this unset when the front end reads directly from the public content API.
-There is nothing else to wire up in a plugin.
+Leave this unset when the frontend reads directly from the public content API.
 
   </Step>
 </Steps>
+
+## Public API Configuration Reference
+
+| Property | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `enabled` | `true` | — | Opts into the generated public API module. |
+| `path` | `string` | — | Single lowercase URL segment (e.g. `"articles"`, never `"admin"`). |
+| `fields` | `string[]` | — | Strict allowlist of exposed fields. Must include the `slug` field. Can include `id` and `publishedAt`. |
+| `searchableFields` | `string[]` | `[]` | Exposed text fields scanned by the `?search=` query parameter. |
+| `orderableFields` | `string[]` | `[]` | Exposed columns accepted by the `?orderBy=` query parameter. |
+| `filterableFields` | `string[]` | `[]` | Exposed columns accepted as equality filters. |
+| `defaultOrderBy` | `string` | `"publishedAt"` | Default column used for ordering public list results. |
+| `defaultOrder` | `"asc" \| "desc"` | `"desc"` | Default sorting direction. |
 
 ## Keep the public surface intentional
 

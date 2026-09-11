@@ -4,7 +4,7 @@ import { z } from 'zod'
 
 export default function ColorExample() {
   const formSchema = z.object({
-    color: z.string().default('hsl(240, 80%, 60%)'),
+    color: z.string().default('hsl(215, 81%, 52%)'),
   })
 
   return (

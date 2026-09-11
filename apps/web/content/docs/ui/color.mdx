@@ -1,6 +1,6 @@
 ---
 title: Color
-description: Color picker field built on react-colorful that outputs an HSL string.
+description: Color picker field with a preset palette and a free-form picker, both storing HSL.
 ---
 
 ## Preview
@@ -9,7 +9,7 @@ description: Color picker field built on react-colorful that outputs an HSL stri
 
 ## Usage
 
-import { Tab, Tabs } from "fumadocs-ui/components/tabs";
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs'
 
 <Tabs items={['Auto Form', 'Manual']}>
   <Tab value="Auto Form">
@@ -21,8 +21,8 @@ import { AutoFormColor } from "@vitnode/core/components/form/fields/color";
 
 ```ts
 const formSchema = z.object({
-  color: z.string().default("hsl(240, 80%, 60%)"),
-});
+  color: z.string().default('hsl(240, 80%, 60%)'),
+})
 ```
 
 ```tsx
@@ -30,8 +30,8 @@ const formSchema = z.object({
   formSchema={formSchema}
   fields={[
     {
-      id: "color",
-      component: props => <AutoFormColor {...props} label="Color" />,
+      id: 'color',
+      component: (props) => <AutoFormColor {...props} label="Color" />,
     },
   ]}
 />
@@ -48,50 +48,89 @@ The `ColorPicker` is controlled - pass the current `value` (an HSL string) and
 handle `onChange`, which receives the new HSL string:
 
 ```tsx
-const [color, setColor] = useState("hsl(240, 80%, 60%)");
+const [color, setColor] = useState('hsl(240, 80%, 60%)')
 
-<ColorPicker value={color} onChange={setColor} />;
+;<ColorPicker value={color} onChange={setColor} />
 ```
 
   </Tab>
 </Tabs>
 
+## Preset palette
+
+The popover opens with a grid of preset swatches - eight hues (gray, red,
+orange, yellow, green, teal, blue and purple) in three tones each. Click one and
+the field stores it as an HSL string, for example `hsl(215, 81%, 52%)`. The
+swatches form a single radio group, so arrow keys move between them and the
+selected one shows a check mark.
+
+The first swatch is the default, and it carries no color of its own. It renders
+in the current theme's text color and stores an empty value, which is how you
+say "no color" without leaving the palette.
+
+The three tone rows were picked in OKLCH, so they step evenly to the eye rather
+than just on paper, and then written out as HSL - the format the picker itself
+speaks. Every tone keeps at least a 3:1 contrast ratio against both the light
+and the dark theme background, so a color chosen by an author in one theme stays
+readable for a reader in the other. A unit test enforces that, so keep it in
+mind if you fork the palette.
+
+The presets live in `@vitnode/core/components/ui/color-presets`, and the
+standalone swatch grid ships as `ColorPresetPicker` from
+`@vitnode/core/components/ui/color-preset-picker` if you want the palette
+without the free-form picker:
+
+```tsx
+import { ColorPresetPicker } from '@vitnode/core/components/ui/color-preset-picker'
+
+;<ColorPresetPicker value={color} onChange={setColor} />
+```
+
 <Callout type="info" title="Output format">
-  Dragging the picker produces an HSL string such as `hsl(240, 80%, 60%)`. Below
-  the picker is a text field where you can paste or type a color in any CSS
-  format - hex (`#22c55e`), `rgb(...)`, `hsl(...)`, or a named color - so the
-  stored value is whatever you enter. The picker is powered by
+  Both the presets and the free-form picker store an HSL string such as
+  `hsl(215, 81%, 52%)`, and the two stay in sync - click a preset and the
+  picker's handle moves onto that color. The text field below takes any CSS
+  color you paste into it, so the stored value is whatever you type there. Hex,
+  `rgb(...)`, `hsl(...)` and `oklch(...)` all show up on the picker; anything
+  else leaves it parked on black until you drag it. The picker is powered by
   [react-colorful](https://github.com/omgovich/react-colorful) and is
   lazy-loaded, so its bundle only ships once the popover is opened.
 </Callout>
 
+<Callout type="info" title="Editor text color">
+  The rich text editor's text color toolbar action uses the same preset palette
+  and nothing else - no free-form picker. Its popover is titled "Text color" and
+  ends with a "Remove color" button, disabled while the selection has no color.
+  The default swatch clears the color the same way.
+</Callout>
+
 ## Props
 
-import { TypeTable } from "fumadocs-ui/components/type-table";
+import { TypeTable } from 'fumadocs-ui/components/type-table'
 
 <TypeTable
   type={{
     label: {
-      description: "The label displayed above the field.",
-      type: "string",
-      default: "",
+      description: 'The label displayed above the field.',
+      type: 'string',
+      default: '',
     },
     description: {
-      description: "A short description displayed below the field.",
-      type: "string",
-      default: "",
+      description: 'A short description displayed below the field.',
+      type: 'string',
+      default: '',
     },
     placeholder: {
       description:
-        "Text shown on the trigger button when no color is selected.",
-      type: "string",
-      default: "",
+        'Text shown on the trigger button when no color is selected.',
+      type: 'string',
+      default: '',
     },
     allowRemoveColor: {
       description:
         "Show a 'Remove' button in the picker to clear the value back to an empty string.",
-      type: "boolean",
-      default: "false",
+      type: 'boolean',
+      default: 'false',
     },
   }}
 />

@@ -87,8 +87,17 @@ export function VitNodeAPI({
     });
   }
 
-  app.use(cors(corsOptions));
-  app.use(csrf(csrfOptions));
+  const webOrigin = CONFIG.web.origin;
+
+  app.use(cors(corsOptions ?? { credentials: true, origin: webOrigin }));
+  app.use(
+    csrf(
+      csrfOptions ?? {
+        origin: (origin, c) =>
+          origin === webOrigin || origin === new URL(c.req.url).origin,
+      },
+    ),
+  );
   app.use("*", clientIpMiddleware);
   // Nothing bounded a request body before this. `POST /sign_in` reads its JSON
   // and then runs scrypt unconditionally, so a body the server is willing to

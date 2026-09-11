@@ -8,7 +8,7 @@ Content Engine supports localized fields, storing translatable text in dedicated
 
 ## Prerequisites & Context
 
-Multi-language support is configured in your client-safe definition file `src/content/article.ts`.
+Multi-language support is configured in your content type definition file:
 
 When `createContentModel` compiles a localized model, it automatically generates a separate secondary database table (`{tableName}_translations`) to hold per-language strings without altering the schema of the main table.
 
@@ -21,23 +21,30 @@ When `createContentModel` compiles a localized model, it automatically generates
 <Step>
 ### Step 1: Mark Localized Fields in Definition
 
-Set `localization` settings and add `localized: true` to translatable fields in `src/content/article.ts`:
+Set `localization` configuration and add `localized: true` to translatable fields in your content definition:
 
-```ts title="src/content/article.ts"
+```ts title="plugins/example/src/content/article.ts"
+import { defineContentType, field } from "@vitnode/core/content"
+
 export const articleContentType = defineContentType({
-  id: 'example.article',
-  tableName: 'example_articles',
+  id: "example.article",
+  tableName: "example_articles",
+  // [!code ++:5]
   localization: {
-    // [!code ++]
-    defaultLanguage: 'en', // [!code ++]
-  }, // [!code ++]
+    enabled: true,
+    defaultLocale: "en",
+    fallback: "default", // "default" | "none"
+  },
   fields: {
-    code: field.text({ required: true }), // Shared field in main table
-    title: field.text({ required: true, localized: true }), // Translatable field // [!code ++]
-    content: field.textarea({ localized: true }), // Translatable field // [!code ++]
+    code: field.text({ required: true }), // Shared field on main table
+    // [!code ++:2]
+    title: field.text({ required: true, localized: true }), // Localized
+    content: field.textarea({ localized: true }), // Localized
   },
 })
 ```
+
+`localized: true` is supported on `text`, `textarea`, `slug`, and `group` fields. Shared fields (such as `number`, `boolean`, `select`, `relation`, `file`, `user`) always reside on the base table.
 
 </Step>
 
@@ -46,57 +53,72 @@ export const articleContentType = defineContentType({
 
 Compiling this model automatically builds two PostgreSQL tables:
 
-1. **Main Table** (`example_articles`): Stores `id`, `code`, timestamps, and shared non-localized columns.
-2. **Translation Table** (`example_articles_translations`): Stores `id`, foreign key `article_id`, `locale` (`varchar(10)`), `title`, and `content`.
+1. **Main Table** (`example_articles`): Stores `id`, `code`, system timestamps (`createdAt`, `updatedAt`), and shared non-localized columns.
+2. **Translation Table** (`example_articles_translations`): Stores composite primary key `(itemId, languageId)`, `version`, timestamps, publication columns (if enabled), and all localized field values.
 
 ```text
-  example_articles                  example_articles_translations
-  ┌─────┬────────┬──────────┐       ┌─────┬────────────┬────────┬────────┬─────────┐
-  │ id  │  code  │ author   │ ◄───┐ │ id  │ article_id │ locale │ title  │ content │
-  ├─────┼────────┼──────────┤     │ ├─────┼────────────┼────────┼────────┼─────────┤
-  │  1  │ ART-01 │  User #5 │     └─│ 101 │     1      │   en   │ Hello  │ World   │
-  └─────┴────────┴──────────┘       │ 102 │     1      │   fr   │ Bonjour│ Monde   │
-                                    └─────┴────────────┴────────┴────────┴─────────┘
+  example_articles                     example_articles_translations
+  ┌─────┬────────┬──────────┐          ┌────────┬────────────┬─────────┬────────┬─────────┐
+  │ id  │  code  │ authorId │ ◄──┐     │ itemId │ languageId │ version │ title  │ content │
+  ├─────┼────────┼──────────┤    │     ├────────┼────────────┼─────────┼────────┼─────────┤
+  │  1  │ ART-01 │    5     │    └─────│   1    │     1      │    1    │ Hello  │ World   │
+  └─────┴────────┴──────────┘   (PK)   │   1    │     2      │    1    │ Bonjour│ Monde   │
+                                       └────────┴────────────┴─────────┴────────┴─────────┘
+                                                ▲
+                                                │ (references core_languages.id)
+```
+
+`languageId` references the system `core_languages.id` table, and `itemId` cascades upon deletion of the parent record.
+
+</Step>
+
+<Step>
+### Step 3: Export the Translation Table for Drizzle Kit
+
+When exporting database tables from your plugin for migrations, export both the base table and `translationTable`:
+
+```ts title="plugins/example/src/database/articles.ts"
+import { createContentModel } from "@vitnode/core/content/server"
+import { articleContentType } from "../content/article"
+
+export const articleContent = createContentModel(articleContentType)
+
+// [!code ++:2]
+export const exampleArticlesTable = articleContent.table
+export const exampleArticlesTranslationsTable = articleContent.translationTable
 ```
 
 </Step>
 
 <Step>
-### Step 3: Render Localized Content with i18n Fallbacks
+### Step 4: Render Localized Content
 
-When fetching localized content via public API or `resolveContentDelivery`, translatable fields (`title`, `content`) resolve in the active locale.
+When querying content via the public API or `resolveContentDelivery`, translatable fields (`title`, `content`) automatically resolve in the requested locale, with fallback to `defaultLocale` when `fallback: "default"` is configured.
 
-For UI wrapper elements (e.g. status badges, section headers), use `useTranslations` from `use-intl`:
+For UI labels and chrome text, use `useTranslations` from `use-intl`:
 
-```tsx title="src/components/article-card.tsx"
-import { useTranslations } from 'use-intl' // [!code ++]
+```tsx title="plugins/example/src/components/article-card.tsx"
+import { useTranslations } from "use-intl"
 
 interface Props {
   article: {
-    title: string // Already resolved to current locale by Content Engine
+    title: string // Resolved to active locale by Content Engine
     content: string
   }
 }
 
 export const ArticleCard = ({ article }: Props) => {
-  const t = useTranslations('@vitnode/example') // [!code ++]
+  const t = useTranslations("example")
 
   return (
     <div className="card">
-      <span className="badge">{t('content.article.badge_label')}</span>{' '}
-      {/* [!code ++] */}
+      <span className="badge">{t("content.article.badge_label")}</span>
       <h3>{article.title}</h3>
       <p>{article.content}</p>
     </div>
   )
 }
 ```
-
-**Fallback Flow**:
-
-1. Returns `fr` translation if published.
-2. Falls back to `defaultLanguage` (`en`) if published.
-3. Returns `404 Not Found` if no published translation exists.
 
 </Step>
 
@@ -106,6 +128,15 @@ export const ArticleCard = ({ article }: Props) => {
 
 ## AdminCP Translation Features
 
-- **Language Selector Tabs**: Automatically rendered in AdminCP form dialogs.
-- **Independent Status**: Each translation language manages its own draft/published lifecycle.
-- **Independent Revisions**: Rollbacks can be performed per-locale without impacting other languages.
+- **Language Selector Tabs**: Automatically rendered in AdminCP form dialogs for each enabled system language.
+- **Independent Status**: Each translation language manages its own draft/published lifecycle when publication is enabled.
+- **Independent Revisions**: When editorial is enabled, revision histories and restores operate per locale (`GET /{id}/translations/{locale}/revisions` and `POST /{id}/translations/{locale}/revisions/{revisionId}/restore`).
+- **Composite Key Integrity**: Translations are uniquely identified by `(itemId, languageId)`, guaranteeing exactly one translation per locale per item.
+
+## Configuration Reference
+
+| Option | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `enabled` | `true` | — | Enables multi-language localization. |
+| `defaultLocale` | `string` | — | Default locale code (e.g. `"en"`). Required when `enabled: true`. |
+| `fallback` | `"default" \| "none"` | `"default"` | Fallback strategy when a translation in the requested locale is missing. |

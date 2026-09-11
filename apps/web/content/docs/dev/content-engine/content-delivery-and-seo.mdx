@@ -10,59 +10,58 @@ Content delivery starts in the plugin that owns the content type. Opt into the
 public API first, then let the same plugin claim the page URL. Search engines
 get a stable story; future you gets fewer scattered files.
 
-{/* Image prompt: Dark-theme flow diagram showing a Content Engine record with a slug, a plugin route tree entry for /articles/:slug, and a rendered page head containing title, description, canonical URL, Open Graph, hreflang, and sitemap symbols. 1600x900. */}
-
 <Steps>
   <Step>
 
 ### Enable public delivery on the content type
 
-`publicApi` explicitly chooses exposed fields. Delivery then projects only those
-fields into metadata and sitemap entries.
+`publicApi` explicitly chooses exposed fields. Delivery then projects only those fields into metadata, slug redirect history, and sitemap entries.
 
-```ts title="plugins/site-notes/src/content/article.ts"
-import { defineContentType, field } from '@vitnode/core/content'
+```ts title="plugins/blog/src/content/article.ts"
+import { defineContentType, field } from "@vitnode/core/content"
 
 export const articleContentType = defineContentType({
-  id: '@acme/site-notes.article',
-  tableName: 'site_notes_articles',
+  id: "blog.article",
+  tableName: "blog_articles",
   publication: { enabled: true },
   editorial: { enabled: true },
   fields: {
     excerpt: field.textarea({ nullable: true }),
-    slug: field.slug({ source: 'title' }),
+    slug: field.slug({ source: "title" }),
     title: field.text({ required: true }),
   },
   // [!code ++:17]
   publicApi: {
     enabled: true,
-    fields: ['id', 'title', 'slug', 'excerpt', 'publishedAt'],
-    path: 'articles',
+    fields: ["id", "title", "slug", "excerpt", "publishedAt"],
+    path: "articles",
   },
   delivery: {
     enabled: true,
     redirects: { enabled: true },
     seo: {
-      descriptionField: 'excerpt',
-      titleField: 'title',
+      descriptionField: "excerpt",
+      titleField: "title",
     },
-    sitemap: { enabled: true, changeFrequency: 'weekly', priority: 0.8 },
+    sitemap: { enabled: true, changeFrequency: "weekly", priority: 0.8 },
   },
 })
 ```
+
+All fields referenced in `delivery.seo` must exist in `publicApi.fields`.
 
   </Step>
   <Step>
 
 ### Claim the public URL in the plugin
 
-```ts title="plugins/site-notes/src/routes.ts"
-import { definePluginRoutes, lazy, page } from '@vitnode/core/routing'
+```ts title="plugins/blog/src/routes.ts"
+import { definePluginRoutes, lazy, page } from "@vitnode/core/routing"
 
 export const routes = definePluginRoutes([
   // [!code ++:3]
-  page('/articles/:slug', {
-    component: lazy(() => import('./pages/article-page')),
+  page("/articles/:slug", {
+    component: lazy(() => import("./pages/article-page")),
   }),
 ])
 ```
@@ -72,9 +71,9 @@ export const routes = definePluginRoutes([
 
 ### Render data and metadata from the plugin route
 
-```tsx title="plugins/site-notes/src/pages/article-page.tsx"
-import type { PluginRoutePageProps } from '@vitnode/core/routing'
-import { definePluginRoute } from '@vitnode/core/routing'
+```tsx title="plugins/blog/src/pages/article-page.tsx"
+import type { PluginRoutePageProps } from "@vitnode/core/routing"
+import { definePluginRoute } from "@vitnode/core/routing"
 
 interface Article {
   excerpt: string | null
@@ -108,12 +107,24 @@ export default ArticlePage
   rules, public API, and public route evolve together, so they belong together.
 </Callout>
 
-## What search engines receive
+## Delivery Configuration Reference
 
-- Canonical URLs and optional Open Graph fields from `delivery.seo`.
-- Redirect history for editorial content when a public slug changes.
-- Localized alternates when you configure `hreflang`.
-- Sitemap entries for public records when `sitemap.enabled` is true.
+| Option | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `enabled` | `true` | — | Opts into the delivery layer. Requires `publicApi: { enabled: true }`. |
+| `redirects.enabled` | `boolean` | `false` | Stores historical public slugs in `core_content_slug_history` and serves 301 redirects when slugs change. Requires `editorial: { enabled: true }`. |
+| `seo.titleField` | `string` | — | Exposed field name used to populate page titles. |
+| `seo.fallbackTitleField` | `string` | — | Fallback field name if `titleField` is empty. |
+| `seo.descriptionField` | `string` | — | Exposed field name used for page meta description. |
+| `seo.fallbackDescriptionField` | `string` | — | Fallback field name if `descriptionField` is empty. |
+| `seo.noIndexField` | `string` | — | Shared boolean field that excludes record from sitemap and marks `robots: { index: false }`. |
+| `seo.openGraph` | `{ titleField?, descriptionField? }` | — | Optional Open Graph title and description fields. |
+| `sitemap.enabled` | `boolean` | `false` | Includes published records in the XML sitemap. |
+| `sitemap.changeFrequency` | `"always" \| "hourly" \| "daily" \| "weekly" \| "monthly" \| "yearly" \| "never"` | — | Sitemap `<changefreq>` hint. |
+| `sitemap.priority` | `number` | — | Sitemap priority rating from `0.0` to `1.0`. |
+| `hreflang.xDefault` | `"defaultLocale"` | — | Emits `x-default` alternate link pointing to the default locale URL for localized content. |
+
+## Learn More
 
 <Cards>
   <Card

@@ -5,6 +5,7 @@ export const vitNodeConfig = buildConfig({
   i18n: {
     defaultLocale: "en",
     locales: [{ code: "en", name: "English" }],
+    timeZone: "UTC",
   },
   metadata: {
     shortTitle: "VitNode",

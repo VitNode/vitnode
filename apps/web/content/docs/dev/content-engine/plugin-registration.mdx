@@ -43,6 +43,7 @@ export const adminNav = {
 Loaded only when an administrator navigates into Content Engine screens:
 
 ```tsx title="plugins/blog/src/admin/content.tsx"
+import type { ContentFrontendPluginSource } from '@vitnode/core/lib/plugin'
 import { contentTypeAdmin } from '@vitnode/core/lib/plugin'
 import { postNav } from './nav'
 
@@ -51,10 +52,10 @@ export const adminContent = {
   contentTypes: [
     contentTypeAdmin({
       ...postNav,
-      // Optional field or layout overrides
+      // Optional column, field, or form layout overrides
     }),
   ],
-}
+} satisfies ContentFrontendPluginSource
 ```
 
 ---
