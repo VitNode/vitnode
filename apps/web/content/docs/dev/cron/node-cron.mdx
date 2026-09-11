@@ -51,18 +51,21 @@ serves your API, so it has to survive a production install.
 the schedule it keeps is not yours: each job carries its own expression, and this
 only decides how often VitNode looks.
 
-```ts title="src/vitnode.api.config.ts"
-import { buildApiConfig } from '@vitnode/core/vitnode.config'
+```ts title="src/vitnode.config.ts"
+import { defineApiRuntime, defineVitNodeConfig } from '@vitnode/core/config'
 import { NodeCronAdapter } from '@vitnode/node-cron' // [!code ++]
 
-export const vitNodeApiConfig = buildApiConfig({
-  cron: NodeCronAdapter(), // [!code ++]
+export default defineVitNodeConfig({
   // ...
+  api: defineApiRuntime(async ({ env }) => ({
+    cron: NodeCronAdapter(), // [!code ++]
+    // ...
+  })),
 })
 ```
 
 This repository's own standalone API does exactly that - see
-`apps/api/src/vitnode.api.config.ts`.
+the `api` runtime of `src/vitnode.config.ts`.
 
 </Step>
 <Step>

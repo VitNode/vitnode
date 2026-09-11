@@ -4,24 +4,27 @@ description: How VitNode manages public and admin sessions, HttpOnly cookies, de
 icon: Cookie
 ---
 
-import { TypeTable } from "fumadocs-ui/components/type-table"
+import { TypeTable } from 'fumadocs-ui/components/type-table'
 
 VitNode implements two isolated sessions: a **public session** for the community site and a separate **admin session** for the AdminCP. Both use opaque random tokens stored as SHA-256 hashes in PostgreSQL.
 
 ## Quick start
 
-Customize session parameters in `apps/api/src/vitnode.api.config.ts`:
+Customize session parameters in the `api` runtime of `src/vitnode.config.ts`:
 
-```ts title="apps/api/src/vitnode.api.config.ts"
-import { buildApiConfig } from "@vitnode/core/vitnode.config"
+```ts title="src/vitnode.config.ts"
+import { defineApiRuntime, defineVitNodeConfig } from '@vitnode/core/config'
 
-export const vitNodeApiConfig = buildApiConfig({
-  // [!code ++:6]
-  authorization: {
-    cookieExpires: 1000 * 60 * 60 * 24 * 30, // 30 days for public users
-    adminCookieExpires: 1000 * 60 * 60 * 8, // 8 hours for AdminCP
-    cookieDomain: ".yourdomain.com", // Optional cross-subdomain sharing
-  },
+export default defineVitNodeConfig({
+  // ...
+  api: defineApiRuntime(async ({ env }) => ({
+    // [!code ++:6]
+    authorization: {
+      cookieExpires: 1000 * 60 * 60 * 24 * 30, // 30 days for public users
+      adminCookieExpires: 1000 * 60 * 60 * 8, // 8 hours for AdminCP
+      cookieDomain: '.yourdomain.com', // Optional cross-subdomain sharing
+    },
+  })),
 })
 ```
 
@@ -29,14 +32,16 @@ export const vitNodeApiConfig = buildApiConfig({
 
 ## The Two-Session Model
 
-| Session Type | Cookie Name | Default Lifetime | Storage Table | Purpose |
-| :--- | :--- | :--- | :--- | :--- |
-| **Public Session** | `vitnode_auth` | 90 days | `core_sessions` | Frontend member authentication |
-| **Admin Session** | `vitnode_auth_admin` | 1 day | `core_admin_sessions` | High-privilege AdminCP access |
-| **Known Device** | `vitnode_device` | 1 year | `core_sessions_known_devices` | Device authorization tracking |
+| Session Type       | Cookie Name          | Default Lifetime | Storage Table                 | Purpose                        |
+| :----------------- | :------------------- | :--------------- | :---------------------------- | :----------------------------- |
+| **Public Session** | `vitnode_auth`       | 90 days          | `core_sessions`               | Frontend member authentication |
+| **Admin Session**  | `vitnode_auth_admin` | 1 day            | `core_admin_sessions`         | High-privilege AdminCP access  |
+| **Known Device**   | `vitnode_device`     | 1 year           | `core_sessions_known_devices` | Device authorization tracking  |
 
 <Callout type="info" title="Session Isolation">
-  Signing out of the AdminCP does not terminate the user's public session, and vice versa. An administrator compromised in a public context cannot access the AdminCP without re-authenticating with staff credentials.
+  Signing out of the AdminCP does not terminate the user's public session, and
+  vice versa. An administrator compromised in a public context cannot access the
+  AdminCP without re-authenticating with staff credentials.
 </Callout>
 
 ---
@@ -56,13 +61,13 @@ export const vitNodeApiConfig = buildApiConfig({
 
 VitNode stores the **canonical** form of an address, so those tricks collapse into a single account:
 
-| Typed at sign-up | Stored in `core_users.email` |
-| :--- | :--- |
-| `Jan.Kowalski@Gmail.com` | `jankowalski@gmail.com` |
-| `jankowalski@googlemail.com` | `jankowalski@gmail.com` |
-| `jankowalski+shop@gmail.com` | `jankowalski@gmail.com` |
-| `piotr+news@outlook.com` | `piotr@outlook.com` |
-| `zofia.nowak@company.com` | `zofia.nowak@company.com` |
+| Typed at sign-up             | Stored in `core_users.email` |
+| :--------------------------- | :--------------------------- |
+| `Jan.Kowalski@Gmail.com`     | `jankowalski@gmail.com`      |
+| `jankowalski@googlemail.com` | `jankowalski@gmail.com`      |
+| `jankowalski+shop@gmail.com` | `jankowalski@gmail.com`      |
+| `piotr+news@outlook.com`     | `piotr@outlook.com`          |
+| `zofia.nowak@company.com`    | `zofia.nowak@company.com`    |
 
 The rules are per-provider, because they are only true per-provider:
 
@@ -73,21 +78,26 @@ The rules are per-provider, because they are only true per-provider:
 - **Yahoo's `-` aliases are deliberately left alone**, because `jan-kowalski@yahoo.com` is a perfectly ordinary name.
 
 <Callout type="info" title="Where it applies">
-  Sign-up, sign-in, password reset, the SSO callback and AdminCP user management all resolve an address the same way. Someone who registered with a password at `jankowalski@gmail.com` and later clicks *Sign in with Google* - which hands back `jan.kowalski@gmail.com` - lands on their own account instead of a second one.
+  Sign-up, sign-in, password reset, the SSO callback and AdminCP user management
+  all resolve an address the same way. Someone who registered with a password at
+  `jankowalski@gmail.com` and later clicks *Sign in with Google* - which hands
+  back `jan.kowalski@gmail.com` - lands on their own account instead of a second
+  one.
 </Callout>
 
 <Callout type="warn" title="Upgrading an existing install">
   The `20260906174535_canonicalize_user_emails` migration rewrites stored addresses in place. A row whose canonical form is already taken by another row is left untouched, so nobody is locked out and no two accounts are silently merged. Run this before upgrading to see whether your install has such pairs:
 
-  ```sql
-  SELECT
-    replace(split_part(split_part(lower("email"), '@', 1), '+', 1), '.', '') AS mailbox,
-    array_agg("email")
-  FROM "core_users"
-  WHERE lower("email") LIKE '%@gmail.com' OR lower("email") LIKE '%@googlemail.com'
-  GROUP BY 1
-  HAVING count(*) > 1;
-  ```
+```sql
+SELECT
+  replace(split_part(split_part(lower("email"), '@', 1), '+', 1), '.', '') AS mailbox,
+  array_agg("email")
+FROM "core_users"
+WHERE lower("email") LIKE '%@gmail.com' OR lower("email") LIKE '%@googlemail.com'
+GROUP BY 1
+HAVING count(*) > 1;
+```
+
 </Callout>
 
 ## `authorization` Options Reference
@@ -95,27 +105,27 @@ The rules are per-provider, because they are only true per-provider:
 <TypeTable
   type={{
     cookieExpires: {
-      default: "90 days",
-      description: "Public user session lifetime in milliseconds.",
-      type: "number",
+      default: '90 days',
+      description: 'Public user session lifetime in milliseconds.',
+      type: 'number',
     },
     adminCookieExpires: {
-      default: "1 day",
-      description: "AdminCP session lifetime in milliseconds.",
-      type: "number",
+      default: '1 day',
+      description: 'AdminCP session lifetime in milliseconds.',
+      type: 'number',
     },
     cookieSecure: {
-      default: "true (in production)",
-      description: "Require HTTPS for session cookies.",
-      type: "boolean",
+      default: 'true (in production)',
+      description: 'Require HTTPS for session cookies.',
+      type: 'boolean',
     },
     cookieDomain: {
-      description: "Domain attribute for cross-subdomain cookie sharing.",
-      type: "string",
+      description: 'Domain attribute for cross-subdomain cookie sharing.',
+      type: 'string',
     },
     ssoAdapters: {
-      description: "Array of configured OAuth2 single sign-on adapters.",
-      type: "SSOApiPlugin[]",
+      description: 'Array of configured OAuth2 single sign-on adapters.',
+      type: 'SSOApiPlugin[]',
     },
   }}
 />

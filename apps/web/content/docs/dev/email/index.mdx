@@ -52,38 +52,44 @@ response quick even when the mail provider is having a moody afternoon.
 
 ## Configuring Email Adapters
 
-Configure your delivery transport in `apps/api/src/vitnode.api.config.ts`:
+Configure your delivery transport in the `api` runtime of `src/vitnode.config.ts`:
 
 ### 1. Resend Adapter
 
-```ts title="apps/api/src/vitnode.api.config.ts"
+```ts title="src/vitnode.config.ts"
 import { ResendEmailAdapter } from '@vitnode/core/api/adapters/email/resend'
 
-export const vitNodeApiConfig = buildApiConfig({
-  email: {
-    from: 'noreply@yourdomain.com',
-    adapter: ResendEmailAdapter({
-      apiKey: process.env.RESEND_API_KEY!,
-    }),
-  },
+export default defineVitNodeConfig({
+  // ...
+  api: defineApiRuntime(async ({ env }) => ({
+    email: {
+      from: 'noreply@yourdomain.com',
+      adapter: ResendEmailAdapter({
+        apiKey: env.RESEND_API_KEY!,
+      }),
+    },
+  })),
 })
 ```
 
 ### 2. SMTP Adapter
 
-```ts title="apps/api/src/vitnode.api.config.ts"
+```ts title="src/vitnode.config.ts"
 import { SmtpEmailAdapter } from '@vitnode/core/api/adapters/email/smtp'
 
-export const vitNodeApiConfig = buildApiConfig({
-  email: {
-    from: 'noreply@yourdomain.com',
-    adapter: SmtpEmailAdapter({
-      host: process.env.SMTP_HOST!,
-      port: Number(process.env.SMTP_PORT ?? 587),
-      user: process.env.SMTP_USER!,
-      password: process.env.SMTP_PASSWORD!,
-    }),
-  },
+export default defineVitNodeConfig({
+  // ...
+  api: defineApiRuntime(async ({ env }) => ({
+    email: {
+      from: 'noreply@yourdomain.com',
+      adapter: SmtpEmailAdapter({
+        host: env.SMTP_HOST!,
+        port: Number(env.SMTP_PORT ?? 587),
+        user: env.SMTP_USER!,
+        password: env.SMTP_PASSWORD!,
+      }),
+    },
+  })),
 })
 ```
 

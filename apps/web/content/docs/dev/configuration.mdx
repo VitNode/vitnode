@@ -1,173 +1,306 @@
 ---
 title: Configuration
-description: The two config files a VitNode app owns - the browser-safe shared one, and the server-only companion - plus the request pipeline Core installs for you.
+description: One authored vitnode.config.ts for the app, its plugins, the API runtime and the web runtime - with a generated browser-safe projection, so the browser never sees a secret.
 icon: Settings
 ---
 
 import { Callout } from 'fumadocs-ui/components/callout'
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs'
 
-A VitNode app has two configuration files, and the line between them is one
-question: **may a browser hold this?**
+A VitNode app has **one** authored configuration file, `src/vitnode.config.ts`.
+It describes the whole deployment - the site, the plugins, the API and the web
+runtime - and it is **server- and build-only**. The browser never imports it.
+Instead, your Vite build writes a browser-safe projection of it to
+`src/vitnode.public.gen.ts`, and that generated file is what the document
+shell, the router and every component read.
 
-| File                           | Holds                                                 | Reached by                                       |
-| :----------------------------- | :---------------------------------------------------- | :----------------------------------------------- |
-| `src/vitnode.config.ts`        | locales, metadata, theme, `debug`, enabled plugin ids | the browser, the server, **and your Vite build** |
-| `src/vitnode.server.config.ts` | message loaders                                       | the server only                                  |
-
----
-
-## `vitnode.config.ts` - the shared config
-
-```ts title="apps/web/src/vitnode.config.ts"
+```ts title="src/vitnode.config.ts"
 import { blogPlugin } from '@vitnode/blog/config'
-import { buildConfig } from '@vitnode/core/vitnode.config'
+import {
+  defineApiRuntime,
+  defineVitNodeConfig,
+  defineWebRuntime,
+} from '@vitnode/core/config'
+import { coreRelations } from '@vitnode/core/database/relations'
+import { SupabaseStorageAdapter } from '@vitnode/supabase-storage'
+import { drizzle } from 'drizzle-orm/postgres-js'
 
-export const vitNodeConfig = buildConfig({
-  debug: false,
-  i18n: {
-    defaultLocale: 'en',
-    locales: [
-      { code: 'en', name: 'English' },
-      { code: 'pl', name: 'Polski' },
-    ],
-    timeZone: 'UTC',
+import { appMessages } from './locales/app'
+import { packageMessages } from './locales/packages'
+
+export default defineVitNodeConfig({
+  app: {
+    i18n: {
+      defaultLocale: 'en',
+      locales: [
+        { code: 'en', name: 'English' },
+        { code: 'pl', name: 'Polski' },
+      ],
+      timeZone: 'UTC',
+    },
+    metadata: { shortTitle: 'VitNode', title: 'VitNode' },
   },
-  metadata: {
-    shortTitle: 'VitNode',
-    title: 'VitNode',
-  },
+
   plugins: [blogPlugin()],
-  theme: {
-    defaultTheme: 'system',
-  },
+
+  api: defineApiRuntime(({ env }) => ({
+    dbProvider: drizzle({
+      connection: env.POSTGRES_URL,
+      relations: coreRelations,
+    }),
+    storage: {
+      adapter: SupabaseStorageAdapter({
+        url: env.SUPABASE_URL,
+        secretKey: env.SUPABASE_SECRET_KEY,
+        bucket: env.SUPABASE_STORAGE_BUCKET,
+      }),
+    },
+  })),
+
+  web: defineWebRuntime({
+    public: {
+      theme: { defaultTheme: 'system' },
+    },
+    server: () => ({ messages: appMessages, packageMessages }),
+  }),
 })
 ```
 
-Three very different readers depend on this file:
+Four sections, and each one has a different reader:
 
-1. **The document shell** renders `metadata`, `theme` and `debug` - in the
-   browser as well as on the server.
-2. **The locale runtime** derives routing from `i18n`.
-3. **Your Vite build** loads it with `jiti` while Vite is still resolving its
-   own config, to find out which plugins to generate route, navigation and
-   content-registry imports for.
+| Section   | Holds                                                        | Read by                                             |
+| :-------- | :----------------------------------------------------------- | :-------------------------------------------------- |
+| `app`     | locales, time zone, site title                               | every runtime, and the public projection            |
+| `plugins` | one factory call per installed plugin, with its options      | every runtime - each loads only the part it needs   |
+| `api`     | a lazy factory for the database, storage, email, Redis, ...  | the Hono API only                                   |
+| `web`     | browser-safe UI settings, and a lazy factory for the loaders | the public projection (`public`) and SSR (`server`) |
 
-<Callout type="warn" title="Plain data only">
-  Because of reader 3, this file is executed at build time; because of reader 1
-  it is bundled for a browser. So it holds plain data and plugin *identity* -
-  never a `() => import(...)` message loader, and never a module that reaches a
-  database.
+<Callout type="warn" title="Nothing runs when the config is evaluated">
+  `defineApiRuntime` and `defineWebRuntime` take **functions**. Your Vite build
+  loads `vitnode.config.ts` with `jiti` on every regeneration pass to find out
+  which plugins are installed - so anything at the top level of that file runs
+  during the build. Importing `drizzle-orm/postgres-js` or a storage adapter is
+  free; *constructing* them is not. Keep every `drizzle(...)`, adapter call and
+  environment read inside the factory, as above, and nothing connects to
+  Postgres, opens Redis or starts cron until a runtime asks for it.
 </Callout>
 
-`buildConfig` keeps `locales` a tuple of literal types, so a `Locale` derived
-from it is `'en' | 'pl'` rather than `string`, and `defaultLocale` is checked
-against the list right beside it:
+---
 
-```ts title="apps/web/src/lib/i18n/shared.ts"
-export type Locale = (typeof vitNodeConfig.i18n.locales)[number]['code']
+## One source, three projections
+
+The authored file is never consumed directly. Each runtime asks for its own
+projection, and each projection is an explicit allowlist rather than "the config
+minus a few fields":
+
+| Projection     | Built by                                      | Contains                                                                                               |
+| :------------- | :-------------------------------------------- | :----------------------------------------------------------------------------------------------------- |
+| **Public**     | your Vite build → `src/vitnode.public.gen.ts` | `debug`, `editor`, `theme`, locale metadata, site title, plugin ids and their sanitized public options |
+| **Web server** | `createIntlMessagesLoader(config)`            | message loaders, package messages, the plugin list                                                     |
+| **API**        | `resolveApiConfig(config)`                    | database provider, Redis, storage, email, AI, cron, SSO, captcha, rate limits, API plugin modules      |
+
+### The public projection
+
+```ts title="src/vitnode.public.gen.ts (generated)"
+export const vitNodePublicConfig = {
+  debug: false,
+  i18n: { defaultLocale: 'en', localePrefix: 'as-needed', locales: [...], timeZone: 'UTC' },
+  metadata: { shortTitle: 'VitNode', title: 'VitNode' },
+  plugins: [{ pluginId: '@vitnode/blog', publicOptions: { postsPerPage: 20 } }],
+  theme: { defaultTheme: 'system' },
+} satisfies VitNodePublicConfig
+
+export type VitNodeLocale = 'en' | 'pl'
 ```
 
-### Enabled plugins
+This is the module browser code imports - the root route, `start.ts`, the
+locale runtime, `pageHead`:
 
-Register a plugin with its own factory:
+```ts title="src/lib/page-head.ts"
+import { createRouteHead } from '@vitnode/core/tanstack/metadata'
+
+import { vitNodePublicConfig } from '@/vitnode.public.gen'
+
+export const pageHead = createRouteHead(vitNodePublicConfig.metadata)
+```
+
+`VitNodeLocale` is the literal union of your enabled locale codes, so
+`Locale` stays `'en' | 'pl'` rather than `string`:
+
+```ts title="src/lib/i18n/shared.ts"
+import type { VitNodeLocale } from '@/vitnode.public.gen'
+
+export type Locale = VitNodeLocale
+```
+
+<Callout type="info" title="Why a generated file">
+  A generated module is ordinary TypeScript: your editor types it, Vite
+  invalidates it, and a custom Vite frontend that is not TanStack Start reads it
+  with a plain `import`. It regenerates on every `vite dev` and `vite build`
+  whenever `vitnode.config.ts` changes, and it is committed like the other
+  `src/*.gen.ts` files.
+</Callout>
+
+### The web server projection
+
+SSR needs the message loaders, which read JSON out of package build output and
+must never reach a browser. They live in `web.server`, and the loader resolves
+them lazily on the first request:
+
+```ts title="src/server/messages.server.ts"
+import '@tanstack/react-start/server-only'
+import { createIntlMessagesLoader } from '@vitnode/core/tanstack/i18n/server'
+
+import vitNodeConfig from '@/vitnode.config'
+
+export const loadIntlMessages = createIntlMessagesLoader(vitNodeConfig)
+```
+
+### The API projection
+
+`resolveApiConfig` runs the `api` factory, then imports each plugin's API entry
+and hands it that plugin's normalized options:
+
+```ts title="src/server/vitnode-api.server.ts"
+import '@tanstack/react-start/server-only'
+import { OpenAPIHono } from '@hono/zod-openapi'
+import { VitNodeAPI } from '@vitnode/core/api/config'
+import { resolveApiConfig } from '@vitnode/core/config/server'
+
+import vitNodeConfig from '@/vitnode.config'
+
+const app = new OpenAPIHono().basePath('/api')
+
+VitNodeAPI({ app, vitNodeApiConfig: await resolveApiConfig(vitNodeConfig) })
+```
+
+The factory receives a framework-neutral context - `{ env, mode }` - so a
+config reads `env.POSTGRES_URL` rather than `process.env`, and a test can hand
+it any environment it likes.
+
+---
+
+## Plugins are registered once
 
 ```ts
-import { blogPlugin } from '@vitnode/blog/config'
-
-plugins: [blogPlugin()]
+plugins: [blogPlugin(), examplePlugin()]
 ```
 
-The factory carries the plugin's identity, its locale barrel and its route
-declarations - plain data, and nothing that renders. Its AdminCP navigation and
-its Content Engine screens live in the plugin's `admin/nav` and `admin/content`
-modules instead, and they never pass through this object.
+`blogPlugin()` returns a lightweight descriptor: the plugin id, the modules the
+plugin provides, its normalized options and the subset it exposes publicly.
+Calling it imports no React, no Hono, no database model - the descriptor is what
+every runtime reads to decide what to load:
 
-What a TanStack Start app **renders** comes back through generated projections
-of those modules, and that is the part worth knowing:
+| Consumer          | Loads from the descriptor               |
+| :---------------- | :-------------------------------------- |
+| Hono API          | `entries.api`, with the options         |
+| public router     | `entries.routes`                        |
+| AdminCP sidebar   | `entries.adminNav`                      |
+| Content Engine UI | `entries.adminContent`                  |
+| public projection | the id and the sanitized public options |
 
-| Generated file                | From                         | Loaded                                          |
-| :---------------------------- | :--------------------------- | :---------------------------------------------- |
-| `src/plugin-routes.gen.ts`    | the plugin's `src/routes.ts` | per route, behind `lazy()`                      |
-| `src/admin-nav.gen.ts`        | the plugin's `admin/nav`     | with the AdminCP shell                          |
-| `src/content-registry.gen.ts` | the plugin's `admin/content` | behind a dynamic `import()` in `src/router.tsx` |
+A plugin that provides no API contributes nothing to the API, and one without
+pages contributes nothing to the router - each consumer skips what is not there.
+Pass options through the same call:
 
-One literal import per configured plugin, written at build time. So a content
-type's editing screen - a Tiptap field, a form layout, a table cell - arrives
-with the route that renders it, not with the config that the document shell
-imports. Spreading `admin/content` into the factory undoes exactly that: the
-whole editing stack rides along with every public page. See
-[Plugin routes](/docs/dev/plugins/routes) and
-[Plugin frontend modules](/docs/dev/content-engine/plugin-registration).
+```ts
+plugins: [blogPlugin({ postsPerPage: 12 })]
+```
 
-<Callout type="info" title="Also register its locale files">
-  The `messages` a factory carries is the plugin's own locale barrel, which loads
-  its JSON with `import('./en.json', { with: { type: 'json' } })` - a specifier
-  no bundler follows. VitNode reads translations from
-  `src/locales/packages.ts` instead, so add a line there per language the plugin
-  ships. [Languages & Localization](/docs/dev/i18n) has the detail.
-</Callout>
+The plugin owns its option types, defaults, validation and what is public. See
+[Plugin options](/docs/dev/plugins/options), and
+[Create a plugin](/docs/dev/plugins/create) for the factory itself.
 
-<Callout type="warn" title="Build-time cost">
-  Your Vite build executes this file with `jiti` on every regeneration pass to
-  discover the plugin list. Running a plugin's registration graph in Node
-  measures ~340ms per pass against ~6ms for `buildPlugin({pluginId})`, which is
-  the minimum a TanStack host needs - worth knowing if a large plugin set makes
-  the dev watcher feel slow.
+<Callout type="warn" title="There is no separate API registration">
+  A plugin's API is loaded from the same factory registration. Nothing like
+  `blogApiPlugin()` exists anymore - a plugin that provides an API advertises it
+  through `entries.api`, and the API imports that entry at startup.
 </Callout>
 
 ---
 
-## `vitnode.server.config.ts` - the server-only companion
+## Deployment modes
 
-Message loaders read JSON out of a package's build output, which is exactly what
-the shared config cannot carry. They go here instead:
+The same file describes every shape VitNode runs in. Leave out a runtime and
+that side of the deployment does not exist.
 
-```ts title="apps/web/src/vitnode.server.config.ts"
-import '@tanstack/react-start/server-only'
-import { buildServerConfig } from '@vitnode/core/vitnode.config'
+<Tabs items={['Fullstack', 'API only', 'Web against a remote API']}>
 
-import { appMessages } from '@/locales/app'
-import { packageMessages } from '@/locales/packages'
-import { vitNodeConfig } from '@/vitnode.config'
-
-export const vitNodeServerConfig = buildServerConfig({
-  config: vitNodeConfig,
-  messages: appMessages,
-  packageMessages,
+```ts tab="Fullstack"
+export default defineVitNodeConfig({
+  app: { ... },
+  plugins: [blogPlugin()],
+  api: defineApiRuntime(async ({ env }) => ({ ... })),
+  web: defineWebRuntime({ ... }),
 })
 ```
 
-It **holds** the shared config rather than repeating any of it, so the locale
-list your message loaders are resolved against is the same object the router and
-the document shell read. Hand the whole thing to the loader:
-
-```ts title="apps/web/src/server/messages.server.ts"
-export const loadIntlMessages = createIntlMessagesLoader(vitNodeServerConfig)
+```ts tab="API only"
+export default defineVitNodeConfig({
+  app: { ... },
+  plugins: [blogPlugin()],
+  api: defineApiRuntime(async ({ env }) => ({ ... })),
+})
 ```
 
-`packageMessages` is one line per language a package ships, and `messages` is
-where you reword a string a package translates differently to how you want it.
-[Languages & Localization](/docs/dev/i18n) covers both.
+```ts tab="Web against a remote API"
+export default defineVitNodeConfig({
+  app: { ... },
+  plugins: [blogPlugin()],
+  web: defineWebRuntime({ ... }),
+})
+```
 
-<Callout type="info" title="The API has its own config">
-  `src/vitnode.api.config.ts` configures the Hono app at `/api/*` - the
-  database, storage, email, Redis. In a single app it reads `vitNodeConfig.i18n`
-  so the site and its emails agree on which languages exist. In a split
-  deployment the API is a separate package and declares its own list.
-</Callout>
+</Tabs>
+
+- **API only** never imports TanStack Start. `apps/api` is this shape:
+  `resolveApiConfig` plus `VitNodeAPI`, served by `@hono/node-server`.
+- **Web against a remote API** configures no database and no API runtime. The
+  universal `fetcher` talks to the API at `VITNODE_API_URL`. Asking such a
+  config for an API projection is an error that names that variable.
+- **A custom frontend** does not have to use VitNode routing or AdminCP at all.
+  The API serves the same public projection at
+  `GET /api/@vitnode/core/middleware` under `public`, so any client - a mobile
+  app, another framework - reads the site's locales, title, plugin ids and
+  public plugin options from one typed contract, `VitNodePublicConfig`.
+
+---
+
+## Why the browser cannot reach a secret
+
+Two independent guards keep the root config out of the client bundle. Neither
+relies on tree-shaking.
+
+1. **Structural.** Browser code imports `src/vitnode.public.gen.ts`, a file
+   your build writes from an explicit allowlist. The database provider, the
+   storage secret key and every server-only plugin option are not fields it
+   leaves out - they are fields it never copies.
+2. **Enforced.** The `vitnode:client-guard` Vite plugin fails the client
+   build when any chunk contains the root config, a plugin's `config.api`
+   module, `drizzle-orm`, the Postgres or Redis drivers, a VitNode storage or
+   email adapter - or the **value** of any secret-shaped environment variable
+   (`*_SECRET*`, `*_PASSWORD*`, `*_API_KEY*`, `POSTGRES_URL`, `REDIS_URL`).
+   In development the same guard refuses the import outright and names the
+   file that made it.
+
+This is also why a plugin's public options must be plain JSON: they are
+written into the generated file, and a value that cannot be serialized - a
+function, a `Date`, anything holding a secret by reference - is refused when
+the factory is called.
 
 ---
 
 ## `start.ts` - the request pipeline
 
-TanStack Start expects a `src/start.ts`. In a VitNode app it is one call:
+TanStack Start expects a `src/start.ts`, and it is part of the **client**
+module graph - so it reads the public projection:
 
-```ts title="apps/web/src/start.ts"
+```ts title="src/start.ts"
 import { createVitNodeStart } from '@vitnode/core/tanstack/start'
 
-import { vitNodeConfig } from '@/vitnode.config'
+import { vitNodePublicConfig } from '@/vitnode.public.gen'
 
-export const startInstance = createVitNodeStart({ config: vitNodeConfig })
+export const startInstance = createVitNodeStart({ config: vitNodePublicConfig })
 ```
 
 `createVitNodeStart` installs three things, and none of them is optional:
@@ -178,79 +311,31 @@ export const startInstance = createVitNodeStart({ config: vitNodeConfig })
 | **Locale**    | Canonical `308` redirects, the remembered-locale cookie, and the document cache directive |
 | **Documents** | Forces `Cache-Control: private, no-store` onto every HTML response                        |
 
-<Callout type="warn" title="Why the factory exists">
-  Start installs its own CSRF middleware *only* while an app declares no
-  `requestMiddleware` at all. The moment an app writes its own list, that
-  default is replaced by whatever the list holds - so an app that hand-rolls the
-  pipeline and forgets CSRF exposes every server function as an unauthenticated
-  cross-site endpoint, silently. Core owns the list so you cannot.
-</Callout>
+Add your own with `requestMiddleware`; it runs after those three, in the order
+you list it:
 
-### Why documents are never shared-cacheable
-
-Every page VitNode renders streams a dehydrated TanStack Query cache into its
-HTML, and that cache always holds the visitor's own session - inside `/admin`,
-an administrator's entire permission set. So the directive is **forced**, not
-defaulted: a route that sets `public, max-age=60` is overwritten rather than
-obeyed, because the route is not in a position to know what is in the body it
-would be publishing.
-
-Only `text/html` responses are touched. Everything else keeps what it had.
-
-<Callout type="info" title="API caching stays the API's">
-  `/api/*` is served by the Hono bridge through this same middleware and passes
-  through untouched: no locale redirect, no rewrite, and no cache directive on
-  the JSON it answers with. The API decides its own policy with `c.get("cache")`
-  - see [Caching](/docs/dev/cache). The one exception proves the rule rather
-  than bending it: Swagger UI at `/api/swagger` is HTML, so it gets the document
-  directive like any other page an operator reads.
-</Callout>
-
-### Adding your own middleware
-
-For things your installation genuinely owns - a request id, a tracing span, a
-maintenance-mode gate:
-
-```ts title="apps/web/src/start.ts"
-import { createMiddleware } from '@tanstack/react-start'
-import { createVitNodeStart } from '@vitnode/core/tanstack/start'
-
-import { vitNodeConfig } from '@/vitnode.config'
-
-const requestId = createMiddleware().server(async ({ next }) => {
-  const result = await next()
-  result.response.headers.set('x-request-id', crypto.randomUUID())
-
-  return result
-})
-
+```ts title="src/start.ts"
 export const startInstance = createVitNodeStart({
-  config: vitNodeConfig,
+  config: vitNodePublicConfig,
   requestMiddleware: [requestId],
 })
 ```
-
-**Ordering is guaranteed:** CSRF first, then locale handling, then your list in
-the order you declared it. You cannot get in front of either. That is not
-tidiness - a locale redirect _ends_ the request, so middleware running before it
-would run twice for every visitor who arrives at a non-canonical URL, once for
-the redirect and once for the page.
 
 ---
 
 ## `vite.config.ts`
 
-One VitNode plugin, which is the environment handling, the dev server's
-dependency pre-bundling, the SSR externals and the plugin route generator in the
-order they have to run:
+One VitNode plugin, which composes the environment handling, the dev server's
+dependency pre-bundling, the SSR externals, the projection generator and the
+client guard in the order they have to run:
 
-```ts title="apps/web/vite.config.ts"
+```ts title="vite.config.ts"
 import { vitnode } from '@vitnode/core/framework/vite'
 
 export default defineConfig({
   plugins: [
     vitnode({ appRoot: import.meta.dirname }),
-    nitro({ compressPublicAssets: { brotli: true, gzip: true } }),
+    nitro(),
     tailwindcss(),
     tanstackStart(),
     viteReact(),
@@ -258,50 +343,108 @@ export default defineConfig({
 })
 ```
 
-`compressPublicAssets` writes a `.br` and a `.gz` twin next to every built asset,
-so the Node server from `pnpm start` serves scripts and styles compressed the
-way a CDN would. The server-rendered HTML itself is not compressed by the Node
-server; put a reverse proxy or a platform such as Vercel in front of it for that.
-
 `appRoot` has to be `import.meta.dirname`: a Vite config is loaded with the
-working directory set to wherever the command ran, which in a monorepo is
-regularly the repository root.
+working directory set to wherever the command ran. The generator reads
+`src/vitnode.config.ts` (or a root-level `vitnode.config.ts`) and writes four
+files: `plugin-routes.gen.ts`, `admin-nav.gen.ts`, `content-registry.gen.ts`
+and `vitnode.public.gen.ts`.
 
-Publish an extra key to the browser with `clientEnv`:
+Publish an extra key to the browser with `clientEnv`, and widen the client
+guard with `clientGuard.forbiddenModules` when your app has server-only modules
+of its own:
 
 ```ts
-vitnode({ appRoot: import.meta.dirname, clientEnv: ['VITNODE_MAP_KEY'] })
+vitnode({
+  appRoot: import.meta.dirname,
+  clientEnv: ['VITNODE_MAP_KEY'],
+  clientGuard: { forbiddenModules: [/\/src\/secrets\//] },
+})
 ```
 
-Everything named there is compiled into JavaScript anyone can read, so add a key
-only when something in the browser genuinely reads it. The four plugins are
-still exported individually - `vitNodeEnv`, `vitNodeOptimizeDeps`,
-`vitNodeSsrExternals`, `vitNodePluginRoutes` - if you ever need to drop or
-reorder one.
+---
 
-### What gets externalised from the server render
+## Migrating from the three config files
 
-You do not write an `ssr.external` list, because the right answer changes
-between the two commands:
+Earlier canary releases authored `vitnode.config.ts`,
+`vitnode.server.config.ts` and `vitnode.api.config.ts`, and registered each
+plugin twice. Those builders are gone: `buildConfig`, `buildServerConfig`,
+`buildApiConfig`, `getVitNodeConfig` and the `*ApiPlugin()` factories no longer
+exist, and a `vitnode.config.ts` that still exports `vitNodeConfig` fails the
+build with a message naming this section.
 
-| Command      | `@vitnode/core` and your plugins | Why                                                                               |
-| ------------ | -------------------------------- | --------------------------------------------------------------------------------- |
-| `vite dev`   | inlined                          | Vite owns the modules, so a rebuilt package reaches the server render immediately |
-| `vite build` | external                         | the built package goes into the output as it is, rather than being bundled again  |
+<Tabs items={['Before', 'After']}>
 
-Externalising in dev is the tempting mistake, and it fails quietly: an external
-module is imported by Node, whose module cache lives as long as the process. The
-browser hot-reloads your edit, the server render keeps the copy it loaded at
-startup, and React reports a hydration mismatch on markup you already fixed. Only
-a restart clears it - which is exactly the loop this plugin removes.
+```ts tab="Before"
+// src/vitnode.config.ts
+export const vitNodeConfig = buildConfig({
+  i18n: { ... },
+  metadata: { ... },
+  plugins: [blogPlugin()],
+  theme: { defaultTheme: 'system' },
+})
 
-The build list is `@vitnode/core`, every plugin in your `vitnode.config.ts` and
-`tslib`. It comes from the same configured plugin list the route generator reads,
-so removing a plugin from your config is one edit, not two.
+// src/vitnode.server.config.ts
+export const vitNodeServerConfig = buildServerConfig({
+  config: vitNodeConfig,
+  messages: appMessages,
+  packageMessages,
+})
+
+// src/vitnode.api.config.ts
+export default defineVitNodeConfig({
+  // ...
+  api: defineApiRuntime(async ({ env }) => ({
+      plugins: [blogApiPlugin()],
+      i18n: vitNodeConfig.i18n,
+      metadata: { ... },
+      dbProvider: drizzle({ connection: env.POSTGRES_URL }),
+  })),
+})
+```
+
+```ts tab="After"
+// src/vitnode.config.ts
+export default defineVitNodeConfig({
+  app: { i18n: { ... }, metadata: { ... } },
+  plugins: [blogPlugin()],
+  api: defineApiRuntime(({ env }) => ({
+    dbProvider: drizzle({ connection: env.POSTGRES_URL }),
+  })),
+  web: defineWebRuntime({
+    public: { theme: { defaultTheme: 'system' } },
+    server: () => ({ messages: appMessages, packageMessages }),
+  }),
+})
+```
+
+</Tabs>
+
+Then, file by file:
+
+| Was                                                                | Becomes                                                                        |
+| :----------------------------------------------------------------- | :----------------------------------------------------------------------------- |
+| `import { vitNodeConfig } from '@/vitnode.config'` in browser code | `import { vitNodePublicConfig } from '@/vitnode.public.gen'`                   |
+| `createVitNodeStart({ config: vitNodeConfig })`                    | `createVitNodeStart({ config: vitNodePublicConfig })`                          |
+| `createIntlMessagesLoader(vitNodeServerConfig)`                    | `createIntlMessagesLoader(vitNodeConfig)` (the default export)                 |
+| `VitNodeAPI({ app, vitNodeApiConfig })`                            | `VitNodeAPI({ app, vitNodeApiConfig: await resolveApiConfig(vitNodeConfig) })` |
+| `defineVitNodeDrizzleConfig({ vitNodeApiConfig, dbCredentials })`  | `defineVitNodeDrizzleConfig({ config: vitNodeConfig, out })`                   |
+| `plugins: [blogApiPlugin()]` in the API config                     | delete it - `blogPlugin()` in `plugins` already covers the API                 |
+| `(typeof vitNodeConfig.i18n.locales)[number]['code']`              | `VitNodeLocale` from the generated file                                        |
+
+Delete `vitnode.server.config.ts` and `vitnode.api.config.ts`. Plugin authors
+replace `buildPlugin({ pluginId, messages, routes })` with
+`definePluginFactory({ pluginId, entries })` and export `apiPlugin` from
+`config.api.ts` instead of a `*ApiPlugin()` factory - see
+[Plugin options](/docs/dev/plugins/options).
 
 ## Learn More
 
 <Cards>
+  <Card
+    title="Plugin options"
+    description="Typed options, defaults, validation and what a plugin exposes publicly"
+    href="/docs/dev/plugins/options"
+  />
   <Card
     title="Languages & Localization"
     description="Where locale metadata lives, and where message loaders go"
@@ -311,10 +454,5 @@ so removing a plugin from your config is one edit, not two.
     title="Architecture"
     description="How TanStack Start and Hono split the work"
     href="/docs/dev/architecture"
-  />
-  <Card
-    title="Caching"
-    description="What the API caches, and what invalidates it"
-    href="/docs/dev/cache"
   />
 </Cards>

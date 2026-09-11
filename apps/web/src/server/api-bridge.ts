@@ -5,6 +5,6 @@ interface FetchableApp {
 }
 
 export const createApiBridge =
-  (app: FetchableApp): ApiBridge =>
+  (app: FetchableApp | Promise<FetchableApp>): ApiBridge =>
   async (request) =>
-    app.fetch(request)
+    (await app).fetch(request)

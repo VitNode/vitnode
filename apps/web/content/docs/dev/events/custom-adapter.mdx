@@ -4,15 +4,18 @@ description: Build a custom event transport adapter to distribute VitNode domain
 icon: Puzzle
 ---
 
-import { TypeTable } from "fumadocs-ui/components/type-table"
+import { TypeTable } from 'fumadocs-ui/components/type-table'
 
 By default, VitNode delivers domain events in-process on the originating machine. By implementing a custom `EventsApiPlugin`, you can forward events to an external message broker (Redis Streams, RabbitMQ, NATS) to fan them out across a distributed cluster.
 
 ## The `EventsApiPlugin` Interface
 
 ```ts
-import type { Context } from "hono"
-import type { EventEnvelope, EventEmitResult } from "@vitnode/core/api/models/events"
+import type { Context } from 'hono'
+import type {
+  EventEnvelope,
+  EventEmitResult,
+} from '@vitnode/core/api/models/events'
 
 export interface EventsApiPlugin {
   name: string
@@ -27,20 +30,25 @@ export interface EventsApiPlugin {
 ### 1. Build the Adapter
 
 ```ts title="apps/api/src/lib/events/redis-stream-adapter.ts"
-import type { EventsApiPlugin } from "@vitnode/core/api/models/events"
+import type { EventsApiPlugin } from '@vitnode/core/api/models/events'
 
 export const RedisStreamEventsAdapter = (): EventsApiPlugin => ({
-  name: "redis-stream",
+  name: 'redis-stream',
   // [!code ++:13]
   publish: async (c, envelope) => {
-    const redis = c.get("redis")
+    const redis = c.get('redis')
     if (redis) {
-      await redis.xadd("vitnode:events", "*", "payload", JSON.stringify(envelope))
+      await redis.xadd(
+        'vitnode:events',
+        '*',
+        'payload',
+        JSON.stringify(envelope),
+      )
     }
 
     return {
       eventId: envelope.eventId,
-      status: "queued",
+      status: 'queued',
       delivered: 0,
       failures: [],
     }
@@ -52,15 +60,18 @@ export const RedisStreamEventsAdapter = (): EventsApiPlugin => ({
 
 ### 2. Register in API Configuration
 
-```ts title="apps/api/src/vitnode.api.config.ts"
-import { buildApiConfig } from "@vitnode/core/vitnode.config"
-import { RedisStreamEventsAdapter } from "./lib/events/redis-stream-adapter"
+```ts title="src/vitnode.config.ts"
+import { defineApiRuntime, defineVitNodeConfig } from '@vitnode/core/config'
+import { RedisStreamEventsAdapter } from './lib/events/redis-stream-adapter'
 
-export const vitNodeApiConfig = buildApiConfig({
-  // [!code ++:3]
-  events: {
-    adapter: RedisStreamEventsAdapter(),
-  },
+export default defineVitNodeConfig({
+  // ...
+  api: defineApiRuntime(async ({ env }) => ({
+    // [!code ++:3]
+    events: {
+      adapter: RedisStreamEventsAdapter(),
+    },
+  })),
 })
 ```
 

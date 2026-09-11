@@ -69,8 +69,26 @@ the client sent it and keeps its own caching policy. See
 VitNode is built around modular plugins located in `plugins/*`:
 
 - **Independent Packages**: Plugins compile to their own `dist/` with isolated dependencies.
-- **Unified Manifest**: Routes, AdminCP navigation, and database models are registered declaratively.
+- **One Registration**: `blogPlugin()` in `vitnode.config.ts` is the whole switch. It returns a descriptor - id, capability entries, options - and each runtime imports only the entry it needs.
 - **Zero Overhead**: Inactive plugins contribute no code or overhead to production bundles.
+
+---
+
+## One Config, Three Projections
+
+The whole deployment is described once, in `src/vitnode.config.ts`, and that
+file is build- and server-only. Every runtime reads a projection of it:
+
+| Consumer                    | Reads                                               | Built by                                       |
+| :-------------------------- | :-------------------------------------------------- | :--------------------------------------------- |
+| **Browser** (shell, router) | `src/vitnode.public.gen.ts` - the public allowlist  | the Vite plugin, on every `dev` and `build`    |
+| **SSR** (message loaders)   | the web server projection                           | `createIntlMessagesLoader(config)`             |
+| **Hono API**                | the API projection, with each plugin's `config.api` | `resolveApiConfig(config)` at startup          |
+| **Custom clients**          | the same public projection over HTTP                | `GET /api/@vitnode/core/middleware` → `public` |
+
+The `vitnode:client-guard` Vite plugin fails a client build that reaches the
+root config, a plugin's API entry, a database driver or a secret's value. See
+[Configuration](/docs/dev/configuration).
 
 ## Learn More
 
@@ -92,7 +110,7 @@ VitNode is built around modular plugins located in `plugins/*`:
   />
   <Card
     title="Configuration"
-    description="The shared config, the server-only companion, and the Start factory"
+    description="One authored config, its public projection, and the Start factory"
     href="/docs/dev/configuration"
   />
 </Cards>

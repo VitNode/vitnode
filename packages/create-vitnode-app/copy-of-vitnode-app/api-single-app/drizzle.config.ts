@@ -1,12 +1,8 @@
 import { defineVitNodeDrizzleConfig } from "@vitnode/core/drizzle.config";
 
-import { POSTGRES_URL, vitNodeApiConfig } from "./src/vitnode.api.config";
+import vitNodeConfig from "./src/vitnode.config";
 
 export default defineVitNodeDrizzleConfig({
-  vitNodeApiConfig,
+  config: vitNodeConfig,
   out: "./migrations/",
-  dialect: "postgresql",
-  dbCredentials: {
-    url: POSTGRES_URL,
-  },
 });

@@ -1,46 +1,57 @@
 // @vitest-environment node
 import { describe, expect, it, vi } from "vitest";
 
-import type { VitNodeConfig } from "@/vitnode.config";
-
 vi.mock("@tanstack/react-start/server-only", () => ({}));
 
-const { buildConfig, buildServerConfig } = await import("@/vitnode.config");
+const { definePluginFactory, defineVitNodeConfig, defineWebRuntime } =
+  await import("@/config");
+const { resolveWebServerConfig } = await import("@/config/server");
 const { createIntlMessagesLoader } = await import("./messages");
 
 const messages = (tree: Record<string, unknown>) => async () =>
   await Promise.resolve({ default: tree });
 
-const config: VitNodeConfig = buildConfig({
-  i18n: {
-    defaultLocale: "en",
-    locales: [
-      { code: "en", name: "English" },
-      { code: "pl", name: "Polski" },
-    ],
-  },
-  metadata: { shortTitle: "Fixture", title: "Fixture" },
-  plugins: [{ pluginId: "@acme/blog" }],
-});
+const blogPlugin = definePluginFactory({ pluginId: "@acme/blog" });
 
-const serverConfig = buildServerConfig({
-  config,
-  messages: {
-    pl: { "@acme/blog": messages({ blog: { title: "Nasz blog" } }) },
+const appMessages = {
+  pl: { "@acme/blog": messages({ blog: { title: "Nasz blog" } }) },
+};
+
+const packageMessages = {
+  "@acme/blog": {
+    en: messages({ blog: { author: "Author", title: "Blog" } }),
+    pl: messages({ blog: { title: "Blog (pakiet)" } }),
   },
-  packageMessages: {
-    "@acme/blog": {
-      en: messages({ blog: { author: "Author", title: "Blog" } }),
-      pl: messages({ blog: { title: "Blog (pakiet)" } }),
+  "@vitnode/core": { en: messages({ core: { global: { save: "Save" } } }) },
+};
+
+let serverLoads = 0;
+
+const config = defineVitNodeConfig({
+  app: {
+    i18n: {
+      defaultLocale: "en",
+      locales: [
+        { code: "en", name: "English" },
+        { code: "pl", name: "Polski" },
+      ],
     },
-    "@vitnode/core": { en: messages({ core: { global: { save: "Save" } } }) },
+    metadata: { shortTitle: "Fixture", title: "Fixture" },
   },
+  plugins: [blogPlugin()],
+  web: defineWebRuntime({
+    server: () => {
+      serverLoads += 1;
+
+      return { messages: appMessages, packageMessages };
+    },
+  }),
 });
 
-const load = createIntlMessagesLoader(serverConfig);
+const load = createIntlMessagesLoader(config);
 
-describe("a server config resolves messages against the shared locale list", () => {
-  it("reads the plugins the shared config registered", async () => {
+describe("the message loader resolves against the unified config", () => {
+  it("reads the plugins the config registered", async () => {
     const { messages: tree } = await load({
       locale: "en",
       namespaces: ["blog"],
@@ -55,16 +66,10 @@ describe("a server config resolves messages against the shared locale list", () 
       namespaces: ["blog"],
     });
 
-    expect(tree).toEqual({
-      // The app's rewording wins over the plugin's own Polish...
-      blog: { author: "Author", title: "Nasz blog" },
-    });
+    expect(tree).toEqual({ blog: { author: "Author", title: "Nasz blog" } });
   });
 
-  it("falls back to the shared config's defaultLocale key by key", async () => {
-    // ...and `author`, which nothing translated to Polish, comes from `en`
-    // rather than rendering as its own key. `defaultLocale` is read off the
-    // shared half, which is the join these two files exist to make.
+  it("falls back to the config's defaultLocale key by key", async () => {
     const { messages: tree } = await load({
       locale: "pl",
       namespaces: ["blog"],
@@ -82,12 +87,26 @@ describe("a server config resolves messages against the shared locale list", () 
     expect(tree).toEqual({ core: { global: { save: "Save" } } });
   });
 
+  it("loads the web-server runtime once, lazily", () => {
+    expect(serverLoads).toBe(1);
+  });
+
+  it("is the same loader the resolved web-server config builds", async () => {
+    const fromResolved = createIntlMessagesLoader(
+      await resolveWebServerConfig(config),
+    );
+
+    expect(await fromResolved({ locale: "pl", namespaces: ["blog"] })).toEqual(
+      await load({ locale: "pl", namespaces: ["blog"] }),
+    );
+  });
+
   it("is the same loader the four spelled-out options build", async () => {
     const explicit = createIntlMessagesLoader({
-      appMessages: serverConfig.messages,
-      defaultLocale: config.i18n.defaultLocale,
-      packageMessages: serverConfig.packageMessages ?? {},
-      plugins: config.plugins,
+      appMessages,
+      defaultLocale: config.app.i18n.defaultLocale,
+      packageMessages,
+      plugins: [...config.plugins],
     });
 
     expect(await explicit({ locale: "pl", namespaces: ["blog"] })).toEqual(
@@ -96,12 +115,23 @@ describe("a server config resolves messages against the shared locale list", () 
   });
 
   it("needs no loaders at all", async () => {
-    // An app that overrides nothing and installs nothing still has to render.
-    const bare = createIntlMessagesLoader(buildServerConfig({ config }));
+    const bare = createIntlMessagesLoader(
+      defineVitNodeConfig({ app: config.app, web: defineWebRuntime() }),
+    );
 
     expect(await bare({ locale: "en", namespaces: ["blog"] })).toEqual({
       locale: "en",
       messages: {},
     });
+  });
+
+  it("refuses a root config without a web runtime", async () => {
+    const apiOnly = createIntlMessagesLoader(
+      defineVitNodeConfig({ app: config.app }),
+    );
+
+    await expect(
+      apiOnly({ locale: "en", namespaces: ["blog"] }),
+    ).rejects.toThrow(/no web runtime/);
   });
 });

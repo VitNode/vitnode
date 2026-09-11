@@ -1,6 +1,6 @@
 import React from "react";
 
-import type { LocaleConfig } from "@/vitnode.config";
+import type { LocaleConfig } from "@/lib/i18n/types";
 
 const LanguagesContext = React.createContext<LocaleConfig[]>([]);
 

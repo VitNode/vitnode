@@ -309,7 +309,6 @@ export const i18nCreate = async () => {
 
   // An API-only app seeds email strings alone; a single app gets both trees.
   const scope = appScope({ api: apiConfig !== null, web: webConfig !== null });
-  const isApiOnly = webConfig === null;
   const defaultLocale = config.i18n?.defaultLocale ?? "en";
   const existingLocales = (config.i18n?.locales ?? []).map(locale => ({
     code: locale.code,
@@ -474,7 +473,7 @@ export const i18nCreate = async () => {
       }),
     );
     console.log(green(`  created  ${relative(appDir, target)}`));
-    const builder = isApiOnly ? "buildApiConfig" : "buildConfig";
+    const builder = "defineVitNodeConfig";
     console.log(
       `\n${prefix} Import it into your config so the app picks it up:\n` +
         dim('  import { i18n } from "./i18n";\n') +

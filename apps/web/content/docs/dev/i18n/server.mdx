@@ -147,9 +147,9 @@ export default function WelcomeEmail({ i18n }: DefaultTemplateEmailProps) {
 
 ## Shipping translations with a plugin
 
-A plugin owns its languages, and it splits them the same way the framework does: frontend strings in `src/locales/`, server strings (emails) in `src/locales/api/`. Each tree gets a barrel and is registered with the matching config - the frontend tree with `buildPlugin` in `config.tsx`, the server tree with `buildApiPlugin` in `config.api.ts`.
+A plugin owns its languages, and it splits them the same way the framework does: frontend strings in `src/locales/`, server strings (emails) in `src/locales/api/`. Each tree gets a barrel. The frontend tree is what an app's `src/locales/packages.ts` points at; the server tree is registered with `buildApiPlugin` in `config.api.ts`.
 
-Most plugins render nothing server-side, so they ship only the frontend tree and register `messages` in `config.tsx` alone. Add the `api/` tree only when your plugin sends email:
+Most plugins render nothing server-side, so they ship only the frontend tree. Add the `api/` tree only when your plugin sends email:
 
 ```ts title="plugins/{your_plugin}/src/locales/api/index.ts"
 import type { LocaleMessagesMap } from '@vitnode/core/lib/i18n/types'

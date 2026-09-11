@@ -138,11 +138,11 @@ describe("the generated messages", () => {
 });
 
 describe("the generated config", () => {
-  it("registers the tree's own array, not a second copy", () => {
+  it("names the routes module instead of importing the tree", () => {
     const config = pluginConfigTemplate("@acme/blog");
 
-    expect(config).toContain('import { routes } from "./routes";');
-    expect(config).toContain("routes,");
+    expect(config).not.toContain('from "./routes"');
+    expect(config).toContain('routes: "@acme/blog/routes",');
   });
 
   it("names the plugin by its package name", () => {
@@ -153,7 +153,7 @@ describe("the generated config", () => {
 
   it("exports a factory whose name is a legal identifier", () => {
     expect(pluginConfigTemplate("@acme/my-blog")).toContain(
-      "export const myBlogPlugin = () =>",
+      "export const myBlogPlugin = definePluginFactory({",
     );
   });
 });
@@ -221,12 +221,22 @@ describe("the scaffold as a whole", () => {
     });
   });
 
-  it("writes the messages barrel the config registers", () => {
+  it("writes a framework-neutral plugin descriptor", () => {
     const files = pluginRouteScaffold("blog");
 
-    expect(files["src/config.tsx"]).toContain(
-      'import messages from "./locales";',
+    expect(files["src/config.ts"]).toContain(
+      'import { definePluginFactory } from "@vitnode/core/config";',
     );
+    expect(files["src/config.ts"]).toContain('pluginId: "blog"');
+    expect(files["src/config.ts"]).toContain('routes: "blog/routes"');
+    expect(files["src/config.ts"]).not.toContain("buildPlugin");
+    expect(files["src/config.ts"]).not.toContain("./locales");
+    expect(Object.keys(files)).not.toContain("src/config.tsx");
+  });
+
+  it("writes the messages barrel an app's `packageMessages` points at", () => {
+    const files = pluginRouteScaffold("blog");
+
     expect(Object.keys(files)).toContain("src/locales/index.ts");
     expect(Object.keys(files)).toContain("src/locales/en.json");
   });

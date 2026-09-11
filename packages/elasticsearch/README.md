@@ -23,20 +23,24 @@ default Postgres engine to Elasticsearch is a config change followed by a rebuil
 
 ## Usage
 
-```ts title="src/vitnode.api.config.ts"
+```ts title="src/vitnode.config.ts"
+import { defineApiRuntime, defineVitNodeConfig } from "@vitnode/core/config";
 import { ElasticsearchSearchAdapter } from "@vitnode/elasticsearch";
 
-export const vitNodeApiConfig = buildApiConfig({
-  search: {
-    adapter: ElasticsearchSearchAdapter({
-      node: process.env.ELASTICSEARCH_NODE,
-      apiKey: process.env.ELASTICSEARCH_API_KEY,
-      index: "vitnode",
-      ranking: {
-        timeDecay: { scale: "30d", decay: 0.5 },
-      },
-    }),
-  },
+export default defineVitNodeConfig({
+  // ...
+  api: defineApiRuntime(({ env }) => ({
+    search: {
+      adapter: ElasticsearchSearchAdapter({
+        node: env.ELASTICSEARCH_NODE,
+        apiKey: env.ELASTICSEARCH_API_KEY,
+        index: "vitnode",
+        ranking: {
+          timeDecay: { scale: "30d", decay: 0.5 },
+        },
+      }),
+    },
+  })),
 });
 ```
 

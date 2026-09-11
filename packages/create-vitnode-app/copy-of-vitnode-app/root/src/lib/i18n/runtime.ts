@@ -3,7 +3,7 @@ import { configureIntl, validateIntlInput } from "@vitnode/core/tanstack/i18n";
 import { IntlProvider } from "use-intl";
 
 import { loadIntlMessages } from "@/server/messages.server";
-import { vitNodeConfig } from "@/vitnode.config";
+import { vitNodePublicConfig } from "@/vitnode.public.gen";
 
 export const getIntlMessages = createServerFn()
   .validator(validateIntlInput)
@@ -17,7 +17,7 @@ export const {
   fetchMessages: async input => await getIntlMessages({ data: input }),
 
   hostIntlProvider: IntlProvider,
-  i18n: vitNodeConfig.i18n,
+  i18n: vitNodePublicConfig.i18n,
 });
 
 export { createLocaleRewrite } from "@vitnode/core/tanstack/i18n";

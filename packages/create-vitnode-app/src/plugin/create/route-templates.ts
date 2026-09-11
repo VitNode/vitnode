@@ -86,7 +86,7 @@ export const pluginMessagesTemplate = (pluginName: string): string =>
   )}\n`;
 
 /**
- * `src/locales/index.ts` - the barrel `config.tsx` registers.
+ * `src/locales/index.ts` - the plugin's locale barrel, one loader per language.
  *
  * A map of loaders rather than of objects, so an app pays for the languages it
  * serves and no others.
@@ -130,27 +130,16 @@ export const pluginVariableName = (pluginName: string): string => {
   return `${stem === "" ? safe : stem}Plugin`;
 };
 
-/**
- * `src/config.tsx` - what an application registers.
- *
- * The routes and the messages, and nothing else. `routes` is the same tree
- * `routes.ts` exports, handed on unchanged: an app on Vite reads that file
- * directly at build time and an app that registers the plugin the ordinary way
- * reads it through here, so the two paths cannot describe different routes.
- */
 export const pluginConfigTemplate = (pluginName: string): string =>
-  `import { buildPlugin } from "@vitnode/core/lib/plugin";
-
-import messages from "./locales";
-import { routes } from "./routes";
+  `import { definePluginFactory } from "@vitnode/core/config";
 
 
-export const ${pluginVariableName(pluginName)} = () =>
-  buildPlugin({
-    pluginId: "${pluginName}",
-    messages,
-    routes,
-  });
+export const ${pluginVariableName(pluginName)} = definePluginFactory({
+  pluginId: "${pluginName}",
+  entries: {
+    routes: "${pluginName}/routes",
+  },
+});
 `;
 
 /**
@@ -184,7 +173,7 @@ export const pluginPackageExports = (): Record<
 export const pluginRouteScaffold = (
   pluginName: string,
 ): Record<string, string> => ({
-  "src/config.tsx": pluginConfigTemplate(pluginName),
+  "src/config.ts": pluginConfigTemplate(pluginName),
   "src/locales/en.json": pluginMessagesTemplate(pluginName),
   "src/locales/index.ts": pluginMessagesBarrelTemplate(),
   "src/pages/home-page.tsx": pluginRouteModuleTemplate(pluginName),

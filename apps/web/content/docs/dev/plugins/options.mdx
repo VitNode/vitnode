@@ -1,0 +1,214 @@
+---
+title: Plugin Options
+description: Give a plugin typed options with defaults and validation, decide which of them the browser may see, and let each runtime load only the capability it needs.
+icon: SlidersHorizontal
+---
+
+import { Callout } from 'fumadocs-ui/components/callout'
+
+A plugin is registered once, with its own factory:
+
+```ts title="src/vitnode.config.ts"
+import { blogPlugin } from '@vitnode/blog/config'
+
+export default defineVitNodeConfig({
+  plugins: [blogPlugin()],
+})
+```
+
+Pass options through the same call. They are typed by the plugin, so a typo or
+a wrong type is a compile error and an out-of-range value fails at config load
+with the plugin's own message:
+
+```ts
+plugins: [
+  blogPlugin({
+    postsPerPage: 20,
+  }),
+]
+```
+
+---
+
+## Writing the factory
+
+`definePluginFactory` builds the factory. The plugin owns everything about its
+options: the type, the defaults, the validation, and which values are safe to
+hand to a browser.
+
+```ts title="plugins/blog/src/config.ts"
+import { definePluginFactory } from '@vitnode/core/config'
+
+export interface BlogPluginOptions {
+  postsPerPage: number
+  publicApi: boolean
+}
+
+export const blogPlugin = definePluginFactory<
+  BlogPluginOptions,
+  { postsPerPage: number }
+>({
+  pluginId: '@vitnode/blog',
+
+  entries: {
+    api: '@vitnode/blog/config.api',
+    adminNav: '@vitnode/blog/admin/nav',
+    adminContent: '@vitnode/blog/admin/content',
+  },
+
+  defaults: { postsPerPage: 20, publicApi: true },
+
+  parse: (options) => {
+    if (!Number.isInteger(options.postsPerPage) || options.postsPerPage < 1) {
+      throw new RangeError('postsPerPage has to be a positive integer')
+    }
+
+    return options
+  },
+
+  toPublicOptions: ({ postsPerPage }) => ({ postsPerPage }),
+})
+```
+
+| Field             | What it does                                                                                   |
+| :---------------- | :--------------------------------------------------------------------------------------------- |
+| `pluginId`        | The package name. Every capability is imported from this package.                              |
+| `entries`         | The modules the plugin provides. A capability not listed here is skipped by every consumer.    |
+| `defaults`        | Applied first; the app's overrides are merged on top, `undefined` values ignored.              |
+| `parse`           | Validation and normalization in one step. Throw to reject; return the options to keep.         |
+| `toPublicOptions` | The **only** path into the browser. Whatever you return is written into the public projection. |
+
+Calling the factory does none of the heavy lifting. It returns a small frozen
+descriptor - id, entries, options, public options - and imports no React
+component, Hono app or database model. That is what lets your Vite build load
+`vitnode.config.ts` cheaply, and what lets an API-only deployment skip the
+frontend entirely.
+
+<Callout type="info" title="No options at all">
+  Leave out `defaults`, `parse` and `toPublicOptions`, and the factory takes no
+  arguments. Leave out `entries` too, and each consumer looks for the
+  conventional subpaths - `routes`, `admin/nav`, `admin/content` and
+  `config.api` - and skips whichever does not resolve.
+</Callout>
+
+---
+
+## Capabilities
+
+Each entry names one module by its package subpath, and each is loaded by
+exactly one consumer:
+
+| Entry          | Module exports                                          | Loaded by                        |
+| :------------- | :------------------------------------------------------ | :------------------------------- |
+| `api`          | `apiPlugin(options, context)`                           | the Hono API, at startup         |
+| `routes`       | `routes = definePluginRoutes([...])`                    | the public router, at build time |
+| `adminNav`     | `adminNav` satisfying `AdminNavPluginSource`            | the AdminCP shell                |
+| `adminContent` | `adminContent` satisfying `ContentFrontendPluginSource` | the Content Engine screens       |
+
+The frontend generator never imports `api`, and the API never imports the
+other three. An entry that is declared but cannot be resolved fails the build
+(or the API startup) with the specifier that did not resolve, rather than
+silently shipping a plugin with a capability missing.
+
+### The API entry
+
+`config.api.ts` receives the **full** normalized options - including anything
+`toPublicOptions` left out - and the runtime context:
+
+```ts title="plugins/blog/src/config.api.ts"
+import { defineApiPluginFactory } from '@vitnode/core/api/lib/plugin'
+import { buildContentPublicModule } from '@vitnode/core/content/server'
+
+import type { BlogPluginOptions } from './config'
+
+export const apiPlugin = defineApiPluginFactory<BlogPluginOptions>(
+  (options) => ({
+    pluginId: '@vitnode/blog',
+    modules: [
+      adminModule,
+      ...(options.publicApi
+        ? [
+            buildContentPublicModule({
+              pluginId: '@vitnode/blog',
+              contentTypes,
+            }),
+          ]
+        : []),
+    ],
+  }),
+)
+```
+
+A plugin without options passes the arguments directly:
+
+```ts
+export const apiPlugin = defineApiPluginFactory({
+  pluginId: '@acme/site-notes',
+  modules: [notesModule],
+})
+```
+
+The module must export `apiPlugin`, and what it builds must carry the same
+`pluginId` as the descriptor - the API refuses a mismatch.
+
+---
+
+## Public options
+
+`toPublicOptions` is an allowlist. Its result is checked for being plain JSON
+when the factory is called - a function, a `Date`, `NaN`, a class instance or a
+circular structure is refused there and then - and it is written, verbatim,
+into `src/vitnode.public.gen.ts`:
+
+```ts title="src/vitnode.public.gen.ts (generated)"
+plugins: [{ pluginId: '@vitnode/blog', publicOptions: { postsPerPage: 20 } }]
+```
+
+Read it in the browser through the providers every VitNode page renders under:
+
+```tsx
+import { usePluginPublicOptions } from '@vitnode/core/components/public-plugins-context'
+
+const { postsPerPage } = usePluginPublicOptions<{ postsPerPage: number }>(
+  '@vitnode/blog',
+) ?? { postsPerPage: 20 }
+```
+
+Or, outside React, from the projection itself:
+
+```ts
+import { pluginPublicOptions } from '@vitnode/core/config'
+
+pluginPublicOptions(vitNodePublicConfig, '@vitnode/blog')
+```
+
+<Callout type="warn" title="Never put a secret in public options">
+  Public options are, by construction, in every visitor's JavaScript - and the
+  API also serves them unauthenticated at `GET /api/@vitnode/core/middleware`.
+  An API token, a webhook secret or a signing key belongs in the plugin's
+  **options**, where only `apiPlugin` sees it, and it reaches the plugin through
+  `env` in the app's `api` runtime rather than through a literal in
+  `vitnode.config.ts`. `toPublicOptions` exists so that the boundary is a
+  decision the plugin author makes explicitly, once, in code that is easy to
+  review.
+</Callout>
+
+## Learn More
+
+<Cards>
+  <Card
+    title="Configuration"
+    description="The one authored config, and the three projections built from it"
+    href="/docs/dev/configuration"
+  />
+  <Card
+    title="Create a Plugin"
+    description="Scaffold a plugin package and register it"
+    href="/docs/dev/plugins/create"
+  />
+  <Card
+    title="Plugin frontend modules"
+    description="admin/nav and admin/content, and why they stay out of the descriptor"
+    href="/docs/dev/content-engine/plugin-registration"
+  />
+</Cards>

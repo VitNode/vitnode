@@ -19,14 +19,17 @@ import { File, Files, Folder } from 'fumadocs-ui/components/files'
 
 ## Quick start
 
-```ts title="src/vitnode.api.config.ts"
+```ts title="src/vitnode.config.ts"
 import { LocalStorageAdapter } from '@vitnode/core/api/adapters/storage/local' // [!code ++]
-import { buildApiConfig } from '@vitnode/core/vitnode.config'
+import { defineApiRuntime, defineVitNodeConfig } from '@vitnode/core/config'
 
-export const vitNodeApiConfig = buildApiConfig({
-  storage: {
-    adapter: LocalStorageAdapter(), // [!code ++]
-  },
+export default defineVitNodeConfig({
+  // ...
+  api: defineApiRuntime(async ({ env }) => ({
+    storage: {
+      adapter: LocalStorageAdapter(), // [!code ++]
+    },
+  })),
 })
 ```
 
@@ -73,7 +76,12 @@ derived from your `publicPath` instead of hardcoded in two places.
 
 ```ts tab="Standalone API" title="apps/api/src/index.ts"
 import { serveStatic } from '@hono/node-server/serve-static'
+import { resolveApiConfig } from '@vitnode/core/config/server'
 import { mkdirSync } from 'node:fs'
+
+import vitNodeConfig from './vitnode.config.js'
+
+const vitNodeApiConfig = await resolveApiConfig(vitNodeConfig)
 
 // [!code ++:14]
 const staticStorage = vitNodeApiConfig.storage?.adapter?.static
@@ -96,10 +104,14 @@ VitNodeAPI({ app, vitNodeApiConfig })
 
 ```ts tab="TanStack Start app" title="src/server/vitnode-api.server.ts"
 import { serveStatic } from '@hono/node-server/serve-static'
+import { resolveApiConfig } from '@vitnode/core/config/server'
 import { mkdirSync } from 'node:fs'
 
-const createVitNodeApi = () => {
+import vitNodeConfig from '@/vitnode.config'
+
+const createVitNodeApi = async () => {
   const app = new OpenAPIHono().basePath('/api')
+  const vitNodeApiConfig = await resolveApiConfig(vitNodeConfig)
 
   // [!code ++:14]
   const staticStorage = vitNodeApiConfig.storage?.adapter?.static

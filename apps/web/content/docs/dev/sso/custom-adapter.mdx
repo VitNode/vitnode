@@ -4,19 +4,19 @@ description: Build a custom OAuth2 Single Sign-On adapter for any provider with 
 icon: Puzzle
 ---
 
-import { TypeTable } from "fumadocs-ui/components/type-table"
+import { TypeTable } from 'fumadocs-ui/components/type-table'
 
 VitNode includes built-in SSO adapters for Google, Discord, and Facebook. You can connect any other OAuth2 provider (e.g. GitHub, Apple, Slack) by implementing the `SSOApiPlugin` interface. State cookie generation, user session linking, and login buttons are handled automatically.
 
 ## Quick start: GitHub SSO Adapter
 
-Implement the 5 interface methods and register the adapter in `vitnode.api.config.ts`:
+Implement the 5 interface methods and register the adapter in the `api` runtime of `vitnode.config.ts`:
 
 ### 1. Build the Adapter
 
 ```ts title="apps/api/src/utils/sso/github.ts"
-import type { SSOApiPlugin } from "@vitnode/core/api/models/sso"
-import { getRedirectUri } from "@vitnode/core/api/models/sso"
+import type { SSOApiPlugin } from '@vitnode/core/api/models/sso'
+import { getRedirectUri } from '@vitnode/core/api/models/sso'
 
 export const GitHubSSOApiPlugin = ({
   clientId,
@@ -25,31 +25,34 @@ export const GitHubSSOApiPlugin = ({
   clientId: string
   clientSecret: string
 }): SSOApiPlugin => {
-  const id = "github"
+  const id = 'github'
   const redirectUri = getRedirectUri(id)
 
   return {
     id,
-    name: "GitHub",
+    name: 'GitHub',
     // 1. Build Authorization URL
     getUrl: ({ state }) =>
       `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=read:user,user:email&state=${state}`,
 
     // 2. Exchange Authorization Code for Token
     fetchToken: async (code) => {
-      const response = await fetch("https://github.com/login/oauth/access_token", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
+      const response = await fetch(
+        'https://github.com/login/oauth/access_token',
+        {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            client_id: clientId,
+            client_secret: clientSecret,
+            code,
+            redirect_uri: redirectUri,
+          }),
         },
-        body: JSON.stringify({
-          client_id: clientId,
-          client_secret: clientSecret,
-          code,
-          redirect_uri: redirectUri,
-        }),
-      })
+      )
 
       return await response.json()
     },
@@ -59,15 +62,20 @@ export const GitHubSSOApiPlugin = ({
       const headers = { Authorization: `${token_type} ${access_token}` }
 
       // Fetch Profile
-      const userRes = await fetch("https://api.github.com/user", { headers })
+      const userRes = await fetch('https://api.github.com/user', { headers })
       const user = await userRes.json()
 
       // Fetch Primary Email
-      const emailRes = await fetch("https://api.github.com/user/emails", { headers })
-      const emails: Array<{ email: string; primary: boolean; verified: boolean }> =
-        await emailRes.json()
+      const emailRes = await fetch('https://api.github.com/user/emails', {
+        headers,
+      })
+      const emails: Array<{
+        email: string
+        primary: boolean
+        verified: boolean
+      }> = await emailRes.json()
       const primaryEmail = emails.find((e) => e.primary && e.verified)?.email
-      if (!primaryEmail) throw new Error("GitHub account has no verified email")
+      if (!primaryEmail) throw new Error('GitHub account has no verified email')
 
       return {
         id: String(user.id),
@@ -84,20 +92,23 @@ export const GitHubSSOApiPlugin = ({
 
 ### 2. Register in API Configuration
 
-```ts title="apps/api/src/vitnode.api.config.ts"
-import { buildApiConfig } from "@vitnode/core/vitnode.config"
-import { GitHubSSOApiPlugin } from "./utils/sso/github"
+```ts title="src/vitnode.config.ts"
+import { defineApiRuntime, defineVitNodeConfig } from '@vitnode/core/config'
+import { GitHubSSOApiPlugin } from './utils/sso/github'
 
-export const vitNodeApiConfig = buildApiConfig({
-  // [!code ++:8]
-  authorization: {
-    ssoAdapters: [
-      GitHubSSOApiPlugin({
-        clientId: process.env.GITHUB_CLIENT_ID!,
-        clientSecret: process.env.GITHUB_CLIENT_SECRET!,
-      }),
-    ],
-  },
+export default defineVitNodeConfig({
+  // ...
+  api: defineApiRuntime(async ({ env }) => ({
+    // [!code ++:8]
+    authorization: {
+      ssoAdapters: [
+        GitHubSSOApiPlugin({
+          clientId: env.GITHUB_CLIENT_ID!,
+          clientSecret: env.GITHUB_CLIENT_SECRET!,
+        }),
+      ],
+    },
+  })),
 })
 ```
 
@@ -110,34 +121,37 @@ A **GitHub** login button automatically renders on `/login` and `/register`, and
 <TypeTable
   type={{
     id: {
-      description: "Unique slug for the provider (e.g. 'github', 'slack'). Used in callback URLs.",
+      description:
+        "Unique slug for the provider (e.g. 'github', 'slack'). Used in callback URLs.",
       required: true,
-      type: "string",
+      type: 'string',
     },
     name: {
-      description: "Display name shown on the login button.",
+      description: 'Display name shown on the login button.',
       required: true,
-      type: "string",
+      type: 'string',
     },
     icon: {
-      description: "Brand mark for the login button: inline SVG markup or an image URL. See Provider Icons.",
+      description:
+        'Brand mark for the login button: inline SVG markup or an image URL. See Provider Icons.',
       required: false,
-      type: "string",
+      type: 'string',
     },
     getUrl: {
-      description: "Returns the provider authorization redirect URL.",
+      description: 'Returns the provider authorization redirect URL.',
       required: true,
-      type: "({ state: string }) => string",
+      type: '({ state: string }) => string',
     },
     fetchToken: {
-      description: "Exchanges code for access_token.",
+      description: 'Exchanges code for access_token.',
       required: true,
-      type: "(code: string) => Promise<{ access_token: string; token_type: string }>",
+      type: '(code: string) => Promise<{ access_token: string; token_type: string }>',
     },
     fetchUser: {
-      description: "Fetches user profile (id, email, username, avatarUrl). Return only an email the provider has verified - VitNode treats it as confirmed and will mark a matching unconfirmed account verified. The built-in adapters reject unverified addresses with a 400.",
+      description:
+        'Fetches user profile (id, email, username, avatarUrl). Return only an email the provider has verified - VitNode treats it as confirmed and will mark a matching unconfirmed account verified. The built-in adapters reject unverified addresses with a 400.',
       required: true,
-      type: "(token: TokenResponse) => Promise<SSOUser>",
+      type: '(token: TokenResponse) => Promise<SSOUser>',
     },
   }}
 />

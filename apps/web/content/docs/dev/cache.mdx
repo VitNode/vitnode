@@ -155,7 +155,7 @@ Redis instance - untouched.
 
 ### Verify it is actually caching
 
-Wire up `redis` in `buildApiConfig` (see [Redis
+Wire up `redis` in the `api` runtime of `vitnode.config.ts` (see [Redis
 setup](/docs/dev/advanced/redis)), restart, then open **System → Integrations**
 in the AdminCP: Redis reads _active_ when it is connected and _configured but
 unreachable_ when the URL is wrong. Call the route twice and only the first call

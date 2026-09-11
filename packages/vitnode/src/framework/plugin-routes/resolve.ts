@@ -1,14 +1,15 @@
+import type { AnyVitNodePluginDefinition } from "../../config/types.js";
 import type { ResolvedPluginRoutesModule } from "./types.js";
 
+import { configFromLoadedModule } from "../../config/loaded.js";
+import { PLUGIN_ID_PATTERN } from "../../config/plugin.js";
 import { PLUGIN_ROUTES_ERROR_PREFIX as ERROR_PREFIX } from "./diagnostics.js";
 
-const PLUGIN_ID_PATTERN =
-  /^(?:@[A-Za-z0-9][A-Za-z0-9._-]*\/)?[A-Za-z0-9][A-Za-z0-9._-]*$/;
+export { toSingleQuotedLiteral } from "../../config/literal.js";
 
 const isRecord = (value: unknown): value is Record<string, unknown> =>
   typeof value === "object" && value !== null;
 
-/** Validates a plugin id and returns it unchanged, so it can be used inline. */
 export const assertPluginId = (pluginId: string, source: string): string => {
   if (!PLUGIN_ID_PATTERN.test(pluginId)) {
     throw new Error(
@@ -19,50 +20,21 @@ export const assertPluginId = (pluginId: string, source: string): string => {
   return pluginId;
 };
 
-/**
- * Turns a JavaScript string into a single-quoted TypeScript literal.
- *
- * Every value that reaches this has already been matched against a pattern that
- * cannot contain a quote, a backslash or a newline, so in practice it escapes
- * nothing. It exists anyway, and is tested directly: this is a code generator,
- * and a code generator that concatenates unescaped strings is one refactor away
- * from writing whatever a plugin's `package.json` says into an app's source.
- */
-export const toSingleQuotedLiteral = (value: string): string =>
-  `'${value
-    .replace(/\\/g, "\\\\")
-    .replace(/'/g, "\\'")
-    .replace(/\n/g, "\\n")
-    .replace(/\r/g, "\\r")}'`;
+export const pluginsFromLoadedConfig = (
+  loaded: unknown,
+  source: string,
+): AnyVitNodePluginDefinition[] =>
+  [...configFromLoadedModule(loaded, source).plugins].map(plugin => {
+    assertPluginId(plugin.pluginId, source);
+
+    return plugin;
+  });
 
 export const pluginIdsFromLoadedConfig = (
   loaded: unknown,
   source: string,
-): string[] => {
-  if (!isRecord(loaded) || !isRecord(loaded.vitNodeConfig)) {
-    throw new Error(
-      `${ERROR_PREFIX} ${source} does not export \`vitNodeConfig\`. It has to, because the configured plugins are what the route registry is generated from.`,
-    );
-  }
-
-  const { plugins } = loaded.vitNodeConfig;
-
-  if (!Array.isArray(plugins)) {
-    throw new Error(
-      `${ERROR_PREFIX} \`vitNodeConfig.plugins\` in ${source} is not an array.`,
-    );
-  }
-
-  return plugins.map((plugin: unknown, index) => {
-    if (!isRecord(plugin) || typeof plugin.pluginId !== "string") {
-      throw new Error(
-        `${ERROR_PREFIX} \`vitNodeConfig.plugins[${String(index)}]\` in ${source} has no string \`pluginId\`.`,
-      );
-    }
-
-    return assertPluginId(plugin.pluginId, source);
-  });
-};
+): string[] =>
+  pluginsFromLoadedConfig(loaded, source).map(plugin => plugin.pluginId);
 
 export const routeDeclarationsFromRoutesModule = (
   loaded: unknown,

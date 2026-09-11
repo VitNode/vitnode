@@ -1,6 +1,5 @@
 import type { StaffPermissionSet } from "@/api/lib/permission-staff";
-import type { AdminDashboardWidget } from "@/lib/plugin";
-import type { VitNodeConfig } from "@/vitnode.config";
+import type { AdminDashboardWidget, BuildPluginReturn } from "@/lib/plugin";
 
 import { hasStaffPermission } from "@/api/lib/staff-permission";
 import { CONFIG_PLUGIN } from "@/config";
@@ -93,7 +92,7 @@ export const dashboardWidgetSources = ({
 }: {
   coreTitle: string;
   coreWidgets: DashboardWidgetSource["widgets"];
-  plugins: VitNodeConfig["plugins"];
+  plugins: Pick<BuildPluginReturn, "admin" | "pluginId">[];
   /** What a plugin is called, or its id when it has not named itself. */
   pluginTitle: (pluginId: string) => string;
 }): DashboardWidgetSource[] => [

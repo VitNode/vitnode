@@ -19,21 +19,24 @@ GOOGLE_CLIENT_ID=1234567890-abc.apps.googleusercontent.com
 GOOGLE_CLIENT_SECRET=GOCSPX-xxxxxxxxxxxxxxxx
 ```
 
-```ts title="src/vitnode.api.config.ts"
+```ts title="src/vitnode.config.ts"
 import { GoogleSSOApiPlugin } from '@vitnode/core/api/adapters/sso/google' // [!code ++]
-import { buildApiConfig } from '@vitnode/core/vitnode.config'
+import { defineApiRuntime, defineVitNodeConfig } from '@vitnode/core/config'
 
-export const vitNodeApiConfig = buildApiConfig({
-  plugins: [],
-  // [!code ++:8]
-  authorization: {
-    ssoAdapters: [
-      GoogleSSOApiPlugin({
-        clientId: process.env.GOOGLE_CLIENT_ID,
-        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      }),
-    ],
-  },
+export default defineVitNodeConfig({
+  // ...
+  api: defineApiRuntime(async ({ env }) => ({
+    plugins: [],
+    // [!code ++:8]
+    authorization: {
+      ssoAdapters: [
+        GoogleSSOApiPlugin({
+          clientId: env.GOOGLE_CLIENT_ID,
+          clientSecret: env.GOOGLE_CLIENT_SECRET,
+        }),
+      ],
+    },
+  })),
 })
 ```
 
@@ -159,21 +162,24 @@ GOOGLE_CLIENT_SECRET=GOCSPX-xxxxxxxxxxxxxxxx # [!code ++]
 Add `GoogleSSOApiPlugin` to `authorization.ssoAdapters` in your API config.
 Note that it is a plain factory function, not a class - there is no `new`.
 
-```ts title="src/vitnode.api.config.ts"
+```ts title="src/vitnode.config.ts"
 import { GoogleSSOApiPlugin } from '@vitnode/core/api/adapters/sso/google' // [!code ++]
-import { buildApiConfig } from '@vitnode/core/vitnode.config'
+import { defineApiRuntime, defineVitNodeConfig } from '@vitnode/core/config'
 
-export const vitNodeApiConfig = buildApiConfig({
-  plugins: [],
-  // [!code ++:8]
-  authorization: {
-    ssoAdapters: [
-      GoogleSSOApiPlugin({
-        clientId: process.env.GOOGLE_CLIENT_ID,
-        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      }),
-    ],
-  },
+export default defineVitNodeConfig({
+  // ...
+  api: defineApiRuntime(async ({ env }) => ({
+    plugins: [],
+    // [!code ++:8]
+    authorization: {
+      ssoAdapters: [
+        GoogleSSOApiPlugin({
+          clientId: env.GOOGLE_CLIENT_ID,
+          clientSecret: env.GOOGLE_CLIENT_SECRET,
+        }),
+      ],
+    },
+  })),
 })
 ```
 

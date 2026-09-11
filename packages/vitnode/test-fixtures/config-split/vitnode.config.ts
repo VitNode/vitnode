@@ -1,15 +1,33 @@
-import { buildConfig } from "../../src/vitnode.config";
+import {
+  defineApiRuntime,
+  definePluginFactory,
+  defineVitNodeConfig,
+  defineWebRuntime,
+} from "../../src/config";
 
+const blogPlugin = definePluginFactory({ pluginId: "@acme/blog" });
 
-export const vitNodeConfig = buildConfig({
-  i18n: {
-    defaultLocale: "en",
-    locales: [
-      { code: "en", name: "English" },
-      { code: "pl", name: "Polski" },
-    ],
-    timeZone: "UTC",
+const docsPlugin = definePluginFactory({ pluginId: "@acme/docs" });
+
+export default defineVitNodeConfig({
+  api: defineApiRuntime(() => {
+    throw new Error("the API runtime was loaded");
+  }),
+  app: {
+    i18n: {
+      defaultLocale: "en",
+      locales: [
+        { code: "en", name: "English" },
+        { code: "pl", name: "Polski" },
+      ],
+      timeZone: "UTC",
+    },
+    metadata: { shortTitle: "Fixture", title: "Fixture" },
   },
-  metadata: { shortTitle: "Fixture", title: "Fixture" },
-  plugins: [{ pluginId: "@acme/blog" }, { pluginId: "@acme/docs" }],
+  plugins: [blogPlugin(), docsPlugin()],
+  web: defineWebRuntime({
+    server: () => {
+      throw new Error("the web-server runtime was loaded");
+    },
+  }),
 });

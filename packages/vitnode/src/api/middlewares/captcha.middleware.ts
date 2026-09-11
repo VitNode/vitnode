@@ -2,7 +2,7 @@ import type { Context, Next } from "hono";
 
 import { HTTPException } from "hono/http-exception";
 
-import type { VitNodeApiConfig } from "../../vitnode.config";
+import type { VitNodeApiConfig } from "../../config/types";
 
 const getResFromReCaptcha = async ({
   token,

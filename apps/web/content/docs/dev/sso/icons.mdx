@@ -64,18 +64,21 @@ mystery.
 You do not have to paste the markup. Where the adapter is bundled by Vite -
 `apps/web`, or any generated VitNode app - import the file itself:
 
-```ts title="apps/web/src/vitnode.api.config.ts"
+```ts title="src/vitnode.config.ts"
 import githubIcon from './icons/github.svg?raw' // the file's markup
 import slackIcon from './icons/slack.svg' // the file's URL
 
-export const vitNodeApiConfig = buildApiConfig({
-  authorization: {
-    ssoAdapters: [
-      GitHubSSOApiPlugin({ icon: githubIcon }),
-      SlackSSOApiPlugin({ icon: slackIcon }),
-    ],
-  },
+export default defineVitNodeConfig({
   // ...
+  api: defineApiRuntime(async ({ env }) => ({
+    authorization: {
+      ssoAdapters: [
+        GitHubSSOApiPlugin({ icon: githubIcon }),
+        SlackSSOApiPlugin({ icon: slackIcon }),
+      ],
+    },
+    // ...
+  })),
 })
 ```
 

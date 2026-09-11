@@ -20,11 +20,11 @@ import { VitNodeRootProviders } from '@vitnode/core/tanstack/layout'
 
 import type { Locale } from '@/lib/i18n/shared'
 
-import { vitNodeConfig } from '@/vitnode.config'
+import { vitNodePublicConfig } from '@/vitnode.public.gen'
 
 import appCss from '../styles.css?url'
 
-const { debug, editor, i18n, metadata, theme } = vitNodeConfig
+const { debug, editor, i18n, metadata, plugins, theme } = vitNodePublicConfig
 
 export interface RootRouterContext {
   queryClient: QueryClient
@@ -63,7 +63,7 @@ export const Route = createRootRouteWithContext<RootRouterContext>()({
 function RootComponent() {
   return (
     <VitNodeRootProviders
-      config={{ debug, editor, locales: i18n.locales, theme }}
+      config={{ debug, editor, locales: i18n.locales, plugins, theme }}
     >
       <Outlet />
     </VitNodeRootProviders>

@@ -8,11 +8,11 @@ To keep the AdminCP sidebar light while lazy-loading heavy rich text editors on 
 
 ## The Three Frontend Modules
 
-| Module          | Location                | Purpose                                                                                       |
-| :-------------- | :---------------------- | :-------------------------------------------------------------------------------------------- |
-| `admin/nav`     | `src/admin/nav.tsx`     | Lightweight sidebar navigation entries and Lucide icons                                       |
-| `admin/content` | `src/admin/content.tsx` | Content Engine editing screens, custom fields, and form layouts                               |
-| `config`        | `src/config.tsx`        | The plugin's identity, locale barrel and route declarations - plain data the browser may hold |
+| Module          | Location                | Purpose                                                                              |
+| :-------------- | :---------------------- | :----------------------------------------------------------------------------------- |
+| `admin/nav`     | `src/admin/nav.tsx`     | Lightweight sidebar navigation entries and Lucide icons                              |
+| `admin/content` | `src/admin/content.tsx` | Content Engine editing screens, custom fields, and form layouts                      |
+| `config`        | `src/config.ts`         | The plugin's descriptor: its id, the capability entries it provides, and its options |
 
 ---
 
@@ -60,31 +60,34 @@ export const adminContent = {
 
 ---
 
-## 3. `config.tsx` (Root Plugin Config)
+## 3. `config.ts` (Root Plugin Config)
 
-The factory a host registers in `vitnode.config.ts`. It is bundled for the
-browser with the document shell, so it carries only what a browser may hold:
-the plugin id, its locale barrel and its route declarations.
+The factory a host registers in `vitnode.config.ts`. It is a
+`definePluginFactory` call that names the modules above by their package
+subpaths - it imports none of them, so calling `blogPlugin()` costs nothing and
+pulls no editor, no Hono app and no database table into the host's config.
 
-```tsx title="plugins/blog/src/config.tsx"
-import { buildPlugin } from '@vitnode/core/lib/plugin'
-import messages from './locales'
-import { routes } from './routes'
+```ts title="plugins/blog/src/config.ts"
+import { definePluginFactory } from '@vitnode/core/config'
 
-export const blogPlugin = () =>
-  buildPlugin({
-    pluginId: 'blog',
-    messages,
-    routes,
-  })
+export const blogPlugin = definePluginFactory({
+  pluginId: 'blog',
+  entries: {
+    api: 'blog/config.api',
+    adminNav: 'blog/admin/nav',
+    adminContent: 'blog/admin/content',
+  },
+})
 ```
 
-Do not spread `admin/nav` or `admin/content` into it. The build generates one
-literal import of each per configured plugin - `admin/nav` with the AdminCP
-shell, `admin/content` behind a dynamic `import()` - so an editing screen arrives
-with the route that renders it. Spreading them into the factory puts the whole
-editing stack, rich text editor included, into every public page's bundle. See
-[Configuration](/docs/dev/configuration).
+The host's build generates one literal import of `admin/nav` with the AdminCP
+shell and one of `admin/content` behind a dynamic `import()`, so an editing
+screen arrives with the route that renders it. The Hono API imports
+`config.api` at startup and nothing else. Never import those modules into the
+factory itself - that would put the whole editing stack, rich text editor
+included, into every public page's bundle. See
+[Configuration](/docs/dev/configuration) and
+[Plugin options](/docs/dev/plugins/options) for typed options and defaults.
 
 ---
 
@@ -96,6 +99,7 @@ Declare the subpaths in your plugin's `package.json`:
 {
   "exports": {
     "./config": "./dist/src/config.js",
+    "./config.api": "./dist/src/config.api.js",
     "./admin/nav": "./dist/src/admin/nav.js",
     "./admin/content": "./dist/src/admin/content.js"
   }

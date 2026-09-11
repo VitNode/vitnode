@@ -4,30 +4,34 @@ description: Restrict API request rates per client IP, return 429 responses with
 icon: ShieldAlert
 ---
 
-import { TypeTable } from "fumadocs-ui/components/type-table"
+import { TypeTable } from 'fumadocs-ui/components/type-table'
 
 VitNode includes automated IP-based rate limiting middleware. Exceeding the request budget immediately returns `429 Too Many Requests` with a `Retry-After` header, protecting authentication and public endpoints from brute-force attacks.
 
 ## Quick start
 
-Customize the rate limiter budget in `apps/api/src/vitnode.api.config.ts`:
+Customize the rate limiter budget in the `api` runtime of `src/vitnode.config.ts`:
 
-```ts title="apps/api/src/vitnode.api.config.ts"
-import { buildApiConfig } from "@vitnode/core/vitnode.config"
+```ts title="src/vitnode.config.ts"
+import { defineApiRuntime, defineVitNodeConfig } from '@vitnode/core/config'
 
-export const vitNodeApiConfig = buildApiConfig({
-  // [!code ++:4]
-  rateLimiter: {
-    points: 60, // Max requests allowed
-    duration: 60, // Window in seconds
-  },
+export default defineVitNodeConfig({
+  // ...
+  api: defineApiRuntime(async ({ env }) => ({
+    // [!code ++:4]
+    rateLimiter: {
+      points: 60, // Max requests allowed
+      duration: 60, // Window in seconds
+    },
+  })),
 })
 ```
 
 The default configuration allows **80 requests per 60 seconds** per IP address.
 
 <Callout type="info" title="Disabled in development">
-  Rate limiting is automatically bypassed when `NODE_ENV=development` to prevent interruptions during local coding.
+  Rate limiting is automatically bypassed when `NODE_ENV=development` to prevent
+  interruptions during local coding.
 </Callout>
 
 ---
@@ -54,13 +58,16 @@ Content-Type: application/json
 - **Without Redis**: Counters are tracked in local memory per server instance.
 - **With Redis**: Counters are synchronized across all API containers using a distributed sliding window.
 
-Configure Redis in `vitnode.api.config.ts`:
+Configure Redis in the same `api` runtime:
 
 ```ts
-export const vitNodeApiConfig = buildApiConfig({
-  redis: process.env.REDIS_URL
-    ? { url: process.env.REDIS_URL, password: process.env.REDIS_PASSWORD }
-    : undefined,
+export default defineVitNodeConfig({
+  // ...
+  api: defineApiRuntime(async ({ env }) => ({
+    redis: env.REDIS_URL
+      ? { url: env.REDIS_URL, password: env.REDIS_PASSWORD }
+      : undefined,
+  })),
 })
 ```
 
@@ -71,14 +78,15 @@ export const vitNodeApiConfig = buildApiConfig({
 <TypeTable
   type={{
     points: {
-      default: "80",
-      description: "Total number of request points allowed within the duration window.",
-      type: "number",
+      default: '80',
+      description:
+        'Total number of request points allowed within the duration window.',
+      type: 'number',
     },
     duration: {
-      default: "60",
-      description: "Window length in seconds before points reset.",
-      type: "number",
+      default: '60',
+      description: 'Window length in seconds before points reset.',
+      type: 'number',
     },
   }}
 />

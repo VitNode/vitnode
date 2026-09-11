@@ -1,5 +1,5 @@
 import { createRouteHead } from '@vitnode/core/tanstack/metadata'
 
-import { vitNodeConfig } from '@/vitnode.config'
+import { vitNodePublicConfig } from '@/vitnode.public.gen'
 
-export const pageHead = createRouteHead(vitNodeConfig.metadata)
+export const pageHead = createRouteHead(vitNodePublicConfig.metadata)

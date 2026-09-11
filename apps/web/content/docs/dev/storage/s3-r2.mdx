@@ -15,20 +15,23 @@ you own at all. R2 is S3-compatible, so the same adapter covers both: you add an
 
 ## Quick start
 
-```ts title="src/vitnode.api.config.ts"
+```ts title="src/vitnode.config.ts"
 import { S3StorageAdapter } from '@vitnode/s3' // [!code ++]
-import { buildApiConfig } from '@vitnode/core/vitnode.config'
+import { defineApiRuntime, defineVitNodeConfig } from '@vitnode/core/config'
 
-export const vitNodeApiConfig = buildApiConfig({
-  storage: {
-    // [!code ++:6]
-    adapter: S3StorageAdapter({
-      bucket: process.env.S3_BUCKET,
-      region: process.env.S3_REGION,
-      accessKeyId: process.env.S3_ACCESS_KEY_ID,
-      secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
-    }),
-  },
+export default defineVitNodeConfig({
+  // ...
+  api: defineApiRuntime(async ({ env }) => ({
+    storage: {
+      // [!code ++:6]
+      adapter: S3StorageAdapter({
+        bucket: env.S3_BUCKET,
+        region: env.S3_REGION,
+        accessKeyId: env.S3_ACCESS_KEY_ID,
+        secretAccessKey: env.S3_SECRET_ACCESS_KEY,
+      }),
+    },
+  })),
 })
 ```
 
@@ -131,27 +134,30 @@ S3_SECRET_ACCESS_KEY=your_secret_access_key
 
 For AWS S3, the four values above are all it needs:
 
-```ts title="src/vitnode.api.config.ts"
+```ts title="src/vitnode.config.ts"
 import { S3StorageAdapter } from '@vitnode/s3' // [!code ++]
-import { buildApiConfig } from '@vitnode/core/vitnode.config'
+import { defineApiRuntime, defineVitNodeConfig } from '@vitnode/core/config'
 
-export const vitNodeApiConfig = buildApiConfig({
-  storage: {
-    // [!code ++:6]
-    adapter: S3StorageAdapter({
-      bucket: process.env.S3_BUCKET,
-      region: process.env.S3_REGION,
-      accessKeyId: process.env.S3_ACCESS_KEY_ID,
-      secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
-    }),
-  },
+export default defineVitNodeConfig({
+  // ...
+  api: defineApiRuntime(async ({ env }) => ({
+    storage: {
+      // [!code ++:6]
+      adapter: S3StorageAdapter({
+        bucket: env.S3_BUCKET,
+        region: env.S3_REGION,
+        accessKeyId: env.S3_ACCESS_KEY_ID,
+        secretAccessKey: env.S3_SECRET_ACCESS_KEY,
+      }),
+    },
+  })),
 })
 ```
 
 For Cloudflare R2, keep the same adapter and add the endpoint - the region stays
 at its `auto` default:
 
-```ts title="src/vitnode.api.config.ts"
+```ts title="src/vitnode.config.ts"
 adapter: S3StorageAdapter({
   bucket: process.env.S3_BUCKET,
   accessKeyId: process.env.S3_ACCESS_KEY_ID,

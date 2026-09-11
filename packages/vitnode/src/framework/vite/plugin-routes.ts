@@ -13,6 +13,11 @@ import {
 } from "node:path";
 import { pathToFileURL } from "node:url";
 
+import type {
+  AnyVitNodePluginDefinition,
+  VitNodeConfig,
+  VitNodePluginCapability,
+} from "../../config/types";
 import type { ResolvedAdminNavModule } from "../admin-nav";
 import type { ResolvedContentRegistryModule } from "../content-registry";
 import type {
@@ -21,29 +26,33 @@ import type {
   PluginRouteCompilerSource,
 } from "../plugin-routes";
 
+import { VitNodeConfigError } from "../../config/errors";
+import { configFromLoadedModule } from "../../config/loaded";
+import {
+  capabilitySpecifier,
+  PLUGIN_CAPABILITY_SUBPATHS,
+} from "../../config/plugin";
+import {
+  generatePublicConfigSource,
+  projectPublicConfig,
+} from "../../config/public";
 import { generateAdminNavSource } from "../admin-nav";
 import { generateContentRegistrySource } from "../content-registry";
 import {
+  assertPluginId,
   compilePluginRoutes,
   hostRoutePathsFromFiles,
   lazyImportSpecifier,
-  pluginIdsFromLoadedConfig,
   routeDeclarationsFromRoutesModule,
 } from "../plugin-routes";
+import { rootConfigPathFor } from "./config-path";
 import { createGenerationQueue } from "./generation-queue";
 import { versionedModuleUrl } from "./module-version";
 
-const ROUTES_SUBPATH = "routes";
-
 const LEGACY_MANIFEST_SUBPATH = "routes/manifest";
-
-const ADMIN_NAV_SUBPATH = "admin/nav";
-
-const ADMIN_CONTENT_SUBPATH = "admin/content";
 
 const ERROR_PREFIX = "[VitNode plugin routes]";
 
-/** Where a file-based router keeps an app's own route files, by convention. */
 const DEFAULT_HOST_ROUTES_DIR = join("src", "routes");
 
 export interface VitNodePluginRoutesOptions {
@@ -52,26 +61,28 @@ export interface VitNodePluginRoutesOptions {
   hostRoutesDir?: null | string;
 }
 
-/** Everything the plugin reads and writes, derived from the app root. */
 const pathsFor = (appRoot: string) => ({
-  /** The configured plugin list, and the only place it is read from. */
-  config: join(appRoot, "src", "vitnode.config.ts"),
+  config: rootConfigPathFor(appRoot),
 
   adminNav: join(appRoot, "src", "admin-nav.gen.ts"),
 
   contentRegistry: join(appRoot, "src", "content-registry.gen.ts"),
 
+  publicConfig: join(appRoot, "src", "vitnode.public.gen.ts"),
+
   registry: join(appRoot, "src", "plugin-routes.gen.ts"),
 
   staleManifest: join(appRoot, "src", "plugin-route-manifest.gen.ts"),
-  /** The file-based router's config, read only for where the routes are. */
+
   routerConfig: join(appRoot, "tsr.config.json"),
 });
 
-const resolverFor = (appRoot: string) => {
+export type PackageFileResolver = (specifier: string) => null | string;
+
+const resolverFor = (appRoot: string): PackageFileResolver => {
   const requireFromApp = createRequire(join(appRoot, "package.json"));
 
-  return (specifier: string): null | string => {
+  return specifier => {
     try {
       const file = requireFromApp.resolve(specifier);
 
@@ -82,35 +93,138 @@ const resolverFor = (appRoot: string) => {
   };
 };
 
-const readConfiguredPluginIds = async (
+export const readConfiguredConfig = async (
   appRoot: string,
-  configPath: string,
-): Promise<string[]> => {
+  configPath: string = pathsFor(appRoot).config,
+): Promise<VitNodeConfig> => {
+  if (!existsSync(configPath)) {
+    throw new VitNodeConfigError(
+      "config-invalid",
+      `No vitnode.config.ts found at ${relative(appRoot, configPath) || configPath}. Create one with \`export default defineVitNodeConfig({ ... })\` from \`@vitnode/core/config\`.`,
+    );
+  }
+
   const jiti = createJiti(pathToFileURL(join(appRoot, "package.json")).href, {
     interopDefault: true,
     moduleCache: false,
   });
 
-  return pluginIdsFromLoadedConfig(
-    await jiti.import(configPath),
-    relative(appRoot, configPath),
-  );
+  const source = relative(appRoot, configPath);
+  const config = configFromLoadedModule(await jiti.import(configPath), source);
+
+  config.plugins.forEach(plugin => assertPluginId(plugin.pluginId, source));
+
+  return config;
 };
 
 export const configuredPluginIds = async (appRoot: string): Promise<string[]> =>
-  await readConfiguredPluginIds(appRoot, pathsFor(appRoot).config);
+  (await readConfiguredConfig(appRoot)).plugins.map(plugin => plugin.pluginId);
+
+const unresolvableCapability = (
+  plugin: AnyVitNodePluginDefinition,
+  capability: VitNodePluginCapability,
+  specifier: string,
+): VitNodeConfigError =>
+  new VitNodeConfigError(
+    "capability-unresolvable",
+    `Plugin "${plugin.pluginId}" advertises its ${capability} module at "${specifier}", which does not resolve from this app. Check the plugin's package.json \`exports\` and that its build output is up to date.`,
+  );
+
+export interface ResolvedCapabilityModule {
+  pluginId: string;
+  specifier: string;
+}
+
+export const readPluginCapabilityModules = <T extends ResolvedCapabilityModule>(
+  plugins: readonly AnyVitNodePluginDefinition[],
+  capability: Exclude<VitNodePluginCapability, "api">,
+  resolvePackageFile: PackageFileResolver,
+): { modules: T[]; watch: string[] } => {
+  const modules: T[] = [];
+  const watch: string[] = [];
+
+  for (const plugin of plugins) {
+    const specifier = capabilitySpecifier(plugin, capability);
+
+    if (specifier === undefined) continue;
+
+    const file = resolvePackageFile(specifier);
+
+    if (file === null) {
+      if (plugin.discovery === "declared") {
+        throw unresolvableCapability(plugin, capability, specifier);
+      }
+
+      continue;
+    }
+
+    modules.push({ pluginId: plugin.pluginId, specifier } as T);
+    watch.push(file);
+  }
+
+  return { modules, watch };
+};
+
+const conventionPlugin = (pluginId: string): AnyVitNodePluginDefinition => ({
+  discovery: "convention",
+  entries: {},
+  kind: "vitnode.plugin",
+  options: {},
+  pluginId,
+});
+
+const capabilityForSubpath = (
+  subpath: string,
+): Exclude<VitNodePluginCapability, "api"> => {
+  const found = (
+    Object.entries(PLUGIN_CAPABILITY_SUBPATHS) as [
+      VitNodePluginCapability,
+      string,
+    ][]
+  ).find(([capability, value]) => value === subpath && capability !== "api");
+
+  if (found === undefined) {
+    throw new Error(
+      `${ERROR_PREFIX} "${subpath}" is not a plugin frontend capability subpath.`,
+    );
+  }
+
+  return found[0] as Exclude<VitNodePluginCapability, "api">;
+};
+
+export const readOptionalPluginModules = <
+  T extends { pluginId: string; specifier: string },
+>(
+  pluginIds: readonly string[],
+  subpath: string,
+  resolvePackageFile: PackageFileResolver,
+): { modules: T[]; watch: string[] } =>
+  readPluginCapabilityModules<T>(
+    pluginIds.map(conventionPlugin),
+    capabilityForSubpath(subpath),
+    resolvePackageFile,
+  );
 
 const readPluginRoutes = async (
-  pluginId: string,
-  resolvePackageFile: (specifier: string) => null | string,
+  plugin: AnyVitNodePluginDefinition,
+  resolvePackageFile: PackageFileResolver,
 ): Promise<{ source: PluginRouteCompilerSource; watch: null | string }> => {
-  const specifier = `${pluginId}/${ROUTES_SUBPATH}`;
+  const specifier = capabilitySpecifier(plugin, "routes");
+
+  if (specifier === undefined) {
+    return { source: { pluginId: plugin.pluginId }, watch: null };
+  }
+
   const file = resolvePackageFile(specifier);
 
   if (file === null) {
-    assertNoLegacyRouteManifest(pluginId, resolvePackageFile);
+    if (plugin.discovery === "declared") {
+      throw unresolvableCapability(plugin, "routes", specifier);
+    }
 
-    return { source: { pluginId }, watch: null };
+    assertNoLegacyRouteManifest(plugin.pluginId, resolvePackageFile);
+
+    return { source: { pluginId: plugin.pluginId }, watch: null };
   }
 
   const loaded: unknown = await import(
@@ -119,7 +233,7 @@ const readPluginRoutes = async (
 
   return {
     source: {
-      pluginId,
+      pluginId: plugin.pluginId,
       routes: routeDeclarationsFromRoutesModule(loaded, specifier),
       routesSpecifier: specifier,
     },
@@ -127,32 +241,21 @@ const readPluginRoutes = async (
   };
 };
 
-/**
- * Fails the build for a plugin that still declares the flat route manifest.
- *
- * Only reached when the plugin exports no `routes` module, which is exactly the
- * shape a plugin written against the previous API has: `routes/manifest`
- * resolves and `routes` does not. Without this it is indistinguishable from a
- * plugin that ships no pages, so every one of its URLs would 404 with nothing
- * anywhere saying why.
- */
 const assertNoLegacyRouteManifest = (
   pluginId: string,
-  resolvePackageFile: (specifier: string) => null | string,
+  resolvePackageFile: PackageFileResolver,
 ): void => {
   const legacy = `${pluginId}/${LEGACY_MANIFEST_SUBPATH}`;
 
   if (resolvePackageFile(legacy) === null) return;
 
   throw new Error(
-    `${ERROR_PREFIX} Plugin "${pluginId}" exports "${legacy}" but no "${pluginId}/${ROUTES_SUBPATH}". Plugin routes are now a nested tree in the plugin's own \`src/routes.ts\`: export \`routes = definePluginRoutes([...])\` built from \`page()\`, \`layout()\` and \`index()\`, with each module named by \`component: lazy(() => import("./pages/..."))\` instead of an \`entry\` string. See https://vitnode.com/docs/dev/plugins/routes.`,
+    `${ERROR_PREFIX} Plugin "${pluginId}" exports "${legacy}" but no "${pluginId}/${PLUGIN_CAPABILITY_SUBPATHS.routes}". Plugin routes are now a nested tree in the plugin's own \`src/routes.ts\`: export \`routes = definePluginRoutes([...])\` built from \`page()\`, \`layout()\` and \`index()\`, with each module named by \`component: lazy(() => import("./pages/..."))\` instead of an \`entry\` string. See https://vitnode.com/docs/dev/plugins/routes.`,
   );
 };
 
-/** Where an app's own route files are, and which of them are not routes. */
 interface HostRoutesConfig {
   dir: null | string;
-  /** The router's own `routeFileIgnorePattern`, if it declares one. */
   ignore: null | RegExp;
 }
 
@@ -180,7 +283,6 @@ const hostRoutesConfigFor = (
         routes: config.routesDirectory,
       };
     } catch {
-      // No `tsr.config.json`, or one that is not JSON.
       return {};
     }
   })();
@@ -193,8 +295,6 @@ const hostRoutesConfigFor = (
     try {
       return new RegExp(declared.ignore);
     } catch {
-      // Not a pattern this build can compile. The router will complain about it
-      // in its own words; refusing to check anything here would be worse.
       return null;
     }
   })();
@@ -212,7 +312,6 @@ const hostRoutesConfigFor = (
   };
 };
 
-/** Every file under a directory, relative to it, in a deterministic order. */
 const filesUnder = (directory: string, prefix = ""): string[] => {
   const entries = readdirSync(directory, { withFileTypes: true }).sort(
     (a, b) => (a.name < b.name ? -1 : 1),
@@ -229,13 +328,6 @@ const filesUnder = (directory: string, prefix = ""): string[] => {
   });
 };
 
-/**
- * Every URL this application's own route files claim, or none.
- *
- * Read from the file *names* - nothing is imported and no router is loaded - and
- * silently empty when the app has no such directory, which is the correct answer
- * for a VitNode app on Vite that is not using a file-based router at all.
- */
 const readHostRoutes = (
   appRoot: string,
   { dir, ignore }: HostRoutesConfig,
@@ -250,87 +342,10 @@ const readHostRoutes = (
 
   return hostRoutePathsFromFiles(files).map(hostRoute => ({
     ...hostRoute,
-    // Relative to the app root, because that is the path an author would type
-    // to open the file the diagnostic is telling them about.
     file: prefix === "" ? hostRoute.file : `${prefix}/${hostRoute.file}`,
   }));
 };
 
-/**
- * Which configured plugins export an optional browser-safe subpath.
- *
- * Resolution *is* the discovery: a plugin appears in a projection by exporting
- * the module and is silently absent otherwise, which is the same contract the
- * route manifest has and for the same reason - most plugins contribute neither
- * navigation nor content types, and an app that installs one must not fail to
- * build over it.
- *
- * Nothing is imported here. Both modules are browser-safe by contract but both
- * are also React - `admin/content` carries a plugin's editor fields and form
- * layouts outright - and a build tool has no business evaluating them: what a
- * generated file needs is a specifier, and a specifier is a string. The resolved
- * files are returned for the dev server to watch, so a plugin *gaining* one
- * while the server runs regenerates rather than requiring a restart.
- *
- * Ordered by the configured plugin list, and re-sorted by each generator - so
- * the bytes depend on which plugins are configured and on nothing else.
- *
- * ## The two subpaths are discovered independently, and that is the contract
- *
- * One call per projection, each asking only whether *its own* module resolves.
- * A plugin may export `admin/nav` and not `admin/content` - an AdminCP settings
- * screen that registers no content types - or `admin/content` and no navigation
- * beyond the entries its content types already imply, or neither. None of those
- * is a misconfiguration, and nothing anywhere compares the two resulting lists:
- * navigation describes what exists, a content registration describes how it is
- * edited, and they are separate concepts that happen to be discovered in one
- * pass over one configured plugin list.
- *
- * Exported for `./plugin-routes.test.ts`, which drives it with a synthetic
- * resolver - the only way to state the independence above without inventing two
- * fixture packages. Deliberately absent from `./index.ts`: this is not part of
- * `@vitnode/core/framework/vite`'s public surface.
- */
-export const readOptionalPluginModules = <
-  T extends { pluginId: string; specifier: string },
->(
-  pluginIds: readonly string[],
-  subpath: string,
-  resolvePackageFile: (specifier: string) => null | string,
-): { modules: T[]; watch: string[] } => {
-  const modules: T[] = [];
-  const watch: string[] = [];
-
-  for (const pluginId of pluginIds) {
-    const specifier = `${pluginId}/${subpath}`;
-    const file = resolvePackageFile(specifier);
-
-    if (file === null) continue;
-
-    modules.push({ pluginId, specifier } as T);
-    watch.push(file);
-  }
-
-  return { modules, watch };
-};
-
-/**
- * Fails the build for a page or layout module the plugin names and does not
- * have.
- *
- * The one check in this layer that cannot be pure, and the one thing a generated
- * file no longer does on the app's behalf: a page is reached through the literal
- * `import()` inside its own plugin's `lazy()` call, so nothing in the app's
- * source names it and nothing in the app's build resolves it until a visitor
- * navigates. Left unchecked, a mistyped page path is a broken chunk request in a
- * browser rather than a failed build.
- *
- * Best effort by construction, and deliberately so. `lazyImportSpecifier` reads
- * the specifier off the compiled callback and answers `null` for anything it
- * cannot be sure about - a bundler-rewritten import, a computed one, a bare
- * package specifier - and this skips those rather than guessing. A check that
- * failed a build over a callback it misread would be worse than no check.
- */
 const assertComponentsImportable = (
   compiled: CompiledPluginRoutes,
   routesFiles: ReadonlyMap<string, string>,
@@ -359,28 +374,41 @@ const assertComponentsImportable = (
   }
 };
 
-const discover = async (
+export interface DiscoveredProjections {
+  adminNav: ResolvedAdminNavModule[];
+  compiled: CompiledPluginRoutes;
+  contentRegistry: ResolvedContentRegistryModule[];
+  publicConfig: string;
+  watch: string[];
+}
+
+export const discoverProjections = async (
   appRoot: string,
   options: VitNodePluginRoutesOptions,
-  onLoaded?: (watch: string[]) => void,
-) => {
+  {
+    onLoaded,
+    resolvePackageFile = resolverFor(appRoot),
+  }: {
+    onLoaded?: (watch: string[]) => void;
+    resolvePackageFile?: PackageFileResolver;
+  } = {},
+): Promise<DiscoveredProjections> => {
   const paths = pathsFor(appRoot);
-  const resolvePackageFile = resolverFor(appRoot);
-  const pluginIds = await readConfiguredPluginIds(appRoot, paths.config);
+  const config = await readConfiguredConfig(appRoot, paths.config);
+  const { plugins } = config;
+
   const loaded = await Promise.all(
-    pluginIds.map(async pluginId =>
-      readPluginRoutes(pluginId, resolvePackageFile),
-    ),
+    plugins.map(async plugin => readPluginRoutes(plugin, resolvePackageFile)),
   );
-  const adminNav = readOptionalPluginModules<ResolvedAdminNavModule>(
-    pluginIds,
-    ADMIN_NAV_SUBPATH,
+  const adminNav = readPluginCapabilityModules<ResolvedAdminNavModule>(
+    plugins,
+    "adminNav",
     resolvePackageFile,
   );
   const contentRegistry =
-    readOptionalPluginModules<ResolvedContentRegistryModule>(
-      pluginIds,
-      ADMIN_CONTENT_SUBPATH,
+    readPluginCapabilityModules<ResolvedContentRegistryModule>(
+      plugins,
+      "adminContent",
       resolvePackageFile,
     );
 
@@ -413,6 +441,7 @@ const discover = async (
     adminNav: adminNav.modules,
     compiled,
     contentRegistry: contentRegistry.modules,
+    publicConfig: generatePublicConfigSource(projectPublicConfig(config)),
     watch,
   };
 };
@@ -429,18 +458,25 @@ const removeIfPresent = async (path: string): Promise<void> => {
   await unlink(path);
 };
 
-/** All three generated files, from one discovery pass. */
-const writeGenerated = async (
+export const generatedProjectionPaths = (appRoot: string) => {
+  const paths = pathsFor(appRoot);
+
+  return {
+    adminNav: paths.adminNav,
+    contentRegistry: paths.contentRegistry,
+    publicConfig: paths.publicConfig,
+    registry: paths.registry,
+  };
+};
+
+export const writeGeneratedProjections = async (
   appRoot: string,
   options: VitNodePluginRoutesOptions,
   onLoaded?: (watch: string[]) => void,
 ): Promise<void> => {
   const paths = pathsFor(appRoot);
-  const { adminNav, compiled, contentRegistry } = await discover(
-    appRoot,
-    options,
-    onLoaded,
-  );
+  const { adminNav, compiled, contentRegistry, publicConfig } =
+    await discoverProjections(appRoot, options, { onLoaded });
 
   await Promise.all([
     writeIfChanged(paths.registry, compiled.source),
@@ -449,6 +485,7 @@ const writeGenerated = async (
       paths.contentRegistry,
       generateContentRegistrySource(contentRegistry),
     ),
+    writeIfChanged(paths.publicConfig, publicConfig),
     removeIfPresent(paths.staleManifest),
   ]);
 };
@@ -462,7 +499,7 @@ export const vitNodePluginRoutes = (
 
   return {
     config: async () => {
-      await writeGenerated(appRoot, options);
+      await writeGeneratedProjections(appRoot, options);
     },
 
     configureServer: server => {
@@ -470,7 +507,7 @@ export const vitNodePluginRoutes = (
 
       const queue = createGenerationQueue(
         async () =>
-          writeGenerated(appRoot, options, files => {
+          writeGeneratedProjections(appRoot, options, files => {
             files.forEach(file => watched.add(file));
             server.watcher.add(files);
           }),

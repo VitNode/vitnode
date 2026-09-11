@@ -18,27 +18,27 @@ column at 2 a.m.
 Public API generation requires `publication: { enabled: true }` and at least one exposed `slug` field in `publicApi.fields` for the detail route:
 
 ```ts title="plugins/blog/src/content/article.ts"
-import { defineContentType, field } from "@vitnode/core/content"
+import { defineContentType, field } from '@vitnode/core/content'
 
 export const articleContentType = defineContentType({
-  id: "blog.article",
-  tableName: "blog_articles",
+  id: 'blog.article',
+  tableName: 'blog_articles',
   fields: {
     adminNotes: field.textarea({ nullable: true }),
     excerpt: field.textarea({ nullable: true }),
-    slug: field.slug({ source: "title" }),
+    slug: field.slug({ source: 'title' }),
     title: field.text({ required: true }),
   },
   // [!code ++:10]
   publication: { enabled: true },
   publicApi: {
     enabled: true,
-    path: "articles",
-    fields: ["id", "title", "slug", "excerpt", "publishedAt"],
-    searchableFields: ["title", "excerpt"],
-    orderableFields: ["title"],
-    defaultOrderBy: "publishedAt",
-    defaultOrder: "desc",
+    path: 'articles',
+    fields: ['id', 'title', 'slug', 'excerpt', 'publishedAt'],
+    searchableFields: ['title', 'excerpt'],
+    orderableFields: ['title'],
+    defaultOrderBy: 'publishedAt',
+    defaultOrder: 'desc',
   },
 })
 ```
@@ -53,19 +53,19 @@ export const articleContentType = defineContentType({
 Register the content type's public routes using `buildContentPublicModule`:
 
 ```ts title="plugins/blog/src/config.api.ts"
-import { buildApiPlugin } from "@vitnode/core/api/lib/plugin"
-import { buildContentPublicModule } from "@vitnode/core/content/server"
+import { buildApiPlugin } from '@vitnode/core/api/lib/plugin'
+import { buildContentPublicModule } from '@vitnode/core/content/server'
 
-import { articleContent } from "./content/articles"
+import { articleContent } from './content/articles'
 
 export const blogApiPlugin = () =>
   buildApiPlugin({
-    pluginId: "blog",
+    pluginId: 'blog',
     modules: [
       // [!code ++:4]
       buildContentPublicModule({
         contentTypes: [articleContent],
-        pluginId: "blog",
+        pluginId: 'blog',
       }),
     ],
   })
@@ -83,12 +83,15 @@ The module exposes two public endpoints:
 
 Content mutations already invalidate VitNode's internal content cache tags. If a separate frontend application caches rendered pages, add its origin so the API can notify it through the framework-neutral revalidation endpoint:
 
-```ts title="apps/api/src/vitnode.api.config.ts"
-export const vitNodeApiConfig = buildApiConfig({
-  content: {
-    // [!code ++]
-    revalidateOrigins: ["https://www.example.com"],
-  },
+```ts title="src/vitnode.config.ts"
+export default defineVitNodeConfig({
+  // ...
+  api: defineApiRuntime(async ({ env }) => ({
+    content: {
+      // [!code ++]
+      revalidateOrigins: ['https://www.example.com'],
+    },
+  })),
 })
 ```
 
@@ -99,16 +102,16 @@ Leave this unset when the frontend reads directly from the public content API.
 
 ## Public API Configuration Reference
 
-| Property | Type | Default | Description |
-| :--- | :--- | :--- | :--- |
-| `enabled` | `true` | — | Opts into the generated public API module. |
-| `path` | `string` | — | Single lowercase URL segment (e.g. `"articles"`, never `"admin"`). |
-| `fields` | `string[]` | — | Strict allowlist of exposed fields. Must include the `slug` field. Can include `id` and `publishedAt`. |
-| `searchableFields` | `string[]` | `[]` | Exposed text fields scanned by the `?search=` query parameter. |
-| `orderableFields` | `string[]` | `[]` | Exposed columns accepted by the `?orderBy=` query parameter. |
-| `filterableFields` | `string[]` | `[]` | Exposed columns accepted as equality filters. |
-| `defaultOrderBy` | `string` | `"publishedAt"` | Default column used for ordering public list results. |
-| `defaultOrder` | `"asc" \| "desc"` | `"desc"` | Default sorting direction. |
+| Property           | Type              | Default         | Description                                                                                            |
+| :----------------- | :---------------- | :-------------- | :----------------------------------------------------------------------------------------------------- |
+| `enabled`          | `true`            | —               | Opts into the generated public API module.                                                             |
+| `path`             | `string`          | —               | Single lowercase URL segment (e.g. `"articles"`, never `"admin"`).                                     |
+| `fields`           | `string[]`        | —               | Strict allowlist of exposed fields. Must include the `slug` field. Can include `id` and `publishedAt`. |
+| `searchableFields` | `string[]`        | `[]`            | Exposed text fields scanned by the `?search=` query parameter.                                         |
+| `orderableFields`  | `string[]`        | `[]`            | Exposed columns accepted by the `?orderBy=` query parameter.                                           |
+| `filterableFields` | `string[]`        | `[]`            | Exposed columns accepted as equality filters.                                                          |
+| `defaultOrderBy`   | `string`          | `"publishedAt"` | Default column used for ordering public list results.                                                  |
+| `defaultOrder`     | `"asc" \| "desc"` | `"desc"`        | Default sorting direction.                                                                             |
 
 ## Keep the public surface intentional
 

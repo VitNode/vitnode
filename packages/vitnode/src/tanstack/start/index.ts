@@ -1,4 +1,4 @@
-export type { VitNodeStartOptions } from "./create-start";
+export type { VitNodeStartConfig, VitNodeStartOptions } from "./create-start";
 export { createVitNodeStart } from "./create-start";
 export {
   applyDocumentCacheControl,

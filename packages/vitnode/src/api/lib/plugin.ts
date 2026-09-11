@@ -1,5 +1,9 @@
 import { OpenAPIHono } from "@hono/zod-openapi";
 
+import type {
+  VitNodeApiPluginEntry,
+  VitNodeRuntimeContext,
+} from "@/config/types";
 import type { RegisteredContentType } from "@/content/registry";
 import type { AnyContentModel } from "@/content/server/model";
 import type { AnyContentTypeDefinition } from "@/content/types";
@@ -37,19 +41,43 @@ export interface BuildPluginApiReturn {
   webSockets?: Omit<WebSocketConfig, "pluginId">[];
 }
 
+export interface BuildApiPluginArgs<P extends string = string> {
+  messages?: LocaleMessagesMap;
+  modules?: BuildModuleReturn<P, string>[];
+  permissionStaff?: PermissionStaffConfig;
+  pluginId: P;
+  searchIndexers?: SearchIndexer[];
+}
+
+export type ApiPluginArgsFactory<TOptions, P extends string = string> = (
+  options: TOptions,
+  context: VitNodeRuntimeContext,
+) => BuildApiPluginArgs<P> | Promise<BuildApiPluginArgs<P>>;
+
+export function defineApiPluginFactory<P extends string>(
+  args: BuildApiPluginArgs<P>,
+): VitNodeApiPluginEntry<Record<never, never>>;
+export function defineApiPluginFactory<TOptions, P extends string = string>(
+  build: ApiPluginArgsFactory<TOptions, P>,
+): VitNodeApiPluginEntry<TOptions>;
+export function defineApiPluginFactory<TOptions, P extends string>(
+  definition: ApiPluginArgsFactory<TOptions, P> | BuildApiPluginArgs<P>,
+): VitNodeApiPluginEntry<TOptions> {
+  return async (options, context) =>
+    buildApiPlugin(
+      typeof definition === "function"
+        ? await definition(options, context)
+        : definition,
+    );
+}
+
 export function buildApiPlugin<P extends string>({
   pluginId,
   messages,
   modules = [],
   permissionStaff,
   searchIndexers,
-}: {
-  messages?: LocaleMessagesMap;
-  modules?: BuildModuleReturn<P, string>[];
-  permissionStaff?: PermissionStaffConfig;
-  pluginId: P;
-  searchIndexers?: SearchIndexer[];
-}): BuildPluginApiReturn {
+}: BuildApiPluginArgs<P>): BuildPluginApiReturn {
   // Run for checking if the plugin is valid
   checkPluginId(pluginId);
 

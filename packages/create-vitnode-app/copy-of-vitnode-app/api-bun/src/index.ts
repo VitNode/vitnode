@@ -1,13 +1,16 @@
 import { OpenAPIHono } from "@hono/zod-openapi";
 import { VitNodeAPI } from "@vitnode/core/api/config";
+import { resolveApiConfig } from "@vitnode/core/config/server";
 
-import { vitNodeApiConfig } from "./vitnode.api.config.js";
+import vitNodeConfig from "./vitnode.config.js";
 
 const app = new OpenAPIHono().basePath("/api");
 
 VitNodeAPI({
   app,
-  vitNodeApiConfig,
+  vitNodeApiConfig: await resolveApiConfig(vitNodeConfig, {
+    appRoot: import.meta.dirname,
+  }),
 });
 
 export default {

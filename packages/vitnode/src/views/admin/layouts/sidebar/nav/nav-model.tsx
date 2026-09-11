@@ -11,7 +11,7 @@ import type {
   PermissionsStaffArgs,
   StaffPermissionSet,
 } from "@/api/lib/permission-staff";
-import type { VitNodeConfig } from "@/vitnode.config";
+import type { AdminNavPluginSource } from "@/lib/plugin";
 
 import { hasStaffPermission } from "@/api/lib/staff-permission";
 import { CONFIG_PLUGIN } from "@/config";
@@ -68,7 +68,9 @@ export interface AdminNavItemDeclaration extends AdminNavSubItemDeclaration {
   items?: AdminNavSubItemDeclaration[];
 }
 
-export type AdminNavConfig = Pick<VitNodeConfig, "plugins">;
+export interface AdminNavConfig {
+  plugins: AdminNavPluginSource[];
+}
 
 /** One sidebar heading and everything declared under it. */
 export interface AdminNavGroupDeclaration {
@@ -234,7 +236,7 @@ const coreNavGroup = (): AdminNavGroupDeclaration => ({
 });
 
 const contentNavItems = (
-  plugin: VitNodeConfig["plugins"][number],
+  plugin: AdminNavPluginSource,
 ): AdminNavItemDeclaration[] =>
   (plugin.contentTypes ?? [])
     .filter(({ definition }) => definition.admin.navigation.enabled)
@@ -254,7 +256,7 @@ const contentNavItems = (
     }));
 
 const declaredNavItems = (
-  plugin: VitNodeConfig["plugins"][number],
+  plugin: AdminNavPluginSource,
 ): AdminNavItemDeclaration[] =>
   (plugin.admin?.nav ?? []).map(item => ({
     href: item.href,
@@ -286,7 +288,7 @@ const declaredNavItems = (
  * installed plugin, with nothing translated and nothing filtered.
  *
  * The first of the model's two stages, and the split is what lets them run in
- * different places. This one is a pure function of `VitNodeConfig` - it needs no
+ * different places. This one is a pure function of `AdminNavConfig` - it needs no
  * request, no session and no locale - so a host may run it wherever the plugin
  * registry actually lives. In a TanStack Start host that registry is
  * deliberately kept out of the browser bundle (see `vitnode.shell.config.ts`),
@@ -436,7 +438,7 @@ export const buildAdminNav = ({
 }: {
   permissions: StaffPermissionSet;
   t: AdminNavTranslator;
-  vitNodeConfig: VitNodeConfig;
+  vitNodeConfig: AdminNavConfig;
 }): NavAdminParent[] =>
   resolveAdminNav({
     declarations: adminNavDeclarations(vitNodeConfig),

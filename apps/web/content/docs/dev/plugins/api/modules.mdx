@@ -60,33 +60,41 @@ export const notesModule = buildModule({
 ```
 
 ```ts title="plugins/site-notes/src/config.api.ts"
-import { buildApiPlugin } from '@vitnode/core/api/lib/plugin'
+import { defineApiPluginFactory } from '@vitnode/core/api/lib/plugin'
 
 import { notesModule } from './api/modules/notes/notes.module'
 
-export const siteNotesApiPlugin = () =>
-  buildApiPlugin({
-    modules: [notesModule], // [!code ++]
-    pluginId: '@acme/site-notes',
-  })
+export const apiPlugin = defineApiPluginFactory({
+  modules: [notesModule], // [!code ++]
+  pluginId: '@acme/site-notes',
+})
 ```
+
+Pass a function instead of an object when the plugin has options: it receives
+the normalized options and the runtime context - see
+[Plugin options](/docs/dev/plugins/options).
 
   </Step>
   <Step>
 
-### Compose it in the app API config
+### Advertise the API entry
 
-The app decides which installed plugins are active. Add the factory to the Hono
-config that serves your app (`apps/web` for a single app, or `apps/api` when it
-is separate):
+Name the module in the plugin's descriptor. The Hono API imports it at startup;
+the frontend build never does:
 
-```ts title="apps/web/src/vitnode.api.config.ts"
-import { siteNotesApiPlugin } from '@acme/site-notes/config.api' // [!code ++]
-
-export const vitNodeApiConfig = buildApiConfig({
-  plugins: [siteNotesApiPlugin()], // [!code ++]
+```ts title="plugins/site-notes/src/config.ts"
+export const siteNotesPlugin = definePluginFactory({
+  pluginId: '@acme/site-notes',
+  entries: {
+    api: '@acme/site-notes/config.api', // [!code ++]
+    routes: '@acme/site-notes/routes',
+  },
 })
 ```
+
+The app registered `siteNotesPlugin()` in `vitnode.config.ts` when it enabled
+the pages, and that one registration now covers the API too - there is nothing
+to add on the app side.
 
 The endpoint is now `GET /api/@acme/site-notes/notes`. OpenAPI picks it up too;
 one less hand-written map to maintain.

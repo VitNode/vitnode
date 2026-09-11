@@ -1,11 +1,10 @@
 import { describe, expect, it } from "vitest";
 
 import type { StaffPermissionSet } from "@/api/lib/permission-staff";
-import type { VitNodeConfig } from "@/vitnode.config";
 
 import { EMPTY_STAFF_PERMISSION_SET } from "@/api/lib/staff-permission";
 
-import type { AdminNavTranslator } from "./nav-model";
+import type { AdminNavConfig, AdminNavTranslator } from "./nav-model";
 
 import {
   adminNavBundle,
@@ -21,8 +20,9 @@ const t: AdminNavTranslator = Object.assign((key: string): string => key, {
   has: () => false,
 });
 
-const config = (plugins: VitNodeConfig["plugins"] = []): VitNodeConfig =>
-  ({ plugins }) as unknown as VitNodeConfig;
+const config = (plugins: AdminNavConfig["plugins"] = []): AdminNavConfig => ({
+  plugins,
+});
 
 const root: StaffPermissionSet = { root: true, permissions: [] };
 
@@ -153,7 +153,7 @@ describe("plugin groups", () => {
   const plugin = (
     pluginId: string,
     extra: Record<string, unknown> = {},
-  ): VitNodeConfig["plugins"][number] => ({ pluginId, ...extra });
+  ): AdminNavConfig["plugins"][number] => ({ pluginId, ...extra });
 
   it("gives every content type a nav item pointing into the Content Engine", () => {
     const nav = buildAdminNav({
@@ -338,7 +338,7 @@ describe("the two stages", () => {
               },
             },
           ],
-        } as unknown as VitNodeConfig["plugins"][number],
+        } as unknown as AdminNavConfig["plugins"][number],
       ]),
     );
 
@@ -365,7 +365,7 @@ describe("the two stages", () => {
             },
           },
         ],
-      } as unknown as VitNodeConfig["plugins"][number],
+      } as unknown as AdminNavConfig["plugins"][number],
     ]);
 
     const [, example] = buildAdminNav({ permissions: root, t, vitNodeConfig });
@@ -386,7 +386,7 @@ describe("the namespaces a navigation needs", () => {
   const plugin = (
     pluginId: string,
     extra: Record<string, unknown> = {},
-  ): VitNodeConfig["plugins"][number] => ({ pluginId, ...extra });
+  ): AdminNavConfig["plugins"][number] => ({ pluginId, ...extra });
 
   it("asks for the shell's own namespace and nothing else for core", () => {
     expect(adminNavNamespaces(adminNavDeclarations(config()))).toEqual([

@@ -5,12 +5,13 @@ import { vitnode } from "./vitnode";
 const names = (plugins: { name: string }[]) => plugins.map(({ name }) => name);
 
 describe("the composed plugin", () => {
-  it("returns all four, in the order they have to run", () => {
+  it("returns all five, in the order they have to run", () => {
     expect(names(vitnode({ appRoot: "/app" }))).toEqual([
       "vitnode:env",
       "vitnode:optimize-deps",
       "vitnode:ssr-externals",
       "vitnode:plugin-routes",
+      "vitnode:client-guard",
     ]);
   });
 

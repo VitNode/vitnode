@@ -1,14 +1,16 @@
 import "@tanstack/react-start/server-only";
 import type { AbstractIntlMessages } from "use-intl";
 
+import type { VitNodeConfig, VitNodeWebServerConfig } from "@/config/types";
 import type {
   AppMessagesMap,
   LocaleMessagesMap,
   MessagesSource,
 } from "@/lib/i18n/types";
-import type { VitNodeServerConfig } from "@/vitnode.config";
 
 import { CONFIG_PLUGIN } from "@/config";
+import { isVitNodeConfig } from "@/config/define";
+import { resolveWebServerConfig } from "@/config/server";
 import { loadMessages } from "@/lib/i18n/load-messages";
 import { pickMessages } from "@/lib/i18n/pick-messages";
 import { buildAppMessagesSources } from "@/lib/i18n/sources";
@@ -53,27 +55,61 @@ export type IntlMessagesLoader = (args: {
   namespaces: readonly string[];
 }) => Promise<IntlMessages>;
 
-const isServerConfig = (
-  options: IntlMessagesLoaderOptions | VitNodeServerConfig,
-): options is VitNodeServerConfig => "config" in options;
+const isWebServerConfig = (
+  options: IntlMessagesLoaderOptions | VitNodeWebServerConfig,
+): options is VitNodeWebServerConfig =>
+  "kind" in options && options.kind === "vitnode.web-server-config";
 
 const loaderOptionsFrom = (
-  options: IntlMessagesLoaderOptions | VitNodeServerConfig,
+  options: IntlMessagesLoaderOptions | VitNodeWebServerConfig,
 ): IntlMessagesLoaderOptions =>
-  isServerConfig(options)
+  isWebServerConfig(options)
     ? {
         appMessages: options.messages,
-        defaultLocale: options.config.i18n.defaultLocale,
-        packageMessages: options.packageMessages ?? {},
-        plugins: options.config.plugins,
+        defaultLocale: options.i18n.defaultLocale,
+        packageMessages: options.packageMessages,
+        plugins: [...options.plugins],
       }
     : options;
 
+export type IntlMessagesLoaderInput =
+  IntlMessagesLoaderOptions | VitNodeConfig | VitNodeWebServerConfig;
+
+interface PreparedSources {
+  defaultLocale: string;
+  sources: MessagesSource[];
+}
+
+const prepareSources = (
+  options: IntlMessagesLoaderOptions,
+): PreparedSources => {
+  const { defaultLocale, ...sourceOptions } = options;
+
+  return { defaultLocale, sources: buildBundledMessagesSources(sourceOptions) };
+};
+
 export function createIntlMessagesLoader(
-  options: IntlMessagesLoaderOptions | VitNodeServerConfig,
+  options: IntlMessagesLoaderInput,
 ): IntlMessagesLoader {
-  const { defaultLocale, ...sourceOptions } = loaderOptionsFrom(options);
-  const sources = buildBundledMessagesSources(sourceOptions);
+  let prepared: Promise<PreparedSources> | undefined = isVitNodeConfig(options)
+    ? undefined
+    : Promise.resolve(prepareSources(loaderOptionsFrom(options)));
+
+  const prepare = async (): Promise<PreparedSources> => {
+    if (prepared) return prepared;
+
+    const pending = resolveWebServerConfig(options as VitNodeConfig).then(
+      resolved => prepareSources(loaderOptionsFrom(resolved)),
+    );
+
+    prepared = pending.catch((error: unknown) => {
+      prepared = undefined;
+
+      throw error;
+    });
+
+    return prepared;
+  };
 
   return async ({
     locale,
@@ -82,6 +118,7 @@ export function createIntlMessagesLoader(
     locale: string;
     namespaces: readonly string[];
   }): Promise<IntlMessages> => {
+    const { defaultLocale, sources } = await prepare();
     const merged = await loadMessages({ defaultLocale, locale, sources });
 
     // `pickMessages` walks an unknown tree and cannot know what it found; what

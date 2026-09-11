@@ -122,6 +122,9 @@ export const createVitNode = async ({
         recursive: true,
       }),
     ]);
+    await cp(join(templatePath, "web-only"), monorepoStructure.web, {
+      recursive: true,
+    });
 
     if (packageManager === "bun") {
       await cp(join(templatePath, "api-bun"), monorepoStructure.api, {

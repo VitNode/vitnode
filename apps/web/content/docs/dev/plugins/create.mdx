@@ -42,8 +42,9 @@ npm create vitnode-app@canary -- --plugin
 </Tabs>
 
 The CLI creates `plugins/site-notes`, adds it as a workspace dependency, and
-gives it a route, locale, and config skeleton. It does **not** enable the
-feature for the host—that explicit switch is next.
+gives it a route, locale, and config skeleton - `src/config.ts` is a
+`definePluginFactory` call. It does **not** enable the feature for the
+host—that explicit switch is next.
 
   </Step>
   <Step>
@@ -73,20 +74,24 @@ Import the plugin factory in the host config and add it to `plugins`:
 
 ```ts title="apps/web/src/vitnode.config.ts"
 import { siteNotesPlugin } from '@acme/site-notes/config' // [!code ++]
-import { buildConfig } from '@vitnode/core/vitnode.config'
+import { defineVitNodeConfig } from '@vitnode/core/config'
 
-export const vitNodeConfig = buildConfig({
+export default defineVitNodeConfig({
   plugins: [
     siteNotesPlugin(), // [!code ++]
   ],
 })
 ```
 
-That is the only composition step - the factory carries the plugin's routes,
-content types and AdminCP navigation, and the feature stays in its package. Your
-build reads this list and generates one literal import per plugin for each of
-those, so a page or an editing screen loads with the route that needs it rather
-than with the config. See [Configuration](/docs/dev/configuration).
+That is the only composition step, for the API as much as for the pages. The
+factory returns a lightweight descriptor - the plugin id and the modules it
+provides - and each runtime loads only the capability it needs from it: your
+Vite build generates one literal import per plugin for its routes, AdminCP
+navigation and Content Engine screens, and the Hono API imports its
+`config.api` entry at startup. The generated `config.ts` names the routes
+module; add `api`, `adminNav` or `adminContent` to its `entries` as the plugin
+grows. See [Configuration](/docs/dev/configuration) and
+[Plugin options](/docs/dev/plugins/options).
 
 Its translations need one more line, in `src/locales/packages.ts` - see
 [Languages & Localization](/docs/dev/i18n).

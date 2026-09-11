@@ -6,7 +6,7 @@ icon: Sparkles
 
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs'
 
-VitNode integrates the [Vercel AI SDK](https://ai-sdk.dev). Register models in `vitnode.api.config.ts` once, then resolve them inside any API handler via `c.get("ai")`.
+VitNode integrates the [Vercel AI SDK](https://ai-sdk.dev). Register models in the `api` runtime of `vitnode.config.ts` once, then resolve them inside any API handler via `c.get("ai")`.
 
 ## Quick start
 
@@ -14,21 +14,24 @@ VitNode integrates the [Vercel AI SDK](https://ai-sdk.dev). Register models in `
 
 You can configure models via string identifiers (using AI Gateway) or direct provider instances:
 
-```ts title="apps/api/src/vitnode.api.config.ts"
+```ts title="src/vitnode.config.ts"
 import { openai } from '@ai-sdk/openai'
-import { buildApiConfig } from '@vitnode/core/vitnode.config'
+import { defineApiRuntime, defineVitNodeConfig } from '@vitnode/core/config'
 
-export const vitNodeApiConfig = buildApiConfig({
-  // [!code ++:10]
-  ai: {
-    models: [
-      {
-        id: 'default',
-        name: 'GPT-4o Mini',
-        model: openai('gpt-4o-mini'),
-      },
-    ],
-  },
+export default defineVitNodeConfig({
+  // ...
+  api: defineApiRuntime(async ({ env }) => ({
+    // [!code ++:10]
+    ai: {
+      models: [
+        {
+          id: 'default',
+          name: 'GPT-4o Mini',
+          model: openai('gpt-4o-mini'),
+        },
+      ],
+    },
+  })),
 })
 ```
 
@@ -58,7 +61,7 @@ handler: async (c) => {
 
 Configure dedicated models for fast completions, reasoning, and vector embeddings:
 
-```ts title="apps/api/src/vitnode.api.config.ts"
+```ts title="src/vitnode.config.ts"
 ai: {
   models: [
     { id: "default", name: "GPT-4o Mini", model: openai("gpt-4o-mini") },

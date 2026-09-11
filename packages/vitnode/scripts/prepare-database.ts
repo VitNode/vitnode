@@ -12,8 +12,8 @@ import { core_moderators_permissions } from "@/database/moderators.js";
 import { core_roles } from "@/database/roles.js";
 import { SEARCH_TEXT_CONFIGS } from "@/database/search.js";
 
+import type { VitNodeApiConfig } from "../src/config/types.js";
 import type { VitNodeApiI18nConfig } from "../src/lib/i18n/types.js";
-import type { VitNodeApiConfig } from "../src/vitnode.config.js";
 
 import { getConfig } from "./get-config.js";
 import { runInteractiveShellCommand } from "./run-interactive-shell-command.js";

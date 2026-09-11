@@ -1,5 +1,5 @@
 import { createVitNodeStart } from "@vitnode/core/tanstack/start";
 
-import { vitNodeConfig } from "@/vitnode.config";
+import { vitNodePublicConfig } from "@/vitnode.public.gen";
 
-export const startInstance = createVitNodeStart({ config: vitNodeConfig });
+export const startInstance = createVitNodeStart({ config: vitNodePublicConfig });

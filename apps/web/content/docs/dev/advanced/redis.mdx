@@ -4,7 +4,7 @@ description: Add a shared Redis cache to VitNode for faster session lookups, dis
 icon: DatabaseZap
 ---
 
-import { Tab, Tabs } from "fumadocs-ui/components/tabs"
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs'
 
 [Redis](https://redis.io) serves as VitNode's shared cache and pub/sub broker across horizontally scaled instances. Redis is optional: without it, VitNode degrades gracefully to in-memory counters and local delivery.
 
@@ -19,14 +19,17 @@ REDIS_PASSWORD=root // [!code ++]
 
 ### 2. Connect in API Configuration
 
-```ts title="apps/api/src/vitnode.api.config.ts"
-import { buildApiConfig } from "@vitnode/core/vitnode.config"
+```ts title="src/vitnode.config.ts"
+import { defineApiRuntime, defineVitNodeConfig } from '@vitnode/core/config'
 
-export const vitNodeApiConfig = buildApiConfig({
-  // [!code ++:5]
-  redis: process.env.REDIS_URL
-    ? { url: process.env.REDIS_URL, password: process.env.REDIS_PASSWORD }
-    : undefined,
+export default defineVitNodeConfig({
+  // ...
+  api: defineApiRuntime(async ({ env }) => ({
+    // [!code ++:5]
+    redis: env.REDIS_URL
+      ? { url: env.REDIS_URL, password: env.REDIS_PASSWORD }
+      : undefined,
+  })),
 })
 ```
 
@@ -34,12 +37,12 @@ export const vitNodeApiConfig = buildApiConfig({
 
 ## What Redis Powers
 
-| Feature | Without Redis | With Redis |
-| :--- | :--- | :--- |
-| **API Domain Cache** | No-op (always executes DB query) | Shared key-value store via `c.get("cache")` |
-| **Rate Limiter** | In-memory counters per instance | Distributed sliding-window across cluster |
-| **WebSocket Realtime** | Single instance only | Cross-instance broadcasts via Redis Pub/Sub |
-| **Sessions** | Database queries on every request | Instant cache hits with DB fallback |
+| Feature                | Without Redis                     | With Redis                                  |
+| :--------------------- | :-------------------------------- | :------------------------------------------ |
+| **API Domain Cache**   | No-op (always executes DB query)  | Shared key-value store via `c.get("cache")` |
+| **Rate Limiter**       | In-memory counters per instance   | Distributed sliding-window across cluster   |
+| **WebSocket Realtime** | Single instance only              | Cross-instance broadcasts via Redis Pub/Sub |
+| **Sessions**           | Database queries on every request | Instant cache hits with DB fallback         |
 
 ---
 
@@ -53,7 +56,7 @@ services:
     image: redis:7-alpine
     restart: always
     ports:
-      - "6379:6379"
+      - '6379:6379'
     command: redis-server --requirepass root
 ```
 
@@ -64,8 +67,8 @@ services:
 Use `remember` to cache expensive database lookups:
 
 ```ts
-const posts = await c.get("cache").remember({
-  key: "featured_posts",
+const posts = await c.get('cache').remember({
+  key: 'featured_posts',
   ttlSeconds: 60, // 1 minute
   loader: async () => await fetchFeaturedPostsFromDB(),
 })

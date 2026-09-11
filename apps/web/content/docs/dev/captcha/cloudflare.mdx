@@ -24,17 +24,20 @@ CLOUDFLARE_TURNSTILE_SITE_KEY=0x4AAAAAAA...
 CLOUDFLARE_TURNSTILE_SECRET_KEY=0x4AAAAAAA...
 ```
 
-```ts title="src/vitnode.api.config.ts"
-import { buildApiConfig } from '@vitnode/core/vitnode.config'
+```ts title="src/vitnode.config.ts"
+import { defineApiRuntime, defineVitNodeConfig } from '@vitnode/core/config'
 
-export const vitNodeApiConfig = buildApiConfig({
-  plugins: [],
-  // [!code ++:5]
-  captcha: {
-    type: 'cloudflare_turnstile',
-    siteKey: process.env.CLOUDFLARE_TURNSTILE_SITE_KEY,
-    secretKey: process.env.CLOUDFLARE_TURNSTILE_SECRET_KEY,
-  },
+export default defineVitNodeConfig({
+  // ...
+  api: defineApiRuntime(async ({ env }) => ({
+    plugins: [],
+    // [!code ++:5]
+    captcha: {
+      type: 'cloudflare_turnstile',
+      siteKey: env.CLOUDFLARE_TURNSTILE_SITE_KEY,
+      secretKey: env.CLOUDFLARE_TURNSTILE_SECRET_KEY,
+    },
+  })),
 })
 ```
 
@@ -50,16 +53,19 @@ steps aside only when the whole `captcha` block is missing, so a deployment with
 the block and no keys **rejects** registration and password reset with `400`.
 Gate the block on the environment variable:
 
-```ts title="src/vitnode.api.config.ts"
-export const vitNodeApiConfig = buildApiConfig({
-  // [!code ++:7]
-  captcha: process.env.CLOUDFLARE_TURNSTILE_SECRET_KEY
-    ? {
-        type: 'cloudflare_turnstile',
-        siteKey: process.env.CLOUDFLARE_TURNSTILE_SITE_KEY,
-        secretKey: process.env.CLOUDFLARE_TURNSTILE_SECRET_KEY,
-      }
-    : undefined,
+```ts title="src/vitnode.config.ts"
+export default defineVitNodeConfig({
+  // ...
+  api: defineApiRuntime(async ({ env }) => ({
+    // [!code ++:7]
+    captcha: env.CLOUDFLARE_TURNSTILE_SECRET_KEY
+      ? {
+          type: 'cloudflare_turnstile',
+          siteKey: env.CLOUDFLARE_TURNSTILE_SITE_KEY,
+          secretKey: env.CLOUDFLARE_TURNSTILE_SECRET_KEY,
+        }
+      : undefined,
+  })),
 })
 ```
 
@@ -140,17 +146,20 @@ CLOUDFLARE_TURNSTILE_SECRET_KEY=0x4AAAAAAA... # [!code ++]
 
 Add the `captcha` block to your API config with `type: 'cloudflare_turnstile'`.
 
-```ts title="src/vitnode.api.config.ts"
-import { buildApiConfig } from '@vitnode/core/vitnode.config'
+```ts title="src/vitnode.config.ts"
+import { defineApiRuntime, defineVitNodeConfig } from '@vitnode/core/config'
 
-export const vitNodeApiConfig = buildApiConfig({
-  plugins: [],
-  // [!code ++:5]
-  captcha: {
-    type: 'cloudflare_turnstile',
-    siteKey: process.env.CLOUDFLARE_TURNSTILE_SITE_KEY,
-    secretKey: process.env.CLOUDFLARE_TURNSTILE_SECRET_KEY,
-  },
+export default defineVitNodeConfig({
+  // ...
+  api: defineApiRuntime(async ({ env }) => ({
+    plugins: [],
+    // [!code ++:5]
+    captcha: {
+      type: 'cloudflare_turnstile',
+      siteKey: env.CLOUDFLARE_TURNSTILE_SITE_KEY,
+      secretKey: env.CLOUDFLARE_TURNSTILE_SECRET_KEY,
+    },
+  })),
 })
 ```
 

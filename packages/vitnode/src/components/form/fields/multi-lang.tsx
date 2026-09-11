@@ -4,7 +4,7 @@ import React from "react";
 import { useLocale, useTranslations } from "use-intl";
 
 import type { MultiLangValue } from "@/lib/helpers/multi-lang";
-import type { LocaleConfig } from "@/vitnode.config";
+import type { LocaleConfig } from "@/lib/i18n/types";
 
 import { useLanguages } from "@/components/languages-provider";
 import {

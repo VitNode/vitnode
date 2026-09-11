@@ -36,7 +36,7 @@ npm create vitnode-app@canary -- --plugin
 </Tabs>
 
 The result has `routes.ts`, `pages/home-page.tsx`, `locales/en.json`, and
-`config.tsx`. The CLI adds a workspace dependency but leaves activation to you,
+`config.ts`. The CLI adds a workspace dependency but leaves activation to you,
 which makes installed plugins predictable.
 
   </Step>
@@ -106,7 +106,7 @@ step; routes and pages remain inside `plugins/site-notes`:
 ```ts title="apps/web/src/vitnode.config.ts"
 import { siteNotesPlugin } from '@acme/site-notes/config' // [!code ++]
 
-export const vitNodeConfig = buildConfig({
+export default defineVitNodeConfig({
   plugins: [
     siteNotesPlugin(), // [!code ++]
   ],

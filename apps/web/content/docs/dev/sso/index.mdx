@@ -8,22 +8,25 @@ VitNode provides built-in OAuth2 single sign-on. Register an adapter in your API
 
 ## Quick start
 
-Register an SSO adapter in `apps/api/src/vitnode.api.config.ts`:
+Register an SSO adapter in the `api` runtime of `src/vitnode.config.ts`:
 
-```ts title="apps/api/src/vitnode.api.config.ts"
-import { GoogleSSOApiPlugin } from "@vitnode/core/api/adapters/sso/google"
-import { buildApiConfig } from "@vitnode/core/vitnode.config"
+```ts title="src/vitnode.config.ts"
+import { GoogleSSOApiPlugin } from '@vitnode/core/api/adapters/sso/google'
+import { defineApiRuntime, defineVitNodeConfig } from '@vitnode/core/config'
 
-export const vitNodeApiConfig = buildApiConfig({
-  // [!code ++:8]
-  authorization: {
-    ssoAdapters: [
-      GoogleSSOApiPlugin({
-        clientId: process.env.GOOGLE_CLIENT_ID!,
-        clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-      }),
-    ],
-  },
+export default defineVitNodeConfig({
+  // ...
+  api: defineApiRuntime(async ({ env }) => ({
+    // [!code ++:8]
+    authorization: {
+      ssoAdapters: [
+        GoogleSSOApiPlugin({
+          clientId: env.GOOGLE_CLIENT_ID!,
+          clientSecret: env.GOOGLE_CLIENT_SECRET!,
+        }),
+      ],
+    },
+  })),
 })
 ```
 
@@ -80,6 +83,7 @@ For example: `https://your-domain.com/login/sso/google`.
 ## How Accounts Link
 
 When a user signs in via SSO:
+
 1. **Known Identity**: The provider account was linked before, so the user is signed straight into it.
 2. **Existing Email Match**: An account already uses that address. The visitor is asked for that account's password; once it checks out, the provider identity is linked to the account and they are signed in. From then on that provider signs them straight in (case 1). A social login can never take over an account on its own - the password is what proves ownership.
 3. **New Visitor**: A new user is created with their social display name, email, and avatar.
@@ -101,11 +105,11 @@ confirmation:
 
 The callback answers `409` with a short-lived, signed **link offer** - the
 account's email, whether it has a password, and a token good for ten minutes.
-The login page turns that into a "Connect *Provider* to your account" form: the
+The login page turns that into a "Connect _Provider_ to your account" form: the
 email is shown read-only, the visitor types their password, and
 `POST /users/sso/{providerId}/link` verifies both before it writes the
 `core_users_sso` row and mints a session. The token carries the provider account
-id, so nothing about *which* identity gets linked is taken from the browser.
+id, so nothing about _which_ identity gets linked is taken from the browser.
 
 An account created by another provider has no password to confirm with. When an
 email adapter is configured the form offers **Set a password** (the ordinary

@@ -4,7 +4,7 @@ description: Upload, serve, and delete files in VitNode with pluggable storage a
 icon: HardDrive
 ---
 
-import { Tab, Tabs } from "fumadocs-ui/components/tabs"
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs'
 
 VitNode provides an integrated storage layer accessible via `c.get("storage")`. It handles file validation, automatic WebP image optimization, database indexing in `core_files`, and persistent storage across multiple backends.
 
@@ -12,16 +12,19 @@ VitNode provides an integrated storage layer accessible via `c.get("storage")`. 
 
 ### 1. Register a Storage Adapter
 
-In `apps/api/src/vitnode.api.config.ts`, configure the local disk adapter:
+In the `api` runtime of `src/vitnode.config.ts`, configure the local disk adapter:
 
-```ts title="apps/api/src/vitnode.api.config.ts"
-import { LocalStorageAdapter } from "@vitnode/core/api/adapters/storage/local"
-import { buildApiConfig } from "@vitnode/core/vitnode.config"
+```ts title="src/vitnode.config.ts"
+import { LocalStorageAdapter } from '@vitnode/core/api/adapters/storage/local'
+import { defineApiRuntime, defineVitNodeConfig } from '@vitnode/core/config'
 
-export const vitNodeApiConfig = buildApiConfig({
-  storage: {
-    adapter: LocalStorageAdapter(), // [!code ++]
-  },
+export default defineVitNodeConfig({
+  // ...
+  api: defineApiRuntime(async ({ env }) => ({
+    storage: {
+      adapter: LocalStorageAdapter(), // [!code ++]
+    },
+  })),
 })
 ```
 
@@ -30,18 +33,18 @@ export const vitNodeApiConfig = buildApiConfig({
 Handle uploads in a Hono route using `c.get("storage").upload()`:
 
 ```ts title="plugins/blog/src/api/modules/posts/routes/upload-cover.route.ts"
-import { z } from "@hono/zod-openapi"
-import { buildRoute } from "@vitnode/core/api/lib/route"
+import { z } from '@hono/zod-openapi'
+import { buildRoute } from '@vitnode/core/api/lib/route'
 
 export const uploadCoverRoute = buildRoute({
-  pluginId: "blog",
+  pluginId: 'blog',
   route: {
-    method: "post",
-    path: "/cover",
+    method: 'post',
+    path: '/cover',
     request: {
       body: {
         content: {
-          "multipart/form-data": {
+          'multipart/form-data': {
             schema: z.object({
               file: z.instanceof(File),
             }),
@@ -54,11 +57,11 @@ export const uploadCoverRoute = buildRoute({
     const { file } = await c.req.parseBody()
 
     // [!code ++:7]
-    const uploaded = await c.get("storage").upload({
+    const uploaded = await c.get('storage').upload({
       file: file as File,
-      folder: "covers",
+      folder: 'covers',
       maxBytes: 5 * 1024 * 1024, // 5 MB
-      allowedMimeTypes: ["image/jpeg", "image/png", "image/webp"],
+      allowedMimeTypes: ['image/jpeg', 'image/png', 'image/webp'],
     })
 
     return c.json(uploaded)
@@ -102,9 +105,9 @@ export const uploadCoverRoute = buildRoute({
 The storage service can automatically convert uploaded images to WebP and constrain dimensions:
 
 ```ts
-const uploaded = await c.get("storage").upload({
+const uploaded = await c.get('storage').upload({
   file,
-  folder: "avatars",
+  folder: 'avatars',
   convertImagesToWebp: true, // [!code ++]
   maxDimensions: { width: 1200, height: 1200 }, // [!code ++]
 })
@@ -117,7 +120,7 @@ const uploaded = await c.get("storage").upload({
 Remove files and clean up storage using `delete()`:
 
 ```ts
-await c.get("storage").delete({ fileId: 42 })
+await c.get('storage').delete({ fileId: 42 })
 ```
 
 This removes the file from the configured storage bucket and deletes its row from `core_files`.
@@ -129,6 +132,7 @@ This removes the file from the configured storage bucket and deletes its row fro
 {/* Image prompt: VitNode AdminCP System -> Integrations screen at /admin/core/system/integrations. Storage integration card shows "Active" with a "Test file storage" button and modal demonstrating test file upload. Dark theme, 1440x900. */}
 
 Test your storage adapter anytime in the AdminCP:
+
 1. Navigate to **System → Integrations** (`/admin/core/system/integrations`).
 2. On the **Storage** card, click **Test Storage** to verify bucket credentials and upload capabilities.
 3. Inspect uploaded files anytime under **System → Files** (`/admin/core/system/files`).

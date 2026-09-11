@@ -209,9 +209,15 @@ describe("the generated application", () => {
   });
 
   it("configures no plugin and commits no generated registry", () => {
-    expect(withoutComments(readTemplate("root/src/vitnode.config.ts"))).toMatch(
-      /plugins:\s*\[\s*\]/,
-    );
+    for (const config of [
+      "api-single-app/src/vitnode.config.ts",
+      "web-only/src/vitnode.config.ts",
+      "api/src/vitnode.config.ts",
+    ]) {
+      expect(withoutComments(readTemplate(config))).toMatch(
+        /plugins:\s*\[\s*\]/,
+      );
+    }
     expect(
       filesUnder(join(appTemplate, "root", "src")).filter(file =>
         file.includes(".gen."),

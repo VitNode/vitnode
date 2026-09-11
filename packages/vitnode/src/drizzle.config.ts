@@ -1,18 +1,33 @@
 import type { Config } from "drizzle-kit";
 
+import { config as loadDotenv } from "dotenv";
 import { defineConfig } from "drizzle-kit";
 import { existsSync, readdirSync, realpathSync } from "node:fs";
 import { join, resolve } from "node:path";
 
-import type { VitNodeApiConfig } from "./vitnode.config";
+import type { VitNodeConfig } from "./config/types";
+
+export const DEFAULT_POSTGRES_URL =
+  "postgresql://root:root@localhost:5432/vitnode";
+
+export const databaseUrlFromEnv = (
+  env: Readonly<Record<string, string | undefined>> = process.env,
+): string => env.POSTGRES_URL ?? DEFAULT_POSTGRES_URL;
+
+type DrizzleConfigInput = Omit<Config, "dialect"> & {
+  dbCredentials?: { url: string };
+  dialect?: "postgresql";
+};
+
+type VitNodeDrizzleConfigArgs = DrizzleConfigInput & { config: VitNodeConfig };
 
 export const defineVitNodeDrizzleConfig = ({
-  vitNodeApiConfig,
+  config,
   ...args
-}: Config & {
-  vitNodeApiConfig: VitNodeApiConfig;
-}) => {
-  const pluginId = vitNodeApiConfig.plugins.map(plugin => plugin.pluginId);
+}: VitNodeDrizzleConfigArgs) => {
+  loadDotenv({ quiet: true });
+
+  const pluginId = config.plugins.map(plugin => plugin.pluginId);
 
   const findMonorepoRoot = (startPath: string): null | string => {
     let currentPath = startPath;
@@ -38,20 +53,15 @@ export const defineVitNodeDrizzleConfig = ({
       "database",
     );
 
-    // Check if the plugin path exists
     if (!existsSync(pluginPath)) {
       return null;
     }
 
-    // Check if there are any .js files in the directory
     try {
       const files = readdirSync(pluginPath);
       const hasSchemaFiles = files.some(file => file.endsWith(".js"));
       if (!hasSchemaFiles) return null;
 
-      // Resolve symlinks before returning: in a workspace the app's own
-      // `node_modules/<plugin>` and the root's are two links onto one
-      // directory, and the caller dedupes on this path.
       return realpathSync(pluginPath);
     } catch {
       return null;
@@ -61,18 +71,12 @@ export const defineVitNodeDrizzleConfig = ({
   const cwd = process.cwd();
   const monorepoRoot = findMonorepoRoot(cwd);
 
-  // Deduplicated by real path. Both candidates below usually resolve to the
-  // same workspace directory, and handing Drizzle Kit the same schema twice
-  // makes it report every table, column, index and constraint as a duplicate -
-  // dozens of warnings that bury the ones worth reading.
   const pluginDirs = new Set<string>();
 
   for (const itemId of ["@vitnode/core", ...pluginId]) {
-    // Check in current working directory
     const cwdPath = checkPluginPath(cwd, itemId);
     if (cwdPath) pluginDirs.add(cwdPath);
 
-    // Check in monorepo root if it exists and is different from cwd
     if (monorepoRoot && monorepoRoot !== cwd) {
       const rootPath = checkPluginPath(monorepoRoot, itemId);
       if (rootPath) pluginDirs.add(rootPath);
@@ -83,7 +87,6 @@ export const defineVitNodeDrizzleConfig = ({
     join(dir, "*.js").replace(/\\/g, "/"),
   );
 
-  // Normalize args.schema into an array without nested ternary expressions
   let baseSchemas: string[] = [];
   if (Array.isArray(args.schema)) {
     baseSchemas = args.schema;
@@ -92,6 +95,8 @@ export const defineVitNodeDrizzleConfig = ({
   }
 
   return defineConfig({
+    dialect: "postgresql",
+    dbCredentials: { url: databaseUrlFromEnv() },
     ...args,
     schema: [...baseSchemas, ...pluginPaths],
   });

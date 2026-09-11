@@ -1,10 +1,11 @@
 // @vitest-environment node
 import { describe, expect, it } from "vitest";
 
+import { defineVitNodeConfig } from "../../config/define";
+import { definePluginFactory } from "../../config/plugin";
 import {
   assertPluginId,
   pluginIdsFromLoadedConfig,
-  routeDeclarationsFromRoutesModule,
   sortAndAssertUniquePlugins,
   toSingleQuotedLiteral,
 } from "./resolve.js";
@@ -95,16 +96,20 @@ describe("toSingleQuotedLiteral", () => {
 });
 
 describe("pluginIdsFromLoadedConfig", () => {
+  const app = {
+    i18n: { defaultLocale: "en", locales: [{ code: "en", name: "English" }] },
+    metadata: { title: "Fixture" },
+  };
+  const plugin = (pluginId: string) => definePluginFactory({ pluginId })();
+
   it("reads the configured plugin ids in the configured order", () => {
     expect(
       pluginIdsFromLoadedConfig(
         {
-          vitNodeConfig: {
-            plugins: [
-              { pluginId: "@vitnode/example" },
-              { pluginId: "@acme/blog" },
-            ],
-          },
+          default: defineVitNodeConfig({
+            app,
+            plugins: [plugin("@vitnode/example"), plugin("@acme/blog")],
+          }),
         },
         "src/vitnode.config.ts",
       ),
@@ -114,88 +119,20 @@ describe("pluginIdsFromLoadedConfig", () => {
   it("accepts an app with no plugins", () => {
     expect(
       pluginIdsFromLoadedConfig(
-        { vitNodeConfig: { plugins: [] } },
+        { default: defineVitNodeConfig({ app }) },
         "src/vitnode.config.ts",
       ),
     ).toEqual([]);
   });
 
   it.each([
-    [undefined, /does not export `vitNodeConfig`/],
-    [{}, /does not export `vitNodeConfig`/],
-    [{ vitNodeConfig: {} }, /is not an array/],
-    [{ vitNodeConfig: { plugins: "nope" } }, /is not an array/],
+    [undefined, /did not evaluate to a module/],
+    [{}, /does not export a VitNode config/],
+    [{ vitNodeConfig: { plugins: [] } }, /Replace `buildConfig`/],
+    [{ default: { plugins: [] } }, /built by `defineVitNodeConfig`/],
   ])("rejects %j", (loaded, message) => {
     expect(() =>
       pluginIdsFromLoadedConfig(loaded, "src/vitnode.config.ts"),
     ).toThrow(message);
-  });
-
-  it("names the offending index", () => {
-    expect(() =>
-      pluginIdsFromLoadedConfig(
-        { vitNodeConfig: { plugins: [{ pluginId: "ok" }, {}] } },
-        "src/vitnode.config.ts",
-      ),
-    ).toThrow(/`vitNodeConfig\.plugins\[1\]`/);
-  });
-
-  it("rejects a configured id that is not a package name", () => {
-    expect(() =>
-      pluginIdsFromLoadedConfig(
-        { vitNodeConfig: { plugins: [{ pluginId: "../evil" }] } },
-        "src/vitnode.config.ts",
-      ),
-    ).toThrow(/which is not a package name/);
-  });
-});
-
-describe("routeDeclarationsFromRoutesModule", () => {
-  it("hands the tree on untouched", () => {
-    const routes = [{ anything: true }];
-
-    expect(
-      routeDeclarationsFromRoutesModule({ routes }, "@acme/blog/routes"),
-    ).toBe(routes);
-  });
-
-  it("accepts a module declaring no routes", () => {
-    expect(
-      routeDeclarationsFromRoutesModule({ routes: [] }, "@acme/blog/routes"),
-    ).toEqual([]);
-  });
-
-  it.each([undefined, {}, { default: [] }])(
-    "rejects a module that exports no `routes` (%j)",
-    loaded => {
-      expect(() =>
-        routeDeclarationsFromRoutesModule(loaded, "@acme/blog/routes"),
-      ).toThrow(/does not export `routes`/);
-    },
-  );
-
-  it("rejects a `routes` that is not an array", () => {
-    expect(() =>
-      routeDeclarationsFromRoutesModule(
-        { routes: { nope: true } },
-        "@acme/blog/routes",
-      ),
-    ).toThrow(/`routes` in @acme\/blog\/routes is not an array/);
-  });
-
-  it("names the old flat manifest rather than failing later", () => {
-    expect(() =>
-      routeDeclarationsFromRoutesModule(
-        {
-          routes: [
-            { entry: "routes/home-page", id: "home", path: "/blog" },
-            { entry: "routes/post-page", id: "post", path: "/blog/:slug" },
-          ],
-        },
-        "@acme/blog/routes",
-      ),
-    ).toThrow(
-      /exports the old flat route manifest - 2 routes declaring an `entry`/,
-    );
   });
 });

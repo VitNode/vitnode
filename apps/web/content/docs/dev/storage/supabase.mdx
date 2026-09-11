@@ -17,19 +17,22 @@ import { TypeTable } from 'fumadocs-ui/components/type-table'
 
 ## Quick start
 
-```ts title="src/vitnode.api.config.ts"
+```ts title="src/vitnode.config.ts"
 import { SupabaseStorageAdapter } from '@vitnode/supabase-storage' // [!code ++]
-import { buildApiConfig } from '@vitnode/core/vitnode.config'
+import { defineApiRuntime, defineVitNodeConfig } from '@vitnode/core/config'
 
-export const vitNodeApiConfig = buildApiConfig({
-  storage: {
-    // [!code ++:5]
-    adapter: SupabaseStorageAdapter({
-      url: process.env.SUPABASE_URL,
-      secretKey: process.env.SUPABASE_SECRET_KEY,
-      bucket: process.env.SUPABASE_STORAGE_BUCKET,
-    }),
-  },
+export default defineVitNodeConfig({
+  // ...
+  api: defineApiRuntime(async ({ env }) => ({
+    storage: {
+      // [!code ++:5]
+      adapter: SupabaseStorageAdapter({
+        url: env.SUPABASE_URL,
+        secretKey: env.SUPABASE_SECRET_KEY,
+        bucket: env.SUPABASE_STORAGE_BUCKET,
+      }),
+    },
+  })),
 })
 ```
 
@@ -125,22 +128,25 @@ typo waits for a file rather than failing at boot.
 
 ### Register the adapter
 
-```ts title="src/vitnode.api.config.ts"
+```ts title="src/vitnode.config.ts"
 import { SupabaseStorageAdapter } from '@vitnode/supabase-storage' // [!code ++]
-import { buildApiConfig } from '@vitnode/core/vitnode.config'
+import { defineApiRuntime, defineVitNodeConfig } from '@vitnode/core/config'
 
-export const vitNodeApiConfig = buildApiConfig({
-  storage: {
-    // [!code ++:5]
-    adapter: SupabaseStorageAdapter({
-      url: process.env.SUPABASE_URL,
-      secretKey: process.env.SUPABASE_SECRET_KEY,
-      bucket: process.env.SUPABASE_STORAGE_BUCKET,
-    }),
-    image: {
-      quality: 85,
+export default defineVitNodeConfig({
+  // ...
+  api: defineApiRuntime(async ({ env }) => ({
+    storage: {
+      // [!code ++:5]
+      adapter: SupabaseStorageAdapter({
+        url: env.SUPABASE_URL,
+        secretKey: env.SUPABASE_SECRET_KEY,
+        bucket: env.SUPABASE_STORAGE_BUCKET,
+      }),
+      image: {
+        quality: 85,
+      },
     },
-  },
+  })),
 })
 ```
 

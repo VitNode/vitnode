@@ -109,7 +109,8 @@ export class VersionManager {
       "packages",
       "vitnode",
       "src",
-      "config.ts",
+      "config",
+      "plugin-id.ts",
     );
     const cleanVersion = version.replace(/^v/, "");
     const content = readFileSync(configPath, "utf8");

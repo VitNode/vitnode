@@ -113,23 +113,20 @@ its entries before React renders, and the screen reads the same ones back.
 
 [React Scan](https://react-scan.com/) draws an outline around every component as
 it re-renders, which turns "this page feels heavy" into a number. It is off by
-default; flip `debug` in the [shared config](/docs/dev/configuration):
+default; flip `debug` in the web runtime's public options in your
+[config](/docs/dev/configuration):
 
 ```ts title="src/vitnode.config.ts"
-export const vitNodeConfig = buildConfig({
-  debug: true, // [!code ++]
-  i18n: {
-    defaultLocale: 'en',
-    locales: [{ code: 'en', name: 'English' }],
-  },
-  metadata: {
-    shortTitle: 'VitNode',
-    title: 'VitNode',
-  },
-  plugins: [],
-  theme: {
-    defaultTheme: 'system',
-  },
+export default defineVitNodeConfig({
+  // ...
+  web: defineWebRuntime({
+    public: {
+      debug: true, // [!code ++]
+      theme: {
+        defaultTheme: 'system',
+      },
+    },
+  }),
 })
 ```
 

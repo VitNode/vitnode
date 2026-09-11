@@ -1,11 +1,10 @@
-
-export type ApiBridge = (request: Request) => Promise<Response> | Response
+export type ApiBridge = (request: Request) => Promise<Response> | Response;
 
 interface FetchableApp {
-  fetch: (request: Request) => Promise<Response> | Response
+  fetch: (request: Request) => Promise<Response> | Response;
 }
 
 export const createApiBridge =
-  (app: FetchableApp): ApiBridge =>
-  async (request) =>
-    app.fetch(request)
+  (app: FetchableApp | Promise<FetchableApp>): ApiBridge =>
+  async request =>
+    (await app).fetch(request);

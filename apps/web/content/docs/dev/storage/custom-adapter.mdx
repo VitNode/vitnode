@@ -142,20 +142,23 @@ runs - throwing there turns a finished delete into a failed request. And
 An adapter needs no registry, no manifest and no plugin entry. It is a value on
 the API config:
 
-```ts title="src/vitnode.api.config.ts"
-import { buildApiConfig } from '@vitnode/core/vitnode.config'
+```ts title="src/vitnode.config.ts"
+import { defineApiRuntime, defineVitNodeConfig } from '@vitnode/core/config'
 
 import { HttpStorageAdapter } from './utils/storage/http-storage' // [!code ++]
 
-export const vitNodeApiConfig = buildApiConfig({
-  storage: {
-    // [!code ++:5]
-    adapter: HttpStorageAdapter({
-      apiKey: process.env.STORAGE_API_KEY,
-      endpoint: process.env.STORAGE_ENDPOINT,
-      publicUrl: process.env.STORAGE_PUBLIC_URL,
-    }),
-  },
+export default defineVitNodeConfig({
+  // ...
+  api: defineApiRuntime(async ({ env }) => ({
+    storage: {
+      // [!code ++:5]
+      adapter: HttpStorageAdapter({
+        apiKey: env.STORAGE_API_KEY,
+        endpoint: env.STORAGE_ENDPOINT,
+        publicUrl: env.STORAGE_PUBLIC_URL,
+      }),
+    },
+  })),
 })
 ```
 

@@ -23,17 +23,20 @@ RECAPTCHA_SITE_KEY=6Lc...
 RECAPTCHA_SECRET_KEY=6Lc...
 ```
 
-```ts title="src/vitnode.api.config.ts"
-import { buildApiConfig } from '@vitnode/core/vitnode.config'
+```ts title="src/vitnode.config.ts"
+import { defineApiRuntime, defineVitNodeConfig } from '@vitnode/core/config'
 
-export const vitNodeApiConfig = buildApiConfig({
-  plugins: [],
-  // [!code ++:5]
-  captcha: {
-    type: 'recaptcha_v3',
-    siteKey: process.env.RECAPTCHA_SITE_KEY,
-    secretKey: process.env.RECAPTCHA_SECRET_KEY,
-  },
+export default defineVitNodeConfig({
+  // ...
+  api: defineApiRuntime(async ({ env }) => ({
+    plugins: [],
+    // [!code ++:5]
+    captcha: {
+      type: 'recaptcha_v3',
+      siteKey: env.RECAPTCHA_SITE_KEY,
+      secretKey: env.RECAPTCHA_SECRET_KEY,
+    },
+  })),
 })
 ```
 
@@ -48,16 +51,19 @@ steps aside only when the whole `captcha` block is missing, so a deployment with
 the block and no keys **rejects** registration and password reset with `400`.
 Gate the block on the environment variable:
 
-```ts title="src/vitnode.api.config.ts"
-export const vitNodeApiConfig = buildApiConfig({
-  // [!code ++:7]
-  captcha: process.env.RECAPTCHA_SECRET_KEY
-    ? {
-        type: 'recaptcha_v3',
-        siteKey: process.env.RECAPTCHA_SITE_KEY,
-        secretKey: process.env.RECAPTCHA_SECRET_KEY,
-      }
-    : undefined,
+```ts title="src/vitnode.config.ts"
+export default defineVitNodeConfig({
+  // ...
+  api: defineApiRuntime(async ({ env }) => ({
+    // [!code ++:7]
+    captcha: env.RECAPTCHA_SECRET_KEY
+      ? {
+          type: 'recaptcha_v3',
+          siteKey: env.RECAPTCHA_SITE_KEY,
+          secretKey: env.RECAPTCHA_SECRET_KEY,
+        }
+      : undefined,
+  })),
 })
 ```
 
@@ -146,17 +152,20 @@ RECAPTCHA_SECRET_KEY=6Lc... # [!code ++]
 
 Add the `captcha` block to your API config with `type: 'recaptcha_v3'`.
 
-```ts title="src/vitnode.api.config.ts"
-import { buildApiConfig } from '@vitnode/core/vitnode.config'
+```ts title="src/vitnode.config.ts"
+import { defineApiRuntime, defineVitNodeConfig } from '@vitnode/core/config'
 
-export const vitNodeApiConfig = buildApiConfig({
-  plugins: [],
-  // [!code ++:5]
-  captcha: {
-    type: 'recaptcha_v3',
-    siteKey: process.env.RECAPTCHA_SITE_KEY,
-    secretKey: process.env.RECAPTCHA_SECRET_KEY,
-  },
+export default defineVitNodeConfig({
+  // ...
+  api: defineApiRuntime(async ({ env }) => ({
+    plugins: [],
+    // [!code ++:5]
+    captcha: {
+      type: 'recaptcha_v3',
+      siteKey: env.RECAPTCHA_SITE_KEY,
+      secretKey: env.RECAPTCHA_SECRET_KEY,
+    },
+  })),
 })
 ```
 

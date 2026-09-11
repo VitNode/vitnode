@@ -34,24 +34,29 @@ npx vitnode i18n:check
 
 </Tabs>
 
-`i18n:create` adds the language to `src/vitnode.config.ts`, seeds a translation file per installed package, and registers the loaders in `src/locales/app.ts`. `i18n:check` scans for missing or untranslated keys - including a file nobody imports, which is the usual reason a translation "does not apply".
+`i18n:create` adds the language to `app.i18n` in `src/vitnode.config.ts`, seeds a translation file per installed package, and registers the loaders in `src/locales/app.ts`. `i18n:check` scans for missing or untranslated keys - including a file nobody imports, which is the usual reason a translation "does not apply".
 
 ---
 
 ## Language Configuration
 
-Locale metadata is plain data, so it lives in the browser-safe [shared config](/docs/dev/configuration) - one declaration, read by the router, the document shell and (in a single app) the API that sends your emails:
+Locale metadata lives under `app.i18n` in the one authored
+[config](/docs/dev/configuration) - one declaration, read by the router and the
+document shell through the generated public projection, and by the API that
+sends your emails:
 
 ```ts title="apps/web/src/vitnode.config.ts"
-export const vitNodeConfig = buildConfig({
-  i18n: {
-    defaultLocale: 'en',
-    locales: [
-      { code: 'en', name: 'English' },
-      // [!code ++:1]
-      { code: 'de', name: 'Deutsch' },
-    ],
-    timeZone: 'UTC',
+export default defineVitNodeConfig({
+  app: {
+    i18n: {
+      defaultLocale: 'en',
+      locales: [
+        { code: 'en', name: 'English' },
+        // [!code ++:1]
+        { code: 'de', name: 'Deutsch' },
+      ],
+      timeZone: 'UTC',
+    },
   },
   // ...
 })
@@ -59,31 +64,38 @@ export const vitNodeConfig = buildConfig({
 
 `timeZone` is explicit on purpose: your app renders on a server, and without one `use-intl` formats dates in whatever zone the server happens to run in - then warns that the client will disagree.
 
-Because `buildConfig` keeps those codes as literal types, `'de'` is now part of your `Locale` union and a typo in `defaultLocale` is a type error.
+Your build writes the literal union of those codes to `src/vitnode.public.gen.ts` as `VitNodeLocale`, so `'de'` is now part of your `Locale` union - and `defaultLocale` is checked against the list right beside it.
 
 ---
 
 ## Where the loaders go
 
-A `() => import('./de.json')` reads a file out of a package's build output, so it is the one part of i18n that must never reach a browser. Two files own it, and both are registered through the **server-only** config:
+A `() => import('./de.json')` reads a file out of a package's build output, so it is the one part of i18n that must never reach a browser. Two files own it, and both are loaded by the web runtime's **server** factory, which only SSR ever calls:
 
 | File                      | Holds                                                |
 | :------------------------ | :--------------------------------------------------- |
 | `src/locales/packages.ts` | one loader per language each installed package ships |
 | `src/locales/app.ts`      | your own rewordings, merged last                     |
 
-```ts title="apps/web/src/vitnode.server.config.ts"
-export const vitNodeServerConfig = buildServerConfig({
-  config: vitNodeConfig, // the locale list above
-  messages: appMessages, // src/locales/app.ts
-  packageMessages, // src/locales/packages.ts
+```ts title="apps/web/src/vitnode.config.ts"
+web: defineWebRuntime({
+  server: async () => {
+    const [{ appMessages }, { packageMessages }] = await Promise.all([
+      import('./locales/app'), // your overrides
+      import('./locales/packages'), // one loader per language a package ships
+    ])
+
+    return { messages: appMessages, packageMessages }
+  },
 })
 ```
 
-<Callout type="warn" title="Not in vitnode.config.ts">
-  Putting a loader in the shared config puts every plugin's AdminCP copy in your
-  browser bundle, and makes your Vite build execute it. `vitnode i18n:create`
-  writes to the right file for you.
+<Callout type="warn" title="Keep the loaders inside the factory">
+  A loader imported at the top of `vitnode.config.ts` runs during your Vite
+  build, which loads that file to discover plugins. Behind `import()` inside
+  `server`, it runs once, on the server, on the first request that needs it -
+  and it never appears in the public projection the browser reads. `vitnode
+  i18n:create` writes to the right file for you.
 </Callout>
 
 Adding a language to a package that ships it needs one line in `src/locales/packages.ts`:
@@ -154,7 +166,7 @@ Missing keys automatically fall back to `defaultLocale` (`en`), preventing raw k
   />
   <Card
     title="Configuration"
-    description="The shared and server-only config files, side by side"
+    description="One authored config and the projections built from it"
     href="/docs/dev/configuration"
   />
 </Cards>

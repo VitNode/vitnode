@@ -1,6 +1,6 @@
 ---
 title: Install the Blog Plugin
-description: Install @vitnode/blog, enable its API and TanStack Start integration, then publish your first article in AdminCP.
+description: Install @vitnode/blog, register it once in vitnode.config.ts, then publish your first article in AdminCP.
 icon: NotebookPen
 ---
 
@@ -35,29 +35,42 @@ npm install @vitnode/blog@canary
   </Step>
   <Step>
 
-### Enable the API plugin
+### Register the plugin
 
-For a Single App, edit `apps/web/src/vitnode.api.config.ts`; a split deployment
-uses the same change in `apps/api/src/vitnode.api.config.ts`.
+One line in `src/vitnode.config.ts` enables everything the plugin ships - its
+API modules, its AdminCP screens and its content types. A Single App and a
+split deployment use the same line; in a split deployment both the web app and
+the API app carry it, and each loads only its own half.
 
-```ts title="apps/web/src/vitnode.api.config.ts"
-import { blogApiPlugin } from '@vitnode/blog/config.api' // [!code ++]
+```ts title="src/vitnode.config.ts"
+import { blogPlugin } from '@vitnode/blog/config' // [!code ++]
 
-export const vitNodeApiConfig = buildApiConfig({
+export default defineVitNodeConfig({
   plugins: [
-    blogApiPlugin(), // [!code ++]
+    blogPlugin(), // [!code ++]
   ],
 })
+```
+
+Tune it with typed options; the plugin validates them for you:
+
+```ts
+plugins: [
+  blogPlugin({
+    postsPerPage: 12,
+  }),
+]
 ```
 
   </Step>
   <Step>
 
-### Enable the web plugin and its messages
+### Register its messages
 
-The host registers the lightweight plugin identity and static locale loaders:
+Add the plugin's locale files to `src/locales/packages.ts`, which the web
+runtime's `server` factory loads:
 
-```ts title="apps/web/src/locales/packages.ts"
+```ts title="src/locales/packages.ts"
 import { CONFIG_PLUGIN as BLOG } from '@vitnode/blog/const' // [!code ++]
 
 export const packageMessages = {
@@ -66,16 +79,6 @@ export const packageMessages = {
     en: async () => await import('@vitnode/blog/locales/en.json'),
   },
 }
-```
-
-```ts title="apps/web/src/vitnode.config.ts"
-import { blogPlugin } from '@vitnode/blog/config' // [!code ++]
-
-export const vitNodeConfig = buildConfig({
-  plugins: [
-    blogPlugin(), // [!code ++]
-  ],
-})
 ```
 
   </Step>

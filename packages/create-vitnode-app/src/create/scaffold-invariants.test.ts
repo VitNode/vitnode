@@ -61,11 +61,11 @@ describe("the single-app template's two trees", () => {
     expect(overlayFiles.filter(file => rootFiles.includes(file))).toEqual([]);
   });
 
-  it("keeps only API-specific files in the overlay", () => {
+  it("keeps only API-specific files and the authored config in the overlay", () => {
     expect(overlayFiles.length).toBeGreaterThan(0);
     for (const file of overlayFiles) {
       expect(file).toMatch(
-        /^(?:drizzle\.config\.ts|src\/(?:routes\/api\/|server\/|vitnode\.api\.config\.ts))/,
+        /^(?:drizzle\.config\.ts|src\/(?:routes\/api\/|server\/|vitnode\.config\.ts))/,
       );
     }
   });
@@ -140,61 +140,175 @@ describe("what a generated single app starts from", () => {
     expect(read(appTemplate, "api-bun/src/index.ts")).toContain("port: 8000");
   });
 
-  it("declares its languages once and reads them from both configs", () => {
+  /**
+   * One authored config per app shape. The web-only overlay and the single-app
+   * overlay each ship their own `vitnode.config.ts`; the shared `root` tree
+   * ships none, so the two shapes cannot disagree about which file is authored.
+   */
+  it("authors exactly one vitnode.config.ts per app shape", () => {
+    expect(appFiles).not.toContain("root/src/vitnode.config.ts");
+    expect(appFiles).toContain("api-single-app/src/vitnode.config.ts");
+    expect(appFiles).toContain("web-only/src/vitnode.config.ts");
+    expect(appFiles).toContain("api/src/vitnode.config.ts");
+
+    expect(
+      allFiles.filter(file =>
+        /vitnode\.(?:api|server|shell)\.config\.ts$/.test(file),
+      ),
+    ).toEqual([]);
     expect(allFiles.filter(file => /(^|\/)src\/i18n\.ts$/.test(file))).toEqual(
       [],
     );
-    expect(appFiles).not.toContain("root/src/vitnode.shell.config.ts");
-
-    const shared = withoutComments(
-      read(appTemplate, "root/src/vitnode.config.ts"),
-    );
-    expect(shared).toMatch(/defaultLocale:\s*"en"/);
-    expect(shared).toMatch(/locales:\s*\[/);
-
-    expect(
-      withoutComments(
-        read(appTemplate, "api-single-app/src/vitnode.api.config.ts"),
-      ),
-    ).toMatch(/i18n:\s*vitNodeConfig\.i18n/);
   });
 
-  it("declares the time zone both runtimes format dates in", () => {
-    expect(
-      withoutComments(read(appTemplate, "root/src/vitnode.config.ts")),
-    ).toMatch(/timeZone:\s*"/);
+  const CONFIGS = {
+    api: "api/src/vitnode.config.ts",
+    single: "api-single-app/src/vitnode.config.ts",
+    web: "web-only/src/vitnode.config.ts",
+  } as const;
+
+  it.each(Object.values(CONFIGS))("%s is a unified default export", file => {
+    const config = withoutComments(read(appTemplate, file));
+
+    expect(config).toContain("@vitnode/core/config");
+    expect(config).toMatch(/export default defineVitNodeConfig\(\{/);
+    expect(config).toMatch(/defaultLocale:\s*"en"/);
+    expect(config).toMatch(/locales:\s*\[/);
+    expect(config).toMatch(/timeZone:\s*"/);
+    expect(config).not.toContain("buildConfig");
+    expect(config).not.toContain("buildApiConfig");
+    expect(config).not.toContain("buildServerConfig");
+  });
+
+  it("declares the runtimes each shape actually runs", () => {
+    const single = withoutComments(read(appTemplate, CONFIGS.single));
+    const web = withoutComments(read(appTemplate, CONFIGS.web));
+    const api = withoutComments(read(appTemplate, CONFIGS.api));
+
+    expect(single).toMatch(/api:\s*defineApiRuntime\(/);
+    expect(single).toMatch(/web:\s*defineWebRuntime\(/);
+
+    expect(web).toMatch(/web:\s*defineWebRuntime\(/);
+    expect(web).not.toContain("defineApiRuntime");
+    expect(web).not.toContain("drizzle");
+
+    expect(api).toMatch(/api:\s*defineApiRuntime\(/);
+    expect(api).not.toContain("defineWebRuntime");
+    expect(api).not.toContain("@tanstack/");
   });
 
   /**
-   * The split shape has the same obligation, one declaration each: two packages,
-   * so neither can import the other's, and the API's is the one the seed reads.
+   * Importing a driver is free; constructing a client is not. `drizzle(...)`
+   * and every adapter call live inside the `api` factory, so evaluating the
+   * file - which Vite does on every regeneration pass - connects to nothing.
    */
-  it("gives a split deployment an API locale declaration of its own", () => {
-    const api = withoutComments(
-      read(appTemplate, "api/src/vitnode.api.config.ts"),
-    );
+  it("constructs server dependencies inside the api runtime, never at config evaluation", () => {
+    for (const file of [CONFIGS.single, CONFIGS.api]) {
+      const config = withoutComments(read(appTemplate, file));
+      const factoryStart = config.indexOf("defineApiRuntime(");
 
-    expect(api).toMatch(/defaultLocale:\s*"en"/);
-    expect(api).toMatch(/locales:\s*\[/);
+      expect(factoryStart).toBeGreaterThan(-1);
+      expect(config.indexOf("drizzle(")).toBeGreaterThan(factoryStart);
+      expect(config.indexOf("loadEnv(")).toBeGreaterThan(factoryStart);
+      expect(config).not.toMatch(/^(?:const|let|var) .*drizzle\(/m);
+      expect(config).toMatch(/env\.POSTGRES_URL/);
+      expect(config).not.toContain("process.env");
+    }
   });
 
-  it("registers the app's message loaders through the server config", () => {
-    const shared = withoutComments(
-      read(appTemplate, "root/src/vitnode.config.ts"),
+  it("registers the app's message loaders through the web runtime", () => {
+    for (const file of [CONFIGS.single, CONFIGS.web]) {
+      const config = withoutComments(read(appTemplate, file));
+      const serverStart = config.indexOf("server:");
+
+      expect(config).toContain('from "./locales/app"');
+      expect(config).toContain('from "./locales/packages"');
+      expect(serverStart).toBeGreaterThan(-1);
+      expect(config.indexOf("messages: appMessages")).toBeGreaterThan(
+        serverStart,
+      );
+      expect(config.lastIndexOf("packageMessages")).toBeGreaterThan(
+        serverStart,
+      );
+    }
+  });
+
+  /**
+   * Browser code reads the generated projection. The root config is imported
+   * only by server modules, and the Vite client guard fails a build that does
+   * otherwise - so the templates have to be on the right side of it.
+   */
+  it("keeps the root config out of every browser-reachable file", () => {
+    const browserFiles = [
+      "root/src/start.ts",
+      "root/src/routes/__root.tsx",
+      "root/src/lib/page-head.ts",
+      "root/src/lib/i18n/runtime.ts",
+      "root/src/lib/i18n/shared.ts",
+      "root/src/router.tsx",
+    ];
+
+    for (const file of browserFiles) {
+      const code = withoutComments(read(appTemplate, file));
+
+      expect(code).not.toContain("@/vitnode.config");
+    }
+
+    for (const file of [
+      "root/src/start.ts",
+      "root/src/routes/__root.tsx",
+      "root/src/lib/page-head.ts",
+      "root/src/lib/i18n/runtime.ts",
+    ]) {
+      expect(withoutComments(read(appTemplate, file))).toContain(
+        "@/vitnode.public.gen",
+      );
+    }
+  });
+
+  it("hands the root config only to server modules", () => {
+    expect(
+      withoutComments(read(appTemplate, "root/src/server/messages.server.ts")),
+    ).toContain('import vitNodeConfig from "@/vitnode.config"');
+    expect(
+      withoutComments(
+        read(appTemplate, "api-single-app/src/server/vitnode-api.server.ts"),
+      ),
+    ).toContain("resolveApiConfig(vitNodeConfig)");
+    expect(withoutComments(read(appTemplate, "api/src/index.ts"))).toContain(
+      "resolveApiConfig(vitNodeConfig",
+    );
+    expect(
+      withoutComments(read(appTemplate, "api-bun/src/index.ts")),
+    ).toContain("resolveApiConfig(vitNodeConfig");
+  });
+
+  it("points drizzle-kit at the unified config", () => {
+    for (const file of [
+      "api/drizzle.config.ts",
+      "api-single-app/drizzle.config.ts",
+    ]) {
+      const drizzle = withoutComments(read(appTemplate, file));
+
+      expect(drizzle).toMatch(/config:\s*vitNodeConfig/);
+      expect(drizzle).not.toContain("vitNodeApiConfig");
+      expect(drizzle).not.toContain("POSTGRES_URL");
+    }
+  });
+
+  it("copies the web-only overlay onto the monorepo web app", () => {
+    const code = withoutComments(
+      read(join(packageRoot, "src"), "create/create-vitnode.ts"),
+    );
+    const monorepo = code.slice(
+      code.indexOf('} else if (mode === "apiMonorepo")'),
+      code.indexOf('} else if (mode === "onlyApi")'),
     );
 
-    expect(shared).not.toMatch(/from\s*['"]\.\/locales/);
-    expect(shared).not.toMatch(/from\s*['"]#\/locales/);
-
-    expect(appFiles).toContain("root/src/vitnode.server.config.ts");
-    const server = withoutComments(
-      read(appTemplate, "root/src/vitnode.server.config.ts"),
+    expect(monorepo).toContain('cp(join(templatePath, "web-only")');
+    expect(monorepo.indexOf('"root"')).toBeLessThan(
+      monorepo.indexOf('"web-only"'),
     );
-    expect(server).toContain('import "@tanstack/react-start/server-only"');
-    expect(server).toContain("buildServerConfig");
-    expect(server).toMatch(/config:\s*vitNodeConfig/);
-    expect(server).toMatch(/messages:\s*appMessages/);
-    expect(server).toContain("packageMessages");
   });
 });
 
@@ -206,7 +320,7 @@ describe("what a generated application does to every request", () => {
       'import { createVitNodeStart } from "@vitnode/core/tanstack/start"',
     );
     expect(start).toMatch(
-      /export const startInstance = createVitNodeStart\(\{\s*config: vitNodeConfig,?\s*\}\)/,
+      /export const startInstance = createVitNodeStart\(\{\s*config: vitNodePublicConfig,?\s*\}\)/,
     );
   });
 

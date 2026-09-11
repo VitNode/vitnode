@@ -91,6 +91,16 @@
     "vitnode": "./cli.mjs"
   },
   "exports": {
+    "./config": {
+      "import": "./dist/src/config/index.js",
+      "types": "./dist/src/config/index.d.ts",
+      "default": "./dist/src/config/index.js"
+    },
+    "./config/server": {
+      "import": "./dist/src/config/server.js",
+      "types": "./dist/src/config/server.d.ts",
+      "default": "./dist/src/config/server.js"
+    },
     "./content": {
       "import": "./dist/src/content/index.js",
       "types": "./dist/src/content/index.d.ts",

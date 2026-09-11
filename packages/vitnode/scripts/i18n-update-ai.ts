@@ -264,9 +264,7 @@ export const i18nUpdateAi = async () => {
   if (models.length === 0) {
     const parent = dirname(appDir);
     const siblingConfigPath =
-      parent !== appDir
-        ? findConfigFile(parent, "vitnode.api.config.ts")
-        : null;
+      parent !== appDir ? findConfigFile(parent, "vitnode.config.ts") : null;
 
     if (siblingConfigPath) {
       const siblingApiConfig = await getConfig({

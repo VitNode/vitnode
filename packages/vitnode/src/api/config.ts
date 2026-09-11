@@ -7,7 +7,7 @@ import { cors } from "hono/cors";
 import { csrf } from "hono/csrf";
 import { HTTPException } from "hono/http-exception";
 
-import type { VitNodeApiConfig } from "@/vitnode.config";
+import type { VitNodeApiConfig } from "@/config/types";
 
 import { createCacheClient } from "@/api/lib/cache-client";
 import { clientIpMiddleware } from "@/api/lib/client-ip";
@@ -135,6 +135,7 @@ export function VitNodeAPI({
       search: vitNodeApiConfig.search,
       storage: vitNodeApiConfig.storage,
       plugins,
+      public: vitNodeApiConfig.public,
       cacheClient: redisClient,
     }),
   );

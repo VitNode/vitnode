@@ -14,17 +14,20 @@ serverless and edge deployments where an SMTP connection would never open.
 
 ## Quick start
 
-```ts title="src/vitnode.api.config.ts"
-import { buildApiConfig } from '@vitnode/core/vitnode.config'
+```ts title="src/vitnode.config.ts"
+import { defineApiRuntime, defineVitNodeConfig } from '@vitnode/core/config'
 import { ResendEmailAdapter } from '@vitnode/resend'
 
-export const vitNodeApiConfig = buildApiConfig({
-  email: {
-    adapter: ResendEmailAdapter({
-      apiKey: process.env.RESEND_API_KEY,
-      from: process.env.RESEND_FROM_EMAIL,
-    }),
-  },
+export default defineVitNodeConfig({
+  // ...
+  api: defineApiRuntime(async ({ env }) => ({
+    email: {
+      adapter: ResendEmailAdapter({
+        apiKey: env.RESEND_API_KEY,
+        from: env.RESEND_FROM_EMAIL,
+      }),
+    },
+  })),
 })
 ```
 
@@ -91,22 +94,25 @@ carry your production mail.
 Add the `email` block to your API config. Both values come from the
 environment, so nothing secret lives in the repository:
 
-```ts title="src/vitnode.api.config.ts"
-import { buildApiConfig } from '@vitnode/core/vitnode.config'
+```ts title="src/vitnode.config.ts"
+import { defineApiRuntime, defineVitNodeConfig } from '@vitnode/core/config'
 import { ResendEmailAdapter } from '@vitnode/resend' // [!code ++]
 
-export const vitNodeApiConfig = buildApiConfig({
-  // [!code ++:6]
-  email: {
-    adapter: ResendEmailAdapter({
-      apiKey: process.env.RESEND_API_KEY,
-      from: process.env.RESEND_FROM_EMAIL,
-    }),
-  },
-  metadata: {
-    title: 'My Community',
-    shortTitle: 'Community',
-  },
+export default defineVitNodeConfig({
+  // ...
+  api: defineApiRuntime(async ({ env }) => ({
+    // [!code ++:6]
+    email: {
+      adapter: ResendEmailAdapter({
+        apiKey: env.RESEND_API_KEY,
+        from: env.RESEND_FROM_EMAIL,
+      }),
+    },
+    metadata: {
+      title: 'My Community',
+      shortTitle: 'Community',
+    },
+  })),
 })
 ```
 
@@ -174,7 +180,7 @@ import { TypeTable } from 'fumadocs-ui/components/type-table'
 
 ## Environment variables
 
-Both are read in `src/vitnode.api.config.ts`, so the names are yours to choose;
+Both are read through `env` in the `api` runtime of `src/vitnode.config.ts`, so the names are yours to choose;
 these are the ones this documentation uses.
 
 | Variable            | Maps to  | Example                 | Notes                                                                      |

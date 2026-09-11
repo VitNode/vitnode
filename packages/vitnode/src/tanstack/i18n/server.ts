@@ -3,6 +3,7 @@ import "@tanstack/react-start/server-only";
 export type {
   BundledMessagesOptions,
   IntlMessagesLoader,
+  IntlMessagesLoaderInput,
   IntlMessagesLoaderOptions,
 } from "./messages";
 export {

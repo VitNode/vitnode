@@ -33,34 +33,47 @@ export const StatsWidget = ({ settings }: AdminDashboardWidgetProps) => (
   </Step>
   <Step>
 
-### Register it in the existing plugin factory
+### Export it from the plugin's widgets module
 
-```tsx title="plugins/site-notes/src/config.tsx"
+A widget is a React component, so it stays out of the plugin's descriptor - the
+same rule as `admin/nav` and `admin/content`. Export the list from its own
+module:
+
+```tsx title="plugins/site-notes/src/admin/widgets.tsx"
+import type { DashboardPluginWidgets } from '@vitnode/core/tanstack/admin/dashboard'
 import { BarChart3Icon } from 'lucide-react'
 
-import { StatsWidget } from './views/admin/widgets/stats-widget'
+import { StatsWidget } from '../views/admin/widgets/stats-widget'
 
-export const siteNotesPlugin = () =>
-  buildPlugin({
-    admin: {
-      dashboard: {
-        widgets: [
-          // [!code ++:9]
-          {
-            component: StatsWidget,
-            defaultEnabled: true,
-            defaultRows: 1,
-            defaultSpan: 1,
-            icon: <BarChart3Icon />,
-            id: 'stats',
-          },
-        ],
-      },
+export const dashboardWidgets: DashboardPluginWidgets = {
+  pluginId: '@acme/site-notes',
+  widgets: [
+    // [!code ++:8]
+    {
+      component: StatsWidget,
+      defaultEnabled: true,
+      defaultRows: 1,
+      defaultSpan: 1,
+      icon: <BarChart3Icon />,
+      id: 'stats',
     },
-    messages,
-    pluginId: '@acme/site-notes',
-    routes,
-  })
+  ],
+}
+```
+
+The host's dashboard route hands every plugin's list to the screen:
+
+```tsx title="apps/web/src/routes/_admin/admin.core.index.tsx"
+import { dashboardWidgets as siteNotesWidgets } from '@acme/site-notes/admin/widgets' // [!code ++]
+
+function AdminDashboardRoute() {
+  return (
+    <AdminDashboardRouteContent
+      {...Route.useLoaderData()}
+      pluginWidgets={[siteNotesWidgets]} // [!code ++]
+    />
+  )
+}
 ```
 
 The full widget id is namespaced by the plugin, so `stats` will not collide with
@@ -76,7 +89,7 @@ Add `permission` to hide a widget from staff who should not see it. Add
 `settingsComponent` when administrators need to save preferences; both stay in
 the plugin alongside the widget.
 
-```tsx title="plugins/site-notes/src/config.tsx"
+```tsx title="plugins/site-notes/src/admin/widgets.tsx"
 {
   component: StatsWidget,
   // [!code ++:4]

@@ -3,10 +3,11 @@ import type { Context, Env, Next } from "hono";
 import { HTTPException } from "hono/http-exception";
 
 import type { CacheClient } from "@/api/lib/cache";
+import type { VitNodeApiConfig, VitNodePublicConfig } from "@/config/types";
 import type { RegisteredContentType } from "@/content/registry";
 import type { RegisteredContentModel } from "@/content/server/model";
 import type { LocaleConfig, MessagesSource } from "@/lib/i18n/types";
-import type { VitNodeApiConfig, VitNodeConfig } from "@/vitnode.config";
+import type { VitNodeMetadata } from "@/lib/metadata";
 import type { VitNodeRealtime } from "@/ws/registry";
 
 import { LocalEventsAdapter } from "@/api/adapters/events/local";
@@ -124,6 +125,7 @@ export interface EnvVariablesVitNode {
     };
     permissionStaff: PermissionStaffCatalogEntry[];
     plugins: { id: string }[];
+    public?: VitNodePublicConfig;
     queue: (BuildQueueTaskReturn & { module: string; pluginId: string })[];
     search: { adapter: SearchProviderApiPlugin };
     searchIndexers: SearchIndexerConfig[];
@@ -171,6 +173,7 @@ export const globalMiddleware = ({
   cron,
   events,
   plugins,
+  public: publicConfig,
   i18n,
   search,
   storage,
@@ -187,12 +190,12 @@ export const globalMiddleware = ({
   | "events"
   | "i18n"
   | "plugins"
+  | "public"
   | "search"
   | "storage"
-> &
-  Pick<VitNodeConfig, "metadata"> & {
-    cacheClient: CacheClient | null;
-  }) => {
+> & {
+  cacheClient: CacheClient | null;
+} & { metadata: VitNodeMetadata }) => {
   const pluginsMetadata = plugins.map(plugin => ({
     id: plugin.pluginId,
   }));
@@ -374,6 +377,7 @@ export const globalMiddleware = ({
       cronSecret: CONFIG.cronJobSecret,
       hasCronAdapter: !!cron,
       plugins: pluginsMetadata,
+      public: publicConfig,
       cron: cronMetadata,
       queue: queueMetadata,
       webSockets: webSocketsMetadata,

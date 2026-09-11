@@ -41,12 +41,15 @@ connects with `postgres.js`, which opens a pool of up to 10 connections per
 process, and a serverless platform will happily run a lot of processes at once.
 If you would rather keep the direct string, shrink the pool instead:
 
-```ts title="src/vitnode.api.config.ts"
-export const vitNodeApiConfig = buildApiConfig({
-  dbProvider: drizzle({
-    connection: { url: POSTGRES_URL, max: 1 }, // [!code ++]
-    relations: coreRelations,
-  }),
+```ts title="src/vitnode.config.ts"
+export default defineVitNodeConfig({
+  // ...
+  api: defineApiRuntime(async ({ env }) => ({
+    dbProvider: drizzle({
+      connection: { url: POSTGRES_URL, max: 1 }, // [!code ++]
+      relations: coreRelations,
+    }),
+  })),
 })
 ```
 

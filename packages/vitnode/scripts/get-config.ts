@@ -1,31 +1,48 @@
 /* eslint-disable no-console */
 import { createJiti } from "jiti";
 import { existsSync, readdirSync, statSync } from "node:fs";
-import { join } from "node:path";
+import { dirname, join, relative } from "node:path";
+import { pathToFileURL } from "node:url";
 
 import type {
   VitNodeApiConfig,
   VitNodeConfig,
-  VitNodeServerConfig,
-} from "../src/vitnode.config.js";
+  VitNodeWebPublicOptions,
+} from "../src/config/types.js";
+import type {
+  AppMessagesMap,
+  LocaleMessagesMap,
+} from "../src/lib/i18n/types.js";
+
+import { configFromLoadedModule } from "../src/config/loaded.js";
+import {
+  resolveApiConfig,
+  resolveWebServerConfig,
+} from "../src/config/server.js";
 
 type ConfigName = "api.config" | "config" | "server.config";
 
+export interface VitNodeWebConfigView extends VitNodeWebPublicOptions {
+  i18n: VitNodeConfig["app"]["i18n"];
+  metadata: VitNodeConfig["app"]["metadata"];
+  plugins: { pluginId: string }[];
+}
+
+export interface VitNodeServerConfigView {
+  config: VitNodeWebConfigView;
+  messages?: AppMessagesMap;
+  packageMessages: Record<string, LocaleMessagesMap | undefined>;
+}
+
 type ConfigType<T extends ConfigName> = T extends "config"
-  ? VitNodeConfig
+  ? VitNodeWebConfigView
   : T extends "server.config"
-    ? VitNodeServerConfig
+    ? VitNodeServerConfigView
     : VitNodeApiConfig;
 
-/**
- * The export each config file is read through - `vitnode.<type>.config.ts` is
- * only half the convention, the named export is the other half.
- */
-const CONFIG_EXPORTS: Record<ConfigName, string> = {
-  "api.config": "vitNodeApiConfig",
-  config: "vitNodeConfig",
-  "server.config": "vitNodeServerConfig",
-};
+export const ROOT_CONFIG_FILENAME = "vitnode.config.ts";
+
+const SKIPPED_DIRECTORIES = new Set(["build", "dist", "node_modules", "out"]);
 
 export const findConfigFile = (
   baseDir: string,
@@ -36,42 +53,104 @@ export const findConfigFile = (
     if (depth > maxDepth) return null;
 
     try {
-      const configPath = join(dir, "src", filename);
-      if (existsSync(configPath)) {
-        return configPath;
+      for (const candidate of [
+        join(dir, filename),
+        join(dir, "src", filename),
+      ]) {
+        if (existsSync(candidate)) return candidate;
       }
 
-      const items = readdirSync(dir);
-      for (const item of items) {
-        // Skip node_modules, hidden directories, and build output folders
-        if (
-          item === "node_modules" ||
-          item.startsWith(".") ||
-          item === "dist" ||
-          item === "build" ||
-          item === "out"
-        ) {
-          continue;
-        }
+      for (const item of readdirSync(dir)) {
+        if (item.startsWith(".") || SKIPPED_DIRECTORIES.has(item)) continue;
 
         const itemPath = join(dir, item);
+
         try {
           if (statSync(itemPath).isDirectory()) {
             const found = searchRecursively(itemPath, depth + 1);
             if (found) return found;
           }
         } catch {
-          // Ignore permission errors
+          continue;
         }
       }
     } catch {
-      // Ignore errors
+      return null;
     }
 
     return null;
   };
 
   return searchRecursively(baseDir, 0);
+};
+
+export interface LoadedVitNodeProject {
+  appDir: string;
+  config: VitNodeConfig;
+  configPath: string;
+}
+
+const appDirOf = (configPath: string): string => {
+  const configDir = dirname(configPath);
+
+  return configDir.endsWith(`/src`) || configDir.endsWith("\\src")
+    ? dirname(configDir)
+    : configDir;
+};
+
+export const loadVitNodeProject = async ({
+  baseDir = process.cwd(),
+}: { baseDir?: string } = {}): Promise<LoadedVitNodeProject | null> => {
+  const configPath = findConfigFile(baseDir, ROOT_CONFIG_FILENAME);
+
+  if (configPath === null) return null;
+
+  const jiti = createJiti(pathToFileURL(configPath).href, {
+    interopDefault: true,
+    moduleCache: false,
+  });
+  const loaded: unknown = await jiti.import(configPath);
+  const source = relative(process.cwd(), configPath) || configPath;
+
+  return {
+    appDir: appDirOf(configPath),
+    config: configFromLoadedModule(loaded, source),
+    configPath,
+  };
+};
+
+const webView = (config: VitNodeConfig): VitNodeWebConfigView => ({
+  ...config.web?.public,
+  i18n: config.app.i18n,
+  metadata: config.app.metadata,
+  plugins: config.plugins.map(plugin => ({ pluginId: plugin.pluginId })),
+});
+
+const projectionFor = async <T extends ConfigName>(
+  project: LoadedVitNodeProject,
+  type: T,
+): Promise<ConfigType<T> | null> => {
+  const { appDir, config } = project;
+
+  if (type === "config") {
+    return (config.web ? webView(config) : null) as ConfigType<T> | null;
+  }
+
+  if (type === "server.config") {
+    if (!config.web) return null;
+
+    const resolved = await resolveWebServerConfig(config);
+
+    return {
+      config: webView(config),
+      messages: resolved.messages,
+      packageMessages: resolved.packageMessages,
+    } as ConfigType<T>;
+  }
+
+  if (!config.api) return null;
+
+  return (await resolveApiConfig(config, { appRoot: appDir })) as ConfigType<T>;
 };
 
 export async function getConfig<T extends ConfigName = "config">(args: {
@@ -93,15 +172,21 @@ export async function getConfig<T extends ConfigName = "config">({
   optional?: boolean;
   type?: T;
 } = {}): Promise<ConfigType<T> | null> {
-  // Defaults to the current app; callers pass `baseDir` to search elsewhere,
-  // e.g. one directory up to reach a sibling app's config in a monorepo.
   const cwd = baseDir ?? process.cwd();
-  const filename = `vitnode.${type}.ts`;
-  const configPath = findConfigFile(cwd, filename);
 
-  if (!configPath) {
+  let project: LoadedVitNodeProject | null;
+
+  try {
+    project = await loadVitNodeProject({ baseDir: cwd });
+  } catch (error) {
     if (optional) return null;
-    console.error(`Config file not found: ${filename}`);
+    console.error("Failed to load config:", error);
+    process.exit(1);
+  }
+
+  if (project === null) {
+    if (optional) return null;
+    console.error(`Config file not found: ${ROOT_CONFIG_FILENAME}`);
     console.error(
       `Searched recursively in ${cwd} (excluding node_modules, .*, dist, build, out)`,
     );
@@ -109,23 +194,17 @@ export async function getConfig<T extends ConfigName = "config">({
   }
 
   try {
-    const configVarName = CONFIG_EXPORTS[type];
+    const projection = await projectionFor(project, type);
 
-    const jiti = createJiti(import.meta.url, {
-      interopDefault: true,
-    });
-
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const loaded = (await jiti.import(configPath)) as any;
-    const config = loaded[configVarName];
-
-    if (!config) {
+    if (projection === null) {
       if (optional) return null;
-      console.error(`Export "${configVarName}" not found in ${configPath}`);
+      console.error(
+        `${relative(cwd, project.configPath)} declares no ${type === "api.config" ? "API runtime (`api: defineApiRuntime(...)`)" : "web runtime (`web: defineWebRuntime(...)`)"}.`,
+      );
       process.exit(1);
     }
 
-    return config as ConfigType<T>;
+    return projection;
   } catch (error) {
     if (optional) return null;
     console.error("Failed to load config:", error);

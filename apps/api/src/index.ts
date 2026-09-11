@@ -6,11 +6,16 @@ import { OpenAPIHono } from "@hono/zod-openapi";
 import { VitNodeAPI } from "@vitnode/core/api/config";
 import { storageStaticHeadersMiddleware } from "@vitnode/core/api/middlewares/storage-static.middleware";
 import { websocketOriginMiddleware } from "@vitnode/core/api/middlewares/websocket-origin.middleware";
+import { resolveApiConfig } from "@vitnode/core/config/server";
 import { handleVitNodeWebSocket } from "@vitnode/core/ws/handle";
 import { mkdirSync } from "node:fs";
 import { WebSocketServer } from "ws";
 
-import { vitNodeApiConfig } from "./vitnode.api.config.js";
+import vitNodeConfig from "./vitnode.config.js";
+
+const vitNodeApiConfig = await resolveApiConfig(vitNodeConfig, {
+  appRoot: import.meta.dirname,
+});
 
 const app = new OpenAPIHono().basePath("/api");
 
