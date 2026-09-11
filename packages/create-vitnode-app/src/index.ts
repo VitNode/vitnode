@@ -54,6 +54,10 @@ const init = async () => {
     "--skip-install",
     "Skip installing packages after initializing the project.",
   );
+  program.option(
+    "--skip-git",
+    "Skip initializing a git repository in the project.",
+  );
   program.addOption(
     new Option(
       "--mode <mode>",
