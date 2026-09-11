@@ -1,4 +1,3 @@
-import { useSuspenseQuery } from "@tanstack/react-query";
 import { useRouter } from "@tanstack/react-router";
 import { useTranslations } from "use-intl";
 
@@ -14,7 +13,7 @@ import {
   changePasswordFromResetAction,
   requestPasswordResetAction,
 } from "./actions";
-import { middlewareConfigQueryOptions } from "./middleware-config";
+import { useMiddlewareConfigQuery } from "./middleware-config";
 import { passwordResetMode } from "./recovery";
 import { LOGIN_PATH, parseInternalDestination } from "./redirects";
 
@@ -50,7 +49,7 @@ export const PasswordResetRouteContent = ({
   search,
 }: PasswordResetRouteProps) => {
   const router = useRouter();
-  const { data: config } = useSuspenseQuery(middlewareConfigQueryOptions());
+  const { data: config } = useMiddlewareConfigQuery();
   const mode = passwordResetMode(search);
 
   return (

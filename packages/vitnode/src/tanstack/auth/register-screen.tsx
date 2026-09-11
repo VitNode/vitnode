@@ -1,5 +1,3 @@
-import { useSuspenseQuery } from "@tanstack/react-query";
-
 import type { AuthLinkComponent } from "@/views/auth/auth-link";
 
 import { SignUpFormContent } from "@/views/auth/sign-up/form/sign-up-form-content";
@@ -10,10 +8,7 @@ import type { AuthNavigate } from "./actions";
 
 import { RouteMessages } from "../i18n/route-messages";
 import { startSsoAction, useSignUpAction } from "./actions";
-import {
-  middlewareConfigQueryOptions,
-  ssoProvidersOf,
-} from "./middleware-config";
+import { ssoProvidersOf, useMiddlewareConfigQuery } from "./middleware-config";
 import { postAuthDestination } from "./redirects";
 import { REGISTER_NAMESPACES } from "./register-route";
 
@@ -26,7 +21,7 @@ export const RegisterRouteContent = ({
   LinkComponent,
   navigate,
 }: RegisterRouteProps) => {
-  const { data: config } = useSuspenseQuery(middlewareConfigQueryOptions());
+  const { data: config } = useMiddlewareConfigQuery();
   const signUp = useSignUpAction({
     destination: () => postAuthDestination(undefined),
     navigate,

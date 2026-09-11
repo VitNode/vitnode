@@ -1,6 +1,6 @@
 import type { QueryClient } from "@tanstack/react-query";
 
-import { queryOptions } from "@tanstack/react-query";
+import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 
 import type { AdminAccessState } from "./session-api";
 
@@ -31,6 +31,9 @@ export const adminSessionQueryOptions = () =>
     retry: false,
     staleTime: ADMIN_SESSION_STALE_TIME,
   });
+
+export const useAdminSessionQuery = () =>
+  useSuspenseQuery(adminSessionQueryOptions());
 
 export const ensureAdminAccess = async (
   queryClient: QueryClient,

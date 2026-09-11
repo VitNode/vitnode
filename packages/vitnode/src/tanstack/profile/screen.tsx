@@ -17,7 +17,7 @@ import {
 import { ProfileContent } from "@/views/profile/profile-content";
 import { userProfileQueryKey } from "@/views/profile/profile-query";
 
-import { invalidateSession, sessionQueryOptions } from "../auth/session-query";
+import { invalidateSession, useSessionQuery } from "../auth/session-query";
 import { RouteMessages } from "../i18n/route-messages";
 import { userProfileQuery } from "./query";
 import { PROFILE_NAMESPACES } from "./route";
@@ -73,7 +73,7 @@ const useOwnProfileEditor = ({
 
 const ProfileScreen = ({ children, nameCode }: ProfileRouteProps) => {
   const { data: user } = useSuspenseQuery(userProfileQuery(nameCode));
-  const { data: session } = useQuery(sessionQueryOptions());
+  const { data: session } = useSessionQuery();
   const isOwner = session?.user?.id === user.id;
   const editor = useOwnProfileEditor({ isOwner, nameCode });
 

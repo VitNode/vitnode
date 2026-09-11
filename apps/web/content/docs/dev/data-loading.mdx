@@ -71,6 +71,56 @@ const mutation = useMutation({
 
 ---
 
+## Built-in Queries
+
+Core ships three hooks for the state every page tends to need. Each one wraps a
+query the framework already warms, so calling it is a cache read rather than a
+new request.
+
+| Hook                         | Import                         | Suspends | Answers                                                     |
+| :--------------------------- | :----------------------------- | :------- | :---------------------------------------------------------- |
+| `useSessionQuery()`          | `@vitnode/core/tanstack/auth`  | No       | The signed-in visitor, or `null`                            |
+| `useAdminSessionQuery()`     | `@vitnode/core/tanstack/admin` | Yes      | Whether this browser is inside the AdminCP, and as whom     |
+| `useMiddlewareConfigQuery()` | `@vitnode/core/tanstack/auth`  | Yes      | What the deployment has switched on, before anyone signs in |
+
+### Deployment configuration
+
+`useMiddlewareConfigQuery()` reads `GET /api/@vitnode/core/middleware` - the
+public answer to "what is turned on here". It needs no session, which is why the
+login, registration, SSO callback and password-reset screens can all read it:
+
+```tsx title="plugins/contact/src/pages/contact-page.tsx"
+import { useMiddlewareConfigQuery } from '@vitnode/core/tanstack/auth'
+
+export const ContactScreen = () => {
+  // [!code ++:1]
+  const { data: config } = useMiddlewareConfigQuery()
+
+  return <ContactForm captcha={config.captcha} />
+}
+```
+
+| Field       | What it says                                                          |
+| :---------- | :-------------------------------------------------------------------- |
+| `sso`       | The social providers to draw buttons for                              |
+| `isEmail`   | Whether an email adapter is configured - password reset needs one     |
+| `captcha`   | The public site key and widget type, or `undefined`                   |
+| `ai.models` | The [configured AI models](/docs/dev/ai); empty when AI is not set up |
+| `isKnown`   | `false` when the read failed - see below                              |
+
+`isKnown` is the one field the API does not send. The fetch never throws: a
+deployment whose API is unreachable answers `UNKNOWN_MIDDLEWARE_CONFIG` with
+`isKnown: false`, so a login screen still renders instead of blanking. Check it
+before treating "no captcha" or "no email" as a deliberate choice.
+
+Route loaders warm it with the options factory rather than the hook:
+
+```ts
+await queryClient.ensureQueryData(middlewareConfigQueryOptions())
+```
+
+---
+
 ## Freshness Constants
 
 VitNode provides standard stale times in `@vitnode/core/lib/query-freshness`:

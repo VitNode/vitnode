@@ -1,5 +1,3 @@
-import { useSuspenseQuery } from "@tanstack/react-query";
-
 import type {
   PermissionsStaffArgs,
   StaffPermissionSet,
@@ -14,7 +12,7 @@ import {
 
 import type { AdminAccessState, AdminSessionApi } from "./session-api";
 
-import { adminSessionQueryOptions } from "./session-query";
+import { useAdminSessionQuery } from "./session-query";
 import { adminPermissionsOf, hasAdminPermission } from "./state";
 
 export const AdminPermissionsProvider = ({
@@ -22,7 +20,7 @@ export const AdminPermissionsProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const { data } = useSuspenseQuery(adminSessionQueryOptions());
+  const { data } = useAdminSessionQuery();
 
   return (
     <AdminStaffPermissionProvider value={adminPermissionsOf(data)}>
@@ -32,7 +30,7 @@ export const AdminPermissionsProvider = ({
 };
 
 export const useAdminAccess = (): AdminAccessState =>
-  useSuspenseQuery(adminSessionQueryOptions()).data;
+  useAdminSessionQuery().data;
 
 export const useAdminUser = (): AdminSessionApi["user"] | null => {
   const access = useAdminAccess();

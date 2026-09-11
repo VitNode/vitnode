@@ -1,10 +1,9 @@
 import type { LucideIcon } from "lucide-react";
 
-import { useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { LogoVitNode } from "@vitnode/core/components/logo-vitnode";
 import { buttonVariants } from "@vitnode/core/components/ui/button";
-import { sessionQueryOptions } from "@vitnode/core/tanstack/auth";
+import { useSessionQuery } from "@vitnode/core/tanstack/auth";
 import { RouterLink } from "@vitnode/core/tanstack/layout";
 import { cn } from "cn";
 import {
@@ -71,7 +70,7 @@ const sharedSteps: NextStep[] = [
 ];
 
 function HomeRoute() {
-  const { data } = useQuery(sessionQueryOptions());
+  const { data } = useSessionQuery();
   const user = data?.user ?? null;
   const steps = user ? sharedSteps : [registerStep, ...sharedSteps];
 

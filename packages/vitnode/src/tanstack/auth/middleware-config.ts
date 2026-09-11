@@ -1,6 +1,6 @@
 import type { z } from "zod";
 
-import { queryOptions } from "@tanstack/react-query";
+import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 
 import type { middlewareModule } from "@/api/modules/middleware/middleware.module";
 import type { routeMiddlewareSchema } from "@/api/modules/middleware/route";
@@ -17,6 +17,7 @@ export interface MiddlewareConfigState extends MiddlewareConfig {
 }
 
 export const UNKNOWN_MIDDLEWARE_CONFIG: MiddlewareConfigState = Object.freeze({
+  ai: { models: [] },
   isEmail: false,
   isKnown: false,
   sso: [],
@@ -59,6 +60,9 @@ export const middlewareConfigQueryOptions = () =>
     queryKey: MIDDLEWARE_QUERY_KEY,
     staleTime: MIDDLEWARE_STALE_TIME,
   });
+
+export const useMiddlewareConfigQuery = () =>
+  useSuspenseQuery(middlewareConfigQueryOptions());
 
 export const ssoProvidersOf = (config: MiddlewareConfig): SSOProvider[] =>
   normalizeSSOProviders(config.sso);

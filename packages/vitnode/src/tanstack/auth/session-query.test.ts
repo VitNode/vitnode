@@ -11,7 +11,7 @@ import {
 import { SESSION_QUERY_KEY } from "./state";
 import { setAuthTransport } from "./transport";
 
-let nextSession: SessionApi = { user: null } as SessionApi;
+let nextSession: SessionApi = { user: null };
 let nextFailure: Error | null = null;
 let reads = 0;
 
