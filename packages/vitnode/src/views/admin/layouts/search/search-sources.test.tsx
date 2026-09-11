@@ -45,7 +45,7 @@ const searchIndex = (
     buildAdminNav({
       permissions,
       t,
-      vitNodeConfig: config(plugins) as never,
+      vitNodeConfig: config(plugins),
     }),
   ),
   ...adminSearchOnlyItems({ permissions, t }),
@@ -136,7 +136,7 @@ describe("the palette indexes only what the sidebar shows", () => {
 describe("flattening", () => {
   it("indexes sub-items rather than their parent, and never an href twice", () => {
     const index = flattenAdminNav(
-      buildAdminNav({ permissions: root, t, vitNodeConfig: config() as never }),
+      buildAdminNav({ permissions: root, t, vitNodeConfig: config() }),
     );
     const users = hrefs(index).filter(href => href === "/admin/core/users");
 
@@ -146,7 +146,7 @@ describe("flattening", () => {
 
   it("carries the parent's title so a result says where it lives", () => {
     const index = flattenAdminNav(
-      buildAdminNav({ permissions: root, t, vitNodeConfig: config() as never }),
+      buildAdminNav({ permissions: root, t, vitNodeConfig: config() }),
     );
     const roles = index.find(item => item.href === "/admin/core/users/roles");
 
@@ -177,7 +177,7 @@ describe("flattening", () => {
       buildAdminNav({
         permissions: root,
         t,
-        vitNodeConfig: config(plugins) as never,
+        vitNodeConfig: config(plugins),
       }),
     );
 
@@ -192,7 +192,7 @@ describe("flattening", () => {
 
 describe("matching", () => {
   const index = flattenAdminNav(
-    buildAdminNav({ permissions: root, t, vitNodeConfig: config() as never }),
+    buildAdminNav({ permissions: root, t, vitNodeConfig: config() }),
   );
   const roles = index.find(item => item.href === "/admin/core/users/roles");
 
