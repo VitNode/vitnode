@@ -10,7 +10,7 @@ Content Engine includes complete editorial workflows: draft and published states
 
 ## Quick start
 
-Enable publication and editorial options in your content type:
+Enable publication, public API, and editorial workflows in your content type definition:
 
 ```ts title="plugins/blog/src/content/post.ts"
 import { defineContentType, field } from "@vitnode/core/content"
@@ -18,8 +18,12 @@ import { defineContentType, field } from "@vitnode/core/content"
 export const blogPostContentType = defineContentType({
   id: "blog.post",
   tableName: "blog_posts",
-  // [!code ++:8]
+  // [!code ++:13]
   publication: { enabled: true },
+  publicApi: {
+    path: "/posts",
+    fields: ["title"],
+  },
   editorial: {
     enabled: true,
     revisions: { retention: 20 }, // Store up to 20 historical versions
@@ -32,42 +36,59 @@ export const blogPostContentType = defineContentType({
 })
 ```
 
-{/* Image prompt: VitNode AdminCP Article editor header with "Draft" badge, "Publish" action button, and a dropdown menu showing "Revision History", "Share Preview Link", and "Schedule Publication". Dark theme, 1440x900. */}
-
 ---
 
 ## Editorial Features
 
 ### 1. Publication Lifecycle
 
-When `publication: { enabled: true }` is enabled:
-- Records carry a `status` column (`draft` or `published`) and a `publishedAt` timestamp.
-- Unauthenticated public queries automatically filter out drafts.
-- Publishing is idempotent: the first publish stamps `publishedAt`, while subsequent edits preserve original publication dates.
+When `publication: { enabled: true }` is configured:
+- Records carry a `status` column (`"draft"` or `"published"`) and a `publishedAt` timestamp.
+- Unauthenticated public queries automatically filter out drafts, returning only records where `status = "published"`.
+- Publishing is idempotent: the first publish stamps `publishedAt`, while subsequent edits preserve the original publication date.
+- The service exposes typed `publish(id)` and `unpublish(id)` methods.
 
 ---
 
 ### 2. Revision History
 
-Each save creates an immutable snapshot in the generated revisions table:
-- Editors can inspect diffs between any historical version and current state.
-- One-click restore reinstates previous content while logging the change.
+When `editorial: { enabled: true }` is configured:
+- Adds a `version` column to the database table (defaults to 1 and increments on each restore).
+- Each save stores an immutable snapshot in the centralized `core_content_revisions` table.
+- `revisions.retention` sets the maximum number of revisions kept per record (1–500, default: 50).
+- Editors can inspect diffs between any historical snapshot and the current record state.
+- One-click restore reinstates previous content while incrementing the version and emitting a `content.${id}.restored` event.
 
 ---
 
 ### 3. Signed Preview Links
 
 Share unpublished drafts with stakeholders who lack AdminCP accounts:
-- Generates HMAC-signed URLs valid for a customizable duration (e.g. 60 minutes).
+- **Prerequisite:** `publicApi` must be configured on the content type, because preview projections rely on `publicApi.fields`.
+- Generates HMAC-signed URLs valid for a customizable duration (`expiresInMinutes`: 1–1440, default: 15).
+- Optional `pathTemplate` allows custom preview URL routing (e.g. `"/preview/posts/{id}"`).
 - Public frontend routes verify the preview token and stream the draft.
 
 ---
 
 ### 4. Scheduled Publishing
 
-Pick a future release date and time:
+Pick a future release date and time for automatic publishing or unpublishing:
+- **Prerequisite:** `publication: { enabled: true }` must be enabled.
 - The background cron worker checks scheduled items periodically.
-- Automatically transitions records to `published` at the specified timestamp.
+- Transitions records between `draft` and `published` at the specified timestamp and emits `content.${id}.scheduled` or `content.${id}.schedule_cancelled` events.
+
+## Configuration Reference
+
+| Option | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `publication.enabled` | `boolean` | `false` | Enables `status` and `publishedAt` lifecycle columns. |
+| `editorial.enabled` | `boolean` | `false` | Enables version tracking and revisions. |
+| `editorial.revisions.retention` | `number` | `50` | Maximum historical revisions preserved per item (1–500). |
+| `editorial.preview.enabled` | `boolean` | `false` | Enables signed preview links. Requires `publicApi`. |
+| `editorial.preview.expiresInMinutes` | `number` | `15` | Expiration time for signed preview links in minutes (1–1440). |
+| `editorial.preview.pathTemplate` | `string` | — | Custom URL template for preview links. |
+| `editorial.scheduling.enabled` | `boolean` | `false` | Enables scheduled publication/unpublication. Requires `publication.enabled: true`. |
 
 ## Learn More
 
@@ -78,8 +99,8 @@ Pick a future release date and time:
     href="/docs/dev/content-engine/defining-a-content-type"
   />
   <Card
-    title="Cron Tasks"
-    description="How background workers process scheduled publications"
-    href="/docs/dev/cron"
+    title="Public API & Caching"
+    description="Configuring public API endpoints and caching rules"
+    href="/docs/dev/content-engine/public-api-and-caching"
   />
 </Cards>

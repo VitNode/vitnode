@@ -36,7 +36,7 @@ export const articleContentType = defineContentType({
 <Steps>
 
 <Step>
-### Step 1: Create Database Model File
+### Step 1: Create Database Model File and Export Tables
 
 Create your model file under `src/database/articles.ts`. Import `createContentModel` from `@vitnode/core/content/server` and your definition `articleContentType`:
 
@@ -52,9 +52,22 @@ export const articleContent = createContentModel(articleContentType, {
   },
 })
 
-// Export raw Drizzle table for migration discovery
+// Export raw Drizzle tables for migration discovery
 export const example_articles = articleContent.table
+
+// When localization is enabled, export the translation table
+export const example_articles_translations = articleContent.translationTable
+
+// When to-many relations or repeatables are used, export junction and child tables
+export const example_articles_categories =
+  articleContent.advancedTables.junctions.categories
+export const example_articles_faq =
+  articleContent.advancedTables.repeatables.faqItems
 ```
+
+<Callout type="warn" title="Always Export Generated Tables">
+  Drizzle Kit discovers database tables by scanning the exported members of built files in `dist/src/database/*.js`. Omitting an export for `table`, `translationTable`, or any junction/repeatable table in `advancedTables` means Drizzle Kit will not discover it and will omit it from the generated SQL migration.
+</Callout>
 
 </Step>
 
@@ -110,7 +123,7 @@ npm run build:plugins && npm run db:migrate
 
 ## Automatic System Columns
 
-When `createContentModel` compiles a model, it automatically includes standard system columns:
+When `createContentModel` compiles a model, it automatically includes standard system columns on the base table:
 
 | Column      | Postgres Type        | Description                         |
 | :---------- | :------------------- | :---------------------------------- |
@@ -118,5 +131,18 @@ When `createContentModel` compiles a model, it automatically includes standard s
 | `createdAt` | `timestamp`          | Auto-populated creation timestamp   |
 | `updatedAt` | `timestamp`          | Auto-updated modification timestamp |
 
-If [`publication`](/docs/dev/content-engine/publication-and-editorial) is enabled, `status` and `publishedAt` columns are added.  
-If [`editorial`](/docs/dev/content-engine/publication-and-editorial) is enabled, a `version` column is added for optimistic concurrency control.
+If [`publication`](/docs/dev/content-engine/publication-and-editorial) is enabled, `status` (`varchar(32)`) and `publishedAt` (`timestamp`) columns are added.  
+If [`editorial`](/docs/dev/content-engine/publication-and-editorial) is enabled, a `version` (`integer`) column is added for optimistic concurrency control.
+
+When [`localization`](/docs/dev/content-engine/localization) is enabled, the secondary translation table (`{tableName}_translations`) carries its own system columns:
+
+| Column        | Postgres Type | Description                                         |
+| :------------ | :------------ | :-------------------------------------------------- |
+| `itemId`      | `integer`     | Foreign key to the base table `id` (composite PK)   |
+| `languageId`  | `integer`     | Foreign key to `core_languages.id` (composite PK)   |
+| `version`     | `integer`     | Per-locale version for concurrency control          |
+| `createdAt`   | `timestamp`   | Creation timestamp of this translation              |
+| `updatedAt`   | `timestamp`   | Modification timestamp of this translation          |
+| `status`      | `varchar(32)` | Translation publication status (with publication)   |
+| `publishedAt` | `timestamp`   | Translation publication timestamp (with publication)|
+

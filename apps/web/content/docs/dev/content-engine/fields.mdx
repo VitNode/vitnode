@@ -12,17 +12,22 @@ Content Engine provides field descriptors exported from `@vitnode/core/content` 
 
 | Field Method | Postgres Column | Zod Schema | AdminCP Form Control |
 | :--- | :--- | :--- | :--- |
-| `field.text()` | `varchar(length)` | `z.string()` | Text Input |
+| `field.text()` | `varchar(maxLength)` | `z.string()` | Text Input |
 | `field.textarea()` | `text()` | `z.string()` | Textarea |
-| `field.number()` | `integer()` / `numeric()` | `z.number()` | Number Input |
+| `field.number({ integer: true })` | `integer()` | `z.number().int()` | Integer Input |
+| `field.number({ integer: false })` | `double precision` | `z.number()` | Number Input |
 | `field.boolean()` | `boolean()` | `z.boolean()` | Switch Toggle |
-| `field.enum()` | `varchar(length)` | `z.enum([...])` | Select Dropdown |
-| `field.dateTime()` | `timestamp()` | `z.date()` | Date / Time Picker |
-| `field.slug()` | `varchar(length)` | `z.string()` | Slug Generator |
+| `field.enum({ values: [...] })` | `varchar(length)` | `z.enum([...])` | Select Dropdown / Radio |
+| `field.dateTime()` | `timestamp()` | `z.date()` / ISO string | Date / Time Picker |
+| `field.slug()` | `varchar(maxLength)` | `z.string()` | Slug Generator |
 | `field.user()` | `integer()` (FK `core_users`) | `z.number()` | User Combobox |
 | `field.user({ multiple: true })` | Junction table | `z.array(z.number())` | Multi-user Combobox |
 | `field.file()` | `integer()` (FK `core_files`) | `z.number()` | Drag-and-drop File Upload |
 | `field.file({ multiple: true })` | Junction table | `z.array(z.number())` | Multi-file Gallery Uploader |
+| `field.relation()` | `integer()` (FK target table) | `z.number()` | Relation Combobox |
+| `field.relation({ multiple: true })` | Junction table | `z.array(z.number())` | Multi-relation Combobox |
+| `field.group({ fields: ... })` | Prefixed columns | `z.object(...)` | Grouped Card |
+| `field.repeatable({ fields: ... })` | Child table | `z.array(...)` | Repeatable List |
 
 ---
 
@@ -42,34 +47,42 @@ export const postContentType = defineContentType({
   id: "blog.post",
   tableName: "blog_posts",
   fields: {
-    // [!code ++:10]
+    // [!code ++:8]
     title: field.text({
       required: true,
       minLength: 3,
       maxLength: 200,
-      searchable: true,
-      translatable: true,
+      localized: true,
     }),
     summary: field.textarea({
       maxLength: 500,
-      translatable: true,
+      localized: true,
     }),
   },
 })
 ```
+
+`localized: true` marks a field for multi-language translation. When `localization: { enabled: true }` is enabled on the content type, localized field values are stored in the generated `{tableName}_translations` table rather than on the base table.
 
 </Step>
 <Step>
 
 ### Numbers, Booleans, and Enums
 
+Number fields require the `integer` boolean option. When `integer: true`, Content Engine generates an `integer` column in PostgreSQL; when `integer: false`, it generates a `double precision` column for floating-point values.
+
 ```ts title="plugins/blog/src/content/post.ts"
 fields: {
-  // [!code ++:13]
+  // [!code ++:16]
   views: field.number({
+    integer: true,
     defaultValue: 0,
     min: 0,
-    sortable: true,
+  }),
+  rating: field.number({
+    integer: false,
+    min: 0,
+    max: 5,
   }),
   featured: field.boolean({
     defaultValue: false,
@@ -86,26 +99,29 @@ fields: {
 
 ### Slugs, Dates, and User Relations
 
-Auto-generate SEO slugs from other fields, pick dates, or link authors:
+Auto-generate slugs from another field, default timestamps to current time, or link users:
 
 ```ts title="plugins/blog/src/content/post.ts"
 fields: {
-  // [!code ++:12]
+  // [!code ++:13]
   slug: field.slug({
-    from: "title", // Automatically generated from title
-    required: true,
+    source: "title",
   }),
   publishedAt: field.dateTime({
-    defaultValue: () => new Date(),
+    defaultNow: true,
   }),
   author: field.user({
     required: true,
   }),
   contributors: field.user({
     multiple: true,
+    ordered: true,
   }),
 }
 ```
+
+- `source: "title"` automatically derives the slug from the `title` field upon creation. When `source` is omitted, the slug must be explicitly supplied in the create payload.
+- `defaultNow: true` configures PostgreSQL and Drizzle to automatically default the column value to `now()` upon insertion.
 
 </Step>
 <Step>
@@ -117,21 +133,22 @@ VitNode connects file fields directly to `core_files` with storage adapters (Loc
 ```ts title="plugins/blog/src/content/post.ts"
 fields: {
   // Single cover image (max 5 MB)
-  // [!code ++:7]
+  // [!code ++:6]
   coverImage: field.file({
-    required: false,
     maxBytes: 5 * 1024 * 1024,
-    allowedExtensions: ["jpg", "png", "webp"],
+    allowedExtensions: [".jpg", ".jpeg", ".png", ".webp"],
     allowedMimeTypes: ["image/jpeg", "image/png", "image/webp"],
   }),
 
   // Gallery of screenshots
-  // [!code ++:7]
+  // [!code ++:8]
   gallery: field.file({
     multiple: true,
-    maxFiles: 10,
+    min: 1,
+    max: 10,
     maxBytes: 10 * 1024 * 1024,
-    allowedExtensions: ["jpg", "png", "webp"],
+    allowedExtensions: [".jpg", ".jpeg", ".png", ".webp"],
+    allowedMimeTypes: ["image/jpeg", "image/png", "image/webp"],
   }),
 }
 ```
@@ -147,40 +164,71 @@ fields: {
 
 ## Common Field Options
 
-Every field descriptor accepts these standard attributes:
+Field descriptors accept these standard attributes:
 
 <TypeTable
   type={{
     required: {
       default: "false",
-      description: "Whether the field must have a non-null value.",
+      description: "Whether the field must be supplied in the create payload.",
+      type: "boolean",
+    },
+    nullable: {
+      default: "false",
+      description: "Whether the database column accepts NULL, allowing null values.",
       type: "boolean",
     },
     defaultValue: {
-      description: "Fallback value for record creation.",
-      type: "T | (() => T)",
+      description: "Static fallback value for record creation.",
+      type: "string | number | boolean | undefined",
     },
-    searchable: {
+    localized: {
       default: "false",
-      description: "Include field in full-text and table search queries.",
-      type: "boolean",
-    },
-    sortable: {
-      default: "false",
-      description: "Allow AdminCP and API consumers to order by this column.",
-      type: "boolean",
-    },
-    translatable: {
-      default: "false",
-      description: "Store separate values per locale with automatic fallback.",
+      description: "Store separate values per language in the translation table (valid on slug, text, and textarea).",
       type: "boolean",
     },
     description: {
-      description: "Helper text rendered below the form input in AdminCP.",
+      description: "Helper text or translation key rendered below the form input in the AdminCP.",
       type: "string",
     },
   }}
 />
+
+---
+
+## Search, Ordering, and Filter Configuration
+
+`searchable` and `sortable` are not field descriptor options. Searching and ordering are configured at the feature level to separate AdminCP management from public API delivery and global search indexing:
+
+### 1. AdminCP Table (`admin.list`)
+
+Configure how administrators search and sort the AdminCP data table:
+
+- **`admin.list.searchableFields`**: Array of shared `text`, `textarea`, or `slug` fields searchable via the table search input.
+- **`admin.list.orderableFields`**: Array of shared scalar columns administrators can click to sort. System columns (`id`, `createdAt`, `updatedAt`) and publication columns (`status`, `publishedAt`) are always allowed.
+- **`admin.list.defaultOrderBy`**: The column name string to sort by initially (e.g. `'updatedAt'`).
+- **`admin.list.defaultOrder`**: Sort direction (`'asc' | 'desc'`).
+
+<Callout type="warn" title="Localized Fields Cannot Be SQL-Sorted on the Base Table">
+  Because localized fields live on the secondary `{tableName}_translations` table, they cannot be ordered with SQL `ORDER BY` on base table queries. Therefore, `admin.list.orderableFields` accepts only shared columns. However, localized fields **can** be displayed as cells in `admin.list.columns` and used for `admin.titleField` (resolved in the editor's language).
+</Callout>
+
+### 2. Public API (`publicApi`)
+
+Control which fields public consumers can query, search, and sort:
+
+- **`publicApi.searchableFields`**: Columns scanned by the public `?search=` parameter.
+- **`publicApi.orderableFields`**: Columns accepted by the public `?orderBy=` parameter (in addition to `publishedAt`).
+- **`publicApi.filterableFields`**: Columns accepted as exact equality filters in query parameters (e.g. `?category=1`).
+
+### 3. Global Search Index (`search`)
+
+Synchronize records with the VitNode search and discovery engine:
+
+- **`search.titleField`**: Non-nullable text field used as the search result heading.
+- **`search.descriptionField`**: Optional text or textarea field prepended to the indexed body.
+- **`search.contentFields`**: Array of fields and group/repeatable leaves concatenated into the full-text search document.
+
 
 ## Learn More
 

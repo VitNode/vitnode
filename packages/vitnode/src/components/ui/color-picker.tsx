@@ -3,15 +3,20 @@ import { XIcon } from "lucide-react";
 import React from "react";
 import { useTranslations } from "use-intl";
 
+import { colorToHex, convertColor, getStringFromOklch } from "@/lib/colors";
+
 import { Button } from "./button";
+import { ColorPresetPicker } from "./color-preset-picker";
 import { Input } from "./input";
 import { Loader } from "./loader";
 import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 
 // react-colorful only ships in the bundle once the picker is actually opened.
-const HslStringColorPicker = React.lazy(async () => ({
-  default: (await import("react-colorful")).HslStringColorPicker,
+const HexColorPicker = React.lazy(async () => ({
+  default: (await import("react-colorful")).HexColorPicker,
 }));
+
+const FALLBACK_PICKER_COLOR = "#000000";
 
 export const ColorPicker = ({
   value = "",
@@ -49,6 +54,8 @@ export const ColorPicker = ({
       </PopoverTrigger>
 
       <PopoverContent className="w-auto gap-3">
+        <ColorPresetPicker onChange={onChange} value={value} />
+
         <React.Suspense
           fallback={
             <div className="flex size-50 items-center justify-center">
@@ -56,19 +63,26 @@ export const ColorPicker = ({
             </div>
           }
         >
-          <HslStringColorPicker color={value} onChange={onChange} />
+          <HexColorPicker
+            color={colorToHex(value) ?? FALLBACK_PICKER_COLOR}
+            onChange={hex => {
+              const oklch = convertColor.hexToOklch(hex);
+
+              onChange?.(oklch ? getStringFromOklch(oklch) : hex);
+            }}
+          />
         </React.Suspense>
 
         <Input
-          className="w-50"
+          className="w-full"
           onChange={event => onChange?.(event.target.value)}
-          placeholder={placeholder ?? "hsl(240, 80%, 60%)"}
+          placeholder={placeholder ?? "oklch(0.58 0.19 258)"}
           value={value}
         />
 
         {allowRemoveColor && value && (
           <Button
-            className="w-50"
+            className="w-full"
             onClick={() => onChange?.("")}
             size="sm"
             type="button"

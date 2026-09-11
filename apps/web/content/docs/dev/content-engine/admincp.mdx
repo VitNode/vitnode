@@ -44,68 +44,163 @@ Control which columns, search inputs, and sortable headers appear in the AdminCP
 
 ```ts title="plugins/blog/src/content/post.ts"
 export const postContentType = defineContentType({
-  id: 'blog.post',
-  tableName: 'blog_posts',
+  id: "blog.post",
+  tableName: "blog_posts",
   fields: {/* ... */},
-  // [!code ++:9]
+  // [!code ++:10]
   admin: {
-    titleField: 'title', // Primary record identifier in dialogs
+    titleField: "title", // Primary record identifier in dialogs and headings
     list: {
-      columns: ['title', 'status', 'author', 'createdAt'],
-      searchableFields: ['title'],
-      orderableFields: ['title', 'createdAt'],
-      defaultOrderBy: { column: 'createdAt', order: 'desc' },
+      columns: ["title", "status", "author", "createdAt"],
+      searchableFields: ["title"],
+      orderableFields: ["title"],
+      defaultOrderBy: "createdAt",
+      defaultOrder: "desc",
     },
   },
 })
 ```
 
+System columns (`createdAt`, `updatedAt`, `status`, `publishedAt`) are always orderable and do not need to be listed in `orderableFields`.
+
 ---
 
-## Customizing Form Layouts
+## Customizing Form Sections
 
-Group fields into visually distinct sections:
+Divide form fields into titled sections:
 
 ```ts title="plugins/blog/src/content/post.ts"
 admin: {
   form: {
-    // [!code ++:10]
+    // [!code ++:12]
     sections: [
       {
-        id: "main",
+        name: "main",
         fields: ["title", "slug", "content"],
       },
       {
-        id: "metadata",
-        title: "Publishing Options",
-        fields: ["status", "category", "author"],
+        name: "meta",
+        fields: ["category", "author"],
       },
     ],
   },
 }
 ```
 
+Section headings and descriptions are localized in your plugin's locale JSON at `{pluginId}.content.{entityKey}.form.{sectionName}.title` and `.desc`:
+
+```json title="plugins/blog/locales/en.json"
+{
+  "content": {
+    "post": {
+      "form": {
+        "main": {
+          "title": "Article Content",
+          "desc": "Title, slug, and body text of the article."
+        },
+        "meta": {
+          "title": "Publishing Options",
+          "desc": "Category and author assignments."
+        }
+      }
+    }
+  }
+}
+```
+
+---
+
+## Custom Form Layouts
+
+For complete control over form presentation (e.g. main content area with a publishing sidebar), supply a custom layout component using `@vitnode/core/content/admin-form` primitives:
+
+```tsx title="plugins/blog/src/views/admin/article/form-layout.tsx"
+import type { ContentFormLayoutProps } from "@vitnode/core/lib/plugin"
+import {
+  ContentFormActions,
+  ContentFormField,
+  ContentFormHeader,
+  ContentFormLayoutGrid,
+  ContentFormMain,
+  ContentFormSection,
+  ContentFormSidebar,
+  ContentFormStatus,
+} from "@vitnode/core/content/admin-form"
+
+export const BlogArticleFormLayout = ({ mode }: ContentFormLayoutProps) => {
+  return (
+    <>
+      <ContentFormHeader>
+        <ContentFormActions />
+      </ContentFormHeader>
+
+      <ContentFormLayoutGrid>
+        <ContentFormMain>
+          <ContentFormSection>
+            <ContentFormField name="title" />
+            <ContentFormField name="slug" />
+            <ContentFormField name="content" />
+          </ContentFormSection>
+        </ContentFormMain>
+
+        <ContentFormSidebar>
+          {mode === "edit" ? <ContentFormStatus /> : null}
+          <ContentFormField name="category" />
+          <ContentFormField name="author" />
+        </ContentFormSidebar>
+      </ContentFormLayoutGrid>
+    </>
+  )
+}
+```
+
+Register the layout in `src/admin/content.tsx`:
+
+```tsx title="plugins/blog/src/admin/content.tsx"
+contentTypeAdmin({
+  ...postNav,
+  forms: {
+    layout: BlogArticleFormLayout,
+  },
+})
+```
+
+---
+
+## Custom Table Cells and Field Components
+
+You can also customize individual table columns or form input controls:
+
+```tsx title="plugins/blog/src/admin/content.tsx"
+contentTypeAdmin({
+  ...categoryNav,
+  // Custom cell rendering in the DataTable
+  columns: {
+    color: {
+      cell: ({ row }) => (
+        <span className="flex items-center gap-2">
+          <span className="h-3 w-3 rounded-full" style={{ backgroundColor: row.color }} />
+          {row.color}
+        </span>
+      ),
+    },
+  },
+  // Custom input component in AutoForm
+  fields: {
+    color: { component: CategoryColorFieldPicker },
+  },
+})
+```
+
 ---
 
 ## The Loading Placeholder
 
-The create and edit screens never flash a spinner. While the form's code chunk
-and the record are still on their way, Content Engine draws a skeleton in the
-shape of the form you are about to get: the heading, description and back link
-render for real, and every field becomes a block the size of the control that
-replaces it.
-
-The placeholder is built from the content type's definition, so it needs no
-configuration - a `text` field becomes an input-sized block, a `boolean` becomes
-a switch, a `file` becomes a media box, and a to-many picker becomes a list. If
-you gave the content type its own layout, the placeholder renders _that_ layout,
-so the fields land exactly where they will a moment later.
+The create and edit screens never flash a spinner. While the form's code chunk and the record are still on their way, Content Engine draws a skeleton in the shape of the form you are about to get.
 
 ### When an override is a different shape
 
-A field override can render something much bigger than its field kind suggests -
-the blog's `content` is declared a `textarea` but renders a full rich-text
-editor. Tell the placeholder what to draw with `skeleton`:
+A field override can render something much bigger than its field kind suggests — the blog's `content` is declared a `textarea` but renders a full rich-text editor. Tell the placeholder what to draw with `skeleton`:
 
 ```tsx title="plugins/blog/src/admin/content.tsx"
 contentTypeAdmin({
@@ -113,7 +208,7 @@ contentTypeAdmin({
   fields: {
     content: {
       component: BlogArticleEditorField,
-      skeleton: 'editor', // [!code ++]
+      skeleton: "editor", // [!code ++]
     },
   },
 })
@@ -132,23 +227,11 @@ contentTypeAdmin({
 The same block is available on its own, for a field that lazy-loads its control:
 
 ```tsx title="plugins/blog/src/views/admin/article/editor-field.tsx"
-import { ContentFormFieldSkeleton } from '@vitnode/core/content/admin-form'
+import { ContentFormFieldSkeleton } from "@vitnode/core/content/admin-form"
 
 ;<React.Suspense fallback={<ContentFormFieldSkeleton control="editor" />}>
-  <AutoFormEditor label={t('content.label')} {...props} />
+  <AutoFormEditor label={t("content.label")} {...props} />
 </React.Suspense>
-```
-
----
-
-## Custom Screen Overrides
-
-For advanced layouts, replace the default screen with a custom React component:
-
-```tsx title="plugins/blog/src/admin/content.tsx"
-export const postAdminOverrides = {
-  customScreen: MyCustomPostScreen, // [!code ++]
-}
 ```
 
 ## Learn More

@@ -14,7 +14,7 @@ Access the typed repository in any Hono route via `model.service(c)`:
 
 ```ts title="plugins/blog/src/api/modules/articles/routes/featured.route.ts"
 import { buildRoute } from "@vitnode/core/api/lib/route"
-import { articleContent } from "@/database/articles"
+import { articleContent } from "@/content/articles"
 
 export const featuredRoute = buildRoute({
   pluginId: "blog",
@@ -36,30 +36,61 @@ export const featuredRoute = buildRoute({
 })
 ```
 
-`findMany` returns `{ edges, pageInfo }` formatted for cursor-based pagination.
+`findMany` returns `{ edges, pageInfo }` formatted for cursor-based pagination. Each edge in `edges` includes the row fields along with resolved `labels` for relations and user references.
 
 ---
 
 ## Service Methods Reference
 
-The service returned by `model.service(c)` includes standard repository methods:
+The service returned by `model.service(c)` is typed to the content type's schema and capabilities:
 
 | Method | Parameters | Returns |
 | :--- | :--- | :--- |
-| `findMany` | `{ query, filters?, orderBy? }` | `{ edges: T[], pageInfo: PageInfo }` |
-| `findById` | `id: number` | `Promise<T \| null>` |
-| `create` | `data: CreateInput` | `Promise<T>` |
-| `update` | `id: number, data: UpdateInput` | `Promise<T>` |
-| `delete` | `id: number` | `Promise<void>` |
+| `findMany` | `args?: { query?, filters?, orderBy?, where? }` | `Promise<{ edges: ContentListRow<T>[], pageInfo: ContentPageInfo }>` |
+| `findById` | `id: number, options?: ContentServiceOptions` | `Promise<ContentSelect<T> \| null>` |
+| `findRowById` | `id: number, options?: ContentServiceOptions` | `Promise<ContentListRow<T> \| null>` (row with `labels`) |
+| `findDetail` | `id: number, options?: ContentServiceOptions` | `Promise<ContentDetail<T> \| null>` |
+| `create` | `values: ContentCreateInput<T>, options?: ContentServiceOptions` | `Promise<ContentSelect<T>>` |
+| `update` | `id: number, values: ContentUpdateInput<T>, options?: ContentServiceOptions` | `Promise<ContentUpdateResult<T> \| null>` (`{ row, changedFields }`) |
+| `delete` | `id: number, options?: ContentServiceOptions` | `Promise<ContentSelect<T> \| null>` (returns deleted row, or `null`) |
+| `publish` | `id: number, options?: ContentServiceOptions` | `Promise<ContentPublicationResult<T> \| null>` (when `publication` enabled) |
+| `unpublish` | `id: number, options?: ContentServiceOptions` | `Promise<ContentPublicationResult<T> \| null>` (when `publication` enabled) |
+| `advanced` | `id: number, options?: ContentServiceOptions` | `Promise<ContentAdvancedValues<T>>` (all relation and repeatable fields) |
+| `options` | `field, search?, ids?` | `Promise<{ color?: string, label: string, value: number }[]>` |
+| `relations[name]` | — | Collection methods: `add`, `get`, `remove`, `reorder`, `set` |
+| `repeatable[name]` | — | Nested row methods: `create`, `delete`, `list`, `reorder`, `set`, `update` |
+
+### Database Transactions
+
+All service methods accept an optional `options` argument with `tx` to participate in an existing database transaction:
+
+```ts
+await c.var.db.transaction(async (tx) => {
+  const service = articleContent.service(c, { tx })
+  const article = await service.create({ title: "Hello World" })
+  // other transactional operations...
+})
+```
 
 ---
 
 ## Generated Zod Schemas
 
-Use generated validation schemas in custom routes:
+`createContentModel` automatically compiles Zod validation schemas accessible under `model.schemas`:
+
+| Schema | Purpose |
+| :--- | :--- |
+| `schemas.create` | Validates new record input, checking required fields and defaults. |
+| `schemas.update` | Validates record updates with partial fields. |
+| `schemas.select` | Validates and serializes the complete database row. |
+| `schemas.filter` | Validates equality filter parameters for the content type. |
+| `schemas.findManyQuery` | Validates standard cursor pagination parameters (`cursor`, `first`, `last`, `search`). |
+
+Use them in custom routes to validate incoming requests:
 
 ```ts
-import { articleContent } from "@/database/articles"
+import { buildRoute } from "@vitnode/core/api/lib/route"
+import { articleContent } from "@/content/articles"
 
 export const createArticleRoute = buildRoute({
   pluginId: "blog",
@@ -89,24 +120,53 @@ export const createArticleRoute = buildRoute({
 
 ## Content Engine Events
 
-Content modifications automatically emit typed domain events on the event bus:
+Content modifications automatically emit typed domain events on the event bus using the pattern `content.${contentTypeId}.${action}`.
+
+Register the content events in your plugin's TypeScript type definitions using module augmentation:
+
+```ts title="plugins/blog/src/events.d.ts"
+import type { ContentEventsFor } from "@vitnode/core/content"
+import type { articleContentType } from "./content/articles"
+
+declare module "@vitnode/core/api/models/events" {
+  interface VitNodeEvents
+    extends ContentEventsFor<typeof articleContentType> {}
+}
+```
+
+Now event listeners have fully typed names and payloads:
 
 ```ts title="plugins/blog/src/api/lib/listeners.ts"
 import { buildEventListener } from "@vitnode/core/api/lib/events"
 
 export const onArticleCreated = buildEventListener({
-  event: "content.article.created",
+  // [!code ++:2]
+  event: "content.blog.article.created",
   name: "notify-subscribers",
   handler: async (c, payload) => {
+    // payload is typed: { contentId: number }
     await c.get("queue").dispatch({
       name: "broadcast-new-article",
-      payload: { articleId: payload.id },
+      payload: { articleId: payload.contentId },
     })
   },
 })
 ```
 
-Standard events include `content.{id}.created`, `content.{id}.updated`, and `content.{id}.deleted`.
+### Event Reference
+
+| Event Name | Payload Shape | Emitted When |
+| :--- | :--- | :--- |
+| `content.${id}.created` | `{ contentId: number }` | A new record is inserted. |
+| `content.${id}.updated` | `{ contentId: number, changedFields: string[] }` | A record is modified. |
+| `content.${id}.deleted` | `{ contentId: number }` | A record is permanently removed. |
+| `content.${id}.published` | `{ contentId: number, publishedAt: Date }` | A record transitions to `published`. |
+| `content.${id}.unpublished` | `{ contentId: number }` | A record transitions to `draft`. |
+| `content.${id}.restored` | `{ contentId: number, revisionId: number, version: number }` | An editorial revision is restored. |
+| `content.${id}.scheduled` | `{ contentId: number, action, scheduledFor, scheduleId }` | Publication is scheduled. |
+| `content.${id}.schedule_cancelled` | `{ contentId: number, action, scheduleId }` | A scheduled job is cancelled. |
+
+When `localization` is enabled, corresponding `content.${id}.translation_*` events are also emitted for translation actions.
 
 ## Learn More
 

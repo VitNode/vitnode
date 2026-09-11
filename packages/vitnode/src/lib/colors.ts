@@ -5,6 +5,12 @@ export interface HslColor {
   s: number;
 }
 
+export interface OklchColor {
+  c: number;
+  h: number;
+  l: number;
+}
+
 export const convertColor = {
   hslToHex: ({ h, l, s }: HslColor): string => {
     l /= 100;
@@ -126,6 +132,42 @@ export const convertColor = {
     };
   },
 
+  hexToOklch(hex: string): OklchColor | undefined {
+    const channels = getRgbChannelsFromHex(hex);
+    if (!channels) return undefined;
+
+    const [long, medium, short] = mulMatrix(
+      LINEAR_RGB_TO_LMS,
+      channels.map(srgbToLinear),
+    ).map(value => Math.cbrt(value));
+    const [l, a, b] = mulMatrix(LMS_TO_OKLAB, [long, medium, short]);
+    const c = Math.hypot(a, b);
+
+    return {
+      l: roundTo(l, 5),
+      c: roundTo(c, 5),
+      h:
+        c < 1e-5
+          ? 0
+          : roundTo(((Math.atan2(b, a) * 180) / Math.PI + 360) % 360, 3),
+    };
+  },
+
+  oklchToHex({ c, h, l }: OklchColor): string {
+    const hueInRadians = (h * Math.PI) / 180;
+    const a = c * Math.cos(hueInRadians);
+    const b = c * Math.sin(hueInRadians);
+    const lms = mulMatrix(OKLAB_TO_LMS, [l, a, b]).map(value => value ** 3);
+
+    return mulMatrix(LMS_TO_LINEAR_RGB, lms)
+      .map(channel =>
+        Math.round(Math.min(1, Math.max(0, linearToSrgb(channel))) * 255)
+          .toString(16)
+          .padStart(2, "0"),
+      )
+      .join("");
+  },
+
   hslToRgb(h: number, s: number, l: number) {
     l /= 100;
     const a = (s * Math.min(l, 1 - l)) / 100;
@@ -146,6 +188,63 @@ export const convertColor = {
   },
 };
 
+const LINEAR_RGB_TO_LMS = [
+  [0.4122214708, 0.5363325363, 0.0514459929],
+  [0.2119034982, 0.6806995451, 0.1073969566],
+  [0.0883024619, 0.2817188376, 0.6299787005],
+];
+const LMS_TO_OKLAB = [
+  [0.2104542553, 0.793617785, -0.0040720468],
+  [1.9779984951, -2.428592205, 0.4505937099],
+  [0.0259040371, 0.7827717662, -0.808675766],
+];
+const OKLAB_TO_LMS = [
+  [1, 0.3963377774, 0.2158037573],
+  [1, -0.1055613458, -0.0638541728],
+  [1, -0.0894841775, -1.291485548],
+];
+const LMS_TO_LINEAR_RGB = [
+  [4.0767416621, -3.3077115913, 0.2309699292],
+  [-1.2684380046, 2.6097574011, -0.3413193965],
+  [-0.0041960863, -0.7034186147, 1.707614701],
+];
+
+const mulMatrix = (matrix: number[][], vector: number[]): number[] =>
+  matrix.map(row =>
+    row.reduce((sum, cell, index) => sum + cell * vector[index], 0),
+  );
+
+const srgbToLinear = (channel: number): number => {
+  const scaled = channel / 255;
+
+  return scaled <= 0.04045 ? scaled / 12.92 : ((scaled + 0.055) / 1.055) ** 2.4;
+};
+
+const linearToSrgb = (channel: number): number =>
+  channel <= 0.0031308 ? channel * 12.92 : 1.055 * channel ** (1 / 2.4) - 0.055;
+
+const roundTo = (value: number, digits: number): number =>
+  Number(value.toFixed(digits));
+
+const getRgbChannelsFromHex = (
+  hex: string,
+): [red: number, green: number, blue: number] | undefined => {
+  if (!hexRegex.test(hex)) return undefined;
+
+  const digits = hex.replace("#", "");
+  const expanded =
+    digits.length === 3
+      ? digits
+          .split("")
+          .map(digit => digit + digit)
+          .join("")
+      : digits;
+
+  return [0, 2, 4].map(offset =>
+    parseInt(expanded.slice(offset, offset + 2), 16),
+  ) as [number, number, number];
+};
+
 export const hexRegex = /^#?([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
 export const hslRegex =
   /^hsl\(\s*(?:36[0]|3[0-5][0-9]|[12][0-9][0-9]|[1-9]?[0-9])\s*,\s*(?:100|[1-9]?[0-9])%\s*,\s*(?:100|[1-9]?[0-9])%\s*\)$/;
@@ -155,9 +254,16 @@ export const rgbWithCommaRegex =
 export const rgbWithoutCommaRegex =
   /^rgb\(\s*([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\s+([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\s+([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\s*\)$/;
 
+export const oklchRegex =
+  /^oklch\(\s*([\d.]+)(%?)\s+([\d.]+)(%?)\s+([\d.]+)(?:deg)?\s*\)$/i;
+
 export const checkColorType = (
   strColor: string,
-): "hex" | "hsl" | "rgb" | null => {
+): "hex" | "hsl" | "oklch" | "rgb" | null => {
+  if (oklchRegex.test(strColor.trim())) {
+    return "oklch";
+  }
+
   if (hexRegex.test(strColor)) {
     return "hex";
   }
@@ -188,4 +294,68 @@ export const getHSLFromString = (string: string): HslColor | null => {
 
 export const getStringFromHSL = ({ h, l, s }: HslColor): string => {
   return `hsl(${h}, ${s}%, ${l}%)`;
+};
+
+export const getOklchFromString = (value: string): null | OklchColor => {
+  const parsed = oklchRegex.exec(value.trim().replace(/\s+/g, " "));
+  if (!parsed) return null;
+
+  const [, lightness, lightnessUnit, chroma, chromaUnit, hue] = parsed;
+
+  return {
+    l: Number(lightness) / (lightnessUnit === "%" ? 100 : 1),
+    c: Number(chroma) * (chromaUnit === "%" ? 0.004 : 1),
+    h: Number(hue),
+  };
+};
+
+export const getStringFromOklch = ({ c, h, l }: OklchColor): string =>
+  `oklch(${l} ${c} ${h})`;
+
+export const colorToHex = (value: string): string | undefined => {
+  const color = value.trim().replace(/\s+/g, " ");
+  const channels = getRgbChannelsFromHex(color);
+  if (channels) {
+    return `#${channels.map(channel => channel.toString(16).padStart(2, "0")).join("")}`;
+  }
+
+  const oklch = getOklchFromString(color);
+  if (oklch) return `#${convertColor.oklchToHex(oklch)}`;
+
+  const hsl = getHSLFromString(color);
+  if (hsl) return `#${convertColor.hslToHex(hsl)}`;
+
+  const rgb = rgbWithCommaRegex.exec(color) ?? rgbWithoutCommaRegex.exec(color);
+  if (rgb) {
+    return `#${rgb
+      .slice(1, 4)
+      .map(channel => Number(channel).toString(16).padStart(2, "0"))
+      .join("")}`;
+  }
+
+  return undefined;
+};
+
+export const colorLuminance = (value: string): number | undefined => {
+  const hex = colorToHex(value);
+  const channels = hex ? getRgbChannelsFromHex(hex) : undefined;
+  if (!channels) return undefined;
+
+  const [red, green, blue] = channels.map(srgbToLinear);
+
+  return 0.2126 * red + 0.7152 * green + 0.0722 * blue;
+};
+
+export const colorContrastRatio = (
+  value: string,
+  otherValue: string,
+): number | undefined => {
+  const luminance = colorLuminance(value);
+  const otherLuminance = colorLuminance(otherValue);
+  if (luminance === undefined || otherLuminance === undefined) return undefined;
+
+  return (
+    (Math.max(luminance, otherLuminance) + 0.05) /
+    (Math.min(luminance, otherLuminance) + 0.05)
+  );
 };
