@@ -69,29 +69,25 @@ export class DeviceModel {
     );
     if (!deviceIdFromCookie) return null;
 
-    try {
-      const [device] = await this.c
-        .get("db")
-        .select({ id: core_sessions_known_devices.id })
-        .from(core_sessions_known_devices)
-        .where(eq(core_sessions_known_devices.publicId, deviceIdFromCookie));
+    const [device] = await this.c
+      .get("db")
+      .select({ id: core_sessions_known_devices.id })
+      .from(core_sessions_known_devices)
+      .where(eq(core_sessions_known_devices.publicId, deviceIdFromCookie));
 
-      if (!device) return null;
+    if (!device) return null;
 
-      await this.c
-        .get("db")
-        .update(core_sessions_known_devices)
-        .set({
-          ipAddress: this.c.get("ipAddress"),
-          userAgent: this.getUserAgent(),
-          lastSeen: new Date(),
-        })
-        .where(eq(core_sessions_known_devices.publicId, deviceIdFromCookie));
+    await this.c
+      .get("db")
+      .update(core_sessions_known_devices)
+      .set({
+        ipAddress: this.c.get("ipAddress"),
+        userAgent: this.getUserAgent(),
+        lastSeen: new Date(),
+      })
+      .where(eq(core_sessions_known_devices.publicId, deviceIdFromCookie));
 
-      return { id: device.id, publicId: deviceIdFromCookie };
-    } catch {
-      return null;
-    }
+    return { id: device.id, publicId: deviceIdFromCookie };
   }
 
   /**

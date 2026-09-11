@@ -30,7 +30,7 @@ const AUTHORIZATION: Authorization = {
  * `storedDevice` is what a `select` on the devices table finds - `null` for "no
  * such device", which is both the no-cookie case and the forged-cookie case.
  */
-const fakeDb = (storedDevice: null | { id: number }) => {
+const fakeDb = (storedDevice: null | { id: number }, selectError?: Error) => {
   const inserts: unknown[] = [];
 
   const chain = (kind: string, table: unknown) => {
@@ -52,8 +52,16 @@ const fakeDb = (storedDevice: null | { id: number }) => {
       limit: () => self,
       returning: () => self,
       set: () => self,
-      then: async (onFulfilled: (value: unknown[]) => unknown) =>
-        await Promise.resolve(onFulfilled(rows())),
+      then: async (
+        onFulfilled: (value: unknown[]) => unknown,
+        onRejected?: (reason: unknown) => unknown,
+      ) => {
+        if (op.kind === "select" && selectError) {
+          return await Promise.resolve(onRejected?.(selectError));
+        }
+
+        return await Promise.resolve(onFulfilled(rows()));
+      },
       values: (value: unknown) => {
         if (op.table === core_sessions_known_devices) inserts.push(value);
 
@@ -79,16 +87,24 @@ const fakeDb = (storedDevice: null | { id: number }) => {
 const run = async <T>({
   act,
   cookie,
+  selectError,
   storedDevice = null,
 }: {
   act: (c: Context) => Promise<T>;
   cookie?: string;
+  selectError?: Error;
   storedDevice?: null | { id: number };
 }): Promise<{ inserts: number; result: T }> => {
-  const { db, inserts } = fakeDb(storedDevice);
+  const { db, inserts } = fakeDb(storedDevice, selectError);
   let result: T | undefined;
+  let thrownError: Error | undefined;
 
   const app = new Hono();
+  app.onError((error, c) => {
+    thrownError = error;
+
+    return c.body(null, 500);
+  });
   app.get("/", async c => {
     c.set("core", {
       authorization: AUTHORIZATION,
@@ -101,6 +117,7 @@ const run = async <T>({
   });
 
   await app.request("/", cookie ? { headers: { cookie } } : {});
+  if (thrownError) throw thrownError;
 
   return { inserts: inserts.length, result: result as T };
 };
@@ -163,6 +180,18 @@ describe("DeviceModel", () => {
 
       expect(result).toEqual({ id: 42, publicId: "known" });
       expect(inserts).toBe(0);
+    });
+
+    it("does not create a device when the existing-device lookup fails", async () => {
+      const lookupError = new Error("database unavailable");
+
+      await expect(
+        run({
+          act: async c => await new DeviceModel(c).getOrCreateDeviceId(),
+          cookie: "vitnode_device=known",
+          selectError: lookupError,
+        }),
+      ).rejects.toBe(lookupError);
     });
   });
 });
