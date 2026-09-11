@@ -2,8 +2,8 @@ import '@tanstack/react-start/server-only'
 import { OpenAPIHono } from '@hono/zod-openapi'
 import { VitNodeAPI } from '@vitnode/core/api/config'
 
-import { createApiBridge } from '#/server/api-bridge'
-import { vitNodeApiConfig } from '#/vitnode.api.config'
+import { createApiBridge } from '@/server/api-bridge'
+import { vitNodeApiConfig } from '@/vitnode.api.config'
 
 // The same two lines `apps/api` and `apps/docs` run. `basePath("/api")` is what
 // makes the mount point part of the API's own routing, so every path the plugins

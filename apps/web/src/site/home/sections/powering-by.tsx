@@ -1,10 +1,10 @@
-import { InfiniteSlider } from '#/site/home/infinite-slider'
-import { DrizzleORMLogo } from '#/site/home/sections/logos/drizzleorm'
-import { HonoJSLogo } from '#/site/home/sections/logos/honojs'
-import { PostgreSQLLogo } from '#/site/home/sections/logos/postgresql'
-import { TailwindCSSLogo } from '#/site/home/sections/logos/tailwindcss'
-import { TanStackLogo } from '#/site/home/sections/logos/tanstack'
-import { TurboRepoLogo } from '#/site/home/sections/logos/turborepo'
+import { InfiniteSlider } from '@/site/home/infinite-slider'
+import { DrizzleORMLogo } from '@/site/home/sections/logos/drizzleorm'
+import { HonoJSLogo } from '@/site/home/sections/logos/honojs'
+import { PostgreSQLLogo } from '@/site/home/sections/logos/postgresql'
+import { TailwindCSSLogo } from '@/site/home/sections/logos/tailwindcss'
+import { TanStackLogo } from '@/site/home/sections/logos/tanstack'
+import { TurboRepoLogo } from '@/site/home/sections/logos/turborepo'
 
 const TOOLS = [
   { href: 'https://tailwindcss.com/', logo: <TailwindCSSLogo /> },

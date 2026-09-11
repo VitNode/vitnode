@@ -1,8 +1,7 @@
+import { createLink, Link } from '@tanstack/react-router'
 import { buttonVariants } from '@vitnode/core/components/ui/button'
 import { cn } from 'cn'
 import { ArrowRight, Bird } from 'lucide-react'
-
-import type { SiteLinkComponent } from '#/site/home/site-link'
 
 import { REPOSITORY_URL } from './links'
 
@@ -94,51 +93,41 @@ export const MarketingSection = ({
   </section>
 )
 
-export const TextLink = ({
+const TextLinkAnchor = ({
   children,
   className,
-  href,
-  LinkComponent,
   target,
-}: {
-  children: React.ReactNode
-  className?: string
-  href: string
-  LinkComponent: SiteLinkComponent
-  target?: React.HTMLAttributeAnchorTarget
-}) => (
-  <LinkComponent
+  ...props
+}: React.ComponentProps<'a'>) => (
+  <a
     className={cn(
       'group text-primary inline-flex w-fit items-center gap-1 text-sm font-semibold underline-offset-4 hover:underline',
       className,
     )}
-    href={href}
     rel={target === '_blank' ? 'noopener noreferrer' : undefined}
     target={target}
+    {...props}
   >
     {children}
     <ArrowRight
       aria-hidden
       className="size-4 transition-transform group-hover:translate-x-0.5"
     />
-  </LinkComponent>
+  </a>
 )
 
-export const MarketingActions = ({
-  className,
-  LinkComponent,
-}: {
-  className?: string
-  LinkComponent: SiteLinkComponent
-}) => (
+export const TextLink = createLink(TextLinkAnchor)
+
+export const MarketingActions = ({ className }: { className?: string }) => (
   <div className={cn('flex flex-wrap items-center gap-3', className)}>
-    <LinkComponent
+    <Link
       className={cn(buttonVariants({ size: 'lg' }), 'px-5')}
-      href="/docs/dev/setup"
+      params={{ _splat: 'dev/setup' }}
+      to="/docs/$"
     >
       Start building free
       <ArrowRight aria-hidden />
-    </LinkComponent>
+    </Link>
 
     <a
       className={cn(buttonVariants({ size: 'lg', variant: 'outline' }), 'px-5')}
@@ -167,11 +156,7 @@ export const CanaryPill = ({ className }: { className?: string }) => (
   </span>
 )
 
-export const CanaryNotice = ({
-  LinkComponent,
-}: {
-  LinkComponent: SiteLinkComponent
-}) => (
+export const CanaryNotice = () => (
   <aside
     aria-label="Canary release status"
     className="bg-card flex flex-col gap-4 rounded-2xl border p-5 sm:flex-row sm:items-center sm:gap-6 sm:p-6"
@@ -193,8 +178,8 @@ export const CanaryNotice = ({
 
     <TextLink
       className="shrink-0"
-      href="/docs/dev/contribution"
-      LinkComponent={LinkComponent}
+      params={{ _splat: 'dev/contribution' }}
+      to="/docs/$"
     >
       Help it grow up
     </TextLink>

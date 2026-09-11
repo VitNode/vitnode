@@ -1,12 +1,10 @@
 import { Compass, Gavel, UserRound, UsersRound } from 'lucide-react'
 
-import type { SiteLinkComponent } from '#/site/home/site-link'
-
 import {
   MarketingSection,
   SectionHeading,
   TextLink,
-} from '#/site/marketing/shared'
+} from '@/site/marketing/shared'
 
 const CARDS = [
   {
@@ -35,11 +33,7 @@ const CARDS = [
   },
 ]
 
-export const CommunitySection = ({
-  LinkComponent,
-}: {
-  LinkComponent: SiteLinkComponent
-}) => (
+export const CommunitySection = () => (
   <MarketingSection id="community" labelledBy="community-title">
     <div className="grid gap-12 lg:grid-cols-5">
       <div className="flex flex-col gap-8 lg:col-span-2">
@@ -54,8 +48,8 @@ export const CommunitySection = ({
         </SectionHeading>
 
         <TextLink
-          href="/docs/dev/working-with-users/roles"
-          LinkComponent={LinkComponent}
+          params={{ _splat: 'dev/working-with-users/roles' }}
+          to="/docs/$"
         >
           See how roles work
         </TextLink>

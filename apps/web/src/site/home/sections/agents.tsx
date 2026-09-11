@@ -9,14 +9,12 @@ import {
   ListChecks,
 } from 'lucide-react'
 
-import type { SiteLinkComponent } from '#/site/home/site-link'
-
-import { AgentMap } from '#/site/home/illustrations/agent-map'
+import { AgentMap } from '@/site/home/illustrations/agent-map'
 import {
   MarketingSection,
   SectionHeading,
   TextLink,
-} from '#/site/marketing/shared'
+} from '@/site/marketing/shared'
 
 const MAP_LEGEND: { Icon: LucideIcon; label: string }[] = [
   { Icon: FileText, label: 'AGENTS.md conventions' },
@@ -27,11 +25,7 @@ const MAP_LEGEND: { Icon: LucideIcon; label: string }[] = [
   { Icon: ListChecks, label: 'Lint rules that teach' },
 ]
 
-export const AgentsSection = ({
-  LinkComponent,
-}: {
-  LinkComponent: SiteLinkComponent
-}) => (
+export const AgentsSection = () => (
   <div className="bg-muted/40 border-y">
     <MarketingSection id="agents" labelledBy="agents-title">
       <div className="grid items-center gap-12 lg:grid-cols-2">
@@ -68,14 +62,10 @@ export const AgentsSection = ({
           </p>
 
           <div className="flex flex-wrap gap-6">
-            <TextLink
-              href="/llms-full.txt"
-              LinkComponent={LinkComponent}
-              target="_blank"
-            >
+            <TextLink target="_blank" to="/llms-full.txt">
               Docs for your agent
             </TextLink>
-            <TextLink href="/docs/dev/ai" LinkComponent={LinkComponent}>
+            <TextLink params={{ _splat: 'dev/ai' }} to="/docs/$">
               Build AI features
             </TextLink>
           </div>

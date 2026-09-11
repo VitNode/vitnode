@@ -11,8 +11,8 @@ import {
 import { cn } from 'cn'
 import { useEffect, useState } from 'react'
 
-import { ScreenFrame } from '#/site/marketing/screen-frame'
-import { SCREENS } from '#/site/marketing/screens'
+import { ScreenFrame } from '@/site/marketing/screen-frame'
+import { SCREENS } from '@/site/marketing/screens'
 
 import { SLIDES } from './showcase-slides'
 

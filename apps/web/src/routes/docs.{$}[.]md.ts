@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 
-import { decodeMarkdownUrl } from '#/docs/shared'
-import { getLLMText, source } from '#/docs/source.server'
+import { decodeMarkdownUrl } from '@/docs/shared'
+import { getLLMText, source } from '@/docs/source.server'
 
 export const Route = createFileRoute('/docs/{$}.md')({
   server: {

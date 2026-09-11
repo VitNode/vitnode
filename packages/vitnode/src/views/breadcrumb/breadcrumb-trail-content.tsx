@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { cn } from "cn";
 import { Fragment } from "react";
 
@@ -10,8 +11,6 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 
-import type { AuthLinkComponent } from "../auth/auth-link";
-
 export interface BreadcrumbTrailContentEntry {
   content: React.ReactNode;
   href: string;
@@ -23,11 +22,9 @@ export interface BreadcrumbTrailContentEntry {
 
 export const BreadcrumbTrailContent = ({
   entries,
-  LinkComponent,
   scrollable,
 }: {
   entries: readonly BreadcrumbTrailContentEntry[];
-  LinkComponent: AuthLinkComponent;
   scrollable?: boolean;
 }) => {
   if (entries.length === 0) return null;
@@ -53,11 +50,7 @@ export const BreadcrumbTrailContent = ({
                   <BreadcrumbPage>{entry.content}</BreadcrumbPage>
                 ) : (
                   <BreadcrumbLink
-                    render={
-                      <LinkComponent href={entry.href}>
-                        {entry.content}
-                      </LinkComponent>
-                    }
+                    render={<Link to={entry.href}>{entry.content}</Link>}
                   />
                 )}
               </BreadcrumbItem>

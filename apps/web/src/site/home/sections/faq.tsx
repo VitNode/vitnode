@@ -5,8 +5,8 @@ import {
   AccordionTrigger,
 } from '@vitnode/core/components/ui/accordion'
 
-import { SPONSOR_URL } from '#/site/marketing/links'
-import { MarketingSection, SectionHeading } from '#/site/marketing/shared'
+import { SPONSOR_URL } from '@/site/marketing/links'
+import { MarketingSection, SectionHeading } from '@/site/marketing/shared'
 
 const FAQS: { answer: React.ReactNode; question: string }[] = [
   {

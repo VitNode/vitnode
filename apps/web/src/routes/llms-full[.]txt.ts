@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 
-import { getLLMText, source } from '#/docs/source.server'
+import { getLLMText, source } from '@/docs/source.server'
 
 export const Route = createFileRoute('/llms-full.txt')({
   server: {

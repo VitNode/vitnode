@@ -1,4 +1,4 @@
-import type { ScreenKey } from '#/site/marketing/screens'
+import type { ScreenKey } from '@/site/marketing/screens'
 
 export const SLIDES: { caption: string; screen: ScreenKey }[] = [
   {

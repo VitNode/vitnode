@@ -21,7 +21,7 @@ import {
   Trophy,
 } from 'lucide-react'
 
-import type { ScreenKey } from '#/site/marketing/screens'
+import type { ScreenKey } from '@/site/marketing/screens'
 
 import { solutionEntry } from './catalog'
 

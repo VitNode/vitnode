@@ -5,8 +5,8 @@ import {
   AUTHOR_NAME,
   AUTHOR_URL,
   REPOSITORY_URL,
-} from '#/site/marketing/links'
-import { Eyebrow, GitHubIcon, MarketingSection } from '#/site/marketing/shared'
+} from '@/site/marketing/links'
+import { Eyebrow, GitHubIcon, MarketingSection } from '@/site/marketing/shared'
 
 const FACTS = [
   { label: 'human building in the open', value: '1' },

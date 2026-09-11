@@ -1,8 +1,7 @@
+import { Link } from '@tanstack/react-router'
 import { KeyRound, Rocket, TrendingUp } from 'lucide-react'
 
-import type { SiteLinkComponent } from '#/site/home/site-link'
-
-import { MarketingSection, SectionHeading } from '#/site/marketing/shared'
+import { MarketingSection, SectionHeading } from '@/site/marketing/shared'
 
 const OUTCOMES = [
   {
@@ -23,18 +22,14 @@ const OUTCOMES = [
 ]
 
 const USE_CASES = [
-  { href: '/solutions/help-center', label: 'Help center' },
-  { href: '/solutions/membership-site', label: 'Membership site' },
-  { href: '/solutions/open-source-hub', label: 'Open-source hub' },
-  { href: '/solutions/gaming-guild', label: 'Gaming guild hub' },
-  { href: '/solutions/multilingual-magazine', label: 'Multilingual magazine' },
+  { label: 'Help center', slug: 'help-center' },
+  { label: 'Membership site', slug: 'membership-site' },
+  { label: 'Open-source hub', slug: 'open-source-hub' },
+  { label: 'Gaming guild hub', slug: 'gaming-guild' },
+  { label: 'Multilingual magazine', slug: 'multilingual-magazine' },
 ]
 
-export const OutcomesSection = ({
-  LinkComponent,
-}: {
-  LinkComponent: SiteLinkComponent
-}) => (
+export const OutcomesSection = () => (
   <MarketingSection labelledBy="outcomes-title">
     <SectionHeading
       align="center"
@@ -48,14 +43,15 @@ export const OutcomesSection = ({
     </SectionHeading>
 
     <ul className="flex flex-wrap justify-center gap-2">
-      {USE_CASES.map(({ href, label }) => (
-        <li key={href}>
-          <LinkComponent
+      {USE_CASES.map(({ label, slug }) => (
+        <li key={slug}>
+          <Link
             className="bg-card hover:border-primary/40 hover:text-primary inline-flex rounded-full border px-3 py-1 text-xs font-semibold transition-colors"
-            href={href}
+            params={{ slug }}
+            to="/solutions/$slug"
           >
             {label}
-          </LinkComponent>
+          </Link>
         </li>
       ))}
     </ul>

@@ -1,5 +1,5 @@
-import { pageHead } from '#/lib/page-head'
-import { HOME_DESCRIPTION, HOME_TITLE } from '#/site/home/metadata'
+import { pageHead } from '@/lib/page-head'
+import { HOME_DESCRIPTION, HOME_TITLE } from '@/site/home/metadata'
 
 import {
   AUTHOR_NAME,

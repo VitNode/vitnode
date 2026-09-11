@@ -23,13 +23,7 @@ export const useAdminBreadcrumb = (): React.ReactNode => {
 
   if (isNavigating) return <BreadcrumbPendingSkeleton />;
 
-  return (
-    <BreadcrumbTrailContent
-      entries={entries}
-      LinkComponent={RouterLink}
-      scrollable
-    />
-  );
+  return <BreadcrumbTrailContent entries={entries} scrollable />;
 };
 
 export const AdminBreadcrumb = ({

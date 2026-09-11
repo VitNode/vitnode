@@ -1,5 +1,6 @@
 import type { LucideIcon } from 'lucide-react'
 
+import { Link } from '@tanstack/react-router'
 import {
   Accordion,
   AccordionContent,
@@ -9,10 +10,8 @@ import {
 import { ArrowRight, Check, Clock, Plug, Sparkles, X } from 'lucide-react'
 import { createElement } from 'react'
 
-import type { SiteLinkComponent } from '#/site/home/site-link'
-
-import { ScreenFrame } from '#/site/marketing/screen-frame'
-import { SCREENS } from '#/site/marketing/screens'
+import { ScreenFrame } from '@/site/marketing/screen-frame'
+import { SCREENS } from '@/site/marketing/screens'
 import {
   CanaryNotice,
   Eyebrow,
@@ -20,11 +19,10 @@ import {
   MarketingSection,
   SectionHeading,
   TextLink,
-} from '#/site/marketing/shared'
+} from '@/site/marketing/shared'
 
 import type { Availability, Solution, SolutionSection } from './data'
 
-import { solutionPath } from './catalog'
 import { SOLUTION_ICONS, SOLUTIONS } from './data'
 
 const casual = (label: string) =>
@@ -445,17 +443,16 @@ const SolutionSections = ({ sections }: { sections: SolutionSection[] }) => (
 )
 
 const SolutionCard = ({
-  LinkComponent,
   solution,
   variant,
 }: {
-  LinkComponent: SiteLinkComponent
   solution: Solution
   variant: 'compact' | 'full'
 }) => (
-  <LinkComponent
+  <Link
     className="group bg-card hover:border-primary/40 flex h-full flex-col gap-3 rounded-3xl border p-6 transition-colors"
-    href={solutionPath(solution.slug)}
+    params={{ slug: solution.slug }}
+    to="/solutions/$slug"
   >
     <span className="bg-primary/10 text-primary flex size-10 items-center justify-center rounded-xl">
       <SolutionIcon className="size-5" slug={solution.slug} />
@@ -483,16 +480,10 @@ const SolutionCard = ({
         className="size-4 transition-transform group-hover:translate-x-0.5"
       />
     </span>
-  </LinkComponent>
+  </Link>
 )
 
-export const SolutionPage = ({
-  LinkComponent,
-  solution,
-}: {
-  LinkComponent: SiteLinkComponent
-  solution: Solution
-}) => {
+export const SolutionPage = ({ solution }: { solution: Solution }) => {
   const others = SOLUTIONS.filter((item) => item.slug !== solution.slug)
 
   return (
@@ -518,10 +509,7 @@ export const SolutionPage = ({
           <p className="text-muted-foreground max-w-2xl text-base leading-relaxed text-pretty sm:text-lg">
             {solution.description}
           </p>
-          <MarketingActions
-            className="justify-center"
-            LinkComponent={LinkComponent}
-          />
+          <MarketingActions className="justify-center" />
           <ul className="flex flex-wrap justify-center gap-2">
             {solution.audience.map((item) => (
               <li
@@ -549,15 +537,11 @@ export const SolutionPage = ({
         <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {others.map((item) => (
             <li key={item.slug}>
-              <SolutionCard
-                LinkComponent={LinkComponent}
-                solution={item}
-                variant="compact"
-              />
+              <SolutionCard solution={item} variant="compact" />
             </li>
           ))}
         </ul>
-        <CanaryNotice LinkComponent={LinkComponent} />
+        <CanaryNotice />
       </MarketingSection>
 
       <section
@@ -575,24 +559,15 @@ export const SolutionPage = ({
             Scaffold an app, add your first plugin and show it to your people
             this week. It costs exactly nothing.
           </p>
-          <MarketingActions
-            className="justify-center"
-            LinkComponent={LinkComponent}
-          />
-          <TextLink href="/plugins" LinkComponent={LinkComponent}>
-            See the plugins that ship today
-          </TextLink>
+          <MarketingActions className="justify-center" />
+          <TextLink to="/plugins">See the plugins that ship today</TextLink>
         </div>
       </section>
     </div>
   )
 }
 
-export const SolutionsIndexPage = ({
-  LinkComponent,
-}: {
-  LinkComponent: SiteLinkComponent
-}) => (
+export const SolutionsIndexPage = () => (
   <div className="flex flex-col">
     <section
       aria-labelledby="solutions-title"
@@ -621,15 +596,11 @@ export const SolutionsIndexPage = ({
       <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {SOLUTIONS.map((solution) => (
           <li key={solution.slug}>
-            <SolutionCard
-              LinkComponent={LinkComponent}
-              solution={solution}
-              variant="full"
-            />
+            <SolutionCard solution={solution} variant="full" />
           </li>
         ))}
       </ul>
-      <CanaryNotice LinkComponent={LinkComponent} />
+      <CanaryNotice />
     </MarketingSection>
   </div>
 )

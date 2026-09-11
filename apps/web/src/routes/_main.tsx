@@ -5,8 +5,8 @@ import {
   ThemeLayoutContent,
 } from '@vitnode/core/tanstack/layout'
 
-import { MainHeader } from '#/components/main-header'
-import { SiteFooter } from '#/site/marketing/footer'
+import { MainHeader } from '@/components/main-header'
+import { SiteFooter } from '@/site/marketing/footer'
 
 const MainLayout = () => (
   <>

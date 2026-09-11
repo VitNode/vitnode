@@ -1,11 +1,11 @@
 import { createFileRoute, Outlet } from '@tanstack/react-router'
 import { useFumadocsLoader } from 'fumadocs-core/source/client'
 
-import docsCss from '#/docs/docs.css?url'
-import { DocsShellPendingSkeleton } from '#/docs/pending'
-import { DOCS_STALE_TIME } from '#/docs/shared'
-import { DocsShellContent } from '#/docs/shell-content'
-import { getDocsPageTree } from '#/docs/transport'
+import docsCss from '@/docs/docs.css?url'
+import { DocsShellPendingSkeleton } from '@/docs/pending'
+import { DOCS_STALE_TIME } from '@/docs/shared'
+import { DocsShellContent } from '@/docs/shell-content'
+import { getDocsPageTree } from '@/docs/transport'
 
 export const Route = createFileRoute('/_docs')({
   loader: async () => ({ pageTree: await getDocsPageTree() }),

@@ -2,10 +2,8 @@ import type { LucideIcon } from 'lucide-react'
 
 import { Bot, Fingerprint, Gauge, KeyRound, ShieldUser } from 'lucide-react'
 
-import type { SiteLinkComponent } from '#/site/home/site-link'
-
-import { GatesVisual } from '#/site/home/illustrations/gates'
-import { SectionHeading, TextLink } from '#/site/marketing/shared'
+import { GatesVisual } from '@/site/home/illustrations/gates'
+import { SectionHeading, TextLink } from '@/site/marketing/shared'
 
 const GUARDS: { Icon: LucideIcon; text: string; title: string }[] = [
   {
@@ -35,11 +33,7 @@ const GUARDS: { Icon: LucideIcon; text: string; title: string }[] = [
   },
 ]
 
-export const SecuritySection = ({
-  LinkComponent,
-}: {
-  LinkComponent: SiteLinkComponent
-}) => (
+export const SecuritySection = () => (
   <section
     aria-labelledby="security-title"
     className="mk-section-anchor container mx-auto px-4 py-12 sm:px-6 sm:py-16"
@@ -73,7 +67,7 @@ export const SecuritySection = ({
           ))}
         </ul>
 
-        <TextLink href="/docs/dev/advanced/auth" LinkComponent={LinkComponent}>
+        <TextLink params={{ _splat: 'dev/advanced/auth' }} to="/docs/$">
           Read how sessions and permissions work
         </TextLink>
       </div>

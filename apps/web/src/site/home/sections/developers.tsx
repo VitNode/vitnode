@@ -1,10 +1,8 @@
-import type { SiteLinkComponent } from '#/site/home/site-link'
-
 import {
   MarketingSection,
   SectionHeading,
   TextLink,
-} from '#/site/marketing/shared'
+} from '@/site/marketing/shared'
 
 const STACK = [
   'TypeScript',
@@ -31,11 +29,7 @@ const COMMANDS = [
   },
 ]
 
-export const DevelopersSection = ({
-  LinkComponent,
-}: {
-  LinkComponent: SiteLinkComponent
-}) => (
+export const DevelopersSection = () => (
   <MarketingSection id="developers" labelledBy="developers-title">
     <div className="grid items-center gap-12 lg:grid-cols-2">
       <div className="flex flex-col gap-8">
@@ -60,10 +54,7 @@ export const DevelopersSection = ({
           ))}
         </ul>
 
-        <TextLink
-          href="/docs/guides/first-plugin"
-          LinkComponent={LinkComponent}
-        >
+        <TextLink params={{ _splat: 'guides/first-plugin' }} to="/docs/$">
           Build your first plugin in ten minutes
         </TextLink>
       </div>

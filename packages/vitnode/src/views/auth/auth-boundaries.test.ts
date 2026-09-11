@@ -9,7 +9,6 @@ import { externalGraph, runtimeImports } from "@/tests/import-graph";
 const here = dirname(fileURLToPath(import.meta.url));
 
 const SHARED = {
-  breadcrumbTrail: join(here, "../breadcrumb/breadcrumb-trail-content.tsx"),
   card: join(here, "sign-in/sign-in-content.tsx"),
   changePasswordForm: join(
     here,
@@ -160,10 +159,8 @@ describe("the settings frame is told its framework parts", () => {
     expect(withoutComments(SHARED.settingsNav)).toContain("pathname: string;");
   });
 
-  it("takes its links as a component in the menu and in the breadcrumb", () => {
-    for (const path of [SHARED.settingsNav, SHARED.breadcrumbTrail]) {
-      expect(withoutComments(path)).toContain("LinkComponent");
-    }
+  it("takes its links as a component in the menu", () => {
+    expect(withoutComments(SHARED.settingsNav)).toContain("LinkComponent");
   });
 
   it("keeps the menu and the active-item rule as data, not markup", () => {
