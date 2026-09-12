@@ -45,9 +45,10 @@ export const loadStaffPermissionLabels = async ({
   const merged: Record<string, unknown> = {};
 
   for (const namespaces of chunkStaffLabelKeys(keys, MAX_NAMESPACES)) {
-    const intl = await queryClient.ensureQueryData(
-      intlQueryOptions({ locale, namespaces }),
-    );
+    const intl = await queryClient.query({
+      ...intlQueryOptions({ locale, namespaces }),
+      staleTime: "static",
+    });
     Object.assign(merged, intl.messages);
   }
 
@@ -97,16 +98,17 @@ export const loadAdminStaffEditRoute = async ({
   const adminUserId = adminIdentityOf(adminAccess);
 
   const [intl, catalog, entry] = await Promise.all([
-    queryClient.ensureQueryData(
-      intlQueryOptions({ locale, namespaces: ADMIN_STAFF_EDIT_NAMESPACES }),
-    ),
-    queryClient.ensureQueryData({
-      ...adminStaffCatalogQuery({ adminUserId }),
-      revalidateIfStale: true,
+    queryClient.query({
+      ...intlQueryOptions({ locale, namespaces: ADMIN_STAFF_EDIT_NAMESPACES }),
+      staleTime: "static",
     }),
-    queryClient.ensureQueryData({
+    queryClient.query({
+      ...adminStaffCatalogQuery({ adminUserId }),
+      staleTime: "static",
+    }),
+    queryClient.query({
       ...adminStaffEntryQuery({ adminUserId, id, type }),
-      revalidateIfStale: true,
+      staleTime: "static",
     }),
   ]);
 

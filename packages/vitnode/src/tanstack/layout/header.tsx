@@ -69,7 +69,10 @@ export const loadMainShell = async ({
   queryClient: QueryClient;
 }): Promise<void> => {
   await Promise.all([
-    queryClient.ensureQueryData(headerIntlQueryOptions({ locale })),
+    queryClient.query({
+      ...headerIntlQueryOptions({ locale }),
+      staleTime: "static",
+    }),
     prefetchSession(queryClient),
   ]);
 };

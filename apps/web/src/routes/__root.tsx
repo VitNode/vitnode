@@ -18,7 +18,7 @@ import {
 } from '@vitnode/core/tanstack/i18n'
 import { VitNodeRootProviders } from '@vitnode/core/tanstack/layout'
 
-import type { Locale } from '@/lib/i18n/shared'
+import type { Locale } from '@/vitnode.config'
 
 import { vitNodeConfig } from '@/vitnode.config'
 
@@ -53,9 +53,10 @@ export const Route = createRootRouteWithContext<RootRouterContext>()({
     ],
   }),
   loader: async ({ context }) => {
-    await context.queryClient.ensureQueryData(
-      intlQueryOptions({ locale: context.locale }),
-    )
+    await context.queryClient.query({
+      ...intlQueryOptions({ locale: context.locale }),
+      staleTime: 'static',
+    })
   },
   shellComponent: RootDocument,
 })

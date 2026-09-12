@@ -8,8 +8,14 @@
 //
 // Same plugin configuration in, same bytes out: the entries are sorted by
 // plugin id.
+//
+// Evaluating this module registers the registry, so an application has to load
+// it before any `/admin/content` route runs - and should load it lazily, since
+// the imports above pull in every plugin's AdminCP content and editor code.
 
 import type { ContentFrontendPluginSource } from '@vitnode/core/lib/plugin'
+
+import { buildContentFrontendRegistry, setContentFrontendRegistry } from '@vitnode/core/content'
 
 import { adminContent as adminContent0 } from '@vitnode/blog/admin/content'
 import { adminContent as adminContent1 } from '@vitnode/example/admin/content'
@@ -19,3 +25,7 @@ export const pluginContentTypes = [
   adminContent0, // @vitnode/blog
   adminContent1, // @vitnode/example
 ] satisfies ContentFrontendPluginSource[]
+
+export const contentRegistry = buildContentFrontendRegistry(pluginContentTypes)
+
+setContentFrontendRegistry(contentRegistry)

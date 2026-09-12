@@ -1,4 +1,5 @@
 import { DEFAULT_TABLE_PAGE_SIZE } from "@/components/table/url-state";
+import { readFirstValue, readPageSize } from "@/lib/table-params";
 
 /** The largest page any VitNode endpoint serves - `MAX_PAGE_SIZE` in `api/lib/with-pagination`. */
 export const ADMIN_TABLE_MAX_PAGE_SIZE = 100;
@@ -32,22 +33,6 @@ export interface AdminTableContract<TOrderBy extends string = string> {
   status?: readonly string[];
 }
 
-/** The first value for a key, since only one can reach the API. */
-const readOne = (value: null | string | string[] | undefined): string => {
-  if (Array.isArray(value)) return value[0] ?? "";
-
-  return value ?? "";
-};
-
-const readPageSize = (raw: string): string | undefined => {
-  if (!/^\d+$/.test(raw)) return undefined;
-
-  const size = Number(raw);
-  if (!Number.isSafeInteger(size) || size < 1) return undefined;
-
-  return String(Math.min(size, ADMIN_TABLE_MAX_PAGE_SIZE));
-};
-
 const readStatus = (
   raw: string,
   allowed: readonly string[],
@@ -65,11 +50,17 @@ export const normalizeAdminTableParams = <TOrderBy extends string>(
 ): AdminTableParams<TOrderBy> => {
   const params: AdminTableParams<TOrderBy> = {};
 
-  const cursor = readOne(raw.cursor);
+  const cursor = readFirstValue(raw.cursor);
   if (/^[A-Za-z0-9_-]{1,512}$/.test(cursor)) params.cursor = cursor;
 
-  const first = readPageSize(readOne(raw.first));
-  const last = readPageSize(readOne(raw.last));
+  const first = readPageSize(
+    readFirstValue(raw.first),
+    ADMIN_TABLE_MAX_PAGE_SIZE,
+  );
+  const last = readPageSize(
+    readFirstValue(raw.last),
+    ADMIN_TABLE_MAX_PAGE_SIZE,
+  );
 
   if (first !== undefined) {
     params.first = first;
@@ -79,19 +70,19 @@ export const normalizeAdminTableParams = <TOrderBy extends string>(
     params.last = last;
   }
 
-  const orderBy = readOne(raw.orderBy) as TOrderBy;
+  const orderBy = readFirstValue(raw.orderBy) as TOrderBy;
   if (contract.orderBy.includes(orderBy)) params.orderBy = orderBy;
 
-  const order = readOne(raw.order) as AdminTableOrder;
+  const order = readFirstValue(raw.order) as AdminTableOrder;
   if (ADMIN_TABLE_ORDER.includes(order)) params.order = order;
 
   if (contract.search) {
-    const search = readOne(raw.search).trim();
+    const search = readFirstValue(raw.search).trim();
     if (search) params.search = search;
   }
 
   if (contract.status) {
-    const status = readStatus(readOne(raw.status), contract.status);
+    const status = readStatus(readFirstValue(raw.status), contract.status);
     if (status) params.status = status;
   }
 

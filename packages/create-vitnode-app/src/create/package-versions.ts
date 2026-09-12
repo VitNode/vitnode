@@ -44,7 +44,7 @@ export const versionsPackageJson = {
   // different `routeTree.gen.ts` than the one core's plugin routes expect.
   tanstackReactRouter: "^1.170",
   tanstackReactStart: "^1.168",
-  tanstackReactQuery: "^5.101",
+  tanstackReactQuery: "^5.102",
   tanstackRouterSsrQuery: "^1.167",
   tanstackReactDevtools: "^0.10",
   tanstackDevtoolsVite: "^0.8",

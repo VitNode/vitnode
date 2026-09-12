@@ -31,9 +31,9 @@ const ensureProfile = async (
   nameCode: string,
 ): Promise<UserProfile> => {
   try {
-    return await queryClient.ensureQueryData({
+    return await queryClient.query({
       ...userProfileQuery(nameCode),
-      revalidateIfStale: true,
+      staleTime: "static",
     });
   } catch (error) {
     if (isProfileNotFound(error)) {
@@ -57,9 +57,10 @@ export const loadProfileRoute = async ({
   }
 
   const [intl, user] = await Promise.all([
-    queryClient.ensureQueryData(
-      intlQueryOptions({ locale, namespaces: PROFILE_NAMESPACES }),
-    ),
+    queryClient.query({
+      ...intlQueryOptions({ locale, namespaces: PROFILE_NAMESPACES }),
+      staleTime: "static",
+    }),
     ensureProfile(queryClient, nameCode),
   ]);
 

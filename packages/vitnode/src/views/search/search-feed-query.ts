@@ -159,7 +159,10 @@ export const fetchSearchFeedPageInBrowser: SearchFeedPageFetcher =
  *
  * A route loader warms it before the component renders:
  *
- *     context.queryClient.ensureInfiniteQueryData(searchFeedQueryOptions({...}))
+ *     context.queryClient.infiniteQuery({
+ *       ...searchFeedQueryOptions({...}),
+ *       staleTime: "static",
+ *     })
  *
  * and the component reads the very same options back:
  *

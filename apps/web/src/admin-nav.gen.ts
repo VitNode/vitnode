@@ -8,8 +8,14 @@
 //
 // Same plugin configuration in, same bytes out: the entries are sorted by
 // plugin id.
+//
+// `adminNav` below is what the AdminCP shell and the `/_admin` loader read.
+// It is derived here rather than in an app's own `src/lib`, so a generated
+// application has no wrapper to keep in step with this file.
 
 import type { AdminNavPluginSource } from '@vitnode/core/lib/plugin'
+
+import { adminNavBundle } from '@vitnode/core/tanstack/admin'
 
 import { adminNav as adminNav0 } from '@vitnode/blog/admin/nav'
 import { adminNav as adminNav1 } from '@vitnode/example/admin/nav'
@@ -19,3 +25,5 @@ export const pluginAdminNav = [
   adminNav0, // @vitnode/blog
   adminNav1, // @vitnode/example
 ] satisfies AdminNavPluginSource[]
+
+export const adminNav = adminNavBundle({ plugins: pluginAdminNav })

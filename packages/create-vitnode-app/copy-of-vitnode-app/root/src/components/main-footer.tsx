@@ -1,10 +1,9 @@
-import { Heart } from "lucide-react";
-
 import {
   VITNODE_DOCS_URL,
   VITNODE_SPONSOR_URL,
   VITNODE_WEBSITE_URL,
-} from "@/lib/vitnode-links";
+} from "@vitnode/core/lib/docs-links";
+import { Heart } from "lucide-react";
 
 export const MainFooter = () => (
   <footer className="border-t">

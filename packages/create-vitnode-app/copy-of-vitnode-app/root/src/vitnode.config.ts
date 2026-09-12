@@ -16,3 +16,5 @@ export const vitNodeConfig = buildConfig({
     defaultTheme: "system",
   },
 });
+
+export type Locale = (typeof vitNodeConfig.i18n.locales)[number]["code"];

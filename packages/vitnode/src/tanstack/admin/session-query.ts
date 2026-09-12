@@ -38,12 +38,12 @@ export const useAdminSessionQuery = () =>
 export const ensureAdminAccess = async (
   queryClient: QueryClient,
 ): Promise<AdminAccessState> =>
-  await queryClient.fetchQuery(adminSessionQueryOptions());
+  await queryClient.query(adminSessionQueryOptions());
 
 export const preloadAdminAccess = async (
   queryClient: QueryClient,
 ): Promise<AdminAccessState> =>
-  await queryClient.fetchQuery({
+  await queryClient.query({
     ...adminSessionQueryOptions(),
     staleTime: ADMIN_SESSION_PRELOAD_STALE_TIME,
   });
@@ -51,7 +51,7 @@ export const preloadAdminAccess = async (
 export const prefetchAdminAccess = async (
   queryClient: QueryClient,
 ): Promise<AdminAccessState | undefined> => {
-  await queryClient.prefetchQuery(adminSessionQueryOptions());
+  await queryClient.query(adminSessionQueryOptions()).catch(() => undefined);
 
   return queryClient.getQueryData(adminSessionQueryOptions().queryKey);
 };

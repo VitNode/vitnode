@@ -1,14 +1,8 @@
-import type { AdminUserSearch } from '@vitnode/core/tanstack/admin'
-
 import { AdminShellContent } from '@vitnode/core/tanstack/admin'
+import { useAppNavigate } from '@vitnode/core/tanstack/auth'
 import { LanguageSwitcher } from '@vitnode/core/tanstack/layout'
 
-import { adminNav } from '@/lib/admin-nav'
-import { adminUserSearchFn } from '@/lib/admin-search'
-import { useAppNavigate } from '@/lib/navigation'
-
-const searchUsers: AdminUserSearch = async (search) =>
-  await adminUserSearchFn({ data: { search } })
+import { adminNav } from '@/admin-nav.gen'
 
 export const AdminShell = ({ children }: { children: React.ReactNode }) => {
   const navigate = useAppNavigate()
@@ -20,7 +14,6 @@ export const AdminShell = ({ children }: { children: React.ReactNode }) => {
       onNavigate={(href) => {
         void navigate(href)
       }}
-      searchUsers={searchUsers}
     >
       {children}
     </AdminShellContent>

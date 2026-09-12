@@ -3,11 +3,7 @@ import type { Context } from "hono";
 import { z } from "@hono/zod-openapi";
 import { HTTPException } from "hono/http-exception";
 
-import type {
-  AnyContentTypeDefinition,
-  ContentLocalizedFieldName,
-  ContentTranslationRow,
-} from "../types";
+import type { AnyContentTypeDefinition } from "../types";
 import type { ContentModel } from "./model";
 import type {
   ContentTranslationEditorialOutcome,
@@ -38,6 +34,13 @@ import { resolveContentTranslationPreviewSlug } from "./preview-target";
 import { createContentPreviewToken } from "./preview-token";
 import { contentPublicLocaleStates } from "./public-locales";
 import { CONTENT_REVISIONS_MAX_PAGE_SIZE } from "./revisions-model";
+import {
+  identifier,
+  jsonBody,
+  jsonResponse,
+  plainOutcome,
+  readJson,
+} from "./route-helpers";
 import { contentTranslationEffects } from "./translation-effects";
 import { withTranslationHttpErrors } from "./translation-http-errors";
 
@@ -83,28 +86,6 @@ export const buildContentTranslationRoutes = <
     }
 
     return buildEditorial(c, { pluginId });
-  };
-
-  const jsonBody = (schema: z.ZodType) => ({
-    content: { "application/json": { schema } },
-  });
-  const jsonResponse = (schema: z.ZodType, description: string) => ({
-    content: { "application/json": { schema } },
-    description,
-  });
-
-  const readJson = async <TValue>(
-    c: Context,
-    schema: z.ZodType<TValue>,
-  ): Promise<TValue> => schema.parse(await c.req.json());
-
-  const identifier = (c: Context): number => {
-    const value = Number(c.req.param("id"));
-    if (!Number.isInteger(value) || value <= 0) {
-      throw new HTTPException(400, { message: "Invalid identifier." });
-    }
-
-    return value;
   };
 
   /**
@@ -158,39 +139,6 @@ export const buildContentTranslationRoutes = <
       pluginId,
     });
   };
-
-  /**
-   * Turns a bare repository result into the outcome the effects expect.
-   *
-   * The path a localized content type **without** `editorial` takes, for every
-   * mutation including publish and unpublish: there is no history to write, so
-   * there is no revision id - but the event still fires, because
-   * `translation_published` and friends are gated on localization and publication,
-   * not on editorial. With `editorial` the service produces a richer outcome
-   * itself and this is not used.
-   */
-  const plainOutcome = (
-    operation: ContentTranslationEditorialOutcome<TDefinition>["operation"],
-    row: ContentTranslationRow<TDefinition>,
-    {
-      changed = true,
-      changedFields = [],
-    }: {
-      changed?: boolean;
-      changedFields?: ContentLocalizedFieldName<TDefinition>[];
-    } = {},
-  ): ContentTranslationEditorialOutcome<TDefinition> => ({
-    changed,
-    changedFields,
-    languageId: row.languageId,
-    locale: row.locale,
-    operation,
-    previousSlug: null,
-    restoredFromRevisionId: null,
-    revisionId: null,
-    row,
-    version: row.version,
-  });
 
   const list = buildRoute({
     pluginId,

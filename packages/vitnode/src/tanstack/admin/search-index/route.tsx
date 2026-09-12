@@ -35,12 +35,16 @@ export const loadAdminSearchIndexRoute = async ({
   requireAdminPermission(adminAccess, SEARCH_INDEX_PERMISSION);
 
   const [intl] = await Promise.all([
-    queryClient.ensureQueryData(
-      intlQueryOptions({ locale, namespaces: ADMIN_SEARCH_INDEX_NAMESPACES }),
-    ),
-    queryClient.ensureQueryData({
+    queryClient.query({
+      ...intlQueryOptions({
+        locale,
+        namespaces: ADMIN_SEARCH_INDEX_NAMESPACES,
+      }),
+      staleTime: "static",
+    }),
+    queryClient.query({
       ...searchIndexQuery(),
-      revalidateIfStale: true,
+      staleTime: "static",
     }),
   ]);
 

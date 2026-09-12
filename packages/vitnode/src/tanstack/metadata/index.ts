@@ -1,6 +1,7 @@
 import type { VitNodeMetadata } from "@/lib/metadata";
 
 import { formatPageTitle } from "@/lib/metadata";
+import { getVitNodeConfig } from "@/vitnode.config";
 
 /** What a crawler may do with a page. */
 export type RouteRobots = "index, follow" | "noindex, nofollow";
@@ -61,3 +62,6 @@ export const createRouteHead =
   (metadata: VitNodeMetadata) =>
   (options: RouteHeadOptions = {}) =>
     routeHead(metadata, options);
+
+export const pageHead = (options: RouteHeadOptions = {}): RouteHeadResult =>
+  routeHead(getVitNodeConfig().metadata, options);

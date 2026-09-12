@@ -5,6 +5,7 @@ import {
   ThemeLayoutContent,
 } from "@vitnode/core/tanstack/layout";
 
+import { MainFooter } from "@/components/main-footer";
 import { MainHeader } from "@/components/main-header";
 
 export const Route = createFileRoute("/_main")({
@@ -14,8 +15,15 @@ export const Route = createFileRoute("/_main")({
 
 function MainLayout() {
   return (
-    <ThemeLayoutContent breadcrumb={<MainBreadcrumb />} header={<MainHeader />}>
-      <Outlet />
-    </ThemeLayoutContent>
+    <div className="flex min-h-svh flex-col [&>main]:flex-1">
+      <ThemeLayoutContent
+        breadcrumb={<MainBreadcrumb />}
+        header={<MainHeader />}
+      >
+        <Outlet />
+      </ThemeLayoutContent>
+
+      <MainFooter />
+    </div>
   );
 }

@@ -31,12 +31,13 @@ export const loadSearchRoute = async ({
   const params = searchRouteFeedParams({ search });
 
   const [intl] = await Promise.all([
-    queryClient.ensureQueryData(
-      intlQueryOptions({ locale, namespaces: SEARCH_NAMESPACES }),
-    ),
-    queryClient.ensureInfiniteQueryData({
+    queryClient.query({
+      ...intlQueryOptions({ locale, namespaces: SEARCH_NAMESPACES }),
+      staleTime: "static",
+    }),
+    queryClient.infiniteQuery({
       ...feedQueryOptions({ locale, params }),
-      revalidateIfStale: true,
+      staleTime: "static",
     }),
   ]);
 

@@ -3,150 +3,27 @@ import "@tanstack/react-start/server-only";
 import { usersModule } from "@/api/modules/users/users.module";
 import { fetcher } from "@/tanstack/fetcher/server";
 
-import type {
-  ChangePasswordInput,
-  ChangePasswordResult,
-  CompleteSsoResult,
-  PasswordResetRequestInput,
-  PasswordResetRequestResult,
-  SignInInput,
-  SignInResult,
-  SignOutInput,
-  SignOutResult,
-  SignUpInput,
-  SignUpResult,
-  SsoCallbackInput,
-  SsoLinkInput,
-  SsoLinkResult,
-  SsoStartInput,
-  SsoStartResult,
-} from "./contract";
+import { createAuthOperations } from "./transport-operations";
 
-import {
-  changePasswordResultFromStatus,
-  completeSsoResultFromStatus,
-  isUsableSessionStatus,
-  passwordResetRequestResultFromStatus,
-  SESSION_UNAVAILABLE,
-  signInResultFromStatus,
-  signOutResultFromStatus,
-  signUpResultFromStatus,
-  ssoLinkResultFromStatus,
-  ssoStartResultFromStatus,
-} from "./contract";
-
-export const readSessionOnApi = async () => {
-  try {
-    const response = await fetcher(usersModule, {
-      method: "get",
-      module: "users",
-      path: "/session",
-    });
-
-    if (isUsableSessionStatus(response.status)) return await response.json();
-
-    throw new Error(`the session route answered ${response.status}`);
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error(`[auth] ${SESSION_UNAVAILABLE}`, error);
-
-    // eslint-disable-next-line preserve-caught-error
-    throw new Error(SESSION_UNAVAILABLE);
-  }
-};
-
-const callUsersApi = async (
-  call: () => Promise<Response>,
-): Promise<null | Response> => {
-  try {
-    return await call();
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error("[auth] users API call failed", error);
-
-    return null;
-  }
-};
-
-const readJson = async (response: Response): Promise<unknown> => {
-  try {
-    return await response.json();
-  } catch {
-    return undefined;
-  }
-};
-
-const readText = async (response: Response): Promise<string> => {
-  try {
-    return await response.text();
-  } catch {
-    return "";
-  }
-};
-
-export const signInOnApi = async (data: SignInInput): Promise<SignInResult> => {
-  const response = await callUsersApi(async () =>
-    fetcher(usersModule, {
-      allowSaveCookies: true,
+/**
+ * The server's own transport: the server fetcher, and the cookie relay.
+ *
+ * `allowSaveCookies: true` on exactly the flows whose answer carries the
+ * session cookie - sign-in, sign-out, the three SSO steps and sign-up. A
+ * password reset request and a token-based password change never mint a
+ * session, so neither has ever relayed a cookie and neither does here.
+ */
+const operations = createAuthOperations({
+  changePasswordFromReset: async data =>
+    await fetcher(usersModule, {
       args: { body: data },
       method: "post",
       module: "users",
-      path: "/sign_in",
+      path: "/change-password",
     }),
-  );
 
-  if (!response) return { ok: false, reason: "server_error" };
-
-  return signInResultFromStatus(response.status);
-};
-
-export const signOutOnApi = async (
-  data: SignOutInput,
-): Promise<SignOutResult> => {
-  const response = await callUsersApi(async () =>
-    fetcher(usersModule, {
-      allowSaveCookies: true,
-      args: { body: { isAdmin: data.isAdmin ?? false } },
-      method: "delete",
-      module: "users",
-      path: "/sign_out",
-    }),
-  );
-
-  if (!response) return { ok: false, reason: "server_error" };
-
-  return signOutResultFromStatus(response.status);
-};
-
-export const startSsoOnApi = async (
-  data: SsoStartInput,
-): Promise<SsoStartResult> => {
-  const response = await callUsersApi(async () =>
-    fetcher(usersModule, {
-      allowSaveCookies: true,
-      args: { params: { providerId: data.providerId } },
-      method: "post",
-      module: "users/sso",
-      path: "/{providerId}",
-    }),
-  );
-
-  if (!response) return { ok: false, reason: "server_error" };
-
-  if (response.status !== 200) {
-    return ssoStartResultFromStatus(response.status, undefined);
-  }
-
-  const { url } = await response.json();
-
-  return ssoStartResultFromStatus(response.status, url);
-};
-
-export const completeSsoOnApi = async (
-  data: SsoCallbackInput,
-): Promise<CompleteSsoResult> => {
-  const response = await callUsersApi(async () =>
-    fetcher(usersModule, {
+  completeSso: async data =>
+    await fetcher(usersModule, {
       allowSaveCookies: true,
       args: {
         params: { providerId: data.providerId },
@@ -156,22 +33,9 @@ export const completeSsoOnApi = async (
       module: "users/sso",
       path: "/{providerId}/callback",
     }),
-  );
 
-  if (!response) return { ok: false, reason: "server_error" };
-
-  if (response.status === 409) {
-    return completeSsoResultFromStatus(409, await readJson(response));
-  }
-
-  return completeSsoResultFromStatus(response.status);
-};
-
-export const linkSsoOnApi = async (
-  data: SsoLinkInput,
-): Promise<SsoLinkResult> => {
-  const response = await callUsersApi(async () =>
-    fetcher(usersModule, {
+  linkSso: async data =>
+    await fetcher(usersModule, {
       allowSaveCookies: true,
       args: {
         body: { password: data.password, token: data.token },
@@ -181,19 +45,43 @@ export const linkSsoOnApi = async (
       module: "users/sso",
       path: "/{providerId}/link",
     }),
-  );
 
-  if (!response) return { ok: false, reason: "server_error" };
+  readSession: async () =>
+    await fetcher(usersModule, {
+      method: "get",
+      module: "users",
+      path: "/session",
+    }),
 
-  return ssoLinkResultFromStatus(response.status);
-};
+  requestPasswordReset: async ({ captchaToken, email }) =>
+    await fetcher(usersModule, {
+      captchaToken,
+      args: { body: { email } },
+      method: "post",
+      module: "users",
+      path: "/reset-password",
+    }),
 
-export const signUpOnApi = async ({
-  captchaToken,
-  ...body
-}: SignUpInput): Promise<SignUpResult> => {
-  const response = await callUsersApi(async () =>
-    fetcher(usersModule, {
+  signIn: async data =>
+    await fetcher(usersModule, {
+      allowSaveCookies: true,
+      args: { body: data },
+      method: "post",
+      module: "users",
+      path: "/sign_in",
+    }),
+
+  signOut: async data =>
+    await fetcher(usersModule, {
+      allowSaveCookies: true,
+      args: { body: { isAdmin: data.isAdmin ?? false } },
+      method: "delete",
+      module: "users",
+      path: "/sign_out",
+    }),
+
+  signUp: async ({ captchaToken, ...body }) =>
+    await fetcher(usersModule, {
       allowSaveCookies: true,
       captchaToken,
       args: { body },
@@ -201,53 +89,23 @@ export const signUpOnApi = async ({
       module: "users",
       path: "/sign_up",
     }),
-  );
 
-  if (!response) return { ok: false, reason: "server_error" };
-
-  if (response.status === 201) {
-    return signUpResultFromStatus(201, { body: await readJson(response) });
-  }
-
-  if (response.status === 409) {
-    return signUpResultFromStatus(409, { conflict: await readText(response) });
-  }
-
-  return signUpResultFromStatus(response.status);
-};
-
-export const requestPasswordResetOnApi = async ({
-  captchaToken,
-  email,
-}: PasswordResetRequestInput): Promise<PasswordResetRequestResult> => {
-  const response = await callUsersApi(async () =>
-    fetcher(usersModule, {
-      captchaToken,
-      args: { body: { email } },
+  startSso: async data =>
+    await fetcher(usersModule, {
+      allowSaveCookies: true,
+      args: { params: { providerId: data.providerId } },
       method: "post",
-      module: "users",
-      path: "/reset-password",
+      module: "users/sso",
+      path: "/{providerId}",
     }),
-  );
+});
 
-  if (!response) return { ok: false, reason: "server_error" };
-
-  return passwordResetRequestResultFromStatus(response.status);
-};
-
-export const changePasswordFromResetOnApi = async (
-  data: ChangePasswordInput,
-): Promise<ChangePasswordResult> => {
-  const response = await callUsersApi(async () =>
-    fetcher(usersModule, {
-      args: { body: data },
-      method: "post",
-      module: "users",
-      path: "/change-password",
-    }),
-  );
-
-  if (!response) return { ok: false, reason: "server_error" };
-
-  return changePasswordResultFromStatus(response.status);
-};
+export const changePasswordFromResetOnApi = operations.changePasswordFromReset;
+export const completeSsoOnApi = operations.completeSso;
+export const linkSsoOnApi = operations.linkSso;
+export const readSessionOnApi = operations.readSession;
+export const requestPasswordResetOnApi = operations.requestPasswordReset;
+export const signInOnApi = operations.signIn;
+export const signOutOnApi = operations.signOut;
+export const signUpOnApi = operations.signUp;
+export const startSsoOnApi = operations.startSso;

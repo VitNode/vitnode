@@ -7,11 +7,12 @@ import { SearchAdminContent } from "@/views/admin/layouts/search/search-content"
 
 import { RouterLink } from "../layout/router-link";
 import { useAdminSearchNavItems } from "./nav";
+import { readAdminUserSearch } from "./user-search";
 
 export const AdminSearch = ({
   LinkComponent = RouterLink,
   onNavigate,
-  searchUsers,
+  searchUsers = readAdminUserSearch,
 }: {
   LinkComponent?: AuthLinkComponent;
 

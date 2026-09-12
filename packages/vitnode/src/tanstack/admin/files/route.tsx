@@ -48,12 +48,13 @@ export const loadAdminFilesRoute = async ({
   requireAdminPermission(adminAccess, FILES_VIEW_PERMISSION);
 
   const [intl] = await Promise.all([
-    queryClient.ensureQueryData(
-      intlQueryOptions({ locale, namespaces: ADMIN_FILES_NAMESPACES }),
-    ),
-    queryClient.ensureQueryData({
+    queryClient.query({
+      ...intlQueryOptions({ locale, namespaces: ADMIN_FILES_NAMESPACES }),
+      staleTime: "static",
+    }),
+    queryClient.query({
       ...adminFilesQuery({ params }),
-      revalidateIfStale: true,
+      staleTime: "static",
     }),
   ]);
 

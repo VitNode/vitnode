@@ -41,8 +41,14 @@ const loadAuthCard = async (
   key: "login" | "register",
 ): Promise<AuthRouteData> => {
   const [intl] = await Promise.all([
-    queryClient.ensureQueryData(intlQueryOptions({ locale, namespaces })),
-    queryClient.ensureQueryData(middlewareConfigQueryOptions()),
+    queryClient.query({
+      ...intlQueryOptions({ locale, namespaces }),
+      staleTime: "static",
+    }),
+    queryClient.query({
+      ...middlewareConfigQueryOptions(),
+      staleTime: "static",
+    }),
   ]);
 
   return { title: translateAuthTitle(locale, intl.messages, key) };

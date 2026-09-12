@@ -38,12 +38,16 @@ export const loadAdminIntegrationsRoute = async ({
   requireAdminPermission(adminAccess, SYSTEM_VIEW_PERMISSION);
 
   const [intl] = await Promise.all([
-    queryClient.ensureQueryData(
-      intlQueryOptions({ locale, namespaces: ADMIN_INTEGRATIONS_NAMESPACES }),
-    ),
-    queryClient.ensureQueryData({
+    queryClient.query({
+      ...intlQueryOptions({
+        locale,
+        namespaces: ADMIN_INTEGRATIONS_NAMESPACES,
+      }),
+      staleTime: "static",
+    }),
+    queryClient.query({
       ...integrationsQuery(),
-      revalidateIfStale: true,
+      staleTime: "static",
     }),
   ]);
 

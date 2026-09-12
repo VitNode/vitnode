@@ -1,17 +1,29 @@
-import "@tanstack/react-start/server-only";
+import { z } from "zod";
 
+import type { adminModule } from "@/api/modules/admin/admin.module";
 import type { AdminSearchUser } from "@/views/admin/layouts/search/search-users";
 
-import { adminModule } from "@/api/modules/admin/admin.module";
-import { fetcher } from "@/tanstack/fetcher/server";
+import { CONFIG_PLUGIN } from "@/config";
+import { clientModule } from "@/lib/fetcher-client";
+import { fetcher } from "@/tanstack/fetcher";
 import { MAX_SEARCH_RESULTS } from "@/views/admin/layouts/search/constants";
 
-export const readAdminUserSearchOnApi = async (
+const admin = clientModule<typeof adminModule>(CONFIG_PLUGIN.pluginId);
+
+export const adminUserSearchInputSchema = z.string().trim().min(1).max(128);
+
+export const readAdminUserSearch = async (
   search: string,
 ): Promise<AdminSearchUser[]> => {
+  const parsed = adminUserSearchInputSchema.safeParse(search);
+
+  if (!parsed.success) return [];
+
   try {
-    const response = await fetcher(adminModule, {
-      args: { query: { first: String(MAX_SEARCH_RESULTS), search } },
+    const response = await fetcher(admin, {
+      args: {
+        query: { first: String(MAX_SEARCH_RESULTS), search: parsed.data },
+      },
       method: "get",
       module: "admin/users",
       path: "/list",

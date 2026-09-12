@@ -48,9 +48,7 @@ export const useDashboardActions = (
   return React.useMemo<DashboardActions>(() => {
     /** The stored settings for one placed widget, read fresh. */
     const settingsFor = async (widgetId: string) => {
-      const saved = await queryClient.fetchQuery(
-        dashboardLayoutQuery(adminUserId),
-      );
+      const saved = await queryClient.query(dashboardLayoutQuery(adminUserId));
 
       return saved.find(item => item.id === widgetId)?.settings ?? {};
     };

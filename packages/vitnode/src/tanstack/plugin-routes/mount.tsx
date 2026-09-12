@@ -88,12 +88,13 @@ const pluginRouteLoader =
       spec.module(),
       spec.namespaces.length === 0
         ? undefined
-        : context.queryClient.ensureQueryData(
-            intlQueryOptions({
+        : context.queryClient.query({
+            ...intlQueryOptions({
               locale: context.locale,
               namespaces: spec.namespaces,
             }),
-          ),
+            staleTime: "static",
+          }),
     ]);
 
     const search = spec.validateSearch

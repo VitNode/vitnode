@@ -29,6 +29,13 @@ import { contentEditorialEffects } from "./editorial-effects";
 import { emitContentEvent } from "./emit";
 import { contentFileFields } from "./files";
 import { withHttpErrors } from "./http-errors";
+import {
+  identifier,
+  jsonBody,
+  jsonResponse,
+  plainOutcome,
+  readJson,
+} from "./route-helpers";
 import { contentSearchAdvancedValues, syncContentSearch } from "./search-sync";
 import { contentTranslationEffects } from "./translation-effects";
 import { withTranslationHttpErrors } from "./translation-http-errors";
@@ -61,14 +68,6 @@ export const buildContentLocalizedAdminRoutes = <
   const name = contentTypeName(definition.id);
   const editorial = definition.editorial.enabled;
   const { defaultLocale } = definition.localization;
-
-  const jsonBody = (schema: z.ZodType) => ({
-    content: { "application/json": { schema } },
-  });
-  const jsonResponse = (schema: z.ZodType, description: string) => ({
-    content: { "application/json": { schema } },
-    description,
-  });
 
   /**
    * The 400 a composite save answers when a file identifier is refused.
@@ -142,46 +141,8 @@ export const buildContentLocalizedAdminRoutes = <
     ).optional(),
   });
 
-  const readJson = async <TValue>(
-    c: Context,
-    schema: z.ZodType<TValue>,
-  ): Promise<TValue> => schema.parse(await c.req.json());
-
-  const identifier = (c: Context): number => {
-    const value = Number(c.req.param("id"));
-    if (!Number.isInteger(value) || value <= 0) {
-      throw new HTTPException(400, { message: "Invalid identifier." });
-    }
-
-    return value;
-  };
-
   const sameLocale = (left: string, right: string): boolean =>
     left.toLowerCase() === right.toLowerCase();
-
-  /** Mirrors `translation-routes`: a repository result, shaped for the effects. */
-  const plainOutcome = (
-    operation: ContentTranslationEditorialOutcome<TDefinition>["operation"],
-    row: ContentTranslationEditorialOutcome<TDefinition>["row"],
-    {
-      changed = true,
-      changedFields = [],
-    }: {
-      changed?: boolean;
-      changedFields?: ContentTranslationEditorialOutcome<TDefinition>["changedFields"];
-    } = {},
-  ): ContentTranslationEditorialOutcome<TDefinition> => ({
-    changed,
-    changedFields,
-    languageId: row.languageId,
-    locale: row.locale,
-    operation,
-    previousSlug: null,
-    restoredFromRevisionId: null,
-    revisionId: null,
-    row,
-    version: row.version,
-  });
 
   /**
    * Writes one language inside the caller's transaction.

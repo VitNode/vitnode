@@ -5,6 +5,7 @@ export {
   adminBreadcrumb,
   useAdminBreadcrumb,
 } from "./breadcrumb";
+export { defaultAdminTransport } from "./default-transport";
 export * from "./intl";
 export { AdminNavProvider, useAdminNav, useAdminSearchNavItems } from "./nav";
 export * from "./permissions";
@@ -35,8 +36,8 @@ export {
 } from "./sign-in-route";
 export type { AdminSignInRouteProps } from "./sign-in-screen";
 export { AdminSignInRouteContent } from "./sign-in-screen";
-
 export * from "./state";
+
 export type {
   AdminTableContract,
   AdminTableNavigate,
@@ -45,15 +46,16 @@ export type {
   AdminTableRouteSearch,
   UncheckedAdminTableSearch,
 } from "./table-search";
-
 export {
   adminTableRouteParams,
   adminTableSearchFrom,
   adminTableSearchParams,
   normalizeAdminTableSearch,
 } from "./table-search";
+
 export * from "./transport";
 export { AdminUserBar } from "./user-bar";
+export { adminUserSearchInputSchema, readAdminUserSearch } from "./user-search";
 
 // ---------------------------------------------------------------- screens ---
 // What every AdminCP screen shares - and, by its absence, where each screen

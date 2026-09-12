@@ -28,13 +28,16 @@ import { ContentEngineError } from "../errors";
 import { isContentReferenceCollection, splitContentFieldPath } from "../paths";
 import { publicOrderableColumns } from "../registry";
 import { groupPublicLeafPaths } from "../schemas";
-import { resolveContentPublicRowFiles } from "./files";
+import { createContentPublicRowHydrator } from "./public-row-hydration";
 import { publicationColumns, publishedCondition } from "./publication";
 import {
   buildFilterCondition,
   buildOrderColumn,
   buildSearchCondition,
 } from "./query";
+
+/** Where the row nesting lives now. Re-exported so its path is unchanged. */
+export { nestContentPublicRow } from "./public-row-hydration";
 
 export interface ContentPublicReadOptions {
   locale?: string;
@@ -209,27 +212,6 @@ export const contentPublicCollectionFields = (
   });
 };
 
-export const nestContentPublicRow = (
-  row: Record<string, unknown>,
-): Record<string, unknown> => {
-  const nested: Record<string, unknown> = {};
-
-  for (const [key, value] of Object.entries(row)) {
-    const path = splitContentFieldPath(key);
-    if (!path) {
-      nested[key] = value;
-      continue;
-    }
-
-    const [owner, leaf] = path;
-    const container = (nested[owner] as Record<string, unknown>) ?? {};
-    container[leaf] = value;
-    nested[owner] = container;
-  }
-
-  return nested;
-};
-
 /** Public pages are smaller than admin ones, and the cap is lower too. */
 export const clampContentPublicPageSize = (
   value: string | undefined,
@@ -285,44 +267,12 @@ export const createContentPublicService = <
   // no junction and no child table unless a public response is made of them.
   const publicCollections = contentPublicCollectionFields(definition);
 
-  const withCollections = async (
-    rows: readonly Record<string, unknown>[],
-  ): Promise<Record<string, unknown>[]> => {
-    const nested = rows.map(nestContentPublicRow);
-    if (nested.length === 0) return nested;
-
-    const ids = nested
-      .map(row => row.id)
-      .filter((id): id is number => typeof id === "number");
-    // Only the collections the allowlist actually exposes: querying a private
-    // junction table to discard its rows afterwards is work with no answer
-    // attached, and `publicCollections` is already exactly that list.
-    const loaded =
-      publicCollections.length === 0
-        ? undefined
-        : await advanced?.loadMany(ids, c.get("db"), publicCollections);
-
-    const withCollectionValues =
-      loaded === undefined
-        ? nested
-        : nested.map(row => ({
-            ...row,
-            ...(typeof row.id === "number" ? loaded.get(row.id) : undefined),
-          }));
-
-    // **After** the collections, not before: a `multiple: true` file field has no
-    // column, so its identifiers only exist on the row once `loadMany` has put
-    // them there. One batch for the whole page either way, and only for the file
-    // fields the allowlist exposes. The identifier is replaced by the descriptor
-    // here rather than in the projector, so the projector stays the one place
-    // that decides *what* is public and this stays the one place that decides
-    // what it looks like.
-    return await resolveContentPublicRowFiles(
-      c,
-      definition,
-      withCollectionValues,
-    );
-  };
+  const withCollections = createContentPublicRowHydrator({
+    advanced,
+    c,
+    definition,
+    publicCollections,
+  });
 
   const readOne = async (
     condition: SQL,
