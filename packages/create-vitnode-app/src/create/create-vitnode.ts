@@ -12,18 +12,30 @@ import { fileURLToPath } from "node:url";
 import ora from "ora";
 import color from "picocolors";
 
+import type { InitGitResult } from "../helpers/init-git.js";
 import type { CreateCliReturn } from "../questions.js";
 
+import { initGitRepository } from "../helpers/init-git.js";
 import { generateMigrationsVitnode } from "../helpers/init-vitnode.js";
 import { installDependencies } from "../helpers/install-dependencies.js";
 import { isFolderEmpty } from "../helpers/is-folder-empty.js";
 import { createPackageJSON } from "./create-package-json.js";
+
+const GIT_WARNINGS: Record<Exclude<InitGitResult, "created">, string> = {
+  "already-in-repository":
+    "Skipped git setup - the project already lives inside a git repository.",
+  failed:
+    'Could not initialize a git repository. Run "git init" in the project yourself once git is configured.',
+  "git-unavailable":
+    'Git is not installed, so no repository was created. Run "git init" in the project after installing git.',
+};
 
 export const createVitNode = async ({
   root,
   appName,
   packageManager,
   eslint,
+  git,
   install,
   docker,
   mode,
@@ -323,7 +335,17 @@ export const createVitNode = async ({
     }
   }
 
+  let gitResult: InitGitResult | undefined;
+  if (git) {
+    spinner.text = "Initializing git repository...";
+    gitResult = await initGitRepository({ root });
+  }
+
   spinner.succeed(
     `${color.green("Success!")} Created ${color.cyan(appName)} at ${color.cyan(root)}`,
   );
+
+  if (gitResult && gitResult !== "created") {
+    console.log(color.yellow(GIT_WARNINGS[gitResult]));
+  }
 };

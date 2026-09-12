@@ -1,6 +1,6 @@
 import type { QueryClient } from "@tanstack/react-query";
 
-import { queryOptions } from "@tanstack/react-query";
+import { queryOptions, useQuery } from "@tanstack/react-query";
 
 import type { SessionApi } from "./session-api";
 import type { AuthState } from "./state";
@@ -17,6 +17,8 @@ export const sessionQueryOptions = () =>
     retry: false,
     staleTime: SESSION_STALE_TIME,
   });
+
+export const useSessionQuery = () => useQuery(sessionQueryOptions());
 
 export const ensureAuthState = async (
   queryClient: QueryClient,

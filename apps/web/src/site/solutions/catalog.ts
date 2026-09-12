@@ -1,4 +1,4 @@
-import type { MarketingPageMeta } from '#/site/marketing/metadata'
+import type { MarketingPageMeta } from '@/site/marketing/metadata'
 
 export interface SolutionEntry {
   metaDescription: string

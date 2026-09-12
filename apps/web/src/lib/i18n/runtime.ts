@@ -2,8 +2,8 @@ import { createServerFn } from '@tanstack/react-start'
 import { configureIntl, validateIntlInput } from '@vitnode/core/tanstack/i18n'
 import { IntlProvider } from 'use-intl'
 
-import { loadIntlMessages } from '#/server/messages.server'
-import { vitNodeConfig } from '#/vitnode.config'
+import { loadIntlMessages } from '@/server/messages.server'
+import { vitNodeConfig } from '@/vitnode.config'
 
 export const getIntlMessages = createServerFn()
   .validator(validateIntlInput)

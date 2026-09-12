@@ -57,7 +57,9 @@ describe("the permission UI is a bridge, not a second store", () => {
   });
 
   it("fills it from the canonical query and from nothing else", () => {
-    expect(permissions()).toMatch(/adminSessionQueryOptions/);
+    expect(permissions()).toMatch(
+      /adminSessionQueryOptions|useAdminSessionQuery/,
+    );
   });
 
   it("takes no permission set as a prop", () => {
@@ -164,7 +166,7 @@ describe("the admin session is never read through the public one", () => {
   it("no module reads the public session query", () => {
     const offenders = adminSources()
       .filter(({ code }) =>
-        /\bsessionQueryOptions\b|\bensureAuthState\b|\bSESSION_QUERY_KEY\b/.test(
+        /\bsessionQueryOptions\b|\buseSessionQuery\b|\bensureAuthState\b|\bSESSION_QUERY_KEY\b/.test(
           code,
         ),
       )

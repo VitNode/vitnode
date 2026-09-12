@@ -80,7 +80,7 @@ building it.
   type={{
     captcha: {
       description:
-        "The deployment's captcha configuration, or undefined when none is configured. Read it from middlewareConfigQueryOptions().",
+        "The deployment's captcha configuration, or undefined when none is configured. Read it from useMiddlewareConfigQuery().",
       type: "{ siteKey: string; type: 'cloudflare_turnstile' | 'recaptcha_v3' } | undefined",
       required: true,
     },
@@ -135,13 +135,12 @@ The site key is public. A plugin page can read it with the shared TanStack Query
 definition before rendering its form:
 
 ```tsx title="plugins/contact/src/pages/contact-page.tsx"
-import { useSuspenseQuery } from '@tanstack/react-query'
-import { middlewareConfigQueryOptions } from '@vitnode/core/tanstack/auth'
+import { useMiddlewareConfigQuery } from '@vitnode/core/tanstack/auth'
 
 import { ContactForm } from '../views/contact-form'
 
 export const ContactScreen = () => {
-  const { data: config } = useSuspenseQuery(middlewareConfigQueryOptions())
+  const { data: config } = useMiddlewareConfigQuery()
 
   return <ContactForm captcha={config.captcha} />
 }

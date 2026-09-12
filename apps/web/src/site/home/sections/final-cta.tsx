@@ -1,14 +1,8 @@
 import { Sparkles } from 'lucide-react'
 
-import type { SiteLinkComponent } from '#/site/home/site-link'
+import { MarketingActions } from '@/site/marketing/shared'
 
-import { MarketingActions } from '#/site/marketing/shared'
-
-export const FinalCtaSection = ({
-  LinkComponent,
-}: {
-  LinkComponent: SiteLinkComponent
-}) => (
+export const FinalCtaSection = () => (
   <section
     aria-labelledby="cta-title"
     className="container mx-auto px-4 pt-4 pb-16 sm:px-6 sm:pb-24"
@@ -34,10 +28,7 @@ export const FinalCtaSection = ({
         is free, the docs are friendly and the canary is only a little bit
         feathery.
       </p>
-      <MarketingActions
-        className="justify-center"
-        LinkComponent={LinkComponent}
-      />
+      <MarketingActions className="justify-center" />
     </div>
   </section>
 )

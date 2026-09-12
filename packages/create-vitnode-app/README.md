@@ -75,6 +75,7 @@ plugins: [myPlugin()]
 | `--package-manager` | Choose `npm` or `pnpm` for the generated project. |
 | `--eslint` | Include ESLint and Prettier configuration. |
 | `--skip-install` | Skip dependency installation after scaffolding. |
+| `--skip-git` | Skip initializing a git repository (created on `main` after install). |
 | `--mode` | Choose `singleApp`, `apiMonorepo`, or `onlyApi`. |
 | `--monorepo` | Create a workspace layout for plugins and multiple applications. |
 | `--docker` | Include local Docker services. |

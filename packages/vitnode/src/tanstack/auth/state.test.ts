@@ -11,7 +11,7 @@ import {
   SESSION_QUERY_KEY,
 } from "./state";
 
-const anonymousSession: SessionApi = { ai: { models: [] }, user: null };
+const anonymousSession: SessionApi = { user: null };
 
 /** A signed-in visitor, exactly as `users/session.route.ts` describes one. */
 const userFixture = (overrides: Partial<AuthUser> = {}): AuthUser => ({
@@ -32,10 +32,7 @@ const userFixture = (overrides: Partial<AuthUser> = {}): AuthUser => ({
   ...overrides,
 });
 
-const sessionFor = (user: AuthUser): SessionApi => ({
-  ai: { models: [] },
-  user,
-});
+const sessionFor = (user: AuthUser): SessionApi => ({ user });
 
 describe("a session becomes an auth state", () => {
   it("decides on the user and on nothing else", () => {
@@ -62,8 +59,8 @@ describe("a session becomes an auth state", () => {
     const auth = authStateFromSession(session);
 
     expect(auth.isAuthenticated).toBe(true);
-    // The same objects, not clones: a page reads the visitor and `ai.models`
-    // off this state, and a copy is a second answer that can drift.
+    // The same objects, not clones: a page reads the visitor off this state,
+    // and a copy is a second answer that can drift.
     expect(auth.user).toBe(user);
     expect(auth.session).toBe(session);
   });

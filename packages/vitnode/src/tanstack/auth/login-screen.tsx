@@ -1,5 +1,3 @@
-import { useSuspenseQuery } from "@tanstack/react-query";
-
 import type { AuthLinkComponent } from "@/views/auth/auth-link";
 
 import { SignInFormContent } from "@/views/auth/sign-in/form/sign-in-form-content";
@@ -11,10 +9,7 @@ import type { AuthNavigate } from "./actions";
 import { RouteMessages } from "../i18n/route-messages";
 import { startSsoAction, useSignInAction } from "./actions";
 import { LOGIN_NAMESPACES } from "./login-route";
-import {
-  middlewareConfigQueryOptions,
-  ssoProvidersOf,
-} from "./middleware-config";
+import { ssoProvidersOf, useMiddlewareConfigQuery } from "./middleware-config";
 import { postAuthDestination } from "./redirects";
 
 export interface LoginRouteProps {
@@ -30,7 +25,7 @@ export const LoginRouteContent = ({
   navigate,
   returnTo,
 }: LoginRouteProps) => {
-  const { data: config } = useSuspenseQuery(middlewareConfigQueryOptions());
+  const { data: config } = useMiddlewareConfigQuery();
   const signIn = useSignInAction({
     destination: () => postAuthDestination(returnTo),
     navigate,

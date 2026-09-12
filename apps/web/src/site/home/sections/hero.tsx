@@ -1,9 +1,8 @@
+import { Link } from '@tanstack/react-router'
 import { ArrowRight, Bot, Scale, Server } from 'lucide-react'
 
-import type { SiteLinkComponent } from '#/site/home/site-link'
-
-import { HeroOrbit } from '#/site/home/illustrations/hero-orbit'
-import { MarketingActions } from '#/site/marketing/shared'
+import { HeroOrbit } from '@/site/home/illustrations/hero-orbit'
+import { MarketingActions } from '@/site/marketing/shared'
 
 const TRUST = [
   { Icon: Scale, label: 'MIT licence, free forever' },
@@ -11,11 +10,7 @@ const TRUST = [
   { Icon: Bot, label: 'Made for AI coding agents' },
 ]
 
-export const HeroSection = ({
-  LinkComponent,
-}: {
-  LinkComponent: SiteLinkComponent
-}) => (
+export const HeroSection = () => (
   <section aria-labelledby="hero-title" className="relative overflow-hidden">
     <div aria-hidden className="mk-grid absolute inset-0 -z-10" />
     <div
@@ -25,9 +20,10 @@ export const HeroSection = ({
 
     <div className="container mx-auto grid items-center gap-12 px-4 py-16 sm:px-6 sm:py-24 lg:grid-cols-2 lg:py-28">
       <div className="flex flex-col gap-6">
-        <LinkComponent
+        <Link
           className="bg-primary/10 text-primary hover:bg-primary/15 inline-flex w-fit items-center gap-2 rounded-full px-3 py-1 text-xs font-semibold transition-colors"
-          href="/docs/dev"
+          params={{ _splat: 'dev' }}
+          to="/docs/$"
         >
           <span aria-hidden className="relative flex size-2">
             <span className="bg-primary absolute inline-flex size-full animate-ping rounded-full opacity-75" />
@@ -35,7 +31,7 @@ export const HeroSection = ({
           </span>
           VitNode 2.0 Canary · a very early build
           <ArrowRight aria-hidden className="size-3.5" />
-        </LinkComponent>
+        </Link>
 
         <h1
           className="text-4xl font-semibold tracking-tight text-balance sm:text-5xl lg:text-6xl"
@@ -51,7 +47,7 @@ export const HeroSection = ({
           the box. Your ideas go on top. Plugins hold it all together.
         </p>
 
-        <MarketingActions LinkComponent={LinkComponent} />
+        <MarketingActions />
 
         <ul className="text-muted-foreground flex flex-wrap gap-x-6 gap-y-2 text-sm">
           {TRUST.map(({ Icon, label }) => (

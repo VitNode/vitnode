@@ -1,5 +1,5 @@
+import { Link, type RegisteredRouter } from '@tanstack/react-router'
 import { LogoVitNodeBrand } from '@vitnode/core/components/logo-vitnode'
-import { RouterLink } from '@vitnode/core/tanstack/layout'
 
 import { AUTHOR_NAME, AUTHOR_URL, LICENSE_URL, REPOSITORY_URL } from './links'
 import { CanaryPill, GitHubIcon } from './shared'
@@ -50,9 +50,9 @@ export const SiteFooter = () => (
     <div className="container mx-auto flex flex-col gap-12 px-4 py-12 sm:px-6 sm:py-16">
       <div className="grid gap-10 lg:grid-cols-5">
         <div className="flex flex-col gap-4 lg:col-span-2">
-          <RouterLink aria-label="VitNode home" className="w-fit" href="/">
+          <Link aria-label="VitNode home" className="w-fit" to="/">
             <LogoVitNodeBrand />
-          </RouterLink>
+          </Link>
           <p className="text-muted-foreground max-w-xs text-sm leading-relaxed text-pretty">
             A home for your community. A head start for your next idea. Free and
             open source, with the boring parts already done.
@@ -80,7 +80,7 @@ export const SiteFooter = () => (
             <ul className="flex flex-col gap-2">
               {links.map(({ href, label, target }) => (
                 <li key={href}>
-                  <RouterLink
+                  <Link<RegisteredRouter, string, string>
                     className="text-muted-foreground hover:text-foreground text-sm transition-colors"
                     href={href}
                     rel={
@@ -89,7 +89,7 @@ export const SiteFooter = () => (
                     target={target}
                   >
                     {label}
-                  </RouterLink>
+                  </Link>
                 </li>
               ))}
             </ul>

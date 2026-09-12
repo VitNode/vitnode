@@ -151,7 +151,7 @@ Tailwind emits one utility per class it finds in the sources you list. A documen
 ```
 
 ```tsx title="apps/web/src/routes/_docs.tsx"
-import docsCss from '#/docs/docs.css?url'
+import docsCss from '@/docs/docs.css?url'
 
 export const Route = createFileRoute('/_docs')({
   loader: async () => ({ pageTree: await getDocsPageTree() }),

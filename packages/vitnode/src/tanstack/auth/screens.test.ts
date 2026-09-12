@@ -115,7 +115,7 @@ describe("ssoLinkFormResult", () => {
 
 describe("anonymousSession", () => {
   const session = {
-    ai: { models: ["anthropic:claude-sonnet-5"] },
+    installation: { timezone: "Europe/Warsaw" },
     user: { email: "test@test.com", id: 1, name: "Test" },
   } as unknown as SessionApi;
 
@@ -124,7 +124,10 @@ describe("anonymousSession", () => {
   });
 
   it("keeps everything that describes the installation rather than the visitor", () => {
-    expect(anonymousSession(session).ai).toEqual(session.ai);
+    expect(anonymousSession(session)).toEqual({
+      installation: { timezone: "Europe/Warsaw" },
+      user: null,
+    });
   });
 
   it("does not mutate the session it was given", () => {

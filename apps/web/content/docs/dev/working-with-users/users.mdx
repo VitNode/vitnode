@@ -36,12 +36,11 @@ handler: async (c) => {
 Consume the user session via TanStack Query:
 
 ```tsx title="src/components/user-greeting.tsx"
-import { useQuery } from '@tanstack/react-query'
-import { sessionQueryOptions } from '@vitnode/core/tanstack/auth'
+import { useSessionQuery } from '@vitnode/core/tanstack/auth'
 
 export const UserGreeting = () => {
   // [!code ++:2]
-  const { data } = useQuery(sessionQueryOptions())
+  const { data } = useSessionQuery()
   const user = data?.user
 
   if (!user) return <span>Welcome, guest!</span>
@@ -49,6 +48,42 @@ export const UserGreeting = () => {
   return <span>Welcome back, {user.name}!</span>
 }
 ```
+
+`useSessionQuery()` wraps `useQuery(sessionQueryOptions())`, so it never
+suspends: `data` is `undefined` on the very first render of a page that did not
+warm it in a loader. Routes that want the session ready before paint call
+`ensureAuthState(queryClient)` in their loader.
+
+---
+
+### 3. In the AdminCP
+
+The AdminCP session is a **second cookie**, and a second query. `isAdmin` on the
+public session means "may be offered the AdminCP", not "is inside it" - so an
+admin screen never answers an admin question with the public session.
+
+```tsx title="plugins/blog/src/admin/current-admin.tsx"
+import { useAdminSessionQuery } from '@vitnode/core/tanstack/admin'
+
+export const CurrentAdmin = () => {
+  // [!code ++:1]
+  const { data } = useAdminSessionQuery()
+
+  if (data.status !== 'granted') return null
+
+  return <span>Signed in as {data.session.user.name}</span>
+}
+```
+
+`useAdminSessionQuery()` wraps `useSuspenseQuery(adminSessionQueryOptions())`,
+so `data` is always there and the screen suspends instead of rendering an empty
+state. The AdminCP layout warms it, which is why every screen below it reads a
+cache hit. Two shorthands sit on top of it:
+
+| Hook               | Returns                                                          |
+| :----------------- | :--------------------------------------------------------------- |
+| `useAdminAccess()` | The whole access state - `granted`, or the reason it was refused |
+| `useAdminUser()`   | The signed-in administrator, or `null` when access is refused    |
 
 ---
 

@@ -1,14 +1,12 @@
 import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 
-import type { SiteLinkComponent } from '#/site/home/site-link'
-
-import { ScreenFrame } from '#/site/marketing/screen-frame'
-import { SCREENS } from '#/site/marketing/screens'
+import { ScreenFrame } from '@/site/marketing/screen-frame'
+import { SCREENS } from '@/site/marketing/screens'
 import {
   MarketingSection,
   SectionHeading,
   TextLink,
-} from '#/site/marketing/shared'
+} from '@/site/marketing/shared'
 
 import { SLIDES } from './showcase-slides'
 
@@ -76,11 +74,7 @@ const ShowcaseStage = () => {
   )
 }
 
-export const ShowcaseSection = ({
-  LinkComponent,
-}: {
-  LinkComponent: SiteLinkComponent
-}) => (
+export const ShowcaseSection = () => (
   <MarketingSection id="admincp" labelledBy="showcase-title">
     <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
       <SectionHeading
@@ -95,8 +89,8 @@ export const ShowcaseSection = ({
 
       <TextLink
         className="shrink-0"
-        href="/docs/dev/plugins/admin"
-        LinkComponent={LinkComponent}
+        params={{ _splat: 'dev/plugins/admin' }}
+        to="/docs/$"
       >
         Explore the AdminCP docs
       </TextLink>

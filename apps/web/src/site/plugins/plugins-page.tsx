@@ -13,13 +13,12 @@ import {
   ShieldCheck,
 } from 'lucide-react'
 
-import type { SiteLinkComponent } from '#/site/home/site-link'
-import type { ScreenKey } from '#/site/marketing/screens'
+import type { ScreenKey } from '@/site/marketing/screens'
 
-import { InfiniteSlider } from '#/site/home/infinite-slider'
-import { PLUGIN_IDEAS } from '#/site/home/sections/plugins'
-import { ScreenFrame } from '#/site/marketing/screen-frame'
-import { SCREENS } from '#/site/marketing/screens'
+import { InfiniteSlider } from '@/site/home/infinite-slider'
+import { PLUGIN_IDEAS } from '@/site/home/sections/plugins'
+import { ScreenFrame } from '@/site/marketing/screen-frame'
+import { SCREENS } from '@/site/marketing/screens'
 import {
   CanaryNotice,
   Eyebrow,
@@ -27,7 +26,7 @@ import {
   MarketingSection,
   SectionHeading,
   TextLink,
-} from '#/site/marketing/shared'
+} from '@/site/marketing/shared'
 
 interface OfficialPlugin {
   description: string
@@ -122,11 +121,7 @@ const STATUS_LABEL: Record<OfficialPlugin['status'], string> = {
   reference: 'Reference plugin',
 }
 
-export const PluginsPage = ({
-  LinkComponent,
-}: {
-  LinkComponent: SiteLinkComponent
-}) => (
+export const PluginsPage = () => (
   <div className="flex flex-col">
     <section
       aria-labelledby="plugins-title"
@@ -151,10 +146,7 @@ export const PluginsPage = ({
           blog you publish today, is an installable package that keeps its
           pages, API, data, translations and admin screens together.
         </p>
-        <MarketingActions
-          className="justify-center"
-          LinkComponent={LinkComponent}
-        />
+        <MarketingActions className="justify-center" />
       </div>
     </section>
 
@@ -223,17 +215,14 @@ export const PluginsPage = ({
                   ))}
                 </ul>
                 {status === 'available' ? (
-                  <TextLink
-                    href="/docs/guides/blog"
-                    LinkComponent={LinkComponent}
-                  >
+                  <TextLink params={{ _splat: 'guides/blog' }} to="/docs/$">
                     Set up the blog plugin
                   </TextLink>
                 ) : null}
                 {status === 'reference' ? (
                   <TextLink
-                    href="/docs/guides/first-plugin"
-                    LinkComponent={LinkComponent}
+                    params={{ _splat: 'guides/first-plugin' }}
+                    to="/docs/$"
                   >
                     Build your first plugin
                   </TextLink>
@@ -313,15 +302,12 @@ export const PluginsPage = ({
           config. The tutorial takes you from there to a working page in ten
           minutes.
         </p>
-        <MarketingActions
-          className="justify-center"
-          LinkComponent={LinkComponent}
-        />
-        <TextLink href="/docs/dev/plugins/create" LinkComponent={LinkComponent}>
+        <MarketingActions className="justify-center" />
+        <TextLink params={{ _splat: 'dev/plugins/create' }} to="/docs/$">
           Read the plugin guide
         </TextLink>
       </div>
-      <CanaryNotice LinkComponent={LinkComponent} />
+      <CanaryNotice />
     </MarketingSection>
   </div>
 )

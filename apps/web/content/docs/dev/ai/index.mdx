@@ -4,7 +4,7 @@ description: Configure Vercel AI SDK providers and models in VitNode API config 
 icon: Sparkles
 ---
 
-import { Tab, Tabs } from "fumadocs-ui/components/tabs"
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs'
 
 VitNode integrates the [Vercel AI SDK](https://ai-sdk.dev). Register models in `vitnode.api.config.ts` once, then resolve them inside any API handler via `c.get("ai")`.
 
@@ -15,17 +15,17 @@ VitNode integrates the [Vercel AI SDK](https://ai-sdk.dev). Register models in `
 You can configure models via string identifiers (using AI Gateway) or direct provider instances:
 
 ```ts title="apps/api/src/vitnode.api.config.ts"
-import { openai } from "@ai-sdk/openai"
-import { buildApiConfig } from "@vitnode/core/vitnode.config"
+import { openai } from '@ai-sdk/openai'
+import { buildApiConfig } from '@vitnode/core/vitnode.config'
 
 export const vitNodeApiConfig = buildApiConfig({
   // [!code ++:10]
   ai: {
     models: [
       {
-        id: "default",
-        name: "GPT-4o Mini",
-        model: openai("gpt-4o-mini"),
+        id: 'default',
+        name: 'GPT-4o Mini',
+        model: openai('gpt-4o-mini'),
       },
     ],
   },
@@ -39,13 +39,13 @@ Set `OPENAI_API_KEY` in your `.env` file.
 ### 2. Use in Route Handlers
 
 ```ts
-import { generateText } from "ai"
+import { generateText } from 'ai'
 
 handler: async (c) => {
   // [!code ++:4]
   const { text } = await generateText({
-    model: c.get("ai").model(), // Resolves the configured "default" model
-    prompt: "Write a summary of this discussion.",
+    model: c.get('ai').model(), // Resolves the configured "default" model
+    prompt: 'Write a summary of this discussion.',
   })
 
   return c.json({ text })
@@ -73,9 +73,43 @@ ai: {
 Resolve specific models by ID:
 
 ```ts
-const smartModel = c.get("ai").model("reasoning")
-const embedModel = c.get("ai").embeddingModel()
+const smartModel = c.get('ai').model('reasoning')
+const embedModel = c.get('ai').embeddingModel()
 ```
+
+---
+
+## Reading the Model List in the Browser
+
+Provider instances and API keys stay on the server. What the browser gets is the
+public half of each entry - `id`, `name`, and the provider's model id string -
+published on the middleware route and read with
+[`useMiddlewareConfigQuery()`](/docs/dev/data-loading#deployment-configuration):
+
+```tsx title="plugins/writer/src/pages/model-picker.tsx"
+import { useMiddlewareConfigQuery } from '@vitnode/core/tanstack/auth'
+
+export const ModelPicker = () => {
+  // [!code ++:1]
+  const { data } = useMiddlewareConfigQuery()
+
+  if (data.ai.models.length === 0) return <p>AI is not configured.</p>
+
+  return (
+    <select className="w-full">
+      {data.ai.models.map((model) => (
+        <option key={model.id} value={model.id}>
+          {model.name}
+        </option>
+      ))}
+    </select>
+  )
+}
+```
+
+The first entry is the default - the one `c.get("ai").model()` resolves when a
+handler is given no id. The list is empty when no `ai.models` are configured, so
+a picker can hide itself rather than offering nothing.
 
 ## Learn More
 

@@ -1,11 +1,10 @@
+import { Link } from '@tanstack/react-router'
 import { buttonVariants } from '@vitnode/core/components/ui/button'
 import { cn } from 'cn'
 import { Check, Coffee, HeartHandshake } from 'lucide-react'
 
-import type { SiteLinkComponent } from '#/site/home/site-link'
-
-import { REPOSITORY_URL, SPONSOR_URL } from '#/site/marketing/links'
-import { Eyebrow, GitHubIcon, MarketingSection } from '#/site/marketing/shared'
+import { REPOSITORY_URL, SPONSOR_URL } from '@/site/marketing/links'
+import { Eyebrow, GitHubIcon, MarketingSection } from '@/site/marketing/shared'
 
 const INCLUDED = [
   'The whole framework, every feature, no tiers',
@@ -14,11 +13,7 @@ const INCLUDED = [
   'Self-host or bring your own cloud',
 ]
 
-export const PricingSection = ({
-  LinkComponent,
-}: {
-  LinkComponent: SiteLinkComponent
-}) => (
+export const PricingSection = () => (
   <MarketingSection id="pricing" labelledBy="pricing-title">
     <div className="bg-card relative flex flex-col items-center gap-6 overflow-hidden rounded-3xl border px-6 py-16 text-center sm:py-20">
       <div aria-hidden className="mk-dots absolute inset-0 -z-10 opacity-60" />
@@ -73,16 +68,17 @@ export const PricingSection = ({
           <Coffee aria-hidden />
           Donate
         </a>
-        <LinkComponent
+        <Link
           className={cn(
             buttonVariants({ size: 'lg', variant: 'outline' }),
             'px-5',
           )}
-          href="/docs/dev/contribution"
+          params={{ _splat: 'dev/contribution' }}
+          to="/docs/$"
         >
           <HeartHandshake aria-hidden />
           Contribute
-        </LinkComponent>
+        </Link>
       </div>
 
       <ul className="grid gap-x-8 gap-y-2 text-left text-sm sm:grid-cols-2">

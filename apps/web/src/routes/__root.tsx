@@ -18,9 +18,9 @@ import {
 } from '@vitnode/core/tanstack/i18n'
 import { VitNodeRootProviders } from '@vitnode/core/tanstack/layout'
 
-import type { Locale } from '#/lib/i18n/shared'
+import type { Locale } from '@/lib/i18n/shared'
 
-import { vitNodeConfig } from '#/vitnode.config'
+import { vitNodeConfig } from '@/vitnode.config'
 
 import appCss from '../styles.css?url'
 

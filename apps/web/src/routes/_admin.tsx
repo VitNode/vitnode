@@ -8,8 +8,8 @@ import {
   preloadAdminAccess,
 } from '@vitnode/core/tanstack/admin'
 
-import { AdminShell } from '#/components/admin-shell'
-import { pageHead } from '#/lib/page-head'
+import { AdminShell } from '@/components/admin-shell'
+import { pageHead } from '@/lib/page-head'
 
 export const Route = createFileRoute('/_admin')({
   beforeLoad: async ({ context, location, preload }) => {
@@ -29,7 +29,7 @@ export const Route = createFileRoute('/_admin')({
   },
 
   loader: async ({ context }) => {
-    const { adminNav } = await import('#/lib/admin-nav')
+    const { adminNav } = await import('@/lib/admin-nav')
 
     await loadAdminMessages({ ...context, namespaces: adminNav.namespaces })
   },

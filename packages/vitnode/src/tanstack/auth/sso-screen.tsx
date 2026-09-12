@@ -1,4 +1,3 @@
-import { useSuspenseQuery } from "@tanstack/react-query";
 import { useRouter } from "@tanstack/react-router";
 
 import type { AuthLinkComponent } from "@/views/auth/auth-link";
@@ -9,10 +8,7 @@ import { useSSOCallback } from "@/views/auth/sso/callback/use-sso-callback";
 import { RouteMessages } from "../i18n/route-messages";
 import { useCompleteSsoAction, useLinkSsoAction } from "./actions";
 import { parseSsoCallback } from "./contract";
-import {
-  middlewareConfigQueryOptions,
-  ssoProvidersOf,
-} from "./middleware-config";
+import { ssoProvidersOf, useMiddlewareConfigQuery } from "./middleware-config";
 import { parseInternalDestination, postAuthDestination } from "./redirects";
 import { SSO_CALLBACK_NAMESPACES } from "./sso-route";
 
@@ -31,7 +27,7 @@ export const SsoCallbackRouteContent = ({
   search,
 }: SsoCallbackRouteProps) => {
   const router = useRouter();
-  const { data: config } = useSuspenseQuery(middlewareConfigQueryOptions());
+  const { data: config } = useMiddlewareConfigQuery();
 
   const parsed = parseSsoCallback({ providerId, query: search });
   const completeSso = useCompleteSsoAction(parsed.ok ? parsed.params : null);

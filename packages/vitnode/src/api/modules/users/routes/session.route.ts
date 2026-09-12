@@ -15,17 +15,6 @@ export const sessionRoute = buildRoute({
         content: {
           "application/json": {
             schema: z.object({
-              // Configured AI models (empty when AI is not set up). The first
-              // entry is the default. `model` is the provider model id string.
-              ai: z.object({
-                models: z.array(
-                  z.object({
-                    id: z.string(),
-                    model: z.string(),
-                    name: z.string(),
-                  }),
-                ),
-              }),
               user: z
                 .object({
                   id: z.number(),
@@ -56,7 +45,6 @@ export const sessionRoute = buildRoute({
     const admin = new SessionAdminModel(c);
 
     return c.json({
-      ai: { models: c.get("ai").models() },
       user: user
         ? {
             ...user,

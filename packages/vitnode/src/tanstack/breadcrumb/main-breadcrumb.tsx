@@ -2,7 +2,6 @@ import { useMatches, useRouter } from "@tanstack/react-router";
 
 import { BreadcrumbTrailContent } from "@/views/breadcrumb/breadcrumb-trail-content";
 
-import { RouterLink } from "../layout/router-link";
 import { useRouteNavigationPending } from "../pending/navigation-pending";
 import { BreadcrumbPendingSkeleton } from "../pending/shapes";
 import { breadcrumbTrail } from "./model";
@@ -20,7 +19,7 @@ export const MainBreadcrumb = () => {
       {isNavigating ? (
         <BreadcrumbPendingSkeleton />
       ) : (
-        <BreadcrumbTrailContent entries={entries} LinkComponent={RouterLink} />
+        <BreadcrumbTrailContent entries={entries} />
       )}
     </div>
   );

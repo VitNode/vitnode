@@ -126,9 +126,9 @@ the shared config cannot carry. They go here instead:
 import '@tanstack/react-start/server-only'
 import { buildServerConfig } from '@vitnode/core/vitnode.config'
 
-import { appMessages } from '#/locales/app'
-import { packageMessages } from '#/locales/packages'
-import { vitNodeConfig } from '#/vitnode.config'
+import { appMessages } from '@/locales/app'
+import { packageMessages } from '@/locales/packages'
+import { vitNodeConfig } from '@/vitnode.config'
 
 export const vitNodeServerConfig = buildServerConfig({
   config: vitNodeConfig,
@@ -165,7 +165,7 @@ TanStack Start expects a `src/start.ts`. In a VitNode app it is one call:
 ```ts title="apps/web/src/start.ts"
 import { createVitNodeStart } from '@vitnode/core/tanstack/start'
 
-import { vitNodeConfig } from '#/vitnode.config'
+import { vitNodeConfig } from '@/vitnode.config'
 
 export const startInstance = createVitNodeStart({ config: vitNodeConfig })
 ```
@@ -215,7 +215,7 @@ maintenance-mode gate:
 import { createMiddleware } from '@tanstack/react-start'
 import { createVitNodeStart } from '@vitnode/core/tanstack/start'
 
-import { vitNodeConfig } from '#/vitnode.config'
+import { vitNodeConfig } from '@/vitnode.config'
 
 const requestId = createMiddleware().server(async ({ next }) => {
   const result = await next()

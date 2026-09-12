@@ -8,6 +8,7 @@ import { getAvailablePackageManagers } from "./helpers/get-available-package-man
 export interface CreateCliReturn {
   docker?: boolean;
   eslint: boolean;
+  git: boolean;
   install: boolean;
   mode: "apiMonorepo" | "onlyApi" | "singleApp";
   monorepo?: boolean;
@@ -21,6 +22,7 @@ export const createQuestionsCli = async (
   const options: CreateCliReturn = {
     packageManager: optionsFromProgram.packageManager,
     eslint: optionsFromProgram.eslint,
+    git: !optionsFromProgram.skipGit,
     install: !optionsFromProgram.skipInstall,
     docker: optionsFromProgram.docker,
     mode: optionsFromProgram.mode,
@@ -96,6 +98,13 @@ export const createQuestionsCli = async (
   if (optionsFromProgram.docker === undefined) {
     options.docker = await confirm({
       message: `Would you like to use ${color.blue("Docker Container")}?`,
+    });
+  }
+
+  if (optionsFromProgram.skipGit === undefined) {
+    options.git = await confirm({
+      message: `Would you like to initialize a ${color.blue("Git repository")}?`,
+      default: true,
     });
   }
 

@@ -5,8 +5,7 @@ import {
   ThemeLayoutContent,
 } from "@vitnode/core/tanstack/layout";
 
-import { MainHeader } from "#/components/main-header";
-
+import { MainHeader } from "@/components/main-header";
 
 export const Route = createFileRoute("/_main")({
   loader: async ({ context }) => await loadMainShell(context),

@@ -1,4 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { useTranslations } from "use-intl";
 
@@ -8,7 +7,7 @@ import { UserHeaderContent } from "@/views/layouts/theme/header/user/user-header
 import { userHeaderState } from "@/views/layouts/theme/header/user/user-header-model";
 
 import { useSignOutAction } from "../auth/actions";
-import { sessionQueryOptions } from "../auth/session-query";
+import { useSessionQuery } from "../auth/session-query";
 import { RouterLink } from "./router-link";
 
 export const UserHeader = ({
@@ -17,7 +16,7 @@ export const UserHeader = ({
   /** How a menu path becomes a navigation. See {@link RouterLink}. */
   LinkComponent?: UserHeaderLinkComponent;
 }) => {
-  const { data, isError } = useQuery(sessionQueryOptions());
+  const { data, isError } = useSessionQuery();
   const signOut = useSignOutAction();
   const tErrors = useTranslations("core.global.errors");
 

@@ -16,15 +16,13 @@ import {
   Trophy,
 } from 'lucide-react'
 
-import type { SiteLinkComponent } from '#/site/home/site-link'
-
-import { PluginDiagram } from '#/site/home/illustrations/plugin-diagram'
-import { InfiniteSlider } from '#/site/home/infinite-slider'
+import { PluginDiagram } from '@/site/home/illustrations/plugin-diagram'
+import { InfiniteSlider } from '@/site/home/infinite-slider'
 import {
   MarketingSection,
   SectionHeading,
   TextLink,
-} from '#/site/marketing/shared'
+} from '@/site/marketing/shared'
 
 const BENEFITS = [
   'A feature keeps its pages, API, data, translations and admin screens together.',
@@ -47,11 +45,7 @@ export const PLUGIN_IDEAS: { Icon: LucideIcon; label: string }[] = [
   { Icon: Megaphone, label: 'Announcements' },
 ]
 
-export const PluginsSection = ({
-  LinkComponent,
-}: {
-  LinkComponent: SiteLinkComponent
-}) => (
+export const PluginsSection = () => (
   <div className="bg-muted/40 border-y">
     <MarketingSection id="plugins" labelledBy="plugins-title">
       <div className="grid items-center gap-12 lg:grid-cols-2">
@@ -79,10 +73,7 @@ export const PluginsSection = ({
             ))}
           </ul>
 
-          <TextLink
-            href="/docs/dev/plugins/create"
-            LinkComponent={LinkComponent}
-          >
+          <TextLink params={{ _splat: 'dev/plugins/create' }} to="/docs/$">
             Meet your first plugin
           </TextLink>
         </div>
