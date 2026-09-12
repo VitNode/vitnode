@@ -1,26 +1,16 @@
 import { CalendarDaysIcon, SparklesIcon } from "lucide-react";
 import { useFormatter, useTranslations } from "use-intl";
 
-import type { UserImageKind } from "@/lib/user-images";
-
 import { Avatar } from "@/components/avatar";
 import { RoleFormatContent } from "@/components/role-format-content";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { UserCoverImage } from "@/components/user-cover-image";
 
 import type { UserImageEditor } from "./images/types";
-import type { UserImageDialogLabels } from "./images/user-image-dialog";
 import type { ProfileRole, UserProfile } from "./profile-query";
 
-import { UserImageDialog } from "./images/user-image-dialog";
-
-const coverStyle = (avatarColor: string): React.CSSProperties => {
-  const color = `#${avatarColor}`;
-
-  return {
-    backgroundImage: `linear-gradient(135deg, ${color} 0%, color-mix(in oklab, ${color} 55%, transparent) 60%, color-mix(in oklab, ${color} 20%, transparent) 100%)`,
-  };
-};
+import { userCoverStyle } from "./images/cover-style";
+import { SelfUserImageDialog } from "./images/self-image-dialog";
 
 const SecondaryRoles = ({ roles }: { roles: ProfileRole[] }) => {
   const t = useTranslations("core.profile");
@@ -40,69 +30,6 @@ const SecondaryRoles = ({ roles }: { roles: ProfileRole[] }) => {
         </ul>
       </dd>
     </div>
-  );
-};
-
-const useProfileImageLabels = ({
-  canUpload,
-  hasImage,
-  kind,
-}: {
-  canUpload: boolean;
-  hasImage: boolean;
-  kind: UserImageKind;
-}): UserImageDialogLabels => {
-  const t = useTranslations("core.profile.images");
-  const tKind = useTranslations(`core.profile.images.${kind}`);
-  const tGlobal = useTranslations("core.global");
-
-  return {
-    cancel: tGlobal("cancel"),
-    chooseAction: t("chooseAction"),
-    confirmRemove: t("confirmRemove"),
-    confirmUpload: t("confirmUpload"),
-    desc: hasImage ? tKind("dialogDesc") : tKind("dialogDescEmpty"),
-    remove: tKind("remove"),
-    removeDesc: tKind("removeDesc"),
-    title: tKind("edit"),
-    upload: hasImage ? tKind("change") : tKind("upload"),
-    ...(canUpload ? {} : { uploadDesc: tKind("notAllowed") }),
-  };
-};
-
-const ProfileImageDialog = ({
-  editor,
-  hasImage,
-  kind,
-  size,
-}: {
-  editor: UserImageEditor;
-  hasImage: boolean;
-  kind: UserImageKind;
-  size?: "icon" | "icon-sm";
-}) => {
-  const limit = editor.policy[kind];
-  const labels = useProfileImageLabels({
-    canUpload: limit.allowed,
-    hasImage,
-    kind,
-  });
-
-  return (
-    <UserImageDialog
-      canUpload={limit.allowed}
-      hasImage={hasImage}
-      kind={kind}
-      labels={labels}
-      maxBytes={limit.maxBytes}
-      onRemove={async () => {
-        await editor.onRemove(kind);
-      }}
-      onUpload={async file => {
-        await editor.onUpload(kind, file);
-      }}
-      size={size}
-    />
   );
 };
 
@@ -134,13 +61,13 @@ export const ProfileContent = ({
         <div
           className="bg-muted relative h-32 w-full sm:h-40 md:h-48"
           data-slot="profile-cover"
-          style={coverStyle(user.avatarColor)}
+          style={userCoverStyle(user.avatarColor)}
         >
           <UserCoverImage fetchPriority="high" url={user.coverUrl} />
 
           {editor ? (
             <div className="absolute inset-e-3 top-3">
-              <ProfileImageDialog
+              <SelfUserImageDialog
                 editor={editor}
                 hasImage={user.coverUrl !== null}
                 kind="cover"
@@ -160,7 +87,7 @@ export const ProfileContent = ({
               />
               {editor ? (
                 <div className="absolute inset-e-0 bottom-0">
-                  <ProfileImageDialog
+                  <SelfUserImageDialog
                     editor={editor}
                     hasImage={user.avatarUrl !== null}
                     kind="avatar"

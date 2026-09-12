@@ -22,6 +22,7 @@ export const ROLE_DEFAULT_COVER_SIZE_KB = 5120;
 
 /** The shape the roles API takes, as the form produces it. */
 export interface AdminRoleFormValues {
+  allowEditPersonalInfo: boolean;
   allowUploadAvatar: boolean;
   allowUploadCover: boolean;
   allowUploadFiles: boolean;
@@ -36,6 +37,7 @@ export interface AdminRoleFormValues {
 
 /** The row an edit re-opens with. Absent for a create. */
 export interface AdminRoleFormData {
+  allowEditPersonalInfo: boolean;
   allowUploadAvatar: boolean;
   allowUploadCover: boolean;
   allowUploadFiles: boolean;
@@ -78,6 +80,9 @@ export const AdminRoleFormContent = ({
       .default(fallback);
 
   const formSchema = z.object({
+    allowEditPersonalInfo: z
+      .boolean()
+      .default(data?.allowEditPersonalInfo ?? true),
     allowUploadAvatar: z.boolean().default(data?.allowUploadAvatar ?? true),
     allowUploadCover: z.boolean().default(data?.allowUploadCover ?? true),
     allowUploadFiles: z.boolean().default(data?.allowUploadFiles ?? false),
@@ -204,6 +209,17 @@ export const AdminRoleFormContent = ({
           hidden: values => !values.allowUploadFiles,
           id: "maxStorageForSubmit",
           tab: "content",
+        },
+        {
+          component: props => (
+            <AutoFormSwitch
+              {...props}
+              description={t("form.personal_info.allow_edit_desc")}
+              label={t("form.personal_info.allow_edit")}
+            />
+          ),
+          id: "allowEditPersonalInfo",
+          tab: "profile",
         },
         {
           component: props => (
