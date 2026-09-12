@@ -6,6 +6,7 @@ import type {
 } from "@/views/files/my-files-query";
 
 import { DEFAULT_TABLE_PAGE_SIZE } from "@/components/table/url-state";
+import { asSearchValue } from "@/lib/table-params";
 import { normalizeMyFilesParams } from "@/views/files/my-files-query";
 
 const DEFAULT_PAGE_SIZE = String(DEFAULT_TABLE_PAGE_SIZE);
@@ -22,24 +23,13 @@ export interface MyFilesRouteSearch {
 export type UncheckedMyFilesSearch =
   MyFilesRouteSearch | Record<string, unknown>;
 
-const readParam = (value: unknown): string | undefined => {
-  const one = Array.isArray(value) ? (value[0] as unknown) : value;
-
-  if (typeof one === "string") return one;
-  if (typeof one === "number")
-    return Number.isFinite(one) ? String(one) : undefined;
-  if (typeof one === "boolean") return String(one);
-
-  return undefined;
-};
-
 const rawParamsOf = (input: UncheckedMyFilesSearch): RawMyFilesParams => ({
-  cursor: readParam(input.cursor),
-  first: readParam(input.first),
-  last: readParam(input.last),
-  order: readParam(input.order),
-  orderBy: readParam(input.orderBy),
-  search: readParam(input.search),
+  cursor: asSearchValue(input.cursor),
+  first: asSearchValue(input.first),
+  last: asSearchValue(input.last),
+  order: asSearchValue(input.order),
+  orderBy: asSearchValue(input.orderBy),
+  search: asSearchValue(input.search),
 });
 
 export const myFilesRouteParams = (

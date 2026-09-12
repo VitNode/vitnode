@@ -6,6 +6,7 @@ import type {
 } from "@/views/admin/table/params";
 
 import { DEFAULT_TABLE_PAGE_SIZE } from "@/components/table/url-state";
+import { asSearchValue } from "@/lib/table-params";
 import { normalizeAdminTableParams } from "@/views/admin/table/params";
 
 const defaultPageSizeOf = (contract: { defaultPageSize?: number }): string =>
@@ -24,27 +25,16 @@ export interface AdminTableRouteSearch<TOrderBy extends string = string> {
 export type UncheckedAdminTableSearch<TOrderBy extends string = string> =
   AdminTableRouteSearch<TOrderBy> | Record<string, unknown>;
 
-const readParam = (value: unknown): string | undefined => {
-  const one = Array.isArray(value) ? (value[0] as unknown) : value;
-
-  if (typeof one === "string") return one;
-  if (typeof one === "number")
-    return Number.isFinite(one) ? String(one) : undefined;
-  if (typeof one === "boolean") return String(one);
-
-  return undefined;
-};
-
 const rawParamsOf = (
   input: UncheckedAdminTableSearch,
 ): RawAdminTableParams => ({
-  cursor: readParam(input.cursor),
-  first: readParam(input.first),
-  last: readParam(input.last),
-  order: readParam(input.order),
-  orderBy: readParam(input.orderBy),
-  search: readParam(input.search),
-  status: readParam(input.status),
+  cursor: asSearchValue(input.cursor),
+  first: asSearchValue(input.first),
+  last: asSearchValue(input.last),
+  order: asSearchValue(input.order),
+  orderBy: asSearchValue(input.orderBy),
+  search: asSearchValue(input.search),
+  status: asSearchValue(input.status),
 });
 
 export const adminTableRouteParams = <TOrderBy extends string>(

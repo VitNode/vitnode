@@ -7,6 +7,7 @@ import { DEFAULT_TABLE_PAGE_SIZE } from "@/components/table/url-state";
 import { CONFIG_PLUGIN } from "@/config";
 import { clientModule, fetcherClient } from "@/lib/fetcher-client";
 import { RECORD_STALE_TIME } from "@/lib/query-freshness";
+import { readFirstValue, readPageSize } from "@/lib/table-params";
 
 export const userFilesModuleRef = clientModule<typeof userFilesModule>(
   CONFIG_PLUGIN.pluginId,
@@ -37,32 +38,16 @@ export type RawMyFilesParams = Partial<
   Record<keyof MyFilesParams, null | string | string[] | undefined>
 >;
 
-/** The first value for a key, since only one can reach the API. */
-const readOne = (value: null | string | string[] | undefined): string => {
-  if (Array.isArray(value)) return value[0] ?? "";
-
-  return value ?? "";
-};
-
-const readPageSize = (raw: string): string | undefined => {
-  if (!/^\d+$/.test(raw)) return undefined;
-
-  const size = Number(raw);
-  if (!Number.isSafeInteger(size) || size < 1) return undefined;
-
-  return String(Math.min(size, MY_FILES_MAX_PAGE_SIZE));
-};
-
 export const normalizeMyFilesParams = (
   raw: RawMyFilesParams = {},
 ): MyFilesParams => {
   const params: MyFilesParams = {};
 
-  const cursor = readOne(raw.cursor);
+  const cursor = readFirstValue(raw.cursor);
   if (/^[A-Za-z0-9_-]{1,512}$/.test(cursor)) params.cursor = cursor;
 
-  const first = readPageSize(readOne(raw.first));
-  const last = readPageSize(readOne(raw.last));
+  const first = readPageSize(readFirstValue(raw.first), MY_FILES_MAX_PAGE_SIZE);
+  const last = readPageSize(readFirstValue(raw.last), MY_FILES_MAX_PAGE_SIZE);
 
   if (first !== undefined) {
     params.first = first;
@@ -72,13 +57,13 @@ export const normalizeMyFilesParams = (
     params.last = last;
   }
 
-  const orderBy = readOne(raw.orderBy) as MyFilesOrderBy;
+  const orderBy = readFirstValue(raw.orderBy) as MyFilesOrderBy;
   if (MY_FILES_ORDER_BY.includes(orderBy)) params.orderBy = orderBy;
 
-  const order = readOne(raw.order) as MyFilesOrder;
+  const order = readFirstValue(raw.order) as MyFilesOrder;
   if (MY_FILES_ORDER.includes(order)) params.order = order;
 
-  const search = readOne(raw.search).trim();
+  const search = readFirstValue(raw.search).trim();
   if (search) params.search = search;
 
   return params;
