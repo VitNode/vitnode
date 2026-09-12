@@ -1,11 +1,11 @@
 import { createFileRoute } from '@tanstack/react-router'
+import { pageHead } from '@vitnode/core/tanstack/metadata'
 import { Suspense } from 'react'
 
 import { DocsPageContent } from '@/docs/page-content'
 import { DocsPagePendingSkeleton } from '@/docs/pending'
 import { DOCS_STALE_TIME } from '@/docs/shared'
 import { getDocsPage } from '@/docs/transport'
-import { pageHead } from '@/lib/page-head'
 
 export const Route = createFileRoute('/_docs/docs/$')({
   loader: async ({ params }) => {

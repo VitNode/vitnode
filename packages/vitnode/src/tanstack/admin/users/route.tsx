@@ -39,12 +39,13 @@ export const loadAdminUsersRoute = async ({
   const adminUserId = adminIdentityOf(adminAccess);
 
   const [intl] = await Promise.all([
-    queryClient.ensureQueryData(
-      intlQueryOptions({ locale, namespaces: ADMIN_USERS_NAMESPACES }),
-    ),
-    queryClient.ensureQueryData({
+    queryClient.query({
+      ...intlQueryOptions({ locale, namespaces: ADMIN_USERS_NAMESPACES }),
+      staleTime: "static",
+    }),
+    queryClient.query({
       ...adminUsersQuery({ adminUserId, params }),
-      revalidateIfStale: true,
+      staleTime: "static",
     }),
   ]);
 

@@ -51,7 +51,7 @@ const fetchThrough = async (
 ): Promise<IntlMessages> =>
   await new QueryClient({
     defaultOptions: { queries: { retry: false } },
-  }).fetchQuery(options);
+  }).query(options);
 
 describe("the query key names the language", () => {
   it("carries the locale", () => {

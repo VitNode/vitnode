@@ -94,9 +94,10 @@ export const loadSettingsPanel = async (
   context: SettingsLoaderContext,
   navKey: SettingsNavKey,
 ): Promise<SettingsPanelData> => {
-  const intl = await context.queryClient.ensureQueryData(
-    settingsMessagesQueryOptions(context.locale),
-  );
+  const intl = await context.queryClient.query({
+    ...settingsMessagesQueryOptions(context.locale),
+    staleTime: "static",
+  });
 
   return {
     title: settingsPanelTitle({

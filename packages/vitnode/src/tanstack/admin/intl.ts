@@ -24,10 +24,11 @@ export const loadAdminMessages = async ({
   namespaces,
   queryClient,
 }: AdminLoaderContext): Promise<void> => {
-  await queryClient.ensureQueryData(
-    intlQueryOptions({
+  await queryClient.query({
+    ...intlQueryOptions({
       locale,
       namespaces: adminShellNamespaces(namespaces),
     }),
-  );
+    staleTime: "static",
+  });
 };

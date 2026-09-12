@@ -25,9 +25,10 @@ export const loadAdminSignInRoute = async ({
   locale,
   queryClient,
 }: AdminLoaderContext): Promise<AdminSignInRouteData> => {
-  const intl = await queryClient.ensureQueryData(
-    intlQueryOptions({ locale, namespaces: ADMIN_SIGN_IN_NAMESPACES }),
-  );
+  const intl = await queryClient.query({
+    ...intlQueryOptions({ locale, namespaces: ADMIN_SIGN_IN_NAMESPACES }),
+    staleTime: "static",
+  });
 
   return { title: translateAdminSignInTitle(locale, intl.messages) };
 };

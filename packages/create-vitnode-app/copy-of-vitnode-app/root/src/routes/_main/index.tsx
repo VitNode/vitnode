@@ -3,8 +3,13 @@ import type { LucideIcon } from "lucide-react";
 import { createFileRoute } from "@tanstack/react-router";
 import { LogoVitNode } from "@vitnode/core/components/logo-vitnode";
 import { buttonVariants } from "@vitnode/core/components/ui/button";
+import {
+  VITNODE_DOCS_URL,
+  VITNODE_WEBSITE_URL,
+} from "@vitnode/core/lib/docs-links";
 import { useSessionQuery } from "@vitnode/core/tanstack/auth";
 import { RouterLink } from "@vitnode/core/tanstack/layout";
+import { pageHead } from "@vitnode/core/tanstack/metadata";
 import { cn } from "cn";
 import {
   ArrowUpRight,
@@ -13,9 +18,6 @@ import {
   ShieldCheck,
   UserRoundPlus,
 } from "lucide-react";
-
-import { pageHead } from "@/lib/page-head";
-import { VITNODE_DOCS_URL, VITNODE_WEBSITE_URL } from "@/lib/vitnode-links";
 
 const REGISTER_HREF = "/register";
 const ADMIN_HREF = "/admin";

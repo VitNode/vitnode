@@ -86,7 +86,7 @@ import { notesQuery } from "../features/notes/notes-query"
 
 export const route = definePluginRoute({
   load: async ({ context }) =>
-    await context.queryClient.ensureQueryData(notesQuery()),
+    await context.queryClient.query({ ...notesQuery(), staleTime: "static" }),
 })
 ```
 

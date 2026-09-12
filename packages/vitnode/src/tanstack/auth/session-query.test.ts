@@ -107,24 +107,30 @@ describe("a guard reads the session again once it has been invalidated", () => {
     expect(after.user?.id).toBe(42);
   });
 
-  it("would not have, through ensureQueryData", async () => {
+  it("would not have, through a static-staleTime read", async () => {
     // The control, and the reason this suite exists. Without it every assertion
     // above would pass on the implementation that had the bug - `ensureAuthState`
-    // could go back to `ensureQueryData` and only this fails.
+    // could go back to `staleTime: "static"` and only this fails.
     const queryClient = new QueryClient();
 
-    await queryClient.ensureQueryData(sessionQueryOptions());
+    await queryClient.query({
+      ...sessionQueryOptions(),
+      staleTime: "static",
+    });
     nextSession = signedIn;
     await invalidateSession(queryClient);
 
-    const stale = await queryClient.ensureQueryData(sessionQueryOptions());
+    const stale = await queryClient.query({
+      ...sessionQueryOptions(),
+      staleTime: "static",
+    });
 
     expect(reads).toBe(1);
     expect(stale.user).toBeNull();
   });
 
   it("rejects rather than answering when the session cannot be read", async () => {
-    // `fetchQuery` propagates, where `prefetchQuery` swallows. A guard must not
+    // `query` propagates, where `prefetchSession` swallows. A guard must not
     // be handed a stale answer during an outage - `_authenticated` leaves the
     // rejection to the router's error path rather than signing anybody out.
     const queryClient = new QueryClient();

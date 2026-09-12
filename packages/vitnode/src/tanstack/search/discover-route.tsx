@@ -24,12 +24,13 @@ export const loadDiscoverRoute = async ({
   queryClient,
 }: DiscoverLoaderContext): Promise<DiscoverRouteData> => {
   const [intl] = await Promise.all([
-    queryClient.ensureQueryData(
-      intlQueryOptions({ locale, namespaces: DISCOVER_NAMESPACES }),
-    ),
-    queryClient.ensureInfiniteQueryData({
+    queryClient.query({
+      ...intlQueryOptions({ locale, namespaces: DISCOVER_NAMESPACES }),
+      staleTime: "static",
+    }),
+    queryClient.infiniteQuery({
       ...discoverFeedQueryOptions({ locale }),
-      revalidateIfStale: true,
+      staleTime: "static",
     }),
   ]);
 

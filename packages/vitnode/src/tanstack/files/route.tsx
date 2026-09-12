@@ -37,12 +37,13 @@ export const loadMyFilesRoute = async ({
   const userId = auth.user.id;
 
   const [intl] = await Promise.all([
-    queryClient.ensureQueryData(
-      intlQueryOptions({ locale, namespaces: MY_FILES_NAMESPACES }),
-    ),
-    queryClient.ensureQueryData({
+    queryClient.query({
+      ...intlQueryOptions({ locale, namespaces: MY_FILES_NAMESPACES }),
+      staleTime: "static",
+    }),
+    queryClient.query({
       ...myFilesQuery({ params, userId }),
-      revalidateIfStale: true,
+      staleTime: "static",
     }),
   ]);
 

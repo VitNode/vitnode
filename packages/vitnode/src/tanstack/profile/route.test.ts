@@ -41,11 +41,7 @@ const clientAnswering = (
 
   return {
     queryClient: {
-      ensureQueryData: async ({
-        queryKey,
-      }: {
-        queryKey: readonly unknown[];
-      }) => {
+      query: async ({ queryKey }: { queryKey: readonly unknown[] }) => {
         requested.push([...queryKey]);
 
         if (isIntlKey(queryKey)) return await Promise.resolve({ messages });

@@ -41,12 +41,13 @@ export const loadAdminQueueRoute = async ({
   requireAdminPermission(adminAccess, QUEUE_VIEW_PERMISSION);
 
   const [intl] = await Promise.all([
-    queryClient.ensureQueryData(
-      intlQueryOptions({ locale, namespaces: ADMIN_QUEUE_NAMESPACES }),
-    ),
-    queryClient.ensureQueryData({
+    queryClient.query({
+      ...intlQueryOptions({ locale, namespaces: ADMIN_QUEUE_NAMESPACES }),
+      staleTime: "static",
+    }),
+    queryClient.query({
       ...queueQuery({ params }),
-      revalidateIfStale: true,
+      staleTime: "static",
     }),
   ]);
 

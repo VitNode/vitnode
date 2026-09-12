@@ -47,16 +47,17 @@ export const loadAdminDebugRoute = async ({
   requireAdminPermission(adminAccess, DEBUG_VIEW_PERMISSION);
 
   const [intl] = await Promise.all([
-    queryClient.ensureQueryData(
-      intlQueryOptions({ locale, namespaces: ADMIN_DEBUG_NAMESPACES }),
-    ),
-    queryClient.ensureQueryData({
-      ...debugQueueQuery(),
-      revalidateIfStale: true,
+    queryClient.query({
+      ...intlQueryOptions({ locale, namespaces: ADMIN_DEBUG_NAMESPACES }),
+      staleTime: "static",
     }),
-    queryClient.ensureQueryData({
+    queryClient.query({
+      ...debugQueueQuery(),
+      staleTime: "static",
+    }),
+    queryClient.query({
       ...debugLogsQuery({ params }),
-      revalidateIfStale: true,
+      staleTime: "static",
     }),
   ]);
 

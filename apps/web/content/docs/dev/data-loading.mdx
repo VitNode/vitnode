@@ -116,8 +116,16 @@ before treating "no captcha" or "no email" as a deliberate choice.
 Route loaders warm it with the options factory rather than the hook:
 
 ```ts
-await queryClient.ensureQueryData(middlewareConfigQueryOptions())
+await queryClient.query({
+  ...middlewareConfigQueryOptions(),
+  staleTime: "static",
+})
 ```
+
+`staleTime: "static"` is what makes a loader cheap: a cached entry is handed
+back as-is, so a second visit to the route does not pay for another round trip.
+The component's own `useQuery` keeps that entry honest afterwards, refetching on
+its normal schedule.
 
 ---
 

@@ -38,9 +38,10 @@ export const settingsRoute: CoreRouteFactory = ({ pageHead, parentRoute }) => {
     loader: async ({ context }) => {
       const narrowed = routeContext<SettingsLoaderContext>(context);
 
-      await narrowed.queryClient.ensureQueryData(
-        settingsMessagesQueryOptions(narrowed.locale),
-      );
+      await narrowed.queryClient.query({
+        ...settingsMessagesQueryOptions(narrowed.locale),
+        staleTime: "static",
+      });
     },
 
     head: () => ({ meta: [{ content: "noindex, nofollow", name: "robots" }] }),
@@ -102,9 +103,9 @@ export const settingsRoute: CoreRouteFactory = ({ pageHead, parentRoute }) => {
 
       const [data] = await Promise.all([
         loadSettingsPanel(narrowed, "devices"),
-        narrowed.queryClient.ensureQueryData({
+        narrowed.queryClient.query({
           ...devicesQuery(userId),
-          revalidateIfStale: true,
+          staleTime: "static",
         }),
       ]);
 

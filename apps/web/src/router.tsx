@@ -3,11 +3,13 @@ import type { AnyRouter } from '@tanstack/react-router'
 import { createRouter as createTanStackRouter } from '@tanstack/react-router'
 import { setupRouterSsrQueryIntegration } from '@tanstack/react-router-ssr-query'
 import { createVitNodeQueryClient } from '@vitnode/core/lib/query-client'
+import { createLocaleRewrite } from '@vitnode/core/tanstack/i18n'
 import {
   Error500Page,
   ErrorActions,
   NotFound,
 } from '@vitnode/core/tanstack/layout'
+import { pageHead } from '@vitnode/core/tanstack/metadata'
 import { RoutePendingSpinner } from '@vitnode/core/tanstack/pending'
 import {
   pluginRouteSpecs,
@@ -23,8 +25,7 @@ import {
 } from '@vitnode/core/tanstack/routes'
 
 import { dehydrateDocsPage, hydrateDocsPage } from './docs/hydration'
-import { createLocaleRewrite, localeRouting } from './lib/i18n/runtime'
-import { pageHead } from './lib/page-head'
+import { localeRouting } from './lib/i18n'
 import { pluginRouteSources } from './plugin-routes.gen'
 import { Route as adminShellRoute } from './routes/_admin'
 import { Route as mainShellRoute } from './routes/_main'

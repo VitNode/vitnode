@@ -95,9 +95,10 @@ beforeEach(() => {
 
 describe("an SSR-warmed feed is the feed the browser reads back", () => {
   it("fills the cache entry the client's own definition names", async () => {
-    await queryClient.ensureInfiniteQueryData(
-      feedQueryOptions({ locale, params }),
-    );
+    await queryClient.infiniteQuery({
+      ...feedQueryOptions({ locale, params }),
+      staleTime: "static",
+    });
 
     // The route's `feedQueryOptions` and a framework-neutral component's
     // `searchFeedQueryOptions` must name one entry, or the loader warms
@@ -119,9 +120,10 @@ describe("an SSR-warmed feed is the feed the browser reads back", () => {
   });
 
   it("fetched that page over the request-aware transport", async () => {
-    await queryClient.ensureInfiniteQueryData(
-      feedQueryOptions({ locale, params }),
-    );
+    await queryClient.infiniteQuery({
+      ...feedQueryOptions({ locale, params }),
+      staleTime: "static",
+    });
 
     const [url, init] = apiFetch.mock.calls[0] ?? [];
     const headers = new Headers(init?.headers);
@@ -131,9 +133,10 @@ describe("an SSR-warmed feed is the feed the browser reads back", () => {
   });
 
   it("renders from that entry without asking again, then appends page two", async () => {
-    await queryClient.ensureInfiniteQueryData(
-      feedQueryOptions({ locale, params }),
-    );
+    await queryClient.infiniteQuery({
+      ...feedQueryOptions({ locale, params }),
+      staleTime: "static",
+    });
 
     expect(apiFetch).toHaveBeenCalledTimes(1);
 

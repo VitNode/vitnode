@@ -9,3 +9,7 @@ export const DOCS_URLS = {
   storage: "https://vitnode.com/docs/dev/storage",
   websocket: "https://vitnode.com/docs/dev/websocket",
 };
+
+export const VITNODE_WEBSITE_URL = "https://vitnode.com/";
+export const VITNODE_DOCS_URL = "https://vitnode.com/docs";
+export const VITNODE_SPONSOR_URL = "https://github.com/sponsors/VitNode";

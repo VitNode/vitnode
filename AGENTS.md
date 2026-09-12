@@ -44,7 +44,7 @@ import { Activity } from "react";
 
 ### Caching APIs
 
-- Client and SSR caching is TanStack Query. Invalidate with `queryClient.invalidateQueries` after a write; warm a route's data in its `loader` with `ensureQueryData`.
+- Client and SSR caching is TanStack Query. Invalidate with `queryClient.invalidateQueries` after a write; warm a route's data in its `loader` with `queryClient.query({ ...options, staleTime: "static" })` (`infiniteQuery` for a feed). `ensureQueryData`, `fetchQuery` and `prefetchQuery` are deprecated - `query` replaces all three.
 - Server-side domain caching is the API's own: `c.get("cache")` in a Hono route, Redis-backed when `REDIS_URL` is set and a no-op otherwise.
 - Content Engine tag builders live in `content/cache.ts` (`contentPublicListTag` and friends) - pure strings, used to expire a content type's cached reads.
 - A background mutation cannot expire a front end's cache by calling a function. `dispatchContentRevalidation` posts to the origins an install opts into via `content.revalidateOrigins`.

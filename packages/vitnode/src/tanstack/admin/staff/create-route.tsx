@@ -37,9 +37,10 @@ export const loadAdminStaffCreateRoute = async ({
 }): Promise<AdminStaffCreateRouteData> => {
   requireAdminPermission(adminAccess, adminStaffPermissions(type).create);
 
-  const intl = await queryClient.ensureQueryData(
-    intlQueryOptions({ locale, namespaces: ADMIN_STAFF_CREATE_NAMESPACES }),
-  );
+  const intl = await queryClient.query({
+    ...intlQueryOptions({ locale, namespaces: ADMIN_STAFF_CREATE_NAMESPACES }),
+    staleTime: "static",
+  });
 
   const t = createTranslator({
     locale,

@@ -23,7 +23,7 @@ export const useSessionQuery = () => useQuery(sessionQueryOptions());
 export const ensureAuthState = async (
   queryClient: QueryClient,
 ): Promise<AuthState> =>
-  authStateFromSession(await queryClient.fetchQuery(sessionQueryOptions()));
+  authStateFromSession(await queryClient.query(sessionQueryOptions()));
 
 export const setSessionData = (
   queryClient: QueryClient,
@@ -40,5 +40,5 @@ export const invalidateSession = async (
 export const prefetchSession = async (
   queryClient: QueryClient,
 ): Promise<void> => {
-  await queryClient.prefetchQuery(sessionQueryOptions());
+  await queryClient.query(sessionQueryOptions()).catch(() => undefined);
 };

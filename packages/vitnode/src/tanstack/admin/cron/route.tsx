@@ -36,12 +36,13 @@ export const loadAdminCronRoute = async ({
   requireAdminPermission(adminAccess, CRON_VIEW_PERMISSION);
 
   const [intl] = await Promise.all([
-    queryClient.ensureQueryData(
-      intlQueryOptions({ locale, namespaces: ADMIN_CRON_NAMESPACES }),
-    ),
-    queryClient.ensureQueryData({
+    queryClient.query({
+      ...intlQueryOptions({ locale, namespaces: ADMIN_CRON_NAMESPACES }),
+      staleTime: "static",
+    }),
+    queryClient.query({
       ...cronQuery({ params }),
-      revalidateIfStale: true,
+      staleTime: "static",
     }),
   ]);
 

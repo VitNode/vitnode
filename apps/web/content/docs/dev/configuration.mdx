@@ -63,7 +63,7 @@ Three very different readers depend on this file:
 from it is `'en' | 'pl'` rather than `string`, and `defaultLocale` is checked
 against the list right beside it:
 
-```ts title="apps/web/src/lib/i18n/shared.ts"
+```ts title="apps/web/src/vitnode.config.ts"
 export type Locale = (typeof vitNodeConfig.i18n.locales)[number]['code']
 ```
 

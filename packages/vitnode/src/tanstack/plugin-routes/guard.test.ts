@@ -12,7 +12,7 @@ const sessionOf = (user: null | { id: number }): SessionApi =>
 
 const contextWith = (user: null | { id: number }) => ({
   queryClient: {
-    fetchQuery: async () => Promise.resolve(sessionOf(user)),
+    query: async () => Promise.resolve(sessionOf(user)),
   } as unknown as QueryClient,
 });
 

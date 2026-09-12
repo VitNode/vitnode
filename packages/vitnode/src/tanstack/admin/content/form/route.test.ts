@@ -48,7 +48,7 @@ const editRoute: ContentAdminRouteData = {
 
 const clientRejecting = (error: Error): AdminScreenContext["queryClient"] =>
   ({
-    ensureQueryData: async () => await Promise.reject(error),
+    query: async () => await Promise.reject(error),
   }) as unknown as AdminScreenContext["queryClient"];
 
 const load = async (error: Error) =>

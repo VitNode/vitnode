@@ -154,9 +154,12 @@ const passwordResetRoute: CoreAuthRouteFactory = ({
       const availability = passwordRecoveryAvailability(
         await routeContext<{
           queryClient: {
-            ensureQueryData: (options: unknown) => Promise<never>;
+            query: (options: unknown) => Promise<never>;
           };
-        }>(context).queryClient.ensureQueryData(middlewareConfigQueryOptions()),
+        }>(context).queryClient.query({
+          ...middlewareConfigQueryOptions(),
+          staleTime: "static",
+        }),
       );
 
       // Not a 404: the route exists, the API could not say whether the flow does.

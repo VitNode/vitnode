@@ -28,12 +28,13 @@ export const loadAdminDashboardRoute = async ({
   const adminUserId = adminIdentityOf(adminAccess);
 
   await Promise.all([
-    queryClient.ensureQueryData(
-      intlQueryOptions({ locale, namespaces: ADMIN_DASHBOARD_NAMESPACES }),
-    ),
-    queryClient.ensureQueryData({
+    queryClient.query({
+      ...intlQueryOptions({ locale, namespaces: ADMIN_DASHBOARD_NAMESPACES }),
+      staleTime: "static",
+    }),
+    queryClient.query({
       ...dashboardLayoutQuery(adminUserId),
-      revalidateIfStale: true,
+      staleTime: "static",
     }),
   ]);
 

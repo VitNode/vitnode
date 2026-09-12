@@ -1,7 +1,9 @@
 // @vitest-environment node
 import { describe, expect, it } from "vitest";
 
-import { createRouteHead, routeHead } from "./index";
+import { buildConfig } from "@/vitnode.config";
+
+import { createRouteHead, pageHead, routeHead } from "./index";
 
 const METADATA = { shortTitle: "VitNode", title: "VitNode Community" };
 
@@ -187,6 +189,32 @@ describe("createRouteHead", () => {
 
     expect(pageHead({ openGraph: { type: "article" } })).toEqual({
       meta: [{ content: "article", property: "og:type" }],
+    });
+  });
+});
+
+describe("pageHead", () => {
+  it("titles a page with the site the application registered", () => {
+    buildConfig({
+      i18n: { defaultLocale: "en", locales: [{ code: "en", name: "English" }] },
+      metadata: METADATA,
+      plugins: [],
+    });
+
+    expect(titleOf(pageHead({ title: "Welcome" }).meta)).toEqual({
+      title: "Welcome - VitNode",
+    });
+  });
+
+  it("reads the config on every call rather than binding it once", () => {
+    buildConfig({
+      i18n: { defaultLocale: "en", locales: [{ code: "en", name: "English" }] },
+      metadata: { shortTitle: "Renamed", title: "Renamed Community" },
+      plugins: [],
+    });
+
+    expect(titleOf(pageHead({ title: "Welcome" }).meta)).toEqual({
+      title: "Welcome - Renamed",
     });
   });
 });

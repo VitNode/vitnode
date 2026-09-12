@@ -21,9 +21,10 @@ export const loadPasswordResetRoute = async ({
   queryClient: QueryClient;
 }): Promise<PasswordResetRouteData> => {
   const namespaces = passwordResetNamespaces(mode);
-  const intl = await queryClient.ensureQueryData(
-    intlQueryOptions({ locale, namespaces }),
-  );
+  const intl = await queryClient.query({
+    ...intlQueryOptions({ locale, namespaces }),
+    staleTime: "static",
+  });
 
   const title = createTranslator({
     locale,

@@ -1,4 +1,5 @@
-import { pageHead } from '@/lib/page-head'
+import { pageHead } from '@vitnode/core/tanstack/metadata'
+
 import { HOME_DESCRIPTION, HOME_TITLE } from '@/site/home/metadata'
 
 import {

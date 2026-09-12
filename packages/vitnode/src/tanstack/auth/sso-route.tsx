@@ -17,9 +17,13 @@ export const loadSsoCallbackRoute = async ({
   queryClient: QueryClient;
 }): Promise<void> => {
   await Promise.all([
-    queryClient.ensureQueryData(
-      intlQueryOptions({ locale, namespaces: SSO_CALLBACK_NAMESPACES }),
-    ),
-    queryClient.ensureQueryData(middlewareConfigQueryOptions()),
+    queryClient.query({
+      ...intlQueryOptions({ locale, namespaces: SSO_CALLBACK_NAMESPACES }),
+      staleTime: "static",
+    }),
+    queryClient.query({
+      ...middlewareConfigQueryOptions(),
+      staleTime: "static",
+    }),
   ]);
 };

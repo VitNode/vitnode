@@ -26,9 +26,10 @@ const warmMessages = async (router: AnyRouter, locale: string) => {
   await Promise.all(
     loadedIntlNamespaces(queryClient, current).map(async namespaces => {
       try {
-        await queryClient.ensureQueryData(
-          intlQueryOptions({ locale, namespaces }),
-        );
+        await queryClient.query({
+          ...intlQueryOptions({ locale, namespaces }),
+          staleTime: "static",
+        });
       } catch {
         /* empty */
       }
