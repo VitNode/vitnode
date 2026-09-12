@@ -1,4 +1,4 @@
-import type { readAdminSessionOnApi } from "./server";
+import type { readAdminSessionFromApi } from "./default-transport";
 import type {
   AdminAccess,
   AdminSessionGranted,
@@ -6,7 +6,7 @@ import type {
 } from "./state";
 
 export type AdminSessionApi = Extract<
-  Awaited<ReturnType<typeof readAdminSessionOnApi>>,
+  Awaited<ReturnType<typeof readAdminSessionFromApi>>,
   AdminSessionGranted<unknown>
 >["session"];
 

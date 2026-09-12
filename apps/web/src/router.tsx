@@ -15,9 +15,6 @@ import {
   pluginRouteSpecs,
   withPluginRoutes,
 } from '@vitnode/core/tanstack/plugin-routes'
-
-import './lib/auth'
-import './lib/admin-auth'
 import {
   withCoreAdminRoutes,
   withCoreMainRoutes,

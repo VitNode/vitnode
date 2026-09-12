@@ -1,7 +1,8 @@
-import "@tanstack/react-start/server-only";
+import type { usersModule } from "@/api/modules/users/users.module";
 
-import { usersModule } from "@/api/modules/users/users.module";
-import { fetcher } from "@/tanstack/fetcher/server";
+import { CONFIG_PLUGIN } from "@/config";
+import { clientModule } from "@/lib/fetcher-client";
+import { fetcher } from "@/tanstack/fetcher";
 
 import type {
   ChangePasswordInput,
@@ -36,9 +37,11 @@ import {
   ssoStartResultFromStatus,
 } from "./contract";
 
-export const readSessionOnApi = async () => {
+const users = clientModule<typeof usersModule>(CONFIG_PLUGIN.pluginId);
+
+export const readSessionFromApi = async () => {
   try {
-    const response = await fetcher(usersModule, {
+    const response = await fetcher(users, {
       method: "get",
       module: "users",
       path: "/session",
@@ -56,10 +59,9 @@ export const readSessionOnApi = async () => {
   }
 };
 
-export const signInOnApi = async (data: SignInInput): Promise<SignInResult> => {
+const signInFromApi = async (data: SignInInput): Promise<SignInResult> => {
   const response = await callUsersApi(async () =>
-    fetcher(usersModule, {
-      allowSaveCookies: true,
+    fetcher(users, {
       args: { body: data },
       method: "post",
       module: "users",
@@ -72,12 +74,9 @@ export const signInOnApi = async (data: SignInInput): Promise<SignInResult> => {
   return signInResultFromStatus(response.status);
 };
 
-export const signOutOnApi = async (
-  data: SignOutInput,
-): Promise<SignOutResult> => {
+const signOutFromApi = async (data: SignOutInput): Promise<SignOutResult> => {
   const response = await callUsersApi(async () =>
-    fetcher(usersModule, {
-      allowSaveCookies: true,
+    fetcher(users, {
       args: { body: { isAdmin: data.isAdmin ?? false } },
       method: "delete",
       module: "users",
@@ -90,12 +89,11 @@ export const signOutOnApi = async (
   return signOutResultFromStatus(response.status);
 };
 
-export const startSsoOnApi = async (
+const startSsoFromApi = async (
   data: SsoStartInput,
 ): Promise<SsoStartResult> => {
   const response = await callUsersApi(async () =>
-    fetcher(usersModule, {
-      allowSaveCookies: true,
+    fetcher(users, {
       args: { params: { providerId: data.providerId } },
       method: "post",
       module: "users/sso",
@@ -114,12 +112,11 @@ export const startSsoOnApi = async (
   return ssoStartResultFromStatus(response.status, url);
 };
 
-export const completeSsoOnApi = async (
+const completeSsoFromApi = async (
   data: SsoCallbackInput,
 ): Promise<CompleteSsoResult> => {
   const response = await callUsersApi(async () =>
-    fetcher(usersModule, {
-      allowSaveCookies: true,
+    fetcher(users, {
       args: {
         params: { providerId: data.providerId },
         query: { code: data.code, state: data.state },
@@ -139,12 +136,9 @@ export const completeSsoOnApi = async (
   return completeSsoResultFromStatus(response.status);
 };
 
-export const linkSsoOnApi = async (
-  data: SsoLinkInput,
-): Promise<SsoLinkResult> => {
+const linkSsoFromApi = async (data: SsoLinkInput): Promise<SsoLinkResult> => {
   const response = await callUsersApi(async () =>
-    fetcher(usersModule, {
-      allowSaveCookies: true,
+    fetcher(users, {
       args: {
         body: { password: data.password, token: data.token },
         params: { providerId: data.providerId },
@@ -160,13 +154,12 @@ export const linkSsoOnApi = async (
   return ssoLinkResultFromStatus(response.status);
 };
 
-export const signUpOnApi = async ({
+const signUpFromApi = async ({
   captchaToken,
   ...body
 }: SignUpInput): Promise<SignUpResult> => {
   const response = await callUsersApi(async () =>
-    fetcher(usersModule, {
-      allowSaveCookies: true,
+    fetcher(users, {
       captchaToken,
       args: { body },
       method: "post",
@@ -188,12 +181,12 @@ export const signUpOnApi = async ({
   return signUpResultFromStatus(response.status);
 };
 
-export const requestPasswordResetOnApi = async ({
+const requestPasswordResetFromApi = async ({
   captchaToken,
   email,
 }: PasswordResetRequestInput): Promise<PasswordResetRequestResult> => {
   const response = await callUsersApi(async () =>
-    fetcher(usersModule, {
+    fetcher(users, {
       captchaToken,
       args: { body: { email } },
       method: "post",
@@ -207,11 +200,11 @@ export const requestPasswordResetOnApi = async ({
   return passwordResetRequestResultFromStatus(response.status);
 };
 
-export const changePasswordFromResetOnApi = async (
+const changePasswordFromResetFromApi = async (
   data: ChangePasswordInput,
 ): Promise<ChangePasswordResult> => {
   const response = await callUsersApi(async () =>
-    fetcher(usersModule, {
+    fetcher(users, {
       args: { body: data },
       method: "post",
       module: "users",
@@ -222,4 +215,16 @@ export const changePasswordFromResetOnApi = async (
   if (!response) return { ok: false, reason: "server_error" };
 
   return changePasswordResultFromStatus(response.status);
+};
+
+export const defaultAuthTransport = {
+  changePasswordFromReset: changePasswordFromResetFromApi,
+  completeSso: completeSsoFromApi,
+  linkSso: linkSsoFromApi,
+  readSession: readSessionFromApi,
+  requestPasswordReset: requestPasswordResetFromApi,
+  signIn: signInFromApi,
+  signOut: signOutFromApi,
+  signUp: signUpFromApi,
+  startSso: startSsoFromApi,
 };

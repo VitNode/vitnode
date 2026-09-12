@@ -1,3 +1,3 @@
-import type { readSessionOnApi } from "./server";
+import type { readSessionFromApi } from "./default-transport";
 
-export type SessionApi = Awaited<ReturnType<typeof readSessionOnApi>>;
+export type SessionApi = Awaited<ReturnType<typeof readSessionFromApi>>;

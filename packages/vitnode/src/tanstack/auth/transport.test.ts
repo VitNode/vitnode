@@ -1,9 +1,12 @@
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it } from "vitest";
 
+import type { AuthTransport } from "./transport";
+
+import { defaultAuthTransport } from "./default-transport";
 import {
-  AUTH_TRANSPORT_MISSING,
   authTransport,
   hasAuthTransport,
+  resetAuthTransport,
   setAuthTransport,
 } from "./transport";
 
@@ -12,7 +15,7 @@ const unreachable = () => {
   throw new Error("no call is made in this suite");
 };
 
-const stub = {
+const stub: AuthTransport = {
   changePasswordFromReset: unreachable,
   completeSso: unreachable,
   linkSso: unreachable,
@@ -24,28 +27,40 @@ const stub = {
   startSso: unreachable,
 };
 
-describe("before an application registers its server functions", () => {
-  it("has no transport", () => {
+afterEach(() => {
+  resetAuthTransport();
+});
+
+describe("an application that registers nothing", () => {
+  it("still has a working transport", () => {
+    expect(authTransport()).toBe(defaultAuthTransport);
+  });
+
+  it("reports that nothing of its own is registered", () => {
     expect(hasAuthTransport()).toBe(false);
   });
 
-  it("says what is missing rather than answering undefined", () => {
-    expect(() => authTransport()).toThrow(AUTH_TRANSPORT_MISSING);
-  });
-
-  it("names the call that fixes it", () => {
-    // The message is the documentation a host actually reads, so it has to carry
-    // the function's name rather than a description of the problem.
-    expect(AUTH_TRANSPORT_MISSING).toContain("setAuthTransport()");
+  it("answers every call the contract names", () => {
+    for (const call of Object.keys(stub)) {
+      expect(authTransport()[call as keyof AuthTransport]).toBeTypeOf(
+        "function",
+      );
+    }
   });
 });
 
-describe("once it has", () => {
+describe("an application that registers its own", () => {
   it("hands back exactly what was registered", () => {
     setAuthTransport(stub);
 
     expect(hasAuthTransport()).toBe(true);
     expect(authTransport()).toBe(stub);
+  });
+
+  it("overrides the built-in default rather than merging with it", () => {
+    setAuthTransport(stub);
+
+    expect(authTransport()).not.toBe(defaultAuthTransport);
   });
 
   /**
@@ -59,5 +74,12 @@ describe("once it has", () => {
     setAuthTransport(second);
 
     expect(authTransport()).toBe(second);
+  });
+
+  it("falls back to the default once the override is dropped", () => {
+    setAuthTransport(stub);
+    resetAuthTransport();
+
+    expect(authTransport()).toBe(defaultAuthTransport);
   });
 });

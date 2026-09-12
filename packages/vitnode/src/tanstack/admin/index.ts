@@ -5,6 +5,7 @@ export {
   adminBreadcrumb,
   useAdminBreadcrumb,
 } from "./breadcrumb";
+export { defaultAdminTransport } from "./default-transport";
 export * from "./intl";
 export { AdminNavProvider, useAdminNav, useAdminSearchNavItems } from "./nav";
 export * from "./permissions";
@@ -20,6 +21,7 @@ export { requireAdminPermission } from "./screen";
 // -----------------------------------------------------------------------------
 
 export { AdminSearch } from "./search";
+export { adminUserSearchInputSchema, readAdminUserSearch } from "./user-search";
 export type {
   AdminAccessState,
   AdminSessionApi,

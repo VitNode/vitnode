@@ -1,11 +1,12 @@
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it } from "vitest";
 
 import type { AdminTransport } from "./transport";
 
+import { defaultAdminTransport } from "./default-transport";
 import {
-  ADMIN_TRANSPORT_MISSING,
   adminTransport,
   hasAdminTransport,
+  resetAdminTransport,
   setAdminTransport,
 } from "./transport";
 
@@ -19,16 +20,22 @@ const transportOf = (tag: string): TaggedTransport => ({
 const tagOf = (transport: AdminTransport): string =>
   (transport as TaggedTransport).tag;
 
-describe("first registration", () => {
-  it("has nothing registered before the host loads its module", () => {
+afterEach(() => {
+  resetAdminTransport();
+});
+
+describe("an application that registers nothing", () => {
+  it("still reads the session through the built-in default", () => {
+    expect(adminTransport()).toBe(defaultAdminTransport);
+    expect(adminTransport().readAdminSession).toBeTypeOf("function");
+  });
+
+  it("reports that nothing of its own is registered", () => {
     expect(hasAdminTransport()).toBe(false);
   });
+});
 
-  it("says what is missing and what to call, rather than answering undefined", () => {
-    expect(() => adminTransport()).toThrow(ADMIN_TRANSPORT_MISSING);
-    expect(ADMIN_TRANSPORT_MISSING).toContain("setAdminTransport()");
-  });
-
+describe("first registration", () => {
   it("hands back exactly what was registered", () => {
     const first = transportOf("first");
 
@@ -36,6 +43,12 @@ describe("first registration", () => {
 
     expect(hasAdminTransport()).toBe(true);
     expect(adminTransport()).toBe(first);
+  });
+
+  it("takes precedence over the built-in default", () => {
+    setAdminTransport(transportOf("custom"));
+
+    expect(adminTransport()).not.toBe(defaultAdminTransport);
   });
 });
 

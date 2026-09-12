@@ -16,9 +16,6 @@ import {
   withCoreRootRoutes,
 } from "@vitnode/core/tanstack/routes";
 
-import "./lib/auth";
-
-import "./lib/admin-auth";
 import { localeRouting } from "./lib/i18n";
 import { pluginRouteSources } from "./plugin-routes.gen";
 import { Route as adminShellRoute } from "./routes/_admin";

@@ -18,6 +18,8 @@ import type {
 } from "./contract";
 import type { SessionApi } from "./session-api";
 
+import { defaultAuthTransport } from "./default-transport";
+
 export interface AuthTransport {
   changePasswordFromReset: (
     input: ChangePasswordInput,
@@ -37,18 +39,17 @@ export interface AuthTransport {
 
 let registered: AuthTransport | undefined;
 
-export const AUTH_TRANSPORT_MISSING =
-  "No auth transport is registered. Call setAuthTransport() from a module the application always loads - the router entry - before any auth route runs.";
-
 export const setAuthTransport = (transport: AuthTransport): void => {
   registered = transport;
 };
 
-export const authTransport = (): AuthTransport => {
-  if (!registered) throw new Error(AUTH_TRANSPORT_MISSING);
-
-  return registered;
+/** Drops a registered override, so the built-in default answers again. */
+export const resetAuthTransport = (): void => {
+  registered = undefined;
 };
 
-/** Whether an application has registered a transport yet. For tests. */
+export const authTransport = (): AuthTransport =>
+  registered ?? defaultAuthTransport;
+
+/** Whether an application registered a transport of its own. */
 export const hasAuthTransport = (): boolean => registered !== undefined;

@@ -1,16 +1,19 @@
-import "@tanstack/react-start/server-only";
+import type { adminModule } from "@/api/modules/admin/admin.module";
 
-import { adminModule } from "@/api/modules/admin/admin.module";
-import { fetcher } from "@/tanstack/fetcher/server";
+import { CONFIG_PLUGIN } from "@/config";
+import { clientModule } from "@/lib/fetcher-client";
+import { fetcher } from "@/tanstack/fetcher";
 
 import {
   adminSessionFailureFromError,
   adminSessionFailureFromStatus,
 } from "./state";
 
-export const readAdminSessionOnApi = async () => {
+const admin = clientModule<typeof adminModule>(CONFIG_PLUGIN.pluginId);
+
+export const readAdminSessionFromApi = async () => {
   try {
-    const response = await fetcher(adminModule, {
+    const response = await fetcher(admin, {
       method: "get",
       module: "admin",
       path: "/session",
@@ -29,4 +32,6 @@ export const readAdminSessionOnApi = async () => {
   }
 };
 
-export { readAdminUserSearch as readAdminUserSearchOnApi } from "./user-search";
+export const defaultAdminTransport = {
+  readAdminSession: readAdminSessionFromApi,
+};
