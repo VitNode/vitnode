@@ -2,7 +2,7 @@ import { AdminShellContent } from "@vitnode/core/tanstack/admin";
 import { useAppNavigate } from "@vitnode/core/tanstack/auth";
 import { LanguageSwitcher } from "@vitnode/core/tanstack/layout";
 
-import { adminNav } from "@/lib/admin-nav";
+import { adminNav } from "@/admin-nav.gen";
 
 export const AdminShell = ({ children }: { children: React.ReactNode }) => {
   const navigate = useAppNavigate();

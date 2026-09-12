@@ -58,7 +58,7 @@ export const buildContentFrontendRegistry = (
 };
 
 export const CONTENT_FRONTEND_REGISTRY_MISSING =
-  "No Content Engine registry is registered. Call setContentFrontendRegistry() from a module the application loads before any /admin/content route runs - src/lib/content-registry.ts, built from src/content-registry.gen.ts.";
+  "No Content Engine registry is registered. src/content-registry.gen.ts calls setContentFrontendRegistry() when it is evaluated, so the application has to load that module before any /admin/content route runs - the router's `loadContentRegistry` import is what does it.";
 
 let registered: ContentFrontendRegistry | undefined;
 

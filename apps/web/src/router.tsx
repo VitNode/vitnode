@@ -29,7 +29,7 @@ import { Route as mainShellRoute } from './routes/_main'
 import { routeTree as fileRouteTree } from './routeTree.gen'
 
 const loadContentRegistry = async () =>
-  (await import('@/lib/content-registry')).contentRegistry
+  (await import('@/content-registry.gen')).contentRegistry
 
 const routeTree = withCoreRootRoutes(
   withCoreAdminRoutes(

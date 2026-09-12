@@ -1,4 +1,4 @@
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 
@@ -13,10 +13,23 @@ const read = (file: string): string =>
 const withoutComments = (source: string): string =>
   source.replace(/\/\*[\s\S]*?\*\//g, "").replace(/\/\/.*$/gm, "");
 
+/** Every `.ts`/`.tsx` file in the template, relative to its `src/`. */
+const sourceFiles = (directory: string, prefix = ""): string[] =>
+  readdirSync(directory, { withFileTypes: true }).flatMap(entry => {
+    const path = prefix ? `${prefix}/${entry.name}` : entry.name;
+
+    if (entry.isDirectory())
+      return sourceFiles(join(directory, entry.name), path);
+
+    return /\.tsx?$/.test(entry.name) ? [path] : [];
+  });
+
 const REMOVED = [
   ["auth", "lib/auth.ts"],
   ["the AdminCP session", "lib/admin-auth.ts"],
   ["the AdminCP user search", "lib/admin-search.ts"],
+  ["the AdminCP navigation", "lib/admin-nav.ts"],
+  ["the Content Engine registry", "lib/content-registry.ts"],
 ] as const;
 
 describe("bootstrap a generated application no longer owns", () => {
@@ -37,6 +50,48 @@ describe("bootstrap a generated application no longer owns", () => {
 
     expect(shell).not.toContain("adminUserSearchFn");
     expect(shell).not.toContain("searchUsers");
+  });
+});
+
+describe("what reads the generated projections", () => {
+  it("takes the AdminCP navigation straight from the generated file", () => {
+    const shell = withoutComments(read("components/admin-shell.tsx"));
+
+    expect(shell).toContain('from "@/admin-nav.gen"');
+    expect(shell).not.toContain("adminNavBundle");
+  });
+
+  it("loads the same generated file in the admin route", () => {
+    const route = withoutComments(read("routes/_admin.tsx"));
+
+    expect(route).toContain('await import("@/admin-nav.gen")');
+    expect(route).not.toContain("@/lib/admin-nav");
+  });
+
+  /**
+   * The registry's imports pull every plugin's AdminCP content and editor code,
+   * so a static import here would put all of it in the entry chunk. The dynamic
+   * `import()` is what keeps it out, and is the reason this is asserted rather
+   * than left to review.
+   */
+  it("keeps the content registry behind a dynamic import in the router", () => {
+    const router = withoutComments(read("router.tsx"));
+
+    expect(router).toContain('await import("./content-registry.gen")');
+    expect(router).not.toMatch(/^import .*content-registry\.gen/m);
+    expect(router).not.toContain("./lib/content-registry");
+  });
+
+  it("never re-derives what the generated files already export", () => {
+    const sources = ["router.tsx", "components/admin-shell.tsx"].map(file =>
+      withoutComments(read(file)),
+    );
+
+    for (const source of sources) {
+      expect(source).not.toContain("adminNavBundle");
+      expect(source).not.toContain("buildContentFrontendRegistry");
+      expect(source).not.toContain("setContentFrontendRegistry");
+    }
   });
 });
 
@@ -61,12 +116,15 @@ describe("the one adapter a generated application keeps", () => {
     expect(read("lib/i18n.ts").slice(0, 1200)).toMatch(/precompiled|compiler/);
   });
 
-  it("is the only createServerFn bootstrap left under lib/", () => {
-    const declaring = ["admin-nav.ts", "content-registry.ts", "i18n.ts"].filter(
-      file =>
-        withoutComments(read(join("lib", file))).includes("createServerFn"),
+  it("is the only thing left under lib/ at all", () => {
+    expect(readdirSync(join(appRoot, "lib")).sort()).toEqual(["i18n.ts"]);
+  });
+
+  it("is the only module in the app that declares a server function", () => {
+    const declaring = sourceFiles(appRoot).filter(file =>
+      withoutComments(read(file)).includes("createServerFn"),
     );
 
-    expect(declaring).toEqual(["i18n.ts"]);
+    expect(declaring).toEqual(["lib/i18n.ts"]);
   });
 });

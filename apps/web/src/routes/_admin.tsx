@@ -29,7 +29,7 @@ export const Route = createFileRoute('/_admin')({
   },
 
   loader: async ({ context }) => {
-    const { adminNav } = await import('@/lib/admin-nav')
+    const { adminNav } = await import('@/admin-nav.gen')
 
     await loadAdminMessages({ ...context, namespaces: adminNav.namespaces })
   },

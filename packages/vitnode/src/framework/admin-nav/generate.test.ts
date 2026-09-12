@@ -9,9 +9,55 @@ describe("generateAdminNavSource", () => {
     expect(source).toContain(
       "export const pluginAdminNav: AdminNavPluginSource[] = []",
     );
-    // Nothing to import, so nothing is imported: a stray alias would be an
-    // unused binding in an app's own `src/`.
-    expect(source).not.toContain("import { adminNav");
+    // Nothing to import, so no plugin alias: a stray one would be an unused
+    // binding in an app's own `src/`. The bundle's own import is not an alias.
+    expect(source).not.toContain("import { adminNav as");
+  });
+
+  /**
+   * The derived export is what an application actually consumes, so it is in
+   * every generated file - an app with no plugins still renders the AdminCP's
+   * own navigation, and still must not need a wrapper module to get it.
+   */
+  it("derives adminNav in the empty case too", () => {
+    const source = generateAdminNavSource([]);
+
+    expect(source).toContain(
+      "import { adminNavBundle } from '@vitnode/core/tanstack/admin'",
+    );
+    expect(source).toContain(
+      "export const adminNav = adminNavBundle({ plugins: pluginAdminNav })",
+    );
+  });
+
+  it("derives adminNav from the projection it just wrote", () => {
+    const source = generateAdminNavSource([
+      { pluginId: "@vitnode/example", specifier: "@vitnode/example/admin/nav" },
+      { pluginId: "@vitnode/blog", specifier: "@vitnode/blog/admin/nav" },
+    ]);
+
+    expect(source).toContain("export const pluginAdminNav = [");
+    expect(source).toContain(
+      "export const adminNav = adminNavBundle({ plugins: pluginAdminNav })",
+    );
+    // Declared before it is read, whatever the plugin list is.
+    expect(source.indexOf("export const pluginAdminNav")).toBeLessThan(
+      source.indexOf("export const adminNav ="),
+    );
+  });
+
+  /**
+   * `adminNav` is a module-level binding and every plugin's export is called
+   * `adminNav` too, so the positional aliases are what keep the derived export
+   * from colliding with an import.
+   */
+  it("never lets a plugin import shadow the derived export", () => {
+    const source = generateAdminNavSource([
+      { pluginId: "@vitnode/blog", specifier: "@vitnode/blog/admin/nav" },
+    ]);
+
+    expect(source).not.toContain("import { adminNav }");
+    expect(source).toContain("import { adminNav as adminNav0 }");
   });
 
   it("imports one module per plugin, by literal specifier", () => {

@@ -9,9 +9,44 @@ describe("generateContentRegistrySource", () => {
     expect(source).toContain(
       "export const pluginContentTypes: ContentFrontendPluginSource[] = []",
     );
-    // Nothing to import, so nothing is imported: a stray alias would be an
-    // unused binding in an app's own `src/`.
-    expect(source).not.toContain("import { adminContent");
+    // Nothing to import, so no plugin alias: a stray one would be an unused
+    // binding in an app's own `src/`.
+    expect(source).not.toContain("import { adminContent as");
+  });
+
+  /**
+   * An application with no content plugins still has to satisfy the registry
+   * contract - `/admin/content` reads it either way - so the empty file builds
+   * and registers an empty registry rather than leaving one unregistered.
+   */
+  it("builds and registers the registry in the empty case too", () => {
+    const source = generateContentRegistrySource([]);
+
+    expect(source).toContain(
+      "import { buildContentFrontendRegistry, setContentFrontendRegistry } from '@vitnode/core/content'",
+    );
+    expect(source).toContain(
+      "export const contentRegistry = buildContentFrontendRegistry(pluginContentTypes)",
+    );
+    expect(source).toContain("setContentFrontendRegistry(contentRegistry)");
+  });
+
+  it("registers the registry it derived, in order", () => {
+    const source = generateContentRegistrySource([
+      {
+        pluginId: "@vitnode/example",
+        specifier: "@vitnode/example/admin/content",
+      },
+      { pluginId: "@vitnode/blog", specifier: "@vitnode/blog/admin/content" },
+    ]);
+
+    expect(source).toContain("export const pluginContentTypes = [");
+    expect(source.indexOf("export const pluginContentTypes")).toBeLessThan(
+      source.indexOf("export const contentRegistry"),
+    );
+    expect(source.indexOf("export const contentRegistry")).toBeLessThan(
+      source.indexOf("setContentFrontendRegistry(contentRegistry)"),
+    );
   });
 
   it("imports one module per plugin, by literal specifier", () => {
@@ -46,7 +81,7 @@ describe("generateContentRegistrySource", () => {
       .split("\n")
       .filter(line => line.startsWith("import "));
 
-    expect(imports).toHaveLength(3);
+    expect(imports).toHaveLength(4);
     imports.forEach(line => {
       expect(line).toMatch(/ from '[^'`$]+'$/);
     });
