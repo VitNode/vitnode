@@ -13,6 +13,8 @@ import { core_languages_words } from "@/database/languages";
 import { core_roles } from "@/database/roles";
 import { core_users } from "@/database/users";
 
+import { withRolesAdminListFields } from "./list-mapping";
+
 const rolesAdminListSchema = z.object({
   edges: z.array(
     z.object({
@@ -183,15 +185,12 @@ export const listRolesAdminRoute = buildRoute({
 
     return c.json({
       pageInfo: data.pageInfo,
-      edges: data.edges.map(role => ({
-        ...role,
-        name: names
-          .filter(word => word.itemId === role.id)
-          .map(word => ({ name: word.value, languageCode: word.languageCode })),
-        usersCount:
-          userCounts.find(item => item.roleId === role.id)?.total ?? 0,
-        grantsAdmin: adminRoleIds.has(role.id),
-      })),
+      edges: withRolesAdminListFields({
+        adminRoleIds,
+        names,
+        roles: data.edges,
+        userCounts,
+      }),
     });
   },
 });
