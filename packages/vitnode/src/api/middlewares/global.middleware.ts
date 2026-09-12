@@ -73,12 +73,16 @@ export interface EnvVariablesVitNode {
       createdAt: Date;
       email: string;
       emailVerified: boolean;
+      firstName: null | string;
+      headline: null | string;
       id: number;
       language: string;
+      lastName: null | string;
       name: string;
       nameCode: string;
       newsletter: boolean;
       roleId: number;
+      showRealName: boolean;
     };
   };
   ai: AIModel;
@@ -151,12 +155,16 @@ export interface EnvVariablesVitNode {
     createdAt: Date;
     email: string;
     emailVerified: boolean;
+    firstName: null | string;
+    headline: null | string;
     id: number;
     language: string;
+    lastName: null | string;
     name: string;
     nameCode: string;
     newsletter: boolean;
     roleId: number;
+    showRealName: boolean;
   };
 }
 

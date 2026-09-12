@@ -571,6 +571,28 @@
           "devices": "Urządzenia",
           "security": "Bezpieczeństwo"
         },
+        "overview": {
+          "desc": "Twój awatar i dane Twojego konta.",
+          "emailNotVerified": "Niezweryfikowany",
+          "edit": "Edytuj",
+          "personalTitle": "Informacje osobiste",
+          "personalDialogDesc": "Opowiedz społeczności, kim jesteś. Każde pole jest opcjonalne.",
+          "nickname": "Pseudonim",
+          "publicName": "Nazwa publiczna",
+          "publicNameNickname": "Twój pseudonim",
+          "publicNameReal": "Twoje imię i nazwisko",
+          "showRealName": "Pokazuj moje prawdziwe imię",
+          "showRealNameDesc": "Twój profil pokazuje imię i nazwisko zamiast pseudonimu. Do czasu ich ustawienia używany jest pseudonim.",
+          "firstName": "Imię",
+          "lastName": "Nazwisko",
+          "email": "Adres e-mail",
+          "secondaryRoles": "Role dodatkowe",
+          "headline": "Nagłówek",
+          "headlineDesc": "Jedna linijka o Tobie, do {max} znaków.",
+          "save": "Zapisz zmiany",
+          "saved": "Informacje osobiste zaktualizowane.",
+          "savedDesc": "Twój profil od razu pokazuje nowe dane."
+        },
         "devices": {
           "title": "Urządzenia",
           "desc": "Zarządzaj urządzeniami, na których jesteś zalogowany.",
@@ -893,6 +915,10 @@
           "in_unit": "w kB",
           "or": "lub",
           "unlimited": "Bez limitu"
+        },
+        "personal_info": {
+          "allow_edit": "Zezwalaj na edycję informacji osobistych",
+          "allow_edit_desc": "Członkowie tej roli mogą ustawić imię, nazwisko i nagłówek oraz wybrać, którą nazwę pokazuje ich profil."
         },
         "images": {
           "in_unit": "kB",
