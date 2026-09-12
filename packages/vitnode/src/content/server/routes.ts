@@ -67,6 +67,7 @@ import { resolveContentPreviewTarget } from "./preview-target";
 import { createContentPreviewToken } from "./preview-token";
 import { publicationMethods } from "./publication";
 import { CONTENT_REVISIONS_MAX_PAGE_SIZE } from "./revisions-model";
+import { identifier, jsonBody, jsonResponse, readJson } from "./route-helpers";
 import { contentSearchAdvancedValues, syncContentSearch } from "./search-sync";
 import { buildContentTranslationRoutes } from "./translation-routes";
 
@@ -92,15 +93,6 @@ const notFound = (definition: AnyContentTypeDefinition): HTTPException =>
   new HTTPException(404, {
     message: `${contentTypeName(definition.id)} not found.`,
   });
-
-const identifier = (c: Context): number => {
-  const value = Number(c.req.param("id"));
-  if (!Number.isInteger(value) || value <= 0) {
-    throw new HTTPException(400, { message: "Invalid identifier." });
-  }
-
-  return value;
-};
 
 /**
  * The collections a search document is made of, or nothing.
@@ -237,14 +229,6 @@ export const buildContentRoutes = <
   ): value is ContentReferenceFieldName<TDefinition> =>
     referenceFieldNames.includes(value);
 
-  // `c.req.valid()` cannot infer through a generic route config, so each
-  // handler re-reads the validated payload through the very schema that
-  // produced it. That keeps the handlers cast-free and correctly typed.
-  const readJson = async <TValue>(
-    c: Context,
-    schema: z.ZodType<TValue>,
-  ): Promise<TValue> => schema.parse(await c.req.json());
-
   // `orderBy` is an enum rather than a string so a column outside the allowlist
   // is a 400 at validation time and shows up in the OpenAPI document. The
   // service keeps its own allowlist check as defence in depth.
@@ -254,14 +238,6 @@ export const buildContentRoutes = <
     orderBy: z.enum(orderable).optional(),
     search: z.string().optional(),
   });
-  const jsonBody = (schema: z.ZodType) => ({
-    content: { "application/json": { schema } },
-  });
-  const jsonResponse = (schema: z.ZodType, description: string) => ({
-    content: { "application/json": { schema } },
-    description,
-  });
-
   const invalidIdentifier = { description: "Invalid identifier" };
   const editorial = definition.editorial.enabled;
 
