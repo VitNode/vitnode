@@ -3,30 +3,22 @@ import "@tanstack/react-start/server-only";
 import { adminModule } from "@/api/modules/admin/admin.module";
 import { fetcher } from "@/tanstack/fetcher/server";
 
-import {
-  adminSessionFailureFromError,
-  adminSessionFailureFromStatus,
-} from "./state";
+import { readAdminSessionThrough } from "./session-read";
 
-export const readAdminSessionOnApi = async () => {
-  try {
+export const readAdminSessionOnApi = async () =>
+  await readAdminSessionThrough(async () => {
     const response = await fetcher(adminModule, {
       method: "get",
       module: "admin",
       path: "/session",
     });
 
-    if (response.status === 200) {
-      return { session: await response.json(), status: "granted" as const };
-    }
-
-    return adminSessionFailureFromStatus(response.status);
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error("[admin] the admin session could not be read", error);
-
-    return adminSessionFailureFromError(error);
-  }
-};
+    // See `default-transport`: the `200` arm is the only one with a body, and
+    // narrowing to it at the call site is what keeps the payload typed.
+    return {
+      session: response.status === 200 ? await response.json() : undefined,
+      status: response.status,
+    };
+  });
 
 export { readAdminUserSearch as readAdminUserSearchOnApi } from "./user-search";

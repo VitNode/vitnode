@@ -78,9 +78,9 @@ describe("the status policy", () => {
     });
   });
 
-  it("agrees with the no-body helper the server read uses", () => {
-    // `readAdminSessionOnApi` calls `adminSessionFailureFromStatus` rather than
-    // the full mapper, so the two must not be able to drift.
+  it("agrees with the no-body helper on every refusal", () => {
+    // Both reads go through the full mapper now, and plenty of callers still
+    // reach for the failure-only one - so the two must not be able to drift.
     for (const status of [401, 403, 429, 500]) {
       expect(adminSessionFailureFromStatus(status)).toEqual(
         adminSessionReadFromStatus(status),
