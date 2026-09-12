@@ -2,6 +2,7 @@ import { z } from "@hono/zod-openapi";
 import { and, eq } from "drizzle-orm";
 import { HTTPException } from "hono/http-exception";
 
+import { attachStoredFile } from "@/api/lib/file-download";
 import { buildRoute } from "@/api/lib/route";
 import { CONFIG_PLUGIN } from "@/config";
 import { core_files } from "@/database/files";
@@ -67,21 +68,9 @@ export const downloadUserFileRoute = buildRoute({
       return c.json({ error: "File not found" }, 404);
     }
 
-    const upstream = await fetch(c.get("storage").getUrl(file.key));
-    if (!upstream.ok || !upstream.body) {
-      return c.json({ error: "File not found" }, 404);
-    }
-
-    c.header("Content-Type", file.mimeType ?? "application/octet-stream");
-    c.header(
-      "Content-Disposition",
-      `attachment; filename*=UTF-8''${encodeURIComponent(file.name)}`,
+    return (
+      (await attachStoredFile(c, file)) ??
+      c.json({ error: "File not found" }, 404)
     );
-    const length = upstream.headers.get("content-length");
-    if (length) {
-      c.header("Content-Length", length);
-    }
-
-    return c.body(upstream.body, 200);
   },
 });
