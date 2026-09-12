@@ -4,6 +4,7 @@ import { and, eq, gt } from "drizzle-orm";
 import { getCookie } from "hono/cookie";
 
 import { deleteAuthCookie, setAuthCookie } from "@/api/lib/auth-cookie";
+import { hashSessionToken } from "@/api/lib/session-token";
 import { core_sessions } from "@/database/sessions";
 
 import { DeviceModel } from "./device";
@@ -21,20 +22,6 @@ export class SessionModel {
   }
   protected readonly c: Context;
 
-  private async hashToken(token: string): Promise<string> {
-    const encoder = new TextEncoder();
-    const data = encoder.encode(token);
-    const hashBuffer = await crypto.subtle.digest("SHA-256", data);
-    const bytes = new Uint8Array(hashBuffer);
-
-    let result = "";
-    for (const byte of bytes) {
-      result += byte.toString(16).padStart(2, "0");
-    }
-
-    return result;
-  }
-
   async createSessionByUserId(userId: number) {
     // Generate secure random bytes using Web Crypto API
     const randomBytes = new Uint8Array(64);
@@ -46,7 +33,7 @@ export class SessionModel {
     }
 
     const device = await new DeviceModel(this.c).getOrCreateDeviceId();
-    const hashedToken = await this.hashToken(token);
+    const hashedToken = await hashSessionToken(token);
 
     await this.c
       .get("db")
@@ -86,7 +73,7 @@ export class SessionModel {
       return;
     }
 
-    const hashedToken = await this.hashToken(token);
+    const hashedToken = await hashSessionToken(token);
 
     await this.c
       .get("db")
@@ -116,7 +103,7 @@ export class SessionModel {
     const device = await new DeviceModel(this.c).getExistingDeviceId();
     if (!device) return null;
 
-    const hashedToken = await this.hashToken(token);
+    const hashedToken = await hashSessionToken(token);
     const cache = this.c.get("cache");
     const cacheKey = sessionCacheKey(hashedToken, device.id);
 

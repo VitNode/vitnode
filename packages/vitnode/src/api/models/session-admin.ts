@@ -5,6 +5,7 @@ import { getCookie } from "hono/cookie";
 import { HTTPException } from "hono/http-exception";
 
 import { deleteAuthCookie, setAuthCookie } from "@/api/lib/auth-cookie";
+import { hashSessionToken } from "@/api/lib/session-token";
 import { core_admin_permissions, core_admin_sessions } from "@/database/admins";
 
 import { DeviceModel } from "./device";
@@ -21,20 +22,6 @@ export class SessionAdminModel {
     this.c = c;
   }
   protected readonly c: Context;
-
-  private async hashToken(token: string): Promise<string> {
-    const encoder = new TextEncoder();
-    const data = encoder.encode(token);
-    const hashBuffer = await crypto.subtle.digest("SHA-256", data);
-    const bytes = new Uint8Array(hashBuffer);
-
-    let result = "";
-    for (const byte of bytes) {
-      result += byte.toString(16).padStart(2, "0");
-    }
-
-    return result;
-  }
 
   async checkIfUserIsAdmin(userId: number) {
     const user = await new UserModel().getUserById({ id: userId, c: this.c });
@@ -69,7 +56,7 @@ export class SessionAdminModel {
       token += byte.toString(16).padStart(2, "0");
     }
 
-    const hashedToken = await this.hashToken(token);
+    const hashedToken = await hashSessionToken(token);
     const device = await new DeviceModel(this.c).getOrCreateDeviceId();
 
     await this.c
@@ -105,7 +92,7 @@ export class SessionAdminModel {
     );
     if (!token) return;
 
-    const hashedToken = await this.hashToken(token);
+    const hashedToken = await hashSessionToken(token);
     const device = await new DeviceModel(this.c).getExistingDeviceId();
 
     await this.c
@@ -133,7 +120,7 @@ export class SessionAdminModel {
     const device = await new DeviceModel(this.c).getExistingDeviceId();
     if (!device) return null;
 
-    const hashedToken = await this.hashToken(token);
+    const hashedToken = await hashSessionToken(token);
     const cache = this.c.get("cache");
     const cacheKey = adminSessionCacheKey(hashedToken, device.id);
 
