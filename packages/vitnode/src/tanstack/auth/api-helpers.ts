@@ -1,6 +1,6 @@
-export const callUsersApi = async (
-  call: () => Promise<Response>,
-): Promise<null | Response> => {
+export const callUsersApi = async <TResponse>(
+  call: () => Promise<TResponse>,
+): Promise<null | TResponse> => {
   try {
     return await call();
   } catch (error) {
@@ -11,7 +11,9 @@ export const callUsersApi = async (
   }
 };
 
-export const readJson = async (response: Response): Promise<unknown> => {
+export const readJson = async (response: {
+  json: () => Promise<unknown>;
+}): Promise<unknown> => {
   try {
     return await response.json();
   } catch {
@@ -19,7 +21,9 @@ export const readJson = async (response: Response): Promise<unknown> => {
   }
 };
 
-export const readText = async (response: Response): Promise<string> => {
+export const readText = async (response: {
+  text: () => Promise<string>;
+}): Promise<string> => {
   try {
     return await response.text();
   } catch {
