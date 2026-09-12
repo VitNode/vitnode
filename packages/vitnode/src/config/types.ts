@@ -42,13 +42,17 @@ export type VitNodePluginEntries = Partial<
   Record<VitNodePluginCapability, string>
 >;
 
-export type VitNodePluginDiscovery = "convention" | "declared";
+export interface VitNodePluginCapabilityRef {
+  /** Whether the plugin named this module itself, and so must have it. */
+  readonly declared: boolean;
+  readonly specifier: string;
+}
 
 export interface VitNodePluginDefinition<
   TOptions = unknown,
   TPublicOptions = unknown,
 > {
-  readonly discovery: VitNodePluginDiscovery;
+  /** Overrides only; every other capability keeps its conventional subpath. */
   readonly entries: VitNodePluginEntries;
   readonly kind: "vitnode.plugin";
   readonly options: TOptions;

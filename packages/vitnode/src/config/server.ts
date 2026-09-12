@@ -14,7 +14,7 @@ import type {
 } from "./types";
 
 import { VitNodeConfigError } from "./errors";
-import { API_PLUGIN_ENTRY_EXPORT, capabilitySpecifier } from "./plugin";
+import { API_PLUGIN_ENTRY_EXPORT, pluginCapability } from "./plugin";
 import { projectPublicConfig } from "./public";
 
 export type ModuleImporter = (specifier: string) => Promise<unknown>;
@@ -128,19 +128,14 @@ export const resolvePluginApiEntry = async (
   importer: ModuleImporter,
   context: VitNodeRuntimeContext,
 ): Promise<BuildPluginApiReturn | undefined> => {
-  const specifier = capabilitySpecifier(plugin, "api");
-
-  if (specifier === undefined) return undefined;
+  const { declared, specifier } = pluginCapability(plugin, "api");
 
   let loaded: unknown;
 
   try {
     loaded = await importer(specifier);
   } catch (error) {
-    if (
-      plugin.discovery === "convention" &&
-      isSpecifierNotFound(error, specifier, plugin.pluginId)
-    ) {
+    if (!declared && isSpecifierNotFound(error, specifier, plugin.pluginId)) {
       return undefined;
     }
 
@@ -154,7 +149,7 @@ export const resolvePluginApiEntry = async (
   const entry = readApiPluginEntry(loaded);
 
   if (entry === undefined) {
-    if (plugin.discovery === "convention") return undefined;
+    if (!declared) return undefined;
 
     throw new VitNodeConfigError(
       "api-entry-invalid",

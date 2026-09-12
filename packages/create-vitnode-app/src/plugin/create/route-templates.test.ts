@@ -138,11 +138,11 @@ describe("the generated messages", () => {
 });
 
 describe("the generated config", () => {
-  it("names the routes module instead of importing the tree", () => {
+  it("names no module at all - every capability is found by convention", () => {
     const config = pluginConfigTemplate("@acme/blog");
 
     expect(config).not.toContain('from "./routes"');
-    expect(config).toContain('routes: "@acme/blog/routes",');
+    expect(config).not.toContain("entries");
   });
 
   it("names the plugin by its package name", () => {
@@ -228,7 +228,7 @@ describe("the scaffold as a whole", () => {
       'import { definePluginFactory } from "@vitnode/core/config";',
     );
     expect(files["src/config.ts"]).toContain('pluginId: "blog"');
-    expect(files["src/config.ts"]).toContain('routes: "blog/routes"');
+    expect(files["src/config.ts"]).not.toContain("entries");
     expect(files["src/config.ts"]).not.toContain("buildPlugin");
     expect(files["src/config.ts"]).not.toContain("./locales");
     expect(Object.keys(files)).not.toContain("src/config.tsx");

@@ -29,8 +29,8 @@ import type {
 import { VitNodeConfigError } from "../../config/errors";
 import { configFromLoadedModule } from "../../config/loaded";
 import {
-  capabilitySpecifier,
   PLUGIN_CAPABILITY_SUBPATHS,
+  pluginCapability,
 } from "../../config/plugin";
 import {
   generatePublicConfigSource,
@@ -144,16 +144,11 @@ export const readPluginCapabilityModules = <T extends ResolvedCapabilityModule>(
   const watch: string[] = [];
 
   for (const plugin of plugins) {
-    const specifier = capabilitySpecifier(plugin, capability);
-
-    if (specifier === undefined) continue;
-
+    const { declared, specifier } = pluginCapability(plugin, capability);
     const file = resolvePackageFile(specifier);
 
     if (file === null) {
-      if (plugin.discovery === "declared") {
-        throw unresolvableCapability(plugin, capability, specifier);
-      }
+      if (declared) throw unresolvableCapability(plugin, capability, specifier);
 
       continue;
     }
@@ -166,7 +161,6 @@ export const readPluginCapabilityModules = <T extends ResolvedCapabilityModule>(
 };
 
 const conventionPlugin = (pluginId: string): AnyVitNodePluginDefinition => ({
-  discovery: "convention",
   entries: {},
   kind: "vitnode.plugin",
   options: {},
@@ -209,18 +203,11 @@ const readPluginRoutes = async (
   plugin: AnyVitNodePluginDefinition,
   resolvePackageFile: PackageFileResolver,
 ): Promise<{ source: PluginRouteCompilerSource; watch: null | string }> => {
-  const specifier = capabilitySpecifier(plugin, "routes");
-
-  if (specifier === undefined) {
-    return { source: { pluginId: plugin.pluginId }, watch: null };
-  }
-
+  const { declared, specifier } = pluginCapability(plugin, "routes");
   const file = resolvePackageFile(specifier);
 
   if (file === null) {
-    if (plugin.discovery === "declared") {
-      throw unresolvableCapability(plugin, "routes", specifier);
-    }
+    if (declared) throw unresolvableCapability(plugin, "routes", specifier);
 
     assertNoLegacyRouteManifest(plugin.pluginId, resolvePackageFile);
 

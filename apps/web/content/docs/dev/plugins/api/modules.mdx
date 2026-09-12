@@ -77,24 +77,15 @@ the normalized options and the runtime context - see
   </Step>
   <Step>
 
-### Advertise the API entry
+### Nothing to advertise
 
-Name the module in the plugin's descriptor. The Hono API imports it at startup;
-the frontend build never does:
-
-```ts title="plugins/site-notes/src/config.ts"
-export const siteNotesPlugin = definePluginFactory({
-  pluginId: '@acme/site-notes',
-  entries: {
-    api: '@acme/site-notes/config.api', // [!code ++]
-    routes: '@acme/site-notes/routes',
-  },
-})
-```
+There is no registration step. `config.api` is one of the conventional subpaths
+the API looks for under the plugin's package, so the module you just wrote is
+picked up on the next start.
 
 The app registered `siteNotesPlugin()` in `vitnode.config.ts` when it enabled
-the pages, and that one registration now covers the API too - there is nothing
-to add on the app side.
+the pages, and that one registration covers the API too - there is nothing to
+add on the app side.
 
 The endpoint is now `GET /api/@acme/site-notes/notes`. OpenAPI picks it up too;
 one less hand-written map to maintain.

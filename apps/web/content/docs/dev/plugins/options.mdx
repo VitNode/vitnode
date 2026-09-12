@@ -50,12 +50,6 @@ export const blogPlugin = definePluginFactory<
 >({
   pluginId: '@vitnode/blog',
 
-  entries: {
-    api: '@vitnode/blog/config.api',
-    adminNav: '@vitnode/blog/admin/nav',
-    adminContent: '@vitnode/blog/admin/content',
-  },
-
   defaults: { postsPerPage: 20, publicApi: true },
 
   parse: (options) => {
@@ -72,11 +66,11 @@ export const blogPlugin = definePluginFactory<
 
 | Field             | What it does                                                                                   |
 | :---------------- | :--------------------------------------------------------------------------------------------- |
-| `pluginId`        | The package name. Every capability is imported from this package.                              |
-| `entries`         | The modules the plugin provides. A capability not listed here is skipped by every consumer.    |
+| `pluginId`        | The package name. Every capability is found under it, by convention.                           |
 | `defaults`        | Applied first; the app's overrides are merged on top, `undefined` values ignored.              |
 | `parse`           | Validation and normalization in one step. Throw to reject; return the options to keep.         |
 | `toPublicOptions` | The **only** path into the browser. Whatever you return is written into the public projection. |
+| `entries`         | Optional. Overrides the module path of one capability - see below.                             |
 
 Calling the factory does none of the heavy lifting. It returns a small frozen
 descriptor - id, entries, options, public options - and imports no React
@@ -86,29 +80,47 @@ frontend entirely.
 
 <Callout type="info" title="No options at all">
   Leave out `defaults`, `parse` and `toPublicOptions`, and the factory takes no
-  arguments. Leave out `entries` too, and each consumer looks for the
-  conventional subpaths - `routes`, `admin/nav`, `admin/content` and
-  `config.api` - and skips whichever does not resolve.
+  arguments: `definePluginFactory({pluginId})` is a complete plugin.
 </Callout>
 
 ---
 
 ## Capabilities
 
-Each entry names one module by its package subpath, and each is loaded by
-exactly one consumer:
+A plugin does not list what it provides. Each consumer looks for one
+conventional subpath of the plugin's own package, and skips whichever does not
+resolve:
 
-| Entry          | Module exports                                          | Loaded by                        |
-| :------------- | :------------------------------------------------------ | :------------------------------- |
-| `api`          | `apiPlugin(options, context)`                           | the Hono API, at startup         |
-| `routes`       | `routes = definePluginRoutes([...])`                    | the public router, at build time |
-| `adminNav`     | `adminNav` satisfying `AdminNavPluginSource`            | the AdminCP shell                |
-| `adminContent` | `adminContent` satisfying `ContentFrontendPluginSource` | the Content Engine screens       |
+| Subpath         | Module exports                                          | Loaded by                        |
+| :-------------- | :------------------------------------------------------ | :------------------------------- |
+| `config.api`    | `apiPlugin`, from `defineApiPluginFactory`              | the Hono API, at startup         |
+| `routes`        | `routes = definePluginRoutes([...])`                    | the public router, at build time |
+| `admin/nav`     | `adminNav` satisfying `AdminNavPluginSource`            | the AdminCP shell                |
+| `admin/content` | `adminContent` satisfying `ContentFrontendPluginSource` | the Content Engine screens       |
 
-The frontend generator never imports `api`, and the API never imports the
-other three. An entry that is declared but cannot be resolved fails the build
-(or the API startup) with the specifier that did not resolve, rather than
-silently shipping a plugin with a capability missing.
+So a plugin that adds `src/admin/nav.tsx` and rebuilds gains a sidebar entry
+with no config change, and one that never writes `src/routes.ts` contributes no
+pages. The frontend generator never looks at `config.api`, and the API never
+looks at the other three.
+
+### Moving one somewhere else
+
+`entries` overrides the path of a single capability. Anything it does not name
+keeps its conventional subpath:
+
+```ts
+export const blogPlugin = definePluginFactory({
+  pluginId: '@vitnode/blog',
+  entries: {
+    api: '@vitnode/blog/server/api', // `routes` and `admin/*` are unaffected
+  },
+})
+```
+
+The difference is not only the path. A capability you name is one you promised:
+if it does not resolve, the build fails with the specifier that was tried. A
+conventional one is discovered, so its absence is simply a plugin that does not
+provide it.
 
 ### The API entry
 

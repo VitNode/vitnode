@@ -28,7 +28,6 @@ export type {
 export {
   API_PLUGIN_ENTRY_EXPORT,
   assertValidPluginId,
-  capabilitySpecifier,
   definePluginFactory,
   isValidPluginId,
   isVitNodePluginDefinition,
@@ -37,6 +36,7 @@ export {
   PLUGIN_CAPABILITIES,
   PLUGIN_CAPABILITY_SUBPATHS,
   PLUGIN_ID_PATTERN,
+  pluginCapability,
   serializablePublicOptions,
 } from "./plugin";
 export { CONFIG_PLUGIN } from "./plugin-id";
@@ -65,8 +65,8 @@ export type {
   VitNodeConfig,
   VitNodeConfigInput,
   VitNodePluginCapability,
+  VitNodePluginCapabilityRef,
   VitNodePluginDefinition,
-  VitNodePluginDiscovery,
   VitNodePluginEntries,
   VitNodePluginInput,
   VitNodePublicConfig,

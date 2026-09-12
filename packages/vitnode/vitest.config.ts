@@ -21,7 +21,6 @@ export default defineConfig({
       "**/coverage/**",
       "**/src/tests/**", // Assuming setup files aren't tests
       "**/src/emails/**",
-      "**/config/**",
       "**/*.config.*",
       "**/*.d.ts",
     ],
@@ -36,7 +35,6 @@ export default defineConfig({
         "**/coverage/**",
         "**/src/tests/**",
         "**/src/emails/**",
-        "**/config/**",
         "**/scripts/**",
         "**/*.config.*",
         "**/*.d.ts",

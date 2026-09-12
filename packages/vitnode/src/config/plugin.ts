@@ -2,6 +2,7 @@ import type {
   AnyVitNodePluginDefinition,
   JsonValue,
   VitNodePluginCapability,
+  VitNodePluginCapabilityRef,
   VitNodePluginDefinition,
   VitNodePluginEntries,
   VitNodePluginInput,
@@ -57,13 +58,18 @@ export const isVitNodePluginDefinition = (
   typeof value.pluginId === "string" &&
   isRecord(value.entries);
 
-export const capabilitySpecifier = (
-  plugin: AnyVitNodePluginDefinition,
+export const pluginCapability = (
+  plugin: Pick<AnyVitNodePluginDefinition, "entries" | "pluginId">,
   capability: VitNodePluginCapability,
-): string | undefined => {
-  if (plugin.discovery === "declared") return plugin.entries[capability];
+): VitNodePluginCapabilityRef => {
+  const override = plugin.entries[capability];
 
-  return `${plugin.pluginId}/${PLUGIN_CAPABILITY_SUBPATHS[capability]}`;
+  return override === undefined
+    ? {
+        declared: false,
+        specifier: `${plugin.pluginId}/${PLUGIN_CAPABILITY_SUBPATHS[capability]}`,
+      }
+    : { declared: true, specifier: override };
 };
 
 const describeError = (error: unknown): string =>
@@ -82,14 +88,14 @@ const assertEntries = (
     if (!PLUGIN_CAPABILITIES.includes(capability as VitNodePluginCapability)) {
       throw new VitNodeConfigError(
         "config-invalid",
-        `Plugin "${pluginId}" declares an unknown capability "${capability}". Known capabilities: ${PLUGIN_CAPABILITIES.join(", ")}.`,
+        `Plugin "${pluginId}" overrides an unknown capability "${capability}". Known capabilities: ${PLUGIN_CAPABILITIES.join(", ")}.`,
       );
     }
 
     if (typeof specifier !== "string" || specifier.trim() === "") {
       throw new VitNodeConfigError(
         "config-invalid",
-        `Plugin "${pluginId}" declares the "${capability}" capability without a module specifier. Use a package subpath such as "${pluginId}/${PLUGIN_CAPABILITY_SUBPATHS[capability as VitNodePluginCapability]}".`,
+        `Plugin "${pluginId}" overrides the "${capability}" capability without a module specifier. Drop the entry to keep the conventional "${pluginId}/${PLUGIN_CAPABILITY_SUBPATHS[capability as VitNodePluginCapability]}", or name the module it lives in.`,
       );
     }
   }
@@ -182,7 +188,6 @@ export const definePluginFactory = <
       : undefined;
 
     return Object.freeze({
-      discovery: declaredEntries === undefined ? "convention" : "declared",
       entries: declaredEntries ?? {},
       kind: "vitnode.plugin",
       options,

@@ -47,11 +47,6 @@ export const blogPlugin = definePluginFactory<
   BlogPluginPublicOptions
 >({
   pluginId: CONFIG_PLUGIN.pluginId,
-  entries: {
-    adminContent: `${CONFIG_PLUGIN.pluginId}/admin/content`,
-    adminNav: `${CONFIG_PLUGIN.pluginId}/admin/nav`,
-    api: `${CONFIG_PLUGIN.pluginId}/config.api`,
-  },
   defaults: BLOG_PLUGIN_DEFAULTS,
   parse: parseBlogPluginOptions,
   toPublicOptions: ({ postsPerPage }) => ({ postsPerPage }),

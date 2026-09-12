@@ -166,6 +166,47 @@ describe("resolveApiConfig", () => {
     expect(api.plugins).toEqual([]);
   });
 
+  /**
+   * What both of this repository's plugins do: no `entries` at all, and the
+   * API is found at the conventional subpath.
+   */
+  it("loads a convention plugin's API from the conventional subpath", async () => {
+    const apiPlugin = vi.fn(() => ({ hono: {}, pluginId: "@acme/quiet" }));
+    const config = defineVitNodeConfig({
+      api: defineApiRuntime(() => ({ dbProvider: {} as never })),
+      app,
+      plugins: [quiet()],
+    });
+
+    const api = await resolveApiConfig(config, {
+      importer: importerOver({ "@acme/quiet/config.api": { apiPlugin } }),
+    });
+
+    expect(api.plugins.map(plugin => plugin.pluginId)).toEqual(["@acme/quiet"]);
+    expect(apiPlugin).toHaveBeenCalledOnce();
+  });
+
+  it("keeps conventional capabilities when a plugin overrides only its API", async () => {
+    const apiPlugin = vi.fn(() => ({ hono: {}, pluginId: "@acme/odd" }));
+    const odd = definePluginFactory({
+      entries: { api: "@acme/odd/server/api" },
+      pluginId: "@acme/odd",
+    });
+    const config = defineVitNodeConfig({
+      api: defineApiRuntime(() => ({ dbProvider: {} as never })),
+      app,
+      plugins: [odd()],
+    });
+    const importer = vi.fn(
+      importerOver({ "@acme/odd/server/api": { apiPlugin } }),
+    );
+
+    const api = await resolveApiConfig(config, { importer });
+
+    expect(importer).toHaveBeenCalledExactlyOnceWith("@acme/odd/server/api");
+    expect(api.plugins.map(plugin => plugin.pluginId)).toEqual(["@acme/odd"]);
+  });
+
   it("fails when a declared API entry cannot be imported", async () => {
     await expect(
       resolveApiConfig(fullstack, { importer: importerOver({}) }),

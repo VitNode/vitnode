@@ -110,10 +110,7 @@ describe("defineVitNodeConfig", () => {
     const config = defineVitNodeConfig({ app, plugins: [acmeBlog(), docs()] });
 
     expect(pluginIdsOf(config)).toEqual(["@acme/blog", "@acme/docs"]);
-    expect(config.plugins.map(plugin => plugin.discovery)).toEqual([
-      "convention",
-      "convention",
-    ]);
+    expect(config.plugins.map(plugin => plugin.entries)).toEqual([{}, {}]);
   });
 
   it("rejects a plugin registered twice", () => {

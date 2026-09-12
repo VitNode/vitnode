@@ -136,9 +136,6 @@ export const pluginConfigTemplate = (pluginName: string): string =>
 
 export const ${pluginVariableName(pluginName)} = definePluginFactory({
   pluginId: "${pluginName}",
-  entries: {
-    routes: "${pluginName}/routes",
-  },
 });
 `;
 

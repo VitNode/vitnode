@@ -3,10 +3,10 @@ import { describe, expect, it } from "vitest";
 
 import { isVitNodeConfigError } from "./errors";
 import {
-  capabilitySpecifier,
   definePluginFactory,
   isVitNodePluginDefinition,
   normalizePluginInput,
+  pluginCapability,
 } from "./plugin";
 
 interface NotesOptions {
@@ -38,7 +38,6 @@ describe("definePluginFactory", () => {
     expect(isVitNodePluginDefinition(plugin)).toBe(true);
     expect(plugin.pluginId).toBe("@acme/notes");
     expect(plugin.options).toEqual({ perPage: 10, theme: "light" });
-    expect(plugin.discovery).toBe("declared");
     expect(Object.isFrozen(plugin)).toBe(true);
     expect(notesPlugin.pluginId).toBe("@acme/notes");
   });
@@ -69,7 +68,6 @@ describe("definePluginFactory", () => {
 
     expect(quiet.options).toEqual({});
     expect(quiet.publicOptions).toBeUndefined();
-    expect(quiet.discovery).toBe("convention");
     expect(quiet.entries).toEqual({});
   });
 
@@ -126,25 +124,45 @@ describe("definePluginFactory", () => {
   });
 });
 
-describe("capabilitySpecifier", () => {
-  it("returns only the declared entries for a declared plugin", () => {
-    const plugin = notesPlugin();
-
-    expect(capabilitySpecifier(plugin, "api")).toBe("@acme/notes/config.api");
-    expect(capabilitySpecifier(plugin, "routes")).toBe("@acme/notes/routes");
-    expect(capabilitySpecifier(plugin, "adminNav")).toBe(
-      "@acme/notes/admin/nav",
-    );
-    expect(capabilitySpecifier(plugin, "adminContent")).toBeUndefined();
-  });
-
-  it("derives every subpath by convention for an undeclared plugin", () => {
+describe("pluginCapability", () => {
+  it("derives every subpath by convention when nothing is overridden", () => {
     const plugin = definePluginFactory({ pluginId: "@acme/quiet" })();
 
-    expect(capabilitySpecifier(plugin, "api")).toBe("@acme/quiet/config.api");
-    expect(capabilitySpecifier(plugin, "adminContent")).toBe(
-      "@acme/quiet/admin/content",
-    );
+    expect(pluginCapability(plugin, "api")).toEqual({
+      declared: false,
+      specifier: "@acme/quiet/config.api",
+    });
+    expect(pluginCapability(plugin, "adminContent")).toEqual({
+      declared: false,
+      specifier: "@acme/quiet/admin/content",
+    });
+  });
+
+  /**
+   * The wart this replaced: overriding one path used to mean listing every
+   * other capability too, or losing it.
+   */
+  it("keeps the conventional subpath for capabilities an override does not name", () => {
+    const plugin = definePluginFactory({
+      entries: { api: "@acme/notes/server/api" },
+      pluginId: "@acme/notes",
+    })();
+
+    expect(pluginCapability(plugin, "api")).toEqual({
+      declared: true,
+      specifier: "@acme/notes/server/api",
+    });
+    expect(pluginCapability(plugin, "routes")).toEqual({
+      declared: false,
+      specifier: "@acme/notes/routes",
+    });
+  });
+
+  it("marks an overridden capability as declared, so it must resolve", () => {
+    const plugin = notesPlugin();
+
+    expect(pluginCapability(plugin, "api").declared).toBe(true);
+    expect(pluginCapability(plugin, "adminContent").declared).toBe(false);
   });
 });
 

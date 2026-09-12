@@ -62,21 +62,16 @@ export const adminContent = {
 
 ## 3. `config.ts` (Root Plugin Config)
 
-The factory a host registers in `vitnode.config.ts`. It is a
-`definePluginFactory` call that names the modules above by their package
-subpaths - it imports none of them, so calling `blogPlugin()` costs nothing and
-pulls no editor, no Hono app and no database table into the host's config.
+The factory a host registers in `vitnode.config.ts`. It imports none of the
+modules above - they are found by convention, under the plugin's own package -
+so calling `blogPlugin()` costs nothing and pulls no editor, no Hono app and no
+database table into the host's config.
 
 ```ts title="plugins/blog/src/config.ts"
 import { definePluginFactory } from '@vitnode/core/config'
 
 export const blogPlugin = definePluginFactory({
   pluginId: 'blog',
-  entries: {
-    api: 'blog/config.api',
-    adminNav: 'blog/admin/nav',
-    adminContent: 'blog/admin/content',
-  },
 })
 ```
 
